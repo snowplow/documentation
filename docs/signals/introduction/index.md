@@ -48,6 +48,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     title="Signals Python SDK"
     description="Use Signals within a notebook"
   >
+    [Connect to Signals](/docs/signals/connection/index.md#signals-python-sdk)
     [Define attributes](/docs/signals/attributes/using-python-sdk/index.md)
     [Define interventions](/docs/signals/interventions/using-python-sdk/index.md)
   </FeaturedSection>
@@ -55,6 +56,12 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
 </CardGrid>
 
 ## Get hands on with Signals
+
+:::tip More resources
+
+Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
+
+:::
 
 <CardGrid cols={3} breakout>
   <LinkCard

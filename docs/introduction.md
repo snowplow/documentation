@@ -5,6 +5,7 @@ sidebar_position: 0
 sidebar_label: "Introduction"
 description: "Snowplow CDI delivers validated, enriched event-level data to your warehouse, lake, or stream in real time. Define custom events with flexible schemas and distinguish AI agent traffic from human visitors."
 keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "ai-powered analytics", "signals"]
+pagination_next: null
 sidebar_custom_props:
   header: "Data Infrastructure"
 ---
@@ -23,6 +24,7 @@ sidebar_custom_props:
     description="Learn more about our real-time customer context platform"
     href="/docs/signals/introduction/"
   />
+
 </CardGrid>
 
 ## Explore Snowplow Customer Data Infrastructure
@@ -97,6 +99,12 @@ sidebar_custom_props:
 </CardGrid>
 
 ## Build with Snowplow
+
+:::tip More resources
+
+Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
+
+:::
 
 <CardGrid cols={3} breakout>
   <LinkCard

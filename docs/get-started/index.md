@@ -2,11 +2,23 @@
 title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
-description: "Details on where and how Snowplow is deployed"
-keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud", "Community Edition", "Self-Hosted"]
+description: "Compare Snowplow deployment options including CDI Private Managed Cloud, CDI Cloud, Community Edition, and Self-Hosted to choose the right platform for your organization."
+keywords: ["Snowplow CDI", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options", "behavioral data platform", "data infrastructure", "getting started"]
 ---
 
-Choose the [Snowplow](https://snowplow.io) platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+Snowplow is a Customer Data Infrastructure (CDI) platform capable of processing billions of events per day:
+
+* Start by [defining the data](/docs/fundamentals/tracking-plans/index.md) you want to collect
+* Choose from over 20 [tracker SDKs](/docs/sources/index.md) to collect data from web, mobile, server-side, and other sources, using custom tracking or [over 100 built-in events and entities](/docs/events/ootb-data/index.md)
+* Enrich your events before loading with over 15 [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)
+* Monitor your [data quality](/docs/fundamentals/failed-events/index.md) - your pipeline will only load [validated data](/docs/fundamentals/schemas/index.md) into your [warehouse or lake](/docs/destinations/warehouses-lakes/index.md)
+* Send enriched events to [third-party platforms](/docs/destinations/forwarding-events/index.md) in real-time
+* Model your data with our [dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md)
+* Enable real time personalization with [Signals](/docs/signals/)
+
+<img src="/img/snowplow-cdi-signals_vertical.svg" alt="diagram of snowplow architecture" style={{maxHeight: '800px', width: 'auto'}} />
+
+Choose the Snowplow platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
 We offer two fully featured Customer Data Infrastructure (CDI) platforms:
 * **Snowplow CDI Private Managed Cloud**: hosted in your own cloud, managed by Snowplow

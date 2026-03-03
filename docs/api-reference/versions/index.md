@@ -13,6 +13,10 @@ import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 ```
 
+This page lists the most recent versions of Snowplow components.
+
+Some information about components is relevant only for [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) users, as [Snowplow CDI](/docs/get-started/index.md#customer-data-infrastructure) customers won't need to configure all their own components.
+
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
 You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).

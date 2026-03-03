@@ -12,7 +12,7 @@ When an intervention triggers:
 
 1. Signals evaluates attribute values in real time
 2. If the criteria are met, the intervention activates
-3. Your Web application can receive intervention notifications via the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) directly on the frontend
+3. Your Web application can receive intervention notifications via the [browser tracker plugin](/docs/signals/interventions/subscribe/#using-the-browser-tracker-plugin) directly on the frontend
    * This uses a Server-Sent Events (SSE) connection for real-time streaming
 
 In this section, you'll create three interventions for common ecommerce scenarios: cart abandonment, discount offers for engaged browsers, and free shipping promotions.
@@ -31,7 +31,7 @@ from snowplow_signals import (
 
 ## Define intervention rules
 
-These [rule-based interventions](/docs/signals/define-interventions/using-python-sdk/) will be triggered automatically when their criteria are met.
+These [rule-based interventions](/docs/signals/interventions/using-python-sdk/) will be triggered automatically when their criteria are met.
 
 Each `InterventionCriterion` specifies:
 
@@ -127,4 +127,4 @@ sp_signals.publish(
 
 Once published, these interventions are active and will trigger in real time as users interact with your application.
 
-In the next section, you'll use the demo e-shop application to see these interventions in action. The app uses the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) to automatically receive and display intervention banners when they trigger.
+In the next section, you'll use the demo e-shop application to see these interventions in action. The app uses the [browser tracker plugin](/docs/signals/interventions/subscribe/#using-the-browser-tracker-plugin) to automatically receive and display intervention banners when they trigger.

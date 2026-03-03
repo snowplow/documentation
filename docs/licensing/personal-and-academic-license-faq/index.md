@@ -59,7 +59,7 @@ import MovingAway from '../_moving_away.md'
 
 ## Can I contribute to this software?
 
-Yes, we welcome community contributions. However, you will need to agree to our [Contribution License Agreement terms](/docs/resources/contributor-license-agreement/index.md).
+Yes, we welcome community contributions. However, you will need to agree to our [Contribution License Agreement terms](/docs/licensing/contributor-license-agreement/index.md).
 
 ## As a commercial user, can I make edits to code?
 

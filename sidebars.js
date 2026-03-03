@@ -11,23 +11,19 @@
 
 // @ts-check
 
-const swap = (allItems, linkItems, descriptions) => {
-  const result = allItems.flatMap((item) => {
-    const header = item.customProps?.header
-      ? [
-          {
-            type: 'html',
-            value: item.customProps.header,
-            defaultStyle: true,
-            className: 'header',
-          },
-        ]
-      : []
+// Sections whose items are unwrapped/hoisted from their parent category into the section directly
+const CHILD_UNWRAP_SECTIONS = new Set(['Signals', 'Components'])
 
-    const className = [
-      item.className || '',
-      item.customProps?.hidden ? 'hidden' : '',
-    ].join(' ')
+// Sections that start in a collapsed state
+const COLLAPSED_BY_DEFAULT_SECTIONS = new Set(['Components'])
+
+const swap = (allItems, linkItems, descriptions) => {
+  return allItems.flatMap((item) => {
+    // Preserve header property for later section wrapping (don't create HTML here)
+    const className =
+      [item.className, item.customProps?.hidden ? 'hidden' : '', item.customProps?.space_above ? 'space-above' : '']
+        .filter(Boolean)
+        .join(' ') || undefined
 
     if (item.type === 'category') {
       // a workaround for category pages not picking up the description in index.md
@@ -35,9 +31,9 @@ const swap = (allItems, linkItems, descriptions) => {
       const customProps = descriptions[item.link?.id]
         ? { ...item.customProps, description: descriptions[item.link.id] }
         : item.customProps
+
       if (item.items.length > 0)
         return [
-          ...header,
           {
             ...item,
             className,
@@ -48,7 +44,6 @@ const swap = (allItems, linkItems, descriptions) => {
       // a workaround for empty category pages not respecting className
       // see https://discord.com/channels/398180168688074762/867060369087922187/1068508121091293264
       return [
-        ...header,
         {
           type: 'doc',
           id: item.link.id,
@@ -61,7 +56,6 @@ const swap = (allItems, linkItems, descriptions) => {
 
     if (linkItems[item.id]) {
       return [
-        ...header,
         {
           type: 'link',
           label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
@@ -74,6 +68,75 @@ const swap = (allItems, linkItems, descriptions) => {
 
     return [{ ...item, className }]
   })
+}
+
+/** @param {string} label @param {any} link @param {any[]} items */
+const buildSection = (label, link, items) => ({
+  type: 'category',
+  label,
+  collapsible: true,
+  collapsed: COLLAPSED_BY_DEFAULT_SECTIONS.has(label),
+  className: 'section-header',
+  link,
+  items,
+})
+
+// Wrap items into collapsible sections based on header markers in customProps
+/** @param {any[]} items */
+const wrapInSections = (items) => {
+  const result = []
+  let currentSection = null
+  let sectionItems = []
+  let sectionLink = null
+
+  for (const item of items) {
+    const header = item.customProps?.header
+
+    if (header) {
+      // Close previous section if exists
+      if (currentSection) {
+        result.push(buildSection(currentSection, sectionLink, sectionItems))
+      }
+
+      // Start new section
+      currentSection = header
+      sectionLink =
+        item.link || (item.type === 'doc' ? { type: 'doc', id: item.id } : null)
+
+      // Add the item itself (without the header prop to avoid recursion issues)
+      const { header: _, ...restCustomProps } = item.customProps || {}
+      const itemWithoutHeader = {
+        ...item,
+        customProps:
+          Object.keys(restCustomProps).length > 0 ? restCustomProps : undefined,
+      }
+      if (
+        CHILD_UNWRAP_SECTIONS.has(header) &&
+        itemWithoutHeader.type === 'category' &&
+        itemWithoutHeader.items?.length
+      ) {
+        sectionItems = itemWithoutHeader.items.map((child) => ({
+          ...child,
+          className: [child.className, 'section-child']
+            .filter(Boolean)
+            .join(' '),
+        }))
+      } else {
+        sectionItems = [itemWithoutHeader]
+      }
+    } else if (currentSection) {
+      // Add to current section
+      sectionItems.push(item)
+    } else {
+      // No section yet, add directly to result
+      result.push(item)
+    }
+  }
+
+  // Close last section
+  if (currentSection && sectionItems.length > 0) {
+    result.push(buildSection(currentSection, sectionLink, sectionItems))
+  }
 
   return result
 }
@@ -88,17 +151,18 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
       descriptions[docItem.id] = docItem.frontMatter.description
     }
     if (docItem.frontMatter.type === 'link') {
-      // Adding the noindex flag
-      docItem.frontMatter.sidebar_custom_props = {
-        ...(docItem.frontMatter.sidebar_custom_props || {}),
-        noindex: true,
+      linkItems[docItem.id] = {
+        ...docItem.frontMatter,
+        sidebar_custom_props: {
+          ...(docItem.frontMatter.sidebar_custom_props || {}),
+          noindex: true,
+        },
       }
-
-      linkItems[docItem.id] = docItem.frontMatter
     }
   }
 
-  return swap(generatedDocs, linkItems, descriptions)
+  const swapped = swap(generatedDocs, linkItems, descriptions)
+  return wrapInSections(swapped)
 }
 
 module.exports = { swapDocItemsToLinkItems }

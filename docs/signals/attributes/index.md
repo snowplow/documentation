@@ -1,15 +1,34 @@
 ---
-title: "Retrieve calculated attributes from the Profiles Store"
-sidebar_position: 30
-sidebar_label: "Retrieve attributes"
-description: "Fetch calculated attributes from the Profiles Store using services or individual attribute groups. Use the Signals Python SDK, Node.js SDK, or API to retrieve user-specific values for real-time personalization."
-keywords: ["retrieve attributes", "profiles store", "get attributes", "signals sdk", "signals api"]
+title: "Define and retrieve attributes in Signals"
+sidebar_position: 20
+sidebar_label: "Attributes"
+description: "Define attributes to calculate behavioral data from real-time streams or your warehouse, then retrieve calculated values using services or attribute groups."
+keywords: ["attributes", "attribute groups", "services", "signals python sdk", "signals node sdk", "signals api"]
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+[Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value. You define attributes within [attribute groups](/docs/signals/attributes/attribute-groups/index.md), then retrieve calculated values through [services](/docs/signals/attributes/services/index.md) or directly from individual groups.
+
+## Define attributes
+
+There are three methods for defining attributes in Signals:
+* Snowplow Console UI
+* [Signals Python SDK](/docs/signals/attributes/using-python-sdk/index.md)
+* [Signals API](/docs/signals/connection/index.md#signals-api)
+
+### Snowplow Console
+
+To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
+
+Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md) and [services](/docs/signals/attributes/services/index.md).
+
+![Console Signals navigation options](../images/console-navbar.png)
+
+## Retrieve attributes
 
 Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/index.md#services).
 
@@ -24,7 +43,7 @@ You have three options for consuming attributes, depending on your use case or a
 
 Start by [connecting to Signals](/docs/signals/connection/index.md).
 
-## Using a service
+### Using a service
 
 The preferred way to retrieve attributes is by using a [service](/docs/signals/concepts/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
 
@@ -104,7 +123,7 @@ The table below lists all available arguments for `getBatchServiceAttributes()`
 </TabItem>
 </Tabs>
 
-## Retrieving individual attributes
+### Retrieve individual attributes
 
 You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/index.md#attribute-groups). This is useful when:
 * You want to retrieve only a small subset of attributes

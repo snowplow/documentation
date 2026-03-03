@@ -24,7 +24,7 @@ Looking forward, we have an exciting technology roadmap that will deliver additi
 
 ## What is the Snowplow Limited Use License Agreement?
 
-Snowplow is moving new versions of the Snowplow pipeline components to a source-available license. This license is based on the [Snowplow Community License](/docs/resources/community-license-faq/index.md), with additional deployment and provisioning restrictions. Notably, this license includes restrictions that prohibit deploying the Snowplow software for production workloads.
+Snowplow is moving new versions of the Snowplow pipeline components to a source-available license. This license is based on the [Snowplow Community License](/docs/licensing/community-license-faq/index.md), with additional deployment and provisioning restrictions. Notably, this license includes restrictions that prohibit deploying the Snowplow software for production workloads.
 
 ## How does the Snowplow Limited Use License Agreement work in practice?
 
@@ -74,7 +74,7 @@ Here is a summary of the specific changes in SLULA v1.1 over the v1.0 license:
 
 ## What components of Snowplow are offered under this new license?
 
-See the [licensing overview](/docs/resources/copyright-license/index.md) page.
+See the [licensing overview](/docs/licensing/index.md) page.
 
 ## What does this mean for me?
 

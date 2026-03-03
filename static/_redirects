@@ -463,6 +463,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/events/cookie-extension/* /docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/:splat 301
 /docs/sources/web-trackers/browsers/* /docs/sources/web-trackers/tracking-events/browsers/:splat 301
+
 # Event Studio renaming
 /docs/data-product-studio/data-products/* /docs/event-studio/tracking-plans/:splat 301
 /docs/data-product-studio/* /docs/event-studio/:splat 301
@@ -484,6 +485,18 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/event-studio/tracking-plans/tracking-plan-templates/* /docs/event-studio/tracking-plans/templates/:splat 301
 /docs/event-studio/snowplow-cli/* /docs/event-studio/programmatic-management/snowplow-cli/:splat 301
 /docs/event-studio/snowtype/* /docs/event-studio/implement-tracking/snowtype/:splat 301
+
+# Sidebar reshuffle
+/docs/signals/define-attributes/* /docs/signals/attributes/:splat 301
+/docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
+/docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
+/docs/signals/receive-interventions/* /docs/signals/interventions/subscribe/:splat 301
+/docs/signals/resources/* /docs/signals/get-started/:splat 301
+/docs/signals /docs/signals/get-started 301
+/docs/resources/migration-guides/* /docs/migration-guides/:splat 301
+/docs/resources/* /docs/licensing/:splat 301
+/docs/licensing/copyright-license/* /docs/licensing/:splat 301
+/docs/api-reference/* /docs/api-reference/versions/:splat 301
 
 # New data modeling feature
 /docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/* /docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat 301

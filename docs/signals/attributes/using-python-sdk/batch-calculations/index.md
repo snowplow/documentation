@@ -31,7 +31,7 @@ Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour.
 
 ## Using existing attributes
 
-Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to [define an `ExternalBatchAttributeGroup`](/docs/signals/define-attributes/using-python-sdk/attribute-groups/warehouse-config/index.md), including a `BatchSource` warehouse configuration object.
+Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to [define an `ExternalBatchAttributeGroup`](/docs/signals/attributes/using-python-sdk/attribute-groups/warehouse-config/index.md), including a `BatchSource` warehouse configuration object.
 
 To start syncing existing tables, [publish](/docs/signals/connection/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
 
@@ -43,7 +43,7 @@ The sync will begin: the sync engine will look for new records at a given interv
 
 ## Creating new attribute tables
 
-To create new batch attributes, you'll need to [define a `BatchAttributeGroup`](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md), and publish it to Signals. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
+To create new batch attributes, you'll need to [define a `BatchAttributeGroup`](/docs/signals/attributes/using-python-sdk/attribute-groups/index.md), and publish it to Signals. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
 
 The included batch engine CLI tool will help you with this process. Check out the [batch engine tutorial](/tutorials/signals-batch-engine/start/) for a step-by-step guide.
 

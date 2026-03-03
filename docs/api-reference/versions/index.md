@@ -44,45 +44,45 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 <Tabs groupId="cloud" queryString>
 <TabItem value="aws" label="AWS" default>
 
-| Component                                                                                                                |           Latest version            |
-| :----------------------------------------------------------------------------------------------------------------------- | :---------------------------------: |
-| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                                        |        {versions.collector}         |
-| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                             |          {versions.enrich}          |
-| [RDB Loader (Redshift, Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        {versions.rdbLoader}         |
-| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        {versions.lakeLoader}        |
-| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | {versions.snowflakeStreamingLoader} |
-| [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         {versions.s3Loader}         |
-| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                                    |        {versions.snowbridge}        |
-| [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md)                               |         {versions.esLoader}         |
-| [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)                         |      {versions.postgresLoader}      |
-| [Dataflow Runner](/docs/api-reference/dataflow-runner/index.md)                                                          |      {versions.dataflowRunner}      |
+| Component                                                                                                                |           Latest version              |
+| :----------------------------------------------------------------------------------------------------------------------- | :-----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                                        |        {versions.collector}           |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                             |          {versions.enrich}            |
+| [RDB Loader (Redshift, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        {versions.rdbLoader}           |
+| [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                                  |         {versions.bqLoader}           |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        {versions.lakeLoader}          |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | {versions.snowflakeStreamingLoader}   |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)          | {versions.databricksStreamingLoader}  |
+| [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         {versions.s3Loader}           |
+| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                                    |        {versions.snowbridge}          |
+| [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md)                               |         {versions.esLoader}           |
+| [Dataflow Runner](/docs/api-reference/dataflow-runner/index.md)                                                          |      {versions.dataflowRunner}        |
 
 </TabItem>
 <TabItem value="gcp" label="GCP">
 
-| Component                                                                                                      |           Latest version            |
-| :------------------------------------------------------------------------------------------------------------- | :---------------------------------: |
-| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                              |        {versions.collector}         |
-| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                   |          {versions.enrich}          |
-| [RDB Loader (Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        {versions.rdbLoader}         |
-| [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                        |         {versions.bqLoader}         |
-| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
-| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)  | {versions.snowflakeStreamingLoader} |
-| [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                 |        {versions.gcsLoader}         |
-| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                          |        {versions.snowbridge}        |
-| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
-| [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)               |      {versions.postgresLoader}      |
+| Component                                                                                                       |           Latest version             |
+| :-------------------------------------------------------------------------------------------------------------- | :----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                               |        {versions.collector}          |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                    |          {versions.enrich}           |
+| [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                         |         {versions.bqLoader}          |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 |        {versions.lakeLoader}         |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)   | {versions.snowflakeStreamingLoader}  |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
+| [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                  |        {versions.gcsLoader}          |
+| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                           |        {versions.snowbridge}         |
 
 </TabItem>
 <TabItem value="azure" label="Azure">
 
-| Component                                                                                                     |           Latest version            |
-| :------------------------------------------------------------------------------------------------------------ | :---------------------------------: |
-| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                             |        {versions.collector}         |
-| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                  |          {versions.enrich}          |
-| [RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)            |        {versions.rdbLoader}         |
-| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               |        {versions.lakeLoader}        |
-| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | {versions.snowflakeStreamingLoader} |
+| Component                                                                                                       |           Latest version             |
+| :-------------------------------------------------------------------------------------------------------------- | :----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                               |        {versions.collector}          |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                    |          {versions.enrich}           |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 |        {versions.lakeLoader}         |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)   | {versions.snowflakeStreamingLoader}  |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
+
 
 </TabItem>
 </Tabs>

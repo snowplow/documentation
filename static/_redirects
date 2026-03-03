@@ -497,3 +497,14 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/resources/* /docs/licensing/:splat 301
 /docs/licensing/copyright-license/* /docs/licensing/:splat 301
 /docs/api-reference/* /docs/api-reference/versions/:splat 301
+
+# New data modeling feature
+/docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/* /docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat 301
+/docs/modeling-your-data/running-data-models-via-console/dbt/* /docs/modeling-your-data/running-data-models-via-console/ 301
+
+# Micro in Console
+/docs/testing/snowplow-micro/basic-usage/* /docs/testing/snowplow-micro/local/:splat 301
+/docs/testing/snowplow-micro/configuring-enrichments/* /docs/testing/snowplow-micro/local/enrichments/:splat 301
+/docs/testing/snowplow-micro/remote-usage/* /docs/testing/snowplow-micro/local/remote-usage/:splat 301
+/docs/testing/snowplow-micro/advanced-usage/* /docs/testing/snowplow-micro/local/advanced-usage/:splat 301
+/docs/testing/snowplow-micro/adding-schemas/* /docs/testing/snowplow-micro/local/schemas/:splat 301

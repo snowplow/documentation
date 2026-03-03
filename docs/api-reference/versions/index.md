@@ -165,7 +165,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 :::info Snowplow CDI
 
-If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Snowplow Mini yourself. We can deploy it as required, and keep it up to date for you.
+If you are a Snowplow CDI customer, rather than self-hosted, we recommend using [Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md) for testing and debugging.
 
 :::
 

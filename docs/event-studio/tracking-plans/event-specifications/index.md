@@ -14,6 +14,8 @@ They act as data contracts between teams. When you create an event specification
 You can only make event specifications within tracking plans. Tracking plans are wrappers for related event specifications. Each event specification belongs to a single tracking plan.
 :::
 
+Once an event specification is ready, you can publish it to make it active in the pipeline. Publishing enables [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md), which automatically matches incoming events to your published specifications and surfaces volume and observability data in the Console.
+
 Each event specification has an event [data structure](/docs/event-studio/data-structures/index.md), plus optional entity data structures. You can add instructions for how to populate each property, when to trigger the event, and how many of each entity to expect. You can also select which version of each data structure to use.
 
 ## Create an event specification in Console

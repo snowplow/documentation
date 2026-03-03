@@ -435,8 +435,9 @@ aside.theme-doc-sidebar-container {
 }
 
 /* Extra space above a sidebar item, via sidebar_custom_props.space_above */
+/* !important to override Infima's specificity-boosted margin rule in production builds */
 li.menu__list-item.space-above {
-  margin-top: 1rem;
+  margin-top: 1rem !important;
 }
 
 /* Collapsible section headers - styled as distinct category headings */

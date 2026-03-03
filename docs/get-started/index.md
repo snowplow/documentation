@@ -14,7 +14,7 @@ Snowplow is a Customer Data Infrastructure (CDI) platform capable of processing 
 * Monitor your [data quality](/docs/fundamentals/failed-events/index.md) - your pipeline will only load [validated data](/docs/fundamentals/schemas/index.md) into your [warehouse or lake](/docs/destinations/warehouses-lakes/index.md)
 * Send enriched events to [third-party platforms](/docs/destinations/forwarding-events/index.md) in real-time
 * Model your data with our [dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md)
-* Enable real time personalization with [Signals](/docs/signals/)
+* Enable real time personalization with [Signals](/docs/signals/introduction/index.md)
 
 <img src="/img/snowplow-cdi-signals_vertical.svg" alt="diagram of snowplow architecture" style={{maxHeight: '800px', width: 'auto'}} />
 

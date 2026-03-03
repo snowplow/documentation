@@ -497,3 +497,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/resources/* /docs/licensing/:splat 301
 /docs/licensing/copyright-license/* /docs/licensing/:splat 301
 /docs/api-reference/* /docs/api-reference/versions/:splat 301
+
+/docs/signals/ /docs/signals/introduction/ 301

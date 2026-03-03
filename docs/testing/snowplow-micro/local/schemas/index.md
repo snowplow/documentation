@@ -45,6 +45,12 @@ Whichever approach you choose, you can use the [the API](/docs/api-reference/sno
 curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 ```
 
+:::tip Micro in Console
+
+If you are [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), it automatically integrates with your development Iglu Server, so you don’t need to follow these steps.
+
+:::
+
 ## Pointing Micro to an Iglu registry
 
 Place your Iglu registry URL and API key (if any) into two [environment variables](https://en.wikipedia.org/wiki/Environment_variable): `MICRO_IGLU_REGISTRY_URL` and `MICRO_IGLU_API_KEY`.
@@ -71,7 +77,7 @@ docker run -p 9090:9090 \\
 
 This will ensure Micro uses your Iglu registry, in addition to [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md).
 
-For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/advanced-usage/index.md#adding-custom-iglu-resolver-configuration).
+For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-iglu-resolver-configuration).
 
 ## Adding schemas directly to Micro
 

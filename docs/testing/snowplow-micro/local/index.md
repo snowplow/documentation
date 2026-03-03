@@ -1,7 +1,7 @@
 ---
-title: "Run Snowplow Micro with Docker"
-sidebar_label: "Basic usage"
-sidebar_position: 1
+title: "Run Snowplow Micro locally"
+sidebar_label: "Run locally"
+sidebar_position: 2
 description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the UI, API, or exported TSV/JSON format."
 keywords: ["micro basic usage", "docker", "run micro", "test events", "micro ui"]
 ---
@@ -12,7 +12,15 @@ import CodeBlock from '@theme/CodeBlock';
 import Badges from '@site/src/components/Badges';
 ```
 
-The easiest way to run Micro is through [Docker](https://www.docker.com/). <Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
+:::tip Micro in Console
+
+For general use, we recommend [running Micro through Snowplow Console](/docs/testing/snowplow-micro/console/index.md). However, running locally can be useful if you don’t have access to Console or need an advanced configuration.
+
+:::
+
+The easiest way to run Micro locally is through [Docker](https://www.docker.com/).
+
+<Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
 
 Run the following command:
 

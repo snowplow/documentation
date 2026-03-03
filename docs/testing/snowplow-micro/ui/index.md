@@ -1,20 +1,18 @@
 ---
 title: "View and filter events in the Snowplow Micro UI"
-sidebar_position: 2
-sidebar_label: "Using the UI"
+sidebar_position: 4
+sidebar_label: "Explore events"
 description: "Access the Micro web interface to view, filter, and investigate good and bad events. Share the UI with colleagues through public domain names."
 keywords: ["micro ui", "event inspection", "filter events", "view events"]
 ---
 
-To view the Micro UI, head to [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your web browser (assuming you followed the [basic usage](/docs/testing/snowplow-micro/basic-usage/index.md) instructions).
+Micro provides a user interface that helps you explore events sent to it, including [failed events](/docs/fundamentals/failed-events/index.md).
 
-:::tip Sharing the UI with other people
+If you are [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), navigate to the **Pipelines** side menu and select your Micro. Then click **View events**. You will need the _View environments_ permission to access the UI.
 
-Want to share this view with a colleague? See the section on [exposing Micro to the outside world](/docs/testing/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name). For example, if you use `ngrok`, you will get a link like `https://1328-...-4103.ngrok-free.app/micro/ui` which you can send to anyone for them to look at the same events.
+If you are [running Micro locally](/docs/testing/snowplow-micro/local/index.md), head to [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your web browser.
 
-:::
-
-Here’s an overview of the functionality:
+Here’s an overview of the UI functionality:
 
 ```mdx-code-block
 import TrackedReactFilePlayer from '@site/src/components/TrackedReactFilePlayer'

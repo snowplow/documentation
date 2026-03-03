@@ -121,7 +121,6 @@ const wrapInSections = (items) => {
             .filter(Boolean)
             .join(' '),
         }))
-        sectionLink = null
       } else {
         sectionItems = [itemWithoutHeader]
       }

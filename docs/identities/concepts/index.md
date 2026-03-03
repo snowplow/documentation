@@ -6,7 +6,7 @@ sidebar_position: 1
 ---
 
 Identities is based on several core concepts.
-* **Identifiers** are the identifying properties in the event payload
+* **Identifiers** are the properties in the event payload that correspond to a user
 * **Profiles** are collections of linked identifiers that represent a single user
 * **Merges** occur when identifiers link two previously separate profiles together
 
@@ -14,19 +14,16 @@ Identities is based on several core concepts.
 
 Identifiers are the key/value pairs that Identities extracts from events and uses to resolve identity. Each identifier has a name or type, such as `domain_userid`, and a value that's the actual ID in the event payload, such as `a43eb2f1-...`.
 
-You can configure identifiers from atomic event fields, custom event fields, or from your own entities. For example, you might add a hashed email address from a user profile entity, or a legacy user ID from a custom entity.
+You can configure identifiers from atomic event fields, custom event fields, or from your own entities. For example, you might add a hashed email address from a form submission event, or a global user ID from a custom user profile entity.
 
-### Identifier aliases
-
-Identifier aliases allow you to map multiple event fields to the same identifier type. This is useful for cross-domain tracking, where the `refr_domain_userid` field contains the `domain_userid` from the referring site.
-
-When you create an alias, events with values in the aliased field are treated as if they contained that identifier type. For example, if you alias `refr_domain_userid` to `domain_userid`, a user clicking from one site to another will have their profiles linked even though the identifier appears in different fields.
+Identities also supports [cross-domain tracking](#cross-domain-tracking), where users navigating between sites with different cookie domains can be resolved to the same profile.
 
 ## Profiles
 
 A profile is a collection of linked identifiers that represent a single user. Each profile has a persistent, immutable `snowplow_id` that identifies it.
 
 When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event in an [identity entity](/docs/identities/data-models/index.md#identity-entity). In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
+<!-- TODO: it's called `identity` instead of `profile` in the backend; is that a problem? I've been using the term `profile` with customers -->
 
 ### Example profile creation
 
@@ -39,36 +36,26 @@ The configured identifiers for this example are:
 During the anonymous browsing session, the only configured identifier in the events is the `domain_userid`. Since this is a new identifier, Identities creates a new profile and links the identifier to it.
 
 ```mermaid
-graph LR
-    A["domain_userid
-    4b0dfa75-..."]
-    B["Profile: sp_001"]
+graph TD
+    A(["domain_userid:<br/>4b0dfa-..."])
+    B(["**Profile: sp_001**"])
 
-    A --> B
-
-    style A fill:#fff9c4
-    style B fill:#fff9c4
+    A --- B
 ```
 
 After the user logs in, the next event contains both the `domain_userid` and their `user_id`. Identities finds the existing profile via the `domain_userid` and adds the `user_id` to it.
 
 ```mermaid
-graph LR
-    A["domain_userid
-    4b0dfa75-..."]
-    B["user_id
-    alice@company.com"]
-    C["Profile: sp_001"]
+graph TD
+    A(["domain_userid:<br/>4b0dfa-..."])
+    B(["user_id:<br/>alice@company.com"])
+    C(["**Profile: sp_001**"])
 
-    A --> C
-    B --> C
-
-    style A fill:#fff9c4
-    style B fill:#fff9c4
-    style C fill:#fff9c4
+    A --- C
+    B --- C
 ```
 
-For now, Identities will give any subsequent events containing either identifier Snowplow ID `sp_001`.
+All events associated with this user both pre- and post-login will have Snowplow ID `sp_001` attached to them.
 
 ## Identity resolution
 
@@ -76,8 +63,8 @@ Identities stores the relationships between identifiers and profiles in a Postgr
 
 The identity resolution process for each event is as follows:
 1. The Snowplow pipeline extracts the configured identifiers from the event payload
-2. The pipeline sends the identifiers to the Identities API
-3. Identities checks the graph database for existing profiles linked to the identifiers
+2. The pipeline sends the identifiers to the Identities service
+3. The Identities service checks the graph for existing profiles linked to the identifiers
 4. Are any of the identifiers linked to existing profiles?
    * No: Identities creates a new profile, links all identifiers to it, and returns the new profile Snowplow ID
    * Yes: processing continues
@@ -86,16 +73,11 @@ The identity resolution process for each event is as follows:
    * No: Identities returns the existing profile Snowplow ID
    * Yes: processing continues
 7. Identities creates a profile-profile merge relationship from the newer profile to the older profile
-8. Identities follows the downstream profiles and relinks their identifiers directly to the new root profile <!-- really? that's not shown in the example diagrams -->
-9. Identities returns the parent profile Snowplow ID
+9. Identities returns the parent profile Snowplow ID and emits a merge event into the Snowplow pipeline to signal to downstream systems that a merge has occurred.
 
-:::info Data privacy
-Identities works inside your cloud environment. All requests are encrypted in transit and at rest.
-:::
+Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information. <!-- TODO:  -->
 
-Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information.
-
-If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events.
+If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events. <!-- TODO: ask peel to confirm -->
 
 Tracked events are sometimes delayed in arriving into your pipeline, for example due to network issues or offline tracking. When they're eventually processed, they're resolved against the current state of the identity graph.
 
@@ -115,148 +97,150 @@ When a merge occurs, Identities emits a [merge event](/docs/identities/data-mode
 
 ### Example merge process
 
-In this example, a user installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously. It's the same user as in the previous example, but that's not immediately apparent.
+In this example, a user installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously (i.e. is not logged in). It's the same user as in the previous example, but that's not immediately apparent.
 
-The ExampleCompany team have configured Identities to use the `appleIdfa` identifier from the mobile platform entity. Identities finds a new `appleIdfa` value in the user's first event, so it creates a new profile.
+The ExampleCompany team has configured Identities to use the `apple_idfv` identifier from the mobile platform entity. Identities finds a new `apple_idfv` value in the user's first event, so it creates a new profile.
 
 ```mermaid
 graph LR
-    C["appleIdfa
-    6D92078A-..."]
-    P2["Profile: sp_002"]
+    C(["apple_idfv:<br/>6d920c-..."])
+    P2(["**Profile: sp_002**"])
 
-    C --> P2
-
-    style C fill:#e1f5fe
-    style P2 fill:#e1f5fe
+    C --- P2
 ```
 
-The user then logs into the mobile app. The next event contains the known `appleIdfa` and the previously seen `user_id`. Identities detects that profiles `sp_001` and `sp_002` refer to the same user because of the matching `user_id`. It merges them and emits a merge event.
+The user then logs into the mobile app. The next event contains the known `apple_idfv` and the previously seen `user_id`. Identities detects that profiles `sp_001` and `sp_002` refer to the same user because of the matching `user_id`. It merges them and emits a merge event.
 
-The older profile becomes the active `snowplow_id`. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001`.
+The older profile becomes the active `snowplow_id`. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001` attached.
 
 ```mermaid
 graph LR
-    A["domain_userid
-    4b0dfa75-..."]
-    B["user_id
-    alice@company.com"]
-    C["appleIdfa
-    6D92078A-..."]
-    P1["Profile: sp_001"]
-    P2["Profile: sp_002"]
+    A(["domain_userid:<br/>4b0dfa-..."])
+    B(["user_id:<br/>alice@company.com"])
+    C(["apple_idfv:<br/>6d920c-..."])
+    P1(["**Profile: sp_001**"])
+    P2(["**Profile: sp_002**"])
 
-    A --> P1
-    B --> P1
-    C --> P2
-    B --> P2
-    P2 -.-> P1
-
-    style A fill:#fff9c4
-    style B fill:#fff9c4
-    style C fill:#fff3e0
-    style P1 fill:#fff9c4
-    style P2 fill:#fff3e0
+    A --- P1
+    B --- P1
+    C --- P2
+    B --- P2
+    P2 -. merged .-> P1
 ```
 
 ## Unique identifiers prevent inaccurate merging
 
-Unique identifiers are identifiers that should never cause two profiles to merge together if they have different values. For example, if you mark `user_id` as unique, two events with different `user_id` values will never cause their profiles to merge, even if they share other identifiers like `domain_userid`. This prevents incorrect merges when multiple users share a device or browser.
+**Unique identifiers** are identifiers that should never cause two profiles to merge together if they have different values. For example, if you mark `user_id` as unique, two events with different `user_id` values will never cause their profiles to merge, even if they share other identifiers like `domain_userid`. This prevents incorrect merges such as when multiple users share a device or browser.
 
 When Identities processes an event that would cause a merge, it checks whether any unique identifiers would conflict. If they do, Identities creates a new anonymous profile for any identifiers that cannot be definitively attributed to either existing profile.
 
 ### Example merge conflict
 
-In this example, the user from the previous example shares their device with a colleague. The original user logs out of their account, and the colleague logs in. Both users have now generated events with the same `domain_userid`, but different `user_id` values. Because `user_id` is marked as unique, Identities doesn't merge the identity profiles.
+In this example, Alice from the previous example shares her phone with a colleague, Bob. Bob logs into the ExampleCompany mobile app on Alice's phone. The event contains the device's `apple_idfv` (already linked to Alice's profile via the earlier merge) and Bob's `user_id`.
+
+Identities detects a conflict: the `apple_idfv` is linked to a profile with `user_id` `alice@company.com`, but the event contains `user_id` `bob@company.com`. Because `user_id` is marked as unique, Identities doesn't merge the profiles. Instead, it creates a new profile for Bob and links all of the event's identifiers to it — including the shared `apple_idfv`.
 
 ```mermaid
 graph LR
-    BobA["domain_userid
-    c94f860b-..."]
-    BobB["user_id
-    bob@company.com"]
-    BobC["Profile: sp_030"]
+    A(["domain_userid:<br/>4b0dfa-..."])
+    B(["user_id:<br/>alice@company.com"])
+    C1(["apple_idfv:<br/>6d920c-..."])
+    P1(["**Profile: sp_001**"])
+    P2(["**Profile: sp_002**"])
 
-    BobA --> BobC
-    BobB --> BobC
+    A --- P1
+    B --- P1
+    C1 --- P2
+    B --- P2
+    P2 -. merged .-> P1
 
-    style BobA fill:#e1f5fe
-    style BobB fill:#e1f5fe
-    style BobC fill:#e1f5fe
+    C2(["apple_idfv:<br/>6d920c-..."])
+    BobB(["user_id:<br/>bob@company.com"])
+    BobC(["**Profile: sp_003**"])
 
-    A["domain_userid
-    4b0dfa75-..."]
-    B["user_id
-    alice@company.com"]
-    C["appleIdfa
-    6D92078A-..."]
-    P1["Profile: sp_001"]
-    P2["Profile: sp_002"]
-
-    A --> P1
-    B --> P1
-    C --> P2
-    B --> P2
-    P2 -.-> P1
-
-    BobA --> P1
-
-    style A fill:#fff9c4
-    style B fill:#fff9c4
-    style C fill:#fff3e0
-    style P1 fill:#fff9c4
-    style P2 fill:#fff3e0
+    C2 --- BobC
+    BobB --- BobC
 ```
 
-The second user then logs out, and a third user browses the site anonymously on the shared device. The next event again contains the same `domain_userid`. Identities has now seen this identifier with two different unique `user_id` identifiers, `alice@company.com` and `bob@company.com`.
+Bob logs out, and a third person picks up the device and opens the app without logging in. The event contains only the `apple_idfv`. Identities looks up the identifier and finds it linked to profiles with two different unique `user_id` values: `alice@company.com` and `bob@company.com`.
 
-Identities can't deterministically attribute this anonymous activity to either Alice or Bob. Instead of making an incorrect attribution, Identities creates a new anonymous profile, and tags events in this session with the new Snowplow ID `sp_045`.
+Identities can't attribute this anonymous activity to either Alice or Bob. Instead of guessing, it creates a new anonymous profile. The anonymous profile receives a deterministic `snowplow_id`, so all future anonymous events from this device receive the same ID until a user logs in.
 
 ```mermaid
 graph LR
-    BobA["domain_userid
-    c94f860b-..."]
-    BobB["user_id
-    bob@company.com"]
-    BobC["Profile: sp_030"]
+    A(["domain_userid:<br/>4b0dfa-..."])
+    B(["user_id:<br/>alice@company.com"])
+    C1(["apple_idfv:<br/>6d920c-..."])
+    P1(["**Profile: sp_001**"])
+    P2(["**Profile: sp_002**"])
 
-    BobA --> BobC
-    BobB --> BobC
+    A --- P1
+    B --- P1
+    C1 --- P2
+    B --- P2
+    P2 -. merged .-> P1
 
-    style BobA fill:#e1f5fe
-    style BobB fill:#e1f5fe
-    style BobC fill:#e1f5fe
+    C2(["apple_idfv:<br/>6d920c-..."])
+    BobB(["user_id:<br/>bob@company.com"])
+    BobC(["**Profile: sp_003**"])
 
-    A["domain_userid
-    4b0dfa75-..."]
-    B["user_id
-    alice@company.com"]
-    C["appleIdfa
-    6D92078A-..."]
-    P1["Profile: sp_001"]
-    P2["Profile: sp_002"]
+    C2 --- BobC
+    BobB --- BobC
 
-    A --> P1
-    B --> P1
-    C --> P2
-    B --> P2
-    P2 -.-> P1
+    C3(["apple_idfv:<br/>6d920c-..."])
+    AnonP(["**Profile: sp_004**<br/>(anonymous)"])
 
-    BobA --> P1
-
-    style A fill:#fff9c4
-    style B fill:#fff9c4
-    style C fill:#fff3e0
-    style P1 fill:#fff9c4
-    style P2 fill:#fff3e0
-
-    CarolP["Profile: sp_045"]
-
-    BobA --> CarolP
+    C3 --- AnonP
 ```
 
-## Identifier aliases and cross-domain tracking
+:::tip Resetting identifiers on logout
+For web browsers, consider calling [`newSession`](/docs/sources/web-trackers/tracking-events/session/index.md) or [`clearUserData`](/docs/sources/web-trackers/anonymous-tracking/index.md#clear-user-data) when a user logs out. This resets the `domain_userid` cookie, preventing it from being shared between users on the same browser.
+:::
 
-Identifier aliases allow you to map multiple event fields to the same identifier type. This is particularly useful for [cross-domain tracking](/docs/events/cross-navigation/index.md), where the `refr_domain_userid` field contains the `domain_userid` from the referring site.
+## Cross-domain tracking
 
-If you alias `refr_domain_userid` to `domain_userid`, a user clicking from one site to another will have their profiles linked even though the identifier appears in different fields.
+When users navigate between sites with different cookie domains, or from a mobile app to a webview, each destination assigns its own `domain_userid`. Without cross-domain tracking, these appear as separate users. [Cross-domain tracking](/docs/events/cross-navigation/index.md) solves this by passing the `domain_userid` from the source site or app in the URL. Events captured on the destination contain a `refr_domain_userid` field with the source's `domain_userid`. This works for web-to-web navigation, mobile app-to-webview transitions, and any other scenario where the [web](/docs/sources/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers decorate outgoing links.
+
+You can [enable cross-domain tracking support](/docs/identities/configuration/index.md#enable-cross-domain-tracking-aliases) in the Identities configuration so that Identities automatically extracts `refr_domain_userid` and maps it to `domain_userid` and `client_session_user_id`, linking the user's profiles across sites.
+
+### Example cross-domain resolution
+
+In this example, ExampleCompany runs two sites on separate cookie domains: `brandA.example.com` and `brandB.example.com`. Cross-domain tracking is configured on the web tracker, and the ExampleCompany team has enabled cross-domain tracking in the Identities configuration.
+
+A user browses `brandA.example.com` anonymously. The event contains a `domain_userid`. Identities creates a new profile.
+
+```mermaid
+graph TD
+    A(["domain_userid:<br/>d123"])
+    P1(["**Profile: sp_001**"])
+
+    A --- P1
+```
+
+The user clicks a link to `brandB.example.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.example.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing profile, and links the new `domain_userid` to it.
+
+```mermaid
+graph TD
+    A(["domain_userid:<br/>d123"])
+    D(["domain_userid:<br/>d456"])
+    P1(["**Profile: sp_001**"])
+
+    A --- P1
+    D --- P1
+```
+
+The user then logs into `brandB.example.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing profile.
+
+```mermaid
+graph TD
+    A(["domain_userid:<br/>d123"])
+    D(["domain_userid:<br/>d456"])
+    U(["user_id:<br/>u001"])
+    P1(["**Profile: sp_001**"])
+
+    A --- P1
+    D --- P1
+    U --- P1
+```
+
+All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same `snowplow_id`.

@@ -13,19 +13,22 @@ Identities allows you to:
 * Build on [cross-navigation tracking](/docs/events/cross-navigation/index.md) to identify users across domains
 * Distinguish between separate users sharing the same device
 
-Use the provided Identities data models to build one-row-per-user and identifier mapping tables to help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
+Use the provided Identities data models to build identifier mapping tables to help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
 ## How does Identities fit into the Snowplow pipeline?
 
 Identity resolution happens in real time as part of the [event enrichment process](/docs/fundamentals/index.md).
 
-At the enrichment stage, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved `snowplow_id` to the event in an identity entity.
+After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved `snowplow_id` to the event in an identity entity.
+<!-- TODO: should we link to the identity entity? -->
 
-Some incoming identifiers will reveal that two previously separate profiles actually belong to the same user. Identities will merge the two profiles in its graph database, and add a merge event directly into your enriched event stream.
+Some incoming identifiers will reveal that two previously separate profiles actually belong to the same user. Identities will merge the two profiles in its graph database, and emit a merge event directly into your enriched event stream.
+<!-- TODO: does graph database denote -->
+<!-- TODO: link to what merge events are? -->
 
 Your Identities infrastructure is deployed into the same cloud as your pipeline. The core components are:
 * **Identities API**: used for identity operations
-* **Postgres database**: persists the identity graph and performs graph operations
+* **Managed Postgres database**: persists the identity graph and performs graph operations. Snowplow uses [Aurora](https://aws.amazon.com/rds/aurora/) on AWS and [AlloyDB](https://cloud.google.com/products/alloydb) on GCP.
 
 ## Using Identities
 
@@ -47,11 +50,13 @@ Read more about identifiers on the [concepts](/docs/identities/concepts/index.md
 ### 2. Configure Identities
 
 Use [Console](https://console.snowplowanalytics.com) to configure Identities with the identifiers you've chosen.
+<!-- TODO: do we have any info about priorities? -->
 
-Set optional filters to specify which events will be sent to Identities for resolution. You can also set aliases to resolve multiple event fields to the same identifier.
+Set optional filters to specify which events will be sent to Identities for resolution. Events that are filtered out will not have an [identity entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity/jsonschema/1-0-0) and corresponding `snowplowId` 
 
 ### 3. Use your new identity data
 
 Set up the Identities dbt package to create your new identity tables. We've updated the existing Snowplow dbt models to support Identities. Use your identity data to gain a better understanding of your users.
+<!-- TODO: link to dbt models page -->
 
 Identities is compatible with Snowplow [Signals](/docs/signals/index.md) for real-time personalization based on unified user profiles.

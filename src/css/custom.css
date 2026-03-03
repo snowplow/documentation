@@ -434,6 +434,11 @@ aside.theme-doc-sidebar-container {
   border-radius: var(--radius);
 }
 
+/* Extra space above a sidebar item, via sidebar_custom_props.space_above */
+li.menu__list-item.space-above {
+  margin-top: 1rem;
+}
+
 /* Collapsible section headers - styled as distinct category headings */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible {
   margin-top: 1rem;

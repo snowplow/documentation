@@ -1,7 +1,7 @@
 ---
 title: "Core Signals components and concepts"
 sidebar_position: 10
-sidebar_label: "Concepts"
+sidebar_label: "Fundamentals"
 description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, and interventions for triggering actions. Learn about data sources, attribute keys, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "profiles store", "attribute keys"]
 ---
@@ -80,13 +80,13 @@ Whether to compute attributes in real-time from the event stream or in batch fro
 
 This table summarizes the options for different types of processing:
 
-| Feature                            | Supported in real-time stream                                                 | Supported in batch            |
-| ---------------------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
-| Real-time calculation              | ✅                                                                             | ❌                             |
-| Time windowing operations          | ✅                                                                            | ✅                             |
-| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                             |
-| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                             |
-| Non-Snowplow data                  | ❌                                                                             | ✅ using external batch source |  |
+| Feature                            | Supported in real-time stream                                     | Supported in batch            |
+| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------- |
+| Real-time calculation              | ✅                                                                 | ❌                             |
+| Time windowing operations          | ✅                                                                 | ✅                             |
+| Computing user lifetime attributes | ✅ from the point at which the attribute was defined               | ✅                             |
+| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined | ✅                             |
+| Non-Snowplow data                  | ❌                                                                 | ✅ using external batch source |  |
 
 ### Stream source
 

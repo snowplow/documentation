@@ -55,6 +55,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [RDB Loader (Redshift, Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        {versions.rdbLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)         | {versions.databricksStreamingLoader} |
 | [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         {versions.s3Loader}         |
 | [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                                    |        {versions.snowbridge}        |
 | [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md)                               |         {versions.esLoader}         |
@@ -72,6 +73,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                        |         {versions.bqLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)  | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
 | [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                 |        {versions.gcsLoader}         |
 | [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                          |        {versions.snowbridge}        |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
@@ -87,6 +89,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)            |        {versions.rdbLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
 
 </TabItem>
 </Tabs>

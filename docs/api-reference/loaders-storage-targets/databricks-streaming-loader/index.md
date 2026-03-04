@@ -14,11 +14,9 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/data
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/_deploy-overview.md';
 ```
 
-:::info Early release
+:::info Availability
 
-This is an early release. It relies on Databricks features that are in preview as of August 2025, e.g. [File Events](https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader/file-notification-mode#file-events).
-
-Also, you will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
+You will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
 
 :::
 

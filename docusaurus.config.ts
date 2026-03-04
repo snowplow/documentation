@@ -210,7 +210,7 @@ const config: Config = {
               },
               {
                 label: 'Licensing Overview',
-                href: '/docs/resources/copyright-license',
+                href: '/docs/licensing/',
               },
             ],
           },

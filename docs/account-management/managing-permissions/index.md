@@ -15,7 +15,7 @@ Snowplow Console sets permissions for each area of Console as summarized below:
 | **Console feature** | **Description**                                                                                                               | **Possible permissions**                                                     |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | User management     | The management and addition of user access. This permission cannot be configured on a Custom role.                            | No access<br/>Edit<br/>Create                                                |
-| Environments        | The management of pipeline and sandbox (Mini) environments. This includes managing which Enrichments run on each environment. | No access<br/>View<br/>Edit                                                  |
+| Environments        | The management of pipeline and development environments. This includes managing which Enrichments run on each environment. | No access<br/>View<br/>Edit                                                  |
 | Tracking plans      | The management and creation of tracking plans                                                                                 | No access<br/>View<br/>Edit<br/>Create                                       |
 | Data structures     | The management and creation of the schemas that define the events and entities you are capturing.                             | No access<br/>View<br/>Edit on development<br/>Edit on production<br/>Create |
 | Data models         | The management and creation of your data models.                                                                              | No access<br/>View<br/>Edit<br/>Create                                       |
@@ -78,7 +78,7 @@ Our recommendation is to remove all existing API keys and Iglu keys, and set the
 
 ### Environments
 
-An environment is the collective name for your Production pipelines, QA pipelines and sandboxes.
+An environment is the collective name for your Production pipelines, QA pipelines and development environments.
 
 An environment has three permissions:
 

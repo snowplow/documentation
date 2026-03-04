@@ -58,7 +58,7 @@ With Self-Hosted, you deploy and host everything. Many features, including the *
 
 Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases. It's a starter template: use it to evaluate Snowplow for testing purposes.
 
-Community Edition infrastructure is provided under the [SLULA license](/docs/resources/copyright-license/index.md).
+Community Edition infrastructure is provided under the [SLULA license](/docs/licensing/index.md).
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |

@@ -17,7 +17,7 @@ The demo application features:
 
 * **Product catalog**: products fetched from an external API
 * **Snowplow tracking**: the [JavaScript tracker](/docs/sources/web-trackers/) with the [ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/)
-* **Intervention display**: the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) to receive and show intervention banners
+* **Intervention display**: the [browser tracker plugin](/docs/signals/interventions/subscribe/#using-the-browser-tracker-plugin) to receive and show intervention banners
 * **Logging**: the app prints to the console when it tracks an event, or receives an intervention
 * **Reset functionality**: ability to clear your user data and start fresh
 

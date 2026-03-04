@@ -11,7 +11,7 @@ Manage your account configuration and users using the Snowplow Console. You can 
 
 ## Credentials API
 
-The API that drives Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for our customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.
+The API that drives Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.
 
 The following view is available in [Console](https://console.snowplowanalytics.com/), under **Settings** in the navigation bar, then **Manage organization**, then **API keys for managing Snowplow**. Users can view this page only if they have the "view" permission on API keys.
 
@@ -25,7 +25,7 @@ You can create multiple API keys, and it's also possible to delete any key. When
 
 Newly created API key view
 
-Both the API key ID and API key are required. The api key functions like a combination of a username and password, and should be treated with the same level of security. Once you have an API key and key ID, exchanging it for a JWT is straightforward. For example, using curl, the process would look like this:
+Both the API key ID and API key are required. The API key functions like a combination of a username and password, and should be treated with the same level of security. Once you have an API key and key ID, exchanging it for a JWT is straightforward. For example, using curl, the process would look like this:
 
 ```bash
 curl \
@@ -59,4 +59,4 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
-While this method will continue to work, the endpoint is now deprecated and will be removed in the future. We strongly advise you to use the v3 endpoint detailed above.
+While this method will continue to work, the endpoint is now deprecated and will be removed in the future. Use the v3 endpoint detailed above instead.

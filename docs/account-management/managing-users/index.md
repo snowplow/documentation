@@ -3,8 +3,8 @@ title: "Manage users in Console directly or with SSO"
 sidebar_label: "User management"
 date: "2020-02-15"
 sidebar_position: 1
-description: "Add and remove users in Snowplow Console, configure Single Sign-On with SAML 2.0 identity providers including Google Workspace, Azure AD, Okta, and OpenID Connect."
-keywords: ["user management", "SSO setup", "Single Sign-On", "SAML", "identity provider", "Azure AD", "Google Workspace", "Okta"]
+description: "Add and remove users in Snowplow Console, configure Single Sign-On with identity providers including Google Workspace, Entra ID, Okta, and OpenID Connect."
+keywords: ["user management", "SSO setup", "Single Sign-On", "SAML", "identity provider", "Entra ID", "Google Workspace", "Okta"]
 ---
 
 There are two ways to add and remove users in Console: directly managed in Console, or managed through your Single Sign-On (SSO) provider.
@@ -17,7 +17,7 @@ For organizations **using SSO**, you will need to configure your account with yo
 
 ## SSO permissions
 
-Only system administrators can set up SSO for their company. For information on setting permissions for individual users, see [this page](/docs/account-management/managing-permissions/index.md).
+Only system administrators can set up SSO for their company. For information on setting permissions for individual users, see [Managing user permissions](/docs/account-management/managing-permissions/index.md).
 
 ## How to enable SSO for your account
 
@@ -27,7 +27,7 @@ To enable single sign-on (SSO) for Snowplow, follow these steps inside Console:
 
 1. Go to the [manage organization](https://console.snowplowanalytics.com/settings) page.
 2. Select [Single sign-on (SSO)](https://console.snowplowanalytics.com/users) from the Users panel. The SSO configuration is only visible to users with Admin role.
-3. Click on Continue and follow the steps for your Identity Provider.
+3. Click **Continue** and follow the steps for your Identity Provider.
 
 ## Which Identity Providers (IdPs) are supported?
 
@@ -41,14 +41,14 @@ Snowplow’s SSO capability enables connections with many IdPs, including: 
 - Okta
 - PingFederate
 
-Note that because we can support OpenID Connect and SAML, it should be possible to support virtually any external Identity Provider that uses those standards.
+Because Snowplow supports OpenID Connect and SAML, virtually any external Identity Provider that uses those standards should work.
 
 ## What information will you need from us?
 
 This will differ depending on your Identity Provider, but typically will include information such as:
 
-- **Entity ID** - the URL that identifies the identity provider issuing a SAML request,  this will be specific to your identity provider.
-- **Metadata URL** - the URL that allows access to obtain SSO configuration data,  this will be specific to your identity provider.
+- **Entity ID** - the URL that identifies the identity provider issuing a SAML request, this will be specific to your identity provider.
+- **Metadata URL** - the URL that allows access to obtain SSO configuration data, this will be specific to your identity provider.
 - **Redirect Login URL** - the URL where users in the company sign in to the identity provider.
 - **User information mapping** - locations of information required by Snowplow Console such as first name, last name and, optionally, job title.
 
@@ -58,11 +58,11 @@ This will differ depending on your Identity Provider, but typically will include
 
 Snowplow supports just-in-time provisioning with SSO connections. When a user logs in for the first time, a corresponding user account with the same email is created in Snowplow.
 
-A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Admin role on your account. For more details on setting user access, see [Managing user permissions](/docs/account-management/managing-permissions/index.md).
+A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Global Admin role on your account. For more details on setting user access, see [Managing user permissions](/docs/account-management/managing-permissions/index.md).
 
 ### Existing users
 
-If a user already has a Snowplow account prior to SSO being enabled, the two accounts will be merged the users current permissions will be applied.
+If a user already has a Snowplow account prior to SSO being enabled, the two accounts will be merged, and the user's current permissions will be applied.
 
 ### Logging in 
 
@@ -75,4 +75,4 @@ Once SSO is enabled, users on your domain can no longer sign in with their old e
 If your company enables SSO, and later decides to disable it:
 
 - Users who did not set up a password before SSO was enabled must click Reset password on the login page to obtain a password.
-- Users who set up a password before SSO was enabled can login with their old username and password.
+- Users who set up a password before SSO was enabled can log in with their old username and password.

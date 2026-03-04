@@ -110,6 +110,7 @@ const config: Config = {
           includePages: true,
           enableLlmsFullTxt: true,
           relativePaths: false,
+          excludeRoutes: ['/'],
         },
         includeOrder:["/docs", "sitemap.xml"],
       } satisfies PluginOptions

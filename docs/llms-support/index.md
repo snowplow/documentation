@@ -15,9 +15,9 @@ The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index
 
 ## Documentation site map
 
-The documentation site map for LLMs is available at [`llms.txt`](/llms.txt). It's an index of all documentation pages with titles and descriptions, organized by section. Use this to help an LLM understand the structure of the documentation and navigate to relevant pages.
+The documentation site map for LLMs is available at [`llms.txt`](pathname:///llms.txt). It's an index of all documentation pages with titles and descriptions, organized by section. Use this to help an LLM understand the structure of the documentation and navigate to relevant pages.
 
-A full-content version is also available at [`llms-full.txt`](/llms-full.txt), which includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
+A full-content version is also available at [`llms-full.txt`](pathname:///llms-full.txt), which includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 
 ## Documentation pages as Markdown
 

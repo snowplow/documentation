@@ -43,7 +43,7 @@ function MarkdownActions() {
   }
 
   const buttonClass =
-    'inline-flex items-center gap-1 text-s text-foreground transition-opacity cursor-pointer bg-transparent border-none p-0 font-normal opacity-70 hover:opacity-100'
+    'inline-flex items-center gap-1 text-[0.825rem] text-foreground transition-opacity cursor-pointer bg-transparent border-none p-0 font-normal opacity-70 hover:opacity-100'
 
   return (
     <div className="not-prose flex items-center gap-3 -mt-4 mb-8">

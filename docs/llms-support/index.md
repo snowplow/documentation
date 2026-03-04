@@ -11,7 +11,7 @@ Snowplow supports AI and LLM-powered workflows in several ways.
 
 ## Snowplow CLI MCP server
 
-The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a [Model Context Protocol (MCP) server](/docs/event-studio/mcp-server/index.md) that connects AI assistants to your tracking plans. Using natural language, you can create, validate, and modify data structures and source applications through your AI client.
+The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a Model Context Protocol (MCP) server that [connects AI assistants to your Snowplow tracking plans](/docs/llms-support/mcp-server/index.md).
 
 ## Documentation as markdown
 

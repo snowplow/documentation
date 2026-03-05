@@ -1,7 +1,7 @@
 ---
 title: "Snowplow CLI command reference"
 sidebar_label: "Command reference"
-date: 2025-10-02
+date: 2026-03-05
 sidebar_position: 1
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
@@ -233,35 +233,33 @@ snowplow-cli data-products generate [paths...] [flags]
 
 
 
-## Data-Products Publish
+## Data-Products Purge
 
 
-Publish all tracking plans, event specs and source apps to Snowplow Console
+Purges (permanently removes) all remote tracking plans and source apps that do not exist locally
 
 ### Synopsis
 
-Publish the local version versions of all tracking plans, event specs and source apps from Snowplow Console.
+Purges (permanently removes) all remote tracking plans and source apps that do not exist locally.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 
 ```
-snowplow-cli data-products publish {directory ./data-products} [flags]
+snowplow-cli data-products purge {directory ./data-products} [flags]
 ```
 
 ### Examples
 
 ```
-  $ snowplow-cli dp publish
-  $ snowplow-cli dp download ./my-data-products
+  $ snowplow-cli dp purge
+  $ snowplow-cli dp purge ./my-data-products
 ```
 
 ### Options
 
 ```
-  -c, --concurrency int   The number of validation requests to perform at once (maximum 10) (default 3)
-  -d, --dry-run           Only print planned changes without performing them
-      --gh-annotate       Output suitable for github workflow annotation (ignores -s)
-  -h, --help              help for publish
+  -h, --help   help for purge
+  -y, --yes    commit to purge
 ```
 
 ### Options inherited from parent commands
@@ -290,33 +288,100 @@ snowplow-cli data-products publish {directory ./data-products} [flags]
 
 
 
-## Data-Products Purge
+## Data-Products Release
 
 
-Purges (permanently removes) all remote tracking plans and source apps that do not exist locally
+Publish and release all tracking plans, event specs and source apps to Snowplow Console
 
 ### Synopsis
 
-Purges (permanently removes) all remote tracking plans and source apps that do not exist locally.
+Publish and release the local versions of all tracking plans, event specs and source apps to Snowplow Console.
+
+This command syncs local files with remote tracking plans, then releases any draft event specs. It will filter out the event specs without the event, and only attempt to publish the event specs that are part of the tracking plans in the directory.
+Releasing marks event specs as published and enables event spec inference.
+Use 'sync' to only sync without releasing, and not change the status of event specs
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 
 ```
-snowplow-cli data-products purge {directory ./data-products} [flags]
+snowplow-cli data-products release {directory ./data-products} [flags]
 ```
 
 ### Examples
 
 ```
-  $ snowplow-cli dp purge
-  $ snowplow-cli dp purge ./my-data-products
+  $ snowplow-cli dp release
+  $ snowplow-cli dp release ./my-data-products
 ```
 
 ### Options
 
 ```
-  -h, --help   help for purge
-  -y, --yes    commit to purge
+  -c, --concurrency int   The number of validation requests to perform at once (maximum 10) (default 3)
+  -d, --dry-run           Only print planned changes without performing them
+      --gh-annotate       Output suitable for github workflow annotation (ignores -s)
+  -h, --help              help for release
+```
+
+### Options inherited from parent commands
+
+```
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
+      --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                              Then on:
+                                Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                                Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                                Windows %AppData%\snowplow\snowplow.yml
+      --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output           Log output as json
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+  -q, --quiet                 Log output level to Warn
+  -s, --silent                Disable output
+```
+
+
+
+## Data-Products Sync
+
+
+Sync all tracking plans, event specs and source apps to Snowplow Console
+
+### Synopsis
+
+Sync the local versions of all tracking plans, event specs and source apps to Snowplow Console.
+
+This command syncs local files with remote tracking plans, event specs and source apps, creating or updating them as needed.
+Event specs status will not be changed by running this command.
+Use 'release' to also release event specs, which changes the status in Snowplow Console to "published" and enable event spec inference.
+
+If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
+
+```
+snowplow-cli data-products sync {directory ./data-products} [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli dp sync
+  $ snowplow-cli dp sync ./my-data-products
+```
+
+### Options
+
+```
+  -c, --concurrency int   The number of validation requests to perform at once (maximum 10) (default 3)
+  -d, --dry-run           Only print planned changes without performing them
+      --gh-annotate       Output suitable for github workflow annotation (ignores -s)
+  -h, --help              help for sync
 ```
 
 ### Options inherited from parent commands
@@ -638,7 +703,7 @@ Publish modified data structures to Snowplow Console and your development enviro
 
 The 'meta' section of a data structure is not versioned within Snowplow Console.
 Changes to it will be published by this command.
-
+	
 
 ```
 snowplow-cli data-structures publish dev [paths...] default: [./data-structures] [flags]
@@ -697,7 +762,7 @@ Publish data structures from your development to your production environment
 
 Data structures found on \<path...\> which are deployed to your development
 environment will be published to your production environment.
-
+	
 
 ```
 snowplow-cli data-structures publish prod [paths...] default: [./data-structures] [flags]
@@ -710,7 +775,7 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
 	$ snowplow-cli ds publish prod
 	$ snowplow-cli ds publish prod --dry-run
 	$ snowplow-cli ds publish prod --dry-run ./my-data-structures ./my-other-data-structures
-
+	
 ```
 
 ### Options

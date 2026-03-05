@@ -3,7 +3,14 @@ title: "Identities concepts"
 sidebar_label: "Concepts"
 date: "2025-02-25"
 sidebar_position: 1
+description: "Core concepts behind Snowplow Identities: identifiers, profiles, merges, and identity resolution."
+keywords: ["identities", "identity resolution", "identifiers", "profiles", "merges"]
 ---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 Identities is based on several core concepts.
 * **Identifiers** are the properties in the event payload that correspond to a user
@@ -22,7 +29,7 @@ Identities also supports [cross-domain tracking](#cross-domain-tracking), where 
 
 A profile is a collection of linked identifiers that represent a single user. Each profile has a persistent, immutable `snowplow_id` that identifies it.
 
-When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event in an [identity entity](/docs/identities/data-models/index.md#identity-entity). In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
+When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event in an [identity entity](#identity-entity). In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
 <!-- TODO: it's called `identity` instead of `profile` in the backend; is that a problem? I've been using the term `profile` with customers -->
 
 ### Example profile creation
@@ -38,7 +45,7 @@ During the anonymous browsing session, the only configured identifier in the eve
 ```mermaid
 graph TD
     A(["domain_userid:<br/>4b0dfa-..."])
-    B(["**Profile: sp_001**"])
+    B(("**Profile:<br/>sp_001**"))
 
     A --- B
 ```
@@ -49,7 +56,7 @@ After the user logs in, the next event contains both the `domain_userid` and the
 graph TD
     A(["domain_userid:<br/>4b0dfa-..."])
     B(["user_id:<br/>alice@company.com"])
-    C(["**Profile: sp_001**"])
+    C(("**Profile:<br/>sp_001**"))
 
     A --- C
     B --- C
@@ -57,9 +64,9 @@ graph TD
 
 All events associated with this user both pre- and post-login will have Snowplow ID `sp_001` attached to them.
 
-## Identity resolution
+## Identity resolution process
 
-Identities stores the relationships between identifiers and profiles in a Postgres database using a graph-based model. This graph is the source of truth for identity resolution. It dynamically links and merges profiles as new identifiers appear.
+Identities stores the relationships between identifiers and profiles using a graph-based model. This graph is the source of truth for identity resolution. It dynamically links and merges profiles as new identifiers appear.
 
 The identity resolution process for each event is as follows:
 1. The Snowplow pipeline extracts the configured identifiers from the event payload
@@ -69,13 +76,13 @@ The identity resolution process for each event is as follows:
    * No: Identities creates a new profile, links all identifiers to it, and returns the new profile Snowplow ID
    * Yes: processing continues
 5. Identities creates links to that profile for any identifiers that aren't already linked
-6. Does any of the identifiers have another linked profile?
+6. Do any of the identifiers have another linked profile?
    * No: Identities returns the existing profile Snowplow ID
    * Yes: processing continues
 7. Identities creates a profile-profile merge relationship from the newer profile to the older profile
-9. Identities returns the parent profile Snowplow ID and emits a merge event into the Snowplow pipeline to signal to downstream systems that a merge has occurred.
+8. Identities returns the parent profile Snowplow ID and emits a merge event into the Snowplow pipeline to signal to downstream systems that a merge has occurred.
 
-Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information. <!-- TODO:  -->
+Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information.
 
 If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events. <!-- TODO: ask peel to confirm -->
 
@@ -89,11 +96,11 @@ In normal operation, priority doesn't affect how profiles are linked. All identi
 
 ## Merges
 
-Merges happen when an event contains identifiers that are currently linked to different profiles. This typically occurs when a user's anonymous activity is later connected to their known identity.
+Merges happen when an event contains identifiers that are linked to different profiles. This typically occurs when a user's anonymous activity is later connected to their known identity.
 
 When profiles merge, the older profile's `snowplow_id` becomes the ID for the combined profile. All identifiers from both profiles are linked to the combined profile. Merged profiles can also be merged again in the future if new connecting identifiers are observed.
 
-When a merge occurs, Identities emits a [merge event](/docs/identities/data-models/index.md#merge-events) into your enriched event stream.
+When a merge occurs, Identities emits a [merge event](#merge-events) into your enriched event stream.
 
 ### Example merge process
 
@@ -104,7 +111,7 @@ The ExampleCompany team has configured Identities to use the `apple_idfv` identi
 ```mermaid
 graph LR
     C(["apple_idfv:<br/>6d920c-..."])
-    P2(["**Profile: sp_002**"])
+    P2(("**Profile:<br/> sp_002**"))
 
     C --- P2
 ```
@@ -118,8 +125,8 @@ graph LR
     A(["domain_userid:<br/>4b0dfa-..."])
     B(["user_id:<br/>alice@company.com"])
     C(["apple_idfv:<br/>6d920c-..."])
-    P1(["**Profile: sp_001**"])
-    P2(["**Profile: sp_002**"])
+    P1(("**Profile:<br/> sp_001**"))
+    P2(("**Profile:<br/> sp_002**"))
 
     A --- P1
     B --- P1
@@ -128,7 +135,7 @@ graph LR
     P2 -. merged .-> P1
 ```
 
-## Unique identifiers prevent inaccurate merging
+## Unique identifiers and merge conflicts
 
 **Unique identifiers** are identifiers that should never cause two profiles to merge together if they have different values. For example, if you mark `user_id` as unique, two events with different `user_id` values will never cause their profiles to merge, even if they share other identifiers like `domain_userid`. This prevents incorrect merges such as when multiple users share a device or browser.
 
@@ -145,8 +152,8 @@ graph LR
     A(["domain_userid:<br/>4b0dfa-..."])
     B(["user_id:<br/>alice@company.com"])
     C1(["apple_idfv:<br/>6d920c-..."])
-    P1(["**Profile: sp_001**"])
-    P2(["**Profile: sp_002**"])
+    P1(("**Profile:<br/> sp_001**"))
+    P2(("**Profile:<br/> sp_002**"))
 
     A --- P1
     B --- P1
@@ -156,7 +163,7 @@ graph LR
 
     C2(["apple_idfv:<br/>6d920c-..."])
     BobB(["user_id:<br/>bob@company.com"])
-    BobC(["**Profile: sp_003**"])
+    BobC(("**Profile:<br/> sp_003**"))
 
     C2 --- BobC
     BobB --- BobC
@@ -171,8 +178,8 @@ graph LR
     A(["domain_userid:<br/>4b0dfa-..."])
     B(["user_id:<br/>alice@company.com"])
     C1(["apple_idfv:<br/>6d920c-..."])
-    P1(["**Profile: sp_001**"])
-    P2(["**Profile: sp_002**"])
+    P1(("**Profile:<br/> sp_001**"))
+    P2(("**Profile:<br/> sp_002**"))
 
     A --- P1
     B --- P1
@@ -182,13 +189,13 @@ graph LR
 
     C2(["apple_idfv:<br/>6d920c-..."])
     BobB(["user_id:<br/>bob@company.com"])
-    BobC(["**Profile: sp_003**"])
+    BobC(("**Profile:<br/>sp_003**"))
 
     C2 --- BobC
     BobB --- BobC
 
     C3(["apple_idfv:<br/>6d920c-..."])
-    AnonP(["**Profile: sp_004**<br/>(anonymous)"])
+    AnonP(("**Profile:<br/>sp_004**<br/>_anonymous_"))
 
     C3 --- AnonP
 ```
@@ -212,7 +219,7 @@ A user browses `brandA.example.com` anonymously. The event contains a `domain_us
 ```mermaid
 graph TD
     A(["domain_userid:<br/>d123"])
-    P1(["**Profile: sp_001**"])
+    P1(("**Profile:<br/>sp_001**"))
 
     A --- P1
 ```
@@ -223,7 +230,7 @@ The user clicks a link to `brandB.example.com`. The destination site assigns a n
 graph TD
     A(["domain_userid:<br/>d123"])
     D(["domain_userid:<br/>d456"])
-    P1(["**Profile: sp_001**"])
+    P1(("**Profile:<br/>sp_001**"))
 
     A --- P1
     D --- P1
@@ -236,7 +243,7 @@ graph TD
     A(["domain_userid:<br/>d123"])
     D(["domain_userid:<br/>d456"])
     U(["user_id:<br/>u001"])
-    P1(["**Profile: sp_001**"])
+    P1(("**Profile:<br/>sp_001**"))
 
     A --- P1
     D --- P1
@@ -244,3 +251,136 @@ graph TD
 ```
 
 All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same `snowplow_id`.
+
+## Identities data structures
+
+Identities adds two data structures to your enriched event stream: an identity entity attached to every resolved event, and a merge event emitted when profiles are combined.
+
+### Identity entity
+
+When Identities resolves identity for an event, it attaches an identity [entity](/docs/fundamentals/entities/index.md) to the event payload. This entity contains the `snowplow_id` for the profile that the event was resolved to. It appears in your warehouse as `contexts_com_snowplowanalytics_snowplow_identity_1`.
+
+<Tabs groupId="schema-view" queryString>
+  <TabItem value="fields" label="Fields" default>
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `snowplowId` | `string` | Required. The profile's Snowplow ID at the time the event was processed. Matches the pattern `sp_` followed by 26 base-32 characters. This may later be merged into a different ID. |
+| `createdAt` | `string` (date-time) | Required. Timestamp of when the profile was first created. |
+
+  </TabItem>
+  <TabItem value="json-schema" label="JSON schema">
+
+See the [full schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity/jsonschema/1-0-0) on GitHub.
+
+```json
+{
+  "description": "Identity context that is enriched onto events by Snowplow Identities",
+  "properties": {
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "snowplowId": {
+      "type": "string",
+      "maxLength": 29,
+      "pattern": "^sp_[A-Za-z2-7]{26}$"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": ["snowplowId", "createdAt"],
+  "self": {
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "identity",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+### Merge events
+
+When a [merge](#merges) occurs, Identities emits a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) into the enriched event stream. Downstream consumers such as the [Identities dbt package](/docs/identities/data-models/index.md) use these events to keep identity mappings up to date.
+
+<Tabs groupId="schema-view" queryString>
+  <TabItem value="fields" label="Fields" default>
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `snowplowId` | `string` | Required. The parent/surviving identity ID after the merge. |
+| `createdAt` | `string` (date-time) | Required. When the parent identity was created. |
+| `merges` | `array` of `string` | Required. List of merged identity IDs. |
+| `merged` | `array` of `object` | Required. Detailed info about each merged identity. Each object contains `snowplowId`, `createdAt`, `mergedAt`, and `triggeringEventId`. |
+
+  </TabItem>
+  <TabItem value="json-schema" label="JSON schema">
+
+See the [full schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity_merge/jsonschema/1-0-0) on GitHub.
+
+```json
+{
+  "description": "Event emitted when Snowplow Identities merges user identities",
+  "properties": {
+    "snowplowId": {
+      "description": "The parent/surviving identity ID",
+      "type": "string",
+      "maxLength": 29,
+      "pattern": "^sp_[A-Za-z2-7]{26}$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the parent identity was created"
+    },
+    "merges": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of merged identity IDs"
+    },
+    "merged": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["snowplowId", "createdAt", "mergedAt", "triggeringEventId"],
+        "properties": {
+          "snowplowId": {
+            "type": "string",
+            "maxLength": 29,
+            "pattern": "^sp_[A-Za-z2-7]{26}$"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mergedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "triggeringEventId": {
+            "type": "string",
+            "maxLength": 36
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Detailed info about merged identities"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": ["snowplowId", "createdAt", "merges", "merged"],
+  "self": {
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "identity_merge",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>

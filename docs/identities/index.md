@@ -3,6 +3,8 @@ title: "Introduction to Snowplow Identities"
 sidebar_label: "Identities"
 date: "2025-02-25"
 sidebar_position: 6
+description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified profiles."
+keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
 ---
 
 Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
@@ -15,7 +17,7 @@ Identities allows you to:
 
 Use the provided Identities data models to build identifier mapping tables to help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
-## How does Identities fit into the Snowplow pipeline?
+## How Identities fits into the Snowplow pipeline
 
 Identity resolution happens in real time as part of the [event enrichment process](/docs/fundamentals/index.md).
 
@@ -52,11 +54,11 @@ Read more about identifiers on the [concepts](/docs/identities/concepts/index.md
 Use [Console](https://console.snowplowanalytics.com) to configure Identities with the identifiers you've chosen.
 <!-- TODO: do we have any info about priorities? -->
 
-Set optional filters to specify which events will be sent to Identities for resolution. Events that are filtered out will not have an [identity entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity/jsonschema/1-0-0) and corresponding `snowplowId` 
+Set optional filters to specify which events will be sent to Identities for resolution. Events that are filtered out will not have an [identity entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity/jsonschema/1-0-0) and corresponding `snowplowId` attached to them.
 
 ### 3. Use your new identity data
 
-Set up the Identities dbt package to create your new identity tables. We've updated the existing Snowplow dbt models to support Identities. Use your identity data to gain a better understanding of your users.
+Set up the Identities dbt package to create your new identity tables. The existing Snowplow dbt models support Identities. Use your identity data to gain a better understanding of your users.
 <!-- TODO: link to dbt models page -->
 
 Identities is compatible with Snowplow [Signals](/docs/signals/index.md) for real-time personalization based on unified user profiles.

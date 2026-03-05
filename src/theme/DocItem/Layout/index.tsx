@@ -68,7 +68,7 @@ function MarkdownActions() {
         aria-label="Download this page as Markdown"
         type="button"
       >
-        <Download size={18} />
+        <Download size={16} />
         <span>Download</span>
       </button>
       <button
@@ -78,7 +78,7 @@ function MarkdownActions() {
         aria-label="Copy this page's Markdown to clipboard"
         type="button"
       >
-        {copied ? <Check size={18} /> : <Copy size={18} />}
+        {copied ? <Check size={16} /> : <Copy size={16} />}
         <span>{copied ? 'Copied!' : 'Copy Markdown'}</span>
       </button>
     </div>

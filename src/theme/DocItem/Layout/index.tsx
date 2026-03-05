@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { useWindowSize } from '@docusaurus/theme-common'
 import { useDoc } from '@docusaurus/plugin-content-docs/client'
@@ -26,6 +26,14 @@ function MarkdownActions() {
   const { pathname } = useLocation()
   const markdownUrl = pathname.replace(/\/$/, '') + '.md'
   const [copied, setCopied] = useState(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    },
+    []
+  )
 
   function handleDownload() {
     const a = document.createElement('a')
@@ -37,24 +45,26 @@ function MarkdownActions() {
   async function handleCopy() {
     try {
       const res = await fetch(markdownUrl)
+      if (!res.ok) throw new Error(`Failed to fetch Markdown: ${res.status}`)
       const text = await res.text()
       await navigator.clipboard.writeText(text)
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // silently fail — clipboard access may be denied
+      clearTimeout(timeoutRef.current ?? undefined)
+      timeoutRef.current = setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.warn('Failed to copy Markdown to clipboard:', err)
     }
   }
 
   const buttonClass =
-    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-opacity cursor-pointer bg-transparent border-none p-0 font-normal hover:opacity-70'
+    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal hover:text-[color:var(--ifm-color-primary)]'
 
   return (
     <div className="not-prose max-w-[740px] mx-auto flex items-center gap-3 -mt-1 mb-8 pl-[0.3rem]">
       <button
         onClick={handleDownload}
         className={buttonClass}
-        title="Download this page as a Markdown file"
+        title="Download page as a Markdown file"
         aria-label="Download this page as Markdown"
         type="button"
       >
@@ -64,7 +74,7 @@ function MarkdownActions() {
       <button
         onClick={handleCopy}
         className={buttonClass}
-        title="Copy the Markdown source of this page to your clipboard"
+        title="Copy page as Markdown (for LLM)"
         aria-label="Copy this page's Markdown to clipboard"
         type="button"
       >

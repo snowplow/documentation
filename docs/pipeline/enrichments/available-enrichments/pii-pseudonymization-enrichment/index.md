@@ -1,6 +1,6 @@
 ---
 title: "PII pseudonymization enrichment"
-sidebar_position: 15
+sidebar_position: 17
 sidebar_label: PII pseudonymization
 description: "Pseudonymize personally identifiable information in events using hashing for privacy compliance."
 keywords: ["PII pseudonymization", "data privacy", "GDPR"]

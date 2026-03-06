@@ -2,7 +2,7 @@
 title: "Managing tracking plans via the CLI"
 sidebar_label: "Tracking plans"
 sidebar_position: 999
-description: "Use the Snowplow CLI data-products command to create, download, validate, and publish tracking plans, event specifications, and source applications with git-ops workflows."
+description: "Use the Snowplow CLI data-products command to create, download, validate, sync, and release tracking plans, event specifications, and source applications with git-ops workflows."
 keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifications CLI", "source applications CLI", "CLI commands"]
 ---
 
@@ -18,12 +18,12 @@ Installed and configured [Snowplow CLI](/docs/event-studio/programmatic-manageme
 ## Available commands
 ### Creating tracking plan
 ```bash
-./snowplow-cli dp generate --data-product my-data-product
+snowplow-cli dp generate --data-product my-data-product
 ```
 This command creates a minimal tracking plan template in a new file `./data-products/my-data-product.yaml`.
 ### Creating source application
 ```bash
-./snowplow-cli dp generate --source-app my-source-app
+snowplow-cli dp generate --source-app my-source-app
 ```
 This command creates a minimal source application template in a new file `./data-products/source-apps/my-source-app.yaml`.
 ### Creating event specification
@@ -81,7 +81,7 @@ data:
 In this example event specification `All source apps` is related to both `generic` and `specific` source apps, but event specification `Not quite everything` is related only to the `generic` source application.
 ### Downloading tracking plans, event specifications and source apps
 ```bash
-./snowplow-cli dp download
+snowplow-cli dp download
 ```
 This command retrieves all organization tracking plans, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed.
 The command creates the following structure:
@@ -90,15 +90,29 @@ The command creates the following structure:
 - Event specifications embedded within their related tracking plan files.
 ### Validating tracking plans, event specifications and source applications
 ```bash
-./snowplow-cli dp validate
+snowplow-cli dp validate
 ```
 This command scans all files under `./data-products` and validates them using Snowplow Console. It checks:
 1. Whether each file is in a valid format (YAML/JSON) with correctly formatted fields
 2. Whether all source application references in the tracking plan files are valid
 3. Whether event specification rules are compatible with their schemas
 If validation fails, the command displays the errors in the console and exits with status code 1.
-### Publishing tracking plans, event specifications and source applications
+### Syncing tracking plans, event specifications and source applications
 ```bash
-./snowplow-cli dp publish
+snowplow-cli dp sync
 ```
-This command locates all files under `./data-products`, validates them, and publishes them to Console.
+This command locates all files under `./data-products`, validates them, and pushes local changes to Console. Tracking plans and source applications are updated in place. For event specifications, a new version in draft status may be created if the change is structural (name change, event change, or rules change).
+
+:::warning Deprecated alias
+
+The old `publish` command has been renamed to `sync`. Running `dp publish` still works as an alias for backward compatibility, but it may be removed in a future release. Update your scripts to use `dp sync` instead.
+
+:::
+
+### Releasing event specifications
+```bash
+snowplow-cli dp release
+```
+This command first syncs local files with Console (like `sync`), then releases any draft event specifications. Releasing marks event specifications as published and enables event spec inference. Only event specifications that are part of the local tracking plan files are affected — other event specifications in Console are left unchanged. Event specifications without an event are skipped.
+
+Use `sync` if you only want to push changes without changing event specification status.

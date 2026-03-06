@@ -67,9 +67,9 @@ That’s it. You can use the [the API](/docs/api-reference/snowplow-micro/api/in
 curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 ```
 
-## Adding custom collector configuration
+## Adding custom Collector and Enrich configuration
 
-If you’d like to tweak the [collector configuration](/docs/api-reference/stream-collector/configure/index.md) inside Micro, the simplest approach is to override individual settings. For example, to change the cookie name:
+If you’d like to tweak the [Collector](/docs/api-reference/stream-collector/configure/index.md) or [Enrich](/docs/api-reference/enrichment-components/configuration-reference/index.md) configuration inside Micro, the simplest approach is to override individual settings. For example, to change the cookie name:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
@@ -77,7 +77,7 @@ If you’d like to tweak the [collector configuration](/docs/api-reference/strea
   -Dcollector.cookie.name=sp`
 }</CodeBlock>
 
-For more extensive changes, you can also bring your own configuration file (`micro.conf`).
+For more extensive changes, you can also bring your own configuration file (`micro.conf`). Collector settings should be inside `collector { ... }`, and Enrich settings inside `enrich { ... }`. (Adding Enrich settings is only supported since version 4.1.0.)
 
 <details>
 <summary>Example</summary>
@@ -94,7 +94,7 @@ Pass your configuration file to the container (using a [bind mount](https://docs
 `docker run -p 9090:9090 \\
   --mount type=bind,source=$(pwd)/micro.conf,destination=/config/micro.conf \\
   snowplow/snowplow-micro:${versions.snowplowMicro} \\
-  --collector-config /config/micro.conf`
+  --config /config/micro.conf`
 }</CodeBlock>
 
 ## Persisting events across restarts

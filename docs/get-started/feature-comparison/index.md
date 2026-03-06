@@ -42,7 +42,7 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | Advanced enrichments (PII, IP anonymization, JS, API, SQL enrichments)                                                    |   ✅   | ✅ (no UI or API) |
 | [Data structures tooling and API](/docs/event-studio/data-structures/index.md)                                            |   ✅   |        ❌         |
 | [Tracking plans](/docs/event-studio/tracking-plans/index.md)                                                              |   ✅   |        ❌         |
-| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)                 |   ✅   |        ❌         |
+| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/index.md)                 |   ✅   |        ❌         |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |        ❌         |
 | Failed events alerting                                                                                                    |   ✅   |        ❌         |
 | Failed events in the warehouse                                                                                            |   ✅   |        ✅         |

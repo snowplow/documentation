@@ -44,6 +44,7 @@
     "@rjsf/utils": "~5.12.1",
     "@rjsf/validator-ajv8": "~5.12.1",
     "@sideway/formula": "^3.0.1",
+    "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@snowplow/browser-plugin-button-click-tracking": "^4.0.4",
     "@snowplow/browser-plugin-form-tracking": "^4.0.4",
     "@snowplow/browser-plugin-link-click-tracking": "^4.0.4",

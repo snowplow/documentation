@@ -13,6 +13,10 @@ import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 ```
 
+This page lists the most recent versions of Snowplow components.
+
+Some information about components is relevant only for [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) users, as [Snowplow CDI](/docs/get-started/index.md#customer-data-infrastructure) customers won't need to configure all their own components.
+
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
 You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
@@ -51,6 +55,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [RDB Loader (Redshift, Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        {versions.rdbLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)         | {versions.databricksStreamingLoader} |
 | [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         {versions.s3Loader}         |
 | [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                                    |        {versions.snowbridge}        |
 | [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md)                               |         {versions.esLoader}         |
@@ -68,6 +73,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                        |         {versions.bqLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)  | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
 | [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                 |        {versions.gcsLoader}         |
 | [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                          |        {versions.snowbridge}        |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        {versions.lakeLoader}        |
@@ -83,6 +89,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)            |        {versions.rdbLoader}         |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               |        {versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | {versions.snowflakeStreamingLoader} |
+| [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
 
 </TabItem>
 </Tabs>
@@ -161,7 +168,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 :::info Snowplow CDI
 
-If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Snowplow Mini yourself. We can deploy it as required, and keep it up to date for you.
+If you are a Snowplow CDI customer, rather than self-hosted, we recommend using [Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md) for testing and debugging.
 
 :::
 

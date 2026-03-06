@@ -1,8 +1,8 @@
 ---
-title: "Introduction to Snowplow Signals"
-sidebar_label: "Introduction"
+title: "Get started with Snowplow Signals"
+sidebar_label: "Get started"
 sidebar_position: 8.7
-description: "Snowplow Signals is a real-time personalization engine that computes and acts on behavioral data from your pipeline. It enables in-session stream and historical user data access for personalized experiences, recommendations, and dynamic pricing."
+description: "Learn how to use Snowplow Signals to compute user attributes from event data, retrieve them in real time for personalization and agentic applications, and trigger automated actions based on user behavior."
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 ---
 
@@ -22,7 +22,7 @@ Use Signals to:
 * Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
 * Trigger actions automatically when users meet specific criteria
 
-By default, Signals calculates attributes from your real-time event stream, but you can also configure it to calculate from warehouse data.
+By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also configure it to calculate from warehouse data.
 
 ## Try Signals for free
 

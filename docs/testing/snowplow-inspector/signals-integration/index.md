@@ -6,7 +6,7 @@ description: "Connect Snowplow Inspector to Signals to validate attribute and in
 keywords: ["signals integration", "debug attributes", "debug interventions", "signals api", "attribute values"]
 ---
 
-The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/index.md) to help validate your [attribute](/docs/signals/attributes/attributes/index.md) and [intervention](/docs/signals/concepts/index.md#interventions) definitions.
+The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/introduction/index.md) to help validate your [attribute](/docs/signals/attributes/attributes/index.md) and [intervention](/docs/signals/concepts/index.md#interventions) definitions.
 
 There are two ways to connect Inspector to Signals:
 

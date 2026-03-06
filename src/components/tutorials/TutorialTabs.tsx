@@ -87,14 +87,12 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
         value={DocsTab.Docs}
         label="Docs"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Docs}
       />
       <Tab
         onClick={() => changeTab(DocsTab.Tutorials)}
         value={DocsTab.Tutorials}
         label="Tutorials"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Tutorials}
       />
     </Tabs>
   )

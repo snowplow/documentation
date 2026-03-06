@@ -1,7 +1,7 @@
 ---
 title: "Snowplow CLI command reference"
 sidebar_label: "Command reference"
-date: 2026-03-05
+date: 2026-03-06
 sidebar_position: 1
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
@@ -291,15 +291,15 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
 ## Data-Products Release
 
 
-Publish and release all tracking plans, event specs and source apps to Snowplow Console
+Sync tracking plans, event specs and source apps to Snowplow Console, then release event specs
 
 ### Synopsis
 
-Publish and release the local versions of all tracking plans, event specs and source apps to Snowplow Console.
+Sync tracking plans, event specs and source apps to Snowplow Console, then release event specs.
 
-This command syncs local files with remote tracking plans, then releases any draft event specs. It will filter out the event specs without the event, and only attempt to publish the event specs that are part of the tracking plans in the directory.
-Releasing marks event specs as published and enables event spec inference.
-Use 'sync' to only sync without releasing, and not change the status of event specs
+This command runs 'sync' first, then releases the event specs.
+Releasing sets the event spec status to 'published' and pushes them to the pipeline, enabling event spec inference.
+Only event specs that exist locally will be released. Each event spec must have an event defined, and all referenced events and entities must be published to the production environment.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 
@@ -352,15 +352,15 @@ snowplow-cli data-products release {directory ./data-products} [flags]
 ## Data-Products Sync
 
 
-Sync all tracking plans, event specs and source apps to Snowplow Console
+Sync tracking plans, event specs and source apps to Snowplow Console
 
 ### Synopsis
 
-Sync the local versions of all tracking plans, event specs and source apps to Snowplow Console.
+Sync tracking plans, event specs and source apps to Snowplow Console.
 
 This command syncs local files with remote tracking plans, event specs and source apps, creating or updating them as needed.
-Event specs status will not be changed by running this command.
-Use 'release' to also release event specs, which changes the status in Snowplow Console to "published" and enable event spec inference.
+Remote tracking plans and source apps are updated in place. Structural changes to event specs (name, event, entities) will instead create a new draft version of the event spec.
+Use 'release' to also release event specs, which changes the status in Snowplow Console to "published" and enables event spec inference.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 

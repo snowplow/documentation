@@ -21,7 +21,7 @@ A full-content version is also available at [`llms-full.txt`](pathname:///llms-f
 
 ## Documentation pages as Markdown
 
-Every documentation page is available as plain Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons under the page title.
+Every documentation page is available as plain Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons above the page title.
 
 To access the Markdown page directly, change the trailing `/` in the URL to `.md`. For example:
 

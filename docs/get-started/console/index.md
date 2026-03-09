@@ -11,13 +11,11 @@ The Getting Started dashboard in Console guides you through collecting and actin
 
 ![The Getting Started dashboard in Console showing Fundamentals, Analytics, and Real-time use cases sections with guided workflow cards](images/console-getting-started.png)
 
-## The Getting Started dashboard
+## How the dashboard is organized
 
-Each section contains workflow cards for a specific task, from designing a tracking plan to configuring Signals. 
+Each section contains workflow cards for a specific task, from designing a tracking plan to configuring Signals. The workflows follow a prerequisite chain: create a tracking plan, implement tracking, then unlock downstream features like data models and Signals.
 
-The workflows follow a prerequisite chain: create a tracking plan, implement tracking, then unlock downstream features like data models and Signals.
-
-:::tip
+:::note Console availability
 The Getting Started dashboard is available to Snowplow CDI customers with Console access.
 :::
 
@@ -46,22 +44,22 @@ With a tracking plan in place, the next card helps you [implement tracking](/doc
 4. Test with Snowplow Micro.
 5. Deploy to production.
 
-:::note
+:::tip Test before deploying
 Test your implementation with Snowplow Micro before deploying to production to verify that events are structured correctly and match your tracking plan.
 :::
 
 ## Deploy a data model
 
-Once data is flowing, you can deploy a data model to transform raw events into structured tables for analysis. Choose between:
+Once data is flowing, you can deploy a data model to transform raw events into structured tables for analysis. Console offers two types of data models:
 
-- [Out-of-the-box data models](/docs/modeling-your-data/running-data-models-via-console/index.md) for common use cases like web and mobile analytics.
-- [Automatically generated data models](/docs/modeling-your-data/automatically-generated-data-models/index.md) tailored to your tracking plan.
+- [Out-of-the-box data models](/docs/modeling-your-data/running-data-models-via-console/index.md) for common use cases like web and mobile analytics
+- [Automatically generated data models](/docs/modeling-your-data/automatically-generated-data-models/index.md) tailored to your tracking plan
 
 ## Configure Signals for real-time use cases
 
 [Signals](/docs/signals/get-started/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
-:::note
+:::note Paid add-on
 Signals is a paid add-on. Contact your account team to enable it.
 :::
 
@@ -75,7 +73,7 @@ Define [Signals attributes](/docs/signals/attributes/index.md) that compute real
 
 ### Retrieve Signals attributes
 
-Create a [service](/docs/signals/attributes/services/index.md) and follow the [retrieval steps](/docs/signals/connection/index.md) to access attribute values from your front end or back end.
+Create a [service](/docs/signals/attributes/services/index.md) and follow the [retrieval steps](/docs/signals/connection/index.md) to access attribute values from your front-end or back-end.
 
 ### Trigger interventions
 

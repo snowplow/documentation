@@ -14,7 +14,7 @@ On the left side of the image below, a user is browsing and engaging with an onl
  
 ![Snowplow tracking](./images/snowplow-tracking-website.png)
 
-Once events have been received by Clickhouse from Snowplow, each event are stored as individual rows within a single Clickhouse table as displayed on the left side of the image below. Displayed on the right is an example dashboard hosted on the wesbite which queries Clickhouse for real-time article engagement and ad performance metrics from the prevous 30 minutes.
+Once Snowplow sends events to ClickHouse, each event is stored as an individual row in a single ClickHouse table as displayed on the left side of the image below. Displayed on the right is an example dashboard hosted on the wesbite which queries Clickhouse for real-time article engagement and ad performance metrics from the prevous 30 minutes.
 
 ![Real-time editioral analytics dashboard](./images/editorial-analytics-dashboard.png)
 
@@ -32,14 +32,14 @@ The solution comprises several interconnected components:
 
 - **Web tracking application**:
   - A Next.js application with a number of articles and advertisements
-  - Snowplow's tracking has been configured to send events related to article engagement (e.g., article impressions, article views, ad impressions, ad clicks, page pings) to the [Snowplow Collector](/docs/fundamentals)
+  - Snowplow's tracking has been configured to send events related to article engagement (e.g., article impressions, article views, ad impressions, ad clicks, page pings) to the [Snowplow Collector](http://docs.snowplow.io/docs/fundamentals/)
   - Code available in the [snowtype.ts](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics/blob/main/website/snowtype/snowplow.ts) file in GitHub
 
 - **Snowplow Micro**:
   - [Snowplow Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/) is a lightweight version of the Snowplow pipeline which can be ran locally.
-  - Collects, peforms schema validation and passes enriched events to [Snowbridge](/docs/api-reference/snowbridge)
+  - Collects, peforms schema validation and passes enriched events to [Snowbridge](https://docs.snowplow.io/docs/api-reference/snowbridge/)
 
-- **Snowplow Snowbridge**:
+- **Snowplow Snowbridge (also known as Event Forwarding)**:
   - Filters incoming Snowplow events to only forward a subset of events and dimensions to Clickhouse.
   - Publishes events and lands events in a single table in Clickhouse using Clickhouse's [HTTP interface](https://clickhouse.com/docs/interfaces/http)
 

@@ -11,13 +11,35 @@ The following steps will deploy the solution accelerator using Docker.
 ## Step 0: Prerequisites
 
 1. Open a terminal
-2. Install **Docker** and **Docker Compose**
+2. Install **Docker** and **Docker Compose** You can run the following commands to check if it is already installed. If not installed, you can install Docker / Docker Compose by following these [instructions.](https://docs.docker.com/compose/install/)
+
+```
+  docker --version
+
+  docker-compose --version
+```
+
 3. [Clone the project](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics) and navigate to its directory
 ```bash
 git clone https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics.git
 ```
-4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within Clickhouse's SQL console. This will be the table that will store the Snowplow events. 
-5. Create a `.env` file based on `.env.example`. The variables can be retrieved from your Clickhouse account by selecting the [HTTPS connection](https://clickhouse.com/docs/getting-started/quick-start/cloud#connect-with-your-app) method.
+4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within Clickhouse's SQL console. This will be the table that will store the Snowplow events. The database will be the value of the `CLICKHOUSE_DATABASE` environment variable in the next step.
+
+![Clickhouse Database Name](images/clickhouse-database-name.png)
+
+5. Create a `.env` file by copying `.env.example`. To populate the values, go to your ClickHouse account and select the [HTTPS connection](https://clickhouse.com/docs/getting-started/quick-start/cloud#connect-with-your-app) method. This will display a sample `curl` command containing your connection details.
+
+Use the following guide to map each value to the correct environment variable:
+
+| Variable | Where to find it |
+|---|---|
+| `CLICKHOUSE_HOST` | Line 3 of the sample `curl` command. Format: `https://<your-clickhouse-host>.aws.clickhouse.cloud:<port>` |
+| `CLICKHOUSE_USER` | The **Username** field |
+| `CLICKHOUSE_KEY` | The **Password** field |
+| `CLICKHOUSE_DATABASE` | The database name from the SQL Console where the SQL query was ran. This is typically `default` |
+| `CLICKHOUSE_TABLE` | Always set this to `snowplow_article_interactions` |
+
+![Clickhouse HTTP Connector Credentials](images/clickhouse-credentials.png)
 
 ## Step 1: Start the containers
 
@@ -48,9 +70,9 @@ Wait for about 30 seconds for the website container to kickstart. Once its ready
 
 ## Step 3: Open the Snowplow Micro front-end
 
-Open Snowplow Micro on [http://localhost:3000](http://localhost:3000) in a separate window. Press the "Refresh" button located in the header. This will display the current Snowplow events which are being tracked (e.g. page_view, page_ping, article_interaction, ad_interaction). You can use the "Pick Columns" button to select certain dimensions which are collected. Try selecting the following:
+Open Snowplow Micro on [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in a separate window. Press the "Refresh" button located in the header. This will display the current Snowplow events which are being tracked (e.g. page_view, page_ping, article_interaction, ad_interaction). You can use the "Pick Columns" button to select certain dimensions which are collected. Try selecting the following:
 - event_name from the "Events" section
-- com_demo_ad_interaction_1.type from the "Atomic" section
+- com_demo_ad_interaction_1.type from the "Events" section
 - com_demo_media_article_interaction_1.type from the "Events" section
 - com_demo_media_article_1.title from the "Entities" section
 

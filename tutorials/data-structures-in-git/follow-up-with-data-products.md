@@ -65,24 +65,24 @@ data:
     owner: me@example.com
 ```
 
-Before publishing, we can validate our changes and preview what will happen:
+Before syncing, we can validate our changes and preview what will happen:
 
 ```bash
-snowplow-cli dp publish --dry-run
+snowplow-cli dp sync --dry-run
 ```
 
 The command will show us the planned changes:
 ```
-publish will create source apps file=.../data-products/source-apps/website.yaml name=website resource name=b8261a25-ee81-4c6a-a94c-7717ba835035
+sync will create source apps file=.../data-products/source-apps/website.yaml name=website resource name=b8261a25-ee81-4c6a-a94c-7717ba835035
 ```
 
-When we're happy with the proposed changes, we can publish by removing the `--dry-run` flag:
+When we're happy with the proposed changes, we can sync by removing the `--dry-run` flag:
 
 ```bash
-snowplow-cli dp publish
+snowplow-cli dp sync
 ```
 
-After publishing, you'll be able to see your new source application in the Snowplow Console UI.
+After syncing, you'll be able to see your new source application in the Snowplow Console UI.
 
 ## Create a tracking plan and an event specification
 
@@ -140,28 +140,28 @@ The `iglu:com.example/login/jsonschema/1-0-1` data structure has to be deployed 
 
 :::
 
-We can run the same `publish --dry-run` command as before, to see if the output is as expected. The output should contain the following lines
+We can run the same `sync --dry-run` command as before, to see if the output is as expected. The output should contain the following lines
 
 ```bash
-snowplow-cli dp publish --dry-run
+snowplow-cli dp sync --dry-run
 ```
 
 ```
-INFO publish will create data product file=.../data-products/login.yaml name=Login resource name=0edb4b95-3308-40c4-b266-eae2910d5d2a
-INFO publish will update event specifications file=.../data-products/login.yaml name="Login success" resource name=cfb3a227-0482-4ea9-8b0d-f5a569e5d103 in data product=0edb4b95-3308-40c4-b266-eae29
+INFO sync will create data product file=.../data-products/login.yaml name=Login resource name=0edb4b95-3308-40c4-b266-eae2910d5d2a
+INFO sync will update event specifications file=.../data-products/login.yaml name="Login success" resource name=cfb3a227-0482-4ea9-8b0d-f5a569e5d103 in data product=0edb4b95-3308-40c4-b266-eae29
 ```
 
-We can apply the changes by using the publish command without the `--dry-run` flag
+We can apply the changes by using the sync command without the `--dry-run` flag
 
 ```bash
-snowplow-cli dp publish
+snowplow-cli dp sync
 ```
 
-## Add tracking plans validation and publishing in the github actions
+## Add tracking plans validation and syncing in the GitHub Actions
 
-Now that we've modeled a source application, tracking plan and event specification, let's see how we can add them to the existing github actions workflows for data structures. You can customize your setup, use a separate repository or a separate actions, but in this example we'll add the tracking plans publishing into the existing workflows.
+Now that we've modeled a source application, tracking plan and event specification, let's see how we can add them to the existing GitHub Actions workflows for data structures. You can customize your setup, use a separate repository or separate actions, but in this example we'll add tracking plan syncing and releasing into the existing workflows.
 
-Lets modify the PR example, and add the following line. This command will validate and print the changes to the github actions log.
+Let's modify the PR example, and add the following line. This command will validate and print the changes to the GitHub Actions log.
 
 ```yml {20} title=".github/workflows/validate-pull-request.yml"
 on:
@@ -183,11 +183,12 @@ jobs:
 
       - run: snowplow-cli ds validate --gh-annotate
 
-      - run: snowplow-cli dp publish --dry-run --gh-annotate
+      - run: snowplow-cli dp sync --dry-run --gh-annotate
 ```
 
-Tracking plans, source applications and event specifications don't have the dev and prod environments, so it's enough to publish them once.
-We can add the same command but without the `--dry-run` flag to the publish pipeline.
+Tracking plans, source applications and event specifications don't have the dev and prod environments, so it's enough to sync them once. When merging to `develop`, use `sync` to push your changes as drafts. When merging to `main`, use `release` to also mark event specifications as published.
+
+Add the `sync` command to the develop pipeline:
 
 ```yml {20} title=".github/workflows/publish-develop.yml"
 on:
@@ -209,7 +210,30 @@ jobs:
 
       - run: snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
 
-      - run: snowplow-cli dp publish
+      - run: snowplow-cli dp sync
 ```
 
-You might want to publish tracking plans in the `.github/workflows/publish-production.yml` as well, or only there. It depends on your setup, but if you strictly follow the rules and always merge to `main` from `develop`, the setup above should be enough.
+Add the `release` command to the production pipeline to publish event specifications when merging to `main`:
+
+```yml {20} title=".github/workflows/publish-production.yml"
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
+      SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
+      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: snowplow/setup-snowplow-cli@v1
+
+      - run: snowplow-cli ds publish prod --managed-from $GITHUB_REPOSITORY
+
+      - run: snowplow-cli dp release
+```

@@ -13,7 +13,7 @@ The Getting Started dashboard in Console guides you through collecting and actin
 
 ## The Getting Started dashboard
 
-Each section contains workflow cards for a specific task, from designing a tracking plan to configuring Signals. Banner CTAs at the top of the page prompt you to set up a destination or invite a teammate.
+Each section contains workflow cards for a specific task, from designing a tracking plan to configuring Signals. 
 
 The workflows follow a prerequisite chain: create a tracking plan, implement tracking, then unlock downstream features like data models and Signals.
 

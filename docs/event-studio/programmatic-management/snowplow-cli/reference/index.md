@@ -291,7 +291,7 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
 ## Data-Products Release
 
 
-Sync tracking plans, event specs and source apps to Snowplow Console, then release event specs
+Sync tracking plans, event specs and source apps to Snowplow Console, then release event specs to be available within your pipeline
 
 ### Synopsis
 
@@ -358,8 +358,8 @@ Sync tracking plans, event specs and source apps to Snowplow Console
 
 Sync tracking plans, event specs and source apps to Snowplow Console.
 
-This command syncs local files with remote tracking plans, event specs and source apps, creating or updating them as needed.
-Remote tracking plans and source apps are updated in place. Structural changes to event specs (name, event, entities) will instead create a new draft version of the event spec.
+This command syncs local files with Snowplow Console. Tracking plans, event specs and source apps are created or updated as needed.
+Tracking plans and source apps that exist in Snowplow Console are updated in place. Structural changes to event specs (name, event, entities) will instead create a new draft version of the event spec.
 Use 'release' to also release event specs, which changes the status in Snowplow Console to "published" and enables event spec inference.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory

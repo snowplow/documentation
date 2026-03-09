@@ -106,10 +106,11 @@ const config: Config = {
         siteDescription: 'Authoritative Snowplow documentation for implementing event tracking, validation, enrichment, governance, and delivery of clean event-level behavioral data. Focus areas include composable analytics, composable CDP, in-product personalization, AI agentic applications, and feeding AI-ready real-time data into warehouses, lakes, streams, and real-time tools.',
         depth: 2,
         content: {
-          includeBlog: true,
+          includeBlog: false,
           includePages: true,
           enableLlmsFullTxt: true,
           relativePaths: false,
+          excludeRoutes: ['/'],
         },
         includeOrder:["/docs", "sitemap.xml"],
       } satisfies PluginOptions

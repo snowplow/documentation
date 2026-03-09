@@ -2,7 +2,7 @@
 title: "Snowplow CLI for data management"
 sidebar_label: "Snowplow CLI"
 sidebar_position: 0.5
-description: "Command-line tool for downloading and publishing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
+description: "Command-line tool for downloading and syncing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
 keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
 ---
 
@@ -23,12 +23,12 @@ Snowplow CLI brings data management elements of Snowplow Console into the comman
 ## Install
 
 Snowplow CLI can be installed with [homebrew](https://brew.sh/):
-```
+```bash
 brew install snowplow/taps/snowplow-cli
 ```
 
 Verify the installation with
-```
+```bash
 snowplow-cli --help
 ```
 
@@ -42,8 +42,8 @@ chmod u+x snowplow-cli
 ```
 
 Verify the installation with
-```
-./snowplow-cli --help
+```bash
+snowplow-cli --help
 ```
 
 ## Configure
@@ -74,7 +74,7 @@ If you prefer manual configuration, you will need these values:
 * An API Key ID and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in Console.
 * Your Organization ID, which you can find [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
-Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
+Snowplow CLI can take its configuration from a variety of sources. More details are available from `snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
 
 <Tabs groupId="config">
   <TabItem value="env" label="env variables or .dotenv file" default>
@@ -99,7 +99,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   <TabItem value="args" label="inline arguments" >
 
   ```bash
-  ./snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
+  snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
   ```
 
   </TabItem>

@@ -44,7 +44,6 @@
     "@rjsf/utils": "~5.12.1",
     "@rjsf/validator-ajv8": "~5.12.1",
     "@sideway/formula": "^3.0.1",
-    "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@snowplow/browser-plugin-button-click-tracking": "^4.0.4",
     "@snowplow/browser-plugin-form-tracking": "^4.0.4",
     "@snowplow/browser-plugin-link-click-tracking": "^4.0.4",
@@ -74,7 +73,7 @@
     "react-product-fruits": "^2.2.61",
     "rehype-katex": "5",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-math": "3",
     "semver": "^7.3.8",
     "tailwind-merge": "^3.0.2",
@@ -95,12 +94,20 @@
     "autoprefixer": "^10.4.21",
     "css-loader": "6.8.1",
     "docusaurus-theme-github-codeblock": "^2.0.2",
+    "hast-util-select": "^6.0.4",
+    "hast-util-to-html": "^9.0.5",
+    "hast-util-to-string": "^3.0.1",
     "postcss": "8.4.31",
     "postcss-loader": "7.3.3",
     "prettier": "2.7.1",
+    "rehype-parse": "^9.0.1",
+    "rehype-remark": "^10.0.1",
+    "remark-stringify": "^11.0.0",
     "style-loader": "3.3.3",
     "tailwindcss": "3.3.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
   },
   "browserslist": {
     "production": [

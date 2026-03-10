@@ -107,6 +107,7 @@ const config: Config = {
         contentSelectors: ['.theme-doc-markdown', 'article', 'main'],
         enableMarkdownFiles: true,
         enableLlmsFullTxt: true,
+        enableLlmsCurrentTxt: true,
       },
     ],
   ],

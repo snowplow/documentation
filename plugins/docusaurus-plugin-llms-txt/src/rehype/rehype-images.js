@@ -6,7 +6,7 @@ import { getClassString } from './utils.js'
  * - ThemedImage: uses two <img> tags with themedComponent--light/dark classes.
  *   Strip dark-theme images, keep light-theme ones.
  * - ThemedImage <picture>: extract light-theme <img>, convert to ![alt](src)
- * - Mermaid SVGs: strip entirely (not useful as text)
+ * - Mermaid SVGs: replace with placeholder text (enriched later by enrich-mermaid)
  * - Standard <img>: rehype-remark handles natively
  */
 export default function rehypeImages() {
@@ -14,11 +14,16 @@ export default function rehypeImages() {
     visit(tree, 'element', (node, index, parent) => {
       if (!parent || index == null) return
 
-      // Strip Mermaid SVGs
+      // Replace Mermaid SVGs with placeholders (enriched later by enrich-mermaid)
       if (node.tagName === 'svg') {
         const className = getClassString(node)
         if (className.includes('mermaid')) {
-          parent.children.splice(index, 1)
+          parent.children.splice(index, 1, {
+            type: 'element',
+            tagName: 'p',
+            properties: {},
+            children: [{ type: 'text', value: 'MERMAID_DIAGRAM_PLACEHOLDER' }],
+          })
           return index
         }
       }

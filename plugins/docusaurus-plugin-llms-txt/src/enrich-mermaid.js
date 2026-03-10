@@ -14,8 +14,14 @@ const NAMED_IMPORT_RE =
   /import\s+(\w+)\s+from\s+['"](@site\/|\.\.?\/)([^'"]+)['"]/g
 
 /**
+ * Placeholder inserted by rehype-images for each mermaid SVG.
+ * Must match the text used in rehype-images.js.
+ */
+const MERMAID_PLACEHOLDER = 'MERMAID_DIAGRAM_PLACEHOLDER'
+
+/**
  * Enrich pages by extracting mermaid diagrams from MDX source files
- * and appending them to the converted markdown.
+ * and inserting them inline where the original SVGs appeared.
  *
  * Handles:
  * - ```mermaid code blocks (static)
@@ -33,17 +39,23 @@ export async function enrichMermaid(pages, siteDir) {
 
   for (const page of pages) {
     const mdxPath = await routeToMdxPath(page.routePath, docsDir, tutorialsDir)
-    if (!mdxPath) continue
+    if (!mdxPath) {
+      // No source found — clean up any leftover placeholders
+      page.markdown = stripPlaceholders(page.markdown)
+      continue
+    }
 
     try {
       const diagrams = await extractMermaidFromFile(mdxPath, siteDir)
-      if (diagrams.length === 0) continue
+      if (diagrams.length === 0) {
+        page.markdown = stripPlaceholders(page.markdown)
+        continue
+      }
 
-      const section = formatMermaidSection(diagrams)
-      page.markdown = page.markdown.trimEnd() + '\n\n' + section
+      page.markdown = insertDiagrams(page.markdown, diagrams)
       enriched++
     } catch {
-      // File not found or unreadable — skip silently
+      page.markdown = stripPlaceholders(page.markdown)
     }
   }
 
@@ -52,6 +64,45 @@ export async function enrichMermaid(pages, siteDir) {
       `[llms-txt] Enriched ${enriched} pages with mermaid diagrams`
     )
   }
+}
+
+/**
+ * Replace MERMAID_DIAGRAM_PLACEHOLDER markers with actual diagram code blocks.
+ * If there are more diagrams than placeholders, append the extras.
+ * If there are more placeholders than diagrams, remove the extras.
+ */
+function insertDiagrams(markdown, diagrams) {
+  let idx = 0
+
+  // Replace each placeholder with the next diagram
+  let result = markdown.replace(
+    new RegExp(MERMAID_PLACEHOLDER, 'g'),
+    () => {
+      if (idx < diagrams.length) {
+        const d = diagrams[idx++]
+        const label = d.label ? `**${d.label}:**\n\n` : ''
+        return `${label}\`\`\`mermaid\n${d.mermaid}\n\`\`\``
+      }
+      return '' // More placeholders than diagrams — remove
+    }
+  )
+
+  // Append any remaining diagrams that didn't have placeholders
+  if (idx < diagrams.length) {
+    const remaining = diagrams.slice(idx)
+    const section = formatMermaidSection(remaining)
+    result = result.trimEnd() + '\n\n' + section
+  }
+
+  return result
+}
+
+/**
+ * Remove any unreplaced placeholder markers.
+ */
+function stripPlaceholders(markdown) {
+  if (!markdown.includes(MERMAID_PLACEHOLDER)) return markdown
+  return markdown.replace(new RegExp(`\\n*${MERMAID_PLACEHOLDER}\\n*`, 'g'), '\n\n')
 }
 
 /**

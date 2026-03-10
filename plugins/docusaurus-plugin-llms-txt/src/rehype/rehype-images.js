@@ -2,6 +2,8 @@ import { visit } from 'unist-util-visit'
 
 /**
  * Handle images:
+ * - ThemedImage: uses two <img> tags with themedComponent--light/dark classes.
+ *   Strip dark-theme images, keep light-theme ones.
  * - ThemedImage <picture>: extract light-theme <img>, convert to ![alt](src)
  * - Mermaid SVGs: strip entirely (not useful as text)
  * - Standard <img>: rehype-remark handles natively
@@ -15,6 +17,15 @@ export default function rehypeImages() {
       if (node.tagName === 'svg') {
         const className = getClassString(node)
         if (className.includes('mermaid')) {
+          parent.children.splice(index, 1)
+          return index
+        }
+      }
+
+      // Strip dark-theme ThemedImage <img> tags
+      if (node.tagName === 'img') {
+        const className = getClassString(node)
+        if (className.includes('themedComponent--dark')) {
           parent.children.splice(index, 1)
           return index
         }

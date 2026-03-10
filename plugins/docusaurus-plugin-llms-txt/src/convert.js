@@ -40,6 +40,7 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
   const processor = unified()
     .use(rehypeParse, { fragment: true })
     .use(rehypeStripFirstH1)
+    .use(rehypeStripComments)
     .use(rehypeStripNav)
     .use(rehypeStripHeadingAnchors)
     .use(rehypeStripBadges)
@@ -124,6 +125,20 @@ function rehypeStripFirstH1() {
         parent.children.splice(index, 1)
         return EXIT
       }
+    })
+  }
+}
+
+/**
+ * Strip HTML comment nodes (<!-- -->) from the tree.
+ * React inserts these as fragment markers.
+ */
+function rehypeStripComments() {
+  return (tree) => {
+    visit(tree, 'comment', (node, index, parent) => {
+      if (!parent || index == null) return
+      parent.children.splice(index, 1)
+      return index
     })
   }
 }

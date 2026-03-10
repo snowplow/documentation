@@ -15,7 +15,7 @@ You have successfully built a real-time system for processing event data includi
 - **ClickHouse** for processing and storing real-time event-level data.
 - **Editorial Analytics Dashboard front-end** for visualizing real-time content engagement behavior on the web tracking application.
 
-![Real-time analytics dashboard](images/realtime-dashboard.png)
+![The Daily Query Analytics Dashboard showing Trending Articles, Trending Categories, and Ad Performance sections, each with metrics for the last 30 minutes including impressions, views, scroll depth, and engaged time](images/realtime-dashboard.png)
 
 This architecture highlights how real-time insights can be achieved using event-driven systems in a streaming context.
 

@@ -28,7 +28,7 @@ git clone https://github.com/snowplow-industry-solutions/clickhouse-realtime-edi
 
 4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within ClickHouse's SQL console. This table will store the Snowplow events. You'll need a `CLICKHOUSE_DATABASE` value in the next step. It's labeled in this image:
 
-![Clickhouse Database Name](images/clickhouse-database-name.png)
+![ClickHouse Cloud SQL console home screen with the left navigation showing the Snowplow database and its tables, with the CLICKHOUSE_DATABASE value highlighted in the breadcrumb](images/clickhouse-database-name.png)
 
 5. Create a `.env` file by copying `.env.example`. To populate the values, go to your ClickHouse account and select the [HTTPS connection](https://clickhouse.com/docs/getting-started/quick-start/cloud#connect-with-your-app) method. This will display a sample `curl` command containing your connection details.
 
@@ -42,7 +42,7 @@ Map each value to the correct environment variable:
 | `CLICKHOUSE_DATABASE` | The database name from the SQL Console where the SQL query was run. This is typically `default`           |
 | `CLICKHOUSE_TABLE`    | Always set this to `snowplow_article_interactions`                                                        |
 
-![ClickHouse HTTP Connector Credentials](images/clickhouse-credentials.png)
+![ClickHouse Connect dialog with Username and Password fields annotated as CLICKHOUSE_USER and CLICKHOUSE_KEY, and a curl command with line 3 annotated as CLICKHOUSE_HOST](images/clickhouse-credentials.png)
 
 ## Step 1: Start the containers
 
@@ -58,13 +58,13 @@ The [architecture](/tutorials/realtime-editorial-analytics-clickhouse/introducti
 
 Wait for about 30 seconds for the website container to start. Once it's ready, visit [`http://localhost:3000`](http://localhost:3000) to view the website application and start tracking events.
 
-![First page of tracking website](images/homepage.png)
+![The Daily Query demo website homepage showing a featured article about AI in journalism and a grid of new articles below](images/homepage.png)
 
 2.1 Click on any of the articles that are on the homepage. Scroll down on the new page which opens. Wait for about 10 seconds to simulate a user reading.
 
 2.2 Click on the advertisement which appears on the right-hand sidebar. Return to the homepage by clicking the **The Daily Query** logo in the header.
 
-![Ads on tracking website](images/advertisement.png)
+![The Daily Query demo website article page with a Professional Development Courses advertisement in the right sidebar](images/advertisement.png)
 
 2.3 Select a different article from the homepage. Scroll down on the new page which opens. Wait for about 10 seconds to simulate a user reading.
 
@@ -89,13 +89,13 @@ select * from snowplow_article_interactions
 order by dvce_created_tstamp desc
 ```
 
-![Example Output from ClickHouse](images/clickhouse-results.png)
+![ClickHouse SQL console showing query results from the snowplow_article_interactions table, with rows of event data ordered by creation timestamp](images/clickhouse-results.png)
 
 ## Step 5: View the editorial analytics data in a sample real-time dashboard
 
 Visit the real-time editorial analytics dashboard at [`localhost:3000/dashboard`](http://localhost:3000/dashboard), which is querying data from ClickHouse. Press the **Load Data** button to see the article engagement and ad performance metrics for the last 30 minutes.
 
-![Real-time analytics dashboard](images/realtime-dashboard.png)
+![The Daily Query Analytics Dashboard showing Trending Articles, Trending Categories, and Ad Performance sections, each with metrics for the last 30 minutes including impressions, views, scroll depth, and engaged time](images/realtime-dashboard.png)
 
 If you're interested in the queries powering these insights, take a look at the code here:
 - [Trending Articles report](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics/blob/main/website/app/api/dashboard/route.ts#L52)

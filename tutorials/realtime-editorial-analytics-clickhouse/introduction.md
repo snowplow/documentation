@@ -15,13 +15,13 @@ The image below shows the accelerator in action. On the left side, a user is eng
 
 The left side of the image shows the Snowplow events in the Snowplow Micro UI.
 
-![Snowplow tracking](./images/snowplow-tracking-website.png)
+![Side-by-side view of The Daily Query demo website on the left and the Snowplow Micro UI on the right, showing captured article engagement events in a table](./images/snowplow-tracking-website.png)
 
 From here, events are forwarded to a ClickHouse table in near real-time latency. Each event is stored as an individual row in a single table, as seen on the left side of the image below.
 
 On the right is an example dashboard, hosted as part of the accelerator website, which queries ClickHouse for real-time article engagement and ad performance metrics from the previous 30 minutes.
 
-![Real-time editorial analytics dashboard](./images/editorial-analytics-dashboard.png)
+![Side-by-side view of the ClickHouse SQL console showing the snowplow_article_interactions table on the left, and The Daily Query Analytics Dashboard showing trending articles and ad performance metrics on the right](./images/editorial-analytics-dashboard.png)
 
 Through this hands-on guide, you'll learn how to build, deploy, and extend real-time, event-driven architectures using Snowplow and ClickHouse. The framework is inspired by real customer use cases in media.
 
@@ -54,7 +54,7 @@ The solution comprises several interconnected components:
 
 The following diagram maps out where each component sits in the end-to-end communication flow.
 
-![Architecture Diagram](images/architecture.png)
+![Architecture diagram showing event data flowing from a front-end website through Snowplow Micro (Collector, Schema Validation, Enrichments) and Snowbridge (Event Forwarding, Transformation and Filters) to a ClickHouse table, which is queried by a Personalization Service and the Content Editorial Team](images/architecture.png)
 
 ## Prerequisites
 

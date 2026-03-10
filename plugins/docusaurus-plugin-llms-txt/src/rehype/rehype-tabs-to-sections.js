@@ -11,11 +11,13 @@ export default function rehypeTabsToSections() {
     visit(tree, 'element', (node, index, parent) => {
       if (!parent || index == null) return
 
-      // Look for tab container divs
+      // Only match Docusaurus tab container divs by their class names.
+      // Do NOT use a recursive "contains tablist" check — that would match
+      // ancestor divs wrapping both tabs and other content, causing the
+      // splice to replace the ancestor and lose sibling content.
       const className = getClassString(node)
       if (!className.includes('tabs-container') && !className.includes('tabs_')) {
-        // Also check if this node contains a tablist
-        if (!hasTabList(node)) return
+        return
       }
 
       // Find the tablist within this container
@@ -66,14 +68,6 @@ export default function rehypeTabsToSections() {
       }
     })
   }
-}
-
-function hasTabList(node) {
-  if (node.properties?.role === 'tablist') return true
-  if (!node.children) return false
-  return node.children.some(
-    (c) => c.type === 'element' && hasTabList(c)
-  )
 }
 
 function findTabList(node) {

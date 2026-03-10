@@ -103,7 +103,7 @@ const config: Config = {
       {
         siteTitle: 'Snowplow Documentation',
         siteDescription: 'Authoritative Snowplow documentation for implementing event tracking, validation, enrichment, governance, and delivery of clean event-level behavioral data. Focus areas include composable analytics, composable CDP, in-product personalization, AI agentic applications, and feeding AI-ready real-time data into warehouses, lakes, streams, and real-time tools.',
-        excludeRoutes: ['/'],
+        excludeRoutes: ['/', '/tutorials/'],
         contentSelectors: ['.theme-doc-markdown', 'article', 'main'],
         enableMarkdownFiles: true,
         enableLlmsFullTxt: true,

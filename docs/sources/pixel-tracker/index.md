@@ -46,27 +46,20 @@ Care must therefore be exercised when using the Pixel tracker on domains that yo
 
 Identify the event you wish to track. This may be opening a particular email that is sent out via your email marketing system, or viewing a product you are selling on a 3rd party marketplace.
 
-### Use the pixel tag generator
+### Construct the pixel tracker URL
 
-Snowplow customers can generate a pixel tracker aimed at structured events via [Snowplow Console](https://console.snowplowanalytics.com/pixel-tracker).
+Build your pixel tracker URL using the format shown in [Anatomy of a Pixel tracking tag](#anatomy-of-a-pixel-tracking-tag). Set your collector domain and configure the query string parameters according to the [Snowplow Tracker Protocol](/docs/events/index.md).
 
-#### Choose your collector domain
+For a page view event, set `e=pv`. Common parameters to include are:
 
-Select the collector you'd like events sent to via the dropdown.
+- `page` — the page title
+- `url` — the page URL
+- `aid` — your application ID
+- `p` — the platform (e.g., `web`, `mob`)
 
-#### Choose the platform
-
-Choose the value for the platform the tag will be run on.
-
-#### Structured event fields
-
-The generator is currently built for quickly outputting a pixel tag related to campaign oriented events.
-
-Category, action, label, property and value are all available to input relevant information about your campaign.
-
-#### Select the Generate Pixel tracking tag button.
-
-The tracking code will be displayed. Copy this to the clipboard.
+:::warning
+Avoid using structured events (`e=se`) in your pixel tracker URL. Structured events are a legacy event type. If you need to capture custom event data, use a JavaScript tracker where your environment permits it.
+:::
 
 ### Insert the tracking code into the page or ad you wish to track
 

@@ -6,6 +6,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { generateCurrent } from './generate-current.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
+import { enrichMermaid } from './enrich-mermaid.js'
 
 /**
  * @param {import('@docusaurus/types').LoadContext} context
@@ -79,6 +80,9 @@ export default function pluginLlmsTxt(context, options) {
 
       // Enrich dbt config pages with variable tables from JSON schemas
       await enrichDbtSchemas(pages, context.siteDir)
+
+      // Enrich pages with mermaid diagrams from MDX source
+      await enrichMermaid(pages, context.siteDir)
 
       // Write per-page .md files
       if (enableMarkdownFiles) {

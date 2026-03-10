@@ -1,5 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
+import { isPreviousVersion, extractCurrentVersionLink, stripDeprecationBanner } from './version-utils.js'
 
 /**
  * Write per-page .md files alongside the HTML in the build directory.
@@ -13,7 +14,7 @@ export async function writePages(outDir, pages, siteUrl) {
     const fullPath = path.join(outDir, mdPath)
     const pageUrl = `${siteUrl}${page.routePath}`
 
-    const content = formatPageMarkdown(page, pageUrl)
+    const content = formatPageMarkdown(page, pageUrl, siteUrl)
 
     await fs.mkdir(path.dirname(fullPath), { recursive: true })
     await fs.writeFile(fullPath, content, 'utf8')
@@ -40,7 +41,7 @@ export function htmlPathToMdPath(htmlRelPath) {
 /**
  * Format a single page's markdown with header metadata.
  */
-function formatPageMarkdown(page, pageUrl) {
+function formatPageMarkdown(page, pageUrl, siteUrl) {
   const lines = []
   lines.push(`# ${page.title}`)
 
@@ -48,8 +49,17 @@ function formatPageMarkdown(page, pageUrl) {
     lines.push(`> ${page.description}`)
   }
   lines.push(`> Source: ${pageUrl}`)
+
+  if (isPreviousVersion(page.routePath)) {
+    const currentLink = extractCurrentVersionLink(page.markdown, siteUrl)
+    lines.push('> Status: Previous version')
+    if (currentLink) {
+      lines.push(`> Current version: ${currentLink}`)
+    }
+  }
+
   lines.push('')
-  lines.push(page.markdown)
+  lines.push(stripDeprecationBanner(page.markdown))
   lines.push('')
 
   return lines.join('\n')

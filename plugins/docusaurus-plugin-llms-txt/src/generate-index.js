@@ -1,6 +1,7 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { htmlPathToMdPath } from './write-pages.js'
+import { isPreviousVersion } from './version-utils.js'
 
 /**
  * Generate llms.txt index file.
@@ -25,11 +26,15 @@ export async function generateIndex(outDir, pages, options) {
     lines.push('')
 
     for (const page of sectionPages) {
+      const prevTag = isPreviousVersion(page.routePath)
+        ? ' [previous version]'
+        : ''
+
       if (enableMarkdownFiles) {
         const mdPath = htmlPathToMdPath(page.htmlRelPath)
-        lines.push(`- [${page.title}](${siteUrl}/${mdPath})`)
+        lines.push(`- [${page.title}](${siteUrl}/${mdPath})${prevTag}`)
       } else {
-        lines.push(`- [${page.title}](${siteUrl}${page.routePath})`)
+        lines.push(`- [${page.title}](${siteUrl}${page.routePath})${prevTag}`)
       }
     }
 

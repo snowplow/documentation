@@ -12,7 +12,7 @@ The following steps will deploy the solution accelerator using Docker.
 ## Step 0: Prerequisites
 
 1. Open a terminal
-2. Install **Docker** and **Docker Compose**. You can run the following commands to check if it is already installed. If not installed, you can install Docker / Docker Compose by following these [instructions](https://docs.docker.com/compose/install/).
+2. Install **Docker** and **Docker Compose**. You can run the following commands to check if it's already installed. If not installed, you can install Docker / Docker Compose by following these [instructions](https://docs.docker.com/compose/install/).
 
 ```bash
   docker --version
@@ -21,16 +21,18 @@ The following steps will deploy the solution accelerator using Docker.
 ```
 
 3. [Clone the project](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics) and navigate to its directory
+
 ```bash
 git clone https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics.git
 ```
-4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within ClickHouse's SQL console. This will be the table that will store the Snowplow events. The database will be the value of the `CLICKHOUSE_DATABASE` environment variable in the next step.
+
+4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within ClickHouse's SQL console. This table will store the Snowplow events. You'll need a `CLICKHOUSE_DATABASE` value in the next step. It's labeled in this image:
 
 ![Clickhouse Database Name](images/clickhouse-database-name.png)
 
 5. Create a `.env` file by copying `.env.example`. To populate the values, go to your ClickHouse account and select the [HTTPS connection](https://clickhouse.com/docs/getting-started/quick-start/cloud#connect-with-your-app) method. This will display a sample `curl` command containing your connection details.
 
-Use the following guide to map each value to the correct environment variable:
+Map each value to the correct environment variable:
 
 | Variable              | Where to find it                                                                                          |
 | --------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -49,8 +51,8 @@ Run the following command to download and run everything in Docker:
 ```bash
 docker-compose up -d
 ```
-Details on everything that's installed can be found in the [architecture](/tutorials/realtime-editorial-analytics-clickhouse/introduction#architecture) section on the previous page.
 
+The [architecture](/tutorials/realtime-editorial-analytics-clickhouse/introduction#architecture) section on the previous page has the details on everything that's installed.
 
 ## Step 2: Open the web tracking front-end
 
@@ -70,7 +72,9 @@ Wait for about 30 seconds for the website container to start. Once it's ready, v
 
 ## Step 3: Open the Snowplow Micro front-end
 
-Open Snowplow Micro on [`http://localhost:9090/micro/ui`](http://localhost:9090/micro/ui) in a separate window. Press the **Refresh** button located in the header. This will display the current Snowplow events which are being tracked (e.g. `page_view`, `page_ping`, `article_interaction`, `ad_interaction`). You can use the **Pick Columns** button to select certain dimensions which are collected. Try selecting the following:
+Open Snowplow Micro on [`http://localhost:9090/micro/ui`](http://localhost:9090/micro/ui) in a separate window. Press the **Refresh** button located in the header. This will display the current Snowplow events which are being tracked (e.g. `page_view`, `page_ping`, `article_interaction`, `ad_interaction`).
+
+You can use the **Pick Columns** button to select certain dimensions. Try selecting the following:
 - `event_name` from the "Events" section
 - `com_demo_ad_interaction_1.type` from the "Events" section
 - `com_demo_media_article_interaction_1.type` from the "Events" section
@@ -89,24 +93,20 @@ order by dvce_created_tstamp desc
 
 ## Step 5: View the editorial analytics data in a sample real-time dashboard
 
-Visit the real-time editorial analytics dashboard at [localhost:3000/dashboard](http://localhost:3000/dashboard), which is querying data from ClickHouse. Press the **Load Data** button. The article engagement and ad performance metrics for the last 30 minutes will then be displayed.
+Visit the real-time editorial analytics dashboard at [`localhost:3000/dashboard`](http://localhost:3000/dashboard), which is querying data from ClickHouse. Press the **Load Data** button to see the article engagement and ad performance metrics for the last 30 minutes.
 
 ![Real-time analytics dashboard](images/realtime-dashboard.png)
 
-If you are interested in the queries powering these insights, take a look at the code here:
+If you're interested in the queries powering these insights, take a look at the code here:
 - [Trending Articles report](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics/blob/main/website/app/api/dashboard/route.ts#L52)
 - [Trending Categories report](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics/blob/main/website/app/api/dashboard/route.ts#L122)
 - [Ad Performance](https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics/blob/main/website/app/api/dashboard/route.ts#L204)
 
 ## Step 6: Generate more insights
 
-Keep looking through different parts of the website by selecting different news articles or clicking on different ads displayed. Repeat Step 4 or Step 5 and the data will refresh in real-time.
+Try selecting different news articles, or clicking on different displayed ads. Repeat Step 4 or Step 5 and the data will refresh in real-time.
 
-You have successfully run the accelerator to stream web behavior through Snowplow to ClickHouse and visualizing the current user behavior in a real-time editorial analytics dashboard.
-
-## Cleaning up
-
-### Clean up and delete
+## Clean up and delete
 
 Shut down and delete all running containers:
 

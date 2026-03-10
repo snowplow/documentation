@@ -7,26 +7,19 @@ keywords: ["clickhouse real-time analytics", "media publisher analytics snowplow
 date: "2025-09-09"
 ---
 
-In this tutorial, you've explored the real-time editorial analytics solution accelerator for gaining practical experience building, deploying, and extending real-time, event-driven architectures using Snowplow and ClickHouse.
+You've completed the real-time editorial analytics solution accelerator. You've gained practical experience building, deploying, and extending real-time, event-driven architectures using Snowplow and ClickHouse.
 
 You have successfully built a real-time system for processing event data including:
-- **Web tracking application** for collecting article interaction and ad performance events
-- **Snowplow Micro and Snowbridge** for event processing and forwarding
-- **ClickHouse** for processing and storing real-time event-level data
-- **Editorial Analytics Dashboard front-end** for visualizing real-time content engagement behavior on the web tracking application
+- **Web tracking application** for collecting article interaction and ad performance events.
+- **Snowplow Micro and Snowbridge** for event processing and forwarding. You explored how to use Snowplow Micro to emulate a full Snowplow pipeline for local development and testing.
+- **ClickHouse** for processing and storing real-time event-level data.
+- **Editorial Analytics Dashboard front-end** for visualizing real-time content engagement behavior on the web tracking application.
 
 ![Real-time analytics dashboard](images/realtime-dashboard.png)
 
 This architecture highlights how real-time insights can be achieved using event-driven systems in a streaming context.
 
-## What you achieved
-
-You explored how to:
-1. Use Snowplow Micro to emulate a full Snowplow pipeline for local development and testing
-2. Launch and interact with the system components, such as the ClickHouse UI and Micro UI
-3. View and verify the real-time event data from the browser using Snowplow's granular content tracking capabilities
-
-This tutorial can be extended to use Snowplow event data for other real-time use cases, such as:
+This accelerator can be extended to use Snowplow event data for other real-time use cases, such as:
 - Web engagement analytics
 - Personalized content recommendations
 - Ad performance tracking

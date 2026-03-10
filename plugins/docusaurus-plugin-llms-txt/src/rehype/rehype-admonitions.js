@@ -1,5 +1,4 @@
 import { visit } from 'unist-util-visit'
-import { toHtml } from 'hast-util-to-html'
 
 const ADMONITION_TYPES = ['note', 'tip', 'info', 'warning', 'danger', 'caution']
 
@@ -28,28 +27,53 @@ export default function rehypeAdmonitions() {
       // Find the admonition content (skip the heading/icon)
       const contentChildren = extractAdmonitionContent(node)
 
-      // Build blockquote: > **Type:** content
+      // Build the label prefix
+      const labelNodes = [
+        {
+          type: 'element',
+          tagName: 'strong',
+          properties: {},
+          children: [{ type: 'text', value: `${type}:` }],
+        },
+        { type: 'text', value: ' ' },
+      ]
+
+      // Prepend label to first paragraph, or create a new one
+      const blockquoteChildren = []
+
+      if (contentChildren.length > 0) {
+        const first = contentChildren[0]
+        if (first.type === 'element' && first.tagName === 'p') {
+          // Prepend label to existing first paragraph
+          blockquoteChildren.push({
+            ...first,
+            children: [...labelNodes, ...(first.children || [])],
+          })
+          // Add remaining content children directly
+          blockquoteChildren.push(...contentChildren.slice(1))
+        } else {
+          // Wrap label + all content in a new paragraph
+          blockquoteChildren.push({
+            type: 'element',
+            tagName: 'p',
+            properties: {},
+            children: [...labelNodes, ...contentChildren],
+          })
+        }
+      } else {
+        blockquoteChildren.push({
+          type: 'element',
+          tagName: 'p',
+          properties: {},
+          children: labelNodes,
+        })
+      }
+
       const blockquote = {
         type: 'element',
         tagName: 'blockquote',
         properties: {},
-        children: [
-          {
-            type: 'element',
-            tagName: 'p',
-            properties: {},
-            children: [
-              {
-                type: 'element',
-                tagName: 'strong',
-                properties: {},
-                children: [{ type: 'text', value: `${type}:` }],
-              },
-              { type: 'text', value: ' ' },
-              ...contentChildren,
-            ],
-          },
-        ],
+        children: blockquoteChildren,
       }
 
       parent.children.splice(index, 1, blockquote)

@@ -22,39 +22,32 @@ export default function pluginLlmsTxt(context, options) {
   return {
     name: 'docusaurus-plugin-llms-txt',
 
-    async postBuild({ outDir, routes }) {
+    async postBuild({ outDir }) {
       const siteUrl = (
         context.siteConfig?.url || 'https://docs.snowplow.io'
       ).replace(/\/$/, '')
 
-      // Flatten nested routes
-      const flatRoutes = flattenRoutes(routes)
+      // Scan the build directory for HTML files under docs/ and tutorials/
+      const htmlFiles = []
+      for (const subdir of ['docs', 'tutorials']) {
+        const subdirPath = path.join(outDir, subdir)
+        try {
+          await fs.access(subdirPath)
+          await walkDir(subdirPath, subdir, htmlFiles)
+        } catch {
+          // Directory doesn't exist, skip
+        }
+      }
 
-      // Filter to doc/tutorial pages, skip excluded routes
-      const pageRoutes = flatRoutes.filter((route) => {
-        const routePath = route.path || ''
-        if (excludeRoutes.includes(routePath)) return false
-        // Only process pages that have an HTML file
-        return routePath.startsWith('/docs/') || routePath.startsWith('/tutorials/')
-      })
+      console.log(`[llms-txt] Found ${htmlFiles.length} HTML files to process...`)
 
-      console.log(
-        `[llms-txt] Processing ${pageRoutes.length} pages...`
-      )
-
-      // Process each route: read HTML, convert to markdown, collect metadata
+      // Process each HTML file
       const pages = []
 
-      for (const route of pageRoutes) {
-        const routePath = route.path
-        const htmlRelPath = routePathToHtmlPath(routePath)
-        const htmlFullPath = path.join(outDir, htmlRelPath)
+      for (const { htmlRelPath, routePath } of htmlFiles) {
+        if (excludeRoutes.includes(routePath)) continue
 
-        try {
-          await fs.access(htmlFullPath)
-        } catch {
-          continue // HTML file doesn't exist, skip
-        }
+        const htmlFullPath = path.join(outDir, htmlRelPath)
 
         try {
           const html = await fs.readFile(htmlFullPath, 'utf8')
@@ -108,20 +101,25 @@ export default function pluginLlmsTxt(context, options) {
   }
 }
 
-function flattenRoutes(routes) {
-  const flat = []
-  for (const route of routes) {
-    flat.push(route)
-    if (route.routes) {
-      flat.push(...flattenRoutes(route.routes))
+/**
+ * Recursively find all index.html files in a directory.
+ */
+async function walkDir(dir, relBase, results) {
+  const entries = await fs.readdir(dir, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name)
+    const relPath = path.join(relBase, entry.name)
+
+    if (entry.isDirectory()) {
+      await walkDir(fullPath, relPath, results)
+    } else if (entry.name === 'index.html') {
+      // Convert path to route: docs/foo/bar/index.html → /docs/foo/bar/
+      const routePath = '/' + relBase.replace(/\\/g, '/') + '/'
+      results.push({
+        htmlRelPath: relPath.replace(/\\/g, '/'),
+        routePath,
+      })
     }
   }
-  return flat
-}
-
-function routePathToHtmlPath(routePath) {
-  // /docs/foo/bar/ → docs/foo/bar/index.html
-  const cleaned = routePath.replace(/^\//, '').replace(/\/$/, '')
-  if (!cleaned) return 'index.html'
-  return `${cleaned}/index.html`
 }

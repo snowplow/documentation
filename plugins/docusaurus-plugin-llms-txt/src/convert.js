@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm'
 import remarkStringify from 'remark-stringify'
 import { select, selectAll } from 'hast-util-select'
 import { toString } from 'hast-util-to-string'
+import { visit, EXIT } from 'unist-util-visit'
 
 import rehypeStripNav from './rehype/rehype-strip-nav.js'
 import rehypeStripHeadingAnchors from './rehype/rehype-strip-heading-anchors.js'
@@ -38,6 +39,7 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
   // Run the conversion pipeline on the content subtree
   const processor = unified()
     .use(rehypeParse, { fragment: true })
+    .use(rehypeStripFirstH1)
     .use(rehypeStripNav)
     .use(rehypeStripHeadingAnchors)
     .use(rehypeStripBadges)
@@ -51,8 +53,8 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
     .use(remarkGfm)
     .use(remarkStringify, {
       bullet: '-',
-      emphasis: '*',
-      strong: '**',
+      emphasis: '_',
+      strong: '*',
       fence: '`',
       fences: true,
       listItemIndent: 'one',
@@ -109,4 +111,19 @@ function extractContent(tree, selectors) {
     if (node) return node
   }
   return null
+}
+
+/**
+ * Strip the first H1 from page content (we add it in the per-page header).
+ */
+function rehypeStripFirstH1() {
+  return (tree) => {
+    visit(tree, 'element', (node, index, parent) => {
+      if (!parent || index == null) return
+      if (node.tagName === 'h1') {
+        parent.children.splice(index, 1)
+        return EXIT
+      }
+    })
+  }
 }

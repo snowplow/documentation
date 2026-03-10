@@ -1,69 +1,79 @@
 import { visit } from 'unist-util-visit'
 
 /**
- * Strip the language label header div above code blocks.
- * The custom CodeBlock/Layout renders a header div with a language badge span
- * and copy/wrap buttons above the <pre><code>. We strip the header div;
- * the class="language-xxx" on <code> provides the language for fenced output.
+ * Clean up code blocks:
+ * 1. Strip the language label header div (badge + buttons) above code blocks
+ * 2. Ensure the language class is on <code> so rehype-remark produces fenced blocks
+ *
+ * HTML structure:
+ * <div class="language-bash codeBlockContainer_xxx theme-code-block">
+ *   <div class="flex ...">           ← header with language badge (STRIP)
+ *   <div class="relative">           ← wrapper (unwrap)
+ *     <pre class="language-bash ...">
+ *       <code class="codeBlockLines_xxx">...</code>
+ *     </pre>
+ *   </div>
+ * </div>
  */
 export default function rehypeStripCodeLabels() {
   return (tree) => {
     visit(tree, 'element', (node, index, parent) => {
       if (!parent || index == null) return
 
-      // Look for divs that are code block wrappers containing both
-      // a header div (with buttons/language badge) and a <pre> element
-      if (node.tagName !== 'div' || !node.children) return
+      // Match the outer code block container
+      const className = getClassString(node)
+      if (
+        node.tagName !== 'div' ||
+        !className.includes('codeBlockContainer') &&
+        !className.includes('theme-code-block')
+      ) {
+        return
+      }
 
-      const hasPreChild = node.children.some(
-        (c) => c.type === 'element' && c.tagName === 'pre'
-      )
-      if (!hasPreChild) return
+      // Extract language from the container's class (e.g. "language-bash")
+      const lang = extractLanguage(className)
 
-      // Remove non-<pre> children that look like header/toolbar divs
-      node.children = node.children.filter((child) => {
-        if (child.type !== 'element') return true
-        if (child.tagName === 'pre') return true
+      // Find the <pre> element (may be nested in a wrapper div)
+      const pre = findPre(node)
+      if (!pre) return
 
-        // Keep if it's NOT a header div with buttons or language labels
-        const className = getClassString(child)
-
-        // Strip divs containing copy buttons or language badges
-        if (child.tagName === 'div' && containsButtonOrBadge(child)) {
-          return false
+      // Ensure language class is on <code> element inside <pre>
+      if (lang && pre.children) {
+        for (const child of pre.children) {
+          if (child.type === 'element' && child.tagName === 'code') {
+            const codeClasses = Array.isArray(child.properties?.className)
+              ? child.properties.className
+              : []
+            if (!codeClasses.some((c) => c.startsWith('language-'))) {
+              child.properties = child.properties || {}
+              child.properties.className = [...codeClasses, `language-${lang}`]
+            }
+          }
         }
+      }
 
-        // Strip standalone button elements (copy button)
-        if (child.tagName === 'button') return false
-
-        return true
-      })
+      // Replace the container with just the <pre>
+      parent.children.splice(index, 1, pre)
+      return index
     })
   }
 }
 
-function containsButtonOrBadge(node) {
-  if (!node.children) return false
+function extractLanguage(className) {
+  const match = className.match(/\blanguage-(\S+)/)
+  return match ? match[1] : null
+}
 
+function findPre(node) {
+  if (!node.children) return null
   for (const child of node.children) {
     if (child.type !== 'element') continue
-    if (child.tagName === 'button') return true
-    // Language badge span
-    if (child.tagName === 'span') {
-      const className = getClassString(child)
-      if (
-        className.includes('language') ||
-        className.includes('badge') ||
-        className.includes('rounded')
-      ) {
-        return true
-      }
-    }
-    // Recurse
-    if (containsButtonOrBadge(child)) return true
+    if (child.tagName === 'pre') return child
+    // Recurse into wrapper divs
+    const found = findPre(child)
+    if (found) return found
   }
-
-  return false
+  return null
 }
 
 function getClassString(node) {

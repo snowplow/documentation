@@ -17,6 +17,7 @@ import rehypeAdmonitions from './rehype/rehype-admonitions.js'
 import rehypeCleanDetails from './rehype/rehype-clean-details.js'
 import rehypeStripInteractive from './rehype/rehype-strip-interactive.js'
 import rehypeImages from './rehype/rehype-images.js'
+import rehypeSchemaProperties from './rehype/rehype-schema-properties.js'
 
 /**
  * Convert an HTML string to clean markdown.
@@ -46,6 +47,7 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
     .use(rehypeStripHeadingAnchors)
     .use(rehypeStripBadges)
     .use(rehypeStripCodeLabels)
+    .use(rehypeSchemaProperties)
     .use(rehypeTabsToSections)
     .use(rehypeAdmonitions)
     .use(rehypeCleanDetails)

@@ -1,5 +1,6 @@
 import { visit } from 'unist-util-visit'
 import { toString } from 'hast-util-to-string'
+import { getClassString } from './utils.js'
 
 /**
  * Convert Docusaurus tab groups to labeled sections.
@@ -109,11 +110,4 @@ function collectTabPanels(node, panels) {
       collectTabPanels(child, panels)
     }
   }
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

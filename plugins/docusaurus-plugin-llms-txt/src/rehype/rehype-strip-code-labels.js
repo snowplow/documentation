@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 /**
  * Clean up code blocks:
@@ -24,8 +25,8 @@ export default function rehypeStripCodeLabels() {
       const className = getClassString(node)
       if (
         node.tagName !== 'div' ||
-        !className.includes('codeBlockContainer') &&
-        !className.includes('theme-code-block')
+        (!className.includes('codeBlockContainer') &&
+        !className.includes('theme-code-block'))
       ) {
         return
       }
@@ -74,11 +75,4 @@ function findPre(node) {
     if (found) return found
   }
   return null
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

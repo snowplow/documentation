@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 /**
  * Strip availability badges, shields.io badges, badge groups, and FontAwesome icons.
@@ -57,11 +58,4 @@ export default function rehypeStripBadges() {
       }
     })
   }
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 /**
  * Handle images:
@@ -60,11 +61,4 @@ function findImg(pictureNode) {
   }
 
   return null
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

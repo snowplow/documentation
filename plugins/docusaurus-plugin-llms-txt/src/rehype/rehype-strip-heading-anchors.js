@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 const HEADING_TAGS = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
@@ -18,11 +19,4 @@ export default function rehypeStripHeadingAnchors() {
       })
     })
   }
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 const ADMONITION_TYPES = ['note', 'tip', 'info', 'warning', 'danger', 'caution']
 
@@ -105,11 +106,4 @@ function extractAdmonitionContent(node) {
   })
 
   return nonHeadingChildren
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

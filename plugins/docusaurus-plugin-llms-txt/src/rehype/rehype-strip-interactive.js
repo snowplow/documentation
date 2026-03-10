@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { getClassString } from './utils.js'
 
 const STRIP_TAGS = new Set(['form', 'iframe', 'video', 'audio', 'button'])
 
@@ -38,11 +39,4 @@ export default function rehypeStripInteractive() {
       }
     })
   }
-}
-
-function getClassString(node) {
-  const cls = node.properties?.className
-  if (!cls) return ''
-  if (Array.isArray(cls)) return cls.join(' ')
-  return String(cls)
 }

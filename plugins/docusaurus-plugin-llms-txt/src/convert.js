@@ -6,6 +6,7 @@ import remarkStringify from 'remark-stringify'
 import { select, selectAll } from 'hast-util-select'
 import { toString } from 'hast-util-to-string'
 import { visit, EXIT } from 'unist-util-visit'
+import { toHtml } from 'hast-util-to-html'
 
 import rehypeStripNav from './rehype/rehype-strip-nav.js'
 import rehypeStripHeadingAnchors from './rehype/rehype-strip-heading-anchors.js'
@@ -63,7 +64,6 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
 
   // Serialize the content subtree back to HTML, then re-parse and convert
   // This is necessary because we extracted a subtree from the full parse
-  const { toHtml } = await import('hast-util-to-html')
   const contentHtml = toHtml(contentTree)
 
   const result = await processor.process(contentHtml)

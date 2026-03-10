@@ -1,9 +1,10 @@
 ---
 position: 2
-title: "Run the application using Snowplow Micro and Clickhouse"
+title: "Run the application using Snowplow Micro and ClickHouse"
 sidebar_label: "Run the application locally"
-description: "Run the complete real-time editorial analytics stack locally with Docker, Snowplow and Clickhouse to process user behavioural events and display real-time content engagement insights and and ad performance metrics."
+description: "Run the complete real-time editorial analytics stack locally with Docker, Snowplow and ClickHouse to process user behavioral events and display real-time content engagement insights and ad performance metrics."
 keywords: ["clickhouse real-time analytics", "media publisher analytics snowplow", "editorial analytics"]
+date: "2025-09-09"
 ---
 
 The following steps will deploy the solution accelerator using Docker.
@@ -11,9 +12,9 @@ The following steps will deploy the solution accelerator using Docker.
 ## Step 0: Prerequisites
 
 1. Open a terminal
-2. Install **Docker** and **Docker Compose** You can run the following commands to check if it is already installed. If not installed, you can install Docker / Docker Compose by following these [instructions.](https://docs.docker.com/compose/install/)
+2. Install **Docker** and **Docker Compose**. You can run the following commands to check if it is already installed. If not installed, you can install Docker / Docker Compose by following these [instructions](https://docs.docker.com/compose/install/).
 
-```
+```bash
   docker --version
 
   docker-compose --version
@@ -23,7 +24,7 @@ The following steps will deploy the solution accelerator using Docker.
 ```bash
 git clone https://github.com/snowplow-industry-solutions/clickhouse-realtime-editorial-analytics.git
 ```
-4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within Clickhouse's SQL console. This will be the table that will store the Snowplow events. The database will be the value of the `CLICKHOUSE_DATABASE` environment variable in the next step.
+4. Run the SQL query in `./clickhouse-queries/create-table-query.sql` within ClickHouse's SQL console. This will be the table that will store the Snowplow events. The database will be the value of the `CLICKHOUSE_DATABASE` environment variable in the next step.
 
 ![Clickhouse Database Name](images/clickhouse-database-name.png)
 
@@ -31,15 +32,15 @@ git clone https://github.com/snowplow-industry-solutions/clickhouse-realtime-edi
 
 Use the following guide to map each value to the correct environment variable:
 
-| Variable | Where to find it |
-|---|---|
-| `CLICKHOUSE_HOST` | Line 3 of the sample `curl` command. Format: `https://<your-clickhouse-host>.aws.clickhouse.cloud:<port>` |
-| `CLICKHOUSE_USER` | The **Username** field |
-| `CLICKHOUSE_KEY` | The **Password** field |
-| `CLICKHOUSE_DATABASE` | The database name from the SQL Console where the SQL query was ran. This is typically `default` |
-| `CLICKHOUSE_TABLE` | Always set this to `snowplow_article_interactions` |
+| Variable              | Where to find it                                                                                          |
+| --------------------- | --------------------------------------------------------------------------------------------------------- |
+| `CLICKHOUSE_HOST`     | Line 3 of the sample `curl` command. Format: `https://<your-clickhouse-host>.aws.clickhouse.cloud:<port>` |
+| `CLICKHOUSE_USER`     | The **Username** field                                                                                    |
+| `CLICKHOUSE_KEY`      | The **Password** field                                                                                    |
+| `CLICKHOUSE_DATABASE` | The database name from the SQL Console where the SQL query was run. This is typically `default`           |
+| `CLICKHOUSE_TABLE`    | Always set this to `snowplow_article_interactions`                                                        |
 
-![Clickhouse HTTP Connector Credentials](images/clickhouse-credentials.png)
+![ClickHouse HTTP Connector Credentials](images/clickhouse-credentials.png)
 
 ## Step 1: Start the containers
 
@@ -53,43 +54,42 @@ Details on everything that's installed can be found in the [architecture](/tutor
 
 ## Step 2: Open the web tracking front-end
 
-Wait for about 30 seconds for the website container to kickstart. Once its ready, visit [http://localhost:3000](http://localhost:3000) to view the website application and start tracking events.
+Wait for about 30 seconds for the website container to start. Once it's ready, visit [`http://localhost:3000`](http://localhost:3000) to view the website application and start tracking events.
 
 ![First page of tracking website](images/homepage.png)
 
-
 2.1 Click on any of the articles that are on the homepage. Scroll down on the new page which opens. Wait for about 10 seconds to simulate a user reading.
 
-2.2 Click on the advertisement which appears on the right-hand sidebar. Return to the homepage by clicking the "The Daily Query" logo in the header.
+2.2 Click on the advertisement which appears on the right-hand sidebar. Return to the homepage by clicking the **The Daily Query** logo in the header.
 
 ![Ads on tracking website](images/advertisement.png)
 
-2.3 Select a different article from the homepage. Scroll down on the new page which opens.  Wait for about 10 seconds to simulate a user reading.
+2.3 Select a different article from the homepage. Scroll down on the new page which opens. Wait for about 10 seconds to simulate a user reading.
 
-2.4 Click on the advertisement which appears on the right-hand sidebar as you did in Step 2.2. Return to the homepage by clicking the "The Daily Query" logo in the header.
+2.4 Click on the advertisement which appears on the right-hand sidebar as you did in Step 2.2. Return to the homepage by clicking the **The Daily Query** logo in the header.
 
 ## Step 3: Open the Snowplow Micro front-end
 
-Open Snowplow Micro on [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in a separate window. Press the "Refresh" button located in the header. This will display the current Snowplow events which are being tracked (e.g. page_view, page_ping, article_interaction, ad_interaction). You can use the "Pick Columns" button to select certain dimensions which are collected. Try selecting the following:
-- event_name from the "Events" section
-- com_demo_ad_interaction_1.type from the "Events" section
-- com_demo_media_article_interaction_1.type from the "Events" section
-- com_demo_media_article_1.title from the "Entities" section
+Open Snowplow Micro on [`http://localhost:9090/micro/ui`](http://localhost:9090/micro/ui) in a separate window. Press the **Refresh** button located in the header. This will display the current Snowplow events which are being tracked (e.g. `page_view`, `page_ping`, `article_interaction`, `ad_interaction`). You can use the **Pick Columns** button to select certain dimensions which are collected. Try selecting the following:
+- `event_name` from the "Events" section
+- `com_demo_ad_interaction_1.type` from the "Events" section
+- `com_demo_media_article_interaction_1.type` from the "Events" section
+- `com_demo_media_article_1.title` from the "Entities" section
 
-## Step 4: Query the data in Clickhouse Console
+## Step 4: Query the data in ClickHouse Console
 
-Run the following query in Clickhouse's SQL Console. You should see events landing in real-time within the Clickhouse table.
+Run the following query in ClickHouse's SQL Console. You should see events landing in real-time within the ClickHouse table.
 
-```
+```sql
 select * from snowplow_article_interactions
 order by dvce_created_tstamp desc
 ```
 
-![Example Output from Clickhouse](images/clickhouse-results.png)
+![Example Output from ClickHouse](images/clickhouse-results.png)
 
 ## Step 5: View the editorial analytics data in a sample real-time dashboard
 
-Visit the real-time editoral analytics dashboard located at localhost:3000/dashboard(http://localhost:3000/dashboard) which is querying data from Clickhouse. Press the "Load Data" button. The article engagement and ad performance metrics for the last 30 minutes will then be displayed.
+Visit the real-time editorial analytics dashboard at [localhost:3000/dashboard](http://localhost:3000/dashboard), which is querying data from ClickHouse. Press the **Load Data** button. The article engagement and ad performance metrics for the last 30 minutes will then be displayed.
 
 ![Real-time analytics dashboard](images/realtime-dashboard.png)
 
@@ -100,9 +100,9 @@ If you are interested in the queries powering these insights, take a look at the
 
 ## Step 6: Generate more insights
 
-Keep looking through different parts of the website by selecting different news articles or clicking on different ads displayed. Re-do Step 4 or Step 5 and the data will refresh in real-time.
+Keep looking through different parts of the website by selecting different news articles or clicking on different ads displayed. Repeat Step 4 or Step 5 and the data will refresh in real-time.
 
-Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow to Clickhouse and visualising the current user behaviour in a real-time editoral analytics dashboard.
+You have successfully run the accelerator to stream web behavior through Snowplow to ClickHouse and visualizing the current user behavior in a real-time editorial analytics dashboard.
 
 ## Cleaning up
 
@@ -114,8 +114,9 @@ Shut down and delete all running containers:
 docker-compose down
 ```
 
-**Tips:**
-- There will still be data in your Clickhouse Cloud account. If you want to delete the generated data, run the following command in Clickhouse's SQL Console:
-```
+:::tip Deleting ClickHouse data
+There will still be data in your ClickHouse Cloud account. If you want to delete the generated data, run the following command in ClickHouse's SQL Console:
+```sql
 DROP TABLE snowplow_article_interactions
 ```
+:::

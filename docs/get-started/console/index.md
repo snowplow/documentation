@@ -27,10 +27,10 @@ The Fundamentals section covers the core data collection workflow.
 
 The first card guides you through creating a [tracking plan](/docs/event-studio/tracking-plans/index.md), which defines the [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md) you want to collect.
 
-1. Choose between built-in events or custom tracking.
-2. Create or select a [source application](/docs/event-studio/source-applications/index.md).
-3. Select tracking plan templates (Base Web, E-commerce Web, Media Web, and others).
-4. Review and confirm your selections.
+1. Choose between built-in events or custom tracking
+2. Create or select a [source application](/docs/event-studio/source-applications/index.md)
+3. Select tracking plan templates (Base Web, E-commerce Web, Media Web, and others)
+4. Review and confirm your selections
 
 Console then creates the tracking plan and associated data structures in your account.
 
@@ -38,11 +38,11 @@ Console then creates the tracking plan and associated data structures in your ac
 
 With a tracking plan in place, the next card helps you [implement tracking](/docs/event-studio/implement-tracking/index.md).
 
-1. Select your source application.
-2. Configure tracker initialization with the generated code snippet.
-3. Select your tracking plan and view event-specific code snippets.
-4. Test with Snowplow Micro.
-5. Deploy to production.
+1. Select your source application
+2. Configure tracker initialization with the generated code snippet
+3. Select your tracking plan and view event-specific code snippets
+4. Test with Snowplow Micro
+5. Deploy to production
 
 :::tip Test before deploying
 Test your implementation with Snowplow Micro before deploying to production to verify that events are structured correctly and match your tracking plan.
@@ -67,9 +67,9 @@ Signals is a paid add-on. Contact your account team to enable it.
 
 Define [Signals attributes](/docs/signals/attributes/index.md) that compute real-time properties about your users (for example, session count, cart value, or engagement score).
 
-1. Choose a template or create a custom attribute.
-2. Create or edit an attribute group.
-3. Test and simulate against real data.
+1. Choose a template or create a custom attribute
+2. Create or edit an attribute group
+3. Test and simulate against real data
 
 ### Retrieve Signals attributes
 

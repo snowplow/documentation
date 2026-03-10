@@ -64,6 +64,15 @@ export default function rehypeTabsToSections() {
       }
 
       if (replacements.length > 0) {
+        // Add a horizontal rule after the tab group to mark where
+        // platform-specific content ends and shared content resumes
+        replacements.push({
+          type: 'element',
+          tagName: 'hr',
+          properties: {},
+          children: [],
+        })
+
         parent.children.splice(index, 1, ...replacements)
         return index
       }

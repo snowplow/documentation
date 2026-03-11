@@ -76,6 +76,6 @@ export const versions = {
   igluScalaClient: '4.0.3',
 
   // Testing & debugging
-  snowplowMicro: '4.1.0',
+  snowplowMicro: '4.1.1',
   snowplowMini: '0.25.1',
 }

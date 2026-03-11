@@ -30,15 +30,21 @@ An example tag is shown below:
 
 Some things to note about the tag:
 
-1. It is a straightforward `<img ...>` tag, that results in the GET request to the Snowplow tracking pixel
-2. The endpoint is set to a Snowplow collector that we are running at `collector.snplow.com`.
-3. Five data points are passed on the query string: the event type (`pageview`), the page name (`Root README`), the URL (`http://github.com/snowplow/snowplow`), the application id (`snowplow`), the platform (`web`) and the tracker version (`no-js-0.1.0`)
+1. It is a straightforward `<img ...>` tag, that results in the GET request to the Snowplow tracking pixel.
+2. The endpoint is set to an example Snowplow Collector running at `collector.snplow.com`. Note that it ends with the pixel tracker endpoint `/i`.
+3. Several data points are passed on the query string:
+   * Event type `e` (`pv` for pageview),
+   * Page name `page` (`Root README`),
+   * URL `url` (`http://github.com/snowplow/snowplow`),
+   * Application id `aid` (`snowplow`),
+   * Platform `p` (`web`)
+   * Tracker version `tv` (`no-js-0.1.0`)
 
 ## A warning about using the Pixel tracker on domains you do not own
 
-The snowplow collector sets a `network_userid` and drops this on a browser cookie.
+The Snowplow collector sets a `network_userid` and drops this on a browser cookie.
 
-Care must therefore be exercised when using the Pixel tracker on domains that you do not own. **It is your responsibility to abide by the terms and conditions of any domain owner for domains where you post content including uploading Pixel tracking tags.** Some domain owners forbid 3rd parties from dropping cookies on their domains. It is your responsibility to ensure you do not violate the terms and conditions of any domain owners that you work with.
+Care must therefore be exercised when using the Pixel tracker on domains that you do not own. **It is your responsibility to abide by the terms and conditions of any domain owner for domains where you post content including uploading Pixel tracking tags.** Some domain owners forbid third parties from dropping cookies on their domains. It is your responsibility to ensure you do not violate the terms and conditions of any domain owners that you work with.
 
 ## Setting up the pixel tracker
 
@@ -48,18 +54,7 @@ Identify the event you wish to track. This may be opening a particular email tha
 
 ### Construct the pixel tracker URL
 
-Build your pixel tracker URL using the format shown in [Anatomy of a Pixel tracking tag](#anatomy-of-a-pixel-tracking-tag). Set your collector domain and configure the query string parameters according to the [Snowplow Tracker Protocol](/docs/events/index.md).
-
-For a page view event, set `e=pv`. Common parameters to include are:
-
-- `page` — the page title
-- `url` — the page URL
-- `aid` — your application ID
-- `p` — the platform (e.g., `web`, `mob`)
-
-:::warning
-Avoid using structured events (`e=se`) in your pixel tracker URL. Structured events are a legacy event type. If you need to capture custom event data, use a JavaScript tracker where your environment permits it.
-:::
+Build your pixel tracker URL using the format shown above. Set your Collector domain and configure the query string parameters according to the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md).
 
 ### Insert the tracking code into the page or ad you wish to track
 
@@ -72,7 +67,7 @@ You can use the Pixel tracker for click tracking aka URI redirects:
 - Set your collector path to `{{collector-domain}}/r/tp2?{{name-value-pairs}}` - the `/r/tp2` tells Snowplow that you are attempting a URI redirect
 - Add a `&u={{uri}}` argument to your collector URI, where `{{uri}}` is the URL-encoded URI that you want to redirect to
 - On clicking this link, the collector will register the link and then do a 302 redirect to the supplied `{{uri}}`
-- As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/events/index.md)
+- As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md)
 
 Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow customers. To use this feature, you need to enable this in your collector configuration. Snowplow customers can enable this from within the Pipeline Configuration screen of Snowplow Console.
 
@@ -90,7 +85,3 @@ How Snowplow attaches the `uri_redirect` to the event depends on what other Tr
 
 1. If you attached an `&e={{event type}}` to your event, then the `uri_redirect` will be added to the contexts array of your event
 2. If you did not attach an `&e={{event type}}` to your event, then this event will be treated as an unstructured event and the `uri_redirect` will be attached as the event itself
-
-## Further sources of information
-
-For further information on the Pixel tracker, see this [introductory blog post](http://snowplowanalytics.com/blog/2013/01/29/introducing-the-pixel-tracker/).

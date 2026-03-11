@@ -107,7 +107,7 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 The `etl_tstamp` field records when the event was validated and enriched, not when it was loaded into the warehouse. The name is historical.
 
-Most trackers capture `os_timezone` automatically. See the [geolocation and timezone tracking](/docs/events/ootb-data/geolocation/index.md) page for tracker-specific setup details.
+Most Snowplow trackers have built-in capability for tracking `os_timezone`. See the [geolocation and timezone tracking](/docs/events/ootb-data/geolocation/index.md) page for tracker-specific configuration details.
 
 | Payload property | Field name            | Type                     | Description                                                 | Reqd? | Example                   | Source             | Web | Mobile |
 | ---------------- | --------------------- | ------------------------ | ----------------------------------------------------------- | ----- | ------------------------- | ------------------ | --- | ------ |

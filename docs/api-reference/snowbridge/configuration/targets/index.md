@@ -56,4 +56,4 @@ Each target has its own defaults for batching options. See the individual target
 | `max_concurrent_batches` | Number of batches written concurrently (default: `5`). |
 | `flush_period_millis` | Interval in milliseconds between timer-based batch flushes (default: `500`). |
 
-If both `max_batch_messages` and `max_batch_bytes` are reached before `flush_period_millis` elapses, the batch is sent immediately.
+If either of `max_batch_messages` or `max_batch_bytes` is reached before `flush_period_millis` elapses, the batch is sent immediately.

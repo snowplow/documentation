@@ -1,11 +1,13 @@
 ---
 title: "Snowbridge upgrade guide"
+sidebar_label: "Snowbridge 5.x upgrade"
+date: "2026-03-11"
 sidebar_position: 500
 description: "Upgrade Snowbridge to version 5.X.X with breaking changes to transformation configuration, target batching, and metrics."
 keywords: ["snowbridge 5.x upgrade", "upgrade guide", "snowbridge migration", "version 5"]
 ---
 
-## Version 5.0.0 Breaking Changes
+## Version 5.0.0 breaking changes
 
 ### Transformation configuration syntax
 
@@ -99,13 +101,13 @@ All other targets (Kafka, Kinesis, PubSub, SQS, EventHub) also gain the `batchin
 
 **Breaking change**: the `failure_target_success` and `failure_target_failed` metrics now count only _invalid_ messages (data that could not be delivered and is not retryable). In v4 these metrics also included _oversized_ messages (messages exceeding the per-message byte limit).
 
-Oversized messages are tracked as a separate concern in v5's and do not produce StatsD counter events.
+Oversized messages are tracked as a separate concern in v5 and do not produce StatsD counter events.
 
 If you have alerting or dashboards that rely on `failure_target_success` or `failure_target_failed` to cover oversized-message volumes, update those thresholds accordingly.
 
 ---
 
-## Version 4.0.0 Breaking Changes
+## Version 4.0.0 breaking changes
 
 ### HTTP target: ordered response rule evaluation
 
@@ -145,7 +147,7 @@ Rules are evaluated in the order they appear in your configuration. The first ma
 
 ---
 
-## Version 3.0.0 Breaking Changes
+## Version 3.0.0 breaking changes
 
 The below breaking changes were made in version 3.0.0. All other functionality is backwards compatible.
 

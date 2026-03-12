@@ -4,6 +4,7 @@ sidebar_position: 65
 sidebar_label: "Snowbridge"
 description: "Replicate Snowplow event streams to multiple destinations with Snowbridge, a configurable tool supporting Kinesis, PubSub, Kafka, HTTP, and more."
 keywords: ["snowbridge", "stream replication", "kinesis", "pubsub", "kafka", "event streaming"]
+date: "2026-03-11"
 ---
 
 ```mdx-code-block
@@ -34,4 +35,8 @@ Snowbridge is a generic tool, built to work on any type of data, developed by th
 
 :::note
 Version 4.0.0 includes breaking changes to response rule evaluation. See the [upgrade guide](/docs/api-reference/snowbridge/3-X-X-upgrade-guide/index.md) for migration information.
+:::
+
+:::note
+Version 5.0.0 includes breaking changes to transformation configuration and target batching options. See the [upgrade guide](/docs/api-reference/snowbridge/4-X-X-upgrade-guide/index.md) for migration information.
 :::

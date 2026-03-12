@@ -1,5 +1,8 @@
 ---
-title: "Snowbridge upgrade guide"
+id: "Snowbridge 3.x upgrade"
+title: "Snowbridge 3.x upgrade guide"
+sidebar_label: "Snowbridge 3.x upgrade"
+date: "2026-03-11"
 sidebar_position: 400
 description: "Upgrade Snowbridge to version 3.X.X with configuration changes for transformations, new features, and breaking changes."
 keywords: ["snowbridge 3.x upgrade", "upgrade guide", "snowbridge migration", "version 3"]

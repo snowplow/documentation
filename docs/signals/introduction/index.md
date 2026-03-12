@@ -17,7 +17,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
 
   <CallToActionCard
     title="Snowplow for Composable Analytics"
-    description="Learn more about the Customer Data Infrastructure that's the foundation for Signals"
+    description="Learn about the Customer Data Infrastructure that's the foundation for Signals"
     href="/docs/"
   />
 </CardGrid>

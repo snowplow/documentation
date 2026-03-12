@@ -8,4 +8,4 @@ sidebar_custom_props:
   header: "Signals"
 ---
 
-<!-- This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artifically hoisted to look like they're all top-level sections -->
+<!-- This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artifically hoisted to look like they're all top-level sections. The Signals landing page is at introduction/index.md -->

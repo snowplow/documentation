@@ -15,13 +15,13 @@ sidebar_custom_props:
 <CardGrid cols={2}>
   <CallToActionCard
     title="Get started with Snowplow CDI"
-    description="Choose to run Snowplow in your cloud or ours"
+    description="Your data foundation, deployed in your cloud or ours"
     href="/docs/get-started/"
   />
 
   <CallToActionCard
     title="Snowplow Signals"
-    description="Learn more about our real-time customer context platform"
+    description="Real-time customer context for AI agents and personalized experiences"
     href="/docs/signals/introduction/"
   />
 

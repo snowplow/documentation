@@ -6,7 +6,7 @@ description: "Compare Snowplow deployment options including CDI Private Managed 
 keywords: ["Snowplow CDI", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options", "behavioral data platform", "data infrastructure", "getting started"]
 ---
 
-Snowplow is a Customer Data Infrastructure (CDI) platform capable of processing billions of events per day:
+Snowplow is the customer context layer that provides the data foundation for your organization. It transforms raw behavioral data into real-time customer context for AI agents and advanced analytics, using [Snowplow Signals](/docs/signals/index.md) and the Snowplow Customer Data Infrastructure (CDI) platform.
 
 * Start by [defining the data](/docs/fundamentals/tracking-plans/index.md) you want to collect
 * Choose from over 20 [tracker SDKs](/docs/sources/index.md) to collect data from web, mobile, server-side, and other sources, using custom tracking or [over 100 built-in events and entities](/docs/events/ootb-data/index.md)

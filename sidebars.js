@@ -21,7 +21,11 @@ const swap = (allItems, linkItems, descriptions) => {
   return allItems.flatMap((item) => {
     // Preserve header property for later section wrapping (don't create HTML here)
     const className =
-      [item.className, item.customProps?.hidden ? 'hidden' : '', item.customProps?.space_above ? 'space-above' : '']
+      [
+        item.className,
+        item.customProps?.hidden ? 'hidden' : '',
+        item.customProps?.space_above ? 'space-above' : '',
+      ]
         .filter(Boolean)
         .join(' ') || undefined
 

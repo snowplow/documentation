@@ -8,7 +8,7 @@ keywords: ["snowplow signals tutorial", "ecommerce interventions"]
 
 Welcome to the **Snowplow Signals** tutorial.
 
-[Snowplow Signals](/docs/signals/) is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+[Snowplow Signals](/docs/signals/introduction/) is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 This tutorial provides a hands-on introduction to Signals. You'll use Python to programmatically define attributes, services, and interventions, then test them with a demo ecommerce application.
 

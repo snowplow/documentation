@@ -492,7 +492,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
 /docs/signals/receive-interventions/* /docs/signals/interventions/subscribe/:splat 301
 /docs/signals/resources/* /docs/signals/get-started/:splat 301
-/docs/signals /docs/signals/get-started 301
+/docs/signals/ /docs/signals/introduction/ 301
 /docs/resources/migration-guides/* /docs/migration-guides/:splat 301
 /docs/resources/* /docs/licensing/:splat 301
 /docs/licensing/copyright-license/* /docs/licensing/:splat 301

@@ -1,10 +1,11 @@
 ---
-title: "Snowbridge upgrade guide"
-sidebar_label: "Snowbridge 5.x upgrade"
+id: "Snowbridge 4.x upgrade"
+title: "Snowbridge 4.x upgrade guide"
+sidebar_label: "Snowbridge 4.x upgrade"
 date: "2026-03-11"
 sidebar_position: 500
 description: "Upgrade Snowbridge to version 5.X.X with breaking changes to transformation configuration, target batching, and metrics."
-keywords: ["snowbridge 5.x upgrade", "upgrade guide", "snowbridge migration", "version 5"]
+keywords: ["snowbridge 4.x upgrade", "upgrade guide", "snowbridge migration", "version 4"]
 ---
 
 ## Version 5.0.0 breaking changes
@@ -104,75 +105,3 @@ All other targets (Kafka, Kinesis, PubSub, SQS, EventHub) also gain the `batchin
 Oversized messages are tracked as a separate concern in v5 and do not produce StatsD counter events.
 
 If you have alerting or dashboards that rely on `failure_target_success` or `failure_target_failed` to cover oversized-message volumes, update those thresholds accordingly.
-
----
-
-## Version 4.0.0 breaking changes
-
-### HTTP target: ordered response rule evaluation
-
-**Breaking change**: response rules are now evaluated in the order they are defined in the configuration, rather than being organized in separate `invalid` and `setup` blocks.
-
-**Migration required**: update your HTTP target configuration to specify a `type` attribute for each rule.
-
-**Before:**
-```hcl
-response_rules {
-  invalid {
-    http_codes = [400]
-    body = "Invalid value for 'purchase' field"
-  }
-  setup {
-    http_codes = [401, 403]
-  }
-}
-```
-
-**After (4.0.0):**
-```hcl
-response_rules {
-  rule {
-    type = "invalid"
-    http_codes = [400]
-    body = "Invalid value for 'purchase' field"
-  }
-  rule {
-    type = "setup"
-    http_codes = [401, 403]
-  }
-}
-```
-
-Rules are evaluated in the order they appear in your configuration. The first matching rule determines the error type.
-
----
-
-## Version 3.0.0 breaking changes
-
-The below breaking changes were made in version 3.0.0. All other functionality is backwards compatible.
-
-### Lua support removed
-
-Support for Lua transformations has been removed. If you are running a Lua transformation, you can port the logic to [Javascript](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [JQ](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md).
-
-### HTTP target: non-JSON data no longer supported
-
-We never intended to support non-JSON data, but prior to version 3.0.0, the request body was simply populated with whatever bytes were found in the message data, regardless of whether it is valid JSON.
-
-From version 3.0.0 onwards, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
-
-### HTTP target: request batching
-
-Many HTTP APIs allow sending several events in a single request by putting them into a JSON array. Since version 3.0.0, if the Snowbridge source provides data in batches, the HTTP target will batch events in this way.
-
-As a consequence, even when the source provides events in a single event batch, it will now be placed into an array of one element. For example, prior to version 3.0.0, a request body might look like this:
-
-```
-{"foo": "bar"}
-```
-
-But it will now look like this:
-
-```
-[{"foo": "bar"}]
-```

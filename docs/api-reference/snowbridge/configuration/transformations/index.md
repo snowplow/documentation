@@ -39,7 +39,7 @@ https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/
 `}</CodeBlock>
 
 :::note
-In Snowbridge 4.x, each transformation required its own `transform {}` block. From version 5.0.0, all transformations must be nested inside a single `transform {}` block. See the [upgrade guide](/docs/api-reference/snowbridge/4-X-X-upgrade-guide/index.md#transformation-configuration-syntax) for migration details.
+In Snowbridge 4.x, each transformation required its own `transform {}` block. From version 5.0.0, all transformations must be nested inside a single `transform {}` block. See the [upgrade guide](/docs/api-reference/snowbridge/4-X-X-upgrade-guide/index.md) for migration details.
 :::
 
 ### Worker pool

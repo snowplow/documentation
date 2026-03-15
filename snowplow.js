@@ -73,11 +73,12 @@ const setupBrowserTracker = () => {
     const data = pickBy({
       cloud: localStorage.getItem('docusaurus.tab.cloud'),
       data_warehouse: localStorage.getItem('docusaurus.tab.warehouse'),
+      tracker_platform: localStorage.getItem('docusaurus.tab.platform'),
     })
     if (!_.isEmpty(data))
       return {
         schema:
-          'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-0',
+          'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-1',
         data,
       }
   }

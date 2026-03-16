@@ -5,7 +5,7 @@ import TabItem from '@theme/TabItem';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_diagram.md';
 ```
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS">
     <LoaderDiagram {...props} stream="Kinesis" cloud="AWS"/>
   </TabItem>

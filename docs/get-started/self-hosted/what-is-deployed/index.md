@@ -31,10 +31,10 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 ## Overview
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-<Tabs groupId="warehouse" queryString lazy>
+<Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift">
 
 <Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
@@ -68,7 +68,7 @@ For more information about the Databricks Loader, see the [loader documentation]
   <TabItem value="gcp" label="GCP">
 
 <!-- see https://github.com/facebook/docusaurus/issues/8357 -->
-<Tabs groupId="warehouse" queryString lazy>
+<Tabs groupId="warehouse" queryString>
   <TabItem value="bigquery" label="BigQuery">
 
 <Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
@@ -83,7 +83,7 @@ For more information about the BigQuery Loader, see the [loader documentation](/
 </TabItem>
 <TabItem value="azure" label="Azure">
 
-<Tabs groupId="warehouse" queryString lazy>
+<Tabs groupId="warehouse" queryString>
   <TabItem value="databricks" label="Databricks" default>
 
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>

@@ -24,7 +24,7 @@ For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/g
 
 :::
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
     <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>
     <DeployOverview cloud="AWS"/>

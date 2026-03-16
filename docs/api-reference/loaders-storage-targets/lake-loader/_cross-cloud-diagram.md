@@ -16,7 +16,7 @@ import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/
     (<LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>)
 : props.warehouse === 'Databricks' ?
     (
-    <Tabs groupId="cloud" queryString lazy>
+    <Tabs groupId="cloud" queryString>
       <TabItem value="gcp" label="GCP">
         <LakeLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
       </TabItem>
@@ -26,7 +26,7 @@ import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/
     </Tabs>
     )
 : (
-    <Tabs groupId="cloud" queryString lazy>
+    <Tabs groupId="cloud" queryString>
       <TabItem value="aws" label="AWS">
         <LakeLoaderDiagram {...props} stream="Kinesis" bucket="S3" cloud="AWS"/>
       </TabItem>

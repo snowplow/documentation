@@ -2,11 +2,12 @@ import { visit } from 'unist-util-visit'
 import { getClassString } from './utils.js'
 
 /**
- * Handle images:
+ * Handle images and mermaid diagrams:
+ * - Mermaid: convert <div data-mermaid-source> (from swizzled theme component)
+ *   directly into <pre><code class="language-mermaid"> for markdown conversion
  * - ThemedImage: uses two <img> tags with themedComponent--light/dark classes.
  *   Strip dark-theme images, keep light-theme ones.
  * - ThemedImage <picture>: extract light-theme <img>, convert to ![alt](src)
- * - Mermaid SVGs: replace with placeholder text (enriched later by enrich-mermaid)
  * - Standard <img>: rehype-remark handles natively
  */
 export default function rehypeImages() {
@@ -14,18 +15,30 @@ export default function rehypeImages() {
     visit(tree, 'element', (node, index, parent) => {
       if (!parent || index == null) return
 
-      // Replace Mermaid SVGs with placeholders (enriched later by enrich-mermaid)
-      if (node.tagName === 'svg') {
-        const className = getClassString(node)
-        if (className.includes('mermaid')) {
+      // Convert mermaid source divs (from swizzled Mermaid component) to code blocks
+      if (
+        node.tagName === 'div' &&
+        node.properties?.dataMermaidSource !== undefined
+      ) {
+        const source = extractText(node).trim()
+        if (source) {
           parent.children.splice(index, 1, {
             type: 'element',
-            tagName: 'p',
+            tagName: 'pre',
             properties: {},
-            children: [{ type: 'text', value: 'MERMAID_DIAGRAM_PLACEHOLDER' }],
+            children: [
+              {
+                type: 'element',
+                tagName: 'code',
+                properties: { className: ['language-mermaid'] },
+                children: [{ type: 'text', value: source }],
+              },
+            ],
           })
-          return index
+        } else {
+          parent.children.splice(index, 1)
         }
+        return index
       }
 
       // Strip dark-theme ThemedImage <img> tags
@@ -50,6 +63,15 @@ export default function rehypeImages() {
       }
     })
   }
+}
+
+/**
+ * Recursively extract text content from a hast node tree.
+ */
+function extractText(node) {
+  if (node.type === 'text') return node.value
+  if (node.children) return node.children.map(extractText).join('')
+  return ''
 }
 
 /**

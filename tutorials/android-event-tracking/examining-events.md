@@ -10,7 +10,7 @@ After implementing tracking, you'll want to verify and analyze the events being 
 
 1. Set up a Snowplow Micro pipeline and configure your tracker to send events to its endpoint, by updating the string in the `Analytics` object.
 2. Run the app and move between screens.
-3. Access the [Micro UI](/docs/testing/snowplow-micro/ui/) to view incoming events.
+3. Access the [Micro dashboard](/docs/testing/snowplow-micro/ui/) to view incoming events.
 4. Each event will contain several context entities by default, providing data about the:
     - Session
     - App

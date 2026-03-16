@@ -87,7 +87,7 @@ Here’s an example:
 print(`--- URL is: ${event.getPage_url()}`);
 ```
 
-This will be printed directly to the output from Micro (in the terminal — currently this information is not available in the Micro UI).
+This will be printed directly to the output from Micro (in the terminal — currently this information is not available in the Micro dashboard).
 
 :::info There is no `console.log`
 

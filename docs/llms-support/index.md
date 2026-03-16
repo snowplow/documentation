@@ -13,9 +13,11 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
 
 The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a Model Context Protocol (MCP) server that [connects AI assistants to your Snowplow tracking plans](/docs/llms-support/mcp-server/index.md). This can help you design tracking plans faster and more consistently.
 
-## `llms.txt`
+## Documentation index in `llms.txt`
 
-The Snowplow documentation index is available at [`llms.txt`](pathname:///llms.txt). Use this to help an LLM understand the structure of the documentation and navigate to relevant pages.
+This documentation follows the [`llms.txt` standard](https://llmstxt.org/), providing structured information to help an LLM use the site.
+
+An index is available at [`llms.txt`](pathname:///llms.txt).
 
 A full-content version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 

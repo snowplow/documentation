@@ -10,6 +10,10 @@ keywords: ["snowbridge 4.x upgrade", "upgrade guide", "snowbridge migration", "v
 
 ## Version 5.0.0 breaking changes
 
+### All sources
+
+**Breaking change**: `concurrent_writes` setting has been removed
+
 ### Transformation configuration syntax
 
 **Breaking change**: multiple `transform {}` blocks are replaced by a single `transform {}` block containing multiple `use` sub-blocks.
@@ -50,7 +54,42 @@ transform {
 
 Transformations still run in the order they appear.
 
-### HTTP target: batching options renamed and moved
+### HTTP target:
+
+#### Headers configuration
+
+**Breaking change**: `headers` setting now accepts an object structure to define custom headers.
+
+**Before:**
+```hcl
+target {
+  use "http" {
+    ...
+    headers  = "{\"Accept-Language\":\"en-US\"}"
+  }
+}
+```
+
+**After (5.0.0):**
+```hcl
+target {
+  use "http" {
+    ...
+    headers = {
+      Accept-Language = "en-US"
+    }
+  }
+}
+```
+
+#### Removal of deprecated settings
+
+**Breaking change**: `request_timeout_in_seconds` setting has been removed.
+
+**Migration required**: use `request_timeout_in_millis` setting instead.
+
+
+#### Batching options renamed and moved
 
 **Breaking change**: the per-request sizing options on the HTTP target have been renamed and moved into a nested `batching {}` block.
 
@@ -96,12 +135,137 @@ target {
 }
 ```
 
-All other targets (Kafka, Kinesis, PubSub, SQS, EventHub) also gain the `batching {}` block in v5. If you do not configure it, target-specific defaults apply — see each target's configuration page.
+### EventHub target:
 
-### StatsD metrics: oversized messages no longer counted in failure metrics
+**Breaking change**: `message_byte_limit`, `chunk_byte_limit`, `chunk_message_limit` & `batch_byte_limit` fields have been renamed and moved into a nested `batching {}` block.
 
-**Breaking change**: the `failure_target_success` and `failure_target_failed` metrics now count only _invalid_ messages (data that could not be delivered and is not retryable). In v4 these metrics also included _oversized_ messages (messages exceeding the per-message byte limit).
+Two additional fields are new in v5:
 
-Oversized messages are tracked as a separate concern in v5 and do not produce StatsD counter events.
+| New field | Default | Description |
+|---|---|---|
+| `max_concurrent_batches` | `5` | Number of batches written to the target concurrently. |
+| `flush_period_millis` | `500` | Milliseconds between timer-based batch flushes. |
 
-If you have alerting or dashboards that rely on `failure_target_success` or `failure_target_failed` to cover oversized-message volumes, update those thresholds accordingly.
+**Before:**
+```hcl
+target {
+  use "eventhub" {
+    message_byte_limit         = 1000000
+    chunk_byte_limit           = 1000000
+    chunk_message_limit        = 501
+    batch_byte_limit           = 1000000
+  }
+}
+```
+
+**After (5.0.0):**
+```hcl
+target {
+  use "eventhub" {
+    batching {
+      max_batch_messages     = 501
+      max_batch_bytes        = 10000000
+      max_message_bytes      = 10000000
+      max_concurrent_batches = 5
+      flush_period_millis    = 500
+    }
+  }
+}
+```
+
+### Kafka target:
+
+**Breaking change**: `byte_limit`, `flush_frequency`, `flush_messages` & `flush_bytes` fields have been renamed and moved into a nested `batching {}` block.
+
+One additional field is new in v5:
+
+| New field | Default | Description |
+|---|---|---|
+| `max_concurrent_batches` | `5` | Number of batches written to the target concurrently. |
+
+**Before:**
+```hcl
+target {
+  use "kafka" {
+    byte_limit      = 1000000
+    flush_frequency = 2
+    flush_messages  = 2
+    flush_bytes     = 2
+  }
+}
+```
+
+**After (5.0.0):**
+```hcl
+target {
+  use "kafka" {
+    batching {
+      max_batch_messages     = 501      // flush_messages
+      max_batch_bytes        = 10000000 // flush_bytes
+      max_message_bytes      = 10000000 // byte_limit
+      flush_period_millis    = 500      // flush_frequency
+      max_concurrent_batches = 5
+    }
+  }
+}
+```
+
+### Kinesis target:
+
+**Breaking change**: `request_max_messages` setting has been renamed and moved into a nested `batching {}` block.
+
+Four additional fields are new in v5:
+
+| New field | Default | Description |
+|---|---|---|
+| `max_batch_bytes`   | `5242880` | Maximum byte limit for a single batched request. |
+| `max_message_bytes` | `1048576` | Maximum byte limit for individual message. |
+| `max_concurrent_batches` | `5` | Number of batches written to the target concurrently. |
+| `flush_period_millis` | `500` | Milliseconds between timer-based batch flushes. |
+
+**Before:**
+```hcl
+target {
+  use "kinesis" {
+    request_max_messages = 1
+  }
+}
+```
+
+**After (5.0.0):**
+```hcl
+target {
+  use "kinesis" {
+    batching {
+      max_batch_messages     = 1        // request_max_messages
+      max_batch_bytes        = 5242880
+      max_message_bytes      = 1048576
+      max_concurrent_batches = 5
+      flush_period_millis    = 500
+    }
+  }
+}
+```
+
+### PubSub & SQS targets:
+
+Similarly to the rest of the targetrs, `PubSub` & `SQS` support nested `batching {}` block.
+
+By default, PubSub has:
+
+| Field | Default | Description |
+|---|---|---|
+| `max_batch_messages` | `100` | Maximum number of events that can go into one batched request |
+| `max_batch_bytes`   | `10485760` | Maximum byte limit for a single batched request. |
+| `max_message_bytes` | `10485760` | Maximum byte limit for individual message. |
+| `max_concurrent_batches` | `5` | Number of batches written to the target concurrently. |
+| `flush_period_millis` | `500` | Milliseconds between timer-based batch flushes. |
+
+By default, SQS has
+| Field | Default | Description |
+|---|---|---|
+| `max_batch_messages` | `10` | Maximum number of events that can go into one batched request |
+| `max_batch_bytes`   | `1048576` | Maximum byte limit for a single batched request. |
+| `max_message_bytes` | `1048576` | Maximum byte limit for individual message. |
+| `max_concurrent_batches` | `5` | Number of batches written to the target concurrently. |
+| `flush_period_millis` | `500` | Milliseconds between timer-based batch flushes. |

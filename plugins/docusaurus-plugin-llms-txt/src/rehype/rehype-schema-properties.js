@@ -62,12 +62,19 @@ export default function rehypeSchemaProperties() {
       // Build replacement nodes
       const replacements = []
 
-      // H3 heading
+      // H3 heading with inline code
       replacements.push({
         type: 'element',
         tagName: 'h3',
         properties: {},
-        children: [{ type: 'text', value: schemaName }],
+        children: [
+          {
+            type: 'element',
+            tagName: 'code',
+            properties: {},
+            children: [{ type: 'text', value: schemaName }],
+          },
+        ],
       })
 
       // Type label

@@ -30,11 +30,13 @@ export async function generateIndex(outDir, pages, options) {
         ? ' [previous version]'
         : ''
 
+      const desc = page.description ? `: ${page.description}` : ''
+
       if (enableMarkdownFiles) {
         const mdPath = htmlPathToMdPath(page.htmlRelPath)
-        lines.push(`- [${page.title}](${siteUrl}/${mdPath})${prevTag}`)
+        lines.push(`- [${page.title}](${siteUrl}/${mdPath})${desc}${prevTag}`)
       } else {
-        lines.push(`- [${page.title}](${siteUrl}${page.routePath})${prevTag}`)
+        lines.push(`- [${page.title}](${siteUrl}${page.routePath})${desc}${prevTag}`)
       }
     }
 

@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2020-12-02"
 sidebar_position: 10
+description: "Initialize Scala tracker 1.0.0 with http4s or ID emitters, configure buffer size, retry policies, event queue policies, and add callbacks."
+keywords: ["scala 1.0 initialization", "http4s emitter", "cats effect"]
 ---
 
 Assuming you have completed the Scala Tracker Setup, you are ready to initialize the Scala Tracker.

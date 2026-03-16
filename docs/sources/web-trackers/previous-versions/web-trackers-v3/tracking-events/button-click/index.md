@@ -1,6 +1,8 @@
 ---
 title: "Button clicks"
 sidebar_position: 50
+description: "Documentation for Button clicks in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

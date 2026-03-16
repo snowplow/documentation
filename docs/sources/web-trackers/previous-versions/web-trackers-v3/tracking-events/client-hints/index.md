@@ -1,6 +1,8 @@
 ---
 title: "Client Hints"
 sidebar_position: 150
+description: "Documentation for Client Hints in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Migrating from v1 to v2"
+title: "Migrate from v1 to v2"
+sidebar_label: "Migrating from v1 to v2"
 date: "2021-08-09"
 sidebar_position: 100
+description: "Migration guide for upgrading React Native tracker from v1 to v2 with installation changes, iOS platform updates, and automatic tracking configuration."
+keywords: ["react native tracker v1 to v2", "migration guide", "version upgrade"]
 ---
 
 Version 2 of the React Native tracker underwent a large rewrite of the internal code, both on the side of the React Native project as well as in the underlying iOS and Android trackers (which have been upgraded to version 5). However, the public APIs and tracker behavior have remained largely unchanged except for a few things discussed on this page.

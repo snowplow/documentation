@@ -1,7 +1,9 @@
 ---
-title: "Custom integrations"
-description: "Build custom consumers for Snowplow event streams using AWS Lambda, GCP Cloud Functions, KCL applications, or Pub/Sub client libraries to integrate with any third-party platform."
+title: "Build custom integrations for event streams"
+sidebar_label: "Custom integrations"
 sidebar_position: 60
+description: "Build custom consumers for Snowplow event streams using AWS Lambda, GCP Cloud Functions, KCL applications, or Pub/Sub client libraries to integrate with any third-party platform."
+keywords: ["custom integrations", "AWS Lambda", "Cloud Functions", "stream consumers", "event processing"]
 ---
 
 Snowplow is underpinned by event streams: AWS Kinesis, GCP PubSub, or Apache Kafka. Before a Snowplow pipeline loads the events to a data warehouse, the enriched events are available on a stream. You can build a custom consumer to consume these events. Below we describe some high level concepts which can be used to consume the enriched event streams.

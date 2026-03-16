@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2021-04-07"
 sidebar_position: 2000
+description: "Initialize and configure the Node.js tracker v3 with emitter settings for event tracking."
+keywords: ["node.js tracker v3 initialization", "tracker configuration"]
 ---
 
 Assuming you have completed the [Node.js Tracker Setup](/docs/sources/node-js-tracker/initialization/index.md) for your project, you are now ready to initialize the Tracker.
@@ -93,10 +96,12 @@ Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/sn
 interface Emitter {
   flush: () => void;
   input: (payload: PayloadDictionary) => void;
-  /** Set if the requests from the emitter should be anonymized. Read more about anonymization used at https://docs.snowplow.io/docs/events/http-requests/. Available from 3.21.0 onwards */
+  /** Set if the requests from the emitter should be anonymized. */
   setAnonymization?: (shouldAnonymize: boolean) => void;
 }
 ```
+
+Anonymization is available from version 3.21.0 onwards.
 
 You can see the implementation of the `gotEmitter` [here](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/src/got_emitter.ts).
 

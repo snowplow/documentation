@@ -1,6 +1,10 @@
 ---
 title: "Platform and application data tracking"
+sidebar_label: "Platform and application data tracking"
+date: "2021-08-06"
 sidebar_position: 10
+description: "Track platform context with device information and application context with app version using React Native tracker v2 SDK."
+keywords: ["react native tracker v2 platform context", "device information", "app version tracking"]
 ---
 
 ```mdx-code-block

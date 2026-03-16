@@ -1,7 +1,10 @@
 ---
-title: "Snowplow Mini"
+title: "Introduction to Snowplow Mini"
+sidebar_label: "Snowplow Mini"
 date: "2021-08-14"
 sidebar_position: 120
+description: "Snowplow Mini is a single-instance development environment for testing tracker updates and schema changes."
+keywords: ["snowplow mini", "development environment", "testing environment", "mini setup"]
 ---
 
 ```mdx-code-block
@@ -13,13 +16,11 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 />
 ```
 
-[Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development sandbox, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
+[Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development environment, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
 
 :::tip
 
-Snowplow Mini is similar to [Snowplow Micro](/docs/testing/snowplow-micro/index.md), with the following differences:
-* Micro is more portable and can easily run on your machine or in automated tests.
-* Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow.
+For new testing environments, we recommend using [Snowplow Micro](/docs/testing/snowplow-micro/index.md), which you can [deploy through Console](/docs/testing/snowplow-micro/console/index.md) or [run locally](/docs/testing/snowplow-micro/local/index.md). New Snowplow Mini deployments are no longer available through Console.
 
 :::
 
@@ -30,7 +31,7 @@ You might use Snowplow Mini when:
 
 ## Getting started
 
-Snowplow users can request a Snowplow Mini instance through Console (go to `“Environments” → “Sandboxes” → “Setup a sandbox”`).
+New Snowplow Mini instances are no longer available through Console. For new development environments, use [Snowplow Micro](/docs/testing/snowplow-micro/console/index.md) instead.
 
 For Snowplow Self-Hosted, see the setup guides for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
 
@@ -47,7 +48,7 @@ Once you are happy with the changes you have made you would then change the trac
 ## Features of Snowplow Mini
 
 - Data is tracked and processed in real time
-- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu) to allow events to be sent against your custom schemas
+- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu-schema-repository) to allow events to be sent against your custom schemas
 - Data is validated during processing
 - Data is loaded into OpenSearch and can be queried directly or through the OpenSearch Dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes

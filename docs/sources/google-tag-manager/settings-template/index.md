@@ -1,6 +1,9 @@
 ---
-title: Settings Template
+title: "Snowplow GTM Settings template"
+sidebar_label: "Settings template"
 sidebar_position: 500
+description: "Configure the Snowplow Settings Variable template for GTM with tracker options, collector endpoints, privacy settings, cookies, dispatching methods, and predefined context entities for consistent tracking configuration."
+keywords: ["gtm settings variable", "tracker configuration", "collector endpoint", "privacy settings", "cookie configuration"]
 ---
 
 This page describes the settings available in the Snowplow Settings Variable template for Google Tag Manager.
@@ -74,6 +77,8 @@ This setting allows you to respect the Do Not Track setting in the user's browse
 
 ### Anonymous Tracking
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 #### Server Anonymisation
 
 Server-side anonymisation affects user identifiers set server-side. In particular, these are the network_userid property set in server-side cookie and the user IP address.
@@ -84,9 +89,9 @@ Setting the flag will add a `SP-Anonymous` HTTP header to requests sent to the S
 
 This setting disables client-side user identifiers but tracks session information. In practice, this means that events track the Session context entity but the userId property is a null UUID (00000000-0000-0000-0000-000000000000). In case Platform context is enabled, the IDFA identifiers will not be present.
 
-#### Cookie Extension Service
+#### Cookie Lifetime Extension Service
 
-This allows you to set the endpoint for the [Cookie Extension Service](/docs/events/cookie-extension/index.md).
+This allows you to set the endpoint for the [Cookie Lifetime Extension Service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md).
 
 ## Cookie Settings
 
@@ -177,11 +182,11 @@ Predefined contexts provide additional metadata for your Snowplow events. By inc
 
 Available predefined contexts are:
 
-| Name                          | Description                                                                                                                              | Source Plugin                                                                                                                                       |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `webPage`                     | Information about the web page where the event occurred.                                                                                 | [Web Page tracking](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) |
+| Name                          | Description                                                                                                                              | Source Plugin                                                                                                           |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `webPage`                     | Information about the web page where the event occurred.                                                                                 | [Web Page tracking](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity) |
 | `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                       |
 | `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/web-trackers/tracking-events/client-hints/index.md)                                 |
-| `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                                                          |
-| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity)                                            |
+| `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                              |
+| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity)                               |
 | `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/web-trackers/tracking-events/timings/index.md)                            |

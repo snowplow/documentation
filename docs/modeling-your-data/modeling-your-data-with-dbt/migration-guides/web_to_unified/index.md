@@ -1,7 +1,9 @@
 ---
-title: "Migrating from Web to Unified Digital"
+title: "Migrate from Web to Unified Digital"
 sidebar_label: "Web to Unified Digital"
 sidebar_position: 1000
+description: "Migration guide for transitioning from the legacy Snowplow Web dbt package to the Unified Digital package."
+keywords: ["web to unified migration", "package transition", "unified digital upgrade"]
 ---
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';

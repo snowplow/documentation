@@ -1,8 +1,10 @@
 ---
 title: "Timestamps"
-description: ""
+sidebar_label: "Timestamps"
+description: "Understanding Snowplow event timestamps from creation through the pipeline, including derived timestamp calculation and usage recommendations."
 date: "2025-05-15"
 sidebar_position: 400
+keywords: ["timestamps", "derived_tstamp", "collector_tstamp", "event time"]
 ---
 
 Snowplow events have multiple timestamps that are added as the payload moves through the pipeline. The set of timestamps is designed to account for devices with incorrectly set clocks, or delays in event sending due to network outages. All timestamps are converted to UTC for consistency across events.

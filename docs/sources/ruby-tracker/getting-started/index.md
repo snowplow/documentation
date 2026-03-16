@@ -1,8 +1,10 @@
 ---
-title: "Getting started with the Ruby tracker"
+title: "Get started with the Ruby tracker"
 sidebar_label: "Getting started"
 date: "2021-10-15"
 sidebar_position: 0
+description: "Install the Ruby tracker gem, initialize trackers with emitters, configure subject properties, and implement singleton pattern for Ruby and Rails apps."
+keywords: ["ruby tracker setup", "gem installation", "singleton pattern"]
 ---
 
 ```mdx-code-block
@@ -34,7 +36,7 @@ The Ruby tracker version 0.7.0 had some breaking changes, notably the addition o
 
 ## Tracking design and initialization
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).
 
 We suggest implementing the Ruby tracker as a Singleton global object. This pattern is demonstrated in our [Ruby on Rails example app](https://github.com/snowplow-industry-solutions/snowplow-ruby-tracker-examples). Structuring your code in this way avoids wasting bandwidth or processing on reinitializing Trackers and Emitters for every page load or event sent.
 

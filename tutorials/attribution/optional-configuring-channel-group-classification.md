@@ -2,6 +2,8 @@
 title: "Optional: Configure custom channel group classifications"
 sidebar_label: "Optional: customize channel groups"
 position: 6
+description: "Customize channel grouping for attribution analysis by overriding dbt macros in the Unified or Attribution package. Define custom channel classifications to match your marketing taxonomy."
+keywords: ["channel grouping attribution", "dbt macro customization", "marketing channel classification", "attribution channel groups"]
 ---
 
 By default, the Attribution Package uses the channel grouping set within the Unified Package. It is recommended to set the channel grouping within the Unified Package, so you have matching channel groups across both packages.

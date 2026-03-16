@@ -1,6 +1,9 @@
 ---
-title: "Scala tracker"
+title: "Scala tracker SDK"
+sidebar_label: "Scala tracker"
 sidebar_position: 210
+description: "Track events in Scala applications and servers with subjects, emitters, and async event sending using the Snowplow Scala tracker SDK."
+keywords: ["scala tracker", "scala analytics", "server-side scala"]
 ---
 
 ```mdx-code-block

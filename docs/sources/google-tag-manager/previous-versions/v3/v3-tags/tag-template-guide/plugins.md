@@ -1,12 +1,15 @@
 ---
-title: "Using Plugins"
+title: "Using plugins"
+sidebar_label: "Using plugins"
 date: "2023-12-20"
 sidebar_position: 200
+description: "Load external and inline JavaScript tracker plugins in Snowplow v3 GTM tags to extend tracking functionality. Configure plugin URLs, constructors, and custom configurations for v3 tracker implementations."
+keywords: ["v3 plugins", "gtm v3 plugins", "tracker plugins v3", "external plugins", "inline plugins v3"]
 ---
 
 [Plugins](/docs/sources/web-trackers/plugins/index.md) provide an easy way to distribute custom behavior for the tracker.
 Each Plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
-A Plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
+A Plugin may add new methods to the tracker that can be called via [Custom Commands](../index.md#custom-commands).
 
 ![The Load Plugins table opened with one external plugin configured.](images/load_plugins.png)
 

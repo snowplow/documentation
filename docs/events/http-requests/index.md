@@ -2,6 +2,8 @@
 title: "Example tracker HTTP request headers"
 sidebar_label: "Example HTTP requests"
 sidebar_position: 450
+description: "Reference examples of HTTP requests to the Snowplow Collector using the Tracker Protocol with JSON payloads."
+keywords: ["Tracker Protocol", "HTTP requests", "Collector", "tracker implementation"]
 ---
 
 This page gives examples of requests to the Snowplow [Collector](/docs/pipeline/collector/index.md). This is a reference **for those who plan to implement their own tracker**, or want to understand the requests being sent by existing Snowplow trackers.

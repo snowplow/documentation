@@ -2,6 +2,8 @@
 position: 1
 title: "Learn how to track events on Android"
 sidebar_label: "Installation and setup"
+description: "Set up the Snowplow Android tracker in your Jetpack Compose app using Kotlin. Install dependencies, initialize the tracker, and begin capturing mobile analytics events."
+keywords: ["snowplow android tracker", "jetpack compose analytics", "kotlin event tracking", "android sdk setup"]
 ---
 
 ## Requirements

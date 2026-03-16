@@ -1,7 +1,10 @@
 ---
-title: "Custom script transformations"
+title: "Custom Snowbridge script transformations"
+sidebar_label: "Custom script transformations"
 date: "2022-10-20"
 sidebar_position: 100
+description: "Create custom JavaScript Snowbridge transformations to modify data, filter messages, set partition keys, and add HTTP headers."
+keywords: ["snowbridge config", "custom scripts", "javascript transformations", "goja engine", "transform scripts"]
 ---
 
 ```mdx-code-block
@@ -140,7 +143,7 @@ The headers will only be included if the target has the [`dynamic_headers = true
 The following hash algorithms are supported:
 - `sha1` - SHA-1 hash (160 bits)
 - `sha256` - SHA-256 hash (256 bits)
-- `md5` - MD5 hash (128 bits) 
+- `md5` - MD5 hash (128 bits)
 
 ```
 hash(input.Data["app_id"], "sha1")

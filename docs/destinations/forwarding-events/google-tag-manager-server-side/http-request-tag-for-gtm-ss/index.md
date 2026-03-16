@@ -1,7 +1,10 @@
 ---
-title: "HTTP Request Tag for GTM SS"
+title: "HTTP Request Tag for GTM Server Side"
+sidebar_label: "HTTP Request Tag for GTM SS"
 date: "2022-01-06"
 sidebar_position: 700
+description: "Send Snowplow events to custom HTTP endpoints from GTM Server Side using the HTTP Request Tag with flexible request configuration and authentication options."
+keywords: ["HTTP Request Tag", "GTM SS HTTP", "custom endpoints", "API integration"]
 ---
 
 The HTTP Request Tag for GTM SS allows events to be forwarded to any JSON HTTP endpoint. This Tag works best with events from the Snowplow Client, but can also work with other GTM SS Clients such as GAv4.

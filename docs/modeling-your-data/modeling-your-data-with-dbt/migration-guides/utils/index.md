@@ -2,7 +2,19 @@
 title: "Migration guide for Utils"
 sidebar_label: "Utils"
 sidebar_position: 50
+description: "Migration guide for upgrading the Snowplow Utils dbt package including breaking changes and configuration updates."
+keywords: ["utils migration", "utils upgrade", "dbt utils version"]
 ---
+
+### Upgrading to 1.0.0
+
+- Version 1.10.6 of `dbt-core` now required
+- for a full upgrade walkthrough, please follow [official dbt guide](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v1.10)
+- Generic test arguments must be nested under arguments:
+(see dbt’s guidance on the require_generic_test_arguments_property behavior change [here](
+https://docs.getdbt.com/reference/global-configs/behavior-changes#generic-test-arguments-property))
+- Adapter dbt-redshift 1.10.0+ is required for Redshift users
+- Users unable to upgrade immediately may remain on v0.x, which receives critical bug fixes only
 
 ### Upgrading to 0.14.0
 

@@ -3,6 +3,7 @@ title: "Introduction to Snowplow entities"
 sidebar_label: "Entities (context)"
 sidebar_position: 2
 description: "Entities are a good way to deal with common fields across various events"
+keywords: ["entities", "context", "contextual data", "custom entities"]
 ---
 
 When you track an action or behavior, the information about the objects, users, and context in which the action occurred is just as important as the action itself. In Snowplow tracking, we use entities to capture this contextual data. They're reusable building blocks that make your tracking easier to implement, and your data easier to analyze.
@@ -34,7 +35,7 @@ Every Snowplow event can have entities attached to it. They can be of the same o
 
 ## How to track entities
 
-Snowplow provides a number of entities out-of-the-box. You can configure your trackers to attach certain entities automatically to all events. For example, the web trackers add a [`webPage` entity](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to all events by default.
+Snowplow provides a number of entities out-of-the-box. You can configure your trackers to attach certain entities automatically to all events. For example, the web trackers add a [`webPage` entity](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) to all events by default.
 
 Trackers add other out-of-the-box entities based on event type. For example, if you track a Snowplow media `play` event, the tracker will automatically add `media_player` and media `session` entities to it.
 
@@ -46,7 +47,7 @@ Some [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) ad
 
 Check out our [tracking plan guide](/docs/fundamentals/tracking-design-best-practice/index.md) for best practice on designing entities.
 
-Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define your own custom entities. Read more about tracking custom data [here](/docs/events/custom-events/index.md).
+Snowplow provides [tooling](/docs/event-studio/index.md) to help you define your own custom entities. Read more about tracking custom data [here](/docs/events/custom-events/index.md).
 
 ## Entities are defined by schemas
 

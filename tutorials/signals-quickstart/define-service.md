@@ -3,6 +3,7 @@ position: 3
 title: Define a Signals tutorial service
 sidebar_label: Define a service
 description: "Configure a Snowplow Signals service to group attribute groups for easy consumption in applications."
+keywords: ["signals services", "snowplow console"]
 ---
 
 [Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.

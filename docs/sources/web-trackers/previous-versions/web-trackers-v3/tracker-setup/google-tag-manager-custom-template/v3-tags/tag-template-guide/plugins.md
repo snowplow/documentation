@@ -2,11 +2,13 @@
 title: "Using Plugins"
 date: "2023-12-20"
 sidebar_position: 200
+description: "Plugin documentation for Using Plugins functionality in the tracker."
+keywords: ["plugin", "using"]
 ---
 
 [Plugins](../../../../plugins/index.md) provide an easy way to distribute custom behavior for the tracker.
 Each Plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
-A Plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
+A Plugin may add new methods to the tracker that can be called via [Custom Commands](./index.md#custom-commands).
 
 ![The Load Plugins table opened with one external plugin configured.](images/load_plugins.png)
 

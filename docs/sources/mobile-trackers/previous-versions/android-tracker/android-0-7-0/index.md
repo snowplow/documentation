@@ -2,6 +2,9 @@
 title: "Android (0.7.0)"
 date: "2020-03-02"
 sidebar_position: 940
+sidebar_label: "Android (0.7.0)"
+description: "Legacy documentation for Android Tracker version 0.7.0."
+keywords: ["android 0.7.0", "tracker"]
 ---
 
 ## 1. Overview
@@ -326,16 +329,16 @@ You may have additional information about your application's environment, curren
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`setUserId`](#311-set-user-id-withsetuserid)
-- [`setScreenResolution`](#312-set-screen-resolution-withsetscreenresolution)
-- [`setViewport`](#313-set-viewport-dimensions-withsetviewport)
-- [`setColorDepth`](#314-set-color-depth-withsetcolordepth)
-- [`setTimezone`](#315-set-timezone-withsettimezone)
-- [`setLanguage`](#316-set-the-language-withsetlanguage)
-- [`setIpAddress`](#317setipaddress)
-- [`setUseragent`](#318setuseragent)
-- [`setNetworkUserId`](#319setnetworkuserid)
-- [`setDomainUserId`](#3110setdomainuserid)
+- `setUserId`
+- `setScreenResolution`
+- `setViewport`
+- `setColorDepth`
+- `setTimezone`
+- `setLanguage`
+- `setIpAddress`
+- `setUseragent`
+- `setNetworkUserId`
+- `setDomainUserId`
 
 Here are some examples:
 
@@ -654,12 +657,12 @@ Tracking methods supported by the Android Tracker at a glance:
 
 | **Function** | \*_Description_ |
 | --- | --- |
-| [`track(ScreenView event)`](#42-track-screen-views-withtrackscreenview-event) | Track the user viewing a screen within the application |
-| [`track(PageView event)`](#43-track-pageviews-withtrackpageview) | Track and record views of web pages |
-| [`track(EcommerceTransaction event)`](#44-track-ecommerce-transactions-withtrackecommercetransaction) | Track an ecommerce transaction and its items |
-| [`track(Structured event)`](#45-track-structured-events-withtrackstructuredevent) | Track a Snowplow custom structured event |
-| [`track(SelfDescribing event)`](#46-track-selfdescribing-events-withtrackselfdescribing-event) | Track a Snowplow custom self-describing event |
-| [`track(TimingWithCategory event)`](#47-track-timing-events-withtracktiming-event) | Track a Timing with Category event |
+| `track(ScreenView event)` | Track the user viewing a screen within the application |
+| `track(PageView event)` | Track and record views of web pages |
+| `track(EcommerceTransaction event)` | Track an ecommerce transaction and its items |
+| `track(Structured event)` | Track a Snowplow custom structured event |
+| `track(SelfDescribing event)` | Track a Snowplow custom self-describing event |
+| `track(TimingWithCategory event)` | Track a Timing with Category event |
 
 #### 4.1 Common
 

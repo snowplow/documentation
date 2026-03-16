@@ -2,13 +2,15 @@
 title: "Iglu Server configuration reference"
 date: "2021-08-03"
 sidebar_position: 0
+description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
+keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON"]
 ---
 
 This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/iglu-server/tree/master/config) show how to prepare an input file.
 
 ## License
 
-Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Iglu Server, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
@@ -35,7 +37,7 @@ license {
 | `database.password` | Required. Password for connecting to Postgres. |
 | `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customise the api base url in Swagger. Helpful for when running iglu-server behind a proxy server. |
 | `debug` | Optional. Default: `false`.  Enable additional debug api endpoint to respond with all internal state. |
-| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/data-product-studio/data-structures/version-amend/amending/index.md). |
+| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/fundamentals/schemas/versioning/index.md). |
 | `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples in github](https://github.com/snowplow-incubator/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
 | `webhooks.schemaPublished.uri` | Required. URI of the HTTP server that will receive the webhook event. |
 | `webhooks.schemaPublished.vendorPrefixes` | Optional. Example: `["com", "org.acme", "org.snowplow"]`. List of schema prefixes (regexes) that should be sent via the webhook. |

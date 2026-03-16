@@ -1,8 +1,11 @@
 ---
 title: "Private Managed Cloud on GCP"
+sidebar_label: "GCP setup guide"
 date: "2020-01-30"
 sidebar_position: 30
 coverImage: "gcp_logo.png"
+description: "Set up Snowplow CDI Private Managed Cloud on GCP with project configuration, IAM roles, and service account permissions."
+keywords: ["GCP setup", "Private Managed Cloud", "Google Cloud", "IAM roles", "GCP project"]
 ---
 
 To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.
@@ -48,3 +51,5 @@ The following is a list of Organizational Policy constraints that we require to 
 - `constraints/iam.disableServiceAccountCreation`
 - `constraints/iam.disableServiceAccountKeyCreation`
 - `constraints/sql.restrictPublicIp`
+- `constraints/sql.restrictAuthorizedNetworks`
+- `constraints/sql.restrictNoncompliantResourceCreation`

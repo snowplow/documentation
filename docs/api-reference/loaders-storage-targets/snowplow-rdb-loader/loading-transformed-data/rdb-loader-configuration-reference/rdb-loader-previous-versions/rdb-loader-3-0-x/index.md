@@ -1,7 +1,10 @@
 ---
-title: "RDB Loader 3.0.x"
+title: "RDB Loader 3.0.x configuration reference"
+sidebar_label: "RDB Loader 3.0.x"
 date: "2022-05-27"
 sidebar_position: 10
+description: "Configure RDB Loader 3.0.x with Redshift and Snowflake storage settings, JDBC configuration, and loading options."
+keywords: ["rdb loader 3.0 config", "redshift 3.0 config", "snowflake 3.0 config", "jdbc settings", "loader 3.0 settings"]
 ---
 
 An example of the minimal required config for the Redshift loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.reference.hocon).

@@ -1,6 +1,8 @@
 ---
-title: "Tracking specific events with the C and C++ tracker"
+title: "Track specific events with the C++ tracker"
 sidebar_label: "Tracking specific events"
+description: "Track custom behavioral events using SelfDescribingEvent, StructuredEvent, ScreenViewEvent, and TimingEvent. Add custom context entities and true timestamps to events sent to your Snowplow collector."
+keywords: ["track events", "self-describing events", "structured events", "screen view events", "event context", "custom entities"]
 date: "2020-02-25"
 sidebar_position: 50
 ---
@@ -12,7 +14,7 @@ We provide several built-in event classes to help you track different kinds of e
 The tracker provides the following event classes for tracking events out of the box:
 
 | **Function**          | **Description**                                         |
-|-----------------------|---------------------------------------------------------|
+| --------------------- | ------------------------------------------------------- |
 | `StructuredEvent`     | Tracks a Snowplow custom structured event               |
 | `SelfDescribingEvent` | Tracks a Snowplow custom unstructured event             |
 | `ScreenViewEvent`     | Tracks the user viewing a screen within the application |
@@ -98,7 +100,7 @@ import SchemaAccess from "@site/docs/reusable/schema-access/_index.md"
 `SelfDescribingEvent` provides the following properties:
 
 | **Argument** | **Description**             | **Required?** | **Validation**     |
-|--------------|-----------------------------|---------------|--------------------|
+| ------------ | --------------------------- | ------------- | ------------------ |
 | `event`      | The properties of the event | Yes           | SelfDescribingJson |
 
 Example:
@@ -121,7 +123,7 @@ For more on JSON schema, refer to [this page](/docs/fundamentals/schemas/index.
 Use the `ScreenViewEvent` type to track a user viewing a screen (or equivalent) within your app. This is the page view equivalent for apps that are not webpages.
 
 | **Argument** | **Description**                     | **Required?** | **Type** |
-|--------------|-------------------------------------|---------------|----------|
+| ------------ | ----------------------------------- | ------------- | -------- |
 | `name`       | Human-readable name for this screen | No            | \*string |
 | `id`         | Unique identifier for this screen   | No            | \*string |
 
@@ -147,7 +149,7 @@ Use the `StructuredEvent` type to track a custom event happening in your app
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
 | **Argument** | **Description**                                                  | **Required?** | **Validation** |
-|--------------|------------------------------------------------------------------|---------------|----------------|
+| ------------ | ---------------------------------------------------------------- | ------------- | -------------- |
 | `category`   | The grouping of structured events which this `action` belongs to | Yes           | string         |
 | `action`     | Defines the type of user interaction which this event involves   | Yes           | string         |
 | `label`      | A string to provide additional dimensions to the event data      | No            | \*string       |
@@ -171,7 +173,7 @@ Use the `TimingEvent` type to track user timing events such as how long resour
 Its properties are as follows:
 
 | **Argument** | **Description**           | **Required?** | **Validation** |
-|--------------|---------------------------|---------------|----------------|
+| ------------ | ------------------------- | ------------- | -------------- |
 | `category`   | The category of the event | Yes           | \*string       |
 | `variable`   | The variable of the event | Yes           | \*string       |
 | `timing`     | The timing of the event   | Yes           | \*int64        |

@@ -148,7 +148,7 @@ import ReactMarkdown from 'react-markdown';
 ```
 
 <>{(props.lang === "javascript") && <><ReactMarkdown>{`
-The URL updating code runs in a [Tracker Callback](/docs/sources/web-trackers/tracking-events/index.md#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.`}</ReactMarkdown>
+The URL updating code runs in a [Tracker Callback](/docs/sources/web-trackers/tracking-events/#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.`}</ReactMarkdown>
 <CodeBlock language="javascript">{
 `snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){

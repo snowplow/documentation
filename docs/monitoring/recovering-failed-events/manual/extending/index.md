@@ -1,7 +1,10 @@
 ---
-title: "Extending"
+title: "Extend and customize an event recovery job"
 date: "2020-04-13"
 sidebar_position: 70
+sidebar_label: "Extending"
+description: "Add custom recovery steps, conditions, and bad row type support by extending the event recovery application."
+keywords: ["custom recovery steps", "extend event recovery"]
 ---
 
 There are several extension points for this application:

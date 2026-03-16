@@ -1,6 +1,8 @@
 ---
-title: "spEnrichedFilterUnstructEvent"
-description: "Filters messages based on a regex match against a field in a custom event."
+title: "Snowbridge spEnrichedFilterUnstructEvent transformation"
+sidebar_label: "spEnrichedFilterUnstructEvent"
+description: "Filter Snowplow enriched events based on regex matches against self-describing event fields using jsonpath notation, with Snowbridge."
+keywords: ["snowbridge config", "unstruct event filter", "custom event filter", "self-describing events", "event filtering"]
 ---
 
 ```mdx-code-block
@@ -8,11 +10,15 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::warning Deprecated
+This transformation is deprecated and can result in unexpected behavior when matching integers. Use the [`jqFilter`](/docs/api-reference/snowbridge/configuration/transformations/builtin/jqFilter.md) transformation instead, which provides more robust and flexible filtering capabilities.
+:::
+
 `spEnrichedFilterUnstructEvent`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a custom event.
 
 This transformation is for use on fields from custom events.
 
-The event name must be provided as it appears in the `event_name` field of the event (eg. `add_to_cart`). 
+The event name must be provided as it appears in the `event_name` field of the event (eg. `add_to_cart`).
 
 Optionally, a regex can be provided to match against the stringified version of the event (eg. `1-*-*`)
 

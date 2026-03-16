@@ -114,12 +114,12 @@ ruby extract_index_attributes.rb docs/collecting-data
 It will output the relevant attributes of that folder's `index.md` file, and the `index.md` files of subfolders in it (just 1 level deep), into a new file called `update_attributes_here.txt` (in the repo root). The file will look something like this:
 
 ```txt
-docs/data-product-studio/data-quality/failed-events
+docs/event-studio/data-quality/failed-events
 - title: "Managing data quality"
 - sidebar_label: "Failed events"
 - sidebar_position: 3
 
-	docs/data-product-studio/data-quality/failed-events/exploring-failed-events
+	docs/event-studio/data-quality/failed-events/exploring-failed-events
 	- title: "Exploring failed events"
 	- sidebar_label: "Explore"
 	- sidebar_position: 3

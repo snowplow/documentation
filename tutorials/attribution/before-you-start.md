@@ -2,6 +2,8 @@
 title: "Optional Attribution dbt package configuration variables"
 sidebar_label: "Before you start"
 position: 2
+description: "Review optional configuration variables for the Attribution dbt package. Customize conversion filters, path transforms, conversion windows, and reporting options to fit your marketing attribution needs."
+keywords: ["attribution dbt configuration", "dbt package variables", "marketing attribution setup", "conversion window settings"]
 ---
 
 Marketing Attribution Analysis can be done in many ways depending on your business and needs. Our aim has always been to make it flexible for users to make changes from selecting a different data source to reshaping how the customer journey to conversion will be adjusted for the analysis. We suggest taking the time to read the documentation before running the model and also readjust the configurations later on to fit your needs.

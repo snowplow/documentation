@@ -1,7 +1,10 @@
 ---
 title: "Tracking events"
+sidebar_label: "Tracking events"
 date: "2022-03-24"
 sidebar_position: 20
+description: "Track page views, screen views, and custom events with Java tracker version 0.12."
+keywords: ["event tracking v0.12", "page view tracking", "custom events"]
 ---
 
 To track an event, pass an `Event` instance to the `Tracker`.
@@ -38,8 +41,8 @@ The Java tracker provides classes for tracking different types of events. They a
 | [`Timing`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-timing-event)                                                              | ue               | unstruct                      |
 | [`PageView`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page_view                     |
 | [`Structured`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-structured-event)                                                      | se               | struct                        |
-| [`EcommerceTransaction`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\*     | tr               | transaction                   |
-| [`EcommerceTransactionItem`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction_item              |
+| [`EcommerceTransaction`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-events)\*     | tr               | transaction                   |
+| [`EcommerceTransactionItem`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-events)\* | ti               | transaction_item              |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 

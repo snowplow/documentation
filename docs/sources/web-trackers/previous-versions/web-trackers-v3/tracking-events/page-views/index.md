@@ -1,6 +1,8 @@
 ---
 title: "Page views"
 sidebar_position: 20
+description: "Documentation for Page views in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

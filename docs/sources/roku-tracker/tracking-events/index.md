@@ -3,6 +3,8 @@ title: "Tracking events with the Roku tracker"
 sidebar_label: "Tracking events"
 date: "2021-11-16"
 sidebar_position: 2000
+description: "Track self-describing events, structured events, and screen views with the Roku tracker SDK including automatic install event tracking."
+keywords: ["roku event tracking", "self-describing events", "screen view tracking"]
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
@@ -102,7 +104,7 @@ m.global.snowplow.screenView = {
 
 ## Automatic application install events
 
-When [configuring the tracker](/docs/sources/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event).
+When [configuring the tracker](/docs/sources/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events).
 
 There's no way to directly detect if the app is running as part of a fresh installation, so the tracker uses an indirect trigger.
 It will send an install event after it creates a first `userId` value for the [`client_session` entity](/docs/sources/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).

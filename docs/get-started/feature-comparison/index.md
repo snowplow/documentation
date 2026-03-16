@@ -1,8 +1,10 @@
 ---
-title: "Product features"
+title: "Product features in Snowplow CDI and Self-Hosted"
 sidebar_position: 2
 hide_table_of_contents: true
 sidebar_label: "Feature comparison"
+description: "Detailed comparison of features available in Snowplow CDI and Self-Hosted deployments."
+keywords: ["feature comparison", "CDI features", "Self-Hosted features", "product capabilities"]
 ---
 
 Here is a detailed list of product features, showing which are available as part of Snowplow [Customer Data Infrastructure](/docs/get-started/index.md#customer-data-infrastructure) (CDI) or [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted).
@@ -14,7 +16,7 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | [25+ trackers and webhooks](/docs/sources/index.md)                                                                       |   ✅   |        ✅         |
 | First party tracking                                                                                                      |   ✅   |        ✅         |
 | Anonymous data collection                                                                                                 |   ✅   |        ✅         |
-| [Cookie Extension service](/docs/events/cookie-extension/index.md)                                                        |   ✅   |        ✅         |
+| [Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md)       |   ✅   |        ✅         |
 | High availability and auto-scaling                                                                                        |   ✅   |        ❌         |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)                                                  |   ✅   |        ✅         |
 | [Failed events](/docs/fundamentals/failed-events/index.md)                                                                |   ✅   |        ✅         |
@@ -36,11 +38,11 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | • Kinesis                                                                                                                 |   ✅   |        ✅         |
 | • PubSub                                                                                                                  |   ✅   |        ✅         |
 | • Kafka / Azure Event Hubs / Confluent Cloud                                                                              |   ✅   |        ✅         |
-| <h3>Data Product Studio</h3>                                                                                              |  CDI  |   Self-Hosted    |
+| <h3>Event Studio</h3>                                                                                                     |  CDI  |   Self-Hosted    |
 | Advanced enrichments (PII, IP anonymization, JS, API, SQL enrichments)                                                    |   ✅   | ✅ (no UI or API) |
-| [Data structures tooling and API](/docs/data-product-studio/data-structures/manage/index.md)                              |   ✅   |        ❌         |
-| [Data products](/docs/data-product-studio/data-products/index.md)                                                         |   ✅   |        ❌         |
-| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)                 |   ✅   |        ❌         |
+| [Data structures tooling and API](/docs/event-studio/data-structures/index.md)                                            |   ✅   |        ❌         |
+| [Tracking plans](/docs/event-studio/tracking-plans/index.md)                                                              |   ✅   |        ❌         |
+| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/index.md)                 |   ✅   |        ❌         |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |        ❌         |
 | Failed events alerting                                                                                                    |   ✅   |        ❌         |
 | Failed events in the warehouse                                                                                            |   ✅   |        ✅         |
@@ -57,6 +59,10 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | **Ecommerce Analytics**                                                                                                   |       |                  |
 | Ecommerce Analytics                                                                                                       |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) |   ✅   |        ❌         |
+| <h3>Signals</h3>                                                                                                          |  CDI  |   Self-Hosted    |
+| [Real-time personalization engine](/docs/signals/index.md)                                                                |   ✅   |        ❌         |
+| Profiles Store                                                                                                            |   ✅   |        ❌         |
+| Interventions                                                                                                             |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |
 | Audience Hub, powered by Census                                                                                           |   ✅   |        ❌         |

@@ -1,6 +1,8 @@
 ---
 title: "Tracking Events"
 sidebar_position: 2000
+description: "Documentation for tracking Tracking Events with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block
@@ -347,7 +349,7 @@ The event property is a [self-describing JSON](http://snowplowanalytics.com/blo
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 

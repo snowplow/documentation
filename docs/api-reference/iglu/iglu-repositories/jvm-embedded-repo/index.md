@@ -1,7 +1,10 @@
 ---
-title: "JVM Embedded Repo"
+title: "JVM-embedded Iglu repository for applications"
+sidebar_label: "JVM-embedded repo"
 date: "2021-03-26"
 sidebar_position: 5000
+description: "Embed JSON schemas in Java or Scala application resources for bootstrap schema resolution without remote dependencies."
+keywords: ["jvm embedded repo", "java schema repository", "scala embedded schemas"]
 ---
 
 A JVM-embedded repo is an Iglu repository **embedded** inside a Java or Scala application, typically alongside the [Scala client](/docs/api-reference/analytics-sdk/analytics-sdk-scala/index.md).

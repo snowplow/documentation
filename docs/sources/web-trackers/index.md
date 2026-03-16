@@ -1,5 +1,8 @@
 ---
-title: "Web trackers"
+title: "Web tracker SDKs"
+sidebar_label: "Web trackers"
+description: "Track user behavior on websites using the JavaScript tracker or Browser tracker with flexible plugins and tracking methods."
+keywords: ["javascript tracker", "browser tracker", "web tracking", "npm package"]
 date: "2021-03-24"
 sidebar_position: 100
 ---
@@ -19,4 +22,4 @@ The **Browser tracker** is available via `npm` (`@snowplow/browser-tracker`) and
 
 As the API is similar, we have combined the documentation for both trackers. We've marked the sections which are only relevant to one tracker or another.
 
-<p>The JavaScript and Browser tracker, along with the <a href="/docs/sources/node-js-tracker/index.md">Node.js</a> tracker, are part of <a href="https://github.com/snowplow/snowplow-javascript-tracker">one monorepo</a>. The current version is {versions.javaScriptTracker}.</p>
+The JavaScript and Browser tracker, along with the [Node.js](/docs/sources/node-js-tracker/index.md) tracker, are part of [one monorepo](https://github.com/snowplow/snowplow-javascript-tracker). <p>The current version is {versions.javaScriptTracker}.</p>

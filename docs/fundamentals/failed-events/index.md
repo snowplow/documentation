@@ -3,6 +3,7 @@ title: "Introduction to failed events"
 sidebar_label: "Failed events"
 sidebar_position: 5
 description: "Failed events represent data that did not pass validation or otherwise failed to be processed"
+keywords: ["failed events", "validation errors", "enrichment failures", "bad data", "invalid event"]
 ---
 
 _Failed events_ is an umbrella term for events that the pipeline had some problem processing.
@@ -23,7 +24,7 @@ Failed events are **not** written to your `atomic` events table, which only cont
 
 The two most common types of failed events are:
 
-* **Validation failures**. These errors occur when an [event](/docs/fundamentals/events/index.md) or an [entity](/docs/fundamentals/entities/index.md) does not match its [schema](/docs/fundamentals/schemas/index.md). The reason usually is incorrect tracking code. For example, if you have a schema with a property defined as an `enum` accepting values `a`, `b`, and `c`, but the incoming event which references that schema includes the property with a value of `d`, that will be a `ValidationError`. The error's description will include that information -- e.g. `$property does not match enum list`. Validation can also fail if the schema is not available, such as when you forgot to add it to the production schema registry before putting the tracking code live. The pipeline will first search for a schema in the associated [Iglu](https://docs.snowplow.io/docs/fundamentals/schemas/#iglu) repository, and if it cannot find it, it will search in [Iglu Central](http://iglucentral.com), the public repository of self-describing schemas available to everyone. If the schema is not found in either location, the event will be labeled as a `ResolutionError`.
+* **Validation failures**. These errors occur when an [event](/docs/fundamentals/events/index.md) or an [entity](/docs/fundamentals/entities/index.md) does not match its [schema](/docs/fundamentals/schemas/index.md). The reason usually is incorrect tracking code. For example, if you have a schema with a property defined as an `enum` accepting values `a`, `b`, and `c`, but the incoming event which references that schema includes the property with a value of `d`, that will be a `ValidationError`. The error's description will include that information -- e.g. `$property does not match enum list`. Validation can also fail if the schema is not available, such as when you forgot to add it to the production schema registry before putting the tracking code live. The pipeline will first search for a schema in the associated [Iglu](/docs/fundamentals/schemas/index.md#iglu-schema-repository) repository, and if it cannot find it, it will search in [Iglu Central](https://iglucentral.com), the public repository of self-describing schemas available to everyone. If the schema is not found in either location, the event will be labeled as a `ResolutionError`.
 
 * **Enrichment failures**. These can be due to an [API enrichment](/docs/pipeline/enrichments/available-enrichments/custom-api-request-enrichment/index.md) reaching out to an external API that’s down. Another cause is a failure in the custom code in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md).
 

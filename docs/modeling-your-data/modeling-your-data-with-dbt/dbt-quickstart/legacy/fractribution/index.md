@@ -2,6 +2,8 @@
 sidebar_label: "Fractribution"
 sidebar_position: 900
 title: "Fractribution Quickstart"
+description: "Quick start guide for the legacy Snowplow Fractribution dbt package for marketing attribution modeling."
+keywords: ["fractribution quickstart", "legacy attribution", "fractribution setup"]
 ---
 
 ```mdx-code-block
@@ -133,7 +135,7 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 ```
 ### 4. Run the model
 
-Execute the following either through your CLI, within dbt Cloud, or within [Snowplow Console](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)
+Execute the following either through your CLI, within dbt Cloud, or within [Snowplow Console](/docs/modeling-your-data/running-data-models-via-console/index.md)
 
 ```yml
 dbt run --select snowplow_fractribution

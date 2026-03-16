@@ -1,11 +1,14 @@
 ---
-title: "Daily Aggregate Model"
+title: "Daily aggregate model"
+sidebar_label: "Daily aggregate model"
+description: "Build daily aggregate tables in Snowplow dbt packages by scanning derived tables with date range filters for accurate aggregations."
+keywords: ["daily aggregates", "aggregate model", "daily reporting", "dbt aggregations"]
 sidebar_position: 20
 ---
 
 Because of the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of our packages, all of the [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) tables contain events (or a higher level) for only the sessions being processed in that run. For this reason, it is not possible to build daily aggregate tables directly off of any this run tables.
 
-To better understand why, consider a late arriving event for a session that started 2 days ago; because we would reprocess all events for this session our sessions this run table would contain a record for that session with a start date 2 days ago, but all other sessions for that day would already have been processed and would **not** be in this table. If you try to get a count of sessions, you'll report that there was only 1 session that day. You could try to be clever with incremental additions, but this session may have already been partially processed so may or may not have already been counted. 
+To better understand why, consider a late arriving event for a session that started 2 days ago; because we would reprocess all events for this session our sessions this run table would contain a record for that session with a start date 2 days ago, but all other sessions for that day would already have been processed and would **not** be in this table. If you try to get a count of sessions, you'll report that there was only 1 session that day. You could try to be clever with incremental additions, but this session may have already been partially processed so may or may not have already been counted.
 
 The only way to accurately do daily aggregates in our packages is to calculate these off the *derived tables*, i.e. the persistent tables in the package. This would be inefficient to scan the whole table every time, so we can be smart and use the _range of dates_ in the [events this run table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) to identify which dates we need to rescan, thus reducing the compute cost.
 
@@ -52,7 +55,7 @@ group by 1
 
 :::tip
 
-Notice that we are filtering on the `start_tstamp` column from the sessions table, because this is the partition/sort key for that table. Make sure you used the right column for the derived table you are querying. 
+Notice that we are filtering on the `start_tstamp` column from the sessions table, because this is the partition/sort key for that table. Make sure you used the right column for the derived table you are querying.
 
 :::
 

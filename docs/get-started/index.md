@@ -3,6 +3,7 @@ title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
 description: "Details on where and how Snowplow is deployed"
+keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud", "Community Edition", "Self-Hosted"]
 ---
 
 Choose the [Snowplow](https://snowplow.io) platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
@@ -19,7 +20,7 @@ For self-hosted deployments, we have:
 
 Snowplow CDI is our full infrastructure offering. Choose whether you'd like the **data plane** to be entirely hosted in your cloud account, or whether you'd prefer Snowplow to host the pipeline infrastructure for you.
 
-The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is always hosted by Snowplow.
+The **control plane**, which includes a UI and an API for [defining your data](/docs/event-studio/tracking-plans/index.md) and managing your infrastructure, is always hosted by Snowplow.
 
 ### CDI Private Managed Cloud
 
@@ -57,7 +58,7 @@ With Self-Hosted, you deploy and host everything. Many features, including the *
 
 Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases. It's a starter template: use it to evaluate Snowplow for testing purposes.
 
-Community Edition infrastructure is provided under the [SLULA license](/docs/resources/copyright-license/index.md).
+Community Edition infrastructure is provided under the [SLULA license](/docs/licensing/index.md).
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |

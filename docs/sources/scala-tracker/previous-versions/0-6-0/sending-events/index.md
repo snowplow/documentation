@@ -1,7 +1,10 @@
 ---
 title: "Sending events"
+sidebar_label: "Sending events"
 date: "2020-10-28"
 sidebar_position: 3000
+description: "Track self-describing events, structured events, page views, errors, and ecommerce transactions in Scala tracker 0.6.0 with circe JSON and SchemaKey."
+keywords: ["scala 0.6 events", "self-describing events", "circe json"]
 ---
 
 ### Additional type safety

@@ -1,8 +1,10 @@
 ---
-title: "Initialization and configuration for the Rust tracker"
+title: "Initialize and configure the Rust tracker"
 sidebar_label: "Initialization and configuration"
 date: "2022-10-24"
 sidebar_position: 2000
+description: "Configure Rust tracker with subject information, event store, HTTP client, batch emitter, and retry policies for async event delivery."
+keywords: ["rust tracker configuration", "batch emitter", "retry policy"]
 ---
 
 The `Snowplow` module provides a single method to initialize and configure a new tracker, the `Snowplow::create_tracker` method. It accepts configuration parameters for the tracker and returns a `Tracker` instance.

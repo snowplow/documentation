@@ -3,6 +3,7 @@ title: "Running your first data models"
 sidebar_position: 7
 sidebar_label: "Run a data model"
 description: "Using a data model to aggregate your data"
+keywords: ["data modeling", "dbt", "Unified Digital model", "data aggregation"]
 ---
 
 ```mdx-code-block

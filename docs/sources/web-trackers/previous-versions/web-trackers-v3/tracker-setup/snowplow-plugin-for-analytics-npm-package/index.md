@@ -2,6 +2,8 @@
 title: "Snowplow Plugin for getanalytics.io"
 date: "2020-08-10"
 sidebar_position: 4000
+description: "Plugin documentation for Snowplow Plugin for getanalytics.io functionality in the tracker."
+keywords: ["plugin", "snowplow"]
 ---
 
 The Snowplow JavaScript tracker can now be deployed directly into your web and node applications using the `analytics` and `@analytics/snowplow` NPM packages.

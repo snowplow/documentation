@@ -1,7 +1,10 @@
 ---
 title: "Tracking specific client-side properties"
+sidebar_label: "Tracking specific client-side properties"
 date: "2022-08-30"
 sidebar_position: 23
+description: "Configure subject properties in React Native tracker v2 including user ID, IP address, timezone, language, and screen resolution at initialization or runtime."
+keywords: ["react native tracker v2 subject", "user properties", "client-side properties"]
 ---
 
 ```mdx-code-block
@@ -80,7 +83,7 @@ const tracker = createTracker(
 );
 ```
 
-See the the full [list of options in the configuration section](/docs/sources/react-native-tracker/index.md#subjectconfiguration).
+See the the full [list of options in the configuration section](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/introduction/index.md#configuring-the-tracker).
 
 ### Setting the subject data in a tracker instance
 

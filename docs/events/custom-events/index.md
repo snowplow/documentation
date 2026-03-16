@@ -2,6 +2,8 @@
 title: "How to track custom events and entities"
 sidebar_label: "Custom data"
 sidebar_position: 1
+description: "Track custom self-describing events and entities with JSON schemas for flexible data collection."
+keywords: ["custom events", "self-describing events", "entities", "structured events", "JSON schemas"]
 ---
 
 Snowplow includes three ways to customize tracking:
@@ -78,7 +80,7 @@ See the documentation for each tracker to learn how to configure it:
 * [React Native](/docs/sources/react-native-tracker/index.md)
 * [Scala](/docs/sources/scala-tracker/initialization/index.md)
 
-Use [source applications](/docs/data-product-studio/source-applications/index.md) to document your expected application entities.
+Use [source applications](/docs/event-studio/source-applications/index.md) to document your expected application entities.
 
 ## Structured events
 

@@ -1,7 +1,10 @@
 ---
 title: "Subject methods"
+sidebar_label: "Subject methods"
 date: "2020-12-02"
 sidebar_position: 30
+description: "Configure subject properties in Scala tracker 1.0.0 including platform, user ID, screen resolution, viewport, timezone, and domain user ID."
+keywords: ["scala 1.0 subject", "subject configuration", "user properties"]
 ---
 
 A list of the methods used to add data to the Subject class.

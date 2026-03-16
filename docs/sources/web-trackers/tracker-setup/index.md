@@ -1,6 +1,8 @@
 ---
-title: "Setting up the web trackers"
+title: "Set up the web trackers"
 sidebar_label: "Tracker setup"
+description: "Install and initialize the JavaScript or Browser tracker with customizable configuration options."
+keywords: ["tracker setup", "initialization", "newtracker", "sp.js", "npm package"]
 date: "2021-03-31"
 sidebar_position: 1000
 ---
@@ -9,7 +11,6 @@ sidebar_position: 1000
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
-import DocCardList from '@theme/DocCardList';
 ```
 
 <ReleaseBadge/>
@@ -19,8 +20,12 @@ import DocCardList from '@theme/DocCardList';
 
 There are two distributions of the JavaScript Tracker:
 
-- `sp.js` is fully featured and is bundled with the majority of the available plugins.
-- `sp.lite.js` is a smaller distribution with no bundled plugins. Included is Page View, Self Describing and Structured Event tracking as well as Activity Tracking and Anonymous Tracking. All other features can be loaded as separate [plugins](/docs/sources/web-trackers/plugins/index.md).
+| Distribution | Size (minified + gzipped) | Default distribution | Best for                                                 | Plugins included? |
+| ------------ | ------------------------- | -------------------- | -------------------------------------------------------- | ----------------- |
+| `sp.js`      | ~25 KB                    | ✅                    | Quick start with the a range of common tracking features | ✅                 |
+| `sp.lite.js` | ~18 KB                    | ❌                    | Smaller file size and core tracking only                 | ❌                 |
+
+The `sp.js` distribution doesn't include all available plugins. See the [plugins](/docs/sources/web-trackers/plugins/index.md) page for full details on which are included.
 
 ```mdx-code-block
 import LoadWithTag from "@site/docs/reusable/javascript-tracker-load-with-tag/_index.md"
@@ -49,8 +54,8 @@ import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', { 
-  appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
   plugins: [ ],
 });
 ```
@@ -63,5 +68,3 @@ trackPageView();
 
   </TabItem>
 </Tabs>
-
-<DocCardList/>

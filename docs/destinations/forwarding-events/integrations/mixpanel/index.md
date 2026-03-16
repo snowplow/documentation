@@ -1,5 +1,5 @@
 ---
-title: "Mixpanel"
+title: "Forward events to Mixpanel"
 description: "Send Snowplow events to Mixpanel for product analytics and user behavior insights using the Import API with support for event tracking and custom properties."
 sidebar_position: 3
 keywords: ["mixpanel", "event forwarding", "product analytics", "user tracking"]

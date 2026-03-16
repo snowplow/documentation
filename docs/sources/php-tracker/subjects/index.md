@@ -1,7 +1,10 @@
 ---
-title: "Subjects"
+title: "Track subject data with the PHP tracker"
+sidebar_label: "Subjects"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Add user and environment data to tracked events using the Subject class with platform, user ID, and device properties."
+keywords: ["php subject", "user properties", "environment data"]
 ---
 
 The Subject object lets you send any additional information about your application's environment, current user, etc to Snowplow.

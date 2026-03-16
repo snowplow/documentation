@@ -1,7 +1,10 @@
 ---
-title: "Snowflake loader"
+title: "Load into Snowflake using the RDB Loader"
+sidebar_label: "Into Snowflake"
 date: "2022-04-05"
 sidebar_position: 20
+description: "Load wide row JSON data into Snowflake on AWS, GCP, or Azure with TempCreds or NoCreds authentication methods."
+keywords: ["snowflake loader", "snowflake rdb", "wide row json", "snowflake copy", "snowflake stage"]
 ---
 
 ```mdx-code-block

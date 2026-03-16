@@ -1,21 +1,23 @@
 ---
-title: "Session tracking with the .NET tracker"
+title: "Track session data with the .NET tracker"
 sidebar_label: "Session"
 date: "2020-02-26"
 sidebar_position: 60
+description: "Track user sessions with persistent session data including session ID, index, and timeout configuration for .NET applications."
+keywords: [".net session tracking", "client session", "session management"]
 ---
 
 The Session object is responsible for maintaining persistent data around user sessions over the life-time of an application.
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `savePath` | The path to save persistent data into | Yes | Null |
-| `foregroundTimeout` | The time until a session expires in focus | No | 600 (s) |
-| `backgroundTimeout` | The time until a session expires in back | No | 300 (s) |
-| `checkInterval` | How often to validate the session timeout | No | 15 (s) |
-| `logger` | The logger to use within the application | No | Null |
+| **Argument Name**   | **Description**                           | **Required?** | **Default** |
+| ------------------- | ----------------------------------------- | ------------- | ----------- |
+| `savePath`          | The path to save persistent data into     | Yes           | Null        |
+| `foregroundTimeout` | The time until a session expires in focus | No            | 600 (s)     |
+| `backgroundTimeout` | The time until a session expires in back  | No            | 300 (s)     |
+| `checkInterval`     | How often to validate the session timeout | No            | 15 (s)      |
+| `logger`            | The logger to use within the application  | No            | Null        |
 
 A full ClientSession construction should look like the following:
 

@@ -1,40 +1,42 @@
 ---
-title: "Tracking specific events with the Python tracker"
-sidebar_label: "Event Tracking"
+title: "Track specific events with the Python tracker"
+sidebar_label: "Event tracking"
 sidebar_position: 50
+description: "Track page views, screen views, structured events, and custom self-describing events with the Python tracker using Event classes and custom context."
+keywords: ["python event tracking", "page view tracking", "self-describing events"]
 ---
 
-The Python tracker makes it simple to track a selection of out-of-the-box events as well as the ability to define your own custom events. 
+The Python tracker makes it simple to track a selection of out-of-the-box events as well as the ability to define your own custom events.
 
 To track an event, simply pass the `Event` object to the `tracker.track()` method. For example, tracking a page view:
 
-```python 
+```python
 page_view = PageView(
   page_url="https://www.snowplow.io",
   page_title="Homepage",
 )
-tracker.track(page_view) 
+tracker.track(page_view)
 ```
 
 Every tracked event payload has a unique event_id UUID string (`eid`). Other properties include the name_tracker (`namespace`) and `app_id` set when the Tracker was initialized. From version 1 onwards, `tracker.track()` returns the payload's `eid`.
 
-Snowplow events have a defined structure and protocol that is identical regardless of the tracker used. Further information on this structure can be found [here](/docs/events/index.md). 
+Snowplow events have a defined structure and protocol that is identical regardless of the tracker used. Further information on this structure can be found [here](/docs/events/index.md).
 
 The Python tracker [Github repository](https://github.com/snowplow/snowplow-python-tracker) includes 3 example apps demonstrating different ways to send events to your collector.
 
 ## Event Tracking
 The Python tracker provides classes for tracking different types of events. They are listed below:
 
-| **Event** | **Description** |
-| --- | --- |
-| `SelfDescribing` | Track custom events with custom schemas |
-| `PageView` | Track views of web pages |
-| `PagePing` | Track engagement on web pages over time |
-| `ScreenView` | Track views of a screen (non-web e.g. in-app) |
-| `StructuredEvent` | Track custom events without schemas |
+| **Event**         | **Description**                               |
+| ----------------- | --------------------------------------------- |
+| `SelfDescribing`  | Track custom events with custom schemas       |
+| `PageView`        | Track views of web pages                      |
+| `PagePing`        | Track engagement on web pages over time       |
+| `ScreenView`      | Track views of a screen (non-web e.g. in-app) |
+| `StructuredEvent` | Track custom events without schemas           |
 
 ## Creating a custom event (`SelfDescribing`)
-To track data using a `SelfDescribing` event, the data must be structured as a `SelfDescribingJson` object. These require two fields, a URI for a self-describing JSON schema and the data in the form of a `PayloadDict`. The data must be valid against the schema. 
+To track data using a `SelfDescribing` event, the data must be structured as a `SelfDescribingJson` object. These require two fields, a URI for a self-describing JSON schema and the data in the form of a `PayloadDict`. The data must be valid against the schema.
 
 A simple initialization for a link click event looks like this:
 
@@ -49,16 +51,16 @@ tracker.track(link_click)
 ```
 
 ## Creating a `PageView` Event
-Track views of a web page with the `PageView` event. 
+Track views of a web page with the `PageView` event.
 
-| **Property** | **Description** | **Type** | **Required?** |
-| --- | --- | --- | --- |
-| `page_url` | URL of the viewed page | `string` | Yes |
-| `page_title` | Title of the viewed page | `string` | No |
-| `referrer` | The address which linked to the page | `string` | No |
-| `event_subject` | The subject for the event | `Subject` | No |
-| `context` | Custom context for the event | `List(SelfDescribingJson)` | No |
-| `true_timestamp` | When the page view occurred | `int or float` | No |
+| **Property**     | **Description**                      | **Type**                   | **Required?** |
+| ---------------- | ------------------------------------ | -------------------------- | ------------- |
+| `page_url`       | URL of the viewed page               | `string`                   | Yes           |
+| `page_title`     | Title of the viewed page             | `string`                   | No            |
+| `referrer`       | The address which linked to the page | `string`                   | No            |
+| `event_subject`  | The subject for the event            | `Subject`                  | No            |
+| `context`        | Custom context for the event         | `List(SelfDescribingJson)` | No            |
+| `true_timestamp` | When the page view occurred          | `int or float`             | No            |
 
 Example:
 
@@ -73,18 +75,18 @@ tracker.track(page_view)
 ## Creating a `PagePing` Event
 Track engagement with a web page over time, via a `PagePing` event. Each ping represents a single heartbeat.
 
-| **Property** | **Description** | **Type** | **Required?** |
-| --- | --- | --- | --- |
-| `page_url` | URL of the viewed page | `string` | Yes |
-| `page_title` | Title of the viewed page | `string` | No |
-| `referrer` | The address which linked to the page | `string` | No |
-| `min_x` | Minimum page x offset seen in the last ping period | `int` | No |
-| `max_x` | Maximum page x offset seen in the last ping period | `int` | No |
-| `min_y` | Minimum page y offset seen in the last ping period | `int` | No |
-| `max_y` | Maximum page y offset seen in the last ping period | `int` | No |
-| `event_subject` | The subject for the event | `Subject` | No |
-| `context` | Custom context for the event | `List(SelfDescribingJson)` | No |
-| `true_timestamp` | When the page ping occurred | `int or float` | No |
+| **Property**     | **Description**                                    | **Type**                   | **Required?** |
+| ---------------- | -------------------------------------------------- | -------------------------- | ------------- |
+| `page_url`       | URL of the viewed page                             | `string`                   | Yes           |
+| `page_title`     | Title of the viewed page                           | `string`                   | No            |
+| `referrer`       | The address which linked to the page               | `string`                   | No            |
+| `min_x`          | Minimum page x offset seen in the last ping period | `int`                      | No            |
+| `max_x`          | Maximum page x offset seen in the last ping period | `int`                      | No            |
+| `min_y`          | Minimum page y offset seen in the last ping period | `int`                      | No            |
+| `max_y`          | Maximum page y offset seen in the last ping period | `int`                      | No            |
+| `event_subject`  | The subject for the event                          | `Subject`                  | No            |
+| `context`        | Custom context for the event                       | `List(SelfDescribingJson)` | No            |
+| `true_timestamp` | When the page ping occurred                        | `int or float`             | No            |
 
 Example:
 ```python
@@ -100,29 +102,29 @@ tracker.track(page_ping)
 
 Use the `ScreenView` to track a user viewing a screen (or equivalent) within your app.
 
-| **Property** | **Description** | **Type** | **Required?** |
-| --- | --- | --- | --- |
-| `id_` | Unique identifier for this screen (UUID) | `string` | No |
-| `name` | Human-readable name for this screen | `Non-empty string` | No |
-| `type`|The type of screen that was viewed e.g feed / carousel.| `string` | No |
-| `previous_name` | The name of the previous screenview. | `string` | No |
-| `previous_id` | The id of the previous screenview. | `string` | No |
-| `previous_type` | The type of the previous screenview. | `string` | No |
-| `transition_type` | The type of transition that led to the screen being viewed. | `string` | No |
-| `event_subject` | The subject for the event | `Subject` | No |
-| `context` | Custom context for the event | `List(SelfDescribingJson)` | No |
-| `true_timestamp` | When the screen was viewed | `int or float` | No |
+| **Property**      | **Description**                                             | **Type**                   | **Required?** |
+| ----------------- | ----------------------------------------------------------- | -------------------------- | ------------- |
+| `id_`             | Unique identifier for this screen (UUID)                    | `string`                   | No            |
+| `name`            | Human-readable name for this screen                         | `Non-empty string`         | No            |
+| `type`            | The type of screen that was viewed e.g feed / carousel.     | `string`                   | No            |
+| `previous_name`   | The name of the previous screenview.                        | `string`                   | No            |
+| `previous_id`     | The id of the previous screenview.                          | `string`                   | No            |
+| `previous_type`   | The type of the previous screenview.                        | `string`                   | No            |
+| `transition_type` | The type of transition that led to the screen being viewed. | `string`                   | No            |
+| `event_subject`   | The subject for the event                                   | `Subject`                  | No            |
+| `context`         | Custom context for the event                                | `List(SelfDescribingJson)` | No            |
+| `true_timestamp`  | When the screen was viewed                                  | `int or float`             | No            |
 
 Example:
 
 ```python
 id = tracker.get_uuid()
 screen_view = ScreenView(
-  id_=id, 
+  id_=id,
   name="name",
   type="feed",
-  previous_name="Home Page", 
-  previous_id="1368725287000", 
+  previous_name="Home Page",
+  previous_id="1368725287000",
   previous_type="feed"
 )
 tracker.track(screen_view)
@@ -130,16 +132,16 @@ tracker.track(screen_view)
 ## Creating a `StructuredEvent`
 Use `StructuredEvent` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Property** | **Description** | **Type** | **Required?** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | `Non-empty string` | Yes |
-| `action` | Defines the type of user interaction which this event involves | `Non-empty string` | Yes |
-| `label` | A string to provide additional dimensions to the event data | `string` | No |
-| `property` | A string describing the object or the action performed on it | `string` | No |
-| `value` | A value to provide numerical data about the event | `int or float` | No |
-| `event_subject` | The subject for the event | `Subject` | No |
-| `context` | Custom context for the event | `List(SelfDescribingJson)` | No |
-| `true_timestamp` | When the structured event occurred | `int or float` | No |
+| **Property**     | **Description**                                                  | **Type**                   | **Required?** |
+| ---------------- | ---------------------------------------------------------------- | -------------------------- | ------------- |
+| `category`       | The grouping of structured events which this `action` belongs to | `Non-empty string`         | Yes           |
+| `action`         | Defines the type of user interaction which this event involves   | `Non-empty string`         | Yes           |
+| `label`          | A string to provide additional dimensions to the event data      | `string`                   | No            |
+| `property`       | A string describing the object or the action performed on it     | `string`                   | No            |
+| `value`          | A value to provide numerical data about the event                | `int or float`             | No            |
+| `event_subject`  | The subject for the event                                        | `Subject`                  | No            |
+| `context`        | Custom context for the event                                     | `List(SelfDescribingJson)` | No            |
+| `true_timestamp` | When the structured event occurred                               | `int or float`             | No            |
 
 Example:
 
@@ -162,9 +164,9 @@ All events are tracked with specific event classes on the tracker instance, of t
 - `context`
 - `true_timestamp`
 
-### Event subject 
+### Event subject
 
-It is possible to set the Subject per-event, in order to augment the event with extra information without having to change the Subject at the Tracker level. This provides a thread safe way to track multiple subjects. 
+It is possible to set the Subject per-event, in order to augment the event with extra information without having to change the Subject at the Tracker level. This provides a thread safe way to track multiple subjects.
 
 Event level subjects are combined with any tracker subjects that have been initialized, with the event subject taking priority over tracker subject parameters.
 
@@ -182,7 +184,7 @@ page_view = PageView(
 tracker.track(page_view)
 ```
 
-More detail on the `Subject` class can be found [here](/docs/sources/python-tracker/subject/index.md). 
+More detail on the `Subject` class can be found [here](/docs/sources/python-tracker/subject/index.md).
 
 ### Custom context
 

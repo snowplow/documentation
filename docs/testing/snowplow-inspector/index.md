@@ -1,7 +1,9 @@
 ---
-title: "Snowplow Inspector browser extension"
+title: "Debug web tracking with the Snowplow Inspector browser extension"
 sidebar_position: 1
-description: "Snowplow Inspector is a useful tool for debugging Snowplow events on web-pages and more"
+sidebar_label: "Snowplow Inspector"
+description: "Validate and debug Snowplow web tracking using the Inspector browser extension. View events, attributes, and interventions in real-time with schema validation support for Chrome, Edge, and Firefox."
+keywords: ["snowplow inspector", "browser extension", "event debugging", "web tracking validation", "chrome extension"]
 ---
 
 ```mdx-code-block
@@ -46,11 +48,11 @@ The **Events** tab shows the usual event debugging functionality. The inspector 
 
 In the example below, events fired as HTTP POST requests from the Snowplow homepage:
 
-- An automatic [self-describing](/docs/fundamentals/events/index.md#self-describing-events) [`web_vitals`](/docs/events/ootb-data/app-performance/index.md#web-vitals-events) event.
+- An automatic [self-describing](/docs/fundamentals/events/index.md#self-describing-events) [`web_vitals`](/docs/events/ootb-data/app-performance/index.md#web-vitals) event.
 - A [`page_view`](/docs/fundamentals/canonical-event/index.md#page-views) event.
 - A second `page_view` event from an embedded iframe on the page. It has a blue dot because its App ID and Collector combination are distinct from the other events, which have red dots because they share an App ID/Collector.
 - A self-describing [`link_click`](/docs/sources/web-trackers/tracking-events/link-click/index.md) event.
-- Two [`page_ping`](/docs/events/ootb-data/page-activity-tracking/index.md#on-web-using-page-ping-events) events.
+- Two [`page_ping`](/docs/events/ootb-data/page-activity-tracking/index.md#page-engagement) events.
 
 ![A screenshot of the Snowplow Inspector extension listing several events observed on the current pageview. A selected page-view event displays, detailing the properties collected as a part of that event.](./images/using-poplin-chrome-extension.png)
 

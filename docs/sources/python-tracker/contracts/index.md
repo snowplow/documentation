@@ -1,6 +1,9 @@
 ---
-title: "Contracts"
+title: "Type checking in the Python tracker"
+sidebar_label: "Contracts"
 sidebar_position: 70
+description: "Enable runtime validation and type checking for Python tracker arguments using contracts to ensure proper value ranges and types."
+keywords: ["python contracts", "type validation", "runtime checking"]
 ---
 
 Python is a dynamically typed language, but each of our methods expects its arguments to be of specific types and value ranges. To avoid wrong inputs, the tracker takes two approaches:

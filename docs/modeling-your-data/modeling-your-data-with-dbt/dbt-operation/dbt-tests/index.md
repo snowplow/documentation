@@ -1,6 +1,9 @@
 ---
-title: "Tests"
+title: "Tests for dbt packages"
+sidebar_label: "Tests"
 sidebar_position: 50
+description: "Use dbt tests to validate data quality in Snowplow packages with test selection tags for scratch and derived models."
+keywords: ["dbt tests", "data quality tests", "test selection"]
 ---
 
 [Tests](https://docs.getdbt.com/docs/build/tests) are a useful feature in dbt to ensure that your data meets some expectations of it, such as certain fields should not be null. We provide a suite of tests with our packages to help test the output tables for any issues, however you could and should add your own as no one knows the required quality checks of your data better than you.
@@ -16,7 +19,7 @@ The packages contain tests for both the scratch and derived models. Depending on
 
 For example if your derived tables are very large you may want to run the full test suite on the `this_run` tables, which act as the input for the derived tables, but only primary key schema tests on the derived tables to ensure no duplicates. If using such a set up, we would also recommend including the `page/screen_view_in_session_value` data test for the page/screen views derived tables.
 
-This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section for more details) as follows:
+This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section for more details) as follows:
 
 
 ```bash

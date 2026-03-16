@@ -1,6 +1,9 @@
 ---
-title: "Igluctl"
+title: "Igluctl CLI for schema management"
+sidebar_label: "Iglu CLI"
 sidebar_position: 10
+description: "Command-line tool for validating, publishing, and managing JSON schemas in Iglu registries with DDL generation and verification."
+keywords: ["igluctl", "schema validation", "iglu cli", "schema migration"]
 ---
 
 ```mdx-code-block
@@ -30,7 +33,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
     - `parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
 
-## Downloading and running Igluctl 
+## Downloading and running Igluctl
 
 Download the latest Igluctl from GitHub releases and unzip the file:
 
@@ -92,8 +95,8 @@ The above cases can very hard to spot without a specialized tool as they are sti
 `lint` has two options:
 
 - `--skip-checks` which will lint without specified linters, given comma separated. To see available linters and their explanations, `$ /path/to/igluctl --help`
-- `--skip-schemas` which will lint all the schemas except the schemas passed to this option as a comma separated list. For example running:  
-    `/path/to/igluctl lint /path/to/schema/registry/schemas --skip-schemas iglu:com.acme/click/jsonschema/1-0-1,iglu:com.acme/scroll/jsonschema/1-0-1`  
+- `--skip-schemas` which will lint all the schemas except the schemas passed to this option as a comma separated list. For example running:
+    `/path/to/igluctl lint /path/to/schema/registry/schemas --skip-schemas iglu:com.acme/click/jsonschema/1-0-1,iglu:com.acme/scroll/jsonschema/1-0-1`
     will lint all schemas in `/path/to/schema/registry/schemas` except the two schemas passed via `--skip-schemas`.
 
 Note: `--severityLevel` option is deprecated and removed as of version 0.4.0.
@@ -102,14 +105,14 @@ Below are two groups of linters; allowed to be skipped and not allowed to be ski
 
 Igluctl let you skip below checks:
 
-| NAME | DEFINITION |
-| --- | --- |
-| `rootObject` | Check that root of schema has object type and contains properties |
-| `unknownFormats` | Check that schema doesn’t contain unknown formats |
-| `numericMinMax` | Check that schema with numeric type contains both minimum and maximum properties |
-| `stringLength` | Check that schema with string type contains maxLength property or other ways to extract max length |
-| `optionalNull` | Check that non-required fields have null type |
-| `description` | Check that property contains description |
+| NAME             | DEFINITION                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| `rootObject`     | Check that root of schema has object type and contains properties                                  |
+| `unknownFormats` | Check that schema doesn’t contain unknown formats                                                  |
+| `numericMinMax`  | Check that schema with numeric type contains both minimum and maximum properties                   |
+| `stringLength`   | Check that schema with string type contains maxLength property or other ways to extract max length |
+| `optionalNull`   | Check that non-required fields have null type                                                      |
+| `description`    | Check that property contains description                                                           |
 
 A sample usage could be as following:
 
@@ -289,8 +292,8 @@ $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server 
 
 ## table-check
 
-`igluctl table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0 
-it would cross verify the column types as well as names. 
+`igluctl table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0
+it would cross verify the column types as well as names.
 
 It supports two interfaces:
 

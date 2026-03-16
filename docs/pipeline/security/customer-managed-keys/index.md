@@ -1,6 +1,9 @@
 ---
-title: "Customer managed keys"
+title: "Configure AWS KMS customer managed keys"
 sidebar_position: 1
+sidebar_label: "Customer managed keys"
+description: "Set up AWS KMS custom encryption keys for enhanced pipeline security with full control over data encryption."
+keywords: ["AWS KMS", "customer managed keys", "encryption keys", "pipeline encryption", "pipeline security"]
 ---
 
 This guide provides step-by-step instructions for setting up AWS KMS (Key Management Service) custom keys for your Snowplow pipeline. Custom KMS keys provide enhanced security by allowing you to maintain full control over encryption keys used by your data infrastructure.

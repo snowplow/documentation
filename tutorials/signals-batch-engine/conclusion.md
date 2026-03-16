@@ -2,7 +2,8 @@
 position: 8
 title: "Conclusions and next steps from the Signals batch engine tutorial"
 sidebar_label: "Conclusion"
-description: "Complete the Snowplow Signals batch engine tutorial, and explore next steps for warehouse-based customer intelligence."
+description: "Complete the Snowplow Signals batch engine tutorial for warehouse-based attribute calculation. Learn how to use dbt projects to compute and sync historical attributes to the Profiles Store."
+keywords: ["signals batch engine workflow", "warehouse customer intelligence"]
 ---
 
 In this tutorial you've learned how to calculate attributes from your warehouse data, and apply them to Signals.
@@ -12,8 +13,8 @@ This is the process workflow:
 * Initialize dbt projects
 * Generate models
 * Configure the projects with dbt
-* Create tables by running the models
-* Connect the tables to Signals by syncing
+* Create tables and snapshot by running dbt
+* Connect the snapshot to Signals by syncing
 
 Supported warehouses:
 * Snowflake

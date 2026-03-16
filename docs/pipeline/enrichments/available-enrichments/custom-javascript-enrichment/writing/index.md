@@ -1,7 +1,9 @@
 ---
-title: "Writing your enrichment"
+title: "Write JavaScript enrichment functions"
 sidebar_position: 1
-description: "How to write the enrichment code in JavaScript."
+description: "Write custom JavaScript functions to transform events with access to event properties and utility functions."
+sidebar_label: "Writing"
+keywords: ["write JavaScript enrichment", "enrichment functions", "event transformation"]
 ---
 
 Your JavaScript enrichment code should contain a function called `process`:

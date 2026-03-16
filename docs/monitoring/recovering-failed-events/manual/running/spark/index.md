@@ -1,7 +1,10 @@
 ---
-title: "Spark"
+title: "Run event recovery on Spark (legacy)"
 date: "2020-04-14"
 sidebar_position: 20
+sidebar_label: "Spark (legacy)"
+description: "Deploy event recovery jobs on Apache Spark using EMR and dataflow-runner."
+keywords: ["Spark event recovery", "EMR recovery job"]
 ---
 
 :::danger

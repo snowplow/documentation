@@ -1,7 +1,9 @@
 ---
-title: "Tracking Google Analytics cookies with the web trackers"
+title: "Track Google Analytics cookies with the web trackers"
 sidebar_label: "GA cookies"
 sidebar_position: 130
+description: "Automatically capture Google Analytics cookie values including GA4 and Universal Analytics cookies as context entities on every event."
+keywords: ["google analytics", "cookies"]
 ---
 
 ```mdx-code-block

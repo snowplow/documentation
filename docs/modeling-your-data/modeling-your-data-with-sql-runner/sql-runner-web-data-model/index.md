@@ -1,7 +1,10 @@
 ---
-title: "Web data model"
+title: "Web data model for SQL Runner"
+sidebar_label: "Web data model"
 date: "2021-07-27"
 sidebar_position: 100
+description: "Legacy SQL Runner web data model for transforming web event data into derived tables."
+keywords: ["SQL Runner web", "web data model", "legacy web SQL", "web SQL Runner"]
 ---
 
 :::tip
@@ -21,8 +24,8 @@ The Snowplow web data model aggregates Snowplow's out of the box page view and p
 #### Requirements
 
 - [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/web-trackers/tracking-events/index.md#page-views) implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/page-views/index.md) implemented.
 
 #### Prerequisites
 

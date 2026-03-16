@@ -1,7 +1,9 @@
 ---
-title: "Snowbridge"
+title: "Replicate event streams in real time with Snowbridge"
 sidebar_position: 65
 sidebar_label: "Snowbridge"
+description: "Replicate Snowplow event streams to multiple destinations with Snowbridge, a configurable tool supporting Kinesis, PubSub, Kafka, HTTP, and more."
+keywords: ["snowbridge", "stream replication", "kinesis", "pubsub", "kafka", "event streaming"]
 ---
 
 ```mdx-code-block
@@ -11,6 +13,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
   available={['cloud', 'pmc', 'selfHosted']}
   helpContent="Snowbridge is included with all Snowplow platforms."
 />
+
 ```
 
 Snowbridge is a flexible, low latency tool which can replicate streams of data of any type to external destinations, optionally filtering or transforming the data along the way. It can be used to consume, transform and relay data to any third party platform which supports HTTP or is listed as a target below — in real-time.
@@ -28,3 +31,7 @@ Snowbridge is a flexible, low latency tool which can replicate streams of data o
 - Statsd and Sentry reporting and monitoring interfaces
 
 Snowbridge is a generic tool, built to work on any type of data, developed by the Snowplow team. It began life as a closed-source tool developed to deliver various requirements related to Snowplow data, and so some of the features are specific to that data.
+
+:::note
+Version 4.0.0 includes breaking changes to response rule evaluation. See the [upgrade guide](/docs/api-reference/snowbridge/3-X-X-upgrade-guide/index.md) for migration information.
+:::

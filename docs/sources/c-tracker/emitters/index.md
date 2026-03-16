@@ -1,6 +1,8 @@
 ---
-title: "Configuring emitters in the C++ tracker"
+title: "Configure emitters in the C++ tracker"
 sidebar_label: "Emitters"
+description: "Configure emitters to send events to your collector with customizable batch sizes, byte limits, and retry behavior. Use SQLite event store or custom EventStore implementation with request callbacks."
+keywords: ["emitter configuration", "event store", "http client", "retry logic", "batch sending"]
 date: "2020-02-25"
 sidebar_position: 60
 ---

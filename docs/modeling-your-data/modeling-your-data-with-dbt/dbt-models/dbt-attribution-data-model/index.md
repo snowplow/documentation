@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Attribution dbt package"
 sidebar_label: "Attribution"
-description: "The Snowplow Attribution dbt Package"
+description: "Marketing attribution analysis with Snowplow dbt package supporting first-touch, last-touch, position-based, and linear attribution models."
+keywords: ["attribution modeling", "marketing attribution", "dbt attribution", "ROAS", "conversion paths", "attribution data model"]
 sidebar_position: 10
 ---
 
@@ -159,7 +160,7 @@ Alternatively, you could use the `derived.snowplow_unified_sessions` table as we
 As for campaigns,
 
 :::tip
-To fully finish the config you might need to overwrite the `channel_classification()` macro. In case your classification logic for attribution analysis needs to be the same as the one already configured in the snowplow_unified model you can simply leave the default macro which refers to that field.
+To fully finish the config you might need to overwrite the `channel_classification()` macro. In case your classification logic for attribution analysis needs to be the same as the one already configured in the snowplow_unified model you can simply leave the default macro which refers to that field. See the [channel_group_query macro](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/overridable-macros/index.md) for more details.
 :::
 
 ### 3. Channel spend information (optional, but recommended)
@@ -175,7 +176,7 @@ You most likely have a warehouse with marketing (ad) spend information by channe
 `, datagridProps)}
 </div>
 
-To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/attribution/index.md#3.good-to-know).
+To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/tutorials/attribution/intro).
 
 ### 4. User mapping source
 

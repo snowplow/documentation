@@ -1,7 +1,10 @@
 ---
 title: "BigQuery Loader (0.4.x)"
+sidebar_label: "BigQuery Loader (0.4.x)"
 date: "2020-03-11"
 sidebar_position: 30
+description: "BigQuery Loader 0.4.x with improved Dataflow performance and Mutator table management for BigQuery loading."
+keywords: ["bigquery loader 0.4", "dataflow 0.4", "bigquery mutator", "loader 0.4", "legacy bigquery"]
 ---
 
 ## Technical Architecture

@@ -159,6 +159,13 @@ h4[id] {
   scroll-margin-top: 70px;
 }
 
+.theme-doc-markdown :is(h2, h3, h4) code {
+  font-size: 0.85em !important;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
 .main-wrapper {
   margin-top: 1em;
 }

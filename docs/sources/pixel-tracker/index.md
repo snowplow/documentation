@@ -14,13 +14,27 @@ import Badges from '@site/src/components/Badges';
 
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
 
-In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow collector via the querystring are calculated on the fly by the JavaScript. (Examples of data points that are calculated on the fly include `user_id`, or `browser_features`.)
+In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow Collector via the querystring are calculated on the fly. Examples of data points that are calculated like this include `user_id`, or `page_title`.
 
-In an environment where JavaScript is not permitted, these values need to be set in advance and hardcoded into the tracking tag. As a result, if you want to record a different `page_title`, for example, for several different HTML-only web pages using the tracking code, you will need to generate a different tracking tag for each of those different web pages, with the right `page_title` set for each.
+In an environment where JavaScript isn't permitted, these values need to be set in advance and hardcoded into the tracking tag. For example, if you want to record a different `page_title` for different pages, you'll need to generate a different tracking tag for each of those pages, with the right `page_title` set for each.
 
-## Anatomy of a Pixel tracking tag
+## Example Pixel tracking tags
 
-An example tag is shown below:
+The structure of a Pixel tracking tag is as follows:
+
+```html
+<img src="{{collector-domain}}/i?{{name-value-pairs}}&tv=no-js-0.1.0" />
+```
+
+Some things to note about the tag:
+* It's an `<img>` tag
+* It sends a GET request using the Snowplow Collector `/i` endpoint
+* You can send any name-value pairs that are supported by the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md) on the query string
+* To help with analysis, we recommend you set the tracker version `tv` to `no-js-0.1.0` to identify that this event came from a Pixel tracker
+
+### Page view tag
+
+Here's an example tag to track a [page view](/docs/events/ootb-data/page-and-screen-view-events/index.md) event:
 
 ```html
 <!--Snowplow start plowing-->
@@ -28,21 +42,83 @@ An example tag is shown below:
 <!--Snowplow stop plowing-->
 ```
 
-Some things to note about the tag:
+The query string contains these key-value pairs:
+* Event type `e` is `pv`, for page view event
+* Page name `page` is `Root README`
+* URL `url` is `http://github.com/snowplow/snowplow`
+* Application id `aid` is `snowplow`
+* Platform `p` is `web`
+* Tracker version `tv` is `no-js-0.1.0`
 
-1. It is a straightforward `<img ...>` tag, that results in the GET request to the Snowplow tracking pixel.
-2. The endpoint is set to an example Snowplow Collector running at `collector.snplow.com`. Note that it ends with the pixel tracker endpoint `/i`.
-3. Several data points are passed on the query string:
-   * Event type `e` (`pv` for pageview),
-   * Page name `page` (`Root README`),
-   * URL `url` (`http://github.com/snowplow/snowplow`),
-   * Application id `aid` (`snowplow`),
-   * Platform `p` (`web`)
-   * Tracker version `tv` (`no-js-0.1.0`)
+### Custom self-describing event tag
 
-## A warning about using the Pixel tracker on domains you do not own
+Here's an example tag to track a [custom self-describing](/docs/events/custom-events/index.md#custom-events) event. This tag tracks an event with the schema `iglu:com.acme/email_open/jsonschema/1-0-0` and the data payload:
 
-The Snowplow collector sets a `network_userid` and drops this on a browser cookie.
+```json
+{
+  "emailId": "abc123",
+  "campaign": "spring-sale"
+}
+```
+
+```html
+<!--Snowplow start plowing-->
+<img src="http://collector.acme.com/i?e=ue&ue_pr=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Funstruct_event%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%7D&aid=acme&p=web&tv=no-js-0.1.0" />
+<!--Snowplow stop plowing-->
+```
+
+The query string contains these key-value pairs:
+* Event type `e` is `ue`, for self-describing event (they used to be called "unstructured events")
+* Event payload `ue_pr` is the [JSON-encoded self-describing event](/docs/fundamentals/schemas/index.md#self-describing-json-data-in-the-event-payload)
+* Application id `aid` is `acme`
+* Platform `p` is `web`
+* Tracker version `tv` is `no-js-0.1.0`
+
+The full [`ue_pr` value](/docs/events/http-requests/index.md) is structured like this:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
+  "data": {
+    "schema": "iglu:com.acme/email_open/jsonschema/1-0-0",
+    "data": {
+      "emailId": "abc123",
+      "campaign": "spring-sale"
+    }
+  }
+}
+```
+
+### Entities
+
+You can also include [entities](/docs/fundamentals/entities/index.md) in your Pixel tracking tags. Here's a tag that extends the page view example to add the `email_open` custom data as an entity:
+
+```html
+<!--Snowplow start plowing-->
+<img src="http://collector.acme.com/i?e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&co=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Fcontexts%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%5B%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%5D%7D&aid=snowplow&p=web&tv=no-js-0.1.0" />
+<!--Snowplow stop plowing-->
+```
+
+The entity data is tracked in the [`co` parameter](docs/fundamentals/schemas/index.md#self-describing-json-data-in-the-event-payload) as a [JSON-encoded array](/docs/events/http-requests/index.md):
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.acme/email_open/jsonschema/1-0-0",
+      "data": {
+        "emailId": "abc123",
+        "campaign": "spring-sale"
+      }
+    }
+  ]
+}
+```
+
+## A warning about using the Pixel tracker on domains you don't own
+
+The Snowplow Collector sets a `network_userid` and drops this on a browser cookie.
 
 Care must therefore be exercised when using the Pixel tracker on domains that you do not own. **It is your responsibility to abide by the terms and conditions of any domain owner for domains where you post content including uploading Pixel tracking tags.** Some domain owners forbid third parties from dropping cookies on their domains. It is your responsibility to ensure you do not violate the terms and conditions of any domain owners that you work with.
 
@@ -58,7 +134,7 @@ Build your pixel tracker URL using the format shown above. Set your Collector do
 
 ### Insert the tracking code into the page or ad you wish to track
 
-If this is an HTML email, you will need to insert it in the email. If it is a webpage hosted on a third party site, you will need to add it to the source code.
+If this is an HTML email, you will need to insert it in the email. If it is a webpage hosted on a third-party site, you will need to add it to the source code.
 
 ## Click tracking
 

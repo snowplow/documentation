@@ -23,7 +23,7 @@ In an environment where JavaScript isn't permitted, these values need to be set 
 The structure of a Pixel tracking tag is as follows:
 
 ```html
-<img src="{{collector-domain}}/i?{{name-value-pairs}}&tv=no-js-0.1.0" />
+<img src="{{Collector-domain}}/i?{{name-value-pairs}}&tv=no-js-0.1.0" />
 ```
 
 Some things to note about the tag:
@@ -38,7 +38,7 @@ Here's an example tag to track a [page view](/docs/events/ootb-data/page-and-scr
 
 ```html
 <!--Snowplow start plowing-->
-<img src="http://collector.acme.com/i?&e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&aid=snowplow&p=web&tv=no-js-0.1.0" />
+<img src="http://Collector.acme.com/i?&e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&aid=snowplow&p=web&tv=no-js-0.1.0" />
 <!--Snowplow stop plowing-->
 ```
 
@@ -63,7 +63,7 @@ Here's an example tag to track a [custom self-describing](/docs/events/custom-ev
 
 ```html
 <!--Snowplow start plowing-->
-<img src="http://collector.acme.com/i?e=ue&ue_pr=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Funstruct_event%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%7D&aid=acme&p=web&tv=no-js-0.1.0" />
+<img src="http://Collector.acme.com/i?e=ue&ue_pr=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Funstruct_event%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%7D&aid=acme&p=web&tv=no-js-0.1.0" />
 <!--Snowplow stop plowing-->
 ```
 
@@ -95,7 +95,7 @@ You can also include [entities](/docs/fundamentals/entities/index.md) in your Pi
 
 ```html
 <!--Snowplow start plowing-->
-<img src="http://collector.acme.com/i?e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&co=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Fcontexts%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%5B%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%5D%7D&aid=snowplow&p=web&tv=no-js-0.1.0" />
+<img src="http://Collector.acme.com/i?e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&co=%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Fcontexts%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%5B%7B%22schema%22%3A%22iglu%3Acom.acme%2Femail_open%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22emailId%22%3A%22abc123%22%2C%22campaign%22%3A%22spring-sale%22%7D%7D%5D%7D&aid=snowplow&p=web&tv=no-js-0.1.0" />
 <!--Snowplow stop plowing-->
 ```
 
@@ -126,7 +126,7 @@ Care must therefore be exercised when using the Pixel tracker on domains that yo
 
 ### Identify the event you wish to track
 
-Identify the event you wish to track. This may be opening a particular email that is sent out via your email marketing system, or viewing a product you are selling on a 3rd party marketplace.
+Identify the event you wish to track. This may be opening a particular email that is sent out via your email marketing system, or viewing a product you are selling on a third-party marketplace.
 
 ### Construct the pixel tracker URL
 
@@ -140,24 +140,24 @@ If this is an HTML email, you will need to insert it in the email. If it is a we
 
 You can use the Pixel tracker for click tracking aka URI redirects:
 
-- Set your collector path to `{{collector-domain}}/r/tp2?{{name-value-pairs}}` - the `/r/tp2` tells Snowplow that you are attempting a URI redirect
-- Add a `&u={{uri}}` argument to your collector URI, where `{{uri}}` is the URL-encoded URI that you want to redirect to
-- On clicking this link, the collector will register the link and then do a 302 redirect to the supplied `{{uri}}`
-- As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md)
+- Set your Collector path to `{{Collector-domain}}/r/tp2?{{name-value-pairs}}` - the `/r/tp2` tells Snowplow that you are attempting a URI redirect
+- Add a `&u={{uri}}` argument to your Collector URI, where `{{uri}}` is the URL-encoded URI that you want to redirect to
+- On clicking this link, the Collector will register the link and then do a 302 redirect to the supplied `{{uri}}`
+- As well as the `&u={{uri}}` parameter, you can populate the Collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md)
 
-Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow customers. To use this feature, you need to enable this in your collector configuration. Snowplow customers can enable this from within the Pipeline Configuration screen of Snowplow Console.
+Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow customers. To use this feature, you need to enable this in your Collector configuration. Snowplow customers can enable this from within the Pipeline Configuration screen of Snowplow Console.
 
-You should also restrict values which are allowed within the `u` parameter to prevent phising attacks using this redirect endpoint. One option is to use [AWS WAF](https://aws.amazon.com/waf/) or [Google Cloud Armor](https://cloud.google.com/armor) (depending on your cloud). They let you block traffic that matches rules you define, such as a regex that the value of the `u` parameter must match.
+You should also restrict values which are allowed within the `u` parameter to prevent phishing attacks using this redirect endpoint. One option is to use [AWS WAF](https://aws.amazon.com/waf/) or [Google Cloud Armor](https://cloud.google.com/armor) (depending on your cloud). They let you block traffic that matches rules you define, such as a regex that the value of the `u` parameter must match.
 
 Example:
 
 ```html
-Check out <a href="http://collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow">Snowplow</a>
+Check out <a href="http://Collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow">Snowplow</a>
 ```
 
 Snowplow converts the `&u={{uri}}` argument into a `com.snowplowanalytics.snowplow/uri_redirect` self-describing JSON.
 
 How Snowplow attaches the `uri_redirect` to the event depends on what other Tracker Protocol fields you attached to the event:
 
-1. If you attached an `&e={{event type}}` to your event, then the `uri_redirect` will be added to the contexts array of your event
-2. If you did not attach an `&e={{event type}}` to your event, then this event will be treated as an unstructured event and the `uri_redirect` will be attached as the event itself
+1. If you attached an `&e={{event type}}` to your event, then the `uri_redirect` will be added to the entities array of your event
+2. If you did not attach an `&e={{event type}}` to your event, then this event will be treated as an self-describing event and the `uri_redirect` will be attached as the event itself

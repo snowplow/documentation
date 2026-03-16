@@ -37,11 +37,11 @@ Next, point your tracking code to `localhost:9090` (see the [usage guide](/docs/
 
 ## Debugging
 
-When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/testing/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/api-reference/snowplow-micro/api/index.md).
+When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [dashboard](/docs/testing/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/api-reference/snowplow-micro/api/index.md).
 
-### User Interface
+### Dashboard
 
-The Micro user interface will show you which events are enriched successfully and which fail.
+The dashboard will show you which events are enriched successfully and which fail.
 
 For each failed event, you can also click on the failure badge to look at the detailed failure message.
 

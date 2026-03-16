@@ -28,10 +28,27 @@ const GROUP_ORDER = [
 ]
 
 /**
- * Enrich dbt configuration pages by appending variable tables
- * extracted from the JSON schema files.
+ * Map from lowercase heading text (as rendered in markdown) to schema group name.
+ * The MDX uses sentence case; the schema uses title case.
+ */
+const HEADING_TO_GROUP = {
+  'warehouse and tracker': 'Warehouse and Tracker',
+  'operation and logic': 'Operation and Logic',
+  'entities (contexts), filters, and logs': 'Contexts, Filters, and Logs',
+  'warehouse-specific': 'Warehouse Specific',
+}
+
+/**
+ * Headings for interactive-only sections that should be removed
+ * from the markdown output (their content is stripped by rehype-strip-interactive).
+ */
+const DEAD_SECTIONS = ['config generator', 'output schemas']
+
+/**
+ * Enrich dbt configuration pages by inserting variable tables
+ * under the matching headings, extracted from JSON schema files.
  *
- * Mutates pages in place — adds markdown table content to matching pages.
+ * Mutates pages in place.
  */
 export async function enrichDbtSchemas(pages, siteDir) {
   const schemasDir = path.join(
@@ -78,10 +95,10 @@ export async function enrichDbtSchemas(pages, siteDir) {
       const schemaPath = path.join(schemasDir, entry.file)
       const raw = await fs.readFile(schemaPath, 'utf8')
       const schema = JSON.parse(raw)
-      const tables = renderSchemaTables(schema, entry.version)
+      const groupedTables = buildGroupedTables(schema)
 
-      if (tables) {
-        page.markdown = page.markdown.trimEnd() + '\n\n' + tables
+      if (groupedTables.size > 0) {
+        page.markdown = insertTablesAndClean(page.markdown, groupedTables, entry.version)
         enriched++
       }
     } catch (err) {
@@ -108,11 +125,11 @@ function matchRoute(routePath) {
 }
 
 /**
- * Render schema properties as grouped markdown tables.
+ * Build a Map of group name → markdown table string from the schema.
  */
-function renderSchemaTables(schema, version) {
+function buildGroupedTables(schema) {
   const properties = schema.properties
-  if (!properties) return null
+  if (!properties) return new Map()
 
   // Group variables
   const groups = new Map()
@@ -126,10 +143,8 @@ function renderSchemaTables(schema, version) {
 
     groups.get(group).push({
       name: varName,
-      title: prop.title || varName,
-      description: cleanDescription(prop.description || ''),
+      description: cleanDescription(prop.longDescription || prop.description || ''),
       defaultValue: formatDefault(prop.packageDefault),
-      type: prop.type || '',
       warehouse: prop.warehouse ? String(prop.warehouse) : null,
       order: prop.order ?? 999,
     })
@@ -141,35 +156,19 @@ function renderSchemaTables(schema, version) {
   }
 
   // Render each group as a markdown table
-  const sections = []
-  sections.push(`## Package configuration variables (v${version})`)
-  sections.push('')
-  sections.push(
-    'All variables in Snowplow dbt packages start with `snowplow__` (omitted from the table below for brevity).'
-  )
-  sections.push('')
-
-  // Emit groups in defined order, then any extras
-  const orderedGroups = [...GROUP_ORDER]
-  for (const key of groups.keys()) {
-    if (!orderedGroups.includes(key)) orderedGroups.push(key)
-  }
-
-  for (const groupName of orderedGroups) {
-    const vars = groups.get(groupName)
+  const result = new Map()
+  for (const [groupName, vars] of groups) {
     if (!vars || vars.length === 0) continue
 
-    sections.push(`### ${groupName}`)
-    sections.push('')
-
+    const lines = []
     const hasWarehouse = vars.some((v) => v.warehouse)
 
     if (hasWarehouse) {
-      sections.push('| Variable | Description | Default | Warehouse |')
-      sections.push('| --- | --- | --- | --- |')
+      lines.push('| Variable | Description | Default | Warehouse |')
+      lines.push('| --- | --- | --- | --- |')
     } else {
-      sections.push('| Variable | Description | Default |')
-      sections.push('| --- | --- | --- |')
+      lines.push('| Variable | Description | Default |')
+      lines.push('| --- | --- | --- |')
     }
 
     for (const v of vars) {
@@ -177,16 +176,75 @@ function renderSchemaTables(schema, version) {
       const def = escapeTableCell(v.defaultValue)
       if (hasWarehouse) {
         const wh = v.warehouse || 'All'
-        sections.push(`| \`${v.name}\` | ${desc} | ${def} | ${wh} |`)
+        lines.push(`| \`${v.name}\` | ${desc} | ${def} | ${wh} |`)
       } else {
-        sections.push(`| \`${v.name}\` | ${desc} | ${def} |`)
+        lines.push(`| \`${v.name}\` | ${desc} | ${def} |`)
       }
     }
 
-    sections.push('')
+    result.set(groupName, lines.join('\n'))
   }
 
-  return sections.join('\n')
+  return result
+}
+
+/**
+ * Insert tables under matching headings and remove dead sections.
+ * Returns the modified markdown string.
+ */
+function insertTablesAndClean(markdown, groupedTables, version) {
+  const lines = markdown.split('\n')
+  const output = []
+  let i = 0
+
+  while (i < lines.length) {
+    const line = lines[i]
+    const headingMatch = line.match(/^(#{2,3})\s+(.+)$/)
+
+    if (headingMatch) {
+      const level = headingMatch[1].length
+      const text = headingMatch[2].trim().toLowerCase()
+
+      // Check if this is a dead section to remove
+      if (level === 2 && DEAD_SECTIONS.includes(text)) {
+        // Skip this heading and everything until the next H2 or end of file
+        i++
+        while (i < lines.length) {
+          const nextMatch = lines[i].match(/^#{2}\s/)
+          if (nextMatch) break
+          i++
+        }
+        continue
+      }
+
+      // Check if this heading matches a group for table insertion
+      const groupName = HEADING_TO_GROUP[text]
+      if (groupName && groupedTables.has(groupName)) {
+        output.push(line)
+        output.push('')
+        output.push(groupedTables.get(groupName))
+        output.push('')
+        // Skip any empty lines after the heading (before the next heading)
+        i++
+        while (i < lines.length && lines[i].trim() === '') {
+          i++
+        }
+        continue
+      }
+
+      // Check if this is the "Package configuration variables" heading — add version note
+      if (level === 2 && text.startsWith('package configuration variables')) {
+        output.push(`## Package configuration variables (v${version})`)
+        i++
+        continue
+      }
+    }
+
+    output.push(line)
+    i++
+  }
+
+  return output.join('\n')
 }
 
 /**
@@ -197,9 +255,7 @@ function formatDefault(value) {
   if (value === '') return '`""`'
   if (value === '[]') return '`[]`'
   if (typeof value === 'string') {
-    // Short values get backticks
     if (value.length <= 60) return `\`${value}\``
-    // Long values get truncated
     return `\`${value.slice(0, 57)}...\``
   }
   return `\`${String(value)}\``

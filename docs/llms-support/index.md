@@ -1,6 +1,6 @@
 ---
-title: "LLMs and Snowplow"
-sidebar_label: "LLMs support"
+title: "Working with AI"
+sidebar_label: "Working with AI"
 description: "How Snowplow supports LLM and AI-powered workflows, from real-time behavioral context to tracking plan management and AI-readable documentation."
 keywords: ["LLMs", "AI", "MCP", "Signals", "agentic applications", "AI assistant", "agentic"]
 date: "2026-03-04"
@@ -11,17 +11,17 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
 
 ## Snowplow CLI MCP server
 
-The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a Model Context Protocol (MCP) server that [connects AI assistants to your Snowplow tracking plans](/docs/llms-support/mcp-server/index.md).
+The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a Model Context Protocol (MCP) server that [connects AI assistants to your Snowplow tracking plans](/docs/llms-support/mcp-server/index.md). This can help you design tracking plans faster and more consistently.
 
-## Documentation site map
+## `llms.txt`
 
-The documentation site map for LLMs is available at [`llms.txt`](pathname:///llms.txt). It's an index of all documentation pages with titles and descriptions, organized by section. Use this to help an LLM understand the structure of the documentation and navigate to relevant pages.
+The Snowplow documentation index is available at [`llms.txt`](pathname:///llms.txt). Use this to help an LLM understand the structure of the documentation and navigate to relevant pages.
 
-A full-content version is also available at [`llms-full.txt`](pathname:///llms-full.txt), which includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
+A full-content version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 
 ## Documentation pages as Markdown
 
-Every documentation page is available as plain Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons above the page title.
+Every documentation page is available as Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons above the page title.
 
 To access the Markdown page directly, change the trailing `/` in the URL to `.md`. For example:
 

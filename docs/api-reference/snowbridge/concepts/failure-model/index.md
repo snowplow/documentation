@@ -29,9 +29,6 @@ Internally, application checks each message against the target's `max_message_by
 
 Oversized message handling occurs before the message reaches the target, so no write is attempted to the main target.
 
-:::note
-From version 5.0.0, oversized messages are handled independently of the failure target write path. They are not counted in the `failure_target_success` and `failure_target_failed` StatsD metrics. If you have alerting that relies on those metrics to cover oversized message volumes, update your dashboards accordingly.
-:::
 
 ## Invalid data
 

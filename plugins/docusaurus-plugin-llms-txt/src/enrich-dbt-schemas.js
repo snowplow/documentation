@@ -2,22 +2,6 @@ import path from 'node:path'
 import fs from 'node:fs/promises'
 
 /**
- * Map from route path suffix to schema name prefix.
- * Each key is the unique tail of the dbt config page route.
- */
-const ROUTE_TO_SCHEMA = {
-  'dbt-configuration/unified/': 'dbtUnified',
-  'dbt-configuration/ecommerce/': 'dbtEcommerce',
-  'dbt-configuration/media-player/': 'dbtMediaPlayer',
-  'dbt-configuration/attribution/': 'dbtAttribution',
-  'dbt-configuration/normalize/': 'dbtNormalize',
-  'dbt-configuration/utils/': 'dbtUtils',
-  'dbt-configuration/legacy/web/': 'dbtWeb',
-  'dbt-configuration/legacy/mobile/': 'dbtMobile',
-  'dbt-configuration/legacy/fractribution/': 'dbtFractribution',
-}
-
-/**
  * Display order for variable groups.
  */
 const GROUP_ORDER = [
@@ -85,7 +69,7 @@ export async function enrichDbtSchemas(pages, siteDir) {
 
   for (const page of pages) {
     // Check if this page matches a dbt config route
-    const schemaName = matchRoute(page.routePath)
+    const schemaName = matchRoute(page.routePath, latestSchemas)
     if (!schemaName) continue
 
     const entry = latestSchemas.get(schemaName)
@@ -114,14 +98,29 @@ export async function enrichDbtSchemas(pages, siteDir) {
 }
 
 /**
- * Check if a route path matches a dbt config page.
- * Returns the schema name or null.
+ * Check if a route path matches a dbt config page by deriving the schema
+ * prefix from the folder name and checking if a matching schema exists.
+ *
+ * Convention: the leaf folder under dbt-configuration/ is converted from
+ * kebab-case to PascalCase and prefixed with "dbt".
+ *   unified        → dbtUnified
+ *   media-player   → dbtMediaPlayer
+ *   legacy/web     → dbtWeb
+ *
+ * Returns the schema prefix or null.
  */
-function matchRoute(routePath) {
-  for (const [suffix, schemaName] of Object.entries(ROUTE_TO_SCHEMA)) {
-    if (routePath.endsWith(suffix)) return schemaName
-  }
-  return null
+function matchRoute(routePath, availableSchemas) {
+  // Match routes like .../dbt-configuration/unified/ or .../dbt-configuration/legacy/web/
+  const match = routePath.match(/\/dbt-configuration\/(?:legacy\/)?([^/]+)\/$/)
+  if (!match) return null
+
+  const slug = match[1]
+  const prefix = 'dbt' + slug
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+
+  return availableSchemas.has(prefix) ? prefix : null
 }
 
 /**

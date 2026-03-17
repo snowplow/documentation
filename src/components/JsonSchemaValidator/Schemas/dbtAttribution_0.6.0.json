@@ -141,10 +141,10 @@
           {
             "title": "exposure",
             "required": [
-              "exposure"
+              "exposure_path"
             ],
             "properties": {
-              "exposure": {
+              "exposure_path": {
                 "type": "string",
                 "default": "null"
               }
@@ -153,10 +153,10 @@
           {
             "title": "first",
             "required": [
-              "first"
+              "first_path"
             ],
             "properties": {
-              "first": {
+              "first_path": {
                 "type": "string",
                 "default": "null"
               }
@@ -165,10 +165,10 @@
           {
             "title": "unique",
             "required": [
-              "unique"
+              "unique_path"
             ],
             "properties": {
-              "unique": {
+              "unique_path": {
                 "type": "string",
                 "default": "null"
               }

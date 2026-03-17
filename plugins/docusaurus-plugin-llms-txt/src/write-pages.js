@@ -21,7 +21,6 @@ export async function writePages(outDir, pages, siteUrl, outdatedPrefixes) {
     written++
   }
 
-  console.log(`[llms-txt] Wrote ${written} per-page .md files`)
 }
 
 /**

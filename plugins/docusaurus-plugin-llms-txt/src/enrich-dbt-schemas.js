@@ -82,8 +82,16 @@ export async function enrichDbtSchemas(pages, siteDir) {
       const groupedTables = buildGroupedTables(schema)
 
       if (groupedTables.size > 0) {
-        page.markdown = insertTablesAndClean(page.markdown, groupedTables, entry.version)
+        const { markdown: enrichedMarkdown, unmatchedGroups } =
+          insertTablesAndClean(page.markdown, groupedTables, entry.version)
+        page.markdown = enrichedMarkdown
         enriched++
+
+        if (unmatchedGroups.length > 0) {
+          console.warn(
+            `[llms-txt] dbt enrichment for ${page.routePath}: schema groups [${unmatchedGroups.join(', ')}] had no matching heading in the markdown`
+          )
+        }
       }
     } catch (err) {
       console.warn(
@@ -92,9 +100,6 @@ export async function enrichDbtSchemas(pages, siteDir) {
     }
   }
 
-  if (enriched > 0) {
-    console.log(`[llms-txt] Enriched ${enriched} dbt config pages with variable tables`)
-  }
 }
 
 /**
@@ -111,8 +116,12 @@ export async function enrichDbtSchemas(pages, siteDir) {
  */
 function matchRoute(routePath, availableSchemas) {
   // Match routes like .../dbt-configuration/unified/ or .../dbt-configuration/legacy/web/
-  const match = routePath.match(/\/dbt-configuration\/(?:legacy\/)?([^/]+)\/$/)
+  // but NOT .../dbt-configuration/legacy/ itself (which is a category index)
+  const match = routePath.match(/\/dbt-configuration\/(?:legacy\/)?([a-z](?:[a-z0-9-]*[a-z0-9])?)\/$/)
   if (!match) return null
+
+  // Exclude the legacy directory index — "legacy" alone is not a config page
+  if (match[1] === 'legacy') return null
 
   const slug = match[1]
   const prefix = 'dbt' + slug
@@ -120,7 +129,14 @@ function matchRoute(routePath, availableSchemas) {
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('')
 
-  return availableSchemas.has(prefix) ? prefix : null
+  if (!availableSchemas.has(prefix)) {
+    console.warn(
+      `[llms-txt] dbt-configuration page at ${routePath} derived schema prefix "${prefix}" but no matching schema file was found`
+    )
+    return null
+  }
+
+  return prefix
 }
 
 /**
@@ -189,11 +205,13 @@ function buildGroupedTables(schema) {
 
 /**
  * Insert tables under matching headings and remove dead sections.
- * Returns the modified markdown string.
+ * Returns { markdown, unmatchedGroups } where unmatchedGroups lists
+ * schema group names that had no corresponding heading in the page.
  */
 function insertTablesAndClean(markdown, groupedTables, version) {
   const lines = markdown.split('\n')
   const output = []
+  const matchedGroups = new Set()
   let i = 0
 
   while (i < lines.length) {
@@ -219,6 +237,7 @@ function insertTablesAndClean(markdown, groupedTables, version) {
       // Check if this heading matches a group for table insertion
       const groupName = HEADING_TO_GROUP[text]
       if (groupName && groupedTables.has(groupName)) {
+        matchedGroups.add(groupName)
         output.push(line)
         output.push('')
         output.push(groupedTables.get(groupName))
@@ -243,7 +262,11 @@ function insertTablesAndClean(markdown, groupedTables, version) {
     i++
   }
 
-  return output.join('\n')
+  const unmatchedGroups = [...groupedTables.keys()].filter(
+    (g) => !matchedGroups.has(g)
+  )
+
+  return { markdown: output.join('\n'), unmatchedGroups }
 }
 
 /**

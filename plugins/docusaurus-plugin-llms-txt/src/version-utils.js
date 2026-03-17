@@ -93,6 +93,81 @@ async function hasOutdatedProp(filePath) {
 }
 
 /**
+ * Scan the docs directory for files with `type: link` in their frontmatter.
+ * Returns a Set of route paths (e.g. "/docs/discourse/", "/docs/api-reference/console-api/").
+ *
+ * These are sidebar link entries that redirect to external URLs and have no
+ * renderable content.
+ */
+export async function buildLinkRoutes(siteDir) {
+  const linkRoutes = new Set()
+  const docsDir = path.join(siteDir, 'docs')
+
+  try {
+    await fs.access(docsDir)
+  } catch {
+    return linkRoutes
+  }
+
+  await scanForLinks(docsDir, '/docs/', linkRoutes)
+  return linkRoutes
+}
+
+/**
+ * Recursively scan for markdown files with `type: link` in frontmatter.
+ */
+async function scanForLinks(dir, routePrefix, results) {
+  let entries
+  try {
+    entries = await fs.readdir(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      await scanForLinks(
+        path.join(dir, entry.name),
+        `${routePrefix}${entry.name}/`,
+        results
+      )
+    } else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
+      const filePath = path.join(dir, entry.name)
+      if (await hasTypeLink(filePath)) {
+        // Standalone files like discourse.md become /docs/discourse/
+        // index.md files use the directory route directly
+        if (entry.name === 'index.md' || entry.name === 'index.mdx') {
+          results.add(routePrefix)
+        } else {
+          const slug = entry.name.replace(/\.mdx?$/, '')
+          results.add(`${routePrefix}${slug}/`)
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Check if a markdown file has `type: link` in its frontmatter.
+ */
+async function hasTypeLink(filePath) {
+  let content
+  try {
+    content = await fs.readFile(filePath, 'utf8')
+  } catch {
+    return false
+  }
+
+  if (!content.startsWith('---')) return false
+
+  const endIndex = content.indexOf('---', 3)
+  if (endIndex === -1) return false
+
+  const frontmatter = content.slice(3, endIndex)
+  return /^type:\s*link\s*$/m.test(frontmatter)
+}
+
+/**
  * Check if a route path is a previous-version page.
  * @param {string} routePath - The page's route path (e.g. "/docs/sources/web-trackers/previous-versions/v3/")
  * @param {Set<string>} outdatedPrefixes - Set of outdated route prefixes from buildOutdatedPaths()

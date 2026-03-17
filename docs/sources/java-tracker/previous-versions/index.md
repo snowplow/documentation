@@ -8,3 +8,5 @@ sidebar_custom_props:
 description: "Documentation for older versions of the Java tracker for reference and legacy implementations."
 keywords: ["java tracker legacy", "previous versions"]
 ---
+
+This section contains documentation for previous versions of the Java tracker.

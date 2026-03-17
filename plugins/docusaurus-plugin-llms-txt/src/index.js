@@ -6,7 +6,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { generateCurrent } from './generate-current.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
-import { buildOutdatedPaths } from './version-utils.js'
+import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
 
 /**
  * @param {import('@docusaurus/types').LoadContext} context
@@ -45,11 +45,15 @@ export default function pluginLlmsTxt(context, options) {
 
       console.log(`[llms-txt] Found ${htmlFiles.length} HTML files to process...`)
 
+      // Build the set of link routes (type: link in frontmatter) to skip
+      const linkRoutes = await buildLinkRoutes(context.siteDir)
+
       // Process each HTML file
       const pages = []
 
       for (const { htmlRelPath, routePath } of htmlFiles) {
         if (excludeRoutes.includes(routePath)) continue
+        if (linkRoutes.has(routePath)) continue
 
         const htmlFullPath = path.join(outDir, htmlRelPath)
 
@@ -60,7 +64,12 @@ export default function pluginLlmsTxt(context, options) {
             contentSelectors
           )
 
-          if (!markdown || !markdown.trim()) continue
+          if (!markdown || !markdown.trim()) {
+            console.warn(
+              `[llms-txt] Page ${routePath} produced empty markdown (content selectors may not match)`
+            )
+            continue
+          }
 
           pages.push({
             routePath,

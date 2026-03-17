@@ -159,6 +159,24 @@ h4[id] {
   scroll-margin-top: 70px;
 }
 
+.theme-doc-markdown :is(h2, h3, h4) code {
+  font-size: 0.85em !important;
+  position: relative;
+  top: -1px;
+}
+
+/* Align inline code vertically with surrounding text in paragraphs and list items */
+.theme-doc-markdown :is(p, li) code {
+  position: relative;
+  top: -1px;
+}
+
+/* Gentler alignment for smaller TOC text */
+.table-of-contents code {
+  position: relative;
+  top: -0.5px;
+}
+
 .main-wrapper {
   margin-top: 1em;
 }

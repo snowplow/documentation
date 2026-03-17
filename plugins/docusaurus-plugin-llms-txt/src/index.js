@@ -91,6 +91,7 @@ export default function pluginLlmsTxt(context, options) {
         siteDescription,
         siteUrl,
         enableMarkdownFiles,
+        siteDir: context.siteDir,
       })
 
       // Generate llms-full.txt

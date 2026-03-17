@@ -7,7 +7,10 @@ import { isPreviousVersion } from './version-utils.js'
  * Generate llms.txt index file.
  */
 export async function generateIndex(outDir, pages, options) {
-  const { siteTitle, siteDescription, siteUrl, enableMarkdownFiles } = options
+  const { siteTitle, siteDescription, siteUrl, enableMarkdownFiles, siteDir } =
+    options
+
+  const labelMap = await buildLabelMap(siteDir)
 
   const lines = []
   lines.push(`# ${siteTitle}`)
@@ -19,7 +22,7 @@ export async function generateIndex(outDir, pages, options) {
   }
 
   // Group pages hierarchically by docs section
-  const groups = groupByDocsSection(pages)
+  const groups = groupByDocsSection(pages, labelMap)
 
   for (const group of groups) {
     lines.push(`## ${group.label}`)
@@ -49,97 +52,93 @@ export async function generateIndex(outDir, pages, options) {
 }
 
 /**
- * Human-readable labels for docs sections.
- * Keys are the slug from the URL path; values are display labels.
- */
-const SECTION_LABELS = {
-  'get-started': 'Getting started',
-  'fundamentals': 'Fundamentals',
-  'sources': 'Sources (trackers & webhooks)',
-  'events': 'Events',
-  'event-studio': 'Event Studio',
-  'pipeline': 'Pipeline',
-  'destinations': 'Destinations',
-  'modeling-your-data': 'Data modeling',
-  'signals': 'Signals',
-  'monitoring': 'Monitoring',
-  'testing': 'Testing & debugging',
-  'api-reference': 'API reference & components',
-  'account-management': 'Account management',
-  'licensing': 'Licensing',
-  'migration-guides': 'Migration guides',
-  'glossary': 'Glossary',
-}
-
-/**
  * Sections large enough to split into subsections.
- * Maps section slug to the minimum page count that triggers splitting.
  */
 const SUBSECTION_THRESHOLD = 30
 
 /**
- * Human-readable labels for common subsection slugs.
+ * Build a map of slug → { label, position } by reading frontmatter from
+ * docs index files. Scans both top-level sections and subsections.
  */
-const SUBSECTION_LABELS = {
-  'web-trackers': 'Web trackers',
-  'mobile-trackers': 'Mobile trackers',
-  'react-native-tracker': 'React Native tracker',
-  'java-tracker': 'Java tracker',
-  'scala-tracker': 'Scala tracker',
-  'node-js-tracker': 'Node.js tracker',
-  'python-tracker': 'Python tracker',
-  'google-tag-manager': 'Google Tag Manager',
-  'flutter-tracker': 'Flutter tracker',
-  'roku-tracker': 'Roku tracker',
-  'net-tracker': '.NET tracker',
-  'unity-tracker': 'Unity tracker',
-  'c-tracker': 'C++ tracker',
-  'golang-tracker': 'Go tracker',
-  'php-tracker': 'PHP tracker',
-  'ruby-tracker': 'Ruby tracker',
-  'rust-tracker': 'Rust tracker',
-  'webview-tracker': 'WebView tracker',
-  'google-amp-tracker': 'Google AMP tracker',
-  'snowplow-tracking-cli': 'Snowplow Tracking CLI',
-  'lua-tracker': 'Lua tracker',
-  'pixel-tracker': 'Pixel tracker',
-  'first-party-tracking': 'First-party tracking',
-  'tracker-maintenance-classification': 'Tracker maintenance classification',
-  'webhooks': 'Webhooks',
-  'loaders-storage-targets': 'Loaders & storage targets',
-  'snowbridge': 'Snowbridge',
-  'iglu': 'Iglu',
-  'enrichment-components': 'Enrichment components',
-  'stream-collector': 'Stream collector',
-  'analytics-sdk': 'Analytics SDKs',
-  'snowplow-mini': 'Snowplow Mini',
-  'snowplow-micro': 'Snowplow Micro',
-  'modeling-your-data-with-dbt': 'dbt',
-  'forwarding-events': 'Event forwarding',
-  'warehouses-lakes': 'Warehouses & lakes',
-  'enrichments': 'Enrichments',
-  'recovering-failed-events': 'Recovering failed events',
-  'ootb-data': 'Out-of-the-box data',
-  'collector': 'Collector',
-  'enriched-tsv-format': 'Enriched TSV format',
-  'security': 'Security',
-  'reverse-etl': 'Reverse ETL',
-  'automatically-generated-data-models': 'Automatically generated data models',
-  'modeling-your-data-with-sql-runner': 'SQL Runner',
-  'running-data-models-via-console': 'Running data models via Console',
-  'visualization': 'Visualization',
-  'failed-events': 'Failed events',
-  'json-schema-reference': 'JSON schema reference',
-  'trackers': 'Trackers',
-  'versions': 'Versions',
-  'dataflow-runner': 'Dataflow Runner',
+async function buildLabelMap(siteDir) {
+  const labelMap = new Map()
+  const docsDir = path.join(siteDir, 'docs')
+
+  try {
+    await fs.access(docsDir)
+  } catch {
+    return labelMap
+  }
+
+  const topEntries = await fs.readdir(docsDir, { withFileTypes: true })
+
+  for (const entry of topEntries) {
+    if (!entry.isDirectory()) continue
+
+    const slug = entry.name
+    const indexPath = path.join(docsDir, slug, 'index.md')
+    const meta = await readFrontmatter(indexPath)
+    if (meta) {
+      labelMap.set(slug, meta)
+    }
+
+    // Scan subsections
+    const subDir = path.join(docsDir, slug)
+    let subEntries
+    try {
+      subEntries = await fs.readdir(subDir, { withFileTypes: true })
+    } catch {
+      continue
+    }
+
+    for (const subEntry of subEntries) {
+      if (!subEntry.isDirectory()) continue
+
+      const subSlug = subEntry.name
+      const subIndexPath = path.join(subDir, subSlug, 'index.md')
+      const subMeta = await readFrontmatter(subIndexPath)
+      if (subMeta) {
+        labelMap.set(subSlug, subMeta)
+      }
+    }
+  }
+
+  return labelMap
+}
+
+/**
+ * Read sidebar_label and sidebar_position from an index.md file's frontmatter.
+ * Returns { label, position } or null if the file doesn't exist.
+ */
+async function readFrontmatter(filePath) {
+  let content
+  try {
+    content = await fs.readFile(filePath, 'utf8')
+  } catch {
+    return null
+  }
+
+  if (!content.startsWith('---')) return null
+
+  const endIndex = content.indexOf('---', 3)
+  if (endIndex === -1) return null
+
+  const frontmatter = content.slice(3, endIndex)
+
+  const labelMatch = frontmatter.match(/^sidebar_label:\s*"?([^"\n]+)"?\s*$/m)
+  const posMatch = frontmatter.match(/^sidebar_position:\s*(\S+)\s*$/m)
+
+  const label = labelMatch ? labelMatch[1].trim() : null
+  const position = posMatch ? parseFloat(posMatch[1]) : Infinity
+
+  return label ? { label, position } : null
 }
 
 /**
  * Group pages by docs section, splitting large sections into subsections.
  * Returns an ordered array of { label, pages } objects.
  */
-function groupByDocsSection(pages) {
+function groupByDocsSection(pages, labelMap) {
   // First pass: group by top-level section (e.g. "sources", "api-reference")
   const topLevel = new Map()
 
@@ -159,45 +158,27 @@ function groupByDocsSection(pages) {
     }
   }
 
+  // Order sections by sidebar_position from frontmatter
+  const sectionKeys = [...topLevel.keys()]
+  sectionKeys.sort((a, b) => {
+    if (a === 'tutorials') return 1
+    if (b === 'tutorials') return -1
+    const posA = labelMap.get(a)?.position ?? Infinity
+    const posB = labelMap.get(b)?.position ?? Infinity
+    return posA - posB
+  })
+
   // Second pass: decide whether to split large sections
   const result = []
 
-  // Emit sections in a logical order
-  const orderedSections = [
-    'get-started',
-    'fundamentals',
-    'sources',
-    'events',
-    'event-studio',
-    'pipeline',
-    'destinations',
-    'modeling-your-data',
-    'signals',
-    'monitoring',
-    'testing',
-    'api-reference',
-    'account-management',
-    'licensing',
-    'migration-guides',
-    'glossary',
-    'tutorials',
-  ]
-
-  // Add any sections not in the ordered list
-  for (const key of topLevel.keys()) {
-    if (!orderedSections.includes(key)) {
-      orderedSections.push(key)
-    }
-  }
-
-  for (const sectionKey of orderedSections) {
+  for (const sectionKey of sectionKeys) {
     const group = topLevel.get(sectionKey)
     if (!group) continue
 
     const sectionLabel =
       sectionKey === 'tutorials'
         ? 'Tutorials'
-        : SECTION_LABELS[sectionKey] || formatSlug(sectionKey)
+        : labelMap.get(sectionKey)?.label || formatSlug(sectionKey)
 
     if (group.total >= SUBSECTION_THRESHOLD && group.subsections.size > 1) {
       // Split into subsections
@@ -207,14 +188,18 @@ function groupByDocsSection(pages) {
         result.push({ label: sectionLabel, pages: directPages })
       }
 
-      // Then emit each subsection
+      // Then emit each subsection, ordered by sidebar_position
       const subKeys = [...group.subsections.keys()].filter((k) => k !== null)
-      subKeys.sort()
+      subKeys.sort((a, b) => {
+        const posA = labelMap.get(a)?.position ?? Infinity
+        const posB = labelMap.get(b)?.position ?? Infinity
+        if (posA !== posB) return posA - posB
+        return a.localeCompare(b)
+      })
 
       for (const subKey of subKeys) {
         const subPages = group.subsections.get(subKey)
-        const subLabel =
-          SUBSECTION_LABELS[subKey] || formatSlug(subKey)
+        const subLabel = labelMap.get(subKey)?.label || formatSlug(subKey)
         result.push({
           label: `${sectionLabel} > ${subLabel}`,
           pages: subPages,

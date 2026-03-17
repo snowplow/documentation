@@ -12,7 +12,7 @@ keywords: ["attribution migration", "attribution upgrade", "dbt attribution vers
   1. users are only allowed to have 1 path transformation defined within the `snowplow__path_transforms` variable
   2. the `snowplow__path_transforms` variable parameters only accept single-item arrays for `remove_if_last_and_not_all` and `remove_if_not_all`
 - This is due to Redshift deprecating Python UDFs; the transformations now rely on native SQL, which allows less flexibility for automation.
-- While UDF creation is disabled, existing users may be able to continue modeling without upgrading, as long as their existing UDFs remain in the database.
+- Existing users can stay on older versions of the package as long as their UDFs remain in the database.
 
 
 ```yml title="dbt_project.yml"

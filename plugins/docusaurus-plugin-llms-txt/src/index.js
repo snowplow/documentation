@@ -6,6 +6,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { generateCurrent } from './generate-current.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
+import { buildOutdatedPaths } from './version-utils.js'
 
 /**
  * @param {import('@docusaurus/types').LoadContext} context
@@ -80,9 +81,12 @@ export default function pluginLlmsTxt(context, options) {
       // Enrich dbt config pages with variable tables from JSON schemas
       await enrichDbtSchemas(pages, context.siteDir)
 
+      // Build the set of outdated route prefixes from frontmatter
+      const outdatedPrefixes = await buildOutdatedPaths(context.siteDir)
+
       // Write per-page .md files
       if (enableMarkdownFiles) {
-        await writePages(outDir, pages, siteUrl)
+        await writePages(outDir, pages, siteUrl, outdatedPrefixes)
       }
 
       // Generate llms.txt index
@@ -92,6 +96,7 @@ export default function pluginLlmsTxt(context, options) {
         siteUrl,
         enableMarkdownFiles,
         siteDir: context.siteDir,
+        outdatedPrefixes,
       })
 
       // Generate llms-full.txt
@@ -100,6 +105,7 @@ export default function pluginLlmsTxt(context, options) {
           siteTitle,
           siteDescription,
           siteUrl,
+          outdatedPrefixes,
         })
       }
 
@@ -109,6 +115,7 @@ export default function pluginLlmsTxt(context, options) {
           siteTitle,
           siteDescription,
           siteUrl,
+          outdatedPrefixes,
         })
       }
 

@@ -6,7 +6,7 @@ import { isPreviousVersion, extractCurrentVersionLink, stripDeprecationBanner } 
  * Generate llms-full.txt — index header + all page content concatenated.
  */
 export async function generateFull(outDir, pages, options) {
-  const { siteTitle, siteDescription, siteUrl } = options
+  const { siteTitle, siteDescription, siteUrl, outdatedPrefixes } = options
 
   const lines = []
 
@@ -32,7 +32,7 @@ export async function generateFull(outDir, pages, options) {
     }
     lines.push(`> Source: ${pageUrl}`)
 
-    if (isPreviousVersion(page.routePath)) {
+    if (isPreviousVersion(page.routePath, outdatedPrefixes)) {
       const currentLink = extractCurrentVersionLink(page.markdown, siteUrl)
       lines.push('> Status: Previous version')
       if (currentLink) {

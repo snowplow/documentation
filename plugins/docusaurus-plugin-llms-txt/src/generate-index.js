@@ -7,7 +7,7 @@ import { isPreviousVersion } from './version-utils.js'
  * Generate llms.txt index file.
  */
 export async function generateIndex(outDir, pages, options) {
-  const { siteTitle, siteDescription, siteUrl, enableMarkdownFiles, siteDir } =
+  const { siteTitle, siteDescription, siteUrl, enableMarkdownFiles, siteDir, outdatedPrefixes } =
     options
 
   const labelMap = await buildLabelMap(siteDir)
@@ -29,7 +29,7 @@ export async function generateIndex(outDir, pages, options) {
     lines.push('')
 
     for (const page of group.pages) {
-      const prevTag = isPreviousVersion(page.routePath)
+      const prevTag = isPreviousVersion(page.routePath, outdatedPrefixes)
         ? ' [previous version]'
         : ''
 

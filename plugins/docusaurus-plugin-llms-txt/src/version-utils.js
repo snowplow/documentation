@@ -1,20 +1,107 @@
 /**
  * Utilities for detecting and handling previous-version pages.
+ *
+ * Instead of hardcoding URL patterns, we read sidebar_custom_props.outdated
+ * from the docs frontmatter — the same source of truth the live site uses
+ * (via MDXContent's breadcrumb inheritance).
  */
 
-const PREVIOUS_VERSION_PATTERNS = [
-  'previous-versions/',
-  'previous-version/',
-  'previous_versions/',
-  'previous-releases/',
-]
+import path from 'node:path'
+import fs from 'node:fs/promises'
 
 /**
- * Check if a route path points to a previous-version page.
- * Matches anywhere in the path (e.g. /rdb-loader-previous-versions/).
+ * Scan the docs directory for index files with `sidebar_custom_props.outdated: true`
+ * in their frontmatter. Returns a Set of route path prefixes (e.g. "/docs/sources/web-trackers/previous-versions/").
+ *
+ * Any page whose route starts with one of these prefixes is considered a previous version.
  */
-export function isPreviousVersion(routePath) {
-  return PREVIOUS_VERSION_PATTERNS.some((p) => routePath.includes(p))
+export async function buildOutdatedPaths(siteDir) {
+  const outdatedPrefixes = new Set()
+  const docsDir = path.join(siteDir, 'docs')
+
+  try {
+    await fs.access(docsDir)
+  } catch {
+    return outdatedPrefixes
+  }
+
+  await scanForOutdated(docsDir, '/docs/', outdatedPrefixes)
+  return outdatedPrefixes
+}
+
+/**
+ * Recursively scan directories for index.md/index.mdx files with outdated: true.
+ */
+async function scanForOutdated(dir, routePrefix, results) {
+  let entries
+  try {
+    entries = await fs.readdir(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+
+  // Check for index.md or index.mdx in this directory
+  for (const entry of entries) {
+    if (
+      !entry.isDirectory() &&
+      (entry.name === 'index.md' || entry.name === 'index.mdx')
+    ) {
+      const filePath = path.join(dir, entry.name)
+      if (await hasOutdatedProp(filePath)) {
+        results.add(routePrefix)
+      }
+    }
+  }
+
+  // Recurse into subdirectories
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      await scanForOutdated(
+        path.join(dir, entry.name),
+        `${routePrefix}${entry.name}/`,
+        results
+      )
+    }
+  }
+}
+
+/**
+ * Check if a markdown file has sidebar_custom_props.outdated: true in its frontmatter.
+ */
+async function hasOutdatedProp(filePath) {
+  let content
+  try {
+    content = await fs.readFile(filePath, 'utf8')
+  } catch {
+    return false
+  }
+
+  if (!content.startsWith('---')) return false
+
+  const endIndex = content.indexOf('---', 3)
+  if (endIndex === -1) return false
+
+  const frontmatter = content.slice(3, endIndex)
+
+  // Check for outdated: true within sidebar_custom_props block
+  const customPropsMatch = frontmatter.match(
+    /sidebar_custom_props:\s*\n((?:\s+.+\n)*)/
+  )
+  if (!customPropsMatch) return false
+
+  return /^\s+outdated:\s*true\s*$/m.test(customPropsMatch[1])
+}
+
+/**
+ * Check if a route path is a previous-version page.
+ * @param {string} routePath - The page's route path (e.g. "/docs/sources/web-trackers/previous-versions/v3/")
+ * @param {Set<string>} outdatedPrefixes - Set of outdated route prefixes from buildOutdatedPaths()
+ */
+export function isPreviousVersion(routePath, outdatedPrefixes) {
+  for (const prefix of outdatedPrefixes) {
+    if (routePath.startsWith(prefix)) return true
+  }
+  return false
 }
 
 /**

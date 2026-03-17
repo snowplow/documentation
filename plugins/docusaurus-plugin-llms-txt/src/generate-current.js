@@ -7,9 +7,9 @@ import { isPreviousVersion } from './version-utils.js'
  * previous-version pages.
  */
 export async function generateCurrent(outDir, pages, options) {
-  const { siteTitle, siteDescription, siteUrl } = options
+  const { siteTitle, siteDescription, siteUrl, outdatedPrefixes } = options
 
-  const currentPages = pages.filter((p) => !isPreviousVersion(p.routePath))
+  const currentPages = pages.filter((p) => !isPreviousVersion(p.routePath, outdatedPrefixes))
 
   const lines = []
 

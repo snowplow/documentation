@@ -181,7 +181,11 @@
             ],
             "properties": {
               "remove_if_last_and_not_all": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
               }
             }
           },
@@ -192,7 +196,11 @@
             ],
             "properties": {
               "remove_if_not_all": {
-                "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
               }
             }
           }

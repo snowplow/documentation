@@ -1,6 +1,8 @@
 ---
-title: "Creating a white-label JavaScript tracker build"
+title: "Create a white-label JavaScript tracker build"
 sidebar_label: "Creating a white-label build"
+description: "Build a customized version of sp.js with your own naming to avoid ad blockers and improve tracking reliability."
+keywords: ["white-label", "custom build", "ad blocker bypass", "tracker customization"]
 date: "2022-09-14"
 sidebar_position: 4000
 ---

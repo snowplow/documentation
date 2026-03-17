@@ -2,6 +2,8 @@
 title: "Learn how to set up the Attribution dbt package"
 sidebar_label: "Introduction"
 position: 1
+description: "Set up Snowplow's Attribution dbt package to analyze marketing attribution with multi-touch models. Prerequisites include Unified package, campaign enrichment, and conversion tracking."
+keywords: ["snowplow attribution dbt", "marketing attribution modeling", "multi-touch attribution", "dbt attribution package"]
 ---
 
 This tutorial walks you through how to set up Snowplow’s Attribution dbt package. It assumes you have already followed our Snowplow Unified Package [tutorial](/tutorials/unified-digital/intro), or previously configured it, as the Attribution package requires the model outputs (e.g. unified views and conversions tables).

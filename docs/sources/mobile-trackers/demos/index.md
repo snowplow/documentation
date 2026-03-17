@@ -2,6 +2,8 @@
 title: "Example applications for the native mobile trackers"
 sidebar_label: "Example applications"
 sidebar_position: 9999
+description: "Explore example Android and iOS applications demonstrating implementation of the Snowplow mobile trackers."
+keywords: ["mobile tracker examples", "demo apps", "implementation reference"]
 ---
 
 Check out the following example applications that can be used as a reference for how to use the tracker, or as a starting point for your own implementation.

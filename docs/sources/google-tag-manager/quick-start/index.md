@@ -1,7 +1,9 @@
 ---
-title: "Quick start guide for Google Tag Manager tracker"
+title: "Quick start guide for using Snowplow in Google Tag Manager"
 sidebar_label: "Quick start"
 sidebar_position: 100
+description: "Add Snowplow v4 custom templates to your Google Tag Manager workspace and configure basic tracking. Import templates from the GTM gallery and set up your collector endpoint for event tracking."
+keywords: ["gtm setup", "tag manager templates", "gtm workspace", "snowplow v4 setup", "gtm gallery"]
 ---
 
 This guide will walk you through the initial setup for Snowplow in Google Tag Manager.
@@ -44,13 +46,13 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 2. Select `Snowplow v4 Settings` from the list of available variables.
 
-3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](https://docs.snowplow.io/docs/collecting-data/configuring-collector/).
+3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](/docs/pipeline/collector/index.md).
 
 ![](images/variable.png)
 
 :::info
 
-You might consider using conditional variables to set the collector endpoint based on the environment, e.g. sending data to [Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/)/[Mini](https://docs.snowplow.io/docs/api-reference/snowplow-mini/) collector endpoint during development.
+You might consider using conditional variables to set the Collector endpoint based on the environment, e.g. sending data to [Snowplow Micro](/docs/testing/snowplow-micro/index.md) during development.
 
 :::
 
@@ -81,4 +83,4 @@ In this section, we will create a simple tag to fire a page view event.
 
 To test the tag, you can use the GTM preview mode. Click the `Preview` button in the top right of the GTM interface. This will open a new tab with your website and the GTM preview console.
 
-Ensure that you see the Page View event in your Snowplow pipeline. If you don't have a full pipeline set up yet and are hosting the site locally, you can use [Snowplow Micro](/docs/testing/snowplow-micro/index.md), or [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md) to check that the event is sent correctly.
+Ensure that you see the Page View event in your Snowplow pipeline. If you don't have a full pipeline set up yet, you can use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) or [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md) to check that the event is sent correctly.

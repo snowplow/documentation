@@ -1,7 +1,9 @@
 ---
-title: "Automated testing with Snowplow Micro"
-sidebar_position: 5.5
-sidebar_label: "Automated testing"
+title: "Set up automated testing with Snowplow Micro"
+sidebar_position: 3
+sidebar_label: "Run in CI/CD"
+description: "Integrate Snowplow Micro with automated testing frameworks like Nightwatch and Cypress. Build end-to-end GitHub Actions workflows to validate tracking implementations with custom commands and assertions."
+keywords: ["automated testing", "nightwatch", "cypress", "github actions", "e2e testing", "ci/cd"]
 ---
 
 ```mdx-code-block
@@ -9,9 +11,17 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-[Snowplow Micro](/docs/testing/snowplow-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
+The basic approach for using Snowplow Micro in automated testing is this:
+* Run it alongside your tests, either via Docker or Java
+* In each test, send some events then validate the results using the [Micro REST API](/docs/api-reference/snowplow-micro/api/index.md)
 
-The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
+:::tip
+
+The instructions for running and configuring Micro in CI/CD are identical to the ones for [running locally](/docs/testing/snowplow-micro/local/index.md).
+
+:::
+
+The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository shows how to set up automated tests using Nightwatch and Cypress as examples of test frameworks and how to build end-to-end GitHub Actions testing workflows.
 
 ## Local setup
 
@@ -181,7 +191,7 @@ window.snowplow('enableFormTracking', { options: options });
     1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
         - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
         - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
-        - We also want to add as [custom context](/docs/sources/web-trackers/tracking-events/index.md#custom-context) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
+        - We also want to add as [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-entity) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
         - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
 
 ```javascript
@@ -261,7 +271,7 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-- `webPage` [predefined Context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts). Note: The webPage predefined context is enabled by default in JavaScript Tracker v3, as it is also a prerequisite for the official [Snowplow web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
+- `webPage` [predefined Context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). Note: The webPage predefined context is enabled by default in JavaScript Tracker v3, as it is also a prerequisite for the official [Snowplow web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
 
 ## Testing with Snowplow Micro
 
@@ -513,7 +523,7 @@ So, following on the 3 test's phases:
 
 Another Cypress' recommendation for best [practices](https://docs.cypress.io/guides/references/best-practices.html#Having-tests-rely-on-the-state-of-previous-tests) is the decoupling of tests, which, for the case of testing with Snowplow Micro, would mean to run both the state-changing and the micro-requests in the same spec file. However, there were some issues in doing so. More specifically, those issues had only to do with cases where links (or submit buttons) were clicked, in other words in cases where a window [unload event](https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event) was fired.
 
-To describe the issue, we first describe what normally happens upon an unload event: When a user clicks, for example, a link, on one hand the browser wants to navigate to the link, and on the other hand, the tracker (in our case the [Javascript Tracker](/docs/sources/web-trackers/index.md)) tries to send the [link click](/docs/sources/web-trackers/tracking-events/index.md#link-click-tracking) or the [submit form](/docs/sources/web-trackers/tracking-events/index.md#form-tracking) events, while also storing them in local storage, just in case the events don't get sent before the page unloads. While it is normal for browsers to cancel all requests, a cancelled request does not necessarily mean that the request did not reach the server, but that the client sending it, does not wait for an answer anymore. So, there is no way to know from client side whether the request (be it POST or GET) succeeded.
+To describe the issue, we first describe what normally happens upon an unload event: When a user clicks, for example, a link, on one hand the browser wants to navigate to the link, and on the other hand, the tracker (in our case the [Javascript Tracker](/docs/sources/web-trackers/index.md)) tries to send the [link click](/docs/sources/web-trackers/tracking-events/link-click/index.md) or the [submit form](/docs/sources/web-trackers/tracking-events/form-tracking/index.md) events, while also storing them in local storage, just in case the events don't get sent before the page unloads. While it is normal for browsers to cancel all requests, a cancelled request does not necessarily mean that the request did not reach the server, but that the client sending it, does not wait for an answer anymore. So, there is no way to know from client side whether the request (be it POST or GET) succeeded.
 
 That problem was especially apparent when Micro was being queried in the same spec file with the app's actions. For example, POST requests appeared as cancelled in Cypress' test runner, but the events may have reached Micro. Taking advantage of the fact that Cypress also clears browser cache when it changes spec file, we decided to move the testing part of Micro into separate spec files.
 
@@ -608,7 +618,7 @@ cy.eventsWithParams(
 );
 ```
 
-This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/tracking-events/index.md#tracking-custom-structured-events).
+This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-structured-event).
 
 #### cy.eventsWithSchema
 

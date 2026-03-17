@@ -1,7 +1,9 @@
 ---
 title: "PII pseudonymization enrichment"
-sidebar_position: 15
+sidebar_position: 17
 sidebar_label: PII pseudonymization
+description: "Pseudonymize personally identifiable information in events using hashing for privacy compliance."
+keywords: ["PII pseudonymization", "data privacy", "GDPR"]
 ---
 
 PII (personally identifiable information) pseudonymization enrichment runs after all the other enrichments and pseudonymizes the fields that are configured as PIIs.
@@ -51,7 +53,7 @@ By default, `anonymousOnly` is `false`, i.e. PII fields are always masked.
 
 ## Input
 
-[These fields](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L43-L60) of the enriched event and any field of an unstructured event or context can be hashed.
+[These fields](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L43-L60) of the enriched event and any string or array of strings field of a self-describing event or entity can be hashed.
 
 ## Output
 

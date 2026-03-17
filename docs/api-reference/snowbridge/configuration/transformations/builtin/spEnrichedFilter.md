@@ -1,12 +1,18 @@
 ---
-title: "spEnrichedFilter"
-description: "Filters messages based on a regex match against an atomic field."
+title: "Snowbridge spEnrichedFilter transformation"
+sidebar_label: "spEnrichedFilter"
+description: "Filter Snowplow enriched events based on regex matches against atomic fields with keep or drop actions, with Snowbridge."
+keywords: ["snowbridge config", "enriched filter", "atomic fields", "regex filter", "snowplow filtering"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+:::warning Deprecated
+This transformation is deprecated and can result in unexpected behavior when matching integers. Use the [`jqFilter`](/docs/api-reference/snowbridge/configuration/transformations/builtin/jqFilter.md) transformation instead, which provides more robust and flexible filtering capabilities.
+:::
 
 `spEnrichedFilter`: Specific to Snowplow data. Filters messages based on a regex match against an atomic field.
 

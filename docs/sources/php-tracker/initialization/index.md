@@ -1,8 +1,10 @@
 ---
-title: "Initializing the PHP tracker"
+title: "Initialize the PHP tracker"
 sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
+description: "Initialize the PHP tracker with emitter, subject, namespace, and encoding configuration for event tracking."
+keywords: ["php tracker initialization", "tracker configuration", "emitter setup"]
 ---
 
 To instantiate a new Tracker instance we need to make sure the Snowplow Tracker classes are available.
@@ -29,13 +31,13 @@ $tracker = new Tracker($emitter, $subject);
 
 Other Tracker arguments:
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `emitters` | The emitter to which events are sent | Yes | `None` |
-| `subject` | The user being tracked | Yes | `Subject()` |
-| `namespace` | The name of the tracker instance | No | `None` |
-| `app_id` | The application ID | No | `None` |
-| `encode_base64` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `True` |
+| **Argument Name** | **Description**                                                            | **Required?** | **Default** |
+| ----------------- | -------------------------------------------------------------------------- | ------------- | ----------- |
+| `emitters`        | The emitter to which events are sent                                       | Yes           | `None`      |
+| `subject`         | The user being tracked                                                     | Yes           | `Subject()` |
+| `namespace`       | The name of the tracker instance                                           | No            | `None`      |
+| `app_id`          | The application ID                                                         | No            | `None`      |
+| `encode_base64`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `True`      |
 
 Another example using all of the allowed arguments:
 

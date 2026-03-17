@@ -1,6 +1,9 @@
 ---
-title: "Reverse ETL"
+title: "Reverse ETL for data activation"
+sidebar_label: "Reverse ETL"
 sidebar_position: 3
+description: "Activate warehouse data by syncing it to marketing platforms with reverse ETL, enabling sophisticated audience targeting based on predictive models and behavioral insights."
+keywords: ["reverse ETL", "data activation", "Census", "audience sync", "marketing platforms"]
 ---
 
 Snowplow and Reverse ETL represents best in class tooling for companies executing more sophisticated use cases with their behavioral data.

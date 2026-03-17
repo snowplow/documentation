@@ -1,6 +1,9 @@
 ---
-title: "LaunchDarkly Tag for GTM SS"
+title: "LaunchDarkly Tag for GTM Server Side"
+sidebar_label: "LaunchDarkly Tag for GTM SS"
 sidebar_position: 600
+description: "Forward Snowplow events to LaunchDarkly from GTM Server Side using the LaunchDarkly Tag with metric import REST API for experiment tracking."
+keywords: ["LaunchDarkly Tag", "GTM SS LaunchDarkly", "feature flags", "experimentation", "metric import"]
 ---
 
 The [LaunchDarkly Tag for GTM SS](https://github.com/snowplow/snowplow-gtm-server-side-launchdarkly-tag) allows events to be forwarded to LaunchDarkly using its [metric import REST API](https://docs.launchdarkly.com/home/creating-experiments/import-metric-events). This Tag works best with events from the Snowplow Client, but can also work with events from other GTM SS Clients such as GAv4.

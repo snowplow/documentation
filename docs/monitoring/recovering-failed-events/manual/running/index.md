@@ -1,8 +1,10 @@
 ---
-title: "Running the event recovery job"
+title: "Run event recovery jobs"
 sidebar_label: "Running"
 date: "2020-07-22"
 sidebar_position: 30
+description: "Define and encode recovery configuration, then deploy recovery jobs using Spark, Flink, or Beam runtimes."
+keywords: ["run recovery job", "deploy event recovery"]
 ---
 
 Now that we've discussed configuring the recovery, let's dive in to running it on your pipeline.
@@ -27,7 +29,7 @@ The configuration consists of the `resolver-config.json` that your pipeline uses
         ],
         "connection": {
           "http": {
-            "uri": "http://iglucentral.com"
+            "uri": "https://iglucentral.com"
           }
         }
       }

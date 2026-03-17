@@ -1,7 +1,10 @@
 ---
-title: "Upgrade guide"
+title: "Snowplow Self-Hosted upgrade guide"
+sidebar_label: "Upgrade guide"
 date: "2021-09-01"
 sidebar_position: 4
+description: "Step-by-step guide to upgrading Snowplow Self-Hosted Community Edition components and Terraform modules to newer versions."
+keywords: ["upgrade", "Terraform upgrade", "version migration", "Community Edition updates"]
 ---
 
 Now that you have successfully spun up a Snowplow pipeline, you might want to upgrade your components when there are updates available.

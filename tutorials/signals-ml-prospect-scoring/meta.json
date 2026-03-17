@@ -2,7 +2,7 @@
   "title": "Score prospects in real time using Signals and ML",
   "label": "Solution accelerator",
   "description": "Try out Signals for live prospect scoring with machine learning.",
-  "useCases": ["Real-time personalization"],
-  "technologies": ["Jupyter notebook", "ML"],
+  "useCase": "Real-time personalization",
+  "technologies": ["Jupyter notebook", "Machine learning"],
   "snowplowTech": ["Signals"]
 }

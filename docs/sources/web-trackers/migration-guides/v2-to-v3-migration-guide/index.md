@@ -1,6 +1,8 @@
 ---
 title: "Migrating from web trackers v2 to v3"
 sidebar_label: "Migrating from v2 to v3"
+description: "Migrate from JavaScript tracker v2 to v3 with the new tracking API, plugins, and configuration changes."
+keywords: ["v2 to v3 migration", "tracker upgrade", "breaking changes", "api changes"]
 date: "2021-03-24"
 sidebar_position: 1200
 ---

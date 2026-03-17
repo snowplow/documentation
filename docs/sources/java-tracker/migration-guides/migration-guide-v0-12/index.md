@@ -1,7 +1,10 @@
 ---
 title: "From version 0.11 to 0.12"
+sidebar_label: "From version 0.11 to 0.12"
 date: "2022-03-24"
 sidebar_position: 100
+description: "Migration guide for upgrading the Java tracker from version 0.11 to 0.12 with breaking changes and new features."
+keywords: ["java tracker migration", "version upgrade 0.12"]
 ---
 
 Several new features were added in v0.12. See the [Github](https://github.com/snowplow/snowplow-java-tracker) changelog for full details. Unfortunately, these improvements involve multiple breaking changes. See below for a guide to the changes.

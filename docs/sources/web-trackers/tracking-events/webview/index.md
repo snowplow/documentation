@@ -1,7 +1,9 @@
 ---
-title: "Tracking WebViews and hybrid applications using the web trackers"
+title: "Track WebViews and hybrid applications using the web trackers"
 sidebar_label: "Hybrid applications"
 sidebar_position: 180
+description: "Integrate web tracking in hybrid mobile apps by forwarding events from web views to native iOS, Android, or React Native trackers."
+keywords: ["webview", "hybrid apps"]
 ---
 
 ```mdx-code-block
@@ -70,7 +72,7 @@ This plugin uses the [Snowplow WebView tracker](/docs/sources/webview-tracker/in
 
 ## What do the forwarded events look like?
 
-The forwarded hybrid events will have all the information tracked by the web tracker. This includes all entities, whether configured by the tracker [automatically](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) or by you as a global context. Baked-in (non-entity) properties such as user agent or URL are also included.
+The forwarded hybrid events will have all the information tracked by the web tracker. This includes all entities, whether configured by the tracker [automatically](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) or by you as a global context. Baked-in (non-entity) properties such as user agent or URL are also included.
 
 Additionally, any configured mobile entities will also be added. Again, this includes [auto-tracked entities](/docs/sources/mobile-trackers/tracking-events/index.md#auto-tracked-events-and-entities) such as the screen, session, or platform entities, as well as any global context entities.
 
@@ -103,9 +105,9 @@ window.snowplow(
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-webview@webview_plugin`
-- `yarn add @snowplow/browser-plugin-webview@webview_plugin`
-- `pnpm add @snowplow/browser-plugin-webview@webview_plugin`
+- `npm install @snowplow/browser-plugin-webview`
+- `yarn add @snowplow/browser-plugin-webview`
+- `pnpm add @snowplow/browser-plugin-webview`
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';

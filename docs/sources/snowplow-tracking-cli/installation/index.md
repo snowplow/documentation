@@ -1,8 +1,10 @@
 ---
-title: "Installing the Snowplow Tracking CLI"
+title: "Install the Snowplow Tracking CLI"
 sidebar_label: "Installation"
 date: "2020-10-12"
 sidebar_position: 100
+description: "Download Snowplow Tracking CLI binaries for Linux, macOS, and Windows, or use the Docker container for command-line event tracking."
+keywords: ["tracking cli installation", "cli binary download", "docker container"]
 ---
 
 You can download the binary for Linux, macOS and Windows directly from GitHub:

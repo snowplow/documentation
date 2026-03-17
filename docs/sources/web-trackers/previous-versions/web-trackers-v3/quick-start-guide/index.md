@@ -2,6 +2,8 @@
 title: "Quick start guide"
 date: "2021-03-24"
 sidebar_position: 100
+description: "Documentation for Quick start guide in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

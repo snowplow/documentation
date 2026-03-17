@@ -1,7 +1,10 @@
 ---
 title: "Load event and entity types that you have defined"
+sidebar_label: "Load event and entity types that you have defined"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Create and load custom event and entity tables in Redshift with Igluctl, JSON Path files, and table definitions for pre-R32 RDB Loader."
+keywords: ["custom entities", "custom events", "igluctl", "json paths", "redshift tables"]
 ---
 
 Snowplow supports users creating their own events and entities. Events and entity definitions live as schemas in Iglu schema registries.

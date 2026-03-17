@@ -3,6 +3,7 @@ title: Call the API to see prospect scores in your browser
 sidebar_label: See scores in the browser
 position: 6
 description: "Deploy the prospect scoring API, and display real-time conversion predictions in the browser console."
+keywords: ["flask api deployment", "browser javascript integration"]
 ---
 
 The final requirement is to see the prospect scores and predictions in the browser. In this tutorial, we'll call the API every 10 seconds.

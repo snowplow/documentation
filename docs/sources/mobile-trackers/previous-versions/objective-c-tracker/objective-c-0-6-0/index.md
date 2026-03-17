@@ -2,6 +2,9 @@
 title: "Objective-C (iOS) (0.6.0)"
 date: "2020-03-02"
 sidebar_position: 950
+sidebar_label: "Objective-C (iOS) (0.6.0)"
+description: "Legacy documentation for Objective-C Tracker version 0.6.0 supporting iOS, OSX, and tvOS."
+keywords: ["objective-c 0.6.0", "ios", "tracker"]
 ---
 
 ## 1. Overview

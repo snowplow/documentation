@@ -2,6 +2,9 @@
 title: "Android (0.8.0)"
 date: "2020-03-05"
 sidebar_position: 930
+sidebar_label: "Android (0.8.0)"
+description: "Documentation for Android Tracker version 0.8.0."
+keywords: ["android 0.8.0", "tracker"]
 ---
 
 The Android tracker can be used to send events from Android apps and games.

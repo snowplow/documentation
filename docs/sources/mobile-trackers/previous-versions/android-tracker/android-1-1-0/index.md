@@ -2,6 +2,9 @@
 title: "Android (1.1.0)"
 date: "2020-03-05"
 sidebar_position: 910
+sidebar_label: "Android (1.1.0)"
+description: "Documentation for Android Tracker version 1.1.0."
+keywords: ["android 1.1.0", "tracker"]
 ---
 
 ## Installation

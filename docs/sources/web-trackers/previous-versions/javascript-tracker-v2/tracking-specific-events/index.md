@@ -1,6 +1,8 @@
 ---
 title: "Tracking Events"
 sidebar_position: 40
+description: "Documentation for tracking Tracking Events with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._
@@ -281,7 +283,7 @@ The `data` field should be flat, not nested.
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 
@@ -813,7 +815,7 @@ snowplow('addTrans',
   );
 ```
 
-`addTrans` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`addTrans` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-context) for more information.
 
 #### `addItem`
 
@@ -1138,7 +1140,7 @@ snowplow('trackAdClick:' + rnd,
 
 Ad click events are implemented as Snowplow self describing events.[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_click/jsonschema/1-0-0) is the JSON schema for an ad click event.
 
-`trackAdClick` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`trackAdClick` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-context) for more information.
 
 #### `trackAdConversion`
 
@@ -1233,7 +1235,7 @@ snowplow('trackSiteSearch',
 
 Site search events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0) is the schema for a `site_search` event.
 
-`trackSiteSearch` can also be passed an array of custom context as an additional final parameter. See [custom context](#custom-contexts) for more information.
+`trackSiteSearch` can also be passed an array of custom context as an additional final parameter. See [custom context](#custom-context) for more information.
 
 ### `trackTiming`
 
@@ -1682,7 +1684,7 @@ try {
 }
 ```
 
-`trackError` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`trackError` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-context) for more information.
 
 Using `trackError` it's assumed that developer knows where error could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 

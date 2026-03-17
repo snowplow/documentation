@@ -1,7 +1,10 @@
 ---
 title: "Upgrading to Newer Versions"
+sidebar_label: "Upgrading"
 date: "2023-01-25"
 sidebar_position: 100
+description: "Upgrade from Python tracker v0.15 to v0.13.0+ with guidance on breaking changes including batch_size and retry behavior updates."
+keywords: ["python tracker v0.15 upgrade", "migration guide", "version upgrade"]
 ---
 
 This page gives instructions to upgrading to newer versions of the Python Tracker

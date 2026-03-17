@@ -1,7 +1,10 @@
 ---
-title: "Redshift loader"
+title: "Load into Redshift using the RDB Loader"
+sidebar_label: "Into Redshift"
 date: "2022-04-05"
 sidebar_position: 10
+description: "Load shredded Snowplow events into Amazon Redshift with automatic schema creation and table management."
+keywords: ["redshift loader", "aws redshift", "shredded data loading", "redshift copy", "redshift tables"]
 ---
 
 ```mdx-code-block

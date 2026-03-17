@@ -1,6 +1,9 @@
 ---
-title: Snowplow Template
+title: "Snowplow GTM template"
+sidebar_label: "Snowplow template"
 sidebar_position: 200
+description: "Configure Snowplow v4 tag types in Google Tag Manager including ad tracking, button clicks, cart events, site search, timing, enhanced consent, ecommerce, error tracking, page views, link clicks, and form tracking with custom commands."
+keywords: ["gtm tag types", "snowplow v4 tags", "gtm event tracking", "tag template configuration", "gtm custom tags"]
 ---
 
 This template implements the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/events/index.md) from your website to your Snowplow collector.
@@ -117,12 +120,12 @@ The Site Search tag can be used to track searches on your website, using the [Si
 <details>
 <summary>Site Search Parameters</summary>
 
-| Name           | Required? | Description                     | Example                  |
-| -------------- | --------- | ------------------------------- | ------------------------ |
-| `terms`        | Yes       | Search terms                    | ['unified, log']         |
+| Name           | Required? | Description                     | Example                   |
+| -------------- | --------- | ------------------------------- | ------------------------- |
+| `terms`        | Yes       | Search terms                    | ['unified, log']          |
 | `filters`      | No        | Search filters                  | \{'category': 'clothing'} |
-| `totalResults` | No        | Results found                   | 10                       |
-| `pageResults`  | No        | Results displayed on first page | 5                        |
+| `totalResults` | No        | Results found                   | 10                        |
+| `pageResults`  | No        | Results displayed on first page | 5                         |
 
 </details>
 
@@ -211,13 +214,13 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 | `filename` | No            | Filename or URL                     | 'shop.js'                |
 | `lineno`   | No            | Line number of problem code chunk   | 23                       |
 | `colno`    | No            | Column number of problem code chunk | 45                       |
-| `error`    | No            | JS `ErrorEvent`                     | \{Stack trace string}     |
+| `error`    | No            | JS `ErrorEvent`                     | \{Stack trace string}    |
 
 </details>
 
 ## Page View
 
-You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/events/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view).
+You can provide a `Custom Page Title` if you wish, and you can add a [custom entity](/docs/events/custom-events/index.md#custom-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md).
 
 If you enable `Page Activity Tracking`, page pings will be sent at intervals that you can specify.
 
@@ -274,7 +277,7 @@ For a list of available commands, consult the [API documentation](https://github
 
 ### Add custom context entities
 
-Using the Context Entities table allows you to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
+Using the Context Entities table allows you to attach [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-entity) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
 
 For example to manually attach the web page context, create a custom JavaScript variable that returns an array with the custom context object:
 
@@ -296,7 +299,7 @@ Then set this variable as the value in the Context Entities table.
 
 ### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#custom-timestamp) with this field. The format must be UNIX time in milliseconds.
 
 ## Parameter Object
 
@@ -305,13 +308,13 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - [Ad Tracking](/docs/sources/web-trackers/tracking-events/ads/index.md)
 - [Cart Tracking](/docs/sources/web-trackers/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
 - [Error Tracking](/docs/sources/web-trackers/tracking-events/errors/index.md)
-- [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
+- [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-event-self-describing)
 - [Site Search](/docs/sources/web-trackers/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/sources/web-trackers/tracking-events/social-media/index.md)
-- [Structured Event](/docs/fundamentals/events/index.md#structured-events)
+- [Structured Event](/docs/fundamentals/canonical-event/index.md#structured-events)
 - [Timing](/docs/sources/web-trackers/tracking-events/timings/generic/index.md)
 
-You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/errors/index.md), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {

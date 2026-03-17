@@ -1,8 +1,10 @@
 ---
-title: "Installing the Scala tracker"
-sidebar_label: "Setup"
+title: "Install the Scala tracker"
+sidebar_label: "Installation"
 date: "2022-9-15"
 sidebar_position: 0
+description: "Install the Snowplow Scala tracker from Maven Central or JCenter using sbt, Gradle, or Maven with support for http4s and id emitters."
+keywords: ["scala tracker installation", "sbt dependency", "maven central"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Subjects"
+title: "Track subject data with the PHP tracker"
+sidebar_label: "Subjects"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Add user and environment data to tracked events using the Subject class with platform, user ID, and device properties."
+keywords: ["php subject", "user properties", "environment data"]
 ---
 
 The Subject object lets you send any additional information about your application's environment, current user, etc to Snowplow.
@@ -12,7 +15,7 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece of information in it already, the [platform](/docs/events/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
+By default the subject has one piece of information in it already, the [platform](/docs/fundamentals/canonical-event/index.md#application-fields) `["p" => "srv"]`.
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 
@@ -66,7 +69,7 @@ For example:
 $subject->setPlatform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [Event Parameters reference](/docs/events/going-deeper/event-parameters/index.md#application-parameters).
+For a full list of supported platforms, please see the [Event Parameters reference](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### `setUserId`
 

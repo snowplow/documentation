@@ -1,7 +1,10 @@
 ---
 title: "Java Tracker v0.12"
+sidebar_label: "Java Tracker v0.12"
 date: "2020-02-26"
 sidebar_position: 100
+description: "Documentation for Java tracker version 0.12, a previous release of the Snowplow Java tracking SDK."
+keywords: ["java tracker v0.12", "legacy version"]
 ---
 
 ```mdx-code-block

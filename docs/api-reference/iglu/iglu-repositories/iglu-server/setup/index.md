@@ -1,7 +1,10 @@
 ---
-title: "Setup Iglu Server"
+title: "Setup guide for Iglu Server"
+sidebar_label: "Setup guide"
 date: "2021-03-26"
 sidebar_position: 1000
+description: "Deploy Iglu Server with Docker or Terraform for PostgreSQL-backed schema repository with RESTful API and authentication."
+keywords: ["iglu server setup", "docker iglu", "terraform iglu", "postgresql schema storage"]
 ---
 
 ```mdx-code-block

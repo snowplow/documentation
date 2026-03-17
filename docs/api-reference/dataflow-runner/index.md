@@ -1,7 +1,10 @@
 ---
-title: "Dataflow Runner"
+title: "Dataflow Runner for AWS EMR clusters"
+sidebar_label: "Dataflow Runner"
 date: "2020-03-02"
 sidebar_position: 100
+description: "CLI tool for launching and managing AWS EMR clusters with templated playbooks for Hadoop and Spark jobs with distributed locking support."
+keywords: ["dataflow runner", "aws emr", "emr cluster management"]
 ---
 
 Dataflow Runner is a system for creating and running [AWS EMR](https://aws.amazon.com/emr/) jobflow clusters and steps. It uses templated playbooks to define your cluster, and the Hadoop/Spark/et al jobs that you want to run.

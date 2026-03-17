@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>output.good.location</code></td>
-    <td>Required, e.g. <code>s3a://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Iceberg format.  The URI should start with <code>s3a://</code></td>
+    <td>Optional, e.g. <code>s3a://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Iceberg format.  The URI should start with <code>s3a://</code>. If not provided, the catalog's default warehouse location will be used.</td>
 </tr>
 <tr>
     <td><code>output.good.database</code></td>

@@ -2,6 +2,9 @@
 title: "Tracking Events"
 date: "2021-11-23"
 sidebar_position: 30
+sidebar_label: "Tracking Events"
+description: "Documentation for tracking events using Mobile Trackers v3.x."
+keywords: ["mobile tracker v3", "tracking events"]
 ---
 
 ```mdx-code-block
@@ -45,7 +48,7 @@ Client session tracking is activated by default but it can be disabled through t
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background the `application_background` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the foreground timeout. When the app moves from background to foreground the `application_foreground` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the background timeout.
 
@@ -156,7 +159,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 
 ### Structured
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
@@ -339,7 +342,7 @@ Client session tracking is activated by default but it can be disabled through t
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background the `application_background` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the foreground timeout. When the app moves from background to foreground the `application_foreground` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the background timeout.
 
@@ -460,7 +463,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 
 ### Structured
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 

@@ -3,6 +3,8 @@ title: "Migration guide for Snowplow iOS Tracker SDK from version 1.x to 2.0"
 date: "2021-03-24"
 sidebar_label: "From version 1.x to 2.0 for iOS"
 sidebar_position: -1
+description: "Migrate your iOS tracker instrumentation from version 1.x to 2.0 with updated configuration and improved Swift compatibility."
+keywords: ["ios migration", "version 2.0", "tracker upgrade"]
 ---
 
 This section describes the main changes when converting an applications instrumentation of the Snowplow iOS tracker SDK from version 1.x to version 2.0.

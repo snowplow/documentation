@@ -3,7 +3,17 @@ title: "Load failed events into warehouse or lake"
 sidebar_position: 3
 sidebar_label: "Load failed events into table"
 description: "Load common types of failed events to a separate table in your warehouse or lake to analyze them easily."
+keywords: ["failed events loader", "load failed events", "warehouse failed events table"]
 ---
+
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Failed events loaders are included with all Snowplow platforms."
+/>
+```
 
 :::note Compatibility
 
@@ -91,7 +101,7 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 ## Configure
 
-To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
+To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/pipeline/enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
 The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 

@@ -3,6 +3,8 @@ title: "Global context for mobile trackers"
 sidebar_label: "Global context"
 date: "2022-08-30"
 sidebar_position: 20
+description: "Apply context entities declaratively to all or specific subsets of tracked events using global context generators."
+keywords: ["global context", "context generators", "conditional entities"]
 ---
 
 ```mdx-code-block

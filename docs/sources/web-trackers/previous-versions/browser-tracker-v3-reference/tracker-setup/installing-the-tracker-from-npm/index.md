@@ -2,6 +2,8 @@
 title: "Installing the tracker from npm"
 date: "2021-03-31"
 sidebar_position: -10
+description: "Documentation for tracking Installing the er from npm with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 Getting started with sending events using the Browser Tracker will be familiar for anyone who is used to installing npm packages into their web apps and is designed to work with frameworks such as React, Angular and Vue.

@@ -1,6 +1,9 @@
 ---
 title: "BigQuery Loader (1.x)"
+sidebar_label: "BigQuery Loader (1.x)"
 sidebar_position: 0
+description: "Legacy BigQuery Loader 1.x documentation with StreamLoader, Mutator, and Repeater applications for loading events into BigQuery."
+keywords: ["bigquery loader 1.x", "streamloader", "bigquery mutator", "bigquery repeater", "legacy loader"]
 ---
 
 ```mdx-code-block

@@ -1,12 +1,18 @@
 ---
-title: "spEnrichedFilterContext"
-description: "Filters messages based on a regex match against a field in an entity."
+title: "Snowbridge spEnrichedFilterContext transformation"
+sidebar_label: "spEnrichedFilterContext"
+description: "Filter Snowplow enriched events based on regex matches against entity fields using jsonpath notation, with Snowbridge."
+keywords: ["snowbridge config", "context filter", "entity filtering", "regex filter", "snowplow entities"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+:::warning Deprecated
+This transformation is deprecated and can result in unexpected behavior when matching integers. Use the [`jqFilter`](/docs/api-reference/snowbridge/configuration/transformations/builtin/jqFilter.md) transformation instead, which provides more robust and flexible filtering capabilities.
+:::
 
 `spEnrichedFilterContext`: Specific to Snowplow data. Filters messages based on a regex match against a field in an entity.
 

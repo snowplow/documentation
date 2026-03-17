@@ -3,6 +3,7 @@ title: "Tracking your first events"
 sidebar_position: 5
 sidebar_label: "Track events"
 description: "Tracking your first Snowplow events"
+keywords: ["event tracking", "trackers", "JavaScript tracker", "web tracking", "mobile tracking"]
 ---
 
 ```mdx-code-block
@@ -88,7 +89,7 @@ CDI Private Managed Cloud can automatically generate the snippet for you. Go to 
   </TabItem>
   <TabItem value="cloud" label="CDI Cloud">
 
-You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/environments/start-tracking-events?fromDocs) section.
+You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/) section.
 
   </TabItem>
   <TabItem value="self-hosted" label="Snowplow Self-Hosted">

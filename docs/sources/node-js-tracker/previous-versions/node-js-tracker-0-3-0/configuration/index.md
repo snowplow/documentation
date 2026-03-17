@@ -1,20 +1,23 @@
 ---
 title: "Configuration"
+sidebar_label: "Configuration"
 date: "2020-02-26"
 sidebar_position: 300
+description: "Configure event properties for Node.js tracker v0.3.0."
+keywords: ["node.js tracker v0.3.0 configuration", "event properties"]
 ---
 
 You may have additional information about your application"s environment, current user and so on, which you want to send to Snowplow with each event.
 
 The tracker instance has a set of `set...()` methods to attach extra data to all tracked events:
 
-- [`setPlatform()`](#set-platform)
-- [`setUserId()`](#set-user-id)
-- [`setScreenResolution()`](#set-screen-resolution)
-- [`setViewport`](#set-viewport)
-- [`setColorDepth()`](#set-color-depth)
-- [`setTimezone()`](#set-timezone)
-- [`setLang()`](#set-lang)
+- `setPlatform()`
+- `setUserId()`
+- `setScreenResolution()`
+- `setViewport()`
+- `setColorDepth()`
+- `setTimezone()`
+- `setLang()`
 
 We will discuss each of these in turn below:
 
@@ -34,7 +37,7 @@ t.setPlatform("mob");
 
 If the platform is not set manually, it defaults to `'srv'` (for server).
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Set user ID with `setUserId()`
 

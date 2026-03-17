@@ -1,7 +1,10 @@
 ---
 title: "Setup"
+sidebar_label: "Setup"
 date: "2020-02-26"
 sidebar_position: 10
+description: "Install Python tracker version 0.15 from PyPI using pip with optional Redis and Celery extras for extended functionality."
+keywords: ["python tracker v0.15 installation", "pip install", "redis celery extras"]
 ---
 
 ```mdx-code-block

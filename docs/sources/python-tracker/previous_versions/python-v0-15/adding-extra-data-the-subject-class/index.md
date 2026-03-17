@@ -1,7 +1,10 @@
 ---
 title: "Adding extra data: The Subject class"
+sidebar_label: "Subject class"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Add user and environment data to events in Python tracker v0.15 using the Subject class with platform, user ID, and device properties."
+keywords: ["python tracker v0.15 subject", "user data tracking", "subject properties"]
 ---
 
 You may have additional information about the user (i.e. subject) performing the action or the environment in which the user has performed the action. Some of that additional data can be sent into Snowplow with each event as part of the subject class.

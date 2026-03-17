@@ -1,7 +1,9 @@
 ---
-title: "Marketing Attribution"
+title: "Marketing Attribution visualization"
 sidebar_position: 3
 sidebar_label: "Marketing Attribution"
+description: "Marketing attribution visualization for multi-channel journeys with first-touch, last-touch, linear, and position-based models."
+keywords: ["marketing attribution visualization", "attribution dashboard", "ROAS reporting", "multi-touch attribution"]
 ---
 
 In today's increasingly complex digital world, users often take multi-channel journeys before converting. Assigning credit across multiple touchpoints is vital to getting an accurate picture of the efficacy of your marketing channels, yet requires merging disparate datasets and running complex calculations.

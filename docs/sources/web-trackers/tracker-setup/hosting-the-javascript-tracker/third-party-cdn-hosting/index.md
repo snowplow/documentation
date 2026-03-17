@@ -1,6 +1,8 @@
 ---
 title: "Third party CDN hosting for the JavaScript tracker"
 sidebar_label: "Third party CDN hosting"
+description: "Use jsDelivr or unpkg CDN for quick testing and evaluation before moving to self-hosted production setup."
+keywords: ["third party cdn", "jsdelivr", "unpkg", "cdn hosting"]
 date: "2020-10-12"
 sidebar_position: 4100
 ---

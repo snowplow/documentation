@@ -1,8 +1,9 @@
 ---
-title: "Understanding data destinations"
+title: "Introduction to data destinations"
 sidebar_label: "Destinations"
 sidebar_position: 6
 description: "Different options for storing and forwarding Snowplow data"
+keywords: ["data destinations", "warehouses", "event forwarding", "reverse ETL"]
 ---
 
 ![](images/usecasearch.png)

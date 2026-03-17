@@ -1,6 +1,9 @@
 ---
 title: "Failed event types"
+sidebar_label: "Failed event types"
 sidebar_position: 15
+description: "Reference guide for Snowplow failed event types including schema violations, enrichment failures, and loader errors, with recovery recommendations."
+keywords: ["failed events", "bad rows", "schema validation", "event recovery", "invalid events"]
 ---
 
 This page lists all the possible types of [failed events](/docs/fundamentals/failed-events/index.md).
@@ -32,7 +35,7 @@ In order for an event to be processed successfully:
 
 If your pipeline is generating schema violations, it might mean there is a problem with your tracking, or a problem with your [Iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) which lists where schemas should be found. The error details in the schema violation JSON object should give you a hint about what the problem might be.
 
-Snowplow customers should check in the Snowplow Console that all data structures are correct and have been [promoted to production](/docs/data-product-studio/data-structures/manage/index.md). Snowplow Self-Hosted users should check that the Enrichment app is configured with an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
+Snowplow customers should check in the Snowplow Console that all data structures are correct and have been [promoted to production](/docs/event-studio/data-structures/index.md). Snowplow Self-Hosted users should check that the Enrichment app is configured with an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
 
 Next, check the tracking code in your custom application, and make sure the entities you are sending conform to the schema definition.
 
@@ -176,9 +179,9 @@ Loader Iglu error schema can be found [here](https://github.com/snowplow/iglu-ce
 
 </details>
 
-## Loader recovery error
+## Loader recovery error (legacy)
 
-Currently only the [BigQuery repeater](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md#block-8db848d4-0265-4ffa-97db-0211f4e2293d) generates this error. We call it "loader recovery error" because the purpose of the repeater is to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
+Only the [BigQuery repeater](/docs/api-reference/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-1.x/index.md#snowplow-bigquery-repeater) generated this error. We call it "loader recovery error" because the purpose of the repeater was to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
 
 <details>
 

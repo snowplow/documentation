@@ -1,7 +1,10 @@
 ---
-title: "Scala client"
+title: "Scala Iglu client"
+sidebar_label: "Scala client"
 date: "2021-03-26"
 sidebar_position: 70
+description: "Production-ready Scala Iglu client and schema resolver for JVM applications with SBT and Gradle integration."
+keywords: ["scala iglu client", "jvm schema resolver", "sbt", "gradle"]
 ---
 
 ```mdx-code-block

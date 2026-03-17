@@ -3,6 +3,7 @@ position: 1
 title: "Learn how to implement real-time interventions in an ecommerce app using Signals"
 sidebar_label: "Introduction"
 description: "Get hands-on with Snowplow Signals, using Snowplow Console or the Signals Sandbox trial environment, to create real-time personalization."
+keywords: ["snowplow signals tutorial", "ecommerce interventions"]
 ---
 
 Welcome to the **Snowplow Signals** tutorial.

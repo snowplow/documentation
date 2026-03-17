@@ -1,8 +1,10 @@
 ---
-title: "Configuring how events are sent for the Java tracker"
+title: "Configure how events are sent for the Java tracker"
 sidebar_label: "Configuring how events are sent"
 date: "2022-03-24"
 sidebar_position: 50
+description: "Configure network connections, event batching, buffering, and retry logic for the Java tracker to optimize event delivery to your collector."
+keywords: ["java tracker configuration", "event batching", "network configuration"]
 ---
 
 A user interacts with your app: an event is generated and tracked using `Tracker.track()`. But the event must be sent to your event collector, to enter your pipeline, before it has any value.
@@ -11,18 +13,18 @@ The Java tracker allows configuration of the network connection, event sending, 
 
 Using `NetworkConfiguration`:
 
-| NetworkConfiguration | Description              | Required?                                    |
-|----------------------|--------------------------|----------------------------------------------|
-| collectorUrl         | Event collector endpoint | Yes, unless an `HttpClientAdapter` is provided |
-| httpClientAdapter    | `HttpClientAdapter` object | No                                           |
-| cookieJar            | OkHttp `CookieJar` object  | No                                           |
+| NetworkConfiguration | Description                | Required?                                      |
+| -------------------- | -------------------------- | ---------------------------------------------- |
+| collectorUrl         | Event collector endpoint   | Yes, unless an `HttpClientAdapter` is provided |
+| httpClientAdapter    | `HttpClientAdapter` object | No                                             |
+| cookieJar            | OkHttp `CookieJar` object  | No                                             |
 
 The URL path for your collector endpoint should include the protocol, "http" or "https".
 
 Using `EmitterConfiguration`:
 
 | EmitterConfiguration      | Description                                | Required? | Default |
-|---------------------------|--------------------------------------------|-----------|---------|
+| ------------------------- | ------------------------------------------ | --------- | ------- |
 | batchSize                 | Number of events to batch into one request | No        | 50      |
 | bufferCapacity            | Maximum number of events buffered          | No        | 10 000  |
 | eventStore                | `EventStore` object                        | No        |         |
@@ -106,7 +108,7 @@ The Java tracker sends events asynchronously: the application is not blocked wai
 
 The default buffer capacity is 10 000 events. This is the number of events that can be stored. When the buffer is full, new tracked payloads are dropped, so choosing the right capacity is important. If events are accumulating in your buffer because of a very high event volume, rather than because of network outages, consider using more threads (see below).
 
-The theoretical maximum capacity is that of a`LinkedBlockingDeque`: `Integer.MAX_VALUE`. It's likely your application would run out of memory before buffering that many events. 
+The theoretical maximum capacity is that of a`LinkedBlockingDeque`: `Integer.MAX_VALUE`. It's likely your application would run out of memory before buffering that many events.
 
 Creating a `BatchEmitter` with a custom maximum buffer capacity:
 ```java
@@ -156,7 +158,7 @@ Tracker tracker = Snowplow.createTracker(
 ```
 Note that `collectorUrl` is not a required parameter for `NetworkConfiguration` when an `HttpClientAdapter` is specified. The `collectorUrl` is normally used to create the default `OkHttpClientAdapter`, therefore if a URL was provided here, it would be ignored.
 
-HTTP request retry can be configured within the HTTP clients, on top of the Java tracker's handling of unsuccessful requests. The default HTTP client, OkHttp, [retries after certain types of connection failure](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-ok-http-client/-builder/retry-on-connection-failure/) by default. The Apache HTTP Client [retries a request up to 3 times](https://www.javadoc.io/doc/org.apache.httpcomponents/httpclient/4.3.5/org/apache/http/impl/client/DefaultHttpRequestRetryHandler.html) by default. 
+HTTP request retry can be configured within the HTTP clients, on top of the Java tracker's handling of unsuccessful requests. The default HTTP client, OkHttp, [retries after certain types of connection failure](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-ok-http-client/-builder/retry-on-connection-failure/) by default. The Apache HTTP Client [retries a request up to 3 times](https://www.javadoc.io/doc/org.apache.httpcomponents/httpclient/4.3.5/org/apache/http/impl/client/DefaultHttpRequestRetryHandler.html) by default.
 
 #### OkHttpClient
 The simplest OkHttpClient initialization looks like this:
@@ -165,7 +167,7 @@ OkHttpClient client = new OkHttpClient();
 ```
 This is the default as used in the `BatchEmitter`.
 
-To add configuration, pass a `OkHttpClientAdapter` during Tracker initialization.  
+To add configuration, pass a `OkHttpClientAdapter` during Tracker initialization.
 For example, setting timeouts:
 ```java
 OkHttpClient client = new OkHttpClient.Builder()
@@ -175,7 +177,7 @@ OkHttpClient client = new OkHttpClient.Builder()
       .build();
 
 OkHttpClientAdapter adapter = new OkHttpClientAdapter(
-      "http://collector-endpoint.com", 
+      "http://collector-endpoint.com",
       client
 );
 
@@ -202,7 +204,7 @@ CloseableHttpClient client = HttpClients.custom()
       .build();
 
 ApacheHttpClientAdapter adapter = new ApacheHttpClientAdapter(
-      "http://collector-endpoint.com", 
+      "http://collector-endpoint.com",
       client
 );
 
@@ -218,7 +220,7 @@ The `BatchEmitter` contains threads for concurrent event sending. This is manage
 
 The process of getting events from the buffer, creating a request payload, and sending the POST request occurs within a single thread.
 
-Specifying the maximum number of event sending threads, in this case to 1: 
+Specifying the maximum number of event sending threads, in this case to 1:
 ```java
 Tracker tracker = Snowplow.createTracker(
                   new TrackerConfiguration("namespace", "appId"),
@@ -259,7 +261,7 @@ Tracker tracker = Snowplow.createTracker(
                   new TrackerConfiguration("namespace", "appId"),
                   new NetworkConfiguration(new OkHttpClientWithCookieJarAdapter("http://collector")));
 
-// A BatchEmitter can also be created directly                       
+// A BatchEmitter can also be created directly
 BatchEmitter emitter = new BatchEmitter(networkConfig);
 ```
 

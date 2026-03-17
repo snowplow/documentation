@@ -2,6 +2,9 @@
 title: "Objective-C (iOS) (1.2.0)"
 date: "2020-03-19"
 sidebar_position: 840
+sidebar_label: "Objective-C (iOS) (1.2.0)"
+description: "Documentation for Objective-C Tracker version 1.2.0."
+keywords: ["objective-c 1.2.0", "ios", "tracker"]
 ---
 
 ## Installation
@@ -256,7 +259,7 @@ On the tracker setup you can override the device platform entry calling:
 
 It resets the parameter `p` (platform) to the new value.
 
-[Here](/docs/events/index.md#application-parameters) a full list of the supported platform values.
+[Here](/docs/fundamentals/canonical-event/index.md#application-fields) a full list of the supported platform values.
 
 ### Sending events
 

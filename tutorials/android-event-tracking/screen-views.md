@@ -2,6 +2,8 @@
 position: 2
 title: "Track screen views using the Android tracker"
 sidebar_label: "Track screen views"
+description: "Implement automatic screen view tracking in Jetpack Compose apps using navigation listeners. Track screen engagement, time spent, and foreground/background status with the Snowplow Android tracker."
+keywords: ["android screen view tracking", "jetpack compose navigation", "screen engagement metrics", "mobile analytics screen tracking"]
 ---
 
 In a Jetpack Compose app, screen views aren't tracked automatically. Screen view tracking can be manually added to every screen, but it’s more efficient to add a navigation listener. Here's how to track screen views using the navigation component:

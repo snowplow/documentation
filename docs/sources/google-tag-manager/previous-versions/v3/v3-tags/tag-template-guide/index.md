@@ -1,7 +1,10 @@
 ---
 title: "Snowplow v3"
+sidebar_label: "Snowplow v3"
 date: "2021-11-18"
 sidebar_position: 100
+description: "Deploy JavaScript tracker v3 in Google Tag Manager using the Snowplow v3 Tag template. Configure tracker initialization, commands, and collector endpoints with GTM settings variable for legacy v3 tracking."
+keywords: ["v3 tag template", "gtm v3 implementation", "javascript tracker v3", "v3 tracker setup", "legacy v3 gtm"]
 ---
 
 This template implements the [Snowplow JavaScript tracker v3](/docs/sources/web-trackers/index.md).
@@ -14,7 +17,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](/docs/sources/web-trackers/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/web-trackers/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
+- There is no implementation for the legacy ecommerce events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) setup instead.
 
 ## Instructions
 

@@ -3,6 +3,7 @@ title: "Learn how to score prospects in real time using Signals and machine lear
 sidebar_label: "Introduction"
 position: 1
 description: "Build a real-time prospect scoring system using Snowplow Signals and machine learning to predict conversion likelihood."
+keywords: ["signals machine learning", "prospect scoring system"]
 ---
 
 Welcome to the [Snowplow Signals](/docs/signals/) real-time prospect scoring tutorial.

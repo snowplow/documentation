@@ -1,8 +1,10 @@
 ---
-title: "Tracking out-of-the-box events with the React Native tracker"
+title: "Track out-of-the-box events with the React Native tracker"
 sidebar_label: "Tracking out-of-the-box events"
 date: "2021-08-06"
 sidebar_position: 20
+description: "Track screen views, structured events, page views, timing events, and ecommerce transactions with the React Native tracker SDK."
+keywords: ["react native event tracking", "screen view tracking", "mobile events"]
 ---
 
 The React Native tracker captures two types of out-of-the-box events, automatically captured and manual events.
@@ -383,7 +385,7 @@ const attachment: MessageNotificationAttachmentProps = {
 
 ### Tracking structured events
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructuredEvent`, if none of the other event-specific methods outlined below are appropriate.
 

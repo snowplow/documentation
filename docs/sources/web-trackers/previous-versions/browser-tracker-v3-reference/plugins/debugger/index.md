@@ -2,6 +2,8 @@
 title: "Debugger"
 date: "2021-04-07"
 sidebar_position: 5000
+description: "Documentation for Debugger in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

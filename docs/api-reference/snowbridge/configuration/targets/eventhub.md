@@ -1,7 +1,8 @@
 ---
-title: "Configuring EventHub as a Snowbridge target"
+title: "Configure EventHub as a Snowbridge target"
 sidebar_label: "EventHub"
-description: "Write data to an EventHub."
+description: "Configure EventHub target for Snowplow Snowbridge to write data to Azure Event Hubs with namespace and environment authentication."
+keywords: ["snowbridge config", "eventhub target", "azure event hubs", "azure streaming", "eventhub config"]
 ---
 
 ```mdx-code-block

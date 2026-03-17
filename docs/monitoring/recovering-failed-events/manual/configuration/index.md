@@ -1,8 +1,10 @@
 ---
-title: "Event recovery configuration"
+title: "Configure an event recovery job"
 sidebar_label: "Configuration"
 date: "2020-08-25"
 sidebar_position: 10
+description: "Define recovery configuration using steps for field modifications, conditions for matching events, and flows to orchestrate recovery operations."
+keywords: ["event recovery configuration", "recovery steps", "recovery conditions"]
 ---
 
 Configuration for event recovery involves the use of reusable components that help map onto specific failure types. The following components are available:

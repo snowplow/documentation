@@ -3,6 +3,8 @@ title: "Global context for React Native trackers"
 sidebar_label: "Global context"
 date: "2022-08-30"
 sidebar_position: 20
+description: "Add global context entities to all events using context generators, filter functions, and rulesets with the React Native tracker."
+keywords: ["react native global context", "context generators", "global entities"]
 ---
 
 **Global context** (also known as global entities) lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded in the app. This saves having to manually build and send the context array with every single event fired.

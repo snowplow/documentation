@@ -2,6 +2,8 @@
 title: "Form Tracking"
 date: "2021-04-07"
 sidebar_position: 9000
+description: "Documentation for tracking Form Tracking with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

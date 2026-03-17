@@ -14,16 +14,13 @@ function normalizeSlug(slug: string): string {
   return slug.replace(/\/$/, '')
 }
 
-const DEFAULT_KEYWORDS = ['Snowplow', 'Behavioral data', 'Customer data integration']
-
 export function generateSchema(frontMatter: BaseFrontMatter, pageMeta: any, siteUrl: string) {
   const { title, slug, image, author } = frontMatter
 
   const safeTitle = title || 'Snowplow Documentation'
   const description = pageMeta?.description || 'Snowplow documentation'
-  const keywords = Array.isArray(pageMeta?.keywords) && pageMeta.keywords.length > 0
-    ? pageMeta.keywords
-    : DEFAULT_KEYWORDS
+  // Keywords are provided by the plugin with fallbacks already applied
+  const keywords = pageMeta?.keywords || []
 
   const site = (siteUrl || 'https://docs.snowplow.io').replace(/\/$/, '')
   const pathPart = !slug || slug === '' ? '/' : slug

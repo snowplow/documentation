@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Attribution dbt package"
 sidebar_label: "Attribution"
-description: "The Snowplow Attribution dbt Package"
+description: "Marketing attribution analysis with Snowplow dbt package supporting first-touch, last-touch, position-based, and linear attribution models."
+keywords: ["attribution modeling", "marketing attribution", "dbt attribution", "ROAS", "conversion paths", "attribution data model"]
 sidebar_position: 10
 ---
 
@@ -12,6 +13,7 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 
 export const datagridProps = {
     hideFooter: true
@@ -23,6 +25,11 @@ export const datagridProps = {
 <Badges badgeType="Early Release"></Badges>
 <Badges badgeType="SPAL"></Badges>
 </BadgeGroup>
+
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Attribution package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+
+
+
 
 :::info
 You will need Unified [version 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.
@@ -153,7 +160,7 @@ Alternatively, you could use the `derived.snowplow_unified_sessions` table as we
 As for campaigns,
 
 :::tip
-To fully finish the config you might need to overwrite the `channel_classification()` macro. In case your classification logic for attribution analysis needs to be the same as the one already configured in the snowplow_unified model you can simply leave the default macro which refers to that field.
+To fully finish the config you might need to overwrite the `channel_classification()` macro. In case your classification logic for attribution analysis needs to be the same as the one already configured in the snowplow_unified model you can simply leave the default macro which refers to that field. See the [channel_group_query macro](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/overridable-macros/index.md) for more details.
 :::
 
 ### 3. Channel spend information (optional, but recommended)
@@ -169,7 +176,7 @@ You most likely have a warehouse with marketing (ad) spend information by channe
 `, datagridProps)}
 </div>
 
-To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/attribution/index.md#3.good-to-know).
+To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/tutorials/attribution/intro).
 
 ### 4. User mapping source
 
@@ -211,20 +218,22 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 
 #### **Transform paths**
 
-In order to reduce unneccesarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
+In order to reduce unnecessarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
 
-In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value. For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
+In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value.
+ 
+For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
 
 <details>
   <summary>Path transform options</summary>
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
- 1. **`exposure (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
+ 1. **`exposure_path (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
 
- 2. **`unique`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
+ 2. **`unique_path`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
 
- 3. **`first`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
+ 3. **`first_path`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
 
  4. **`remove_if_last_and_not_all`**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
 
@@ -235,6 +244,12 @@ In order to apply these transformations, all you have to do is to define them in
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go from the actual conversion event.
 
 </details>
+
+:::warning
+Redshift users starting from 0.6.0 are only allowed to have one path transformation
+(e.g. either `exposure_path` or `first_path`). If using `remove_if_last_and_not_all` or
+`remove_if_not_all`, only single-item arrays are allowed. In case of other supported targets there are no such limitations, multiple path transformations can be applied, if neeeded.
+:::
 
 #### **Other, macro based setup**
 

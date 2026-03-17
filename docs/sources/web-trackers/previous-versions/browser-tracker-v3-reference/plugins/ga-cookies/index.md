@@ -2,6 +2,8 @@
 title: "GA Cookies"
 date: "2021-04-07"
 sidebar_position: 10000
+description: "Documentation for GA Cookies in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

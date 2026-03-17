@@ -2,6 +2,8 @@
 title: "Performance Navigation Timing"
 date: "2023-05-10"
 sidebar_position: 14500
+description: "Documentation for Performance Navigation Timing in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,18 +1,21 @@
 ---
-title: "Tracking an event"
+title: "Track an event with the PHP tracker"
+sidebar_label: "Tracking an event"
 date: "2020-02-26"
 sidebar_position: 50
+description: "Track page views, ecommerce transactions, screen views, and custom events with the PHP tracker SDK."
+keywords: ["php event tracking", "page view tracking", "ecommerce tracking"]
 ---
 
 Tracking methods supported by the PHP Tracker:
 
-| **Function** | **Description** |
-| --- | --- |
-| [`trackPageView`](#trackpageview) | Track and record views of web pages. |
-| [`trackEcommerceTransaction`](#trackecommercetransaction) | Track an ecommerce transaction |
-| [`trackScreenView`](#trackscreenview) | Track the user viewing a screen within the application |
-| [`trackStructEvent`](#trackstructevent) | Track a Snowplow custom structured event |
-| [`trackUnstructEvent`](#trackunstructevent) | Track a Snowplow custom unstructured event |
+| **Function**                                              | **Description**                                        |
+| --------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackPageView`](#trackpageview)                         | Track and record views of web pages.                   |
+| [`trackEcommerceTransaction`](#trackecommercetransaction) | Track an ecommerce transaction                         |
+| [`trackScreenView`](#trackscreenview)                     | Track the user viewing a screen within the application |
+| [`trackStructEvent`](#trackstructevent)                   | Track a Snowplow custom structured event               |
+| [`trackUnstructEvent`](#trackunstructevent)               | Track a Snowplow custom unstructured event             |
 
 ### Optional Tracking Arguments
 
@@ -79,13 +82,13 @@ public function trackPageView($page_url, $page_title = NULL, $referrer = NULL, $
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$page_url` | The URL of the page | Yes | Non-empty string |
-| `$page_title` | The title of the page | No | String |
-| `$referrer` | The address which linked to the page | No | String |
-| `$context` | Custom context for the event | No | Array |
-| `$tstamp` | When the pageview occurred | No | Positive integer |
+| **Argument**  | **Description**                      | **Required?** | **Validation**   |
+| ------------- | ------------------------------------ | ------------- | ---------------- |
+| `$page_url`   | The URL of the page                  | Yes           | Non-empty string |
+| `$page_title` | The title of the page                | No            | String           |
+| `$referrer`   | The address which linked to the page | No            | String           |
+| `$context`    | Custom context for the event         | No            | Array            |
+| `$tstamp`     | When the pageview occurred           | No            | Positive integer |
 
 Example Usage:
 
@@ -105,34 +108,34 @@ public function trackEcommerceTransaction($order_id, $total_value, $currency = N
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$order_id` | ID of the eCommerce transaction | Yes | Non-empty string |
-| `$total_value` | Total transaction value | Yes | Int or Float |
-| `$currency` | Transaction currency | No | String |
-| `$affiliation` | Transaction affiliation | No | String |
-| `$tax_value` | Transaction tax value | No | Int or Float |
-| `$shipping` | Delivery cost charged | No | Int or Float |
-| `$city` | Delivery address city | No | String |
-| `$state` | Delivery address state | No | String |
-| `$country` | Delivery address country | No | String |
-| `$items` | Items in the transaction | No | Array |
-| `$context` | Custom context for the event | No | Array |
-| `$tstamp` | When the transaction event occurred | No | Positive integer |
+| **Argument**   | **Description**                     | **Required?** | **Validation**   |
+| -------------- | ----------------------------------- | ------------- | ---------------- |
+| `$order_id`    | ID of the eCommerce transaction     | Yes           | Non-empty string |
+| `$total_value` | Total transaction value             | Yes           | Int or Float     |
+| `$currency`    | Transaction currency                | No            | String           |
+| `$affiliation` | Transaction affiliation             | No            | String           |
+| `$tax_value`   | Transaction tax value               | No            | Int or Float     |
+| `$shipping`    | Delivery cost charged               | No            | Int or Float     |
+| `$city`        | Delivery address city               | No            | String           |
+| `$state`       | Delivery address state              | No            | String           |
+| `$country`     | Delivery address country            | No            | String           |
+| `$items`       | Items in the transaction            | No            | Array            |
+| `$context`     | Custom context for the event        | No            | Array            |
+| `$tstamp`      | When the transaction event occurred | No            | Positive integer |
 
 Example Usage:
 
 ```php
 
 $tracker->trackEcommerceTransaction(
-    "test_order_id_1", 
-    200, 
-    "GBP", 
-    "affiliation_1", 
+    "test_order_id_1",
+    200,
+    "GBP",
+    "affiliation_1",
     "tax_value_1",
-    "shipping_1", 
-    "city_1", 
-    "state_1", 
+    "shipping_1",
+    "city_1",
+    "state_1",
     "country_1",
     array(
         array("name" => "name_1","category" => "category_1",
@@ -151,13 +154,13 @@ This is a private function that is called from within `trackEcommerceTransactio
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `"sku"` | Item SKU | Yes | Non-empty string |
-| `"price"` | Item price | Yes | Int or Float |
-| `"quantity"` | Item quantity | Yes | Int |
-| `"name"` | Item name | No | String |
-| `"category"` | Item category | No | String |
+| **Argument** | **Description** | **Required?** | **Validation**   |
+| ------------ | --------------- | ------------- | ---------------- |
+| `"sku"`      | Item SKU        | Yes           | Non-empty string |
+| `"price"`    | Item price      | Yes           | Int or Float     |
+| `"quantity"` | Item quantity   | Yes           | Int              |
+| `"name"`     | Item name       | No            | String           |
+| `"category"` | Item category   | No            | String           |
 
 Example Item:
 
@@ -185,12 +188,12 @@ public function trackScreenView($name = NULL, $id = NULL, $context = NULL, $tsta
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$name` | Human-readable name for this screen | No | Non-empty string |
-| `$id` | Unique identifier for this screen | No | String |
-| `$context` | Custom context for the event | No | Array |
-| `$tstamp` | When the screen was viewed | No | Positive integer |
+| **Argument** | **Description**                     | **Required?** | **Validation**   |
+| ------------ | ----------------------------------- | ------------- | ---------------- |
+| `$name`      | Human-readable name for this screen | No            | Non-empty string |
+| `$id`        | Unique identifier for this screen   | No            | String           |
+| `$context`   | Custom context for the event        | No            | Array            |
+| `$tstamp`    | When the screen was viewed          | No            | Positive integer |
 
 Although `$name` and `$id` are not individually required, at least one must be provided or the event will fail validation.
 
@@ -212,15 +215,15 @@ public function trackStructEvent($category, $action, $label = NULL, $property = 
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$category` | The grouping of structured events which this `action` belongs to | Yes | Non-empty string |
-| `$action` | Defines the type of user interaction which this event involves | Yes | Non-empty string |
-| `$label` | A string to provide additional dimensions to the event data | No | String |
-| `$property` | A string describing the object or the action performed on it | No | String |
-| `$value` | A value to provide numerical data about the event | No | Int or Float |
-| `$context` | Custom context for the event | No | Array |
-| `$tstamp` | When the structured event occurred | No | Positive integer |
+| **Argument** | **Description**                                                  | **Required?** | **Validation**   |
+| ------------ | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `$category`  | The grouping of structured events which this `action` belongs to | Yes           | Non-empty string |
+| `$action`    | Defines the type of user interaction which this event involves   | Yes           | Non-empty string |
+| `$label`     | A string to provide additional dimensions to the event data      | No            | String           |
+| `$property`  | A string describing the object or the action performed on it     | No            | String           |
+| `$value`     | A value to provide numerical data about the event                | No            | Int or Float     |
+| `$context`   | Custom context for the event                                     | No            | Array            |
+| `$tstamp`    | When the structured event occurred                               | No            | Positive integer |
 
 Example:
 
@@ -243,11 +246,11 @@ public function trackUnstructEvent($event_json, $context = NULL, $tstamp = NULL)
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$event_json` | The properties of the event | Yes | Array |
-| `$context` | Custom context for the event | No | Array |
-| `$tstamp` | When the unstructured event occurred | No | Positive integer |
+| **Argument**  | **Description**                      | **Required?** | **Validation**   |
+| ------------- | ------------------------------------ | ------------- | ---------------- |
+| `$event_json` | The properties of the event          | Yes           | Array            |
+| `$context`    | Custom context for the event         | No            | Array            |
+| `$tstamp`     | When the unstructured event occurred | No            | Positive integer |
 
 Example:
 

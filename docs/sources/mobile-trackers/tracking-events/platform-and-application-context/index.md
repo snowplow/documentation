@@ -1,7 +1,9 @@
 ---
-title: "Tracking platform and application data with the native mobile trackers"
+title: "Track platform and application data with the native mobile trackers"
 sidebar_label: "Platform and application data"
 sidebar_position: 10
+description: "Automatically capture device and application context including OS version, device model, battery level, and advertising identifiers."
+keywords: ["platform context", "application context", "device information"]
 ---
 
 ```mdx-code-block
@@ -85,7 +87,7 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 | `appSetIdScope`         | String (either "app" or "developer") | ✅       | ❌   | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No                 |
 
 :::note Android screen resolution
-The screen resolution for the platform entity is obtained from the Android context resources. The height value will likely be lower than that reported in the canonical `dvce_screenheight` [event property](/docs/events/going-deeper/event-parameters/index.md), which is fetched from `WindowManager`, an older API that still includes the menu bar.
+The screen resolution for the platform entity is obtained from the Android context resources. The height value will likely be lower than that reported in the canonical `dvce_screenheight` [event property](/docs/fundamentals/canonical-event/index.md#device-and-operating-system-fields), which is fetched from `WindowManager`, an older API that still includes the menu bar.
 
 To standardize the screen resolution between event and entity properties, provide a `SubjectConfiguration` with `useContextResourcesScreenResolution(true)` flag at tracker initialization. This flag is false by default, and available from Android tracker v6.0.3 onwards. Read about configuring `Subject` properties [here](/docs/sources/mobile-trackers/client-side-properties/index.md).
 :::

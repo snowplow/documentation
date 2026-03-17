@@ -1,7 +1,9 @@
 ---
-title: "Tracking installs with the React Native tracker"
+title: "Track installs with the React Native tracker"
 sidebar_label: "Installs"
 sidebar_position: 60
+description: "Track app installation events automatically on first launch with the React Native tracker installation autotracking feature."
+keywords: ["react native install tracking", "app install event", "first launch tracking"]
 ---
 
 ```mdx-code-block

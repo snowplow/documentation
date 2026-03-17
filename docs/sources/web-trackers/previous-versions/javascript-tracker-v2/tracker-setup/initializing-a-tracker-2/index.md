@@ -1,6 +1,8 @@
 ---
 title: "Initialization options"
 sidebar_position: 10
+description: "Setup and initialization instructions for Initialization options."
+keywords: ["setup", "installation"]
 ---
 
 _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._
@@ -113,7 +115,7 @@ Set the application ID using the `appId` field of the configuration object. Th
 
 #### Setting the platform
 
-Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 #### Configuring the cookie domain
 

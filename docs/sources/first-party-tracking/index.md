@@ -1,9 +1,12 @@
 ---
 title: "First-party tracking"
+sidebar_label: "First-party tracking"
 sidebar_position: 40
 sidebar_custom_props:
   # hide from sidebar and external search until these instructions apply more universally
   hidden: true
+description: "Configure a custom collector domain matching your primary domain to enable first-party cookies and bypass browser tracking limitations."
+keywords: ["first-party tracking", "custom collector domain", "cookie domain configuration"]
 ---
 
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
@@ -12,7 +15,7 @@ When your collector domain (e.g. `collector.snwplow.net`) does not match your pr
 
 With first-party tracking, you can configure a custom collector domain (e.g. `c.flowershop.ai`) to match your primary domain (e.g. `flowershop.ai`), sidestepping these limitations.
 
-Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use a Cookie Extension service](/docs/events/cookie-extension/index.md) to fully persist the cookies.
+Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use a Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md) to fully persist the cookies.
 
 :::info
 

@@ -1,7 +1,10 @@
 ---
-title: "PHP tracker"
+title: "PHP tracker SDK"
+sidebar_label: "PHP tracker"
 date: "2020-02-26"
 sidebar_position: 230
+description: "Track events in PHP applications and scripts with the Snowplow PHP tracker SDK using trackers, subjects, and emitters."
+keywords: ["php tracker", "php analytics", "composer package"]
 ---
 
 ```mdx-code-block

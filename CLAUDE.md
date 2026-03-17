@@ -24,8 +24,8 @@
 * Use lowercase after colons in list items: `Like: this` not `Like: This`.
 
 ## Snowplow terminology
-* **Always capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
-* **Never capitalized**: entities, events, schemas, data structures, data products
+* **Always capitalized**: Event Studio, Snowtype, Snowplow CDI, Signals
+* **Never capitalized**: entities, events, schemas, data structures, tracking plans
 * Use "entity", never "context". Use "self-describing event", never "unstructured event".
 
 ## File structure ⚠️ CRITICAL

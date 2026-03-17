@@ -2,6 +2,8 @@
 title: "Currency conversion enrichment"
 sidebar_position: 2
 sidebar_label: Currency conversion
+description: "Convert transaction values to a base currency using Open Exchange Rates API for standardized reporting."
+keywords: ["currency conversion", "exchange rates", "multi-currency"]
 ---
 
 This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.
@@ -13,7 +15,7 @@ When transactional data is collected in multiple currencies, it can be useful to
 This is an older and less actively maintained enrichment, and as such it has several limitations.
 
 * **It can only use the exchange rate from the end of the day prior to the event’s `collector_tstamp`.** You can’t apply a different rate (e.g. the one in effect when the event occurred), and you can’t pick a different timestamp field (e.g. `dvce_sent_tstamp`).
-* **It only works with the [`tr_` and `ti_` fields](/docs/fundamentals/canonical-event/index.md#e-commerce-transactions).** These fields are not very convenient to use and exist for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
+* **It only works with the [`tr_` and `ti_` fields](/docs/fundamentals/canonical-event/index.md#legacy-ecommerce-fields).** These fields are not very convenient to use and exist for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
 
 Over the years, it has become more idiomatic to use dedicated [entities](/docs/fundamentals/entities/index.md) for order items in e-commerce transactions. For instance, our [E-commerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce/) uses this approach, which is _incompatible with this enrichment_.
 

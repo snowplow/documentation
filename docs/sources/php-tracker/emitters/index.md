@@ -1,8 +1,10 @@
 ---
-title: "Configuring emitters in the PHP tracker"
+title: "Configure emitters in the PHP tracker"
 sidebar_label: "Emitters"
 date: "2020-02-26"
 sidebar_position: 40
+description: "Configure sync, socket, curl, and file emitters for sending events to Snowplow collectors with GET or POST requests."
+keywords: ["php emitters", "sync emitter", "curl emitter"]
 ---
 
 We currently support four different emitters: sync, socket, curl, and an out-of-band file emitter. The most basic emitter only requires you to select the type of emitter to be used and specify the Collector's hostname as parameters.
@@ -57,6 +59,8 @@ Arguments:
 | `$max_retry_attempts`   | The maximum number of times to retry a request. Defaults to 1.                                                                      | No            | Int              |
 | `$retry_backoff_ms`     | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No            | Int              |
 | `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events                | No            | Int              |
+
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
 ### Socket
 

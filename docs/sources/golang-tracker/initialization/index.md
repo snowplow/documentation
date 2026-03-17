@@ -1,6 +1,8 @@
 ---
-title: "Initializing the Golang tracker"
+title: "Initialize the Golang tracker"
 sidebar_label: "Initialization"
+description: "Create a Golang tracker with InitTracker using collector URI and storage implementation. Configure namespace, app ID, platform, and base64 encoding with optional builder functions."
+keywords: ["golang initialization", "init tracker", "emitter configuration", "storage implementation", "tracker builder"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

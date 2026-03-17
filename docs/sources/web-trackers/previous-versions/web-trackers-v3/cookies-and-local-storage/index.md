@@ -1,6 +1,8 @@
 ---
 title: "Cookies and local storage"
 sidebar_position: 2850
+description: "Documentation for Cookies and local storage in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 Unless you have enabled `respectDoNotTrack` during initialization, the tracker will persist information on the client. By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and local storage. The behavior of each of these cookies and local storage keys are described here.

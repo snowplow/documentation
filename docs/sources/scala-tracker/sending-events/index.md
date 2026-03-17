@@ -1,7 +1,10 @@
 ---
-title: "Sending events"
+title: "Track events with the Scala tracker"
+sidebar_label: "Tracking events"
 date: "2022-9-15"
 sidebar_position: 20
+description: "Track self-describing events, structured events, page views, errors, and ecommerce transactions with the Scala tracker using custom contexts and timestamps."
+keywords: ["scala event tracking", "self-describing events", "ecommerce tracking"]
 ---
 
 This page lists the available methods for sending events to Snowplow.

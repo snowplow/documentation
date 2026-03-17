@@ -3,6 +3,8 @@ title: "Migration guide for Snowplow Android Tracker SDK from version 2.x to 3.0
 date: "2021-11-23"
 sidebar_label: "From version 2.x to 3.0 for Android"
 sidebar_position: -1
+description: "Migrate your Android tracker from version 2.x to 3.0 which removes the deprecated v1 API."
+keywords: ["android migration", "version 3.0", "api removal"]
 ---
 
 This new release doesn't introduce breaking changes with the previous 2.x version. The version 2.0 can be considered a transitory release because two different APIs were available for the developer: v1 API (deprecated) and v2 API (the new one). The version 3.0 doesn't introduce changes to the v2 API but it completely remove the v1 API. Hence, this version introduces breking changes only for the developer that have instrumented the v2.0 using the old deprecated v1 API.

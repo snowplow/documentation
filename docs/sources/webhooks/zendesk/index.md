@@ -3,6 +3,8 @@ title: "Zendesk webhook"
 sidebar_label: "Zendesk"
 date: "2020-02-26"
 sidebar_position: 150
+description: "Track Zendesk ticket events and user context data including ticket creation, updates, and associated requester, assignee, and submitter information."
+keywords: ["zendesk webhook integration", "zendesk ticket tracking", "zendesk support events"]
 ---
 
 You can configure Zendesk to automatically send `POST` requests to a (Clojure or Scala) collector. The first step is to set up a Zendesk "extension" pointing at the collector.
@@ -51,7 +53,7 @@ Under "Meet ANY of the following conditions" header click _**Add condition**_ 
 
 ### Setting up body for ticket event
 
-In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](#setting-up-a-collector-as-a-zendesk-extension) section above).
+In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST".
 
 In the _**JSON body**_ box, paste the following:
 

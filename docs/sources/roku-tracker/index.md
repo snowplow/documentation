@@ -1,7 +1,10 @@
 ---
-title: "Roku tracker"
+title: "Roku tracker SDK"
+sidebar_label: "Roku tracker"
 date: "2021-11-16"
 sidebar_position: 140
+description: "Track events in BrightScript and BrighterScript Roku applications with SceneGraph channel support using the Snowplow Roku tracker SDK."
+keywords: ["roku tracker", "brightscript tracking", "scenegraph channels"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,8 @@
 ---
-title: "Deploying the JavaScript tracker using the getanalytics.io plugin"
+title: "Deploy the JavaScript tracker using the getanalytics.io plugin"
 sidebar_label: "Snowplow plugin for getanalytics.io"
+description: "Deploy the web tracker through the analytics npm package to send events to multiple providers."
+keywords: ["getanalytics.io", "analytics package", "multi-provider tracking"]
 date: "2020-08-10"
 sidebar_position: 4000
 ---

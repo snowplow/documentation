@@ -1,7 +1,10 @@
 ---
 title: "Setup"
+sidebar_label: "Setup"
 date: "2022-05-12"
 sidebar_position: 10
+description: "Installation and setup instructions for Java tracker version 0.11 using Maven, Gradle, or direct download."
+keywords: ["java tracker v0.11 setup", "maven installation", "gradle setup"]
 ---
 
 :::info These pages are for version 0.11

@@ -1,7 +1,9 @@
 ---
-title: "Tracking performance navigation timings on web"
+title: "Track performance navigation timings on web"
 sidebar_label: "Performance timings"
 sidebar_position: 98
+description: "Track page load performance metrics using the PerformanceNavigationTiming API including DNS lookup, connection times, and resource loading duration."
+keywords: ["performance", "page load"]
 ---
 
 ```mdx-code-block
@@ -36,7 +38,7 @@ You can also create and track general timing events using the [site tracking plu
 
 | Tracker Distribution | Included |
 | -------------------- | -------- |
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
@@ -121,8 +123,10 @@ Performance timing context entities are **automatically tracked** once configure
 
 | Tracker Distribution | Included |
 | -------------------- | -------- |
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
+
+This plugin was included in `sp.js` in version 3, but removed in version 4 in favor of the performance navigation timing plugin.
 
 **Download:**
 

@@ -3,7 +3,7 @@ title: "Run Snowplow Micro through Console"
 sidebar_label: "Run via Console"
 sidebar_position: 1
 description: "Run Snowplow Micro through Snowplow Console to validate and debug tracking implementations. Send events to the collector endpoint and view results through the dashboard."
-keywords: ["micro in console", "run micro", "test events", "micro dashboard"]
+keywords: ["micro in console", "run micro", "test events", "micro dashboard", "micro ui"]
 ---
 
 Snowplow Micro is fully integrated in Snowplow Console:

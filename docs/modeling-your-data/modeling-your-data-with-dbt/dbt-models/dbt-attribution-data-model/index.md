@@ -224,7 +224,7 @@ In order to apply these transformations, all you have to do is to define them in
 
 :::warning
 Redshift users starting from 0.6.0 are only allowed to have one path transformation
-(e.g. either `exposure` or `first`). If using `remove_if_last_and_not_all` or
+(e.g. either `exposure_path` or `first_path`). If using `remove_if_last_and_not_all` or
 `remove_if_not_all`, only single-item arrays are allowed.
 :::
  
@@ -235,11 +235,11 @@ Redshift users starting from 0.6.0 are only allowed to have one path transformat
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
- 1. **`exposure (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
+ 1. **`exposure_path (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
 
- 2. **`unique`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
+ 2. **`unique_path`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
 
- 3. **`first`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
+ 3. **`first_path`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
 
  4. **`remove_if_last_and_not_all`**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
 

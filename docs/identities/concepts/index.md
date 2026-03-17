@@ -12,6 +12,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+
 Identities is based on several core concepts.
 * **Identifiers** are the properties in the event payload that correspond to a user
 * **Profiles** are collections of linked identifiers that represent a single user
@@ -252,135 +254,37 @@ graph TD
 
 All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same `snowplow_id`.
 
-## Identities data structures
+## Identities data
 
-Identities adds two data structures to your enriched event stream: an identity entity attached to every resolved event, and a merge event emitted when profiles are combined.
+Identities adds two data types to your enriched event stream: an identity entity attached to every resolved event, and a merge event emitted when profiles are combined.
 
 ### Identity entity
 
 When Identities resolves identity for an event, it attaches an identity [entity](/docs/fundamentals/entities/index.md) to the event payload. This entity contains the `snowplow_id` for the profile that the event was resolved to. It appears in your warehouse as `contexts_com_snowplowanalytics_snowplow_identity_1`.
 
-<Tabs groupId="schema-view" queryString>
-  <TabItem value="fields" label="Fields" default>
-
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `snowplowId` | `string` | Required. The profile's Snowplow ID at the time the event was processed. Matches the pattern `sp_` followed by 26 base-32 characters. This may later be merged into a different ID. |
-| `createdAt` | `string` (date-time) | Required. Timestamp of when the profile was first created. |
-
-  </TabItem>
-  <TabItem value="json-schema" label="JSON schema">
-
-See the [full schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity/jsonschema/1-0-0) on GitHub.
-
-```json
-{
-  "description": "Identity context that is enriched onto events by Snowplow Identities",
-  "properties": {
-    "createdAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "snowplowId": {
-      "type": "string",
-      "maxLength": 29,
-      "pattern": "^sp_[A-Za-z2-7]{26}$"
-    }
-  },
-  "additionalProperties": false,
-  "type": "object",
-  "required": ["snowplowId", "createdAt"],
-  "self": {
-    "vendor": "com.snowplowanalytics.snowplow",
-    "name": "identity",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  }
-}
-```
-
-  </TabItem>
-</Tabs>
+<SchemaProperties
+  overview={{entity: true}}
+  example={{
+    snowplowId: "sp_abcdefabcdefabcdefabcdefab",
+    createdAt: "2024-01-15T10:30:00.000Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity", "format": "jsonschema", "version": "1-0-0" }, "description": "Identity context that is enriched onto events by Snowplow Identities", "properties": { "createdAt": { "type": "string", "format": "date-time" }, "snowplowId": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplowId", "createdAt"], "additionalProperties": false }} />
 
 ### Merge events
 
-When a [merge](#merges) occurs, Identities emits a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) into the enriched event stream. Downstream consumers such as the [Identities dbt package](/docs/identities/data-models/index.md) use these events to keep identity mappings up to date.
+When a merge occurs, Identities emits a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) into the enriched event stream. Downstream consumers such as the [Identities dbt package](/docs/identities/data-models/index.md) use these events to keep identity mappings up to date.
 
-<Tabs groupId="schema-view" queryString>
-  <TabItem value="fields" label="Fields" default>
-
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `snowplowId` | `string` | Required. The parent/surviving identity ID after the merge. |
-| `createdAt` | `string` (date-time) | Required. When the parent identity was created. |
-| `merges` | `array` of `string` | Required. List of merged identity IDs. |
-| `merged` | `array` of `object` | Required. Detailed info about each merged identity. Each object contains `snowplowId`, `createdAt`, `mergedAt`, and `triggeringEventId`. |
-
-  </TabItem>
-  <TabItem value="json-schema" label="JSON schema">
-
-See the [full schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identity_merge/jsonschema/1-0-0) on GitHub.
-
-```json
-{
-  "description": "Event emitted when Snowplow Identities merges user identities",
-  "properties": {
-    "snowplowId": {
-      "description": "The parent/surviving identity ID",
-      "type": "string",
-      "maxLength": 29,
-      "pattern": "^sp_[A-Za-z2-7]{26}$"
-    },
-    "createdAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "When the parent identity was created"
-    },
-    "merges": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "List of merged identity IDs"
-    },
-    "merged": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["snowplowId", "createdAt", "mergedAt", "triggeringEventId"],
-        "properties": {
-          "snowplowId": {
-            "type": "string",
-            "maxLength": 29,
-            "pattern": "^sp_[A-Za-z2-7]{26}$"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "mergedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "triggeringEventId": {
-            "type": "string",
-            "maxLength": 36
-          }
-        },
-        "additionalProperties": false
-      },
-      "description": "Detailed info about merged identities"
-    }
-  },
-  "additionalProperties": false,
-  "type": "object",
-  "required": ["snowplowId", "createdAt", "merges", "merged"],
-  "self": {
-    "vendor": "com.snowplowanalytics.snowplow",
-    "name": "identity_merge",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  }
-}
-```
-
-  </TabItem>
-</Tabs>
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    snowplowId: "sp_abcdefabcdefabcdefabcdefab",
+    createdAt: "2024-01-15T10:30:00.000Z",
+    merges: ["sp_zyxwvuzyxwvuzyxwvuzyxwvuzy"],
+    merged: [{
+      snowplowId: "sp_zyxwvuzyxwvuzyxwvuzyxwvuzy",
+      createdAt: "2024-01-10T08:00:00.000Z",
+      mergedAt: "2024-01-15T10:30:00.000Z",
+      triggeringEventId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    }]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity_merge", "format": "jsonschema", "version": "1-0-0" }, "description": "Event emitted when Snowplow Identities merges user identities", "properties": { "merged": { "type": "array", "items": { "type": "object", "required": ["snowplowId", "createdAt", "mergedAt", "triggeringEventId"], "properties": { "mergedAt": { "type": "string", "format": "date-time" }, "createdAt": { "type": "string", "format": "date-time" }, "snowplowId": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" }, "triggeringEventId": { "type": "string", "maxLength": 36 } }, "additionalProperties": false }, "description": "Detailed info about merged identities" }, "merges": { "type": "array", "items": { "type": "string" }, "description": "List of merged identity IDs" }, "createdAt": { "type": "string", "format": "date-time", "description": "When the parent identity was created" }, "snowplowId": { "description": "The parent/surviving identity ID", "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplowId", "createdAt", "merges", "merged"], "additionalProperties": false }} />

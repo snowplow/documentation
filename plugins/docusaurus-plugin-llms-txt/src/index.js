@@ -4,7 +4,6 @@ import { convertHtmlToMarkdown } from './convert.js'
 import { writePages } from './write-pages.js'
 import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
-import { generateCurrent } from './generate-current.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
 
@@ -20,7 +19,6 @@ export default function pluginLlmsTxt(context, options) {
     contentSelectors = ['.theme-doc-markdown', 'article', 'main'],
     enableMarkdownFiles = true,
     enableLlmsFullTxt = true,
-    enableLlmsCurrentTxt = true,
   } = options
 
   return {
@@ -111,16 +109,6 @@ export default function pluginLlmsTxt(context, options) {
       // Generate llms-full.txt
       if (enableLlmsFullTxt) {
         await generateFull(outDir, pages, {
-          siteTitle,
-          siteDescription,
-          siteUrl,
-          outdatedPrefixes,
-        })
-      }
-
-      // Generate llms-current.txt (excluding previous-version pages)
-      if (enableLlmsCurrentTxt) {
-        await generateCurrent(outDir, pages, {
           siteTitle,
           siteDescription,
           siteUrl,

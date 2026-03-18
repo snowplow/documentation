@@ -2,13 +2,15 @@
 sidebar_label: "Mobile"
 sidebar_position: 800
 title: "Mobile Quickstart"
+description: "Quick start guide for the legacy Snowplow Mobile dbt package to model mobile event data into sessions and users."
+keywords: ["mobile quickstart", "legacy mobile package", "dbt mobile setup"]
 ---
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a mobile events dataset being available in your database, the requirements are:
 
-- Snowplow [Android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.
-- Mobile session context enabled ([ios](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#session-context) or  [android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#session-tracking)).
-- Screen view events enabled ([ios](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#tracking-features) or [android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#tracking-features)).
+- Snowplow [Android](/docs/sources/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/sources/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.
+- Mobile session context enabled ([ios](/docs/sources/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#session-context) or  [android](/docs/sources/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#session-tracking)).
+- Screen view events enabled ([ios](/docs/sources/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#tracking-features) or [android](/docs/sources/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#tracking-features)).
 
 
 ## Installation
@@ -34,7 +36,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the mobile model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the mobile model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-mobile/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 

@@ -3,6 +3,7 @@ position: 3
 title: Define attributes and service configuration using the Signals Python SDK
 sidebar_label: Define attributes and service
 description: "Use the Signals Python SDK to programmatically define real-time ecommerce attributes."
+keywords: ["signals python sdk", "ecommerce attributes"]
 ---
 
 ```mdx-code-block
@@ -18,7 +19,7 @@ You'll create three attributes to track user shopping behavior:
 * **`count_add_to_cart`** counts the number of add-to-cart events
 * **`total_cart_value`** sums the prices of items added to the cart
 
-These attributes use the [Snowplow ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/), which tracks standardized ecommerce events.
+These attributes use the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/), which tracks standardized ecommerce events.
 
 ## Import required classes
 
@@ -40,7 +41,7 @@ from snowplow_signals import (
 
 ## Define the attributes
 
-Each [attribute](/docs/signals/define-attributes/using-python-sdk/attribute-groups/attributes/) defines which event it will be calculated from, and what kind of aggregation will be performed.
+Each [attribute](/docs/signals/attributes/using-python-sdk/attribute-groups/attributes/) defines which event it will be calculated from, and what kind of aggregation will be performed.
 
 ### Product views counter
 

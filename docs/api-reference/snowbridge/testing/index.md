@@ -1,7 +1,10 @@
 ---
 title: "Testing Snowbridge locally"
+sidebar_label: "Testing Snowbridge locally"
 date: "2023-04-14"
 sidebar_position: 300
+description: "Test Snowbridge configurations locally using stdin and stdout sources before deploying to production stream infrastructure."
+keywords: ["snowbridge testing", "local testing", "stdin stdout", "snowbridge development"]
 ---
 
 ```mdx-code-block
@@ -15,7 +18,7 @@ The easiest way to test Snowbridge configuration (e.g. transformations) is to ru
 
 You can get started working with Snowplow data by [downloading this file](./assets/input.txt) which contains a sample of web and mobile Snowplow events in TSV format. However, if you need events that match your actual events, generate your own events sample.
 
-In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/testing/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events).
+In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/testing/snowplow-micro/local/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/testing/snowplow-micro/local/index.md#exporting-events).
 
 For example, here we’re using a file named `data.tsv`:
 

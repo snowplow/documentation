@@ -116,10 +116,11 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: hsl(var(--primary));
+  --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-font-color-base: hsl(var(--muted-foreground));
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
-  --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
+  --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2) !important;
   --doc-sidebar-width: 330px !important;
   --ifm-tabs-padding-vertical: 8px;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
@@ -149,6 +150,33 @@ body {
   font-weight: 400;
   letter-spacing: -0.0125em;
 }
+
+/* Fix anchor links being hidden under navbar */
+h1[id],
+h2[id],
+h3[id],
+h4[id] {
+  scroll-margin-top: 70px;
+}
+
+.theme-doc-markdown :is(h2, h3, h4) code {
+  font-size: 0.85em !important;
+  position: relative;
+  top: -1px;
+}
+
+/* Align inline code vertically with surrounding text in paragraphs and list items */
+.theme-doc-markdown :is(p, li) code {
+  position: relative;
+  top: -1px;
+}
+
+/* Gentler alignment for smaller TOC text */
+.table-of-contents code {
+  position: relative;
+  top: -0.5px;
+}
+
 .main-wrapper {
   margin-top: 1em;
 }
@@ -424,13 +452,160 @@ aside.theme-doc-sidebar-container {
   border-radius: var(--radius);
 }
 
-.theme-doc-sidebar-item-link-level-1.header {
-  margin-top: 1em;
-  padding-bottom: 0;
-  padding-left: var(--ifm-menu-link-padding-horizontal);
+/* Extra space above a sidebar item, via sidebar_custom_props.space_above */
+/* !important to override Infima's specificity-boosted margin rule in production builds */
+li.menu__list-item.space-above {
+  margin-top: 1rem !important;
+}
+
+/* Collapsible section headers - styled as distinct category headings */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible {
+  margin-top: 1rem;
+}
+
+/* Remove top margin from the first section header */
+.theme-doc-sidebar-item-category-level-1.section-header:first-child
+  > .menu__list-item-collapsible {
+  margin-top: 0;
+}
+
+/* Shared heading typography for section header link and toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
   font-variant: all-small-caps;
-  font-size: 1.1em;
-  color: var(--ifm-color-primary-darker);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link {
+  padding-bottom: 0.125rem;
+}
+
+/* Disable hover/active highlight styles on section header links and toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--active,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle.menu__link--active {
+  background: none;
+  border-left: none;
+  margin-left: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Override Infima's global collapsible hover background */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible:hover {
+  background: none !important;
+}
+
+/* Override Infima's global collapsible active background */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible.menu__list-item-collapsible--active {
+  background: none !important;
+  border-left: none;
+  margin-left: 0;
+}
+
+/* Section header toggle button: full-width, same appearance as the link */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem
+    var(--ifm-menu-link-padding-horizontal);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle:hover {
+  background: none;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Inline caret inside the section header toggle button */
+/* !important needed to override Infima's global .menu__caret opacity: 0, display, and padding rules */
+.theme-doc-sidebar-item-category-level-1.section-header .section-header__caret {
+  display: inline-flex !important;
+  flex-shrink: 0;
+  margin-left: auto;
+  opacity: 1 !important;
+  padding: 4px !important;
+}
+
+/* Override Infima's collapsible hover background on the caret */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .section-header__caret:hover {
+  background: none !important;
+}
+
+/* Remove the old separate caret styles (no longer rendered) */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__caret {
+  display: none;
+}
+
+/* Remove vertical border line from section header's direct child list */
+/* Uses !important to override Infima's specificity-boosted rule in production builds:
+   .menu__list:not(#\#):not(#\#) .menu__list { padding-left: var(--ifm-menu-link-padding-horizontal) }
+   That rule wins over a normal class chain locally it's absent, causing the deploy preview indent. */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list {
+  padding-left: 0 !important;
+  margin-left: 0;
+  border-left: none;
+}
+
+/* Make items inside section headers look like top-level items */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2 {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2
+  > .menu__link {
+  padding-left: var(--ifm-menu-link-padding-horizontal);
+}
+
+/* Shift nested levels inside sections to appear one level up */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-3,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-3 {
+  font-weight: 340;
+}
+
+/* Nested lists inside sections: grey line aligns with parent's active line */
+.section-header .menu__list .menu__list {
+  margin-left: 0;
+  padding-left: 0.75rem;
+  margin-top: 4px;
 }
 
 .theme-doc-sidebar-item-link-level-1,
@@ -450,7 +625,17 @@ aside.theme-doc-sidebar-container {
   color: hsl(var(--foreground));
 }
 
-.theme-doc-sidebar-item-category-level-2
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
+  .menu__list-item-collapsible
+  .menu__caret {
+  display: flex;
+  padding: 4px;
+}
+
+.section-header
+  .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
@@ -478,7 +663,7 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu__list-item:not(:first-child) {
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 .menu__list-item--collapsed .menu__list {
@@ -611,13 +796,36 @@ aside.theme-doc-sidebar-container {
   border: none;
   background: none !important;
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
 }
-.theme-doc-sidebar-item-category-level-2
+/* Level-2 carets always visible (except direct children of section headers, which act as top-level) */
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
+}
+
+/* Level-3+ carets inside section headers always visible */
+.section-header
+  .theme-doc-sidebar-item-category-level-3
+  .menu__list-item-collapsible
+  .menu__caret {
+  padding: 4px;
+  opacity: 1 !important;
+}
+
+/* Carets for hoisted Signals subsections: hidden by default, visible on hover */
+.section-child .menu__list-item-collapsible .menu__caret {
+  display: flex;
+  padding: 4px;
+  opacity: 0;
+}
+
+.section-child .menu__list-item-collapsible:hover .menu__caret {
+  opacity: 1 !important;
 }
 
 /* button to collapse */
@@ -626,7 +834,7 @@ aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
 }
 @media (min-width: 997px) {
   aside.theme-doc-sidebar-container nav.menu {
-    padding: 1rem 0 0.5rem 0.5rem;
+    padding: 0rem 0 0.5rem 0.5rem;
   }
   aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
     display: inline-flex !important;
@@ -1197,30 +1405,32 @@ img.full-width {
 }
 
 /* Manual margin collapse rules for grid layout. Removes bottom margin
-from elements with a subsequent element that has a top margin. */
-.theme-doc-markdown h1:has(+ h2),
-.theme-doc-markdown h1:has(+ h3),
+from elements with a subsequent element that has a top margin.
+Uses :not(##):not(##) specificity hack to match Docusaurus v3's Infima framework,
+which uses the same pattern to ensure base styles have higher specificity. */
+.theme-doc-markdown h1:not(##):not(##):has(+ h2),
+.theme-doc-markdown h1:not(##):not(##):has(+ h3),
 /*.theme-doc-markdown h2:has(+ h3),*/
-.theme-doc-markdown ul:has(+ h2),
-.theme-doc-markdown ul:has(+ h3),
-.theme-doc-markdown ol:has(+ h2),
-.theme-doc-markdown ol:has(+ h3),
-.theme-doc-markdown p:has(+ h2),
-.theme-doc-markdown p:has(+ h3),
-.theme-doc-markdown p:has(+ div > table),
-.theme-doc-markdown p:has(+ table),
-.theme-doc-markdown h2:has(+ p > img),
-.theme-doc-markdown h3:has(+ p > img),
-.theme-doc-markdown div.theme-admonition:has(+ h2),
-.theme-doc-markdown div.theme-admonition:has(+ h3),
-.theme-doc-markdown details:has(+ h2),
-.theme-doc-markdown details:has(+ h3),
-.theme-doc-markdown div.tabs-container:has(+ h2),
-.theme-doc-markdown div.tabs-container:has(+ h3),
-.theme-doc-markdown div.theme-code-block:has(+ h2),
-.theme-doc-markdown div.theme-code-block:has(+ h3),
-.theme-doc-markdown div > table:has(+ h2), /* Tables generated by MDX components are typically put in divs */
-.theme-doc-markdown div > table:has(+ h3) {
+.theme-doc-markdown ul:not(##):not(##):has(+ h2),
+.theme-doc-markdown ul:not(##):not(##):has(+ h3),
+.theme-doc-markdown ol:not(##):not(##):has(+ h2),
+.theme-doc-markdown ol:not(##):not(##):has(+ h3),
+.theme-doc-markdown p:not(##):not(##):has(+ h2),
+.theme-doc-markdown p:not(##):not(##):has(+ h3),
+.theme-doc-markdown p:not(##):not(##):has(+ div > table),
+.theme-doc-markdown p:not(##):not(##):has(+ table),
+.theme-doc-markdown h2:not(##):not(##):has(+ p > img),
+.theme-doc-markdown h3:not(##):not(##):has(+ p > img),
+.theme-doc-markdown div.theme-admonition:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.theme-admonition:not(##):not(##):has(+ h3),
+.theme-doc-markdown details:not(##):not(##):has(+ h2),
+.theme-doc-markdown details:not(##):not(##):has(+ h3),
+.theme-doc-markdown div.tabs-container:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.tabs-container:not(##):not(##):has(+ h3),
+.theme-doc-markdown div.theme-code-block:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.theme-code-block:not(##):not(##):has(+ h3),
+.theme-doc-markdown div:not(##):not(##) > table:has(+ h2), /* Tables generated by MDX components are typically put in divs */
+.theme-doc-markdown div:not(##):not(##) > table:has(+ h3) {
   margin-bottom: 0rem;
 }
 
@@ -1284,43 +1494,6 @@ li.footer__item::first-letter {
   color: hsl(var(--muted-foreground));
 }
 
-/* START Control rest of the elements erase after we upgrade */
-article nav.theme-doc-breadcrumbs,
-article footer.theme-doc-footer,
-nav.pagination-nav {
-  max-width: 740px;
-  margin: 2rem auto 0 auto;
-}
-abbr[data-title]:focus:after,
-abbr[data-title]:hover:after {
-  background-color: hsl(var(--popover));
-  border-radius: var(--radius);
-  color: var(--popover-foreground);
-  content: attr(data-title);
-  font-size: 0.875rem;
-  padding: 4px 8px;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  > ul {
-  padding: 0.75rem !important;
-  font-size: 1rem !important;
-  margin: 0 !important;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  a {
-  text-decoration: none !important;
-}
-.prose .markdown table thead tr th h3,
-.prose .markdown table tbody tr td h3 {
-  margin: 0.5rem 0 !important;
-}
-.prose table thead a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
-/* END  Control rest of the elements erase after we upgrade */
-
 /* Custom code block header and button styling */
 .theme-code-block {
   border: 1px solid hsl(var(--border));
@@ -1356,10 +1529,9 @@ pre.mermaid {
 
 /* Mobile: FORCE diagrams to never exceed viewport - covers both real mobile and dev tools simulation */
 @media (max-width: 768px),
-       screen and (max-device-width: 768px),
-       (max-width: 767px),
-       (pointer: coarse) {
-
+  screen and (max-device-width: 768px),
+  (max-width: 767px),
+  (pointer: coarse) {
   /* Prevent horizontal scroll on mobile while preserving text flow */
   body {
     overflow-x: hidden !important;
@@ -1375,7 +1547,7 @@ pre.mermaid {
   }
 
   /* Fix the root cause: Docusaurus column width on mobile */
-  .col[class*="docItemCol"] {
+  .col[class*='docItemCol'] {
     max-width: 100vw !important;
     width: 100% !important;
     flex: 1 1 100% !important;
@@ -1442,7 +1614,8 @@ pre.mermaid {
   .mermaid .edgeLabel,
   .mermaid foreignObject {
     font-size: 11px !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      sans-serif !important;
     white-space: normal !important;
     word-wrap: break-word !important;
     max-width: 120px !important;
@@ -1508,7 +1681,7 @@ pre.mermaid {
 
 @media (max-width: 768px) {
   .mermaid-container::after {
-    content: "👆 Tap to enlarge";
+    content: '👆 Tap to enlarge';
     position: absolute;
     bottom: 5px;
     left: 50%;

@@ -1,7 +1,10 @@
 ---
-title: "Braze Tag Configuration"
+title: "Configure Braze Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2022-01-17"
 sidebar_position: 100
+description: "Configure authentication, user identifiers, event mapping, and entity rules for the Braze Tag in GTM Server Side."
+keywords: ["Braze Tag configuration", "external_id", "user alias", "Track Users API"]
 ---
 
 ## Configuration options
@@ -196,7 +199,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

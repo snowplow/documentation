@@ -1,5 +1,5 @@
 ---
-title: "Mixpanel"
+title: "Forward events to Mixpanel"
 description: "Send Snowplow events to Mixpanel for product analytics and user behavior insights using the Import API with support for event tracking and custom properties."
 sidebar_position: 3
 keywords: ["mixpanel", "event forwarding", "product analytics", "user tracking"]
@@ -50,6 +50,14 @@ You can confirm events are reaching Mixpanel by checking the **Events** page in 
 Mixpanel uses a combination of `distinct_id` (user identifier) and `$device_id` (device identifier) to track users across sessions. The Snowplow integration defaults to using `user_id` for `distinct_id` and a coalesce of `domain_userid` and `client_sesion.user_id` for `$device_id`, which supports Mixpanel's [Simplified ID Merge system](https://docs.mixpanel.com/docs/tracking-methods/id-management#simplified-id-merge-system).
 
 When a user logs in and your event contains a `user_id` value, Mixpanel will automatically merge the user's anonymous activity (tracked via `$device_id`) with their identified profile (tracked via `distinct_id`).
+
+## Sending custom properties
+
+You can send custom event properties beyond the standard fields defined in the schema reference below. Custom properties are nested under the `properties` object. When configuring your forwarder, add field mappings formatted as `properties.your_custom_field` (e.g., `properties.plan_type`, `properties.feature_flag`).
+
+For property names containing spaces, use bracket notation (e.g., `properties["referred by"]`).
+
+See Mixpanel's [Import Events API documentation](https://developer.mixpanel.com/reference/import-events) for details on supported data types and property requirements. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
 
 ## Schema reference
 

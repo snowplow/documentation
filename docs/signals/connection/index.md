@@ -1,8 +1,13 @@
 ---
-title: "Connect to Signals"
+title: "Connect to Snowplow Signals"
 sidebar_position: 15
-description: "Configure Snowplow Signals attributes using the Console, Python SDK, or API to start calculating behavioral insights."
+sidebar_label: "Connect to Signals"
+description: "Set up a Signals connection through Snowplow Console or Sandbox to start configuring attributes and interventions. Connect using the Python SDK, Node.js SDK, or REST API with your deployment credentials."
+keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "signals setup"]
+sidebar_custom_props:
+  space_above: true
 ---
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -20,6 +25,10 @@ Click **Enable** to start setting up a Signals connection.
 
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
 
+:::note Warehouse Connection
+Signals can also be deployed without connecting to a warehouse.
+:::
+
 You'll need to:
 * Select which warehouse to use
 * Specify your warehouse account details
@@ -30,7 +39,7 @@ Click **Test and create connection** to trigger the Signals deployment. You'll b
 
 To use the UI to manage Signals, navigate to the **Signals** section.
 
-Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/define-interventions/index.md).
+Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/attributes/services/index.md), and [interventions](/docs/signals/interventions/index.md).
 
 ![Console Signals landing page with navigation for attribute groups, services, and interventions](../images/console-landing.png)
 
@@ -63,10 +72,10 @@ Add these four tokens to your environment secrets.
 
 To connect to Signals using the Signals SDKs or API, you will need two values. These are found at the bottom of the Signals Sandbox dashboard under **Configuration details**.
 
-| Value           | Description                             | Where to get it                                                  | Format                                             |
-| --------------- | --------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
-| Signals API URL | The API URL for your Signals deployment | Profiles API URL                             | `https://{{123abc}}.svc.snplow.net` |
-| Sandbox Token          | An authorization token to connect to Signals                     |  Sandbox Token  | UUID                                               |
+| Value           | Description                                  | Where to get it  | Format                              |
+| --------------- | -------------------------------------------- | ---------------- | ----------------------------------- |
+| Signals API URL | The API URL for your Signals deployment      | Profiles API URL | `https://{{123abc}}.svc.snplow.net` |
+| Sandbox Token   | An authorization token to connect to Signals | Sandbox Token    | UUID                                |
 
 Add these values to your environment secrets.
 
@@ -134,9 +143,9 @@ The created `Signals` object has the following methods:
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
 
-Check out the [attribute groups](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/define-attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/define-attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
+Check out the [attribute groups](/docs/signals/attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
 
-Read more about retrieving calculated attributes [here](/docs/signals/retrieve-attributes/index.md), and about interventions [here](/docs/signals/receive-interventions/index.md).
+Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
 
 ### Publishing and deleting
 
@@ -216,7 +225,7 @@ The created `Signals` object has the following methods:
 | `getGroupAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
 | `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
 
-Read more about retrieving calculated attributes [here](/docs/signals/retrieve-attributes/index.md), and about interventions [here](/docs/signals/receive-interventions/index.md).
+Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
 
 ## Signals API
 

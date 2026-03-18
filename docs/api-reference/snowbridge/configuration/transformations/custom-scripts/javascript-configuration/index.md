@@ -1,7 +1,10 @@
 ---
-title: "JavaScript transformation configuration"
+title: "Snowbridge JavaScript transformation configuration"
+sidebar_label: "JavaScript transformation configuration"
 date: "2022-10-20"
 sidebar_position: 200
+description: "Configure Snowbridge JavaScript transformations using the goja embedded JavaScript engine with script paths and timeout settings."
+keywords: ["snowbridge config", "javascript config", "goja engine", "script configuration", "js transformations"]
 ---
 
 ```mdx-code-block

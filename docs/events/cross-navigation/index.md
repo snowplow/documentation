@@ -1,19 +1,21 @@
 ---
 title: "Cross-navigation tracking"
+sidebar_label: "Cross-navigation tracking"
 description: "Configure cross-domain tracking to maintain user identity between different domains in your ecosystem"
 date: "2025-07-26"
 sidebar_position: 5
+keywords: ["cross-domain tracking", "link decoration", "user identity", "cross-navigation"]
 ---
 
 When users navigate between different domains in your ecosystem, their user identity may get fragmented. Examples include navigation from your main website to a partner site, or to a mobile app. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
 
 :::info Web subdomains
-This problem doesn't usually apply for navigation between web subdomains, for example between `www.example.com` and `blog.example.com`. This is because the web trackers have `discoverRootDomain` [enabled by default](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md).
+This problem doesn't usually apply for navigation between web subdomains, for example between `www.example.com` and `blog.example.com`. This is because the web trackers have `discoverRootDomain` [enabled by default](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 :::
 
 Cross-navigation (also called cross-domain) tracking solves this problem by passing user identification data in URL parameters when users click links to other domains. This enables you to maintain user continuity across your applications.
 
-To use cross-navigation tracking, configure the [web](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers to add an additional parameter, named `_sp`, to the querystring of outbound links. This process is called "link decoration".
+To use cross-navigation tracking, configure the [web](/docs/sources/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers to add an additional parameter, named `_sp`, to the querystring of outbound links. This process is called "link decoration".
 
 Link decoration makes the added values visible in the `url` field of events on the destination page or URI. The querystring is added only to the events at the destination page: it doesn't persist throughout the user's session.
 
@@ -52,3 +54,15 @@ Both default and extended formats will populate the [atomic](/docs/fundamentals/
 | Populates `refr_domain_userid` field                    | ✅                | ✅                                |
 | Populates `refr_dvce_tstamp` field                      | ✅                | ✅                                |
 | Adds `cross_navigation` entity                          | ❌                | ✅                                |
+
+## Tracker support
+
+This table shows the support for cross-domain tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include link click tracking.
+
+| Tracker                                                                                                                                      | Supported | Since version |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/link-click/index.md)                                                                        | ✅         | 0.7.0         |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking)     | ✅         | 6.0.0         |
+| [Android](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) | ✅         | 6.0.0         |
+| React Native                                                                                                                                 | ❌         |               |
+| Flutter                                                                                                                                      | ❌         |               |

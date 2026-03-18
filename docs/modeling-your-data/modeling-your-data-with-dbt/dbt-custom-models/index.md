@@ -1,10 +1,12 @@
 ---
-title: "Custom models"
-description: "How to create, update, and remove custom models in our dbt packages"
+title: "Custom dbt models"
+sidebar_label: "Custom models"
+description: "Create, update, and remove custom models in Snowplow dbt packages with incremental, drop+recompute, and this run model types."
+keywords: ["custom dbt models", "incremental models", "dbt customization", "Snowplow model extensions"]
 sidebar_position: 60
 ---
 
-The Snowplow packages are designed to be easily customized or extended within your own dbt project by building your own custom models. The standard models we provide (base, page/screen views, sessions and users) are not designed to be modified by you. 
+The Snowplow packages are designed to be easily customized or extended within your own dbt project by building your own custom models. The standard models we provide (base, page/screen views, sessions and users) are not designed to be modified by you.
 
 In general there are 3 types of custom models you may end up building:
 1. **Drop+recompute/view models**: these models build from the derived tables but require a Drop+recompute each time they are built. This could include things like daily aggregations or rolling views.
@@ -27,16 +29,16 @@ The following best practices should be followed to ensure that updates and bug f
 
 In short, the standard models can be treated as the source code for a distinct piece of software, and custom models can be treated as self-maintained, additive plugins - in much the same way as a Java package may permit one to leverage public classes in their own API, and provide an entry point for custom programs to run, but will not permit one to modify the original API.
 
-The [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) and derived tables are considered part of the 'public' class of tables in this model structure, and so we can give assurances that non-breaking releases won't alter them. The other tables may be used in custom SQL, but their logic and structure may change from release to release, or they may be removed. 
+The [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) and derived tables are considered part of the 'public' class of tables in this model structure, and so we can give assurances that non-breaking releases won't alter them. The other tables may be used in custom SQL, but their logic and structure may change from release to release, or they may be removed.
 
 ## Custom model usage
 An overview of the detail provided below is available in this summary table:
 
-| Model Type | Materialization | Requires Tagging | Requires backfilling | Requires specific refreshing | Use is run with new events | Use `snowplow_optimize` |
-|-|-|-|-|-|-|-|
-| Drop+recompute/ view | `table`/`view` | ❌ |❌ |❌ |❌ |❌ |
-| Incremental | `incremental` | ✅ |✅ |✅ |✅ |✅ |
-| This Run | `table`/`view`/ `ephemeral` | ✅ |❌ |❌ |❌ |❌ |
+| Model Type           | Materialization             | Requires Tagging | Requires backfilling | Requires specific refreshing | Use is run with new events | Use `snowplow_optimize` |
+| -------------------- | --------------------------- | ---------------- | -------------------- | ---------------------------- | -------------------------- | ----------------------- |
+| Drop+recompute/ view | `table`/`view`              | ❌                | ❌                    | ❌                            | ❌                          | ❌                       |
+| Incremental          | `incremental`               | ✅                | ✅                    | ✅                            | ✅                          | ✅                       |
+| This Run             | `table`/`view`/ `ephemeral` | ✅                | ❌                    | ❌                            | ❌                          | ❌                       |
 
 ### Tagging Models
 Any incremental model, or one that builds from the events this run table, in the package requires tagging so that it can be tracked in the manifest table as part of the [incremental sessionisation logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md). If you do not correctly tag the model you may get an error, or your package may get stuck in State 2.

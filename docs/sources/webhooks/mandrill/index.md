@@ -1,7 +1,10 @@
 ---
-title: "Mandrill"
+title: "Mandrill webhook"
+sidebar_label: "Mandrill"
 date: "2020-02-25"
 sidebar_position: 60
+description: "Track Mandrill email events including sent messages, bounces, opens, clicks, spam reports, rejections, and unsubscribes."
+keywords: ["mandrill webhook integration", "mandrill email tracking", "mailchimp transactional email"]
 ---
 
 This webhook integration lets you track a variety of events logged by [Mandrill](https://mandrill.com/).

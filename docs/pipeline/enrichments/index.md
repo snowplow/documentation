@@ -1,8 +1,20 @@
 ---
-title: "Enrichments"
+title: "Introduction to enrichments"
 date: "2020-02-15"
 sidebar_position: 2
+sidebar_label: "Enrichments"
+description: "Configure enrichments to add extra properties and dimensions to your Snowplow events during the enrichment process."
+keywords: ["enrichments", "dimension widening", "event enrichment", "configurable enrichments"]
 ---
+
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Enrichments are included with all Snowplow platforms."
+/>
+```
 
 During Enrichment your events have extra properties and values attached to them, also known as dimension widening.
 

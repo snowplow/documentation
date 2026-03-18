@@ -2,6 +2,8 @@
 position: 3
 title: "Model the data to identify unfinished purchases"
 sidebar_label: "Model the data"
+description: "Write SQL queries in Snowflake to identify users who viewed products but didn't complete purchases. Aggregate product view data and calculate engagement metrics for abandoned browse campaigns."
+keywords: ["snowflake sql abandoned browse", "ecommerce data modeling", "product view analytics", "user engagement tracking"]
 ---
 
 After implementing the tracking setup, send some events and test that they are arriving in your data warehouse. If you don't have a data warehouse, you can sign up for a [free trial of Snowflake](https://www.snowflake.com/).

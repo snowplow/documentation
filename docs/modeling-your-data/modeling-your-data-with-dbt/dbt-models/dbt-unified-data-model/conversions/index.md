@@ -1,6 +1,8 @@
 ---
-title: "Modeling conversion events with the Unified Digital package"
+title: "Model conversion events with the Unified Digital package"
 sidebar_label: "Conversions"
+description: "Model and track conversion events with the Unified Digital dbt package for attribution and funnel analysis."
+keywords: ["conversion tracking", "conversion events", "conversion modeling", "funnel analysis", "conversion attribution"]
 sidebar_position: 100
 ---
 
@@ -127,7 +129,7 @@ vars:
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>

@@ -1,7 +1,10 @@
 ---
 title: "RDB Loader configuration reference"
+sidebar_label: "RDB Loader configuration reference"
 date: "2022-04-05"
 sidebar_position: 500
+description: "Configure RDB Loader for Redshift, Snowflake, and Databricks with storage, messaging, scheduling, and monitoring settings."
+keywords: ["rdb loader config", "redshift config", "snowflake config", "databricks config", "loader settings"]
 ---
 
 The configuration reference in this page is written for RDB Loader 5.0.0 or higher.
@@ -35,7 +38,15 @@ import License from "@site/docs/api-reference/loaders-storage-targets/snowplow-r
 | `roleArn`                  | Required if 'NoCreds' is chosen as load auth method.. AWS Role ARN allowing Redshift to load data from S3.                                                                                                                  |
 | `schema`                   | Required. Redshift schema name, eg “atomic”.                                                                                                                                    |
 | `username`                 | Required. DB user with permissions to load data.                                                                                                                                |
-| `password`                 | Required. Password of DB user.                                                                                                                                                  |
+| `jdbcAuth.*` (since 6.3.0) | Required. JDBC authentication configuration. Supports two modes: `password` and `iam`.                                                                                     |
+| `jdbcAuth.type` (since 6.3.0) | Required. The authentication type. Possible values: `password` and `iam`.                                                                                                       |
+| `jdbcAuth.password` (since 6.3.0) | Required if `jdbcAuth.type` is `password`. Password of the DB user.                                                                                                             |
+| `jdbcAuth.roleArn` (since 6.3.0) | Required if `jdbcAuth.type` is `iam`. IAM role ARN with permissions to call `GetClusterCredentials`.                                                                            |
+| `jdbcAuth.roleExternalId` (since 6.3.0) | Required if `jdbcAuth.type` is `iam`. External ID for assuming the IAM role, used to restrict role assumption to trusted principals.    |
+| `jdbcAuth.redshiftRegion` (since 6.3.0) | Required if `jdbcAuth.type` is `iam`. AWS region where the Redshift cluster is located.                                                                                       |
+| `jdbcAuth.clusterId` (since 6.3.0) | Required if `jdbcAuth.type` is `iam`. Redshift cluster identifier.                                                                                                         |
+| `jdbcAuth.roleSessionName` (since 6.3.0) | Optional. Session name for the assumed IAM role.                                                                                                                                |
+| `jdbcAuth.credentialsTtl` (since 6.3.0) | Optional. TTL for temporary database credentials when using IAM authentication. Must be between 15 minutes and one hour.                                                          |
 | `maxError`                 | Optional. Configures the [Redshift MAXERROR load option](https://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-load.html#copy-maxerror). The default is 10.       |
 | `loadAuthMethod.*` (since 5.2.0) | Optional, default method is `NoCreds`. Specifies the auth method to use with the `COPY` statement. |
 | `loadAuthMethod.type`      | Required if `loadAuthMethod` section is included. Specifies the type of the authentication method. The possible values are `NoCreds` and `TempCreds`. <br/><br/>With `NoCreds`, no credentials will be passed to the `COPY` statement. Instead, Redshift cluster needs to be configured with an AWS Role ARN that allows it to load data from S3. This Role ARN needs to be passed in the `roleArn` setting above. You can find more information [here](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-access-permissions.html). <br/><br/>With 'TempCreds', temporary credentials will be created for every load operation and these temporary credentials will be passed to the `COPY` statement. |

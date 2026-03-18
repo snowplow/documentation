@@ -2,6 +2,8 @@
 title: "Set up the Unified Digital dbt package locally"
 sidebar_label: "Set up locally"
 position: 2
+description: "Install and configure the Snowplow Unified Digital dbt package locally with detailed variable configuration for web and mobile data modeling. Includes optimization tips for partition pruning, entity enablement, and warehouse-specific setup."
+keywords: ["dbt unified package installation", "snowplow web mobile data modeling"]
 ---
 
 Installing the package:
@@ -86,7 +88,7 @@ vars:
     snowplow__enable_web: true
 ```
 
-3. Enable [entities](https://docs.snowplow.io/docs/understanding-your-pipeline/entities/) to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
+3. Enable [entities](/docs/fundamentals/entities/) to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
 
     ```yaml
     vars:
@@ -134,9 +136,9 @@ vars:
 ```
 :::
 
-6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary.
+6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#config-generator) to help you create all your variable configurations, if necessary.
 
-7. Filter your data set
+2. Filter your data set
 
 You can specify both `start_date` at which to start processing events and the `app_id`'s to filter for. By default the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this please add the following to your `dbt_project.yml` file:
 
@@ -153,7 +155,7 @@ Below we list a few more that might be of interest depending on your setup or mo
 The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module) documentation.
 
 - adjust page ping variables, if needed
-The Unified Digital Model processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/trackers/web-trackers/tracking-events/#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The Unified Digital Model processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/web-trackers/tracking-events/activity-page-pings/) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -164,7 +166,7 @@ vars:
 
 ## Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the Unified Digital Model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the Unified Digital Model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [Model selection](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection) documentation.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 

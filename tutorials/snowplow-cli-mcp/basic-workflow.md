@@ -2,6 +2,8 @@
 position: 3
 title: "Create and publish a data structure using the Snowplow CLI MCP tool"
 sidebar_label: "Create and publish a data structure"
+description: "Step-by-step walkthrough of creating, validating, and publishing a data structure and tracking plan using the Snowplow CLI MCP tool."
+keywords: ["Snowplow CLI", "MCP", "data structures", "tracking plans", "validation"]
 ---
 
 Here's a typical interaction pattern for creating a data structure.
@@ -48,10 +50,10 @@ Also add a description field.
 The assistant will modify the structure and re-validate.
 
 
-## 5. Data product creation
+## 5. Tracking plan creation
 
 ```
-Create a data product for ecommerce product interactions. Include:
+Create a tracking plan for ecommerce product interactions. Include:
 - The existing product page views
 - Add to cart events
 - A source application for our website
@@ -61,7 +63,7 @@ Create a data product for ecommerce product interactions. Include:
 The assistant will:
 1. Create the necessary data structures for events (locally)
 2. Create a source application definition (locally)
-3. Create a data product linking everything together (locally)
+3. Create a tracking plan linking everything together (locally)
 4. Validate all components together (including cross-references)
 
 

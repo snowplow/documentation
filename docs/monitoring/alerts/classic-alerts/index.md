@@ -1,8 +1,10 @@
 ---
-title: "Setting up classic alerts"
+title: "Set up classic alerts"
 date: "2021-01-14"
 sidebar_label: "Classic alerts"
 sidebar_position: 2
+description: "Set up cost-effective classic alerts for new failed events and daily digests using internal telemetry data."
+keywords: ["classic alerts", "pipeline alerts", "failed event notifications", "email alerts"]
 ---
 
 

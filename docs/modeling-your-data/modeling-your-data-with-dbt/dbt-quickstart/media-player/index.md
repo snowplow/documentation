@@ -2,6 +2,8 @@
 sidebar_label: "Media Player"
 sidebar_position: 20
 title: "Media Player Quickstart"
+description: "Quick start guide for the Snowplow Media Player dbt package to model video and audio engagement data."
+keywords: ["media player quickstart", "media player setup", "dbt media player installation"]
 ---
 
 ```mdx-code-block
@@ -22,8 +24,8 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md)
-- Have the [`webPage` context](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)
+- Have the [`webPage` context](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) enabled on Web or the [screen context](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
 - Enabled session tracking on the tracker (default on mobile).
 
 The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:
@@ -67,7 +69,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the media player model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the media player model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-media-player/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -176,7 +178,7 @@ vars:
     snowplow__enable_youtube: true
 ```
 
-For other variables you can configure please see the [model configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#model-configuration) section.
+For other variables you can configure please see the [variables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#variables) section.
 
 
 ### 7. Optimize your project
@@ -191,7 +193,7 @@ vars:
 
 ### 8. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx#config-generator) to help you create all your variable configurations, if necessary.
 
 
 ### 9. Run your model

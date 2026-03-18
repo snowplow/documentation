@@ -1,15 +1,15 @@
 ---
-title: "Webhooks - collecting data from third parties"
+title: "Collect data from third parties with webhooks"
 date: "2020-02-15"
-sidebar_position: 10
+sidebar_position: 1000
 sidebar_label: "Webhooks"
+description: "Receive third-party event streams through webhooks for Adjust, Iglu, Iterable, MailGun, Mandrill, SendGrid, and Zendesk integrations."
+keywords: ["webhook integrations", "third-party webhooks", "snowplow webhook adapter"]
 ---
 
 Snowplow enables you to collect events via the webhooks of supported third-party software.
 
-Webhooks allow the third-party software to send their own internal event streams to your Snowplow collector for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
-
-View our [set of trackers for tracking events from your own applications](/docs/sources/trackers/index.md).
+Webhooks allow the third-party software to send their own internal event streams to your Snowplow Collector for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
 | Webhook                                                  | Track                                                                        |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------- |

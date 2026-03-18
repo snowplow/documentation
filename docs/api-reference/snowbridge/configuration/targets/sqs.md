@@ -1,7 +1,8 @@
 ---
-title: "Configuring SQS as a Snowbridge target"
+title: "Configure SQS as a Snowbridge target"
 sidebar_label: "SQS"
-description: "Write data to an SQS queue."
+description: "Configure SQS target for Snowplow Snowbridge to write data to AWS SQS queues with IAM authentication and message attributes."
+keywords: ["snowbridge config", "sqs target", "aws sqs", "sqs queue", "sqs producer"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Self describing JSONs"
+title: "Self-describing JSON format"
+sidebar_label: "Self describing JSON"
 date: "2021-03-26"
 sidebar_position: 50
+description: "Standardized JSON format linking data instances to their schemas via Iglu URI references in a schema field."
+keywords: ["self-describing json", "iglu uri", "json data format"]
 ---
 
 _This page is adapted from the Snowplow Analytics blog post, [Introducing self-describing JSONs](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/)._

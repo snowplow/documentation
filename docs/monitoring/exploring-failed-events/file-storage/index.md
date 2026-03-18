@@ -1,7 +1,9 @@
 ---
-title: "Accessing failed events in file storage"
+title: "Access raw failed events from S3 or GCS buckets"
 sidebar_label: "Raw failed events"
 sidebar_position: 2
+description: "Retrieve and query raw failed event payloads directly from S3 or GCS file storage using Athena or BigQuery."
+keywords: ["failed events S3", "failed events GCS", "Athena failed events", "BigQuery failed events", "failed events file storage"]
 ---
 
 ```mdx-code-block

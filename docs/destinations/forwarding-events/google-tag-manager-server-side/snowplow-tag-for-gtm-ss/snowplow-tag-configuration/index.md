@@ -1,7 +1,10 @@
 ---
-title: "Snowplow Tag Configuration"
+title: "Configure Snowplow Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure collector URL, cookie settings, advanced event settings, and logging for the Snowplow Tag in GTM Server Side."
+keywords: ["Snowplow Tag configuration", "collector settings", "cookie configuration", "event forwarding"]
 ---
 
 ## Collector URL (Required)
@@ -101,7 +104,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | "Message"                                                      |
 | Request     | "RequestMethod", "RequestUrl", "RequestHeaders", "RequestBody" |
 | Response    | "ResponseStatusCode", "ResponseHeaders", "ResponseBody"        |

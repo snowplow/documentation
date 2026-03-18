@@ -1,7 +1,10 @@
 ---
-title: "Flink"
+title: "Run event recovery on Flink"
 date: "2020-04-14"
 sidebar_position: 10
+sidebar_label: "Flink"
+description: "Deploy event recovery jobs on Apache Flink using EMR with fault tolerance and CloudWatch metrics monitoring."
+keywords: ["Flink event recovery", "EMR Flink recovery"]
 ---
 
 The Flink job reads bad rows from an S3 location and stores the recovered payloads in Kinesis, unrecovered and unrecoverable in other S3 buckets.

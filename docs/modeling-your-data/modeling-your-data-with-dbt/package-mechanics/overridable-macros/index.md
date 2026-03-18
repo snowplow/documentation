@@ -2,6 +2,8 @@
 title: "Overridable macros in Snowplow dbt packages"
 sidebar_label: "Overridable macros"
 sidebar_position: 20
+description: "Override and customize default macros in Snowplow dbt packages to extend package functionality."
+keywords: ["overridable macros", "macro customization", "dbt macros", "custom macros"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -10,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Many of our packages are built using [macros](https://docs.getdbt.com/docs/build/jinja-macros) to allow easier support of multiple warehouses. Some of these macros are designed to be overridable to give an easy route to customization for the user. You can find a list of the overridable macros for each package in the [package details](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) pages.
 
-The easiest way to to override any given macro is to create a `default__` version within your dbt project, for example, to change the `filter_bots` macro in the `unified` package you would have:
+The easiest way to override any given macro is to create a `default__` version within your dbt project, for example, to change the `filter_bots` macro in the `unified` package you would have:
 
 ```jinja2 title="your_dbt_project/macros/filter_bots.sql"
 {% macro default__filter_bots(table_alias = none) %}

@@ -1,7 +1,9 @@
 ---
-title: "REST API"
+title: "Snowplow Micro REST API"
+sidebar_label: "REST API"
 sidebar_position: 1
-description: Snowplow Micro REST API.
+description: "Snowplow Micro REST API endpoints for querying good events, bad events, and resetting cache."
+keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 ---
 
 ```mdx-code-block
@@ -9,9 +11,15 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md#what-is-snowplow-micro).
+This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md).
 
 ## /micro/all
+
+:::note Micro in Console
+
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+
+:::
 
 This endpoint responds with a summary JSON object of the number of total, good and bad events currently in the cache.
 
@@ -32,6 +40,12 @@ Example:
 ```
 
 ## /micro/good
+
+:::note Micro in Console
+
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+
+:::
 
 This endpoint queries the good events, which are the events that have been successfully validated.
 
@@ -298,6 +312,12 @@ It's not necessary to specify all the fields in a request, only the ones that ne
 
 ## /micro/bad
 
+:::note Micro in Console
+
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+
+:::
+
 This endpoint queries the bad events, which are the events that failed validation.
 
 ### HTTP method
@@ -448,7 +468,7 @@ It's not necessary to specify all the fields in each request, only the ones that
 
 ## /micro/reset
 
-Sending a request to this endpoint resets Micro's cache.
+Sending a request to this endpoint deletes all events stored by Micro.
 
 ### HTTP method
 

@@ -1,7 +1,10 @@
 ---
-title: "MailGun"
+title: "MailGun webhook"
+sidebar_label: "MailGun"
 date: "2020-02-26"
 sidebar_position: 50
+description: "Track MailGun email events including delivered messages, hard bounces, spam complaints, unsubscribes, clicks, and opens."
+keywords: ["mailgun webhook integration", "mailgun email tracking", "email delivery events"]
 ---
 
 This webhook integration lets you track a variety of events logged by [Mailgun](https://www.mailgun.com/).

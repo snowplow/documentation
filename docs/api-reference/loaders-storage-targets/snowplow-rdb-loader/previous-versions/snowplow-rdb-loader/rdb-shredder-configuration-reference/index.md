@@ -1,7 +1,10 @@
 ---
-title: "RDB shredder configuration reference"
+title: "RDB shredder configuration reference for 2.0.0+"
+sidebar_label: "RDB shredder configuration reference"
 date: "2021-12-01"
 sidebar_position: 450
+description: "Configure RDB Shredder 2.0.0+ with input, output, deduplication, and compression settings for batch processing enriched events."
+keywords: ["shredder config", "batch config", "deduplication config", "rdb shredder 2.0", "shredder settings"]
 ---
 
 Shredder and loader use different configurations starting from 2.0.0. An example config for shredder can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/2.0.0/config/shredder.batch.config.reference.hocon).

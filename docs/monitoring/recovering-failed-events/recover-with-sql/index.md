@@ -1,7 +1,9 @@
 ---
-title: "Recover loaded events with SQL"
+title: "Recover loaded events from a failed events table with SQL"
 sidebar_position: 10
+sidebar_label: "Recover loaded events with SQL"
 description: "Learn how to recover failed events from your failed events table back into your good events table using SQL queries."
+keywords: ["SQL event recovery", "recover with SQL", "failed events SQL"]
 ---
 
 ```mdx-code-block
@@ -81,6 +83,28 @@ FROM SNOWPLOW_FAILED.EVENTS -- Use your failed events schema
 WHERE load_tstamp::DATE > CURRENT_DATE - INTERVAL '7 DAY' -- include a date range for when the failed events occurred
   AND contexts_com_snowplowanalytics_snowplow_failure_1 IS NOT NULL;
 ```
+  </TabItem>
+  <TabItem value="databricks" label="Databricks" default>
+  ```sql
+  SELECT
+    app_id,
+    event_name,
+    event_version,
+    contexts_com_snowplowanalytics_snowplow_failure_1,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].data AS data, -- use the `[0]` syntax to extract the first (and only) instance of this entity from the failure array
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].errors AS errors,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].failure_type AS failure_type,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].schema AS schema,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].timestamp AS timestamp,
+    SPLIT(SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
+        '/')[0], ':')[1] AS schema_vendor,
+    SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[1] AS schema_name,
+    SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[3] AS schema_version
+  FROM snowplow_failed.events -- Use your failed events schema
+  WHERE 1=1
+    AND DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), 7) -- include a date range for when the failed events occurred
+    AND contexts_com_snowplowanalytics_snowplow_failure_1 IS NOT NULL
+  ```
   </TabItem>
 </Tabs>
 
@@ -167,6 +191,47 @@ ORDER BY timestamp DESC;
 ```
 
   </TabItem>
+  <TabItem value="databricks" label="Databricks" default>
+  
+  ```sql
+  WITH
+  failed_events AS (
+  SELECT
+    app_id,
+    event_name,
+    event_version,
+    contexts_com_snowplowanalytics_snowplow_failure_1,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].data AS data,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].errors AS errors,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].failure_type AS failure_type,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].schema AS schema,
+    contexts_com_snowplowanalytics_snowplow_failure_1[0].timestamp AS timestamp,
+    SPLIT(SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
+        '/')[0], ':')[1] AS schema_vendor,
+    SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[1] AS schema_name,
+    SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[3] AS schema_version
+  FROM snowplow_failed.events -- Use your failed events schema
+  WHERE 1=1
+    AND DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), 7)
+    AND contexts_com_snowplowanalytics_snowplow_failure_1 IS NOT NULL
+  ORDER BY timestamp DESC)
+  SELECT
+    event_name,
+    schema,
+    schema_name,
+    schema_version,
+    schema_vendor,
+    data,
+    errors,
+    get_json_object(data, '$.user_name') as user_name,
+    get_json_object(data, '$.user_id') as user_id
+  FROM failed_events
+  WHERE 1=1
+    AND schema_name = 'user_entity'
+    AND app_id = 'test-app'
+  ORDER BY timestamp DESC
+  ```
+  </TabItem>
 </Tabs>
 
 Here we are filtering for our `test-app` app ID, and the specific schema failures we're looking for (`WHERE schema_name = 'user_entity'`).
@@ -194,7 +259,13 @@ Key principles for reconstructing events:
 
 ## Creating a prep query
 
-In this example, the `user_entity` is obviously an entity, so will be in an array. We're using BigQuery here, so we need an array containing a single struct value. In BigQuery, Snowplow stores the `data` object as a `JSON` type, so the individual values must be cast to their correct types.
+In this example, the `user_entity` is obviously an entity, so will be in an array. Depending on the data warehouse you are using, the `data` object will be stored differently. 
+
+* BigQuery stores the `data` object as a JSON type. 
+* Snowflake uses a VARIANT type.
+* Databricks uses a `STRING` type to represent the JSON object. 
+
+Regardless of the data warehouse in question, the repaired object should be an array containing a single struct value, and the individual values must be cast to their correct types from the value stored in the failed event object.
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="bigQuery" label="BigQuery" default>
@@ -244,6 +315,30 @@ SELECT
 FROM prep
 ```
 
+  </TabItem>
+  <TabItem value="databricks" label="Databricks" default>
+  
+  ```sql
+  WITH prep AS (
+  SELECT
+    contexts_com_snowplowanalytics_snowplow_failure_1
+  FROM snowplow_failed.events
+  WHERE 1=1
+    AND DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), 7)
+    AND app_id = 'test-app'
+    AND contexts_com_snowplowanalytics_snowplow_failure_1[0].schema = 'iglu:com.example/user_entity/jsonschema/2-0-1' -- filter for my offending schema
+)
+SELECT
+  ARRAY( -- since this is an entity, it must be an array
+      NAMED_STRUCT(
+        '_schema_version', '2-0-0', -- set the schema version to the correct entity version for Databricks
+        'user_id', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, '$.user_id') as BIGINT), -- use the `[0]` syntax to extract the first (and only) instance of this entity from the failure array
+        'user_name', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, '$.user_name') as STRING) -- CAST as BIGINT and STRING to cast the raw JSON string values to their appropriate types
+      )
+    )
+  AS contexts_com_example_user_entity_2_0_0 -- correctly name the column name to be inserted
+FROM prep;
+```
   </TabItem>
 </Tabs>
 
@@ -335,7 +430,9 @@ column_mappings AS (   -- this CTE checks if columns are missing,
           -- Entity columns
           WHEN STARTS_WITH(lower(column_name), 'contexts_') THEN
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
-          -- Standard columns
+          -- Custom event columns
+          WHEN STARTS_WITH(lower(column_name), 'unstruct_') THEN
+            FORMAT('cast(null as %s) AS %s', target_type, column_name)
           ELSE
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
         END
@@ -450,6 +547,9 @@ column_mappings AS (   -- this CTE checks if columns are missing,
           -- Entity columns
           WHEN STARTSWITH(lower(column_name), 'contexts_') THEN
             CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
+          -- Custom event columns
+          WHEN STARTSWITH(lower(column_name), 'unstruct_') THEN
+            CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
           -- Standard columns
           ELSE
             CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
@@ -495,6 +595,129 @@ SELECT
 FROM generated_insert;
 ```
 
+  </TabItem>
+  <TabItem value="databricks" label="Databricks" default>
+  
+  ```sql
+WITH target_table_columns AS ( -- Find all columns in the good events table
+  SELECT
+    ordinal_position,
+    column_name,
+    full_data_type,
+    is_nullable
+  FROM snowplow_good.information_schema.columns
+  WHERE table_name = 'events'
+    AND table_schema = 'snowplow_good'
+),
+
+failed_table_columns AS ( -- Find all columns in the failed events table
+  SELECT
+    column_name,
+    full_data_type,
+    is_nullable
+  FROM snowplow_failed.information_schema.columns
+  WHERE table_name = 'events'
+    AND table_schema = 'snowplow_failed'
+),
+
+schema_comparison AS ( -- Join and label missing columns
+  SELECT
+    t.ordinal_position,
+    t.column_name,
+    t.full_data_type AS target_type,
+    f.full_data_type AS failed_type,
+    t.is_nullable,
+    CASE
+      WHEN f.column_name IS NULL THEN 'MISSING_IN_FAILED'
+      WHEN t.full_data_type != f.full_data_type THEN 'TYPE_MISMATCH'
+      ELSE 'MATCH'
+    END AS status
+  FROM target_table_columns t
+  LEFT JOIN failed_table_columns f ON t.column_name = f.column_name
+),
+
+column_mappings AS ( -- Handle missing columns and insert repaired event columns
+  SELECT
+    ordinal_position,
+    column_name,
+    target_type,
+    status,
+    CASE
+      -- Handle your specific replaced entity column
+      WHEN column_name = 'contexts_com_example_user_entity_2_0_0' THEN
+        -- Paste in your reprocess logic as a string
+        'ARRAY(NAMED_STRUCT(
+        ''_schema_version'', ''2-0-0'',
+        ''user_id'', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, ''$.user_id'') AS BIGINT),
+        ''user_name'', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, ''$.user_name'') AS STRING)
+        )) AS contexts_com_example_user_entity_2_0_0'
+
+      -- Exclude the failure entity from source
+      WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
+        'CAST(NULL AS ARRAY<STRUCT<schema:STRING, data:STRING>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
+
+      -- Handle the load_tstamp column
+      WHEN column_name = 'load_tstamp' THEN 
+        'CURRENT_TIMESTAMP() AS load_tstamp'
+
+      -- Handle missing columns with appropriate NULL casting
+      WHEN status = 'MISSING_IN_FAILED' THEN
+        CASE
+          -- Entity columns (contexts)
+          WHEN LOWER(column_name) LIKE 'contexts_%' THEN
+            CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
+          -- Custom event columns (unstruct)
+          WHEN LOWER(column_name) LIKE 'unstruct_%' THEN
+            CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
+          -- Standard columns
+          ELSE
+            CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
+        END
+
+      -- Handle type mismatches with explicit casting
+      WHEN status = 'TYPE_MISMATCH' THEN
+        CONCAT('CAST(', column_name, ' AS ', target_type, ') AS ', column_name)
+
+      -- Pass through matching columns
+      ELSE column_name
+    END AS select_expression
+  FROM schema_comparison
+),
+
+select_clause AS ( -- List all columns for the INSERT statement
+  SELECT 
+    CONCAT_WS(',\n  ', COLLECT_LIST(select_expression)) AS columns_sql
+  FROM (
+    SELECT ordinal_position, select_expression
+    FROM column_mappings
+    ORDER BY ordinal_position
+  )
+),
+
+generated_insert AS (
+  SELECT 
+    CONCAT(
+      'INSERT INTO snowplow_good.events\n',
+      'WITH prep AS (\n',
+      '  SELECT\n',
+      '    * -- include all columns from the failed events table\n',
+      '  FROM snowplow_failed.events\n',
+      '  WHERE DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), 7)\n',
+      '    AND app_id = ''test-app''\n',
+      '    AND contexts_com_snowplowanalytics_snowplow_failure_1[0].schema = ''iglu:com.example/user_entity/jsonschema/2-0-1''\n',
+      ')\n',
+      'SELECT\n  ',
+      columns_sql,
+      '\nFROM prep;'
+    ) AS insert_statement
+  FROM select_clause
+)
+
+-- Output the complete INSERT statement
+SELECT
+  insert_statement AS generated_sql
+FROM generated_insert;
+  ```
   </TabItem>
 </Tabs>
 

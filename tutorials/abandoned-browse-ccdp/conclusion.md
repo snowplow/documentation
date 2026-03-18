@@ -2,6 +2,8 @@
 position: 6
 title: "Conclusions and next steps from the abandoned browse composable CDP accelerator"
 sidebar_label: "Conclusion"
+description: "Review what you've accomplished in this abandoned browse tutorial and explore recommended next steps including advanced segmentation, A/B testing, and personalization strategies to improve conversion rates."
+keywords: ["abandoned browse summary", "composable cdp tutorial", "ecommerce marketing automation", "customer re-engagement"]
 ---
 
 Congratulations on completing the tutorial on setting up an abandoned browse tracking and re-engagement system using Snowplow, Snowflake, Braze, and Census. Here's a summary of what you've learned and achieved.

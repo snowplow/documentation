@@ -66,3 +66,9 @@ This table shows the support for cross-domain tracking across the main client-si
 | [Android](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) | ✅         | 6.0.0         |
 | React Native                                                                                                                                 | ❌         |               |
 | Flutter                                                                                                                                      | ❌         |               |
+
+## Identities and cross-navigation tracking
+
+[Snowplow Identities](/docs/identities/index.md) provides real-time identity resolution, stitching together user identifiers from different events into unified profiles.
+
+Cross-navigation tracking is directly supported within Identities. If you enable [cross-domain tracking support](/docs/identities/concepts/index.md#cross-domain-tracking), Identities will automatically treat `refr_domain_userid` as equivalent to `domain_userid`. The result is that all of a user's activity across your domains — anonymous or authenticated — resolves to the same `snowplow_id`, without any downstream modeling to join the identifiers yourself.

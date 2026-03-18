@@ -46,6 +46,11 @@ The configured identifiers for this example are:
 
 During the anonymous browsing session, the only configured identifier in the events is the `domain_userid`. Since this is a new identifier, Identities creates a new profile and links the identifier to it.
 
+| Event property  | Value        |
+| --------------- | ------------ |
+| `domain_userid` | `4b0dfa-...` |
+| `user_id`       | -            |
+
 ```mermaid
 graph TD
     A(["domain_userid:<br/>4b0dfa-..."])
@@ -55,6 +60,11 @@ graph TD
 ```
 
 After the user logs in, the next event contains both the `domain_userid` and their `user_id`. Identities finds the existing profile via the `domain_userid` and adds the `user_id` to it.
+
+| Event property  | Value               |
+| --------------- | ------------------- |
+| `domain_userid` | `4b0dfa-...`        |
+| `user_id`       | `alice@company.com` |
 
 ```mermaid
 graph TD
@@ -110,7 +120,14 @@ When a merge occurs, Identities emits a [merge event](#merge-events) into your e
 
 In this example, a user installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously (i.e. is not logged in). It's the same user as in the [profile creation example](#example-profile-creation), but that's not immediately apparent.
 
-The ExampleCompany team has configured Identities to use the `apple_idfv` identifier from the mobile platform entity. Identities finds a new `apple_idfv` value in the user's first event, so it creates a new profile.
+The ExampleCompany team has configured Identities to use the `apple_idfv` identifier from the mobile platform entity.
+
+Identities finds a new `apple_idfv` value in the user's first event, so it creates a new profile.
+
+| Event property | Value        |
+| -------------- | ------------ |
+| `apple_idfv`   | `6d920c-...` |
+| `user_id`      | -            |
 
 ```mermaid
 graph LR
@@ -121,6 +138,11 @@ graph LR
 ```
 
 The user then logs into the mobile app. The next event contains the known `apple_idfv` and the previously seen `user_id`. Identities detects that profiles `sp_001` and `sp_002` refer to the same user because of the matching `user_id`. It merges them and emits a merge event.
+
+| Event property | Value               |
+| -------------- | ------------------- |
+| `apple_idfv`   | `6d920c-...`        |
+| `user_id`      | `alice@company.com` |
 
 The older profile becomes the active Snowplow ID. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001` attached.
 
@@ -147,7 +169,14 @@ When Identities processes an event that would cause a merge, it checks whether a
 
 ### Example merge conflict
 
-In this example, Alice from the [profile creation](#example-profile-creation) and [merge](#example-merge-process) examples shares her phone with a colleague, Bob. Bob logs into the ExampleCompany mobile app on Alice's phone. The event contains the device's `apple_idfv`, already linked to Alice's profile via the earlier merge, and Bob's `user_id`.
+In this example, Alice from the [profile creation](#example-profile-creation) and [merge](#example-merge-process) examples shares her phone with a colleague, Bob.
+
+Bob logs into the ExampleCompany mobile app on Alice's phone. The event contains the device's `apple_idfv`, already linked to Alice's profile via the earlier merge, and Bob's `user_id`.
+
+| Event property | Value             |
+| -------------- | ----------------- |
+| `apple_idfv`   | `6d920c-...`      |
+| `user_id`      | `bob@company.com` |
 
 Identities detects a conflict: the `apple_idfv` is linked to a profile with `user_id: alice@company.com`, but the event contains `user_id: bob@company.com`. Because `user_id` is marked as unique, Identities doesn't merge the profiles. Instead, it creates a new profile for Bob and links all of the event's identifiers to it — including the shared `apple_idfv`.
 
@@ -174,6 +203,11 @@ graph LR
 ```
 
 Bob logs out, and a third person picks up the device and opens the app without logging in. The event contains only the `apple_idfv`. Identities looks up the identifier and finds it linked to profiles with two different unique `user_id` values: `alice@company.com` and `bob@company.com`.
+
+| Event property | Value        |
+| -------------- | ------------ |
+| `apple_idfv`   | `6d920c-...` |
+| `user_id`      | -            |
 
 Identities can't attribute this anonymous activity to either Alice or Bob. Instead of guessing, it creates a new anonymous profile. The anonymous profile receives a deterministic Snowplow ID, so all future anonymous events from this device receive the same ID until a user logs in.
 
@@ -222,6 +256,12 @@ In this example, ExampleCompany runs two sites on separate cookie domains: `bran
 
 A user browses `brandA.com` anonymously. The event contains a `domain_userid`. Identities creates a new profile.
 
+| Event property  | Value        |
+| --------------- | ------------ |
+| `url`           | `brandA.com` |
+| `domain_userid` | `d123`       |
+| `user_id`       | -            |
+
 ```mermaid
 graph TD
     A(["domain_userid:<br/>d123"])
@@ -232,10 +272,17 @@ graph TD
 
 The user clicks a link to `brandB.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing profile, and links the new `domain_userid` to it.
 
+| Event property       | Value        |
+| -------------------- | ------------ |
+| `url`                | `brandB.com` |
+| `domain_userid`      | `f456`       |
+| `refr_domain_userid` | `d123`       |
+| `user_id`            | -            |
+
 ```mermaid
 graph TD
     A(["domain_userid:<br/>d123"])
-    D(["domain_userid:<br/>d456"])
+    D(["domain_userid:<br/>f456"])
     P1(("**Profile:<br/>sp_001**"))
 
     A --- P1
@@ -244,10 +291,16 @@ graph TD
 
 The user then logs into `brandB.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing profile.
 
+| Event property  | Value                     |
+| --------------- | ------------------------- |
+| `url`           | `brandB.com/user-profile` |
+| `domain_userid` | `f456`                    |
+| `user_id`       | `u001`                    |
+
 ```mermaid
 graph TD
     A(["domain_userid:<br/>d123"])
-    D(["domain_userid:<br/>d456"])
+    D(["domain_userid:<br/>f456"])
     U(["user_id:<br/>u001"])
     P1(("**Profile:<br/>sp_001**"))
 

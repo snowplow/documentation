@@ -19,24 +19,26 @@ Identities is based on several core concepts.
 * **Profiles** are collections of linked identifiers that represent a single user
 * **Merges** occur when identifiers link two previously separate profiles together
 
+Identities also supports cross-domain tracking, where users navigating between sites with different cookie domains can be resolved to the same profile. TODO maybe move this - or add more value prop here
+
 ## Identifiers
 
-Identifiers are the key/value pairs that Identities extracts from events and uses to resolve identity. Each identifier has a name or type, such as `domain_userid`, and a value that's the actual ID in the event payload, such as `a43eb2f1-...`.
+Identifiers are the properties in the event payload that Identities uses to resolve identity. They're key-value pairs. Each identifier has a type key, such as `domain_userid`, and a value that's the actual ID in the event payload, such as `a43eb2f1-...`.
 
-You can configure identifiers from atomic event fields, custom event fields, or from your own entities. For example, you might add a hashed email address from a form submission event, or a global user ID from a custom user profile entity.
-
-Identities also supports [cross-domain tracking](#cross-domain-tracking), where users navigating between sites with different cookie domains can be resolved to the same profile.
+You can configure identifiers from atomic event fields, or from a property inside an event or entity data structure. For example, you might add a hashed email address from a form submission event, or a global user ID from a custom user profile entity.
 
 ## Profiles
 
-A profile is a collection of linked identifiers that represent a single user. Each profile has a persistent, immutable `snowplow_id` that identifies it.
+A profile is a collection of linked identifiers that represent a single user. Each profile has a persistent, immutable Snowplow ID that identifies it.
 
-When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event in an [identity entity](#identity-entity). In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
+When Identities receives a new identifier not found in another profile, it creates a new profile and links the identifier to it. The pipeline adds the new profile's Snowplow ID to the event in an [identity entity](#identity-entity).
+
+In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same Snowplow ID.
 <!-- TODO: it's called `identity` instead of `profile` in the backend; is that a problem? I've been using the term `profile` with customers -->
 
 ### Example profile creation
 
-In this example, a user browses a Snowplow-enabled ExampleCompany website anonymously, then logs in. Identities is able to identify the events as belonging to the same user.
+In this example, a user browses an ExampleCompany website anonymously, then logs in. Identities, running in the ExampleCompany Snowplow pipeline, is able to identify the events as belonging to the same user.
 
 The configured identifiers for this example are:
 - `domain_userid`: browser cookie ID from the web tracker
@@ -64,7 +66,7 @@ graph TD
     B --- C
 ```
 
-All events associated with this user both pre- and post-login will have Snowplow ID `sp_001` attached to them.
+All events associated with this user both pre- and post-login will have the same Snowplow ID `sp_001` attached in an identity entity.
 
 ## Identity resolution process
 
@@ -84,15 +86,15 @@ The identity resolution process for each event is as follows:
 7. Identities creates a profile-profile merge relationship from the newer profile to the older profile
 8. Identities returns the parent profile Snowplow ID and emits a merge event into the Snowplow pipeline to signal to downstream systems that a merge has occurred.
 
-Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information.
+Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the Snowplow ID reflects the most up-to-date identity information.
 
-If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events. <!-- TODO: ask peel to confirm -->
+If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback Snowplow ID linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events. <!-- TODO: ask peel to confirm -->
 
 Tracked events are sometimes delayed in arriving into your pipeline, for example due to network issues or offline tracking. When they're eventually processed, they're resolved against the current state of the identity graph.
 
 ### Fallback IDs and identifier priority
 
-Each identifier has a priority that determines how the `snowplow_id` is generated when Identities can't reach the graph database, e.g. during a traffic spike. Higher-priority identifiers are preferred when generating fallback IDs.
+Each identifier has a priority that determines how the Snowplow ID is generated when Identities can't reach the graph database, e.g. during a traffic spike. Higher-priority identifiers are preferred when generating fallback IDs.
 
 In normal operation, priority doesn't affect how profiles are linked. All identifiers contribute equally to identity resolution.
 
@@ -100,13 +102,13 @@ In normal operation, priority doesn't affect how profiles are linked. All identi
 
 Merges happen when an event contains identifiers that are linked to different profiles. This typically occurs when a user's anonymous activity is later connected to their known identity.
 
-When profiles merge, the older profile's `snowplow_id` becomes the ID for the combined profile. All identifiers from both profiles are linked to the combined profile. Merged profiles can also be merged again in the future if new connecting identifiers are observed.
+When profiles merge, the older profile's Snowplow ID becomes the ID for the combined profile. All identifiers from both profiles are linked to the combined profile. Merged profiles can also be merged again in the future if new connecting identifiers are observed.
 
 When a merge occurs, Identities emits a [merge event](#merge-events) into your enriched event stream.
 
 ### Example merge process
 
-In this example, a user installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously (i.e. is not logged in). It's the same user as in the previous example, but that's not immediately apparent.
+In this example, a user installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously (i.e. is not logged in). It's the same user as in the [profile creation example](#example-profile-creation), but that's not immediately apparent.
 
 The ExampleCompany team has configured Identities to use the `apple_idfv` identifier from the mobile platform entity. Identities finds a new `apple_idfv` value in the user's first event, so it creates a new profile.
 
@@ -120,7 +122,7 @@ graph LR
 
 The user then logs into the mobile app. The next event contains the known `apple_idfv` and the previously seen `user_id`. Identities detects that profiles `sp_001` and `sp_002` refer to the same user because of the matching `user_id`. It merges them and emits a merge event.
 
-The older profile becomes the active `snowplow_id`. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001` attached.
+The older profile becomes the active Snowplow ID. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001` attached.
 
 ```mermaid
 graph LR
@@ -145,9 +147,9 @@ When Identities processes an event that would cause a merge, it checks whether a
 
 ### Example merge conflict
 
-In this example, Alice from the previous example shares her phone with a colleague, Bob. Bob logs into the ExampleCompany mobile app on Alice's phone. The event contains the device's `apple_idfv` (already linked to Alice's profile via the earlier merge) and Bob's `user_id`.
+In this example, Alice from the [profile creation](#example-profile-creation) and [merge](#example-merge-process) examples shares her phone with a colleague, Bob. Bob logs into the ExampleCompany mobile app on Alice's phone. The event contains the device's `apple_idfv`, already linked to Alice's profile via the earlier merge, and Bob's `user_id`.
 
-Identities detects a conflict: the `apple_idfv` is linked to a profile with `user_id` `alice@company.com`, but the event contains `user_id` `bob@company.com`. Because `user_id` is marked as unique, Identities doesn't merge the profiles. Instead, it creates a new profile for Bob and links all of the event's identifiers to it — including the shared `apple_idfv`.
+Identities detects a conflict: the `apple_idfv` is linked to a profile with `user_id: alice@company.com`, but the event contains `user_id: bob@company.com`. Because `user_id` is marked as unique, Identities doesn't merge the profiles. Instead, it creates a new profile for Bob and links all of the event's identifiers to it — including the shared `apple_idfv`.
 
 ```mermaid
 graph LR
@@ -173,7 +175,7 @@ graph LR
 
 Bob logs out, and a third person picks up the device and opens the app without logging in. The event contains only the `apple_idfv`. Identities looks up the identifier and finds it linked to profiles with two different unique `user_id` values: `alice@company.com` and `bob@company.com`.
 
-Identities can't attribute this anonymous activity to either Alice or Bob. Instead of guessing, it creates a new anonymous profile. The anonymous profile receives a deterministic `snowplow_id`, so all future anonymous events from this device receive the same ID until a user logs in.
+Identities can't attribute this anonymous activity to either Alice or Bob. Instead of guessing, it creates a new anonymous profile. The anonymous profile receives a deterministic Snowplow ID, so all future anonymous events from this device receive the same ID until a user logs in.
 
 ```mermaid
 graph LR
@@ -202,21 +204,23 @@ graph LR
     C3 --- AnonP
 ```
 
-:::tip Resetting identifiers on logout
+:::tip Reset identifiers on logout
 For web browsers, consider calling [`newSession`](/docs/sources/web-trackers/tracking-events/session/index.md) or [`clearUserData`](/docs/sources/web-trackers/anonymous-tracking/index.md#clear-user-data) when a user logs out. This resets the `domain_userid` cookie, preventing it from being shared between users on the same browser.
 :::
 
 ## Cross-domain tracking
 
-When users navigate between sites with different cookie domains, or from a mobile app to a webview, each destination assigns its own `domain_userid`. Without cross-domain tracking, these appear as separate users. [Cross-domain tracking](/docs/events/cross-navigation/index.md) solves this by passing the `domain_userid` from the source site or app in the URL. Events captured on the destination contain a `refr_domain_userid` field with the source's `domain_userid`. This works for web-to-web navigation, mobile app-to-webview transitions, and any other scenario where the [web](/docs/sources/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers decorate outgoing links.
+When users navigate between sites with different cookie domains, or from a mobile app to a webview, each destination assigns its own `domain_userid`. Without cross-domain tracking, these appear as separate users. [Cross-domain](/docs/events/cross-navigation/index.md), or cross-navigation, tracking solves this by passing the `domain_userid` from the source site or app in the URL. Events captured on the destination contain a `refr_domain_userid` field with the source's `domain_userid`.
+
+This works for web-to-web navigation, mobile app-to-webview transitions, and any other scenario where the [web](/docs/sources/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers decorate outgoing links.
 
 You can [enable cross-domain tracking support](/docs/identities/configuration/index.md#enable-cross-domain-tracking-aliases) in the Identities configuration so that Identities automatically extracts `refr_domain_userid` and maps it to `domain_userid` and `client_session_user_id`, linking the user's profiles across sites.
 
 ### Example cross-domain resolution
 
-In this example, ExampleCompany runs two sites on separate cookie domains: `brandA.example.com` and `brandB.example.com`. Cross-domain tracking is configured on the web tracker, and the ExampleCompany team has enabled cross-domain tracking in the Identities configuration.
+In this example, ExampleCompany runs two sites on separate cookie domains: `brandA.com` and `brandB.com`. Cross-domain tracking is configured on the web tracker, and the ExampleCompany team has enabled cross-domain tracking in the Identities configuration.
 
-A user browses `brandA.example.com` anonymously. The event contains a `domain_userid`. Identities creates a new profile.
+A user browses `brandA.com` anonymously. The event contains a `domain_userid`. Identities creates a new profile.
 
 ```mermaid
 graph TD
@@ -226,7 +230,7 @@ graph TD
     A --- P1
 ```
 
-The user clicks a link to `brandB.example.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.example.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing profile, and links the new `domain_userid` to it.
+The user clicks a link to `brandB.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing profile, and links the new `domain_userid` to it.
 
 ```mermaid
 graph TD
@@ -238,7 +242,7 @@ graph TD
     D --- P1
 ```
 
-The user then logs into `brandB.example.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing profile.
+The user then logs into `brandB.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing profile.
 
 ```mermaid
 graph TD
@@ -252,7 +256,7 @@ graph TD
     U --- P1
 ```
 
-All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same `snowplow_id`.
+All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same Snowplow ID.
 
 ## Identities data
 
@@ -260,7 +264,7 @@ Identities adds two data types to your enriched event stream: an identity entity
 
 ### Identity entity
 
-When Identities resolves identity for an event, it attaches an identity [entity](/docs/fundamentals/entities/index.md) to the event payload. This entity contains the `snowplow_id` for the profile that the event was resolved to. It appears in your warehouse as `contexts_com_snowplowanalytics_snowplow_identity_1`.
+When Identities resolves identity for an event, it attaches an identity [entity](/docs/fundamentals/entities/index.md) to the event payload. This entity contains the Snowplow ID for the profile that the event was resolved to. For [most warehouses](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md), you'll find it as `contexts_com_snowplowanalytics_snowplow_identity_1`.
 
 <SchemaProperties
   overview={{entity: true}}

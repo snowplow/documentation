@@ -52,7 +52,7 @@ For cross-domain tracking aliases to work, you must have identifiers named `doma
 By default, Identities processes all events that flow through your pipeline. Use event filters to limit identity resolution to a subset of events.
 
 Event filters are optional. Common reasons to filter events include:
-- Processing only events from specific applications (`app_id`)
+- Processing only events from specific applications, using `app_id`
 - Excluding server-side events that don't represent user activity
 - Limiting to events from specific platforms
 
@@ -60,10 +60,10 @@ You can add multiple filters and combine them with **AND** (all conditions must 
 
 To add a filter, click **Add filter** and configure:
 
-| Field    | Description                                     |
-| -------- | ----------------------------------------------- |
-| Property | The event property to filter on                 |
+| Field    | Description                                        |
+| -------- | -------------------------------------------------- |
+| Property | The event property to filter on                    |
 | Operator | `is one of` (include) or `is not one of` (exclude) |
-| Value    | A list of values to match                       |
+| Value    | A list of values to match                          |
 
 <!-- TODO: Add screenshot of filter form -->

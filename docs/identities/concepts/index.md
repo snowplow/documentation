@@ -7,19 +7,14 @@ description: "Core concepts behind Snowplow Identities: identifiers, profiles, m
 keywords: ["identities", "identity resolution", "identifiers", "profiles", "merges"]
 ---
 
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-```
-
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Identities is based on several core concepts.
 * **Identifiers** are the properties in the event payload that correspond to a user
 * **Profiles** are collections of linked identifiers that represent a single user
 * **Merges** occur when identifiers link two previously separate profiles together
-
-Identities also supports cross-domain tracking, where users navigating between sites with different cookie domains can be resolved to the same profile. TODO maybe move this - or add more value prop here
 
 ## Identifiers
 
@@ -311,7 +306,11 @@ graph TD
 
 All of the user's activity across both sites, both anonymous and authenticated, is resolved to the same Snowplow ID.
 
-## Identities data
+## Identities and Signals
+
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). To use the Snowplow ID as a unified profile in Signals, set an attribute group's key to `snowplowId` and map it to the `snowplowId` property in the identity entity.
+
+## Data types
 
 Identities adds two data types to your enriched event stream: an identity entity attached to every resolved event, and a merge event emitted when profiles are combined.
 

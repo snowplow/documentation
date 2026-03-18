@@ -15,13 +15,15 @@ Identities allows you to:
 * Build on [cross-navigation tracking](/docs/events/cross-navigation/index.md) to identify users across domains
 * Distinguish between separate users sharing the same device
 
-Use the provided Identities data models to build identifier mapping tables to help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
+Use the provided Identities data models to build identifier mapping tables. These tables help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
 ## How Identities fits into the Snowplow pipeline
 
 Identity resolution happens in real time as part of the [event enrichment process](/docs/fundamentals/index.md).
 
-After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved `snowplow_id` to the event in an [identity entity](/docs/identities/concepts/index.md#identity-entity).
+![Diagram showing where Identities fits into the Snowplow pipeline](./images/identities-pipeline.png)
+
+After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved Snowplow ID to the event in an [identity entity](/docs/identities/concepts/index.md#identity-entity).
 
 Some incoming identifiers will reveal that two previously separate profiles actually belong to the same user. Identities will merge the two profiles in its graph database, and emit a [merge event](/docs/identities/concepts/index.md#merge-events) directly into your enriched event stream.
 <!-- TODO: does graph database denote -->

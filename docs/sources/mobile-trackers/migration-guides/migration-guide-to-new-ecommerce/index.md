@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The [Ecommerce tracking package](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) was introduced in Android and iOS version 5.4.0. It provides 11 out-of-the-box event types to make it easier to thoroughly track user activity in an ecommerce store.
+The [Ecommerce tracking package](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) was introduced in Android and iOS version 5.4.0. It provides 11 out-of-the-box event types to make it easier to thoroughly track user activity in an ecommerce store.
 
 :::note
 Migrating to the new ecommerce events is a breaking change for any relevant data models.
@@ -178,7 +178,7 @@ tracker.track(event)
   </TabItem>
 </Tabs>
 
-These code snippets show only the direct API replacement. Check out the [docs page](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) for information about expanding your tracking with the other new event types.
+These code snippets show only the direct API replacement. Check out the [docs page](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) for information about expanding your tracking with the other new event types.
 
 Note that address details and affiliation are not captured in `TransactionEvent`. To track these so that they are attached to the `TransactionEvent`, we suggest creating [custom schemas](/docs/sources/mobile-trackers/custom-tracking-using-schemas/index.md) and adding the data as an entity. Alternatively for addresses, you could use the `CheckoutStepEvent` which has address and postcode as optional parameters.
 

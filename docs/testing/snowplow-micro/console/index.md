@@ -2,8 +2,8 @@
 title: "Run Snowplow Micro through Console"
 sidebar_label: "Run via Console"
 sidebar_position: 1
-description: "Run Snowplow Micro through Snowplow Console to validate and debug tracking implementations. Send events to the collector endpoint and view results through the UI."
-keywords: ["micro in console", "run micro", "test events", "micro ui"]
+description: "Run Snowplow Micro through Snowplow Console to validate and debug tracking implementations. Send events to the collector endpoint and view results through the dashboard."
+keywords: ["micro in console", "run micro", "test events", "micro dashboard", "micro ui"]
 ---
 
 Snowplow Micro is fully integrated in Snowplow Console:
@@ -39,11 +39,11 @@ Select your environment and you will see the Collector endpoint URL you can use 
 
 Events will be stored for a (rolling) 7 day period.
 
-To view events in the [Micro UI](/docs/testing/snowplow-micro/ui/index.md), select your environment and then click **View events**.
+To view events in the [Micro dashboard](/docs/testing/snowplow-micro/ui/index.md), select your environment and then click **Open dashboard**.
 
 :::warning Production data
 
-Do not send production data to development environments. Anyone with the _View environments_ permission can access the UI and see the events. Also, development environments are not configured to withstand high volumes of events.
+Do not send production data to development environments. Anyone with the _View environments_ permission can access the dashboard and see the events. Also, development environments are not configured to withstand high volumes of events.
 
 :::
 

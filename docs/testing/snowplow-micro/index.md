@@ -19,7 +19,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 * Getting familiar with Snowplow
 * Debugging and testing, including [automated testing](/docs/testing/snowplow-micro/automated-testing/index.md)
 
-![Snowplow Micro UI](./images/overview.png)
+![Snowplow Micro dashboard](./images/overview.png)
 
 Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/index.md).
 

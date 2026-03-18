@@ -22,7 +22,7 @@ Use the event filter to choose which event type to calculate the attribute from.
 
 Click the dropdown to see the available events, listed by name and vendor:
 
-* **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/) from an existing [tracking plan](/docs/event-studio/tracking-plans/). 
+* **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) from an existing [tracking plan](/docs/event-studio/tracking-plans/index.md).
 
 * **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
 

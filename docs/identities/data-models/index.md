@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#identities-data-structures) in your warehouse into a set of derived tables for identity resolution, identifier lookup, and audit. Run this package before any other Snowplow dbt packages so that downstream models can reference the resolved identities.
+The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) in your warehouse into a set of derived tables for identity resolution, identifier lookup, and audit. Run this package before any other Snowplow dbt packages so that downstream models can reference the resolved identities.
 
 The package processes data incrementally, only handling new events on each run.
 

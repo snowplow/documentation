@@ -14,6 +14,8 @@ The main user and session identifiers are tracked as:
 * Atomic event properties
 * Session entity properties
 
+Not all trackers have session tracking capabilities.
+
 ## User atomic event properties
 
 These [properties](/docs/fundamentals/canonical-event/index.md#user-fields) can be assigned using most Snowplow trackers, regardless of the platform.
@@ -24,7 +26,7 @@ If you don't manually set an IP address or `network_userid`, the event [Collecto
 
 | Tracker                                                                              | Supported | Since version | Notes                                                                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/index.md#business-user-id)       | ✅         | 0.1.0         | Set `user_id` only. Tracker sets the `domain_userid`, `network_userid`, `domain_sessionid`, and `domain_sessionidx` automatically from [cookies](/docs/sources/web-trackers/cookies-and-local-storage/index.md). |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#business-user-id)          | ✅         | 0.1.0         | Set `user_id` only. Tracker sets the `domain_userid`, `network_userid`, `domain_sessionid`, and `domain_sessionidx` automatically from [cookies](/docs/sources/web-trackers/cookies-and-local-storage/index.md). |
 | [iOS](/docs/sources/mobile-trackers/client-side-properties/index.md)                 | ✅         | 0.5.0         | Set all properties except `domain_sessionid` and `domain_sessionidx`.                                                                                                                                            |
 | [Android](/docs/sources/mobile-trackers/client-side-properties/index.md)             | ✅         | 0.1.0         | Set all properties except `domain_sessionid` and `domain_sessionidx`.                                                                                                                                            |
 | [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         | Set all properties.                                                                                                                                                                                              |
@@ -33,7 +35,7 @@ If you don't manually set an IP address or `network_userid`, the event [Collecto
 | [Node.js](/docs/sources/node-js-tracker/configuration/index.md)                      | ✅         | 0.8.0         | Set all properties.                                                                                                                                                                                              |
 | [Golang](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)  | ✅         | 1.0.0         | Set all properties.                                                                                                                                                                                              |
 | [.NET](/docs/sources/net-tracker/subject/index.md)                                   | ✅         | 0.1.0         | Set all properties.                                                                                                                                                                                              |
-| [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.10.0        | Set all properties.                                                                                                                                                                                              |
+| [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.10.0        | Set all properties except `domain_sessionidx`.                                                                                                                                                                   |
 | [Python](/docs/sources/python-tracker/subject/index.md)                              | ✅         | 0.13.0        | Set all properties.                                                                                                                                                                                              |
 | [Scala](/docs/sources/scala-tracker/subject-methods/index.md)                        | ✅         | 0.6.0         | Set all properties except `domain_sessionid` and `domain_sessionidx`.                                                                                                                                            |
 | [Ruby](/docs/sources/ruby-tracker/adding-data-events/index.md)                       | ✅         | 0.3.0         | Set all properties.                                                                                                                                                                                              |
@@ -43,6 +45,25 @@ If you don't manually set an IP address or `network_userid`, the event [Collecto
 | [Unity](/docs/sources/unity-tracker/subject/index.md)                                | ✅         | 0.1.0         | Set all properties.                                                                                                                                                                                              |
 | [Lua](/docs/sources/lua-tracker/tracking-specific-events/index.md)                   | ✅         | 0.1.0         | Set `user_id` only.                                                                                                                                                                                              |
 | Google Tag Manager                                                                   | ❌         |               | Set using custom configuration.                                                                                                                                                                                  |
+## Session timeouts
+
+A session is a period of time in which a user interacts with your application. A new session starts the first time an event is tracked after the previous session's timeout has elapsed.
+
+There's no maximum session duration, but sessions do have a configurable inactivity timeout. If there's no user activity for the specified time, the session ends. A new one will start when the user returns.
+
+For most trackers, the timeout is based on the gap between the last tracked event and the current event. Mobile trackers have two session timeout settings, allowing you to specify different timeouts if the app is in the foreground or background.
+
+| Tracker                                                                                      | Foreground timeout, min | Background timeout, min | Notes                                                                                                                 |
+| -------------------------------------------------------------------------------------------- | ----------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/session/index.md)                           | 30                      | -                       | Page pings from [activity tracking](/docs/events/ootb-data/page-activity-tracking/index.md) will keep a session alive |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md)               | 30                      | 30                      |                                                                                                                       |
+| [Android](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md)           | 30                      | 30                      |                                                                                                                       |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/session-tracking/index.md) | 30                      | 30                      |                                                                                                                       |
+| [Flutter](/docs/sources/flutter-tracker/sessions-and-data-model/index.md)                    | 30                      | 30                      |                                                                                                                       |
+| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                                      | 30                      | -                       |                                                                                                                       |
+| [.NET](/docs/sources/net-tracker/setup/index.md)                                             | 10                      | 5                       | Uses a timer so it can expire a session independently of a new tracked event                                          |
+| [C++](/docs/sources/c-tracker/client-sessions/index.md)                                      | 30                      | 30                      |                                                                                                                       |
+| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)            | 30                      | -                       |                                                                                                                       |
 
 ## Session entity
 

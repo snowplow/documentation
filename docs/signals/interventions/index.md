@@ -77,6 +77,22 @@ Interventions are versioned. This allows you to iterate on the definitions witho
 
 Within criteria, the attributes are always evaluated based on the latest published version of the attribute group that contains the attribute. For example, if `attribute_group` v1, v2, and v3 all have the required `attribute`, v3 will be used. If you then publish `attribute_group` v4, which removes `attribute`, v3 will still be used.
 
+## Testing
+
+Signals provides two ways to test an intervention: a preview you can run before publishing, and a live test you can trigger once the intervention is published.
+
+### Preview
+
+While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined.
+
+![Intervention preview showing test results with match count against scanned warehouse records](../images/intervention-preview.png)
+
+### Send a test intervention
+
+Once the intervention is published, you can send a test by specifying a particular attribute key identifier. Signals will dispatch an intervention to that identifier so you can verify your subscription is set up correctly and diagnose any connection errors before relying on it in production.
+
+![Intervention connection test showing attribute key input field to send a test intervention](../images/intervention-connection-test.png)
+
 ## Deleting an intervention
 
 To unpublish or delete an intervention, click the `⋮` button on the details page.

@@ -51,8 +51,6 @@ Define a custom intervention target scope by selecting [attribute keys](/docs/si
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
 
-![Intervention target configuration showing custom attribute key selection](../images/intervention-attribute-keys.png)
-
 You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups.
 
 ![Intervention delivery configuration showing attribute key targeting and attribute group payload selection](../images/intervention-delivery.png)

@@ -12,7 +12,7 @@ keywords: ["snowbridge 5.x upgrade", "upgrade guide", "snowbridge migration", "v
 
 ### All sources
 
-`concurrent_writes` setting has been removed. Concurrency is now configured at transformation and target levels: see [batching model](../concepts/batching-model/index.md) for more details.
+`concurrent_writes` setting has been removed. Concurrency is now configured at transformation and target levels: see [batching model](/docs/api-reference/snowbridge/concepts/batching-model/index.md) for more details.
 
 ### Transformation configuration syntax
 

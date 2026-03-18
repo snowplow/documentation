@@ -45,13 +45,17 @@ When adding more than one criteria, you can require all or any of them to be met
 
 These attributes are both from groups with the `domain_userid` attribute key. Therefore, this intervention is targeted to users. When a [subscribed](/docs/signals/interventions/subscribe/index.md) user reaches 10 page views while using Chrome, the intervention will trigger.
 
-## Custom targets
+## Target and payload
 
 Define a custom intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#targeting). These are the attribute keys that will receive the information.
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
 
 ![Intervention target configuration showing custom attribute key selection](../images/intervention-attribute-keys.png)
+
+You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups.
+
+![Intervention delivery configuration showing attribute key targeting and attribute group payload selection](../images/intervention-delivery.png)
 
 ## Publishing the intervention
 

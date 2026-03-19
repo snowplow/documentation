@@ -19,13 +19,15 @@ This documentation follows the [`llms.txt` standard](https://llmstxt.org/), prov
 
 An index is available at [`llms.txt`](pathname:///llms.txt).
 
-A full-content version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of every page. This file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
+An extended version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of the current pages. For token efficiency, sections relating to older versions of components aren't included in this file. These sections are still listed in the `llms.txt` index, labeled as `[previous version]`.
+
+The `llms-full.txt` file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 
 ## Documentation pages as Markdown
 
 Every documentation page is available as Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons above the page title.
 
-To access the Markdown page directly, change the trailing `/` in the URL to `.md`. For example:
+Following the `llms.txt` standard, you can access the Markdown page directly by changing the trailing `/` in the URL to `.md`. For example:
 
 - HTML: `https://docs.snowplow.io/docs/signals/concepts/`
 - Markdown: `https://docs.snowplow.io/docs/signals/concepts.md`

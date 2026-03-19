@@ -1,14 +1,13 @@
 ---
-title: "Generate tracking code with Snowtype"
+title: "Snowtype"
 sidebar_label: "Snowtype"
 sidebar_position: 6
-description: "Automatically generate type-safe tracking code from data structures and event specifications with compile-time validation, reducing implementation time and maintenance overhead."
+description: "Snowtype generates type-safe tracking code from your event specifications and data structures, so your tracking implementation stays in sync with your schemas."
 keywords: ["Snowtype", "code generation", "type-safe tracking", "automated SDK code", "tracking automation"]
+date: "2026-03-19"
 ---
 
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
@@ -17,88 +16,38 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 />
 ```
 
-**Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. Snowtype connects directly to your data structures and event specifications. This eliminates manual instrumentation work and ensures that your tracking code is compliant with the schemas and produces high quality data.
+Snowtype is a CLI tool that reads your [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) and [data structures](/docs/event-studio/data-structures/index.md) from your Snowplow account, and generates type-safe tracking code for the language and tracker you specify.
 
-Snowtype streamlines the development workflow by providing several key advantages:
+This provides several key advantages:
+* Quicker implementation: reduce the manual work needed to produce production-ready tracking code
+* Type safety: ensure your tracking code is consistent with your schemas and catch errors before they reach your pipeline
+* Workflow integration: use CI/CD GitOps-like processes to keep your tracking code in sync with your schemas
 
-- **Type safety enforcement:** Generates strongly-typed code that validates events and entities at compile time, preventing schema violations before data reaches your pipeline.
-- **Automated code generation:** Converts event specifications into production-ready SDK code, reducing implementation time from weeks to days.
-- **Integrated documentation:** Syncs inline code documentation with your data structures and products, maintaining consistency between design and implementation.
-- **Development workflow integration:** Fits seamlessly into CI/CD processes, enabling GitOps-style tracking plan management and automated updates when schemas evolve.
-- **Reduced maintenance overhead:** Automatically updates tracking code when data structures change, eliminating the need for manual synchronization across multiple codebases.
+Writing tracking code by hand, and keeping it up-to-date, is time-consuming and error-prone. Snowtype automates this process, supporting your data governance and quality efforts.
+
+## Snowtype workflow
+
+The workflow for using Snowtype is:
+
+1. **Define** your events and entities in [Console](https://console.snowplowanalytics.com) or [programmatically](/docs/event-studio/programmatic-management/index.md).
+2. **Generate** tracking code by running Snowtype in your project. It produces typed functions you call instead of constructing event payloads manually.
+3. **Track** events using the generated functions in your application code.
+4. **Update** when schemas change. Snowtype can detect new versions and regenerate your code.
+
+You can run Snowtype from the command line, or you can find its output in the Console on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md).
 
 ## Supported trackers
 
-```mdx-code-block
-import Trackers from "./_supported-trackers.md"
+Snowtype generates code for the following Snowplow trackers:
 
-<Trackers/>
-```
-
-## Prerequsites
-
-To use Snowtype, you must have [Node.js](https://nodejs.org/en/) (>=@18) installed.
-
-## Installation
-
-Navigate to your project and install Snowtype using your favorite package manager:
-
-<Tabs groupId="package-manager">
-  <TabItem value="npm" label="npm" default>
-
-```bash
-npm install --save-dev @snowplow/snowtype@latest
-```
-
-  </TabItem>
-  <TabItem value="yarn" label="Yarn">
-
-```bash
-yarn add --dev @snowplow/snowtype@latest
-```
-
-  </TabItem>
-  <TabItem value="pnpm" label="pnpm">
-
-```bash
-pnpm add --save-dev @snowplow/snowtype@latest
-```
-
-  </TabItem>
-</Tabs>
-
-## Executing commands
-
-Installing Snowtype will also create a local executable `snowtype` which you can use with `npx`, `yarn` or `pnpm` directly when on your project's directory.
-
-<Tabs groupId="example-commands">
-  <TabItem value="npm" label="npm" default>
-
-```bash
-npx @snowplow/snowtype@latest init
-# Same as
-npx snowtype init
-```
-
-  </TabItem>
-  <TabItem value="yarn" label="Yarn">
-
-```bash
-yarn @snowplow/snowtype@latest init
-# Same as
-yarn snowtype init
-```
-
-  </TabItem>
-  <TabItem value="pnpm" label="pnpm">
-
-```bash
-pnpm @snowplow/snowtype@latest init
-# Same as
-pnpm snowtype init
-```
-
-  </TabItem>
-</Tabs>
-
-_We will show example commands using `npm/npx` but it should work the same with any other package manager._
+| Tracker                                                     | Language               |
+| ----------------------------------------------------------- | ---------------------- |
+| [Browser](/docs/sources/web-trackers/index.md)              | JavaScript, TypeScript |
+| [JavaScript](/docs/sources/web-trackers/index.md)           | JavaScript             |
+| [iOS](/docs/sources/mobile-trackers/index.md)               | Swift                  |
+| [Android](/docs/sources/mobile-trackers/index.md)           | Kotlin                 |
+| [React Native](/docs/sources/react-native-tracker/index.md) | TypeScript             |
+| [Flutter](/docs/sources/flutter-tracker/index.md)           | Dart                   |
+| [Node.js](/docs/sources/node-js-tracker/index.md)           | JavaScript, TypeScript |
+| [Go](/docs/sources/golang-tracker/index.md)                 | Go                     |
+| [Java](/docs/sources/java-tracker/index.md)                 | Java                   |

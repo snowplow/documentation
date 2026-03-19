@@ -2,7 +2,7 @@
 title: "BigQuery Streaming Loader"
 sidebar_label: "BigQuery Loader"
 sidebar_position: 2
-description: "Stream Snowplow events to BigQuery from Kinesis, Pub/Sub, or Kafka with real-time loading and schema evolution."
+description: "Stream Snowplow events to BigQuery from Kinesis or Pub/Sub with real-time loading and schema evolution."
 keywords: ["bigquery loader", "google bigquery", "streaming loader", "snowplow gcp"]
 ---
 
@@ -24,10 +24,6 @@ The BigQuery Streaming Loader is an application that loads Snowplow events to Bi
   <TabItem value="gcp" label="GCP">
     <LoaderDiagram stream="Pub/Sub" cloud="GCP"/>
     <DeployOverview cloud="GCP" stream="pubsub"/>
-  </TabItem>
-  <TabItem value="azure" label="Azure">
-    <LoaderDiagram stream="Kafka" cloud="Azure"/>
-    <DeployOverview cloud="Azure" stream="kafka"/>
   </TabItem>
 </Tabs>
 
@@ -55,13 +51,6 @@ https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/confi
 
 ```json reference
 https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.pubsub.minimal.hocon
-```
-
-  </TabItem>
-  <TabItem value="azure" label="Azure">
-
-```json reference
-https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.azure.minimal.hocon
 ```
 
   </TabItem>

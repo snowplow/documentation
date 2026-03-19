@@ -78,6 +78,14 @@ credentials: 'omit'
 
 Before v4, this configuration was provided using the `withCredentials` flag.
 
+### Sent timestamp for GET events
+
+By default, the tracker sends POST requests. If you update the `eventMethod` to `get`, the tracker will send events using GET requests. These events will contain a `stm` [timestamp parameter](/docs/events/timestamps/index.md) recording when the event was sent.
+
+If you need to make requests as small as possible, you can omit the `stm` parameter by setting the `useStm` [configuration option](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) to `false`. This option was introduced in version 2.10.1. It's a niche parameter that you should only use if you have a specific reason to do so.
+
+POST requests always include the sent timestamp.
+
 ## Network protocol and method
 
 ### Setting the request protocol
@@ -207,6 +215,14 @@ dontRetryStatusCodes: [418] // force retry on 418
 ```
 
 Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. Take caution when choosing the `dontRetryStatusCodes`.
+
+### Event queue behavior
+
+The `useLocalStorage` [configuration option](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) refers to event queue behavior. It was introduced in version 4.0.0. If you set it to `false`, events will be stored in memory only. If the page closes before events are sent, they'll be lost.
+
+This is a **risky** setting that you should only use if you have a specific reason, such as compliance or privacy.
+
+Previous versions of the tracker had a `useLocalStorage` option that referred to state storage. In version 3 [we deprecated this option](/docs/sources/web-trackers/migration-guides/v2-to-v3-migration-guide/index.md) in favor of `stateStorageStrategy`. If you're upgrading from version 2 and were using `useLocalStorage`, switch to `stateStorageStrategy: 'localStorage'` if don't want to store state in cookies, or use the default `cookieAndLocalStorage` behavior.
 
 ## Callbacks
 

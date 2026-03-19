@@ -196,7 +196,7 @@ The following plugins are now included by default:
 - [Performance Navigation Timing](/docs/sources/web-trackers/tracking-events/timings/index.md)
 - [Web Vitals](/docs/sources/web-trackers/tracking-events/web-vitals/index.md)
 
-To keep using old plugins, they will have to be [explicitly installed](/docs/sources/web-trackers/plugins/configuring-tracker-plugins/javascript/index.md) using `addPlugins` or built into a custom bundle.
+To keep using old plugins, they will have to be [explicitly installed](/docs/sources/web-trackers/plugins/configuring-tracker-plugins/index.md) using `addPlugins` or built into a custom bundle.
 
 ### Plugin behavior updates
 

@@ -1,7 +1,7 @@
 ---
 title: "Set up automated testing with Snowplow Micro"
-sidebar_position: 5.5
-sidebar_label: "Automated testing"
+sidebar_position: 3
+sidebar_label: "Run in CI/CD"
 description: "Integrate Snowplow Micro with automated testing frameworks like Nightwatch and Cypress. Build end-to-end GitHub Actions workflows to validate tracking implementations with custom commands and assertions."
 keywords: ["automated testing", "nightwatch", "cypress", "github actions", "e2e testing", "ci/cd"]
 ---
@@ -11,9 +11,17 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-[Snowplow Micro](/docs/testing/snowplow-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
+The basic approach for using Snowplow Micro in automated testing is this:
+* Run it alongside your tests, either via Docker or Java
+* In each test, send some events then validate the results using the [Micro REST API](/docs/api-reference/snowplow-micro/api/index.md)
 
-The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
+:::tip
+
+The instructions for running and configuring Micro in CI/CD are identical to the ones for [running locally](/docs/testing/snowplow-micro/local/index.md).
+
+:::
+
+The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository shows how to set up automated tests using Nightwatch and Cypress as examples of test frameworks and how to build end-to-end GitHub Actions testing workflows.
 
 ## Local setup
 
@@ -183,7 +191,7 @@ window.snowplow('enableFormTracking', { options: options });
     1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
         - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
         - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
-        - We also want to add as [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-entity) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
+        - We also want to add as [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-entity) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
         - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
 
 ```javascript
@@ -610,7 +618,7 @@ cy.eventsWithParams(
 );
 ```
 
-This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/tracking-events/index.md#structured).
+This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-structured-event).
 
 #### cy.eventsWithSchema
 

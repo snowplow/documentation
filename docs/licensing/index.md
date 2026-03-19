@@ -1,0 +1,110 @@
+---
+title: "Snowplow licenses"
+date: "2020-10-28"
+sidebar_position: 12.5
+sidebar_label: "Licensing"
+description: "Information about the different licenses used in Snowplow components and projects, including the Community License, Limited Use License, and Personal and Academic License."
+keywords: ["Snowplow licensing", "community license", "limited use license", "contributor license agreement"]
+---
+
+This section provides information about the different licenses used in Snowplow components and projects.
+
+
+```mdx-code-block
+import Link from '@docusaurus/Link';
+```
+
+## Source-available components
+
+:::tip Terminology
+
+Since some of the below licenses are not approved by [OSI](https://opensource.org/licenses/), we do not refer to them as _Open Source_ licenses. However, the source code is still available.
+
+:::
+
+<table>
+<thead>
+
+<tr>
+<th><Link to="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</Link></th>
+<th><Link to="/community-license-1.0/">Community License</Link></th>
+<th><Link to="/limited-use-license-1.1/">Limited Use License</Link></th>
+<th><Link to="/personal-and-academic-license-1.0/">Personal & Academic License</Link></th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr style={{verticalAlign: "top"}}>
+<td>
+
+_Usage and distribution for any purpose_
+
+</td>
+<td>
+
+_Usage in non-competing products, no distribution_ ([FAQ](/docs/licensing/community-license-faq/index.md))
+
+</td>
+<td>
+
+_Usage in non-production environments only, no distribution_  ([FAQ](/docs/licensing/limited-use-license-faq/index.md))
+
+</td>
+<td>
+
+_Usage for personal and academic purposes only_ ([FAQ](/docs/licensing/personal-and-academic-license-faq/index.md))
+
+</td>
+</tr>
+
+<tr style={{verticalAlign: "top"}}>
+<td>
+
+* All tracker SDKs¹
+* All Google Tag Manager templates
+* Legacy data models (web, mobile)
+
+</td>
+<td>
+
+* Core libraries (schema-ddl, common-streams, etc)
+* Developer tools (Chrome Inspector, `igluctl`, etc)
+
+</td>
+<td>
+
+All pipeline apps:
+* [Collector](/docs/api-reference/stream-collector/index.md) _(3.0.0+)_
+* [Enrich](/docs/api-reference/enrichment-components/index.md) _(4.0.0+)_
+* [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) _(0.12.0+)_
+* [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) _(6.0.0+)_
+* [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)
+* [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) _(2.0.0+)_
+* [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) _(0.2.0+)_
+* Other loaders
+* [Snowbridge](/docs/api-reference/snowbridge/index.md) _(2.4.0+)_
+* Community Edition terraform modules _(2024+)_
+
+</td>
+<td>
+
+All data models (except web and mobile)
+
+</td>
+</tr>
+
+</tbody>
+</table>
+
+¹As an exception, [Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascript-tracker) is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). This tracker was originally based on Anthon Pang’s `piwik.js`, and has maintained the same license for distribution.
+
+:::tip
+
+When in doubt, consult each component’s GitHub repository for the LICENSE file.
+
+:::
+
+## Proprietary components
+
+[Snowplow CDI](https://snowplow.io/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.

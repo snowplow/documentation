@@ -53,13 +53,13 @@ Each self-describing event consists of two parts:
 Because the event references a specific version of its schema, it's always clear to downstream users and applications what each field in the event means, even if your definition of the event changes over time.
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
-* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
+* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-clicks)
 * [Form submissions](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)
 * [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 
 Check out the full range of included events [here](/docs/events/ootb-data/index.md).
 
-You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define and track custom events.
+You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/event-studio/index.md) to help you define and track custom events.
 
 Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
 

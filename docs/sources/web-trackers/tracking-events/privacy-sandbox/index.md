@@ -11,9 +11,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The plugin allows for adding Privacy Sandbox related data to your Snowplow tracking. To learn more about the Privacy Sandbox you can visit the official [website](https://www.privacysandbox.com/). As more and more APIs become available or further refined, we will be upgrading the plugin with more capabilities and options as more APIs are added to the Privacy Sandbox.
+:::warning
+Privacy Sandbox has been deprecated by Google. This plugin remains available but the underlying browser API may no longer be supported.
+:::
 
-We currently support the [Topics API](https://developer.chrome.com/docs/privacy-sandbox/topics/overview/).
+The plugin allows for adding Privacy Sandbox [Topics API](https://developer.chrome.com/docs/privacy-sandbox/topics/overview/) data to your Snowplow tracking. To learn more about Privacy Sandbox visit the official [website](https://www.privacysandbox.com/).
 
 :::note
 Some of the APIs and data will not be available by default in all users. This is commonly due to these APIs being dependent on browser support, user privacy preferences, browser feature-flags or ad-blocking software. The plugin will not modify or request access explicitly to any of these features if not available by default.
@@ -23,7 +25,7 @@ Some of the APIs and data will not be available by default in all users. This is
 The plugin is available since version 3.14 of the tracker.
 :::
 
-The Privacy Sandbox context entity is **automatically tracked** once configured.
+The Privacy Sandbox entity is **automatically tracked** once configured.
 
 ## Install plugin
 
@@ -70,4 +72,4 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Context entity
 
-Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.privacysandbox/topics/jsonschema/1-0-0) context entity.
+Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.privacysandbox/topics/jsonschema/1-0-0) entity.

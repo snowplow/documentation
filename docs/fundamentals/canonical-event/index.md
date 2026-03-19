@@ -22,6 +22,8 @@ During enrichment, atomic property values are validated against the [atomic sche
 
 The tables show the default maximum lengths for string fields. You can configure different maximum lengths for specific fields by setting `atomicFieldsLimits` in the [Enrich configuration](/docs/api-reference/enrichment-components/configuration-reference/index.md). These can be more permissive than the limits in the atomic schema. In fact, the `page_url`, `page_referrer`, and `mkt_clickid` fields already have larger maximum lengths in the default Enrich configuration than in the atomic schema.
 
+Some identifiers require UUID strings. Snowplow components use UUIDv4, but the pipeline will accept any valid UUID, regardless of version.
+
 Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out these [example HTTP requests](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 
 ## Common fields
@@ -50,13 +52,17 @@ This table shows the possible values for the `event` field:
 
 ### User fields
 
+Read more about tracking and using these fields in the [OOTB user and session data](/docs/events/ootb-data/user-and-session-identification/index.md) and [identifiers](/docs/events/identifiers/index.md) pages.
+
 The `domain_userid` is regarded as the most reliable session based identifier for most use cases. It's treated as the primary `user_identifier` field in our data models that rely on sessionization, including the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) data model.
 
 The `domain_sessionidx` is the number or index of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript tracker calculates this field by storing a visit count in a [first-party cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
-The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity).
+The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity).
 
 The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker.
+
+The IP address is also added to the event by the Collector, if you didn't provide one in your tracking code. Snowplow supports both IPv4 and IPv6 addresses, as long as a domain is compatible with the IPv6 network.
 
 | Payload property | Field name          | Type                     | Description                                                                    | Reqd? | Example                                | Source                                                                                                                           | Web | Mobile |
 | ---------------- | ------------------- | ------------------------ | ------------------------------------------------------------------------------ | ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- | ------ |
@@ -65,7 +71,7 @@ The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/ind
 | `tnuid`          | `network_userid`    | `string`, max length 128 | User ID set by Snowplow using server-set cookie                                | No    | `ecdff4d0-9175-40ac-a8bb-325c49733607` | Tracking or pipeline                                                                                                             | ✅   | ✅      |
 | `sid`            | `domain_sessionid`  | UUID `string`            | Unique identifier (UUID) for this visit of this `domain_userid` to this domain | No    | `c6ef3124-b53a-4b13-a233-0088f79dcbcb` | Tracking                                                                                                                         | ✅   | ❌      |
 | `vid`            | `domain_sessionidx` | `integer`                | Index of number of visits that this `domain_userid` has made to this domain    | No    | `3`                                    | Tracking                                                                                                                         | ✅   | ❌      |
-| `ip`             | `user_ipaddress`    | `string`, max length 128 | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
+| `ip`             | `user_ipaddress`    | `string`, max length 128 | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
 
 ### Application fields
 
@@ -91,6 +97,7 @@ This table shows the possible values for the `platform` field:
 | Connected TV              | `tv`             |
 | Games console             | `cnsl`           |
 | Internet of Things        | `iot`            |
+| Headset (e.g., AR, VR)    | `headset`        |
 
 :::info Tracker namespacing
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that doesn't contain a colon or semicolon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
@@ -100,7 +107,7 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 The `etl_tstamp` field records when the event was validated and enriched, not when it was loaded into the warehouse. The name is historical.
 
-To set the `os_timezone` timezone field, use the [timezone plugin](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md) on web trackers, or set the timezone in the [mobile tracker configuration](/docs/sources/mobile-trackers/client-side-properties/index.md).
+Most Snowplow trackers have built-in capability for tracking `os_timezone`. See the [geolocation and timezone tracking](/docs/events/ootb-data/geolocation/index.md) page for tracker-specific configuration details.
 
 | Payload property | Field name            | Type                     | Description                                                 | Reqd? | Example                   | Source             | Web | Mobile |
 | ---------------- | --------------------- | ------------------------ | ----------------------------------------------------------- | ----- | ------------------------- | ------------------ | --- | ------ |
@@ -131,7 +138,7 @@ For more information on this topic check out the [device data](/docs/events/ootb
 
 ### IP address fields
 
-These fields are populated by the [IP enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md).
+These fields are populated by the [IP enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md), based on the `user_ipaddress` field.
 
 | Field name        | Type                     | Description                                                                                | Reqd? | Example              | Source                                                                                          | Web | Mobile |
 | ----------------- | ------------------------ | ------------------------------------------------------------------------------------------ | ----- | -------------------- | ----------------------------------------------------------------------------------------------- | --- | ------ |

@@ -11,10 +11,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/snowplow-fractribution" name="Fractional Attribution Modeling"/>
 ```
+
 :::warning
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
@@ -135,7 +133,7 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 ```
 ### 4. Run the model
 
-Execute the following either through your CLI, within dbt Cloud, or within [Snowplow Console](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)
+Execute the following either through your CLI, within dbt Cloud, or within [Snowplow Console](/docs/modeling-your-data/running-data-models-via-console/index.md)
 
 ```yml
 dbt run --select snowplow_fractribution

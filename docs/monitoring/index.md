@@ -55,7 +55,7 @@ Clicking on a particular error type will take you to a detailed view:
 
 ![](images/dqd-details.png)
 
-The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps), [mobile](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
+The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#entity-definitions), [mobile](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
 
 Some columns are too wide to fit in the table: click on them to see the full pretty-printed, syntax-highlighted content. The most useful column to explore is probably `CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1`, which contains the actual error information encoded as a JSON object:
 

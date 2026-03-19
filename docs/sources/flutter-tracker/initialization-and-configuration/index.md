@@ -100,6 +100,7 @@ Some of the properties are only configurable on iOS and Android and are automati
 | `networkUserId`    | `String?` | Network user ID (UUIDv4).                                       | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `domainUserId`     | `String?` | Domain user ID (UUIDv4).                                        | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `userAgent`        | `String?` | Custom user-agent. It overrides the user-agent used by default. | ✔       | ✔   | Non-configurable, auto-assigned. |         |
+| `ipAddress`        | `String?` | IP address.                                                     | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `timezone`         | `String?` | The timezone label.                                             | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `language`         | `String?` | The language set on the device.                                 | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `screenResolution` | `Size?`   | The screen resolution on the device.                            | ✔       | ✔   | Non-configurable, auto-assigned. |         |

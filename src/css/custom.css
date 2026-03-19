@@ -116,6 +116,7 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: hsl(var(--primary));
+  --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-font-color-base: hsl(var(--muted-foreground));
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
@@ -156,6 +157,24 @@ h2[id],
 h3[id],
 h4[id] {
   scroll-margin-top: 70px;
+}
+
+.theme-doc-markdown :is(h2, h3, h4) code {
+  font-size: 0.85em !important;
+  position: relative;
+  top: -1px;
+}
+
+/* Align inline code vertically with surrounding text in paragraphs and list items */
+.theme-doc-markdown :is(p, li) code {
+  position: relative;
+  top: -1px;
+}
+
+/* Gentler alignment for smaller TOC text */
+.table-of-contents code {
+  position: relative;
+  top: -0.5px;
 }
 
 .main-wrapper {
@@ -433,13 +452,160 @@ aside.theme-doc-sidebar-container {
   border-radius: var(--radius);
 }
 
-.theme-doc-sidebar-item-link-level-1.header {
-  margin-top: 1em;
-  padding-bottom: 0;
-  padding-left: var(--ifm-menu-link-padding-horizontal);
+/* Extra space above a sidebar item, via sidebar_custom_props.space_above */
+/* !important to override Infima's specificity-boosted margin rule in production builds */
+li.menu__list-item.space-above {
+  margin-top: 1rem !important;
+}
+
+/* Collapsible section headers - styled as distinct category headings */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible {
+  margin-top: 1rem;
+}
+
+/* Remove top margin from the first section header */
+.theme-doc-sidebar-item-category-level-1.section-header:first-child
+  > .menu__list-item-collapsible {
+  margin-top: 0;
+}
+
+/* Shared heading typography for section header link and toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
   font-variant: all-small-caps;
-  font-size: 1.1em;
-  color: var(--ifm-color-primary-darker);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link {
+  padding-bottom: 0.125rem;
+}
+
+/* Disable hover/active highlight styles on section header links and toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--active,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle.menu__link--active {
+  background: none;
+  border-left: none;
+  margin-left: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Override Infima's global collapsible hover background */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible:hover {
+  background: none !important;
+}
+
+/* Override Infima's global collapsible active background */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible.menu__list-item-collapsible--active {
+  background: none !important;
+  border-left: none;
+  margin-left: 0;
+}
+
+/* Section header toggle button: full-width, same appearance as the link */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem
+    var(--ifm-menu-link-padding-horizontal);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle:hover {
+  background: none;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Inline caret inside the section header toggle button */
+/* !important needed to override Infima's global .menu__caret opacity: 0, display, and padding rules */
+.theme-doc-sidebar-item-category-level-1.section-header .section-header__caret {
+  display: inline-flex !important;
+  flex-shrink: 0;
+  margin-left: auto;
+  opacity: 1 !important;
+  padding: 4px !important;
+}
+
+/* Override Infima's collapsible hover background on the caret */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .section-header__caret:hover {
+  background: none !important;
+}
+
+/* Remove the old separate caret styles (no longer rendered) */
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__caret {
+  display: none;
+}
+
+/* Remove vertical border line from section header's direct child list */
+/* Uses !important to override Infima's specificity-boosted rule in production builds:
+   .menu__list:not(#\#):not(#\#) .menu__list { padding-left: var(--ifm-menu-link-padding-horizontal) }
+   That rule wins over a normal class chain locally it's absent, causing the deploy preview indent. */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list {
+  padding-left: 0 !important;
+  margin-left: 0;
+  border-left: none;
+}
+
+/* Make items inside section headers look like top-level items */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2 {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2
+  > .menu__link {
+  padding-left: var(--ifm-menu-link-padding-horizontal);
+}
+
+/* Shift nested levels inside sections to appear one level up */
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-3,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-3 {
+  font-weight: 340;
+}
+
+/* Nested lists inside sections: grey line aligns with parent's active line */
+.section-header .menu__list .menu__list {
+  margin-left: 0;
+  padding-left: 0.75rem;
+  margin-top: 4px;
 }
 
 .theme-doc-sidebar-item-link-level-1,
@@ -459,7 +625,17 @@ aside.theme-doc-sidebar-container {
   color: hsl(var(--foreground));
 }
 
-.theme-doc-sidebar-item-category-level-2
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
+  .menu__list-item-collapsible
+  .menu__caret {
+  display: flex;
+  padding: 4px;
+}
+
+.section-header
+  .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
@@ -487,7 +663,7 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu__list-item:not(:first-child) {
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 .menu__list-item--collapsed .menu__list {
@@ -620,13 +796,36 @@ aside.theme-doc-sidebar-container {
   border: none;
   background: none !important;
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
 }
-.theme-doc-sidebar-item-category-level-2
+/* Level-2 carets always visible (except direct children of section headers, which act as top-level) */
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
+}
+
+/* Level-3+ carets inside section headers always visible */
+.section-header
+  .theme-doc-sidebar-item-category-level-3
+  .menu__list-item-collapsible
+  .menu__caret {
+  padding: 4px;
+  opacity: 1 !important;
+}
+
+/* Carets for hoisted Signals subsections: hidden by default, visible on hover */
+.section-child .menu__list-item-collapsible .menu__caret {
+  display: flex;
+  padding: 4px;
+  opacity: 0;
+}
+
+.section-child .menu__list-item-collapsible:hover .menu__caret {
+  opacity: 1 !important;
 }
 
 /* button to collapse */
@@ -635,7 +834,7 @@ aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
 }
 @media (min-width: 997px) {
   aside.theme-doc-sidebar-container nav.menu {
-    padding: 1rem 0 0.5rem 0.5rem;
+    padding: 0rem 0 0.5rem 0.5rem;
   }
   aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
     display: inline-flex !important;
@@ -1507,6 +1706,78 @@ pre.mermaid {
   .mermaid-container:active {
     transform: scale(0.98);
   }
+}
+
+/* Featured section links - display each link on its own line */
+.featured-section-links a {
+  display: block;
+  padding: 2px 0;
+}
+
+/* Featured section button */
+.featured-section-button {
+  background-color: #f3f4f6;
+  color: #374151;
+  text-decoration: none !important;
+}
+
+.featured-section-button:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .featured-section-button {
+  background: hsl(var(--primary));
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .featured-section-button:hover {
+  background: hsl(var(--primary) / 0.9);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Call to Action cards */
+.cta-card {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.18) 0%,
+    hsl(var(--primary) / 0.06) 35%,
+    hsl(var(--background)) 100%
+  );
+  text-decoration: none !important;
+  border: 1px solid hsl(var(--border));
+}
+
+.cta-card:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.24) 0%,
+    hsl(var(--primary) / 0.1) 35%,
+    hsl(var(--background)) 100%
+  );
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  text-decoration: none !important;
+}
+
+/* Link cards */
+.link-card {
+  text-decoration: none !important;
+}
+
+.link-card:hover {
+  text-decoration: none !important;
+}
+
+.link-card p.text-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+.link-card p.text-muted-foreground {
+  color: hsl(var(--muted-foreground)) !important;
+  font-weight: 400 !important;
 }
 
 @media print {

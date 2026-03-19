@@ -16,4 +16,4 @@ import Media from "@site/docs/reusable/media/_index.md"
 Media tracking is available in the Flutter tracker since version 0.7.0.
 :::
 
-<Media tracker="flutter" />
+<Media platforms={["flutter"]} />

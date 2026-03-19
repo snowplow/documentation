@@ -11,12 +11,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The web tracker supports Optimizely X (Next Generation Platform).
+The web tracker supports [Optimizely X](https://www.optimizely.com/) (Next Generation Platform) for campaign and A/B test management.
 
-The Optimizely context entities are **automatically tracked** once configured.
-You can have a look at the JsonSchema [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.optimizelyx/summary/jsonschema/1-0-0) to see what is being captured.
+The Optimizely entity is **automatically tracked** once configured.
 
-### Install plugin
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -59,9 +58,10 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
+Check out the [third-party sources overview page](/docs/events/ootb-data/third-party-sources/index.md) to see the entity schema.
 
-### Context entity
+If you're planning on leveraging the entity's `variationName`, you'll have to untick "Mask descriptive names in project code and third-party integrations" in the **OptimizelyX menu** > **Settings** > **Privacy**. Otherwise, all variation names will be null.
 
-Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.optimizelyx/summary/jsonschema/1-0-0) context entity (`iglu:com.optimizely.optimizelyx/summary/jsonschema/1-0-0`).
+## Legacy plugin
 
-If you’re planning on leveraging the entity’s variation names, you’ll have to untick ‘Mask descriptive names in project code and third-party integrations’ in the OptimizelyX menu -> Settings -> Privacy. Otherwise, all variation names will be null.
+The `browser-plugin-optimizely-x` plugin supersedes the earlier `browser-plugin-optimizely` plugin that was added in version 3.0. We deprecated and fully [removed it in version 4.0](/docs/sources/web-trackers/migration-guides/v3-to-v4-migration-guide/index.md).

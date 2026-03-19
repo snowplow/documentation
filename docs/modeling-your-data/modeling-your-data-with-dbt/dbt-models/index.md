@@ -10,8 +10,8 @@ keywords: ["dbt packages", "Snowplow dbt", "data modeling packages", "dbt models
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
-  available={['cloud', 'pmc', 'addon']}
-  helpContent="Data models are a paid addon for Snowplow CDI."
+  available={['cloud', 'pmc', 'selfHosted', 'addon']}
+  helpContent="Data models are a paid addon for Snowplow CDI or Self-Hosted."
 />
 ```
 

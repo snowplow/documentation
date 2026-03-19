@@ -78,23 +78,33 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    Snowplow.defaultTracker()?.track(event)
    ```
 
-You can override the default configuration with a fine grained configuration when you create the tracker. See the [API docs](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/trackerconfiguration/) for the `Configuration` classes to see all the options and defaults.
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [API docs](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/trackerconfiguration/) for more details.
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
   TrackerConfiguration()
-      .base64Encoding(false)
-      .sessionContext(true)
-      .platformContext(true)
-      .lifecycleAutotracking(true)
-      .screenViewAutotracking(true)
-      .screenContext(true)
+      .appId("appId")
+      .devicePlatform(.mobile)
+      .base64Encoding(true)
+      .logLevel(.off)
+      .loggerDelegate(nil)
       .applicationContext(true)
-      .exceptionAutotracking(true)
+      .platformContext(true)
+      .platformContextProperties(nil)
+      .platformContextRetriever(nil)
+      .geoLocationContext(false)
+      .sessionContext(true)
+      .deepLinkContext(true)
+      .screenContext(true)
+      .screenViewAutotracking(true)
+      .screenEngagementAutotracking(true)
+      .lifecycleAutotracking(true)
       .installAutotracking(true)
+      .exceptionAutotracking(true)
+      .diagnosticAutotracking(false)
       .userAnonymisation(false)
       .immersiveSpaceContext(true)
-      .logLevel(.off)
+      .advertisingIdentifierRetriever(nil)
   SessionConfiguration(
       foregroundTimeout: Measurement(value: 30, unit: .minutes),
       backgroundTimeout: Measurement(value: 30, unit: .minutes)
@@ -165,7 +175,7 @@ If you prefer to access the tracker when the reference is not directly accessibl
 Snowplow.defaultTracker?.track(event)
 ```
 
-You can override the default configuration with a fine grained configuration when you create the tracker. See the [Android API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) for the `Configuration` classes to see all the options and defaults.
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [Android API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) for more details.
 
 ```kotlin
 val networkConfig = NetworkConfiguration(
@@ -173,17 +183,25 @@ val networkConfig = NetworkConfiguration(
     HttpMethod.POST
 )
 val trackerConfig = TrackerConfiguration("appId")
-    .base64encoding(false)
-    .sessionContext(true)
-    .platformContext(true)
-    .lifecycleAutotracking(true)
-    .screenViewAutotracking(true)
-    .screenContext(true)
-    .applicationContext(true)
-    .exceptionAutotracking(true)
-    .installAutotracking(true)
-    .userAnonymisation(false)
+    .devicePlatform(DevicePlatform.Mobile)
+    .base64encoding(true)
     .logLevel(LogLevel.OFF)
+    .loggerDelegate(null)
+    .applicationContext(true)
+    .platformContext(true)
+    .geoLocationContext(false)
+    .sessionContext(true)
+    .deepLinkContext(true)
+    .screenContext(true)
+    .screenViewAutotracking(true)
+    .screenEngagementAutotracking(true)
+    .lifecycleAutotracking(true)
+    .installAutotracking(true)
+    .exceptionAutotracking(true)
+    .diagnosticAutotracking(false)
+    .userAnonymisation(false)
+    .platformContextProperties(null)
+    .platformContextRetriever(null)
 val sessionConfig = SessionConfiguration(
     TimeMeasure(30, TimeUnit.SECONDS),
     TimeMeasure(30, TimeUnit.SECONDS)

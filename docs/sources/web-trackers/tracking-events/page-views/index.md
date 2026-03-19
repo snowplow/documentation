@@ -3,7 +3,7 @@ title: "Track page views on web"
 sidebar_label: "Page views"
 sidebar_position: 20
 description: "Track page views with automatically captured URL, referrer, and title along with page view UUID for session analysis and single page apps."
-keywords: ["page views", "page tracking"]
+keywords: ["page views", "page tracking", "webpage entity", "page view ID"]
 ---
 
 ```mdx-code-block
@@ -11,9 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Page view events are tracked using the `trackPageView` method. This is generally part of the first Snowplow tag to fire, or first method to be called, on a particular web page. As a result, the `trackPageView` method is usually deployed straight after the tag that also invokes the Snowplow JavaScript (sp.js).
-
-## Tracking a page view
+Page view events are one of the most fundamental types of events to track on a website. They're tracked using `trackPageView()`.
 
 Page view events must be **manually tracked**.
 
@@ -35,11 +33,11 @@ trackPageView();
   </TabItem>
 </Tabs>
 
-This method automatically captures the URL, referrer URL and page title (inferred from the `<title>` tag). The first page view tracked uses `document.referrer` for the referrer URL, while for subsequent page views it is the previous page URL.
+This method automatically captures the URL, referrer URL, and page title. The first page view tracked uses `document.referrer` for the referrer URL, while for subsequent page views the referrer is the previous page URL.
 
-It's possible to [override the URL and referrer URL](/docs/sources/web-trackers/tracking-events/index.md#setting-a-custom-page-url-and-referrer-url).
+It's possible to [override the URL and referrer URL](/docs/sources/web-trackers/tracking-events/index.md#custom-page-url-and-referrer-url).
 
-If you wish, you can also override the title with a custom value:
+By default, the tracker infers the page title from the `<title>` tag. If you wish, you can also override the title with a custom value:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
@@ -59,11 +57,96 @@ trackPageView({ title: 'my custom page title' });
   </TabItem>
 </Tabs>
 
-## Context callback
+## Page view ID and `web_page` entity
 
-As with all `trackX` methods, `trackPageView` can be passed an array of [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) as an additional parameter.
+When the tracker loads on a page, or when `trackPageView()` is called, it generates a new page view UUID. This page view ID is attached to **all events** tracked on that page, as a [`web_page` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#web-page-entity), until the next page view event is tracked. At that point, a new page view ID is generated and used for all subsequent events.
 
-Additionally, you can pass a function which returns an array of zero or more context entities to `trackPageView`. For the page view and for all subsequent [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md), the function will be called and the context entities it returns will be added to the event.
+From version 3, the `web_page` entity is [enabled by default](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). We advise you leave this enabled so you can use the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package.
+
+By default, the tracker lazily generates the page view ID when it's needed for the first time. For example:
+
+1. The tracker is initialized when the page loads
+2. `trackPageView()` is called for the first time
+3. Tracker calls `getPageViewId()` to get the current page view ID
+4. Since there is no page view ID yet, it generates a new one
+5. The page view event is tracked with the generated page view ID
+6. Subsequent events use the same page view ID
+
+The next time `trackPageView()` is called, the tracker generates a new page view ID.
+
+If you track an event before the first page view, the tracker will generate the page view ID at that point:
+
+1. The tracker is initialized when the page loads
+2. A custom event is tracked
+3. Tracker calls `getPageViewId()` to get the current page view ID
+4. Since there is no page view ID yet, it generates a new one
+5. The custom event is tracked with the generated page view ID
+6. Subsequent events, including the first page view, use the same page view ID
+
+The second page view will generate a new page view ID as usual.
+
+You can get the current page view ID using [the `getPageViewId` function](/docs/sources/web-trackers/tracking-events/index.md#page-view-id).
+
+### Change ID behavior for SPAs
+
+In a single-page app (SPA), the tracker stays in memory as the user navigates between URLs. If you track events after navigating to a new URL but before calling `trackPageView()`, those events will use the existing page view ID from the previous page. The ID only resets when `trackPageView()` is called.
+
+Use the `preservePageViewIdForUrl` configuration option to bind the page view ID generation to URL changes instead of page view events. The options are:
+
+* `false` (default): URL changes don't trigger a new ID when reading `getPageViewId()`. Only `trackPageView()` triggers a new ID (on second+ call).
+* `true` or `'full'`: generate a new ID when reading `getPageViewId()` if the full URL changed. `trackPageView()` still generates a new ID on second+ call even for the same URL.
+* `'pathname'`: generate a new ID when reading `getPageViewId()` if pathname changed. Search params or fragment changes don't trigger a new ID.
+* `'pathnameAndSearch'`: generate a new ID when reading `getPageViewId()` if pathname or search params changed. Fragment changes don't trigger a new ID.
+* `preservePageViewId`: never regenerate the ID at all. Ignores `preservePageViewIdForUrl`.
+
+You can set these options at initialization or during runtime:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// At initialization
+snowplow('newTracker', 'sp', 'collector.example.com', {
+  appId: 'my-app',
+  preservePageViewIdForUrl: 'pathname'
+});
+
+// At runtime
+snowplow('preservePageViewIdForUrl', 'pathname');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+// At initialization
+import { newTracker, preservePageViewIdForUrl } from '@snowplow/browser-tracker';
+
+const tracker = newTracker('sp', 'collector.example.com', {
+  appId: 'my-app',
+  preservePageViewIdForUrl: 'pathname'
+});
+
+// At runtime
+tracker.preservePageViewIdForUrl('pathname');
+```
+
+  </TabItem>
+</Tabs>
+
+## Reset page activity on page view
+
+By default, tracking a page view using `trackPageView()`resets [activity tracking](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).
+
+Read more about this in the [activity tracking documentation](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md#reset-page-pings-on-page-view).
+
+## Add entities dynamically
+
+As with all `trackX` methods, `trackPageView` can be passed an array of [custom entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) as an additional parameter.
+
+Additionally, you can add entities to page view and [page ping](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) events dynamically using the `contextCallback` option.
+
+Pass it a function that returns an array of zero or more entities. The function will fire for the page view and for all subsequent [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) on the page. The returned entities will be added to the events.
 
 For example:
 
@@ -78,14 +161,14 @@ snowplow('enableActivityTracking', {
 });
 
 snowplow('trackPageView', {
-  // The usual array of static context entities
+  // The usual array of static entities
   context: [{
     schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
     data: {
       staticValue: new Date().toString()
     }
   }],
-  // Function which returns an array of custom context entities
+  // Function which returns an array of custom entities
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
@@ -114,14 +197,14 @@ enableActivityTracking({
 });
 
 trackPageView({
-  // The usual array of static context entities
+  // The usual array of static entities
   context: [{
     schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
     data: {
       staticValue: new Date().toString()
     }
   }],
-  // Function which returns an array of custom context entities
+  // Function which returns an array of custom entities
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
@@ -136,113 +219,4 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-In this example, the tracked page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
-
-## WebPage (page view ID) context entity
-
-When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to **all events**.
-
-From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
-
-To disable this entity, set `"webPage": false` in the `"contexts"` object within the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
-
-<details>
-    <summary>Web page entity properties</summary>
-
-The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
-
-| Attribute | Description                             | Required? |
-| --------- | --------------------------------------- | --------- |
-| `id`      | An identifier (UUID) for the page view. | Yes       |
-
-</details>
-
-## Reset page ping on page view
-
-By default the tracker will reset the Page Ping timers, which were configured when [`enableActivityTracking`](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) is called, as well as reset the attached webPage context entities on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
-
-## Get page view ID
-
-When the JavaScript Tracker loads on a page, it generates a new page view UUID as mentioned above.
-
-It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/sources/web-trackers/tracking-events/index.md#getting-user-id-once-set), and [cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
-
-```mdx-code-block
-import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
-import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
-```
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-<RetrieveValuesJs />
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-<RetrieveValuesBrowser />
-
-  </TabItem>
-</Tabs>
-
-To get the page view ID, use the `getPageViewId` method:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-// Access the tracker instance inside a callback
-snowplow(function () {
- var sp = this.sp;
- var pageViewId = sp.getPageViewId();
- console.log(pageViewId);
-})
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-const pageViewId = sp.getPageViewId();
-console.log(pageViewId);
-```
-
-  </TabItem>
-</Tabs>
-
-## When is the page view ID generated
-
-The first page view ID after loading a page is available even before the first page view is tracked. That means that events tracked before the first page view have the same page view ID as the first page view event.
-
-In single page apps, multiple page URLs might be visited while the same app is in memory. This brings up a question when are the second and following page view IDs generated. Normally, they are generated when the second and following page view events are tracked.
-
-In some cases, it may be desirable to generate a new page view ID for the second page URL before the page view event is tracked. For instance, the page may track multiple async events during the page load (e.g., for A/B testing) and we can't ensure that they will be tracked after the page view event (but still want them to share the same page view ID as the page view event).
-
-The tracker provides a configuration option, `preservePageViewIdForUrl`, that enables binding the generation of the page view ID to the changes in the page URL. That means that the page view ID will change along with changes in the URL for all events regardless of which order they are tracked in. The options are:
-
-* `false` (default) – the `pageViewId` will be regenerated on the second and each following page view event (first page view doesn't change the page view ID since tracker initialization).
-* `true` or `'full'` – the `pageViewId` will be kept the same for all page views with that exact URL (even for events tracked before the page view event).
-* `'pathname'` – the `pageViewId` will be kept the same for all page views with the same pathname (search params or fragment may change).
-* `'pathnameAndSearch'` – the `pageViewId` will be kept the same for all page views with the same pathname and search params (fragment may change).
-* `preservePageViewId` – the `preservePageViewIdForUrl` setting is ignored.
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('newTracker', 'sp', 'https://{{collector_url_here}}', {
-  preservePageViewIdForUrl: 'pathname'
-});
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-newTracker('sp', 'https://{{collector_url_here}}', {
-  preservePageViewIdForUrl: 'pathname'
-});
-```
-
-  </TabItem>
-</Tabs>
+In this example, the tracked page view and every subsequent page ping will have both a `static_context` and a `dynamic_context` attached. The `static_context` will all have the same `staticValue`, but the `dynamic_context` will have different `dynamicValue` values.

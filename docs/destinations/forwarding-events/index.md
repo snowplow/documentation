@@ -17,7 +17,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They're deployed as fully managed apps that sit alongside warehouse and lake loaders in your Snowplow cloud account. You can configure forwarders through Snowplow Console.
 
-![Event forwarding architecture showing data flow from Snowplow pipeline through forwarders to destination APIs](./images/event-forwarding-diagram.drawio.svg)
+![Event forwarding architecture showing data flow from Snowplow pipeline through forwarders to destination APIs](./images/event-forwarding-diagram.svg)
 
 Event forwarding uses [Snowbridge](/docs/api-reference/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md). For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are also available.
 

@@ -7,7 +7,7 @@ description: "Track self-describing events, structured events, screen views, and
 keywords: ["rust event tracking", "self-describing events", "timing events"]
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 

@@ -7,7 +7,7 @@ description: "Host Iglu schemas as a static website on S3, Apache, Nginx, or IIS
 keywords: ["static iglu repo", "s3 schema hosting", "static schema registry"]
 ---
 
-A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/api-reference/iglu/iglu-central-setup/index.md) can be used as an example, [serving](http://iglucentral.com/) its whole content over http.
+A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/api-reference/iglu/iglu-central-setup/index.md) can be used as an example, [serving](https://iglucentral.com/) its whole content over HTTP.
 
 ## 1. Choose a hosting partner
 

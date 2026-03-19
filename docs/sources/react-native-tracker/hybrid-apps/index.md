@@ -35,7 +35,7 @@ We recommend using the Web tracker (v4.3+) to forward all Web events to the Reac
 
 4. Track events as usual.
 
-The Web tracker will automatically intercept all web events and forward them to the React Native tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the React Native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity).
+The Web tracker will automatically intercept all web events and forward them to the React Native tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the React Native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity).
 
 The forwarded events are filtered out of the Web tracker event queue so that they are not tracked twice.
 

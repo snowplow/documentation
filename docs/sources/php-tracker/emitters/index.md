@@ -60,6 +60,8 @@ Arguments:
 | `$retry_backoff_ms`     | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No            | Int              |
 | `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events                | No            | Int              |
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 ### Socket
 
 The Socket emitter allows for the much faster transmission of Requests to the Collector by allowing us to write data directly to the HTTP socket. However, this solution is still, in essence, a synchronous process and blocks the execution of the main script.

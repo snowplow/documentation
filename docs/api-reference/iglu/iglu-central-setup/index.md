@@ -65,7 +65,7 @@ Given a standard Iglu client configuration:
         "vendorPrefixes": [ "com.snowplowanalytics" ],
         "connection": {
           "http": {
-            "uri": "http://iglucentral.com"
+            "uri": "https://iglucentral.com"
           }
         }
       }

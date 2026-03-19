@@ -257,7 +257,7 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWS
 
 ### Set up the Snowplow deployment role
 
-The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. Contact us to request the full list of permissions attached to this role.
+The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. Contact Snowplow Support via the Snowplow Console or through your Snowplow account team to request the full list of permissions attached to this role.
 
   1. In the AWS sub-account, open IAM from the console
   2. Navigate to `Access management` > `Roles` and click `Create role`
@@ -289,7 +289,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
     ]
   }
   ```
-  7. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+  7. Copy the Snowplow deployment role ARN. You will need to share this role with Snowplow as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 
@@ -305,7 +305,7 @@ If you require Snowplow to be deployed using a specific IAM Permission Boundary,
 
 ### Final checklist
 
-If you are sending a request to our team to set up your account for you, please ensure you provide the following information:
+If you are sending a request to Snowplow to set up your account, please ensure you provide the following information:
 1. SnowplowAdmin role ARN
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into

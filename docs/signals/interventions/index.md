@@ -45,13 +45,15 @@ When adding more than one criteria, you can require all or any of them to be met
 
 These attributes are both from groups with the `domain_userid` attribute key. Therefore, this intervention is targeted to users. When a [subscribed](/docs/signals/interventions/subscribe/index.md) user reaches 10 page views while using Chrome, the intervention will trigger.
 
-## Custom targets
+## Target and payload
 
 Define a custom intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#targeting). These are the attribute keys that will receive the information.
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
 
-![Intervention target configuration showing custom attribute key selection](../images/intervention-attribute-keys.png)
+You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups.
+
+![Intervention delivery configuration showing attribute key targeting and attribute group payload selection](../images/intervention-delivery.png)
 
 ## Publishing the intervention
 
@@ -72,6 +74,22 @@ The intervention page also includes sample code to help you subscribe to it. Rea
 Interventions are versioned. This allows you to iterate on the definitions without breaking downstream processes. All interventions start as `v1`. If you make changes to the definition, the version will be automatically incremented.
 
 Within criteria, the attributes are always evaluated based on the latest published version of the attribute group that contains the attribute. For example, if `attribute_group` v1, v2, and v3 all have the required `attribute`, v3 will be used. If you then publish `attribute_group` v4, which removes `attribute`, v3 will still be used.
+
+## Testing
+
+Signals provides two ways to test an intervention: a preview you can run before publishing, and a live test you can trigger once the intervention is published.
+
+### Preview
+
+While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined.
+
+![Intervention preview showing test results with match count against scanned warehouse records](../images/intervention-preview.png)
+
+### Send a test intervention
+
+Once the intervention is published, you can send a test by specifying a particular attribute key identifier. Signals will dispatch an intervention to that identifier so you can verify your subscription is set up correctly and diagnose any connection errors before relying on it in production.
+
+![Intervention connection test showing attribute key input field to send a test intervention](../images/intervention-connection-test.png)
 
 ## Deleting an intervention
 

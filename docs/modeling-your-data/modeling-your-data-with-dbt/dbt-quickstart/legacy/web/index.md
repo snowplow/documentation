@@ -6,12 +6,6 @@ description: "Quick start guide for the legacy Snowplow Web dbt package to model
 keywords: ["web quickstart", "legacy web package", "dbt web setup"]
 ---
 
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
-```
-
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
 - [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.

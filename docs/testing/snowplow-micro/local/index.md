@@ -2,8 +2,8 @@
 title: "Run Snowplow Micro locally"
 sidebar_label: "Run locally"
 sidebar_position: 2
-description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the UI, API, or exported TSV/JSON format."
-keywords: ["micro basic usage", "docker", "run micro", "test events", "micro ui"]
+description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the dashboard, API, or exported TSV/JSON format."
+keywords: ["micro basic usage", "docker", "run micro", "test events", "micro dashboard"]
 ---
 
 ```mdx-code-block
@@ -106,9 +106,9 @@ Once you have the tracking code and the events are flowing in, you should see so
 
 This means your tracking is set up correctly and your events are valid (`GOOD`).
 
-Would you rather see the events visually? Open [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your browser. You might want to check [a few tips on how to use the UI](/docs/testing/snowplow-micro/ui/index.md).
+Would you rather see the events visually? Open [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your browser. You might want to check [a few tips on how to use the dashboard](/docs/testing/snowplow-micro/ui/index.md).
 
-![Micro UI overview](../images/overview.png)
+![Micro dashboard overview](../images/overview.png)
 
 Alternatively, you can inspect the events via [the API](/docs/api-reference/snowplow-micro/api/index.md). For example, try:
 

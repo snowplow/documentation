@@ -55,7 +55,7 @@ Ready to use Signals in production? You'll need:
 
 ### Learn more
 
-* Read the full [Signals documentation](/docs/signals/)
+* Read the full [Signals documentation](/docs/signals/introduction/)
 * Explore the [Signals Python SDK reference](https://pypi.org/project/snowplow-signals/)
 * Join the [Snowplow community](https://community.snowplow.io/) to discuss use cases and best practices
 

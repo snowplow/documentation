@@ -60,7 +60,7 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | Ecommerce Analytics                                                                                                       |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) |   ✅   |        ❌         |
 | <h3>Signals</h3>                                                                                                          |  CDI  |   Self-Hosted    |
-| [Real-time personalization engine](/docs/signals/index.md)                                                                |   ✅   |        ❌         |
+| [Real-time personalization engine](/docs/signals/introduction/index.md)                                                   |   ✅   |        ❌         |
 | Profiles Store                                                                                                            |   ✅   |        ❌         |
 | Interventions                                                                                                             |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |

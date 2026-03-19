@@ -31,7 +31,7 @@ This method is for running Micro locally. You can also [run Micro through Consol
 
 :::
 
-This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via the [UI](/docs/testing/snowplow-micro/ui/index.md) (since version 2.0.0) or the [API](/docs/api-reference/snowplow-micro/api/index.md).
+This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results in the [dashboard](/docs/testing/snowplow-micro/ui/index.md) (since version 2.0.0) or via the [API](/docs/api-reference/snowplow-micro/api/index.md).
 
 ```mermaid
 flowchart LR

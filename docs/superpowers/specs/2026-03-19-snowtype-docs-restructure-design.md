@@ -29,16 +29,16 @@ The current Snowtype docs (5 pages under `docs/event-studio/implement-tracking/s
 
 8 pages, organized by task:
 
-| # | Page | Directory | Purpose |
-|---|------|-----------|---------|
-| 1 | Overview | `snowtype/index.md` | What Snowtype is, why use it, how it works, supported trackers |
-| 2 | Get started | `snowtype/get-started/index.md` | Install, authenticate, initialize, first generation |
-| 3 | Generate tracking code | `snowtype/generate-tracking-code/index.md` | Core workflow, per-language examples, input sources |
-| 4 | Keep code up to date | `snowtype/keep-code-up-to-date/index.md` | Lock file, update, patch, purge, CI/CD |
-| 5 | Client-side validation | `snowtype/client-side-validation/index.md` | Runtime schema validation (existing, reframed) |
-| 6 | Use with Google Tag Manager | `snowtype/working-with-gtm/index.md` | GTM-specific setup and usage (existing, tightened) |
-| 7 | Configuration reference | `snowtype/configuration-reference/index.md` | All config file options and formats |
-| 8 | Commands reference | `snowtype/commands-reference/index.md` | All CLI commands and options |
+| # | Page | Directory | sidebar_position | sidebar_label |
+|---|------|-----------|-----------------|---------------|
+| 1 | Overview | `snowtype/index.md` | 6 (unchanged) | Snowtype |
+| 2 | Get started | `snowtype/get-started/index.md` | 1 | Get started |
+| 3 | Generate tracking code | `snowtype/generate-tracking-code/index.md` | 2 | Generate tracking code |
+| 4 | Keep code up to date | `snowtype/keep-code-up-to-date/index.md` | 3 | Keep code up to date |
+| 5 | Client-side validation | `snowtype/client-side-validation/index.md` | 4 | Client-side validation |
+| 6 | Use with Google Tag Manager | `snowtype/working-with-gtm/index.md` | 5 | Use with GTM |
+| 7 | Configuration reference | `snowtype/configuration-reference/index.md` | 10 | Configuration reference |
+| 8 | Commands reference | `snowtype/commands-reference/index.md` | 11 | Commands reference |
 
 ### Page 1: Overview (index.md)
 
@@ -60,8 +60,8 @@ Zero-to-first-generated-code. A developer who's never used Snowtype follows this
 
 **Sections:**
 
-- **Prerequisites** — Node.js 18+, a Snowplow account with at least one event specification or data structure defined.
-- **Install Snowtype** — npm/yarn/pnpm tabs (relocated from current index.md).
+- **Prerequisites** — Node.js 18+, a Snowplow account with at least one event specification or data structure defined. Include warning that Snowtype does not install Snowplow tracking libraries — you must install the tracker SDK separately.
+- **Install Snowtype** — npm/yarn/pnpm tabs (relocated from current index.md). Include executing commands section (npx/yarn dlx/pnpm dlx usage patterns).
 - **Authenticate** — API key setup covering `.env` file, environment variables, and CLI flag. Notes API key ID requirement for versions >0.9.0.
 - **Initialize your project** — `snowtype init` walkthrough. What each prompt means and how to choose tracker/language/output path.
 - **Generate your first code** — Run `snowtype generate`, brief explanation of what you now have.
@@ -74,8 +74,8 @@ The core workflow. What Snowtype generates and how to use the output.
 
 **Sections:**
 
-- **What Snowtype generates** — Types, tracking functions, inline documentation. Explanation of the output file structure.
-- **Use generated code** — Per-language examples via tabs (Browser/Node TypeScript, JavaScript, Kotlin, Swift, Go, Dart, Java). Each tab shows a realistic usage example, not just the function signature. Consolidates the 9 tracker examples currently scattered through "Using the CLI."
+- **What Snowtype generates** — Types, tracking functions, inline documentation. Explanation of the output file structure. Sourced from the "Contents" subsection of the current "Using the CLI" page (types, interfaces, classes, self-describing JSON methods, event specification methods).
+- **Use generated code** — Per-language examples via tabs (Browser/Node TypeScript, JavaScript, Kotlin, Swift, Go, Dart, Java). Each tab shows a realistic usage example, not just the function signature. Consolidates the 8 tracker example tabs currently in "Using the CLI." Note: the `@snowplow/javascript-tracker` does not have its own code example in the current docs — check with engineering whether one should be added or if browser tracker examples cover it.
 - **Input sources** — Subsections for each way to feed schemas into Snowtype:
   - **Event specifications** — With Console parallel: the Implementation tab toggle showing Snowtype-generated code vs manual code. Screenshot of the toggle.
   - **Data products / tracking plans** — Using `dataProductIds` to pull all event specs from a data product.
@@ -144,15 +144,19 @@ Pure reference. All config options in one place, separated from workflow content
 
 Pure reference. Every CLI command with full options.
 
+Document every command with full flag notation (short and long forms). The current docs are missing several flags — this is a correction, not just a migration.
+
 **Commands:**
 
-- `snowtype init` — Options: organizationId, tracker, language, outpath
-- `snowtype generate` — Options: config, instructions, validations, disallowDevSchemas, deprecateOnlyOnProdAvailableUpdates
-- `snowtype update` — Options: config, yes, maximumBump, latestDraft, eventSpecs, dataProducts
-- `snowtype patch` — Options: config, dataProductIds, eventSpecificationIds, dataStructures, igluCentralSchemas, repositories
-- `snowtype purge` — Options: config
+- `snowtype init` — Options: `-i, --organizationId`, `-t, --tracker`, `-l, --language`, `-o, --outpath`
+- `snowtype generate` — Options: `-c, --config`, `--instructions / --no-instructions`, `--validations / --no-validations`, `--disallowDevSchemas`, `--deprecateOnlyOnProdAvailableUpdates`
+- `snowtype update` — Options: `-c, --config`, `-y, --yes`, `-m, --maximumBump`, `-d, --latestDraft`, `-e, --eventSpecs <ids...>`, `-p, --dataProducts <ids...>`
+- `snowtype patch` — Options: `-c, --config`, `-p, --dataProductIds <ids...>`, `-e, --eventSpecificationIds <ids...>`, `-d, --dataStructures <uris...>`, `-i, --igluCentralSchemas <uris...>`, `-r, --repositories <paths...>`
+- `snowtype purge` — Options: `-c, --config`
 - `snowtype help`
-- **Global options** — help, version, apiKey, apiKeyId, verbose
+- **Global options** — `-h, --help`, `-V, --version`, `-k, --apiKey`, `-s, --apiKeyId`, `-v, --verbose`
+
+**Corrections from current docs:** The existing commands page is missing `-s, --apiKeyId` from global options and does not document `--latestDraft`, `--eventSpecs`, or `--dataProducts` on the `update` command. The `purge` command is entirely absent.
 
 ### Console integration touchpoints
 
@@ -181,6 +185,7 @@ Pages outside the Snowtype section that should link into it:
 | `index.md` | Overview text | Page 1: Overview |
 | `index.md` | Supported trackers table | Page 1: Overview |
 | `index.md` | Installation | Page 2: Get started |
+| `index.md` | Executing commands (npx/yarn/pnpm usage) | Page 2: Get started |
 | `using-the-cli/index.md` | Authentication | Page 2: Get started |
 | `using-the-cli/index.md` | Init walkthrough | Page 2: Get started |
 | `using-the-cli/index.md` | Generate command basics | Page 2: Get started (first run) + Page 3: Generate (full workflow) |
@@ -268,3 +273,30 @@ snowtype/
 - `using-the-cli/` — content distributed across Get started, Generate tracking code, and Keep code up to date.
 - `snowtype-config/` — replaced by Configuration reference.
 - `commands/` — replaced by Commands reference.
+
+### Redirects
+
+Set up redirects for removed pages to prevent broken bookmarks and external links:
+
+| Old URL | Redirect to |
+|---------|------------|
+| `snowtype/using-the-cli/` | `snowtype/get-started/` |
+| `snowtype/snowtype-config/` | `snowtype/configuration-reference/` |
+| `snowtype/commands/` | `snowtype/commands-reference/` |
+
+Use `@docusaurus/plugin-client-redirects` or equivalent. Check whether this plugin is already configured in `docusaurus.config.js`.
+
+### Internal link updates
+
+All internal links within the Snowtype section must be updated during implementation. Additionally, review and update links from pages outside the section that currently point into Snowtype:
+
+- `docs/event-studio/implement-tracking/index.md` → links to `snowtype/index.md` (unchanged, no action needed)
+- `docs/event-studio/tracking-plans/create-and-manage/index.md` → links to `snowtype/index.md` (unchanged)
+- `docs/event-studio/tracking-plans/event-specification-inference/index.md` → links to `snowtype/index.md` (unchanged)
+- Any links pointing to `snowtype/using-the-cli/` or `snowtype/commands/` from outside the section need updating to their new destinations.
+
+### Shared components
+
+The `TrackingPlansNomenclature` partial (imported from `@site/docs/reusable/tracking-plans-nomenclature/_index.md`) is currently used in `using-the-cli/index.md` and `commands/index.md`. Carry this forward into:
+- Page 3: Generate tracking code (where tracking plans / data products are discussed as input sources)
+- Page 7: Configuration reference (where `dataProductIds` is documented)

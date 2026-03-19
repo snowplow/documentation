@@ -112,14 +112,10 @@ Once add to cart events are tracked, the event should look like this in your Sno
 
 ## Explanation of parameters
 
-- **id**: the unique identifier for the product
-- **name**: the product's name
-- **price**: the product's price as a floating-point number
-- **brand**: the brand associated with the product
-- **currency**: the currency code (e.g., USD, EUR)
-- **category**: the product's category or taxonomy
-- **total_value**: the updated total cart value after adding the product
-
-## Next step
-
-With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more ecommerce tracking, please refer to the [Snowplow ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) or the detailed [ecommerce documentation](/docs/sources/web-trackers/tracking-events/ecommerce). Next progress to the [data modeling](./data-modeling.md) step to verify your tracking setup in the data warehouse.
+- **`id`**: the unique identifier for the product
+- **`name`**: the product's name
+- **`price`**: the product's price as a floating-point number
+- **`brand`**: the brand associated with the product
+- **`currency`**: the currency code (e.g., USD, EUR)
+- **`category`**: the product's category or taxonomy
+- **`total_value`**: the updated total cart value after adding the product

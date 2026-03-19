@@ -11,7 +11,7 @@ import RDBLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/s
   </Admonition>
 )}</>
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS (Batching, recommended)" default>
     <RDBLoaderDiagram {...props} batch="true" stream="Kinesis" bucket="S3" queue="SQS"/>
   </TabItem>

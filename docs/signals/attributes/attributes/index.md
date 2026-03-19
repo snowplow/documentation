@@ -2,13 +2,13 @@
 title: "Define attributes in Console"
 sidebar_position: 10
 sidebar_label: "Attributes"
-description: "Define individual attributes within attribute groups by selecting event schemas, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
+description: "Define individual attributes within attribute groups by selecting event schemas or event specifications, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection"]
 ---
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:
 * A name, ideally one that describes the attribute
-* Which event schema to calculate it from
+* Which event schema or event specification to calculate it from
 * What property in the schema to consider for the calculation
 * What kind of aggregation you want to calculate over time, e.g. `mean` or `last`
 
@@ -18,16 +18,18 @@ keywords: ["attributes", "aggregations", "event selection", "criteria filters", 
 
 Use the event filter to choose which event type to calculate the attribute from.
 
-![Event filter dropdown showing available Snowplow and custom event schemas](../../images/attribute-event-filter.png)
+![Event filter dropdown showing available event specifications, Snowplow, and custom event schemas](../../images/attribute-event-specs.png)
 
-Click the dropdown to see the available schemas, listed by name and vendor:
+Click the dropdown to see the available events, listed by name and vendor:
+
+* **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) from an existing [tracking plan](/docs/event-studio/tracking-plans/index.md).
 
 * **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
 
 * **Custom events**: select any schema or data structure that's available within your pipeline.
 
-:::note Searching for schemas
-The schema search finds direct matches only, so use the exact name of the schema or vendor.
+:::note Searching for events
+The search finds direct matches only, so use the exact name of the event, schema, or vendor.
 :::
 
 Once you've selected an event and version, click **Confirm** to add the attribute to your attribute group.

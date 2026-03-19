@@ -15,7 +15,7 @@ import StreamingVsRDB from '@site/docs/api-reference/loaders-storage-targets/_sn
 
 We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift** (including Redshift serverless), **Databricks**, or **Snowflake** (the latter not recommended). For other destinations, see [here](/docs/api-reference/loaders-storage-targets/index.md).
 
-<Tabs groupId="warehouse" queryString lazy>
+<Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift" default>
     <CrossCloudDiagram format="TSV" warehouse="Redshift"/>
   </TabItem>

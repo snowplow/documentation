@@ -13,9 +13,9 @@ This accelerator demonstrates how to leverage real-time **Snowplow event data** 
 
 The image below shows the accelerator in action. On the left side, a user is engaging with a media website, reading articles and clicking different advertisements. The website sends events through a local Snowplow Micro pipeline.
 
-The left side of the image shows the Snowplow events in the Snowplow Micro UI.
+The left side of the image shows the Snowplow events in the Snowplow Micro dashboard.
 
-![Side-by-side view of The Daily Query demo website on the left and the Snowplow Micro UI on the right, showing captured article engagement events in a table](./images/snowplow-tracking-website.png)
+![Side-by-side view of The Daily Query demo website on the left and the Snowplow Micro dashboard on the right, showing captured article engagement events in a table](./images/snowplow-tracking-website.png)
 
 From here, events are forwarded to a ClickHouse table in near real-time latency. Each event is stored as an individual row in a single table, as seen on the left side of the image below.
 

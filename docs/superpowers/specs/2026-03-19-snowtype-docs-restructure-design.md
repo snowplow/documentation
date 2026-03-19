@@ -60,13 +60,12 @@ Zero-to-first-generated-code. A developer who's never used Snowtype follows this
 
 **Sections:**
 
-- **Prerequisites** — Node.js 18+, a Snowplow account with at least one event specification or data structure defined. Include warning that Snowtype does not install Snowplow tracking libraries — you must install the tracker SDK separately.
+- **Prerequisites** — Node.js 18+. Include warning that Snowtype does not install Snowplow tracking libraries — you must install the tracker SDK separately.
 - **Install Snowtype** — npm/yarn/pnpm tabs (relocated from current index.md). Include executing commands section (npx/yarn dlx/pnpm dlx usage patterns).
 - **Authenticate** — API key setup covering `.env` file, environment variables, and CLI flag. Notes API key ID requirement for versions >0.9.0.
 - **Initialize your project** — `snowtype init` walkthrough. What each prompt means and how to choose tracker/language/output path.
 - **Generate your first code** — Run `snowtype generate`, brief explanation of what you now have.
 - **Console path** — Callout showing the "Implement tracking" modal from Data Products (install → generate → share). Screenshot of the modal.
-- **Next steps** — Links to "Generate tracking code" and "Configuration reference."
 
 ### Page 3: Generate tracking code (generate-tracking-code/index.md)
 
@@ -276,15 +275,17 @@ snowtype/
 
 ### Redirects
 
-Set up redirects for removed pages to prevent broken bookmarks and external links:
+Use the repo's `move.sh` script to handle redirects when removing/renaming pages. Do this per-file as each old page is replaced, not all at the end.
 
-| Old URL | Redirect to |
+| Old path | Redirect to |
 |---------|------------|
 | `snowtype/using-the-cli/` | `snowtype/get-started/` |
 | `snowtype/snowtype-config/` | `snowtype/configuration-reference/` |
 | `snowtype/commands/` | `snowtype/commands-reference/` |
 
-Use `@docusaurus/plugin-client-redirects` or equivalent. Check whether this plugin is already configured in `docusaurus.config.js`.
+### Implementation approach
+
+Work on one file at a time. Write each new page, allow for editing and tweaking, then commit before moving on to the next. This keeps commits clean and reviewable.
 
 ### Internal link updates
 

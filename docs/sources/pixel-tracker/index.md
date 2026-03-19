@@ -30,6 +30,7 @@ Some things to note about the tag:
 * It's an `<img>` tag
 * It sends a GET request using the Snowplow Collector `/i` endpoint
 * You can send any name-value pairs that are supported by the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md) on the query string
+  * The pipeline will drop name-value pairs that aren't supported by the Snowplow Tracker Protocol
 * To help with analysis, we recommend you set the tracker version `tv` to `no-js-0.1.0` to identify that this event came from a Pixel tracker
 
 ### Page view tag

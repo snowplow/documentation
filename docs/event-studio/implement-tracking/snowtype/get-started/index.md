@@ -1,16 +1,16 @@
 ---
 title: "Get started with Snowtype"
-sidebar_label: "Get started"
+sidebar_label: "Install and initialize"
 sidebar_position: 1
-description: "Install Snowtype, authenticate with your Snowplow account, and generate tracking code for the first time."
-keywords: ["Snowtype", "install", "setup", "getting started", "code generation"]
+description: "Install Snowtype, authenticate with your Snowplow account, and initialize your project."
+keywords: ["Snowtype", "install", "setup", "getting started", "code generation", "authenticate", "initialize"]
 date: "2026-03-19"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide walks you through installing Snowtype, connecting it to your Snowplow account, and generating tracking code for the first time.
+This guide walks you through installing Snowtype and connecting it to your Snowplow account.
 
 ## Prerequisites
 
@@ -105,37 +105,4 @@ Snowtype saves these choices to a `snowtype.config.json` file in your project ro
 
 :::tip
 If you use the Console, you can also find initialization commands on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md), pre-filled with the correct IDs.
-:::
-
-## Generate code for the first time
-
-Before generating, add at least one input source to your configuration file ADD LINK.
-
-The easiest way to do this is to find the `snowtype patch` command for the tracking plan you want to add. TODO
-
-Snowtype can generate code from several sources:
-
-- **Event specifications** — add their IDs to the `eventSpecificationIds` array
-- **Tracking plans** — add their IDs to the `dataProductIds` array to include all event specifications in the plan
-- **Data structures** — add their schema tracking URLs to the `dataStructures` array
-- **Iglu Central schemas** — add their schema tracking URLs to the `igluCentralSchemas` array
-
-You can find these IDs and URLs in Console, or use `snowtype patch` to add them interactively. See Generate tracking code ADD LINK for details on each source.
-
-Once your configuration file includes at least one source, generate the code:
-
-```bash
-npx snowtype generate
-```
-
-Snowtype creates a file at your configured output path containing:
-
-- **Types and interfaces** for each schema, so your editor can validate property names and types
-- **Tracking functions** for each event, so you can track events with a single function call instead of constructing payloads manually
-- **Entity constructors** for each data structure, so you can create entities to attach to events
-
-The generated code expects the relevant [Snowplow tracker](/docs/sources/index.md) to already be installed in your project. Snowtype doesn't install trackers for you.
-
-:::note
-The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This pins the schema versions used for generation, so subsequent runs produce consistent output. To check for newer schema versions, use `snowtype update` ADD LINK.
 :::

@@ -49,7 +49,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 Keep in mind that you will need to be able to:
 
-<Tabs groupId="catalog" queryString lazy>
+<Tabs groupId="catalog" queryString>
   <TabItem value="rest" label="REST" default>
     * Specify your Snowflake Open Catalog account id and region, as well as namespace
     * Create a service connection to the catalog and provide the client id and client secret

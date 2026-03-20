@@ -50,7 +50,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 Keep in mind that you will need to be able to:
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
   * Provide an S3 bucket

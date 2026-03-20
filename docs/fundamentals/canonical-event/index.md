@@ -71,7 +71,7 @@ The IP address is also added to the event by the Collector, if you didn't provid
 | `tnuid`          | `network_userid`    | `string`, max length 128 | User ID set by Snowplow using server-set cookie                                | No    | `ecdff4d0-9175-40ac-a8bb-325c49733607` | Tracking or pipeline                                                                                                             | ✅   | ✅      |
 | `sid`            | `domain_sessionid`  | UUID `string`            | Unique identifier (UUID) for this visit of this `domain_userid` to this domain | No    | `c6ef3124-b53a-4b13-a233-0088f79dcbcb` | Tracking                                                                                                                         | ✅   | ❌      |
 | `vid`            | `domain_sessionidx` | `integer`                | Index of number of visits that this `domain_userid` has made to this domain    | No    | `3`                                    | Tracking                                                                                                                         | ✅   | ❌      |
-| `ip`             | `user_ipaddress`    | `string`, max length 128 | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
+| `ip`             | `user_ipaddress`    | `string`, max length 128 | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
 
 ### Application fields
 
@@ -107,7 +107,7 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 The `etl_tstamp` field records when the event was validated and enriched, not when it was loaded into the warehouse. The name is historical.
 
-To set the `os_timezone` timezone field, use the [timezone plugin](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md) on web trackers, or set the timezone in the [mobile tracker configuration](/docs/sources/mobile-trackers/client-side-properties/index.md).
+Most Snowplow trackers have built-in capability for tracking `os_timezone`. See the [geolocation and timezone tracking](/docs/events/ootb-data/geolocation/index.md) page for tracker-specific configuration details.
 
 | Payload property | Field name            | Type                     | Description                                                 | Reqd? | Example                   | Source             | Web | Mobile |
 | ---------------- | --------------------- | ------------------------ | ----------------------------------------------------------- | ----- | ------------------------- | ------------------ | --- | ------ |

@@ -22,7 +22,7 @@ You will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
 
 The Databricks Streaming Loader is an application that integrates with a Databricks [Lakeflow Declarative Pipeline](https://docs.databricks.com/aws/en/dlt/) to load Snowplow events into Databricks with low latency.
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
     <LoaderDiagram stream="Kinesis" cloud="AWS"/>
     <DeployOverview cloud="AWS" stream="kinesis"/>

@@ -280,6 +280,12 @@ import DiscardingEvents from "@site/docs/reusable/discarding-events/_index.md"
 
 ## Accessing Java methods
 
+:::note Availability
+
+For security reasons, this feature is not available to Cloud customers (where Snowplow owns the cloud account).
+
+:::
+
 Because the JavaScript enrichment runs inside the Enrich application, it has access to the Java standard library, as well as _some_ Java libraries (the ones used by Enrich). You can call Java methods via their fully qualified path, for example:
 
 ```js

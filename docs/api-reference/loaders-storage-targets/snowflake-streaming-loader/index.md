@@ -19,7 +19,7 @@ The Snowflake Streaming Loader is an application that loads Snowplow events to S
 
 <StreamingVsRDB/>
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
     <LoaderDiagram stream="Kinesis" cloud="AWS"/>
     <DeployOverview cloud="AWS" stream="kinesis"/>

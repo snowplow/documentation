@@ -24,7 +24,7 @@ You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your 
 
 You'll need the same connection credentials you used in the previous step:
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="cdi" label="CDI" default>
 
 ```python

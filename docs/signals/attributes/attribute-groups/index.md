@@ -52,11 +52,11 @@ Once you've created and published the group, create and configure the dbt models
 
 Attribute groups with an external batch source don't require attribute definition, as no calculation will be performed. This source type allows you to sync existing warehouse values with Signals so they're available in your Profiles Store.
 
-Provide the warehouse and table details, and which fields you want to send to Signals.
+Provide the warehouse and table details, and select which fields you want to send to Signals.
 
 ![External batch source configuration showing warehouse table and field mapping options](../../images/attribute-group-external-batch-fields.png)
 
-To minimize latency, Signals will use the timestamp field to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
+To minimize latency, select a timestamp field which Signals will use to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
 
 ## Attribute keys
 

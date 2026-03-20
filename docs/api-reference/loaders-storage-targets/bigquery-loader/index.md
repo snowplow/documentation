@@ -16,7 +16,7 @@ import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/big
 
 The BigQuery Streaming Loader is an application that loads Snowplow events to BigQuery.
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
     <LoaderDiagram stream="Kinesis" cloud="AWS"/>
     <DeployOverview cloud="AWS" stream="kinesis"/>

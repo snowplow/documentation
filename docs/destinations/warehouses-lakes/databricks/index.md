@@ -46,7 +46,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 Keep in mind that you will need to be able to do a few things.
 
-<Tabs groupId="databricks-integration" queryString lazy>
+<Tabs groupId="databricks-integration" queryString>
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>
 
 * Provide a Databricks cluster along with its URL
@@ -83,7 +83,7 @@ Note that Lakeflow features require a Premium Databricks account. You might also
 
 You can add a Databricks destination through the Snowplow Console.
 
-<Tabs groupId="databricks-integration" queryString lazy>
+<Tabs groupId="databricks-integration" queryString>
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>
 
 (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) instead.)
@@ -113,7 +113,7 @@ Once the loader is up and running, click on the “...” button in the **Loader
 
 <HowLoadingWorks/>
 
-<Tabs groupId="databricks-integration" queryString lazy>
+<Tabs groupId="databricks-integration" queryString>
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>
 
 For more details on the loading flow, see the [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) reference page, where you will find additional information and diagrams.

@@ -63,7 +63,7 @@ It will be translated into a column called `last_name` (notice the underscore), 
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
-     <Tabs groupId="biquery-loader-version" queryString lazy>
+     <Tabs groupId="biquery-loader-version" queryString>
          <TabItem value="v2" label="Version 2.x" default>
 
 Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
@@ -305,7 +305,7 @@ Once the loader creates a column for a given schema version as `NULLABLE` or `NO
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
-    <Tabs groupId="biquery-loader-version" queryString lazy>
+    <Tabs groupId="biquery-loader-version" queryString>
         <TabItem value="v2" label="Version 2.x" default>
 
 Because the column name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new column:

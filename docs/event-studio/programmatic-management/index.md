@@ -19,7 +19,7 @@ The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index
 - Validate resources before publishing
 - Integrate with version control and code review workflows
 
-The [Snowplow CLI MCP server](/docs/event-studio/mcp-server/index.md) enables AI assistants to interact with your tracking plan resources through natural language.
+The [Snowplow CLI MCP server](/docs/llms-support/mcp-server/index.md) enables AI assistants to interact with your tracking plan resources through natural language.
 
 ## Console API
 

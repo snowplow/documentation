@@ -218,20 +218,22 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 
 #### **Transform paths**
 
-In order to reduce unneccesarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
+In order to reduce unnecessarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
 
-In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value. For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
+In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value.
+ 
+For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
 
 <details>
   <summary>Path transform options</summary>
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
- 1. **`exposure (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
+ 1. **`exposure_path (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
 
- 2. **`unique`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
+ 2. **`unique_path`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
 
- 3. **`first`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
+ 3. **`first_path`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
 
  4. **`remove_if_last_and_not_all`**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
 
@@ -242,6 +244,12 @@ In order to apply these transformations, all you have to do is to define them in
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go from the actual conversion event.
 
 </details>
+
+:::warning
+Redshift users starting from 0.6.0 are only allowed to have one path transformation
+(e.g. either `exposure_path` or `first_path`). If using `remove_if_last_and_not_all` or
+`remove_if_not_all`, only single-item arrays are allowed. In case of other supported targets there are no such limitations, multiple path transformations can be applied, if neeeded.
+:::
 
 #### **Other, macro based setup**
 

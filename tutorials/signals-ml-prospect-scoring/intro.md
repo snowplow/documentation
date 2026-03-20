@@ -6,7 +6,7 @@ description: "Build a real-time prospect scoring system using Snowplow Signals a
 keywords: ["signals machine learning", "prospect scoring system"]
 ---
 
-Welcome to the [Snowplow Signals](/docs/signals/) real-time prospect scoring tutorial.
+Welcome to the [Snowplow Signals](/docs/signals/introduction/) real-time prospect scoring tutorial.
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 

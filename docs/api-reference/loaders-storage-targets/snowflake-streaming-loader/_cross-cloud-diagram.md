@@ -11,7 +11,7 @@ The cloud selection below is for your _pipeline_. We don’t have restrictions o
 
 :::
 
-<Tabs groupId="cloud" queryString lazy>
+<Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS">
     <LoaderDiagram {...props} stream="Kinesis" cloud="AWS"/>
   </TabItem>

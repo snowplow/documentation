@@ -1,6 +1,6 @@
 ---
-title: "RDB Loader previous versions"
-sidebar_label: "RDB Loader previous versions"
+title: "RDB Loader configurations for previous versions"
+sidebar_label: "Previous versions"
 date: "2022-05-27"
 sidebar_position: 10
 description: "Configuration references for previous versions of RDB Loader with legacy settings and migration information."

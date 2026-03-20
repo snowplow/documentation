@@ -23,7 +23,7 @@ Installed and configured [Snowplow CLI](/docs/event-studio/programmatic-manageme
 ### Creating data structures
 
 ```bash
-./snowplow-cli ds generate login_click ./folder-name
+snowplow-cli ds generate login_click ./folder-name
 
 ```
 
@@ -33,7 +33,7 @@ Will create a minimal data structure template in a new file `./folder-name/login
 ### Downloading data structures
 
 ```bash
-./snowplow-cli ds download
+snowplow-cli ds download
 ```
 
 This command will retrieve all organization data structures. By default it will create a folder named `data-structures` in the current working directory to put them in. It uses a combination of vendor and name to further break things down.
@@ -50,7 +50,7 @@ The CLI download command only retrieves data structures that have been deployed 
 ### Validating data structures
 
 ```bash
-./snowplow-cli ds validate ./folder-name
+snowplow-cli ds validate ./folder-name
 ```
 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to validate them using Snowplow Console. It will assert the following
@@ -65,7 +65,7 @@ If any validations fail the command will report the problems to stdout and exit 
 ### Publishing data structures
 
 ```bash
-./snowplow-cli ds publish dev ./folder-name
+snowplow-cli ds publish dev ./folder-name
 ```
 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to Snowplow Console in the environment provided (`dev` or `prod`).

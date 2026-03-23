@@ -141,6 +141,43 @@ export function createProduct(product: Product){
 }
 ```
 
+Here's how you could use the generated code:
+
+```typescript
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./src/tracking/snowplow";
+
+/* Track a self-describing event */
+trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+
+/* Enforce specific entity types using type arguments */
+const webPage = createWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+});
+trackWebPage<Product | WebPage>({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
+```
+
 ### Browser (JavaScript)
 
 Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in JavaScript. Snowtype produces JSDoc typedefs, with `track` and `create` functions.
@@ -291,6 +328,32 @@ export function createProduct(product){
 }
 ```
 
+Here's how you could use the generated code:
+
+```javascript
+import {
+  trackWebPage,
+  createProduct,
+  createWebPage,
+} from "./src/tracking/snowplow";
+
+/* Track a self-describing event */
+trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+```
+
 ### JavaScript tag
 
 Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Snowtype produces functions that call `window.snowplow()` directly, suitable for use with the Snowplow JavaScript tag loaded via a script element.
@@ -436,6 +499,26 @@ function createProduct(product){
         data: product
     }
 }
+```
+
+Here's how you could use the generated code:
+
+```javascript
+/* Track a self-describing event */
+trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
 ```
 
 ## iOS (Swift)
@@ -808,6 +891,27 @@ struct Product {
 }
 ```
 
+Here's how you could use the generated code:
+
+```swift
+import SnowplowTracker
+
+/* Track a self-describing event */
+_ = tracker.track(WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
+
+/* Track an event with an entity attached */
+let product = Product(
+    category: "Snowplow/Shoes",
+    currency: "EUR",
+    id: "Product id",
+    name: "Snowplow product",
+    price: 10
+)
+let event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
+event.entities.append(product.toEntity())
+_ = tracker.track(event)
+```
+
 ## Android (Kotlin)
 
 Generated code for the [Android tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Kotlin data classes with `toEvent()` and `toEntity()` methods.
@@ -940,6 +1044,28 @@ data class Product(
 }
 ```
 
+Here's how you could use the generated code:
+
+```kotlin
+import {{ specified package }}.Product
+import {{ specified package }}.WebPage
+
+/* Track a self-describing event */
+tracker.track(WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
+
+/* Track an event with an entity attached */
+val product = Product(
+    id = "Product id",
+    name = "Snowplow product",
+    currency = "EUR",
+    price = 10.0,
+    category = "Snowplow/Shoes",
+)
+val event = WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
+event.entities.add(product.toEntity())
+tracker.track(event)
+```
+
 ## React Native (TypeScript)
 
 Generated code for the [React Native tracker](/docs/sources/react-native-tracker/index.md). Snowtype produces TypeScript types with `track` and `create` functions.
@@ -1065,6 +1191,48 @@ export function createProduct(product: Product){
 }
 ```
 
+Here's how you could use the generated code:
+
+```tsx
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./src/tracking/snowplow";
+
+/*
+ * `t` is the tracker instance created by the
+ * `createTracker` function of @snowplow/react-native-tracker.
+ */
+
+/* Track a self-describing event */
+trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+
+/* Enforce specific entity types using type arguments */
+const webPage = createWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+});
+trackWebPage<Product | WebPage>(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
+```
+
 ## Flutter (Dart)
 
 Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md). Snowtype produces immutable Dart classes that implement `SelfDescribing`, with `schema`, `data`, and `toMap()` accessors.
@@ -1178,6 +1346,26 @@ class Product implements SelfDescribing {
         };
     }
 }
+```
+
+Here's how you could use the generated code:
+
+```dart
+import './lib/tracking/snowplow/snowtype.dart';
+
+/* Track a self-describing event */
+await tracker.track(const WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43"));
+
+/* Track an event with an entity attached */
+const product = Product(
+  category: "Snowplow/Shoes",
+  currency: "EUR",
+  id: "Product id",
+  price: 10.0,
+  name: "Snowplow product"
+);
+const event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43");
+await tracker.track(event, contexts: [product]);
 ```
 
 ## Node.js
@@ -1298,6 +1486,48 @@ export function createProduct(product: Product){
         data: product
     }
 }
+```
+
+Here's how you could use the generated code in a Node.js project:
+
+```tsx
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./src/tracking/snowplow";
+
+/*
+ * `t` is the tracker instance created by the
+ * `tracker` function of @snowplow/node-tracker.
+ */
+
+/* Track a self-describing event */
+trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+
+/* Enforce specific entity types using type arguments */
+const webPage = createWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+});
+trackWebPage<Product | WebPage>(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
 ```
 
 ### JavaScript
@@ -1447,6 +1677,37 @@ export function createProduct(product){
         data: product
     }
 }
+```
+
+Here's how you could use the generated code in a Node.js project:
+
+```javascript
+import {
+  trackWebPage,
+  createProduct,
+  createWebPage,
+} from "./src/tracking/snowplow";
+
+/*
+ * `t` is the tracker instance created by the
+ * `tracker` function of @snowplow/node-tracker.
+ */
+
+/* Track a self-describing event */
+trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+
+/* Track an event with an entity attached */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
 ```
 
 ## Golang
@@ -1612,6 +1873,29 @@ func TrackProduct(tracker *sp.Tracker, product Product, opts ...option) error {
 }
 ```
 
+Here's how you could use the generated code in a Go project:
+
+```go
+// Track a self-describing event
+TrackWebPage(tracker, WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"})
+
+// Track an event with an entity attached
+productName := "Snowplow product"
+product := Product{
+	ID:       "Product_id",
+	Currency: "EUR",
+	Price:    10,
+	Category: "Snowplow/Shoes",
+	Name:     &productName,
+}
+
+TrackWebPage(
+	tracker,
+	WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"},
+	WithContexts(product),
+)
+```
+
 ## Java
 
 Generated code for the [Java tracker](/docs/sources/java-tracker/index.md). Snowtype produces Java classes with private fields, getter and setter methods, and Javadoc comments. Each class is generated as a separate file.
@@ -1695,6 +1979,45 @@ public class Product {
     public double getPrice() { return price; }
     public void setPrice(double value) { this.price = value; }
 }
+```
+
+Here's how you could use the generated code in a Java project:
+
+
+```java
+import com.snowplowanalytics.snowplow.tracker.*;
+import com.snowplowanalytics.snowplow.snowtype.*;
+import com.snowplowanalytics.snowplow.tracker.events.SelfDescribing;
+
+import java.util.Collections;
+
+/* Track a self-describing event */
+tracker.track(
+    SelfDescribing.builder()
+        .eventData(new WebPage.Builder()
+            .setId("212a9b63-1af7-4e96-9f35-e2fca110ff43")
+            .build()
+            .toSelfDescribingJson())
+        .build()
+);
+
+/* Track an event with an entity attached */
+Product product = new Product.Builder()
+    .setId("Product id")
+    .setName("Snowplow product")
+    .setCurrency("EUR")
+    .setPrice(10.0)
+    .setCategory("Snowplow/Shoes")
+    .build();
+WebPage webPage = new WebPage.Builder()
+    .setId("212a9b63-1af7-4e96-9f35-e2fca110ff43")
+    .build();
+SelfDescribing event = SelfDescribing.builder()
+    .eventData(product.toSelfDescribingJson())
+    .customContext(Collections.singletonList(
+        webPage.toSelfDescribingJson()))
+    .build();
+tracker.track(event);
 ```
 
 ## Google Tag Manager (JavaScript)

@@ -254,12 +254,11 @@ export function createProduct(product: Product) {
 
 ## Use the generated code
 
-The examples below demonstrate how to use Snowtype's [generated code](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-output/index.md). They assume you generated code for the `web_page` and `product` schemas.
+How to implement the generated code depends on the tracker and language you're using.
 
-TODO move most to the other page?
+This example demonstrates how to use Snowtype's generated code for the Browser tracker, based on the example generated code above.
 
-<Tabs groupId="language">
-<TabItem value="browser-ts" label="Browser (TypeScript)" default>
+Check out the [full examples page](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-output/index.md) for more examples in different languages and trackers.
 
 ```tsx
 import {
@@ -296,234 +295,9 @@ trackWebPage<Product | WebPage>({
 });
 ```
 
-</TabItem>
-
-<TabItem value="node-ts" label="Node.js (TypeScript)">
-
-```tsx
-import {
-  trackWebPage,
-  createProduct,
-  WebPage,
-  Product,
-  createWebPage,
-} from "./{outpath}/snowplow";
-
-/*
- * `t` is the tracker instance created by the
- * `tracker` function of @snowplow/node-tracker.
- */
-
-/* Track a self-describing event */
-trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
-});
-trackWebPage(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
-});
-
-/* Enforce specific entity types using type arguments */
-const webPage = createWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-});
-trackWebPage<Product | WebPage>(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product, webPage],
-});
-```
-
-</TabItem>
-
-<TabItem value="android" label="Android (Kotlin)">
-
-```kotlin
-import {{ specified package }}.Product
-import {{ specified package }}.WebPage
-
-/* Track a self-describing event */
-tracker.track(WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
-
-/* Track an event with an entity attached */
-val product = Product(
-    id = "Product id",
-    name = "Snowplow product",
-    currency = "EUR",
-    price = 10.0,
-    category = "Snowplow/Shoes",
-)
-val event = WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
-event.entities.add(product.toEntity())
-tracker.track(event)
-```
-
-</TabItem>
-
-<TabItem value="ios" label="iOS (Swift)">
-
-```swift
-import SnowplowTracker
-
-/* Track a self-describing event */
-_ = tracker.track(WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
-
-/* Track an event with an entity attached */
-let product = Product(
-    category: "Snowplow/Shoes",
-    currency: "EUR",
-    id: "Product id",
-    name: "Snowplow product",
-    price: 10
-)
-let event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
-event.entities.append(product.toEntity())
-_ = tracker.track(event)
-```
-
-</TabItem>
-
-<TabItem value="go" label="Go">
-
-```go
-// Track a self-describing event
-TrackWebPage(tracker, WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"})
-
-// Track an event with an entity attached
-productName := "Snowplow product"
-product := Product{
-	ID:       "Product_id",
-	Currency: "EUR",
-	Price:    10,
-	Category: "Snowplow/Shoes",
-	Name:     &productName,
-}
-
-TrackWebPage(
-	tracker,
-	WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"},
-	WithContexts(product),
-)
-```
-
-</TabItem>
-
-<TabItem value="react-native" label="React Native (TypeScript)">
-
-```tsx
-import {
-  trackWebPage,
-  createProduct,
-  WebPage,
-  Product,
-  createWebPage,
-} from "./{outpath}/snowplow";
-
-/*
- * `t` is the tracker instance created by the
- * `createTracker` function of @snowplow/react-native-tracker.
- */
-
-/* Track a self-describing event */
-trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
-});
-trackWebPage(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
-});
-
-/* Enforce specific entity types using type arguments */
-const webPage = createWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-});
-trackWebPage<Product | WebPage>(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product, webPage],
-});
-```
-
-</TabItem>
-
-<TabItem value="flutter" label="Flutter (Dart)">
-
-```dart
-import './{outpath}/snowplow.dart';
-
-/* Track a self-describing event */
-await tracker.track(const WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43"));
-
-/* Track an event with an entity attached */
-const product = Product(
-  category: "Snowplow/Shoes",
-  currency: "EUR",
-  id: "Product id",
-  price: 10.0,
-  name: "Snowplow product"
-);
-const event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43");
-await tracker.track(event, contexts: [product]);
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-```java
-import com.snowplowanalytics.snowplow.tracker.*;
-import com.snowplowanalytics.snowplow.snowtype.*;
-import com.snowplowanalytics.snowplow.tracker.events.SelfDescribing;
-
-import java.util.Collections;
-
-/* Track a self-describing event */
-tracker.track(
-    SelfDescribing.builder()
-        .eventData(new WebPage.Builder()
-            .setId("212a9b63-1af7-4e96-9f35-e2fca110ff43")
-            .build()
-            .toSelfDescribingJson())
-        .build()
-);
-
-/* Track an event with an entity attached */
-Product product = new Product.Builder()
-    .setId("Product id")
-    .setName("Snowplow product")
-    .setCurrency("EUR")
-    .setPrice(10.0)
-    .setCategory("Snowplow/Shoes")
-    .build();
-WebPage webPage = new WebPage.Builder()
-    .setId("212a9b63-1af7-4e96-9f35-e2fca110ff43")
-    .build();
-SelfDescribing event = SelfDescribing.builder()
-    .eventData(product.toSelfDescribingJson())
-    .customContext(Collections.singletonList(
-        webPage.toSelfDescribingJson()))
-    .build();
-tracker.track(event);
-```
-
-</TabItem>
-</Tabs>
-
 ## Prevent generation from development schemas
 
-When you are developing new schemas, they may only be deployed to your development environment. Generating tracking code from development-only schemas and shipping it to production causes [failed events](/docs/fundamentals/failed-events/index.md), because the production pipeline does not have those schemas.
+When you are developing new data structures, they may only be deployed to your development environment. Generating and using tracking code from development-only schemas and shipping it to production can cause [failed events](/docs/fundamentals/failed-events/index.md), because the production pipeline doesn't have those schemas.
 
 By default, Snowtype prints a warning when it detects development-only schemas. To turn this into a hard error that stops generation, use the `--disallowDevSchemas` flag:
 
@@ -550,3 +324,5 @@ The generated Markdown includes:
 - Links to the generated code for each event specification
 
 This is useful for sharing implementation requirements with developers who may not have access to Console.
+
+TODO add example

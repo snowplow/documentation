@@ -1789,3 +1789,8 @@ pre.mermaid {
     display: none;
   }
 }
+
+/* Fix: hash-link ::before content lost during prod CSS build (postcss specificity transform strips @layer rules)  */
+.hash-link::before {
+  content: '#';
+}

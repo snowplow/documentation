@@ -1,6 +1,6 @@
 ---
 title: "Get started with Snowtype"
-sidebar_label: "Install and initialize"
+sidebar_label: "Install Snowtype"
 sidebar_position: 1
 description: "Install Snowtype, authenticate with your Snowplow account, and initialize your project."
 keywords: ["Snowtype", "install", "setup", "getting started", "code generation", "authenticate", "initialize"]

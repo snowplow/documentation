@@ -108,12 +108,14 @@
           "reference": {
             "type": "string",
             "title": "Reference",
-            "description": "Column name in the events table"
+            "description": "Column name in the events table",
+            "order": 1
           },
           "alias": {
             "type": "string",
             "title": "Alias",
-            "description": "Name to use in the output tables"
+            "description": "Name to use in the output tables",
+            "order": 2
           }
         },
         "required": ["reference", "alias"],

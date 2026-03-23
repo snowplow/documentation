@@ -13,7 +13,7 @@ The Snowplow Identities dbt package transforms the raw [identity entities and me
 | -------- | ---- |
 | **Package overview** | [Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) |
 | **Quickstart** | [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) |
-| **Configuration** | [Identities configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.md) |
+| **Configuration** | [Identities configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) |
 | **Source code** | [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) |
 
 :::note Incremental strategy

@@ -7,7 +7,7 @@ keywords: ["identities quickstart", "identities setup", "dbt identities installa
 date: "2026-03-23"
 ---
 
-This guide walks you through setting up the [Snowplow Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md). Unlike the other Snowplow dbt packages, this package uses a simplified timestamp-based incremental strategy, so the [package mechanics](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/index.md), [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), and [dbt operations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) guidance does not apply.
+This guide walks you through setting up the [Snowplow Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md).
 
 ## Requirements
 
@@ -135,4 +135,4 @@ On dev targets (matching `snowplow__dev_target_name`, default `dev`), the manife
 ## Next steps
 
 - Review the [output model reference](/docs/identities/data-models/index.md) for column definitions and example queries.
-- See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.md) for all available variables and a config generator.
+- See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) for all available variables and a config generator.

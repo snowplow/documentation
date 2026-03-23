@@ -16,7 +16,7 @@ The Snowplow Identities dbt package transforms the raw [identity entities and me
 | **Configuration** | [Identities configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.md) |
 | **Source code** | [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) |
 
-:::note
+:::note Incremental strategy
 This package uses a simplified timestamp-based incremental strategy. The [package mechanics](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/index.md), [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), and [dbt operations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) guidance for other Snowplow packages does not apply here.
 :::
 
@@ -114,7 +114,7 @@ Use this table to look up addressable identifiers, such as email, that can be ac
 
 ### `snowplow_identities_new_identities`
 
-One row per `snowplow_id`, recording the first and last observed activity for that identity. The identifier columns (e.g., `domain_userid`, `user_id`) are determined by the [`snowplow__identifiers`](/docs/identities/configuration/index.md) variable and will vary based on your configuration.
+One row per `snowplow_id`, recording the first and last observed activity for that identity. The [`snowplow__identifiers`](/docs/identities/configuration/index.md) variable determines which identifier columns appear in this table.
 
 | Column                  | Description                                                                         |
 | ----------------------- | ----------------------------------------------------------------------------------- |

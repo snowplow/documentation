@@ -11,7 +11,7 @@ The Snowplow Identities dbt package transforms the raw [identity entities and me
 
 The package uses a simplified, timestamp-based incremental strategy rather than the session-based incremental logic used by other Snowplow dbt packages. This means the standard [package mechanics](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/index.md), [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), and [dbt operations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) guidance does not apply to this package.
 
-It supports **Snowflake** and **BigQuery**.
+It supports Snowflake and BigQuery.
 
 :::note Source code
 The package source code is available in the [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) repository.

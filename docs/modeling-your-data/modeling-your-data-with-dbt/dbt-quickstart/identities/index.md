@@ -1,5 +1,5 @@
 ---
-title: "Identities Quickstart"
+title: "Identities quickstart"
 sidebar_label: "Identities"
 sidebar_position: 70
 description: "Quick start guide for the Snowplow Identities dbt package to transform identity entities and merge events into resolved identity tables."
@@ -31,7 +31,9 @@ Then run:
 dbt deps
 ```
 
-## Setup
+## Configure the package
+
+The steps below walk through each variable you need to set in your `dbt_project.yml` to get the package running.
 
 ### 1. Accept the license
 
@@ -133,4 +135,4 @@ On dev targets (matching `snowplow__dev_target_name`, default `dev`), the manife
 ## Next steps
 
 - Review the [output model reference](/docs/identities/data-models/index.md) for column definitions and example queries.
-- See how to [integrate with Unified Digital models](/docs/identities/data-models/index.md#integration-with-unified-digital-models).
+- See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.md) for all available variables and a config generator.

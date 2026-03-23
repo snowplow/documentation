@@ -254,8 +254,7 @@ export function createProduct(product: Product) {
 
 The examples below demonstrate how to use Snowtype's [generated code](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-output/index.md). They assume you generated code for the `web_page` and `product` schemas.
 
-TODO put these in the correct order
-is JS missing?
+TODO move most to the other page?
 
 <Tabs groupId="language">
 <TabItem value="browser-ts" label="Browser (TypeScript)" default>

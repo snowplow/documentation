@@ -1790,7 +1790,39 @@ pre.mermaid {
   }
 }
 
-/* Fix: hash-link ::before content lost during prod CSS build (postcss specificity transform strips @layer rules)  */
+/* ==========================================================================
+   Prod-build hardening
+
+   The production PostCSS transform changes CSS specificity, causing custom
+   rules to lose against Infima defaults or Tailwind prose. These overrides
+   use !important to ensure consistent rendering in both dev and prod builds.
+   ========================================================================== */
+
+/* Hash-link anchor icon */
 .hash-link::before {
-  content: '#';
+  content: '#' !important;
+}
+
+/* TOC: preserve custom font-size and padding */
+.table-of-contents__link {
+  font-size: 0.875rem !important; /* 14px */
+  padding: 6px 20px !important;
+}
+
+/* Sidenav: preserve custom link padding */
+.menu__link {
+  padding: var(--ifm-menu-link-padding-vertical)
+    var(--ifm-menu-link-padding-horizontal) !important;
+}
+
+/* Sidenav: preserve active link padding */
+.menu__link--active:not(.menu__link--sublist) {
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem
+    var(--ifm-menu-link-padding-horizontal) !important;
+}
+
+/* Custom variable overrides: ensure values survive prod build */
+:root {
+  --ifm-toc-padding-horizontal: 20px !important;
+  --ifm-menu-link-padding-vertical: 0.25rem !important;
 }

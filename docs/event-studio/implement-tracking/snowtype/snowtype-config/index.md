@@ -92,7 +92,7 @@ options?: {
 ```
 
 ### `namespace`
-TODO need example for this
+TODO
 
 :::info
 

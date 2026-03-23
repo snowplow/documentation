@@ -7,19 +7,17 @@ keywords: ["identities", "dbt", "identity resolution", "data model"]
 date: "2026-03-05"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
+The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) in your warehouse into a set of derived tables for identity resolution, identifier lookup, and audit.
 
-The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) in your warehouse into a set of derived tables for identity resolution, identifier lookup, and audit. Run this package before any other Snowplow dbt packages so that downstream models can reference the resolved identities.
+| Resource | Link |
+| -------- | ---- |
+| **Package overview** | [Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) |
+| **Quickstart** | [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) |
+| **Configuration** | [Identities configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.md) |
+| **Source code** | [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) |
 
-The package processes data incrementally, only handling new events on each run.
-
-It supports **Snowflake** and **BigQuery**. If your warehouse isn't currently supported, please reach out to Snowplow Support.
-
-:::note Source code
-The package source code is available in the [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) repository.
+:::note
+This package uses a simplified timestamp-based incremental strategy. The [package mechanics](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/index.md), [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), and [dbt operations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) guidance for other Snowplow packages does not apply here.
 :::
 
 ## Key fields
@@ -34,7 +32,7 @@ The Identities models use these field names consistently:
 
 ## Output models
 
-The package produces four output models.
+The package produces six output models.
 
 ### `snowplow_identities_id_changes`
 
@@ -42,7 +40,7 @@ A fact table containing a complete history of all changes to Snowplow ID cluster
 
 | Column                 | Description                                                            |
 | ---------------------- | ---------------------------------------------------------------------- |
-| `id_change_key`        | Surrogate primary key (hash of `snowplow_id` + `previous_snowplow_id`) |
+| `id_change_key`        | Surrogate primary key (hash of `snowplow_id` + `previous_snowplow_id` + `effective_at`) |
 | `snowplow_id`          | The Snowplow ID after this change                                      |
 | `previous_snowplow_id` | The ID that was merged; `NULL` for new ID creation                     |
 | `effective_at`         | Event timestamp; `derived_tstamp` for creates, `merged_at` for merges  |
@@ -53,7 +51,7 @@ A fact table containing a complete history of all changes to Snowplow ID cluster
 
 ### `snowplow_identities_snowplow_id_mapping`
 
-A mapping between any previous `snowplow_id` and its current `active_snowplow_id`. The model automatically resolves chains of merges so you always get the most current unified ID. Only merged `snowplow_id` values appear in this table — unmerged IDs are their own `active_snowplow_id` by definition.
+A mapping between any previous `snowplow_id` and its current `active_snowplow_id`. The model automatically resolves chains of merges, so you always get the most current unified ID. Only merged `snowplow_id` values appear in this table — unmerged IDs are their own `active_snowplow_id` by definition.
 
 | Column               | Description                                                            |
 | -------------------- | ---------------------------------------------------------------------- |
@@ -114,15 +112,30 @@ Use this table to look up addressable identifiers, such as email, that can be ac
 | `last_seen_at`        | Timestamp of the event where this identifier was last observed                                                    |
 | `uuid`                | Surrogate key                                                                                                     |
 
-## Integration with Unified Digital models
+### `snowplow_identities_new_identities`
 
-The Identities dbt package is independent of the existing Unified Digital dbt models. This allows tables across all Snowplow dbt packages — [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md), [Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md), [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md), and others — to reference identity data.
+One row per `snowplow_id`, recording the first and last observed activity for that identity. The identifier columns (e.g., `domain_userid`, `user_id`) are determined by the [`snowplow__identifiers`](/docs/identities/configuration/index.md) variable and will vary based on your configuration.
 
-When the Identities package is enabled, the Unified Digital models add two new columns to session and user tables:
+| Column                  | Description                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| `snowplow_id`           | The Snowplow ID — unique key for this table                                         |
+| `created_at`            | Timestamp when this identity was first created, from the identity entity            |
+| `first_seen_event_id`   | The first event associated with this identity                                       |
+| `first_app_id`          | The `app_id` where this identity was first observed                                 |
+| `last_app_id`           | The `app_id` where this identity was most recently observed                         |
+| `first_derived_tstamp`  | `derived_tstamp` of the first event for this identity                               |
+| `last_derived_tstamp`   | `derived_tstamp` of the most recent event for this identity                         |
+| *(identifier columns)*  | One column per configured identifier (e.g., `domain_userid`, `user_id`)            |
 
-| Column               | Description                                                                                                           |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `snowplow_id`        | The `snowplow_id` from the event or session. For sessions, this is the latest `snowplow_id` observed in that session. |
-| `active_snowplow_id` | Looked up from `snowplow_identities_snowplow_id_mapping` during materialization.                                      |
+### `snowplow_identities_merge_events`
 
-The existing `stitched_user_id` column changes from `COALESCE(user_id, user_identifier)` to `COALESCE(active_snowplow_id, user_id, user_identifier)`, easing migration for customers already using identity stitching. The `user_id` and `user_identifier` columns remain unchanged.
+One row per identity merge event. Each row records the surviving (`active`) Snowplow ID and the full hierarchy of IDs that were merged into it. Use this table to audit the raw merge operations as they occurred.
+
+| Column               | Description                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `merge_event_id`     | The `event_id` of the `identity_merge` event — unique key for this table                                  |
+| `active_snowplow_id` | The surviving Snowplow ID after this merge                                                                 |
+| `collector_tstamp`   | Timestamp when the merge event was collected                                                               |
+| `derived_tstamp`     | Timestamp when the merge event occurred                                                                    |
+| `merged`             | Array containing the full merge hierarchy (all IDs merged into `active_snowplow_id`)                       |
+| `merges`             | Array of objects describing each individual merge operation, with `snowplow_id`, `merged_at`, and `triggering_event_id` |

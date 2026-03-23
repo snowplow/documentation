@@ -96,32 +96,34 @@ If you manage schemas locally using [Snowplow CLI](/docs/event-studio/programmat
 }
 ```
 
-## What Snowtype generates
+## Generate tracking code
 
-When you run `snowtype generate`, Snowtype produces a single output file, at the path set in your configuration. The contents will vary based on the tracker and language you selected, but generally include:
-- Types, interfaces, or classes for each schema
-- Functions to track the schemas as self-describing events or entities
-- For event specifications, functions to track the events with the correct schemas and instructions defined in the specification
+To generate tracking code, run:
 
 ```bash
 npx snowtype generate
 ```
 
-:::note Snowtype lock file
+When you run `snowtype generate`, Snowtype will produce a single output file, at the path set in your configuration file. The contents will vary based on the tracker and language you selected, but generally include:
+- Types, interfaces, or classes for each schema
+- Functions to track the schemas as self-describing events or entities
+- For event specifications, functions to track the events with the correct schemas and instructions defined in the specification
+
+Snowtype will generate code for you to track all schemas as either a self-describing event or entity, regardless of how you've defined your data structures in Console.
+
 The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This pins the schema versions used for generation, so subsequent runs produce consistent output. To check for newer schema versions, use `snowtype update` ADD LINK.
-:::
 
 If an event specification includes [instructions](/docs/event-studio/tracking-plans/event-specifications/index.md), Snowtype will generate a type that reflects the adjusted schema, with the event specification name as a suffix to avoid naming conflicts. TODO huh?
 
-The generated code is not minified and includes inline documentation. You can modify it to suit your project, but any changes will be overwritten the next time you run `generate`.
+The generated code isn't minified and includes inline documentation. You can modify it to suit your project, but any changes will be overwritten the next time you run `generate`.
 
-:::tip Console parallel
+The code expects the relevant [Snowplow tracker](/docs/sources/index.md) to already be installed in your project. Snowtype doesn't install trackers for you.
+
+:::tip Generated code in Console
 In Console, the **Implementation** tab on any event specification shows the same generated code that Snowtype produces. You can toggle between languages and copy the code directly, which is useful for quick reference, or if you want to review the output before generating locally.
+
+TODO move this all up a section and merge the Console code snippets?
 :::
-
-The generated code expects the relevant [Snowplow tracker](/docs/sources/index.md) to already be installed in your project. Snowtype doesn't install trackers for you.
-
-TODO event/entity for all schemas
 
 ### Example output
 

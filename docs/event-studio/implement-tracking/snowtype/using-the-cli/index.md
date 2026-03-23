@@ -1,7 +1,7 @@
 ---
 title: "Work with the Snowtype CLI"
 sidebar_label: "Snowtype CLI"
-sidebar_position: 2
+sidebar_position: 3
 description: "Use the Snowtype CLI to initialize projects, generate tracking code, and configure code generation for Snowplow tracking SDKs."
 keywords: ["Snowtype CLI", "code generation CLI", "Snowtype workflow", "CLI usage"]
 ---

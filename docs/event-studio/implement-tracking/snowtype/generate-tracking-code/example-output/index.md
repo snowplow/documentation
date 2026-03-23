@@ -525,7 +525,7 @@ trackWebPage({
 
 Generated code for the [iOS tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Swift structs with `toEvent()` and `toEntity()` methods.
 
-The code is compatible with both Swift 5.5+ and 6.
+The generated code is compatible with both Swift 5.5+ and 6.
 
 ```json title="snowtype.config.json"
 {
@@ -538,9 +538,12 @@ The code is compatible with both Swift 5.5+ and 6.
   ],
   "dataStructures": [
     "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  ],
+  // "namespace": "Snowtype"
 }
 ```
+
+When generating tracking code for the iOS tracker, you can set the optional `namespace` option in your Snowtype configuration. All classes generated will be included in this namespace. For example, instead of generating `WebPage` and `Product` structs as in the example, Snowtype would generate `Snowtype.WebPage` and `Snowtype.Product`. This can be helpful for avoiding naming conflicts with other types in your codebase.
 
 ```swift title="Snowtype.swift"
 import Foundation

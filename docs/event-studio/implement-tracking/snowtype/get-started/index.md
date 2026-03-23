@@ -103,5 +103,5 @@ The command will prompt you for:
 Snowtype saves these choices to a `snowtype.config.json` file in your project root. You can edit this file directly later, or pass the values as flags to skip the prompts. See the configuration reference ADD LINK for all available options.
 
 :::tip
-If you use the Console, you can also find initialization commands on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md), pre-filled with the correct IDs.
+If you use the Console, you can also find initialization commands on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md), pre-filled with the correct IDs. TODO move this
 :::

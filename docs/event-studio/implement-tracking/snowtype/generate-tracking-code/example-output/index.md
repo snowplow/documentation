@@ -525,6 +525,8 @@ trackWebPage({
 
 Generated code for the [iOS tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Swift structs with `toEvent()` and `toEntity()` methods.
 
+The code is compatible with both Swift 5.5+ and 6.
+
 ```json title="snowtype.config.json"
 {
   "orgId": "your-org-id",

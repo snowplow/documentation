@@ -98,6 +98,8 @@ If you manage schemas locally using [Snowplow CLI](/docs/event-studio/programmat
 
 ## Generate tracking code
 
+TODO need event spec examples
+
 To generate tracking code, run:
 
 ```bash

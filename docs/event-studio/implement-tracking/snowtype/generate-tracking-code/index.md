@@ -121,6 +121,8 @@ In Console, the **Implementation** tab on any event specification shows the same
 
 The generated code expects the relevant [Snowplow tracker](/docs/sources/index.md) to already be installed in your project. Snowtype doesn't install trackers for you.
 
+TODO event/entity for all schemas
+
 ### Example output
 
 This example shows generated Browser tracker TypeScript code for the `web_page` schema from Iglu Central, and a custom `product` data structure. To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-output/index.md).

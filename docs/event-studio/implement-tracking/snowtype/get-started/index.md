@@ -12,12 +12,11 @@ import TabItem from '@theme/TabItem';
 
 This guide walks you through installing Snowtype and connecting it to your Snowplow account.
 
-## Prerequisites
-
 To use Snowtype, you need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
-- A Snowplow CDI account with a Console API key
+- A Snowplow CDI account
+- A Console API key
 
 ## Install Snowtype
 

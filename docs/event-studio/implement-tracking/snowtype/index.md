@@ -40,14 +40,15 @@ You can run Snowtype from the command line, or you can find its output in the Co
 
 Snowtype generates code for the following Snowplow trackers:
 
-| Tracker                                                     | Language               |
-| ----------------------------------------------------------- | ---------------------- |
-| [Browser](/docs/sources/web-trackers/index.md)              | JavaScript, TypeScript |
-| [JavaScript](/docs/sources/web-trackers/index.md)           | JavaScript             |
-| [iOS](/docs/sources/mobile-trackers/index.md)               | Swift                  |
-| [Android](/docs/sources/mobile-trackers/index.md)           | Kotlin                 |
-| [React Native](/docs/sources/react-native-tracker/index.md) | TypeScript             |
-| [Flutter](/docs/sources/flutter-tracker/index.md)           | Dart                   |
-| [Node.js](/docs/sources/node-js-tracker/index.md)           | JavaScript, TypeScript |
-| [Go](/docs/sources/golang-tracker/index.md)                 | Go                     |
-| [Java](/docs/sources/java-tracker/index.md)                 | Java                   |
+| Tracker                                                         | Language               |
+| --------------------------------------------------------------- | ---------------------- |
+| [Browser](/docs/sources/web-trackers/index.md)                  | JavaScript, TypeScript |
+| [JavaScript](/docs/sources/web-trackers/index.md)               | JavaScript             |
+| [iOS](/docs/sources/mobile-trackers/index.md)                   | Swift                  |
+| [Android](/docs/sources/mobile-trackers/index.md)               | Kotlin                 |
+| [React Native](/docs/sources/react-native-tracker/index.md)     | TypeScript             |
+| [Flutter](/docs/sources/flutter-tracker/index.md)               | Dart                   |
+| [Node.js](/docs/sources/node-js-tracker/index.md)               | JavaScript, TypeScript |
+| [Go](/docs/sources/golang-tracker/index.md)                     | Go                     |
+| [Java](/docs/sources/java-tracker/index.md)                     | Java                   |
+| [Google Tag Manager](/docs/sources/google-tag-manager/index.md) | JavaScript             |

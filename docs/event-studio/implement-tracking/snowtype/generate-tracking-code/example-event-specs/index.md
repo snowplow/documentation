@@ -1,6 +1,6 @@
 ---
-title: "Example Snowtype generated code"
-sidebar_label: "Example outputs"
+title: "Example Snowtype generated code for an event specification"
+sidebar_label: "Example event specification"
 sidebar_position: 1
 description: "Example configuration files and generated output for each Snowtype-supported tracker and language."
 keywords: ["Snowtype", "code generation", "output", "example", "tracker"]
@@ -9,17 +9,25 @@ date: "2026-03-19"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The following examples show the Snowtype configuration file and generated output for the [Iglu Central](https://iglucentral.com) schema `web_page`, and a custom data structure, `product`. The `tracker` and `language` fields in your configuration determine the language and structure of the output.
+The following examples show the Snowtype configuration file and generated output for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user` and `user_authentication`.
+
+The `tracker` and `language` fields in your configuration determine the language and structure of the output.
 
 These are the example schemas:
 
 <SchemaProperties
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "web_page", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for a web page", "properties": { "id": { "type": "string", "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$" } }, "type": "object", "required": ["id"], "additionalProperties": false }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snplow.msc.aws", "name": "login", "format": "jsonschema", "version": "1-0-0" }, "description": "Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.", "properties": { "method": { "type": "string", "description": "The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'." }, "error_code": { "type": ["string", "null"], "description": "An optional error code if the login attempt failed (e.g., 'invalid_password', 'user_not_found')." }, "is_success": { "type": "boolean", "description": "Whether the login attempt was successful." } }, "required": ["method", "is_success"], "additionalProperties": false }}
 />
 
 <SchemaProperties
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.example", "name": "product", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for a product entity", "properties": { "id": { "type": "string", "description": "The product ID (SKU)." }, "name": { "type": "string", "description": "The product name." }, "currency": { "type": "string", "description": "The currency the product is listed in." }, "price": { "type": "number", "description": "The price of the product." }, "category": { "type": "string", "description": "The product category." } }, "required": ["id", "name", "currency", "price", "category"], "additionalProperties": false }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.console", "name": "user", "format": "jsonschema", "version": "1-0-1" }, "description": "A subset of the user fields from the users-service", "properties": { "userId": { "type": "string", "description": "The users UUID.", "format": "uuid" }, "firstName": { "type": "string", "description": "The users first name.", "maxLength": 45 }, "lastName": { "type": "string", "description": "The users last name.", "maxLength": 45 }, "organizationId": { "type": "string", "description": "The organization's UUID that the user belongs to.", "format": "uuid" }, "email": { "type": ["string", "null"], "description": "The users email address.", "maxLength": 60 }, "jobTitle": { "type": ["string", "null"], "description": "The users job title.", "maxLength": 60 }, "accessLevel": { "type": ["string", "null"], "description": "The users access level.", "enum": ["Admin", "User", "Custom"] } }, "required": ["userId", "firstName", "lastName", "organizationId"], "additionalProperties": false }}
 />
+
+<SchemaProperties
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snplow.msc.aws", "name": "user_authentication", "format": "jsonschema", "version": "1-0-0" }, "description": "Data structure that defines how user signed-up / logged in", "properties": { "auth_type": { "type": "string", "enum": ["google", "facebook", "manual"], "description": "Type of authentication used" } }, "required": ["auth_type"], "additionalProperties": false }}
+/>
+
+<!-- TODO add event spec example screenshot -->
 
 ## Web trackers
 

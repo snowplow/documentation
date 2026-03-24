@@ -512,3 +512,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/testing/snowplow-micro/adding-schemas/* /docs/testing/snowplow-micro/local/schemas/:splat 301
 
 /docs/event-studio/mcp-server/* /docs/llms-support/mcp-server/:splat 301
+
+# Bot filtering moved to events section
+/docs/pipeline/enrichments/filtering-bot-events/* /docs/events/filtering-bot-events/:splat 301

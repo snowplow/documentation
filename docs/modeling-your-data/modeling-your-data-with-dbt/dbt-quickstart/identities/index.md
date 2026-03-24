@@ -1,5 +1,5 @@
 ---
-title: "Identities quickstart"
+title: "Identities Quickstart"
 sidebar_label: "Identities"
 sidebar_position: 70
 description: "Quick start guide for the Snowplow Identities dbt package to transform identity entities and merge events into resolved identity tables."
@@ -33,11 +33,11 @@ dbt deps
 
 ## Configure the package
 
-The steps below walk through each variable you need to set in your `dbt_project.yml` to get the package running.
+The steps below walk through each variable you need to set in your `dbt_project.yml` to get the package running. Check out the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) for more details.
 
 ### 1. Accept the license
 
-The package is licensed under the [Snowplow Personal and Academic License (SPAL)](https://docs.snowplow.io/personal-and-academic-license-1.0/). You must accept the license before the package will run. Add the following to your `dbt_project.yml`:
+The package is licensed under the [Snowplow Personal and Academic License (SPAL)](/personal-and-academic-license-1.0/). You must accept the license before the package will run. Add the following to your `dbt_project.yml`:
 
 ```yaml title="dbt_project.yml"
 vars:
@@ -94,7 +94,7 @@ vars:
 
 ### 6. Filter your data set *(optional)*
 
-To restrict processing to specific app IDs, set `snowplow__app_id`:
+This step is optional. To restrict processing to specific app IDs, set `snowplow__app_id`:
 
 ```yaml title="dbt_project.yml"
 vars:
@@ -104,7 +104,7 @@ vars:
 
 ### 7. Hash identifiers *(optional)*
 
-If your identifiers contain PII, set `snowplow__hash_identifiers` to `true`. This applies a SHA-256 hash to all `id_value` entries in the `snowplow_identities_identifier_mapping` output table:
+This step is optional. If your identifiers contain PII, set `snowplow__hash_identifiers` to `true`. This applies a SHA-256 hash to all `id_value` entries in the `snowplow_identities_identifier_mapping` output table:
 
 ```yaml title="dbt_project.yml"
 vars:
@@ -114,15 +114,17 @@ vars:
 
 ### 8. Run the package
 
+Run the package with this command:
+
 ```bash
 dbt run --select snowplow_identities
 ```
 
-Run this package before any other Snowplow dbt packages so that downstream models can reference the resolved identities.
+Run this package before any other Snowplow dbt packages, so that downstream models can reference the resolved identities.
 
 ## Full refresh
 
-By default, running `dbt run --full-refresh` will not drop the incremental manifest (which would reset all incremental processing). To allow a full reset, set `snowplow__allow_refresh` to `true` before running:
+By default, running `dbt run --full-refresh` won't drop the incremental manifest, as this would reset all incremental processing. To allow a full reset, set `snowplow__allow_refresh` to `true` before running:
 
 ```yaml title="dbt_project.yml"
 vars:
@@ -130,9 +132,4 @@ vars:
     snowplow__allow_refresh: true
 ```
 
-On dev targets (matching `snowplow__dev_target_name`, default `dev`), the manifest is always dropped on full refresh without needing this flag.
-
-## Next steps
-
-- Review the [output model reference](/docs/identities/data-models/index.md) for column definitions and example queries.
-- See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) for all available variables and a config generator.
+On development targets, the manifest is always dropped on full refresh without needing this flag. Development targets are identified by the `snowplow__dev_target_name` variable, which you can set to match your development target name if it's not the default `dev`.

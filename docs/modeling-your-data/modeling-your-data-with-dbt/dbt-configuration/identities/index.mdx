@@ -2,7 +2,7 @@
 title: "Configure the Identities data model"
 sidebar_label: "Identities"
 description: "Configure the Snowplow Identities dbt package for identity resolution and identifier mapping."
-keywords: ["Identities configuration", "dbt identities package", "configure identities", "configure dbt"]
+keywords: ["Identities configuration", "dbt identities package", "configure identities", "configure dbt", "variables"]
 sidebar_position: 35
 date: "2026-03-23"
 ---
@@ -64,7 +64,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 <JsonToTable groupFilter="Contexts, Filters, and Logs" />
 
-## Configuration generator
+## Config generator
 
 Use the inputs below to generate configuration code for your `dbt_project.yml`. Any values not specified will use their package defaults.
 

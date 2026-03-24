@@ -17,7 +17,7 @@ Filtering bot events helps you maintain accurate analytics and can reduce unnece
 
 Snowplow can identify bot traffic both client-side, via a [tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md), and server-side, via [enrichments](/docs/pipeline/enrichments/index.md).
 
-Each source attaches information to the event that you can use for filtering. For convenience, the last enrichment in this list provides a consolidated `bot` field based on the output of all other sources.
+Each source attaches information to the event that you can use for filtering. For convenience, the [bot detection enrichment](#bot-detection-enrichment) consolidates all sources into a single `bot` field.
 
 :::note Anonymous tracking
 

@@ -1,5 +1,5 @@
 ---
-title: "Detect bots on web"
+title: "Detect bots on the web"
 sidebar_label: "Bot detection"
 sidebar_position: 55
 description: "Detect automated browsers client-side using FingerprintJS BotD and attach a bot detection entity to every event."
@@ -16,7 +16,7 @@ The bot detection plugin uses [FingerprintJS BotD](https://github.com/nicedoc/fi
 
 This is useful when you want to identify bot traffic as early as possible, before events reach your pipeline. For a broader approach that also incorporates server-side signals, see the [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md).
 
-## Install plugin
+## Install the plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -30,7 +30,11 @@ This is useful when you want to identify bot traffic as early as possible, befor
 
 <table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-bot-detection@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-bot-detection@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+:::note
+
+The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+
+:::
 
 ```javascript
 window.snowplow('addPlugin',

@@ -50,6 +50,7 @@ Snowbridge sends the following metrics to StatsD:
 |---|---|
 | `target_success` | Events successfully sent to the target. |
 | `target_failed` | Events that failed to reach the target and will be retried. |
+| `target_request_count` | Number of requests successfully sent to the target. |
 | `message_filtered` | Events filtered out via transformation. |
 | `failure_target_success` | Invalid events (not retryable) successfully sent to the failure target. |
 | `failure_target_failed` | Invalid events that failed to reach the failure target. Snowbridge crashes in this scenario. |
@@ -63,11 +64,5 @@ Snowbridge sends the following metrics to StatsD:
 | `max_filter_latency` | Maximum time between entering Snowbridge and being filtered out. |
 | `min_request_latency` | Minimum time for a target write request to complete. |
 | `max_request_latency` | Maximum time for a target write request to complete. |
-| `sum_request_latency` | Sum of all request times. Use with `target_request_count` to calculate average latency. |
-| `target_request_count` | Number of events sent to the target. Use with `sum_request_latency` to calculate average latency. |
 | `min_e2e_latency` | Minimum time between Snowplow collector timestamp and completing the target write. Enabled via configuration — Snowplow enriched data only. |
 | `max_e2e_latency` | Maximum time between Snowplow collector timestamp and completing the target write. Enabled via configuration — Snowplow enriched data only. |
-
-:::note
-From version 5.0.0, `failure_target_success` and `failure_target_failed` count only _invalid_ messages. Oversized messages (exceeding `max_message_bytes`) are handled by the Router and are not counted in these metrics. If you have dashboards that relied on oversized-message volumes appearing here, update your alerting accordingly.
-:::

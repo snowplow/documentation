@@ -45,6 +45,7 @@ You can see the pre-configured URLs in the default enrichment configuration in C
 Once downloaded, take the .mmdb file(s) and upload them to a location on your cloud:
 
 - Amazon S3 (if running Snowplow on AWS) e.g. `s3://my-private-bucket/third-party/maxmind`
+- Azure ADLS (if running Snowplow on Azure) e.g. `https://my-private-storage-container.dfs.core.windows.net/third-party/maxmind`
 - Google Cloud Storage (if running Snowplow on GCS) e.g. `gs://my-private-bucket/third-party/maxmind`
 
 When the database(s) need updating in future you can download the latest version and overwrite this file in your storage.

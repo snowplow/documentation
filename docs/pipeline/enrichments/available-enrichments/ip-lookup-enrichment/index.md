@@ -89,7 +89,7 @@ For a full reference of the options, see the [configuration schema](https://gith
 
 ## Configuration examples
 
-Note that you will need to change the `uri` values in these examples.
+Note that you will need to change the `uri` values in these examples:
 * If you are using Snowplow CDI and the free MaxMind databases, use the same default value you can see in Console for all `uri` fields (whether `geo`, `asn`, etc).
 * Otherwise, provide the location (e.g. `s3://my-private-bucket/third-party/maxmind`) where you uploaded the files.
 

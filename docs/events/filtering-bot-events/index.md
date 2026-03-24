@@ -7,13 +7,13 @@ keywords: ["bot filtering", "bot detection", "spam events", "event filtering", "
 date: "2026-03-24"
 ---
 
-Bot traffic - crawlers, scrapers, and automated agents - can make up a significant share of the events flowing through your pipeline.
+Bot traffic — crawlers, scrapers, and automated agents — can make up a significant share of the events flowing through your pipeline.
 
 If left unfiltered, these events inflate page view counts, distort session metrics, and degrade the quality of any downstream analysis or machine learning model that relies on your data.
 
 Filtering bot events helps you maintain accurate analytics and can reduce unnecessary storage and compute costs in your data warehouse.
 
-## Bot detection
+## Detect bot traffic
 
 Snowplow provides several [enrichments](/docs/pipeline/enrichments/index.md) that identify bot traffic from different angles.
 
@@ -23,7 +23,7 @@ Each enrichment attaches information to the event that you can use for filtering
 
 The [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) checks the event's IP address and user agent string against the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/), an industry-standard database maintained by the Interactive Advertising Bureau. It adds an [entity](/docs/fundamentals/entities/index.md) with a `spiderOrRobot` boolean that indicates whether the event came from a known bot.
 
-:::tip
+:::tip Custom rules
 
 When configuring this enrichment, you can also [add custom user agent string patterns](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md#custom-user-agent-lists) you'd like to classify as bots or not bots.
 
@@ -37,7 +37,7 @@ The [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-en
 
 The [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) checks the event's autonomous system number against a configurable list of ASNs associated with bots, cloud providers, or data centers. Many bots originate from well-known hosting ASNs, and community-maintained lists track these. When a match is found, the enrichment sets `likelyBot` to `true` on the ASN entity.
 
-:::tip
+:::tip Prerequisites
 
 For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure its `asn` or `isp`. This is what will generate the initial ASN entity.
 
@@ -47,7 +47,7 @@ For this enrichment to work, you also need to enable the [IP lookup enrichment](
 
 The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) consolidates the outputs of the three enrichments above into a single `bot_detection` entity. It uses "any positive = bot" logic: if any enabled source indicates that the event is a bot, the `bot` field is set to `true`, along with a list of which sources contributed to the decision. This gives you a single field to check instead of querying multiple entities separately.
 
-## Filtering out bot events
+## Filter out bot events
 
 Once you have bot detection in place, there are two main approaches to removing bot events from your analytics.
 
@@ -61,7 +61,7 @@ from events
 where not contexts_com_snowplowanalytics_snowplow_bot_detection_1[0]:bot::boolean
 ```
 
-This approach is the simplest to implement and lets you keep the bot events for inspection or debugging if needed.
+This approach lets you keep the bot events for inspection or debugging if needed.
 
 ### Drop events in the pipeline
 
@@ -85,7 +85,7 @@ function process(event) {
 
 The `event.drop()` method (available since Enrich 5.3.0) prevents the event from being sent to any stream or destination, lowering infrastructure costs.
 
-:::warning
+:::warning Events dropped permanently
 
 There is no way to recover dropped events, so use this with caution.
 
@@ -107,7 +107,7 @@ function process(event) {
 }
 ```
 
-:::warning
+:::warning Failed events
 
 This creates an "enrichment failure" failed event, which may be tricky to distinguish from genuine failures in your enrichment code.
 

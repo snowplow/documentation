@@ -45,7 +45,7 @@ The [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn
 
 :::tip Prerequisites
 
-For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure its `asn` or `isp`. This is what will generate the initial ASN entity.
+For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure either its `asn` or `isp`, as this is what will generate the initial ASN entity.
 
 :::
 

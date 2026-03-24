@@ -36,7 +36,7 @@ You need to decide which of the different Maxmind databases listed above you wis
 
 :::tip Snowplow CDI
 
-If you use Snowplow CDI, the free-tier MaxMind database files are already provided by Snowplow, so you don't need this step.
+If you use Snowplow CDI, the free-tier MaxMind database files are already provided and updated by Snowplow, so you don't need this step.
 
 You can see the pre-configured URLs in the default enrichment configuration in Console.
 

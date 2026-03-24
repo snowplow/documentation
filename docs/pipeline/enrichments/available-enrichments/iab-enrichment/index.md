@@ -48,7 +48,7 @@ All three of these fields **must** be added to the enrichment JSON, as the IAB l
 
 :::tip Snowplow CDI
 
-If you use Snowplow CDI, these files are already provided by Snowplow. You can see the pre-configured URLs in the default enrichment configuration in Console.
+If you use Snowplow CDI, these files are already provided and updated by Snowplow. You can see the pre-configured URLs in the default enrichment configuration in Console.
 
 :::
 

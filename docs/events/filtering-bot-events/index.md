@@ -19,6 +19,12 @@ Snowplow provides several [enrichments](/docs/pipeline/enrichments/index.md) tha
 
 Each enrichment attaches information to the event that you can use for filtering. For convenience, the last enrichment in this list provides a consolidated `bot` field based on the output of the other enrichments.
 
+:::note Anonymous tracking
+
+Events tracked with [server-side anonymization](../anonymous-tracking/index.md#server-side-anonymization) lack IP address data. As such, bot detection based on IP addresses will not be effective for these events. This includes the ASN lookup enrichment and the  IP-related check in the IAB enrichment.
+
+:::
+
 ### IAB enrichment
 
 The [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) checks the event's IP address and user agent string against the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/), an industry-standard database maintained by the Interactive Advertising Bureau. It adds an [entity](/docs/fundamentals/entities/index.md) with a `spiderOrRobot` boolean that indicates whether the event came from a known bot.

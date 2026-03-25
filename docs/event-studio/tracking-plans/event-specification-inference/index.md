@@ -34,7 +34,7 @@ Before publishing completes, the Console checks whether all [data structures](/d
 
 ## Understand how inference works
 
-Once a specification is published, the pipeline evaluates every eligible incoming event against it. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/snowtype/index.md) already contain an `event_specification` entity, so the pipeline bypasses inference for them entirely. All other events are evaluated using the following criteria, in order:
+Once a specification is published, the pipeline evaluates every eligible incoming event against it. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/index.md) already contain an `event_specification` entity, so the pipeline bypasses inference for them entirely. All other events are evaluated using the following criteria, in order:
 
 1. **Event schema**: the event's schema must match the event data structure defined in the specification.
 2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification according to the cardinality rules. Extra entities with different schemas on the event are ignored.

@@ -11,7 +11,7 @@ import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenc
 <TrackingPlansNomenclature />
 
 :::info
-This page only summarizes the CLI commands and the options for each command. For details on which scenarios they can be used, you can go to the [Working with the CLI page](../using-the-cli/index.md).
+This page only summarizes the CLI commands and the options for each command. For details on which scenarios they can be used, you can go to the Working with the CLI page ADD LINK.
 :::
 
 ## Usage
@@ -26,8 +26,8 @@ Initialize the setup of Snowtype code generation in a project. Creates the confi
 
 **Options**
  -  `-i, --organizationId` Organization ID.
- -  `-t, --tracker` Tracker to use. [See available](../using-the-cli/index.md#available-trackerslanguages)
- -  `-l, --language` Language to use. [See available](../using-the-cli/index.md#available-trackerslanguages)
+ -  `-t, --tracker` Tracker to use. ADD LINK
+ -  `-l, --language` Language to use. ADD LINK
  -  `-o, --outpath` Output path.
 
 ### `snowtype generate`

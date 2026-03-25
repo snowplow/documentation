@@ -45,8 +45,8 @@ The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file a
 
 The properties are:
 * `organizationId`: your Snowplow account [organization ID](/docs/account-management/index.md). This is required to fetch event specifications and data structures from Console.
-* `tracker`: the Snowplow tracker you want to generate code for. This determines the structure of the generated code and which trackers it will work with. [See list of available trackers](../using-the-cli/index.md#available-trackerslanguages).
-* `language`: the programming language you want to generate code in. [See list of available languages](../using-the-cli/index.md#available-trackerslanguages).
+* `tracker`: the Snowplow tracker you want to generate code for. This determines the structure of the generated code and which trackers it will work with. See list of available trackers ADD LINK.
+* `language`: the programming language you want to generate code in. See list of available languages ADD LINK.
 * `outpath`: the output path where Snowtype should write the generated code, relative to the current working directory when running the script.
 * `dataProductIds`: an array of tracking plan IDs to generate code for.
 * `eventSpecificationIds`: an array of event specification IDs to generate code for.

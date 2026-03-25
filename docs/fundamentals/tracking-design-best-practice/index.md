@@ -120,7 +120,7 @@ This approach can be useful when:
 * **Analysis**: the actions are closely related and often analyzed together
 * **Simplicity**: you want to reduce the number of event schemas and columns in your data warehouse
 
-Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/tracking-plans/event-specifications/index.md#properties). Tools like [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) can also help simplify this complexity during implementation.
+Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/tracking-plans/event-specifications/index.md#properties). Tools like [Snowtype](/docs/event-studio/implement-tracking/index.md) can also help simplify this complexity during implementation.
 
 ### Approach 2: One event schema per action
 

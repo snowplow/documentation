@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
-Snowtype reads its settings from a configuration file in your project root. The file is created when you run [`snowtype init`](/docs/event-studio/implement-tracking/snowtype/get-started/index.md), and you can edit it directly at any time.
+Snowtype reads its settings from a configuration file in your project root. The file is created when you run [`snowtype init`](/docs/event-studio/implement-tracking/install-snowtype/index.md), and you can edit it directly at any time.
 
 <TrackingPlansNomenclature />
 
@@ -145,16 +145,16 @@ Each tracker supports one or more languages. Set `tracker` and `language` to a v
 
 ## Command options
 
-The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/snowtype/commands/index.md) for the equivalent flags.
+The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/commands/index.md) for the equivalent flags.
 
 ### `options.commands.generate`
 
-| Option                                | Type      | Default | Description                                                                                                                                                                          |
-| ------------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `instructions`                        | `boolean` | `false` | Generate a Markdown file with implementation instructions for each event specification. Equivalent to the `--instructions` flag.                                                     |
-| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/snowtype/client-side-validation/index.md) code in the output. Equivalent to the `--validations` flag. |
-| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment. Equivalent to the `--disallowDevSchemas` flag.                                                        |
-| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show deprecation warnings for schemas that have a newer version deployed to production. Equivalent to the `--deprecateOnlyOnProdAvailableUpdates` flag.                         |
+| Option                                | Type      | Default | Description                                                                                                                                                                 |
+| ------------------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `instructions`                        | `boolean` | `false` | Generate a Markdown file with implementation instructions for each event specification. Equivalent to the `--instructions` flag.                                            |
+| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) code in the output. Equivalent to the `--validations` flag. |
+| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment. Equivalent to the `--disallowDevSchemas` flag.                                               |
+| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show deprecation warnings for schemas that have a newer version deployed to production. Equivalent to the `--deprecateOnlyOnProdAvailableUpdates` flag.                |
 
 ```json title="Example"
 {

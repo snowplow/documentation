@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Once you have [installed and initialized Snowtype](/docs/event-studio/implement-tracking/snowtype/get-started/index.md), you can generate tracking code from the sources you configured ADD LINK.
+Once you have [installed and initialized Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md), you can generate tracking code from the sources you configured ADD LINK.
 
 TODO need event spec examples
 
@@ -46,7 +46,7 @@ For data structures and Iglu Central schemas, Snowtype generates two functions: 
 
 This example shows generated Browser tracker TypeScript code for the `web_page` schema from Iglu Central, and a custom `product` data structure. The inline comments are generated from the schema descriptions.
 
-To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-data-structures/index.md).
+To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/generate-tracking-code/example-data-structures/index.md).
 
 ```json title="snowtype.config.json"
 {
@@ -173,7 +173,7 @@ TODO name collisions
 
 This example shows generated Browser tracker TypeScript code for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user_authentication` and `user`.
 
-To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/example-event-specs/index.md).
+To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md).
 
 ```json title="snowtype.config.json"
 {

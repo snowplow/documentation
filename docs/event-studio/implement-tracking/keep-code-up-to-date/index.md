@@ -78,7 +78,7 @@ npx snowtype update --maximumBump=patch
 # Shows 1-0-1 only.
 ```
 
-You can also set this in your [configuration file](/docs/event-studio/implement-tracking/snowtype/snowtype-config/index.md) so it applies to every `update` run:
+You can also set this in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) so it applies to every `update` run:
 
 ```json title="snowtype.config.json"
 {
@@ -113,7 +113,7 @@ npx snowtype patch --igluCentralSchemas iglu:com.snowplowanalytics.snowplow/web_
 npx snowtype patch --repositories ./local-schemas
 ```
 
-The `patch` command updates your configuration file and, by default, regenerates your tracking code. You can disable automatic regeneration in your [configuration file](/docs/event-studio/implement-tracking/snowtype/snowtype-config/index.md) by setting `regenerateOnPatch` to `false`.
+The `patch` command updates your configuration file and, by default, regenerates your tracking code. You can disable automatic regeneration in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) by setting `regenerateOnPatch` to `false`.
 
 ## Clean up stale entries
 
@@ -134,7 +134,7 @@ You can run Snowtype in a CI/CD pipeline to catch outdated tracking code before 
 
 The `--yes` flag runs non-interactively, accepting all available updates and regenerating automatically.
 
-Combine this with [`--disallowDevSchemas`](/docs/event-studio/implement-tracking/snowtype/generate-tracking-code/index.md#prevent-generation-from-development-schemas) on the `generate` step to also prevent development-only schemas from reaching production:
+Combine this with [`--disallowDevSchemas`](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) on the `generate` step to also prevent development-only schemas from reaching production:
 
 ```bash
 npx snowtype update --yes

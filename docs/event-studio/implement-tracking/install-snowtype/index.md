@@ -96,12 +96,8 @@ npx snowtype init
 The command will prompt you for:
 
 - Your **organization ID** from Console
-- The **tracker** you want to generate code for (for example, `@snowplow/browser-tracker`)
-- The **language** for that tracker, if applicable (for example, `typescript`)
+- The **tracker** you want to generate code for, e.g. `@snowplow/browser-tracker`
+- The **language** for that tracker, if applicable, e.g. `typescript`
 - The **output path** where Snowtype should write the generated code
 
-Snowtype saves these choices to a `snowtype.config.json` file in your project root. You can edit this file directly later, or pass the values as flags to skip the prompts. See the configuration reference ADD LINK for all available options.
-
-:::tip
-If you use the Console, you can also find initialization commands on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md), pre-filled with the correct IDs. TODO move this
-:::
+Snowtype saves these choices to a `snowtype.config.json` file in your project root. You can edit this file directly later, or pass the values as flags to skip the prompts. See the [configuration reference](/docs/event-studio/implement-tracking/configuration-reference/index.md) for all available options.

@@ -7,6 +7,8 @@ keywords: ["Snowtype", "update", "lock file", "patch", "purge", "CI/CD", "schema
 date: "2026-03-23"
 ---
 
+TODO work through this page
+
 Schemas evolve over time. When an event specification or data structure gets a new version, your generated tracking code falls behind. Outdated code loses type safety and may send events that [fail validation](/docs/fundamentals/failed-events/index.md), because the generated types no longer match what the pipeline expects.
 
 Snowtype provides commands to check for updates, apply them selectively, and keep your configuration clean.

@@ -1,5 +1,5 @@
 ---
-title: "Implement tracking in your applications"
+title: "Implement tracking with Snowtype"
 sidebar_label: "Implement tracking"
 sidebar_position: 44
 description: "Generate and implement tracking code from your event specifications using Snowtype, Console code snippets, or manual SDK integration."
@@ -18,27 +18,23 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 Once you've defined your [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md), the next step is implementing the tracking code in your applications.
 
-The best way to implement tracking is to use our CLI code generation tool, Snowtype. Snowtype reads your [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) and [data structures](/docs/event-studio/data-structures/index.md) from your Snowplow account, and generates type-safe tracking code for the language and tracker you specify.
+The best way to implement tracking is to use our CLI code generation tool, **Snowtype**. Snowtype reads your [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) and [data structures](/docs/event-studio/data-structures/index.md) from your Snowplow account, and generates type-safe tracking code for the language and tracker you specify.
 
 This provides several key advantages over manual implementation:
 * Quicker implementation: reduce the work needed to produce production-ready tracking code
 * Type safety: ensure your tracking code is consistent with your schemas and catch errors before they reach your pipeline
-* Workflow integration: use CI/CD GitOps-like processes to keep your tracking code in sync with your schemas
+* Workflow integration: use CI/CD GitOps-like processes to [keep your tracking code in sync](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md) with your schemas
 
-For custom tracking on web, you also have the option of using the ready-to-use event specification code snippets from [Console](https://console.snowplowanalytics.com). See below for details.
+For custom tracking on web, you also have the option of using the ready-to-use event specification code snippets in [Console](https://console.snowplowanalytics.com), with or without Snowtype. See below for details.
 
 ## Snowtype workflow
 
 The workflow for using Snowtype is:
 
 1. **Define** your events and entities in [Console](https://console.snowplowanalytics.com) or [programmatically](/docs/event-studio/programmatic-management/index.md).
-2. **Generate** tracking code by running Snowtype in your project. It produces typed functions you call instead of constructing event payloads manually.
+2. **Generate** tracking code by [running Snowtype](/docs/event-studio/implement-tracking/generate-tracking-code/index.md) in your project. It produces typed functions you call instead of constructing event payloads manually.
 3. **Track** events using the generated functions in your application code.
-4. **Update** when schemas change. Snowtype can detect new versions and regenerate your code.
-
-You can run Snowtype from the command line, or you can find its output in the Console on the **Implementation** tab of any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md).
-
-ADD LINKs throughout this page
+4. **Update** when schemas change. Snowtype can [detect new versions](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md) and regenerate your code.
 
 ## Supported trackers
 
@@ -57,6 +53,7 @@ Snowtype generates code for the following Snowplow trackers:
 | [Java](/docs/sources/java-tracker/index.md)                     | Java                   |
 | [Google Tag Manager](/docs/sources/google-tag-manager/index.md) | JavaScript             |
 
+Check out the generated code examples for [data structures](/docs/event-studio/implement-tracking/generate-tracking-code/example-data-structures/index.md) and [event specifications](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md) for each language to see how Snowtype integrates with each tracker.
 
 ## Console code snippets
 
@@ -107,6 +104,6 @@ window.snowplow("trackSelfDescribingEvent", {
 });
 ```
 
-Use the **Show Snowtype code** toggle to display the specific Snowtype function name to call for tracking implementation. TODO this needs to go somewhere else
+Use the **Show Snowtype code** toggle to display the specific Snowtype function name to call in your tracking implementation. Note that it relies on you having generated the required Snowtype code in your project.
 
 ![Show snowtype code](images/show-snowtype-code.png)

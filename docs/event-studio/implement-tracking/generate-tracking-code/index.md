@@ -11,9 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Once you have [installed and initialized Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md), you can generate tracking code from the sources you configured ADD LINK.
-
-TODO need event spec examples
+Once you've [installed and initialized Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md), you can generate tracking code from the [sources you configured](/docs/event-studio/implement-tracking/snowtype-config/index.md).
 
 To generate tracking code, run:
 
@@ -28,17 +26,11 @@ When you run `snowtype generate`, Snowtype will produce a single output file, at
 
 Snowtype will generate code for you to track all schemas as either a self-describing event or entity, regardless of how you've defined your data structures in Console.
 
-The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This pins the schema versions used for generation, so subsequent runs produce consistent output. To check for newer schema versions, use `snowtype update` ADD LINK.
+The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This pins the schema versions used for generation, so subsequent runs produce consistent output. To check for newer schema versions, [use `snowtype update`](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md).
 
 The generated code isn't minified and includes inline documentation. You can modify it to suit your project, but any changes will be overwritten the next time you run `generate`.
 
 The code expects the relevant [Snowplow tracker](/docs/sources/index.md) to already be installed in your project. Snowtype doesn't install trackers for you.
-
-:::tip Generated code in Console
-In Console, the **Implementation** tab on any event specification shows the same generated code that Snowtype produces. You can toggle between languages and copy the code directly, which is useful for quick reference, or if you want to review the output before generating locally.
-
-TODO move this all up a section and merge the Console code snippets?
-:::
 
 ## Data structures
 
@@ -166,10 +158,7 @@ For event specifications, which have more requirements and metadata than data st
 
 Along with the self-describing event and entity functions for each schema, it also produces a function to track the event according to the instructions defined in the specification. This includes any required entities, as well as an event specification entity that links this event to its tracking plan.
 
-
-If an event specification includes [instructions](/docs/event-studio/tracking-plans/event-specifications/index.md), Snowtype will generate a type that reflects the adjusted schema, with the event specification name as a suffix to avoid naming conflicts. TODO huh?
-
-TODO name collisions
+<!-- TODO name collisions - which languages have a problem with this? -->
 
 This example shows generated Browser tracker TypeScript code for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user_authentication` and `user`.
 
@@ -435,7 +424,7 @@ If you generate code for multiple event specifications, the instructions for eac
 
 This example shows the generated instruction file for a `User Log In` event specification:
 
-TODO add the actual example without the autoformatted tables
+<!-- TODO add the actual example without the autoformatted tables, spacing is weird when rendered now -->
 
 ```markdown
 # Implementation instructions
@@ -503,13 +492,11 @@ This is especially useful in CI/CD pipelines where you want to catch the problem
 
 How to implement the generated code depends on the tracker and language you're using.
 
-This example demonstrates how to use Snowtype's generated code for the Browser tracker, based on the example generated code above.
+This example demonstrates how to use Snowtype's generated code for the Browser tracker, based on the generated code shown above.
 
-TODO add event spec example
+Check out the full [data structures](/docs/event-studio/implement-tracking/generate-tracking-code/example-data-structures/index.md) and [event specifications](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md) example pages for different languages and trackers.
 
-Check out the full examples pages TODO ADD LINK for more examples in different languages and trackers.
-
-```tsx
+```typescript
 import {
   trackWebPage,
   createProduct,
@@ -541,5 +528,30 @@ const webPage = createWebPage({
 trackWebPage<Product | WebPage>({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
   context: [product, webPage],
+});
+```
+
+```typescript
+import {
+  trackUserLogInSpec,
+  createUser,
+  createUserAuthentication,
+} from "./src/tracking/snowplow";
+
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
+});
+
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec({
+  method: "google",
+  is_success: true,
+  context: [user, userAuth],
 });
 ```

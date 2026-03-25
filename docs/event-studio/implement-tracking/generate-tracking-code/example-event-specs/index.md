@@ -9,7 +9,7 @@ date: "2026-03-19"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The following examples show the Snowtype configuration file and generated output for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user` and `user_authentication`.
+The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) and generated output for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user` and `user_authentication`.
 
 The `tracker` and `language` fields in your configuration determine the language and structure of the output.
 
@@ -27,7 +27,7 @@ These are the example schemas:
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snplow.msc.aws", "name": "user_authentication", "format": "jsonschema", "version": "1-0-0" }, "description": "Data structure that defines how the user logged in", "properties": { "auth_type": { "type": "string", "enum": ["google", "facebook", "manual"], "description": "Type of authentication used" } }, "required": ["auth_type"], "additionalProperties": false }}
 />
 
-<!-- TODO add event spec example screenshot -->
+![Console screenshot showing the example event specification](../images/example_event_spec_full.png)
 
 ## Web trackers
 
@@ -3308,7 +3308,7 @@ tracker.track(Snowtype.userLogInSpec(login, user, userAuth));
 
 ## Google Tag Manager (JavaScript)
 
-Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM Custom JavaScript Variable ADD LINK.
+Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM [Custom JavaScript Variable](/docs/event-studio/implement-tracking/working-with-gtm/index.md).
 
 Snowtype will also generate a minified version.
 

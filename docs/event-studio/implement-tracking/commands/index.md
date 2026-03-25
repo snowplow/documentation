@@ -6,6 +6,8 @@ description: "Summary of Snowtype CLI commands and options for code generation, 
 keywords: ["Snowtype commands", "CLI reference", "command options", "Snowtype CLI"]
 ---
 
+TODO regenerate this page
+
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
 <TrackingPlansNomenclature />

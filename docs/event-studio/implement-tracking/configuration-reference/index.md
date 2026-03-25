@@ -13,14 +13,13 @@ import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenc
 
 Snowtype reads its settings from a configuration file in your project root. The file is created when you run [`snowtype init`](/docs/event-studio/implement-tracking/install-snowtype/index.md), and you can edit it directly at any time.
 
+Keep the configuration file in the root of your project, and include it in your version control system.
+
 <TrackingPlansNomenclature />
 
-## Config file formats
+## Configuration file structure
 
-The configuration file can be JSON, JavaScript, or TypeScript. The file name must start with `snowtype.config` — for example, `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts`.
-
-<Tabs groupId="config" queryString>
-  <TabItem value="json" label="JSON" default>
+The configuration file is a JSON object with the following structure:
 
 ```json title="snowtype.config.json"
 {
@@ -40,11 +39,47 @@ The configuration file can be JSON, JavaScript, or TypeScript. The file name mus
     "igluCentralSchemas": [
         "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
     ],
-    "repositories": ["../data-structures"]
+    "repositories": ["../data-structures"],
+    "namespace": "Snowtype",
+    "options": {
+        "commands": {
+            "generate": {
+                "instructions": true,
+                "validations": true,
+                "disallowDevSchemas": true
+            },
+            "update": {
+                "maximumBump": "minor",
+                "showOnlyProdUpdates": true
+            },
+            "patch": {
+                "regenerateOnPatch": false
+            }
+        }
+    }
 }
 ```
 
-  </TabItem>
+| Property                | Type       | Description                                                                                                                                                                                                                           | Required |
+| ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `organizationId`        | `string`   | Your Snowplow account [organization ID](/docs/account-management/index.md). Used to fetch tracking plans, event specifications, or data structures from Console. Not required if you're only generating code from a local repository. | ✅/❌      |
+| `tracker`               | `string`   | The Snowplow tracker to generate code for. This determines the structure of the generated code and which tracker it will work with.                                                                                                   | ✅        |
+| `language`              | `string`   | The programming language to generate code in.                                                                                                                                                                                         | ✅        |
+| `outpath`               | `string`   | The output path where Snowtype writes the generated code, relative to the current working directory when running the script.                                                                                                          | ✅        |
+| `dataProductIds`        | `string[]` | An array of [tracking plan](/docs/event-studio/tracking-plans/index.md) IDs to generate code for.                                                                                                                                     | ❌        |
+| `eventSpecificationIds` | `string[]` | An array of [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) IDs to generate code for.                                                                                                          | ❌        |
+| `dataStructures`        | `string[]` | An array of schema URIs for [data structures](/docs/fundamentals/schemas/index.md) published in Console to generate code for.                                                                                                         | ❌        |
+| `igluCentralSchemas`    | `string[]` | An array of schema URIs for [Iglu Central](https://iglucentral.com/) schemas to generate code for.                                                                                                                                    | ❌        |
+| `repositories`          | `string[]` | An array of paths to local [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md) schema repositories to generate code for.                                                                 | ❌        |
+| `namespace`             | `string`   | Swift tracker only: a namespace prefix for the generated code. For other trackers it will trigger an error.                                                                                                                           | ❌        |
+| `options`               | `object`   | Additional settings related to Snowtype behavior. See details below.                                                                                                                                                                  | ❌        |
+
+### File formats
+
+Snowtype automatically creates the configuration file in JSON format, but you can also use JavaScript or TypeScript if you prefer. The filename must start with `snowtype.config` — for example, `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts`.
+
+
+<Tabs groupId="config" queryString>
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript title="snowtype.config.js"
@@ -65,7 +100,24 @@ const config = {
     "igluCentralSchemas": [
         "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
     ],
-    "repositories": ["../data-structures"]
+    "repositories": ["../data-structures"],
+    "namespace": "Snowtype",
+    "options": {
+        "commands": {
+            "generate": {
+                "instructions": true,
+                "validations": true,
+                "disallowDevSchemas": true
+            },
+            "update": {
+                "maximumBump": "minor",
+                "showOnlyProdUpdates": true
+            },
+            "patch": {
+                "regenerateOnPatch": false
+            }
+        }
+    }
 };
 
 module.exports = config;
@@ -92,7 +144,24 @@ const config = {
     igluCentralSchemas: [
         "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
     ],
-    repositories: ["../data-structures"]
+    repositories: ["../data-structures"],
+    namespace: "Snowtype",
+    options: {
+        commands: {
+            generate: {
+                instructions: true,
+                validations: true,
+                disallowDevSchemas: true
+            },
+            update: {
+                maximumBump: "minor",
+                showOnlyProdUpdates: true
+            },
+            patch: {
+                regenerateOnPatch: false
+            }
+        }
+    }
 };
 
 export default config;
@@ -101,60 +170,41 @@ export default config;
   </TabItem>
 </Tabs>
 
-:::note
-Keep the configuration file in the root of your project. CLI flags take precedence over values set in the configuration file.
-:::
+## Supported trackers and languages
 
-## Configuration attributes
+Set `tracker` and `language` to a valid combination from this table:
 
-### Required attributes
-
-| Attribute  | Type     | Description                                                                                                                                        |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracker`  | `string` | The Snowplow tracker to generate code for. Determines the structure of the output. See [supported trackers](#supported-trackers).                  |
-| `language` | `string` | The programming language for the generated code. Must be a valid language for the selected tracker. See [supported trackers](#supported-trackers). |
-| `outpath`  | `string` | The output path for the generated code file, relative to the working directory when you run the command.                                           |
-
-### Optional attributes
-
-| Attribute               | Type       | Description                                                                                                                                                                           |
-| ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `organizationId`        | `string`   | Your Snowplow [organization ID](/docs/account-management/index.md). Required when generating code from event specifications, tracking plans, or data structures published in Console. |
-| `eventSpecificationIds` | `string[]` | An array of [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) IDs to generate code for.                                                          |
-| `dataProductIds`        | `string[]` | An array of [tracking plan](/docs/event-studio/tracking-plans/index.md) IDs. Generates code for all event specifications in each tracking plan.                                       |
-| `dataStructures`        | `string[]` | An array of Iglu schema URIs for [data structures](/docs/fundamentals/schemas/index.md) published in Console (for example, `iglu:com.example/my_event/jsonschema/1-0-0`).             |
-| `igluCentralSchemas`    | `string[]` | An array of Iglu schema URIs for schemas hosted on [Iglu Central](https://iglucentral.com/) (for example, `iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0`).           |
-| `repositories`          | `string[]` | An array of paths to local schema repositories managed with [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md).                         |
-| `namespace`             | `string`   | A namespace prefix for the generated code. Only applies to the Swift tracker. See [namespace](#namespace).                                                                            |
-
-### Supported trackers
-
-Each tracker supports one or more languages. Set `tracker` and `language` to a valid combination from this table:
-
-| Tracker                          | Language(s)                |
-| -------------------------------- | -------------------------- |
-| `@snowplow/browser-tracker`      | `javascript`, `typescript` |
-| `@snowplow/node-tracker`         | `javascript`, `typescript` |
-| `@snowplow/react-native-tracker` | `typescript`               |
-| `@snowplow/javascript-tracker`   | `javascript`               |
-| `snowplow-golang-tracker`        | `go`                       |
-| `snowplow-ios-tracker`           | `swift`                    |
-| `snowplow-android-tracker`       | `kotlin`                   |
-| `snowplow-flutter-tracker`       | `dart`                     |
-| `snowplow-java-tracker`          | `java`                     |
+| Tracker                                                         | `tracker`                        | `language`                 |
+| --------------------------------------------------------------- | -------------------------------- | -------------------------- |
+| [Browser](/docs/sources/web-trackers/index.md)                  | `@snowplow/browser-tracker`      | `javascript`, `typescript` |
+| [JavaScript](/docs/sources/web-trackers/index.md)               | `@snowplow/javascript-tracker`   | `javascript`               |
+| [iOS](/docs/sources/mobile-trackers/index.md)                   | `snowplow-ios-tracker`           | `swift`                    |
+| [Android](/docs/sources/mobile-trackers/index.md)               | `snowplow-android-tracker`       | `kotlin`                   |
+| [React Native](/docs/sources/react-native-tracker/index.md)     | `@snowplow/react-native-tracker` | `typescript`               |
+| [Flutter](/docs/sources/flutter-tracker/index.md)               | `snowplow-flutter-tracker`       | `dart`                     |
+| [Node.js](/docs/sources/node-js-tracker/index.md)               | `@snowplow/node-tracker`         | `javascript`, `typescript` |
+| [Go](/docs/sources/golang-tracker/index.md)                     | `snowplow-golang-tracker`        | `go`                       |
+| [Java](/docs/sources/java-tracker/index.md)                     | `snowplow-java-tracker`          | `java`                     |
+| [Google Tag Manager](/docs/sources/google-tag-manager/index.md) | `google-tag-manager`             | `javascript-gtm`           |
 
 ## Command options
 
-The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/commands/index.md) for the equivalent flags.
+The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/commands/index.md) for more details on the flags.
 
-### `options.commands.generate`
+:::note Flag priority
+CLI flags take precedence over values set in the configuration file.
+:::
 
-| Option                                | Type      | Default | Description                                                                                                                                                                 |
-| ------------------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `instructions`                        | `boolean` | `false` | Generate a Markdown file with implementation instructions for each event specification. Equivalent to the `--instructions` flag.                                            |
-| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) code in the output. Equivalent to the `--validations` flag. |
-| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment. Equivalent to the `--disallowDevSchemas` flag.                                               |
-| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show deprecation warnings for schemas that have a newer version deployed to production. Equivalent to the `--deprecateOnlyOnProdAvailableUpdates` flag.                |
+### `generate`
+
+The `generate` options apply when running `snowtype generate`, which creates the initial code based on your configuration and schemas.
+
+| Option                                | Type      | Default | Description                                                                                                                        | Equivalent flag                         |
+| ------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `instructions`                        | `boolean` | `false` | Generate a Markdown file with implementation instructions for each event specification                                             | `--instructions`                        |
+| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) code in the output | `--validations`                         |
+| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment                                                      | `--disallowDevSchemas`                  |
+| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show deprecation warnings for schemas that have a newer version deployed to production                                        | `--deprecateOnlyOnProdAvailableUpdates` |
 
 ```json title="Example"
 {
@@ -170,7 +220,9 @@ The `options` object configures the behavior of specific Snowtype commands. You 
 }
 ```
 
-### `options.commands.update`
+### `update`
+
+The `update` options apply when running `snowtype update`, which checks for new schema versions and regenerates code if needed.
 
 | Option                | Type                                | Default   | Description                                                                                                                                                              |
 | --------------------- | ----------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -191,7 +243,9 @@ The `options` object configures the behavior of specific Snowtype commands. You 
 }
 ```
 
-### `options.commands.patch`
+### `patch`
+
+The `patch` option applies when running `snowtype patch`, which adds new sources to your configuration file and optionally regenerates code.
 
 | Option              | Type      | Default | Description                                                                   |
 | ------------------- | --------- | ------- | ----------------------------------------------------------------------------- |
@@ -209,7 +263,7 @@ The `options` object configures the behavior of specific Snowtype commands. You 
 }
 ```
 
-## Namespace
+## Swift namespace
 
 The `namespace` option applies only when generating Swift code. It adds a prefix to all generated classes, which helps avoid naming conflicts in your project.
 
@@ -219,12 +273,12 @@ For example, setting `namespace` to `"Snowtype"`:
 {
     "tracker": "snowplow-ios-tracker",
     "language": "swift",
-    "namespace": "Snowtype",
-    "outpath": "./Sources/Tracking"
+    "outpath": "./Sources/Tracking",
+    "namespace": "Snowtype"
 }
 ```
 
-Results in classes accessed with the `Snowtype` prefix:
+This results in classes accessed with the `Snowtype` prefix:
 
 ```swift
 let data = Snowtype.AccountConfirmed(
@@ -232,6 +286,8 @@ let data = Snowtype.AccountConfirmed(
     companyName: "Acme Corp"
 )
 ```
+
+Setting a `namespace` when generating code for a non-Swift tracker will trigger an error.
 
 ## Full configuration type
 

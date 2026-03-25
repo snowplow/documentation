@@ -9,7 +9,7 @@ date: "2026-03-19"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The following examples show the Snowtype configuration file and generated output for the [Iglu Central](https://iglucentral.com) schema `web_page`, and a custom data structure, `product`. The `tracker` and `language` fields in your configuration determine the language and structure of the output.
+The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) and generated output for the [Iglu Central](https://iglucentral.com) schema `web_page`, and a custom data structure, `product`. The `tracker` and `language` fields in your configuration determine the language and structure of the output.
 
 These are the example schemas:
 
@@ -2027,7 +2027,7 @@ tracker.track(event);
 
 ## Google Tag Manager (JavaScript)
 
-Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM Custom JavaScript Variable ADD LINK.
+Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM [Custom JavaScript Variable](/docs/event-studio/implement-tracking/working-with-gtm/index.md).
 
 Snowtype will also generate a minified version.
 

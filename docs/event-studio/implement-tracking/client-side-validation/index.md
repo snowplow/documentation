@@ -1,10 +1,12 @@
 ---
 title: "Client-side schema validation with Snowtype"
-sidebar_label: "Client-side validation"
+sidebar_label: "Client-side validation for web"
 sidebar_position: 4
 description: "Enable real-time schema validation in the browser for JavaScript and TypeScript trackers to catch tracking errors before events are sent."
 keywords: ["client-side validation", "browser validation", "schema validation", "JavaScript validation", "TypeScript validation"]
 ---
+
+TODO regenerate this page
 
 :::info
 This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.

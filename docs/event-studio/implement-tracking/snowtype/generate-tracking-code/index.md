@@ -371,7 +371,7 @@ export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp<User |
 
 ### Event specification entity
 
-TODO
+Code generated for event specifications includes an entity that allows you to link the tracked event to its event specification and tracking plan.
 
 <SchemaProperties
   overview={{entity: true}}
@@ -385,12 +385,9 @@ TODO
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity schema for referencing an event specification", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "event_specification", "format": "jsonschema", "version": "1-0-4" }, "type": "object", "properties": { "id": { "description": "Identifier for the event specification that the event adheres to", "type": "string", "maxLength": 254, "minLength": 1 }, "name": { "description": "Name for the event specification that the event adheres to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_id": { "description": "Identifier for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_name": { "description": "Name for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_domain": { "description": "Domain for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "version": { "description": "Version of the event specification that the event adheres to", "type": ["integer", "null"], "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "required": ["id"] }} />
 
-
-
 ## Markdown instructions
 
 When generating code for event specifications, you can also produce a Markdown file containing the implementation instructions defined for each specification. This can be useful for sharing implementation requirements with developers who may not have access to Console.
-
 
 Use the `--instructions` flag:
 
@@ -399,15 +396,65 @@ npx snowtype generate --instructions
 ```
 
 The generated Markdown includes:
-
 - Trigger descriptions
 - Implementation rules
 - Images uploaded on your event specification triggers
 - App identifiers and URLs where the event should fire
 - Links to the generated code for each event specification
 
-TODO add example
+If you generate code for multiple event specifications, the instructions for each will be included in the same file, separated by headings.
 
+This example shows the generated instruction file for a `User Log In` event specification:
+
+```
+# Implementation instructions
+
+_A guide on how to implement tracking for the generated Event Specifications._
+
+**Table of contents:**
+- [User Log In](#user-log-in)
+
+
+## [User Log In](https://console.snowplowanalytics.com/177234df-d425-412e-ad8d-8b97515b2807/data-products/57471841-aa79-445d-b4f7-1cbd073a3188/event-specifications/a965caf1-88a6-4a89-9aea-cc92516a9d56)
+
+|                            |                                       |
+| -------------------------- | ------------------------------------- |
+| **Id**                     | a965caf1-88a6-4a89-9aea-cc92516a9d56  |
+| **Version**                | 8                                     |
+| **Data Product Id**        | 57471841-aa79-445d-b4f7-1cbd073a3188  |
+| **Source Application/s**   | None selected                         |
+| **Event Data Structure**   | login/1-0-0                           |
+| **Entity Data Structures** | user/1-0-1, user_authentication/1-0-0 |
+| **Code**                   | [Link](./snowplow.ts#L185)            |
+| **Data Product Domain**    | Marketing                             |
+
+
+
+#### Entity Cardinality Rules
+| Name                | Required | Number of entities  |
+| ------------------- | -------- | ------------------- |
+| user                | ❌        | Between `0` and `1` |
+| user_authentication | ✅        | Exactly `1`         |
+
+
+
+### Trigger
+
+#### Screenshot
+_N/A_
+
+#### In which application(s) does this trigger apply?
+
+_N/A_
+
+#### The URL of the page on which this event specification triggers:
+
+_N/A_
+
+#### Notes
+
+Track this when the user clicks the Log in button on the log in form/selection modal
+```
 
 ## Prevent generation from development schemas
 

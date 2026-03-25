@@ -215,14 +215,43 @@ export type Login = {
  * A subset of the user fields from the users-service
  */
 export type User = {
-    firstName:      string;
-    lastName:       string;
+    /**
+     * The users access level.
+     */
+    accessLevel?: AccessLevel;
+    /**
+     * The users email address.
+     */
+    email?: null | string;
+    /**
+     * The users first name.
+     */
+    firstName: string;
+    /**
+     * The users job title.
+     */
+    jobTitle?: null | string;
+    /**
+     * The users last name.
+     */
+    lastName: string;
+    /**
+     * The organization's UUID that the user belongs to.
+     */
     organizationId: string;
-    userId:         string;
+    /**
+     * The users UUID.
+     */
+    userId: string;
 }
 
 /**
- * Data structure that defines how user logged in
+ * The users access level.
+ */
+export type AccessLevel = "Admin" | "User" | "Custom";
+
+/**
+ * Data structure that defines how the user logged in
  */
 export type UserAuthentication = {
     /**
@@ -316,7 +345,7 @@ export function createUser(user: User){
 }
 /**
  * Track a Snowplow event for UserAuthentication.
- * Data structure that defines how user logged in
+ * Data structure that defines how the user logged in
  */
 export function trackUserAuthentication<T extends {} = any>(userAuthentication: UserAuthentication & ContextsOrTimestamp<T>, trackers?: string[]){
     const { context, timestamp, ...data } = userAuthentication;
@@ -349,7 +378,7 @@ export function createUserAuthentication(userAuthentication: UserAuthentication)
 export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp<User | UserAuthentication>, trackers?: string[]){
     const eventSpecificationContext = createEventSpecification({
         id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
-        version: 6,
+        version: 8,
         name: 'User Log In',
         data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
         data_product_name: 'Checkout Flow',
@@ -406,7 +435,9 @@ If you generate code for multiple event specifications, the instructions for eac
 
 This example shows the generated instruction file for a `User Log In` event specification:
 
-```
+TODO add the actual example without the autoformatted tables
+
+```markdown
 # Implementation instructions
 
 _A guide on how to implement tracking for the generated Event Specifications._

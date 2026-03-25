@@ -1805,8 +1805,8 @@ pre.mermaid {
 
 /* TOC: preserve custom font-size and padding */
 .table-of-contents__link {
-  font-size: 0.875rem !important;     /* 14px */
-  padding: 4px 12px !important;
+  font-size: 0.875rem !important; /* 14px */
+  padding: 4px 8px !important;
 }
 
 /* Sidenav: preserve custom link padding */

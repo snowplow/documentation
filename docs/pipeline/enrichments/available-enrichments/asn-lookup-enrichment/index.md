@@ -96,7 +96,7 @@ You can use the community-maintained [cpuchain/bad-asn-list](https://github.com/
 
 :::tip Snowplow CDI
 
-If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URL in the default enrichment configuration in Console.
+If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI of that list in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 
 :::
 

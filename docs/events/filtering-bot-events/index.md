@@ -21,7 +21,7 @@ Each enrichment attaches information to the event that you can use for filtering
 
 :::note Anonymous tracking
 
-Events tracked with [server-side anonymization](../anonymous-tracking/index.md#server-side-anonymization) lack IP address data. As such, bot detection based on IP addresses will not be effective for these events. This includes the ASN lookup enrichment and the  IP-related check in the IAB enrichment.
+Events tracked with [server-side anonymization](/docs/events/anonymous-tracking/index.md#server-side-anonymization) lack IP address data. As such, bot detection based on IP addresses will not be effective for these events. This includes the ASN lookup enrichment and the IP-related check in the IAB enrichment.
 
 :::
 
@@ -45,7 +45,7 @@ The [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn
 
 :::tip Prerequisites
 
-For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure either its `asn` or `isp`, as this is what will generate the initial ASN entity.
+For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure either its `asn` or `isp`, as this is what will generate the initial [ASN entity](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md#asn-data).
 
 :::
 

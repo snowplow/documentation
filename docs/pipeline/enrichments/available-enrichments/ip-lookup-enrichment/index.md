@@ -38,7 +38,7 @@ You need to decide which of the different Maxmind databases listed above you wis
 
 If you use Snowplow CDI, the free-tier MaxMind database files are already provided and updated by Snowplow, so you don't need this step.
 
-You can see the pre-configured URLs in the default enrichment configuration in Console.
+There is a pre-configured URI for the directory containing these files. You can find it in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 
 :::
 
@@ -88,7 +88,7 @@ Allowed database filenames are as follows. If the file name you provide is not o
 
 For a full reference of the options, see the [configuration schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1).
 
-## Configuration examples
+## Example configurations
 
 Note that you will need to change the `uri` values in these examples:
 * If you are using Snowplow CDI and the free MaxMind databases, use the same default value you can see in Console for all `uri` fields (whether `geo`, `asn`, etc).
@@ -152,33 +152,19 @@ You can remove the configuration keys for the databases you don't wish to use.
 
 ## Output
 
-This enrichment populates atomic table fields prefixed with `geo_` and `ip_` [seen here](https://github.com/snowplow/iglu-central/blob/8ff48b2485b3c95447e38a9bb925ef3f5266112c/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0#L82).
+This enrichment populates [atomic table fields prefixed with `geo_` and `ip_`](/docs/fundamentals/canonical-event/index.md#ip-address-fields).
 
-| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      | SOURCE DATABASE  |
-| ----------------- | ------------- | ------------------------------------------------------------ | ---------------- |
-| `geo_country`     | GB            | Country of IP origin                                         | `geo`            |
-| `geo_region`      | ENG           | Region of IP origin                                          | `geo`            |
-| `geo_city`        | London        | City of IP origin                                            | `geo`            |
-| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               | `geo`            |
-| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        | `geo`            |
-| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       | `geo`            |
-| `geo_region_name` | England       | Region of IP origin                                          | `geo`            |
-| `geo_timezone`    | Europe/London | Timezone of IP origin                                        | `geo`            |
-| `ip_isp`          | AT&T Services | ISP name                                                     | `isp`            |
-| `ip_organization` | AT&T Services | Organization name for larger networks                        | `isp`            |
-| `ip_domain`       | att.net       | Second level domain name                                     | `domain`         |
-| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) | `connectionType` |
+### ASN data
 
+Starting with Enrich 6.7.0, the enrichment supports ASN information, which is useful for detecting bot traffic coming from cloud computing providers. To enable this, you need to provide either the ISP or the free ASN database through the `isp` or `asn` setting respectively.
 
-Starting with Enrich 6.7.0, this enrichment supports ASN information, which is useful for detecting bot traffic coming from cloud computing providers.
+If ASN data is available for a given IP address, the enrichment adds a derived entity to the enriched event with [the `asn` schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-1).
 
-If ASN data is available for a given IP address through one of the supplied databases (either ISP or the free ASN database), the enrichment adds a derived entity to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0).
-
-Here is an example of a derived entity attached by this enrichment:
+Here is an example of an entity attached by this enrichment:
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-1",
     "data": {
         "number": 16509,
         "organization": "Amazon.com, Inc."

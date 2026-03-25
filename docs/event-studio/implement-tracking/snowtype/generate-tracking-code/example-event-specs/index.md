@@ -295,12 +295,7 @@ Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in
   "tracker": "@snowplow/browser-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 
@@ -342,47 +337,77 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
  */
 
 /**
- * Schema for a web page
- * @typedef {object} WebPage
- * @property {string} id The page view ID.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ * @typedef {object} Login
+ * @property {string} method The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+ * @property {?string} [error_code] An optional error code if the login attempt failed (e.g., 'invalid_password', 'user_not_found').
+ * @property {boolean} is_success Whether the login attempt was successful.
  */
 
 
 /**
- * Typedef for a WebPage entity context.
- * @typedef {object} WebPageContext
+ * Typedef for a Login entity context.
+ * @typedef {object} LoginContext
  * @property {string} schema The schema of the context.
- * @property { WebPage } data The data to send for the context.
+ * @property { Login } data The data to send for the context.
  */
 
 /**
- * Schema for a product entity
- * @typedef {object} Product
- * @property {string} category The product category.
- * @property {string} currency The currency the product is listed in.
- * @property {string} id The product ID (SKU).
- * @property {string} name The product name.
- * @property {number} price The price of the product.
+ * A subset of the user fields from the tenants-service
+ * @typedef {object} User
+ * @property {string} userId The users UUID.
+ * @property {string} firstName The users first name.
+ * @property {string} lastName The users last name.
+ * @property {string} organizationId The organization's UUID that the user belongs to.
+ * @property {?string} [email] The users email address.
+ * @property {?string} [jobTitle] The users job title.
+ * @property {"Admin"|"User"|"Custom"|null} [accessLevel] The users access level.
  */
 
 
 /**
- * Typedef for a Product entity context.
- * @typedef {object} ProductContext
+ * Typedef for a User entity context.
+ * @typedef {object} UserContext
  * @property {string} schema The schema of the context.
- * @property { Product } data The data to send for the context.
+ * @property { User } data The data to send for the context.
  */
 
 /**
- * Track a Snowplow event for WebPage.
- * Schema for a web page
- * @param { WebPage & Timestamp & Context } webPage - Attributes for WebPage.
+ * Data structure that defines how user signed-up / logged in
+ * @typedef {object} UserAuthentication
+ * @property {"google"|"facebook"|"manual"} auth_type Type of authentication used
+ */
+
+
+/**
+ * Typedef for a UserAuthentication entity context.
+ * @typedef {object} UserAuthenticationContext
+ * @property {string} schema The schema of the context.
+ * @property { UserAuthentication } data The data to send for the context.
+ */
+
+/**
+ * Creates a Snowplow Event Specification entity.
+ */
+export function createEventSpecification(eventSpecification){
+    return {
+        schema:
+            'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4',
+        data: eventSpecification,
+    }
+}
+
+
+/**
+ * Track a Snowplow event for Login.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ * @param { Login & Timestamp & Context } login - Attributes for Login.
  * @param {string[]} [trackers] - Tracker names to send the event to.
  */
-export function trackWebPage(webPage, trackers){
-    const { context, timestamp, ...data } = webPage;
+export function trackLogin(login, trackers){
+    const { context, timestamp, ...data } = login;
     const event = {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
         data
     };
 
@@ -394,25 +419,25 @@ export function trackWebPage(webPage, trackers){
 }
 
 /**
- * Creates a Snowplow WebPage entity.
- * @param { WebPage } webPage - Attributes for WebPage.
+ * Creates a Snowplow Login entity.
+ * @param { Login } login - Attributes for Login.
  */
-export function createWebPage(webPage){
+export function createLogin(login){
     return {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-        data: webPage
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
+        data: login
     }
 }
 /**
- * Track a Snowplow event for Product.
- * Schema for a product entity
- * @param { Product & Timestamp & Context } product - Attributes for Product.
+ * Track a Snowplow event for User.
+ * A subset of the user fields from the tenants-service
+ * @param { User & Timestamp & Context } user - Attributes for User.
  * @param {string[]} [trackers] - Tracker names to send the event to.
  */
-export function trackProduct(product, trackers){
-    const { context, timestamp, ...data } = product;
+export function trackUser(user, trackers){
+    const { context, timestamp, ...data } = user;
     const event = {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
         data
     };
 
@@ -424,14 +449,78 @@ export function trackProduct(product, trackers){
 }
 
 /**
- * Creates a Snowplow Product entity.
- * @param { Product } product - Attributes for Product.
+ * Creates a Snowplow User entity.
+ * @param { User } user - Attributes for User.
  */
-export function createProduct(product){
+export function createUser(user){
     return {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
-        data: product
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
+        data: user
     }
+}
+/**
+ * Track a Snowplow event for UserAuthentication.
+ * Data structure that defines how user signed-up / logged in
+ * @param { UserAuthentication & Timestamp & Context } userAuthentication - Attributes for UserAuthentication.
+ * @param {string[]} [trackers] - Tracker names to send the event to.
+ */
+export function trackUserAuthentication(userAuthentication, trackers){
+    const { context, timestamp, ...data } = userAuthentication;
+    const event = {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data
+    };
+
+    trackSelfDescribingEvent({
+        event,
+        context,
+        timestamp,
+    }, trackers);
+}
+
+/**
+ * Creates a Snowplow UserAuthentication entity.
+ * @param { UserAuthentication } userAuthentication - Attributes for UserAuthentication.
+ */
+export function createUserAuthentication(userAuthentication){
+    return {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data: userAuthentication
+    }
+}
+
+/**
+ * Typedef for UserLogIn event specification contexts.
+ * @typedef {object} UserLogInContexts
+ * @property {(UserContext | UserAuthenticationContext)[]} [context] Contexts to include in the UserLogIn event specification.
+ */
+
+/**
+ * Tracks a UserLogIn event specification.
+ * ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+ * @param { Login & Timestamp & UserLogInContexts } userLogIn - Attributes for UserLogIn event specification.
+ * @param {string[]} [trackers] - Tracker names to send the event specification to.
+ */
+export function trackUserLogInSpec(userLogIn, trackers){
+    const eventSpecificationContext = createEventSpecification({
+        id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
+        version: 8,
+        name: 'User Log In',
+        data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
+        data_product_name: 'Checkout Flow - Example',
+        data_product_domain: 'Marketing'
+    });
+
+    const context = Array.isArray(userLogIn.context)
+        ? [...userLogIn.context, eventSpecificationContext]
+        : [eventSpecificationContext];
+
+    const modifiedUserLogIn = {
+        ...userLogIn,
+        context,
+    };
+
+    trackLogin(modifiedUserLogIn, trackers);
 }
 ```
 
@@ -439,25 +528,26 @@ Here's how you could use the generated code:
 
 ```javascript
 import {
-  trackWebPage,
-  createProduct,
-  createWebPage,
+  trackUserLogInSpec,
+  createUser,
+  createUserAuthentication,
 } from "./src/tracking/snowplow";
 
-/* Track a self-describing event */
-trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
 });
-trackWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec({
+  method: "google",
+  is_success: true,
+  context: [user, userAuth],
 });
 ```
 
@@ -471,12 +561,7 @@ Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Sn
   "tracker": "@snowplow/javascript-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 
@@ -517,49 +602,67 @@ Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Sn
  */
 
 /**
- * Schema for a web page
- * @typedef {object} WebPage
- * @property {string} id The page view ID.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ * @typedef {object} Login
+ * @property {string} method The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+ * @property {?string} [error_code] An optional error code if the login attempt failed (e.g., 'invalid_password', 'user_not_found').
+ * @property {boolean} is_success Whether the login attempt was successful.
  */
 
 
 /**
- * Typedef for a WebPage entity context.
- * @typedef {object} WebPageContext
+ * Typedef for a Login entity context.
+ * @typedef {object} LoginContext
  * @property {string} schema The schema of the context.
- * @property { WebPage } data The data to send for the context.
+ * @property { Login } data The data to send for the context.
  */
 
 /**
- * Schema for a product entity
- * @typedef {object} Product
- * @property {string} category The product category.
- * @property {string} currency The currency the product is listed in.
- * @property {string} id The product ID (SKU).
- * @property {string} name The product name.
- * @property {number} price The price of the product.
+ * A subset of the user fields from the tenants-service
+ * @typedef {object} User
+ * @property {string} userId The users UUID.
+ * @property {string} firstName The users first name.
+ * @property {string} lastName The users last name.
+ * @property {string} organizationId The organization's UUID that the user belongs to.
+ * @property {?string} [email] The users email address.
+ * @property {?string} [jobTitle] The users job title.
+ * @property {"Admin"|"User"|"Custom"|null} [accessLevel] The users access level.
  */
 
 
 /**
- * Typedef for a Product entity context.
- * @typedef {object} ProductContext
+ * Typedef for a User entity context.
+ * @typedef {object} UserContext
  * @property {string} schema The schema of the context.
- * @property { Product } data The data to send for the context.
+ * @property { User } data The data to send for the context.
  */
 
 /**
- * Track a Snowplow event for WebPage.
- * Schema for a web page
- * @param { WebPage & Timestamp & Context } webPage - Attributes for WebPage.
+ * Data structure that defines how user signed-up / logged in
+ * @typedef {object} UserAuthentication
+ * @property {"google"|"facebook"|"manual"} auth_type Type of authentication used
+ */
+
+
+/**
+ * Typedef for a UserAuthentication entity context.
+ * @typedef {object} UserAuthenticationContext
+ * @property {string} schema The schema of the context.
+ * @property { UserAuthentication } data The data to send for the context.
+ */
+
+/**
+ * Track a Snowplow event for Login.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ * @param { Login & Timestamp & Context } login - Attributes for Login.
  * @param {string[]} [trackers] - Tracker names to send the event to.
  */
-function trackWebPage(webPage, trackers){
+function trackLogin(login, trackers){
     const trackerNames = (trackers && trackers.length) ? ':' + trackers.join(';') : '';
-    const { context, timestamp, ...data } = webPage;
+    const { context, timestamp, ...data } = login;
     window.snowplow('trackSelfDescribingEvent' + trackerNames, {
         event: {
-            schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+            schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
             data
         },
         context,
@@ -568,27 +671,27 @@ function trackWebPage(webPage, trackers){
 }
 
 /**
- * Creates a Snowplow WebPage entity.
- * @param { WebPage } webPage - Attributes for WebPage.
+ * Creates a Snowplow Login entity.
+ * @param { Login } login - Attributes for Login.
  */
-function createWebPage(webPage){
+function createLogin(login){
     return {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-        data: webPage
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
+        data: login
     }
 }
 /**
- * Track a Snowplow event for Product.
- * Schema for a product entity
- * @param { Product & Timestamp & Context } product - Attributes for Product.
+ * Track a Snowplow event for User.
+ * A subset of the user fields from the tenants-service
+ * @param { User & Timestamp & Context } user - Attributes for User.
  * @param {string[]} [trackers] - Tracker names to send the event to.
  */
-function trackProduct(product, trackers){
+function trackUser(user, trackers){
     const trackerNames = (trackers && trackers.length) ? ':' + trackers.join(';') : '';
-    const { context, timestamp, ...data } = product;
+    const { context, timestamp, ...data } = user;
     window.snowplow('trackSelfDescribingEvent' + trackerNames, {
         event: {
-            schema: 'iglu:com.example/product/jsonschema/1-0-0',
+            schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
             data
         },
         context,
@@ -597,34 +700,109 @@ function trackProduct(product, trackers){
 }
 
 /**
- * Creates a Snowplow Product entity.
- * @param { Product } product - Attributes for Product.
+ * Creates a Snowplow User entity.
+ * @param { User } user - Attributes for User.
  */
-function createProduct(product){
+function createUser(user){
     return {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
-        data: product
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
+        data: user
     }
+}
+/**
+ * Track a Snowplow event for UserAuthentication.
+ * Data structure that defines how user signed-up / logged in
+ * @param { UserAuthentication & Timestamp & Context } userAuthentication - Attributes for UserAuthentication.
+ * @param {string[]} [trackers] - Tracker names to send the event to.
+ */
+function trackUserAuthentication(userAuthentication, trackers){
+    const trackerNames = (trackers && trackers.length) ? ':' + trackers.join(';') : '';
+    const { context, timestamp, ...data } = userAuthentication;
+    window.snowplow('trackSelfDescribingEvent' + trackerNames, {
+        event: {
+            schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+            data
+        },
+        context,
+        timestamp,
+    });
+}
+
+/**
+ * Creates a Snowplow UserAuthentication entity.
+ * @param { UserAuthentication } userAuthentication - Attributes for UserAuthentication.
+ */
+function createUserAuthentication(userAuthentication){
+    return {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data: userAuthentication
+    }
+}
+
+/**
+ * Creates a Snowplow Event Specification entity.
+ */
+export function createEventSpecification(eventSpecification){
+    return {
+        schema:
+            'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4',
+        data: eventSpecification,
+    }
+}
+
+/**
+ * Typedef for UserLogIn event specification contexts.
+ * @typedef {object} UserLogInContexts
+ * @property {(UserContext | UserAuthenticationContext)[]} [context] Contexts to include in the UserLogIn event specification.
+ */
+
+/**
+ * Tracks a UserLogIn event specification.
+ * ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+ * @param { Login & Timestamp & UserLogInContexts } userLogIn - Attributes for UserLogIn event specification.
+ * @param {string[]} [trackers] - Tracker names to send the event specification to.
+ */
+function trackUserLogInSpec(userLogIn, trackers){
+    const eventSpecificationContext = createEventSpecification({
+        id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
+        version: 8,
+        name: 'User Log In',
+        data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
+        data_product_name: 'Checkout Flow - Example',
+        data_product_domain: 'Marketing'
+    });
+
+    const context = Array.isArray(userLogIn.context)
+        ? [...userLogIn.context, eventSpecificationContext]
+        : [eventSpecificationContext];
+
+    const modifiedUserLogIn = {
+        ...userLogIn,
+        context,
+    };
+
+    trackLogin(modifiedUserLogIn, trackers);
 }
 ```
 
 Here's how you could use the generated code:
 
 ```javascript
-/* Track a self-describing event */
-trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
 });
-trackWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec({
+  method: "google",
+  is_success: true,
+  context: [user, userAuth],
 });
 ```
 
@@ -1315,13 +1493,8 @@ Generated code for the [React Native tracker](/docs/sources/react-native-tracker
   "orgId": "your-org-id",
   "tracker": "@snowplow/react-native-tracker",
   "language": "typescript",
-  "outpath": "./src/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "outpath": "./Sources/Tracking/Snowtype",
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
 }
 ```
 
@@ -1330,40 +1503,78 @@ import { ReactNativeTracker } from '@snowplow/react-native-tracker';
 // Automatically generated by Snowtype
 
 /**
- * Schema for a web page
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome
+ * of the authentication attempt.
  */
-export type WebPage = {
+export type Login = {
     /**
-     * The page view ID.
+     * An optional error code if the login attempt failed (e.g., 'invalid_password',
+     * 'user_not_found').
      */
-    id: string;
+    error_code?: null | string;
+    /**
+     * Whether the login attempt was successful.
+     */
+    is_success: boolean;
+    /**
+     * The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+     */
+    method: string;
 }
 
 /**
- * Schema for a product entity
+ * A subset of the user fields from the tenants-service
  */
-export type Product = {
+export type User = {
     /**
-     * The product category.
+     * The users access level.
      */
-    category: string;
+    accessLevel?: AccessLevel;
     /**
-     * The currency the product is listed in.
+     * The users email address.
      */
-    currency: string;
+    email?: null | string;
     /**
-     * The product ID (SKU).
+     * The users first name.
      */
-    id: string;
+    firstName: string;
     /**
-     * The product name.
+     * The users job title.
      */
-    name: string;
+    jobTitle?: null | string;
     /**
-     * The price of the product.
+     * The users last name.
      */
-    price: number;
+    lastName: string;
+    /**
+     * The organization's UUID that the user belongs to.
+     */
+    organizationId: string;
+    /**
+     * The users UUID.
+     */
+    userId: string;
 }
+
+/**
+ * The users access level.
+ */
+export type AccessLevel = "Admin" | "User" | "Custom";
+
+/**
+ * Data structure that defines how user signed-up / logged in
+ */
+export type UserAuthentication = {
+    /**
+     * Type of authentication used
+     */
+    auth_type: AuthType;
+}
+
+/**
+ * Type of authentication used
+ */
+export type AuthType = "google" | "facebook" | "manual";
 
 interface CommonEventProperties<T = Record<string, unknown>> {
     /** Add context to an event by setting an Array of Self Describing JSON */
@@ -1387,47 +1598,117 @@ export type SelfDescribing<T extends Record<keyof T, unknown> = Record<string, u
         data: T;
 };
 
+
 /**
- * Track a Snowplow event for WebPage.
- * Schema for a web page
+ * Creates a Snowplow Event Specification entity.
  */
-export function trackWebPage<T extends {} = any>(tracker: ReactNativeTracker, webPage: WebPage & Contexts<T>){
-    const { contexts, ...data } = webPage;
+export function createEventSpecification(eventSpecification: Omit<EventSpecification, 'data_product_domain'> & Partial<Pick<EventSpecification, 'data_product_domain'>>){
+    return {
+        schema:
+            'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4',
+        data: eventSpecification,
+    }
+}
+
+/**
+ * Automatically attached context for event specifications
+ */
+interface EventSpecification {
+    id: string;
+    version: number;
+    name: string;
+    data_product_id: string;
+    data_product_name: string;
+    data_product_domain?: string;
+}
+
+/**
+ * Track a Snowplow event for Login.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ */
+export function trackLogin<T extends {} = any>(tracker: ReactNativeTracker, login: Login & Contexts<T>){
+    const { contexts, ...data } = login;
     tracker.trackSelfDescribingEvent({
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
         data
     }, contexts);
 }
 
 /**
- * Creates a Snowplow WebPage entity.
+ * Creates a Snowplow Login entity.
  */
-export function createWebPage(webPage: WebPage){
+export function createLogin(login: Login){
     return {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-        data: webPage
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
+        data: login
     }
 }
 /**
- * Track a Snowplow event for Product.
- * Schema for a product entity
+ * Track a Snowplow event for User.
+ * A subset of the user fields from the tenants-service
  */
-export function trackProduct<T extends {} = any>(tracker: ReactNativeTracker, product: Product & Contexts<T>){
-    const { contexts, ...data } = product;
+export function trackUser<T extends {} = any>(tracker: ReactNativeTracker, user: User & Contexts<T>){
+    const { contexts, ...data } = user;
     tracker.trackSelfDescribingEvent({
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
         data
     }, contexts);
 }
 
 /**
- * Creates a Snowplow Product entity.
+ * Creates a Snowplow User entity.
  */
-export function createProduct(product: Product){
+export function createUser(user: User){
     return {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
-        data: product
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
+        data: user
     }
+}
+/**
+ * Track a Snowplow event for UserAuthentication.
+ * Data structure that defines how user signed-up / logged in
+ */
+export function trackUserAuthentication<T extends {} = any>(tracker: ReactNativeTracker, userAuthentication: UserAuthentication & Contexts<T>){
+    const { contexts, ...data } = userAuthentication;
+    tracker.trackSelfDescribingEvent({
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data
+    }, contexts);
+}
+
+/**
+ * Creates a Snowplow UserAuthentication entity.
+ */
+export function createUserAuthentication(userAuthentication: UserAuthentication){
+    return {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data: userAuthentication
+    }
+}
+
+/**
+ * Tracks a UserLogIn event specification.
+ */
+export function trackUserLogInSpec(tracker: ReactNativeTracker, userLogIn: Login & Contexts<User | UserAuthentication>){
+    const eventSpecificationContext = createEventSpecification({
+        id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
+        version: 8,
+        name: 'User Log In',
+        data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
+        data_product_name: 'Checkout Flow - Example',
+        data_product_domain: 'Marketing'
+    });
+
+    const contexts = Array.isArray(userLogIn.contexts)
+        ? [...userLogIn.contexts, eventSpecificationContext]
+        : [eventSpecificationContext];
+
+    const modifiedUserLogIn = {
+        ...userLogIn,
+        contexts,
+    } as Login & Contexts<User | UserAuthentication>;
+
+    trackLogin<User | UserAuthentication>(tracker, modifiedUserLogIn);
 }
 ```
 
@@ -1435,11 +1716,9 @@ Here's how you could use the generated code:
 
 ```tsx
 import {
-  trackWebPage,
-  createProduct,
-  WebPage,
-  Product,
-  createWebPage,
+  trackUserLogInSpec,
+  createUser,
+  createUserAuthentication,
 } from "./src/tracking/snowplow";
 
 /*
@@ -1447,29 +1726,21 @@ import {
  * `createTracker` function of @snowplow/react-native-tracker.
  */
 
-/* Track a self-describing event */
-trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
-});
-trackWebPage(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
 });
 
-/* Enforce specific entity types using type arguments */
-const webPage = createWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-});
-trackWebPage<Product | WebPage>(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product, webPage],
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec(t, {
+  method: "google",
+  is_success: true,
+  contexts: [user, userAuth],
 });
 ```
 
@@ -1482,13 +1753,8 @@ Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md)
   "orgId": "your-org-id",
   "tracker": "snowplow-flutter-tracker",
   "language": "dart",
-  "outpath": "./lib/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "outpath": "./Sources/Tracking/Snowtype",
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
 }
 ```
 
@@ -1496,16 +1762,24 @@ Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md)
 import 'package:flutter/foundation.dart';
 import 'package:snowplow_tracker/events/self_describing.dart';
 
-/// Schema for a web page
-/// Schema: `iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0`
+/// Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+/// Schema: `iglu:com.snplow.msc.aws/login/jsonschema/1-0-0`
 @immutable
-class WebPage implements SelfDescribing {
+class Login implements SelfDescribing {
 
-    /// The page view ID.
-    final String id;
+    /// An optional error code if the login attempt failed (e.g., 'invalid_password',,'user_not_found').
+    final String? errorCode;
 
-    const WebPage({
-        required this.id
+    /// Whether the login attempt was successful.
+    final bool isSuccess;
+
+    /// The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+    final String method;
+
+    const Login({
+        this.errorCode,
+        required this.isSuccess,
+        required this.method
     });
 
     @override
@@ -1516,12 +1790,14 @@ class WebPage implements SelfDescribing {
     @override
     Map<String, Object?> get data {
         return {
-            'id': id,
+            if (errorCode != null) 'error_code': errorCode,
+            'is_success': isSuccess,
+            'method': method,
         };
     }
 
     @override
-    String get schema => 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0';
+    String get schema => 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0';
 
     @override
     Map<String, Object?> toMap() {
@@ -1531,32 +1807,40 @@ class WebPage implements SelfDescribing {
         };
     }
 }
-/// Schema for a product entity
-/// Schema: `iglu:com.example/product/jsonschema/1-0-0`
+/// A subset of the user fields from the tenants-service
+/// Schema: `iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1`
 @immutable
-class Product implements SelfDescribing {
+class User implements SelfDescribing {
 
-    /// The product category.
-    final String category;
+    /// The users access level.
+    final AccessLevel? accessLevel;
 
-    /// The currency the product is listed in.
-    final String currency;
+    /// The users email address.
+    final String? email;
 
-    /// The product ID (SKU).
-    final String id;
+    /// The users first name.
+    final String firstName;
 
-    /// The product name.
-    final String name;
+    /// The users job title.
+    final String? jobTitle;
 
-    /// The price of the product.
-    final double price;
+    /// The users last name.
+    final String lastName;
 
-    const Product({
-        required this.category,
-        required this.currency,
-        required this.id,
-        required this.name,
-        required this.price
+    /// The organization's UUID that the user belongs to.
+    final String organizationId;
+
+    /// The users UUID.
+    final String userId;
+
+    const User({
+        this.accessLevel,
+        this.email,
+        required this.firstName,
+        this.jobTitle,
+        required this.lastName,
+        required this.organizationId,
+        required this.userId
     });
 
     @override
@@ -1567,16 +1851,18 @@ class Product implements SelfDescribing {
     @override
     Map<String, Object?> get data {
         return {
-            'category': category,
-            'currency': currency,
-            'id': id,
-            'name': name,
-            'price': price,
+            if (accessLevel != null) 'accessLevel': accessLevel?.value,
+            if (email != null) 'email': email,
+            'firstName': firstName,
+            if (jobTitle != null) 'jobTitle': jobTitle,
+            'lastName': lastName,
+            'organizationId': organizationId,
+            'userId': userId,
         };
     }
 
     @override
-    String get schema => 'iglu:com.example/product/jsonschema/1-0-0';
+    String get schema => 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1';
 
     @override
     Map<String, Object?> toMap() {
@@ -1584,6 +1870,158 @@ class Product implements SelfDescribing {
             'schema': schema,
             'data': data,
         };
+    }
+}
+/// Data structure that defines how user signed-up / logged in
+/// Schema: `iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0`
+@immutable
+class UserAuthentication implements SelfDescribing {
+
+    /// Type of authentication used
+    final AuthType authType;
+
+    const UserAuthentication({
+        required this.authType
+    });
+
+    @override
+    String endpoint() {
+        return 'trackSelfDescribing';
+    }
+
+    @override
+    Map<String, Object?> get data {
+        return {
+            'auth_type': authType.value,
+        };
+    }
+
+    @override
+    String get schema => 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0';
+
+    @override
+    Map<String, Object?> toMap() {
+        return {
+            'schema': schema,
+            'data': data,
+        };
+    }
+}
+
+/// The users access level.
+enum AccessLevel {
+    admin("Admin"),
+    custom("Custom"),
+    user("User");
+
+    const AccessLevel(this.value);
+    final String value;
+}
+
+/// Type of authentication used
+enum AuthType {
+    facebook("facebook"),
+    google("google"),
+    manual("manual");
+
+    const AuthType(this.value);
+    final String value;
+}
+
+/// For internal use.
+@immutable
+class EventSpecification {
+    final SelfDescribing event;
+    final List<SelfDescribing> contexts;
+
+    const EventSpecification({
+        required this.event,
+        required this.contexts
+    });
+}
+
+/// For internal use.
+@immutable
+class EventSpecEntity implements SelfDescribing {
+    /// Identifier for the data product that the event specification belongs to
+    final String? dataProductId;
+    /// Name for the data product that the event specification belongs to
+    final String? dataProductName;
+    /// Domain of the data product that the event specification belongs to
+    final String? dataProductDomain;
+    /// Identifier for the event specification that the event adheres to
+    final String id;
+    /// Version of the event specification that the event adheres to
+    final int version;
+    /// Name for the event specification that the event adheres to
+    final String? name;
+    const EventSpecEntity({
+        this.dataProductId,
+        this.dataProductName,
+        this.dataProductDomain,
+        required this.id,
+        required this.version,
+        this.name
+    });
+
+    @override
+    String endpoint() {
+            return 'trackSelfDescribing';
+    }
+
+    @override
+    Map<String, Object?> get data {
+        return {
+            if (dataProductId != null) 'data_product_id': dataProductId,
+            if (dataProductName != null) 'data_product_name': dataProductName,
+            if (dataProductDomain != null) 'data_product_domain': dataProductDomain,
+            'id': id,
+            'version': version,
+            if (name != null) 'name': name,
+        };
+    }
+
+    @override
+    String get schema => 'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4';
+
+    @override
+    Map<String, Object?> toMap() {
+        return {
+            'schema': schema,
+            'data': data,
+        };
+    }
+}
+
+/// Creates an event with entities for a UserLogIn event specification.
+/// ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+/// Example:
+/// ```dart
+/// const baseEvent = Login(...);
+/// final eventSpec = baseEvent.toUserLogInSpec(
+///   dataUser: User(...), dataUserAuthentication: UserAuthentication(...)
+/// );
+/// /// Track as an event and list of context entities
+/// tracker.track(eventSpec.event, contexts: eventSpec.contexts);
+/// ```
+extension UserLogInEventSpec on Login {
+    EventSpecification toUserLogInSpec({ required User dataUser, required UserAuthentication dataUserAuthentication }) {
+        final entities = <SelfDescribing>[];
+        const eventSpecEntity = EventSpecEntity(
+            id: "a965caf1-88a6-4a89-9aea-cc92516a9d56",
+            version: 8,
+            name: "User Log In",
+            dataProductId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+            dataProductName: "Checkout Flow - Example",
+            dataProductDomain: 'Marketing'
+        );
+        entities.add(eventSpecEntity);
+        entities.add(dataUser);
+        entities.add(dataUserAuthentication);
+        return EventSpecification(
+            event: this,
+            contexts: entities
+        );
     }
 }
 ```
@@ -1593,19 +2031,19 @@ Here's how you could use the generated code:
 ```dart
 import './lib/tracking/snowplow/snowtype.dart';
 
-/* Track a self-describing event */
-await tracker.track(const WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43"));
-
-/* Track an event with an entity attached */
-const product = Product(
-  category: "Snowplow/Shoes",
-  currency: "EUR",
-  id: "Product id",
-  price: 10.0,
-  name: "Snowplow product"
+const login = Login(method: "google", isSuccess: true);
+final eventSpec = login.toUserLogInSpec(
+  dataUser: User(
+    userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    firstName: "Ada",
+    lastName: "Lovelace",
+    organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+    email: "ada@example.com",
+    accessLevel: AccessLevel.admin,
+  ),
+  dataUserAuthentication: UserAuthentication(authType: AuthType.google),
 );
-const event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43");
-await tracker.track(event, contexts: [product]);
+await tracker.track(eventSpec.event, contexts: eventSpec.contexts);
 ```
 
 ## Node.js
@@ -1622,12 +2060,7 @@ Snowtype generates TypeScript type definitions and typed `track` and `create` fu
   "tracker": "@snowplow/node-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 
@@ -1636,40 +2069,78 @@ import { buildSelfDescribingEvent, SelfDescribingJson, Timestamp, Tracker } from
 // Automatically generated by Snowtype
 
 /**
- * Schema for a web page
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome
+ * of the authentication attempt.
  */
-export type WebPage = {
+export type Login = {
     /**
-     * The page view ID.
+     * An optional error code if the login attempt failed (e.g., 'invalid_password',
+     * 'user_not_found').
      */
-    id: string;
+    error_code?: null | string;
+    /**
+     * Whether the login attempt was successful.
+     */
+    is_success: boolean;
+    /**
+     * The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+     */
+    method: string;
 }
 
 /**
- * Schema for a product entity
+ * A subset of the user fields from the tenants-service
  */
-export type Product = {
+export type User = {
     /**
-     * The product category.
+     * The users access level.
      */
-    category: string;
+    accessLevel?: AccessLevel;
     /**
-     * The currency the product is listed in.
+     * The users email address.
      */
-    currency: string;
+    email?: null | string;
     /**
-     * The product ID (SKU).
+     * The users first name.
      */
-    id: string;
+    firstName: string;
     /**
-     * The product name.
+     * The users job title.
      */
-    name: string;
+    jobTitle?: null | string;
     /**
-     * The price of the product.
+     * The users last name.
      */
-    price: number;
+    lastName: string;
+    /**
+     * The organization's UUID that the user belongs to.
+     */
+    organizationId: string;
+    /**
+     * The users UUID.
+     */
+    userId: string;
 }
+
+/**
+ * The users access level.
+ */
+export type AccessLevel = "Admin" | "User" | "Custom";
+
+/**
+ * Data structure that defines how user signed-up / logged in
+ */
+export type UserAuthentication = {
+    /**
+     * Type of authentication used
+     */
+    auth_type: AuthType;
+}
+
+/**
+ * Type of authentication used
+ */
+export type AuthType = "google" | "facebook" | "manual";
 
 interface CommonEventProperties<T = Record<string, unknown>> {
     /** Add context to an event by setting an Array of Self Describing JSON */
@@ -1678,53 +2149,125 @@ interface CommonEventProperties<T = Record<string, unknown>> {
     timestamp?: Timestamp | null;
 }
 
+/**
+ * Creates a Snowplow Event Specification entity.
+ */
+export function createEventSpecification(eventSpecification: Omit<EventSpecification, 'data_product_domain'> & Partial<Pick<EventSpecification, 'data_product_domain'>>){
+    return {
+        schema:
+            'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4',
+        data: eventSpecification,
+    }
+}
+
+/**
+ * Automatically attached context for event specifications
+ */
+interface EventSpecification {
+    id: string;
+    version: number;
+    name: string;
+    data_product_id: string;
+    data_product_name: string;
+    data_product_domain?: string;
+}
+
 type ContextsOrTimestamp<T = any> = Omit<CommonEventProperties<T>, 'context'> & { context?: SelfDescribingJson<T>[] | null | undefined }
 
 /**
- * Track a Snowplow event for WebPage.
- * Schema for a web page
+ * Track a Snowplow event for Login.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
  */
-export function trackWebPage<T extends {} = any>(tracker: Tracker, webPage: WebPage & ContextsOrTimestamp<T>){
-    const { context, timestamp, ...data } = webPage;
+export function trackLogin<T extends {} = any>(tracker: Tracker, login: Login & ContextsOrTimestamp<T>){
+    const { context, timestamp, ...data } = login;
     tracker.track(buildSelfDescribingEvent({
         event: {
-            schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+            schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
             data
         }
     }), context, timestamp);
 }
 
 /**
- * Creates a Snowplow WebPage entity.
+ * Creates a Snowplow Login entity.
  */
-export function createWebPage(webPage: WebPage){
+export function createLogin(login: Login){
     return {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-        data: webPage
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
+        data: login
     }
 }
 /**
- * Track a Snowplow event for Product.
- * Schema for a product entity
+ * Track a Snowplow event for User.
+ * A subset of the user fields from the tenants-service
  */
-export function trackProduct<T extends {} = any>(tracker: Tracker, product: Product & ContextsOrTimestamp<T>){
-    const { context, timestamp, ...data } = product;
+export function trackUser<T extends {} = any>(tracker: Tracker, user: User & ContextsOrTimestamp<T>){
+    const { context, timestamp, ...data } = user;
     tracker.track(buildSelfDescribingEvent({
         event: {
-            schema: 'iglu:com.example/product/jsonschema/1-0-0',
+            schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
             data
         }
     }), context, timestamp);
 }
 
 /**
- * Creates a Snowplow Product entity.
+ * Creates a Snowplow User entity.
  */
-export function createProduct(product: Product){
+export function createUser(user: User){
     return {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
-        data: product
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
+        data: user
     }
+}
+/**
+ * Track a Snowplow event for UserAuthentication.
+ * Data structure that defines how user signed-up / logged in
+ */
+export function trackUserAuthentication<T extends {} = any>(tracker: Tracker, userAuthentication: UserAuthentication & ContextsOrTimestamp<T>){
+    const { context, timestamp, ...data } = userAuthentication;
+    tracker.track(buildSelfDescribingEvent({
+        event: {
+            schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+            data
+        }
+    }), context, timestamp);
+}
+
+/**
+ * Creates a Snowplow UserAuthentication entity.
+ */
+export function createUserAuthentication(userAuthentication: UserAuthentication){
+    return {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data: userAuthentication
+    }
+}
+
+/**
+ * Tracks a UserLogIn event specification.
+ * ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+ */
+export function trackUserLogInSpec(tracker: Tracker, userLogIn: Login & ContextsOrTimestamp<User | UserAuthentication>){
+    const eventSpecificationContext = createEventSpecification({
+        id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
+        version: 8,
+        name: 'User Log In',
+        data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
+        data_product_name: 'Checkout Flow - Example',
+        data_product_domain: 'Marketing'
+    });
+
+    const context = Array.isArray(userLogIn.context)
+        ? [...userLogIn.context, eventSpecificationContext]
+        : [eventSpecificationContext];
+
+    const modifiedUserLogIn: Login & ContextsOrTimestamp<User | UserAuthentication | EventSpecification> = {
+        ...userLogIn,
+        context,
+    };
+
+    trackLogin(tracker, modifiedUserLogIn);
 }
 ```
 
@@ -1732,11 +2275,9 @@ Here's how you could use the generated code in a Node.js project:
 
 ```tsx
 import {
-  trackWebPage,
-  createProduct,
-  WebPage,
-  Product,
-  createWebPage,
+  trackUserLogInSpec,
+  createUser,
+  createUserAuthentication,
 } from "./src/tracking/snowplow";
 
 /*
@@ -1744,29 +2285,21 @@ import {
  * `tracker` function of @snowplow/node-tracker.
  */
 
-/* Track a self-describing event */
-trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
-});
-trackWebPage(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
 });
 
-/* Enforce specific entity types using type arguments */
-const webPage = createWebPage({
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-});
-trackWebPage<Product | WebPage>(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product, webPage],
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec(t, {
+  method: "google",
+  is_success: true,
+  context: [user, userAuth],
 });
 ```
 
@@ -1780,12 +2313,7 @@ Snowtype generates JSDoc typedefs and untyped `track` and `create` functions, wi
   "tracker": "@snowplow/node-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 
@@ -1827,36 +2355,65 @@ import { buildSelfDescribingEvent } from '@snowplow/node-tracker';
  */
 
 /**
- * Schema for a web page
- * @typedef {object} WebPage
- * @property {string} id The page view ID.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
+ * @typedef {object} Login
+ * @property {string} method The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+ * @property {?string} [error_code] An optional error code if the login attempt failed (e.g., 'invalid_password', 'user_not_found').
+ * @property {boolean} is_success Whether the login attempt was successful.
  */
 
 
 /**
- * Typedef for a WebPage entity context.
- * @typedef {object} WebPageContext
+ * Typedef for a Login entity context.
+ * @typedef {object} LoginContext
  * @property {string} schema The schema of the context.
- * @property { WebPage } data The data to send for the context.
+ * @property { Login } data The data to send for the context.
  */
 
 /**
- * Schema for a product entity
- * @typedef {object} Product
- * @property {string} category The product category.
- * @property {string} currency The currency the product is listed in.
- * @property {string} id The product ID (SKU).
- * @property {string} name The product name.
- * @property {number} price The price of the product.
+ * A subset of the user fields from the tenants-service
+ * @typedef {object} User
+ * @property {string} userId The users UUID.
+ * @property {string} firstName The users first name.
+ * @property {string} lastName The users last name.
+ * @property {string} organizationId The organization's UUID that the user belongs to.
+ * @property {?string} [email] The users email address.
+ * @property {?string} [jobTitle] The users job title.
+ * @property {"Admin"|"User"|"Custom"|null} [accessLevel] The users access level.
  */
 
 
 /**
- * Typedef for a Product entity context.
- * @typedef {object} ProductContext
+ * Typedef for a User entity context.
+ * @typedef {object} UserContext
  * @property {string} schema The schema of the context.
- * @property { Product } data The data to send for the context.
+ * @property { User } data The data to send for the context.
  */
+
+/**
+ * Data structure that defines how user signed-up / logged in
+ * @typedef {object} UserAuthentication
+ * @property {"google"|"facebook"|"manual"} auth_type Type of authentication used
+ */
+
+
+/**
+ * Typedef for a UserAuthentication entity context.
+ * @typedef {object} UserAuthenticationContext
+ * @property {string} schema The schema of the context.
+ * @property { UserAuthentication } data The data to send for the context.
+ */
+
+/**
+ * Creates a Snowplow Event Specification entity.
+ */
+export function createEventSpecification(eventSpecification){
+    return {
+        schema:
+            'iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4',
+        data: eventSpecification,
+    }
+}
 
 /**
  * Typedef for a Node.js tracker object.
@@ -1864,58 +2421,119 @@ import { buildSelfDescribingEvent } from '@snowplow/node-tracker';
  */
 
 /**
- * Track a Snowplow event for WebPage.
- * Schema for a web page
+ * Track a Snowplow event for Login.
+ * Captured when a user attempts to log in to their account. Tracks the method and outcome of the authentication attempt.
  * @param {Tracker} tracker - Tracker to send the event to.
- * @param { WebPage & Timestamp & Context } webPage - Attributes for WebPage.
+ * @param { Login & Timestamp & Context } login - Attributes for Login.
  */
-export function trackWebPage(tracker, webPage){
-    const { context, timestamp, ...data } = webPage;
+export function trackLogin(tracker, login){
+    const { context, timestamp, ...data } = login;
 
     tracker.track(buildSelfDescribingEvent({
         event: {
-            schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
+            schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
             data
         }
     }), context, timestamp);
 }
 
 /**
- * Creates a Snowplow WebPage entity.
- * @param { WebPage } webPage - Attributes for WebPage.
+ * Creates a Snowplow Login entity.
+ * @param { Login } login - Attributes for Login.
  */
-export function createWebPage(webPage){
+export function createLogin(login){
     return {
-        schema: 'iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0',
-        data: webPage
+        schema: 'iglu:com.snplow.msc.aws/login/jsonschema/1-0-0',
+        data: login
     }
 }
 /**
- * Track a Snowplow event for Product.
- * Schema for a product entity
+ * Track a Snowplow event for User.
+ * A subset of the user fields from the tenants-service
  * @param {Tracker} tracker - Tracker to send the event to.
- * @param { Product & Timestamp & Context } product - Attributes for Product.
+ * @param { User & Timestamp & Context } user - Attributes for User.
  */
-export function trackProduct(tracker, product){
-    const { context, timestamp, ...data } = product;
+export function trackUser(tracker, user){
+    const { context, timestamp, ...data } = user;
 
     tracker.track(buildSelfDescribingEvent({
         event: {
-            schema: 'iglu:com.example/product/jsonschema/1-0-0',
+            schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
             data
         }
     }), context, timestamp);
 }
 
 /**
- * Creates a Snowplow Product entity.
- * @param { Product } product - Attributes for Product.
+ * Creates a Snowplow User entity.
+ * @param { User } user - Attributes for User.
  */
-export function createProduct(product){
+export function createUser(user){
     return {
-        schema: 'iglu:com.example/product/jsonschema/1-0-0',
-        data: product
+        schema: 'iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1',
+        data: user
     }
+}
+/**
+ * Track a Snowplow event for UserAuthentication.
+ * Data structure that defines how user signed-up / logged in
+ * @param {Tracker} tracker - Tracker to send the event to.
+ * @param { UserAuthentication & Timestamp & Context } userAuthentication - Attributes for UserAuthentication.
+ */
+export function trackUserAuthentication(tracker, userAuthentication){
+    const { context, timestamp, ...data } = userAuthentication;
+
+    tracker.track(buildSelfDescribingEvent({
+        event: {
+            schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+            data
+        }
+    }), context, timestamp);
+}
+
+/**
+ * Creates a Snowplow UserAuthentication entity.
+ * @param { UserAuthentication } userAuthentication - Attributes for UserAuthentication.
+ */
+export function createUserAuthentication(userAuthentication){
+    return {
+        schema: 'iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0',
+        data: userAuthentication
+    }
+}
+
+/**
+ * Typedef for UserLogIn event specification contexts.
+ * @typedef {object} LoginContexts
+ * @property {(UserContext | UserAuthenticationContext)[]} [context] Contexts to include in the UserLogIn event specification.
+ */
+
+/**
+ * Tracks a UserLogIn event specification.
+ * ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+ * @param {Tracker} tracker - Tracker to send the tracking event specification to.
+ * @param { Login & Timestamp & LoginContexts } userLogIn - Attributes for UserLogIn event specification.
+ */
+export function trackUserLogInSpec(tracker, userLogIn){
+    const eventSpecificationContext = createEventSpecification({
+        id: 'a965caf1-88a6-4a89-9aea-cc92516a9d56',
+        version: 8,
+        name: 'User Log In',
+        data_product_id: '57471841-aa79-445d-b4f7-1cbd073a3188',
+        data_product_name: 'Checkout Flow - Example',
+        data_product_domain: 'Marketing'
+    });
+
+ const context = Array.isArray(userLogIn.context)
+        ? [...userLogIn.context, eventSpecificationContext]
+        : [eventSpecificationContext];
+
+    const modifiedUserLogIn = {
+        ...userLogIn,
+        context,
+    };
+
+    trackLogin(tracker, modifiedUserLogIn);
 }
 ```
 
@@ -1923,9 +2541,9 @@ Here's how you could use the generated code in a Node.js project:
 
 ```javascript
 import {
-  trackWebPage,
-  createProduct,
-  createWebPage,
+  trackUserLogInSpec,
+  createUser,
+  createUserAuthentication,
 } from "./src/tracking/snowplow";
 
 /*
@@ -1933,20 +2551,21 @@ import {
  * `tracker` function of @snowplow/node-tracker.
  */
 
-/* Track a self-describing event */
-trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-
-/* Track an event with an entity attached */
-const product = createProduct({
-  id: "Product id",
-  name: "Snowplow product",
-  currency: "EUR",
-  price: 10,
-  category: "Snowplow/Shoes",
+const user = createUser({
+  userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  firstName: "Ada",
+  lastName: "Lovelace",
+  organizationId: "57471841-aa79-445d-b4f7-1cbd073a3188",
+  email: "ada@example.com",
+  accessLevel: "Admin",
 });
-trackWebPage(t, {
-  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+
+const userAuth = createUserAuthentication({ auth_type: "google" });
+
+trackUserLogInSpec(t, {
+  method: "google",
+  is_success: true,
+  context: [user, userAuth],
 });
 ```
 
@@ -1960,12 +2579,7 @@ Generated code for the [Golang tracker](/docs/sources/golang-tracker/index.md). 
   "tracker": "snowplow-golang-tracker",
   "language": "go",
   "outpath": "./tracking/snowtype",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 
@@ -1975,25 +2589,59 @@ package snowtypegenerated
 import "github.com/mitchellh/mapstructure"
 import sp "github.com/snowplow/snowplow-golang-tracker/v3/tracker"
 
-// Schema for a web page
-type WebPage struct {
-	// The page view ID.
-	ID string `mapstructure:"id"`
+// Captured when a user attempts to log in to their account. Tracks the method and outcome
+// of the authentication attempt.
+type Login struct {
+	// An optional error code if the login attempt failed (e.g., 'invalid_password',
+	// 'user_not_found').
+	ErrorCode                                                                         *string `mapstructure:"error_code"`
+	// Whether the login attempt was successful.
+	IsSuccess                                                                         bool    `mapstructure:"is_success"`
+	// The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+	Method                                                                            string  `mapstructure:"method"`
 }
 
-// Schema for a product entity
-type Product struct {
-	// The product category.
-	Category string  `mapstructure:"category"`
-	// The currency the product is listed in.
-	Currency string  `mapstructure:"currency"`
-	// The product ID (SKU).
-	ID       string  `mapstructure:"id"`
-	// The product name.
-	Name     string  `mapstructure:"name"`
-	// The price of the product.
-	Price    float64 `mapstructure:"price"`
+// A subset of the user fields from the tenants-service
+type User struct {
+	// The users access level.
+	AccessLevel                                         *AccessLevel `mapstructure:"accessLevel,omitempty"`
+	// The users email address.
+	Email                                               *string      `mapstructure:"email"`
+	// The users first name.
+	FirstName                                           string       `mapstructure:"firstName"`
+	// The users job title.
+	JobTitle                                            *string      `mapstructure:"jobTitle"`
+	// The users last name.
+	LastName                                            string       `mapstructure:"lastName"`
+	// The organization's UUID that the user belongs to.
+	OrganizationID                                      string       `mapstructure:"organizationId"`
+	// The users UUID.
+	UserID                                              string       `mapstructure:"userId"`
 }
+
+// Data structure that defines how user signed-up / logged in
+type UserAuthentication struct {
+	// Type of authentication used
+	AuthType                      AuthType `mapstructure:"auth_type"`
+}
+
+// The users access level.
+type AccessLevel string
+
+const (
+	AccessLevelUser AccessLevel = "User"
+	Admin           AccessLevel = "Admin"
+	Custom          AccessLevel = "Custom"
+)
+
+// Type of authentication used
+type AuthType string
+
+const (
+	Facebook AuthType = "facebook"
+	Google   AuthType = "google"
+	Manual   AuthType = "manual"
+)
 
 // SnowplowApplicable signifies ability to be formatted as self-describing json
 type SnowplowApplicable interface {
@@ -2056,21 +2704,45 @@ func WithSubject(subject *sp.Subject) option {
 	}
 }
 
+// Entity schema for referencing an event specification
+type EventSpecification struct {
+	// Identifier for the event specification that the event adheres to
+	Id string `mapstructure:"id"`
+	Version uint32 `mapstructure:"version"`
+	Name string `mapstructure:"name"`
+	DataProductId string `mapstructure:"data_product_id"`
+	DataProductName string `mapstructure:"data_product_name"`
+	DataProductDomain string `mapstructure:"data_product_domain,omitempty"`
+}
+
 // SnowplowFormat implements SnowplowApplicable
-func (webPage WebPage) SnowplowFormat() (*sp.SelfDescribingJson, error) {
+func (eventSpecification EventSpecification) SnowplowFormat() (*sp.SelfDescribingJson, error) {
 	var decodedMap map[string]interface{}
-	err := mapstructure.Decode(webPage, &decodedMap)
+	err := mapstructure.Decode(eventSpecification, &decodedMap)
 	if err != nil {
 		return nil, err
 	}
 
-	sdj := sp.InitSelfDescribingJson("iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0", decodedMap)
+	sdj := sp.InitSelfDescribingJson("iglu:com.snowplowanalytics.snowplow/event_specification/jsonschema/1-0-4", decodedMap)
 	return sdj, nil
 }
 
-// TrackWebPage tracks a WebPage
-func TrackWebPage(tracker *sp.Tracker, webPage WebPage, opts ...option) error {
-	sdj, err := webPage.SnowplowFormat()
+
+// SnowplowFormat implements SnowplowApplicable
+func (login Login) SnowplowFormat() (*sp.SelfDescribingJson, error) {
+	var decodedMap map[string]interface{}
+	err := mapstructure.Decode(login, &decodedMap)
+	if err != nil {
+		return nil, err
+	}
+
+	sdj := sp.InitSelfDescribingJson("iglu:com.snplow.msc.aws/login/jsonschema/1-0-0", decodedMap)
+	return sdj, nil
+}
+
+// TrackLogin tracks a Login
+func TrackLogin(tracker *sp.Tracker, login Login, opts ...option) error {
+	sdj, err := login.SnowplowFormat()
 	if err != nil {
 		return err
 	}
@@ -2084,21 +2756,22 @@ func TrackWebPage(tracker *sp.Tracker, webPage WebPage, opts ...option) error {
 	return nil
 }
 
+
 // SnowplowFormat implements SnowplowApplicable
-func (product Product) SnowplowFormat() (*sp.SelfDescribingJson, error) {
+func (user User) SnowplowFormat() (*sp.SelfDescribingJson, error) {
 	var decodedMap map[string]interface{}
-	err := mapstructure.Decode(product, &decodedMap)
+	err := mapstructure.Decode(user, &decodedMap)
 	if err != nil {
 		return nil, err
 	}
 
-	sdj := sp.InitSelfDescribingJson("iglu:com.example/product/jsonschema/1-0-0", decodedMap)
+	sdj := sp.InitSelfDescribingJson("iglu:com.snowplowanalytics.console/user/jsonschema/1-0-1", decodedMap)
 	return sdj, nil
 }
 
-// TrackProduct tracks a Product
-func TrackProduct(tracker *sp.Tracker, product Product, opts ...option) error {
-	sdj, err := product.SnowplowFormat()
+// TrackUser tracks a User
+func TrackUser(tracker *sp.Tracker, user User, opts ...option) error {
+	sdj, err := user.SnowplowFormat()
 	if err != nil {
 		return err
 	}
@@ -2108,6 +2781,115 @@ func TrackProduct(tracker *sp.Tracker, product Product, opts ...option) error {
 		opt(sde)
 	}
 
+	tracker.TrackSelfDescribingEvent(*sde)
+	return nil
+}
+
+
+// SnowplowFormat implements SnowplowApplicable
+func (userAuthentication UserAuthentication) SnowplowFormat() (*sp.SelfDescribingJson, error) {
+	var decodedMap map[string]interface{}
+	err := mapstructure.Decode(userAuthentication, &decodedMap)
+	if err != nil {
+		return nil, err
+	}
+
+	sdj := sp.InitSelfDescribingJson("iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0", decodedMap)
+	return sdj, nil
+}
+
+// TrackUserAuthentication tracks a UserAuthentication
+func TrackUserAuthentication(tracker *sp.Tracker, userAuthentication UserAuthentication, opts ...option) error {
+	sdj, err := userAuthentication.SnowplowFormat()
+	if err != nil {
+		return err
+	}
+
+	sde := &sp.SelfDescribingEvent{Event: sdj}
+	for _, opt := range opts {
+		opt(sde)
+	}
+
+	tracker.TrackSelfDescribingEvent(*sde)
+	return nil
+}
+
+
+
+// UserLogInApplicable represents a context applicable to UserLogIn event specification
+type UserLogInApplicable interface {
+	UserLogInFormat() (*sp.SelfDescribingJson, error)
+}
+
+
+// UserLogInFormat implements UserLogInApplicable
+func (user User) UserLogInFormat() (*sp.SelfDescribingJson, error) {
+	return user.SnowplowFormat()
+}
+
+
+// UserLogInFormat implements UserLogInApplicable
+func (userAuthentication UserAuthentication) UserLogInFormat() (*sp.SelfDescribingJson, error) {
+	return userAuthentication.SnowplowFormat()
+}
+
+
+// UserLogIn Event Specification
+type UserLogIn struct {
+	Event    Login
+	Contexts []UserLogInApplicable
+}
+
+
+// TrackUserLogInSpec tracks UserLogIn event specification
+// ID: a965caf1-88a6-4a89-9aea-cc92516a9d56
+func TrackUserLogInSpec(tracker *sp.Tracker, userLogIn UserLogIn, opts ...option) error {
+	event := userLogIn.Event
+	sdj, err := event.SnowplowFormat()
+	if err != nil {
+		return err
+	}
+
+	sde := &sp.SelfDescribingEvent{Event: sdj}
+	var optErr error
+	for _, opt := range opts {
+		optErr = opt(sde)
+		if optErr != nil {
+			break
+		}
+	}
+	if optErr != nil {
+		return optErr
+	}
+
+	eventSpecificationCtx := make([]sp.SelfDescribingJson, len(userLogIn.Contexts))
+	var ctxErr error
+	for i, val := range userLogIn.Contexts {
+		ctxSdj, ctxErr := val.UserLogInFormat()
+		if ctxErr != nil {
+			break
+		}
+		eventSpecificationCtx[i] = *ctxSdj
+	}
+	if ctxErr != nil {
+		return ctxErr
+	}
+
+	eventSpec := EventSpecification{
+		Id: "a965caf1-88a6-4a89-9aea-cc92516a9d56",
+		Version: 8,
+		Name: "User Log In",
+		DataProductId : "57471841-aa79-445d-b4f7-1cbd073a3188",
+		DataProductName: "Checkout Flow - Example",
+		DataProductDomain: "Marketing",
+	}
+	eventSpecSdj, err := eventSpec.SnowplowFormat()
+	if err != nil {
+		return err
+	}
+	eventSpecificationCtx = append(eventSpecificationCtx, *eventSpecSdj)
+
+	sde.Contexts = append(sde.Contexts, eventSpecificationCtx...)
 	tracker.TrackSelfDescribingEvent(*sde)
 	return nil
 }
@@ -2116,24 +2898,26 @@ func TrackProduct(tracker *sp.Tracker, product Product, opts ...option) error {
 Here's how you could use the generated code in a Go project:
 
 ```go
-// Track a self-describing event
-TrackWebPage(tracker, WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"})
+email := "ada@example.com"
+accessLevel := Admin
 
-// Track an event with an entity attached
-productName := "Snowplow product"
-product := Product{
-	ID:       "Product_id",
-	Currency: "EUR",
-	Price:    10,
-	Category: "Snowplow/Shoes",
-	Name:     &productName,
-}
-
-TrackWebPage(
-	tracker,
-	WebPage{ID: "212a9b63-1af7-4e96-9f35-e2fca110ff43"},
-	WithContexts(product),
-)
+err := TrackUserLogInSpec(tracker, UserLogIn{
+	Event: Login{
+		Method:    "google",
+		IsSuccess: true,
+	},
+	Contexts: []UserLogInApplicable{
+		User{
+			UserID:         "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+			FirstName:      "Ada",
+			LastName:       "Lovelace",
+			OrganizationID: "57471841-aa79-445d-b4f7-1cbd073a3188",
+			Email:          &email,
+			AccessLevel:    &accessLevel,
+		},
+		UserAuthentication{AuthType: Google},
+	},
+})
 ```
 
 ## Java
@@ -2146,12 +2930,7 @@ Generated code for the [Java tracker](/docs/sources/java-tracker/index.md). Snow
   "tracker": "snowplow-java-tracker",
   "language": "java",
   "outpath": "./src/main/java/snowtype",
-  "igluCentralSchemas": [
-    "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-  ],
-  "dataStructures": [
-    "iglu:com.example/product/jsonschema/1-0-0"
-  ]
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
 }
 ```
 

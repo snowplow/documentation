@@ -2029,6 +2029,8 @@ tracker.track(event);
 
 Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM Custom JavaScript Variable ADD LINK.
 
+Snowtype will also generate a minified version.
+
 ```json title="snowtype.config.json"
 {
   "orgId": "your-org-id",

@@ -12,9 +12,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The bot detection plugin uses [FingerprintJS BotD](https://github.com/nicedoc/fingerprintjs-botd) to detect automated browsers — such as Selenium, PhantomJS, and headless Chrome — directly in the browser. Once detection completes, it attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) to every event.
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-This is useful when you want to identify bot traffic as early as possible, before events reach your pipeline. For a broader approach that also incorporates server-side signals, see the [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md).
+The bot detection plugin uses [FingerprintJS BotD](https://github.com/nicedoc/fingerprintjs-botd) to detect automated browsers such as Selenium, PhantomJS, or headless Chrome. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) to every event.
+
+This is useful when you want to identify bot traffic as early as possible, before events reach your pipeline. For a broader approach that also incorporates server-side indicators, see the [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md).
+
+:::note
+The plugin is available since version 4.7 of the tracker.
+:::
+
+The bot detection entity is **automatically tracked** once configured.
 
 ## Install the plugin
 
@@ -65,17 +73,19 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Output
 
-The plugin attaches a `client_side_bot_detection` entity (`iglu:com.snowplowanalytics.snowplow/client_side_bot_detection/jsonschema/1-0-0`) to every event.
+The plugin attaches a `client_side_bot_detection` entity to every event.
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `bot` | boolean | `true` if an automated browser was detected, `false` otherwise. |
-| `kind` | string or null | The type of bot detected (e.g. `"selenium"`, `"headless_chrome"`, `"phantomjs"`), or `null` if no bot was detected. |
+<SchemaProperties
+  example={{
+    bot: true,
+    kind: "headless_chrome"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for bot detection entity, powered by the BotD library (https://github.com/fingerprintjs/BotD)", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "client_side_bot_detection", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "bot": { "description": "Whether the current browser is identified as a bot", "type": "boolean" }, "kind": { "description": "The type of bot detected. Populated when bot is true, null or omitted otherwise. See https://github.com/fingerprintjs/BotD/blob/main/src/types.ts", "type": ["string", "null"], "enum": ["awesomium", "cef", "cefsharp", "coachjs", "electron", "fminer", "geb", "nightmarejs", "phantomas", "phantomjs", "rhino", "selenium", "sequentum", "slimerjs", "webdriverio", "webdriver", "headless_chrome", "unknown", null] } }, "required": ["bot"], "additionalProperties": false }} />
 
 :::note Asynchronous detection
 
-Bot detection runs asynchronously. Events tracked before detection completes will not have this entity attached. In most cases, detection finishes within milliseconds, but if you need the entity on the very first event, consider deferring your initial tracking calls until the tracker is fully initialized.
+Bot detection runs asynchronously. Events tracked before detection completes won't have this entity attached. In most cases, detection finishes within milliseconds, but if you need the entity on the very first event, consider deferring your initial tracking calls until the tracker is fully initialized.
 
 :::
 
-The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) can consolidate this client-side signal with server-side indicators from YAUAA, IAB, and ASN lookups into a single `bot_detection` entity.
+The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) can consolidate this client-side indicator with server-side indicators from YAUAA, IAB, and ASN lookups into a single `bot_detection` entity.

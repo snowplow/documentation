@@ -27,7 +27,7 @@ Events tracked with [server-side anonymization](/docs/events/anonymous-tracking/
 
 ### Client-side bot detection plugin
 
-The [bot detection plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) runs in the browser to detect automation frameworks — such as Selenium, PhantomJS, and headless Chrome — using behavioral signals. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) with a `bot` boolean and a `kind` field identifying the bot type.
+The [bot detection plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for the web tracker runs in the browser to detect automation frameworks, such as Selenium, PhantomJS, or headless Chrome, using behavioral signals. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) with a `bot` boolean and a `kind` field identifying the bot type.
 
 ### IAB enrichment
 

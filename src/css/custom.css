@@ -1805,8 +1805,8 @@ pre.mermaid {
 
 /* TOC: preserve custom font-size and padding */
 .table-of-contents__link {
-  font-size: 0.875rem !important; /* 14px */
-  padding: 6px 20px !important;
+  font-size: 0.875rem !important;     /* 14px */
+  padding: 4px 12px !important;
 }
 
 /* Sidenav: preserve custom link padding */
@@ -1823,6 +1823,6 @@ pre.mermaid {
 
 /* Custom variable overrides: ensure values survive prod build */
 :root {
-  --ifm-toc-padding-horizontal: 20px !important;
+  --ifm-toc-padding-horizontal: 12px !important;
   --ifm-menu-link-padding-vertical: 0.25rem !important;
 }

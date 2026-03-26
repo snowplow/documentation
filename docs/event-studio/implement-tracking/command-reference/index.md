@@ -59,7 +59,7 @@ Generates tracking code based on the configuration file.
 | `--validations`                         | Add [runtime validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) using Ajv. Available only for the Browser tracker.                                               |         |
 | `--no-validations`                      | Generate without runtime validations.                                                                                                                                                            |         |
 | `--disallowDevSchemas`                  | Disallow [generation of code](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) using schemas only deployed on DEV environment. | `false` |
-| `--deprecateOnlyOnProdAvailableUpdates` | Show deprecation warnings ADD LINK only when there are PROD-available schema updates.                                                                                                            | `false` |
+| `--deprecateOnlyOnProdAvailableUpdates` | Show [deprecation warnings](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#deprecation-and-hidden-warnings) only when there are PROD-available schema updates.            | `false` |
 
 ## `update`
 

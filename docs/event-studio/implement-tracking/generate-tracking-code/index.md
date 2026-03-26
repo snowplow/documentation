@@ -579,3 +579,37 @@ trackUserLogInSpec({
   context: [user, userAuth],
 });
 ```
+
+## Deprecation and hidden warnings
+
+When you `generate` code from event specifications, Snowtype checks whether the data structures referenced by each specification are up to date. If a newer version of a data structure exists, or if the data structure has been hidden in Console, Snowtype adds a warning comment to the generated tracking function.
+
+There are two types of warnings:
+- Outdated data structure: the event specification references a data structure version that isn't the latest. Snowtype marks the generated function with `@deprecated Outdated data structure detected.` in JavaScript/TypeScript, or an equivalent comment in other languages.
+- Hidden data structure: the event specification references a data structure that has been hidden in Console. Snowtype marks the generated function with `Warning: Hidden data structure detected.`
+
+If both conditions apply, both warnings appear together:
+
+```typescript
+/**
+ * @deprecated Outdated data structure detected.
+ * Warning: Hidden data structure detected.
+ * Tracks a MakesPurchase event specification.
+ * ID: 132a582b-88f3-4bcc-b1d5-c89e5813bbc9
+ */
+export function trackMakesPurchaseSpec(
+    ...
+)
+```
+
+These warnings surface in your IDE so you can see which event specifications need attention.
+
+### Show warnings only for production-deployed updates
+
+By default, Snowtype flags outdated data structures in event specifications, regardless of where the newer version is deployed. If you only want to see deprecation warnings when a newer version has been deployed to your production environment, use the `--deprecateOnlyOnProdAvailableUpdates` flag:
+
+```bash
+npx snowtype generate --deprecateOnlyOnProdAvailableUpdates
+```
+
+This suppresses outdated warnings when the newer schema version only exists in development, which can reduce noise during active development. You can also set this in your [configuration file](/docs/event-studio/implement-tracking/configuration-reference/index.md#command-options).

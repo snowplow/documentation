@@ -199,12 +199,12 @@ CLI flags take precedence over values set in the configuration file.
 
 The `generate` options apply when running `snowtype generate`, which creates the initial code based on your configuration and schemas.
 
-| Option                                | Type      | Default | Description                                                                                                                        | Equivalent flag                         |
-| ------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `instructions`                        | `boolean` | `false` | Generate a Markdown file with implementation instructions for each event specification                                             | `--instructions`                        |
-| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) code in the output | `--validations`                         |
-| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment                                                      | `--disallowDevSchemas`                  |
-| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show deprecation warnings for schemas that have a newer version deployed to production                                        | `--deprecateOnlyOnProdAvailableUpdates` |
+| Option                                | Type      | Default | Description                                                                                                                                                                                          | Equivalent flag                         |
+| ------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `instructions`                        | `boolean` | `false` | Generate a [Markdown file](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#markdown-instructions) with implementation instructions for each event specification                | `--instructions`                        |
+| `validations`                         | `boolean` | `false` | Include runtime [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) code in the output                                                                   | `--validations`                         |
+| `disallowDevSchemas`                  | `boolean` | `false` | Fail generation if any schema is only deployed to the development environment                                                                                                                        | `--disallowDevSchemas`                  |
+| `deprecateOnlyOnProdAvailableUpdates` | `boolean` | `false` | Only show [deprecation warnings](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#deprecation-and-hidden-warnings) for schemas that have a newer version deployed to production | `--deprecateOnlyOnProdAvailableUpdates` |
 
 ```json title="Example"
 {

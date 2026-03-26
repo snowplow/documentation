@@ -10,7 +10,7 @@ date: "2026-03-19"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide walks you through installing Snowtype and connecting it to your Snowplow account.
+This page walks you through installing Snowtype and connecting it to your Snowplow account.
 
 To use Snowtype, you need:
 

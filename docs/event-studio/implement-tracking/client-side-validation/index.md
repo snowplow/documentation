@@ -8,12 +8,19 @@ keywords: ["client-side validation", "browser validation", "schema validation", 
 
 TODO regenerate this page
 
+
+Using Snowtype you can get notified, at runtime, about schema validation errors and fix them before shipping to production.
+
 :::info
-This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.
+This feature is available for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser), in both JavaScript and TypeScript.
 :::
 
-## Schema validation right on your browser
-Using Snowtype you can get notified, at runtime, about schema validation errors and fix them before slipping to production.
+
+When enabled, every event sent through generated code is checked against:
+
+- **Schema rules**: does the event data match the schema definition?
+- **Cardinality rules**: does the event include the correct number of each entity?
+- **Property rules**: do entity values match the constraints defined in the event specification?
 
 To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
 

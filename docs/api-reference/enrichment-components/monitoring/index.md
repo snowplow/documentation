@@ -15,8 +15,8 @@ Enrich tracks the following metrics:
 
 - `raw`: total number of raw collector payloads received.
 - `good`: total number of events successfully enriched.
-- `failed` (`incomplete` before version 6.0.0): total number of [failed events](/docs/fundamentals/failed-events/index.md) produced, e.g. due to schema violations or enrichment failures.
-- `bad`: total number of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
+- `failed` (`incomplete` before version 6.0.0): the number of failed events produced due to [common failures](/docs/fundamentals/failed-events/index.md#common-failures), e.g. schema violations or enrichment failures.
+- `bad`: total number of all types of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
 - `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md).
 - `e2e_latency_millis` (`latency` before version 6.0.0): time difference between the collector timestamp and when the event is emitted to the output stream.
 - `latency_millis` (since version 6.0.0): delay between an input record being written to the stream and Enrich starting to process it.

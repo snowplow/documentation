@@ -1,31 +1,29 @@
 ---
 title: "Keep code up to date"
-sidebar_label: "Keep code up to date"
+sidebar_label: "Keep code up to date TODO"
 sidebar_position: 3
 description: "Update your Snowtype-generated tracking code when schemas change, manage your lock file, and automate updates in CI/CD."
 keywords: ["Snowtype", "update", "lock file", "patch", "purge", "CI/CD", "schema versions"]
 date: "2026-03-23"
 ---
 
-TODO work through this page
+You can check for updates to the schemas and event specifications in your configuration with the `snowtype update` command.
 
-Schemas evolve over time. When an event specification or data structure gets a new version, your generated tracking code falls behind. Outdated code loses type safety and may send events that [fail validation](/docs/fundamentals/failed-events/index.md), because the generated types no longer match what the pipeline expects.
+## Keep data structures up to date
 
-Snowtype provides commands to check for updates, apply them selectively, and keep your configuration clean.
+When generating code for data structures and Iglu Central schemas, the version number is included in the configuration file. For example, this data structure is version `1-0-0`.
 
-## How version tracking works
-
-The first time you run `snowtype generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This lock file pins the exact schema versions used for code generation.
-
-On subsequent runs, `generate` reads from the lock file rather than fetching the latest versions. This ensures reproducible builds — running `generate` twice produces the same output, even if a schema was updated in between.
-
-To pick up newer schema versions, use the `snowtype update` command.
-
-:::note
-Commit `.snowtype-lock.json` to version control. It ensures everyone on your team generates code from the same schema versions.
-:::
-
-## Check for updates
+```json title="snowtype.config.json"
+{
+  "orgId": "your-org-id",
+  "tracker": "@snowplow/browser-tracker",
+  "language": "typescript",
+  "outpath": "./src/tracking/snowplow",
+  "dataStructures": [
+    "iglu:com.example/product/jsonschema/1-0-0"
+  ]
+}
+```
 
 Run `snowtype update` to check whether any of your pinned schemas have newer versions available:
 
@@ -35,7 +33,15 @@ npx snowtype update
 
 The command outputs a diff showing the available version updates:
 
-![Version diff showing available updates](images/patch-diff.png)
+```bash
+✔: Valid configuration found
+⠧ Checking for updates...✔: Available updates found!
+✔: Available Data Structures Updates
+
+ - iglu:com.example/product/jsonschema/1-0-0
+ + iglu:com.example/product/jsonschema/2-0-0
+```
+
 
 You can then choose to accept the updates and regenerate your tracking code. To skip the confirmation prompt and automatically update and regenerate, use the `--yes` flag:
 
@@ -43,29 +49,9 @@ You can then choose to accept the updates and regenerate your tracking code. To 
 npx snowtype update --yes
 ```
 
-### Scope updates
+### Update based on SchemaVer level
 
-You can limit the update check to a subset of your configuration:
-
-```bash
-# Check specific event specifications only
-npx snowtype update --eventSpecs <id1> <id2>
-
-# Check specific data products only
-npx snowtype update --dataProducts <id1> <id2>
-```
-
-### Check draft versions
-
-By default, `update` only checks published schema versions. To include the latest draft version, use the `--latestDraft` flag:
-
-```bash
-npx snowtype update --latestDraft
-```
-
-## Control update notifications
-
-For data structure updates, you can filter what `update` shows you based on the [SchemaVer](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/) bump level TODO. The `--maximumBump` flag sets the highest level of update to include. It defaults to `major`, meaning all updates are shown.
+For data structure updates, you can filter what `update` shows you based on the [SchemaVer](/docs/fundamentals/schemas/versioning/index.md) bump level. The `--maximumBump` flag sets the highest level of update to include. It defaults to `major`, meaning all updates are shown.
 
 For example, if your configuration pins `iglu:com.acme_company/page_unload/jsonschema/1-0-0` and versions `1-0-1`, `1-1-0`, and `2-0-0` are available:
 
@@ -80,21 +66,81 @@ npx snowtype update --maximumBump=patch
 # Shows 1-0-1 only.
 ```
 
-You can also set this in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) so it applies to every `update` run:
+You can also set this in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) so it applies to every `update` run.
 
-```json title="snowtype.config.json"
+## Keep event specifications up to date
+
+The first time you run `snowtype generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file. This lock file pins the exact event specification versions used for code generation.
+
+It has this structure:
+
+```json
 {
-  "options": {
-    "commands": {
-      "update": {
-        "maximumBump": "minor"
-      }
-    }
+  "eventSpecifications": {
+    "a965caf1-88a6-4a89-9aea-cc92516a9d56": 8,
+    "c83f1895-3eb3-469e-a592-a22fabd545b0": 1
   }
 }
 ```
 
-## Add new schemas
+If you've specified tracking plans in your configuration, Snowtype will list event specifications referenced within them individually in the lock file.
+
+:::note
+Commit `.snowtype-lock.json` to version control. This ensures everyone on your team is generating code from the same versions.
+:::
+
+On subsequent runs, `generate` will read from the lock file rather than fetching the latest versions. This ensures reproducible builds, as running `generate` twice produces the same output, even if a schema was updated in between.
+
+If you add new event specifications to your configuration file, and then run `generate` without updating the lock file, Snowtype will skip them:
+
+```bash
+Generating...⚠ Warning: Skipping 25 event specification(s) not found in lock file. Run 'update --yes' to add new entries.
+```
+
+To check for newer event specification versions, use the `update` command:
+
+```bash
+npx snowtype update
+```
+
+Use the `--yes` flag to automatically accept all updates and regenerate the lock file:
+
+```bash
+✔: Valid configuration found
+⠦ Checking for updates...✔: Available updates found!
+✔: Available Event Specification Updates
+
+ - 8a4d8cbd-e703-4e06-9484-abc1877771a7: (new)
+ + 8a4d8cbd-e703-4e06-9484-abc1877771a7: version 13
+
+ℹ No updates applied
+ℹ To apply the available updates automatically run `update` with the --yes flag
+ℹ (caution: will overwrite the configuration file)
+```
+
+### Include draft versions
+
+By default, `update` only checks published event specification versions. If Snowtype isn't detecting your event specification, it might be because it's still in draft mode.
+
+To include the latest draft version, use the `--latestDraft` flag:
+
+```bash
+npx snowtype update --latestDraft
+```
+
+### Scope update to specific IDs
+
+You can limit the update check to a subset of your configuration:
+
+```bash
+# Check specific event specifications only
+npx snowtype update --eventSpecs <id1> <id2>
+
+# Check specific tracking plans only
+npx snowtype update --dataProducts <id1> <id2>
+```
+
+## Add new sources with `patch`
 
 Use `snowtype patch` to add new event specifications, data structures, or other schema sources to your configuration file without editing it by hand:
 

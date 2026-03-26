@@ -1,6 +1,6 @@
 ---
 title: "Snowtype CLI command reference"
-sidebar_label: "Command reference"
+sidebar_label: "Command reference TODO"
 sidebar_position: 11
 description: "Summary of Snowtype CLI commands and options for code generation, with details on usage scenarios and configuration."
 keywords: ["Snowtype commands", "CLI reference", "command options", "Snowtype CLI"]

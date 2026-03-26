@@ -48,6 +48,8 @@ Add sources to your configuration manually by editing the file, or with `snowtyp
 npx snowtype patch
 ```
 
+See more details about the `patch` command ADD LINK and ADD LINK.
+
 ### Tracking plans
 
 A [tracking plan](/docs/event-studio/tracking-plans/index.md) groups related event specifications together. Adding a tracking plan to your configuration generates code for all of its event specifications at once.

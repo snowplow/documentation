@@ -480,10 +480,30 @@ Track this when the user clicks the Log in button on the log in form/selection m
 
 When you are developing new data structures, they may only be deployed to your development environment. Generating and using tracking code from development-only schemas and shipping it to production can cause [failed events](/docs/fundamentals/failed-events/index.md), because the production pipeline doesn't have those schemas.
 
-By default, Snowtype prints a warning when it detects development-only schemas. To turn this into a hard error that stops generation, use the `--disallowDevSchemas` flag:
+By default, Snowtype prints a warning when it detects development-only schemas:
+
+```bash
+✔: Valid configuration found
+⠦ Generating...
+ ⚠ Warning: Generating code using schemas in DEV environment, tracking against those will result in failed events. Schemas in DEV:
+iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0
+
+✔: Code generated, writing...
+```
+
+To turn this into a hard error that stops generation, use the `--disallowDevSchemas` flag:
 
 ```bash
 npx snowtype generate --disallowDevSchemas
+```
+
+```bash
+✔: Valid configuration found
+⠼ Generating...
+ ⚠ Warning: Generating code using schemas in DEV environment, tracking against those will result in failed events. Schemas in DEV:
+iglu:com.snplow.msc.aws/user_authentication/jsonschema/1-0-0
+
+✗ Error: Code generation using schemas in DEV environment not allowed. Publish the schemas and retry.
 ```
 
 This is especially useful in CI/CD pipelines where you want to catch the problem before code reaches production.
@@ -495,6 +515,8 @@ How to implement the generated code depends on the tracker and language you're u
 This example demonstrates how to use Snowtype's generated code for the Browser tracker, based on the generated code shown above.
 
 Check out the full [data structures](/docs/event-studio/implement-tracking/generate-tracking-code/example-data-structures/index.md) and [event specifications](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md) example pages for different languages and trackers.
+
+Using the generated data structure and Iglu Central schema code:
 
 ```typescript
 import {
@@ -530,6 +552,8 @@ trackWebPage<Product | WebPage>({
   context: [product, webPage],
 });
 ```
+
+Using the generated event specification code:
 
 ```typescript
 import {

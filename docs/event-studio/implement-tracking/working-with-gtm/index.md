@@ -1,6 +1,6 @@
 ---
 title: "Use Snowtype with Google Tag Manager"
-sidebar_label: "Snowtype and Google Tag Manager"
+sidebar_label: "Snowtype and Google Tag Manager TODO"
 sidebar_position: 5
 description: "Generate tracking code specifically formatted for Google Tag Manager custom JavaScript with Snowtype's GTM target for easier tag implementation."
 keywords: ["Snowtype GTM", "Google Tag Manager", "GTM tracking", "GTM custom JavaScript", "GTM code generation"]

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The bot detection plugin uses [FingerprintJS BotD](https://github.com/nicedoc/fingerprintjs-botd) to detect automated browsers such as Selenium, PhantomJS, or headless Chrome. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) to every event.
+The bot detection plugin uses [FingerprintJS BotD](https://github.com/fingerprintjs/Botd) to detect automated browsers such as Selenium, PhantomJS, or headless Chrome. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) to every event.
 
 This is useful when you want to identify bot traffic as early as possible, before events reach your pipeline. For a broader approach that also incorporates server-side indicators, see the [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md).
 

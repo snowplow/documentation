@@ -1,105 +1,113 @@
 ---
 title: "Use Snowtype with Google Tag Manager"
-sidebar_label: "Snowtype and Google Tag Manager TODO"
+sidebar_label: "Snowtype and Google Tag Manager"
 sidebar_position: 5
 description: "Generate tracking code specifically formatted for Google Tag Manager custom JavaScript with Snowtype's GTM target for easier tag implementation."
 keywords: ["Snowtype GTM", "Google Tag Manager", "GTM tracking", "GTM custom JavaScript", "GTM code generation"]
 ---
 
-TODO regenerate this page
+Snowtype can generate tracking code specifically formatted for Google Tag Manager (GTM). Instead of importing the code into a JavaScript project, you copy the generated output into a [Custom JavaScript variable](https://support.google.com/tagmanager/answer/7683362?hl=en#custom_javascript) in GTM.
 
-:::info
-This feature is available from version 0.5.0.
-:::
+This is useful when your tracking implementation lives entirely within GTM, and you don't have a separate code repository for it.
 
-To make working with Google Tag Manager and event tracking easier, we created a specific target for Snowtype fitting the way Google Tag Manager handles custom JavaScript code.
+Benefits of using Snowtype with GTM:
+- Generated functions are available on `window.__snowtype` for all tags to use
+- Inline JSDoc type definitions for code documentation
 
-A few extra benefits:
-- Simple initialization and maintenance.
-- Snowtype generated functions are available in `window.__snowtype` for all tags to use.
-- Fully typed code documentation using JSDoc.
+## Set up a project
 
-## Getting Started without a code repository
+If you already use Snowtype in an existing project, you can switch to GTM output by changing your configuration. Set `tracker` to `google-tag-manager` and `language` to `javascript-gtm`:
 
-<details>
-<summary>Already using Snowtype?</summary>
-
-To generate code for usage in Google Tag Manager, you should use the option `Google Tag Manager` as the tracker option in your ` [init](../commands/index.md#snowtype-init) ` TODO flow or replace your `tracker` and `language` attributes with the following values:
-
-```json
+```json title="snowtype.config.json"
 {
-    // Rest of the attributes...
     "tracker": "google-tag-manager",
     "language": "javascript-gtm"
 }
 ```
-</details>
 
-What we are going to showcase here is how you can set up a separate project that uses Snowtype to generate code for your Google Tag Manager tracking needs. _You can also use version control to better understand any changes you make across time._
+Then run `npx snowtype generate` to regenerate.
 
-The only requirement is to first have [Node.js](https://nodejs.org/en/download/package-manager) installed on your computer. After that, open your terminal and run the following commands:
+### Create a new project
+
+If you don't have an existing project, you can create one specifically for GTM. This is a lightweight Node.js project whose only purpose is to run Snowtype and produce the generated output.
+
+You need [Node.js](https://nodejs.org/en/download/package-manager) version 18 or later.
+
 ```bash
-# Navigate to a directory that you wish to create your project in.
-cd ./directory/to/setup/the/project
-# Create a folder for the project. Here you can replace
-# 'container-id' with the GTM container the code will be used in.
-mkdir snowtype-gtm-container-id
-# Change directory to the newly created folder.
-cd snowtype-gtm-container-id
-# This will create a few needed files for the project.
+# Create and enter a project directory
+mkdir snowtype-gtm && cd snowtype-gtm
+
+# Initialize the project and install Snowtype
 npm init -y
-# This will install the latest version of Snowtype.
 npm install @snowplow/snowtype@latest
-# This will start the Snowtype init flow,
-# in which you should select 'Google Tag Manager' when
-# prompted to select a tracker.
-npx @snowplow/snowtype@latest init
+
+# Run the init flow — select 'Google Tag Manager' when prompted
+npx snowtype init
 ```
 
-After you have completed the `init` flow and have added your desired configuration, you can go ahead and generate the code you need to use:
+After completing the `init` flow and adding your desired configuration, generate the code:
 
 ```bash
-npx @snowplow/snowtype@latest generate
+npx snowtype generate
 ```
 
-After that you can find the code in the specified `outpath` attribute of your configuration file.
+Snowtype will create `snowplow.js` and `snowplow.minified.js` files at the path you configured in `outpath`. These files contain the code you'll add to GTM.
 
-## Using in Google Tag Manager
+## Add the generated code to GTM
 
-The code that Snowtype will generate is included in a `snowplow.js` file and, as stated in the file as well, is the code to be **copied and pasted** into a Google Tag Manager [Custom JavaScript variable](https://support.google.com/tagmanager/answer/7683362?hl=en#custom_javascript).
+The generated `snowplow.js` file is designed to be copied and pasted into a GTM Custom JavaScript variable.
 
-Below you can see the steps you need to create the variable using the contents generated by Snowtype:
-![](./images/gtm-var.gif)
+To create the variable:
 
+1. In GTM, go to **Variables** > **New**.
+2. Choose **Custom JavaScript** as the variable type.
+3. Paste the contents of `snowplow.js` into the code field.
+4. Name the variable (for example, `Snowtype Tracking`).
 
-:::warning
+![Creating a Custom JavaScript variable in GTM with Snowtype-generated code](./images/gtm-var.gif)
 
-If the generated code is too large for Google Tag Manager, you will receive a warning from Snowtype. You can choose to use the `.minified.js` version created by Snowtype to reduce the file size. Alternatively, you can split the code into multiple variables and include them in the order they are generated, or place them directly into a Custom HTML tag.
+:::note Size limit
+
+GTM limits Custom JavaScript variables to 20,000 characters. If your generated code exceeds this limit, Snowtype will warn you. Use the `snowplow.minified.js` file instead, which Snowtype generates automatically alongside the full version. If the minified version still exceeds the limit, you can split the code across multiple variables or place it directly in a Custom HTML tag.
 
 :::
 
-### Naming and calling the Custom JavaScript
+## Initialize the tracking code
 
-After selecting a name for the Custom JavaScript variable, you would need to include it in a [Custom HTML](https://support.google.com/tagmanager/answer/6107167?hl=en#CustomHTML) tag so that it is executed. Depending on your Google Tag Manager setup, there are a couple, or more, places the variable can be used. An example is a type of Custom HTML tag that runs during page initialization:
+The Custom JavaScript variable defines a `snowtypeInit()` function but doesn't execute it. To run it, include the variable in a [Custom HTML](https://support.google.com/tagmanager/answer/6107167?hl=en#CustomHTML) tag that fires during page initialization:
 
 ```html
 <script>
-// ... Rest of the initialization code you might have
-{{NAME_OF_THE_CREATED_VARIABLE}}
+{{Snowtype Tracking}}
 </script>
 ```
 
-### Using the Snowtype generated code
+Replace `{{Snowtype Tracking}}` with the name you gave to the Custom JavaScript variable.
 
-From there on, after the function has been executed you can access all the functions generated would be available through the `window.__snowtype` object.
+Once this tag fires, all generated tracking functions become available on the `window.__snowtype` object.
 
-For example:
+## Call the tracking functions
+
+After initialization, you can call the generated functions from any tag or script on the page. The functions are available on `window.__snowtype`.
+
+For data structures, Snowtype generates `track` and `create` functions:
+
 ```js
-// Example Data Structure
-window.__snowtype.trackExample({ ... });
+// Track as a self-describing event
+window.__snowtype.trackProductView({ name: "Example", price: 9.99 });
 
-// Or for an Example Event Specification
-window.__snowtype.trackExampleSpec({ ... });
+// Create an entity for attaching to other events
+var productEntity = window.__snowtype.createProductView({ name: "Example", price: 9.99 });
 ```
 
-Keep in mind that at the bottom of the generated file, there are all the JSDoc type definitions required for you to use the functions correctly.
+For event specifications, Snowtype generates `Spec` functions that include the event specification metadata automatically:
+
+```js
+window.__snowtype.trackAddToCartSpec({
+  name: "Example",
+  price: 9.99,
+  context: [productEntity]
+});
+```
+
+The bottom of the generated file includes JSDoc type definitions for all functions and their parameters.

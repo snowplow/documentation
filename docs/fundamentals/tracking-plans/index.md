@@ -73,7 +73,7 @@ Break down the barriers that exist between data producers and data consumers, by
 
 * Enhances accountability and transparency by providing a clear audit trail of all data modifications, fostering confidence in data integrity
 
-**Volume metrics**; tracking plans can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/event-studio/implement-tracking/commands-reference/index.md#snowtype-patch).
+**Volume metrics**; tracking plans can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific event specification IDs.
 
 **Benefits:**
 

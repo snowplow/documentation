@@ -189,7 +189,7 @@ Set `tracker` and `language` to a valid combination from this table:
 
 ## Command options
 
-The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/commands-reference/index.md) for more details on the flags.
+The `options` object configures the behavior of specific Snowtype commands. You can set these in the configuration file so they apply on every run, or override them with CLI flags. See the [commands reference](/docs/event-studio/implement-tracking/command-reference/index.md) for more details on the flags.
 
 :::note Flag priority
 CLI flags take precedence over values set in the configuration file.

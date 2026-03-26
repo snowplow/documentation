@@ -188,3 +188,7 @@ Combine this with [`--disallowDevSchemas`](/docs/event-studio/implement-tracking
 npx snowtype update --yes
 npx snowtype generate --disallowDevSchemas
 ```
+
+## TODO deprecation warnings
+
+TODO

@@ -4,6 +4,7 @@
   "main": "worker/index.js",
   "assets": {
     "directory": "./build",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
   }
 }

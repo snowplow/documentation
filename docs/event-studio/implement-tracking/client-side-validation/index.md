@@ -6,36 +6,32 @@ description: "Enable real-time schema validation in the browser for JavaScript a
 keywords: ["client-side validation", "browser validation", "schema validation", "JavaScript validation", "TypeScript validation"]
 ---
 
-TODO regenerate this page
+Using Snowtype you can get notified, at runtime, if tracked events don't match their schema definitions, or the rules defined in their event specification. This allows you to catch errors before they reach production.
 
+When enabled, every event sent through Snowtype generated code is checked against:
 
-Using Snowtype you can get notified, at runtime, about schema validation errors and fix them before shipping to production.
-
-:::info
-This feature is available for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser), in both JavaScript and TypeScript.
-:::
-
-
-When enabled, every event sent through generated code is checked against:
-
-- **Schema rules**: does the event data match the schema definition?
-- **Cardinality rules**: does the event include the correct number of each entity?
+- **Schema rules**: does the event or entity data match the schema definition?
+- **Cardinality rules**: does the event include the correct number of each entity, as defined in the event specification?
 - **Property rules**: do entity values match the constraints defined in the event specification?
 
-To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
+:::info Only for Browser tracker
+This feature is available for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) only, in both JavaScript and TypeScript.
+:::
 
-```sh
-npx @snowplow/snowtype@latest generate --validations
-```
+To use validation, you'll first need to install three [Ajv](https://ajv.js.org/) packages: `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.
 
-For validations to work, you will also need to install `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.
-
-```sh
+```bash
 # Example using npm
 npm install ajv@8 ajv-formats@2 ajv-draft-04@1
 ```
 
-This command will generate your code as expected but behind the scenes run all the validations required when an event is being sent from the generated code.
+To opt-in to client-side validation, include the `--validations` flag when you are generating your code.
+
+```bash
+npx snowtype generate --validations
+```
+
+You can also enable validations permanently in your [configuration file](/docs/event-studio/implement-tracking/configuration-reference/index.md) instead of passing the flag each time.
 
 ## Schema validation example
 

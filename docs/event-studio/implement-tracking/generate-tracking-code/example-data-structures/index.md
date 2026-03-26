@@ -35,6 +35,8 @@ Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md). S
   "tracker": "@snowplow/browser-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -188,6 +190,8 @@ Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in
   "tracker": "@snowplow/browser-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -364,6 +368,8 @@ Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Sn
   "tracker": "@snowplow/javascript-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -533,6 +539,8 @@ The generated code is compatible with both Swift 5.5+ and 6.
   "tracker": "snowplow-ios-tracker",
   "language": "swift",
   "outpath": "./Sources/Tracking/Snowtype",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -927,6 +935,8 @@ Generated code for the [Android tracker](/docs/sources/mobile-trackers/index.md)
   "tracker": "snowplow-android-tracker",
   "language": "kotlin",
   "outpath": "./app/src/main/java/snowtype",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1081,6 +1091,8 @@ Generated code for the [React Native tracker](/docs/sources/react-native-tracker
   "tracker": "@snowplow/react-native-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1248,6 +1260,8 @@ Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md)
   "tracker": "snowplow-flutter-tracker",
   "language": "dart",
   "outpath": "./lib/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1387,6 +1401,8 @@ Snowtype generates TypeScript type definitions and typed `track` and `create` fu
   "tracker": "@snowplow/node-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1545,6 +1561,8 @@ Snowtype generates JSDoc typedefs and untyped `track` and `create` functions, wi
   "tracker": "@snowplow/node-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1725,6 +1743,8 @@ Generated code for the [Golang tracker](/docs/sources/golang-tracker/index.md). 
   "tracker": "snowplow-golang-tracker",
   "language": "go",
   "outpath": "./tracking/snowtype",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -1911,6 +1931,8 @@ Generated code for the [Java tracker](/docs/sources/java-tracker/index.md). Snow
   "tracker": "snowplow-java-tracker",
   "language": "java",
   "outpath": "./src/main/java/snowtype",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -2037,6 +2059,8 @@ Snowtype will also generate a minified version.
   "tracker": "google-tag-manager",
   "language": "javascript-gtm",
   "outpath": "./gtm",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],

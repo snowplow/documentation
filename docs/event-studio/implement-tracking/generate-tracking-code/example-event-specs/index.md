@@ -43,7 +43,10 @@ Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md). S
   "tracker": "@snowplow/browser-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -295,7 +298,10 @@ Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in
   "tracker": "@snowplow/browser-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -561,7 +567,10 @@ Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Sn
   "tracker": "@snowplow/javascript-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -818,7 +827,10 @@ The generated code is compatible with both Swift 5.5+ and 6.
   "tracker": "snowplow-ios-tracker",
   "language": "swift",
   "outpath": "./Sources/Tracking/Snowtype",
+  "dataProductIds": [],
   "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": [],
   // "namespace": "SnowplowTracking"
 }
 ```
@@ -1158,7 +1170,10 @@ Generated code for the [Android tracker](/docs/sources/mobile-trackers/index.md)
   "tracker": "snowplow-android-tracker",
   "language": "kotlin",
   "outpath": "./app/src/main/java/snowtype",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -1494,7 +1509,10 @@ Generated code for the [React Native tracker](/docs/sources/react-native-tracker
   "tracker": "@snowplow/react-native-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
   "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -1754,7 +1772,10 @@ Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md)
   "tracker": "snowplow-flutter-tracker",
   "language": "dart",
   "outpath": "./lib/tracking/snowplow",
+  "dataProductIds": [],
   "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -2060,7 +2081,10 @@ Snowtype generates TypeScript type definitions and typed `track` and `create` fu
   "tracker": "@snowplow/node-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -2313,7 +2337,10 @@ Snowtype generates JSDoc typedefs and untyped `track` and `create` functions, wi
   "tracker": "@snowplow/node-tracker",
   "language": "javascript",
   "outpath": "./src/tracking/snowplow",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -2579,7 +2606,10 @@ Generated code for the [Golang tracker](/docs/sources/golang-tracker/index.md). 
   "tracker": "snowplow-golang-tracker",
   "language": "go",
   "outpath": "./tracking/snowtype",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -2932,7 +2962,10 @@ Enums and the `EventSpecification` class are also generated separately, along wi
   "tracker": "snowplow-java-tracker",
   "language": "java",
   "outpath": "./src/main/java/snowtype",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 
@@ -3318,7 +3351,10 @@ Snowtype will also generate a minified version.
   "tracker": "google-tag-manager",
   "language": "javascript-gtm",
   "outpath": "./gtm",
-  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]
+  "dataProductIds": [],
+  "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"],
+  "dataStructures": [],
+  "igluCentralSchemas": []
 }
 ```
 

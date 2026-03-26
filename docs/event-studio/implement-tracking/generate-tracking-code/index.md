@@ -46,6 +46,8 @@ To see the output for different trackers and languages, check out the [full exam
   "tracker": "@snowplow/browser-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
   "igluCentralSchemas": [
     "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
   ],
@@ -170,6 +172,7 @@ To see the output for different trackers and languages, check out the [full exam
   "tracker": "@snowplow/browser-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
   "igluCentralSchemas": [],
   "dataStructures": [],
   "eventSpecificationIds": ["a965caf1-88a6-4a89-9aea-cc92516a9d56"]

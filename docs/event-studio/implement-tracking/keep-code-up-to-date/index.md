@@ -19,6 +19,9 @@ When generating code for data structures and Iglu Central schemas, the version n
   "tracker": "@snowplow/browser-tracker",
   "language": "typescript",
   "outpath": "./src/tracking/snowplow",
+  "dataProductIds": [],
+  "eventSpecificationIds": [],
+  "igluCentralSchemas": [],
   "dataStructures": [
     "iglu:com.example/product/jsonschema/1-0-0"
   ]

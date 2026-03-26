@@ -417,39 +417,26 @@ const rules = [
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
 ];
 
-const exactRedirects = new Map();
-const prefixRedirects = [];
-
-for (const [from, to, status] of rules) {
-  if (from.endsWith('/*')) {
-    prefixRedirects.push({ prefix: from.slice(0, -1), to, status });
-  } else if (from.includes('*')) {
-    // Handle patterns like "/path/ui*" (wildcard without preceding /)
-    const idx = from.indexOf('*');
-    prefixRedirects.push({ prefix: from.slice(0, idx), to, status });
-  } else {
-    exactRedirects.set(from, { to, status });
-  }
-}
-
 export function findRedirect(pathname) {
-  // Try exact match
-  let match = exactRedirects.get(pathname);
-  if (match) return match;
-
-  // Try with/without trailing slash
   const alt = pathname.endsWith('/')
     ? pathname.slice(0, -1)
     : pathname + '/';
-  match = exactRedirects.get(alt);
-  if (match) return match;
 
-  // Try prefix match (first match wins, preserving _redirects file order)
-  for (const { prefix, to, status } of prefixRedirects) {
-    if (pathname.startsWith(prefix)) {
-      const splat = pathname.slice(prefix.length);
-      const target = to.includes(':splat') ? to.replace(':splat', splat) : to;
-      return { to: target, status };
+  for (const [from, to, status] of rules) {
+    if (from.endsWith('/*')) {
+      const prefix = from.slice(0, -1);
+      if (pathname.startsWith(prefix)) {
+        const splat = pathname.slice(prefix.length);
+        return { to: to.includes(':splat') ? to.replace(':splat', splat) : to, status };
+      }
+    } else if (from.includes('*')) {
+      const prefix = from.slice(0, from.indexOf('*'));
+      if (pathname.startsWith(prefix)) {
+        const splat = pathname.slice(prefix.length);
+        return { to: to.includes(':splat') ? to.replace(':splat', splat) : to, status };
+      }
+    } else if (pathname === from || alt === from) {
+      return { to, status };
     }
   }
 

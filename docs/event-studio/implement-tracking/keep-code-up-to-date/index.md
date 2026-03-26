@@ -1,9 +1,9 @@
 ---
-title: "Keep code up to date"
-sidebar_label: "Keep code up to date TODO"
+title: "Keep Snowtype code up to date"
+sidebar_label: "Keep code up to date"
 sidebar_position: 3
-description: "Update your Snowtype-generated tracking code when schemas change, manage your lock file, and automate updates in CI/CD."
-keywords: ["Snowtype", "update", "lock file", "patch", "purge", "CI/CD", "schema versions"]
+description: "Update your Snowtype-generated tracking code when schemas and event specifications change, manage your lock file, and automate updates in CI/CD."
+keywords: ["Snowtype", "update", "lock file", "patch", "purge", "CI/CD", "schema versions", "event specification versions"]
 date: "2026-03-23"
 ---
 

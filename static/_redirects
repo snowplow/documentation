@@ -516,7 +516,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 # Snowtype restructure
 /docs/event-studio/implement-tracking/snowtype/using-the-cli/* /docs/event-studio/implement-tracking/install-snowtype/:splat 301
 /docs/event-studio/implement-tracking/snowtype/snowtype-config/* /docs/event-studio/implement-tracking/snowtype-config/:splat 301
-/docs/event-studio/implement-tracking/snowtype/commands/* /docs/event-studio/implement-tracking/commands/:splat 301
+/docs/event-studio/implement-tracking/snowtype/commands/* /docs/event-studio/implement-tracking/commands-reference/:splat 301
 /docs/event-studio/implement-tracking/snowtype/client-side-validation/* /docs/event-studio/implement-tracking/client-side-validation/:splat 301
 /docs/event-studio/implement-tracking/snowtype/working-with-gtm/* /docs/event-studio/implement-tracking/working-with-gtm/:splat 301
 /docs/event-studio/implement-tracking/snowtype/* /docs/event-studio/implement-tracking/:splat 301

@@ -24,7 +24,7 @@ A few extra benefits:
 <details>
 <summary>Already using Snowtype?</summary>
 
-To generate code for usage in Google Tag Manager, you should use the option `Google Tag Manager` as the tracker option in your [init](../commands/index.md#snowtype-init) flow or replace your `tracker` and `language` attributes with the following values:
+To generate code for usage in Google Tag Manager, you should use the option `Google Tag Manager` as the tracker option in your ` [init](../commands/index.md#snowtype-init) ` TODO flow or replace your `tracker` and `language` attributes with the following values:
 
 ```json
 {

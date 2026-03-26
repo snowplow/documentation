@@ -15,7 +15,7 @@ Enrich tracks the following metrics:
 
 - `raw`: total number of raw collector payloads received.
 - `good`: total number of events successfully enriched.
-- `failed` (`incomplete` before version 6.0.0): total number of events that failed due to schema violations or enrichment failures (if the failed events feature is enabled).
+- `failed` (`incomplete` before version 6.0.0): total number of [failed events](/docs/fundamentals/failed-events/index.md) produced, e.g. due to schema violations or enrichment failures.
 - `bad`: total number of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
 - `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md).
 - `e2e_latency_millis` (`latency` before version 6.0.0): time difference between the collector timestamp and when the event is emitted to the output stream.
@@ -83,7 +83,7 @@ Prometheus is configured under `monitoring.metrics.prometheus` in your configura
 }
 ```
 
-The `tags` map adds common labels to all metrics. Point your Prometheus scrape config at `http://<host>:<port>/metrics`.
+The `tags` map adds common labels to all metrics. Point your Prometheus scrape config at `http://<host>:<port>/metrics`, where `<port>` is the health probe port (default `8000`, configured via `monitoring.healthProbe.port`).
 
 ## Sentry
 

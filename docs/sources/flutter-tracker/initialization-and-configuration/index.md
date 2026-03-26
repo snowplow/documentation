@@ -42,8 +42,8 @@ The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST p
 The `EmitterConfiguration` class was added in v0.3.0.
 :::
 
-:::note
-The `GlobalContextsConfiguration` class was added in v0.9.0.
+:::note Version support
+The `GlobalContextsConfiguration` class was added in 0.9.0.
 :::
 
 ## Configuration of tracker properties: `TrackerConfiguration`
@@ -142,10 +142,10 @@ Determines the GDPR context that will be attached to all events sent by the trac
 
 ## Global context configuration: `GlobalContextsConfiguration`
 
-Configures global context entities to attach to all events. Unlike per-event context, global context entities are sent with every event without needing to specify them on individual `track()` calls.
+Configures global context entities to attach to all events. Unlike per-event context entities, global context entities are sent with every event without needing to specify them on individual `track()` calls.
 
-| Attribute  | Type                   | Description                                                    | Android | iOS | Web | Default |
-| ---------- | ---------------------- | -------------------------------------------------------------- | ------- | --- | --- | ------- |
-| `contexts` | `List<SelfDescribing>` | List of context entities to attach to all tracked events.     | ✔       | ✔   | ✔   | empty   |
+| Attribute  | Type                   | Description                                           | Android | iOS | Web | Default |
+| ---------- | ---------------------- | ----------------------------------------------------- | ------- | --- | --- | ------- |
+| `contexts` | `List<SelfDescribing>` | List of context entities to attach to all tracked events. | ✔       | ✔   | ✔   | empty   |
 
 See the [Global context page](/docs/sources/flutter-tracker/adding-data/global-context/index.md) for detailed information on configuring global contexts at initialization time and managing them dynamically at runtime.

@@ -9,9 +9,9 @@ sidebar_position: 4000
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset:
 
-1. Event context using self-describing data: Attach event context, describing anything you like, in the form of self-describing JSONs.
-2. Global context: Attach context entities to all events globally, without specifying them on each individual call.
-3. Subject: Include information about the user, or the platform on which the event occurred.
+1. Event context using self-describing data: attach event context, describing anything you like, in the form of self-describing JSONs.
+2. Global context: attach context entities to all events globally, without specifying them on each individual call.
+3. Subject: include information about the user, or the platform on which the event occurred.
 
 ## Event context
 

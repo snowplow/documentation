@@ -391,6 +391,30 @@ const rules = [
   ['/docs/event-studio/tracking-plans/tracking-plan-templates/*', '/docs/event-studio/tracking-plans/templates/:splat', 301],
   ['/docs/event-studio/snowplow-cli/*', '/docs/event-studio/programmatic-management/snowplow-cli/:splat', 301],
   ['/docs/event-studio/snowtype/*', '/docs/event-studio/implement-tracking/snowtype/:splat', 301],
+  ['/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/*', '/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/:splat', 301],
+  // Sidebar reshuffle
+  ['/docs/signals/define-attributes/*', '/docs/signals/attributes/:splat', 301],
+  ['/docs/signals/retrieve-attributes/*', '/docs/signals/attributes/:splat', 301],
+  ['/docs/signals/define-interventions/*', '/docs/signals/interventions/:splat', 301],
+  ['/docs/signals/receive-interventions/*', '/docs/signals/interventions/subscribe/:splat', 301],
+  ['/docs/signals/resources/*', '/docs/signals/get-started/:splat', 301],
+  ['/docs/signals/', '/docs/signals/introduction/', 301],
+  ['/docs/resources/migration-guides/*', '/docs/migration-guides/:splat', 301],
+  ['/docs/resources/*', '/docs/licensing/:splat', 301],
+  ['/docs/licensing/copyright-license/*', '/docs/licensing/:splat', 301],
+  ['/docs/api-reference/*', '/docs/api-reference/versions/:splat', 301],
+  // New data modeling feature
+  ['/docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/*', '/docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat', 301],
+  ['/docs/modeling-your-data/running-data-models-via-console/dbt/*', '/docs/modeling-your-data/running-data-models-via-console/', 301],
+  // Micro in Console
+  ['/docs/testing/snowplow-micro/basic-usage/*', '/docs/testing/snowplow-micro/local/:splat', 301],
+  ['/docs/testing/snowplow-micro/configuring-enrichments/*', '/docs/testing/snowplow-micro/local/enrichments/:splat', 301],
+  ['/docs/testing/snowplow-micro/remote-usage/*', '/docs/testing/snowplow-micro/local/remote-usage/:splat', 301],
+  ['/docs/testing/snowplow-micro/advanced-usage/*', '/docs/testing/snowplow-micro/local/advanced-usage/:splat', 301],
+  ['/docs/testing/snowplow-micro/adding-schemas/*', '/docs/testing/snowplow-micro/local/schemas/:splat', 301],
+  ['/docs/event-studio/mcp-server/*', '/docs/llms-support/mcp-server/:splat', 301],
+  // Bot filtering moved to events section
+  ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
 ];
 
 const exactRedirects = new Map();

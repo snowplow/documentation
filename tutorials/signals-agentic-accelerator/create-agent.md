@@ -32,13 +32,13 @@ The `get_signals` tool connects to the Snowplow Signals Profiles API using the c
 
 ## Configure the foundation model
 
-Run the notebook cell that sets up the foundation model. The `BedrockModel` class connects to Amazon Bedrock:
+Run the notebook cell that sets up the foundation model. Make sure you have set your AWS credentials and region in the credentials cell first - uncomment and fill in `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` if they are not already in your environment. The notebook includes guidance on enabling Claude model access and required IAM permissions.
 
 ```python
 model = BedrockModel(
     model_id="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
     temperature=0.3,
-    region_name=region,
+    region_name=AWS_REGION,
 )
 ```
 

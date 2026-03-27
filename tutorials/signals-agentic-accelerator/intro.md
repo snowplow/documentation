@@ -20,7 +20,7 @@ By the end of this accelerator you will have:
 * Persistent customer memory using AgentCore Memory
 * An agent that combines behavioral context and memory to deliver personalized responses
 
-The accelerator takes approximately 1-2 hours to complete. All source code is available in the accompanying [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb).
+The accelerator takes approximately 1-2 hours to complete. All source code is available in the accompanying [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/aisp-1115/signals-agentic-accelerator/static/notebooks/signals-agentic-accelerator.ipynb).
 
 ## Architecture
 

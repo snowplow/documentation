@@ -7,8 +7,6 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "server-side", "node tracker
 date: "2026-03-26"
 ---
 
-# Server-side tracking
-
 In this stage, you'll add server-side tracking for the agent's orchestration loop. By the end, every invocation, reasoning step, tool execution, and completion will be captured with token counts, latency, and success/failure status.
 
 :::tip Code-along / Read-along
@@ -31,10 +29,10 @@ flowchart LR
 
 Each step involves an LLM call. Each tool call has its own latency and can succeed or fail. The agent consumes tokens, makes decisions, and may loop multiple times before producing a final response. None of this is visible from the client.
 
-Server-side tracking answers: **How many steps did the agent take? How many tokens did it use? How long did each tool take? Did the agent succeed?**
+Server-side tracking answers: how many steps did the agent take? How many tokens did it use? How long did each tool take? Did the agent succeed?
 
-:::info Key concept: The agent lifecycle
-Every request to the chat API triggers an **invocation** - a complete cycle of the agent doing its work. Within an invocation, the agent takes **steps** (LLM reasoning iterations). Some steps include **tool executions**. When the agent has a final response, the invocation reaches **completion**.
+:::note Key concept: The agent lifecycle
+Every request to the chat API triggers an invocation - a complete cycle of the agent doing its work. Within an invocation, the agent takes steps (LLM reasoning iterations). Some steps include tool executions. When the agent has a final response, the invocation reaches completion.
 
 All events in a single lifecycle share an `invocation_id` for correlation. This is the key to joining client events (which carry the same ID in `message_received`) with server events.
 :::
@@ -43,11 +41,11 @@ All events in a single lifecycle share an `invocation_id` for correlation. This 
 
 This stage introduces:
 
-- **1 new dependency:** `@snowplow/node-tracker`
-- **4 event schemas:** `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
-- **2 entity schemas:** `agent_context`, `tool_context`
-- **1 new file:** `src/lib/tracking/server.ts` - the server tracking module
-- **Modifications to:** `src/app/api/chat/route.ts` (wiring tracking into the agent lifecycle) and `src/lib/tools/business-tools.ts` (tools self-instrument their execution)
+- 1 new dependency: `@snowplow/node-tracker`
+- 4 event schemas: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
+- 2 entity schemas: `agent_context`, `tool_context`
+- 1 new file: `src/lib/tracking/server.ts` - the server tracking module
+- Modifications to: `src/app/api/chat/route.ts` (wiring tracking into the agent lifecycle) and `src/lib/tools/business-tools.ts` (tools self-instrument their execution)
 
 ## Define the schemas
 
@@ -221,9 +219,9 @@ data:
 
 The other three event schemas cover:
 
-- **`agent_step`:** Each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `prompt_tokens`, `completion_tokens`, `finish_reason`, `tool_calls_count`
-- **`tool_execution`:** Each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`, `result_summary`
-- **`agent_completion`:** The invocation summary - `total_steps`, `total_duration_ms`, `total_tokens`, `tools_called`, `finish_reason`, `success`
+- `agent_step`: each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `prompt_tokens`, `completion_tokens`, `finish_reason`, `tool_calls_count`
+- `tool_execution`: each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`, `result_summary`
+- `agent_completion`: the invocation summary - `total_steps`, `total_duration_ms`, `total_tokens`, `tools_called`, `finish_reason`, `success`
 
 ## Create the server tracking module
 
@@ -544,10 +542,10 @@ export function createSearchFlightsTool(ctx: RequestContext) {
 
 The key patterns here:
 
-- **Timing:** `startTime` is captured before execution, duration calculated after
-- **Counter incrementing:** `ctx.totalToolsCalled++` and `ctx.businessToolsCalled++` so the completion event has accurate totals
-- **Both paths tracked:** Success records a `result_summary` with structured output metadata; failure records `errorType` and `errorMessage`
-- **Tool-specific summaries:** `search_flights` records `flights_found` and `price_range`; `book_flight` records `booking_id` and `confirmation_code`; `check_calendar` records `conflicts_found` and `available_dates_count`
+- Timing: `startTime` is captured before execution, duration calculated after
+- Counter incrementing: `ctx.totalToolsCalled++` and `ctx.businessToolsCalled++` so the completion event has accurate totals
+- Both paths tracked: success records a `result_summary` with structured output metadata; failure records `errorType` and `errorMessage`
+- Tool-specific summaries: `search_flights` records `flights_found` and `price_range`; `book_flight` records `booking_id` and `confirmation_code`; `check_calendar` records `conflicts_found` and `available_dates_count`
 
 The `book_flight` and `check_calendar` tools follow the same wrapping pattern.
 
@@ -559,17 +557,17 @@ npm run start:dev
 ```
 
 1. Send "Find flights from London to Paris tomorrow"
-2. Open the **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press refresh to see both client and server events arriving
-3. Find the **`agent_invocation`** event - note the `invocation_id` that links all events in this lifecycle
-4. Find the **`agent_step`** events - observe `step_number` incrementing, token counts, and `finish_reason` ("tool_calls" when the agent wants to call a tool, "stop" when it has a final response)
-5. Find the **`tool_execution`** for `search_flights` - note `execution_duration_ms`, the `success: true` flag, and the `result_summary` showing how many flights were found and the price range
-6. Find the **`agent_completion`** - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
-7. Trace the **`invocation_id`** across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
+2. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press **Refresh** to see both client and server events arriving
+3. Find the `agent_invocation` event - note the `invocation_id` that links all events in this lifecycle
+4. Find the `agent_step` events - observe `step_number` incrementing, token counts, and `finish_reason` ("tool_calls" when the agent wants to call a tool, "stop" when it has a final response)
+5. Find the `tool_execution` for `search_flights` - note `execution_duration_ms`, the `success: true` flag, and the `result_summary` showing how many flights were found and the price range
+6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
+7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
 ---
 
-> **Summary**
-> **Files:** 1 added, 3 modified | **Events:** `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion` | **Entities:** `agent_context`, `tool_context`
-> **Key takeaway:** You can now trace the agent's entire reasoning lifecycle - every step, every tool call, every token. This answers "what did the agent do?"
+> Summary
+> Files: 1 added, 3 modified | Events: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion` | Entities: `agent_context`, `tool_context`
+> Key takeaway: you can now trace the agent's entire reasoning lifecycle - every step, every tool call, every token. This answers "what did the agent do?"
 
 You now have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.

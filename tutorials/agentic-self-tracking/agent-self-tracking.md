@@ -7,8 +7,6 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "self-tracking", "intent", "
 date: "2026-03-26"
 ---
 
-# Agentic self-tracking
-
 In this stage, you'll give the agent tools to track its own reasoning. By the end, the agent will log what it understood, why it made each decision, and when it can't meet a user's requirements.
 
 :::tip Code-along / Read-along
@@ -42,9 +40,9 @@ These are tools like any other - the LLM calls them when instructed by the syste
 
 This stage introduces:
 
-- **3 event schemas:** `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
-- **1 new file:** `src/lib/tools/self-tracking-tools.ts` - three tool factories
-- **Modifications to:** `src/lib/tracking/server.ts` (three new tracking functions) and `src/app/api/chat/route.ts` (register tools + system prompt protocol)
+- 3 event schemas: `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
+- 1 new file: `src/lib/tools/self-tracking-tools.ts` - three tool factories
+- Modifications to: `src/lib/tracking/server.ts` (three new tracking functions) and `src/app/api/chat/route.ts` (register tools + system prompt protocol)
 
 No new entities are needed - the self-tracking events reuse the `agent_context` and `tool_context` entities from v0.2.
 
@@ -383,8 +381,8 @@ export function createTrackUserIntentTool(ctx: RequestContext) {
 
 Key things to notice:
 
-- The Zod schema provides **structured input validation** for the agent's self-report. The `intent_category` is an enum, `confidence` is bounded 0-1, and `extracted_entities` has typed fields for known travel entities with `.passthrough()` allowing additional ones.
-- The tool **increments counters** on the shared request context (`ctx.selfTrackingToolsCalled++`) so the `agent_completion` event has accurate totals.
+- The Zod schema provides structured input validation for the agent's self-report. The `intent_category` is an enum, `confidence` is bounded 0-1, and `extracted_entities` has typed fields for known travel entities with `.passthrough()` allowing additional ones.
+- The tool increments counters on the shared request context (`ctx.selfTrackingToolsCalled++`) so the `agent_completion` event has accurate totals.
 - The return value `{ tracked: true, intent_id }` is simple - the agent doesn't need a complex response, just confirmation.
 - The tool's `description` includes "Call this FIRST" - this is part of guiding the agent's behavior.
 
@@ -567,7 +565,7 @@ IMPORTANT: After calling tracking tools, you MUST continue to take action on the
 Do not just track -- actually help them by calling business tools or asking for missing information.`,
 ```
 
-:::info Why this matters: prompt engineering for self-tracking
+:::note Why this matters: prompt engineering for self-tracking
 Without clear instructions, the LLM might skip tracking, over-track, or treat tracking as its primary task rather than a secondary one. The protocol addresses each risk:
 
 - **"MUST use self-tracking tools"** - prevents skipping
@@ -589,16 +587,16 @@ npm run start:dev
 
 Send "Find cheap flights from London to Paris tomorrow"
 
-1. Open the **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) and refresh after the agent responds
-2. Find the **`user_intent_detected`** event - drill into it to see:
+1. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) and refresh after the agent responds
+2. Find the `user_intent_detected` event - drill into it to see:
    - `intent_category`: "search_flights"
    - `confidence`: ~0.9 (this is a clear request)
    - `extracted_entities`: `{ origin: "London", destination: "Paris", date: "...", preferences: ["cheap"] }`
    - `reasoning`: The agent's explanation of how it interpreted the message
-3. Find the **`agent_decision_logged`** event - see:
+3. Find the `agent_decision_logged` event - see:
    - `decision_type`: "tool_selection"
    - `reasoning`: "Will use search_flights with sort_by='price' since user said 'cheap'"
-4. Find the **`tool_execution`** for `search_flights` (this existed in v0.2)
+4. Find the `tool_execution` for `search_flights` (this existed in v0.2)
 5. Trace the full event chain through the Micro UI - all events share the same `invocation_id`
 
 ### Scenario B: Constraint violation
@@ -606,8 +604,8 @@ Send "Find cheap flights from London to Paris tomorrow"
 Send "Find a flight to Tokyo for $20"
 
 1. Refresh the Micro UI after the agent responds
-2. Find the **`user_intent_detected`** event - notice the confidence might be lower and the budget constraint is noted in `extracted_entities`
-3. Find the **`constraint_violation`** event - drill into it to see:
+2. Find the `user_intent_detected` event - notice the confidence might be lower and the budget constraint is noted in `extracted_entities`
+3. Find the `constraint_violation` event - drill into it to see:
    - `constraint_type`: "budget"
    - `user_requirement`: "$20 to Tokyo"
    - `reason_not_met`: An explanation of why flights to Tokyo can't cost $20
@@ -617,8 +615,8 @@ Send "Find a flight to Tokyo for $20"
 
 ---
 
-> **Summary**
-> **Files:** 1 added, 2 modified | **Events:** `user_intent_detected`, `agent_decision_logged`, `constraint_violation` | **Entities:** (reuses `agent_context`, `tool_context` from v0.2)
-> **Key takeaway:** The agent now documents its own reasoning - what it understood, why it chose a course of action, and when it can't meet requirements. This answers "what did the agent think?"
+> Summary
+> Files: 1 added, 2 modified | Events: `user_intent_detected`, `agent_decision_logged`, `constraint_violation` | Entities: reuses `agent_context`, `tool_context` from v0.2
+> Key takeaway: the agent now documents its own reasoning - what it understood, why it chose a course of action, and when it can't meet requirements. This answers "what did the agent think?"
 
 You now have all three layers of tracking in place. The final section puts it all together - showing how events connect across layers and what you can build with this data.

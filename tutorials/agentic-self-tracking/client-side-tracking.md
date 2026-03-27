@@ -7,8 +7,6 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "client-side", "browser trac
 date: "2026-03-26"
 ---
 
-# Client-side tracking
-
 In this stage, you'll add browser-side Snowplow tracking for user interactions. By the end, every message sent and every response received will be captured as validated, schema-backed events.
 
 :::tip Code-along / Read-along
@@ -24,13 +22,13 @@ To see exactly what changed: `git diff v0.0-starter..v0.1-client-tracking`
 
 Before writing code, it's worth understanding Snowplow's event model. If you're already familiar with Snowplow, skip to [What you'll add](#what-youll-add).
 
-:::info Key concept: Self-describing events and entities
-Snowplow uses a **self-describing** event model:
+:::note Key concept: Self-describing events and entities
+Snowplow uses a self-describing event model:
 
-- **Events** are lightweight actions - "a message was sent", "a response was received". Each event references a schema that defines its structure.
-- **Entities** (also called contexts) are rich data objects attached to events. They describe the "who, what, where" - a `message_context` entity might include the message role, length, and a preview of the content.
-- **Schemas** define and validate both events and entities. They live in an [Iglu](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) registry and follow a versioning format (e.g., `1-0-0`).
-- **Snowplow Micro** runs locally in Docker and validates every incoming event against its schema in real-time. Events that pass validation land in `/micro/good`; those that fail land in `/micro/bad`, and viewable in the browser at `/micro/ui`.
+- Events are lightweight actions - "a message was sent", "a response was received". Each event references a schema that defines its structure.
+- Entities (also called contexts) are rich data objects attached to events. They describe the "who, what, where" - a `message_context` entity might include the message role, length, and a preview of the content.
+- Schemas define and validate both events and entities. They live in an [Iglu](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) registry and follow a versioning format (e.g., `1-0-0`).
+- Snowplow Micro runs locally in Docker and validates every incoming event against its schema in real-time. Events that pass validation land in `/micro/good`; those that fail land in `/micro/bad`, and viewable in the browser at `/micro/ui`.
 
 This separation - thin events with rich attached entities - keeps events composable. The same `message_context` entity can be attached to both `message_sent` and `message_received` events without duplicating the schema.
 :::
@@ -39,12 +37,12 @@ This separation - thin events with rich attached entities - keeps events composa
 
 This stage introduces:
 
-- **1 new dependency:** `@snowplow/browser-tracker`
-- **2 event schemas:** `message_sent` and `message_received`
-- **1 entity schema:** `message_context`
-- **1 new file:** `src/lib/tracking/client.ts` - the client tracking module
-- **1 new file:** `start.sh` - dev startup script that runs Snowplow Micro alongside Next.js
-- **Modifications to:** `src/app/page.tsx` (wiring tracking into the UI)
+- 1 new dependency: `@snowplow/browser-tracker`
+- 2 event schemas: `message_sent` and `message_received`
+- 1 entity schema: `message_context`
+- 1 new file: `src/lib/tracking/client.ts` - the client tracking module
+- 1 new file: `start.sh` - dev startup script that runs Snowplow Micro alongside Next.js
+- Modifications to: `src/app/page.tsx` (wiring tracking into the UI)
 
 ## Define the schemas
 
@@ -527,9 +525,9 @@ With both services running:
 
 1. Open [http://localhost:3000](http://localhost:3000) and send a message: "Find flights from London to Paris tomorrow"
 2. Open the **LiveTrackingPanel** (the sidebar on the right) - you'll see events appearing in real-time
-3. Open the **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press the Refresh button to see events arriving. You can click on individual events to explore their properties and attached entities. The UI also shows any events that failed schema validation. ([Micro UI docs](https://docs.snowplow.io/docs/testing/snowplow-micro/local/#checking-the-results))
-4. Examine a **`message_sent`** event in the Micro UI - notice the self-describing event structure and the attached `message_context` entity showing role: "user", the message length, and the truncated preview
-5. Examine a **`message_received`** event - notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used
+3. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press **Refresh** to see events arriving. You can click on individual events to explore their properties and attached entities. The UI also shows any events that failed schema validation. ([Micro UI docs](https://docs.snowplow.io/docs/testing/snowplow-micro/local/#checking-the-results))
+4. Examine a `message_sent` event in the Micro UI - notice the self-describing event structure and the attached `message_context` entity showing role: "user", the message length, and the truncated preview
+5. Examine a `message_received` event - notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used
 
 :::note
 Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you prefer programmatic access, but the UI is the recommended way to explore events throughout this tutorial.
@@ -537,8 +535,8 @@ Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you p
 
 ---
 
-> **Summary**
-> **Files:** 3 added, 3 modified | **Events:** `message_sent`, `message_received` | **Entities:** `message_context`
-> **Key takeaway:** You can now see every user interaction - when messages are sent, how long responses take, and how many tools the agent used. This answers "what did the user do?"
+> Summary
+> Files: 3 added, 3 modified | Events: `message_sent`, `message_received` | Entities: `message_context`
+> Key takeaway: you can now see every user interaction - when messages are sent, how long responses take, and how many tools the agent used. This answers "what did the user do?"
 
 Client-side tracking gives you visibility into the user's experience, but the agent's internal behavior is still invisible. When the agent receives a message, it enters a multi-step reasoning loop - calling the LLM, deciding which tools to use, executing them, and generating a response. None of that is captured yet. In the next section, you'll add server-side tracking to see inside the agent's orchestration.

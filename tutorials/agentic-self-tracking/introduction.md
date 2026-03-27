@@ -1,21 +1,19 @@
 ---
-title: "Introduction & overview"
-sidebar_label: "Introduction & overview"
+title: "Introduction and overview"
+sidebar_label: "Introduction and overview"
 position: 1
 description: "Learn how to instrument an AI-powered chatbot with Snowplow behavioral tracking across three architectural layers: client-side interactions, server-side agent orchestration, and agent self-tracking."
 keywords: ["snowplow", "agentic", "tracking", "ai", "observability", "llm"]
 date: "2026-03-26"
 ---
 
-# Introduction & overview
-
 AI-powered applications have a visibility problem. Traditional analytics tells you what users clicked and which pages they visited, but when your product is an AI agent, the interesting behavior happens in layers you can't see from the browser.
 
 Consider a travel booking chatbot. A user types "find me cheap flights to Paris tomorrow." Behind the scenes:
 
-1. **The browser** sends the message and eventually renders a response - but that's all it knows.
-2. **The server** orchestrates an entire reasoning loop - the LLM is invoked, it decides which tools to call, it executes a flight search, it processes results, and it streams a response. Multiple steps, multiple tool calls, token consumption, latency - none of this is visible to the client.
-3. **The agent itself** makes decisions you can't observe from either the client or the server framework. It interprets the user's intent ("they want cheap flights, so I'll sort by price"). It chooses parameters for tools. It detects when a requirement can't be met ("$50 to Tokyo isn't possible"). This reasoning is invisible unless the agent explicitly reports it.
+1. The browser sends the message and eventually renders a response - but that's all it knows.
+2. The server orchestrates an entire reasoning loop - the LLM is invoked, it decides which tools to call, it executes a flight search, it processes results, and it streams a response. Multiple steps, multiple tool calls, token consumption, latency - none of this is visible to the client.
+3. The agent itself makes decisions you can't observe from either the client or the server framework. It interprets the user's intent ("they want cheap flights, so I'll sort by price"). It chooses parameters for tools. It detects when a requirement can't be met ("$50 to Tokyo isn't possible"). This reasoning is invisible unless the agent explicitly reports it.
 
 Each of these layers answers a different question:
 
@@ -31,10 +29,10 @@ You'll work with a fully functional travel booking chatbot built with Next.js, R
 
 By the end of this tutorial, you'll have added:
 
-- **10 custom event schemas** tracking user messages, agent invocations, tool executions, intent detection, decisions, and constraint violations
-- **3 context entities** enriching events with message, agent, and tool metadata
-- **Schema validation** against all events locally via Snowplow Micro
-- **A real-time event panel** in the UI visualizing the event stream as it happens
+- 10 custom event schemas tracking user messages, agent invocations, tool executions, intent detection, decisions, and constraint violations
+- 3 context entities enriching events with message, agent, and tool metadata
+- Schema validation against all events locally via Snowplow Micro
+- A real-time event panel in the UI visualizing the event stream as it happens
 
 ## Architecture
 
@@ -65,7 +63,7 @@ This tutorial supports two learning paths:
 
 **Read-along:** You check out each git tag, read the code, run the app, and observe events in Snowplow Micro. The tutorial explains what was done and why.
 
-The companion repository has four tagged commits, one for each stage:
+The [companion repository](https://github.com/snowplow-industry-solutions/agentic-app-tracking-tutorial) has four tagged commits, one for each stage:
 
 | Tag | Stage | Question answered |
 |-----|-------|-------------------|
@@ -80,10 +78,10 @@ Each section makes both paths clear. When the instructions diverge, you'll see c
 
 Before you begin, make sure you have:
 
-- **Node.js 18+** installed
-- **Docker** installed and running (required from Stage 1 onwards for Snowplow Micro)
-- **At least one LLM API key:** Anthropic (`ANTHROPIC_API_KEY`), OpenAI (`OPENAI_API_KEY`), or Google (`GOOGLE_GENERATIVE_AI_API_KEY`)
-- **Git** installed
+- Node.js 18+ installed
+- Docker installed and running (required from Stage 1 onwards for Snowplow Micro)
+- At least one LLM API key: Anthropic (`ANTHROPIC_API_KEY`), OpenAI (`OPENAI_API_KEY`), or Google (`GOOGLE_GENERATIVE_AI_API_KEY`)
+- Git installed
 
 ## Setup
 

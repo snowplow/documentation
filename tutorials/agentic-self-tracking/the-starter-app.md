@@ -7,8 +7,6 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "starter", "chatbot"]
 date: "2026-03-26"
 ---
 
-# The starter app
-
 Before adding any tracking, take a tour of the application. This is the baseline - a fully functional AI travel assistant with zero observability.
 
 :::tip Code-along / Read-along
@@ -23,11 +21,11 @@ npm install
 
 The travel assistant is built with:
 
-- **Next.js 16** with React 19 and TypeScript
-- **Vercel AI SDK** for multi-provider LLM support (Anthropic Claude, OpenAI GPT, Google Gemini)
-- **Three business tools:** `search_flights`, `book_flight`, `check_calendar`
-- **A mock flights API** with realistic airline and route data (no external API keys needed for the tools themselves)
-- **Streaming responses** with inline tool call visualization
+- Next.js 16 with React 19 and TypeScript
+- Vercel AI SDK for multi-provider LLM support (Anthropic Claude, OpenAI GPT, Google Gemini)
+- Three business tools: `search_flights`, `book_flight`, `check_calendar`
+- A mock flights API with realistic airline and route data (no external API keys needed for the tools themselves)
+- Streaming responses with inline tool call visualization
 
 ## Key files
 
@@ -88,10 +86,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) and try:
 
-1. **Send a message:** "Find flights from London to Paris tomorrow"
-2. **Try a demo scenario:** Click one of the six pre-built prompts at the top of the page
-3. **Switch models:** Use the dropdown to select a different LLM provider and observe how response styles differ (if you have access to multiple providers)
-4. **Watch tool calls:** Notice the inline tool call indicators showing `search_flights` or `check_calendar` being invoked with parameters and results
+1. Send a message: "Find flights from London to Paris tomorrow"
+2. Try a demo scenario: click one of the six pre-built prompts at the top of the page
+3. Switch models: use the dropdown to select a different LLM provider and observe how response styles differ (if you have access to multiple providers)
+4. Watch tool calls: notice the inline tool call indicators showing `search_flights` or `check_calendar` being invoked with parameters and results
 
 The app works. The agent searches for flights, presents results, and can book them. You can have multi-turn conversations and use different models.
 
@@ -110,8 +108,8 @@ Right now, the only way to know any of this is to manually watch the chat UI or 
 
 ---
 
-> **Summary**
-> **Files:** 0 added, 0 modified | **Events:** none | **Schemas:** none
-> **Key takeaway:** A fully functional AI chatbot with zero observability.
+> Summary
+> Files: 0 added, 0 modified | Events: none | Schemas: none
+> Key takeaway: a fully functional AI chatbot with zero observability.
 
 In the next section, you'll add the first layer of tracking: client-side events that capture what the user does in the browser.

@@ -1,5 +1,6 @@
 ---
 title: "Agentic self-tracking"
+sidebar_label: "Agent self-tracking"
 position: 5
 description: "Give the AI agent tools to track its own reasoning - intent detection, decision logging, and constraint violation reporting - completing the three-layer observability stack."
 keywords: ["snowplow", "agentic", "tracking", "ai", "self-tracking", "intent", "decision", "constraint"]

@@ -1,5 +1,6 @@
 ---
 title: "Client-side tracking"
+sidebar_label: "Client-side tracking"
 position: 3
 description: "Add browser-side Snowplow tracking for user interactions - message sent, message received - with schema validation via Snowplow Micro."
 keywords: ["snowplow", "agentic", "tracking", "ai", "client-side", "browser tracker"]

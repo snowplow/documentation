@@ -1,5 +1,6 @@
 ---
 title: "The starter app"
+sidebar_label: "The starter app"
 position: 2
 description: "Explore the travel booking chatbot before any Snowplow tracking is added. Understand the app architecture, tools, and what's missing without observability."
 keywords: ["snowplow", "agentic", "tracking", "ai", "starter", "chatbot"]

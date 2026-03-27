@@ -1,5 +1,6 @@
 ---
 title: "Server-side tracking"
+sidebar_label: "Server-side tracking"
 position: 4
 description: "Add server-side Snowplow tracking for the agent's orchestration loop - invocations, steps, tool executions, and completions - with full lifecycle tracing."
 keywords: ["snowplow", "agentic", "tracking", "ai", "server-side", "node tracker", "agent lifecycle"]

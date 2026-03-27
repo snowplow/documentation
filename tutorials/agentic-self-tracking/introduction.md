@@ -1,5 +1,6 @@
 ---
 title: "Introduction & overview"
+sidebar_label: "Introduction & overview"
 position: 1
 description: "Learn how to instrument an AI-powered chatbot with Snowplow behavioral tracking across three architectural layers: client-side interactions, server-side agent orchestration, and agent self-tracking."
 keywords: ["snowplow", "agentic", "tracking", "ai", "observability", "llm"]

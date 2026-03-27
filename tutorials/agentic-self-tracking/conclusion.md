@@ -1,5 +1,6 @@
 ---
 title: "Putting it all together"
+sidebar_label: "Putting it all together"
 position: 6
 description: "See how all three tracking layers connect via shared identifiers, review the complete schema inventory, and learn what to build next."
 keywords: ["snowplow", "agentic", "tracking", "ai", "data lineage", "schema inventory"]

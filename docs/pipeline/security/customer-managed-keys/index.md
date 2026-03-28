@@ -201,11 +201,6 @@ Share this information with your Snowplow Customer Success Manager or through a 
 - Which pipeline components you want encrypted (or confirm you want full pipeline encryption)
 - Any specific requirements or restrictions
 
-You can reach Snowplow Support through any of the following channels:
-- Support portal: [support.snowplow.io](https://support.snowplow.io)
-- Email: [support@snowplow.io](mailto:support@snowplow.io)
-- Slack: via your shared Snowplow Slack channel, if you have one
-
 ## Step 4: Snowplow configuration
 
 Once you've shared the key information, Snowplow will configure the following pipeline components to use your custom KMS key.

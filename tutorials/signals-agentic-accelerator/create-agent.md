@@ -61,12 +61,10 @@ agent = Agent(
 Run the test cell in the notebook to verify the agent works:
 
 ```python
-response = agent(
-    "What's the difference in weather between Bangkok and Hanoi at this time of year?"
-)
+response = agent("Tell me about Bangkok as a destination")
 ```
 
-When you call the agent, it follows this execution flow:
+This query uses the `get_destination_info` tool, which returns data from the local data source. When you call the agent, it follows this execution flow:
 
 1. **Query analysis** - the agent analyzes the user's question
 2. **Tool selection** - the agent determines which tools to call

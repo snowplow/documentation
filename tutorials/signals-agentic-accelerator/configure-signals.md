@@ -18,7 +18,7 @@ These attributes form a compact behavioral profile that the agent's `get_signals
 
 ## Set up your credentials
 
-You'll need your Signals connection credentials. These are the same values you configured in the notebook's credentials cell:
+You need your Signals connection credentials. These are the same values you configured in the notebook's credentials cell:
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="cdi" label="CDI" default>
@@ -138,5 +138,5 @@ print("Page view count:", response.get("page_view_count"))
 You should see `page_view_count` and `destination_page_view_count` both equal to 5, matching the number of test events sent.
 
 :::tip
-The Signals credentials you configured earlier in the notebook are also used by the agent's `get_signals` tool. No additional configuration is needed.
+The `get_signals` tool uses the same Signals credentials you configured earlier in the notebook.
 :::

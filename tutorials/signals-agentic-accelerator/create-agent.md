@@ -13,7 +13,7 @@ The example implements a travel assistant, but the same pattern - define tools, 
 
 ## Open the Jupyter notebook
 
-You'll use the Strands Agents framework in a Jupyter notebook to build the agent. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb), or download it locally.
+Use the Strands Agents framework in a Jupyter notebook to build the agent. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb), or download it locally.
 
 ## Define the agent tools
 
@@ -36,7 +36,7 @@ Run the notebook cell that sets up the foundation model. Make sure you have set 
 
 ```python
 model = BedrockModel(
-    model_id="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+    model_id="us.anthropic.claude-sonnet-4-20250514-v1:0",
     temperature=0.3,
     region_name=AWS_REGION,
 )

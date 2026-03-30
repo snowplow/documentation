@@ -64,8 +64,8 @@ AgentCore Memory automatically processes these interactions into long-term memor
 
 Run the notebook cell that defines the `TravelAgentMemoryHooks` class. This uses the Strands Agents [hook system](https://strandsagents.com/latest/documentation/docs/user-guide/concepts/agents/hooks/) to automatically retrieve and store memory around each agent interaction:
 
-* **`retrieve_customer_context`** - fires when a new user message arrives, retrieves relevant memories from both namespaces, and injects them into the message as context
-* **`save_travel_interaction`** - fires after the agent responds, saves the interaction to memory for future retrieval
+* `retrieve_customer_context` - fires when a new user message arrives, retrieves relevant memories from both namespaces, and injects them into the message as context
+* `save_travel_interaction` - fires after the agent responds, saves the interaction to memory for future retrieval
 
 The `retrieve_memories` call uses semantic search - it finds memories relevant to the current query, not just the most recent ones. This means if a user asks about beach destinations, the agent retrieves memories about their beach preferences even if those were mentioned weeks ago.
 

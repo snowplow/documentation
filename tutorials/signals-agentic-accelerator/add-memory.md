@@ -71,7 +71,7 @@ The `retrieve_memories` call uses semantic search - it finds memories relevant t
 
 ## Test personalized responses
 
-Run the notebook cells that rebuild the agent with memory hooks and test it:
+Run the notebook cells that rebuild the agent with memory hooks and test it. The agent now has access to both memory (the seeded customer history) and Signals (the behavioral attributes from your test events).
 
 ```python
 agent_with_memory = Agent(
@@ -90,12 +90,13 @@ response = agent_with_memory("Can you recommend some destinations for me?")
 
 Because you seeded `customer_001` with preferences for warm, adventurous, family-friendly destinations, the agent should incorporate this context into its recommendations without the user needing to restate those preferences.
 
-Try follow-up queries to see how the agent combines behavioral Signals data with memory:
+To test Signals integration, pass the same session ID you used when emitting test events so the agent can fetch those behavioral attributes:
 
 ```python
 response = agent_with_memory(
-    "Based on my browsing behavior, what experiences would suit me?"
+    f"My session ID is {SIGNALS_USER_ID}. Based on my browsing behavior, "
+    "what experiences would suit me?"
 )
 ```
 
-The agent now calls `get_signals` to fetch the behavioral profile and combines it with stored memory to deliver a response informed by both real-time behavior and historical preferences.
+The agent calls `get_signals` with the session ID, retrieves the behavioral profile (page view counts, segment affinities), and combines it with stored memory to deliver a response informed by both real-time behavior and historical preferences.

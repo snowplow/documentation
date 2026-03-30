@@ -32,7 +32,7 @@ The `get_signals` tool connects to the Snowplow Signals Profiles API using the c
 
 ## Configure the foundation model
 
-Run the notebook cell that sets up the foundation model. Make sure you have set your AWS credentials and region in the credentials cell first - uncomment and fill in `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` if they are not already in your environment. The notebook includes guidance on enabling Claude model access and required IAM permissions.
+Run the notebook cell that sets up the foundation model. Make sure you have configured your AWS credentials and region in the credentials cell first. On Google Colab, store your IAM access keys as Colab secrets (key icon in the left sidebar). The notebook loads them automatically. If running locally, ensure your AWS CLI is configured.
 
 ```python
 model = BedrockModel(

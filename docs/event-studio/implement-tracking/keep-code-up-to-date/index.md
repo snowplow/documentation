@@ -125,7 +125,7 @@ Use the `--yes` flag to automatically accept all updates and regenerate the lock
 
 By default, `update` only checks published event specification versions. If Snowtype isn't detecting your event specification, it might be because it's still in draft mode.
 
-To include the latest draft version, use the `--latestDraft` flag:
+To check for drafts and include the latest draft version, use the `--latestDraft` flag:
 
 ```bash
 npx snowtype update --latestDraft

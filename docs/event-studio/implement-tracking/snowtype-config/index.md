@@ -123,3 +123,22 @@ If you manage schemas locally using [Snowplow CLI](/docs/event-studio/programmat
   "repositories": ["./schemas"]
 }
 ```
+
+You can pass in the path to the data structures directly, or the Snowplow CLI directory root.
+
+```json
+// This is fine
+"repositories": ["./my-snowplow-tracking"]
+
+// This also works
+"repositories": ["./my-snowplow-tracking/data-structures"]
+
+// This won't do anything
+"repositories": ["./my-snowplow-tracking/data-products"]
+```
+
+Provide the path relative to the location of your configuration file.
+
+:::note Snowtype limitation
+Snowtype can **only** create tracking code for local data structures, not for local tracking plans (data products).
+:::

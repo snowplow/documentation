@@ -71,4 +71,4 @@ This table shows the support for cross-domain tracking across the main client-si
 
 [Snowplow Identities](/docs/identities/index.md) provides real-time identity resolution, stitching together user identifiers from different events into unified profiles.
 
-Cross-navigation tracking is directly supported within Identities. If you enable [cross-domain tracking support](/docs/identities/concepts/index.md#cross-domain-tracking), Identities will automatically treat `refr_domain_userid` as equivalent to `domain_userid`. The result is that all of a user's activity across your domains — anonymous or authenticated — resolves to the same `snowplow_id`, without any downstream modeling to join the identifiers yourself.
+Cross-navigation tracking is directly supported within Identities. If you enable [cross-domain tracking support](/docs/identities/concepts/cross-domain-tracking/index.md), Identities will automatically treat `refr_domain_userid` as equivalent to `domain_userid`. The result is that all of a user's activity across your domains — anonymous or authenticated — resolves to the same `snowplow_id`, without any downstream modeling to join the identifiers yourself.

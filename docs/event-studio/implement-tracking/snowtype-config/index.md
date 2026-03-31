@@ -38,7 +38,7 @@ The configuration file is a JSON object with the following structure:
 
 The `organizationId`, `tracker`, `language`, and `outpath` options will be pre-filled based on your answers to the `snowtype init` prompts.
 
-Check out the [configuration reference](/docs/event-studio/implement-tracking/configuration-reference/index.md) page for more details on the available options.
+Check out the [configuration reference](/docs/event-studio/implement-tracking/configuration-reference/index.md) page for more details on the available options, including the supported trackers.
 
 ## Add sources
 

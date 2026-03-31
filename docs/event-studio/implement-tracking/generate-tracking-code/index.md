@@ -406,7 +406,11 @@ Code generated for event specifications includes an entity that allows you to li
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity schema for referencing an event specification", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "event_specification", "format": "jsonschema", "version": "1-0-4" }, "type": "object", "properties": { "id": { "description": "Identifier for the event specification that the event adheres to", "type": "string", "maxLength": 254, "minLength": 1 }, "name": { "description": "Name for the event specification that the event adheres to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_id": { "description": "Identifier for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_name": { "description": "Name for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "data_product_domain": { "description": "Domain for the data product that the event specification belongs to", "type": ["string", "null"], "maxLength": 256, "minLength": 1 }, "version": { "description": "Version of the event specification that the event adheres to", "type": ["integer", "null"], "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "required": ["id"] }} />
 
-## Markdown instructions
+## Property rules and instructions
+
+Snowtype will take into account any instructions (property rules) that you define within your event specifications.
+
+### Markdown instructions
 
 When generating code for event specifications, you can also produce a Markdown file containing the implementation instructions defined for each specification. This can be useful for sharing implementation requirements with developers who may not have access to Console.
 
@@ -616,3 +620,19 @@ npx snowtype generate --deprecateOnlyOnProdAvailableUpdates
 ```
 
 This suppresses outdated warnings when the newer schema version only exists in development, which can reduce noise during active development. You can also set this in your [configuration file](/docs/event-studio/implement-tracking/configuration-reference/index.md#command-options).
+
+## Name collisions
+
+If you generate code for multiple versions of the same data structure or Iglu Central schema, Snowtype will disambiguate them by appending numbers to the type and function names. For example, if you provide `iglu:com.example/message_delayed/jsonschema/2-0-0` and `iglu:com.example/message_delayed/jsonschema/3-0-0` in your configuration, the generated code will include e.g. `type MessageDelayed` and `type MessageDelayed1`.
+
+The numbering is based on the order of the sources in your configuration file. Snowtype processes local repository data structures first, then Iglu Central schemas, then Console data structures.
+
+If you use the same data structure in multiple event specifications, Snowtype will generate only one set of functions for that data structure. You can use them wherever they're needed.
+
+:::note Snowtype limitation
+If you have multiple event specifications with the same name, you might experience name collisions, depending on which tracker you're using.
+
+Generated code for Kotlin, Swift, and Dart handles event specification name collisions based on the tracking plan name, using different receiver types and extension names.
+
+Code for the other trackers will contain name clashes in this case. To avoid this, we recommend giving each event specification a unique name.
+:::

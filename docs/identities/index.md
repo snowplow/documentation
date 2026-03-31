@@ -7,6 +7,13 @@ description: "Snowplow Identities provides real-time identity resolution, stitch
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
 ---
 
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Identities is a paid addon for Snowplow CDI."
+/>
+
 Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
 
 Identities allows you to:

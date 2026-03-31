@@ -7,6 +7,13 @@ keywords: ["identities dbt", "identity resolution", "snowplow_id", "identity map
 date: "2026-03-23"
 ---
 
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Identities is a paid addon for Snowplow CDI."
+/>
+
 **The package source code can be found in the [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) repository.**
 
 The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) produced by [Identities](/docs/identities/index.md) into a set of derived tables for identity resolution, identifier lookup, and audit.

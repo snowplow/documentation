@@ -84,7 +84,7 @@ To use the JavaScript tracker on your site, you will need to obtain a code snipp
 <Tabs groupId="offering" queryString>
   <TabItem value="pmc" label="CDI Private Managed Cloud" default>
 
-CDI Private Managed Cloud can automatically generate the snippet for you. Go to the [tag generator](https://console.snowplowanalytics.com/tag-generator) screen, fill in the necessary parameters, and copy the snippet at the bottom.
+CDI Private Managed Cloud can automatically generate the snippet for you. Create a [source application](/docs/event-studio/source-applications/index.md) in Event Studio, then use the **Set up tracking** tab to configure your tracker and copy the generated code snippet.
 
   </TabItem>
   <TabItem value="cloud" label="CDI Cloud">

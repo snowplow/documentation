@@ -135,7 +135,7 @@ response = sp_signals.get_service_attributes(
 print("Page view count:", response.get("page_view_count"))
 ```
 
-You should see `page_view_count` and `destination_page_view_count` both equal to 5, matching the number of test events sent.
+You should see values across multiple attributes - for example, `page_view_count` of 10, `cultural_explorer` of 5, `budget_conscious_count` of 2, and `preferred_experience_length` of `half-day`. The exact counts depend on the test events sent.
 
 :::tip
 The `get_signals` tool uses the same Signals credentials you configured earlier in the notebook.

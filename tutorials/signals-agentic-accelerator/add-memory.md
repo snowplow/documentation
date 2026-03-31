@@ -90,13 +90,12 @@ response = agent_with_memory("Can you recommend some destinations for me?")
 
 Because you seeded `customer_001` with preferences for warm, adventurous, family-friendly destinations, the agent should incorporate this context into its recommendations without the user needing to restate those preferences.
 
-To test Signals integration, pass the same session ID you used when emitting test events so the agent can fetch those behavioral attributes:
+To test Signals integration, ask the agent a question that triggers the `get_signals` tool:
 
 ```python
 response = agent_with_memory(
-    f"My session ID is {SIGNALS_USER_ID}. Based on my browsing behavior, "
-    "what experiences would suit me?"
+    "Based on my browsing behavior, what experiences would suit me?"
 )
 ```
 
-The agent calls `get_signals` with the session ID, retrieves the behavioral profile (page view counts, segment affinities), and combines it with stored memory to deliver a response informed by both real-time behavior and historical preferences.
+The `get_signals` tool automatically uses the same session ID from the test events you sent earlier. In a production deployment, this session ID would come from the application context (for example, passed through from the frontend). The agent retrieves the behavioral profile (page view counts, segment affinities) and combines it with stored memory to deliver a response informed by both real-time behavior and historical preferences.

@@ -129,9 +129,9 @@ Care must therefore be exercised when using the Pixel tracker on domains that yo
 
 Identify the event you wish to track. This may be opening a particular email that is sent out via your email marketing system, or viewing a product you are selling on a third-party marketplace.
 
-### Generate the tracking tag
+### Construct the pixel tracker URL
 
-To generate a pixel tracking tag, create a [source application](/docs/event-studio/source-applications/index.md) in Event Studio and use the **Set up tracking** tab to configure your tracker and generate a code snippet.
+Build your pixel tracker URL using the format shown above. Set your Collector domain and configure the query string parameters according to the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md).
 
 ### Insert the tracking code into the page or ad you wish to track
 

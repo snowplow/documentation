@@ -79,7 +79,7 @@ vars:
         alias: user_id
 ```
 
-Add any additional identifiers your tracking sends, for example `email` or `phone`.
+This list should reflect the identifiers you have [configured in the Identities service](/docs/identities/configuration/index.md) via Console. You can also include additional identifiers from your events that you want available in the output tables, even if they aren't configured in Console for identity resolution.
 
 ### 5. Check source data
 

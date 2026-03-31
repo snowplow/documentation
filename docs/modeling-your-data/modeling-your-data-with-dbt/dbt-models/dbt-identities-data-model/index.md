@@ -97,7 +97,7 @@ where effective_at <= '2026-01-15'
 
 ### `snowplow_identities_identifier_mapping`
 
-Contains all external identifiers linked to an `active_snowplow_id`. The list of identifier types is [configurable](/docs/identities/configuration/index.md). Identifiers are stored in a normalized format with `id_type` and `id_value` columns rather than pivoted into separate columns per type.
+Contains all external identifiers linked to an `active_snowplow_id`. The list of identifier types is [configurable](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md#4-configure-your-identifiers) and should reflect the identifiers you have configured in Console, plus any additional identifiers you want available in the output tables. Identifiers are stored in a normalized format with `id_type` and `id_value` columns rather than pivoted into separate columns per type.
 
 Use this table to look up addressable identifiers, such as email, that can be activated in downstream systems.
 

@@ -11,13 +11,13 @@ When users navigate between sites with different cookie domains, or from a mobil
 
 This works for web-to-web navigation, mobile app-to-webview transitions, and any other scenario where the [web](/docs/sources/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers decorate outgoing links.
 
-You can [enable cross-domain tracking support](/docs/identities/configuration/index.md#enable-cross-domain-tracking-aliases) in the Identities configuration so that Identities automatically extracts `refr_domain_userid` and maps it to `domain_userid` and `client_session_user_id`, linking the user's profiles across sites.
+You can [enable cross-domain tracking support](/docs/identities/configuration/index.md#enable-cross-domain-tracking-aliases) in the Identities configuration so that Identities automatically extracts `refr_domain_userid` and maps it to `domain_userid` and `client_session_user_id`, linking the user's Snowplow IDs across sites.
 
 ## Example cross-domain resolution
 
 In this example, ExampleCompany runs two sites on separate cookie domains: `brandA.com` and `brandB.com`. Cross-domain tracking is configured on the web tracker, and the ExampleCompany team has enabled cross-domain tracking in the Identities configuration.
 
-A user browses `brandA.com` anonymously. The event contains a `domain_userid`. Identities creates a new profile.
+A user browses `brandA.com` anonymously. The event contains a `domain_userid`. Identities creates a new Snowplow ID.
 
 | Event property  | Value        |
 | --------------- | ------------ |
@@ -28,12 +28,12 @@ A user browses `brandA.com` anonymously. The event contains a `domain_userid`. I
 ```mermaid
 graph TD
     A(["domain_userid:<br/>d123"])
-    P1(("**Profile:<br/>sp_001**"))
+    P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1
 ```
 
-The user clicks a link to `brandB.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing profile, and links the new `domain_userid` to it.
+The user clicks a link to `brandB.com`. The destination site assigns a new `domain_userid`, but the event also contains a `refr_domain_userid` field with the `domain_userid` from `brandA.com`. Identities treats `refr_domain_userid` as equivalent to `domain_userid`, finds the existing Snowplow ID, and links the new `domain_userid` to it.
 
 | Event property       | Value        |
 | -------------------- | ------------ |
@@ -46,13 +46,13 @@ The user clicks a link to `brandB.com`. The destination site assigns a new `doma
 graph TD
     A(["domain_userid:<br/>d123"])
     D(["domain_userid:<br/>f456"])
-    P1(("**Profile:<br/>sp_001**"))
+    P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1
     D --- P1
 ```
 
-The user then logs into `brandB.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing profile.
+The user then logs into `brandB.com`. The event contains the same `domain_userid` from that site plus a `user_id`. Identities adds the `user_id` to the existing Snowplow ID.
 
 | Event property  | Value                     |
 | --------------- | ------------------------- |
@@ -65,7 +65,7 @@ graph TD
     A(["domain_userid:<br/>d123"])
     D(["domain_userid:<br/>f456"])
     U(["user_id:<br/>u001"])
-    P1(("**Profile:<br/>sp_001**"))
+    P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1
     D --- P1

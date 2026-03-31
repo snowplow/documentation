@@ -3,7 +3,7 @@ title: "Introduction to Snowplow Identities"
 sidebar_label: "Identities"
 date: "2025-02-25"
 sidebar_position: 6
-description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified profiles."
+description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified Snowplow IDs."
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
 ---
 
@@ -23,9 +23,9 @@ Identity resolution happens in real time as part of the [event enrichment proces
 
 ![Diagram showing where Identities fits into the Snowplow pipeline](./images/identities-pipeline.png)
 
-After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved Snowplow ID to the event in an [identity entity](/docs/identities/concepts/index.md#identity-entity).
+After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing Snowplow ID, or creates a new one. Enrich then adds the resolved Snowplow ID to the event in an [identity entity](/docs/identities/concepts/index.md#identity-entity).
 
-Some incoming identifiers will reveal that two previously separate profiles actually belong to the same user. Identities will merge the two profiles in its graph database, and emit a [merge event](/docs/identities/concepts/index.md#merge-events) directly into your enriched event stream.
+Some incoming identifiers will reveal that two previously separate Snowplow IDs actually belong to the same user. Identities will merge them in its graph database, and emit a [merge event](/docs/identities/concepts/index.md#merge-events) directly into your enriched event stream.
 <!-- TODO: does graph database denote -->
 
 Your Identities infrastructure is deployed into the same cloud as your pipeline. The core components are:

@@ -24,7 +24,7 @@ Each identifier type has:
 | -------- | ------------------------------------------------------------------------------------ | --------- |
 | Name     | A unique name for this identifier type, e.g. `acme_user_id`                          | Yes       |
 | Property | The event property to extract the identifier value from                              | Yes       |
-| Unique   | Whether this identifier should prevent merges between profiles with different values | No        |
+| Unique   | Whether this identifier should prevent merges between Snowplow IDs with different values | No        |
 | Priority | The priority used when generating fallback IDs; higher is preferred                  | Yes       |
 
 Only one identifier can be marked as unique.
@@ -36,7 +36,7 @@ A single event field can only be mapped to one identifier type. Identifier names
 Follow the steps in Console to create a new identifier.
 
 :::warning Removing identifiers
-Removing an identifier affects identity resolution for all future events. Profiles that would have been connected through this identifier will appear as separate profiles going forward. Historical identities won't change. This can't be undone.
+Removing an identifier affects identity resolution for all future events. Snowplow IDs that would have been connected through this identifier will appear as separate Snowplow IDs going forward. Historical identities won't change. This can't be undone.
 :::
 
 ### Enable cross-domain tracking aliases

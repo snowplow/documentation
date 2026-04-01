@@ -40,7 +40,7 @@ vars:
 ```
 Note that these user/role names are case sensitive. Databricks Principals are also supported. If the user does not exist an error will occur when the grant tries to run. This feature is compatible with the built-in [dbt grants](https://docs.getdbt.com/reference/resource-configs/grants) functionality and we will grant to a combination of the two.
 
-:::warning
+:::tip
 
 It is important to scope this to the relevant package, if you set this variable at the top level of your project then all models will have this grant applied.
 
@@ -55,7 +55,7 @@ Note this will overwrite any existing grants applied to the table manually in th
 ### Granting usage on schemas
 In the case of some warehouses, users also need `usage` permissions on the schema a table is in to be able to access the data. We provide this functionality via a post-hook that grants usage on **any** schema interacted with during the `dbt run` to the users listed in `snowplow__grant_select_to`.
 
-:::danger
+:::warning
 
 Due to limitations with dbt, we are not able to scope this only to schemas interacted with by our package. This means **ALL** schemas in the run will have `usage` granted to these users.
 

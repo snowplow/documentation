@@ -14,7 +14,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-:::warning
+:::note
 
 We only offer this loader on AWS or as part of [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md).
 

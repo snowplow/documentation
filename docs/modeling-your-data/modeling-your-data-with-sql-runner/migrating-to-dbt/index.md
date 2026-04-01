@@ -87,7 +87,7 @@ The latest information for our packages can be found in the [quickstart](/docs/m
 
 ## Migrate existing derived data
 
-:::danger
+:::warning
 
 The dbt package uses slightly different logic for processing, including the quarantining of sessions and different format manifest tables. It is highly recommended that you just run the dbt project from your start date. The following is a best-effort suggestion and we make no guarantee that all data will be correctly processed or that issues may not happen later in the lifetime of the project.
 

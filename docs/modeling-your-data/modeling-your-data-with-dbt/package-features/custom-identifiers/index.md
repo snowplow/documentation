@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::danger
+:::warning
 
 As this changes the core logic of the package, you should make sure you have a good understanding of how the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
 

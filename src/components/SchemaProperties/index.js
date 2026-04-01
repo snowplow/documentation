@@ -38,10 +38,10 @@ export default function SchemaProperties(props) {
         <div className="space-y-4">
           <div className="gap-2 text-base leading-none font-bold flex flex-col items-start">
             <span>Schema URI</span>
-            <span className="text-muted-foreground leading-snug font-normal">
+            <code className="text-muted-foreground leading-snug font-normal">
               iglu:{props.schema.self.vendor}/{props.schema.self.name}/
               {props.schema.self.format}/{props.schema.self.version}
-            </span>
+            </code>
           </div>
 
           {props.example && Object.keys(props.example).length > 0 && hasProperties && (

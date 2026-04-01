@@ -12,3 +12,151 @@
 /docs/sources/snowplow-tracking-cli/usage/* /docs/sources/snowplow-tracking-cli/ 301
 /docs/sources/snowplow-tracking-cli/additional-information/* /docs/sources/snowplow-tracking-cli/ 301
 
+# Page renaming
+/advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
+/accelerators/snowplow_fractribution/* /accelerators/snowplow-fractribution/:splat 301
+
+/docs/collecting-data/collecting-from-own-applications/javascript-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/ 301  # http://bit.ly/sp-js linked in most of the web tracker artifacts
+/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
+/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
+/docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/adding-extra-data-the-subject-class/:splat 301
+/docs/collecting-data/collecting-from-own-applications/python-tracker/class-reference-v0-15/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/class-reference/:splat 301
+/docs/collecting-data/collecting-from-own-applications/python-tracker/multiple-subject-tracking/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/multiple-subject-tracking/ 301
+/docs/collecting-data/collecting-from-own-applications/ruby-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/ruby-tracker/previous_versions/ruby-0-8/adding-extra-data-the-subject-class/:splat 301
+/docs/collecting-data/collecting-from-own-applications/ruby-tracker/class-reference-v0-8/* /docs/collecting-data/collecting-from-own-applications/ruby-tracker/previous_versions/ruby-0-8/class-reference/:splat 301
+
+/docs/collecting-data/webhooks/webhook-setup-guide /docs/collecting-data/webhooks/webhook-setup 301
+/docs/collecting-data/webhooks/webhook-setup-guide/* /docs/collecting-data/webhooks/webhook-setup/:splat 301
+
+/docs/collecting-data/collecting-from-own-applications/snowplow-tracking-cli/* /docs/sources/snowplow-tracking-cli/:splat 301
+
+/docs/sources/snowplow-tracking-cli/* /docs/sources/snowplow-tracking-cli/:splat 200
+
+/docs/detecting-data-quality/data-quality-rules/* /docs/data-quality/data-quality-rules/:splat 301
+/docs/detecting-data-quality/* /docs/data-quality/:splat 301
+
+/docs/understanding-tracking-design/ootb-schemas/* /docs/understanding-your-pipeline/schemas/ootb-schemas/:splat 301
+/docs/understanding-tracking-design/understanding-identifiers/* /docs/understanding-your-pipeline/understanding-identifiers/:splat 301
+/docs/understanding-tracking-design/* /docs/understanding-your-pipeline/:splat 301
+
+/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/* /docs/enrichments/available-enrichments/ua-parser-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/* /docs/enrichments/available-enrichments/yauaa-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/ip-lookups-enrichment/* /docs/enrichments/available-enrichments/ip-lookups-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/sql-enrichment/* /docs/enrichments/available-enrichments/sql-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/weather-enrichment/* /docs/enrichments/available-enrichments/weather-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/* /docs/enrichments/available-enrichments/event-fingerprint-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/referer-parser-enrichment/* /docs/enrichments/available-enrichments/referer-parser-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/* /docs/enrichments/available-enrichments/campaign-attribution-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/* /docs/enrichments/available-enrichments/currency-conversion-enrichment/:splat 301
+/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/* /docs/enrichments/available-enrichments/event-fingerprint-enrichment/:splat 301
+
+/docs/pipeline/enrichments/* /docs/enrichments/:splat 301
+
+/docs/running-snowplow/running-the-snowplow-events-pipeline/* /docs/pipeline/running-the-snowplow-events-pipeline/:splat 301
+/docs/running-snowplow/data-products/* /docs/data-products/:splat 301
+/docs/running-snowplow/* /docs/pipeline/:splat 301
+
+/docs/pipeline/recipes/customer-intelligence/* /docs/data-products/recipes/customer-intelligence/:splat 301
+/docs/pipeline/recipes/predictive-analytics/* /docs/data-products/recipes/predictive-analytics/:splat 301
+/docs/pipeline/recipes/marketing-analytics/* /docs/data-products/recipes/marketing-analytics/:splat 301
+/docs/pipeline/recipes/* /docs/data-products/recipes/:splat 301
+
+/docs/pipeline/qs/aws/* /docs/pipeline/running-the-snowplow-events-pipeline/qs/aws/:splat 301
+/docs/pipeline/qs/gcp/* /docs/pipeline/running-the-snowplow-events-pipeline/qs/gcp/:splat 301
+/docs/pipeline/qs/snowflake/* /docs/pipeline/running-the-snowplow-events-pipeline/qs/snowflake/:splat 301
+/docs/pipeline/qs/databricks/* /docs/pipeline/running-the-snowplow-events-pipeline/qs/databricks/:splat 301
+
+/docs/pipeline/pipeline-docs/* /docs/pipeline/running-the-snowplow-events-pipeline/pipeline-docs/:splat 301
+/docs/pipeline/common-issues/* /docs/pipeline/running-the-snowplow-events-pipeline/common-issues/:splat 301
+/docs/pipeline/enrichment-jobs/* /docs/pipeline/running-the-snowplow-events-pipeline/enrichment-jobs/:splat 301
+/docs/pipeline/loader-jobs/* /docs/pipeline/running-the-snowplow-events-pipeline/loader-jobs/:splat 301
+/docs/pipeline/dataflow-iglu-server/* /docs/pipeline/running-the-snowplow-events-pipeline/dataflow-iglu-server/:splat 301
+
+/docs/llms-support/mcp-server/* /docs/llms-support/mcp-server/:splat 200
+
+/docs/snowplow-identity/* /docs/identity/:splat 301
+/docs/identity-resolution/* /docs/identity/:splat 301
+
+/docs/sources/analytics-sdk/* /docs/collecting-data/collecting-from-own-applications/analytics-sdk/:splat 301
+
+/docs/sources/event-data-platform/activate/* /docs/features/data-activation/:splat 301
+
+/docs/pipeline/dbt-models/* /docs/pipeline/running-the-snowplow-events-pipeline/dbt-models/:splat 301
+
+/docs/sources/event-data-platform/governance/* /docs/features/data-governance/:splat 301
+
+/docs/sources/event-data-platform/catalog/* /docs/features/data-catalog/:splat 301
+
+/docs/sources/snowplow-intelligence/create-entity-models/* /docs/features/entity-models/:splat 301
+
+/docs/sources/snowplow-intelligence/ml-features-store/* /docs/features/ml-features/:splat 301
+
+/docs/sources/event-data-platform/package-hub/* /docs/features/package-hub/:splat 301
+
+/docs/sources/snowplow-intelligence/intelligence-platform/* /docs/features/intelligence/:splat 301
+
+/docs/event-studio/* /docs/features/event-studio/:splat 301
+
+/docs/sources/snowplow-intelligence/* /docs/features/:splat 301
+
+/docs/sources/event-data-platform/* /docs/features/:splat 301
+
+/docs/sources/* /docs/collecting-data/collecting-from-own-applications/:splat 301
+
+/docs/protocols/* /docs/collecting-data/protocols/:splat 301
+
+/docs/modeling-your-data/* /docs/features/dbt-package/:splat 301
+
+/docs/ingestion/* /docs/collecting-data/ingestion/:splat 301
+
+/docs/architecture/* /docs/understanding-your-pipeline/:splat 301
+
+/docs/feature-flags/* /docs/collecting-data/feature-flags/:splat 301
+
+# Historical migrations
+/docs/collecting-data/collecting-from-own-applications/index/sending-events /docs/collecting-data/collecting-from-own-applications/sending-events-to-snowplow/ 301
+
+# BDP Cloud moved
+/docs/features/data-governance/* /docs/features/data-governance/:splat 200
+/docs/features/data-activation/* /docs/features/data-activation/:splat 200
+/docs/features/data-catalog/* /docs/features/data-catalog/:splat 200
+/docs/features/package-hub/* /docs/features/package-hub/:splat 200
+/docs/features/entity-models/* /docs/features/entity-models/:splat 200
+/docs/features/ml-features/* /docs/features/ml-features/:splat 200
+/docs/features/event-studio/* /docs/features/event-studio/:splat 200
+/docs/features/intelligence/* /docs/features/intelligence/:splat 200
+/docs/features/dbt-package/* /docs/features/dbt-package/:splat 200
+/docs/features/data-products/* /docs/features/data-products/:splat 200
+
+/docs/infrastructure/* /docs/deploying-snowplow/:splat 301
+
+/docs/collecting-data/* /docs/collecting-data/:splat 200
+
+/docs/understanding-tracking-design/ /docs/understanding-your-pipeline/ 301
+/docs/understanding-your-pipeline/* /docs/understanding-your-pipeline/:splat 200
+
+/docs/features/data-governance /docs/features/data-governance/ 301
+/docs/features/data-activation /docs/features/data-activation/ 301
+/docs/features/data-catalog /docs/features/data-catalog/ 301
+/docs/features/package-hub /docs/features/package-hub/ 301
+/docs/features/entity-models /docs/features/entity-models/ 301
+/docs/features/ml-features /docs/features/ml-features/ 301
+/docs/features/event-studio /docs/features/event-studio/ 301
+/docs/features/intelligence /docs/features/intelligence/ 301
+/docs/features/dbt-package /docs/features/dbt-package/ 301
+/docs/features/* /docs/features/:splat 200
+
+/docs/deploying-snowplow/* /docs/deploying-snowplow/:splat 200
+
+/docs/events/* /docs/events/:splat 200
+/docs/enrichments/* /docs/enrichments/:splat 200
+/docs/data-products/* /docs/data-products/:splat 200
+/docs/pipeline/* /docs/pipeline/:splat 200
+
+/docs/identity/* /docs/identity/:splat 200
+/docs/llms-support/* /docs/llms-support/:splat 200
+
+/docs/* /docs/:splat 200
+
+# Fallback
+/* / 200

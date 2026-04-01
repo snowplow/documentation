@@ -91,6 +91,6 @@ Adds new items to the configuration file without modifying it by hand.
 
 Removes event specification entries from the lock file that no longer appear in the configuration file.
 
-| Flag                    | Description       |
-| ----------------------- | ----------------- |
-| `-c, --config <string>` | Config file path. |
+| Flag                    | Description      |
+| ----------------------- | ---------------- |
+| `-c, --config <string>` | Config file path |

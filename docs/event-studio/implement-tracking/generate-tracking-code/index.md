@@ -160,8 +160,6 @@ For event specifications, which have more requirements and metadata than data st
 
 Along with the self-describing event and entity functions for each schema, it also produces a function to track the event according to the instructions defined in the specification. This includes any required entities, as well as an event specification entity that links this event to its tracking plan.
 
-<!-- TODO name collisions - which languages have a problem with this? -->
-
 This example shows generated Browser tracker TypeScript code for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user_authentication` and `user`.
 
 To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md).
@@ -653,18 +651,18 @@ If you have multiple event specifications with the same name, you might experien
 We recommend giving each event specification a unique name.
 :::
 
-In Kotlin, Swift, and Dart, Snowtype uses the tracking plan name for receiver types or extension names, which prevents name collisions.
+In Kotlin, Swift, and Dart, Snowtype uses the tracking plan name for extensions, which prevents name collisions.
 
 For example, you may have two event specifications with the same name, `User Log In`, in two different tracking plans, `Checkout Flow` and `User Management`. In the `Checkout Flow` tracking plan, the `User Log In` event specification has the event data structure `login`. In the `User Management` tracking plan, the `User Log In` event specification has the event data structure `authentication_attempt`.
 
-When you generate code for these specifications in Kotlin, Snowtype produces two separate functions to track each specification, with different receiver types based on the tracking plan name:
+When you generate code for these specifications in Kotlin, Snowtype produces two separate functions to track each specification, with different extension functions based on the tracking plan name:
 
 ```kotlin
 fun Login.toUserLogInSpec() // for Checkout Flow
 fun AuthenticationAttempt.toUserLogInSpec() // for User Management
 ```
 
-Similarly, in Swift, Snowtype generates two separate extension functions with different names:
+Similarly, in Swift, Snowtype generates extension functions with different names:
 
 ```swift
 extension Login {

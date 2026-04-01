@@ -2,14 +2,14 @@
 title: "Example Snowtype generated code for data structures"
 sidebar_label: "Example data structures"
 sidebar_position: 1
-description: "Example configuration files and generated output for each Snowtype-supported tracker and language."
+description: "Example configuration files, generated output, and how to use them for each Snowtype-supported tracker and language."
 keywords: ["Snowtype", "code generation", "output", "example", "tracker"]
 date: "2026-03-19"
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) and generated output for the [Iglu Central](https://iglucentral.com) schema `web_page`, and a custom data structure, `product`. The `tracker` and `language` fields in your configuration determine the language and structure of the output.
+The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md), generated output, and how to use them, for the [Iglu Central](https://iglucentral.com) schema `web_page` and a custom data structure, `product`. The `tracker` and `language` fields in your configuration determine the language and structure of the output.
 
 These are the example schemas:
 

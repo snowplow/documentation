@@ -9,7 +9,7 @@ date: "2026-03-19"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) and generated output for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user` and `user_authentication`.
+The following examples show the Snowtype [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md), generated output, and how to use them, for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user` and `user_authentication`.
 
 The `tracker` and `language` fields in your configuration determine the language and structure of the output.
 
@@ -35,7 +35,7 @@ Snowtype can generate code in TypeScript or JavaScript, depending which version 
 
 ### Browser (TypeScript)
 
-Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md). Snowtype produces TypeScript type definitions with `track` and `create` functions that wrap `trackSelfDescribingEvent`.
+Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md). Snowtype produces TypeScript type definitions with `track` and `create` functions that wrap `trackSelfDescribingEvent`, plus a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -290,7 +290,7 @@ trackUserLogInSpec({
 
 ### Browser (JavaScript)
 
-Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in JavaScript. Snowtype produces JSDoc typedefs, with `track` and `create` functions.
+Generated code for the [Browser tracker](/docs/sources/web-trackers/index.md) in JavaScript. Snowtype produces JSDoc typedefs, with `track` and `create` functions, plus a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -559,7 +559,7 @@ trackUserLogInSpec({
 
 ### JavaScript tag
 
-Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Snowtype produces functions that call `window.snowplow()` directly, suitable for use with the Snowplow JavaScript tag loaded via a script element.
+Generated code for the [JavaScript tag](/docs/sources/web-trackers/index.md). Snowtype produces functions that call `window.snowplow()` directly, including a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -817,7 +817,7 @@ trackUserLogInSpec({
 
 ## iOS (Swift)
 
-Generated code for the [iOS tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Swift structs with `toEvent()` and `toEntity()` methods, plus an extension on the event struct for the event specification.
+Generated code for the [iOS tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Swift structs with `toEvent()` and `toEntity()` methods, plus a `toXSpec()` extension on the event struct that bundles it with its required entities and attaches the event specification entity. In this case, a `toUserLogInSpec()` extension on the `Login` struct.
 
 The generated code is compatible with both Swift 5.5+ and 6.
 
@@ -1162,7 +1162,7 @@ Snowplow.defaultTracker()?.track(event)
 
 ## Android (Kotlin)
 
-Generated code for the [Android tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Kotlin data classes with `toEvent()` and `toEntity()` methods, plus an extension function for the event specification.
+Generated code for the [Android tracker](/docs/sources/mobile-trackers/index.md). Snowtype produces Kotlin data classes with `toEvent()` and `toEntity()` methods, plus a `toXSpec()` extension function for the event that bundles it with its required entities and attaches the event specification entity. In this case, a `toUserLogInSpec()` extension on `Login`.
 
 ```json title="snowtype.config.json"
 {
@@ -1501,7 +1501,7 @@ Snowplow.defaultTracker?.track(event)
 
 ## React Native (TypeScript)
 
-Generated code for the [React Native tracker](/docs/sources/react-native-tracker/index.md). Snowtype produces TypeScript types with `track` and `create` functions.
+Generated code for the [React Native tracker](/docs/sources/react-native-tracker/index.md). Snowtype produces TypeScript types with `track` and `create` functions, plus a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -1764,7 +1764,7 @@ trackUserLogInSpec(t, {
 
 ## Flutter (Dart)
 
-Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md). Snowtype produces immutable Dart classes that implement `SelfDescribing`, with `schema`, `data`, and `toMap()` accessors.
+Generated code for the [Flutter tracker](/docs/sources/flutter-tracker/index.md). Snowtype produces immutable Dart classes that implement `SelfDescribing`, with `schema`, `data`, and `toMap()` accessors, plus a `toXSpec()` extension function for the event that bundles it with its required entities and attaches the event specification entity. In this case, a `toUserLogInSpec()` extension on `Login`.
 
 ```json title="snowtype.config.json"
 {
@@ -2073,7 +2073,7 @@ Snowtype can generate code in TypeScript or JavaScript for the [Node.js tracker]
 
 ### TypeScript
 
-Snowtype generates TypeScript type definitions and typed `track` and `create` functions that import directly from `@snowplow/node-tracker`.
+Snowtype generates TypeScript type definitions and typed `track` and `create` functions that import directly from `@snowplow/node-tracker`, plus a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -2329,7 +2329,7 @@ trackUserLogInSpec(t, {
 
 ### JavaScript
 
-Snowtype generates JSDoc typedefs and untyped `track` and `create` functions, with a `@typedef {object} Tracker` for the tracker instance parameter.
+Snowtype generates JSDoc typedefs and untyped `track` and `create` functions, with a `@typedef {object} Tracker` for the tracker instance parameter, plus a `trackXSpec` function, in this case `trackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -2598,7 +2598,7 @@ trackUserLogInSpec(t, {
 
 ## Golang
 
-Generated code for the [Golang tracker](/docs/sources/golang-tracker/index.md). Snowtype produces Go structs with `mapstructure` tags and `SnowplowFormat()` methods that implement the `SnowplowApplicable` interface, plus `Track` functions that accept a `*sp.Tracker`.
+Generated code for the [Golang tracker](/docs/sources/golang-tracker/index.md). Snowtype produces Go structs with `mapstructure` tags and `SnowplowFormat()` methods that implement the `SnowplowApplicable` interface, plus a `TrackXSpec` function, in this case `TrackUserLogInSpec`. This function automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -2954,7 +2954,7 @@ err := TrackUserLogInSpec(tracker, UserLogIn{
 
 Generated code for the [Java tracker](/docs/sources/java-tracker/index.md). Snowtype produces Java classes with a Builder pattern, `toSelfDescribingJson()` methods, and Javadoc comments. Each class is generated as a separate file.
 
-Enums and the `EventSpecification` class are also generated separately, along with a `Snowtype` class that contains the event specification helper method.
+Enums and the `EventSpecification` class are also generated separately, along with a `Snowtype` class containing a static `xSpec()` method, in this case `userLogInSpec()`. This method automatically includes the required entities along with the event specification entity.
 
 ```json title="snowtype.config.json"
 {
@@ -3341,7 +3341,7 @@ tracker.track(Snowtype.userLogInSpec(login, user, userAuth));
 
 ## Google Tag Manager (JavaScript)
 
-Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, designed to be used in a GTM [Custom JavaScript Variable](/docs/event-studio/implement-tracking/working-with-gtm/index.md).
+Generated code for [Google Tag Manager](/docs/sources/google-tag-manager/index.md). Snowtype produces a single function that assigns tracking methods to `window.__snowtype`, including `trackXSpec`, designed to be used in a GTM [Custom JavaScript Variable](/docs/event-studio/implement-tracking/working-with-gtm/index.md).
 
 Snowtype will also generate a minified version.
 

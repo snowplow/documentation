@@ -42,13 +42,32 @@ Check out the [configuration reference](/docs/event-studio/implement-tracking/co
 
 ## Add sources
 
-Add sources to your configuration manually by editing the file, or with `snowtype patch`. The command will prompt you for the source type and ID, then update your configuration file:
+Add sources to your configuration manually by editing the file, or with `snowtype patch`. The [command](/docs/event-studio/implement-tracking/command-reference/index.md) will prompt you for the source type and ID, then update your configuration file:
 
 ```bash
 npx snowtype patch
 ```
 
-See more details about the `patch` command ADD LINK and ADD LINK.
+You can also pass in the source details directly:
+
+```bash
+# Add event specifications
+npx snowtype patch --eventSpecificationIds <id1> <id2>
+
+# Add data products
+npx snowtype patch --dataProductIds <id1> <id2>
+
+# Add data structures
+npx snowtype patch --dataStructures iglu:com.example/my_entity/jsonschema/1-0-0
+
+# Add Iglu Central schemas
+npx snowtype patch --igluCentralSchemas iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0
+
+# Add local schema repositories
+npx snowtype patch --repositories ./local-schemas
+```
+
+You can disable automatic regeneration in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) by setting `regenerateOnPatch` to `false`.
 
 ### Tracking plans
 

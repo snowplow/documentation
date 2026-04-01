@@ -143,29 +143,6 @@ npx snowtype update --eventSpecs <id1> <id2>
 npx snowtype update --dataProducts <id1> <id2>
 ```
 
-## Add new sources with `patch`
-
-Use `snowtype patch` to add new event specifications, data structures, or other schema sources to your configuration file without editing it by hand:
-
-```bash
-# Add event specifications
-npx snowtype patch --eventSpecificationIds <id1> <id2>
-
-# Add data products
-npx snowtype patch --dataProductIds <id1> <id2>
-
-# Add data structures
-npx snowtype patch --dataStructures iglu:com.example/my_entity/jsonschema/1-0-0
-
-# Add Iglu Central schemas
-npx snowtype patch --igluCentralSchemas iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0
-
-# Add local schema repositories
-npx snowtype patch --repositories ./local-schemas
-```
-
-The `patch` command updates your configuration file and, by default, regenerates your tracking code. You can disable automatic regeneration in your [configuration file](/docs/event-studio/implement-tracking/snowtype-config/index.md) by setting `regenerateOnPatch` to `false`.
-
 ## Clean up stale entries
 
 Over time, your lock file may accumulate entries for schemas you've removed from your configuration. Use `snowtype purge` to clean them up:

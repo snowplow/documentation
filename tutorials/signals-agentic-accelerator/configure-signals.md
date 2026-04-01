@@ -18,7 +18,7 @@ These attributes form a compact behavioral profile that the agent's `get_signals
 
 ## Set up your credentials
 
-You need your Signals connection credentials. These are the same values you configured in the notebook's credentials cell:
+You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](https://docs.snowplow.io/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="cdi" label="CDI" default>

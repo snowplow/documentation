@@ -33,8 +33,12 @@ Click on the enrichment you want to change. You will see the current configurati
 
 * To enable or edit the enrichment, click on **Edit configuration**. Adjust the configuration and click **Publish** to deploy the changes. This will enable the enrichment if it was disabled.
 * To disable the enrichment, click on the **⋮** menu and select **Disable**.
-* Secrets management: For enrichments requiring secrets or API keys (such as: IP Lookup with custom Maxmind DB, API Request enrichment, PII Pseudonymization, Currency, or SQL Query), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. Never put credentials or salts directly in your enrichments, we will place them on secured environment variables for you.
 
+:::warning
+
+Never put credentials, API keys, or salts directly in your enrichment configuration. For enrichments that require secrets (such as IP Lookup with a custom MaxMind DB, API Request enrichment, PII Pseudonymization, Currency, or SQL Query), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. We will place them in secured environment variables on your behalf.
+
+:::
 
 ## Deploy an enrichment from a development environment to a pipeline
 

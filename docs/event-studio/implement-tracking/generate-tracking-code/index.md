@@ -429,8 +429,6 @@ If you generate code for multiple event specifications, the instructions for eac
 
 This example shows the generated instruction file for a `User Log In` event specification:
 
-<!-- TODO add the actual example without the autoformatted tables, spacing is weird when rendered now -->
-
 ```markdown
 # Implementation instructions
 
@@ -442,24 +440,26 @@ _A guide on how to implement tracking for the generated Event Specifications._
 
 ## [User Log In](https://console.snowplowanalytics.com/177234df-d425-412e-ad8d-8b97515b2807/data-products/57471841-aa79-445d-b4f7-1cbd073a3188/event-specifications/a965caf1-88a6-4a89-9aea-cc92516a9d56)
 
-|                            |                                       |
-| -------------------------- | ------------------------------------- |
-| **Id**                     | a965caf1-88a6-4a89-9aea-cc92516a9d56  |
-| **Version**                | 8                                     |
-| **Data Product Id**        | 57471841-aa79-445d-b4f7-1cbd073a3188  |
-| **Source Application/s**   | None selected                         |
-| **Event Data Structure**   | login/1-0-0                           |
+|       |  |
+
+| ----------- | ----------- |
+| **Id** | a965caf1-88a6-4a89-9aea-cc92516a9d56 |
+| **Version** | 8 |
+| **Data Product Id** | 57471841-aa79-445d-b4f7-1cbd073a3188 |
+| **Source Application/s** | None selected |
+| **Event Data Structure** | login/1-0-0 |
 | **Entity Data Structures** | user/1-0-1, user_authentication/1-0-0 |
-| **Code**                   | [Link](./snowplow.ts#L185)            |
-| **Data Product Domain**    | Marketing                             |
+| **Code** | [Link](./snowplow.ts#L185) |
+| **Data Product Domain** | Marketing |
 
 
 
 #### Entity Cardinality Rules
-| Name                | Required | Number of entities  |
-| ------------------- | -------- | ------------------- |
-| user                | ❌        | Between `0` and `1` |
-| user_authentication | ✅        | Exactly `1`         |
+|    Name   | Required  | Number of entities  |
+
+| ----------- | ----------- |  ----------- |
+user | ❌ | Between `0` and `1`
+user_authentication | ✅ | Exactly `1`
 
 
 

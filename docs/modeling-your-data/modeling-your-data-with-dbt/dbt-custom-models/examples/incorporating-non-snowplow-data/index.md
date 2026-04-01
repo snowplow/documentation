@@ -11,7 +11,7 @@ There may be times when you wish to add some fields to our derived tables that a
 Our packages are designed to process events associated to sessions, based on newly incoming events from the `atomic.events` table. Allowing for incorporating external data into the processing by default is not planned so far, not only because there can be a myriad of ways how different users would want to link their data to our events/sessions, but also because the package would then need some sort of governance over the data source being readily available for the period to be processed, which it has no impact over. However, there is a way to accomplish that through custom models.
 
 **Example Scenario 1:**
-Imagine you run an e-commerce site, and you are only tracking the products` SKU, but you have an internal table with richer information about the particular product. You would like to add some extra information to your views table through the custom page_view context.
+Imagine you run an ecommerce site, and you are only tracking the products` SKU, but you have an internal table with richer information about the particular product. You would like to add some extra information to your views table through the custom page_view context.
 
 **Example Scenario 2:**
 Wanting to incorporate additional user based information into the sessions table with the use of the external User Profiles table.

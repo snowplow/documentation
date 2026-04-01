@@ -29,7 +29,7 @@ The first card guides you through creating a [tracking plan](/docs/event-studio/
 
 1. Choose between built-in events or custom tracking
 2. Create or select a [source application](/docs/event-studio/source-applications/index.md)
-3. Select tracking plan templates (Base Web, E-commerce Web, Media Web, and others)
+3. Select tracking plan templates (Base Web, Ecommerce Web, Media Web, and others)
 4. Review and confirm your selections
 
 Console then creates the tracking plan and associated data structures in your account.

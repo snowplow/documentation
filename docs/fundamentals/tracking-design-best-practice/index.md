@@ -70,7 +70,7 @@ Tracking plans are logical groupings of related business events with defined own
 When defining tracking plans, consider who will own the data and what business domain or use-case the events relate to. If you have multiple teams or departments, it can be helpful to align tracking plans with those organizational structures. Additionally, those teams can reflect implementation ownership or analysis ownership.
 
 Examples of tracking plans include:
-* `Ecommerce Checkout Flow`: contains events related to the checkout process in an e-commerce application
+* `Ecommerce Checkout Flow`: contains events related to the checkout process in an ecommerce application
 * `Mobile App User Engagement`: contains events related to user interactions within a mobile application
 * `SaaS Application Usage`: contains events related to user actions within a SaaS platform
 

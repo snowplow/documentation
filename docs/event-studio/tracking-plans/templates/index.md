@@ -9,11 +9,13 @@ keywords: ["tracking plan templates", "Base Web template", "Base Mobile template
 
 To create a new tracking plan based on a pre-defined template, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" or "Templates" buttons.
 
-:::note
-_When creating a tracking plan based on a template, the name must be unique to ensure proper identification and avoid conflicts._
+When creating a tracking plan based on a template, the name must be unique to ensure proper identification and avoid conflicts.
+
+:::note Snowtype
+[Snowtype](/docs/event-studio/implement-tracking/index.md) **does not support** tracking plan templates.
 :::
 
-Below is a list of the current templates:
+Below is a list of the current templates.
 
 ## Base Web
 

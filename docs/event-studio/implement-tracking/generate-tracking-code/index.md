@@ -685,3 +685,27 @@ export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp, track
 // For User Management — duplicate identifier causes SyntaxError
 export function trackUserLogInSpec(userLogIn: AuthenticationAttempt & ContextsOrTimestamp, trackers?: string[])
 ```
+
+## Snowtype limitations
+
+Snowtype **does not work** with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
+
+### Excluded schemas
+
+Snowtype doesn't generate code for certain out-of-the-box Snowplow event schemas. Use the standard tracker API to track the event data structure as a self-describing event, or use the out-of-the-box tracking functionality.
+
+If your event specification uses any of these schemas for the event data structure, Snowtype will generate code for the event specification and entities only:
+* `iglu:com.snowplowanalytics.snowplow/page_ping/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`
+* `iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/expose_element/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/create_element/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/application_background/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.snowplow/application_foreground/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.mobile/screen_view/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.mobile/screen_end/jsonschema/1-0-0`
+* `iglu:com.snowplowanalytics.mobile/application_install/jsonschema/1-0-0`
+
+You'll see a warning logged when you generate code using these: `Warning: Currently code will not be generated for Standard events. Skipping`.

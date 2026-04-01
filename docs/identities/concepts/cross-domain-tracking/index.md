@@ -22,12 +22,12 @@ A user browses `brandA.com` anonymously. The event contains a `domain_userid`. I
 | Event property  | Value        |
 | --------------- | ------------ |
 | `url`           | `brandA.com` |
-| `domain_userid` | `d123`       |
+| `domain_userid` | `b0258d-...` |
 | `user_id`       | -            |
 
 ```mermaid
 graph TD
-    A(["domain_userid:<br/>d123"])
+    A(["domain_userid:<br/>b0258d-..."])
     P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1
@@ -38,14 +38,14 @@ The user clicks a link to `brandB.com`. The destination site assigns a new `doma
 | Event property       | Value        |
 | -------------------- | ------------ |
 | `url`                | `brandB.com` |
-| `domain_userid`      | `f456`       |
-| `refr_domain_userid` | `d123`       |
+| `domain_userid`      | `dd8ef0-...` |
+| `refr_domain_userid` | `b0258d-...` |
 | `user_id`            | -            |
 
 ```mermaid
 graph TD
-    A(["domain_userid:<br/>d123"])
-    D(["domain_userid:<br/>f456"])
+    A(["domain_userid:<br/>b0258d-..."])
+    D(["domain_userid:<br/>dd8ef0-..."])
     P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1
@@ -57,14 +57,14 @@ The user then logs into `brandB.com`. The event contains the same `domain_userid
 | Event property  | Value                     |
 | --------------- | ------------------------- |
 | `url`           | `brandB.com/user-profile` |
-| `domain_userid` | `f456`                    |
-| `user_id`       | `u001`                    |
+| `domain_userid` | `dd8ef0-...`              |
+| `user_id`       | `charlie@example.com`     |
 
 ```mermaid
 graph TD
-    A(["domain_userid:<br/>d123"])
-    D(["domain_userid:<br/>f456"])
-    U(["user_id:<br/>u001"])
+    A(["domain_userid:<br/>b0258d-..."])
+    D(["domain_userid:<br/>dd8ef0-..."])
+    U(["user_id:<br/>charlie@example.com"])
     P1(("**Snowplow ID:<br/>sp_001**"))
 
     A --- P1

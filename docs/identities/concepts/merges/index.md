@@ -15,7 +15,7 @@ When a merge occurs, Identities emits a [merge event](/docs/identities/concepts/
 
 ## Example merge process
 
-In this example, a user has already been browsing the ExampleCompany website. Identities has created Snowplow ID `sp_001` with two linked identifiers: a `domain_userid` (browser cookie) and a `user_id` (authenticated email), as shown below.
+In this example, a user has been browsing the ExampleCompany website. Identities, running in the ExampleCompany Snowplow pipeline, has created Snowplow ID `sp_001` with two linked identifiers: a `domain_userid` from the browser cookie, and a `user_id` from their authenticated email.
 
 ```mermaid
 graph LR
@@ -27,7 +27,7 @@ graph LR
     B --- C
 ```
 
-The same user now installs a Snowplow-enabled ExampleCompany mobile app on their Apple phone, and uses the app anonymously (i.e. is not logged in).
+The same user now installs the ExampleCompany mobile app on their iPhone, and uses the app anonymously, i.e. they're not logged in.
 
 The ExampleCompany team has configured Identities to use the `apple_idfv` identifier from the mobile platform entity.
 

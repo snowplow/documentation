@@ -13,7 +13,9 @@ When Identities processes an event that would cause a merge, it checks whether a
 
 ## Example merge conflict
 
-In this example, Alice has been using ExampleCompany's website and mobile app. Identities has previously merged her web and mobile Snowplow IDs into `sp_001`, linked to her `domain_userid`, `user_id`, and `apple_idfv` identifiers. The `user_id` identifier is marked as unique.
+In this example, Alice has been using ExampleCompany's website and mobile app. Identities, running in the ExampleCompany Snowplow pipeline, has previously [merged](/docs/identities/concepts/merges/index.md) her web and mobile Snowplow IDs into `sp_001`, linked to her `domain_userid`, `user_id`, and `apple_idfv` identifiers.
+
+ExampleCompany have configured the `user_id` identifier as unique.
 
 ```mermaid
 graph LR

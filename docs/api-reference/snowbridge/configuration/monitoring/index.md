@@ -44,26 +44,25 @@ https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/
 
 ## Metric definitions
 
-Snowbridge sends the following metrics to statsd:
+Snowbridge sends the following metrics to StatsD:
 
-| Metric                   | Definitions                                                                                                                                              |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `target_success`         | Events successfully sent to the target.                                                                                                                  |
-| `target_failed`          | Events which failed to reach the target, and will be handled by the retry config. Retries which fail are also counted.                                   |
-| `message_filtered`       | Events filtered out via transformation.                                                                                                                  |
-| `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                                                |
-| `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario, Snowbridge will crash. |
-| `min_processing_latency` | Min time between entering Snowbridge and write to target.                                                                                                |
-| `max_processing_latency` | Max time between entering Snowbridge and write to target.                                                                                                |
-| `min_message_latency`    | Min time between entering the source stream and write to target.                                                                                         |
-| `max_message_latency`    | Max time between entering the source stream and write to target.                                                                                         |
-| `min_transform_latency`  | Min time between start and completion of transformation.                                                                                                 |
-| `max_transform_latency`  | Max time between start and completion of transformation.                                                                                              |
-| `min_filter_latency`     | Min time between entering Snowbridge and being filtered out.                                                                                             |
-| `max_filter_latency`     | Max time between entering Snowbridge and being filtered out.                                                                                             |
-| `min_request_latency`    | Min time between starting request to target and finishing request to target.                                                                             |
-| `max_request_latency`    | Max time between starting request to target and finishing request to target.                                                                             |
-| `sum_request_latency`    | Sum of request times, use with `target_request_count` to calculate average request latency.                                                              |
-| `target_request_count`   | Number of requests sent to target, use with `sum_request_latency` to calculate average request latency.                                                  |
-| `min_e2e_latency`        | Min time between Snowplow collector tstamp and finishing request to target. Enabled via configuration - Snowplow enriched data only.                     |
-| `max_e2e_latency`        | Max time between Snowplow collector tstamp and finishing request to target. Enabled via configuration - Snowplow enriched data only.                     |
+| Metric | Description |
+|---|---|
+| `target_success` | Events successfully sent to the target. |
+| `target_failed` | Events that failed to reach the target and will be retried. |
+| `target_request_count` | Number of requests successfully sent to the target. |
+| `message_filtered` | Events filtered out via transformation. |
+| `failure_target_success` | Invalid events (not retryable) successfully sent to the failure target. |
+| `failure_target_failed` | Invalid events that failed to reach the failure target. Snowbridge crashes in this scenario. |
+| `min_processing_latency` | Minimum time between entering Snowbridge and writing to the target. |
+| `max_processing_latency` | Maximum time between entering Snowbridge and writing to the target. |
+| `min_message_latency` | Minimum time between entering the source stream and writing to the target. |
+| `max_message_latency` | Maximum time between entering the source stream and writing to the target. |
+| `min_transform_latency` | Minimum time for a transformation to complete. |
+| `max_transform_latency` | Maximum time for a transformation to complete. |
+| `min_filter_latency` | Minimum time between entering Snowbridge and being filtered out. |
+| `max_filter_latency` | Maximum time between entering Snowbridge and being filtered out. |
+| `min_request_latency` | Minimum time for a target write request to complete. |
+| `max_request_latency` | Maximum time for a target write request to complete. |
+| `min_e2e_latency` | Minimum time between Snowplow collector timestamp and completing the target write. Enabled via configuration — Snowplow enriched data only. |
+| `max_e2e_latency` | Maximum time between Snowplow collector timestamp and completing the target write. Enabled via configuration — Snowplow enriched data only. |

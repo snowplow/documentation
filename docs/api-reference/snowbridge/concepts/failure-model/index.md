@@ -1,66 +1,80 @@
 ---
 title: "Snowbridge failure model"
 sidebar_label: "Failure model"
-date: "2022-10-20"
+date: "2026-03-11"
 sidebar_position: 600
 description: "Learn how Snowbridge handles target failures, oversized data, invalid data, transformation failures, and fatal errors."
 keywords: ["failure handling", "error recovery", "failed events", "retry logic", "snowbridge errors"]
 ---
 
-# Failure model
-
 ## Failure targets
 
-When Snowbridge hits an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it will emit a [failed event](/docs/fundamentals/failed-events/index.md) to the configured failure target. A failure target is the same as a target, the only difference is that the configured destination will receive failed events.
+When Snowbridge encounters an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it emits a [failed event](/docs/fundamentals/failed-events/index.md) to the configured failure target. A failure target is configured the same way as a regular target; the only difference is that the destination receives failed events rather than the main data stream.
 
-You can find more detail on setting up a failure target, in the [configuration section](/docs/api-reference/snowbridge/configuration/targets/index.md).
-
-There are several different failures that Snowbridge may hit.
+You can find more detail on setting up a failure target in the [configuration section](/docs/api-reference/snowbridge/configuration/targets/index.md).
 
 ## Target failure
 
-This is where a request to the destination technology fails or is rejected - for example a HTTP 400 response is received.
+A target failure occurs when a write request to the destination fails or is rejected — for example, an HTTP 400 response.
 
-Retry behavior for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/api-reference/snowbridge/configuration/retries/index.md).
+Retry behavior is determined by the retry configuration. See the [retry configuration section](/docs/api-reference/snowbridge/configuration/retries/index.md) for details.
 
-As of Snowbridge 2.4.2, the Kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
+The Kinesis target handles write throughput exceptions separately, with an in-built backoff and retry, rather than treating them as a standard failure type.
 
-Before version 3.0.0, Snowbridge treated every kind of target failure the same -  it would retry 5 times. If all 5 attempts failed, it would proceed without acking the failed Messages. As long as the source's acking model allows for it, these would be re-processed through Snowbridge again.
-
-Each target failure attempt will be reported as a 'MsgFailed' for monitoring purposes.
+Each failed attempt is reported as a `target_failed` metric for monitoring purposes.
 
 ## Oversized data
 
-Targets have limits to the size of a single message. Where the destination technology has a hard limit, targets are hardcoded to that limit. Otherwise, this is a configurable option in the target configuration. When a message's data is above this limit, Snowbridge will produce a [size violation failed event](/docs/api-reference/failed-events/index.md#size-violation), and emit it to the failure target.
+Internally, application checks each message against the target's `max_message_bytes` limit before batching. Messages that exceed this limit produce a [size violation failed event](/docs/api-reference/failed-events/index.md#size-violation) and are sent to the failure target.
 
-Writes of oversized messages to the failure target will be recorded with 'OversizedMsg' statistics in monitoring. Any failure to write to the failure target will cause a [fatal failure](#fatal-failure).
+Oversized message handling occurs before the message reaches the target, so no write is attempted to the main target.
+
 
 ## Invalid data
 
-In the unlikely event that Snowbridge encounters data which is invalid for the target destination (for example empty data is invalid for pubsub), it will create a [generic error failed event](/docs/api-reference/failed-events/index.md#generic-error),  emit it to the failure target, and ack the original message.
+In the unlikely event that Snowbridge encounters data that the target cannot process (for example, empty data is invalid for PubSub), it creates a [generic error failed event](/docs/api-reference/failed-events/index.md#generic-error), emits it to the failure target, and acks the original message.
 
-As of version 3.0.0, the HTTP target may produce 'invalid' type failures. This occurs when: the a POST request body cannot be formed; the templating feature's attempts to template data result in an error; or the response conforms to a response rules configuration which specifies that the failure is to be treated as invalid. You can find more details in the [configuration section](/docs/api-reference/snowbridge/configuration/targets/http/index.md).
+The HTTP target may produce invalid failures in the following situations:
 
-Transformation failures are also treated as invalid, as described below.
+- A POST request body cannot be formed.
+- The templating feature fails to template the data.
+- A response rule configured with `type = "invalid"` matches the response.
 
-Writes of invalid messages to the failure target will be recorded with 'InvalidMsg' statistics in monitoring. Any failure to write to the failure target will cause a [fatal failure](#fatal-failure).
+Transformation failures are also treated as invalid (see [transformation failure](#transformation-failure)).
+
+Invalid message writes to the failure target are reported as `failure_target_success` and `failure_target_failed` metrics.
 
 ## Transformation failure
 
-Where a transformation hits an exception, Snowbridge will consider it invalid, assuming that the configured transformation cannot process the data. It will create a [generic error failed event](/docs/api-reference/failed-events/index.md#generic-error), emit it to the failure target, and ack the original message.
+Where a transformation throws an exception, Snowbridge treats the message as invalid. It creates a [generic error failed event](/docs/api-reference/failed-events/index.md#generic-error), emits it to the failure target, and acks the original message.
 
-As long as the built-in transformations are configured correctly, this should be unlikely. For scripting transformations, Snowbridge assumes that an exception means the data cannot be processed - make sure to construct and test your scripts accordingly.
-
-Writes of invalid messages to the failure target will be recorded with 'InvalidMsg' statistics in monitoring. Any failure to write to the failure target will cause a [fatal failure](#fatal-failure).
+Built-in transformations rarely fail when configured correctly. For scripting transformations, an exception is interpreted as meaning the transformation cannot process the data — construct and test your scripts accordingly.
 
 ## Fatal failure
 
-Snowbridge is built to be averse to crashes, but there are two scenarios where it would be expected to crash.
+A fatal failure is a scenario where continued processing is not possible and Snowbridge must stop.
 
-Firstly, if it hits an error in retrieving data from the source stream, it will log an error and crash. If this occurs it is normally a case of misconfiguration of the source. If that is not the case, it will be safe to redeploy the app — it will attempt to begin from the first unacked message. This may cause duplicates.
+There are three paths that lead to a fatal failure.
 
-Secondly, as described above, where there are failures it will attempt to reprocess the data if it can, and where failures aren't recoverable it will attempt to handle that via a failure target. Normally, even reaching this point is rare.
+### Source read error
 
-In the very unlikely event that Snowbridge reaches this point and cannot write to a failure target, the app will crash. Should this happen, and the app is re-deployed, it will begin processing data from the last acked message. Note that the likely impact of this is duplicated sends to the target, but not data loss.
+If Snowbridge cannot read from the source stream, it logs an error and exits. This is usually a misconfiguration of the source. When redeployed, the app resumes from the first unacked message, which may cause some duplicate sends to the target.
 
-Of course, if you experience crashes or other issues that are not explained by the above, please log an issue detailing the behavior.
+### Failure target write error
+
+When invalid or oversized data cannot be written to the failure target, Snowbridge crashes. On redeploy, the app resumes from the last acked message. The likely impact is duplicated target sends, not data loss.
+
+### Fatal response rule (graceful shutdown)
+
+From version 5.0.0, the HTTP target supports a `fatal` response rule type. When a response matches a `fatal` rule, Snowbridge interprets this as a signal that the request can never succeed — for example, a 413 response indicating the payload is permanently too large. Rather than crashing immediately, Snowbridge completes all in-flight writes and flushes any remaining batches before shutting down gracefully.
+
+```hcl
+response_rules {
+  rule {
+    type       = "fatal"
+    http_codes = [413]
+  }
+}
+```
+
+This provides a clean shutdown path distinct from a crash, ensuring in-flight data is not lost when the target signals an unrecoverable state.

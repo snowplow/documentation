@@ -92,9 +92,11 @@ For example, server-side tracking (`"srv"`) and IoT (`"iot"`) events typically c
 }
 ```
 
-:::tip Hosting the bot ASN list
-
 You can use the community-maintained [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) as a starting point for `botAsnsFile`. Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
+
+:::tip Snowplow CDI
+
+If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI of that list in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 
 :::
 

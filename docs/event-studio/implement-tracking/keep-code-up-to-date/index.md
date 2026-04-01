@@ -176,6 +176,8 @@ npx snowtype purge
 
 This removes any entries in `.snowtype-lock.json` that are no longer referenced by your configuration file.
 
+This is a risky operation. Make sure to commit your lock file beforehand, so you can revert if anything goes wrong.
+
 ## Automate with CI/CD
 
 You can run Snowtype in a CI/CD pipeline to catch outdated tracking code before it reaches production. A typical approach:

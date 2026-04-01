@@ -515,3 +515,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Bot filtering moved to events section
 /docs/pipeline/enrichments/filtering-bot-events/* /docs/events/filtering-bot-events/:splat 301
+
+# Tracking CLI merge
+/docs/sources/snowplow-tracking-cli/installation/* /docs/sources/snowplow-tracking-cli/:splat 301
+/docs/sources/snowplow-tracking-cli/usage/* /docs/sources/snowplow-tracking-cli/:splat 301
+/docs/sources/snowplow-tracking-cli/additional-information/* /docs/sources/snowplow-tracking-cli/:splat 301

@@ -33,6 +33,7 @@ This feature has some limitations:
 - EMR cluster: if you're using the RDB Transformer component (only required for batch loading to Redshift and Databricks), it will need additional permissions adding (`kms:Decrypt`, `kms:GenerateDataKey*`) to enable access to customer S3 buckets with customer-managed KMS keys.
 - Single key recommendation: while it's technically possible to use different keys for different services, we recommend using a single key for all pipeline resources for simplicity.
 - Regional restrictions: keys must be created in the same region as your pipeline infrastructure.
+- KMS API quota: BYOK operations consume additional KMS API calls beyond your baseline usage. Verify you have sufficient quota before enabling this feature.
 
 ## Step 1: Create your custom KMS key
 
@@ -190,11 +191,14 @@ After creating your key, collect the following information:
   - Format: `arn:aws:kms:REGION:YOUR_ACCOUNT_ID:key/KEY_ID`
 - Key ID: the unique identifier for your key
 - Region: the AWS region where the key was created
+- Environment name: e.g. `prod`, `qa1`
 
 Share this information with your Snowplow Customer Success Manager or through a support ticket:
 
 - Key ARN
+- Environment name
 - Confirmation that cross-account access is configured
+- Which pipeline components you want encrypted (or confirm you want full pipeline encryption)
 - Any specific requirements or restrictions
 
 ## Step 4: Snowplow configuration
@@ -228,10 +232,36 @@ After Snowplow applies your custom KMS key:
 - Drift application: Snowplow will apply necessary IAM policy updates to resolve access issues
 
 You can verify the configuration by:
-- Checking S3 bucket encryption settings in your AWS Console
+- Sending test events to your collector endpoint and confirming events appear in the enriched stream without errors
+- Checking S3 bucket encryption settings in your AWS Console — objects should show your KMS key ARN under encryption properties
 - Verifying Kinesis stream encryption status
 - Confirming SQS queue encryption (if applicable)
+- Reviewing **AWS CloudTrail logs** for `Decrypt` and `GenerateDataKey` operations against your key ID — the presence of these calls confirms your key is actively in use by the pipeline
 - Monitoring pipeline health through Snowplow dashboards
+
+## Rotating or changing your KMS key
+
+If you need to switch to a different KMS key — for example, as part of a scheduled key rotation policy — follow these steps:
+
+1. Create the new KMS key and configure its key policy as described in Steps 1 and 2 above.
+2. Contact Snowplow Support with your environment name, the new Key ARN, and the current Key ARN being replaced.
+3. Keep the old key active and accessible until Snowplow Support confirms the rotation is complete and all data encrypted with the old key has been processed and archived.
+
+:::warning Keep the old key active until rotation is confirmed
+Do not disable or delete the old KMS key until you receive explicit confirmation from Snowplow Support. Disabling the key prematurely while it is still referenced by your pipeline will cause data processing to stop immediately.
+:::
+
+## Disabling customer-managed key encryption
+
+:::warning Disable the key in AWS only after Snowplow confirms it is safe to do so
+Disabling your KMS key while it is still referenced in the pipeline configuration will cause an immediate pipeline outage. Data processing will stop and stream latency will increase as events back up in queues.
+:::
+
+If you need to disable customer-managed key encryption, you must follow this sequence — do not disable the key in AWS first:
+
+1. Contact Snowplow Support and request that the KMS key references be removed from your pipeline configuration.
+2. Wait for Snowplow to redeploy the updated configuration and confirm the key is no longer referenced.
+3. Only after receiving confirmation from Snowplow Support, disable or delete the key in AWS.
 
 ## Security best practices
 
@@ -248,10 +278,13 @@ For key management:
 
 ## Troubleshooting
 
-If you encounter access denied errors:
-- Verify the key policy includes the correct Snowplow pipeline account ID
-- Ensure the key is in the same region as your pipeline
-- Check that **Other AWS Accounts** was properly configured during key creation
+The following table covers the most common issues after enabling customer-managed key encryption.
+
+|                     Issue                      |                         Likely Cause                          |                                                         Resolution                                                          |
+| :--------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
+|      Data stops flowing after BYOK setup       |           KMS key is unreachable or disabled                  |        Verify the key is enabled in the AWS KMS console and check CloudTrail for access denied errors                       |
+|  Some streams appear encrypted but not others  |     Snowplow did not apply the configuration to all pipeline stacks      |                     Contact Snowplow Support to verify all stacks have been updated                                         |
+|           Access denied errors                 | Incorrect pipeline account ID in key policy, or key is in a different region | Verify the key policy includes the correct Snowplow pipeline account ID and that the key region matches your pipeline |
 
 Pipeline failures after KMS implementation are expected temporarily while Snowplow applies the necessary IAM policy updates. Contact Support if issues persist beyond the expected configuration window.
 

@@ -136,7 +136,7 @@ You should now have a local file called `c.example.com.p12` with the default pas
 
 ### Match the Collector configuration
 
-To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration).
+To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-and-enrich-configuration).
 
 The two most important settings are the cookie name (you can set it with `-Dcollector.cookie.name` as shown on the page linked above) and any custom paths (via a configuration file).
 

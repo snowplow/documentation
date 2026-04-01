@@ -29,7 +29,7 @@ You can always run Micro with the `--help` argument to find out what is supporte
 
 | Argument                                 | Description                                                                                                                                                           |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--collector-config`                     | Configuration file for collector ([usage](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration))       |
+| `--config`                     | Configuration file for Collector and Enrich ([usage](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-and-enrich-configuration))       |
 | `--iglu`                                 | Configuration file for Iglu Client ([usage](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-iglu-resolver-configuration)) |
 | `-t`, `--output-tsv`<br/>_(since 1.4.0)_ | Print events in TSV format to standard output ([usage](/docs/testing/snowplow-micro/local/index.md#exporting-events))           |
 | `-j`, `--output-json`<br/>_(since 2.4.0)_ | Print events in JSON format to standard output ([usage](/docs/testing/snowplow-micro/local/index.md#exporting-events))           |

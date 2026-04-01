@@ -46,6 +46,12 @@ The table below describes the three types of database fields:
 
 All three of these fields **must** be added to the enrichment JSON, as the IAB lookup process uses all three databases in order to detect robots and spiders. Note that the database files are commercial and proprietary and should not be stored publicly – for instance, on unprotected HTTPS or in a public S3 bucket.
 
+:::tip Snowplow CDI
+
+If you use Snowplow CDI, the necessary files are already provided and updated by Snowplow. You can see the pre-configured URIs of these files in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
+
+:::
+
 ### Custom user agent lists
 
 :::note Availability

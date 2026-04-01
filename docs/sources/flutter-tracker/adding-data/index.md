@@ -9,8 +9,9 @@ sidebar_position: 4000
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset:
 
-1. Event context using self-describing data: Attach event context, describing anything you like, in the form of self-describing JSONs.
-2. Subject: Include information about the user, or the platform on which the event occurred.
+1. Event context using self-describing data: attach event context, describing anything you like, in the form of self-describing JSONs.
+2. Global context: attach context entities to all events globally, without specifying them on each individual call.
+3. Subject: include information about the user, or the platform on which the event occurred.
 
 ## Event context
 
@@ -48,6 +49,12 @@ tracker.track(
     ]
 );
 ```
+
+## Global context
+
+Global context entities are attached to all events without requiring you to pass them to each individual `track()` call. This is useful for data that applies across all or most of your tracked events.
+
+See the [Global context page](/docs/sources/flutter-tracker/adding-data/global-context/index.md) for detailed documentation on configuring global contexts at initialization time and adding or removing them dynamically.
 
 ## Adding user and platform data with Subject
 

@@ -18,6 +18,29 @@ This is useful for automatically flagging non-human traffic. Many bots and scrap
 
 This enrichment requires the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) to be enabled with ASN data (either the free GeoLite2 ASN database or the paid GeoIP2 ISP database). It runs immediately after IP lookup and reads the ASN entity that IP lookup produces.
 
+To use the Snowplow provided free tier of Maxmind's GeoLite2-ASN database, add the following to your [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) configuration depending on your cloud provider.
+
+AWS:
+```
+"asn": {
+      "database": "GeoLite2-ASN.mmdb",
+      "uri": "s3://snowplow-hosted-assets-proprietary-eu-west-1/third-party/com.maxmind"
+}
+```
+Azure:
+```
+"asn": {
+      "database": "GeoLite2-ASN.mmdb",
+      "uri": "https://my-private-storage-container.dfs.core.windows.net/third-party/maxmind"
+}
+```
+GCP:
+```
+"asn": {
+      "database": "GeoLite2-ASN.mmdb",
+      "uri": "gs://my-private-bucket/third-party/maxmind"
+}
+```
 :::
 
 ## Configuration

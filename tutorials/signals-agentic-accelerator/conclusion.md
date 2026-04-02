@@ -1,7 +1,7 @@
 ---
 title: "Conclusion and next steps"
 sidebar_label: "Conclusion"
-position: 5
+position: 6
 description: "Summary of the Signals-powered AI agent accelerator, cleanup instructions, and next steps for production deployment."
 keywords: ["conclusion", "cleanup", "next steps", "AgentCore", "Signals", "production"]
 date: "2026-03-27"
@@ -15,6 +15,8 @@ You have built an AI agent that combines real-time behavioral data from Snowplow
 * Deliver personalized responses that reflect both browsing behavior and historical preferences
 
 This pattern - tools + behavioral context + persistent memory - applies to any customer-facing agent, from support bots to shopping assistants to content recommenders.
+
+If you connected the [SEA Explorer demo app](/tutorials/signals-agentic-accelerator/connect-demo-app), you also have a working frontend that calls Bedrock with Signals and Memory integration, demonstrating the full end-to-end flow.
 
 ## Clean up
 

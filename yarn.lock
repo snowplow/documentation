@@ -2172,6 +2172,11 @@
     lodash.isundefined "^3.0.1"
     lodash.uniq "^4.5.0"
 
+"@fingerprintjs/botd@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@fingerprintjs/botd/-/botd-2.0.0.tgz#fc533621f4d96f28c36c8595dc8b6646cccc972c"
+  integrity sha512-yhuz23NKEcBDTHmGz/ULrXlGnbHenO+xZmVwuBkuqHUkqvaZ5TAA0kAgcRy4Wyo5dIBdkIf57UXX8/c9UlMLJg==
+
 "@floating-ui/core@^1.7.3":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.7.3.tgz#462d722f001e23e46d86fd2bd0d21b7693ccb8b7"
@@ -3059,66 +3064,75 @@
     micromark-util-character "^1.1.0"
     micromark-util-symbol "^1.0.1"
 
-"@snowplow/browser-plugin-button-click-tracking@^4.0.4":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-button-click-tracking/-/browser-plugin-button-click-tracking-4.6.6.tgz#bda944061a3bb8e059a5058697af183721b0bb63"
-  integrity sha512-LYgEs6ferb2nsyv+CXhnOtcupaaVE0Tz0jc9avQtTNFMXrqFSpkfC+0HOI1Cd8P2tbX8m7z/GU8tmJ+006fQGg==
+"@snowplow/browser-plugin-bot-detection@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-bot-detection/-/browser-plugin-bot-detection-4.7.0.tgz#66503af2ecb2cb01958fc7a96b0aa213238f41ab"
+  integrity sha512-xWRQch2sqFvMQYGXDJspQmSpcQONYKAkuZSr25FiH0EALc0oPEHE3wlFHqvxtUkA78waJCIXrd+MoDSqxNeVRA==
   dependencies:
-    "@snowplow/browser-tracker-core" "4.6.6"
-    "@snowplow/tracker-core" "4.6.6"
+    "@fingerprintjs/botd" "2.0.0"
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
 
-"@snowplow/browser-plugin-form-tracking@^4.0.4":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-form-tracking/-/browser-plugin-form-tracking-4.6.6.tgz#2cb2180ba86d043ca4e38a28df586b32ac16b940"
-  integrity sha512-SzJbZWhR0p3zwPOZ6PXI53X02RFuA0l1qKDDkvCZKMrkqdtBoAfL3bhuZpEBSHdseijDlkzNiWM+/xjMEr/SRQ==
+"@snowplow/browser-plugin-button-click-tracking@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-button-click-tracking/-/browser-plugin-button-click-tracking-4.7.0.tgz#c1cc1968739ffee52d30f17df2a494f032f6e28c"
+  integrity sha512-fSo2UGe8t1lXhF2vndwhNxF3cV4Os/1jSraJsnZQVxeqJtUm1gnKnxkVtM4TmLgvcG9y40DBJQHUdxc8PTusQg==
   dependencies:
-    "@snowplow/browser-tracker-core" "4.6.6"
-    "@snowplow/tracker-core" "4.6.6"
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
 
-"@snowplow/browser-plugin-link-click-tracking@^4.0.4":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-link-click-tracking/-/browser-plugin-link-click-tracking-4.6.6.tgz#d8bf73c6811b077ca367984c34da4a0558a90169"
-  integrity sha512-NyYnvgWy78rRmToPsNzobe5ym4I95eqqcJCtIKMM+M4GTD+P4uEmNMgYG45Y7H9aUZLrrAxME/E6yWTdRriVUg==
+"@snowplow/browser-plugin-form-tracking@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-form-tracking/-/browser-plugin-form-tracking-4.7.0.tgz#adf6e1cd4e47e22baabec2f32f6d95839e9f9c12"
+  integrity sha512-qlD4xN4cVIy2ljfhq2EUq9nlp+w3HfT/FPcgz3hcHQ0c6GJ6Ahp7DHwgtceNwekWLViCN0KWRlbaczNkFivTiw==
   dependencies:
-    "@snowplow/browser-tracker-core" "4.6.6"
-    "@snowplow/tracker-core" "4.6.6"
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
 
-"@snowplow/browser-plugin-media@^4.0.4":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-media/-/browser-plugin-media-4.6.6.tgz#1920b0555868756169133f02252b554e2b8be131"
-  integrity sha512-/6eIfs8pIzsVPkTDXoQKbpTM3jIbcWuJZJMdK7S8XwXdB0gR91Ho1Yt+kOk1YDCyV1vBdQrPwbJH5QLpqV4CxA==
+"@snowplow/browser-plugin-link-click-tracking@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-link-click-tracking/-/browser-plugin-link-click-tracking-4.7.0.tgz#552101b3d4fd831fd4a7f76fc2601a654d2b83b7"
+  integrity sha512-XxWIJoxkHTEowiXUlOSg193kCRrTFseZ79VnYJT+GOBp0Abu4DUuWEoblZR565ePATnmAIqesKxTol9Fd7JJKw==
   dependencies:
-    "@snowplow/browser-tracker-core" "4.6.6"
-    "@snowplow/tracker-core" "4.6.6"
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
+    tslib "^2.3.1"
+
+"@snowplow/browser-plugin-media@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-media/-/browser-plugin-media-4.7.0.tgz#5750397dab55cfa7071b55243473289d050e9ea0"
+  integrity sha512-Arci/V8pKGBVY1MOH+KBBuX7gKyPPUf5Wh0Iq+ve8Uh91G56YHDJLNnMHZM9ISaGGvqug++hYuEc9lvDcJmeLg==
+  dependencies:
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
     uuid "^10.0.0"
 
-"@snowplow/browser-tracker-core@4.6.6":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker-core/-/browser-tracker-core-4.6.6.tgz#4cc2c05af2c893510b44a4093bb84ff4fa4e1a49"
-  integrity sha512-kcP+YhXF8Q9u/G4YIx3WwHhwRfuZjHxFfMZe5iAacGGZLZYR+GRiOB0LOE5j9gy4mDbJ9wooCoD0cBA1HvdrHg==
+"@snowplow/browser-tracker-core@4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker-core/-/browser-tracker-core-4.7.0.tgz#c561bd6e6fba4152b625fa24424b8ecb7badb923"
+  integrity sha512-Vh6b2OfcmOnwA6alUaSlfLxxGKdMB/hqBZJHxUdQ/7n7zsTIw+lr0i3hJMhQ4mpAx6A0cXUQZclDRy0Vlrxyyg==
   dependencies:
-    "@snowplow/tracker-core" "4.6.6"
-    sha1 "^1.1.1"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
     uuid "^10.0.0"
 
-"@snowplow/browser-tracker@^4.0.4":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker/-/browser-tracker-4.6.6.tgz#6a63663eeb252b7148f9518c2999f41e43bc56b3"
-  integrity sha512-CpJ434FDibO06OliPDXWpp2tIQUYjLrLZLFspBca00KXC8rJQl4Is5GcrgReJvrn7V+3ZO3rzj7gb12BmycSvg==
+"@snowplow/browser-tracker@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker/-/browser-tracker-4.7.0.tgz#a5aed238b915ef0a5144b32348ebbc4ada6c4d44"
+  integrity sha512-AMVGWZn2TNVaYqWevCZIuAWfsxNen+vrUKmUbUQEPhHFP5h7Mz471RIGQeiYPPgh1EDx/Nbc0ULA3tiLWszs2Q==
   dependencies:
-    "@snowplow/browser-tracker-core" "4.6.6"
-    "@snowplow/tracker-core" "4.6.6"
+    "@snowplow/browser-tracker-core" "4.7.0"
+    "@snowplow/tracker-core" "4.7.0"
     tslib "^2.3.1"
 
-"@snowplow/tracker-core@4.6.6":
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/@snowplow/tracker-core/-/tracker-core-4.6.6.tgz#5ded00859d05af16ae9104fd1b618b489e8cd0a9"
-  integrity sha512-brgUj2JSdwL7D+esHQay5BwTJATTGu9pZ+XUTsbWBfrj1bbFkNsNzSJh88Azd6FOouEjA+wrsCvl6tA63eKeEQ==
+"@snowplow/tracker-core@4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@snowplow/tracker-core/-/tracker-core-4.7.0.tgz#6b113a17b54e8296f38193e6e62f438508d873c7"
+  integrity sha512-GXfo6I69p0TcyQO6DbrQiHHsE4m0UOQE2dAVuSlDeawDny51ZD+snhhZXgdAvTY+YK3xwpfUiIvt91DoGXP01A==
   dependencies:
     tslib "^2.3.1"
     uuid "^10.0.0"
@@ -4670,11 +4684,6 @@ character-reference-invalid@^2.0.0:
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz#85c66b041e43b47210faf401278abf808ac45cb9"
   integrity sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==
 
-"charenc@>= 0.0.1":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-  integrity sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==
-
 cheerio-select@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cheerio-select/-/cheerio-select-2.1.0.tgz#4d8673286b8126ca2a8e42740d5e3c4884ae21b4"
@@ -5097,11 +5106,6 @@ cross-spawn@^7.0.3, cross-spawn@^7.0.6:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
-
-"crypt@>= 0.0.1":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
-  integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
 
 crypto-random-string@^4.0.0:
   version "4.0.0"
@@ -11268,14 +11272,6 @@ setprototypeof@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
-
-sha1@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/sha1/-/sha1-1.1.1.tgz#addaa7a93168f393f19eb2b15091618e2700f848"
-  integrity sha512-dZBS6OrMjtgVkopB1Gmo4RQCDKiZsqcpAQpkV/aaj+FCrCg8r4I4qMkDPQjBgLIxlmu9k4nUbWq6ohXahOneYA==
-  dependencies:
-    charenc ">= 0.0.1"
-    crypt ">= 0.0.1"
 
 shallow-clone@^3.0.0:
   version "3.0.1"

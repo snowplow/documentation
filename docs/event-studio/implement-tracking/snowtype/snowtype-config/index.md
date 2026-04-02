@@ -38,7 +38,7 @@ The Tracking Plan IDs you wish to generate tracking code for. By providing the T
 
 ### `organizationId`
 
-The Organization ID for your Snowplow account. The Organization ID is a UUID that can be retrieved from the URL immediately following the .com when visiting console.
+The Organization ID for your Snowplow account. You can find your Organization ID [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 ### `tracker`
 

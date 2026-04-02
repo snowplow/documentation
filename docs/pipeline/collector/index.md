@@ -71,11 +71,7 @@ The endpoint for the API is:
 
 and the only supported HTTP verb is `GET`.
 
-Your organization ID is a UUID and can be found in the location bar of your browser when you are using the Console:
-
-![This image has an empty alt attribute; its file name is image-3.png](images/image-3.png)
-
-Organization ID is the UUID in-between the two forward slashes.
+You can find your organization ID [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 Similarly, the pipeline ID can be found in the location bar as the second UUID there:
 

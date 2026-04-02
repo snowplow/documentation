@@ -11,14 +11,16 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Screen view tracking captures screen changes within the app.
+## Automatic screen view tracking
+
+Screen view tracking captures screen changes within the app. It is enabled by default and can be configured in `TrackerConfiguration`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-## Screen View Tracking in UIKit
+**UIKit**
 
-The screen view tracking for UIKit views is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
+The screen view tracking for UIKit views is enabled by default:
 
 ```swift
 let trackerConfig = TrackerConfiguration()
@@ -28,7 +30,7 @@ let trackerConfig = TrackerConfiguration()
 
 Using method swizzling in the `ViewController` class, the tracker automatically detects when screens are loaded (triggered by viewDidAppear in a ViewController) and tracks events that include information about the current and previous view controllers.
 
-## Screen View tracking in SwiftUI
+**SwiftUI**
 
 The tracker is able to track screen view events when selected view components appear in the SwiftUI lifecycle.
 To provide this functionality, it implements an extension over the `View` component which lets you annotate the components the events should be tracked for using the `snowplowScreen()` function:
@@ -75,9 +77,9 @@ struct ProductDetail: View {
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
-## Screen View tracking in traditional Activity-based apps
+**Traditional Activity-based apps**
 
-The screen view tracking for Activities (screens) is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
+The screen view tracking for Activities (screens) is enabled by default:
 
 ```kotlin
 val trackerConfig = TrackerConfiguration("appId")
@@ -87,7 +89,7 @@ val trackerConfig = TrackerConfiguration("appId")
 
 Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracker automatically detects when Activities are loaded and tracks events that include information about the current and previous Activity.
 
-## Screen View tracking in Jetpack Compose apps
+**Jetpack Compose apps**
 
 Apps built with Jetpack Compose are constructed from Composable functions rather than Activities, and so the built-in ScreenViewAutotracking will not work.
 
@@ -108,16 +110,15 @@ Depending how your app is configured, this listener may result in a `ScreenView`
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
 
-## Screen View tracking in traditional Activity-based apps
+**Traditional Activity-based apps**
 
-The screen view tracking for Activities (screens) is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
+The screen view tracking for Activities (screens) is enabled by default:
 
 ```java
 TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .screenViewAutotracking(true)
     .screenContext(true);
 ```
-
 
 Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracker automatically detects when Activities are loaded and tracks events that include information about the current and previous Activity.
 
@@ -223,7 +224,7 @@ let event = ListItemView(
 Snowplow.defaultTracker()?.track(event)
 ```
 
-#### Using the `snowplowListItem` modifier in SwiftUI
+**Using the `snowplowListItem` modifier in SwiftUI**
 
 If you are using SwiftUI in your app, you can use the `snowplowListItem` view modifier to automatically track list item views.
 Annotating the items in your list will ensure that they are tracked as they become visible.

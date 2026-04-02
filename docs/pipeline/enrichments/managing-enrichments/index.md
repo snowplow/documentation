@@ -36,7 +36,7 @@ Click on the enrichment you want to change. You will see the current configurati
 
 :::warning
 
-Never put credentials, API keys, or salts directly in your enrichment configuration. For enrichments that require secrets (such as IP Lookup with a custom MaxMind DB, API Request enrichment, PII Pseudonymization, Currency, or SQL Query), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. We will place them in secured environment variables on your behalf.
+Never put credentials, API keys, or salts directly in your enrichment configuration. For enrichments that require secrets (e.g., API Request enrichment, SQL Query, PII Pseudonymization), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. The Support team will place the secrets in secured environment variables on your behalf.
 
 :::
 

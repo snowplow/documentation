@@ -15,15 +15,19 @@ Filtering bot events helps you maintain accurate analytics and can reduce unnece
 
 ## Detect bot traffic
 
-Snowplow provides several [enrichments](/docs/pipeline/enrichments/index.md) that identify bot traffic from different angles.
+Snowplow can identify bot traffic both client-side, via a [tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md), and server-side, via [enrichments](/docs/pipeline/enrichments/index.md).
 
-Each enrichment attaches information to the event that you can use for filtering. For convenience, the last enrichment in this list provides a consolidated `bot` field based on the output of the other enrichments.
+Each source attaches information to the event that you can use for filtering. For convenience, the [bot detection enrichment](#bot-detection-enrichment) consolidates all sources into a single `bot` field.
 
 :::note Anonymous tracking
 
 Events tracked with [server-side anonymization](/docs/events/anonymous-tracking/index.md#server-side-anonymization) lack IP address data. As such, bot detection based on IP addresses will not be effective for these events. This includes the ASN lookup enrichment and the IP-related check in the IAB enrichment.
 
 :::
+
+### Client-side bot detection plugin
+
+The [bot detection plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for the web tracker runs in the browser to detect automation frameworks, such as Selenium, PhantomJS, or headless Chrome, using behavioral signals. It attaches a `client_side_bot_detection` [entity](/docs/fundamentals/entities/index.md) with a `bot` boolean and a `kind` field identifying the bot type.
 
 ### IAB enrichment
 
@@ -51,7 +55,7 @@ For this enrichment to work, you also need to enable the [IP lookup enrichment](
 
 ### Bot detection enrichment
 
-The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) consolidates the outputs of the three enrichments above into a single `bot_detection` entity. It uses "any positive = bot" logic: if any enabled source indicates that the event is a bot, the `bot` field is set to `true`, along with a list of which sources contributed to the decision. This gives you a single field to check instead of querying multiple entities separately.
+The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) consolidates the outputs of the sources above (including the client-side bot detection plugin and the server-side enrichments) into a single `bot_detection` entity. It uses "any positive = bot" logic: if any enabled source indicates that the event is a bot, the `bot` field is set to `true`, along with a list of which sources contributed to the decision. This gives you a single field to check instead of querying multiple entities separately.
 
 ## Filter out bot events
 

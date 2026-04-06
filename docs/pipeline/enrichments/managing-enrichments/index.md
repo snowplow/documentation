@@ -34,6 +34,12 @@ Click on the enrichment you want to change. You will see the current configurati
 * To enable or edit the enrichment, click on **Edit configuration**. Adjust the configuration and click **Publish** to deploy the changes. This will enable the enrichment if it was disabled.
 * To disable the enrichment, click on the **⋮** menu and select **Disable**.
 
+:::warning
+
+Never put credentials, API keys, or salts directly in your enrichment configuration. For enrichments that require secrets (e.g., API Request enrichment, SQL Query, PII Pseudonymization), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. The Support team will place the secrets in secured environment variables on your behalf.
+
+:::
+
 ## Deploy an enrichment from a development environment to a pipeline
 
 If you followed the recommended workflow to test an enrichment in a development environment, you will need to copy the same configuration into a pipeline.

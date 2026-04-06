@@ -128,20 +128,6 @@ represents the following JSON, when decoded:
 
 An array of [entities](/docs/fundamentals/entities/index.md) can be sent with each event. Entity payloads should be wrapped in a `contexts` self-describing JSON.
 
-```json
-{
-  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-  "data": [
-    {
-      ...
-    },
-    {
-      ...
-    },
-  ]
-}
-```
-
 This is an example of an HTTP request for the same `viewed_product` event as above but with a custom entity added, using the recommended Base64 encoding and the `cx` property:
 
 ```json

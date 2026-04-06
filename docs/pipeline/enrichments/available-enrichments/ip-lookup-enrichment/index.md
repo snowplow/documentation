@@ -1,7 +1,7 @@
 ---
 title: "IP lookup enrichment"
 sidebar_position: 10
-sidebar_label: IP Lookup
+sidebar_label: IP lookup
 description: "Resolve IP addresses to geographic locations and ISP information using MaxMind databases."
 keywords: ["IP lookup", "geolocation", "MaxMind"]
 ---

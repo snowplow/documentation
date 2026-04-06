@@ -18,7 +18,7 @@ This is useful for automatically flagging non-human traffic. Many bots and scrap
 
 Many VPN services also use cloud hosting. As such, this enrichment might incorrectly flag VPN users as bots (hence the `likelyBot` and not `bot` designation).
 
-Depending on the nature of your business, VPN users might represent a meaningful portion of your traffic. If you find that to be the case, you should not rely on this enrichment as a _sole_ indicator of bots. Instead, you could use it to reinforce other indicators, e.g. unusually high number of page views in a short timeframe.
+Depending on the nature of your business, VPN users might represent a meaningful portion of your traffic. If you find that to be the case, you should not rely on this enrichment as a _sole_ indicator of bots. Instead, you could use it to reinforce other indicators, e.g., unusually high number of page views in a short timeframe.
 
 :::
 
@@ -33,18 +33,18 @@ To use this enrichment, you need to enable the [IP lookup enrichment](/docs/pipe
 
 If you are using the paid MaxMind database (`isp` field present in your IP lookup configuration), you don't need to do anything else.
 
-If you are using the free MaxMind database, e.g. the one provided by Snowplow for CDI customers, your configuration will look like this:
+If you are using the free MaxMind database, e.g., the one provided by Snowplow for CDI customers, your configuration will look like this:
 
-```
+```json
 "geo": {
   "database": "GeoLite2-City.mmdb",
   "uri": "<database URI>"
 }
 ```
 
-Add the `asn` field in a similar fashion:
+Add the `asn` field:
 
-```
+```json
 "geo": {
   "database": "GeoLite2-City.mmdb",
   "uri": "<database URI>"

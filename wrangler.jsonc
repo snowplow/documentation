@@ -5,6 +5,7 @@
   "assets": {
     "directory": "./build",
     "binding": "ASSETS",
+    "run_worker_first": true,
     "not_found_handling": "404-page"
   }
 }

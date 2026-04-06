@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "build:cf": "NODE_OPTIONS='--max-old-space-size=4096' docusaurus build",
+    "build:cf": "NODE_OPTIONS='--max-old-space-size=4096' docusaurus build && rm -f build/_redirects",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

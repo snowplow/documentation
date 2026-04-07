@@ -1517,9 +1517,10 @@ div[class*='buttonGroup'] {
 .theme-code-block div[class^='codeBlockContent'] {
   padding-top: 0 !important;
 }
-/* Reset paragraph margins inside Mermaid nodes (foreignObject renders <p> tags) */
+/* Reset paragraph margins inside Mermaid nodes (foreignObject renders <p> tags).
+   Needs !important to survive production CSS reordering (Tailwind important: true). */
 .mermaid p {
-  margin: 0;
+  margin: 0 !important;
 }
 
 /* Mermaid diagrams responsive styles - FORCE fit viewport */

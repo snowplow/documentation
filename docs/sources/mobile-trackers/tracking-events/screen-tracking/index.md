@@ -11,9 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Automatic screen view tracking
-
-Screen view tracking captures screen changes within the app. It is enabled by default and can be configured in `TrackerConfiguration`.
+Screen view tracking captures screen changes within the app. It's enabled by default and can be configured in `TrackerConfiguration`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

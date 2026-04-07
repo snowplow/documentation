@@ -27,7 +27,7 @@ There are two ways that you can model conversions in the Unified package:
 
 By configuring the conversion specifications through the `snowplow__conversion_events` variable you can enable conversion events to be modelled in the derived sessions table.
 
-:::warning
+:::note
 
 Because this is part of the sessions table within the Unified dbt package, we still expect your sessions to contain at least one `page_view`, a `page_ping` or a `screen_view` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view`, a `page_ping` or a `screen_view` in the session there will be no session record for the model to attach the conversions to.
 

@@ -45,7 +45,7 @@ Currently we support the following aggregations:
 
 ## Usage Notes
 
-:::warning
+:::note
 
 It is unlikely, although not impossible, that when using the SQL approach you may need to provide a table alias to avoid ambiguous references, in this case please see the model sql file for the specific alias used for the `snowplow_unified_base_events_this_run` table in each case.
 

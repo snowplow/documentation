@@ -111,7 +111,7 @@ The script should always be run from the **root** of your dbt project (the same 
 
 ### Install python packages
 
-:::warning
+:::note
 Python versions between 3.7 and 3.10 (inclusive) are currently supported
 
 :::
@@ -123,7 +123,7 @@ pip install -r dbt_packages/snowplow_normalize/utils/requirements.txt
 ```
 
 ### Configuration File
-:::warning
+:::note
 
 There may be changes to the config file between versions, this page will always contain the latest information but if you are using an older version you should call the python script with the `--configHelp` flag.
 
@@ -526,3 +526,4 @@ You can remove all models that don't exist in your config by running the script 
 
 :::warning
 If you have other models in the same sub-folder that were not generated via this package then this will attempt to delete those files.
+:::

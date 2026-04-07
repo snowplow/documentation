@@ -25,7 +25,7 @@ export const datagridProps = {
 <Badges badgeType="SPAL"></Badges>
 </BadgeGroup>
 
-:::warning
+:::note
 Make sure you upgrade to [v.0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) of Unified Package if you would like to use the v0.2.0 of Attribution Package
 
 :::

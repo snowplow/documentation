@@ -13,7 +13,7 @@ import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
 
-:::warning
+:::note
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 
@@ -210,7 +210,7 @@ Please note that some of the libraries are adapter specific. These are listed in
 <details>
 <summary>M1 Instructions (for Snowflake only)</summary>
 
-:::warning
+:::note
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
 ```

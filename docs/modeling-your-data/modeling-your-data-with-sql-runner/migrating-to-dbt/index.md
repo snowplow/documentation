@@ -87,7 +87,7 @@ The latest information for our packages can be found in the [quickstart](/docs/m
 
 ## Migrate existing derived data
 
-:::warning
+:::note
 
 The dbt package uses slightly different logic for processing, including the quarantining of sessions and different format manifest tables. It is highly recommended that you just run the dbt project from your start date. The following is a best-effort suggestion and we make no guarantee that all data will be correctly processed or that issues may not happen later in the lifetime of the project.
 
@@ -116,7 +116,7 @@ The following SQL will merge the existing web records in your SQL Runner derived
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::warning
+:::note
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 
@@ -637,7 +637,7 @@ The following SQL will merge the existing mobile records in your SQL Runner deri
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::warning
+:::note
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 

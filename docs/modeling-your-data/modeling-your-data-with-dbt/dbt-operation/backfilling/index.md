@@ -94,7 +94,7 @@ Make sure to recreate any additional features as necessary e.g. partition keys.
 
 ### Step 3: Update the manifest record
 
-:::danger
+:::warning
 
 Ensure your project is not running while you perform this step as it could cause a conflict in the manifest table.
 

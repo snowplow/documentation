@@ -6,7 +6,7 @@ description: "Legacy Snowplow dbt packages including Web, Mobile, and Fractribut
 keywords: ["legacy dbt packages", "deprecated packages", "web dbt legacy", "mobile dbt legacy", "fractribution legacy"]
 ---
 
-:::warning
+:::note
 
 Legacy packages are no longer under active development and are in some cases no longer supported. Please look for a suitable replacement for these packages where possible.
 

@@ -82,7 +82,7 @@ For actual rendering performance, the application will have to use the Performan
 
 ## Performance timing plugin (original)
 
-:::warning
+:::note
 This plugin has been deprecated and superseded by the Performance Navigation Timing plugin described above.
 :::
 

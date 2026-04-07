@@ -113,7 +113,7 @@ function process(event) {
 }
 ```
 
-:::warning Failed events
+:::note Failed events
 
 This creates an "enrichment failure" failed event, which may be tricky to distinguish from genuine failures in your enrichment code.
 

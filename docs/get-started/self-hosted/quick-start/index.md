@@ -577,7 +577,7 @@ EOT
 
 </details>
 
-:::tip
+:::note
 
 For all active destinations, change any `_password` setting to a value that _only you_ know.
 

@@ -30,7 +30,7 @@ WHERE event_name = 'page_view'
 
 You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your configuration.
 
-:::tip
+:::note
 
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 

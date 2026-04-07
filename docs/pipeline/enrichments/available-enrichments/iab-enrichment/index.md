@@ -21,18 +21,18 @@ Here is the logic it uses:
 ```mermaid
 flowchart TD
   IncList{{User agent in the custom **include** list?}}:::nowrap
-  IncList -->|Yes| Browser1([Browser])
+  IncList -->|Yes| NotBot1([Not bot])
   IncList -->|No| ExcList{{User agent in the custom **exclude** list?}}:::nowrap
-  ExcList -->|Yes| Bot1([Bot])
+  ExcList -->|Yes| Bot1([**Bot**])
   ExcList -->|No| IpFile{{IP address in the IAB IP file?}}:::nowrap
-  IpFile -->|Yes| Bot2([Bot])
+  IpFile -->|Yes| Bot2([**Bot**])
   IpFile -->|No| NullUA{{User agent is null?}}:::nowrap
-  NullUA -->|Yes| Browser2([Browser])
+  NullUA -->|Yes| NotBot2([Not bot])
   NullUA -->|No| IncFile{{User agent in the IAB **include** file?}}:::nowrap
   IncFile -->|Yes| ExcFile{{User agent in the IAB **exclude** file?}}:::nowrap
-  IncFile -->|No| Bot3([Bot])
-  ExcFile -->|Yes| Bot4([Bot])
-  ExcFile -->|No| Browser3([Browser])
+  IncFile -->|No| Bot3([**Bot**])
+  ExcFile -->|Yes| Bot4([**Bot**])
+  ExcFile -->|No| NotBot3([Not bot])
   classDef nowrap white-space:nowrap
 ```
 

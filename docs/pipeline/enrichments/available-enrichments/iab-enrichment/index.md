@@ -29,10 +29,10 @@ flowchart TD
   IpFile -->|No| NullUA{{User agent is null?}}:::nowrap
   NullUA -->|Yes| Browser2([Browser])
   NullUA -->|No| IncFile{{User agent in the IAB **include** file?}}:::nowrap
-  IncFile -->|No| Bot3([Bot])
   IncFile -->|Yes| ExcFile{{User agent in the IAB **exclude** file?}}:::nowrap
-  ExcFile -->|No| Browser3([Browser])
+  IncFile -->|No| Bot3([Bot])
   ExcFile -->|Yes| Bot4([Bot])
+  ExcFile -->|No| Browser3([Browser])
   classDef nowrap white-space:nowrap
 ```
 

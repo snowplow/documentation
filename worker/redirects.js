@@ -1,5 +1,11 @@
-// Each rule: [source, destination, status]
-const rules = [
+// Rules that always apply, before trying to serve the page.
+const forcedRules = [
+  ['/docs/signals/', '/docs/signals/introduction/', 301],
+  ['/docs/api-reference/', '/docs/api-reference/versions/', 301],
+];
+
+// Rules that only apply when the page is not found.
+const fallbackRules = [
   ['/accelerators/', 'https://snowplow.io/data-product-accelerators/', 302],
   ['/snowplow-android-tracker/*', 'https://snowplow.github.io/snowplow-android-tracker/:splat', 302],
   ['/snowplow-cpp-tracker/*', 'https://snowplow.github.io/snowplow-cpp-tracker/:splat', 302],
@@ -398,7 +404,6 @@ const rules = [
   ['/docs/signals/define-interventions/*', '/docs/signals/interventions/:splat', 301],
   ['/docs/signals/receive-interventions/*', '/docs/signals/interventions/subscribe/:splat', 301],
   ['/docs/signals/resources/*', '/docs/signals/get-started/:splat', 301],
-  ['/docs/signals/', '/docs/signals/introduction/', 301],
   ['/docs/resources/migration-guides/*', '/docs/migration-guides/:splat', 301],
   ['/docs/resources/*', '/docs/licensing/:splat', 301],
   ['/docs/licensing/copyright-license/*', '/docs/licensing/:splat', 301],
@@ -417,7 +422,7 @@ const rules = [
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
 ];
 
-export function findRedirect(pathname) {
+function findInRules(rules, pathname) {
   const alt = pathname.endsWith('/')
     ? pathname.slice(0, -1)
     : pathname + '/';
@@ -441,4 +446,12 @@ export function findRedirect(pathname) {
   }
 
   return null;
+}
+
+export function findForcedRedirect(pathname) {
+  return findInRules(forcedRules, pathname);
+}
+
+export function findFallbackRedirect(pathname) {
+  return findInRules(fallbackRules, pathname);
 }

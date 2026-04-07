@@ -19,7 +19,7 @@ You can enable and edit enrichments on any pipeline, but we recommend the follow
 
 Alternatively, you can use [Snowplow Micro](/docs/testing/snowplow-micro/local/index.md) to test your changes locally.
 
-:::note
+:::warning
 
 Invalid enrichment changes can halt data processing in the pipeline. For example, an enrichment might be pointing to a non-existent database file, or the JavaScript code in the JavaScript enrichment might have typos. This is why we recommend testing in a low-risk environment first.
 

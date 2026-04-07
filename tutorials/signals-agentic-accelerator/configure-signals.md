@@ -132,10 +132,27 @@ response = sp_signals.get_service_attributes(
     identifier=user_id,
 )
 
-print("Page view count:", response.get("page_view_count"))
+print(response)
 ```
 
-You should see values across multiple attributes - for example, `page_view_count` of 10, `cultural_explorer` of 5, `budget_conscious_count` of 2, and `preferred_experience_length` of `half-day`. The exact counts depend on the test events sent.
+You should see a response similar to the following (exact counts depend on the test events sent):
+
+```json
+{
+  "page_view_count": 10,
+  "destination_page_view_count": 6,
+  "family_destination_count": 3,
+  "cultural_explorer": 5,
+  "modern_urbanite": 1,
+  "tranquil_seeker": 2,
+  "family_fun": 3,
+  "culinary_tourist": 2,
+  "preferred_experience_length": "half-day",
+  "budget_conscious_count": 2,
+  "luxury_inclined_count": 1,
+  "latest_schedule": null
+}
+```
 
 :::tip
 The `get_signals` tool uses the same Signals credentials you configured earlier in the notebook.

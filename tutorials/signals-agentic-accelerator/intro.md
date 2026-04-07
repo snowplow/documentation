@@ -13,6 +13,8 @@ This accelerator shows you how to combine [Snowplow Signals](/docs/signals/intro
 
 The code examples use a travel domain, but the pattern applies to any customer-facing agent - support, shopping, advisory, or content recommendation.
 
+![Example Signals response showing computed behavioral attributes](images/signals-response.png)
+
 By the end of this accelerator you will have:
 
 * An AI agent built with Strands Agents and AWS Bedrock

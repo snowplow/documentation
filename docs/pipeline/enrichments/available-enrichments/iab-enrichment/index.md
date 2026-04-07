@@ -12,20 +12,11 @@ The Interactive Advertising Bureau (IAB) is an advertising business organization
 
 Their internationally recognized list of spiders and bots is regularly maintained to try and identify the IP addresses of known bots and spiders.
 
-## Configuration
+## How the enrichment works
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-1)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/iab_spiders_and_robots_enrichment.json)
+This enrichment performs several checks using the IAB database files and your custom override lists (both covered in the [configuration section](#configuration)).
 
-```mdx-code-block
-import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
-
-<TestingWithMicro/>
-```
-
-### Overview
-
-The enrichment performs several checks. Before diving into the individual configuration options, it's helpful to know their precedence:
+Here is the logic it uses:
 
 ```mermaid
 flowchart TD
@@ -45,9 +36,21 @@ flowchart TD
   classDef nowrap white-space:nowrap
 ```
 
-A user agent string will match one of the lists or files if it contains a string from this list or file. The matching is case insensitive.
+A user agent string will match one of the lists or files if it contains a string from that list or file. The matching is case-insensitive.
 
 For example, the user agent string `Chrome Chrome MyBot Chrome` will match an entry named `mybot`.
+
+
+## Configuration
+
+- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-1)
+- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/iab_spiders_and_robots_enrichment.json)
+
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
 
 ### IAB files
 
@@ -62,7 +65,7 @@ There are three configuration fields that correspond to the IAB/ABC database fil
 All three are mandatory and must have two inner fields:
 
 - The `database` field containing the name of the database file.
-- The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs` and `s3` schemes.
+- The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs`, and `s3` schemes.
 
 :::tip Snowplow CDI
 
@@ -78,8 +81,6 @@ The database filenames must be as follows:
 | `excludeUseragentFile.database` | `"exclude_current.txt"` |
 | `includeUseragentFile.database` | `"include_current.txt"` |
 
-Note that the database files are commercial and proprietary and should not be stored publicly – for instance, on unprotected HTTPS or in a public S3 bucket.
-
 ### Custom user agent lists
 
 :::note Availability
@@ -88,7 +89,7 @@ This feature is available since version 6.8.0 of Enrich.
 
 :::
 
-In addition to the IAB database files, you can provide custom lists of user agent strings to supplement the detection. Two optional fields can be added to the `parameters` section:
+In addition to the IAB database files, you can provide custom lists of user agent strings to supplement or override the detection. Two optional fields can be added to the `parameters` section:
 
 | Field name | Description |
 | ---------- | ----------- |

@@ -117,4 +117,4 @@
 * Use `-` or `*` for bullet points.
 * Use triple backticks and specify the language for code blocks.
 * Use Docusaurus admonitions sparingly. Always set custom headings.
-* Use Tip for actions, Note or Info for information, Warning for data loss or security risks.
+* Use Tip for actions, Note or Info for information, Warning for data loss or security risks, Danger for pipeline outages.

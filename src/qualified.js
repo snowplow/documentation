@@ -6,13 +6,9 @@
   const host = window.location.hostname;
 
   const isProdBuild = process.env.NODE_ENV === 'production';
-  const isDocsHost =
-    host === 'docs.snowplow.io' ||
-    host.endsWith('snowplow-docs.netlify.app'); // deploy-preview-xxxx--snowplow-docs.netlify.app
-
-  // Only load Qualified on real docs + Netlify previews
-  if (!isProdBuild || !isDocsHost) {
-    console.log('Qualified tracking not loaded (non-docs or non-preview host).');
+  // Only load Qualified on the production docs site
+  if (!isProdBuild || host !== 'docs.snowplow.io') {
+    console.log('Qualified tracking not loaded (non-production host).');
     return;
   }
 

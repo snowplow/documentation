@@ -75,7 +75,7 @@ If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enr
 
 You can also add temporary `print` statements to your code to inspect certain values.
 
-:::warning
+:::tip
 
 Make sure to remove all debug printing when adding the enrichment to a production pipeline.
 
@@ -179,7 +179,7 @@ For a solution, check out the section on [locally resolving an existing domain n
 
 :::tip Cookie name
 
-If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
+If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-and-enrich-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
 
 <CodeBlock language="bash">{
 `docker run ... \\

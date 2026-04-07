@@ -28,7 +28,7 @@ Filters are a type of transformation which prevent Snowbridge from further proce
 
 ## Configuration
 
-To configure transformations, supply one or more `transform {}` block. Choose the transformation using `use "${transformation_name}"`.
+Configure transformations by supplying a single `transform {}` block. Within it, choose each transformation using `use "transformation_name" {}`. Multiple transformations run in the order they appear.
 
 Example:
 
@@ -37,3 +37,22 @@ The below first filters out any `event_name` which does not match the regex `^pa
 <CodeBlock language="hcl" reference>{`
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/transformations-overview-example.hcl
 `}</CodeBlock>
+
+:::note
+In Snowbridge 4.x, each transformation required its own `transform {}` block.
+From version 5.0.0, all transformations must be nested inside a single `transform {}` block. See the [upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-5-X-X/index.md) for migration details.
+:::
+
+### Worker pool
+
+The `transform {}` block accepts an optional `worker_pool` parameter that controls the number of concurrent goroutines used to run transformations. By default, the worker pool scales automatically based on `GOMAXPROCS`.
+
+```hcl
+transform {
+  worker_pool = 4
+
+  use "spEnrichedToJson" {}
+}
+```
+
+Set `worker_pool` explicitly when you need predictable concurrency, for example in memory-constrained environments.

@@ -393,7 +393,7 @@ You can configure your cluster with [an instance profile](https://docs.databrick
 
 #### Step 3: Create an access token for the loader
 
-:::warning
+:::note
 
 The access token must not have a specified lifetime. Otherwise, the loader will stop working when the token expires.
 
@@ -577,7 +577,7 @@ EOT
 
 </details>
 
-:::warning
+:::note
 
 For all active destinations, change any `_password` setting to a value that _only you_ know.
 

@@ -6,7 +6,7 @@ description: "Configuration for legacy Snowplow dbt packages including Web, Mobi
 keywords: ["legacy dbt packages", "deprecated dbt packages", "web dbt legacy", "mobile dbt legacy"]
 ---
 
-:::warning
+:::note
 
 Legacy packages are no longer under active development and are in some cases no longer supported. Please look for a suitable replacement for these packages where possible.
 

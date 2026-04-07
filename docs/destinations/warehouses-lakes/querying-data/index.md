@@ -30,7 +30,7 @@ WHERE event_name = 'page_view'
 
 You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your configuration.
 
-:::warning
+:::note
 
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 
@@ -63,7 +63,7 @@ LEFT JOIN
     ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
-:::warning
+:::note
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -162,7 +162,7 @@ LEFT JOIN -- assumes no duplicates, and will return all events regardless of if 
     ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
-:::warning
+:::note
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 

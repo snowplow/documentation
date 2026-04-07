@@ -223,7 +223,7 @@ enableFormTracking({
   </TabItem>
 </Tabs>
 
-:::warning
+:::tip
 
 It is recommended that the `transform` function does not return a falsy value but a string even when the intention is to redact a value from being tracked.
 E.g. Send `"null"` over `null`.

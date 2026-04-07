@@ -11,7 +11,11 @@ import CodeBlock from '@theme/CodeBlock';
 ```
 
 :::note
-Version 3.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/3-X-X-upgrade-guide/index.md)
+Version 4.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-4-X-X/index.md)
+:::
+
+:::note
+Version 5.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-5-X-X/index.md)
 :::
 
 ## Basic authentication

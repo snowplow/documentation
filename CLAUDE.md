@@ -86,6 +86,10 @@ Best practices, recommendations, or encouraging specific actions
 :::warning
 Important cautions about data loss or security risks
 :::
+
+:::danger
+Critical warnings about severe consequences such as pipeline outages
+:::
 ```
 
 ## Images

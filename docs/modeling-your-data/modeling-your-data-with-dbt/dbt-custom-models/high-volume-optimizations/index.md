@@ -14,7 +14,7 @@ Our [incremental sessionization](/docs/modeling-your-data/modeling-your-data-wit
 Decreasing the backfill limit days will only impact on backfill runs so once models are up to date this will have little impact. Decreasing the upsert lookback days, or the session lookback days can have benefits but come at the risk of duplicates making it into the manifest or derived tables so do this at your own risk.
 
 ## Reduce the number of columns written + ephemeral this run
-:::danger
+:::note
 
 These configurations have not been fully tested and leave you at risk of issues occurring when we make upgrades to our packages. Continue at your own risk.
 

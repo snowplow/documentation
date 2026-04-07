@@ -32,7 +32,7 @@ Initialize the setup of Snowtype code generation in a project. Creates the confi
 
 ### `snowtype generate`
 
-Generates tracking code based on configuration on the configuration file. Can generate/modify the `.snowtype-lock.json` file.
+Generates tracking code based on the configuration file. On the first run, Snowtype creates a `.snowtype-lock.json` file next to the configuration file to pin the resolved versions. On subsequent runs, `generate` reads versions from the lock file rather than fetching the latest. To update the pinned versions, use the [`snowtype update`](#snowtype-update) command.
 
 **Options**
  -  `-c, --config` Config file path.
@@ -45,12 +45,15 @@ Generates tracking code based on configuration on the configuration file. Can ge
 
 ### `snowtype update`
 
-Checks for latest version updates in Data Structures and Event Specifications.
+Updates the pinned versions in the `.snowtype-lock.json` file. By default, updates all event specifications to the latest published versions.
 
 **Options**
  -  `-c, --config` Config file path.
  -  `-y, --yes` Updates all to latest version without prompting. (default: false)
  -  `-m, --maximumBump` The maximum SchemaVer update to show an available update notification for. Possible values are 'patch', 'minor', 'major' and will work as expected regular SemVer bumps. (default: 'major')
+ -  `--latestDraft` Update to the latest draft version.
+ -  `--eventSpecs <ids...>` Update only the specified event specifications.
+ -  `--dataProducts <ids...>` Update only the specified tracking plans.
 
 ### `snowtype patch`
 

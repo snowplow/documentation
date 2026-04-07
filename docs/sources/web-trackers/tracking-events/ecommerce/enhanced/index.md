@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::warning
+:::note
 This plugin has been deprecated and superseded by the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) dbt model.
 :::
 

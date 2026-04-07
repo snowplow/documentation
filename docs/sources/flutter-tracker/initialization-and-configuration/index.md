@@ -29,16 +29,21 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `method`         | `Method?`               | HTTP method to use: `Method.get` or `Method.post` (`Method.post` is default).        |
 | `customPostPath` | `String?`               | Custom POST path.                                                                    |
 | `requestHeaders` | `Map<String, String>?`  | Map of custom HTTP headers to add to requests to the collector.                      |
-| `trackerConfig`  | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
-| `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
-| `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
-| `emitterConfig`  | `EmitterConfiguration?` | Configuration for how the events are sent.                                           |
+| `trackerConfig`         | `TrackerConfiguration?`         | Configuration of the tracker and the core tracker properties.                        |
+| `gdprConfig`            | `GdprConfiguration?`            | Determines the GDPR context that will be attached to all events sent by the tracker. |
+| `subjectConfig`         | `SubjectConfiguration?`         | Subject information about tracked user and device that is added to events.           |
+| `emitterConfig`         | `EmitterConfiguration?`         | Configuration for how the events are sent.                                           |
+| `globalContextsConfig`  | `GlobalContextsConfiguration?`  | Configuration of global context entities attached to all events.                    |
 
 :::note
 The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
 :::
 :::note
 The `EmitterConfiguration` class was added in v0.3.0.
+:::
+
+:::note Version support
+The `GlobalContextsConfiguration` class was added in 0.9.0.
 :::
 
 ## Configuration of tracker properties: `TrackerConfiguration`
@@ -134,3 +139,13 @@ Determines the GDPR context that will be attached to all events sent by the trac
 | `documentId`          | `String` | ID of a GDPR basis document. | ✔       | ✔   | ✔   |         |
 | `documentVersion`     | `String` | Version of the document.     | ✔       | ✔   | ✔   |         |
 | `documentDescription` | `String` | Description of the document. | ✔       | ✔   | ✔   |
+
+## Global context configuration: `GlobalContextsConfiguration`
+
+Configures global context entities to attach to all events. Unlike per-event context entities, global context entities are sent with every event without needing to specify them on individual `track()` calls.
+
+| Attribute  | Type                   | Description                                           | Android | iOS | Web | Default |
+| ---------- | ---------------------- | ----------------------------------------------------- | ------- | --- | --- | ------- |
+| `contexts` | `List<SelfDescribing>` | List of context entities to attach to all tracked events. | ✔       | ✔   | ✔   | empty   |
+
+See the [Global context page](/docs/sources/flutter-tracker/adding-data/global-context/index.md) for detailed information on configuring global contexts at initialization time and managing them dynamically at runtime.

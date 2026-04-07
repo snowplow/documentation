@@ -16,23 +16,23 @@ Their internationally recognized list of spiders and bots is regularly maintaine
 
 This enrichment performs several checks using the IAB database files and your custom override lists (both covered in the [configuration section](#configuration)).
 
-Here is the logic it uses:
+Here is the logic it uses. The values in parantheses are for the `reason` field in the IAB [entity](/docs/fundamentals/entities/index.md) attached to the event.
 
 ```mermaid
 flowchart TD
   IncList{{User agent in the custom **include** list?}}:::nowrap
-  IncList -->|Yes| NotBot1([Not bot])
+  IncList -->|Yes| NotBot1(["Not bot"])
   IncList -->|No| ExcList{{User agent in the custom **exclude** list?}}:::nowrap
-  ExcList -->|Yes| Bot1([**Bot**])
+  ExcList -->|Yes| Bot1("**Bot**<br/>(FAILED_UA_EXCLUDE)")
   ExcList -->|No| IpFile{{IP address in the IAB IP file?}}:::nowrap
-  IpFile -->|Yes| Bot2([**Bot**])
+  IpFile -->|Yes| Bot2("**Bot**<br/>(FAILED_IP_EXCLUDE)")
   IpFile -->|No| NullUA{{User agent is null?}}:::nowrap
-  NullUA -->|Yes| NotBot2([Not bot])
+  NullUA -->|Yes| NotBot2(["Not bot"])
   NullUA -->|No| IncFile{{User agent in the IAB **include** file?}}:::nowrap
   IncFile -->|Yes| ExcFile{{User agent in the IAB **exclude** file?}}:::nowrap
-  IncFile -->|No| Bot3([**Bot**])
-  ExcFile -->|Yes| Bot4([**Bot**])
-  ExcFile -->|No| NotBot3([Not bot])
+  IncFile -->|No| Bot3("**Bot**<br/>(FAILED_UA_INCLUDE)")
+  ExcFile -->|Yes| Bot4("**Bot**<br/>(FAILED_UA_EXCLUDE)")
+  ExcFile -->|No| NotBot3(["Not bot"])
   classDef nowrap white-space:nowrap
 ```
 

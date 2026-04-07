@@ -1517,11 +1517,16 @@ div[class*='buttonGroup'] {
 .theme-code-block div[class^='codeBlockContent'] {
   padding-top: 0 !important;
 }
-/* Reset paragraph margins inside Mermaid nodes (foreignObject renders <p> tags).
-   The container class is "docusaurus-mermaid-container", not ".mermaid".
-   Needs !important to beat Infima's boosted p margin specificity (Docusaurus 3). */
+/* Fix Mermaid node sizing: Infima's boosted p margins (Docusaurus 3) inflate
+   foreignObject dimensions at render time. In production builds, external CSS
+   loads after Mermaid measures nodes, so shapes are drawn too large. The margin
+   reset fixes the text; height: 100% shrinks foreignObject to fit its content
+   within the already-drawn shapes. */
 .docusaurus-mermaid-container p {
   margin: 0 !important;
+}
+.docusaurus-mermaid-container foreignObject {
+  height: 100% !important;
 }
 
 /* Mermaid diagrams responsive styles - FORCE fit viewport */

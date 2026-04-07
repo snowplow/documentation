@@ -1518,8 +1518,9 @@ div[class*='buttonGroup'] {
   padding-top: 0 !important;
 }
 /* Reset paragraph margins inside Mermaid nodes (foreignObject renders <p> tags).
-   Needs !important to survive production CSS reordering (Tailwind important: true). */
-.mermaid p {
+   The container class is "docusaurus-mermaid-container", not ".mermaid".
+   Needs !important to beat Infima's boosted p margin specificity (Docusaurus 3). */
+.docusaurus-mermaid-container p {
   margin: 0 !important;
 }
 

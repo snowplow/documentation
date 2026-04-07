@@ -16,7 +16,7 @@ The compression feature allows the collector to batch multiple individual collec
 
 ## Enabling compression
 
-:::warning Enrich 6.1.x required
+:::danger Enrich 6.1.x required
 Before enabling compression, you must upgrade to Enrich 6.1.x first. The reason for this is that support for processing compressed payloads is added to Enrich starting with Enrich 6.1.0. Enrich 6.1.0 can process both compressed and uncompressed payloads.
 
 Enrich is currently the only application compatible with compression. Setups with an [S3 loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md) reading off the raw stream will not be supported.

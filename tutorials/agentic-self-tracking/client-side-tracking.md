@@ -39,22 +39,24 @@ This separation - thin events with rich attached entities - keeps events composa
 
 This stage introduces:
 
-- 1 new dependency: `@snowplow/browser-tracker`
-- 2 event schemas: `message_sent` and `message_received`
-- 1 entity schema: `message_context`
-- 1 new file: `src/lib/tracking/client.ts` - the client tracking module
-- 1 new file: `start.sh` - dev startup script that runs Snowplow Micro alongside Next.js
+- One new dependency: `@snowplow/browser-tracker`
+- Two event schemas from Iglu Central: `message_sent` and `message_received`
+- One entity schema from Iglu Central: `message_context`
+- One new file: `src/lib/tracking/client.ts` - the client tracking module
+- One new file: `start.sh` - dev startup script that runs Snowplow Micro alongside Next.js
 - Modifications to: `src/app/page.tsx` (wiring tracking into the UI)
 
-## Define the schemas
+## Review the schemas
 
-Every Snowplow event and entity needs a schema. You'll create three schemas for this stage.
+Every Snowplow event and entity needs a schema. The three schemas used in this stage - `message_sent`, `message_received`, and `message_context` - are published on [Iglu Central](https://github.com/snowplow/iglu-central) under vendor `com.snowplow.agent.tracking`. Your application references them by schema URI, and Snowplow resolves them automatically - you do not need to create or host these schemas yourself.
+
+Here's what each schema defines:
 
 ### message_sent event
 
 The `message_sent` event is deliberately minimal - it captures the session and timestamp. All the interesting message metadata lives in the attached `message_context` entity.
 
-```yaml title="snowplow/data-structures/events/client/message_sent.yml"
+```yaml title="message_sent schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -65,7 +67,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'User sends a message in the chat interface.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: message_sent
     format: jsonschema
     version: 1-0-0
@@ -89,7 +91,7 @@ data:
 
 The `message_received` event is richer - it captures performance and usage metrics about the agent's response that are only available once the response completes.
 
-```yaml title="snowplow/data-structures/events/client/message_received.yml"
+```yaml title="message_received schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -100,7 +102,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'Agent response received and rendered in the chat interface.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: message_received
     format: jsonschema
     version: 1-0-0
@@ -145,7 +147,7 @@ data:
 
 The `message_context` entity is attached to both events. It describes the message itself - who sent it, how long it is, its position in the conversation.
 
-```yaml title="snowplow/data-structures/entities/message_context.yml"
+```yaml title="message_context schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -156,7 +158,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'Context entity describing a chat message.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: message_context
     format: jsonschema
     version: 1-0-0
@@ -264,7 +266,7 @@ export const initClientTracker = () => {
 
 The tracker is initialized as a singleton - `initClientTracker()` is safe to call multiple times; it only runs once. It reads the collector URL and app ID from environment variables, enables built-in web page and session contexts, and fires an initial page view.
 
-Now add the two tracking functions:
+Next, add the two tracking functions:
 
 ```typescript title="src/lib/tracking/client.ts (continued)"
 // ---------------------------------------------------------------------------
@@ -281,7 +283,7 @@ export interface MessageContextData {
 }
 
 const buildMessageContext = (data: MessageContextData) => ({
-  schema: 'iglu:com.snowplow.demo/message_context/jsonschema/1-0-0' as const,
+  schema: 'iglu:com.snowplow.agent.tracking/message_context/jsonschema/1-0-0' as const,
   data: data as unknown as Record<string, unknown>,
 });
 
@@ -300,7 +302,7 @@ export interface MessageSentParams {
 export const trackMessageSent = (params: MessageSentParams) => {
   trackSelfDescribingEvent({
     event: {
-      schema: 'iglu:com.snowplow.demo/message_sent/jsonschema/1-0-0',
+      schema: 'iglu:com.snowplow.agent.tracking/message_sent/jsonschema/1-0-0',
       data: {
         session_id: params.sessionId,
         sent_at: new Date().toISOString(),
@@ -340,7 +342,7 @@ export interface MessageReceivedParams {
 export const trackMessageReceived = (params: MessageReceivedParams) => {
   trackSelfDescribingEvent({
     event: {
-      schema: 'iglu:com.snowplow.demo/message_received/jsonschema/1-0-0',
+      schema: 'iglu:com.snowplow.agent.tracking/message_received/jsonschema/1-0-0',
       data: {
         session_id: params.sessionId,
         invocation_id: params.invocationId,
@@ -478,17 +480,17 @@ The `onFinish` callback fires once the full response has been streamed. By this 
 
 ### 5. Enable the LiveTrackingPanel
 
-The `LiveTrackingPanel` component was already in the codebase but disabled. Now render it in the JSX:
+The `LiveTrackingPanel` component was already in the codebase but disabled. Render it in the JSX:
 
 ```tsx title="src/app/page.tsx"
 <LiveTrackingPanel sessionId={sessionId} />
 ```
 
-This component polls Snowplow Micro's API every 2 seconds and displays events in a real-time sidebar. It requires Micro to be running.
+This component polls Snowplow Micro's API every two seconds and displays events in a real-time sidebar. It requires Micro to be running.
 
 ## Set up Snowplow Micro
 
-To validate events locally, you need Snowplow Micro running in Docker. The `start.sh` script handles this:
+To validate events locally, you need [Snowplow Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/) running in Docker. The `start.sh` script handles this:
 
 ```bash title="start.sh"
 #!/bin/bash
@@ -499,7 +501,8 @@ if [ -f .env.local ]; then
   export $(grep -v '^#' .env.local | grep -v '^$' | xargs)
 fi
 
-# Start Snowplow Micro with local Iglu schemas mounted
+# Generic schemas (com.snowplow.agent.tracking) resolve from Iglu Central automatically.
+# The local mount provides app-specific custom entities added in later stages.
 docker run -d --name snowplow-micro \
   -p 9090:9090 \
   -v "$(pwd)/snowplow/iglu-local:/config/iglu-client-embedded" \
@@ -511,7 +514,9 @@ sleep 2
 npm run dev
 ```
 
-The key line is the `docker run` command: it mounts the local `snowplow/iglu-local` directory into the container. This is where Micro finds the JSON schema files it uses to validate incoming events.
+Snowplow Micro validates every incoming event against its schema. The three schemas you're using in this stage - `message_sent`, `message_received`, and `message_context` - are published on [Iglu Central](https://github.com/snowplow/iglu-central), Snowplow's public schema registry. Micro resolves them automatically over the network, so you don't need local copies.
+
+The `-v` mount maps the local `snowplow/iglu-local` directory into the container. This directory is where you'll add your own custom entity schemas in later stages - for example, domain-specific entities that describe travel intent or tool parameters. For the time being, it can remain empty; everything you need comes from Iglu Central.
 
 Run the combined startup with:
 
@@ -535,10 +540,12 @@ With both services running:
 Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you prefer programmatic access, but the UI is the recommended way to explore events throughout this tutorial.
 :::
 
----
+:::note Stage summary
+- Files: three added, three modified
+- Events: `message_sent`, `message_received`
+- Entities: `message_context`
 
-> Summary
-> Files: 3 added, 3 modified | Events: `message_sent`, `message_received` | Entities: `message_context`
-> Key takeaway: you can now see every user interaction - when messages are sent, how long responses take, and how many tools the agent used. This answers "what did the user do?"
+You can see every user interaction - when messages are sent, how long responses take, and how many tools the agent used. This answers "what did the user do?"
+:::
 
 Client-side tracking gives you visibility into the user's experience, but the agent's internal behavior is still invisible. When the agent receives a message, it enters a multi-step reasoning loop - calling the LLM, deciding which tools to use, executing them, and generating a response. None of that is captured yet. In the next section, you'll add server-side tracking to see inside the agent's orchestration.

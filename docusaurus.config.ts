@@ -25,6 +25,14 @@ const config: Config = {
 
   future: {
     v4: true,
+    experimental_faster: {
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      swcHtmlMinimizer: true,
+      lightningCssMinimizer: true,
+      rspackBundler: true,
+      mdxCrossCompilerCache: true,
+    },
   },
 
   clientModules: [

@@ -67,7 +67,6 @@ For more information about the Databricks Loader, see the [loader documentation]
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-<!-- see https://github.com/facebook/docusaurus/issues/8357 -->
 <Tabs groupId="warehouse" queryString>
   <TabItem value="bigquery" label="BigQuery">
 

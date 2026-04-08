@@ -8,9 +8,9 @@ sidebar_custom_props:
   header: "Signals"
 ---
 
-<!-- This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artifically hoisted to look like they're all top-level sections. The Signals landing page is at introduction/index.md -->
+{/* This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artifically hoisted to look like they're all top-level sections. The Signals landing page is at introduction/index.md */}
 
-<!-- This content is here for SEO purposes - it's taken from the get-started page -->
+{/* This content is here for SEO purposes - it's taken from the get-started page */}
 
 Snowplow Signals computes user attributes from your data. You can retrieve these attributes in your applications to take real-time actions. Signals can also send automated triggers to your applications based on calculated attributes.
 

@@ -6,7 +6,7 @@ description: "Ecommerce analytics visualization with dashboards for revenue, pur
 keywords: ["ecommerce visualization", "ecommerce dashboards", "revenue analytics", "purchase analytics"]
 ---
 
-<!-- Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions -->
+{/* Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions */}
 
 The Ecommerce Analytics visualization offers an in-depth breakdown of ecommerce activities across your websites and mobile apps, presenting an enhanced rendition of Google Analytics v4 reports. Use the dashboards to:
 

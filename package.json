@@ -17,11 +17,11 @@
   },
   "dependencies": {
     "@braintree/sanitize-url": "^6.0.1",
-    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/core": "^3.10.0",
     "@docusaurus/faster": "^3.10.0",
-    "@docusaurus/plugin-client-redirects": "^3.9.2",
-    "@docusaurus/preset-classic": "^3.9.2",
-    "@docusaurus/theme-mermaid": "^3.9.2",
+    "@docusaurus/plugin-client-redirects": "^3.10.0",
+    "@docusaurus/preset-classic": "^3.10.0",
+    "@docusaurus/theme-mermaid": "^3.10.0",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -88,8 +88,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.9.2",
-    "@docusaurus/types": "^3.9.2",
+    "@docusaurus/module-type-aliases": "^3.10.0",
+    "@docusaurus/types": "^3.10.0",
     "@mermaid-js/layout-elk": "^0.1.9",
     "@mui/system": "^5.18.0",
     "@tailwindcss/typography": "^0.5.16",

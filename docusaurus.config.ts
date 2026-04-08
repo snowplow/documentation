@@ -25,7 +25,7 @@ const config: Config = {
 
   future: {
     v4: true,
-    experimental_faster: {
+    faster: {
       swcJsLoader: true,
       swcJsMinimizer: true,
       swcHtmlMinimizer: true,

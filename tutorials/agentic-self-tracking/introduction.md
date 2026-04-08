@@ -29,10 +29,12 @@ This tutorial walks you through instrumenting all three layers with [Snowplow](h
 
 You'll work with a fully functional travel booking chatbot built with Next.js, React, and the Vercel AI SDK. The app supports multiple LLM providers (Anthropic Claude, OpenAI GPT, Google Gemini) and has three business tools: flight search, flight booking, and calendar checking.
 
+Snowplow provides a set of generic agentic tracking [schemas](https://docs.snowplow.io/docs/fundamentals/schemas/) on [Iglu Central](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/iglu-central/) that cover the agent lifecycle out of the box - invocations, steps, tool executions, completions, and more. For domain-specific data like extracted travel intent or flight search parameters, you create your own custom [entities](https://docs.snowplow.io/docs/fundamentals/entities/) and attach them alongside the generic schemas. This tutorial covers both.
+
 By the end of this tutorial, you'll have added:
 
-- 10 custom event schemas tracking user messages, agent invocations, tool executions, intent detection, decisions, and constraint violations
-- 3 context entities enriching events with message, agent, and tool metadata
+- 10 event schemas and three entities from Iglu Central covering the generic agent lifecycle
+- Three custom entities for travel-specific data: extracted intent, tool parameters, and tool results
 - Schema validation against all events locally via Snowplow Micro
 - A real-time event panel in the UI visualizing the event stream as it happens
 

@@ -348,7 +348,7 @@ data:
 
 ## Add server tracking functions
 
-Add three new tracking functions to `src/lib/tracking/server.ts`. They follow the same pattern as the v0.2 functions, attaching both `agent_context` and `tool_context` entities (with `tool_category: 'self_tracking'`).
+Add three new tracking functions to `src/lib/tracking/server.ts`. They follow the same pattern as the v0.2 functions, attaching `agent_context` and `tool_context` entities (with `tool_category: 'self_tracking'`). The `trackUserIntentDetected` function also conditionally attaches the `intent_extraction` custom entity.
 
 Here's `trackUserIntentDetected` as the pattern:
 
@@ -357,40 +357,56 @@ export const trackUserIntentDetected = (params: UserIntentDetectedParams) => {
   const t = initServerTracker();
   if (!t) return;
 
+  const contexts: Array<{ schema: string; data: Record<string, unknown> }> = [
+    buildToolContext({
+      tool_name: 'track_user_intent',
+      tool_category: 'self_tracking',
+      tool_call_id: params.toolCallId,
+    }),
+    buildAgentContext({
+      invocation_id: params.invocationId,
+      session_id: params.sessionId,
+      agent_type: 'travel_assistant',
+      model_name: params.modelName,
+      model_provider: params.modelProvider,
+    }),
+  ];
+
+  if (params.intentExtraction) {
+    contexts.push(buildIntentExtraction(params.intentExtraction));
+  }
+
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.demo/user_intent_detected/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.agent.tracking/user_intent_detected/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           intent_id: params.intentId,
           intent_category: params.intentCategory,
           confidence: params.confidence,
-          extracted_entities: params.extractedEntities,
           reasoning: params.reasoning ?? null,
           detected_at: new Date().toISOString(),
         },
       },
     }),
-    [
-      buildToolContext({
-        tool_name: 'track_user_intent',
-        tool_category: 'self_tracking',
-        tool_call_id: params.toolCallId,
-      }),
-      buildAgentContext({
-        invocation_id: params.invocationId,
-        session_id: params.sessionId,
-        agent_type: 'travel_assistant',
-        model_name: params.modelName,
-        model_provider: params.modelProvider,
-      }),
-    ],
+    contexts,
   );
 };
 ```
 
-`trackAgentDecisionLogged` and `trackConstraintViolation` follow the same structure with their respective schemas and data fields.
+The `buildIntentExtraction` helper references the local custom entity schema:
+
+```typescript title="src/lib/tracking/server.ts (continued)"
+const buildIntentExtraction = (data: IntentExtractionData) => ({
+  schema: 'iglu:com.snowplow.demo.travel/intent_extraction/jsonschema/1-0-0' as const,
+  data: data as unknown as Record<string, unknown>,
+});
+```
+
+This is the same entity composition pattern from the previous stage - generic Iglu Central event plus custom entities from `iglu-local`. A single `user_intent_detected` event carries three entities: `tool_context`, `agent_context` (both from Iglu Central), and `intent_extraction` (from `iglu-local`).
+
+`trackAgentDecisionLogged` and `trackConstraintViolation` follow the same structure with their respective schemas and data fields. Neither needs custom entities - `considerations` (a string array) and `constraint_violation` fields are generic enough to live on the Iglu Central event directly.
 
 ## Create the self-tracking tools
 
@@ -422,20 +438,18 @@ const trackUserIntentInputSchema = z.object({
     ])
     .describe('Category of user intent'),
   confidence: z.number().min(0).max(1).describe('Confidence level (0-1)'),
-  extracted_entities: z
-    .object({
-      origin: z.string().nullish(),
-      destination: z.string().nullish(),
-      date: z.string().nullish(),
-      return_date: z.string().nullish(),
-      passengers: z.number().nullish(),
-      budget_min: z.number().nullish(),
-      budget_max: z.number().nullish(),
-      currency: z.string().nullish(),
-      preferences: z.array(z.string()).nullish(),
-    })
-    .passthrough()
-    .describe('Extracted entities from user message'),
+  origin: z.string().nullish().describe('Origin city or airport'),
+  destination: z.string().nullish().describe('Destination city or airport'),
+  date: z.string().nullish().describe('Travel date'),
+  return_date: z.string().nullish().describe('Return date'),
+  passengers: z.number().nullish().describe('Number of passengers'),
+  budget_min: z.number().nullish().describe('Minimum budget'),
+  budget_max: z.number().nullish().describe('Maximum budget'),
+  currency: z.string().nullish().describe('Budget currency'),
+  preferences: z
+    .array(z.string())
+    .nullish()
+    .describe('Travel preferences'),
   reasoning: z
     .string()
     .optional()
@@ -460,7 +474,17 @@ export function createTrackUserIntentTool(ctx: RequestContext) {
         intentId,
         intentCategory: params.intent_category,
         confidence: params.confidence,
-        extractedEntities: params.extracted_entities,
+        intentExtraction: {
+          origin: params.origin ?? null,
+          destination: params.destination ?? null,
+          date: params.date ?? null,
+          return_date: params.return_date ?? null,
+          passengers: params.passengers ?? null,
+          budget_min: params.budget_min ?? null,
+          budget_max: params.budget_max ?? null,
+          currency: params.currency ?? null,
+          preferences: params.preferences ?? null,
+        },
         reasoning: params.reasoning || null,
         toolCallId,
         executionDurationMs: Date.now() - startTime,
@@ -476,9 +500,9 @@ export function createTrackUserIntentTool(ctx: RequestContext) {
 
 Key things to notice:
 
-- The Zod schema provides structured input validation for the agent's self-report. The `intent_category` is an enum, `confidence` is bounded 0-1, and `extracted_entities` has typed fields for known travel entities with `.passthrough()` allowing additional ones.
+- The Zod schema enforces `intent_category` as a strict enum (six travel-specific values), while the Iglu Central schema accepts any string. This is the [two-tier validation pattern](#use-permissive-schemas-with-strict-application-code).
+- The extracted entity fields (`origin`, `destination`, `date`, etc.) are flat on the Zod schema - they're part of what the LLM provides. The `execute` function collects them into an `intentExtraction` object that `trackUserIntentDetected` attaches as a custom entity.
 - The tool increments counters on the shared request context (`ctx.selfTrackingToolsCalled++`) so the `agent_completion` event has accurate totals.
-- The return value `{ tracked: true, intent_id }` is simple - the agent doesn't need a complex response, just confirmation.
 - The tool's `description` includes "Call this FIRST" - this is part of guiding the agent's behavior.
 
 ### track_agent_decision
@@ -497,16 +521,10 @@ const trackAgentDecisionInputSchema = z.object({
   reasoning: z
     .string()
     .describe('Natural language explanation of your decision'),
-  context: z
-    .object({
-      considered_options: z.array(z.string()).optional(),
-      selected_option: z.string().optional(),
-      selection_criteria: z.array(z.string()).optional(),
-      trade_offs: z.string().optional(),
-    })
-    .passthrough()
+  considerations: z
+    .array(z.string())
     .optional()
-    .describe('Additional context about the decision'),
+    .describe('Key factors, options, or trade-offs you considered'),
 });
 
 export function createTrackAgentDecisionTool(ctx: RequestContext) {
@@ -527,7 +545,7 @@ export function createTrackAgentDecisionTool(ctx: RequestContext) {
         decisionId,
         decisionType: params.decision_type,
         reasoning: params.reasoning,
-        decisionContext: params.context,
+        considerations: params.considerations,
         toolCallId,
         executionDurationMs: Date.now() - startTime,
         modelName: ctx.modelName,
@@ -592,6 +610,65 @@ export function createTrackConstraintViolationTool(ctx: RequestContext) {
 }
 ```
 
+## Use permissive schemas with strict application code
+
+You may have noticed a deliberate mismatch between the Iglu Central schemas and the Zod schemas you just defined. Compare `intent_category` in both:
+
+Iglu Central (the schema that validates the Snowplow event):
+
+```yaml
+intent_category:
+  type: string
+  maxLength: 255
+  description: 'Category of user intent (application-defined)'
+```
+
+Zod (the schema that validates the LLM's tool call input):
+
+```typescript
+intent_category: z.enum([
+  'search_flights',
+  'book_flight',
+  'modify_booking',
+  'cancel_booking',
+  'get_recommendations',
+  'ask_question',
+])
+```
+
+The Iglu Central schema accepts any string up to 255 characters. The Zod schema only accepts six specific values. The same pattern applies to `decision_type` and `constraint_type` across all three self-tracking tools.
+
+This is intentional - and it's the recommended approach for production agentic tracking implementations.
+
+### Why the schemas are permissive
+
+The Iglu Central schemas are designed to work for any agentic application - travel, customer support, finance, healthcare. A support app's intent categories might be `open_ticket`, `escalate`, or `check_status`. A finance app might use `analyze_portfolio` or `execute_trade`. Hardcoding enums into the registry schema would break this reusability.
+
+Instead, the Iglu Central schemas use `examples` to suggest common values and `maxLength` to prevent unbounded strings, but accept any value:
+
+```yaml
+# From the Iglu Central constraint_violation schema
+constraint_type:
+  type: string
+  examples: ["budget", "dates", "availability", "permissions", "rate_limit"]
+  description: 'Type of constraint that was violated (application-defined)'
+  maxLength: 255
+```
+
+### Why application code is strict
+
+Your application knows its own domain. The travel app has exactly six intent categories and six constraint types - the LLM should not invent new ones. The Zod enum enforces this at the tool call boundary, before the data ever reaches Snowplow:
+
+1. The LLM calls `track_user_intent` with `intent_category: "search_flights"`
+2. Zod validates that `"search_flights"` is in the allowed enum - if not, the tool call fails and the LLM retries
+3. The validated value flows into the Snowplow event, which Iglu Central also validates (it passes, since any string under 255 characters is valid)
+
+If you add a new intent category to your app - say `compare_flights` - you update the Zod enum in `self-tracking-tools.ts`. No schema version bump needed. No registry update. The Iglu Central schema already accepts it.
+
+:::tip When to use this pattern
+Two-tier validation works well for any field where the *set of valid values* is application-specific but the *field itself* is generic. It's not needed for fields like `confidence` (0-1 number range is universal) or `reasoning` (free-text by nature). Focus it on categorical fields that vary by domain.
+:::
+
 ## Wire the tools into the chat route
 
 Two changes are needed in `src/app/api/chat/route.ts`:
@@ -618,7 +695,7 @@ tools: {
 },
 ```
 
-The agent now has six tools available - three for business actions and three for self-tracking.
+The agent has six tools available - three for business actions and three for self-tracking.
 
 ### 2. Add the self-tracking protocol to the system prompt
 
@@ -663,10 +740,10 @@ Do not just track -- actually help them by calling business tools or asking for 
 :::note Why this matters: prompt engineering for self-tracking
 Without clear instructions, the LLM might skip tracking, over-track, or treat tracking as its primary task rather than a secondary one. The protocol addresses each risk:
 
-- **"MUST use self-tracking tools"** - prevents skipping
-- **"First, provide a brief friendly response"** - ensures the user gets an immediate acknowledgment before tracking tools run
-- **"IMPORTANT: After calling tracking tools, you MUST continue to take action"** - prevents the agent from treating tracking as the end goal
-- **The workflow example** - gives the agent a concrete template to follow
+- "MUST use self-tracking tools" - prevents skipping
+- "First, provide a brief friendly response" - ensures the user gets an immediate acknowledgment before tracking tools run
+- "IMPORTANT: After calling tracking tools, you MUST continue to take action" - prevents the agent from treating tracking as the end goal
+- The workflow example - gives the agent a concrete template to follow
 
 The balance matters: you want complete tracking without disrupting the conversation flow.
 :::
@@ -678,40 +755,43 @@ git checkout v0.3-agentic-tracking  # (or verify your code-along)
 npm run start:dev
 ```
 
-### Scenario A: Normal flow
+### Test a normal flow
 
 Send "Find cheap flights from London to Paris tomorrow"
 
 1. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) and refresh after the agent responds
 2. Find the `user_intent_detected` event - drill into it to see:
-   - `intent_category`: "search_flights"
-   - `confidence`: ~0.9 (this is a clear request)
-   - `extracted_entities`: `{ origin: "London", destination: "Paris", date: "...", preferences: ["cheap"] }`
-   - `reasoning`: The agent's explanation of how it interpreted the message
+  - `intent_category`: "search_flights"
+  - `confidence`: ~0.9 (this is a clear request)
+  - `reasoning`: The agent's explanation of how it interpreted the message
+  - In the event's entities, find the `intent_extraction` custom entity: `{ origin: "London", destination: "Paris", date: "2026-04-10", preferences: ["cheap"] }`
 3. Find the `agent_decision_logged` event - see:
-   - `decision_type`: "tool_selection"
-   - `reasoning`: "Will use search_flights with sort_by='price' since user said 'cheap'"
+  - `decision_type`: "tool_selection"
+  - `reasoning`: "Will use search_flights with sort_by='price' since user said 'cheap'"
+  - `considerations`: the factors the agent weighed
 4. Find the `tool_execution` for `search_flights` (this existed in v0.2)
 5. Trace the full event chain through the Micro UI - all events share the same `invocation_id`
 
-### Scenario B: Constraint violation
+### Test constraint handling
 
 Send "Find a flight to Tokyo for $20"
 
 1. Refresh the Micro UI after the agent responds
-2. Find the `user_intent_detected` event - notice the confidence might be lower and the budget constraint is noted in `extracted_entities`
+2. Find the `user_intent_detected` event - notice the confidence might be lower. Check the `intent_extraction` entity for the budget constraint noted in `budget_max`
 3. Find the `constraint_violation` event - drill into it to see:
-   - `constraint_type`: "budget"
-   - `user_requirement`: "$20 to Tokyo"
-   - `reason_not_met`: An explanation of why flights to Tokyo can't cost $20
-   - `alternatives_considered`: What other options the agent thought about
-   - `recommendation`: What the agent suggests instead
+  - `constraint_type`: "budget"
+  - `user_requirement`: "$20 to Tokyo"
+  - `reason_not_met`: An explanation of why flights to Tokyo can't cost $20
+  - `alternatives_considered`: What other options the agent thought about
+  - `recommendation`: What the agent suggests instead
 4. The agent still responds helpfully to the user with alternatives - tracking doesn't interrupt the conversation
 
----
+:::note Stage summary
+- Files: one added, two modified
+- Events: `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
+- Entities: `agent_context`, `tool_context` (Iglu Central) + `intent_extraction` (custom)
 
-> Summary
-> Files: 1 added, 2 modified | Events: `user_intent_detected`, `agent_decision_logged`, `constraint_violation` | Entities: reuses `agent_context`, `tool_context` from v0.2
-> Key takeaway: the agent now documents its own reasoning - what it understood, why it chose a course of action, and when it can't meet requirements. This answers "what did the agent think?"
+The agent documents its own reasoning - what it understood, why it chose a course of action, and when it can't meet requirements. Domain-specific extracted data lives in a custom entity, following the same pattern as `tool_params` and `tool_results` from the previous stage.
+:::
 
-You now have all three layers of tracking in place. The final section puts it all together - showing how events connect across layers and what you can build with this data.
+You have all three layers of tracking in place. The final section puts it all together - showing how events connect across layers and what you can build with this data.

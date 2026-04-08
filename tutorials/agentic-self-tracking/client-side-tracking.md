@@ -11,10 +11,12 @@ In this stage, you'll add browser-side Snowplow tracking for user interactions. 
 
 :::tip Code-along / Read-along
 If you're coding along, continue from the starter app and create the files described below. If you're reading along, check out the tag and review the changes:
+
 ```bash
 git checkout v0.1-client-tracking
 npm install
 ```
+
 To see exactly what changed: `git diff v0.0-starter..v0.1-client-tracking`
 :::
 

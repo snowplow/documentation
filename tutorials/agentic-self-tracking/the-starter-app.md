@@ -1,20 +1,24 @@
 ---
+
 title: "The starter app"
 sidebar_label: "The starter app"
 position: 2
 description: "Explore the travel booking chatbot before any Snowplow tracking is added. Understand the app architecture, tools, and what's missing without observability."
 keywords: ["snowplow", "agentic", "tracking", "ai", "starter", "chatbot"]
 date: "2026-03-26"
+
 ---
 
 Before adding any tracking, take a tour of the application. This is the baseline - a fully functional AI travel assistant with zero observability.
 
 :::tip Code-along / Read-along
-If you're coding along, you should already be on the starter tag from the setup step. If you're reading along, check out the tag now:
+If you're coding along, you should already be on the starter tag from the setup step. If you're reading along, check out the tag:
+
 ```bash
 git checkout v0.0-starter
 npm install
 ```
+
 :::
 
 ## App overview
@@ -29,14 +33,16 @@ The travel assistant is built with:
 
 ## Key files
 
-| File | What it does |
-|------|-------------|
-| `src/app/page.tsx` | Main chat UI - message list, input, model selector, demo scenarios |
-| `src/app/api/chat/route.ts` | Chat API route - receives messages, calls the LLM with tools, streams the response |
-| `src/lib/tools/business-tools.ts` | Three tool definitions with Zod input schemas |
-| `src/lib/external/flights-api.ts` | Mock flight database - 8 airlines, 9 airports, realistic pricing |
-| `src/lib/model-config.ts` | LLM provider configuration - models across 3 providers |
-| `src/app/components/` | UI components: `ModelSelector`, `DemoScenarios`, `ToolCallIndicator`, `LiveTrackingPanel` (disabled) |
+
+| File                              | What it does                                                                                         |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `src/app/page.tsx`                | Main chat UI - message list, input, model selector, demo scenarios                                   |
+| `src/app/api/chat/route.ts`       | Chat API route - receives messages, calls the LLM with tools, streams the response                   |
+| `src/lib/tools/business-tools.ts` | Three tool definitions with Zod input schemas                                                        |
+| `src/lib/external/flights-api.ts` | Mock flight database - eight airlines, nine airports, realistic pricing                               |
+| `src/lib/model-config.ts`         | LLM provider configuration - models across three providers                                            |
+| `src/app/components/`             | UI components: `ModelSelector`, `DemoScenarios`, `ToolCallIndicator`, `LiveTrackingPanel` (disabled) |
+
 
 ### The chat route
 
@@ -74,7 +80,7 @@ export function createSearchFlightsTool() {
 }
 ```
 
-The tools work with generated mock data - 8 airlines, 9 airports, realistic pricing with cabin class multipliers, and randomized schedules. No external flight API is needed.
+The tools work with generated mock data - eight airlines, nine airports, realistic pricing with cabin class multipliers, and randomized schedules. No external flight API is needed.
 
 ## Try it out
 
@@ -104,12 +110,14 @@ The app is fully functional, but you have zero visibility into what's happening.
 - Why did the agent give that particular answer?
 - When can't the agent meet a user's request, and how often does that happen?
 
-Right now, the only way to know any of this is to manually watch the chat UI or read server logs. That doesn't scale.
+At this point, the only way to know any of this is to manually watch the chat UI or read server logs. That doesn't scale.
 
----
+:::note Stage summary
+- Files: zero added, zero modified
+- Events: none
+- Schemas: none
 
-> Summary
-> Files: 0 added, 0 modified | Events: none | Schemas: none
-> Key takeaway: a fully functional AI chatbot with zero observability.
+A fully functional AI chatbot with zero observability.
+:::
 
 In the next section, you'll add the first layer of tracking: client-side events that capture what the user does in the browser.

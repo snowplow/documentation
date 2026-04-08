@@ -1,20 +1,24 @@
 ---
+
 title: "Server-side tracking"
 sidebar_label: "Server-side tracking"
 position: 4
 description: "Add server-side Snowplow tracking for the agent's orchestration loop - invocations, steps, tool executions, and completions - with full lifecycle tracing."
 keywords: ["snowplow", "agentic", "tracking", "ai", "server-side", "node tracker", "agent lifecycle"]
 date: "2026-03-26"
+
 ---
 
 In this stage, you'll add server-side tracking for the agent's orchestration loop. By the end, every invocation, reasoning step, tool execution, and completion will be captured with token counts, latency, and success/failure status.
 
 :::tip Code-along / Read-along
 If you're coding along, continue from the previous stage and create the files described below. If you're reading along:
+
 ```bash
 git checkout v0.2-server-tracking
 npm install
 ```
+
 To see exactly what changed: `git diff v0.1-client-tracking..v0.2-server-tracking`
 :::
 
@@ -26,6 +30,8 @@ The browser sees two things: the user sent a message, and eventually a response 
 flowchart LR
     invocation --> step1[step 1] --> tool1[tool call] --> step2[step 2] --> tool2[tool call] --> more[...] --> completion
 ```
+
+
 
 Each step involves an LLM call. Each tool call has its own latency and can succeed or fail. The agent consumes tokens, makes decisions, and may loop multiple times before producing a final response. None of this is visible from the client.
 

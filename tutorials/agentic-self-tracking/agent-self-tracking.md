@@ -1,20 +1,24 @@
 ---
+
 title: "Agentic self-tracking"
 sidebar_label: "Agent self-tracking"
 position: 5
 description: "Give the AI agent tools to track its own reasoning - intent detection, decision logging, and constraint violation reporting - completing the three-layer observability stack."
 keywords: ["snowplow", "agentic", "tracking", "ai", "self-tracking", "intent", "decision", "constraint"]
 date: "2026-03-26"
+
 ---
 
 In this stage, you'll give the agent tools to track its own reasoning. By the end, the agent will log what it understood, why it made each decision, and when it can't meet a user's requirements.
 
 :::tip Code-along / Read-along
 If you're coding along, continue from the previous stage and create the files described below. If you're reading along:
+
 ```bash
 git checkout v0.3-agentic-tracking
 npm install
 ```
+
 To see exactly what changed: `git diff v0.2-server-tracking..v0.3-agentic-tracking`
 :::
 
@@ -22,17 +26,19 @@ To see exactly what changed: `git diff v0.2-server-tracking..v0.3-agentic-tracki
 
 This stage is fundamentally different from the first two:
 
-- **v0.1** tracked what the **user** did - events emitted by browser code you wrote
-- **v0.2** tracked what the **system** did - events emitted by server framework callbacks
-- **v0.3** tracks what the **agent thinks** - events emitted by the LLM itself, via tool calls
+- `v0.1` tracked what the user did - events emitted by browser code you wrote
+- `v0.2` tracked what the system did - events emitted by server framework callbacks
+- `v0.3` tracks what the agent thinks - events emitted by the LLM itself, via tool calls
 
 The agent becomes an observer of its own reasoning. You give it three new tools that don't perform business actions - they log the agent's internal state:
 
-| Tool | Purpose | When called |
-|------|---------|-------------|
-| `track_user_intent` | "I understood the user wants X with confidence Y" | First, on every new user message |
-| `track_agent_decision` | "I'm choosing to do Y because Z" | Before executing any business tool |
-| `track_constraint_violation` | "The user wants A, but it's not possible because B" | When a requirement can't be met |
+
+| Tool                         | Purpose                                             | When called                        |
+| ---------------------------- | --------------------------------------------------- | ---------------------------------- |
+| `track_user_intent`          | "I understood the user wants X with confidence Y"   | First, on every new user message   |
+| `track_agent_decision`       | "I'm choosing to do Y because Z"                    | Before executing any business tool |
+| `track_constraint_violation` | "The user wants A, but it's not possible because B" | When a requirement can't be met    |
+
 
 These are tools like any other - the LLM calls them when instructed by the system prompt. The difference is they don't search flights or book tickets; they log the agent's reasoning into Snowplow events.
 
@@ -40,19 +46,20 @@ These are tools like any other - the LLM calls them when instructed by the syste
 
 This stage introduces:
 
-- 3 event schemas: `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
-- 1 new file: `src/lib/tools/self-tracking-tools.ts` - three tool factories
+- Three event schemas from Iglu Central: `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
+- One custom entity schema (created locally): `intent_extraction` - domain-specific entity for the travel app's extracted intent data
+- One new file: `src/lib/tools/self-tracking-tools.ts` - three tool factories
 - Modifications to: `src/lib/tracking/server.ts` (three new tracking functions) and `src/app/api/chat/route.ts` (register tools + system prompt protocol)
-
-No new entities are needed - the self-tracking events reuse the `agent_context` and `tool_context` entities from v0.2.
 
 ## Define the schemas
 
+The three event schemas are published on [Iglu Central](https://github.com/snowplow/iglu-central) under vendor `com.snowplow.agent.tracking`, just like the schemas from previous stages. You'll also create one custom entity for domain-specific data.
+
 ### user_intent_detected
 
-Captures the agent's interpretation of what the user wants, including confidence and extracted entities.
+Captures the agent's interpretation of what the user wants, including a confidence score and reasoning.
 
-```yaml title="snowplow/data-structures/events/agent/user_intent_detected.yml"
+```yaml title="user_intent_detected schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:

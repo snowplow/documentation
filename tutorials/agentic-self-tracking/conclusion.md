@@ -7,7 +7,7 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "data lineage", "schema inve
 date: "2026-03-26"
 ---
 
-You've now instrumented an AI chatbot with three layers of behavioral tracking. This section shows how the layers connect and what you can do with the data.
+You've instrumented an AI chatbot with three layers of behavioral tracking. This section shows how the layers connect and what you can do with the data.
 
 ## Data lineage
 

@@ -1,10 +1,12 @@
 ---
+
 title: "Introduction and overview"
 sidebar_label: "Introduction and overview"
 position: 1
 description: "Learn how to instrument an AI-powered chatbot with Snowplow behavioral tracking across three architectural layers: client-side interactions, server-side agent orchestration, and agent self-tracking."
 keywords: ["snowplow", "agentic", "tracking", "ai", "observability", "llm"]
 date: "2026-03-26"
+
 ---
 
 AI-powered applications have a visibility problem. Traditional analytics tells you what users clicked and which pages they visited, but when your product is an AI agent, the interesting behavior happens in layers you can't see from the browser.
@@ -53,6 +55,8 @@ flowchart TD
     collector["<b><u>Snowplow Collector</u></b><br/><i>(Micro for local)</i>"]
 ```
 
+
+
 All events flow to the same Snowplow collector. In this tutorial, you'll use [Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/what-is-micro/) running locally in Docker to validate events against their schemas in real-time.
 
 ## How to follow this tutorial
@@ -63,14 +67,23 @@ This tutorial supports two learning paths:
 
 **Read-along:** You check out each git tag, read the code, run the app, and observe events in Snowplow Micro. The tutorial explains what was done and why.
 
+:::tip Which path should I choose?
+- **Developer / Architect** - choose **code-along** if you want hands-on implementation experience. You'll write tracking code, create schemas, and debug validation errors yourself.
+- **Analyst / Data Architect** - choose **read-along** if you want to understand the architecture and data model without writing every line. You'll focus on how the tracking layers fit together, what the schemas capture, and how to design your own entity model.
+
+Both paths cover the same concepts. You can switch between them at any stage.
+:::
+
 The [companion repository](https://github.com/snowplow-industry-solutions/agentic-app-tracking-tutorial) has four tagged commits, one for each stage:
 
-| Tag | Stage | Question answered |
-|-----|-------|-------------------|
-| `v0.0-starter` | The starter app | (no tracking yet) |
-| `v0.1-client-tracking` | Client-side tracking | "What did the user do?" |
-| `v0.2-server-tracking` | Server-side tracking | "What did the agent do?" |
+
+| Tag                     | Stage                 | Question answered           |
+| ----------------------- | --------------------- | --------------------------- |
+| `v0.0-starter`          | The starter app       | (no tracking yet)           |
+| `v0.1-client-tracking`  | Client-side tracking  | "What did the user do?"     |
+| `v0.2-server-tracking`  | Server-side tracking  | "What did the agent do?"    |
 | `v0.3-agentic-tracking` | Agentic self-tracking | "What did the agent think?" |
+
 
 Each section makes both paths clear. When the instructions diverge, you'll see callouts for each path.
 
@@ -79,7 +92,7 @@ Each section makes both paths clear. When the instructions diverge, you'll see c
 Before you begin, make sure you have:
 
 - Node.js 18+ installed
-- Docker installed and running (required from Stage 1 onwards for Snowplow Micro)
+- Docker installed and running (required from stage one onwards for Snowplow Micro)
 - At least one LLM API key: Anthropic (`ANTHROPIC_API_KEY`), OpenAI (`OPENAI_API_KEY`), or Google (`GOOGLE_GENERATIVE_AI_API_KEY`)
 - Git installed
 
@@ -119,13 +132,15 @@ SNOWPLOW_APP_ID=travel-agent-demo
 
 The environment variables break down by stage:
 
-| Variable | Used from | Purpose |
-|----------|-----------|---------|
-| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GOOGLE_GENERATIVE_AI_API_KEY` | v0.0 | LLM provider authentication |
-| `NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL` | v0.1 | Snowplow collector endpoint (client-side, exposed to browser) |
-| `NEXT_PUBLIC_SNOWPLOW_APP_ID` | v0.1 | Application identifier (client-side) |
-| `SNOWPLOW_COLLECTOR_URL` | v0.2 | Snowplow collector endpoint (server-side, never exposed to browser) |
-| `SNOWPLOW_APP_ID` | v0.2 | Application identifier (server-side) |
+
+| Variable                                                                | Used from | Purpose                                                             |
+| ----------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GOOGLE_GENERATIVE_AI_API_KEY` | v0.0      | LLM provider authentication                                         |
+| `NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL`                                    | v0.1      | Snowplow collector endpoint (client-side, exposed to browser)       |
+| `NEXT_PUBLIC_SNOWPLOW_APP_ID`                                           | v0.1      | Application identifier (client-side)                                |
+| `SNOWPLOW_COLLECTOR_URL`                                                | v0.2      | Snowplow collector endpoint (server-side, never exposed to browser) |
+| `SNOWPLOW_APP_ID`                                                       | v0.2      | Application identifier (server-side)                                |
+
 
 :::note Why two sets of Snowplow variables?
 Next.js exposes `NEXT_PUBLIC_*` variables to the browser bundle. Server-only variables (without the prefix) stay on the server. You need both because client-side and server-side trackers initialize independently - the client tracker runs in the browser, the server tracker runs in the Node.js process.

@@ -68,9 +68,9 @@ meta:
   customData: {}
 data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs the detected user intent.'
+  description: 'Agent self-tracking: logs the detected user intent category and confidence.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: user_intent_detected
     format: jsonschema
     version: 1-0-0
@@ -79,29 +79,26 @@ data:
     invocation_id:
       type: string
       description: 'Unique identifier for the agent invocation'
-      maxLength: 36
+      format: uuid
     intent_id:
       type: string
       description: 'Unique identifier for this detected intent'
-      maxLength: 36
+      format: uuid
     intent_category:
       type: string
-      enum:
+      examples:
         - search_flights
-        - book_flight
-        - modify_booking
+        - submit_order
+        - ask_question
         - cancel_booking
         - get_recommendations
-        - ask_question
-      description: 'Category of user intent'
+      description: 'Category of user intent (application-defined)'
+      maxLength: 255
     confidence:
       type: number
       minimum: 0
       maximum: 1
       description: 'Confidence level (0-1)'
-    extracted_entities:
-      type: object
-      description: 'Extracted entities from user message'
     reasoning:
       type:
         - string
@@ -117,18 +114,104 @@ data:
     - intent_id
     - intent_category
     - confidence
-    - extracted_entities
     - detected_at
   additionalProperties: false
 ```
 
-The `confidence` field (0-1) and `extracted_entities` (free-form object) are particularly valuable for analysis. You can track how often the agent is confident in its interpretation and what entities it extracts from natural language.
+Notice that `intent_category` is a permissive `string` with `examples`, not a restricted enum. The Iglu Central schema is domain-agnostic - a travel app uses `search_flights`, while a support app might use `open_ticket`. You'll enforce your travel-specific values with Zod in [the two-tier validation pattern](#use-permissive-schemas-with-strict-application-code) later in this page.
+
+Also notice what's *not* here: there's no `extracted_entities` field. The generic event captures *that* intent was detected - the category and confidence. *What* was extracted (origin, destination, dates) is domain-specific data that belongs in a custom entity.
+
+### Create the intent extraction entity
+
+Just like you created `tool_params` and `tool_results` custom entities in the previous stage, you'll create an `intent_extraction` entity to capture what the agent interpreted from the user's message. This follows the same pattern: the generic Iglu Central event carries lifecycle data, your custom entity carries the business data.
+
+Create the entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/intent_extraction/jsonschema/1-0-0`:
+
+```json title="snowplow/iglu-local/schemas/com.snowplow.demo.travel/intent_extraction/jsonschema/1-0-0"
+{
+  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "description": "What the agent interpreted from the user's message in the travel demo app. Attached to user_intent_detected events to capture extracted travel intent details.",
+  "self": {
+    "vendor": "com.snowplow.demo.travel",
+    "name": "intent_extraction",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "origin": {
+      "type": ["string", "null"],
+      "description": "Origin city or airport code",
+      "maxLength": 200
+    },
+    "destination": {
+      "type": ["string", "null"],
+      "description": "Destination city or airport code",
+      "maxLength": 200
+    },
+    "date": {
+      "type": ["string", "null"],
+      "description": "Departure date in YYYY-MM-DD format",
+      "maxLength": 10
+    },
+    "return_date": {
+      "type": ["string", "null"],
+      "description": "Return date for round-trip in YYYY-MM-DD format",
+      "maxLength": 10
+    },
+    "passengers": {
+      "type": ["integer", "null"],
+      "description": "Number of passengers",
+      "minimum": 1
+    },
+    "budget_min": {
+      "type": ["number", "null"],
+      "description": "Minimum budget amount"
+    },
+    "budget_max": {
+      "type": ["number", "null"],
+      "description": "Maximum budget amount"
+    },
+    "currency": {
+      "type": ["string", "null"],
+      "description": "Currency code for budget values",
+      "maxLength": 10
+    },
+    "preferences": {
+      "type": ["array", "null"],
+      "description": "User preferences extracted from the message",
+      "items": {
+        "type": "string",
+        "maxLength": 500
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+Key things to notice about this entity:
+
+- Vendor: `com.snowplow.demo.travel` - your application's namespace, not the shared registry
+- All fields nullable: the agent may not extract every field from every message. A message like "flights to Paris" has a destination but no date, budget, or passenger count.
+- No required fields: unlike the event schemas, the entity is entirely optional data. Which fields are populated depends on what the agent extracts.
+- Location: this lives in `snowplow/iglu-local/`, resolved by Snowplow Micro from the mounted volume - just like the `tool_params` and `tool_results` entities from the previous stage
+
+:::note Why intent_extraction is separate from tool_params
+You might notice that `intent_extraction` shares some fields with `tool_params` - both have `origin`, `destination`, `date`, and `passengers`. They are separate entities because they represent different points in the agent lifecycle with different semantic meaning:
+
+- `intent_extraction` captures what the agent *understood* from the user's message, attached to `user_intent_detected`. This happens before any tool runs. The values are the agent's interpretation - they may be incomplete, inferred, or wrong.
+- `tool_params` captures what the agent *actually passed* to a business tool, attached to `tool_execution`. This happens later, after the agent has made decisions. The values are concrete parameters that drove a real action.
+
+Comparing the two for the same conversation turn tells you how the agent translated user intent into action. Did it fill in defaults the user didn't mention? Did it ignore a preference? Did it change a parameter after seeing search results? These are the questions a separate-entity model lets you answer in your warehouse, and they collapse into noise if both stages share a single entity.
+:::
 
 ### agent_decision_logged
 
-Captures the reasoning behind a decision the agent is about to make, including what options it considered.
+Captures the reasoning behind a decision the agent is about to make, including what factors it considered.
 
-```yaml title="snowplow/data-structures/events/agent/agent_decision_logged.yml"
+```yaml title="agent_decision_logged schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -137,9 +220,9 @@ meta:
   customData: {}
 data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs a decision the agent is about to make.'
+  description: 'Agent self-tracking: logs a decision the agent is about to make, including reasoning and considerations.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: agent_decision_logged
     format: jsonschema
     version: 1-0-0
@@ -148,29 +231,33 @@ data:
     invocation_id:
       type: string
       description: 'Unique identifier for the agent invocation'
-      maxLength: 36
+      format: uuid
     decision_id:
       type: string
       description: 'Unique identifier for this decision'
-      maxLength: 36
+      format: uuid
     decision_type:
       type: string
-      enum:
+      examples:
         - tool_selection
         - parameter_reasoning
         - result_interpretation
         - clarification_needed
         - constraint_handling
-      description: 'Type of decision'
+      description: 'Type of decision (application-defined)'
+      maxLength: 255
     reasoning:
       type: string
       description: 'Natural language explanation of the decision'
       maxLength: 2000
-    context:
+    considerations:
       type:
-        - object
+        - array
         - 'null'
-      description: 'Additional context (considered options, criteria, trade-offs)'
+      description: 'Factors the agent considered when making this decision'
+      items:
+        type: string
+        maxLength: 2000
     logged_at:
       type: string
       format: date-time
@@ -188,7 +275,7 @@ data:
 
 Captures when the agent detects that a user's requirement can't be met, including what was requested, why it failed, and what alternatives exist.
 
-```yaml title="snowplow/data-structures/events/agent/constraint_violation.yml"
+```yaml title="constraint_violation schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -197,9 +284,9 @@ meta:
   customData: {}
 data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs when a user requirement cannot be met.'
+  description: 'Agent self-tracking: logs when a user requirement cannot be met due to a constraint.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: constraint_violation
     format: jsonschema
     version: 1-0-0
@@ -208,21 +295,21 @@ data:
     invocation_id:
       type: string
       description: 'Unique identifier for the agent invocation'
-      maxLength: 36
+      format: uuid
     violation_id:
       type: string
       description: 'Unique identifier for this violation'
-      maxLength: 36
+      format: uuid
     constraint_type:
       type: string
-      enum:
+      examples:
         - budget
         - dates
         - availability
-        - route
-        - preferences
-        - other
-      description: 'Type of constraint that was violated'
+        - permissions
+        - rate_limit
+      description: 'Type of constraint that was violated (application-defined)'
+      maxLength: 255
     user_requirement:
       type: string
       description: 'What the user requested'
@@ -237,13 +324,14 @@ data:
         - 'null'
       items:
         type: string
+        maxLength: 1000
       description: 'Alternative options considered'
     recommendation:
       type:
         - string
         - 'null'
       description: 'Recommended alternative'
-      maxLength: 2000
+      maxLength: 1000
     violated_at:
       type: string
       format: date-time

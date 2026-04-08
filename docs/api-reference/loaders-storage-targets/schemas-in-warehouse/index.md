@@ -492,8 +492,10 @@ The row order in this table is important. Type lookup stops after the first matc
 
 <table>
 <thead>
-<td>Json Schema</td>
-<td>Redshift Type</td>
+<tr>
+<th>Json Schema</th>
+<th>Redshift Type</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -973,8 +975,10 @@ The row order in this table is important. Type lookup stops after the first matc
 
 <table>
 <thead>
-<td>Json Schema</td>
-<td>BigQuery Type</td>
+<tr>
+<th>Json Schema</th>
+<th>BigQuery Type</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -1227,8 +1231,10 @@ The row order in this table is important. Type lookup stops after the first matc
 
 <table>
 <thead>
-<td>Json Schema</td>
-<td>Databricks Type</td>
+<tr>
+<th>Json Schema</th>
+<th>Databricks Type</th>
+</tr>
 </thead>
 <tbody>
 <tr>

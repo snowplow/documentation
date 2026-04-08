@@ -55,8 +55,11 @@ If you have not yet configured an SSL certificate and a custom domain name for y
 
 <details>
 <summary>Which events are sent?</summary>
+
 We use the following tracking code:
+
 <CodeBlock language="javascript">{sampleTrackingCode}</CodeBlock>
+
 </details>
 
 <EventComponent />

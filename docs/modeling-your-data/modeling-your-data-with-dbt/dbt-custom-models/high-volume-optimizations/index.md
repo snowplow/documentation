@@ -64,6 +64,7 @@ vars:
 
 <details>
 <summary>snowplow_unified_base_events_this_run (copy)</summary>
+
 We have removed the vast majority of the code from the original model code. The changes are the addition of the `default_cte` and then the selection of specific columns below.
 
 ```jinja2 title=models/snowplow_custom/snowplow_unified_base_events_this_run

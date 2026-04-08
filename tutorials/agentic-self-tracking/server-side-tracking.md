@@ -47,19 +47,22 @@ All events in a single lifecycle share an `invocation_id` for correlation. This 
 
 This stage introduces:
 
-- 1 new dependency: `@snowplow/node-tracker`
-- 4 event schemas: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
-- 2 entity schemas: `agent_context`, `tool_context`
-- 1 new file: `src/lib/tracking/server.ts` - the server tracking module
+- One new dependency: `@snowplow/node-tracker`
+- Four event schemas from Iglu Central: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
+- Two entity schemas from Iglu Central: `agent_context`, `tool_context`
+- Two custom entity schemas (created locally): `tool_params`, `tool_results` - domain-specific entities for the travel app's business tools
+- One new file: `src/lib/tracking/server.ts` - the server tracking module
 - Modifications to: `src/app/api/chat/route.ts` (wiring tracking into the agent lifecycle) and `src/lib/tools/business-tools.ts` (tools self-instrument their execution)
 
 ## Define the schemas
+
+The six generic schemas used in this stage - four events and two entities - are published on [Iglu Central](https://github.com/snowplow/iglu-central) under vendor `com.snowplow.agent.tracking`, just like the client-side schemas from the previous stage. You'll also create two custom entities for domain-specific data that live in your local `iglu-local` directory.
 
 ### agent_context entity
 
 The `agent_context` entity is attached to every server-side event. It identifies the invocation, session, model, and current state.
 
-```yaml title="snowplow/data-structures/entities/agent_context.yml"
+```yaml title="agent_context schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -70,7 +73,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'Context entity describing the agent and its current state.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: agent_context
     format: jsonschema
     version: 1-0-0
@@ -122,9 +125,9 @@ data:
 
 ### tool_context entity
 
-The `tool_context` entity is attached to tool-related events. It identifies the tool, its category, and what parameters were passed.
+The `tool_context` entity is attached to tool-related events. It identifies the tool and its category.
 
-```yaml title="snowplow/data-structures/entities/tool_context.yml"
+```yaml title="tool_context schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -135,7 +138,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'Context entity describing a tool being invoked by the agent.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: tool_context
     format: jsonschema
     version: 1-0-0
@@ -147,25 +150,23 @@ data:
       maxLength: 100
     tool_category:
       type: string
-      enum:
+      examples:
         - business
         - self_tracking
-      description: 'Category of tool'
+        - retrieval
+        - orchestration
+      description: 'Category of tool (application-defined)'
+      maxLength: 100
     tool_call_id:
       type: string
       description: 'Unique identifier for this specific tool invocation'
-      maxLength: 100
+      format: uuid
     tool_description:
       type:
         - string
         - 'null'
       description: 'Brief description of what this tool does'
       maxLength: 500
-    parameters_summary:
-      type:
-        - object
-        - 'null'
-      description: 'Summary of key parameters passed to the tool'
   required:
     - tool_name
     - tool_category
@@ -177,11 +178,11 @@ data:
 Every server-side event carries an `agent_context` entity. Tool-related events additionally carry a `tool_context` entity. This means you can always filter events by model, session, or invocation - and for tool events, you can also filter by tool name or category. The entities are attached at tracking time, not joined later.
 :::
 
-### Event schemas
+### Review the event schemas
 
 The four server events form the agent lifecycle. Here's the `agent_invocation` event as an example - the others follow the same pattern:
 
-```yaml title="snowplow/data-structures/events/server/agent_invocation.yml"
+```yaml title="agent_invocation schema (Iglu Central)"
 apiVersion: v1
 resourceType: data-structure
 meta:
@@ -192,7 +193,7 @@ data:
   $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
   description: 'Marks the start of an agent invocation.'
   self:
-    vendor: com.snowplow.demo
+    vendor: com.snowplow.agent.tracking
     name: agent_invocation
     format: jsonschema
     version: 1-0-0
@@ -226,8 +227,219 @@ data:
 The other three event schemas cover:
 
 - `agent_step`: each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `prompt_tokens`, `completion_tokens`, `finish_reason`, `tool_calls_count`
-- `tool_execution`: each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`, `result_summary`
+- `tool_execution`: each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`
 - `agent_completion`: the invocation summary - `total_steps`, `total_duration_ms`, `total_tokens`, `tools_called`, `finish_reason`, `success`
+
+### Create custom entities for domain-specific data
+
+The generic schemas above capture the agent lifecycle - that a tool was called, how long it took, whether it succeeded. But they don't capture *what* was searched for or *what* came back. That data is specific to your application's domain.
+
+This is where [custom entities](/docs/fundamentals/entities/#custom-entities) come in. You create schemas for your own domain data and attach them to the generic events as additional entities. The generic `tool_execution` event carries the lifecycle data; your custom entities carry the business data.
+
+For the travel app, you'll create two custom entities under vendor `com.snowplow.demo.travel`:
+
+- `tool_params` - the parameters passed to each business tool (origin, destination, dates, etc.)
+- `tool_results` - the results returned from each business tool (flights found, booking ID, etc.)
+
+Both entities use a consolidated design - one schema covers all three business tools, with nullable fields for each tool's specific data. Which fields are populated depends on `tool_context.tool_name`. This keeps the number of schemas small at the cost of some sparsity in the warehouse columns.
+
+Create the `tool_params` entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/tool_params/jsonschema/1-0-0`:
+
+```json title="snowplow/iglu-local/schemas/com.snowplow.demo.travel/tool_params/jsonschema/1-0-0"
+{
+  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "description": "Parameters passed to business tools in the travel demo app. Consolidated entity covering search_flights, book_flight, and check_calendar.",
+  "self": {
+    "vendor": "com.snowplow.demo.travel",
+    "name": "tool_params",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "origin": {
+      "type": ["string", "null"],
+      "description": "Origin city or airport code (search_flights)",
+      "maxLength": 200
+    },
+    "destination": {
+      "type": ["string", "null"],
+      "description": "Destination city or airport code (search_flights)",
+      "maxLength": 200
+    },
+    "date": {
+      "type": ["string", "null"],
+      "description": "Departure date in YYYY-MM-DD format (search_flights)",
+      "maxLength": 10
+    },
+    "return_date": {
+      "type": ["string", "null"],
+      "description": "Return date for round-trip (search_flights)",
+      "maxLength": 10
+    },
+    "passengers": {
+      "type": ["integer", "null"],
+      "description": "Number of passengers (search_flights)",
+      "minimum": 1
+    },
+    "cabin_class": {
+      "type": ["string", "null"],
+      "description": "Cabin class (search_flights)",
+      "maxLength": 50
+    },
+    "sort_by": {
+      "type": ["string", "null"],
+      "description": "Sort order for results (search_flights)",
+      "maxLength": 50
+    },
+    "max_results": {
+      "type": ["integer", "null"],
+      "description": "Maximum number of results to return (search_flights)",
+      "minimum": 1
+    },
+    "flight_id": {
+      "type": ["string", "null"],
+      "description": "Unique identifier of the flight to book (book_flight)",
+      "maxLength": 200
+    },
+    "airline": {
+      "type": ["string", "null"],
+      "description": "Airline name (book_flight)",
+      "maxLength": 200
+    },
+    "flight_number": {
+      "type": ["string", "null"],
+      "description": "Flight number (book_flight)",
+      "maxLength": 50
+    },
+    "passenger_name": {
+      "type": ["string", "null"],
+      "description": "Passenger full name (book_flight)",
+      "maxLength": 500
+    },
+    "payment_method": {
+      "type": ["string", "null"],
+      "description": "Payment method (book_flight)",
+      "maxLength": 50
+    },
+    "start_date": {
+      "type": ["string", "null"],
+      "description": "Start date in YYYY-MM-DD format (check_calendar)",
+      "maxLength": 10
+    },
+    "end_date": {
+      "type": ["string", "null"],
+      "description": "End date in YYYY-MM-DD format (check_calendar)",
+      "maxLength": 10
+    },
+    "user_id": {
+      "type": ["string", "null"],
+      "description": "User ID for calendar check (check_calendar)",
+      "maxLength": 200
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+Create the `tool_results` entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/tool_results/jsonschema/1-0-0`:
+
+```json title="snowplow/iglu-local/schemas/com.snowplow.demo.travel/tool_results/jsonschema/1-0-0"
+{
+  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "description": "Results returned from business tools in the travel demo app. Consolidated entity covering search_flights, book_flight, and check_calendar.",
+  "self": {
+    "vendor": "com.snowplow.demo.travel",
+    "name": "tool_results",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "flights_found": {
+      "type": ["integer", "null"],
+      "description": "Number of flights matching the search criteria (search_flights)",
+      "minimum": 0
+    },
+    "price_min": {
+      "type": ["number", "null"],
+      "description": "Lowest price among matching flights (search_flights)"
+    },
+    "price_max": {
+      "type": ["number", "null"],
+      "description": "Highest price among matching flights (search_flights)"
+    },
+    "price_currency": {
+      "type": ["string", "null"],
+      "description": "Currency code for price fields (search_flights)",
+      "maxLength": 10
+    },
+    "booking_id": {
+      "type": ["string", "null"],
+      "description": "Unique booking identifier (book_flight)",
+      "maxLength": 200
+    },
+    "confirmation_code": {
+      "type": ["string", "null"],
+      "description": "Booking confirmation code (book_flight)",
+      "maxLength": 50
+    },
+    "booking_status": {
+      "type": ["string", "null"],
+      "description": "Status of the booking (book_flight)",
+      "maxLength": 50
+    },
+    "conflicts_found": {
+      "type": ["integer", "null"],
+      "description": "Number of calendar conflicts found (check_calendar)",
+      "minimum": 0
+    },
+    "available_dates_count": {
+      "type": ["integer", "null"],
+      "description": "Number of available dates in the range (check_calendar)",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+Notice the differences from the Iglu Central schemas:
+
+- Vendor: `com.snowplow.demo.travel` instead of `com.snowplow.agent.tracking`. This is your application's namespace, not the shared registry.
+- Location: these live in `snowplow/iglu-local/`, not on Iglu Central. Snowplow Micro resolves them from the mounted volume.
+- No required fields: every field is nullable. A `search_flights` call populates `origin`, `destination`, `date`, etc. while `flight_id`, `passenger_name`, and the calendar fields remain null.
+- Format: these are JSON Schema files (not YAML) in Iglu's directory convention: `schemas/{vendor}/{name}/jsonschema/{version}`.
+
+Snowplow Micro automatically picks up schemas from `iglu-local` alongside those it resolves from Iglu Central. No configuration changes needed - the `start.sh` volume mount you set up in the previous stage already handles this.
+
+<details>
+<summary>Alternative approach: per-tool entities (six schemas instead of two)</summary>
+
+The consolidated approach above uses one `tool_params` schema and one `tool_results` schema for all three business tools. An alternative is to create separate schemas per tool - one params and one results entity for each:
+
+| Entity | Fields | Attached to |
+|--------|--------|-------------|
+| `search_flights_params` | `origin`, `destination`, `date`, `return_date`, `passengers`, `cabin_class`, `sort_by`, `max_results` | `tool_execution` where `tool_name = search_flights` |
+| `search_flights_results` | `flights_found`, `price_min`, `price_max`, `price_currency` | same |
+| `book_flight_params` | `flight_id`, `airline`, `flight_number`, `passenger_name`, `payment_method` | `tool_execution` where `tool_name = book_flight` |
+| `book_flight_results` | `booking_id`, `confirmation_code`, `booking_status` | same |
+| `check_calendar_params` | `start_date`, `end_date`, `user_id` | `tool_execution` where `tool_name = check_calendar` |
+| `check_calendar_results` | `conflicts_found`, `available_dates_count` | same |
+
+Trade-offs:
+
+| | Consolidated (two schemas) | Per-tool (six schemas) |
+|---|---|---|
+| Schema count | Fewer schemas to maintain | More schemas, but each is small and focused |
+| Warehouse columns | Sparse - many null columns per row (a `search_flights` row has null `booking_id`, `conflicts_found`, etc.) | Dense - every column is meaningful for every row |
+| Querying | One table to query, filter by `tool_name` to find relevant columns | Separate tables per tool, no filtering needed, each column is always relevant |
+| Adding tools | Add fields to existing schemas (new schema version) | Add a new pair of schemas (no version bump on existing ones) |
+| Type safety | Looser - nothing prevents setting `booking_id` on a `search_flights` event | Tighter - each schema only has fields that apply to that tool |
+
+The consolidated approach works well for demos and applications with a small number of tools where sparsity is manageable. The per-tool approach is better for production applications with many tools or where strict typing and dense warehouse tables matter. This tutorial uses the consolidated approach for simplicity.
+
+</details>
 
 ## Create the server tracking module
 
@@ -279,7 +491,9 @@ Notice `bufferSize: 1` - this flushes events to the collector immediately after 
 
 Also notice the environment variables don't have the `NEXT_PUBLIC_` prefix. These are server-only - they're never included in the browser bundle.
 
-### Context entity builders
+### Build the context entity helpers
+
+The generic entity builders reference schemas on Iglu Central:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export interface AgentContextData {
@@ -294,7 +508,7 @@ export interface AgentContextData {
 }
 
 const buildAgentContext = (data: AgentContextData) => ({
-  schema: 'iglu:com.snowplow.demo/agent_context/jsonschema/1-0-0' as const,
+  schema: 'iglu:com.snowplow.agent.tracking/agent_context/jsonschema/1-0-0' as const,
   data: data as unknown as Record<string, unknown>,
 });
 
@@ -303,16 +517,62 @@ export interface ToolContextData {
   tool_category: 'business' | 'self_tracking';
   tool_call_id: string;
   tool_description?: string | null;
-  parameters_summary?: Record<string, unknown> | null;
 }
 
 const buildToolContext = (data: ToolContextData) => ({
-  schema: 'iglu:com.snowplow.demo/tool_context/jsonschema/1-0-0' as const,
+  schema: 'iglu:com.snowplow.agent.tracking/tool_context/jsonschema/1-0-0' as const,
   data: data as unknown as Record<string, unknown>,
 });
 ```
 
-### Tracking functions
+The custom entity builders reference the local schemas you created in `iglu-local`:
+
+```typescript title="src/lib/tracking/server.ts (continued)"
+export interface ToolParamsData {
+  origin?: string | null;
+  destination?: string | null;
+  date?: string | null;
+  return_date?: string | null;
+  passengers?: number | null;
+  cabin_class?: string | null;
+  sort_by?: string | null;
+  max_results?: number | null;
+  flight_id?: string | null;
+  airline?: string | null;
+  flight_number?: string | null;
+  passenger_name?: string | null;
+  payment_method?: string | null;
+  start_date?: string | null;
+  end_date?: string | null;
+  user_id?: string | null;
+}
+
+const buildToolParams = (data: ToolParamsData) => ({
+  schema: 'iglu:com.snowplow.demo.travel/tool_params/jsonschema/1-0-0' as const,
+  data: data as unknown as Record<string, unknown>,
+});
+
+export interface ToolResultsData {
+  flights_found?: number | null;
+  price_min?: number | null;
+  price_max?: number | null;
+  price_currency?: string | null;
+  booking_id?: string | null;
+  confirmation_code?: string | null;
+  booking_status?: string | null;
+  conflicts_found?: number | null;
+  available_dates_count?: number | null;
+}
+
+const buildToolResults = (data: ToolResultsData) => ({
+  schema: 'iglu:com.snowplow.demo.travel/tool_results/jsonschema/1-0-0' as const,
+  data: data as unknown as Record<string, unknown>,
+});
+```
+
+Notice the schema URIs use vendor `com.snowplow.demo.travel` - these resolve from `iglu-local`, not from Iglu Central.
+
+### Add the tracking functions
 
 Each lifecycle event gets its own function. Here's `trackAgentInvocation` as the pattern example:
 
@@ -324,7 +584,7 @@ export const trackAgentInvocation = (params: AgentInvocationParams) => {
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.demo/agent_invocation/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.agent.tracking/agent_invocation/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           session_id: params.sessionId,
@@ -354,7 +614,58 @@ Every tracking function follows this pattern:
 3. Build the event with its schema and data
 4. Attach the relevant context entities
 
-The remaining functions - `trackAgentStep`, `trackToolExecution`, and `trackAgentCompletion` - follow the same structure with their respective schemas and data fields.
+The remaining functions - `trackAgentStep`, `trackToolExecution`, and `trackAgentCompletion` - follow the same structure. The `trackToolExecution` function is the most interesting because it conditionally attaches the custom entities:
+
+```typescript title="src/lib/tracking/server.ts (continued)"
+export const trackToolExecution = (params: ToolExecutionParams) => {
+  const t = initServerTracker();
+  if (!t) return;
+
+  const contexts: Array<{ schema: string; data: Record<string, unknown> }> = [
+    buildToolContext({
+      tool_name: params.toolName,
+      tool_category: params.toolCategory,
+      tool_call_id: params.toolCallId,
+    }),
+    buildAgentContext({
+      invocation_id: params.invocationId,
+      session_id: params.sessionId,
+      agent_type: 'travel_assistant',
+      model_name: params.modelName,
+      model_provider: params.modelProvider,
+      current_step_number: params.currentStepNumber ?? null,
+    }),
+  ];
+
+  if (params.toolParams) {
+    contexts.push(buildToolParams(params.toolParams));
+  }
+
+  if (params.toolResults) {
+    contexts.push(buildToolResults(params.toolResults));
+  }
+
+  t.track(
+    buildSelfDescribingEvent({
+      event: {
+        schema: 'iglu:com.snowplow.agent.tracking/tool_execution/jsonschema/1-0-0',
+        data: {
+          invocation_id: params.invocationId,
+          step_number: params.stepNumber ?? null,
+          execution_duration_ms: params.executionDurationMs,
+          success: params.success,
+          error_type: params.errorType ?? null,
+          error_message: params.errorMessage ?? null,
+          executed_at: new Date().toISOString(),
+        },
+      },
+    }),
+    contexts,
+  );
+};
+```
+
+The entities array starts with the two generic entities (`tool_context` and `agent_context`) and conditionally adds the custom entities. On a successful `search_flights` call, a single `tool_execution` event carries four entities: two from Iglu Central, two from `iglu-local`.
 
 ## Wire tracking into the chat route
 
@@ -471,11 +782,11 @@ const result = streamText({
 });
 ```
 
-Notice how the tool factories now receive `requestContext` as a parameter - `createSearchFlightsTool(requestContext)`. This is how tools access the shared context for tracking.
+Notice how the tool factories receive `requestContext` as a parameter - `createSearchFlightsTool(requestContext)`. This is how tools access the shared context for tracking.
 
 ## Instrument the business tools
 
-Each tool factory now takes a `RequestContext` parameter and wraps its execution with timing and tracking:
+Each tool factory takes a `RequestContext` parameter and wraps its execution with timing and tracking. The domain-specific data - what was searched for, what came back - is attached as custom entities:
 
 ```typescript title="src/lib/tools/business-tools.ts"
 export function createSearchFlightsTool(ctx: RequestContext) {
@@ -501,18 +812,30 @@ export function createSearchFlightsTool(ctx: RequestContext) {
           toolCategory: 'business',
           executionDurationMs: duration,
           success: true,
-          resultSummary: {
-            flights_found: results.flights.length,
-            price_range: results.flights.length > 0
-              ? {
-                  min: Math.min(...results.flights.map((f) => f.price.amount)),
-                  max: Math.max(...results.flights.map((f) => f.price.amount)),
-                  currency: results.flights[0].price.currency,
-                }
-              : null,
+          toolParams: {
             origin: params.origin,
             destination: params.destination,
             date: params.date,
+            return_date: params.return_date ?? null,
+            passengers: params.passengers,
+            cabin_class: params.cabin_class,
+            sort_by: params.sort_by,
+            max_results: params.max_results,
+          },
+          toolResults: {
+            flights_found: results.flights.length,
+            price_min:
+              results.flights.length > 0
+                ? Math.min(...results.flights.map((f) => f.price.amount))
+                : null,
+            price_max:
+              results.flights.length > 0
+                ? Math.max(...results.flights.map((f) => f.price.amount))
+                : null,
+            price_currency:
+              results.flights.length > 0
+                ? results.flights[0].price.currency
+                : null,
           },
           modelName: ctx.modelName,
           modelProvider: ctx.modelProvider,
@@ -550,8 +873,9 @@ The key patterns here:
 
 - Timing: `startTime` is captured before execution, duration calculated after
 - Counter incrementing: `ctx.totalToolsCalled++` and `ctx.businessToolsCalled++` so the completion event has accurate totals
-- Both paths tracked: success records a `result_summary` with structured output metadata; failure records `errorType` and `errorMessage`
-- Tool-specific summaries: `search_flights` records `flights_found` and `price_range`; `book_flight` records `booking_id` and `confirmation_code`; `check_calendar` records `conflicts_found` and `available_dates_count`
+- Custom entity attachment: `toolParams` and `toolResults` are passed as structured objects that `trackToolExecution` attaches as custom entities alongside the generic `tool_context` and `agent_context` entities
+- Both paths tracked: success attaches both custom entities; failure records `errorType` and `errorMessage` (no custom entities needed)
+- Tool-specific data: `search_flights` populates `origin`, `destination`, `date` in params and `flights_found`, `price_min`, `price_max` in results. The `book_flight` and `check_calendar` tools populate their respective fields in the same consolidated schemas.
 
 The `book_flight` and `check_calendar` tools follow the same wrapping pattern.
 
@@ -566,14 +890,16 @@ npm run start:dev
 2. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press **Refresh** to see both client and server events arriving
 3. Find the `agent_invocation` event - note the `invocation_id` that links all events in this lifecycle
 4. Find the `agent_step` events - observe `step_number` incrementing, token counts, and `finish_reason` ("tool_calls" when the agent wants to call a tool, "stop" when it has a final response)
-5. Find the `tool_execution` for `search_flights` - note `execution_duration_ms`, the `success: true` flag, and the `result_summary` showing how many flights were found and the price range
+5. Find the `tool_execution` for `search_flights` - note `execution_duration_ms` and the `success: true` flag. Drill into the event's entities and find the `tool_params` entity (with `origin`, `destination`, `date`) and `tool_results` entity (with `flights_found`, `price_min`, `price_max`) alongside the generic `tool_context` and `agent_context`
 6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
 7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
----
+:::note Stage summary
+- Files: one added, three modified
+- Events: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
+- Entities: `agent_context`, `tool_context` (Iglu Central) + `tool_params`, `tool_results` (custom)
 
-> Summary
-> Files: 1 added, 3 modified | Events: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion` | Entities: `agent_context`, `tool_context`
-> Key takeaway: you can now trace the agent's entire reasoning lifecycle - every step, every tool call, every token. This answers "what did the agent do?"
+Generic Iglu Central schemas trace the agent lifecycle; custom entities capture your domain-specific tool data. This answers both "what did the agent do?" and "with what data?"
+:::
 
-You now have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.
+You have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.

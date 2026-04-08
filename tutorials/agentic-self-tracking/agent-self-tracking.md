@@ -750,6 +750,8 @@ The balance matters: you want complete tracking without disrupting the conversat
 
 ## Try it out
 
+Check that `.env.local` has a valid API key for the model you plan to use - placeholder values like `sk-ant-...` cause silent failures.
+
 ```bash
 git checkout v0.3-agentic-tracking  # (or verify your code-along)
 npm run start:dev

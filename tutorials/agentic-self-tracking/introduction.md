@@ -115,7 +115,7 @@ Create your environment file:
 cp .env.example .env.local
 ```
 
-Open `.env.local` and add at least one API key. The file looks like this:
+Open `.env.local` and add at least one LLM API key. The flight search, booking, and calendar tools all use mock data, so you do not need any external travel API keys. You do need a valid LLM key because the chatbot calls a real language model. The file looks like this:
 
 ```bash title=".env.example"
 # --- LLM Provider API Keys (configure at least one) ---
@@ -131,6 +131,10 @@ NEXT_PUBLIC_SNOWPLOW_APP_ID=travel-agent-demo
 SNOWPLOW_COLLECTOR_URL=http://localhost:9090
 SNOWPLOW_APP_ID=travel-agent-demo
 ```
+
+:::warning Check your API key
+Replace the placeholder values (`sk-ant-...`, `sk-...`) with your real key. If the value is still a placeholder, the app starts but the chatbot silently fails to respond. The UI lets you select any model regardless of which keys are configured - if you pick a provider without a valid key, the request fails without a visible error.
+:::
 
 The environment variables break down by stage:
 

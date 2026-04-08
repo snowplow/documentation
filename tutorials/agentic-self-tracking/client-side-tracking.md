@@ -528,6 +528,8 @@ This starts Snowplow Micro on port 9090 and Next.js on port 3000.
 
 ## Try it out
 
+If the chatbot sends messages but never responds, check that `.env.local` has a real API key (not a placeholder) for the model you selected.
+
 With both services running:
 
 1. Open [http://localhost:3000](http://localhost:3000) and send a message: "Find flights from London to Paris tomorrow"

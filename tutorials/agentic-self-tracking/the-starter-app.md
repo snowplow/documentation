@@ -84,6 +84,8 @@ The tools work with generated mock data - eight airlines, nine airports, realist
 
 ## Try it out
 
+Before starting, confirm that `.env.local` has at least one valid LLM API key (not a placeholder value like `sk-ant-...`).
+
 Start the development server:
 
 ```bash

@@ -881,6 +881,8 @@ The `book_flight` and `check_calendar` tools follow the same wrapping pattern.
 
 ## Try it out
 
+Check that `.env.local` has a valid API key for the model you plan to use - placeholder values like `sk-ant-...` cause silent failures.
+
 ```bash
 git checkout v0.2-server-tracking  # (or verify your code-along)
 npm run start:dev

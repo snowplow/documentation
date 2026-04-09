@@ -12,7 +12,7 @@ Navigate to **Identities** in the Console sidebar. If Identities is not yet depl
 
 If Identities is already deployed, you'll see the Identities overview page with your current configuration. Click **Edit configuration** to make changes.
 
-<!-- TODO: Add screenshot of Identities landing page -->
+{/* TODO: Add screenshot of Identities landing page */}
 
 ## Configure identifiers
 
@@ -20,12 +20,12 @@ Configure which fields from your events should be used as [identifiers](/docs/id
 
 Each identifier type has:
 
-| Field    | Description                                                                          | Required? |
-| -------- | ------------------------------------------------------------------------------------ | --------- |
-| Name     | A unique name for this identifier type, e.g. `acme_user_id`                          | Yes       |
-| Property | The event property to extract the identifier value from                              | Yes       |
+| Field    | Description                                                                              | Required? |
+| -------- | ---------------------------------------------------------------------------------------- | --------- |
+| Name     | A unique name for this identifier type, e.g. `acme_user_id`                              | Yes       |
+| Property | The event property to extract the identifier value from                                  | Yes       |
 | Unique   | Whether this identifier should prevent merges between Snowplow IDs with different values | No        |
-| Priority | The priority used when generating fallback IDs; higher is preferred                  | Yes       |
+| Priority | The priority used when generating fallback IDs; higher is preferred                      | Yes       |
 
 Only one identifier can be marked as unique.
 
@@ -66,4 +66,4 @@ To add a filter, click **Add filter** and configure:
 | Operator | `is one of` (include) or `is not one of` (exclude) |
 | Value    | A list of values to match                          |
 
-<!-- TODO: Add screenshot of filter form -->
+{/* TODO: Add screenshot of filter form */}

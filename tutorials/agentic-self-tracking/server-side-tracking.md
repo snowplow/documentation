@@ -226,7 +226,7 @@ data:
 
 The other three event schemas cover:
 
-- `agent_step`: each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `prompt_tokens`, `completion_tokens`, `finish_reason`, `tool_calls_count`
+- `agent_step`: each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `input_tokens`, `output_tokens`, `finish_reason`, `tool_calls_count`
 - `tool_execution`: each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`
 - `agent_completion`: the invocation summary - `total_steps`, `total_duration_ms`, `total_tokens`, `tools_called`, `finish_reason`, `success`
 
@@ -745,8 +745,8 @@ const result = streamText({
       sessionId: requestContext.sessionId,
       stepNumber: requestContext.stepNumber,
       stepType,
-      promptTokens: usage.inputTokens ?? 0,
-      completionTokens: usage.outputTokens ?? 0,
+      inputTokens: usage.inputTokens ?? 0,
+      outputTokens: usage.outputTokens ?? 0,
       finishReason: mapFinishReasonForStep(finishReason),
       toolCallsCount: toolCalls.length,
       textLength: text.length,

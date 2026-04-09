@@ -99,6 +99,6 @@ graph LR
     C3 --- AnonP
 ```
 
-:::tip Reset identifiers on logout
+:::tip[Reset identifiers on logout]
 For web browsers, consider calling [`newSession`](/docs/sources/web-trackers/tracking-events/session/index.md) or [`clearUserData`](/docs/sources/web-trackers/anonymous-tracking/index.md#clear-user-data) when a user logs out. This resets the `domain_userid` cookie, preventing it from being shared between users on the same browser.
 :::

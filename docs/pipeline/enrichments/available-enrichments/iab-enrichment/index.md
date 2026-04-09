@@ -67,7 +67,7 @@ All three are mandatory and must have two inner fields:
 - The `database` field containing the name of the database file.
 - The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs`, and `s3` schemes.
 
-:::tip Snowplow CDI
+:::tip[Snowplow CDI]
 
 If you use Snowplow CDI, the necessary files are already provided and updated by Snowplow. You can see the pre-configured URIs of these files in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 
@@ -83,7 +83,7 @@ The database filenames must be as follows:
 
 ### Custom user agent lists
 
-:::note Availability
+:::note[Availability]
 
 This feature is available since version 6.8.0 of Enrich.
 

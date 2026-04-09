@@ -15,7 +15,7 @@ You will typically find most of your Snowplow data in the `events` table. If you
 
 Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
-:::tip Data models
+:::tip[Data models]
 
 Querying the `events` table directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
 

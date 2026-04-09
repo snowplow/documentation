@@ -352,7 +352,7 @@ GRANT ROLE ${snowflake_loader_role} TO ROLE SYSADMIN;
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-:::info Azure-specific instructions
+:::info[Azure-specific instructions]
 
 On Azure, we currently support loading data into Databricks via a data lake. You can still follow Step 1 below to create the cluster, however you should skip the rest of these steps. Instead, proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Databricks [at the end of this guide](#configure-the-destination).
 
@@ -524,7 +524,7 @@ To do this, you will need to:
 * Create an API key and fill the relevant fields (`confluent_cloud_api_key`, `confluent_cloud_api_secret`)
 * Add a bootstrap server in `confluent_cloud_bootstrap_server`
 
-:::tip Topic partitions
+:::tip[Topic partitions]
 
 If you need to stay within the free tier for your Confluent cluster, make sure to select no more than 2 partitions for each topic.
 
@@ -638,7 +638,7 @@ This will output your `collector_lb_ip_address` and `collector_lb_fqdn`.
 
 Make a note of the outputs: you'll need them when sending events and (in some cases) connecting to your data.
 
-:::tip Empty outputs
+:::tip[Empty outputs]
 
 Depending on your cloud and chosen destination, some of these outputs might be empty — you can ignore those.
 
@@ -646,7 +646,7 @@ Depending on your cloud and chosen destination, some of these outputs might be e
 
 If you have attached a custom SSL certificate and set up your own DNS records, then you don't need `collector_dns_name`, as you will use your own DNS record to send events from the Snowplow trackers.
 
-:::tip Terraform errors
+:::tip[Terraform errors]
 
 For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/get-started/self-hosted/faq/index.md#troubleshooting-terraform-errors).
 
@@ -672,7 +672,7 @@ No extra steps needed.
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-:::info Azure-specific instructions
+:::info[Azure-specific instructions]
 
 On Azure, we currently support loading data into Databricks via a data lake. To complete the setup, you will need to configure Databricks to access your data on ADLS.
 
@@ -734,7 +734,7 @@ FROM OPENROWSET(
 
 </details>
 
-:::tip Fabric and OneLake
+:::tip[Fabric and OneLake]
 
 You can also consume your ADLS data via Fabric and OneLake:
 

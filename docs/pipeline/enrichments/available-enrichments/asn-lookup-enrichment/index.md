@@ -6,7 +6,7 @@ description: "Flag bot traffic by checking autonomous system numbers against kno
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
 ---
 
-:::note Availability
+:::note[Availability]
 This enrichment is available since version 6.9.0 of Enrich.
 :::
 
@@ -14,7 +14,7 @@ This enrichment checks the autonomous system number (ASN) attached to an event a
 
 This is useful for automatically flagging non-human traffic. Many bots and scrapers originate from well-known cloud hosting or data center ASNs, and community-maintained lists such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) track these.
 
-:::warning VPN users
+:::warning[VPN users]
 
 Many VPN services also use cloud hosting. As such, this enrichment might incorrectly flag VPN users as bots (hence the `likelyBot` and not `bot` designation).
 
@@ -24,7 +24,7 @@ Depending on the nature of your business, VPN users might represent a meaningful
 
 ## Configuration
 
-:::note Prerequisite
+:::note[Prerequisite]
 
 To use this enrichment, you need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure it to produce ASN data.
 
@@ -133,7 +133,7 @@ For example, server-side tracking (`"srv"`) and IoT (`"iot"`) events typically c
 
 You can use the community-maintained [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) as a starting point for `botAsnsFile`. Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
 
-:::tip Snowplow CDI
+:::tip[Snowplow CDI]
 
 If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI of that list in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 

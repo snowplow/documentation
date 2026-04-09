@@ -130,7 +130,7 @@ The REST catalog integration has been tested with Snowflake Open Catalog.
         </tbody>
     </table>
 
-:::info Event Hubs Authentication
+:::info[Event Hubs Authentication]
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 

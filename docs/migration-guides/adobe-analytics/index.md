@@ -165,7 +165,7 @@ You'll need to translate your Adobe Analytics configuration into Snowplow [track
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
 
-:::info Snowplow CLI MCP server
+:::info[Snowplow CLI MCP server]
 The Snowplow CLI includes an [MCP server](/docs/llms-support/mcp-server/index.md) to help you translate your Adobe Analytics event configuration into Snowplow tracking plans.
 :::
 
@@ -198,7 +198,7 @@ Add Snowplow tracking in parallel with your existing Adobe Analytics tracking:
 * Gradually continue this process until you have a complete Adobe Analytics and Snowplow dual tracking implementation
 * Gradually roll out tracking to production
 
-:::info Snowplow Micro
+:::info[Snowplow Micro]
 [Snowplow Micro](/docs/testing/snowplow-micro/index.md) is a Dockerized local pipeline. It uses the same schema registry as your production pipeline, allowing developers to quickly confirm that the tracked events are valid.
 :::
 

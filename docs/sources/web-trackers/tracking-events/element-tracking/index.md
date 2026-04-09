@@ -638,7 +638,7 @@ enableFormTracking({ context: [componentGenerator] });
   </TabItem>
 </Tabs>
 
-:::note Plugin compatibility
+:::note[Plugin compatibility]
 
 `componentGeneratorWithDetail` returns multiple entities and isn't directly compatible with the `context` arrays used by the link and form tracking plugins.
 

@@ -42,7 +42,7 @@ Use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Sig
 
 You will need a [Snowplow pipeline](/docs/get-started/index.md) to use Signals. Your Signals infrastructure is deployed into the same cloud as your pipeline.
 
-:::note Warehouse support
+:::note[Warehouse support]
 Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 

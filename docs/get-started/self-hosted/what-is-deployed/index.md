@@ -199,7 +199,7 @@ Collector payloads are written to the raw stream, before being picked up by the 
 
 Events that have been validated and enriched by the Enrich application are written to the enriched stream. Depending on your cloud and destination, different loaders pick up the data from this stream, as shown on the diagram [above](#overview).
 
-:::note AWS only
+:::note[AWS only]
 
 The S3 loader (enriched) also reads from this enriched stream and writes to the enriched folder on S3.
 

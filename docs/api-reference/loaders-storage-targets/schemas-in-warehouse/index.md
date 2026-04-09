@@ -281,7 +281,7 @@ Because the table name for the self-describing event or entity includes the majo
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
 
-:::info Breaking changes
+:::info[Breaking changes]
 
 If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to modify the table to accommodate the new data.
 
@@ -297,7 +297,7 @@ Note that this behavior was introduced in RDB Loader 6.0.0. In older versions, b
 
 :::
 
-:::info Nullability
+:::info[Nullability]
 
 Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
 
@@ -318,7 +318,7 @@ Because the column name for the self-describing event or entity includes the maj
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `RECORD`.
 
-:::info Breaking changes
+:::info[Breaking changes]
 <ParquetRecoveryColumns/>
 :::
    </TabItem>
@@ -333,7 +333,7 @@ Because the column name for the self-describing event or entity includes the ful
 
 If you are [modeling your data with dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), you can use [this macro](https://github.com/snowplow/dbt-snowplow-utils#combine_column_versions-source) to aggregate the data across multiple columns.
 
-:::info Breaking changes
+:::info[Breaking changes]
 
 While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for BigQuery Loader version 1.x. Indeed, each schema version gets its own column, so there is no difference between major and minor versions. That said, we believe sticking to our recommendation is a good idea:
 * Breaking changes might affect downstream consumers of the data, even if they don’t affect BigQuery
@@ -354,7 +354,7 @@ Because the column name for the self-describing event or entity includes the maj
 | `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
 
-:::info Breaking changes
+:::info[Breaking changes]
 
 While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for Snowflake. Indeed, the event or entity data is stored in the column as is in the `VARIANT` form, so Snowflake is not “aware” of the schema. That said, we believe sticking to our recommendation is a good idea:
 * Breaking changes might affect downstream consumers of the data, even if they don’t affect Snowflake
@@ -377,7 +377,7 @@ Because the column name for the self-describing event or entity includes the maj
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `STRUCT`.
 
-:::info Breaking changes
+:::info[Breaking changes]
 
 <ParquetRecoveryColumns/>
 

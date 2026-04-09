@@ -15,7 +15,7 @@ The Getting Started dashboard in Console guides you through collecting and actin
 
 Each section contains workflow cards for a specific task, from designing a tracking plan to configuring Signals. The workflows follow a prerequisite chain: create a tracking plan, implement tracking, then unlock downstream features like data models and Signals.
 
-:::note Console availability
+:::note[Console availability]
 The Getting Started dashboard is available to Snowplow CDI customers with Console access.
 :::
 
@@ -44,7 +44,7 @@ With a tracking plan in place, the next card helps you [implement tracking](/doc
 4. Test with Snowplow Micro
 5. Deploy to production
 
-:::tip Test before deploying
+:::tip[Test before deploying]
 Test your implementation with Snowplow Micro before deploying to production to verify that events are structured correctly and match your tracking plan.
 :::
 
@@ -59,7 +59,7 @@ Once data is flowing, you can deploy a data model to transform raw events into s
 
 [Signals](/docs/signals/get-started/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
-:::note Paid add-on
+:::note[Paid add-on]
 Signals is a paid add-on. Contact your account team to enable it.
 :::
 

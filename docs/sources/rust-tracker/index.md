@@ -17,7 +17,7 @@ The Snowplow Rust Tracker allows you to add analytics to your Rust apps.
 
 The tracker is published on crates.io as [snowplow_tracker](https://crates.io/crates/snowplow_tracker).
 
-:::note Migration from 0.1.0
+:::note[Migration from 0.1.0]
 
 If you are upgrading from 0.1.0 to 0.2.0, there are a couple of changes required to make to your code:
 

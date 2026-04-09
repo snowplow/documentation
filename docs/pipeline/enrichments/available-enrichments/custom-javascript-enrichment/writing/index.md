@@ -23,7 +23,7 @@ function process(event) {
 
 You can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
 
-:::tip JavaScript Language Features
+:::tip[JavaScript Language Features]
 
 JavaScript enrichment uses the [Nashorn Engine](https://docs.oracle.com/en/java/javase/11/nashorn/introduction.html) and since version 3.0.0 of Enrich, many features of ECMAScript 6 are supported. For a list of those features, please refer to [this OpenJDK proposal](http://openjdk.java.net/jeps/292). Regarding the features the proposal says “might be feasible” in the future, as of 2023 our testing shows that classes and generators don't work, but tail calls do.
 
@@ -111,7 +111,7 @@ For events with no entities attached, `getContexts()` will return `null`. The pa
 
 :::
 
-:::note Derived entities
+:::note[Derived entities]
 
 For derived entities (added by other enrichments), you can use `event.getDerived_contexts()` in the same way as above. Note that this is only supported since Enrich 3.8.0 (and Snowplow Micro 1.7.1). In prior versions, this function always returns `null`.
 
@@ -280,7 +280,7 @@ import DiscardingEvents from "@site/docs/reusable/discarding-events/_index.md"
 
 ## Accessing Java methods
 
-:::note Availability
+:::note[Availability]
 
 For security reasons, this feature is not available to Cloud customers (where Snowplow owns the cloud account).
 
@@ -344,7 +344,7 @@ This is useful when you want to quickly reconfigure the enrichment without updat
 
 Starting with Enrich 5.1.1, it is possible to access the HTTP headers that came with the original request to the Collector. The array of headers is passed in the _third_ argument to the `process` function. Each header is a string in the format `HEADER:value`.
 
-:::tip formatting
+:::tip[formatting]
 Per the HTTP specification, headers are not case sensitive, so we recommend using a case insensitive match, like what is shown below.
 It is also a good practice to trim whitespace from the value, as there might or might not be some space around the `:` character.
 :::

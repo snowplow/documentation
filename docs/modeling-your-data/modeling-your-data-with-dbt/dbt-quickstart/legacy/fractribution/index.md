@@ -68,7 +68,7 @@ vars:
     snowplow__path_transforms: \{'exposure_path' : null}
 ```
 
-:::tip Snowflake Only
+:::tip[Snowflake Only]
 
 If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
 

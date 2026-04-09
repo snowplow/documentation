@@ -19,7 +19,7 @@ Snowplow can identify bot traffic both client-side, via a [tracker plugin](/docs
 
 Each source attaches information to the event that you can use for filtering. For convenience, the [bot detection enrichment](#bot-detection-enrichment) consolidates all sources into a single `bot` field.
 
-:::note Anonymous tracking
+:::note[Anonymous tracking]
 
 Events tracked with [server-side anonymization](/docs/events/anonymous-tracking/index.md#server-side-anonymization) lack IP address data. As such, bot detection based on IP addresses will not be effective for these events. This includes the ASN lookup enrichment and the IP-related check in the IAB enrichment.
 
@@ -33,7 +33,7 @@ The [bot detection plugin](/docs/sources/web-trackers/tracking-events/bot-detect
 
 The [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) checks the event's IP address and user agent string against the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/), an industry-standard database maintained by the Interactive Advertising Bureau. It adds an [entity](/docs/fundamentals/entities/index.md) with a `spiderOrRobot` boolean that indicates whether the event came from a known bot.
 
-:::tip Custom rules
+:::tip[Custom rules]
 
 When configuring this enrichment, you can also [add custom user agent string patterns](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md#custom-user-agent-lists) you'd like to classify as bots or not bots.
 
@@ -47,7 +47,7 @@ The [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-en
 
 The [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) checks the event's autonomous system number against a configurable list of ASNs associated with bots, cloud providers, or data centers. Many bots originate from well-known hosting ASNs, and community-maintained lists track these. When a match is found, the enrichment sets `likelyBot` to `true` on the ASN entity.
 
-:::tip Prerequisites
+:::tip[Prerequisites]
 
 For this enrichment to work, you also need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure either its `asn` or `isp` setting, as this is what will generate the initial [ASN entity](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md#asn-data).
 
@@ -95,7 +95,7 @@ function process(event) {
 
 The `event.drop()` method (available since Enrich 5.3.0) prevents the event from being sent to any stream or destination, lowering infrastructure costs.
 
-:::warning Events dropped permanently
+:::warning[Events dropped permanently]
 
 There is no way to recover dropped events, so use this with caution.
 
@@ -117,7 +117,7 @@ function process(event) {
 }
 ```
 
-:::note Failed events
+:::note[Failed events]
 
 This creates an "enrichment failure" failed event, which may be tricky to distinguish from genuine failures in your enrichment code.
 

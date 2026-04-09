@@ -43,7 +43,7 @@ Switching to the **Events** or **Interventions** tab and then back to the **Attr
 
 If the attribute values have still not updated or look out of date, you can use the refresh button at the top of the screen to manually trigger a refresh.
 
-:::note Signals Sandbox refreshes
+:::note[Signals Sandbox refreshes]
 Since Signals Sandbox requests are free, attribute values get requested much more frequently than described here, to update as quickly as possible.
 :::
 
@@ -54,7 +54,7 @@ You can filter by environment, organization, or attribute source type to limit w
 The controls at the top allow you to filter or search to filter what's displayed.
 Each attribute group listing includes its organization, environment, version, and source in the top-right for reference.
 
-:::note Organization filters
+:::note[Organization filters]
 If you only have access to one organization, organization filters don't display.
 Similarly, if there is only a single version of an attribute group, there will be no option to change it.
 

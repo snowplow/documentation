@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 On AWS and GCP, when failed events are generated on your pipeline, the raw event payload along with details about the failure are saved into file storage (S3 on AWS, GCS on Google Cloud).
 
-:::info Snowplow Self-Hosted quick start guide on GCP
+:::info[Snowplow Self-Hosted quick start guide on GCP]
 
 If you followed the [Snowplow Self-Hosted quick start guide](/docs/get-started/self-hosted/quick-start/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
@@ -100,7 +100,7 @@ CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 
 Then run each SQL statement provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor. We recommend creating all tables, although you can skip the ones you are not interested in.
 
-:::info Placeholders
+:::info[Placeholders]
 
 Note that the SQL statements contain a few placeholders which you will need to edit before you can create the tables:
 
@@ -114,7 +114,7 @@ Note that the SQL statements contain a few placeholders which you will need to e
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-:::info Snowplow Self-Hosted quick start guide on GCP
+:::info[Snowplow Self-Hosted quick start guide on GCP]
 
 If you followed the [Snowplow Self-Hosted Quick Start guide](/docs/get-started/self-hosted/quick-start/index.md), you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
@@ -137,7 +137,7 @@ The `--data-location` should match the location of your bad rows bucket. Also 
 
 Next, download the table definitions provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery) in JSON format.
 
-:::info Placeholders
+:::info[Placeholders]
 
 Each table definition contains a `{{ BUCKET }}` placeholder which needs to be changed to the GCS bucket where your bad rows files are stored (e.g. `sp-storage-loader-bad-prod1-com_acme`).
 
@@ -170,7 +170,7 @@ bq mk \
 
 Run the corresponding commands for the remaining table definitions. We recommend creating all tables, although you can skip the ones you are not interested in.
 
-:::tip Why not just auto-detect the schemas?
+:::tip[Why not just auto-detect the schemas?]
 
 BigQuery has an “Auto-detect” feature to automatically generate the table definition for you by inspecting the file contents. So you might wonder why it is necessary to provide explicit schema definitions for your tables.
 

@@ -57,7 +57,7 @@ The tracker will be named `sp` (tracker namespace) and will send events to the a
 
 If `newTracker` is called multiple times with the same namespace, only the first call is taken into account.
 
-:::tip For Single Page Apps
+:::tip[For Single Page Apps]
 Initialize one tracker per initial page load.
 :::
 

@@ -77,7 +77,7 @@ Each [entity](/docs/fundamentals/entities/index.md) type attached to the event g
 
 First off, install and set up Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html) for installation information and [Supported versions of OpenSearch and Elasticsearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html#choosing-version) for the latest information of ElasticSearch/OpenSearch supported versions by AWS.
 
-:::note Supported Versions
+:::note[Supported Versions]
 
 We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x currently.
 

@@ -45,7 +45,7 @@ We often see, and recommend as a best practice, setting up a unique application 
 
 Application entities, also referred to as [global context](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md), are a set of entities that can be sent with every event recorded in the application. Using source applications you can document which application entities are expected. This is useful for tracking implementation, data discovery, and preventing information duplication in tracking plans.
 
-:::info Conditional application entities
+:::info[Conditional application entities]
 Since application entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an application entity is through [rulesets](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
 :::
 

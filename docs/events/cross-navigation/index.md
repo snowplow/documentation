@@ -9,7 +9,7 @@ keywords: ["cross-domain tracking", "link decoration", "user identity", "cross-n
 
 When users navigate between different domains in your ecosystem, their user identity may get fragmented. Examples include navigation from your main website to a partner site, or to a mobile app. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
 
-:::info Web subdomains
+:::info[Web subdomains]
 This problem doesn't usually apply for navigation between web subdomains, for example between `www.example.com` and `blog.example.com`. This is because the web trackers have `discoverRootDomain` [enabled by default](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 :::
 

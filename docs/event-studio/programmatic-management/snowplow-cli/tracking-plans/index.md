@@ -103,7 +103,7 @@ snowplow-cli dp sync
 ```
 This command locates all files under `./data-products`, validates them, and pushes local changes to Console. Tracking plans and source applications are updated in place. For event specifications, a new version in draft status may be created if the change is structural (name change, event change, or rules change).
 
-:::note Deprecated alias
+:::note[Deprecated alias]
 
 The old `publish` command has been renamed to `sync`. Running `dp publish` still works as an alias for backward compatibility, but it may be removed in a future release. Update your scripts to use `dp sync` instead.
 

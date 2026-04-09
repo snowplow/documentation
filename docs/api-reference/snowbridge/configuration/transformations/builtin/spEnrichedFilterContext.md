@@ -10,7 +10,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-:::note Deprecated
+:::note[Deprecated]
 This transformation is deprecated and can result in unexpected behavior when matching integers. Use the [`jqFilter`](/docs/api-reference/snowbridge/configuration/transformations/builtin/jqFilter.md) transformation instead, which provides more robust and flexible filtering capabilities.
 :::
 

@@ -34,7 +34,7 @@ You need to decide which of the different Maxmind databases listed above you wis
 
 ## Host the databases in your cloud
 
-:::tip Snowplow CDI
+:::tip[Snowplow CDI]
 
 If you use Snowplow CDI, the free-tier MaxMind database files are already provided and updated by Snowplow, so you don't need this step.
 

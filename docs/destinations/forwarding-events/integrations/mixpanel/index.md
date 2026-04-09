@@ -21,7 +21,7 @@ Before setting up the forwarder in Console, you'll need the following from your 
 - **Service Account Username**: create a service account in Mixpanel under **Settings** > **Organization Settings** > **Service Accounts**. The service account must have either **Admin** or **Owner** permissions.
 - **Service Account Password**: generated when you create the service account
 
-:::tip Test in a non-production project first
+:::tip[Test in a non-production project first]
 To avoid introducing test data in your production Mixpanel project, we recommend using a test or development Mixpanel project to test your transformations first. Then, create a new Connection in Console with your production credentials, and a new forwarder that imports the configuration from your development forwarder.
 :::
 

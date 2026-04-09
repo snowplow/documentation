@@ -16,7 +16,7 @@ import { sampleTrackingCode } from '@site/src/components/FirstSteps/sampleTracki
 
 Once your pipeline is set up, you will want to send some events to it. Here's an overview of the different options.
 
-:::tip Latency
+:::tip[Latency]
 
 Regardless of how you send the events, it might take a few minutes for them to reach your destination (e.g. data warehouse). This depends on which [destination and loader](/docs/destinations/warehouses-lakes/index.md) you have configured.
 
@@ -26,7 +26,7 @@ Regardless of how you send the events, it might take a few minutes for them to r
 
 If you are eager to look at some Snowplow events or just test your pipeline, you can use the box below to send some data (including [failed events](/docs/fundamentals/failed-events/index.md)) to your Collector.
 
-:::tip HTTPS
+:::tip[HTTPS]
 
 Note that to use this tool, you need a Collector URL that starts with `https://`, not `http://`.
 This is because web browsers block traffic from HTTPS-enabled sites (such as `https://docs.snowplow.io` — this site — to non-HTTPS resources).
@@ -64,7 +64,7 @@ We use the following tracking code:
 
 <EventComponent />
 
-:::tip Application ID
+:::tip[Application ID]
 
 An application ID is sent along with each Snowplow event. You can pick a value that will make it easy to filter out these test events from your data later, e.g. like this:
 
@@ -130,7 +130,7 @@ If you are already using Google Tag Manager to add various code snippets to your
 
 The JavaScript tracker captures many events (e.g. page views) automatically, so you should start accumulating your first events as soon as the changes are rolled out to your users.
 
-:::tip Strong user and session cookies and ad-blocker mitigation
+:::tip[Strong user and session cookies and ad-blocker mitigation]
 
 To make sure that your tracking is well configured for strong first-party cookies and resilient against the impact of ad-blockers, [visit this page with several useful recommendations](/docs/get-started/tracking/cookies-and-ad-blockers/index.md).
 

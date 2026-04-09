@@ -181,7 +181,7 @@ Snowplow includes in-product management and tools for [tracking plans](/docs/fun
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to automatically generate the tracking code snippets.
 
-:::info Snowplow CLI MCP server
+:::info[Snowplow CLI MCP server]
 The Snowplow CLI includes an [MCP server](/docs/llms-support/mcp-server/index.md) to help you translate your Mixpanel Tracking Plans into Snowplow tracking plans.
 :::
 
@@ -241,7 +241,7 @@ Add Snowplow tracking in parallel with your existing Mixpanel tracking:
 * Gradually continue this process until you have a complete Mixpanel and Snowplow dual tracking implementation
 * Gradually roll out tracking to production
 
-:::info Snowplow Micro
+:::info[Snowplow Micro]
 [Snowplow Micro](/docs/testing/snowplow-micro/index.md) is a Dockerized local pipeline. It uses the same schema registry as your production pipeline, allowing developers to quickly confirm that the tracked events are valid.
 :::
 

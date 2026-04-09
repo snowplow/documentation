@@ -18,7 +18,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 Snowplow recommends using the Snowplow Inspector browser extension for validating your tracking code.
 To install in Chrome, Edge and other Chromium-based browsers, find [Snowplow Inspector on the chrome web store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm).
 
-:::note Browser support
+:::note[Browser support]
 Firefox users can install the extension manually using an `.xpi` file from the [GitHub Releases page](https://github.com/snowplow/chrome-snowplow-inspector/releases).
 
 The Snowplow Inspector is not supported on Safari at this time.
@@ -28,7 +28,7 @@ The code for the Snowplow Inspector is available on [GitHub](https://github.com/
 
 Once you add the extension to your browser, you can view it by [opening Developer Tools](https://developer.chrome.com/docs/devtools/open/), where it has its own tab named **Snowplow** (look for the tab adjacent to **Console**, **Network**, etc. It may be necessary to expand the list of tabs using the `»` button).
 
-:::tip Opening DevTools
+:::tip[Opening DevTools]
 Common keyboard shortcuts to open Developer Tools include:
 
 - PC: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>

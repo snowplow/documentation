@@ -23,7 +23,7 @@ You might encounter specific restrictions when following the documentation, for 
 
 ## Upgrades and deprecation
 
-:::info Snowplow CDI
+:::info[Snowplow CDI]
 
 If you are a Snowplow CDI customer, rather than self-hosted, you don't need to deal with upgrading your pipeline. We'll perform upgrades for you.
 
@@ -39,7 +39,7 @@ From time to time, we develop better applications for certain tasks and deprecat
 
 ### Core pipeline
 
-:::info Snowplow CDI
+:::info[Snowplow CDI]
 
 If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install any of the core pipeline components yourself. We'll deploy your pipeline and keep it up to date.
 
@@ -96,7 +96,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 ### Iglu (schema registry)
 
-:::info Snowplow CDI
+:::info[Snowplow CDI]
 
 If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/event-studio/data-structures/index.md).
 
@@ -166,7 +166,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 ### Testing and debugging
 
-:::info Snowplow CDI
+:::info[Snowplow CDI]
 
 If you are a Snowplow CDI customer, rather than self-hosted, we recommend using [Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md) for testing and debugging.
 

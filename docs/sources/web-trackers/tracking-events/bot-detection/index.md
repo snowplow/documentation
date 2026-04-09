@@ -82,7 +82,7 @@ The plugin attaches a `client_side_bot_detection` entity to every event.
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for bot detection entity, powered by the BotD library (https://github.com/fingerprintjs/BotD)", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "client_side_bot_detection", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "bot": { "description": "Whether the current browser is identified as a bot", "type": "boolean" }, "kind": { "description": "The type of bot detected. Populated when bot is true, null or omitted otherwise. See https://github.com/fingerprintjs/BotD/blob/main/src/types.ts", "type": ["string", "null"], "enum": ["awesomium", "cef", "cefsharp", "coachjs", "electron", "fminer", "geb", "nightmarejs", "phantomas", "phantomjs", "rhino", "selenium", "sequentum", "slimerjs", "webdriverio", "webdriver", "headless_chrome", "unknown", null] } }, "required": ["bot"], "additionalProperties": false }} />
 
-:::note Asynchronous detection
+:::note[Asynchronous detection]
 
 Bot detection runs asynchronously. Events tracked before detection completes won't have this entity attached. In most cases, detection finishes within milliseconds, but if you need the entity on the very first event, consider deferring your initial tracking calls until the tracker is fully initialized.
 

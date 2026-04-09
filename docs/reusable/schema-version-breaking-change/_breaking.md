@@ -13,7 +13,7 @@ Different data warehouses handle schema evolution slightly differently. Use the 
 | **Change the type of an existing field**     | Breaking     | Breaking                        |
 | **Change the size of an existing field**     | Non-breaking | Non-breaking                    |
 
-:::note Size changes
+:::note[Size changes]
 
 In Redshift and Databricks, changing _size_ may also mean _type_ change. For example, changing the `maximum` integer from `30000` to `100000`. See our documentation on [how schemas translate to database types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 

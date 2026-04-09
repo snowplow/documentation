@@ -247,13 +247,13 @@ If you need to switch to a different KMS key — for example, as part of a sched
 2. Contact Snowplow Support with your environment name, the new Key ARN, and the current Key ARN being replaced.
 3. Keep the old key active and accessible until Snowplow Support confirms the rotation is complete and all data encrypted with the old key has been processed and archived.
 
-:::danger Keep the old key active until rotation is confirmed
+:::danger[Keep the old key active until rotation is confirmed]
 Do not disable or delete the old KMS key until you receive explicit confirmation from Snowplow Support. Disabling the key prematurely while it is still referenced by your pipeline will cause data processing to stop immediately.
 :::
 
 ## Disabling customer-managed key encryption
 
-:::danger Disable the key in AWS only after Snowplow confirms it is safe to do so
+:::danger[Disable the key in AWS only after Snowplow confirms it is safe to do so]
 Disabling your KMS key while it is still referenced in the pipeline configuration will cause an immediate pipeline outage. Data processing will stop and stream latency will increase as events back up in queues.
 :::
 

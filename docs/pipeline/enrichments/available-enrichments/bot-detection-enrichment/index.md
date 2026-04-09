@@ -6,7 +6,7 @@ description: "Consolidate bot indicators from multiple enrichments into a single
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
 ---
 
-:::note Availability
+:::note[Availability]
 This enrichment is available since version 6.9.0 of Enrich.
 :::
 
@@ -29,7 +29,7 @@ Each source contributes a indicator as follows:
 
 For example, if YAUAA detects a bot based on user agent but IAB does not, the event is still classified as a bot. Similarly, if the ASN lookup flags the event based on a known bad ASN, that result stands regardless of what YAUAA or IAB report.
 
-:::note Missing sources
+:::note[Missing sources]
 
 It's safe to enable all sources (`useYauaa`, `useIab`, `useAsnLookups`, `useClientSideDetection`) even if some of the underlying enrichments or plugins are not in use. If a contributing source is not enabled or its entity is not present, that source is silently skipped.
 

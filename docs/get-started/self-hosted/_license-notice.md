@@ -1,4 +1,4 @@
-:::note Licensing
+:::note[Licensing]
 
 Please read the terms of the [Snowplow Limited Use License Agreement](/limited-use-license-1.1) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)) which apply to Community Edition.
 

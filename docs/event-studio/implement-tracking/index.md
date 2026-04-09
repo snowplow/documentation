@@ -19,7 +19,7 @@ When viewing an [event specification](/docs/event-studio/tracking-plans/event-sp
 
 The snippets in the **Implementation** tab show the exact tracking calls needed for each event, including all required properties and entities.
 
-:::note Available for custom web events only
+:::note[Available for custom web events only]
 Code snippets are available for the JavaScript tracker only, for event specifications with custom event data structures.
 :::
 

@@ -10,7 +10,7 @@ This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to co
 
 When transactional data is collected in multiple currencies, it can be useful to convert it in the one that is used for reporting for instance. This could help to lower discrepancies when reporting revenue amounts across multiple currencies.
 
-:::note Limitations
+:::note[Limitations]
 
 This is an older and less actively maintained enrichment, and as such it has several limitations.
 

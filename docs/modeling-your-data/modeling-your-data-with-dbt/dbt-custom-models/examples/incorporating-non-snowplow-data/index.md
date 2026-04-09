@@ -27,6 +27,6 @@ When modifying the model you would typically want to add left joins using the ke
 
 Bear in mind that if you make changes to the Sessions table, you might break the Users table in the Unified Digital package depending on the changes as the Users table is built on top of the Sessions table (e.g. it is generally safe to add more fields (be careful about name clashes), though you might also need to add them as a [passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) for them to show up in the Users table, but probably not to remove them, best to test it first), otherwise they are safe to update independently.
 
-:::info Lineage Graph
+:::info[Lineage Graph]
 You can inspect the lineage graph to verify this if you are unsure by using dbt's built in data lineage feature through dbt docs. We also update that for each of our latest releases on github: https://snowplow.github.io/dbt-snowplow-unified/#!/overview?g_v=1
 :::

@@ -19,7 +19,7 @@ This section explains how to create, manage, and update [data structures](/docs/
 
 To create a data structure within Console, go to **Data collection** > **Data structures** and click the **Create data structure** button. You can use the builder to create simple data structures with basic types and validation rules, or the JSON editor for more complex data structures.
 
-:::info Supported properties
+:::info[Supported properties]
 The data structure builder supports the following types:
 
 - String
@@ -65,7 +65,7 @@ To edit an existing data structure, navigate to **Data Structures** and locate t
 
 Once located, click on the name to view the data structure. You can then select from two options to edit the data structure: **Edit with builder** or **Edit with JSON editor**.
 
-:::note Options depend on the data structure
+:::note[Options depend on the data structure]
 The **Edit with builder** option will be unavailable if the data structure you're viewing is not supported. More complex data structures must be edited with the **JSON Editor**.
 :::
 
@@ -85,7 +85,7 @@ When you're ready to use your data structure, you need to publish it from draft 
 
 Once you are happy with your changes in the development environment, you will want to migrate these changes to your production environment.
 
-:::note Permissions needed
+:::note[Permissions needed]
 The action of migrating data structures to production is only available to Admin users.
 :::
 
@@ -121,7 +121,7 @@ Once located either click on the name to view the data structure and then click 
 
 Follow the dialog instructions to confirm the action.
 
-:::note Hidden data structures are not deleted
+:::note[Hidden data structures are not deleted]
 
 Hiding a data structure will not remove it from the registry, it simply hides it from the console listing. This means:
 

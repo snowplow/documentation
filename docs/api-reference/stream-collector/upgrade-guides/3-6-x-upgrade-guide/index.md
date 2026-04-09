@@ -16,7 +16,7 @@ The compression feature allows the collector to batch multiple individual collec
 
 ## Enabling compression
 
-:::danger Enrich 6.1.x required
+:::danger[Enrich 6.1.x required]
 
 Before enabling compression, you must upgrade to Enrich 6.1.x first. The reason for this is that support for processing compressed payloads is added to Enrich starting with Enrich 6.1.0. Enrich 6.1.0 can process both compressed and uncompressed payloads.
 

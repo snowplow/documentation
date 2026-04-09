@@ -25,7 +25,7 @@ All payloads should be wrapped in a `payload_data` self-describing JSON.
 }
 ```
 
-:::info Reserved parameter `u`
+:::info[Reserved parameter `u`]
 `u` is a reserved parameter because it is used for [click tracking in the Pixel Tracker](/docs/sources/pixel-tracker/index.md#click-tracking).
 :::
 

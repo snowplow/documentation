@@ -96,7 +96,7 @@ This package consists of two macros, a python script, and some example configura
   - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window).
 ## Operation
 
-:::tip Using dbt Cloud?
+:::tip[Using dbt Cloud?]
 
 If you are using dbt Cloud then you will need to run the model-generating script locally, as there is no way to do this in cloud, and then copy your models up to your Cloud environment. You'll still need to add the package to your `packages.yml` file in your project.
 
@@ -502,7 +502,7 @@ If you wish to update your models, such as adding a new context, removing a colu
 
 All events models will be updated including the filtered events table, it is not possible at this time to update just a subset of models.
 
-:::info BigQuery Only
+:::info[BigQuery Only]
 As your schemas for custom contexts and unstructured events evolve, multiple versions of the same column may be created in your events table (depending on the type of data loader being used) e.g. custom_context_1_0_0, custom_context_1_0_1. When modeling Snowplow data it can be useful to combine or coalesce each nested field across all versions of the column for a continuous view over time.
 
 The snowplow-normalize package handles this for you, all you have to do is make sure you add all the versions in the relevant config file parameter (`self_describing_event_schemas` / `context_schemas`):

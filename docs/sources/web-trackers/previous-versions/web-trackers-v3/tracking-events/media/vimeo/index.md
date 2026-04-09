@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](../snowplow/index.md).
 
-:::info Example app
+:::info[Example app]
 To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit [an example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) that showcases the tracked media events and entities live as you watch a video.
 
 Source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples).
@@ -65,7 +65,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 The snippets below show how to get started with the plugin, after [setting up your tracker](../../../tracker-setup/index.md).
 
-:::info Accepted `video` attribute values
+:::info[Accepted `video` attribute values]
 The plugin's `video` attribute will accept either:
 - An `iframe` element
 - An instance of `Vimeo.Player`, created with the [Vimeo Player SDK](https://developer.vimeo.com/player/sdk)

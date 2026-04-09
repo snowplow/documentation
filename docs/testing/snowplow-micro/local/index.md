@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import Badges from '@site/src/components/Badges';
 ```
 
-:::tip Micro in Console
+:::tip[Micro in Console]
 
 For general use, we recommend [running Micro through Snowplow Console](/docs/testing/snowplow-micro/console/index.md). However, running locally can be useful if you don’t have access to Console or need an advanced configuration.
 

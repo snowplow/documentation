@@ -104,7 +104,7 @@ Each run configuration controls what dbt commands will be executed and when. Mor
 * Each run configuration can contain one or more schedules
 * For each schedule, you can define specific dbt commands
 
-:::tip Examples
+:::tip[Examples]
 
 If you want to run all your models every day at midnight, you would create:
 * One run configuration

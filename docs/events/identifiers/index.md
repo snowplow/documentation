@@ -29,7 +29,7 @@ It's the default identifier used in our [dbt packages](/docs/modeling-your-data/
 | Persistance mechanism | Browser cookies                                                      | App user settings storage |
 | Unified Digital field | `user_identifier`                                                    | `user_identifier`         |
 
-:::note Mobile-specific identifiers
+:::note[Mobile-specific identifiers]
 In mobile apps, there are additional on-device identifiers provided by the platform: advertising ID (IDFA) and vendor ID (IDFV, app set ID). These can be tracked in the [mobile entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity).
 :::
 

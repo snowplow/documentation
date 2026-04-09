@@ -36,7 +36,7 @@ A single event field can only be mapped to one identifier type. Identifier names
 
 Follow the steps in Console to create a new identifier.
 
-:::warning Removing identifiers
+:::warning[Removing identifiers]
 Removing an identifier affects identity resolution for all future events. Snowplow IDs that would have been connected through this identifier will appear as separate Snowplow IDs going forward. Historical identities won't change. This can't be undone.
 :::
 
@@ -44,7 +44,7 @@ Removing an identifier affects identity resolution for all future events. Snowpl
 
 If you use [cross-domain tracking](/docs/events/cross-navigation/index.md), check the **Enable cross-domain tracking aliases** box. This automatically extracts `refr_domain_userid` as an identifier and maps it to `domain_userid` and `client_session_user_id`, so the same user is resolved across sites with different cookie domains.
 
-:::note Mapping requirements
+:::note[Mapping requirements]
 For cross-domain tracking aliases to work, you must have identifiers named `domain_userid` or `client_session_user_id` (or both) defined in the identifiers section above.
 :::
 

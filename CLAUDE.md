@@ -75,19 +75,19 @@ import TabItem from '@theme/TabItem';
 
 ## Admonitions
 ```mdx
-:::note
+:::note[Title]
 General information, context, or clarifications
 :::
 
-:::tip
+:::tip[Title]
 Best practices, recommendations, or encouraging specific actions
 :::
 
-:::warning
+:::warning[Title]
 Important cautions about data loss or security risks
 :::
 
-:::danger
+:::danger[Title]
 Critical warnings about severe consequences such as pipeline outages
 :::
 ```

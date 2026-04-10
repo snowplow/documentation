@@ -6,7 +6,7 @@ description: "Edit, clone, and delete Snowplow event forwarders in Console to up
 keywords: ["manage forwarders", "edit forwarder", "delete forwarder", "clone forwarder", "forwarder configuration"]
 ---
 
-This page explains how to edit, clone, and delete event forwarders. To start, go to **Destinations** > **Destination list** in [Snowplow Console](https://console.snowplowanalytics.com).
+This page explains how to edit, clone, and delete event forwarders. To start, go to **Destinations** > **Event forwarding** in [Snowplow Console](https://console.snowplowanalytics.com).
 
 ## Edit a forwarder
 
@@ -30,7 +30,7 @@ When creating a new forwarder, you can import the configuration from an existing
 
 To clone a forwarder:
 
-1. Navigate to the **Available** tab and select **Configure** on the destination card from the list of available integrations to start setting up the forwarder.
+1. Click **Add destination** and select the from the list of available integrations to start setting up the forwarder.
 2. Give the forwarder a **name**, select the **pipeline** you want the forwarder to read events from, and choose a **connection**.
 3. From the **Import configuration from** dropdown, choose an existing forwarder.
 4. Click **Continue**. The filters, mappings, and custom functions will be pre-populated with those of the existing forwarder you imported from.
@@ -39,6 +39,5 @@ To clone a forwarder:
 
 To permanently delete a forwarder:
 
-1. Click **Details** under the destination you want to change to open the destination details page.
-2. On the event forwarders overview table, click the three dots next to the forwarder you want to change and select **Delete**.
-3. On the confirmation modal, select **Delete**. This will start the process of destroying the underlying forwarder infrastructure.
+1. In the event forwarders overview table, click the three dots next to the forwarder you want to change and select **Delete**.
+2. On the confirmation modal, select **Delete**. This will start the process of destroying the underlying forwarder infrastructure.

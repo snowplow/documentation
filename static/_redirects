@@ -515,3 +515,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Bot filtering moved to events section
 /docs/pipeline/enrichments/filtering-bot-events/* /docs/events/filtering-bot-events/:splat 301
+
+/deprecation-policy /lifecycle-policy 301

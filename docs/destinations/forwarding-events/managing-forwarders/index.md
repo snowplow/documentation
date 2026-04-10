@@ -30,7 +30,7 @@ When creating a new forwarder, you can import the configuration from an existing
 
 To clone a forwarder:
 
-1. Click **Add destination** and select the from the list of available integrations to start setting up the forwarder.
+1. Click **Add destination** and select the destination from the list of available integrations to start setting up the forwarder.
 2. Give the forwarder a **name**, select the **pipeline** you want the forwarder to read events from, and choose a **connection**.
 3. From the **Import configuration from** dropdown, choose an existing forwarder.
 4. Click **Continue**. The filters, mappings, and custom functions will be pre-populated with those of the existing forwarder you imported from.

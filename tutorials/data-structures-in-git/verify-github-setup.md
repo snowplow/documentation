@@ -36,7 +36,7 @@ Validation has failed. To identify the problem we open the 'file' tab on the pul
 
 ![](./images/worked-diff-annotated.png)
 :::note
-Validation only takes your configured [warehouse and lake destinations](https://console.snowplowanalytics.com/destinations/warehouses-lakestions) into account.
+Validation only takes your configured [warehouse and lake destinations](https://console.snowplowanalytics.com/destinations/warehouses-lakes) into account.
 :::
 
 Together with the description warnings we forgot to fix earlier we have some errors. Changing the values of the enum would change the type of the `result` property which will cause problems further down the line for our data. The error suggests we need to make a major version bump to avert disaster. We'll do that (and add descriptions).

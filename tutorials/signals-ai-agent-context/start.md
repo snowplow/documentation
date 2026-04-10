@@ -1,5 +1,5 @@
 ---
-title: "Learn how to build an AI agent with real-time user context"
+title: "Learn how to build an AI agent with real-time user context using Signals and Vercel AI SDK"
 position: 1
 sidebar_label: "Introduction"
 description: "Build a Next.js AI agent that uses Snowplow Signals to understand what your users are doing in real time."

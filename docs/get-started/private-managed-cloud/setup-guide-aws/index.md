@@ -264,7 +264,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
   3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
     - Account ID: `793733611312`
     - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
-  4. Do not attach any AWS managed policies. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
+  4. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
   5. Name the role `SnowplowDeployment` — this exact name is required. Optionally add a description: "Allows the Snowplow team to programmatically deploy to this account". Create the role.
   6. Open the role you just created, go to the **Permissions** tab and click **Add permissions** > **Create inline policy**. Switch to the JSON editor, paste the following policy, and save it:
   ```json

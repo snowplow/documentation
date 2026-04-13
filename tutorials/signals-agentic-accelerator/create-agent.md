@@ -7,7 +7,7 @@ keywords: ["Strands Agents", "AI agent", "tools", "AWS Bedrock", "Claude", "prot
 date: "2026-03-27"
 ---
 
-In this step you build a working agent prototype using the [Strands Agents](https://strandsagents.com/) framework. The agent combines a foundation model with custom tools to answer queries, look up information, and fetch behavioral data from Snowplow Signals.
+In this step, you'll build a working agent prototype using the [Strands Agents](https://strandsagents.com/) framework. The agent combines a foundation model with custom tools to answer queries, look up information, and fetch behavioral data from Snowplow Signals.
 
 The example implements a travel assistant, but the same pattern - define tools, configure a model, create an agent with a system prompt - applies to any domain.
 
@@ -42,7 +42,7 @@ model = BedrockModel(
 )
 ```
 
-A lower `temperature` value (0.3) produces more consistent, reliable responses - appropriate for a customer-facing agent where accuracy matters more than creativity.
+The `temperature` parameter controls how random the model's output is, on a scale from 0 to 1. A value of 0.3 produces more consistent, predictable responses - appropriate for a customer-facing agent where accuracy matters more than creativity.
 
 ## Create and configure the agent
 
@@ -70,5 +70,23 @@ This query uses the `get_destination_info` tool, which returns data from the loc
 2. **Tool selection** - the agent determines which tools to call
 3. **Tool execution** - the agent calls the selected tools with appropriate parameters
 4. **Response synthesis** - the agent combines tool results with its knowledge to produce a response
+
+You should see a response like:
+
+```
+Tool #1: get_destination_info
+Bangkok is a vibrant and exciting destination in Thailand. Here are
+some highlights:
+
+- **Best for**: Culture, street food, temples, and nightlife
+- **Climate**: Tropical - warm and humid year-round with average
+  temperatures of 28-35°C
+- **Top experiences**: Grand Palace and Wat Phra Kaew, street food
+  tours in Chinatown, Chatuchak Weekend Market, and longtail boat
+  rides through the canals
+
+Bangkok is a great base for exploring Southeast Asia, with easy
+connections to Thailand's islands and neighboring countries.
+```
 
 At this point, the `get_signals` tool will not return data because you have not yet configured Signals attributes. In the next step, you will define and publish behavioral attributes that the agent can use for personalization.

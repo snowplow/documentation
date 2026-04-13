@@ -21,10 +21,10 @@ The app includes a chat interface where users can ask travel questions. As users
 Before connecting the demo app, ensure you have:
 
 * Completed the previous steps in this accelerator (agent, Signals attributes, and memory)
-* Your AWS credentials (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) with Bedrock access
-* Your AWS region (the same one used in the notebook)
-* Your AgentCore Memory ID (printed when you created the memory resource)
-* Your Signals credentials (the same values you configured in the notebook's credentials cell)
+* Your AWS credentials - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` - with Bedrock access
+* Your AWS region - the same one used in the notebook
+* Your AgentCore Memory ID - printed when you created the memory resource
+* Your Signals credentials - the same values you configured in the notebook's credentials cell
 
 ## Run the demo app
 
@@ -86,11 +86,11 @@ If either dropdown shows "Not set" for required fields, check that the correspon
 
 ## Test the integration
 
-1. **Chat with the agent** — click the chat icon in the bottom right corner and ask a travel question. The agent calls Bedrock directly with the same model used in the notebook (`us.anthropic.claude-sonnet-4-20250514-v1:0`).
+1. **Chat with the agent**: click the chat icon in the bottom right corner and ask a travel question. The agent will call Bedrock directly with the same model used in the notebook (`us.anthropic.claude-sonnet-4-20250514-v1:0`).
 
-2. **Test memory** — ask the agent for destination recommendations. Because you seeded customer history in the notebook, the agent should reference preferences for warm, adventurous, family-friendly destinations without you needing to state them.
+2. **Test memory**: ask the agent for destination recommendations. Because you seeded customer history in the notebook, the agent should reference preferences for warm, adventurous, family-friendly destinations without you needing to state them.
 
-3. **Test Signals** — browse some destination and experience pages to generate tracking events. Then ask the agent "Based on my browsing behavior, what experiences would suit me?" The agent fetches your behavioral profile from Signals and personalizes its response.
+3. **Test Signals**: browse some destination and experience pages to generate tracking events. Then ask the agent "Based on my browsing behavior, what experiences would suit me?" The agent will fetch your behavioral profile from Signals and personalize its response.
 
 :::tip
 All configuration is managed through environment variables. To change settings, update your `.env` file and restart the container.

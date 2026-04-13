@@ -7,14 +7,14 @@ keywords: ["conclusion", "cleanup", "next steps", "AgentCore", "Signals", "produ
 date: "2026-03-27"
 ---
 
-You have built an AI agent that combines real-time behavioral data from Snowplow Signals with persistent memory from AWS Bedrock AgentCore Memory. The agent can:
+You've built an AI agent that combines real-time behavioral data from Snowplow Signals with persistent memory from AWS Bedrock AgentCore Memory. The agent can:
 
 * Answer queries using custom tools (destination lookup, experience info, web search)
 * Fetch behavioral attributes from Signals to understand what the user is doing right now
 * Retrieve and store customer context across conversations using AgentCore Memory
 * Deliver personalized responses that reflect both browsing behavior and historical preferences
 
-This pattern - tools + behavioral context + persistent memory - applies to any customer-facing agent, from support bots to shopping assistants to content recommenders.
+This pattern - tools plus behavioral context plus persistent memory - is useful in any customer-facing agent, from support bots to shopping assistants to content recommenders.
 
 If you connected the [SEA Explorer demo app](/tutorials/signals-agentic-accelerator/connect-demo-app), you also have a working frontend that calls Bedrock with Signals and Memory integration, demonstrating the full end-to-end flow.
 
@@ -34,7 +34,12 @@ memory_client.gmcp_client.delete_memory(memoryId=memory_id)
 print(f"Deleted memory resource: {memory_id}")
 ```
 
-If you published a Signals service and attribute group, you can remove them from your Sandbox or CDI environment through the Signals dashboard.
+If you published a Signals service and attribute group, run the optional cleanup cell at the end of the notebook to remove them:
+
+```python
+sp_signals.unpublish([travel_service, session_attributes_group])
+sp_signals.delete([travel_service, session_attributes_group])
+```
 
 ## Next steps
 

@@ -12,13 +12,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step you define behavioral attributes using Snowplow Signals, publish them as a service, and validate that they compute correctly from raw events.
+Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step, you'll define behavioral attributes using Snowplow Signals, publish them as a service, and validate that they compute correctly from raw events.
 
-These attributes form a compact behavioral profile that the agent's `get_signals` tool fetches at runtime, enabling personalized responses without requiring the user to state their preferences manually.
+These attributes form a behavioral profile that the agent's `get_signals` tool fetches at runtime, enabling personalized responses without requiring the user to state their preferences manually.
 
 ## Set up your credentials
 
-You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](https://docs.snowplow.io/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
+You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="cdi" label="CDI" default>
@@ -53,7 +53,7 @@ family_fun_tags = ["family-friendly", "beaches", "nature", "food", "mountains", 
 culinary_tourist_tags = ["food", "street food", "multicultural", "traditional", "urban", "shopping"]
 ```
 
-The notebook defines these counter attributes:
+The notebook defines these `counter` attributes:
 
 * `page_view_count` - overall engagement level
 * `destination_page_view_count` - interest in destination content
@@ -73,13 +73,13 @@ And these attributes with the `last` aggregation:
 
 Running this cell defines the attributes locally but does not publish them yet.
 
-:::note
+:::note[Snowplow schemas]
 These attributes are designed around specific Snowplow [events](/docs/fundamentals/events/) and [entities](/docs/fundamentals/entities/) (for example, `filter_tag_applied`, `destination_filter`, and the `content` entity). To use them on your own site, your tracking implementation must send the same events with matching schemas. You can adapt the attribute definitions to match your own event data instead.
 :::
 
 ## Create an attribute group
 
-Run the next notebook cell to define an attribute group. This creates a `StreamAttributeGroup` with `domain_sessionid` as the attribute key, meaning attributes are computed per browser session:
+Run the next notebook cell to define an [attribute group](/docs/signals/attributes/attribute-groups/). This creates a `StreamAttributeGroup` with `domain_sessionid` as the attribute key, meaning attributes are computed per browser session:
 
 ```python
 session_attributes_group = StreamAttributeGroup(
@@ -96,7 +96,7 @@ session_attributes_group = StreamAttributeGroup(
 
 ## Create a service
 
-Run the notebook cell that defines a service to expose the attribute group via the Profiles API:
+Run the notebook cell that defines a [service](/docs/signals/attributes/services/) to manage the attribute group:
 
 ```python
 travel_service = Service(
@@ -121,7 +121,7 @@ Signals will start processing attributes from your real-time event stream.
 
 ## Validate attribute computation
 
-Run the notebook cells that send synthetic test events and retrieve the computed attributes. The Snowplow tracker sends events directly to your collector - no demo site or web application is needed. The `page_url` field is metadata used by the attribute criteria to match against URL patterns.
+Run the notebook cells that send synthetic test events and retrieve the computed attributes. The Snowplow tracker in the notebook sends events directly to your event Collector - no demo site or web application is needed. The `page_url` field is metadata used by the attribute criteria to match against URL patterns.
 
 After sending the events, retrieve the results:
 

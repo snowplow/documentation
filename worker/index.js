@@ -8,9 +8,38 @@ function toResponse(redirect, url) {
   return Response.redirect(target, redirect.status);
 }
 
+const SNOWPLOW_ENDPOINT = "https://86976d04-0042-4716-aade-0d4e21159b7f.apps.snowplowanalytics.com/com.snowplowanalytics.snowplow/tp2"
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    const snowplowPayload = {
+		  schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
+      data: [
+        {
+          e: "pv",
+          ua: request.headers.get("user-agent"),
+          aid: "docs-cloudflare",
+          p: "srv",
+          tv: "cf-worker-1.0.0",
+          url: request.url
+        }
+      ]
+    };
+
+    ctx.waitUntil(fetch(
+      SNOWPLOW_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          ...(request.headers.get("signature-agent") && {
+            "signature-agent": request.headers.get("signature-agent")
+          })
+        },
+        body: JSON.stringify(snowplowPayload)
+      })
+    );
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);
     if (forced) return forced;

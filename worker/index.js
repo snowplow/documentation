@@ -40,6 +40,7 @@ export default {
           method: "POST",
           headers: {
             "content-type": "application/json",
+            "SP-Anonymous": "*",
             ...(request.headers.get("signature-agent") && {
               "signature-agent": request.headers.get("signature-agent")
             })

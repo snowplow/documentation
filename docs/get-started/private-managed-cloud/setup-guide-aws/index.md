@@ -264,9 +264,107 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
   3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
     - Account ID: `793733611312`
     - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
-  4. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
+  4. Do not attach any AWS managed policies. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
   5. Name the role `SnowplowDeployment` — this exact name is required. Optionally add a description: "Allows the Snowplow team to programmatically deploy to this account". Create the role.
-  6. Open the role you just created, go to the Trust relationships tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
+  6. Open the role you just created, go to the **Permissions** tab and click **Add permissions** > **Create inline policy**. Switch to the JSON editor, paste the following policy, and save it:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "IAMManagement",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:AddRoleToInstanceProfile",
+          "iam:AddUserToGroup",
+          "iam:AttachGroupPolicy",
+          "iam:AttachRolePolicy",
+          "iam:AttachUserPolicy",
+          "iam:CreateAccessKey",
+          "iam:CreateGroup",
+          "iam:CreateInstanceProfile",
+          "iam:CreateOpenIDConnectProvider",
+          "iam:CreatePolicy",
+          "iam:CreatePolicyVersion",
+          "iam:CreateRole",
+          "iam:CreateServiceLinkedRole",
+          "iam:CreateUser",
+          "iam:DeleteAccessKey",
+          "iam:DeleteGroup",
+          "iam:DeleteInstanceProfile",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:DeletePolicy",
+          "iam:DeletePolicyVersion",
+          "iam:DeleteRole",
+          "iam:DeleteRolePermissionsBoundary",
+          "iam:DeleteRolePolicy",
+          "iam:DeleteServiceLinkedRole",
+          "iam:DeleteUser",
+          "iam:DetachGroupPolicy",
+          "iam:DetachRolePolicy",
+          "iam:DetachUserPolicy",
+          "iam:GetAccessKeyLastUsed",
+          "iam:GetGroup",
+          "iam:GetInstanceProfile",
+          "iam:GetOpenIDConnectProvider",
+          "iam:GetPolicy",
+          "iam:GetPolicyVersion",
+          "iam:GetRole",
+          "iam:GetRolePolicy",
+          "iam:GetUser",
+          "iam:ListAccessKeys",
+          "iam:ListAttachedGroupPolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:ListAttachedUserPolicies",
+          "iam:ListGroupsForUser",
+          "iam:ListEntitiesForPolicy",
+          "iam:ListInstanceProfilesForRole",
+          "iam:ListInstanceProfileTags",
+          "iam:ListMFADeviceTags",
+          "iam:ListOpenIDConnectProviderTags",
+          "iam:ListPolicyAttachments",
+          "iam:ListPolicyTags",
+          "iam:ListPolicyVersions",
+          "iam:ListRolePolicies",
+          "iam:ListRoles",
+          "iam:ListRoleTags",
+          "iam:ListSAMLProviderTags",
+          "iam:ListServerCertificateTags",
+          "iam:ListUserPolicies",
+          "iam:ListUserTags",
+          "iam:PassRole",
+          "iam:PutRolePermissionsBoundary",
+          "iam:PutRolePolicy",
+          "iam:RemoveClientIDFromOpenIDConnectProvider",
+          "iam:RemoveRoleFromInstanceProfile",
+          "iam:RemoveUserFromGroup",
+          "iam:SetDefaultPolicyVersion",
+          "iam:TagInstanceProfile",
+          "iam:TagOpenIDConnectProvider",
+          "iam:TagPolicy",
+          "iam:TagRole",
+          "iam:TagUser",
+          "iam:UntagInstanceProfile",
+          "iam:UntagMFADevice",
+          "iam:UntagOpenIDConnectProvider",
+          "iam:UntagPolicy",
+          "iam:UntagRole",
+          "iam:UntagServerCertificate",
+          "iam:UntagUser",
+          "iam:UpdateAccessKey",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:UpdateGroup",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:UpdateRole",
+          "iam:UpdateUser"
+        ]
+      }
+    ]
+  }
+  ```
+  7. Go to the **Trust relationships** tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
   ```json
   {
     "Version": "2012-10-17",
@@ -289,7 +387,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
     ]
   }
   ```
-  7. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+  8. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

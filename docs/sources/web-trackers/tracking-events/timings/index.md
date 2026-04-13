@@ -82,7 +82,7 @@ For actual rendering performance, the application will have to use the Performan
 
 ## Performance timing plugin (original)
 
-:::warning
+:::note
 This plugin has been deprecated and superseded by the Performance Navigation Timing plugin described above.
 :::
 
@@ -94,6 +94,7 @@ Note that if you fire a page view event as soon as the page loads, the `domComp
 
 <details>
   <summary>Advanced PerformanceTiming usage</summary>
+
   The `domComplete`, `loadEventStart`, and `loadEventEnd` metrics in the NavigationTiming API are set to 0 until after every script on the page has finished executing, including sp.js. This means that the corresponding fields in the PerformanceTiming reported by the tracker will be 0.
 
   To get around this limitation, you can wrap all Snowplow code in a `setTimeout` call:

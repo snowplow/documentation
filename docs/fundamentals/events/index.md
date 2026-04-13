@@ -34,11 +34,11 @@ In the data warehouse, any event-specific information will be in standard column
 
 Find out more about how to track and model page view and page ping events [here](/docs/events/ootb-data/page-activity-tracking/index.md).
 
-:::tip Legacy structured events
+:::tip[Legacy structured events]
 We recommend using self-describing events instead of structured events whenever possible. Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
 :::
 
-:::info Legacy transaction events
+:::info[Legacy transaction events]
 The legacy `transaction` and `transaction_item` events are also "baked-in". Several Snowplow trackers provide [ecommerce tracking](/docs/events/ootb-data/ecommerce-events/index.md) APIs; we recommend using these instead, as they support current Snowplow best practise, and are compatible with the [Snowplow ecommerce dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md).
 :::
 
@@ -63,7 +63,7 @@ You can also create [custom self-describing events](/docs/events/custom-events/i
 
 Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
 
-:::info Terminology
+:::info[Terminology]
 We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.
 :::
 

@@ -8,7 +8,7 @@ sidebar_position: 50
 
 Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions.
 
-:::danger
+:::note
 
 These manifest tables are critical to the package **and as such are protected from full refreshes, i.e. being dropped, when running in production by default**. In development refreshes are enabled.
 

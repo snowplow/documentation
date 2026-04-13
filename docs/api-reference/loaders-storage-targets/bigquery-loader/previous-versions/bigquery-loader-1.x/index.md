@@ -16,7 +16,7 @@ Under the umbrella of Snowplow BigQuery Loader, we have a family of applications
 
 <Diagram/>
 
-:::tip Schemas in BigQuery
+:::tip[Schemas in BigQuery]
 
 For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery).
 

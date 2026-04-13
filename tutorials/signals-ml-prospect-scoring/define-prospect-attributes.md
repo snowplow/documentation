@@ -106,6 +106,7 @@ prospect_scoring_tutorial_service = Service(
 
 <details>
 <summary>For Signals Customers: test attribute group on your warehouse data</summary>
+
 If you're using Signals in the Console, you can test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`. This filtering is optional.
 
 ```python

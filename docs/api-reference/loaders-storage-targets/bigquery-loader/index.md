@@ -27,7 +27,7 @@ The BigQuery Streaming Loader is an application that loads Snowplow events to Bi
   </TabItem>
 </Tabs>
 
-:::tip Schemas in BigQuery
+:::tip[Schemas in BigQuery]
 
 For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery).
 

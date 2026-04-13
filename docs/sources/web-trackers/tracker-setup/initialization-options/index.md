@@ -60,7 +60,7 @@ The tracker will send events to the Collector URL you specify by replacing `{{co
 
 If your code calls `newTracker` multiple times with the same namespace, only the first call is taken into account.
 
-:::tip For Single Page Apps
+:::tip[For Single Page Apps]
 Initialize one tracker per initial page load.
 :::
 

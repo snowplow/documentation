@@ -13,7 +13,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 By default, when running locally, Micro does not have any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled. This page shows how you can enable them.
 
-:::tip Micro in Console
+:::tip[Micro in Console]
 
 When [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), you can use the UI to configure enrichments.
 
@@ -27,7 +27,7 @@ One of the most useful enrichments, [YAUAA](/docs/pipeline/enrichments/available
 `docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --yauaa`
 }</CodeBlock>
 
-:::tip Memory usage
+:::tip[Memory usage]
 
 We recommend not enabling this enrichment in a CI setting unless necessary, because it consumes a few extra hundred MB of RAM.
 

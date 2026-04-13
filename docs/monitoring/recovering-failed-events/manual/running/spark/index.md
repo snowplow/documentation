@@ -7,7 +7,7 @@ description: "Deploy event recovery jobs on Apache Spark using EMR and dataflow-
 keywords: ["Spark event recovery", "EMR recovery job"]
 ---
 
-:::danger
+:::note
 Spark module is now deprecated. Kinesis integration is not as reliable as we'd like. We suggest migrating to [Flink module](../flink/index.md).
 :::
 

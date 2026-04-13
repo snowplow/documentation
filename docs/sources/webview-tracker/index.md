@@ -410,6 +410,6 @@ window.snowplow('trackPageView', {}, ['ns1']);
   </TabItem>
 </Tabs>
 
-:::warning Specifying namespaces
+:::warning[Specifying namespaces]
 If you specify namespaces in the configuration, and no mobile trackers actually exist with those namespaces, the event will be lost.
 :::

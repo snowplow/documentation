@@ -86,7 +86,7 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 | `appSetId`              | String                               | ✅       | ❌   | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id)     | No                 |
 | `appSetIdScope`         | String (either "app" or "developer") | ✅       | ❌   | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No                 |
 
-:::note Android screen resolution
+:::note[Android screen resolution]
 The screen resolution for the platform entity is obtained from the Android context resources. The height value will likely be lower than that reported in the canonical `dvce_screenheight` [event property](/docs/fundamentals/canonical-event/index.md#device-and-operating-system-fields), which is fetched from `WindowManager`, an older API that still includes the menu bar.
 
 To standardize the screen resolution between event and entity properties, provide a `SubjectConfiguration` with `useContextResourcesScreenResolution(true)` flag at tracker initialization. This flag is false by default, and available from Android tracker v6.0.3 onwards. Read about configuring `Subject` properties [here](/docs/sources/mobile-trackers/client-side-properties/index.md).

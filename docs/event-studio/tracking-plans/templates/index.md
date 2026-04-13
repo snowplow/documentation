@@ -46,7 +46,7 @@ Included event specifications:
 
 This Tracking Plan template contains all the basic ecommerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
+Tracked using the [out-of-the-box ecommerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 

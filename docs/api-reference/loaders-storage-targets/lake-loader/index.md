@@ -16,7 +16,7 @@ import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/
 
 The Lake Loader is an application that loads Snowplow events to a cloud storage bucket using Open Table Formats.
 
-:::info Open Table Formats
+:::info[Open Table Formats]
 
 The Lake Loader supports the two major Open Table Formats: [Delta](https://delta.io/) and [Iceberg](https://iceberg.apache.org/).
 

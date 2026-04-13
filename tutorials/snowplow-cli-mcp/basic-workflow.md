@@ -10,7 +10,7 @@ Here's a typical interaction pattern for creating a data structure.
 
 ## 1. Get context
 
-:::note Important
+:::note[Important]
 Always ensure `get_context` is called at the start of your conversation. If you don't see it happen, then ask for it.
 :::
 

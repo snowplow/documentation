@@ -61,7 +61,7 @@ Now we’ll get to using our variables, which is how you enable the parts of the
         snowplow__database: database_with_snowplow_events
     ```
 
-:::info Databricks only
+:::info[Databricks only]
 
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
 
@@ -126,7 +126,7 @@ vars:
     snowplow__session_timestamp: 'load_tstamp'
 ```
 
-:::info BigQuery Only
+:::info[BigQuery Only]
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"

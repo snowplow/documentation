@@ -108,7 +108,7 @@ Add into your project's `pom.xml`:
 </TabItem>
 </Tabs>
 
-:::info For Maven and Gradle users
+:::info[For Maven and Gradle users]
 
 Notice a `_2.13` postfix in artifactId. This is used for Scala libraries and denotes the Scala version which the artifact (in our case `snowplow-scala-tracker`) is compiled against. It also means that this library will bring a `org.scala-lang:scala-library_2.13.x` as transitive dependency and if you're using any other Scala dependency you should keep these postfixes in accordance (`snowplow-scala-tracker` is also compiled against Scala 2.12).
 

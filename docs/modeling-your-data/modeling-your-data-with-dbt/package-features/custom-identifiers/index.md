@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::danger
+:::tip
 
 As this changes the core logic of the package, you should make sure you have a good understanding of how the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
 
@@ -87,7 +87,7 @@ vars:
     ...
 ...
 ```
-:::warning
+:::tip
 Make sure you include a `prefix` value if you are running on **Postgres or Redshift**, as this ensures that you don't have duplicate column names somewhere in your SQL select statement. It is not required for the other warehouses, but is recommended.
 :::
 
@@ -103,7 +103,7 @@ vars:
     ...
 ...
 ```
-:::warning
+:::tip
 Make sure if you include multiple fields from the same entity that you give them the same prefix.
 :::
 
@@ -227,7 +227,7 @@ If there are session identifiers that are more complicated to utilize, then you 
 Defining the `snowplow__session_sql` variable will ensure that the package takes it's value as the `session_identifier` **over** anything you may have defined with the `snowplow__session_identifiers` variable.
 :::
 
-:::warning
+:::note
 For Redshift/Postgres, if you want to leverage custom entities for your custom session logic, you will need to include them in the `snowplow__session_identifiers` variable in the same way as in previous sections to ensure they are correctly joined to the table.
 :::
 

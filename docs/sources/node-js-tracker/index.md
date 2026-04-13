@@ -18,4 +18,4 @@ The Snowplow Node.js Tracker allows you to track Snowplow events from your Nod
 
 The tracker should be straightforward to use if you are comfortable with JavaScript development; any prior experience with other Snowplow trackers is helpful but not necessary. It is written in TypeScript.
 
-The Node.js tracker, along with the [web trackers](/docs/sources/web-trackers/index.md), are part of [one monorepo](https://github.com/snowplow/snowplow-javascript-tracker). <p>The current version is {versions.javaScriptTracker}.</p>
+The Node.js tracker, along with the [web trackers](/docs/sources/web-trackers/index.md), are part of [one monorepo](https://github.com/snowplow/snowplow-javascript-tracker). The current version is {versions.javaScriptTracker}.

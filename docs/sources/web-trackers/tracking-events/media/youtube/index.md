@@ -403,10 +403,14 @@ The `enableYouTubeTracking` function is similar to `startYouTubeTracking`, excep
 - The additional options to `startMediaTracking` are nested within an `options` object
 - The media session ID value will be generated automatically if not provided
 
-:::info The plugin's `id` option is equivalent to `video` in the new API and will accept:
+:::info
+
+The plugin's `id` option is equivalent to `video` in the new API and will accept:
+
 - The `id` of an `iframe` element
 - An `iframe` element directly
 - An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
+
 :::
 
 The `enableYouTubeTracking` function takes the form:

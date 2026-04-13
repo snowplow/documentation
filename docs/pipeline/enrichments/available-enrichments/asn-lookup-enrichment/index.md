@@ -6,7 +6,7 @@ description: "Flag bot traffic by checking autonomous system numbers against kno
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
 ---
 
-:::note Availability
+:::note[Availability]
 This enrichment is available since version 6.9.0 of Enrich.
 :::
 
@@ -14,13 +14,52 @@ This enrichment checks the autonomous system number (ASN) attached to an event a
 
 This is useful for automatically flagging non-human traffic. Many bots and scrapers originate from well-known cloud hosting or data center ASNs, and community-maintained lists such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) track these.
 
-:::note Prerequisite
+:::warning[VPN users]
 
-This enrichment requires the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) to be enabled with ASN data (either the free GeoLite2 ASN database or the paid GeoIP2 ISP database). It runs immediately after IP lookup and reads the ASN entity that IP lookup produces.
+Many VPN services also use cloud hosting. As such, this enrichment might incorrectly flag VPN users as bots (hence the `likelyBot` and not `bot` designation).
+
+Depending on the nature of your business, VPN users might represent a meaningful portion of your traffic. If you find that to be the case, you should not rely on this enrichment as a _sole_ indicator of bots. Instead, you could use it to reinforce other indicators, e.g., unusually high number of page views in a short timeframe.
 
 :::
 
 ## Configuration
+
+:::note[Prerequisite]
+
+To use this enrichment, you need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure it to produce ASN data.
+
+<details>
+<summary>IP lookup configuration</summary>
+
+If you are using the paid MaxMind database (`isp` field present in your IP lookup configuration), you don't need to do anything else.
+
+If you are using the free MaxMind database, e.g., the one provided by Snowplow for CDI customers, your configuration will look like this:
+
+```json
+"geo": {
+  "database": "GeoLite2-City.mmdb",
+  "uri": "<database URI>"
+}
+```
+
+Add the `asn` field:
+
+```json
+"geo": {
+  "database": "GeoLite2-City.mmdb",
+  "uri": "<database URI>"
+},
+// highlight-start
+"asn": {
+  "database": "GeoLite2-ASN.mmdb",
+  "uri": "<same URI value as for geo>"
+}
+// highlight-end
+```
+
+</details>
+
+:::
 
 - [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn_lookups/jsonschema/1-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/asn_lookups.json)
@@ -94,7 +133,7 @@ For example, server-side tracking (`"srv"`) and IoT (`"iot"`) events typically c
 
 You can use the community-maintained [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) as a starting point for `botAsnsFile`. Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
 
-:::tip Snowplow CDI
+:::tip[Snowplow CDI]
 
 If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI of that list in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 

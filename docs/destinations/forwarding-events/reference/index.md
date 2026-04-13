@@ -51,7 +51,7 @@ Schema names follow these transformation rules:
 - Only major version number retained
 - Hyphens in vendor/name become underscores
 
-:::info Optional chaining
+:::info[Optional chaining]
 Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
 :::
 

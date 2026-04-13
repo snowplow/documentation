@@ -59,7 +59,7 @@ You can find the plugins code [here](https://github.com/snowplow/snowplow-javasc
 
 ## Browser features plugin (deprecated)
 
-:::warning
+:::note
 **Deprecated**: This plugin is deprecated. The `navigator.mimeTypes` API which this tracker uses is now deprecated and modern browsers may no longer populate these values.
 :::
 

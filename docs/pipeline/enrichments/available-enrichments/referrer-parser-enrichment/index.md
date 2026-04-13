@@ -45,7 +45,7 @@ This behavior is not configurable, and may require handling in data models or a 
 
 ### Custom referrer mappings
 
-:::note Availability
+:::note[Availability]
 This feature is available since version 6.9.0 of Enrich.
 :::
 
@@ -99,7 +99,7 @@ With this configuration, a referrer URL of `https://search.example.com/?q=snowpl
 | `refr_source` | `Corporate Search`  |
 | `refr_term`   | `snowplow`          |
 
-:::tip Contributing mappings upstream
+:::tip[Contributing mappings upstream]
 
 You can use custom referrer mappings to immediately test new categorizations in your pipeline. Once validated, consider contributing your mappings back to the [upstream referer-parser database](https://github.com/snowplow/referer-parser) via a pull request.
 

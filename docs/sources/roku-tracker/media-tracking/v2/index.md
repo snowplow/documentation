@@ -12,7 +12,7 @@ import Media from "@site/docs/reusable/media/_index.md"
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 ```
 
-:::note Media version 2
+:::note[Media version 2]
 Media tracking has [multiple versions](/docs/sources/web-trackers/tracking-events/media/index.md) of schemas available.
 This document is for version 2 of the schemas; tracker versions earlier than v0.3.0 [only support v1 tracking](/docs/sources/roku-tracker/media-tracking/v1/index.md).
 :::

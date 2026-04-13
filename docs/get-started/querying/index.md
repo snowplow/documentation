@@ -77,7 +77,7 @@ To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.sno
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-:::info Azure-specific instructions
+:::info[Azure-specific instructions]
 
 On Azure, you have created an external table in the [last step of the guide](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
 
@@ -98,7 +98,7 @@ In Synapse Analytics, you can connect directly to the data residing in ADLS. You
 
 Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
 
-:::tip Fabric and OneLake
+:::tip[Fabric and OneLake]
 
 If you created a OneLake shortcut in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
 

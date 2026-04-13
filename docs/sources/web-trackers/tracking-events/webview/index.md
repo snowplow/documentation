@@ -158,6 +158,6 @@ newTracker('sp1', '{{collector_url}}', {
 </TabItem>
 </Tabs>
 
-:::warning Specifying namespaces
+:::warning[Specifying namespaces]
 When a mobile interface is available, the web tracker will forward the event rather than tracking it. If you specify namespaces in the configuration, and no mobile trackers actually exist with those namespaces, the event will be lost.
 :::

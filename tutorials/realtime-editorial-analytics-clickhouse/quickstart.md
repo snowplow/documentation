@@ -114,7 +114,7 @@ Shut down and delete all running containers:
 docker-compose down
 ```
 
-:::tip Deleting ClickHouse data
+:::tip[Deleting ClickHouse data]
 There will still be data in your ClickHouse Cloud account. If you want to delete the generated data, run the following command in ClickHouse's SQL Console:
 ```sql
 DROP TABLE snowplow_article_interactions

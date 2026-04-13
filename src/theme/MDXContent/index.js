@@ -47,7 +47,8 @@ export default function MDXContentWrapper(props) {
     )
   }
 
-  const frontMatter = docMetadata?.frontMatter ?? docMetadata?.metadata?.frontMatter
+  const frontMatter =
+    docMetadata?.frontMatter ?? docMetadata?.metadata?.frontMatter
   const isExternalLink = frontMatter?.type === 'link' && frontMatter?.href
 
   return (
@@ -60,8 +61,8 @@ export default function MDXContentWrapper(props) {
       {admonitions}
       {isExternalLink ? (
         <p>
-          This page links to an external resource. Visit it
-          at: <a href={frontMatter.href}>{frontMatter.href}</a>
+          This page links to an external resource at{' '}
+          <a href={frontMatter.href}>{frontMatter.href}</a>
         </p>
       ) : (
         <MDXContent {...props} />

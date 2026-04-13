@@ -34,6 +34,8 @@ Create a file called `.env` with your credentials from the notebook. Include you
   <TabItem value="cdi" label="CDI" default>
 
 ```bash
+AI_MODEL_PROVIDER=bedrock
+AI_MODEL_NAME=us.anthropic.claude-sonnet-4-20250514-v1:0
 AWS_REGION=us-west-2
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
@@ -50,6 +52,8 @@ SNOWPLOW_SIGNALS_SERVICE_NAME=travel_service
   <TabItem value="sandbox" label="Sandbox">
 
 ```bash
+AI_MODEL_PROVIDER=bedrock
+AI_MODEL_NAME=us.anthropic.claude-sonnet-4-20250514-v1:0
 AWS_REGION=us-west-2
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key

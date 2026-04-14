@@ -10,54 +10,56 @@ function toResponse(redirect, url) {
 
 const SNOWPLOW_ENDPOINT = "https://c.snowplow.io/com.snowplowanalytics.snowplow/tp2"
 
-function trackRequest(pathname) {
+const forwardHeaders = [
+  "referer",
+  "signature-agent",
+  "signature-input",
+  "signature"
+]
+
+function shouldTrackRequest(pathname) {
   const dotIndex = pathname.lastIndexOf('.');
   if (dotIndex === -1 || dotIndex < pathname.lastIndexOf('/')) return true;
   return pathname.endsWith('.md') || pathname.endsWith('llms.txt');
+}
+
+async function trackRequest(request) {
+  const headers = {
+    "content-type": "application/json",
+    "sp-anonymous": "*",
+  };
+  for (const name of forwardHeaders) {
+    const value = request.headers.get(name);
+    if (value) headers[name] = value;
+  }
+
+  const payload = {
+    schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
+    data: [
+      {
+        e: "pv",
+        ua: request.headers.get("user-agent"),
+        aid: "docs-cloudflare",
+        p: "srv",
+        tv: "cf-worker-1.0.0",
+        url: request.url
+      }
+    ]
+  };
+
+  await fetch(SNOWPLOW_ENDPOINT, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload)
+  });
 }
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    if (trackRequest(url.pathname)) {
-      const headers = {
-        "content-type": "application/json",
-        "SP-Anonymous": "*",
-      };
-      for (const name of ["signature-agent", "signature-input", "signature"]) {
-        const value = request.headers.get(name);
-        if (value) headers[name] = value;
-      }
-
-      const payload = {
-        schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
-        data: [
-          {
-            e: "pv",
-            ua: request.headers.get("user-agent"),
-            aid: "docs-cloudflare",
-            p: "srv",
-            tv: "cf-worker-1.0.0",
-            url: request.url
-          }
-        ]
-      };
-
-      ctx.waitUntil(
-        (async () => {
-          try {
-            await fetch(SNOWPLOW_ENDPOINT, {
-              method: "POST",
-              headers,
-              body: JSON.stringify(payload)
-            });
-            console.log("Sent Snowplow event")
-          } catch (e) {
-            console.warn("Error sending Snowplow event", e)
-          }
-        })()
-      )
+    if (shouldTrackRequest(url.pathname)) {
+      ctx.waitUntil(trackRequest(request));
     }
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);

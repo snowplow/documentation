@@ -44,13 +44,20 @@ export default {
         ]
       };
 
-      ctx.waitUntil(fetch(
-        SNOWPLOW_ENDPOINT, {
-          method: "POST",
-          headers,
-          body: JSON.stringify(payload)
-        })
-      );
+      ctx.waitUntil(
+        (async () => {
+          try {
+            await fetch(SNOWPLOW_ENDPOINT, {
+              method: "POST",
+              headers,
+              body: JSON.stringify(payload)
+            });
+            console.log("Sent Snowplow event")
+          } catch (e) {
+            console.warn("Error sending Snowplow event", e)
+          }
+        })()
+      )
     }
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);

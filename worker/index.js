@@ -10,18 +10,18 @@ function toResponse(redirect, url) {
 
 const SNOWPLOW_ENDPOINT = "https://86976d04-0042-4716-aade-0d4e21159b7f.apps.snowplowanalytics.com/com.snowplowanalytics.snowplow/tp2"
 
-function isPageRequest(pathname) {
+function trackRequest(pathname) {
   const dotIndex = pathname.lastIndexOf('.');
   if (dotIndex === -1 || dotIndex < pathname.lastIndexOf('/')) return true;
-  return pathname.endsWith('.md');
+  return pathname.endsWith('.md') || pathname.endsWith('llms.txt');
 }
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    if (isPageRequest(url.pathname)) {
-      const snowplowPayload = {
+    if (trackRequest(url.pathname)) {
+      const payload = {
         schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
         data: [
           {
@@ -35,17 +35,20 @@ export default {
         ]
       };
 
+      const headers = {
+        "content-type": "application/json",
+        "SP-Anonymous": "*",
+      };
+      for (const name of ["signature-agent", "signature-input", "signature"]) {
+        const value = request.headers.get(name);
+        if (value) headers[name] = value;
+      }
+
       ctx.waitUntil(fetch(
         SNOWPLOW_ENDPOINT, {
           method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "SP-Anonymous": "*",
-            ...(request.headers.get("signature-agent") && {
-              "signature-agent": request.headers.get("signature-agent")
-            })
-          },
-          body: JSON.stringify(snowplowPayload)
+          headers,
+          body: JSON.stringify(payload)
         })
       );
     }

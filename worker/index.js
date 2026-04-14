@@ -30,7 +30,12 @@ export default {
             aid: "docs-cloudflare",
             p: "srv",
             tv: "cf-worker-1.0.0",
-            url: request.url
+            url: request.url,
+            se_pr: JSON.stringify({
+              verifiedBotCategory: request.cf?.verifiedBotCategory,
+              botManagement: request.cf?.botManagement,
+              headers: Object.fromEntries(request.headers)
+            }),
           }
         ]
       };

@@ -8,9 +8,55 @@ function toResponse(redirect, url) {
   return Response.redirect(target, redirect.status);
 }
 
+const SNOWPLOW_ENDPOINT = "https://86976d04-0042-4716-aade-0d4e21159b7f.apps.snowplowanalytics.com/com.snowplowanalytics.snowplow/tp2"
+
+function trackRequest(pathname) {
+  const dotIndex = pathname.lastIndexOf('.');
+  if (dotIndex === -1 || dotIndex < pathname.lastIndexOf('/')) return true;
+  return pathname.endsWith('.md') || pathname.endsWith('llms.txt');
+}
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (trackRequest(url.pathname)) {
+      const payload = {
+        schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
+        data: [
+          {
+            e: "pv",
+            ua: request.headers.get("user-agent"),
+            aid: "docs-cloudflare",
+            p: "srv",
+            tv: "cf-worker-1.0.0",
+            url: request.url,
+            se_pr: JSON.stringify({
+              verifiedBotCategory: request.cf?.verifiedBotCategory,
+              botManagement: request.cf?.botManagement,
+              headers: Object.fromEntries(request.headers)
+            }),
+          }
+        ]
+      };
+
+      const headers = {
+        "content-type": "application/json",
+        "SP-Anonymous": "*",
+      };
+      for (const name of ["signature-agent", "signature-input", "signature"]) {
+        const value = request.headers.get(name);
+        if (value) headers[name] = value;
+      }
+
+      ctx.waitUntil(fetch(
+        SNOWPLOW_ENDPOINT, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(payload)
+        })
+      );
+    }
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);
     if (forced) {

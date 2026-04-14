@@ -1,4 +1,5 @@
 {
+  // Test: trigger build notification
   "name": "documentation",
   "compatibility_date": "2026-02-27",
   "main": "worker/index.js",

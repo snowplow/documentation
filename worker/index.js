@@ -20,7 +20,7 @@ export default {
 
     const response = await env.ASSETS.fetch(request);
     if (response.status !== 404) {
-      console.log(`${request.method} ${url.pathname} -> ${response.status}`);
+      console.log(`${request.method} ${url.pathname} -> ${response.status} (asset)`);
       return response;
     }
 

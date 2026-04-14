@@ -10,18 +10,25 @@ function toResponse(redirect, url) {
 
 const SNOWPLOW_ENDPOINT = "https://c.snowplow.io/com.snowplowanalytics.snowplow/tp2"
 
+const forwardHeaders = [
+  "referer",
+  "signature-agent",
+  "signature-input",
+  "signature"
+]
+
 function shouldTrackRequest(pathname) {
   const dotIndex = pathname.lastIndexOf('.');
   if (dotIndex === -1 || dotIndex < pathname.lastIndexOf('/')) return true;
   return pathname.endsWith('.md') || pathname.endsWith('llms.txt');
 }
 
-function trackRequest(request, ctx) {
+async function trackRequest(request) {
   const headers = {
     "content-type": "application/json",
-    "SP-Anonymous": "*",
+    "sp-anonymous": "*",
   };
-  for (const name of ["referer", "signature-agent", "signature-input", "signature"]) {
+  for (const name of forwardHeaders) {
     const value = request.headers.get(name);
     if (value) headers[name] = value;
   }
@@ -40,20 +47,11 @@ function trackRequest(request, ctx) {
     ]
   };
 
-  ctx.waitUntil(
-    (async () => {
-      try {
-        const sent = await fetch(SNOWPLOW_ENDPOINT, {
-          method: "POST",
-          headers,
-          body: JSON.stringify(payload)
-        });
-        console.log("Sent Snowplow event", sent.status);
-      } catch (e) {
-        console.warn("Error sending Snowplow event", e);
-      }
-    })()
-  )
+  await fetch(SNOWPLOW_ENDPOINT, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload)
+  });
 }
 
 export default {
@@ -61,7 +59,7 @@ export default {
     const url = new URL(request.url);
 
     if (shouldTrackRequest(url.pathname)) {
-      trackRequest(request, ctx);
+      ctx.waitUntil(trackRequest(request));
     }
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);

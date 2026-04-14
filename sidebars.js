@@ -155,12 +155,15 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
       descriptions[docItem.id] = docItem.frontMatter.description
     }
     if (docItem.frontMatter.type === 'link') {
+      // Mutate the original frontMatter so useDoc() picks up noindex at render time.
+      // This is intentional — the spread into linkItems below copies the updated reference.
+      docItem.frontMatter.sidebar_custom_props = {
+        ...(docItem.frontMatter.sidebar_custom_props || {}),
+        noindex: true,
+      }
+
       linkItems[docItem.id] = {
         ...docItem.frontMatter,
-        sidebar_custom_props: {
-          ...(docItem.frontMatter.sidebar_custom_props || {}),
-          noindex: true,
-        },
       }
     }
   }

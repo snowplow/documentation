@@ -420,6 +420,7 @@ const fallbackRules = [
   ['/docs/event-studio/mcp-server/*', '/docs/llms-support/mcp-server/:splat', 301],
   // Bot filtering moved to events section
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
+  ['/deprecation-policy', '/lifecycle-policy', 301],
 ];
 
 function findInRules(rules, pathname) {

@@ -54,12 +54,12 @@ The attributes are based on these content tags:
 ```python
 cultural_explorer_tags = ["culture", "history", "heritage", "ancient", "temples", "art", "traditional"]
 modern_urbanite_tags = ["urban", "nightlife", "shopping", "modern", "architecture"]
-tranquil_seeker_tags = ["nature", "peaceful", "wellness", "beaches", "mountains", "river", "wellness"]
+tranquil_seeker_tags = ["nature", "peaceful", "beaches", "mountains", "river", "wellness"]
 family_fun_tags = ["family-friendly", "beaches", "nature", "food", "mountains", "culture"]
 culinary_tourist_tags = ["food", "street food", "multicultural", "traditional", "urban", "shopping"]
 ```
 
-The notebook defines these counter attributes:
+The notebook defines these `counter` attributes:
 
 * `page_view_count`
 * `dest_page_view_count`

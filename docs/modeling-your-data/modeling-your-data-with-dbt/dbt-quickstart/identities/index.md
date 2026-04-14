@@ -17,12 +17,12 @@ This guide walks you through setting up the [Snowplow Identities dbt package](/d
 
 ## Installation
 
-Add the package to your `packages.yml`:
+Add the package from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-identities) to your `packages.yml`:
 
 ```yaml title="packages.yml"
 packages:
-  - package: snowplow/snowplow_identities
-    version: [">=0.1.0", "<0.2.0"]
+  - git: "https://github.com/snowplow-incubator/dbt-snowplow-identities.git"
+    revision: "main"
 ```
 
 Then run:

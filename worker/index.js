@@ -13,14 +13,24 @@ export default {
     const url = new URL(request.url);
 
     const forced = toResponse(findForcedRedirect(url.pathname), url);
-    if (forced) return forced;
+    if (forced) {
+      console.log(`${request.method} ${url.pathname} -> ${forced.status} (redirect)`);
+      return forced;
+    }
 
     const response = await env.ASSETS.fetch(request);
-    if (response.status !== 404) return response;
+    if (response.status !== 404) {
+      console.log(`${request.method} ${url.pathname} -> ${response.status}`);
+      return response;
+    }
 
     const fallback = toResponse(findFallbackRedirect(url.pathname), url);
-    if (fallback) return fallback;
+    if (fallback) {
+      console.log(`${request.method} ${url.pathname} -> ${fallback.status} (fallback redirect)`);
+      return fallback;
+    }
 
+    console.log(`${request.method} ${url.pathname} -> 404`);
     return response;
   },
 };

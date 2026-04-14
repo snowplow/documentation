@@ -8,7 +8,7 @@ function toResponse(redirect, url) {
   return Response.redirect(target, redirect.status);
 }
 
-const SNOWPLOW_ENDPOINT = "https://com-snowplowanalytics-biz1.collector.snplow.net/com.snowplowanalytics.snowplow/tp2"
+const SNOWPLOW_ENDPOINT = "https://c.snowplow.io/com.snowplowanalytics.snowplow/tp2"
 
 const forwardHeaders = [
   "referer",
@@ -47,11 +47,16 @@ async function trackRequest(request) {
     ]
   };
 
-  await fetch(SNOWPLOW_ENDPOINT, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(payload)
-  });
+  try {
+    const resp = await fetch(SNOWPLOW_ENDPOINT, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(payload),
+    });
+    console.log(`Snowplow ${resp.status}: ${await resp.text()}`);
+  } catch (err) {
+    console.error(`Snowplow error: ${err.message}`);
+  }
 }
 
 export default {

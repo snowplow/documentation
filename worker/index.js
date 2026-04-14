@@ -21,6 +21,15 @@ export default {
     const url = new URL(request.url);
 
     if (trackRequest(url.pathname)) {
+      const headers = {
+        "content-type": "application/json",
+        "SP-Anonymous": "*",
+      };
+      for (const name of ["signature-agent", "signature-input", "signature"]) {
+        const value = request.headers.get(name);
+        if (value) headers[name] = value;
+      }
+
       const payload = {
         schema: "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
         data: [
@@ -32,22 +41,12 @@ export default {
             tv: "cf-worker-1.0.0",
             url: request.url,
             se_pr: JSON.stringify({
-              verifiedBotCategory: request.cf?.verifiedBotCategory,
-              botManagement: request.cf?.botManagement,
-              headers: Object.fromEntries(request.headers)
+              headers: Object.fromEntries(request.headers),
+              sendHeaders: headers
             }),
           }
         ]
       };
-
-      const headers = {
-        "content-type": "application/json",
-        "SP-Anonymous": "*",
-      };
-      for (const name of ["signature-agent", "signature-input", "signature"]) {
-        const value = request.headers.get(name);
-        if (value) headers[name] = value;
-      }
 
       ctx.waitUntil(fetch(
         SNOWPLOW_ENDPOINT, {

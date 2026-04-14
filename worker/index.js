@@ -8,7 +8,7 @@ function toResponse(redirect, url) {
   return Response.redirect(target, redirect.status);
 }
 
-const SNOWPLOW_ENDPOINT = "https://86976d04-0042-4716-aade-0d4e21159b7f.apps.snowplowanalytics.com/com.snowplowanalytics.snowplow/tp2"
+const SNOWPLOW_ENDPOINT = "https://c.snowplow.io/com.snowplowanalytics.snowplow/tp2"
 
 function trackRequest(pathname) {
   const dotIndex = pathname.lastIndexOf('.');
@@ -39,11 +39,7 @@ export default {
             aid: "docs-cloudflare",
             p: "srv",
             tv: "cf-worker-1.0.0",
-            url: request.url,
-            se_pr: JSON.stringify({
-              headers: Object.fromEntries(request.headers),
-              sendHeaders: headers
-            }),
+            url: request.url
           }
         ]
       };

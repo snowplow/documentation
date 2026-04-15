@@ -46,11 +46,13 @@ The command outputs a diff showing the available version updates:
 ```
 
 
-You can then choose to accept the updates and regenerate your tracking code. To skip the confirmation prompt and automatically update and regenerate, use the `--yes` flag:
+You can then choose to accept the updates. To skip the confirmation prompt and automatically update your Snowtype configuration file, use the `--yes` flag:
 
 ```bash
 npx snowtype update --yes
 ```
+
+Your code won't be regenerated until you run `snowtype generate` again, unless you've configured [`regenerateOnUpdate`](/docs/event-studio/implement-tracking/configuration-reference/index.md#update) in your configuration file.
 
 ### Update based on SchemaVer level
 
@@ -121,6 +123,8 @@ Use the `--yes` flag to automatically accept all updates and regenerate the lock
 ℹ (caution: will overwrite the configuration file)
 ```
 
+Your code won't be regenerated until you run `snowtype generate` again, unless you've configured [`regenerateOnUpdate`](/docs/event-studio/implement-tracking/configuration-reference/index.md#update) in your configuration file.
+
 ### Include draft versions
 
 By default, `update` only checks published event specification versions. If Snowtype isn't detecting your event specification, it might be because it's still in draft mode.
@@ -159,10 +163,11 @@ This is a risky operation. Make sure to commit your lock file beforehand, so you
 
 You can run Snowtype in a CI/CD pipeline to catch outdated tracking code before it reaches production. A typical approach:
 
-1. Run `snowtype update --yes` to check for updates and regenerate if any are found.
-2. If the generated output changes, fail the pipeline or open a pull request with the updated code.
+1. Run `snowtype update --yes` to check for updates, and regenerate the configuration file or lock file if any are found
+2. Generate the tracking code with `snowtype generate`
+3. If the generated output changes, fail the build or open a pull request with the updated code
 
-The `--yes` flag runs non-interactively, accepting all available updates and regenerating automatically.
+The `--yes` flag runs non-interactively, accepting all available updates.
 
 Combine this with [`--disallowDevSchemas`](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) on the `generate` step to also prevent development-only schemas from reaching production:
 

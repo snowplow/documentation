@@ -157,5 +157,5 @@ You can pass in the path to the data structures directly, or the Snowplow CLI di
 Provide the path relative to the location of your configuration file.
 
 :::note[Snowtype limitation]
-Snowtype can **only** create tracking code for local data structures, not for local tracking plans (data products).
+Snowtype can only create tracking code for local data structures, not for local tracking plans (data products).
 :::

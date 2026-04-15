@@ -31,7 +31,7 @@ On mobile, the following [user and session identifiers](/docs/events/ootb-data/u
 * Server-side user identifiers:
   * `network_userid` and `user_ipaddress`, set by the [Collector](/docs/pipeline/collector/index.md)
 
-:::note User-set properties
+:::note[User-set properties]
 The Collector captures the IP address from the request HTTP headers, and updates the `user_ipaddress` event property. However, if you set the `user_ipaddress` property in the `Subject`, that value has priority.
 
 Similarly, if you set the `network_userid` property in the `Subject`, that value is used instead of the Collector cookie value.

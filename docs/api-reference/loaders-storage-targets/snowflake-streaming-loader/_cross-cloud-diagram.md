@@ -5,7 +5,7 @@ import TabItem from '@theme/TabItem';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/_diagram.md';
 ```
 
-:::note Cloud
+:::note[Cloud]
 
 The cloud selection below is for your _pipeline_. We don’t have restrictions on where Snowflake itself is deployed.
 

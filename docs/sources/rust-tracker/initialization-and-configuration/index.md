@@ -63,7 +63,10 @@ let event_store = InMemoryEventStore::builder()
     .build()?;
 ```
 
-:::warning Events in the `InMemoryEventStore` will be lost if the process is unexpectedly terminated.
+:::warning
+
+Events in the `InMemoryEventStore` will be lost if the process is unexpectedly terminated.
+
 :::
 
 ## HTTP Client
@@ -78,7 +81,10 @@ let emitter = BatchEmitter::builder()
     .build()?;
 ```
 
-:::note This is an async trait. The [async-trait](https://github.com/dtolnay/async-trait) crate is used until async traits are supported in stable Rust.
+:::note
+
+This is an async trait. The [async-trait](https://github.com/dtolnay/async-trait) crate is used until async traits are supported in stable Rust.
+
 :::
 
 ### Reqwest Client

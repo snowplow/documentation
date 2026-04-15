@@ -7,7 +7,7 @@ description: "Configure event mapping, user properties, entity rules, and sessio
 keywords: ["Amplitude Tag configuration", "event mapping", "user properties", "session tracking"]
 ---
 
-:::tip Populating the Amplitude Session ID
+:::tip[Populating the Amplitude Session ID]
 
 The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/sources/web-trackers/tracking-events/session/index.md) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
 

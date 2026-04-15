@@ -66,7 +66,7 @@ window.snowplow('trackPageView', {
 
 See the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page to learn how entity data is structured in the data warehouse.
 
-:::info Deprecated terminology
+:::info[Deprecated terminology]
 In the past, what we now call "entity" or "entities" was called "context". You'll still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities. For example, the `context` parameter in the JavaScript tracker API above is an array of entities.
 :::
 
@@ -84,7 +84,7 @@ Use [source applications](/docs/event-studio/source-applications/index.md) to do
 
 ## Structured events
 
-:::info Use self-describing events instead
+:::info[Use self-describing events instead]
 Structured event tracking is a legacy format used to track events that weren't natively supported by Snowplow.
 
 We recommend using self-describing events for custom event tracking.

@@ -41,12 +41,12 @@ def __init__(
     )-> None:
 ```
 
-:::note Prior to v0.12.0
+:::note[Prior to v0.12.0]
 
 Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively. 
 
 :::
-:::note Prior to v0.13.0
+:::note[Prior to v0.13.0]
 
 Before version 0.13.0 `batch_size` was named `buffer_size`
 
@@ -74,7 +74,7 @@ See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for mo
 
 `protocol` defaults to "https" but also supports "http".
 
-:::note Prior to v0.12.0
+:::note[Prior to v0.12.0]
 
 In older versions, `protocol` defaulted to `http`.
 
@@ -82,7 +82,7 @@ In older versions, `protocol` defaulted to `http`.
 
 - `batch_size`
 
-:::note Prior to v0.13.0
+:::note[Prior to v0.13.0]
 
 In older versions, `batch_size` was named `buffer_size`.
 
@@ -98,7 +98,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 `on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were successfully sent.
 
-:::note New in v0.9.0
+:::note[New in v0.9.0]
 
 Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
 
@@ -142,7 +142,7 @@ t.track_page_view("http://www.example.com/page1")
 t.track_page_view("http://www.example.com/page2")
 ```
 
-:::note New in v0.10.0
+:::note[New in v0.10.0]
 
 Since version 0.10.0, the constructor takes another `request_timeout` argument.
 
@@ -151,7 +151,7 @@ Since version 0.10.0, the constructor takes another `request_timeout` argument.
 
 Timeout for HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately.
 
-:::note New in v0.13.0
+:::note[New in v0.13.0]
 
 Since version 0.13.0, the constructor takes another `max_retry_delay_seconds` argument.
 
@@ -160,7 +160,7 @@ Since version 0.13.0, the constructor takes another `max_retry_delay_seconds` ar
 
 The maximum time between attempts to send failed events to the collector. 
 
-:::note New in v0.13.0
+:::note[New in v0.13.0]
 
 Since version 0.13.0, the constructor takes another `buffer_capacity` argument.
 
@@ -169,7 +169,7 @@ Since version 0.13.0, the constructor takes another `buffer_capacity` argument.
 
 The maximum capacity of the event buffer. When the buffer is full new events are lost.
 
-:::note New in v0.13.0
+:::note[New in v0.13.0]
 
 Since version 0.13.0, the constructor takes another `custom_retry_codes` argument.
 
@@ -178,7 +178,7 @@ Since version 0.13.0, the constructor takes another `custom_retry_codes` argumen
 
 Custom retry rules for HTTP status codes received in emit responses from the Collector. By default, retry will not occur for status codes 400, 401, 403, 410 or 422. This can be overridden here by parsing a dictionary of status codes and booleans.
 
-:::note New in v0.13.0
+:::note[New in v0.13.0]
 
 Since version 0.13.0, the constructor takes another `event_store` argument.
 
@@ -187,7 +187,7 @@ Since version 0.13.0, the constructor takes another `event_store` argument.
 
 The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfully emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
 
-:::note New in v0.15.0
+:::note[New in v0.15.0]
 
 Since version 0.15.0, the constructor takes another `session` argument.
 
@@ -196,7 +196,7 @@ Since version 0.15.0, the constructor takes another `session` argument.
 The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy usage. If no `session` is parsed, the requests API is used.
 
 ## What happens if an event fails to send?
-:::note New in v0.13.0
+:::note[New in v0.13.0]
 Retry capabilities are new in v0.13.0
 :::
 After trying to send a batch of events the collector will return an http status code. A 2xx code is always considered successful. If a failure code is returned (anything other than 2xx, with certain exceptions, see below), the events (as PayloadDictList objects) are returned to the buffer. They will be retried in future sending attempts. 

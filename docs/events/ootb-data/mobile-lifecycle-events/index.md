@@ -28,7 +28,7 @@ This table shows the support for mobile application install tracking across the 
 | Roku                                                                                              | ❌         |               |               |                                 |
 | Google Tag Manager                                                                                | ❌         |               |               |                                 |
 
-:::note No uninstall events
+:::note[No uninstall events]
 It's not possible to track when an app is uninstalled, since the mobile platforms don't provide a callback where such an event could be tracked.
 :::
 

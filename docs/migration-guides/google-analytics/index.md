@@ -174,7 +174,7 @@ You'll need to translate your GA4 event configuration into Snowplow [tracking pl
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
 
-:::info Snowplow CLI MCP server
+:::info[Snowplow CLI MCP server]
 The Snowplow CLI includes an [MCP server](/docs/event-studio/programmatic-management/snowplow-cli/index.md#mcp-server) to help you translate your GA4 event configuration into Snowplow tracking plans.
 :::
 
@@ -194,7 +194,7 @@ Follow the [Snowplow CDI getting started instructions](/docs/get-started/private
 If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
 Use the Snowplow CLI or Console to publish.
 
-:::info Snowplow Micro
+:::info[Snowplow Micro]
 Use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to test and validate your Snowplow events locally, before sending them to your warehouse.
 
 Snowplow Micro is a Dockerized local pipeline. It uses the same schema registry for event validation as your production pipeline.

@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::warning
+:::note
 Privacy Sandbox has been deprecated by Google. This plugin remains available but the underlying browser API may no longer be supported.
 :::
 

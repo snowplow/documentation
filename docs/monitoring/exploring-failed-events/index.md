@@ -15,7 +15,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 />
 ```
 
-:::note Compatibility
+:::note[Compatibility]
 
 This feature is available since Enrich 5.0.0 and works with:
 * Snowflake Streaming Loader
@@ -105,7 +105,7 @@ To use this feature, you will first need to enable the stream that contains fail
 
 The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 
-:::note Infrastructure costs
+:::note[Infrastructure costs]
 
 An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/index.md#cdi-cloud)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
 
@@ -132,7 +132,7 @@ Pick your desired destination and follow the steps in the UI, selecting _“fail
 
 Note that as with any other loader, you will first need to create a connection to your warehouse or lake, and then the loader itself.
 
-:::warning PII in failed events
+:::warning[PII in failed events]
 
 Some of the problems that cause failed events could lead them to contain personally identifiable information (PII). For example, a validation error could stem from PII placed in the wrong field, and that field might not be pseudonymized, leaving PII exposed in the error message. Or the [PII enrichment](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md) itself might have failed.
 

@@ -31,7 +31,7 @@ This table shows the [user and session identifiers](/docs/events/ootb-data/user-
 
 You can set some of these properties at [tracker initialization](/docs/sources/flutter-tracker/initialization-and-configuration/index.md).
 
-:::note Network properties on mobile
+:::note[Network properties on mobile]
 The Collector captures the IP address from the request HTTP headers, and updates the `user_ipaddress` event property. However, if you set the `user_ipaddress` property at initialization, that value has priority.
 
 Similarly, if you set the `network_userid` property, that value is used instead of the Collector cookie value.

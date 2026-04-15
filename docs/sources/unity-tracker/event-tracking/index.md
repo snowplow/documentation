@@ -233,7 +233,7 @@ Arguments:
 | `timestamp`      | Optional timestamp              | No            | `long`                           |
 | `eventId`        | Optional custom event id        | No            | `string`                         |
 
-The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction. Note that `Track(EcommerceTransaction)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`.
+The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the ecommerce transaction. Note that `Track(EcommerceTransaction)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`.
 
 Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 

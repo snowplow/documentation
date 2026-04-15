@@ -7,7 +7,7 @@ description: "Configure IP forwarding, sp.js hosting, custom paths, common event
 keywords: ["Snowplow Client configuration", "common event mapping", "entity merging", "sp.js hosting"]
 ---
 
-:::tip Populating common User Data
+:::tip[Populating common User Data]
 
 The [GTM Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) has a `user_data` property. To populate this, you can attach a context Entity to your events of this schema: `iglu:com.google.tag-manager.server-side/user_data/jsonschema/1-0-0`, which can be found on [Iglu Central](https://github.com/snowplow/iglu-central/blob/853357452300b172ebc113d1d75d1997f595142a/schemas/com.google.tag-manager.server-side/user_data/jsonschema/1-0-0).
 

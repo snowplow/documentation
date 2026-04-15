@@ -41,7 +41,7 @@ The Snowplow media tracking APIs enable you to track events from media playback 
 
 For details on the events and entities tracked, see the [media tracking overview](/docs/events/ootb-data/media-events/index.md).
 
-:::info Example app
+:::info[Example app]
 See the tracked media events and entities live as you watch a video in our [React example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media). [View the source code](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react).
 :::
 

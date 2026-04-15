@@ -9,7 +9,7 @@ keywords: ["cross-domain tracking", "link decoration", "user identity", "cross-n
 
 When users navigate between different domains in your ecosystem, their user identity may get fragmented. Examples include navigation from your main website to a partner site, or to a mobile app. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
 
-:::info Web subdomains
+:::info[Web subdomains]
 This problem doesn't usually apply for navigation between web subdomains, for example between `www.example.com` and `blog.example.com`. This is because the web trackers have `discoverRootDomain` [enabled by default](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 :::
 
@@ -66,3 +66,9 @@ This table shows the support for cross-domain tracking across the main client-si
 | [Android](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) | ✅         | 6.0.0         |
 | React Native                                                                                                                                 | ❌         |               |
 | Flutter                                                                                                                                      | ❌         |               |
+
+## Identities and cross-navigation tracking
+
+[Snowplow Identities](/docs/identities/index.md) provides real-time identity resolution, stitching together user identifiers from different events into unified profiles.
+
+Cross-navigation tracking is directly supported within Identities. If you enable [cross-domain tracking support](/docs/identities/concepts/cross-domain-tracking/index.md), Identities will automatically treat `refr_domain_userid` as equivalent to `domain_userid`. The result is that all of a user's activity across your domains — anonymous or authenticated — resolves to the same `snowplow_id`, without any downstream modeling to join the identifiers yourself.

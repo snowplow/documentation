@@ -10,7 +10,7 @@ keywords: ["java tracker v0.12 installation", "maven setup", "gradle configurati
 
 The Snowplow Java tracker ([GitHub](https://github.com/snowplow/snowplow-java-tracker)) has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala.
 
-:::info These pages are for version 0.12
+:::info[These pages are for version 0.12]
 See [here](/docs/sources/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
 

@@ -12,7 +12,7 @@ import HowLoadingWorks from '../_how-loading-works.mdx';
 import SingleTableFormat from '../_single-table-format.mdx';
 ```
 
-:::info Cloud availability
+:::info[Cloud availability]
 
 The BigQuery integration is available for Snowplow pipelines running on **AWS** and **GCP**.
 

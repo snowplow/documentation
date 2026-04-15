@@ -44,9 +44,13 @@ YouTube media events and entities are **automatically tracked** once configured.
 
 The snippets below show how to get started with the plugin, after [setting up your tracker](../../../tracker-setup/index.md).
 
-:::info The plugin's `id` attribute will accept:
+:::info
+
+The plugin's `id` attribute will accept:
+
 - The `id` of an `iframe` element
 - An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
+
 :::
 
 1. `iFrame`

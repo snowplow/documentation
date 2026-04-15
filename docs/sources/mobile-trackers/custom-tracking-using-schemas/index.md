@@ -17,13 +17,13 @@ Self-describing (self-referential) JSON schemas are at the core of Snowplow trac
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach entities to any tracked event.
 The entities can describe the context in which the event happen or provide extra information to better describe the event.
 
-<!-- [Here](TODO) are some more details on what events and entities are. -->
+{/* [Here](TODO) are some more details on what events and entities are. */}
 
 ## Tracking a custom event (SelfDescribing)
 
 You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by Structured events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
-<!-- [Here](TODO) are some more details on how to create a custom entity. -->
+{/* [Here](TODO) are some more details on how to create a custom entity. */}
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -76,7 +76,7 @@ See the full configuration and parameter options for all these classes and metho
 Custom entities can be used to augment any standard Snowplow event type with additional data.
 Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom entity, you must create a JSON schema.
 
-<!-- [Here](TODO) some more details on how to create a custom entity. -->
+{/* [Here](TODO) some more details on how to create a custom entity. */}
 
 Note: Even if only one custom entity is being attached to an event, it still needs to be wrapped in an array.
 

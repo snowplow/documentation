@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 ```
 
-<!-- Note the following tables are wrapped in the additional tags to correctly render the package version, but work the same as normal markdown tables -->
+{/* Note the following tables are wrapped in the additional tags to correctly render the package version, but work the same as normal markdown tables */}
 
 <Tabs groupId="dbt-packages" queryString>
 

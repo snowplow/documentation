@@ -110,6 +110,6 @@ await Snowplow.removeGlobalContexts(
 );
 ```
 
-:::note Version support
+:::note[Version support]
 Global context was added in 0.9.0. In this release, only static context entities are supported.
 :::

@@ -100,7 +100,7 @@ sidebar_custom_props:
 
 ## Build with Snowplow
 
-:::tip More resources
+:::tip[More resources]
 
 Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
 

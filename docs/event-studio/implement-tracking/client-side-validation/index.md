@@ -14,7 +14,7 @@ When enabled, every event sent through Snowtype generated code is checked agains
 - **Cardinality rules**: does the event include the correct number of each entity, as defined in the event specification?
 - **Property rules**: do entity values match the constraints defined in the event specification?
 
-:::info Only for Browser tracker
+:::info[Only for Browser tracker]
 This feature is available for the [Browser tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) only, in both JavaScript and TypeScript.
 :::
 
@@ -255,7 +255,7 @@ This is useful for:
 - Unit testing: throw an `Error` so that tests fail automatically when a violation occurs
 - Error monitoring: report violations to a service like Sentry in staging or production
 
-:::tip Automatic errors
+:::tip[Automatic errors]
 When `NODE_ENV` is set to `test`, as many testing libraries do automatically, the default handler throws an `Error` instead of logging a warning. This means tracking violations will cause your tests to fail without any extra configuration.
 :::
 

@@ -6,8 +6,6 @@ description: "Configure Snowtype code generation with options for output paths, 
 keywords: ["Snowtype configuration", "config options", "code generation settings", "Snowtype setup"]
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
 Snowtype reads from the configuration file you created with `snowtype init` to determine which schemas to generate code for, and what language the code should be generated in. You can combine multiple source types in a single configuration.
@@ -158,6 +156,6 @@ You can pass in the path to the data structures directly, or the Snowplow CLI di
 
 Provide the path relative to the location of your configuration file.
 
-:::note Snowtype limitation
+:::note[Snowtype limitation]
 Snowtype can **only** create tracking code for local data structures, not for local tracking plans (data products).
 :::

@@ -66,7 +66,7 @@ To create the variable:
 
 ![Creating a Custom JavaScript variable in GTM with Snowtype-generated code](./images/gtm-var.gif)
 
-:::note Size limit
+:::note[Size limit]
 
 GTM limits Custom JavaScript variables to 20,000 characters. If your generated code exceeds this limit, Snowtype will warn you. Use the `snowplow.minified.js` file instead, which Snowtype generates automatically alongside the full version. If the minified version still exceeds the limit, you can split the code across multiple variables or place it directly in a Custom HTML tag.
 

@@ -98,6 +98,7 @@ The command will prompt you for:
 - Your **organization ID** from Console
 - The **tracker** you want to generate code for, e.g. `@snowplow/browser-tracker`
 - The **language** for that tracker, if applicable, e.g. `typescript`
+- The **format** (language) you want the configuration file to be in
 - The **output path** where Snowtype should write the generated code
 
 Snowtype saves these choices to a `snowtype.config.json` file in your project root. You can edit this file directly later, or pass the values as flags to skip the prompts. See the [configuration reference](/docs/event-studio/implement-tracking/configuration-reference/index.md) for all available options.

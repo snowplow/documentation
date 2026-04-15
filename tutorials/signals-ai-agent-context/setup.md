@@ -1,15 +1,17 @@
 ---
-title: "Set up the project"
+title: "Set up the Next.js project"
 position: 2
-sidebar_label: "Project setup"
+sidebar_label: "Set up the project"
 description: "Scaffold a Next.js project and install the required dependencies for Snowplow tracking, Signals, and the Vercel AI SDK."
 keywords: ["next.js setup", "vercel ai sdk", "snowplow browser tracker", "project scaffold"]
 date: "2026-04-10"
 ---
 
-First, create (or use an existing) Next.js project and install all dependencies.
+First, you'll need to create a Next.js project. You could also use an existing project.
 
 ## Scaffold the app
+
+Run the following commands to set up the project and install the required dependencies:
 
 ```bash
 npx create-next-app@latest signals-agent --yes --typescript --tailwind --app
@@ -17,13 +19,19 @@ cd signals-agent
 npm install ai @ai-sdk/react @snowplow/browser-tracker @snowplow/browser-plugin-link-click-tracking @snowplow/signals-node
 ```
 
+This will create a new Next.js app using TypeScript and Tailwind CSS.
+
+As well as installing the Vercel AI SDK, it'll add the Snowplow browser tracker and link click plugin for client-side tracking, and the Signals Node client to fetch user attributes server-side.
+
 :::note[Existing projects]
 The code in this tutorial uses the `@/*` path alias (e.g. `@/lib/snowplow`, `@/components/chat-widget`). This is configured by default by `create-next-app`. If you're adding to an existing project, make sure your `tsconfig.json` has `"@/*": ["./*"]` in `compilerOptions.paths`.
 :::
 
 ## Install AI Elements
 
-You'll use [AI Elements](https://ai-sdk.dev/elements) — Vercel's component library built on shadcn/ui — for the chat UI. First, initialize shadcn/ui (this creates the `components.json` config that AI Elements needs):
+This tutorial uses [AI Elements](https://ai-sdk.dev/elements), Vercel's component library built on shadcn/ui, for the chat UI.
+
+First, initialize shadcn/ui. This creates the `components.json` config that AI Elements needs:
 
 ```bash
 npx shadcn@latest init --defaults --yes
@@ -35,11 +43,11 @@ Then install the AI Elements components:
 npx ai-elements@latest add conversation message
 ```
 
-This installs the `Conversation` and `Message` component families into `@/components/ai-elements/`. You'll build a lightweight input component yourself in Step 4 — this avoids a known type incompatibility in the AI Elements `prompt-input` component.
+This installs the `Conversation` and `Message` component families into `@/components/ai-elements/`. You'll build a lightweight input component yourself in the Build the AI integration step, rather than using the AI Elements `prompt-input` component.
 
 ## Verify the scaffold builds
 
-Before writing any code, confirm everything is set up correctly:
+Confirm everything is set up correctly:
 
 ```bash
 npm run build
@@ -47,7 +55,7 @@ npm run build
 
 You should see a successful build with no errors.
 
-## Environment variables
+## Add environment variables
 
 Create a `.env.local` file:
 
@@ -67,14 +75,27 @@ SNOWPLOW_SIGNALS_ORG_ID=your-org-id
 SNOWPLOW_SIGNALS_SERVICE_NAME=web-agent-context
 ```
 
-Note the `NEXT_PUBLIC_` prefix on the collector URL — this makes it available to the Browser SDK on the client side.
+Note the `NEXT_PUBLIC_` prefix on the Collector URL: this makes it available to the Browser tracker on the client-side.
 
-You'll find your Snowplow Collector URL in **Snowplow Console** → **Pipeline** → select your pipeline → **Configuration** → **Collector Domains**.
+You'll find your Snowplow Collector URL in [Snowplow Console](https://console.snowplowanalytics.com) > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
 
-You'll find your Signals base URL and credentials in **Snowplow Console** → **Signals** → **Overview**.
+You'll find your Signals base URL (also known as Profiles API URL) and credentials in [Snowplow Console](https://console.snowplowanalytics.com) > **Signals** > **Overview**.
 
-## Need a demo app?
+## Add more pages
 
-The scaffolded project only has a single page. To see Signals in action, you need multiple pages so there's meaningful browsing behavior to track. If you don't already have a multi-page app, you can ask an AI coding assistant (Claude, Cursor, etc.) to generate a demo app with this prompt:
+The scaffolded project starts with only a single page.
 
-> Create a simple multi-page Next.js App Router e-commerce site for a fictional store called "Signal Shop". It should have: a homepage with featured products, a `/products` page listing at least 8 products across categories (electronics, clothing, home), individual product detail pages at `/products/[id]`. Use Tailwind for styling. Keep it minimal — static content is fine, no database or real checkout needed.
+To see Signals in action, you'll need multiple pages so there's meaningful browsing behavior to track. The easiest way to add pages is to ask an AI coding assistant (Claude, Cursor, etc.) to generate some.
+
+Example prompt:
+
+```txt
+Add pages to this Next.js project for a fictional store called "Signal Shop". Add:
+- A homepage with featured products
+- A `/products` page listing at least 8 products across different categories
+- Individual product detail pages at `/products/[id]`
+
+Use product categories "electronics", "clothing", and "home".
+Use Tailwind for styling.
+Keep it minimal — static content is fine, no database or real checkout needed.
+```

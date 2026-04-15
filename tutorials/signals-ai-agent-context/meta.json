@@ -4,5 +4,5 @@
   "label": "Signals implementation",
   "useCase": "Customer-facing AI agents",
   "technologies": ["Vercel AI SDK", "Next.js"],
-  "snowplowTech": ["Signals", "Browser Tracker"]
+  "snowplowTech": ["Signals"]
 }

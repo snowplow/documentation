@@ -1,27 +1,31 @@
 ---
-title: "See it in action"
+title: "Try out the Signals and Vercel AI integration"
 position: 6
-sidebar_label: "Test it"
+sidebar_label: "Test the app"
 description: "Run your Next.js app, build up behavioral context by browsing, and see how the AI agent uses real-time Signals data."
 keywords: ["testing", "signals context", "ai agent demo", "real-time personalization"]
 date: "2026-04-10"
 ---
 
-Make sure you've replaced the placeholder values in `.env.local` with real credentials — particularly `AI_GATEWAY_API_KEY` and `NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL`. Then run your app:
+Your application is now ready to try out.
+
+Run it with:
 
 ```bash
 npm run dev
 ```
 
+Make sure you've replaced the placeholder values in `.env.local` with real credentials.
+
 ## Build up behavioral context
 
-Open your app in a browser and browse around for a few minutes — visit different pages, click some links, spend time on different sections. Snowplow is tracking these interactions and Signals is computing your attributes in real time.
+Open your app in a browser and browse around for a few minutes. Visit different pages, click some links, and spend time on different sections. The Browser tracker will record these interactions, and Signals will compute your attributes in real time.
 
-Now open the chat and ask a general question. If your Signals service is returning attributes for your session, the agent's response will reflect what you've been doing — referencing the pages you've visited and tailoring its answers accordingly.
+Open the chat and ask a general question. If your Signals service is returning attributes for your session, the agent's response will reference what you've been doing.
 
 ## Verify Signals context
 
-You can verify the Signals context is being received by adding a log to the API route:
+You can verify that the app is receiving the Signals context by adding a log to the API route:
 
 ```tsx
 console.log(
@@ -30,17 +34,9 @@ console.log(
 );
 ```
 
-A typical Signals response for an active session looks like:
+If the context is empty, check:
+* Is your attribute group published?
+* Did you create a service with the right name?
+* Have you been browsing for long enough for events to flow through the pipeline?
 
-```
-## Real-Time User Context (Snowplow Signals)
-The following attributes describe the current user's session behavior:
-- page_views_count: 7
-- unique_pages_viewed: 4
-- first_event_timestamp: "2026-04-09T15:02:18.000Z"
-- last_event_timestamp: "2026-04-09T15:16:25.000Z"
-```
-
-:::tip[No attributes appearing?]
-If the context is empty, make sure your attribute group is published, your service is created, and you've been browsing for long enough for events to flow through the pipeline. Check the Signals section of the Console to verify that attributes are being computed for your sessions.
-:::
+To rerun the attribute group test query in Console, click **Edit** on your attribute group page > **Run Preview**.

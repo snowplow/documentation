@@ -1,13 +1,13 @@
 ---
-title: "Build the AI integration"
+title: "Build the Signals AI integration using the Vercel AI SDK"
 position: 5
-sidebar_label: "AI integration"
+sidebar_label: "Connect Signals and AI agent"
 description: "Connect Snowplow Signals to a Vercel AI SDK agent by fetching user attributes and injecting them into the system prompt."
 keywords: ["vercel ai sdk", "system prompt", "signals context", "ai agent", "streaming", "next.js api route"]
 date: "2026-04-10"
 ---
 
-Now for the main event — connecting Signals to your AI agent via the Vercel AI SDK.
+The next step is to connect Signals to your AI agent, via the Vercel AI SDK.
 
 ## Fetch Signals context
 
@@ -77,14 +77,33 @@ export async function getSignalsContext(
 }
 ```
 
-A few things worth noting about this implementation:
+The raw response format from the service, pulled using `signals.getServiceAttributes()`, looks like this:
 
-- `formatAttributes()` converts the raw attributes object into a markdown section ready for the system prompt
-- If Signals isn't configured or a fetch fails, the function returns an empty string — the agent degrades gracefully and still works without context
+```json
+{
+  "page_views_count": 12,
+  "unique_pages_viewed": 5,
+  "first_event_timestamp": "2026-04-09T14:23:01.000Z",
+  "last_event_timestamp": "2026-04-09T14:41:03.000Z"
+}
+```
+
+The `formatAttributes()` function converts that into a markdown section that can be appended to the agent's system prompt, for example:
+
+```markdown
+## Real-Time User Context (Snowplow Signals)
+The following attributes describe the current user's session behavior on this application:
+- page_views_count: 12
+- unique_pages_viewed: 5
+- first_event_timestamp: "2026-04-09T14:23:01.000Z"
+- last_event_timestamp: "2026-04-09T14:41:03.000Z"
+```
+
+If Signals isn't configured or a fetch fails, the `getSignalsContext()` function returns an empty string. The agent still works without the Signals context.
 
 ## Build the agent
 
-Create the function that constructs the system prompt with Signals context appended:
+Create the function that constructs the system prompt with the Signals context appended:
 
 ```tsx
 // lib/agent.ts
@@ -102,18 +121,7 @@ export function createAgent(signalsContext?: string) {
 }
 ```
 
-The Signals context block, when present, looks like this in the system prompt:
-
-```
-## Real-Time User Context (Snowplow Signals)
-The following attributes describe the current user's session behavior:
-- page_views_count: 12
-- unique_pages_viewed: 5
-- first_event_timestamp: "2026-04-09T14:23:01.000Z"
-- last_event_timestamp: "2026-04-09T14:41:03.000Z"
-```
-
-The model treats this as factual context about the current user. No special prompting is needed beyond including it — LLMs naturally incorporate provided context when formulating responses.
+The model treats the Signals block as factual context about the current user. No special prompting is needed beyond including it: LLMs naturally incorporate provided context when formulating responses.
 
 ## Build the chat API route
 
@@ -158,12 +166,18 @@ export async function POST(request: Request) {
 ```
 
 :::note[Model providers]
-This example uses [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), which routes requests to any supported model provider with a single API key. To use a different model, change the model string — e.g. `gateway("anthropic/claude-sonnet-4.5")` or `gateway("google/gemini-2.5-pro")`. See the [full list of supported models](https://vercel.com/ai-gateway/models). The Signals integration works identically regardless of which model you choose — it's just a system prompt string.
+This example uses [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), which routes requests to any supported model provider with a single API key.
+
+To use a different model, change the model string e.g. `gateway("anthropic/claude-sonnet-4.5")` or `gateway("google/gemini-2.5-pro")`.
+
+See the [full list of supported models](https://vercel.com/ai-gateway/models). The Signals integration works identically regardless of which model you choose.
 :::
 
 ## Build the chat frontend
 
-Create a floating chat widget using [AI Elements](https://ai-sdk.dev/elements) components. The widget renders as a button in the bottom-right corner that expands into a chat panel — so it works alongside any page content without replacing it.
+Create a floating chat widget using [AI Elements](https://ai-sdk.dev/elements) components. The widget renders as a button in the bottom-right corner that expands into a chat panel.
+
+The widget accesses the current Snowplow session ID using the helper from `lib/snowplow.ts`.
 
 ```tsx
 // components/chat-widget.tsx
@@ -269,9 +283,9 @@ export function ChatWidget() {
 }
 ```
 
-## Wire it up in your layout
+## Load the widget
 
-Since the chat widget floats over page content, the best place to render it is in your root layout — inside the `SnowplowProvider`. This way the widget is available on every page:
+Since the chat widget floats over page content, the best place to render it is in your root layout, inside the `SnowplowProvider`. This way the widget is available on every page:
 
 ```tsx
 // app/layout.tsx — add the ChatWidget import and render it inside <body>:
@@ -288,4 +302,4 @@ import { ChatWidget } from "@/components/chat-widget";
 </body>
 ```
 
-The `ChatWidget` is placed inside `SnowplowProvider` to ensure the tracker is always initialized before the chat reads the session ID. The `SnowplowProvider` handles tracking across all pages, and the `ChatWidget` floats in the corner — users can browse, build up behavioral context, and open the chat whenever they want.
+The `ChatWidget` is placed inside `SnowplowProvider` to ensure the tracker is always initialized before the chat reads the session ID.

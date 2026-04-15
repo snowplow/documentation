@@ -8,7 +8,7 @@ keywords: ["snowtype", "client-side validation", "browser validation", "schema v
 
 Using Snowtype you can get notified, at runtime, if tracked events don't match their schema definitions, or the rules defined in their event specification. This allows you to catch errors before they reach production.
 
-When enabled, every event sent through Snowtype generated code is checked against:
+When enabled, every event sent through Snowtype generated code is checked at runtime against:
 
 - **Schema rules**: does the event or entity data match the schema definition?
 - **Cardinality rules**: does the event include the correct number of each entity, as defined in the event specification?
@@ -182,6 +182,8 @@ A warning also appears when a required entity is missing entirely:
 ## Property instructions validation
 
 [Property rule](/docs/event-studio/tracking-plans/create-and-manage/index.md) instructions are constraints you define on event or entity properties within an event specification.
+
+Snowtype creates [types for property rules](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#property-rules-and-instructions) for all trackers. This additional runtime validation layer can catch any mistakes that slip through, such as when using dynamic values.
 
 In this example event specification, the `category` property of the `product` entity must be either `"related"` or `"cross-sell"`.
 

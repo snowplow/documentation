@@ -164,6 +164,12 @@ Along with the self-describing event and entity functions for each schema, it al
 
 See the [Use the generated code](#use-the-generated-code) section below for an example of how to use the generated functions in your code. For JavaScript and TypeScript, the key function is called `track{EventSpecificationName}Spec`.
 
+:::note[Event specification version]
+Changes to event specifications increases the version number. Your [lockfile](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md#keep-event-specifications-up-to-date) pins specific event specification versions.
+
+If you don't see the expected changes in your generated code after editing the event specification, try running `snowtype update`.
+:::
+
 This example shows generated Browser tracker TypeScript code for a `User Log In` event specification. The event specification has a `login` event data structure, plus two entities: `user_authentication` and `user`.
 
 To see the output for different trackers and languages, check out the [full examples page](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md).
@@ -410,7 +416,71 @@ Code generated for event specifications includes an entity that allows you to li
 
 ## Property rules and instructions
 
-Snowtype will take into account any instructions (property rules) that you define within your event specifications.
+Snowtype will take into account property rules that you define within your event specifications.
+
+For example, if you add an instruction that a property must have one of a specific set of values, Snowtype will generate a type for that property that only allows those values.
+
+If you include an instruction that's a detailed explanation of how to implement the data, this will be included as a comment in the generated code. It'll replace the description from the underlying data structure.
+
+Snowtype supports entity cardinality rules for the [Browser tracker only](/docs/event-studio/implement-tracking/client-side-validation/index.md).
+
+:::note[Event specification version]
+Changes to instructions increase the event specification version number. Your [lockfile](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md#keep-event-specifications-up-to-date) pins specific event specification versions.
+
+If you don't see the expected updates in your generated code after making changes, try running `snowtype update`.
+:::
+
+This example uses the `User Log In` event specification from the previous section. Within the `Login` event data structure, property rules have been set for two of the properties:
+- `error_code`: a detailed instruction explaining what values to supply
+- `method`: an enum rule limiting the allowed values to `email`, `google`, `apple`, and `saml`
+
+In the generated output, the instruction on `error_code` appears as an inline comment, and `method` becomes a union type instead of `string`:
+
+```tsx title="Generated output (excerpt)"
+// Before instructions
+
+export type Login = {
+    /**
+     * An optional error code if the login attempt failed (e.g., 'invalid_password',
+     * 'user_not_found').
+     */
+    error_code?: null | string;
+    /**
+     * Whether the login attempt was successful.
+     */
+    is_success: boolean;
+    /**
+     * The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+     */
+    method: string;
+}
+
+// After instructions
+
+export type Login = {
+    /**
+     * Provide the raw error code from the authentication service, for example:
+     * 'AUTH_001' for invalid credentials, 'AUTH_002' for an expired session,
+     * or 'AUTH_003' for a locked account. Leave null if the login succeeded.
+     */
+    error_code?: null | string;
+    /**
+     * Whether the login attempt was successful.
+     */
+    is_success: boolean;
+    /**
+     * The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+     */
+    method: LoginMethod;
+}
+
+/**
+ * The method used to authenticate, such as 'email', 'google', 'apple', or 'saml'.
+ */
+export type LoginMethod = "email" | "google" | "apple" | "saml";
+```
+
+
 
 ### Markdown instructions
 
@@ -525,7 +595,7 @@ This example demonstrates how to use Snowtype's generated code for the Browser t
 
 Check out the full [data structures](/docs/event-studio/implement-tracking/generate-tracking-code/example-data-structures/index.md) and [event specifications](/docs/event-studio/implement-tracking/generate-tracking-code/example-event-specs/index.md) example pages for different languages and trackers.
 
-Using the generated data structure and Iglu Central schema code:
+Using the [generated data structure and Iglu Central schema code](#data-structures) from the previous section:
 
 ```typescript
 import {
@@ -540,7 +610,7 @@ import {
 trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
 
 /* Track an event with an entity attached */
-const product = createProduct({
+const productEntity = createProduct({
   id: "Product id",
   name: "Snowplow product",
   currency: "EUR",
@@ -549,20 +619,20 @@ const product = createProduct({
 });
 trackWebPage({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product],
+  context: [productEntity],
 });
 
 /* Enforce specific entity types using type arguments */
-const webPage = createWebPage({
+const webPageEntity = createWebPage({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
 });
 trackWebPage<Product | WebPage>({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
-  context: [product, webPage],
+  context: [productEntity, webPageEntity],
 });
 ```
 
-Using the generated event specification code:
+Using the [generated event specification code](#event-specifications) from the previous section:
 
 ```typescript
 import {
@@ -571,7 +641,7 @@ import {
   createUserAuthentication,
 } from "./src/tracking/snowplow";
 
-const user = createUser({
+const userEntity = createUser({
   userId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   firstName: "Ada",
   lastName: "Lovelace",
@@ -580,12 +650,12 @@ const user = createUser({
   accessLevel: "Admin",
 });
 
-const userAuth = createUserAuthentication({ auth_type: "google" });
+const userAuthEntity = createUserAuthentication({ auth_type: "google" });
 
 trackUserLogInSpec({
   method: "google",
   is_success: true,
-  context: [user, userAuth],
+  context: [userEntity, userAuthEntity],
 });
 ```
 

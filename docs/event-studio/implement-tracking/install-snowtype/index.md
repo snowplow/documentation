@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This page walks you through installing Snowtype and connecting it to your Snowplow account.
 
-To use Snowtype, you need:
+To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
@@ -58,7 +58,7 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. You can create or find your API key in [Console](https://console.snowplowanalytics.com/settings).
+Snowtype needs a Console API key to read your event specifications and data structures. You can create or find your API key in [Console](https://console.snowplowanalytics.com/settings) > **Settings** > **Manage organization**.
 
 You need both the **API key** and the **API key ID**.
 
@@ -100,5 +100,7 @@ The command will prompt you for:
 - The **language** for that tracker, if applicable, e.g. `typescript`
 - The **format** (language) you want the configuration file to be in
 - The **output path** where Snowtype should write the generated code
+
+To find your organization ID, go to [Console](https://console.snowplowanalytics.com/settings) > **Settings** > **Manage organization**.
 
 Snowtype saves these choices to a `snowtype.config.json` file in your project root. You can edit this file directly later, or pass the values as flags to skip the prompts. See the [configuration reference](/docs/event-studio/implement-tracking/configuration-reference/index.md) for all available options.

@@ -23,7 +23,7 @@ Each of these layers answers a different question:
 - **Server-side tracking:** "What did the agent do?"
 - **Agent self-tracking:** "What did the agent think?"
 
-This tutorial walks you through instrumenting all three layers with [Snowplow](https://snowplow.io/) behavioral data tracking, progressively building from zero observability to complete transparency.
+This tutorial walks you through instrumenting all three layers with [Snowplow](https://snowplow.io/) behavioral data tracking.
 
 ## What you'll build
 
@@ -59,7 +59,7 @@ flowchart TD
 
 
 
-All events flow to the same Snowplow collector. In this tutorial, you'll use [Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/what-is-micro/) running locally in Docker to validate events against their schemas in real-time.
+All events flow to the same Collector. In this tutorial, you'll use [Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/what-is-micro/) running locally in Docker to validate events against their schemas in real-time.
 
 ## How to follow this tutorial
 
@@ -132,7 +132,7 @@ SNOWPLOW_COLLECTOR_URL=http://localhost:9090
 SNOWPLOW_APP_ID=travel-agent-demo
 ```
 
-:::warning Check your API key
+:::warning[Check your API key]
 Replace the placeholder values (`sk-ant-...`, `sk-...`) with your real key. If the value is still a placeholder, the app starts but the chatbot silently fails to respond. The UI lets you select any model regardless of which keys are configured - if you pick a provider without a valid key, the request fails without a visible error.
 :::
 
@@ -148,7 +148,7 @@ The environment variables break down by stage:
 | `SNOWPLOW_APP_ID`                                                       | v0.2      | Application identifier (server-side)                                |
 
 
-:::note Why two sets of Snowplow variables?
+:::note[Why two sets of Snowplow variables?]
 Next.js exposes `NEXT_PUBLIC_*` variables to the browser bundle. Server-only variables (without the prefix) stay on the server. You need both because client-side and server-side trackers initialize independently - the client tracker runs in the browser, the server tracker runs in the Node.js process.
 :::
 

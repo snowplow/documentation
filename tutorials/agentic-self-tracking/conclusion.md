@@ -11,7 +11,7 @@ You've instrumented an AI chatbot with three layers of behavioral tracking. This
 
 ## Data lineage
 
-Every event in the system connects to others through shared identifiers. A single user message triggers a cascade of events across all three layers, all traceable through two key IDs:
+Every event in the system connects to others through shared identifiers. A single user message triggers events across all three layers, traceable through two IDs:
 
 - `session_id` - generated once per browser session and stored in localStorage. It links all activity for a given user session.
 - `invocation_id` - generated per API request. It links every event within a single agent lifecycle.
@@ -32,7 +32,7 @@ session_id (browser localStorage UUID)
        └→ message_received (client) ────── message_context
 ```
 
-This means you can start from any event and trace outward:
+You can start from any event and trace outward:
 
 - From a `constraint_violation`, find the `user_intent_detected` in the same invocation to see what the user originally asked for
 - From an `agent_completion` with high `total_tokens`, drill into the `agent_step` events to see which steps consumed the most tokens
@@ -88,7 +88,7 @@ With all three layers in place, you have the data foundation for:
 - Prompt optimization: use decision logs to identify cases where the agent's reasoning was sound but its actions were wrong
 - Model comparison: run the same prompts against different models and compare intent confidence, decision quality, and constraint detection
 
-## What's next
+## Next steps
 
 This tutorial used Snowplow Micro for local validation. To take this to production:
 
@@ -98,4 +98,4 @@ This tutorial used Snowplow Micro for local validation. To take this to producti
 - Build dashboards on top of the landed data to monitor the metrics described above
 - Use the data to improve agent performance - fine-tune prompts, optimize tool selection, and calibrate confidence thresholds
 
-The three-layer model - client, server, agent - generalizes beyond travel chatbots. Any agentic application can benefit from this pattern. The generic Iglu Central schemas give you lifecycle observability out of the box. The custom entities you create for your domain - whether travel, support, finance, or anything else - capture the business-specific data that makes the tracking actionable.
+The client/server/agent model generalizes beyond travel chatbots. The generic Iglu Central schemas give you lifecycle observability out of the box, and the custom entities you create for your domain capture the business-specific data.

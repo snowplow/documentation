@@ -7,7 +7,7 @@ keywords: ["snowplow", "agentic", "tracking", "ai", "client-side", "browser trac
 date: "2026-03-26"
 ---
 
-In this stage, you'll add browser-side Snowplow tracking for user interactions. By the end, every message sent and every response received will be captured as validated, schema-backed events.
+You'll add browser-side Snowplow tracking for user interactions so that every message sent and every response received is captured as a validated, schema-backed event.
 
 :::tip Code-along / Read-along
 If you're coding along, continue from the starter app and create the files described below. If you're reading along, check out the tag and review the changes:
@@ -24,11 +24,11 @@ To see exactly what changed: `git diff v0.0-starter..v0.1-client-tracking`
 
 Before writing code, it's worth understanding Snowplow's event model. If you're already familiar with Snowplow, skip to [What you'll add](#what-youll-add).
 
-:::note Key concept: Self-describing events and entities
+:::note[Self-describing events and entities]
 Snowplow uses a self-describing event model:
 
 - Events are lightweight actions - "a message was sent", "a response was received". Each event references a schema that defines its structure.
-- Entities (also called contexts) are rich data objects attached to events. They describe the "who, what, where" - a `message_context` entity might include the message role, length, and a preview of the content.
+- Entities are data objects attached to events. They describe the "who, what, where" - a `message_context` entity might include the message role, length, and a preview of the content.
 - Schemas define and validate both events and entities. They live in an [Iglu](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) registry and follow a versioning format (e.g., `1-0-0`).
 - Snowplow Micro runs locally in Docker and validates every incoming event against its schema in real-time. Events that pass validation land in `/micro/good`; those that fail land in `/micro/bad`, and viewable in the browser at `/micro/ui`.
 
@@ -205,12 +205,12 @@ data:
   additionalProperties: false
 ```
 
-:::note Why separate events from entities?
-Notice that `message_sent` doesn't contain the message text or length - that's in the `message_context` entity. This is a deliberate Snowplow pattern: events capture *what happened* and *when*, while entities capture *the context around it*. The same entity can be reused across multiple events without duplicating the schema definition.
+:::note[Why separate events from entities?]
+`message_sent` doesn't contain the message text or length - that's in the `message_context` entity. This is a deliberate Snowplow pattern: events capture *what happened* and *when*, while entities capture *the context around it*. The same entity can be reused across multiple events without duplicating the schema definition.
 :::
 
-:::note Privacy pattern
-The `message_preview` field is capped at 100 characters. Full message content is never sent to the collector. This is a good practice for any user-generated content - capture enough for debugging and analysis, but respect user privacy.
+:::note[Privacy pattern]
+The `message_preview` field is capped at 100 characters. Full message content is never sent to the Collector. This is a good practice for any user-generated content - capture enough for debugging and analysis, but respect user privacy.
 :::
 
 ## Create the client tracking module
@@ -366,10 +366,10 @@ export const trackMessageReceived = (params: MessageReceivedParams) => {
 };
 ```
 
-Each function follows the same pattern:
+Both functions:
 
 1. Build the event payload (the thin event with timestamps and IDs)
-2. Build the context entity (the rich metadata about the message)
+2. Build the entity (the metadata about the message)
 3. Fire the self-describing event with `trackSelfDescribingEvent()`
 
 The `message_preview` is truncated to 100 characters in both functions - this matches the schema's `maxLength` constraint and protects user privacy.
@@ -538,16 +538,14 @@ With both services running:
 4. Examine a `message_sent` event in the Micro UI - notice the self-describing event structure and the attached `message_context` entity showing role: "user", the message length, and the truncated preview
 5. Examine a `message_received` event - notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used
 
-:::note
+:::note[Programmatic access]
 Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you prefer programmatic access, but the UI is the recommended way to explore events throughout this tutorial.
 :::
 
-:::note Stage summary
+:::note[Stage summary]
 - Files: three added, three modified
 - Events: `message_sent`, `message_received`
 - Entities: `message_context`
-
-You can see every user interaction - when messages are sent, how long responses take, and how many tools the agent used. This answers "what did the user do?"
 :::
 
 Client-side tracking gives you visibility into the user's experience, but the agent's internal behavior is still invisible. When the agent receives a message, it enters a multi-step reasoning loop - calling the LLM, deciding which tools to use, executing them, and generating a response. None of that is captured yet. In the next section, you'll add server-side tracking to see inside the agent's orchestration.

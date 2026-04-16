@@ -9,7 +9,7 @@ date: "2026-03-26"
 
 ---
 
-In this stage, you'll add server-side tracking for the agent's orchestration loop. By the end, every invocation, reasoning step, tool execution, and completion will be captured with token counts, latency, and success/failure status.
+Client-side tracking tells you what the user did. Now you'll add server-side tracking for the agent's orchestration loop, capturing every invocation, reasoning step, tool execution, and completion with token counts, latency, and success/failure status.
 
 :::tip Code-along / Read-along
 If you're coding along, continue from the previous stage and create the files described below. If you're reading along:
@@ -37,10 +37,10 @@ Each step involves an LLM call. Each tool call has its own latency and can succe
 
 Server-side tracking answers: how many steps did the agent take? How many tokens did it use? How long did each tool take? Did the agent succeed?
 
-:::note Key concept: The agent lifecycle
+:::note[The agent lifecycle]
 Every request to the chat API triggers an invocation - a complete cycle of the agent doing its work. Within an invocation, the agent takes steps (LLM reasoning iterations). Some steps include tool executions. When the agent has a final response, the invocation reaches completion.
 
-All events in a single lifecycle share an `invocation_id` for correlation. This is the key to joining client events (which carry the same ID in `message_received`) with server events.
+All events in a single lifecycle share an `invocation_id` for correlation. This ID joins client events (which carry it in `message_received`) with server events.
 :::
 
 ## What you'll add
@@ -174,8 +174,8 @@ data:
   additionalProperties: false
 ```
 
-:::note Why this matters: entity attachment pattern
-Every server-side event carries an `agent_context` entity. Tool-related events additionally carry a `tool_context` entity. This means you can always filter events by model, session, or invocation - and for tool events, you can also filter by tool name or category. The entities are attached at tracking time, not joined later.
+:::note[Entity attachment]
+Every server-side event carries an `agent_context` entity. Tool-related events additionally carry a `tool_context` entity. You can filter events by model, session, or invocation - and for tool events, also by tool name or category. The entities are attached at tracking time, not joined later.
 :::
 
 ### Review the event schemas
@@ -404,7 +404,7 @@ Create the `tool_results` entity at `snowplow/iglu-local/schemas/com.snowplow.de
 }
 ```
 
-Notice the differences from the Iglu Central schemas:
+These differ from the Iglu Central schemas in a few ways:
 
 - Vendor: `com.snowplow.demo.travel` instead of `com.snowplow.agent.tracking`. This is your application's namespace, not the shared registry.
 - Location: these live in `snowplow/iglu-local/`, not on Iglu Central. Snowplow Micro resolves them from the mounted volume.
@@ -487,9 +487,9 @@ const initServerTracker = (): Tracker | null => {
 };
 ```
 
-Notice `bufferSize: 1` - this flushes events to the collector immediately after each one is tracked. In production you'd use a larger buffer for efficiency, but for development this ensures events appear in Micro instantly.
+`bufferSize: 1` flushes events to the Collector immediately after each one is tracked. In production you'd use a larger buffer for efficiency, but for development this ensures events appear in Micro instantly.
 
-Also notice the environment variables don't have the `NEXT_PUBLIC_` prefix. These are server-only - they're never included in the browser bundle.
+The environment variables don't have the `NEXT_PUBLIC_` prefix - they're server-only and never included in the browser bundle.
 
 ### Build the context entity helpers
 
@@ -570,11 +570,11 @@ const buildToolResults = (data: ToolResultsData) => ({
 });
 ```
 
-Notice the schema URIs use vendor `com.snowplow.demo.travel` - these resolve from `iglu-local`, not from Iglu Central.
+The schema URIs use vendor `com.snowplow.demo.travel` - these resolve from `iglu-local`, not from Iglu Central.
 
 ### Add the tracking functions
 
-Each lifecycle event gets its own function. Here's `trackAgentInvocation` as the pattern example:
+Each lifecycle event gets its own function. Here's `trackAgentInvocation`:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export const trackAgentInvocation = (params: AgentInvocationParams) => {
@@ -607,14 +607,9 @@ export const trackAgentInvocation = (params: AgentInvocationParams) => {
 };
 ```
 
-Every tracking function follows this pattern:
+All four tracking functions lazy-initialize the tracker, return early if it can't initialize (the app works with or without tracking), build the event, and attach the relevant entities.
 
-1. Get the tracker (lazy-initialize if needed)
-2. Return early if the tracker can't initialize (graceful degradation - the app works with or without tracking)
-3. Build the event with its schema and data
-4. Attach the relevant context entities
-
-The remaining functions - `trackAgentStep`, `trackToolExecution`, and `trackAgentCompletion` - follow the same structure. The `trackToolExecution` function is the most interesting because it conditionally attaches the custom entities:
+`trackToolExecution` is worth showing separately because it conditionally attaches the custom entities:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export const trackToolExecution = (params: ToolExecutionParams) => {
@@ -782,7 +777,7 @@ const result = streamText({
 });
 ```
 
-Notice how the tool factories receive `requestContext` as a parameter - `createSearchFlightsTool(requestContext)`. This is how tools access the shared context for tracking.
+The tool factories receive `requestContext` as a parameter - `createSearchFlightsTool(requestContext)` - so they can access the shared context for tracking.
 
 ## Instrument the business tools
 
@@ -869,15 +864,13 @@ export function createSearchFlightsTool(ctx: RequestContext) {
 }
 ```
 
-The key patterns here:
+A few things to note in the code above:
 
-- Timing: `startTime` is captured before execution, duration calculated after
-- Counter incrementing: `ctx.totalToolsCalled++` and `ctx.businessToolsCalled++` so the completion event has accurate totals
-- Custom entity attachment: `toolParams` and `toolResults` are passed as structured objects that `trackToolExecution` attaches as custom entities alongside the generic `tool_context` and `agent_context` entities
-- Both paths tracked: success attaches both custom entities; failure records `errorType` and `errorMessage` (no custom entities needed)
-- Tool-specific data: `search_flights` populates `origin`, `destination`, `date` in params and `flights_found`, `price_min`, `price_max` in results. The `book_flight` and `check_calendar` tools populate their respective fields in the same consolidated schemas.
-
-The `book_flight` and `check_calendar` tools follow the same wrapping pattern.
+- `startTime` is captured before execution, duration calculated after
+- `ctx.totalToolsCalled++` and `ctx.businessToolsCalled++` keep the counters accurate for the completion event
+- `toolParams` and `toolResults` are passed as structured objects that `trackToolExecution` attaches as custom entities alongside `tool_context` and `agent_context`
+- Both success and failure paths are tracked - failure records `errorType` and `errorMessage` instead of custom entities
+- `search_flights` populates `origin`, `destination`, `date` in params and `flights_found`, `price_min`, `price_max` in results; `book_flight` and `check_calendar` populate their respective fields in the same consolidated schemas
 
 ## Try it out
 
@@ -896,12 +889,10 @@ npm run start:dev
 6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
 7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
-:::note Stage summary
+:::note[Stage summary]
 - Files: one added, three modified
 - Events: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
 - Entities: `agent_context`, `tool_context` (Iglu Central) + `tool_params`, `tool_results` (custom)
-
-Generic Iglu Central schemas trace the agent lifecycle; custom entities capture your domain-specific tool data. This answers both "what did the agent do?" and "with what data?"
 :::
 
 You have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.

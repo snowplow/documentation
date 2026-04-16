@@ -9,7 +9,7 @@ date: "2026-03-26"
 
 ---
 
-Before adding any tracking, take a tour of the application. This is the baseline - a fully functional AI travel assistant with zero observability.
+Before adding any tracking, take a tour of the application to understand what you're working with.
 
 :::tip Code-along / Read-along
 If you're coding along, you should already be on the starter tag from the setup step. If you're reading along, check out the tag:
@@ -114,12 +114,10 @@ The app is fully functional, but you have zero visibility into what's happening.
 
 At this point, the only way to know any of this is to manually watch the chat UI or read server logs. That doesn't scale.
 
-:::note Stage summary
+:::note[Stage summary]
 - Files: zero added, zero modified
 - Events: none
 - Schemas: none
-
-A fully functional AI chatbot with zero observability.
 :::
 
 In the next section, you'll add the first layer of tracking: client-side events that capture what the user does in the browser.

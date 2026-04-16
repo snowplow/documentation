@@ -8,7 +8,7 @@ keywords: ["attribute groups", "stream attributes", "batch attributes", "attribu
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
 
-To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions.
+To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions. You can also start from a [prebuilt template](/docs/signals/attributes/templated-attribute-groups/index.md) for common use cases like web analytics, marketing attribution, or ecommerce.
 
 ![Create attribute group form with name, description, data source, and owner fields](../../images/attribute-group-create.png)
 

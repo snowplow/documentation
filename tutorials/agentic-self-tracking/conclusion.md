@@ -41,23 +41,23 @@ You can start from any event and trace outward:
 
 ## Full schema inventory
 
-| # | Schema | Type | Layer | Registry | Added in |
-|---|--------|------|-------|----------|----------|
-| 1 | `message_sent` | event | client | Iglu Central | `v0.1` |
-| 2 | `message_received` | event | client | Iglu Central | `v0.1` |
-| 3 | `message_context` | entity | client | Iglu Central | `v0.1` |
-| 4 | `agent_invocation` | event | server | Iglu Central | `v0.2` |
-| 5 | `agent_step` | event | server | Iglu Central | `v0.2` |
-| 6 | `tool_execution` | event | server | Iglu Central | `v0.2` |
-| 7 | `agent_completion` | event | server | Iglu Central | `v0.2` |
-| 8 | `agent_context` | entity | server | Iglu Central | `v0.2` |
-| 9 | `tool_context` | entity | server | Iglu Central | `v0.2` |
-| 10 | `user_intent_detected` | event | agent | Iglu Central | `v0.3` |
-| 11 | `agent_decision_logged` | event | agent | Iglu Central | `v0.3` |
-| 12 | `constraint_violation` | event | agent | Iglu Central | `v0.3` |
-| 13 | `tool_params` | entity | server | custom (iglu-local) | `v0.2` |
-| 14 | `tool_results` | entity | server | custom (iglu-local) | `v0.2` |
-| 15 | `intent_extraction` | entity | agent | custom (iglu-local) | `v0.3` |
+| #   | Schema                  | Type   | Layer  | Registry            | Added in |
+| --- | ----------------------- | ------ | ------ | ------------------- | -------- |
+| 1   | `message_sent`          | event  | client | Iglu Central        | `v0.1`   |
+| 2   | `message_received`      | event  | client | Iglu Central        | `v0.1`   |
+| 3   | `message_context`       | entity | client | Iglu Central        | `v0.1`   |
+| 4   | `agent_invocation`      | event  | server | Iglu Central        | `v0.2`   |
+| 5   | `agent_step`            | event  | server | Iglu Central        | `v0.2`   |
+| 6   | `tool_execution`        | event  | server | Iglu Central        | `v0.2`   |
+| 7   | `agent_completion`      | event  | server | Iglu Central        | `v0.2`   |
+| 8   | `agent_context`         | entity | server | Iglu Central        | `v0.2`   |
+| 9   | `tool_context`          | entity | server | Iglu Central        | `v0.2`   |
+| 10  | `user_intent_detected`  | event  | agent  | Iglu Central        | `v0.3`   |
+| 11  | `agent_decision_logged` | event  | agent  | Iglu Central        | `v0.3`   |
+| 12  | `constraint_violation`  | event  | agent  | Iglu Central        | `v0.3`   |
+| 13  | `tool_params`           | entity | server | custom (iglu-local) | `v0.2`   |
+| 14  | `tool_results`          | entity | server | custom (iglu-local) | `v0.2`   |
+| 15  | `intent_extraction`     | entity | agent  | custom (iglu-local) | `v0.3`   |
 
 10 events and six entities. The 12 Iglu Central schemas (vendor `com.snowplow.agent.tracking`) resolve automatically - you don't need to publish or maintain them. The three custom entities (vendor `com.snowplow.demo.travel`) are defined in `iglu-local` and validated by Snowplow Micro during development.
 
@@ -90,10 +90,10 @@ With all three layers in place, you have the data foundation for:
 
 ## Next steps
 
-This tutorial used Snowplow Micro for local validation. To take this to production:
+This accelerator used Snowplow Micro for local validation. To take this to production:
 
 - The 12 generic schemas (vendor `com.snowplow.agent.tracking`) are already on Iglu Central - your Snowplow pipeline resolves them automatically with no publishing or configuration needed
-- Publish your custom entities (vendor `com.snowplow.demo.travel`) to your own [Iglu registry](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) so your pipeline can validate them in production
+- Publish your custom entities (vendor `com.snowplow.demo.travel`) to your own [Iglu registry](/docs/api-reference/iglu/) so your pipeline can validate them in production
 - Connect to a Snowplow pipeline to collect events at scale with validation, enrichment, and warehouse loading
 - Build dashboards on top of the landed data to monitor the metrics described above
 - Use the data to improve agent performance - fine-tune prompts, optimize tool selection, and calibrate confidence thresholds

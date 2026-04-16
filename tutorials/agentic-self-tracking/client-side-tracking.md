@@ -29,7 +29,7 @@ Snowplow uses a self-describing event model:
 
 - Events are lightweight actions - "a message was sent", "a response was received". Each event references a schema that defines its structure.
 - Entities are data objects attached to events. They describe the "who, what, where" - a `message_context` entity might include the message role, length, and a preview of the content.
-- Schemas define and validate both events and entities. They live in an [Iglu](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) registry and follow a versioning format (e.g., `1-0-0`).
+- Schemas define and validate both events and entities. They live in an [Iglu](/docs/api-reference/iglu/) registry and follow a versioning format (e.g., `1-0-0`).
 - Snowplow Micro runs locally in Docker and validates every incoming event against its schema in real-time. Events that pass validation land in `/micro/good`; those that fail land in `/micro/bad`, and viewable in the browser at `/micro/ui`.
 
 This separation - thin events with rich attached entities - keeps events composable. The same `message_context` entity can be attached to both `message_sent` and `message_received` events without duplicating the schema.
@@ -490,7 +490,7 @@ This component polls Snowplow Micro's API every two seconds and displays events 
 
 ## Set up Snowplow Micro
 
-To validate events locally, you need [Snowplow Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/) running in Docker. The `start.sh` script handles this:
+To validate events locally, you need [Snowplow Micro](/docs/testing/snowplow-micro/) running in Docker. The `start.sh` script handles this:
 
 ```bash title="start.sh"
 #!/bin/bash
@@ -534,12 +534,12 @@ With both services running:
 
 1. Open [http://localhost:3000](http://localhost:3000) and send a message: "Find flights from London to Paris tomorrow"
 2. Open the **LiveTrackingPanel** (the sidebar on the right) - you'll see events appearing in real-time
-3. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press **Refresh** to see events arriving. You can click on individual events to explore their properties and attached entities. The UI also shows any events that failed schema validation. ([Micro UI docs](https://docs.snowplow.io/docs/testing/snowplow-micro/local/#checking-the-results))
+3. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) - press **Refresh** to see events arriving. You can click on individual events to explore their properties and attached entities. The UI also shows any events that failed schema validation. ([Micro UI docs](/docs/testing/snowplow-micro/local/#checking-the-results))
 4. Examine a `message_sent` event in the Micro UI - notice the self-describing event structure and the attached `message_context` entity showing role: "user", the message length, and the truncated preview
 5. Examine a `message_received` event - notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used
 
 :::note[Programmatic access]
-Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you prefer programmatic access, but the UI is the recommended way to explore events throughout this tutorial.
+Micro also exposes raw JSON endpoints at `/micro/good` and `/micro/bad` if you prefer programmatic access, but the UI is the recommended way to explore events throughout this accelerator.
 :::
 
 :::note[Stage summary]

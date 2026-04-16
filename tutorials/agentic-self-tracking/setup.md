@@ -1,18 +1,73 @@
 ---
-
-title: "The starter app"
-sidebar_label: "The starter app"
+title: "Set up the agentic Next.js application"
+sidebar_label: "Set up the app"
 position: 2
 description: "Explore the travel booking chatbot before any Snowplow tracking is added. Understand the app architecture, tools, and what's missing without observability."
 keywords: ["snowplow", "agentic", "tracking", "ai", "starter", "chatbot"]
 date: "2026-03-26"
+---
+
+Start by cloning the repository and installing dependencies:
+
+```bash
+git clone https://github.com/snowplow-industry-solutions/agentic-app-tracking-tutorial.git
+cd agentic-app-tracking-tutorial
+git checkout v0.0-starter
+npm install
+```
+
+Create your environment file:
+
+```bash
+cp .env.example .env.local
+```
+
+Open `.env.local` and add at least one LLM API key. The flight search, booking, and calendar tools all use mock data, so you do not need any external travel API keys. You do need a valid LLM key because the chatbot calls a real language model. The file looks like this:
+
+```bash title=".env.example"
+# --- LLM Provider API Keys (configure at least one) ---
+ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+GOOGLE_GENERATIVE_AI_API_KEY=...
+
+# --- Snowplow Client-Side Tracking (active from v0.1-client-tracking) ---
+NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=http://localhost:9090
+NEXT_PUBLIC_SNOWPLOW_APP_ID=travel-agent-demo
+
+# --- Snowplow Server-Side Tracking (active from v0.2-server-tracking) ---
+SNOWPLOW_COLLECTOR_URL=http://localhost:9090
+SNOWPLOW_APP_ID=travel-agent-demo
+```
+
+:::warning[Check your API key]
+Replace the placeholder values (`sk-ant-...`, `sk-...`) with your real key. If the value is still a placeholder, the app starts but the chatbot silently fails to respond. The UI lets you select any model regardless of which keys are configured - if you pick a provider without a valid key, the request fails without a visible error.
+:::
+
+The environment variables break down by stage:
+
+
+| Variable                                                                | Used from | Purpose                                                             |
+| ----------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GOOGLE_GENERATIVE_AI_API_KEY` | v0.0      | LLM provider authentication                                         |
+| `NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL`                                    | v0.1      | Snowplow collector endpoint (client-side, exposed to browser)       |
+| `NEXT_PUBLIC_SNOWPLOW_APP_ID`                                           | v0.1      | Application identifier (client-side)                                |
+| `SNOWPLOW_COLLECTOR_URL`                                                | v0.2      | Snowplow collector endpoint (server-side, never exposed to browser) |
+| `SNOWPLOW_APP_ID`                                                       | v0.2      | Application identifier (server-side)                                |
+
+
+:::note[Why two sets of Snowplow variables?]
+Next.js exposes `NEXT_PUBLIC_*` variables to the browser bundle. Server-only variables (without the prefix) stay on the server. You need both because client-side and server-side trackers initialize independently - the client tracker runs in the browser, the server tracker runs in the Node.js process.
+:::
+
+You're ready to start. The next section explores the starter app before any tracking is added.
 
 ---
 
+
 Before adding any tracking, take a tour of the application to understand what you're working with.
 
-:::tip Code-along / Read-along
-If you're coding along, you should already be on the starter tag from the setup step. If you're reading along, check out the tag:
+:::tip[Read-along]
+If you're reading along, check out the tag:
 
 ```bash
 git checkout v0.0-starter
@@ -39,8 +94,8 @@ The travel assistant is built with:
 | `src/app/page.tsx`                | Main chat UI - message list, input, model selector, demo scenarios                                   |
 | `src/app/api/chat/route.ts`       | Chat API route - receives messages, calls the LLM with tools, streams the response                   |
 | `src/lib/tools/business-tools.ts` | Three tool definitions with Zod input schemas                                                        |
-| `src/lib/external/flights-api.ts` | Mock flight database - eight airlines, nine airports, realistic pricing                               |
-| `src/lib/model-config.ts`         | LLM provider configuration - models across three providers                                            |
+| `src/lib/external/flights-api.ts` | Mock flight database - eight airlines, nine airports, realistic pricing                              |
+| `src/lib/model-config.ts`         | LLM provider configuration - models across three providers                                           |
 | `src/app/components/`             | UI components: `ModelSelector`, `DemoScenarios`, `ToolCallIndicator`, `LiveTrackingPanel` (disabled) |
 
 

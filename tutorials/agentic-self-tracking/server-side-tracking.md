@@ -418,26 +418,26 @@ Snowplow Micro automatically picks up schemas from `iglu-local` alongside those 
 
 The consolidated approach above uses one `tool_params` schema and one `tool_results` schema for all three business tools. An alternative is to create separate schemas per tool - one params and one results entity for each:
 
-| Entity | Fields | Attached to |
-|--------|--------|-------------|
-| `search_flights_params` | `origin`, `destination`, `date`, `return_date`, `passengers`, `cabin_class`, `sort_by`, `max_results` | `tool_execution` where `tool_name = search_flights` |
-| `search_flights_results` | `flights_found`, `price_min`, `price_max`, `price_currency` | same |
-| `book_flight_params` | `flight_id`, `airline`, `flight_number`, `passenger_name`, `payment_method` | `tool_execution` where `tool_name = book_flight` |
-| `book_flight_results` | `booking_id`, `confirmation_code`, `booking_status` | same |
-| `check_calendar_params` | `start_date`, `end_date`, `user_id` | `tool_execution` where `tool_name = check_calendar` |
-| `check_calendar_results` | `conflicts_found`, `available_dates_count` | same |
+| Entity                   | Fields                                                                                                | Attached to                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `search_flights_params`  | `origin`, `destination`, `date`, `return_date`, `passengers`, `cabin_class`, `sort_by`, `max_results` | `tool_execution` where `tool_name = search_flights` |
+| `search_flights_results` | `flights_found`, `price_min`, `price_max`, `price_currency`                                           | same                                                |
+| `book_flight_params`     | `flight_id`, `airline`, `flight_number`, `passenger_name`, `payment_method`                           | `tool_execution` where `tool_name = book_flight`    |
+| `book_flight_results`    | `booking_id`, `confirmation_code`, `booking_status`                                                   | same                                                |
+| `check_calendar_params`  | `start_date`, `end_date`, `user_id`                                                                   | `tool_execution` where `tool_name = check_calendar` |
+| `check_calendar_results` | `conflicts_found`, `available_dates_count`                                                            | same                                                |
 
 Trade-offs:
 
-| | Consolidated (two schemas) | Per-tool (six schemas) |
-|---|---|---|
-| Schema count | Fewer schemas to maintain | More schemas, but each is small and focused |
-| Warehouse columns | Sparse - many null columns per row (a `search_flights` row has null `booking_id`, `conflicts_found`, etc.) | Dense - every column is meaningful for every row |
-| Querying | One table to query, filter by `tool_name` to find relevant columns | Separate tables per tool, no filtering needed, each column is always relevant |
-| Adding tools | Add fields to existing schemas (new schema version) | Add a new pair of schemas (no version bump on existing ones) |
-| Type safety | Looser - nothing prevents setting `booking_id` on a `search_flights` event | Tighter - each schema only has fields that apply to that tool |
+|                   | Consolidated (two schemas)                                                                                 | Per-tool (six schemas)                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Schema count      | Fewer schemas to maintain                                                                                  | More schemas, but each is small and focused                                   |
+| Warehouse columns | Sparse - many null columns per row (a `search_flights` row has null `booking_id`, `conflicts_found`, etc.) | Dense - every column is meaningful for every row                              |
+| Querying          | One table to query, filter by `tool_name` to find relevant columns                                         | Separate tables per tool, no filtering needed, each column is always relevant |
+| Adding tools      | Add fields to existing schemas (new schema version)                                                        | Add a new pair of schemas (no version bump on existing ones)                  |
+| Type safety       | Looser - nothing prevents setting `booking_id` on a `search_flights` event                                 | Tighter - each schema only has fields that apply to that tool                 |
 
-The consolidated approach works well for demos and applications with a small number of tools where sparsity is manageable. The per-tool approach is better for production applications with many tools or where strict typing and dense warehouse tables matter. This tutorial uses the consolidated approach for simplicity.
+The consolidated approach works well for demos and applications with a small number of tools where sparsity is manageable. The per-tool approach is better for production applications with many tools or where strict typing and dense warehouse tables matter. This accelerator uses the consolidated approach for simplicity.
 
 </details>
 

@@ -9,7 +9,7 @@ date: "2026-04-16"
 
 Signals provides prebuilt attribute group templates for common use cases. Instead of defining [attributes](/docs/signals/attributes/attributes/index.md) from scratch, select a template to create an [attribute group](/docs/signals/attributes/attribute-groups/index.md) with pre-configured attributes that you can customize before publishing.
 
-Templates are available for three categories of use case:
+Signals provides templates for three categories of use case:
 
 | Category | Template | Attributes | Description |
 | --- | --- | --- | --- |
@@ -89,7 +89,11 @@ Captures [marketing campaign data](/docs/fundamentals/canonical-event/index.md#m
 
 ### Product views
 
-Tracks product browsing behavior using Snowplow [ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) events. Requires ecommerce tracking to be configured in your tracker.
+Tracks product browsing behavior using Snowplow [ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) events.
+
+:::note[Ecommerce tracking required]
+You must have [ecommerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) configured in your tracker to use this template.
+:::
 
 | Attribute | Description | Aggregation |
 | --- | --- | --- |
@@ -106,7 +110,11 @@ Tracks product browsing behavior using Snowplow [ecommerce](/docs/sources/web-tr
 
 ### Transactions
 
-Tracks transactional ecommerce data using Snowplow [ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) events. Requires ecommerce tracking to be configured in your tracker.
+Tracks transactional ecommerce data using Snowplow [ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) events.
+
+:::note[Ecommerce tracking required]
+You must have [ecommerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) configured in your tracker to use this template.
+:::
 
 | Attribute | Description | Aggregation |
 | --- | --- | --- |

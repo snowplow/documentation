@@ -1,7 +1,7 @@
 ---
 
-title: "Introduction and overview"
-sidebar_label: "Introduction and overview"
+title: "Instrument an AI agent with behavioral tracking"
+sidebar_label: "Introduction"
 position: 1
 description: "Learn how to instrument an AI-powered chatbot with Snowplow behavioral tracking across three architectural layers: client-side interactions, server-side agent orchestration, and agent self-tracking."
 keywords: ["snowplow", "agentic", "tracking", "ai", "observability", "llm"]
@@ -9,7 +9,7 @@ date: "2026-03-26"
 
 ---
 
-AI-powered applications have a visibility problem. Traditional analytics tells you what users clicked and which pages they visited, but when your product is an AI agent, the interesting behavior happens in layers you can't see from the browser.
+AI-powered applications have a visibility problem. Traditional analytics tells you what users clicked and which pages they visited. When your product is an AI agent, however, the interesting behavior happens in layers you can't see from the browser.
 
 Consider a travel booking chatbot. A user types "find me cheap flights to Paris tomorrow." Behind the scenes:
 

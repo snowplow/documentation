@@ -4,5 +4,5 @@
   "description": "Add client-side, server-side, and agent self-tracking to an AI-powered chatbot using Snowplow.",
   "useCase": "Customer-facing AI agents",
   "technologies": ["Next.js", "Vercel AI SDK"],
-  "snowplowTech": ["Browser Tracker", "Node Tracker", "Snowplow Micro"]
+  "snowplowTech": ["Micro"]
 }

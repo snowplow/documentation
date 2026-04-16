@@ -16,7 +16,7 @@ Some trackers can populate the [browser atomic event properties](/docs/fundament
 
 Depending on the tracker, you may have to provide the values, as not all trackers capture these fields themselves. The tracker will add the values automatically to all sent events.
 
-:::note Cookies field
+:::note[Cookies field]
 Only the JavaScript tracker can populate the `br_cookies` field.
 :::
 

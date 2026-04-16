@@ -75,7 +75,7 @@ You can define an unlimited number of steps.
 
 <img src={StepImage} alt="An example funnel step configuration." style={{maxWidth: "400px"}} />
 
-:::note The **Update Steps** button
+:::note[The **Update Steps** button]
 Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the **Update Steps** button.
 :::
 

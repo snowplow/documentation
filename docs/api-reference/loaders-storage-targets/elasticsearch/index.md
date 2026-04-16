@@ -14,7 +14,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-:::warning
+:::note
 
 We only offer this loader on AWS or as part of [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md).
 
@@ -77,7 +77,7 @@ Each [entity](/docs/fundamentals/entities/index.md) type attached to the event g
 
 First off, install and set up Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html) for installation information and [Supported versions of OpenSearch and Elasticsearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html#choosing-version) for the latest information of ElasticSearch/OpenSearch supported versions by AWS.
 
-:::note Supported Versions
+:::note[Supported Versions]
 
 We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x currently.
 

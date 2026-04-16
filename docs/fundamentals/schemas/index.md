@@ -30,13 +30,13 @@ A **data structure** is a higher-level data management concept that includes the
 
 [Data structures](/docs/event-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions. They allow you to group related schemas within [tracking plans](/docs/event-studio/tracking-plans/index.md) (previously known as data products), or keep track of [which schemas are used where](/docs/event-studio/tracking-plans/event-specifications/index.md).
 
-:::tip Data structure management
+:::tip[Data structure management]
 Check out the documentation for [managing](/docs/event-studio/data-structures/index.md) and [versioning](/docs/event-studio/data-structures/versioning/index.md) data structures.
 :::
 
 ## Self-describing JSON schema anatomy
 
-:::info Data structures builder
+:::info[Data structures builder]
 Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/index.md), without worrying about how it works under the hood.
 :::
 
@@ -112,7 +112,7 @@ This example doesn't show the optional `$supersedes` and `$supersededBy` fields.
 
 ## Iglu schema repository
 
-:::info Iglu is included for Snowplow CDI customers
+:::info[Iglu is included for Snowplow CDI customers]
 Snowplow CDI customers don't need to create or manage their own Iglu repositories. A private Iglu repository is included in your pipeline.
 :::
 
@@ -160,7 +160,7 @@ Before adding this data to the event payload, the tracker will wrap this event 
 }
 ```
 
-:::info It's self-describing JSON all the way down
+:::info[It's self-describing JSON all the way down]
 The event payload is itself a self-describing JSON object. See how this works in practise in these [example tracker HTTP requests](/docs/events/http-requests/index.md).
 :::
 

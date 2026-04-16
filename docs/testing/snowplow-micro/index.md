@@ -23,7 +23,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/index.md).
 
-:::warning
+:::note
 
 Micro is not designed for production traffic.
 

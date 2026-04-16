@@ -56,7 +56,7 @@ You can elect to enable activity tracking on specific pages. It is executed as p
 
 The following example would generate the first ping event after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
 
-:::info Method order
+:::info[Method order]
 The `enableActivityTracking` method **must** be called before the `trackPageView` method.
 :::
 

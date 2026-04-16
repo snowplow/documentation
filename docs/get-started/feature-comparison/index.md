@@ -63,6 +63,9 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | [Real-time personalization engine](/docs/signals/introduction/index.md)                                                   |   ✅   |        ❌         |
 | Profiles Store                                                                                                            |   ✅   |        ❌         |
 | Interventions                                                                                                             |   ✅   |        ❌         |
+| <h3>Identities</h3>                                                                                                       |  CDI  |   Self-Hosted    |
+| [Real-time identity resolution](/docs/identities/index.md)                                                                |   ✅   |        ❌         |
+| [Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |
 | Audience Hub, powered by Census                                                                                           |   ✅   |        ❌         |

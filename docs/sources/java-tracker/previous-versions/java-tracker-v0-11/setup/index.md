@@ -7,7 +7,7 @@ description: "Installation and setup instructions for Java tracker version 0.11 
 keywords: ["java tracker v0.11 setup", "maven installation", "gradle setup"]
 ---
 
-:::info These pages are for version 0.11
+:::info[These pages are for version 0.11]
 See [here](/docs/sources/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
 

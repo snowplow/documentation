@@ -14,7 +14,7 @@ The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{session
 
 If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the short format, `_sp={domainUserId}.{timestamp}`
 
-:::note Event fields always populated
+:::note[Event fields always populated]
 The pipeline will always populate the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields, even if this enrichment isn't enabled.
 :::
 

@@ -28,7 +28,7 @@ Click the dropdown to see the available events, listed by name and vendor:
 
 * **Custom events**: select any schema or data structure that's available within your pipeline.
 
-:::note Searching for events
+:::note[Searching for events]
 The search finds direct matches only, so use the exact name of the event, schema, or vendor.
 :::
 

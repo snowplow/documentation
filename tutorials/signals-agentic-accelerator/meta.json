@@ -1,0 +1,8 @@
+{
+  "title": "Build a Signals-powered AI agent with AWS Bedrock AgentCore",
+  "label": "Solution accelerator",
+  "description": "Build a customer-facing AI agent using Strands Agents and AWS Bedrock AgentCore Memory, personalized with real-time behavioral data from Snowplow Signals.",
+  "useCase": "Customer-facing AI agents",
+  "technologies": ["AWS Bedrock", "Strands Agents", "Jupyter notebook"],
+  "snowplowTech": ["Signals"]
+}

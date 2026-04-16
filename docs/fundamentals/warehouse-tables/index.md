@@ -12,7 +12,7 @@ Each line in the atomic events table represents a single event, be that a `page_
 
 Individual fields are stored in their own columns. Check out the [event properties reference](/docs/fundamentals/canonical-event/index.md) for a full list of standard fields. [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) are stored as additional columns in the `atomic.events` table (except in Redshift, see below).
 
-:::tip Don't mutate the atomic events table
+:::tip[Don't mutate the atomic events table]
 The Snowplow data table is designed to be immutable: the data in each line should not change over time.
 
 Data points that you would expect to change over time e.g. what cohort a particular user belongs to, or how you classify a particular visitor, can be derived from Snowplow data. Our recommendation is that you define and calculate these derived fields at analysis time, store them in a separate table, and join to the `atomic.events` table when performing any analysis.

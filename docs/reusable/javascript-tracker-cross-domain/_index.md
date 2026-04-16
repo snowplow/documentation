@@ -70,7 +70,7 @@ This should automatically exclude links that don't lead simply to other web page
 });`
 }</CodeBlock>}</>
 
-:::note Opt-in vs opt-out
+:::note[Opt-in vs opt-out]
 
 Some of the above examples will also decorate any links to the same site the user is currently on.
 For most users we recommend explicitly allowing the list of domains you want to decorate, as well as ensuring that you only decorate links that are on a different domain to the current page.
@@ -119,7 +119,7 @@ If further links get added to the page after the tracker has loaded, you can use
 });`
 }</CodeBlock>}</>
 
-:::warning Warning
+:::tip
 
 If you enable link decoration, you should also make sure that at least one event is fired on the page.
 Firing an event causes the tracker to write the `domain_userid` to a cookie.
@@ -127,7 +127,7 @@ If the cookie doesn’t exist when the user leaves the page, the tracker will ge
 
 :::
 
-:::tip Reduce Shared Link Decoration URLs
+:::tip[Reduce Shared Link Decoration URLs]
 
 If a user clicks a cross-site link and the URL is decorated with their `domain_userid`, and then they share that URL, other users will also have the parameters when they visit the shared page.
 

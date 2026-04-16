@@ -264,9 +264,53 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
   3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
     - Account ID: `793733611312`
     - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
-  4. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
+  4. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
   5. Name the role `SnowplowDeployment` — this exact name is required. Optionally add a description: "Allows the Snowplow team to programmatically deploy to this account". Create the role.
-  6. Open the role you just created, go to the Trust relationships tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
+  6. Open the role you just created, go to the **Permissions** tab and click **Add permissions** > **Create inline policy**. Switch to the JSON editor, paste the following policy, and save it:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "IAMBootstrap",
+            "Effect": "Allow",
+            "Resource": "*",
+            "Action": [
+                "iam:AddRoleToInstanceProfile",
+                "iam:AddUserToGroup",
+                "iam:AttachGroupPolicy",
+                "iam:AttachRolePolicy",
+                "iam:CreateGroup",
+                "iam:CreateInstanceProfile",
+                "iam:CreatePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:CreateRole",
+                "iam:CreateServiceLinkedRole",
+                "iam:CreateUser",
+                "iam:GetGroup",
+                "iam:GetInstanceProfile",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:GetRole",
+                "iam:GetUser",
+                "iam:ListAttachedGroupPolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListGroupsForUser",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListPolicyVersions",
+                "iam:ListRolePolicies",
+                "iam:ListRoleTags",
+                "iam:PassRole",
+                "iam:TagPolicy",
+                "iam:TagRole",
+                "iam:TagUser",
+                "iam:UpdateAssumeRolePolicy"
+            ]
+        }
+    ]
+  }
+  ```
+  7. Go to the **Trust relationships** tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
   ```json
   {
     "Version": "2012-10-17",
@@ -289,7 +333,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
     ]
   }
   ```
-  7. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+  8. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

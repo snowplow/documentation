@@ -16,7 +16,7 @@ import Link from '@docusaurus/Link';
 
 ## Source-available components
 
-:::tip Terminology
+:::tip[Terminology]
 
 Since some of the below licenses are not approved by [OSI](https://opensource.org/licenses/), we do not refer to them as _Open Source_ licenses. However, the source code is still available.
 

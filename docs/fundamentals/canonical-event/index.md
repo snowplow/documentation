@@ -99,7 +99,7 @@ This table shows the possible values for the `platform` field:
 | Internet of Things        | `iot`            |
 | Headset (e.g., AR, VR)    | `headset`        |
 
-:::info Tracker namespacing
+:::info[Tracker namespacing]
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that doesn't contain a colon or semicolon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
 :::
 
@@ -296,7 +296,7 @@ For [self-describing events](/docs/fundamentals/events/index.md#self-describing-
 | `event_format`  | `string`, max length 128  | Format for event; always `jsonschema` | Yes   | `jsonschema` | Default enrichment | ✅   | ✅      |
 | `event_version` | `string`, max length 128  | Version of event schema               | Yes   | `1-0-2`      | Default enrichment | ✅   | ✅      |
 
-:::note Extra columns for self-describing event data
+:::note[Extra columns for self-describing event data]
 
 Data in self-describing events or entities is added as additional columns, rather than in these standard atomic fields.
 

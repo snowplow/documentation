@@ -15,7 +15,7 @@ Add an entity to every tracked event that records [information about the user's 
 
 The browser entity is **automatically tracked** once configured.
 
-:::note Availability
+:::note[Availability]
 The browser entity is available since version 3.9 of the tracker.
 :::
 

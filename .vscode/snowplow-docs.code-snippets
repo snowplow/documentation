@@ -73,31 +73,31 @@
   "Note Admonition": {
     "scope": "markdown",
     "prefix": "admon_note",
-    "body": [":::note", "", "$0", "", ":::"],
+    "body": [":::note[${1:Title}]", "", "$0", "", ":::"],
     "description": "Note admonition"
   },
   "Tip Admonition": {
     "scope": "markdown",
     "prefix": "admon_tip",
-    "body": [":::tip", "", "$0", "", ":::"],
+    "body": [":::tip[${1:Title}]", "", "$0", "", ":::"],
     "description": "Tip admonition"
   },
   "Info Admonition": {
     "scope": "markdown",
     "prefix": "admon_info",
-    "body": [":::info", "", "$0", "", ":::"],
+    "body": [":::info[${1:Title}]", "", "$0", "", ":::"],
     "description": "Info admonition"
   },
   "Warning Admonition": {
     "scope": "markdown",
     "prefix": "admon_warning",
-    "body": [":::warning", "", "$0", "", ":::"],
+    "body": [":::warning[${1:Title}]", "", "$0", "", ":::"],
     "description": "Warning admonition"
   },
   "Danger Admonition": {
     "scope": "markdown",
     "prefix": "admon_danger",
-    "body": [":::danger", "", "$0", "", ":::"],
+    "body": [":::danger[${1:Title}]", "", "$0", "", ":::"],
     "description": "Danger admonition"
   },
   "Collapsable Details Block": {

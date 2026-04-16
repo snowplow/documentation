@@ -13,13 +13,13 @@ import CodeBlock from '@theme/CodeBlock';
 
 With Snowplow Postgres Loader you can load enriched data or [failed events](/docs/fundamentals/failed-events/index.md) into PostgreSQL database.
 
-:::danger Production use
+:::danger[Production use]
 
 The Postgres loader is not recommended for production use, especially with large data volumes. We recommend using a fully-fledged data warehouse like Databricks, Snowflake, BigQuery or Redshift, together with a [respective loader](/docs/destinations/warehouses-lakes/index.md).
 
 :::
 
-:::tip Schemas in Postgres
+:::tip[Schemas in Postgres]
 
 For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=postgres).
 

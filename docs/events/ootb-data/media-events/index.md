@@ -76,7 +76,7 @@ Each media player instance needs to be registered with the tracker, using a uniq
 
 ![Diagram showing media session timeline and which events to track](./timeline_diagram.svg)
 
-:::info Media example application
+:::info[Media example application]
 Check out our [example React application](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) to see tracked media events and entities live as you watch a video.
 
 The source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react).

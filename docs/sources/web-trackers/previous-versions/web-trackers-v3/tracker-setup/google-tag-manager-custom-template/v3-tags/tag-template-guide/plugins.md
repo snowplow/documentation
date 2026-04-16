@@ -49,7 +49,7 @@ Plugins are allowed to take zero or more parameters, but you are only given a si
 You can either type in a string value, or reference a Variable containing another value, which should return an Array of arguments to pass to the Plugin (this will typically be a Custom JavaScript Variable).
 If you enter a string, the Tag Template will check if it contains a `,` character, and if so, will split it into an array of strings and pass them as separate arguments to the Plugin, otherwise passing your string as the only argument.
 
-:::warning
+:::note
 
 The Tag Template will try to call `.indexOf(',')` on the **Additional Configuration** value, so values of types other than Array or String may fail and break the Tag.
 String values (before or after splitting) of `true`, `false`, `null`, and numeric values will become their respective typed JSON values.

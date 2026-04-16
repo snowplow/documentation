@@ -16,7 +16,7 @@ With this enrichment, you can write a JavaScript function to be executed for eac
 - [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-1)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/javascript_script_enrichment.json)
 
-:::note base64 encoding
+:::note[base64 encoding]
 
 Notice that in the configuration file you will need to provide the JavaScript code of your enrichment encoded in base64.
 

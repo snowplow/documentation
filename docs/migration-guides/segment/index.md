@@ -94,7 +94,7 @@ Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for faile
 
 Snowplow also provides event data management tools for defining and managing tracking plans. Each Snowplow [tracking plan](/docs/fundamentals/tracking-plans/index.md) contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
-You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to automatically generate the tracking code snippets.
+You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/implement-tracking/index.md) to automatically generate the tracking code snippets.
 
 
 ## Migration phases
@@ -151,7 +151,7 @@ Add Snowplow tracking in parallel with your existing Segment tracking:
   * Use the Snowplow Inspector to confirm that the tracker is generating the expected events
   * Use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to test and validate locally
   * Finally, confirm that the tracker can also send events to your warehouse
-* Use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to generate custom tracking code for your tracking plans
+* Use [Snowtype](/docs/event-studio/implement-tracking/index.md) to generate custom tracking code for your tracking plans
 * Test and validate your custom tracking using Micro as before
 * Gradually continue this process until you have a complete Segment and Snowplow dual tracking implementation
 * Gradually roll out tracking to production

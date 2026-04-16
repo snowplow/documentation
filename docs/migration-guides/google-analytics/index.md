@@ -120,7 +120,7 @@ Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for faile
 
 You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. Each [tracking plan](/docs/fundamentals/tracking-plans/index.md) contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
-You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, you may be able to use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to automatically generate the tracking code snippets.
+You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, you may be able to use [Snowtype](/docs/event-studio/implement-tracking/index.md) to automatically generate the tracking code snippets.
 
 
 ## Migration approaches
@@ -215,7 +215,7 @@ Your GA4 implementation will stay live until the final migration phase. By the e
 For the most straightforward migration, add Snowplow tracking in parallel with your existing GA4 tracking:
 * Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/web-trackers/quick-start-guide/index.md)
 * Use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/index.md) to confirm that the tracker is generating the expected events
-* Use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to generate custom tracking code for your tracking plans
+* Use [Snowtype](/docs/event-studio/implement-tracking/index.md) to generate custom tracking code for your tracking plans
 
 #### Snowplow GTM templates
 

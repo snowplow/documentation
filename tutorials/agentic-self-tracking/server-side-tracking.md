@@ -1,18 +1,24 @@
 ---
-
 title: "Server-side tracking"
 sidebar_label: "Server-side tracking"
 position: 4
 description: "Add server-side Snowplow tracking for the agent's orchestration loop - invocations, steps, tool executions, and completions - with full lifecycle tracing."
 keywords: ["snowplow", "agentic", "tracking", "ai", "server-side", "node tracker", "agent lifecycle"]
 date: "2026-03-26"
-
 ---
 
-Client-side tracking tells you what the user did. Now you'll add server-side tracking for the agent's orchestration loop, capturing every invocation, reasoning step, tool execution, and completion with token counts, latency, and success/failure status.
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-:::tip Code-along / Read-along
-If you're coding along, continue from the previous stage and create the files described below. If you're reading along:
+Client-side tracking tells you what the user did. Now you'll add server-side tracking for the agent's orchestration loop.
+
+Every request to the chat API triggers an invocation - a complete cycle of the agent doing its work. Within an invocation, the agent takes multiple steps that are LLM reasoning iterations. Some steps include tool executions. When the agent has a final response, the invocation reaches completion.
+
+All events in a single lifecycle share an `invocation_id` for correlation. The client-side `message_received` events include this ID, allowing you to link them with the corresponding server-side events.
+
+:::tip[Code-along or Read-along]
+If you're coding along, continue from the previous stage, and create the files described below.
+
+If you're reading along:
 
 ```bash
 git checkout v0.2-server-tracking
@@ -22,27 +28,6 @@ npm install
 To see exactly what changed: `git diff v0.1-client-tracking..v0.2-server-tracking`
 :::
 
-## Why client-side isn't enough
-
-The browser sees two things: the user sent a message, and eventually a response appeared. But between those two points, the server orchestrates an entire reasoning loop:
-
-```mermaid
-flowchart LR
-    invocation --> step1[step 1] --> tool1[tool call] --> step2[step 2] --> tool2[tool call] --> more[...] --> completion
-```
-
-
-
-Each step involves an LLM call. Each tool call has its own latency and can succeed or fail. The agent consumes tokens, makes decisions, and may loop multiple times before producing a final response. None of this is visible from the client.
-
-Server-side tracking answers: how many steps did the agent take? How many tokens did it use? How long did each tool take? Did the agent succeed?
-
-:::note[The agent lifecycle]
-Every request to the chat API triggers an invocation - a complete cycle of the agent doing its work. Within an invocation, the agent takes steps (LLM reasoning iterations). Some steps include tool executions. When the agent has a final response, the invocation reaches completion.
-
-All events in a single lifecycle share an `invocation_id` for correlation. This ID joins client events (which carry it in `message_received`) with server events.
-:::
-
 ## What you'll add
 
 This stage introduces:
@@ -50,198 +35,27 @@ This stage introduces:
 - One new dependency: `@snowplow/node-tracker`
 - Four event schemas from Iglu Central: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
 - Two entity schemas from Iglu Central: `agent_context`, `tool_context`
-- Two custom entity schemas (created locally): `tool_params`, `tool_results` - domain-specific entities for the travel app's business tools
+- Two local custom entity schemas: `tool_params`, `tool_results`
 - One new file: `src/lib/tracking/server.ts` - the server tracking module
-- Modifications to: `src/app/api/chat/route.ts` (wiring tracking into the agent lifecycle) and `src/lib/tools/business-tools.ts` (tools self-instrument their execution)
+- Modifications to:
+  - Adding tracking to the agent lifecycle in `src/app/api/chat/route.ts`
+  - Adding tracking to tools in `src/lib/tools/business-tools.ts`
 
-## Define the schemas
+## Install the Snowplow tracker
 
-The six generic schemas used in this stage - four events and two entities - are published on [Iglu Central](https://github.com/snowplow/iglu-central) under vendor `com.snowplow.agent.tracking`, just like the client-side schemas from the previous stage. You'll also create two custom entities for domain-specific data that live in your local `iglu-local` directory.
+Install the [Node.js tracker](/docs/sources/node-js-tracker/):
 
-### agent_context entity
-
-The `agent_context` entity is attached to every server-side event. It identifies the invocation, session, model, and current state.
-
-```yaml title="agent_context schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: entity
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Context entity describing the agent and its current state.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: agent_context
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    invocation_id:
-      type: string
-      description: 'Unique identifier for current agent invocation'
-      maxLength: 36
-    session_id:
-      type: string
-      description: 'User session identifier'
-      maxLength: 36
-    user_id:
-      type:
-        - string
-        - 'null'
-      description: 'User identifier if authenticated'
-    agent_type:
-      type: string
-      description: 'Type/name of agent'
-      maxLength: 100
-    model_name:
-      type: string
-      description: 'LLM model identifier'
-      maxLength: 100
-    model_provider:
-      type: string
-      description: 'LLM provider (e.g., anthropic, openai)'
-      maxLength: 50
-    conversation_messages_count:
-      type:
-        - integer
-        - 'null'
-      description: 'Number of messages in conversation history'
-    current_step_number:
-      type:
-        - integer
-        - 'null'
-      description: 'Current step number within the invocation'
-  required:
-    - invocation_id
-    - session_id
-    - agent_type
-    - model_name
-    - model_provider
-  additionalProperties: false
+```bash
+npm install @snowplow/node-tracker
 ```
 
-### tool_context entity
+## Create custom entities
 
-The `tool_context` entity is attached to tool-related events. It identifies the tool and its category.
+Check out the [Schema reference](#schema-reference) section below for details on the Iglu Central schemas used for the server-side tracking. They capture the agent lifecycle - that a tool was called, how long it took, and whether it succeeded. These questions are generic to any agentic application.
 
-```yaml title="tool_context schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: entity
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Context entity describing a tool being invoked by the agent.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: tool_context
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    tool_name:
-      type: string
-      description: 'Name of the tool being executed'
-      maxLength: 100
-    tool_category:
-      type: string
-      examples:
-        - business
-        - self_tracking
-        - retrieval
-        - orchestration
-      description: 'Category of tool (application-defined)'
-      maxLength: 100
-    tool_call_id:
-      type: string
-      description: 'Unique identifier for this specific tool invocation'
-      format: uuid
-    tool_description:
-      type:
-        - string
-        - 'null'
-      description: 'Brief description of what this tool does'
-      maxLength: 500
-  required:
-    - tool_name
-    - tool_category
-    - tool_call_id
-  additionalProperties: false
-```
-
-:::note[Entity attachment]
-Every server-side event carries an `agent_context` entity. Tool-related events additionally carry a `tool_context` entity. You can filter events by model, session, or invocation - and for tool events, also by tool name or category. The entities are attached at tracking time, not joined later.
-:::
-
-### Review the event schemas
-
-The four server events form the agent lifecycle. Here's the `agent_invocation` event as an example - the others follow the same pattern:
-
-```yaml title="agent_invocation schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: event
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Marks the start of an agent invocation.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: agent_invocation
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    invocation_id:
-      type: string
-      description: 'Unique identifier for this agent invocation'
-      maxLength: 36
-    session_id:
-      type: string
-      description: 'User session identifier'
-      maxLength: 36
-    user_message_preview:
-      type:
-        - string
-        - 'null'
-      description: 'Truncated user message that triggered invocation'
-      maxLength: 500
-    invoked_at:
-      type: string
-      format: date-time
-      description: 'Timestamp when invocation started'
-  required:
-    - invocation_id
-    - session_id
-    - invoked_at
-  additionalProperties: false
-```
-
-The other three event schemas cover:
-
-- `agent_step`: each reasoning iteration - `step_number`, `step_type` (initial/continue/tool-result), `input_tokens`, `output_tokens`, `finish_reason`, `tool_calls_count`
-- `tool_execution`: each tool call - `execution_duration_ms`, `success`, `error_type`, `error_message`
-- `agent_completion`: the invocation summary - `total_steps`, `total_duration_ms`, `total_tokens`, `tools_called`, `finish_reason`, `success`
-
-### Create custom entities for domain-specific data
-
-The generic schemas above capture the agent lifecycle - that a tool was called, how long it took, whether it succeeded. But they don't capture *what* was searched for or *what* came back. That data is specific to your application's domain.
-
-This is where [custom entities](/docs/fundamentals/entities/#custom-entities) come in. You create schemas for your own domain data and attach them to the generic events as additional entities. The generic `tool_execution` event carries the lifecycle data; your custom entities carry the business data.
-
-For the travel app, you'll create two custom entities under vendor `com.snowplow.demo.travel`:
-
-- `tool_params` - the parameters passed to each business tool (origin, destination, dates, etc.)
-- `tool_results` - the results returned from each business tool (flights found, booking ID, etc.)
-
-Both entities use a consolidated design - one schema covers all three business tools, with nullable fields for each tool's specific data. Which fields are populated depends on `tool_context.tool_name`. This keeps the number of schemas small at the cost of some sparsity in the warehouse columns.
+In this section, you'll create two [custom entities](/docs/fundamentals/entities/#custom-entities) for domain-specific business data:
+- `tool_params`: the parameters passed to each business tool, e.g. origin, destination, dates
+- `tool_results`: the results returned from each business tool, e.g. flights found, booking ID
 
 Create the `tool_params` entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/tool_params/jsonschema/1-0-0`:
 
@@ -404,42 +218,19 @@ Create the `tool_results` entity at `snowplow/iglu-local/schemas/com.snowplow.de
 }
 ```
 
-These differ from the Iglu Central schemas in a few ways:
+These schemas have a different vendor from the Iglu Central schemas: `com.snowplow.demo.travel` instead of `com.snowplow.agent.tracking`. This is your application's namespace, not that of the shared registry.
 
-- Vendor: `com.snowplow.demo.travel` instead of `com.snowplow.agent.tracking`. This is your application's namespace, not the shared registry.
-- Location: these live in `snowplow/iglu-local/`, not on Iglu Central. Snowplow Micro resolves them from the mounted volume.
-- No required fields: every field is nullable. A `search_flights` call populates `origin`, `destination`, `date`, etc. while `flight_id`, `passenger_name`, and the calendar fields remain null.
-- Format: these are JSON Schema files (not YAML) in Iglu's directory convention: `schemas/{vendor}/{name}/jsonschema/{version}`.
+Because of the Snowplow Micro configuration in `start.sh`, it will automatically pick up schemas from `iglu-local` alongside those it resolves from Iglu Central.
 
-Snowplow Micro automatically picks up schemas from `iglu-local` alongside those it resolves from Iglu Central. No configuration changes needed - the `start.sh` volume mount you set up in the previous stage already handles this.
+### Schema design considerations
 
-<details>
-<summary>Alternative approach: per-tool entities (six schemas instead of two)</summary>
+Each of these schemas is compatible with all three business tools: which fields are populated depends on `tool_context.tool_name`. This keeps the demo application simple.
 
-The consolidated approach above uses one `tool_params` schema and one `tool_results` schema for all three business tools. An alternative is to create separate schemas per tool - one params and one results entity for each:
+In a production application, we highly advise creating separate schemas per tool. For example, instead of one `tool_params` schema with nullable fields for the different tools, you'd have `search_flights_params`, `book_flight_params`, and `check_calendar_params` schemas with only the relevant fields.
 
-| Entity                   | Fields                                                                                                | Attached to                                         |
-| ------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `search_flights_params`  | `origin`, `destination`, `date`, `return_date`, `passengers`, `cabin_class`, `sort_by`, `max_results` | `tool_execution` where `tool_name = search_flights` |
-| `search_flights_results` | `flights_found`, `price_min`, `price_max`, `price_currency`                                           | same                                                |
-| `book_flight_params`     | `flight_id`, `airline`, `flight_number`, `passenger_name`, `payment_method`                           | `tool_execution` where `tool_name = book_flight`    |
-| `book_flight_results`    | `booking_id`, `confirmation_code`, `booking_status`                                                   | same                                                |
-| `check_calendar_params`  | `start_date`, `end_date`, `user_id`                                                                   | `tool_execution` where `tool_name = check_calendar` |
-| `check_calendar_results` | `conflicts_found`, `available_dates_count`                                                            | same                                                |
+A per-tool approach is more extendable and has better type safety. Analysis will also be easier as the data for each tool would be separated.
 
-Trade-offs:
-
-|                   | Consolidated (two schemas)                                                                                 | Per-tool (six schemas)                                                        |
-| ----------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Schema count      | Fewer schemas to maintain                                                                                  | More schemas, but each is small and focused                                   |
-| Warehouse columns | Sparse - many null columns per row (a `search_flights` row has null `booking_id`, `conflicts_found`, etc.) | Dense - every column is meaningful for every row                              |
-| Querying          | One table to query, filter by `tool_name` to find relevant columns                                         | Separate tables per tool, no filtering needed, each column is always relevant |
-| Adding tools      | Add fields to existing schemas (new schema version)                                                        | Add a new pair of schemas (no version bump on existing ones)                  |
-| Type safety       | Looser - nothing prevents setting `booking_id` on a `search_flights` event                                 | Tighter - each schema only has fields that apply to that tool                 |
-
-The consolidated approach works well for demos and applications with a small number of tools where sparsity is manageable. The per-tool approach is better for production applications with many tools or where strict typing and dense warehouse tables matter. This accelerator uses the consolidated approach for simplicity.
-
-</details>
+Check out our [tracking design best practise guide](/docs/fundamentals/tracking-design-best-practice/) for more on schema design patterns.
 
 ## Create the server tracking module
 
@@ -896,3 +687,114 @@ npm run start:dev
 :::
 
 You have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.
+
+## Schema reference
+
+The six schemas used in this stage are published on [Iglu Central](https://iglucentral.com/) under vendor `com.snowplow.agent.tracking`, just like the client-side schemas from the previous stage.
+
+All the events have the `invocation_id`.
+
+### `agent_context` entity
+
+The `agent_context` entity is attached to every server-side event. It identifies the invocation, session, model, and current state.
+
+<SchemaProperties
+  overview={{entity: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    session_id: "550e8400-e29b-41d4-a716-446655440000",
+    user_id: null,
+    agent_type: "travel_assistant",
+    model_name: "claude-sonnet-4-20250514",
+    model_provider: "anthropic",
+    application_version: "1.0.0",
+    conversation_messages_count: 3,
+    current_step_number: 2
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Context entity describing the agent, its configuration, and current state when performing actions.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "agent_context", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Unique identifier for current agent invocation", "format": "uuid" }, "session_id": { "type": "string", "description": "User session identifier", "format": "uuid" }, "user_id": { "type": ["string", "null"], "description": "User identifier if authenticated", "maxLength": 255 }, "agent_type": { "type": "string", "description": "Type/name of agent", "maxLength": 100 }, "model_name": { "type": "string", "description": "LLM model identifier (e.g., claude-sonnet-4-20250514)", "maxLength": 100 }, "model_provider": { "type": "string", "description": "LLM provider (e.g., anthropic, openai)", "maxLength": 50 }, "application_version": { "type": ["string", "null"], "description": "Application version", "maxLength": 20 }, "conversation_messages_count": { "type": ["integer", "null"], "description": "Number of messages in conversation history at this point", "minimum": 0, "maximum": 10000 }, "current_step_number": { "type": ["integer", "null"], "description": "Current step number within the invocation", "minimum": 1, "maximum": 10000 } }, "required": ["invocation_id", "session_id", "agent_type", "model_name", "model_provider"], "additionalProperties": false }} />
+
+### `tool_context` entity
+
+The `tool_context` entity is attached to tool-related events. It identifies the tool and its category.
+
+<SchemaProperties
+  overview={{entity: true}}
+  example={{
+    tool_name: "search_flights",
+    tool_category: "business",
+    tool_call_id: "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+    tool_description: "Search for flights between two cities on a specific date"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Context entity describing a tool (function) being invoked by the agent, including its purpose, category, and parameters.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "tool_context", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "tool_name": { "type": "string", "description": "Name of the tool being executed", "maxLength": 100 }, "tool_category": { "type": "string", "examples": ["business", "self_tracking", "retrieval", "orchestration"], "description": "Category of tool (application-defined)", "maxLength": 100 }, "tool_call_id": { "type": "string", "description": "Unique identifier for this specific tool invocation", "format": "uuid" }, "tool_description": { "type": ["string", "null"], "description": "Brief description of what this tool does", "maxLength": 500 } }, "required": ["tool_name", "tool_category", "tool_call_id"], "additionalProperties": false }} />
+
+### `agent_invocation` event
+
+The `agent_invocation` event fires when the chat API receives a request. It starts the lifecycle — every subsequent event in this invocation shares the same `invocation_id`. The `user_message_preview` field captures the first 500 characters of the user's message for context; full message content is never stored.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    session_id: "550e8400-e29b-41d4-a716-446655440000",
+    user_message_preview: "Find flights from London to Paris tomorrow",
+    invoked_at: "2024-01-15T10:30:00.000Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Marks the start of an agent invocation. Agent details and state are in the attached agent_context entity.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "agent_invocation", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Unique identifier for this agent invocation", "format": "uuid" }, "session_id": { "type": "string", "description": "User session identifier", "format": "uuid" }, "user_message_preview": { "type": ["string", "null"], "description": "Truncated/sanitized user message that triggered invocation", "maxLength": 500 }, "invoked_at": { "type": "string", "format": "date-time", "description": "Timestamp when invocation started" } }, "required": ["invocation_id", "session_id", "invoked_at"], "additionalProperties": false }} />
+
+### `agent_step` event
+
+The `agent_step` event fires at the end of each LLM iteration. `step_type` indicates where in the reasoning loop this step falls: `initial` for the first LLM call, `tool-result` when the model is processing tool output, and `continue` for intermediate steps. `finish_reason` tells you why the model stopped: `tool_calls` means it wants to invoke a tool next, `stop` means it has a final answer.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    step_number: 2,
+    step_type: "tool-result",
+    input_tokens: 1250,
+    output_tokens: 87,
+    finish_reason: "tool_calls",
+    tool_calls_count: 1,
+    text_length: null,
+    step_duration_ms: 820,
+    stepped_at: "2024-01-15T10:30:01.820Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Records a single iteration step in the agent reasoning loop. Agent context provides invocation details.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "agent_step", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Parent invocation identifier", "format": "uuid" }, "step_number": { "type": "integer", "description": "Sequential step number in this invocation", "minimum": 1, "maximum": 10000 }, "step_type": { "type": "string", "enum": ["initial", "continue", "tool-result"], "description": "Type of step in the agent loop" }, "input_tokens": { "type": "integer", "description": "Input tokens for this step", "minimum": 0, "maximum": 2147483647 }, "output_tokens": { "type": "integer", "description": "Output tokens for this step", "minimum": 0, "maximum": 2147483647 }, "finish_reason": { "type": ["string", "null"], "enum": ["stop", "length", "tool_calls", "content_filter", null], "description": "Why the model stopped generating" }, "tool_calls_count": { "type": "integer", "description": "Number of tool calls made in this step", "minimum": 0, "maximum": 100 }, "text_length": { "type": ["integer", "null"], "description": "Length of text generated in this step", "minimum": 0, "maximum": 100000 }, "step_duration_ms": { "type": ["integer", "null"], "description": "Duration of this step", "minimum": 0, "maximum": 300000 }, "stepped_at": { "type": "string", "format": "date-time", "description": "Timestamp when step completed" } }, "required": ["invocation_id", "step_number", "step_type", "input_tokens", "output_tokens", "tool_calls_count", "stepped_at"], "additionalProperties": false }} />
+
+### `tool_execution` event
+
+The `tool_execution` event fires when a tool call completes. The event captures lifecycle data — timing and success or failure — while the domain-specific data lives in the custom `tool_params` and `tool_results` entities attached alongside `tool_context` and `agent_context`. On a failed call, `error_type` and `error_message` are populated instead.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    step_number: 2,
+    execution_duration_ms: 340,
+    success: true,
+    error_type: null,
+    error_message: null,
+    executed_at: "2024-01-15T10:30:01.480Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Records execution of an agent tool. Tool details are in the attached tool_context entity. Agent state is in agent_context entity.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "tool_execution", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Parent invocation identifier", "format": "uuid" }, "step_number": { "type": ["integer", "null"], "description": "Step number within invocation", "minimum": 1, "maximum": 10000 }, "execution_duration_ms": { "type": "integer", "description": "Time taken to execute the tool", "minimum": 0, "maximum": 300000 }, "success": { "type": "boolean", "description": "Whether tool execution succeeded" }, "error_type": { "type": ["string", "null"], "description": "Type of error if execution failed", "maxLength": 100 }, "error_message": { "type": ["string", "null"], "description": "Error message if execution failed", "maxLength": 500 }, "executed_at": { "type": "string", "format": "date-time", "description": "Timestamp when tool execution completed" } }, "required": ["invocation_id", "execution_duration_ms", "success", "executed_at"], "additionalProperties": false }} />
+
+### `agent_completion` event
+
+The `agent_completion` event fires when the invocation ends and provides aggregate metrics across the entire lifecycle. `finish_reason: max_steps` means the agent hit the `stopWhen: stepCountIs(10)` limit without reaching a final answer — a useful signal for identifying queries that are hitting complexity limits.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    total_steps: 3,
+    total_duration_ms: 2850,
+    total_tokens: 3420,
+    tools_called: 1,
+    business_tools_called: 1,
+    self_tracking_tools_called: 0,
+    finish_reason: "stop",
+    success: true,
+    final_response_length: 312,
+    completed_at: "2024-01-15T10:30:02.850Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Records completion of an agent invocation with summary metrics. Agent context provides invocation details.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "agent_completion", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Invocation identifier", "format": "uuid" }, "total_steps": { "type": "integer", "description": "Total number of reasoning steps", "minimum": 1, "maximum": 10000 }, "total_duration_ms": { "type": "integer", "description": "Total time from invocation to completion", "minimum": 0, "maximum": 600000 }, "total_tokens": { "type": "integer", "description": "Total tokens used (prompt + completion)", "minimum": 0, "maximum": 2147483647 }, "tools_called": { "type": "integer", "description": "Total number of tool calls made", "minimum": 0, "maximum": 1000 }, "business_tools_called": { "type": ["integer", "null"], "description": "Number of business tools called", "minimum": 0, "maximum": 1000 }, "self_tracking_tools_called": { "type": ["integer", "null"], "description": "Number of self-tracking tools called", "minimum": 0, "maximum": 1000 }, "finish_reason": { "type": "string", "enum": ["stop", "length", "error", "max_steps"], "description": "Why the agent stopped" }, "success": { "type": "boolean", "description": "Whether invocation completed successfully" }, "final_response_length": { "type": ["integer", "null"], "description": "Length of final response to user", "minimum": 0, "maximum": 100000 }, "completed_at": { "type": "string", "format": "date-time", "description": "Timestamp when invocation completed" } }, "required": ["invocation_id", "total_steps", "total_duration_ms", "total_tokens", "tools_called", "finish_reason", "success", "completed_at"], "additionalProperties": false }} />

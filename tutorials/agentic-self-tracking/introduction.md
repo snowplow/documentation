@@ -1,12 +1,10 @@
 ---
-
 title: "Instrument an AI agent with behavioral tracking"
 sidebar_label: "Introduction"
 position: 1
 description: "Learn how to instrument an AI-powered chatbot with Snowplow behavioral tracking across three architectural layers: client-side interactions, server-side agent orchestration, and agent self-tracking."
 keywords: ["snowplow", "agentic", "tracking", "ai", "observability", "llm"]
 date: "2026-03-26"
-
 ---
 
 AI-powered applications have a visibility problem. Traditional analytics tells you what users clicked and which pages they visited. When your product is an AI agent, however, interesting behavior happens in layers you can't see from the browser.
@@ -27,7 +25,15 @@ Tracking for each these layers will answer a different question:
 - **Server-side tracking:** "What did the agent do?"
 - **Agent self-tracking:** "What did the agent think?"
 
-This accelerator walks you through instrumenting all three layers with [Snowplow](https://snowplow.io/) behavioral data tracking.
+By combining all three layers, you'll be able to answer questions like:
+- How many messages do users send per session?
+- How long do agent responses take?
+- Which tools get called most often? Do they succeed or fail?
+- How many LLM steps and tokens does each request use?
+- Why did the agent give that particular answer?
+- When can't the agent meet a user's request, and how often does that happen?
+
+This accelerator walks you through instrumenting all three tracking layers with [Snowplow](https://snowplow.io/) behavioral data tracking.
 
 You **don't need a Snowplow account** to follow this accelerator.
 

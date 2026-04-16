@@ -278,13 +278,13 @@ const initServerTracker = (): Tracker | null => {
 };
 ```
 
-`bufferSize: 1` flushes events to the Collector immediately after each one is tracked. In production you'd use a larger buffer for efficiency, but for development this ensures events appear in Micro instantly.
+The setting [`bufferSize: 1`](/docs/sources/node-js-tracker/initialization/) flushes events to the Collector immediately after each one is tracked. In production you'd use a larger buffer for efficiency, but for development this ensures events appear in Micro instantly.
 
-The environment variables don't have the `NEXT_PUBLIC_` prefix - they're server-only and never included in the browser bundle.
+The environment variables don't have the `NEXT_PUBLIC_` prefix. They're server-only, and never included in the browser bundle.
 
 ### Build the context entity helpers
 
-The generic entity builders reference schemas on Iglu Central:
+The generic entity builders reference Iglu Central schemas:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export interface AgentContextData {
@@ -361,11 +361,11 @@ const buildToolResults = (data: ToolResultsData) => ({
 });
 ```
 
-The schema URIs use vendor `com.snowplow.demo.travel` - these resolve from `iglu-local`, not from Iglu Central.
-
 ### Add the tracking functions
 
-Each lifecycle event gets its own function. Here's `trackAgentInvocation`:
+Each lifecycle event gets its own function. All four tracking functions: lazy-initialize the tracker, return early if it can't initialize, build the event, and attach the relevant entities.
+
+Here's `trackAgentInvocation`:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export const trackAgentInvocation = (params: AgentInvocationParams) => {
@@ -398,43 +398,57 @@ export const trackAgentInvocation = (params: AgentInvocationParams) => {
 };
 ```
 
-All four tracking functions lazy-initialize the tracker, return early if it can't initialize (the app works with or without tracking), build the event, and attach the relevant entities.
+`trackAgentStep` tracks each loop iteration and captures token usage, step type, and finish reason:
 
-`trackToolExecution` is worth showing separately because it conditionally attaches the custom entities:
+```typescript title="src/lib/tracking/server.ts (continued)"
+export const trackAgentStep = (params: AgentStepParams) => {
+  const t = initServerTracker();
+  if (!t) return;
+
+  t.track(
+    buildSelfDescribingEvent({
+      event: {
+        schema: 'iglu:com.snowplow.demo/agent_step/jsonschema/1-0-0',
+        data: {
+          invocation_id: params.invocationId,
+          step_number: params.stepNumber,
+          step_type: params.stepType,
+          prompt_tokens: params.promptTokens,
+          completion_tokens: params.completionTokens,
+          finish_reason: params.finishReason ?? null,
+          tool_calls_count: params.toolCallsCount,
+          text_length: params.textLength ?? null,
+          step_duration_ms: params.stepDurationMs ?? null,
+          stepped_at: new Date().toISOString(),
+        },
+      },
+    }),
+    [
+      buildAgentContext({
+        invocation_id: params.invocationId,
+        session_id: params.sessionId,
+        agent_type: 'travel_assistant',
+        model_name: params.modelName,
+        model_provider: params.modelProvider,
+        conversation_messages_count: params.conversationMessagesCount ?? null,
+        current_step_number: params.stepNumber,
+      }),
+    ],
+  );
+};
+```
+
+`trackToolExecution` attaches both `tool_context` and `agent_context` entities, carrying the tool name, category, and invocation metadata alongside the parameters and result summaries:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export const trackToolExecution = (params: ToolExecutionParams) => {
   const t = initServerTracker();
   if (!t) return;
 
-  const contexts: Array<{ schema: string; data: Record<string, unknown> }> = [
-    buildToolContext({
-      tool_name: params.toolName,
-      tool_category: params.toolCategory,
-      tool_call_id: params.toolCallId,
-    }),
-    buildAgentContext({
-      invocation_id: params.invocationId,
-      session_id: params.sessionId,
-      agent_type: 'travel_assistant',
-      model_name: params.modelName,
-      model_provider: params.modelProvider,
-      current_step_number: params.currentStepNumber ?? null,
-    }),
-  ];
-
-  if (params.toolParams) {
-    contexts.push(buildToolParams(params.toolParams));
-  }
-
-  if (params.toolResults) {
-    contexts.push(buildToolResults(params.toolResults));
-  }
-
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.agent.tracking/tool_execution/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.demo/tool_execution/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           step_number: params.stepNumber ?? null,
@@ -442,16 +456,70 @@ export const trackToolExecution = (params: ToolExecutionParams) => {
           success: params.success,
           error_type: params.errorType ?? null,
           error_message: params.errorMessage ?? null,
+          result_summary: params.resultSummary ?? null,
           executed_at: new Date().toISOString(),
         },
       },
     }),
-    contexts,
+    [
+      buildToolContext({
+        tool_name: params.toolName,
+        tool_category: params.toolCategory,
+        tool_call_id: params.toolCallId,
+        tool_description: params.toolDescription ?? null,
+        parameters_summary: params.parametersSummary ?? null,
+      }),
+      buildAgentContext({
+        invocation_id: params.invocationId,
+        session_id: params.sessionId,
+        agent_type: 'travel_assistant',
+        model_name: params.modelName,
+        model_provider: params.modelProvider,
+        current_step_number: params.currentStepNumber ?? null,
+      }),
+    ],
   );
 };
 ```
 
-The entities array starts with the two generic entities (`tool_context` and `agent_context`) and conditionally adds the custom entities. On a successful `search_flights` call, a single `tool_execution` event carries four entities: two from Iglu Central, two from `iglu-local`.
+`trackAgentCompletion` fires when the loop ends and records aggregate metrics across the whole invocation:
+
+```typescript title="src/lib/tracking/server.ts (continued)"
+export const trackAgentCompletion = (params: AgentCompletionParams) => {
+  const t = initServerTracker();
+  if (!t) return;
+
+  t.track(
+    buildSelfDescribingEvent({
+      event: {
+        schema: 'iglu:com.snowplow.demo/agent_completion/jsonschema/1-0-0',
+        data: {
+          invocation_id: params.invocationId,
+          total_steps: params.totalSteps,
+          total_duration_ms: params.totalDurationMs,
+          total_tokens: params.totalTokens,
+          tools_called: params.toolsCalled,
+          business_tools_called: params.businessToolsCalled ?? null,
+          self_tracking_tools_called: params.selfTrackingToolsCalled ?? null,
+          finish_reason: params.finishReason,
+          success: params.success,
+          final_response_length: params.finalResponseLength ?? null,
+          completed_at: new Date().toISOString(),
+        },
+      },
+    }),
+    [
+      buildAgentContext({
+        invocation_id: params.invocationId,
+        session_id: params.sessionId,
+        agent_type: 'travel_assistant',
+        model_name: params.modelName,
+        model_provider: params.modelProvider,
+      }),
+    ],
+  );
+};
+```
 
 ## Wire tracking into the chat route
 

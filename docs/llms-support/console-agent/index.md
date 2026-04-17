@@ -7,12 +7,12 @@ keywords: ["snowplow assistant", "ai assistant", "ai agent", "natural language",
 date: "2026-04-10"
 ---
 
-![Private Preview](https://img.shields.io/badge/Snowplow-Private%20Preview-6638b8?labelColor=9ba0aa)
+<span className="snowplow-badge-container"><img src="https://img.shields.io/badge/Snowplow-Private%20Preview-6638b8?labelColor=9ba0aa" alt="Private Preview" title="Private Preview" /></span>
 
 The Snowplow Assistant is an AI assistant embedded in [Snowplow BDP Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
 
 :::note[Private Preview]
-The Snowplow Assistant is in Private Preview. Contact your account team to enable it for your organization.
+The Snowplow Assistant is in Private Preview. Contact your account team to enable or disable it for your organization.
 :::
 
 ## How it works
@@ -32,6 +32,10 @@ The Snowplow Assistant does not have access to personal data or PII such as name
 :::warning[Third-party LLM processing]
 To provide this functionality, the content of your messages and the configuration data the assistant retrieves on your behalf are sent to a third-party LLM provider for processing. Do not enter personal data, credentials, or other sensitive information into the chat.
 :::
+
+### Disabling the assistant
+
+If your organization does not want to use the Snowplow Assistant, it can be disabled entirely. Contact your account team to turn it off, and the chat interface will not appear in the Console for any user in your organization.
 
 ## Capabilities
 

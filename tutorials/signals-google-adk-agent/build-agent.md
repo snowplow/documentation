@@ -88,6 +88,8 @@ def get_signals_context(domain_session_id: str) -> str:
         return ""
 ```
 
+With context fetching isolated in its own module, the agent code can stay focused on request handling and delegate Signals lookups to a single function call.
+
 ## Build the ADK agent
 
 Now replace the scaffold's `agent/main.py` — which is wired up for the proverbs demo — with one that reads the Snowplow session ID from state and calls `get_signals_context` on every turn.
@@ -205,7 +207,7 @@ if __name__ == "__main__":
 There are three key pieces to understand here:
 
 - **`extract_snowplow_session`** — an `ag_ui_adk` hook that runs before the ADK session is created. It reads from `input_data.forwarded_props` (populated by CopilotKit's `properties` prop) and returns a dict that gets merged into the ADK session state. Because `forwarded_props` is sent on every AG-UI request, the session ID is available for each chat message.
-- **`inject_signals_context`** (the `before_model_callback`) — runs every turn, just before the LLM is called. It reads the session ID from state, fetches fresh Signals attributes, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behaviour — including pages they've visited during the conversation.
+- **`inject_signals_context`** (the `before_model_callback`) — runs every turn, just before the LLM is called. It reads the session ID from state, fetches fresh Signals attributes, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behavior — including pages they've visited during the conversation.
 - **`append_instructions`** — an ADK `LlmRequest` method that adds content to the system instruction for this turn only. It doesn't mutate the agent's `instruction` field permanently — every turn starts fresh and gets the latest Signals data appended.
 
 The resulting system prompt for a turn where Signals has data looks like:
@@ -250,7 +252,7 @@ export function CopilotProvider({ children }: { children: React.ReactNode }) {
       setSessionId(id);
       return;
     }
-    // Tracker initialises in SnowplowProvider's effect, which runs in parallel
+    // Tracker initializes in SnowplowProvider's effect, which runs in parallel
     // with this one. Poll briefly until the tracker is ready.
     const interval = setInterval(() => {
       const id = getDomainSessionId();
@@ -279,7 +281,7 @@ export function CopilotProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-`getDomainSessionId()` is the single source of truth for session ID lookup — it wraps `tracker.getDomainUserInfo()` so you don't duplicate cookie parsing here. `SnowplowProvider` (which wraps `CopilotProvider` in `layout.tsx`) initialises the tracker in its own `useEffect`; because both effects run after mount, you poll briefly on the first render to handle the case where the tracker isn't ready yet. By the time a user types their first chat message, the session ID is reliably available.
+`getDomainSessionId()` is the single source of truth for session ID lookup — it wraps `tracker.getDomainUserInfo()` so you don't duplicate cookie parsing here. `SnowplowProvider` (which wraps `CopilotProvider` in `layout.tsx`) initializes the tracker in its own `useEffect`; because both effects run after mount, you poll briefly on the first render to handle the case where the tracker isn't ready yet. By the time a user types their first chat message, the session ID is reliably available.
 
 ## Verify the CopilotKit proxy endpoint
 

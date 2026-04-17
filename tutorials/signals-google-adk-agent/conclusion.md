@@ -17,7 +17,7 @@ This starts the Python agent on `:8000` and the React dev server on `:3000`. Ope
 
 Now open the CopilotKit sidebar and ask a question. The agent has your Signals context from the first message — its response will reflect what you've been browsing.
 
-## Debugging
+## Debug the integration
 
 The `main.py` above already logs each callback invocation via `log.info(...)` to stderr. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the very first turn:
 
@@ -28,7 +28,7 @@ The `main.py` above already logs each callback invocation via `log.info(...)` to
 
 Common issues:
 
-- **Empty session ID** — the Snowplow tracker never initialised. Check the browser Network tab for requests to your Collector; check that your Collector URL env var is set and exposed to the browser (`NEXT_PUBLIC_` prefix in the scaffold, or `VITE_` in Vite). Also verify the `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx` (not the other way around) — the tracker must set the cookie before the provider reads it.
+- **Empty session ID** — the Snowplow tracker never initialized. Check the browser Network tab for requests to your Collector; check that your Collector URL env var is set and exposed to the browser (`NEXT_PUBLIC_` prefix in the scaffold, or `VITE_` in Vite). Also verify the `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx` (not the other way around) — the tracker must set the cookie before the provider reads it.
 - **Empty Signals block but session ID present** — the attribute group hasn't been published, the service name in `.env` doesn't match the Console, or the session hasn't generated enough events for Signals to compute yet (give it 30–60 seconds of browsing).
 
 ## What's next
@@ -37,11 +37,11 @@ You've built an agent that knows what the user has been doing. The next step is 
 
 ### Interventions — agents that reach out first
 
-This tutorial covered the pull side: the agent fetches context when the user starts a conversation. Signals interventions add the push side — triggers that fire when a user crosses a behavioural threshold. A user who has viewed pricing five times without converting, a new visitor who's been stuck on the docs for ten minutes, a returning user who just landed on a page they've never seen before — interventions let you define those moments and have the agent proactively start a conversation. Combine this with CopilotKit's `useCopilotChatSuggestions` to surface contextual prompts in the sidebar at exactly the right time.
+This tutorial covered the pull side: the agent fetches context when the user starts a conversation. Signals interventions add the push side — triggers that fire when a user crosses a behavioral threshold. A user who has viewed pricing five times without converting, a new visitor who's been stuck on the docs for ten minutes, a returning user who just landed on a page they've never seen before — interventions let you define those moments and have the agent proactively start a conversation. Combine this with CopilotKit's `useCopilotChatSuggestions` to surface contextual prompts in the sidebar at exactly the right time.
 
 ### Richer attributes
 
-The Basic Web template covers session-level behaviour. For deeper personalisation, extend your attribute group with product affinity (views per category), engagement scoring (session depth and intent), return visitor detection, or funnel stage tracking.
+The Basic Web template covers session-level behavior. For deeper personalization, extend your attribute group with product affinity (views per category), engagement scoring (session depth and intent), return visitor detection, or funnel stage tracking.
 
 ### Generative UI with CopilotKit
 

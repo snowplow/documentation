@@ -7,7 +7,7 @@ keywords: ["Snowplow Browser SDK", "tracker", "page views", "activity tracking",
 date: "2026-04-17"
 ---
 
-Signals needs a behavioural event stream to work with. This step gets that stream flowing. You don't need custom events — standard page views, page pings, and link clicks are enough to build meaningful context.
+Signals needs a behavioral event stream to work with. This step gets that stream flowing. You don't need custom events — standard page views, page pings, and link clicks are enough to build meaningful context.
 
 The Snowplow Browser SDK (`@snowplow/browser-tracker`) handles the tracking. It also sets a cookie with a unique session ID, which is what you'll use as the lookup key when fetching attributes from Signals.
 
@@ -100,7 +100,7 @@ The scaffold uses `usePathname` from `next/navigation` for route-change detectio
 
 ## Wire it into the root component
 
-Wrap your app with the `SnowplowProvider` outside the CopilotKit provider. This is important: the Snowplow tracker must initialise first so its cookie exists before `CopilotProvider` tries to read the session ID.
+Wrap your app with the `SnowplowProvider` outside the CopilotKit provider. This is important: the Snowplow tracker must initialize first so its cookie exists before `CopilotProvider` tries to read the session ID.
 
 ```tsx
 // src/app/layout.tsx — modify the scaffolded root component:
@@ -175,4 +175,4 @@ export function ChatShell({ children }: { children: React.ReactNode }) {
 }
 ```
 
-With this in place, every route change fires a page view event, page pings track ongoing engagement, and link clicks are captured automatically. That gives Signals a rich behavioural stream to compute attributes from, and the agentic chat sidebar stays open throughout.
+With this in place, every route change fires a page view event, page pings track ongoing engagement, and link clicks are captured automatically. That gives Signals a rich behavioral stream to compute attributes from, and the agentic chat sidebar stays open throughout.

@@ -7,8 +7,6 @@ keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "Gemini", "AI agents"
 date: "2026-04-17"
 ---
 
-Welcome to the **Build a real-time context-aware agent with Signals, Google ADK, and CopilotKit** tutorial.
-
 Every company shipping an AI agent hits the same wall: the agent doesn't know who it's talking to or what they're trying to accomplish. A user has spent twenty minutes deep on your website, browsing its enterprise features and pricing — comparing tiers, reading the SLA fine print — and when they open the chat, the agent starts from zero:
 
 > User: "Can you help me understand your pricing?"

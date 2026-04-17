@@ -5,6 +5,7 @@ import {
   addGlobalContexts,
   enableActivityTracking,
   disableAnonymousTracking,
+  crossDomainLinker,
 } from '@snowplow/browser-tracker'
 import {
   LinkClickTrackingPlugin,
@@ -26,6 +27,14 @@ import { isEmpty, pickBy } from 'lodash'
 import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media'
 import { BotDetectionPlugin } from '@snowplow/browser-plugin-bot-detection'
 
+const CROSS_DOMAIN_TARGETS = ['snowplowanalytics.com']
+
+const crossDomainLinkerFn = (linkElement) => {
+  return CROSS_DOMAIN_TARGETS.some((domain) =>
+    linkElement.hostname.endsWith(domain)
+  )
+}
+
 const createTrackerConfig = (cookieName) => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname)
     ? 'docs2'
@@ -45,6 +54,8 @@ const createTrackerConfig = (cookieName) => {
     cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName,
     cookieSameSite: 'Lax',
+    crossDomainLinker: crossDomainLinkerFn,
+    useExtendedCrossDomainLinker: true,
     contexts: {
       webPage: true,
       performanceTiming: true,
@@ -131,6 +142,7 @@ const module = {
       // see https://github.com/facebook/docusaurus/pull/7424 regarding setTimeout
       setTimeout(() => {
         trackPageView()
+        crossDomainLinker(crossDomainLinkerFn)
       })
     }
   },

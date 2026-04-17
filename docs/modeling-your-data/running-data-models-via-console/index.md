@@ -49,7 +49,7 @@ We also highly recommend installing dbt locally so that you can quickly test you
 ## Initial setup
 
 First, create a Git connection to your repository:
-* In Console, go to **Destinations > Connections > Set up connection > Git connection**
+* In Console, go to **Settings > Connections > Set up connection > Git repository**
 * The setup flow will guide you to create and test the connection
 
 Next, create the model project:
@@ -93,7 +93,7 @@ You might have already set up a warehouse connection for loading the data. Data 
 
 :::
 
-Navigate to **Destinations > Connections > Set up connection > Data modeling connection**. Select your warehouse and follow the steps in Console to create and test your connection.
+Navigate to **Settings > Connections > Set up connection > Data modeling**. Select your warehouse and follow the steps in Console to create and test your connection.
 
 ## Add run configurations
 

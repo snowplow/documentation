@@ -7,7 +7,12 @@ keywords: ["snowplow assistant", "ai assistant", "ai agent", "natural language",
 date: "2026-04-10"
 ---
 
-<span className="snowplow-badge-container"><img src="https://img.shields.io/badge/Snowplow-Private%20Preview-6638b8?labelColor=9ba0aa" alt="Private Preview" title="Private Preview" /></span>
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="The Snowplow Assistant is in Private Preview for Snowplow BDP customers on Cloud and Private Managed Cloud."
+/>
 
 The Snowplow Assistant is an AI assistant embedded in [Snowplow BDP Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
 

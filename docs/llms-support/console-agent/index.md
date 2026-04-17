@@ -1,29 +1,41 @@
 ---
-title: "Console Agent"
-sidebar_label: "Console Agent"
+title: "Snowplow Assistant"
+sidebar_label: "Snowplow Assistant"
 sidebar_position: 50
-description: "The Console Agent is an AI assistant built into Snowplow BDP Console that lets you manage your tracking plans, pipelines, and data quality through natural language."
-keywords: ["console agent", "ai assistant", "ai agent", "natural language", "console", "automation"]
+description: "The Snowplow Assistant is an AI assistant built into Snowplow BDP Console that lets you manage your tracking plans, pipelines, and data quality through natural language."
+keywords: ["snowplow assistant", "ai assistant", "ai agent", "natural language", "console", "automation"]
 date: "2026-04-10"
 ---
 
-The Console Agent is an AI assistant embedded in [Snowplow BDP Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
+![Private Preview](https://img.shields.io/badge/Snowplow-Private%20Preview-6638b8?labelColor=9ba0aa)
+
+The Snowplow Assistant is an AI assistant embedded in [Snowplow BDP Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
+
+:::note[Private Preview]
+The Snowplow Assistant is in Private Preview. Contact your account team to enable it for your organization.
+:::
 
 ## How it works
 
-The Console Agent runs as a chat interface inside the Console. When you send a message, the agent determines which tools and skills to use, calls the relevant Snowplow APIs on your behalf, and returns the results in a conversational format.
-
-It is context-aware: the agent knows which Console page you're on and can tailor its responses accordingly. If [Signals](/docs/signals/concepts/index.md) is enabled for your account, the agent can also incorporate real-time behavioral attributes from your current session.
+The Snowplow Assistant runs as a chat interface inside the Console. When you send a message, the assistant determines which tools and skills to use, calls the relevant Snowplow APIs on your behalf, and returns the results in a conversational format.
 
 ### Permissions
 
-The Console Agent operates with **your existing Console permissions**. It authenticates using your current session and can only perform actions that your account is authorized to do. It cannot escalate privileges or access resources outside your organization.
+The Snowplow Assistant operates with **your existing Console permissions**. It authenticates using your current session and can only perform actions that your account is authorized to do. It cannot escalate privileges or access resources outside your organization.
 
-Any action that modifies data (creating a schema, updating an enrichment, deleting an alert) requires your explicit confirmation before the agent proceeds.
+Any action that modifies data (creating a schema, updating an enrichment, deleting an alert) requires your explicit confirmation before the assistant proceeds.
+
+### Data privacy
+
+The Snowplow Assistant does not have access to personal data or PII such as names or email addresses. It operates only on Snowplow configuration and metadata (schemas, tracking plans, pipeline settings, failed event error details, and similar).
+
+:::warning[Third-party LLM processing]
+To provide this functionality, the content of your messages and the configuration data the assistant retrieves on your behalf are sent to a third-party LLM provider for processing. Do not enter personal data, credentials, or other sensitive information into the chat.
+:::
 
 ## Capabilities
 
-The agent provides assistance across several areas of the Console. It loads specialized skills on demand based on your request.
+The assistant provides support across several areas of the Console. It loads specialized skills on demand based on your request.
 
 ### Tracking design
 
@@ -80,7 +92,7 @@ Perform day-to-day management tasks:
 
 ### Signals
 
-If [Signals](/docs/signals/concepts/index.md) is enabled for your organization, the agent can help you configure and manage it:
+If [Signals](/docs/signals/concepts/index.md) is enabled for your organization, the assistant can help you configure and manage it:
 
 - Define and manage attribute keys and attribute groups
 - Create services for pull-based attribute access

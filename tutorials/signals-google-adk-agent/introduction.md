@@ -25,7 +25,7 @@ That's the same model, the only difference is real-time behavioral user context.
 
 Now take it a step further. That user on the enterprise pricing page — what if they've been there for twenty minutes, visited the comparison table three times, and still haven't clicked "Talk to Sales"? That's a high-intent user who's stuck. With Signals interventions, the agent doesn't wait for the user to open the chat. It can proactively reach out — "I noticed you've been comparing our Enterprise and Pro plans. Want me to walk you through the differences for your team size?" — right when the behavioral data says the moment matters. Context tells the agent what to say. Interventions tell it *when* to say it.
 
-In this tutorial, you'll build that behavioral context layer. You'll wire [Snowplow Signals](/docs/signals/index.md) — which computes real-time attributes from your behavioral event stream — into a Google ADK agent, so the agent gets fresh context about the current user's session before every turn. The session attributes (pages viewed, engagement depth, time on site) get appended to the system prompt, and the model does the rest. Interventions are covered in a separate tutorial, but together they form the full picture: agents that know what to say and when to say it.
+In this tutorial, you'll build that behavioral context layer. You'll wire [Snowplow Signals](/docs/signals/) — which computes real-time attributes from your behavioral event stream — into a Google ADK agent, so the agent gets fresh context about the current user's session before every turn. The session attributes (pages viewed, engagement depth, time on site) get appended to the system prompt, and the model does the rest. Interventions are covered in a separate tutorial, but together they form the full picture: agents that know what to say and when to say it.
 
 ## What you'll build
 
@@ -66,7 +66,7 @@ flowchart TB
     A -->|"GET attributes<br/>by session ID"| SG
 ```
 
-Here's how the pieces fit together. The Snowplow Browser SDK streams behavioral [events](/docs/fundamentals/events/index.md) (page views, page pings, link clicks) to your Collector. Signals computes live session attributes from that stream. On the frontend, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop — which gets sent as `forwarded_props` in every AG-UI request, including the very first turn. The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction.
+Here's how the pieces fit together. The Snowplow Browser SDK streams behavioral [events](/docs/fundamentals/events/) (page views, page pings, link clicks) to your Collector. Signals computes live session attributes from that stream. On the frontend, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop — which gets sent as `forwarded_props` in every AG-UI request, including the very first turn. The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction.
 
 ## Prerequisites
 

@@ -61,9 +61,9 @@ Once you're happy locally, `ag_ui_adk` supports deployment to [Vertex AI Agent E
 
 ## Further reading
 
-- [Snowplow Signals documentation](/docs/signals/index.md)
+- [Snowplow Signals documentation](/docs/signals/)
 - [Snowplow Signals Python SDK](https://pypi.org/project/snowplow-signals/)
-- [Snowplow Browser Tracker](/docs/sources/web-trackers/index.md)
+- [Snowplow Browser Tracker](/docs/sources/web-trackers/)
 - [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
 - [ADK + AG-UI integration guide](https://google.github.io/adk-docs/integrations/ag-ui/)
 - [CopilotKit ADK integration](https://docs.copilotkit.ai/adk)

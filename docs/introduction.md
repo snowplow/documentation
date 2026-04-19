@@ -49,7 +49,7 @@ sidebar_custom_props:
     [Tracking plans](/docs/event-studio/tracking-plans/index.md)
     [Source applications](/docs/event-studio/source-applications/index.md)
     [Create a data structure](/docs/event-studio/data-structures/index.md)
-    [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md)
+    [Snowtype](/docs/event-studio/implement-tracking/index.md)
   </FeaturedSection>
 
   <FeaturedSection

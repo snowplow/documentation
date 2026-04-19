@@ -418,8 +418,16 @@ const fallbackRules = [
   ['/docs/testing/snowplow-micro/advanced-usage/*', '/docs/testing/snowplow-micro/local/advanced-usage/:splat', 301],
   ['/docs/testing/snowplow-micro/adding-schemas/*', '/docs/testing/snowplow-micro/local/schemas/:splat', 301],
   ['/docs/event-studio/mcp-server/*', '/docs/llms-support/mcp-server/:splat', 301],
+  // Snowtype restructure
+  ['/docs/event-studio/implement-tracking/snowtype/using-the-cli/*', '/docs/event-studio/implement-tracking/install-snowtype/:splat', 301],
+  ['/docs/event-studio/implement-tracking/snowtype/snowtype-config/*', '/docs/event-studio/implement-tracking/snowtype-config/:splat', 301],
+  ['/docs/event-studio/implement-tracking/snowtype/commands/*', '/docs/event-studio/implement-tracking/command-reference/:splat', 301],
+  ['/docs/event-studio/implement-tracking/snowtype/client-side-validation/*', '/docs/event-studio/implement-tracking/client-side-validation/:splat', 301],
+  ['/docs/event-studio/implement-tracking/snowtype/working-with-gtm/*', '/docs/event-studio/implement-tracking/working-with-gtm/:splat', 301],
+  ['/docs/event-studio/implement-tracking/snowtype/*', '/docs/event-studio/implement-tracking/:splat', 301],
   // Bot filtering moved to events section
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
+  ['/deprecation-policy', '/lifecycle-policy', 301],
 ];
 
 function findInRules(rules, pathname) {

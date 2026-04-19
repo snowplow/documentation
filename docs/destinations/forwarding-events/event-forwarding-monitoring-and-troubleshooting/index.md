@@ -44,8 +44,8 @@ When any type of failure occurs, Snowplow can take one or more of the following 
 
 Once a forwarder is deployed, you can configure one or more email addresses to send alerts when setup failures occur. Follow the steps below to configure the alerts.
 
-1. Navigate to **Destinations** > **Destinations list** from the navigation bar and click the **Details** button on a destination card to open the **Destination details** page.
-2. On the table of forwarders, click the three dots next to the forwarder you want to configure alerting for and select **Alerts**.
+1. Navigate to **Destinations** > **Event forwarding** from the sidebar.
+2. In the table of forwarders, click the three dots next to the forwarder you want to configure alerting for and select **Alerts**.
 3. You'll see a modal where you can enter the email addresses you want to be alerted in case of setup errors. Click **Save Changes** to confirm.
 
 ![Setup alerts modal dialog for configuring email addresses to receive forwarder error notifications](images/setup-alerting-screenshot.png)
@@ -62,7 +62,7 @@ You can monitor forwarders in a few ways:
 
 In Snowplow Console, you can see the number of filtered, failed, and successfully delivered events over the last seven days.
 
-To view these metrics, navigate to **Destinations** > **Destinations list** and select the destination you'd like to view. On the event forwarders overview table, you will see metrics for each forwarder configured for that destination.
+To view these metrics, navigate to **Destinations** > **Event forwarding**. In the event forwarders table, you will see metrics for each forwarder.
 
 ![Console metrics dashboard showing forwarder statistics including filtered, failed, and delivered event counts](images/event-forwarding-console-metrics.png)
 

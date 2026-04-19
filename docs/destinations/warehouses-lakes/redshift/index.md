@@ -65,7 +65,7 @@ Snowplow data also includes customizable [self-describing events](/docs/fundamen
 For each type of self-describing event and entity, there are additional tables that can be joined with the main table:
 
 <details>
-<summary>unstruct_event_com_acme_button_press_1</summary>
+<summary>com_acme_button_press_1</summary>
 
 | root_id | root_tstamp | button_name | button_color | ... |
 | ------- | ----------- | ----------- | ------------ | --- |
@@ -74,7 +74,7 @@ For each type of self-describing event and entity, there are additional tables t
 </details>
 
 <details>
-<summary>contexts_com_acme_product_1</summary>
+<summary>com_acme_product_1</summary>
 
 | root_id | root_tstamp | name | price | ... |
 | ------- | ----------- | ---- |------ | --- |
@@ -83,9 +83,9 @@ For each type of self-describing event and entity, there are additional tables t
 
 </details>
 
-Note:
-* "unstruct\[ured\] event" and "context" are the legacy terms for self-describing events and entities, respectively
-* the `_1` suffix represents the major version of the schema (e.g. `1-x-y`)
+:::note
+The `_1` suffix represents the major version of the schema (e.g. `1-x-y`).
+:::
 
 You can learn more [in the API reference section](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 

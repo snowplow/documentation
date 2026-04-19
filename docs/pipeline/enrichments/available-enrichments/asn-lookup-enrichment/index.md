@@ -156,7 +156,7 @@ This enrichment modifies the ASN entity (`iglu:com.snowplowanalytics.snowplow/as
 }
 ```
 
-If the ASN does not match any entry in the bot list, or the event's platform is in `bypassPlatforms`, the `likelyBot` field is not added to the entity.
+If the event's platform is in `bypassPlatforms`, the `likelyBot` field is not added to the entity.
 
 | Field | Type | Description |
 | --- | --- | --- |

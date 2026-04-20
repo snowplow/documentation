@@ -725,7 +725,7 @@ If you have multiple event specifications with the same name, you might experien
 We recommend giving each event specification a unique name.
 :::
 
-In Kotlin, Swift, and Dart, Snowtype uses the tracking plan name for extensions, which prevents name collisions.
+In Kotlin and Swift, Snowtype uses the tracking plan name for extensions, which prevents name collisions.
 
 For example, you may have two event specifications with the same name, `User Log In`, in two different tracking plans, `Checkout Flow` and `User Management`. In the `Checkout Flow` tracking plan, the `User Log In` event specification has the event data structure `login`. In the `User Management` tracking plan, the `User Log In` event specification has the event data structure `authentication_attempt`.
 
@@ -788,3 +788,27 @@ If your event specification uses any of these schemas for the event data structu
 * `iglu:com.snowplowanalytics.mobile/application_install/jsonschema/1-0-0`
 
 You'll see a warning logged when you generate code using these: `Warning: Currently code will not be generated for Standard events. Skipping`.
+
+### Schema property types
+
+Snowtype supports most [JSON Schema property types](/docs/api-reference/json-schema-reference/index.md). It supports the core property types used in the [data structures builder](/docs/event-studio/data-structures/index.md) for all languages: strings, string enums, integers, decimals, and booleans.
+
+These core property types can be nullable via union with null, e.g. a type of `["string", "null"]`. They can also be optional or `required` by the schema.
+
+For other complex data types, the support varies by language:
+
+| Property type                                | TypeScript | JavaScript | Kotlin | Swift | Dart | Java | Go  |
+| -------------------------------------------- | ---------- | ---------- | ------ | ----- | ---- | ---- | --- |
+| Non-null unions e.g. `["string", "integer"]` | ✅          | ✅/❌*       | ❌      | ❌     | ✅    | ❌    | ❌   |
+| Array of primitives                          | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
+| Array of arrays                              | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
+| Array of string enum                         | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅   |
+| Array of nullable string enum                | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
+| Array of object                              | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅   |
+| Array of nullable object                     | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
+| Object                                       | ✅          | ✅          | ✅      | ✅     | ❌    | ✅    | ✅   |
+| Nested objects                               | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅   |
+| String enum                                  | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
+| Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌   |
+
+*For non-null union types in JavaScript, Snowtype generates working code but the JSDoc comment will be incorrect.

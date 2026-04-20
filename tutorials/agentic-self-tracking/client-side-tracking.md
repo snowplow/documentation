@@ -356,6 +356,8 @@ sleep 2
 npm run dev
 ```
 
+{/* TODO: Add screenshot of the app */}
+
 Snowplow Micro validates every incoming event against its schema. Micro resolves Iglu Central schemas automatically, so you don't need local copies.
 
 The `-v` mount maps the local `snowplow/iglu-local` directory into the container. This directory is where you'll add your own custom entity schemas later on.
@@ -369,8 +371,6 @@ With both services running:
 3. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui). Press **Refresh** to see events arriving. You can click on individual events to explore their properties and attached entities. The [UI](/docs/testing/snowplow-micro/local/#checking-the-results) also shows any events that failed schema validation.
 4. Examine a `message_sent` event in the Micro UI. Notice the self-describing event structure and the attached `message_context` entity showing `"role": "user"`, the message length, and the truncated preview.
 5. Examine a `message_received` event. Notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used.
-
-{/* TODO: Maybe add screenshot of the app */}
 
 {/* TODO: Add screenshot of Micro UI showing one of these events */}
 

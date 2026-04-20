@@ -490,6 +490,8 @@ To test the constraint handling, send "Find a flight to Tokyo for $20"
 
 You now have all three layers of tracking in place.
 
+{/* TODO: Add screenshot of Micro UI showing the events */}
+
 ## Schema reference
 
 The schemas used in this stage are published on [Iglu Central](https://iglucentral.com/) under vendor `com.snowplow.agent.tracking`, as before.

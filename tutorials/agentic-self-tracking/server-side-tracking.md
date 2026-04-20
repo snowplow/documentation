@@ -748,6 +748,8 @@ npm run start:dev
 6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
 7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
+{/* TODO: Add screenshot of Micro UI showing one of these events */}
+
 You now have visibility into both the user's actions and the agent's execution.
 
 ## Schema reference

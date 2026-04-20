@@ -121,12 +121,12 @@ Both paths cover the same concepts. You can switch between them at any stage.
 The [companion repository](https://github.com/snowplow-industry-solutions/agentic-app-tracking-tutorial) has four tagged commits, one for each stage:
 
 
-| Tag                     | Stage                 | Question answered           |
-| ----------------------- | --------------------- | --------------------------- |
-| `v0.0-starter`          | The starter app TODO  | (no tracking yet)           |
-| `v0.1-client-tracking`  | Client-side tracking  | "What did the user do?"     |
-| `v0.2-server-tracking`  | Server-side tracking  | "What did the agent do?"    |
-| `v0.3-agentic-tracking` | Agentic self-tracking | "What did the agent think?" |
+| Tag                     | Stage                   | Question answered           |
+| ----------------------- | ----------------------- | --------------------------- |
+| `v0.0-starter`          | The initial application | (no tracking yet)           |
+| `v0.1-client-tracking`  | Client-side tracking    | "What did the user do?"     |
+| `v0.2-server-tracking`  | Server-side tracking    | "What did the agent do?"    |
+| `v0.3-agentic-tracking` | Agentic self-tracking   | "What did the agent think?" |
 
 ## Prerequisites
 

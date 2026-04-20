@@ -7,7 +7,7 @@ keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "Gemini", "AI agents"
 date: "2026-04-17"
 ---
 
-In this tutorial, you'll wire [Snowplow Signals](/docs/signals/) into a Google ADK agent so the agent gets fresh context about the current user's session before every turn. Instead of responding generically, the agent will know which pages the user has been browsing, how long they've been on the site, and what they've been looking at.
+In this tutorial, you'll add [Snowplow Signals](/docs/signals/) to a Google ADK agent so the agent gets fresh context about the current user's session before every response. Instead of responding generically, the agent will know which pages the user has been browsing, how long they've been on the site, and what they've been looking at.
 
 The app will:
 
@@ -62,12 +62,19 @@ flowchart TB
     A -->|"GET attributes<br/>by session ID"| SG
 ```
 
-The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) (page views, page pings, link clicks) to your Collector. Signals computes live session attributes from that stream. On the frontend, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop, which gets sent as `forwarded_props` in every AG-UI request, including the very first turn. The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction.
+The flow works like this:
+- The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
+- Signals computes live session attributes from that stream
+- On the front-end, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop
+- The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
+- The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction
 
 ## Prerequisites
 
 - A Snowplow account with [Signals deployed](/docs/signals/connection/)
 - Node.js 18+ and npm/pnpm
-- Python 3.12+ (the scaffold uses [`uv`](https://docs.astral.sh/uv/) for dependency management — it will be installed automatically if needed)
-- A Google AI Studio API key — get one at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey). If you prefer Vertex AI, see the ADK docs on [Vertex AI auth](https://docs.cloud.google.com/agent-builder/agent-engine/quickstart-adk).
+- Python 3.12+
+- A Google AI Studio API key
+  - [AI Studio](https://aistudio.google.com/app/apikey)
+  - [Vertex AI](https://docs.cloud.google.com/agent-builder/agent-engine/quickstart-adk)
 - Basic familiarity with React, Python, and TypeScript

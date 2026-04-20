@@ -19,12 +19,12 @@ Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute
 
 The Basic Web template includes these attributes:
 
-| Attribute               | Description                               |
-| ----------------------- | ----------------------------------------- |
-| `page_views_count`      | Total number of page views in the session |
-| `unique_pages_viewed`   | A map of each distinct page path to the number of times it was viewed in the session (e.g. `{"/products/electronics/wireless-headphones": 3, "/pricing": 1}`) |
-| `first_event_timestamp` | When the session started                  |
-| `last_event_timestamp`  | When the most recent event was recorded   |
+| Attribute               | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `page_views_count`      | Total number of page views in the session  |
+| `unique_pages_viewed`   | List of unique URLs visited in the session |
+| `first_event_timestamp` | When the session started                   |
+| `last_event_timestamp`  | When the most recent event was recorded    |
 
 Test your attribute group by clicking **Run Preview** before saving, to verify it's computing correctly based on recent events in your pipeline. This runs a query against your event data in your data warehouse and shows the computed attributes for recent sessions.
 
@@ -59,16 +59,16 @@ The service returns attributes for a given session ID in this format:
 ```json
 {
   "page_views_count": 12,
-  "unique_pages_viewed": {
-    "/": 1,
-    "/products/electronics": 2,
-    "/products/electronics/wireless-headphones": 4,
-    "/products/electronics/smart-speaker-mini": 2,
-    "/pricing": 3
-  },
+  "unique_pages_viewed": [
+    "http://localhost:3000/",
+    "http://localhost:3000/products/electronics",
+    "http://localhost:3000/products/electronics/wireless-headphones",
+    "http://localhost:3000/products/electronics/smart-speaker-mini",
+    "http://localhost:3000/pricing"
+  ],
   "first_event_timestamp": "2026-04-09T14:23:01.000Z",
   "last_event_timestamp": "2026-04-09T14:41:03.000Z"
 }
 ```
 
-The `unique_pages_viewed` attribute is a map of page paths to view counts, showing the agent which pages the user has been browsing and how many times.
+The `unique_pages_viewed` attribute is a list of URLs the user has visited during the session, showing the agent which pages they have been browsing.

@@ -19,12 +19,12 @@ Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute
 
 The Basic Web template includes these attributes:
 
-| Attribute               | Description                               |
-| ----------------------- | ----------------------------------------- |
-| `page_views_count`      | Total number of page views in the session |
-| `unique_pages_viewed`   | Number of distinct pages visited          |
-| `first_event_timestamp` | When the session started                  |
-| `last_event_timestamp`  | When the most recent event was recorded   |
+| Attribute               | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `page_views_count`      | Total number of page views in the session  |
+| `unique_pages_viewed`   | List of unique URLs visited in the session |
+| `first_event_timestamp` | When the session started                   |
+| `last_event_timestamp`  | When the most recent event was recorded    |
 
 Test your attribute group by clicking **Run Preview** before saving, to verify it's computing correctly based on recent events in your pipeline. This runs a query against your event data in your data warehouse and shows the computed attributes for recent sessions.
 

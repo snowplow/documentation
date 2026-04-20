@@ -11,7 +11,7 @@ The next step is to connect Signals to the Google ADK agent, and forward the Sno
 
 ## Fetch Signals context from Python
 
-Create a module inside the `agent/` directory that wraps the Snowplow Signals Python SDK:
+Create a module inside the `agent/` directory that wraps the [Snowplow Signals Python SDK](/docs/signals/attributes/using-python-sdk/):
 
 ```python
 # agent/signals_context.py
@@ -90,7 +90,7 @@ def get_signals_context(domain_session_id: str) -> str:
 
 ## Build the agent
 
-Replace the scaffold's `agent/main.py` — which is wired up for the proverbs demo — with one that reads the Snowplow session ID from state and calls `get_signals_context` on every turn.
+Replace the scaffold's `agent/main.py` with one that reads the Snowplow session ID from state and calls `get_signals_context` on every turn.
 
 ```python
 # agent/main.py
@@ -159,7 +159,7 @@ root_agent = LlmAgent(
     before_model_callback=inject_signals_context,
 )
 
-# ADKAgent wraps the LlmAgent and makes it speak AG-UI.
+# ADKAgent exposes the LlmAgent over the AG-UI protocol
 adk_agent = ADKAgent(
     adk_agent=root_agent,
     app_name="signals_adk_agent",
@@ -202,9 +202,11 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=port)
 ```
 
-- **`extract_snowplow_session`** — an `ag_ui_adk` hook that runs before the ADK session is created. It reads from `input_data.forwarded_props` (populated by CopilotKit's `properties` prop) and returns a dict that gets merged into the ADK session state. Because `forwarded_props` is sent on every AG-UI request, the session ID is available for each chat message.
-- **`inject_signals_context`** (the `before_model_callback`) — runs every turn, just before the LLM is called. It reads the session ID from state, fetches fresh Signals attributes, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behavior — including pages they've visited during the conversation.
-- **`append_instructions`** — an ADK `LlmRequest` method that adds content to the system instruction for this turn only. It doesn't mutate the agent's `instruction` field permanently — every turn starts fresh and gets the latest Signals data appended.
+The `inject_signals_context` method is the `before_model_callback`. It runs every turn, just before the LLM is called. It reads the session ID from state, fetches fresh Signals attributes, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behavior, including pages they've visited during the conversation.
+
+Within `inject_signals_context`, `append_instructions` is an ADK `LlmRequest` method that adds content to the system instruction for this turn only. It doesn't mutate the agent's `instruction` field permanently; every turn starts fresh and gets the latest Signals data appended.
+
+The `extract_snowplow_session` method is an `ag_ui_adk` hook that runs before the ADK session is created. It reads from `input_data.forwarded_props`, which is populated by CopilotKit's `properties` prop. It returns a dictionary that gets merged into the ADK session state. Because `forwarded_props` is sent on every AG-UI request, the session ID is available for each chat message.
 
 The resulting system prompt for a turn where Signals has data looks like:
 
@@ -218,18 +220,17 @@ your responses. Reference what the user has been looking at to give more relevan
 ## Real-Time User Context (Snowplow Signals)
 The following attributes describe the current user's session behavior on this application:
 - page_views_count: 12
-- unique_pages_viewed: {'/': 1, '/products/electronics': 2, '/products/electronics/wireless-headphones': 4, '/products/electronics/smart-speaker-mini': 2, '/pricing': 3}
+- unique_pages_viewed: ["http://localhost:3000/products/electronics",
+    "http://localhost:3000/products/electronics/wireless-headphones"]
 - first_event_timestamp: 2026-04-09T14:23:01.000Z
 - last_event_timestamp: 2026-04-09T14:41:03.000Z
 ```
 
 Gemini treats the Signals block as factual context about the current user. No special prompting is needed beyond including it: the model naturally incorporates the context when formulating responses.
 
-## Forward the session ID from frontend to agent
+## Forward the session ID from front-end to agent
 
-The backend's `extract_snowplow_session` expects the Snowplow session ID to arrive in `forwarded_props.snowplowDomainSessionId`. CopilotKit's `properties` prop delivers it: anything passed to `properties` is sent as `forwarded_props` in every AG-UI request, including the first.
-
-Extend the placeholder `CopilotProvider` you created in the tracking setup step to read the session ID via the `getDomainSessionId()` helper from `snowplow.ts` and pass it to `<CopilotKit>` via the `properties` prop:
+Extend the placeholder `CopilotProvider` you created in the tracking setup stage to read the session ID via the `getDomainSessionId()` helper from `snowplow.ts`, and pass it to `<CopilotKit>` via the `properties` prop:
 
 ```tsx
 // src/components/copilot-provider.tsx
@@ -277,14 +278,14 @@ export function CopilotProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-`getDomainSessionId()` wraps `tracker.getDomainUserInfo()` so session ID lookup is in one place. `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx` and initializes the tracker first; because both effects run after mount, the provider polls briefly to handle the case where the tracker isn't ready yet.
+`SnowplowProvider` wraps `CopilotProvider` in `layout.tsx` and initializes the tracker first. Because both effects run after mount, the provider polls briefly to handle the case where the tracker isn't ready yet.
 
-## Verify the CopilotKit proxy endpoint
+## Check the CopilotKit proxy endpoint
 
-The scaffold includes a server-side endpoint that bridges CopilotKit to your Python agent (`src/app/api/copilotkit/route.ts`). Verify it matches:
+The scaffold includes a server-side endpoint that bridges CopilotKit to your Python agent at `src/app/api/copilotkit/route.ts`. Verify it matches:
 
 ```tsx
-// src/app/api/copilotkit/route.ts (scaffolded — verify it matches)
+// src/app/api/copilotkit/route.ts
 import {
   CopilotRuntime,
   ExperimentalEmptyAdapter,
@@ -314,28 +315,39 @@ export const POST = async (req: NextRequest) => {
 };
 ```
 
-This is a thin proxy. `CopilotRuntime` handles the AG-UI envelope (state sync, tool calls, readables) and `HttpAgent` relays every request to your FastAPI service at `http://localhost:8000/`, where `ADKAgent` decodes AG-UI messages back into ADK sessions. In the scaffold this lives in a Next.js API route; in a plain SPA you'd host it in a small Express server.
+This is a thin proxy. `CopilotRuntime` handles the AG-UI envelope including state sync, tool calls, and readables. `HttpAgent` relays every request to your FastAPI service at `http://localhost:8000/`, where `ADKAgent` decodes AG-UI messages back into ADK sessions. In the scaffold this lives in a Next.js API route.
 
-## Replace the scaffold's page
+## Try it out
 
-The scaffold's `src/app/page.tsx` imports the demo components you deleted in the project setup step, so it needs to be replaced. The chat sidebar is already mounted by `ChatShell` in `layout.tsx`, so the page itself only needs homepage content:
+Your application is now ready to try out.
 
-```tsx
-// src/app/page.tsx
-export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-50 to-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Signal Shop</h1>
-        <p className="text-lg text-gray-600">
-          Browse around and chat with the assistant to see Signals in action.
-        </p>
-      </div>
-    </main>
-  );
-}
+Run the stack:
+
+```bash
+npm run dev
 ```
 
-:::tip[Need a richer demo?]
-A single page won't generate interesting Signals attributes (unique pages will always be 1). See the "Add more pages" section in the project setup step for a prompt to generate a multi-page store.
-:::
+Make sure you've replaced the placeholder values in `.env` with real credentials.
+
+Open [http://localhost:3000](http://localhost:3000) and browse around for a few minutes. Visit different pages, click some links. The Browser tracker will record these interactions, and Signals will compute your attributes in real time.
+
+Open the CopilotKit sidebar and ask a general question. If your Signals service is returning attributes for your session, the agent's response will reference what you've been doing.
+
+## Verify Signals context
+
+You can verify that the app is receiving the Signals context by checking the agent logs. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the first turn:
+
+```
+[agent] before_model_callback: state_keys=['snowplowDomainSessionId', '_ag_ui_thread_id', '_ag_ui_app_name', '_ag_ui_user_id'] snowplow_session_id='472f97c1-eec1-45fe-b081-3ff695c30415'
+[agent] injecting signals block (287 chars)
+```
+
+If the session ID is missing, the Snowplow tracker never initialized. Check:
+* The browser's Network tab for requests to your Collector
+* That your Collector URL environment variable is set and exposed to the browser (`NEXT_PUBLIC_` prefix in the scaffold)
+* That `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx`
+
+If the Signals block is empty but the session ID is present, check:
+* Is your attribute group published?
+* Did you create a service with the right name?
+* Have you been browsing for long enough for events to flow through the pipeline?

@@ -101,7 +101,7 @@ export function SnowplowProvider({ children }: { children: React.ReactNode }) {
 ```
 
 :::note[Using a different framework?]
-The scaffold uses `usePathname` from `next/navigation` for route-change detection. In a Vite or CRA app, swap this for `useLocation` from `react-router-dom`. The Snowplow tracker itself is framework-agnostic.
+The scaffold uses `usePathname` from `next/navigation` for route-change detection. In a Vite application, swap this for `useLocation` from `react-router-dom`. The Snowplow tracker itself is framework-agnostic.
 :::
 
 ## Add to the root layout
@@ -139,7 +139,7 @@ export default function RootLayout({
 }
 ```
 
-`CopilotProvider` is a thin wrapper around `<CopilotKit>`. Create the placeholder version now so the layout compiles — you'll extend it in the next step to read the Snowplow session ID from the tracker cookie and forward it to the agent on every request (including the very first chat message).
+`CopilotProvider` is a thin wrapper around `<CopilotKit>`. Create the placeholder version now so the layout compiles. You'll extend it in the next step to read the Snowplow session ID from the tracker cookie.
 
 ```tsx
 // src/components/copilot-provider.tsx

@@ -7,7 +7,7 @@ keywords: ["CopilotKit", "Google ADK", "scaffold", "setup", "uv", "Next.js"]
 date: "2026-04-17"
 ---
 
-CopilotKit ships a starter that scaffolds both the ADK Python backend and a React frontend in one command.
+CopilotKit ships a starter that scaffolds both the ADK Python back-end and a React front-end in one command.
 
 ## Scaffold the app
 
@@ -19,14 +19,16 @@ cd signals-adk-agent
 This creates:
 
 - `agent/` — Python ADK agent entrypoint at `agent/main.py` and `pyproject.toml`
-- `src/` — React frontend with CopilotKit wired up and a demo agent
+- `src/` — React front-end with CopilotKit wired up and a demo agent
 - `scripts/` — `setup-agent.sh` (runs `uv sync`) and `run-agent.sh`
 - `package.json` scripts: `dev:ui`, `dev:agent`, and `dev` (runs both concurrently)
 
-The scaffold's Python side uses `uv` — not pip — and the agent venv lives at `agent/.venv`.
+The scaffold's Python side uses `uv` rather than pip. The agent virtual environment lives at `agent/.venv`.
 
-:::note[Framework note]
-The scaffold uses Next.js as a convenience — it provides a dev server, routing, and an API endpoint to host the CopilotKit proxy. CopilotKit itself is a React library that works with any framework (Vite, Remix, CRA, etc.). The three pieces that matter in this tutorial are CopilotKit (React), Google ADK (Python), and Snowplow Signals (API) — the framework around them is your choice.
+:::note[React frameworks]
+The scaffold uses Next.js as a convenience. It provides a development server, routing, and an API endpoint to host the CopilotKit proxy.
+
+CopilotKit itself is a React library that works with any framework.
 :::
 
 ## Install frontend and backend dependencies
@@ -47,7 +49,7 @@ cd agent && uv add snowplow-signals && cd ..
 
 ## Configure environment variables
 
-Create your `.env` at the project root (not inside `agent/`):
+Create your `.env` at the project root. Navigate back to the project root if you're still in the `agent/` directory. The file should contain the following variables:
 
 ```bash
 # Gemini / Google AI Studio
@@ -80,7 +82,7 @@ Confirm the scaffold runs. Set `GOOGLE_API_KEY` to a real Google AI Studio key i
 npm run dev
 ```
 
-This uses `concurrently` to launch FastAPI on `http://localhost:8000` and the React dev server on `http://localhost:3000`, with agent logs prefixed `[agent]` and UI logs prefixed `[ui]`. Open the frontend, open the CopilotKit sidebar, and confirm you can chat with the Gemini-backed agent. Exit the dev server with Ctrl+C before moving on.
+This uses `concurrently` to launch FastAPI on `http://localhost:8000` and the React development server on `http://localhost:3000`, with agent logs prefixed `[agent]` and UI logs prefixed `[ui]`. Open the front-end, open the CopilotKit sidebar, and confirm you can chat with the Gemini-backed agent. Exit the development server with `Ctrl+C` before moving on.
 
 ## Strip the scaffold's demo content
 
@@ -90,18 +92,40 @@ Remove the demo components and types the scaffold ships with:
 rm src/components/proverbs.tsx src/components/weather.tsx src/lib/types.ts
 ```
 
-After this, `src/app/page.tsx` will fail to compile because it still imports those deleted files — you'll replace it with a plain homepage in the agent integration step. Don't run `npm run dev` again until then.
+After this, `src/app/page.tsx` will fail to compile because it still imports those deleted files.
+
+## Replace the scaffold's page contents
+
+The scaffold's `src/app/page.tsx` imports the demo components you just deleted, so it needs to be replaced. The chat sidebar is already mounted by `ChatShell` in `layout.tsx`, so the page itself only needs homepage content:
+
+```tsx
+// src/app/page.tsx
+export default function HomePage() {
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 to-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Signal Shop</h1>
+        <p className="text-lg text-gray-600">
+          Browse around and chat with the assistant to see Signals in action.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+The project should now compile again. Check it runs with `npm run dev`.
 
 ## Add more pages
 
 The scaffolded project starts with only a single page.
 
-To see Signals in action, you'll need multiple pages so there's meaningful browsing behavior to track. The easiest way to add pages is to ask an AI coding assistant (Claude, Cursor, etc.) to generate some.
+To see Signals in action, you'll need multiple pages so there's meaningful browsing behavior to track. The easiest way to add pages is to ask an AI coding assistant to generate some.
 
 Example prompt:
 
 ```txt
-Create a simple multi-page e-commerce site for a fictional store called "Signal Shop". It should have:
+Create a simple multi-page ecommerce site for a fictional store called "Signal Shop". It should have:
 - A homepage with featured products
 - Category landing pages at `/products/[category]` for at least three categories (electronics, clothing, home)
 - Individual product detail pages at `/products/[category]/[slug]` (e.g. `/products/electronics/wireless-headphones`) with at least 8 distinct products spread across the categories

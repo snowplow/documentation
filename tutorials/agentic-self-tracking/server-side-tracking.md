@@ -733,7 +733,9 @@ A few things to note in the code above:
 
 ## Try it out
 
-Check that `.env.local` has a valid API key for the model you plan to use - placeholder values like `sk-ant-...` cause silent failures.
+:::warning[Valid API key required]
+Check that `.env.local` has a valid API key for the model you plan to use. Placeholder values like `sk-ant-...` cause **silent failures** (the app may appear to run but the model will not respond correctly).
+:::
 
 ```bash
 git checkout v0.2-server-tracking  # (or verify your code-along)

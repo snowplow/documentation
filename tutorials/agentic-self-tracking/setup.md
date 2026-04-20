@@ -52,7 +52,9 @@ SNOWPLOW_COLLECTOR_URL=http://localhost:9090
 SNOWPLOW_APP_ID=travel-agent-demo
 ```
 
-The app will run if you configure the wrong key or use a placeholder, but requests will fail silently.
+:::warning[Valid API key required]
+The app will start even if you use the wrong key or leave placeholder values (like `sk-ant-...` from the example file), but **LLM requests will fail silently**: the UI may look healthy while the model never responds correctly.
+:::
 
 The environment variables break down by accelerator stage:
 

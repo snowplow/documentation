@@ -454,6 +454,10 @@ The system prompt tells the agent *when* and *how* to use its self-tracking tool
 
 ## Try it out
 
+:::tip[LLM API keys]
+If you are on this branch without repeating earlier steps, confirm `.env.local` has **real** provider API keys (not placeholders). Invalid keys often fail silently; see [Configure environment variables](./setup#configure-environment-variables).
+:::
+
 Run the application:
 
 ```bash

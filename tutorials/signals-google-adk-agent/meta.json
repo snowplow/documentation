@@ -1,8 +1,8 @@
 {
   "title": "Build a real-time context-aware agent with Signals, Google ADK, and CopilotKit",
   "label": "Solution accelerator",
-  "description": "Wire Snowplow Signals into a Google ADK agent so it gets fresh real-time user context on every turn, and embed it in a React app with CopilotKit.",
+  "description": "Add Snowplow Signals to a Google ADK agent so it gets real-time user context for every response, and embed it in a React app with CopilotKit.",
   "useCase": "Customer-facing AI agents",
-  "technologies": ["Google ADK", "CopilotKit", "Gemini", "AG-UI", "FastAPI", "React"],
-  "snowplowTech": ["Signals", "Browser tracker"]
+  "technologies": ["Google ADK", "CopilotKit", "Gemini", "React"],
+  "snowplowTech": ["Signals"]
 }

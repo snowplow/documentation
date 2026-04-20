@@ -7,15 +7,15 @@ keywords: ["Signals", "attribute group", "service", "Basic Web", "domain_session
 date: "2026-04-17"
 ---
 
-Now that events are flowing, you need to tell Signals what to compute from them. You define attribute groups — the specific metrics you care about — and Signals keeps them current as events arrive.
+The next step is to define the user attributes you want to compute. You'll do this within [Snowplow Console](https://console.snowplowanalytics.com).
 
-## Use a templated attribute group
+## Create a Basic Web attribute group
 
-Instead of building an attribute group from scratch, use one of Signals' built-in templates.
+Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute-groups) templates to define attributes. Use the `domain_sessionid` as attribute key to compute session-level attributes.
 
-1. In Snowplow Console, navigate to **Signals → Attribute Groups**
-2. Click **Create attribute group** and choose **Basic Web** (or a template suited to your use case)
-3. Set the **Attribute Key** to `domain_sessionid` to aggregate attributes at the session level
+1. In [Console](https://console.snowplowanalytics.com), navigate to **Signals** > **Attribute Groups**
+2. Click **Create attribute group** and choose **Basic Web**
+3. Set the **Attribute Key** to `domain_sessionid`
 
 The Basic Web template includes these attributes:
 
@@ -26,29 +26,35 @@ The Basic Web template includes these attributes:
 | `first_event_timestamp` | When the session started                  |
 | `last_event_timestamp`  | When the most recent event was recorded   |
 
-Click **Run Preview** to validate the attribute group against recent events in your warehouse, then click **Create Attribute Group**.
+Test your attribute group by clicking **Run Preview** before saving, to verify it's computing correctly based on recent events in your pipeline. This runs a query against your event data in your data warehouse and shows the computed attributes for recent sessions.
+
+Click **Create attribute group** when you're happy with the attribute group.
 
 ## Publish the attribute group
 
-Attribute groups need to be published before they start computing:
+[Attribute groups](/docs/signals/concepts/#attribute-groups) need to be published before Signals will start computing:
 
 1. Open your attribute group and click **Publish**
-2. Confirm the publish — this deploys the computation logic to the pipeline
+2. Confirm the publish to deploy the computation logic to the pipeline
 
 Once published, Signals starts computing attributes for each user session as events arrive.
 
 ## Create a service
 
-A service is a pull-based API endpoint that exposes your computed attributes for a specific lookup key. You'll fetch attributes by `domain_sessionid` from your Python agent.
+A [service](/docs/signals/concepts/#services) provides a pull-based API endpoint that exposes your computed attributes for a specific attribute (lookup) key.
 
-1. Navigate to **Signals → Services**
-2. Click **New Service**
+Services allow you to combine multiple attribute groups if needed, but for this tutorial, use just the one you created in the last step.
+
+Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in your `.env` file.
+
+1. Navigate to **Signals** > **Services**
+2. Click **Create service**
 3. Configure:
-   - **Name**: `web_agent_context` (must match `SNOWPLOW_SIGNALS_SERVICE_NAME` in your `.env`)
-   - **Attribute Group**: the one you just published
-4. Click **Create**
+   - **Name**: `web_agent_context`
+   - **Attribute groups**: Select the attribute group you just published
+4. Click **Create service**
 
-The service's response for a given session ID looks like:
+The service returns attributes for a given session ID in this format:
 
 ```json
 {
@@ -65,4 +71,4 @@ The service's response for a given session ID looks like:
 }
 ```
 
-Because `unique_pages_viewed` is a map of paths to view counts, the agent sees exactly which products and categories the user has been browsing on.
+The `unique_pages_viewed` attribute is a map of page paths to view counts, showing the agent which pages the user has been browsing and how many times.

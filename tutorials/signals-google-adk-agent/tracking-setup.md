@@ -1,15 +1,17 @@
 ---
 title: "Set up Snowplow tracking"
-sidebar_label: "Tracking setup"
+sidebar_label: "Set up Snowplow tracking"
 position: 3
-description: "Initialize the Snowplow Browser SDK, track page views on client-side route changes, and wire the tracker into the React layout."
+description: "Initialize the Snowplow Browser tracker, track page views on client-side route changes, and wire the tracker into the React layout."
 keywords: ["Snowplow Browser SDK", "tracker", "page views", "activity tracking", "link clicks"]
 date: "2026-04-17"
 ---
 
-Signals needs a behavioral event stream to work with. This step gets that stream flowing. You don't need custom events — standard page views, page pings, and link clicks are enough to build meaningful context.
+[Snowplow Signals](/docs/signals/get-started/) computes user attributes from your Snowplow behavioral event stream. Follow these steps to create events to work with.
 
-The Snowplow Browser SDK (`@snowplow/browser-tracker`) handles the tracking. It also sets a cookie with a unique session ID, which is what you'll use as the lookup key when fetching attributes from Signals.
+Signals doesn't need custom events: standard [page views](/docs/sources/web-trackers/tracking-events/page-views/), [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/), and [link clicks](/docs/sources/web-trackers/tracking-events/link-click/) are enough to build meaningful real-time context.
+
+Since you're building a Next.js app, you'll use the [Snowplow Browser tracker](/docs/sources/web-trackers/), which is designed for npm-based frameworks.
 
 ## Initialize the tracker
 
@@ -67,9 +69,13 @@ export function getDomainSessionId(): string {
 }
 ```
 
+The [session ID](/docs/events/identifiers/#session-identifiers) is stored in the [`_sp_id` cookie](/docs/sources/web-trackers/cookies-and-local-storage/), which the [`getDomainUserInfo()` method](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/) reads. You'll use this value later to fetch the current user's Signals attributes.
+
 ## Track page views on route changes
 
-In single-page apps, client-side navigation doesn't trigger full page reloads, so you need to track page views when the route changes. Create a provider component that fires a page view on every route change:
+In a Next.js App Router app, client-side navigation doesn't trigger full page reloads.
+
+Create a client component to track page views when the route changes:
 
 ```tsx
 // src/components/snowplow-provider.tsx
@@ -98,9 +104,9 @@ export function SnowplowProvider({ children }: { children: React.ReactNode }) {
 The scaffold uses `usePathname` from `next/navigation` for route-change detection. In a Vite or CRA app, swap this for `useLocation` from `react-router-dom`. The Snowplow tracker itself is framework-agnostic.
 :::
 
-## Wire it into the root component
+## Add to the root layout
 
-Wrap your app with the `SnowplowProvider` outside the CopilotKit provider. This is important: the Snowplow tracker must initialize first so its cookie exists before `CopilotProvider` tries to read the session ID.
+Wrap your app with the `SnowplowProvider` outside the CopilotKit provider. The Snowplow tracker must initialize first so its cookie exists before `CopilotProvider` tries to read the session ID.
 
 ```tsx
 // src/app/layout.tsx — modify the scaffolded root component:
@@ -175,4 +181,4 @@ export function ChatShell({ children }: { children: React.ReactNode }) {
 }
 ```
 
-With this in place, every route change fires a page view event, page pings track ongoing engagement, and link clicks are captured automatically. That gives Signals a rich behavioral stream to compute attributes from, and the agentic chat sidebar stays open throughout.
+With this in place, every route change fires a page view event, page pings track ongoing engagement, and link clicks are captured automatically. That gives Signals a rich behavioral event stream to compute attributes from.

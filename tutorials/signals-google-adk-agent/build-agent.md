@@ -1,13 +1,13 @@
 ---
-title: "Build the agent integration"
-sidebar_label: "Build the agent"
+title: "Connect Signals to the Google ADK agent"
+sidebar_label: "Connect Signals and agent"
 position: 5
 description: "Fetch Signals attributes from Python, build a Google ADK agent that injects them into its system instruction each turn, and forward the Snowplow session ID from the React frontend through CopilotKit."
 keywords: ["Google ADK", "CopilotKit", "AG-UI", "Signals", "LlmAgent", "before_model_callback"]
 date: "2026-04-17"
 ---
 
-This is the core of the tutorial — connecting Signals to your Google ADK agent, and wiring the Snowplow session ID through CopilotKit so the agent knows *which* user to fetch context for.
+The next step is to connect Signals to the Google ADK agent, and forward the Snowplow session ID through CopilotKit so the agent knows which user to fetch context for.
 
 ## Fetch Signals context from Python
 
@@ -88,11 +88,9 @@ def get_signals_context(domain_session_id: str) -> str:
         return ""
 ```
 
-With context fetching isolated in its own module, the agent code can stay focused on request handling and delegate Signals lookups to a single function call.
+## Build the agent
 
-## Build the ADK agent
-
-Now replace the scaffold's `agent/main.py` — which is wired up for the proverbs demo — with one that reads the Snowplow session ID from state and calls `get_signals_context` on every turn.
+Replace the scaffold's `agent/main.py` — which is wired up for the proverbs demo — with one that reads the Snowplow session ID from state and calls `get_signals_context` on every turn.
 
 ```python
 # agent/main.py
@@ -204,8 +202,6 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=port)
 ```
 
-There are three key pieces to understand here:
-
 - **`extract_snowplow_session`** — an `ag_ui_adk` hook that runs before the ADK session is created. It reads from `input_data.forwarded_props` (populated by CopilotKit's `properties` prop) and returns a dict that gets merged into the ADK session state. Because `forwarded_props` is sent on every AG-UI request, the session ID is available for each chat message.
 - **`inject_signals_context`** (the `before_model_callback`) — runs every turn, just before the LLM is called. It reads the session ID from state, fetches fresh Signals attributes, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behavior — including pages they've visited during the conversation.
 - **`append_instructions`** — an ADK `LlmRequest` method that adds content to the system instruction for this turn only. It doesn't mutate the agent's `instruction` field permanently — every turn starts fresh and gets the latest Signals data appended.
@@ -227,13 +223,13 @@ The following attributes describe the current user's session behavior on this ap
 - last_event_timestamp: 2026-04-09T14:41:03.000Z
 ```
 
-Gemini treats this as factual context about the current user. No special prompting tricks needed — the model naturally incorporates the context when formulating responses.
+Gemini treats the Signals block as factual context about the current user. No special prompting is needed beyond including it: the model naturally incorporates the context when formulating responses.
 
-## Wire the session ID from frontend to agent
+## Forward the session ID from frontend to agent
 
-The backend's `extract_snowplow_session` expects the Snowplow session ID to arrive in `forwarded_props.snowplowDomainSessionId`. CopilotKit's `properties` prop is the mechanism that delivers it — anything passed to `properties` is sent as `forwarded_props` in every AG-UI request, including the first.
+The backend's `extract_snowplow_session` expects the Snowplow session ID to arrive in `forwarded_props.snowplowDomainSessionId`. CopilotKit's `properties` prop delivers it: anything passed to `properties` is sent as `forwarded_props` in every AG-UI request, including the first.
 
-Now extend the placeholder `CopilotProvider` you created in the tracking setup step to read the session ID via the `getDomainSessionId()` helper from `snowplow.ts` and pass it to `<CopilotKit>` via the `properties` prop:
+Extend the placeholder `CopilotProvider` you created in the tracking setup step to read the session ID via the `getDomainSessionId()` helper from `snowplow.ts` and pass it to `<CopilotKit>` via the `properties` prop:
 
 ```tsx
 // src/components/copilot-provider.tsx
@@ -281,11 +277,11 @@ export function CopilotProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-`getDomainSessionId()` is the single source of truth for session ID lookup — it wraps `tracker.getDomainUserInfo()` so you don't duplicate cookie parsing here. `SnowplowProvider` (which wraps `CopilotProvider` in `layout.tsx`) initializes the tracker in its own `useEffect`; because both effects run after mount, you poll briefly on the first render to handle the case where the tracker isn't ready yet. By the time a user types their first chat message, the session ID is reliably available.
+`getDomainSessionId()` wraps `tracker.getDomainUserInfo()` so session ID lookup is in one place. `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx` and initializes the tracker first; because both effects run after mount, the provider polls briefly to handle the case where the tracker isn't ready yet.
 
 ## Verify the CopilotKit proxy endpoint
 
-The scaffold already created a server-side endpoint that bridges CopilotKit to your Python agent (`src/app/api/copilotkit/route.ts`). It should look like this — nothing to change:
+The scaffold includes a server-side endpoint that bridges CopilotKit to your Python agent (`src/app/api/copilotkit/route.ts`). Verify it matches:
 
 ```tsx
 // src/app/api/copilotkit/route.ts (scaffolded — verify it matches)
@@ -341,5 +337,5 @@ export default function HomePage() {
 ```
 
 :::tip[Need a richer demo?]
-A single page won't generate interesting Signals attributes (unique pages will always be 1). See the "Need a demo app?" section in the project setup step for a prompt to generate a multi-page store.
+A single page won't generate interesting Signals attributes (unique pages will always be 1). See the "Add more pages" section in the project setup step for a prompt to generate a multi-page store.
 :::

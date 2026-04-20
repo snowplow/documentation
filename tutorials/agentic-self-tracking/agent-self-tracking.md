@@ -494,7 +494,7 @@ To test the constraint handling, send "Find a flight to Tokyo for $20"
 
 You now have all three layers of tracking in place.
 
-{/* TODO: Add screenshot of Micro UI showing the events */}
+![](./screenshots/cleanshot-2026-04-20-at-19.30.33.png)
 
 ## Schema reference
 

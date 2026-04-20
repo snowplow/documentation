@@ -356,7 +356,7 @@ sleep 2
 npm run dev
 ```
 
-{/* TODO: Add screenshot of the app */}
+![](./screenshots/cleanshot-2026-04-20-at-18-03-14.png)
 
 Snowplow Micro validates every incoming event against its schema. Micro resolves Iglu Central schemas automatically, so you don't need local copies.
 
@@ -372,7 +372,7 @@ With both services running:
 4. Examine a `message_sent` event in the Micro UI. Notice the self-describing event structure and the attached `message_context` entity showing `"role": "user"`, the message length, and the truncated preview.
 5. Examine a `message_received` event. Notice the `response_time_ms` showing how long the agent took, and `tool_calls_count` showing how many tools it used.
 
-{/* TODO: Add screenshot of Micro UI showing one of these events */}
+![](./screenshots/cleanshot-2026-04-20-at-18-04-37.png)
 
 :::warning[Chat never responds?]
 If the chatbot accepts your message but **never responds**, check that `.env.local` has a **real** API key for the provider and model you selected. Placeholder or invalid keys often fail **silently** (see [Configure environment variables](../setup#configure-environment-variables)).

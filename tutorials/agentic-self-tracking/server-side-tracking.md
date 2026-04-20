@@ -438,12 +438,37 @@ export const trackAgentStep = (params: AgentStepParams) => {
 };
 ```
 
-`trackToolExecution` attaches both `tool_context` and `agent_context` entities, carrying the tool name, category, and invocation metadata alongside the parameters and result summaries:
+`trackToolExecution` always attaches `tool_context` and `agent_context` entities, carrying the tool name, category, and invocation metadata. When the caller supplies `toolParams` and `toolResults`, those are pushed as additional custom entities under `com.snowplow.demo.travel` so the domain-specific input and output fields are recorded without bloating the generic schemas:
 
 ```typescript title="src/lib/tracking/server.ts (continued)"
 export const trackToolExecution = (params: ToolExecutionParams) => {
   const t = initServerTracker();
   if (!t) return;
+
+  const contexts: Array<{ schema: string; data: Record<string, unknown> }> = [
+    buildToolContext({
+      tool_name: params.toolName,
+      tool_category: params.toolCategory,
+      tool_call_id: params.toolCallId,
+      tool_description: params.toolDescription ?? null,
+    }),
+    buildAgentContext({
+      invocation_id: params.invocationId,
+      session_id: params.sessionId,
+      agent_type: 'travel_assistant',
+      model_name: params.modelName,
+      model_provider: params.modelProvider,
+      current_step_number: params.currentStepNumber ?? null,
+    }),
+  ];
+
+  if (params.toolParams) {
+    contexts.push(buildToolParams(params.toolParams));
+  }
+
+  if (params.toolResults) {
+    contexts.push(buildToolResults(params.toolResults));
+  }
 
   t.track(
     buildSelfDescribingEvent({
@@ -456,28 +481,11 @@ export const trackToolExecution = (params: ToolExecutionParams) => {
           success: params.success,
           error_type: params.errorType ?? null,
           error_message: params.errorMessage ?? null,
-          result_summary: params.resultSummary ?? null,
           executed_at: new Date().toISOString(),
         },
       },
     }),
-    [
-      buildToolContext({
-        tool_name: params.toolName,
-        tool_category: params.toolCategory,
-        tool_call_id: params.toolCallId,
-        tool_description: params.toolDescription ?? null,
-        parameters_summary: params.parametersSummary ?? null,
-      }),
-      buildAgentContext({
-        invocation_id: params.invocationId,
-        session_id: params.sessionId,
-        agent_type: 'travel_assistant',
-        model_name: params.modelName,
-        model_provider: params.modelProvider,
-        current_step_number: params.currentStepNumber ?? null,
-      }),
-    ],
+    contexts,
   );
 };
 ```

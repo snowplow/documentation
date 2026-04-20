@@ -59,5 +59,5 @@ To take this to production:
 To explore related topics:
 
 - [Build a personalized travel agent with Signals](/tutorials/signals-personalize-travel/intro) - use real-time behavioral attributes to personalize agent responses
-- [Build a Signals-powered AI agent with AgentCore](/tutorials/signals-agentic-accelerator/introduction) - combine Signals with persistent memory for customer-facing agents
+- [Build a Signals-powered AI agent with AgentCore](/tutorials/signals-agentic-accelerator/intro) - combine Signals with persistent memory for customer-facing agents
 - [Manage data structures with the Snowplow CLI MCP tool](/tutorials/snowplow-cli-mcp/introduction) - use AI assistants to create and validate schemas

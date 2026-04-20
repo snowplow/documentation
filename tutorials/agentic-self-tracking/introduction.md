@@ -39,7 +39,7 @@ You **don't need a Snowplow account** to follow this accelerator.
 
 ## What you'll build
 
-You'll work with a fully functional travel booking chatbot built with Next.js, React, and the Vercel AI SDK. The app supports multiple LLM providers (Anthropic Claude, OpenAI GPT, Google Gemini) and has three business tools: flight search, flight booking, and calendar checking.
+You'll work with a fully functional travel booking chatbot built with Next.js and the Vercel AI SDK. The app supports multiple LLM providers (Anthropic Claude, OpenAI GPT, Google Gemini) and has three business tools: flight search, flight booking, and calendar checking.
 
 Snowplow provides a set of generic agentic tracking [schemas](/docs/fundamentals/schemas/) on [Iglu Central](https://iglucentral.com/) that cover the agent lifecycle out of the box - invocations, steps, tool executions, completions, and more.
 
@@ -71,9 +71,37 @@ flowchart TD
     collector["<b><u>Snowplow Collector</u></b><br/><i>(Micro for local)</i>"]
 ```
 
-
-
 All events flow to the same Snowplow Collector. In this accelerator, you'll use a [Snowplow Micro](/docs/testing/snowplow-micro/) pipeline running locally in Docker to validate events against their schemas in real-time.
+
+### Data lineage
+
+Every event in the system connects to others through shared identifiers. A single user message triggers events across all three layers, traceable through two IDs:
+
+- `session_id` - generated once per browser session and stored in localStorage. It links all activity for a given user session.
+- `invocation_id` - generated per API request. It links every event within a single agent lifecycle.
+
+Here's how they connect:
+
+```
+session_id (browser localStorage UUID)
+  └→ invocation_id (created per /api/chat request)
+       ├→ message_sent (client) ────────── message_context
+       ├→ agent_invocation (server) ────── agent_context
+       ├→ user_intent_detected (agent) ─── agent_context + tool_context
+       ├→ agent_decision_logged (agent) ── agent_context + tool_context
+       ├→ agent_step (server) ──────────── agent_context
+       ├→ tool_execution (server) ──────── agent_context + tool_context
+       ├→ constraint_violation (agent) ─── agent_context + tool_context
+       ├→ agent_completion (server) ────── agent_context
+       └→ message_received (client) ────── message_context
+```
+
+You can start from any event and trace outward:
+
+- From a `constraint_violation`, find the `user_intent_detected` in the same invocation to see what the user originally asked for
+- From an `agent_completion` with high `total_tokens`, drill into the `agent_step` events to see which steps consumed the most tokens
+- From a `message_received` with a long `response_time_ms`, trace the `tool_execution` events to find which tool was slow
+- From a `user_intent_detected` with low `confidence`, check if the agent asked for clarification or guessed wrong
 
 ## How to follow this accelerator
 

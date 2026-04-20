@@ -1,7 +1,7 @@
 ---
 
-title: "Agentic self-tracking"
-sidebar_label: "Agent self-tracking"
+title: "Track agent self-reasoning"
+sidebar_label: "Track agent self-reasoning"
 position: 5
 description: "Give the AI agent tools to track its own reasoning - intent detection, decision logging, and constraint violation reporting - completing the three-layer observability stack."
 keywords: ["snowplow", "agentic", "tracking", "ai", "self-tracking", "intent", "decision", "constraint"]
@@ -9,10 +9,18 @@ date: "2026-03-26"
 
 ---
 
-The previous two stages tracked what the user did and what the system did. Now you'll give the agent tools to track its own reasoning - what it understood, why it made each decision, and when it can't meet a user's requirements.
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-:::tip Code-along / Read-along
-If you're coding along, continue from the previous stage and create the files described below. If you're reading along:
+The previous two stages tracked what the user did and what the system did. Now you'll give the agent tools to track its own reasoning as Snowplow events - what it understood, why it made each decision, and when it can't meet a user's requirements.
+
+| Tool                         | Purpose                                             | When called                        |
+| ---------------------------- | --------------------------------------------------- | ---------------------------------- |
+| `track_user_intent`          | "I understood the user wants X with confidence Y"   | First, on every new user message   |
+| `track_agent_decision`       | "I'm choosing to do Y because Z"                    | Before executing any business tool |
+| `track_constraint_violation` | "The user wants A, but it's not possible because B" | When a requirement can't be met    |
+
+:::tip[Code-along or Read-along]
+If you're coding along, continue from the previous stage, and create the files described below. If you're reading along:
 
 ```bash
 git checkout v0.3-agentic-tracking
@@ -21,26 +29,6 @@ npm install
 
 To see exactly what changed: `git diff v0.2-server-tracking..v0.3-agentic-tracking`
 :::
-
-## How self-tracking differs
-
-This stage works differently from the first two:
-
-- `v0.1` tracked what the user did - events emitted by browser code you wrote
-- `v0.2` tracked what the system did - events emitted by server framework callbacks
-- `v0.3` tracks what the agent thinks - events emitted by the LLM itself, via tool calls
-
-You give the agent three new tools that don't perform business actions - they log the agent's internal state:
-
-
-| Tool                         | Purpose                                             | When called                        |
-| ---------------------------- | --------------------------------------------------- | ---------------------------------- |
-| `track_user_intent`          | "I understood the user wants X with confidence Y"   | First, on every new user message   |
-| `track_agent_decision`       | "I'm choosing to do Y because Z"                    | Before executing any business tool |
-| `track_constraint_violation` | "The user wants A, but it's not possible because B" | When a requirement can't be met    |
-
-
-These are tools like any other - the LLM calls them when instructed by the system prompt. The difference is they don't search flights or book tickets; they log the agent's reasoning into Snowplow events.
 
 ## What you'll add
 
@@ -51,80 +39,13 @@ This stage introduces:
 - One new file: `src/lib/tools/self-tracking-tools.ts` - three tool factories
 - Modifications to: `src/lib/tracking/server.ts` (three new tracking functions) and `src/app/api/chat/route.ts` (register tools + system prompt protocol)
 
-## Define the schemas
+## Create custom entity
 
-The three event schemas are published on [Iglu Central](https://github.com/snowplow/iglu-central) under vendor `com.snowplow.agent.tracking`, just like the schemas from previous stages. You'll also create one custom entity for domain-specific data.
+Three event schemas capture the agent reasoning. Check out the [Schema reference](#schema-reference) section below for details on the Iglu Central schemas.
 
-### user_intent_detected
+The `user_intent_detected` event captures the agent's interpretation of what the user wants. The domain-specific data about that intent, such as origin, destination, dates, or budget, is specific to the travel demo. This data belongs in a custom `intent_extraction` entity.
 
-Captures the agent's interpretation of what the user wants, including a confidence score and reasoning.
-
-```yaml title="user_intent_detected schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: event
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs the detected user intent category and confidence.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: user_intent_detected
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    invocation_id:
-      type: string
-      description: 'Unique identifier for the agent invocation'
-      format: uuid
-    intent_id:
-      type: string
-      description: 'Unique identifier for this detected intent'
-      format: uuid
-    intent_category:
-      type: string
-      examples:
-        - search_flights
-        - submit_order
-        - ask_question
-        - cancel_booking
-        - get_recommendations
-      description: 'Category of user intent (application-defined)'
-      maxLength: 255
-    confidence:
-      type: number
-      minimum: 0
-      maximum: 1
-      description: 'Confidence level (0-1)'
-    reasoning:
-      type:
-        - string
-        - 'null'
-      description: 'Reasoning for this interpretation'
-      maxLength: 2000
-    detected_at:
-      type: string
-      format: date-time
-      description: 'Timestamp when intent was detected'
-  required:
-    - invocation_id
-    - intent_id
-    - intent_category
-    - confidence
-    - detected_at
-  additionalProperties: false
-```
-
-`intent_category` is a permissive `string` with `examples`, not a restricted enum. The Iglu Central schema is domain-agnostic - a travel app uses `search_flights`, while a support app might use `open_ticket`. You'll enforce your travel-specific values with Zod in [the two-tier validation pattern](#use-permissive-schemas-with-strict-application-code) later in this page.
-
-There's also no `extracted_entities` field. The generic event captures *that* intent was detected - the category and confidence. *What* was extracted (origin, destination, dates) is domain-specific data that belongs in a custom entity.
-
-### Create the intent extraction entity
-
-You'll create an `intent_extraction` entity to capture what the agent interpreted from the user's message. As with `tool_params` and `tool_results`, the generic Iglu Central event carries lifecycle data while your custom entity carries the business data.
+As with `tool_params` and `tool_results`, the generic Iglu Central event carries lifecycle data, while your custom entity carries the business data.
 
 Create the entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/intent_extraction/jsonschema/1-0-0`:
 
@@ -191,159 +112,17 @@ Create the entity at `snowplow/iglu-local/schemas/com.snowplow.demo.travel/inten
 }
 ```
 
-All fields are nullable because the agent may not extract every field from every message - "flights to Paris" has a destination but no date, budget, or passenger count. Like the other custom entities, this lives in `snowplow/iglu-local/` under vendor `com.snowplow.demo.travel`.
+All fields are nullable because the agent may not extract every field from every message. For example, "flights to Paris" has a destination but no date, budget, or passenger count.
 
-:::note[Why intent_extraction is separate from tool_params]
-You might notice that `intent_extraction` shares some fields with `tool_params` - both have `origin`, `destination`, `date`, and `passengers`. They are separate entities because they represent different points in the agent lifecycle with different semantic meaning:
+### Permissive schemas, strict code
 
-- `intent_extraction` captures what the agent *understood* from the user's message, attached to `user_intent_detected`. This happens before any tool runs. The values are the agent's interpretation - they may be incomplete, inferred, or wrong.
-- `tool_params` captures what the agent *actually passed* to a business tool, attached to `tool_execution`. This happens later, after the agent has made decisions. The values are concrete parameters that drove a real action.
+The Iglu Central schemas are designed to be reusable across domains, so they don't hardcode specific intent categories or entity fields. For example, the `intent_category` field of the `user_intent_detected` event is a free-form string property, rather than an enum.
 
-Comparing the two for the same conversation turn tells you how the agent translated user intent into action. Did it fill in defaults the user didn't mention? Did it ignore a preference? Did it change a parameter after seeing search results? These are the questions a separate-entity model lets you answer in your warehouse, and they collapse into noise if both stages share a single entity.
-:::
-
-### agent_decision_logged
-
-Captures the reasoning behind a decision the agent is about to make, including what factors it considered.
-
-```yaml title="agent_decision_logged schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: event
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs a decision the agent is about to make, including reasoning and considerations.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: agent_decision_logged
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    invocation_id:
-      type: string
-      description: 'Unique identifier for the agent invocation'
-      format: uuid
-    decision_id:
-      type: string
-      description: 'Unique identifier for this decision'
-      format: uuid
-    decision_type:
-      type: string
-      examples:
-        - tool_selection
-        - parameter_reasoning
-        - result_interpretation
-        - clarification_needed
-        - constraint_handling
-      description: 'Type of decision (application-defined)'
-      maxLength: 255
-    reasoning:
-      type: string
-      description: 'Natural language explanation of the decision'
-      maxLength: 2000
-    considerations:
-      type:
-        - array
-        - 'null'
-      description: 'Factors the agent considered when making this decision'
-      items:
-        type: string
-        maxLength: 2000
-    logged_at:
-      type: string
-      format: date-time
-      description: 'Timestamp when decision was logged'
-  required:
-    - invocation_id
-    - decision_id
-    - decision_type
-    - reasoning
-    - logged_at
-  additionalProperties: false
-```
-
-### constraint_violation
-
-Captures when the agent detects that a user's requirement can't be met, including what was requested, why it failed, and what alternatives exist.
-
-```yaml title="constraint_violation schema (Iglu Central)"
-apiVersion: v1
-resourceType: data-structure
-meta:
-  hidden: false
-  schemaType: event
-  customData: {}
-data:
-  $schema: 'http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#'
-  description: 'Agent self-tracking: logs when a user requirement cannot be met due to a constraint.'
-  self:
-    vendor: com.snowplow.agent.tracking
-    name: constraint_violation
-    format: jsonschema
-    version: 1-0-0
-  type: object
-  properties:
-    invocation_id:
-      type: string
-      description: 'Unique identifier for the agent invocation'
-      format: uuid
-    violation_id:
-      type: string
-      description: 'Unique identifier for this violation'
-      format: uuid
-    constraint_type:
-      type: string
-      examples:
-        - budget
-        - dates
-        - availability
-        - permissions
-        - rate_limit
-      description: 'Type of constraint that was violated (application-defined)'
-      maxLength: 255
-    user_requirement:
-      type: string
-      description: 'What the user requested'
-      maxLength: 1000
-    reason_not_met:
-      type: string
-      description: 'Why it cannot be fulfilled'
-      maxLength: 2000
-    alternatives_considered:
-      type:
-        - array
-        - 'null'
-      items:
-        type: string
-        maxLength: 1000
-      description: 'Alternative options considered'
-    recommendation:
-      type:
-        - string
-        - 'null'
-      description: 'Recommended alternative'
-      maxLength: 1000
-    violated_at:
-      type: string
-      format: date-time
-      description: 'Timestamp when violation was detected'
-  required:
-    - invocation_id
-    - violation_id
-    - constraint_type
-    - user_requirement
-    - reason_not_met
-    - violated_at
-  additionalProperties: false
-```
+Your application code will enforce domain-specific constraints instead. This also allows for easier tracking evolution: if you want to add a new intent category to your enum, you only need to update the application code, rather than publishing a new schema version.
 
 ## Add server tracking functions
 
-Add three new tracking functions to `src/lib/tracking/server.ts`, attaching `agent_context` and `tool_context` entities (with `tool_category: 'self_tracking'`). `trackUserIntentDetected` also conditionally attaches the `intent_extraction` custom entity:
+Add three new tracking functions to `src/lib/tracking/server.ts`, attaching the `agent_context` and `tool_context` entities. The `tool_category` is `self_tracking`. The `trackUserIntentDetected` function also conditionally attaches the `intent_extraction` custom entity:
 
 ```typescript title="src/lib/tracking/server.ts"
 export const trackUserIntentDetected = (params: UserIntentDetectedParams) => {
@@ -397,13 +176,13 @@ const buildIntentExtraction = (data: IntentExtractionData) => ({
 });
 ```
 
-A single `user_intent_detected` event carries three entities: `tool_context`, `agent_context` (both from Iglu Central), and `intent_extraction` (from `iglu-local`).
-
-`trackAgentDecisionLogged` and `trackConstraintViolation` use their respective schemas and data fields but don't need custom entities - `considerations` (a string array) and the constraint fields are generic enough to live on the Iglu Central event directly.
+A single `user_intent_detected` event carries three entities: `tool_context` and `agent_context` from Iglu Central, and `intent_extraction` from `iglu-local`.
 
 ## Create the self-tracking tools
 
-The three self-tracking tools are defined in a new file. Each is a tool factory that takes a `RequestContext` (the same one from v0.2) and returns a Vercel AI SDK tool.
+Create the three self-tracking tools in a new file. Each is a tool factory that takes the `RequestContext` from stage v0.2, and returns a Vercel AI SDK tool.
+
+`trackAgentDecisionLogged` and `trackConstraintViolation` don't need custom entities, because their event properties can capture generic or broad data about what happened.
 
 ```typescript title="src/lib/tools/self-tracking-tools.ts"
 import { z } from 'zod';
@@ -416,7 +195,9 @@ import {
 import type { RequestContext } from '@/app/api/chat/route';
 ```
 
-### track_user_intent
+### Track user intent
+
+This tool uses the `user_intent_detected` event schema.
 
 ```typescript title="src/lib/tools/self-tracking-tools.ts (continued)"
 const trackUserIntentInputSchema = z.object({
@@ -491,9 +272,9 @@ export function createTrackUserIntentTool(ctx: RequestContext) {
 }
 ```
 
-The Zod schema enforces `intent_category` as a strict enum (six travel-specific values), while the Iglu Central schema accepts any string - this is the [two-tier validation pattern](#use-permissive-schemas-with-strict-application-code). The extracted entity fields (`origin`, `destination`, `date`, etc.) are flat on the Zod schema because they're part of what the LLM provides. The `execute` function collects them into an `intentExtraction` object that `trackUserIntentDetected` attaches as a custom entity.
+### Track agent decision
 
-### track_agent_decision
+This tool uses the `agent_decision_logged` event schema.
 
 ```typescript title="src/lib/tools/self-tracking-tools.ts (continued)"
 const trackAgentDecisionInputSchema = z.object({
@@ -546,7 +327,9 @@ export function createTrackAgentDecisionTool(ctx: RequestContext) {
 }
 ```
 
-### track_constraint_violation
+### Track constraint violation
+
+This tool uses the `constraint_violation` event schema.
 
 ```typescript title="src/lib/tools/self-tracking-tools.ts (continued)"
 const trackConstraintViolationInputSchema = z.object({
@@ -598,72 +381,12 @@ export function createTrackConstraintViolationTool(ctx: RequestContext) {
 }
 ```
 
-## Use permissive schemas with strict application code
 
-You may have noticed a deliberate mismatch between the Iglu Central schemas and the Zod schemas you just defined. Compare `intent_category` in both:
+## Add the tools to the chat route
 
-Iglu Central (the schema that validates the Snowplow event):
+Two changes are needed in `src/app/api/chat/route.ts`.
 
-```yaml
-intent_category:
-  type: string
-  maxLength: 255
-  description: 'Category of user intent (application-defined)'
-```
-
-Zod (the schema that validates the LLM's tool call input):
-
-```typescript
-intent_category: z.enum([
-  'search_flights',
-  'book_flight',
-  'modify_booking',
-  'cancel_booking',
-  'get_recommendations',
-  'ask_question',
-])
-```
-
-The Iglu Central schema accepts any string up to 255 characters. The Zod schema only accepts six specific values. The same pattern applies to `decision_type` and `constraint_type` across all three self-tracking tools.
-
-This mismatch is intentional.
-
-### Why the schemas are permissive
-
-The Iglu Central schemas are designed to work for any agentic application - travel, customer support, finance, healthcare. A support app's intent categories might be `open_ticket`, `escalate`, or `check_status`. A finance app might use `analyze_portfolio` or `execute_trade`. Hardcoding enums into the registry schema would break this reusability.
-
-Instead, the Iglu Central schemas use `examples` to suggest common values and `maxLength` to prevent unbounded strings, but accept any value:
-
-```yaml
-# From the Iglu Central constraint_violation schema
-constraint_type:
-  type: string
-  examples: ["budget", "dates", "availability", "permissions", "rate_limit"]
-  description: 'Type of constraint that was violated (application-defined)'
-  maxLength: 255
-```
-
-### Why application code is strict
-
-Your application knows its own domain. The travel app has exactly six intent categories and six constraint types - the LLM should not invent new ones. The Zod enum enforces this at the tool call boundary, before the data ever reaches Snowplow:
-
-1. The LLM calls `track_user_intent` with `intent_category: "search_flights"`
-2. Zod validates that `"search_flights"` is in the allowed enum - if not, the tool call fails and the LLM retries
-3. The validated value flows into the Snowplow event, which Iglu Central also validates (it passes, since any string under 255 characters is valid)
-
-If you add a new intent category to your app - say `compare_flights` - you update the Zod enum in `self-tracking-tools.ts`. No schema version bump needed. No registry update. The Iglu Central schema already accepts it.
-
-:::tip[When to use this pattern]
-Two-tier validation works well for any field where the *set of valid values* is application-specific but the *field itself* is generic. It's not needed for fields like `confidence` (0-1 number range is universal) or `reasoning` (free-text by nature). Focus it on categorical fields that vary by domain.
-:::
-
-## Wire the tools into the chat route
-
-Two changes are needed in `src/app/api/chat/route.ts`:
-
-### 1. Register the tools
-
-Add the three self-tracking tools alongside the three business tools:
+First, register the tools. Add the three self-tracking tools alongside the three business tools:
 
 ```typescript title="src/app/api/chat/route.ts"
 import {
@@ -683,11 +406,9 @@ tools: {
 },
 ```
 
-The agent has six tools available - three for business actions and three for self-tracking.
+The agent now has six tools available - three for business actions and three for self-tracking.
 
-### 2. Add the self-tracking protocol to the system prompt
-
-The system prompt tells the agent *when* and *how* to use its self-tracking tools:
+Next, add the self-tracking protocol to the system prompt:
 
 ```typescript title="src/app/api/chat/route.ts (system prompt addition)"
 system: `You are a helpful travel assistant with self-awareness capabilities...
@@ -725,61 +446,102 @@ IMPORTANT: After calling tracking tools, you MUST continue to take action on the
 Do not just track -- actually help them by calling business tools or asking for missing information.`,
 ```
 
-:::note[Prompt engineering for self-tracking]
-Without clear instructions, the LLM might skip tracking, over-track, or treat tracking as its primary task. The protocol addresses each risk:
+The system prompt tells the agent *when* and *how* to use its self-tracking tools. It's important to give clear instructions about when to call them. Otherwise, the LLM might skip over tracking, track excessively, or treat tracking as its primary task. The provided protocol addresses each risk:
 
-- "MUST use self-tracking tools" - prevents skipping
-- "First, provide a brief friendly response" - ensures the user gets an immediate acknowledgment before tracking tools run
-- "IMPORTANT: After calling tracking tools, you MUST continue to take action" - prevents the agent from treating tracking as the end goal
-- The workflow example - gives the agent a concrete template to follow
-
-The balance matters: you want complete tracking without disrupting the conversation flow.
-:::
+- "MUST use self-tracking tools" prevents skipping
+- "First, provide a brief friendly response" ensures the user gets an immediate acknowledgment before tracking tools run
+- "IMPORTANT: after calling tracking tools, you MUST continue to take action" prevents the agent from treating tracking as the end goal
 
 ## Try it out
 
-Check that `.env.local` has a valid API key for the model you plan to use - placeholder values like `sk-ant-...` cause silent failures.
+Run the application:
 
 ```bash
 git checkout v0.3-agentic-tracking  # (or verify your code-along)
 npm run start:dev
 ```
 
-### Test a normal flow
-
-Send "Find cheap flights from London to Paris tomorrow"
+To test the default flow, send "Find cheap flights from London to Paris tomorrow"
 
 1. Open **Snowplow Micro UI** at [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) and refresh after the agent responds
 2. Find the `user_intent_detected` event - drill into it to see:
-  - `intent_category`: "search_flights"
-  - `confidence`: ~0.9 (this is a clear request)
-  - `reasoning`: The agent's explanation of how it interpreted the message
-  - In the event's entities, find the `intent_extraction` custom entity: `{ origin: "London", destination: "Paris", date: "2026-04-10", preferences: ["cheap"] }`
+     - `intent_category`: "search_flights"
+     - `confidence`: ~0.9 (this is a clear request)
+     - `reasoning`: the agent's explanation of how it interpreted the message
+     - In the event's entities, find the `intent_extraction` custom entity: `{ origin: "London", destination: "Paris", date: "2026-04-10", preferences: ["cheap"] }`
 3. Find the `agent_decision_logged` event - see:
-  - `decision_type`: "tool_selection"
-  - `reasoning`: "Will use search_flights with sort_by='price' since user said 'cheap'"
-  - `considerations`: the factors the agent weighed
+     - `decision_type`: "tool_selection"
+     - `reasoning`: "Will use search_flights with sort_by='price' since user said 'cheap'"
+     - `considerations`: the factors the agent weighed
 4. Find the `tool_execution` for `search_flights` (this existed in v0.2)
 5. Trace the full event chain through the Micro UI - all events share the same `invocation_id`
 
-### Test constraint handling
-
-Send "Find a flight to Tokyo for $20"
+To test the constraint handling, send "Find a flight to Tokyo for $20"
 
 1. Refresh the Micro UI after the agent responds
 2. Find the `user_intent_detected` event - notice the confidence might be lower. Check the `intent_extraction` entity for the budget constraint noted in `budget_max`
 3. Find the `constraint_violation` event - drill into it to see:
-  - `constraint_type`: "budget"
-  - `user_requirement`: "$20 to Tokyo"
-  - `reason_not_met`: An explanation of why flights to Tokyo can't cost $20
-  - `alternatives_considered`: What other options the agent thought about
-  - `recommendation`: What the agent suggests instead
+     - `constraint_type`: "budget"
+     - `user_requirement`: "$20 to Tokyo"
+     - `reason_not_met`: an explanation of why flights to Tokyo can't cost $20
+     - `alternatives_considered`: what other options the agent thought about
+     - `recommendation`: what the agent suggests instead
 4. The agent still responds helpfully to the user with alternatives - tracking doesn't interrupt the conversation
 
-:::note[Stage summary]
-- Files: one added, two modified
-- Events: `user_intent_detected`, `agent_decision_logged`, `constraint_violation`
-- Entities: `agent_context`, `tool_context` (Iglu Central) + `intent_extraction` (custom)
-:::
+You now have all three layers of tracking in place.
 
-You have all three layers of tracking in place. The final section puts it all together - showing how events connect across layers and what you can build with this data.
+## Schema reference
+
+The schemas used in this stage are published on [Iglu Central](https://iglucentral.com/) under vendor `com.snowplow.agent.tracking`, as before.
+
+All the events have the `invocation_id`.
+
+### `user_intent_detected` event
+
+The `user_intent_detected` event captures the agent's interpretation of what the user wants. `intent_category` identifies the intent type; `confidence` scores the agent's certainty (0–1); `reasoning` records the agent's explanation for its interpretation.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    intent_id: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    intent_category: "search_flights",
+    confidence: 0.9,
+    reasoning: "User asked for cheap flights to Paris tomorrow, clearly a flight search request",
+    detected_at: "2024-01-15T10:30:00.000Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Agent self-tracking: logs the detected user intent category and confidence.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "user_intent_detected", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Unique identifier for the agent invocation", "format": "uuid" }, "intent_id": { "type": "string", "description": "Unique identifier for this detected intent", "format": "uuid" }, "intent_category": { "type": "string", "examples": ["search_flights", "submit_order", "ask_question", "cancel_booking", "get_recommendations"], "description": "Category of user intent (application-defined)", "maxLength": 255 }, "confidence": { "type": "number", "minimum": 0, "maximum": 1, "description": "Confidence level (0-1)" }, "reasoning": { "type": ["string", "null"], "description": "Reasoning for this interpretation", "maxLength": 2000 }, "detected_at": { "type": "string", "format": "date-time", "description": "Timestamp when intent was detected" } }, "required": ["invocation_id", "intent_id", "intent_category", "confidence", "detected_at"], "additionalProperties": false }} />
+
+### `agent_decision_logged` event
+
+The `agent_decision_logged` event captures the reasoning behind a decision the agent is about to make. `decision_type` classifies the kind of decision; `reasoning` records the agent's explanation; `considerations` lists the factors it weighed.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    decision_id: "a3bb189e-8bf9-3888-9912-ace4e6543002",
+    decision_type: "tool_selection",
+    reasoning: "User wants cheap flights so I will use search_flights with sort_by='price' to surface the lowest fares first",
+    considerations: ["User specified 'cheap' as a preference", "sort_by='price' surfaces lowest fares first"],
+    logged_at: "2024-01-15T10:30:00.500Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Agent self-tracking: logs a decision the agent is about to make, including reasoning and context.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "agent_decision_logged", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Unique identifier for the agent invocation", "format": "uuid" }, "decision_id": { "type": "string", "description": "Unique identifier for this decision", "format": "uuid" }, "decision_type": { "type": "string", "examples": ["tool_selection", "parameter_reasoning", "result_interpretation", "clarification_needed", "constraint_handling"], "description": "Type of decision (application-defined)", "maxLength": 255 }, "reasoning": { "type": "string", "description": "Natural language explanation of the decision", "maxLength": 2000 }, "considerations": { "type": ["array", "null"], "description": "Factors the agent considered when making this decision", "items": { "type": "string", "maxLength": 2000 } }, "logged_at": { "type": "string", "format": "date-time", "description": "Timestamp when decision was logged" } }, "required": ["invocation_id", "decision_id", "decision_type", "reasoning", "logged_at"], "additionalProperties": false }} />
+
+### `constraint_violation` event
+
+The `constraint_violation` event fires when the agent detects that a user's requirement cannot be met. `constraint_type` classifies the blocker; `user_requirement` records what was asked for; `reason_not_met` explains why it failed. `alternatives_considered` and `recommendation` capture what the agent explored and suggested instead.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    invocation_id: "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    violation_id: "c56a4180-65aa-42ec-a945-5fd21dec0538",
+    constraint_type: "budget",
+    user_requirement: "Flight to Tokyo for $20",
+    reason_not_met: "No flights to Tokyo are available under $400 — the cheapest available fare is $412",
+    alternatives_considered: ["Nearby airports such as Osaka", "Flexible dates in the next 30 days", "One-stop routes via Seoul"],
+    recommendation: "The lowest available fare is $412. Would you like to search with a higher budget or explore nearby destinations?",
+    violated_at: "2024-01-15T10:30:01.200Z"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Agent self-tracking: logs when a user requirement cannot be met due to a constraint.", "self": { "vendor": "com.snowplow.agent.tracking", "name": "constraint_violation", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "invocation_id": { "type": "string", "description": "Unique identifier for the agent invocation", "format": "uuid" }, "violation_id": { "type": "string", "description": "Unique identifier for this violation", "format": "uuid" }, "constraint_type": { "type": "string", "examples": ["budget", "dates", "availability", "permissions", "rate_limit"], "description": "Type of constraint that was violated (application-defined)", "maxLength": 255 }, "user_requirement": { "type": "string", "description": "What the user requested", "maxLength": 1000 }, "reason_not_met": { "type": "string", "description": "Why it cannot be fulfilled", "maxLength": 2000 }, "alternatives_considered": { "type": ["array", "null"], "items": { "type": "string", "maxLength": 1000 }, "description": "Alternative options considered" }, "recommendation": { "type": ["string", "null"], "description": "Recommended alternative", "maxLength": 1000 }, "violated_at": { "type": "string", "format": "date-time", "description": "Timestamp when violation was detected" } }, "required": ["invocation_id", "violation_id", "constraint_type", "user_requirement", "reason_not_met", "violated_at"], "additionalProperties": false }} />

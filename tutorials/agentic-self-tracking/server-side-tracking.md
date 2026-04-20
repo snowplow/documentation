@@ -1,6 +1,6 @@
 ---
-title: "Server-side tracking"
-sidebar_label: "Server-side tracking"
+title: "Track server-side agent execution"
+sidebar_label: "Track server-side"
 position: 4
 description: "Add server-side Snowplow tracking for the agent's orchestration loop - invocations, steps, tool executions, and completions - with full lifecycle tracing."
 keywords: ["snowplow", "agentic", "tracking", "ai", "server-side", "node tracker", "agent lifecycle"]
@@ -408,7 +408,7 @@ export const trackAgentStep = (params: AgentStepParams) => {
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.demo/agent_step/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.agent.tracking/agent_step/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           step_number: params.stepNumber,
@@ -448,7 +448,7 @@ export const trackToolExecution = (params: ToolExecutionParams) => {
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.demo/tool_execution/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.agent.tracking/tool_execution/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           step_number: params.stepNumber ?? null,
@@ -492,7 +492,7 @@ export const trackAgentCompletion = (params: AgentCompletionParams) => {
   t.track(
     buildSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.snowplow.demo/agent_completion/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplow.agent.tracking/agent_completion/jsonschema/1-0-0',
         data: {
           invocation_id: params.invocationId,
           total_steps: params.totalSteps,
@@ -748,13 +748,7 @@ npm run start:dev
 6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
 7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
-:::note[Stage summary]
-- Files: one added, three modified
-- Events: `agent_invocation`, `agent_step`, `tool_execution`, `agent_completion`
-- Entities: `agent_context`, `tool_context` (Iglu Central) + `tool_params`, `tool_results` (custom)
-:::
-
-You have visibility into both the user's actions and the agent's execution. But there's still a blind spot: *why* did the agent do what it did? When it chose to search for flights sorted by price, what was its reasoning? When it couldn't meet a user's budget, did it recognize the constraint? The next section gives the agent the ability to report its own thinking.
+You now have visibility into both the user's actions and the agent's execution.
 
 ## Schema reference
 

@@ -375,7 +375,7 @@ With both services running:
 {/* TODO: Add screenshot of Micro UI showing one of these events */}
 
 :::warning[Chat never responds?]
-If the chatbot accepts your message but **never responds**, check that `.env.local` has a **real** API key for the provider and model you selected. Placeholder or invalid keys often fail **silently** (see [Configure environment variables](./setup#configure-environment-variables)).
+If the chatbot accepts your message but **never responds**, check that `.env.local` has a **real** API key for the provider and model you selected. Placeholder or invalid keys often fail **silently** (see [Configure environment variables](../setup#configure-environment-variables)).
 :::
 
 :::note[Programmatic access]

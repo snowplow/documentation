@@ -775,7 +775,11 @@ This isn't a problem for the other generated languages.
 
 ## Snowtype limitations
 
-Snowtype does not work with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
+Snowtype has a number of limitations to be aware of when generating code.
+
+### Tracking plan templates
+
+Snowtype doesn't work with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
 
 ### Excluded schemas
 
@@ -820,3 +824,9 @@ For other complex data types, the support varies by language:
 | Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌   |
 
 *For non-null union types in JavaScript, Snowtype generates working code but the JSDoc comment will be incorrect.
+
+### Schema validation rules
+
+The [JSON Schema specification](/docs/api-reference/json-schema-reference/index.md) allows you to add validation rules such as `maxItems` for arrays, or `format` for strings. Snowtype doesn't take these rules into account when generating code.
+
+For the Browser tracker only, you can use [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) to enforce these rules at runtime.

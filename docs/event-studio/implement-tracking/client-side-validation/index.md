@@ -45,7 +45,7 @@ All the changes are under the hood, and don't affect how you call the generated 
 
 ### Updated `track` functions
 
-To validate schemas, Snowtype adds extra code to the [generated `track` functions](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#data-structures).
+To validate schemas and data structures, Snowtype adds extra code to the [generated `track` functions](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#data-structures).
 
 The highlighted lines in this example show the changed or additional code:
 
@@ -135,6 +135,10 @@ For JavaScript projects, this type of validation is especially useful given the 
 Your app will raise a `Snowtype Schema Validation error` warning in the browser console if a property violates the schema. In this example, the property `id` is expected to be a string, but the value `1` is passed instead. The erroneous value can be found under `errors[n].data`, and a stack trace pointing to the calling function is also provided:
 
 ![Schema validation error shown in browser console](./images/validation.png)
+
+The validation checks against all your [JSON Schema requirements](/docs/api-reference/json-schema-reference/index.md). For example, it will confirm that your tracking matches `type`, `minLength`, `pattern`, `minimum`, or `additionalProperties` rules.
+
+This validation applies to Iglu Central schemas, data structures, and event specifications.
 
 ## Entity cardinality rule validation
 

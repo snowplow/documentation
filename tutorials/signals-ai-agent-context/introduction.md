@@ -34,6 +34,13 @@ The agent can tailor its response based on the user's actual behavior, making fo
 
 ## How the components fit together
 
+The flow works like this:
+- The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
+- Signals computes live session attributes from that stream
+- On the front-end, the `ChatWidget` reads the Snowplow session ID from the tracker's cookie and sends it alongside every chat request as `pageContext.snowplowDomainSessionId`
+- The Next.js `/api/chat` route uses that session ID to fetch fresh attributes from Signals and appends them to the system prompt
+- The model's response is streamed back through the Vercel AI Gateway to the browser
+
 ```mermaid
 flowchart TB
     subgraph Browser["Browser"]
@@ -60,8 +67,6 @@ flowchart TB
     R -->|"GET attributes<br/>by session ID"| SG
     R -->|"streaming chat completion"| G
 ```
-
-The Snowplow JavaScript tracker streams behavioral [events](/docs/fundamentals/events/) (page views, page pings, link clicks) to the Collector, and Signals computes live session attributes from that stream. On the front-end, the `ChatWidget` reads the Snowplow session ID from the tracker's cookie and sends it alongside every chat request as `pageContext.snowplowDomainSessionId`. The Next.js `/api/chat` route uses that session ID to fetch fresh attributes from Signals, appends them to the system prompt, and hands the combined prompt to `streamText`, which streams the model's response back through the Vercel AI Gateway to the browser.
 
 ## Prerequisites
 

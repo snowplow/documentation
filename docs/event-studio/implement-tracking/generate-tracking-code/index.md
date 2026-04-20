@@ -765,7 +765,7 @@ export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp, track
 export function trackUserLogInSpec(userLogIn: AuthenticationAttempt & ContextsOrTimestamp, trackers?: string[])
 ```
 
-### Event specifications and data structures with the same name
+### Event specification names in Golang
 
 When generating Golang code, if your event specification has the same processed name as one of the data structures within it, there will be a name collision. For example, if you have an event specification called `User Signed Up` that uses a data structure called `user_signed_up`, both will be processed to `type UserSignedUp`, which isn't allowed.
 
@@ -775,7 +775,7 @@ This isn't a problem for the other generated languages.
 
 ## Snowtype limitations
 
-Snowtype **does not work** with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
+Snowtype does not work with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
 
 ### Excluded schemas
 
@@ -814,7 +814,7 @@ For other complex data types, the support varies by language:
 | Array of nullable string enum                | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
 | Array of object                              | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅   |
 | Array of nullable object                     | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
-| Object                                       | ✅          | ✅          | ✅      | ✅     | ❌    | ✅    | ✅   |
+| Object                                       | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅   |
 | Nested objects                               | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅   |
 | String enum                                  | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
 | Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌   |

@@ -765,6 +765,14 @@ export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp, track
 export function trackUserLogInSpec(userLogIn: AuthenticationAttempt & ContextsOrTimestamp, trackers?: string[])
 ```
 
+### Event specifications and data structures with the same name
+
+When generating Golang code, if your event specification has the same processed name as one of the data structures within it, there will be a name collision. For example, if you have an event specification called `User Signed Up` that uses a data structure called `user_signed_up`, both will be processed to `type UserSignedUp`, which isn't allowed.
+
+To avoid this problem, give your event specifications unique names that are different from the data structures they use.
+
+This isn't a problem for the other generated languages.
+
 ## Snowtype limitations
 
 Snowtype **does not work** with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.

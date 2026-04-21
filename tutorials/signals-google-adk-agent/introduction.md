@@ -34,40 +34,14 @@ The agent can tailor its response based on the user's actual behavior.
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph Browser["Browser"]
-        T["Snowplow tracker"]
-        C["CopilotKit client"]
-    end
-
-    subgraph Frontend["React app (port 3000)"]
-        S["CopilotKit Sidebar"]
-        P["CopilotRuntime (proxy)"]
-    end
-
-    subgraph Backend["FastAPI (port 8000)"]
-        A["ADKAgent middleware<br/>LlmAgent (gemini-3)<br/>before_model_callback"]
-    end
-
-    subgraph Snowplow["Snowplow"]
-        CO["Collector<br/>(receives raw events)"]
-        SG["Signals<br/>(real-time session attributes)"]
-    end
-
-    T -->|"page views, pings,<br/>link clicks"| CO
-    CO -->|"enriched events"| SG
-    C <-->|"AG-UI"| S
-    P -->|"HttpAgent<br/>(+ session ID in<br/>forwarded_props)"| A
-    A -->|"GET attributes<br/>by session ID"| SG
-```
-
 The flow works like this:
 - The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
 - Signals computes live session attributes from that stream
 - On the front-end, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop
 - The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
 - The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction
+
+<img src={require('./adk-architecture.png').default} alt="Diagram showing how the Snowplow tracker, Signals, React app, and ADK agent fit together" style={{maxWidth: '600px', width: '100%'}} />
 
 ## Prerequisites
 

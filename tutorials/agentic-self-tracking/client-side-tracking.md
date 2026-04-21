@@ -32,6 +32,7 @@ This stage introduces:
 - Two event schemas from Iglu Central: `message_sent` and `message_received`
 - One entity schema from Iglu Central: `message_context`
 - One new file: `src/lib/tracking/client.ts` - the client tracking module
+- A nanoid-to-UUID helper for the message IDs that come from the AI SDK
 - One new file: `start.sh` - dev startup script that runs Snowplow Micro alongside Next.js
 - Modifications to: `src/app/page.tsx` to add tracking
 
@@ -98,6 +99,52 @@ The `initClientTracker()` function initalizes the tracker as a singleton. The fu
 
 :::tip[Activity tracking]
 For production Snowplow implementations, we recommend enabling [activity tracking](/docs/sources/web-trackers/tracking-events/activity-page-pings/). We've left it out of this accelerator to keep the focus on agentic tracking.
+:::
+
+The Snowplow schemas on Iglu Central use `format: uuid` on identifier fields. Everywhere else in this tutorial you will generate IDs with `crypto.randomUUID()`, which satisfies that constraint directly. The one exception is `message.id` from the AI SDK's `useChat` hook, which is a nanoid, so you need to convert it before using it as `invocation_id` or `message_id` on a Snowplow event.
+
+Add a deterministic nanoid-to-UUIDv5 mapping in `client.ts`. The same `message.id` always produces the same UUID, preserving correlation without a lookup table.
+
+```typescript title="src/lib/tracking/client.ts (continued)"
+// ---------------------------------------------------------------------------
+// Deterministic nanoid to UUID mapping (UUIDv5)
+// ---------------------------------------------------------------------------
+
+const TRACKING_UUID_NAMESPACE = 'b7f3e4d2-8c1a-4f5e-9a2b-6d7c8e9f0a1b';
+
+const hexToBytes = (hex: string): Uint8Array => {
+  const clean = hex.replace(/-/g, '');
+  const bytes = new Uint8Array(clean.length / 2);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = parseInt(clean.substr(i * 2, 2), 16);
+  }
+  return bytes;
+};
+
+const bytesToUuid = (bytes: Uint8Array): string => {
+  const hex = Array.from(bytes.slice(0, 16))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20, 32)}`;
+};
+
+export const nanoidToUuid = async (input: string): Promise<string> => {
+  const namespace = hexToBytes(TRACKING_UUID_NAMESPACE);
+  const name = new TextEncoder().encode(input);
+  const combined = new Uint8Array(namespace.length + name.length);
+  combined.set(namespace, 0);
+  combined.set(name, namespace.length);
+
+  const hashBuffer = await crypto.subtle.digest('SHA-1', combined);
+  const uuid = new Uint8Array(hashBuffer).slice(0, 16);
+  uuid[6] = (uuid[6] & 0x0f) | 0x50; // version 5
+  uuid[8] = (uuid[8] & 0x3f) | 0x80; // RFC 4122 variant
+  return bytesToUuid(uuid);
+};
+```
+
+:::tip[Production use]
+Generate your own namespace UUID when adopting this pattern in a production app. It needs to be stable across sessions so IDs stay correlatable.
 :::
 
 Next, add the two tracking functions within the same file.
@@ -223,6 +270,7 @@ import {
   initClientTracker,
   trackMessageSent,
   trackMessageReceived,
+  nanoidToUuid,
 } from '@/lib/tracking/client';
 
 // Inside the Home component:
@@ -288,16 +336,17 @@ In the `useChat` hook's `onFinish` callback, call `trackMessageReceived()` with 
 ```typescript title="src/app/page.tsx"
 const { messages, sendMessage, status } = useChat<UIMessage>({
   transport: chatTransport,
-  onFinish: ({ message }) => {
+  onFinish: async ({ message }) => {
     const responseTime = Date.now() - startTimeRef.current;
     const textContent = extractTextContent(message.parts);
     const toolCallsCount = extractToolCalls(message.parts).length;
     const activeSessionId = ensureActiveSessionId();
+    const messageUuid = await nanoidToUuid(message.id);
 
     trackMessageReceived({
       sessionId: activeSessionId,
-      invocationId: message.id,
-      messageId: message.id,
+      invocationId: messageUuid,
+      messageId: messageUuid,
       responseText: textContent,
       tokensUsed: null,
       toolCallsCount: toolCallsCount,
@@ -312,7 +361,7 @@ const { messages, sendMessage, status } = useChat<UIMessage>({
 });
 ```
 
-The `onFinish` callback fires once the full response has been streamed.
+The `onFinish` callback fires once the full response has been streamed. The callback is `async` because `nanoidToUuid` uses `crypto.subtle.digest`.
 
 ## Enable the `LiveTrackingPanel` component
 

@@ -226,7 +226,7 @@ Because of the Snowplow Micro configuration in `start.sh`, it will automatically
 
 Each of these schemas is compatible with all three business tools: which fields are populated depends on `tool_context.tool_name`. This keeps the demo application simple.
 
-In a production application, we highly advise creating separate schemas per tool. For example, instead of one `tool_params` schema with nullable fields for the different tools, you'd have `search_flights_params`, `book_flight_params`, and `check_calendar_params` schemas with only the relevant fields.
+In a production application, we highly advise creating separate schemas per tool. For example, instead of one `tool_params` schema with nullable fields for the different tools, you'd have `search_flights_params`, `book_flight_params`, and `check_calendar_params` schemas with only the relevant fields, and corresponding `search_flights_results`, `book_flight_results`, and `check_calendar_results` schemas (for the relevant tools' inputs and outputs).
 
 A per-tool approach is more extendable and has better type safety. Analysis will also be easier as the data for each tool would be separated.
 

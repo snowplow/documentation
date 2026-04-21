@@ -41,7 +41,7 @@ The flow works like this:
 - The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
 - The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction
 
-<img src={require('./adk-architecture.png').default} alt="Diagram showing how the Snowplow tracker, Signals, React app, and ADK agent fit together" style={{maxWidth: '600px', width: '100%'}} />
+<img src={require('./adk-architecture.png').default} alt="Architecture diagram showing the full data and request flow. In the browser, the Snowplow tracker fires page views, page pings, and link clicks to the Snowplow Collector. The CopilotKit client communicates with the React app via the AG-UI protocol. In the React app (port 3000), a CopilotKit sidebar renders the chat UI and a CopilotRuntime proxy forwards requests to the ADK backend as an HttpAgent, including the Snowplow session ID in forwarded_props. The FastAPI server (port 8000) runs ADKAgent middleware containing an LlmAgent (Gemini) with a before_model_callback. Before each model call, the callback fetches fresh session attributes from Signals using a GET attributes by session ID request. In the Snowplow layer, the Collector receives raw events, produces enriched events, and feeds them into Signals, which maintains real-time session attributes." style={{maxWidth: '600px', width: '100%'}} />
 
 ## Prerequisites
 

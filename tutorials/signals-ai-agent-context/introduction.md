@@ -41,32 +41,7 @@ The flow works like this:
 - The Next.js `/api/chat` route uses that session ID to fetch fresh attributes from Signals and appends them to the system prompt
 - The model's response is streamed back through the Vercel AI Gateway to the browser
 
-```mermaid
-flowchart TB
-    subgraph Browser["Browser"]
-        T["Snowplow tracker"]
-        W["ChatWidget<br/>(useChat hook)"]
-    end
-
-    subgraph Server["Next.js server"]
-        R["/api/chat route<br/>streamText + systemPrompt"]
-    end
-
-    subgraph Snowplow["Snowplow"]
-        CO["Collector<br/>(receives raw events)"]
-        SG["Signals<br/>(real-time session attributes)"]
-    end
-
-    subgraph AI["Model provider"]
-        G["Vercel AI Gateway<br/>(openai/gpt-4o-mini)"]
-    end
-
-    T -->|"page views, pings,<br/>link clicks"| CO
-    CO -->|"enriched events"| SG
-    W -->|"POST messages +<br/>snowplowDomainSessionId"| R
-    R -->|"GET attributes<br/>by session ID"| SG
-    R -->|"streaming chat completion"| G
-```
+<img src={require('./vercel-architecture.png').default} alt="Architecture diagram showing the full data and request flow. In the browser, the Snowplow tracker fires page views, page pings, and link clicks to the Snowplow Collector. The Collector produces enriched events, which flow into Snowplow Signals. Signals computes session attributes and exposes them via a GET attributes by session endpoint. On the Next.js server, the API Chat route receives messages and a Session ID from the browser chat widget, calls the Signals endpoint to fetch session attributes, and passes those attributes as a system prompt alongside the messages to Vercel AI Gateway. The gateway returns a streamed response, which the browser renders in the chat widget." style={{maxWidth: '600px', width: '100%'}} />
 
 ## Prerequisites
 

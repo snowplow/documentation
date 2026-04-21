@@ -34,40 +34,14 @@ The agent can tailor its response based on the user's actual behavior.
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph Browser["Browser"]
-        T["Snowplow tracker"]
-        C["CopilotKit client"]
-    end
-
-    subgraph Frontend["React app (port 3000)"]
-        S["CopilotKit Sidebar"]
-        P["CopilotRuntime (proxy)"]
-    end
-
-    subgraph Backend["FastAPI (port 8000)"]
-        A["ADKAgent middleware<br/>LlmAgent (gemini-3)<br/>before_model_callback"]
-    end
-
-    subgraph Snowplow["Snowplow"]
-        CO["Collector<br/>(receives raw events)"]
-        SG["Signals<br/>(real-time session attributes)"]
-    end
-
-    T -->|"page views, pings,<br/>link clicks"| CO
-    CO -->|"enriched events"| SG
-    C <-->|"AG-UI"| S
-    P -->|"HttpAgent<br/>(+ session ID in<br/>forwarded_props)"| A
-    A -->|"GET attributes<br/>by session ID"| SG
-```
-
 The flow works like this:
 - The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
 - Signals computes live session attributes from that stream
 - On the front-end, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop
 - The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
 - The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction
+
+<img src={require('./adk-architecture.png').default} alt="Architecture diagram showing the full data and request flow. In the browser, the Snowplow tracker fires page views, page pings, and link clicks to the Snowplow Collector. The CopilotKit client communicates with the React app via the AG-UI protocol. In the React app (port 3000), a CopilotKit sidebar renders the chat UI and a CopilotRuntime proxy forwards requests to the ADK backend as an HttpAgent, including the Snowplow session ID in forwarded_props. The FastAPI server (port 8000) runs ADKAgent middleware containing an LlmAgent (Gemini) with a before_model_callback. Before each model call, the callback fetches fresh session attributes from Signals using a GET attributes by session ID request. In the Snowplow layer, the Collector receives raw events, produces enriched events, and feeds them into Signals, which maintains real-time session attributes." style={{maxWidth: '600px', width: '100%'}} />
 
 ## Prerequisites
 

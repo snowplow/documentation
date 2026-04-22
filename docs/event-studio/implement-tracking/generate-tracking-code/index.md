@@ -809,19 +809,19 @@ These core property types can be nullable via union with null, e.g. a type of `[
 
 For other complex data types, the support varies by language:
 
-| Property type                                | TypeScript | JavaScript | Kotlin | Swift | Dart | Java | Go  |
-| -------------------------------------------- | ---------- | ---------- | ------ | ----- | ---- | ---- | --- |
-| Non-null unions e.g. `["string", "integer"]` | ✅          | ✅/❌*       | ❌      | ❌     | ✅    | ❌    | ❌   |
-| Array of primitives                          | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
-| Array of arrays                              | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
-| Array of string enum                         | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅   |
-| Array of nullable string enum                | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
-| Array of object                              | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅   |
-| Array of nullable object                     | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅   |
-| Object                                       | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅   |
-| Nested objects                               | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅   |
-| String enum                                  | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅   |
-| Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌   |
+| Property type                                | TypeScript | JavaScript | Kotlin | Swift | Dart | Java | Golang |
+| -------------------------------------------- | ---------- | ---------- | ------ | ----- | ---- | ---- | ------ |
+| Non-null unions e.g. `["string", "integer"]` | ✅          | ✅/❌*       | ❌      | ❌     | ✅    | ❌    | ❌      |
+| Array of primitives                          | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Array of arrays                              | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Array of string enum                         | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅      |
+| Array of nullable string enum                | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅      |
+| Array of object                              | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅      |
+| Array of nullable object                     | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅      |
+| Object                                       | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅      |
+| Nested objects                               | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅      |
+| String enum                                  | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌      |
 
 *For non-null union types in JavaScript, Snowtype generates working code but the JSDoc comment will be incorrect.
 

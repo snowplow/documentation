@@ -21,12 +21,15 @@ function process(event) {
 }
 ```
 
-You can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
+You can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with this interface.
 
-:::tip[JavaScript Language Features]
+You can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline.
 
-JavaScript enrichment uses the [Nashorn Engine](https://docs.oracle.com/en/java/javase/11/nashorn/introduction.html) and since version 3.0.0 of Enrich, many features of ECMAScript 6 are supported. For a list of those features, please refer to [this OpenJDK proposal](http://openjdk.java.net/jeps/292). Regarding the features the proposal says “might be feasible” in the future, as of 2023 our testing shows that classes and generators don't work, but tail calls do.
+:::tip[JavaScript language features]
 
+The JavaScript enrichment uses the standalone [Nashorn engine](https://github.com/openjdk/nashorn) with ES6 support.
+
+Not all ES6 features are guaranteed to work. If you are unsure whether a specific feature is available, test it in a [local environment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md) before deploying.
 :::
 
 ## Best practices

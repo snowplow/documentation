@@ -16,6 +16,8 @@ The field **type** refers to the data type in the enriched event data. For some 
 
 Different event fields are populated by different applications, such as tracker SDKs or [enrichments](/docs/pipeline/enrichments/index.md). The **source** of data for each field is indicated in the tables below.
 
+Values you provide in your tracking code have precedence over enrichment-derived values. For example, if you set `useragent` in your tracking code, the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) will use that value, rather than overriding it with the value from the `User-Agent` HTTP header.
+
 ## Validation
 
 During enrichment, atomic property values are validated against the [atomic schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0). If a required field is missing or invalid, for example the wrong type or length, [Enrich](/docs/api-reference/enrichment-components/index.md) will process the event as a [failed event](/docs/fundamentals/failed-events/index.md). The **reqd?** values in these tables specify whether a field is required for a Snowplow event.

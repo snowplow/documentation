@@ -39,6 +39,56 @@ This table shows the support for page ping tracking across the main client-side 
 
 We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/templates/index.md#base-web) for web tracking. It includes page pings.
 
+Since web tracker 4.8.0, it's also possible to attach [detailed activity metrics](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md#activity-metrics) to each page ping. The detailed metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction) and distance traveled by the mouse.
+
+:::tip[Agentic browsers]
+
+This can be helpful, for example, for distinguishing human and agent actions in an agentic browser session. Agents typically produce very little activity, navigating to pages directly and not clicking on links.
+
+:::
+
+### Activity metrics entity
+
+<SchemaProperties
+  overview={{event: false}}
+  example={{ mouseDistance: 1234, scrollDistance: 567, keyPresses: 12, clicks: 3, touches: 0 }}
+  schema={{
+    "description": "Quantitative user interaction metrics accumulated between page pings",
+    "properties": {
+      "mouseDistance": {
+        "type": "integer",
+        "description": "Cumulative Euclidean mouse distance in pixels"
+      },
+      "scrollDistance": {
+        "type": "integer",
+        "description": "Cumulative absolute scroll distance in pixels (both directions)"
+      },
+      "keyPresses": {
+        "type": "integer",
+        "description": "Number of key presses"
+      },
+      "clicks": {
+        "type": "integer",
+        "description": "Number of clicks"
+      },
+      "touches": {
+        "type": "integer",
+        "description": "Number of touch events"
+      }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": ["mouseDistance", "scrollDistance", "keyPresses", "clicks", "touches"],
+    "self": {
+      "vendor": "com.snowplowanalytics.snowplow",
+      "name": "activity_metrics",
+      "format": "jsonschema",
+      "version": "1-0-0"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }}
+/>
+
 ## Screen engagement
 
 Use screen engagement tracking to track a `screen_end` event when a user navigates away from a screen.

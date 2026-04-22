@@ -148,7 +148,7 @@ This is particularly useful when a user is passively engaging with your content,
 
 ### Activity metrics
 
-Since web tracker 4.8.0, it's possible to track more detailed activity metrics. These metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction) and distance traveled by the mouse.
+Since JavaScript tracker version 4.8.0, you can track more detailed activity metrics. These metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction), and distance traveled by the mouse.
 
 To enable activity metrics, set `activityMetrics` to `true` when enabling activity tracking (the default is `false`):
 
@@ -187,7 +187,7 @@ Activity metrics also work with [activity tracking callbacks](#activity-tracking
 
 ## Activity tracking callback
 
-You can perform edge analytics in the browser to reduce the number of events sent to your Collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent.
+You can perform edge analytics in the browser to reduce the number of events sent to your Collector while still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent.
 
 ### Enable callback
 
@@ -239,7 +239,7 @@ type ActivityCallbackData = {
     maxXOffset: number;
     /** The maximum Y scroll position for the current page view */
     maxYOffset: number;
-    /** Since 4.8.0. Activity metrics accumulated since the last ping (only when activityMetrics is enabled) */
+    /** Since version 4.8.0. Activity metrics accumulated since the last ping (only when activityMetrics is enabled) */
     activityMetrics?: ActivityMetrics;
 };
 ```

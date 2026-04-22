@@ -39,7 +39,7 @@ This table shows the support for page ping tracking across the main client-side 
 
 We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/templates/index.md#base-web) for web tracking. It includes page pings.
 
-Since web tracker 4.8.0, it's also possible to attach [detailed activity metrics](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md#activity-metrics) to each page ping. The detailed metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction) and distance traveled by the mouse.
+Since JavaScript tracker version 4.8.0, you can also attach [detailed activity metrics](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md#activity-metrics) to each page ping. The detailed metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction), and distance traveled by the mouse.
 
 :::tip[Agentic browsers]
 

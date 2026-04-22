@@ -12,7 +12,7 @@ Snowplow trackers track information about the device or browser that is sending 
 
 ## Browser atomic event properties
 
-Some trackers can populate the [browser atomic event properties](/docs/fundamentals/canonical-event/index.md#browser-fields).
+Some trackers can populate the [browser atomic event properties](/docs/fundamentals/canonical-event/index.md#browser-fields): `br_lang`, `br_cookies`, `br_colordepth`, `br_viewheight` and `br_viewwidth`.
 
 Depending on the tracker, you may have to provide the values, as not all trackers capture these fields themselves. The tracker will add the values automatically to all sent events.
 
@@ -22,7 +22,7 @@ Only the JavaScript tracker can populate the `br_cookies` field.
 
 | Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                         |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | --------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
+| [Web](/docs/sources/web-trackers/tracking-events/browsers/index.md)                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
 | [iOS](/docs/sources/mobile-trackers/client-side-properties/index.md)                 | ✅         | 0.5.0         | ✅             |                                               |
 | [Android](/docs/sources/mobile-trackers/client-side-properties/index.md)             | ✅         | 0.1.0         | ✅             |                                               |
 | [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         | ✅             |                                               |
@@ -46,14 +46,14 @@ Only the JavaScript tracker can populate the `br_cookies` field.
 
 You can configure the web trackers to automatically include a browser entity with all tracked events.
 
-| Tracker                                                                          | Supported | Since version | Auto-tracking |
-| -------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| Tracker                                                                                      | Supported | Since version | Auto-tracking |
+| -------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
 | [Web](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) | ✅         | 3.9.0         | ✅             |
-| iOS                                                                              | ❌         |               |               |
-| Android                                                                          | ❌         |               |               |
-| React Native                                                                     | ❌         |               |               |
-| Flutter                                                                          | ❌         |               |               |
-| Google Tag Manager                                                               | ❌         |               |               |
+| iOS                                                                                          | ❌         |               |               |
+| Android                                                                                      | ❌         |               |               |
+| React Native                                                                                 | ❌         |               |               |
+| Flutter                                                                                      | ❌         |               |               |
+| Google Tag Manager                                                                           | ❌         |               |               |
 
 The browser entity is only available on web trackers since it captures browser-specific information from the DOM and browser APIs. These APIs aren't available to React Native or Flutter.
 

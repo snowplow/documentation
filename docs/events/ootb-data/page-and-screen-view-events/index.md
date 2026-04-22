@@ -20,7 +20,7 @@ Both page and screen views are included in the [Snowplow Unified Digital dbt pac
 
 Track page views to record when a user views a web page.
 
-Page view events are [baked-in events](/docs/fundamentals/events/index.md) that have no schema. They populate the [page atomic event parameters](/docs/fundamentals/canonical-event/index.md#page-fields).
+Page view events are [baked-in events](/docs/fundamentals/events/index.md) that have no schema. They populate the [page atomic event parameters](/docs/fundamentals/canonical-event/index.md#page-fields). These parameters start with `page_` or `refr_`.
 
 This table shows the support for page view tracking across the main [Snowplow tracker SDKs](/docs/sources/index.md).
 

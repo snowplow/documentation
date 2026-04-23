@@ -20,7 +20,7 @@ Consider a travel booking chatbot. A user types "find me cheap flights to Paris 
    - It streams a response
 3. The agent makes decisions you can't observe from either the client or the server framework, such as intepreting user intent, choosing parameters for tool calls, or detecting when requirements can't be met.
 
-Tracking for each these layers will answer a different question:
+Tracking for each of these layers will answer a different question:
 - **Client-side tracking:** "What did the user do?"
 - **Server-side tracking:** "What did the agent do?"
 - **Agent self-tracking:** "What did the agent think?"

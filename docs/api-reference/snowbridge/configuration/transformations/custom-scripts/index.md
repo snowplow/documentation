@@ -145,8 +145,30 @@ The following hash algorithms are supported:
 - `sha256` - SHA-256 hash (256 bits)
 - `md5` - MD5 hash (128 bits)
 
-```
+```js
 hash(input.Data["app_id"], "sha1")
+```
+
+* `allContexts(data, contextName)` returns an array of all entity instances for a given entity name across all schema versions present in the data object. Instances are ordered by schema version descending (highest version first). `contextName` is the snake_case vendor and name portion of the key, without the `contexts_` prefix and version suffix. Returns an empty array if no matching keys are found.
+
+:::note
+`data` must be a parsed object, not a raw string. Use this function with `snowplow_mode`, or after parsing the data with `JSON.parse()`.
+:::
+
+```js
+allContexts(input.Data, "nl_basjes_yauaa_context")
+// e.g. returns [{ agentName: "python-requests", ... }]
+```
+
+* `allUnstruct(data, eventName)` returns the payload object for a self-describing event matching the given event name. `eventName` is the snake_case vendor and name portion of the key, without the `unstruct_event_` prefix and version suffix. Returns `undefined` if no matching key is found.
+
+:::note
+`data` must be a parsed object, not a raw string. Use this function with `snowplow_mode`, or after parsing the data with `JSON.parse()`.
+:::
+
+```js
+allUnstruct(input.Data, "com_snowplowanalytics_snowplow_add_to_cart")
+// e.g. returns { sku: "item41", quantity: 1, ... }
 ```
 
 ## Configuration

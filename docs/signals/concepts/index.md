@@ -106,7 +106,7 @@ Real-time stream flow:
 ### Batch source
 
 The batch data source uses dbt to generate and calculate new tables of attributes from your
-Snowplow atomic events table. Signals then syncs them to the Profiles Store periodically using the sync engine.
+Snowplow atomic events table. Signals then syncs them to the Profiles Store every hour using the sync engine.
 
 Batch flow:
 1. Behavioral data events arrive in the warehouse

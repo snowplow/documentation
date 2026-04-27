@@ -126,7 +126,7 @@ The [`ctx.waitUntil`](https://developers.cloudflare.com/workers/runtime-apis/con
 
 :::
 
-You will receive the following fields in the events:
+You will receive the following fields in the events (as well as all relevant fields added by enrichments, e.g., `page_urlpath`, `page_urlquery`):
 
 | Field | Value | Description |
 |-------|-------|-------------|
@@ -135,4 +135,4 @@ You will receive the following fields in the events:
 | `app_id` | your app id | Application identifier, so you can filter these events in your data |
 | `v_tracker` | `cf-worker-1.0.0` | Tracker version |
 | `useragent` | from the original request | The visitor's `User-Agent` header |
-
+| `page_url` | from the original request | The URL of the requested page |

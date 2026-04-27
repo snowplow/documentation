@@ -1,7 +1,5 @@
 import Link from '@docusaurus/Link';
 
-<table>
-<tbody>
 <tr>
     <td><code>batching.maxBytes</code></td>
     <td>Optional. Default value <code>10000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
@@ -138,5 +136,3 @@ import Link from '@docusaurus/Link';
     <td><code>http.client.maxConnectionsPerServer</code></td>
     <td> Optional. Default value 4. Configures the internal HTTP client used for iglu resolver, alerts and telemetry. The maximum number of open HTTP requests to any single server at any one time.</td>
 </tr>
-</tbody>
-</table>

@@ -37,7 +37,7 @@ In the image below, you can see an example of a tracking plan. It not only provi
 
 - **Share**; allow other members of your organization to access the tracking plan
 - **Subscribe**; receive notifications of any changes in the tracking plan
-- **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/snowtype/index.md))
+- **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/index.md))
 
 :::note
 Sharing and subscribing is only available for users registered in Snowplow Console.

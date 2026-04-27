@@ -1527,6 +1527,12 @@ pre.mermaid {
   width: 100% !important;
 }
 
+/* Fix Infima paragraph margin leaking into Mermaid SVG node labels */
+[id^="mermaid-"] foreignObject .nodeLabel p:not(#\#):not(#\#),
+[id^="mermaid-"] foreignObject .edgeLabel p:not(#\#):not(#\#) {
+  margin-bottom: 0;
+}
+
 /* Mobile: FORCE diagrams to never exceed viewport - covers both real mobile and dev tools simulation */
 @media (max-width: 768px),
   screen and (max-device-width: 768px),

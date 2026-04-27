@@ -29,7 +29,7 @@ On mobile, the following [user and session identifiers](/docs/events/ootb-data/u
 * Server-side user identifiers:
   * `network_userid` and `user_ipaddress`, set by the [Collector](/docs/pipeline/collector/index.md)
 
-:::note User-set properties
+:::note[User-set properties]
 The Collector captures the IP address from the request HTTP headers, and updates the `user_ipaddress` event property. However, if you set the `user_ipaddress` property in the `Subject`, that value has priority.
 
 Similarly, if you set the `network_userid` property in the `Subject`, that value is used instead of the Collector cookie value.
@@ -133,7 +133,7 @@ TrackerConfiguration config = new TrackerConfiguration("appId")
 | `network_userid`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 | `user_ipaddress`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 
-:::note Toggling anonymous tracking
+:::note[Toggling anonymous tracking]
 
 When anonymous tracking is enabled or disabled using `tracker.setUserAnonymisation(true | false)`, the tracker starts a new session. This results in a new `sessionId`.
 

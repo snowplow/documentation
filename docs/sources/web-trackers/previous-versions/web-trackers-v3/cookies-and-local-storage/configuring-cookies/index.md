@@ -108,7 +108,7 @@ Set the cookie samesite attribute for the tracker instance using the `cookieSame
 
 It is recommended to set either "`None`" or "`Lax`". You must use "`None`" if using the tracker in a third party iframe. "`Lax`" is good in all other cases and must be used if not setting Secure to true.
 
-:::note Safari 12 issue with SameSite cookies
+:::note[Safari 12 issue with SameSite cookies]
 It's been noted that Safari 12 doesn't persist cookies with `SameSite: None` as expected which can lead to rotation of the `domain_userid` from users using this browser. You should switch to `cookieSameSite: 'Lax'` in your tracker configuration to solve this, unless you are tracking inside a third party iframe.
 :::
 

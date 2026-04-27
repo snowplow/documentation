@@ -2,7 +2,7 @@
 title: "WebView tracker (legacy)"
 sidebar_label: "WebView tracker (legacy)"
 date: "2020-02-26"
-sidebar_position: 135
+sidebar_position: 137
 description: "Track events from web views in mobile hybrid apps by forwarding events to native iOS, Android, or React Native trackers with shared session data."
 keywords: ["webview tracker", "hybrid app tracking", "mobile webview events"]
 ---
@@ -410,6 +410,6 @@ window.snowplow('trackPageView', {}, ['ns1']);
   </TabItem>
 </Tabs>
 
-:::warning Specifying namespaces
+:::warning[Specifying namespaces]
 If you specify namespaces in the configuration, and no mobile trackers actually exist with those namespaces, the event will be lost.
 :::

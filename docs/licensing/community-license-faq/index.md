@@ -5,7 +5,7 @@ description: "Frequently asked questions about the Snowplow Community License te
 keywords: ["community license", "SCL", "license FAQ"]
 ---
 
-:::info Note
+:::info[Note]
 
 This FAQ is not a substitute for reading [the license text](/community-license-1.0/).
 

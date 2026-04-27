@@ -14,6 +14,6 @@ As well as loading the JavaScript Tracker, this tag creates a global function ca
 
 If you're running multiple JavaScript Trackers on the same page, you can avoid conflicts by specifying different function names for each tracker.
 
-:::info Local testing
+:::info[Local testing]
 If you're testing by opening your HTML file directly from your filesystem, e.g. `file:///home/joe/test.html`, protocol-relative URLs like `//cdn.example.com/sp.js` won't load. Use a local server or specify the full URL with `http://` or `https://`.
 :::

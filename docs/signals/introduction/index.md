@@ -57,7 +57,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
 
 ## Get hands on with Signals
 
-:::tip More resources
+:::tip[More resources]
 
 Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
 

@@ -20,7 +20,7 @@ The first step is to specify:
 
 ## Data source
 
-:::note Warehouse Connection
+:::note[Warehouse Connection]
 A warehouse connection is required to create `Batch` and `External Batch` attributes.
 :::
 
@@ -88,7 +88,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 ## Testing the attribute definitions
 
-:::note Warehouse Connection
+:::note[Warehouse Connection]
 A warehouse connection is required to test attribute definitions.
 :::
 

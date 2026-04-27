@@ -66,7 +66,7 @@ There may be times where you need to re-run some or all of the models for a peri
 
 Note that it is not currently possible to re-process a fixed period in the past, it is only possible to re-process from a given date up to the current date of the data.
 
-:::danger
+:::note
 
 Both methods are only suitable if the value of your source data in your `upsert` and date keys have not changed (e.g. `view_id` and `derived_tstamp` for the `snowplow_unified_views` model). If this is not the case, or your custom models are not built using this approach, there is no choice but to run a full refresh of the model.
 
@@ -102,7 +102,7 @@ sources={{
 />
 </p>
 
-:::danger
+:::note
 
 Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)). Where possible, use option 1.
 

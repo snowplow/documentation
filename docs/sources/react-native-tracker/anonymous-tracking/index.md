@@ -25,7 +25,7 @@ On React Native, the following [user and session identifiers](/docs/events/ootb-
 * Server-side user identifiers:
   * `network_userid` and `user_ipaddress`, set by the [Collector](/docs/pipeline/collector/index.md)
 
-:::note User-set properties
+:::note[User-set properties]
 The Collector captures the IP address from the request HTTP headers, and updates the `user_ipaddress` event property. However, if you set the `user_ipaddress` property in the `Subject`, that value has priority.
 
 Similarly, if you set the `network_userid` property in the `Subject`, that value is used instead of the Collector cookie value.
@@ -148,7 +148,7 @@ With `userAnonymisation: true` and `sessionContext: true`, events include the se
 | `network_userid`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 | `user_ipaddress`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 
-:::note Toggling anonymous tracking
+:::note[Toggling anonymous tracking]
 When anonymous tracking is enabled or disabled using `tracker.setUserAnonymisation(true | false)`, the tracker starts a new session. This results in a new `sessionId`.
 :::
 
@@ -159,7 +159,7 @@ When anonymous tracking is enabled or disabled using `tracker.setUserAnonymisati
 
 Server-side anonymization affects user identifiers set by the Collector: the `network_userid` property (set in the server-side cookie) and the user IP address. Use the `serverAnonymization` flag to prevent the Collector from setting these values.
 
-:::note Spelling
+:::note[Spelling]
 The new API uses the US English spelling "anonymization", rather than the British English "anonymisation" seen in the older API.
 :::
 

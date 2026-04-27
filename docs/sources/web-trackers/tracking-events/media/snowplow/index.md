@@ -16,7 +16,7 @@ This plugin is the recommended way to manually track media events from video pla
 
 See the [media tracking overview page](/docs/events/ootb-data/media-events/index.md) for more details on schemas and using the plugin.
 
-:::info Example app
+:::info[Example app]
 To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), visit our [example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) that showcases the tracked media events and entities live as you watch a video.
 
 Source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples).

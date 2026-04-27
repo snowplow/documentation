@@ -51,7 +51,7 @@ This configuration section is available only if your [Metric Type](#metric-type)
 
 In this section you can specify the event property whose value will populate the LaunchDarkly `metricValue` object.
 
-:::warning
+:::note
 
 Since the metric value needs to be a number (e.g. `10.0`), the Tag **will fail**, if you specify an event property whose value is not a number.
 

@@ -5,7 +5,7 @@ description: "Frequently asked questions about the Snowplow Personal and Academi
 keywords: ["academic license", "SPAL", "personal use license"]
 ---
 
-:::info Note
+:::info[Note]
 
 This FAQ is not a substitute for reading [the license text](/personal-and-academic-license-1.0/).
 

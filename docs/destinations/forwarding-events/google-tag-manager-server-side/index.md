@@ -42,7 +42,7 @@ Use GTM SS to relay raw events before the Snowplow pipeline to destinations, inc
 
 ### Principles for AWS deployment
 
-:::info For Snowplow customers
+:::info[For Snowplow customers]
 
 GTM SS **should** be deployed into a different account to the Snowplow sub-account to maintain full segmentation of the infrastructure that Snowplow manages from that which is managed by the Snowplow customer.
 

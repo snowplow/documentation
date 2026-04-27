@@ -6,7 +6,7 @@ description: "Quick start guides for legacy Snowplow dbt packages including Web,
 keywords: ["legacy dbt packages", "deprecated dbt packages", "legacy quickstart"]
 ---
 
-:::warning
+:::note
 
 Legacy packages are no longer under active development and are in some cases no longer supported. Please look for a suitable replacement for these packages where possible.
 

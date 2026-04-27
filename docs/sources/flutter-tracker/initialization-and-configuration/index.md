@@ -42,7 +42,7 @@ The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST p
 The `EmitterConfiguration` class was added in v0.3.0.
 :::
 
-:::note Version support
+:::note[Version support]
 The `GlobalContextsConfiguration` class was added in 0.9.0.
 :::
 

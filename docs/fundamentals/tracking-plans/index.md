@@ -55,7 +55,7 @@ Examples of tracking plans:
 
 **Benefits:**
 
-* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) for further details)
+* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/event-studio/implement-tracking/index.md) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
 **Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Tracking Plan, usually because the data is being used in a downstream data model or Data Model Pack.
@@ -73,11 +73,11 @@ Break down the barriers that exist between data producers and data consumers, by
 
 * Enhances accountability and transparency by providing a clear audit trail of all data modifications, fostering confidence in data integrity
 
-**Volume metrics**; tracking plans can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/event-studio/implement-tracking/snowtype/commands/index.md#snowtype-patch).
+**Volume metrics**; tracking plans can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific event specification IDs.
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/event-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/event-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/event-studio/implement-tracking/index.md). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.

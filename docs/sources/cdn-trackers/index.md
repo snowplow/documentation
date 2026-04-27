@@ -27,13 +27,13 @@ For example, for single-page applications (SPAs), client-side tracking will corr
 
 ## Cloudflare
 
-You can add Snowplow tracking to Cloudflare via a [Cloudflare Worker](https://developers.cloudflare.com/workers/). Note that you will likely require a [Workers Paid plan](https://developers.cloudflare.com/workers/platform/pricing/) depending on event volumes.
+You can add Snowplow tracking to Cloudflare via a [Cloudflare Worker](https://developers.cloudflare.com/workers/). Depending on your monthly number of requests, you will likely require a [Workers Paid plan](https://developers.cloudflare.com/workers/platform/pricing/).
 
-If you are already using Workers, you will need to add the below code to your existing worker script.
-
-Otherwise, follow Cloudflare documentation to:
-* [Create a worker](https://developers.cloudflare.com/workers/get-started/dashboard/) and add the script
+Follow Cloudflare documentation to:
+* [Create a worker](https://developers.cloudflare.com/workers/get-started/dashboard/) and add the following script
 * [Route your website to the worker](https://developers.cloudflare.com/workers/configuration/routing/routes/#set-up-a-route-in-the-dashboard)
+
+If you are already using Workers, you will need to add the code to your existing worker script.
 
 :::note[Customization]
 
@@ -132,7 +132,7 @@ You will receive the following fields in the events:
 |-------|-------|-------------|
 | `event` | `page_view` | Event type: page view |
 | `platform` | `srv` | Platform: server-side, to distinguish from browser events |
-| `appId` | your app id | Application identifier, so you can filter these events in your data |
+| `app_id` | your app id | Application identifier, so you can filter these events in your data |
 | `v_tracker` | `cf-worker-1.0.0` | Tracker version |
 | `useragent` | from the original request | The visitor's `User-Agent` header |
 

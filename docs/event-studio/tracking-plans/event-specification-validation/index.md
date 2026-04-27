@@ -22,9 +22,9 @@ The entity has two fields:
 
 Events that pass validation receive no entity. Use the entity's presence in your warehouse to identify events that failed validation.
 
-## Understand when the entity appears
+## Know when the entity appears
 
-Validation runs only when an event arrives with an `event_specification` entity that includes a version, typically attached by a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md). When the event specification or tracking plan is published, the pipeline routes events without an attached specification to [inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Inference never produces a validation entity, even when an event would have failed validation.
+Validation runs only when an event arrives with an `event_specification` entity that includes a version, typically attached by a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md). When the event specification or tracking plan is published, the pipeline routes events without an attached specification to [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Inference never produces a validation entity, even when an event would have failed validation.
 
 In your warehouse, three cases are possible:
 
@@ -36,7 +36,7 @@ In your warehouse, three cases are possible:
 The inference path filters specification candidates by their constraints internally, but it never attaches a validation entity. If an event would have failed validation under a given specification, inference does not match it to that specification: the absence of an `event_specification` entity covers both "no specification applies" and "an applicable specification existed but the event did not satisfy its constraints". To get explicit per-event validation results, instrument your tracking with Snowtype.
 :::
 
-## Understand what gets validated
+## Understand what the pipeline validates
 
 The pipeline evaluates each event against three categories of rule defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:
 
@@ -44,7 +44,7 @@ The pipeline evaluates each event against three categories of rule defined in it
 2. **Entity cardinality**: how many of each entity listed in the specification must be present on the event. Cardinality is checked per entity schema.
 3. **Entity constraints**: property-level rules defined on each entity data structure listed in the specification
 
-If the event payload itself fails its schema validation, event constraints are not evaluated because the payload is no longer available to the validation step. Entity cardinality and entity constraints still run, and a validation entity is attached only if one of those entity checks fails.
+If the event payload itself fails its schema validation, the pipeline does not evaluate event constraints because the payload is no longer available to the validation step. Entity cardinality and entity constraints still run, and the pipeline attaches a validation entity only if one of those entity checks fails.
 
 ### Example
 

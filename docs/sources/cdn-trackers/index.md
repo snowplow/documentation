@@ -42,13 +42,13 @@ See the comments in the script for various parts you need to customize.
 :::
 
 ```javascript
-// Add your Snowplow collector host here.
+// Add your Snowplow collector domain name here.
 // IMPORTANT: Do not use domains registered via Cloudflare,
-//            as it can lead to DNS resolution issues inside a worker script.
-//            You can use the <name>.collector.snplow.net domain instead.
+//            as that can lead to DNS resolution issues inside a worker script.
+//            CDI customers can opt for the <name>.collector.snplow.net domain instead.
 // highlight-start
 const collectorUrl =
-  "https://<collector-host>/com.snowplowanalytics.snowplow/tp2";
+  "https://<collector-domain>/com.snowplowanalytics.snowplow/tp2";
 // highlight-end
 
 // Headers to forward to Snowplow.

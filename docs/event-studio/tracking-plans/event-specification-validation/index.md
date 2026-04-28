@@ -65,6 +65,8 @@ An `add_to_cart` event arrives with an event payload where `currency = "USD"` an
 The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure on the validation entity but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md).
 :::
 
-:::tip[No tracking changes needed for newly published specifications]
-You do not need to change your tracking implementation when you publish a new specification. The pipeline validates events that already declare a specification against the newly published version immediately, and the validation entity appears in the warehouse without any client-side changes.
-:::
+## Validate against a new specification version
+
+A Snowtype-tracked event declares a specific `(id, version)` pair on its `event_specification` entity, and the pipeline validates each event against the version it declares. When you publish a new version of a specification, events from existing tracker code continue to declare the previous version and validate against its instructions. The new version applies once you regenerate your tracker code with [Snowtype](/docs/event-studio/implement-tracking/index.md) and deploy the updated tracker code, after which new events declare and validate against the new version.
+
+Different versions of a specification can coexist. Each event validates against the version it declares, whether the variation comes from a rolling update, from different applications using different versions, or from different deployment stages.

@@ -38,7 +38,7 @@ Once a specification is published, the pipeline evaluates every eligible incomin
 
 1. **Event schema**: the event's schema must match the event data structure defined in the specification.
 2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification according to the cardinality rules. Extra entities with different schemas on the event are ignored.
-3. **Property rules**: any property-level rules defined on those data structures in the specification — for example, `category = "product"` — must be satisfied.
+3. **Property instructions**: any property-level instructions defined on those data structures in the specification — for example, `category = "product"` — must be satisfied.
 
 The pipeline does not match on `appId`, environment, or any other source attribute. A single incoming event can match more than one specification if multiple published specifications share overlapping definitions.
 

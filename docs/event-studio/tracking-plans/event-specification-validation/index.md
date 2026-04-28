@@ -32,10 +32,6 @@ In your warehouse, three cases are possible:
 - **Passed validation, or matched by inference**: the event has an `event_specification` entity but no `event_specification_validation` entity. Either the event was Snowtype-tracked and passed validation, or the pipeline matched it to a specification by inference.
 - **Not associated with a specification**: the event has neither entity. No specification was attached at tracking time and the pipeline did not match the event to a published specification.
 
-:::note[Inference does not surface failures]
-The inference path filters specification candidates by their rules internally, but it never attaches a validation entity. If an event would have failed validation under a given specification, inference does not match it to that specification: the absence of an `event_specification` entity covers both "no specification applies" and "an applicable specification existed but the event did not satisfy its rules". To get explicit per-event validation results, instrument your tracking with Snowtype.
-:::
-
 ## Understand what the pipeline validates
 
 The pipeline evaluates each event against three categories of rule defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:

@@ -12,7 +12,7 @@ We want to score the combination of these attributes using an ML model to better
 
 Here's the prediction structure and timeline:
 
-![](./images/prediction-structure.png)
+![Diagram showing the prediction structure: a timeline of 30 days of user behaviour with attributes aggregated over time (num_pageviews, num_sessions, latest_geo), leading to a prediction point that asks whether the prospect will submit_form in the next 1 hour](./images/prediction-structure.png)
 
 The next task is to prepare historical data resembling the same Signals features, and train a LogisticRegression model on top.
 
@@ -154,7 +154,7 @@ joblib.dump(model, "model.joblib")
 
 Follow along in the notebook to evaluate your model's performance.
 
-![](./images/model_evaluate.png)
+![Model evaluation output showing classification metrics (accuracy 0.72, F1 score 0.38, ROC AUC 0.71), a confusion matrix, and an ROC curve with AUC of 0.71](./images/model_evaluate.png)
 
 :::note
 This model is built on an artificial subset of events. In real-life use-cases you'll most likely use a lot more Signals attributes that capture key user's behaviours including geo, useragent, traffic sources, various categorical attributes, and more.

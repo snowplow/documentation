@@ -15,7 +15,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 3. Select **Email** as the channel
 4. Name your campaign (e.g. "Abandoned browse - product reminder")
 
-![Create Campaign](images/retl-braze-create-campaign.png)
+![Braze Campaigns page with the "Create campaign" dropdown open, showing channel options: Multichannel, Email (highlighted), Push notification, In-app message, and Webhook](images/retl-braze-create-campaign.png)
 
 ## Configure campaign trigger
 
@@ -24,7 +24,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Create email template
 
-![Braze Campaign Builder](images/retl-braze-preview.png)
+![Braze campaign builder preview for "Message to Abandoned Browse" showing the personalized email for user trent@snowplowanalytics.com with the message "Hey Trent we saw you were interested in Air Force 1 Shadow"](images/retl-braze-preview.png)
 
 1. Click **Edit Campaign** in the campaign builder and click **Edit Email Body**
 2. Design your email using Braze's visual editor:
@@ -50,7 +50,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
      - remove users from the campaign audience once they've engaged. See image below for how to configure this in your Reverse ETL audience.
 :::
 
-![Filter Winback](images/retl-winback-filtered.png)
+![Census segment definition "Abandoned intent email to Braze" with filter conditions: Email is not blank, Time Engaged In greater than 30, Add To Cart is true, and Winback Successful is false](images/retl-winback-filtered.png)
 
 
 ## Campaign settings
@@ -82,7 +82,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
     - in Snowflake or Census, check the `winback_successful` column for the user has been set to true
 
 ---
-![Braze Test Email](images/retl-email.png)
+![Gmail inbox showing the test abandoned browse email from Snowplow Store with subject "Did you forget something??" and body text "Hey Trent we saw you were interested in Air Force 1 Shadow"](images/retl-email.png)
 
 ---
 

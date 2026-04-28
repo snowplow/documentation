@@ -494,7 +494,7 @@ To test the constraint handling, send "Find a flight to Tokyo for $20"
 
 You now have all three layers of tracking in place.
 
-![](./screenshots/cleanshot-2026-04-20-at-19.30.33.png)
+![Snowplow Micro UI showing all three tracking layers: client-side events (message_sent, page_view), server-side agent events (agent_invocation, agent_step, tool_execution, agent_completion), and a con_intent_detected event with its detail panel open showing intent_category "flight_search" with medium confidence](./screenshots/cleanshot-2026-04-20-at-19.30.33.png)
 
 ## Schema reference
 

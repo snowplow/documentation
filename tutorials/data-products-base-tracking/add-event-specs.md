@@ -8,15 +8,15 @@ keywords: ["event specification creation", "implementation instructions", "entit
 
 Now you can create the Event Specification representing the todo addition. Click `Create new event specification`, fill the event information modal with the following inputs and click `Save and continue`.
 
-![](./images/start-add-todo.png)
+!["Add event information" modal filled in with event name "Add todo", description "Event Specification representing a todo addition", and Todo Web Application as the source application with app IDs todo-web and todo-web-dev](./images/start-add-todo.png)
 
 The next step is to add the event Data Structure `todo_action` you created previously to represent the todo addition interaction. Select the Event Specification and on the `Event data structure` panel click `Add existing data structure` and select the `todo_action` custom Data Structure.
 
-![](./images/todo-action.png)
+!["Event data structure" modal showing a search for "todo" with the custom todo_action data structure at version 1-0-0 selected](./images/todo-action.png)
 
 To make sure your intention on this Event Specification is clear and also instructions for implementation are as precise as possible, you should go ahead and add instructions for this event. Click the `Add instructions` button and click `Edit` on the `value` attribute. Now you can fill the instructions with the following inputs, indicating exactly what is expected for this event.
 
-![](./images/implementation-instructions.png)
+![Properties panel for the action field showing instruction configuration: "I want to select one or more possible values" with value "add" and detailed instruction "Expected action `add`"](./images/implementation-instructions.png)
 
 :::tip
 Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](/docs/event-studio/implement-tracking/generate-tracking-code/#markdown-instructions).
@@ -24,10 +24,10 @@ Information for implementation instructions, cardinality rules and trigger detai
 
 Now on the Entity data structures section, click `Add existing data structure`, find and select the todo entity created earlier. On the next modal step you can define the expected cardinality, of this entity on the event specification. For the todo entity, you want to have exactly 1 instance.
 
-![](./images/entity-cardinality.png)
+!["Entity data structures" modal showing the todo entity with cardinality rule set to "Exactly 1"](./images/entity-cardinality.png)
 
 Finally you should add a trigger to represent exactly the conditions when this event should be fired. For this case, you expect the event to be fired when a user hits the Enter key after adding a title for the todo.
 
-![](./images/trigger.png)
+!["Event trigger" modal showing a preview of the Todo app with a text input highlighted, and the trigger description "Trigger this when Enter is hit and the todo has been added"](./images/trigger.png)
 
 **A similar process can be taken to create both the completion and removal Event Specifications.**

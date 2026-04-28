@@ -9,7 +9,7 @@ keywords: ["source application", "tracking plans", "application IDs", "Snowplow 
 The basis for every tracking setup is the Source Application. It represents the tracking estate, in a specific platform (_web, Android, iOS, etc._), for an application which in our case would be named _'Todo Web Application'_.
 
 Navigate to the Source Applications section and click the `Add a source application` button.
-![](./images/add-sap.png)
+![Console Source applications page showing no source applications added yet, with an "Add a source application" button in the top right](./images/add-sap.png)
 
 The inputs on the creation screen are:
 - **Name**: a name used for this application which is fairly understood across the organization.
@@ -19,4 +19,4 @@ The inputs on the creation screen are:
 - **Application entities**: here is where you will set the [application entities](/docs/event-studio/source-applications/#application-entities) you will implement and expect to be available with every event hit coming from this application.
 
 An example of inputs can be the following which you can adjust to your case:
-![](./images/filled-sap.png)
+![Add source application form filled in with name "Todo Web Application", description "Source Application for the Todo web application", owner peter@snowplowanalytics.com, and application IDs "todo-web" and "todo-web-dev"](./images/filled-sap.png)

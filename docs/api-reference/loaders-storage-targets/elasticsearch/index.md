@@ -1,9 +1,9 @@
 ---
-title: "Elasticsearch Loader for Kinesis and NSQ"
+title: "Elasticsearch Loader"
 sidebar_label: "Elasticsearch Loader"
 date: "2020-11-25"
 sidebar_position: 64
-description: "Load Snowplow enriched and bad events from Kinesis or NSQ streams into Elasticsearch or OpenSearch clusters."
+description: "Load Snowplow enriched and bad events from a Kinesis stream into Elasticsearch or OpenSearch clusters."
 keywords: ["elasticsearch loader", "opensearch", "kinesis elasticsearch", "event search"]
 ---
 
@@ -12,7 +12,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
+If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from a Kinesis stream and write them to [Elasticsearch](http://www.elasticsearch.org/overview/) or [OpenSearch](https://opensearch.org/).
 
 :::note
 
@@ -75,17 +75,17 @@ Each [entity](/docs/fundamentals/entities/index.md) type attached to the event g
 
 #### Getting started
 
-First off, install and set up Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html) for installation information and [Supported versions of OpenSearch and Elasticsearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html#choosing-version) for the latest information of ElasticSearch/OpenSearch supported versions by AWS.
+First, install and set up Elasticsearch. For more information, see the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html) for installation information and [Supported versions of OpenSearch and Elasticsearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html#choosing-version) for the latest information of ElasticSearch/OpenSearch supported versions by AWS.
 
-:::note[Supported Versions]
+:::note[Supported versions]
 
-We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x currently.
+The Elasticsearch Loader supports Elasticsearch 6.x, 7.x, 8.x, and 9.x. It also supports OpenSearch 1.x, 2.x, and 3.x.
 
 :::
 
 #### Raising the file limit
 
-Elasticsearch keeps a lot of files open simultaneously so you will need to increase the maximum number of files a user can have open. To do this:
+Elasticsearch keeps a lot of files open simultaneously, so you will need to increase the maximum number of files a user can have open. To do this:
 
 <CodeBlock language="bash">{
 `sudo vim /etc/security/limits.conf
@@ -169,7 +169,7 @@ If you want to tokenize specific string fields, you can change the "properties" 
 The Elasticsearch Loader is published on Docker Hub:
 
 <CodeBlock language="bash">{
-`docker pull snowplow/snowplow-elasticsearch-loader:${versions.esLoader}
+`docker pull snowplow/elasticsearch-loader:${versions.esLoader}
 `}</CodeBlock>
 
 The container can be run with the following command:
@@ -177,65 +177,141 @@ The container can be run with the following command:
 <CodeBlock language="bash">{
 `docker run \\
   -v /path/to/config.hocon:/snowplow/config.hocon \\
-  snowplow/snowplow-elasticsearch-loader:${versions.esLoader} \\
+  snowplow/elasticsearch-loader:${versions.esLoader} \\
   --config /snowplow/config.hocon
 `}</CodeBlock>
 
-Alternatively you can download and run a [jar file from the github release](https://github.com/snowplow/snowplow-elasticsearch-loader/releases):
+### Configure the Elasticsearch Loader
 
-<CodeBlock language="bash">{
-`java -jar snowplow-elasticsearch-loader-${versions.esLoader}.jar --config /path/to/config.hocon
-`}</CodeBlock>
+The loader is configured using a HOCON file. You can find a minimal example and a full reference example in the [config directory](https://github.com/snowplow/snowplow-elasticsearch-loader/tree/master/config).
 
-### Using the Elasticsearch Loader
+#### License acceptance
 
-#### Configuration
+The loader requires explicit acceptance of the [Snowplow Limited Use License Agreement](https://docs.snowplow.io/limited-use-license-1.1):
 
-The sink is configured using a HOCON file, for which you can find examples [here](https://github.com/snowplow/snowplow-elasticsearch-loader/tree/master/config). These are the fields:
+```hocon
+"license": {
+  "accept": true
+}
+```
 
-| Name                               | Description                                                                                                                                                                                                                                                                             |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| purpose                            | Required. "ENRICHED_EVENTS" for a stream of successfully enriched events<br/>"BAD_ROWS" for a stream of bad events<br/>"JSON" for writing plain json                                                                                                                                    |
-| input.type                         | Required. Configures where input events will be read from.<br/> Can be “kinesis”, “stdin” or “nsq”                                                                                                                                                                                      |
-| input.streamName                   | Required when `input.type` is kinesis or nsq. Name of the stream to read from.                                                                                                                                                                                                          |
-| input.initialPosition              | Required when `input.type` is kinesis. Used when `input.type` is Kinesis. Specifies where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT_TIMESTAMP" for after specified timestamp. |
-| input.initialTimestamp             | Used when `input.type` is kinesis. Required when `input.initialTimestamp` is "AT_TIMESTAMP". Specifies the timestamp to start read.                                                                                                                                                     |
-| input.maxRecords                   | Used when `input.type` is kinesis. Optional. Maximum number of records fetched in a single request. Default value 10000.                                                                                                                                                                |
-| input.region                       | Used when `input.type` is kinesis. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). Region where the Kinesis stream is located.                  |
-| input.customEndpoint               | Used when `input.type` is kinesis. Optional. Custom endpoint to override AWS Kinesis endpoints, this can be used to specify local endpoints when using localstack.                                                                                                                      |
-| input.dynamodbCustomEndpoint       | Used when `input.type` is kinesis. Optional. Custom endpoint to override AWS DynamoDB endpoints for Kinesis checkpoints lease table, this can be used to specify local endpoints when using Localstack.                                                                                 |
-| input.appName                      | Used when `input.type` is kinesis. Optional. Used by a DynamoDB table to maintain stream state. Default value "snowplow-elasticsearch-loader".                                                                                                                                          |
-| input.buffer.byteLimit             | Used when `input.type` is kinesis. Optional. The limit of the buffer in terms of bytes. When this value is exceeded, events will be sent to Elasticsearch. Default value 1000000.                                                                                                       |
-| input.buffer.recordLimit           | Used when `input.type` is kinesis. Optional. The limit of the buffer in terms of record count. When this value is exceeded, events will be sent to Elasticsearch. Default value 500.                                                                                                    |
-| input.buffer.timeLimit             | Used when `input.type` is kinesis. Optional. The time limit in milliseconds to wait to send the buffer to Elasticsearch. Default value 500.                                                                                                                                             |
-| input.channelName                  | Required when `input.type` is nsq. Channel name for NSQ source stream. If more than one application reading from the same NSQ topic at the same time, all of them must have unique channel name to be able to get all the data from the same topic.                                     |
-| input.nsqlookupdHost               | Required when `input.type` is nsq. Host name for nsqlookupd                                                                                                                                                                                                                             |
-| input.nsqlookupdPort               | Required when `input.type` is nsq. HTTP port for nsqd.                                                                                                                                                                                                                                  |
-| output.good.type                   | Required. Configure where to write good events. Can be "elasticsearch" or "stdout".                                                                                                                                                                                                     |
-| output.good.client.endpoint        | Required. The Elasticsearch cluster endpoint.                                                                                                                                                                                                                                           |
-| output.good.client.port            | Optional. The port the Elasticsearch cluster can be accessed on. Default value 9200.                                                                                                                                                                                                    |
-| output.good.client.username        | Optional. HTTP Basic Auth username. Can be removed if not active.                                                                                                                                                                                                                       |
-| output.good.client.password        | Optional. HTTP Basic Auth password. Can be removed if not active.                                                                                                                                                                                                                       |
-| output.good.client.shardDateFormat | Optional. Formatting used for sharding good stream, i.e. _yyyy-MM-dd. Can be removed if not needed.                                                                                                                                                                                     |
-| output.good.client.shardDateField  | Optional. Timestamp field for sharding good stream. If not specified derived_tstamp is used.                                                                                                                                                                                            |
-| output.good.client.maxRetries      | Optional. The maximum number of request attempts before giving up. Default value 6.                                                                                                                                                                                                     |
-| output.good.client.ssl             | Optional. Whether to use ssl or not. Default value false.                                                                                                                                                                                                                               |
-| output.good.aws.signing            | Optional. Whether to activate AWS signing or not. It should be activated if AWS OpenSearch service is used. Default value false.                                                                                                                                                        |
-| output.good.aws.region             | Optional. Region where the AWS OpenSearch service is located.                                                                                                                                                                                                                           |
-| output.good.cluster.index          | Required. The Elasticsearch index name.                                                                                                                                                                                                                                                 |
-| output.good.cluster.documentType   | Optional. The Elasticsearch index type. Index types are deprecated in ES >=7.x Therefore, it shouldn't be set with ES >=7.x                                                                                                                                                             |
-| output.good.chunk.byteLimit        | Optional. Bulk request to Elasticsearch will be splitted to chunks according given byte limit. Default value 1000000.                                                                                                                                                                   |
-| output.good.chunk.recordLimit      | Optional. Bulk request to Elasticsearch will be splitted to chunks according given record limit. Default value 500.                                                                                                                                                                     |
-| output.bad.type                    | Required. Configure where to write failed events. Can be "kinesis", "nsq", "stderr" or "none".                                                                                                                                                                                          |
-| output.bad.streamName              | Required. Stream name for events which are rejected by Elasticsearch.                                                                                                                                                                                                                   |
-| output.bad.region                  | Used when `output.bad.type` is kinesis. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). Region where the bad Kinesis stream is located.         |
-| output.bad.customEndpoint          | Used when `output.bad.type` is kinesis. Optional. Custom endpoint to override AWS Kinesis endpoints, this can be used to specify local endpoints when using localstack.                                                                                                                 |
-| output.bad.nsqdHost                | Required when `output.bad.type` is nsq. Host name for nsqd.                                                                                                                                                                                                                             |
-| output.bad.nsqdPort                | Required when `output.bad.type` is nsq. HTTP port for nsqd.                                                                                                                                                                                                                             |
-| monitoring.snowplow.collector      | Optional. Snowplow collector URI for monitoring. Can be removed together with monitoring section.                                                                                                                                                                                       |
-| monitoring.snowplow.appId          | Optional. The app id used in decorating the events sent for monitoring. Can be removed together with monitoring section.                                                                                                                                                                |
-| monitoring.metrics.cloudWatch      | Optional. Whether to enable Cloudwatch metrics or not. Default value true.                                                                                                                                                                                                              |
+#### Input
 
-#### Document count
+The loader reads from a Kinesis stream. The following fields configure the input:
+
+| Name | Description |
+| ---- | ----------- |
+| `input.streamName` | Required. Name of the Kinesis stream to read from. |
+| `input.appName` | Optional. Name used for the KCL DynamoDB lease table. Default: `"snowplow-elasticsearch-loader"`. |
+| `input.initialPosition.type` | Optional. Where to start reading the first time the app runs. Options: `"TRIM_HORIZON"` (oldest), `"LATEST"` (newest), or `"AT_TIMESTAMP"`. Default: `"TRIM_HORIZON"`. On subsequent runs, the app always resumes from the last checkpoint. |
+| `input.initialPosition.timestamp` | Required when `initialPosition.type` is `"AT_TIMESTAMP"`. Timestamp to start reading from, e.g. `"2023-01-01T00:00:00Z"`. |
+| `input.retrievalMode.type` | Optional. How the KCL fetches events. Options: `"Polling"` or `"FanOut"` (Kinesis Enhanced Fan-Out). Default: `"Polling"`. |
+| `input.retrievalMode.maxRecords` | Optional. Used when `retrievalMode.type` is `"Polling"`. Maximum number of events per poll request. Default: `750`. |
+| `input.retrievalMode.idleTimeBetweenReads` | Optional. Used when `retrievalMode.type` is `"Polling"`. Idle time between `GetRecords` requests. Default: `"1500 millis"`. |
+| `input.workerIdentifier` | Optional. Name of this KCL worker in the DynamoDB lease table. Default: `${HOSTNAME}`. |
+| `input.leaseDuration` | Optional. Duration of shard leases. Workers must refresh leases in DynamoDB before this expires. Default: `"10 seconds"`. |
+| `input.maxLeasesToStealAtOneTimeFactor` | Optional. Controls how many leases can be stolen at once, as a multiple of available processors. Default: `2.0`. |
+| `input.checkpointThrottledBackoffPolicy.minBackoff` | Optional. Minimum backoff when DynamoDB provisioned throughput limits are hit. Default: `"100 millis"`. |
+| `input.checkpointThrottledBackoffPolicy.maxBackoff` | Optional. Maximum backoff when DynamoDB provisioned throughput limits are hit. Default: `"1 second"`. |
+| `input.debounceCheckpoints` | Optional. How often to checkpoint progress to DynamoDB. Default: `"10 seconds"`. |
+| `input.maxRetries` | Optional. Maximum number of retries for Kinesis API operations. Default: `10`. |
+| `input.apiCallAttemptTimeout` | Optional. Maximum time for a single AWS API call attempt. Default: `"15 seconds"`. |
+
+#### Output: good events
+
+Good events are written to Elasticsearch. The following fields configure the Elasticsearch output:
+
+| Name | Description |
+| ---- | ----------- |
+| `output.good.url` | Required. URL of the Elasticsearch cluster, including scheme and port. Example: `"http://localhost:9200"`. |
+| `output.good.index` | Required. Name of the Elasticsearch index to write events into. |
+| `output.good.auth.type` | Required. Authentication method. Options: `"NoAuth"`, `"Basic"`, or `"AWSSigning"`. |
+| `output.good.auth.username` | Required when `auth.type` is `"Basic"`. HTTP Basic Auth username. |
+| `output.good.auth.password` | Required when `auth.type` is `"Basic"`. HTTP Basic Auth password. |
+| `output.good.auth.region` | Required when `auth.type` is `"AWSSigning"`. AWS region of the OpenSearch Service domain. |
+| `output.good.auth.serviceSigningName` | Required when `auth.type` is `"AWSSigning"`. AWS service name for SigV4 signing. Use `"es"` for OpenSearch Service or `"aoss"` for OpenSearch Serverless. |
+| `output.good.documentType` | Optional. Elasticsearch document type. Only required for Elasticsearch 6.x compatibility. |
+| `output.good.sharding.dateFormat` | Optional. Date format to append to the index name for time-partitioned indices, e.g. `"yyyy-MM-dd"`. |
+| `output.good.sharding.dateField` | Required when `sharding` is set. Timestamp field to extract the date from for index sharding. Must be one of: `collector_tstamp`, `derived_tstamp`, `dvce_created_tstamp`, `dvce_sent_tstamp`, `etl_tstamp`, `refr_dvce_tstamp`, `true_tstamp`. |
+| `output.good.indexTimeout` | Optional. Timeout passed to Elasticsearch for each bulk request. Default: `"1 minute"`. |
+| `output.good.additionalBadRowErrorTypes` | Optional. Additional Elasticsearch error types to treat as permanent bad rows instead of retrying. By default, `mapper_parsing_exception` and `document_parsing_exception` are treated as bad rows. |
+
+#### Output: bad rows
+
+Events that cannot be written to Elasticsearch are sent to a Kinesis stream as bad rows:
+
+| Name | Description |
+| ---- | ----------- |
+| `output.bad.streamName` | Required. Name of the Kinesis stream for bad rows. |
+| `output.bad.maxRecordSize` | Optional. Maximum record size in bytes. Records exceeding this are replaced with a `SizeViolation` bad row. Default: `1000000`. |
+| `output.bad.throttledBackoffPolicy.minBackoff` | Optional. Minimum backoff when Kinesis write throughput limits are exceeded. Default: `"100 milliseconds"`. |
+| `output.bad.throttledBackoffPolicy.maxBackoff` | Optional. Maximum backoff when Kinesis write throughput limits are exceeded. Default: `"1 second"`. |
+| `output.bad.recordLimit` | Optional. Maximum number of records per `PutRecords` request. Default: `500`. |
+| `output.bad.byteLimit` | Optional. Maximum number of bytes per `PutRecords` request. Default: `5242880`. |
+| `output.bad.maxRetries` | Optional. Maximum number of retries for Kinesis write operations. Default: `10`. |
+
+#### Purpose
+
+| Name | Description |
+| ---- | ----------- |
+| `purpose` | Required. Type of events to process. Options: `"ENRICHED_EVENTS"` for Snowplow enriched events, `"BAD_ROWS"` for Snowplow bad rows, or `"JSON"` for arbitrary JSON. |
+
+#### Batching
+
+The loader accumulates events into batches before sending them to Elasticsearch. A batch is flushed when the first condition is met:
+
+| Name | Description |
+| ---- | ----------- |
+| `batching.maxBytes` | Optional. Flush after this many source bytes have been accumulated. Default: `10000000`. |
+| `batching.maxDelay` | Optional. Flush after this delay has elapsed. Default: `"1 second"`. |
+
+#### Retries
+
+| Name | Description |
+| ---- | ----------- |
+| `retries.transientErrors.delay` | Optional. Delay between retry attempts for transient Elasticsearch errors. Default: `"1 second"`. |
+| `retries.transientErrors.attempts` | Optional. Maximum number of retry attempts before treating the batch as failed. Default: `5`. |
+
+#### Decompression
+
+The loader automatically detects and decompresses zstd- or gzip-compressed Kinesis messages. Uncompressed messages are unaffected.
+
+| Name | Description |
+| ---- | ----------- |
+| `decompression.maxBytesInBatch` | Optional. Maximum total decompressed bytes per batch. Protects memory when a single compressed message expands into many large records. Default: `5242880`. |
+| `decompression.maxBytesSinglePayload` | Optional. Maximum size of a single decompressed record in bytes. Records exceeding this limit are dropped and emitted as bad rows. Default: `10000000`. |
+
+#### Parallelism
+
+| Name | Description |
+| ---- | ----------- |
+| `cpuParallelismFactor` | Optional. Controls how the app splits the workload into concurrent batches for parsing and transformation, as a multiple of available processors. Default: `1`. |
+| `uploadParallelismFactor` | Optional. Controls how many Elasticsearch bulk upload jobs can run in parallel, as a multiple of available processors. Default: `4`. |
+
+#### Monitoring
+
+The loader exposes runtime metrics and health information through several optional integrations:
+
+| Name | Description |
+| ---- | ----------- |
+| `monitoring.metrics.statsd.hostname` | Optional. Hostname of the StatsD server to send metrics to. |
+| `monitoring.metrics.statsd.port` | Optional. Port of the StatsD server. Default: `8125`. |
+| `monitoring.metrics.statsd.tags` | Optional. Map of key/value pairs sent along with each metric. |
+| `monitoring.metrics.statsd.period` | Optional. How often to report metrics. Default: `"1 minute"`. |
+| `monitoring.metrics.statsd.prefix` | Optional. Prefix for metric names. |
+| `monitoring.metrics.prometheus.tags` | Optional. Map of key/value pairs used as common labels on all Prometheus metrics. When set, a `/metrics` endpoint is exposed for scraping. |
+| `monitoring.sentry.dsn` | Optional. Sentry DSN for reporting unexpected runtime exceptions. |
+| `monitoring.sentry.tags` | Optional. Map of key/value pairs included as tags on Sentry events. |
+| `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. |
+| `monitoring.healthProbe.unhealthyLatency` | Optional. The health probe becomes unhealthy if any received event has not been fully processed before this cutoff time. Default: `"2 minutes"`. |
+
+#### Telemetry
+
+| Name | Description |
+| ---- | ----------- |
+| `telemetry.disable` | Optional. Set to `true` to disable telemetry. Default: `false`. |
+| `telemetry.userProvidedId` | Optional. Identifier to tie events together across modules and infrastructure. |
+
+## Check document count
 
 To check the number of documents in an Elasticsearch or OpenSearch cluster, use the [Count API](https://docs.opensearch.org/latest/api-reference/search-apis/count/) provided by Elasticsearch/OpenSearch. For example, to get the total number of documents in the cluster, use `GET _count`.

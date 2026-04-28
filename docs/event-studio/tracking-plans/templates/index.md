@@ -2,7 +2,7 @@
 title: "Tracking plan templates"
 sidebar_label: "Templates"
 date: "2024-06-17"
-sidebar_position: 2
+sidebar_position: 4
 description: "Pre-defined tracking plan templates for Base Web, Base Mobile, Ecommerce, and Media tracking with included event specifications and implementation guidance."
 keywords: ["tracking plan templates", "Base Web template", "Base Mobile template", "ecommerce template", "media tracking template"]
 ---

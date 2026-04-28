@@ -3,7 +3,7 @@ title: "Event specification validation"
 sidebar_label: "Validation"
 sidebar_position: 3
 description: "Event specification validation checks events that arrive with a specification entity attached against the rules defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
-keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "entity constraints"]
+keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "property instructions"]
 date: "2026-04-27"
 ---
 

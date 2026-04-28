@@ -31,6 +31,6 @@ Supported platform codes can again be found in the [Snowplow Tracker Protocol](
 
 Having entered the endpoint URL, click on **Create**. This will open a form where you can set up authentication of the callbacks – leave that to "None". In the bottom part of the page, you will be able to select which events to subscribe to as shown in this screenshot:
 
-![](images/iterable-events-810x1024.png)
+![Iterable System Webhooks configuration page showing event subscription checkboxes across Email, SMS, Push, In-app, and Web Push categories, with all events selected](images/iterable-events-810x1024.png)
 
 That’s it – when you save the configuration, Iterable events should automatically flow through into your data warehouse.

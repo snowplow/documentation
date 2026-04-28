@@ -39,13 +39,13 @@ The data quality dashboard allows you to see failed events directly from your wa
 
 In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/monitoring/exploring-failed-events/index.md#configure). The data quality dashboard currently supports Snowflake and Bigquery connections.
 
-![](images/dqd-architecture.png)
+![Architecture diagram showing user-generated events flowing through the pipeline to a warehouse, with the Data Quality API connecting directly to the warehouse, and the Console UI in the browser sending failed event queries to the Data Quality API while authenticating via the Console API.](images/dqd-architecture.png)
 
 In this setup, you expose an additional interface (Data Quality API) to the public internet, and all failed events information is served via that interface.
 
 The user experience of the data quality dashboard is similar to the default view, but offers substantially more information to support resolution of tracking issues. The overview page looks as follows:
 
-![](images/dqd-overview.png)
+![Data quality dashboard overview showing 15.29k total data volume (10.55k valid events, 4.73k failed events), a stacked bar chart of failed event volumes by day, and a table listing ValidationError issues by data structure, app ID, app version, first and last seen dates, volume, and trend.](images/dqd-overview.png)
 
 As in the default view, it is possible to change the time horizon from the 7-day default, to the last hour, last day, or last 30 days. You get a corresponding overview of event volumes, both the successful and the failed ones, for the whole time period but also split per day/hour/minute in the bar chart right below.
 
@@ -53,17 +53,17 @@ Complementing the graphical overview, there is a table that lists all errors (at
 
 Clicking on a particular error type will take you to a detailed view:
 
-![](images/dqd-details.png)
+![Issue details page for a ValidationError showing the error message "3 classes (array, null, string) is required", the offending data structure and app IDs, and a sample data table with columns including COLLECTOR_TSTAMP and CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1 containing JSON failure context.](images/dqd-details.png)
 
 The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#entity-definitions), [mobile](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
 
 Some columns are too wide to fit in the table: click on them to see the full pretty-printed, syntax-highlighted content. The most useful column to explore is probably `CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1`, which contains the actual error information encoded as a JSON object:
 
-![](images/cell-content.png)
+![Value details modal displaying the full content of a CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1 column as syntax-highlighted JSON, showing schema version 1-0-0, componentName snowplow-enrich-kinesis, and lookupHistory errors with NotFound responses from Iglu Central.](images/cell-content.png)
 
 Finally, you can click on the **View SQL query** button to see the SQL query that was used to fetch the failed events from your warehouse:
 
-![](images/sql-query.png)
+![View SQL query modal showing the SELECT statement used to fetch failed events from atomic_failed.events, including lateral flatten operations on the failure context column and a WHERE clause filtering by error hash and load timestamp range.](images/sql-query.png)
 
 ### Missing warehouse permissions
 
@@ -204,13 +204,13 @@ To fix these errors, try:
 
 The default view is a relatively simple interface that shows the number of failed events over time alongside a coarse-grained description of the problem at hand. In certain cases, the error message can be somewhat cryptic in terms of diagnosing the root cause of the error. The reason is that this information flows through Snowplow infrastructure, therefore we have redacted it substantially before it leaves your pipeline, to ensure that PII does not traverse Snowplow systems. The aggregates are served by the Console's backend:
 
-![](images/aggregator-architecture.png)
+![Architecture diagram showing user-generated events flowing through the pipeline, which contains a Failed Events Aggregator, to the warehouse. Redacted aggregates pass from the aggregator through Snowplow Infrastructure and the Console API to the Console UI in the browser.](images/aggregator-architecture.png)
 
 In this setup, you expose no additional interface to the public internet, and all failed events information is served by the Console's APIs.
 
 Below is an example view of the failed events screen in Snowplow Console:
 
-![](images/image-1024x1024.png)
+![Tracking quality report (30-day view) showing 502.51m total events with 2.31k failed events (0.00%), a bar chart of 30-day failure trends, and a failed events by type table listing two Validation errors: load_succeeded/2-0-0 with 1.80k failures and page_view/1-0-0 with 335 failures.](images/image-1024x1024.png)
 
 This interface is intended to give you a quick representation of the volume of event failures so that action can be taken. The UI focuses on schema violation and enrichment errors at present.
 
@@ -224,7 +224,7 @@ In the table, failed events are aggregated by the unique type of failure (valida
 
 By selecting a particular error you are able to get more detail:
 
-![](images/image-1-1024x1009.png)
+![Tracking failure details page for the page_view/1-0-0 schema showing error messages for $.documentLocationUrl and $.documentPath maxLength violations, vendor com.google.analytics.measurement-protocol, tracker com.google.analytics.measurement-protocol-v1, and a 30-day trend chart with 335 total failures most recently on 12 May.](images/image-1-1024x1009.png)
 
 The detailed view shows the error message as well as other useful metadata (when available), like `app_id`, to help diagnose the source and root cause of the error; as well as a bar chart indicating how the volume of failures varies over time for this particular failed event.
 

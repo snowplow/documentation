@@ -40,7 +40,7 @@ import DeprecatedV2 from "@site/docs/reusable/javascript-tracker-v2-deprecation/
 
 ```
 
-[![](https://img.shields.io/github/v/release/snowplow/sp-js-assets?sort=semver&style=flat)](https://github.com/snowplow/snowplow-javascript-tracker/releases)
+[![Latest release version badge for the Snowplow JavaScript Tracker](https://img.shields.io/github/v/release/snowplow/sp-js-assets?sort=semver&style=flat)](https://github.com/snowplow/snowplow-javascript-tracker/releases)
 
 <DeprecatedV2/>
 

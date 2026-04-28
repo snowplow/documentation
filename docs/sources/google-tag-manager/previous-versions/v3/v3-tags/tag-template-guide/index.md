@@ -33,7 +33,7 @@ The Tag template requires a [Snowplow v3 Settings](/docs/sources/google-tag-mana
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
-![tracker initialization](images/tracker_initialization.png)
+![The Tracker Initialisation section with the Snowplow Settings dropdown set to "{{Snowplow v3 Settings}}" and four unchecked override options for tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
 
 You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
 
@@ -41,17 +41,17 @@ You can also choose to override some of the parameters specifically for this tag
 
 If you have the Snowplow library [self-hosted](/docs/sources/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
-![modifying permissions](images/modifying_permissions.png)
+![The GTM Template Editor Permission tab with the "Injects scripts" permission expanded, showing an Allowed URL match patterns field containing a custom self-hosted tracker URL](images/modifying_permissions.png)
 
 Modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template.
 
-![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
+![A GTM warning dialog stating "Modified Community Gallery Templates will no longer receive updates provided by the developer" with Cancel and Continue buttons](images/modifying_breaks_gallery_link.png)
 
 :::note
 
 Since v1.1.0, an alternative to prevent breaking the gallery update link is to use the `Do not load` option from the corresponding drop down menu:
 
-![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
+![The "Override JavaScript Library Host" option enabled with the Snowplow JavaScript Tracker Library dropdown set to "Do not load library"](images/host_drop_down_no_load.png)
 
 Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/sources/google-tag-manager/previous-versions/v3/v3-settings-variable/index.md) Variable.)
 

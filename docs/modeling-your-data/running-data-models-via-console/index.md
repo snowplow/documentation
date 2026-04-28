@@ -132,7 +132,7 @@ To create a run configuration:
 
 Once you’ve defined the run configurations and schedules, Console will automatically run your data models. You can see when the next run is scheduled by looking at each run configuration.
 
-![Run configuration example](images/run-configurations.png)
+![Run configurations panel showing an active "Main run configuration" on BigQuery with one schedule, and an "example-models" schedule set to run every 20 minutes with the next run today at 20:00](images/run-configurations.png)
 
 You can also use the **Run now** button to trigger a one-off model run for a specific schedule. The resulting job will use the same commands and settings.
 

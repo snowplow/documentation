@@ -17,7 +17,7 @@ By default all its metrics are relative to the page load rather than absolute ti
 
 The following diagram shows the ResourceTiming and PerformanceNavigationTiming properties and how they connect to the navigation of the page main document.
 
-![performance navigation timeline](./images/performance_navigation_timeline.png)
+![The W3C Performance Navigation Timeline showing sequential page load phases — Process Unload Event, Redirect, Service Worker, HTTP Cache, DNS, TCP, Request, Response, Processing, and Load — with timing marks such as fetchStart, domInteractive, and loadEventEnd annotated at each transition](./images/performance_navigation_timeline.png)
 
 _Performance navigation timeline from the [W3C specification](https://www.w3.org/TR/navigation-timing-2/)._
 

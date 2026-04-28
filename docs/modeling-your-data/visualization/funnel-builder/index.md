@@ -99,11 +99,11 @@ You can also download the generated SQL to edit or rerun in your own environment
 
 | User counts by funnel step                                                  | Funnel conversion rates                                                       |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![Chart showing user counts by funnel step.](images/output-user-counts.png) | ![Chart showing funnel conversion rates.](images/output-conversion-rates.png) |
+| ![Bar chart showing the number of users who reached each step in the funnel, with step names on the x-axis and user counts on the y-axis](images/output-user-counts.png) | ![Bar chart showing the percentage of users who converted between each consecutive pair of funnel steps](images/output-conversion-rates.png) |
 
 | Abandonment at each funnel step                                                  | Summary table                                                      |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| ![Chart showing abandonment at each funnel step.](images/output-abandonment.png) | ![Summary table with the funnel steps.](images/output-summary.png) |
+| ![Bar chart showing the number of users who dropped off at each funnel step, with abandonment counts on the y-axis](images/output-abandonment.png) | ![Table summarizing each funnel step with columns for step name, user count, conversion rate, and abandonment count](images/output-summary.png) |
 
 ### Save your funnel configuration
 

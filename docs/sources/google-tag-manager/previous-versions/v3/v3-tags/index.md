@@ -42,7 +42,7 @@ function() {
 
 Alternatively, you can set the drop-down to the value `No`, and add the parameters manually instead:
 
-![adding parameters manually](images/adding_parameters_manually.png)
+![GTM tag Parameter Configuration section showing Tag Type set to "Error Tracking", Retrieve Parameters From Variable set to "No", and a manually entered parameter row with Parameter Name "message (required)" and Parameter Value "Error Message"](images/adding_parameters_manually.png)
 
 Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/sources/web-trackers/tracking-events/index.md) for more information about what each option does.
 
@@ -96,19 +96,19 @@ The **Callback Function** is something you can set to a JavaScript function. If 
 
 For any other commands which are supported by the Snowplow JavaScript Tracker v3, you can select the **[Custom Command]** option. Once select, you can enter any function name and the associated parameter for that function. The parameter can either be a simple string, in examples such as `setUserId`:
 
-![setUserId](images/setUserId.png)
+![GTM tag Custom Command section with Command Name set to "setUserId" and Command Argument set to "user-123"](images/setUserId.png)
 
 Or it can be set to a Custom JavaScript Variable in the instances where an Object should be passed to the function, such as with `enableAnonymousTracking`:
 
-![enableAnonymousTracking Custom JavaScript variable](images/enableAnonymousTracking_custom_variable.png)
+![GTM Custom JavaScript variable configuration named "Anonymous Tracking Options" containing a function that returns an options object with withServerAnonymisation set to true](images/enableAnonymousTracking_custom_variable.png)
 
 And then use this variable as your Command Argument:
 
-![enableAnonymousTracking Custom Command argument](images/enableAnonymousTracking_argument.png)
+![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "{{Anonymous Tracking Options}}"](images/enableAnonymousTracking_argument.png)
 
 ### Additional Tracking Parameters
 
-![](images/additional_tracking_parameters.png)
+![GTM tag Additional Tracking Parameters section showing a Context Entities dropdown for attaching custom context and a Set Custom Timestamp field with a UNIX milliseconds input](images/additional_tracking_parameters.png)
 
 #### Add Custom Context Entities
 

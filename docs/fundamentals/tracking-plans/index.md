@@ -37,7 +37,7 @@ Examples of tracking plans:
 
 **The Source Application/s it is part of**; a tracking plan is referencing the [Source Application/s](/docs/event-studio/source-applications/index.md) that is spanning across.
 
-![Example Tracking Plan view](images/example_tracking_plan_view.png)
+![Snowplow Console showing the "E-commerce Web" tracking plan Overview tab, including the tracking plan name, description, source application (website), ownership details, and a table of event specifications with their data structures, entities, source applications, last seen dates, and event volume counts.](images/example_tracking_plan_view.png)
 
 **Benefits:**
 
@@ -51,7 +51,7 @@ Examples of tracking plans:
 
 **Event specifications**; these describe each event that is collected as part of the tracking plan, on which applications they are triggered and where, the event data structure to validate against, and the entities to attach to each event (e.g. user, product etc).
 
-![Example Event Specification](images/example_event_specification.png)
+![Snowplow Console showing the "Add to cart" event specification detail page, including event description, source application (website), application IDs with status indicators, the snowplow_ecommerce_action 1-0-2 data structure with a required "type" property set to the exact value "add_to_cart", and entity data structures for product and cart.](images/example_event_specification.png)
 
 **Benefits:**
 
@@ -98,11 +98,11 @@ For these tracking plans, the volume metrics will behave differently:
 
   This toggle will be disabled by default, so the metrics displayed will relate only to the application IDs inherited from the source applications set up in the tracking plan.
 
-  ![](images/tracking_plan_metrics_default.png)
+  ![Event specifications list with the "Show all tracked App IDs" toggle disabled. Five event specifications are shown (Button click, Custom event, Link click, Page ping, Page view) with their data structures, the console-qa application ID badge, last seen dates, and volume counts. Page view shows 64.00k events.](images/tracking_plan_metrics_default.png)
 
   If the toggle is enabled, it will show the metrics for all the application IDs found for the standard events (not just the ones inherited from the tracking plan).
 
-  ![](images/tracking_plan_metrics_toggled.png)
+  ![Event specifications list with the "Show all tracked App IDs" toggle enabled. The Page view event now shows three application ID badges — console-qa (green indicator), react-app (yellow indicator), and duncan_app (yellow indicator) — revealing events tracked from application IDs not configured in the tracking plan's source applications.](images/tracking_plan_metrics_toggled.png)
 
 :::
 

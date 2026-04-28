@@ -14,14 +14,14 @@ import TabItem from '@theme/TabItem';
 
 Use the native Snowplow Ecommerce API or [transitional GA4/UA ecommerce adapter APIs](../../../../../tracking-events/ecommerce/index.md) for existing dataLayer implementations using those formats. To get full value from the [Snowplow Ecommerce plugin](../../../../../tracking-events/ecommerce/index.md) we recommend using the native API when possible.
 
-![](images/01_ecommerce_api.png)
+![Ecommerce API dropdown with three options: Snowplow Ecommerce (selected and highlighted), Google Analytics 4 Ecommerce, and Universal Analytics Enhanced Ecommerce.](images/01_ecommerce_api.png)
 
 ## Tracking Parameters
 
 <Tabs groupId="ecommerceAPI" queryString>
   <TabItem value="sp" label="Snowplow Ecommerce" default>
 
-![](images/02_sp_tracking_parameters.png)
+![Snowplow Ecommerce Tracking Parameters section showing Ecommerce Function set to Track Product View, an empty Ecommerce Argument field, an empty Custom Context Entities table with an Add Row button, and Set Custom Timestamp set to Use system time.](images/02_sp_tracking_parameters.png)
 
 #### Snowplow Ecommerce Function
 
@@ -44,7 +44,7 @@ Set this to a UNIX timestamp in case you want to [override the default timestamp
   </TabItem>
   <TabItem value="ga4" label="GA4 Ecommerce">
 
-![](images/02_ga4_tracking_parameters.png)
+![GA4 Ecommerce Tracking Parameters section showing GA4 Ecommerce Function set to Track GA4 View Item List, and Ecommerce Arguments subsection with empty DataLayer ecommerce and Options object fields.](images/02_ga4_tracking_parameters.png)
 
 #### GA4 Ecommerce Function
 
@@ -63,7 +63,7 @@ Here you can specify a variable returning an object holding additional informati
   </TabItem>
   <TabItem value="ua" label="Universal Analytics Enhanced Ecommerce">
 
-![](images/02_ua_tracking_parameters.png)
+![Universal Analytics Enhanced Ecommerce Tracking Parameters section showing UA Enhanced Ecommerce Function set to Track Enhanced Ecommerce Product List View, and Ecommerce Arguments subsection with empty DataLayer ecommerce and Options object fields.](images/02_ua_tracking_parameters.png)
 
 #### Universal Analytics Enhanced Ecommerce Function
 
@@ -84,7 +84,7 @@ Here you can specify a variable returning an object holding additional informati
 
 ## Snowplow Tracker and Ecommerce Plugin Settings
 
-![](images/04_tracker_plugin_settings.png)
+![Snowplow Tracker and Ecommerce Plugin Settings section showing a Tracker Settings dropdown prompting to select a Snowplow v3 Settings variable, and Plugin Settings with Snowplow Ecommerce Plugin Library set to Self-hosted and an empty Self-hosted Plugin URL field.](images/04_tracker_plugin_settings.png)
 
 ### Tracker Settings
 

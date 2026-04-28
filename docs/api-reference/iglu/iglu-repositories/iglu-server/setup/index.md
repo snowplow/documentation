@@ -16,7 +16,7 @@ For more information on the architecture of the Iglu server, please read [the t
 
 ## Available on Terraform Registry
 
-[![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest)
+[![Terraform Registry](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest)
 
 A Terraform module is available which deploys an Iglu Server on AWS EC2 without the need for this manual setup.
 

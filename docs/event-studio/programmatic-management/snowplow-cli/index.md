@@ -132,7 +132,7 @@ For VS Code you can get this authoring functionality using this [YAML extension]
 
 After that running `snowplow-cli ds generate test` and opening the generated file in the configured editor of choice should look something like the following:
 
-![](./images/lspValidation.png)
+![VS Code editor showing a Snowplow data structure YAML file with YAML language server validation active, highlighting a type error on the vendor field with the message "Incorrect type. Expected 'string'"](./images/lspValidation.png)
 
 ## MCP server
 

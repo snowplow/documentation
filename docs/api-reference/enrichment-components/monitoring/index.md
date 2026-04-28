@@ -15,6 +15,7 @@ Enrich tracks the following metrics:
 
 - `raw`: total number of raw collector payloads received.
 - `good`: total number of events successfully enriched.
+- `good_bytes`: total byte size of successfully enriched events, measured after serialization to TSV format.
 - `failed` (`incomplete` before version 6.0.0): the number of failed events produced due to [common failures](/docs/fundamentals/failed-events/index.md#common-failures), e.g. schema violations or enrichment failures.
 - `bad`: total number of all types of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
 - `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event).
@@ -22,7 +23,7 @@ Enrich tracks the following metrics:
 - `latency_millis` (since version 6.0.0): delay between an input record being written to the stream and Enrich starting to process it.
 - `invalid_enriched`: number of enriched events that were not valid against the [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.
 
-The count metrics (`raw`, `good`, `bad`, `failed`, `dropped`, and `invalid_enriched`) refer to the count since the previous measurement. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
+The count metrics (`raw`, `good`, `good_bytes`, `bad`, `failed`, `dropped`, and `invalid_enriched`) refer to the count since the previous measurement. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
 
 The latency metrics (`e2e_latency_millis` and `latency_millis`) refer to the maximum latency across all events since the previous measurement.
 
@@ -37,6 +38,7 @@ Enrich can periodically push its metrics to a StatsD daemon. For example, a sing
 ```text
 snowplow.enrich.raw:42|c|#tag1:value1
 snowplow.enrich.good:30|c|#tag1:value1
+snowplow.enrich.good_bytes:30000|c|#tag1:value1
 snowplow.enrich.failed:10|c|#tag1:value1
 snowplow.enrich.bad:12|c|#tag1:value1
 snowplow.enrich.dropped:0|c|#tag1:value1

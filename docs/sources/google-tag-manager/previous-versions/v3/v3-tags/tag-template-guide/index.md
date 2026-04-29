@@ -33,7 +33,7 @@ The Tag template requires a [Snowplow v3 Settings](/docs/sources/google-tag-mana
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
-![The Tracker Initialisation section with the Snowplow Settings dropdown set to "{{Snowplow v3 Settings}}" and four unchecked override options for tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
+![The Tracker Initialisation section with the Snowplow Settings dropdown set to "Snowplow v3 Settings" and four unchecked override options for tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
 
 You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
 

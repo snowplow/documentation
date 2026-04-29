@@ -44,7 +44,7 @@ The Tag template requires a [Snowplow v3 Settings](../../v3-settings-variable/in
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
-![GTM tag Tracker Initialisation section showing the Snowplow Settings dropdown set to "{{Snowplow v3 Settings}}" with unchecked options to override tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
+![GTM tag Tracker Initialisation section showing the Snowplow Settings dropdown set to "Snowplow v3 Settings" with unchecked options to override tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
 
 You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
 
@@ -156,7 +156,7 @@ Or it can be set to a Custom JavaScript Variable in the instances where an Objec
 
 And then use this variable as your Command Argument:
 
-![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "{{Anonymous Tracking Options}}"](images/enableAnonymousTracking_argument.png)
+![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "Anonymous Tracking Options"](images/enableAnonymousTracking_argument.png)
 
 ### Additional Tracking Parameters
 

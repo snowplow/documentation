@@ -267,7 +267,7 @@ Or it can be set to a Custom JavaScript Variable in the instances where an Objec
 
 And then use this variable as your Command Argument:
 
-![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "{{Anonymous Tracking Options}}"](images/enableAnonymousTracking_argument.png)
+![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "Anonymous Tracking Options"](images/enableAnonymousTracking_argument.png)
 
 For a list of available commands, consult the [API documentation](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/browser-tracker/src/api.ts) for the Browser Tracker
 

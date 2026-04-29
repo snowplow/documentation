@@ -110,7 +110,7 @@ This text box is revealed if the [LaunchDarkly event creation time](#launchdarkl
 
 ## Versioning
 
-![Versioning section with a Version text field containing the example value {{Container Version}}.](images/08-versioning.png)
+![Versioning section with a Version text field containing the example value Container Version.](images/08-versioning.png)
 
 The LaunchDarkly event import REST API accepts a `User-Agent` header, which helps identify the source of traffic and debug issues. One of the components to construct this header is the `Version`, which can be any format.
 

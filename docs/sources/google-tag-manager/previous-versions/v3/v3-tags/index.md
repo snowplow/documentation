@@ -104,7 +104,7 @@ Or it can be set to a Custom JavaScript Variable in the instances where an Objec
 
 And then use this variable as your Command Argument:
 
-![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "{{Anonymous Tracking Options}}"](images/enableAnonymousTracking_argument.png)
+![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "Anonymous Tracking Options"](images/enableAnonymousTracking_argument.png)
 
 ### Additional Tracking Parameters
 

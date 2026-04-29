@@ -11,7 +11,7 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Event specification validation checks whether incoming events conform to the rules defined in the [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) you have published.
 
-The pipeline runs validation on events that arrive with an `event_specification` entity already attached, typically from a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md). For events that arrive without one, the pipeline runs [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Each event takes one path or the other; the two paths are mutually exclusive per event. Inference never produces a validation entity, even when an event would have failed validation.
+The pipeline runs validation on events that arrive with an `event_specification` entity already attached, typically from a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md) version 0.17.0 or later (see [Validate against a new specification version](#validate-against-a-new-specification-version) for the upgrade steps). For events that arrive without one, the pipeline runs [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Each event takes one path or the other; the two paths are mutually exclusive per event. Inference never produces a validation entity, even when an event would have failed validation.
 
 When an event fails validation, the pipeline attaches an [entity](/docs/fundamentals/entities/index.md) to it describing the failure. The pipeline still enriches and delivers events that fail validation alongside successful ones; only the validation entity reflects the failure. You don't need to change your tracking implementation, as validation runs against newly published specifications immediately.
 
@@ -89,7 +89,14 @@ The event fails the entity cardinality check. The pipeline attaches a validation
 
 ## Validate against a new specification version
 
-A Snowtype-tracked event declares a specific `(id, version)` pair in its `event_specification` entity, and the pipeline validates each event against that event specification version.
+A Snowtype-tracked event declares a specific `(id, version)` pair in its `event_specification` entity, and the pipeline validates each event against that event specification version. Snowtype attaches the `version` field starting in version 0.17.0; events tracked with earlier Snowtype versions don't produce a validation entity.
+
+:::info[Enable validation for an existing tracking implementation]
+1. Update the Snowtype dependency in your package manager or CI configuration to 0.17.0 or later
+2. Regenerate the tracker code with `snowtype generate`, either manually or as part of your build pipeline
+3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; validation doesn't run against drafts
+4. Deploy the regenerated tracker code
+:::
 
 When you publish a new version of a specification, events from existing tracker code continue to declare the previous version, validating against its instructions. The new version applies once you regenerate your tracker code with [Snowtype](/docs/event-studio/implement-tracking/index.md) and deploy the updated tracker code, after which new events declare and validate against the new version.
 

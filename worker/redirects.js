@@ -438,14 +438,16 @@ function findInRules(rules, pathname) {
   for (const [from, to, status] of rules) {
     if (from.endsWith('/*')) {
       const prefix = from.slice(0, -1);
-      if (pathname.startsWith(prefix)) {
-        const splat = pathname.slice(prefix.length);
+      const match = pathname.startsWith(prefix) ? pathname : alt.startsWith(prefix) ? alt : null;
+      if (match) {
+        const splat = match.slice(prefix.length);
         return { to: to.includes(':splat') ? to.replace(':splat', splat) : to, status };
       }
     } else if (from.includes('*')) {
       const prefix = from.slice(0, from.indexOf('*'));
-      if (pathname.startsWith(prefix)) {
-        const splat = pathname.slice(prefix.length);
+      const match = pathname.startsWith(prefix) ? pathname : alt.startsWith(prefix) ? alt : null;
+      if (match) {
+        const splat = match.slice(prefix.length);
         return { to: to.includes(':splat') ? to.replace(':splat', splat) : to, status };
       }
     } else if (pathname === from || alt === from) {

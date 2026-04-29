@@ -11,7 +11,7 @@ To create a new tracking plan based on a pre-defined template, navigate to the "
 
 When creating a tracking plan based on a template, the name must be unique to ensure proper identification and avoid conflicts.
 
-:::note Snowtype
+:::note[Snowtype]
 [Snowtype](/docs/event-studio/implement-tracking/index.md) **does not support** tracking plan templates.
 :::
 

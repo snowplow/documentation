@@ -22,10 +22,10 @@ To receive alerts you must have the failed events [monitoring](/docs/monitoring/
 - Locate the pipeline you wish to set up alerts for in the left-hand navigation
 - Click on the `Configuration` tab, then the `Pipeline alerts` section
 
-![](images/image.png)
+![Snowplow Console pipeline Configuration tab showing the Pipeline alerts section with two alert types listed: "Failed Events (digest)" and "New Failed Event", each showing "No recipients currently set to receive these alerts" and a Manage link.](images/image.png)
 
 - Click `Manage` for the alert you wish to subscribe to
 - Add one or more email addresses by typing them into the input and clicking `Add recipient`
 - Once you have added all recipients, click `Save Changes`
 
-![](images/image-1.png)
+![Manage Notification modal for "Failed events (digest)" showing an email address input field, an Add recipient button, a current recipient (joe@example.com), and Save Changes and Cancel buttons.](images/image-1.png)

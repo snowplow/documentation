@@ -758,7 +758,7 @@ npm run start:dev
 6. Find the `agent_completion` - note `total_steps`, `total_tokens`, `total_duration_ms`, and the aggregate tool counts
 7. Trace the `invocation_id` across all events - use the Micro UI to drill into each event's entities and see how they form a complete lifecycle linked by this ID
 
-![](./screenshots/cleanshot-2026-04-20-at-19.27.51.png)
+![Snowplow Micro UI showing server-side agent tracking events including agent_invocation, agent_step, tool_execution, and agent_completion, with a tool_execution event's detail panel open showing tool_params (origin: London, destination: Paris) and tool_results (flights_found: true)](./screenshots/cleanshot-2026-04-20-at-19.27.51.png)
 
 You now have visibility into both the user's actions and the agent's execution.
 

@@ -11,7 +11,7 @@ Snowbridge’s architecture is fairly simple: it receives data from one streamin
 
 Where the source supports acking, Snowbridge only acks messages once the data is successfully sent to either the target or the failure target (in the case of unrecoverable failure). In the case of a recoverable failure — for example when the target is temporarily unavailable — Snowbridge will not ack the messages and will retry them once the source technology’s ack deadline has passed.
 
-![architecture](./images/snowbridge-architecture.jpg)
+![Snowbridge architecture diagram showing an Input Stream flowing into a Stream Replicator containing a Source, a Filters and Transformations chain, and a Target. Valid messages flow from the Target to a Destination; invalid or oversized messages are routed to a Failure Target and on to a Failure Destination.](./images/snowbridge-architecture.jpg)
 
 ## Operational details
 

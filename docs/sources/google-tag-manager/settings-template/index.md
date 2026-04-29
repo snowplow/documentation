@@ -38,11 +38,11 @@ The default Tag doesn't have the permission to inject scripts from a custom URL.
 
 You will need to update the `Injects Scripts` permission to reflect the new location, by editing the `Snowplow Analytics v3/v4 Tag` template. Delete the content of the `Allowed URL Match Patterns` field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
-![modifying permissions](images/modifying_permissions.png)
+![The GTM Template Editor Permission tab with the "Injects scripts" permission expanded, showing an Allowed URL match patterns field containing a custom self-hosted tracker URL](images/modifying_permissions.png)
 
 Modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template.
 
-![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
+![A GTM warning dialog stating "Modified Community Gallery Templates will no longer receive updates provided by the developer" with Cancel and Continue buttons](images/modifying_breaks_gallery_link.png)
 
 :::
 
@@ -50,7 +50,7 @@ Modifying permissions **breaks the gallery link** and you will no longer be noti
 
 Since v1.1.0, an alternative to prevent breaking the gallery update link is to use the `Do not load` option from the corresponding drop down menu:
 
-![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
+![The "Override JavaScript Library Host" option enabled with the Snowplow JavaScript Tracker Library dropdown set to "Do not load library"](images/host_drop_down_no_load.png)
 
 :::
 

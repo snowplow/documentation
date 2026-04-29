@@ -15,13 +15,13 @@ The API that drives Console's functionality is [publicly documented](https://con
 
 The following view is available in [Console](https://console.snowplowanalytics.com/), under **Settings** in the navigation bar, then **Manage organization**, then **API keys for managing Snowplow**. Users can view this page only if they have the "view" permission on API keys.
 
-![](images/accessing-generated-api-keys.png)
+![Snowplow Console API keys page showing a form to create a new API key by name, and a table of existing Generated API keys with columns for Name, Issued At, Issued By, and Last Used](images/accessing-generated-api-keys.png)
 
 API keys generation view
 
 You can create multiple API keys, and it's also possible to delete any key. When a new API key is generated, the following view will appear:
 
-![](images/generated-api-key-v3.png)
+![Snowplow Console confirmation screen after generating a new API key, showing the API key ID and a redacted API key value with copy-to-clipboard buttons, plus YAML and environment variable configuration examples](images/generated-api-key-v3.png)
 
 Newly created API key view
 

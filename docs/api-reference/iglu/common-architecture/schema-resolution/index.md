@@ -43,7 +43,7 @@ Since version 0.5.0, Iglu Scala Client supports `cacheTtl` property. It is esp
 
 Overall, Schema Resolution algorithm can be described by following flowchart:
 
-![](images/schema-resolution-flowchart.png)
+![Flowchart of the Iglu schema resolution algorithm. From Start: if the registry response is in cache and successful, it is returned immediately. If cached but unsuccessful, the algorithm checks whether the error is NotFound — if yes, it returns failure listing all tried registries; if no, it returns failure but allows three more fetch attempts. If the response is not in cache, registries are prioritized and fetched, then the result loops back to the success check.](images/schema-resolution-flowchart.png)
 
 Few important things to note:
 

@@ -26,7 +26,7 @@ To use the UI to manage Signals, log in to [Console](https://console.snowplowana
 
 Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md) and [services](/docs/signals/attributes/services/index.md).
 
-![Console Signals navigation options](../images/console-navbar.png)
+![Signals section of the Console navigation sidebar showing Overview, Attribute groups, Services, Attribute keys, and Interventions as menu items](../images/console-navbar.png)
 
 ## Retrieve attributes
 

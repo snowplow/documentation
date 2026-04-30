@@ -30,13 +30,13 @@ That all looks good so we'll go ahead and push to github and [create a pull requ
 
 We wait patiently for our validate on pull request workflow to run.
 
-![](./images/worked-pr-checks.png)
+![GitHub pull request checks panel showing "All checks have failed" with the validate-pull-request.yml workflow failing after 8 seconds](./images/worked-pr-checks.png)
 
 Validation has failed. To identify the problem we open the 'file' tab on the pull request and see..
 
-![](./images/worked-diff-annotated.png)
+![GitHub pull request diff for login.yaml showing the enum change from [success, failure] to [200, 403], with GitHub Actions annotations indicating missing description properties and an incompatible type change from String to Integer requiring a version 2-0-0 bump](./images/worked-diff-annotated.png)
 :::note
-Validation only takes your configured [destinations](https://console.snowplowanalytics.com/destinations) into account.
+Validation only takes your configured [warehouse and lake destinations](https://console.snowplowanalytics.com/destinations/warehouses-lakes) into account.
 :::
 
 Together with the description warnings we forgot to fix earlier we have some errors. Changing the values of the enum would change the type of the `result` property which will cause problems further down the line for our data. The error suggests we need to make a major version bump to avert disaster. We'll do that (and add descriptions).
@@ -63,10 +63,10 @@ Our next attempt:
 
 And the workflow result..
 
-![](./images/worked-pr-checks-ok.png)
+![GitHub pull request checks panel showing "All checks have passed" with 1 successful check and the Merge pull request button available](./images/worked-pr-checks-ok.png)
 
 Validation has passed. Now our colleagues can feedback on our changes and if everyone is happy we can merge to `develop` which will trigger our `publish-develop.yml` workflow.
 
-![](./images/worked-pub-dev.png)
+![GitHub Actions showing the publish-develop.yml workflow successfully triggered by merging pull request #1 (login-results-error-codes) into the develop branch, completing in 25 seconds](./images/worked-pub-dev.png)
 
 Finally, once we are convinced everything works we can open another pull request from `develop` to `main`, merge that and trigger our `publish-production.yml` workflow.

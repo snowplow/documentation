@@ -151,7 +151,7 @@ You can also configure your tracker to automatically add [GDPR information](./gd
 
 The tracker provides classes for tracking different types of events.
 The events are divided into two groups: canonical events and self-describing events.
-<!-- You can read more about the difference between the two [here](TODO) -->
+{/* You can read more about the difference between the two [here](TODO) */}
 
 ### Creating a Timing event
 

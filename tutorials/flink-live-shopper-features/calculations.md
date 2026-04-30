@@ -39,16 +39,16 @@ At a high level, the workflow is:
 
 This architecture diagram shows more details about the windowing logic:
 
-![live-shopper-calculations-architecture.png](./images/live-shopper-calculations-architecture.png)
+![Flink pipeline architecture diagram showing four event branches (product_view, category, cart, purchase) each flowing through filter, map, key-by, aggregate, and metric-parser operators before writing computed feature values to Redis with keys like user:1038:product_view_count_5m](./images/live-shopper-calculations-architecture.png)
 
 - All rolling windows use a custom `RollingWindowProcessFunction`
 - The session view uses `SnowplowSessionWindow`
 
 For example, aggregation on a rolling window of 5 seconds and a session window with a 3-second gap would look like:
 
-![live-shopper-calculations-window.png](./images/live-shopper-calculations-window.png)
+![Sliding window diagram showing 11 overlapping windows across timestamps 0–14, where each window captures a different subset of events e1 through e8, illustrating how rolling windows continuously advance to cover the most recent activity](./images/live-shopper-calculations-window.png)
 
-![live-shopper-calculations-window2.png](./images/live-shopper-calculations-window2.png)
+![Session window diagram showing two windows across timestamps 0–14, where Window 1 groups events e1 through e7 into a single session and Window 2 captures e8 after a gap representing user inactivity](./images/live-shopper-calculations-window2.png)
 
 More detail is available in [The case for a custom window in Flink: Expanding your streaming use-cases](https://pedromazala.substack.com/p/the-case-for-a-custom-window-in-flink?utm_source=snowplow&utm_medium=accelerator&utm_campaign=live-shopper) blog post.
 

@@ -27,7 +27,7 @@ There are two methods to install the Snowplow Client.
 4. Import `template.tpl` downloaded in Step 1
 5. Click Save
 
-![Installing Snowplow Client](images/manualclientinstall.gif)
+![Animated walkthrough of installing the Snowplow Client template in GTM SS: creating a new Client in the Templates section, clicking More Actions, selecting Import, importing template.tpl, and clicking Save](images/manualclientinstall.gif)
 
 ## Snowplow Client Setup
 
@@ -36,7 +36,7 @@ With the template installed, you can now add the Snowplow Client to your GTM SS 
 1. From the Clients tab, select "New", then select the Snowplow Client as your Client Configuration
 2. Click Save
 
-![Adding Snowplow Client to GTM SS](images/clientsetup.gif)
+![Animated walkthrough of adding the Snowplow Client to a GTM SS container: navigating to the Clients tab, clicking New, selecting Snowplow Client as the Client Configuration, and clicking Save](images/clientsetup.gif)
 
 ## Testing
 
@@ -44,9 +44,9 @@ You can test your Snowplow Client setup by using GTM SS [preview mode](https://d
 
 Once your debug container is running, obtain your preview header value:
 
-![Opening the “send requests manually” popup](images/preview-mode-1.png)
+![GTM SS preview mode showing the container debug panel with the option to open the “Send requests manually” popup to obtain the preview header value](images/preview-mode-1.png)
 
-![The “send requests manually” popup](images/preview-mode-2.png)
+![The “Send requests manually” dialog in GTM SS preview mode showing the preview header value field to copy for use in cURL requests](images/preview-mode-2.png)
 
 Now you can use the cURL command below. Note:
 * Replace `{{your-gtm-ss-url}}` with the URL of your GTM SS container.

@@ -22,7 +22,7 @@ Before setting up the forwarder in Console, you'll need an Amplitude API Key. To
 3. From the sidebar, select **Projects**, then select your Project to view its details
 4. Copy the **API Key**
 
-:::tip Test in a non-production project first
+:::tip[Test in a non-production project first]
 To avoid introducing bad data in your production Amplitude project, we recommend using a test or development Amplitude project to test your transformations first. Then, create a new Connection in Console with your production API key, and a new forwarder that imports the configuration from your development forwarder.
 :::
 

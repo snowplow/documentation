@@ -10,7 +10,7 @@ Event specifications are complete definitions of business events. They define wh
 
 They act as data contracts between teams. When you create an event specification, you are defining exactly what data your applications should send, what your data warehouse will receive, and what your downstream consumers can rely on.
 
-:::note Event specifications are part of tracking plans
+:::note[Event specifications are part of tracking plans]
 You can only make event specifications within tracking plans. Tracking plans are wrappers for related event specifications. Each event specification belongs to a single tracking plan.
 :::
 
@@ -27,7 +27,7 @@ To create a new event specification, follow these steps:
 3. A dialog will appear, prompting you to enter a name for your event specification and click **Save and continue**
 4. Your first event specification will be displayed on the page
 
-![Create an event specification](images/create-event-specification.png)
+![E-Commerce Web User Interactions Data tracking plan overview with an arrow highlighting the Create event button at the bottom of the event specifications list](images/create-event-specification.png)
 
 To add more information or modify an existing event specification, follow these steps:
 
@@ -37,7 +37,7 @@ To add more information or modify an existing event specification, follow these 
 
 This interface is divided into focused sections; explore each section below for more details.
 
-![Example of an event specification overview](images/event-specification-overview.png)
+![Product Added to Cart event specification showing event description, source application, the cart_action 1-0-0 data structure with a type property required to be "add", user and product entity data structures, and an Add to Cart button trigger](images/event-specification-overview.png)
 
 ### Event information
 
@@ -52,7 +52,7 @@ You can choose from two types of data structures:
 - **Standard**: provided by the Snowplow tracker by default
 - **Custom**: provided by your organization
 
-![Event data structure](images/event-data-structure.png)
+!["Event data structure" selection dialog showing the Standard tab with four options: link_click (1-0-1), page_ping (1-0-0), page_view (1-0-0), and screen_view (1-0-0), each with a "View properties" link](images/event-data-structure.png)
 
 ### Entity data structures
 
@@ -60,7 +60,7 @@ Within this section, you have the flexibility to define the entities that should
 
 To facilitate making an informed selection of your entities, you can view a detailed breakdown of the properties associated with the chosen entities (and its version) by a specific version.
 
-![Entity data structures](images/entity-data-structures.png)
+!["Entity data structures" selection dialog showing the Custom tab with six entities listed, the product entity selected, and a "Select entities" button](images/entity-data-structures.png)
 
 ### Event triggers
 
@@ -70,7 +70,7 @@ To create your first trigger, simply select the **Add trigger** button. You can 
 
 A dialog will appear, allowing you to upload an image and provide additional context, such as the URL to the page on which this trigger applies.
 
-![Event triggers](images/event-triggers.png)
+!["Event trigger" dialog with fields for uploading a screenshot, adding trigger notes, specifying which applications the trigger applies to, and providing a URL for the page where the trigger fires](images/event-triggers.png)
 
 ### Properties
 
@@ -84,4 +84,4 @@ You can configure detailed instructions for any of the properties shown in the l
 Instructions for required properties are added by default and can be edited but they cannot be deleted.
 :::
 
-![Implementation instructions](images/implementation-instructions.png)
+!["Add implementation instructions" dialog showing the link_click 1-0-1 schema properties (elementId, elementClasses, elementTarget, targetUrl, elementContent), with targetUrl marked as required and an Edit action](images/implementation-instructions.png)

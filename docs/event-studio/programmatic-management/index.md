@@ -33,7 +33,7 @@ It has endpoints for three resource types:
 
 You can explore all available endpoints in the [Swagger API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs).
 
-:::note Only available for Iglu Server registries
+:::note[Only available for Iglu Server registries]
 By default, Snowplow pipelines use Iglu Server schema registries. Each pipeline has a development and a production Iglu Server instance.
 
 The Console API only works with these registries. If you're using a custom static S3 registry instead, you'll need to update your registry manually.

@@ -25,7 +25,7 @@ Click **Enable** to start setting up a Signals connection.
 
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
 
-:::note Warehouse Connection
+:::note[Warehouse Connection]
 Signals can also be deployed without connecting to a warehouse.
 :::
 

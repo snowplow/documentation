@@ -30,4 +30,4 @@ Configure alerts to trigger only for specific types of failed events:
 3. Click **[Manage](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md)** alerts to set up notifications
 4. **[Create](/docs/monitoring/alerts/failed-event-alerts/creating-alerts/index.md)** and configure your first alert
 
-![Data Quality Dashboard overview](images/dq_manage_alerts_button.png)
+![Data quality dashboard header for Pipeline 3 showing the dashboard description and a "Manage alerts" button](images/dq_manage_alerts_button.png)

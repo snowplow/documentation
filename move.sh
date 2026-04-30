@@ -7,5 +7,6 @@ for file in $(git grep -l $1 -- docs/); do
     git add $file
 done
 
-echo "/$1/* /$2/:splat 301" >> static/_redirects
-git add static/_redirects
+sed "s|^];$|  ['/$1/*', '/$2/:splat', 301],\n];|" worker/redirects.js > worker/redirects.js.tmp
+mv worker/redirects.js.tmp worker/redirects.js
+git add worker/redirects.js

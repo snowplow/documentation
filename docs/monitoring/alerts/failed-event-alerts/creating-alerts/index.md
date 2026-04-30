@@ -16,7 +16,7 @@ To create an alert, go to Snowplow Console:
 2. Click **Manage alerts** in the top-right corner
 3. Click **Create alert**
 
-![Create alert form](images/data_quality_create_alert.png)
+![Manage alerts page in an empty state showing "No alerts added" and a Create alert button](images/data_quality_create_alert.png)
 
 ## Configure destination
 
@@ -30,7 +30,7 @@ Choose how you want to receive notifications:
 4. Configure triggers as needed
 5. Enter alert name (e.g., "mobile-app")
 
-![Email destination configuration](images/data_quality_create_email_alert.png)
+![Create alert form with Email selected as the destination, two recipient addresses added, trigger set to "When above value" with insights showing 750 failed events per day and a suggested threshold of 1.50k, delivery set to Daily, and the alert named "web-login"](images/data_quality_create_email_alert.png)
 
 ### Slack notifications
 
@@ -40,15 +40,15 @@ Choose how you want to receive notifications:
 4. Configure triggers as needed
 5. Enter alert name (e.g., "web-app")
 
-![Slack destination configuration](images/data_quality_create_slack_alert.png)
+![Create alert form with Slack selected as the destination and #slack-alerts-test chosen as the Slack channel](images/data_quality_create_slack_alert.png)
 
 When no active Slack integration is found, a `Connect with Slack` button will appear instead of the list of channels.
 
-![Connect to Slack](images/data_quality_connect_slack.png)
+![Destination section showing a "Connect with Slack" button, which appears when no active Slack integration is found](images/data_quality_connect_slack.png)
 
 A Slack consent screen will appear.
 
-![Slack consent](images/data_quality_slack.png)
+![Slack permission screen requesting access for "Snowplow Notifications" to view channel content and perform actions in the Snowplow Slack workspace](images/data_quality_slack.png)
 
 To select channels in the UI, first add the app to those channels. In Slack:
 
@@ -56,11 +56,11 @@ To select channels in the UI, first add the app to those channels. In Slack:
 2. Type `@Snowplow Notifications` and send
 3. Click "Add them" when prompted
 
-![Invite to Slack](images/data_quality_slack_invite.png)
+![Slackbot message saying "You mentioned @Snowplow Notifications, but they're not in this channel," with Add them and Do nothing buttons](images/data_quality_slack_invite.png)
 
 Once a Slack alert is configured you will see a confirmation notification in the selected Slack channel.
 
-![Slack confirmation](images/data_quality_slack_confirmation.png)
+![Slack message from Snowplow Notifications confirming a successful integration, showing alert name "web-login" and active filters for ResolutionError and ValidationError issue types on the mobile-login data structure](images/data_quality_slack_confirmation.png)
 
 ## Set up filters
 
@@ -70,7 +70,7 @@ Configure when alerts should trigger:
 2. **Data structures**: choose specific data structures (all versions will apply)
 3. **App IDs**: filter by application identifiers
 
-![Filter configuration](images/data_quality_filters.png)
+![Filters panel showing ResolutionError and ValidationError selected as issue types, the mobile-login data structure filtered, and no app IDs configured](images/data_quality_filters.png)
 
 ## Configure triggers
 
@@ -83,7 +83,7 @@ Choose from the available trigger options:
 - **When above value**: Set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
 - **On any issue**: Alert when any failed events are detected
 
-![Trigger configuration showing trigger type selection](images/data_quality_trigger_types.png)
+![Alert trigger type selector with two options: "When above value" for setting an absolute failed event threshold, and "On any issue" for alerting whenever any failed events are detected](images/data_quality_trigger_types.png)
 
 ### Threshold configuration
 
@@ -93,7 +93,7 @@ When using "When above value" trigger:
 2. **Time period**: Select the time window (10 minutes, hour, or day)
 3. **Deliver**: Choose notification frequency (daily, weekly, or monthly)
 
-![Value threshold configuration with insights panel](images/data_quality_absolute_threshold.png)
+![Alert threshold configuration panel showing Value, Time period, and Deliver fields, alongside an Insights panel with average event volume, a suggested threshold value, and an Apply suggestion button based on the last 7 days of data](images/data_quality_absolute_threshold.png)
 
 #### Insights from recent data
 

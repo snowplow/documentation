@@ -36,7 +36,7 @@ Iglu consists of three key technical aspects:
 
 In the below diagram we show an Iglu client resolving a schema from Iglu Central, one embedded registry and a further two remote HTTP registries:
 
-![Iglu client](images/iglu-clients.png)
+![Diagram showing an application using Iglu containing an Embedded Iglu Repository and an Iglu Client. The Iglu Client makes schema lookups to three remote repositories: Iglu Central, Private Iglu Repository #1, and Private Iglu Repository #2.](images/iglu-clients.png)
 
 An **Iglu registry** acts as a store of data schemas. Hosting JSON schemas in an Iglu registry allows you to use those schemas in Iglu-capable systems such as Snowplow.
 
@@ -47,7 +47,7 @@ So far we support two types of Iglu registry:
 
 In the below diagram we show an Iglu client resolving a schema from Iglu Central, one embedded registry and a further two remote HTTP registries:
 
-![Iglu repositories](images/iglu-repos.png)
+![Diagram showing an application using Iglu with the repositories highlighted: an Embedded Iglu Repository inside the application, and three remote repositories (Iglu Central, Private Iglu Repository #1, and Private Iglu Repository #2) accessible via schema lookups](images/iglu-repos.png)
 
 **Iglu Central** ([https://iglucentral.com](https://iglucentral.com/)) is a public registry of Snowplow JSON schemas.
 
@@ -55,6 +55,6 @@ Under the covers, Iglu Central is built and run as a **static Iglu registry**, h
 
 > A **static repo** is simply an Iglu registry server structured as a static website.
 
-![Iglu Central](images/iglu-central.png)
+![Diagram showing three Iglu clients making schema lookups to Iglu Central, with schemas manually uploaded to Iglu Central. A "Behind firewall" section shows a separate Iglu Client querying a private Iglu Central mirror.](images/iglu-central.png)
 
 The **deployment process** for Iglu Central is documented in [Iglu Central setup](/docs/api-reference/iglu/iglu-central-setup/index.md) in case you want to set up a public mirror or private instance of Iglu Central.

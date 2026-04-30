@@ -19,13 +19,13 @@ Partition key must be called `eventId` and have type String. Sort key must be ca
 
 Uncheck "Use default settings" checkbox and set "Write capacity units" to 100. Capacity units value is individual and should tweaked depending on your cluster size.
 
-![](images/create-table.png)
+![AWS Console "Create DynamoDB table" form with table name set to "snowplow-deduplication", partition key "eventId" of type String, sort key "fingerprint" of type String, "Use default settings" unchecked, and provisioned capacity set to 100 read capacity units and 100 write capacity units.](images/create-table.png)
 
 Create Table
 
 After table is created, write down "Amazon Resource Name (ARN)" in "Overview" tab. It should look similar to `arn:aws:dynamodb:us-east-1:719197435995:table/one-more-deduplication-test` This ARN will be used in next step.
 
-![](images/table-arn.png)
+![AWS DynamoDB Console Overview tab for the "snowplow-deduplication" table showing table details including primary partition key (eventId), primary sort key (fingerprint), table status "Creating", provisioned read and write capacity of 100 units each, region "US East (N. Virginia)", and the Amazon Resource Name (ARN) at the bottom.](images/table-arn.png)
 
 Finding the Table ARN
 
@@ -60,6 +60,6 @@ Notice element in `Resourse` array. It must be changed to your ARN from previous
 
 `dynamodb:CreateTable` and `dynamodb:DeleteTable` are unnecessary if you already created table.
 
-![](images/policy.png)
+![AWS IAM "Review Policy" screen showing a policy named "crossbatch-deduplication-policy" with a policy document granting dynamodb:CreateTable, dynamodb:DeleteTable, dynamodb:DescribeTable, and dynamodb:PutItem actions on the snowplow-deduplication table ARN.](images/policy.png)
 
 Attach the IAM policy

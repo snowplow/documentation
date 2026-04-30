@@ -21,7 +21,7 @@ Using a development environment is a great way to test your changes before apply
 
 To create a development environment, navigate to **Settings > Workspaces**, select your workspace, scroll to the **Development environments** section and click **Create environment**.
 
-:::note Permissions
+:::note[Permissions]
 
 You will need _Edit environments_ permissions to do this.
 
@@ -41,7 +41,7 @@ Events will be stored for a (rolling) 7 day period.
 
 To view events in the [Micro dashboard](/docs/testing/snowplow-micro/ui/index.md), select your environment and then click **Open dashboard**.
 
-:::warning Production data
+:::warning[Production data]
 
 Do not send production data to development environments. Anyone with the _View environments_ permission can access the dashboard and see the events. Also, development environments are not configured to withstand high volumes of events.
 

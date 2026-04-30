@@ -14,7 +14,7 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/data
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/_deploy-overview.md';
 ```
 
-:::info Availability
+:::info[Availability]
 
 You will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
 
@@ -37,7 +37,7 @@ The Databricks Streaming Loader is an application that integrates with a Databri
   </TabItem>
 </Tabs>
 
-:::tip Schemas in Databricks
+:::tip[Schemas in Databricks]
 
 For more information on how events are stored in Databricks, check the [mapping between Snowplow schemas and the corresponding Databricks column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=databricks).
 

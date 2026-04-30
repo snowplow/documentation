@@ -19,7 +19,7 @@ While it's possible to use Micro [through Console](/docs/testing/snowplow-micro/
 
 If you haven't run Micro on your machine before, take a look at the [usage guide](/docs/testing/snowplow-micro/local/index.md). Adding the JavaScript enrichment to Micro is similar to [adding other enrichments](/docs/testing/snowplow-micro/local/enrichments/index.md).
 
-:::tip Testing `.js` files directly
+:::tip[Testing `.js` files directly]
 
 While you can add the full enrichment configuration in a JSON file (with your JavaScript encoded in base64), you can also just drop a `.js` file in your enrichments folder. Micro will interpret it as JavaScript enrichment code. This way, you don’t need to keep converting your enrichment to base64 as you iterate on it. _(Make sure to either use a `.json` or a `.js` file, but not both.)_
 
@@ -75,7 +75,7 @@ If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enr
 
 You can also add temporary `print` statements to your code to inspect certain values.
 
-:::warning
+:::tip
 
 Make sure to remove all debug printing when adding the enrichment to a production pipeline.
 
@@ -89,7 +89,7 @@ print(`--- URL is: ${event.getPage_url()}`);
 
 This will be printed directly to the output from Micro (in the terminal — currently this information is not available in the Micro dashboard).
 
-:::info There is no `console.log`
+:::info[There is no `console.log`]
 
 Note that `console.log` and `console.dir` familiar to JavaScript developers _will not_ work in this context.
 
@@ -177,9 +177,9 @@ If your enrichment relies on cookies, you may find it difficult to reproduce all
 
 For a solution, check out the section on [locally resolving an existing domain name to Micro](/docs/testing/snowplow-micro/local/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro). With this approach you can hook into an existing website or app, receiving all cookies in your Micro.
 
-:::tip Cookie name
+:::tip[Cookie name]
 
-If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
+If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-and-enrich-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
 
 <CodeBlock language="bash">{
 `docker run ... \\

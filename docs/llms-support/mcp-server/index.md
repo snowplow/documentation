@@ -16,7 +16,7 @@ The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index
 - Analyze tracking requirements and suggest implementations
 - Validate tracking plans and source applications
 
-:::info Read more
+:::info[Read more]
 For a step-by-step guide to using the Snowplow MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
 :::
 
@@ -58,7 +58,7 @@ Using npx:
   }
 }
 ```
-:::note Filesystem access
+:::note[Filesystem access]
 Claude Desktop requires additional filesystem access to create and modify files.
 :::
 
@@ -132,6 +132,6 @@ You can then ask it for help. It has access to your existing data structures, tr
 
 Use the standard [Snowplow CLI commands](/docs/event-studio/programmatic-management/snowplow-cli/reference/index.md) to publish your changes to [Console](https://console.snowplowanalytics.com) when ready, using the standard Snowplow CLI commands such as `snowplow-cli ds publish`.
 
-:::note Publish separately
+:::note[Publish separately]
 The MCP server creates and validates files on your local filesystem only.
 :::

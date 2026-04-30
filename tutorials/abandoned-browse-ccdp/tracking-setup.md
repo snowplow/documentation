@@ -8,7 +8,7 @@ keywords: ["snowplow javascript tracker", "ecommerce product tracking", "engagem
 
 To begin, we will set up Snowplow tracking on your ecommerce website. In this section we will capture what products a customer views, how long they view them for and if they add them to their cart. We assume that you already have a Snowplow pipeline. If you do not yet have a pipeline running, please return to the [Introduction](/tutorials/abandoned-browse-ccdp/introduction) information on the different deployment options.
 
-![website](images/retl-shopfront.png)
+![Demo shoe ecommerce storefront showing the "All shoes" category page with 6 products, including Total Orange and SP Air Force 1 Shadow women's shoes at $129.99 and SP Air Max Plus 3 men's shoes at $189.99](images/retl-shopfront.png)
 
 First, [initialize the Snowplow JavaScript tracker](/docs/sources/web-trackers/quick-start-guide). Below is an example of how to set up the tracker:
 
@@ -69,7 +69,7 @@ snowplow('trackPageView');
 
 To verify your tracking implementation, use the [Snowplow Chrome extension](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
 
-![Chrome Extension](images/retl-chrome-extension.png)
+![Snowplow Inspector showing a product_view ecommerce action event with the product entity expanded, displaying name "SP Dunk Low Retro", brand Snowplow, category Men shoes, and price 119.99 USD](images/retl-chrome-extension.png)
 
 ## Track product views
 
@@ -108,7 +108,7 @@ window.snowplow("trackAddToCart", {
 
 Once add to cart events are tracked, the event should look like this in your Snowplow Chrome extension.
 
-![Add to cart](images/retl-add-to-cart.png)
+![Snowplow Inspector showing an add_to_cart ecommerce event with the product entity (SP Dunk Low Retro, $119.99) and cart entity both validated against Iglu Central](images/retl-add-to-cart.png)
 
 ## Explanation of parameters
 

@@ -38,7 +38,7 @@ auto tracker = Snowplow::create_tracker(
 );
 ```
 
-Optionally, you may choose to attach a `Subject` instance with information about the user and device (see the next page on [Adding data](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md) to learn more about the `Subject`):
+Optionally, you may choose to attach a `Subject` instance with information about the user and device (see the next page on [Adding data](/docs/sources/c-tracker/adding-extra-data-the-subject-class/index.md) to learn more about the `Subject`):
 
 ```cpp
 auto subject = std::make_shared<Subject>() // initialize a C++ shared pointer for the Subject
@@ -47,7 +47,7 @@ subject->set_user_id("a-user-id");
 auto tracker = Snowplow::create_tracker("ns", "https://com.acme.collector", POST, "events.db", subject);
 ```
 
-Finally, client session tracking will be automatically enabled and session information will be attached to all events (see documentation on [Client sessions](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/06-client-sessions.md) for more details). If you wish to disable session tracking, pass `false` as the last argument:
+Finally, client session tracking will be automatically enabled and session information will be attached to all events (see documentation on [Client sessions](/docs/sources/c-tracker/client-sessions/index.md) for more details). If you wish to disable session tracking, pass `false` as the last argument:
 
 ```cpp
 auto tracker = Snowplow::create_tracker("ns", "https://com.acme.collector", POST, "events.db", subject, false);

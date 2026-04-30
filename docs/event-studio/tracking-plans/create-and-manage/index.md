@@ -9,11 +9,11 @@ keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source 
 
 To create a new tracking plan, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" button.
 
-![Create tracking plan](images/create-tracking-plan-v2.png)
+![Tracking plans list page showing six tracking plans with their domain, status, event volume, event spec count, and last modified date, with a "+ Create tracking plan" button in the top right](images/create-tracking-plan-v2.png)
 
 A modal will appear on the page, giving you the possibility to quickly create a tracking plan by using one of the existing templates or create one from scratch.
 
-![Create tracking plan modal](images/create-tracking-plan-modal.png)
+!["Create tracking plan" dialog offering a "Create new" option and three templates: E-commerce Web (11 events), Base Web (5 events), and Media Web (24 events)](images/create-tracking-plan-modal.png)
 
 After selecting "Create new" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
 
@@ -37,15 +37,15 @@ In the image below, you can see an example of a tracking plan. It not only provi
 
 - **Share**; allow other members of your organization to access the tracking plan
 - **Subscribe**; receive notifications of any changes in the tracking plan
-- **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/snowtype/index.md))
+- **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/index.md))
 
 :::note
 Sharing and subscribing is only available for users registered in Snowplow Console.
 :::
 
-![Tracking plan overview](images/tracking-plan-overview.png)
+![E-commerce Web tracking plan overview showing general information, E-commerce domain ownership, and an event specifications table with four draft events (Add to cart, Checkout step, Internal promotion click, Internal promotion view) all using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
 
-![Event specification details](images/event-specification-details.png)
+![Add to cart event specification page showing event description, four tracked application IDs, the snowplow_ecommerce_action 1-0-2 data structure with a "type" property set to "add_to_cart", and product and cart entity data structures](images/event-specification-details.png)
 
 If you need to edit a tracking plan at any time, select it from the tracking plans listing accessible from the main menu.
 
@@ -63,15 +63,15 @@ To streamline the process of upgrading an Event Specification to the latest vers
 
 When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI.
 
-![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
+![Event data structure section with a warning that a new version of the data structure is available, showing add_to_cart at version 1-0-0 and an Upgrade button](images/upgrade-event-specification-warning.png)
 
 Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'** button.
 
-![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
+!["Upgrade Add Product" page warning that add_product_to_cart will be upgraded from version 1-0-0 to 1-0-1, with a "View changes" button and Upgrade and Cancel actions](images/upgrade-event-specification-page.png)
 
 When clicked it will show the differences between the current version of the Data Structure and the one the user intends to upgrade to.
 
-![Upgrade Event Specification diff](images/upgrade-event-specification-diff.png)
+![Side-by-side diff view showing JSON schema changes between the current version 1-0-0 and the latest version 1-0-1 of a data structure, with additions highlighted](images/upgrade-event-specification-diff.png)
 
 At the bottom, a button will allow users to confirm the upgrade. One of two things can happen when the upgrade is confirmed:
 
@@ -80,7 +80,7 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 - If the Event Specification instructions are compatible with the new Data Structure version, the system will automatically upgrade the Event Specification to the latest version of the Data Structure.
 - All instructions will be updated seamlessly without any further user intervention.
 
-![Automatic upgrade Event Specification](images/success_upgrade.png)
+!["Upgrade Add Product" page showing a green "Data structure updated" success message with a "Return to Event Specification" button](images/success_upgrade.png)
 
 #### 2. Conflict detection and resolution
 
@@ -91,6 +91,6 @@ If the new version of the Data Structure introduces incompatibilities with the e
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
   - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
 
-![Conflict resolution Event Specification](images/conflict_resolution.png)
+!["Upgrade Add Product" page showing a conflict where the upgrade from 1-0-1 to 2-0-0 couldn't complete because the Quantity property instruction is incompatible with the new version and requires manual editing](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.

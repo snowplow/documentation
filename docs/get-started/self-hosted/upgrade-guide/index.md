@@ -38,7 +38,7 @@ git checkout -b 21.08 21.08 // To checkout 21.08
 
 ## Migrations
 
-:::info AWS
+:::info[AWS]
 
 This information is currently specific to AWS.
 

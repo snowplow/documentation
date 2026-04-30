@@ -15,7 +15,7 @@ This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micr
 
 ## /micro/all
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 
@@ -41,7 +41,7 @@ Example:
 
 ## /micro/good
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 
@@ -312,7 +312,7 @@ It's not necessary to specify all the fields in a request, only the ones that ne
 
 ## /micro/bad
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 

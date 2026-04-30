@@ -14,7 +14,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 A Terraform module is available which deploys the collector on a AWS EC2 without the need for this manual setup.
 
-[![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)
+[![Terraform Registry badge linking to the Snowplow collector Kinesis EC2 Terraform module](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)
 
 ## Run the collector
 

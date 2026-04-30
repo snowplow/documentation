@@ -19,7 +19,7 @@ This guide assumes you are running the standard web and/or mobile SQL Runner mod
 
 ## Why Migrate?
 
-SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our CDI customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including e-commerce, marketing attribution, and a package to normalize your Snowplow data.
+SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our CDI customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including ecommerce, marketing attribution, and a package to normalize your Snowplow data.
 
 In dbt we also support Databricks and Postgres warehouses in addition to Snowflake, BigQuery, and Redshift. Newer tracking plugins are only being modeled within our dbt packages.
 
@@ -87,7 +87,7 @@ The latest information for our packages can be found in the [quickstart](/docs/m
 
 ## Migrate existing derived data
 
-:::danger
+:::note
 
 The dbt package uses slightly different logic for processing, including the quarantining of sessions and different format manifest tables. It is highly recommended that you just run the dbt project from your start date. The following is a best-effort suggestion and we make no guarantee that all data will be correctly processed or that issues may not happen later in the lifetime of the project.
 
@@ -116,7 +116,7 @@ The following SQL will merge the existing web records in your SQL Runner derived
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::warning
+:::note
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 
@@ -637,7 +637,7 @@ The following SQL will merge the existing mobile records in your SQL Runner deri
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::warning
+:::note
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 

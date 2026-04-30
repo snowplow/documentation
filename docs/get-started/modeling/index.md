@@ -19,6 +19,6 @@ The [Unified Digital model](/docs/modeling-your-data/modeling-your-data-with-dbt
 
 If you don't have access to Snowplow Console, you'll need to install dbt and run the models yourself. Check out our [Unified Digital Quick Start tutorial](/tutorials/unified-digital/intro) for help getting started.
 
-:::tip Using dbt
+:::tip[Using dbt]
 To start using our models with dbt, you will need to [create a dbt project](https://docs.getdbt.com/reference/commands/init) and [add the respective packages](https://docs.getdbt.com/docs/build/packages).
 :::

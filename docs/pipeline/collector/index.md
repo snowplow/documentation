@@ -14,13 +14,13 @@ Read more about the technical aspects of the collector [here](/docs/api-referenc
 
 The easiest way to access collector configuration is to view it within the Snowplow Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
 
-![](images/image-1.png)
+![Snowplow Console showing a pipeline with the Configuration tab selected (indicated by a red arrow), and the left sidebar showing configuration sections including COLLECTOR (Collector domains, Tracker request paths, Collector settings), VALIDATION, COMPONENTS, and ALERTS.](images/image-1.png)
 
 Selecting the pipeline configuration tab
 
 You can then view your configuration, with the default values displayed for empty fields:
 
-![](images/image-2.png)
+![Snowplow Console Collector configuration page showing the Tracker request paths section with a table of default paths: POST at /com.snowplowanalytics.snowplow/tp2, Redirect at /r/tp2, and Iglu at /com.snowplowanalytics.iglu/v1.](images/image-2.png)
 
 Example collector configuration
 
@@ -71,15 +71,11 @@ The endpoint for the API is:
 
 and the only supported HTTP verb is `GET`.
 
-Your organization ID is a UUID and can be found in the location bar of your browser when you are using the Console:
-
-![This image has an empty alt attribute; its file name is image-3.png](images/image-3.png)
-
-Organization ID is the UUID in-between the two forward slashes.
+You can find your organization ID [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 Similarly, the pipeline ID can be found in the location bar as the second UUID there:
 
-![This image has an empty alt attribute; its file name is image-4.png](images/image-4.png)
+![Snowplow Console browser address bar showing a URL where the pipeline ID UUID is highlighted as the second UUID in the path.](images/image-4.png)
 
 The Pipeline ID is the second UUID in the location bar.
 

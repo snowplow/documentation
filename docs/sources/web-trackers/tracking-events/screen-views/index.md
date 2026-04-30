@@ -15,7 +15,7 @@ Screen view tracking is the recommended way to track users opening a screen in m
 
 On web, [we recommend using page views](/docs/sources/web-trackers/tracking-events/page-views/index.md) to track users visiting a page. However, using the screen view tracking plugin is also an option on web.
 
-:::note Availability
+:::note[Availability]
 The plugin is available from Version 4.2 of the tracker.
 :::
 
@@ -222,7 +222,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 To update the [list item viewed and scroll depth information](/docs/events/ootb-data/page-activity-tracking/index.md#screen-engagement) tracked in the `screen_summary` entity, track the `ListItemView` and `ScrollChanged` events with this information.
 
-:::note Page pings and element visibility
+:::note[Page pings and element visibility]
 
 We designed the screen summary entity to work with mobile platforms. On web, you can track scroll offsets automatically using [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).
 

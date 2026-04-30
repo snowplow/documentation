@@ -17,7 +17,7 @@ There are two ways to define an intervention using the SDK or [Signals API](/doc
 
 Rule-based interventions are triggered automatically when their criteria are met. They use `RuleIntervention` objects, and are published to Signals using [`publish()`](/docs/signals/connection/index.md#publishing-and-deleting), similar to other configuration objects.
 
-:::note Sent once
+:::note[Sent once]
 An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
 :::
 
@@ -156,7 +156,7 @@ It will trigger based on attribute changes within the `shopping` attribute group
 
 Direct interventions have no criteria, and are not tied to attribute values. They use `InterventionInstance` objects, and are pushed to Signals using `push_intervention`, rather than being published like other configuration objects.
 
-:::note Not available in Snowplow Console
+:::note[Not available in Snowplow Console]
 Direct interventions are only available using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api).
 :::
 

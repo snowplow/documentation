@@ -32,7 +32,7 @@ The tracker allows the addition of a persistent set of information through the `
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplow.io/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 The tracker provides anonymous tracking functionality to mask certain user identifiers. Refer to the [section on anonymous tracking to learn more](../anonymous-tracking/index.md).
 
-:::note Android screen resolution
+:::note[Android screen resolution]
 The default screen resolution values are fetched from `WindowManager`, an older Android API. Screen resolution is also reported in the [platform context entity](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md), which obtains the screen size from the Android context resources. The height value will likely be higher in `dvce_screenheight` than in the context entity, as the `WindowManager` size includes the menu bar.
 
 To use the modern API throughout the tracker and standardize the screen resolution between event and entity properties, set `useContextResourcesScreenResolution(true)` flag in `SubjectConfiguration`. This flag is off by default, and available from Android tracker v6.0.3 onwards.

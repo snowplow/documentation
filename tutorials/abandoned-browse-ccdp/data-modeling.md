@@ -27,7 +27,7 @@ ORDER BY load_tstamp DESC;
 ```
 
 The output of this query should be similar to below:
-![Atomic Events](images/retl-atomic-events.png)
+![Snowflake query results showing the atomic events table with rows including page_ping, page_view, and ecommerce product_view events for the Complete Snowboard product page, with event context columns containing schema-versioned JSON](images/retl-atomic-events.png)
 
 ## Identifying most viewed but not added-to-cart products
 
@@ -87,7 +87,7 @@ WHERE
     AND a.email IS NOT NULL;
 ```
 The output of this query should be similar to below:
-![Aggregated Query](images/retl-aggregated-query.png)
+![Aggregated query result showing one identified prospect: Trent has spent 30 seconds on The Complete Snowboard product page, has not added to cart, and came via Facebook's NewSnowboardsCampaign](images/retl-aggregated-query.png)
 
 ## Next step
 

@@ -1,4 +1,4 @@
-:::info Documentation for latest release
+:::info[Documentation for latest release]
 
 The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.
 

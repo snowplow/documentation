@@ -55,7 +55,7 @@ You can elect to enable activity tracking on specific pages. It is executed as p
 
 The following example would generate the first ping event after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
 
-:::warning
+:::note
 The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
 :::
 
@@ -313,7 +313,7 @@ trackPageView();
 For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
 :::
 
-:::warning
+:::tip
 The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the example is not a valid schema. Please define your own schema for these events. Otherwise, they will fail validation and go to the bad event queue.
 :::
 

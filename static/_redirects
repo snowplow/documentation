@@ -494,11 +494,11 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
 /docs/signals/receive-interventions/* /docs/signals/interventions/subscribe/:splat 301
 /docs/signals/resources/* /docs/signals/get-started/:splat 301
-/docs/signals/ /docs/signals/introduction/ 301
+/docs/signals/ /docs/signals/introduction/ 301!
 /docs/resources/migration-guides/* /docs/migration-guides/:splat 301
 /docs/resources/* /docs/licensing/:splat 301
 /docs/licensing/copyright-license/* /docs/licensing/:splat 301
-/docs/api-reference/* /docs/api-reference/versions/:splat 301
+/docs/api-reference/ /docs/api-reference/versions/ 301!
 
 # New data modeling feature
 /docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/* /docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat 301
@@ -513,6 +513,14 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/event-studio/mcp-server/* /docs/llms-support/mcp-server/:splat 301
 
+# Snowtype restructure
+/docs/event-studio/implement-tracking/snowtype/using-the-cli/* /docs/event-studio/implement-tracking/install-snowtype/:splat 301
+/docs/event-studio/implement-tracking/snowtype/snowtype-config/* /docs/event-studio/implement-tracking/snowtype-config/:splat 301
+/docs/event-studio/implement-tracking/snowtype/commands/* /docs/event-studio/implement-tracking/command-reference/:splat 301
+/docs/event-studio/implement-tracking/snowtype/client-side-validation/* /docs/event-studio/implement-tracking/client-side-validation/:splat 301
+/docs/event-studio/implement-tracking/snowtype/working-with-gtm/* /docs/event-studio/implement-tracking/working-with-gtm/:splat 301
+/docs/event-studio/implement-tracking/snowtype/* /docs/event-studio/implement-tracking/:splat 301
+
 # Bot filtering moved to events section
 /docs/pipeline/enrichments/filtering-bot-events/* /docs/events/filtering-bot-events/:splat 301
 
@@ -520,3 +528,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/snowplow-tracking-cli/installation/* /docs/sources/snowplow-tracking-cli/:splat 301
 /docs/sources/snowplow-tracking-cli/usage/* /docs/sources/snowplow-tracking-cli/:splat 301
 /docs/sources/snowplow-tracking-cli/additional-information/* /docs/sources/snowplow-tracking-cli/:splat 301
+
+/deprecation-policy /lifecycle-policy 301

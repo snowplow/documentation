@@ -26,4 +26,4 @@ A subject represents a user whose events are tracked. A tracker constructs event
 
 The current flow of the PHP Tracker is illustrated below:
 
-![](images/php-tracker-flow.png)
+![Flowchart showing the Snowplow PHP Tracker architecture: the Tracker contains one or more Emitters and one Subject; Emitters (SyncEmitter, CurlEmitter, SocketEmitter) buffer events and send them to the Collector; FileEmitter spawns Worker processes that consume event log files and send them to the Collector, with failed event logs copied to a failed folder](images/php-tracker-flow.png)

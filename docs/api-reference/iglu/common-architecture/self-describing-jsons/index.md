@@ -56,7 +56,7 @@ Notice the two main differences compared to our original JSON:
 
 1. There is a new `schema` field located at the root of the JSON which contains (in a space-efficient format) all the information required to uniquely identify the associated JSON Schema. The schema's URI follows the following pattern:
 
-![](images/iglu-schema-key.png)
+![Annotated diagram of the Iglu schema URI format, using the example iglu:com.channel2.vod/video_played/jsonschema/1-0-0. Color-coded labels identify each segment: "iglu" as the schema repository technology name, "com.channel2.vod" as the vendor, "video_played" as the event name, "jsonschema" as the schema format, and "1-0-0" as the schema version.](images/iglu-schema-key.png)
 
 1. The data contained in the original JSON has been encapsulated in a `data` field to prevent any accidental collisions should the JSON already have a `schema` field
 

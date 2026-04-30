@@ -142,7 +142,7 @@ vars:
 
 ### 3. Handling of schema evolution
 
-:::info BigQuery Only
+:::info[BigQuery Only]
 
 As your schemas for such custom contexts and unstructured events evolve, multiple versions of the same column will be created in your events table e.g. `custom_context_1_0_0`, `custom_context_1_0_1`. These columns contain nested fields i.e. are of a datatype `RECORD`. When modeling Snowplow data it can be useful to combine or coalesce each nested field across all versions of the column for a continuous view over time.
 

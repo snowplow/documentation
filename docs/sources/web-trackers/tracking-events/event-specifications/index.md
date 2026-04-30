@@ -13,7 +13,7 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 This plugin allows you to integrate with [Media Web](/docs/event-studio/tracking-plans/templates/index.md#media-web) event specifications. The plugin will add an event specification entity to the matching [Snowplow media](/docs/events/ootb-data/media-events/index.md) events.
 
-Retrieve the configuration directly from your [tracking plan](https://docs.snowplow.io/docs/fundamentals/tracking-plans/) in [Snowplow Console](https://console.snowplowanalytics.com).
+Retrieve the configuration directly from your [tracking plan](/docs/fundamentals/tracking-plans/index.md) in [Snowplow Console](https://console.snowplowanalytics.com).
 
 :::note
 The plugin is available since version 3.23 of the tracker. It's only available for tracking plans created using the [Media Web template](/docs/event-studio/tracking-plans/templates/index.md#media-web).
@@ -68,7 +68,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 You can retrieve the configuration for your event specifications directly from your tracking plan after clicking on the `Implement tracking` button.
 
-![implement tracking button](./images/implement_tracking.png)
+![The Media Web data product page in Snowplow Console showing the Event specifications section with an arrow highlighting the "Implement tracking" button, and a list of event specifications including Ad Break End Event, Ad Break Start Event, and Ad Click Event](./images/implement_tracking.png)
 
 Configure the plugin by mapping each tracked event to the event specification ID from your tracking plan. For example:
 

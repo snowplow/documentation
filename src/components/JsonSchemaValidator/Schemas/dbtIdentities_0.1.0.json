@@ -1,0 +1,152 @@
+{
+  "type": "object",
+  "properties": {
+    "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
+      "type": "string",
+      "title": "Schema",
+      "description": "Schema (dataset) that contains your atomic events",
+      "longDescription": "The schema (dataset for BigQuery) that contains your atomic events table.",
+      "packageDefault": "atomic",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
+      "type": "string",
+      "title": "Database",
+      "description": "Database that contains your atomic events",
+      "longDescription": "The database that contains your atomic events table.",
+      "packageDefault": "target.database",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Dev Target",
+      "description": "Target name of your development environment as defined in your `profiles.yml` file",
+      "longDescription": "The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.",
+      "packageDefault": "dev",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__events": {
+      "recommendFullRefresh": false,
+      "order": 9999,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Events Table",
+      "description": "Reference to your events table",
+      "longDescription": "This is used internally by the package to reference your events table based on other variable values and should not be changed.",
+      "packageDefault": "{{ source('atomic', 'events') }}",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
+      "type": "string",
+      "format": "date",
+      "title": "Start Date",
+      "group": "Operation and Logic",
+      "longDescription": "The date to start processing events from on first run or a full refresh, based on `derived_tstamp`.",
+      "packageDefault": "2020-01-01",
+      "description": "The date to start processing events from on first run or a full refresh"
+    },
+    "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Allow Refresh",
+      "group": "Operation and Logic",
+      "longDescription": "Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.",
+      "packageDefault": "false"
+    },
+    "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
+      "type": "number",
+      "minimum": 0,
+      "title": "Backfill Limit",
+      "group": "Operation and Logic",
+      "longDescription": "The maximum number of days of new data to be processed since the latest event processed.",
+      "packageDefault": "30",
+      "description": "The maximum number of days of new data to be processed since the latest event processed"
+    },
+    "snowplow__hash_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 20,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "Hash Identifiers",
+      "group": "Operation and Logic",
+      "longDescription": "When set to `true`, all identifier values stored in `snowplow_identities_identifier_mapping` are hashed using SHA-256 before being written to the table. Recommended when identifiers contain PII.",
+      "packageDefault": "false",
+      "description": "Hash all identifier values with SHA-256 before storing them (recommended for PII compliance)"
+    },
+    "snowplow__identifiers": {
+      "recommendFullRefresh": true,
+      "order": 10,
+      "consoleGroup": "basic",
+      "type": "array",
+      "title": "Identifiers",
+      "group": "Operation and Logic",
+      "longDescription": "The list of identifiers to extract from events and link to each `snowplow_id`. Each entry has a `reference` (the column name in your events table) and an `alias` (the name used in the output tables). Add any event-level fields you want to track as identifiers, such as `email` or `phone`.",
+      "packageDefault": "[{'reference': 'domain_userid', 'alias': 'domain_userid'}, {'reference': 'user_id', 'alias': 'user_id'}]",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "title": "Identifier",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference",
+            "description": "Column name in the events table",
+            "order": 1
+          },
+          "alias": {
+            "type": "string",
+            "title": "Alias",
+            "description": "Name to use in the output tables",
+            "order": 2
+          }
+        },
+        "required": ["reference", "alias"],
+        "additionalProperties": false
+      }
+    },
+    "snowplow__license_accepted": {
+      "recommendFullRefresh": false,
+      "order": 127,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "License accepted",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to accept the Snowplow Personal and Academic License or specify that you have a commercial agreement with Snowplow.",
+      "packageDefault": "false",
+      "description": "Use this field to accept the Snowplow user license."
+    },
+    "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
+      "type": "array",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 0,
+      "title": "App IDs",
+      "longDescription": "A list of `app_id`s to filter the events table on for processing within the package.",
+      "packageDefault": "[ ] (no filter applied)",
+      "group": "Contexts, Filters, and Logs",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

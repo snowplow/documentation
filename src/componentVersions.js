@@ -8,7 +8,7 @@ export const versions = {
   googleAmpTracker: '1.1.0',
   iosTracker: '6.2.1',
   javaTracker: '2.1.0',
-  javaScriptTracker: '4.6.8',
+  javaScriptTracker: '4.8.0',
   luaTracker: '0.2.0',
   phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
@@ -22,7 +22,7 @@ export const versions = {
 
   // Core pipeline
   collector: '3.7.0',
-  enrich: '6.9.0',
+  enrich: '6.11.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.6',
   snowbridge: '5.0.0',
@@ -30,10 +30,10 @@ export const versions = {
   // Loaders
   bqLoader: '2.1.0',
   bqLoader1x: '1.7.2',
-  esLoader: '2.1.3',
+  esLoader: '3.0.0',
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.3.0',
+  rdbLoader: '6.4.0',
   s3Loader: '3.1.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.9.1',
@@ -76,6 +76,6 @@ export const versions = {
   igluScalaClient: '4.0.3',
 
   // Testing & debugging
-  snowplowMicro: '4.1.1',
+  snowplowMicro: '4.2.0',
   snowplowMini: '0.25.1',
 }

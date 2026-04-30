@@ -8,7 +8,7 @@ keywords: ["snowplow micro", "micro api", "micro arguments", "testing tool"]
 
 See [this guide](/docs/testing/snowplow-micro/index.md) for learning about Snowplow Micro and getting started with it.
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 You can skip this reference page if you are running Micro [through Console](/docs/testing/snowplow-micro/console/index.md).
 

@@ -12,7 +12,7 @@ This accelerator demonstrates how to build a real-time use case leveraging **Sno
 
 On the left side of the image below, someone is watching a video. Their events are sent through a Snowplow pipeline to Kafka where they are consumed and processed by an application. The result of this processing is displayed in the right window. This shows the number of active users and their current state.
 
-![Application Output](images/one-viewer.png)
+![Split-screen showing the demo ecommerce store on the left with a Big Buck Bunny video and a media event table, and the Snowplow Live Viewer Profile dashboard on the right showing 5 messages received, 1 live viewer, and a JSON message with status PAUSED_VIDEO](images/one-viewer.png)
 
 Through this hands-on guide, you'll learn how to build, deploy, and extend real-time, event-driven architectures using Snowplow and Kafka, enabling personalized recommendations, real-time insights, and dynamic analytics for streaming platforms. The framework is inspired by common challenges in video streaming, including tracking user behavior, ad engagement, and session activities, with the goal of maintaining up-to-date viewer profiles in DynamoDB.
 
@@ -48,7 +48,7 @@ The solution comprises several interconnected components:
   - Code available in [live-viewer-frontend](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles/tree/main/live-viewer-frontend) folder in GitHub
 
 The following diagram maps out where each component sits in the end-to-end communication flow.
-![Architecture Diagram](images/architecture.png)
+![UML sequence diagram showing the end-to-end communication flow between video-viewer, tracker-frontend, stream-collector, snowbridge, enrich, live-viewer-backend, and DynamoDB, with the behavior-viewer separately accessing the live-viewer-frontend to observe user state via WebSocket](images/architecture.png)
 
 ### Components and configuration
 

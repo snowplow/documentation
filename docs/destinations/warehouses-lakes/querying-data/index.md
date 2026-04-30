@@ -15,7 +15,7 @@ You will typically find most of your Snowplow data in the `events` table. If you
 
 Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
-:::tip Data models
+:::tip[Data models]
 
 Querying the `events` table directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
 
@@ -30,7 +30,7 @@ WHERE event_name = 'page_view'
 
 You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your configuration.
 
-:::warning
+:::note
 
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 
@@ -63,7 +63,7 @@ LEFT JOIN
     ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
-:::warning
+:::note
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -162,7 +162,7 @@ LEFT JOIN -- assumes no duplicates, and will return all events regardless of if 
     ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
-:::warning
+:::note
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 

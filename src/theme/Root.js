@@ -3,6 +3,8 @@ import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScri
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
 
+const PRODUCT_FRUITS_WORKSPACE_CODE = 'x2zOSE4yyzB6ULQ8'
+
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')
   const [sessionId, setSessionId] = useState('unknown_session')
@@ -28,47 +30,11 @@ const useCookie = () => {
   return [userId, sessionId]
 }
 
-async function fetchApiKey() {
-  try {
-    const response = await fetch('/.netlify/functions/product_fruits_key', {
-      method: 'GET',
-    })
-
-    if (!response.ok) {
-      throw new Error(
-        `Netlify Function responded with status ${response.status}`
-      )
-    }
-
-    const apiKey = await response.text()
-
-    // The Product Fruits API key is 16 characters
-    if (typeof apiKey !== 'string' || apiKey.length !== 16) {
-      throw new Error(
-        `Invalid API key format: expected 16 character string, got ${typeof apiKey} with length ${
-          apiKey.length
-        }`
-      )
-    }
-
-    return apiKey
-  } catch (error) {
-    console.error('Error fetching API key:', error)
-    return null
-  }
-}
-
 export default function Root({ children }) {
-  const [apiKey, setApiKey] = useState(null)
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
-    fetchApiKey().then((key) => {
-      if (key) {
-        setApiKey(key)
-      }
-    })
   }, [])
 
   const [userId, sessionId] = useCookie()
@@ -79,9 +45,9 @@ export default function Root({ children }) {
 
   return (
     <>
-      {isClient && apiKey && (
+      {isClient && (
         <ProductFruits
-          workspaceCode={apiKey}
+          workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
           language="en"
           user={userInfo}
           lifeCycle="unmount"

@@ -88,7 +88,7 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
         </tbody>
     </table>
 
-:::info Event Hubs Authentication
+:::info[Event Hubs Authentication]
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 

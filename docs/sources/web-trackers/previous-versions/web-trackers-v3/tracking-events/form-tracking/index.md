@@ -31,6 +31,7 @@ Form events are **automatically tracked** once configured.
 | `sp.lite.js`         | ❌        |
 
 **Download:**
+
 <table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-form-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-form-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
@@ -143,7 +144,7 @@ This is a function used to determine which elements are tracked. The element is 
 
 This is a function used to transform data in each form field. The value and element (2.15.0+ only) are passed as arguments to the function and the tracked value is replaced by the value returned.
 
-:::note Behavior prior to version 3.16 of the tracker
+:::note[Behavior prior to version 3.16 of the tracker]
 
 **In versions prior to 3.16.0**, the transform function would receive 2 arguments, that were different between `submit_form` and `change_form` or `focus_form` events. More specifically, the transform function signature **was**:
 
@@ -223,7 +224,7 @@ enableFormTracking({
   </TabItem>
 </Tabs>
 
-:::warning
+:::tip
 
 It is recommended that the `transform` function does not return a falsy value but a string even when the intention is to redact a value from being tracked.
 E.g. Send `"null"` over `null`.

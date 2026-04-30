@@ -10,7 +10,7 @@ If you are working on some changes to the configuration of your Google Tag Manag
 
 You can direct some (or all) of your Snowplow events to the Preview Mode, instead of the production tags.
 
-:::note Snowbridge 2.3+
+:::note[Snowbridge 2.3+]
 
 To follow the steps below, you will need to be running [Snowbridge](/docs/api-reference/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/api-reference/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow customers using Snowbridge with GTM Server Side).
 
@@ -22,7 +22,7 @@ Once you enter Preview Mode in Google Tag Manager, click on the three dots in th
 
 You will see a popup with a preview header, for example (not a real value):
 
-:::note X-Gtm-Server-Preview HTTP header
+:::note[X-Gtm-Server-Preview HTTP header]
 
 ```
 sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb1BwK0E9PQo=

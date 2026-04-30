@@ -271,7 +271,7 @@ SQS is used to queue any message that the collector failed to send to Kinesis. T
 
 The keys set up for the Kinesis stream are stored as SQS message attributes in order to preserve the information.
 
-:::warning
+:::note
 
 The SQS messages cannot be as big as Kinesis messages. The limit is 256kB per message, but we send the messages as Base64 encoded, so the limit goes down to 192kB for the original message.
 

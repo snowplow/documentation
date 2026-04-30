@@ -20,7 +20,7 @@ To start off, navigate to the Tracking Plans section and click through the `Crea
 
 On the basic information screen you can add the inputs as shown below and also select the `Todo Web Application` as the connected Source Application. You can name the tracking plan something similar to `Todo - Goals`.
 
-![](./images/create-todo-goals.png)
+![Create tracking plan form showing the name "Todo - Goals", description "Goal interactions for the Todo web application", primary owner peter@snowplowanalytics.com, and "Todo Web Application" selected as the connected source application](./images/create-todo-goals.png)
 
 Finally click `Create and continue`.
 

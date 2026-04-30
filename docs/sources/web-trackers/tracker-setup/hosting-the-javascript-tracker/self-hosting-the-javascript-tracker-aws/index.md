@@ -92,7 +92,7 @@ Your metadata should now look something like this:
 
 Now scroll to the bottom and click **Upload** to upload the JavaScript file into your bucket. When done, you should have something like this:
 
-![](images/s3-upload.png)
+![AWS S3 console showing the versioned tracker folder containing the uploaded and renamed sp.js file with its file size and last modified date](images/s3-upload.png)
 
 ### Create your CloudFront distribution
 

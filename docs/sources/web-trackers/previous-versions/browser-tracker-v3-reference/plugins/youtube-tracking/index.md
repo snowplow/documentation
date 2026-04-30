@@ -29,8 +29,8 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ YouTubeTrackingPlugin() ],
 });
 
@@ -41,7 +41,9 @@ enableYouTubeTracking(/* options */);
 
 The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/sources/web-trackers/previous-versions/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
 
-:::info The plugin's `id` attribute will accept:
+:::info
+
+The plugin's `id` attribute will accept:
 
 - The `id` of an `iframe` element
 - An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
@@ -128,7 +130,7 @@ For this plugin to find your media element, your IFrame must be given the id tha
  <iframe
       id="example-id"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-></iframe>  
+></iframe>
 ```
 
 **`main.js`**

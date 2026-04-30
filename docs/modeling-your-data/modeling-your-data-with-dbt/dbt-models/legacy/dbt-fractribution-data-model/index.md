@@ -22,7 +22,7 @@ import TabItem from '@theme/TabItem';
 
 **The package source code can be found in the [snowplow/dbt-snowplow-fractribution repo](https://github.com/snowplow/dbt-snowplow-fractribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-fractribution/#/overview/snowplow_fractribution).**
 ​
-:::warning
+:::note
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 

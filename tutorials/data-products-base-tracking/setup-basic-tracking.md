@@ -44,7 +44,7 @@ What this code does is:
 3. Sends a page view when the main application component is first rendered.
 
 You can validate this step being implemented properly using the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension observing Page view and Page ping events.
-![](./images/inspector.png)
+![Snowplow Inspector showing a page view event for the Todo app at localhost:5173/, with page title "Snowplow TODO MVC" and browser details including language en-AU and viewport 867x968](./images/inspector.png)
 
 ## Add link click tracking
 
@@ -86,4 +86,4 @@ const Todo = function () {
 With this code, all links that are initially rendered on the page will be tracked automatically.
 
 You can verify this using the Snowplow inspector browser extension observing link click events after clicking the TodoMVC link.
-![](./images/inspector-link.png)
+![Snowplow Inspector showing a link_click self-describing event fired from the Todo app, with the event detail panel open displaying the link_click schema (1-0-1) and properties including targetUrl: http://todomvc.com/ and elementTarget: _blank](./images/inspector-link.png)

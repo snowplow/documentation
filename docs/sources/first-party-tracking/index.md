@@ -69,14 +69,14 @@ In some cases, you may wish to separate the tracking of user behavior for differ
 For example, if you own both `gardening.primary-domain.co.uk` and `insurance.primary-domain.co.uk` and only want to track users on `gardening.primary-domain.co.uk`, you can select that as your cookie domain and `c.gardening.primary-domain.co.uk` as your collector domain.
 </details>
 
-![enter_domain](images/Screenshot_enter_domain.png)
+![The Custom domain form showing a Domain field set to "t.flowershop.ai" and a Cookie domain field auto-populated with "flowershop.ai"](images/Screenshot_enter_domain.png)
 
 ## Configuring DNS records
 In the next step, Snowplow will generate the required DNS records. This may take several minutes.
 
 When the records are ready, you will receive a confirmation by email.
 
-![create_dns_records](images/Screenshot_create_dns_records.png)
+![The Create DNS records screen showing a loading state with the message "We're generating the configuration settings that you need to apply into your DNS provider"](images/Screenshot_create_dns_records.png)
 
 Once the DNS records are available, copy them into your domain provider.
 
@@ -88,7 +88,7 @@ You will have to conclude this step within 72 hours. If Snowplow is unable to ve
 
 Once Snowplow verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
 
-![dns_records](images/Screenshot_dns_records.png)
+![The Custom domain details page showing domain "t.cromah.com", cookie domain "cromah.com", a DNS records table with one CNAME and two A records, and a green status indicator reading "First-party server tracking on cromah.com and its sub-domains"](images/Screenshot_dns_records.png)
 
 ## Updating your tracking code
 
@@ -100,4 +100,4 @@ This can be done in several ways:
 - If you already have tracking implemented and are using the JavaScript tracker, follow the above step or update the collector URL manually.
 - If you wish to implement tracking or already have tracking with one of our other trackers then you will need to manually change the collector URL.
 
-![implement_new_tracking_snippet](images/Screenshot_implement_new_tracking_snippet.png)
+![The "Select a custom domain" dropdown with "t.cromah.com" selected, and the JavaScript tracking snippet below showing the collector URL set to the custom domain](images/Screenshot_implement_new_tracking_snippet.png)

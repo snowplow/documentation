@@ -51,7 +51,7 @@ Schema names follow these transformation rules:
 - Only major version number retained
 - Hyphens in vendor/name become underscores
 
-:::info Optional chaining
+:::info[Optional chaining]
 Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
 :::
 
@@ -140,7 +140,7 @@ The code snippets below contain JavaScript expressions that you can include in t
 
 Map standard event fields directly:
 
-![](images/event-forwarding-basic-mapping.png)
+![Field mapping UI showing one row: the required destination field event_type (described as "A unique identifier for your event") mapped to the Snowplow expression event.event_name.](images/event-forwarding-basic-mapping.png)
 
 ```json
 // sample output
@@ -149,7 +149,7 @@ Map standard event fields directly:
 
 You can also apply fallback and conditional logic:
 
-![](images/event-forwarding-conditional-mapping.png)
+![Field mapping UI showing two rows: user_id mapped to event.userid ?? event.domain_userid (nullish coalescing fallback), and source mapped to event.app_id === "web" ? "website" : "app" (ternary conditional).](images/event-forwarding-conditional-mapping.png)
 
 ```json
 // sample output
@@ -161,7 +161,7 @@ You can also apply fallback and conditional logic:
 
 You can also send static values:
 
-![](images/event-forwarding-static-mapping.png)
+![Field mapping UI showing one row: destination field source mapped to the static string value "snowplow".](images/event-forwarding-static-mapping.png)
 
 ```json
 // sample output
@@ -172,7 +172,7 @@ You can also send static values:
 
 Convert data types, such as strings, boolean values, and dates:
 
-![](images/event-forwarding-type-conversions.png)
+![Field mapping UI showing four type conversion examples: page_width mapped to parseInt(event.page_width), page_height to parseFloat(event.page_height), is_mobile to event.mobile_device == "1", and timestamp to new Date(event.collector_tstamp).toISOString().](images/event-forwarding-type-conversions.png)
 
 ```json
 // sample output
@@ -200,7 +200,7 @@ event.page_urlpath.split('/')
 
 Map to nested objects using dot notation in field names:
 
-![](images/event-forwarding-nested-mapping.png)
+![Field mapping UI showing four nested object mappings using dot notation: user.id to event.domain_userid, properties.page_title to event.page_title, properties.page_url to event.page_url, and properties.referrer to event.refr_urlhost.](images/event-forwarding-nested-mapping.png)
 
 ```json
 // sample output

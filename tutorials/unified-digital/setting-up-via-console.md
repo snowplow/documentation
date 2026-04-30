@@ -12,9 +12,9 @@ To get started, follow these steps:
 
 1. Commit the local configuration you built previously to a Git repository.
 
-2. Create a Git connection to your repository. In Console, navigate to **Destinations > Connections > Set up connection > Git connection**
+2. Create a Git connection to your repository. In Console, navigate to **Settings > Connections > Set up connection > Git repository**
 
-3. Create a warehouse connection. In Console, navigate to **Destinations > Connections > Set up connection > Data modeling connection**
+3. Create a warehouse connection. In Console, navigate to **Settings > Connections > Set up connection > Data modeling**
 
 4. Create a model project. In Console, select **Modeling > Model projects > Create model project**
 

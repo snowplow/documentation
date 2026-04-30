@@ -11,7 +11,7 @@ There may be times when you wish to add some fields to our derived tables that a
 Our packages are designed to process events associated to sessions, based on newly incoming events from the `atomic.events` table. Allowing for incorporating external data into the processing by default is not planned so far, not only because there can be a myriad of ways how different users would want to link their data to our events/sessions, but also because the package would then need some sort of governance over the data source being readily available for the period to be processed, which it has no impact over. However, there is a way to accomplish that through custom models.
 
 **Example Scenario 1:**
-Imagine you run an e-commerce site, and you are only tracking the products` SKU, but you have an internal table with richer information about the particular product. You would like to add some extra information to your views table through the custom page_view context.
+Imagine you run an ecommerce site, and you are only tracking the products` SKU, but you have an internal table with richer information about the particular product. You would like to add some extra information to your views table through the custom page_view context.
 
 **Example Scenario 2:**
 Wanting to incorporate additional user based information into the sessions table with the use of the external User Profiles table.
@@ -27,6 +27,6 @@ When modifying the model you would typically want to add left joins using the ke
 
 Bear in mind that if you make changes to the Sessions table, you might break the Users table in the Unified Digital package depending on the changes as the Users table is built on top of the Sessions table (e.g. it is generally safe to add more fields (be careful about name clashes), though you might also need to add them as a [passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) for them to show up in the Users table, but probably not to remove them, best to test it first), otherwise they are safe to update independently.
 
-:::info Lineage Graph
+:::info[Lineage Graph]
 You can inspect the lineage graph to verify this if you are unsure by using dbt's built in data lineage feature through dbt docs. We also update that for each of our latest releases on github: https://snowplow.github.io/dbt-snowplow-unified/#!/overview?g_v=1
 :::

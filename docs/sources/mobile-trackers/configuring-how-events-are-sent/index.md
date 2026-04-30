@@ -246,7 +246,7 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-:::note Behavior before version 6.0.0 of the tracker
+:::note[Behavior before version 6.0.0 of the tracker]
 Before version 6 of the iOS and Android tracker, the `bufferOption` and `emitRange` had a slightly different meaning.
 Events were sent right after they were tracked regardless of the `bufferOption` used.
 The `bufferOption` was used to specify the maximum number of events per request and the `emitRange` specified the maximum number of total events to make in parallel requests at once.
@@ -255,7 +255,7 @@ For instance, if there were 100 events in the event store and `bufferOption` was
 
 ## Automatic clean up of the event store
 
-:::note Not available before v6
+:::note[Not available before v6]
 This feature was introduced in version 6.0.0 of the iOS and Android trackers.
 :::
 

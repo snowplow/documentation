@@ -18,7 +18,7 @@ So far we support two types of Iglu repository:
 
 In this diagram we show an Iglu client resolving a schema from Iglu Central, one embedded repository and a further two remote HTTP repositories:
 
-![iglu-repos-img](images/iglu-repos.png)
+![Diagram showing an application using Iglu with the repositories highlighted: an Embedded Iglu Repository inside the application, and three remote repositories (Iglu Central, Private Iglu Repository #1, and Private Iglu Repository #2) accessible via schema lookups](images/iglu-repos.png)
 
 ## Available Iglu repositories
 

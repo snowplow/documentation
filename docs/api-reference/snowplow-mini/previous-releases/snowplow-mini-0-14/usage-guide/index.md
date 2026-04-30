@@ -160,15 +160,15 @@ Browse to `mini-public-address/kibana` , once Kibana is loaded, you should be ab
 
 You can then inspect any individual event data in the UI by unfolding a payload:
 
-![](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
+![Opensearch Dashboards Discover interface showing 12 good events in the "good" index, with available fields listed on the left and a table of event rows on the right displaying timestamps and source data including fields such as collector_tstamp, v_collector, and br_features.](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
 
 If you want to inspect bad events, click on `good`, placed towards top left of the screen and select `bad` from drop-down list.
 
-![](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
+![Opensearch Dashboards Discover interface showing 13 bad events in the "bad" index, with failure-related fields listed on the left (including data.failure.messages, data.failure.timestamp, data.payload.body) and event rows on the right showing error details such as "empty querystring" and "not a valid URI redirect".](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
 
 Unfold any payload to inspect a bad event in detail.
 
-![](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
+![Opensearch Dashboards Discover interface showing a single good event unfolded, with its full JSON payload displayed in a table view including fields such as _index, app_id, geo_latitude, v_collector, and collector_tstamp.](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
 
 ## Resetting Elasticsearch indices
 

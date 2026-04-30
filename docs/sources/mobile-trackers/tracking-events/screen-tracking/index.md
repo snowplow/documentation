@@ -137,7 +137,7 @@ Indeed, disabling the `screenViewAutotracking` only, the tracker can still attac
 
 ## Screen engagement tracking
 
-:::note Available since version 6
+:::note[Available since version 6]
 This feature has been added in the version 6.0.0 of the iOS and Android trackers.
 :::
 

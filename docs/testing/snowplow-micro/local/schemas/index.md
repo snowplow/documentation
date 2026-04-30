@@ -45,7 +45,7 @@ Whichever approach you choose, you can use the [the API](/docs/api-reference/sno
 curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 ```
 
-:::tip Micro in Console
+:::tip[Micro in Console]
 
 If you are [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), it automatically integrates with your development Iglu Server, so you don’t need to follow these steps.
 
@@ -81,7 +81,7 @@ For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/local/ad
 
 ## Adding schemas directly to Micro
 
-:::note Limitations
+:::note[Limitations]
 
 Currently, this method does not work for [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded).
 

@@ -22,7 +22,7 @@ Event Studio is a comprehensive set of tools for designing and implementing beha
 * **Schema management**: define and version data structures for events and entities
 * **Ownership and governance**: assign ownership and establish data contracts
 * **Observability**: monitor data quality and tracking implementation
-* **Code generation**: automatically generate tracking code from your designs, using [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md)
+* **Code generation**: automatically generate tracking code from your designs, using [Snowtype](/docs/event-studio/implement-tracking/index.md)
 * **Tracking plans**: document and manage your tracking implementation
 
 The Event Studio UI is included in [Snowplow Console](https://console.snowplowanalytics.com).

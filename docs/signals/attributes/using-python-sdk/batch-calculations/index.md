@@ -10,7 +10,7 @@ You can use existing attributes that are already in your warehouse, or use the S
 
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
-:::note Warehouse support
+:::note[Warehouse support]
 Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 

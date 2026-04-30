@@ -428,6 +428,10 @@ const fallbackRules = [
   // Bot filtering moved to events section
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
   ['/deprecation-policy', '/lifecycle-policy', 301],
+  // Tracking CLI merge (subpages merged into single page)
+  ['/docs/sources/snowplow-tracking-cli/installation/*', '/docs/sources/snowplow-tracking-cli/', 301],
+  ['/docs/sources/snowplow-tracking-cli/usage/*', '/docs/sources/snowplow-tracking-cli/', 301],
+  ['/docs/sources/snowplow-tracking-cli/additional-information/*', '/docs/sources/snowplow-tracking-cli/', 301],
 ];
 
 function findInRules(rules, pathname) {

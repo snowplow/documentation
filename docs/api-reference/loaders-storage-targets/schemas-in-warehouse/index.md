@@ -276,7 +276,7 @@ Because the table name for the self-describing event or entity includes the majo
 | Schema                                      | Resulting table              |
 | ------------------------------------------- | ---------------------------- |
 | `com.example/button_press/jsonschema/1-0-0` | `com_example_button_press_1` |
-| `com.example/button_press/jsonschema/1-2-0` | `com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-0-1` | `com_example_button_press_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `com_example_button_press_2` |
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
@@ -313,7 +313,7 @@ Because the column name for the self-describing event or entity includes the maj
 | Schema                                      | Resulting column                            |
 | ------------------------------------------- | ------------------------------------------- |
 | `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
-| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-0-1` | `unstruct_event_com_example_button_press_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `RECORD`.
@@ -328,7 +328,7 @@ Because the column name for the self-describing event or entity includes the ful
 | Schema                                      | Resulting column                                |
 | ------------------------------------------- | ----------------------------------------------- |
 | `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1_0_0` |
-| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1_2_0` |
+| `com.example/button_press/jsonschema/1-0-1` | `unstruct_event_com_example_button_press_1_0_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2_0_0` |
 
 If you are [modeling your data with dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), you can use [this macro](https://github.com/snowplow/dbt-snowplow-utils#combine_column_versions-source) to aggregate the data across multiple columns.
@@ -351,7 +351,7 @@ Because the column name for the self-describing event or entity includes the maj
 | Schema                                      | Resulting column                            |
 | ------------------------------------------- | ------------------------------------------- |
 | `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
-| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-0-1` | `unstruct_event_com_example_button_press_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
 
 :::info[Breaking changes]
@@ -372,7 +372,7 @@ Because the column name for the self-describing event or entity includes the maj
 | Schema                                      | Resulting column                            |
 | ------------------------------------------- | ------------------------------------------- |
 | `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
-| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-0-1` | `unstruct_event_com_example_button_press_1` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `STRUCT`.

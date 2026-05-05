@@ -65,35 +65,17 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 The enrichment accepts three required boolean parameters and one optional parameter that control which sources are consulted:
 
-| Parameter                | Type               | Description                                                                                                                                                                                                    |
-| ------------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `useYauaa`               | boolean            | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot indicators.                                                                          |
-| `useIab`                 | boolean            | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot indicators.                                                                              |
-| `useAsnLookups`          | boolean            | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot indicators.                                                                |
-| `useClientSideDetection` | boolean            | Consult the `client_side_bot_detection` entity from the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md). Available since Enrich 6.10.0. |
+| Parameter                | Type    | Description                                                                                                                                                                               |
+| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `useYauaa`               | boolean | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot indicators.                                                     |
+| `useIab`                 | boolean | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot indicators.                                                         |
+| `useAsnLookups`          | boolean | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot indicators.                                           |
+| `useClientSideDetection` | boolean | Consult the `client_side_bot_detection` entity from the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md). Available since Enrich 6.10.0. |
 
-### Example configuration
-
-```json
-{
-    "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1",
-    "data": {
-        "name": "bot_detection_enrichment_config",
-        "vendor": "com.snowplowanalytics.snowplow.enrichments",
-        "enabled": true,
-        "parameters": {
-            "useYauaa": true,
-            "useIab": true,
-            "useAsnLookups": true,
-            "useClientSideDetection": true
-        }
-    }
-}
-```
-
-The enrichment produces a single entity that summarizes all bot indicators for the event.
 
 ## Output
+
+The enrichment produces a single entity that summarizes all bot indicators for the event.
 
 When enabled, this enrichment always attaches a `bot_detection` entity (`iglu:com.snowplowanalytics.snowplow/bot_detection/jsonschema/1-0-1`) to every event, even when no bot is detected.
 

@@ -6,6 +6,8 @@ description: "Consolidate bot indicators from multiple enrichments into a single
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
 ---
 
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+
 :::note[Availability]
 This enrichment is available since version 6.9.0 of Enrich.
 :::
@@ -37,8 +39,20 @@ It's safe to enable all sources (`useYauaa`, `useIab`, `useAsnLookups`, `useClie
 
 ## Configuration
 
-- [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/bot_detection_enrichment_config.json)
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    name: "bot_detection_enrichment_config",
+    vendor: "com.snowplowanalytics.snowplow.enrichments",
+    enabled: true,
+    parameters: {
+      useYauaa: true,
+      useIab: true,
+      useAsnLookups: false,
+      useClientSideDetection: false
+    }
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for Bot Detection enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "bot_detection_enrichment_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "useYauaa": { "type": "boolean", "description": "Whether to use YAUAA deviceClass/agentClass as a bot signal" }, "useIab": { "type": "boolean", "description": "Whether to use IAB spiders and robots as a bot signal" }, "useAsnLookups": { "type": "boolean", "description": "Whether to use ASN lookups as a bot signal" }, "useClientSideDetection": { "type": "boolean", "description": "Whether to use the client-side bot detection tracker plugin as a bot signal" } }, "required": ["useYauaa", "useIab", "useAsnLookups", "useClientSideDetection"], "additionalProperties": false } }, "required": ["vendor", "name", "enabled", "parameters"], "additionalProperties": false }} />
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

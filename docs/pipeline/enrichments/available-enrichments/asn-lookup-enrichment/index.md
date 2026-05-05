@@ -6,6 +6,8 @@ description: "Flag bot traffic by checking autonomous system numbers against kno
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
 ---
 
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+
 :::note[Availability]
 This enrichment is available since version 6.9.0 of Enrich.
 :::
@@ -61,8 +63,25 @@ Add the `asn` field:
 
 :::
 
-- [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn_lookups/jsonschema/1-0-0)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/asn_lookups.json)
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    name: "asn_lookups",
+    vendor: "com.snowplowanalytics.snowplow.enrichments",
+    enabled: true,
+    parameters: {
+      botAsnsFile: {
+        uri: "http://my-self-hosted-assets.example.com/asns",
+        database: "bad-asn-list.csv"
+      },
+      botAsns: [
+        { asn: 123, name: "ASN 123" },
+        { asn: 456 }
+      ],
+      bypassPlatforms: ["srv"]
+    }
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for ASN lookups enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "asn_lookups", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string", "maxLength": 256 }, "name": { "type": "string", "maxLength": 256 }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "botAsnsFile": { "type": "object", "description": "Location of the CSV file with a list of ASNs known to belong to cloud, managed hosting, and colo facilities. Each line contains an ASN and possibly the organization name", "properties": { "uri": { "type": "string", "format": "uri" }, "database": { "type": "string" } }, "required": ["uri", "database"], "additionalProperties": false }, "botAsns": { "type": "array", "description": "Autonomous system numbers known to belong to cloud, managed hosting, and colo facilities, merged with the file", "items": { "type": "object", "properties": { "asn": { "type": "integer", "description": "Autonomous system number", "minimum": 0, "maximum": 2147483647 }, "name": { "type": "string", "description": "Organization associated with the autonomous system number (optional)" } }, "required": ["asn"], "additionalProperties": false } }, "bypassPlatforms": { "type": "array", "description": "Platforms for which the enrichment should not be executed, e.g. srv", "items": { "type": "string", "enum": ["web", "iot", "app", "mob", "pc", "cnsl", "tv", "srv", "headset"] } } }, "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

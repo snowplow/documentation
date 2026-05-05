@@ -6,20 +6,18 @@ description: "Extract name-value pairs from first-party cookies and attach them 
 keywords: ["cookie extraction", "first-party cookies", "cookie enrichment"]
 ---
 
-This enrichment extracts name-value pairs from cookies set on the collector domain, attaching them to the event as derived contexts.
+This enrichment extracts name-value pairs from cookies set on the Collector domain, attaching them to the event as derived entities.
 
-A powerful attribute of using a custom collector domain is the ability to capture values in first-party cookies set by other services such as ad servers or content management software (CMS). By capturing these cookie fields and attaching them to the event, you can use the data to better identify users of your website.
+By using a custom Collector domain, it's possible to capture values in first-party cookies set by other services such as ad servers or content management software (CMS). By capturing these cookie fields and attaching them to the event, you can use the data to better identify users of your website.
 
-## Examples
+This table shows how the cookie and Collector domains interact, indicating whether or not the cookies can be accessed with this enrichment.
 
-The following table provides examples of how the cookie and collector domains interact, indicating whether or not the cookies can be accessed with this enrichment.
-
-| Collector Domain | Cookie Domain | Cookies Extracted |
-| ---------------- | ------------- | ----------------- |
-| c.snowplow.io | acme.com | ❌ |
-| t.acme.com | c.acme.com | ❌ |
-| t.acme.com | acme.com | ✅ |
-| sp.track.acme.com | acme.com | ✅ |
+| Collector domain    | Cookie domain | Cookies extracted |
+| ------------------- | ------------- | ----------------- |
+| `c.snowplow.io`     | `acme.com`    | ❌                 |
+| `t.acme.com`        | `c.acme.com`  | ❌                 |
+| `t.acme.com`        | `acme.com`    | ✅                 |
+| `sp.track.acme.com` | `acme.com`    | ✅                 |
 
 ## Configuration
 
@@ -28,7 +26,7 @@ The following table provides examples of how the cookie and collector domains in
 
 In the configuration we specify the list of cookie keys for which we want to extract the value and attach it to the event.
 
-The example configuration is capturing Scala Stream Collector’s own “sp” cookie value but in practice we would probably want to extract other more valuable cookies available on the company domain.
+The example configuration is capturing Scala Stream Collector’s own `sp` cookie value but in practice we would probably want to extract other more valuable cookies available on the company domain.
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

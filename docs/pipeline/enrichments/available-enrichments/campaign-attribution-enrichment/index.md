@@ -50,7 +50,7 @@ The configuration of the enrichment defines which parameters in the URL (e.g. `u
       }
     }
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a campaign attribution enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "campaign_attribution", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "mapping": { "type": ["string", "null"], "enum": ["static", "script"] }, "fields": { "type": "object", "properties": { "mktMedium": { "type": "array", "items": { "type": "string" } }, "mktSource": { "type": "array", "items": { "type": "string" } }, "mktTerm": { "type": "array", "items": { "type": "string" } }, "mktContent": { "type": "array", "items": { "type": "string" } }, "mktCampaign": { "type": "array", "items": { "type": "string" } }, "mktClickId": { "type": "object", "additionalProperties": { "type": "string" } } }, "required": ["mktMedium", "mktSource", "mktTerm", "mktContent", "mktCampaign"], "additionalProperties": false } }, "required": ["fields"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a campaign attribution enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "campaign_attribution", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "mapping": { "type": ["string", "null"], "enum": ["static", "script"] }, "fields": { "type": "object", "properties": { "mktMedium": { "$ref": "#/definitions/stringArray" }, "mktSource": { "$ref": "#/definitions/stringArray" }, "mktTerm": { "$ref": "#/definitions/stringArray" }, "mktContent": { "$ref": "#/definitions/stringArray" }, "mktCampaign": { "$ref": "#/definitions/stringArray" }, "mktClickId": { "type": "object", "additionalProperties": { "type": "string" } } }, "required": ["mktMedium", "mktSource", "mktTerm", "mktContent", "mktCampaign"], "additionalProperties": false } }, "required": ["fields"], "additionalProperties": false } }, "additionalProperties": false, "definitions": { "stringArray": { "type": "array", "items": { "type": "string" } } }, "required": ["name", "vendor", "enabled", "parameters"] }} />
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -66,12 +66,10 @@ You can configure more than one parameter name in the array, like so:
     "parameters":{
       "mapping":"static",
       "fields":{
-        ...
         "mktCampaign":[
           "utm_campaign",
           "legacy_campaign"
         ]
-        ...
       }
     }
 ```

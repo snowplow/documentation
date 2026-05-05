@@ -4,16 +4,61 @@ import TabItem from '@theme/TabItem'
 import CodeBlock from '@theme/CodeBlock'
 import EventQuery from '@site/docs/reusable/event-query/_index.md'
 
+function renderParamRows(properties, required = []) {
+  return Object.entries(properties).map(([key, prop]) => {
+    const isRequired = required.includes(key)
+    const type = Array.isArray(prop.type) ? prop.type[0] : prop.type
+    const isArray = type === 'array'
+    const itemsEnum = isArray && prop.items?.enum ? prop.items.enum : null
+
+    return (
+      <tr key={key}>
+        <td>
+          <code>{key}</code>
+          <br />
+          <i>
+            {type}
+            {isArray ? '[]' : ''}
+          </i>
+        </td>
+        <td>
+          <i>{isRequired ? 'Required.' : 'Optional.'}</i> {prop.description}
+          {itemsEnum && (
+            <>
+              <br />
+              Must be one of:{' '}
+              {itemsEnum.map((value, index) => (
+                <React.Fragment key={index}>
+                  <code>{String(value)}</code>
+                  {index < itemsEnum.length - 1 ? ', ' : ''}
+                </React.Fragment>
+              ))}
+            </>
+          )}
+        </td>
+      </tr>
+    )
+  })
+}
+
 export default function SchemaProperties(props) {
   const schemaName = props.schema.self.name
-  const badgeText = props.overview
-    ? props.overview.event
-      ? 'Event'
-      : 'Entity'
+  const badgeText = props.overview?.event
+    ? 'Event'
+    : props.overview?.enrichment
+    ? 'Configuration'
+    : props.overview?.entity
+    ? 'Entity'
     : 'Schema'
   const description = props.info || props.schema.description
   const hasProperties =
     props.schema.properties && Object.keys(props.schema.properties).length > 0
+
+  const parametersSchema = props.schema.properties?.parameters
+  const hasParameters =
+    props.overview?.enrichment &&
+    parametersSchema?.properties &&
+    Object.keys(parametersSchema.properties).length > 0
 
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
@@ -47,9 +92,11 @@ export default function SchemaProperties(props) {
           {props.example &&
             Object.keys(props.example).length > 0 &&
             hasProperties && (
-              <details>
+              <details open={!!props.overview?.enrichment}>
                 <summary className="cursor-pointer text-base font-semibold">
-                  Example
+                  {props.overview?.enrichment
+                    ? 'Example configuration'
+                    : 'Example data'}
                 </summary>
                 <div className="mt-2 text-base">
                   <CodeBlock language="json">
@@ -147,7 +194,34 @@ export default function SchemaProperties(props) {
             </div>
           </details>
 
-          {props.overview && props.overview.event && (
+          {hasParameters && (
+            <details open>
+              <summary className="cursor-pointer text-base font-semibold">
+                Parameters
+              </summary>
+              <div className="mt-2">
+                <p className="text-base mb-2">
+                  The enrichment accepts these <code>parameters</code>:
+                </p>
+                <table className="w-full not-prose text-sm">
+                  <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {renderParamRows(
+                      parametersSchema.properties,
+                      parametersSchema.required || []
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          )}
+
+          {props.overview?.event && (
             <details>
               <summary className="cursor-pointer text-base font-semibold">
                 Warehouse query

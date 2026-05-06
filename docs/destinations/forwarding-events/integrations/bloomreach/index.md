@@ -16,7 +16,12 @@ Send Snowplow events to Bloomreach Engagement for real-time customer analytics, 
 
 ## Prerequisites
 
-Before setting up the forwarder in Console, you'll need the following from your Bloomreach Engagement account:
+Before setting up the forwarder in Console, you'll need to configure an API key with 'Get' and 'Set' permission on all of the properties events that you intend to send to bloomreach. We recommend also permitting 'Get' and 'Set' permission on 'New Properties' and 'New Events', do avoid problems when new tracking is added.
+
+You can configure this in the Access Management section of Project settings.
+
+
+You'll also need the following from your Bloomreach Engagement account:
 
 - **API Endpoint Host**: the base URL for your Bloomreach API instance (e.g., `api-engagement.bloomreach.com`)
 - **Project Token**: a unique identifier for your Bloomreach project

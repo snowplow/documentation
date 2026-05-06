@@ -23,7 +23,7 @@ You can configure this in the Access Management section of Project settings.
 
 You'll also need the following from your Bloomreach Engagement account:
 
-- **API Endpoint Host**: the base URL for your Bloomreach API instance (e.g., `api-engagement.bloomreach.com`)
+- **API Endpoint Host**: the base URL for your Bloomreach API instance (e.g., `api.exponea.com`)
 - **Project Token**: a unique identifier for your Bloomreach project
 - **API Key ID**: the identifier for your API key
 - **API Secret**: the secret associated with your API key. Save the secret in a secure location, as you can only view it once after creation.

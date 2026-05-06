@@ -6,16 +6,31 @@ description: "Generate unique fingerprints for events using hash functions to en
 keywords: ["event fingerprint", "deduplication", "event hashing"]
 ---
 
-This enrichment computes the fingerprint of an event using the query string parameters.
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Both the key and the value of all query string parameters are used to compute the fingerprint, except for the fields specified in `excludeParameters`.
+This enrichment computes the fingerprint of an event using the Snowplow tracker payload.
 
-This is helpful when de-duplicating events.
+Both the key and the value of all parameters in the payload are used to compute the fingerprint, except for the fields specified in `excludeParameters`. Check out the [atomic fields reference](/docs/fundamentals/canonical-event/index.md) and [example HTTP requests](/docs/events/http-requests/index.md) for more information on the relevant parameters.
+
+This can be helpful when de-duplicating events.
 
 ## Configuration
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-1)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/event_fingerprint_enrichment.json)
+<SchemaProperties
+  overview={{ enrichment: true }}
+  example={{
+    schema: "iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-1",
+    data: {
+      vendor: "com.snowplowanalytics.snowplow",
+      name: "event_fingerprint_config",
+      enabled: true,
+      parameters: {
+        excludeParameters: ["eid", "nuid", "stm", "cv"],
+        hashAlgorithm: "MD5"
+      }
+    }
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for configuration of an event fingerprinting enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "event_fingerprint_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "hashAlgorithm": { "enum": ["MD5", "SHA1", "SHA256", "SHA384", "SHA512"], "description": "The algorithm used to compute the event fingerprint" }, "excludeParameters": { "type": "array", "items": { "type": "string" }, "description": "Parameters to exclude from the fingerprint calculation" } }, "required": ["hashAlgorithm", "excludeParameters"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -23,7 +38,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-`hashAlgorithm` determines the algorithm that should be used to calculate the hash. Supported hashing algorithms are:
+Supported hashing algorithms are:
 
 - [MD5](https://en.wikipedia.org/wiki/MD5)
 - [SHA1](https://en.wikipedia.org/wiki/SHA-1)
@@ -31,26 +46,14 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 - [SHA384](https://en.wikipedia.org/wiki/SHA-2)
 - [SHA512](https://en.wikipedia.org/wiki/SHA-2)
 
-The example configuration below would use all the parameters to compute the hash **except** the event ID (`eid`) and the device sent timestamp (`stm`).
+We recommend excluding the sent timestamp `stm`. When the tracker doesn't receive an acknowledgement after sending an event once, it will retry. The two copies of the event will have different `stm`s, but they're the same event.
 
-```json
-    "parameters": {
-      "excludeParameters": [
-        "eid",
-        "stm"
-      ],
-      "hashAlgorithm": "MD5"
-    }
-```
-
-Removing `stm` can be a good idea because in the scenario where tracker doesn't receive an acknowledgement after sending an event once and retries, the two copies of the event will have different `stm`s, whereas they are the same event.
-
-Similarly, not much is gained by including the event ID in the hash given that this field is field is already used for de-duplication.
+Similarly, not much is gained by including the event ID, `eid`, in the hash given that this field is already used for de-duplication.
 
 ## Input
 
-Query string parameters.
+Query string parameters in the tracker request.
 
 ## Output
 
-This enrichment will populate the field `event_fingerprint` of the atomic event.
+This enrichment will populate the `event_fingerprint` atomic event field.

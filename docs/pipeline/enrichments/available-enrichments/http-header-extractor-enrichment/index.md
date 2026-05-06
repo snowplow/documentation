@@ -33,7 +33,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-All the headers that will match the regex defined in `headersPattern` parameter will be attached to the event.
+All the headers that will match the regular expression defined in `headersPattern` parameter will be attached to the event.
 
 In the example configuration, all the headers of the request would be attached to the event because of the `.*` regex pattern.
 

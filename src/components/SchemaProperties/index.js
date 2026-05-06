@@ -184,6 +184,27 @@ export default function SchemaProperties(props) {
                       This schema has no properties.
                     </p>
                   )}
+                  {hasParameters && (
+                    <>
+                      <p className="text-base mt-4 mb-2">
+                        The enrichment accepts these <code>parameters</code>:
+                      </p>
+                      <table className="w-full not-prose text-sm">
+                        <thead>
+                          <tr>
+                            <th>Parameter</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {renderParamRows(
+                            parametersSchema.properties,
+                            parametersSchema.required || []
+                          )}
+                        </tbody>
+                      </table>
+                    </>
+                  )}
                 </TabItem>
                 <TabItem value="json" label="JSON schema">
                   <CodeBlock language="json">
@@ -193,33 +214,6 @@ export default function SchemaProperties(props) {
               </Tabs>
             </div>
           </details>
-
-          {hasParameters && (
-            <details open>
-              <summary className="cursor-pointer text-base font-semibold">
-                Parameters
-              </summary>
-              <div className="mt-2">
-                <p className="text-base mb-2">
-                  The enrichment accepts these <code>parameters</code>:
-                </p>
-                <table className="w-full not-prose text-sm">
-                  <thead>
-                    <tr>
-                      <th>Parameter</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {renderParamRows(
-                      parametersSchema.properties,
-                      parametersSchema.required || []
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </details>
-          )}
 
           {props.overview?.event && (
             <details>

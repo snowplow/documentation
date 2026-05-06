@@ -16,7 +16,7 @@ Their internationally recognized list of spiders and bots is regularly maintaine
 
 ## How the enrichment works
 
-This enrichment performs several checks using the IAB database files and your custom override lists (both covered in the [configuration section](#configuration)).
+This enrichment performs several checks using the IAB database files and your custom override lists.
 
 Here is the logic it uses. The values in parentheses are for the `reason` field in the IAB [entity](/docs/fundamentals/entities/index.md) attached to the event.
 

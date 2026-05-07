@@ -299,7 +299,7 @@ The loader exposes runtime metrics and health information through several option
 | `monitoring.metrics.statsd.tags` | Optional. Map of key/value pairs sent along with each metric. |
 | `monitoring.metrics.statsd.period` | Optional. How often to report metrics. Default: `"1 minute"`. |
 | `monitoring.metrics.statsd.prefix` | Optional. Prefix for metric names. |
-| `monitoring.metrics.prometheus.tags` | Optional. Map of key/value pairs used as common labels on all Prometheus metrics. When set, a `/metrics` endpoint is exposed for scraping. |
+| `monitoring.metrics.prometheus.tags` | Optional. Map of key/value pairs used as common labels on all Prometheus metrics. The loader exposes these metrics at the `/metrics` endpoint on the health probe port (see `monitoring.healthProbe.port`). |
 | `monitoring.sentry.dsn` | Optional. Sentry DSN for reporting unexpected runtime exceptions. |
 | `monitoring.sentry.tags` | Optional. Map of key/value pairs included as tags on Sentry events. |
 | `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. |

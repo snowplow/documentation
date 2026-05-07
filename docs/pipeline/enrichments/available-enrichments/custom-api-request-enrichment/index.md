@@ -95,7 +95,6 @@ Specify an array of `inputs` to use as keys when performing your API lookup. E
 Key names can contain only alphanumeric symbols, hyphens, and underscores.
 
 For `json`, specify the field name as either `unstruct_event` for self-describing event fields, `contexts` for fields in entities added during tracking, or `derived_contexts` for fields in enrichment entities. Add two additional fields:
-
 - `schemaCriterion` is the self-describing JSON URI. You can specify all versions of the schema (`*-*-*`), or a specific MODEL version (e.g. `1-*-*`), MODEL plus MINOR (e.g. `1-1-*`) or a full MODEL-MINOR-PATCH version (e.g. `1-1-1`)
 - `jsonPath` is the [JSON Path statement](http://goessner.net/articles/JsonPath/) to navigate to the field inside the JSON that you want to use as the input.
 
@@ -132,6 +131,44 @@ Each entry in the `outputs` array needs two fields:
 The `outputs` array must have at least one entry in it.
 
 If the JSON path specified can't be found within the API's returned JSON, then the lookup and event will be flagged as a failure.
+
+### `cache`
+
+A Snowplow enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source. The `cache` configuration attempts to minimize the number of lookups performed.
+
+The cache is an LRU (least-recently used) cache, where less frequently accessed values are evicted to make space for new values. The `uri` with all keys populated is used as the key in the cache. Configure the `cache` as follows:
+
+- `size` is the maximum number of entries to hold in the cache at any one time. The minimum value is `1`.
+- `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your API can return different values for the same key over time.
+
+To disable `ttl` so keys can be stored in cache until the job is done, use value `0`.
+
+### `ignoreOnError`
+
+When set to `true`, if the API call fails, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
+
+When set to `false`, the event will become a [failed event](/docs/fundamentals/failed-events/index.md) if the API call fails.
+
+## Edge case handling
+
+This enrichment uses any third-party RESTful service to fetch data in JSON format. In most cases, we recommend using your own private server to maintain performance. Third-party services could cause slowdown of your enrichment process.
+
+This table describes what will happen under different conditions:
+
+| Scenario                                                                      | Outcome                                                                                                                     |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| A provided JSONPath is invalid.                                               | Failed event.                                                                                                               |
+| Any one of the input keys wasn't found.                                       | The HTTP request won't be sent, and no entities will be added. The event will otherwise be processed as usual - not failed. |
+| More than one entity in the event matches the `schemaCriterion`.              | The first matching entity found will be used.                                                                               |
+| Multiple inputs share the same key (don't do this).                           | The last input configured will be picked.                                                                                   |
+| An input JSONPath matches a non-primitive value.                              | The enrichment will try to stringify it, likely resulting in an invalid URL.                                                |
+| The output's JSONPath wasn't found.                                           | Failed event.                                                                                                               |
+| The response returned JSON which is not valid according to the output schema. | Failed event.                                                                                                               |
+| The server returned any non-successful response or timed-out.                 | Failed event.                                                                                                               |
+
+## Output
+
+This enrichment adds entities based on your configuration.
 
 Example API response:
 
@@ -171,41 +208,3 @@ The enrichment will add this entity to your event:
   }
 }
 ```
-
-### `cache`
-
-A Snowplow enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source. The `cache` configuration attempts to minimize the number of lookups performed.
-
-The cache is an LRU (least-recently used) cache, where less frequently accessed values are evicted to make space for new values. The `uri` with all keys populated is used as the key in the cache. Configure the `cache` as follows:
-
-- `size` is the maximum number of entries to hold in the cache at any one time. The minimum value is `1`.
-- `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your API can return different values for the same key over time.
-
-To disable `ttl` so keys can be stored in cache until the job is done, use value `0`.
-
-### `ignoreOnError`
-
-When set to `true`, if the API call fails, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
-
-When set to `false`, the event will become a [failed event](/docs/fundamentals/failed-events/index.md) if the API call fails.
-
-## Edge case handling
-
-This enrichment uses any third-party RESTful service to fetch data in JSON format. In most cases, we recommend using your own private server to maintain performance. Third-party services could cause slowdown of your enrichment process.
-
-This table describes what will happen under different conditions:
-
-| Scenario                                                                      | Outcome                                                                                                                     |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| A provided JSONPath is invalid.                                               | Failed event.                                                                                                               |
-| Any one of the input keys wasn't found.                                       | The HTTP request won't be sent, and no entities will be added. The event will otherwise be processed as usual - not failed. |
-| More than one entity in the event matches the `schemaCriterion`.              | The first matching entity found will be used.                                                                               |
-| Multiple inputs share the same key (don't do this).                           | The last input configured will be picked.                                                                                   |
-| An input JSONPath matches a non-primitive value.                              | The enrichment will try to stringify it, likely resulting in an invalid URL.                                                |
-| The output's JSONPath wasn't found.                                           | Failed event.                                                                                                               |
-| The response returned JSON which is not valid according to the output schema. | Failed event.                                                                                                               |
-| The server returned any non-successful response or timed-out.                 | Failed event.                                                                                                               |
-
-## Output
-
-This enrichment adds entities based on your configuration.

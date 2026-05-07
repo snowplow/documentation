@@ -5,10 +5,11 @@ sidebar_position: 20
 description: "Migration guide for upgrading the Snowplow Media Player dbt package including breaking changes and configuration updates."
 keywords: ["media player migration", "media player upgrade", "dbt media player version"]
 ---
+
 ### Upgrading to 1.0.0
 
 - Version 1.10.6 of `dbt-core` now required
-- for a full upgrade walkthrough, please follow [official dbt guide](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v1.10)
+- For a full upgrade walkthrough, please follow the [official dbt guide](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v1.10)
 - Generic test arguments must be nested under arguments:
 (see dbt’s guidance on the require_generic_test_arguments_property behavior change [here](
 https://docs.getdbt.com/reference/global-configs/behavior-changes#generic-test-arguments-property))

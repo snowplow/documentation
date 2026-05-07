@@ -121,7 +121,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>monitoring.metrics.prometheus.tags.*</code></td>
-    <td>Optional. A map of key/value pairs added as common labels on every Prometheus metric. The loader always exposes these metrics at <code>/metrics</code> on the health probe port.</td>
+    <td>Optional. A map of key/value pairs added as common labels on every Prometheus metric. The loader exposes these metrics at the <code>/metrics</code> endpoint on the health probe port.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>

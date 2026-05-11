@@ -45,7 +45,7 @@ import Link from '@docusaurus/Link';
     <td><code>decompression.maxBytesSinglePayload</code> (since 0.10.0)</td>
     <td>
       <p>Optional. Default value <code>10000000</code> (10 MB).</p>
-      <p>For zstd- or gzip-compressed source messages, this is the maximum size of a single payload after decompression. The loader emits a <Link to="/docs/fundamentals/failed-events/index.md">size violation failed event</Link> for any payload that exceeds this size.</p>
+      <p>For zstd- or gzip-compressed source messages, this is the maximum size of a single payload after decompression. The loader emits a <Link to="/docs/api-reference/failed-events/#size-violation">size violation failed event</Link> for any payload that exceeds this size.</p>
     </td>
 </tr>
 <tr>

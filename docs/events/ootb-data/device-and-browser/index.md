@@ -191,7 +191,9 @@ This table shows the support for the mobile entity across the main client-side S
 
 ### Client hints entity
 
-[Client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) are an alternative to user-agent strings for capturing browser and device information. You can configure the JavaScript tracker to automatically include a client hints entity with all tracked events.
+[Client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints) are an alternative to user agent strings for capturing browser and device information. You can configure the JavaScript tracker to automatically include a client hints entity with all tracked events.
+
+For other trackers, use the YAUAA enrichment to capture client hints information. See the [YAUAA user agent parsing](#yauaa-user-agent-parsing) section below for more details.
 
 | Tracker                                                                 | Supported | Since version | Auto-tracking |
 | ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
@@ -222,6 +224,8 @@ You can configure your pipeline to add these entities to tracked web events.
 
 The [YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) enables parsing the user agent string tracked in web events.
 It extract information about the user's device and browser.
+
+This enrichment can also use client hints headers.
 
 <SchemaProperties
   overview={{event: false}}
@@ -263,7 +267,7 @@ It extract information about the user's device and browser.
 
 ### Spiders and robots
 
-The [IAB Spiders and Robots enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) uses the IAB/ABC International Spiders and Bots List to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
+The [IAB Spiders and Robots enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) uses the IAB/ABC International Spiders and Bots List to determine whether an event was produced by a user or a robot or spider based on its IP address and user agent.
 
 <SchemaProperties
   overview={{event: false}}

@@ -8,7 +8,7 @@ keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The YAUAA (Yet Another User Agent Analyzer) enrichment is a user agent parser and analyzer. It uses the [YAUAA library](https://yauaa.basjes.nl/). This enrichment doesn't call any external APIs.
+The YAUAA (Yet Another User Agent Analyzer) enrichment is a user agent parser and analyzer. It uses the [YAUAA library](https://yauaa.basjes.nl/).
 
 :::note[Memory usage]
 YAUAA parsing relies on in-memory `HashMaps`, and requires approximately [120 MB of RAM](https://yauaa.basjes.nl/using/memoryusage/). Additional memory is also used for caching by default.
@@ -18,23 +18,41 @@ If memory usage is a concern, consider using the [UA parser enrichment](/docs/pi
 
 This enrichment adds an additional entity to the event.
 
-## Configure your website to send client hints TODO
+## Input
 
-The current trend in web browsers is to reduce the amount of information sent to servers in the `User-Agent` HTTP header, to help with user privacy. [Client Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) are a way for sites to opt in to sending the extra information which previously would have been part of the user agent header.
+This enrichment uses the following inputs:
+- The `User-Agent` HTTP header of the tracker request.
+- The `useragent` field from the [tracker payload](/docs/events/ootb-data/device-and-browser/index.md), if set. This field has priority over the `User-Agent` HTTP header.
+- [Client hint](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints) HTTP request headers.
 
-The YAUAA enrichment does not require you to make any changes to your website, if you are happy with the level of detail you get from the reduced user agent.  However, it is possible to improve the accuracy of the user agent data produced by YAUAA, if you are able to configure your website to send [high entropy client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) to the collector by following these instructions.
+The supported client hints headers are:
+- `Sec-CH-UA` (low entropy)
+- `Sec-CH-UA-Mobile` (low entropy)
+- `Sec-CH-UA-Platform` (low entropy)
+- `Sec-CH-UA-Full-Version-List`
+- `Sec-CH-UA-Full-Version` (deprecated)
+- `Sec-CH-UA-Arch`
+- `Sec-CH-UA-Bitness`
+- `Sec-CH-UA-Model`
+- `Sec-CH-UA-Platform-Version`
 
-There are two ways for your website to opt-in to sending client hints to the collector.  In the first method, you must configure your webserver to set both a [`Accept-CH` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) and a [`Permissions-Policy` HTTP header](https://www.w3.org/TR/permissions-policy-1/) when serving the your site's main HTML pages:
+## Configure high-entropy client hints
 
+Chromium browsers will include low-entropy client hint HTTP request headers by default.
+
+To include the more detailed high-entropy client hint headers, additional configuration is required: specifying the hints to include with `Permissions-Policy` and `Accept-CH`.
+
+Update the URLs to your Collector, and add this configuration to your server:
+
+```txt
+Accept-CH: sec-ch-ua-full-version-list, sec-ch-ua-platform-version, sec-ch-ua-arch, sec-ch-ua-bitness, sec-ch-ua-model
+Permissions-Policy: ch-ua-full-version-list=("https://<YOUR COLLECTOR>"), ch-ua-platform-version=("https://<YOUR COLLECTOR>"), ch-ua-arch=("https://<YOUR COLLECTOR>"), ch-ua-bitness=("https://<YOUR COLLECTOR>"), ch-ua-model=("https://<YOUR COLLECTOR>")
 ```
-Accept-CH: sec-ch-ua, sec-ch-ua-full-version-list, sec-ch-ua-full-version, sec-ch-ua-mobile, sec-ch-ua-platform, sec-ch-ua-platform-version, sec-ch-ua-arch, sec-ch-ua-bitness, sec-ch-ua-model, sec-ch-ua-wow64
-Permissions-Policy: ch-ua=("https://<YOUR COLLECTOR>"), ch-ua-full-version-list=("https://<YOUR COLLECTOR>"), ch-ua-full-version=("https://<YOUR COLLECTOR>"), ch-ua-mobile=("https://<YOUR COLLECTOR>"), ch-ua-platform=("https://<YOUR COLLECTOR>"), ch-ua-platform-version=("https://<YOUR COLLECTOR>"), ch-ua-arch=("https://<YOUR COLLECTOR>"), ch-ua-bitness=("https://<YOUR COLLECTOR>"), ch-ua-model=("https://<YOUR COLLECTOR>"), ch-ua-wow64=("https://<YOUR COLLECTOR>"),
-```
 
-Alternatively, in the second method, you can put a `meta` tag in the header secion of your site's HTML:
+Alternatively, add the following `meta` tag with `Delegate-CH` to the header section of your site's HTML, updating the URLs to your Collector:
 
-```
-<meta http-equiv="delegate-ch" content="sec-ch-ua https://<YOUR COLLECTOR>; sec-ch-ua-full-version-list https://<YOUR COLLECTOR>; sec-ch-ua-full-version https://<YOUR COLLECTOR>; sec-ch-ua-mobile https://<YOUR COLLECTOR>; sec-ch-ua-platform https://<YOUR COLLECTOR>; sec-ch-ua-platform-version https://<YOUR COLLECTOR>; sec-ch-ua-arch https://<YOUR COLLECTOR>; sec-ch-ua-bitness https://<YOUR COLLECTOR>; sec-ch-ua-model https://<YOUR COLLECTOR>; sec-ch-ua-wow64 https://<YOUR COLLECTOR>;">
+```html
+<meta http-equiv="Delegate-CH" content="sec-ch-ua-full-version-list https://<YOUR COLLECTOR>; sec-ch-ua-platform-version https://<YOUR COLLECTOR>; sec-ch-ua-arch https://<YOUR COLLECTOR>; sec-ch-ua-bitness https://<YOUR COLLECTOR>; sec-ch-ua-model https://<YOUR COLLECTOR>">
 ```
 
 ## Configuration
@@ -58,13 +76,6 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 ```
 
 The `cacheSize` property determines the number of already parsed user agents that are kept in memory for faster processing. By default, the cache size is 10000. Set `cacheSize` to 0 to disable caching.
-
-## Input
-
-This enrichment uses the following inputs:
-- The `User-Agent` HTTP header of the tracker request.
-- The `useragent` field from the [tracker payload](/docs/events/ootb-data/device-and-browser/index.md), if set. This field has priority over the `User-Agent` HTTP header.
-- Client hint HTTP headers.  These are [a set of standard headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) such as `Sec-CH-UA` which provide extra detail about the user agent. TODO
 
 ## Output
 

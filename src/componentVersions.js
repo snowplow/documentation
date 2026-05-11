@@ -25,16 +25,16 @@ export const versions = {
   enrich: '6.11.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.6',
-  snowbridge: '5.0.0',
+  snowbridge: '5.1.0',
 
   // Loaders
-  bqLoader: '2.1.0',
+  bqLoader: '2.2.0',
   bqLoader1x: '1.7.2',
   esLoader: '3.0.1',
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
   rdbLoader: '6.4.0',
-  s3Loader: '3.1.0',
+  s3Loader: '3.2.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.9.1',
   snowflakeStreamingLoader: '0.5.1',
@@ -42,15 +42,15 @@ export const versions = {
 
   // Data Modelling
   // dbt
-  dbtSnowplowAttribution: '0.6.0',
+  dbtSnowplowAttribution: '1.0.0',
   dbtSnowplowUnified: '1.0.0',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowMediaPlayer: '0.9.4',
+  dbtSnowplowMediaPlayer: '1.0.0',
   dbtSnowplowUtils: '1.0.0',
-  dbtSnowplowNormalize: '0.4.1',
+  dbtSnowplowNormalize: '1.0.0',
   dbtSnowplowFractribution: '0.3.6',
-  dbtSnowplowEcommerce: '0.9.3',
+  dbtSnowplowEcommerce: '1.0.0',
 
   // sql runner
   sqlRunner: '0.10.1',

@@ -63,7 +63,7 @@ The `cacheSize` property determines the number of already parsed user agents tha
 
 This enrichment uses the following inputs:
 - The `User-Agent` HTTP header of the tracker request.
-- The `useragent` field from the [tracker payload](/docs/fundamentals/canonical-event/index.md#device-and-operating-system-fields), if set. This field has priority over the `User-Agent` HTTP header.
+- The `useragent` field from the [tracker payload](/docs/events/ootb-data/device-and-browser/index.md), if set. This field has priority over the `User-Agent` HTTP header.
 - Client hint HTTP headers.  These are [a set of standard headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) such as `Sec-CH-UA` which provide extra detail about the user agent. TODO
 
 ## Output

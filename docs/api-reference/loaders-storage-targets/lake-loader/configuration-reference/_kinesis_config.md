@@ -47,6 +47,10 @@
     <td>Optional. Default value 10. Maximum number of retries for AWS SDK operations when reading from Kinesis.</td>
 </tr>
 <tr>
+    <td><code>input.apiCallAttemptTimeout</code> (since 0.10.0)</td>
+    <td>Optional. Default value <code>15 seconds</code>. Maximum amount of time to wait for an individual Kinesis API call to complete.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>

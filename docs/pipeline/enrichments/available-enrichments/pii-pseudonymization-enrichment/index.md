@@ -97,7 +97,7 @@ Specify `pojo` to hash atomic event fields. The available fields are:
 - `tr_orderid`
 - `ti_orderid`
 
-Providing a field not in this list will cause an error, and the event will become a failed event.
+Providing a field not in this list will cause a failed event.
 
 For `json`, specify the field name as either `unstruct_event` for self-describing event fields, `contexts` for fields in entities added during tracking, or `derived_contexts` for fields in enrichment entities. Add two additional fields:
 - `schemaCriterion` is the self-describing JSON URI. You can specify all versions of the schema (`*-*-*`), or a specific MODEL version (e.g. `1-*-*`), MODEL plus MINOR (e.g. `1-1-*`) or a full MODEL-MINOR-PATCH version (e.g. `1-1-1`)

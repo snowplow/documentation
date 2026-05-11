@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Client hints include information about the user, network, or device. They're an alternative or supplement to tracking the user agent. They're available in most [Chromium-based browsers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Accept-CH#browser_compatibility).
 
-This is useful data to capture as browsers are moving away from high entropy user agent strings. Client hints offer useful information to understand browser usage, without the potential to infringe on a users privacy as can be the case with the user agent string.
+This is useful data to capture as browsers are moving away from high entropy user agent strings. Client hints offer useful information to understand browser usage, without the potential to infringe on a user's privacy as can be the case with the user agent string.
 
 Use the client hints plugin to capture hints information from `navigator.userAgentData` in an entity.
 

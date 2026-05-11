@@ -12,7 +12,7 @@ This enrichment uses the [Snowplow referer-parser](https://github.com/snowplow/r
 
 This is particularly useful when looking for traffic from specific search engine providers or social networks.
 
-## Configuration example
+## Configuration
 
 <SchemaProperties
   overview={{ enrichment: true }}

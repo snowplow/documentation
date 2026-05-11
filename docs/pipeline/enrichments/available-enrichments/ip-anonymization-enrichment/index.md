@@ -8,7 +8,7 @@ keywords: ["IP anonymization", "GDPR compliance", "privacy protection"]
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance `13.54.45.87` could become `13.54.x.x`. The user IP is tracked in the `user_ipaddress` field of the atomic event
+This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance `13.54.45.87` could become `13.54.x.x`. The user IP is tracked in the `user_ipaddress` field of the atomic event.
 
 Both IPv4 and IPv6 are supported.
 

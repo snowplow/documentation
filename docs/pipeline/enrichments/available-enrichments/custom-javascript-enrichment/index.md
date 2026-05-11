@@ -315,7 +315,7 @@ To modify fields of an entity, you'll need to unpack them, make the modification
 
 You can also use this approach to delete tracker entities, by filtering them out from the array.
 
-For example, to deleted unwanted entities, and update a field called `myField` inside an entity:
+For example, to delete unwanted entities and update a field called `myField` inside an entity:
 
 ```js
 function process(event) {

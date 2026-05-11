@@ -20,7 +20,7 @@ The bot detection enrichment consolidates these indicators into a single [entity
 
 The enrichment uses "any positive = bot" logic. If any of the enabled sources flags the event as coming from a bot, the event is classified as a bot. A negative result from one source doesn't override a positive result from another. This is because none of the existing enrichments can produce a strong "not a bot" result.
 
-Each source contributes a indicator as follows:
+Each source contributes an indicator as follows:
 
 | Source                | Flagged as bot when                                                                                                                                                                                                     |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

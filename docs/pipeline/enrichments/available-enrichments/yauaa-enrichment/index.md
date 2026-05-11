@@ -42,7 +42,7 @@ Chromium browsers will include low-entropy client hint HTTP request headers by d
 
 To include the more detailed high-entropy client hint headers, additional configuration is required: specifying the hints to include with `Permissions-Policy` and `Accept-CH`.
 
-Update the URLs to your Collector, and add this configuration to your server:
+Update the URLs to your Collector, and add this configuration to your web server:
 
 ```txt
 Accept-CH: sec-ch-ua-full-version-list, sec-ch-ua-platform-version, sec-ch-ua-arch, sec-ch-ua-bitness, sec-ch-ua-model

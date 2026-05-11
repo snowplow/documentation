@@ -223,7 +223,7 @@ You can configure your pipeline to add these entities to tracked web events.
 ### YAUAA user agent parsing
 
 The [YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) enables parsing the user agent string tracked in web events.
-It extract information about the user's device and browser.
+It extracts information about the user's device and browser.
 
 This enrichment can also use client hints headers.
 

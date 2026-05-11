@@ -108,7 +108,7 @@ How you handle livestreams and playlists depends on whether you want to analyze 
 
 You don't need to send the media ping events, or any other tracked media events, to the data warehouse. The media APIs include a configuration option to filter out certain events, or to keep only specified events. Filtered events aren't sent to the Collector.
 
-To drop unwanted tracked events within the pipeline, use a [custom JavaScript enrichment](//docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events).
+To drop unwanted tracked events within the pipeline, use a [custom JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events).
 
 ### End a session
 

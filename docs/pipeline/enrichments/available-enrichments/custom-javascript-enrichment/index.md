@@ -44,7 +44,7 @@ You can only have _one_ JavaScript enrichment, and hence a single `process` func
 
 The JavaScript enrichment uses the standalone [Nashorn engine](https://github.com/openjdk/nashorn) with ES6 support.
 
-Not all ES6 features are guaranteed to work. If you are unsure whether a specific feature is available, test it in a [local environment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md) before deploying.
+Not all ES6 features are guaranteed to work. If you are unsure whether a specific feature is available, [test it in a local environment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md) before deploying.
 :::
 
 ## Configuration
@@ -313,7 +313,7 @@ function process(event) {
 
 To modify fields of an entity, you'll need to unpack them, make the modification, and then set the whole modified object using `setContexts`. You can only edit fields in tracker-set entities with this method.
 
-You can also use this approach to delete tracker-set entities, by filtering them out from the array.
+You can also use this approach to delete tracker entities, by filtering them out from the array.
 
 For example, to deleted unwanted entities, and update a field called `myField` inside an entity:
 
@@ -386,13 +386,13 @@ Your array of entities will be passed to `JSON.stringify()` before being attache
 
 To delete tracker-set entities, use the same approach as for editing them.
 
-To edit or delete entities added by enrichments, use `getDerived_contexts()` with `eraseDerived_contexts()`. The `eraseDerived_contexts()` method will delete all the enrichment-derived entities from the event. You can then return a modified array of entities to replace them:
+To edit or delete entities added by enrichments, use `getDerived_contexts()` with `eraseDerived_contexts()`. The `eraseDerived_contexts()` method will delete all the enrichment entities from the event. You can then return a modified array of entities to replace them:
 
 ```js
 function process(event) {
   const enrichmentEntities = JSON.parse(event.getDerived_contexts())
 
-  // delete the existing enrichment-derived entities array from the event
+  // delete the existing enrichment entities array from the event
   event.eraseDerived_contexts()
 
   // modify the entities
@@ -406,7 +406,7 @@ function process(event) {
   // remove entities with a specific schema
   const filtered = enrichmentEntities.data.filter(e => e.schema !== 'iglu:com.my-company/unwanted/jsonschema/1-0-0')
 
-  // returned the updated array of enrichment-derived entities
+  // returned the updated array of enrichment entities
   // this will replace the original one
   return filtered
 }

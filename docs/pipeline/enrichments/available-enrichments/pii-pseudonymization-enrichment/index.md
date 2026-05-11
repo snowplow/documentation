@@ -72,7 +72,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 ### `pii` fields
 
 The enrichment can act on most properties in the event:
-- A defined subset of [atomic event properties](/docs/fundamentals/canonical-event/index.md), including `user_id`
+- A defined subset of [atomic event properties](/docs/fundamentals/canonical-event/index.md), including `user_id`, see below
 - [Self-describing event](/docs/fundamentals/events/index.md#self-describing-events) fields
 - [Entities](/docs/fundamentals/entities/index.md) attached by tracker SDKs
 - Entities attached by other enrichments
@@ -97,7 +97,7 @@ Specify `pojo` to hash atomic event fields. The available fields are:
 - `tr_orderid`
 - `ti_orderid`
 
-Providing a field not in this list will cause an error, and the event will fail.
+Providing a field not in this list will cause an error, and the event will become a failed event.
 
 For `json`, specify the field name as either `unstruct_event` for self-describing event fields, `contexts` for fields in entities added during tracking, or `derived_contexts` for fields in enrichment entities. Add two additional fields:
 - `schemaCriterion` is the self-describing JSON URI. You can specify all versions of the schema (`*-*-*`), or a specific MODEL version (e.g. `1-*-*`), MODEL plus MINOR (e.g. `1-1-*`) or a full MODEL-MINOR-PATCH version (e.g. `1-1-1`)

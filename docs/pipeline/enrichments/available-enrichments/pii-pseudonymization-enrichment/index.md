@@ -14,7 +14,6 @@ It enables you to better protect the privacy rights of data subjects, therefore 
 
 In Europe the obligations regarding Personal Data handling have been outlined on the [GDPR EU website](https://www.gdpreu.org/the-regulation/key-concepts/personal-data/).
 
-It's **important** to keep these things in mind when using this enrichment:
 :::tip[Hashed values must match the schema]
 Hashing a field can change its format (e.g. email) and its length. This could make a whole valid original event invalid if its schema is not compatible with the hashing.
 :::

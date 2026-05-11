@@ -9,7 +9,7 @@ keywords: ["cookie extraction", "first-party cookies", "cookie enrichment"]
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
-This enrichment extracts name-value pairs from cookies set on the Collector domain, attaching them to the event as derived entities.
+This enrichment extracts name-value pairs from cookies set on the Collector domain, attaching them to the event as derived entities. It uses the `Cookie` HTTP header.
 
 When using a custom Collector domain, it's possible to capture values in first-party cookies set by other services such as ad servers or content management software (CMS). By capturing these cookie fields and attaching them to the event, you can use the data to better identify users of your website.
 
@@ -48,10 +48,6 @@ The example configuration captures the Collector's own `sp` cookie value. In pra
 To test first-party cookies, you'll need to run Micro locally and [configure a custom DNS resolution rule](/docs/testing/snowplow-micro/local/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
 
 </TestingWithMicro>
-
-## Input
-
-This enrichment uses the `Cookie` HTTP header.
 
 ## Output
 

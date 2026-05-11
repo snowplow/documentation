@@ -8,7 +8,7 @@ keywords: ["IP anonymization", "GDPR compliance", "privacy protection"]
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance `13.54.45.87` could become `13.54.x.x`.
+This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance `13.54.45.87` could become `13.54.x.x`. The user IP is tracked in the `user_ipaddress` field of the atomic event
 
 Both IPv4 and IPv6 are supported.
 
@@ -41,10 +41,6 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 The number of octets (IPv4) to anonymize is specified with `anonOctets` and the number of segments (IPv6) to anonymize is specified with `anonSegments`.
 
 For example, anonymizing one octet would change an IPv4 address of `255.255.255.255` to `255.255.255.x`, and anonymizing three octets would change it to `255.x.x.x`.
-
-## Input
-
-This enrichment uses the user IP, which can be found in the `user_ipaddress` field of the atomic event.
 
 ## Output
 

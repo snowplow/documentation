@@ -46,9 +46,9 @@ This enrichment extracts the `_sp` query string parameter from the `page_url` fi
 
 ## Output
 
-Enrich always populates the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields, where possible.
+Enrich always populates the `refr_domain_userid` and `refr_dvce_tstamp` event fields when possible, regardless of whether the cross-navigation enrichment is enabled.
 
-This enrichment adds a new derived `cross_navigation` entity to the enriched event.
+The enrichment adds a `cross_navigation` entity to the enriched event.
 
 <SchemaProperties
   overview={{ entity: true }}

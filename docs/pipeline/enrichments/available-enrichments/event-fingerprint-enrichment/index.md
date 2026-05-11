@@ -50,10 +50,6 @@ We recommend excluding the sent timestamp `stm`. When the tracker doesn't receiv
 
 Similarly, not much is gained by including the event ID, `eid`, in the hash given that this field is already used for de-duplication.
 
-## Input
-
-Query string parameters in the tracker request.
-
 ## Output
 
 This enrichment will populate the `event_fingerprint` atomic event field.

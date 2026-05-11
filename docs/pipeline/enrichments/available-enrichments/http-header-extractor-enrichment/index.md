@@ -43,10 +43,6 @@ If you're only interested in the host, for example, use:
       "headersPattern": "Host"
 ```
 
-## Input
-
-This enrichment uses the HTTP headers in the tracker request to the Collector.
-
 ## Output
 
 For **each** header matching the regex defined in `headersPattern`, an `http_header` entity is added to the enriched event. Each entity contains only one name/value pair.

@@ -12,9 +12,9 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 This enrichment is available since version 6.9.0 of Enrich.
 :::
 
-Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). In addition, the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for web can detect automated browsers client-side. Without this enrichment, you would need to check each source separately during data modeling to determine whether an event came from a bot.
+Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). In addition, the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for web can detect automated browsers client-side.
 
-The bot detection enrichment consolidates these indicators into a single [entity](/docs/fundamentals/entities/index.md). It reads the output of the contributing enrichments and the client-side bot detection plugin, and produces a `bot_detection` entity with a simple `bot` boolean and a list of which sources flagged the event. This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/index.md#filtering-out-bots).
+The bot detection enrichment consolidates these indicators into a single [entity](/docs/fundamentals/entities/index.md). This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/index.md#filtering-out-bots).
 
 ## How bot indicators are combined
 
@@ -22,18 +22,18 @@ The enrichment uses "any positive = bot" logic. If any of the enabled sources fl
 
 Each source contributes a indicator as follows:
 
-| Source                | Flagged as bot when                                                                                                                       |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| YAUAA                 | `deviceClass` is `"Robot"`, `"Robot Mobile"`, or `"Robot Imitator"`, or `agentClass` is `"Robot"` or `"Robot Mobile"` in the YAUAA entity |
-| IAB                   | `spiderOrRobot` is `true` in the IAB entity                                                                                               |
-| ASN lookup            | `likelyBot` is `true` in the ASN entity                                                                                                   |
-| Client-side detection | `bot` is `true` in the `client_side_bot_detection` entity                                                                                 |
+| Source                | Flagged as bot when                                                                                                                                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| YAUAA                 | `deviceClass` is `"Robot"`, `"Robot Mobile"`, or `"Robot Imitator"`, or `agentClass` is `"Robot"` or `"Robot Mobile"` in the [YAUAA entity](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) |
+| IAB                   | `spiderOrRobot` is `true` in the [IAB entity](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md)                                                                                                 |
+| ASN lookup            | `likelyBot` is `true` in the [ASN entity](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md)                                                                                              |
+| Client-side detection | `bot` is `true` in the [client-side bot detection entity](/docs/sources/web-trackers/tracking-events/bot-detection/index.md)                                                                                            |
 
-For example, if YAUAA detects a bot based on user agent but IAB does not, the event is still classified as a bot. Similarly, if the ASN lookup flags the event based on a known bad ASN, that result stands regardless of what YAUAA or IAB report.
+For example, if YAUAA detects a bot based on user agent but IAB doesn't, the event is still classified as a bot. Similarly, if the ASN lookup flags the event based on a known bad ASN, that result stands regardless of what YAUAA or IAB report.
 
 :::note[Missing sources]
 
-It's safe to enable all sources (`useYauaa`, `useIab`, `useAsnLookups`, `useClientSideDetection`) even if some of the underlying enrichments or plugins are not in use. If a contributing source is not enabled or its entity is not present, that source is silently skipped.
+It's safe to enable all sources - `useYauaa`, `useIab`, `useAsnLookups`, `useClientSideDetection` - even if some of the underlying enrichments or plugins aren't in use. If a contributing source isn't enabled or its entity isn't present, that source is silently skipped.
 
 :::
 
@@ -63,47 +63,16 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-The enrichment accepts three required boolean parameters and one optional parameter that control which sources are consulted:
-
-| Parameter                | Type    | Description                                                                                                                                                                               |
-| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `useYauaa`               | boolean | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot indicators.                                                     |
-| `useIab`                 | boolean | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot indicators.                                                         |
-| `useAsnLookups`          | boolean | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot indicators.                                           |
-| `useClientSideDetection` | boolean | Consult the `client_side_bot_detection` entity from the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md). Available since Enrich 6.10.0. |
-
+The `useClientSideDetection` parameter is available since Enrich 6.10.0.
 
 ## Output
 
-The enrichment produces a single entity that summarizes all bot indicators for the event.
+The enrichment produces a `bot_detection` entity that summarizes all bot indicators for the event. It adds this entity to all events, even when no bot is detected.
 
-When enabled, this enrichment always attaches a `bot_detection` entity (`iglu:com.snowplowanalytics.snowplow/bot_detection/jsonschema/1-0-1`) to every event, even when no bot is detected.
-
-| Field        | Type             | Description                                                                                                                                          |
-| ------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bot`        | boolean          | `true` if any enabled source flagged the event as a bot, `false` otherwise.                                                                          |
-| `indicators` | array of strings | Which sources flagged the event as a bot. Possible values: `"yauaa"`, `"iab"`, `"asnLookups"`, `"clientSideDetection"`. Empty when `bot` is `false`. |
-
-### Example: bot detected by multiple sources
-
-```json
-{
-    "schema": "iglu:com.snowplowanalytics.snowplow/bot_detection/jsonschema/1-0-1",
-    "data": {
-        "bot": true,
-        "indicators": ["yauaa", "clientSideDetection"]
-    }
-}
-```
-
-### Example: no bot detected
-
-```json
-{
-    "schema": "iglu:com.snowplowanalytics.snowplow/bot_detection/jsonschema/1-0-1",
-    "data": {
-        "bot": false,
-        "indicators": []
-    }
-}
-```
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    bot: true,
+    indicators: ["yauaa", "clientSideDetection"]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for bot detection context generated by the Bot Detection enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "bot_detection", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "bot": { "type": "boolean", "description": "Whether the event is classified as coming from a bot" }, "indicators": { "type": "array", "items": { "type": "string", "enum": ["yauaa", "iab", "asnLookups", "clientSideDetection"] }, "description": "List of sources that indicated bot activity" } }, "required": ["bot", "indicators"], "additionalProperties": false }} />

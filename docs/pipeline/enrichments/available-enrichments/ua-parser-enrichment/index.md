@@ -16,7 +16,7 @@ This enrichment uses the [ua-parser library](https://github.com/ua-parser/uap-c
 
 Choose this UA parser enrichment over the YAUAA enrichment if you're a [Self-Hosted](/docs/get-started/index.md#self-hosted) user and have memory constraints running Enrich. Alternatively, you may prefer the UA parser enrichment output.
 
-Both enrichments will add an additional entity to the event, based on the information available in the `User-Agent` header of the tracker request, or the `ua` [tracker payload field](/docs/fundamentals/canonical-event/index.md#device-and-operating-system-fields).
+Both enrichments will add an additional entity to the event, based on the information available in the `User-Agent` header of the tracker request, or the `ua` [tracker payload field](/docs/fundamentals/canonical-event/index.md#browser-fields).
 
 ## Configuration
 

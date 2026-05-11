@@ -14,7 +14,7 @@ This enrichment is available since version 6.9.0 of Enrich.
 
 Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). In addition, the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for web can detect automated browsers client-side.
 
-The bot detection enrichment consolidates these indicators into a single [entity](/docs/fundamentals/entities/index.md). This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/index.md#filtering-out-bots).
+The bot detection enrichment consolidates these indicators into a single [entity](/docs/fundamentals/entities/index.md). This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events).
 
 ## How bot indicators are combined
 

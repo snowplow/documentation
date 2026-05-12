@@ -93,4 +93,21 @@ where
 
 </TabItem>
 
+<TabItem value="synapse" label="Synapse Analytics">
+
+<CodeBlock language="sql">
+{`select
+  ${fieldName(props, 'synapse')}
+from
+  OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events
+where
+  events.collector_tstamp > dateadd(hour, -1, getdate())
+  and events.event = 'unstruct'
+  and events.event_name = '${props.name}'
+  and events.event_vendor = '${props.vendor}'
+`}
+</CodeBlock>
+
+</TabItem>
+
 </Tabs>

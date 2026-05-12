@@ -2,41 +2,40 @@
 
 This guide covers how to write and edit documentation in this repo. For how the site is built, see [`ARCHITECTURE.md`](ARCHITECTURE.md). For CI and deploys, see [`WORKFLOWS.md`](WORKFLOWS.md).
 
-- [Basic docs and tutorials](#basic-docs-and-tutorials)
+- [Docs and tutorials](#docs-and-tutorials)
 - [Style and tone](#style-and-tone)
-- [Common tasks](#common-tasks)
+- [Manage pages](#manage-pages)
   - [Edit an existing page](#edit-an-existing-page)
   - [Add a new page or section](#add-a-new-page-or-section)
-  - [Add a link to another page](#add-a-link-to-another-page)
   - [Move a page](#move-a-page)
   - [Delete a page](#delete-a-page)
+  - [Document a new version of a versioned component](#document-a-new-version-of-a-versioned-component)
+- [Write content](#write-content)
+  - [Add a link to another page](#add-a-link-to-another-page)
   - [Add an image or diagram](#add-an-image-or-diagram)
   - [Add Iglu schema details](#add-iglu-schema-details)
   - [Use admonitions for callouts](#use-admonitions-for-callouts)
   - [Use codeblocks](#use-codeblocks)
   - [Use tabs for platform-specific content](#use-tabs-for-platform-specific-content)
   - [Reuse content across pages](#reuse-content-across-pages)
+- [Sidebar and visibility](#sidebar-and-visibility)
   - [Mark a page as outdated, hidden, or noindex](#mark-a-page-as-outdated-hidden-or-noindex)
   - [Make a sidebar entry link to an external URL](#make-a-sidebar-entry-link-to-an-external-url)
   - [Reorder the sidebar](#reorder-the-sidebar)
-  - [Document a new version of a versioned component](#document-a-new-version-of-a-versioned-component)
-  - [Write a new tutorial](#write-a-new-tutorial)
-  - [Open a PR](#open-a-pr)
-- [Reference](#reference)
-  - [Frontmatter fields](#frontmatter-fields)
-  - [Sidebar mechanics](#sidebar-mechanics)
+- [Write a new tutorial](#write-a-new-tutorial)
+- [Submit changes](#submit-changes)
 - [Tooling](#tooling)
   - [Check spelling and grammar with Vale](#check-spelling-and-grammar-with-vale)
   - [Format with Prettier](#format-with-prettier)
 
-## Basic docs and tutorials
+## Docs and tutorials
 
 The repo has two separate content trees, rendered as two sections of the site:
 
 - **`/docs/`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `/docs`.
-- **`/tutorials/`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use a different content model (each one has a `meta.json` file), a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
+- **`/tutorials/`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
 
-Tasks below apply to `/docs` unless stated otherwise.
+Instructions below apply to `/docs` unless stated otherwise.
 
 ## Style and tone
 
@@ -44,11 +43,9 @@ Follow the Snowplow style guide, found at [`src/pages/style-guide/index.md`](src
 
 An LLM-targeted variant lives at [`src/pages/style-guide/llm/index.md`](src/pages/style-guide/llm/index.md). Repo-specific rules that apply on top of the style guide, including required frontmatter, heading rules, terminology, and file structure, are in [`CLAUDE.md`](CLAUDE.md).
 
-## Common tasks
+All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons. The sections below assume you're working in `/docs/`, unless otherwise specified. For `/tutorials/`, see [Write a new tutorial](#write-a-new-tutorial) below.
 
-These instructions assume you're working in `/docs/`, unless otherwise specified. For `/tutorials/`, see [Write a new tutorial](#write-a-new-tutorial) below.
-
-All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons.
+## Manage pages
 
 ### Edit an existing page
 
@@ -64,31 +61,18 @@ Add the required frontmatter at the top — see [Frontmatter fields](#frontmatte
 
 ```yaml
 ---
-title: "Configure how events are sent"
-sidebar_position: 10
-sidebar_label: "Send events"
-description: "One to two sentences for SEO."
-keywords: ["keyword1", "keyword2", "keyword3"]
-date: "2026-05-12"
+title: "Full page title"                       # Sentence case, ideally unique across the site
+sidebar_position: 10                           # Controls ordering
+sidebar_label: "Short title"                   # Sidebar text (optional, falls back to title)
+description: "One to two sentences for SEO."   # Used for SEO
+keywords: ["keyword1", "keyword2"]             # SEO keywords
+date: "2025-09-09"                             # Creation date (YYYY-MM-DD)
 ---
 ```
 
 `sidebar_position` controls where the page appears in the sidebar; lower numbers come first. `sidebar_label` is the short text shown in the sidebar.
 
 To add a child page, create a subfolder with its own `index.md`.
-
-### Add a link to another page
-
-Inside `/docs/`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
-
-```markdown
-[Send events](/docs/sources/trackers/setup/index.md)
-[Send events](/docs/sources/trackers/setup/index.md#section-anchor)
-```
-
-Use absolute paths from the docs root. Relative paths (`../setup/index.md`) are reserved for [versioned modules](#document-a-new-version-of-a-versioned-module).
-
-Inside `/tutorials/`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
 
 ### Move a page
 
@@ -110,6 +94,29 @@ Rules for using this script:
 If you're removing a page entirely, delete its folder and add a 301 redirect rule to `worker/redirects.js` pointing the old URL to the closest replacement page.
 
 If you want to keep the content reachable but hide it from the sidebar and search engines, set `sidebar_custom_props.hidden: true` in its `index.md` — see [Mark a page as outdated, hidden, or noindex](#mark-a-page-as-outdated-hidden-or-noindex).
+
+### Document a new version of a versioned component
+
+When updating documentation for a new version of a versioned component such as a tracker, loader, or dbt package, update the [`src/componentVersions.js`](src/componentVersions.js) file. This is the source of truth for the latest version of all Snowplow components, and is widely referenced across the docs.
+
+When a new major or minor version is released, add a migration guide within the docs section for that component.
+
+For significant changes, move the old content into a `previous-versions/` subfolder, add `sidebar_custom_props.outdated: true` to trigger the outdated-version admonition, and add the new content in its place.
+
+## Write content
+
+### Add a link to another page
+
+Inside `/docs/`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
+
+```markdown
+[Send events](/docs/sources/trackers/setup/index.md)
+[Send events](/docs/sources/trackers/setup/index.md#section-anchor)
+```
+
+Use absolute paths from the docs root. Relative paths (`../setup/index.md`) are reserved for [versioned modules](#document-a-new-version-of-a-versioned-component).
+
+Inside `/tutorials/`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
 
 ### Add an image or diagram
 
@@ -232,6 +239,8 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
+## Sidebar and visibility
+
 ### Mark a page as outdated, hidden, or noindex
 
 These flags live in `sidebar_custom_props` in the `index.md` frontmatter, and apply to all descendant pages:
@@ -268,21 +277,15 @@ href: https://snowplow.github.io/snowplow-java-tracker
 
 ### Reorder the sidebar
 
-Adjust `sidebar_position` on the relevant `index.md` files. Positions within `/docs/` can be any number. The `/tutorials/` renderer expects sequential integers.
+The `/docs/` navigation sidebar is generated from the folder structure of `/docs`, then transformed by `sidebars.js` to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags. See [`ARCHITECTURE.md`](ARCHITECTURE.md#sidebar) for the full details.
+
+Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `/docs/` can be any number. The `/tutorials/` renderer expects sequential integers.
 
 To rename a sidebar entry without changing the page title, set `sidebar_label`.
 
 To add visual breathing room above an entry, set `sidebar_custom_props.space_above: true`. To add a header above a group of entries, set `sidebar_custom_props.header: "Header Name"` on the first entry of the group.
 
-### Document a new version of a versioned component
-
-When updating documentation for a new version of a versioned component such as a tracker, loader, or dbt package, update the [`src/componentVersions.js`](src/componentVersions.js) file. This is the source of truth for the latest version of all Snowplow components, and is widely referenced across the docs.
-
-When a new major or minor version is released, add a migration guide within the docs section for that component.
-
-For significant changes, move the old content into a `previous-versions/` subfolder, add `sidebar_custom_props.outdated: true` to trigger the outdated-version admonition, and add the new content in its place.
-
-### Write a new tutorial
+## Write a new tutorial
 
 Tutorials live in `/tutorials/`, not `/docs/`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.
 
@@ -291,14 +294,14 @@ The examples serve as templates for structure and formatting. Copy one of the wo
 - [`tutorial-requirements/example-tutorial/`](tutorial-requirements/example-tutorial) — a complete tutorial structure.
 - [`tutorial-requirements/example-accelerator/`](tutorial-requirements/example-accelerator) — a complete accelerator structure.
 
-Key differences from `/docs`:
+Key differences from `/docs/` pages:
 
 - The tutorials sidebar is rendered by custom React components in `src/components/tutorials/` - see [`ARCHITECTURE.md`](ARCHITECTURE.md#tutorials) for details
 - Internal links within `/tutorials/` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules
 - The `sidebar_custom_props` frontmatter flags don't apply
 - Downloadable Jupyter notebooks accompanying tutorials live as static assets in `static/notebooks/`, not as rendered pages
 
-### Open a PR
+## Submit changes
 
 Before opening a PR, run `yarn build` locally. This runs the full production build, and catches any errors or broken internal links or anchors before they get to CI.
 
@@ -307,29 +310,6 @@ Also consider running:
 - Vale, via the VS Code extension or the CLI
 
 CI runs frontmatter validation and a Claude-based style review on every PR. See [`WORKFLOWS.md`](WORKFLOWS.md).
-
-## Reference
-
-### Frontmatter fields
-
-Required on every `/docs/` page:
-
-```yaml
----
-title: "Full page title"                       # Sentence case, ideally unique across the site
-sidebar_position: 10                           # Controls ordering
-sidebar_label: "Short title"                   # Sidebar text (optional, falls back to title)
-description: "One to two sentences for SEO."   # Used for SEO
-keywords: ["keyword1", "keyword2"]             # SEO keywords
-date: "2025-09-09"                             # Creation date (YYYY-MM-DD)
----
-```
-
-### Sidebar mechanics
-
-The `/docs/` sidebar is generated from the folder structure of `/docs`, then transformed by `sidebars.js` to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
-
-See [`ARCHITECTURE.md`](ARCHITECTURE.md#sidebar) for the full details.
 
 ## Tooling
 

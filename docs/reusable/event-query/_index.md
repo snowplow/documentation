@@ -11,8 +11,6 @@ export function fieldName(props, wh) {
         props.name +
         '_' +
         (
-          wh == 'bigquery' ?
-          props.version.replaceAll('-', '_') :
           props.version.split('-')[0]
         )
     );
@@ -74,7 +72,7 @@ where
 
 </TabItem>
 
-<TabItem value="redshift" label="Redshift & Postgres">
+<TabItem value="redshift" label="Redshift">
 
 <CodeBlock language="sql">
 {`select

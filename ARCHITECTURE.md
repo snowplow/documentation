@@ -11,6 +11,7 @@ An overview of how the docs site is built. For writing guidelines see [`CONTRIBU
 - [Cookies and tracking](#cookies-and-tracking)
   - [Tracking scripts](#tracking-scripts)
 - [Styling and CSS](#styling-and-css)
+  - [Tailwind and Infima](#tailwind-and-infima)
 - [Mermaid](#mermaid)
 - [Tutorials](#tutorials)
 - [LLM support](#llm-support)
@@ -108,13 +109,17 @@ The repo has multiple tracking implementations. Each tracking script manages its
 
 ## Styling and CSS
 
-Custom CSS lives in `src/css/custom.css`. The file is imported in `docusaurus.config.js` and applies globally.
-
-Tailwind runs with `important: true` and `preflight: false` in `tailwind.config.js`, so it can override Docusaurus's built-in [Infima](https://infima.dev) without resetting it.
-
-**Practical consequence**: CSS output might not render as expected, or might differ between local and production environments. If you see unexpected styling, it's likely a Tailwind vs Infima issue.
+Most custom CSS lives in `src/css/custom.css`. The file is imported in `docusaurus.config.js` and applies globally. Some components also have their own CSS modules, e.g. `src/theme/DocItem/Layout/styles.module.css`.
 
 Code blocks use custom Prism syntax highlighting themes: `src/theme/PrismThemes/snowplow-light.js` and `src/theme/PrismThemes/snowplow-dark.js`.
+
+### Tailwind and Infima
+
+Docusaurus uses [Infima](https://infima.dev) as its native CSS framework. This provides basic styling and layout, and is used by the default Docusaurus components. This repo also uses [Tailwind CSS](https://tailwindcss.com/) for custom styles and components.
+
+Tailwind runs with `important: true` and `preflight: false` in `tailwind.config.js`, so it can override Infima without resetting it.
+
+**Practical consequence**: CSS output might not render as expected, or might differ between local and production environments. If you see unexpected styling, it's likely a Tailwind vs Infima issue.
 
 ## Mermaid
 

@@ -1,337 +1,150 @@
 # Architecture
 
-How the documentation site is built. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.md); for CI and deploys see [`WORKFLOWS.md`](WORKFLOWS.md).
+An overview of how the docs site is built. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.md); for CI and deploys see [`WORKFLOWS.md`](WORKFLOWS.md).
 
 - [Overview](#overview)
-- [Navigation sidebar](#navigation-sidebar)
-  - [1. Filesystem to default sidebar](#1-filesystem-to-default-sidebar)
-  - [2. `swapDocItemsToLinkItems` — frontmatter wiring](#2-swapdocitemstolinkitems--frontmatter-wiring)
-  - [3. `wrapInSections` — custom section headers and hoisting](#3-wrapinsections--custom-section-headers-and-hoisting)
+- [Gotchas](#gotchas)
+- [Cloudflare Worker](#cloudflare-worker)
 - [Custom plugins](#custom-plugins)
-  - [`docusaurus-plugin-llms-txt`](#docusaurus-plugin-llms-txt)
-  - [`docusaurus-plugin-snowplow-schema`](#docusaurus-plugin-snowplow-schema)
-- [Swizzled theme components](#swizzled-theme-components)
-- [`src/pages` and `static/`](#srcpages-and-static)
-- [`componentVersions.js`](#componentversionsjs)
-- [Tailwind and Infima](#tailwind-and-infima)
-- [CSS](#css)
-- [Images](#images)
+  - [LLMs.txt and Markdown generation](#llmstxt-and-markdown-generation)
+  - [JSON-LD schema](#json-ld-schema)
+- [Cookies and tracking](#cookies-and-tracking)
+  - [Tracking scripts](#tracking-scripts)
+- [Styling and CSS](#styling-and-css)
 - [Mermaid](#mermaid)
 - [Tutorials](#tutorials)
-- [Special frontmatter and sidebar custom props](#special-frontmatter-and-sidebar-custom-props)
-- [Third-party scripts](#third-party-scripts)
-- [Event-sending component](#event-sending-component)
-- [Cookie consent](#cookie-consent)
-- [Cloudflare Worker, redirects, and server-side tracking](#cloudflare-worker-redirects-and-server-side-tracking)
-- [LLM-friendly features](#llm-friendly-features)
+- [LLM support](#llm-support)
+- [Product Fruits feedback widget](#product-fruits-feedback-widget)
+- [Snowplow event-sending component](#snowplow-event-sending-component)
 
 ## Overview
 
-This is a Docusaurus project, deployed on Cloudflare Pages. The main configuration file is `docusaurus.config.ts`.
+This is a Docusaurus project, deployed on Cloudflare Pages. The Docusaurus configuration is in `docusaurus.config.js`. Search is provided by [Algolia DocSearch](https://docsearch.algolia.com).
 
-All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons.
+Pages are MDX under the hood, but mostly carry `.md` extensions for Docusaurus legacy reasons.
 
-Search is provided by [Algolia DocSearch](https://docsearch.algolia.com/).
+Key architectural files and folders:
 
-Key architectural sections or files:
+| Path                       | Contents                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| `docs/`                    | Main documentation, rendered at `/docs/*`                                             |
+| `tutorials/`               | Tutorial pages, rendered at `/tutorials/*` via a [second plugin instance](#tutorials) |
+| `src/components/`          | Custom React components used inside MDX                                               |
+| `src/theme/`               | Swizzled Docusaurus theme components                                                  |
+| `src/pages/`               | Custom routes outside docs/tutorials (homepage, style guide, license pages)           |
+| `plugins/`                 | [Custom local Docusaurus plugins](#custom-plugins)                                    |
+| `static/`                  | Files served at the site root (fonts, images, downloadable notebooks)                 |
+| `worker/`                  | [Cloudflare Worker source](#cloudflare-worker): redirects + server-side tracking      |
+| `utils/`                   | Scripts for refreshing dbt reference data                                             |
+| `sidebars.js`              | [Sidebar transformation logic](#navigation-sidebar)                                   |
+| `src/componentVersions.js` | [Source of truth for component version strings](#componentversionsjs)                 |
 
-| Path                       | Contents                                                                               |
-| -------------------------- | -------------------------------------------------------------------------------------- |
-| `docs/`                    | All documentation pages, rendered at `/docs/*`                                         |
-| `tutorials/`               | Tutorial pages, rendered at `/tutorials/*` via a separate plugin instance              |
-| `src/components/`          | Custom React components used inside MDX pages                                          |
-| `src/theme/`               | Swizzled Docusaurus theme components                                                   |
-| `src/pages/`               | Custom routes outside the docs/tutorials trees including style guide and license pages |
-| `plugins/`                 | Custom local Docusaurus plugins                                                        |
-| `static/`                  | Files served at the site root including fonts and site images                          |
-| `worker/`                  | Cloudflare Worker source: forced/fallback redirects and server-side page-view tracking |
-| `utils/`                   | Scripts for managing dbt documentation                                                 |
-| `sidebars.js`              | Sidebar transformation logic; see [Sidebar](#sidebar)                                  |
-| `src/componentVersions.js` | Single source of truth for component version strings shown in pages                    |
+## Gotchas
 
-## Navigation sidebar
+Non-obvious things that could cause trouble if you don't know about them:
 
-The sidebar is autogenerated from the `docs/` filesystem and then transformed by `sidebars.js`. There are three layers worth understanding.
+- **`static/_redirects` is dead.** Legacy Netlify file kept for reference only. Live redirects are in [`worker/redirects.js`](#cloudflare-worker). The `yarn build:cf` script deletes the auto-generated `build/_redirects` so nothing leaks.
+- **`yarn build` is the only link checker.** `yarn start` doesn't catch broken internal links or missing anchors. The build is configured with `onBrokenLinks: 'throw'` + `onBrokenAnchors: 'throw'`.
+- **`componentVersions.js` has no JS imports.** It's referenced from MDX pages only — grep `versions.` to find usage.
+- **Tailwind and Infima coexist deliberately but unevenly.** See [Styling and CSS](#styling-and-css).
+- **The sidebar doesn't match the folder tree.** `sidebars.js` reshapes the autogenerated tree before render: it groups top-level folders into named sections (`sidebar_custom_props.header`), hoists two sections' children up a level (Signals, Components), and swaps `type: link` docs for external-link items.
+- **Tutorials are a separate plugin instance** and don't share docs conventions — different sidebar, different link rules. See [Tutorials](#tutorials).
+- **The Cloudflare Worker tracks page-view events server-side** to track LLM crawlers.
 
-### 1. Filesystem to default sidebar
+## Cloudflare Worker
 
-Docusaurus generates a sidebar that mirrors the folder structure of `docs/`. Each folder becomes a collapsible category, ordered by `sidebar_position`, labelled by `sidebar_label`.
+`worker/index.js` runs on every request and does three things:
 
-### 2. `swapDocItemsToLinkItems` — frontmatter wiring
+1. **Server-side Snowplow tracking**.
+2. **Forced redirects** via `findForcedRedirect(pathname)`, checked before asset fetch, returns 301 on match.
+3. **Fallback redirects** via `findFallbackRedirect(pathname)`, checked only after a 404.
 
-`sidebars.js` exports a single transformation function that runs over the generated sidebar. It does three things:
-
-- **Pulls descriptions from `index.md` frontmatter** onto their parent category's `customProps.description`, so the auto-generated index card on each category page shows the folder's own description. This is a workaround for a Docusaurus feature gap.
-- **Swaps external-link docs** (`type: link` + `href` in frontmatter) for sidebar link items that go directly to the external URL, and force-sets `noindex: true` on the underlying doc so it does not get indexed by search engines.
-- **Translates `sidebar_custom_props` flags into CSS classes**: `hidden: true` adds the `hidden` class (display: none in the sidebar); `space_above: true` adds the `space-above` class (extra top margin). These are used to fine-tune the visual sidebar without changing the file tree.
-
-### 3. `wrapInSections` — custom section headers and hoisting
-
-After step 2, `wrapInSections` walks the flat top-level list and groups items into collapsible **section headers**. This is what gives the sidebar its top-level structure of named sections instead of one long flat list of folders.
-
-The trigger is `sidebar_custom_props.header: "Section name"` on a folder's `index.md`. When that runs:
-
-- A new collapsible section is opened with the given name.
-- The item itself, plus every subsequent item up to the next `header:`, is placed inside that section.
-- The section is rendered as a styled "section-header" category (CSS class `section-header`).
-
-Two special-case sections — **Signals** and **Components** — also **hoist their children**. This is the `CHILD_UNWRAP_SECTIONS` set at the top of `sidebars.js`. For these two, the folder's children are pulled up into the section directly, instead of being nested one level deeper inside the folder. The folder's `index.md` page becomes the first entry of the section, and its children sit alongside it rather than under it. Hoisted children get the `section-child` class.
-
-**`Components` is also marked collapsed by default** via `COLLAPSED_BY_DEFAULT_SECTIONS`.
-
-To add a new top-level section header, add `sidebar_custom_props.header: "Name"` to the appropriate folder's `index.md`. To make a section hoist its children or start collapsed, add it to the corresponding set in `sidebars.js`.
-
-**Files:** `sidebars.js`, `docs/signals/index.md` (Signals header, hoisted), `docs/api-reference/index.md` (Components header, hoisted and collapsed), `docs/event-studio/index.md` (`space_above`), `docs/sources/first-party-tracking/index.md` (`hidden`).
+Both redirect tiers are defined in `worker/redirects.js`. `move.sh` appends to it automatically.
 
 ## Custom plugins
 
-Both live under `plugins/`.
+Live under `plugins/`.
 
-### `docusaurus-plugin-llms-txt`
+### LLMs.txt and Markdown generation
 
-Generates LLM-friendly artefacts in the `postBuild` lifecycle:
+This [plugin](plugins/docusaurus-plugin-llms-txt/src/index.js) generates LLM artefacts during build:
+- A `.md` file for each page
+- An `llms.txt` index containing the page title, description, and link to the markdown version
+- A concatenated `llms-full.txt`
 
-- One `.md` file per docs page at the same URL with a `.md` suffix, derived by running the rendered HTML through a rehype pipeline that strips chrome (heading anchors, admonitions, tab UI, code labels, navigation, images, badges, details) and converts the remaining content back to Markdown. Tabs are flattened into sequential `###` sections so all tab content is preserved.
-- `llms.txt` — an index file listing every page with its title and description, following the [llms.txt convention](https://llmstxt.org).
-- `llms_full.txt` — a single concatenated dump of every page's rendered Markdown.
+The `llms.txt` index includes files in both `/docs` and `/tutorials`. It excludes pages with `type: link` and routes in the `excludeRoutes` array. Files marked as `sidebar_custom_props.legacy` or similar are indexed, but are suffixed with `[previous version]`.
 
-Pages with `frontMatter.type: link` and routes matched by `excludeRoutes` (the homepage, tutorials root, Signals docs, API reference) are skipped. dbt schema pages are enriched with version metadata.
+The `llms-full.txt` file concatenates all the per-page markdown files, except for the `[previous version]` pages.
 
-The per-page `.md` files are what the **Download** and **Copy Markdown** buttons fetch — see [Swizzled theme components](#swizzled-theme-components).
+The plugin includes scripts for converting different types of content or components into Markdown.
 
-**Files:** `plugins/docusaurus-plugin-llms-txt/`.
+### JSON-LD schema
 
-### `docusaurus-plugin-snowplow-schema`
+This [plugin](plugins/docusaurus-plugin-snowplow-schema/README.md) adds structured [JSON-LD schema](https://schema.org/) metadata to the `<head>` of each page. This metadata helps with SEO and AIO/GEO/LLM consumption.
 
-Loads MDX frontmatter for every page during the load phase, normalizes slugs and any custom slugs, and special-cases `type: link` pages. It also provides default SEO keywords used when a page lacks its own.
+The schema itself is generated by the [`SchemaPlugin` component](src/components/SchemaPlugin/index.tsx). All pages have type `TechArticle`.
 
-**Files:** `plugins/docusaurus-plugin-snowplow-schema/`.
+The plugin uses the title, description, and keywords from the page frontmatter. There's a CI workflow to enforce these fields for this reason.
 
-## Swizzled theme components
+## Cookies and tracking
 
-Customizations to the default Docusaurus theme. Grouped by purpose.
+The site uses [`cookie-though`](https://github.com/Cookie-Though/cookie-though) for consent management. It's initialized in `cookieConsent.js`.
 
-**Custom rendering on docs pages:**
+User preferences are stored in a cookie keyed by `COOKIE_PREF_KEY`, with per-policy flags (`analytics:0` / `analytics:1`).
 
-- `DocItem/Layout/index.tsx` — the main document layout. Adds the **Download** and **Copy Markdown** buttons under the breadcrumbs (`MarkdownActions` component, lines 25–86), and wraps tutorial pages in an MUI `Paper`. Also injects the JSON-LD `<HeadJSONLD>` component for schema markup.
-- `MDXContent/index.js` — wraps every MDX page. Reads breadcrumb `customProps` and frontmatter to (a) inject a "you are reading an outdated version" admonition when an ancestor folder is marked `outdated`, (b) render an external-link stub for `type: link` pages, and (c) add `<meta name="robots" content="noindex, follow">` for pages marked `legacy`, `outdated`, `hidden`, or `noindex`. See [Special frontmatter and sidebar custom props](#special-frontmatter-and-sidebar-custom-props).
-- `MDXComponents.js` — overrides default MDX element mappings.
-- `MDXPage/`, `DocPage/Layout/Main/`, `DocRoot/Layout/Main/`, `DocItem/Content/` — layout tweaks.
+The user-facing preferences page is `src/pages/cookie-preferences.mdx`, linked to from the site footer.
 
-**Sidebar and navigation:**
+### Tracking scripts
 
-- `DocSidebarItem/Category` — styling for sidebar categories, including the `section-header`, `section-child`, `space-above`, and `hidden` classes set by `sidebars.js`.
-- `DocBreadcrumbs/Items/Home` — custom home icon.
-- `PaginatorNavLink`, `DocItem/Paginator` — next/previous link styling.
-- `DocCardList` — styling for the auto-generated cards on category landing pages.
-- `Navbar/MobileSidebar/`, custom navbar item types (`custom-docsTutorialsTabsDesktop` and `custom-docsTutorialsTabsMobile`) — render the Docs/Tutorials tab switcher in the navbar.
-- `TOCCollapsible` — collapsible table of contents.
+The repo has multiple tracking implementations. Each tracking script manages its own consent behavior independently.
 
-**Branding and theming:**
+| Script             | Purpose                                                         | Default behavior       | Consent opt-in                                                              | Consent opt-out                                                                                |
+| ------------------ | --------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `snowplow.js`      | Snowplow browser tracker                                        | Anonymous tracking     | Calls `disableAnonymousTracking()`, sets cookies, and fires a new page view | Removes `_sp5_*` and `sp` cookies and reloads (`_sp_biz1_*` cookies aren't removed on opt-out) |
+| `google.js`        | Google Analytics / Google tag                                   | No scripts loaded      | Starts tracking, sets cookies                                               | Removes `_ga`, `_gid`, and `_gat_*` cookies and reloads                                        |
+| `reoTracking.js`   | [Reo.dev](https://reo.dev) tracker                              | Loaded unconditionally | N/A                                                                         | N/A                                                                                            |
+| `src/qualified.js` | [Qualified](https://www.qualified.com) chat/conversion tracking | Loaded unconditionally | N/A                                                                         | N/A                                                                                            |
+| `worker/index.js`  | Page view tracking for `.md` and `llms.txt` requests            | Anonymous tracking     | N/A                                                                         | N/A                                                                                            |
 
-- `Root.js` — wraps the app with MUI's `CssVarsProvider`, integrates ProductFruits using IDs read from the Snowplow `_sp_biz1_id` cookie.
-- `ColorModeToggle/` — dark/light mode toggle.
-- `Icon/Home/` — home icon.
-- `PrismThemes/snowplow-light.js`, `PrismThemes/snowplow-dark.js` — code block syntax themes.
-- `CodeBlock/Layout/`, `CodeBlock/Buttons/`, `CodeBlock/Container/`, `CodeBlock/Content/` — work with the GitHub codeblock theme.
+## Styling and CSS
 
-**Other:**
+Custom CSS lives in `src/css/custom.css`. The file is imported in `docusaurus.config.js` and applies globally.
 
-- `SearchBar/` — Algolia search customization.
-- `Mermaid/` — Mermaid diagram wrapper.
+Tailwind runs with `important: true` and `preflight: false` in `tailwind.config.js`, so it can override Docusaurus's built-in [Infima](https://infima.dev) without resetting it.
 
-**Files:** `src/theme/`.
+**Practical consequence**: CSS output might not render as expected, or might differ between local and production environments. If you see unexpected styling, it's likely a Tailwind vs Infima issue.
 
-## `src/pages` and `static/`
-
-Two ways to ship content that isn't a docs or tutorials page.
-
-**`src/pages/`** holds custom routes. Files become routes at their path: `src/pages/style-guide/index.md` → `/style-guide`. Contents:
-
-- `index.js` — the homepage
-- `style-guide/index.md` — the human-readable style guide
-- `style-guide/llm/index.md` — an LLM-targeted style guide (see [LLM-friendly features](#llm-friendly-features))
-- `cookie-preferences.mdx` — the user-facing cookie preferences page
-- `tutorials.tsx` — the tutorials index/router
-- License and policy pages (terms and conditions, licensing variants, lifecycle policy, shared responsibility model, deployment notification policy, restrictive access models)
-
-**`static/`** is served at the root, untouched. Contents:
-
-- `_redirects` — legacy Netlify-format file, not used at runtime (kept for reference)
-- `fonts/` — Inter VariableFont TTFs
-- `img/` — site logos, favicons, screenshots used outside docs pages
-- `js/sandboxed-sp.js` — the iframe-loaded tracker for the [event-sending component](#event-sending-component)
-- `notebooks/` — downloadable Jupyter notebooks linked from tutorial pages
-- `assets/`, `robots.txt`, `.nojekyll`
-
-## `componentVersions.js`
-
-A single object exporting the current version string of every Snowplow component (around 70 entries across trackers, pipeline components, loaders, dbt packages, SQL runner variants, analytics SDKs, Iglu components, and testing tools).
-
-The file is **not** imported into JavaScript anywhere — it is referenced from MDX pages to render the current version inline (and inside tables, with a particular render pattern; see the [versioned modules section in CONTRIBUTING.md](CONTRIBUTING.md#versioned-modules) for examples). When a new bugfix version ships, update this file and every page that renders the version updates with no further changes.
-
-There is also `src/dbtVersions.js`, auto-generated weekly by the `update-dbt-docs.yml` workflow — see [`WORKFLOWS.md`](WORKFLOWS.md).
-
-**Files:** `src/componentVersions.js`.
-
-## Tailwind and Infima
-
-The site uses both Tailwind and Docusaurus's built-in [Infima](https://infima.dev) framework, which can produce CSS output that looks contradictory unless you know what's been configured.
-
-In `tailwind.config.js`:
-
-- **`important: true`** — every Tailwind utility is emitted with `!important`. This is so Tailwind utilities reliably win against Infima's defaults.
-- **`corePlugins.preflight: false`** — Tailwind's CSS reset is disabled, so Infima's base styles remain in effect. Without this, Tailwind would reset elements that Infima styles, breaking the default look of Docusaurus components.
-- **Dark mode** is keyed on `[data-theme="dark"]` (the attribute Docusaurus toggles) rather than the default `class: 'dark'`.
-- The theme extends a set of HSL design tokens (`--primary`, `--secondary`, `--accent`, `--destructive`, etc.) defined in `src/css/custom.css` in the shadcn convention.
-
-**Consequence:** when something looks wrong, check both layers. An Infima class can be overridden by a Tailwind utility (because of `!important`), but Tailwind utilities cannot reset the base element styles Infima sets (because preflight is off). Custom CSS in `src/css/custom.css` can target either layer.
-
-**Files:** `tailwind.config.js`, `postcss.config.js`, `src/css/custom.css`.
-
-## CSS
-
-- `src/css/custom.css` — global stylesheet. Imports Tailwind's `base`, `components`, and `utilities`; declares design-token CSS variables for light and dark themes; declares custom keyframe animations; loads Inter VariableFont. The Docusaurus-generated comment "You can override the default Infima variables here" sits above the Snowplow palette overrides.
-- `src/pages/index.module.css` — homepage-specific styles.
-- `src/theme/PrismThemes/snowplow-light.js`, `snowplow-dark.js` — code block syntax themes (these are JS objects, not CSS).
-- Component-level CSS modules live next to their components.
-
-## Images
-
-Three patterns are in active use.
-
-**Relative path (default):**
-
-```markdown
-![Alt text](./images/diagram.png)
-```
-
-The image lives in an `images/` folder next to the markdown file. This is the default and what should be used in most cases.
-
-**`@site` absolute alias:**
-
-```markdown
-![Alt text](@site/docs/fundamentals/images/architecture.png)
-```
-
-`@site` resolves to the repo root. Use this when referencing an image from a different docs folder so you don't have to use long `../../../` relative paths.
-
-**`require()` for forced light background:**
-
-```jsx
-<div style={{"background-color": '#F2F4F7'}}>
-  <img src={require("./images/diagram.png").default}/>
-</div>
-```
-
-Use this for legacy diagrams that can't be regenerated and don't render against a dark background. The wrapping `<div>` applies a light background even in dark mode.
-
-**Themed images** (separate light and dark versions) use Docusaurus's [`ThemedImage`](https://docusaurus.io/docs/next/markdown-features/assets#themed-images) component.
+Code blocks use custom Prism syntax highlighting themes: `src/theme/PrismThemes/snowplow-light.js` and `src/theme/PrismThemes/snowplow-dark.js`.
 
 ## Mermaid
 
-Mermaid diagrams are rendered by `@docusaurus/theme-mermaid` (enabled via `markdown.mermaid: true` in the Docusaurus config).
+The Mermaid theme [component](src/theme/Mermaid/index.js) renders diagrams as SVG. It's been swizzled to add the source Mermaid code in the DOM, alongside the rendered SVG, for ingestion by LLMs.
 
-A small client module, `src/js/mermaidEnlarge.js`, runs on every page and adds **click-to-enlarge** behavior to all `.mermaid` elements. On viewports under 768px wide it converts the diagram SVG to a base64 data URL and opens it in a new tab, since pinch-to-zoom is more reliable than the in-page enlarge UI on mobile. A MutationObserver re-runs the wiring whenever new diagrams are added to the DOM.
-
-The `docusaurus-plugin-llms-txt` plugin preserves Mermaid blocks as fenced code in its generated Markdown so LLMs receive the source rather than a rendered SVG.
-
-**Files:** `src/js/mermaidEnlarge.js`, `docusaurus.config.ts`.
+There's also a module `src/js/mermaidEnlarge.js` that adds click-to-enlarge functionality on mobile, since small SVGs can be hard to read.
 
 ## Tutorials
 
-Tutorials are served at `/tutorials/*` via a **second `@docusaurus/plugin-content-docs` instance** configured separately from the main docs. The tutorials plugin has no `sidebarPath`, so the tutorial navigation is custom (not the file-tree-derived sidebar).
+Served at `/tutorials/*` via a **second `@docusaurus/plugin-content-docs` instance** configured separately.
 
-The tutorials surface is built from React components in `src/components/tutorials/`:
+The plugin has no `sidebarPath`, so navigation is custom and not file-tree-derived. The tutorials use the components in [`src/components/tutorials/`](src/components/tutorials).
 
-- `TutorialList/` — the filterable tutorial index
-- `TutorialGrid.tsx`, `TutorialCard.tsx` — card layouts
-- `Steps.tsx` — renders the step-by-step structure within a tutorial
-- `TutorialTabs.tsx` — the in-page tab navigation between tutorial chapters
-- `TutorialProgressTracker.tsx`, `TutorialProgressTrackerMobile.tsx` — progress UI
-- `TutorialSearch.tsx`, `hooks.ts`, `utils.ts`, `models.tsx` — supporting code
+Internal link conventions inside `/tutorials/` differ from `/docs/` — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable notebooks live as static assets in `static/notebooks/`.
 
-The navbar carries the **Docs ↔ Tutorials** tab switcher via two custom navbar item types: `custom-docsTutorialsTabsDesktop` and `custom-docsTutorialsTabsMobile`. These are registered as swizzled `Navbar/Item` types.
+## LLM support
 
-Tutorial pages themselves are Markdown files in `/tutorials/`. **Internal link conventions differ from `/docs/`** — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable Jupyter notebooks linked from tutorials live as static assets under `static/notebooks/`, not as rendered pages.
+As well as the [custom `llms.txt` and JSON-LD schema plugins](#custom-plugins), the docs have additional features designed to make them easier for LLMs to parse and understand:
+- `CLAUDE.md` instructions
+- LLM-targeted style guide at `src/pages/style-guide/llm/index.md`.
+- Download or Copy Markdown buttons on every docs page, implemented in `src/theme/DocItem/Layout/index.tsx`. Note that these buttons don't provide the correct output when running locally.
 
-**Files:** `docusaurus.config.ts` (plugin entry), `src/components/tutorials/`, `tutorials/`.
+## Product Fruits feedback widget
 
-## Special frontmatter and sidebar custom props
+The site uses [Product Fruits](https://productfruits.com/) for in-product feedback collection. It reads user/session IDs from the Snowplow `_sp_biz1_id` cookie to link feedback to analytics data.
 
-Several frontmatter and `sidebar_custom_props` fields trigger non-default behavior. The fanning-out of where each is handled is worth a single overview.
+The `ProductFruits` widget is initialized in `src/theme/Root.js` using the production Product Fruits workspace code.
 
-| Field                                    | Where it lives            | What it does                                                                                                                                                                                                                                                       |
-| ---------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type: link` + `href: <url>`             | Page frontmatter          | `MDXContent` replaces the body with a stub linking to `href`. `sidebars.js` swaps the sidebar entry for an external-link item. The llms-txt plugin skips the page. The snowplow-schema plugin special-cases it. `noindex` is auto-applied via mutated frontmatter. |
-| `sidebar_custom_props.outdated: true`    | Folder `index.md`         | `MDXContent` injects an "outdated version" admonition on every descendant page, linking back to the latest version. Applies `noindex`.                                                                                                                             |
-| `sidebar_custom_props.legacy: true`      | Folder `index.md`         | Same `noindex` effect as `outdated`, without the admonition. Use for retired content kept for inbound links.                                                                                                                                                       |
-| `sidebar_custom_props.hidden: true`      | Folder `index.md`         | Adds the `hidden` CSS class to the sidebar entry (display: none in the sidebar). Also applies `noindex`.                                                                                                                                                           |
-| `sidebar_custom_props.noindex: true`     | Page or folder `index.md` | Adds `<meta name="robots" content="noindex, follow">`.                                                                                                                                                                                                             |
-| `sidebar_custom_props.space_above: true` | Folder `index.md`         | Adds the `space-above` CSS class to the sidebar entry.                                                                                                                                                                                                             |
-| `sidebar_custom_props.header: "Name"`    | Folder `index.md`         | Starts a new collapsible top-level sidebar section called "Name". See [Sidebar](#sidebar).                                                                                                                                                                         |
+## Snowplow event-sending component
 
-**Files:** `src/theme/MDXContent/index.js`, `sidebars.js`.
+The **Get Started > Tracking** page `docs/get-started/tracking/index.md` includes a "send test events" widget that allows users to send pre-defined test events to their Snowplow pipeline, directly from the docs.
 
-## Third-party scripts
-
-The site loads several third-party trackers, plus its own. All of them are conditional on cookie consent (see [Cookie consent](#cookie-consent)).
-
-Client modules registered in `docusaurus.config.ts`:
-
-- **`snowplow.js`** — the Snowplow browser tracker. Loads `@snowplow/browser-tracker` plus plugins for link clicks, button clicks, forms, media, and bot detection. Configures two trackers: `sp1` for docs analytics (app ID `docs2` or `test`) and `biz1` for the business pipeline. Cross-domain linking is enabled for snowplowanalytics.com. The cookie name is `_sp_biz1_`. A custom `selected_tabs` context is attached for tab-selection tracking.
-- **`google.js`** — Google Analytics / Google tag.
-- **`reoTracking.js`** — [Reo.dev](https://reo.dev) tracker.
-- **`src/qualified.js`** — [Qualified](https://www.qualified.com) chat/conversion script.
-- **`cookieConsent.js`** — see [Cookie consent](#cookie-consent).
-- **`src/js/mermaidEnlarge.js`** — see [Mermaid](#mermaid).
-
-Additionally:
-
-- **ProductFruits** is initialized inside `src/theme/Root.js` (workspace code `x2zOSE4yyzB6ULQ8`). User and session IDs are extracted from the Snowplow `_sp_biz1_id` cookie and passed to ProductFruits so in-product feedback widgets carry consistent IDs.
-- **Server-side Snowplow tracking** runs in the Cloudflare Worker — see [Cloudflare Worker](#cloudflare-worker-redirects-and-server-side-tracking).
-
-## Event-sending component
-
-The "send a test event" UI on the Get Started → Tracking page is in `src/components/FirstSteps/index.tsx`.
-
-It renders a form for a custom collector URL and app ID (persisted in localStorage). When the user submits, a sandboxed `<iframe>` (`SnowplowSandbox`) loads `static/js/sandboxed-sp.js`, which inlines a Snowplow tracker initialized with the user's collector and app ID, and calls `trackSelfDescribingEvent` with a sample event. The sandboxed approach means the test event uses the user's tracker config, not the site's, without polluting the parent page.
-
-Supporting code:
-
-- `sampleTrackingCode.ts` — the sample event payload and tracking code snippet shown to users
-- `utils.ts` — validation for collector URL and app ID
-
-**Files:** `src/components/FirstSteps/`, `static/js/sandboxed-sp.js`.
-
-## Cookie consent
-
-`cookieConsent.js` (root) uses the [`cookie-though`](https://github.com/Cookie-Though/cookie-though) library to render the consent banner and gate the third-party trackers. The banner is initialized before any tracker module runs. The `onPreferencesChanged` hook responds to changes by toggling Snowplow and Google initialization and clearing all `_sp_*` cookies when the user opts out.
-
-The user-facing preferences page lives at `src/pages/cookie-preferences.mdx` and is reachable from the footer.
-
-**Files:** `cookieConsent.js`, `src/pages/cookie-preferences.mdx`.
-
-## Cloudflare Worker, redirects, and server-side tracking
-
-The site runs behind a Cloudflare Worker (`worker/index.js`) that does three things on every request:
-
-1. **Server-side page-view tracking.** For requests likely to be page views (no extension, or `.md`, or `llms.txt`), the worker fires a Snowplow page-view event to `com-snowplowanalytics-biz1.collector.snplow.net` with `aid: 'docs-cloudflare'` and the `sp-anonymous` header set. This catches traffic the browser tracker doesn't see, including LLM crawlers fetching `.md` and `llms.txt` files. Tracking runs in `ctx.waitUntil`, so it doesn't block the response.
-2. **Forced redirects.** Before serving an asset, the worker checks `findForcedRedirect(pathname)` against the rules in `worker/redirects.js`. A match returns a 301 immediately, skipping the asset fetch.
-3. **Fallback redirects.** If the asset fetch returns 404, the worker checks `findFallbackRedirect(pathname)`. This is the catch-net for old URLs that don't match any current page.
-
-`worker/redirects.js` is a long array of rules; `move.sh` appends to it automatically when moving pages. Add new redirects either by running `move.sh` or by editing `worker/redirects.js` directly.
-
-`static/_redirects` is a legacy Netlify-format file. It is **not** used at runtime. The `yarn build:cf` script (used by Cloudflare Pages) explicitly removes the auto-generated `build/_redirects` so nothing from `static/_redirects` accidentally ships.
-
-**Files:** `worker/index.js`, `worker/redirects.js`, `move.sh`, `package.json` (`build:cf` script).
-
-## LLM-friendly features
-
-Three pieces work together to make the docs accessible to LLMs:
-
-- **`llms.txt` and `llms_full.txt`** generated by `docusaurus-plugin-llms-txt` at build time. See [Custom plugins](#custom-plugins).
-- **Per-page Markdown files** — every docs page is also served at `<url>.md` with chrome stripped. The same plugin generates these.
-- **Download and Copy Markdown buttons** on every docs page, rendered by `MarkdownActions` in `src/theme/DocItem/Layout/index.tsx` (lines 25–86). **Download** triggers a download of `<page-url>.md`; **Copy Markdown** fetches that same URL and writes the body to the clipboard.
-- **LLM-targeted style guide** at `src/pages/style-guide/llm/index.md`, served at `/style-guide/llm`. This is a separate, more terse style guide intended for LLMs writing or editing docs against this repo.
-- **Server-side tracking of LLM access** — the Cloudflare Worker tracks fetches of `.md` and `llms.txt` files so we can see how often LLMs are pulling the docs. See [Cloudflare Worker](#cloudflare-worker-redirects-and-server-side-tracking).
+This is implemented in `src/components/FirstSteps/index.tsx`. It uses a sandboxed Snowplow tracker from `static/js/sandboxed-sp.js` to keep test events isolated from the site's own tracking.

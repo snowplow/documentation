@@ -9,7 +9,6 @@ sidebar_position: 30
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
-import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
 
 export const datagridProps = {
     hideFooter: true

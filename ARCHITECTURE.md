@@ -37,12 +37,12 @@ Key architectural files and folders:
 | `static/`                  | Files served at the site root (fonts, images, downloadable notebooks)                 |
 | `worker/`                  | [Cloudflare Worker source](#cloudflare-worker): redirects + server-side tracking      |
 | `utils/`                   | Scripts for refreshing dbt reference data                                             |
-| `sidebars.js`              | [Sidebar transformation logic](#navigation-sidebar)                                   |
-| `src/componentVersions.js` | [Source of truth for component version strings](#componentversionsjs)                 |
+| `sidebars.js`              | Sidebar transformation logic                                                          |
+| `src/componentVersions.js` | Source of truth for component version strings                                         |
 
 ## Gotchas
 
-Non-obvious things that could cause trouble if you don't know about them:
+Non-obvious things that could cause confusion if you don't know about them:
 
 - **`static/_redirects` is dead.** Legacy Netlify file kept for reference only. Live redirects are in [`worker/redirects.js`](#cloudflare-worker). The `yarn build:cf` script deletes the auto-generated `build/_redirects` so nothing leaks.
 - **`yarn build` is the only link checker.** `yarn start` doesn't catch broken internal links or missing anchors. The build is configured with `onBrokenLinks: 'throw'` + `onBrokenAnchors: 'throw'`.

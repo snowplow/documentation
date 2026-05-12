@@ -57,7 +57,7 @@ For example, the page at `https://docs.snowplow.io/docs/destinations/` is built 
 
 Create a new folder under `/docs/`, then add an `index.md` inside it. Standalone `.md` files are not used (except for legacy pages) — every page should have its own `<folder>/index.md`. File and folder names are kebab-case.
 
-Add the required frontmatter at the top — see [Frontmatter fields](#frontmatter-fields) for the full list. The minimum:
+Add the required frontmatter at the top — see [`CLAUDE.md`](CLAUDE.md) for the full required-fields list. The minimum:
 
 ```yaml
 ---
@@ -277,7 +277,7 @@ href: https://snowplow.github.io/snowplow-java-tracker
 
 ### Reorder the sidebar
 
-The `/docs/` navigation sidebar is generated from the folder structure of `/docs`, then transformed by `sidebars.js` to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags. See [`ARCHITECTURE.md`](ARCHITECTURE.md#sidebar) for the full details.
+The `/docs/` navigation sidebar is generated from the folder structure of `/docs`, then transformed by [`sidebars.js`](sidebars.js) to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
 
 Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `/docs/` can be any number. The `/tutorials/` renderer expects sequential integers.
 

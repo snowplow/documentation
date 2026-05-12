@@ -19,9 +19,9 @@ yarn build
 
 ## Learn about this repo
 
-- **Writing or editing content**: [`CONTRIBUTING.md`](CONTRIBUTING.md). Covers style, sidebars, links, frontmatter, images, formatting, and moving pages.
+- **Contribute content**: [`CONTRIBUTING.md`](CONTRIBUTING.md). Covers style, sidebars, links, frontmatter, images, formatting, and moving pages.
 - **How the site is built**: [`ARCHITECTURE.md`](ARCHITECTURE.md). Covers Docusaurus configuration, the sidebar transformation logic, custom plugins, swizzled components, Tailwind and Infima, third-party scripts, the Cloudflare Worker, and LLM-friendly features.
-- **CI, deploys, and repo scripts**: [`WORKFLOWS.md`](WORKFLOWS.md). Covers GitHub Actions, the Cloudflare Pages build, and the dbt reference automation.
+- **Build and CI**: [`WORKFLOWS.md`](WORKFLOWS.md). Covers GitHub Actions, the Cloudflare Pages build, and the dbt reference automation.
 - **Writing rules for AI assistants**: [`CLAUDE.md`](CLAUDE.md). Required frontmatter, terminology, file structure, and style.
 - **Style guide**: [`src/pages/style-guide/index.md`](src/pages/style-guide/index.md), served at [`docs.snowplow.io/style-guide`](https://docs.snowplow.io/style-guide). An LLM-targeted variant lives at [`src/pages/style-guide/llm/index.md`](src/pages/style-guide/llm/index.md).
 

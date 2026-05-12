@@ -161,6 +161,34 @@ export default function SchemaProperties(props) {
               </div>
             </details>
           )}
+
+          {props.overview && props.overview.event === false && (
+            <details open>
+              <summary className="cursor-pointer text-base font-semibold">
+                Warehouse column name
+              </summary>
+              <div className="mt-2 text-base">
+                <p>
+                  In most warehouses:{' '}
+                  <code>
+                    {'contexts_' +
+                      props.schema.self.vendor.replaceAll('.', '_') +
+                      '_' +
+                      props.schema.self.name +
+                      '_' +
+                      props.schema.self.version.split('-')[0]}
+                  </code>
+                </p>
+                <p>
+                  See the{' '}
+                  <a href="/docs/destinations/warehouses-lakes/querying-data/">
+                    querying overview
+                  </a>{' '}
+                  for Redshift and older BigQuery Loader versions.
+                </p>
+              </div>
+            </details>
+          )}
         </div>
       </div>
     </div>

@@ -2,11 +2,14 @@
 
 How the documentation site is built. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.md); for CI and deploys see [`WORKFLOWS.md`](WORKFLOWS.md).
 
-- [Stack](#stack)
-- [Repo layout](#repo-layout)
-- [Docusaurus configuration](#docusaurus-configuration)
-- [Sidebar](#sidebar)
+- [Overview](#overview)
+- [Navigation sidebar](#navigation-sidebar)
+  - [1. Filesystem to default sidebar](#1-filesystem-to-default-sidebar)
+  - [2. `swapDocItemsToLinkItems` — frontmatter wiring](#2-swapdocitemstolinkitems--frontmatter-wiring)
+  - [3. `wrapInSections` — custom section headers and hoisting](#3-wrapinsections--custom-section-headers-and-hoisting)
 - [Custom plugins](#custom-plugins)
+  - [`docusaurus-plugin-llms-txt`](#docusaurus-plugin-llms-txt)
+  - [`docusaurus-plugin-snowplow-schema`](#docusaurus-plugin-snowplow-schema)
 - [Swizzled theme components](#swizzled-theme-components)
 - [`src/pages` and `static/`](#srcpages-and-static)
 - [`componentVersions.js`](#componentversionsjs)
@@ -22,46 +25,31 @@ How the documentation site is built. For writing guidelines see [`CONTRIBUTING.m
 - [Cloudflare Worker, redirects, and server-side tracking](#cloudflare-worker-redirects-and-server-side-tracking)
 - [LLM-friendly features](#llm-friendly-features)
 
-## Stack
+## Overview
 
-[Docusaurus](https://docusaurus.io) v3.10 with the classic preset, deployed on Cloudflare Pages. The site was previously deployed on Netlify; the redirect file format (`static/_redirects`) is a holdover from that period but is no longer used at runtime — see [Cloudflare Worker](#cloudflare-worker-redirects-and-server-side-tracking).
+This is a Docusaurus project, deployed on Cloudflare Pages. The main configuration file is `docusaurus.config.ts`.
 
-The build runs with the Docusaurus `v4` future flag, the SWC JS loader, and the Rspack bundler for faster builds. Math is rendered with `remark-math` and `rehype-katex`.
+All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons.
 
-**Files:** `docusaurus.config.ts`, `package.json`.
+Search is provided by [Algolia DocSearch](https://docsearch.algolia.com/).
 
-## Repo layout
+Key architectural sections or files:
 
-| Path | Contents |
-|---|---|
-| `docs/` | All documentation pages, rendered at `/docs/*` |
-| `tutorials/` | Tutorial pages, rendered at `/tutorials/*` via a second docs plugin instance |
-| `src/components/` | Custom React components used inside MDX pages |
-| `src/theme/` | Swizzled Docusaurus theme components |
-| `src/pages/` | Custom routes outside the docs/tutorials trees (homepage, style guide, license pages) |
-| `src/plugins/` | (empty) |
-| `plugins/` | Custom local Docusaurus plugins |
-| `static/` | Files served at the site root (fonts, images, `_redirects` legacy, downloadable notebooks, sandboxed-tracker iframe script) |
-| `worker/` | Cloudflare Worker source: forced/fallback redirects and server-side page-view tracking |
-| `utils/` | Scripts for generating reference data (e.g. dbt package versions) |
-| `sidebars.js` | Sidebar transformation logic — see [Sidebar](#sidebar) |
-| `src/componentVersions.js` | Single source of truth for component version strings shown in pages |
+| Path                       | Contents                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| `docs/`                    | All documentation pages, rendered at `/docs/*`                                         |
+| `tutorials/`               | Tutorial pages, rendered at `/tutorials/*` via a separate plugin instance              |
+| `src/components/`          | Custom React components used inside MDX pages                                          |
+| `src/theme/`               | Swizzled Docusaurus theme components                                                   |
+| `src/pages/`               | Custom routes outside the docs/tutorials trees including style guide and license pages |
+| `plugins/`                 | Custom local Docusaurus plugins                                                        |
+| `static/`                  | Files served at the site root including fonts and site images                          |
+| `worker/`                  | Cloudflare Worker source: forced/fallback redirects and server-side page-view tracking |
+| `utils/`                   | Scripts for managing dbt documentation                                                 |
+| `sidebars.js`              | Sidebar transformation logic; see [Sidebar](#sidebar)                                  |
+| `src/componentVersions.js` | Single source of truth for component version strings shown in pages                    |
 
-## Docusaurus configuration
-
-`docusaurus.config.ts` is the main wiring point. Notable settings:
-
-- **Presets**: only `@docusaurus/preset-classic`. KaTeX CSS is added via `stylesheets`.
-- **Themes**: `@docusaurus/theme-mermaid`, `docusaurus-theme-github-codeblock`.
-- **Plugins**: a second `@docusaurus/plugin-content-docs` instance for tutorials, plus two custom plugins (see [Custom plugins](#custom-plugins)).
-- **`onBrokenLinks`** and **`onBrokenAnchors`** are both `'throw'`. The production build fails on any broken internal link or missing anchor; `yarn build` is the link checker.
-- **`trailingSlash: true`**.
-- **Algolia search** is configured via DocSearch.
-- **Mermaid**: enabled via `markdown.mermaid: true`.
-- **Client modules**: `cookieConsent.js`, `snowplow.js`, `reoTracking.js`, `google.js`, `src/js/mermaidEnlarge.js`, `src/qualified.js` — these run on every page. See [Third-party scripts](#third-party-scripts).
-- **Prism**: extra languages registered for syntax highlighting (Scala, Kotlin, Swift, R, Lua, etc.); custom light and dark themes live in `src/theme/PrismThemes/`.
-
-## Sidebar
+## Navigation sidebar
 
 The sidebar is autogenerated from the `docs/` filesystem and then transformed by `sidebars.js`. There are three layers worth understanding.
 
@@ -273,15 +261,15 @@ Tutorial pages themselves are Markdown files in `/tutorials/`. **Internal link c
 
 Several frontmatter and `sidebar_custom_props` fields trigger non-default behavior. The fanning-out of where each is handled is worth a single overview.
 
-| Field | Where it lives | What it does |
-|---|---|---|
-| `type: link` + `href: <url>` | Page frontmatter | `MDXContent` replaces the body with a stub linking to `href`. `sidebars.js` swaps the sidebar entry for an external-link item. The llms-txt plugin skips the page. The snowplow-schema plugin special-cases it. `noindex` is auto-applied via mutated frontmatter. |
-| `sidebar_custom_props.outdated: true` | Folder `index.md` | `MDXContent` injects an "outdated version" admonition on every descendant page, linking back to the latest version. Applies `noindex`. |
-| `sidebar_custom_props.legacy: true` | Folder `index.md` | Same `noindex` effect as `outdated`, without the admonition. Use for retired content kept for inbound links. |
-| `sidebar_custom_props.hidden: true` | Folder `index.md` | Adds the `hidden` CSS class to the sidebar entry (display: none in the sidebar). Also applies `noindex`. |
-| `sidebar_custom_props.noindex: true` | Page or folder `index.md` | Adds `<meta name="robots" content="noindex, follow">`. |
-| `sidebar_custom_props.space_above: true` | Folder `index.md` | Adds the `space-above` CSS class to the sidebar entry. |
-| `sidebar_custom_props.header: "Name"` | Folder `index.md` | Starts a new collapsible top-level sidebar section called "Name". See [Sidebar](#sidebar). |
+| Field                                    | Where it lives            | What it does                                                                                                                                                                                                                                                       |
+| ---------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type: link` + `href: <url>`             | Page frontmatter          | `MDXContent` replaces the body with a stub linking to `href`. `sidebars.js` swaps the sidebar entry for an external-link item. The llms-txt plugin skips the page. The snowplow-schema plugin special-cases it. `noindex` is auto-applied via mutated frontmatter. |
+| `sidebar_custom_props.outdated: true`    | Folder `index.md`         | `MDXContent` injects an "outdated version" admonition on every descendant page, linking back to the latest version. Applies `noindex`.                                                                                                                             |
+| `sidebar_custom_props.legacy: true`      | Folder `index.md`         | Same `noindex` effect as `outdated`, without the admonition. Use for retired content kept for inbound links.                                                                                                                                                       |
+| `sidebar_custom_props.hidden: true`      | Folder `index.md`         | Adds the `hidden` CSS class to the sidebar entry (display: none in the sidebar). Also applies `noindex`.                                                                                                                                                           |
+| `sidebar_custom_props.noindex: true`     | Page or folder `index.md` | Adds `<meta name="robots" content="noindex, follow">`.                                                                                                                                                                                                             |
+| `sidebar_custom_props.space_above: true` | Folder `index.md`         | Adds the `space-above` CSS class to the sidebar entry.                                                                                                                                                                                                             |
+| `sidebar_custom_props.header: "Name"`    | Folder `index.md`         | Starts a new collapsible top-level sidebar section called "Name". See [Sidebar](#sidebar).                                                                                                                                                                         |
 
 **Files:** `src/theme/MDXContent/index.js`, `sidebars.js`.
 

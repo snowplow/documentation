@@ -148,18 +148,45 @@ export default function SchemaProperties(props) {
           </details>
 
           {props.overview && props.overview.event && (
-            <details>
-              <summary className="cursor-pointer text-base font-semibold">
-                Warehouse query
-              </summary>
-              <div className="mt-2 text-base not-prose">
-                <EventQuery
-                  vendor={props.schema.self.vendor}
-                  name={props.schema.self.name}
-                  version={props.schema.self.version}
-                />
-              </div>
-            </details>
+            <>
+              <details open>
+                <summary className="cursor-pointer text-base font-semibold">
+                  Warehouse column name
+                </summary>
+                <div className="mt-2 text-base">
+                  <p>
+                    In most warehouses:{' '}
+                    <code>
+                      {'unstruct_event_' +
+                        props.schema.self.vendor.replaceAll('.', '_') +
+                        '_' +
+                        props.schema.self.name +
+                        '_' +
+                        props.schema.self.version.split('-')[0]}
+                    </code>
+                  </p>
+                  <p>
+                    See the{' '}
+                    <a href="/docs/destinations/warehouses-lakes/querying-data/">
+                      querying overview
+                    </a>{' '}
+                    for Redshift and older BigQuery Loader versions.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary className="cursor-pointer text-base font-semibold">
+                  Warehouse query
+                </summary>
+                <div className="mt-2 text-base not-prose">
+                  <EventQuery
+                    vendor={props.schema.self.vendor}
+                    name={props.schema.self.name}
+                    version={props.schema.self.version}
+                  />
+                </div>
+              </details>
+            </>
           )}
 
           {props.overview && props.overview.event === false && (

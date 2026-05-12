@@ -9,7 +9,6 @@ keywords: ["fractribution quickstart", "legacy attribution", "fractribution setu
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
 

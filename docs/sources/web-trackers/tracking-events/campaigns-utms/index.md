@@ -6,10 +6,6 @@ description: "Identify traffic sources from paid and organic campaigns using UTM
 keywords: ["utm parameters", "campaign tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Campaign tracking is used to identify the source of traffic coming to a website.
 

@@ -6,10 +6,6 @@ description: "Overview of Snowplow visualization templates including ecommerce, 
 keywords: ["data visualization", "Snowplow dashboards", "analytics visualizations", "BI templates"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Along with data models, Snowplow provides dashboards and visualizations to help you extract value from your data quickly. These self-service analytics tools give you templated use-cases for data collection, modeling, and activation.
 

@@ -8,7 +8,6 @@ keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "pa
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
 ```
 
 Every schema has a version, starting from `1-0-0`. As your schema evolves, you will need to create new versions of it. All previous versions of a schema remain available to ensure backwards-compatibility.

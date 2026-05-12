@@ -6,10 +6,6 @@ description: "Track visionOS-specific events including window groups and immersi
 keywords: ["visionos tracking", "immersive space tracking", "apple vision pro"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 :::note
 Snowplow visionOS tracking was added in version 6.0.0.

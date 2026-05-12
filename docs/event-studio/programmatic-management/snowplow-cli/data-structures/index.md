@@ -6,10 +6,6 @@ description: "Use the Snowplow CLI data-structures command to generate, download
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 The `data-structures` subcommand of [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 

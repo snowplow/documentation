@@ -7,10 +7,6 @@ description: "Configure subject properties in React Native tracker v2 including 
 keywords: ["react native tracker v2 subject", "user properties", "client-side properties"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data.
 

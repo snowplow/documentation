@@ -8,7 +8,6 @@ keywords: ["S3 Loader", "upgrade guide", "AWS SDK", "Kinesis", "S3"]
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
 ```
 
 S3 loader was using AWS SDK v1 which goes EOL at the end of 2025.

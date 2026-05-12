@@ -7,8 +7,6 @@ keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifica
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <TrackingPlansNomenclature />
 

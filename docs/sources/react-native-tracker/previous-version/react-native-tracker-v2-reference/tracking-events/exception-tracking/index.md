@@ -7,10 +7,6 @@ description: "Automatically track unhandled exceptions in native iOS and Android
 keywords: ["react native tracker v2 exception tracking", "crash reporting", "error tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Exception tracking captures any unhandled exceptions within the application.
 

@@ -14,6 +14,16 @@ export default function SchemaProperties(props) {
   const description = props.info || props.schema.description
   const hasProperties =
     props.schema.properties && Object.keys(props.schema.properties).length > 0
+  const warehouseNote = (
+    <p>
+      Redshift and older versions of the BigQuery Loader use different names —
+      see the{' '}
+      <a href="/docs/destinations/warehouses-lakes/querying-data/">
+        querying overview
+      </a>{' '}
+      for details.
+    </p>
+  )
 
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
@@ -165,13 +175,7 @@ export default function SchemaProperties(props) {
                         props.schema.self.version.split('-')[0]}
                     </code>
                   </p>
-                  <p>
-                    See the{' '}
-                    <a href="/docs/destinations/warehouses-lakes/querying-data/">
-                      querying overview
-                    </a>{' '}
-                    for Redshift and older BigQuery Loader versions.
-                  </p>
+                  {warehouseNote}
                 </div>
               </details>
               <details>
@@ -206,13 +210,7 @@ export default function SchemaProperties(props) {
                       props.schema.self.version.split('-')[0]}
                   </code>
                 </p>
-                <p>
-                  See the{' '}
-                  <a href="/docs/destinations/warehouses-lakes/querying-data/">
-                    querying overview
-                  </a>{' '}
-                  for Redshift and older BigQuery Loader versions.
-                </p>
+                {warehouseNote}
               </div>
             </details>
           )}

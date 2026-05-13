@@ -19,21 +19,23 @@ This guide covers how to write and edit documentation in this repo. For how the 
   - [Use tabs for platform-specific content](#use-tabs-for-platform-specific-content)
   - [Reuse content across pages](#reuse-content-across-pages)
 - [Sidebar and visibility](#sidebar-and-visibility)
+  - [Reorder the sidebar](#reorder-the-sidebar)
   - [Mark a page as outdated, hidden, or noindex](#mark-a-page-as-outdated-hidden-or-noindex)
   - [Make a sidebar entry link to an external URL](#make-a-sidebar-entry-link-to-an-external-url)
-  - [Reorder the sidebar](#reorder-the-sidebar)
 - [Write a new tutorial](#write-a-new-tutorial)
 - [Submit changes](#submit-changes)
 - [Tooling](#tooling)
   - [Check spelling and grammar with Vale](#check-spelling-and-grammar-with-vale)
+    - [VS Code extension](#vs-code-extension)
+    - [Command line](#command-line)
   - [Format with Prettier](#format-with-prettier)
 
 ## Docs and tutorials
 
 The repo has two separate content trees, rendered as two sections of the site:
 
-- **`/docs/`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `/docs`.
-- **`/tutorials/`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
+- **`/docs`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `/docs`.
+- **`/tutorials`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
 
 Instructions below apply to `/docs` unless stated otherwise.
 
@@ -43,7 +45,7 @@ Follow the Snowplow style guide, found at [`src/pages/style-guide/index.md`](src
 
 An LLM-targeted variant lives at [`src/pages/style-guide/llm/index.md`](src/pages/style-guide/llm/index.md). Repo-specific rules that apply on top of the style guide, including required frontmatter, heading rules, terminology, and file structure, are in [`CLAUDE.md`](CLAUDE.md).
 
-All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons. The sections below assume you're working in `/docs/`, unless otherwise specified. For `/tutorials/`, see [Write a new tutorial](#write-a-new-tutorial) below.
+All Docusaurus pages use MDX format under the hood, but mostly have `.md` extensions for legacy reasons.
 
 ## Manage pages
 
@@ -55,7 +57,7 @@ For example, the page at `https://docs.snowplow.io/docs/destinations/` is built 
 
 ### Add a new page or section
 
-Create a new folder under `/docs/`, then add an `index.md` inside it. Standalone `.md` files are not used (except for legacy pages) — every page should have its own `<folder>/index.md`. File and folder names are kebab-case.
+Create a new folder under `/docs`, then add an `index.md` inside it. Standalone `.md` files are not used (except for legacy pages) — every page should have its own `<folder>/index.md`. File and folder names are kebab-case.
 
 Add the required frontmatter at the top — see [`CLAUDE.md`](CLAUDE.md) for the full required-fields list. The minimum:
 
@@ -70,7 +72,7 @@ date: "2025-09-09"                             # Creation date (YYYY-MM-DD)
 ---
 ```
 
-`sidebar_position` controls where the page appears in the sidebar; lower numbers come first. `sidebar_label` is the short text shown in the sidebar.
+`sidebar_position` controls where the page appears in the sidebar; lower numbers come first.
 
 To add a child page, create a subfolder with its own `index.md`.
 
@@ -99,7 +101,7 @@ If you want to keep the content reachable but hide it from the sidebar and searc
 
 When updating documentation for a new version of a versioned component such as a tracker, loader, or dbt package, update the [`src/componentVersions.js`](src/componentVersions.js) file. This is the source of truth for the latest version of all Snowplow components, and is widely referenced across the docs.
 
-When a new major or minor version is released, add a migration guide within the docs section for that component.
+When a new major or minor version is released, add a migration guide in that component's docs section.
 
 For significant changes, move the old content into a `previous-versions/` subfolder, add `sidebar_custom_props.outdated: true` to trigger the outdated-version admonition, and add the new content in its place.
 
@@ -107,16 +109,16 @@ For significant changes, move the old content into a `previous-versions/` subfol
 
 ### Add a link to another page
 
-Inside `/docs/`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
+Inside `/docs`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
 
 ```markdown
 [Send events](/docs/sources/trackers/setup/index.md)
 [Send events](/docs/sources/trackers/setup/index.md#section-anchor)
 ```
 
-Use absolute paths from the docs root. Relative paths (`../setup/index.md`) are reserved for [versioned modules](#document-a-new-version-of-a-versioned-component).
+Use absolute paths from the docs root. Relative paths (`../setup/index.md`) are reserved for [versioned modules](#document-a-new-version-of-a-versioned-component) or images.
 
-Inside `/tutorials/`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
+Inside `/tutorials`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
 
 ### Add an image or diagram
 
@@ -132,7 +134,7 @@ To reference an image from a different folder without needing a long relative pa
 ![Full description of the image](@site/docs/fundamentals/images/architecture.png)
 ```
 
-For diagrams, Mermaid is preferred: they're legible to LLMs, easy to update, and adapt automatically to light and dark themes. Use a fenced ` ```mermaid ` block, or a `<Mermaid>` component if you need to pass in props for dynamic rendering.
+For diagrams, prefer Mermaid: it's legible to LLMs, easy to update, and adapts automatically to light and dark themes. Use a fenced ````mermaid ` block, or a `<Mermaid>` component if you need to pass in props for dynamic rendering.
 
 ### Add Iglu schema details
 
@@ -160,11 +162,11 @@ Then place it in the page body, passing in the full Iglu JSON schema:
 | `example`  | A JSON object showing an example payload.                                                               | ❌         |
 | `info`     | Overrides the description taken from `schema.description`.                                              | ❌         |
 
-Schemas marked as `{{ event: true }}` get an "Event" badge, and an additional warehouse query section. Schemas marked as `{{ event: false }}` get an "Entity" badge. If you don't pass an `overview` prop, the component will show a generic "Schema" badge.
+Schemas marked as `event: true` get an "Event" badge, and an additional warehouse query section. Schemas marked as `event: false` get an "Entity" badge. If you don't pass an `overview` prop, the component will show a generic "Schema" badge.
 
 ### Use admonitions for callouts
 
-Use Docusaurus admonitions for notes, tips, warnings, or any content you want to visually set apart. They come in different types, each with different colors and icons. You can also add an optional title.
+Use Docusaurus admonitions for notes, tips, warnings, or any content you want to visually set apart. They come in different types, each with different colors, icons, and use cases. You can also add an optional title.
 
 ```mdx
 :::note[Title]
@@ -200,6 +202,7 @@ In some cases, you might want to include dynamic content, such as interpolating 
 
 ```mdx
 import CodeBlock from '@theme/CodeBlock';
+import {versions} from '@site/src/componentVersions';
 
 <CodeBlock language="scala">{
 `// Dependency
@@ -241,6 +244,16 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ## Sidebar and visibility
 
+### Reorder the sidebar
+
+The `/docs` navigation sidebar is generated from the folder structure of `/docs`, then transformed by [`sidebars.js`](sidebars.js) to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
+
+Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `/docs` can be any number. The `/tutorials` renderer expects sequential integers, starting from 1 for the introduction page.
+
+To rename a sidebar entry without changing the page title, set `sidebar_label`.
+
+To add visual breathing room above an entry, set `sidebar_custom_props.space_above: true`. To add a header above a group of entries, set `sidebar_custom_props.header: "Header Name"` on the first entry of the group.
+
 ### Mark a page as outdated, hidden, or noindex
 
 These flags live in `sidebar_custom_props` in the `index.md` frontmatter, and apply to all descendant pages:
@@ -273,37 +286,28 @@ href: https://snowplow.github.io/snowplow-java-tracker
 ---
 ```
 
-`noindex` is applied automatically.
+`noindex` will be applied automatically.
 
-### Reorder the sidebar
-
-The `/docs/` navigation sidebar is generated from the folder structure of `/docs`, then transformed by [`sidebars.js`](sidebars.js) to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
-
-Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `/docs/` can be any number. The `/tutorials/` renderer expects sequential integers.
-
-To rename a sidebar entry without changing the page title, set `sidebar_label`.
-
-To add visual breathing room above an entry, set `sidebar_custom_props.space_above: true`. To add a header above a group of entries, set `sidebar_custom_props.header: "Header Name"` on the first entry of the group.
 
 ## Write a new tutorial
 
-Tutorials live in `/tutorials/`, not `/docs/`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.
+Tutorials live in `/tutorials`, not `/docs`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.
 
 The examples serve as templates for structure and formatting. Copy one of the working examples as a starting point:
 
 - [`tutorial-requirements/example-tutorial/`](tutorial-requirements/example-tutorial) — a complete tutorial structure.
 - [`tutorial-requirements/example-accelerator/`](tutorial-requirements/example-accelerator) — a complete accelerator structure.
 
-Key differences from `/docs/` pages:
+Key differences from `/docs` pages:
 
-- The tutorials sidebar is rendered by custom React components in `src/components/tutorials/` - see [`ARCHITECTURE.md`](ARCHITECTURE.md#tutorials) for details
-- Internal links within `/tutorials/` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules
-- The `sidebar_custom_props` frontmatter flags don't apply
-- Downloadable Jupyter notebooks accompanying tutorials live as static assets in `static/notebooks/`, not as rendered pages
+- The tutorials sidebar is rendered by custom React components in `src/components/tutorials` — see [`ARCHITECTURE.md`](ARCHITECTURE.md#tutorials) for details.
+- Internal links within `/tutorials` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules.
+- The `sidebar_custom_props` frontmatter flags don't apply.
+- Downloadable Jupyter notebooks accompanying tutorials live as static assets in `static/notebooks/`, not as rendered pages.
 
 ## Submit changes
 
-Before opening a PR, run `yarn build` locally. This runs the full production build, and catches any errors or broken internal links or anchors before they get to CI.
+Before opening a PR, run `yarn build` locally. This runs the full production build, and catches errors, broken internal links, and broken anchors before they get to CI.
 
 Also consider running:
 - `yarn format` for Prettier
@@ -315,11 +319,15 @@ CI runs frontmatter validation and a Claude-based style review on every PR. See 
 
 ### Check spelling and grammar with Vale
 
-This repo uses [Vale](https://vale.sh) for prose linting. Vale has three alert levels (error, warning, suggestion); it flags issues but does not auto-correct. Code blocks, inline code, and link paths are excluded.
+This repo uses [Vale](https://vale.sh) for prose linting. Vale has three alert levels (error, warning, and suggestion); it flags issues but does not auto-correct. Code blocks, inline code, and link paths are excluded.
 
-**VS Code extension.** Install [Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode) from the Extensions Marketplace. The extension checks files on open and save, underlining flagged sections by severity. Hover for the alert message, or check the **Problems** tab.
+#### VS Code extension
 
-**Command line.** Install with `brew install vale`, then:
+Install [Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode) from the Extensions Marketplace. The extension checks files on open and save, underlining flagged sections by severity. Hover for the alert message, or check the **Problems** tab.
+
+#### Command line
+
+Install with `brew install vale`, then:
 
 ```bash
 vale docs/account-management
@@ -330,4 +338,4 @@ Use `--minAlertLevel=warning` to filter out suggestions. See the [Vale CLI optio
 
 ### Format with Prettier
 
-Run `yarn format` to apply Prettier across the repo. CI enforces formatting. Set your editor to format on save; here's [a VSCode guide](https://blog.yogeshchavan.dev/automatically-format-code-on-file-save-in-visual-studio-code-using-prettier).
+Run `yarn format` to apply Prettier across the repo. Set your editor to format on save; here's [a VSCode guide](https://blog.yogeshchavan.dev/automatically-format-code-on-file-save-in-visual-studio-code-using-prettier).

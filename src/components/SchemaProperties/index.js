@@ -60,6 +60,22 @@ export default function SchemaProperties(props) {
     parametersSchema?.properties &&
     Object.keys(parametersSchema.properties).length > 0
 
+  // In enrichment mode, BDP Console users only edit the contents of the
+  // `parameters` object — name/vendor/enabled are managed by Console. Render
+  // the example and property table scoped to `parameters` so the page matches
+  // what users actually paste into Console. The full schema is still shown in
+  // the "JSON schema" tab for self-hosted users.
+  const scopeToParameters = hasParameters
+  const isEnrichmentWithoutParameters =
+    props.overview?.enrichment && !hasParameters
+  const exampleToRender = scopeToParameters
+    ? props.example?.data?.parameters
+    : props.example
+  const hasExample =
+    exampleToRender &&
+    typeof exampleToRender === 'object' &&
+    Object.keys(exampleToRender).length > 0
+
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
       <div className="flex self-stretch flex-row justify-between items-start gap-4 p-6">
@@ -89,8 +105,19 @@ export default function SchemaProperties(props) {
             </code>
           </div>
 
-          {props.example &&
-            Object.keys(props.example).length > 0 &&
+          {isEnrichmentWithoutParameters ? (
+            <details open>
+              <summary className="cursor-pointer text-base font-semibold">
+                Example configuration
+              </summary>
+              <div className="mt-2 text-base">
+                <p className="text-muted-foreground">
+                  This enrichment has no configurable options.
+                </p>
+              </div>
+            </details>
+          ) : (
+            hasExample &&
             hasProperties && (
               <details open={!!props.overview?.enrichment}>
                 <summary className="cursor-pointer text-base font-semibold">
@@ -99,12 +126,20 @@ export default function SchemaProperties(props) {
                     : 'Example data'}
                 </summary>
                 <div className="mt-2 text-base">
+                  {scopeToParameters && (
+                    <p>
+                      You only need the parameters object for configuration in
+                      Console. For local Micro or Self-Hosted, you'll need to
+                      provide a complete schema.
+                    </p>
+                  )}
                   <CodeBlock language="json">
-                    {JSON.stringify(props.example, null, 2)}
+                    {JSON.stringify(exampleToRender, null, 2)}
                   </CodeBlock>
                 </div>
               </details>
-            )}
+            )
+          )}
 
           <details open>
             <summary className="cursor-pointer text-base font-semibold">
@@ -117,7 +152,26 @@ export default function SchemaProperties(props) {
                 queryString
               >
                 <TabItem value="table" label="Table">
-                  {hasProperties ? (
+                  {isEnrichmentWithoutParameters ? (
+                    <p className="text-muted-foreground text-sm">
+                      This schema has no configurable parameters.
+                    </p>
+                  ) : scopeToParameters ? (
+                    <table className="w-full not-prose text-sm">
+                      <thead>
+                        <tr>
+                          <th>Parameter</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {renderParamRows(
+                          parametersSchema.properties,
+                          parametersSchema.required || []
+                        )}
+                      </tbody>
+                    </table>
+                  ) : hasProperties ? (
                     <table className="w-full not-prose text-sm">
                       <thead>
                         <tr>
@@ -184,29 +238,8 @@ export default function SchemaProperties(props) {
                       This schema has no properties.
                     </p>
                   )}
-                  {hasParameters && (
-                    <>
-                      <p className="text-base mt-4 mb-2">
-                        The enrichment accepts these <code>parameters</code>:
-                      </p>
-                      <table className="w-full not-prose text-sm">
-                        <thead>
-                          <tr>
-                            <th>Parameter</th>
-                            <th>Description</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {renderParamRows(
-                            parametersSchema.properties,
-                            parametersSchema.required || []
-                          )}
-                        </tbody>
-                      </table>
-                    </>
-                  )}
                 </TabItem>
-                <TabItem value="json" label="JSON schema">
+                <TabItem value="json" label="Complete JSON schema">
                   <CodeBlock language="json">
                     {JSON.stringify(props.schema, null, 2)}
                   </CodeBlock>

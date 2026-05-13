@@ -60,7 +60,10 @@ Alternatively, add the following `meta` tag with `Delegate-CH` to the header sec
     data: {
       enabled: true,
       vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "yauaa_enrichment_config"
+      name: "yauaa_enrichment_config",
+      parameters: {
+        cacheSize: 10000
+      }
     }
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for YAUAA enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "yauaa_enrichment_config", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "cacheSize": { "type": "integer" } }, "additionalProperties": false } }, "required": ["vendor", "name", "enabled"], "additionalProperties": false }} />

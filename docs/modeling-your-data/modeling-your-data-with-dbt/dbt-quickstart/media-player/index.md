@@ -9,7 +9,6 @@ keywords: ["media player quickstart", "media player setup", "dbt media player in
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
 ```

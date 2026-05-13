@@ -6,10 +6,6 @@ description: "Track user sessions with client_session entities, configure foregr
 keywords: ["react native session tracking", "session timeout", "client session entity"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Session tracking captures the session which helps to keep track of the user activity in the app.
 

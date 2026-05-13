@@ -1,6 +1,5 @@
 ```mdx-code-block
 import Mermaid from '@theme/Mermaid';
-import Link from '@docusaurus/Link';
 ```
 
 There are two parts to how the Databricks Streaming Loader works.

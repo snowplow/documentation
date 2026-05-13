@@ -6,10 +6,6 @@ description: "Snowplow Micro REST API endpoints for querying good events, bad ev
 keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 ---
 
-```mdx-code-block
-import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
-```
 
 This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md).
 

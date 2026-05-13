@@ -10,7 +10,6 @@ keywords: ["databricks config", "unity catalog config", "lakeflow config", "stre
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Admonition from '@theme/Admonition';
 import DatabricksConfig from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/configuration-reference/_databricks_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/configuration-reference/_kinesis_config.md';

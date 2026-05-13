@@ -17,7 +17,6 @@ import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/lake-
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_kinesis_config.md';
 import KafkaConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_kafka_config.md';
 import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_common_config.md';
-import Admonition from '@theme/Admonition';
 ```
 
 <p>The configuration reference in this page is written for Lake Loader <code>{`${versions.lakeLoader}`}</code></p>

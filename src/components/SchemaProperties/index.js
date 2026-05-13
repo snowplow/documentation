@@ -128,9 +128,8 @@ export default function SchemaProperties(props) {
                 <div className="mt-2 text-base">
                   {scopeToParameters && (
                     <p>
-                      You only need the parameters object for configuration in
-                      Console. For local Micro or Self-Hosted, you'll need to
-                      provide a complete schema.
+                      Update the parameters in Console. For Self-Hosted, you'll
+                      need to <a href="/docs/pipeline/enrichments/managing-enrichments/terraform/">provide a complete schema</a>.
                     </p>
                   )}
                   <CodeBlock language="json">

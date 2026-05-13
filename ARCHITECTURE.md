@@ -1,18 +1,3 @@
-- [Overview](#overview)
-- [Gotchas](#gotchas)
-- [Cloudflare Worker](#cloudflare-worker)
-- [Custom plugins](#custom-plugins)
-  - [LLMs.txt and Markdown generation](#llmstxt-and-markdown-generation)
-  - [JSON-LD schema](#json-ld-schema)
-- [Cookies and tracking](#cookies-and-tracking)
-  - [Tracking scripts](#tracking-scripts)
-- [Styling and CSS](#styling-and-css)
-  - [Tailwind and Infima](#tailwind-and-infima)
-- [Mermaid](#mermaid)
-- [Tutorials](#tutorials)
-- [LLM support](#llm-support)
-- [Product Fruits feedback widget](#product-fruits-feedback-widget)
-- [Snowplow event-sending component](#snowplow-event-sending-component)
 # Architecture
 
 An overview of how the docs site is built. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.md); for CI and deploys see [`WORKFLOWS.md`](WORKFLOWS.md).

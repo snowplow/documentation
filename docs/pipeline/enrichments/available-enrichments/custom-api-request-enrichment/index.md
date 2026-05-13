@@ -16,7 +16,7 @@ As with all enrichments, only one instance of it can be configured within your p
 
 ## Configuration
 
-For historical reasons, the configuration uses nomenclature that's no longer used elsewhere in Snowplow.
+For historical reasons, the configuration uses terms that's no longer used elsewhere in Snowplow.
 
 <SchemaProperties
   overview={{ enrichment: true }}
@@ -90,15 +90,15 @@ The enrichment can use any property in the event as input data source. The input
 
 The custom API enrichment runs after most other enrichments, so it can access data added by them. Only the IP anonymization and PII pseudonymization enrichments run after the custom API enrichment.
 
-Specify an array of `inputs` to use as keys when performing your API lookup. Each input consists of a `key` and a source: `pojo` for atomic event fields, or `json` for self-describing JSON fields, whether event or entity.
+Specify an array of `inputs` to use as keys when performing your API lookup. Each input consists of a `key` and a source: `pojo` for atomic event fields, or `json` for JSON fields, whether event or entity.
 
 Key names can contain only alphanumeric symbols, hyphens, and underscores.
 
 For `json`, specify the field name as either `unstruct_event` for self-describing event fields, `contexts` for fields in entities added during tracking, or `derived_contexts` for fields in enrichment entities. Add two additional fields:
-- `schemaCriterion` is the self-describing JSON URI. You can specify all versions of the schema (`*-*-*`), or a specific MODEL version (e.g. `1-*-*`), MODEL plus MINOR (e.g. `1-1-*`) or a full MODEL-MINOR-PATCH version (e.g. `1-1-1`)
+- `schemaCriterion` is the Iglu schema URI. You can specify all versions of the schema (`*-*-*`), or a specific major version (e.g. `1-*-*`), major plus minor (e.g. `1-1-*`) or a full major-minor-patch version (e.g. `1-1-1`)
 - `jsonPath` is the [JSON Path statement](http://goessner.net/articles/JsonPath/) to navigate to the field inside the JSON that you want to use as the input.
 
-The resolved values should be primitive types.
+The resolved values should be primitive types (string, number, or boolean).
 
 ### `api`
 
@@ -114,7 +114,7 @@ If a key required in the `uri` wasn't found in any of the `inputs`, then the 
 
 The only supported `authentication` option is `httpBasic`. Provide a `username` and/or `password` for the enrichment to connect to your API using [basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). Some APIs use only the `username` or `password` field to contain an API key; in this case, set the other property to an empty string `""`.
 
-If your API is unsecured, because for example it's only accessible from inside your private subnet, or you're using IP address whitelisting, then configure the `authentication` section like this:
+If your API is unsecured (for example, because it's only accessible from inside your private subnet, or because you're using an IP address allowlist) then configure the `authentication` section like this:
 
 ```json
 "authentication": { }
@@ -122,11 +122,11 @@ If your API is unsecured, because for example it's only accessible from inside y
 
 ### `outputs`
 
-This enrichment assumes that your API returns a JSON, containing one or more properties that you want to add to your event. You'll need to specify the schema or data structure that the enrichment should use to define the retrieved data.
+This enrichment assumes that your API returns a JSON object containing one or more properties that you want to add to your event. You'll need to specify the schema or data structure that the enrichment should use to define the retrieved data.
 
 Each entry in the `outputs` array needs two fields:
 - `schema` to specify the schema URI you want to attach to the event.
-- `json` and `jsonPath` to specify which part of the returned JSON you want to add to the enriched event. Use `$` if you want to attach returned JSON as is.
+- `json` and `jsonPath` to specify which part of the returned JSON you want to add to the enriched event. Use `$` if you want to attach the returned JSON as is.
 
 The `outputs` array must have at least one entry in it.
 
@@ -134,14 +134,14 @@ If the JSON path specified can't be found within the API's returned JSON, then t
 
 ### `cache`
 
-A Snowplow enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source. The `cache` configuration attempts to minimize the number of lookups performed.
+An enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source. The `cache` configuration attempts to minimize the number of lookups performed.
 
 The cache is an LRU (least-recently used) cache, where less frequently accessed values are evicted to make space for new values. The `uri` with all keys populated is used as the key in the cache. Configure the `cache` as follows:
 
 - `size` is the maximum number of entries to hold in the cache at any one time. The minimum value is `1`.
 - `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your API can return different values for the same key over time.
 
-To disable `ttl` so keys can be stored in cache until the job is done, use value `0`.
+To disable time-based expiration and only evict entries based on least-recent use, set `ttl` to `0`.
 
 ### `ignoreOnError`
 
@@ -151,7 +151,7 @@ When set to `false`, the event will become a [failed event](/docs/fundamentals/f
 
 ## Edge case handling
 
-This enrichment uses any third-party RESTful service to fetch data in JSON format. In most cases, we recommend using your own private server to maintain performance. Third-party services could cause slowdown of your enrichment process.
+This enrichment can use any third-party RESTful service to fetch data in JSON format. In most cases, we recommend using your own private server to maintain performance. Third-party services could cause slowdown of your enrichment process.
 
 This table describes what will happen under different conditions:
 

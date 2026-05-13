@@ -66,7 +66,7 @@ Use this property to specify a list of subdomains to class as `Internal` traffic
 
 :::note
 
-The enrichment will also classify `refr_medium` as `Internal` when an event's `page_urlhost` matches it's `refr_urlhost`, regardless of the configured `internalDomains`.
+The enrichment will also classify `refr_medium` as `Internal` when an event's `page_urlhost` matches its `refr_urlhost`, regardless of the configured `internalDomains`.
 
 This behavior isn't configurable, and may require handling in data models or a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md) to change.
 

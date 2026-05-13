@@ -8,9 +8,9 @@ keywords: ["PII pseudonymization", "data privacy", "GDPR"]
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The PII (personally identifiable information) pseudonymization enrichment runs after all the other enrichments, and pseudonymizes the fields that are configured as PIIs.
+The PII (personally identifiable information) pseudonymization enrichment runs after all the other enrichments, and pseudonymizes the fields that are configured as PII.
 
-It enables you to better protect the privacy rights of data subjects, therefore aiding in compliance for regulatory measures.
+It enables you to better protect the privacy rights of data subjects and comply with data regulation.
 
 In Europe the obligations regarding Personal Data handling have been outlined on the [GDPR EU website](https://www.gdpreu.org/the-regulation/key-concepts/personal-data/).
 
@@ -20,7 +20,7 @@ Hashing a field can change its format (e.g. email) and its length. This could ma
 
 ## Configuration
 
-For historical reasons, the configuration uses nomenclature that's no longer used elsewhere in Snowplow.
+For historical reasons, the configuration uses terms that's no longer used elsewhere in Snowplow.
 
 <SchemaProperties
   overview={{ enrichment: true }}

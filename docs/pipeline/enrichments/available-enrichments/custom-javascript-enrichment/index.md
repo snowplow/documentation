@@ -97,7 +97,7 @@ function process(event) {
 
 ## Available properties and methods
 
-Your JavaScript enrichment code has access to the entire event payload, including request headers, plus any parameters you define. You can also access standard Java methods.
+Your JavaScript enrichment code has access to the entire event payload, including request headers, plus any parameters you define.
 
 ### Atomic fields
 

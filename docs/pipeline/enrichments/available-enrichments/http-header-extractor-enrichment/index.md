@@ -35,12 +35,12 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 All the headers that will match the regular expression defined in `headersPattern` parameter will be attached to the event.
 
-In the example configuration, all the headers of the request would be attached to the event because of the `.*` regex pattern.
+In the example configuration, all the headers of the request would be attached to the event because of the `.*` regular expression pattern.
 
 If you're only interested in the host, for example, use:
 
 ```json
-      "headersPattern": "Host"
+      "headersPattern": "(?i)Host"
 ```
 
 ## Output

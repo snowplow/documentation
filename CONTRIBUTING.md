@@ -34,10 +34,10 @@ This guide covers how to write and edit documentation in this repo. For how the 
 
 The repo has two separate content trees, rendered as two sections of the site:
 
-- **`/docs`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `/docs`.
-- **`/tutorials`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
+- **`docs/`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `docs/`.
+- **`tutorials/`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
 
-Instructions below apply to `/docs` unless stated otherwise.
+Instructions below apply to `docs/` unless stated otherwise.
 
 ## Style and tone
 
@@ -57,7 +57,7 @@ For example, the page at `https://docs.snowplow.io/docs/destinations/` is built 
 
 ### Add a new page or section
 
-Create a new folder under `/docs`, then add an `index.md` inside it. Standalone `.md` files are not used (except for legacy pages) — every page should have its own `<folder>/index.md`. File and folder names are kebab-case.
+Create a new folder under `docs/`, then add an `index.md` inside it. Standalone `.md` files are not used (except for legacy pages) — every page should have its own `<folder>/index.md`. File and folder names are kebab-case.
 
 Add the required frontmatter at the top — see [`CLAUDE.md`](CLAUDE.md) for the full required-fields list. The minimum:
 
@@ -78,7 +78,7 @@ To add a child page, create a subfolder with its own `index.md`.
 
 ### Move a page
 
-Use the `./move.sh` script. It runs `git mv`, updates internal links across `/docs`, and appends a 301 redirect rule to `worker/redirects.js`:
+Use the `./move.sh` script. It runs `git mv`, updates internal links across `docs/`, and appends a 301 redirect rule to `worker/redirects.js`:
 
 ```bash
 ./move.sh docs/old/page/location docs/new/page/location
@@ -109,7 +109,7 @@ For significant changes, move the old content into a `previous-versions/` subfol
 
 ### Add a link to another page
 
-Inside `/docs`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
+Inside `docs/`, end every internal link with `/index.md`. This lets `yarn build` validate the target:
 
 ```markdown
 [Send events](/docs/sources/trackers/setup/index.md)
@@ -118,7 +118,7 @@ Inside `/docs`, end every internal link with `/index.md`. This lets `yarn build`
 
 Use absolute paths from the docs root. Relative paths (`../setup/index.md`) are reserved for [versioned modules](#document-a-new-version-of-a-versioned-component) or images.
 
-Inside `/tutorials`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
+Inside `tutorials/`, do **not** append `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full tutorial link rules.
 
 ### Add an image or diagram
 
@@ -246,9 +246,9 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ### Reorder the sidebar
 
-The `/docs` navigation sidebar is generated from the folder structure of `/docs`, then transformed by [`sidebars.js`](sidebars.js) to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
+The `docs/` navigation sidebar is generated from the folder structure of `docs/`, then transformed by [`sidebars.js`](sidebars.js) to add section headers, hoist a couple of sections, swap in external link items, and apply visibility flags.
 
-Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `/docs` can be any number. The `/tutorials` renderer expects sequential integers, starting from 1 for the introduction page.
+Adjust `sidebar_position` on the relevant `index.md` files to change the ordering within the sidebar. Positions within `docs/` can be any number. The `tutorials/` renderer expects sequential integers, starting from 1 for the introduction page.
 
 To rename a sidebar entry without changing the page title, set `sidebar_label`.
 
@@ -291,17 +291,17 @@ href: https://snowplow.github.io/snowplow-java-tracker
 
 ## Write a new tutorial
 
-Tutorials live in `/tutorials`, not `/docs`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.
+Tutorials live in `tutorials/`, not `docs/`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.
 
 The examples serve as templates for structure and formatting. Copy one of the working examples as a starting point:
 
 - [`tutorial-requirements/example-tutorial/`](tutorial-requirements/example-tutorial) — a complete tutorial structure.
 - [`tutorial-requirements/example-accelerator/`](tutorial-requirements/example-accelerator) — a complete accelerator structure.
 
-Key differences from `/docs` pages:
+Key differences from `docs/` pages:
 
 - The tutorials sidebar is rendered by custom React components in `src/components/tutorials` — see [`ARCHITECTURE.md`](ARCHITECTURE.md#tutorials) for details.
-- Internal links within `/tutorials` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules.
+- Internal links within `tutorials/` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules.
 - The `sidebar_custom_props` frontmatter flags don't apply.
 - Downloadable Jupyter notebooks accompanying tutorials live as static assets in `static/notebooks/`, not as rendered pages.
 

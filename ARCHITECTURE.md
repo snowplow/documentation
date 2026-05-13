@@ -72,7 +72,7 @@ This [plugin](plugins/docusaurus-plugin-llms-txt/src/index.js) generates LLM art
 - An `llms.txt` index containing the page title, description, and link to the markdown version
 - A concatenated `llms-full.txt`
 
-The `llms.txt` index includes files in both `/docs` and `/tutorials`. It excludes pages with `type: link` and routes in the `excludeRoutes` array. Files marked as `sidebar_custom_props.legacy` or similar are indexed, but are suffixed with `[previous version]`.
+The `llms.txt` index includes files in both `docs/` and `tutorials/`. It excludes pages with `type: link` and routes in the `excludeRoutes` array. Files marked as `sidebar_custom_props.legacy` or similar are indexed, but are suffixed with `[previous version]`.
 
 The `llms-full.txt` file concatenates all the per-page markdown files, except for the `[previous version]` pages.
 
@@ -132,7 +132,7 @@ Served at `/tutorials/*` via a **second `@docusaurus/plugin-content-docs` instan
 
 The plugin has no `sidebarPath`, so navigation is custom and not file-tree-derived. The tutorials use the components in [`src/components/tutorials`](src/components/tutorials).
 
-Internal link conventions inside `/tutorials` differ from `/docs` — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable notebooks live as static assets in `static/notebooks/`.
+Internal link conventions inside `tutorials/` differ from `docs/` — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable notebooks live as static assets in `static/notebooks/`.
 
 ## LLM support
 

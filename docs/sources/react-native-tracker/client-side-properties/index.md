@@ -7,10 +7,6 @@ description: "Configure and update subject properties including user ID, IP addr
 keywords: ["react native subject", "user properties", "client-side properties"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 The tracker allows you to add a persistent set of information through the `SubjectConfiguration` which represents the basic information about the user and the app.
 

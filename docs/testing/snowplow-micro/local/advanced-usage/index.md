@@ -9,8 +9,6 @@ keywords: ["micro advanced", "https configuration", "iglu resolver", "collector 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 ```
 
 This page describes additional configuration options for Snowplow Micro.

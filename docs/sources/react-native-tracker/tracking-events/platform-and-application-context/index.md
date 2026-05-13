@@ -6,10 +6,6 @@ description: "Track platform context with device information and application con
 keywords: ["react native platform context", "device information", "app version tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Platform and application data tracking features capture information about the device and the app.
 

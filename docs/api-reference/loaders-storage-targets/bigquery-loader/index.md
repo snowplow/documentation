@@ -9,7 +9,6 @@ keywords: ["bigquery loader", "google bigquery", "streaming loader", "snowplow g
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_diagram.md';
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_deploy-overview.md';
 ```

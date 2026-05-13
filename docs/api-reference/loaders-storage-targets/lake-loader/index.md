@@ -9,7 +9,6 @@ keywords: ["lake loader", "delta lake", "iceberg", "open table formats", "data l
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/lake-loader/_deploy_overview.md';
 import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/lake-loader/_diagram.md';
 ```

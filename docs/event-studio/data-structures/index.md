@@ -7,7 +7,6 @@ description: "Create, manage, and update data structures (schemas) using Snowplo
 keywords: ["data structures", "schemas", "JSON schemas", "schema management"]
 ---
 
-import ThemedImage from '@theme/ThemedImage';
 
 This section explains how to create, manage, and update [data structures](/docs/fundamentals/schemas/index.md) (schemas). Snowplow provides different options for data structure management:
 * Snowplow Console UI

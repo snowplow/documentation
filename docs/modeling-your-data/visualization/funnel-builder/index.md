@@ -7,7 +7,6 @@ keywords: ["funnel builder", "funnel analysis", "conversion funnel", "user journ
 ---
 
 ```mdx-code-block
-import MainImage from './images/ecommerce-full-page.png';
 import TableAndSchemaImage from './images/table-and-schema.png';
 import FilterImage from './images/filter.png';
 import StepImage from './images/step.png';

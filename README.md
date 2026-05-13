@@ -27,4 +27,4 @@ yarn build
 
 ## Reporting issues
 
-Open an [issue](https://github.com/snowplow/documentation/issues/new) on GitHub. PRs welcome.
+Open an [issue](https://github.com/snowplow/documentation/issues/new) on GitHub to report a problem. PRs welcome.

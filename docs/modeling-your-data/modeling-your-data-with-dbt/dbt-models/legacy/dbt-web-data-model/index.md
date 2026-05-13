@@ -10,7 +10,6 @@ sidebar_position: 700
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
-import DocCardList from '@theme/DocCardList';
 import {versions} from '@site/src/componentVersions';
 
 ```

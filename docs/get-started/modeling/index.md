@@ -6,10 +6,6 @@ description: "Using a data model to aggregate your data"
 keywords: ["data modeling", "dbt", "Unified Digital model", "data aggregation"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Querying the events table directly — as you would have done in the previous step — can be useful for exploring your events or building custom analytics. However, for many common use cases it's much easier to use our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
 

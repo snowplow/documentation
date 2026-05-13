@@ -10,7 +10,6 @@ keywords: ["snowflake loader", "snowflake rdb", "wide row json", "snowflake copy
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
-import AutoSchemaCreation from '@site/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
 It is possible to run Snowflake Loader on AWS, GCP and Azure.

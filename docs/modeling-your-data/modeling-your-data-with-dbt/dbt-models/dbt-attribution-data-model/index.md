@@ -10,8 +10,6 @@ sidebar_position: 10
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
 import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 

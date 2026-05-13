@@ -19,7 +19,7 @@ Key considerations when writing your own JavaScript enrichment:
 * Make sure your code works for _all_ of your events, not just the particular types of events you're interested in. Unhandled exceptions will result in [failed events](/docs/fundamentals/failed-events/index.md).
 * Don't try to share state across multiple enriched events. Enrichments run inside a highly parallel application with multiple independent instances, so this won't work.
 * In your enrichment code, avoid CPU-intensive tasks such as encryption, or IO-intensive tasks such as requests to an external service, without thoroughly benchmarking the impact they might have on your event processing time.
-* The enrichment code has access to the Java standard library, and therefore to the filesystem of the machine it's running on. Proceed with caution when copying code from untrusted sources.
+* The enrichment code has access to the Java standard library, and therefore to the filesystem of the machine it's running on. Proceed with caution when copying code from untrusted sources. Snowplow CDI Cloud customers don't have access to Java methods, for security reasons.
 
 Your JavaScript enrichment code should contain a function called `process`:
 * This function will receive each event as its first argument
@@ -64,36 +64,16 @@ Not all ES6 features are guaranteed to work. If you are unsure whether a specifi
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for configuration of a JavaScript dynamic scripting enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "javascript_script_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "script": { "type": "string" }, "config": { "type": "object", "description": "Parameters to pass to the enrichment" } }, "required": ["script"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
 
-:::note[base64 encoding]
+:::note[Formatting]
 
-You will need to provide the JavaScript code encoded in base64.
+If you're using [Snowplow Console](https://console.snowplowanalytics.com) to configure the enrichment, provide your script directly as JavaScript in the editor. Use the JSON editor to provide any `config` parameters.
+
+You can also provide JavaScript directly to [Micro](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md).
+
+For other configurations, you'll need to provide the JavaScript code encoded in base64.
 
 :::
 
-The JavaScript in this example decodes to:
-
-```javascript
-function process(event) {
-
-  var platform = event.getPlatform(),
-      appId    = event.getApp_id();
-
-  if (platform == "server" && appId != "secret") {
-    throw "Server-side event has invalid app_id: " + appId;
-  }
-
-  if (appId == null) {
-    return [];
-  }
-
-  // Use new String() because http://nelsonwells.net/2012/02/json-stringify-with-mapped-variables/
-  var appIdUpper = new String(appId.toUpperCase());
-
-  return [ { schema: "iglu:com.acme/foo/jsonschema/1-0-0",
-               data: { appIdUpper: appIdUpper }
-           } ];
-}
-```
 
 ## Available properties and methods
 
@@ -418,42 +398,6 @@ The `eraseDerived_contexts()` method is available since Enrich 5.4.0.
 
 Sometimes you don't want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user.
 
-### Cause a failed event
-
-You can send an event to [failed events](/docs/fundamentals/failed-events/index.md) by deliberately throwing an unhandled exception.
-
-This will create an "enrichment failure" failed event, which may be tricky to distinguish from genuine failures in your enrichment code.
-
-For example, to filter out events with a user agent containing "Googlebot":
-
-```js
-const botPattern = /.*Googlebot.*/;
-
-function process(event) {
-  const useragent = event.getUseragent();
-
-  if (useragent !== null && botPattern.test(useragent)) {
-    throw "Filtered event produced by Googlebot";
-  }
-}
-```
-
-The [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) is one way to identify bots. This example uses the IAB entity to send bot events to failed events:
-
-```js
-function process(event) {
-  const entities = JSON.parse(event.getDerived_contexts());
-  if (entities) {
-    for (const entity of entities.data) {
-      if (entity.schema.startsWith('iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1') &&
-          entity.data.spiderOrRobot) {
-        throw "Filtered a spider/bot event";
-      }
-    }
-  }
-}
-```
-
 ### Drop completely
 
 You can also drop any event, using `event.drop()`. This is a destructive operation: dropped events won't be stored or sent to any stream or destination.
@@ -477,3 +421,39 @@ There's no way to recover dropped events.
 :::
 
 This feature is available since Enrich 5.3.0.
+
+### Cause a failed event
+
+You can send an event to [failed events](/docs/fundamentals/failed-events/index.md) by deliberately throwing an unhandled exception.
+
+This will create an "enrichment failure" failed event, which may be tricky to distinguish from genuine failures in your enrichment code.
+
+For example, to filter out events with a user agent containing "Googlebot":
+
+```js
+const botPattern = /.*Googlebot.*/;
+
+function process(event) {
+  const useragent = event.getUseragent();
+
+  if (useragent !== null && botPattern.test(useragent)) {
+    throw "Filtered event produced by Googlebot";
+  }
+}
+```
+
+The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) consolidates signals from multiple enrichments into a single entity. This example uses the `bot_detection` entity to send bot events to failed events:
+
+```js
+function process(event) {
+  const entities = JSON.parse(event.getDerived_contexts());
+  if (entities) {
+    for (const entity of entities.data) {
+      if (entity.schema.startsWith('iglu:com.snowplowanalytics.snowplow/bot_detection/jsonschema/1') &&
+          entity.data.bot) {
+        throw "Filtered a spider/bot event";
+      }
+    }
+  }
+}
+```

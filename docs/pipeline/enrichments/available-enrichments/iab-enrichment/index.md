@@ -45,6 +45,8 @@ For example, the user agent string `Chrome Chrome MyBot Chrome` will match an en
 
 ## Configuration
 
+The example shows `database` and `uri` fields. Snowplow CDI customers don't need to worry about these properties: check Console for pre-configured values suitable for your cloud.
+
 <SchemaProperties
   overview={{ enrichment: true }}
   example={{

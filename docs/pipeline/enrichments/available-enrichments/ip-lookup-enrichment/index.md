@@ -38,6 +38,8 @@ From the paid tier, you can provide four databases to Snowplow:
 
 If you're a Snowplow CDI customer, the free-tier MaxMind database files are already provided and updated by Snowplow, so you don't need this step.
 
+There's a pre-configured URI for the directory containing these files. You can find it in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
+
 :::
 
 Once downloaded, take the `.mmdb` files and upload them to a location on your cloud:
@@ -96,6 +98,12 @@ Allowed database filenames are as follows. If the filename you provide isn't one
 | `domain`         | `GeoIP2-Domain.mmdb`                                   |
 | `connectionType` | `GeoIP2-Connection-Type.mmdb`                          |
 | `asn`            | `GeoLite2-ASN.mmdb`                                    |
+
+:::note[URI values]
+If you are using Snowplow CDI and the free MaxMind databases, use the same default value you can see in Console for all `uri` fields, whether `geo`, `asn`, etc.
+
+Otherwise, provide the location (e.g. `s3://my-private-bucket/third-party/maxmind`) where you uploaded the files.
+:::
 
 ## Output
 

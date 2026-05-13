@@ -60,7 +60,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ### Supporting multiple parameters
 
-You can configure more than one parameter name in the array, like so:
+What if some of your links use `utm_campaign=...` and some use `legacy_campaign=...`? You can configure more than one parameter name in the array, like so:
 
 ```json
     "parameters":{

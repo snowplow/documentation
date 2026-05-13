@@ -50,8 +50,8 @@ It's safe to enable all sources - `useYauaa`, `useIab`, `useAsnLookups`, `useCli
       parameters: {
         useYauaa: true,
         useIab: true,
-        useAsnLookups: false,
-        useClientSideDetection: false
+        useAsnLookups: true,
+        useClientSideDetection: true
       }
     }
   }}

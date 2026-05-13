@@ -130,7 +130,7 @@ Each entry in the `outputs` array needs two fields:
 
 The `outputs` array must have at least one entry in it.
 
-If the JSON path specified can't be found within the API's returned JSON, then the lookup and event will be flagged as a failure.
+If the JSON path specified can't be found within the API response, then the lookup and the event will be flagged as a failure - unless `ignoreOnError` is set to `true`.
 
 ### `cache`
 
@@ -141,11 +141,9 @@ The cache is an LRU (least-recently used) cache, where less frequently accessed 
 - `size` is the maximum number of entries to hold in the cache at any one time. The minimum value is `1`.
 - `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your API can return different values for the same key over time.
 
-To disable time-based expiration and only evict entries based on least-recent use, set `ttl` to `0`.
-
 ### `ignoreOnError`
 
-When set to `true`, if the API call fails, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
+When set to `true`, if the enrichment fails for any reason, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
 
 When set to `false`, the event will become a [failed event](/docs/fundamentals/failed-events/index.md) if the API call fails.
 
@@ -155,16 +153,16 @@ This enrichment can use any third-party RESTful service to fetch data in JSON fo
 
 This table describes what will happen under different conditions:
 
-| Scenario                                                                      | Outcome                                                                                                                     |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| A provided JSONPath is invalid.                                               | Failed event.                                                                                                               |
-| Any one of the input keys wasn't found.                                       | The HTTP request won't be sent, and no entities will be added. The event will otherwise be processed as usual - not failed. |
-| More than one entity in the event matches the `schemaCriterion`.              | The first matching entity found will be used.                                                                               |
-| Multiple inputs share the same key (don't do this).                           | The last input configured will be picked.                                                                                   |
-| An input JSONPath matches a non-primitive value.                              | The enrichment will try to stringify it, likely resulting in an invalid URL.                                                |
-| The output's JSONPath wasn't found.                                           | Failed event.                                                                                                               |
-| The response returned JSON which is not valid according to the output schema. | Failed event.                                                                                                               |
-| The server returned any non-successful response or timed-out.                 | Failed event.                                                                                                               |
+| Scenario                                                                      | Outcome                                                                                                                                                    |
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A provided JSONPath is invalid.                                               | Failed event, unless `ignoreOnError` is set to `true`.                                                                                                     |
+| Any one of the input keys wasn't found.                                       | The HTTP request won't be sent, and no entities will be added. The event will otherwise be processed as usual - not failed.                                |
+| More than one entity in the event matches the `schemaCriterion`.              | The first matching entity found will be used.                                                                                                              |
+| Multiple inputs share the same key (don't do this).                           | The last input configured will be picked.                                                                                                                  |
+| An input JSONPath matches a non-primitive value.                              | The enrichment will try to stringify it, likely resulting in an invalid URL. If so, it will cause a failed event, unless `ignoreOnError` is set to `true`. |
+| The output's JSONPath wasn't found.                                           | Failed event, unless `ignoreOnError` is set to `true`.                                                                                                     |
+| The response returned JSON which is not valid according to the output schema. | Failed event, unless `ignoreOnError` is set to `true`.                                                                                                     |
+| The server returned any non-successful response or timed-out.                 | Failed event, unless `ignoreOnError` is set to `true`.                                                                                                     |
 
 ## Output
 

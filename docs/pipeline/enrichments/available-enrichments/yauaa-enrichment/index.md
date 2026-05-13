@@ -8,13 +8,9 @@ keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-The YAUAA (Yet Another User Agent Analyzer) enrichment is a user agent parser and analyzer. It uses the [YAUAA library](https://yauaa.basjes.nl/).
+The YAUAA (Yet Another User Agent Analyzer) enrichment is a user agent parser and analyzer. It uses the [YAUAA library](https://yauaa.basjes.nl/). The library is stored in memory; there is no interaction with an external system.
 
-:::note[Memory usage]
-YAUAA parsing relies on in-memory `HashMaps`, and requires approximately [120 MB of RAM](https://yauaa.basjes.nl/using/memoryusage/). Additional memory is also used for caching by default.
-
-If memory usage is a concern, consider using the [UA parser enrichment](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md) instead.
-:::
+If you don't need the full YAUAA output, consider using the [UA parser enrichment](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md) instead.
 
 This enrichment adds an additional entity to the event.
 
@@ -38,9 +34,9 @@ The supported client hints headers are:
 
 ## Configure high-entropy client hints
 
-Chromium browsers will include low-entropy client hint HTTP request headers by default.
+The YAUAA enrichment does not require you to make any changes to your website, if you are happy with the level of detail you get from the default user agent strings.  However, it is possible to improve the accuracy of the user agent data produced by YAUAA, if you are able to configure your website to send [high-entropy client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints#high_entropy_hints) to the Collector by following these instructions.
 
-To include the more detailed high-entropy client hint headers, additional configuration is required: specifying the hints to include with `Permissions-Policy` and `Accept-CH`.
+Chromium browsers will include low-entropy client hint HTTP request headers by default. To include the more detailed high-entropy client hint headers, additional configuration is required: specifying the hints to include with `Permissions-Policy` and `Accept-CH`.
 
 Update the URLs to your Collector, and add this configuration to your web server:
 

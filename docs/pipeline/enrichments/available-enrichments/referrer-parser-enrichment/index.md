@@ -74,6 +74,10 @@ This behavior isn't configurable, and may require handling in data models or a [
 
 ### `database` and `uri`
 
+:::note[Snowplow CDI]
+If you're using Snowplow CDI, you don't need to configure these. Use the default values provided in Console.
+:::
+
 Provide details of the referer-parser format database to use. Snowplow hosts a database you can use: the latest version is listed in the [library README](https://github.com/snowplow/referer-parser). Alternatively, the enrichment will accept any valid JSON or YAML file in the right format.
 
 ### Custom referrer mappings

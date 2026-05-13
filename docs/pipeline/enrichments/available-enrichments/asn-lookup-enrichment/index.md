@@ -24,14 +24,9 @@ Depending on the nature of your business, VPN users might represent a meaningful
 
 :::
 
-## Configuration
-
-:::note[Prerequisite]
+## Prerequisites
 
 To use this enrichment, you need to enable the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and configure it to produce ASN data.
-
-<details>
-<summary>IP lookup configuration</summary>
 
 If you are using the paid MaxMind database (`isp` field present in your IP lookup configuration), you don't need to do anything else.
 
@@ -59,9 +54,9 @@ Add the `asn` field:
 // highlight-end
 ```
 
-</details>
+## Configuration
 
-:::
+The example shows `database` and `uri` fields. Snowplow CDI customers don't need to worry about these properties: check Console for pre-configured values suitable for your cloud.
 
 <SchemaProperties
   overview={{ enrichment: true }}
@@ -101,13 +96,9 @@ Points to a CSV file with ASN numbers. The file should have a header row and use
 | `uri`      | string | Base URI where the file is hosted. Supports `http:`, `s3:`, and `gs:` schemes. Must not end with a trailing slash. |
 | `database` | string | The CSV filename.                                                                                                  |
 
-Use the community-maintained [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) as a starting point for `botAsnsFile`. Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
+If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
 
-:::tip[Snowplow CDI]
-
-If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI of that list in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
-
-:::
+Otherwise, you can use a community-maintained list such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list). Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
 
 ### `botAsns`
 
@@ -128,7 +119,11 @@ For example, server-side tracking (`"srv"`) and IoT (`"iot"`) events typically c
 
 The [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) adds an ASN entity to events where ASN information is available. This enrichment modifies that entity by setting `likelyBot` to `true` when the ASN matches one from the configured list of bad ASNs.
 
-If you don't have the IP lookup enrichment enabled, or if an event doesn't have ASN information, this enrichment won't produce any output.
+This enrichment won't produce any output if:
+* The IP lookup enrichment is not enabled
+* ASN data is not enabled in the IP lookup enrichment configuration
+* An event does not contain an IP address
+* There is no ASN information for that IP address
 
 <SchemaProperties
   overview={{entity: true}}

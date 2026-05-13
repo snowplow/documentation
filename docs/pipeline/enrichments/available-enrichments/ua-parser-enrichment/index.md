@@ -14,11 +14,82 @@ The [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-en
 
 This enrichment uses the [ua-parser library](https://github.com/ua-parser/uap-core/) to parse the user agent and provide information about the user's device.
 
-Choose this UA parser enrichment over the YAUAA enrichment if you're a [Self-Hosted](/docs/get-started/index.md#self-hosted) user and have memory constraints running Enrich. Alternatively, you may prefer the UA parser enrichment output.
+Both the UA parser and YAUAA enrichments will add an additional entity to the event, based on the information available in the `User-Agent` header of the tracker request, or the `ua` [tracker payload field](/docs/fundamentals/canonical-event/index.md#browser-fields). Unlike YAUAA, this enrichment doesn't support client hints.
 
-Both enrichments will add an additional entity to the event, based on the information available in the `User-Agent` header of the tracker request, or the `ua` [tracker payload field](/docs/fundamentals/canonical-event/index.md#browser-fields).
+## UA parser vs YAUAA
+
+This table compares the output of the two user agent parsing enrichments. The UA parser enrichment provides fewer fields, but is more lightweight and has lower memory requirements than YAUAA.
+
+The example output is based on the user agent string `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:106.0) Gecko/20100101 Firefox/106.0` (Firefox 106 on Mac OS X).
+
+| UA Parser field    | YAUAA field                       | Example         |
+| ------------------ | --------------------------------- | --------------- |
+| `deviceFamily`     | `deviceClass`                     | Desktop         |
+| ❌                  | `deviceName`                      | Apple Macintosh |
+| ❌                  | `deviceBrand`                     | Apple           |
+| ❌                  | `deviceCpu`                       | Intel           |
+| ❌                  | `deviceCpuBits`                   | 32              |
+| ❌                  | `deviceFirmwareVersion`           |                 |
+| ❌                  | `deviceVersion`                   |                 |
+| ❌                  | `operatingSystemClass`            | Desktop         |
+| `osFamily`         | `operatingSystemName`             | Mac OS X        |
+| `osVersion`        | `operatingSystemVersion`          | 10.15           |
+| `osMajor`          | `operatingSystemVersionMajor`     | 10              |
+| `osMinor`          | ❌                                 | 15              |
+| `osPatch`          | ❌                                 |                 |
+| `osPatchMinor`     | `operatingSystemVersionBuild`     |                 |
+| ❌                  | `operatingSystemNameVersion`      | Mac OS X 10.15  |
+| ❌                  | `operatingSystemNameVersionMajor` | Mac OS X 10     |
+| ❌                  | `layoutEngineClass`               | Browser         |
+| ❌                  | `layoutEngineName`                | Gecko           |
+| ❌                  | `layoutEngineVersion`             | 106.0           |
+| ❌                  | `layoutEngineVersionMajor`        | 106             |
+| ❌                  | `layoutEngineNameVersion`         | Gecko 106.0     |
+| ❌                  | `layoutEngineNameVersionMajor`    | Gecko 106       |
+| ❌                  | `layoutEngineBuild`               | 20100101        |
+| ❌                  | `agentClass`                      | Browser         |
+| `useragentFamily`  | `agentName`                       | Firefox         |
+| `useragentVersion` | `agentVersion`                    | 106.0           |
+| `useragentMajor`   | `agentVersionMajor`               | 106             |
+| `useragentMinor`   | ❌                                 | 0               |
+| `useragentPatch`   | ❌                                 |                 |
+| ❌                  | `agentNameVersion`                | Firefox 106.0   |
+| ❌                  | `agentNameVersionMajor`           | Firefox 106     |
+| ❌                  | `agentBuild`                      |                 |
+| ❌                  | `agentLanguage`                   |                 |
+| ❌                  | `agentLanguageCode`               |                 |
+| ❌                  | `agentInformationEmail`           |                 |
+| ❌                  | `agentInformationUrl`             |                 |
+| ❌                  | `agentSecurity`                   |                 |
+| ❌                  | `agentUuid`                       |                 |
+| ❌                  | `webviewAppName`                  |                 |
+| ❌                  | `webviewAppVersion`               |                 |
+| ❌                  | `webviewAppVersionMajor`          |                 |
+| ❌                  | `webviewAppNameVersionMajor`      |                 |
+| ❌                  | `facebookCarrier`                 |                 |
+| ❌                  | `facebookDeviceClass`             |                 |
+| ❌                  | `facebookDeviceName`              |                 |
+| ❌                  | `facebookDeviceVersion`           |                 |
+| ❌                  | `facebookFBOP`                    |                 |
+| ❌                  | `facebookFBSS`                    |                 |
+| ❌                  | `facebookOperatingSystemName`     |                 |
+| ❌                  | `facebookOperatingSystemVersion`  |                 |
+| ❌                  | `anonymized`                      |                 |
+| ❌                  | `hackerAttackVector`              |                 |
+| ❌                  | `hackerToolkit`                   |                 |
+| ❌                  | `koboAffiliate`                   |                 |
+| ❌                  | `koboPlatformId`                  |                 |
+| ❌                  | `iECompatibilityVersion`          |                 |
+| ❌                  | `iECompatibilityVersionMajor`     |                 |
+| ❌                  | `iECompatibilityNameVersion`      |                 |
+| ❌                  | `iECompatibilityNameVersionMajor` |                 |
+| ❌                  | `carrier`                         |                 |
+| ❌                  | `gSAInstallationID`               |                 |
+| ❌                  | `networkType`                     |                 |
 
 ## Configuration
+
+The optional `database` and `uri` parameters allow you to specify a custom ruleset. By default, the enrichment will use the one defined in the [ua-parser](https://github.com/ua-parser/uap-core/) library.
 
 <SchemaProperties
   overview={{ enrichment: true }}
@@ -41,8 +112,6 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 <TestingWithMicro/>
 ```
-
-The optional `database` and `uri` parameters allow you to specify a custom ruleset. By default, the enrichment will use the one defined in the [ua-parser](https://github.com/ua-parser/uap-core/) library.
 
 ## Output
 

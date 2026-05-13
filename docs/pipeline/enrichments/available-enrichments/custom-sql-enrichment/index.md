@@ -103,10 +103,10 @@ Each input consists of a `placeholder` index and a source: `pojo` for atomic e
 The `placeholder` is the index of the `?` SQL placeholder which this input will populate. It must be an integer greater than or equal to 1.
 
 For `json`, specify the field name as either `unstruct_event` for self-describing event fields, `contexts` for fields in entities added during tracking, or `derived_contexts` for fields in enrichment entities. Add two additional fields:
-- `schemaCriterion` is the self-describing JSON URI. You can specify all versions of the schema (`*-*-*`), or a specific MODEL version (e.g. `1-*-*`), MODEL plus MINOR (e.g. `1-1-*`) or a full MODEL-MINOR-PATCH version (e.g. `1-1-1`)
+- `schemaCriterion` is the Iglu schema URI. You can specify all versions of the schema (`*-*-*`), or a specific major version (e.g. `1-*-*`), major plus minor (e.g. `1-1-*`) or a full major-minor-patch version (e.g. `1-1-1`)
 - `jsonPath` is the [JSON Path statement](http://goessner.net/articles/JsonPath/) to navigate to the field inside the JSON that you want to use as the input.
 
-The resolved values should be primitive types.
+The resolved values should be primitive types (string, number, or boolean).
 
 As shown in the example configuration, you can have multiple inputs with the same placeholder index. The enrichment will use the last configured input for that index that resolves to a non-null value. This allows you to specify fallback inputs.
 
@@ -121,7 +121,7 @@ Configure how the enrichment should access your database in the `database` sect
 - `database`: the name of the specific database to run the query against
 
 :::tip[Minimal permissions]
-We strongly recommend that the username has minimal read-only permissions on just the tables required to execute the SQL query.
+We strongly recommend restricting the username to minimal read-only permissions on just the tables required to execute the SQL query.
 :::
 
 If your database server has additional authentication in place, such as IP allowlisting, configure it to permit access from the NAT gateway associated with the Snowplow pipeline.
@@ -174,23 +174,23 @@ The cache is an LRU (least-recently used) cache, where less frequently accessed 
 
 ### `ignoreOnError`
 
-When set to `true`, if the SQL query fails, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
+When set to `true`, if the enrichment fails for any reason, the event is still considered successfully enriched. It'll be loaded as usual, except without the entities added by the enrichment.
 
 When set to `false`, the event will become a [failed event](/docs/fundamentals/failed-events/index.md) if the SQL query fails.
 
 ## Edge case handling
 
-This enrichment uses any relational database to fetch data in JSON format. Here are some clues on how this enrichment will handle some exceptional cases:
+This enrichment uses a relational database to fetch data in JSON format. This table describes what will happen under different conditions:
 
-| Scenario                                                         | Outcome                                                                                                        |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| A provided JSONPath is invalid.                                  | Failed event.                                                                                                  |
-| More than one entity in the event matches the `schemaCriterion`. | The first matching entity is used.                                                                             |
-| Multiple inputs share the same placeholder index.                | The last configured input is used.                                                                             |
-| An input value is non-primitive (object or array), or `null`.    | Treated as not found.                                                                                          |
-| Any placeholder index has no value.                              | The SQL query won't run and no entities will be added. The event is otherwise processed as usual — not failed. |
-| The database query failed for any reason, or timed out.          | Failed event.                                                                                                  |
-| The database connection was lost.                                | Failed event.                                                                                                  |
+| Scenario                                                         | Outcome                                                                                                                              |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| A provided JSONPath is invalid.                                  | Failed event, unless `ignoreOnError` is set to `true`.                                                                               |
+| More than one entity in the event matches the `schemaCriterion`. | The first matching entity is used.                                                                                                   |
+| Multiple inputs share the same placeholder index.                | The last configured input is used.                                                                                                   |
+| Any placeholder index has no value.                              | The SQL query won't run and no entities will be added. The event is otherwise processed as usual — not failed.                       |
+| An input value is non-primitive (object or array), or `null`.    | Treated as not found. The SQL query won't run and no entities will be added. The event is otherwise processed as usual — not failed. |
+| The database query failed for any reason, or timed out.          | Failed event, unless `ignoreOnError` is set to `true`.                                                                               |
+| The database connection was lost.                                | Failed event, unless `ignoreOnError` is set to `true`.                                                                               |
 
 If the database connection is lost, the enrichment will attempt to reestablish it on the next event.
 

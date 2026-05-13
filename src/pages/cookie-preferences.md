@@ -1,6 +1,8 @@
 ---
-title: "Cookie Preferences"
-date: "2022-01-25"
+title: "Cookie preferences"
+description: "Manage your cookie preferences for the Snowplow documentation site, including analytics and essential cookies."
+keywords: ["cookies", "cookie preferences", "cookie policy", "consent", "privacy"]
+date: "2026-05-13"
 ---
 
 import ManageCookiePreferences from '@site/src/components/ManageCookiePreferences'

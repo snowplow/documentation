@@ -16,12 +16,11 @@ export default function SchemaProperties(props) {
     props.schema.properties && Object.keys(props.schema.properties).length > 0
   const warehouseNote = (
     <p>
-      Redshift and older versions of the BigQuery Loader use different names —
-      see the{' '}
+      Check the{' '}
       <a href="/docs/destinations/warehouses-lakes/querying-data/">
         querying overview
       </a>{' '}
-      for details.
+      to confirm the syntax for your warehouse or lake.
     </p>
   )
 

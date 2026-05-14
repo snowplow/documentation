@@ -3,33 +3,21 @@ title: "Introduction to Iglu repositories for schema storage"
 sidebar_label: "Repositories"
 date: "2021-03-26"
 sidebar_position: 20
-description: "Remote and embedded Iglu repositories for storing and serving JSON schemas via HTTP or embedded in JVM applications."
+description: "Remote Iglu repositories for storing and serving JSON schemas via HTTP."
 keywords: ["iglu repositories", "schema storage", "iglu server", "static repo"]
 ---
 
-An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
-
-## Technical architecture
-
-So far we support two types of Iglu repository:
-
-1. **Remote repositories** - essentially websites containing schemas which an Iglu client can query over HTTP
-2. **Embedded repositories** - which are embedded in a piece of software (typically alongside an Iglu client)
-
-In this diagram we show an Iglu client resolving a schema from Iglu Central, one embedded repository and a further two remote HTTP repositories:
-
-![Diagram showing an application using Iglu with the repositories highlighted: an Embedded Iglu Repository inside the application, and three remote repositories (Iglu Central, Private Iglu Repository #1, and Private Iglu Repository #2) accessible via schema lookups](images/iglu-repos.png)
+An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
 
 ## Available Iglu repositories
 
-We currently have two Iglu "repo" technologies available for deploying your Iglu repository - follow the links to find out more:
+There are two Iglu repository technologies available for deploying your own Iglu repository. Follow the links to find out more:
 
-| **Repository**    | **Category** | **Description**                                            | **Status**       |
-| ----------------- | ------------ | ---------------------------------------------------------- | ---------------- |
-| Iglu Server       | Remote       | An Iglu repository server structured as a RESTful API      | Production-ready |
-| Static repo       | Remote       | An Iglu repository server structured as a static website   | Production-ready |
-| JVM-embedded repo | Embedded     | An Iglu repository embedded in a Java or Scala application | Production-ready |
+| **Repository** | **Description**                                          |
+| -------------- | -------------------------------------------------------- |
+| Iglu Server    | An Iglu repository server structured as a RESTful API    |
+| Static repo    | An Iglu repository server structured as a static website |
 
 ## Iglu Central
 
-[Iglu Central](https://iglucentral.com/) is a public repository of JSON Schemas hosted by [Snowplow Analytics](http://snowplowanalytics.com/). For more information on its technical architecture, see [Iglu Central](/docs/api-reference/iglu/iglu-central-setup/index.md).
+[Iglu Central](https://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow. For more information, see [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md).

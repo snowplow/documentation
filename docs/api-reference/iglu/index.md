@@ -21,7 +21,7 @@ Iglu consists of three key technical aspects:
 
 1. A [common architecture](/docs/api-reference/iglu/common-architecture/index.md) that informs all aspects of Iglu
 2. [Iglu registries](/docs/api-reference/iglu/iglu-repositories/index.md) that can host a set of [self-describing JSON schemas](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/index.md)
-3. [Iglu clients](/docs/api-reference/iglu/iglu-clients/index.md) that can resolve schemas from one or more Iglu registries
+3. [Iglu clients](/docs/api-reference/iglu/iglu-repositories/index.md) that can resolve schemas from one or more Iglu registries
 
 ## Iglu explained
 
@@ -57,4 +57,4 @@ Under the covers, Iglu Central is built and run as a **static Iglu registry**, h
 
 ![Diagram showing three Iglu clients making schema lookups to Iglu Central, with schemas manually uploaded to Iglu Central. A "Behind firewall" section shows a separate Iglu Client querying a private Iglu Central mirror.](images/iglu-central.png)
 
-The **deployment process** for Iglu Central is documented in [Iglu Central setup](/docs/api-reference/iglu/iglu-central-setup/index.md) in case you want to set up a public mirror or private instance of Iglu Central.
+The **deployment process** for Iglu Central is documented in [Iglu Central setup](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) in case you want to set up a public mirror or private instance of Iglu Central.

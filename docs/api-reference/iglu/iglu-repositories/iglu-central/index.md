@@ -19,18 +19,24 @@ Under the hood, Iglu Central is built and run as a static Iglu repository, which
 
 ![Diagram showing three Iglu clients making schema lookups to Iglu Central, with schemas manually uploaded to Iglu Central. A "Behind firewall" section shows a separate Iglu Client querying a private Iglu Central mirror.](images/iglu-central.png)
 
-The [deployment process](/docs/api-reference/iglu/iglu-central-setup/index.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
 
-Iglu Central is available for view at [https://iglucentral.com](https://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/api-reference/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
+Iglu Central is available for view at [https://iglucentral.com](https://iglucentral.com/). The root index page links to all schemas currently hosted on Iglu Central.
 
-## Self Hosting Iglu Central schemas
+## Mirror or self-host Iglu Central
 
-The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central). You can mirror Iglu Central using `[igluctl](/docs/api-reference/iglu/igluctl-2/index.md)`:
+You might want to create a public mirror or private clone of Iglu Central if:
+
+- You need to access Iglu Central from a software system that cannot reach the open internet.
+- You want a mirror with lower latency to your software system.
+
+The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central). You can mirror Iglu Central to your own [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) using [`igluctl`](/docs/api-reference/iglu/igluctl-2/index.md):
 
 ```bash
 git clone https://github.com/snowplow/iglu-central
 cd iglu-central
-igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
+igluctl static push --public schemas/ http://MY-IGLU-URL 00000000-0000-0000-0000-000000000000
 ```
 
-For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/api-reference/iglu/iglu-central-setup/index.md).
+Alternatively, you can host the schemas as a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md).
+
+Once your mirror is in place, update your [Iglu resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md) to point to it instead of `https://iglucentral.com`.

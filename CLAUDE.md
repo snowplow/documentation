@@ -37,6 +37,7 @@ When documenting an Iglu schema, use the `SchemaProperties` component. See [`CON
 * Example: Create `/segment-audience-hub/index.md`, not `segment-audience-hub.md`.
 * **End all internal links with `/index.md`** for validation, EXCEPT for links in files within `/tutorials`.
 * Use absolute paths from docs root: `/docs/sources/trackers/.../index.md`
+* **Never use `https://docs.snowplow.io` links to internal pages.** Any link to a `docs.snowplow.io` URL must be converted to a relative internal path.
 * **Verify every link exists.** Search the docs directory to confirm paths before publishing.
 
 ## Required frontmatter

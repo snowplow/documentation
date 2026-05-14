@@ -18,9 +18,8 @@ Send Snowplow events to Amplitude to power product and marketing analytics or gu
 Before setting up the forwarder in Console, you'll need an Amplitude API Key. To find your API key:
 
 1. Log in to your Amplitude workspace
-2. Click **Settings** in the top right, then click **Organization Settings**
-3. From the sidebar, select **Projects**, then select your Project to view its details
-4. Copy the **API Key**
+2. Create a HTTP API source (Data -> Sources)
+3. Copy the **API Key** from your source's Settings screen
 
 :::tip[Test in a non-production project first]
 To avoid introducing bad data in your production Amplitude project, we recommend using a test or development Amplitude project to test your transformations first. Then, create a new Connection in Console with your production API key, and a new forwarder that imports the configuration from your development forwarder.

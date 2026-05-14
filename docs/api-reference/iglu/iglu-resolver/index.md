@@ -1,7 +1,7 @@
 ---
 title: "Iglu Resolver configuration for Snowplow applications"
 sidebar_label: "Iglu Resolver"
-date: "2020-10-22"
+date: "2026-05-14"
 sidebar_position: 30
 description: "Configure Iglu Resolver for schema fetching and validation in Snowplow enrichers and loaders with cache and repository settings."
 keywords: ["iglu resolver", "resolver config", "schema fetching", "iglu client configuration"]

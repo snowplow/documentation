@@ -1,7 +1,7 @@
 ---
 title: "Iglu Central public schema repository"
 sidebar_label: "Iglu Central"
-date: "2021-03-26"
+date: "2026-05-14"
 sidebar_position: 1000
 description: "Public machine-readable repository of Snowplow JSON schemas, with self-hosting support via igluctl."
 keywords: ["iglu central", "public schema repository", "snowplow schemas"]

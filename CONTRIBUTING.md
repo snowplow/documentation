@@ -288,7 +288,6 @@ href: https://snowplow.github.io/snowplow-java-tracker
 
 `noindex` will be applied automatically.
 
-
 ## Write a new tutorial
 
 Tutorials live in `tutorials/`, not `docs/`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.

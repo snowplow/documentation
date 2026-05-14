@@ -132,9 +132,7 @@ if (ExecutionEnvironment.canUseDOM) {
       })
       trackPageView()
     } else {
-      const cookieKeys = document.cookie
-        .split(';')
-        .reduce((ac, str) => [...ac, str?.split('=')[0].trim()], [])
+      const cookieKeys = Object.keys(Cookies.get())
       const snowplowCookies = cookieKeys.filter((cookieKey) =>
         cookieKey.startsWith('_sp5_')
       )

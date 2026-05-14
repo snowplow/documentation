@@ -20,7 +20,7 @@ import {
   enableFormTracking,
 } from '@snowplow/browser-plugin-form-tracking'
 import Cookies from 'js-cookie'
-import { DOCS_SITE_URLS } from './src/constants/config'
+import { DOCS_SITE_URLS, SP5_COOKIE_NAME, BIZ1_COOKIE_NAME } from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
 import { isEmpty, pickBy } from 'lodash'
 import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media'
@@ -79,9 +79,9 @@ const setupBrowserTracker = () => {
   newTracker(
     'snplow5',
     'https://collector.snowplow.io',
-    createTrackerConfig('_sp5_')
+    createTrackerConfig(SP5_COOKIE_NAME)
   )
-  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
+  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig(BIZ1_COOKIE_NAME))
 
   const selectedTabContext = () => {
     const data = pickBy({
@@ -134,7 +134,7 @@ if (ExecutionEnvironment.canUseDOM) {
     } else {
       const cookieKeys = Object.keys(Cookies.get())
       const snowplowCookies = cookieKeys.filter((cookieKey) =>
-        cookieKey.startsWith('_sp5_')
+        cookieKey.startsWith(SP5_COOKIE_NAME)
       )
       snowplowCookies.forEach((snowplowCookie) =>
         Cookies.remove(snowplowCookie)

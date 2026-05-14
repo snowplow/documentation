@@ -28,7 +28,7 @@ You might want to create a public mirror or private clone of Iglu Central if:
 - You need to access Iglu Central from a software system that cannot reach the open internet.
 - You want a mirror with lower latency to your software system.
 
-The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central). You can mirror Iglu Central to your own [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) using [`igluctl`](/docs/api-reference/iglu/igluctl-2/index.md):
+The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central). You can mirror Iglu Central to your own [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) using [`igluctl`](/docs/api-reference/iglu/igluctl/index.md):
 
 ```bash
 git clone https://github.com/snowplow/iglu-central

@@ -32,7 +32,7 @@ For tuning, see the [configuration reference](/docs/api-reference/iglu/iglu-repo
 
 ## Manage schemas
 
-Most users interact with Iglu Server through [`igluctl`](/docs/api-reference/iglu/igluctl-2/index.md) (for publishing and validating schemas from the command line) rather than calling the API directly. See [Manage schemas](/docs/api-reference/iglu/manage-schemas/index.md).
+Most users interact with Iglu Server through [`igluctl`](/docs/api-reference/iglu/igluctl/index.md) (for publishing and validating schemas from the command line) rather than calling the API directly. See [Manage schemas](/docs/api-reference/iglu/manage-schemas/index.md).
 
 ## REST API
 

@@ -124,7 +124,7 @@ Most other registries, such as those hosted as websites or via [S3](https://aws.
 
 If you can access the schemas directly via a browser, this is probably the right choice.
 
-Static registries managed with [`igluctl`](/docs/api-reference/iglu/igluctl-2/index.md) version 8 or newer will include a manifest file listing all the schemas in a registry, e.g. [the Iglu Central manifest](https://iglucentral.com/schemas).
+Static registries managed with [`igluctl`](/docs/api-reference/iglu/igluctl/index.md) version 8 or newer will include a manifest file listing all the schemas in a registry, e.g. [the Iglu Central manifest](https://iglucentral.com/schemas).
 
 If the registry doesn't include a manifest listing the contained schemas, the extension will attempt to request all referenced schemas from static registries to see if it's included.
 In this case the registries will also not have their schemas listed in **Manage Schemas** - unless they're referenced by tracked events since you last opened the extension.

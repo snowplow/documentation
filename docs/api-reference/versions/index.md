@@ -105,7 +105,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | Component                                                                              |       Latest version       |
 | :------------------------------------------------------------------------------------- | :------------------------: |
 | [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)         |   {versions.igluServer}    |
-| [`igluctl` utility](/docs/api-reference/iglu/igluctl-2/index.md)                       |     {versions.igluctl}     |
+| [`igluctl` utility](/docs/api-reference/iglu/igluctl/index.md)                       |     {versions.igluctl}     |
 
 ### Trackers
 

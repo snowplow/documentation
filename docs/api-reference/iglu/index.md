@@ -31,4 +31,4 @@ The pages in this section are most relevant to Self-Hosted customers running the
 - **[Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md)** is a public registry hosted by Snowplow at [iglucentral.com](https://iglucentral.com/). It contains the schemas for Snowplow's out-of-the-box events and entities.
 - **[Static repositories](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md)** are an alternative to Iglu Server for read-only schema hosting from a static website (for example, on S3).
 - The **[Iglu Resolver](/docs/api-reference/iglu/iglu-resolver/index.md)** is embedded into Snowplow pipeline components (enrichers, loaders) and fetches schemas from one or more configured registries.
-- **[`igluctl`](/docs/api-reference/iglu/igluctl-2/index.md)** is the command-line tool for validating, publishing, and managing schemas.
+- **[`igluctl`](/docs/api-reference/iglu/igluctl/index.md)** is the command-line tool for validating, publishing, and managing schemas.

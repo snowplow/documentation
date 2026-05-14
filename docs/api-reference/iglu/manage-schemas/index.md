@@ -59,13 +59,13 @@ If you update the `vendor` or the `name` in the example, you should update the a
 
 :::
 
-Finally, to upload your schema to your Iglu registry, you can use [igluctl](/docs/api-reference/iglu/igluctl-2/index.md):
+Finally, to upload your schema to your Iglu registry, you can use [igluctl](/docs/api-reference/iglu/igluctl/index.md):
 
 ```bash
 igluctl static push --public <local path to schemas> <Iglu server endpoint> <iglu_super_api_key>
 ```
 
-See the [Igluctl reference page](/docs/api-reference/iglu/igluctl-2/index.md#static-push) for more information on the `static push` command.
+See the [Igluctl reference page](/docs/api-reference/iglu/igluctl/index.md#static-push) for more information on the `static push` command.
 
 ## Versioning schemas
 

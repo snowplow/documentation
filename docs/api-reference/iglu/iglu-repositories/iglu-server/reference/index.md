@@ -35,6 +35,7 @@ license {
 | `repoServer.idleTimeout` | Default: `30 seconds`. TCP connections are dropped after this timeout expires. In case Iglu Server runs behind a load balancer, this should slightly exceed the load balancer's idle timeout. |
 | `repoServer.hsts.enable` _(since 0.12.0)_ | Default: `false`. Whether to send an [HSTS header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security). |
 | `repoServer.hsts.maxAge` _(since 0.12.0)_ | Default: `365 days`. The maximum age for the HSTS header. |
+| `repoServer.maxPayloadSize` _(since 0.14.0)_ | Default: `100000`. Maximum accepted request body size in bytes. Requests exceeding this are rejected. |
 | `database.type` | Optional. Default: `postgres`. Can be changed to `dummy` during development for in-memory only storage. |
 | `database.host` | Required. Host name for Postgres database. |
 | `database.port` | Optional. Default: `5432`. Port for Postgres database. |
@@ -49,6 +50,7 @@ license {
 | `webhooks.schemaPublished.vendorPrefixes` | Optional. Example: `["com", "org.acme", "org.snowplow"]`. List of schema prefixes (regexes) that should be sent via the webhook. |
 | `webhooks.schemaPublished.usePost` (since *0.8.7*) | Optional. Default: `false`. Whether to use `POST` to send request via the webhook. |
 | `superApiKey` | Optional. Set a super api key with permission to read/write any schema, and add other api keys. |
+| `maxJsonDepth` _(since 0.14.0)_ | Default: `40`. Maximum nesting depth for JSON values accepted by the server. Used both when validating schemas and when parsing incoming JSON payloads. |
 
 ## Advanced options
 

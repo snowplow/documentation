@@ -1,5 +1,6 @@
 ---
 title: "Iglu Server configuration reference"
+sidebar_label: "Config reference"
 date: "2026-05-14"
 sidebar_position: 0
 description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
@@ -12,7 +13,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs in github](https://github.com/snowplow/iglu-server/tree/master/config) show how to prepare an input file.
+This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs on GitHub](https://github.com/snowplow/iglu-server/tree/master/config) show how to prepare an input file.
 
 ## License
 
@@ -42,10 +43,10 @@ license {
 | `database.dbname` | Required. Name of Postgres database. |
 | `database.username` | Required. Username for connecting to Postgres. |
 | `database.password` | Required. Password for connecting to Postgres. |
-| `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customise the api base url in Swagger. Helpful for when running iglu-server behind a proxy server. |
+| `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customize the api base url in Swagger. Helpful for when running Iglu Server behind a proxy server. |
 | `debug` | Optional. Default: `false`.  Enable additional debug api endpoint to respond with all internal state. |
 | `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/fundamentals/schemas/versioning/index.md). |
-| `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples in github](https://github.com/snowplow/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
+| `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples on GitHub](https://github.com/snowplow/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
 | `webhooks.schemaPublished.uri` | Required. URI of the HTTP server that will receive the webhook event. |
 | `webhooks.schemaPublished.vendorPrefixes` | Optional. Example: `["com", "org.acme", "org.snowplow"]`. List of schema prefixes (regexes) that should be sent via the webhook. |
 | `webhooks.schemaPublished.usePost` (since *0.8.7*) | Optional. Default: `false`. Whether to use `POST` to send request via the webhook. |
@@ -54,7 +55,7 @@ license {
 
 ## Advanced options
 
-We believe these advanced options are set to sensible defaults, and hopefully you won’t need to ever change them.
+These advanced options have sensible defaults and rarely need changing.
 
 | parameter | description |
 |-|-|
@@ -70,4 +71,4 @@ We believe these advanced options are set to sensible defaults, and hopefully yo
 | `database.pool.connectionPool.size` | Optional. Default: `4`. Number of threads to use when the connection pool has type `fixed`. |
 | `database.pool.transactionPool.type` | Optional. Default: `cached` (recommended for production). Type of the thread pool used for blocking JDBC operations. |
 | `preTerminationPeriod` (since *0.8.0*) | Optional. Default: `1 second`. How long the server should pause after receiving a sigterm before starting the graceful shutdown. During this period the server continues to accept new connections and respond to requests. |
-| `preTerminationUnhealthy` (since *0.8.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the server can be configured to return 503s on the `/health` endpoint. Can be helpful for removing the server from a load balancer’s targets. |
+| `preTerminationUnhealthy` (since *0.8.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the server can be configured to return 503s on the `/health` endpoint. Can be helpful for removing the server from a load balancer's targets. |

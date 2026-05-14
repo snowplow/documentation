@@ -79,8 +79,8 @@ If `cacheTtl` is set, successfully fetched schemas are also re-resolved after th
 
 For each schema lookup, registries are sorted by:
 
-1. **`vendorPrefixes`** — the resolver checks registries with a matching `vendorPrefix` first. Other registries aren't skipped, just queried later.
-2. **Class priority** — a hardcoded value per registry type. Embedded registries are always checked before HTTP registries (within the same `vendorPrefix` match).
-3. **`priority`** — the user-defined value in your config. Only affects ordering within the same class priority.
+1. `vendorPrefixes` — the resolver checks registries with a matching `vendorPrefix` first. Other registries aren't skipped, just queried later.
+2. Class priority — a hardcoded value per registry type. Embedded registries are always checked before HTTP registries (within the same `vendorPrefix` match).
+3. `priority` — the user-defined value in your config. Only affects ordering within the same class priority.
 
 Lower numbers mean higher priority. `[0, 1, 2, 3]` is checked left to right.

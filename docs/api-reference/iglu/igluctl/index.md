@@ -2,6 +2,7 @@
 title: "Igluctl CLI for schema management"
 sidebar_label: "Iglu CLI"
 sidebar_position: 10
+date: "2026-05-14"
 description: "Command-line tool for validating, publishing, and managing JSON schemas in Iglu registries with DDL generation and verification."
 keywords: ["igluctl", "schema validation", "iglu cli", "schema migration", "self-hosted snowplow"]
 ---
@@ -14,31 +15,31 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-Iglu is a schema repository for JSON Schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
+Iglu is a schema repository for JSON schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
 
 <p> This document is for version {versions.igluctl}. </p>
 
 ## Igluctl
 
-Iglu provides a CLI application, called igluctl which allows you to perform most common tasks on Iglu registry. So far, the overall structure of igluctl commands looks like the following:
+Iglu provides a CLI application called Igluctl which allows you to perform most common tasks in Iglu Registry. So far, the overall structure of Igluctl commands looks like the following:
 
-- `lint` - validate set of JSON Schemas for syntax and consistency of their properties
+- `lint` - validate set of JSON schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
-    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON Schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window, loading would fail for all events.
-    - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
-    - `pull` - pull set of JSON Schemas from registry to local folder
+    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window, loading would fail for all events.
+    - `push` - push set of JSON schemas from static registry to full-featured (Scala Registry for example) one
+    - `pull` - pull set of JSON schemas from registry to local folder
     - `deploy` - run entire schema workflow using a config file. This could be used to chain multiple commands, i.e. `lint` followed by `push` and `s3cp`.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
-- `server` - work with an Iglu server
+- `server` - work with an Iglu Server
     - `keygen` - generate read and write API keys on Iglu Server
-- `table-check` - will check a given Redshift or Postgres tables against iglu server.
+- `table-check` - will check a given Redshift or Postgres tables against Iglu Server.
 - `verify` (since 0.13.0) - work with schemas to check their evolution
     - `redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
     - `parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
 
 ## Downloading and running Igluctl
 
-Download the latest Igluctl from GitHub releases and unzip the file:
+Download Igluctl from GitHub releases and unzip the file:
 
 <CodeBlock language="bash">{
 `$ wget https://github.com/snowplow/igluctl/releases/download/${versions.igluctl}/igluctl_${versions.igluctl}.zip
@@ -61,7 +62,7 @@ Note that Igluctl expects [JRE 8](http://www.oracle.com/technetwork/java/javase/
 
 ## lint
 
-`igluctl lint` validates JSON Schemas.
+`igluctl lint` validates JSON schemas.
 
 It is designed to be run against file-based schema registries with the standard Iglu folder structure:
 
@@ -88,12 +89,12 @@ $ /path/to/igluctl lint /path/to/schema/registry/schemas/com.example_company/exa
 
 Examples of errors that are identified:
 
-- JSON Schema has inconsistent self-describing information and path on filesystem
-- JSON Schema has invalid `$schema` keyword. It should be always set to [iglu-specific](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#), while users tend to set it to Draft v4 or even to self-referencing Iglu URI
-- JSON Schema is invalid against its standard (empty `required`, string `maximum` and similar)
-- JSON Schema contains properties which contradict each other, like `{"type": "integer", "maxLength": 0}` or `{"maximum": 0, "minimum": 10'}`. These schemas are inherently useless as for some valiators there is no JSON instance they can validate
+- JSON schema has inconsistent self-describing information and path on filesystem
+- JSON schema has invalid `$schema` keyword. It should be always set to [Iglu-specific](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#), while users tend to set it to Draft v4 or even to self-referencing Iglu URI
+- JSON schema is invalid against its standard (empty `required`, string `maximum` and similar)
+- JSON schema contains properties which contradict each other, like `{"type": "integer", "maxLength": 0}` or `{"maximum": 0, "minimum": 10'}`. These schemas are inherently useless as for some validators there is no JSON instance they can validate
 
-The above cases can very hard to spot without a specialized tool as they are still valid JSONs and in last case it is even valid JSON Schemas - so will validate against a standard JSON schema validator.
+The above cases can very hard to spot without a specialized tool as they are still valid JSON and in last case even valid JSON schemas - so will validate against a standard JSON schema validator.
 
 `lint` has two options:
 
@@ -104,14 +105,14 @@ The above cases can very hard to spot without a specialized tool as they are sti
 
 Note: `--severityLevel` option is deprecated and removed as of version 0.4.0.
 
-Below are two groups of linters; allowed to be skipped and not allowed to be skipped. By default, all of them are enabled but igluctl users can skip any combination of `rootObject`, `unknownFormats`, `numericMinMax`, `stringLength`, `optionalNull`, `description` through `--skip-checks`.
+Below are two groups of linters; allowed to be skipped and not allowed to be skipped. By default, all of them are enabled but Igluctl users can skip any combination of `rootObject`, `unknownFormats`, `numericMinMax`, `stringLength`, `optionalNull`, `description` through `--skip-checks`.
 
 Igluctl let you skip below checks:
 
 | NAME             | DEFINITION                                                                                         |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
 | `rootObject`     | Check that root of schema has object type and contains properties                                  |
-| `unknownFormats` | Check that schema doesn’t contain unknown formats                                                  |
+| `unknownFormats` | Check that schema doesn't contain unknown formats                                                  |
 | `numericMinMax`  | Check that schema with numeric type contains both minimum and maximum properties                   |
 | `stringLength`   | Check that schema with string type contains maxLength property or other ways to extract max length |
 | `optionalNull`   | Check that non-required fields have null type                                                      |
@@ -125,7 +126,7 @@ $ ./igluctl lint --skip-checks description,rootObject /path/to/schema/registry/s
 
 Note that linter names are case sensitive
 
-Igluctl also includes many checks proving that schemas doesn’t have conflicting expectations (such as `minimum` value bigger than `maximum`). Schemas with such expectations are valid according to specification, but do not make any sense in real-world use cases. These checks are mandatory and cannot be disabled.
+Igluctl also includes many checks proving that schemas doesn't have conflicting expectations (such as `minimum` value bigger than `maximum`). Schemas with such expectations are valid according to specification, but do not make any sense in real-world use cases. These checks are mandatory and cannot be disabled.
 
 `igluctl lint` will exit with status code 1 if encounter at least one error.
 
@@ -147,9 +148,9 @@ $ ./igluctl static generate --output $DDL_DIR $INPUT
 
 ### Generating migration Redshift table scripts to accommodate updated schema versions
 
-If an input directory is specified with several self-describing JSON schemas with a single REVISION, Igluctl will generate migration scripts to update (`ALTER`) Redshift tables for older schema versions to support the latest schema version.
+If an input directory is specified with several self-describing JSON schemas with a single REVISION, Igluctl will generate migration scripts to update (`ALTER`) Redshift tables for older schema versions to support the new schema version.
 
-For example, having the following Self-describing JSON Schemas as an input:
+For example, having the following Self-describing JSON schemas as an input:
 
 - schemas/com.acme/click_event/1-0-0
 - schemas/com.acme/click_event/1-0-1
@@ -208,20 +209,20 @@ $ ./igluctl static pull /path/to/static/registry iglu.acme.com:80/iglu-server f8
 
 ## static s3cp
 
-`igluctl static s3cp` enables you to upload JSON Schemas to chosen S3 bucket. This is helpful for generating a remote iglu registry which can be served from S3 over http(s).
+`igluctl static s3cp` enables you to upload JSON schemas to chosen S3 bucket. This is helpful for generating a remote Iglu registry which can be served from S3 over http(s).
 
 `igluctl static s3cp` accepts two required arguments and several options:
 
 - `input` - path to your files. Required.
 - `bucket` - S3 bucket name. Required.
-- `s3path` - optional S3 path to prepend your input root. Usually you don’t need it.
-- `accessKeyId` - your AWS Access Key Id. This may or or may not be required, depending on your preferred authentication option.
-- `secretAccessKey` - your AWS Secret Access Key. This may or or may not be required, depending on your preferred authentication option.
-- `profile` - your AWS profile name. This may or or may not be required, depending on your preferred authentication option.
+- `s3path` - optional S3 path to prepend your input root. Usually you don't need it.
+- `accessKeyId` - your AWS Access Key Id. This may or may not be required, depending on your preferred authentication option.
+- `secretAccessKey` - your AWS Secret Access Key. This may or may not be required, depending on your preferred authentication option.
+- `profile` - your AWS profile name. This may or may not be required, depending on your preferred authentication option.
 - `region` - AWS S3 region. Default: `us-west-2`
-- `skip-schema-lists` - Do not generate and upload schema list objects. If using a static registry for all Snowplow applications, don’t enable this setting as some components still require lists to function correctly.
+- `skip-schema-lists` - Do not generate and upload schema list objects. If using a static registry for all Snowplow applications, don't enable this setting as some components still require lists to function correctly.
 
-`igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren’t available as well - it `~/.aws/config` file. If all above failed - it exits with error.
+`igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren't available as well - it `~/.aws/config` file. If all above failed - it exits with error.
 
 ## static deploy
 
@@ -295,7 +296,7 @@ $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server 
 
 ## table-check
 
-`igluctl table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0
+`igluctl table-check` will check given RedShift or Postgres schema against an Iglu repository. As of version 0.11.0
 it would cross verify the column types as well as names.
 
 It supports two interfaces:

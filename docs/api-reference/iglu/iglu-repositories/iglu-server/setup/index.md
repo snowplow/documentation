@@ -2,6 +2,7 @@
 title: "Setup guide for Iglu Server"
 sidebar_label: "Setup guide"
 sidebar_position: 1000
+date: "2026-05-14"
 description: "Deploy Iglu Server on AWS, GCP, or Azure using the Terraform modules from the self-hosted quick start, or run it manually with Docker."
 keywords: ["iglu server setup", "terraform iglu", "docker iglu", "postgresql schema storage", "self-hosted snowplow"]
 ---

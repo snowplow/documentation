@@ -13,7 +13,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
+An Iglu repository acts as a store of data schemas (JSON schemas only). Hosting JSON schemas in an Iglu repository allows you to use those schemas in Snowplow.
 
 ## Available Iglu repositories
 
@@ -26,4 +26,4 @@ There are two Iglu repository technologies available for deploying your own Iglu
 
 ## Iglu Central
 
-[Iglu Central](https://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow. For more information, see [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md).
+[Iglu Central](https://iglucentral.com/) is a public repository of JSON schemas hosted by Snowplow. For more information, see [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md).

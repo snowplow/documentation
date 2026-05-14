@@ -17,7 +17,6 @@ Think of Iglu Central as like [RubyGems.org](http://rubygems.org/) or [Maven Cen
 
 Under the hood, Iglu Central is built and run as a static Iglu repository, which is simply an Iglu repository server structured as a static website serving its whole content over http, and is hosted on Amazon S3.
 
-![Diagram showing three Iglu clients making schema lookups to Iglu Central, with schemas manually uploaded to Iglu Central. A "Behind firewall" section shows a separate Iglu Client querying a private Iglu Central mirror.](images/iglu-central.png)
 
 
 Iglu Central is available for view at [https://iglucentral.com](https://iglucentral.com/). The root index page links to all schemas currently hosted on Iglu Central.

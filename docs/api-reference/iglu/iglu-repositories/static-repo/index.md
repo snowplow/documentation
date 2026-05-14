@@ -26,7 +26,7 @@ Make the following changes:
 - Leave `jsonschema` as-is (we only support JSON Schemas for now)
 - Replace `1-0-0` with the schema specification of your first JSON Schema
 
-Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/index.md) for details.
+Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/fundamentals/schemas/index.md#self-describing-json-schema-anatomy) for details.
 
 Done? Now you are ready to host your files.
 

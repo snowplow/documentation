@@ -114,7 +114,7 @@ You may need to add one of these registries if you are accessing the registry bu
 
 To authenticate with your server, the extension will require:
 - Iglu API endpoint: this is the base URL the extension will use when contacting the API. If you include a path component, the API request will be `api/*` relative to this path; you may need to add or remove trailing slashes if the API isn't hosted at the root.
-- Iglu API key: see [API keys and the authentication service](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md#5-api-keys-and-the-authentication-service-apiauth) for instructions on generating an Iglu API key.
+- Iglu API key: see [API keys and the authentication service](/docs/api-reference/iglu/iglu-repositories/iglu-server/setup/index.md#3-use-the-api-key-generation-service) for instructions on generating an Iglu API key.
 
 When logged into Console, these details should be available in **Manage organization** > **API keys for utilities**.
 

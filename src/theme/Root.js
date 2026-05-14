@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from '@mui/material/styles'
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
-
-const PRODUCT_FRUITS_WORKSPACE_CODE = 'x2zOSE4yyzB6ULQ8'
+import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
 
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')

@@ -44,7 +44,7 @@ Key architectural files and folders:
 
 Non-obvious things that could cause confusion if you don't know about them:
 
-- **`static/_redirects` is dead.** Legacy Netlify file kept for reference only. Live redirects are in [`worker/redirects.js`](#cloudflare-worker). The `yarn build:cf` script deletes the auto-generated `build/_redirects` so nothing leaks.
+- **`static/_redirects` is no longer active.** Legacy Netlify file kept for reference only. Live redirects are in [`worker/redirects.js`](#cloudflare-worker). The `yarn build:cf` script deletes the auto-generated `build/_redirects` so nothing leaks.
 - **`yarn build` is the only link checker.** `yarn start` doesn't catch broken internal links or missing anchors. The build is configured with `onBrokenLinks: 'throw'` + `onBrokenAnchors: 'throw'`.
 - **`componentVersions.js` has no JS imports.** It's referenced from MDX pages only — grep `versions.` to find usage.
 - **Tailwind and Infima coexist deliberately but unevenly.** See [Styling and CSS](#styling-and-css).
@@ -55,10 +55,9 @@ Non-obvious things that could cause confusion if you don't know about them:
 ## Cloudflare Worker
 
 `worker/index.js` runs on every request and does three things:
-
-1. **Server-side Snowplow tracking**.
-2. **Forced redirects** via `findForcedRedirect(pathname)`, checked before asset fetch, returns 301 on match.
-3. **Fallback redirects** via `findFallbackRedirect(pathname)`, checked only after a 404.
+1. **Server-side Snowplow tracking**
+2. **Forced redirects** via `findForcedRedirect(pathname)`, checked before asset fetch, returns 301 on match
+3. **Fallback redirects** via `findFallbackRedirect(pathname)`, checked only after a 404
 
 Both redirect tiers are defined in `worker/redirects.js`. `move.sh` appends to it automatically.
 
@@ -68,12 +67,12 @@ Live under `plugins/`.
 
 ### LLMs.txt and Markdown generation
 
-This [plugin](plugins/docusaurus-plugin-llms-txt/src/index.js) generates LLM artefacts during build:
+This [plugin](plugins/docusaurus-plugin-llms-txt/src/index.js) generates LLM artifacts during build:
 - A `.md` file for each page
 - An `llms.txt` index containing the page title, description, and link to the markdown version
 - A concatenated `llms-full.txt`
 
-The `llms.txt` index includes files in both `/docs` and `/tutorials`. It excludes pages with `type: link` and routes in the `excludeRoutes` array. Files marked as `sidebar_custom_props.legacy` or similar are indexed, but are suffixed with `[previous version]`.
+The `llms.txt` index includes files in both `docs/` and `tutorials/`. It excludes pages with `type: link` and routes in the `excludeRoutes` array. Files marked as `sidebar_custom_props.legacy` or similar are indexed, but are suffixed with `[previous version]`.
 
 The `llms-full.txt` file concatenates all the per-page markdown files, except for the `[previous version]` pages.
 
@@ -131,9 +130,9 @@ There's also a module `src/js/mermaidEnlarge.js` that adds click-to-enlarge func
 
 Served at `/tutorials/*` via a **second `@docusaurus/plugin-content-docs` instance** configured separately.
 
-The plugin has no `sidebarPath`, so navigation is custom and not file-tree-derived. The tutorials use the components in [`src/components/tutorials/`](src/components/tutorials).
+The plugin has no `sidebarPath`, so navigation is custom and not file-tree-derived. The tutorials use the components in [`src/components/tutorials`](src/components/tutorials).
 
-Internal link conventions inside `/tutorials/` differ from `/docs/` — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable notebooks live as static assets in `static/notebooks/`.
+Internal link conventions inside `tutorials/` differ from `docs/` — see [`tutorials/_README.md`](tutorials/_README.md). Downloadable notebooks live as static assets in `static/notebooks/`.
 
 ## LLM support
 

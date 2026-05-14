@@ -36,7 +36,6 @@ const config: Config = {
   },
 
   clientModules: [
-    require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
     require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
@@ -276,6 +275,12 @@ const config: Config = {
         content:
           'https://cdn.prod.website-files.com/661fd4aa0185c5022e931990/66714f936876397066d5fba7_thumbnail-post-category.avif',
       },
+    },
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        '!function(){window.semaphore=window.semaphore||[],window.ketch=function(){window.semaphore.push(arguments)};var e=document.createElement("script");e.type="text/javascript",e.src="https://global.ketchcdn.com/web/v3/config/snowplow_analytics/website_smart_tag/boot.js",e.defer=e.async=!0,document.getElementsByTagName("head")[0].appendChild(e)}();',
     },
   ],
 

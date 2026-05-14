@@ -13,7 +13,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-Iglu Resolver is a component embedded into many Snowplow applications, including enrichers and loaders. It's responsible for fetching schemas from Iglu registries and validating data against these schemas.
+Iglu Resolver is a component embedded into many Snowplow applications, including Enrich and loaders. It's responsible for fetching schemas from Iglu registries and validating data against these schemas.
 
 ## Configuration
 
@@ -52,7 +52,7 @@ Most of the time, configuring Iglu Resolver means providing a JSON file like thi
 }
 ```
 
-The above configuration assumes Snowplow-authored schemas ([Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md)) will be used in a pipeline, and that you have your own [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) registry hosted at `https://${iglu_server_hostname}/` with a read-rights API key `${iglu_server_apikey}`.
+The above configuration assumes Snowplow-authored schemas ([Iglu Central](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central)) will be used in a pipeline, and that you have your own [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) registry hosted at `https://${iglu_server_hostname}/` with a read-rights API key `${iglu_server_apikey}`.
 
 ### Configuration parameters
 

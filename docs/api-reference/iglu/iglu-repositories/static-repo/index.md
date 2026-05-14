@@ -13,7 +13,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-A static Iglu repository is a read-only schema registry served from a static website. It's a lighter alternative to [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) when you don't need an authenticated write API. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) is itself a static repo.
+A static Iglu repository is a read-only schema registry served from a static website. It's a lighter alternative to [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) when you don't need an authenticated write API. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) is itself a static repo.
 
 You can host a static repo on any HTTP server that can serve files with a directory structure — for example, Nginx, Apache, Amazon S3, Google Cloud Storage, or Azure Blob Storage.
 

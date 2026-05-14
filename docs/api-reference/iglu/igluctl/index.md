@@ -15,13 +15,9 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-Iglu is a schema repository for JSON schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
+Iglu provides a CLI application called Igluctl that allows you to perform most common tasks in Iglu Registry.
 
-<p> This document is for version {versions.igluctl}. </p>
-
-## Igluctl
-
-Iglu provides a CLI application called Igluctl which allows you to perform most common tasks in Iglu Registry. So far, the overall structure of Igluctl commands looks like the following:
+The available Igluctl commands are:
 
 - `lint` - validate set of JSON schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
@@ -60,7 +56,7 @@ Below and everywhere in documentation you'll find example commands without this 
 
 Note that Igluctl expects [JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) or later, and [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or later to run.
 
-## lint
+## `lint`
 
 `igluctl lint` validates JSON schemas.
 
@@ -130,7 +126,7 @@ Igluctl also includes many checks proving that schemas doesn't have conflicting 
 
 `igluctl lint` will exit with status code 1 if encounter at least one error.
 
-## static generate
+## `static generate`
 
 `igluctl static generate` generates corresponding [Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) DDL files (`CREATE TABLE` statements) and migration scripts (`ALTER TABLE` statements).
 
@@ -177,7 +173,7 @@ One of the more problematic scenarios to handle when generating Redshift table d
 - If user specified full path to file with schema and it is 1-0-0 - all good
 
 
-## static push
+## `static push`
 
 `igluctl static push` publishes schemas stored locally to a remote [Iglu Server](https://github.com/snowplow/iglu-server).
 
@@ -193,7 +189,7 @@ Also it accepts optional `--public` argument which makes schemas available witho
 $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
-## static pull
+## `static pull`
 
 `igluctl static pull` downloads schemas stored on a remote [Iglu Server](https://github.com/snowplow/iglu-server) to a local folder.
 
@@ -207,7 +203,7 @@ It accepts three required arguments:
 $ ./igluctl static pull /path/to/static/registry iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
-## static s3cp
+## `static s3cp`
 
 `igluctl static s3cp` enables you to upload JSON schemas to chosen S3 bucket. This is helpful for generating a remote Iglu registry which can be served from S3 over http(s).
 
@@ -224,7 +220,7 @@ $ ./igluctl static pull /path/to/static/registry iglu.acme.com:80/iglu-server f8
 
 `igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren't available as well - it `~/.aws/config` file. If all above failed - it exits with error.
 
-## static deploy
+## `static deploy`
 
 `igluctl static deploy` performs whole schema workflow at once.
 
@@ -279,7 +275,7 @@ Example:
 }
 ```
 
-## server keygen
+## `server keygen`
 
 `igluctl server keygen` generates read and write API keys on Iglu Server.
 
@@ -294,7 +290,7 @@ Also it accepts `--vendor-prefix` argument which will be associated with generat
 $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
-## table-check
+## `table-check`
 
 `igluctl table-check` will check given RedShift or Postgres schema against an Iglu repository. As of version 0.11.0
 it would cross verify the column types as well as names.
@@ -339,7 +335,7 @@ or
 $ ./igluctl table-check --server <uri> ...connection params
 ```
 
-## verify parquet
+## `verify parquet`
 
 `igluctl verify parquet` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
 
@@ -362,7 +358,7 @@ Breaking change introduced by 'com.acme/item/jsonschema/1-1-0'. Changes: Incompa
 ```
 
 
-## verify redshift
+## `verify redshift`
 
 `igluctl verify redshift` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
 

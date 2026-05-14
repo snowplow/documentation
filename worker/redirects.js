@@ -435,7 +435,8 @@ const fallbackRules = [
   ['/docs/api-reference/iglu/common-architecture/schemaver/', '/docs/fundamentals/schemas/versioning/#schema-version-format', 301],
   ['/docs/api-reference/iglu/common-architecture/schema-resolution/', '/docs/api-reference/iglu/iglu-resolver/#how-schemas-are-resolved', 301],
   ['/docs/api-reference/iglu/common-architecture/*', '/docs/api-reference/iglu/', 301],
-  ['/docs/api-reference/iglu/iglu-central-setup/*', '/docs/api-reference/iglu/iglu-repositories/iglu-central/', 301],
+  ['/docs/api-reference/iglu/iglu-central-setup/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
+  ['/docs/api-reference/iglu/iglu-repositories/iglu-central/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
   ['/docs/api-reference/iglu/iglu-clients/*', '/docs/api-reference/iglu/', 301],
   ['/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/*', '/docs/api-reference/iglu/iglu-repositories/', 301],
 ];

@@ -3,23 +3,13 @@ title: "Iglu Central public schema repository"
 sidebar_label: "Iglu Central"
 date: "2021-03-26"
 sidebar_position: 1000
-description: "Public machine-readable repository of Snowplow JSON schemas hosted on Amazon S3 with self-hosting support via igluctl."
+description: "Public machine-readable repository of Snowplow JSON schemas, with self-hosting support via igluctl."
 keywords: ["iglu central", "public schema repository", "snowplow schemas"]
 ---
 
-[Iglu Central](https://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow Analytics.
+[Iglu Central](https://iglucentral.com/) is a public, machine-readable repository of JSON schemas hosted by Snowplow. Think of it as RubyGems or Maven Central, but for JSON schemas. It contains the schemas for Snowplow's out-of-the-box events and entities.
 
-As far as we know, Iglu Central is the first public **machine-readable** schema repository - all prior efforts we have seen are human-browsable directories of articles about schemas (e.g. [schema.org](http://schema.org/)).
-
-Think of Iglu Central as like [RubyGems.org](http://rubygems.org/) or [Maven Central](http://central.maven.org/) but for storing publically-available JSON Schemas.
-
-## Technical architecture
-
-Under the hood, Iglu Central is built and run as a static Iglu repository, which is simply an Iglu repository server structured as a static website serving its whole content over http, and is hosted on Amazon S3.
-
-
-
-Iglu Central is available for view at [https://iglucentral.com](https://iglucentral.com/). The root index page links to all schemas currently hosted on Iglu Central.
+Under the hood, Iglu Central is a [static Iglu repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) — a schema registry served as a static website over HTTP. The root index page at [iglucentral.com](https://iglucentral.com/) links to all the schemas it hosts.
 
 ## Mirror or self-host Iglu Central
 

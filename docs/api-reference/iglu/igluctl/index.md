@@ -191,11 +191,11 @@ $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f8
 
 ## static pull
 
-`igluctl static pull` downloads schemas stored on a remote [](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server)[Iglu Server](https://github.com/snowplow/iglu-server) to a local folder.
+`igluctl static pull` downloads schemas stored on a remote [Iglu Server](https://github.com/snowplow/iglu-server) to a local folder.
 
 It accepts three required arguments:
 
-- `host` - Scala Iglu Registry host name or IP address with optional port and endpoint. It should conform to the pattern `host:port/path` (or just `host`) **without** http:// prefix.
+- `host` - Iglu Server host name or IP address with optional port and endpoint. It should conform to the pattern `host:port/path` (or just `host`) **without** http:// prefix.
 - `apikey` - master API key, used to create temporary write and read keys
 - `path` - path to your static registry (local folder to download to)
 
@@ -281,7 +281,7 @@ Example:
 
 It accepts two required arguments:
 
-- `host` - Scala Iglu Registry host name or IP address with optional port and endpoint. It should conform pattern `host:port/path` (or just `host`) **without** http:// prefix.
+- `host` - Iglu Server host name or IP address with optional port and endpoint. It should conform to the pattern `host:port/path` (or just `host`) **without** http:// prefix.
 - `apikey` - master API key, used to create temporary write and read keys
 
 Also it accepts `--vendor-prefix` argument which will be associated with generated key.

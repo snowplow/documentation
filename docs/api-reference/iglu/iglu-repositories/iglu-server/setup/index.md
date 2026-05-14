@@ -1,10 +1,9 @@
 ---
 title: "Setup guide for Iglu Server"
 sidebar_label: "Setup guide"
-date: "2021-03-26"
 sidebar_position: 1000
-description: "Deploy Iglu Server with Docker or Terraform for PostgreSQL-backed schema repository with RESTful API and authentication."
-keywords: ["iglu server setup", "docker iglu", "terraform iglu", "postgresql schema storage"]
+description: "Deploy Iglu Server on AWS, GCP, or Azure using the Terraform modules from the self-hosted quick start, or run it manually with Docker."
+keywords: ["iglu server setup", "terraform iglu", "docker iglu", "postgresql schema storage"]
 ---
 
 ```mdx-code-block
@@ -12,39 +11,36 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-For more information on the architecture of the Iglu server, please read [the technical documentation](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md).
+Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)). To accept the terms of the license and run Iglu Server, set the environment variable `ACCEPT_LIMITED_USE_LICENSE=yes`, or set `license.accept = true` in your HOCON config file.
 
-## Available on Terraform Registry
+## Deploy Iglu Server
 
-[![Terraform Registry](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest)
+The recommended way to deploy Iglu Server is to use the Terraform modules provided as part of the [Snowplow Self-Hosted quick start](/docs/get-started/self-hosted/quick-start/index.md#set-up-iglu-server). The quick start walks through deploying Iglu Server (along with the rest of your pipeline) on AWS, GCP, or Azure.
 
-A Terraform module is available which deploys an Iglu Server on AWS EC2 without the need for this manual setup.
+The Terraform modules are also available directly on the Terraform Registry if you want to deploy Iglu Server independently:
 
-## 1. Run the Iglu server
+- [AWS](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest)
+- [GCP](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ce/google/latest)
+- [Azure](https://registry.terraform.io/modules/snowplow-devops/iglu-server-vmss/azurerm/latest)
 
-Iglu Server is [published on Docker Hub](https://hub.docker.com/repository/docker/snowplow/iglu-server).
+### Deploy with Docker
+
+If you'd rather run Iglu Server manually, you'll also need a PostgreSQL instance to back it. Iglu Server stores schemas in PostgreSQL and connects to it on startup. The Terraform modules handle this for you; if you're deploying manually, provision your own database.
+
+Pull the Iglu Server image from Docker Hub and pass a HOCON config file:
 
 <CodeBlock language="bash">{
-`$ docker pull snowplow/iglu-server:${versions.igluServer}
-`}</CodeBlock>
+`docker pull snowplow/iglu-server:${versions.igluServer}
 
-The application is configured by passing a hocon file on the command line:
-
-<CodeBlock language="bash">{
-`$ docker run --rm \\
+docker run --rm \\
   -v $PWD/config.hocon:/iglu/config.hocon \\
+  -e ACCEPT_LIMITED_USE_LICENSE=yes \\
   snowplow/iglu-server:${versions.igluServer} --config /iglu/config.hocon
 `}</CodeBlock>
 
-Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow-incubator/iglu-server/releases).
+A minimal configuration looks like this:
 
-<CodeBlock language="bash">{
-`$ java -jar iglu-server-${versions.igluServer}.jar --config /path/to/config.hocon
-`}</CodeBlock>
-
-Here is an example of a minimal configuration file:
-
-```json
+```hocon
 {
   "database": {
     "host": "postgres"
@@ -57,55 +53,37 @@ Here is an example of a minimal configuration file:
 }
 ```
 
-See [the configuration reference](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) for a complete description of all parameters.
+See the [configuration reference](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) for all available parameters. A [docker-compose.yml](https://github.com/snowplow/iglu-server/blob/master/docker/docker-compose.yml) is also provided in the repository to help you get started.
 
-We also provide a [docker-compose.yml](https://github.com/snowplow-incubator/iglu-server/blob/master/docker/docker-compose.yml) to help you get started.
+#### Initialize the database
 
-## 2. Initialize the database
-
-:::note
-
-Iglu Server has been successfully tested with PostgreSQL 16.3, but should work with PostgreSQL 8.2 or newer.
-
-:::
-
-With a fresh install you need to manually create the database:
+For a fresh install, create the database, then run the `setup` command to create the tables:
 
 ```bash
-$ psql -U postgres -c "CREATE DATABASE igludb"
+psql -U postgres -c "CREATE DATABASE igludb"
 ```
 
-And then use the `setup` command of the iglu server to create the database tables:
-
 <CodeBlock language="bash">{
-`$ docker run --rm \\
+`docker run --rm \\
   -v $PWD/config.hocon:/iglu/config.hocon \\
+  -e ACCEPT_LIMITED_USE_LICENSE=yes \\
   snowplow/iglu-server:${versions.igluServer} setup --config /iglu/config.hocon
 `}</CodeBlock>
 
-## 3. Use the API key generation service
+## Generate API keys
 
-The super API key you put in the configuration file is able to generate further API keys for your clients through the API key generation service.
+The super API key in your configuration file lets you generate further keys for your applications via the API key generation service.
 
-To generate a pair of read and write API keys for a specific vendor prefix, simply send a `POST` request to this URL using your super API key in an `apikey` HTTP header:
-
-```text
-HOST/api/auth/keygen
-```
-
-For example:
+To generate a pair of read and write API keys for a specific vendor prefix, send a `POST` request to `HOST/api/auth/keygen` with your super API key in the `apikey` header:
 
 ```bash
-curl \
-  HOST/api/auth/keygen \
+curl HOST/api/auth/keygen \
   -X POST \
   -H 'apikey: your_super_apikey' \
   -d '{"vendorPrefix":"com.acme"}'
 ```
 
-**Note:** From 0.6.0+ the vendor prefix should be `vendorPrefix` within a JSON body however prior to this it was `vendor_prefix` as a query parameter.
-
-You should receive a JSON response like this one:
+You'll receive a JSON response with the two keys:
 
 ```json
 {
@@ -114,42 +92,29 @@ You should receive a JSON response like this one:
 }
 ```
 
-If you need to revoke a specific API key, you can do so by sending a `DELETE` request to the following endpoint:
-
-```text
-HOST/api/auth/keygen?key=some-uuid
-```
-
-For example:
+To revoke a key, send a `DELETE` request to the same endpoint:
 
 ```bash
-curl \
-  HOST/api/auth/keygen \
+curl 'HOST/api/auth/keygen?key=some-uuid' \
   -X DELETE \
-  -H 'apikey: your_super_apikey' \
-  -d 'key=some-uuid'
+  -H 'apikey: your_super_apikey'
 ```
 
-You should now be all set up to use the Iglu server, if you would like to know more about the Iglu server, please read the [technical documentation](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md).
+## Optional configuration
 
-## Dummy mode
+### Dummy mode for testing
 
-Since 0.6.0 Iglu Server supports new dummy DB mode. In this mode, Server does not require persistent storage as PostgreSQL and stores all data in memory. Use this for debug purposes only, all your data will be lost after restart.
+Iglu Server supports a dummy database mode that stores all data in memory rather than PostgreSQL. Use it for testing only — all data is lost on restart.
 
-To enable dummy mode, you need to set `database.type` setting to `"dummy"`.
+To enable dummy mode, set `database.type` to `"dummy"` in your config. The dummy server uses a single hardcoded master API key: `48b267d7-cd2b-4f22-bae4-0f002008b5ad`.
 
-Dummy Iglu Server works with single hardcoded master API key - `48b267d7-cd2b-4f22-bae4-0f002008b5ad`, which you can use to upload your schemas and create new api keys.
+### Logging
 
-## Logging
+Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html), configurable via system properties. For example, to redirect logs to a file and suppress verbose connection loop output:
 
-Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html) underneath. Which can be configured via system properties.
+```bash
+-Dorg.slf4j.simpleLogger.logFile=server.log
+-Dorg.slf4j.simpleLogger.log.org.http4s.blaze.channel.nio1.SelectorLoop=warn
+```
 
-For example:
-
-<CodeBlock language="bash">{
-`$ iglu-server-${versions.igluServer}.jar \\
-  -Dorg.slf4j.simpleLogger.logFile=server.log                                   # In order to redirect logs \\
-  -Dorg.slf4j.simpleLogger.log.org.http4s.blaze.channel.nio1.SelectorLoop=warn  # To suppress very verbose SelectorLoop output
-`}</CodeBlock>
-
-On debug loglevel `SchemaService` will print all HTTP requests and responses.
+At debug log level, `SchemaService` prints all HTTP requests and responses.

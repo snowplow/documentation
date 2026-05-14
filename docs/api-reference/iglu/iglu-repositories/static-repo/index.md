@@ -1,43 +1,64 @@
 ---
-title: "Static Iglu repository on web servers"
+title: "Static Iglu repository"
 sidebar_label: "Static repo"
-date: "2021-03-26"
 sidebar_position: 4000
-description: "Host Iglu schemas as a static website on S3, Apache, Nginx, or IIS for HTTP-accessible schema repositories."
-keywords: ["static iglu repo", "s3 schema hosting", "static schema registry"]
+description: "Host Iglu schemas on any HTTP server as a read-only alternative to Iglu Server."
+keywords: ["static iglu repo", "static schema registry", "iglu hosting"]
 ---
 
-A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) can be used as an example, [serving](https://iglucentral.com/) its whole content over HTTP.
+A static Iglu repository is a read-only schema registry served from a static website. It's a lighter alternative to [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) when you don't need an authenticated write API. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) is itself a static repo.
 
-## 1. Choose a hosting partner
+You can host a static repo on any HTTP server that can serve files with a directory structure — for example, Nginx, Apache, Amazon S3, Google Cloud Storage, or Azure Blob Storage.
 
-We host static Iglu registry using Amazon S3, but you can choose any existing webserver your company is already using, such as Apache, IIS or Nginx.
+:::warning[Loader limitations]
 
-## 2. Prepare your files
+Some loaders (notably [RDB loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)) use the schema-list API endpoints that are only fully supported by Iglu Server. If you use a static repo with these loaders, you must generate the schema-list objects when you publish. [`igluctl`](/docs/api-reference/iglu/igluctl/index.md) generates them by default; if you upload schemas to your host by hand, the lists won't exist and the loader will fail.
 
-You need to create a file structure for your JSON Schemas. Please check out the template we provide here:
+:::
 
-[https://github.com/snowplow/iglu/tree/master/2-repositories/static-registry/template](https://github.com/snowplow/iglu/tree/master/2-repositories/static-registry/template)
+## Schema file structure
 
-Make the following changes:
+Iglu repositories use a fixed folder hierarchy keyed by vendor, schema name, format, and version:
 
-- Replace `com.myvendor` with your company domain, reverse-ordered
-- Replace `myschema` with the name of your first JSON Schema
-- Leave `jsonschema` as-is (we only support JSON Schemas for now)
-- Replace `1-0-0` with the schema specification of your first JSON Schema
+```text
+schemas
+└── com.acme
+    └── ad_click
+        └── jsonschema
+            └── 1-0-0
+```
 
-Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/fundamentals/schemas/index.md#self-describing-json-schema-anatomy) for details.
+The version file (`1-0-0`) has no extension and contains the self-describing JSON schema. See [Self-describing schemas](/docs/fundamentals/schemas/index.md#self-describing-json-schema-anatomy) for what goes inside.
 
-Done? Now you are ready to host your files.
+## Publish schemas
 
-## 3. Host the files in your schema registry
+Prepare your schemas locally in the folder structure above. Then publish them to your HTTP host.
 
-To host your static schema registry, follow the AWS guide, [Host a Static Website on Amazon Web Services](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
+If you're hosting on Amazon S3, [`igluctl static s3cp`](/docs/api-reference/iglu/igluctl/index.md#static-s3cp) uploads schemas and generates the schema-list objects loaders rely on in one step:
 
-To host your static schema on an alternative webserving platform, please consult the appropriate webserver documentation or talk to your Systems team.
+```bash
+igluctl static s3cp /path/to/schemas my-iglu-bucket --region eu-west-1
+```
 
-## 4. Update your Iglu client configuration
+For any other host, generate the schema-list objects locally with `igluctl`, then upload the resulting `schemas` directory to your web root. See the [`igluctl` reference](/docs/api-reference/iglu/igluctl/index.md) for details.
 
-Finally, update your Iglu client configuration so that it can resolve your new registry.
+Make sure schema files are accessible to whatever clients you intend to use — typically that means making them publicly readable, since static repos don't support authentication.
 
-For details on how to do this, check out the page on [Iglu client configuration](/docs/api-reference/iglu/iglu-resolver/index.md).
+## Configure the Iglu resolver
+
+Once your registry is live, add it to your [Iglu resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md):
+
+```json
+{
+  "name": "Acme static repo",
+  "priority": 0,
+  "vendorPrefixes": [ "com.acme" ],
+  "connection": {
+    "http": {
+      "uri": "https://schemas.acme.com"
+    }
+  }
+}
+```
+
+Static repos don't require an `apikey`.

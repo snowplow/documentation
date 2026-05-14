@@ -3,8 +3,14 @@ title: "Static Iglu repository"
 sidebar_label: "Static repo"
 sidebar_position: 4000
 description: "Host Iglu schemas on any HTTP server as a read-only alternative to Iglu Server."
-keywords: ["static iglu repo", "static schema registry", "iglu hosting"]
+keywords: ["static iglu repo", "static schema registry", "iglu hosting", "self-hosted"]
 ---
+
+```mdx-code-block
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
+
+<CdiCallout/>
+```
 
 A static Iglu repository is a read-only schema registry served from a static website. It's a lighter alternative to [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) when you don't need an authenticated write API. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) is itself a static repo.
 

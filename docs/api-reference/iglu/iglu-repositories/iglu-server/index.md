@@ -3,16 +3,16 @@ title: "Iglu Server"
 sidebar_label: "Iglu Server"
 sidebar_position: 2000
 description: "Iglu Server is a RESTful schema registry for publishing, validating, and serving Iglu schemas in self-hosted Snowplow pipelines."
-keywords: ["iglu server", "schema registry", "self-hosted snowplow"]
+keywords: ["iglu server", "schema registry", "self-hosted snowplow", "self-hosted"]
 ---
 
 [Iglu Server](https://github.com/snowplow/iglu-server) is the schema registry used by self-hosted Snowplow pipelines. It stores your [schemas](/docs/fundamentals/schemas/index.md), validates them on upload, and serves them over a RESTful API.
 
-:::info[CDI customers]
+```mdx-code-block
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 
-Snowplow CDI customers don't run Iglu Server directly. Iglu Server is included in your pipeline and managed for you. Use [Event Studio](/docs/event-studio/data-structures/index.md) to manage data structures.
-
-:::
+<CdiCallout/>
+```
 
 ## What you can do with it
 

@@ -3,12 +3,15 @@ title: "Setup guide for Iglu Server"
 sidebar_label: "Setup guide"
 sidebar_position: 1000
 description: "Deploy Iglu Server on AWS, GCP, or Azure using the Terraform modules from the self-hosted quick start, or run it manually with Docker."
-keywords: ["iglu server setup", "terraform iglu", "docker iglu", "postgresql schema storage"]
+keywords: ["iglu server setup", "terraform iglu", "docker iglu", "postgresql schema storage", "self-hosted snowplow"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
+
+<CdiCallout/>
 ```
 
 Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)). To accept the terms of the license and run Iglu Server, set the environment variable `ACCEPT_LIMITED_USE_LICENSE=yes`, or set `license.accept = true` in your HOCON config file.

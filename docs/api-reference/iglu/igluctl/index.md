@@ -3,12 +3,15 @@ title: "Igluctl CLI for schema management"
 sidebar_label: "Iglu CLI"
 sidebar_position: 10
 description: "Command-line tool for validating, publishing, and managing JSON schemas in Iglu registries with DDL generation and verification."
-keywords: ["igluctl", "schema validation", "iglu cli", "schema migration"]
+keywords: ["igluctl", "schema validation", "iglu cli", "schema migration", "self-hosted snowplow"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
+
+<CdiCallout/>
 ```
 
 Iglu is a schema repository for JSON Schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.

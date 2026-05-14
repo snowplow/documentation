@@ -4,14 +4,14 @@ sidebar_label: "Manage schemas"
 date: "2026-05-14"
 sidebar_position: 4
 description: "Manage schemas with Iglu Server or host a static Iglu registry in Amazon S3 or Google Cloud Storage for self-hosted Snowplow deployments."
-keywords: ["Iglu Server", "schema management", "static registry", "S3 registry", "GCS registry"]
+keywords: ["Iglu Server", "schema management", "static registry", "S3 registry", "GCS registry", "self-hosted"]
 ---
 
-:::info[CDI customers]
+```mdx-code-block
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 
-If you're a Snowplow CDI customer, manage your schemas through [Event Studio](/docs/event-studio/data-structures/index.md) or the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) rather than interacting with Iglu directly. This page is for Self-Hosted customers running their own registry.
-
-:::
+<CdiCallout/>
+```
 
 To manage your [schemas](/docs/fundamentals/schemas/index.md), you need an [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (you'll already have one if you followed the [Snowplow Self-Hosted quick start](/docs/get-started/self-hosted/index.md)). Alternatively, you can host a [static Iglu registry](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md).
 

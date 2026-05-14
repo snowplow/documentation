@@ -4,8 +4,14 @@ sidebar_label: "Repositories"
 date: "2026-05-14"
 sidebar_position: 20
 description: "Remote Iglu repositories for storing and serving JSON schemas via HTTP."
-keywords: ["iglu repositories", "schema storage", "iglu server", "static repo"]
+keywords: ["iglu repositories", "schema storage", "iglu server", "static repo", "self-hosted"]
 ---
+
+```mdx-code-block
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
+
+<CdiCallout/>
+```
 
 An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
 

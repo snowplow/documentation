@@ -437,6 +437,7 @@ const fallbackRules = [
   ['/docs/api-reference/iglu/common-architecture/*', '/docs/api-reference/iglu/', 301],
   ['/docs/api-reference/iglu/iglu-central-setup/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
   ['/docs/api-reference/iglu/iglu-repositories/iglu-central/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
+  ['/docs/api-reference/iglu/iglu-repositories/iglu-server/setup/*', '/docs/api-reference/iglu/iglu-repositories/iglu-server/#deploy-iglu-server', 301],
   ['/docs/api-reference/iglu/iglu-clients/*', '/docs/api-reference/iglu/', 301],
   ['/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/*', '/docs/api-reference/iglu/iglu-repositories/', 301],
 ];

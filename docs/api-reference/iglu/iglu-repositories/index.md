@@ -15,14 +15,12 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 
 An Iglu repository acts as a store of JSON schemas. Hosting JSON schemas in an Iglu repository allows you to use those schemas in Snowplow.
 
-## Types of Iglu repository
+There are two Iglu repository technologies available for deploying your own Iglu repository:
 
-There are two Iglu repository technologies available for deploying your own Iglu repository. Follow the links to find out more:
-
-| **Repository** | **Description**                                          |
-| -------------- | -------------------------------------------------------- |
-| Iglu Server    | An Iglu repository server structured as a RESTful API    |
-| Static repo    | An Iglu repository server structured as a static website |
+| **Repository**                                                                       | **Description**                                          |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)       | An Iglu repository server structured as a RESTful API    |
+| [Static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) | An Iglu repository server structured as a static website |
 
 ## Iglu Central
 

@@ -1,6 +1,6 @@
 ---
 title: "Static Iglu repository"
-sidebar_label: "Static repo"
+sidebar_label: "Static repository"
 sidebar_position: 4000
 date: "2026-05-14"
 description: "Host Iglu schemas on any HTTP server as a read-only alternative to Iglu Server."

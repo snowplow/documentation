@@ -2,7 +2,7 @@
 title: "Introduction to Iglu repositories for schema storage"
 sidebar_label: "Repositories"
 date: "2026-05-14"
-sidebar_position: 20
+sidebar_position: 10
 description: "Remote Iglu repositories for storing and serving JSON schemas via HTTP."
 keywords: ["iglu repositories", "schema storage", "iglu server", "static repo", "self-hosted"]
 ---

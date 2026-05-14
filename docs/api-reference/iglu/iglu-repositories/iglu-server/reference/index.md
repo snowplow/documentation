@@ -2,7 +2,7 @@
 title: "Iglu Server configuration reference"
 sidebar_label: "Config reference"
 date: "2026-05-14"
-sidebar_position: 0
+sidebar_position: 10
 description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
 keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON", "self-hosted"]
 ---

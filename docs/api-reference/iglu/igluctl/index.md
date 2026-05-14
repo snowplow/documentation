@@ -1,7 +1,7 @@
 ---
 title: "Igluctl CLI for schema management"
 sidebar_label: "Iglu CLI"
-sidebar_position: 10
+sidebar_position: 40
 date: "2026-05-14"
 description: "Command-line tool for validating, publishing, and managing JSON schemas in Iglu registries with DDL generation and verification."
 keywords: ["igluctl", "schema validation", "iglu cli", "schema migration", "self-hosted snowplow"]

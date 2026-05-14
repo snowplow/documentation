@@ -14,7 +14,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
   helpContent="Identities is a paid addon for Snowplow CDI."
 />
 
-**The package source code can be found in the [snowplow/dbt-snowplow-identities](https://github.com/snowplow/dbt-snowplow-identities) repository.**
+**The package source code can be found in the [snowplow-incubator/dbt-snowplow-identities](https://github.com/snowplow-incubator/dbt-snowplow-identities/) repository.**
 
 The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) produced by [Identities](/docs/identities/index.md) into a set of derived tables for identity resolution, identifier lookup, and audit.
 

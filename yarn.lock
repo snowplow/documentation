@@ -7809,17 +7809,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-though@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "cookie-though@npm:1.5.0"
-  dependencies:
-    events: "npm:3.3.0"
-    lodash.throttle: "npm:4.1.1"
-    preact: "npm:10.7.1"
-  checksum: 10c0/54312cda298b21553785801d3ea30eaf33b98e0f178d7d49ae450ae241ab993e9979812cf4e61b1a7b8afe921396eb5688e291294c92a43869720ea08b8c7e06
-  languageName: node
-  linkType: hard
-
 "cookie@npm:0.7.1":
   version: 0.7.1
   resolution: "cookie@npm:0.7.1"
@@ -8977,7 +8966,6 @@ __metadata:
     autoprefixer: "npm:^10.4.21"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
-    cookie-though: "npm:^1.5.0"
     css-loader: "npm:6.8.1"
     d3-color: "npm:^3.1.0"
     docusaurus-theme-github-codeblock: "npm:^2.0.2"
@@ -9589,7 +9577,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"events@npm:3.3.0, events@npm:^3.2.0":
+"events@npm:^3.2.0":
   version: 3.3.0
   resolution: "events@npm:3.3.0"
   checksum: 10c0/d6b6f2adbccbcda74ddbab52ed07db727ef52e31a61ed26db9feb7dc62af7fc8e060defa65e5f8af9449b86b52cc1a1f6a79f2eafcf4e62add2b7a1fa4a432f6
@@ -12148,13 +12136,6 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 10c0/402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
-  languageName: node
-  linkType: hard
-
-"lodash.throttle@npm:4.1.1":
-  version: 4.1.1
-  resolution: "lodash.throttle@npm:4.1.1"
-  checksum: 10c0/14628013e9e7f65ac904fc82fd8ecb0e55a9c4c2416434b1dd9cf64ae70a8937f0b15376a39a68248530adc64887ed0fe2b75204b2c9ec3eea1cb2d66ddd125d
   languageName: node
   linkType: hard
 
@@ -15420,13 +15401,6 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/5127cc7c91ed7a133a1b7318012d8bfa112da9ef092dddf369ae699a1f10ebbd89b1b9f25f3228795b84585c72aabd5ced5fc11f2ba467eedf7b081a66fad024
-  languageName: node
-  linkType: hard
-
-"preact@npm:10.7.1":
-  version: 10.7.1
-  resolution: "preact@npm:10.7.1"
-  checksum: 10c0/0bef59be885f60a1bcb2e2b278f717eca7ca87d36f829303160a33e33072d3e5c52e589196b2967e63a17120273042fa1400bf515f8e82d22bd2d5423dbe4b88
   languageName: node
   linkType: hard
 

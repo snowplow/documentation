@@ -45,7 +45,7 @@ A [service](/docs/signals/concepts/#services) provides a pull-based API endpoint
 
 Services allow you to combine multiple attribute groups if needed, but for this tutorial, use just the one you created in the last step.
 
-Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in the Next.js application.
+You'll use this service name in your application code to fetch attributes from this service.
 
 1. Navigate to **Signals** > **Services**
 2. Click **Create service**

@@ -72,7 +72,6 @@ SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
 SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
 SNOWPLOW_SIGNALS_ORG_ID=your-org-id
-SNOWPLOW_SIGNALS_SERVICE_NAME=web-agent-context
 ```
 
 Note the `NEXT_PUBLIC_` prefix on the Collector URL: this makes it available to the Browser tracker on the client-side.

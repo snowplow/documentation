@@ -35,6 +35,8 @@ function getSignalsClient(): Signals | null {
   return signalsInstance;
 }
 
+const SERVICE_NAME = "web-agent-context";
+
 function formatAttributes(attributes: Record<string, unknown>): string {
   const lines = Object.entries(attributes).map(
     ([key, value]) => `- ${key}: ${JSON.stringify(value)}`,
@@ -52,12 +54,9 @@ export async function getSignalsContext(
   const signals = getSignalsClient();
   if (!signals) return "";
 
-  const serviceName = process.env.SNOWPLOW_SIGNALS_SERVICE_NAME;
-  if (!serviceName) return "";
-
   try {
     const attributes = await signals.getServiceAttributes({
-      name: serviceName,
+      name: SERVICE_NAME,
       attribute_key: "domain_sessionid",
       identifier: domainSessionId,
     });
@@ -285,21 +284,20 @@ export function ChatWidget() {
 
 ## Load the widget
 
-Since the chat widget floats over page content, the best place to render it is in your root layout, inside the `SnowplowProvider`. This way the widget is available on every page:
+Since the chat widget floats over page content, the best place to render it is in your root layout, alongside `SnowplowTracker`. This way the widget is available on every page:
 
 ```tsx
 // app/layout.tsx — add the ChatWidget import and render it inside <body>:
 
-// 1. Add this import alongside the SnowplowProvider import
+// 1. Add this import alongside the SnowplowTracker import
 import { ChatWidget } from "@/components/chat-widget";
 
-// 2. Render it inside the <body> tag, inside SnowplowProvider:
+// 2. Render it inside the <body> tag, alongside SnowplowTracker:
 <body className={/* ...keep existing classes... */}>
-  <SnowplowProvider>
-    {children}
-    <ChatWidget />
-  </SnowplowProvider>
+  <SnowplowTracker />
+  {children}
+  <ChatWidget />
 </body>
 ```
 
-The `ChatWidget` is placed inside `SnowplowProvider` to ensure the tracker is always initialized before the chat reads the session ID.
+The `ChatWidget` sits alongside `SnowplowTracker` in the layout. If the tracker hasn't initialized yet when the chat sends its first request, `getDomainSessionId()` returns an empty string and the agent responds without Signals context.

@@ -1,7 +1,5 @@
 import Link from '@docusaurus/Link';
 
-<table>
-<tbody>
 <tr>
     <td><code>batching.maxBytes</code></td>
     <td>Optional. Default value <code>10000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
@@ -87,6 +85,21 @@ import Link from '@docusaurus/Link';
     </td>
 </tr>
 <tr>
+    <td><code>decompression.maxBytesInBatch</code></td>
+    <td>
+      <p>Optional. Default value <code>5242880</code> (5 MB).</p>
+      <p>The loader automatically detects and decompresses zstd- or gzip-compressed source messages. Uncompressed messages are unaffected.</p>
+      <p>The loader uses this as a cutoff when incrementally adding decompressed events to a batch, and emits the batch as soon as it reaches this size. This protects the loader's memory because a small compressed message can expand into a much larger payload.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>decompression.maxBytesSinglePayload</code></td>
+    <td>
+      <p>Optional. Default value <code>10000000</code> (10 MB).</p>
+      <p>For zstd- or gzip-compressed source messages, this is the maximum size of a single payload after decompression. The loader emits a <Link to="/docs/api-reference/failed-events/#size-violation">size violation failed event</Link> for any payload that exceeds this size.</p>
+    </td>
+</tr>
+<tr>
     <td><code>monitoring.metrics.statsd.hostname</code></td>
     <td>Optional. If set, the loader sends statsd metrics over UDP to a server on this host name.</td>
 </tr>
@@ -105,6 +118,10 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>monitoring.metrics.statsd.prefix</code></td>
     <td>Optional. Default <code>snowplow.bigquery-loader</code>. Prefix used for the metric name when sending to statsd.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.prometheus.tags.*</code></td>
+    <td>Optional. A map of key/value pairs added as common labels on every Prometheus metric. The loader exposes these metrics at the <code>/metrics</code> endpoint on the health probe port.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>
@@ -138,5 +155,3 @@ import Link from '@docusaurus/Link';
     <td><code>http.client.maxConnectionsPerServer</code></td>
     <td> Optional. Default value 4. Configures the internal HTTP client used for iglu resolver, alerts and telemetry. The maximum number of open HTTP requests to any single server at any one time.</td>
 </tr>
-</tbody>
-</table>

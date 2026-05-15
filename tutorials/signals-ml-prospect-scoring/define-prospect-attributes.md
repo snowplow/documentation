@@ -106,6 +106,7 @@ prospect_scoring_tutorial_service = Service(
 
 <details>
 <summary>For Signals Customers: test attribute group on your warehouse data</summary>
+
 If you're using Signals in the Console, you can test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`. This filtering is optional.
 
 ```python
@@ -118,7 +119,7 @@ sp_signals_test
 
 The result should look similar to this:
 
-![](./images/signals_test_output.png)
+![Table showing Signals test output with columns for domain_userid, latest_app_id, latest_device_class, num_sessions, num_apps_l7d, num_page_views_l7d, num_page_pings_l7d, and num_pricing_views_l7d, with 5 sample rows of prospect data](./images/signals_test_output.png)
 </details>
 
 ## Deploy configuration to Signals
@@ -143,7 +144,7 @@ If you're using Signals Sandbox your collector URL for `sp.js` is next to the Si
 
 Go to your website, and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
 
-![](./images/get_domain_userid.png)
+![Snowplow Inspector browser extension showing a page_ping event from /docs/, with the User section expanded and the Domain User ID value circled in red](./images/get_domain_userid.png)
 
 Use your `domain_userid` to retrieve the attributes that Signals has calculated just now from your real-time event stream.
 

@@ -8,7 +8,6 @@ keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "pa
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
 ```
 
 Every schema has a version, starting from `1-0-0`. As your schema evolves, you will need to create new versions of it. All previous versions of a schema remain available to ensure backwards-compatibility.
@@ -32,7 +31,7 @@ Aim to treat each schema version as immutable. However, if you can't avoid makin
 
 Patching is available if your schema version isn't yet in production.
 
-:::danger Development schemas only
+:::danger[Development schemas only]
 For Snowplow CDI customers, patching is disabled for production pipelines.
 
 Patching in a production environment can break your loading, especially if your patch contains breaking changes.
@@ -248,7 +247,7 @@ The `$supersedes` field states that the schema version defined in the `self` par
 ...
 ```
 
-:::note Patching and superseding
+:::note[Patching and superseding]
 
 Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where patching is allowed. However, you can change which schema version supersedes which by creating new schema versions.
 
@@ -256,7 +255,7 @@ For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you
 
 :::
 
-:::tip Schema caching
+:::tip[Schema caching]
 
 Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
 

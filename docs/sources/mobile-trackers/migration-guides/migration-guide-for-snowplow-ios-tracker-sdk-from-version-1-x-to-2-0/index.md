@@ -94,7 +94,7 @@ The tracker can be controlled by the `TrackerController` (the `Tracker` class is
 
 - `EcommerceItem`s aren't forced to have the same timestamp of the `EcommerceTransaction` event.
 
-- `SPEcommerceItem` constructor doesn't require `itemId` as it's added by the tracker when the e-commerce event is sent.
+- `SPEcommerceItem` constructor doesn't require `itemId` as it's added by the tracker when the ecommerce event is sent.
 
 - Deprecated classes of the previous API (SPTracker, SPEmitter, SPSubject, ...).
 

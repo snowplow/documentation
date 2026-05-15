@@ -13,7 +13,7 @@ A lake created by the Lake Loader has two levels of partitioning:
 
 This structure of partitioning works very well with queries that filter on `load_tstamp` and/or `event_name`.  It works especially well with incremental models, which only ever process the most recently loaded events.
 
-:::note Session Timestamp
+:::note[Session Timestamp]
 If you are using Snowplow's DBT packages, then set the `session_timestamp` variable to `load_stamp` to match the table's partitioning.
 :::
 

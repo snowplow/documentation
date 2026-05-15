@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 On AWS and GCP, when failed events are generated on your pipeline, the raw event payload along with details about the failure are saved into file storage (S3 on AWS, GCS on Google Cloud).
 
-:::info Snowplow Self-Hosted quick start guide on GCP
+:::info[Snowplow Self-Hosted quick start guide on GCP]
 
 If you followed the [Snowplow Self-Hosted quick start guide](/docs/get-started/self-hosted/quick-start/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
@@ -30,21 +30,21 @@ Login to your AWS Console account and navigate to the sub-account that contains 
 
 You should find a bucket with a name ending in `-kinesis-s3-bad` and within that a folder with your pipeline name e.g. `prod1`.
 
-![bad bucket](images/failed-evs-s3-1.jpg)
+![AWS S3 console bucket list filtered to show one result: a bucket named ending in -kinesis-s3-bad](images/failed-evs-s3-1.jpg)
 
-![prod folder](images/failed-evs-s3-2.jpg)
+![AWS S3 bucket contents showing a single folder named prod1](images/failed-evs-s3-2.jpg)
 
 Navigate into this folder and you should see `partitioned` (search if it isn't visible).
 
-![partitioned folder](images/failed-evs-s3-3.jpg)
+![AWS S3 prod1 folder filtered to show a single folder named partitioned](images/failed-evs-s3-3.jpg)
 
 Within this folder, there will be a subfolder for each type of failed event. Select the relevant type for the failed events you wish to find.
 
-![failed event folders](images/failed-evs-s3-4.jpg)
+![AWS S3 partitioned folder containing six subfolders, one per failed event type: adapter_failures, collector_payload_format_violation, enrichment_failures, generic_error, schema_violations, and tracker_protocol_violations](images/failed-evs-s3-4.jpg)
 
 You can now browse the folder using date and time to find a batch of failed events that occurred on that date / time period.
 
-![failed events](images/failed-evs-s3-5.jpg)
+![AWS S3 folder listing showing individual failed event files in gz format with timestamps and file sizes](images/failed-evs-s3-5.jpg)
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
@@ -53,23 +53,23 @@ Login to your Google Cloud Platform account and navigate to the project that con
 
 You should find a bucket named with a prefix of `sp-storage-loader-bad`.
 
-![bad bucket](images/failed-evs-gcs-1.jpg)
+![Google Cloud Storage browser showing one bucket named with a sp-storage-loader-bad prefix, located in europe-west1](images/failed-evs-gcs-1.jpg)
 
 Navigate into this folder and you should see `partitioned` (search if it isn't visible).
 
-![partitioned folder](images/failed-evs-gcs-2.jpg)
+![Google Cloud Storage bucket contents showing three folders: 2019, 2020, and partitioned](images/failed-evs-gcs-2.jpg)
 
 Within this folder, there will be a subfolder for each type of failed event. Select the relevant type for the failed events you wish to find.
 
-![failed event folders](images/failed-evs-gcs-3.jpg)
+![Google Cloud Storage partitioned folder containing six subfolders, one per failed event type: adapter_failures, collector_payload_format_violation, enrichment_failures, generic_error, schema_violations, and tracker_protocol_violations](images/failed-evs-gcs-3.jpg)
 
 You can now browse the folder using date and time to find a batch of failed events that occurred on that date / time period.
 
-![year folders](images/failed-evs-gcs-5.jpg)
+![Google Cloud Storage folder showing two year-based subfolders: 2020 and 2021](images/failed-evs-gcs-5.jpg)
 
-![month folders](images/failed-evs-gcs-6.jpg)
+![Google Cloud Storage folder showing month-based subfolders numbered 01 through 10](images/failed-evs-gcs-6.jpg)
 
-![failed events](images/failed-evs-gcs-7.jpg)
+![Google Cloud Storage folder listing showing individual failed event output files from October 2021 with sizes ranging from approximately 10 to 120 KB](images/failed-evs-gcs-7.jpg)
 
   </TabItem>
 </Tabs>
@@ -100,7 +100,7 @@ CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 
 Then run each SQL statement provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor. We recommend creating all tables, although you can skip the ones you are not interested in.
 
-:::info Placeholders
+:::info[Placeholders]
 
 Note that the SQL statements contain a few placeholders which you will need to edit before you can create the tables:
 
@@ -109,12 +109,12 @@ Note that the SQL statements contain a few placeholders which you will need to e
 
 :::
 
-![Creating a table in Athena](images/athena-create-table.png)
+![AWS Athena query editor showing a CREATE EXTERNAL TABLE statement being executed, with 12 failed event tables visible in the left panel and a "Query successful" result](images/athena-create-table.png)
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-:::info Snowplow Self-Hosted quick start guide on GCP
+:::info[Snowplow Self-Hosted quick start guide on GCP]
 
 If you followed the [Snowplow Self-Hosted Quick Start guide](/docs/get-started/self-hosted/quick-start/index.md), you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
@@ -137,7 +137,7 @@ The `--data-location` should match the location of your bad rows bucket. Also 
 
 Next, download the table definitions provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery) in JSON format.
 
-:::info Placeholders
+:::info[Placeholders]
 
 Each table definition contains a `{{ BUCKET }}` placeholder which needs to be changed to the GCS bucket where your bad rows files are stored (e.g. `sp-storage-loader-bad-prod1-com_acme`).
 
@@ -170,7 +170,7 @@ bq mk \
 
 Run the corresponding commands for the remaining table definitions. We recommend creating all tables, although you can skip the ones you are not interested in.
 
-:::tip Why not just auto-detect the schemas?
+:::tip[Why not just auto-detect the schemas?]
 
 BigQuery has an “Auto-detect” feature to automatically generate the table definition for you by inspecting the file contents. So you might wonder why it is necessary to provide explicit schema definitions for your tables.
 
@@ -196,7 +196,7 @@ SELECT COUNT(*) FROM schema_violations
 WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
 ```
 
-![Athena query](images/athena-count.png)
+![AWS Athena query editor showing a SELECT COUNT(*) query on the schema_violations table filtered to the last 7 days, returning a count of 3187](images/athena-count.png)
 
 If you have schema violations, you might want to find which tracker sent the event:
 
@@ -240,7 +240,7 @@ WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME,
 
 You can repeat that query for each table you created in your bad rows dataset.
 
-![BigQuery query](images/bigquery-count.png)
+![Google BigQuery query editor showing a SELECT COUNT(*) query on the schema_violations table filtered to the last 7 days using the _FILE_NAME column, returning a count of 16111](images/bigquery-count.png)
 
 If you have schema violations, you might want to find which tracker sent the event:
 

@@ -38,4 +38,4 @@ Adding this plugin will automatically capture the following context:
 
 | Context                                                                                                                                                          | Example                                           |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-30-at-22.12.03.png) |
+| [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0) | ![Example GA cookies context JSON showing the _ga cookie value](images/Screenshot-2021-03-30-at-22.12.03.png) |

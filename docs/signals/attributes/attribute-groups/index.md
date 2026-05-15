@@ -20,7 +20,7 @@ The first step is to specify:
 
 ## Data source
 
-:::note Warehouse Connection
+:::note[Warehouse Connection]
 A warehouse connection is required to create `Batch` and `External Batch` attributes.
 :::
 
@@ -46,7 +46,7 @@ First, define the [attributes](/docs/signals/attributes/attributes/index.md) you
 
 Once you've created and published the group, create and configure the dbt models. Follow the instructions shown, or check out the [batch engine tutorial](/tutorials/signals-batch-engine/start) for a step-by-step guide.
 
-![Batch configuration instructions showing dbt setup steps](../../images/attribute-group-batch-instructions.png)
+![Published batch attribute group in Snowplow Console showing three dbt setup steps: install the Signals dbt package, add the group ID to your dbt project configuration, and run the dbt model](../../images/attribute-group-batch-instructions.png)
 
 ### External batch
 
@@ -88,7 +88,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 ## Testing the attribute definitions
 
-:::note Warehouse Connection
+:::note[Warehouse Connection]
 A warehouse connection is required to test attribute definitions.
 :::
 

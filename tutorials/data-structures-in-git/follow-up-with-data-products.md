@@ -134,7 +134,7 @@ data:
 You'll need to come up with a valid uuid V4 for the `resourceName` of an event specification. You can do so by using an [online generator](https://www.uuidgenerator.net), or running the `uuidgen` command in your terminal
 :::
 
-:::warning
+:::note
 
 The `iglu:com.example/login/jsonschema/1-0-1` data structure has to be deployed at least to a develop envinroment. Currently referencing local data structures is not supported
 

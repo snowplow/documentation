@@ -1,4 +1,4 @@
-:::tip Streaming Loader or RDB Loader?
+:::tip[Streaming Loader or RDB Loader?]
 
 Both [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) and [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) can load data into Snowflake.
 

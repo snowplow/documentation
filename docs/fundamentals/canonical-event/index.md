@@ -16,6 +16,8 @@ The field **type** refers to the data type in the enriched event data. For some 
 
 Different event fields are populated by different applications, such as tracker SDKs or [enrichments](/docs/pipeline/enrichments/index.md). The **source** of data for each field is indicated in the tables below.
 
+Values you provide in your tracking code have precedence over pipeline-derived values. For example, if you [set `useragent`](/docs/events/ootb-data/device-and-browser/index.md#user-agent) in your tracking code, the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) will use that value, rather than overriding it with the value from the `User-Agent` HTTP header.
+
 ## Validation
 
 During enrichment, atomic property values are validated against the [atomic schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0). If a required field is missing or invalid, for example the wrong type or length, [Enrich](/docs/api-reference/enrichment-components/index.md) will process the event as a [failed event](/docs/fundamentals/failed-events/index.md). The **reqd?** values in these tables specify whether a field is required for a Snowplow event.
@@ -99,7 +101,7 @@ This table shows the possible values for the `platform` field:
 | Internet of Things        | `iot`            |
 | Headset (e.g., AR, VR)    | `headset`        |
 
-:::info Tracker namespacing
+:::info[Tracker namespacing]
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that doesn't contain a colon or semicolon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
 :::
 
@@ -124,15 +126,14 @@ The trackers send timestamp properties as `int` in the payload, representing mil
 
 Read more about Snowplow timestamps [here](/docs/events/timestamps/index.md).
 
-### Device and operating system fields
+### Device fields
 
 The `dvce_screenheight` and `dvce_screenwidth` screen resolution fields originate from a single `res` payload property. It's a string with the format `"<width>x<height>"`, e.g. `1900x1024`. During enrichment, this string is split into the two separate integer fields.
 
-| Payload property | Field name          | Type                      | Description             | Reqd? | Example                                                                                | Source               | Web | Mobile |
-| ---------------- | ------------------- | ------------------------- | ----------------------- | ----- | -------------------------------------------------------------------------------------- | -------------------- | --- | ------ |
-| `ua`             | `useragent`         | `string`, max length 1000 | Raw useragent           | No    | `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0` | Tracking or pipeline | ✅   | ✅      |
-| `res`            | `dvce_screenheight` | `integer`                 | Screen height in pixels | No    | `1024`                                                                                 | Tracking             | ✅   | ✅      |
-| `res`            | `dvce_screenwidth`  | `integer`                 | Screen width in pixels  | No    | `1900`                                                                                 | Tracking             | ✅   | ✅      |
+| Payload property | Field name          | Type      | Description             | Reqd? | Example | Source   | Web | Mobile |
+| ---------------- | ------------------- | --------- | ----------------------- | ----- | ------- | -------- | --- | ------ |
+| `res`            | `dvce_screenheight` | `integer` | Screen height in pixels | No    | `1024`  | Tracking | ✅   | ✅      |
+| `res`            | `dvce_screenwidth`  | `integer` | Screen width in pixels  | No    | `1900`  | Tracking | ✅   | ✅      |
 
 For more information on this topic check out the [device data](/docs/events/ootb-data/device-and-browser/index.md) page.
 
@@ -199,7 +200,9 @@ These fields record the versions of the various Snowplow components involved in 
 
 ## Web-specific fields
 
-These fields apply only to events from web.
+These fields apply mainly to events from web.
+
+For more information about these fields check out the [device and browser](/docs/events/ootb-data/device-and-browser/index.md), [page and screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md), and [links and referrers](/docs/events/ootb-data/links-and-referrers/index.md) overview pages.
 
 ### Page fields
 
@@ -242,15 +245,14 @@ The `doc_width` and `doc_height` page size fields originate from a single `ds` p
 
 The `br_viewwidth` and `br_viewheight` page size fields originate from a single `vp` payload property. It's a string with the format `"<width>x<height>"`, e.g. `1000x1000`. During enrichment, this string is split into the two separate integer fields.
 
-| Payload property | Field name      | Type                     | Description                              | Reqd? | Example | Source   | Web | Mobile |
-| ---------------- | --------------- | ------------------------ | ---------------------------------------- | ----- | ------- | -------- | --- | ------ |
-| `lang`           | `br_lang`       | `string`, max length 255 | Language the browser is set to           | No    | `en-GB` | Tracking | ✅   | ❌      |
-| `cookie`         | `br_cookies`    | `integer boolean`        | Whether the browser is accepting cookies | No    | `1`     | Tracking | ✅   | ❌      |
-| `cd`             | `br_colordepth` | `string`, max length 12  | Bit depth of the browser color palette   | No    | `24`    | Tracking | ✅   | ❌      |
-| `vp`             | `br_viewwidth`  | `integer`                | Viewport width                           | No    | `1000`  | Tracking | ✅   | ❌      |
-| `vp`             | `br_viewheight` | `integer`                | Viewport height                          | No    | `1000`  | Tracking | ✅   | ❌      |
-
-For more information on this topic check out the [device and browser data](/docs/events/ootb-data/device-and-browser/index.md) page.
+| Payload property | Field name      | Type                      | Description                              | Reqd? | Example                                                                                | Source               | Web | Mobile |
+| ---------------- | --------------- | ------------------------- | ---------------------------------------- | ----- | -------------------------------------------------------------------------------------- | -------------------- | --- | ------ |
+| `lang`           | `br_lang`       | `string`, max length 255  | Language the browser is set to           | No    | `en-GB`                                                                                | Tracking             | ✅   | ❌      |
+| `cookie`         | `br_cookies`    | `integer boolean`         | Whether the browser is accepting cookies | No    | `1`                                                                                    | Tracking             | ✅   | ❌      |
+| `cd`             | `br_colordepth` | `string`, max length 12   | Bit depth of the browser color palette   | No    | `24`                                                                                   | Tracking             | ✅   | ❌      |
+| `vp`             | `br_viewwidth`  | `integer`                 | Viewport width                           | No    | `1000`                                                                                 | Tracking             | ✅   | ❌      |
+| `vp`             | `br_viewheight` | `integer`                 | Viewport height                          | No    | `1000`                                                                                 | Tracking             | ✅   | ❌      |
+| `ua`             | `useragent`     | `string`, max length 1000 | Raw useragent                            | No    | `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0` | Tracking or pipeline | ✅   | ✅      |
 
 ## Baked-in event fields
 
@@ -296,7 +298,7 @@ For [self-describing events](/docs/fundamentals/events/index.md#self-describing-
 | `event_format`  | `string`, max length 128  | Format for event; always `jsonschema` | Yes   | `jsonschema` | Default enrichment | ✅   | ✅      |
 | `event_version` | `string`, max length 128  | Version of event schema               | Yes   | `1-0-2`      | Default enrichment | ✅   | ✅      |
 
-:::note Extra columns for self-describing event data
+:::note[Extra columns for self-describing event data]
 
 Data in self-describing events or entities is added as additional columns, rather than in these standard atomic fields.
 

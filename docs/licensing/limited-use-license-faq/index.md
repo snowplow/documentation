@@ -5,7 +5,7 @@ description: "Frequently asked questions about the Snowplow Limited Use License 
 keywords: ["limited use license", "SLULA", "license terms"]
 ---
 
-:::info Note
+:::info[Note]
 
 This FAQ is not a substitute for reading the license text:
 

@@ -25,8 +25,11 @@
 
 ## Snowplow terminology
 * **Always capitalized**: Event Studio, Snowtype, Snowplow CDI, Signals
-* **Never capitalized**: entities, events, schemas, data structures, tracking plans
+* **Not proper nouns**: entities, events, schemas, data structures, tracking plans
 * Use "entity", never "context". Use "self-describing event", never "unstructured event".
+
+## Documenting Iglu schemas
+When documenting an Iglu schema, use the `SchemaProperties` component. See [`CONTRIBUTING.md`](CONTRIBUTING.md#add-iglu-schema-details). Don't list the properties manually or link out to the schema.
 
 ## File structure ⚠️ CRITICAL
 * Use kebab-case for file names: `google-tag-manager-server-side.md`
@@ -34,12 +37,13 @@
 * Example: Create `/segment-audience-hub/index.md`, not `segment-audience-hub.md`.
 * **End all internal links with `/index.md`** for validation, EXCEPT for links in files within `/tutorials`.
 * Use absolute paths from docs root: `/docs/sources/trackers/.../index.md`
+* **Never use `https://docs.snowplow.io` links to internal pages.** Any link to a `docs.snowplow.io` URL must be converted to a relative internal path.
 * **Verify every link exists.** Search the docs directory to confirm paths before publishing.
 
 ## Required frontmatter
 ```yaml
 ---
-title: "Full page title"                        # Descriptive title in sentence case
+title: "Full page title"                        # Descriptive title in sentence case, ideally unique across the site
 sidebar_position: 10                            # Controls ordering
 sidebar_label: "Short title"                    # To display in navigation sidebar
 description: "One to two sentences for SEO."    # Grammatically correct
@@ -75,16 +79,20 @@ import TabItem from '@theme/TabItem';
 
 ## Admonitions
 ```mdx
-:::note
+:::note[Title]
 General information, context, or clarifications
 :::
 
-:::tip
+:::tip[Title]
 Best practices, recommendations, or encouraging specific actions
 :::
 
-:::warning
+:::warning[Title]
 Important cautions about data loss or security risks
+:::
+
+:::danger[Title]
+Critical warnings about severe consequences such as pipeline outages
 :::
 ```
 

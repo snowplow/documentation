@@ -6,16 +6,12 @@ description: "Snowplow Micro REST API endpoints for querying good events, bad ev
 keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 ---
 
-```mdx-code-block
-import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
-```
 
 This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md).
 
 ## /micro/all
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 
@@ -41,7 +37,7 @@ Example:
 
 ## /micro/good
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 
@@ -312,7 +308,7 @@ It's not necessary to specify all the fields in a request, only the ones that ne
 
 ## /micro/bad
 
-:::note Micro in Console
+:::note[Micro in Console]
 
 This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
 

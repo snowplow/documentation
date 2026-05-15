@@ -20,7 +20,7 @@ Snowplow and Reverse ETL is for organizations who want to:
 - Activate very high value audiences based on propensity to convert.
 - Execute well on dozens of other use cases.
 
-![](images/reverseetl.png)
+![Diagram of a marketing activation use case showing five stages: Collect (Snowplow strength), Unify, Segment, and Predict (data warehouse and models strength), and Activate (Reverse ETL strength)](images/reverseetl.png)
 
 ## What problem does Reverse ETL solve?
 

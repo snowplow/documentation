@@ -80,7 +80,7 @@ Publishing to `dev` will also run validation. It will only fail on ERROR notific
 
 You should now be able to see your published data structure in [Console UI](https://console.snowplowanalytics.com/data-structures). If you click through from the data structure listing to view the `login` data structure you should see the following banner.
 
-![](./images/locked.png)
+![Console UI banner on the login data structure page saying "This data structure is locked because it is managed in an external repository and can't be edited from the console UI," with Unlock and Learn more options](./images/locked.png)
 
 Any data structures published using snowplow-cli will automatically get this banner and have UI based editing disabled. It is a good idea to settle on one source of truth for each data structure to avoid potential conflicts.
 

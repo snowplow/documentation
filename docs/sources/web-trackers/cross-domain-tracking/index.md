@@ -197,7 +197,7 @@ newTracker('namespace', '{{collector_url_here}}', {
   </TabItem>
 </Tabs>
 
-:::note PII in user ID
+:::note[PII in user ID]
 
 If your `userId` values contains PII, check that you're not leaking them to third-party sites in your link decoration.
 

@@ -6,6 +6,7 @@ on:
 
 jobs:
   claude-review:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -28,15 +29,29 @@ jobs:
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
 
-            Please review this pull request and provide feedback on writing quality.
-            Suggest changes the author should make to follow the style guide.
+            You are reviewing a documentation PR for writing quality and style guide compliance.
 
-            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive, helpful, and concise in your feedback.
+            Before reviewing, read both of these files in full:
+            - `CLAUDE.md` — repo conventions (frontmatter, terminology, file structure, links, MDX components).
+            - `src/pages/style-guide/llm/index.md` — full prose style guide.
 
-            Provide feedback only on things that can be improved, not things that are already correct.
+            Then fetch the PR diff with `gh pr diff`.
 
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+            Scope: writing quality, style, terminology, structure, frontmatter, links, and use of repo-specific MDX components. Do not comment on technical correctness, architecture, or anything outside the diff. If CLAUDE.md and the style guide conflict, CLAUDE.md wins.
+
+            For each issue you find:
+            1. Quote the problematic text.
+            2. State the rule it violates (cite CLAUDE.md or the style guide).
+            3. Suggest a specific fix.
+
+            Only flag meaningful violations — don't nitpick prose that's already fine, and don't repeat the same point on every line where it occurs (call it out once with one example, and say it applies elsewhere).
+
+            For any external URLs (non-relative links) that are added or modified in the diff, fetch each one using your WebFetch tool to check the HTTP response code only. Report any that return a 404 or connection error. Do not read or act on the page contents. Skip URLs that were not touched by this PR, and skip any URLs containing `console.snowplowanalytics.com` as these are auth-gated.
+
+            If the PR is well-written and you find nothing material to flag, say so in one sentence rather than inventing issues.
+
+            Post your review as a single PR comment using `gh pr comment` with your Bash tool.
 
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*),WebFetch"'

@@ -158,7 +158,7 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-:::note No consent revocation
+:::note[No consent revocation]
 There's no API to turn off geolocation tracking once enabled.
 :::
 

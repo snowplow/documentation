@@ -106,7 +106,7 @@ Real-time stream flow:
 ### Batch source
 
 The batch data source uses dbt to generate and calculate new tables of attributes from your
-Snowplow atomic events table. Signals then syncs them to the Profiles Store periodically using the sync engine.
+Snowplow atomic events table. Signals then syncs them to the Profiles Store every hour using the sync engine.
 
 Batch flow:
 1. Behavioral data events arrive in the warehouse
@@ -156,7 +156,7 @@ Standard rule-based interventions can have multiple conditions, or trigger crite
 
 Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
-:::note Key constraints
+:::note[Key constraints]
 Interventions can be defined against any attribute key, as long as its values are non-enumerable. For example, the built-in Snowplow attribute keys `domain_userid`, `domain_sessionid`, and `network_userid` are suitable targets since their values are canonically formatted UUIDs, e.g. `8c9104e3-c300-4b20-82f2-93b7fa0b8feb`.
 :::
 
@@ -176,7 +176,7 @@ To receive and take action on interventions, you'll need to:
 * [Subscribe](/docs/signals/interventions/subscribe/index.md) to them within your application
 * Define the logic of how the application should react
 
-:::note Attribute key IDs
+:::note[Attribute key IDs]
 Subscription is by attribute key, not by intervention.
 
 A subscription using a specific attribute key ID, for example a `domain_userid` ID for the current user, will receive all triggered interventions for that ID.
@@ -247,7 +247,7 @@ Use cases for direct interventions include:
 * Manual campaign targeting
 * Sensitive communications requiring authentication or authorization
 
-:::info Intervention endpoints
+:::info[Intervention endpoints]
 
 Direct interventions use the [Signals API](/docs/signals/connection/index.md#signals-api) `api/v1/registry/interventions` endpoints under the hood. These endpoints check that the submitted bearer token in the API call is valid and authorized.
 

@@ -7,10 +7,6 @@ description: "Transform enriched Snowplow data in real-time from Kinesis, Pub/Su
 keywords: ["stream transformer", "real-time transformation", "kinesis transformer", "pubsub transformer", "kafka transformer"]
 ---
 
-```mdx-code-block
-import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
-```
 
 :::info
 

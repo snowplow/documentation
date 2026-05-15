@@ -14,7 +14,6 @@ This package has been superseded by the [Unified Digital](/docs/modeling-your-da
 
 import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
-import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
 import CodeBlock from '@theme/CodeBlock';
 import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
@@ -71,7 +70,7 @@ This page helps you configure the Snowplow Mobile dbt package. You can customize
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note Variable name prefix
+:::note[Variable name prefix]
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
 :::
 

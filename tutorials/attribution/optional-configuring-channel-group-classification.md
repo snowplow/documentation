@@ -18,7 +18,7 @@ You only need to follow **one** of the configuration guides below.
 
 1. Create a new file called `channel_group_query.sql` in your root dbt projects macro folder
 
-![](./screenshots/Screenshot00.png)
+![VS Code file explorer for the sp_attribution_tutorial project showing channel_group_query.sql newly created in the macros folder](./screenshots/Screenshot00.png)
 
 2. Open [this link](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/field_definitions/channel_group_query.sql) to find the GitHub link to the channel_group_query.sql macro within Unified Package. Within the file there are three macros, find the one relevant to you:
     1. bigquery__channel_group_query - BigQuery
@@ -48,7 +48,7 @@ END
 
 1. Create a new file called `channel_classification.sql` in your root dbt projects macro folder
 
-![](./screenshots/Screenshot31.png)
+![VS Code file explorer for the sp_attribution_tutorial project showing channel_classification.sql newly created in the macros folder](./screenshots/Screenshot31.png)
 
 2. Paste the following into the file you created within step 1.
 

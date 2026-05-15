@@ -6,10 +6,6 @@ description: "Use the Snowplow CLI data-structures command to generate, download
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 The `data-structures` subcommand of [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 
@@ -40,7 +36,7 @@ This command will retrieve all organization data structures. By default it will 
 
 Given a data structure with `vendor: com.acme` and `name: link_click` and assuming the default format of yaml the resulting folder structure will be `./data-structures/com.acme/link_click.yaml`.
 
-:::note Drafts not included
+:::note[Drafts not included]
 
 The CLI download command only retrieves data structures that have been deployed to at least the development environment. **Draft data structures** that haven't been deployed yet will not be included in the download.
 

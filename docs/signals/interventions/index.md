@@ -28,7 +28,7 @@ Next, configure when the intervention should trigger.
 
 Criteria are the conditional rules that determine when an intervention should trigger.
 
-:::note Sent once
+:::note[Sent once]
 An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
 :::
 
@@ -59,7 +59,7 @@ You can also select one or more attribute groups to be sent with the interventio
 
 Once you're happy with your intervention configuration, click **Create intervention** to save it. It will be saved as a draft, and not yet available to Signals.
 
-![Draft intervention page showing Edit and Publish buttons](../images/intervention-draft.png)
+![Intervention details page in Snowplow Console showing a status of Draft, with Edit and Publish action buttons](../images/intervention-draft.png)
 
 Click the **Edit** button if you want to make changes to the intervention.
 

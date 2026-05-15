@@ -25,7 +25,7 @@ If you are not running your website or app locally but would still like to use M
 
 ## Exposing Micro via a public domain name
 
-:::tip Micro in Console
+:::tip[Micro in Console]
 
 This method is for running Micro locally. You can also [run Micro through Console](/docs/testing/snowplow-micro/console/index.md), which automatically gives you a public endpoint.
 
@@ -46,7 +46,7 @@ flowchart LR
 
 The easiest way to achieve this is with a tool like [ngrok](https://ngrok.com/) or [localtunnel](https://theboroer.github.io/localtunnel-www/).
 
-:::note Cookies and IP addresses
+:::note[Cookies and IP addresses]
 
 Either tool will take care of HTTPS and the required certificates. However, the resulting URL will not be under your domain, so you will not be able to set or receive first-party cookies this way.
 
@@ -106,7 +106,7 @@ flowchart LR
 
 Let’s say you have a website `example.com` with Snowplow tracking that points to a Collector hosted at `c.example.com`.
 
-:::note Cookies and IP addresses
+:::note[Cookies and IP addresses]
 
 With this approach, because Micro is “pretending” to be behind the actual Collector domain (`c.example.com`), it will receive first-party cookies set for that domain.
 
@@ -136,7 +136,7 @@ You should now have a local file called `c.example.com.p12` with the default pas
 
 ### Match the Collector configuration
 
-To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration).
+To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-and-enrich-configuration).
 
 The two most important settings are the cookie name (you can set it with `-Dcollector.cookie.name` as shown on the page linked above) and any custom paths (via a configuration file).
 

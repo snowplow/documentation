@@ -38,7 +38,7 @@ The new column naming scheme has several advantages:
 
 The catch is that you have to follow the rules of schema evolution more strictly to ensure data from different schema versions can fit in the same column — see below.
 
-:::tip Consolidating old and new columns
+:::tip[Consolidating old and new columns]
 
 If you are using [Snowplow dbt models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), they will automatically consolidate the data between `_1_0_0` and `_1` style columns, because they look at the major version prefix (e.g. `_1`), which is common to both.
 

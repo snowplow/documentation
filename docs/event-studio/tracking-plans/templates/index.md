@@ -2,18 +2,20 @@
 title: "Tracking plan templates"
 sidebar_label: "Templates"
 date: "2024-06-17"
-sidebar_position: 2
+sidebar_position: 4
 description: "Pre-defined tracking plan templates for Base Web, Base Mobile, Ecommerce, and Media tracking with included event specifications and implementation guidance."
 keywords: ["tracking plan templates", "Base Web template", "Base Mobile template", "ecommerce template", "media tracking template"]
 ---
 
 To create a new tracking plan based on a pre-defined template, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" or "Templates" buttons.
 
-:::note
-_When creating a tracking plan based on a template, the name must be unique to ensure proper identification and avoid conflicts._
+When creating a tracking plan based on a template, the name must be unique to ensure proper identification and avoid conflicts.
+
+:::note[Snowtype]
+[Snowtype](/docs/event-studio/implement-tracking/index.md) **does not support** tracking plan templates.
 :::
 
-Below is a list of the current templates:
+Below is a list of the current templates.
 
 ## Base Web
 
@@ -46,7 +48,7 @@ Included event specifications:
 
 This Tracking Plan template contains all the basic ecommerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
+Tracked using the [out-of-the-box ecommerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 

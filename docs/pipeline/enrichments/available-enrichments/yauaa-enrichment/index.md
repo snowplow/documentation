@@ -10,7 +10,7 @@ YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent pars
 
 It uses [YAUAA API](https://yauaa.basjes.nl/) to parse and analyze all user agent information of an HTTP request and extract as many relevant information as possible about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
-:::warning
+:::note
 
 YAUAA parsing relies entirely on in-memory _HashMaps_ and requires roughly 400 MB of RAM (see [here](https://yauaa.basjes.nl/README-MemoryUsage.html)). Additional memory is also needed if caching is enabled (by default).
 
@@ -54,8 +54,8 @@ Only one parameter can be set in the configuration : `cacheSize`. This field det
 
 This enrichment uses the following inputs:
 
-- The `useragent` field from the Snowplow event.  Typically this field is taken from the `User-Agent` HTTP header.  But Snowplow trackers can also override the user agent by setting the `ua` field [in the tracker payload](/docs/events/index.md).
-- Client hint HTTP headers.  These are [a set of standard headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) such as `Sec-CH-UA` which provide extra detail about the user agent.
+- The `useragent` field from the Snowplow event. Typically this field is taken from the `User-Agent` HTTP header.  But Snowplow trackers can also override the user agent by setting the `ua` field [in the tracker payload](/docs/events/ootb-data/device-and-browser/index.md).
+- Client hint HTTP headers. These are [a set of standard headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) such as `Sec-CH-UA` which provide extra detail about the user agent.
 
 ## Output
 

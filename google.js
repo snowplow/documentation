@@ -1,8 +1,6 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
-import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import {
-  COOKIE_PREF_KEY,
   DOCS_SITE_URLS,
   GTM_ID,
   UA_ID,
@@ -82,40 +80,34 @@ const attachGAScripts = () => {
   scriptsAttached[2] = true
 }
 
-const setupGoogleTrackers = () => {
-  const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
-  const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
-
-  if (
-    isProd &&
-    cookiePreferences &&
-    cookiePreferences.includes('analytics:1')
-  ) {
-    attachGTMHeadScript()
-    attachGTMBodyScript()
-    attachGAScripts()
-  }
-}
-
 if (ExecutionEnvironment.canUseDOM) {
-  setupGoogleTrackers()
+  let consentInitialized = false
 
-  onPreferencesChanged((preferences) => {
+  window.ketch('on', 'consent', (consent) => {
     const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
+    const analyticsEnabled = consent.purposes?.analytics === true
 
-    preferences.cookieOptions.forEach(({ id, isEnabled }) => {
-      if (id === 'analytics' && isProd) {
-        if (isEnabled) {
-          attachGTMHeadScript()
-          attachGTMBodyScript()
-          attachGAScripts()
-        } else {
-          Cookies.remove('_ga')
-          Cookies.remove('_gid')
-          Cookies.remove('_gat_gtag_UA_159566509_1')
-          reloadOnce()
-        }
+    if (!consentInitialized) {
+      consentInitialized = true
+      if (isProd && analyticsEnabled) {
+        attachGTMHeadScript()
+        attachGTMBodyScript()
+        attachGAScripts()
       }
-    })
+      return
+    }
+
+    if (isProd) {
+      if (analyticsEnabled) {
+        attachGTMHeadScript()
+        attachGTMBodyScript()
+        attachGAScripts()
+      } else {
+        Cookies.remove('_ga')
+        Cookies.remove('_gid')
+        Cookies.remove('_gat_gtag_UA_159566509_1')
+        reloadOnce()
+      }
+    }
   })
 }

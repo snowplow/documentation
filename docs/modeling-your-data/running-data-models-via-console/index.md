@@ -49,7 +49,7 @@ We also highly recommend installing dbt locally so that you can quickly test you
 ## Initial setup
 
 First, create a Git connection to your repository:
-* In Console, go to **Destinations > Connections > Set up connection > Git connection**
+* In Console, go to **Settings > Connections > Set up connection > Git repository**
 * The setup flow will guide you to create and test the connection
 
 Next, create the model project:
@@ -93,7 +93,7 @@ You might have already set up a warehouse connection for loading the data. Data 
 
 :::
 
-Navigate to **Destinations > Connections > Set up connection > Data modeling connection**. Select your warehouse and follow the steps in Console to create and test your connection.
+Navigate to **Settings > Connections > Set up connection > Data modeling**. Select your warehouse and follow the steps in Console to create and test your connection.
 
 ## Add run configurations
 
@@ -104,7 +104,7 @@ Each run configuration controls what dbt commands will be executed and when. Mor
 * Each run configuration can contain one or more schedules
 * For each schedule, you can define specific dbt commands
 
-:::tip Examples
+:::tip[Examples]
 
 If you want to run all your models every day at midnight, you would create:
 * One run configuration
@@ -132,7 +132,7 @@ To create a run configuration:
 
 Once you’ve defined the run configurations and schedules, Console will automatically run your data models. You can see when the next run is scheduled by looking at each run configuration.
 
-![Run configuration example](images/run-configurations.png)
+![Run configurations panel showing an active "Main run configuration" on BigQuery with one schedule, and an "example-models" schedule set to run every 20 minutes with the next run today at 20:00](images/run-configurations.png)
 
 You can also use the **Run now** button to trigger a one-off model run for a specific schedule. The resulting job will use the same commands and settings.
 

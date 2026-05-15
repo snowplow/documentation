@@ -10,8 +10,6 @@ sidebar_position: 10
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
 import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 
@@ -106,8 +104,6 @@ It also does the heavy-lifting for you and provides you with **incremental data 
 The purpose of this package is to allow an incremental, efficient way to do marketing attribution without having to read all your data every time.
 
 In the below guide we will walk you through the data transformation process step-by-step in order for you to see how the source data changes downstream. This will give you and your team a transparent and easy-to-understand way to see how this package will lead you to valuable insights.
-
-We also provide the **[Marketing Attribution Data Model Pack](/docs/modeling-your-data/visualization/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
 
 ## Sources you are going to need
 
@@ -221,7 +217,7 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 In order to reduce unnecessarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
 
 In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value.
- 
+
 For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
 
 <details>
@@ -245,7 +241,7 @@ For other transformations (`exposure_path`, `first_path`, `unique_path`), no add
 
 </details>
 
-:::warning
+:::note
 Redshift users starting from 0.6.0 are only allowed to have one path transformation
 (e.g. either `exposure_path` or `first_path`). If using `remove_if_last_and_not_all` or
 `remove_if_not_all`, only single-item arrays are allowed. In case of other supported targets there are no such limitations, multiple path transformations can be applied, if neeeded.

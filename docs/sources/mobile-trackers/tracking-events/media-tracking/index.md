@@ -7,8 +7,6 @@ keywords: ["media tracking", "video tracking", "avplayer tracking"]
 ---
 
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import Media from "@site/docs/reusable/media/_index.md"
 ```
 

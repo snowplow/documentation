@@ -97,7 +97,7 @@ This table shows the support for Kantar Focal Meter tracking across the main cli
 
 ## Privacy Sandbox (deprecated)
 
-:::warning
+:::note
 Privacy Sandbox has been deprecated by Google. This plugin remains available but the underlying browser API may no longer be supported.
 :::
 

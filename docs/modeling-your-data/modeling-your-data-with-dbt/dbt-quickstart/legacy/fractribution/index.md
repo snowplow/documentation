@@ -9,11 +9,10 @@ keywords: ["fractribution quickstart", "legacy attribution", "fractribution setu
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
 
-:::warning
+:::note
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 
@@ -68,7 +67,7 @@ vars:
     snowplow__path_transforms: \{'exposure_path' : null}
 ```
 
-:::tip Snowflake Only
+:::tip[Snowflake Only]
 
 If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
 
@@ -210,7 +209,7 @@ Please note that some of the libraries are adapter specific. These are listed in
 <details>
 <summary>M1 Instructions (for Snowflake only)</summary>
 
-:::warning
+:::note
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
 ```

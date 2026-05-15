@@ -17,7 +17,6 @@ import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/lake-
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_kinesis_config.md';
 import KafkaConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_kafka_config.md';
 import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_common_config.md';
-import Admonition from '@theme/Admonition';
 ```
 
 <p>The configuration reference in this page is written for Lake Loader <code>{`${versions.lakeLoader}`}</code></p>
@@ -66,6 +65,13 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
   </TabItem>
 
   <TabItem value="iceberg-rest" label="Iceberg / REST">
+
+:::note
+
+The REST catalog integration has been tested with Snowflake Open Catalog.
+
+:::
+
     <table>
         <thead>
             <tr>
@@ -123,7 +129,7 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
         </tbody>
     </table>
 
-:::info Event Hubs Authentication
+:::info[Event Hubs Authentication]
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 

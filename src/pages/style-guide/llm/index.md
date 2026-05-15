@@ -92,7 +92,7 @@
 * Enrich: Capitalized. "Enrich can enrich an event."
 * Loaders: Capitalized, with "the". "The BigQuery Loader reads enriched events."
 * Iglu, Iglu Central, Iglu Server: Capitalized. Other Iglu components are lowercase.
-* Never capitalized: entities, events, schemas, data structures, tracking plans, page view, self-describing event, source applications, failed events.
+* Not proper nouns: entities, events, schemas, data structures, tracking plans, page view, self-describing event, source applications, failed events.
 * Use "entity". Never use "context".
 * Use "self-describing event". Never use "unstructured event".
 * Use "failed events". Never use "bad rows" (except for legacy JSON format).
@@ -116,5 +116,5 @@
 
 * Use `-` or `*` for bullet points.
 * Use triple backticks and specify the language for code blocks.
-* Use Docusaurus admonitions sparingly. Always set custom headings.
-* Use Tip for actions, Note or Info for information, Warning for data loss or security risks.
+* Use Docusaurus admonitions sparingly. Always set custom headings using bracket syntax: `:::note[Title]`.
+* Use Tip for actions, Note or Info for information, Warning for data loss or security risks, Danger for pipeline outages.

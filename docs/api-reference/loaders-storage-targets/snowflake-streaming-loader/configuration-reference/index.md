@@ -10,7 +10,6 @@ keywords: ["snowflake config", "snowpipe streaming", "streaming loader config", 
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Admonition from '@theme/Admonition';
 import SnowflakeConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_snowflake_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_kinesis_config.md';
@@ -88,7 +87,7 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
         </tbody>
     </table>
 
-:::info Event Hubs Authentication
+:::info[Event Hubs Authentication]
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 

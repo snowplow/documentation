@@ -14,20 +14,20 @@ For some Event Specification features, such as event counts, it is required that
 
 ## Installing Snowtype
 
-After having set up a [Console API key](/docs/event-studio/implement-tracking/snowtype/using-the-cli/#authenticating-with-the-console) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`.
+After having set up a [Console API key](/docs/event-studio/implement-tracking/install-snowtype/#authenticate) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`.
 
-Since this is a project without previous Snowtype installation, we need to go through the [init flow](/docs/event-studio/implement-tracking/snowtype/using-the-cli/#initializing-snowtype-for-your-project).
+Since this is a project without previous Snowtype installation, we need to go through the [init flow](/docs/event-studio/implement-tracking/install-snowtype/#initialize-your-project).
 
 To do that, you can go to the tracking plan page and click on the `Implement tracking` button. There you can copy the second code command which relates to initializing a new Snowtype project.
 
-![](./images/sntp-init.png)
+!["Implement tracking" modal showing the Generate code tab with the npx snowtype patch command for updating and the npx snowtype init command for first-time setup, with a green arrow highlighting the init command's Copy button](./images/sntp-init.png)
 
 The inputs should look like the following:
 
-![](./images/sntp-init-inputs.png)
+![Terminal output from running the Snowtype init command, showing interactive prompts answered with Browser Tracker, TypeScript, JSON format, and ./src/tracking as the output directory, ending with "Configuration created"](./images/sntp-init-inputs.png)
 
 Next you add this tracking plan to the Snowtype project by copying the first code command.
 
-![](./images/sntp-patch.png)
+!["Implement tracking" modal with a green arrow highlighting the Copy button for the npx snowtype patch command used to add the tracking plan to the Snowtype project](./images/sntp-patch.png)
 
 Now your Snowtype configuration file should include the tracking plan in the `dataProductIds` array.

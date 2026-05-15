@@ -12,7 +12,7 @@ For ML training data we will use an artificial set of Snowplow events. Feel free
 
 Start by configuring your Signals credentials in the notebook.
 
-![](./images/colab_credentials.jpeg)
+![Google Colab Secrets panel showing two notebook secrets configured: SP_SANDBOX_URL and SP_SANDBOX_TOKEN, with their values hidden](./images/colab_credentials.jpeg)
 
 Here's a list of all the credentials you may need to configure, saved as variables:
 

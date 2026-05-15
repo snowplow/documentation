@@ -7,8 +7,6 @@ keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifica
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <TrackingPlansNomenclature />
 
@@ -41,7 +39,7 @@ data:
           event:
             source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
 ```
-:::warning Warning
+:::note
 The `source` fields of events and entities must refer to a deployed data structure. Referring to a locally created data structure is not yet supported.
 :::
 ### Linking tracking plan to a source application
@@ -103,7 +101,7 @@ snowplow-cli dp sync
 ```
 This command locates all files under `./data-products`, validates them, and pushes local changes to Console. Tracking plans and source applications are updated in place. For event specifications, a new version in draft status may be created if the change is structural (name change, event change, or rules change).
 
-:::warning Deprecated alias
+:::note[Deprecated alias]
 
 The old `publish` command has been renamed to `sync`. Running `dp publish` still works as an alias for backward compatibility, but it may be removed in a future release. Update your scripts to use `dp sync` instead.
 

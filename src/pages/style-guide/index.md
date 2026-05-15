@@ -619,13 +619,13 @@ Here are two pieces of older content that only partially follow the style guide.
 
    | ✅                            | ❌         |
    | ---------------------------- | --------- |
-   | `:::info Function signature` | `:::info` |
+   | `:::info[Function signature]` | `:::info` |
 
 - Use "Tip" blocks to encourage readers to take action
 
     | ✅                                                                                                                                |
     | -------------------------------------------------------------------------------------------------------------------------------- |
-    | :::tip Avoiding duplicate column names<br></br>Make sure you include a prefix value to avoid duplicate column names.<br></br>::: |
+    | :::tip[Avoiding duplicate column names]<br></br>Make sure you include a prefix value to avoid duplicate column names.<br></br>::: |
 
 - Use "Note" or "Info" blocks to highlight information that doesn't necessarily require action, such as that about a newer version being available, how a specific component works, or what versions are supported
 - The "Warning" and "Danger" blocks are reserved for information about potential data loss or permissions breaches

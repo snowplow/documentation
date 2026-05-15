@@ -6,10 +6,6 @@ description: "Overview of Snowplow visualization templates including ecommerce, 
 keywords: ["data visualization", "Snowplow dashboards", "analytics visualizations", "BI templates"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Along with data models, Snowplow provides dashboards and visualizations to help you extract value from your data quickly. These self-service analytics tools give you templated use-cases for data collection, modeling, and activation.
 
@@ -54,19 +50,19 @@ After purchase, click the tile in the Console **Visualizations** section to begi
 
 An example tile:
 
-![Visualization tile showing start install process](images/install-app-tile.png)
+![Visualization tile for the User & Marketing Analytics app by Snowplow showing "AVAILABLE" status and a "Start install" button](images/install-app-tile.png)
 
 During installation, you will need to provide a connection to the warehouse you would like the visualization to use. It will also highlight any required pipeline and data model dependencies.
 
 The installation workflow will look something like this:
 
-![Visualization install process](images/sample-app-install.png)
+![Install wizard for User & Marketing Analytics showing three steps: reviewing enrichments (Campaign attribution, IP lookups, and YAUAA enabled; Referer parser disabled), enabling the Unified Digital App data model on BigQuery, and selecting a warehouse connection](images/sample-app-install.png)
 
 ### Data model dependencies
 
 Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via Console](/docs/modeling-your-data/running-data-models-via-console/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 
-:::note Manual configuration for Open Source
+:::note[Manual configuration for Open Source]
 If you are running the necessary data models yourself outside of Console, then you will need to manually check that your setup satisfies the requirements for each visualization. These requirements are listed within the documentation pages for each visualization.
 :::
 
@@ -78,7 +74,7 @@ You might have already set up a warehouse connection for loading and/or modeling
 
 The connection process will look something like this:
 
-![Visualization warehouse connection process](images/add-connection.png)
+!["Add a new applications connection" dialog listing available warehouse destinations: BigQuery (Prod1) and Redshift (Prod1) as active pipeline destinations, and Databricks and Snowflake as other available options](images/add-connection.png)
 
 Once you have selected a destination, provided the credentials, and run the suggested SQL script, the Console will test the connection. Upon a successful test, the visualization will be available to use.
 
@@ -96,7 +92,7 @@ You may particularly notice this on visualizations with multiple tabs per page, 
 Where the visualization has some configuration requirements it will also have a **Settings** page that will validate what is available to the visualization, and provide information for steps to take for any unfulfilled requirements.
 
 ### Chart sources
-Many of the visualizations support the exporting of the SQL used to generate the charts. In some cases, there may be a specific download button, but otherwise look for the ![](./images/download_sql.svg) icon. Click it to download the SQL used to make that chart.
+Many of the visualizations support the exporting of the SQL used to generate the charts. In some cases, there may be a specific download button, but otherwise look for the ![download SQL file](./images/download_sql.svg) icon. Click it to download the SQL used to make that chart.
 
 Note that some data is processed further after the query to get it into the format required for plotting, which may include actions such as filtering, pivoting, etc.
 

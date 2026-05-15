@@ -51,7 +51,7 @@ http://<collector host>/com.sendgrid/v3
 
 Our Webhooks setup page should look like this after we have added our **HTTP POST URL**:
 
-![](images/sendgrid.png)
+![SendGrid Mail Settings page showing the Event Webhook configuration with all Deliverability Data and Engagement Data event types checked and the HTTP Post URL set to the Snowplow collector endpoint](images/sendgrid.png)
 
 If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL so:
 

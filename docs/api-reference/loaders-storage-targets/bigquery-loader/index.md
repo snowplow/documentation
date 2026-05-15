@@ -9,7 +9,6 @@ keywords: ["bigquery loader", "google bigquery", "streaming loader", "snowplow g
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_diagram.md';
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_deploy-overview.md';
 ```
@@ -27,7 +26,7 @@ The BigQuery Streaming Loader is an application that loads Snowplow events to Bi
   </TabItem>
 </Tabs>
 
-:::tip Schemas in BigQuery
+:::tip[Schemas in BigQuery]
 
 For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery).
 

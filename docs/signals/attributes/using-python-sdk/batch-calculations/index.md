@@ -10,7 +10,7 @@ You can use existing attributes that are already in your warehouse, or use the S
 
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
-:::note Warehouse support
+:::note[Warehouse support]
 Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 
@@ -27,7 +27,7 @@ The engine will be enabled when you either:
 * Apply an `ExternalBatchAttributeGroup` for an existing table
 * Run the batch engine `sync` command after creating new attribute tables
 
-Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour. Only the records that have changed since the last sync are sent to the Profiles Store.
+Once enabled, syncs begin at a fixed interval: every hour. Only the records that have changed since the last sync are sent to the Profiles Store.
 
 ## Using existing attributes
 

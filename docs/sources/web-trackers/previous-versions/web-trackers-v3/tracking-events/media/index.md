@@ -11,7 +11,7 @@ There are four media tracking plugins to choose from. Choosing the right plugin 
 2. Do you prefer the tracker to automatically subscribe to and track events from the media player, or do you prefer to track the events manually by calling track event functions (e.g., you have a wrapper around the media player which listens to the player events and can send them to Snowplow)?
 3. What data do you want to track? This will have an effect on whether you choose a plugin that tracks version 1 or version 2 of our media schemas (see below).
 
-:::note Version 1 vs Version 2 media schemas
+:::note[Version 1 vs Version 2 media schemas]
 
 We recommend adopting the newer, more fully-featured v2 schemas where possible. The [media player data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) does also support the v1 schemas.
 

@@ -12,7 +12,7 @@ Follow the steps below to configure a new event forwarder. See [available integr
 
 A **connection** is a resource that stores the credentials and endpoint details needed to send events to your destination.
 
-To create a connection from [Snowplow Console](https://console.snowplowanalytics.com), first go to **Destinations** > **Connections**, then select **Set up connection**. From the dropdown, choose **Loader connection**, then select the destination you want to forward events to. Each destination will have specific authentication and endpoint details required.
+To create a connection from [Snowplow Console](https://console.snowplowanalytics.com), first go to **Settings** > **Connections**, then select **Set up connection**. From the dropdown, choose **Event forwarding**, then select the destination you want to forward events to. Each destination will have specific authentication and endpoint details required.
 
 ![Console interface for creating a new destination connection with authentication and endpoint configuration fields](images/event-forwarding-connection.png)
 
@@ -21,8 +21,8 @@ When finished, click **Deploy**. Once a connection is deployed, you can use it i
 
 ## Step 2: Create a new forwarder
 
-1. Go to **Destinations** > **Destination list**.
-2. Navigate to the **Available** tab and select **Configure** on the destination card from the list of available integrations to start setting up the forwarder.
+1. Go to **Destinations** > **Event forwarding**.
+2. Click **Add destination** and select the destination from the list of available integrations to start setting up the forwarder.
 3. Give the forwarder a **name**, select the **pipeline** you want the forwarder to read events from, and choose the **connection** you created in step 1.
 4. Optionally, you can choose to **Import configuration from** an existing forwarder. This is helpful when migrating a forwarder setup from development to production.
 5. Click **Continue** to configure event filters and data mapping.
@@ -70,7 +70,7 @@ Once you've defined your filter and mapping configuration, you can test it again
 
 ![Test transformation interface showing sample event input and JSON output preview with run test button](images/event-forwarding-test-transformations.png)
 
-Snowplow provides a few out-of-the-box sample events to test with, which you can edit as needed. You can also choose **Custom event** to paste in your own JSON-formatted Snowplow event. You can use [Snowplow Micro](/docs/testing/snowplow-micro/) with the `--output-json` flag to generate your own events to test with.
+Snowplow provides a few out-of-the-box sample events to test with, which you can edit as needed. You can also choose **Custom event** to paste in your own JSON-formatted Snowplow event. You can use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to collect some test events and copy their JSON payload for testing.
 
 Select **View generated code** to see the JavaScript function generated from your filters, field mappings, and custom functions. This is exactly what will run when transforming events for your destination, and can be used directly in a [Snowbridge JavaScript transformation](docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) for local testing.
 

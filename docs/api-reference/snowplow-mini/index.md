@@ -37,7 +37,7 @@ For Snowplow Self-Hosted, see the setup guides for [AWS](/docs/api-reference/sno
 
 ## Conceptual diagram
 
-![](images/image.png)
+![Architecture diagram showing Snowplow Mini (dev sandbox) alongside the Production Pipeline. Both receive events from Snowplow SDKs and webhooks via separate dev and prod tracker endpoints. Each pipeline runs Collector, Validate, and Enrich stages; events failing validation are separated out. Mini stores results in Elasticsearch good and bad indexes backed by a dev schema registry, while Production stores results in a data warehouse and bad logs backed by a prod schema registry.](images/image.png)
 
 The diagram above illustrates how Snowplow Mini (top) works alongside your Production pipeline (bottom).
 

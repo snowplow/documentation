@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["customer_ids", "event_type"],
+  "properties": {
+    "customer_ids": {
+      "type": "object",
+      "description": "Object identifying the customer. Must contain at least one ID. Keys are ID type names configured in the Bloomreach project.",
+      "consoleRequired": true,
+      "minProperties": 1,
+      "properties": {
+        "registered": {
+          "type": "string",
+          "description": "Hard ID — the identified user ID. Used for cross-device identity resolution.",
+          "consoleDefault": "event.user_id"
+        },
+        "cookie": {
+          "type": "string",
+          "description": "Soft ID — anonymous visitor identifier, typically a browser cookie.",
+          "consoleDefault": "event.domain_userid"
+        }
+      }
+    },
+    "event_type": {
+      "type": "string",
+      "description": "The name of the event type in Bloomreach.",
+      "consoleDefault": "event.event_name",
+      "consoleRequired": true
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "When the event occurred, as UNIX epoch seconds. Defaults to current time if omitted.",
+      "consoleDefault": "Math.floor(spTstampToJSDate(event.derived_tstamp).getTime() / 1000)",
+      "consoleRequired": true
+    },
+    "properties": {
+      "type": "object",
+      "description": "Arbitrary key-value pairs for the event. Values can be strings, numbers, booleans, or nested objects.",
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The full URL of the page where the event occurred.",
+          "consoleDefault": "event.page_url"
+        },
+        "title": {
+          "type": "string",
+          "description": "The page title.",
+          "consoleDefault": "event.page_title"
+        },
+        "referrer": {
+          "type": "string",
+          "description": "The referring URL.",
+          "consoleDefault": "event.page_referrer"
+        },
+        "ip": {
+          "type": "string",
+          "description": "The user's IP address.",
+          "consoleDefault": "event.user_ipaddress"
+        },
+        "city": {
+          "type": "string",
+          "description": "The city of the user.",
+          "consoleDefault": "event.geo_city"
+        },
+        "region": {
+          "type": "string",
+          "description": "The region (state or province) of the user.",
+          "consoleDefault": "event.geo_region_name || event.geo_region"
+        },
+        "country": {
+          "type": "string",
+          "description": "The country code of the user.",
+          "consoleDefault": "event.geo_country"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Latitude of the user's location.",
+          "consoleDefault": "event.geo_latitude"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude of the user's location.",
+          "consoleDefault": "event.geo_longitude"
+        },
+        "browser": {
+          "type": "string",
+          "description": "Name of the browser.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.agentName"
+        },
+        "browser_version": {
+          "type": "string",
+          "description": "Version of the browser.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.agentVersion"
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system name.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.operatingSystemName || event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.osType"
+        },
+        "os_version": {
+          "type": "string",
+          "description": "Operating system version.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.operatingSystemVersion || event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.osVersion"
+        },
+        "device": {
+          "type": "string",
+          "description": "Device name or model.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceName || event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.deviceModel"
+        },
+        "device_type": {
+          "type": "string",
+          "description": "The type/class of device (e.g. Desktop, Mobile, Tablet).",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceClass"
+        },
+        "device_manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the device.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceBrand || event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.deviceManufacturer"
+        },
+        "screen_height": {
+          "type": "integer",
+          "description": "Device screen height in pixels.",
+          "consoleDefault": "event.dvce_screenheight"
+        },
+        "screen_width": {
+          "type": "integer",
+          "description": "Device screen width in pixels.",
+          "consoleDefault": "event.dvce_screenwidth"
+        },
+        "language": {
+          "type": "string",
+          "description": "The user's language/locale.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_browser_context_1?.[0]?.browserLanguage || event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.language"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The user's timezone.",
+          "consoleDefault": "event.os_timezone"
+        },
+        "platform": {
+          "type": "string",
+          "description": "The platform the event was tracked on (web, mob, etc.).",
+          "consoleDefault": "event.platform"
+        },
+        "tracker": {
+          "type": "string",
+          "description": "Tracker library that sent the event.",
+          "consoleDefault": "'Snowplow: ' + event.v_tracker"
+        },
+        "utm_source": {
+          "type": "string",
+          "description": "UTM source parameter.",
+          "consoleDefault": "event.mkt_source"
+        },
+        "utm_medium": {
+          "type": "string",
+          "description": "UTM medium parameter.",
+          "consoleDefault": "event.mkt_medium"
+        },
+        "utm_campaign": {
+          "type": "string",
+          "description": "UTM campaign parameter.",
+          "consoleDefault": "event.mkt_campaign"
+        },
+        "utm_content": {
+          "type": "string",
+          "description": "UTM content parameter.",
+          "consoleDefault": "event.mkt_content"
+        },
+        "utm_term": {
+          "type": "string",
+          "description": "UTM term parameter.",
+          "consoleDefault": "event.mkt_term"
+        },
+        "carrier": {
+          "type": "string",
+          "description": "Mobile carrier.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.carrier"
+        },
+        "network_type": {
+          "type": "string",
+          "description": "Network connection type (wifi, mobile, etc.).",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.networkType"
+        },
+        "app_version": {
+          "type": "string",
+          "description": "Application version.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_mobile_application_1?.[0]?.version || event.contexts_com_snowplowanalytics_snowplow_application_1?.[0]?.version"
+        }
+      }
+    }
+  }
+}

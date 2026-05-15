@@ -159,7 +159,7 @@ In the next example, we will customize the `mktClickId` configuration:
     }
 ```
 
-:::warning
+:::tip
 
 You should not use more than one click parameter in the query string (e.g. both `wbraid` and `gbraid`). If you do, one of them will be picked arbitrarily.
 

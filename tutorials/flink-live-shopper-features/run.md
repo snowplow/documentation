@@ -47,13 +47,13 @@ keywords: ["flink docker setup", "kafka redis stream processing"]
      - Purchase history: aggregate purchases over rolling windows (e.g., 24 hours) to calculate total spend, order count
      - Session analytics: duration, bounce rate, marketing source
 
-   ![Screenshot showing the Flink dashboard](./images/live-shopper-setup-flink.png)
+   ![Split-screen showing the Apache Flink dashboard on the left with the Ecommerce Product Analysis Pipeline job DAG, and a Grafana dashboard on the right displaying real-time shopper metrics](./images/live-shopper-setup-flink.png)
 
 4. Feature store (Redis):
    - Metrics are written to Redis using deterministic keys (e.g., `user:{user_id}:{feature}_{window}`)
    - These metrics are available for real-time lookups by downstream systems
 
-   ![Screenshot showing the Redis dashboard](./images/live-shopper-setup-redis.png)
+   ![Redis Insights browser at localhost:5540 showing 28 STRING keys with computed shopper feature metrics, including user:trent@snowplowanalytics.com:unique_categories_24hr and user:trent@snowplowanalytics.com:price_range_viewed_5m](./images/live-shopper-setup-redis.png)
 
 ## Testing
 

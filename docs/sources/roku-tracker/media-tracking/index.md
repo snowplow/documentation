@@ -7,10 +7,6 @@ description: "Enable automatic audio and video playback tracking for Roku Audio 
 keywords: ["roku media tracking", "video playback tracking", "audio tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Media tracking enables collecting events about audio/video playback from the [Audio](https://developer.roku.com/en-gb/docs/references/scenegraph/media-playback-nodes/audio.md) and [Video](https://developer.roku.com/en-gb/docs/references/scenegraph/media-playback-nodes/video.md) nodes provided in the Roku SceneGraph SDK for media playback.
 Once enabled for a node, the tracker subscribes to selected events and tracks them automatically.

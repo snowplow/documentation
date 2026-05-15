@@ -1,7 +1,7 @@
 ---
 title: "Forward events to Braze"
 sidebar_label: "Braze"
-sidebar_position: 2
+sidebar_position: 3
 description: "Send Snowplow events to Braze for real-time personalization and campaign automation using the Track Users API with support for user attributes, custom events, and purchases."
 keywords: ["Braze", "personalization", "campaign automation", "Track Users API", "marketing automation", "event forwarding"]
 ---

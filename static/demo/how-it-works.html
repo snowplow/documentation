@@ -249,7 +249,7 @@
     </div>
 
     <div class="cloud">
-      <div class="cloud-label">Pipeline in your cloud account · AWS · GCP · Azure</div>
+      <div class="cloud-label">Pipeline runs in your cloud (AWS, GCP, or Azure)</div>
       <div class="cloud-inner">
         <div class="stage" data-stage="collect">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg></div>
@@ -257,13 +257,13 @@
           <p>The Collector receives raw payloads over HTTP and persists them.</p>
         </div>
         <div class="stage" data-stage="validate">
-          <span class="stream-pill bad">→ Failed events stream</span>
+          <span class="stream-pill bad">→ Real-Time Bad Stream</span>
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <h3>3. Validate</h3>
           <p>Every event is checked against its JSON schema in Iglu.</p>
         </div>
         <div class="stage" data-stage="enrich">
-          <span class="stream-pill good">RT Good stream</span>
+          <span class="stream-pill good">Real-Time Good Stream</span>
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
           <h3>4. Enrich</h3>
           <p>Attach geo, user-agent, campaign, currency, and custom API or SQL entities.</p>
@@ -276,7 +276,7 @@
       </div>
       <div class="schema-chip">
         <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-        <span><strong>Schema Registry (Iglu)</strong> — validation rules live here; Validate fetches per-event.</span>
+        <span><strong>Iglu Schema Registry</strong> — validation rules live here; Validate fetches per-event.</span>
       </div>
     </div>
 
@@ -293,8 +293,8 @@
   </div>
 
   <div class="controls">
-    <button id="sendBtn">▶ Send a valid event</button>
-    <button id="sendBadBtn" class="bad">✗ Send an invalid event</button>
+    <button id="sendBtn">Send a valid event</button>
+    <button id="sendBadBtn" class="bad">Send an invalid event</button>
     <button id="resetBtn" class="ghost">Reset</button>
     <span style="color:var(--muted); font-size:12.5px;">Latency target: enriched in &lt;1s under normal load.</span>
   </div>
@@ -358,7 +358,7 @@
 }</pre>
     </div>
   </div>
-  <p class="sub" style="margin-top:18px;">The <strong>contexts</strong> array carries <em>entities</em> — reusable building blocks (user, page, product, A/B test, …) that attach to any event. Same entity definition, used everywhere.</p>
+  <p class="sub" style="margin-top:18px;">The <code>contexts</code> array carries entities — reusable building blocks (user, page, product, A/B test, and so on) that attach to any event. Same entity definition, used everywhere.</p>
 </section>
 
 <!-- ====================== Sources ====================== -->
@@ -396,12 +396,12 @@
 
 <!-- ====================== Signals ====================== -->
 <section>
-  <h2><span class="num">06</span>Signals — real-time attributes</h2>
+  <h2><span class="num">06</span>Serve real-time attributes with Signals</h2>
   <div class="signals-card">
     <div>
       <p class="sub" style="margin:0 0 14px;">Signals computes user attributes from the event stream as events flow, and serves them to your application through a low-latency API.</p>
       <ul style="color:var(--muted); line-height:1.7; padding-left:18px; margin:0;">
-        <li>Provide real-time behavioral data to chatbots and agentic applications</li>
+        <li>Provide real-time behavioral data to chatbots, AI agents, and assistants</li>
         <li>Power dynamic pricing, recommendations, and adaptive interfaces</li>
         <li>Trigger interventions automatically when users meet defined criteria</li>
         <li>Combine streaming attributes with attributes derived from the warehouse</li>
@@ -430,15 +430,15 @@
   const STAGE_INFO = {
     track: {
       title: "Track — emit an event from your app",
-      body: `<p>An SDK call (or a webhook POST) produces a JSON payload conforming to the Snowplow tracker protocol — 89 atomic fields plus self-describing event data and entity contexts. The SDK batches, retries, and respects user consent. Twenty-plus tracker SDKs exist, all wire-compatible.</p>`
+      body: `<p>An SDK call (or a webhook POST) produces a JSON payload conforming to the Snowplow tracker protocol — 89 atomic fields plus self-describing event data and entities. The SDK batches, retries, and respects user consent. 20+ tracker SDKs exist, all wire-compatible.</p>`
     },
     collect: {
       title: "Collect — the Collector accepts and persists",
       body: `<p>The Collector is a stateless HTTP service that receives payloads at endpoints like <code>/com.snowplowanalytics.snowplow/tp2</code>, sets a third-party cookie if configured, and writes the raw event to a stream (Kinesis on AWS, PubSub on GCP) plus durable storage (S3/GCS). It applies no business logic — its job is to never lose an event.</p>`
     },
     validate: {
-      title: "Validate — schema-check, or route to the failed events stream",
-      body: `<p>Enrich pulls the schema referenced by the event from your Iglu repository and validates the payload. Pass → continues to enrichment. Fail → routed to the <strong>failed events stream</strong> with a structured failure reason. Failed events can be replayed after you fix the schema, so the pipeline stays non-lossy.</p>`
+      title: "Validate — schema-check, or route to the Real-Time Bad Stream",
+      body: `<p>Enrich pulls the schema referenced by the event from your Iglu repository and validates the payload. Pass → continues to enrichment via the Real-Time Good Stream. Fail → routed to the <strong>Real-Time Bad Stream</strong> as a failed event with a structured failure reason. Failed events can be replayed after you fix the schema, so the pipeline stays non-lossy.</p>`
     },
     enrich: {
       title: "Enrich — attach entities in stream",
@@ -619,7 +619,7 @@
     focusStage('validate');
     setTokenPos(42);
     if (invalid) {
-      logRow("enrich", `❌ schema validation FAILED`, "bad");
+      logRow("enrich", `schema validation failed`, "bad");
       logRow("", `· price: -5 violates minimum: 0`, "bad");
       logRow("", `· currency: "BTC" not in enum [USD,EUR,GBP]`, "bad");
       setTokenPos(48, true);
@@ -637,7 +637,7 @@
         }
       };
       renderJson(bad);
-      logRow("enrich", `→ routed to failed events stream (recoverable after schema fix)`, "warn");
+      logRow("enrich", `→ routed to Real-Time Bad Stream as a failed event (recoverable after schema fix)`, "warn");
       setTokenPos(50, true);
       snap('validate', bad, true);
       latencyEl.textContent = Math.round(performance.now() - t0) + ' ms';
@@ -645,7 +645,7 @@
       sendBtn.disabled = sendBadBtn.disabled = false;
       return;
     }
-    logRow("enrich", `✓ schema validated against iglu:com.acme/add_to_cart/1-0-0`, "good");
+    logRow("enrich", `schema validated against iglu:com.acme/add_to_cart/1-0-0`, "good");
     snap('validate', payload);
     await delay(450);
 

@@ -30,7 +30,7 @@ sidebar_custom_props:
 <CardGrid cols={1}>
   <CallToActionCard
     title="See how Snowplow works — interactive walkthrough"
-    description="Watch a single event travel from tracker to warehouse, with live JSON, validation, and enrichment at each step."
+    description="Send a single event through every pipeline stage and inspect the JSON payload, validation result, and enrichments at each step."
     href="/docs/how-it-works/index.md"
   />
 </CardGrid>

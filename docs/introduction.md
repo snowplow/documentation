@@ -27,6 +27,14 @@ sidebar_custom_props:
 
 </CardGrid>
 
+<CardGrid cols={1}>
+  <CallToActionCard
+    title="See how Snowplow works — interactive walkthrough"
+    description="Watch a single event travel from tracker to warehouse, with live JSON, validation, and enrichment at each step."
+    href="/docs/how-it-works/"
+  />
+</CardGrid>
+
 ## Explore Snowplow Customer Data Infrastructure
 
 <CardGrid cols={3} breakout>

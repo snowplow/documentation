@@ -239,7 +239,7 @@
 <!-- ====================== Pipeline ====================== -->
 <section>
   <h2><span class="num">01</span>The pipeline</h2>
-  <p class="sub">Six stages, fully streaming, all your data — never sampled, never aggregated.</p>
+  <p class="sub">Six stages process every event in real time. Events are kept at atomic grain end-to-end — no sampling, no pre-aggregation.</p>
 
   <div class="pipeline" id="pipeline">
     <div class="stage" data-stage="track">
@@ -257,16 +257,16 @@
           <p>The Collector receives raw payloads over HTTP and persists them.</p>
         </div>
         <div class="stage" data-stage="validate">
-          <span class="stream-pill bad">→ RT Bad Stream</span>
+          <span class="stream-pill bad">→ Failed events stream</span>
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <h3>3. Validate</h3>
           <p>Every event is checked against its JSON schema in Iglu.</p>
         </div>
         <div class="stage" data-stage="enrich">
-          <span class="stream-pill good">RT Good Stream</span>
+          <span class="stream-pill good">RT Good stream</span>
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
           <h3>4. Enrich</h3>
-          <p>Add geo, UA, campaign, currency, custom API/SQL context.</p>
+          <p>Attach geo, user-agent, campaign, currency, and custom API or SQL entities.</p>
         </div>
         <div class="stage" data-stage="load">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
@@ -301,7 +301,7 @@
 
   <div class="detail-card" id="detail">
     <h4>Click a stage to learn what happens there</h4>
-    <p>Or hit <strong>Send a valid event</strong> to step through the whole pipeline. The JSON payload on the left grows as each stage adds its piece. The log on the right shows what each component does.</p>
+    <p>Or select <strong>Send a valid event</strong> to step through the whole pipeline. The JSON payload on the left grows as each stage adds its piece. The log on the right shows what each component does.</p>
   </div>
 
   <div class="console">
@@ -364,19 +364,19 @@
 <!-- ====================== Sources ====================== -->
 <section>
   <h2><span class="num">03</span>Where events come from</h2>
-  <p class="sub">20+ open-source trackers cover every surface you ship. All speak the same Snowplow tracker protocol, so one collector handles them all.</p>
+  <p class="sub">Snowplow provides open-source tracker SDKs for web, mobile, and server-side platforms. All trackers use the same Snowplow tracker protocol, so the Collector accepts events from any of them.</p>
   <div class="grid">
-    <div class="card"><div class="pill">Client-side</div><h3>Web · Mobile · TV</h3><p>JavaScript (web + browser SDK), iOS, Android, React Native, Flutter, Roku, AMP, WebView, Pixel.</p></div>
-    <div class="card"><div class="pill">Server-side</div><h3>Backends & jobs</h3><p>Node.js, Python, Go, Java, Scala, Ruby, PHP, Rust, .NET, C++, Unity, Lua, CLI.</p></div>
-    <div class="card"><div class="pill">3rd party</div><h3>Webhooks</h3><p>Adjust, Iterable, Mailgun, Mandrill, SendGrid, Zendesk, or any Iglu-compatible GET/POST.</p></div>
-    <div class="card"><div class="pill">Studio</div><h3>Snowtype</h3><p>Code-gen typed tracking SDKs straight from your tracking plan. Catch tracking bugs at compile time.</p></div>
+    <div class="card"><div class="pill">Client-side</div><h3>Web · Mobile · TV</h3><p>JavaScript (web and browser SDK), iOS, Android, React Native, Flutter, Roku, AMP, WebView, Pixel.</p></div>
+    <div class="card"><div class="pill">Server-side</div><h3>Backends and jobs</h3><p>Node.js, Python, Go, Java, Scala, Ruby, PHP, Rust, .NET, C++, Unity, Lua, CLI.</p></div>
+    <div class="card"><div class="pill">Third party</div><h3>Webhooks</h3><p>Adjust, Iterable, Mailgun, Mandrill, SendGrid, Zendesk, or any Iglu-compatible GET or POST request.</p></div>
+    <div class="card"><div class="pill">Studio</div><h3>Snowtype</h3><p>Generate typed tracking SDKs from your tracking plan to catch tracking errors at compile time.</p></div>
   </div>
 </section>
 
 <!-- ====================== Enrichments ====================== -->
 <section>
-  <h2><span class="num">04</span>Enrichments do the boring work</h2>
-  <p class="sub">Toggle any of these in your pipeline config. Each one runs in stream — they execute in a fixed order so results are deterministic.</p>
+  <h2><span class="num">04</span>Attach entities with enrichments</h2>
+  <p class="sub">Enable any of these in your pipeline configuration. Each enrichment runs in stream and executes in a fixed order, so results are deterministic.</p>
   <div class="grid" id="enrichGrid">
     <!-- filled by JS -->
   </div>
@@ -389,22 +389,22 @@
   <div class="grid">
     <div class="card"><div class="pill">Warehouses</div><h3>Snowflake · BigQuery · Redshift · Databricks</h3><p>Schemas auto-evolve as you ship new tracking. Events arrive within seconds of being tracked.</p></div>
     <div class="card"><div class="pill">Lakes</div><h3>S3 · GCS · ADLS / OneLake</h3><p>Open table formats (Iceberg, Delta, Hudi). Query with Athena, Spark, or your warehouse.</p></div>
-    <div class="card"><div class="pill">Forwarding</div><h3>GTM Server-Side & native</h3><p>Forward enriched events in real time to ad platforms, CDPs, marketing tools.</p></div>
+    <div class="card"><div class="pill">Forwarding</div><h3>GTM Server-Side and native</h3><p>Forward enriched events in real time to ad platforms, CDPs, and marketing tools.</p></div>
     <div class="card"><div class="pill">Reverse ETL</div><h3>Activation</h3><p>Push modeled warehouse audiences back to operational tools.</p></div>
   </div>
 </section>
 
 <!-- ====================== Signals ====================== -->
 <section>
-  <h2><span class="num">06</span>Signals — real-time context</h2>
+  <h2><span class="num">06</span>Signals — real-time attributes</h2>
   <div class="signals-card">
     <div>
-      <p class="sub" style="margin:0 0 14px;">Signals computes user attributes <strong>off your event stream as it flows</strong>, and serves them to your app via a low-latency API.</p>
+      <p class="sub" style="margin:0 0 14px;">Signals computes user attributes from the event stream as events flow, and serves them to your application through a low-latency API.</p>
       <ul style="color:var(--muted); line-height:1.7; padding-left:18px; margin:0;">
-        <li>Personalize chatbots and agentic apps with current behavior</li>
-        <li>Drive dynamic pricing, recommendations, adaptive UI</li>
-        <li>Trigger interventions automatically on threshold events</li>
-        <li>Combine streaming attributes with warehouse-derived ones</li>
+        <li>Provide real-time behavioral data to chatbots and agentic applications</li>
+        <li>Power dynamic pricing, recommendations, and adaptive interfaces</li>
+        <li>Trigger interventions automatically when users meet defined criteria</li>
+        <li>Combine streaming attributes with attributes derived from the warehouse</li>
       </ul>
     </div>
     <div class="panel">
@@ -437,11 +437,11 @@
       body: `<p>The Collector is a stateless HTTP service that receives payloads at endpoints like <code>/com.snowplowanalytics.snowplow/tp2</code>, sets a third-party cookie if configured, and writes the raw event to a stream (Kinesis on AWS, PubSub on GCP) plus durable storage (S3/GCS). It applies no business logic — its job is to never lose an event.</p>`
     },
     validate: {
-      title: "Validate — schema-check or route to bad",
-      body: `<p>Enrich pulls the schema referenced by the event from your Iglu repository and validates the payload. Pass → continues to enrichment. Fail → routed to the <strong>bad stream</strong> with a structured failure reason. Bad events can be replayed after you fix the schema, so the pipeline stays non-lossy.</p>`
+      title: "Validate — schema-check, or route to the failed events stream",
+      body: `<p>Enrich pulls the schema referenced by the event from your Iglu repository and validates the payload. Pass → continues to enrichment. Fail → routed to the <strong>failed events stream</strong> with a structured failure reason. Failed events can be replayed after you fix the schema, so the pipeline stays non-lossy.</p>`
     },
     enrich: {
-      title: "Enrich — add context in stream",
+      title: "Enrich — attach entities in stream",
       body: `<ul><li><strong>Geo / ASN / IP lookup</strong> — country, city, ISP from MaxMind</li><li><strong>YAUAA / UA Parser</strong> — device, browser, OS from user-agent</li><li><strong>Bot detection</strong> — IAB, ASN, YAUAA signals consolidated</li><li><strong>Campaign attribution</strong> — UTM and referrer parsing</li><li><strong>Custom JavaScript / SQL / API</strong> — call your own systems</li><li><strong>PII pseudonymization</strong> — hash sensitive fields</li></ul>`
     },
     load: {
@@ -556,7 +556,7 @@
     snapshots = [];
     trackEl.classList.remove('scrubable');
     document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
-    detail.innerHTML = `<h4>Click a stage to learn what happens there</h4><p>Or hit <strong>Send a valid event</strong> to step through the whole pipeline.</p>`;
+    detail.innerHTML = `<h4>Click a stage to learn what happens there</h4><p>Or select <strong>Send a valid event</strong> to step through the whole pipeline.</p>`;
   }
 
   function snap(stage, payload, bad=false) {
@@ -637,7 +637,7 @@
         }
       };
       renderJson(bad);
-      logRow("enrich", `→ routed to BAD stream (recoverable after schema fix)`, "warn");
+      logRow("enrich", `→ routed to failed events stream (recoverable after schema fix)`, "warn");
       setTokenPos(50, true);
       snap('validate', bad, true);
       latencyEl.textContent = Math.round(performance.now() - t0) + ' ms';

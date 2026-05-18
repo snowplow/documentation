@@ -10,7 +10,7 @@ hide_table_of_contents: true
 
 import ResizingIframe from '@site/src/components/ResizingIframe'
 
-Snowplow Customer Data Infrastructure captures every customer interaction as a validated, enriched event — and delivers it to your warehouse, lake, or stream within seconds. Watch a single event travel from a tracker call to a warehouse row below, with live JSON and enrichment at each step. Click any pipeline stage to learn what happens there, or hit **Send a valid event** to step through the whole pipeline.
+Snowplow Customer Data Infrastructure captures every customer interaction as a validated, enriched [event](/docs/fundamentals/events/index.md) and delivers it to your warehouse, lake, or stream in real time. Watch a single event travel from a tracker call to a warehouse row below, with live JSON and enrichment at each step. Click any pipeline stage to learn what happens there, or select **Send a valid event** to step through the whole pipeline.
 
 <ResizingIframe
   src="/demo/how-it-works.html"

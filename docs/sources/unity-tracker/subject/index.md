@@ -9,6 +9,11 @@ keywords: ["unity subject configuration", "unity user context", "unity tracker u
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
 
+:::note[User anonymization]
+When [user anonymization](/docs/sources/unity-tracker/tracker/index.md#setuseranonymisationbool) is enabled on the tracker, the `userId`, `domainUserId`, `networkUserId`, and `ipAddress` fields are omitted from events regardless of
+what is set on the Subject.
+:::
+
 The Subject class has a set of `Set...()` methods to attach extra data relating to the user to all tracked events:
 
 - `SetUserId`

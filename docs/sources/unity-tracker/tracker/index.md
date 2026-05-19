@@ -20,6 +20,7 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 | [`session`](/docs/sources/unity-tracker/session/index.md) | The Session object you create                                            | No            | Null        |
 | `platform`                                                | The device the Tracker is running on                                     | No            | Mobile      |
 | `base64Encoded`                                           | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No            | True        |
+| `userAnonymisation` | Enables [client-side user anonymization](/docs/events/anonymous-tracking/index.md#full-client-side-anonymization). Omits user identifiers (userId, domainUserId, networkUserId) and any explicitly-set ipAddress from all events. Note: this does not affect the IP address captured by the collector from the network connection, use server anonymisation for that. | No | False |
 
 A full Tracker construction should look like the following:
 
@@ -58,4 +59,12 @@ This is the function used for Tracking all events.
 
 ```csharp
 tracker.Track(IEvent newEvent);
+```
+
+#### `SetUserAnonymisation(bool)`
+
+Enables or disables user anonymization. When enabled, the `userId`, `domainUserId`, `networkUserId`, and `ipAddress` fields are omitted from all events. This can also be set at construction time via the `userAnonymisation` parameter.
+
+```csharp
+tracker.SetUserAnonymisation(true);
 ```

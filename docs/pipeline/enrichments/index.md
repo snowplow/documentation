@@ -3,8 +3,8 @@ title: "Introduction to enrichments"
 date: "2020-02-15"
 sidebar_position: 2
 sidebar_label: "Enrichments"
-description: "Configure enrichments to add extra properties and dimensions to your Snowplow events during the enrichment process."
-keywords: ["enrichments", "dimension widening", "event enrichment", "configurable enrichments"]
+description: "Configure enrichments to add extra data to your Snowplow events."
+keywords: ["enrichments", "event enrichment", "configurable enrichments"]
 ---
 
 ```mdx-code-block
@@ -16,82 +16,73 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 />
 ```
 
-During Enrichment your events have extra properties and values attached to them, also known as dimension widening.
+During enrichment, events are validated against their schemas, and additional data is attached to the events.
 
-Snowplow enrichments can be categorized into three brackets:
+Snowplow runs two kinds of enrichments:
+- **Configurable enrichments**, which you can opt into. Most produce entities attached to the event, though a few modify atomic event fields directly.
+- **Hardcoded enrichments**, which always run as part of the common enrichment process. They populate [atomic event fields](/docs/fundamentals/canonical-event/index.md).
 
-- Hardcoded enrichments loading `atomic.events` (legacy)
-- Configurable enrichments loading `atomic.events` (legacy)
-- Configurable enrichments adding new contexts to the `derived_contexts` JSON array
+## Configurable enrichments
 
-_Legacy enrichments_ are those which populate `atomic.events` table as opposed to dedicated enrichment tables. The hardcoded legacy enrichments normally take place as part of common enrichment process and they precede configurable enrichments. During the common enrichment process the data received from collector(s) is mapped according to our [Canonical Event Model](/docs/fundamentals/canonical-event/index.md).
+See the [available enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) page for the full list, in execution order.
 
-_Configurable enrichments_ often depend on the data produced by the common enrichment process.
+## Hardcoded enrichments
 
-### Hardcoded enrichments
+During enrichment, the [Enrich](/docs/api-reference/enrichment-components/index.md) application adds a number of fields to the event.
 
-The following fields are populated depending on whether the tracker provided the corresponding value or not.
+### Always populated
 
-| Raw Parameter | Enriched Parameter | Purpose                                                                                                                                                 |
-| ------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eid`         | `event_id`         | The unique event identifier (UUID). Assigned during enrichment if not provided with `eid`                                                               |
-| `cv`          | `v_collector`      | Collector type/version                                                                                                                                  |
-| `tnuid`       | `network_userid`   | User ID set by Snowplow using 3rd party cookie. Overwriten with tracker-set `tnuid`.                                                                    |
-| `ip`          | `user_ipaddress`   | Snowplow collectors log IP address as standard. However, you can override the value derived from the collector by populating this value in the tracker. |
-| `ua`          | `useragent`        | Raw useragent (browser string). Could be overwritten with `ua`.                                                                                         |
+The following fields are always populated during the enrichment process:
 
-The following fields are populated depending on the collector and ETL (Extract, Transform, Load) utilized in the pipeline.
-
-| Added Parameter    | Purpose                                            |
+| Added parameter    | Purpose                                            |
 | ------------------ | -------------------------------------------------- |
-| `v_etl`            | Host ETL version                                   |
-| `etl_tstamp`       | Timestamp event began ETL                          |
-| `collector_tstamp` | Time stamp for the event recorded by the collector |
+| `v_etl`            | Version of the enrichment process.                 |
+| `etl_tstamp`       | Timestamp the event began enrichment.              |
+| `collector_tstamp` | Timestamp for the event recorded by the Collector. |
+| `derived_tstamp`   | Calculated timestamp.                              |
 
-The raw parameter `res` (if present) representing the screen/monitor resolution and coming in as a combination of width and height (ex. `1280x1024`) is broken up into separate entities.
+See the [Timestamps overview page](/docs/events/timestamps/index.md) for more details on Snowplow timestamps.
 
-| Added Parameter     | Purpose                 |
-| ------------------- | ----------------------- |
-| `dvce_screenwidth`  | Screen / monitor width  |
-| `dvce_screenheight` | Screen / monitor height |
+### Conditionally populated
 
-The `url` parameter provides the value for `page_url` in `atomic.events`, which represents the current page's URL. The following parts are extracted and populate separate fields as outlined below.
+Some fields are populated depending on whether the tracker provided the corresponding value or not.
 
-| Added Parameter    | Purpose                                        |
-| ------------------ | ---------------------------------------------- |
-| `page_urlscheme`   | Scheme (protocol), ex. "http"                  |
-| `page_urlhost`     | Host (domain), ex. "www.snowplowanalytics.com" |
-| `page_urlport`     | Port if specified, 80 if not                   |
-| `page_urlpath`     | Path to page, ex. "/product/index.html"        |
-| `page_urlquery`    | Querystring, ex. "id=GTM-DLRG"                 |
-| `page_urlfragment` | Fragment (anchor), ex. "4-conclusion"          |
+These parameters can be provided by the tracker or by the [Collector](/docs/pipeline/collector/index.md).
 
-Similarly, `page_referrer` gets the value from `refr`, which represents the referer’s URL, and the following parts are extracted and populate separate fields as shown below.
+| Raw parameter | Enriched parameter | Purpose                                                                                                                               |
+| ------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `eid`         | `event_id`         | The unique event identifier (UUID). Trackers should always assign this value, but it can be assigned during enrichment as a fallback. |
+| `cv`          | `v_collector`      | Collector type/version.                                                                                                               |
+| `tnuid`       | `network_userid`   | User ID set by Snowplow using a third-party cookie. Overwritten with tracker-set `tnuid`.                                             |
+| `ip`          | `user_ipaddress`   | The Collector logs IP address by default. You can override the value derived from the Collector by populating this in the tracker.    |
+| `ua`          | `useragent`        | Raw user agent (browser string). Can be overwritten with `ua`.                                                                        |
 
-| Added Parameter    | Purpose                      |
-| ------------------ | ---------------------------- |
-| `refr_urlscheme`   | Scheme (protocol)            |
-| `refr_urlhost`     | Host (domain)                |
-| `refr_urlport`     | Port if specified, 80 if not |
-| `refr_urlpath`     | Path to page                 |
-| `refr_urlquery`    | Querystring                  |
-| `refr_urlfragment` | Fragment (anchor)            |
+The raw tracker payload parameters `res`, `ds`, and `vp` each combine a width and height into a single string, e.g. `1280x1024`. During enrichment, each is split into two separate integer fields.
 
-Additionally the derived timestamp is calculated, `derived_tstamp`. See [Timestamps](/docs/events/timestamps/index.md) for more details.
+| Raw parameter | Added parameters                        | Purpose                 |
+| ------------- | --------------------------------------- | ----------------------- |
+| `res`         | `dvce_screenwidth`, `dvce_screenheight` | Screen or monitor size. |
+| `ds`          | `doc_width`, `doc_height`               | Page size.              |
+| `vp`          | `br_viewwidth`, `br_viewheight`         | Viewport size.          |
 
-Finally, contexts, unstructured events and the relevant configurable enrichments (if enabled) are validated against their corresponding JSON schemas and the array of the derived contexts is assembled.
+The `url` parameter provides the [atomic `page_url` field](/docs/fundamentals/canonical-event/index.md#page-fields). During enrichment, the following parts are extracted to populate separate fields:
 
-### Configurable enrichment
+| Added parameter    | Purpose                                          |
+| ------------------ | ------------------------------------------------ |
+| `page_urlscheme`   | Scheme (protocol), for example `https`.          |
+| `page_urlhost`     | Host (domain), for example `www.snowplow.io`.    |
+| `page_urlport`     | Port if specified, 443 or 80 if not.             |
+| `page_urlpath`     | Path to page, for example `/product/index.html`. |
+| `page_urlquery`    | Query string, for example `id=GTM-DLRG`.         |
+| `page_urlfragment` | Fragment (anchor), for example `4-conclusion`.   |
 
-All configurable enrichments are listed on the [Available Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) page.
+Similarly, the `refr` parameter provides the [atomic `page_referrer` field](/docs/fundamentals/canonical-event/index.md#page-fields). During enrichment, the following parts are extracted to populate separate fields:
 
-The following configurable enrichments write data into `atomic.events` table (legacy enrichments):
-
-- [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md)
-- [IP lookups enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)
-- [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
-- [Currency conversion enrichment](/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/index.md)
-- [referer-parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)
-- [Event fingerprint enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md)
-
-All other configurable enrichments create a separate context and thus are loaded into their own dedicated tables.
+| Added parameter    | Purpose                              |
+| ------------------ | ------------------------------------ |
+| `refr_urlscheme`   | Scheme (protocol).                   |
+| `refr_urlhost`     | Host (domain).                       |
+| `refr_urlport`     | Port if specified, 443 or 80 if not. |
+| `refr_urlpath`     | Path to page.                        |
+| `refr_urlquery`    | Query string.                        |
+| `refr_urlfragment` | Fragment (anchor).                   |

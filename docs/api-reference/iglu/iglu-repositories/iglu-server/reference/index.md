@@ -1,6 +1,6 @@
 ---
 title: "Iglu Server configuration reference"
-sidebar_label: "Config reference"
+sidebar_label: "Configuration"
 date: "2026-05-14"
 sidebar_position: 10
 description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
@@ -13,7 +13,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 <CdiCallout/>
 ```
 
-This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs on GitHub](https://github.com/snowplow/iglu-server/tree/master/config) show how to prepare an input file.
+This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [examples on GitHub](https://github.com/snowplow/iglu-server/tree/master/config) show how to prepare this file.
 
 ## License
 

@@ -37,9 +37,9 @@ Snowplow versions schemas using a scheme called **SchemaVer**. A SchemaVer versi
 
 Unlike [SemVer](https://semver.org/), SchemaVer uses hyphens rather than periods, and starts at `1-0-0` rather than `0.1.0`.
 
-## Patch a schema
+## Overwrite a schema
 
-Patching is available if your schema version isn't yet in production.
+Overwriting a schema (also called “patching” — not to be confused with the “patch” component of the version) is available if your schema version isn't yet in production.
 
 :::danger[Development schemas only]
 For Snowplow CDI customers, patching is disabled for production pipelines.

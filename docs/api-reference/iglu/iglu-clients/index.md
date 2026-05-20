@@ -13,7 +13,7 @@ Iglu clients are used for interacting with Iglu server repos and for resolving s
 
 In this diagram we show an Iglu client resolving a schema from Iglu Central, one embedded repository and a further two remote HTTP repositories:
 
-![](images/iglu-clients.png)
+![Diagram showing an application using Iglu containing an Embedded Iglu Repository and an Iglu Client. The Iglu Client makes schema lookups to three remote repositories: Iglu Central, Private Iglu Repository #1, and Private Iglu Repository #2.](images/iglu-clients.png)
 
 For more information on the rules governing resolving schemas from multiple repositories, see [Schema resolution](/docs/api-reference/iglu/common-architecture/schema-resolution/index.md).
 

@@ -39,3 +39,16 @@ All except `eventStore` of these variables can be altered after creation with th
 
 Some load balancers limit the maximum URL length accepted for `GET` requests, often around 16KB.
 The default of 52000 bytes is considerably larger than these limits, but most single event payloads will not reach this size.
+
+
+### Functions
+
+The Emitter also provides functions to configure its behavior after construction.
+
+#### `SetServerAnonymisation(bool)`
+
+Enables or disables [server-side anonymization](/docs/events/anonymous-tracking/index.md#server-side-anonymization). When enabled, the `SP-Anonymous: *` header is added to all requests to the Collector, instructing it to anonymize the user's IP address and network user ID.
+
+```csharp
+emitter.SetServerAnonymisation(true);
+```

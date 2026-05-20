@@ -98,7 +98,7 @@ $ ./terraform/terraform.sh png
 
 Current PNG image of the available modules:
 
-![Terraform Modules](images/terraform.png)
+![Terraform module dependency diagram showing module.snowplow (DynamoDB tables and Kinesis streams) and module.apps (EC2 instance, security group, key pair, and DynamoDB video_events table) with dependency arrows between resources](images/terraform.png)
 
 ### Destroy the infrastructure
 

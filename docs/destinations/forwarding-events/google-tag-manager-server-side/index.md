@@ -21,7 +21,7 @@ Taking an approach with Snowplow and GTM SS offers many additional flexibility a
 
 GTM SS with Snowplow can be setup in two different configurations.
 
-![](images/gtmssoptions2.png)
+![Diagram showing two GTM Server Side configurations: the Destinations Hub option where events flow from the Snowplow pipeline through Snowbridge into GTM Server Side before being forwarded to destinations like Braze and Amplitude; and the Server Side Tag Manager option where a tracker sends directly to GTM Server Side which routes to Snowplow, Google Analytics, and other destinations](images/gtmssoptions2.png)
 
 ### Destinations Hub (Post-pipeline)
 

@@ -10,7 +10,6 @@ keywords: ["unified digital dbt", "web and mobile data", "sessions modeling", "u
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
-import DocCardList from '@theme/DocCardList';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
@@ -51,18 +50,18 @@ This model consists of a series of modules, each producing a table which serves 
 ### Supported Entities
 While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables.
 
-| Entity                                                                                                          | Type   | Enabled via Variable                                                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [YAUAA](/docs/events/ootb-data/device-and-browser/index.md#user-agent-parsing)                | web    | `snowplow__enable_yauaa`                                                                                                                                        |
-| [IAB](/docs/events/ootb-data/device-and-browser/index.md#spiders-and-robots)                    | web    | `snowplow__enable_iab`                                                                                                                                          |
-| [UA](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)                            | web    | `snowplow__enable_ua`                                                                                                                                           |
-| [Browser](/docs/events/ootb-data/device-and-browser/index.md#browser-entity)                                   | web    | `snowplow__enable_browser_context`, `snowplow__enable_browser_context_2` (depending on schema versions tracked, when both are enabled the values are coalesced) |
-| [Mobile](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity)                                     | mobile | `snowplow__enable_mobile_context`                                                                                                                               |
-| [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-entity)           | mobile | `snowplow__enable_geolocation_context`                                                                                                                          |
-| [Application](/docs/events/ootb-data/app-information/index.md#entity-definitions)        | mobile | `snowplow__enable_application_context`                                                                                                                          |
-| [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity)                        | mobile | `snowplow__enable_screen_context`                                                                                                                               |
-| [Deep links](/docs/events/ootb-data/links-and-referrers/index.md#deep-links-for-mobile) | mobile | `snowplow__enable_deep_link_context`                                                                                                                            |
-| [Screen summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | `snowplow__enable_screen_summary_context`                                                                                                                       |
+| Entity                                                                                         | Type   | Enabled via Variable                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [YAUAA](/docs/events/ootb-data/device-and-browser/index.md#yauaa-user-agent-parsing)           | web    | `snowplow__enable_yauaa`                                                                                                                                        |
+| [IAB](/docs/events/ootb-data/device-and-browser/index.md#spiders-and-robots)                   | web    | `snowplow__enable_iab`                                                                                                                                          |
+| [UA](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)           | web    | `snowplow__enable_ua`                                                                                                                                           |
+| [Browser](/docs/events/ootb-data/device-and-browser/index.md#browser-entity)                   | web    | `snowplow__enable_browser_context`, `snowplow__enable_browser_context_2` (depending on schema versions tracked, when both are enabled the values are coalesced) |
+| [Mobile](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity)                     | mobile | `snowplow__enable_mobile_context`                                                                                                                               |
+| [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-entity)                  | mobile | `snowplow__enable_geolocation_context`                                                                                                                          |
+| [Application](/docs/events/ootb-data/app-information/index.md#entity-definitions)              | mobile | `snowplow__enable_application_context`                                                                                                                          |
+| [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity)            | mobile | `snowplow__enable_screen_context`                                                                                                                               |
+| [Deep links](/docs/events/ootb-data/links-and-referrers/index.md#deep-links-for-mobile)        | mobile | `snowplow__enable_deep_link_context`                                                                                                                            |
+| [Screen summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity) | mobile | `snowplow__enable_screen_summary_context`                                                                                                                       |
 
 ### Optional Modules
 | Module                                                                                                                                    | Enabled via Variable           |

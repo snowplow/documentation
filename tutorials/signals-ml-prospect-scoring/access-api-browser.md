@@ -91,6 +91,6 @@ Every 10 seconds it will print out the prediction score that you'll convert, as 
 
 Adjust the timing interval to call the endpoint APIs as often as needed in your use case.
 
-![](./images/console_output.png)
+![Browser developer console showing live prospect scoring output: repeated prediction entries for a domain_userid with scores around 0.009, alongside scoring attributes and explanations fetched from the Signals API](./images/console_output.png)
 
 In a real use case, you'd be able to take actions based on these scores and predictions.

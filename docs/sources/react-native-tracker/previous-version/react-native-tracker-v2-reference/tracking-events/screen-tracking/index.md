@@ -7,10 +7,6 @@ description: "Track screen views automatically with React Navigation or manually
 keywords: ["react native tracker v2 screen tracking", "screen engagement", "navigation tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Screen view tracking captures screen changes within the app.
 

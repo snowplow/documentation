@@ -19,9 +19,8 @@ import {
   FormTrackingPlugin,
   enableFormTracking,
 } from '@snowplow/browser-plugin-form-tracking'
-import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
+import { DOCS_SITE_URLS, SP5_COOKIE_NAME, BIZ1_COOKIE_NAME } from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
 import { isEmpty, pickBy } from 'lodash'
 import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media'
@@ -63,12 +62,14 @@ const createTrackerConfig = (cookieName) => {
     },
   }
 
-  const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
-
-  if (!cookiePreferences || cookiePreferences.includes('analytics:0')) {
-    trackerConfig.anonymousTracking = {
-      withServerAnonymisation: true,
+  try {
+    const raw = Cookies.get('_ketch_consent_v1_')
+    const ketchConsent = raw && JSON.parse(atob(decodeURIComponent(raw)))
+    if (!ketchConsent || ketchConsent.analytics?.status !== 'granted') {
+      trackerConfig.anonymousTracking = { withServerAnonymisation: true }
     }
+  } catch {
+    trackerConfig.anonymousTracking = { withServerAnonymisation: true }
   }
 
   return trackerConfig
@@ -78,9 +79,9 @@ const setupBrowserTracker = () => {
   newTracker(
     'snplow5',
     'https://collector.snowplow.io',
-    createTrackerConfig('_sp5_')
+    createTrackerConfig(SP5_COOKIE_NAME)
   )
-  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
+  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig(BIZ1_COOKIE_NAME))
 
   const selectedTabContext = () => {
     const data = pickBy({
@@ -109,30 +110,38 @@ const setupBrowserTracker = () => {
 if (ExecutionEnvironment.canUseDOM) {
   setupBrowserTracker()
 
-  onPreferencesChanged((preferences) => {
-    preferences.cookieOptions.forEach(({ id, isEnabled }) => {
-      if (id === 'analytics') {
-        if (isEnabled) {
-          disableAnonymousTracking({
-            stateStorageStrategy: 'cookieAndLocalStorage',
-          })
-          // to now track it with all the extra data
-          trackPageView()
-        } else {
-          const cookieKeys = document.cookie
-            .split(';')
-            .reduce((ac, str) => [...ac, str?.split('=')[0].trim()], [])
-          const snowplowCookies = cookieKeys.filter((cookieKey) =>
-            cookieKey.startsWith('_sp5_')
-          )
-          snowplowCookies.forEach((snowplowCookie) =>
-            Cookies.remove(snowplowCookie)
-          )
-          Cookies.remove('sp')
-          reloadOnce()
-        }
+  let consentInitialized = false
+
+  window.ketch('on', 'consent', (consent) => {
+    const analyticsEnabled = consent.purposes?.analytics === true
+
+    if (!consentInitialized) {
+      consentInitialized = true
+      if (analyticsEnabled) {
+        disableAnonymousTracking({
+          stateStorageStrategy: 'cookieAndLocalStorage',
+        })
+        trackPageView()
       }
-    })
+      return
+    }
+
+    if (analyticsEnabled) {
+      disableAnonymousTracking({
+        stateStorageStrategy: 'cookieAndLocalStorage',
+      })
+      trackPageView()
+    } else {
+      const cookieKeys = Object.keys(Cookies.get())
+      const snowplowCookies = cookieKeys.filter((cookieKey) =>
+        cookieKey.startsWith(SP5_COOKIE_NAME)
+      )
+      snowplowCookies.forEach((snowplowCookie) =>
+        Cookies.remove(snowplowCookie)
+      )
+      Cookies.remove('sp')
+      reloadOnce()
+    }
   })
 }
 

@@ -25,7 +25,7 @@ Add the event names (in separate lines) to be tracked as custom structured Snowp
 
 This section allows you to define [Snowplow self-describing events](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-event-self-describing).
 
-![self describing events setup](images/self_describing_setup.png)
+![The Self-describing events section with page_interaction mapped to iglu:com.acme/page_interaction/jsonschema/1-0-0, and event definitions mapping interactionType and label properties from client event properties](images/self_describing_setup.png)
 
 ### Define events to be sent as Snowplow Self-Describing Events
 
@@ -60,11 +60,11 @@ Both subsections offer two ways to set your context entities:
 
 1. Using the default tables in the UI:
 
-  ![context entities settings](images/context_entities_settings.png)
+  ![The context entities settings showing empty Custom context entities and Global context entities tables for defining entity mappings using the default table UI](images/context_entities_settings.png)
 
 2. Through GTM Server-side variables (best suited for advanced use-cases):
 
-  ![context entities settings through variable](images/context_entities_settings_with_var.png)
+  ![The context entities settings with both "Use variables" options enabled, revealing variable-based configuration fields for custom and global context entities](images/context_entities_settings_with_var.png)
 
 
 #### Custom context entities
@@ -191,7 +191,7 @@ We are using the Snowplow GTM SS Tag to forward it to our Snowplow pipeline, and
 
 Then we can configure the Snowplow GTM SS Tag's Context entities settings as:
 
-![context entities settings example A](images/context_entities_settings_example.png)
+![The context entities settings example with tutorial_begin custom entities mapping id and category fields from client event properties, and a global user_data entity mapping email_address](images/context_entities_settings_example.png)
 
 Here we have configured the Context entities settings in order to:
 
@@ -217,7 +217,7 @@ As you can see in the images above, the schema for an entity can be written in 2
 
 As mentioned, it is also possible to reference GTM Server-side Variables in order to set both the Custom and the Global context entities. As a simple example:
 
-![context entities settings example B](images/context_entities_settings_example_var.png)
+![The context entities settings example using GTM variables, with {{product_entities}} attached to purchase events and {{global_entities}} applied to all events globally](images/context_entities_settings_example_var.png)
 
 Here:
 

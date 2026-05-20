@@ -1528,8 +1528,8 @@ pre.mermaid {
 }
 
 /* Fix Infima paragraph margin leaking into Mermaid SVG node labels */
-[id^="mermaid-"] foreignObject .nodeLabel p:not(#\#):not(#\#),
-[id^="mermaid-"] foreignObject .edgeLabel p:not(#\#):not(#\#) {
+[id^='mermaid-'] foreignObject .nodeLabel p:not(#\#):not(#\#),
+[id^='mermaid-'] foreignObject .edgeLabel p:not(#\#):not(#\#) {
   margin-bottom: 0;
 }
 
@@ -1787,10 +1787,6 @@ pre.mermaid {
 }
 
 @media print {
-  aside.cookie-though {
-    display: none !important;
-    visibility: hidden !important;
-  }
   [data-name='Book a demo'] {
     display: none;
   }

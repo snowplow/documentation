@@ -16,10 +16,6 @@ Do not copy the project yaml from the package into your main project, this can l
 
 :::
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 ```mdx-code-block
 import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"

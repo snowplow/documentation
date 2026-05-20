@@ -36,6 +36,6 @@ Adding this plugin will automatically start printing out `debug` logs to your De
 
 **Note:** You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
 
-![](images/Screenshot-2021-03-28-at-20.08.35.png)
+![Browser Developer Tools console showing the Snowplow debugger plugin output, with color-coded entries for a Page View event, GDPR context, web_page context, http_client_hints context, and full event payload](images/Screenshot-2021-03-28-at-20.08.35.png)
 
 An example of the output from this plugin

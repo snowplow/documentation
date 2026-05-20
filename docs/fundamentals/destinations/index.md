@@ -6,7 +6,7 @@ description: "Different options for storing and forwarding Snowplow data"
 keywords: ["data destinations", "warehouses", "event forwarding", "reverse ETL"]
 ---
 
-![](images/usecasearch.png)
+![Diagram showing Snowplow data flowing from a data warehouse into three destination categories: Event Forwarding (customer journey nudges, packaged analytics), Reverse ETL (targeting in Google/Facebook, CRM enablement, packaged analytics), and BI and ML Tool (in-session recommendations, customer-facing metrics, churn propensity scoring, fraud prevention, custom marketing attribution, content and author analytics, lead scoring, anomaly detection)](images/usecasearch.png)
 
 Snowplow gives you multiple ways to get your data where it needs to go. You can load data into warehouses and lakes for deeper analysis, forward individual events to marketing platforms in real-time, or send aggregated segments to activate your insights.
 

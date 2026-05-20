@@ -16,7 +16,7 @@ To **install the template**, browse to **Templates** in the Google Tag Manager u
 
 Under **Tag Templates**, click **Search Gallery**, and type `Snowplow v3` into the gallery overlay search bar.
 
-![search Snowplow v3 in GTM gallery](images/search_snowplow_v3.png)
+![GTM Community Template Gallery search showing "Snowplow v3" typed in the search field with the verified Snowplow v3 template result listed below](images/search_snowplow_v3.png)
 
 Click the **Snowplow v3** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
 
@@ -44,7 +44,7 @@ The Tag template requires a [Snowplow v3 Settings](../../v3-settings-variable/in
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
-![tracker initialization](images/tracker_initialization.png)
+![GTM tag Tracker Initialisation section showing the Snowplow Settings dropdown set to "Snowplow v3 Settings" with unchecked options to override tracker name, collector endpoint, and JavaScript library host](images/tracker_initialization.png)
 
 You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
 
@@ -52,17 +52,17 @@ You can also choose to override some of the parameters specifically for this tag
 
 If you have the Snowplow library [self-hosted](../../../hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
-![modifying permissions](images/modifying_permissions.png)
+![GTM Template Editor Permission tab showing the "Injects scripts" permission expanded with an Allowed URL match patterns field containing the self-hosted sp.js URL](images/modifying_permissions.png)
 
 Modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template.
 
-![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
+![GTM warning dialog stating that modified community gallery templates will no longer receive developer updates, with Cancel and Continue buttons](images/modifying_breaks_gallery_link.png)
 
 :::note
 
 Since v1.1.0, an alternative to prevent breaking the gallery update link is to use the `Do not load` option from the corresponding drop down menu:
 
-![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
+![GTM tag showing Override JavaScript Library Host enabled with the Snowplow JavaScript Tracker Library dropdown set to "Do not load library"](images/host_drop_down_no_load.png)
 
 Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](../../v3-settings-variable/index.md) Variable.)
 
@@ -102,7 +102,7 @@ function() {
 
 Alternatively, you can set the drop-down to the value `No`, and add the parameters manually instead:
 
-![adding parameters manually](images/adding_parameters_manually.png)
+![GTM tag Parameter Configuration section showing Tag Type set to "Error Tracking", Retrieve Parameters From Variable set to "No", and a manually entered parameter row with Parameter Name "message (required)" and Parameter Value "Error Message"](images/adding_parameters_manually.png)
 
 Some tag types will add additional selections to this section. Follow the [official tracker documentation](../../../../tracking-events/index.md) for more information about what each option does.
 
@@ -148,19 +148,19 @@ The **Callback Function** is something you can set to a JavaScript function. If 
 
 For any other commands which are supported by the Snowplow JavaScript Tracker v3, you can select the **[Custom Command]** option. Once select, you can enter any function name and the associated parameter for that function. The parameter can either be a simple string, in examples such as `setUserId`:
 
-![setUserId](images/setUserId.png)
+![GTM tag Custom Command section with Command Name set to "setUserId" and Command Argument set to "user-123"](images/setUserId.png)
 
 Or it can be set to a Custom JavaScript Variable in the instances where an Object should be passed to the function, such as with `enableAnonymousTracking`:
 
-![enableAnonymousTracking Custom JavaScript variable](images/enableAnonymousTracking_custom_variable.png)
+![GTM Custom JavaScript variable configuration named "Anonymous Tracking Options" containing a function that returns an options object with withServerAnonymisation set to true](images/enableAnonymousTracking_custom_variable.png)
 
 And then use this variable as your Command Argument:
 
-![enableAnonymousTracking Custom Command argument](images/enableAnonymousTracking_argument.png)
+![GTM tag Custom Command section with Command Name set to "enableAnonymousTracking" and Command Argument set to "Anonymous Tracking Options"](images/enableAnonymousTracking_argument.png)
 
 ### Additional Tracking Parameters
 
-![](images/additional_tracking_parameters.png)
+![GTM tag Additional Tracking Parameters section showing a Context Entities dropdown for attaching custom context and a Set Custom Timestamp field with a UNIX milliseconds input](images/additional_tracking_parameters.png)
 
 #### Add Custom Context Entities
 

@@ -6,10 +6,6 @@ description: "SQL Runner is no longer actively developed and users should try to
 keywords: ["SQL Runner to dbt", "dbt migration", "SQL Runner migration", "legacy to dbt"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 :::info
 

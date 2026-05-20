@@ -10,4 +10,4 @@ When viewing an [event specification](/docs/event-studio/tracking-plans/event-sp
 
 The **Querying** tab provides example queries to help you retrieve and analyze your event data. Choose your warehouse to see appropriately optimized SQL.
 
-![Querying SQL examples](images/sql-example.png)
+!["Working with this event" panel on the Querying tab showing a Snowflake SQL query that selects flattened event and context columns from atomic events, filtered by event name and vendor](images/sql-example.png)

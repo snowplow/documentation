@@ -18,11 +18,13 @@ Not all trackers have session tracking capabilities.
 
 ## User atomic event properties
 
-These [properties](/docs/fundamentals/canonical-event/index.md#user-fields) can be assigned using most Snowplow trackers, regardless of the platform.
+These [properties](/docs/fundamentals/canonical-event/index.md#user-fields) can be assigned using most Snowplow trackers: `user_id`, `domain_userid`, `network_userid`, `domain_sessionid`, `domain_sessionidx`, and `user_ipaddress`.
 
 Some trackers set certain user properties automatically, while others require you to set them manually using the tracker's API.
 
 If you don't manually set an IP address or `network_userid`, the event [Collector](/docs/pipeline/collector/index.md) will automatically add them to the event based on the request HTTP headers and the Collector cookie. You can turn this feature off using [server-side anonymization](/docs/events/anonymous-tracking/index.md).
+
+Values set in your tracking code will take precedence over values added by the Collector or enrichments.
 
 | Tracker                                                                              | Supported | Since version | Notes                                                                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

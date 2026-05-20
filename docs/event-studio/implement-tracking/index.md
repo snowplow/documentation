@@ -106,4 +106,4 @@ window.snowplow("trackSelfDescribingEvent", {
 
 Use the **Show Snowtype code** toggle to display the specific Snowtype function name to call in your tracking implementation. Note that it relies on you having generated the required Snowtype code in your project.
 
-![Show snowtype code](images/show-snowtype-code.png)
+!["Working with this event" panel on the Implementation tab showing JavaScript code for a Snowtype-generated trackAddToCartSpec function, with the "Show Snowtype code" toggle enabled and a Download button](images/show-snowtype-code.png)

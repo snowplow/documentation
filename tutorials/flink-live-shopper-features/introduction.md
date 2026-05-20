@@ -55,7 +55,7 @@ The project structure is:
 
 This diagram shows the architectural overview:
 
-![Architecture diagram](./images/live-shopper-setup-architecture.svg)
+![Architecture diagram showing event flow from the ecommerce store through Snowplow Local into Kafka, processed by Apache Flink's branched stream pipeline across product, category, cart, and purchase lanes, and stored in Redis as user feature metrics](./images/live-shopper-setup-architecture.svg)
 
 Benefits of this architecture:
 - Sub-second freshness: metrics are computed in the stream, not via nightly batch jobs, so they're actionable in-session

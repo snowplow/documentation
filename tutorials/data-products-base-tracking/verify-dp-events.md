@@ -9,4 +9,4 @@ keywords: ["tracking plan verification", "event volume monitoring", "base event 
 As mentioned previously, if you check the `Todo - Base Web` tracking plan you created, you will be able to see the events coming in from the correct environment based on the app ID.
 
 _Note: You might need to wait for a bit, up to a maximum of 2 hours, until the events are visible._
-![](./images/base-counts.png)
+![Todo - Base Web tracking plan showing event specifications including page_view (volume 8), page_ping (volume 3), and link_click (volume 1) received from the todo-web and todo-web-dev app IDs](./images/base-counts.png)

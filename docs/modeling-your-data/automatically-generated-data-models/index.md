@@ -77,7 +77,7 @@ This table compares the different options:
 
 To generate a data model, find the **Data models** tab in [Console](https://console.snowplowanalytics.com/) > **Data collection** > **Tracking plans** > tracking plan details page.
 
-![Data models tab on a tracking plan](./images/landing-page.png)
+![Data models tab on the example_tracking_plan page showing a three-step flow (Your tracking plan data → Generate your data model → Simplified modeled data) and a "Generate data model" button](./images/landing-page.png)
 
 Follow the instructions to create your model:
 * Provide basic information such as name and warehouse destination
@@ -87,11 +87,11 @@ Follow the instructions to create your model:
 
 Once you've completed these steps, click **Save to tracking plan** to save the model. You can also download the model now.
 
-![Finalize step of the Generate data model wizard](./images/finalize.png)
+![Finalize step of the Generate data model wizard showing two deployment options — "Create a view" (selected) and "Create an incremental dbt model" — with a SQL preview and a Download button](./images/finalize.png)
 
 You can view the SQL at any time by choosing **View data model code** from the `⋮` menu.
 
-![Generated data models list](./images/created.png)
+![Generated data models list showing example_model as a View on Snowflake prod1, generated on 29 September 2025, with a menu open showing "View data model code" and "Delete data model" options](./images/created.png)
 
 ## Deploying models
 

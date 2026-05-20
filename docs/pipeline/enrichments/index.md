@@ -26,7 +26,7 @@ Snowplow runs two kinds of enrichments:
 
 See the [available enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) page for the full list, in execution order.
 
-## Hardcoded enrichments
+## Hardcoded enrichment fields
 
 During enrichment, the [Enrich](/docs/api-reference/enrichment-components/index.md) application adds a number of fields to the event.
 

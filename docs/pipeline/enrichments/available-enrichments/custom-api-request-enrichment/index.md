@@ -16,7 +16,7 @@ As with all enrichments, only one instance of it can be configured within your p
 
 ## Configuration
 
-For historical reasons, the configuration uses terms that's no longer used elsewhere in Snowplow.
+For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
 <SchemaProperties
   overview={{ enrichment: true }}

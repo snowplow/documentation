@@ -18,7 +18,7 @@ We don't recommend using this enrichment with analytical databases such as Redsh
 
 ## Configuration
 
-For historical reasons, the configuration uses terms that's no longer used elsewhere in Snowplow.
+For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
 <SchemaProperties
   overview={{ enrichment: true }}

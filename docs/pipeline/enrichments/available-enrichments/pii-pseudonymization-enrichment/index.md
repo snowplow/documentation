@@ -20,7 +20,7 @@ Hashing a field can change its format (e.g. email) and its length. This could ma
 
 ## Configuration
 
-For historical reasons, the configuration uses terms that's no longer used elsewhere in Snowplow.
+For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
 <SchemaProperties
   overview={{ enrichment: true }}

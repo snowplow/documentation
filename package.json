@@ -54,7 +54,6 @@
     "@snowplow/browser-tracker": "^4.7.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cookie-though": "^1.5.0",
     "d3-color": "^3.1.0",
     "framer-motion": "^12.23.24",
     "hast-util-is-element": "1.1.0",

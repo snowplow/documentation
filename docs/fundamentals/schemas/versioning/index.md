@@ -33,7 +33,7 @@ Snowplow versions schemas using a scheme called **SchemaVer**. A SchemaVer versi
 
 - `major` — increment for a breaking change that prevents the new schema from validating historical data (for example, changing a field's type, or adding a new required field).
 - `minor` — increment for a change that _may_ prevent the new schema from validating some historical data.
-- `patch` — increment for a change that's compatible with all historical data (for example, adding a new optional field).
+- `patch` — increment for a change that's compatible with all historical data (for example, adding a new optional field). Note that this is unrelated to overwriting a schema version, which is also called patching.
 
 Unlike [SemVer](https://semver.org/), SchemaVer uses hyphens rather than periods, and starts at `1-0-0` rather than `0.1.0`.
 

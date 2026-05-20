@@ -31,12 +31,18 @@ The configuration of the enrichment defines which parameters in the URL (e.g. `u
 
 ## Configuration
 
-The enrichment takes these parameters:
+The enrichment takes one parameter, `fields`, which maps event marketing fields to URL query string parameter names. It must contain these keys:
 
-| Parameter | Required | Description                                                          |
-| --------- | -------- | -------------------------------------------------------------------- |
-| `mapping` | ❌        | Mapping mode. Must be one of: `static`, `script`.                    |
-| `fields`  | ✅        | Maps event marketing fields to the URL query string parameter names. |
+| Key           | Required | Populates                       | Description                                                                                         |
+| ------------- | -------- | ------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `mktMedium`   | ✅        | `mkt_medium`                    | Array of URL query string parameter names. Use `[]` if you don't need it.                           |
+| `mktSource`   | ✅        | `mkt_source`                    | As above.                                                                                           |
+| `mktTerm`     | ✅        | `mkt_term`                      | As above.                                                                                           |
+| `mktContent`  | ✅        | `mkt_content`                   | As above.                                                                                           |
+| `mktCampaign` | ✅        | `mkt_campaign`                  | As above.                                                                                           |
+| `mktClickId`  | ❌        | `mkt_clickid` and `mkt_network` | Object mapping click parameter names to network names. See [below](#click-and-network-attribution). |
+
+All five required keys must be present, even if you only want to extract some of them. Provide an empty array for any you don't need.
 
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
@@ -45,7 +51,6 @@ Configure the parameters in the Console enrichment editor. For example:
 
 ```json
 {
-  "mapping": "static",
   "fields": {
     "mktMedium": ["utm_medium"],
     "mktSource": ["utm_source"],
@@ -69,7 +74,6 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
     "vendor": "com.snowplowanalytics.snowplow",
     "enabled": true,
     "parameters": {
-      "mapping": "static",
       "fields": {
         "mktMedium": ["utm_medium"],
         "mktSource": ["utm_source"],
@@ -85,6 +89,8 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
   </TabItem>
 </Tabs>
 
+Note that the legacy `mapping` field in the `campaign_attribution` schema definition is ignored by Enrich.
+
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
@@ -97,7 +103,6 @@ What if some of your links use `utm_campaign=...` and some use `legacy_campaign=
 
 ```json
     "parameters":{
-      "mapping":"static",
       "fields":{
         "mktCampaign":[
           "utm_campaign",
@@ -139,7 +144,6 @@ This example shows how to define your own click attribution settings, using `mkt
 
 ```json
     "parameters":{
-      "mapping":"static",
       "fields":{
         ...
         "mktClickId": {

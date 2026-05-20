@@ -34,30 +34,30 @@ export const TutorialCardWithHover: React.FC<TutorialCardWithHoverProps> = ({ tu
 
   const cardContent = (
     <div className={cn(
-      "h-full w-full bg-accent text-popover-foreground border-0 rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-indigo-900 group-hover:shadow-xl group-hover:shadow-indigo-500/30 group-hover:scale-[1.02] flex flex-col",
+      "h-full w-full bg-accent text-popover-foreground border-0 rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-muted group-hover:shadow-lg group-hover:scale-[1.01] flex flex-col",
       className
     )}>
       <div className="p-6 flex-1 flex flex-col">
         {/* Topic/Use Case Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {tutorial.meta.useCase && (
-            <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">
+            <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
               {tutorial.meta.useCase}
             </div>
           )}
-          <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">
+          <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
             {tutorial.meta.label}
           </div>
         </div>
 
         {/* Title and Description */}
         <div className="flex-1 mb-4">
-          <h3 className="text-xl font-semibold mb-2 text-foreground leading-tight transition-all duration-300 group-hover:text-white">
+          <h3 className="text-xl font-semibold mb-2 text-foreground leading-tight">
             {firstStep
               ? tutorial.meta.title
               : `${tutorial.meta.title} (No steps found)`}
           </h3>
-          <p className="text-muted-foreground text-sm leading-relaxed transition-all duration-300 group-hover:text-slate-200">
+          <p className="text-muted-foreground text-sm leading-relaxed">
             {tutorial.meta.description}
           </p>
         </div>
@@ -65,8 +65,8 @@ export const TutorialCardWithHover: React.FC<TutorialCardWithHoverProps> = ({ tu
         {/* Progress Section */}
         <div className="mt-auto">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-muted-foreground text-sm transition-all duration-300 group-hover:text-slate-200">Progress</span>
-            <span className="text-foreground text-sm transition-all duration-300 group-hover:text-slate-200">
+            <span className="text-muted-foreground text-sm">Progress</span>
+            <span className="text-foreground text-sm">
               {progress.completed}/{tutorial.steps.length}
             </span>
           </div>
@@ -79,8 +79,8 @@ export const TutorialCardWithHover: React.FC<TutorialCardWithHoverProps> = ({ tu
                 className={cn(
                   "flex-1 h-2 rounded-sm transition-all duration-300",
                   index < progress.completed
-                    ? "bg-green-500 rounded-full group-hover:bg-green-400 group-hover:shadow-sm group-hover:shadow-green-400/50"
-                    : "bg-white/80 rounded-full group-hover:bg-white/30"
+                    ? "bg-green-500 rounded-full"
+                    : "bg-white/80 rounded-full"
                 )}
               />
             ))}

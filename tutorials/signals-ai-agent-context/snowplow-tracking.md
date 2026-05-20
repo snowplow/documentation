@@ -96,7 +96,7 @@ export function SnowplowTracker() {
 }
 ```
 
-The scaffolded `app/layout.tsx` already includes font imports, a `lang` attribute, and CSS classes. Add the `SnowplowTracker` import and place it as alongside `{children}`:
+The scaffolded `app/layout.tsx` already includes font imports, a `lang` attribute, and CSS classes. Add the `SnowplowTracker` import and place it alongside `{children}`:
 
 ```tsx
 // app/layout.tsx — add these two changes to your scaffolded layout:

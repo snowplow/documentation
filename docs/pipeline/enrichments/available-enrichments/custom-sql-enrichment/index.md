@@ -6,7 +6,8 @@ description: "Query relational databases during enrichment to attach lookup data
 keywords: ["SQL enrichment", "database lookup", "relational database enrichment"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 The SQL query enrichment lets you add data to a Snowplow event via your own MySQL or PostgreSQL relational database.
 
@@ -20,67 +21,143 @@ We don't recommend using this enrichment with analytical databases such as Redsh
 
 For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-1",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "sql_query_enrichment_config",
-      enabled: false,
-      parameters: {
-        inputs: [
-          {
-            placeholder: 1,
-            pojo: {
-              field: "user_id"
-            }
-          },
-          {
-            placeholder: 1,
-            json: {
-              field: "contexts",
-              schemaCriterion: "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
-              jsonPath: "$.userId"
-            }
-          },
-          {
-            placeholder: 2,
-            pojo: {
-              field: "app_id"
-            }
-          }
-        ],
-        database: {
-          postgresql: {
-            host: "cluster01.redshift.acme.com",
-            port: 5439,
-            sslMode: true,
-            username: "snowplow_enrich_ro",
-            password: "1asIkJed",
-            database: "crm"
-          }
-        },
-        query: {
-          sql: "SELECT username, email_address, date_of_birth FROM tbl_users WHERE user = ? AND client = ? LIMIT 1"
-        },
-        output: {
-          expectedRows: "AT_MOST_ONE",
-          json: {
-            schema: "iglu:com.acme/user/jsonschema/1-0-0",
-            describes: "ALL_ROWS",
-            propertyNames: "CAMEL_CASE"
-          }
-        },
-        cache: {
-          size: 3000,
-          ttl: 60
-        },
-        ignoreOnError: false
+The enrichment takes these parameters:
+
+| Parameter       | Required | Description                                                          |
+| --------------- | -------- | -------------------------------------------------------------------- |
+| `inputs`        | ✅        | Event values to substitute in SQL placeholders.                      |
+| `database`      | ✅        | Defines access to the database.                                      |
+| `query`         | ✅        | The SQL statement to query your database.                            |
+| `output`        | ✅        | How to convert the returned rows into self-describing JSON entities. |
+| `cache`         | ✅        | Whether to store retrieved rows.                                     |
+| `ignoreOnError` | ❌        | Whether to make the event fail if the API request fails.             |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "inputs": [
+    {
+      "placeholder": 1,
+      "pojo": {
+        "field": "user_id"
+      }
+    },
+    {
+      "placeholder": 1,
+      "json": {
+        "field": "contexts",
+        "schemaCriterion": "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
+        "jsonPath": "$.userId"
+      }
+    },
+    {
+      "placeholder": 2,
+      "pojo": {
+        "field": "app_id"
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for SQL Query enrichment configuration", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "sql_query_enrichment_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "inputs": { "description": "Event values to substitute in SQL placeholders", "type": "array", "items": { "type": "object", "properties": { "placeholder": { "type": "integer", "minimum": 1, "maximum": 64 }, "pojo": { "type": "object", "properties": { "field": { "type": "string" } }, "additionalProperties": false, "required": ["field"] }, "json": { "type": "object", "properties": { "field": { "type": "string", "enum": ["unstruct_event", "contexts", "derived_contexts"] }, "schemaCriterion": { "type": "string", "pattern": "^iglu:([a-zA-Z0-9-_.]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([1-9][0-9]*|\\*)-((?:0|[1-9][0-9]*)|\\*)-((?:0|[1-9][0-9]*)|\\*)$" }, "jsonPath": { "type": "string" } }, "additionalProperties": false, "required": ["field", "schemaCriterion", "jsonPath"] } }, "additionalProperties": false, "minProperties": 2, "maxProperties": 2, "required": ["placeholder"] } }, "database": { "description": "Defines access to the database", "oneOf": [ { "type": "object", "properties": { "postgresql": { "type": "object", "properties": { "host": { "type": "string" }, "port": { "type": "integer", "minimum": 1, "maximum": 65535 }, "sslMode": { "type": "boolean" }, "username": { "type": "string", "minLength": 1 }, "password": { "type": "string" }, "database": { "type": "string", "minLength": 1 } }, "required": ["host", "port", "sslMode", "username", "password", "database"], "additionalProperties": false } }, "required": ["postgresql"], "additionalProperties": false }, { "type": "object", "properties": { "mysql": { "type": "object", "properties": { "host": { "type": "string" }, "port": { "type": "integer", "minimum": 1, "maximum": 65535 }, "sslMode": { "type": "boolean" }, "username": { "type": "string", "minLength": 1 }, "password": { "type": "string" }, "database": { "type": "string", "minLength": 1 } }, "required": ["host", "port", "sslMode", "username", "password", "database"], "additionalProperties": false } }, "required": ["mysql"] } ], "additionalProperties": true }, "query": { "description": "The SQL statement to query your database", "type": "object", "properties": { "sql": { "type": "string" } }, "required": ["sql"], "additionalProperties": false }, "output": { "description": "How to convert the returned rows into self-describing JSON entities", "type": "object", "properties": { "expectedRows": { "type": "string", "enum": ["AT_LEAST_ONE", "AT_LEAST_ZERO", "AT_MOST_ONE", "EXACTLY_ONE"] }, "json": { "type": "object", "properties": { "schema": { "type": "string", "pattern": "^iglu:([a-zA-Z0-9-_.]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([1-9][0-9]*(?:-(?:0|[1-9][0-9]*)){2})$" }, "propertyNames": { "type": "string", "enum": ["AS_IS", "CAMEL_CASE", "PASCAL_CASE", "SNAKE_CASE", "LOWER_CASE", "UPPER_CASE"] }, "describes": { "type": "string", "enum": ["ALL_ROWS", "EVERY_ROW"] } }, "required": ["schema", "propertyNames", "describes"], "additionalProperties": false } }, "additionalProperties": false }, "cache": { "description": "Whether to store retrieved rows", "type": "object", "properties": { "size": { "type": "integer", "minimum": 0 }, "ttl": { "type": "integer", "minimum": 0, "maximum": 86400 } }, "additionalProperties": false, "required": ["size", "ttl"] }, "ignoreOnError": { "type": ["boolean", "null"], "description": "Whether to make the event fail if the API request fails" } }, "additionalProperties": false, "required": ["inputs", "database", "query", "output", "cache"] } }, "additionalProperties": false, "required": ["name", "vendor", "enabled", "parameters"] }} />
+  ],
+  "database": {
+    "postgresql": {
+      "host": "cluster01.redshift.acme.com",
+      "port": 5439,
+      "sslMode": true,
+      "username": "snowplow_enrich_ro",
+      "password": "1asIkJed",
+      "database": "crm"
+    }
+  },
+  "query": {
+    "sql": "SELECT username, email_address, date_of_birth FROM tbl_users WHERE user = ? AND client = ? LIMIT 1"
+  },
+  "output": {
+    "expectedRows": "AT_MOST_ONE",
+    "json": {
+      "schema": "iglu:com.acme/user/jsonschema/1-0-0",
+      "describes": "ALL_ROWS",
+      "propertyNames": "CAMEL_CASE"
+    }
+  },
+  "cache": {
+    "size": 3000,
+    "ttl": 60
+  },
+  "ignoreOnError": false
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-1",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "sql_query_enrichment_config",
+    "enabled": false,
+    "parameters": {
+      "inputs": [
+        {
+          "placeholder": 1,
+          "pojo": {
+            "field": "user_id"
+          }
+        },
+        {
+          "placeholder": 1,
+          "json": {
+            "field": "contexts",
+            "schemaCriterion": "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
+            "jsonPath": "$.userId"
+          }
+        },
+        {
+          "placeholder": 2,
+          "pojo": {
+            "field": "app_id"
+          }
+        }
+      ],
+      "database": {
+        "postgresql": {
+          "host": "cluster01.redshift.acme.com",
+          "port": 5439,
+          "sslMode": true,
+          "username": "snowplow_enrich_ro",
+          "password": "1asIkJed",
+          "database": "crm"
+        }
+      },
+      "query": {
+        "sql": "SELECT username, email_address, date_of_birth FROM tbl_users WHERE user = ? AND client = ? LIMIT 1"
+      },
+      "output": {
+        "expectedRows": "AT_MOST_ONE",
+        "json": {
+          "schema": "iglu:com.acme/user/jsonschema/1-0-0",
+          "describes": "ALL_ROWS",
+          "propertyNames": "CAMEL_CASE"
+        }
+      },
+      "cache": {
+        "size": 3000,
+        "ttl": 60
+      },
+      "ignoreOnError": false
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -333,7 +410,7 @@ Then two entities would be added to your event, one per row:
     "sku": "123",
     "prod_name": "iPad"
   }
-}
+},
 {
   "schema": "iglu:com.acme/product/jsonschema/1-0-0",
   "data": {

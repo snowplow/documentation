@@ -6,7 +6,8 @@ description: "Pseudonymize personally identifiable information in events using h
 keywords: ["PII pseudonymization", "data privacy", "GDPR"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 The PII (personally identifiable information) pseudonymization enrichment runs after all the other enrichments, and pseudonymizes the fields that are configured as PII.
 
@@ -22,46 +23,96 @@ Hashing a field can change its format (e.g. email) and its length. This could ma
 
 For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "pii_enrichment_config",
-      emitEvent: false,
-      enabled: true,
-      anonymousOnly: false,
-      parameters: {
-        pii: [
-          {
-            pojo: {
-              field: "user_id"
-            }
-          },
-          {
-            pojo: {
-              field: "user_ipaddress"
-            }
-          },
-          {
-            json: {
-              field: "unstruct_event",
-              schemaCriterion: "iglu:com.google.analytics.measurement-protocol/user/jsonschema/1-*-*",
-              jsonPath: "$.['clientId', 'userId']"
-            }
+The enrichment takes these parameters:
+
+| Parameter       | Required | Description                                                                                                                                         |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pii`           | ✅        | List of all the fields for which pseudonymization will be performed.                                                                                |
+| `strategy`      | ✅        | The pseudonymization strategy which will be applied to all the fields specified in the `pii` section.                                               |
+| `anonymousOnly` | ❌        | Not configurable in Console: whether to enable anonymous mode. If enabled, the enrichment masks PII only when the `SP-Anonymous` header is present. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "pii": [
+    {
+      "pojo": {
+        "field": "user_id"
+      }
+    },
+    {
+      "pojo": {
+        "field": "user_ipaddress"
+      }
+    },
+    {
+      "json": {
+        "field": "unstruct_event",
+        "schemaCriterion": "iglu:com.google.analytics.measurement-protocol/user/jsonschema/1-*-*",
+        "jsonPath": "$.['clientId', 'userId']"
+      }
+    }
+  ],
+  "strategy": {
+    "pseudonymize": {
+      "hashFunction": "SHA-1",
+      "salt": "pepper123"
+    }
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "pii_enrichment_config",
+    "emitEvent": false,
+    "enabled": true,
+    "anonymousOnly": false,
+    "parameters": {
+      "pii": [
+        {
+          "pojo": {
+            "field": "user_id"
           }
-        ],
-        strategy: {
-          pseudonymize: {
-            hashFunction: "SHA-1",
-            salt: "pepper123"
+        },
+        {
+          "pojo": {
+            "field": "user_ipaddress"
           }
+        },
+        {
+          "json": {
+            "field": "unstruct_event",
+            "schemaCriterion": "iglu:com.google.analytics.measurement-protocol/user/jsonschema/1-*-*",
+            "jsonPath": "$.['clientId', 'userId']"
+          }
+        }
+      ],
+      "strategy": {
+        "pseudonymize": {
+          "hashFunction": "SHA-1",
+          "salt": "pepper123"
         }
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for PII pseudonymization enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "pii_enrichment_config", "format": "jsonschema", "version": "2-0-1" }, "type": "object", "properties": { "vendor": { "type": "string", "description": "The name of the vendor for this config (the only valid value for scala-common enrich is com.snowplowanalytics.snowplow.enrichments)" }, "name": { "type": "string", "description": "The name of the config (the only valid value for scala-common enrich is pii_enrichment_config)" }, "enabled": { "type": "boolean", "description": "Whether to enable this enrichment" }, "emitEvent": { "type": "boolean", "description": "Legacy field, ignored" }, "parameters": { "type": "object", "properties": { "pii": { "description": "List of all the fields for which pseudonymization will be performed", "type": "array", "items": { "type": "object", "properties": { "pojo": { "description": "Scalar field which contains a single string value, on which pseudonymization will be performed on the entire field (e.g. user_id)", "type": "object", "properties": { "field": { "enum": ["user_id", "user_ipaddress", "user_fingerprint", "domain_userid", "network_userid", "ip_organization", "ip_domain", "tr_orderid", "ti_orderid", "mkt_term", "mkt_content", "se_category", "se_action", "se_label", "se_property", "mkt_clickid", "refr_domain_userid", "domain_sessionid"] } }, "required": ["field"], "additionalProperties": false }, "json": { "description": "JSON field which contains a JSON string value, on which pseudonymization will be performed on a specific JSON path", "type": "object", "properties": { "field": { "enum": ["contexts", "derived_contexts", "unstruct_event"] }, "schemaCriterion": { "type": "string", "pattern": "^iglu:([a-zA-Z0-9-_.]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([1-9][0-9]*|\\*)-((?:0|[1-9][0-9]*)|\\*)-((?:0|[1-9][0-9]*)|\\*)$" }, "jsonPath": { "type": "string", "pattern": "^\\$.*$" } }, "required": ["field", "schemaCriterion", "jsonPath"], "additionalProperties": false } }, "oneOf": [ { "required": ["pojo"] }, { "required": ["json"] } ], "additionalProperties": false } }, "strategy": { "description": "The pseudonymization strategy which will be applied to all the fields specified in the pii section", "type": "object", "properties": { "pseudonymize": { "description": "Pseudonymization strategy that hashes using a specified algorithm", "type": "object", "properties": { "hashFunction": { "description": "The hash function that will be used by this strategy", "enum": ["MD2", "MD5", "SHA-1", "SHA-256", "SHA-384", "SHA-512"] }, "salt": { "description": "A salt that will be added to the field during hashing", "type": "string" } }, "required": ["hashFunction", "salt"], "additionalProperties": false } }, "required": ["pseudonymize"], "additionalProperties": false } }, "required": ["pii", "strategy"], "additionalProperties": false }, "anonymousOnly": { "type": "boolean", "description": "Whether to enable anonymous mode. If enabled, the enrichment masks PII only when the SP-Anonymous header is present" } }, "required": ["vendor", "name", "enabled", "emitEvent", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -69,7 +120,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-Note that the `emitEvent` field is ignored by Enrich.
+Note that the legacy `emitEvent` field is ignored by Enrich.
 
 ### `pii` fields
 

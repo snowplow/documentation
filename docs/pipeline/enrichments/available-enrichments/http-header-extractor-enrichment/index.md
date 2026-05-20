@@ -6,26 +6,52 @@ description: "Extract HTTP request headers using regex patterns and attach them 
 keywords: ["HTTP headers", "header extraction", "request headers"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 This enrichment can extract name/value pairs from the HTTP headers in the tracker request to the Collector, and attach them to the event as entities.
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "http_header_extractor_config",
-      enabled: false,
-      parameters: {
-        headersPattern: ".*"
-      }
+The enrichment takes one parameter:
+
+| Parameter        | Required | Description                   |
+| ---------------- | -------- | ----------------------------- |
+| `headersPattern` | ✅        | A regex for matching headers. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "headersPattern": ".*"
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "http_header_extractor_config",
+    "enabled": false,
+    "parameters": {
+      "headersPattern": ".*"
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for HTTP header extractor enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "http_header_extractor_config", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "headersPattern": { "type": "string" }, "description": "A regex for matching headers" }, "required": ["headersPattern"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

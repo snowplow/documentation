@@ -6,9 +6,12 @@ description: "Anonymize IP addresses by masking octets or segments to protect us
 keywords: ["IP anonymization", "GDPR compliance", "privacy protection"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance `13.54.45.87` could become `13.54.x.x`. The user IP is tracked in the `user_ipaddress` field of the atomic event.
+This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. The user IP is tracked in the `user_ipaddress` field of the atomic event.
+
+For example, anonymizing one IPv4 octet would change an address of `255.255.255.255` to `255.255.255.x`, and anonymizing three octets would change it to `255.x.x.x`.
 
 Both IPv4 and IPv6 are supported.
 
@@ -16,31 +19,53 @@ This enrichment runs after the [IP lookup enrichment](/docs/pipeline/enrichments
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/anon_ip/jsonschema/1-0-1",
-    data: {
-      name: "anon_ip",
-      vendor: "com.snowplowanalytics.snowplow",
-      enabled: true,
-      parameters: {
-        anonOctets: 1,
-        anonSegments: 1
-      }
+The enrichment takes these parameters:
+
+| Parameter      | Required | Description                           |
+| -------------- | -------- | ------------------------------------- |
+| `anonOctets`   | ✅        | Number of IPv4 octets to anonymize.   |
+| `anonSegments` | ❌        | Number of IPv6 segments to anonymize. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "anonOctets": 1,
+  "anonSegments": 1
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/anon_ip/jsonschema/1-0-1",
+  "data": {
+    "name": "anon_ip",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "anonOctets": 1,
+      "anonSegments": 1
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an IP anonymization enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "anon_ip", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "anonOctets": { "description": "Number of IPv4 octets to anonymize", "type": "number", "minimum": 1, "maximum": 4 }, "anonSegments": { "description": "Number of IPv6 segments to anonymize", "type": "integer", "minimum": 1, "maximum": 8 } }, "required": ["anonOctets"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
 <TestingWithMicro/>
 ```
-
-The number of octets (IPv4) to anonymize is specified with `anonOctets` and the number of segments (IPv6) to anonymize is specified with `anonSegments`.
-
-For example, anonymizing one octet would change an IPv4 address of `255.255.255.255` to `255.255.255.x`, and anonymizing three octets would change it to `255.x.x.x`.
 
 ## Output
 

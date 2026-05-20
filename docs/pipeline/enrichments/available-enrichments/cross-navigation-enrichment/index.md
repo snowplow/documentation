@@ -22,17 +22,20 @@ The pipeline will always populate the `refr_domain_userid` and `refr_dvce_tstamp
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/cross_navigation_config/jsonschema/1-0-0",
-    data: {
-      enabled: false,
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "cross_navigation_config"
-    }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for cross navigation enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "cross_navigation_config", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string", "description": "The name of the vendor for this config (the only valid value for scala-common enrich is com.snowplowanalytics.snowplow.enrichments)" }, "name": { "type": "string", "description": "The name of the config (the only valid value for scala-common enrich is cross_navigation_config)" }, "enabled": { "type": "boolean", "description": "Whether to enable this enrichment" } }, "required": ["vendor", "name", "enabled"], "additionalProperties": false }} />
+This enrichment has no configurable parameters. Enable it in Console.
+
+For Self-Hosted, [provide the following JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md):
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/cross_navigation_config/jsonschema/1-0-0",
+  "data": {
+    "enabled": false,
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "cross_navigation_config"
+  }
+}
+```
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

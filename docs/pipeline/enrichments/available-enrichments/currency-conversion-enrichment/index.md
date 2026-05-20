@@ -6,7 +6,8 @@ description: "Convert transaction values to a base currency using Open Exchange 
 keywords: ["currency conversion", "exchange rates", "multi-currency"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 :::tip[Don't use this enrichment]
 We recommend managing currency conversion downstream instead of using this enrichment. For example, you could bring currency exchange rate information into your data warehouse and join that data with your Snowplow data.
@@ -18,23 +19,53 @@ This enrichment only works with the legacy `tr_` and `ti_` [ecommerce atomic eve
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/currency_conversion_config/jsonschema/1-0-0",
-    data: {
-      enabled: false,
-      vendor: "com.snowplowanalytics.snowplow",
-      name: "currency_conversion_config",
-      parameters: {
-        accountType: "DEVELOPER",
-        apiKey: "{{KEY}}",
-        baseCurrency: "USD",
-        rateAt: "EOD_PRIOR"
-      }
+The enrichment takes these parameters:
+
+| Parameter      | Required | Description                                                                                                                                                                                     |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`       | ✅        | Open Exchange Rates API key.                                                                                                                                                                    |
+| `baseCurrency` | ✅        | Currency to convert all transaction values to.                                                                                                                                                  |
+| `rateAt`       | ✅        | Determines which exchange rate will be used. Only `EOD_PRIOR` is supported, meaning that the enrichment uses the exchange rate from the end of the day prior to the event's `collector_tstamp`. |
+| `accountType`  | ✅        | Level of Open Exchange Rates account. Must be `DEVELOPER`, `ENTERPRISE`, or `UNLIMITED`.                                                                                                        |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "accountType": "DEVELOPER",
+  "apiKey": "{{KEY}}",
+  "baseCurrency": "USD",
+  "rateAt": "EOD_PRIOR"
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/currency_conversion_config/jsonschema/1-0-0",
+  "data": {
+    "enabled": false,
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "currency_conversion_config",
+    "parameters": {
+      "accountType": "DEVELOPER",
+      "apiKey": "{{KEY}}",
+      "baseCurrency": "USD",
+      "rateAt": "EOD_PRIOR"
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for configuration of currency-conversion enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "currency_conversion_config", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "apiKey": { "type": "string", "description": "Open Exchange Rates API key" }, "baseCurrency": { "type": "string", "description": "Currency to convert all transaction values to" }, "rateAt": { "enum": ["EOD_PRIOR"], "description": "Determines which exchange rate will be used. Only EOD_PRIOR is supported, meaning that the enrichment uses the exchange rate from the end of the day prior to the event's collector_tstamp." }, "accountType": { "type": "string", "enum": ["DEVELOPER", "ENTERPRISE", "UNLIMITED"], "description": "Level of Open Exchange Rates account. Must be DEVELOPER, ENTERPRISE, or UNLIMITED." } }, "required": ["apiKey", "baseCurrency", "rateAt", "accountType"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

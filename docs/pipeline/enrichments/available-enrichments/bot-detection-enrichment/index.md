@@ -6,6 +6,8 @@ description: "Consolidate bot indicators from multiple enrichments into a single
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 :::note[Availability]
@@ -39,23 +41,53 @@ It's safe to enable all sources - `useYauaa`, `useIab`, `useAsnLookups`, `useCli
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1",
-    data: {
-      name: "bot_detection_enrichment_config",
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      enabled: true,
-      parameters: {
-        useYauaa: true,
-        useIab: true,
-        useAsnLookups: true,
-        useClientSideDetection: true
-      }
+The enrichment takes these parameters:
+
+| Parameter                | Required | Description                                                                  |
+| ------------------------ | -------- | ---------------------------------------------------------------------------- |
+| `useYauaa`               | ✅        | Whether to use YAUAA `deviceClass`/`agentClass` as a bot signal.             |
+| `useIab`                 | ✅        | Whether to use IAB spiders and robots as a bot signal.                       |
+| `useAsnLookups`          | ✅        | Whether to use ASN lookups as a bot signal.                                  |
+| `useClientSideDetection` | ✅        | Whether to use the client-side bot detection tracker plugin as a bot signal. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "useYauaa": true,
+  "useIab": true,
+  "useAsnLookups": true,
+  "useClientSideDetection": true
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1",
+  "data": {
+    "name": "bot_detection_enrichment_config",
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "enabled": true,
+    "parameters": {
+      "useYauaa": true,
+      "useIab": true,
+      "useAsnLookups": true,
+      "useClientSideDetection": true
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for Bot Detection enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "bot_detection_enrichment_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "useYauaa": { "type": "boolean", "description": "Whether to use YAUAA deviceClass/agentClass as a bot signal" }, "useIab": { "type": "boolean", "description": "Whether to use IAB spiders and robots as a bot signal" }, "useAsnLookups": { "type": "boolean", "description": "Whether to use ASN lookups as a bot signal" }, "useClientSideDetection": { "type": "boolean", "description": "Whether to use the client-side bot detection tracker plugin as a bot signal" } }, "required": ["useYauaa", "useIab", "useAsnLookups", "useClientSideDetection"], "additionalProperties": false } }, "required": ["vendor", "name", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

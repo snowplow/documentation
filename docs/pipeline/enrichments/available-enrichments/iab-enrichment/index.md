@@ -6,6 +6,8 @@ description: "Identify bot and spider traffic using the IAB/ABC International Sp
 keywords: ["IAB enrichment", "bot detection", "spider detection"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 The IAB Spiders and Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
@@ -49,33 +51,74 @@ For example, the user agent string `Chrome Chrome MyBot Chrome` will match an en
 The example shows `database` and `uri` fields. Snowplow CDI customers don't need to worry about these properties: check Console for pre-configured values suitable for your cloud.
 :::
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-1",
-    data: {
-      name: "iab_spiders_and_robots_enrichment",
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      enabled: false,
-      parameters: {
-        ipFile: {
-          database: "ip_exclude_current_cidr.txt",
-          uri: "s3://my-private-bucket/iab"
-        },
-        excludeUseragentFile: {
-          database: "exclude_current.txt",
-          uri: "s3://my-private-bucket/iab"
-        },
-        includeUseragentFile: {
-          database: "include_current.txt",
-          uri: "s3://my-private-bucket/iab"
-        },
-        excludeUseragents: [],
-        includeUseragents: []
-      }
+The enrichment takes these parameters:
+
+| Parameter              | Required | Description                                                                                                                       |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `ipFile`               | ✅        | Path to IP address exclude file.                                                                                                  |
+| `excludeUseragentFile` | ✅        | Path to user agent exclude file.                                                                                                  |
+| `includeUseragentFile` | ✅        | Path to user agent include file.                                                                                                  |
+| `includeUseragents`    | ❌        | Additional user agent patterns to classify as browsers, extending `includeUseragentFile`. Case-insensitive substring match.       |
+| `excludeUseragents`    | ❌        | Additional user agent patterns to classify as spiders/robots, extending `excludeUseragentFile`. Case-insensitive substring match. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "ipFile": {
+    "database": "ip_exclude_current_cidr.txt",
+    "uri": "s3://my-private-bucket/iab"
+  },
+  "excludeUseragentFile": {
+    "database": "exclude_current.txt",
+    "uri": "s3://my-private-bucket/iab"
+  },
+  "includeUseragentFile": {
+    "database": "include_current.txt",
+    "uri": "s3://my-private-bucket/iab"
+  },
+  "excludeUseragents": [],
+  "includeUseragents": []
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-1",
+  "data": {
+    "name": "iab_spiders_and_robots_enrichment",
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "enabled": false,
+    "parameters": {
+      "ipFile": {
+        "database": "ip_exclude_current_cidr.txt",
+        "uri": "s3://my-private-bucket/iab"
+      },
+      "excludeUseragentFile": {
+        "database": "exclude_current.txt",
+        "uri": "s3://my-private-bucket/iab"
+      },
+      "includeUseragentFile": {
+        "database": "include_current.txt",
+        "uri": "s3://my-private-bucket/iab"
+      },
+      "excludeUseragents": [],
+      "includeUseragents": []
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for IAB Spiders and Robots enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "iab_spiders_and_robots_enrichment", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "ipFile": { "description": "Path to IP address exclude file", "type": "object", "properties": { "database": { "enum": ["ip_exclude_current_cidr.txt"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "excludeUseragentFile": { "description": "Path to user agent exclude file", "type": "object", "properties": { "database": { "enum": ["exclude_current.txt"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "includeUseragentFile": { "description": "Path to user agent include file", "type": "object", "properties": { "database": { "enum": ["include_current.txt"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "includeUseragents": { "description": "Additional user agent patterns to classify as browsers, extending includeUseragentFile. Case-insensitive substring match.", "type": "array", "items": { "type": "string" } }, "excludeUseragents": { "description": "Additional user agent patterns to classify as spiders/robots, extending excludeUseragentFile. Case-insensitive substring match.", "type": "array", "items": { "type": "string" } } }, "required": ["ipFile", "excludeUseragentFile", "includeUseragentFile"], "additionalProperties": false } }, "required": ["vendor", "name", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

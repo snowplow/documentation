@@ -6,6 +6,8 @@ description: "Resolve IP addresses to geographic locations and ISP information u
 keywords: ["IP lookup", "geolocation", "MaxMind"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_index.md"
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -63,27 +65,62 @@ Alternatively, you can [set up Micro to receive external IP addresses](/docs/tes
 
 </TestingWithMicro>
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
-    data: {
-      name: "ip_lookups",
-      vendor: "com.snowplowanalytics.snowplow",
-      enabled: true,
-      parameters: {
-        geo: {
-          database: "GeoLite2-City.mmdb",
-          uri: "..."
-        },
-        asn: {
-          database: "GeoLite2-ASN.mmdb",
-          uri: "..."
-        }
+The enrichment takes these parameters:
+
+| Parameter        | Required | Description                              |
+| ---------------- | -------- | ---------------------------------------- |
+| `geo`            | ❌        | MaxMind GeoIP2 / GeoLite2 City database. |
+| `isp`            | ❌        | MaxMind GeoIP2 ISP database.             |
+| `domain`         | ❌        | MaxMind GeoIP2 Domain database.          |
+| `connectionType` | ❌        | MaxMind GeoIP2 Connection Type database. |
+| `asn`            | ❌        | MaxMind GeoLite2 ASN database.           |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "geo": {
+    "database": "GeoLite2-City.mmdb",
+    "uri": "..."
+  },
+  "asn": {
+    "database": "GeoLite2-ASN.mmdb",
+    "uri": "..."
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
+  "data": {
+    "name": "ip_lookups",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "geo": {
+        "database": "GeoLite2-City.mmdb",
+        "uri": "..."
+      },
+      "asn": {
+        "database": "GeoLite2-ASN.mmdb",
+        "uri": "..."
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for MaxMind GeoIP2 ip lookups enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "ip_lookups", "format": "jsonschema", "version": "2-0-1" }, "type": "object", "properties": { "vendor": { "type": "string", "maxLength": 256 }, "name": { "type": "string", "maxLength": 256 }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "geo": { "type": "object", "properties": { "database": { "enum": ["GeoLite2-City.mmdb", "GeoIP2-City.mmdb"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "isp": { "type": "object", "properties": { "database": { "enum": ["GeoIP2-ISP.mmdb"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "domain": { "type": "object", "properties": { "database": { "enum": ["GeoIP2-Domain.mmdb"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "connectionType": { "type": "object", "properties": { "database": { "enum": ["GeoIP2-Connection-Type.mmdb"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] }, "asn": { "type": "object", "properties": { "database": { "enum": ["GeoLite2-ASN.mmdb"] }, "uri": { "type": "string", "format": "uri" } }, "required": ["database", "uri"] } }, "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 Each of the parameters is an object with two required fields: `database` and `uri`:
 - The `database` field is an enum that contains the name of the MaxMind database file.

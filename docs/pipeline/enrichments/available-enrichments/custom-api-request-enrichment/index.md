@@ -6,7 +6,8 @@ description: "Enrich events with data from external HTTP APIs by making custom A
 keywords: ["API enrichment", "HTTP API", "external data enrichment"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 The API request enrichment lets you add data to a Snowplow event via your own or third-party proprietary HTTP(S) API. Only basic access authentication is supported.
 
@@ -18,61 +19,130 @@ As with all enrichments, only one instance of it can be configured within your p
 
 For historical reasons, the configuration uses terms that are no longer used elsewhere in Snowplow.
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-2",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "api_request_enrichment_config",
-      enabled: false,
-      parameters: {
-        inputs: [
-          {
-            key: "user",
-            json: {
-              field: "contexts",
-              schemaCriterion: "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
-              jsonPath: "$.userId"
-            }
-          },
-          {
-            key: "client",
-            pojo: {
-              field: "app_id"
-            }
-          }
-        ],
-        api: {
-          http: {
-            method: "GET",
-            uri: "http://api.acme.com/users/{{client}}/{{user}}?format=json",
-            timeout: 2000,
-            authentication: {
-              httpBasic: {
-                username: "xxx",
-                password: "yyy"
-              }
-            }
-          }
-        },
-        outputs: [
-          {
-            schema: "iglu:com.acme/user/jsonschema/1-0-0",
-            json: {
-              jsonPath: "$.record"
-            }
-          }
-        ],
-        cache: {
-          size: 3000,
-          ttl: 60
-        },
-        ignoreOnError: false
+The enrichment takes these parameters:
+
+| Parameter       | Required | Description                                                                                       |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `inputs`        | ✅        | Specifies the data points from the Snowplow event to use as keys when performing your API lookup. |
+| `api`           | ✅        | Defines how the enrichment can access your API.                                                   |
+| `outputs`       | ✅        | Specify how to process the returned JSON.                                                         |
+| `cache`         | ✅        | Improves the enrichment's performance by storing values retrieved from the API.                   |
+| `ignoreOnError` | ❌        | Whether to make the event fail if the API request fails.                                          |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "inputs": [
+    {
+      "key": "user",
+      "json": {
+        "field": "contexts",
+        "schemaCriterion": "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
+        "jsonPath": "$.userId"
+      }
+    },
+    {
+      "key": "client",
+      "pojo": {
+        "field": "app_id"
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for API Request Enrichment configuration", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "api_request_enrichment_config", "format": "jsonschema", "version": "1-0-2" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "inputs": { "type": "array", "description": "Specifies the data points from the Snowplow event to use as keys when performing your API lookup", "items": { "type": "object", "properties": { "key": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" }, "pojo": { "type": "object", "properties": { "field": { "type": "string" } }, "additionalProperties": false }, "json": { "type": "object", "properties": { "field": { "type": "string", "enum": ["unstruct_event", "contexts", "derived_contexts"] }, "schemaCriterion": { "type": "string", "pattern": "^iglu:[a-zA-Z0-9-_.]+/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+/([1-9][0-9]*|\\*)-((?:0|[1-9][0-9]*)|\\*)-((?:0|[1-9][0-9]*)|\\*)$" }, "jsonPath": { "type": "string", "pattern": "^\\$.*$" } }, "additionalProperties": false } }, "additionalProperties": false, "minProperties": 2, "maxProperties": 2, "required": ["key"] } }, "api": { "type": "object", "description": "Defines how the enrichment can access your API", "minProperties": 1, "maxProperties": 1, "properties": { "http": { "type": "object", "properties": { "method": { "type": "string", "enum": ["GET", "POST", "PUT"] }, "uri": { "type": "string" }, "timeout": { "type": "integer", "minimum": 1, "maximum": 60000 }, "authentication": { "type": "object", "properties": { "httpBasic": { "type": "object", "properties": { "username": { "type": "string" }, "password": { "type": "string" } }, "required": ["username", "password"], "additionalProperties": false } }, "additionalProperties": false } }, "required": ["method", "uri", "timeout", "authentication"], "additionalProperties": false } }, "additionalProperties": false }, "outputs": { "type": "array", "description": "Specify how to process the returned JSON", "minItems": 1, "items": { "type": "object", "properties": { "schema": { "type": "string", "pattern": "^iglu:([a-zA-Z0-9-_.]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([1-9][0-9]*(?:-(?:0|[1-9][0-9]*)){2})$" }, "json": { "type": "object", "properties": { "jsonPath": { "type": "string", "pattern": "^\\$.*$" } }, "required": ["jsonPath"], "additionalProperties": false } }, "required": ["schema"], "minProperties": 2, "maxProperties": 2, "additionalProperties": false } }, "cache": { "type": "object", "description": "Improves the enrichment's performance by storing values retrieved from the API", "properties": { "size": { "type": "integer", "minimum": 0 }, "ttl": { "type": "integer", "minimum": 0, "maximum": 86400 } }, "additionalProperties": false, "required": ["size", "ttl"] }, "ignoreOnError": { "type": ["boolean", "null"], "description": "Whether to make the event fail if the API request fails" } }, "additionalProperties": false, "required": ["inputs", "api", "outputs", "cache"] } }, "additionalProperties": false, "required": ["name", "vendor", "enabled", "parameters"] }} />
+  ],
+  "api": {
+    "http": {
+      "method": "GET",
+      "uri": "http://api.acme.com/users/{{client}}/{{user}}?format=json",
+      "timeout": 2000,
+      "authentication": {
+        "httpBasic": {
+          "username": "xxx",
+          "password": "yyy"
+        }
+      }
+    }
+  },
+  "outputs": [
+    {
+      "schema": "iglu:com.acme/user/jsonschema/1-0-0",
+      "json": {
+        "jsonPath": "$.record"
+      }
+    }
+  ],
+  "cache": {
+    "size": 3000,
+    "ttl": 60
+  },
+  "ignoreOnError": false
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-2",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "api_request_enrichment_config",
+    "enabled": false,
+    "parameters": {
+      "inputs": [
+        {
+          "key": "user",
+          "json": {
+            "field": "contexts",
+            "schemaCriterion": "iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-*-*",
+            "jsonPath": "$.userId"
+          }
+        },
+        {
+          "key": "client",
+          "pojo": {
+            "field": "app_id"
+          }
+        }
+      ],
+      "api": {
+        "http": {
+          "method": "GET",
+          "uri": "http://api.acme.com/users/{{client}}/{{user}}?format=json",
+          "timeout": 2000,
+          "authentication": {
+            "httpBasic": {
+              "username": "xxx",
+              "password": "yyy"
+            }
+          }
+        }
+      },
+      "outputs": [
+        {
+          "schema": "iglu:com.acme/user/jsonschema/1-0-0",
+          "json": {
+            "jsonPath": "$.record"
+          }
+        }
+      ],
+      "cache": {
+        "size": 3000,
+        "ttl": 60
+      },
+      "ignoreOnError": false
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

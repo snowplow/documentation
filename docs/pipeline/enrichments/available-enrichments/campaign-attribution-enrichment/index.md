@@ -6,7 +6,8 @@ description: "Link events to marketing campaigns by extracting attribution data 
 keywords: ["campaign attribution", "marketing attribution", "UTM parameters"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This enrichment can be used to link events to marketing campaigns, using the query string parameters.
 
@@ -30,27 +31,59 @@ The configuration of the enrichment defines which parameters in the URL (e.g. `u
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1",
-    data: {
-      name: "campaign_attribution",
-      vendor: "com.snowplowanalytics.snowplow",
-      enabled: true,
-      parameters: {
-        mapping: "static",
-        fields: {
-          mktMedium: ["utm_medium"],
-          mktSource: ["utm_source"],
-          mktTerm: ["utm_term"],
-          mktContent: ["utm_content"],
-          mktCampaign: ["utm_campaign"]
-        }
+The enrichment takes these parameters:
+
+| Parameter | Required | Description                                                          |
+| --------- | -------- | -------------------------------------------------------------------- |
+| `mapping` | ❌        | Mapping mode. Must be one of: `static`, `script`.                    |
+| `fields`  | ✅        | Maps event marketing fields to the URL query string parameter names. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "mapping": "static",
+  "fields": {
+    "mktMedium": ["utm_medium"],
+    "mktSource": ["utm_source"],
+    "mktTerm": ["utm_term"],
+    "mktContent": ["utm_content"],
+    "mktCampaign": ["utm_campaign"]
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1",
+  "data": {
+    "name": "campaign_attribution",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "mapping": "static",
+      "fields": {
+        "mktMedium": ["utm_medium"],
+        "mktSource": ["utm_source"],
+        "mktTerm": ["utm_term"],
+        "mktContent": ["utm_content"],
+        "mktCampaign": ["utm_campaign"]
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a campaign attribution enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "campaign_attribution", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "mapping": { "type": ["string", "null"], "enum": ["static", "script"] }, "fields": { "type": "object", "properties": { "mktMedium": { "$ref": "#/definitions/stringArray" }, "mktSource": { "$ref": "#/definitions/stringArray" }, "mktTerm": { "$ref": "#/definitions/stringArray" }, "mktContent": { "$ref": "#/definitions/stringArray" }, "mktCampaign": { "$ref": "#/definitions/stringArray" }, "mktClickId": { "type": "object", "additionalProperties": { "type": "string" } } }, "required": ["mktMedium", "mktSource", "mktTerm", "mktContent", "mktCampaign"], "additionalProperties": false } }, "required": ["fields"], "additionalProperties": false } }, "additionalProperties": false, "definitions": { "stringArray": { "type": "array", "items": { "type": "string" } } }, "required": ["name", "vendor", "enabled", "parameters"] }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

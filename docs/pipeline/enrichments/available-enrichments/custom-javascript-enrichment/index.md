@@ -6,7 +6,8 @@ description: "Write custom JavaScript code to transform and enrich events with f
 keywords: ["JavaScript enrichment", "custom enrichment", "event transformation"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 With this enrichment, you can write a JavaScript function to be executed for each event. Use this enrichment to apply your own business logic to your events, including:
 * Adding extra data to the event in the form of [entities](/docs/fundamentals/entities/index.md)
@@ -49,26 +50,69 @@ Not all ES6 features are guaranteed to work. If you are unsure whether a specifi
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow",
-      name: "javascript_script_config",
-      enabled: false,
-      parameters: {
-        script: "ZnVuY3Rpb24gcHJvY2VzcyhldmVudCkgew0KDQogIHZhciBwbGF0Zm9ybSA9IGV2ZW50LmdldFBsYXRmb3JtKCksDQogICAgICBhcHBJZCAgICA9IGV2ZW50LmdldEFwcF9pZCgpOw0KDQogIGlmIChwbGF0Zm9ybSA9PSAic2VydmVyIiAmJiBhcHBJZCAhPSAic2VjcmV0Iikgew0KICAgIHRocm93ICJTZXJ2ZXItc2lkZSBldmVudCBoYXMgaW52YWxpZCBhcHBfaWQ6ICIgKyBhcHBJZDsNCiAgfQ0KICANCiAgaWYgKGFwcElkID09IG51bGwpIHsNCiAgICByZXR1cm4gW107DQogIH0NCg0KICAvLyBVc2UgbmV3IFN0cmluZygpIGJlY2F1c2UgaHR0cDovL25lbHNvbndlbGxzLm5ldC8yMDEyLzAyL2pzb24tc3RyaW5naWZ5LXdpdGgtbWFwcGVkLXZhcmlhYmxlcy8NCiAgdmFyIGFwcElkVXBwZXIgPSBuZXcgU3RyaW5nKGFwcElkLnRvVXBwZXJDYXNlKCkpOw0KDQogIHJldHVybiBbIHsgc2NoZW1hOiAiaWdsdTpjb20uYWNtZS9mb28vanNvbnNjaGVtYS8xLTAtMCIsDQogICAgICAgICAgICAgICBkYXRhOiB7IGFwcElkVXBwZXI6IGFwcElkVXBwZXIgfQ0KICAgICAgICAgICB9IF07DQp9"
-      }
+The enrichment takes these parameters:
+
+| Parameter | Required | Description                           |
+| --------- | -------- | ------------------------------------- |
+| `script`  | ✅        | The JavaScript code to run.           |
+| `config`  | ❌        | Parameters to pass to the enrichment. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Console has two editors: a JavaScript editor for the `script`, and a JSON editor for any `config` parameters. Enter your `script` directly as JavaScript — no base64 encoding required. For example:
+
+```js
+function process(event) {
+
+  var platform = event.getPlatform(),
+      appId    = event.getApp_id();
+
+  if (platform == "server" && appId != "secret") {
+    throw "Server-side event has invalid app_id: " + appId;
+  }
+
+  if (appId == null) {
+    return [];
+  }
+
+  var appIdUpper = new String(appId.toUpperCase());
+
+  return [ { schema: "iglu:com.acme/foo/jsonschema/1-0-0",
+               data: { appIdUpper: appIdUpper }
+           } ];
+}
+```
+
+```json
+{}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "javascript_script_config",
+    "enabled": false,
+    "parameters": {
+      "script": "ZnVuY3Rpb24gcHJvY2VzcyhldmVudCkgew0KDQogIHZhciBwbGF0Zm9ybSA9IGV2ZW50LmdldFBsYXRmb3JtKCksDQogICAgICBhcHBJZCAgICA9IGV2ZW50LmdldEFwcF9pZCgpOw0KDQogIGlmIChwbGF0Zm9ybSA9PSAic2VydmVyIiAmJiBhcHBJZCAhPSAic2VjcmV0Iikgew0KICAgIHRocm93ICJTZXJ2ZXItc2lkZSBldmVudCBoYXMgaW52YWxpZCBhcHBfaWQ6ICIgKyBhcHBJZDsNCiAgfQ0KICANCiAgaWYgKGFwcElkID09IG51bGwpIHsNCiAgICByZXR1cm4gW107DQogIH0NCg0KICAvLyBVc2UgbmV3IFN0cmluZygpIGJlY2F1c2UgaHR0cDovL25lbHNvbndlbGxzLm5ldC8yMDEyLzAyL2pzb24tc3RyaW5naWZ5LXdpdGgtbWFwcGVkLXZhcmlhYmxlcy8NCiAgdmFyIGFwcElkVXBwZXIgPSBuZXcgU3RyaW5nKGFwcElkLnRvVXBwZXJDYXNlKCkpOw0KDQogIHJldHVybiBbIHsgc2NoZW1hOiAiaWdsdTpjb20uYWNtZS9mb28vanNvbnNjaGVtYS8xLTAtMCIsDQogICAgICAgICAgICAgICBkYXRhOiB7IGFwcElkVXBwZXI6IGFwcElkVXBwZXIgfQ0KICAgICAgICAgICB9IF07DQp9"
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for configuration of a JavaScript dynamic scripting enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "javascript_script_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "script": { "type": "string" }, "config": { "type": "object", "description": "Parameters to pass to the enrichment" } }, "required": ["script"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
 
-:::note[Formatting]
+  </TabItem>
+</Tabs>
 
-If you're using [Snowplow Console](https://console.snowplowanalytics.com) to configure the enrichment, provide your script directly as JavaScript in the editor. Use the JSON editor to provide any `config` parameters.
+:::note[Encoding]
 
-You can also provide JavaScript directly to [Micro](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md).
+If you're using [Snowplow Console](https://console.snowplowanalytics.com) toconfigure the enrichment, or configuring or [Micro](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md), provide your script directly as JavaScript.
 
 For other configurations, you'll need to provide the JavaScript code encoded in base64.
 

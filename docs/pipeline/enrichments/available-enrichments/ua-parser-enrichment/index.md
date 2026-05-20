@@ -6,6 +6,8 @@ description: "Parse user agent strings to extract browser, operating system, and
 keywords: ["user agent parser", "browser detection", "device detection"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 :::tip[Use YAUAA instead]
@@ -91,21 +93,47 @@ The example output is based on the user agent string `Mozilla/5.0 (Macintosh; In
 
 The optional `database` and `uri` parameters allow you to specify a custom ruleset. By default, the enrichment will use the one defined in the [ua-parser](https://github.com/ua-parser/uap-core/) library.
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/ua_parser_config/jsonschema/1-0-1",
-    data: {
-      vendor: "com.snowplowanalytics.snowplow",
-      name: "ua_parser_config",
-      enabled: true,
-      parameters: {
-        database: "regexes-latest.yaml",
-        uri: "s3://snowplow-hosted-assets/third-party/ua-parser/"
-      }
+The enrichment takes these parameters:
+
+| Parameter  | Required | Description                                           |
+| ---------- | -------- | ----------------------------------------------------- |
+| `database` | ❌        | Filename of a custom ruleset.                         |
+| `uri`      | ❌        | URI of the bucket containing the custom ruleset file. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "database": "regexes-latest.yaml",
+  "uri": "s3://snowplow-hosted-assets/third-party/ua-parser/"
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/ua_parser_config/jsonschema/1-0-1",
+  "data": {
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "ua_parser_config",
+    "enabled": true,
+    "parameters": {
+      "database": "regexes-latest.yaml",
+      "uri": "s3://snowplow-hosted-assets/third-party/ua-parser/"
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for configuration of ua-parser enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "ua_parser_config", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "database": { "type": "string" }, "uri": { "type": "string", "format": "uri" } }, "additionalProperties": false } }, "required": ["name", "vendor", "enabled"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

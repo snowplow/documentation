@@ -6,6 +6,8 @@ description: "Parse user agent strings with advanced detection using Yet Another
 keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 The YAUAA (Yet Another User Agent Analyzer) enrichment is a user agent parser and analyzer. It uses the [YAUAA library](https://yauaa.basjes.nl/). The library is stored in memory; there is no interaction with an external system.
@@ -53,28 +55,50 @@ Alternatively, add the following `meta` tag with `Delegate-CH` to the header sec
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow.enrichments/yauaa_enrichment_config/jsonschema/1-0-0",
-    data: {
-      enabled: true,
-      vendor: "com.snowplowanalytics.snowplow.enrichments",
-      name: "yauaa_enrichment_config",
-      parameters: {
-        cacheSize: 10000
-      }
+The enrichment takes one parameter:
+
+| Parameter   | Required | Description                                                                                                                  |
+| ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `cacheSize` | ❌        | Number of already parsed user agents to keep in memory for faster processing. Default is 10000. Set to 0 to disable caching. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "cacheSize": 10000
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/yauaa_enrichment_config/jsonschema/1-0-0",
+  "data": {
+    "enabled": true,
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "name": "yauaa_enrichment_config",
+    "parameters": {
+      "cacheSize": 10000
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for YAUAA enrichment config", "self": { "vendor": "com.snowplowanalytics.snowplow.enrichments", "name": "yauaa_enrichment_config", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "cacheSize": { "type": "integer" } }, "additionalProperties": false } }, "required": ["vendor", "name", "enabled"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
 <TestingWithMicro/>
 ```
-
-The `cacheSize` property determines the number of already parsed user agents that are kept in memory for faster processing. By default, the cache size is 10000. Set `cacheSize` to 0 to disable caching.
 
 ## Output
 

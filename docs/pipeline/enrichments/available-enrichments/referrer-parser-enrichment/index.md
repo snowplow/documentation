@@ -6,7 +6,8 @@ description: "Extract attribution data from referrer URLs to identify traffic so
 keywords: ["referrer parser", "traffic source", "attribution", "referer"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This enrichment uses the [Snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referrer URLs.
 
@@ -14,38 +15,83 @@ This is particularly useful when looking for traffic from specific search engine
 
 ## Configuration
 
-<SchemaProperties
-  overview={{ enrichment: true }}
-  example={{
-    schema: "iglu:com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-1",
-    data: {
-      name: "referer_parser",
-      vendor: "com.snowplowanalytics.snowplow",
-      enabled: true,
-      parameters: {
-        internalDomains: [],
-        database: "referers-latest.json",
-        uri: "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
-        referrers: {
-          search: {
-            "Search website 1": {
-              domains: ["search.acme.com"],
-              parameters: ["q"]
-            },
-            "Search website 2": {
-              domains: ["search.acmebis.com"]
-            }
+The enrichment takes these parameters:
+
+| Parameter         | Required | Description                                                                |
+| ----------------- | -------- | -------------------------------------------------------------------------- |
+| `internalDomains` | ✅        | Subdomains to classify as `Internal` traffic sources.                      |
+| `database`        | ✅        | Filename of the referer-parser database.                                   |
+| `uri`             | ✅        | URI of the bucket containing the database file.                            |
+| `referrers`       | ❌        | Custom referrer-to-category mappings, taking precedence over the database. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "internalDomains": [],
+  "database": "referers-latest.json",
+  "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
+  "referrers": {
+    "search": {
+      "Search website 1": {
+        "domains": ["search.acme.com"],
+        "parameters": ["q"]
+      },
+      "Search website 2": {
+        "domains": ["search.acmebis.com"]
+      }
+    },
+    "social": {
+      "Social website": {
+        "domains": ["social.acme.com"]
+      }
+    }
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-1",
+  "data": {
+    "name": "referer_parser",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "internalDomains": [],
+      "database": "referers-latest.json",
+      "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
+      "referrers": {
+        "search": {
+          "Search website 1": {
+            "domains": ["search.acme.com"],
+            "parameters": ["q"]
           },
-          social: {
-            "Social website": {
-              domains: ["social.acme.com"]
-            }
+          "Search website 2": {
+            "domains": ["search.acmebis.com"]
+          }
+        },
+        "social": {
+          "Social website": {
+            "domains": ["social.acme.com"]
           }
         }
       }
     }
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for referer-parser customization enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "referer_parser", "format": "jsonschema", "version": "2-0-1" }, "type": "object", "properties": { "vendor": { "type": "string" }, "name": { "type": "string" }, "enabled": { "type": "boolean" }, "parameters": { "type": "object", "properties": { "internalDomains": { "type": "array", "items": { "type": "string" } }, "database": { "type": "string" }, "uri": { "type": "string", "format": "uri" }, "referrers": { "type": "object", "additionalProperties": { "type": "object", "additionalProperties": { "type": "object", "properties": { "domains": { "type": "array", "minItems": 1, "items": { "type": "string" } }, "parameters": { "type": "array", "items": { "type": "string" } } }, "required": ["domains"], "additionalProperties": false } } } }, "required": ["internalDomains", "database", "uri"], "additionalProperties": false } }, "required": ["name", "vendor", "enabled", "parameters"], "additionalProperties": false }} />
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"

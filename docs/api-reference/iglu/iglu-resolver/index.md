@@ -69,7 +69,7 @@ When the resolver is asked for a schema, it checks its cache first. On a miss, i
 
 The resolver caches both successful and failed lookups, keyed per-registry:
 
-- A schema fetched successfully is cached until it's evicted by the LRU algorithm (when the cache reaches `cacheSize`).
+- A schema fetched successfully is cached until it's evicted by the LRU algorithm (when the cache reaches `cacheSize` or after `cacheTtl` seconds).
 - If a registry responds with "not found", that result is also cached, so the registry won't be queried again for that schema until the entry is evicted.
 - If a registry responds with another error (timeout, network error, server fault), the resolver retries that registry up to three more times before marking the schema as missing for that registry.
 

@@ -33,12 +33,12 @@ export const versions = {
   esLoader: '3.0.1',
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.4.0',
+  rdbLoader: '6.4.2',
   s3Loader: '3.2.0',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.9.1',
+  lakeLoader: '0.10.0',
   snowflakeStreamingLoader: '0.5.1',
-  databricksStreamingLoader: '0.4.0',
+  databricksStreamingLoader: '0.5.0',
 
   // Data Modelling
   // dbt

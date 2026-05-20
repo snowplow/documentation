@@ -5,10 +5,6 @@ description: "Documentation for Campaigns and UTMs in the web tracker."
 keywords: ["tracker", "configuration"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Campaign tracking is used to identify the source of traffic coming to a website.
 

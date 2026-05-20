@@ -1,47 +1,55 @@
 import React, { useEffect, useState } from 'react'
-import { onPreferencesChanged, show } from 'cookie-though'
 import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY } from '../../constants/config'
 import styles from './styles.module.css'
 
+const getConsentState = () => {
+  try {
+    const raw = Cookies.get('_ketch_consent_v1_')
+    if (!raw) return null
+    const parsed = JSON.parse(atob(decodeURIComponent(raw)))
+    return {
+      analytics: parsed.analytics?.status === 'granted',
+      advertising: parsed.targeted_advertising?.status === 'granted',
+    }
+  } catch {
+    return null
+  }
+}
+
+const consentLabel = (consent) => {
+  if (!consent) return 'You currently have no cookies enabled'
+
+  const enabled = ['Essential Services']
+  if (consent.analytics) enabled.push('Data Analytics')
+  if (consent.advertising)
+    enabled.push('Targeted Advertising and Personalization')
+
+  if (enabled.length === 1)
+    return `You currently have only ${enabled[0]} cookies enabled`
+  return `You currently have ${enabled.slice(0, -1).join(', ')} and ${
+    enabled[enabled.length - 1]
+  } cookies enabled`
+}
+
 export default function ManageCookiePreferences() {
-  const [consentState, setConsentState] = useState(
-    'You currently have no cookies enabled'
-  )
+  const [consent, setConsent] = useState(null)
 
   useEffect(() => {
-    onPreferencesChanged((preferences) => {
-      preferences.cookieOptions.forEach(({ id, isEnabled }) => {
-        if (id === 'analytics') {
-          if (isEnabled) {
-            setConsentState(
-              'You currently have Necessary and Analytics cookies enabled'
-            )
-          } else {
-            setConsentState(
-              'You currently have only the Necessary cookies enabled'
-            )
-          }
-        }
-      })
-    })
+    setConsent(getConsentState())
 
-    const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
-    if (cookiePreferences) {
-      if (cookiePreferences.includes('analytics:1')) {
-        setConsentState(
-          'You currently have Necessary and Analytics cookies enabled'
-        )
-      } else {
-        setConsentState('You currently have only the Necessary cookies enabled')
-      }
-    }
+    const handler = () => setConsent(getConsentState())
+    window.ketch('on', 'consent', handler)
+    return () => window.ketch('off', 'consent', handler)
   }, [])
 
   return (
     <p>
-      <span>{consentState}</span>
-      <button type="button" className={styles.manageButton} onClick={show}>
+      <span>{consentLabel(consent)}</span>
+      <button
+        type="button"
+        className={styles.manageButton}
+        onClick={() => window.ketch('showPreferences')}
+      >
         Preferences
       </button>
     </p>

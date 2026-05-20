@@ -1,5 +1,4 @@
 ```mdx-code-block
-import ReactMarkdown from 'react-markdown';
 import CodeBlock from '@theme/CodeBlock';
 ```
 

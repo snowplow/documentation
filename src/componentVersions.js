@@ -25,7 +25,7 @@ export const versions = {
   enrich: '6.11.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.6',
-  snowbridge: '5.1.0',
+  snowbridge: '5.1.1',
 
   // Loaders
   bqLoader: '2.2.0',

@@ -73,14 +73,14 @@ The resolver caches both successful and failed lookups, keyed per-registry:
 - If a registry responds with "not found", that result is also cached, so the registry won't be queried again for that schema until the entry is evicted.
 - If a registry responds with another error (timeout, network error, server fault), the resolver retries that registry up to three more times before marking the schema as missing for that registry.
 
-If `cacheTtl` is set, successfully fetched schemas are also re-resolved after the TTL expires. This lets you patch schemas without restarting the pipeline (though patching production schemas isn't recommended). For real-time pipelines, `cacheTtl` prevents stale "failed" results from persisting for too long.
+If `cacheTtl` is set, cache entries (both successful fetches and "not found" results) are re-resolved after the TTL expires. This lets you patch schemas without restarting the pipeline (though patching production schemas isn't recommended). For real-time pipelines, `cacheTtl` also prevents stale "not found" results from persisting for too long — for example, if a schema was missing when first looked up but has since been uploaded.
 
 ### Registry priority
 
 For each schema lookup, registries are sorted by:
 
 1. `vendorPrefixes` — the resolver checks registries with a matching `vendorPrefix` first. Other registries aren't skipped, just queried later.
-2. Class priority — a hardcoded value per registry type. Embedded registries are always checked before HTTP registries (within the same `vendorPrefix` match).
+2. Class priority — a hardcoded value per registry type. Embedded registries (which read schemas from the local filesystem or from resources bundled with the application, rather than over HTTP) are always checked before HTTP registries within the same `vendorPrefix` match.
 3. `priority` — the user-defined value in your config. Only affects ordering within the same class priority.
 
 Lower numbers mean higher priority. `[0, 1, 2, 3]` is checked left to right.

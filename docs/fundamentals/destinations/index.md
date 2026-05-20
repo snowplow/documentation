@@ -10,7 +10,7 @@ keywords: ["data destinations", "warehouses", "event forwarding", "reverse ETL"]
 
 Snowplow gives you multiple ways to get your data where it needs to go. You can load data into warehouses and lakes for deeper analysis, forward individual events to marketing platforms in real-time, or send aggregated segments to activate your insights.
 
-The right approach depends on your use case, but most organizations benefit from combining approaches: storing data centrally in a warehouse, while selectively forwarding specific events or segments to operational systems.
+The right approach depends on your use case, but most organizations benefit from combining approaches: storing data centrally in a warehouse while selectively forwarding specific events or segments to operational systems.
 
 ## Data warehouses and lakes
 

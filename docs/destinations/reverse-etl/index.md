@@ -3,7 +3,7 @@ title: "Reverse ETL for data activation"
 sidebar_label: "Reverse ETL"
 sidebar_position: 3
 description: "Use reverse ETL to sync warehouse data to marketing and advertising platforms, activating audience segments built from Snowplow behavioral data."
-keywords: ["reverse ETL", "data activation", "Census", "audience sync", "marketing platforms"]
+keywords: ["reverse ETL", "data activation", "Census", "audience sync", "marketing platforms", "Fivetran Activations"]
 ---
 
 Reverse ETL tools sync data from your warehouse to external platforms such as Salesforce, Google Ads, and marketing automation tools. Combined with Snowplow's behavioral data, this lets you activate warehouse-derived audiences, scores, and attributes directly in the tools where your teams work.

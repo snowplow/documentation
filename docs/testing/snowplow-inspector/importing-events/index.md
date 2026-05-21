@@ -37,7 +37,7 @@ This can be useful for testing many devices at once, e.g. multiple mobile device
 [ngrok](https://ngrok.com/) is a service for creating ad-hoc network endpoints that can accept / tunnel requests and offers an API for other services to introspect and act on the requests that it received.
 Using ngrok, you can create an endpoint, use that endpoint as a Collector destination for your tracking, and then examine any events sent to it via the extension.
 
-When you attempt to import from ngrok, the extension will attempt to connect to the ngrok tool running on your local machine on port 4040 (`localhost:4040`) to access the [ngrok Agent API](https://ngrok.com/docs/ngrok-agent/api/).
+When you attempt to import from ngrok, the extension will attempt to connect to the ngrok tool running on your local machine on port 4040 (`localhost:4040`) to access the [ngrok Agent API](https://ngrok.com/docs/agent/api).
 If successful, any Snowplow events sent to the corresponding tunnel endpoint will appear in the extension.
 
 ## Remote debugging with Chrome DevTools

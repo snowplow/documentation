@@ -139,7 +139,7 @@ The config file is a JSON file which can be viewed by running the python script 
 <TabItem value="desc" label="Field Description" default>
 
 - `config` _(required - object)_:
-  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) only
+  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) only
   - `filtered_events_table_name` _(optional - string)_: Name of filtered events table, if not provided it will not be generated
   - `users_table_name` _(optional - string)_: Name of users table, default `events_users` if user schema(s) provided
   - `validate_schemas` _(optional - boolean)_: If you want to validate schemas loaded from each iglu registry or not, default `true`

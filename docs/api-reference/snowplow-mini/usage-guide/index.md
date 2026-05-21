@@ -58,12 +58,12 @@ Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of cha
 
 To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. There are 2 options:
 
-- Use igluctl’s [server keygen](/docs/api-reference/iglu/igluctl-2/index.md#server-keygen) subcommand
+- Use igluctl’s [server keygen](/docs/api-reference/iglu/igluctl/index.md#server-keygen) subcommand
 - Use any HTTP client e.g. cURL
 
 #### Option 1
 
-First, [download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+First, [download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 
@@ -96,7 +96,7 @@ should return a read key and a write key.
 To test and send non-standard Snowplow events such as your own custom-contexts and unstructured events you can load them into the Iglu repository local to the Snowplow Mini instance.
 
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
-2. [Download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+2. [Download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 1. Run the executable with the following input:
 
@@ -223,12 +223,12 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl’s [static push](/docs/api-reference/iglu/igluctl-2/index.md#static-push) subcommand to put our custom schema into the Iglu Server
+- Use igluctl’s [static push](/docs/api-reference/iglu/igluctl/index.md#static-push) subcommand to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
 #### Option 1
 
-First, [download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+First, [download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 

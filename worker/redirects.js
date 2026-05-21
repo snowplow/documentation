@@ -428,6 +428,18 @@ const fallbackRules = [
   // Bot filtering moved to events section
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
   ['/deprecation-policy', '/lifecycle-policy', 301],
+  // Iglu docs refactor — deleted/relocated pages
+  ['/docs/api-reference/iglu/igluctl-2/*', '/docs/api-reference/iglu/igluctl/:splat', 301],
+  ['/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/', '/docs/fundamentals/schemas/#self-describing-json-schema-anatomy', 301],
+  ['/docs/api-reference/iglu/common-architecture/self-describing-jsons/', '/docs/fundamentals/schemas/#self-describing-json-data-in-the-event-payload', 301],
+  ['/docs/api-reference/iglu/common-architecture/schemaver/', '/docs/fundamentals/schemas/versioning/#schema-version-format', 301],
+  ['/docs/api-reference/iglu/common-architecture/schema-resolution/', '/docs/api-reference/iglu/iglu-resolver/#how-schemas-are-resolved', 301],
+  ['/docs/api-reference/iglu/common-architecture/*', '/docs/api-reference/iglu/', 301],
+  ['/docs/api-reference/iglu/iglu-central-setup/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
+  ['/docs/api-reference/iglu/iglu-repositories/iglu-central/*', '/docs/api-reference/iglu/iglu-repositories/#iglu-central', 301],
+  ['/docs/api-reference/iglu/iglu-repositories/iglu-server/setup/*', '/docs/api-reference/iglu/iglu-repositories/iglu-server/#deploy-iglu-server', 301],
+  ['/docs/api-reference/iglu/iglu-clients/*', '/docs/api-reference/iglu/', 301],
+  ['/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/*', '/docs/api-reference/iglu/iglu-repositories/', 301],
 ];
 
 function findInRules(rules, pathname) {

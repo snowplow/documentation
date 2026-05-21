@@ -749,4 +749,4 @@ testing/cypress/
     - In the `commands.js` file, the commands are defined based on the `Micro` [helper module](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/jsm/helpers.js)
     - The `integration/helpers_spec.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/integration/helpers_spec.js) tests the helper functions that define the matching logic. For a different custom matching logic, you can tweak the helper functions, and then test them.
 2. Environment variables.
-    - Cypress allows for [many ways](https://docs.cypress.io/guides/guides/environment-variables.html) to set environment variables. In this example we set them in the `plugins/index.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/plugins/index.js).
+    - Cypress allows for [many ways](https://docs.cypress.io/app/guides/environment-variables) to set environment variables. In this example we set them in the `plugins/index.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/plugins/index.js).

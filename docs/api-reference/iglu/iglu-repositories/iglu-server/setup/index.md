@@ -142,7 +142,7 @@ Dummy Iglu Server works with single hardcoded master API key - `48b267d7-cd2b-4
 
 ## Logging
 
-Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html) underneath. Which can be configured via system properties.
+Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html) underneath. Which can be configured via system properties.
 
 For example:
 

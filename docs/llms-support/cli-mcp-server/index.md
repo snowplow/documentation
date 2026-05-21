@@ -1,6 +1,6 @@
 ---
-title: "MCP server"
-sidebar_label: "MCP server"
+title: "CLI MCP server"
+sidebar_label: "CLI MCP server"
 sidebar_position: 80
 description: "Use the Snowplow CLI MCP server to interact with your tracking plans through AI assistants."
 keywords: ["mcp", "model context protocol", "ai", "cli", "tracking plan"]
@@ -17,7 +17,7 @@ The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index
 - Validate tracking plans and source applications
 
 :::info[Read more]
-For a step-by-step guide to using the Snowplow MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
+For a step-by-step guide to using the Snowplow CLI MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
 :::
 
 The MCP server allows AI assistants to interact with the Snowplow CLI using the `snowplow-cli mcp` command.

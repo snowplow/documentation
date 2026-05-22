@@ -73,7 +73,7 @@ vars:
 ### 5. Additional vendor specific configuration
 
 :::info[BigQuery Only]
-Verify which column your events table is partitioned on. It will likely be partitioned on `load_tstamp` or `collector_tstamp`. Unless it is partitioned on `derived_tstamp` (legacy behaviour) you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
+Verify which column your events table is partitioned on. It will likely be partitioned on `load_tstamp` or `collector_tstamp`. Unless it is partitioned on `derived_tstamp` (legacy behavior) you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"
 vars:

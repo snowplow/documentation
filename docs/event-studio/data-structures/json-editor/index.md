@@ -25,7 +25,7 @@ Select whether you'd like to create an [Event](/docs/fundamentals/events/index.m
 
 You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off. For comprehensive guidance on all supported JSON Schema features and validation options, see the [JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
 
-![](images/json-template.png)
+![JSON editor "Create data structure" page showing a dark-themed code editor pre-populated with a JSON Schema template including description, properties, additionalProperties, type, required, self (vendor, name, format, version 1-0-0), and $schema fields. Validate and Exit without saving buttons are shown at the bottom.](images/json-template.png)
 
 Once you are done, click the **Validate** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a draft.
 
@@ -39,11 +39,11 @@ Make the required edits to the JSON schema. You can use the 'Difference' toggle 
 
 In the example below we have changed the `maxLength` of `example_field_1`.
 
-![](images/image-5.png)
+![Side-by-side diff view comparing "Latest production version (1-0-0)" on the left with "New version" on the right. Line 7 is highlighted: maxLength is changed from 128 (shown in red on the left) to 256 (shown in green on the right).](images/image-5.png)
 
 Once you are happy with your changes, click **Validate** to ensure you have valid JSON markup. Then click **Publish to development environment** to save your changes to your development environment.
 
-![](images/image-7.png)
+![Publish version to development environment dialog for the "enrichments_workflow" schema showing three version options: Patch (1-0-1) — currently selected, Non-breaking (1-0-2), and Breaking (2-0-0). A warning banner advises selecting the correct version increment to avoid load failures.](images/image-7.png)
 
 The versioning dialog will appear, at this point you have three options:
 

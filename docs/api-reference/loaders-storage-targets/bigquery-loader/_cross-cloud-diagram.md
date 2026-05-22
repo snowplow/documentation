@@ -1,5 +1,4 @@
 ```mdx-code-block
-import Admonition from '@theme/Admonition';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_diagram.md';

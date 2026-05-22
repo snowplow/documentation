@@ -75,7 +75,7 @@ When returned as part of `Data`, `time.Time` instances will [serialize in JSON](
 
 :::
 
-Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](/docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/api-reference/iglu/common-architecture/schemaver/index.md). For example:
+Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](/docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/fundamentals/schemas/versioning/index.md#schema-version-format). For example:
 
 | **Schema URI**                                                  | **Type** | **Key**                                              |
 | --------------------------------------------------------------- | -------- | ---------------------------------------------------- |
@@ -145,8 +145,86 @@ The following hash algorithms are supported:
 - `sha256` - SHA-256 hash (256 bits)
 - `md5` - MD5 hash (128 bits)
 
-```
+```js
 hash(input.Data["app_id"], "sha1")
+```
+
+* `allContexts(data, contextName)` returns an array of all entity instances for a given entity name across all schema versions present in the data object. Instances are ordered by schema version descending (highest version first). `contextName` is the snake_case vendor and name portion of the key, without the `contexts_` prefix and version suffix. Returns an empty array if no matching keys are found.
+
+:::note
+`data` must be a parsed object, not a raw string. Use this function with `snowplow_mode`, or after parsing the data with `JSON.parse()`.
+:::
+
+1. Access a field from the first entity instance:
+
+```js
+// input.Data: {"contexts_nl_basjes_yauaa_context_1":[{"agentName":"python-requests",...}]}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  x.Data = allContexts(data, "nl_basjes_yauaa_context")[0].agentName;
+  // returns "python-requests"
+  return x;
+}
+```
+
+2. When multiple schema versions of the same entity are present, concatenate `label` values, with the highest version first:
+
+```js
+// input.Data: {"contexts_com_example_1":[{"label":"v1"}],"contexts_com_example_2":[{"label":"v2"}]}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  x.Data = allContexts(data, "com_example").map(c => c.label).join(",");
+  // returns "v2,v1"
+  return x;
+}
+```
+
+3. When no matching entity is found, the function returns an empty array — use an optional chain to avoid errors:
+
+```js
+// input.Data: {"contexts_com_other_1":[{"url":"https://example.com"}]}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  const instances = allContexts(data, "com_example");
+  x.Data = instances[0]?.url ?? "not_found";
+  // returns "not_found"
+  return x;
+}
+```
+
+* `allUnstruct(data, eventName)` returns the payload object for a self-describing event matching the given event name. `eventName` is the snake_case vendor and name portion of the key, without the `unstruct_event_` prefix and version suffix. Returns `undefined` if no matching key is found.
+
+:::note
+`data` must be a parsed object, not a raw string. Use this function with `snowplow_mode`, or after parsing the data with `JSON.parse()`.
+:::
+
+1. Access a field from the event payload:
+
+```js
+// input.Data: {"unstruct_event_com_snowplowanalytics_snowplow_add_to_cart_1":{"sku":"item41",...}}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  x.Data = allUnstruct(data, "com_snowplowanalytics_snowplow_add_to_cart").sku;
+  // returns "item41"
+  return x;
+}
+```
+
+2. When no matching event is found, the function returns `undefined` — use the nullish coalescing operator (`??`) to provide a fallback:
+
+```js
+// input.Data: {"unstruct_event_com_other_1":{"sku":"item1"}}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  x.Data = allUnstruct(data, "com_example") ?? "not_found";
+  // returns "not_found"
+  return x;
+}
 ```
 
 ## Configuration

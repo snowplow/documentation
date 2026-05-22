@@ -75,7 +75,7 @@ docker run -p 9090:9090 \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 
-This will ensure Micro uses your Iglu registry, in addition to [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md).
+This will ensure Micro uses your Iglu registry, in addition to [Iglu Central](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central).
 
 For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-iglu-resolver-configuration).
 

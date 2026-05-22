@@ -146,9 +146,48 @@ On the next interval after this call, a ping will be generated even if the user 
 
 This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
 
+### Activity metrics
+
+Since JavaScript tracker version 4.8.0, you can track more detailed activity metrics. These metrics show how much interaction happened on the page, including the number of clicks, touches, key presses, absolute scroll distance (in either direction), and distance traveled by the mouse.
+
+To enable activity metrics, set `activityMetrics` to `true` when enabling activity tracking (the default is `false`):
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableActivityTracking', {
+  activityMetrics: true,
+  ...
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+enableActivityTracking({
+  activityMetrics: true,
+  ...
+});
+```
+  </TabItem>
+</Tabs>
+
+With activity metrics enabled, each page ping includes an [`activity_metrics`](/docs/events/ootb-data/page-activity-tracking/index.md#activity-metrics-entity) entity.
+
+Metrics accumulate between page pings and reset after each one, so each ping reflects activity during that interval only. They also reset when a new page view is tracked (see [reset page pings on page view](#reset-page-pings-on-page-view)).
+
+:::note[Manual updates]
+
+Calling `updatePageActivity` triggers a ping but does not add to the activity metrics. Only real user interactions (mouse movement, scrolling, clicks, key presses, touches) contribute to the metrics.
+
+:::
+
+Activity metrics also work with [activity tracking callbacks](#activity-tracking-callback). Set `activityMetrics: true` in the `enableActivityTrackingCallback` configuration, and the `activityMetrics` field will be available on the callback data.
+
 ## Activity tracking callback
 
-You can now perform edge analytics in the browser to reduce the number of events sent to your Collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent.
+You can perform edge analytics in the browser to reduce the number of events sent to your Collector while still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent.
 
 ### Enable callback
 
@@ -200,6 +239,8 @@ type ActivityCallbackData = {
     maxXOffset: number;
     /** The maximum Y scroll position for the current page view */
     maxYOffset: number;
+    /** Since version 4.8.0. Activity metrics accumulated since the last ping (only when activityMetrics is enabled) */
+    activityMetrics?: ActivityMetrics;
 };
 ```
 

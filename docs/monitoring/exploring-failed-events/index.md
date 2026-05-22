@@ -113,7 +113,7 @@ An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respe
 
 Open the _“Pipeline configuration”_ section for the desired pipeline and select _“Failed events stream”_.
 
-![enable failed events stream](images/enable-stream.png)
+![The Pipeline configuration page showing the "Failed events stream" option under Validation, with an Enable button to activate streaming of failed events in Snowplow TSV format](images/enable-stream.png)
 
 Click _“Enable”_ and wait for the changes to take effect.
 
@@ -128,7 +128,7 @@ You can use the following loaders with the failed events stream:
 
 Pick your desired destination and follow the steps in the UI, selecting _“failed events”_ as the  type of events.
 
-![loader type selection](images/loader-type.png)
+![The Events type selector showing two radio button options: "Enriched events" and "Failed events", with "Failed events" selected](images/loader-type.png)
 
 Note that as with any other loader, you will first need to create a connection to your warehouse or lake, and then the loader itself.
 

@@ -19,7 +19,7 @@ The SPAL is a license from Snowplow Analytics, designed for products and compone
 
 ## Which license is the SPAL based on?
 
-The SPAL is based on the [PolyForm Noncommercial License](https://polyformproject.org/licenses/noncommercial/1.0.0/).
+The SPAL is based on the [PolyForm Noncommercial License](https://polyformproject.org/licenses/noncommercial/1.0.0).
 
 ## I have commercially licensed software from Snowplow. Does this impact me?
 

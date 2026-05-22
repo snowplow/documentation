@@ -9,7 +9,6 @@ keywords: ["databricks loader", "lakeflow", "unity catalog", "databricks lakehou
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/_diagram.md';
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/_deploy-overview.md';
 ```

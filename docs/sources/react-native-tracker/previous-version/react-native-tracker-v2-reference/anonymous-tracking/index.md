@@ -7,10 +7,6 @@ description: "Enable client-side and server-side user anonymization in React Nat
 keywords: ["react native tracker v2 anonymous tracking", "user anonymization", "privacy tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 :::info
 

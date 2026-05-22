@@ -14,7 +14,7 @@ This is the value that identifies your metric. When you create your metric in La
 
 ## Metric Type
 
-![](images/01-metric-type.png)
+![Metric Type configuration section showing an Event Name text field and two radio button options: Conversion and Numeric Metric, with Numeric Metric selected by default.](images/01-metric-type.png)
 
 This section allows you to select the Metric Type for this Tag. The options are:
 
@@ -23,7 +23,7 @@ This section allows you to select the Metric Type for this Tag. The options are:
 
 ## Authentication
 
-![](images/02-authentication.png)
+![Authentication section with two empty text input fields: Project Key and Environment Key.](images/02-authentication.png)
 
 ### Project Key (Required)
 
@@ -35,7 +35,7 @@ In this text box you need to provide the key for the **environment** your metric
 
 ## Authorization
 
-![](images/02-authorization.png)
+![Authorization section with a single empty text input field labeled Access Token.](images/02-authorization.png)
 
 ### Access Token (Required)
 
@@ -43,7 +43,7 @@ In this text box you need to provide the access token to be used for authorizing
 
 ## Metric Options
 
-![](images/03-metric-options.png)
+![Metric Options section with a single empty text input field labeled Event property for Metric Value.](images/03-metric-options.png)
 
 This configuration section is available only if your [Metric Type](#metric-type) is set to **Numeric Metric**. In that case, this configuration option is required to be set.
 
@@ -63,7 +63,7 @@ In order to specify the common event property of interest, Key Path notation can
 
 ### User Options
 
-![](images/04-user-options-default.png)
+![User Options section with a User Value dropdown set to Common User ID (the default selection).](images/04-user-options-default.png)
 
 This section allows you to configure how to populate the value of the user property that uniquely identifies the context that the LaunchDarkly metric is about.
 
@@ -77,13 +77,13 @@ With this drop-down option you can select how to derive the value for the `user`
 
 #### Event property for user context key
 
-![](images/05-user-value-custom.png)
+![User Options section with User Value dropdown set to Custom, revealing an additional empty text input field labeled Event property for user context key.](images/05-user-value-custom.png)
 
 This option is revealed if you have previously selected **Custom** as the option for the [User Value](#user-value). In this text box you can specify the Property Key from the GTM Event to use. You can use Key Path notation here if you want to denote a nested key (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1.0.userId` to use the `userId` from the Snowplow client session entity (in array index 0)).
 
 ### Other Context Keys
 
-![](images/05-other-context-keys.png)
+![Other Context Keys section showing an empty Context Keys to Add table with Key and Value columns and an Add Row button.](images/05-other-context-keys.png)
 
 #### Context Keys to Add
 
@@ -91,7 +91,7 @@ Using this table you can specify context keys depending on your experiment's [ra
 
 ## Advanced Event Settings
 
-![](images/06-advanced-time-default.png)
+![Advanced Event Settings section with a LaunchDarkly event creation time dropdown set to Set to current time (the default selection).](images/06-advanced-time-default.png)
 
 ### LaunchDarkly event creation time
 
@@ -104,13 +104,13 @@ The available options are:
 
 #### Event property name
 
-![](images/07-advanced-time-from-event.png)
+![Advanced Event Settings section with LaunchDarkly event creation time set to Set from event, revealing an Event property name field pre-filled with x-sp-dvce_created_tstamp.](images/07-advanced-time-from-event.png)
 
 This text box is revealed if the [LaunchDarkly event creation time](#launchdarkly-event-creation-time) is set to "Set from event". Here you can specify the event property to use in order to set the event time (in Unix milliseconds). For example in the above image, the LaunchDarkly creation date will be set from the device created timestamp (`dvce_created_tstamp`) of the Snowplow event (prefixed with `x-sp-` in the client common event).
 
 ## Versioning
 
-![](images/08-versioning.png)
+![Versioning section with a Version text field containing the example value Container Version.](images/08-versioning.png)
 
 The LaunchDarkly event import REST API accepts a `User-Agent` header, which helps identify the source of traffic and debug issues. One of the components to construct this header is the `Version`, which can be any format.
 
@@ -126,7 +126,7 @@ As an example using the default version, the User-Agent header could be like:
 
 ## Logs Settings
 
-![](images/09-logs-settings.png)
+![Logs Settings section with three radio button options: Do not log, Log to console during debug and preview (selected by default), and Always log to console.](images/09-logs-settings.png)
 
 Through the Logs Settings you can control the logging behavior of the LaunchDarkly Tag. The available options are:
 

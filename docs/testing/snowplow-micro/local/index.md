@@ -108,7 +108,7 @@ This means your tracking is set up correctly and your events are valid (`GOOD`).
 
 Would you rather see the events visually? Open [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your browser. You might want to check [a few tips on how to use the dashboard](/docs/testing/snowplow-micro/ui/index.md).
 
-![Micro dashboard overview](../images/overview.png)
+![Snowplow Micro dashboard at localhost:9090/micro/ui showing a bar chart of event volume over time and a table of 81 events. All visible rows show Valid status, with event names including page_ping, ping_event, and pause_event collected from a YouTube example page.](../images/overview.png)
 
 Alternatively, you can inspect the events via [the API](/docs/api-reference/snowplow-micro/api/index.md). For example, try:
 

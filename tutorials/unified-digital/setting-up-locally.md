@@ -46,7 +46,7 @@ Installing the package:
 
 7. Delete some of the other default pieces that are in the default project as they are not needed.
 
-    ![](./screenshots/Screenshot_2024-07-04_at_17.14.37.png)
+    ![dbt_project.yml configuration showing the models block with demo_project configured to materialize the example directory as views](./screenshots/Screenshot_2024-07-04_at_17.14.37.png)
 
 ## Setting Variables
 

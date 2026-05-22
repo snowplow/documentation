@@ -10,11 +10,11 @@ In this tutorial, you've explored the **live viewer profiles** solution accelera
 
 You have successfully built a real time system for processing event data including:
 - **Web tracking application** for collecting media events
-![Application Output](images/video.png)
+![Browser at localhost:3000/media showing the Big Buck Bunny video playing at 0:26/9:56 in the Snowplow JavaScript Tracker demo app](images/video.png)
 - **Snowplow Collector and Snowbridge** for event processing and forwarding
 - **Live Viewer back-end** for managing real-time data with Kafka and DynamoDB
 - **Live Viewer front-end** for visualizing real-time user activity on the web tracking application
-![Live viewer frontend](images/live-viewer.png)
+![Snowplow Live Viewer Profile dashboard at localhost:8280 showing "Messages received: 5 | Live viewers: 1" with a JSON message displaying viewer_id, status PAUSED_VIDEO, and video playback position](images/live-viewer.png)
 
 This architecture highlights how real-time insights can be achieved using event-driven systems in a streaming context.
 

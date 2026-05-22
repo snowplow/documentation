@@ -73,11 +73,11 @@ A [tracking plan](/docs/event-studio/tracking-plans/index.md) groups related eve
 
 To find the tracking plan ID, click **Implement tracking** on the tracking plan page in Console to get the command directly:
 
-![Implement tracking button on the tracking plan page](images/dp-track.png)
+![Tracking plan page in Snowplow Console showing the Implement tracking button, which opens a modal with the npx snowtype generate command pre-filled with the tracking plan's dataProductIds argument](images/dp-track.png)
 
 You can also copy the ID from the URL bar and add it to the `dataProductIds` array in your configuration file. The ID is the last part of the URL after `/data-products/`:
 
-![Tracking plan ID in the URL bar](images/dp-id.png)
+![Browser address bar with the tracking plan UUID highlighted in a red box (52461212-9ea0-4d90-a695-e524c62f7198), with a red arrow pointing to it](images/dp-id.png)
 
 ```json
 {
@@ -89,7 +89,7 @@ You can also copy the ID from the URL bar and add it to the `dataProductIds` arr
 
 You can add individual [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) if you don't need the full tracking plan. Find the event specification ID on its page in Console. The ID is the last part of the URL after `/event-specifications/`:
 
-![Event specification ID on the event specification page](images/es-id.png)
+![Event specification page in Snowplow Console with the browser URL bar showing the event specification ID as the last segment of the path after /event-specifications/](images/es-id.png)
 
 Add the ID to the `eventSpecificationIds` array in your configuration file:
 
@@ -103,7 +103,7 @@ Add the ID to the `eventSpecificationIds` array in your configuration file:
 
 To generate code for a specific [data structure](/docs/fundamentals/schemas/index.md), you need its schema tracking URI. Find it on the data structure page in Console, under the **Overview** tab:
 
-![Schema tracking URI on the data structure page](images/ds-url.png)
+![Data structure overview page in Console with the Schema tracking URI field highlighted in a red box, showing iglu:com.snowplowanalytics.console/data_structures/jsonschema/1-0-0](images/ds-url.png)
 
 Add the URI to the `dataStructures` array in your configuration file:
 
@@ -119,7 +119,7 @@ Add the URI to the `dataStructures` array in your configuration file:
 
 [Iglu Central](http://iglucentral.com/) hosts schemas that you can use in your tracking. Find the schema tracking URI on the Iglu Central website under **General Information**:
 
-![Schema tracking URI on Iglu Central](images/iglu-url.png)
+![Iglu Central schema details for button_click with the Schema tracking URL field highlighted in a red box, showing iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0](images/iglu-url.png)
 
 Add the URI to the `igluCentralSchemas` array in your configuration file:
 

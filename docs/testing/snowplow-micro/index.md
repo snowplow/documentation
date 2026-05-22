@@ -19,7 +19,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 * Getting familiar with Snowplow
 * Debugging and testing, including [automated testing](/docs/testing/snowplow-micro/automated-testing/index.md)
 
-![Snowplow Micro dashboard](./images/overview.png)
+![Snowplow Micro dashboard at localhost:9090/micro/ui showing a bar chart of event volume over time and a table of 81 events. All visible rows show Valid status, with event names including page_ping, ping_event, and pause_event collected from a YouTube example page.](./images/overview.png)
 
 Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/index.md).
 

@@ -136,4 +136,4 @@ To run the Cloud Storage Loader on Dataflow, it is also necessary to specify add
 - `--region=[REGION]` The [region](https://cloud.google.com/compute/docs/regions-zones) where the Dataflow job will be launched.
 - `--gcpTempLocation=gs://[BUCKET]/` The GCS bucket where temporary files necessary to run the job (e.g. JARs) will be stored.
 
-The list of all the options can be found at [https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options).
+The list of all the options can be found at [the Dataflow documentation](https://docs.cloud.google.com/dataflow/docs/reference/pipeline-options?hl=en).

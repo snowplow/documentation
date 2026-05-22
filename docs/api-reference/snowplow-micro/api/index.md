@@ -7,10 +7,6 @@ keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 date: "2026-05-22"
 ---
 
-```mdx-code-block
-import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
-```
 
 This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md).
 

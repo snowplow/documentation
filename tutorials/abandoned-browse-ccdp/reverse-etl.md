@@ -84,7 +84,7 @@ WHERE
     - enter the SQL query above
     - click **Preview** and ensure it returns data
 
-![Census Dataset](images/retl-datasets.png)
+![Census Datasets page showing the "Most viewed product for each user today" dataset sourced from Snowflake, with the SQL query visible that aggregates product view data per user](images/retl-datasets.png)
 
 4. Configure the audience segment:
     - select **Segments** from the menu
@@ -93,7 +93,7 @@ WHERE
     - add filters to the segment based on the image below
     - click preview to confirm that the correct data is being returned
 
-![Census Sync](images/retl-census.png)
+![Census segment "Abandoned browse to Braze" with filters requiring a non-blank email, more than 5 seconds of engagement, and no add-to-cart action, showing 1 matching result](images/retl-census.png)
 
 5. Configure the sync settings to send data from our audience to Braze:
     - select **Syncs** from the menu
@@ -103,7 +103,7 @@ WHERE
     - configure the mapping as shown in the image below
     - click **Run Now**
 
-![Census Mapping](images/retl-census-mapping.png)
+![Census Data Configuration showing column mappings for the Braze sync: EMAIL as the identifier mapped to External User ID, with ADD_TO_CART, CAMPAIGN, CHANNEL, FIRST_NAME, PRODUCT, PRODUCT_URL, and TIME_ENGAGED_IN_S all mapped to matching Braze attributes](images/retl-census-mapping.png)
 
 ## Monitoring and optimization
 

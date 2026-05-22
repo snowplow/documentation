@@ -2,8 +2,9 @@
 title: "Snowplow Micro REST API"
 sidebar_label: "REST API"
 sidebar_position: 1
-description: "Snowplow Micro REST API endpoints for querying good events, bad events, and resetting cache."
+description: "Snowplow Micro REST API endpoints for querying events."
 keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
+date: "2026-05-22"
 ---
 
 ```mdx-code-block
@@ -13,11 +14,236 @@ import CodeBlock from '@theme/CodeBlock';
 
 This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md).
 
+## Authentication
+
+When running Micro locally, no authentication is required. You can query all endpoints directly.
+
+When using [Micro in Console](/docs/testing/snowplow-micro/console/index.md), you need to authenticate with a Console access token. First, [create an API key](/docs/account-management/index.md#create-an-api-key) and use it to [obtain an access token](/docs/account-management/index.md#obtain-an-access-token). Then pass the token in the `Authorization` header:
+
+```bash
+curl -H 'Authorization: Bearer <JWT>' \
+  https://<CONSOLE_MICRO_URL>/micro/events
+```
+
+## /micro/events
+
+This endpoint queries events with server-side filtering, sorting, and pagination. It handles both valid and failed events.
+
+### HTTP method
+
+`POST` (`Content-Type: application/json`)
+
+### Request format
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `page` | integer | Yes | Page number (1-indexed). |
+| `pageSize` | integer | Yes | Number of events per page. Capped at 100 when persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)). |
+| `filters` | array | Yes | List of column filters (see below). |
+| `validEvents` | boolean or null | No | `true` for valid events only, `false` for failed events only, `null` (default) for all events. |
+| `timeRange` | object or null | No | Time range filter (see below). |
+| `sorting` | object or null | No | Sorting specification (see below). |
+
+Each object in the `filters` array has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `column` | string | Column name to filter on (e.g., `app_id`, `event_name`). |
+| `value` | string | Filter value. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `domain_userid`, `v_tracker`. |
+
+The `timeRange` object has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `start` | string (ISO 8601) or null | Start timestamp, inclusive. |
+| `end` | string (ISO 8601) or null | End timestamp, exclusive. |
+
+The `sorting` object has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `column` | string | Column to sort by. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `domain_userid`, `v_tracker`, `collector_tstamp`. |
+| `desc` | boolean | `true` for descending, `false` for ascending. |
+
+Example request:
+
+```bash
+curl -X POST http://localhost:9090/micro/events \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "filters": [
+      {"column": "app_id", "value": "myapp"}
+    ],
+    "validEvents": true,
+    "timeRange": {
+      "start": "2025-01-01T00:00:00Z",
+      "end": "2025-01-02T00:00:00Z"
+    },
+    "sorting": {"column": "collector_tstamp", "desc": true},
+    "page": 1,
+    "pageSize": 50
+  }'
+```
+
+### Response format
+
+| Field | Type | Description |
+|---|---|---|
+| `events` | array | Array of event objects in the [Analytics SDK](https://github.com/snowplow/snowplow-scala-analytics-sdk) JSON format. |
+| `totalPages` | integer | Total number of pages available. |
+| `totalItems` | integer | Total number of events matching the filters. |
+
+Example response with a valid event:
+
+```json
+{
+  "events": [
+    {
+      "event_id": "bee0a6d7-fc17-4392-b2bc-2208e8e944f3",
+      "event_name": "page_view",
+      "app_id": "myapp",
+      "collector_tstamp": "2025-01-01T12:30:45.123Z",
+      "platform": "web",
+      "v_tracker": "js-4.0.0"
+    }
+  ],
+  "totalPages": 5,
+  "totalItems": 234
+}
+```
+
+Failed events (queried with `"validEvents": false`) have the same JSON structure, but include a `contexts_com_snowplowanalytics_snowplow_failure_1` field with error details. For example, an event that failed due to an unresolved schema:
+
+```json
+{
+  "events": [
+    {
+      "event_id": "1ebca17a-0e59-4848-ba3a-50ff6ac8ace7",
+      "event": "unstruct",
+      "app_id": "myapp",
+      "collector_tstamp": "2026-05-22T10:45:21.287Z",
+      "platform": "web",
+      "v_tracker": "js-4.0.0",
+      "contexts_com_snowplowanalytics_snowplow_failure_1": [
+        {
+          "data": {
+            "foo": "bar"
+          },
+          "errors": [
+            {
+              "source": "unstruct",
+              "message": "Resolution error: schema iglu:com.example/missing/jsonschema/1-0-0 not found",
+              "lookupHistory": [
+                {
+                  "errors": [{"error": "NotFound"}],
+                  "attempts": 1,
+                  "repository": "Iglu Central",
+                  "lastAttempt": "2026-05-22T10:45:22.281Z"
+                },
+                {
+                  "errors": [{"error": "NotFound"}],
+                  "attempts": 1,
+                  "repository": "Iglu Client Embedded",
+                  "lastAttempt": "2026-05-22T10:45:22.216Z"
+                }
+              ]
+            }
+          ],
+          "schema": "iglu:com.example/missing/jsonschema/1-0-0",
+          "timestamp": "2026-05-22T10:45:22.215Z",
+          "failureType": "ResolutionError",
+          "componentName": "snowplow-micro",
+          "componentVersion": "4.2.0",
+          "_schema_version": "iglu:com.snowplowanalytics.snowplow/failure/jsonschema/1-0-0"
+        }
+      ]
+    }
+  ],
+  "totalPages": 1,
+  "totalItems": 1
+}
+```
+
+## /micro/timeline
+
+This endpoint returns event counts aggregated into time buckets. The Micro UI uses it to display event timelines.
+
+### HTTP method
+
+`POST` (`Content-Type: application/json`)
+
+### Request format
+
+The request body contains an array of time buckets to aggregate events into.
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `buckets` | array | Yes | List of time buckets. |
+
+Each object in the `buckets` array has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `start` | string (ISO 8601) | Start of the bucket, inclusive. |
+| `end` | string (ISO 8601) | End of the bucket, exclusive. |
+
+Example request:
+
+```bash
+curl -X POST http://localhost:9090/micro/timeline \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "buckets": [
+      {"start": "2025-01-01T00:00:00Z", "end": "2025-01-01T01:00:00Z"},
+      {"start": "2025-01-01T01:00:00Z", "end": "2025-01-01T02:00:00Z"}
+    ]
+  }'
+```
+
+### Response format
+
+| Field | Type | Description |
+|---|---|---|
+| `points` | array | One data point per input bucket, in the same order. |
+
+Each object in the `points` array has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `validEvents` | integer | Count of valid events in the bucket. |
+| `failedEvents` | integer | Count of failed events in the bucket. |
+| `bucket` | object | The original bucket definition (`start` and `end`). |
+
+Example:
+
+```json
+{
+  "points": [
+    {
+      "validEvents": 42,
+      "failedEvents": 3,
+      "bucket": {
+        "start": "2025-01-01T00:00:00Z",
+        "end": "2025-01-01T01:00:00Z"
+      }
+    },
+    {
+      "validEvents": 58,
+      "failedEvents": 1,
+      "bucket": {
+        "start": "2025-01-01T01:00:00Z",
+        "end": "2025-01-01T02:00:00Z"
+      }
+    }
+  ]
+}
+```
+
 ## /micro/all
 
 :::note[Micro in Console]
 
-This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md) (or when using persistent storage in general).
 
 :::
 
@@ -43,7 +269,7 @@ Example:
 
 :::note[Micro in Console]
 
-This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md) (or when using persistent storage in general).
 
 :::
 
@@ -61,8 +287,8 @@ JSON array of [GoodEvent](https://github.com/snowplow/snowplow-micro/blob/maste
 - `rawEvent`: contains the [RawEvent](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/RawEvent.scala#L28). It corresponds to the format of a validated event just before being enriched.
 - `event`: contains the [canonical snowplow Event](https://github.com/snowplow/snowplow-scala-analytics-sdk/blob/master/src/main/scala/com.snowplowanalytics.snowplow.analytics.scalasdk/Event.scala#L42). It is in the format of an event after enrichment, even if all the enrichments are deactivated.
 - `eventType`: type of the event.
-- `schema`: schema of the event in case of an unstructured event.
-- `contexts`: contexts of the event.
+- `schema`: schema of the event in case of a self-describing event.
+- `contexts`: entities attached to the event.
 
 An example of a response with one event can be found below:
 
@@ -305,7 +531,7 @@ List of possible fields for the filters:
 
 - `event_type`: type of the event (in `e` param);
 - `schema`: corresponds to the schema of a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) (schema of the self-describing JSON contained in `ue_pr` or `ue_px`). It automatically implies `event_type` = `ue`.
-- `contexts`: list of the schemas contained in the contexts of an event (parameters `co` or `cx`). An event must contain **all** the contexts of the list to be returned. It can also contain more contexts than the ones specified in the request.
+- `contexts`: list of the schemas contained in the entities of an event (parameters `co` or `cx`). An event must contain **all** the entities in the list to be returned. It can also contain more entities than the ones specified in the request.
 - `limit`: limit the number of events in the response (most recent events are returned).
 
 It's not necessary to specify all the fields in a request, only the ones that need to be used for filtering.
@@ -314,7 +540,7 @@ It's not necessary to specify all the fields in a request, only the ones that ne
 
 :::note[Micro in Console]
 
-This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md).
+This endpoint is not available when using Micro [through Snowplow Console](/docs/testing/snowplow-micro/console/index.md) (or when using persistent storage in general).
 
 :::
 
@@ -514,9 +740,9 @@ For example, assuming Micro running on localhost port `9090`:
 curl -X GET http://localhost:9090/micro/iglu/com.myvendor/myschema/jsonschema/1-0-0
 ```
 
-### HTTP Method
+### HTTP method
 
-GET
+`GET`
 
 ### Response format
 

@@ -43,3 +43,7 @@ Your Identities infrastructure is deployed into the same cloud as your pipeline.
 To use Identities, start by deciding which user identifiers are most relevant to your use cases. Identities supports standard Snowplow identifiers such as `user_id` and `domain_userid`, as well as custom identifiers derived from any field in the event payload. See the [configuration](/docs/identities/configuration/index.md) page for more details.
 
 After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables.
+
+## Fulfill GDPR erasure requests
+
+Identities exposes an API to remove a user's entries from the identity graph. See [Erasure](/docs/identities/erasure/index.md) for what it does and how to call it.

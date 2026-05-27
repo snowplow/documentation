@@ -10,15 +10,11 @@ date: "2026-04-10"
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
-  available={['cloud', 'pmc']}
-  helpContent="The Snowplow Assistant is in Private Preview for Snowplow BDP customers on Cloud and Private Managed Cloud."
+  available={['cloud', 'pmc','addon']}
+  helpContent="Snowplow Assistant is part of Event Studio, which is a paid addon for Snowplow CDI."
 />
 
-The Snowplow Assistant is an AI assistant embedded in [Snowplow BDP Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
-
-:::note[Private Preview]
-The Snowplow Assistant is in Private Preview. You can enable or disable it for your organization from the **Settings** section of the Snowplow Console.
-:::
+The Snowplow Assistant is an AI assistant embedded in [Snowplow Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
 
 ## How it works
 
@@ -41,6 +37,12 @@ To provide this functionality, the content of your messages and the configuratio
 ### Enabling and disabling the assistant
 
 You can enable or disable the Snowplow Assistant for your organization from the **Settings** section of the Snowplow Console. When disabled, the chat interface does not appear in the Console for any user in your organization.
+
+When enabling the feature for the first time, an admin user must accept the terms and conditions related to LLM usage within the Snowplow product.
+
+### Usage Limits
+
+The Snowplow Assistant has weekly refreshing token limits at the organisation level. The limit is set at a level that under normal usage you will not reach it.
 
 ## Capabilities
 

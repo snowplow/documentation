@@ -7,10 +7,6 @@ description: "Automatically track foreground and background transitions with lif
 keywords: ["react native lifecycle tracking", "foreground background events", "app state tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 The tracker can capture application lifecycle state changes. In particular, when the app changes state from foreground to background and vice versa.
 

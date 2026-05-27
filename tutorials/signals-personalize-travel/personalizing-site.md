@@ -80,7 +80,7 @@ Once you've performed 4 or more actions that align with a specific segment, refr
 
 Here's what the page looks like before:
 
-![Before personalization](images/no-pers.jpg)
+![Southeast Asia Destinations page before personalization, showing 12 destinations with Bangkok and Bali as the first two cards, using default images and generic descriptions](images/no-pers.jpg)
 
 After personalization for a `culinary_tourist` user, the images and descriptions have been updated to focus on food, and the food star rating has been put first:
 

@@ -37,7 +37,7 @@ It's safe to enable all sources (`useYauaa`, `useIab`, `useAsnLookups`, `useClie
 
 ## Configuration
 
-- [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-0)
+- [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/bot_detection_enrichment_config.json)
 
 ```mdx-code-block
@@ -53,13 +53,13 @@ The enrichment accepts three required boolean parameters and one optional parame
 | `useYauaa`               | boolean            | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot indicators.                                                                          |
 | `useIab`                 | boolean            | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot indicators.                                                                              |
 | `useAsnLookups`          | boolean            | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot indicators.                                                                |
-| `useClientSideDetection` | boolean (optional) | Consult the `client_side_bot_detection` entity from the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md). Defaults to `false`. Available since Enrich 6.10.0. |
+| `useClientSideDetection` | boolean            | Consult the `client_side_bot_detection` entity from the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md). Available since Enrich 6.10.0. |
 
 ### Example configuration
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/bot_detection_enrichment_config/jsonschema/1-0-1",
     "data": {
         "name": "bot_detection_enrichment_config",
         "vendor": "com.snowplowanalytics.snowplow.enrichments",

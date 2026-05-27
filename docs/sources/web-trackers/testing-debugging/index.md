@@ -40,7 +40,7 @@ The plugin uses color-coded output to distinguish between different types of inf
 You may need to enable **Verbose** logs in your Developer Tools console, as this plugin uses `console.debug` to output results.
 :::
 
-![Example console output from the debugger plugin](images/Screenshot-2021-03-28-at-20.08.35.png)
+![Browser Developer Tools console showing color-coded debugger plugin output for a tracked event, including the event name, attached context entities, and the full payload sent to the Collector](images/Screenshot-2021-03-28-at-20.08.35.png)
 
 ### Install plugin
 

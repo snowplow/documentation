@@ -16,7 +16,7 @@ Snowplow S3 Loader consumes records from an [Amazon Kinesis](http://aws.amazon.
 - Load enriched events from the "enriched" stream. These serve as input for [the RDB loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) when loading to a warehouse.
 - Load failed events from the "bad" stream.
 
-Records that can't be successfully written to S3 are written to a [second Kinesis stream](https://github.com/snowplow/snowplow-s3-loader/blob/master/examples/config.hocon.sample#L75) with the error message.
+Records that can't be successfully written to S3 are written to a second Kinesis stream with the error message.
 
 ## Output format : GZIP
 
@@ -28,7 +28,7 @@ Gzip encoding is generally used for both enriched data and bad data.
 
 ### Available on Terraform Registry
 
-[![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest)
+[![Terraform Registry](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest)
 
 A Terraform module which deploys the Snowplow S3 Loader on AWS EC2 for use with Kinesis. For installing in other environments, please see the other installation options below.
 

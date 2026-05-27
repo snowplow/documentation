@@ -27,7 +27,7 @@ The engine will be enabled when you either:
 * Apply an `ExternalBatchAttributeGroup` for an existing table
 * Run the batch engine `sync` command after creating new attribute tables
 
-Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour. Only the records that have changed since the last sync are sent to the Profiles Store.
+Once enabled, syncs begin at a fixed interval: every hour. Only the records that have changed since the last sync are sent to the Profiles Store.
 
 ## Using existing attributes
 

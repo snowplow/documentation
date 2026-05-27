@@ -18,11 +18,11 @@ Links to both templates can be found [here](/docs/sources/google-tag-manager/ind
 
 1. Navigate to the `Templates` tab in your GTM workspace and click the `Search Gallery` button in the `Tag Templates` section.
 
-![](images/tag-template-search.png)
+![GTM Templates tab showing the Tag Templates section with the Search Gallery button highlighted and an empty state, and the Variable Templates section below it also with a Search Gallery button.](images/tag-template-search.png)
 
 2. Search for "Snowplow v4"
 
-![](images/search.png)
+![Community Template Gallery search panel with "Snowplow v4" entered in the search field, showing one result: Snowplow v4 by snowplow with a green verified checkmark.](images/search.png)
 
 3. Click on the template, and then click `Add to Workspace` in the next screen. Review the permissions and click `Add` to finalize the import.
 
@@ -32,7 +32,7 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 1. Again in the `Templates` tab in your GTM workspace, click the `Search Gallery` button in the `Variable Templates` section.
 
-![](images/variable-template-search.png)
+![GTM Templates tab with the Search Gallery button in the Variable Templates section highlighted, and the Tag Templates section above it showing an empty state.](images/variable-template-search.png)
 
 2. Search for "Snowplow v4 Settings"
 
@@ -42,13 +42,13 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 1. Navigate to the `Variables` tab in your GTM workspace and click `New` in `User-Defined Variables`.
 
-![](images/variables-new.png)
+![GTM Variables tab showing built-in variables (Event, Page Hostname, Page Path, Page URL, and Referrer) and the User-Defined Variables section with the New button highlighted and an empty state.](images/variables-new.png)
 
 2. Select `Snowplow v4 Settings` from the list of available variables.
 
 3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](/docs/pipeline/collector/index.md).
 
-![](images/variable.png)
+![GTM Variable Configuration panel for Untitled Variable showing type set to Snowplow v4 Settings, Tracker Options with Tracker Name spTracker and Collector Endpoint Hostname collector.mydomain.com, and JavaScript Tracker with library set to jsDelivr and version 4.0.2.](images/variable.png)
 
 :::info
 
@@ -67,7 +67,7 @@ In this section, we will create a simple tag to fire a page view event.
 
 1. Navigate to the `Tags` tab in your GTM workspace and click `New`.
 
-![](images/new-tag.png)
+![GTM Tags tab with the New button highlighted and an empty state message indicating no tags have been created yet.](images/new-tag.png)
 
 2. Click on the `Tag Configuration` section and select `Snowplow v4`.
 

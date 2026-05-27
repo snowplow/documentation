@@ -7,25 +7,29 @@ description: "Manage your Snowplow account configuration, users, and API keys th
 keywords: ["account management", "Credentials API", "API keys", "JWT authentication", "Console API"]
 ---
 
-Manage your account configuration and users using the Snowplow Console. You can also use the underlying API directly. This page describes how to acquire an API key.
+You can control Snowplow Console (e.g., to automate certain actions) through its [API](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml). To use this API, you need to first obtain an API token.
 
-## Credentials API
+## Create an API key
 
-The API that drives Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.
+In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **API keys for managing Snowplow**. To view this page, you need a _View API keys_ permission.
 
-The following view is available in [Console](https://console.snowplowanalytics.com/), under **Settings** in the navigation bar, then **Manage organization**, then **API keys for managing Snowplow**. Users can view this page only if they have the "view" permission on API keys.
+![API keys generation view](images/accessing-generated-api-keys.png)
 
-![](images/accessing-generated-api-keys.png)
+You can create multiple API keys. It's also possible to delete any key.
 
-API keys generation view
+When you create an API key, store the _API key ID_ and the _API key_ itself in a secure location. This pair works like a combination of a username and password, and you should treat it with the same level of security.
 
-You can create multiple API keys, and it's also possible to delete any key. When a new API key is generated, the following view will appear:
+:::warning[Key privileges]
 
-![](images/generated-api-key-v3.png)
+All API keys have admin privileges. Do not share these keys with people or systems you do not trust.
 
-Newly created API key view
+:::
 
-Both the API key ID and API key are required. The API key functions like a combination of a username and password, and should be treated with the same level of security. Once you have an API key and key ID, exchanging it for a JWT is straightforward. For example, using curl, the process would look like this:
+## Obtain an access token
+
+Once you have an API key and key ID, you can exchange them for a temporary access token valid for 24 hours.
+
+For example, using curl, the process would look like this:
 
 ```bash
 curl \
@@ -33,6 +37,21 @@ curl \
   --header 'X-API-Key: <API_KEY>' \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
+
+<details>
+<summary>Previous versions</summary>
+
+A previous version of the token exchange endpoint is still available, only requiring the API key:
+
+```bash
+curl \
+  --header 'X-API-Key: <API_KEY>' \
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
+```
+
+This endpoint is deprecated and will be removed in the future. Use the v3 endpoint detailed above instead.
+
+</details>
 
 You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
@@ -42,21 +61,10 @@ The curl command above will return a JWT as follows:
 { "accessToken": "<JWT>" }
 ```
 
-You can then use this access token to supply authorization headers for subsequent API requests:
+## Use the access token with Console API
+
+You can use the access token to supply authorization headers for subsequent API requests:
 
 ```bash
 curl --header 'Authorization: Bearer <JWT>'
 ```
-
-
-### Previous versions
-
-A previous version of the token exchange endpoint is still available, only requiring the API key: 
-
-```bash
-curl \
-  --header 'X-API-Key: <API_KEY>' \
-  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
-```
-
-While this method will continue to work, the endpoint is now deprecated and will be removed in the future. Use the v3 endpoint detailed above instead.

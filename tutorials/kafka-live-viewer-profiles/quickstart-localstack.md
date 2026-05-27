@@ -43,21 +43,21 @@ Details on everything that's installed can be found in the [architecture](/tutor
 
 Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`.
 
-![First page of tracking website](images/tracker-demo.png)
+![Snowplow JavaScript Tracker Demo setup page with the Collector endpoint URI field pre-filled with "localhost:9090" and "Create tracker" and "Skip" buttons](images/tracker-demo.png)
 
 On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers.
 
-![Welcome page on tracking website](images/welcome-page.png)
+![Tracker demo welcome page listing tracking options including "Custom media tracking demo", with buttons for enabling and disabling anonymous tracking and tracking structured events](images/welcome-page.png)
 
 You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) to verify that the events are successfully sent from the web browser.
 
-![Video playing on the website](images/video.png)
+![Browser at localhost:3000/media showing the Big Buck Bunny video playing at 0:26/9:56 in the Snowplow JavaScript Tracker demo app](images/video.png)
 
 ## Step 3: Open the Live Viewer front-end
 
 Open [http://localhost:8280](http://localhost:8280) in a separate window. This will display the active users and their current state (e.g. watching video, watching advertisement, paused).
 
-![Live viewer frontend](images/live-viewer.png)
+![Snowplow Live Viewer Profile dashboard at localhost:8280 showing "Messages received: 5 | Live viewers: 1" with a JSON message displaying viewer_id, status PAUSED_VIDEO, and video playback position](images/live-viewer.png)
 
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 

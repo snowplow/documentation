@@ -28,7 +28,7 @@ Prospects on the Snowplow marketing website visit product and pricing pages, wat
 
 We want to predict if a specific prospect is likely to submit a form in the next hour, given their behavior before the prediction moment.
 
-![](./images/prediction-structure.png)
+![Diagram showing the prediction structure: a timeline of 30 days of user behaviour with attributes aggregated over time (num_pageviews, num_sessions, latest_geo), leading to a prediction point that asks whether the prospect will submit_form in the next 1 hour](./images/prediction-structure.png)
 
 For simplicity in this tutorial, we'll score prospects every 10 seconds as they browse the website. Depending on your requirements, you could score prospects at the start of each `page_view`, after certain events, or at some other time interval.
 
@@ -50,7 +50,7 @@ The system consists of three main blocks:
 2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in real time e.g., `num_page_views`, `num_customers_views`
 3. **Intermediary `/predict` API**:  an API that calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back
 
-![](./images/solution_overview.png)
+![Architecture diagram showing user events flowing from a marketing website to the Snowplow Event Collector and Signals API, then to a prospect scoring API server with a /predict endpoint. The server uses the snowplow-signals-sdk to call get_online_attributes(), feeds results through custom logic and an ML model, and returns a likely-to-convert prediction to the website.](./images/solution_overview.png)
 
 :::note
 You can replace the ML model with any other back-end system that you'd use to act on live prospects' attributes.

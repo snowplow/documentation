@@ -10,7 +10,6 @@ keywords: ["bigquery config", "loader configuration", "streaming config", "kines
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Admonition from '@theme/Admonition';
 import BigqueryConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_bigquery_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_kinesis_config.md';

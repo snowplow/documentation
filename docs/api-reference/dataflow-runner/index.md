@@ -134,6 +134,15 @@ INFO[0289] EMR cluster is in state BOOTSTRAPPING - need state WAITING, checking 
 INFO[0310] EMR cluster launched successfully; Jobflow ID: j-2DPBXD87LSGP9
 ```
 
+If the cluster fails to launch (for example, a bootstrap action error or a VPC/quota validation error), Dataflow Runner surfaces the EMR `StateChangeReason` so the reason is visible in the runner's stdout rather than only in the AWS console. From `0.7.7` onwards the output includes both the code and message:
+
+```text
+ERRO[0310] EMR cluster state change reason: code='BOOTSTRAP_FAILURE' message="Master instance (i-0123456789abcdef0) failed attempting to download bootstrap action 1 file from S3"
+ERRO[0310] Bootstrap failure detected, retrying in 183 seconds...
+```
+
+The same code and message are included in the final error returned by the `up` command when all retries are exhausted.
+
 This command adds new steps to the already running cluster. By default this command is blocking - however if you wish to submit and forget simply supply the `--async` argument, the output should look something like the following:
 
 ```bash

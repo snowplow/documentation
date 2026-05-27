@@ -1,7 +1,7 @@
 ---
 title: "Snowplow MCP server"
 sidebar_label: "Snowplow MCP server"
-sidebar_position: 40
+sidebar_position: 60
 description: "Connect your AI assistant to the Snowplow MCP server for natural language console management."
 keywords: ["mcp", "model context protocol", "ai", "snowplow mcp"]
 date: "2026-05-21"

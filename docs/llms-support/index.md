@@ -11,7 +11,7 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
 
 ## Snowplow Assistant
 
-The [Snowplow Assistant](/docs/llms-support/console-agent/index.md) is an AI assistant built into Snowplow BDP Console. It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation, using your existing Console permissions. Currently in Private Preview.
+The [Snowplow Assistant](/docs/llms-support/console-agent/index.md) is an AI assistant built into Snowplow BDP Console. It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation, using your existing Console permissions.
 
 ## Snowplow CLI MCP server
 

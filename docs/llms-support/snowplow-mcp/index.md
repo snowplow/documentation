@@ -14,7 +14,27 @@ Snowplow MCP is a remote [Model Context Protocol](https://modelcontextprotocol.i
 
 The MCP server exposes the same set of tools as the Snowplow Assistant, but in your choice of harness and model. The server authenticates through your existing Snowplow Console login via OAuth.
 
+## One-line install (Claude Code, Cursor, Codex)
+
+The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://github.com/vercel-labs/plugins), a vendor-neutral installer that auto-detects supported AI tools. From any terminal, run:
+
+```bash
+npx plugins add snowplow/skills
+```
+
+This installs the Snowplow MCP server plus six bundled skills — `tracking-design`, `implementation-guidance`, `signals`, `pipeline-infrastructure`, `console-operations`, and `troubleshooting` — into any detected agent tool in a single step. The plugin source lives at [github.com/snowplow/skills](https://github.com/snowplow/skills).
+
+The `plugins` CLI auto-detects [Claude Code](https://claude.com/product/claude-code) and [Cursor](https://cursor.com/). Pass `--target claude-code` or `--target cursor` to scope the install to a specific tool.
+
+On first use, your tool opens a browser for OAuth against [Snowplow Console](https://console.snowplowanalytics.com) — see [Authentication](#authentication) for the permissions model.
+
+:::tip[Skills are model-invoked]
+The bundled skills are loaded on demand by the model. Claude or Cursor automatically engages the relevant skill when you ask about tracking design, pipeline troubleshooting, or any of the other areas. There is no slash command to run.
+:::
+
 ## Configure the MCP server
+
+If your tool isn't supported by the [`plugins` CLI](#one-line-install-claude-code-cursor-codex), or you want the MCP server without the bundled skills, configure it manually using the snippets below.
 
 <Tabs groupId="mcp-client" queryString>
   <TabItem value="claude-ai" label="Claude.ai" default>

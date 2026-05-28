@@ -17,7 +17,20 @@ The MCP server exposes the same set of tools as the Snowplow Assistant, but in y
 ## Configure the MCP server
 
 <Tabs groupId="mcp-client" queryString>
-  <TabItem value="claude-ai" label="Claude.ai" default>
+  <TabItem value="plugins" label="Plugins" default>
+
+The fastest way to get started is to install the Snowplow plugin using [Vercel's plugin system](https://vercel.com/docs/agent-resources/vercel-plugin). This installs both the MCP server tools and a set of skills that guide your AI assistant through common Snowplow workflows such as tracking design, troubleshooting, and pipeline management.
+
+Run the following in your project directory:
+
+```bash
+npx plugins add snowplow/snowplow
+```
+
+This should add the skills and MCP server to a [supported tool](https://vercel.com/docs/agent-resources/vercel-plugin#supported-tools)
+
+  </TabItem>
+  <TabItem value="claude-ai" label="Claude.ai">
 
 Claude.ai supports remote MCP servers as custom connectors. To add Snowplow MCP:
 

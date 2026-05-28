@@ -14,7 +14,7 @@ Snowplow MCP is a remote [Model Context Protocol](https://modelcontextprotocol.i
 
 The MCP server exposes the same set of tools as the Snowplow Assistant, but in your choice of harness and model. The server authenticates through your existing Snowplow Console login via OAuth.
 
-## One-line install (Claude Code, Cursor, Codex)
+## One-line install (Claude Code, Cursor)
 
 The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://github.com/vercel-labs/plugins), a vendor-neutral installer that auto-detects supported AI tools. From any terminal, run:
 
@@ -34,7 +34,7 @@ The bundled skills are loaded on demand by the model. Claude or Cursor automatic
 
 ## Configure the MCP server
 
-If your tool isn't supported by the [`plugins` CLI](#one-line-install-claude-code-cursor-codex), or you want the MCP server without the bundled skills, configure it manually using the snippets below.
+Configure Snowplow MCP manually using the snippets below for your tool of choice.
 
 <Tabs groupId="mcp-client" queryString>
   <TabItem value="claude-ai" label="Claude.ai" default>

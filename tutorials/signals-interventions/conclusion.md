@@ -43,7 +43,6 @@ These tutorials require a [Snowplow account](/docs/get-started/private-managed-c
 
 * [Set up Signals for real-time calculation](/tutorials/signals-quickstart/start) using the Snowplow Console UI
 * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro) for machine learning integration
-* [Set up the Signals batch engine](/tutorials/signals-batch-engine/start) for warehouse-based attribute calculation
 
 ### Move to production
 

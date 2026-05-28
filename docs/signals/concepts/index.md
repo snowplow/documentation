@@ -74,19 +74,20 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 
 ## Data sources
 
-Whether to compute attributes in real-time from the event stream or in batch from the warehouse is an important decision. Broadly, you might use:
-* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session
-* **Batch** sources (warehouse tables) for historical analysis, such as calculating a user's purchase history or average session length
+Whether to compute attributes in real-time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
+* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's lifetime purchase history.
+* **Warehouse** to bring in pre-calculated values from outside Snowplow, such as transactional data or CRM attributes
 
 This table summarizes the options for different types of processing:
 
-| Feature                            | Supported in real-time stream                                     | Supported in batch            |
-| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------- |
-| Real-time calculation              | ✅                                                                 | ❌                             |
-| Time windowing operations          | ✅                                                                 | ✅                             |
-| Computing user lifetime attributes | ✅ from the point at which the attribute was defined               | ✅                             |
-| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined | ✅                             |
-| Non-Snowplow data                  | ❌                                                                 | ✅ using external batch source |  |
+| Feature                            | Stream                                                                          | Stream with backfill                                                              | Warehouse                      |
+| ---------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------ |
+| Real-time calculation              | ✅                                                                               | ✅                                                                                 | ❌                              |
+| Time windowing operations          | ✅                                                                               | ✅                                                                                 | ❌                              |
+| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                             | ✅ from the configured backfill start date                                         | ❌                              |
+| Historical data                    | ❌ attributes are only calculated from the moment they are defined               | ✅ backfilled from the `atomic` events table up to the publish timestamp           | ✅ any pre-calculated data      |
+| Non-Snowplow data                  | ❌                                                                               | ❌                                                                                 | ✅                              |
+| Warehouse connection required      | ❌                                                                               | ✅                                                                                 | ✅                              |
 
 ### Stream source
 
@@ -103,23 +104,15 @@ Real-time stream flow:
 6. Signals evaluates and computes the attributes
 7. Updated attributes are pushed to the Profiles Store
 
-### Batch source
+#### Backfill
 
-The batch data source uses dbt to generate and calculate new tables of attributes from your
-Snowplow atomic events table. Signals then syncs them to the Profiles Store every hour using the sync engine.
+Stream attribute groups only calculate attributes from the moment they are published. If you need historical coverage, you can optionally enable backfill when creating the group. Backfill requires a warehouse connection.
 
-Batch flow:
-1. Behavioral data events arrive in the warehouse
-2. Signals compares timestamps to check for new rows in the atomic events table
-3. Are there any new rows?
-   * No: nothing happens
-   * Yes: processing continues
-4. Signals runs dbt models to update the attribute tables
-5. Updated tables are synced to the Profiles Store
+When backfill is enabled, you select a start date. On publish, Signals uses your `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. From the publish timestamp onwards, the streaming engine processes events in real time. Real-time values always take precedence: if the streaming engine has already calculated a value for a key, the backfill will not overwrite it.
 
-### External batch source
+### Warehouse source
 
-Use an external batch source to sync tables of existing, pre-calculated values to the Profiles Store. The external batch tables can be any data. For example, you may want to include transactional data in your Signals use case.
+Use a warehouse source to sync tables of existing, pre-calculated values to the Profiles Store. The warehouse tables can be any data. For example, you may want to include transactional data or CRM attributes in your Signals use case.
 
 ## Services
 

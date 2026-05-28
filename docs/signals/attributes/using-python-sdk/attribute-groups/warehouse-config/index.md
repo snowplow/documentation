@@ -1,24 +1,18 @@
 ---
-title: "Connect to existing warehouse tables"
+title: "Sync warehouse tables to Signals"
 sidebar_position: 30
 sidebar_label: "Warehouse configuration"
 description: "Connect Signals to existing warehouse tables using ExternalBatchAttributeGroup and BatchSource objects. Define table details, timestamp fields, and field mappings to sync pre-calculated attributes."
-keywords: ["external batch", "batch source", "warehouse tables", "field mapping", "timestamp sync"]
+keywords: ["warehouse attributes", "batch source", "warehouse tables", "field mapping", "timestamp sync"]
 ---
 
-To sync existing, pre-calculated attributes to Signals, use an `ExternalBatchAttributeGroup` attribute group to define which source table to use, and which fields (columns) to use from the table. Using existing warehouse tables doesn't require any additional modeling.
+To sync existing, pre-calculated attributes from your warehouse to Signals, use a `ExternalBatchAttributeGroup` to define which source table to use, and which fields (columns) to sync. No additional modeling is required.
 
-Configure which table to sync by specifying a `BatchSource` object for the group.
-
-:::info
-
-A `BatchSource` isn't required for `BatchAttributeGroup` objects, only `ExternalBatchAttributeGroup`.
-
-:::
+Once published, the batch engine handles syncing: it reads new rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
 
 ## Provide source table details
 
-The `BatchSource` defines how to connect to the table of interest in your warehouse. Here's an example:
+Configure which table to sync by specifying a `BatchSource` object for the group.
 
 ```python
 from snowplow_signals import BatchSource
@@ -42,14 +36,14 @@ The table below lists all available arguments for a `BatchSource`:
 | `database`        | The database where the attributes are stored                           | `string` | ✅         |
 | `schema`          | The schema for the table of interest                                   | `string` | ✅         |
 | `table`           | The table where the attributes are stored                              | `string` | ✅         |
-| `timestamp_field` | Primary timestamp of the attribute value                               | `string` | ❌         |
+| `timestamp_field` | Primary timestamp of the attribute value indicating data freshness `string` | ❌         |
 | `owner`           | The owner of the source, typically the email of the primary maintainer | `string` | ❌         |
 
-The sync engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. For each attribute key, make sure there is only one row per timestamp — otherwise, one value may be discarded arbitrarily.
+The batch engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. In case there are multiple rows for the same sync period, the engine will take the most recently updated value for the same attribute key based on the timestamp_field.
 
 ## Define which fields to sync
 
-Instead of `attributes`, this attribute group class has `fields`.
+Instead of `attributes`, this attribute group class has `fields` - abstractions over the warehouse columns.
 
 Here's an example:
 

@@ -22,7 +22,7 @@ Use Signals to:
 * Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
 * Trigger actions automatically when users meet specific criteria
 
-By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also configure it to calculate from warehouse data.
+By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
 ## Try Signals for free
 
@@ -51,9 +51,8 @@ Signals consists of several new infrastructure components. When running Signals,
 The core Signals components are:
 * **Profiles Store**: stores calculated attributes and configurations
 * Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
-* **Streaming engine**: computes attributes from Snowplow events in stream, and sends them directly to the Profiles Store
-* **Sync engine**: periodically updates the Profiles Store with batch attributes
-* **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
+* **Streaming engine**: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
+* **Batch engine**: backfills historical attribute values from your warehouse, and periodically syncs pre-calculated warehouse tables to the Profiles Store
 
 ![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 
@@ -70,7 +69,7 @@ Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for he
 
 Your first step is to decide what changes in user behavior you're aiming for. What systems or data will you need to achieve this? This planning will help you decide which attributes you want to calculate, and which interventions you're interested in defining.
 
-You'll also need to decide whether to calculate attributes from your real-time event stream (default), or from warehouse data, or both.
+You'll also need to decide whether to calculate attributes from your real-time event stream, or to include pre-calculated warehouse data, or both.
 
 Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
 
@@ -90,6 +89,5 @@ Use the attributes to update the user experience, or subscribe to [interventions
 
 Check out the Signals foundations tutorials:
 * [Quick Start](/tutorials/signals-quickstart/start) for defining stream attributes using the UI or the Python SDK
-* [Set up the Signals batch engine](/tutorials/signals-batch-engine/start) to calculate and sync attributes from warehouse data
 
 Follow the [real-time prospect scoring with ML](/tutorials/signals-ml-prospect-scoring/intro) solution accelerator to explore using Signals with a machine learning use case.

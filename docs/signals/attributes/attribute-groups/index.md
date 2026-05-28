@@ -2,11 +2,11 @@
 title: "Define attribute groups in Console"
 sidebar_position: 1
 sidebar_label: "Attribute groups"
-description: "Define attribute groups to calculate behavioral data from real-time event streams, batch warehouse tables, or external sources. Configure attributes, attribute keys, TTL lifetimes, and test definitions before publishing."
-keywords: ["attribute groups", "stream attributes", "batch attributes", "attribute keys", "ttl"]
+description: "Define attribute groups to calculate behavioral data from real-time event streams or sync pre-calculated warehouse tables. Configure attributes, attribute keys, TTL lifetimes, and test definitions before publishing."
+keywords: ["attribute groups", "stream attributes", "warehouse attributes", "attribute keys", "ttl", "backfill"]
 ---
 
-Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or sync pre-calculated values from your warehouse.
 
 To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions.
 
@@ -20,43 +20,37 @@ The first step is to specify:
 
 ## Data source
 
-:::note[Warehouse Connection]
-A warehouse connection is required to create `Batch` and `External Batch` attributes.
-:::
-
-There are three [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
-* **Stream**: real-time Snowplow event stream
-* **Batch**: a new warehouse table created by Signals, calculated from your `atomic` events table
-* **External batch**: pre-calculated values in a warehouse table that you can sync to the Profiles Store
-
+There are two [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
+* **Stream**: real-time Snowplow event stream, with an optional warehouse backfill
+* **Warehouse**: pre-calculated values in a warehouse table that you sync to the Profiles Store
 
 Attribute groups are configured differently based on the data source.
 
 ### Stream
 
-By default, Signals will calculate attributes from events in your real-time stream: the stream source. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
+Signals calculates attributes from events in your real-time stream. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
 
 You'll need to define the [attributes](/docs/signals/attributes/attributes/index.md) you want to calculate from your event stream.
 
-### Batch
+#### Backfill attributes
 
-Attribute groups with a batch source use dbt to calculate the defined attributes as a new table. Signals will sync the calculated attributes to the Profiles Store.
+:::note[Warehouse Connection]
+A warehouse connection is required to use the backfill option.
+:::
 
-First, define the [attributes](/docs/signals/attributes/attributes/index.md) you want to calculate from your `atomic` events table.
+Stream attribute groups only calculate attributes from the moment they are published. If you want to include historical data, enable **Backfill attributes** when creating the group.
 
-Once you've created and published the group, create and configure the dbt models. Follow the instructions shown, or check out the [batch engine tutorial](/tutorials/signals-batch-engine/start) for a step-by-step guide.
+When enabled, a date picker appears. Select the date from which Signals should backfill attribute values from your `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse. From the publish timestamp onwards, the streaming engine takes over and processes events in real time.
 
-![Published batch attribute group in Snowplow Console showing three dbt setup steps: install the Signals dbt package, add the group ID to your dbt project configuration, and run the dbt model](../../images/attribute-group-batch-instructions.png)
+![Stream attribute group with Backfill attributes toggle enabled and date picker shown](../../images/attribute-group-stream-backfill.png)
 
-### External batch
+### Warehouse
 
-Attribute groups with an external batch source don't require attribute definition, as no calculation will be performed. This source type allows you to sync existing warehouse values with Signals so they're available in your Profiles Store.
+Attribute groups with a warehouse source don't require attribute definition, as no calculation is performed. This source type syncs existing, pre-calculated warehouse values to your Profiles Store. The batch engine runs on a fixed interval and only sends rows that are newer than the last sync, based on a timestamp field you configure. Once a sync period has passed, those rows will not be reprocessed. If a dataset has multiple rows for the same attribute key within a sync period, Signals uses the most recent value.
 
 Provide the warehouse and table details, and select which fields you want to send to Signals.
 
-![External batch source configuration showing warehouse table and field mapping options](../../images/attribute-group-external-batch-fields.png)
-
-To minimize latency, select a timestamp field which Signals will use to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
+![Warehouse source configuration showing warehouse table and field mapping options](../../images/attribute-group-warehouse-fields.png)
 
 ## Attribute keys
 
@@ -78,13 +72,13 @@ To edit or delete a custom attribute key, go to the key details page and click t
 
 ## Attribute lifetimes
 
-We recommend setting a Time to live (TTL) value for each attribute group. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure a TTL for the attribute group.
+We recommend setting a Time to live (TTL) value for each attribute. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure a TTL for the attribute group.
 
-The suggested default is 7 days for stream attribute groups, and 365 days for batch attribute groups.
+The default TTL is 7 days for stream attribute groups and 365 days for warehouse synced values.
 
 When none of the attributes for an attribute group have been updated for the defined lifespan, the attribute group expires. Any attribute values for this group will be deleted: fetching them will return `None` values.
 
-If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
+If Signals then processes a new event that calculates the attribute again, or syncs new data from the warehouse, the expiration timer is reset.
 
 ## Testing the attribute definitions
 
@@ -92,7 +86,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 A warehouse connection is required to test attribute definitions.
 :::
 
-After defining one or more [attributes](/docs/signals/attributes/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.
+After defining one or more [attributes](/docs/signals/attributes/attributes/index.md) for stream attribute groups, you can test out the configuration with the **Run preview** button.
 
 This will output a table of attributes calculated from your `atomic` events table, using a random subset of events from the last hour.
 
@@ -107,10 +101,6 @@ Click the **Edit** button if you want to make changes to the attribute group.
 To send the attribute group configuration to your Signals infrastructure, click the **Publish** button. This will allow Signals to start calculating attributes or syncing tables, and populating the Profiles Store.
 
 ![Published attribute group page showing active status and management options](../../images/attribute-group-published.png)
-
-:::note
-If the attribute group has a batch source, Signals won't be able to do anything until you've completed the dbt configuration steps. Complete the dbt steps before publishing the group.
-:::
 
 ### Versioning
 

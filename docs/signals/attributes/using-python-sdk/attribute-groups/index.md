@@ -2,8 +2,8 @@
 title: "Define attribute groups with the Signals Python SDK"
 sidebar_position: 30
 sidebar_label: "Attribute groups"
-description: "Define StreamAttributeGroup, BatchAttributeGroup, or ExternalBatchAttributeGroup objects programmatically. Configure attributes, data sources, TTL, and versioning using the Python SDK."
-keywords: ["python sdk attribute groups", "stream attribute group", "batch attribute group", "external batch"]
+description: "Define StreamAttributeGroup objects programmatically using the Signals Python SDK. Configure attributes, TTL, and versioning for real-time stream attribute groups."
+keywords: ["python sdk attribute groups", "stream attribute group", "attribute groups"]
 ---
 
 ```mdx-code-block
@@ -13,12 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups).
 
-## Attribute groups by data source
-
-Each of the three available [data sources](/docs/signals/concepts/index.md#data-sources) has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
-
-<Tabs groupId="source" queryString>
-<TabItem value="stream" label="StreamAttributeGroup" default>
+## Defining a stream attribute group
 
 Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream.
 
@@ -38,69 +33,9 @@ my_stream_attribute_group = StreamAttributeGroup(
 )
 ```
 
-</TabItem>
-<TabItem value="batch" label="BatchAttributeGroup">
-
-Use a `BatchAttributeGroup` to calculate attributes from the atomic events table. Read more about this in the [batch calculations](/docs/signals/attributes/using-python-sdk/batch-calculations/index.md) section.
-
-```python
-from snowplow_signals import BatchAttributeGroup, domain_sessionid
-
-my_batch_attribute_group = BatchAttributeGroup(
-    name="my_batch_attribute_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com",
-    attributes=[
-        # Previously defined attributes
-        page_view_count,
-        products_added_to_cart_feature,
-    ],
-)
-```
-
-</TabItem>
-<TabItem value="external" label="ExternalBatchAttributeGroup">
-
-Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table. Read more about this in the [batch calculations](/docs/signals/attributes/using-python-sdk/batch-calculations/index.md) section.
-
-In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group has `fields`.
-
-```python
-from snowplow_signals import ExternalBatchAttributeGroup, domain_sessionid, Field
-
-my_external_batch_attribute_group = ExternalBatchAttributeGroup(
-    name="my_external_batch_attribute_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com",
-    batch_source=data_source,   # Assuming this object has been previously defined
-    fields=[
-        Field(
-            name="TOTAL_TRANSACTIONS",
-            type="int32",
-        ),
-        Field(
-            name="TOTAL_REVENUE",
-            type="int32",
-        ),
-        Field(
-            name="AVG_TRANSACTION_REVENUE",
-            type="int32",
-        ),
-    ],
-)
-```
-
-</TabItem>
-</Tabs>
-
 ## Attribute group options
 
-The tables below list all available arguments for each type of attribute group:
-
-<Tabs groupId="source" queryString>
-<TabItem value="stream" label="StreamAttributeGroup" default>
+The table below lists all available arguments for `StreamAttributeGroup`:
 
 | Argument        | Description                                           | Type                | Default | Required? |
 | --------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
@@ -113,42 +48,7 @@ The tables below list all available arguments for each type of attribute group:
 | `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
 | `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
 
-</TabItem>
-<TabItem value="batch" label="BatchAttributeGroup">
-
-| Argument        | Description                                           | Type                | Default | Required? |
-| --------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
-| `name`          | The name of the attribute group                       | `string`            |         | ✅         |
-| `version`       | The version of the attribute group                    | `int`               | 1       | ❌         |
-| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`      |         | ✅         |
-| `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
-| `description`   | A description of the attribute group                  | `string`            |         | ❌         |
-| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
-| `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
-| `batch_source`  | The batch data source for the attribute group         | `BatchSource`       |         | ❌         |
-| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
-
-For `BatchAttributeGroup` groups, it's a good idea to publish initially with `online=False`. This is because Signals will be unable to calculate the attributes until the dbt project has been configured to create the new table. Once you've configured dbt, republish the attribute group with `online=True` to start calculating the attributes.
-
-</TabItem>
-<TabItem value="external" label="ExternalBatchAttributeGroup">
-
-| Argument        | Description                                           | Type            | Default | Required? |
-| --------------- | ----------------------------------------------------- | --------------- | ------- | --------- |
-| `name`          | The name of the attribute group                       | `string`        |         | ✅         |
-| `version`       | The version of the attribute group                    | `int`           | 1       | ❌         |
-| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`  |         | ✅         |
-| `owner`         | The owner of the attribute group                      | `Email`         |         | ✅         |
-| `description`   | A description of the attribute group                  | `string`        |         | ❌         |
-| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`     |         | ❌         |
-| `batch_source`  | The batch data source for the attribute group         | `BatchSource`   |         | ✅         |
-| `fields`        | Table columns for syncing                             | list of `Field` |         | ✅         |
-| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`          | `True`  | ❌         |
-
-</TabItem>
-</Tabs>
-
-If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes. We highly recommend setting a TTL. Our suggested default is 7 days for stream attribute groups, and 365 days for batch attribute groups.
+If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes. We highly recommend setting a TTL. The suggested default is 7 days.
 
 Use the `online` property to control whether or not Signals should actively compute the attributes, or just register the configuration.
 
@@ -176,7 +76,7 @@ test_data = sp_signals.test(
 ```
 
 :::note
-While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
+While you can filter on specific app_ids during testing, the streaming engine may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
 :::
 
 To see which attributes an attribute group has, use `get_attribute_group()`. Here's an example:

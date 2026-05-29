@@ -50,7 +50,7 @@ Once downloaded, take the .mmdb file(s) and upload them to a location on your cl
 
 When the database(s) need updating in future you can download the latest version and overwrite this file in your storage.
 
-MaxMind also offer a method to [download and update their databases programmatically](https://dev.maxmind.com/geoip/geoipupdate/).
+MaxMind also offer a method to [download and update their databases programmatically](https://dev.maxmind.com/geoip/updating-databases/#using-geoip-update).
 
 ## Configure the enrichment
 

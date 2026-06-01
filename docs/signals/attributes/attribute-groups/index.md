@@ -72,11 +72,11 @@ To edit or delete a custom attribute key, go to the key details page and click t
 
 ## Attribute lifetimes
 
-We recommend setting a Time to live (TTL) value for each attribute group. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attribute values staying in your Profiles Store forever, configure a TTL when creating or updating an attribute group.
+We recommend setting a Time to live (TTL) value for each attribute. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attribute values staying in your Profiles Store forever, configure a TTL when creating or updating an attribute.
 
-The default TTL is 7 days for stream attribute groups and 365 days for warehouse synced values.
+The default TTL is 7 days for stream attributes and 365 days for warehouse synced values.
 
-When none of the attributes within a group have been updated for the defined lifespan, all attribute values in that group will be deleted: fetching them will return `None` values.
+When an attribute has not been updated for its defined lifespan, that attribute's value will be deleted: fetching it will return a `None` value.
 
 If Signals then processes a new event that calculates the attribute again, or syncs new data from the warehouse, the expiration timer is reset.
 

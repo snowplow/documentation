@@ -36,10 +36,10 @@ The table below lists all available arguments for a `BatchSource`:
 | `database`        | The database where the attributes are stored                           | `string` | ✅         |
 | `schema`          | The schema for the table of interest                                   | `string` | ✅         |
 | `table`           | The table where the attributes are stored                              | `string` | ✅         |
-| `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness | `string` | ❌ |
+| `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness    | `string` | ❌         |
 | `owner`           | The owner of the source, typically the email of the primary maintainer | `string` | ❌         |
 
-The batch engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. In case there are multiple rows for the same sync period, the engine will take the most recently updated value for the same attribute key based on the timestamp_field.
+The batch engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the greatest `timestamp_field` value.
 
 ## Define which fields to sync
 

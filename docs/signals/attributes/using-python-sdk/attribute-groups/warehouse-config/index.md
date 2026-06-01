@@ -6,7 +6,7 @@ description: "Connect Signals to existing warehouse tables using ExternalBatchAt
 keywords: ["warehouse attributes", "batch source", "warehouse tables", "field mapping", "timestamp sync"]
 ---
 
-To sync existing, pre-calculated attributes from your warehouse to Signals, use a `ExternalBatchAttributeGroup` to define which source table to use, and which fields (columns) to sync. No additional modeling is required.
+To sync existing, pre-calculated attributes from your warehouse to Signals, use an `ExternalBatchAttributeGroup` to define which source table to use, and which fields (columns) to sync. No additional modeling is required.
 
 Once published, the batch engine handles syncing: it reads new rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
 
@@ -36,14 +36,14 @@ The table below lists all available arguments for a `BatchSource`:
 | `database`        | The database where the attributes are stored                           | `string` | ✅         |
 | `schema`          | The schema for the table of interest                                   | `string` | ✅         |
 | `table`           | The table where the attributes are stored                              | `string` | ✅         |
-| `timestamp_field` | Primary timestamp of the attribute value indicating data freshness `string` | ❌         |
+| `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness | `string` | ❌ |
 | `owner`           | The owner of the source, typically the email of the primary maintainer | `string` | ❌         |
 
 The batch engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. In case there are multiple rows for the same sync period, the engine will take the most recently updated value for the same attribute key based on the timestamp_field.
 
 ## Define which fields to sync
 
-Instead of `attributes`, this attribute group class has `fields` - abstractions over the warehouse columns.
+Instead of `attributes`, this attribute group class has `fields` — abstractions over the warehouse columns.
 
 Here's an example:
 

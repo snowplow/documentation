@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups).
 
-## Defining a stream attribute group
+## Define a stream attribute group
 
 Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream.
 

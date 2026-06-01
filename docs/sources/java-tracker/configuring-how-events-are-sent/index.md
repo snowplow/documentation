@@ -158,7 +158,7 @@ Tracker tracker = Snowplow.createTracker(
 ```
 Note that `collectorUrl` is not a required parameter for `NetworkConfiguration` when an `HttpClientAdapter` is specified. The `collectorUrl` is normally used to create the default `OkHttpClientAdapter`, therefore if a URL was provided here, it would be ignored.
 
-HTTP request retry can be configured within the HTTP clients, on top of the Java tracker's handling of unsuccessful requests. The default HTTP client, OkHttp, [retries after certain types of connection failure](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-ok-http-client/-builder/retry-on-connection-failure/) by default. The Apache HTTP Client [retries a request up to 3 times](https://www.javadoc.io/doc/org.apache.httpcomponents/httpclient/4.3.5/org/apache/http/impl/client/DefaultHttpRequestRetryHandler.html) by default.
+HTTP request retry can be configured within the HTTP clients, on top of the Java tracker's handling of unsuccessful requests. The default HTTP client, OkHttp, [retries after certain types of connection failure](https://square.github.io/okhttp/features/calls/#retrying-requests) by default. The Apache HTTP Client [retries a request up to 3 times](https://www.javadoc.io/doc/org.apache.httpcomponents/httpclient/4.3.5/org/apache/http/impl/client/DefaultHttpRequestRetryHandler.html) by default.
 
 #### OkHttpClient
 The simplest OkHttpClient initialization looks like this:

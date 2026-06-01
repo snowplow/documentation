@@ -211,7 +211,7 @@ This table shows the support for anonymous tracking across the main [Snowplow tr
 | Rust                                                                                               | ❌         |               |             |             |                                                               |
 | [PHP](/docs/sources/php-tracker/emitters/index.md)                                                 | ✅         | 0.9.0         | ❌           | ✅           |                                                               |
 | C++                                                                                                | ❌         |               |             |             |                                                               |
-| Unity                                                                                              | ❌         |               |             |             |                                                               |
+| Unity                                                                                              | ✅         | 0.9.0         | ✅          | ✅           |                                                               |
 | Lua                                                                                                | ❌         |               |             |             |                                                               |
 | [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)                  | ✅         | v4            | ✅           | ✅           |                                                               |
 

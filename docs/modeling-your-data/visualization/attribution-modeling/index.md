@@ -16,7 +16,7 @@ The Snowplow Marketing Attribution visualization (together with the [Snowplow At
 - Option to specify your own touchpoint and advertising spend tables
 - Intermediate tables that you can build your own attribution models on top of
 
-![the top half of the overview page](images/overview.png)
+![Marketing Attribution overview dashboard showing key metrics for the last 28 days: 384 conversions, £13,268 revenue, £66,957 channel spend, and 0.198 ROAS, with bar charts showing Paid Search leading in both attributed conversions and attributed revenue by channel](images/overview.png)
 
 ## Requirements
 
@@ -85,4 +85,4 @@ Edit or delete existing views from the **Settings** page, using the **Edit/Delet
 - **Delete**: click X next to the view.
 - **Edit**: click on the name of the view. The visualization will take you to the view configuration page where you can make amendments. Saving will overwrite the existing view configurations.
 
-![the edit and delete views dropdown](images/edit_delete_views.png)
+![Edit/Delete Views dropdown showing two saved views — "Last 30 days (Dynamic)" and "Jan" — each with a delete button](images/edit_delete_views.png)

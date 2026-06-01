@@ -311,7 +311,7 @@ If you want to analyze events sent via this tracker, you may prefer to query for
 
 ### Page view and ping aggregation
 
-By default, the  [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined [PAGE_VIEW_ID_64](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#page-view-id-64), which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
+By default, the  [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined `PAGE_VIEW_ID_64`, which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
 
 Users can aggregate page views, page pings and other events on-page by this ID to aggregate engaged time, and model events to a page view level, by combining it with the url, amp client ID, and date.
 
@@ -323,7 +323,7 @@ Note that page pings and the page view ID itself are not defined by Snowplow's l
 Available from version 1.1.0.
 :::
 
-By default the [AMP Session](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_session/jsonschema/) context is attached to every event. This context allows for tracking information related to session analytics capabilities, as implemented in the [AMP framework](https://github.com/ampproject/issues/3399). The attributes included are the following:
+By default the [AMP Session](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_session/jsonschema/) context is attached to every event. This context allows for tracking information related to session analytics capabilities, as implemented in the AMP framework. The attributes included are the following:
 - `ampSessionId`: An identifier for the AMP session.
 - `ampSessionIndex`: The index of the current session for this user.
 - `sessionEngaged`: If there has been any kind of user engagement in the AMP session. Engagement in this context means if the page is visible, has focus and is in the foreground.
@@ -333,7 +333,7 @@ By default the [AMP Session](https://github.com/snowplow/iglu-central/blob/maste
 
 ### User Identification
 
-By default, the  [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the [AMP Client ID](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#client-id), the `user_id` (if set via the `userId` var), and the domain_userid (if passed to an AMP page via cross-domain linking - more detail below).
+By default, the  [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the AMP Client ID, the `user_id` (if set via the `userId` var), and the domain_userid (if passed to an AMP page via cross-domain linking - more detail below).
 
 This provides a map between the main relevant identifiers, which can be used to model user journeys across platforms. Users can choose to instrument further user identification methods using custom contexts.
 

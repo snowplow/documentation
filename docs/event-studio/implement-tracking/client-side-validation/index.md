@@ -134,7 +134,7 @@ For JavaScript projects, this type of validation is especially useful given the 
 
 Your app will raise a `Snowtype Schema Validation error` warning in the browser console if a property violates the schema. In this example, the property `id` is expected to be a string, but the value `1` is passed instead. The erroneous value can be found under `errors[n].data`, and a stack trace pointing to the calling function is also provided:
 
-![Schema validation error shown in browser console](./images/validation.png)
+![Browser console showing a "Snowtype Schema Validation error" warning where the id property received 1 (a number) instead of the expected string type, with the invalid value shown under errors[n].data and a stack trace pointing to the calling function](./images/validation.png)
 
 The validation checks against all your [JSON Schema requirements](/docs/api-reference/json-schema-reference/index.md). For example, it will confirm that your tracking matches `type`, `minLength`, `pattern`, `minimum`, or `additionalProperties` rules.
 
@@ -151,7 +151,7 @@ With client-side validation enabled, your Snowtype code will check these rules a
 
 For example, with a `product` entity that has a cardinality rule of "Exactly 1":
 
-![Cardinality rule definition in Console](./images/cardinality-validation.png)
+![Event specification in Snowplow Console showing a product entity with a cardinality rule set to "Exactly 1"](./images/cardinality-validation.png)
 
 This code satisfies the rule:
 
@@ -175,13 +175,13 @@ trackButtonClickSpec({
 });
 ```
 
-![Cardinality violation shown in browser console](./images/cardinality-browser.png)
+![Browser console showing a "Snowtype Entity Cardinality Rules error" warning with minCardinality, maxCardinality, and currentCardinality values listed, and a stack trace pointing to the calling function](./images/cardinality-browser.png)
 
 The warning includes the `minCardinality` and `maxCardinality` expected, the `currentCardinality` i.e. how many were actually passed, and a stack trace.
 
 A warning also appears when a required entity is missing entirely:
 
-![Missing entity cardinality warning in browser console](./images/cardinality-empty.png)
+![Browser console showing a "Snowtype Entity Cardinality Rules error" warning for a required entity that was not included in the tracked event](./images/cardinality-empty.png)
 
 ## Property instructions validation
 
@@ -191,7 +191,7 @@ Snowtype creates [types for property rules](/docs/event-studio/implement-trackin
 
 In this example event specification, the `category` property of the `product` entity must be either `"related"` or `"cross-sell"`.
 
-![Property rules defined in Console](./images/property-rules-browser.png)
+![Event specification in Snowplow Console showing the category property of a product entity with allowed values restricted to "related" and "cross-sell"](./images/property-rules-browser.png)
 
 This code satisfies the property rule:
 
@@ -226,7 +226,7 @@ trackRelatedSpec({
 });
 ```
 
-![Property rule violation shown in browser console](./images/property-rules-enum-error.png)
+![Browser console showing a "Snowtype Schema Validation error" warning triggered by passing "cross-sells" for a category property that only accepts "related" or "cross-sell"](./images/property-rules-enum-error.png)
 
 ## Custom violation handlers
 

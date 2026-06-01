@@ -34,4 +34,4 @@ To edit a service definition, go to the service details page and click the **Edi
 
 To delete a service, go to the service details page and click the `⋮` button, then choose **Delete**.
 
-![Service management menu with Edit and Delete options](../../images/service-edit-delete.png)
+![Signals service details page in Snowplow Console showing the Edit button and the three-dot overflow menu expanded with the Delete option](../../images/service-edit-delete.png)

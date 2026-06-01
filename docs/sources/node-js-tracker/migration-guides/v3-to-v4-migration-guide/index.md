@@ -6,10 +6,6 @@ description: "Migration guide for upgrading the Node.js tracker from version 3 t
 keywords: ["node.js tracker v4", "version upgrade v3 to v4"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Version 4 is a major release with several breaking changes to defaults and behavior.
 

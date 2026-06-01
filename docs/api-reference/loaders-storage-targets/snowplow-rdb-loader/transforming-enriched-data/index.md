@@ -38,7 +38,7 @@ These files are stored on S3 partitioned by type. When the data is loaded into R
 
 The following diagram illustrates the process:
 
-![](images/storage-loader-dataflow.png)
+![Diagram of the shredding process: an enriched good event TSV file with contexts, unstruct_event, and derived_contexts fields is passed through a Shredding step (using Iglu for schema lookup), producing shredded good output split into atomic.events, user-specific self-describing events (JSON), and predefined contexts (JSON), which are then loaded by StorageLoader into Redshift tables](images/storage-loader-dataflow.png)
 
 **NOTE:** Shredded data can currently only be loaded into **Redshift**.
 

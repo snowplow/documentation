@@ -6,7 +6,7 @@ description: "An overview of what a Snowplow pipeline does and what steps it inc
 keywords: ["Snowplow pipeline", "architecture", "trackers", "enrichment", "data warehouses", "collector"]
 ---
 
-![Pipeline architecture diagram](images/architecture.png)
+![Snowplow pipeline architecture diagram showing data flowing from web, mobile, server-side, pixel, and webhook sources through Collect, Validate, and Enrich stages. Validated events route to a Real-Time Good Stream and on to a data warehouse and BI tools; invalid events route to a Real-Time Bad Stream and Bad Logs.](images/architecture.png)
 
 The diagram above illustrates a typical Snowplow pipeline with data flowing left to right.
 

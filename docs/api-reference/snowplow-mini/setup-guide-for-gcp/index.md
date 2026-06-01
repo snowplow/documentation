@@ -33,7 +33,7 @@ Note: All services are configured to start automatically so everything should ha
 
 To understand the flow of data please refer to the following diagram:
 
-![](images/snowplow-mini-topology.jpg)
+![Data flow diagram showing the Snowplow Mini real-time processing topology: the Scala Stream Collector receives events, passes them to Stream Enrich, and both good and bad events flow through Elasticsearch Sink components into an Elasticsearch node, with four named queues — RawEvents, EnrichedEvents, BadEvents, and BadElasticsearchEvents — shown as horizontal streams between components.](images/snowplow-mini-topology.jpg)
 
 ## Importing public tarballs to a GCP project
 
@@ -80,11 +80,11 @@ Mini is available in 3 different sizes:
 
 Go to `Compute Engine` on GCP console, select `Images` from menu on the left. You should see your imported image on the list. Select it then you should see `CREATE INSTANCE` button at the top of the page. Click on it.
 
-![](images/create-instance.png)
+![GCP Console Images page showing the imported Snowplow Mini image selected, with the CREATE INSTANCE button visible in the top action bar.](images/create-instance.png)
 
-![](images/create-instance-2.png)
+![GCP Create an instance form showing the instance name set to "snowplow-mini-0-6-0", region us-east1 (South Carolina), zone us-east1-b, and machine type configured with 2 vCPUs and 8 GB memory.](images/create-instance-2.png)
 
-![](images/create-instance-3.png)
+![Lower section of the GCP Create an instance form showing boot disk set to a 10 GB standard persistent disk with the Snowplow Mini image, the Compute Engine default service account selected with Allow default access scope, HTTP traffic allowed in the Firewall section, and the Create button at the bottom.](images/create-instance-3.png)
 
 Click `Create`.
 

@@ -59,7 +59,7 @@ You can also select one or more attribute groups to be sent with the interventio
 
 Once you're happy with your intervention configuration, click **Create intervention** to save it. It will be saved as a draft, and not yet available to Signals.
 
-![Draft intervention page showing Edit and Publish buttons](../images/intervention-draft.png)
+![Intervention details page in Snowplow Console showing a status of Draft, with Edit and Publish action buttons](../images/intervention-draft.png)
 
 Click the **Edit** button if you want to make changes to the intervention.
 

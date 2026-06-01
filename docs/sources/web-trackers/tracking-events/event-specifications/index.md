@@ -68,7 +68,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 You can retrieve the configuration for your event specifications directly from your tracking plan after clicking on the `Implement tracking` button.
 
-![implement tracking button](./images/implement_tracking.png)
+![The Media Web data product page in Snowplow Console showing the Event specifications section with an arrow highlighting the "Implement tracking" button, and a list of event specifications including Ad Break End Event, Ad Break Start Event, and Ad Click Event](./images/implement_tracking.png)
 
 Configure the plugin by mapping each tracked event to the event specification ID from your tracking plan. For example:
 

@@ -9,7 +9,6 @@ keywords: ["lake loader", "delta lake", "iceberg", "open table formats", "data l
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/lake-loader/_deploy_overview.md';
 import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/lake-loader/_diagram.md';
 ```
@@ -20,7 +19,7 @@ The Lake Loader is an application that loads Snowplow events to a cloud storage 
 
 The Lake Loader supports the two major Open Table Formats: [Delta](https://delta.io/) and [Iceberg](https://iceberg.apache.org/).
 
-For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) and [Iceberg REST](https://iceberg.apache.org/docs/latest/rest-catalog/) as catalogs. The REST catalog integration has been tested with Snowflake Open Catalog.
+For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) and [Iceberg REST](https://iceberg.apache.org/rest-catalog-spec/) as catalogs. The REST catalog integration has been tested with Snowflake Open Catalog.
 
 :::
 

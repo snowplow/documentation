@@ -6,10 +6,6 @@ description: "SQL Runner is no longer actively developed and users should try to
 keywords: ["SQL Runner to dbt", "dbt migration", "SQL Runner migration", "legacy to dbt"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 :::info
 
@@ -32,7 +28,7 @@ The core of the web and mobile models (e.g. page/screen views, sessions, and use
 We recommend you take a look at the [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for our dbt packages to get a better understanding of how they work and how you can use them going forward.
 
 ## Pre-requisites
-We assume that you have dbt [installed](https://docs.getdbt.com/docs/core/installation), a working connection, and some basic understanding of using dbt including installing packages and running models.
+We assume that you have dbt installed, a working connection, and some basic understanding of using dbt including installing packages and running models.
 
 ## Mapping the variables
 

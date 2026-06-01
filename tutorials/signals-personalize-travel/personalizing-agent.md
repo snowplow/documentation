@@ -60,14 +60,14 @@ First, test without personalization:
 2. Ask a question like "What are some good destinations for me in Southeast Asia?"
 3. Note the generic response
 4.
-![Chat widget without personalization](images/chat-nops.jpg)
+![SEA Travel Assistant chat widget with the Signals toggle switched off (gray), showing a generic response to "What are some good destinations for me in South East Asia?" listing Beach Lovers destinations including Bali, Indonesia](images/chat-nops.jpg)
 
 Then test with personalization:
 1. Turn the toggle switch on (green)
 2. Ask the same question
 3. Compare the response - it should now be tailored to your browsing behavior
 
-![Chat widget with personalization](images/chat-ps1.jpg)
+![SEA Travel Assistant chat widget with the Signals toggle switched on (green), showing a personalized response to the same question that recommends Bangkok, Thailand first with a specific rationale about modern urban life and culinary tours based on browsing behavior](images/chat-ps1.jpg)
 
 ![Chat widget with personalization continued](images/chat-ps2.jpg)
 

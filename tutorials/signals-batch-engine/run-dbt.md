@@ -35,7 +35,7 @@ For your first run, you'll want to do a full refresh to ensure all tables are cr
 dbt run --full-refresh
 ```
 
-![dbt first run](images/dbt_first_run.png)
+![Terminal output from dbt run --full-refresh showing 13 models created successfully, followed by a Dates to Process Summary with 3 total dates and 22 total events to process across 2025-01-01, 2025-01-02, and 2025-01-03](images/dbt_first_run.png)
 
 For later runs, you can use the standard command:
 

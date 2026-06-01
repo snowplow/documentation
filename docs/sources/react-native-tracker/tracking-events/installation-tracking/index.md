@@ -6,10 +6,6 @@ description: "Track app installation events automatically on first launch with t
 keywords: ["react native install tracking", "app install event", "first launch tracking"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Installation tracking tracks an install event which occurs the first time an application is opened. The tracker will record when it's first been installed, so deleting and reinstalling an app will trigger another install event.
 

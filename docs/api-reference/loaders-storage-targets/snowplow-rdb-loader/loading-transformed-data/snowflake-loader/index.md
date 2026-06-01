@@ -10,7 +10,6 @@ keywords: ["snowflake loader", "snowflake rdb", "wide row json", "snowflake copy
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
-import AutoSchemaCreation from '@site/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
 It is possible to run Snowflake Loader on AWS, GCP and Azure.
@@ -75,7 +74,7 @@ See [here](/docs/api-reference/iglu/iglu-resolver/index.md) for details on how t
 
 :::tip
 
-All self-describing schemas for events processed by RDB Loader **must** be hosted on [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority.
+All self-describing schemas for events processed by RDB Loader **must** be hosted on [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority.
 
 :::
 

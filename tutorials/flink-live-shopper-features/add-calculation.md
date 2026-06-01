@@ -253,4 +253,4 @@ out.collect(
 
 After these changes, re-run the script `./up.sh`. It will rebuild the docker image and restart the containers. You should be able to see in Redis the most viewed brand by the user.
 
-![image.png](./images/live-shopper-add-calculation.png)
+![Redis Insights showing the STRING key user:trent@snowplowanalytics.com:most_viewed_brand_5m with value "Snowplow", confirming the new most_viewed_brand feature is being stored in Redis](./images/live-shopper-add-calculation.png)

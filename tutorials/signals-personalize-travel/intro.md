@@ -9,7 +9,7 @@ date: "2025-01-21"
 
 Welcome to the **Build a personalized travel agent with Signals** tutorial.
 
-[![Personalized Travel Experiences](./images/demo-site.jpg)](./images/demo-site.jpg)
+[![Demo travel website showing the Southeast Asia Destinations page with a filters panel, four destination cards (Bangkok, Ho Chi Minh City, Hanoi, Penang) with ratings and category tags, and the SEA Travel Assistant chat widget open with a personalized culinary recommendations response](./images/demo-site.jpg)](./images/demo-site.jpg)
 
 This tutorial walks you through building personalized experiences on a travel website using Snowplow Signals. You'll learn how to capture user behavior, define attributes that represent user preferences, and use these insights to customize both website content and chatbot responses in real-time.
 

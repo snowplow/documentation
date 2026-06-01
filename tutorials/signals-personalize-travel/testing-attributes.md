@@ -24,7 +24,7 @@ Start by generating events on your travel website:
 
 Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate to the [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) tab:
 
-![Snowplow Inspector](images/inspector.jpg)
+![Snowplow Inspector browser extension open in Chrome DevTools showing the Events tab with 15 events on the /destinations page, including multiple Page Ping events and an SD Event for filter_tag_applied, with the detail panel showing event type, application ID (travel_bug), and timestamps](images/inspector.jpg)
 
 1. In the **Events** tab, verify you can see page view events being sent to your collector endpoint
 2. In the **Attributes** tab, check that the `page_view_count` and `dest_page_view_count` attributes have non-zero values

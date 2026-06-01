@@ -15,7 +15,7 @@ What you achieved:
 
 This accelerator is a starting point for exploring and using Signals APIs for your own needs and use cases.
 
-![](./images/console_output.png)
+![Browser developer console showing live prospect scoring output: repeated prediction entries for a domain_userid with scores around 0.009, alongside scoring attributes and explanations fetched from the Signals API](./images/console_output.png)
 
 ## Next steps
 

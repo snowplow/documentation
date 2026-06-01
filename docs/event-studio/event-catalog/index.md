@@ -20,7 +20,7 @@ When your organization has multiple tracking plans across different teams and do
 
 Navigate to **Event Catalog** in the main navigation.
 
-![Event Catalog overview](images/event-catalog-overview.png)
+![Event Catalog page listing six event specifications across multiple tracking plans, showing their entities, event volume, last seen date, and status (Draft or Published), with a "Create event specification" button in the top right](images/event-catalog-overview.png)
 
 ## Browse event specifications
 
@@ -56,7 +56,7 @@ To create an event specification:
 5. Select the source applications where this event is tracked
 6. Click **Confirm**
 
-![Create event specification dialog](images/create-event-specification.png)
+!["Create event specification" dialog with name "Add to cart" entered, tracking plan set to E-commerce Web, and source application set to website](images/create-event-specification.png)
 
 After creation, you can add event and entity data structures, triggers, and property instructions.
 

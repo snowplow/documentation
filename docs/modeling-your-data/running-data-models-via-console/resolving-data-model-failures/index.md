@@ -17,11 +17,11 @@ Console uses these email addresses to send notifications when a data modeling jo
 
 You will be able to see the details of your data model failure in the jobs interface in Console. Under **Job DAG** (Directed Acyclic Graph) for the failed job, click on the failed step to see details of what went wrong.
 
-![Example job DAG](images/dbt-dag.png)
+![Job DAG showing two steps: git-clone-cache (succeeded in 2 seconds) and run-dbt (failed in 16 seconds)](images/dbt-dag.png)
 
 The **Error Output** will show you the error logs from the dbt commands that were executed. These logs will contain the failure information that dbt and the warehouse relayed back to Console.
 
-![Example error output](images/dbt-step-error-output.png)
+![Step logs panel for run-dbt showing FAILED status after 16 seconds, with dbt output warning about deprecated configuration keys and a Database Error](images/dbt-step-error-output.png)
 
 ## Understand and resolve issues
 

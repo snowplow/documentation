@@ -21,4 +21,4 @@ Those files end up in S3 and are used to load the data into Redshift tables dedi
 
 The whole process could be depicted with the following dataflow diagram.
 
-![](images/storage-loader-dataflow.png)
+![Dataflow diagram showing enriched good TSV events with contexts, unstruct_event, and derived_contexts fields being processed by a Shredding component that references Iglu. The shredder outputs three categories — atomic.events, user-specific unstruct events (JSON), and predefined contexts (JSON) — which StorageLoader then copies into Redshift tables named atomic.events, com_acme_events_1, and com_acme_contexts_1.](images/storage-loader-dataflow.png)

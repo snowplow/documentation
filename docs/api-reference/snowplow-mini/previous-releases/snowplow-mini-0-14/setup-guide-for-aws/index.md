@@ -63,7 +63,7 @@ Note: All services are configured to start automatically so everything should ha
 
 To understand the flow of data please refer to the following diagram:
 
-![This image has an empty alt attribute; its file name is snowplow-mini-topology.jpg](images/snowplow-mini-topology.jpg)
+![Real-time processing topology diagram showing the Scala Stream Collector, Stream Enrich, Elasticsearch Sink (Good), and Elasticsearch Sink (Bad) services interacting with RawEvents, EnrichedEvents, BadEvents, and BadElasticsearchEvents streams, with both Elasticsearch Sinks writing to an Elasticsearch node](images/snowplow-mini-topology.jpg)
 
 **IAM**
 
@@ -107,7 +107,7 @@ Select the `Create Security Group` button and fill in the name, description an
 
 You will then need to add the following InBound rules:
 
-![snowplow-mini-security-group-setup](images/security-groups-setup.png)
+![The AWS EC2 "Edit inbound rules" dialog showing three Custom TCP rules: port 80 open to 0.0.0.0/0, port 443 open to 0.0.0.0/0, and port 22 restricted to a specific IP address](images/security-groups-setup.png)
 
 - Custom TCP Rule | Port Range (80)
 - CIDR range `0.0.0.0/0`

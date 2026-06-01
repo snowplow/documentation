@@ -15,7 +15,7 @@ To **install the template**, browse to **Templates** in the Google Tag Manager u
 
 Under **Variable Templates**, click **Search Gallery**, and type `Snowplow v3` into the gallery overlay search bar.
 
-![search Snowplow v3 Settings in GTM gallery](images/search_snowplow_v3_settings.png)
+![GTM Community Template Gallery showing the "Import Variable Template" dialog with "Snowplow v3" entered in the search field, with the Snowplow v3 Settings template by snowplow listed as a result](images/search_snowplow_v3_settings.png)
 
 Click the **Snowplow v3 Settings** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
 

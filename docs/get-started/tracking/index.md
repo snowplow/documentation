@@ -118,7 +118,7 @@ If you have access to the source code of your site, paste the snippet into the `
 
 If you are already using Google Tag Manager to add various code snippets to your site, you can add your Snowplow snippet there.
 
-![google-tag-manager-setup](images/gtm.gif)
+![Animated walkthrough of adding the Snowplow JavaScript snippet as a Custom HTML tag in Google Tag Manager, setting it to fire on All Pages, and previewing the tag](images/gtm.gif)
 
 - Navigate to the Google Tag Manager account you wish to add tracking to
 - Create a new Custom HTML tag and paste the Javascript snippet into the tag

@@ -14,6 +14,15 @@ export default function SchemaProperties(props) {
   const description = props.info || props.schema.description
   const hasProperties =
     props.schema.properties && Object.keys(props.schema.properties).length > 0
+  const warehouseNote = (
+    <p>
+      Check the{' '}
+      <a href="/docs/destinations/warehouses-lakes/querying-data/">
+        querying overview
+      </a>{' '}
+      to confirm the syntax for your warehouse or lake.
+    </p>
+  )
 
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
@@ -148,16 +157,59 @@ export default function SchemaProperties(props) {
           </details>
 
           {props.overview && props.overview.event && (
-            <details>
+            <>
+              <details open>
+                <summary className="cursor-pointer text-base font-semibold">
+                  Warehouse column name
+                </summary>
+                <div className="mt-2 text-base">
+                  <p>
+                    In most warehouses:{' '}
+                    <code>
+                      {'unstruct_event_' +
+                        props.schema.self.vendor.replaceAll('.', '_') +
+                        '_' +
+                        props.schema.self.name +
+                        '_' +
+                        props.schema.self.version.split('-')[0]}
+                    </code>
+                  </p>
+                  {warehouseNote}
+                </div>
+              </details>
+              <details>
+                <summary className="cursor-pointer text-base font-semibold">
+                  Warehouse query
+                </summary>
+                <div className="mt-2 text-base not-prose">
+                  <EventQuery
+                    vendor={props.schema.self.vendor}
+                    name={props.schema.self.name}
+                    version={props.schema.self.version}
+                  />
+                </div>
+              </details>
+            </>
+          )}
+
+          {props.overview && props.overview.event === false && (
+            <details open>
               <summary className="cursor-pointer text-base font-semibold">
-                Warehouse query
+                Warehouse column name
               </summary>
-              <div className="mt-2 text-base not-prose">
-                <EventQuery
-                  vendor={props.schema.self.vendor}
-                  name={props.schema.self.name}
-                  version={props.schema.self.version}
-                />
+              <div className="mt-2 text-base">
+                <p>
+                  In most warehouses:{' '}
+                  <code>
+                    {'contexts_' +
+                      props.schema.self.vendor.replaceAll('.', '_') +
+                      '_' +
+                      props.schema.self.name +
+                      '_' +
+                      props.schema.self.version.split('-')[0]}
+                  </code>
+                </p>
+                {warehouseNote}
               </div>
             </details>
           )}

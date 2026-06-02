@@ -11,8 +11,6 @@ export function fieldName(props, wh) {
         props.name +
         '_' +
         (
-          wh == 'bigquery' ?
-          props.version.replaceAll('-', '_') :
           props.version.split('-')[0]
         )
     );
@@ -23,6 +21,43 @@ export function alias(props) {
 ```
 
 <Tabs groupId="warehouse" queryString>
+<TabItem value="redshift" label="Redshift">
+
+<CodeBlock language="sql">
+{`select
+  "${alias(props)}".*
+from
+  atomic.events events
+  join atomic.${fieldName(props, 'redshift')} "${alias(props)}"
+    on "${alias(props)}".root_id = events.event_id and "${alias(props)}".root_tstamp = events.collector_tstamp
+where
+  events.collector_tstamp > getdate() - interval '1 hour'
+  and "${alias(props)}".root_tstamp > getdate() - interval '1 hour'
+  and events.event = 'unstruct'
+  and events.event_name = '${props.name}'
+  and events.event_vendor = '${props.vendor}'
+`}
+</CodeBlock>
+
+</TabItem>
+
+<TabItem value="bigquery" label="BigQuery">
+
+<CodeBlock language="sql">
+{`select
+  ${fieldName(props, 'bigquery')}
+from
+  PIPELINE_NAME.events events
+where
+  events.collector_tstamp > timestamp_sub(current_timestamp(), interval 1 hour)
+  and events.event = 'unstruct'
+  and events.event_name = '${props.name}'
+  and events.event_vendor = '${props.vendor}'
+`}
+</CodeBlock>
+
+</TabItem>
+
 <TabItem value="snowflake" label="Snowflake">
 
 <CodeBlock language="sql">
@@ -40,22 +75,6 @@ where
 
 </TabItem>
 
-<TabItem value="bigquery" label="BigQuery" default>
-
-<CodeBlock language="sql">
-{`select
-  ${fieldName(props, 'bigquery')}
-from
-  PIPELINE_NAME.events events
-where
-  events.collector_tstamp > timestamp_sub(current_timestamp(), interval 1 hour)
-  and events.event = 'unstruct'
-  and events.event_name = '${props.name}'
-  and events.event_vendor = '${props.vendor}'
-`}
-</CodeBlock>
-
-</TabItem>
 <TabItem value="databricks" label="Databricks">
 
 <CodeBlock language="sql">
@@ -69,26 +88,6 @@ where
   and events.event_name = '${props.name}'
   and events.event_vendor = '${props.vendor}'
   and ${fieldName(props)} is not null
-`}
-</CodeBlock>
-
-</TabItem>
-
-<TabItem value="redshift" label="Redshift & Postgres">
-
-<CodeBlock language="sql">
-{`select
-  "${alias(props)}".*
-from
-  atomic.events events
-  join atomic.${fieldName(props, 'redshift')} "${alias(props)}"
-    on "${alias(props)}".root_id = events.event_id and "${alias(props)}".root_tstamp = events.collector_tstamp
-where
-  events.collector_tstamp > getdate() - interval '1 hour'
-  and "${alias(props)}".root_tstamp > getdate() - interval '1 hour'
-  and events.event = 'unstruct'
-  and events.event_name = '${props.name}'
-  and events.event_vendor = '${props.vendor}'
 `}
 </CodeBlock>
 

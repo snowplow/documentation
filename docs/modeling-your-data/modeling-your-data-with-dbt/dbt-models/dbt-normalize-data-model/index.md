@@ -29,7 +29,7 @@ Normalize in this context means [database normalization](https://en.wikipedia.or
 
 **The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize).**
 
-The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
+The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools. See the [Model Design](#model-design) section for further details on these tables.
 
 The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
@@ -139,7 +139,7 @@ The config file is a JSON file which can be viewed by running the python script 
 <TabItem value="desc" label="Field Description" default>
 
 - `config` _(required - object)_:
-  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) only
+  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) only
   - `filtered_events_table_name` _(optional - string)_: Name of filtered events table, if not provided it will not be generated
   - `users_table_name` _(optional - string)_: Name of users table, default `events_users` if user schema(s) provided
   - `validate_schemas` _(optional - boolean)_: If you want to validate schemas loaded from each iglu registry or not, default `true`

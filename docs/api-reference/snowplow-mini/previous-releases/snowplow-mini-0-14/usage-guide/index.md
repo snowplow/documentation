@@ -58,7 +58,7 @@ Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of cha
 
 To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. We have 2 options:
 
-- Use igluctl's `[server keygen](/docs/api-reference/iglu/igluctl-2/index.md#server-keygen)` subcommand
+- Use igluctl's `[server keygen](/docs/api-reference/iglu/igluctl/index.md#server-keygen)` subcommand
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.
@@ -222,7 +222,7 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl [static push](/docs/api-reference/iglu/igluctl-2/index.md#static-push) to put our custom schema into the Iglu Server
+- Use igluctl [static push](/docs/api-reference/iglu/igluctl/index.md#static-push) to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.

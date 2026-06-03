@@ -43,6 +43,10 @@
     <td>Optional.  Default value <code>1 second</code>.  Maximum backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
 </tr>
 <tr>
+    <td><code>input.apiCallAttemptTimeout</code> (since 0.6.0)</td>
+    <td>Optional. Default value <code>15 seconds</code>. Maximum amount of time to wait for an individual Kinesis API call to complete.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>

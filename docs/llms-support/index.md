@@ -9,9 +9,17 @@ sidebar_position: 2.5
 
 Snowplow supports agentic and LLM-powered workflows in several ways.
 
-## Snowplow CLI MCP server
+## Snowplow Assistant
 
-The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a Model Context Protocol (MCP) server that [connects AI assistants to your Snowplow tracking plans](/docs/llms-support/mcp-server/index.md). This can help you design tracking plans faster and more consistently.
+The [Snowplow Assistant](/docs/llms-support/console-agent/index.md) is an AI assistant built into Snowplow BDP Console. It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation, using your existing Console permissions.
+
+## Snowplow MCP server
+
+The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/index.md) is a remote MCP server that connects AI assistants to your Snowplow Console account. It provides broad access to Console functionality, including pipelines, failed events, event specifications, the data catalog, and more.
+
+## CLI MCP server
+
+The [Snowplow CLI MCP server](/docs/llms-support/cli-mcp-server/index.md) runs locally and connects AI assistants to your tracking plan files on disk. It is included in the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) and is focused on tracking plan design and validation.
 
 ## Documentation index in `llms.txt`
 

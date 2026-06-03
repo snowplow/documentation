@@ -14,7 +14,7 @@ Note that if you want to delete your S3 bucket or Postgres database, you would n
 
 ## How do I upgrade the version of the application that I am using?
 
-We release new versions of our pipeline components very frequently; however the versions used within the terraform modules are updated a few times a year to the most stable and recommended versions of our components. [Sign up to get the latest updates](https://go.snowplowanalytics.com/get-snowplow-technology-updates) on platform releases and new features.
+We release new versions of our pipeline components very frequently; however the versions used within the terraform modules are updated a few times a year to the most stable and recommended versions of our components.
 
 When a new version of a module is released, follow these instructions to upgrade:
 

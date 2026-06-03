@@ -37,7 +37,7 @@ When using the JSON editor, at the point of publishing a data structure you'll b
 
 ## Patch a schema
 
-To [patch a schema](/docs/fundamentals/schemas/versioning/index.md#patch-a-schema), i.e. apply changes to it without updating the version, select the **Patch** option when saving the schema.
+To [patch a schema](/docs/fundamentals/schemas/versioning/index.md#overwrite-a-schema), i.e. apply changes to it without updating the version, select the **Patch** option when saving the schema.
 
 Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it's controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 

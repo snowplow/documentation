@@ -676,7 +676,7 @@ No extra steps needed.
 
 On Azure, we currently support loading data into Databricks via a data lake. To complete the setup, you will need to configure Databricks to access your data on ADLS.
 
-First, follow the [Databricks documentation](https://docs.databricks.com/en/storage/azure-storage.html) to set up authentication using either Azure service principal, shared access signature tokens or account keys. _(The latter mechanism is not recommended, but is arguably the easiest for testing purposes.)_
+First, follow the [Databricks documentation](https://docs.databricks.com/sap/en/external-locations-azure) to set up authentication using either Azure service principal, shared access signature tokens or account keys. _(The latter mechanism is not recommended, but is arguably the easiest for testing purposes.)_
 
 You will need to know a couple of things:
 * Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file

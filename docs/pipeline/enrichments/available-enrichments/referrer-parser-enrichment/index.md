@@ -27,12 +27,12 @@ The enrichment takes these parameters:
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
 
-Configure the parameters in the Console enrichment editor. Keep the Console default for the `uri` field. For example:
+Configure the parameters in the Console enrichment editor. Keep the Console default for the `database` and `uri` fields. For example:
 
 ```json
 {
   "internalDomains": [],
-  "database": "referers-latest.json",
+  "database": "<use default value from Console>",
   "uri": "<use default value from Console>",
   "referrers": {
     "search": {
@@ -67,8 +67,8 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
     "enabled": true,
     "parameters": {
       "internalDomains": [],
-      "database": "referers-latest.json",
-      "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/referers-6.10.json",
+      "database": "referers-5.3.json",
+      "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
       "referrers": {
         "search": {
           "Search website 1": {

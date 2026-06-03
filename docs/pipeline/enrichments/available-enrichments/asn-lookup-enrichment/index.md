@@ -58,28 +58,24 @@ Add the `asn` field:
 
 ## Configuration
 
-:::tip[Values in Console]
-The example shows `database` and `uri` fields. Snowplow CDI customers don't need to worry about these properties: check Console for pre-configured values suitable for your cloud.
-:::
-
 The enrichment takes these parameters:
 
 | Parameter         | Required | Description                                                                      |
 | ----------------- | -------- | -------------------------------------------------------------------------------- |
-| `botAsnsFile`     | ❌        | Location of a CSV file listing ASNs to flag as likely bots.                      |
+| `botAsnsFile`     | ❌        | Location of a CSV file listing ASNs to flag as likely bots. Already provided for CDI customers. |
 | `botAsns`         | ❌        | Inline list of ASNs to flag, merged with any entries from `botAsnsFile`.         |
 | `bypassPlatforms` | ❌        | Event platforms for which the enrichment should not run (e.g. server-side, IoT). |
 
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
 
-Configure the parameters in the Console enrichment editor. For example:
+Configure the parameters in the Console enrichment editor. Keep the Console defaults for the `database` and `uri` fields. For example:
 
 ```json
 {
   "botAsnsFile": {
-    "uri": "s3://my-private-bucket/third-party/bad-asn",
-    "database": "bad-asn-list.csv"
+    "uri": "<use default value from Console>",
+    "database": "<use default value from Console>"
   },
   "botAsns": [
     { "asn": 123, "name": "ASN 123" },
@@ -103,7 +99,7 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
     "enabled": true,
     "parameters": {
       "botAsnsFile": {
-        "uri": "s3://my-private-bucket/third-party/bad-asn",
+        "uri": "<your file location>",
         "database": "bad-asn-list.csv"
       },
       "botAsns": [
@@ -127,6 +123,10 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ### `botAsnsFile`
 
+:::tip[Snowplow CDI]
+If you're using Snowplow CDI, you don't need to configure this. Use the default values provided in Console.
+:::
+
 Points to a CSV file with ASN numbers. The file should have a header row and use the format `number,name` (e.g., `174,"COGENT-174 - Cogent Communications, US"`). Only the number column is used for matching; the name column is for human readability and can be empty.
 
 | Field      | Type   | Description                                                                                                        |
@@ -134,9 +134,7 @@ Points to a CSV file with ASN numbers. The file should have a header row and use
 | `uri`      | string | Base URI where the file is hosted. Supports `http:`, `s3:`, and `gs:` schemes. Must not end with a trailing slash. |
 | `database` | string | The CSV filename.                                                                                                  |
 
-If you use Snowplow CDI, a list is already provided and updated by Snowplow. You can see the pre-configured URI in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
-
-Otherwise, you can use a community-maintained list such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list). Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
+You can use a community-maintained list such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list). Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
 
 ### `botAsns`
 

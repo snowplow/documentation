@@ -56,7 +56,10 @@ Configure the parameters in the Console enrichment editor. For example:
     "mktSource": ["utm_source"],
     "mktTerm": ["utm_term"],
     "mktContent": ["utm_content"],
-    "mktCampaign": ["utm_campaign"]
+    "mktCampaign": ["utm_campaign"],
+    "mktClickId": {
+      "gbraid": "Google"
+    }
   }
 }
 ```
@@ -79,7 +82,10 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
         "mktSource": ["utm_source"],
         "mktTerm": ["utm_term"],
         "mktContent": ["utm_content"],
-        "mktCampaign": ["utm_campaign"]
+        "mktCampaign": ["utm_campaign"],
+        "mktClickId": {
+          "gbraid": "Google"
+        }
       }
     }
   }
@@ -89,7 +95,11 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
   </TabItem>
 </Tabs>
 
-Note that the legacy `mapping` field in the `campaign_attribution` schema definition is ignored by Enrich.
+Here is what the above example does:
+
+* take the value of `utm_medium=...` in the URL and place it into the `mkt_medium` field
+* same for `utm_source` and `mkt_source`, and so on
+* if `gbraid=...` is in the URL, take its value and place it into the `mkt_clickid` field, also setting `mkt_network` to `Google`
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -120,9 +130,10 @@ Results:
 
 | Query string                           | Value of `mkt_campaign` |
 | -------------------------------------- | ----------------------- |
-| `utm_campaign=abc`                     | `abc`                   |
-| `legacy_campaign=abc`                  | `abc`                   |
-| `legacy_campaign=abc&utm_campaign=def` | `def`                   |
+| `utm_campaign=new`                     | `new`                   |
+| `legacy_campaign=old`                  | `old`                   |
+| `utm_campaign=new&legacy_campaign=old` | `new`                   |
+| `legacy_campaign=old&utm_campaign=new` | `new`                   |
 
 ### Click and network attribution
 
@@ -143,8 +154,8 @@ This example shows how to define your own click attribution settings, using `mkt
 * The default mappings for `gclid` and `dclid` remain unaffected
 
 ```json
-    "parameters":{
-      "fields":{
+    "parameters": {
+      "fields": {
         ...
         "mktClickId": {
           "wbraid": "Google",
@@ -157,7 +168,7 @@ This example shows how to define your own click attribution settings, using `mkt
     }
 ```
 
-Use only one click parameter at a time. If you add multiple e.g. both `wbraid` and `gbraid`, one of them will be picked arbitrarily.
+Use only one click id parameter per URL. If you add multiple to the same URL, e.g. both `wbraid` and `gbraid`, one of them will be picked arbitrarily.
 
 Results:
 
@@ -172,4 +183,4 @@ Results:
 
 This enrichment populates the [marketing atomic event fields](/docs/fundamentals/canonical-event/index.md#marketing-fields): `mkt_medium`, `mkt_source`, `mkt_term`, `mkt_content`, `mkt_campaign`, `mkt_clickid`, and `mkt_network`.
 
-If the enrichment is not activated, those fields will not be populated.
+If you don't enable the enrichment, those fields will be empty.

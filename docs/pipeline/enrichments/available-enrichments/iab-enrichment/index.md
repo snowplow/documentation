@@ -47,41 +47,41 @@ For example, the user agent string `Chrome Chrome MyBot Chrome` will match an en
 
 ## Configuration
 
-:::tip[Values in Console]
-The example shows `database` and `uri` fields. Snowplow CDI customers don't need to worry about these properties: check Console for pre-configured values suitable for your cloud.
-:::
-
 The enrichment takes these parameters:
 
 | Parameter              | Required | Description                                                                                                                       |
 | ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `ipFile`               | ✅        | Path to IP address exclude file.                                                                                                  |
-| `excludeUseragentFile` | ✅        | Path to user agent exclude file.                                                                                                  |
-| `includeUseragentFile` | ✅        | Path to user agent include file.                                                                                                  |
+| `ipFile`               | ✅        | Path to IP address exclude file. Already provided for CDI customers.                                                             |
+| `excludeUseragentFile` | ✅        | Path to user agent exclude file. Already provided for CDI customers.                                                             |
+| `includeUseragentFile` | ✅        | Path to user agent include file. Already provided for CDI customers.                                                             |
 | `includeUseragents`    | ❌        | Additional user agent patterns to classify as browsers, extending `includeUseragentFile`. Case-insensitive substring match.       |
 | `excludeUseragents`    | ❌        | Additional user agent patterns to classify as spiders/robots, extending `excludeUseragentFile`. Case-insensitive substring match. |
 
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
 
-Configure the parameters in the Console enrichment editor. For example:
+Configure the parameters in the Console enrichment editor. Keep the Console defaults for the `uri` fields. For example:
 
 ```json
 {
   "ipFile": {
     "database": "ip_exclude_current_cidr.txt",
-    "uri": "s3://my-private-bucket/iab"
+    "uri": "<use default value from Console>"
   },
   "excludeUseragentFile": {
     "database": "exclude_current.txt",
-    "uri": "s3://my-private-bucket/iab"
+    "uri": "<use default value from Console>"
   },
   "includeUseragentFile": {
     "database": "include_current.txt",
-    "uri": "s3://my-private-bucket/iab"
+    "uri": "<use default value from Console>"
   },
-  "excludeUseragents": [],
-  "includeUseragents": []
+  "excludeUseragents": [
+    "BotNotCaughtByIAB"
+  ],
+  "includeUseragents": [
+    "MyServerSideTrackerThatIsNotABot"
+  ]
 }
 ```
 
@@ -100,18 +100,22 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
     "parameters": {
       "ipFile": {
         "database": "ip_exclude_current_cidr.txt",
-        "uri": "s3://my-private-bucket/iab"
+        "uri": "<your file location>"
       },
       "excludeUseragentFile": {
         "database": "exclude_current.txt",
-        "uri": "s3://my-private-bucket/iab"
+        "uri": "<your file location>"
       },
       "includeUseragentFile": {
         "database": "include_current.txt",
-        "uri": "s3://my-private-bucket/iab"
+        "uri": "<your file location>"
       },
-      "excludeUseragents": [],
-      "includeUseragents": []
+      "excludeUseragents": [
+        "BotNotCaughtByIAB"
+      ],
+      "includeUseragents": [
+        "MyServerSideTrackerThatIsNotABot"
+      ]
     }
   }
 }
@@ -128,6 +132,10 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ### IAB files
 
+:::tip[Snowplow CDI]
+If you're using Snowplow CDI, you don't need to configure these. Use the default values provided in Console.
+:::
+
 There are three configuration fields that correspond to the IAB/ABC database files:
 
 | Field name             | Description                                                       |
@@ -140,12 +148,6 @@ All three are mandatory and must have two inner fields:
 
 - The `database` field containing the name of the database file.
 - The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs`, and `s3` schemes.
-
-:::tip[Snowplow CDI]
-
-If you use Snowplow CDI, the necessary files are already provided and updated by Snowplow. You can see the pre-configured URIs of these files in the default enrichment configuration in [Console](https://console.snowplowanalytics.com).
-
-:::
 
 The database filenames must be as follows:
 

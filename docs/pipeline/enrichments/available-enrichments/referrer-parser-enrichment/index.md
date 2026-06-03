@@ -20,20 +20,20 @@ The enrichment takes these parameters:
 | Parameter         | Required | Description                                                                |
 | ----------------- | -------- | -------------------------------------------------------------------------- |
 | `internalDomains` | ✅        | Subdomains to classify as `Internal` traffic sources.                      |
-| `database`        | ✅        | Filename of the referer-parser database.                                   |
-| `uri`             | ✅        | URI of the bucket containing the database file.                            |
+| `database`        | ✅        | Filename of the referer-parser database. Already provided for CDI customers. |
+| `uri`             | ✅        | URI of the bucket containing the database file. Already provided for CDI customers. |
 | `referrers`       | ❌        | Custom referrer-to-category mappings, taking precedence over the database. |
 
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
 
-Configure the parameters in the Console enrichment editor. For example:
+Configure the parameters in the Console enrichment editor. Keep the Console default for the `uri` field. For example:
 
 ```json
 {
   "internalDomains": [],
   "database": "referers-latest.json",
-  "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
+  "uri": "<use default value from Console>",
   "referrers": {
     "search": {
       "Search website 1": {
@@ -68,7 +68,7 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
     "parameters": {
       "internalDomains": [],
       "database": "referers-latest.json",
-      "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/",
+      "uri": "https://s3-eu-west-1.amazonaws.com/snowplow-hosted-assets/third-party/referer-parser/referers-6.10.json",
       "referrers": {
         "search": {
           "Search website 1": {
@@ -120,7 +120,7 @@ This behavior isn't configurable, and may require handling in data models or a [
 
 ### `database` and `uri`
 
-:::note[Snowplow CDI]
+:::tip[Snowplow CDI]
 If you're using Snowplow CDI, you don't need to configure these. Use the default values provided in Console.
 :::
 

@@ -58,7 +58,7 @@ Claude.ai will redirect you to the Snowplow login page to authorize access.
 
 The custom connector method also works for Claude Desktop. But in case you don't have access to custom connectors, you can configure it directly in Claude Desktop using [`mcp-remote`](https://www.npmjs.com/package/mcp-remote)
 
-Add the following to your Claude Desktop configuration filej:
+Add the following to your Claude Desktop configuration file:
 
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`

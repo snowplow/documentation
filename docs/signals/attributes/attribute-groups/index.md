@@ -46,9 +46,9 @@ When enabled, a date picker appears. Select the date from which Signals should b
 
 ### Warehouse
 
-Attribute groups with a warehouse source don't require attribute definition, as no calculation is performed. This source type syncs existing, pre-calculated warehouse values to your Profiles Store. The batch engine runs on a fixed interval and only sends rows that are newer than the last sync, based on a timestamp field you configure. Once a sync period has passed, those rows will not be reprocessed. If a dataset has multiple rows for the same attribute key within a sync period, Signals uses the most recent value.
+Attribute groups with a warehouse source don't require attribute definition, as no calculation is performed. This source type syncs existing, pre-calculated warehouse values to your Profiles Store using the batch engine.
 
-Provide the warehouse and table details, and select which fields you want to send to Signals.
+Provide the warehouse and table details, and select which fields you want to send to Signals. See [Warehouse configuration](/docs/signals/attributes/using-python-sdk/attribute-groups/warehouse-config/index.md) for full configuration details.
 
 ![Warehouse source configuration showing warehouse table and field mapping options](../../images/attribute-group-warehouse-fields.png)
 
@@ -72,13 +72,13 @@ To edit or delete a custom attribute key, go to the key details page and click t
 
 ## Attribute lifetimes
 
-We recommend setting a Time to live (TTL) value for each attribute. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attribute values staying in your Profiles Store forever, configure a TTL when creating or updating an attribute.
+TTL configuration applies to **lifetime attributes** only. For time windowed attributes, the TTL is set automatically to match the attribute's time window — a 10-minute window attribute expires after 10 minutes, regardless of any TTL you configure.
 
-The default TTL is 7 days for stream attributes and 365 days for warehouse synced values.
+For lifetime attribute groups, we recommend setting a TTL to avoid stale values persisting in your Profiles Store indefinitely. Configure a TTL when creating or updating the attribute group.
 
-When an attribute has not been updated for its defined lifespan, that attribute's value will be deleted: fetching it will return a `None` value.
+The defaults for lifetime attribute groups are 7 days for stream attributes and 365 days for warehouse synced values.
 
-If Signals then processes a new event that calculates the attribute again, or syncs new data from the warehouse, the expiration timer is reset.
+When a lifetime attribute has not been updated for its defined TTL, its value is deleted: fetching it will return a `None` value. If Signals then processes a new event that updates the attribute, or syncs new data from the warehouse, the expiration timer is reset.
 
 ## Testing the attribute definitions
 

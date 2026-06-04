@@ -52,7 +52,7 @@ The core Signals components are:
 * **Profiles Store**: stores calculated attributes and configurations
 * Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
 * **Streaming engine**: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
-* **Batch engine**: backfills historical attribute values from your warehouse, and periodically syncs pre-calculated warehouse tables to the Profiles Store
+* **Batch engine**: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
 
 ![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 

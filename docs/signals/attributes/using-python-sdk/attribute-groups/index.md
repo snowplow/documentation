@@ -37,18 +37,19 @@ my_stream_attribute_group = StreamAttributeGroup(
 
 The table below lists all available arguments for `StreamAttributeGroup`:
 
-| Argument        | Description                                           | Type                | Default | Required? |
-| --------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
-| `name`          | The name of the attribute group                       | `string`            |         | ✅         |
-| `version`       | The version of the attribute group                    | `int`               | 1       | ❌         |
-| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`      |         | ✅         |
-| `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
-| `description`   | A description of the attribute group                  | `string`            |         | ❌         |
-| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
-| `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
-| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
+| Argument               | Description                                           | Type                | Default | Required? |
+| ---------------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
+| `name`                 | The name of the attribute group                       | `string`            |         | ✅         |
+| `version`              | The version of the attribute group                    | `int`               | 1       | ❌         |
+| `attribute_key`        | The attribute key associated with the attribute group | `AttributeKey`      |         | ✅         |
+| `owner`                | The owner of the attribute group                      | `Email`             |         | ✅         |
+| `description`          | A description of the attribute group                  | `string`            |         | ❌         |
+| `ttl`                  | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
+| `attributes`           | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
+| `online`               | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
+| `backfill_since_tstamp`| How far in time to backfill from                      | `datetime`          |         | ❌ for stream, ✅ for warehouse |
 
-If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes. We highly recommend setting a TTL. The suggested default is 7 days.
+If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, a default applies based on the attribute group type: stream lifetime attributes default to 7 days, attributes calculated from the warehouse default to 365 days. Please note that time windowed attributes use the period size as their TTL.
 
 Use the `online` property to control whether or not Signals should actively compute the attributes, or just register the configuration.
 
@@ -74,10 +75,6 @@ test_data = sp_signals.test(
     app_ids=["website"] # The app_id in your Snowplow events
 )
 ```
-
-:::note
-While you can filter on specific app_ids during testing, the streaming engine may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
-:::
 
 To see which attributes an attribute group has, use `get_attribute_group()`. Here's an example:
 

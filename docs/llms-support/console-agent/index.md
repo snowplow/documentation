@@ -39,7 +39,7 @@ To provide this functionality, the content of your messages and the configuratio
 You can enable or disable the Snowplow Assistant for your organization from the **Settings** section of the Snowplow Console. When disabled, the chat interface does not appear in the Console for any user in your organization.
 
 :::note
-Only users with the Administrator role can enable or disable the assistant.
+Only users with the Administrator role can enable or disable the Snowplow Assistant.
 :::
 
 When enabling the feature for the first time, an admin user must accept the terms and conditions related to LLM usage within the Snowplow product.

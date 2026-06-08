@@ -45,8 +45,6 @@ A [service](/docs/signals/concepts/#services) provides a pull-based API endpoint
 
 Services allow you to combine multiple attribute groups if needed, but for this tutorial, use just the one you created in the last step.
 
-You'll use this service name in your application code to fetch attributes from this service.
-
 1. Navigate to **Signals** > **Services**
 2. Click **Create service**
 3. Configure:

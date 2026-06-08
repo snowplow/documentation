@@ -300,4 +300,4 @@ import { ChatWidget } from "@/components/chat-widget";
 </body>
 ```
 
-The `ChatWidget` sits alongside `SnowplowTracker` in the layout. If the tracker hasn't initialized yet when the chat sends its first request, `getDomainSessionId()` returns an empty string and the agent responds without Signals context.
+The `ChatWidget` sits alongside `SnowplowTracker` in the layout.

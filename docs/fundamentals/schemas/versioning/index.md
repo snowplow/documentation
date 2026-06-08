@@ -27,9 +27,19 @@ Changing a schema without incrementing the version has several risks:
 
 Aim to treat each schema version as immutable. However, if you can't avoid making changes to an existing schema version, you have two options: patching the schema, or marking it as superseded.
 
-## Patch a schema
+## Schema version format
 
-Patching is available if your schema version isn't yet in production.
+Snowplow versions schemas using a scheme called **SchemaVer**. A SchemaVer version has the form `major-minor-patch`, starting at `1-0-0`:
+
+- `major` — increment for a breaking change that prevents the new schema from validating historical data (for example, changing a field's type, or adding a new required field).
+- `minor` — increment for a change that _may_ prevent the new schema from validating some historical data.
+- `patch` — increment for a change that's compatible with all historical data (for example, adding a new optional field). Note that this is unrelated to overwriting a schema version, which is also called patching.
+
+Unlike [SemVer](https://semver.org/), SchemaVer uses hyphens rather than periods, and starts at `1-0-0` rather than `0.1.0`.
+
+## Overwrite a schema
+
+Overwriting a schema (also called “patching” — not to be confused with the “patch” component of the version) is available if your schema version isn't yet in production.
 
 :::danger[Development schemas only]
 For Snowplow CDI customers, patching is disabled for production pipelines.

@@ -6,14 +6,18 @@ import EventQuery from '@site/docs/reusable/event-query/_index.md'
 
 export default function SchemaProperties(props) {
   const schemaName = props.schema.self.name
-  const badgeText = props.overview
-    ? props.overview.event
-      ? 'Event'
-      : 'Entity'
+  const badgeText = props.overview?.event
+    ? 'Event'
+    : props.overview?.entity
+    ? 'Entity'
     : 'Schema'
   const description = props.info || props.schema.description
   const hasProperties =
     props.schema.properties && Object.keys(props.schema.properties).length > 0
+  const hasExample =
+    props.example &&
+    typeof props.example === 'object' &&
+    Object.keys(props.example).length > 0
 
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
@@ -44,20 +48,18 @@ export default function SchemaProperties(props) {
             </code>
           </div>
 
-          {props.example &&
-            Object.keys(props.example).length > 0 &&
-            hasProperties && (
-              <details>
-                <summary className="cursor-pointer text-base font-semibold">
-                  Example
-                </summary>
-                <div className="mt-2 text-base">
-                  <CodeBlock language="json">
-                    {JSON.stringify(props.example, null, 2)}
-                  </CodeBlock>
-                </div>
-              </details>
-            )}
+          {hasExample && hasProperties && (
+            <details>
+              <summary className="cursor-pointer text-base font-semibold">
+                Example data
+              </summary>
+              <div className="mt-2 text-base">
+                <CodeBlock language="json">
+                  {JSON.stringify(props.example, null, 2)}
+                </CodeBlock>
+              </div>
+            </details>
+          )}
 
           <details open>
             <summary className="cursor-pointer text-base font-semibold">
@@ -138,7 +140,7 @@ export default function SchemaProperties(props) {
                     </p>
                   )}
                 </TabItem>
-                <TabItem value="json" label="JSON schema">
+                <TabItem value="json" label="Complete JSON schema">
                   <CodeBlock language="json">
                     {JSON.stringify(props.schema, null, 2)}
                   </CodeBlock>
@@ -147,7 +149,7 @@ export default function SchemaProperties(props) {
             </div>
           </details>
 
-          {props.overview && props.overview.event && (
+          {props.overview?.event && (
             <details>
               <summary className="cursor-pointer text-base font-semibold">
                 Warehouse query

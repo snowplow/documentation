@@ -42,6 +42,6 @@ import Link from '@docusaurus/Link';
     <td><code>output.good.catalog.options.*</code></td>
     <td>
     Optional. A map of key/value strings which are passed to the catalog configuration.
-    These can be anything <Link to="https://iceberg.apache.org/docs/latest/rest-catalog/">from the Iceberg REST catalog documentation</Link>, such as authentication credentials.
+    These can be anything <Link to="https://iceberg.apache.org/rest-catalog-spec/">from the Iceberg REST catalog documentation</Link>, such as authentication credentials.
     </td>
 </tr>

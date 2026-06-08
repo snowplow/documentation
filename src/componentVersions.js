@@ -76,5 +76,5 @@ export const versions = {
 
   // Testing & debugging
   snowplowMicro: '4.2.1',
-  snowplowMini: '0.25.1',
+  snowplowMini: '0.26.0',
 }

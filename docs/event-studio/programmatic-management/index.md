@@ -14,6 +14,7 @@ Partnered with other tools like the data structures [CI tool](/docs/testing/data
 
 The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) provides file-based workflows for git-ops integration. It has commands to:
 
+- [Send events](/docs/event-studio/programmatic-management/snowplow-cli/send-events/index.md) to a Collector from the command line, for testing or scripting
 - Download and upload [data structures](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md) as local YAML/JSON files
 - Manage [tracking plans](/docs/event-studio/programmatic-management/snowplow-cli/tracking-plans/index.md), event specifications, and source applications
 - Validate resources before publishing

@@ -2,7 +2,7 @@
 title: "Snowplow CLI command reference"
 sidebar_label: "Command reference"
 date: 2026-03-06
-sidebar_position: 1
+sidebar_position: 0
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
 ---
@@ -1063,3 +1063,91 @@ snowplow-cli status [flags]
   -q, --quiet             Log output level to Warn
   -s, --silent            Disable output
 ```
+
+## Events
+
+
+Work with Snowplow events
+
+### Examples
+
+```
+  $ snowplow-cli events send --collector collector.example.com --sdjson '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
+```
+
+### Options
+
+```
+  -h, --help   help for events
+```
+
+### Options inherited from parent commands
+
+```
+      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                        Then on:
+                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                          Windows %AppData%\snowplow\snowplow.yml
+      --debug           Log output level to Debug
+      --json-output     Log output as json
+  -q, --quiet           Log output level to Warn
+  -s, --silent          Disable output
+```
+
+
+
+## Events Send
+
+
+Send a single event to a Snowplow collector
+
+### Synopsis
+
+Send a single self-describing event to a Snowplow collector.
+
+Provide either a full self-describing JSON via --sdjson, or a --schema URI plus a
+--json data payload. Optionally attach entities via --entities.
+
+```
+snowplow-cli events send [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli events send -c collector.example.com -d iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0 -j '{"category":"test","action":"click"}'
+  $ snowplow-cli events send -c collector.example.com -J '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
+```
+
+### Options
+
+```
+  -a, --app-id string       Application ID (default "snowplowcli")
+  -c, --collector string    Collector domain, e.g. collector.example.com (required)
+  -e, --entities string     JSON array of self-describing JSON entities to attach (default "[]")
+  -h, --help                help for send
+  -i, --ip-address string   Custom IP address to track
+  -j, --json string         Non-self-describing JSON data of the form {...}
+  -m, --method string       HTTP method [POST|GET] (default "POST")
+  -p, --protocol string     Protocol [http|https] (default "https")
+  -d, --schema string       Schema (data structure) URI, of the form iglu:...
+  -J, --sdjson string       Self-describing JSON of the form {"schema":"iglu:...","data":{...}}
+```
+
+### Options inherited from parent commands
+
+```
+      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                        Then on:
+                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                          Windows %AppData%\snowplow\snowplow.yml
+      --debug           Log output level to Debug
+      --json-output     Log output as json
+  -q, --quiet           Log output level to Warn
+  -s, --silent          Disable output
+```
+
+
+

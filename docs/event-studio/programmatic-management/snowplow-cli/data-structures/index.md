@@ -1,7 +1,7 @@
 ---
 title: "Manage data structures via Snowplow CLI"
 sidebar_label: "Data structures"
-sidebar_position: 2
+sidebar_position: 20
 description: "Use the Snowplow CLI data-structures command to generate, download, validate, and publish data structures with git-ops workflows and JSON Schema validation."
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
 ---

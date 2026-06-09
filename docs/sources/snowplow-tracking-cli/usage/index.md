@@ -3,8 +3,8 @@ title: "Snowplow Tracking CLI interface"
 sidebar_label: "Usage"
 date: "2020-10-12"
 sidebar_position: 200
-description: "Track events from command line with Tracking CLI using self-describing JSON or schema URI with collector endpoint, app ID, and HTTP method options."
-keywords: ["cli usage", "self-describing json", "command line events"]
+description: "Deprecated. Reference for the legacy Snowplow Tracking CLI interface. Use the snowplow-cli events send command instead."
+keywords: ["tracking cli deprecated", "snowplow-cli events send"]
 ---
 
 The command line interface is as follows:

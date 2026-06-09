@@ -1,0 +1,25 @@
+docs/event-studio/programmatic-management/snowplow-cli/send-events/index.md
+  s_d89843fd3a70fa::t_83a6d9447f4763 22
+  s_d89843fd3a70fa::t_4ed32e647c2c71 10
+  s_d89843fd3a70fa::t_ff47632da5bc80 5
+  s_d89843fd3a70fa::t_84af1b7aeff040 12
+  s_d89843fd3a70fa::t_825f33ebc6b5ea 20
+docs/event-studio/programmatic-management/index.md
+  s_d89843fd3a70fa::t_ef4adbb3f2f8d7 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8402c4d7d983692955167461359b7670eb2eb5f1",
+  "prompts": {},
+  "sessions": {
+    "s_d89843fd3a70fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6dc8bc10-97e6-4b9d-b457-7025cedf459c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gleb Lobov <gleb.lobov@snowplowanalytics.com>"
+    }
+  }
+}

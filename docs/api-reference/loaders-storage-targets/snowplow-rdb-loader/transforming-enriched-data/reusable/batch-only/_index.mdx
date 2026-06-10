@@ -66,3 +66,7 @@ Any key-value pairs to be added as dimensions in Cloudwatch metrics. Example:
     <td><code>skipSchemas</code> (since 5.7.1) </td>
     <td>Optional, default = none. Supply a list of Iglu URIs and the transformer's output files will omit any columns using that schema.  This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
 </tr>
+<tr>
+    <td><code>archival.source</code> (since 6.5.0) </td>
+    <td>Optional. An S3 URI holding enriched data to archive. When set, the transformer copies all files from this path into a new <code>run=YYYY-MM-DD-hh-mm-ss</code> directory under <code>input</code> before processing begins, then deletes each source file. Omit it (or leave the <code>archival</code> block empty) to skip the archival step. This can replace the standalone <code>s3-dist-cp</code> EMR step.</td>
+</tr>

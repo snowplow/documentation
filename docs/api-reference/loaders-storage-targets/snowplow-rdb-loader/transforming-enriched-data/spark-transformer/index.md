@@ -261,6 +261,12 @@ You need to change the following settings with your own values:
 
 **NOTE:** The `"--src"` and `"--dest"` settings above apply only to the `s3DistCp` step of the playbook. The source and destination buckets for the transformer step are configured via the `config.hocon` file.
 
+:::tip[Archiving within the transformer]
+
+Since version 6.5.0, the transformer can perform this copy step itself instead of relying on a separate `s3-dist-cp` step. Set [`archival.source`](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/configuration-reference/index.md) in `config.hocon` to the S3 path of your enriched data. Before processing begins, the transformer copies all files from that path into a new `run=YYYY-MM-DD-hh-mm-ss` directory under `input`, then deletes each source file. When you use this option, you can remove the `S3DistCp` step from the playbook.
+
+:::
+
 ### Submitting the job to EMR with Dataflow Runner
 
 Here's an example of putting all of the above together on a transient EMR cluster:

@@ -22,7 +22,11 @@ If your source data comes from Snowplow events, consider using a stream attribut
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-When creating an attribute group, select **Warehouse** as the data source. Provide the warehouse and table details, and select which fields you want to send to Signals.
+When creating an attribute group, select **Warehouse** as the data source.
+
+![Create attribute group form showing where to select the Warehouse data source in Snowplow Console](../../images/warehouse.png)
+
+Then provide the warehouse and table details, and select which fields you want to send to Signals.
 
 ![Warehouse source configuration showing warehouse table and field mapping options](../../images/attribute-group-warehouse-fields.png)
 

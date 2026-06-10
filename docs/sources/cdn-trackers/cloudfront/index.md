@@ -7,7 +7,7 @@ keywords: ["cloudfront tracking", "cloudfront access logs", "amazon firehose", "
 date: "2026-06-10"
 ---
 
-If your website is served through Amazon CloudFront, you can forward access logs to Snowplow to capture page views from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each log entry as a [page view event](/docs/fundamentals/events/index.md), which integrates naturally with your existing web analytics.
+If your website is served through Amazon CloudFront, you can forward access logs to Snowplow to capture page views from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each log entry as a [page view event](/docs/fundamentals/events/index.md), which appears alongside your existing web analytics events.
 
 This integration uses [CloudFront standard logging](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) with Amazon Data Firehose as the delivery mechanism. Firehose forwards log batches to the Snowplow Collector via HTTP, where they are processed by the CloudFront Firehose adapter in Enrich. This adapter is available from Enrich 6.12.0.
 
@@ -55,7 +55,7 @@ To set a custom `app_id`, append `?aid=<value>` to the collector endpoint URL wh
 
 :::note[IP address collection]
 
-CloudFront access logs contain the visitor IP address in the `c-ip` field, and there is no mechanism for visitors to opt out of IP collection at the CDN level. For this reason, we recommend omitting `c-ip` from the fields you enable in CloudFront. If you do include it, consider pairing this with the [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md).
+CloudFront access logs contain the visitor IP address in the `c-ip` field, and there is no mechanism for visitors to opt out of IP collection at the CDN level. For this reason, omit `c-ip` from the fields you enable in CloudFront. If you do include it, consider pairing this with the [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md).
 
 :::
 
@@ -108,7 +108,7 @@ Choose which log fields to include. At minimum, include:
 - `cs(User-Agent)` — visitor user agent
 - `cs(Referer)` — referring URL
 
-We recommend **not** including `c-ip`. See the note on IP address collection above.
+Avoid including `c-ip`. See the note on IP address collection above.
 
 ## Filter events before ingestion
 

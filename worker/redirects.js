@@ -428,6 +428,9 @@ const fallbackRules = [
   // Bot filtering moved to events section
   ['/docs/pipeline/enrichments/filtering-bot-events/*', '/docs/events/filtering-bot-events/:splat', 301],
   ['/deprecation-policy', '/lifecycle-policy', 301],
+  // JS enrichment flattened
+  ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
+  ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
   // Iglu docs refactor — deleted/relocated pages
   ['/docs/api-reference/iglu/igluctl-2/*', '/docs/api-reference/iglu/igluctl/:splat', 301],
   ['/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/', '/docs/fundamentals/schemas/#self-describing-json-schema-anatomy', 301],

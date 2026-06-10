@@ -67,7 +67,7 @@ Or if you made a typo in a function name:
 
 :::note
 
-If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event), you will get a similar failure message in the logs, but it would be expected.
+If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events), you will get a similar failure message in the logs, but it would be expected.
 
 :::
 
@@ -129,7 +129,7 @@ For example, if your code adds some entities, you will find them in the output f
 
 ## Iterating on code and schemas
 
-If your enrichment [adds extra entities to the event](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event), you might be iterating on the schemas for those entities at the same time you are iterating on your enrichment code.
+If your enrichment [adds extra entities to the event](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#add-entities), you might be iterating on the schemas for those entities at the same time you are iterating on your enrichment code.
 
 You can simplify your development and testing flow by [adding schemas to Micro](/docs/testing/snowplow-micro/local/schemas/index.md#adding-schemas-directly-to-micro) as local files. For example, your current directory might look like this:
 

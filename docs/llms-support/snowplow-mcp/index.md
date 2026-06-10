@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Snowplow MCP is a remote [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that lets AI assistants interact with your Snowplow Console account using natural language.
 
-The MCP server exposes the same set of tools as the Snowplow Assistant, but in your choice of harness and model. The server authenticates through your existing Snowplow Console login via OAuth.
+The MCP server exposes the same set of tools as the Snowplow Assistant, but in your choice of harness and model. The server authenticates through your existing Snowplow Console login via OAuth, or with a Console API key to avoid re-authenticating — see [Authentication](#authentication).
 
 ## One-line install (Claude Code, Cursor)
 
@@ -58,7 +58,7 @@ Claude.ai will redirect you to the Snowplow login page to authorize access.
 
 The custom connector method also works for Claude Desktop. But in case you don't have access to custom connectors, you can configure it directly in Claude Desktop using [`mcp-remote`](https://www.npmjs.com/package/mcp-remote)
 
-Add the following to your Claude Desktop configuration filej:
+Add the following to your Claude Desktop configuration file:
 
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
@@ -169,9 +169,49 @@ Cursor will redirect you to the Snowplow login page to authorize access.
 
 ## Authentication
 
-The MCP server authenticates via OAuth using your Snowplow Console credentials. The AI assistant operates with the same permissions as your user account — it can access and modify only things that you can.
+OAuth and API keys are the two ways to authenticate with your Snowplow Console account. Both give the assistant access to one organization at a time, limited to what the credentials allow.
 
-The server automatically connects to the organization your account belongs to. Selecting a different organization is not currently supported.
+### OAuth
+
+The configurations above use OAuth. On first connection, your tool opens a browser to authorize against [Snowplow Console](https://console.snowplowanalytics.com), and the assistant then operates with the same permissions as your user account — it can access and modify only what you can.
+
+OAuth uses the organization your account belongs to by default. To target a different organization that your user has access to, add an `X-Org-Id` header with the organization ID, found on the **Manage organization** page in [Console](https://console.snowplowanalytics.com/settings). With `mcp-remote`, append these entries to the `args` array of any configuration above:
+
+```json
+"--header",
+"X-Org-Id:<ORGANIZATION_ID>"
+```
+
+### API key
+
+Authenticate with a Snowplow Console API key to avoid repeated browser logins. Unlike OAuth tokens, which expire and prompt a fresh login, an API key is a long-lived credential passed as HTTP headers, so the connection keeps working without interruption.
+
+First, [create an API key](/docs/account-management/index.md#create-an-api-key) in Console and note the API key ID and the API key. From the same **Manage organization** page, copy your organization ID. Then configure the server with the `X-Org-Id`, `X-Api-Key-Id`, and `X-Api-Key` headers:
+
+```json
+{
+  "mcpServers": {
+    "snowplow-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://console.snowplowanalytics.com/api/agent/mcp",
+        "--header",
+        "X-Org-Id:<ORGANIZATION_ID>",
+        "--header",
+        "X-Api-Key-Id:<API_KEY_ID>",
+        "--header",
+        "X-Api-Key:<API_KEY>"
+      ]
+    }
+  }
+}
+```
+
+:::warning[API keys use admin permissions by default]
+By default, API keys are created with all permissions, which may be broader than you intend for an assistant. The assistant can perform any action the key allows. If you need the assistant to operate with limited permissions, use [OAuth](#oauth) instead, which is scoped to your user account. Store the key securely and only use this method in environments you trust.
+:::
 
 ## Capabilities of the server
 

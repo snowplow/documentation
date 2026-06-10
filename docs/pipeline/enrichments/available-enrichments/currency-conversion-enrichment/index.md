@@ -1,45 +1,77 @@
 ---
 title: "Currency conversion enrichment"
 sidebar_position: 2
-sidebar_label: Currency conversion
+sidebar_label: Currency conversion (legacy)
 description: "Convert transaction values to a base currency using Open Exchange Rates API for standardized reporting."
 keywords: ["currency conversion", "exchange rates", "multi-currency"]
 ---
 
-This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-When transactional data is collected in multiple currencies, it can be useful to convert it in the one that is used for reporting for instance. This could help to lower discrepancies when reporting revenue amounts across multiple currencies.
-
-:::note[Limitations]
-
-This is an older and less actively maintained enrichment, and as such it has several limitations.
-
-* **It can only use the exchange rate from the end of the day prior to the event’s `collector_tstamp`.** You can’t apply a different rate (e.g. the one in effect when the event occurred), and you can’t pick a different timestamp field (e.g. `dvce_sent_tstamp`).
-* **It only works with the [`tr_` and `ti_` fields](/docs/fundamentals/canonical-event/index.md#legacy-ecommerce-fields).** These fields are not very convenient to use and exist for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
-
-Over the years, it has become more idiomatic to use dedicated [entities](/docs/fundamentals/entities/index.md) for order items in ecommerce transactions.
-
-We recommend to manage currency conversion downstream instead of using this enrichment. For example, you could bring currency exchange rate information into your data warehouse and join that data with your Snowplow data.
-
+:::tip[Don't use this enrichment]
+We recommend managing currency conversion downstream instead of using this enrichment. For example, you could bring currency exchange rate information into your data warehouse and join that data with your Snowplow data.
 :::
+
+This legacy enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.
+
+This enrichment only works with the legacy `tr_` and `ti_` [ecommerce atomic event fields](/docs/fundamentals/canonical-event/index.md#legacy-ecommerce-fields). Also, it can only use the exchange rate from the end of the day prior to the event's `collector_tstamp`. For these reasons, we recommend handling currency conversion downstream instead of using this enrichment.
 
 ## Configuration
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/currency_conversion_config/jsonschema/1-0-0)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/currency_conversion_config.json)
+The enrichment takes these parameters:
+
+| Parameter      | Required | Description                                                                                                                                                                                     |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`       | ✅        | Open Exchange Rates API key.                                                                                                                                                                    |
+| `baseCurrency` | ✅        | Currency to convert all transaction values to.                                                                                                                                                  |
+| `rateAt`       | ✅        | Determines which exchange rate will be used. Only `EOD_PRIOR` is supported, meaning that the enrichment uses the exchange rate from the end of the day prior to the event's `collector_tstamp`. |
+| `accountType`  | ✅        | Level of Open Exchange Rates account. Must be `DEVELOPER`, `ENTERPRISE`, or `UNLIMITED`.                                                                                                        |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. For example:
+
+```json
+{
+  "accountType": "DEVELOPER",
+  "apiKey": "{{KEY}}",
+  "baseCurrency": "USD",
+  "rateAt": "EOD_PRIOR"
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/currency_conversion_config/jsonschema/1-0-0",
+  "data": {
+    "enabled": false,
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "currency_conversion_config",
+    "parameters": {
+      "accountType": "DEVELOPER",
+      "apiKey": "{{KEY}}",
+      "baseCurrency": "USD",
+      "rateAt": "EOD_PRIOR"
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
 <TestingWithMicro/>
 ```
-
-| **Field**      | **Description**                                                                                                                                                                                               |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accountType`  | Level of Open Exchange Rates account. Must be “developer”, “enterprise”, or “unlimited”.                                                                                                                      |
-| `apiKey`       | Open Exchange Rates API key                                                                                                                                                                                   |
-| `baseCurrency` | Currency to convert all transaction values to                                                                                                                                                                 |
-| `rateAt`       | Determines which exchange rate will be used. **Currently only “EOD_PRIOR” is supported**, meaning that the enrichment uses the exchange rate from the end of the day prior to the event’s `collector_tstamp`. |
 
 ## Input
 
@@ -54,7 +86,7 @@ This enrichment uses the following fields :
 
 ## Output
 
-This enrichment updates the following fields of the atomic event :
+This enrichment updates the following fields of the atomic event:
 
 | Field              | Purpose                                                                                         |
 | ------------------ | ----------------------------------------------------------------------------------------------- |

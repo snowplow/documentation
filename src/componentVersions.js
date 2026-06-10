@@ -24,7 +24,7 @@ export const versions = {
   collector: '3.7.0',
   enrich: '6.11.0',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.7',
+  dataflowRunner: '0.7.8',
   snowbridge: '5.1.1',
 
   // Loaders
@@ -75,6 +75,6 @@ export const versions = {
   igluScalaClient: '4.0.3',
 
   // Testing & debugging
-  snowplowMicro: '4.2.0',
-  snowplowMini: '0.25.1',
+  snowplowMicro: '4.2.1',
+  snowplowMini: '0.26.0',
 }

@@ -18,7 +18,7 @@ Enrich tracks the following metrics:
 - `good_bytes`: total byte size of successfully enriched events, measured after serialization to TSV format.
 - `failed` (`incomplete` before version 6.0.0): the number of failed events produced due to [common failures](/docs/fundamentals/failed-events/index.md#common-failures), e.g. schema violations or enrichment failures.
 - `bad`: total number of all types of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
-- `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event).
+- `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events).
 - `e2e_latency_millis` (`latency` before version 6.0.0): time difference between the collector timestamp and when the event is emitted to the output stream.
 - `latency_millis` (since version 6.0.0): delay between an input record being written to the stream and Enrich starting to process it.
 - `invalid_enriched`: number of enriched events that were not valid against the [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.

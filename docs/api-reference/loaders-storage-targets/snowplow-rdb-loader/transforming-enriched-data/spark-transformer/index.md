@@ -18,9 +18,9 @@ For a high-level overview of the Transform process, see [Transforming enriched d
 
 :::
 
-The Spark-based transformer is a batch job designed to be deployed in an EMR cluster and process a bounded data set stored on S3.
+The Spark-based transformer is a batch job that processes a bounded data set stored on S3. You can deploy it on an EMR cluster, or as a Spark job on Kubernetes (see [Running on Kubernetes](#running-on-kubernetes)).
 
-In order to run it, you will need:
+To run it on EMR, you will need:
 
 - the `snowplow-transformer-batch` jar file (from version 3.0.0 this replaces the `snowplow-rdb-shredder` asset)
 - configuration files for the jar file
@@ -261,6 +261,12 @@ You need to change the following settings with your own values:
 
 **NOTE:** The `"--src"` and `"--dest"` settings above apply only to the `s3DistCp` step of the playbook. The source and destination buckets for the transformer step are configured via the `config.hocon` file.
 
+:::tip[Archiving within the transformer]
+
+Since version 6.5.0, the transformer can perform this copy step itself instead of relying on a separate `s3-dist-cp` step. Set [`archival.source`](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/configuration-reference/index.md) in `config.hocon` to the S3 path of your enriched data. Before processing begins, the transformer copies all files from that path into a new `run=YYYY-MM-DD-hh-mm-ss` directory under `input`, then deletes each source file. When you use this option, you can remove the `S3DistCp` step from the playbook. This is required when [running on Kubernetes](#running-on-kubernetes), where the `s3-dist-cp` EMR step is not available.
+
+:::
+
 ### Submitting the job to EMR with Dataflow Runner
 
 Here's an example of putting all of the above together on a transient EMR cluster:
@@ -274,3 +280,22 @@ $ ./dataflow-runner run-transient \
 This will spin up the cluster with the above configuration, submit the steps from the playbook, and terminate the cluster once all steps are completed.
 
 For more examples on running EMR jobs with Dataflow Runner, as well as details on cluster configurations and playbooks, see the app's [documentation](/docs/api-reference/dataflow-runner/index.md). It also details how you can submit steps to a persistent EMR cluster.
+
+## Running on Kubernetes
+
+Since version 6.5.0, the batch transformer is also published as a Docker image that runs as a [Spark job on Kubernetes](https://spark.apache.org/docs/latest/running-on-kubernetes.html), as an alternative to EMR. The image is based on the official `apache/spark` base image:
+
+<CodeBlock language="text">{`docker.io/snowplow/rdb-transformer-batch:${versions.rdbLoader}`}</CodeBlock>
+
+The transformer reads the same `config.hocon` and `iglu_resolver.json` files as the EMR deployment (see [Configuring `snowplow-transformer-batch`](#configuring-snowplow-transformer-batch)). Two differences apply when running on Kubernetes:
+
+- the `s3-dist-cp` EMR step is not available, so you must set [`archival.source`](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/configuration-reference/index.md) in `config.hocon` to have the transformer copy enriched data into its `input` path before processing.
+- AWS credentials are resolved through the default AWS credentials provider chain. On EKS this means [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) works automatically, so no credentials need to be set in the configuration.
+
+The image entrypoint expects the `spark-submit` options and the transformer's application arguments as a single list, separated by a `--` sentinel:
+
+```text
+[spark-submit options] -- --iglu-config <base64 iglu_resolver.json> --config <base64 config.hocon>
+```
+
+Everything before `--` is passed to `spark-submit`, and everything after `--` is passed to the transformer. The entrypoint adds the `--class` and JAR arguments, and the S3A filesystem configuration, automatically. Deploy the job following the upstream [Running Spark on Kubernetes](https://spark.apache.org/docs/latest/running-on-kubernetes.html) guide, setting `spark.kubernetes.container.image` to the image above.

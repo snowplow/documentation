@@ -85,11 +85,7 @@ Stream attribute groups only calculate attributes from the moment they are publi
 <TabItem value="console" label="Console" default>
 
 :::note[Warehouse connection]
-A warehouse connection is required to use the backfill option.
-:::
-
-:::note[Supported warehouses]
-Only Snowflake and BigQuery are supported currently.
+A warehouse connection is required to use the backfill option. Only Snowflake and BigQuery are supported currently.
 :::
 
 Enable **Backfill attributes** when creating the group. A date picker appears — select the date from which Signals should backfill attribute values from your Snowplow `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse.

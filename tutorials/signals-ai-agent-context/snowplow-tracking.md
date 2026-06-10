@@ -57,8 +57,8 @@ export function getDomainSessionId(): string {
   try {
     // getDomainUserInfo() returns the _sp_id cookie as an array.
     // Index [6] is the domain_sessionid.
-    const info = tracker.getDomainUserInfo();
-    return info?.[6] ?? "";
+    const cookieValues = tracker.getDomainUserInfo();
+    return cookieValues?.[6] ?? "";
   } catch {
     return "";
   }
@@ -74,41 +74,40 @@ In a Next.js App Router app, client-side navigation doesn't trigger full page re
 Create a client component to track page views when the route changes:
 
 ```tsx
-// components/snowplow-provider.tsx
+// components/snowplow-tracker.tsx
 "use client";
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { initSnowplow, trackPage } from "@/lib/snowplow";
 
-export function SnowplowProvider({ children }: { children: React.ReactNode }) {
+export function SnowplowTracker() {
   const pathname = usePathname();
 
-  // Initialize tracker on mount
   useEffect(() => {
     initSnowplow();
   }, []);
 
-  // Track page view on every route change
   useEffect(() => {
     trackPage();
   }, [pathname]);
 
-  return <>{children}</>;
+  return null;
 }
 ```
 
-The scaffolded `app/layout.tsx` already includes font imports, a `lang` attribute, and CSS classes. Add the `SnowplowProvider` import and wrap `{children}` with it:
+The scaffolded `app/layout.tsx` already includes font imports, a `lang` attribute, and CSS classes. Add the `SnowplowTracker` import and place it alongside `{children}`:
 
 ```tsx
 // app/layout.tsx — add these two changes to your scaffolded layout:
 
 // 1. Add this import at the top
-import { SnowplowProvider } from "@/components/snowplow-provider";
+import { SnowplowTracker } from "@/components/snowplow-tracker";
 
-// 2. Wrap {children} inside the <body> tag:
+// 2. Add SnowplowTracker inside the <body> tag:
 <body className={/* ...keep existing classes... */}>
-  <SnowplowProvider>{children}</SnowplowProvider>
+  <SnowplowTracker />
+  {children}
 </body>
 ```
 

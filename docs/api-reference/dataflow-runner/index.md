@@ -217,3 +217,9 @@ OPTIONS:
 ```
 
 This command is a combination of `up`, `run` and `down` which is designed to mimic the current `EmrEtlRunner` behavior.
+
+As with the `up` command, if the transient cluster fails to launch (for example, a bootstrap action error), Dataflow Runner surfaces the EMR `StateChangeReason` so the reason is visible in the runner's stdout rather than only in the AWS console. From `0.7.8` onwards the code and message are included in both the logs and the final error returned by `run-transient`:
+
+```text
+ERRO[0310] EMR cluster state change reason: code='BOOTSTRAP_FAILURE' message="Master instance (i-0123456789abcdef0) failed attempting to download bootstrap action 1 file from S3"
+```

@@ -143,7 +143,7 @@ The created `Signals` object has the following methods:
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
 
-Check out the [attribute groups](/docs/signals/attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
+Check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/attributes/services/index.md), and [interventions](/docs/signals/interventions/using-python-sdk/index.md) pages to learn how to configure them programmatically.
 
 Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
 

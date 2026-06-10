@@ -49,7 +49,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     description="Use Signals within a notebook"
   >
     [Connect to Signals](/docs/signals/connection/index.md#signals-python-sdk)
-    [Define attributes](/docs/signals/attributes/using-python-sdk/index.md)
+    [Define attributes](/docs/signals/attributes/attribute-groups/index.md)
     [Define interventions](/docs/signals/interventions/using-python-sdk/index.md)
   </FeaturedSection>
 

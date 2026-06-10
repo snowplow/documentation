@@ -11,52 +11,55 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-[Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value. You define attributes within [attribute groups](/docs/signals/attributes/attribute-groups/index.md), then retrieve calculated values through [services](/docs/signals/attributes/services/index.md) or directly from individual groups.
+[Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value. There are three ways to interact with Signals attributes:
 
-## Define attributes
+* **[Snowplow Console](https://console.snowplowanalytics.com)** — a UI for defining and managing attribute configurations. Covered in the sub-pages of this section.
+* **[Signals Python SDK](https://pypi.org/project/snowplow-signals/)** — define and publish attribute configurations programmatically from a notebook or script. Covered in the sub-pages of this section alongside the Console approach.
+* **[Signals API](/docs/signals/connection/index.md#signals-api)** — interact with Signals directly over HTTP, including both configuration and retrieval.
 
-There are three methods for defining attributes in Signals:
-* Snowplow Console UI
-* [Signals Python SDK](/docs/signals/attributes/using-python-sdk/index.md)
-* [Signals API](/docs/signals/connection/index.md#signals-api)
+## Defining attributes
 
-### Snowplow Console
+Attributes are defined within [attribute groups](/docs/signals/attributes/attribute-groups/index.md). Each group specifies an [attribute key](/docs/signals/attributes/attribute-keys/index.md) (the identifier to calculate against), the [attributes](/docs/signals/attributes/attributes/index.md) to compute, and a data source — either a real-time event stream or a [warehouse table](/docs/signals/attributes/warehouse-config/index.md). Once published, attribute groups are grouped into [services](/docs/signals/attributes/services/index.md) for retrieval.
 
-To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
 
-Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md) and [services](/docs/signals/attributes/services/index.md).
+Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section. Use the **Attribute groups**, **Attribute keys**, and **Services** pages to create and manage your configuration.
 
 ![Signals section of the Console navigation sidebar showing Overview, Attribute groups, Services, Attribute keys, and Interventions as menu items](../images/console-navbar.png)
 
-## Retrieve attributes
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
 
-Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/index.md#services).
+Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object, then use the `publish()` method to register your configuration.
 
-To use attributes to take action in your application, you'll want to retrieve only the relevant values. This would usually be the attributes for the current user.
+```python
+from snowplow_signals import Signals, StreamAttributeGroup
 
-For example, use the current user's unique `domain_userid` identifier to retrieve attributes defined against the `domain_userid` attribute key.
+sp_signals = Signals({{ config }})
 
-You have three options for consuming attributes, depending on your use case or application:
-* [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) (TypeScript)
-* [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
-* [Signals API](/docs/signals/connection/index.md#signals-api)
+sp_signals.publish([my_attribute_group, my_service])
+```
+
+</TabItem>
+</Tabs>
+
+## Retrieving attributes
+
+Calculated attribute values are stored in the Profiles Store and consumed by your applications via the Python SDK, Node.js SDK, or API.
 
 Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ### Using a service
 
-The preferred way to retrieve attributes is by using a [service](/docs/signals/concepts/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
+The preferred way to retrieve attributes is via a [service](/docs/signals/concepts/index.md#services), which lets you fetch attributes from multiple groups in one call. See [Services](/docs/signals/attributes/services/index.md) to define one using the Console or Python SDK.
 
-<Tabs groupId="signals" queryString>
+<Tabs groupId="signals-retrieve" queryString>
 <TabItem value="python" label="Python" default>
 
-Use `get_service_attributes()` to retrieve attributes from a service. Signals will return the attributes as a dictionary.
-
-Here's an example:
+Use `get_service_attributes()` to retrieve attributes from a service.
 
 ```python
-# The Signals connection object has been created as sp_signals
-
 calculated_values = sp_signals.get_service_attributes(
     name="my_service",
     attribute_key="domain_userid",
@@ -64,24 +67,18 @@ calculated_values = sp_signals.get_service_attributes(
 )
 ```
 
-The table below lists all available arguments for `get_service_attributes()`
-
-| Argument        | Description                                  | Type     | Required? |
-| --------------- | -------------------------------------------- | -------- | --------- |
-| `name`          | The name of the service                      | `string` | ✅         |
-| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
-| `identifier`    | The specific attribute key value             | `string` | ✅         |
+| Argument | Description | Type | Required? |
+| --- | --- | --- | --- |
+| `name` | The name of the service | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-Use `getServiceAttributes()` to retrieve attributes for a single identifier from a specific service. Signals will return the attributes as a JavaScript object.
-
-Here's an example:
+Use `getServiceAttributes()` to retrieve attributes for a single identifier, or `getBatchServiceAttributes()` for multiple identifiers in one call.
 
 ```typescript
-// The Signals connection object has been created as signals
-
 const calculatedValues = await signals.getServiceAttributes({
   name: "my_service",
   attribute_key: "domain_userid",
@@ -89,18 +86,13 @@ const calculatedValues = await signals.getServiceAttributes({
 });
 ```
 
-The table below lists all available arguments for `getServiceAttributes()`
-
-| Argument        | Description                                  | Type     | Required? |
-| --------------- | -------------------------------------------- | -------- | --------- |
-| `name`          | The name of the service                      | `string` | ✅         |
-| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
-| `identifier`    | The specific attribute key value             | `string` | ✅         |
-
-Use `getBatchServiceAttributes()` to retrieve attributes for multiple identifiers from a service in a single API call. This is more efficient than calling `getServiceAttributes()` multiple times.
+| Argument | Description | Type | Required? |
+| --- | --- | --- | --- |
+| `name` | The name of the service | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `identifier` | The specific attribute key value | `string` | ✅ |
 
 ```typescript
-// Retrieve cart data for multiple users
 const batchResults = await signals.getBatchServiceAttributes({
   name: "shopping_cart_service",
   attribute_key: "domain_userid",
@@ -112,34 +104,26 @@ const batchResults = await signals.getBatchServiceAttributes({
 });
 ```
 
-The table below lists all available arguments for `getBatchServiceAttributes()`
-
-| Argument        | Description                                  | Type       | Required? |
-| --------------- | -------------------------------------------- | ---------- | --------- |
-| `name`          | The name of the service                      | `string`   | ✅         |
-| `attribute_key` | The attribute key to retrieve attributes for | `string`   | ✅         |
-| `identifiers`   | Array of attribute key values to look up     | `string[]` | ✅         |
+| Argument | Description | Type | Required? |
+| --- | --- | --- | --- |
+| `name` | The name of the service | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `identifiers` | Array of attribute key values to look up | `string[]` | ✅ |
 
 </TabItem>
 </Tabs>
 
 ### Retrieve individual attributes
 
-You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/index.md#attribute-groups). This is useful when:
-* You want to retrieve only a small subset of attributes
-* You haven't defined a service yet
+You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/index.md#attribute-groups), without a service. This is useful when you want a small subset of attributes or haven't defined a service yet.
 
-<Tabs groupId="signals" queryString>
+<Tabs groupId="signals-retrieve" queryString>
 <TabItem value="python" label="Python" default>
 
-Use `get_group_attribtues()` to retrieve specific attributes. Signals will return the attributes as a dictionary.
-
-Here's an example:
+Use `get_group_attributes()` to retrieve specific attributes.
 
 ```python
-# The Signals connection object has been created as sp_signals
-
-calculated_values = sp_signals.get_group_attribtues(
+calculated_values = sp_signals.get_group_attributes(
     name="my_attribute_group",
     version=1,
     attributes=["page_view_count"],
@@ -148,26 +132,20 @@ calculated_values = sp_signals.get_group_attribtues(
 )
 ```
 
-The table below lists all available arguments for `get_group_attribtues()`
-
-| Argument        | Description                             | Type                         | Required? |
-| --------------- | --------------------------------------- | ---------------------------- | --------- |
-| `name`          | The name of the attribute group         | `string`                     | ✅         |
-| `version`       | The attribute group version             | `int`                        | ✅         |
-| `attributes`    | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
-| `attribute_key` | The attribute key name                  | `string`                     | ✅         |
-| `identifier`    | The specific attribute key value        | `string`                     | ✅         |
+| Argument | Description | Type | Required? |
+| --- | --- | --- | --- |
+| `name` | The name of the attribute group | `string` | ✅ |
+| `version` | The attribute group version | `int` | ✅ |
+| `attributes` | The names of the attributes to retrieve | `string` or list of `string` | ✅ |
+| `attribute_key` | The attribute key name | `string` | ✅ |
+| `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-Use `getGroupAttributes()` to retrieve specific attributes from an attribute group. Signals will return the attributes as a JavaScript object.
-
-Here's an example:
+Use `getGroupAttributes()` to retrieve specific attributes from an attribute group.
 
 ```typescript
-// The Signals connection object has been created as signals
-
 const calculatedValues = await signals.getGroupAttributes({
   name: "my_attribute_group",
   version: 1,
@@ -177,15 +155,13 @@ const calculatedValues = await signals.getGroupAttributes({
 });
 ```
 
-The table below lists all available arguments for `getGroupAttributes()`
-
-| Argument        | Description                             | Type       | Required? |
-| --------------- | --------------------------------------- | ---------- | --------- |
-| `name`          | The name of the attribute group         | `string`   | ✅         |
-| `version`       | The attribute group version             | `number`   | ✅         |
-| `attributes`    | The names of the attributes to retrieve | `string[]` | ✅         |
-| `attribute_key` | The attribute key name                  | `string`   | ✅         |
-| `identifier`    | The specific attribute key value        | `string`   | ✅         |
+| Argument | Description | Type | Required? |
+| --- | --- | --- | --- |
+| `name` | The name of the attribute group | `string` | ✅ |
+| `version` | The attribute group version | `number` | ✅ |
+| `attributes` | The names of the attributes to retrieve | `string[]` | ✅ |
+| `attribute_key` | The attribute key name | `string` | ✅ |
+| `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
 </Tabs>

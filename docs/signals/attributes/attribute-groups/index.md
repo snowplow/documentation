@@ -88,7 +88,9 @@ Stream attribute groups only calculate attributes from the moment they are publi
 A warehouse connection is required to use the backfill option.
 :::
 
-Enable **Backfill attributes** when creating the group. A date picker appears — select the date from which Signals should backfill attribute values from your `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse. From the publish timestamp onwards, the streaming engine takes over.
+Enable **Backfill attributes** when creating the group. A date picker appears — select the date from which Signals should backfill attribute values from your Snowplow `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse. From the publish timestamp onwards, the streaming engine takes over.
+
+Backfill runs asynchronously and may take some time depending on data volume.
 
 ![Stream attribute group with Backfill attributes toggle enabled and date picker shown](../../images/attribute-group-stream-backfill.png)
 
@@ -174,13 +176,11 @@ All attribute groups need an [attribute key](/docs/signals/concepts/index.md#att
 
 ## Attribute lifetimes
 
-TTL configuration applies to **lifetime attributes** only. For time windowed attributes, the TTL is set automatically to match the attribute's time window — a 10-minute window attribute expires after 10 minutes, regardless of any TTL you configure.
+TTL configuration applies to attributes without a period (that is, lifetime, first touch, and last touch attributes). For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
 
-For lifetime attribute groups, we recommend setting a TTL to avoid stale values persisting in your Profiles Store indefinitely.
+We recommend setting a TTL on your attribute group to avoid stale values persisting in your Profiles Store indefinitely. The defaults are 7 days for stream attribute groups and 365 days for warehouse attribute groups. If no TTL is set on the attribute group, the attribute key's TTL is used; if neither is set, the defaults apply.
 
-The defaults for lifetime attribute groups are 7 days for stream attributes and 365 days for warehouse synced values. If no TTL is set on the attribute group, the attribute key's TTL is used; if neither is set, the defaults apply.
-
-When a lifetime attribute has not been updated for its defined TTL, its value is deleted: fetching it will return a `None` value. If Signals then processes a new event that updates the attribute, or syncs new data from the warehouse, the expiration timer is reset.
+When an attribute has not been updated for its defined TTL, its value is deleted: fetching it will return a `None` value. If Signals then processes a new event that updates the attribute, or syncs new data from the warehouse, the expiration timer is reset.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

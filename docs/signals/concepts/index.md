@@ -35,12 +35,14 @@ Attributes describe what kind of calculation to perform, and what event data to 
 
 Attributes can be categorized into four main types, depending on the type of user behavior you want to understand:
 
-| Type          | Description                                            | Example                              |
-| ------------- | ------------------------------------------------------ | ------------------------------------ |
-| Time windowed | Actions that happened within the last X period of time | `products_added_to_cart_last_10_min` |
-| Lifetime      | Calculated over all the available data                 | `total_product_price_clv`            |
-| First touch   | The first event or property that happened              | `first_mkt_source`                   |
-| Last touch    | The most recent event or property that happened        | `last_device_class`                  |
+For period-based attributes, the period is configured on each attribute. Data retention is controlled by the TTL configured on the attribute group.
+
+| Type         | Description                                            | Example                              |
+| ------------ | ------------------------------------------------------ | ------------------------------------ |
+| Period-based | Actions that happened within a configured period       | `products_added_to_cart_last_10_min` |
+| No-period aggregate | Calculated over all available data (subject to TTL) | `total_product_price_clv`            |
+| First touch  | The first event or property that happened              | `first_mkt_source`                   |
+| Last touch   | The most recent event or property that happened        | `last_device_class`                  |
 
 Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/attributes/attributes/index.md) page.
 
@@ -75,19 +77,19 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 ## Data sources
 
 Whether to compute attributes in real-time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
-* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's lifetime purchase history.
-* **Warehouse** to bring in pre-calculated values from outside Snowplow, such as transactional data or CRM attributes
+* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's purchase history.
+* **Warehouse** to bring in modeled data from your warehouse, such as transactional data or CRM attributes
 
 This table summarizes the options for different types of processing:
 
-| Feature                            | Stream                                                                          | Stream with backfill                                                              | Warehouse                      |
-| ---------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------ |
-| Real-time calculation              | ✅                                                                               | ✅                                                                                 | ❌                              |
-| Time windowing operations          | ✅                                                                               | ✅                                                                                 | ❌                              |
-| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                             | ✅ from the configured backfill start date                                         | ❌                              |
-| Historical data                    | ❌ attributes are only calculated from the moment they are defined               | ✅ backfilled from the `atomic` events table up to the publish timestamp           | ✅ any pre-calculated data      |
-| Non-Snowplow data                  | ❌                                                                               | ❌                                                                                 | ✅                              |
-| Warehouse connection required      | ❌                                                                               | ✅                                                                                 | ✅                              |
+| Feature                                        | Stream                                                            | Stream with backfill                                                    | Warehouse                 |
+| ---------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------- |
+| Real-time calculation                           | ✅                                                                 | ✅                                                                       | ❌                         |
+| Period-based calculations                       | ✅                                                                 | ✅                                                                       | ❌                         |
+| Calculations over all available data (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                               | ❌                         |
+| Historical data                                 | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp | ✅ any pre-calculated data |
+| Non-Snowplow data                               | ❌                                                                 | ❌                                                                       | ✅                         |
+| Warehouse connection required                   | ❌                                                                 | ✅                                                                       | ✅                         |
 
 ### Stream source
 
@@ -106,9 +108,11 @@ Real-time stream flow:
 
 #### Backfill
 
-Stream attribute groups only calculate attributes from the moment they are published. If you need historical coverage, you can optionally enable backfill when creating the group. Backfill requires a warehouse connection.
+Stream attribute groups by default only calculate attributes from the moment they are published. If you would like to pre-populate your attributes with values from your warehouse, you can optionally enable backfill when creating the group. Backfilling stream attributes requires a warehouse connection.
 
-When backfill is enabled, you select a start date. On publish, Signals uses your `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. From the publish timestamp onwards, the streaming engine processes events in real time. Real-time values always take precedence: if the streaming engine has already calculated a value for a key, the backfill will not overwrite it.
+When backfill is enabled, you select a start date. On publish, Signals uses your Snowplow `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. From the publish timestamp onwards, the streaming engine processes events in real time.
+
+Backfill runs asynchronously and can take some time depending on data volume. You can monitor progress in Snowplow Console on the attribute group's details page, where the status updates as the backfill completes.
 
 ### Warehouse source
 

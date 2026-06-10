@@ -13,8 +13,8 @@ import TabItem from '@theme/TabItem';
 
 To sync existing, pre-calculated attributes from your warehouse to Signals, configure an attribute group with a warehouse source. No additional modeling is required — the batch engine reads rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
 
-:::tip[Use stream attributes with backfill for most use cases]
-If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Warehouse source attribute groups are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
+:::tip[Use stream attributes with backfill when possible]
+If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
 :::
 
 ## Provide source table details

@@ -110,9 +110,9 @@ Real-time stream flow:
 
 Stream attribute groups by default only calculate attributes from the moment they are published. If you would like to pre-populate your attributes with values from your warehouse, you can optionally enable backfill when creating the group. Backfilling stream attributes requires a warehouse connection.
 
-When backfill is enabled, you select a start date. On publish, Signals uses your Snowplow `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. From the publish timestamp onwards, the streaming engine processes events in real time.
+When backfill is enabled, you select a start date. On publish, Signals uses your Snowplow `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. The streaming engine starts immediately and processes all new events in real time. Backfill operates within this defined period and can take some time depending on data volume. Once backfill completes, only the streaming engine remains active.
 
-Backfill runs asynchronously and can take some time depending on data volume. You can monitor progress in Snowplow Console on the attribute group's details page. While historical values are syncing, a status bar labeled `Backfill in progress` is shown. This status remains visible until the backfill has completed.
+You can monitor progress in Snowplow Console on the attribute group's details page. While historical values are syncing, a status bar labeled `Backfill in progress` is shown. This status remains visible until the backfill period has completed.
 
 ![Backfill progress status bar shown for stream with backfill attribute groups](../images/backfill_progress.png)
 

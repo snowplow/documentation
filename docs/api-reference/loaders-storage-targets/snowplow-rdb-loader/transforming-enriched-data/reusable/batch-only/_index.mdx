@@ -68,5 +68,5 @@ Any key-value pairs to be added as dimensions in Cloudwatch metrics. Example:
 </tr>
 <tr>
     <td><code>archival.source</code> (since 6.5.0) </td>
-    <td>Optional. An S3 URI holding enriched data to archive. When set, the transformer copies all files from this path into a new <code>run=YYYY-MM-DD-hh-mm-ss</code> directory under <code>input</code> before processing begins, then deletes each source file. Omit it (or leave the <code>archival</code> block empty) to skip the archival step. This replaces the standalone <code>s3-dist-cp</code> EMR step and is required when running the transformer on Kubernetes.</td>
+    <td>Optional. An S3 URI holding enriched data to archive. When set, the transformer copies all files from this path into a new <code>run=YYYY-MM-DD-hh-mm-ss</code> directory under <code>input</code> before processing begins, then deletes each source file. Omit it (or leave the <code>archival</code> block empty) to skip the archival step. This can replace the standalone <code>s3-dist-cp</code> EMR step.</td>
 </tr>

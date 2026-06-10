@@ -32,6 +32,19 @@ On first use, your tool opens a browser for OAuth against [Snowplow Console](htt
 The bundled skills are loaded on demand by the model. Claude or Cursor automatically engages the relevant skill when you ask about tracking design, pipeline troubleshooting, or any of the other areas. There is no slash command to run.
 :::
 
+## Install with the Claude Code plugin marketplace
+
+If you use [Claude Code](https://claude.com/product/claude-code), you can install the Snowplow plugin from its native marketplace instead. Register the marketplace and install the plugin from inside Claude Code:
+
+```text
+/plugin marketplace add snowplow/skills
+/plugin install snowplow@snowplow
+```
+
+This installs the Snowplow MCP server plus the same six bundled skills as the [`plugins` CLI](#one-line-install-claude-code-cursor). Claude Code reads the plugin directly from the [repository](https://github.com/snowplow/skills) and updates it automatically when the repository changes.
+
+Prefer a single command across Claude Code, Cursor, and Codex? Use the vendor-neutral [`plugins` CLI](#one-line-install-claude-code-cursor) instead.
+
 ## Configure the MCP server
 
 Configure Snowplow MCP manually using the snippets below for your tool of choice.

@@ -1,0 +1,126 @@
+---
+title: "Agent classification enrichment"
+sidebar_position: 9.5
+sidebar_label: Agent classification
+description: "Identify AI crawlers and automated agents by classifying them by operator and purpose."
+keywords: ["agent classification", "AI crawler", "bot classification", "YAUAA"]
+date: "2026-06-10"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+
+:::note[Availability]
+This enrichment is available since version 6.12.0 of Enrich.
+:::
+
+The agent classification enrichment identifies automated agents — AI crawlers, bots, and other non-human clients — by matching the agent name parsed by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) against a lookup of known agents. For each match, it adds an [entity](/docs/fundamentals/entities/index.md) to the event identifying the operator (e.g. `OpenAI`) and, where known, the agent's purpose (e.g. `AI crawler`).
+
+## Prerequisites
+
+To use this enrichment, you need to enable the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md). The agent classification enrichment reads the `agentName` field from the YAUAA entity. If YAUAA is not active, no agent classification entity is attached.
+
+## Configuration
+
+The enrichment takes these parameters:
+
+| Parameter | Required | Description |
+| --- | --- | --- |
+| `classificationFile` | ❌ | Location of a JSON file mapping YAUAA agent names to classification records. Already provided for CDI customers. |
+| `classification` | ❌ | Inline classification records, keyed by YAUAA agent name. Takes precedence over matching entries in `classificationFile`. |
+
+At least one of `classificationFile` or `classification` must be present.
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. Keep the Console defaults for the `database` and `uri` fields. For example:
+
+```json
+{
+  "classificationFile": {
+    "uri": "<use default value from Console>",
+    "database": "<use default value from Console>"
+  },
+  "classification": {
+    "MyInternalBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/agent_classification_enrichment_config/jsonschema/1-0-0",
+  "data": {
+    "name": "agent_classification_enrichment_config",
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "enabled": true,
+    "parameters": {
+      "classificationFile": {
+        "uri": "<your file location>",
+        "database": "agent-classifications.json"
+      },
+      "classification": {
+        "MyInternalBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
+      }
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
+### `classificationFile`
+
+:::tip[Snowplow CDI]
+If you're using Snowplow CDI, you don't need to configure this. Use the default values provided in Console.
+:::
+
+Points to a JSON file containing the agent-to-classification mapping. The file must be a JSON object where the keys are YAUAA `agentName` values and the values are objects with `operator` (required) and `purpose` (optional). For example:
+
+```json
+{
+  "ChatGPT-User": {"operator": "OpenAI", "purpose": "AI data retrieval"},
+  "GPTBot": {"operator": "OpenAI", "purpose": "AI crawler"},
+  "ClaudeBot": {"operator": "Anthropic"}
+}
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `uri` | string | Base URI where the file is hosted. Supports `http:`, `s3:`, and `gs:` schemes. Must not end with a trailing slash. |
+| `database` | string | The JSON filename. |
+
+### `classification`
+
+An inline map of agent names to classification records, keyed by YAUAA `agentName`. Each record must include `operator` (the vendor operating the agent) and optionally `purpose` (the agent's purpose, if known). Records defined here take precedence over any matching entry in `classificationFile`.
+
+## Output
+
+This enrichment adds an `agent_classification` entity to events where the YAUAA `agentName` matches a known agent.
+
+This enrichment won't produce any output if:
+* The YAUAA enrichment is not enabled
+* The YAUAA entity does not contain an `agentName` field
+* The `agentName` is not found in the classification lookup
+
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    operator: "OpenAI",
+    purpose: "AI crawler"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for agent classification context generated by agent classification enrichment", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "agent_classification", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "operator": { "type": "string", "description": "The vendor operating the agent, e.g. OpenAI" }, "purpose": { "type": ["string", "null"], "description": "The purpose of the agent, e.g. AI crawler, if known" } }, "required": ["operator"], "additionalProperties": false }} />

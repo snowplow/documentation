@@ -147,29 +147,6 @@ Check out the [attribute groups](/docs/signals/attributes/attribute-groups/index
 
 Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
 
-### Publishing and deleting
-
-Use the same object management methods for attribute groups, services, attribute keys, and interventions:
-* Use `publish()` to register objects with Signals. This makes them available for real-time calculation and retrieval.
-* Use `unpublish()` to stop active calculation without losing the object definitions.
-* Use `delete()` to permanently remove objects from Signals. Objects must be unpublished before deletion. If you delete an attribute group, the calculated attributes in the Profiles Store will also be deleted.
-
-```python
-from snowplow_signals import StreamAttributeGroup, Service, RuleIntervention
-
-# Define your objects (assuming these are already created)
-objects_to_manage = [my_attribute_group, my_service, my_intervention]
-
-# 1. Publish objects
-published_objects = sp_signals.publish(objects_to_manage)
-
-# 2. Unpublish objects
-unpublished_objects = sp_signals.unpublish(objects_to_manage)
-
-# 3. Delete objects permanently - must unpublish first
-sp_signals.delete(objects_to_manage)
-```
-
 ## Signals Node.js SDK
 
 Use the [Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) to retrieve calculated attributes.

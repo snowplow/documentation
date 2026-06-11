@@ -104,7 +104,7 @@ To delete a service, go to the service details page and click the `⋮` button, 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`publish()` method](/docs/signals/connection/index.md#publishing-and-deleting) to register services with Signals.
+Use the [`publish()` method](/docs/signals/attributes/attribute-groups/index.md#publishing-attribute-groups) to register services with Signals.
 
 ```python
 from snowplow_signals import Signals

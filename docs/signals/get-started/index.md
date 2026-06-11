@@ -24,19 +24,7 @@ Use Signals to:
 
 By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
-## Try Signals for free
-
-Signals Sandbox is a [free, lightweight sandbox environment](https://try-signals.snowplow.io/) where you can try out Signals without needing a Snowplow account or pipeline. Log in with your GitHub account to get started.
-
-The Sandbox provides you with:
-* Signals infrastructure and Snowplow pipeline deployed in a dedicated environment
-* [Event Collector](/docs/pipeline/collector/index.md) endpoint
-* Signals Profiles API endpoint
-* Sandbox Token for authentication
-
-Check out the [real-time interventions tutorial](/tutorials/signals-interventions/start) for a hands-on introduction to using the Sandbox. The tutorial uses a demo ecommerce website to generate events, but you could also send your own events to the Sandbox Collector using any [Snowplow tracker](/docs/sources/index.md).
-
-Use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api) to start experimenting with [attributes](/docs/signals/concepts/index.md#attribute-groups) and [interventions](/docs/signals/concepts/index.md#interventions).
+If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to experience Signals and Snowplow Console.
 
 ## Architecture
 

@@ -1,17 +1,12 @@
 ---
 title: "Connect to Snowplow Signals"
-sidebar_position: 15
+sidebar_position: 35
 sidebar_label: "Connect to Signals"
-description: "Set up a Signals connection through Snowplow Console or Sandbox to start configuring attributes and interventions. Connect using the Python SDK, Node.js SDK, or REST API with your deployment credentials."
-keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "signals setup"]
+description: "Connect to Signals using the Python SDK, Node.js SDK, or REST API with your deployment credentials, to manage configurations or consume calculated values."
+keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "connection credentials"]
 sidebar_custom_props:
   space_above: true
 ---
-
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 You'll connect to Signals for one of two reasons:
 
@@ -22,57 +17,17 @@ This table shows which interface supports which task:
 
 | Interface                                       | Define configurations | Retrieve attributes | Subscribe to interventions |
 | ----------------------------------------------- | --------------------- | ------------------- | -------------------------- |
-| [Snowplow Console](#set-up-signals)             | ✅                     | ❌                   | ❌                          |
+| [Snowplow Console](https://console.snowplowanalytics.com) | ✅                     | ❌                   | ❌                          |
 | [Python SDK](#signals-python-sdk)               | ✅                     | ✅                   | ✅                          |
 | [Node.js SDK](#signals-nodejs-sdk)              | ❌                     | ✅                   | ❌                          |
 | [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
 | [Signals API](#signals-api)                     | ✅                     | ✅                   | ✅                          |
 
-Console doesn't require any connection setup: log in and navigate to the **Signals** section. For the SDKs, plugin, and API, you'll need [connection credentials](#connection-credentials).
+Console doesn't require any connection setup: log in and navigate to the **Signals** section. If Signals isn't enabled for your organization yet, see [Set up Signals](/docs/signals/setup/index.md).
 
-## Set up Signals
-
-If you're new to Signals, you'll need to set up Signals infrastructure first. This is a one-time task, done in one of two ways:
-
-- Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section (for Snowplow customers with Signals).
-- Set up a Signals instance with [Signals Sandbox](https://try-signals.snowplow.io/dashboard) to explore the product's features and capabilities.
-
-### Snowplow Console
-
-Click **Enable** to start setting up a Signals connection.
-
-![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
-
-:::note[Warehouse Connection]
-Signals can also be deployed without connecting to a warehouse.
-:::
-
-You'll need to:
-* Select which warehouse to use
-* Specify your warehouse account details
-* Specify your Snowplow atomic events table
-* Run the provided script
-
-Click **Test and create connection** to trigger the Signals deployment. You'll be able to start using Signals as soon as the infrastructure is ready.
-
-To use the UI to manage Signals, navigate to the **Signals** section.
-
-Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md).
-
-![Console Signals landing page with navigation for attribute groups, services, and interventions](../images/console-landing.png)
-
-### Signals Sandbox
-
-Alternatively, you can use the Signals Sandbox to test out the functionality and features of Signals. When you log in to the Signals Sandbox dashboard, a temporary Signals instance will be deployed.
-
-![Signals Sandbox landing page with pipeline deployment in progress](../images/sandbox-deployment.png)
+For the SDKs, plugin, and API, you'll need [connection credentials](#connection-credentials).
 
 ## Connection credentials
-
-You will need different connection values depending on your deployment type.
-
-<Tabs groupId="connection" queryString>
-  <TabItem value="console" label="Console" default>
 
 To connect to Signals using the Signals SDKs or API, you will need four values. Use the Console **Overview** page to access them.
 
@@ -84,21 +39,6 @@ To connect to Signals using the Signals SDKs or API, you will need four values. 
 | Organization ID | Your Snowplow organization ID           | Console > **Signals** > **Overview**                             | UUID                                               |
 
 Add these four tokens to your environment secrets.
-
-</TabItem>
-  <TabItem value="sandbox" label="Signals Sandbox">
-
-To connect to Signals using the Signals SDKs or API, you will need two values. These are found at the bottom of the Signals Sandbox dashboard under **Configuration details**.
-
-| Value           | Description                                  | Where to get it  | Format                              |
-| --------------- | -------------------------------------------- | ---------------- | ----------------------------------- |
-| Signals API URL | The API URL for your Signals deployment      | Profiles API URL | `https://{{123abc}}.svc.snplow.net` |
-| Sandbox Token   | An authorization token to connect to Signals | Sandbox Token    | UUID                                |
-
-Add these values to your environment secrets.
-
-  </TabItem>
-</Tabs>
 
 ## Signals Python SDK
 
@@ -114,11 +54,7 @@ pip install snowplow-signals
 
 Once installed, you can start to define configuration components. To test or publish your configuration, or retrieve calculated attributes or interventions from the Profiles Store, you'll need to connect to your Signals deployment.
 
-Create a `Signals` object by passing in the required values depending on your deployment type.
-
-
-<Tabs groupId="connection" queryString>
-  <TabItem value="console" label="Console" default>
+Create a `Signals` object by passing in the required values:
 
 ```python
 from snowplow_signals import Signals
@@ -130,22 +66,6 @@ sp_signals = Signals(
     org_id=ORG_ID,
 )
 ```
-
-</TabItem>
-  <TabItem value="sandbox" label="Signals Sandbox">
-
-```python
-from snowplow_signals import SignalsSandbox
-
-sp_signals = SignalsSandbox(
-    api_url=SIGNALS_DEPLOYED_URL,
-    sandbox_token=SIGNALS_SANDBOX_TOKEN,
-)
-```
-
-  </TabItem>
-</Tabs>
-
 
 The created `Signals` object has the following methods:
 
@@ -179,12 +99,7 @@ yarn add @snowplow/signals-node
 pnpm i @snowplow/signals-node
 ```
 
-Create a `Signals` object by passing in the required values.
-
-
-
-<Tabs groupId="connection" queryString>
-  <TabItem value="console" label="Console" default>
+Create a `Signals` object by passing in the required values:
 
 ```typescript
 import { Signals } from '@snowplow/signals-node';
@@ -196,21 +111,6 @@ const signals = new Signals({
   organizationId: ORG_ID,
 });
 ```
-
-</TabItem>
-  <TabItem value="sandbox" label="Signals Sandbox">
-
-```typescript
-import { Signals } from '@snowplow/signals-node';
-
-const signals = new Signals({
-  baseUrl: SIGNALS_DEPLOYED_URL,
-  sandboxToken: SIGNALS_SANDBOX_TOKEN,
-});
-```
-
-  </TabItem>
-</Tabs>
 
 The created `Signals` object has the following methods:
 

@@ -33,7 +33,7 @@ In this tutorial, you will:
 
 ### Snowplow Console
 
-If you have a Snowplow account, you can [enable Signals through Snowplow Console](/docs/signals/connection/#snowplow-console). This provides:
+If you have a Snowplow account, you can [enable Signals through Snowplow Console](/docs/signals/setup/). This provides:
 
 * Integration with your existing Snowplow data pipeline
 * Access to your production behavioral data

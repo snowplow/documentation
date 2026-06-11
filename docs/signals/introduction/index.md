@@ -11,8 +11,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
 <CardGrid cols={2}>
   <CallToActionCard
     title="Try Signals for free"
-    description="Try out Signals in a sandbox, without a Snowplow account"
-    href="https://try-signals.snowplow.io/"
+    description="Experience Signals in Snowplow Console with a free trial"
+    href="https://snowplow.io/get-started/snowplow-free-trial"
   />
 
   <CallToActionCard

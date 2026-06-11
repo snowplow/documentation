@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="background: #ffffff; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color-scheme: light dark;" version="1.1" viewBox="0 0 1680 280" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#6638b8"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#1db58f"/>
+    </marker>
+  </defs>
+
+  <!-- connectors -->
+  <g fill="none" stroke-width="2" stroke-dasharray="6 5">
+    <path d="M 230 65 H 330 V 125 H 430" stroke="#6638b8" marker-end="url(#arrow-purple)"/>
+    <path d="M 230 185 H 330 V 130" stroke="#6638b8"/>
+    <path d="M 670 125 H 850" stroke="#6638b8" marker-end="url(#arrow-purple)"/>
+    <path d="M 1080 125 H 1130 V 65 H 1165" stroke="#6638b8" marker-end="url(#arrow-purple)"/>
+    <path d="M 1130 125 V 185 H 1165" stroke="#6638b8" marker-end="url(#arrow-purple)"/>
+    <path d="M 1380 65 H 1420 V 105 H 1445" stroke="#6638b8" marker-end="url(#arrow-purple)"/>
+    <path d="M 1380 185 H 1420 V 145 H 1445" stroke="#1db58f" marker-end="url(#arrow-green)"/>
+  </g>
+
+  <!-- connector origin dots -->
+  <g fill="#6638b8">
+    <circle cx="230" cy="65" r="5"/>
+    <circle cx="230" cy="185" r="5"/>
+    <circle cx="670" cy="125" r="5"/>
+    <circle cx="1080" cy="125" r="5"/>
+    <circle cx="1380" cy="65" r="5"/>
+  </g>
+  <circle cx="1380" cy="185" r="5" fill="#1db58f"/>
+
+  <!-- nodes -->
+  <g stroke="#6638b8" stroke-width="1.5">
+    <rect x="20" y="30" width="210" height="70" rx="35" fill="#ffffff"/>
+    <rect x="14" y="162" width="210" height="70" rx="35" fill="#ffffff"/>
+    <rect x="17" y="156" width="210" height="70" rx="35" fill="#ffffff"/>
+    <rect x="20" y="150" width="210" height="70" rx="35" fill="#ffffff"/>
+    <rect x="440" y="90" width="230" height="70" rx="35" fill="#ffffff"/>
+    <rect x="860" y="50" width="220" height="150" rx="18" fill="#f4eef9"/>
+    <rect x="1175" y="30" width="205" height="70" rx="35" fill="#ffffff"/>
+    <rect x="1175" y="150" width="205" height="70" rx="35" fill="#ffffff"/>
+    <rect x="1455" y="50" width="205" height="150" rx="18" fill="#ffffff"/>
+  </g>
+
+  <!-- Profiles Store person icon -->
+  <g stroke="#6638b8" stroke-width="2" fill="none">
+    <circle cx="970" cy="98" r="22"/>
+    <circle cx="970" cy="91" r="6.5"/>
+    <path d="M 958 110 C 961 101 979 101 982 110"/>
+  </g>
+
+  <!-- Application window icon -->
+  <g stroke="#6638b8" stroke-width="2" fill="none">
+    <circle cx="1557" cy="98" r="22"/>
+    <rect x="1546" y="89" width="22" height="18" rx="3"/>
+    <line x1="1546" y1="95" x2="1568" y2="95"/>
+  </g>
+
+  <!-- labels -->
+  <g fill="#1f2937" font-size="17" text-anchor="middle">
+    <text x="125" y="71">Snowplow events</text>
+    <text x="125" y="191">Batch sources</text>
+    <text x="555" y="131">Attribute groups</text>
+    <text x="970" y="168">Profiles Store</text>
+    <text x="1277" y="71">Services</text>
+    <text x="1277" y="191">Interventions</text>
+    <text x="1557" y="168">Application</text>
+  </g>
+</svg>

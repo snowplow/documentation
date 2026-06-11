@@ -19,7 +19,7 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 
 **Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
-![Detailed Signals architecture showing how attribute groups, services, and interventions connect to the Profiles Store](../images/overview-detailed.png)
+![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
 
 ## Attribute groups
 

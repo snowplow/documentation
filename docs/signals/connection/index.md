@@ -13,13 +13,31 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-If you're new to Signals, you'll need to set up a Signals connection in one of two ways:
+You'll connect to Signals for one of two reasons:
+
+* **To define and manage configurations**: create attribute groups, services, and interventions, and publish them to Signals. This is typically done by a data team, using Snowplow Console, the Python SDK, or the API.
+* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, or API.
+
+This table shows which interface supports which task:
+
+| Interface                                       | Define configurations | Retrieve attributes | Subscribe to interventions |
+| ----------------------------------------------- | --------------------- | ------------------- | -------------------------- |
+| [Snowplow Console](#set-up-signals)             | ✅                     | ❌                   | ❌                          |
+| [Python SDK](#signals-python-sdk)               | ✅                     | ✅                   | ✅                          |
+| [Node.js SDK](#signals-nodejs-sdk)              | ❌                     | ✅                   | ❌                          |
+| [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
+| [Signals API](#signals-api)                     | ✅                     | ✅                   | ✅                          |
+
+Console doesn't require any connection setup: log in and navigate to the **Signals** section. For the SDKs, plugin, and API, you'll need [connection credentials](#connection-credentials).
+
+## Set up Signals
+
+If you're new to Signals, you'll need to set up Signals infrastructure first. This is a one-time task, done in one of two ways:
 
 - Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section (for Snowplow customers with Signals).
 - Set up a Signals instance with [Signals Sandbox](https://try-signals.snowplow.io/dashboard) to explore the product's features and capabilities.
 
-
-## Snowplow Console
+### Snowplow Console
 
 Click **Enable** to start setting up a Signals connection.
 
@@ -39,11 +57,11 @@ Click **Test and create connection** to trigger the Signals deployment. You'll b
 
 To use the UI to manage Signals, navigate to the **Signals** section.
 
-Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/attributes/services/index.md), and [interventions](/docs/signals/interventions/index.md).
+Use the configuration interface to define [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md).
 
 ![Console Signals landing page with navigation for attribute groups, services, and interventions](../images/console-landing.png)
 
-## Signals Sandbox
+### Signals Sandbox
 
 Alternatively, you can use the Signals Sandbox to test out the functionality and features of Signals. When you log in to the Signals Sandbox dashboard, a temporary Signals instance will be deployed.
 
@@ -143,32 +161,9 @@ The created `Signals` object has the following methods:
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
 
-Check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/attributes/services/index.md), and [interventions](/docs/signals/interventions/using-python-sdk/index.md) pages to learn how to configure them programmatically.
+To define configurations programmatically, check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md) pages, as well as the shared [publishing lifecycle](/docs/signals/attributes/index.md#publish-and-manage-configurations).
 
-Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
-
-### Publishing and deleting
-
-Use the same object management methods for attribute groups, services, attribute keys, and interventions:
-* Use `publish()` to register objects with Signals. This makes them available for real-time calculation and retrieval.
-* Use `unpublish()` to stop active calculation without losing the object definitions.
-* Use `delete()` to permanently remove objects from Signals. Objects must be unpublished before deletion. If you delete an attribute group, the calculated attributes in the Profiles Store will also be deleted.
-
-```python
-from snowplow_signals import StreamAttributeGroup, Service, RuleIntervention
-
-# Define your objects (assuming these are already created)
-objects_to_manage = [my_attribute_group, my_service, my_intervention]
-
-# 1. Publish objects
-published_objects = sp_signals.publish(objects_to_manage)
-
-# 2. Unpublish objects
-unpublished_objects = sp_signals.unpublish(objects_to_manage)
-
-# 3. Delete objects permanently - must unpublish first
-sp_signals.delete(objects_to_manage)
-```
+To consume calculated values in your application, see [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [subscribe to interventions](/docs/signals/applications/subscribe/index.md).
 
 ## Signals Node.js SDK
 
@@ -225,7 +220,7 @@ The created `Signals` object has the following methods:
 | `getGroupAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
 | `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
 
-Read more about retrieving calculated attributes [here](/docs/signals/attributes/index.md), and about interventions [here](/docs/signals/interventions/subscribe/index.md).
+See [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for usage examples.
 
 ## Signals API
 

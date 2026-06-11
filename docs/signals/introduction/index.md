@@ -10,8 +10,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
 
 <CardGrid cols={2}>
   <CallToActionCard
-    title="Get started with Signals"
-    description="Try out Signals for free without a Snowplow account"
+    title="Try Signals for free"
+    description="Try out Signals in a sandbox, without a Snowplow account"
     href="https://try-signals.snowplow.io/"
   />
 
@@ -31,8 +31,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     description="Calculate user attributes in real time"
   >
     [Learn about attributes](/docs/signals/concepts/index.md#attribute-groups)
-    [Define attributes](/docs/signals/attributes/attribute-groups/index.md)
-    [Retrieve attributes](/docs/signals/attributes/index.md)
+    [Define attributes](/docs/signals/attributes/index.md)
+    [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
   </FeaturedSection>
 
   <FeaturedSection
@@ -41,7 +41,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
   >
     [Learn about interventions](/docs/signals/concepts/index.md#interventions)
     [Define interventions](/docs/signals/interventions/index.md)
-    [Subscribe to interventions](/docs/signals/interventions/subscribe/index.md)
+    [Subscribe to interventions](/docs/signals/applications/subscribe/index.md)
   </FeaturedSection>
 
   <FeaturedSection
@@ -49,8 +49,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     description="Use Signals within a notebook"
   >
     [Connect to Signals](/docs/signals/connection/index.md#signals-python-sdk)
-    [Define attributes](/docs/signals/attributes/attribute-groups/index.md)
-    [Define interventions](/docs/signals/interventions/using-python-sdk/index.md)
+    [Define attributes](/docs/signals/attributes/index.md)
+    [Define interventions](/docs/signals/interventions/index.md)
   </FeaturedSection>
 
 </CardGrid>

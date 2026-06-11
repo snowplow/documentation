@@ -21,7 +21,7 @@ You've worked with the core Signals concepts:
 
 * **[Attributes](/docs/signals/attributes/attributes/)**: real-time calculations of user behavior patterns
 * **[Attribute groups](/docs/signals/attributes/attribute-groups/)**: organized collections of related attributes
-* **[Services](/docs/signals/attributes/services/)**: interfaces for applications to retrieve attributes
+* **[Services](/docs/signals/applications/services/)**: interfaces for applications to retrieve attributes
 * **[Interventions](/docs/signals/interventions/)**: rules that trigger personalized experiences
 
 Thank you for trying Signals. We hope this tutorial has inspired ideas for how you can use real-time behavioral data to create personalized experiences for your users.
@@ -32,8 +32,8 @@ Now that you understand how Signals works, here are some ways to continue your j
 
 ### Explore more Signals capabilities
 
-* Try defining attributes with different [aggregations](/docs/signals/attributes/attributes/#aggregation-options) (min, max, average, etc.)
-* Experiment with [time windows](/docs/signals/attributes/attributes/#time-period) for attributes
+* Try defining attributes with different [aggregations](/docs/signals/attributes/attributes/#choose-an-aggregation) (min, max, average, etc.)
+* Experiment with [time windows](/docs/signals/attributes/attributes/#set-a-time-period) for attributes
 * Create more complex intervention criteria using multiple attributes
 * Define attributes based on different [event types](/docs/fundamentals/events/)
 
@@ -50,7 +50,7 @@ Ready to use Signals in production? You'll need:
 
 * A [Snowplow](/docs/get-started/private-managed-cloud/) account
 * A [Signals connection](/docs/signals/connection/) configured
-* Integration of the [browser tracker plugin](/docs/signals/interventions/subscribe/#using-the-browser-tracker-plugin) or API calls in your application
+* Integration of the [browser tracker plugin](/docs/signals/applications/subscribe/#subscribe-with-the-browser-tracker-plugin) or API calls in your application
 
 ### Learn more
 

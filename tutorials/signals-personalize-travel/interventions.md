@@ -44,7 +44,7 @@ sp_signals.publish([destination_assistance_intervention])
 
 ## Test the intervention
 
-The travel site automatically subscribes to interventions for the current user and session using the [Signals browser plugin](/docs/signals/interventions/subscribe/).
+The travel site automatically subscribes to interventions for the current user and session using the [Signals browser plugin](/docs/signals/applications/subscribe/).
 
 Once you've created the intervention, test it by:
 

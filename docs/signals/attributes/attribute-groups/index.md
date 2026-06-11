@@ -142,11 +142,7 @@ Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Wareho
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-The first step when creating an attribute group is to specify:
-* A unique name
-* An optional description
-* The email address of the primary owner or maintainer
-* Which data source you want to use
+All options are set in the creation form, shown at the top of this page, or by editing the attribute group later.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -160,7 +156,7 @@ The table below lists all available arguments for `StreamAttributeGroup`:
 | `attribute_key` | The attribute key associated with the attribute group | `AttributeKey` | | ✅ |
 | `owner` | The owner of the attribute group | `Email` | | ✅ |
 | `description` | A description of the attribute group | `string` | | ❌ |
-| `ttl` | Time-to-live for attributes in the Profile Store | `timedelta` | | ❌ |
+| `ttl` | Time-to-live for attributes in the Profiles Store | `timedelta` | | ❌ |
 | `attributes` | List of attributes to calculate | list of `Attribute` | | ✅ |
 | `online` | Calculate attributes (`True`) or not (`False`) | `bool` | `True` | ❌ |
 | `backfill_since_tstamp` | How far in time to backfill from | `datetime` | | ❌ |
@@ -176,7 +172,7 @@ All attribute groups need an [attribute key](/docs/signals/concepts/index.md#att
 
 ## Attribute lifetimes
 
-TTL configuration applies to attributes without a period (that is, lifetime, first touch, and last touch attributes). For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
+TTL configuration applies to attributes without a period (that is, no-period aggregate, first touch, and last touch attributes). For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
 
 We recommend setting a TTL on your attribute group to avoid stale values persisting in your Profiles Store indefinitely. The defaults are 7 days for stream attribute groups and 365 days for warehouse attribute groups. If no TTL is set on the attribute group, the attribute key's TTL is used; if neither is set, the defaults apply.
 
@@ -209,7 +205,7 @@ stream_attribute_group = StreamAttributeGroup(
 </TabItem>
 </Tabs>
 
-## Testing attribute definitions
+## Test attribute definitions
 
 After defining one or more [attributes](/docs/signals/attributes/attributes/index.md) for stream attribute groups, you can test the configuration before publishing.
 
@@ -258,7 +254,7 @@ If you don't specify a version, Signals retrieves the latest version.
 </TabItem>
 </Tabs>
 
-## Publishing attribute groups
+## Publish attribute groups
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -274,7 +270,7 @@ Click **Edit** to make changes. To send the configuration to your Signals infras
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`publish()` method](/docs/signals/connection/index.md#publishing-and-deleting) to register attribute groups with Signals.
+Use the [`publish()` method](/docs/signals/attributes/index.md#publish-and-manage-configurations) to register attribute groups with Signals.
 
 ```python
 from snowplow_signals import Signals
@@ -292,7 +288,7 @@ sp_signals.publish([
 
 ## Versioning
 
-Attribute groups are versioned, which allows you to iterate on definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/attributes/services/index.md).
+Attribute groups are versioned, which allows you to iterate on definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/applications/services/index.md).
 
 All attribute groups start as `v1`. If you make changes to the definition, the version is automatically incremented.
 
@@ -309,7 +305,7 @@ Use `version=1` for the first version. After publishing, if you want to change t
 </TabItem>
 </Tabs>
 
-## Deleting an attribute group
+## Delete an attribute group
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -329,7 +325,7 @@ If the attribute group version is used by a published [intervention](/docs/signa
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`delete()` method](/docs/signals/connection/index.md#publishing-and-deleting) to remove an attribute group and its values from the Profiles Store.
+Use the [`delete()` method](/docs/signals/attributes/index.md#publish-and-manage-configurations) to remove an attribute group and its values from the Profiles Store.
 
 </TabItem>
 </Tabs>

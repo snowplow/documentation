@@ -55,7 +55,7 @@ Once applied and active, this definition triggers every time Signals processes a
 </TabItem>
 </Tabs>
 
-## Event selection
+## Select events
 
 Use the event filter to choose which event type to calculate the attribute from.
 
@@ -118,7 +118,7 @@ sp_structured = Event(name="event", vendor="com.google.analytics", version="1-0-
 </TabItem>
 </Tabs>
 
-## Aggregation options
+## Choose an aggregation
 
 Signals supports the following aggregation types:
 
@@ -152,7 +152,7 @@ Set the `aggregation` argument using the lowercase snake_case version of the agg
 </TabItem>
 </Tabs>
 
-## Property selection
+## Select a property
 
 You can calculate attributes based on properties in any part of your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md) properties: available for all events
@@ -199,7 +199,7 @@ EntityProperty(
 </TabItem>
 </Tabs>
 
-## Time period
+## Set a time period
 
 Add an optional time period to aggregate over a rolling window. Signals won't include events older than the specified time period in the calculation.
 
@@ -227,7 +227,7 @@ my_attribute = Attribute(
 </TabItem>
 </Tabs>
 
-## Filtering with criteria
+## Filter with criteria
 
 Use criteria to filter the events used to calculate an attribute. They allow you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may wish to calculate only views for the homepage, or a login page.
 
@@ -380,15 +380,15 @@ referrer_source_attribute = Attribute(
 
 ### Example 3: sum of an entity property
 
-Sum the `price` of the first product entity in ecommerce transaction events.
+Sum the `price` of product entities in ecommerce events, counting only `transaction` events.
 
 ```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion, EntityProperty
+from snowplow_signals import Attribute, Event, Criteria, Criterion, EntityProperty, EventProperty
 
 my_new_attribute = Attribute(
     name="products_total_purchase_value",
     description="Total purchase value for all products",
-    type="int64",
+    type="double",
     events=[
         Event(
             vendor="com.snowplowanalytics.snowplow.ecommerce",
@@ -400,12 +400,11 @@ my_new_attribute = Attribute(
     criteria=Criteria(
         all=[
             Criterion.eq(
-                EntityProperty(
+                EventProperty(
                     vendor="com.snowplowanalytics.snowplow.ecommerce",
-                    name="product",
+                    name="snowplow_ecommerce_action",
                     major_version=1,
-                    index=[0],
-                    path="price"
+                    path="type"
                 ),
                 "transaction"
             )

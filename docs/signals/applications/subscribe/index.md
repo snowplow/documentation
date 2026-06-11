@@ -1,7 +1,7 @@
 ---
 title: "Subscribe to and receive interventions in your applications"
-sidebar_position: 50
-sidebar_label: "Subscription"
+sidebar_position: 30
+sidebar_label: "Subscribe to interventions"
 description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
 ---
@@ -14,10 +14,10 @@ Subscribe to interventions to automatically respond within your application. You
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 :::note[Sent once]
-An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [fundamentals page](/docs/signals/concepts/index.md#targeting-example).
 :::
 
-## Using the Signals Python SDK
+## Subscribe with the Python SDK
 
 Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be in a non-enumerable format, such as UUIDs.
 
@@ -47,7 +47,7 @@ intervention_instance = subscription.get()
 subscription.stop()
 ```
 
-## Using the browser tracker plugin
+## Subscribe with the browser tracker plugin
 
 For web applications using the Snowplow [browser tracker](/docs/sources/web-trackers/index.md), you can subscribe to interventions using the [Signals browser plugin](https://www.npmjs.com/package/@snowplow/signals-browser-plugin).
 
@@ -98,7 +98,7 @@ subscribeToInterventions({
     pageview_id: "/co/com.snowplowanalytics.snowplow/web_page/id",
   },
   attributeKeyIds: {
-    network_userid: "177234df-d421-412e-ad8d-8bf97515b2807",
+    network_userid: "177234df-d421-412e-ad8d-8bf97515b280",
   },
 });
 ```
@@ -117,7 +117,7 @@ The plugin generates Snowplow events to track interventions. The events include 
 
 When delivered, interventions contain the following information:
 
-| Argument                    | Description                                                             | Type      |
+| Field                       | Description                                                             | Type      |
 | --------------------------- | ----------------------------------------------------------------------- | --------- |
 | `intervention_id`           | A unique identifier for this triggered intervention                     | `string`  |
 | `name`                      | The unique name/identifier of the intervention                          | `string`  |

@@ -1,7 +1,7 @@
 ---
 title: "Define services"
 sidebar_label: "Services"
-sidebar_position: 32
+sidebar_position: 10
 description: "Services group multiple versioned attribute groups into stable consumption interfaces for applications. Create and manage services to control which attribute versions your applications use."
 keywords: ["services", "attribute group versioning", "stable interfaces", "python sdk services", "service configuration"]
 ---
@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
+[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications. They provide a stable interface for [retrieving attributes](/docs/signals/applications/retrieve-attributes/index.md): we strongly recommend using services in production applications.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -88,7 +88,7 @@ Specify the version of each attribute group in the `attribute_groups` list using
 </TabItem>
 </Tabs>
 
-## Managing services
+## Manage services
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -104,7 +104,7 @@ To delete a service, go to the service details page and click the `⋮` button, 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`publish()` method](/docs/signals/connection/index.md#publishing-and-deleting) to register services with Signals.
+Use the [`publish()` method](/docs/signals/attributes/index.md#publish-and-manage-configurations) to register services with Signals.
 
 ```python
 from snowplow_signals import Signals

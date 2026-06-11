@@ -1,7 +1,7 @@
 ---
 title: "Get started with Snowplow Signals"
 sidebar_label: "Get started"
-sidebar_position: 8.7
+sidebar_position: 5
 description: "Learn how to use Snowplow Signals to compute user attributes from event data, retrieve them in real time for personalization and agentic applications, and trigger automated actions based on user behavior."
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 ---
@@ -30,7 +30,7 @@ Signals Sandbox is a [free, lightweight sandbox environment](https://try-signals
 
 The Sandbox provides you with:
 * Signals infrastructure and Snowplow pipeline deployed in a dedicated environment
-* [Event Collector](/docs/fundamentals/index.md) endpoint
+* [Event Collector](/docs/pipeline/collector/index.md) endpoint
 * Signals Profiles API endpoint
 * Sandbox Token for authentication
 
@@ -71,7 +71,7 @@ Your first step is to decide what changes in user behavior you're aiming for. Wh
 
 You'll also need to decide whether to calculate attributes from your real-time event stream, or to include pre-calculated warehouse data, or both.
 
-Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
+Read more about attributes and interventions on the [fundamentals](/docs/signals/concepts/index.md) page.
 
 ### 2. Apply the configuration
 

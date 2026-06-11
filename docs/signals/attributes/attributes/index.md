@@ -313,11 +313,6 @@ The table below lists all available arguments for an `Attribute`:
 ## Extended examples
 
 <Tabs groupId="signals-impl" queryString>
-<TabItem value="console" label="Console" default>
-
-For complex attribute configurations, use the **More options** section in the attribute editor to add time periods and criteria filters.
-
-</TabItem>
 <TabItem value="sdk" label="Python SDK">
 
 ### Example 1: filtered counter with a time window

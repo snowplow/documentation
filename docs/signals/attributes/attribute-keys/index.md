@@ -18,7 +18,7 @@ Signals includes four built-in attribute keys, based on commonly used identifier
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-The built-in attribute keys are available to select when creating an attribute group in Snowplow Console.
+The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, and `user_id`.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">

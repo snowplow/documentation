@@ -81,7 +81,7 @@ The created `Signals` object has the following methods:
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
 
-To define configurations programmatically, check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md) pages, as well as the shared [publishing lifecycle](/docs/signals/attributes/index.md#publish-and-manage-configurations).
+To define configurations programmatically, check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md) pages. The [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow) describes how publishing, versioning, unpublishing, and deletion fit together.
 
 To consume calculated values in your application, see [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [subscribe to interventions](/docs/signals/applications/subscribe/index.md).
 

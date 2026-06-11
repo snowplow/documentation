@@ -2,14 +2,9 @@
 title: "Define attributes in Signals"
 sidebar_position: 20
 sidebar_label: "Define attributes"
-description: "Define attributes within attribute groups to calculate behavioral data from real-time streams or your warehouse, then publish the configuration to Signals."
-keywords: ["attributes", "attribute groups", "attribute keys", "warehouse configuration", "signals python sdk", "publish"]
+description: "Define attributes within attribute groups to calculate behavioral data from real-time streams or your warehouse, then test and publish the configuration to Signals."
+keywords: ["attributes", "attribute groups", "attribute keys", "warehouse configuration", "configuration workflow", "publish"]
 ---
-
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value.
 
@@ -34,39 +29,17 @@ You can also use the [Signals API](/docs/signals/connection/index.md#signals-api
 
 ![Signals section of the Console navigation sidebar showing Overview, Attribute groups, Services, Attribute keys, and Interventions as menu items](../images/console-navbar.png)
 
-## Publish and manage configurations
+## Configuration workflow
 
-Definitions only take effect once you publish them to Signals. The same lifecycle applies to attribute groups, attribute keys, [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md):
+Attribute groups move through the same lifecycle whether you manage them in Console or with the Python SDK:
 
-* **Publish** registers objects with Signals. This makes them available for real-time calculation and retrieval.
-* **Unpublish** stops active calculation without losing the object definitions.
-* **Delete** permanently removes objects from Signals. Objects must be unpublished before deletion. If you delete an attribute group, the calculated attributes in the Profiles Store will also be deleted.
+1. **Define**: [create the attribute group](/docs/signals/attributes/attribute-groups/index.md#define-the-attribute-group), choosing its data source, attribute key, and attributes. In Console, new attribute groups are saved as drafts, so you can edit them freely before publishing.
+2. **Test**: [preview the attribute values](/docs/signals/attributes/attribute-groups/index.md#test-attribute-definitions) the group would produce, calculated from recent events in your warehouse.
+3. **Publish**: [apply the configuration](/docs/signals/attributes/attribute-groups/index.md#publish-attribute-groups) to your Signals infrastructure. Signals starts calculating attributes, or syncing warehouse tables, and populating the Profiles Store. Definitions only take effect once published: values are calculated from this point onwards, unless you've configured a backfill.
+4. **Update**: editing a published attribute group creates a new [version](/docs/signals/attributes/attribute-groups/index.md#versioning), leaving the published version unchanged. This means you can iterate on definitions without breaking downstream processes, then migrate consumers by updating your [service](/docs/signals/applications/services/index.md) definitions.
+5. **Unpublish**: [stop calculation](/docs/signals/attributes/attribute-groups/index.md#delete-an-attribute-group) for a specific version without losing its definition. Existing values remain in the Profiles Store, and you can republish later.
+6. **Delete**: permanently remove all versions of the group, along with its calculated values in the Profiles Store. Attribute groups must be unpublished before they can be deleted.
 
-<Tabs groupId="signals-impl" queryString>
-<TabItem value="console" label="Console" default>
+[Interventions](/docs/signals/interventions/index.md) follow the same lifecycle. [Services](/docs/signals/applications/services/index.md) are simpler: they're published automatically as soon as they're created, and aren't versioned.
 
-In Console, each configuration is saved as a draft when you create it, and published from its details page. See the [attribute groups](/docs/signals/attributes/attribute-groups/index.md#publish-attribute-groups) and [interventions](/docs/signals/interventions/index.md#publish-and-manage-the-intervention) pages for details.
-
-</TabItem>
-<TabItem value="sdk" label="Python SDK">
-
-Use the `publish()`, `unpublish()`, and `delete()` methods on your `Signals` object:
-
-```python
-from snowplow_signals import StreamAttributeGroup, Service, RuleIntervention
-
-# Define your objects (assuming these are already created)
-objects_to_manage = [my_attribute_group, my_service, my_intervention]
-
-# 1. Publish objects
-published_objects = sp_signals.publish(objects_to_manage)
-
-# 2. Unpublish objects
-unpublished_objects = sp_signals.unpublish(objects_to_manage)
-
-# 3. Delete objects permanently - must unpublish first
-sp_signals.delete(objects_to_manage)
-```
-
-</TabItem>
-</Tabs>
+Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps.

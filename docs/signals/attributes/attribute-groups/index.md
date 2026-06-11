@@ -50,7 +50,11 @@ my_stream_attribute_group = StreamAttributeGroup(
 </TabItem>
 </Tabs>
 
-## Data source
+## Define the attribute group
+
+An attribute group definition has several parts, described in this section. The most important choice is the data source, which determines how attributes are calculated and which options are available.
+
+### Data source
 
 There are two [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
 
@@ -137,7 +141,7 @@ Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Wareho
 </TabItem>
 </Tabs>
 
-## Attribute group options
+### Attribute group options
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -166,11 +170,11 @@ Use the `online` property to control whether Signals should actively compute the
 </TabItem>
 </Tabs>
 
-## Attribute keys
+### Attribute keys
 
 All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys). See [Attribute keys](/docs/signals/attributes/attribute-keys/index.md) for details on using built-in keys and creating custom ones.
 
-## Attribute lifetimes
+### Attribute lifetimes
 
 TTL (time-to-live) configuration applies to attributes without a period. For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
 
@@ -274,7 +278,7 @@ Click **Edit** to make changes. To send the configuration to your Signals infras
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`publish()` method](/docs/signals/attributes/index.md#publish-and-manage-configurations) to register attribute groups with Signals.
+Use `publish()` to register attribute groups with Signals.
 
 ```python
 from snowplow_signals import Signals
@@ -327,7 +331,7 @@ If the attribute group version is used by a published [intervention](/docs/signa
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use [`unpublish()`](/docs/signals/attributes/index.md#publish-and-manage-configurations) to stop active calculation without losing the attribute group definition. You can republish it later if needed.
+Use `unpublish()` to stop active calculation without losing the attribute group definition. You can republish it later if needed.
 
 Use `delete()` to permanently remove the attribute group and its calculated attribute values from the Profiles Store. You must unpublish before deleting.
 

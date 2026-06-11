@@ -46,32 +46,40 @@ The core Signals components are:
 
 ## Workflow
 
-These are the high-level steps for using Signals:
-1. Decide on the business logic
-2. Apply the configurations to Signals
-3. Use the attributes and interventions to take action in your application
+These are the high-level steps for using Signals, and the documentation in this section follows the same order:
+1. Set up Signals
+2. Plan your use case
+3. Define and publish your configuration
+4. Take action in your application
 
-Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for help getting started.
+Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a hands-on walkthrough.
 
-### 1. Decide on the business logic
+### 1. Set up Signals
 
-Your first step is to decide what changes in user behavior you're aiming for. What systems or data will you need to achieve this? This planning will help you decide which attributes you want to calculate, and which interventions you're interested in defining.
+[Enable Signals](/docs/signals/setup/index.md) in Snowplow Console. This is a one-time task that deploys the Signals infrastructure alongside your pipeline.
 
-You'll also need to decide whether to calculate attributes from your real-time event stream, or to include pre-calculated warehouse data, or both.
+Connecting a warehouse is optional, but you'll need one to backfill stream attributes with historical data, sync pre-calculated warehouse tables, or test attribute definitions before publishing.
 
-Read more about attributes and interventions on the [fundamentals](/docs/signals/concepts/index.md) page.
+### 2. Plan your use case
 
-### 2. Apply the configuration
+Decide what changes in user behavior you're aiming for, and what your application will do about them. This planning will tell you:
+* Which [attributes](/docs/signals/concepts/index.md#attribute-groups) to calculate, and at what level — per user, per session, or against a custom [attribute key](/docs/signals/concepts/index.md#attribute-keys)
+* Whether to calculate them from your real-time event stream, sync pre-calculated values from your warehouse, or both — see [data sources](/docs/signals/concepts/index.md#data-sources)
+* Whether your application will pull attribute values on demand, react to [interventions](/docs/signals/concepts/index.md#interventions) pushed by Signals, or both
 
-We recommend using [Console](https://console.snowplowanalytics.com) to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
+The [fundamentals](/docs/signals/concepts/index.md) page explains all of these components.
 
-Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
+### 3. Define and publish your configuration
 
-### 3. Take action in your application
+[Define attribute groups](/docs/signals/attributes/index.md) and [interventions](/docs/signals/interventions/index.md), using Snowplow Console or the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk). Group your published attribute groups into [services](/docs/signals/applications/services/index.md), so your applications consume a stable set of attributes.
 
-Retrieve calculated attributes in your application using the [Node.js](https://www.npmjs.com/package/@snowplow/signals-node) or [Python](https://pypi.org/project/snowplow-signals/) Signals SDKs. You could also use the Signals API.
+Definitions only take effect once published: publishing is what makes Signals start calculating attributes and populating the Profiles Store. The [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow) describes the full lifecycle, including testing definitions before you publish.
 
-Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to automatically take action based on user behavior.
+### 4. Take action in your application
+
+[Retrieve the calculated attributes](/docs/signals/applications/retrieve-attributes/index.md) in your application using the Python SDK, Node.js SDK, or API, and use them to personalize the user experience.
+
+To react to user behavior as it happens, [subscribe to interventions](/docs/signals/applications/subscribe/index.md) using the Python SDK, the browser tracker plugin, or the API.
 
 ## Resources
 

@@ -235,7 +235,7 @@ The intervention page also includes sample code to help you subscribe to it. Rea
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the [`publish()` method](/docs/signals/attributes/index.md#publish-and-manage-configurations) to register rule-based interventions with Signals:
+Use `publish()` to register rule-based interventions with Signals:
 
 ```python
 sp_signals.publish([hello_intervention])
@@ -271,7 +271,7 @@ To unpublish or delete an intervention in Console, click the `⋮` button on the
 
 Unpublishing is version specific. You can republish it later if needed. Choose **Delete** to permanently delete all versions of the intervention.
 
-With the Python SDK, use the [`unpublish()` and `delete()` methods](/docs/signals/attributes/index.md#publish-and-manage-configurations).
+With the Python SDK, use the `unpublish()` and `delete()` methods.
 
 ## Test the intervention
 

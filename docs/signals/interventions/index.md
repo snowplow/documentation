@@ -77,7 +77,7 @@ The table below lists all available arguments for a `RuleIntervention`:
 Criteria are the conditional rules that determine when an intervention should trigger.
 
 :::note[Sent once]
-An intervention is sent only the first time the criteria are met. Read an example of how this works on the [fundamentals page](/docs/signals/concepts/index.md#targeting-example).
+An intervention is sent only the first time the criteria are met. Read an example of how this works in the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example).
 :::
 
 When a referenced attribute is updated, the updated and previous states are evaluated against the criteria. If the previous state did not meet the conditions but the newly updated state does, the trigger activates. Criteria always refer to the latest published version of the attribute group that contains the attribute.
@@ -161,6 +161,14 @@ criteria = InterventionCriteriaAll(all=[
 ## Target and payload
 
 Interventions are delivered to [attribute keys](/docs/signals/concepts/index.md#targeting). By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys if you want different targets.
+
+:::note[Key constraints]
+Interventions can be defined against any attribute key, as long as its values are non-enumerable. For example, the built-in Snowplow attribute keys `domain_userid`, `domain_sessionid`, and `network_userid` are suitable targets since their values are canonically formatted UUIDs, e.g. `8c9104e3-c300-4b20-82f2-93b7fa0b8feb`.
+:::
+
+Custom targeting can be useful when you have broad criteria but want a more narrow target. For example, if your criteria use a broad attribute like `page_id`, you might not want to send the intervention to everyone on that page. If you're also checking user-specific criteria, target `domain_userid` to reach only the specific user who meets all conditions.
+
+Another use for custom targeting is when you want to target an attribute key that's available in the triggering event, but isn't part of your intervention logic. For example, to send an intervention to a `domain_userid` when they do a certain number of things in a single `pageview_id`. By targeting the user rather than the page, you can ensure that the intervention is received even if they've gone onto a new page by the time the triggering event is processed, or if the application is not subscribed to the `pageview_id`.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -294,7 +302,7 @@ Once the intervention is published, you can send a test by specifying a particul
 Direct interventions have no criteria, and are not tied to attribute values. They use `InterventionInstance` objects, and are pushed to Signals using `push_intervention`, rather than being published like other configuration objects.
 
 :::note[Not available in Snowplow Console]
-Direct interventions are only available using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api).
+Direct interventions are only available using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api). They use the API's `api/v1/registry/interventions` endpoints under the hood, which require a valid, authorized bearer token.
 :::
 
 You can directly push these interventions to any attribute keys. If the intervention is valid, Signals will immediately deliver it to any [subscribers](/docs/signals/applications/subscribe/index.md) for the targeted attribute key IDs.

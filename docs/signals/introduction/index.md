@@ -6,7 +6,13 @@ description: "Snowplow Signals is a real-time personalization engine that comput
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 ---
 
-**Give your AI agents the context they need to act intelligently with Snowplow Signals**.
+Snowplow Signals computes user attributes from your behavioral data in real time, and serves them to your applications over an API. Attributes are calculated from your Snowplow event stream as events arrive, or synced from tables in your warehouse.
+
+Use Signals to:
+* Personalize content, recommendations, and pricing based on what the user is doing in their current session
+* Give chatbots and AI agents context about the user they're interacting with
+* Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
+* Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
 <CardGrid cols={2}>
   <CallToActionCard

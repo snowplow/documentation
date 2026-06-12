@@ -14,19 +14,7 @@ Use Signals to:
 * Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
 * Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
-<CardGrid cols={2}>
-  <CallToActionCard
-    title="Try Signals for free"
-    description="Experience Signals in Snowplow Console with a free trial"
-    href="https://snowplow.io/get-started/snowplow-free-trial"
-  />
-
-  <CallToActionCard
-    title="Snowplow for Composable Analytics"
-    description="Learn about the Customer Data Infrastructure that's the foundation for Signals"
-    href="/docs/"
-  />
-</CardGrid>
+If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to try Signals in Snowplow Console.
 
 ## Explore Signals
 

@@ -13,7 +13,7 @@ sidebar_custom_props:
 Snowplow Signals computes user attributes from your data. You can retrieve these attributes in your applications to take real-time actions. Signals can also send automated triggers to your applications based on calculated attributes.
 
 Use Signals to:
-* Provide enriched user context to chatbots and other agentic applications, in near real time
+* Provide enriched user context to chatbots and other agentic applications, in real time
 * Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
 * Trigger actions automatically when users meet specific criteria
 

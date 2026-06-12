@@ -19,43 +19,17 @@ import TabItem from '@theme/TabItem';
 
 Attribute calculation starts when the definitions are published, and values are not backdated.
 
-## Minimal example
+## Configure the attribute
 
-<Tabs groupId="signals-impl" queryString>
-<TabItem value="console" label="Console" default>
+Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-a-time-period) and [criteria](#filter-with-criteria) settings are optional refinements.
 
-Open your attribute group in Snowplow Console and use the attribute configuration interface to fill in the required fields.
+In Console, open your attribute group and use the attribute configuration interface to fill in the fields. The time period and criteria settings are within **More options**.
 
 ![Attribute configuration interface showing name, event filter, and aggregation options](../../images/attribute-group-attributes.png)
 
-</TabItem>
-<TabItem value="sdk" label="Python SDK">
+With the Python SDK, these settings are arguments to the `Attribute` class, listed in [all attribute options](#all-attribute-options).
 
-This is the minimum configuration needed to create an attribute:
-
-```python
-from snowplow_signals import Attribute, Event
-
-my_attribute = Attribute(
-    name="button_click_counter",
-    type="int32",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="button_click",
-            version="1-0-0",
-        )
-    ],
-    aggregation="counter"
-)
-```
-
-Once applied and active, this definition triggers every time Signals processes an event with the schema `iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0`. The stored attribute starts at 0 and increases by 1 with every `button_click` event.
-
-</TabItem>
-</Tabs>
-
-## Event selection
+### Select events
 
 Use the event filter to choose which event type to calculate the attribute from.
 
@@ -118,7 +92,7 @@ sp_structured = Event(name="event", vendor="com.google.analytics", version="1-0-
 </TabItem>
 </Tabs>
 
-## Aggregation options
+### Choose an aggregation
 
 Signals supports the following aggregation types:
 
@@ -152,7 +126,7 @@ Set the `aggregation` argument using the lowercase snake_case version of the agg
 </TabItem>
 </Tabs>
 
-## Property selection
+### Select a property
 
 You can calculate attributes based on properties in any part of your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md) properties: available for all events
@@ -199,7 +173,7 @@ EntityProperty(
 </TabItem>
 </Tabs>
 
-## Time period
+### Set a time period
 
 Add an optional time period to aggregate over a rolling window. Signals won't include events older than the specified time period in the calculation.
 
@@ -227,7 +201,7 @@ my_attribute = Attribute(
 </TabItem>
 </Tabs>
 
-## Filtering with criteria
+### Filter with criteria
 
 Use criteria to filter the events used to calculate an attribute. They allow you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may wish to calculate only views for the homepage, or a login page.
 
@@ -285,15 +259,7 @@ criteria = Criteria(
 
 ## All attribute options
 
-<Tabs groupId="signals-impl" queryString>
-<TabItem value="console" label="Console" default>
-
-All attribute options are available in the attribute configuration interface within your attribute group. Use **More options** to access time period and criteria settings.
-
-</TabItem>
-<TabItem value="sdk" label="Python SDK">
-
-The table below lists all available arguments for an `Attribute`:
+The table below lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -307,15 +273,34 @@ The table below lists all available arguments for an `Attribute`:
 | `period` | The time window over which to calculate the aggregation | `timedelta` | ❌ |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
-</TabItem>
-</Tabs>
+## Examples
 
-## Extended examples
+The following examples show complete attribute configurations, using the Python SDK.
 
-<Tabs groupId="signals-impl" queryString>
-<TabItem value="sdk" label="Python SDK">
+### Minimal example
 
-### Example 1: filtered counter with a time window
+This is the minimum configuration needed to create an attribute:
+
+```python
+from snowplow_signals import Attribute, Event
+
+my_attribute = Attribute(
+    name="button_click_counter",
+    type="int32",
+    events=[
+        Event(
+            vendor="com.snowplowanalytics.snowplow",
+            name="button_click",
+            version="1-0-0",
+        )
+    ],
+    aggregation="counter"
+)
+```
+
+Once applied and active, this definition triggers every time Signals processes an event with the schema `iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0`. The stored attribute starts at 0 and increases by 1 with every `button_click` event.
+
+### Filtered counter with a time window
 
 Count `button_click` events only where the button `id` is `generate_emoji_btn`, over a rolling 10-minute window.
 
@@ -353,7 +338,7 @@ button_click_counter_attribute = Attribute(
 )
 ```
 
-### Example 2: last atomic property value
+### Last atomic property value
 
 Track the most recent referrer source using the `mkt_medium` atomic property, calculated from either a page view or a custom event.
 
@@ -373,17 +358,17 @@ referrer_source_attribute = Attribute(
 )
 ```
 
-### Example 3: sum of an entity property
+### Sum of an entity property
 
-Sum the `price` of the first product entity in ecommerce transaction events.
+Sum the `price` of product entities in ecommerce events, counting only `transaction` events.
 
 ```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion, EntityProperty
+from snowplow_signals import Attribute, Event, Criteria, Criterion, EntityProperty, EventProperty
 
 my_new_attribute = Attribute(
     name="products_total_purchase_value",
     description="Total purchase value for all products",
-    type="int64",
+    type="double",
     events=[
         Event(
             vendor="com.snowplowanalytics.snowplow.ecommerce",
@@ -395,12 +380,11 @@ my_new_attribute = Attribute(
     criteria=Criteria(
         all=[
             Criterion.eq(
-                EntityProperty(
+                EventProperty(
                     vendor="com.snowplowanalytics.snowplow.ecommerce",
-                    name="product",
+                    name="snowplow_ecommerce_action",
                     major_version=1,
-                    index=[0],
-                    path="price"
+                    path="type"
                 ),
                 "transaction"
             )
@@ -415,6 +399,3 @@ my_new_attribute = Attribute(
     default_value=0
 )
 ```
-
-</TabItem>
-</Tabs>

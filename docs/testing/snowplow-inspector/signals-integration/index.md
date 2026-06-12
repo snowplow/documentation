@@ -8,10 +8,7 @@ keywords: ["signals integration", "debug attributes", "debug interventions", "si
 
 The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/introduction/index.md) to help validate your [attribute](/docs/signals/attributes/attributes/index.md) and [intervention](/docs/signals/concepts/index.md#interventions) definitions.
 
-There are two ways to connect Inspector to Signals:
-
-- Automatic: log into [Snowplow Console](https://console.snowplowanalytics.com) via the extension. The extension will detect Signals instances for any organizations you have access to. For full functionality you will need to add API credentials for each organization in the extension options.
-- Signals Sandbox: if you're trialing Signals using the [Signals Sandbox](/tutorials/signals-interventions/start/#signals-sandbox), you can enter your Profiles API and credentials information in the extension options.
+To connect Inspector to Signals, log into [Snowplow Console](https://console.snowplowanalytics.com) via the extension. The extension will detect Signals instances for any organizations you have access to. For full functionality you will need to add API credentials for each organization in the extension options.
 
 To access the extension options, use your browser toolbar to find the extensions menu, and access the **Options** for the Snowplow Inspector extension.
 
@@ -43,10 +40,6 @@ Switching to the **Events** or **Interventions** tab and then back to the **Attr
 
 If the attribute values have still not updated or look out of date, you can use the refresh button at the top of the screen to manually trigger a refresh.
 
-:::note[Signals Sandbox refreshes]
-Since Signals Sandbox requests are free, attribute values get requested much more frequently than described here, to update as quickly as possible.
-:::
-
 All attribute groups from all Signals instances get fetched if their configured attribute key has any values extracted from events.
 If you have access to many organizations, this may slow down the retrieval process.
 You can filter by environment, organization, or attribute source type to limit what's requested and displayed.
@@ -57,8 +50,6 @@ Each attribute group listing includes its organization, environment, version, an
 :::note[Organization filters]
 If you only have access to one organization, organization filters don't display.
 Similarly, if there is only a single version of an attribute group, there will be no option to change it.
-
-If configured, Signals Sandbox counts as its own organization.
 :::
 
 By default, the Inspector only fetches the highest version of each attribute group.

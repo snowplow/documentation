@@ -402,8 +402,12 @@ const fallbackRules = [
   ['/docs/signals/define-attributes/*', '/docs/signals/attributes/:splat', 301],
   ['/docs/signals/retrieve-attributes/*', '/docs/signals/attributes/:splat', 301],
   ['/docs/signals/define-interventions/*', '/docs/signals/interventions/:splat', 301],
-  ['/docs/signals/receive-interventions/*', '/docs/signals/interventions/subscribe/:splat', 301],
+  ['/docs/signals/receive-interventions/*', '/docs/signals/applications/subscribe/:splat', 301],
   ['/docs/signals/resources/*', '/docs/signals/get-started/:splat', 301],
+  // Signals define/consume restructure
+  ['/docs/signals/attributes/services/*', '/docs/signals/applications/services/:splat', 301],
+  ['/docs/signals/interventions/subscribe/*', '/docs/signals/applications/subscribe/:splat', 301],
+  ['/docs/signals/interventions/using-python-sdk/*', '/docs/signals/interventions/:splat', 301],
   ['/docs/resources/migration-guides/*', '/docs/migration-guides/:splat', 301],
   ['/docs/resources/*', '/docs/licensing/:splat', 301],
   ['/docs/licensing/copyright-license/*', '/docs/licensing/:splat', 301],

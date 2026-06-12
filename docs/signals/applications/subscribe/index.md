@@ -1,7 +1,7 @@
 ---
 title: "Subscribe to and receive interventions in your applications"
-sidebar_position: 50
-sidebar_label: "Subscription"
+sidebar_position: 30
+sidebar_label: "Subscribe to interventions"
 description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
 ---
@@ -14,10 +14,12 @@ Subscribe to interventions to automatically respond within your application. You
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 :::note[Sent once]
-An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+An intervention is sent only the first time the criteria are met. The [delivery example](#delivery-example) below shows how this works.
 :::
 
-## Using the Signals Python SDK
+The subscription endpoint (`api/v1/interventions`) is public: it doesn't perform authentication or authorization, just checks the requested attribute keys. Knowing an attribute key ID grants access to its interventions. This is why ID values must be non-enumerable, such as canonically formatted UUIDs, so that they can't be guessed.
+
+## Subscribe with the Python SDK
 
 Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be in a non-enumerable format, such as UUIDs.
 
@@ -47,7 +49,7 @@ intervention_instance = subscription.get()
 subscription.stop()
 ```
 
-## Using the browser tracker plugin
+## Subscribe with the browser tracker plugin
 
 For web applications using the Snowplow [browser tracker](/docs/sources/web-trackers/index.md), you can subscribe to interventions using the [Signals browser plugin](https://www.npmjs.com/package/@snowplow/signals-browser-plugin).
 
@@ -98,7 +100,7 @@ subscribeToInterventions({
     pageview_id: "/co/com.snowplowanalytics.snowplow/web_page/id",
   },
   attributeKeyIds: {
-    network_userid: "177234df-d421-412e-ad8d-8bf97515b2807",
+    network_userid: "177234df-d421-412e-ad8d-8bf97515b280",
   },
 });
 ```
@@ -117,7 +119,7 @@ The plugin generates Snowplow events to track interventions. The events include 
 
 When delivered, interventions contain the following information:
 
-| Argument                    | Description                                                             | Type      |
+| Field                       | Description                                                             | Type      |
 | --------------------------- | ----------------------------------------------------------------------- | --------- |
 | `intervention_id`           | A unique identifier for this triggered intervention                     | `string`  |
 | `name`                      | The unique name/identifier of the intervention                          | `string`  |
@@ -147,3 +149,39 @@ Here's an example intervention payload:
   }
 }
 ```
+
+## Delivery example
+
+This example shows how targeting, subscription, and the send-once rule work together. Consider these two interventions:
+* `intervention1` targets the `domain_userid` and `domain_sessionid` attribute keys
+  * It has two criteria rules, where `any` must be met
+  * The first rule is: `attribute_group1:page_view_count == 10`
+  * The second rule is: `attribute_group2:ad_count is not null`
+* `intervention2` targets the `domain_userid` attribute key
+  * It has one criteria rule, `attribute_group3:button_click_count > 20`
+
+To receive interventions for the current user and session, subscribe to their interventions by providing the `domain_userid` and `domain_sessionid` ID values.
+
+Interventions will be triggered when:
+* The user views 10 pages, **or** the session has an ad event
+  * `intervention1` will be delivered to one of the subscribed targets.
+  * Signals will initially create a payload for each target. However, they'll have the same ID as they're triggered by a single event, and will be deduped.
+* The user exceeds 20 button clicks for the first time
+  * `intervention2` will be delivered to the subscribed user.
+
+Assuming it's the user's first session, the flow looks like this:
+* First page view
+* First ad event
+  * `intervention1` is triggered and delivered to one of the targets
+* More page views, button clicks, and ad events
+* Tenth page view
+  * Nothing happens: because `intervention1` sent already on seeing the ad event in this session, it's not triggered again
+* Twenty-first button click
+  * The attribute value changes from 20 to 21, crossing the required threshold
+  * `intervention2` is triggered and delivered to the user target
+* Twenty-second button click
+  * Nothing happens: the threshold has already passed
+
+This user has already seen more than 10 pages, so `intervention1` can never be triggered by that rule for them. However, if their current session expires, and the application subscribes to their new `domain_sessionid` ID, `intervention1` can be triggered again by the first ad event of the session.
+
+Likewise, the user has already clicked a button more than 20 times, so `intervention2` will never be sent to them again.

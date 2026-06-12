@@ -50,7 +50,11 @@ my_stream_attribute_group = StreamAttributeGroup(
 </TabItem>
 </Tabs>
 
-## Data source
+## Define the attribute group
+
+An attribute group definition has several parts, described in this section. The most important choice is the data source, which determines how attributes are calculated and which options are available.
+
+### Data source
 
 There are two [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
 
@@ -137,7 +141,7 @@ Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Wareho
 </TabItem>
 </Tabs>
 
-## Attribute group options
+### Attribute group options
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -156,7 +160,7 @@ The table below lists all available arguments for `StreamAttributeGroup`:
 | `attribute_key` | The attribute key associated with the attribute group | `AttributeKey` | | ✅ |
 | `owner` | The owner of the attribute group | `Email` | | ✅ |
 | `description` | A description of the attribute group | `string` | | ❌ |
-| `ttl` | Time-to-live for attributes in the Profile Store | `timedelta` | | ❌ |
+| `ttl` | Time-to-live for attributes in the Profiles Store | `timedelta` | | ❌ |
 | `attributes` | List of attributes to calculate | list of `Attribute` | | ✅ |
 | `online` | Calculate attributes (`True`) or not (`False`) | `bool` | `True` | ❌ |
 | `backfill_since_tstamp` | How far in time to backfill from | `datetime` | | ❌ |
@@ -166,11 +170,11 @@ Use the `online` property to control whether Signals should actively compute the
 </TabItem>
 </Tabs>
 
-## Attribute keys
+### Attribute keys
 
 All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys). See [Attribute keys](/docs/signals/attributes/attribute-keys/index.md) for details on using built-in keys and creating custom ones.
 
-## Attribute lifetimes
+### Attribute lifetimes
 
 TTL (time-to-live) configuration applies to attributes without a period. For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
 
@@ -207,7 +211,7 @@ stream_attribute_group = StreamAttributeGroup(
 </TabItem>
 </Tabs>
 
-## Testing attribute definitions
+## Test attribute definitions
 
 After defining one or more [attributes](/docs/signals/attributes/attributes/index.md) for stream attribute groups, you can test the configuration before publishing. This outputs a table of attributes calculated from your `atomic` events table, using a random subset of events from the last hour.
 
@@ -258,7 +262,7 @@ If you don't specify a version, Signals retrieves the latest version.
 </TabItem>
 </Tabs>
 
-## Publishing attribute groups
+## Publish attribute groups
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -290,9 +294,11 @@ sp_signals.publish([
 </TabItem>
 </Tabs>
 
+Once published, Signals starts calculating attribute values and storing them in the Profiles Store. To use them, [retrieve the attributes in your application](/docs/signals/applications/retrieve-attributes/index.md), typically via a [service](/docs/signals/applications/services/index.md).
+
 ## Versioning
 
-Attribute groups are versioned, which allows you to iterate on definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/attributes/services/index.md).
+Attribute groups are versioned, which allows you to iterate on definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/applications/services/index.md).
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -307,7 +313,7 @@ Use `version=1` for the first version. After publishing, if you want to change t
 </TabItem>
 </Tabs>
 
-## Deleting an attribute group
+## Delete an attribute group
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

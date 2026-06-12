@@ -215,7 +215,7 @@ It will trigger based on attribute changes within the `shopping` attribute group
 
 ## Publish and manage the intervention
 
-Interventions only become active once published to your Signals infrastructure. Signals will then start monitoring attribute value changes.
+Interventions only become active once published to your Signals infrastructure. Signals will then start monitoring attribute value changes. To receive and act on triggered interventions, your application will need an active [subscription](/docs/signals/applications/subscribe/index.md).
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -285,7 +285,7 @@ While defining an intervention, you can preview how many users would have receiv
 
 ### Send a test intervention
 
-Once the intervention is published, you can send a test by specifying a particular attribute key identifier. Signals will dispatch an intervention to that identifier so you can verify your subscription is set up correctly and diagnose any connection errors before relying on it in production.
+Once the intervention is published, you can send a test by specifying a particular attribute key identifier. Signals will dispatch an intervention to that identifier so you can verify your [subscription](/docs/signals/applications/subscribe/index.md) is set up correctly and diagnose any connection errors before relying on it in production. Your application must already be subscribed to that attribute key ID to receive the test.
 
 ![Intervention connection test showing attribute key input field to send a test intervention](../images/intervention-connection-test.png)
 
@@ -297,7 +297,7 @@ Direct interventions have no criteria, and are not tied to attribute values. The
 Direct interventions are only available using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api).
 :::
 
-You can directly push these interventions to any attribute keys. If the intervention is valid, Signals will immediately deliver it to any subscribers for the targeted attribute key IDs.
+You can directly push these interventions to any attribute keys. If the intervention is valid, Signals will immediately deliver it to any [subscribers](/docs/signals/applications/subscribe/index.md) for the targeted attribute key IDs.
 
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals

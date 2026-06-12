@@ -294,6 +294,8 @@ sp_signals.publish([
 </TabItem>
 </Tabs>
 
+Once published, Signals starts calculating attribute values and storing them in the Profiles Store. To use them, [retrieve the attributes in your application](/docs/signals/applications/retrieve-attributes/index.md), typically via a [service](/docs/signals/applications/services/index.md).
+
 ## Versioning
 
 Attribute groups are versioned, which allows you to iterate on definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/applications/services/index.md).

@@ -2,7 +2,7 @@
 title: "Configure and manage Identities"
 sidebar_label: "Configuration"
 date: "2025-02-25"
-sidebar_position: 3
+sidebar_position: 2
 description: "Configure identifiers, aliases, and event filters for Snowplow Identities identity resolution."
 keywords: ["identities", "identity resolution", "identifiers", "aliases", "event filters", "configuration"]
 ---
@@ -20,7 +20,7 @@ If Identities is already deployed, you'll see the Identities overview page with 
 Configure which fields from your events should be used as [identifiers](/docs/identities/concepts/index.md#identifiers).
 
 :::tip[Choose stable identifiers]
-The fields you choose affect both resolution quality and the cost and latency of running Identities. Before adding an identifier, read [choosing identifiers](/docs/identities/choosing-identifiers/index.md) and validate its cardinality against your warehouse.
+The fields you choose affect both resolution quality and the cost and latency of running Identities. Before adding an identifier, read [choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md) and validate its cardinality against your warehouse.
 :::
 
 Each identifier type has:
@@ -75,7 +75,7 @@ To add a filter, click **Add filter** and configure:
 
 ## Supported scale
 
-Identities is self-serviceable from Console. The default deployment is sized for typical production event volumes and reasonable identifier configurations, where each configured identifier is stable for a user. Following the guidance in [choosing identifiers](/docs/identities/choosing-identifiers/index.md) keeps your deployment within these defaults.
+Identities is self-serviceable from Console. The default deployment is sized for typical production event volumes and reasonable identifier configurations, where each configured identifier is stable for a user. Following the guidance in [choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md) keeps your deployment within these defaults.
 
 :::warning[High-volume deployments]
 High-volume pipelines aren't covered by the self-serve defaults and shouldn't be deployed without guidance. If you expect a large event volume, or your warehouse checks show high-cardinality identifiers you can't avoid, [contact Snowplow Support](https://support.snowplow.io/) before deploying Identities.

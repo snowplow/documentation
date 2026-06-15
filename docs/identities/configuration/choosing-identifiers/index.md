@@ -16,31 +16,29 @@ A good identifier holds the same value for a user over time and across their eve
 Stable identifiers include:
 * `user_id`, set when a user authenticates
 * `domain_userid`, the web tracker's persistent cookie ID
-* a hashed email address captured at sign-in
-* a device identifier such as `apple_idfv`
+* A hashed email address captured at sign-in
+* A device identifier such as `apple_idfv`
 
 Avoid identifiers whose value changes frequently for the same user. Each distinct identifier value becomes a node in the [identity graph database](/docs/identities/index.md#how-identities-fits-into-the-snowplow-pipeline), so a value that changes often produces a new node on almost every event. Unstable identifiers include:
-* session identifiers such as `domain_sessionid`
-* page view identifiers
-* event identifiers such as `event_id`
-* any value that embeds a timestamp or is regenerated per session or per event
+* Session identifiers such as `domain_sessionid`
+* Page view identifiers
+* Event identifiers such as `event_id`
+* Any value that embeds a timestamp or is regenerated per session or per event
 
 ## Why high-cardinality identifiers are a problem
 
 Identities stores every distinct identifier value as a node in a managed Postgres graph database. When you configure a high-cardinality identifier, the number of nodes grows roughly in line with your event volume rather than your user count.
 
 This has three effects:
-* storage cost increases, because the graph database holds far more nodes than there are users
-* identity resolution latency increases, because graph operations run against a much larger graph
-* resolution quality drops, because most nodes are one-off values that never link any events together
+* Storage cost increases, because the graph database holds far more nodes than there are users
+* Identity resolution latency increases, because graph operations run against a much larger graph
+* Resolution quality drops, because most nodes are one-off values that never link any events together
 
-:::warning[Validate before configuring]
-An unstable identifier can grow the identity graph by orders of magnitude. Removing an identifier later doesn't reduce the nodes already created, and [affects resolution for all future events](/docs/identities/configuration/index.md). Validate cardinality against your warehouse before adding an identifier.
-:::
+An unstable identifier can grow the identity graph by orders of magnitude. Removing an identifier later doesn't reduce the nodes already created, and [affects resolution for all future events](/docs/identities/configuration/index.md).
 
 ## Validate identifiers against your warehouse
 
-Run these checks against your `atomic.events` table before configuring an identifier. The examples use standard atomic columns. If your identifier comes from a custom event or entity field, replace the column with the relevant `unstruct_event_*` or `contexts_*` column. See [how data structures map to warehouse columns](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
+It is recommended to run these checks against your `atomic.events` table before configuring an identifier. The examples use standard atomic columns. If your identifier comes from a custom event or entity field, replace the column with the relevant `unstruct_event_*` or `contexts_*` column. See [how data structures map to warehouse columns](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 ### Check cardinality
 
@@ -72,11 +70,11 @@ from (
 
 Use the result to judge whether an identifier is stable enough to configure:
 
-| Average distinct values per user | Interpretation                                        |
-| -------------------------------- | ----------------------------------------------------- |
-| Around 1                         | Ideal: the identifier is stable for each user         |
-| A small number, e.g. 2-5         | Acceptable: some churn across devices or sessions     |
-| Tens or more                     | Reconsider: the identifier is unstable and high-cost  |
+| Average distinct values per user | Interpretation                                       |
+| -------------------------------- | ---------------------------------------------------- |
+| Around one                       | Ideal: the identifier is stable for each user        |
+| A small number, e.g. two to five | Acceptable: some churn across devices or sessions    |
+| Tens or more                     | Reconsider: the identifier is unstable and high-cost |
 
 ## Reset identifiers on logout
 

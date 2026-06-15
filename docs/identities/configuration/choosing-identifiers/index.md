@@ -27,7 +27,7 @@ Avoid identifiers whose value changes frequently for the same user. Each distinc
 
 ## Why high-cardinality identifiers are a problem
 
-Identities stores every distinct identifier value as a node in a managed Postgres graph database. When you configure a high-cardinality identifier, the number of nodes grows roughly in line with your event volume rather than your user count.
+Identities stores every distinct identifier value as a node in a graph database. When you configure a high-cardinality identifier, the number of nodes grows roughly in line with your event volume rather than your user count.
 
 This has three effects:
 * Storage cost increases, because the graph database holds far more nodes than there are users

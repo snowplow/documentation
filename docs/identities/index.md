@@ -16,10 +16,6 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
 
-:::note[Deployment support]
-Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/index.md). Azure isn't supported.
-:::
-
 Identities allows you to:
 * Attribute anonymous events to authenticated users, both within the same session and across sessions and devices
 * Connect behavior across web, iOS, and Android apps, when users authenticate with the same credentials on different platforms
@@ -27,6 +23,10 @@ Identities allows you to:
 * Distinguish between separate users sharing the same device
 
 Use the provided Identities data models to build identifier mapping tables. These tables help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
+
+:::note[Deployment support]
+Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/index.md). Azure isn't supported.
+:::
 
 ## How Identities fits into the Snowplow pipeline
 

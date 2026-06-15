@@ -40,6 +40,8 @@ Your Identities infrastructure is deployed into the same cloud as your pipeline.
 
 ## Get started with Identities
 
-To use Identities, start by deciding which user identifiers are most relevant to your use cases. Identities supports standard Snowplow identifiers such as `user_id` and `domain_userid`, as well as custom identifiers derived from any field in the event payload. See the [configuration](/docs/identities/configuration/index.md) page for more details.
+Identities is self-serviceable from [Console](/docs/identities/configuration/index.md) within its [supported scale](/docs/identities/configuration/index.md#supported-scale).
+
+To use Identities, start by deciding which user identifiers are most relevant to your use cases. Identities supports standard Snowplow identifiers such as `user_id` and `domain_userid`, as well as custom identifiers derived from any field in the event payload. Because your choice of identifiers affects both resolution quality and cost, follow the guidance in [choosing identifiers](/docs/identities/choosing-identifiers/index.md) before you configure them.
 
 After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables.

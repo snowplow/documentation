@@ -1,7 +1,7 @@
 ---
 title: "Snowplow Identities dbt package"
 sidebar_label: "Data models"
-sidebar_position: 3
+sidebar_position: 4
 description: "The Snowplow Identities dbt package provides incremental models for identity resolution, mapping, and audit."
 keywords: ["identities", "dbt", "identity resolution", "data model"]
 date: "2026-03-05"

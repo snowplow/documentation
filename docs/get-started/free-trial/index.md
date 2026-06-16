@@ -15,7 +15,7 @@ Use the trial to evaluate Snowplow end to end: define your data, send events fro
 
 Sign up for the free trial on the [Snowplow website](https://snowplow.io/get-started/snowplow-free-trial).
 
-After you sign up, your trial environment is provisioned automatically. Provisioning is not instant: trial access becomes available once provisioning completes, which takes around 20 minutes.
+After you sign up, your trial environment is provisioned automatically. You will receive access instructions within around 20 minutes.
 
 The trial runs for 14 days. If you need more time, extensions are available on request.
 

@@ -32,7 +32,7 @@ Some features are not configurable during the trial:
 The trial includes a limited set of resources that do not scale:
 
 * Destinations are limited to:
-  * one [Micro](/docs/api-reference/snowplow-micro/index.md) instance
+  * one [Micro](/docs/testing/snowplow-micro/index.md) instance
   * one [warehouse or lake destination](/docs/destinations/warehouses-lakes/index.md)
   * one [event forwarding destination](/docs/destinations/forwarding-events/index.md)
 * Rate limiting is enforced at the collector.

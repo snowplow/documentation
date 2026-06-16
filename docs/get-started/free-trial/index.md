@@ -25,7 +25,7 @@ Some features are not configurable during the trial:
 
 * Collector configuration changes are not available.
 * First-party collector and custom domains are not available.
-* Advanced or non-self-serviceable infrastructure is not available during the trial. [Contact sales](https://console.snowplowanalytics.com/contact-us) to discuss your requirements.
+* Some destinations are not available during the trial. [Contact sales](https://console.snowplowanalytics.com/contact-us) to discuss your requirements.
 
 ## Capacity limits
 

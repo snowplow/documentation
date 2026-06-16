@@ -17,14 +17,13 @@ Sign up for the free trial on the [Snowplow website](https://snowplow.io/get-sta
 
 After you sign up, your trial environment is provisioned automatically. You will receive access instructions within around 20 minutes.
 
-The trial runs for 14 days. If you need more time, extensions are available on request.
+The trial runs for 14 days. To request an extension, [contact sales](https://console.snowplowanalytics.com/contact-us).
 
 ## Product limitations
 
-Some features are not configurable during the trial:
+Some Snowplow features are not available during the trial:
 
-* Collector configuration changes are not available.
-* First-party collector and custom domains are not available.
+* First-party tracking using your own domain is not available.
 * Some destinations are not available during the trial. [Contact sales](https://console.snowplowanalytics.com/contact-us) to discuss your requirements.
 
 ## Capacity limits
@@ -35,7 +34,7 @@ The trial includes a limited set of resources that do not scale:
   * one [Micro](/docs/testing/snowplow-micro/index.md) instance
   * one [warehouse or lake destination](/docs/destinations/warehouses-lakes/index.md)
   * one [event forwarding destination](/docs/destinations/forwarding-events/index.md)
-* Rate limiting is enforced at the collector.
+* Collector-level rate limits apply.
 * Pipeline, [Signals](/docs/signals/index.md), and [Identities](/docs/identities/index.md) resources are limited and do not scale during the trial.
 
 :::note[Beyond the trial]

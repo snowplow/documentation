@@ -165,7 +165,7 @@ const config: Config = {
           },
           {
             href: 'https://snowplow.io/get-started/snowplow-free-trial',
-            label: 'Start free trial',
+            label: 'Try for free',
             position: 'right',
             className: 'snowplow-button cta-button navbar-cta',
           },

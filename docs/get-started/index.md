@@ -29,7 +29,7 @@ For self-hosted deployments, we have:
 * **Snowplow Self-Hosted**: for production use, for existing Snowplow users
 
 :::tip[Try Snowplow for free]
-Not sure which platform is right for you? Start a [free 14-day trial](/docs/get-started/free-trial/index.md) of CDI Cloud.
+To compare platforms before committing, start a [free 14-day trial](/docs/get-started/free-trial/index.md) of CDI Cloud.
 :::
 
 ## Customer Data Infrastructure

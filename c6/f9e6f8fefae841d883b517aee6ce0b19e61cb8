@@ -1,0 +1,25 @@
+worker/redirects.js
+  s_17845c729b46d5::t_c1fddf4f924b92 394
+  s_17845c729b46d5::t_74d65d7bf9db3a 398-399
+  s_17845c729b46d5::t_323627ddb0bf89 387
+static/_redirects
+  s_17845c729b46d5::t_c56f80039514a6 477
+  s_17845c729b46d5::t_2d8beff3e0f77b 488-489
+  s_17845c729b46d5::t_526063393a6754 484
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "c6f9e6f8fefae841d883b517aee6ce0b19e61cb8",
+  "prompts": {},
+  "sessions": {
+    "s_17845c729b46d5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a94ab49-ff2b-478d-9c61-03b308e666c1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gleb Lobov <gleb.lobov@snowplowanalytics.com>"
+    }
+  }
+}

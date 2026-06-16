@@ -34,7 +34,7 @@ The trial includes a limited set of resources that do not scale:
   * one [Micro](/docs/testing/snowplow-micro/index.md) instance
   * one [warehouse or lake destination](/docs/destinations/warehouses-lakes/index.md)
   * one [event forwarding destination](/docs/destinations/forwarding-events/index.md)
-* Collector-level rate limits apply.
+* Collector-level rate limits apply, capped at around 20 events per second.
 * Pipeline, [Signals](/docs/signals/index.md), and [Identities](/docs/identities/index.md) resources are limited and do not scale during the trial.
 
 :::note[Beyond the trial]

@@ -386,6 +386,19 @@ button.snowplow-button:focus {
   color: white;
 }
 
+/* Free trial call to action in the navbar */
+
+[data-theme] a.navbar-cta.snowplow-button {
+  height: 36px;
+  margin: auto 0 auto 0.5rem;
+}
+
+@media (max-width: 996px) {
+  a.navbar-cta {
+    display: none;
+  }
+}
+
 /* Alert buttons */
 
 .alert a.snowplow-button {

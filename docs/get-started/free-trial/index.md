@@ -7,7 +7,7 @@ keywords: ["free trial", "Snowplow trial", "CDI Cloud", "14-day trial", "trial l
 date: "2026-06-16"
 ---
 
-The Snowplow free trial is a 14-day, fully managed trial of [Snowplow CDI Cloud](/docs/get-started/index.md#cdi-cloud). Snowplow hosts and manages the pipeline infrastructure, so you can collect, validate, and load behavioral data without setting up any cloud infrastructure yourself.
+The Snowplow free trial is a 14-day trial of [Snowplow CDI Cloud](/docs/get-started/index.md#cdi-cloud). Snowplow hosts and manages the pipeline infrastructure, so you can collect, validate, and load behavioral data without setting up any cloud infrastructure yourself.
 
 Use the trial to evaluate Snowplow end to end: define your data, send events from your application, and load validated data into a warehouse or lake destination.
 

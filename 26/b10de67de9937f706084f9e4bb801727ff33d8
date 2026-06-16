@@ -1,0 +1,24 @@
+docs/api-reference/snowplow-cli/data-structures/index.md
+  s_17845c729b46d5::t_a574e1d6ad3a4a 9-14
+docs/api-reference/snowplow-cli/index.md
+  s_17845c729b46d5::t_2e0596e4aebb9c 15-16
+docs/api-reference/snowplow-cli/tracking-plans/index.md
+  s_17845c729b46d5::t_42ea110181cc26 10,14-17
+  s_17845c729b46d5::t_5f3e11b9599f21 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "26b10de67de9937f706084f9e4bb801727ff33d8",
+  "prompts": {},
+  "sessions": {
+    "s_17845c729b46d5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a94ab49-ff2b-478d-9c61-03b308e666c1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gleb Lobov <gleb.lobov@snowplowanalytics.com>"
+    }
+  }
+}

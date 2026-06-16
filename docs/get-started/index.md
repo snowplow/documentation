@@ -28,6 +28,10 @@ For self-hosted deployments, we have:
 * **Snowplow Community Edition**: not for production use, hosted and managed by you
 * **Snowplow Self-Hosted**: for production use, for existing Snowplow users
 
+:::tip[Try Snowplow for free]
+To compare platforms before committing, start a [free 14-day trial](/docs/get-started/free-trial/index.md) of CDI Cloud.
+:::
+
 ## Customer Data Infrastructure
 
 Snowplow CDI is our full infrastructure offering. Choose whether you'd like the **data plane** to be entirely hosted in your cloud account, or whether you'd prefer Snowplow to host the pipeline infrastructure for you.

@@ -1,3 +1,10 @@
+:::note[Catalog options]
+
+We support different catalog options for Iceberg lakes.
+The instructions below are not necessary when using Snowflake Open Catalog.
+
+:::
+
 The [Iceberg documentation](https://iceberg.apache.org/docs/latest/maintenance/) makes recommendations for running regular maintenance jobs to get the best performance from your lake.  This guide expands on those recommendations specifically for your Snowplow events lake.
 
 The Snowplow Lake Loader **does not** automatically run the maintenance tasks described below.
@@ -44,7 +51,7 @@ The `rewriteDataFiles` action has two benefits for Snowplow data:
 
 We recommend that you schedule the `removeOrphanFiles` Iceberg action to run once per month.
 
-:::tip delete-after-commit
+:::tip[delete-after-commit]
 Your Iceberg table should have `write.metadata.delete-after-commit.enabled=true` set in the table properties. If your Iceberg table was originally created by a Lake Loader older than version 0.7.0, then please run:
 
 ```sql

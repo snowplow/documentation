@@ -1,7 +1,9 @@
 ---
-title: "Partitioning of your lake"
+title: "Partitioning for data lakes"
 sidebar_label: "Partitioning"
 sidebar_position: 2
+description: "Data lake partitioning by load_tstamp and event_name for efficient querying and incremental processing in Delta and Iceberg tables."
+keywords: ["lake partitioning", "load_tstamp partition", "event_name partition", "query optimization", "incremental models"]
 ---
 
 A lake created by the Lake Loader has two levels of partitioning:
@@ -11,7 +13,7 @@ A lake created by the Lake Loader has two levels of partitioning:
 
 This structure of partitioning works very well with queries that filter on `load_tstamp` and/or `event_name`.  It works especially well with incremental models, which only ever process the most recently loaded events.
 
-:::note Session Timestamp
+:::note[Session Timestamp]
 If you are using Snowplow's DBT packages, then set the `session_timestamp` variable to `load_stamp` to match the table's partitioning.
 :::
 

@@ -1,15 +1,16 @@
 ---
-title: "Setup Guide for AWS"
+title: "Set up Snowplow Mini on AWS"
+sidebar_label: "AWS setup guide"
 date: "2021-05-11"
 sidebar_position: 1
+description: "Deploy Snowplow Mini on AWS for a single-instance testing environment."
+keywords: ["snowplow mini", "aws setup", "mini deployment"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 
@@ -21,7 +22,7 @@ All setup for Snowplow Mini is done within the AWS Console and will incur small 
 
 We offer Snowplow Mini in 3 different sizes. To decide on which size of Snowplow Mini to choose, read on.
 
-### large & xlarge & xxlarge
+## large & xlarge & xxlarge
 
 Mini is available in 3 different sizes:
 
@@ -33,20 +34,20 @@ This service is available as an EC2 image within the AWS Community AMIs in the f
 
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-- Snowplow Collector NSQ 3.3.0
-- Snowplow Enrich NSQ 5.4.0
-- Snowplow Elasticsearch Loader 2.1.2
-- Snowplow Iglu Server 0.13.0
-- Opensearch 2.4.0
-- Opensearch Dashboards 2.4.0
-- Postgresql 15.1
+- Snowplow Collector NSQ 3.7.0
+- Snowplow Enrich NSQ 6.11.0
+- Snowplow Elasticsearch Loader 2.1.3
+- Snowplow Iglu Server 0.14.0
+- Opensearch 3.6.0
+- Opensearch Dashboards 3.6.0
+- Postgresql 16.10
 - NSQ v1.3.0
 
 Note: All services are configured to start automatically so everything should happily survive restarts/shutdowns.
 
 To understand the flow of data please refer to the following diagram:
 
-![This image has an empty alt attribute; its file name is snowplow-mini-topology.jpg](images/snowplow-mini-topology.jpg)
+![Real-time processing topology diagram showing the Scala Stream Collector, Stream Enrich, Elasticsearch Sink (Good), and Elasticsearch Sink (Bad) services interacting with RawEvents, EnrichedEvents, BadEvents, and BadElasticsearchEvents streams, with both Elasticsearch Sinks writing to an Elasticsearch node](images/snowplow-mini-topology.jpg)
 
 **IAM**
 
@@ -90,7 +91,7 @@ Select the `Create Security Group` button and fill in the name, description an
 
 You will then need to add the following InBound rules:
 
-![snowplow-mini-security-group-setup](images/security-groups-setup.png)
+![The AWS EC2 "Edit inbound rules" dialog showing three Custom TCP rules: port 80 open to 0.0.0.0/0, port 443 open to 0.0.0.0/0, and port 22 restricted to a specific IP address](images/security-groups-setup.png)
 
 - Custom TCP Rule | Port Range (80)
 - CIDR range `0.0.0.0/0`

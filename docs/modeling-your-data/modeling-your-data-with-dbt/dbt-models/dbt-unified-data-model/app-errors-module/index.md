@@ -1,7 +1,9 @@
 ---
-title: "App Errors Module"
-sidebar_position: 50
-hide_title: true
+title: "App errors module for Unified Digital"
+sidebar_label: "App errors module"
+description: "Track and analyze application errors with the App errors module for the Unified Digital dbt package."
+keywords: ["app errors", "error tracking", "application errors module", "crash tracking", "error analysis", "model errors"]
+sidebar_position: 101
 ---
 
 ```mdx-code-block

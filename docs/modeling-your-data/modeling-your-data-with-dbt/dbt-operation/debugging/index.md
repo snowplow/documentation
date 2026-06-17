@@ -1,10 +1,11 @@
 ---
-title: "Debugging data modeling issues"
-description: "Guide for debugging data modeling issues"
+title: "Debug data modeling issues"
+sidebar_label: "Debugging data modeling issues"
+description: "Guide for debugging data modeling issues including execution errors, missing data, and unexpected results."
+keywords: ["dbt debugging", "data modeling errors", "troubleshooting dbt"]
 sidebar_position: 10
 ---
 
-## Debugging Data Modeling Issues
 There will inevitably be times when you run into dbt errors or the output is not what you expected (e.g. a session is missing from the sessions table). This guide will try and help you get started with the most common issues and how to handle them, to help you get unblocked faster and avoid having to open a customer ticket to ask for help.
 
 
@@ -44,6 +45,6 @@ To help debug it better, it is best to choose a sample session, select  all its 
 
 One recommendation when deep-diving into errors is to look at dbt's lineage graph to see the model evolution, and work your way upstream to find out where the data gets filtered out using the compiled sql code from the given run. Once you find the first source when the data starts appearing you know which is the model where it gets filtered out, and you can check the subsequent model's compiled code, then cte by cte you can execute the code. It should not impact the model as those will be select statements, and you will most likely be able to identify the root cause.
 
-:::info Lineage Graph
+:::info[Lineage Graph]
 You can inspect the lineage graph to verify this if you are unsure by using dbt's built in data lineage feature through dbt docs. We also update that for each of our latest releases on github: https://snowplow.github.io/dbt-snowplow-unified/#!/overview?g_v=1
 :::

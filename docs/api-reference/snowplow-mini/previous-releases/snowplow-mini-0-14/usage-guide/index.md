@@ -1,7 +1,10 @@
 ---
 title: "Usage Guide"
+sidebar_label: "Usage Guide"
 date: "2021-05-11"
 sidebar_position: -10
+description: "Usage guide for Snowplow Mini 0.14.x testing and debugging."
+keywords: ["snowplow mini", "usage guide", "mini 0.14", "testing"]
 ---
 
 ## Overview
@@ -55,7 +58,7 @@ Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of cha
 
 To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. We have 2 options:
 
-- Use igluctl's `[server keygen](/docs/api-reference/iglu/igluctl-2/index.md#server-keygen)` subcommand
+- Use igluctl's `[server keygen](/docs/api-reference/iglu/igluctl/index.md#server-keygen)` subcommand
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.
@@ -157,15 +160,15 @@ Browse to `mini-public-address/kibana` , once Kibana is loaded, you should be ab
 
 You can then inspect any individual event data in the UI by unfolding a payload:
 
-![](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
+![Opensearch Dashboards Discover interface showing 12 good events in the "good" index, with available fields listed on the left and a table of event rows on the right displaying timestamps and source data including fields such as collector_tstamp, v_collector, and br_features.](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
 
 If you want to inspect bad events, click on `good`, placed towards top left of the screen and select `bad` from drop-down list.
 
-![](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
+![Opensearch Dashboards Discover interface showing 13 bad events in the "bad" index, with failure-related fields listed on the left (including data.failure.messages, data.failure.timestamp, data.payload.body) and event rows on the right showing error details such as "empty querystring" and "not a valid URI redirect".](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
 
 Unfold any payload to inspect a bad event in detail.
 
-![](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
+![Opensearch Dashboards Discover interface showing a single good event unfolded, with its full JSON payload displayed in a table view including fields such as _index, app_id, geo_latitude, v_collector, and collector_tstamp.](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
 
 ## Resetting Elasticsearch indices
 
@@ -197,7 +200,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 ## Configuring telemetry
 
-See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/get-started/self-hosted/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 
@@ -219,7 +222,7 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl [static push](/docs/api-reference/iglu/igluctl-2/index.md#static-push) to put our custom schema into the Iglu Server
+- Use igluctl [static push](/docs/api-reference/iglu/igluctl/index.md#static-push) to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.

@@ -1,0 +1,36 @@
+All events are loaded into a single table (`events`).
+
+There are dedicated columns for [atomic fields](/docs/fundamentals/canonical-event/index.md), such as `app_id`, `user_id` and so on:
+
+| app_id | collector_tstamp | ... | event_id | ... | user_id | ... |
+| ------ | ---------------- | --- | -------- | --- | ------- | --- |
+| website | 2025-05-06 12:30:05.123 | ... | c6ef3124-b53a-4b13-a233-0088f79dcbcb | ... | c94f860b-1266-4dad-ae57-3a36a414a521 | ... |
+
+Snowplow data also includes customizable [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md). These use [schemas](/docs/fundamentals/schemas/index.md) to define which fields should be present, and of what type (e.g. string, number).
+
+For self-describing events and entities, there are additional columns, like so:
+
+<table>
+<thead>
+<tr>
+<th>app_id</th>
+<th>...</th>
+<th>unstruct_event_com_acme_button_press_1</th>
+<th>contexts_com_acme_product_1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>website</td>
+<td>...</td>
+<td>data for your custom <code>button_press</code> event (as {props.eventType})</td>
+<td>data for your custom <code>product</code> entities (as {props.entitiesType})</td>
+</tr>
+</tbody>
+</table>
+
+Note:
+* "unstruct\[ured\] event" and "context" are the legacy terms for self-describing events and entities, respectively
+* the `_1` suffix represents the major version of the schema (e.g. `1-x-y`)
+
+You can learn more [in the API reference section](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).

@@ -1,7 +1,10 @@
 ---
 title: "RDB Loader 1.0.0"
+sidebar_label: "RDB Loader 1.0.0"
 date: "2021-01-28"
 sidebar_position: 20
+description: "RDB Loader 1.0.0 documentation with Shredder Spark job, SQS messaging, and stateless shredding algorithm for Redshift loading."
+keywords: ["rdb loader 1.0", "shredder 1.0", "sqs messaging", "stateless shredder", "redshift 1.0"]
 ---
 
 ## 1. Overview
@@ -15,7 +18,7 @@ Upstream of the RDB loader, [S3 loader](/docs/api-reference/loaders-storage-targ
 
 ## 2. Architecture
 
-![](images/architecture.png)
+![Architecture diagram showing the RDB Loader data flow: enriched S3 files are archived (step 1), the Batch Shredder processes them (step 2), writing shredded data to S3 (step 3) and sending a completion message to an SQS queue (step 4). The Long-running Loader consumes from SQS (step 5), reads shredded data from S3 (step 6), and loads it into Redshift using a manifest table to prevent duplicate loading (step 7). Dataflow Runner orchestrates the EMR steps.](images/architecture.png)
 
 1. Enriched files copied from _enriched/_ to _archive/enriched/_ with S3DistCp on EMR.
 2. Shredder is run as an EMR step. It reads the directory from step 1. 
@@ -33,7 +36,7 @@ Steps to get RDB loader up and running:
 
 1. [Configure Transformer (formerly Shredder) and loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)
 2. Create SQS FIFO queue. Content-based deduplication needs to be enabled.
-3. Configure [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/setup/index.md) with the schemas  
+3. Configure [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) with the schemas  
     **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
 4. Create `atomic.events` table.
 5. Run RDB Loader as long-running process with access to message queue:  
@@ -48,7 +51,7 @@ How does this work ?
 
 Inside _archive/enriched/,_ folders are organized by run ids, e.g.
 
-![](images/ls.png)
+![S3 directory listing showing run-id folders in the archive/enriched/ path, for example run=2021-03-04-09-29-41/ and run=2021-03-04-12-45-29/.](images/ls.png)
 
 When shredder starts, it lists the content of _archive/enriched_/.
 

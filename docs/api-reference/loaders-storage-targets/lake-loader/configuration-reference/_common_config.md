@@ -34,6 +34,21 @@ import Link from '@docusaurus/Link';
     </td>
 </tr>
 <tr>
+    <td><code>decompression.maxBytesInBatch</code> (since 0.10.0)</td>
+    <td>
+      <p>Optional. Default value <code>5242880</code> (5 MB).</p>
+      <p>The loader automatically detects and decompresses zstd- or gzip-compressed source messages. Uncompressed messages are unaffected.</p>
+      <p>The loader uses this as a cutoff when incrementally adding decompressed events to a batch, and emits the batch as soon as it reaches this size. This protects the loader's memory because a small compressed message can expand into a much larger payload.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>decompression.maxBytesSinglePayload</code> (since 0.10.0)</td>
+    <td>
+      <p>Optional. Default value <code>10000000</code> (10 MB).</p>
+      <p>For zstd- or gzip-compressed source messages, this is the maximum size of a single payload after decompression. The loader emits a <Link to="/docs/api-reference/failed-events/#size-violation">size violation failed event</Link> for any payload that exceeds this size.</p>
+    </td>
+</tr>
+<tr>
     <td><code>spark.conf.*</code></td>
     <td>Optional. A map of key/value strings which are passed to the internal spark context.</td>
 </tr>
@@ -83,6 +98,10 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default <code>snowplow.lakeloader</code>. Prefix used for the metric name when sending to statsd.</td>
 </tr>
 <tr>
+    <td><code>monitoring.metrics.prometheus.tags.*</code> (since 0.10.0)</td>
+    <td>Optional. A map of key/value pairs added as common labels on every Prometheus metric. The loader exposes these metrics at the <code>/metrics</code> endpoint on the health probe port.</td>
+</tr>
+<tr>
     <td><code>monitoring.webhook.endpoint</code></td>
     <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how Snowflake is set up for this loader.</td>
 </tr>
@@ -112,11 +131,11 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>telemetry.disable</code></td>
-    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/snowplow-community-edition/telemetry/">telemetry</Link>.</td>
+    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/self-hosted/telemetry/">telemetry</Link>.</td>
 </tr>
 <tr>
     <td><code>telemetry.userProvidedId</code></td>
-    <td>Optional. See <Link to="/docs/get-started/snowplow-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
+    <td>Optional. See <Link to="/docs/get-started/self-hosted/telemetry/#how-can-i-help">here</Link> for more information.</td>
 </tr>
 <tr>
     <td><code>inMemBatchBytes</code></td>

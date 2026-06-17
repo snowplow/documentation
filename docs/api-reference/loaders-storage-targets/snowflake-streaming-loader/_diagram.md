@@ -3,7 +3,7 @@ import Mermaid from '@theme/Mermaid';
 import Link from '@docusaurus/Link';
 ```
 
-<p>The Snowflake Streaming Loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to Snowflake using the <Link to="https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-overview">Snowpipe Streaming API</Link>.</p>
+<p>On {props.cloud}, the Snowflake Streaming Loader continually pulls events from {props.stream} and writes to Snowflake using the <Link to="https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-overview">Snowpipe Streaming API</Link>.</p>
 
 <Mermaid value={`
 flowchart LR

@@ -1,7 +1,10 @@
 ---
-title: "Shredding Overview"
+title: "Shredding overview for RDB Loader 2.x"
+sidebar_label: "Shredding Overview"
 date: "2020-03-06"
 sidebar_position: 10
+description: "Understand shredding in RDB Loader 2.x that splits enriched events into separate files for loading into Redshift tables."
+keywords: ["shredding", "rdb shredder", "enriched events", "redshift tables", "tsv files"]
 ---
 
 Shredding is the process of splitting a Snowplow enriched event into several smaller files, which can be inserted directly into Redshift tables.
@@ -18,4 +21,4 @@ Those files end up in S3 and are used to load the data into Redshift tables dedi
 
 The whole process could be depicted with the following dataflow diagram.
 
-![](images/storage-loader-dataflow.png)
+![Dataflow diagram showing enriched good TSV events with contexts, unstruct_event, and derived_contexts fields being processed by a Shredding component that references Iglu. The shredder outputs three categories — atomic.events, user-specific unstruct events (JSON), and predefined contexts (JSON) — which StorageLoader then copies into Redshift tables named atomic.events, com_acme_events_1, and com_acme_contexts_1.](images/storage-loader-dataflow.png)

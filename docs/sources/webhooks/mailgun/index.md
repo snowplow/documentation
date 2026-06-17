@@ -1,10 +1,11 @@
 ---
-title: "MailGun"
+title: "MailGun webhook"
+sidebar_label: "MailGun"
 date: "2020-02-26"
 sidebar_position: 50
+description: "Track MailGun email events including delivered messages, hard bounces, spam complaints, unsubscribes, clicks, and opens."
+keywords: ["mailgun webhook integration", "mailgun email tracking", "email delivery events"]
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [Mailgun](https://www.mailgun.com/).
 
@@ -18,7 +19,7 @@ Available events are:
 - Clicks
 - Opens
 
-### Compatibility
+## Compatibility
 
 - [R97 Knossos](https://github.com/snowplow/snowplow/releases/tag/r97-knossos)\+ (`POST`\-capable collectors only)
 - [Mailgun webhook API](https://documentation.mailgun.com/en/latest/user_manual.html#webhooks)
@@ -34,11 +35,11 @@ Integrating Mailgun's webhooks into Snowplow is a two-stage process:
 
 First login to Mailgun. Select **Webhooks** from the top panel.
 
-![](images/mailgun-1.png)
+![Mailgun dashboard showing the Message Delivery overview, with the Webhooks item highlighted in the top navigation bar.](images/mailgun-1.png)
 
 Then select the domain for which you want to configure snowplow.
 
-![](images/mailgun-2.png)
+![Mailgun Webhooks page showing the domain selector dropdown open with a list of configured domains to choose from.](images/mailgun-2.png)
 
 Once you have the desired domain selected, you can configure snowplow for the type of events that interest you.
 
@@ -46,7 +47,7 @@ Following is an example configuring the "Spam Complaints" event. The process is 
 
 Click on the cross next to the event type you woudl like to configure. In this case "Spam Complaints":
 
-![](images/mailgun-3.png)
+![Mailgun Webhooks configuration page showing the list of event types with "Spam Complaints" selected, a URL input field for the webhook endpoint, and Test Webhook and Set Webhook URL buttons.](images/mailgun-3.png)
 
 Then set the collector URL:
 

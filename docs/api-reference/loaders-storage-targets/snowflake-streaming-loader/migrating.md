@@ -2,6 +2,8 @@
 title: "Migrating to Snowflake Streaming Loader from RDB Loader"
 sidebar_label: "Migrating from RDB Loader"
 sidebar_position: 2
+description: "Migrate from RDB Loader to Snowflake Streaming Loader for lower latency and cost with same table or fresh table strategies."
+keywords: ["snowflake migration", "rdb to streaming", "loader migration", "streaming upgrade", "snowflake switch"]
 ---
 
 This guide is aimed at Snowplow users who load events into Snowflake via the [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
@@ -15,7 +17,7 @@ There are two migration strategies you might take:
 
 ## Load into the same table as before
 
-The Streaming Loader is fully compatible with the table created and managed by the recent versions of RDB Loader.  In particular, these aspects are exactly the same as before:
+The Streaming Loader is fully compatible with the table created and managed by the recent versions of RDB Loader. In particular, these aspects are exactly the same as before:
 
 - There are 129 columns for the atomic fields, common to all Snowplow events
 - [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) are loaded into columns named like `unstruct_event_com_example_button_press_1`
@@ -24,11 +26,17 @@ The Streaming Loader is fully compatible with the table created and managed by t
 
 :::tip
 
-[This page](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
+[This page](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
 
 :::
 
 You will notice some subtle differences:
+
+#### No loader-side deduplication
+
+RDB Loader performs [within-batch and cross-batch deduplication](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/deduplication/index.md) during loading. The Streaming Loader does not deduplicate events, so you may see more duplicates than with the RDB Loader.
+
+Snowplow's [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) handle deduplication automatically. If you write custom queries, see [dealing with duplicates](/docs/destinations/warehouses-lakes/querying-data/index.md#dealing-with-duplicates).
 
 #### New `_schema_version` property in entities
 

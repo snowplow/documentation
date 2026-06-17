@@ -2,21 +2,15 @@
 sidebar_label: "Web"
 sidebar_position: 700
 title: "Web Quickstart"
+description: "Quick start guide for the legacy Snowplow Web dbt package to model web event data into page views, sessions, and users."
+keywords: ["web quickstart", "legacy web package", "dbt web setup"]
 ---
 
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
-<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
-```
-
-## Requirements
-
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
-
-- [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
+- [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/page-views/index.md) implemented.
 - From version v0.13.0 onwards you must be using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 
 ## Installation
@@ -42,7 +36,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-web/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -56,7 +50,7 @@ vars:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
-:::info Databricks only
+:::info[Databricks only]
 
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
 
@@ -94,7 +88,7 @@ vars:
 
 ### 6. Verify page ping variables
 
-The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -105,7 +99,7 @@ vars:
 
 ### 7. Additional vendor specific configuration
 
-:::info BigQuery Only
+:::info[BigQuery Only]
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"
@@ -115,7 +109,7 @@ vars:
 ```
 :::
 
-:::info Databricks only - setting the databricks_catalog
+:::info[Databricks only - setting the databricks_catalog]
 
 Add the following variable to your dbt project's `dbt_project.yml` file
 
@@ -141,9 +135,3 @@ dbt run --selector snowplow_web
 
 ### 9. Enable extras
 The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/consent-module/index.md), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/conversions/index.md), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/core-web-vitals-module/index.md) documentation.
-
-:::tip
-
-For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/resources/recipes-tutorials/recipe-dbt-web-queries/index.md)!
-
-:::

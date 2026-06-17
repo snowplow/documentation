@@ -1,14 +1,12 @@
 ---
-title: "Configuration"
-description: "Information for the configuration of our dbt packages"
+title: "Configure Snowplow dbt packages"
+sidebar_label: "Configuration"
+description: "Configure Snowplow dbt packages, including warehouse-specific settings for Postgres, Spark, Databricks, and BigQuery."
+keywords: ["dbt configuration", "dbt variables", "Databricks Unity Catalog", "BigQuery partitioning"]
 sidebar_position: 40
 ---
 
-:::info
-
-This page details general configurations that can apply across many of our packages, each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
-
-:::
+This page details general configurations that can apply across many of our packages. Each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
 
 ## Variables
 
@@ -18,10 +16,6 @@ Do not copy the project yaml from the package into your main project, this can l
 
 :::
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 ```mdx-code-block
 import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"
@@ -39,7 +33,7 @@ To optimism performance of large Postgres datasets you can create [indexes](http
 {{
   config(
     ...
-    indexes=[{'columns': [‘domain_sessionid’], 'unique': True}]
+    indexes=[\{'columns': ['domain_sessionid'], 'unique': True}]
   )
 }}
 ```
@@ -71,17 +65,17 @@ With the rollout of Unity Catalog (UC), the `dbt-databricks` adapter has added s
 
 Since there are many different situations, we've created the following table to help guide your setup process (this should help resolve the `Cannot set database in Databricks!` error):
 
-|                                             | Adapter supports UC and UC Enabled                                                                   | Adapter supports UC and UC not enabled         | Adapter does not support UC                                                                         |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
-| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_catalog}'` | `snowplow__atomic_schema = '{name_of_schema}'` | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_schema}'` |
+|                                             | Adapter supports UC and UC Enabled                                                                     | Adapter supports UC and UC not enabled          | Adapter does not support UC                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '\{name_of_catalog}'`                                                  | Nothing needed                                  | `snowplow__databricks_catalog = 'atomic'`                                                             |
+| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_catalog}'` | `snowplow__atomic_schema = '\{name_of_schema}'` | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_schema}'` |
 
 #### Optimization of models
 
 The `dbt-databricks` adapter allows our data models to take advantage of the auto-optimization features in Databricks. If you are using the `dbt-spark` adapter, you will need to manually alter the table properties of your derived and manifest tables using the following command after running the data model at least once. You will need to run the command in your Databricks environment once for each table, and we would recommend applying this to the tables in the `_derived` and `_snowplow_manifest` schemas:
 
 ```SQL
-ALTER TABLE {TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = true, delta.autoOptimize.autoCompact = true);
+ALTER TABLE \{TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = true, delta.autoOptimize.autoCompact = true);
 ```
 
 ### BigQuery

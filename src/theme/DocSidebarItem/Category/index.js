@@ -9,8 +9,10 @@ import {
 } from '@docusaurus/theme-common'
 import {
   isActiveSidebarItem,
-  findFirstCategoryLink,
+  findFirstSidebarItemLink,
   useDocSidebarItemsExpandedState,
+} from '@docusaurus/plugin-content-docs/client'
+import {
   isSamePath,
 } from '@docusaurus/theme-common/internal'
 import Link from '@docusaurus/Link'
@@ -45,35 +47,21 @@ function useCategoryHrefWithSSRFallback(item) {
       return item.href
     }
     // In these cases, it's not necessary to render a fallback
-    // We skip the "findFirstCategoryLink" computation
+    // We skip the "findFirstSidebarItemLink" computation
     if (isBrowser || !item.collapsible) {
       return undefined
     }
-    return findFirstCategoryLink(item)
+    return findFirstSidebarItemLink(item)
   }, [item, isBrowser])
 }
 
-function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
-  // Modified CollapseButton so that it has the same behavior as the title
+function CollapseButton({ categoryLabel, collapsed, updateCollapsed }) {
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (!collapsed) {
-      // When expanded, simply collapse
-      updateCollapsed(true)
-    } else {
-      // When collapsed, expand AND navigate to the page
-      updateCollapsed(false)
-      if (href) {
-        const linkElement = e.target
-          .closest('.menu__list-item-collapsible')
-          .querySelector('.menu__link')
-        if (linkElement) {
-          linkElement.click()
-        }
-      }
-    }
+    // Only toggle the collapse state, don't navigate
+    updateCollapsed(!collapsed)
   }
 
   return (
@@ -129,6 +117,8 @@ export default function DocSidebarItemCategory({
     setCollapsed(toCollapsed)
   }
 
+  const isSectionHeader = className && className.includes('section-header')
+
   useAutoExpandActiveCategory({ isActive, collapsed, updateCollapsed })
 
   useEffect(() => {
@@ -136,30 +126,12 @@ export default function DocSidebarItemCategory({
       collapsible &&
       expandedItem != null &&
       expandedItem !== index &&
-      autoCollapseCategories
+      autoCollapseCategories &&
+      !isSectionHeader
     ) {
       setCollapsed(true)
     }
-  }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
-
-  // Modified click handler for the title link
-  const handleTitleClick = (e) => {
-    onItemClick?.(item)
-
-    if (collapsible) {
-      if (isActive && !collapsed) {
-        // When expanded and selected, clicking title should collapse and navigate
-        updateCollapsed(true)
-      } else if (href) {
-        // For items with href, expand and let navigation happen
-        updateCollapsed(false)
-      } else {
-        // For items without href, just toggle
-        e.preventDefault()
-        updateCollapsed()
-      }
-    }
-  }
+  }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories, isSectionHeader])
 
   return (
     <li
@@ -178,27 +150,41 @@ export default function DocSidebarItemCategory({
           'menu__list-item-collapsible--active': isCurrentPage,
         })}
       >
-        <Link
-          className={clsx('menu__link', {
-            'menu__link--sublist': collapsible,
-            'menu__link--sublist-caret': !href && collapsible,
-            'menu__link--active': isActive,
-          })}
-          onClick={handleTitleClick}
-          aria-current={isCurrentPage ? 'page' : undefined}
-          aria-expanded={collapsible ? !collapsed : undefined}
-          href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
-          {...props}
-        >
-          {label}
-        </Link>
-        {href && collapsible && (
-          <CollapseButton
-            categoryLabel={label}
-            href={href}
-            collapsed={collapsed}
-            updateCollapsed={updateCollapsed}
-          />
+        {isSectionHeader && collapsible ? (
+          <button
+            type="button"
+            className={clsx('clean-btn', 'menu__link', 'section-header__toggle', {
+              'menu__link--active': isActive,
+            })}
+            aria-expanded={!collapsed}
+            onClick={() => updateCollapsed(!collapsed)}
+          >
+            {label}
+            <span className="section-header__caret menu__caret" aria-hidden="true" />
+          </button>
+        ) : (
+          <>
+            <Link
+              className={clsx('menu__link', {
+                'menu__link--sublist': collapsible,
+                'menu__link--sublist-caret': !href && collapsible,
+                'menu__link--active': isActive,
+              })}
+              aria-current={isCurrentPage ? 'page' : undefined}
+              aria-expanded={collapsible ? !collapsed : undefined}
+              href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
+              {...props}
+            >
+              {label}
+            </Link>
+            {href && collapsible && (
+              <CollapseButton
+                categoryLabel={label}
+                collapsed={collapsed}
+                updateCollapsed={updateCollapsed}
+              />
+            )}
+          </>
         )}
       </div>
 

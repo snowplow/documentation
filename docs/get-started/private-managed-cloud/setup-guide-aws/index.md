@@ -1,0 +1,357 @@
+---
+title: "Private Managed Cloud on AWS"
+sidebar_label: "AWS setup guide"
+date: "2020-01-30"
+sidebar_position: 10
+coverImage: "aws_logo_0.png"
+description: "Set up Snowplow CDI Private Managed Cloud on AWS with sub-account configuration, IAM roles, and cross-account access."
+keywords: ["AWS setup", "Private Managed Cloud", "AWS sub-account", "IAM roles", "cross-account access"]
+---
+
+To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com). You will receive an account as part of your onboarding.
+
+## What are the steps
+
+The first setup steps are designed to get your infrastructure in place and have you sending data as quickly as possible. The initial steps include:
+
+- providing the right cloud environment for Snowplow to be installed
+- setting up your first development environment
+- selecting which warehouse, if any, you want to load your data into
+
+Completing the forms for these initial steps should take you around 30 minutes.
+
+## What will I need
+
+To set up your cloud environment as required you will need:
+
+- to be able to set up a sub-account and appropriate permissions on AWS
+- to know which AWS region you’d like us to install your Snowplow pipeline into
+- to know whether or not you will need to use an existing VPC or require VPC peering (note: VPC peering and using a custom VPC are additional bolt-ons)
+
+We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Console you can [easily create accounts for colleagues](/docs/account-management/managing-users/index.md) who can complete this step for you.
+
+## Preparing your AWS sub-account
+
+These instructions are also provided as part of the setup flow in Console.
+
+### Create sub-account
+
+  1. From your main AWS account, set up an Organization if you haven't done so already.
+  2. Create a member account (the sub-account) in that organization.
+  3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
+
+### Set up Role and IAM permissions
+
+  :::note
+  Before you begin, raise the [Managed policies per role](https://us-east-1.console.aws.amazon.com/servicequotas/home/services/iam/quotas/L-0DA4ABF3) attached to an IAM role Service Quota in IAM (region: us-east-1) from the default of 10 to 25. This is typically auto-approved within seconds of requesting.
+  :::
+
+  1. In the AWS sub-account, open IAM from the console
+  2. Navigate to `Access management` > `Roles` and click `Create role`
+  3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
+    - Account ID: `793733611312`
+    - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
+  4. Search for and attach each of the following AWS managed policies:
+  ```text
+arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+arn:aws:iam::aws:policy/AmazonEC2FullAccess
+arn:aws:iam::aws:policy/AmazonECS_FullAccess
+arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess
+arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
+arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
+arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+arn:aws:iam::aws:policy/AmazonMSKFullAccess
+arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess
+arn:aws:iam::aws:policy/AmazonRDSFullAccess
+arn:aws:iam::aws:policy/AmazonRedshiftFullAccess
+arn:aws:iam::aws:policy/AmazonRoute53FullAccess
+arn:aws:iam::aws:policy/AmazonRoute53ResolverFullAccess
+arn:aws:iam::aws:policy/AmazonS3FullAccess
+arn:aws:iam::aws:policy/AmazonSNSFullAccess
+arn:aws:iam::aws:policy/AmazonSQSFullAccess
+arn:aws:iam::aws:policy/AmazonSSMFullAccess
+arn:aws:iam::aws:policy/AutoScalingFullAccess
+arn:aws:iam::aws:policy/AWSCertificateManagerFullAccess
+arn:aws:iam::aws:policy/AWSLambda_FullAccess
+arn:aws:iam::aws:policy/CloudWatchFullAccess
+arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+arn:aws:iam::aws:policy/IAMFullAccess
+  ```
+  5. Name the role `SnowplowAdmin` — this exact name is required
+  6. Open the role you just created, go to the Permissions tab and click `Add permissions` > `Create inline policy`. Switch to the JSON editor, paste the following, and save the policy:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "EKSClusterManagement",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "eks:AccessKubernetesApi",
+          "eks:AssociateAccessPolicy",
+          "eks:AssociateIdentityProviderConfig",
+          "eks:CreateAccessEntry",
+          "eks:CreateAddon",
+          "eks:CreateCluster",
+          "eks:CreateFargateProfile",
+          "eks:CreateNodegroup",
+          "eks:DeleteAccessEntry",
+          "eks:DeleteAddon",
+          "eks:DeleteCluster",
+          "eks:DeleteFargateProfile",
+          "eks:DeleteNodegroup",
+          "eks:DeregisterCluster",
+          "eks:DescribeAccessEntry",
+          "eks:DescribeAddon",
+          "eks:DescribeAddonConfiguration",
+          "eks:DescribeAddonVersions",
+          "eks:DescribeCluster",
+          "eks:DescribeFargateProfile",
+          "eks:DescribeIdentityProviderConfig",
+          "eks:DescribeNodegroup",
+          "eks:DescribeUpdate",
+          "eks:DisassociateAccessPolicy",
+          "eks:DisassociateIdentityProviderConfig",
+          "eks:ListAccessEntries",
+          "eks:ListAccessPolicies",
+          "eks:ListAddons",
+          "eks:ListAssociatedAccessPolicies",
+          "eks:ListClusters",
+          "eks:ListFargateProfiles",
+          "eks:ListIdentityProviderConfigs",
+          "eks:ListNodegroups",
+          "eks:ListTagsForResource",
+          "eks:ListUpdates",
+          "eks:RegisterCluster",
+          "eks:TagResource",
+          "eks:UntagResource",
+          "eks:UpdateAccessEntry",
+          "eks:UpdateAddon",
+          "eks:UpdateClusterConfig",
+          "eks:UpdateClusterVersion",
+          "eks:UpdateNodegroupConfig",
+          "eks:UpdateNodegroupVersion"
+        ]
+      },
+      {
+        "Sid": "KMS",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "kms:DescribeKey",
+          "kms:List*"
+        ]
+      },
+      {
+        "Sid": "SecretsManager",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "secretsmanager:CreateSecret",
+          "secretsmanager:DeleteSecret",
+          "secretsmanager:DescribeSecret",
+          "secretsmanager:GetResourcePolicy",
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:PutSecretValue",
+          "secretsmanager:TagResource"
+        ]
+      },
+      {
+        "Sid": "GlobalAccelerator",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "globalaccelerator:AddEndpoints",
+          "globalaccelerator:Create*",
+          "globalaccelerator:Delete*",
+          "globalaccelerator:Describe*",
+          "globalaccelerator:List*",
+          "globalaccelerator:TagResource",
+          "globalaccelerator:UntagResource",
+          "globalaccelerator:Update*"
+        ]
+      },
+      {
+        "Sid": "ServiceQuotas",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "servicequotas:Associate*",
+          "servicequotas:Delete*",
+          "servicequotas:Disassociate*",
+          "servicequotas:Get*",
+          "servicequotas:List*",
+          "servicequotas:Put*",
+          "servicequotas:Request*",
+          "servicequotas:TagResource",
+          "servicequotas:UntagResource"
+        ]
+      },
+      {
+        "Sid": "WAFv2ReadOnly",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "wafv2:Describe*",
+          "wafv2:Get*",
+          "wafv2:List*"
+        ]
+      },
+      {
+        "Sid": "Support",
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "support:Add*",
+          "support:Create*",
+          "support:Describe*",
+          "support:Refresh*",
+          "support:ResolveCase"
+        ]
+      }
+    ]
+  }
+  ```
+  7. Go to the Trust relationships tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::793733611312:root"
+        },
+        "Action": "sts:AssumeRole",
+        "Condition": {
+          "Bool": {
+            "aws:MultiFactorAuthPresent": "false"
+          },
+          "StringLike": {
+            "aws:PrincipalArn": "arn:aws:iam::793733611312:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_sre-*"
+          }
+        }
+      }
+    ]
+  }
+  ```
+
+  You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+
+For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
+
+### Set up Role and IAM permissions with **CloudFormation**
+
+We also provide a CloudFormation template that will create a role named SnowplowAdmin with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/SnowplowAdminRole_CF.yml). The IAM quota will also need updating for this template to apply successfully.
+
+  1. Access the CloudFormation service within the sub-account
+  2. Go to `Stacks` select `Create stack` > `With new resources (standard)`
+  3. Select `Template is ready` within the Prepare template block
+  4. Specify an Amazon S3 URL with the full path to the SnowplowAdmin CloudFormation template and proceed
+  5. Provide the stack with a meaningful name such as SnowplowAdmin stack
+  6. Now proceed through the remainder of the prompts and choose `Create stack`
+
+For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+
+### Set up the Snowplow deployment role
+
+The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. Contact Snowplow Support via the Snowplow Console or through your Snowplow account team to request the full list of permissions attached to this role.
+
+  1. In the AWS sub-account, open IAM from the console
+  2. Navigate to `Access management` > `Roles` and click `Create role`
+  3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
+    - Account ID: `793733611312`
+    - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
+  4. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
+  5. Name the role `SnowplowDeployment` — this exact name is required. Optionally add a description: "Allows the Snowplow team to programmatically deploy to this account". Create the role.
+  6. Open the role you just created, go to the **Permissions** tab and click **Add permissions** > **Create inline policy**. Switch to the JSON editor, paste the following policy, and save it:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "IAMBootstrap",
+            "Effect": "Allow",
+            "Resource": "*",
+            "Action": [
+                "iam:AddRoleToInstanceProfile",
+                "iam:AddUserToGroup",
+                "iam:AttachGroupPolicy",
+                "iam:AttachRolePolicy",
+                "iam:CreateGroup",
+                "iam:CreateInstanceProfile",
+                "iam:CreatePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:CreateRole",
+                "iam:CreateServiceLinkedRole",
+                "iam:CreateUser",
+                "iam:GetGroup",
+                "iam:GetInstanceProfile",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:GetRole",
+                "iam:GetUser",
+                "iam:ListAttachedGroupPolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListGroupsForUser",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListPolicyVersions",
+                "iam:ListRolePolicies",
+                "iam:ListRoleTags",
+                "iam:PassRole",
+                "iam:TagPolicy",
+                "iam:TagRole",
+                "iam:TagUser",
+                "iam:UpdateAssumeRolePolicy"
+            ]
+        }
+    ]
+  }
+  ```
+  7. Go to the **Trust relationships** tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::793733611312:root"
+        },
+        "Action": "sts:AssumeRole",
+        "Condition": {
+          "StringLike": {
+            "aws:PrincipalArn": [
+              "arn:aws:iam::793733611312:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_sre-*",
+              "arn:aws:iam::793733611312:user/nomad-handler"
+            ]
+          }
+        }
+      }
+    ]
+  }
+  ```
+  7. Copy the Snowplow deployment role ARN. You will need to share this role with Snowplow as part of filling out the setup form in Snowplow Console.
+
+### Provide a CIDR range for VPC peering or using a custom VPC (optional)
+
+For VPC peering, you will need to select a peering-compatible /21 or /22 CIDR range (2048 or 1024 addresses).
+
+If you require Snowplow to be deployed into a custom VPC, you will need to specify a /18 CIDR range (16,384 addresses) for that VPC so that we can create /20 and /23 subnets. This ensures that we have an ample room for scaling, as well as deploying additional services.
+
+Note: VPC peering and using a custom VPC are additional bolt-ons.
+
+### Determine if Snowplow requires a specific IAM Permission Boundary (optional)
+
+If you require Snowplow to be deployed using a specific IAM Permission Boundary, this should be provided at the same time.
+
+### Final checklist
+
+If you are sending a request to Snowplow to set up your account, please ensure you provide the following information:
+1. SnowplowAdmin role ARN
+2. SnowplowDeployment role ARN
+3. AWS region to deploy into
+4. VPC CIDR requirements for VPC peering or a custom VPC (optional)
+5. The IAM Permission Boundary ARN (optional)

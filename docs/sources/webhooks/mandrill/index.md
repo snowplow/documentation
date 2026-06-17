@@ -1,10 +1,11 @@
 ---
-title: "Mandrill"
+title: "Mandrill webhook"
+sidebar_label: "Mandrill"
 date: "2020-02-25"
 sidebar_position: 60
+description: "Track Mandrill email events including sent messages, bounces, opens, clicks, spam reports, rejections, and unsubscribes."
+keywords: ["mandrill webhook integration", "mandrill email tracking", "mailchimp transactional email"]
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [Mandrill](https://mandrill.com/).
 
@@ -20,7 +21,7 @@ Available events are:
 - Message clicked
 - Recipient unsubscribed
 
-### Compatibility
+## Compatibility
 
 - [Snowplow 0.9.14](https://github.com/snowplow/snowplow/releases/tag/0.9.14)\+ (`POST`\-capable collectors only)
 - [Mandrill webhook API](http://help.mandrill.com/entries/21738186-Introduction-to-Webhooks)
@@ -42,7 +43,7 @@ Now we can start to setup the webhook by selecting what events we want our Mandr
 
 - Please note: 'Rejection Whitelist Changes' & 'Rejection Blacklist Changes' are not supported by the Snowplow MandrillAdapter.
 
-![](images/mandrill-1.png)
+![Mandrill Add a Webhook form showing the Trigger on Events checkboxes (all unchecked), an empty Post To URL field, and an empty Description field](images/mandrill-1.png)
 
 Once we have selected what events we want to record we need to fill in the **Post To URL** field:
 
@@ -54,7 +55,7 @@ http://<collector host>/com.mandrill/v1?aid=<company code>
 
 The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/events/index.md). You can use it to specify which company in Mandrill these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
-![](images/mandrill-2.png)
+![Mandrill Add a Webhook form with most Trigger on Events checkboxes checked, Post To URL set to the Snowplow collector endpoint with aid parameter, and Description set to "Webhook Setup for Snowplow MandrillAdapter"](images/mandrill-2.png)
 
 If you want, you can also manually override the event's `platform` parameter like so:
 

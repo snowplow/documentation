@@ -2,13 +2,14 @@
 title: "Snowflake Streaming Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
+description: "Configure Snowflake Streaming Loader with Snowpipe Streaming, Kinesis, Pub/Sub, and Kafka settings for real-time warehouse loading."
+keywords: ["snowflake config", "snowpipe streaming", "streaming loader config", "warehouse configuration"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Admonition from '@theme/Admonition';
 import SnowflakeConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_snowflake_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/_kinesis_config.md';
@@ -17,6 +18,18 @@ import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/snowf
 ```
 
 <p>The configuration reference in this page is written for Snowflake Streaming Loader <code>{`${versions.snowflakeStreamingLoader}`}</code></p>
+
+### License
+
+The Snowflake Streaming Loader is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
+
+```json
+"license": {
+  "accept": true
+}
+```
 
 ### Snowflake configuration
 
@@ -74,7 +87,7 @@ import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/snowf
         </tbody>
     </table>
 
-:::info Event Hubs Authentication
+:::info[Event Hubs Authentication]
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 

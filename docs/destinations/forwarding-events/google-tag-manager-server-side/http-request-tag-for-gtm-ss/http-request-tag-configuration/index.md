@@ -1,10 +1,11 @@
 ---
-title: "HTTP Request Tag Configuration"
+title: "Configure HTTP Request Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2022-01-06"
 sidebar_position: 100
+description: "Configure JSON request body construction, entity mapping, custom headers, and post-processing for the HTTP Request Tag in GTM Server Side."
+keywords: ["HTTP Request Tag configuration", "JSON body", "entity mapping", "custom endpoints"]
 ---
-
-## Video Walkthrough
 
 In the following short video a complete example configuration of the Snowplow GTM SS HTTP Request Tag is presented.
 
@@ -96,13 +97,13 @@ If you wish it to denote a different nesting path where a key name may include a
 
 then you can use this setting to set a different separator for nesting. As an example, if you set:
 
-![first alternative separator example](images/first_alt_separator_example.png)
+![The "Use alternative separator to dot notation" option enabled, with the Separator field set to a tilde (~)](images/first_alt_separator_example.png)
 
 then the tilde character (`~`) denotes nesting everywhere "dot notation" can be used. You can now denote the example path above as `user_data.address~city`.
 
 It is also possible to use more than one character as alternative separator, for example:
 
-![second alternative separator example](images/second_alt_separator_example.png)
+![The "Use alternative separator to dot notation" option enabled, with the Separator field set to two dots (..)](images/second_alt_separator_example.png)
 
 Now, you can denote nesting by using 2 dots, and the example path above can be denoted as `user_data.address..city`.
 
@@ -119,7 +120,7 @@ If enabled, an additional text field optionally allows you to specify a key unde
 
 As an example, this section configured as:
 
-![snowplow atomic properties rules](images/snowplow_atomic_nest.png)
+![The Snowplow Atomic Properties Rules section with "Include all Snowplow Atomic Event Properties" enabled and the nesting key set to "snowplow_atomic"](images/snowplow_atomic_nest.png)
 
 will result in the following JSON structure:
 
@@ -145,7 +146,7 @@ Similarly to the above section, you can also specify a key under which the self-
 
 As an example, this section configured as:
 
-![snowplow self-describing event rules](images/snowplow_self_desc_no_nest.png)
+![The Snowplow Self-Describing Event Rules section with "Include Self Describing event" enabled and the optional nesting key left blank](images/snowplow_self_desc_no_nest.png)
 
 will result in the following JSON structure:
 
@@ -164,7 +165,7 @@ will result in the following JSON structure:
 
 This section describes how the HTTP Request tag will use the context Entities attached to a Snowplow Event.
 
-![snowplow event context rules](images/context_rules.png)
+![The Snowplow Event Context Rules section showing "Extract entity from Array if single element" checked, entities set to include "All", and empty tables for entity mapping and exclusion rules](images/context_rules.png)
 
 #### Extract entity from Array if single element
 
@@ -272,7 +273,7 @@ This section allows you to add custom properties in the request body that are "e
 
 ## Post-processing
 
-![post processing](images/post_processing.png)
+![The Post-processing section with subsections for JSON Stringify and Encode base64url, each with an empty table for specifying property names or nested paths to transform](images/post_processing.png)
 
 This section provides a way to easily configure some basic post-processing of values in the constructed HTTP request payload. The order of the subsections denotes the post-processing order. For more advanced use cases you can still use the **Additional Request Data** section above and provide values through GTM server-side variables.
 
@@ -324,7 +325,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

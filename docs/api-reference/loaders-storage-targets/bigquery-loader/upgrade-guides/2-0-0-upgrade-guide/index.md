@@ -1,6 +1,9 @@
 ---
-title: "2.0.0 upgrade guide"
+title: "BigQuery Loader 2.0.0 upgrade guide"
+sidebar_label: "2.0.0 upgrade guide"
 sidebar_position: -20
+description: "Guide for upgrading to BigQuery Loader 2.0.0, including configuration changes, new column naming strategy, and recovery columns for schema evolution."
+keywords: ["BigQuery Loader", "upgrade guide", "schema evolution", "recovery columns", "BigQuery"]
 ---
 
 ## Configuration
@@ -18,6 +21,8 @@ Apart from Repeater and Mutator, other infrastructure components have become obs
 * The `failedInserts` PubSub topic connecting Loader and Repeater.
 * The `deadLetter` GCS bucket used by Repeater to store data that repeatedly failed to be inserted into BigQuery.
 
+This means that failed events are now written to the failed events PubSub topic, configured as `output.bad.topic`, rather than directly to the GCS bucket as before. This change was made to consolidate all types of event failures into a single place.
+
 ## Events table format
 
 Starting from 2.0.0, BigQuery Loader changes its output column naming strategy. For example, for [ad_click event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0):
@@ -33,7 +38,7 @@ The new column naming scheme has several advantages:
 
 The catch is that you have to follow the rules of schema evolution more strictly to ensure data from different schema versions can fit in the same column — see below.
 
-:::tip Consolidating old and new columns
+:::tip[Consolidating old and new columns]
 
 If you are using [Snowplow dbt models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), they will automatically consolidate the data between `_1_0_0` and `_1` style columns, because they look at the major version prefix (e.g. `_1`), which is common to both.
 
@@ -102,7 +107,7 @@ To avoid crashing or losing data, BigQuery Loader 2.0.0 proceeds by creating a n
 
 If you create a new schema `1-0-2` that reverts the offending changes and is again compatible with `1-0-0`, the data for events with that schema will be written to the original column as expected.
 :::tip
-You might find that some of your schemas were evolved incorrectly in the past, which results in the creation of these “recovery” columns after the upgrade. To address this for a given schema, create a new _minor_ schema version that reverts the breaking changes introduced in previous versions. (Or, if you want to keep the breaking change, create a new _major_ schema version.) You can set it to [supersede](/docs/data-product-studio/data-structures/version-amend/index.md#marking-the-schema-as-superseded) the previous version(s), so that events are automatically validated against the new schema.
+You might find that some of your schemas were evolved incorrectly in the past, which results in the creation of these “recovery” columns after the upgrade. To address this for a given schema, create a new _minor_ schema version that reverts the breaking changes introduced in previous versions. (Or, if you want to keep the breaking change, create a new _major_ schema version.) You can set it to [supersede](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded) the previous version(s), so that events are automatically validated against the new schema.
 :::
 :::note
 
@@ -110,4 +115,4 @@ If events with incorrectly evolved schemas never arrive, then the recovery colum
 
 :::
 
-You can read more about schema evolution and how recovery columns work [here](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=bigquery#versioning).
+You can read more about schema evolution and how recovery columns work [here](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery#versioning).

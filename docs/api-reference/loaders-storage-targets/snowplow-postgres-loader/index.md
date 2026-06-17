@@ -1,6 +1,9 @@
 ---
-title: "Postgres Loader"
-sidebar_position: 6
+title: "Postgres Loader for testing and development"
+sidebar_label: "Postgres Loader"
+sidebar_position: 7
+description: "Load Snowplow enriched events into PostgreSQL database from Kinesis or Pub/Sub for development and testing environments."
+keywords: ["postgres loader", "postgresql", "snowplow postgres", "database loader"]
 ---
 
 ```mdx-code-block
@@ -10,21 +13,21 @@ import CodeBlock from '@theme/CodeBlock';
 
 With Snowplow Postgres Loader you can load enriched data or [failed events](/docs/fundamentals/failed-events/index.md) into PostgreSQL database.
 
-:::danger Production use
+:::danger[Production use]
 
 The Postgres loader is not recommended for production use, especially with large data volumes. We recommend using a fully-fledged data warehouse like Databricks, Snowflake, BigQuery or Redshift, together with a [respective loader](/docs/destinations/warehouses-lakes/index.md).
 
 :::
 
-:::tip Schemas in Postgres
+:::tip[Schemas in Postgres]
 
-For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=postgres).
+For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=postgres).
 
 :::
 
 ## Available on Terraform Registry
 
-[![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest)
+[![Terraform Registry](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest)
 
 A Terraform module which deploys the Snowplow Postgres Loader on AWS EC2 for use with Kinesis. For installing in other environments, please see the other installation options below.
 

@@ -1,7 +1,10 @@
 ---
-title: "Braze Tag Configuration"
+title: "Configure Braze Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2022-01-17"
 sidebar_position: 100
+description: "Configure authentication, user identifiers, event mapping, and entity rules for the Braze Tag in GTM Server Side."
+keywords: ["Braze Tag configuration", "external_id", "user alias", "Track Users API"]
 ---
 
 ## Configuration options
@@ -14,7 +17,7 @@ Set this to the URL of your Braze REST [endpoint](https://www.braze.com/docs/api
 
 Set this to your Braze [API Key](https://www.braze.com/docs/api/basics/#app-group-rest-api-keys) that will be included in each request. The minimum permission that you need to assign for this API Key is to access the `/users/track` endpoint.
 
-![key permission](images/key_permission.png)
+![The Braze API key permissions list showing "users.track" checked as the required permission for recording user attributes, custom events, and purchases](images/key_permission.png)
 
 ### Identity settings
 
@@ -22,13 +25,13 @@ Set this to your Braze [API Key](https://www.braze.com/docs/api/basics/#app-grou
 
 This section allows you to select which Braze user identifier (external user ID (`external_id`) or [User Alias](https://www.braze.com/docs/api/objects_filters/user_alias_object#user-alias-object-specification) `user_alias`) will be used by the tag. The default value is `external_id`.
 
-![identity settings dropdown](images/identity_settings.png)
+![The Identity settings section showing the Braze User Identifier dropdown open with "external_id" selected and "user alias object" as the alternative option](images/identity_settings.png)
 
 ##### Braze external_id
 
 This configuration section is enabled if you have selected the `external_id` as the **Braze User Identifier**.
 
-![braze external id](images/external_id.png)
+![The Braze External Id section with "Set external_id from:" set to "Event Property" and an empty field for the external_id value](images/external_id.png)
 
 - **Set external_id from:**
 
@@ -42,7 +45,7 @@ This configuration section is enabled if you have selected the `external_id` as 
 
 This configuration section is enabled if you have selected the `user_alias` as the **Braze User Identifier**.
 
-![braze user alias object](images/user_alias_object.png)
+![The Braze User Alias Object section with "Update existing users only" checked, and Event Property dropdowns for setting the User Alias Name and User Alias Label](images/user_alias_object.png)
 
 ###### Update existing users only
 
@@ -74,7 +77,7 @@ This section includes the mapping rules that concern a Snowplow event as claimed
 
 ###  Snowplow Self Describing Event
 
-![snowplow event mapping options](images/snowplow_event_mapping_options.png)
+![The Snowplow Self Describing Event section with "Include Self Describing event" enabled and the Self Describing Event Location dropdown open, showing "Nest under schema name" and "Merge to root level" as options](images/snowplow_event_mapping_options.png)
 
 #### Include Self Describing event
 
@@ -155,7 +158,7 @@ Using this table, you can additionally specify the Property Key from the Client 
 
 ## Advanced Event Settings
 
-![advanced event settings](images/advanced_event_settings.png)
+![The Advanced Event Settings section showing empty input fields for Event Name Override and Event time property](images/advanced_event_settings.png)
 
 This section offers additional configuration options on the Braze event object:
 
@@ -196,7 +199,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

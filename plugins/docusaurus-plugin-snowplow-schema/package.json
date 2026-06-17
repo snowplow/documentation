@@ -1,0 +1,10 @@
+{
+  "name": "docusaurus-plugin-snowplow-schema",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "peerDependencies": {
+    "@docusaurus/core": ">=2.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}

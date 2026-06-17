@@ -1,8 +1,9 @@
 ---
-title: "Normalize"
+title: "Snowplow Normalize dbt package"
+sidebar_label: "Normalize"
 sidebar_position: 50
-description: "The Snowplow Normalize dbt Package"
-hide_title: true
+description: "Flatten and normalize self-describing events and entities into dedicated tables for downstream ETL and analysis tools."
+keywords: ["normalize dbt", "flatten events", "unnest entities", "event normalization", "ETL preparation"]
 ---
 
 ```mdx-code-block
@@ -10,13 +11,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
-<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
+<Badges badgeType="Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
-# Snowplow Normalize Package
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Normalize package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 :::note
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.
@@ -24,7 +29,7 @@ Normalize in this context means [database normalization](https://en.wikipedia.or
 
 **The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize).**
 
-The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
+The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools. See the [Model Design](#model-design) section for further details on these tables.
 
 The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
@@ -91,7 +96,7 @@ This package consists of two macros, a python script, and some example configura
   - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window).
 ## Operation
 
-:::tip Using dbt Cloud?
+:::tip[Using dbt Cloud?]
 
 If you are using dbt Cloud then you will need to run the model-generating script locally, as there is no way to do this in cloud, and then copy your models up to your Cloud environment. You'll still need to add the package to your `packages.yml` file in your project.
 
@@ -106,7 +111,7 @@ The script should always be run from the **root** of your dbt project (the same 
 
 ### Install python packages
 
-:::caution
+:::note
 Python versions between 3.7 and 3.10 (inclusive) are currently supported
 
 :::
@@ -118,7 +123,7 @@ pip install -r dbt_packages/snowplow_normalize/utils/requirements.txt
 ```
 
 ### Configuration File
-:::caution
+:::note
 
 There may be changes to the config file between versions, this page will always contain the latest information but if you are using an older version you should call the python script with the `--configHelp` flag.
 
@@ -134,7 +139,7 @@ The config file is a JSON file which can be viewed by running the python script 
 <TabItem value="desc" label="Field Description" default>
 
 - `config` _(required - object)_:
-  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) only
+  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) only
   - `filtered_events_table_name` _(optional - string)_: Name of filtered events table, if not provided it will not be generated
   - `users_table_name` _(optional - string)_: Name of users table, default `events_users` if user schema(s) provided
   - `validate_schemas` _(optional - boolean)_: If you want to validate schemas loaded from each iglu registry or not, default `true`
@@ -490,14 +495,14 @@ To add new models for new types of events, simply add them to your config and ru
 
 ### Updating your models
 :::warning
-Adding or removing columns from your dbt model, either manually or by changes caused by a different schema version, without specifying the `on_schema_change` model configuration or directly altering the tables in your database, is very likely to result in unintended outcomes - either your new columns will not appear or dbt may return an error. Please see the [dbt docs](https://docs.getdbt.com/docs/build/incremental-models#what-if-the-columns-of-my-incremental-model-change) for what to do in this situation. If you need to backfill new columns regardless you can perform a rerun of the entire model following the instructions [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md#tearing-down-and-restarting-a-subset-of-models) *(note using the `--full-refresh` flag will not work in this case due to the use of the Snowplow incremental logic)*.
+Adding or removing columns from your dbt model, either manually or by changes caused by a different schema version, without specifying the `on_schema_change` model configuration or directly altering the tables in your database, is very likely to result in unintended outcomes - either your new columns will not appear or dbt may return an error. Please see the [dbt docs](https://docs.getdbt.com/docs/build/incremental-models#what-if-the-columns-of-my-incremental-model-change) for what to do in this situation. If you need to backfill new columns regardless you can perform a rerun of the entire model following the instructions [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#refresh-only-some-models-in-a-package) *(note using the `--full-refresh` flag will not work in this case due to the use of the Snowplow incremental logic)*.
 :::
 
 If you wish to update your models, such as adding a new context, removing a column, or updating to a new schema version, you must update your config file and run the script again, ensuring the `overwrite` value is set to `true`. This will remove any custom changes you made to the model file itself and you will need to re-add these.
 
 All events models will be updated including the filtered events table, it is not possible at this time to update just a subset of models.
 
-:::info BigQuery Only
+:::info[BigQuery Only]
 As your schemas for custom contexts and unstructured events evolve, multiple versions of the same column may be created in your events table (depending on the type of data loader being used) e.g. custom_context_1_0_0, custom_context_1_0_1. When modeling Snowplow data it can be useful to combine or coalesce each nested field across all versions of the column for a continuous view over time.
 
 The snowplow-normalize package handles this for you, all you have to do is make sure you add all the versions in the relevant config file parameter (`self_describing_event_schemas` / `context_schemas`):
@@ -519,5 +524,6 @@ If you want to not select all columns from your self describing event or context
 ### Removing models
 You can remove all models that don't exist in your config by running the script with the `--cleanUp` flag. This will scan the `models_folder` folder provided in your config and list all models in this folder that don't match those listed in your config file; you will then be asked to confirm deletion of these. If you may wish to re-enable these models at a later date you can [disable them in your project](https://docs.getdbt.com/reference/resource-configs/enabled) instead.
 
-:::caution
+:::warning
 If you have other models in the same sub-folder that were not generated via this package then this will attempt to delete those files.
+:::

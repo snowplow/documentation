@@ -1,10 +1,11 @@
 ---
-title: "ZenDesk"
+title: "Zendesk webhook"
+sidebar_label: "Zendesk"
 date: "2020-02-26"
 sidebar_position: 150
+description: "Track Zendesk ticket events and user context data including ticket creation, updates, and associated requester, assignee, and submitter information."
+keywords: ["zendesk webhook integration", "zendesk ticket tracking", "zendesk support events"]
 ---
-
-## Setting up a collector as a Zendesk extension
 
 You can configure Zendesk to automatically send `POST` requests to a (Clojure or Scala) collector. The first step is to set up a Zendesk "extension" pointing at the collector.
 
@@ -12,15 +13,15 @@ Log in to Zendesk. Click the cogwheel-shaped "Admin" icon located at the bottom-
 
 In the "SETTINGS" menu, click on "Extensions":
 
-![](images/extensions-button.png)
+![Zendesk Admin settings sidebar with Extensions highlighted under the SETTINGS menu, alongside options like Account, Subscription, Security, Tickets, and Agents.](images/extensions-button.png)
 
 Click "add target":
 
-![](images/add-extension.png)
+![Zendesk Extensions page showing the Targets tab with 13 active targets listed and a blue arrow pointing to the add target button in the top right corner.](images/add-extension.png)
 
 Choose "HTTP target" from the list of target types to add:
 
-![](images/http-target.png)
+![Zendesk Select target to add page showing six options: Campfire target, Twitter target, Clickatell target, URL target, HTTP target (highlighted with a blue border), and JIRA target.](images/http-target.png)
 
 Name the new extension something like "Snowplow Collector - Iglu POST". The "Iglu POST" here represents the fact we will be sending Zendesk events and contexts to [Iglu webhook adapter](/docs/sources/webhooks/iglu-webhook/index.md) via `POST` request.
 
@@ -32,7 +33,7 @@ Set the **Method** field to "POST" and the **Content type** to "JSON" from t
 
 Select "Create Target" and click the _**Submit**_ button.
 
-![](images/extension-form.png)
+![Zendesk HTTP target form with Title set to "Snowplow Collector - Iglu POST", URL ending in /com.snowplowanalytics.iglu/v1?aid=zendesk, Method set to POST, Content type set to JSON, and a Submit button.](images/extension-form.png)
 
 We have set up our collector as a Zendesk extension. We can now add a trigger which sends `POST` requests to the collector whenever certain events occur.
 
@@ -42,17 +43,17 @@ We have set up our collector as a Zendesk extension. We can now add a trigger wh
 
 From the _Admin_ page, select "Triggers" from the "BUSINESS RULES" menu and click "add trigger":
 
-![](images/add-trigger-button.png)
+![Zendesk Triggers page with a numbered blue arrow pointing to Triggers in the Business Rules sidebar (step 1) and another pointing to the Add trigger button in the top right (step 2).](images/add-trigger-button.png)
 
 Name the trigger something like "Ticket created or updated" to reflect Zendesk data will be send on ticket creation and update events.
 
 Under "Meet ANY of the following conditions" header click _**Add condition**_ button to add 2 "Ticket: Is..." conditions and set them to "Created" and "Updated" respectively.
 
-![](images/trigger-conditions.png)
+![Zendesk trigger creation form with trigger name "Ticket created or updated" and two conditions under Meet ANY of the following conditions: Ticket Is Created and Ticket Is Updated.](images/trigger-conditions.png)
 
 ### Setting up body for ticket event
 
-In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](#setting-up-a-collector-as-a-zendesk-extension) section above).
+In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST".
 
 In the _**JSON body**_ box, paste the following:
 
@@ -86,7 +87,7 @@ In the _**JSON body**_ box, paste the following:
 }
 ```
 
-![](images/json-body.png)
+![Zendesk trigger Actions section with Notify target set to Snowplow Collector - Iglu POST and a JSON body editor showing the ticket_updated schema payload using Liquid markup template variables, with a validation warning on line 5.](images/json-body.png)
 
 _NOTE:_ Ignore the warning on the left-hand side of the _**JSON body**_ textbox. It is due to usage of [Liquid markup](https://shopify.github.io/liquid/) in JSON.
 
@@ -226,4 +227,4 @@ In the _**JSON body**_ box, paste the following:
 
 Submit the new trigger by clicking _**Create**_ button. It should look something like this:
 
-![](images/submit-target.png)
+![Zendesk trigger Actions section showing the final Notify target action set to Snowplow Collector - Iglu POST with submitter user JSON body, and a blue arrow pointing to the Create button in the bottom right.](images/submit-target.png)

@@ -1,7 +1,10 @@
 ---
-title: "R32 Upgrade Guide"
+title: "RDB Loader R32 upgrade guide"
+sidebar_label: "R32 upgrade guide"
 date: "2020-03-06"
 sidebar_position: 700
+description: "Upgrade RDB Loader to R32 with EMR 5.19.0, automigrations, and updated shredder and loader versions for Redshift."
+keywords: ["rdb loader r32", "emr 5.19", "automigrations", "shredder upgrade", "r32 migration"]
 ---
 
 We recommend to go through the upgrade routine in several independent steps. After every step you should have a working pipeline. If something is not working or Shredder produces unexpected failed events - please let us know.

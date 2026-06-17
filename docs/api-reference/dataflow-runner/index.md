@@ -1,7 +1,10 @@
 ---
-title: "Dataflow Runner"
+title: "Dataflow Runner for AWS EMR clusters"
+sidebar_label: "Dataflow Runner"
 date: "2020-03-02"
 sidebar_position: 100
+description: "CLI tool for launching and managing AWS EMR clusters with templated playbooks for Hadoop and Spark jobs with distributed locking support."
+keywords: ["dataflow runner", "aws emr", "emr cluster management"]
 ---
 
 Dataflow Runner is a system for creating and running [AWS EMR](https://aws.amazon.com/emr/) jobflow clusters and steps. It uses templated playbooks to define your cluster, and the Hadoop/Spark/et al jobs that you want to run.
@@ -131,6 +134,15 @@ INFO[0289] EMR cluster is in state BOOTSTRAPPING - need state WAITING, checking 
 INFO[0310] EMR cluster launched successfully; Jobflow ID: j-2DPBXD87LSGP9
 ```
 
+If the cluster fails to launch (for example, a bootstrap action error or a VPC/quota validation error), Dataflow Runner surfaces the EMR `StateChangeReason` so the reason is visible in the runner's stdout rather than only in the AWS console. From `0.7.7` onwards the output includes both the code and message:
+
+```text
+ERRO[0310] EMR cluster state change reason: code='BOOTSTRAP_FAILURE' message="Master instance (i-0123456789abcdef0) failed attempting to download bootstrap action 1 file from S3"
+ERRO[0310] Bootstrap failure detected, retrying in 183 seconds...
+```
+
+The same code and message are included in the final error returned by the `up` command when all retries are exhausted.
+
 This command adds new steps to the already running cluster. By default this command is blocking - however if you wish to submit and forget simply supply the `--async` argument, the output should look something like the following:
 
 ```bash
@@ -205,3 +217,9 @@ OPTIONS:
 ```
 
 This command is a combination of `up`, `run` and `down` which is designed to mimic the current `EmrEtlRunner` behavior.
+
+As with the `up` command, if the transient cluster fails to launch (for example, a bootstrap action error), Dataflow Runner surfaces the EMR `StateChangeReason` so the reason is visible in the runner's stdout rather than only in the AWS console. From `0.7.8` onwards the code and message are included in both the logs and the final error returned by `run-transient`:
+
+```text
+ERRO[0310] EMR cluster state change reason: code='BOOTSTRAP_FAILURE' message="Master instance (i-0123456789abcdef0) failed attempting to download bootstrap action 1 file from S3"
+```

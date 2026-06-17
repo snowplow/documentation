@@ -1,7 +1,10 @@
 ---
 title: "Load event and entity types that you have defined"
+sidebar_label: "Load event and entity types that you have defined"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Create and load custom event and entity tables in Redshift with Igluctl, JSON Path files, and table definitions for pre-R32 RDB Loader."
+keywords: ["custom entities", "custom events", "igluctl", "json paths", "redshift tables"]
 ---
 
 Snowplow supports users creating their own events and entities. Events and entity definitions live as schemas in Iglu schema registries.
@@ -26,7 +29,7 @@ RDB Loader loads each shredded type into its own table in Redshift. You need to 
 
 ### Creating a new table for a new event type
 
-Once you have created a new schema in Iglu corresponding to your new event or entity type, you need to create a table definition for it. This can be automatically generated using [igluctl](/docs/api-reference/iglu/igluctl-2/index.md), using the [static generate](/docs/api-reference/iglu/igluctl-2/index.md#static-generate) command.
+Once you have created a new schema in Iglu corresponding to your new event or entity type, you need to create a table definition for it. This can be automatically generated using [igluctl](/docs/api-reference/iglu/igluctl/index.md), using the [static generate](/docs/api-reference/iglu/igluctl/index.md#static-generate) command.
 
 ## Creating and uploading a JSON Paths file
 
@@ -38,7 +41,7 @@ The format is simple - a JSON Paths file consists of a JSON array, where each el
 
 ### Creating a JSON Paths file
 
-JSON Path files should be automatically generated using [igluctl static generate --with-json-paths](/docs/api-reference/iglu/igluctl-2/index.md#static-generate)
+JSON Path files should be automatically generated using [igluctl static generate --with-json-paths](/docs/api-reference/iglu/igluctl/index.md#static-generate)
 
 ### Installing the JSON Paths file
 

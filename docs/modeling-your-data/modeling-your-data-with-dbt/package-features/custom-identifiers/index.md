@@ -1,6 +1,9 @@
 ---
-title: "Custom Sessionization"
+title: "Configure custom sessionization"
+sidebar_label: "Custom sessionization"
 sidebar_position: 50
+description: "Define custom session and user identifiers in Snowplow dbt packages using SQL expressions and custom logic."
+keywords: ["custom sessionization", "session identifiers", "user identifiers", "custom SQL identifiers"]
 toc_max_heading_level: 5
 ---
 ```mdx-code-block
@@ -8,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::danger
+:::tip
 
 As this changes the core logic of the package, you should make sure you have a good understanding of how the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
 
@@ -84,7 +87,7 @@ vars:
     ...
 ...
 ```
-:::warning
+:::tip
 Make sure you include a `prefix` value if you are running on **Postgres or Redshift**, as this ensures that you don't have duplicate column names somewhere in your SQL select statement. It is not required for the other warehouses, but is recommended.
 :::
 
@@ -94,13 +97,13 @@ Similar to before, if you want to combine multiple identifiers in different (or 
 vars:
     ...
     snowplow__session_identifiers: [
-            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'logged_in_id', 'prefix': 'lsi'}, 
-            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'session_identifier', 'prefix': 'lsi'}, 
+            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'logged_in_id', 'prefix': 'lsi'},
+            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'session_identifier', 'prefix': 'lsi'},
             {'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
     ...
 ...
 ```
-:::warning
+:::tip
 Make sure if you include multiple fields from the same entity that you give them the same prefix.
 :::
 
@@ -112,9 +115,9 @@ This will then render into the following SQL:
 SELECT
     ...
     COALESCE(
-        com_mycompany_logged_session_id_1[0].logged_in_id, 
-        com_mycompany_logged_session_id_1[0].session_identifier, 
-        com_mycompany_session_identifier_1[0].session_id, 
+        com_mycompany_logged_session_id_1[0].logged_in_id,
+        com_mycompany_logged_session_id_1[0].session_identifier,
+        com_mycompany_session_identifier_1[0].session_id,
         NULL
         ) as session_identifier,
 ...
@@ -127,9 +130,9 @@ SELECT
 SELECT
     ...
     COALESCE(
-        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].logged_in_id, 
-        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].session_identifier, 
-        com_mycompany_session_identifier_1_0_0[safe_offset(0)].session_id, 
+        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].logged_in_id,
+        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].session_identifier,
+        com_mycompany_session_identifier_1_0_0[safe_offset(0)].session_id,
         NULL
         ) as session_identifier,
 ...
@@ -142,9 +145,9 @@ SELECT
 SELECT
     ...
     COALESCE(
-        lsi_logged_in_id, 
-        lsi_session_identifier, 
-        si_session_id, 
+        lsi_logged_in_id,
+        lsi_session_identifier,
+        si_session_id,
         NULL
         ) as session_identifier,
 ...
@@ -224,7 +227,7 @@ If there are session identifiers that are more complicated to utilize, then you 
 Defining the `snowplow__session_sql` variable will ensure that the package takes it's value as the `session_identifier` **over** anything you may have defined with the `snowplow__session_identifiers` variable.
 :::
 
-:::warning
+:::note
 For Redshift/Postgres, if you want to leverage custom entities for your custom session logic, you will need to include them in the `snowplow__session_identifiers` variable in the same way as in previous sections to ensure they are correctly joined to the table.
 :::
 

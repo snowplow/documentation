@@ -509,7 +509,7 @@
       "type": "string",
       "title": "Timestamp used for incremental processing, should be your partition field",
       "group": "Operation and Logic",
-      "longDescription": "Determines which timestamp is used to build the sessionization logic. It's a good idea to have this timestamp be the same timestamp as the field you partition your events table on.",
+      "longDescription": "Determines which timestamp to use for optimizing the queries in our sessionization logic. This should be set to the same timestamp as the field you partition your events table on. This does not affect how sessions are processed and all events will be processed as described in our [sessionization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing) logic.",
       "packageDefault": "collector_tstamp"
     },
     "snowplow__user_identifiers": {

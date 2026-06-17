@@ -1,13 +1,11 @@
 ---
 title: "Incremental sessionization logic"
+sidebar_label: "Incremental sessionization logic"
 description: "A detailed overview of our incremental run logic using manifest tables."
+keywords: ["incremental sessionization", "sessionization logic", "manifest tables", "incremental processing"]
 sidebar_position: 10
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 The general principle behind an incremental model is to identify new events/rows since the previous run of the model, and only process these new events. This minimizes cost and reduces run times. This is great for basic event streams, however you begin to encounter issues for any aggregations you wish to do. To resolve this we treat a `session` as the atomic unit of the majority of our packages, ensuring that when we have a new event for a previously processed session, we have to reprocess all historic events for that session as well as the new events - otherwise our metrics would be incorrect. Note that because we allow [custom session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) this does not have to be a true web-type `session`.
 
@@ -198,7 +196,7 @@ dbt run --select snowplow_<package>_base_new_event_limits
 - State 3: `Snowplow: Snowplow incremental models out of sync. Syncing`
 - State 4: `Snowplow: Standard incremental run`
 
-:::caution
+:::note
 
 In all states, although much more likely in state 1, it is possible that a run finds no incremental data to process. In this case you will see a warning in the logs of the form `Snowplow Warning: No data in <table> for date range from variables, please modify your run variables to include data if this is not expected.`. In this case you should increase your start date if no runs have completed, or increase your backfill limit days if there is a gap in your data before the next records.
 

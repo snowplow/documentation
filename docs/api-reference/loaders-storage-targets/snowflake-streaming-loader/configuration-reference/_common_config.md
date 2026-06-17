@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>batching.uploadParallelismFactor</code></td>
-    <td>Optional. Default value 2.5.  Controls how many batches can we send simultaneously over the network to Snowflake. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 2.5, then the loader sends up to 10 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
+    <td>Optional. Default value 3.5.  Controls how many batches can we send simultaneously over the network to Snowflake. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 3.5, then the loader sends up to 14 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
 </tr>
 <tr>
     <td><code>cpuParallelismFactor</code></td>
@@ -40,8 +40,30 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value 5. Maximum number of attempts to make before giving up on a transient error.</td>
 </tr>
 <tr>
+    <td><code>retries.checkCommittedOffset.delay</code></td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Configures a delay in between flushing events to Snowflake and fetching the latest offset token from Snowflake to check the events are fully ingested.
+    </td>
+</tr>
+<tr>
     <td><code>skipSchemas</code></td>
     <td>Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>. A list of schemas that won't be loaded to Snowflake. This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
+</tr>
+<tr>
+    <td><code>decompression.maxBytesInBatch</code> (since 0.6.0)</td>
+    <td>
+      <p>Optional. Default value <code>5242880</code> (5 MB).</p>
+      <p>The loader automatically detects and decompresses zstd- or gzip-compressed source messages. Uncompressed messages are unaffected.</p>
+      <p>The loader uses this as a cutoff when incrementally adding decompressed events to a batch, and emits the batch as soon as it reaches this size. This protects the loader's memory because a small compressed message can expand into a much larger payload.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>decompression.maxBytesSinglePayload</code> (since 0.6.0)</td>
+    <td>
+      <p>Optional. Default value <code>10000000</code> (10 MB).</p>
+      <p>For zstd- or gzip-compressed source messages, this is the maximum size of a single payload after decompression. The loader emits a <Link to="/docs/api-reference/failed-events/#size-violation">size violation failed event</Link> for any payload that exceeds this size.</p>
+    </td>
 </tr>
 <tr>
     <td><code>monitoring.metrics.statsd.hostname</code></td>
@@ -62,6 +84,10 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>monitoring.metrics.statsd.prefix</code></td>
     <td>Optional. Default <code>snowplow.snowflake-loader</code>. Prefix used for the metric name when sending to statsd.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.prometheus.tags.*</code> (since 0.6.0)</td>
+    <td>Optional. A map of key/value pairs added as common labels on every Prometheus metric. The loader exposes these metrics at the <code>/metrics</code> endpoint on the health probe port.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>
@@ -85,11 +111,11 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>telemetry.disable</code></td>
-    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/snowplow-community-edition/telemetry/">telemetry</Link>.</td>
+    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/self-hosted/telemetry/">telemetry</Link>.</td>
 </tr>
 <tr>
     <td><code>telemetry.userProvidedId</code></td>
-    <td>Optional. See <Link to="/docs/get-started/snowplow-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
+    <td>Optional. See <Link to="/docs/get-started/self-hosted/telemetry/#how-can-i-help">here</Link> for more information.</td>
 </tr>
 <tr>
     <td><code>output.good.jdbcLoginTimeout</code></td>

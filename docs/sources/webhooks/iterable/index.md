@@ -1,10 +1,11 @@
 ---
-title: "Iterable"
+title: "Iterable webhook"
+sidebar_label: "Iterable"
 date: "2022-05-17"
 sidebar_position: 30
+description: "Track email opens, clicks, SMS, push notifications, and other Iterable system webhook events directly into Snowplow."
+keywords: ["iterable webhook integration", "iterable email tracking", "iterable system webhooks"]
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events provided by Iterable through their [System Webhooks](https://support.iterable.com/hc/en-us/articles/208013936-System-Webhooks). The event types include email opens and clicks, sent SMS or push notifications, and more.
 
@@ -26,10 +27,10 @@ If you want, you can also manually override the event's `platform` parameter b
 https://<collector host>/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.iterable%2Fsystem_webhook%2Fjsonschema%2F1-0-0&aid=<company>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Having entered the endpoint URL, click on **Create**. This will open a form where you can set up authentication of the callbacks – leave that to "None". In the bottom part of the page, you will be able to select which events to subscribe to as shown in this screenshot:
 
-![](images/iterable-events-810x1024.png)
+![Iterable System Webhooks configuration page showing event subscription checkboxes across Email, SMS, Push, In-app, and Web Push categories, with all events selected](images/iterable-events-810x1024.png)
 
 That’s it – when you save the configuration, Iterable events should automatically flow through into your data warehouse.

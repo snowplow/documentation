@@ -1,6 +1,9 @@
 ---
 position: 1
-title: Introduction
+title: "Learn how to calculate real-time shopper features using Apache Flink"
+sidebar_label: "Introduction"
+description: "Build real-time ecommerce analytics with Apache Flink to calculate shopper features like product views, cart behavior, and session metrics for in-session personalization."
+keywords: ["apache flink real-time analytics", "ecommerce stream processing"]
 ---
 
 Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.
@@ -52,7 +55,7 @@ The project structure is:
 
 This diagram shows the architectural overview:
 
-![Architecture diagram](./images/live-shopper-setup-architecture.svg)
+![Architecture diagram showing event flow from the ecommerce store through Snowplow Local into Kafka, processed by Apache Flink's branched stream pipeline across product, category, cart, and purchase lanes, and stored in Redis as user feature metrics](./images/live-shopper-setup-architecture.svg)
 
 Benefits of this architecture:
 - Sub-second freshness: metrics are computed in the stream, not via nightly batch jobs, so they're actionable in-session
@@ -83,3 +86,6 @@ The key subsystems are described below.
   - Trigger live-chat prompts when high-value carts stall
   - Send discounts based on price sensitivity
   - Feed both real-time dashboards and long-term analytics using consistent definitions
+
+## Acknowledgements
+Thank you to the Data Streaming experts [evoura](https://evoura.com/?utm_source=snowplow&utm_medium=accelerator&utm_campaign=live-shopper) for their support with building this accelerator.

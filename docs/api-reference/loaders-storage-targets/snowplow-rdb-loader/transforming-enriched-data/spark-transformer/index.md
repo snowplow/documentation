@@ -1,7 +1,10 @@
 ---
-title: "Spark transformer"
+title: "Spark transformer for batch processing"
+sidebar_label: "Spark transformer"
 date: "2022-04-04"
 sidebar_position: 10
+description: "Transform enriched Snowplow data in batches using Spark on EMR with support for deduplication and wide row or shredded output."
+keywords: ["spark transformer", "batch transformation", "emr spark", "deduplication", "rdb shredder"]
 ---
 
 ```mdx-code-block
@@ -45,7 +48,7 @@ where `region` is one of `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`, `eu
 
 ## Configuring the EMR cluster
 
-:::caution
+:::note
 
 Starting from version `5.5.0`, batch transformer requires to use Java 11 on EMR ([default is Java 8](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/configuring-java8.html)). See the `bootstrapActionConfigs` section in the configuration below.
 
@@ -188,7 +191,7 @@ See [here](/docs/api-reference/iglu/iglu-resolver/index.md) for details on how t
 
 :::tip
 
-All self-describing schemas for events processed by the transformer **must** be hosted on [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority.
+All self-describing schemas for events processed by the transformer **must** be hosted on [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/api-reference/iglu/iglu-repositories/index.md#iglu-central) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority.
 
 :::
 
@@ -257,6 +260,12 @@ You need to change the following settings with your own values:
 - `"--dest"`: the bucket in which the data for your enriched data lake lives.
 
 **NOTE:** The `"--src"` and `"--dest"` settings above apply only to the `s3DistCp` step of the playbook. The source and destination buckets for the transformer step are configured via the `config.hocon` file.
+
+:::tip[Archiving within the transformer]
+
+Since version 6.5.0, the transformer can perform this copy step itself instead of relying on a separate `s3-dist-cp` step. Set [`archival.source`](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/configuration-reference/index.md) in `config.hocon` to the S3 path of your enriched data. Before processing begins, the transformer copies all files from that path into a new `run=YYYY-MM-DD-hh-mm-ss` directory under `input`, then deletes each source file. When you use this option, you can remove the `S3DistCp` step from the playbook.
+
+:::
 
 ### Submitting the job to EMR with Dataflow Runner
 

@@ -1,6 +1,9 @@
 ---
 position: 4
-title: (Optional) Add your own calculation
+title: "Optional: Add a new calculation to the Flink live shopper features project"
+sidebar_label: "Optional: add your own calculation"
+description: "Extend the Flink pipeline by adding a custom feature calculation to track the most viewed product brand using event data and window aggregations."
+keywords: ["flink custom aggregations", "java stream processing extension"]
 ---
 
 This page describes how to add an additional feature to the product window. The process would be similar for other parts of the system, such as cart or purchase features.
@@ -18,7 +21,7 @@ In this example, you will track a new feature called `most_viewed_brand`, based 
 
 ## 1. Add a field to `ProductViewEvent`
 
-The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
+The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/web-trackers/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
 
 The `brand` field isn't currently present in the `ProductViewEvent` class.
 
@@ -250,4 +253,4 @@ out.collect(
 
 After these changes, re-run the script `./up.sh`. It will rebuild the docker image and restart the containers. You should be able to see in Redis the most viewed brand by the user.
 
-![image.png](./images/live-shopper-add-calculation.png)
+![Redis Insights showing the STRING key user:trent@snowplowanalytics.com:most_viewed_brand_5m with value "Snowplow", confirming the new most_viewed_brand feature is being stored in Redis](./images/live-shopper-add-calculation.png)

@@ -1,10 +1,13 @@
 ---
-title: "Snowplow Client Configuration"
+title: "Configure Snowplow Client for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure IP forwarding, sp.js hosting, custom paths, common event mapping, and entity merging for the Snowplow Client in GTM Server Side."
+keywords: ["Snowplow Client configuration", "common event mapping", "entity merging", "sp.js hosting"]
 ---
 
-:::tip Populating common User Data
+:::tip[Populating common User Data]
 
 The [GTM Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) has a `user_data` property. To populate this, you can attach a context Entity to your events of this schema: `iglu:com.google.tag-manager.server-side/user_data/jsonschema/1-0-0`, which can be found on [Iglu Central](https://github.com/snowplow/iglu-central/blob/853357452300b172ebc113d1d75d1997f595142a/schemas/com.google.tag-manager.server-side/user_data/jsonschema/1-0-0).
 
@@ -26,7 +29,7 @@ This setting allows for your GTM SS Container to serve your `sp.js` JavaScript
 
 It is recommended to rename `sp.js` if enabling this setting, as many adblockers will block requests to files named `sp.js`. A random string is the best option here.
 
-![sp.js settings](images/spjssettings.png)
+![sp.js settings section with the Serve sp.js from container checkbox checked and a sp.js name field containing the example value 776b5b25.js.](images/spjssettings.png)
 
 You can request _any_ version of the Snowplow JavaScript Tracker with this setting enabled. e.g. `https://{{gtm-ss-url}}/3.1.6/776b5b25.js` will load v3.1.6, or `https://{{gtm-ss-url}}/2.18.2/776b5b25.js` will load v2.18.2.
 
@@ -84,7 +87,7 @@ By default, the contexts will be "shredded" into separate keys using the context
 
 ## Advanced common event options
 
-![advanced common event options](images/advanced_common_options.png)
+![Advanced common event options section showing four collapsed subsections: client_id (with Use default settings checked), user_id (with Use default settings checked), Snowplow Entities mapping (with Merge selected Snowplow entities unchecked), and Snowplow Self-describing Event Mapping (with Merge selected Snowplow self-describing event data unchecked).](images/advanced_common_options.png)
 
 ### `client_id`
 
@@ -124,13 +127,13 @@ This is an advanced feature and we recommend that you first explore the configur
 
 Enable this option to allow merging of Snowplow context data to the Common Event. Checking this box reveals the following table:
 
-![](images/context_merging_overview.png)
+![Snowplow Entities Mapping section with the Merge selected Snowplow entities checkbox checked, revealing a Context entities to merge table with columns for Schema, Apply to all versions, Prefix, Merge to, Custom path, Keep original mapping, and Custom transformation, with an Add Row button.](images/context_merging_overview.png)
 
 #### Context entities to merge
 
 Using this table you can specify the rules to merge Snowplow context entity data to the Common Event. The columns of this table are:
 
-![](images/context_merging_new_row.png)
+![New row dialog for a context entity mapping rule, with fields for Schema (empty), Apply to all versions (False), Prefix (empty), Merge to (Event Properties), Custom path (empty), Keep original mapping (Keep), and Custom transformation (empty).](images/context_merging_new_row.png)
 
 1. **Schema**: (Required) The schema of the context entity to merge.
 
@@ -205,13 +208,13 @@ This is an advanced feature and we recommend that you first explore the configur
 
 Enable this option to allow merging of Snowplow self-describing event data to the Common Event. Checking this box reveals the following table:
 
-![](images/selfdesc_merging_overview.png)
+![Snowplow Self-describing Event Mapping section with the Merge selected Snowplow self-describing event data checkbox checked, revealing a Self-describing events to merge table with columns for Schema, Apply to all versions, Prefix, Merge to, Custom path, Keep original mapping, and Custom transformation, with an Add Row button.](images/selfdesc_merging_overview.png)
 
 #### Self-describing events to merge
 
 Using this table you can specify the rules to merge Snowplow self-describing event data to the Common Event. The columns of this table are:
 
-![](images/selfdesc_merging_new_row.png)
+![New row dialog for a self-describing event mapping rule, with fields for Schema (empty), Apply to all versions (False), Prefix (empty), Merge to (Event Properties), Custom path (empty), Keep original mapping (True), and Custom transformation (empty).](images/selfdesc_merging_new_row.png)
 
 **Schema**: (Required) The schema of the self-describing event.
 

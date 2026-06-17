@@ -1,14 +1,13 @@
 ---
 title: "First-party tracking"
+sidebar_label: "First-party tracking"
 sidebar_position: 40
 sidebar_custom_props:
-  offerings:
-    - bdp
   # hide from sidebar and external search until these instructions apply more universally
   hidden: true
+description: "Configure a custom collector domain matching your primary domain to enable first-party cookies and bypass browser tracking limitations."
+keywords: ["first-party tracking", "custom collector domain", "cookie domain configuration"]
 ---
-
-# First-party tracking
 
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 
@@ -16,7 +15,7 @@ When your collector domain (e.g. `collector.snwplow.net`) does not match your pr
 
 With first-party tracking, you can configure a custom collector domain (e.g. `c.flowershop.ai`) to match your primary domain (e.g. `flowershop.ai`), sidestepping these limitations.
 
-Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use a Cookie Extension service](/docs/events/cookie-extension/index.md) to fully persist the cookies.
+Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use a Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md) to fully persist the cookies.
 
 :::info
 
@@ -26,7 +25,7 @@ Before starting, ensure you can access and edit the configuration of your hostin
 
 :::info
 
-The flow described below might differ depending on the version of Snowplow BDP you are using.
+The flow described below might differ depending on the version of Snowplow you are using.
 
 :::
 
@@ -70,26 +69,26 @@ In some cases, you may wish to separate the tracking of user behavior for differ
 For example, if you own both `gardening.primary-domain.co.uk` and `insurance.primary-domain.co.uk` and only want to track users on `gardening.primary-domain.co.uk`, you can select that as your cookie domain and `c.gardening.primary-domain.co.uk` as your collector domain.
 </details>
 
-![enter_domain](images/Screenshot_enter_domain.png)
+![The Custom domain form showing a Domain field set to "t.flowershop.ai" and a Cookie domain field auto-populated with "flowershop.ai"](images/Screenshot_enter_domain.png)
 
 ## Configuring DNS records
-In the next step, BDP will generate the required DNS records. This may take several minutes.
+In the next step, Snowplow will generate the required DNS records. This may take several minutes.
 
 When the records are ready, you will receive a confirmation by email.
 
-![create_dns_records](images/Screenshot_create_dns_records.png)
+![The Create DNS records screen showing a loading state with the message "We're generating the configuration settings that you need to apply into your DNS provider"](images/Screenshot_create_dns_records.png)
 
 Once the DNS records are available, copy them into your domain provider.
 
-The set of DNS records will contain a special record that allows BDP to verify that the setup is correct.
+The set of DNS records will contain a special record that allows Snowplow to verify that the setup is correct.
 
 :::info
-You will have to conclude this step within 72 hours. If BDP is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
+You will have to conclude this step within 72 hours. If Snowplow is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
 :::
 
-Once BDP verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
+Once Snowplow verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
 
-![dns_records](images/Screenshot_dns_records.png)
+![The Custom domain details page showing domain "t.cromah.com", cookie domain "cromah.com", a DNS records table with one CNAME and two A records, and a green status indicator reading "First-party server tracking on cromah.com and its sub-domains"](images/Screenshot_dns_records.png)
 
 ## Updating your tracking code
 
@@ -101,4 +100,4 @@ This can be done in several ways:
 - If you already have tracking implemented and are using the JavaScript tracker, follow the above step or update the collector URL manually.
 - If you wish to implement tracking or already have tracking with one of our other trackers then you will need to manually change the collector URL.
 
-![implement_new_tracking_snippet](images/Screenshot_implement_new_tracking_snippet.png)
+![The "Select a custom domain" dropdown with "t.cromah.com" selected, and the JavaScript tracking snippet below showing the collector URL set to the custom domain](images/Screenshot_implement_new_tracking_snippet.png)

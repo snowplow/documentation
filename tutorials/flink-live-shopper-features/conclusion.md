@@ -1,6 +1,9 @@
 ---
 position: 5
-title: Conclusion
+title: "Conclusions from the Flink live shopper features accelerator"
+sidebar_label: "Conclusion"
+description: "Build sub-second real-time personalization with Snowplow, Flink, Kafka, and Redis to drive higher conversion and smarter marketing."
+keywords: ["real-time personalization pipeline", "flink kafka redis architecture"]
 ---
 
 Real-time streams let you see what a shopper is doing while the session is still active. Events leave the browser, flow through Snowplow, and reach Flink within milliseconds. This is important because the system can trigger actions that improve conversion.

@@ -1,11 +1,16 @@
 ---
-title: "Web"
+title: "Migration guide for Web"
+sidebar_label: "Web"
 sidebar_position: 900
+description: "Migration guide for upgrading the legacy Snowplow Web dbt package including breaking changes and configuration updates."
+keywords: ["web migration", "web upgrade", "legacy web package"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+This is a legacy package.
 
 ### Upgrading to 0.16.0
 

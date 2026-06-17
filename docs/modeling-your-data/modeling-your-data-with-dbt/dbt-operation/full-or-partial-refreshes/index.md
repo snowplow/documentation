@@ -1,6 +1,9 @@
 ---
-title: "Full or partial refreshes"
+title: "Full or partial table refreshes"
+sidebar_label: "Full or partial refreshes"
 sidebar_position: 20
+description: "Perform full or partial refreshes of Snowplow dbt package models to reprocess data or fix issues."
+keywords: ["dbt refresh", "full refresh", "partial refresh", "reprocess data"]
 ---
 
 ```mdx-code-block
@@ -63,7 +66,7 @@ There may be times where you need to re-run some or all of the models for a peri
 
 Note that it is not currently possible to re-process a fixed period in the past, it is only possible to re-process from a given date up to the current date of the data.
 
-:::danger
+:::note
 
 Both methods are only suitable if the value of your source data in your `upsert` and date keys have not changed (e.g. `view_id` and `derived_tstamp` for the `snowplow_unified_views` model). If this is not the case, or your custom models are not built using this approach, there is no choice but to run a full refresh of the model.
 
@@ -85,7 +88,7 @@ sources={{
 
 ### Option 2: Manipulating the manifest table
 
-It is possible to update the value in the [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#manifest-tables) so that the `max_last_success` values for the relevant models are set to the date you wish to re-run from. In this case, it may take multiple runs for your data to be completely re-run, based on your `snowplow__backfill_limit_days` value, and you may be left with abnormal data until all runs are completed. In the case where you have aggregations in your models (such as the `snowplow_unified_users` model), or have downstream reports/visualization/ML models based on these tables, we recommend setting the `snowplow__backfill_limit_days` to a large enough value that it can be completed in one run to minimize downstream issues (or to use option 1, where this happens by default).
+It is possible to update the value in the [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md) so that the `max_last_success` values for the relevant models are set to the date you wish to re-run from. In this case, it may take multiple runs for your data to be completely re-run, based on your `snowplow__backfill_limit_days` value, and you may be left with abnormal data until all runs are completed. In the case where you have aggregations in your models (such as the `snowplow_unified_users` model), or have downstream reports/visualization/ML models based on these tables, we recommend setting the `snowplow__backfill_limit_days` to a large enough value that it can be completed in one run to minimize downstream issues (or to use option 1, where this happens by default).
 
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00`, you would set the value in your manifest table for the model(s) to `2022-10-25 02:00:00`. This will then process data from that point (minus the `snowplow__lookback_window_hours` buffer) until either the current date, or according to your `snowplow__backfill_limit_days`, whichever yields a smaller time period. This will repeat until the data is fully reprocessed.
 
@@ -99,7 +102,7 @@ sources={{
 />
 </p>
 
-:::danger
+:::note
 
 Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)). Where possible, use option 1.
 

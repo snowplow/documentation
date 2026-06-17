@@ -1,6 +1,8 @@
 ---
-title: "Modeling your data with dbt"
+title: "Model your data with dbt"
+sidebar_label: "Modeling your data with dbt"
 description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
+keywords: ["dbt packages", "Snowplow dbt", "data modeling", "dbt quickstart"]
 sidebar_position: 1
 ---
 
@@ -20,12 +22,12 @@ dark: require('./images/dbt_packages-dark.drawio.png').default
 </p>
 
 
-To setup dbt, Snowplow Community Edition users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
+To set up dbt, Snowplow Self-Hosted users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
 
-For Snowplow BDP customers, dbt projects can be configured and scheduled in the console meaning you can [get started](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) running dbt models alongside your Snowplow pipelines.
+For Snowplow CDI customers, dbt projects can be configured and scheduled in the console meaning you can [get started](/docs/modeling-your-data/running-data-models-via-console/index.md) running dbt models alongside your Snowplow pipelines.
 
 
-# Snowplow dbt Packages
+## Snowplow dbt Packages
 
 :::info
 
@@ -39,7 +41,7 @@ Our dbt packages come with powerful built-in features such as an [optimization t
 There are 4 core snowplow dbt packages:
 - [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-unified/#!/overview/snowplow_unified)): for modeling your web and mobile data for page and screen views, sessions, users, and consent
 - [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player)): for modeling your media elements for play statistics
-- [Snowplow E-commerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your E-commerce interactions across carts, products, checkouts, and transactions
+- [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your Ecommerce interactions across carts, products, checkouts, and transactions
 - [Snowplow Attribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-attribution/#!/overview/attribution)): used for Attribution Modeling with Snowplow
 
 We also have 2 utility packages:
@@ -52,9 +54,22 @@ There are also 3 legacy dbt packages for web, mobile (superseded by unified) and
 - [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modeling with Snowplow
 
 
-Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/sources/trackers/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
+Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/sources/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
+
+## Package Versions & dbt Compatibility
+
+Starting with v1.0.0, Snowplow dbt packages adopt stricter syntax requirements introduced in dbt Core ≥ 1.10.6 (for example, nested generic test arguments). Earlier dbt versions are not supported from this release onward. Additionally, for Redshift users only, redshift-adapters 1.10 is the minimum requirement going forward.
+
+Snowplow maintains two active release lines:
+
+- v1.x (latest) – recommended for all users, it is where ongoing development occurs
+- v0.x (maintenance) – receives critical bug fixes only, where possible
+
+For users upgrading from v0.x to v1.x, see our [migration guides](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/unified/index.md#upgrading-to-100)
 
 
+### Note on dbt Fusion
+While these packages are architecturally compatible with the dbt Fusion engine, Snowplow packages are not officially supported on dbt Fusion at this time. Limited testing may be possible using the [--no-version-check](https://docs.getdbt.com/reference/project-configs/require-dbt-version#fusion-compatibility) flag. Behavior can be fragile, particularly during full-refreshes or when introducing new models, and is under investigation.
 
 The supported data warehouses per version can be seen below:
 

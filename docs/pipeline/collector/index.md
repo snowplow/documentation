@@ -1,24 +1,26 @@
 ---
-title: "Configuring the Collector"
+title: "Configure the Collector"
 sidebar_position: 1
 sidebar_label: "Collector"
+description: "View and configure Snowplow collector settings via Console UI or API, including cookie domains, paths, and HTTP headers."
+keywords: ["collector configuration", "collector API", "HTTP headers", "event collector"]
 ---
 
-Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/trackers/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
 
 Read more about the technical aspects of the collector [here](/docs/api-reference/stream-collector/index.md).
 
-## Viewing collector configuration in Snowplow BDP Console
+## Viewing collector configuration in Snowplow Console
 
-The easiest way to access collector configuration is to view it within the Snowplow BDP Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
+The easiest way to access collector configuration is to view it within the Snowplow Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
 
-![](images/image-1.png)
+![Snowplow Console showing a pipeline with the Configuration tab selected (indicated by a red arrow), and the left sidebar showing configuration sections including COLLECTOR (Collector domains, Tracker request paths, Collector settings), VALIDATION, COMPONENTS, and ALERTS.](images/image-1.png)
 
 Selecting the pipeline configuration tab
 
 You can then view your configuration, with the default values displayed for empty fields:
 
-![](images/image-2.png)
+![Snowplow Console Collector configuration page showing the Tracker request paths section with a table of default paths: POST at /com.snowplowanalytics.snowplow/tp2, Redirect at /r/tp2, and Iglu at /com.snowplowanalytics.iglu/v1.](images/image-2.png)
 
 Example collector configuration
 
@@ -26,7 +28,7 @@ This view is consuming the respective API that you can also access, as discussed
 
 ## Consuming the collector configuration API
 
-As a Snowplow BDP customer you already benefit from 24x7 monitoring of pipeline collector health. If you wish to add collector monitoring to your internal monitoring systems nevertheless, the maintainable way to do this is to retrieve collector endpoints and other configuration values via the available API, then invoke your health checks on them.
+As a Snowplow customer you already benefit from 24x7 monitoring of pipeline collector health. If you wish to add collector monitoring to your internal monitoring systems nevertheless, the maintainable way to do this is to retrieve collector endpoints and other configuration values via the available API, then invoke your health checks on them.
 
 ### Authorization
 
@@ -69,15 +71,11 @@ The endpoint for the API is:
 
 and the only supported HTTP verb is `GET`.
 
-Your organization ID is a UUID and can be found in the location bar of your browser when you are using the Console:
-
-![This image has an empty alt attribute; its file name is image-3.png](images/image-3.png)
-
-Organization ID is the UUID in-between the two forward slashes.
+You can find your organization ID [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 Similarly, the pipeline ID can be found in the location bar as the second UUID there:
 
-![This image has an empty alt attribute; its file name is image-4.png](images/image-4.png)
+![Snowplow Console browser address bar showing a URL where the pipeline ID UUID is highlighted as the second UUID in the path.](images/image-4.png)
 
 The Pipeline ID is the second UUID in the location bar.
 
@@ -113,8 +111,6 @@ Invoking this API will return an object of the following form:
 }
 ```
 
-#### Response details
-
 The `cookieDomains` object is always expected to be available and holds two properties:
 
 - `domains` is a non-optional list of domains for which collector cookies are being set. The value may be an empty list.
@@ -139,6 +135,21 @@ The `cookieAttributes` object is always expected to be available and contains th
 
 Finally, `blockUnencrypted` is an optional boolean property indicating whether un-encrypted traffic should be allowed or not. If not available, the default is `false` (i.e. "do not block").
 
-## Configuring the collector for Community Edition users
+## Configuring the collector for Snowplow Self-Hosted users
 
-After you have installed the [Collector](/docs/api-reference/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md) or [manually](/docs/api-reference/stream-collector/setup/index.md)), you can follow the [reference page](/docs/api-reference/stream-collector/configure/index.md) to configure it.
+After you have installed the [Collector](/docs/api-reference/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/self-hosted/index.md) or [manually](/docs/api-reference/stream-collector/setup/index.md)), you can follow the [reference page](/docs/api-reference/stream-collector/configure/index.md) to configure it.
+
+## HTTP request headers
+
+The Collector will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.
+
+Additionally, the following two headers can be sent on requests:
+
+| Header       | Allowed Values     | Description                                                                                                |
+| ------------ | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Content-Type | `application/json` | See [MDN Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)             |
+| SP-Anonymous | `*`                | Enables Server Side Anonymization, preventing the User IP Address and Network User ID from being collected |
+
+### Cookie header
+
+The Collector will collect any cookie information sent in the `Cookie` HTTP header. Cookies can be attached to events using the [Cookie extractor enrichment](/docs/pipeline/enrichments/available-enrichments/cookie-extractor-enrichment/index.md)

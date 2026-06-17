@@ -1,14 +1,23 @@
 ---
 title: "Iglu Server configuration reference"
-date: "2021-08-03"
-sidebar_position: 0
+sidebar_label: "Configuration"
+date: "2026-05-14"
+sidebar_position: 10
+description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
+keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON", "self-hosted"]
 ---
 
-This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/iglu-server/tree/master/config) show how to prepare an input file.
+```mdx-code-block
+import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
+
+<CdiCallout/>
+```
+
+This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [examples on GitHub](https://github.com/snowplow/iglu-server/tree/master/config) show how to prepare this file.
 
 ## License
 
-Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Iglu Server, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
@@ -27,24 +36,26 @@ license {
 | `repoServer.idleTimeout` | Default: `30 seconds`. TCP connections are dropped after this timeout expires. In case Iglu Server runs behind a load balancer, this should slightly exceed the load balancer's idle timeout. |
 | `repoServer.hsts.enable` _(since 0.12.0)_ | Default: `false`. Whether to send an [HSTS header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security). |
 | `repoServer.hsts.maxAge` _(since 0.12.0)_ | Default: `365 days`. The maximum age for the HSTS header. |
+| `repoServer.maxPayloadSize` _(since 0.14.0)_ | Default: `100000`. Maximum accepted request body size in bytes. Requests exceeding this are rejected. |
 | `database.type` | Optional. Default: `postgres`. Can be changed to `dummy` during development for in-memory only storage. |
 | `database.host` | Required. Host name for Postgres database. |
 | `database.port` | Optional. Default: `5432`. Port for Postgres database. |
 | `database.dbname` | Required. Name of Postgres database. |
 | `database.username` | Required. Username for connecting to Postgres. |
 | `database.password` | Required. Password for connecting to Postgres. |
-| `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customise the api base url in Swagger. Helpful for when running iglu-server behind a proxy server. |
+| `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customize the api base url in Swagger. Helpful for when running Iglu Server behind a proxy server. |
 | `debug` | Optional. Default: `false`.  Enable additional debug api endpoint to respond with all internal state. |
-| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/data-product-studio/data-structures/version-amend/amending/index.md). |
-| `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples in github](https://github.com/snowplow-incubator/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
+| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/fundamentals/schemas/versioning/index.md). |
+| `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples on GitHub](https://github.com/snowplow/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
 | `webhooks.schemaPublished.uri` | Required. URI of the HTTP server that will receive the webhook event. |
 | `webhooks.schemaPublished.vendorPrefixes` | Optional. Example: `["com", "org.acme", "org.snowplow"]`. List of schema prefixes (regexes) that should be sent via the webhook. |
 | `webhooks.schemaPublished.usePost` (since *0.8.7*) | Optional. Default: `false`. Whether to use `POST` to send request via the webhook. |
 | `superApiKey` | Optional. Set a super api key with permission to read/write any schema, and add other api keys. |
+| `maxJsonDepth` _(since 0.14.0)_ | Default: `40`. Maximum nesting depth for JSON values accepted by the server. Used both when validating schemas and when parsing incoming JSON payloads. |
 
 ## Advanced options
 
-We believe these advanced options are set to sensible defaults, and hopefully you won’t need to ever change them.
+These advanced options have sensible defaults and rarely need changing.
 
 | parameter | description |
 |-|-|
@@ -60,4 +71,4 @@ We believe these advanced options are set to sensible defaults, and hopefully yo
 | `database.pool.connectionPool.size` | Optional. Default: `4`. Number of threads to use when the connection pool has type `fixed`. |
 | `database.pool.transactionPool.type` | Optional. Default: `cached` (recommended for production). Type of the thread pool used for blocking JDBC operations. |
 | `preTerminationPeriod` (since *0.8.0*) | Optional. Default: `1 second`. How long the server should pause after receiving a sigterm before starting the graceful shutdown. During this period the server continues to accept new connections and respond to requests. |
-| `preTerminationUnhealthy` (since *0.8.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the server can be configured to return 503s on the `/health` endpoint. Can be helpful for removing the server from a load balancer’s targets. |
+| `preTerminationUnhealthy` (since *0.8.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the server can be configured to return 503s on the `/health` endpoint. Can be helpful for removing the server from a load balancer's targets. |

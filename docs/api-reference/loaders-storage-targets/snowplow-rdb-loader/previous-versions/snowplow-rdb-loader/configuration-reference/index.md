@@ -1,7 +1,10 @@
 ---
-title: "RDB loader configuration reference"
+title: "RDB loader configuration reference for 2.0.0+"
+sidebar_label: "RDB loader configuration reference"
 date: "2021-06-08"
 sidebar_position: 380
+description: "Configure RDB Loader 2.0.0+ with storage, messaging, scheduling, and monitoring settings for Redshift and warehouse loading."
+keywords: ["rdb loader 2.0 config", "loader configuration", "redshift config", "messaging config", "loader 2.0 settings"]
 ---
 
 Shredder and loader use different configurations starting from 2.0.0. An example config for loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/2.0.0/config/loader.config.reference.hocon).

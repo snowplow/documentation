@@ -1,7 +1,10 @@
 ---
-title: "Usage Guide"
+title: "Snowplow Mini usage guide"
+sidebar_label: "Usage guide"
 date: "2021-05-11"
 sidebar_position: 3
+description: "Learn how to use Snowplow Mini for testing, debugging trackers, and exploring Snowplow features."
+keywords: ["snowplow mini", "usage guide", "testing", "debugging", "mini dashboard"]
 ---
 
 ## Overview
@@ -55,12 +58,12 @@ Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of cha
 
 To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. There are 2 options:
 
-- Use igluctl’s [server keygen](/docs/api-reference/iglu/igluctl-2/index.md#server-keygen) subcommand
+- Use igluctl’s [server keygen](/docs/api-reference/iglu/igluctl/index.md#server-keygen) subcommand
 - Use any HTTP client e.g. cURL
 
 #### Option 1
 
-First, [download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+First, [download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 
@@ -93,7 +96,7 @@ should return a read key and a write key.
 To test and send non-standard Snowplow events such as your own custom-contexts and unstructured events you can load them into the Iglu repository local to the Snowplow Mini instance.
 
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
-2. [Download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+2. [Download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 1. Run the executable with the following input:
 
@@ -158,15 +161,15 @@ Browse to `mini-public-address/kibana` , once Opensearch Dashboards is loaded, y
 
 You can then inspect any individual event data in the UI by unfolding a payload:
 
-![](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
+![Opensearch Dashboards Discover interface showing 12 good events in the "good" index, with available fields listed on the left and a table of event rows on the right displaying timestamps and source data including fields such as collector_tstamp, v_collector, and br_features.](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
 
 If you want to inspect bad events, click on `good`, placed towards top left of the screen and select `bad` from drop-down list.
 
-![](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
+![Opensearch Dashboards Discover interface showing 13 bad events in the "bad" index, with failure-related fields listed on the left (including data.failure.messages, data.failure.timestamp, data.payload.body) and event rows on the right showing error details such as "empty querystring" and "not a valid URI redirect".](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
 
 Unfold any payload to inspect a bad event in detail.
 
-![](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
+![Opensearch Dashboards Discover interface showing a single good event unfolded, with its full JSON payload displayed in a table view including fields such as _index, app_id, geo_latitude, v_collector, and collector_tstamp.](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
 
 ## Resetting Opensearch indices
 
@@ -198,7 +201,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 ## Configuring telemetry
 
-See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/get-started/self-hosted/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 
@@ -220,12 +223,12 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl’s [static push](/docs/api-reference/iglu/igluctl-2/index.md#static-push) subcommand to put our custom schema into the Iglu Server
+- Use igluctl’s [static push](/docs/api-reference/iglu/igluctl/index.md#static-push) subcommand to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
 #### Option 1
 
-First, [download igluctl](/docs/api-reference/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
+First, [download igluctl](/docs/api-reference/iglu/igluctl/index.md#downloading-and-running-igluctl).
 
 Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 

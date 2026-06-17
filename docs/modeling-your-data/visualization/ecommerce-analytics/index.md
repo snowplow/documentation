@@ -1,10 +1,12 @@
 ---
-title: "Ecommerce Analytics"
+title: "Ecommerce Analytics visualization"
 sidebar_position: 2
 sidebar_label: "Ecommerce Analytics"
+description: "Ecommerce analytics visualization with dashboards for revenue, purchases, checkout journey, and transaction patterns."
+keywords: ["ecommerce visualization", "ecommerce dashboards", "revenue analytics", "purchase analytics"]
 ---
 
-<!-- Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions -->
+{/* Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions */}
 
 The Ecommerce Analytics visualization offers an in-depth breakdown of ecommerce activities across your websites and mobile apps, presenting an enhanced rendition of Google Analytics v4 reports. Use the dashboards to:
 
@@ -14,13 +16,13 @@ The Ecommerce Analytics visualization offers an in-depth breakdown of ecommerce 
 
 Leveraging Snowplow's Ecommerce event tracking packages and our Ecommerce dbt package, the visualization transforms raw event data into structured tables covering carts, checkouts, products, transactions, and user interactions, providing valuable insights for informed decision-making.
 
-![the overview page](images/overview.png)
+![E-commerce Analytics overview page showing sample data for January 2023 with key metrics (total revenue $30,243.69, 162 customers, average order value $156.70) and line charts for revenue per day and unique customers per day, plus purchased products tables](images/overview.png)
 
 ## Requirements
 
 - Running the [Snowplow Ecommerce dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the visualization
-- Ecommerce events tracked using the ecommerce APIs for the [JavaScript (Snowplow Ecommerce plugin)](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md)
+- Ecommerce events tracked using the ecommerce APIs for the [JavaScript (Snowplow Ecommerce plugin)](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) or [mobile trackers](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md)
 
 ## Usage
 
@@ -56,9 +58,9 @@ If the tables have the required columns, you can navigate to the dashboard pages
 At the top of each page, there is an option to choose the date range (including a secondary date range to compare the data against) and filters.
 These options let you narrow down the data shown in the dashboard to what you are interested in.
 
-![the top of the Checkout page, showing the filter buttons](images/filters.png)
+![Top of the Checkout page showing a "Last 30 Days" date range dropdown and a Filters button](images/filters.png)
 
 When you click on the **Filters** button, you will see a modal with an option to add conditions on fields in the data.
 For example, you can add conditions on the products or product lists that you are interested in.
 
-![setting up a filter for a completed order](images/filters_modal.png)
+![Filter dialog configured with field "step", operator "contains", and value "order complete", with Add Filter and Save buttons](images/filters_modal.png)

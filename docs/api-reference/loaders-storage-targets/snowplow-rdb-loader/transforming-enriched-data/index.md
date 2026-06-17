@@ -1,7 +1,10 @@
 ---
-title: "Transforming enriched data"
+title: "How the RDB Loader transforms enriched data for warehouses"
+sidebar_label: "Transforming enriched data"
 date: "2022-04-04"
 sidebar_position: 10
+description: "Transform Snowplow enriched events into shredded data for Redshift or wide row format for Snowflake and Databricks using Spark or stream transformers."
+keywords: ["data transformation", "shredded data", "wide row format", "redshift transformation", "snowflake transformation"]
 ---
 
 _For a high-level overview of the RDB Loader architecture, of which the transformer is a part, see [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)._
@@ -35,7 +38,7 @@ These files are stored on S3 partitioned by type. When the data is loaded into R
 
 The following diagram illustrates the process:
 
-![](images/storage-loader-dataflow.png)
+![Diagram of the shredding process: an enriched good event TSV file with contexts, unstruct_event, and derived_contexts fields is passed through a Shredding step (using Iglu for schema lookup), producing shredded good output split into atomic.events, user-specific self-describing events (JSON), and predefined contexts (JSON), which are then loaded by StorageLoader into Redshift tables](images/storage-loader-dataflow.png)
 
 **NOTE:** Shredded data can currently only be loaded into **Redshift**.
 

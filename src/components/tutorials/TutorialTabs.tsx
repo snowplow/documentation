@@ -17,9 +17,7 @@ export const DocsTutorialsTabsMobile: React.FC = () => {
   const history = useHistory()
   const location = useLocation()
 
-  const [tab, setTab] = useState<DocsTab>(() =>
-    getCurrentTab(location.pathname)
-  )
+  const [tab, setTab] = useState<DocsTab>(DocsTab.Docs)
 
   useEffect(() => {
     setTab(getCurrentTab(location.pathname))
@@ -62,9 +60,7 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
   const history = useHistory()
   const location = useLocation()
 
-  const [tab, setTab] = useState<DocsTab>(() =>
-    getCurrentTab(location.pathname)
-  )
+  const [tab, setTab] = useState<DocsTab>(DocsTab.Docs)
 
   useEffect(() => {
     setTab(getCurrentTab(location.pathname))
@@ -91,14 +87,12 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
         value={DocsTab.Docs}
         label="Docs"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Docs}
       />
       <Tab
         onClick={() => changeTab(DocsTab.Tutorials)}
         value={DocsTab.Tutorials}
         label="Tutorials"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Tutorials}
       />
     </Tabs>
   )

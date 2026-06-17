@@ -1,5 +1,4 @@
 import ComponentTypes from '@theme-original/NavbarItem/ComponentTypes'
-import NavbarButton from '@site/src/components/RunnableSnippets/NavbarButton'
 import {
   DocsTutorialsTabsDesktop,
   DocsTutorialsTabsMobile,
@@ -7,7 +6,6 @@ import {
 
 export default {
   ...ComponentTypes,
-  'custom-docsTrackerNavbarButton': NavbarButton,
   'custom-docsTutorialsTabsDesktop': DocsTutorialsTabsDesktop,
   'custom-docsTutorialsTabsMobile': DocsTutorialsTabsMobile,
 }

@@ -1,7 +1,10 @@
 ---
-title: "Braze Tag for GTM SS"
+title: "Braze Tag for GTM Server Side"
+sidebar_label: "Braze Tag for GTM SS"
 date: "2022-01-17"
 sidebar_position: 400
+description: "Forward Snowplow events to Braze from GTM Server Side using the Braze Tag with Track Users API for personalization and marketing automation."
+keywords: ["Braze Tag", "GTM SS Braze", "marketing automation", "Track Users API"]
 ---
 
 The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.braze.com/). This Tag works best with the [Snowplow Client](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md), but can also work with other GTM SS Clients such as GAv4.

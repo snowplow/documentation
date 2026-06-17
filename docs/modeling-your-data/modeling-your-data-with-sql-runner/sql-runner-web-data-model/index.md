@@ -1,7 +1,10 @@
 ---
-title: "Web data model"
+title: "Web data model for SQL Runner"
+sidebar_label: "Web data model"
 date: "2021-07-27"
 sidebar_position: 100
+description: "Legacy SQL Runner web data model for transforming web event data into derived tables."
+keywords: ["SQL Runner web", "web data model", "legacy web SQL", "web SQL Runner"]
 ---
 
 :::tip
@@ -12,7 +15,7 @@ For any new developments we highly recommend using our [unified digital package 
 
 The Snowplow web data model aggregates Snowplow's out of the box page view and page ping events to create a set of derived tables - page views, sessions and users - that contain many useful dimensions as well as calculated measures such as time engaged and scroll depth.
 
-![](images/image-3.png)
+![Diagram showing the three levels of the SQL Runner web data model: ENTITY (users) at the top, CYCLE (sessions) in the middle, and INTERACTION (page views) at the bottom, connected by vertical lines.](images/image-3.png)
 
 **The latest Snowplow web data model can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
 
@@ -20,14 +23,14 @@ The Snowplow web data model aggregates Snowplow's out of the box page view and p
 
 #### Requirements
 
-- [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
+- [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/page-views/index.md) implemented.
 
 #### Prerequisites
 
 - [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md)).
-- A dataset of web events from the [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) must be available in the database.
+- A dataset of web events from the [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) must be available in the database.
 
 #### Configuring and running the model
 
@@ -37,7 +40,7 @@ Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment var
 
 Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
-You can then run the model, either by running playbooks individually by running SQL-runner locally, or via your Snowplow BDP GitHub repository. Of course, as a Snowplow BDP customer you can also reach out to Support to get the model deployed for you.
+You can then run the model, either by running playbooks individually by running SQL-runner locally, or via your Snowplow GitHub repository. Of course, as a Snowplow customer you can also reach out to Support to get the model deployed for you.
 
 ## Technical architecture
 
@@ -45,7 +48,7 @@ You can then run the model, either by running playbooks individually by running 
 
 This model consists of a series of modules, each is idempotent and can be run on independent schedules, and each produces a table which serves as the input to the next module.
 
-![](images/web_full_model_structure.jpg)
+![Full flowchart of the SQL Runner web data model showing the complete module sequence from Atomic Tables/Manifests through base, page views, sessions, and users modules. Each level shows a main playbook, optional custom aggregation steps, a complete playbook, a production table output, and a staged table that feeds into the next module.](images/web_full_model_structure.jpg)
 
 #### The individual modules
 
@@ -55,7 +58,7 @@ Each module produces a table which acts as the input to the subsequent module (t
 
 Each module comes with a `99-{module}-complete playbook`, which marks that module complete by updating any relevant manifests, and truncating the input, and cleaning up temporary tables. The complete steps may be run at the end of each module, or at the end of the run.
 
-![](images/web_model_module.jpg)
+![Diagram showing the structure of a single SQL Runner module: Step 1 (01-main playbook) reads from an Inputs table and outputs to Production Tables and Staged Tables; Step 2 (optional custom SQL plugin) also reads from Inputs and outputs to Custom Tables; Step 3 (99-complete playbook) truncates the Inputs table to finish the incremental lifecycle.](images/web_model_module.jpg)
 
 More detail on each module can be found in the relevant READMEs in the [GitHub repository](https://github.com/snowplow/data-models/tree/master).
 

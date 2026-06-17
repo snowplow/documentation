@@ -1,15 +1,16 @@
 ---
-title: "Setup Guide for GCP"
+title: "Set up Snowplow Mini on GCP"
+sidebar_label: "GCP setup guide"
 date: "2021-05-11"
 sidebar_position: 2
+description: "Deploy Snowplow Mini on GCP for a single-instance testing environment."
+keywords: ["snowplow mini", "gcp setup", "mini deployment"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 
@@ -19,20 +20,20 @@ Snowplow Mini is, in essence, the Snowplow real time stack inside of a single im
 
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-- Snowplow Collector NSQ 3.3.0
-- Snowplow Enrich NSQ 5.4.0
-- Snowplow Elasticsearch Loader 2.1.2
-- Snowplow Iglu Server 0.13.0
-- Opensearch 2.4.0
-- Opensearch Dashboards 2.4.0
-- Postgresql 15.1
+- Snowplow Collector NSQ 3.7.0
+- Snowplow Enrich NSQ 6.11.0
+- Snowplow Elasticsearch Loader 2.1.3
+- Snowplow Iglu Server 0.14.0
+- Opensearch 3.6.0
+- Opensearch Dashboards 3.6.0
+- Postgresql 16.10
 - NSQ v1.3.0
 
 Note: All services are configured to start automatically so everything should happily survive restarts/shutdowns.
 
 To understand the flow of data please refer to the following diagram:
 
-![](images/snowplow-mini-topology.jpg)
+![Data flow diagram showing the Snowplow Mini real-time processing topology: the Scala Stream Collector receives events, passes them to Stream Enrich, and both good and bad events flow through Elasticsearch Sink components into an Elasticsearch node, with four named queues — RawEvents, EnrichedEvents, BadEvents, and BadElasticsearchEvents — shown as horizontal streams between components.](images/snowplow-mini-topology.jpg)
 
 ## Importing public tarballs to a GCP project
 
@@ -50,16 +51,16 @@ A sample usage would be as following.
 gcloud compute images create \
 imported-sp-mini \
 --source-uri \
-https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-2-large-1749631920.tar.gz
+https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-26-0-large-1780921141.tar.gz
 ```
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
 <p>Version {versions.snowplowMini} (recommended)</p>
 
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-2-large-1749631920.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-1-xlarge-1749633980.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-1-xxlarge-1749639938.tar.gz) |
+| L / 2 vCPUs                                                                                        | XL / 4 vCPUs                                                                                         | XXL / 8 vCPUs                                                                                          |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-26-0-large-1780921141.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-26-0-xlarge-1780921124.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-26-0-xxlarge-1780921136.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
 
@@ -67,7 +68,7 @@ After importing our tarball of your choice into your project, you should see it 
 
 To decide on which size of Snowplow Mini to choose, read on.
 
-### large & xlarge & xxlarge
+## large & xlarge & xxlarge
 
 Mini is available in 3 different sizes:
 
@@ -79,11 +80,11 @@ Mini is available in 3 different sizes:
 
 Go to `Compute Engine` on GCP console, select `Images` from menu on the left. You should see your imported image on the list. Select it then you should see `CREATE INSTANCE` button at the top of the page. Click on it.
 
-![](images/create-instance.png)
+![GCP Console Images page showing the imported Snowplow Mini image selected, with the CREATE INSTANCE button visible in the top action bar.](images/create-instance.png)
 
-![](images/create-instance-2.png)
+![GCP Create an instance form showing the instance name set to "snowplow-mini-0-6-0", region us-east1 (South Carolina), zone us-east1-b, and machine type configured with 2 vCPUs and 8 GB memory.](images/create-instance-2.png)
 
-![](images/create-instance-3.png)
+![Lower section of the GCP Create an instance form showing boot disk set to a 10 GB standard persistent disk with the Snowplow Mini image, the Compute Engine default service account selected with Allow default access scope, HTTP traffic allowed in the Firewall section, and the Create button at the bottom.](images/create-instance-3.png)
 
 Click `Create`.
 

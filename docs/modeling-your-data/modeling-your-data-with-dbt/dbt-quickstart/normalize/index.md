@@ -2,6 +2,8 @@
 sidebar_label: "Normalize"
 sidebar_position: 50
 title: "Normalize Quickstart"
+description: "Quick start guide for the Snowplow Normalize dbt package to flatten and normalize events and entities for downstream tools."
+keywords: ["normalize quickstart", "normalize setup", "dbt normalize installation"]
 ---
 
 ## Requirements
@@ -32,7 +34,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the normalize model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the normalize model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-normalize/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -46,7 +48,7 @@ vars:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
-:::info Databricks only
+:::info[Databricks only]
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
 
 :::
@@ -89,8 +91,8 @@ At the root of your dbt project, running `python dbt_packages/snowplow_normalize
 
 ### 9. Additional vendor specific configuration
 
-:::info BigQuery Only
-Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
+:::info[BigQuery Only]
+Verify which column your events table is partitioned on. It will likely be partitioned on `load_tstamp` or `collector_tstamp`. Unless it is partitioned on `derived_tstamp` (legacy behavior) you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -99,7 +101,7 @@ vars:
 ```
 :::
 
-:::info Databricks only - setting the databricks_catalog
+:::info[Databricks only - setting the databricks_catalog]
 
 Add the following variable to your dbt project's `dbt_project.yml` file
 
@@ -125,7 +127,7 @@ vars:
 
 The purpose of this variable is to adjust the partitioning of the derived tables to use a different timestamp (e.g., derived_tstamp) that is more suitable for analytics in the next layer.
 
-:::warning Important Note on Custom Partition Timestamps
+:::warning[Important Note on Custom Partition Timestamps]
 If you change `snowplow__partition_tstamp` to a different column (e.g., `load_tstamp`), you MUST ensure that this column is included in the `event_columns` list in your normalize configuration for each event. Failing to do so will cause the models to fail, as the partition column must be present in the normalized output.
 
 Example configuration when using a custom partition timestamp:

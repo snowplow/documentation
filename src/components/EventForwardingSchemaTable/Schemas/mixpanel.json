@@ -1,0 +1,241 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "event",
+    "properties"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event": {
+      "type": "string",
+      "description": "The name of the event",
+      "consoleDefault": "event.event_name",
+      "consoleRequired": true
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "time",
+        "distinct_id",
+        "$insert_id"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "time": {
+          "type": "integer",
+          "description": "The time at which the event occurred, in milliseconds since epoch.",
+          "consoleDefault": "spTstampToEpochMillis(event.derived_tstamp)",
+          "consoleRequired": true
+        },
+        "distinct_id": {
+          "type": "string",
+          "description": "Identifies the user who performed the event.",
+          "consoleDefault": "event.user_id",
+          "consoleRequired": true
+        },
+        "$insert_id": {
+          "type": "string",
+          "description": "A unique identifier for the event, used for deduplication.",
+          "maxLength": 36,
+          "consoleDefault": "event.event_id",
+          "consoleRequired": true
+        },
+        "ip": {
+          "type": "string",
+          "description": "The IP address of the user.",
+          "consoleDefault": "event.user_ipaddress"
+        },
+        "$city": {
+          "type": "string",
+          "description": "The city of the event sender.",
+          "consoleDefault": "event.geo_city"
+        },
+        "$region": {
+          "type": "string",
+          "description": "The region (state or province) of the event sender.",
+          "consoleDefault": "event.geo_region"
+        },
+        "mp_country_code": {
+          "type": "string",
+          "description": "The country of the event sender.",
+          "consoleDefault": "event.geo_country"
+        },
+        "$browser": {
+          "type": "string",
+          "description": "Name of the browser.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.agentName"
+        },
+        "$browser_version": {
+          "type": "string",
+          "description": "Version of the browser.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.agentVersion"
+        },
+        "$current_url": {
+          "type": "string",
+          "description": "The full URL of the webpage on which the event is triggered.",
+          "consoleDefault": "event.page_url"
+        },
+        "$referrer": {
+          "type": "string",
+          "description": "Referring URL including your own domain.",
+          "consoleDefault": "event.page_referrer"
+        },
+        "$referring_domain": {
+          "type": "string",
+          "description": "Referring domain including your own domain.",
+          "consoleDefault": "event.refr_urlhost"
+        },
+        "$device": {
+          "type": "string",
+          "description": "Name of the device.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceName"
+        },
+        "$device_id": {
+          "type": "string",
+          "description": "A unique device identifier. Used in Mixpanel's Simplified ID Merge API.",
+          "consoleDefault": "event.domain_userid ?? event.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0]?.userId"
+        },
+        "$screen_height": {
+          "type": "integer",
+          "description": "The height of the device screen in pixels.",
+          "consoleDefault": "event.dvce_screenheight"
+        },
+        "$screen_width": {
+          "type": "integer",
+          "description": "The width of the device screen in pixels.",
+          "consoleDefault": "event.dvce_screenwidth"
+        },
+        "$os": {
+          "type": "string",
+          "description": "Operating system of the device.",
+          "consoleDefault": "event.os_name"
+        },
+        "$os_version": {
+          "type": "string",
+          "description": "Operating system version.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.operatingSystemVersion"
+        },
+        "$manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the device.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceBrand"
+        },
+        "$model": {
+          "type": "string",
+          "description": "Model of the device.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceName"
+        },
+        "$app_version_string": {
+          "type": "string",
+          "description": "The app version.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_mobile_application_1?.[0]?.version"
+        },
+        "$app_build_number": {
+          "type": "string",
+          "description": "Build number for the mobile app.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_mobile_application_1?.[0]?.build"
+        },
+        "$carrier": {
+          "type": "string",
+          "description": "Wireless carrier of the device owner.",
+          "consoleDefault": "event.contexts_nl_basjes_yauaa_context_1?.[0]?.carrier"
+        },
+        "$radio": {
+          "type": "string",
+          "description": "The current cellular network communication standard (3G, 4G, LTE, etc).",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.networkTechnology"
+        },
+        "$wifi": {
+          "type": "boolean",
+          "description": "Set to true if the user's device is connected to wifi.",
+          "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.networkType === 'wifi'"
+        },
+        "$user_id": {
+          "type": "string",
+          "description": "The identified ID of the user. Used in Mixpanel's Simplified ID Merge API.",
+          "consoleDefault": "event.user_id"
+        },
+        "$lib_version": {
+          "type": "string",
+          "description": "Tracker library version.",
+          "consoleDefault": "event.v_tracker"
+        },
+        "utm_source": {
+          "type": "string",
+          "description": "UTM source parameter from the URL.",
+          "consoleDefault": "event.mkt_source"
+        },
+        "utm_medium": {
+          "type": "string",
+          "description": "UTM medium parameter from the URL.",
+          "consoleDefault": "event.mkt_medium"
+        },
+        "utm_campaign": {
+          "type": "string",
+          "description": "UTM campaign parameter from the URL.",
+          "consoleDefault": "event.mkt_campaign"
+        },
+        "utm_content": {
+          "type": "string",
+          "description": "UTM content parameter from the URL.",
+          "consoleDefault": "event.mkt_content"
+        },
+        "utm_term": {
+          "type": "string",
+          "description": "UTM term parameter from the URL.",
+          "consoleDefault": "event.mkt_term"
+        },
+        "mp_lib": {
+          "type": "string",
+          "description": "Tracker library that sent the event.",
+          "consoleDefault": "'Snowplow: ' + event.v_tracker"
+        },
+        "mp_sent_by_lib_version": {
+          "type": "string",
+          "description": "Mixpanel library version used to send data (not necessarily the same as the version which enqueued the data)."
+        },
+        "$screen_dpi": {
+          "type": "integer",
+          "description": "Pixel density of the device screen."
+        },
+        "$initial_referrer": {
+          "type": "string",
+          "description": "Referring URL when the user first arrived on your site. Defaults to “$direct” if the user is not referred."
+        },
+        "$initial_referring_domain": {
+          "type": "string",
+          "description": "Referring domain at first arrival. Defaults to “$direct” if the user is not referred."
+        },
+        "$search_engine": {
+          "type": "string",
+          "description": "The search engine that the customer used when they arrived at your domain."
+        },
+        "mp_keyword": {
+          "type": "string",
+          "description": "Search keywords detected on the referrer from a search engine to your domain. This property is only collected when search keywords are included in a URL."
+        },
+        "$watch_model": {
+          "type": "string",
+          "description": "The model of the iOS watch."
+        },
+        "$bluetooth_enabled": {
+          "type": "boolean",
+          "description": "Set to true if Bluetooth is enabled, false if not."
+        },
+        "$bluetooth_version": {
+          "type": "string",
+          "description": "Set to “none”, “ble”, or “classic”."
+        },
+        "$has_nfc": {
+          "type": "boolean",
+          "description": "The device supports Near Field Communication(NFC). Set to true if the device hardware supports NFC, false if not."
+        },
+        "$has_telephone": {
+          "type": "boolean",
+          "description": "Set to true if this device has telephone functionality, false if not."
+        }
+      }
+    }
+  }
+}

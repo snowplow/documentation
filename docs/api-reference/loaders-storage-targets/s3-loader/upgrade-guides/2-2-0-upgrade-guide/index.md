@@ -1,7 +1,10 @@
 ---
-title: "2.2.x upgrade guide"
+title: "S3 Loader 2.2.x upgrade guide"
+sidebar_label: "2.2.x upgrade guide"
 date: "2022-05-19"
 sidebar_position: 10
+description: "Upgrade S3 Loader to 2.2.x with separate Docker images for GZip, LZO, and distroless variants for security improvements."
+keywords: ["s3 loader 2.2 upgrade", "docker images", "lzo variant", "distroless image", "s3 loader variants"]
 ---
 
 ```mdx-code-block

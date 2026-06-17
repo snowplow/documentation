@@ -2,21 +2,45 @@
 title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
-description: "Details on where and how Snowplow is deployed"
+description: "Compare Snowplow deployment options including CDI Private Managed Cloud, CDI Cloud, Community Edition, and Self-Hosted to choose the right platform for your organization."
+keywords: ["Snowplow CDI", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options", "behavioral data platform", "data infrastructure", "getting started"]
 ---
 
-You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Snowplow BDP Cloud (paid, hosted by Snowplow) and Snowplow Community Edition (free, hosted in your cloud). See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+Snowplow is the customer context layer that provides the data foundation for your organization. It transforms raw behavioral data into real-time customer context for AI agents and advanced analytics, using [Snowplow Signals](/docs/signals/index.md) and the Snowplow Customer Data Infrastructure (CDI) platform.
 
-Each offering has its own setup guide:
-* [Snowplow BDP Enterprise](/docs/get-started/snowplow-bdp/index.md)
-* [Snowplow BDP Cloud](/docs/get-started/snowplow-bdp/index.md)
-* [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md)
+* Start by [defining the data](/docs/fundamentals/tracking-plans/index.md) you want to collect
+* Choose from over 20 [tracker SDKs](/docs/sources/index.md) to collect data from web, mobile, server-side, and other sources, using custom tracking or [over 100 built-in events and entities](/docs/events/ootb-data/index.md)
+* Enrich your events before loading with over 15 [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)
+* Monitor your [data quality](/docs/fundamentals/failed-events/index.md) - your pipeline will only load [validated data](/docs/fundamentals/schemas/index.md) into your [warehouse or lake](/docs/destinations/warehouses-lakes/index.md)
+* Send enriched events to [third-party platforms](/docs/destinations/forwarding-events/index.md) in real-time
+* Model your data with our [dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md)
+* Enable real time personalization with [Signals](/docs/signals/introduction/index.md)
 
-## Snowplow BDP Enterprise
+<img src="/img/snowplow-cdi-signals_vertical.svg" alt="diagram of snowplow architecture" style={{maxHeight: '800px', width: 'auto'}} />
 
-Snowplow BDP Enterprise is deployed using a “private SaaS” or “Bring Your Own Cloud (BYOC)” deployment model. This means the data pipeline is hosted and run in your own cloud environment, using your data warehouse or lake. (These comprise the **data plane**.) The ongoing pipeline maintenance, such as upgrades and security patches, are still managed by Snowplow.
+Choose the Snowplow platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
-The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is hosted by Snowplow.
+We offer two fully featured Customer Data Infrastructure (CDI) platforms:
+* **Snowplow CDI Private Managed Cloud**: hosted in your own cloud, managed by Snowplow
+* **Snowplow CDI Cloud**: hosted and managed by Snowplow
+
+For self-hosted deployments, we have:
+* **Snowplow Community Edition**: not for production use, hosted and managed by you
+* **Snowplow Self-Hosted**: for production use, for existing Snowplow users
+
+:::tip[Try Snowplow for free]
+To compare platforms before committing, start a [free 14-day trial](/docs/get-started/free-trial/index.md) of CDI Cloud.
+:::
+
+## Customer Data Infrastructure
+
+Snowplow CDI is our full infrastructure offering. Choose whether you'd like the **data plane** to be entirely hosted in your cloud account, or whether you'd prefer Snowplow to host the pipeline infrastructure for you.
+
+The **control plane**, which includes a UI and an API for [defining your data](/docs/event-studio/tracking-plans/index.md) and managing your infrastructure, is always hosted by Snowplow.
+
+### CDI Private Managed Cloud
+
+Private Managed Cloud is a version of [Snowplow](https://snowplow.io) hosted in your own cloud account, using your data warehouse or lake. Ongoing pipeline maintenance, such as upgrades and security patches, are managed by Snowplow.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -27,22 +51,30 @@ The **control plane**, which includes a UI and an API for [defining your data](/
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## Snowplow BDP Cloud
+### CDI Cloud
 
-BDP Cloud differs from BDP Enterprise above in that the data pipeline is deployed in Snowplow’s cloud account and entirely managed by Snowplow.
+Cloud is a hosted version of Snowplow designed to get your organization up and running and delivering value from behavioral data as quickly as possible. With Cloud, you don't need to set up any cloud infrastructure yourself.
 
-|                                     | Hosted by Snowplow | Hosted by you |
-| :---------------------------------- | :----------------: | :-----------: |
-| **Control plane**                   |                    |               |
-| Management Console                  |         ✅          |               |
-| API endpoints                       |         ✅          |               |
-| **Data plane**                      |                    |               |
-| Pipeline infrastructure             |         ✅          |               |
-| Data destination (warehouse / lake) |                    |       ✅       |
+All data processed and collected with Snowplow Cloud is undertaken within Snowplow's own cloud account.
 
-## Snowplow Community Edition
+|                                             | Hosted by Snowplow | Hosted by you |
+| :------------------------------------------ | :----------------: | :-----------: |
+| **Control plane**                           |                    |               |
+| Management Console                          |         ✅          |               |
+| API endpoints                               |         ✅          |               |
+| **Data plane**                              |                    |               |
+| Pipeline infrastructure (AWS / Azure / GCP) |         ✅          |               |
+| Data destination (warehouse / lake)         |                    |       ✅       |
 
-With Snowplow Community Edition, everything is deployed and hosted by you. Note that the **control plane** functionality from above is not available in Community Edition.
+## Self-Hosted
+
+With Self-Hosted, you deploy and host everything. Many features, including the **control plane**, are not available in Self-Hosted.
+
+### Community Edition
+
+Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases. It's a starter template: use it to evaluate Snowplow for testing purposes.
+
+Community Edition infrastructure is provided under the [SLULA license](/docs/licensing/index.md).
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -53,6 +85,15 @@ With Snowplow Community Edition, everything is deployed and hosted by you. Note 
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## Snowplow Micro
+### Production Self-Hosted license
 
-While not a full substitute for a real Snowplow pipeline, [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) could be a quick way to get a feel for how Snowplow works for more technical users. Note that Micro does not store data in any warehouse or database, but you will be able to look at the available fields.
+If you have an existing Snowplow implementation, either Community Edition or a legacy deployment, you're eligible for Snowplow Self-Hosted. It's a production-use license.
+
+|                                             | Hosted by Snowplow | Hosted by you |
+| :------------------------------------------ | :----------------: | :-----------: |
+| **Control plane**                           |                    |               |
+| Management Console                          |        N/A         |      N/A      |
+| API endpoints                               |        N/A         |      N/A      |
+| **Data plane**                              |                    |               |
+| Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
+| Data destination (warehouse / lake)         |                    |       ✅       |

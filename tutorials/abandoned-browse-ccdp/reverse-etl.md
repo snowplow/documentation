@@ -1,6 +1,9 @@
 ---
 position: 4
-title: Reverse ETL Integration
+title: "Integrate with with Census using reverse ETL"
+sidebar_label: "Integrate with Census"
+description: "Set up Census reverse ETL to sync abandoned browse audiences from Snowflake to Braze. Configure data sources, create audience segments, and automate marketing campaign triggers."
+keywords: ["census reverse etl", "snowflake braze integration", "audience segmentation", "marketing automation sync"]
 ---
 
 Next we will set up a Census sync to build an audience using our query from Snowflake, filter the audience to focus on users who have shown interest in products but haven't purchased, and sync the data to Braze.
@@ -20,51 +23,51 @@ Use the query from the [data modeling](./data-modeling.md#identifying-most-viewe
 
 ```sql
 WITH productsViewedToday AS (
-    SELECT 
-        domain_userid, 
-        page_urlpath AS product_id, 
+    SELECT
+        domain_userid,
+        page_urlpath AS product_id,
         MAX(user_id) AS email,
         MAX(product.value:name::STRING) AS product,
         5 * SUM(CASE WHEN event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s,
         MAX(
-            CASE 
-                WHEN ecom_action.value:type = 'add_to_cart' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN ecom_action.value:type = 'add_to_cart'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS add_to_cart,
         MAX(
-            CASE 
-                WHEN page_urlquery = 'abandonedEmail=true' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN page_urlquery = 'abandonedEmail=true'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS winback_successful,
         MAX(page_url) AS product_url
-    FROM 
+    FROM
         SNOWPLOW_SALES_AWS_PROD1_DB.ATOMIC.EVENTS,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_ecommerce_product_1) product,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_web_page_1) page,
         LATERAL FLATTEN(input => unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1) ecom_action
-    WHERE 
+    WHERE
         DATE(load_tstamp) = CURRENT_DATE()
         AND page_urlpath LIKE '/product%'
-    GROUP BY 
+    GROUP BY
         1, 2
-    ORDER BY 
+    ORDER BY
         time_engaged_in_s DESC
 )
 
-SELECT 
-    a.* 
-FROM 
+SELECT
+    a.*
+FROM
     productsViewedToday a
-LEFT JOIN 
+LEFT JOIN
     productsViewedToday b
-    ON a.email = b.email 
+    ON a.email = b.email
     AND a.time_engaged_in_s < b.time_engaged_in_s
-WHERE 
-    b.time_engaged_in_s IS NULL 
+WHERE
+    b.time_engaged_in_s IS NULL
     AND a.email IS NOT NULL;
 ```
 
@@ -81,7 +84,7 @@ WHERE
     - enter the SQL query above
     - click **Preview** and ensure it returns data
 
-![Census Dataset](images/retl-datasets.png)
+![Census Datasets page showing the "Most viewed product for each user today" dataset sourced from Snowflake, with the SQL query visible that aggregates product view data per user](images/retl-datasets.png)
 
 4. Configure the audience segment:
     - select **Segments** from the menu
@@ -90,7 +93,7 @@ WHERE
     - add filters to the segment based on the image below
     - click preview to confirm that the correct data is being returned
 
-![Census Sync](images/retl-census.png)
+![Census segment "Abandoned browse to Braze" with filters requiring a non-blank email, more than 5 seconds of engagement, and no add-to-cart action, showing 1 matching result](images/retl-census.png)
 
 5. Configure the sync settings to send data from our audience to Braze:
     - select **Syncs** from the menu
@@ -100,7 +103,7 @@ WHERE
     - configure the mapping as shown in the image below
     - click **Run Now**
 
-![Census Mapping](images/retl-census-mapping.png)
+![Census Data Configuration showing column mappings for the Braze sync: EMAIL as the identifier mapped to External User ID, with ADD_TO_CART, CAMPAIGN, CHANNEL, FIRST_NAME, PRODUCT, PRODUCT_URL, and TIME_ENGAGED_IN_S all mapped to matching Braze attributes](images/retl-census-mapping.png)
 
 ## Monitoring and optimization
 

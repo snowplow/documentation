@@ -4,7 +4,7 @@ The `_sp` value includes the domain user ID for the current page and the time at
 This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page.
 The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields for all events fired on the destination page where the URL includes the `_sp` parameter.
 
-You can configure which links get decorated this way using the `crossDomainLinker` field of the [configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+You can configure which links get decorated this way using the `crossDomainLinker` field of the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 The value should be a function taking one argument (the link element) and return `true` if the link element should be decorated and `false` otherwise.
 For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
 
@@ -70,7 +70,7 @@ This should automatically exclude links that don't lead simply to other web page
 });`
 }</CodeBlock>}</>
 
-:::note Opt-in vs opt-out
+:::note[Opt-in vs opt-out]
 
 Some of the above examples will also decorate any links to the same site the user is currently on.
 For most users we recommend explicitly allowing the list of domains you want to decorate, as well as ensuring that you only decorate links that are on a different domain to the current page.
@@ -119,7 +119,7 @@ If further links get added to the page after the tracker has loaded, you can use
 });`
 }</CodeBlock>}</>
 
-:::caution Warning
+:::tip
 
 If you enable link decoration, you should also make sure that at least one event is fired on the page.
 Firing an event causes the tracker to write the `domain_userid` to a cookie.
@@ -127,7 +127,7 @@ If the cookie doesn’t exist when the user leaves the page, the tracker will ge
 
 :::
 
-:::tip Reduce Shared Link Decoration URLs
+:::tip[Reduce Shared Link Decoration URLs]
 
 If a user clicks a cross-site link and the URL is decorated with their `domain_userid`, and then they share that URL, other users will also have the parameters when they visit the shared page.
 
@@ -148,7 +148,7 @@ import ReactMarkdown from 'react-markdown';
 ```
 
 <>{(props.lang === "javascript") && <><ReactMarkdown>{`
-The URL updating code runs in a [Tracker Callback](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.`}</ReactMarkdown>
+The URL updating code runs in a [Tracker Callback](/docs/sources/web-trackers/tracking-events/#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.`}</ReactMarkdown>
 <CodeBlock language="javascript">{
 `snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){

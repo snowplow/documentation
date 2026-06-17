@@ -1,11 +1,12 @@
 ---
-title: "Web to Unified Digital"
+title: "Migrate from Web to Unified Digital"
+sidebar_label: "Web to Unified Digital"
 sidebar_position: 1000
+description: "Migration guide for transitioning from the legacy Snowplow Web dbt package to the Unified Digital package."
+keywords: ["web to unified migration", "package transition", "unified digital upgrade"]
 ---
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 ```
 
 Follow this migration guide to upgrade from the legacy [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) dbt package to the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) package. Unified Digital is the most supported and feature-rich Snowplow dbt package, which you can use to model web and/or mobile event data.

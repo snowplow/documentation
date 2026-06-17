@@ -1,7 +1,10 @@
 ---
 title: "BigQuery Loader (0.3.x)"
+sidebar_label: "BigQuery Loader (0.3.x)"
 date: "2020-03-11"
 sidebar_position: 40
+description: "BigQuery Loader 0.3.x legacy documentation with Dataflow job and Mutator for Pub/Sub to BigQuery loading."
+keywords: ["bigquery loader 0.3", "dataflow loader", "bigquery 0.3", "legacy loader", "pubsub bigquery"]
 ---
 
 Please be aware that we have identified a security vulnerability in BigQuery Repeater in this version, which we've fixed in version [0.4.2](/docs/api-reference/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-0-4-0/index.md).
@@ -19,7 +22,7 @@ The available tools are:
 3. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by _mutation lag_) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
 4. **Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. In most cases, we recommend using Repeater.
 
-![](../images/bigquery-microservices-architecture.png)
+![Architecture diagram showing enriched events flowing into BigQuery Loader, which writes successfully transformed data to BigQuery and bad rows to a Bad rows Pub/Sub topic. BigQuery outputs failed inserts to a Failed inserts topic. BigQuery Loader also writes type information to a Types topic, which the Mutator reads to perform table alterations in BigQuery.](../images/bigquery-microservices-architecture.png)
 
 In addition it also includes a fourth microservice, the "forwarder". This has been replaced by the "repeater" - we recommend users setup the repeater rather than the forwarder.
 

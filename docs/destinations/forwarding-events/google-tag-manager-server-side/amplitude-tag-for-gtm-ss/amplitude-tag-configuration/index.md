@@ -1,12 +1,15 @@
 ---
-title: "Amplitude Tag Configuration"
+title: "Configure Amplitude Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure event mapping, user properties, entity rules, and session tracking for the Amplitude Tag in GTM Server Side."
+keywords: ["Amplitude Tag configuration", "event mapping", "user properties", "session tracking"]
 ---
 
-:::tip Populating the Amplitude Session ID
+:::tip[Populating the Amplitude Session ID]
 
-The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#session-context) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
+The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/sources/web-trackers/tracking-events/session/index.md) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
 
 :::
 
@@ -14,7 +17,7 @@ The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/11500
 
 Set this to the API of your Amplitude HTTP API Data Source.
 
-![](images/01-gtm-ss-amplitude.png)
+![Amplitude API Key section with an empty text input field and a Use Amplitude's EU servers checkbox (unchecked).](images/01-gtm-ss-amplitude.png)
 
 ### Use Amplitude's EU servers
 
@@ -30,7 +33,7 @@ Indicates if a Snowplow Self Describing event should be in the `event_propertie
 
 This section describes how the Amplitude tag will use the context Entities attached to a Snowplow Event.
 
-![](images/02-gtm-ss-amplitude.png)
+![Snowplow Event Context Rules section with Extract entity from Array if single element checked, Include Snowplow Entities in event_properties set to All, an empty Snowplow Entities to Add/Edit mapping table with Entity Name, Amplitude Mapped Name, Include in event_properties or user_properties, and Apply to all versions columns, and an empty Snowplow Entities to Exclude table.](images/02-gtm-ss-amplitude.png)
 
 #### Extract entity from Array if single element
 
@@ -101,7 +104,7 @@ If remapping or moving some entities to User Properties with the above customiza
 
 If you wish to map other properties from a Client event into an Amplitude event they can be specified in this section.
 
-![](images/03-gtm-ss-amplitude.png)
+![Additional Event Mapping Options section showing Event Property Rules (Include common event properties checked, empty Additional Event Property Mapping Rules table) and User Property Rules (Include common user properties checked, Map Snowplow mkt fields to user properties unchecked, empty Additional User Property Mapping Rules table).](images/03-gtm-ss-amplitude.png)
 
 ### Event Property Rules
 
@@ -143,7 +146,7 @@ Specify the Property Key from the GTM Event, and the key you would like to map i
 
 In this section you can additionally set specified event or user properties to custom values (e.g. through a GTM Server-side variable).
 
-![additional_properties](images/05-gtm-ss-amplitude.png)
+![Additional Properties section with three empty tables for setting custom values: Event Properties (Amplitude Property Name and Value columns), User Properties, and Groups Properties, each with an Add Row button.](images/05-gtm-ss-amplitude.png)
 
 ### Event Properties
 
@@ -167,7 +170,7 @@ Using the **Additional Groups Properties** table allows you to set additional **
 
 In this section you can find advanced configuration parameters.
 
-![advanced event settings](images/04-gtm-ss-amplitude.png)
+![Advanced Event Settings section showing Forward Users IP address checked, Fallback platform identifier set to Web, Amplitude event time set to Do not set, Inherit Amplitude device_id from common event client_id checked, and Inherit Amplitude user_id from common event user_id checked.](images/04-gtm-ss-amplitude.png)
 
 ### Forward User IP address
 
@@ -185,7 +188,7 @@ This option allows you to decide whether the event time of the Amplitude event w
 - `Set to current timestamp`: sets the Amplitude event time to the current timestamp.
 - `Set from event property`: sets the Amplitude event time from the client event property. For example, in the image below the Amplitude's event time will be set from the device created timestamp (`dvce_created_tstamp`) of the Snowplow event (`x-sp-` prefix in the client event):
 
-![](images/07-gtm-ss-amplitude.png)
+![Amplitude time setting section with Amplitude event time set to Set from event property and Event property name field containing x-sp-dvce_created_tstamp.](images/07-gtm-ss-amplitude.png)
 
 ### Device Identifier
 
@@ -228,7 +231,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

@@ -1,7 +1,10 @@
 ---
-title: "Iterable Tag Configuration"
+title: "Configure Iterable Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure user identifiers, identity events, entity mapping, and event properties for the Iterable Tag in GTM Server Side."
+keywords: ["Iterable Tag configuration", "user identification", "identity events", "event data fields"]
 ---
 
 ## Iterable API Key (Required)
@@ -54,7 +57,7 @@ The columns of this table are:
 
 As an example of how Search Priority works, according to the following setup, in order to set the value for Iterable's `userId`, the Tag will first look for `user_id` in common event. If that is not found, then it will use the value of `user_data.email_address`:
 
-![userId identifier example](images/user_id_example.png)
+![The userId Specify userId table showing search priority 20 mapped to "user_id" and search priority 10 mapped to "user_data.email_address" as a fallback](images/user_id_example.png)
 
 ### Identity Events
 
@@ -94,7 +97,7 @@ Indicates if a Snowplow Self Describing event should be in the `dataFields` ob
 
 This section describes how the Iterable tag will use the context Entities attached to a Snowplow Event.
 
-![snowplow event context rules](images/context_rules.png)
+![The Snowplow Event Context Rules section with "Extract entity from Array if single element" checked, entities set to include "All", and empty tables for entity mapping and exclusion](images/context_rules.png)
 
 #### Extract entity from Array if single element
 
@@ -228,7 +231,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

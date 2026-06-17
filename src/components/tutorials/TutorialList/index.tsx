@@ -1,108 +1,18 @@
-import React, { FC, useMemo, useState } from 'react'
-
-import Link from '@docusaurus/Link'
+import React, { FC, useState, useEffect } from 'react'
 import Head from '@docusaurus/Head'
-import { useHistory } from '@docusaurus/router'
-import { ChevronRight } from '@mui/icons-material'
+import { Meta, Tutorial } from '../models'
+import { getSteps } from '../utils'
+import TutorialGrid from '../TutorialGrid'
+import TutorialSearch from '../TutorialSearch'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@site/src/components/ui/accordion'
 import {
-  Box,
-  Grid,
-  InputAdornment,
-  MenuItem,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material'
-
-import { getMetaData, getSteps } from '../utils'
-import {
-  SearchBarFormControl,
-  SearchBarInput,
-  SnowplowPurpleSearchIcon,
-  TopicFilterFormControl,
-  TopicFilterSelect,
-  TutorialCardTitle,
-  Grid as TutorialGrid,
-} from './styledComponents'
-import { Meta, Topic as TopicType, Tutorial } from '../models'
-import { Card, Description, StartButton, Topic } from './styledComponents'
-
-function getFirstStepPath(meta: Meta): string | null {
-  const steps = getSteps(meta.id)
-  if (steps.length === 0) {
-    return null
-  }
-  return steps[0].path
-}
-
-const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
-  const history = useHistory()
-  const firstStep = getFirstStepPath(tutorial.meta)
-
-  return (
-    <Card sx={{ height: '100%' }}>
-      <Grid
-        container
-        direction="column"
-        sx={{ height: '100%' }}
-        justifyContent="space-between"
-      >
-        <Grid item container direction="column">
-          <Grid item>
-            {firstStep ? (
-              <Link
-                style={{ color: 'inherit', cursor: 'pointer' }}
-                to={firstStep}
-              >
-                <TutorialCardTitle>{tutorial.meta.title}</TutorialCardTitle>
-              </Link>
-            ) : (
-              <TutorialCardTitle sx={{ color: 'red' }}>
-                {tutorial.meta.title} (No steps found)
-              </TutorialCardTitle>
-            )}
-          </Grid>
-          <Grid item>
-            <Topic label={tutorial.meta.label} sx={{ mb: 2 }}></Topic>
-          </Grid>
-          <Grid item>
-            <Description>{tutorial.meta.description}</Description>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <StartButton
-            disabled={!firstStep}
-            onClick={() => {
-              const [first] = getSteps(tutorial.meta.id)
-              history.push(first.path)
-            }}
-            endIcon={<ChevronRight />}
-          >
-            Start Learning
-          </StartButton>
-        </Grid>
-      </Grid>
-    </Card>
-  )
-}
-
-function searchFilter(term: string, tutorial?: Tutorial): boolean {
-  return tutorial
-    ? tutorial?.meta.title.toLowerCase().includes(term.toLowerCase()) ||
-        tutorial?.meta.description.toLowerCase().includes(term.toLowerCase())
-    : false
-}
-
-function topicFilter(topic: TopicDropdown, tutorial?: Tutorial): boolean {
-  if (!tutorial) return false
-  if (topic === 'All topics') return true
-  return tutorial ? tutorial?.meta.label === topic : false
-}
-
-type TopicDropdown = keyof typeof TopicType.Values | 'All topics'
-const TopicDropdownValues: TopicDropdown[] = [
-  'All topics',
-  ...Object.values(TopicType.Values),
-]
+  useTutorialFilters,
+  UseCaseFilter,
+  TopicFilter,
+  TechnologyFilter,
+  SnowplowTechFilter,
+} from './filters'
+import '../tutorials-page.css'
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {
@@ -130,140 +40,158 @@ function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   })
 }
 
-const TutorialList: FC = () => {
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
-  const [search, setSearch] = useState('')
-  const [topic, setTopic] = useState<TopicDropdown>('All topics')
-  const parsedTutorials = useMemo<Tutorial[]>(
-    () => getParsedTutorials(getMetaData()),
-    []
-  )
-  const tutorials = useMemo<Tutorial[]>(
-    () => filterTutorials(search, topic, parsedTutorials),
-    [search, topic, parsedTutorials]
-  )
+
+// Shared filter and tutorial content hook
+const useTutorialContent = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const {
+    setSearch,
+    selectedTopics,
+    setSelectedTopics,
+    selectedUseCases,
+    setSelectedUseCases,
+    allAvailableUseCases,
+    selectedTechnologies,
+    setSelectedTechnologies,
+    allAvailableTechnologies,
+    selectedSnowplowTech,
+    setSelectedSnowplowTech,
+    allAvailableSnowplowTech,
+    filteredAvailableOptions,
+    filteredTutorials,
+  } = useTutorialFilters(getParsedTutorials)
+
+  const defaultAccordionValue = isMobile ? [] : ["use-cases", "topics", "technology"]
+
+  return {
+    filters: (
+      <div className="space-y-4">
+        <TutorialSearch onSearch={setSearch} />
+
+        <Accordion type="multiple" variant="outline" className="w-full" defaultValue={defaultAccordionValue}>
+          <AccordionItem value="use-cases">
+            <AccordionTrigger>
+              Filter by use case
+            </AccordionTrigger>
+            <AccordionContent>
+              <UseCaseFilter
+                selectedUseCases={selectedUseCases}
+                setSelectedUseCases={setSelectedUseCases}
+                allAvailableUseCases={allAvailableUseCases}
+                availableUseCases={filteredAvailableOptions.availableUseCases}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="topics">
+            <AccordionTrigger>
+              Filter by topic
+            </AccordionTrigger>
+            <AccordionContent>
+              <TopicFilter
+                selectedTopics={selectedTopics}
+                setSelectedTopics={setSelectedTopics}
+                availableTopics={filteredAvailableOptions.availableTopics}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="technology">
+            <AccordionTrigger>
+              Filter by technology
+            </AccordionTrigger>
+            <AccordionContent>
+              <TechnologyFilter
+                selectedTechnologies={selectedTechnologies}
+                setSelectedTechnologies={setSelectedTechnologies}
+                allAvailableTechnologies={allAvailableTechnologies}
+                availableTechnologies={filteredAvailableOptions.availableTechnologies}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="snowplow-tech">
+            <AccordionTrigger>
+              Filter by Snowplow technology
+            </AccordionTrigger>
+            <AccordionContent>
+              <SnowplowTechFilter
+                selectedSnowplowTech={selectedSnowplowTech}
+                setSelectedSnowplowTech={setSelectedSnowplowTech}
+                allAvailableSnowplowTech={allAvailableSnowplowTech}
+                availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    ),
+    tutorials: filteredTutorials,
+  }
+}
+
+const TutorialList: FC = () => {
+  const content = useTutorialContent()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <>
       <Head>
         <title>Tutorials | Snowplow Documentation</title>
-      </Head>{' '}
-      {isMobile ? (
-        <MobileTutorialList
-          setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
-          tutorials={tutorials}
-        />
-      ) : (
-        <DesktopTutorialList
-          setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
-          tutorials={tutorials}
-        />
-      )}
+      </Head>
+
+      <div className="w-full">
+        {/* Mobile filters - Only shown on mobile */}
+        {isMobile && (
+          <div className="max-w-7xl mx-auto px-6 pt-6">
+            <div className="p-4 mb-6">
+              {content.filters}
+            </div>
+          </div>
+        )}
+
+        <div className="flex">
+          {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
+          {!isMobile && (
+            <div className="w-[320px] flex-shrink-0">
+              <div className="p-6 sticky top-12">
+                {content.filters}
+              </div>
+            </div>
+          )}
+
+          {/* Main content - Center aligned with page */}
+          <div className="flex-1 flex justify-center px-6 pb-6">
+            <div className="w-full max-w-6xl">
+              {/* Tutorial Grid */}
+              <TutorialGrid tutorials={content.tutorials} />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
-
-function filterTutorials(
-  search: string,
-  topic: TopicDropdown,
-  tutorials: Tutorial[]
-): Tutorial[] {
-  return tutorials
-    .filter((tutorial) => searchFilter(search, tutorial))
-    .filter((tutorial) => topicFilter(topic, tutorial))
-}
-
-const MobileTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-  tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
-  return (
-    <Box sx={{ mt: 1 }}>
-      <Grid container direction="column" rowSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
-
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  )
-}
-
-const DesktopTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-  tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
-  return (
-    <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
-      <Grid container columnSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
-      </Grid>
-
-      <TutorialGrid mb={2}>
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
-      </TutorialGrid>
-    </Box>
-  )
-}
-
-const SearchBar: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-}> = ({ setSearch }) => {
-  return (
-    <Grid item>
-      <SearchBarFormControl variant="outlined">
-        <SearchBarInput
-          startAdornment={
-            <InputAdornment position="start">
-              <SnowplowPurpleSearchIcon />
-            </InputAdornment>
-          }
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name of the tutorial or guide..."
-        />
-      </SearchBarFormControl>
-    </Grid>
-  )
-}
-
-const TopicFilter: FC<{
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-}> = ({ topic, setTopic }) => {
-  return (
-    <Grid item>
-      <TopicFilterFormControl variant="outlined">
-        <TopicFilterSelect
-          value={topic}
-          onChange={(e) => setTopic(e.target.value as TopicDropdown)}
-        >
-          {TopicDropdownValues.map((topic) => (
-            <MenuItem key={topic} value={topic}>
-              {topic}
-            </MenuItem>
-          ))}
-        </TopicFilterSelect>
-      </TopicFilterFormControl>
-    </Grid>
   )
 }
 

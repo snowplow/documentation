@@ -1,21 +1,128 @@
 ---
-title: "IAB enrichment"
+title: "IAB bot detection enrichment"
 sidebar_position: 0
-sidebar_label: IAB
+sidebar_label: IAB bot detection
+description: "Identify bot and spider traffic using the IAB/ABC International Spiders and Bots List based on IP and user agent."
+keywords: ["IAB enrichment", "bot detection", "spider detection"]
 ---
 
-The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Spiders & bots are sometimes considered a necessary evil of the web. We want search engine crawlers to find our site, but we also don’t want a lot of non-human traffic clouding our reporting.
+The IAB Spiders and Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
 
 The Interactive Advertising Bureau (IAB) is an advertising business organization that develops industry standards, conducts research, and provides legal support for the online advertising industry.
 
 Their internationally recognized list of spiders and bots is regularly maintained to try and identify the IP addresses of known bots and spiders.
 
+## How the enrichment works
+
+This enrichment performs several checks using the IAB database files and your custom override lists.
+
+Here is the logic it uses. The values in parentheses are for the `reason` field in the IAB [entity](/docs/fundamentals/entities/index.md) attached to the event.
+
+```mermaid
+flowchart TD
+  IncList{{User agent in the custom **include** list?}}:::nowrap
+  IncList -->|Yes| NotBot1(["Not bot"])
+  IncList -->|No| ExcList{{User agent in the custom **exclude** list?}}:::nowrap
+  ExcList -->|Yes| Bot1("**Bot**<br/>(FAILED_UA_EXCLUDE)")
+  ExcList -->|No| IpFile{{IP address in the IAB IP file?}}:::nowrap
+  IpFile -->|Yes| Bot2("**Bot**<br/>(FAILED_IP_EXCLUDE)")
+  IpFile -->|No| NullUA{{User agent is null?}}:::nowrap
+  NullUA -->|Yes| NotBot2(["Not bot"])
+  NullUA -->|No| IncFile{{User agent in the IAB **include** file?}}:::nowrap
+  IncFile -->|Yes| ExcFile{{User agent in the IAB **exclude** file?}}:::nowrap
+  IncFile -->|No| Bot3("**Bot**<br/>(FAILED_UA_INCLUDE)")
+  ExcFile -->|Yes| Bot4("**Bot**<br/>(FAILED_UA_EXCLUDE)")
+  ExcFile -->|No| NotBot3(["Not bot"])
+  classDef nowrap white-space:nowrap
+```
+
+A user agent string will match one of the lists or files if it contains a string from that list or file. The matching is case-insensitive.
+
+For example, the user agent string `Chrome Chrome MyBot Chrome` will match an entry named `mybot`.
+
+
 ## Configuration
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-0)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/iab_spiders_and_robots_enrichment.json)
+The enrichment takes these parameters:
+
+| Parameter              | Required | Description                                                                                                                       |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `ipFile`               | ✅        | Path to IP address exclude file. Already provided for CDI customers.                                                             |
+| `excludeUseragentFile` | ✅        | Path to user agent exclude file. Already provided for CDI customers.                                                             |
+| `includeUseragentFile` | ✅        | Path to user agent include file. Already provided for CDI customers.                                                             |
+| `includeUseragents`    | ❌        | Additional user agent patterns to classify as browsers, extending `includeUseragentFile`. Case-insensitive substring match.       |
+| `excludeUseragents`    | ❌        | Additional user agent patterns to classify as spiders/robots, extending `excludeUseragentFile`. Case-insensitive substring match. |
+
+<Tabs groupId="deployment" queryString>
+  <TabItem value="console" label="Console" default>
+
+Configure the parameters in the Console enrichment editor. Keep the Console defaults for the `uri` fields. For example:
+
+```json
+{
+  "ipFile": {
+    "database": "ip_exclude_current_cidr.txt",
+    "uri": "<use default value from Console>"
+  },
+  "excludeUseragentFile": {
+    "database": "exclude_current.txt",
+    "uri": "<use default value from Console>"
+  },
+  "includeUseragentFile": {
+    "database": "include_current.txt",
+    "uri": "<use default value from Console>"
+  },
+  "excludeUseragents": [
+    "BotNotCaughtByIAB"
+  ],
+  "includeUseragents": [
+    "MyServerSideTrackerThatIsNotABot"
+  ]
+}
+```
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Self-Hosted">
+
+For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-1",
+  "data": {
+    "name": "iab_spiders_and_robots_enrichment",
+    "vendor": "com.snowplowanalytics.snowplow.enrichments",
+    "enabled": false,
+    "parameters": {
+      "ipFile": {
+        "database": "ip_exclude_current_cidr.txt",
+        "uri": "<your file location>"
+      },
+      "excludeUseragentFile": {
+        "database": "exclude_current.txt",
+        "uri": "<your file location>"
+      },
+      "includeUseragentFile": {
+        "database": "include_current.txt",
+        "uri": "<your file location>"
+      },
+      "excludeUseragents": [
+        "BotNotCaughtByIAB"
+      ],
+      "includeUseragents": [
+        "MyServerSideTrackerThatIsNotABot"
+      ]
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -23,49 +130,95 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-There are three fields that can be added to the `parameters` section of the enrichment configuration JSON:
+### IAB files
 
-- `ipFile`
-- `excludeUseragentFile`
-- `includeUseragentFile`
+:::tip[Snowplow CDI]
+If you're using Snowplow CDI, you don't need to configure these. Use the default values provided in Console.
+:::
 
-They correspond to one of the IAB/ABC database files, and need to have two inner fields:
+There are three configuration fields that correspond to the IAB/ABC database files:
 
-- The `database` field containing the name of the database file.
-- The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs` and `s3` schemes.
+| Field name             | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `ipFile`               | Denylist of IP addresses considered to be robots or spiders       |
+| `excludeUseragentFile` | Denylist of user agent strings considered to be robots or spiders |
+| `includeUseragentFile` | Allowlist of user agent strings considered to be browsers         |
 
-The table below describes the three types of database fields:
+All three are mandatory and must have two inner fields:
 
-| **Field name**         | **Database description**                                          | **Database filename**           |
-|------------------------|-------------------------------------------------------------------|---------------------------------|
-| `ipFile`               | Blacklist of IP addresses considered to be robots of spiders      | `"ip_exclude_current_cidr.txt"` |
-| `excludeUseragentFile` | Blacklist of useragent strings considered to be robots or spiders | `"exclude_current.txt"`         |
-| `includeUseragentFile` | Whitelist of useragent strings considered to be browsers          | `"include_current.txt"`         |
+- The `database` field containing the name of the database file.
+- The `uri` field containing the URI of the bucket in which the database file is found. This field supports `http`, `https`, `gs`, and `s3` schemes.
 
-All three of these fields **must** be added to the enrichment JSON, as the IAB lookup process uses all three databases in order to detect robots and spiders. Note that the database files are commercial and proprietary and should not be stored publicly – for instance, on unprotected HTTPS or in a public S3 bucket.
+The database filenames must be as follows:
 
-## Input
+| Field name                      | Filename                        |
+| ------------------------------- | ------------------------------- |
+| `ipFile.database`               | `"ip_exclude_current_cidr.txt"` |
+| `excludeUseragentFile.database` | `"exclude_current.txt"`         |
+| `includeUseragentFile.database` | `"include_current.txt"`         |
 
-This enrichment uses the following fields of a Snowplow event:
+### Custom user agent lists
 
-- `useragent` to determine an event’s user agent, which will be validated against the databases described in `excludeUseragentFile` and `includeUseragentFile`.
-- `user_ipaddress` to determine an event’s IP address, which will be validated against the database described in `ipFile`.
-- `derived_tstamp` to determine an event’s datetime. Some entries in the Spiders & Robots List can be considered “stale”, and will be given a `category` of `INACTIVE_SPIDER_OR_ROBOT` rather than `ACTIVE_SPIDER_OR_ROBOT` based on their age.
+:::note[Availability]
 
-## Output
+This feature is available since version 6.8.0 of Enrich.
 
-This enrichment adds a new context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0).
+:::
+
+In addition to the IAB database files, you can provide custom lists of user agent strings to supplement or override the detection. Two optional fields can be added to the `parameters` section:
+
+| Field name          | Description                                                     |
+| ------------------- | --------------------------------------------------------------- |
+| `excludeUseragents` | A list of user agent strings to be treated as robots or spiders |
+| `includeUseragents` | A list of user agent strings to be treated as browsers          |
+
+Both fields accept a JSON array of strings. They are optional and default to empty lists if omitted.
+
+A user agent matching `excludeUseragents` produces the following output values:
+
+| Field           | Value               |
+| --------------- | ------------------- |
+| `spiderOrRobot` | `true`              |
+| `category`      | `SPIDER_OR_ROBOT`   |
+| `reason`        | `FAILED_UA_EXCLUDE` |
+| `primaryImpact` | `UNKNOWN`           |
+
+A user agent matching `includeUseragents` produces the following output values:
+
+| Field           | Value        |
+| --------------- | ------------ |
+| `spiderOrRobot` | `false`      |
+| `category`      | `BROWSER`    |
+| `reason`        | `PASSED_ALL` |
+| `primaryImpact` | `NONE`       |
 
 Example:
 
 ```json
-{
-    "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",
-    "data": {
-        "spiderOrRobot": false,
-        "category": "BROWSER",
-        "reason": "PASSED_ALL",
-        "primaryImpact": "NONE"
-    }
-}
+"excludeUseragents": ["my-custom-bot/1.0", "internal-crawler"],
+"includeUseragents": ["my-legitimate-app/2.0"]
 ```
+
+This is useful when you need to flag or allowlist specific user agents without modifying the IAB database files themselves.
+
+## Input
+
+This enrichment uses the following [fields](/docs/fundamentals/canonical-event/index.md) of a Snowplow event:
+
+- `useragent` to determine an event's user agent, which will be validated against the databases described in `excludeUseragentFile` and `includeUseragentFile`, as well as the custom lists in `excludeUseragents` and `includeUseragents`
+- `user_ipaddress` to determine an event's IP address, which will be validated against the database described in `ipFile`
+- `derived_tstamp` to determine an event's datetime. Some entries in the Spiders and Robots List can be considered "stale", and will be given a `category` of `INACTIVE_SPIDER_OR_ROBOT` rather than `ACTIVE_SPIDER_OR_ROBOT` based on their age
+
+## Output
+
+This enrichment adds a `spiders_and_robots` entity to the enriched event.
+
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    spiderOrRobot: false,
+    category: "BROWSER",
+    reason: "PASSED_ALL",
+    primaryImpact: "NONE"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an entity generated by the IAB Spiders and Robots enrichment", "self": { "vendor": "com.iab.snowplow", "name": "spiders_and_robots", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "spiderOrRobot": { "description": "true if the IP address or user agent checked against the list is a spider or robot, false otherwise", "type": "boolean" }, "category": { "description": "Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise", "enum": ["SPIDER_OR_ROBOT", "ACTIVE_SPIDER_OR_ROBOT", "INACTIVE_SPIDER_OR_ROBOT", "BROWSER"] }, "reason": { "description": "Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise", "enum": ["FAILED_IP_EXCLUDE", "FAILED_UA_INCLUDE", "FAILED_UA_EXCLUDE", "PASSED_ALL"] }, "primaryImpact": { "description": "Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none", "enum": ["PAGE_IMPRESSIONS", "AD_IMPRESSIONS", "PAGE_AND_AD_IMPRESSIONS", "UNKNOWN", "NONE"] } }, "required": ["spiderOrRobot", "category", "reason", "primaryImpact"], "additionalProperties": false }} />

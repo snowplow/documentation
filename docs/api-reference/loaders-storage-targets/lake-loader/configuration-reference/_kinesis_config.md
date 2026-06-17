@@ -7,7 +7,7 @@
     <td>Optional, default <code>snowplow-lake-loader</code>. Name to use for the dynamodb table, used by the underlying Kinesis Consumer Library for managing leases.</td>
 </tr>
 <tr>
-    <td><code>input.initialPosition</code></td>
+    <td><code>input.initialPosition.type</code></td>
     <td>Optional, default <code>LATEST</code>. Allowed values are <code>LATEST</code>, <code>TRIM_HORIZON</code>, <code>AT_TIMESTAMP</code>. When the loader is deployed for the first time, this controls from where in the kinesis stream it should start consuming events.  On all subsequent deployments of the loader, the loader will resume from the offsets stored in the DynamoDB table.</td>
 </tr>
 <tr>
@@ -43,6 +43,14 @@
     <td>Optional.  Default value <code>1 second</code>.  Maximum backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
 </tr>
 <tr>
+    <td><code>input.maxRetries</code> (since 0.9.0)</td>
+    <td>Optional. Default value 10. Maximum number of retries for AWS SDK operations when reading from Kinesis.</td>
+</tr>
+<tr>
+    <td><code>input.apiCallAttemptTimeout</code> (since 0.10.0)</td>
+    <td>Optional. Default value <code>15 seconds</code>. Maximum amount of time to wait for an individual Kinesis API call to complete.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>
@@ -61,4 +69,12 @@
 <tr>
     <td><code>output.bad.byteLimit</code></td>
     <td>Optional.  Default value 5242880.  The maximum number of bytes we are allowed to send to Kinesis in 1 PutRecords request.</td>
+</tr>
+<tr>
+    <td><code>output.bad.maxRecordSize</code></td>
+    <td>Optional.  Default value 1000000.  Any single event failed event sent to Kinesis should not exceed this size in bytes</td>
+</tr>
+<tr>
+    <td><code>output.bad.maxRetries</code> (since 0.8.0)</td>
+    <td>Optional. Default value 10. Maximum number of retries by Kinesis Client.</td>
 </tr>

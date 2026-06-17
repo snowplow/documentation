@@ -1,9 +1,10 @@
 ---
-title: "Adjust"
+title: "Adjust webhook"
+sidebar_label: "Adjust"
 sidebar_position: -1
+description: "Track mobile attribution data including app installation and reattribution events from Adjust callbacks using the Iglu webhook adapter."
+keywords: ["adjust webhook integration", "mobile attribution tracking", "adjust callback snowplow"]
 ---
-
-## Intro
 
 [Adjust](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
 
@@ -359,7 +360,7 @@ Create a corresponding Redshift table for the schema. We recommend autogeneratin
 /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/install
 ```
 
-Or with [Igluctl](/docs/api-reference/iglu/igluctl-2/index.md):
+Or with [Igluctl](/docs/api-reference/iglu/igluctl/index.md):
 
 ```bash
 /path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/install
@@ -872,7 +873,7 @@ Do this using [Schema Guru](https://github.com/snowplow/schema-guru) e.g. the SQ
 $ /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/reattribute
 ```
 
-Or with [Igluctl](/docs/api-reference/iglu/igluctl-2/index.md):
+Or with [Igluctl](/docs/api-reference/iglu/igluctl/index.md):
 
 ```bash
 $ /path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/reattribute

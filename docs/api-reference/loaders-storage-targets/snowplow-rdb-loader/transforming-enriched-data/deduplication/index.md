@@ -1,7 +1,10 @@
 ---
-title: "Deduplication"
+title: "Event deduplication with Spark transformer"
+sidebar_label: "Deduplication"
 date: "2022-04-04"
 sidebar_position: 30
+description: "Deduplicate Snowplow events in-batch and cross-batch using natural and synthetic deduplication strategies with DynamoDB storage."
+keywords: ["event deduplication", "natural deduplication", "synthetic deduplication", "dynamodb deduplication", "duplicate events"]
 ---
 
 **NOTE:** Deduplication is currently only available in the [Spark transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md).

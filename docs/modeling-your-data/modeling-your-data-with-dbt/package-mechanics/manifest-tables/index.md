@@ -1,12 +1,14 @@
 ---
 title: "Manifest tables"
+sidebar_label: "Manifest tables"
 description: "Details around the manifest tables we use in our packages."
+keywords: ["manifest tables", "session lifecycle", "quarantine table", "package state"]
 sidebar_position: 50
 ---
 
 Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions.
 
-:::danger
+:::note
 
 These manifest tables are critical to the package **and as such are protected from full refreshes, i.e. being dropped, when running in production by default**. In development refreshes are enabled.
 
@@ -16,7 +18,7 @@ The `allow_refresh()` macro defines the protection behavior. As [dbt recommends]
 
 To full refresh any of the manifest models in production as part of a `--full-refresh`, set the `snowplow__allow_refresh` to `true` at run time.
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md) section for more details.
 
 ## Incremental manifest
 The majority of our packages have an incremental manifest table; by default this is in your `_snowplow_manifest` suffixed schema, and will have the name `snowplow_<package_name>_incremental_manifest`. This table exists to track the [state](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#how-to-identify-the-current-state) of each of the models in the package, including any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) that have been tagged.

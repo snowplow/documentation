@@ -1,10 +1,11 @@
 ---
-title: "Sendgrid"
+title: "SendGrid webhook"
+sidebar_label: "SendGrid"
 date: "2020-02-26"
 sidebar_position: 110
+description: "Track SendGrid email notification events including processed, delivered, bounced, opened, clicked, unsubscribed, and spam report events."
+keywords: ["sendgrid webhook integration", "sendgrid email tracking", "email notification events"]
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [SendGrid](http://sendgrid.com/).
 
@@ -22,7 +23,7 @@ Available events are:
 - Group Unsubscribe
 - Group Resubscribe
 
-### Compatibility
+## Compatibility
 
 - The support of the latest version of Sendgrid webhook has been introduced in [Snowplow R114 Polonnaruwa](https://github.com/snowplow/snowplow/releases/tag/r114-polonnaruwa)
 - [SendGrid webhook API](https://docs.sendgrid.com/for-developers/tracking-events/event)
@@ -50,7 +51,7 @@ http://<collector host>/com.sendgrid/v3
 
 Our Webhooks setup page should look like this after we have added our **HTTP POST URL**:
 
-![](images/sendgrid.png)
+![SendGrid Mail Settings page showing the Event Webhook configuration with all Deliverability Data and Engagement Data event types checked and the HTTP Post URL set to the Snowplow collector endpoint](images/sendgrid.png)
 
 If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL so:
 

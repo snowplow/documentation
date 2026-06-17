@@ -9,7 +9,7 @@ The documentation on this site is published under the terms of the Creative Comm
 
 [https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode)
 
-:::info Analytics
+:::info[Analytics]
 
 We collect analytics, including data on page views, time on page, link clicks, searches, inputs to interactive components, etc. Note that you can [configure your cookie preferences](/cookie-preferences/).
 

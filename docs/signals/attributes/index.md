@@ -132,14 +132,14 @@ You can also retrieve attributes directly from a specific [attribute group](/doc
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>
 
-Use `get_group_attribtues()` to retrieve specific attributes. Signals will return the attributes as a dictionary.
+Use `get_group_attributes()` to retrieve specific attributes. Signals will return the attributes as a dictionary.
 
 Here's an example:
 
 ```python
 # The Signals connection object has been created as sp_signals
 
-calculated_values = sp_signals.get_group_attribtues(
+calculated_values = sp_signals.get_group_attributes(
     name="my_attribute_group",
     version=1,
     attributes=["page_view_count"],
@@ -148,7 +148,7 @@ calculated_values = sp_signals.get_group_attribtues(
 )
 ```
 
-The table below lists all available arguments for `get_group_attribtues()`
+The table below lists all available arguments for `get_group_attributes()`
 
 | Argument        | Description                             | Type                         | Required? |
 | --------------- | --------------------------------------- | ---------------------------- | --------- |

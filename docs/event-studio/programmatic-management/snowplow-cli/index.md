@@ -67,6 +67,10 @@ You can also use optional flags:
 - `--read-only`: Create a read-only API key
 - `--dotenv`: Store configuration as .env file in current working directory
 
+:::note[For SSO-enabled Snowplow organizations]
+If SSO is enabled for your Snowplow organization, you will need to follow the [Manual Configuration](#manual-configuration) method instead.
+:::
+
 ### Manual Configuration
 
 If you prefer manual configuration, you will need these values:

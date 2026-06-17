@@ -71,6 +71,30 @@ event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
 event?.contexts_com_acme_user_profile_1?.[0]?.account_created
 ```
 
+The field names above pin a schema's major version (the `_1` suffix), so an expression breaks when you start sending a new major version. To access custom events and entities without pinning the version, use the `allUnstruct` and `allContexts` [helper functions](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md#helper-functions), which match across all schema versions present on the event.
+
+`allUnstruct(event, eventName)` returns the payload of a self-describing event, or `undefined` if it's not present. The `eventName` is the snake_case vendor and name, without the `unstruct_event_` prefix or version suffix:
+
+```javascript
+// Version-pinned access:
+event?.unstruct_event_com_acme_signup_1?.signup_method
+
+// Version-agnostic alternative:
+allUnstruct(event, "com_acme_signup")?.signup_method
+```
+
+`allContexts(event, entityName)` returns an array of all instances of an entity across schema versions, ordered with the highest version first. It returns an empty array if none are present:
+
+```javascript
+// Version-pinned access:
+event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
+
+// Version-agnostic alternative:
+allContexts(event, "com_acme_user_profile")[0]?.subscription_tier
+```
+
+Other [helper functions](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md#helper-functions), such as `hash` and `parseTimestamp`, are also available in filters, field mappings, and custom functions.
+
 ## Event filtering
 
 Event filters determine which events are forwarded to your destination. Only events matching your filter criteria (JavaScript expression evaluating to `true`) will be processed and sent.

@@ -9,7 +9,7 @@ keywords: ["tracking cli deprecated", "snowplow-cli events send"]
 
 :::warning[Deprecated]
 
-The standalone Snowplow Tracking CLI has been merged into [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) as the `events send` command. This tool is deprecated and its repository will be archived. See [Send events via Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/send-events/index.md) for the replacement and a migration guide.
+The standalone Snowplow Tracking CLI has been merged into [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) as the `events send` command. This tool is deprecated and its repository will be archived. See [Send events via Snowplow CLI](/docs/api-reference/snowplow-cli/send-events/index.md) for the replacement and a migration guide.
 
 :::
 

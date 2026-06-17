@@ -6,12 +6,18 @@ description: "Use the Snowplow CLI data-structures command to generate, download
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
 ---
 
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-The `data-structures` subcommand of [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+/>
+
+The `data-structures` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 
 ## Snowplow CLI Prerequisites
 
-Installed and configured [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md)
+Installed and configured [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md)
 
 
 ## Available commands

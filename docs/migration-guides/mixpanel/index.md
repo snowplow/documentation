@@ -211,7 +211,7 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [tracking pl
 * Which events use group analytics? You'll need to define group entities for these.
 * Are there sets of event properties used in multiple places that could be defined as reusable entities instead?
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plan tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plan tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
 * Coexistence: leave historical Mixpanel data in existing tables. Write queries that combine data from both systems, using a transformation layer (for example, in dbt) to create compatible structures.
@@ -226,7 +226,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing. Use the Snowplow CLI or Console to publish.
+If you haven't done this yet, use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing. Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Mixpanel tracking:
 * If you have a web platform, start here

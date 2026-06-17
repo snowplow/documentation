@@ -2,18 +2,18 @@
 title: "Send events via Snowplow CLI"
 sidebar_label: "Send events"
 sidebar_position: 10
-description: "Send Snowplow events to a Collector from the command line with the Snowplow CLI events send command. Useful for sending a test event, verifying a pipeline, shell scripts, and terminal sessions without writing tracker code."
+description: "Send Snowplow events to a Collector from the command line with the Snowplow CLI events send command. Useful for sending a test event, verifying a pipeline, or adding tracking to shell scripts and terminal sessions without writing tracker code."
 keywords: ["send events", "send test event", "send event from command line", "send event to collector", "Snowplow CLI events send", "command line tracking"]
 date: "2026-06-09"
 ---
 
-The `events` subcommand of [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) sends events to a Snowplow Collector from the command line. Use it to embed Snowplow tracking into your shell scripts and terminal sessions, or to send a quick test event while validating a pipeline.
+The `events` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) sends events to a Snowplow Collector from the command line. Use it to embed Snowplow tracking into your shell scripts and terminal sessions, or to send a quick test event while validating a pipeline.
 
 Each event is sent as an individual payload, and the command exits once the Collector has responded.
 
 ## Prerequisites
 
-You need [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) installed. Sending events does not require Console credentials, so you can skip the configuration step if you only use the `events` subcommand.
+You need [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) installed. Sending events does not require Console credentials, so you can skip the configuration step if you only use the `events` subcommand.
 
 ## Send an event
 
@@ -55,7 +55,7 @@ snowplow-cli events send \
 
 ## Command options
 
-Set the application ID with `--app-id`, the HTTP method with `--method` (defaults to `POST`), and the protocol with `--protocol` (defaults to `https`). For the full list of flags, see the [`events send` command reference](/docs/event-studio/programmatic-management/snowplow-cli/reference/index.md#events-send).
+Set the application ID with `--app-id`, the HTTP method with `--method` (defaults to `POST`), and the protocol with `--protocol` (defaults to `https`). For the full list of flags, see the [`events send` command reference](/docs/api-reference/snowplow-cli/reference/index.md#events-send).
 
 ## Migrate from the Snowplow Tracking CLI
 
@@ -63,17 +63,17 @@ The standalone Snowplow Tracking CLI (`snowplow-tracking-cli`) has been merged i
 
 The flags are largely the same, with a few renames and one changed default:
 
-| Snowplow Tracking CLI | Snowplow CLI `events send` | Notes                                          |
-| --------------------- | -------------------------- | ---------------------------------------------- |
-| `--collector`         | `--collector`              | Unchanged, required                            |
-| `--appid`             | `--app-id`                 | Defaults to `snowplowcli`                       |
-| `--method`            | `--method`                 | Default changed from `GET` to `POST`           |
-| `--protocol`          | `--protocol`               | Unchanged, defaults to `https`                 |
-| `--sdjson`            | `--sdjson`                 | Unchanged                                      |
-| `--schema`            | `--schema`                 | Unchanged                                      |
-| `--json`              | `--json`                   | Unchanged                                      |
-| `--ipaddress`         | `--ip-address`             | Renamed                                        |
-| `--contexts`          | `--entities`               | Renamed                                        |
+| Snowplow Tracking CLI | Snowplow CLI `events send` | Notes                                |
+| --------------------- | -------------------------- | ------------------------------------ |
+| `--collector`         | `--collector`              | Unchanged, required                  |
+| `--appid`             | `--app-id`                 | Renamed; defaults to `snowplowcli`   |
+| `--method`            | `--method`                 | Default changed from `GET` to `POST` |
+| `--protocol`          | `--protocol`               | Unchanged, defaults to `https`       |
+| `--sdjson`            | `--sdjson`                 | Unchanged                            |
+| `--schema`            | `--schema`                 | Unchanged                            |
+| `--json`              | `--json`                   | Unchanged                            |
+| `--ipaddress`         | `--ip-address`             | Renamed                              |
+| `--contexts`          | `--entities`               | Renamed                              |
 
 For example, this Snowplow Tracking CLI command:
 

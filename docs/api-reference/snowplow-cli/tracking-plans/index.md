@@ -7,12 +7,18 @@ keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifica
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <TrackingPlansNomenclature />
 
-The `data-products` subcommand of [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+/>
+
+The `data-products` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 ## Snowplow CLI Prerequisites
-Installed and configured [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md)
+Installed and configured [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md)
 ## Available commands
 ### Creating tracking plan
 ```bash

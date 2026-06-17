@@ -142,6 +142,6 @@ We have many different trackers in different programming languages, in case the 
 
 :::tip
 
-For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/events/index.md). Instead, take a look at how to [send events with Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/send-events/index.md) which will do this for you.
+For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/events/index.md). Instead, take a look at [sending events with Snowplow CLI](/docs/api-reference/snowplow-cli/send-events/index.md), which will do this for you.
 
 :::

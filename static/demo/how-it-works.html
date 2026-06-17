@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How Snowplow works — interactive walkthrough</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #faf8ff;
+    --panel: #ffffff;
+    --panel-2: #faf8ff;
+    --line: #e6e2f2;
+    --text: #1a1530;
+    --muted: #5c5680;
+    --accent: #6638B8;
+    --accent-2: #8b5cf6;
+    --good: #16a34a;
+    --bad: #dc2626;
+    --warn: #d97706;
+    --code-bg: #1a1530;
+    --code: #f4f1ff;
+    --shadow: 0 8px 28px rgba(102, 56, 184, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg);
+    color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh; }
+  a { color: var(--accent-2); }
+  header {
+    padding: 40px 24px 24px; text-align: center; max-width: 980px; margin: 0 auto;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(102,56,184,0.08); border: 1px solid rgba(102,56,184,0.2);
+    color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(102,56,184,0.5); }
+  h1 {
+    font-size: clamp(32px, 5vw, 56px); margin: 24px 0 16px; line-height: 1.05; letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 auto; line-height: 1.6; }
+  main { max-width: 100%; margin: 0; padding: 16px 24px 24px; }
+  section { margin: 56px 0; }
+  h2 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 .num { color: var(--accent-2); font-variant-numeric: tabular-nums; margin-right: 12px; opacity: 0.8; }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 720px; line-height: 1.6; }
+
+  /* Pipeline diagram */
+  .pipeline {
+    display: grid; grid-template-columns: 1fr 4fr 1fr; gap: 16px; align-items: stretch;
+    background: var(--bg-2);
+    border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+  }
+  .cloud {
+    grid-column: 2; position: relative;
+    border: 1.5px dashed rgba(102,56,184,0.35); border-radius: 16px;
+    padding: 34px 14px 14px; background: rgba(102,56,184,0.04);
+  }
+  .cloud-label {
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+    background: var(--bg); padding: 2px 14px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(102,56,184,0.25); white-space: nowrap;
+  }
+  .cloud-inner {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px;
+  }
+  .schema-chip {
+    margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 6px 12px; font-size: 12px; color: var(--muted);
+    border: 1px dashed var(--line); border-radius: 10px; background: #ffffff;
+  }
+  .schema-chip strong { color: var(--accent); font-weight: 600; }
+  .stream-pill {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px;
+  }
+  .stream-pill.good { background: rgba(22,163,74,0.10); color: var(--good); border: 1px solid rgba(22,163,74,0.3); }
+  .stream-pill.bad  { background: rgba(220,38,38,0.08); color: var(--bad); border: 1px solid rgba(220,38,38,0.3); }
+  .stage {
+    background: #ffffff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 14px; cursor: pointer; transition: all 0.25s ease; position: relative;
+    min-height: 132px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .stage:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(102,56,184,0.08); }
+  .stage.active { border-color: var(--accent); background: rgba(102,56,184,0.04); box-shadow: 0 0 0 3px rgba(102,56,184,0.12); }
+  .stage .icon { color: var(--accent); display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; }
+  .stage .icon svg { width: 24px; height: 24px; stroke-width: 2; }
+  .schema-chip svg { width: 16px; height: 16px; stroke: var(--accent); flex-shrink: 0; }
+  .stage h3 { margin: 0; font-size: 15px; }
+  .stage p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+
+  /* Event token traveling */
+  .pipeline-track {
+    position: relative; height: 6px; margin: 20px 6px 0;
+    background: rgba(102,56,184,0.08); border-radius: 999px;
+    cursor: pointer;
+  }
+  .pipeline-track .tick {
+    position: absolute; top: -3px; width: 2px; height: 12px;
+    background: rgba(102,56,184,0.25); transform: translateX(-50%);
+  }
+  .pipeline-track.scrubable { cursor: grab; }
+  .pipeline-track.scrubable::before {
+    content: '← Click any step to revisit →';
+    position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    background: var(--bg); padding: 0 8px;
+  }
+  .pipeline-track .fill {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-radius: 999px; transition: width 0.5s ease;
+  }
+  .token {
+    position: absolute; top: -7px; width: 20px; height: 20px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
+    box-shadow: 0 0 18px var(--accent-2); transition: left 0.6s cubic-bezier(.7,.1,.3,1);
+    transform: translateX(-50%);
+  }
+  .token.bad { background: radial-gradient(circle at 30% 30%, #fff, var(--bad)); box-shadow: 0 0 18px var(--bad); }
+
+  .controls {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; align-items: center;
+  }
+  button {
+    background: linear-gradient(180deg, var(--accent) 0%, #4d27a3 100%);
+    color: white; border: 0; padding: 12px 20px; border-radius: 10px; font-weight: 600;
+    cursor: pointer; font-size: 14px; letter-spacing: 0.01em;
+    box-shadow: 0 6px 16px rgba(102,56,184,0.4);
+    transition: transform 0.15s ease;
+  }
+  button:hover { transform: translateY(-1px); }
+  button.ghost {
+    background: #ffffff; color: var(--text); box-shadow: none; border: 1px solid var(--line);
+  }
+  button.bad { background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%); box-shadow: 0 6px 16px rgba(220,38,38,0.25); }
+
+  .console {
+    margin-top: 20px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px;
+  }
+  .panel {
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  }
+  .panel header.bar {
+    display: flex; align-items: center; justify-content: space-between; padding: 10px 16px;
+    background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12px;
+    color: #b8b3d8; text-transform: uppercase; letter-spacing: 0.08em;
+    text-align: left; margin: 0; max-width: none;
+  }
+  pre.code {
+    margin: 0; padding: 16px; font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12.5px; line-height: 1.55; color: var(--code); white-space: pre-wrap; word-break: break-word;
+    min-height: 240px; max-height: 360px; overflow: auto;
+  }
+  .tok-key { color: #b6a1ff; }
+  .tok-str { color: #9be1a0; }
+  .tok-num { color: #ffd07a; }
+  .tok-com { color: #7c79a8; font-style: italic; }
+  .tok-new { animation: highlight 1.6s ease; background: rgba(54,211,153,0.15); border-radius: 3px; padding: 0 2px; }
+  @keyframes highlight { from { background: rgba(54,211,153,0.55); } to { background: transparent; } }
+
+  .log {
+    padding: 12px 16px; font-family: ui-monospace, Menlo, monospace; font-size: 12.5px;
+    height: 240px; max-height: 360px; overflow: auto; line-height: 1.6;
+    color: #ECEAFE;
+  }
+  .log .row { display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.08); color: #ECEAFE; }
+  .log .tag { color: #b89cff; flex-shrink: 0; min-width: 88px; }
+  .log .tag.bad { color: #ff8a98; }
+  .log .tag.good { color: #5deea0; }
+  .log .tag.warn { color: #ffc164; }
+
+  /* Cards */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
+  }
+  .card {
+    background: #ffffff;
+    border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover { box-shadow: 0 6px 18px rgba(102,56,184,0.08); transform: translateY(-1px); }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+  .card .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px;
+    background: rgba(102,56,184,0.08); color: var(--accent); margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;}
+
+  details.gap {
+    background: rgba(255, 122, 138, 0.05); border: 1px solid rgba(255,122,138,0.25);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
+  }
+  details.gap[open] { background: rgba(255,122,138,0.08); }
+  details.gap > summary { cursor: pointer; font-weight: 600; color: var(--bad); font-size: 14px; }
+  details.gap p, details.gap ul { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin: 10px 0 0; }
+
+  /* Stage detail content */
+  .detail-card {
+    background: #ffffff;
+    border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+    margin-top: 16px; min-height: 140px;
+  }
+  .detail-card h4 { margin: 0 0 6px; font-size: 18px; color: var(--accent); }
+  .detail-card p { color: var(--muted); line-height: 1.6; font-size: 14px; }
+  .detail-card ul { color: var(--muted); line-height: 1.7; font-size: 14px; padding-left: 18px; }
+
+  /* Schema example */
+  .schema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 1000px) {
+    .pipeline { grid-template-columns: 1fr; gap: 12px; }
+    .cloud { grid-column: 1; padding: 30px 12px 12px; }
+    .cloud-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) { .schema-grid, .console { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .cloud-inner { grid-template-columns: 1fr; } }
+
+  footer { color: var(--muted); padding: 40px 24px 80px; text-align: center; font-size: 13px; }
+  .kbd { font-family: ui-monospace, monospace; background: rgba(102,56,184,0.06); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 11px; border: 1px solid var(--line); }
+
+  /* Signals callout */
+  .signals-card {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center;
+    background: linear-gradient(135deg, rgba(102,56,184,0.08), rgba(139,92,246,0.04));
+    border: 1px solid rgba(102,56,184,0.2); border-radius: 18px; padding: 32px;
+  }
+  @media (max-width: 800px) { .signals-card { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<main>
+
+<!-- ====================== Pipeline ====================== -->
+<section>
+  <h2><span class="num">01</span>The pipeline</h2>
+  <p class="sub">Six stages process every event in real time. Events are kept at atomic grain end-to-end — no sampling, no pre-aggregation.</p>
+
+  <div class="pipeline" id="pipeline">
+    <div class="stage" data-stage="track">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2.5"/><path d="M12 18h.01"/></svg></div>
+      <h3>1. Track</h3>
+      <p>Web, mobile, server, or webhook SDKs emit events to your Collector.</p>
+    </div>
+
+    <div class="cloud">
+      <div class="cloud-label">Pipeline runs in your cloud (AWS, GCP, or Azure)</div>
+      <div class="cloud-inner">
+        <div class="stage" data-stage="collect">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg></div>
+          <h3>2. Collect</h3>
+          <p>The Collector receives raw payloads over HTTP and persists them.</p>
+        </div>
+        <div class="stage" data-stage="validate">
+          <span class="stream-pill bad">→ Real-Time Bad Stream</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>3. Validate</h3>
+          <p>Every event is checked against its JSON schema in Iglu.</p>
+        </div>
+        <div class="stage" data-stage="enrich">
+          <span class="stream-pill good">Real-Time Good Stream</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
+          <h3>4. Enrich</h3>
+          <p>Attach geo, user-agent, campaign, currency, and custom API or SQL entities.</p>
+        </div>
+        <div class="stage" data-stage="load">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+          <h3>5. Load</h3>
+          <p>Stream to warehouse, lake, or forward to downstream tools.</p>
+        </div>
+      </div>
+      <div class="schema-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+        <span><strong>Iglu Schema Registry</strong> — validation rules live here; Validate fetches per-event.</span>
+      </div>
+    </div>
+
+    <div class="stage" data-stage="model">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+      <h3>6. Model</h3>
+      <p>dbt packages turn atomic events into analytics-ready tables.</p>
+    </div>
+  </div>
+
+  <div class="pipeline-track">
+    <div class="fill" id="trackFill"></div>
+    <div class="token" id="token" style="left:0%"></div>
+  </div>
+
+  <div class="controls">
+    <button id="sendBtn">Send a valid event</button>
+    <button id="sendBadBtn" class="bad">Send an invalid event</button>
+    <button id="resetBtn" class="ghost">Reset</button>
+    <span style="color:var(--muted); font-size:12.5px;">Latency target: enriched in &lt;1s under normal load.</span>
+  </div>
+
+  <div class="detail-card" id="detail">
+    <h4>Click a stage to learn what happens there</h4>
+    <p>Or select <strong>Send a valid event</strong> to step through the whole pipeline. The JSON payload on the left grows as each stage adds its piece. The log on the right shows what each component does.</p>
+  </div>
+
+  <div class="console">
+    <div class="panel">
+      <header class="bar"><span>event.json</span><span id="eventSize">— bytes</span></header>
+      <pre class="code" id="eventJson"><span class="tok-com">// No event sent yet. Click "Send a valid event" above.</span></pre>
+    </div>
+    <div class="panel">
+      <header class="bar"><span>pipeline.log</span><span id="latency">— ms</span></header>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Anatomy of an event ====================== -->
+<section>
+  <h2><span class="num">02</span>Anatomy of a Snowplow event</h2>
+  <p class="sub">An event is a JSON object that <em>describes itself</em>. It always carries the schema that defines its shape, so consumers — and your warehouse — always know what they're looking at, even after the definition evolves.</p>
+
+  <div class="schema-grid">
+    <div class="panel">
+      <header class="bar"><span>iglu schema</span><span>v1-0-0</span></header>
+      <pre class="code"><span class="tok-key">"$schema"</span>: <span class="tok-str">"...self-desc/schema/jsonschema/1-0-0"</span>,
+<span class="tok-key">"description"</span>: <span class="tok-str">"A user added a product to their cart"</span>,
+<span class="tok-key">"self"</span>: {
+  <span class="tok-key">"vendor"</span>: <span class="tok-str">"com.acme"</span>,
+  <span class="tok-key">"name"</span>: <span class="tok-str">"add_to_cart"</span>,
+  <span class="tok-key">"format"</span>: <span class="tok-str">"jsonschema"</span>,
+  <span class="tok-key">"version"</span>: <span class="tok-str">"1-0-0"</span>
+},
+<span class="tok-key">"type"</span>: <span class="tok-str">"object"</span>,
+<span class="tok-key">"properties"</span>: {
+  <span class="tok-key">"product_id"</span>: { <span class="tok-key">"type"</span>: <span class="tok-str">"string"</span> },
+  <span class="tok-key">"price"</span>:      { <span class="tok-key">"type"</span>: <span class="tok-str">"number"</span>, <span class="tok-key">"minimum"</span>: <span class="tok-num">0</span> },
+  <span class="tok-key">"currency"</span>:   { <span class="tok-key">"type"</span>: <span class="tok-str">"string"</span>, <span class="tok-key">"enum"</span>: [<span class="tok-str">"USD"</span>,<span class="tok-str">"EUR"</span>,<span class="tok-str">"GBP"</span>] }
+},
+<span class="tok-key">"required"</span>: [<span class="tok-str">"product_id"</span>, <span class="tok-str">"price"</span>]</pre>
+    </div>
+    <div class="panel">
+      <header class="bar"><span>self-describing event</span><span>conforms to schema</span></header>
+      <pre class="code">{
+  <span class="tok-key">"schema"</span>: <span class="tok-str">"iglu:com.acme/add_to_cart/jsonschema/1-0-0"</span>,
+  <span class="tok-key">"data"</span>: {
+    <span class="tok-key">"product_id"</span>: <span class="tok-str">"SKU-9123"</span>,
+    <span class="tok-key">"price"</span>:      <span class="tok-num">49.95</span>,
+    <span class="tok-key">"currency"</span>:   <span class="tok-str">"USD"</span>
+  },
+  <span class="tok-key">"contexts"</span>: [
+    { <span class="tok-key">"schema"</span>: <span class="tok-str">"iglu:.../user/1-0-0"</span>,
+      <span class="tok-key">"data"</span>: { <span class="tok-key">"id"</span>: <span class="tok-str">"u_42"</span>, <span class="tok-key">"tier"</span>: <span class="tok-str">"gold"</span> } },
+    { <span class="tok-key">"schema"</span>: <span class="tok-str">"iglu:.../web_page/1-0-0"</span>,
+      <span class="tok-key">"data"</span>: { <span class="tok-key">"id"</span>: <span class="tok-str">"pv_77ab"</span> } }
+  ]
+}</pre>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:18px;">The <code>contexts</code> array carries entities — reusable building blocks (user, page, product, A/B test, and so on) that attach to any event. Same entity definition, used everywhere.</p>
+</section>
+
+<!-- ====================== Sources ====================== -->
+<section>
+  <h2><span class="num">03</span>Where events come from</h2>
+  <p class="sub">Snowplow provides open-source tracker SDKs for web, mobile, and server-side platforms. All trackers use the same Snowplow tracker protocol, so the Collector accepts events from any of them.</p>
+  <div class="grid">
+    <div class="card"><div class="pill">Client-side</div><h3>Web · Mobile · TV</h3><p>JavaScript (web and browser SDK), iOS, Android, React Native, Flutter, Roku, AMP, WebView, Pixel.</p></div>
+    <div class="card"><div class="pill">Server-side</div><h3>Backends and jobs</h3><p>Node.js, Python, Go, Java, Scala, Ruby, PHP, Rust, .NET, C++, Unity, Lua, CLI.</p></div>
+    <div class="card"><div class="pill">Third party</div><h3>Webhooks</h3><p>Adjust, Iterable, Mailgun, Mandrill, SendGrid, Zendesk, or any Iglu-compatible GET or POST request.</p></div>
+    <div class="card"><div class="pill">Studio</div><h3>Snowtype</h3><p>Generate typed tracking SDKs from your tracking plan to catch tracking errors at compile time.</p></div>
+  </div>
+</section>
+
+<!-- ====================== Enrichments ====================== -->
+<section>
+  <h2><span class="num">04</span>Attach entities with enrichments</h2>
+  <p class="sub">Enable any of these in your pipeline configuration. Each enrichment runs in stream and executes in a fixed order, so results are deterministic.</p>
+  <div class="grid" id="enrichGrid">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- ====================== Destinations ====================== -->
+<section>
+  <h2><span class="num">05</span>Where data lands</h2>
+  <p class="sub">Stream loaders write to your warehouse, lake, or both — without an external ETL step. Real-time forwarders push the same events to downstream tools.</p>
+  <div class="grid">
+    <div class="card"><div class="pill">Warehouses</div><h3>Snowflake · BigQuery · Redshift · Databricks</h3><p>Schemas auto-evolve as you ship new tracking. Events arrive within seconds of being tracked.</p></div>
+    <div class="card"><div class="pill">Lakes</div><h3>S3 · GCS · ADLS / OneLake</h3><p>Open table formats (Iceberg, Delta, Hudi). Query with Athena, Spark, or your warehouse.</p></div>
+    <div class="card"><div class="pill">Forwarding</div><h3>GTM Server-Side and native</h3><p>Forward enriched events in real time to ad platforms, CDPs, and marketing tools.</p></div>
+    <div class="card"><div class="pill">Reverse ETL</div><h3>Activation</h3><p>Push modeled warehouse audiences back to operational tools.</p></div>
+  </div>
+</section>
+
+<!-- ====================== Signals ====================== -->
+<section>
+  <h2><span class="num">06</span>Serve real-time attributes with Signals</h2>
+  <div class="signals-card">
+    <div>
+      <p class="sub" style="margin:0 0 14px;">Signals computes user attributes from the event stream as events flow, and serves them to your application through a low-latency API.</p>
+      <ul style="color:var(--muted); line-height:1.7; padding-left:18px; margin:0;">
+        <li>Provide real-time behavioral data to chatbots, AI agents, and assistants</li>
+        <li>Power dynamic pricing, recommendations, and adaptive interfaces</li>
+        <li>Trigger interventions automatically when users meet defined criteria</li>
+        <li>Combine streaming attributes with attributes derived from the warehouse</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <header class="bar"><span>signals.fetch()</span><span>~10ms</span></header>
+      <pre class="code">{
+  <span class="tok-key">"user_id"</span>: <span class="tok-str">"u_42"</span>,
+  <span class="tok-key">"attributes"</span>: {
+    <span class="tok-key">"cart_value_30m"</span>:     <span class="tok-num">149.85</span>,
+    <span class="tok-key">"products_viewed_5m"</span>: <span class="tok-num">7</span>,
+    <span class="tok-key">"likely_abandon"</span>:     <span class="tok-num">0.71</span>,
+    <span class="tok-key">"is_ai_agent"</span>:        <span class="tok-str">false</span>
+  }
+}</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<script>
+  // ============= Stage detail content =============
+  const STAGE_INFO = {
+    track: {
+      title: "Track — emit an event from your app",
+      body: `<p>An SDK call (or a webhook POST) produces a JSON payload conforming to the Snowplow tracker protocol — 89 atomic fields plus self-describing event data and entities. The SDK batches, retries, and respects user consent. 20+ tracker SDKs exist, all wire-compatible.</p>`
+    },
+    collect: {
+      title: "Collect — the Collector accepts and persists",
+      body: `<p>The Collector is a stateless HTTP service that receives payloads at endpoints like <code>/com.snowplowanalytics.snowplow/tp2</code>, sets a third-party cookie if configured, and writes the raw event to a stream (Kinesis on AWS, PubSub on GCP) plus durable storage (S3/GCS). It applies no business logic — its job is to never lose an event.</p>`
+    },
+    validate: {
+      title: "Validate — schema-check, or route to the Real-Time Bad Stream",
+      body: `<p>Enrich pulls the schema referenced by the event from your Iglu repository and validates the payload. Pass → continues to enrichment via the Real-Time Good Stream. Fail → routed to the <strong>Real-Time Bad Stream</strong> as a failed event with a structured failure reason. Failed events can be replayed after you fix the schema, so the pipeline stays non-lossy.</p>`
+    },
+    enrich: {
+      title: "Enrich — attach entities in stream",
+      body: `<ul><li><strong>Geo / ASN / IP lookup</strong> — country, city, ISP from MaxMind</li><li><strong>YAUAA / UA Parser</strong> — device, browser, OS from user-agent</li><li><strong>Bot detection</strong> — IAB, ASN, YAUAA signals consolidated</li><li><strong>Campaign attribution</strong> — UTM and referrer parsing</li><li><strong>Custom JavaScript / SQL / API</strong> — call your own systems</li><li><strong>PII pseudonymization</strong> — hash sensitive fields</li></ul>`
+    },
+    load: {
+      title: "Load — into warehouse, lake, or forward",
+      body: `<p>Stream loaders pick events off the enriched stream and write them to your destination(s) with auto-evolving schemas. Warehouses: Snowflake, BigQuery, Redshift, Databricks. Lakes: S3 / GCS / ADLS in Iceberg, Delta, or Hudi. Event forwarders push the same enriched events in real time to GTM Server-Side, ad platforms, or any HTTP endpoint.</p>`
+    },
+    model: {
+      title: "Model — atomic to analytics-ready",
+      body: `<p>Snowplow ships dbt packages (Unified Digital, Attribution, Media Player, Ecommerce) that transform raw atomic events into derived sessions, users, conversions, and journeys. Incremental processing means you re-model only what changed. Identity stitching links anonymous and known sessions.</p>`
+    }
+  };
+
+  const stages = ["track","collect","validate","enrich","load","model"];
+  const STAGE_PCT = { track: 8, collect: 24, validate: 42, enrich: 60, load: 78, model: 96 };
+  let snapshots = []; // [{stage, payload, logHTML, bad}]
+
+  const stageEls = {};
+  document.querySelectorAll('.stage').forEach(el => {
+    stageEls[el.dataset.stage] = el;
+    el.addEventListener('click', () => {
+      focusStage(el.dataset.stage);
+      replayStage(el.dataset.stage);
+    });
+  });
+
+  const detail = document.getElementById('detail');
+  function focusStage(name) {
+    document.querySelectorAll('.stage').forEach(s => s.classList.toggle('active', s.dataset.stage === name));
+    const info = STAGE_INFO[name];
+    detail.innerHTML = `<h4>${info.title}</h4>${info.body}`;
+    // Always align the track token with the clicked stage
+    if (STAGE_PCT[name] !== undefined) {
+      const snap = snapshots.find(s => s.stage === name);
+      setTokenPos(STAGE_PCT[name], !!(snap && snap.bad));
+    }
+  }
+
+  function replayStage(name) {
+    if (!snapshots.length) return;
+    const snap = snapshots.find(s => s.stage === name);
+    if (!snap) return;
+    renderJson(snap.payload);
+    log.innerHTML = snap.logHTML;
+    log.scrollTop = log.scrollHeight;
+    setTokenPos(STAGE_PCT[name], !!snap.bad);
+  }
+
+  // Pipeline-track click → snap to nearest stage and replay
+  const trackEl = document.querySelector('.pipeline-track');
+  trackEl.addEventListener('click', (e) => {
+    if (!snapshots.length) return;
+    const rect = trackEl.getBoundingClientRect();
+    const pct = ((e.clientX - rect.left) / rect.width) * 100;
+    // find nearest snapshot stage by % position
+    let nearest = snapshots[0];
+    let bestDist = Infinity;
+    for (const s of snapshots) {
+      const d = Math.abs(STAGE_PCT[s.stage] - pct);
+      if (d < bestDist) { bestDist = d; nearest = s; }
+    }
+    focusStage(nearest.stage);
+    replayStage(nearest.stage);
+  });
+
+  // ============= Event simulator =============
+  const log = document.getElementById('log');
+  const eventJson = document.getElementById('eventJson');
+  const token = document.getElementById('token');
+  const fill = document.getElementById('trackFill');
+  const eventSizeEl = document.getElementById('eventSize');
+  const latencyEl = document.getElementById('latency');
+  const sendBtn = document.getElementById('sendBtn');
+  const sendBadBtn = document.getElementById('sendBadBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  function logRow(tag, msg, kind="") {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `<span class="tag ${kind}">${tag}</span><span>${msg}</span>`;
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function syntaxHighlight(obj) {
+    const json = JSON.stringify(obj, null, 2);
+    return json
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"([^"]+)":/g, '<span class="tok-key">"$1"</span>:')
+      .replace(/: "([^"]*)"/g, ': <span class="tok-str">"$1"</span>')
+      .replace(/: (true|false|null)/g, ': <span class="tok-num">$1</span>')
+      .replace(/: (-?\d+(?:\.\d+)?)/g, ': <span class="tok-num">$1</span>');
+  }
+
+  function renderJson(obj) {
+    eventJson.innerHTML = syntaxHighlight(obj);
+    const bytes = new Blob([JSON.stringify(obj)]).size;
+    eventSizeEl.textContent = bytes + ' bytes';
+  }
+
+  function setTokenPos(pct, bad=false) {
+    token.style.left = pct + '%';
+    fill.style.width = pct + '%';
+    token.classList.toggle('bad', bad);
+  }
+
+  function reset() {
+    log.innerHTML = '';
+    eventJson.innerHTML = '<span class="tok-com">// Ready. Send an event.</span>';
+    eventSizeEl.textContent = '— bytes';
+    latencyEl.textContent = '— ms';
+    setTokenPos(0);
+    snapshots = [];
+    trackEl.classList.remove('scrubable');
+    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+    detail.innerHTML = `<h4>Click a stage to learn what happens there</h4><p>Or select <strong>Send a valid event</strong> to step through the whole pipeline.</p>`;
+  }
+
+  function snap(stage, payload, bad=false) {
+    snapshots.push({
+      stage,
+      payload: JSON.parse(JSON.stringify(payload)),
+      logHTML: log.innerHTML,
+      bad,
+    });
+  }
+  resetBtn.addEventListener('click', reset);
+
+  async function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function sendEvent(invalid=false) {
+    sendBtn.disabled = sendBadBtn.disabled = true;
+    log.innerHTML = '';
+    snapshots = [];
+    trackEl.classList.remove('scrubable');
+    const t0 = performance.now();
+
+    // 1. Track
+    focusStage('track');
+    setTokenPos(8);
+    const eid = (crypto.randomUUID ? crypto.randomUUID() : 'c6ef3124-b53a-4b13-a233-0088f79dcbcb');
+    const payload = {
+      e: "ue",
+      eid,
+      dtm: Date.now(),
+      tv: "js-3.24.0",
+      p: "web",
+      ue_pr: {
+        schema: "iglu:com.acme/add_to_cart/jsonschema/1-0-0",
+        data: invalid
+          ? { product_id: "SKU-9123", price: -5, currency: "BTC" }
+          : { product_id: "SKU-9123", price: 49.95, currency: "USD" }
+      },
+      co: [
+        { schema: "iglu:.../user/1-0-0", data: { id: "u_42" } },
+        { schema: "iglu:.../web_page/1-0-0", data: { id: "pv_77ab" } }
+      ]
+    };
+    logRow("tracker", `web SDK → POST /com.snowplowanalytics.snowplow/tp2`);
+    renderJson(payload);
+    snap('track', payload);
+    await delay(550);
+
+    // 2. Collect
+    focusStage('collect');
+    setTokenPos(24);
+    payload.collector_tstamp = new Date().toISOString();
+    payload.user_ipaddress = "82.14.117.41";
+    payload.useragent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/605.1.15";
+    logRow("collector", `received · raw event sinked to s3://.../raw/`, "good");
+    renderJson(payload);
+    snap('collect', payload);
+    await delay(550);
+
+    // 3. Validate
+    focusStage('validate');
+    setTokenPos(42);
+    if (invalid) {
+      logRow("enrich", `schema validation failed`, "bad");
+      logRow("", `· price: -5 violates minimum: 0`, "bad");
+      logRow("", `· currency: "BTC" not in enum [USD,EUR,GBP]`, "bad");
+      setTokenPos(48, true);
+      await delay(400);
+      const bad = {
+        schema: "iglu:.../schema_violations/jsonschema/2-0-0",
+        data: {
+          failure: {
+            messages: [
+              { keyword: "minimum", path: "/price", message: "-5 is less than the minimum 0" },
+              { keyword: "enum",    path: "/currency", message: "BTC is not one of [USD,EUR,GBP]" }
+            ]
+          },
+          payload: { event_id: eid }
+        }
+      };
+      renderJson(bad);
+      logRow("enrich", `→ routed to Real-Time Bad Stream as a failed event (recoverable after schema fix)`, "warn");
+      setTokenPos(50, true);
+      snap('validate', bad, true);
+      latencyEl.textContent = Math.round(performance.now() - t0) + ' ms';
+      trackEl.classList.add('scrubable');
+      sendBtn.disabled = sendBadBtn.disabled = false;
+      return;
+    }
+    logRow("enrich", `schema validated against iglu:com.acme/add_to_cart/1-0-0`, "good");
+    snap('validate', payload);
+    await delay(450);
+
+    // 4. Enrich
+    focusStage('enrich');
+    setTokenPos(60);
+    payload.geo_country = "GB";
+    payload.geo_city = "London";
+    payload.geo_latitude = 51.5072;
+    payload.geo_longitude = -0.1276;
+    payload.br_name = "Chrome";
+    payload.br_version = "131.0";
+    payload.os_name = "macOS";
+    payload.dvce_type = "Computer";
+    payload.mkt_source = "google";
+    payload.mkt_medium = "cpc";
+    logRow("enrich", `+ ip-lookup → geo_country=GB, geo_city=London`, "good");
+    logRow("enrich", `+ yauaa → br_name=Chrome, os_name=macOS`, "good");
+    logRow("enrich", `+ campaign-attribution → mkt_source=google`, "good");
+    renderJson(payload);
+    snap('enrich', payload);
+    await delay(700);
+
+    // 5. Load
+    focusStage('load');
+    setTokenPos(78);
+    logRow("loader", `→ snowflake.atomic.events (row inserted)`, "good");
+    logRow("loader", `→ s3://lake/iceberg/events (parquet appended)`, "good");
+    logRow("forwarder", `→ GTM-SS · Meta Conversions API`, "good");
+    snap('load', payload);
+    await delay(550);
+
+    // 6. Model
+    focusStage('model');
+    setTokenPos(96);
+    logRow("dbt", `unified.sessions_this_run: 1 session updated`, "good");
+    logRow("dbt", `ecommerce.cart_events: +1 row`, "good");
+    await delay(400);
+    setTokenPos(100);
+
+    const total = Math.round(performance.now() - t0);
+    latencyEl.textContent = total + ' ms (simulated)';
+    logRow("done", `event ${eid.slice(0,8)} live in warehouse`, "good");
+    snap('model', payload);
+    trackEl.classList.add('scrubable');
+
+    sendBtn.disabled = sendBadBtn.disabled = false;
+  }
+
+  sendBtn.addEventListener('click', () => sendEvent(false));
+  sendBadBtn.addEventListener('click', () => sendEvent(true));
+
+  // ============= Enrichment grid =============
+  const ENRICHMENTS = [
+    ["IP Lookup", "Country, region, city, lat/long from MaxMind."],
+    ["YAUAA", "Parses User-Agent into device, browser, OS, version."],
+    ["Bot Detection", "Combines YAUAA + IAB + ASN signals into one bot entity."],
+    ["Campaign Attribution", "Maps query-string params to UTM-style marketing fields."],
+    ["Referrer Parser", "Classifies referring URL as search, social, internal, etc."],
+    ["Currency Conversion", "Normalizes transaction values to your base currency."],
+    ["PII Pseudonymization", "Hashes specified fields to meet privacy requirements."],
+    ["Cross-Navigation", "Stitches journeys across your own domains via _sp param."],
+    ["Custom JavaScript", "Run arbitrary JS per event — derive whatever you need."],
+    ["Custom SQL / API", "Look up data from your DB or HTTP API, attach as entity."],
+    ["Cookie Extractor", "Pull values from cookies into typed entities."],
+    ["Event Fingerprint", "Hash payload fields for deduplication downstream."]
+  ];
+  const grid = document.getElementById('enrichGrid');
+  grid.innerHTML = ENRICHMENTS.map(([n,d]) =>
+    `<div class="card"><div class="pill">Enrichment</div><h3>${n}</h3><p>${d}</p></div>`
+  ).join('');
+
+  // initial state
+  reset();
+
+  // ============= Auto-resize host iframe to content =============
+  // Tells the parent page how tall we are so the iframe doesn't need an inner scrollbar.
+  (function () {
+    if (window.parent === window) return; // standalone, no-op
+    const post = () => {
+      const h = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
+      window.parent.postMessage({ type: 'sp-demo-resize', height: h }, '*');
+    };
+    new ResizeObserver(post).observe(document.documentElement);
+    window.addEventListener('load', post);
+    post();
+  })();
+</script>
+
+</body>
+</html>

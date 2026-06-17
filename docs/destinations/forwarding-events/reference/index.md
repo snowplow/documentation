@@ -86,7 +86,7 @@ allUnstruct(event, "com_acme_signup")?.signup_method
 `allContexts(event, entityName)` returns an array of all instances of an entity across schema versions, ordered with the highest version first. It returns an empty array if none are present:
 
 ```javascript
-// Version-pinned access:
+// Version-specific access:
 event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
 
 // Version-agnostic alternative:

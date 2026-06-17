@@ -76,7 +76,7 @@ The field names above hardcode a schema's major version (the `_1` suffix), so an
 `allUnstruct(event, eventName)` returns the payload of a self-describing event, or `undefined` if it's not present. The `eventName` is the snake_case vendor and name, without the `unstruct_event_` prefix or version suffix:
 
 ```javascript
-// Version-pinned access:
+// Version-specific access:
 event?.unstruct_event_com_acme_signup_1?.signup_method
 
 // Version-agnostic alternative:

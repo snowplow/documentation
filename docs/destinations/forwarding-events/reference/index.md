@@ -71,7 +71,7 @@ event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
 event?.contexts_com_acme_user_profile_1?.[0]?.account_created
 ```
 
-The field names above pin a schema's major version (the `_1` suffix), so an expression breaks when you start sending a new major version. To access custom events and entities without pinning the version, use the `allUnstruct` and `allContexts` [helper functions](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md#helper-functions), which match across all schema versions present on the event.
+The field names above hardcode a schema's major version (the `_1` suffix), so an expression breaks when you start sending a new major version. To access custom events and entities across all versions, use the `allUnstruct` and `allContexts` [helper functions](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md#helper-functions).
 
 `allUnstruct(event, eventName)` returns the payload of a self-describing event, or `undefined` if it's not present. The `eventName` is the snake_case vendor and name, without the `unstruct_event_` prefix or version suffix:
 

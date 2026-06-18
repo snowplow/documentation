@@ -1,0 +1,75 @@
+tutorials/snowplow-cli-mcp/setup.md
+  s_17845c729b46d5::t_5f3e11b9599f21 26
+tutorials/data-structures-in-git/introduction.md
+  s_17845c729b46d5::t_5f3e11b9599f21 19,24,30
+docs/event-studio/implement-tracking/configuration-reference/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 73
+tutorials/snowplow-cli-mcp/conclusion.md
+  s_17845c729b46d5::t_5f3e11b9599f21 20
+docs/event-studio/data-structures/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 14,142
+worker/redirects.js
+  s_17845c729b46d5::t_323627ddb0bf89 387
+  s_17845c729b46d5::t_c1fddf4f924b92 394
+  s_17845c729b46d5::t_74d65d7bf9db3a 398-399
+docs/migration-guides/adobe-analytics/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 166,185
+docs/api-reference/snowplow-cli/send-events/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 5-76
+docs/event-studio/implement-tracking/command-reference/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 88
+docs/event-studio/implement-tracking/snowtype-config/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 136
+docs/get-started/tracking/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 145
+docs/llms-support/cli-mcp-server/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 13,27,133
+docs/sources/snowplow-tracking-cli/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 12
+docs/api-reference/snowplow-cli/data-structures/index.md
+  s_17845c729b46d5::t_a574e1d6ad3a4a 9-14
+  s_17845c729b46d5::t_5f3e11b9599f21 16-20
+docs/migration-guides/google-analytics/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 175,178,194
+docs/migration-guides/mixpanel/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 214,229
+tutorials/data-structures-in-git/local-setup.md
+  s_17845c729b46d5::t_5f3e11b9599f21 37
+docs/api-reference/snowplow-cli/index.md
+  s_17845c729b46d5::t_3f69bfceac497f 4
+  s_17845c729b46d5::t_2e0596e4aebb9c 15-16
+  s_17845c729b46d5::t_5f3e11b9599f21 149-150
+docs/event-studio/programmatic-management/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 15,17-19
+docs/llms-support/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 22
+docs/glossary/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 76
+docs/migration-guides/segment/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 124,127,143
+docs/api-reference/snowplow-cli/tracking-plans/index.md
+  s_17845c729b46d5::t_42ea110181cc26 10-17
+  s_17845c729b46d5::t_5f3e11b9599f21 18-21
+docs/reusable/iglu-self-hosted-only/_callout.md
+  s_17845c729b46d5::t_5f3e11b9599f21 3
+docs/sources/index.md
+  s_17845c729b46d5::t_5f3e11b9599f21 59
+tutorials/snowplow-cli-mcp/introduction.md
+  s_17845c729b46d5::t_5f3e11b9599f21 35-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "d9f3584985e9cca454d44482829573774315fe53",
+  "prompts": {},
+  "sessions": {
+    "s_17845c729b46d5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a94ab49-ff2b-478d-9c61-03b308e666c1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gleb Lobov <gleb.lobov@snowplowanalytics.com>"
+    }
+  }
+}

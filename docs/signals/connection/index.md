@@ -241,9 +241,9 @@ Your API documentation is linked in Console on the **Overview** page, under **Co
 
 The SDKs handle authentication for you. When you call the Signals API directly, each request must include a Bearer token in the `Authorization` header.
 
-To obtain this token, exchange your Snowplow API key and key ID for a temporary access token using the Console Credentials API. The token is a JWT valid for 24 hours. See [account management](/docs/account-management/index.md#obtain-an-access-token) for the full process, including how to create an API key.
+To obtain this token, exchange your Snowplow API key and key ID for a temporary access token using the Console Credentials API. The token is a JWT valid for 24 hours. See [Account management](/docs/account-management/index.md#obtain-an-access-token) for the full process, including how to create an API key.
 
-First, exchange your API key for an access token:
+First, exchange your API key and key ID for an access token:
 
 ```bash
 curl \
@@ -263,7 +263,7 @@ Then use the JWT as a Bearer token in your Signals API requests:
 ```bash
 curl \
   --header 'Authorization: Bearer <JWT>' \
-  {{API_URL}}/api/v1/...
+  {{API_URL}}/api/v1/registry/interventions
 ```
 
 :::note[Signals Sandbox]

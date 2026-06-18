@@ -37,17 +37,6 @@ We recommend not enabling this enrichment in a CI setting unless necessary, beca
 
 You can enable any enrichments you like by passing corresponding configuration files to Micro.
 
-<details>
-<summary>Limitations for enrichments that rely on data files</summary>
-
-Some enrichments require data files (e.g. a database of IPs).
-
-The Enrich application in a full Snowplow pipeline will automatically download and periodically update these files. However, Micro will only download them once. You can always restart Micro to get a fresher copy of the files.
-
-You might also face access limitations where the database files are hosted on S3, GCS, or ADLS and are authenticated via the cloud environment roles and permissions.
-
-</details>
-
 For example, let’s say that you want to configure the [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md). The default configuration file looks like this:
 
 ```json reference
@@ -88,3 +77,10 @@ Once Micro starts, you should see messages like these:
 Micro is especially great for [testing the JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md).
 
 :::
+
+Some enrichments require data files (e.g., a database of IPs).
+
+Like Enrich, Micro supports downloading these files from `http(s)://` URLs and (since version 4.1.0) from S3, GCS and ADLS. Starting with version 4.3.0, Micro periodically re-downloads the files when they change, as opposed to only fetching them once on startup.
+
+For S3 and GCS, only authentication via instance profiles is supported (i.e., Micro needs to run on AWS or GCP respectively). For ADLS, set the `MICRO_AZURE_BLOB_ACCOUNT` and `MICRO_AZURE_BLOB_SAS_TOKEN` environment variables.
+

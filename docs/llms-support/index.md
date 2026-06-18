@@ -19,7 +19,7 @@ The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/index.md) is a remote 
 
 ## CLI MCP server
 
-The [Snowplow CLI MCP server](/docs/llms-support/cli-mcp-server/index.md) runs locally and connects AI assistants to your tracking plan files on disk. It is included in the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) and is focused on tracking plan design and validation.
+The [Snowplow CLI MCP server](/docs/llms-support/cli-mcp-server/index.md) runs locally and connects AI assistants to your tracking plan files on disk. It is included in the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) and is focused on tracking plan design and validation.
 
 ## Documentation index in `llms.txt`
 

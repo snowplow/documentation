@@ -163,7 +163,7 @@ You'll need to translate your Adobe Analytics configuration into Snowplow [track
 * Which eVar persistence behaviors need to be replicated in warehouse modeling?
 * How will you handle the `s.products` string? Snowplow's ecommerce tracking or custom product entities are more flexible alternatives.
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 :::info[Snowplow CLI MCP server]
 The Snowplow CLI includes an [MCP server](/docs/llms-support/cli-mcp-server/index.md) to help you translate your Adobe Analytics event configuration into Snowplow tracking plans.
@@ -182,7 +182,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
+If you haven't done this yet, use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
 Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Adobe Analytics tracking:

@@ -52,24 +52,22 @@ sp_signals = Signals(
 Use your current session ID to retrieve the attributes that Signals has just calculated about your session.
 
 ```python
+import pandas as pd
+
 attributes = sp_signals.get_service_attributes(
     name="quickstart_service",
     attribute_key="domain_sessionid",
     identifier="472f97c1-eec1-45fe-b081-3ff695c30415", # UPDATE THIS
 )
 
-print(attributes["page_view_count"])
-print(attributes["most_recent_browser"])
-print(attributes["first_referrer"])
+pd.DataFrame([attributes])
 ```
 
-Both methods return a plain dictionary keyed by attribute name. The result should look something like this:
+The result should look something like this:
 
-```
-2.0
-Firefox
-snowplow.io
-```
+| `page_view_count` | `most_recent_browser` | `first_referrer` |
+| ----------------- | --------------------- | ---------------- |
+| 2.0               | `Firefox`             | `snowplow.io`    |
 
 ### Retrieving single attributes
 
@@ -84,5 +82,5 @@ attributes = sp_signals.get_group_attributes(
     identifier="472f97c1-eec1-45fe-b081-3ff695c30415", # UPDATE THIS
 )
 
-print(attributes["page_view_count"])
+pd.DataFrame([attributes])
 ```

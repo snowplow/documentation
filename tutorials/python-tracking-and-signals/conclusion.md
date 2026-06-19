@@ -1,0 +1,25 @@
+---
+title: "Conclusion"
+position: 5
+sidebar_label: "Conclusion"
+description: "Recap of the end-to-end Python tracking and Signals personalization loop, with suggested next steps."
+keywords: ["snowplow python sdk", "signals", "next steps"]
+date: "2026-06-19"
+---
+
+You've built a complete real-time personalization loop in Python. Along the way you:
+
+* tracked page views, screen views, structured events, and a custom self-describing event with an entity, using the Snowplow Python tracker
+* attached stable UUID identifiers with a `Subject` so events and attributes line up
+* defined an attribute group, a service, and an intervention with the Signals Python SDK, and published them
+* retrieved a user's live attributes and reacted to an intervention from your application
+
+This is the same pattern that powers production personalization: track behavior, compute attributes in real time, and act the moment a user meets your criteria. Swap in your own events, attributes, and intervention rules to fit your product.
+
+## Next steps
+
+* Explore more [attribute aggregations and criteria](/docs/signals/attributes/attributes/) to compute richer signals, such as filtered counts or most-frequent values.
+* Learn how to [retrieve `domain_userid` and `domain_sessionid` in a web app](/docs/sources/web-trackers/cookies-and-local-storage/) so your backend can read attributes for real, signed-in users.
+* Read more about [interventions](/docs/signals/interventions/) and the different ways to [subscribe to them](/docs/signals/interventions/subscribe/).
+* Follow the [Signals quickstart](/tutorials/signals-quickstart/start) to define attributes in the Console UI.
+* Review the full [Python tracker](/docs/sources/python-tracker/) and [Signals](/docs/signals/) documentation for the complete API.

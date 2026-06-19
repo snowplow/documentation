@@ -1,0 +1,8 @@
+{
+  "title": "Track and personalize from Python with Snowplow Signals",
+  "description": "Instrument a Python backend with the Snowplow tracker, then compute and act on real-time user attributes and interventions using the Signals Python SDK.",
+  "label": "Signals implementation",
+  "useCase": "Real-time personalization",
+  "technologies": ["Python"],
+  "snowplowTech": ["Signals", "Console"]
+}

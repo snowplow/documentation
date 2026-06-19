@@ -43,13 +43,13 @@ sp_signals = Signals(
 
 ## Define an attribute group
 
-An attribute group computes one or more attributes for a given [attribute key](/docs/signals/concepts/) (the identifier the attributes are calculated against). Here you'll key on `domain_userid`, and count `task_completed` events over a rolling 7-day window.
+An attribute group computes one or more attributes for a given [attribute key](/docs/signals/concepts/) (the identifier the attributes are calculated against). Here you'll key on `user_id`, and count `task_completed` events over a rolling 7-day window.
 
 The `Event` you reference must match the schema you created: same vendor, name, and version.
 
 ```python
 from datetime import timedelta
-from snowplow_signals import StreamAttributeGroup, Attribute, Event, EventProperty, domain_userid
+from snowplow_signals import StreamAttributeGroup, Attribute, Event, EventProperty, user_id
 
 OWNER = "you@example.com"  # a valid email; identifies the owner of the definition
 
@@ -58,7 +58,7 @@ task_completed = Event(vendor="com.example", name="task_completed", version="1-0
 engagement_group = StreamAttributeGroup(
     name="project_engagement",
     version=1,
-    attribute_key=domain_userid,
+    attribute_key=user_id,
     owner=OWNER,
     description="Per-user engagement with the project tool",
     attributes=[
@@ -86,7 +86,7 @@ engagement_group = StreamAttributeGroup(
 )
 ```
 
-`domain_userid` is a built-in attribute key exported by the SDK. `domain_sessionid` and `user_id` are also available if you want to compute attributes per session or per logged-in user instead.
+`user_id` is a built-in attribute key exported by the SDK. `domain_userid` and `domain_sessionid` are also available if you want to compute attributes per device or per session instead. Whichever key you choose, its values must be UUID-formatted.
 
 The `counter` aggregation simply counts matching events, so it needs no property. Aggregations that read a value — such as `last`, `first`, `min`, `max`, `sum`, or `mean` — require a `property` that points to the field to read. Here, `EventProperty` references the `priority` field of the `task_completed` event, using the schema's major version.
 
@@ -132,7 +132,7 @@ power_user_nudge = RuleIntervention(
             ),
         ]
     ),
-    target_attribute_keys=[LinkAttributeKey(name="domain_userid")],
+    target_attribute_keys=[LinkAttributeKey(name="user_id")],
 )
 ```
 
@@ -151,5 +151,5 @@ Open **Signals** in Console to confirm that your attribute group, service, and i
 * `get_service_attributes() got an unexpected keyword argument 'service'`: the parameter is `name=`, not `service=`. The same applies to `get_group_attributes` (`name=`, not `group_name=`).
 * `422: ... aggregation requires a property to be set`: value-reading aggregations such as `last`, `first`, `min`, `max`, `sum`, and `mean` need a `property` (for example an `EventProperty`). Only `counter` works without one.
 * Intervention validation error on `attribute`: the attribute must be qualified as `group_name:attribute_name`, for example `project_engagement:tasks_completed_count`.
-* Intervention validation error on `target_attribute_keys`: pass `LinkAttributeKey(name="domain_userid")`, not the built-in `domain_userid` attribute key object.
+* Intervention validation error on `target_attribute_keys`: pass `LinkAttributeKey(name="user_id")`, not the built-in `user_id` attribute key object.
 * `owner` validation error: `owner` must be a valid email address.

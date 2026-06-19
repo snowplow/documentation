@@ -3,13 +3,13 @@ title: "Set up tracking"
 position: 2
 sidebar_label: "Set up tracking"
 description: "Install the Snowplow Python tracker, create the event schema, initialize a tracker with stable user identifiers, and track project activity."
-keywords: ["snowplow python tracker", "self-describing event", "subject", "domain_userid"]
+keywords: ["snowplow python tracker", "self-describing event", "subject", "user_id"]
 date: "2026-06-19"
 ---
 
 In this section you'll instrument your project-management app's backend to send events. You'll install the Python tracker, create the [schema](/docs/fundamentals/schemas/) for a custom event, initialize a tracker, and track a user completing some work.
 
-The key idea that makes the rest of the tutorial work is identity: you'll generate stable UUIDs for the user and session, and attach them to every event. Signals later uses these same identifiers to compute and retrieve attributes for that user.
+The key idea that makes the rest of the tutorial work is identity: you'll attach a stable `user_id` to every event. Signals later uses that same `user_id` to compute and retrieve attributes for that user. Signals requires attribute key values to be UUID-formatted, so you'll use a UUID as the `user_id`.
 
 ## Install the SDKs
 
@@ -48,7 +48,7 @@ Once published, these resolve to the following Iglu URIs, which you'll reference
 
 ## Initialize the tracker
 
-Create a tracker using the `Snowplow` factory, which is the recommended initialization path. Attach a `Subject` carrying your minted UUIDs so that every event is associated with the same user and session.
+Create a tracker using the `Snowplow` factory, which is the recommended initialization path. Attach a `Subject` carrying the user's ID so that every event is associated with the same user.
 
 ```python
 import uuid
@@ -56,16 +56,12 @@ from snowplow_tracker import Snowplow, Subject
 
 COLLECTOR_URL = "YOUR_COLLECTOR_HOST"  # e.g. https://collector.acme.com
 
-# Mint UUIDs once, and reuse them for tracking AND for Signals retrieval later.
-domain_userid = str(uuid.uuid4())
-domain_sessionid = str(uuid.uuid4())
+# The signed-in user's ID. Signals requires attribute key values to be
+# UUID-formatted, so use a UUID and reuse it for tracking AND retrieval.
+user_id = str(uuid.uuid4())
 
-# The Subject attaches your identifiers to every event.
-subject = (
-    Subject()
-    .set_domain_user_id(domain_userid)
-    .set_domain_session_id(domain_sessionid)
-)
+# The Subject attaches the user_id to every event.
+subject = Subject().set_user_id(user_id)
 
 Snowplow.create_tracker(
     namespace="project-app",
@@ -76,10 +72,11 @@ Snowplow.create_tracker(
 tracker = Snowplow.get_tracker("project-app")
 ```
 
-:::warning[Attach a Subject, or attributes won't resolve]
-Without a `Subject`, the tracker generates its own random `domain_userid` and `domain_sessionid` for each event. Signals would then compute attributes against those auto-generated identifiers, and your retrieval calls (which use your minted UUIDs) would silently return `None`. Always set the identifiers explicitly and reuse the same values everywhere.
+:::warning[Identifiers must be UUID-formatted, and set via a Subject]
+Two things will silently cost you all your attributes if you get them wrong:
 
-Signals also requires that identifier values are UUIDs. Using a non-UUID value such as an email address causes a `400: only UUIDs allowed as attribute key values` error. If you key on your own user IDs, map them to UUIDs first.
+* **Attach a `Subject` that sets `user_id`.** Without it, your events carry no `user_id`, so Signals can't attribute them to a user and your retrieval calls (which look up by `user_id`) return `None`. Always set `user_id` explicitly and reuse the same value when you retrieve attributes.
+* **Use a UUID-formatted value.** Signals requires attribute key values to be UUIDs. A non-UUID value doesn't raise an error, but no attributes will ever compute or be retrievable for it and interventions won't fire. Because this tutorial keys on `user_id`, the `user_id` value itself must be a UUID — so map your application's real user IDs to UUIDs (for example, a deterministic UUID per user) and use that mapped value everywhere.
 :::
 
 ## Track project activity
@@ -149,4 +146,4 @@ There is no `Snowplow.flush()`. Flush from the tracker instance with `tracker.fl
 
 * `SelfDescribing.__init__() got an unexpected keyword argument 'event'`: `SelfDescribing` takes the `SelfDescribingJson` as its first positional argument. The keyword form is `event_json=`, not `event=`.
 * `Tracker.__init__() got multiple values for argument 'namespace'`: if you construct components manually, pass everything as keyword arguments — `Tracker(namespace=..., emitters=...)`. The parameter is `emitters` (plural), and accepts a single emitter or a list.
-* Events tracked but no attributes later: confirm you attached a `Subject` with your minted UUIDs, and that the same `domain_userid` is used for retrieval.
+* Events tracked but no attributes later: confirm you attached a `Subject` that sets `user_id`, that the value is UUID-formatted, and that the same `user_id` is used for retrieval.

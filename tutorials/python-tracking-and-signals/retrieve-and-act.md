@@ -11,13 +11,13 @@ With events flowing and definitions published, you can now read attributes and r
 
 ## Retrieve attributes from your application
 
-Retrieve a user's attributes through the service you defined. Use the **same** `domain_userid` UUID that you tracked with, as the `identifier`.
+Retrieve a user's attributes through the service you defined. Use the **same** `user_id` that you tracked with, as the `identifier`.
 
 ```python
 attributes = sp_signals.get_service_attributes(
     name="project_engagement_service",
-    attribute_key="domain_userid",
-    identifier=domain_userid,
+    attribute_key="user_id",
+    identifier=user_id,
 )
 
 print(attributes["tasks_completed_count"])
@@ -33,8 +33,8 @@ attributes = sp_signals.get_group_attributes(
     name="project_engagement",
     version=1,
     attributes=["tasks_completed_count"],
-    attribute_key="domain_userid",
-    identifier=domain_userid,
+    attribute_key="user_id",
+    identifier=user_id,
 )
 ```
 
@@ -49,7 +49,7 @@ Instead of polling attributes, you can subscribe to interventions and have Signa
 ```python
 from snowplow_signals import AttributeKeyIdentifiers
 
-targets = AttributeKeyIdentifiers({"domain_userid": [domain_userid]})
+targets = AttributeKeyIdentifiers({"user_id": [user_id]})
 
 subscription = sp_signals.pull_interventions(targets)
 subscription.add_handler(lambda intervention: print("INTERVENTION:", intervention))
@@ -65,7 +65,7 @@ subscription.stop()
 In your app, the handler is where you'd act, for example by showing an in-app prompt inviting the user to add a teammate.
 
 :::warning[Interventions fire only once per target]
-An intervention is sent only the first time its criteria are met for a given target. Re-running the script with the same `domain_userid` won't fire it again. To test repeatedly, mint a fresh `domain_userid` and track enough `task_completed` events to cross the threshold under that new identifier.
+An intervention is sent only the first time its criteria are met for a given target. Re-running the script with the same `user_id` won't fire it again. To test repeatedly, mint a fresh `user_id` (a new UUID) and track enough `task_completed` events to cross the threshold under that new identifier.
 :::
 
 ## Put it all together
@@ -92,16 +92,11 @@ if any(
 ):
     sys.exit("Fill in the placeholder configuration values before running.")
 
-# --- Identity: mint UUIDs and reuse them for tracking and retrieval ---
-domain_userid = str(uuid.uuid4())
-domain_sessionid = str(uuid.uuid4())
+# --- Identity: a UUID-formatted user_id, reused for tracking and retrieval ---
+user_id = str(uuid.uuid4())
 
 # --- Tracker ---
-subject = (
-    Subject()
-    .set_domain_user_id(domain_userid)
-    .set_domain_session_id(domain_sessionid)
-)
+subject = Subject().set_user_id(user_id)
 Snowplow.create_tracker(
     namespace="project-app",
     endpoint=COLLECTOR_URL,
@@ -119,7 +114,7 @@ sp_signals = Signals(
 )
 
 # --- Subscribe to interventions before tracking ---
-targets = AttributeKeyIdentifiers({"domain_userid": [domain_userid]})
+targets = AttributeKeyIdentifiers({"user_id": [user_id]})
 subscription = sp_signals.pull_interventions(targets)
 subscription.add_handler(lambda intervention: print("INTERVENTION:", intervention))
 subscription.start()
@@ -147,8 +142,8 @@ for _ in range(12):
     time.sleep(5)
     attributes = sp_signals.get_service_attributes(
         name="project_engagement_service",
-        attribute_key="domain_userid",
-        identifier=domain_userid,
+        attribute_key="user_id",
+        identifier=user_id,
     )
     count = attributes["tasks_completed_count"]
     if count is not None:
@@ -166,6 +161,6 @@ When you run this, you should see the `tasks_completed_count` value, followed by
 
 ## Troubleshooting
 
-* `tasks_completed_count` is `None` or missing: confirm the tracker has a `Subject` with your minted `domain_userid`, that you're retrieving with the same UUID, and that you've allowed time for the stream to propagate.
-* The intervention never arrives: it fires only the first time the threshold is crossed for a target. Use a fresh `domain_userid` and re-track enough events. Also confirm the intervention is published and its threshold matches how many events you sent.
-* `400: only UUIDs allowed as attribute key values`: your identifier isn't a UUID. Use `str(uuid.uuid4())` and reuse it everywhere.
+* `tasks_completed_count` is `None` or missing: confirm the tracker has a `Subject` that sets `user_id`, that you're retrieving with the same `user_id`, and that you've allowed time for the stream to propagate.
+* Values never compute, even after waiting: check that your `user_id` is UUID-formatted. A non-UUID value won't error, but Signals never computes or returns attributes for it, and interventions won't fire.
+* The intervention never arrives: it fires only the first time the threshold is crossed for a target. Use a fresh `user_id` and re-track enough events. Also confirm the intervention is published and its threshold matches how many events you sent.

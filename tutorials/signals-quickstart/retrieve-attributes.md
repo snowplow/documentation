@@ -52,35 +52,37 @@ sp_signals = Signals(
 Use your current session ID to retrieve the attributes that Signals has just calculated about your session.
 
 ```python
-response = sp_signals.get_service_attributes(
+attributes = sp_signals.get_service_attributes(
     name="quickstart_service",
     attribute_key="domain_sessionid",
     identifier="472f97c1-eec1-45fe-b081-3ff695c30415", # UPDATE THIS
 )
 
-df=response.to_dataframe()
-df
+print(attributes["page_view_count"])
+print(attributes["most_recent_browser"])
+print(attributes["first_referrer"])
 ```
 
-The result should look something like this:
+Both methods return a plain dictionary keyed by attribute name. The result should look something like this:
 
-|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer` |
-| --- | -------------------------------------- | ----------------- | --------------------- | ---------------- |
-| 0   | `472f97c1-eec1-45fe-b081-3ff695c30415` | 2.0               | `Firefox`             | `snowplow.io`    |
+```
+2.0
+Firefox
+snowplow.io
+```
 
 ### Retrieving single attributes
 
 To retrieve individual attributes rather than using a service, use the `get_group_attributes()` method.
 
 ```python
-response = sp_signals.get_group_attributes(
+attributes = sp_signals.get_group_attributes(
     name="quickstart_group",
     version=1,
     attributes=["page_view_count"],
     attribute_key="domain_sessionid",
-    identifiers=["472f97c1-eec1-45fe-b081-3ff695c30415"]
+    identifier="472f97c1-eec1-45fe-b081-3ff695c30415", # UPDATE THIS
 )
 
-df=response.to_dataframe()
-df
+print(attributes["page_view_count"])
 ```

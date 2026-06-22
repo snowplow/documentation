@@ -31,7 +31,7 @@ export const versions = {
   bqLoader: '2.2.0',
   bqLoader1x: '1.7.2',
   esLoader: '3.0.1',
-  gcsLoader: '0.5.6',
+  gcsLoader: '0.5.7',
   postgresLoader: '0.3.3',
   rdbLoader: '6.5.0',
   s3Loader: '3.2.0',

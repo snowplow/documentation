@@ -18,8 +18,8 @@ This is the same pattern that powers production personalization: track behavior,
 
 ## Next steps
 
-* Explore more [attribute aggregations and criteria](/docs/signals/attributes/attributes/index.md) to compute richer signals, such as filtered counts or most-frequent values.
+* Explore more [attribute aggregations and criteria](/docs/signals/attributes/attributes/) to compute richer signals, such as filtered counts or most-frequent values.
 * Set the `user_id` from your authentication layer (mapped to a UUID) consistently across every tracker — web, mobile, and server — so Signals attributes follow the same user everywhere.
-* Read more about [interventions](/docs/signals/interventions/index.md) and the different ways to [subscribe to them](/docs/signals/applications/subscribe/index.md).
+* Read more about [interventions](/docs/signals/interventions/) and the different ways to [subscribe to them](/docs/signals/applications/subscribe/).
 * Follow the [Signals quickstart](/tutorials/signals-quickstart/start) to define attributes in the Console UI.
-* Review the full [Python tracker](/docs/sources/python-tracker/index.md) and [Signals](/docs/signals/index.md) documentation for the complete API.
+* Review the full [Python tracker](/docs/sources/python-tracker/) and [Signals](/docs/signals/) documentation for the complete API.

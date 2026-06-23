@@ -10,10 +10,10 @@ date: "2026-06-19"
 Now that events are flowing, you'll tell Signals what to compute from them. In this section you'll connect to Signals and define three things with the Python SDK:
 
 * an [attribute group](/docs/signals/attributes/attribute-groups/) that counts completed tasks per user
-* a [service](/docs/signals/attributes/services/) that bundles the group for easy retrieval
+* a [service](/docs/signals/applications/services/) that bundles the group for easy retrieval
 * an [intervention](/docs/signals/interventions/) that fires when a user crosses an engagement threshold
 
-You can also define all of these in the Console UI. This tutorial uses the [Python SDK](/docs/signals/attributes/using-python-sdk/) so the whole loop lives in code.
+You can also define all of these in the Console UI. This tutorial uses the [Python SDK](/docs/signals/connection/) so the whole loop lives in code.
 
 ## Connect to Signals
 

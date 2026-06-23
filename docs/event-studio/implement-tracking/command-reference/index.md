@@ -85,7 +85,7 @@ Adds new items to the configuration file without modifying it by hand.
 | `-p, --dataProductIds <ids...>`        | Tracking plan IDs                                                                                                         |
 | `-d, --dataStructures <uris...>`       | Data structure schema URIs                                                                                                |
 | `-i, --igluCentralSchemas <uris...>`   | Iglu Central schema URI.                                                                                                  |
-| `-r, --repositories <paths...>`        | [Local data structure repository](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md) paths |
+| `-r, --repositories <paths...>`        | [Local data structure repository](/docs/api-reference/snowplow-cli/data-structures/index.md) paths |
 
 ## `purge`
 

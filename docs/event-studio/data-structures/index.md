@@ -11,7 +11,7 @@ keywords: ["data structures", "schemas", "JSON schemas", "schema management"]
 This section explains how to create, manage, and update [data structures](/docs/fundamentals/schemas/index.md) (schemas). Snowplow provides different options for data structure management:
 * Snowplow Console UI
 * [Data structures API](/docs/event-studio/programmatic-management/data-structures-api/index.md)
-* [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md)
+* [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md)
 * For Community users: [Iglu](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)
 
 ## Create a data structure
@@ -139,7 +139,7 @@ This will take you to a list of hidden data structures, locate the one you wish 
 
 ## Externally managed data structures
 
-Data structures can be managed from an external repository using [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md).
+Data structures can be managed from an external repository using [Snowplow CLI](/docs/api-reference/snowplow-cli/data-structures/index.md).
 
 When a data structure is managed this way it becomes locked in the UI, disabling all editing. You will see a banner explaining the situation and giving people with the 'publish to production' (default for admin users) capability the ability to unlock.
 

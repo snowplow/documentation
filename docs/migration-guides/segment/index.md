@@ -121,10 +121,10 @@ You'll need to translate your Segment Tracking Plans into Snowplow [tracking pla
 * Are there sets of event properties used in multiple places that could be defined as [entities](/docs/fundamentals/entities/index.md) instead?
 * What's the best combination of event properties and entities to capture the same data as the non-`track` Segment events?
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 :::info[Snowplow CLI MCP server]
-The Snowplow CLI includes an [MCP server](/docs/event-studio/programmatic-management/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow tracking plans.
+The Snowplow CLI includes an [MCP server](/docs/api-reference/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow tracking plans.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
@@ -140,7 +140,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
+If you haven't done this yet, use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
 Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Segment tracking:

@@ -73,7 +73,7 @@ Define [Signals attributes](/docs/signals/attributes/index.md) that compute real
 
 ### Retrieve Signals attributes
 
-Create a [service](/docs/signals/attributes/services/index.md) and follow the [retrieval steps](/docs/signals/connection/index.md) to access attribute values from your front-end or back-end.
+Create a [service](/docs/signals/applications/services/index.md) and follow the [retrieval steps](/docs/signals/applications/retrieve-attributes/index.md) to access attribute values from your front-end or back-end.
 
 ### Trigger interventions
 

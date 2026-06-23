@@ -6,21 +6,15 @@ description: "Snowplow Signals is a real-time personalization engine that comput
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 ---
 
-**Give your AI agents the context they need to act intelligently with Snowplow Signals**.
+Snowplow Signals computes user attributes from your behavioral data in real time, and serves them to your applications over an API. Attributes are calculated from your Snowplow event stream as events arrive, or synced from tables in your warehouse.
 
-<CardGrid cols={2}>
-  <CallToActionCard
-    title="Get started with Signals"
-    description="Try out Signals for free without a Snowplow account"
-    href="https://try-signals.snowplow.io/"
-  />
+Use Signals to:
+* Personalize content, recommendations, and pricing based on what the user is doing in their current session
+* Give chatbots and AI agents context about the user they're interacting with
+* Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
+* Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
-  <CallToActionCard
-    title="Snowplow for Composable Analytics"
-    description="Learn about the Customer Data Infrastructure that's the foundation for Signals"
-    href="/docs/"
-  />
-</CardGrid>
+If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to try Signals in Snowplow Console.
 
 ## Explore Signals
 
@@ -31,8 +25,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     description="Calculate user attributes in real time"
   >
     [Learn about attributes](/docs/signals/concepts/index.md#attribute-groups)
-    [Define attributes](/docs/signals/attributes/attribute-groups/index.md)
-    [Retrieve attributes](/docs/signals/attributes/index.md)
+    [Define attributes](/docs/signals/attributes/index.md)
+    [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
   </FeaturedSection>
 
   <FeaturedSection
@@ -41,7 +35,7 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
   >
     [Learn about interventions](/docs/signals/concepts/index.md#interventions)
     [Define interventions](/docs/signals/interventions/index.md)
-    [Subscribe to interventions](/docs/signals/interventions/subscribe/index.md)
+    [Subscribe to interventions](/docs/signals/applications/subscribe/index.md)
   </FeaturedSection>
 
   <FeaturedSection
@@ -49,8 +43,8 @@ keywords: ["real-time personalization", "customer intelligence", "behavioral dat
     description="Use Signals within a notebook"
   >
     [Connect to Signals](/docs/signals/connection/index.md#signals-python-sdk)
-    [Define attributes](/docs/signals/attributes/using-python-sdk/index.md)
-    [Define interventions](/docs/signals/interventions/using-python-sdk/index.md)
+    [Define attributes](/docs/signals/attributes/index.md)
+    [Define interventions](/docs/signals/interventions/index.md)
   </FeaturedSection>
 
 </CardGrid>

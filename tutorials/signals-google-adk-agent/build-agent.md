@@ -11,7 +11,7 @@ The next step is to connect Signals to the Google ADK agent, and forward the Sno
 
 ## Fetch Signals context from Python
 
-Create a module inside the `agent/` directory that wraps the [Snowplow Signals Python SDK](/docs/signals/attributes/using-python-sdk/):
+Create a module inside the `agent/` directory that wraps the [Snowplow Signals Python SDK](/docs/signals/attributes/attribute-groups/):
 
 ```python
 # agent/signals_context.py

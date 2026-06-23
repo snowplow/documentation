@@ -96,7 +96,7 @@ session_attributes_group = StreamAttributeGroup(
 
 ## Create a service
 
-Run the notebook cell that defines a [service](/docs/signals/attributes/services/) to manage the attribute group:
+Run the notebook cell that defines a [service](/docs/signals/applications/services/) to manage the attribute group:
 
 ```python
 travel_service = Service(

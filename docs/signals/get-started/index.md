@@ -1,7 +1,7 @@
 ---
 title: "Get started with Snowplow Signals"
 sidebar_label: "Get started"
-sidebar_position: 8.7
+sidebar_position: 5
 description: "Learn how to use Snowplow Signals to compute user attributes from event data, retrieve them in real time for personalization and agentic applications, and trigger automated actions based on user behavior."
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 ---
@@ -18,25 +18,13 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 Snowplow Signals computes user attributes from your data. You can retrieve these attributes in your applications to take real-time actions. Signals can also send automated triggers to your applications based on calculated attributes.
 
 Use Signals to:
-* Provide enriched user context to chatbots and other agentic applications, in near real time
+* Provide enriched user context to chatbots and other agentic applications, in real time
 * Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
 * Trigger actions automatically when users meet specific criteria
 
-By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also configure it to calculate from warehouse data.
+By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
-## Try Signals for free
-
-Signals Sandbox is a [free, lightweight sandbox environment](https://try-signals.snowplow.io/) where you can try out Signals without needing a Snowplow account or pipeline. Log in with your GitHub account to get started.
-
-The Sandbox provides you with:
-* Signals infrastructure and Snowplow pipeline deployed in a dedicated environment
-* [Event Collector](/docs/fundamentals/index.md) endpoint
-* Signals Profiles API endpoint
-* Sandbox Token for authentication
-
-Check out the [real-time interventions tutorial](/tutorials/signals-interventions/start) for a hands-on introduction to using the Sandbox. The tutorial uses a demo ecommerce website to generate events, but you could also send your own events to the Sandbox Collector using any [Snowplow tracker](/docs/sources/index.md).
-
-Use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api) to start experimenting with [attributes](/docs/signals/concepts/index.md#attribute-groups) and [interventions](/docs/signals/concepts/index.md#interventions).
+If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to experience Signals and Snowplow Console.
 
 ## Architecture
 
@@ -51,45 +39,51 @@ Signals consists of several new infrastructure components. When running Signals,
 The core Signals components are:
 * **Profiles Store**: stores calculated attributes and configurations
 * Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
-* **Streaming engine**: computes attributes from Snowplow events in stream, and sends them directly to the Profiles Store
-* **Sync engine**: periodically updates the Profiles Store with batch attributes
-* **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
+* **Streaming engine**: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
+* **Batch engine**: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
 
 ![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 
 ## Workflow
 
-These are the high-level steps for using Signals:
-1. Decide on the business logic
-2. Apply the configurations to Signals
-3. Use the attributes and interventions to take action in your application
+These are the high-level steps for using Signals, and the documentation in this section follows the same order:
+1. Set up Signals
+2. Plan your use case
+3. Define and publish your configuration
+4. Take action in your application
 
-Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for help getting started.
+Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a hands-on walkthrough.
 
-### 1. Decide on the business logic
+### 1. Set up Signals
 
-Your first step is to decide what changes in user behavior you're aiming for. What systems or data will you need to achieve this? This planning will help you decide which attributes you want to calculate, and which interventions you're interested in defining.
+[Enable Signals](/docs/signals/setup/index.md) in Snowplow Console. This is a one-time task that deploys the Signals infrastructure alongside your pipeline.
 
-You'll also need to decide whether to calculate attributes from your real-time event stream (default), or from warehouse data, or both.
+Connecting a warehouse is optional, but you'll need one to backfill stream attributes with historical data, sync pre-calculated warehouse tables, or test attribute definitions before publishing.
 
-Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
+### 2. Plan your use case
 
-### 2. Apply the configuration
+Decide what changes in user behavior you're aiming for, and what your application will do about them. This planning will tell you:
+* Which [attributes](/docs/signals/concepts/index.md#attribute-groups) to calculate, and at what level — per user, per session, or against a custom [attribute key](/docs/signals/concepts/index.md#attribute-keys)
+* Whether to calculate them from your real-time event stream, sync pre-calculated values from your warehouse, or both — see [data sources](/docs/signals/concepts/index.md#data-sources)
+* Whether your application will pull attribute values on demand, react to [interventions](/docs/signals/concepts/index.md#interventions) pushed by Signals, or both
 
-We recommend using [Console](https://console.snowplowanalytics.com) to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
+The [fundamentals](/docs/signals/concepts/index.md) page explains all of these components.
 
-Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
+### 3. Define and publish your configuration
 
-### 3. Take action in your application
+[Define attribute groups](/docs/signals/attributes/index.md) and [interventions](/docs/signals/interventions/index.md), using Snowplow Console or the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk). Group your published attribute groups into [services](/docs/signals/applications/services/index.md), so your applications consume a stable set of attributes.
 
-Retrieve calculated attributes in your application using the [Node.js](https://www.npmjs.com/package/@snowplow/signals-node) or [Python](https://pypi.org/project/snowplow-signals/) Signals SDKs. You could also use the Signals API.
+Definitions only take effect once published: publishing is what makes Signals start calculating attributes and populating the Profiles Store. The [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow) describes the full lifecycle, including testing definitions before you publish.
 
-Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to automatically take action based on user behavior.
+### 4. Take action in your application
+
+[Retrieve the calculated attributes](/docs/signals/applications/retrieve-attributes/index.md) in your application using the Python SDK, Node.js SDK, or API, and use them to personalize the user experience.
+
+To react to user behavior as it happens, [subscribe to interventions](/docs/signals/applications/subscribe/index.md) using the Python SDK, the browser tracker plugin, or the API.
 
 ## Resources
 
 Check out the Signals foundations tutorials:
 * [Quick Start](/tutorials/signals-quickstart/start) for defining stream attributes using the UI or the Python SDK
-* [Set up the Signals batch engine](/tutorials/signals-batch-engine/start) to calculate and sync attributes from warehouse data
 
 Follow the [real-time prospect scoring with ML](/tutorials/signals-ml-prospect-scoring/intro) solution accelerator to explore using Signals with a machine learning use case.

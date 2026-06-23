@@ -25,4 +25,3 @@ Here are some ideas for further exploration:
 * Explore our other Signals tutorials:
   * [Implement Real-Time Interventions in an Ecommerce App Using Signals](/tutorials/signals-interventions/start).
   * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro)
-  * [Set up the Signals batch engine](/tutorials/signals-batch-engine/start) for calculating attributes from your warehouse

@@ -13,8 +13,8 @@ import TabItem from '@theme/TabItem';
 
 The first step is to set up your Signals connection. Follow the instructions in the [Signals connection documentation](/docs/signals/connection/) for your chosen deployment method:
 
-- **Snowplow Console**: [enable Signals through Snowplow Console](/docs/signals/connection/#snowplow-console) if you have a Snowplow account
-- **Signals Sandbox**: [deploy a Sandbox instance](/docs/signals/connection/#signals-sandbox) to experiment without a Snowplow account
+- **Snowplow Console**: [enable Signals through Snowplow Console](/docs/signals/setup/) if you have a Snowplow account
+- **Signals Sandbox**: [deploy a Sandbox instance](https://try-signals.snowplow.io/) to experiment without a Snowplow account
 
 Once your connection is set up, gather the required credentials as described in the [connection credentials section](/docs/signals/connection/#connection-credentials).
 

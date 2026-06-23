@@ -1,7 +1,7 @@
 ---
 title: "Snowplow CLI for data management"
 sidebar_label: "Snowplow CLI"
-sidebar_position: 0.5
+sidebar_position: 110
 description: "Command-line tool for downloading and syncing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
 keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
 ---
@@ -12,8 +12,8 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
 <AvailabilityBadges
-  available={['cloud', 'pmc']}
-  helpContent="Snowplow CLI is available for Snowplow CDI customers only."
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow CLI works with any pipeline. Sending events works with any Collector; managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 <TrackingPlansNomenclature />
@@ -66,6 +66,10 @@ This command will:
 You can also use optional flags:
 - `--read-only`: Create a read-only API key
 - `--dotenv`: Store configuration as .env file in current working directory
+
+:::note[For SSO-enabled Snowplow organizations]
+If SSO is enabled for your Snowplow organization, you will need to follow the [Manual Configuration](#manual-configuration) method instead.
+:::
 
 ### Manual Configuration
 
@@ -146,5 +150,6 @@ For setup instructions and configuration examples for different MCP clients, see
 
 ## Use cases
 
-- [Manage your data structures with snowplow-cli](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md)
+- [Manage your data structures with snowplow-cli](/docs/api-reference/snowplow-cli/data-structures/index.md)
+- [Send events from the command line with snowplow-cli](/docs/api-reference/snowplow-cli/send-events/index.md)
 - [Set up a GitHub CI/CD pipeline to manage data structures and tracking plans](/tutorials/data-structures-in-git/introduction)

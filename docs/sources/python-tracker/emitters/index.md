@@ -99,7 +99,7 @@ def failure(num, arr):
     for event_dict in arr:
         print(event_dict)
 
-e = Emitter(endpoint="collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
+e = Emitter(endpoint="collector.example.com", batch_size=3, on_success=new_success, on_failure=failure)
 
 t = Tracker(namespace="snowplow_tracker", emitter=e)
 ```

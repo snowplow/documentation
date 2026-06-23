@@ -133,7 +133,7 @@ Add the URI to the `igluCentralSchemas` array in your configuration file:
 
 ### Local data structure repositories
 
-If you manage schemas locally using [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/data-structures/index.md), you can point Snowtype at your local repository paths. Add them to the `repositories` array:
+If you manage schemas locally using [Snowplow CLI](/docs/api-reference/snowplow-cli/data-structures/index.md), you can point Snowtype at your local repository paths. Add them to the `repositories` array:
 
 ```json
 {

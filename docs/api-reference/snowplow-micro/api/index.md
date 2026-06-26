@@ -45,7 +45,8 @@ Each object in the `filters` array has the following fields:
 | Field | Type | Description |
 |---|---|---|
 | `column` | string | Column name to filter on (e.g., `app_id`, `event_name`). |
-| `value` | string | Filter value. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `v_tracker`. |
+| `values` (since version 4.4.0) | array of strings | One or more values to filter for. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `v_tracker`.  |
+| `value` (before version 4.4.0) | string | The value to filter for. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `v_tracker`.  |
 
 The `timeRange` object has the following fields:
 

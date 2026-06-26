@@ -136,3 +136,9 @@ You will receive the following fields in the events (as well as all relevant fie
 | `v_tracker` | `cf-worker-1.0.0` | Tracker version |
 | `useragent` | from the original request | The visitor's `User-Agent` header |
 | `page_url` | from the original request | The URL of the requested page |
+
+## CloudFront
+
+If your website is served through Amazon CloudFront, you can forward standard access logs to Snowplow using Amazon Data Firehose. Firehose delivers log batches to the Snowplow Collector via HTTP, and Enrich produces one page view event per log entry.
+
+See [CloudFront access logs via Firehose](/docs/sources/cdn-trackers/cloudfront/index.md) for setup instructions, including how to configure the Firehose stream, which log fields to enable, and how to filter events before ingestion using a Lambda function.

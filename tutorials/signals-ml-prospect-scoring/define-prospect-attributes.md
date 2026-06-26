@@ -139,7 +139,6 @@ Signals will start populating your Profiles Store with attributes calculated fro
 
 :::note
 This section expects that you [integrated](/docs/sources/web-trackers/quick-start-guide/) `sp.js` into a website and have events flowing to the collector.
-If you're using Signals Sandbox your collector URL for `sp.js` is next to the Signals token.
 :::
 
 Go to your website, and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.

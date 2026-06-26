@@ -6,11 +6,6 @@ description: "Use the interactive demo e-shop to see your Signals configuration 
 keywords: ["signals demo app", "javascript tracker ecommerce"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Now that you've defined attributes and interventions, it's time to see them work in a real application. We've prepared a demo React application with Snowplow tracking that can integrate with your Signals instance to demonstrate real-time personalization.
 
 The demo application features:
@@ -33,20 +28,8 @@ When you first open the app, you'll see a configuration screen.
 
 Enter your credentials from the setup step.
 
-<Tabs groupId="connection" queryString>
-<TabItem value="console" label="Snowplow Console" default>
-
 * **Collector URL**: your Snowplow Collector endpoint for the pipeline you enabled Signals on (see the "Pipelines" section in Snowplow Console)
 * **Profiles API URL**: your Signals API URL (from Snowplow Console > **Signals** > **Overview**)
-
-</TabItem>
-<TabItem value="sandbox" label="Signals Sandbox">
-
-* **Collector URL**: your Snowplow Collector endpoint provided by Signals Sandbox
-* **Profiles API URL**: your Signals Profiles API endpoint provided by Signals Sandbox
-
-</TabItem>
-</Tabs>
 
 The app will store these values in your browser's local storage, so you won't need to enter them again during this session.
 
@@ -87,30 +70,12 @@ You can install the extension from the [Chrome Web Store](https://chromewebstore
 
 ![Screenshot showing the Snowplow Inspector extension with tracked events from the demo app.](./images/inspector-events.png)
 
-<Tabs groupId="connection" queryString>
-<TabItem value="console" label="Snowplow Console" default>
-
 To configure the extension to show Signals attributes and interventions:
 
 1. In Chrome, navigate to [the Extensions settings page](chrome://extensions/)
 2. Click on "Details" for the Snowplow Inspector extension
 3. Scroll down and click on "Extension options"
 4. Click on "Add new organization" and enter your Organization ID and API key details.
-
-</TabItem>
-<TabItem value="sandbox" label="Signals Sandbox">
-
-To configure the extension to show Signals attributes and interventions:
-
-1. In Chrome, navigate to [the Extensions settings page](chrome://extensions/).
-2. Click on "Details" for the Snowplow Inspector extension.
-3. Scroll down and click on "Extension options".
-4. Open "Advanced options" and enter your Signals Sandbox URL and token.
-
-![Screenshot showing the Snowplow Inspector extension options page with fields to enter Signals API URL and Token.](./images/inspector-advanced-options.png)
-
-</TabItem>
-</Tabs>
 
 Now, in addition to seeing the Snowplow events tracked, you will be able to see the attributes and interventions calculated by Signals after switching the section on the left side of the extension.
 
@@ -122,7 +87,7 @@ Now, in addition to seeing the Snowplow events tracked, you will be able to see 
 
 Here's what happens when you interact with the demo app:
 
-1. **Event tracking**: when you view a product or add to cart, the JavaScript tracker sends an ecommerce event to your Sandbox Collector
+1. **Event tracking**: when you view a product or add to cart, the JavaScript tracker sends an ecommerce event to your Snowplow Collector
 2. **Attribute calculation**: Signals processes the event and updates your user attributes in real time
 3. **Intervention evaluation**: Signals checks if any intervention criteria are now met
 4. **Delivery**: if an intervention triggers, Signals sends it to the browser via Server-Sent Events (SSE)

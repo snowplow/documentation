@@ -12,16 +12,12 @@ For ML training data we will use an artificial set of Snowplow events. Feel free
 
 Start by configuring your Signals credentials in the notebook.
 
-![Google Colab Secrets panel showing two notebook secrets configured: SP_SANDBOX_URL and SP_SANDBOX_TOKEN, with their values hidden](./images/colab_credentials.jpeg)
+![Google Colab Secrets panel showing the notebook secrets configured for your Signals credentials, with their values hidden](./images/colab_credentials.jpeg)
 
 Here's a list of all the credentials you may need to configure, saved as variables:
 
 ```python
 from google.colab import userdata
-
-# Snowplow Signals Sandbox credentils
-SP_SANDBOX_URL = userdata.get('SP_SANDBOX_URL')     # https://{{123abc}}.svc.snplow.net
-SP_SANDBOX_TOKEN = userdata.get('SP_SANDBOX_TOKEN') # 12345678-0000-1111-2222-123456789012
 
 # Snowplow Signals Console credentials
 SP_API_URL = userdata.get('SP_API_URL')       # Signals API URL

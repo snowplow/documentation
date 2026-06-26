@@ -7,11 +7,6 @@ keywords: ["Snowplow Signals", "behavioral attributes", "Profile API", "streamin
 date: "2026-03-27"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step, you'll define behavioral attributes using Snowplow Signals, publish them as a service, and validate that they compute correctly from raw events.
 
 These attributes form a behavioral profile that the agent's `get_signals` tool fetches at runtime, enabling personalized responses without requiring the user to state their preferences manually.
@@ -20,26 +15,12 @@ These attributes form a behavioral profile that the agent's `get_signals` tool f
 
 You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
 
-<Tabs groupId="cloud" queryString>
-  <TabItem value="cdi" label="CDI" default>
-
 ```python
 API_URL = 'example.signals.snowplowanalytics.com'
 API_KEY = ''
 API_KEY_ID = ''
 ORG_ID = ''
 ```
-
-  </TabItem>
-  <TabItem value="sandbox" label="Sandbox">
-
-```python
-API_URL = 'you.signals.snowplowanalytics.com'
-ACCESS_TOKEN = ''
-```
-
-  </TabItem>
-</Tabs>
 
 ## Define attributes
 

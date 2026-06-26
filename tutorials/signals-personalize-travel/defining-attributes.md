@@ -7,11 +7,6 @@ keywords: ["Snowplow Signals", "attributes", "Python SDK", "behavioral data", "u
 date: "2025-01-21"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 You'll now define behavioral attributes that capture different types of travel preferences based on how users interact with the website. These attributes will serve as the foundation for both on-site content personalization and AI chatbot customization.
 
 The attributes you create will track user engagement with different types of content, destinations, and features. For example, users who frequently view food-related content will have their culinary interest attribute incremented, while those who browse luxury destinations will see their luxury preference attribute increase.
@@ -24,26 +19,12 @@ You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your 
 
 You'll need the same connection credentials you used in the previous step:
 
-<Tabs groupId="cloud" queryString>
-  <TabItem value="cdi" label="CDI" default>
-
 ```python
 API_URL = 'example.signals.snowplowanalytics.com'
 API_KEY = 'YOUR_API_KEY'
 API_KEY_ID = 'YOUR_API_KEY_ID'
 ORG_ID = 'YOUR_ORG_ID'
 ```
-
-  </TabItem>
-  <TabItem value="sandbox" label="Sandbox">
-
-```python
-API_URL = 'you.signals.snowplowanalytics.com'
-ACCESS_TOKEN = ''
-```
-
-  </TabItem>
-</Tabs>
 
 ## Define attributes
 

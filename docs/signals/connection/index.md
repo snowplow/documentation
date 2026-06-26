@@ -160,7 +160,3 @@ curl \
   --header 'Authorization: Bearer <JWT>' \
   {{API_URL}}/api/v1/registry/interventions
 ```
-
-:::note[Signals Sandbox]
-This token exchange applies to Console deployments. For Signals Sandbox, use the Sandbox token from the [Configuration details](#connection-credentials) on the dashboard.
-:::

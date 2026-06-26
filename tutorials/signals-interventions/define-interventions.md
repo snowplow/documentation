@@ -113,7 +113,7 @@ This triggers when the cart value exceeds $100, incentivizing users to complete 
 
 ## Publish the interventions
 
-Publish all three interventions to your Signals Sandbox:
+Publish all three interventions to Signals:
 
 ```python
 sp_signals.publish(

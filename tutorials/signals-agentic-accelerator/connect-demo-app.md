@@ -7,11 +7,6 @@ keywords: ["SEA Explorer", "demo app", "Bedrock", "Signals", "AgentCore Memory",
 date: "2026-03-27"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Now that you have a working agent with Signals attributes and AgentCore Memory, you can connect it to a frontend application. The SEA Explorer demo app is a Next.js travel site that calls Bedrock directly using the same model and credentials from the notebook.
 
 The app includes a chat interface where users can ask travel questions. As users browse destinations and experiences, Snowplow tracking generates the behavioral events that Signals processes into the attributes your agent uses for personalization. AgentCore Memory persists context across chat sessions.
@@ -30,9 +25,6 @@ Before connecting the demo app, ensure you have:
 
 Create a file called `.env` with your credentials from the notebook. Include your AWS credentials, memory ID, and Signals connection:
 
-<Tabs groupId="cloud" queryString>
-  <TabItem value="cdi" label="CDI" default>
-
 ```bash
 AI_MODEL_PROVIDER=bedrock
 AI_MODEL_NAME=us.anthropic.claude-sonnet-4-20250514-v1:0
@@ -48,25 +40,6 @@ SNOWPLOW_SIGNALS_ORGANIZATION_ID=your_org_id
 SNOWPLOW_SIGNALS_SERVICE_NAME=travel_service
 ```
 
-  </TabItem>
-  <TabItem value="sandbox" label="Sandbox">
-
-```bash
-AI_MODEL_PROVIDER=bedrock
-AI_MODEL_NAME=us.anthropic.claude-sonnet-4-20250514-v1:0
-AWS_REGION=us-west-2
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AGENTCORE_MEMORY_ID=your_memory_id
-
-NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=https://you.signals.snowplowanalytics.com
-SNOWPLOW_SIGNALS_TRIAL_TOKEN=your_token
-SNOWPLOW_SIGNALS_SERVICE_NAME=travel_service
-```
-
-  </TabItem>
-</Tabs>
-
 Pull and run the published Docker image, passing your credentials via the env file:
 
 ```bash
@@ -79,7 +52,7 @@ Open `http://localhost:3000` in your browser.
 
 The app header includes two read-only status dropdowns:
 
-* **Signals** — shows whether Signals is connected in CDI or Sandbox mode, and which credentials are configured
+* **Signals** — shows whether Signals is connected, and which credentials are configured
 * **AgentCore** — shows the current Bedrock model, AWS region, and memory ID
 
 If either dropdown shows "Not set" for required fields, check that the corresponding environment variables are present in your `.env` file and restart the container.

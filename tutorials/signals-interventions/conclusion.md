@@ -2,15 +2,15 @@
 position: 6
 title: "Conclusions and next steps for the Signals interventions tutorial"
 sidebar_label: "Conclusion"
-description: "Complete the Signals Sandbox tutorial and explore next steps for real-time personalization."
+description: "Complete the Signals interventions tutorial and explore next steps for real-time personalization."
 keywords: ["signals interventions tutorial", "real-time personalization"]
 ---
 
-Congratulations! You've successfully completed the Signals Sandbox tutorial and experienced real-time personalization in action.
+Congratulations! You've successfully completed the Signals interventions tutorial and experienced real-time personalization in action.
 
 In this tutorial, you:
 
-* Deployed a Signals Sandbox instance
+* Set up your Signals connection through Snowplow Console
 * Used the Signals Python SDK to programmatically define attributes
 * Created a service to expose calculated attributes
 * Defined rule-based interventions for common ecommerce scenarios
@@ -57,12 +57,3 @@ Ready to use Signals in production? You'll need:
 * Read the full [Signals documentation](/docs/signals/introduction/)
 * Explore the [Signals Python SDK reference](https://pypi.org/project/snowplow-signals/)
 * Join the [Snowplow community](https://community.snowplow.io/) to discuss use cases and best practices
-
-## Sandbox limitations
-
-Remember that the Signals Sandbox is designed for exploration and learning:
-
-* Sandbox instances are temporary and will be deleted after some period
-* Data is not persisted long-term
-* Performance and rate limits apply
-* For production use cases, use Snowplow CDI with Signals

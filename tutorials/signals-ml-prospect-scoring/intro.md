@@ -36,11 +36,9 @@ We're calculating aggregated attributes based off real-time stream event data, s
 
 ## Prerequisites
 
-1. Please follow [Connect to Signals](/docs/signals/connection/) page to setup the Signals connection (Console or Sandbox)
-    1. Signals Sandbox: follow the Sandbox setup flow
-    2. Signals Customers: follow the Console setup flow
+1. Follow the [Connect to Signals](/docs/signals/connection/) page to set up the Signals connection in the Snowplow Console
 2. Open this [Google Colab](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb) notebook to follow along
-3. [Optional] Integrate Snowplow into your website. If you use Signals Sandbox - find your collector URL in the UI
+3. [Optional] Integrate Snowplow into your website
 
 ## Architecture
 

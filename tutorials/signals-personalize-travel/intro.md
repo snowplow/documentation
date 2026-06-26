@@ -21,7 +21,7 @@ You'll build a complete personalization system that captures user interests thro
 
 ## Prerequisites
 
-* Signals enabled for your CDI pipeline or [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) set up with [Signals Sandbox](https://try-signals.snowplow.io/dashboard)
+* Signals enabled for your CDI pipeline
 * The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) browser extension installed
 * Familiarity with running Jupyter notebooks, either locally or in Google Colab
 * [Docker](https://www.docker.com/) installed and configured

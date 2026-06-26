@@ -2,19 +2,11 @@
 position: 2
 title: Connect to Signals within a notebook using the Signals Python SDK
 sidebar_label: Connect to Signals using the Python SDK
-description: "Enable Signals through Snowplow Console or deploy a Signals Sandbox instance and obtain your access credentials."
-keywords: ["signals sandbox", "jupyter notebook setup"]
+description: "Enable Signals through Snowplow Console and obtain your access credentials."
+keywords: ["jupyter notebook setup"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
-The first step is to set up your Signals connection. Follow the instructions in the [Signals connection documentation](/docs/signals/connection/) for your chosen deployment method:
-
-- **Snowplow Console**: [enable Signals through Snowplow Console](/docs/signals/setup/) if you have a Snowplow account
-- **Signals Sandbox**: [deploy a Sandbox instance](https://try-signals.snowplow.io/) to experiment without a Snowplow account
+The first step is to set up your Signals connection. Follow the instructions in the [Signals connection documentation](/docs/signals/connection/) to [enable Signals through Snowplow Console](/docs/signals/setup/).
 
 Once your connection is set up, gather the required credentials as described in the [connection credentials section](/docs/signals/connection/#connection-credentials).
 
@@ -33,22 +25,10 @@ You can use the provided notebook, or create your own. To create a new notebook,
 
 You'll need to add credentials as Colab secrets. Click the key icon in the left sidebar, and add the required secrets:
 
-<Tabs groupId="connection" queryString>
-<TabItem value="console" label="Snowplow Console" default>
-
 - `SP_API_URL`: your Signals API URL
 - `SP_API_KEY`: your API key
 - `SP_API_KEY_ID`: your API key ID
 - `SP_ORG_ID`: your Snowplow Console organization ID
-
-</TabItem>
-<TabItem value="sandbox" label="Signals Sandbox">
-
-- `SP_API_URL`: your Profiles API URL
-- `SP_SANDBOX_TOKEN`: your Sandbox Token
-
-</TabItem>
-</Tabs>
 
 When you run the notebook, it will ask for access to the secrets. Choose to grant access.
 
@@ -62,9 +42,6 @@ If you're using your own notebook, follow these steps:
 
 2. Load your credentials in the notebook:
 
-<Tabs groupId="connection" queryString>
-<TabItem value="console" label="Snowplow Console" default>
-
 ```python
 from google.colab import userdata
 import os
@@ -74,20 +51,6 @@ os.environ["SP_API_KEY"] = userdata.get('SP_API_KEY')
 os.environ["SP_API_KEY_ID"] = userdata.get('SP_API_KEY_ID')
 os.environ["SP_ORG_ID"] = userdata.get('SP_ORG_ID')
 ```
-
-</TabItem>
-<TabItem value="sandbox" label="Signals Sandbox">
-
-```python
-from google.colab import userdata
-import os
-
-os.environ["SP_API_URL"] = userdata.get('SP_API_URL')
-os.environ["SP_SANDBOX_TOKEN"] = userdata.get('SP_SANDBOX_TOKEN')
-```
-
-</TabItem>
-</Tabs>
 
 ### Using local Jupyter
 
@@ -101,26 +64,12 @@ pip install jupyter snowplow-signals python-dotenv
 
 2. Create a `.env` file in your working directory with your credentials:
 
-<Tabs groupId="connection" queryString>
-<TabItem value="console" label="Snowplow Console" default>
-
 ```text
 SP_API_URL=your_signals_api_url
 SP_API_KEY=your_api_key
 SP_API_KEY_ID=your_api_key_id
 SP_ORG_ID=your_organization_id
 ```
-
-</TabItem>
-<TabItem value="sandbox" label="Signals Sandbox">
-
-```text
-SP_API_URL=your_profiles_api_url
-SP_SANDBOX_TOKEN=your_sandbox_token
-```
-
-</TabItem>
-</Tabs>
 
 3. Start Jupyter notebook:
 
@@ -139,9 +88,6 @@ load_dotenv()
 
 Now you're ready to connect to your Signals instance using the Python SDK.
 
-<Tabs groupId="connection" queryString>
-  <TabItem value="console" label="Snowplow Console" default>
-
 ```python
 from snowplow_signals import Signals
 import os
@@ -153,27 +99,5 @@ sp_signals = Signals(
     org_id=os.environ["SP_ORG_ID"],
 )
 ```
-
-  </TabItem>
-  <TabItem value="sandbox" label="Signals Sandbox">
-
-```python
-from snowplow_signals import SignalsSandbox
-import os
-
-sp_signals = SignalsSandbox(
-    api_url=os.environ["SP_API_URL"],
-    sandbox_token=os.environ["SP_SANDBOX_TOKEN"],
-)
-```
-
-:::tip
-
-The `SignalsSandbox` class is specifically designed for Sandbox environments. For production Snowplow deployments, you would use the `Signals` class instead, which requires API keys.
-
-:::
-
-  </TabItem>
-</Tabs>
 
 You're now ready to start defining attributes and interventions in Signals.

@@ -40,6 +40,10 @@ Similarly, if you set the `network_userid` property, that value is used instead 
 
 Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
+:::note[Changing anonymisation at runtime]
+As well as setting these flags at initialization, from version 0.10.0 you can change them at runtime on an existing tracker, without recreating it. See [Changing anonymisation at runtime](#changing-anonymisation-at-runtime) below.
+:::
+
 There are several levels to the anonymization depending on which of the categories are affected.
 
 ## 1. Full client-side anonymization
@@ -229,3 +233,29 @@ const EmitterConfiguration()
 | `androidIdfa`       | Mobile (platform) entity | ❌                   |
 | `network_userid`    | Atomic                   | ❌                   |
 | `user_ipaddress`    | Atomic                   | ❌                   |
+
+## Changing anonymisation at runtime
+
+:::note[Introduced in version 0.10.0 of the tracker]
+This feature is only available on mobile (Android and iOS).
+:::
+
+The `userAnonymisation` and `serverAnonymisation` flags described above are normally set at [tracker initialization](/docs/sources/flutter-tracker/initialization-and-configuration/index.md). You can also change them at runtime on an existing tracker, for example when a user updates their tracking consent, without recreating the tracker:
+
+```dart
+// On the tracker instance:
+await tracker.setUserAnonymisation(true);
+await tracker.setServerAnonymisation(true);
+
+// Or via the static API, using the tracker namespace:
+await Snowplow.setUserAnonymisation(true, tracker: 'ns1');
+await Snowplow.setServerAnonymisation(true, tracker: 'ns1');
+```
+
+This avoids recreating the tracker (and therefore resetting identifiers) just to change the anonymisation level. The new setting applies to all events tracked afterwards, with the same effect as setting the flag at initialization.
+
+:::note
+Changing `userAnonymisation` starts a new session. The tracker instance and the user identifier are preserved, but the `sessionId` changes. `setServerAnonymisation` does not affect the session.
+:::
+
+These methods are only available on mobile (Android and iOS). On Web they throw an `Unimplemented` `PlatformException`.

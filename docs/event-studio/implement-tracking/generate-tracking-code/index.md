@@ -725,7 +725,7 @@ If you have multiple event specifications with the same name, you might experien
 We recommend giving each event specification a unique name.
 :::
 
-In Kotlin, Swift, and Dart, Snowtype uses the tracking plan name for extensions, which prevents name collisions.
+In Kotlin and Swift, Snowtype uses the tracking plan name for extensions, which prevents name collisions.
 
 For example, you may have two event specifications with the same name, `User Log In`, in two different tracking plans, `Checkout Flow` and `User Management`. In the `Checkout Flow` tracking plan, the `User Log In` event specification has the event data structure `login`. In the `User Management` tracking plan, the `User Log In` event specification has the event data structure `authentication_attempt`.
 
@@ -765,9 +765,21 @@ export function trackUserLogInSpec(userLogIn: Login & ContextsOrTimestamp, track
 export function trackUserLogInSpec(userLogIn: AuthenticationAttempt & ContextsOrTimestamp, trackers?: string[])
 ```
 
+### Event specification names in Golang
+
+When generating Golang code, if your event specification has the same processed name as one of the data structures within it, there will be a name collision. For example, if you have an event specification called `User Signed Up` that uses a data structure called `user_signed_up`, both will be processed to `type UserSignedUp`, which isn't allowed.
+
+To avoid this problem, give your event specifications unique names that are different from the data structures they use.
+
+This isn't a problem for the other generated languages.
+
 ## Snowtype limitations
 
-Snowtype **does not work** with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
+Snowtype has a number of limitations to be aware of when generating code.
+
+### Tracking plan templates
+
+Snowtype doesn't work with [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). Track these manually using the standard tracker API.
 
 ### Excluded schemas
 
@@ -788,3 +800,33 @@ If your event specification uses any of these schemas for the event data structu
 * `iglu:com.snowplowanalytics.mobile/application_install/jsonschema/1-0-0`
 
 You'll see a warning logged when you generate code using these: `Warning: Currently code will not be generated for Standard events. Skipping`.
+
+### Schema property types
+
+Snowtype supports most [JSON Schema property types](/docs/api-reference/json-schema-reference/index.md). It supports the core property types used in the [data structures builder](/docs/event-studio/data-structures/index.md) for all languages: strings, string enums, integers, decimals, and booleans.
+
+These core property types can be nullable via union with null, e.g. a type of `["string", "null"]`. They can also be optional or `required` by the schema.
+
+For other complex data types, the support varies by language:
+
+| Property type                                | TypeScript | JavaScript | Kotlin | Swift | Dart | Java | Golang |
+| -------------------------------------------- | ---------- | ---------- | ------ | ----- | ---- | ---- | ------ |
+| Non-null unions e.g. `["string", "integer"]` | ✅          | ✅/❌*       | ❌      | ❌     | ✅    | ❌    | ❌      |
+| Array of primitives                          | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Array of arrays                              | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Array of string enum                         | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅      |
+| Array of nullable string enum                | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅      |
+| Array of object                              | ✅          | ✅          | ✅      | ✅     | ❌    | ❌    | ✅      |
+| Array of nullable object                     | ✅          | ✅          | ❌      | ❌     | ❌    | ❌    | ✅      |
+| Object                                       | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅      |
+| Nested objects                               | ✅          | ✅          | ✅      | ✅     | ✅    | ❌    | ✅      |
+| String enum                                  | ✅          | ✅          | ✅      | ✅     | ✅    | ✅    | ✅      |
+| Integer or float enum                        | ❌          | ❌          | ❌      | ❌     | ❌    | ❌    | ❌      |
+
+*For non-null union types in JavaScript, Snowtype generates working code but the JSDoc comment will be incorrect.
+
+### Schema validation rules
+
+The [JSON Schema specification](/docs/api-reference/json-schema-reference/index.md) allows you to add validation rules such as `maxItems` for arrays, or `format` for strings. Snowtype doesn't take these rules into account when generating code.
+
+For the Browser tracker only, you can use [client-side validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) to enforce these rules at runtime.

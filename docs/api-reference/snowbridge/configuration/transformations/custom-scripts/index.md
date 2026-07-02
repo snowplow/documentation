@@ -227,6 +227,36 @@ function main(x) {
 }
 ```
 
+* `parseTimestamp(timestampStr, layout)` parses a timestamp string into a JavaScript `Date`. The `layout` argument is optional and defaults to `2006-01-02 15:04:05.999`, the format used by Snowplow enriched event timestamp fields such as `collector_tstamp`. To parse a different format, pass a `layout` using [Go reference time syntax](https://pkg.go.dev/time#pkg-constants), where each component of the reference time `Mon Jan 2 15:04:05 MST 2006` stands for that part of the timestamp. The function throws a `RangeError` if the input does not match the layout.
+
+1. Parse a Snowplow timestamp using the default layout:
+
+```js
+// input.Data: {"collector_tstamp":"2026-06-15 09:30:00.000"}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  const ts = parseTimestamp(data.collector_tstamp);
+  x.Data = ts.toISOString();
+  // returns "2026-06-15T09:30:00.000Z"
+  return x;
+}
+```
+
+2. Parse a custom format by passing a `layout`:
+
+```js
+// input.Data: {"event_time":"15/06/2026"}
+
+function main(x) {
+  const data = JSON.parse(x.Data);
+  const ts = parseTimestamp(data.event_time, "02/01/2006");
+  x.Data = ts.getUTCFullYear();
+  // returns 2026
+  return x;
+}
+```
+
 ## Configuration
 
 Once your script is ready, you can configure it in the app by following the [Javascript](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) configuration page.

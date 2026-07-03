@@ -24,6 +24,8 @@ Before setting up the forwarder in Console, you'll need the following from your 
 
 ## Getting started
 
+Set up a connection with your Meta credentials, create a forwarder, then validate that events arrive before you switch to live data.
+
 ### Configure the destination
 
 To create the connection and forwarder, follow the steps in [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md).
@@ -34,13 +36,17 @@ When configuring the connection, select **Meta Conversions API** for the connect
 
 You can confirm events are reaching Meta using Events Manager:
 
-1. In Events Manager, open your dataset and select the **Test events** tab.
-2. Send events with a test event code configured on the connection.
-3. Confirm the events appear, and review the event details and match quality that Meta reports.
+1. In Events Manager, open your dataset and select the **Test events** tab
+2. Send events with a test event code configured on the connection
+3. Confirm the events appear, and review the event details and match quality that Meta reports
 
 Once you've validated the setup, remove the test event code so events flow to your live data.
 
-## User matching
+## Mapping events to Meta
+
+The default mapping produces a standard Conversions API payload. The sections below explain how Snowplow populates user identifiers, event names, and custom data, and what you can change. See the schema reference at the end of this page for every field and its default expression.
+
+### User matching
 
 Meta matches each event to a person using the identifiers in the `user_data` object. Every event must include at least one identifier, and Meta uses more identifiers to improve match quality. Personally identifiable fields such as email (`em`), phone (`ph`), and name (`fn`, `ln`) must be SHA256-hashed after normalization, so you supply the hash in your mapping expression. The `client_ip_address`, `client_user_agent`, `fbc`, and `fbp` fields must not be hashed.
 
@@ -50,11 +56,11 @@ The default mapping sets `external_id` to the Snowplow `user_id`. It derives the
 If the [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) is enabled, `client_ip_address` contains a truncated IP address. Meta treats a truncated IP as invalid and rejects the request, so the event is not forwarded. Do not enable IP anonymization on events you forward to Meta.
 :::
 
-## Event names
+### Event names
 
 Meta expects a [standard event name](https://developers.facebook.com/docs/meta-pixel/reference) (such as `Purchase`, `AddToCart`, or `ViewContent`) or a custom event name in the `event_name` field. The default mapping maps a Snowplow ecommerce transaction to `Purchase` and `page_view` to `ViewContent`, and passes any other event name through unchanged. To map your own events to Meta standard events, edit the `toMetaEventName` function in the forwarder's custom functions.
 
-## Sending custom properties
+### Custom properties
 
 You can send business data beyond the standard fields defined in the schema reference below. Event value, currency, order details, and product information are nested under the `custom_data` object (e.g., `custom_data.value`, `custom_data.content_ids`). Never place raw personal data in `custom_data` — customer identifiers belong in the hashed `user_data` fields.
 
@@ -62,9 +68,15 @@ See Meta's [Conversions API parameters](https://developers.facebook.com/docs/mar
 
 ## Limitations
 
-**Event freshness:** Meta rejects the entire request if any event's `event_time` is more than seven days in the past. Avoid forwarding events from a source that can replay or delay events beyond this window.
+Keep the following constraints in mind when forwarding to Meta.
 
-**Batching:** Snowplow sends one event per request to the Conversions API, so the API rate limit also functions as the event rate limit.
+### Event freshness
+
+Meta rejects the entire request if any event's `event_time` is more than seven days in the past. Avoid forwarding events from a source that can replay or delay events beyond this window.
+
+### Batching
+
+Snowplow sends one event per request to the Conversions API, so the API rate limit also functions as the event rate limit.
 
 ## Schema reference
 

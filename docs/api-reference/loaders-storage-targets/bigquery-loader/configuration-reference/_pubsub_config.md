@@ -2,14 +2,10 @@
     <td><code>input.subscription</code></td>
     <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
-<tr>
-    <td><code>input.parallelPullFactor</code></td>
-    <td>
-      Optional. Default value <code>0.5</code>.
-      Controls how many threads are used internally by the Pub/Sub client library for fetching events.
-      The number of threads is equal to this factor multiplied by the number of available CPU cores.
-    </td>
-</tr>
+{/* Do not document `input.parallelPullFactor`, `input.maxMessagesPerPull` or `input.debounceRequests` here.
+    Those options are only relevant for unary pull, and BigQuery Loader (as of 2.2.1) uses streaming pull
+    (the common-streams default), so they have no effect for this loader.
+    If the loader ever switches to unary pull, they become relevant and should be documented. */}
 <tr>
     <td><code>input.durationPerAckExtension</code></td>
     <td>Optional. Default value <code>15 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
@@ -21,18 +17,6 @@
       Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline.
       For example, if <code>durationPerAckExtension</code> is <code>15 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
       will wait until there is <code>1.5 seconds</code> left of the remaining deadline, before re-extending the message deadline.
-    </td>
-</tr>
-<tr>
-    <td><code>input.maxMessagesPerPull</code></td>
-    <td>Optional. Default value 1000. How many Pub/Sub messages to pull from the server in a single request.</td>
-</tr>
-<tr>
-    <td><code>input.debounceRequests</code></td>
-    <td>
-      Optional. Default value <code>100 millis</code>.
-      Adds an artifical delay between consecutive requests to Pub/Sub for more messages.
-      Under some circumstances, this was found to slightly alleviate a problem in which Pub/Sub might re-deliver the same messages multiple times.
     </td>
 </tr>
 <tr>

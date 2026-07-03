@@ -2,6 +2,9 @@
     <td><code>input.subscription</code></td>
     <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
+{/* Unlike the other GCP loaders, unary-pull-only options (`parallelPullFactor`, `maxMessagesPerPull`)
+    are valid here: Lake Loader (as of 0.11.0) sets `streamingPull: false` in its application.conf,
+    because it has long delays between acks. */}
 <tr>
     <td><code>input.parallelPullFactor</code></td>
     <td>Optional. Default value 0.5. <code>parallelPullFactor * cpu count</code> will determine the number of threads used internally by the Pub/Sub client library for fetching events</td>

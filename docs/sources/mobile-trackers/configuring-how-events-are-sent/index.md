@@ -212,7 +212,7 @@ This setting specifies the maximum number of events that can be sent in one requ
 For instance, let's say that 100 events accumulate in the event store.
 In case the default emit range (25) is used, the tracker will make 4 requests serially, one after the other, each with 25 events.
 
-If the event store is empty when the tracker tries to send events - because another thread has just sent them - the thread sleeps for 5 seconds before trying again. If this happens 5 times in a row in the same thread, event sending will be paused for the whole tracker. It is restarted when a new event arrives.
+When the event store is empty, the emitter stops sending and waits for new events. It resumes automatically when a new event is tracked or when you call [`flush`](#manually-flushing-the-event-queue). You don't need to manage this yourself.
 
 Configure the batch size and emit range like this:
 
@@ -251,6 +251,42 @@ Before version 6 of the iOS and Android tracker, the `bufferOption` and `emitRan
 Events were sent right after they were tracked regardless of the `bufferOption` used.
 The `bufferOption` was used to specify the maximum number of events per request and the `emitRange` specified the maximum number of total events to make in parallel requests at once.
 For instance, if there were 100 events in the event store and `bufferOption` was set to 10 (called `defaultGroup` previously) and `emitRange` to 50, the tracker would make 5 parallel requests to the collector with 10 events each. After that it would make another 10 parallel requests to the collector with 10 events each.
+:::
+
+## Manually flushing the event queue
+
+The tracker sends events asynchronously and, depending on the `bufferOption`, may hold events in the event store until enough have accumulated to make a request. In some cases you want to send whatever is queued right away rather than waiting for the buffer to fill. A common example is sending any remaining events when the user logs out.
+
+Call `flush` on the `EmitterController` to attempt to send all events currently in the event store immediately:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+tracker.emitter?.flush()
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+tracker.emitter.flush()
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+tracker.getEmitter().flush();
+```
+
+  </TabItem>
+</Tabs>
+
+Sending happens asynchronously, so events may not have reached the collector by the time `flush` returns. Events are persisted in the event store before sending, so they are not lost if the app is closed before the request completes; they are sent on the next `flush` or when the tracker next sends events.
+
+:::note[Android availability]
+`flush` is available on the iOS tracker and, from version 6.4.0, on the Android tracker.
 :::
 
 ## Automatic clean up of the event store

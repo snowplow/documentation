@@ -67,10 +67,6 @@ For property names containing spaces, use bracket notation (e.g., `["account typ
 
 See Braze's [Event Object documentation](https://www.braze.com/docs/api/objects_filters/event_object) for details on supported data types, property naming requirements, and payload size limits. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
 
-## Limitations
-
-**Rate limits:** Braze enforces a rate limit of 3,000 API calls every three seconds for the Track Users API. Because Snowplow does not currently support batching for event forwarders, this API rate limit also functions as the event rate limit. If your input throughput exceeds 3,000 events per three seconds, you will experience increased latency.
-
 ## Schema reference
 
 The sections below contain information on the fields you can send to Braze, including field names, data types, required fields, and default Snowplow mapping expressions.

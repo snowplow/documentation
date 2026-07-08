@@ -29,7 +29,7 @@ Set up your ClickHouse table first, then create the connection and forwarder in 
 
 ### Create the destination table
 
-ClickHouse does not create or alter tables for you, so create the destination table before forwarding. Each field you map must match a column in the table: a mapped field with no matching column fails the insert rather than being silently dropped. Map only the columns your table defines, and add columns for any other fields you want to forward.
+ClickHouse does not create or alter tables for you, so create the destination table before forwarding. Each field you map must match a column in the table: a mapped field with no matching column fails the insert rather than being silently dropped.
 
 The default field mapping targets the eight columns below. A table that matches it looks like this:
 

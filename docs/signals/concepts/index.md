@@ -48,7 +48,7 @@ Signals includes a range of different aggregations for calculating attributes, i
 
 ### Attribute keys
 
-An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. The identifier can be any atomic field of a Snowplow event, such as `domain_userid`.
+An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. For stream attribute groups, the identifier can be any property of a Snowplow event: an atomic field such as `domain_userid`, a property within a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events), or a property within an [entity](/docs/fundamentals/entities/index.md). For warehouse attribute groups, the identifier is a column in your warehouse table.
 
 To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min`. It represents a count of page view events, with a 10 minute time limit. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
 

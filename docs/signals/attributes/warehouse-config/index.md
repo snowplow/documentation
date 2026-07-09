@@ -72,12 +72,16 @@ The batch engine only sends rows with a newer timestamp to the Profiles Store, b
 
 Select the fields (columns) from your warehouse table that you want to sync to the Profiles Store. You must also specify a backfill start date — the earliest date from which Signals should read rows on the first sync.
 
+The [attribute key](/docs/signals/attributes/attribute-keys/index.md) for the group must correspond to a column in the table that contains the key values.
+
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
 Use `ExternalBatchAttributeGroup` to define which source table and fields to use. Instead of `attributes`, this class uses `fields` — abstractions over the warehouse columns.
 
 You must set `backfill_since_tstamp` to tell the batch engine the earliest timestamp from which to read rows on the first sync. Without this, no historical data will be loaded.
+
+The attribute key must correspond to a column in the source table. The example below uses the built-in `domain_userid` key, so the table must have a `domain_userid` column. To key on a different column, [define a custom attribute key](/docs/signals/attributes/attribute-keys/index.md#custom-attribute-keys) with `external_column` set to the column name.
 
 ```python
 from datetime import datetime, timezone
@@ -104,7 +108,7 @@ The table below lists all available arguments for `ExternalBatchAttributeGroup`:
 | --- | --- | --- | --- |
 | `name` | The name of the attribute group | `string` | ✅ |
 | `version` | The version of the attribute group | `int` | ✅ |
-| `attribute_key` | The key used to identify profiles (e.g. `domain_userid`) | `key` | ✅ |
+| `attribute_key` | The key used to identify profiles. Its name must match a column in the source table | `AttributeKey` | ✅ |
 | `batch_source` | The `BatchSource` defining the warehouse table to sync from | `BatchSource` | ✅ |
 | `backfill_since_tstamp` | The earliest timestamp from which to read rows on the first sync. Accepts tz-aware or naive UTC `datetime`; tz-aware is recommended. | `datetime` | ✅ |
 | `fields` | The list of `Field` objects defining which columns to sync | `list` | ✅ |

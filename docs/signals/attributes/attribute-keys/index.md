@@ -39,10 +39,14 @@ from snowplow_signals import (
 
 ## Custom attribute keys
 
-You can define custom attribute keys to calculate attributes against any property in your events:
+You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/concepts/index.md#data-sources).
+
+For stream attribute groups, the key can be any property in your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md#common-fields) properties: fields of the core Snowplow event, available for all events
 * Event schema properties: properties within a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events)
 * Entity properties: properties from schemas tracked as [entities](/docs/fundamentals/entities/index.md)
+
+For [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md), the attributes are pre-calculated in your warehouse table, so the key isn't based on event properties. Instead, define the attribute key using the name of the table column that contains the key values.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -56,13 +60,14 @@ You will need to provide:
 * An optional description
 * An optional email address for the primary owner or maintainer
 * Which property you want to calculate attributes against: an atomic field, or a property from an event or entity schema
+  * For keys used with warehouse attribute groups, provide the name of the table column that contains the key values instead
 
 To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the `⋮` button followed by **Delete**.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use the `AttributeKey` class to define a custom attribute key. Specify the property with the same [property classes](/docs/signals/attributes/attributes/index.md#select-a-property) used for defining attributes: `AtomicProperty`, `EventProperty`, or `EntityProperty`.
+Use the `AttributeKey` class to define a custom attribute key. For stream attribute groups, specify the property with the same [property classes](/docs/signals/attributes/attributes/index.md#select-a-property) used for defining attributes: `AtomicProperty`, `EventProperty`, or `EntityProperty`.
 
 ```python
 from snowplow_signals import AttributeKey, AtomicProperty
@@ -78,8 +83,9 @@ The table below lists all available arguments:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
-| `property` | The property to calculate attributes against | `AtomicProperty`, `EventProperty`, or `EntityProperty` | ✅ |
-| `name` | The name of the attribute key (derived from `property` if not set) | `string` | ❌ |
+| `property` | The property to calculate attributes against, for stream attribute groups | `AtomicProperty`, `EventProperty`, or `EntityProperty` | Either `property` or `external_column` |
+| `external_column` | The column in your warehouse table that contains the key values, for warehouse attribute groups | `string` | Either `property` or `external_column` |
+| `name` | The name of the attribute key (derived from `property` or `external_column` if not set) | `string` | ❌ |
 | `description` | A description of the attribute key | `string` | ❌ |
 | `owner` | The owner of the attribute key | `string` | ❌ |
 | `ttl` | Time attributes for this key will live in the Profiles Store | `timedelta` | ❌ |
@@ -107,6 +113,19 @@ customer_tier_attribute_key = AttributeKey(
     ttl=timedelta(days=365),
 )
 ```
+
+For [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md), use `external_column` to define the key from the table column that contains the key values:
+
+```python
+from snowplow_signals import AttributeKey
+
+customer_id_attribute_key = AttributeKey(
+    external_column="CUSTOMER_ID",
+    description="Attribute key for the customer ID column in the transactions table",
+)
+```
+
+The key's `name` is set to the column name automatically. If you set both, they must match.
 
 Custom attribute keys are used in attribute groups in the same way as built-in keys.
 

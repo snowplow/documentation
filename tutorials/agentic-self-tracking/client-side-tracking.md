@@ -397,7 +397,7 @@ fi
 docker run -d --name snowplow-micro \
   -p 9090:9090 \
   -v "$(pwd)/snowplow/iglu-local:/config/iglu-client-embedded" \
-  snowplow/snowplow-micro:3.0.1
+  snowplow/snowplow-micro:4.4.1
 
 sleep 2
 

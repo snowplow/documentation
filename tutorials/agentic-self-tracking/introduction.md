@@ -132,7 +132,7 @@ The [companion repository](https://github.com/snowplow-industry-solutions/agenti
 
 You'll need:
 
-- Node.js 18+ installed
+- Node.js installed. Recommended Node.js 20.9 or later (22 LTS recommended)
 - Docker installed and running
 - At least one LLM API key
   - Anthropic `ANTHROPIC_API_KEY`

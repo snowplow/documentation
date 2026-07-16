@@ -414,12 +414,6 @@ Here are two pieces of older content that only partially follow the style guide.
    | the bad rows format               |                               |
 
 
-- Use "visualization", not "data application"
-
-   | ✅                                       | ❌                                  |
-   | --------------------------------------- | ---------------------------------- |
-   | the Marketing Attribution visualization | the Marketing Attribution data app |
-
 
 ### Pipeline components
 - Console is capitalized, and doesn't have a definite article (no "the")

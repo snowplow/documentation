@@ -46,7 +46,8 @@ When enabling the feature for the first time, an admin user must accept the term
 
 ### Custom instructions
 
-You can give the Snowplow Assistant organization-level information to keep in mind, such as naming conventions, schema patterns, internal terminology, and anything else relevant to how your organization works.
+You can give the Snowplow Assistant organization-level information to keep in mind, such as naming conventions, schema patterns, and internal terminology.
+Do not include credentials, secrets, personal data, or other sensitive information.
 
 These custom instructions apply to every conversation across all workspaces in your organization.
 

@@ -50,9 +50,9 @@ You can give the Snowplow Assistant organization-level information to keep in mi
 
 These custom instructions apply to every conversation across all workspaces in your organization.
 
-### Usage Limits
+### Usage limits
 
-The Snowplow Assistant has weekly refreshing token limits at the organisation level. The limit is set at a level that under normal usage you will not reach it.
+The Snowplow Assistant has token limits that refresh weekly at the organization level. Under normal usage, you should not reach the limit.
 
 ## Capabilities
 

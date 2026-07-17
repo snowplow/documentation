@@ -18,4 +18,3 @@ This section covers:
 * [Services](/docs/signals/applications/services/index.md): stable interfaces that group attribute group versions together for your applications, recommended for production use
 * [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md): fetch calculated attribute values using a service or directly from an attribute group
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
-* [Create training datasets](/docs/signals/applications/create-training-datasets/index.md): create training datasets from Signals attributes

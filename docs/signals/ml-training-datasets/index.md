@@ -18,8 +18,8 @@ Start by [connecting to Signals](/docs/signals/connection/index.md) to create a 
 Building and using an ML training dataset follows this process:
 
 1. [Define your attribute groups](/docs/signals/attributes/attribute-groups/index.md) with the features you want your model to learn from (e.g. `product_view_count`, `add_to_cart_count`)
-2. Define anchors that specify what outcome you want to predict and over what time window
-3. Generate the SQL bundle using the dataset builder
+2. Build the dataset SQL bundle by calling the appropriate method - `build_dataset_with_session_anchors()` for auto-generated anchors, or `build_dataset_with_custom_anchors()` for a pre-existing anchor table
+3. Optionally inspect or save the generated SQL
 4. Execute the SQL against your warehouse to produce the training dataset
 5. Train your model on the resulting DataFrame
 6. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
@@ -46,11 +46,11 @@ Each row captures the attribute values as they were at the anchor timestamp, not
 
 Anchors are the labeled events that form the rows of your training dataset. Each anchor is a point in a session that receives a label: `1` if the user achieved the goal, `0` if they did not.
 
-Use `SessionAnchors` when you want Signals to automatically identify anchor events from your raw event data. Use `UserSuppliedAnchors` when you already have a table of labeled events, for example from an existing ML pipeline or a manually curated dataset.
+Signals provides two approaches: session anchors (automatically derived from your event data) and user-supplied anchors (from a table you provide). You choose between them by calling different methods on the Signals client.
 
 ### Session anchors
 
-Use `SessionAnchors` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window, labels each based on whether the goal was achieved, and produces one anchor per qualifying session.
+Use `build_dataset_with_session_anchors()` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window, labels each based on whether the goal was achieved, and produces one anchor per qualifying session.
 
 ```python
 from datetime import datetime, timezone
@@ -59,11 +59,11 @@ from snowplow_signals import (
     Criteria,
     Criterion,
     EventProperty,
-    SessionAnchors,
     TrainingSpan,
 )
 
-anchors = SessionAnchors(
+bundle = sp_signals.build_dataset_with_session_anchors(
+    attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
         any=[
             Criterion.eq(
@@ -86,23 +86,27 @@ anchors = SessionAnchors(
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
+| `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `goal_criteria` | Criteria that define a positive anchor (label=1) | `Criteria` | ✅ |
 | `training_span` | Time window to scan for anchor events | `TrainingSpan` | ✅ |
 | `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to ensure each anchor has enough behavioral signal for meaningful features. | `int` | Default: `1` |
 | `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions. | `int` or `None` | Default: `None` |
 | `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
-| `output` | Override the output table location for the anchors table | `WarehouseTable` | Default: `None` |
+| `anchors_table` | Override the output table location for the anchors table | `WarehouseTable` | Default: `None` |
+| `attributes_table` | Override the output table configuration for intermediate per-attribute-key tables (database, schema, table prefix) | `AttributesWarehouseTable` | Default: `None` |
+| `dataset_table` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
+| `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. Override it to widen or narrow the event window. | `int` | Default: derived from attribute periods |
 
 ### User-supplied anchors
 
-If you already have a table of labeled anchor events, use `UserSuppliedAnchors` instead. Your table must contain the following columns:
+If you already have a table of labeled anchor events, use `build_dataset_with_custom_anchors()` instead. Your table must contain the following columns:
 
 | Column | Type | Description |
 | --- | --- | --- |
 | Attribute key column (e.g. `domain_sessionid`) | `VARCHAR` | The attribute key used by your attribute groups. The column name must match the attribute key name. |
 | `anchor_ts` | `TIMESTAMP` | The timestamp of the anchor event |
-| `label` | `INTEGER` | `1` for positive, `0` for negative. Only required when `has_label` is `True`. |
+| `label` | `INTEGER` | `1` for positive, `0` for negative. Only required when `anchors_have_label` is `True`. |
 
 For example, if your attribute groups use `domain_sessionid` as the attribute key:
 
@@ -112,45 +116,31 @@ For example, if your attribute groups use `domain_sessionid` as the attribute ke
 | `def-456` | 2024-01-15 10:01:00 | 0 |
 
 ```python
-from snowplow_signals import UserSuppliedAnchors, WarehouseTable
+from snowplow_signals import WarehouseTable
 
-anchors = UserSuppliedAnchors(
-    source=WarehouseTable(
+bundle = sp_signals.build_dataset_with_custom_anchors(
+    attribute_groups=[my_attribute_group],
+    anchors_table=WarehouseTable(
         database="analytics",
         schema="ml",
         table="my_anchor_events",
     ),
-    has_label=True,
-)
-```
-
-| Argument | Description | Type | Required? |
-| --- | --- | --- | --- |
-| `source` | Table containing your pre-built anchor events | `WarehouseTable` | ✅ |
-| `has_label` | Whether the source table contains a `label` column. Set to `False` if your anchors are unlabeled. | `bool` | Default: `True` |
-
-## Generate the SQL
-
-The `build_dataset_sql()` method sends your attribute group definitions and anchor configuration to the Signals API, which returns a bundle of SQL files. This is a separate step from execution so you can review the generated SQL, save it to version control, or run it in a different environment.
-
-```python
-bundle = sp_signals.build_dataset_sql(
-    attribute_groups=[my_attribute_group],
-    anchors=anchors,
+    anchors_have_label=True,
 )
 ```
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
-| `anchors` | Anchor configuration (`SessionAnchors` or `UserSuppliedAnchors`) | `Anchors` | ✅ |
-| `attributes_database` | Database for the intermediate per-attribute-key tables created during execution | `str` | Default: warehouse default |
-| `attributes_schema` | Schema for the intermediate per-attribute-key tables created during execution | `str` | Default: warehouse default |
-| `attributes_table_prefix` | Prefix for intermediate table names. For example, with the default prefix and an attribute key of `domain_sessionid`, the table is named `signals_attributes_domain_sessionid`. | `str` | Default: `"signals_attributes"` |
-| `dataset` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
-| `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. Override it to widen or narrow the event window. | `int` | Default: derived from attribute periods |
+| `anchors_table` | Table containing your pre-built anchor events | `WarehouseTable` | ✅ |
+| `anchors_have_label` | Whether the source table contains a `label` column. Set to `False` if your anchors are unlabeled. | `bool` | Default: `True` |
+| `attributes_table` | Override the output table configuration for intermediate per-attribute-key tables (database, schema, table prefix) | `AttributesWarehouseTable` | Default: `None` |
+| `dataset_table` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
+| `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |
 
-The returned `DatasetBundle` contains the generated SQL files. You can inspect them, save them to disk, or execute them directly.
+## Inspect and save the SQL bundle
+
+Both `build_dataset_with_session_anchors()` and `build_dataset_with_custom_anchors()` return a `DatasetBundle` containing the generated SQL files. You can inspect them, save them to disk, or execute them directly.
 
 ### Save SQL to disk
 
@@ -200,10 +190,10 @@ If a stage fails, it raises an `ExecutionError` with details of the failed stage
 
 ### Get results as a DataFrame
 
-After execution, call `to_pandas()` to get the training dataset as a DataFrame, ready for model training.
+After execution, access the `dataframe` attribute to get the training dataset as a pandas DataFrame, ready for model training.
 
 ```python
-df = result.to_pandas()
+df = result.dataframe
 ```
 
 The resulting DataFrame contains one row per anchor, with columns for the attribute key, anchor timestamp, label, and every attribute from your attribute groups:

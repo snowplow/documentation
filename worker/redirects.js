@@ -273,7 +273,6 @@ const fallbackRules = [
   ['/docs/using-the-snowplow-console/*', '/docs/account-management/:splat', 301],
   ['/docs/discovering-data/*', '/docs/data-product-studio', 301],
   ['/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/', '/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/', 301],
-  ['/docs/data-apps/*', '/docs/modeling-your-data/visualization/:splat', 301],
   ['/docs/get-started/deployment-model/*', '/docs/get-started/', 301],
   ['/docs/get-started/snowplow-bdp/private-managed-cloud/*', '/docs/get-started/snowplow-bdp/:splat', 301],
   ['/docs/get-started/snowplow-bdp/cloud/*', '/docs/get-started/snowplow-bdp/', 301],

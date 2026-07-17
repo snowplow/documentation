@@ -49,15 +49,10 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | QA pipeline                                                                                                                  |   ✅   |  do-it-yourself  |
 | Fine-grained user permissions using access control lists                                                                     |   ✅   |        ❌         |
 | API key access                                                                                                               |   ✅   |        ❌         |
-| <h3>[Data Model Packs](/docs/modeling-your-data/visualization/index.md)</h3>                                                 |  CDI  |   Self-Hosted    |
+| <h3>Data Model Packs</h3>                                                                                                    |  CDI  |   Self-Hosted    |
 | **Digital Analytics**                                                                                                        |       |                  |
-| Funnel builder                                                                                                               |   ✅   |        ❌         |
-| User and Marketing Analytics                                                                                                 |   ✅   |        ❌         |
-| Marketing Attribution                                                                                                        |   ✅   |        ❌         |
-| Video and Media                                                                                                              |   ✅   |        ❌         |
 | [Unified Digital, Attribution, Media Player, Ecommerce, Normalize, Utils data models](/docs/modeling-your-data/index.md)     |   ✅   |        ❌         |
 | **Ecommerce Analytics**                                                                                                      |       |                  |
-| Ecommerce Analytics                                                                                                          |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)    |   ✅   |        ❌         |
 | <h3>Signals</h3>                                                                                                             |  CDI  |   Self-Hosted    |
 | [Real-time personalization engine](/docs/signals/introduction/index.md)                                                      |   ✅   |        ❌         |

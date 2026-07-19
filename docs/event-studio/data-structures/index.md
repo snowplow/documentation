@@ -52,7 +52,7 @@ When you create a new data structure your changes are initially saved as a **dra
 
 **Important**: Draft data structures are not deployed to your development environment and will not be available for event validation. You must deploy your draft to the development environment when you're ready to test it.
 
-This workflow gives you the flexibility to iterate on your data structure design without the overhead of managing version increments for every small change.
+This workflow gives you the flexibility to iterate on your data structure design without the overhead of managing version increments for every small change. Draft data structures sit outside the normal console listing machinery entirely (not downloadable via CLI, not usable for validation). In the Console you cannot hide a draft data structure, the only option is to delete it, so you should never see a draft in the hidden tab.
 
 ## Edit a data structure
 
@@ -126,6 +126,7 @@ Hiding a data structure will not remove it from the registry, it simply hides it
 
 (1) events can still be sent against this structure
 (2) you cannot create a new structure of the same name
+(3) draft data structures are not shown as hidden, as explained above in the drafts workflow
 
 :::
 

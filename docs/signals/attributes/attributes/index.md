@@ -170,6 +170,24 @@ EntityProperty(
 )
 ```
 
+All three property classes accept an optional `granularity` argument to truncate the timestamp value before aggregation. This enables active-day counts, time-of-day seasonality, and similar time-based features.
+
+Supported values: `'second'`, `'minute'`, `'hour'`, `'day'`, `'month'`, `'year'`.
+
+:::note[Truncation is always UTC]
+All timestamp truncation uses UTC, regardless of your warehouse timezone settings. Snowplow normalises event timestamps to UTC before storage, so truncation is consistent across warehouses.
+:::
+
+```python
+# Count distinct active days in the last 30 days
+AtomicProperty(name="derived_tstamp", granularity="day")
+
+# Hour-of-day value for seasonality analysis
+AtomicProperty(name="collector_tstamp", granularity="hour")
+```
+
+Setting `granularity` on a non-timestamp `AtomicProperty` name returns a validation error. For `EventProperty` and `EntityProperty`, the resolved path value must be a parseable ISO 8601 timestamp string.
+
 </TabItem>
 </Tabs>
 
@@ -269,7 +287,8 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `aggregation` | The calculation to perform | one of: `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `most_frequent`, `least_frequent`, `approx_count_distinct`, `category_count`, `unique_list` | ✅ |
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
-| `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
+| `property` | The property of the event or entity to use in the aggregation | `AtomicProperty`, `EventProperty`, or `EntityProperty` | ❌ |
+| `granularity` | Set on the `property` object: truncates the timestamp value to the specified unit before aggregation. All truncation is UTC. Rejected on non-timestamp `AtomicProperty` names. | one of: `'second'`, `'minute'`, `'hour'`, `'day'`, `'month'`, `'year'` | ❌ |
 | `period` | The time window over which to calculate the aggregation | `timedelta` | ❌ |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
@@ -357,6 +376,28 @@ referrer_source_attribute = Attribute(
     property=AtomicProperty(name="mkt_medium"),
 )
 ```
+
+### Count distinct active days
+
+Count the number of distinct days in the last 30 days on which the user triggered any event, using `approx_count_distinct` on a day-truncated timestamp.
+
+```python
+from snowplow_signals import Attribute, Event, AtomicProperty
+from datetime import timedelta
+
+active_days_attribute = Attribute(
+    name="active_days_30d",
+    description="Number of distinct active days in the past 30 days",
+    type="int32",
+    events=[Event()],
+    aggregation="approx_count_distinct",
+    property=AtomicProperty(name="derived_tstamp", granularity="day"),
+    period=timedelta(days=30),
+    default_value=0,
+)
+```
+
+`Event()` with no arguments matches all event types. `granularity="day"` truncates each `derived_tstamp` to midnight UTC before the distinct count, so multiple events on the same day count as one active day.
 
 ### Sum of an entity property
 

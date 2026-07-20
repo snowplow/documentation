@@ -173,6 +173,33 @@ EntityProperty(
 </TabItem>
 </Tabs>
 
+### Set timestamp granularity
+
+Add an optional granularity to truncate a `unix_timestamp` property value to the specified unit before it feeds the aggregation. This lets you count distinct days, weeks, or other calendar periods — for example, the number of distinct days a user was active.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+Find the granularity option within **More options**. The dropdown appears only when the attribute type is `unix_timestamp` or `unix_timestamp_list`.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+Set `granularity` on your `Attribute` to one of: `"second"`, `"minute"`, `"hour"`, `"day"`, `"week"`, `"month"`, or `"year"`. The field is only valid when `type` is `unix_timestamp` or `unix_timestamp_list`.
+
+```python
+my_attribute = Attribute(
+    ...,
+    type="unix_timestamp",
+    granularity="day",
+)
+```
+
+</TabItem>
+</Tabs>
+
+Timestamps are truncated in UTC. The output type remains `unix_timestamp`.
+
 ### Set a time period
 
 Add an optional time period to aggregate over a rolling window. Signals won't include events older than the specified time period in the calculation.
@@ -270,6 +297,7 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
 | `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
+| `granularity` | Truncates a `unix_timestamp` property to the specified unit before aggregation. Only valid for `unix_timestamp` and `unix_timestamp_list` types. Truncation is applied in UTC. | one of: `second`, `minute`, `hour`, `day`, `week`, `month`, `year` | ❌ |
 | `period` | The time window over which to calculate the aggregation | `timedelta` | ❌ |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
@@ -396,6 +424,29 @@ my_new_attribute = Attribute(
         major_version=1,
         path="price",
     ),
+    default_value=0
+)
+```
+
+### Count distinct active days
+
+Count the approximate number of distinct calendar days on which a user triggered a page view event. Truncating `dvce_created_tstamp` to `day` granularity collapses all events on the same day to the same value before `approx_count_distinct` deduplicates them.
+
+```python
+from snowplow_signals import Attribute, Event, AtomicProperty
+from datetime import timedelta
+
+active_days_attribute = Attribute(
+    name="active_days_30d",
+    description="Approximate count of distinct days with at least one page view in the last 30 days",
+    type="unix_timestamp",
+    events=[
+        Event(name="page_view", vendor="com.snowplowanalytics.snowplow", version="1-0-0")
+    ],
+    aggregation="approx_count_distinct",
+    property=AtomicProperty(name="dvce_created_tstamp"),
+    granularity="day",
+    period=timedelta(days=30),
     default_value=0
 )
 ```

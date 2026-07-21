@@ -92,11 +92,27 @@ The retry delay calculation is an exponential function with multiplicative facto
 
 You may want to force an emitter to send all events in its buffer, even if the buffer is not full. The Tracker class has a `flush()` method which flushes its emitter.
 
-Example:
-
 ```cpp
 tracker->flush();
 ```
+
+`flush()` waits for the event queue to drain and then calls `stop()` on the emitter. To prevent `flush()` from blocking indefinitely when the collector is unreachable, it respects a configurable deadline. If the deadline expires before the queue drains, `flush()` calls `stop()` regardless; undelivered events remain in the SQLite event store and will be retried the next time the tracker is started.
+
+The default deadline is 30,000 ms (30 seconds). You can adjust it for your application's shutdown budget using `set_flush_timeout_ms()` on `EmitterConfiguration`:
+
+```cpp
+EmitterConfiguration emitter_config("sp.db");
+emitter_config.set_flush_timeout_ms(5000); // wait at most 5 seconds for the queue to drain
+
+auto tracker = Snowplow::create_tracker(tracker_config, network_config, emitter_config, session_config);
+
+// later, during shutdown:
+tracker->flush(); // returns within ~5 seconds even if the collector is unreachable
+```
+
+:::tip[Choosing a flush timeout]
+Choose a value that fits your application's shutdown budget. Command-line tools may tolerate only a few seconds; long-running servers may prefer a longer deadline to maximize event delivery before restart.
+:::
 
 ## Using a custom HTTP Client
 

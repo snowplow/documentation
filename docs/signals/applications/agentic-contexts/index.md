@@ -15,6 +15,10 @@ Once an agentic context is [published](/docs/signals/agentic-contexts/index.md),
 
 An agentic context tracks a single user's activity within their current session, so you retrieve it for a specific `domain_sessionid` value. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
+## Get the session identifier
+
+Fetching an agentic context happens server-side, so you'll need to pass your backend the current `domain_sessionid`. Read it client-side with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) method, then send it to your server, for example as a request parameter.
+
 ## Retrieve an agentic context
 
 You can read the same agentic context as JSON, for programmatic use, or as a readable narrative summary, well-suited to dropping straight into an LLM's context or showing a human.

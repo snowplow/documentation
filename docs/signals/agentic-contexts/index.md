@@ -97,10 +97,29 @@ Choose which events to capture in the agentic context, and which details to keep
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Pass one `EventSelection` per event you want to capture. Each selection pairs an `EventLogEvent` reference with the properties to project:
-* `EventLogAtomicProperty`: an [atomic](/docs/fundamentals/canonical-event/index.md) property, referenced by name
-* `EventLogEventProperty`: a property from the event's own schema, referenced by vendor, name, major version, and path
-* `EventLogEntityProperty`: a property from an entity attached to the event, referenced the same way
+Pass one `EventSelection` per event you want to capture, pairing an `EventLogEvent` reference with the properties to project:
+
+| Argument     | Description                                                | Type                      | Required? |
+| ------------ | ----------------------------------------------------------- | -------------------------- | --------- |
+| `event`      | The event schema to match                                   | `EventLogEvent`            | ✅         |
+| `properties` | The properties to project from each matching event (1-50)   | list of property objects   | ✅         |
+
+Use `EventLogEvent` to reference the event schema, either by `name`/`vendor`/`version` or by `event_specification_id`. Pin an exact version with `version` (e.g. `"1-0-0"`), or match any minor/patch within a major release using `major_version` instead. Only one of `version` or `major_version` may be set.
+
+| Argument                | Description                                                           | Type     |
+| ------------------------ | ---------------------------------------------------------------------- | -------- |
+| `name`                   | Name of the event                                                       | `string` |
+| `vendor`                 | Vendor of the event                                                     | `string` |
+| `version`                | Exact event version, e.g. `1-0-0`                                       | `string` |
+| `major_version`          | Major-version pin, matches any minor/patch. Mutually exclusive with `version` | `int`    |
+| `event_specification_id` | Event specification ID. Mutually exclusive with `name`/`vendor`/`version` | `string` |
+
+Each entry in `properties` is one of three types:
+* `EventLogAtomicProperty`: an [atomic](/docs/fundamentals/canonical-event/index.md) property, referenced by `name` (e.g. `page_url`)
+* `EventLogEventProperty`: a property from the event's own schema, referenced by `vendor`, `name`, `major_version`, and a JSONPath-like `path`
+* `EventLogEntityProperty`: a property from an entity attached to the event, referenced the same way as `EventLogEventProperty`, plus an `index` for the nth entity instance (defaults to `0`)
+
+All three accept an optional `output_name` to set the property's key in the resulting agentic context. Set this to resolve conflicts when two properties would otherwise share the same key.
 
 </TabItem>
 </Tabs>
@@ -119,7 +138,7 @@ An agentic context tracks a single user's activity within their current session,
 
 ## Prompt
 
-Each agentic context carries a free-text prompt: guidance and role framing that's handed to the agent alongside the activity. It shapes how the agent interprets what it reads, but has no effect on which events are captured. Refine an agent's tone, focus, or rules by editing this text and re-publishing.
+Each agentic context carries a free-text prompt: instructions handed to the agent alongside the captured activity. Use it to tell the agent what job it's doing and what to do with this specific data, for example its role, what it should conclude from the activity, or what action to take next. The prompt has no effect on which events are captured. It only shapes how the agent interprets and acts on them. Edit this text and re-publish to refine that interpretation without changing the underlying data or how the agentic context is consumed.
 
 ## Publishing an agentic context
 

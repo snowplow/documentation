@@ -61,14 +61,16 @@ Navigator.pop(context);
 
 Event classes supported by the Flutter Tracker:
 
-| Method             | Event type tracked                                          |
-| ------------------ | ----------------------------------------------------------- |
-| `SelfDescribing`   | Custom event based on "self-describing" JSON schema         |
-| `Structured`       | Semi-custom structured event                                |
-| `ScreenView`       | View of a screen in the app                                 |
-| `Timing`           | User timing events such as how long resources take to load. |
-| `ConsentGranted`   | User opting into data collection.                           |
-| `ConsentWithdrawn` | User withdrawing consent for data collection.               |
+| Method                 | Event type tracked                                                           |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `SelfDescribing`       | Custom event based on "self-describing" JSON schema                          |
+| `Structured`           | Semi-custom structured event                                                 |
+| `ScreenView`           | View of a screen in the app                                                  |
+| `Timing`               | User timing events such as how long resources take to load.                  |
+| `ConsentGranted`       | User opting into data collection.                                            |
+| `ConsentWithdrawn`     | User withdrawing consent for data collection.                                |
+| `DeepLinkReceived`     | Deep link received by the app (mobile only).                                 |
+| `MessageNotification`  | Push or local notification received by the app (mobile only).                |
 
 All the methods share common features and parameters. Every type of event can have an optional context added. See the [next page](/docs/sources/flutter-tracker/adding-data/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
@@ -293,3 +295,74 @@ tracker.track(ConsentWithdrawn(
     documentDescription: 'description1',
 ));
 ```
+
+## Track deep link received events with `DeepLinkReceived`
+
+Deep links are URLs that take users directly to a specific location within your app. The mobile operating system receives them and passes them to your app. Use `DeepLinkReceived` to manually track when your app receives a deep link. This event is only supported on iOS and Android; calling it on Web will throw a `PlatformException`.
+
+After tracking a `DeepLinkReceived` event, the tracker automatically attaches the deep link information as a `deep_link` [entity](/docs/fundamentals/entities/index.md) to the next `ScreenView` event.
+
+| Argument   | Description                              | Required in event? |
+| ---------- | ---------------------------------------- | ------------------ |
+| `url`      | URL of the received deep-link.           | Yes                |
+| `referrer` | Referrer URL, source of this deep-link.  | No                 |
+
+Example:
+
+```dart
+tracker.track(DeepLinkReceived(
+    url: 'https://example.com/notes/123',
+    referrer: 'https://snowplow.io',
+));
+```
+
+The event schema is `iglu:com.snowplowanalytics.mobile/deep_link_received/jsonschema/1-0-0`.
+
+## Track push notifications with `MessageNotification`
+
+Use `MessageNotification` to track when a push or local notification is received by your app. This event is only supported on iOS and Android; calling it on Web will throw a `PlatformException`.
+
+| Argument                | Description                                                                                                             | Required in event? |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `title`                 | The notification title.                                                                                                 | Yes                |
+| `body`                  | The notification body.                                                                                                  | Yes                |
+| `trigger`               | The trigger for the notification: `'push'`, `'location'`, `'calendar'`, `'timeInterval'`, or `'other'`.                | Yes                |
+| `action`                | The action associated with the notification.                                                                            | No                 |
+| `attachments`           | List of `MessageNotificationAttachment` objects associated with the notification.                                       | No                 |
+| `badge`                 | The application badge count specified in the notification.                                                              | No                 |
+| `categoryIdentifier`    | The notification category identifier.                                                                                   | No                 |
+| `launchImageName`       | The filename of the image to display as the launch image (iOS only).                                                    | No                 |
+| `notificationTimestamp` | The UTC timestamp of when the notification was delivered.                                                               | No                 |
+| `sound`                 | The name of the sound file to play when the notification is delivered.                                                  | No                 |
+| `subtitle`              | The notification subtitle (iOS only).                                                                                   | No                 |
+| `thread`                | The thread identifier used to group related notifications.                                                              | No                 |
+
+Each `MessageNotificationAttachment` takes three required fields:
+
+| Argument     | Description                        |
+| ------------ | ---------------------------------- |
+| `identifier` | The unique identifier of the attachment. |
+| `type`       | The attachment media type.         |
+| `url`        | The URL of the attachment.         |
+
+Example:
+
+```dart
+tracker.track(MessageNotification(
+    title: 'title',
+    body: 'body',
+    trigger: 'push',
+    notificationTimestamp: '2021-10-18T10:16:08.008Z',
+    action: 'action',
+    sound: 'chime.mp3',
+    attachments: [
+        MessageNotificationAttachment(
+            identifier: 'id',
+            type: 'type',
+            url: 'https://snowplow.io',
+        ),
+    ],
+));
+```
+
+The event schema is `iglu:com.snowplowanalytics.mobile/message_notification/jsonschema/1-0-0`.

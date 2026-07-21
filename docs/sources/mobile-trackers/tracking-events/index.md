@@ -374,6 +374,27 @@ tracker.track(event);
 ```
 
   </TabItem>
+  <TabItem value="flutter" label="Flutter">
+
+```dart
+tracker.track(MessageNotification(
+    title: 'title',
+    body: 'body',
+    trigger: 'push',
+    notificationTimestamp: '2021-10-18T10:16:08.008Z',
+    action: 'action',
+    sound: 'chime.mp3',
+    attachments: [
+        MessageNotificationAttachment(
+            identifier: 'id',
+            type: 'type',
+            url: 'https://snowplow.io',
+        ),
+    ],
+));
+```
+
+  </TabItem>
 </Tabs>
 
 ### Tracking Deep Links

@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "event_name",
+    "event_time",
+    "action_source",
+    "user_data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_name": {
+      "type": "string",
+      "description": "A Meta standard event name (Purchase, AddToCart, PageView, ...) or a custom event name.",
+      "consoleDefault": "toMetaEventName(event)",
+      "consoleRequired": true
+    },
+    "event_time": {
+      "type": "integer",
+      "description": "Unix timestamp in seconds (GMT) when the event occurred. Must be no more than 7 days in the past; a single older event causes Meta to reject the entire request.",
+      "consoleDefault": "spTstampToEpochSecs(event.derived_tstamp)",
+      "consoleRequired": true
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Advertiser-chosen ID used with event_name to deduplicate against browser Pixel events (48-hour window). Must equal the Pixel's eventID for dedup to occur.",
+      "consoleDefault": "event.event_id",
+      "consoleRequired": true
+    },
+    "event_source_url": {
+      "type": "string",
+      "description": "The browser URL where the event happened. Required for website events.",
+      "consoleDefault": "event.page_url",
+      "consoleRequired": true
+    },
+    "action_source": {
+      "type": "string",
+      "enum": [
+        "email",
+        "website",
+        "app",
+        "phone_call",
+        "chat",
+        "physical_store",
+        "system_generated",
+        "business_messaging",
+        "other"
+      ],
+      "description": "Where the conversion occurred. When 'website', event_source_url and user_data.client_user_agent are required.",
+      "consoleDefault": "'website'",
+      "consoleRequired": true
+    },
+    "opt_out": {
+      "type": "boolean",
+      "description": "If true, the event is used for attribution only, not ads optimization.",
+      "consoleRequired": false
+    },
+    "referrer_url": {
+      "type": "string",
+      "description": "HTTP referrer of the event page.",
+      "consoleDefault": "event.page_referrer",
+      "consoleRequired": false
+    },
+    "data_processing_options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set to ['LDU'] to enable Limited Data Use for US privacy compliance; [] to disable.",
+      "consoleRequired": false
+    },
+    "data_processing_options_country": {
+      "type": "integer",
+      "description": "1 = US, 0 = let Meta geolocate. Required when LDU is set.",
+      "consoleRequired": false
+    },
+    "data_processing_options_state": {
+      "type": "integer",
+      "description": "e.g. 1000 = California, 0 = geolocate. Required when LDU is set and no client_ip_address is provided.",
+      "consoleRequired": false
+    },
+    "user_data": {
+      "type": "object",
+      "description": "Customer information for matching. At least one identifier is required. PII fields must be SHA256-hashed after normalization.",
+      "required": [
+        "client_ip_address",
+        "client_user_agent"
+      ],
+      "additionalProperties": true,
+      "consoleRequired": true,
+      "properties": {
+        "client_ip_address": {
+          "type": "string",
+          "description": "The user's IPv4/IPv6 address. Do not hash. If the Snowplow IP anonymization enrichment is enabled, this field will contain a truncated IP, which Meta rejects as invalid, causing the request to fail. Do not enable IP anonymization on events forwarded to Meta.",
+          "consoleDefault": "event.user_ipaddress",
+          "consoleRequired": true
+        },
+        "client_user_agent": {
+          "type": "string",
+          "description": "The user's browser user agent. Do not hash. Required for website events.",
+          "consoleDefault": "event.useragent",
+          "consoleRequired": true
+        },
+        "external_id": {
+          "type": "string",
+          "description": "Any unique advertiser user ID. Defaults to the raw Snowplow user_id. Meta recommends SHA256 hashing and also accepts raw values; if you hash, the format must be consistent with what you send on other channels. To hash, wrap the value yourself, e.g. hash(event.user_id, 'sha256'). To use a fallback identifier, coalesce: event.user_id || event.domain_userid.",
+          "consoleDefault": "event.user_id"
+        },
+        "em": {
+          "type": "string",
+          "description": "Email, SHA256-hashed after trimming whitespace and lowercasing. No canonical Snowplow source; map from your own entity, e.g. hash(myEmail.trim().toLowerCase(), 'sha256')."
+        },
+        "ph": {
+          "type": "string",
+          "description": "Phone, SHA256-hashed after normalizing to digits only with country code, no leading zeros or symbols."
+        },
+        "fn": {
+          "type": "string",
+          "description": "First name, SHA256-hashed after lowercasing, punctuation removed (UTF-8 for special characters)."
+        },
+        "ln": {
+          "type": "string",
+          "description": "Last name, SHA256-hashed, same normalization as fn."
+        },
+        "ge": {
+          "type": "string",
+          "description": "Gender as single lowercase initial ('f'/'m'), SHA256-hashed."
+        },
+        "db": {
+          "type": "string",
+          "description": "Date of birth as YYYYMMDD, SHA256-hashed."
+        },
+        "ct": {
+          "type": "string",
+          "description": "City, lowercase with no punctuation or spaces, SHA256-hashed."
+        },
+        "st": {
+          "type": "string",
+          "description": "State as 2-character lowercase ANSI code (US), SHA256-hashed."
+        },
+        "zp": {
+          "type": "string",
+          "description": "Zip/postcode, lowercase, no spaces or dashes, first 5 digits for US, SHA256-hashed."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country as lowercase ISO 3166-1 alpha-2 code, SHA256-hashed."
+        },
+        "fbc": {
+          "type": "string",
+          "description": "Meta click ID (format fb.1.{ms_timestamp}.{fbclid}). Do not hash. Default reads the _fbc cookie via the cookie extractor enrichment, falling back to deriving from fbclid via the campaign attribution enrichment. For the default to work, configure _fbc in the cookie extractor enrichment and fbclid in the campaign attribution enrichment.",
+          "consoleDefault": "deriveFbc(event, event.mkt_network, event.mkt_clickid, event.derived_tstamp)"
+        },
+        "fbp": {
+          "type": "string",
+          "description": "Meta browser ID from the _fbp cookie. Do not hash. Default reads the _fbp cookie via the cookie extractor enrichment. For the default to work, configure _fbp in the cookie extractor enrichment.",
+          "consoleDefault": "deriveFbp(event)"
+        },
+        "subscription_id": {
+          "type": "string",
+          "description": "Subscription ID for this user. Do not hash."
+        },
+        "lead_id": {
+          "type": "integer",
+          "description": "Lead ID from Meta Lead Ads. Integer - do not string-coerce. Do not hash."
+        },
+        "fb_login_id": {
+          "type": "integer",
+          "description": "App-scoped Facebook Login ID. Integer - do not string-coerce. Do not hash."
+        }
+      }
+    },
+    "custom_data": {
+      "type": "object",
+      "description": "Additional business data. Must never carry raw PII - identifiers belong in (hashed) user_data.",
+      "additionalProperties": true,
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Monetary value of the event. Required (with currency) for Purchase events.",
+          "consoleDefault": "allContexts(event, 'com_snowplowanalytics_snowplow_ecommerce_transaction')[0]?.revenue"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code. Required with value for Purchase events.",
+          "consoleDefault": "allContexts(event, 'com_snowplowanalytics_snowplow_ecommerce_transaction')[0]?.currency"
+        },
+        "order_id": {
+          "type": "string",
+          "description": "Order ID for the transaction.",
+          "consoleDefault": "allContexts(event, 'com_snowplowanalytics_snowplow_ecommerce_transaction')[0]?.transaction_id"
+        },
+        "content_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Product IDs associated with the event."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Either 'product' or 'product_group', matching how content_ids are keyed in your catalog."
+        },
+        "content_name": {
+          "type": "string",
+          "description": "Name of the page or product."
+        },
+        "content_category": {
+          "type": "string",
+          "description": "Category of the page or product."
+        },
+        "contents": {
+          "type": "array",
+          "description": "Per-item detail. Each entry requires an id; delivery_category must be one of in_store, curbside, home_delivery.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "item_price": {
+                "type": "number"
+              },
+              "delivery_category": {
+                "type": "string",
+                "enum": [
+                  "in_store",
+                  "curbside",
+                  "home_delivery"
+                ]
+              }
+            }
+          }
+        },
+        "num_items": {
+          "type": "integer",
+          "description": "Number of items in a checkout/purchase."
+        },
+        "search_string": {
+          "type": "string",
+          "description": "Search query string for Search events."
+        }
+      }
+    }
+  }
+}

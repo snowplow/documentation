@@ -44,9 +44,16 @@ Only users with the Administrator role can accept the terms and conditions and e
 
 When enabling the feature for the first time, an admin user must accept the terms and conditions related to LLM usage within the Snowplow product.
 
-### Usage Limits
+### Custom instructions
 
-The Snowplow Assistant has weekly refreshing token limits at the organisation level. The limit is set at a level that under normal usage you will not reach it.
+You can give the Snowplow Assistant organization-level information to keep in mind, such as naming conventions, schema patterns, and internal terminology.
+Do not include credentials, secrets, personal data, or other sensitive information.
+
+These custom instructions apply to every conversation across all workspaces in your organization.
+
+### Usage limits
+
+The Snowplow Assistant has token limits that refresh weekly at the organization level. Under normal usage, you should not reach the limit.
 
 ## Capabilities
 

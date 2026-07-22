@@ -146,6 +146,7 @@ Additionally, it provides the following setter functions:
 | `set_byte_limit_post`              | The byte limit when sending a POST request.                                                                                                  | 40000 bytes |
 | `set_request_callback`             | Set a callback to call after emit requests are made with the resulting emit status (see page about Emitter for more info).                   | None        |
 | `set_custom_retry_for_status_code` | Set a custom retry rule for when the HTTP status code is received in emit response from Collector (see page about Emitter for more details). | None        |
+| `set_flush_timeout_ms`             | Maximum time in ms that `flush()` waits for the event queue to empty before stopping. Events not yet delivered remain in SQLite for the next session. Pass `0` for no timeout (waits indefinitely). | 30000 ms |
 
 ### Session configuration using "SessionConfiguration"
 

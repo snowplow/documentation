@@ -90,12 +90,21 @@ The retry delay calculation is an exponential function with multiplicative facto
 
 ## Manual flushing
 
-You may want to force an emitter to send all events in its buffer, even if the buffer is not full. The Tracker class has a `flush()` method which flushes its emitter.
+You may want to force an emitter to send all events in its buffer, even if the buffer is not full. The Tracker class has a `flush()` method which flushes its emitter.
 
-Example:
+`flush()` waits up to the configured flush timeout (default 30 seconds) for the event queue to drain before calling `stop()` and returning. If the timeout expires before the queue empties — for example, because the collector endpoint is unreachable — `flush()` still calls `stop()` and returns; any undelivered events remain in the SQLite event store and will be retried in the next session when a new emitter is started.
+
+You can configure the flush timeout via `EmitterConfiguration::set_flush_timeout_ms()`. Pass `0` to wait indefinitely. The timeout applies only to unreachable or slow collectors — events delivered to a reachable collector drain in milliseconds and are unaffected.
 
 ```cpp
-tracker->flush();
+EmitterConfiguration emitter_config("sp.db");
+emitter_config.set_flush_timeout_ms(5000); // wait up to 5 seconds for the queue to drain
+
+auto tracker = Snowplow::create_tracker(tracker_config, network_config, emitter_config, session_config);
+
+// ... track events ...
+
+tracker->flush(); // blocks for up to 5 seconds, then stops the emitter
 ```
 
 ## Using a custom HTTP Client

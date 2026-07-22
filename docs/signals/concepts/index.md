@@ -2,22 +2,27 @@
 title: "Signals fundamentals"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, and interventions for triggering actions. Learn about data sources, attribute keys, and the Profiles Store."
-keywords: ["attribute groups", "services", "interventions", "profiles store", "attribute keys"]
+description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, interventions for triggering actions, and agentic contexts for grounding agents. Learn about data sources, attribute keys, and the Profiles Store."
+keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-Signals has three main configurable components:
+Signals has four main configurable components:
 * **Attribute groups**, for defining and calculating attributes
+* **Agentic contexts**, for grounding agents in a user's recent session activity
 * **Services**, for consuming calculated attributes in your applications
 * **Interventions**, for consuming calculated attributes and triggering actions in your applications
 
 **Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure or take action on - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups; they are effectively properties of the attribute group.
 
+**Agentic contexts** are a separate resource, for capturing a rolling window of session activity to ground an agent, along with instructions to guide it.
+
 To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 
-**Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
+**Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes.
+
+**Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
 
@@ -191,6 +196,14 @@ Use cases for direct interventions include:
 * Real-time business decisions, e.g. breaking news
 * Manual campaign targeting
 * Sensitive communications requiring authentication or authorization
+
+## Agentic contexts
+
+Agentic contexts capture a rolling window of a user's recent session activity, ready to hand to an agent so it can ground its responses in what the user is doing right now. Unlike attribute groups, they don't calculate or aggregate values: they log the raw events and properties you select, up to a configured limit on count and age.
+
+Each agentic context also carries a free-text prompt, stored and returned alongside the activity, that tells the agent what to do with the data. Read the result as structured JSON, or as a plain-language narrative ready to drop into an LLM's context.
+
+Agentic contexts follow the same draft-then-publish model as other Signals resources, but aren't versioned: there's a single published agentic context per name, and publishing a draft replaces it. Learn how to [define an agentic context](/docs/signals/agentic-contexts/index.md) and [retrieve one](/docs/signals/applications/agentic-contexts/index.md) in your application.
 
 ## Profiles Store
 

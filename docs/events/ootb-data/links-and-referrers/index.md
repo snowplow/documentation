@@ -22,7 +22,7 @@ This table shows the support for page referrer tracking across the main client-s
 | [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                              | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
 | [Android](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                          | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
 | [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 1.1.0                                              | ❌             | Based on Deep Link events          |
-| Flutter                                                                                                        | ❌         |                                                    |               |                                    |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/deep-link-and-push-notifications/index.md)            | ✅         |                                                    | ❌             | Based on Deep Link events          |
 | Roku                                                                                                           | ❌         |                                                    |               |                                    |
 | Google Tag Manager                                                                                             | ✅         | v3                                                 | ✅             | Automatic for all page view events |
 

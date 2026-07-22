@@ -80,15 +80,56 @@ const text = await signals.getAgenticContext({
 
 ## Response format
 
-With `format="json"`, the response contains the captured events along with the prompt:
+### JSON
 
-| Field           | Description                                                | Type      |
-| --------------- | ----------------------------------------------------------- | --------- |
-| `name`          | The name of the agentic context                             | `string`  |
-| `attribute_key` | The attribute key the log is scoped to                      | `string`  |
-| `identifier`    | The attribute key value the log was read for                | `string`  |
-| `events`        | The captured events, most recent activity first             | `array`   |
-| `prompt`        | The free-text instruction attached to the agentic context   | `string`  |
-| `started_at_ms` | When the session buffer started, in epoch milliseconds      | `integer` |
+Use `format="json"` when you need to work with the activity programmatically, for example to build your own prompt, apply custom logic, or store the result.
 
-With `format="narrative"`, the response is a plain-text context block, ready to drop straight into an LLM's context.
+The response contains the captured events along with the prompt and a human-readable summary:
+
+| Field           | Description                                                     | Type      |
+| --------------- | ----------------------------------------------------------------- | --------- |
+| `summary`       | Time on the current page, session age, and the configured limits | `string`  |
+| `attribute_key` | The attribute key the log is scoped to                            | `string`  |
+| `identifier`    | The attribute key value the log was read for                      | `string`  |
+| `name`          | The name of the agentic context                                   | `string`  |
+| `version`       | Schema version, currently always `1`                               | `integer` |
+| `prompt`        | The free-text instruction attached to the agentic context         | `string`  |
+| `started_at_ms` | When the session buffer started, in epoch milliseconds            | `integer` |
+| `events`        | The captured events, ordered oldest to most recent                | `array`   |
+
+Here's an example response:
+
+```json
+{
+  "summary": "45 seconds on the current page. Session started 90 seconds ago. Based on last 50 recorded events for the last 1800 seconds.",
+  "attribute_key": "domain_sessionid",
+  "identifier": "8c9104e3-c300-4b20-82f2-93b7fa0b8feb",
+  "name": "my_agentic_context",
+  "version": 1,
+  "prompt": "You are a checkout-recovery assistant. Use the recent activity to help the user complete their purchase.",
+  "started_at_ms": 1737549000000,
+  "events": [
+    { "page_url": "https://example.com/checkout", "my_field": "blue" },
+    { "page_url": "https://example.com/cart" }
+  ]
+}
+```
+
+### Narrative
+
+Use `format="narrative"` when you want a ready-made plain-text summary to drop straight into an LLM's context, or to show a human, without writing your own formatting logic.
+
+The block opens with a short summary: how long the user has been on their current page, how long ago the session started, and the agentic context's configured `max_events`/`max_age_seconds` limits. Events follow as a table, ordered oldest to most recent: seconds since the start of the session, the event name, the URL path, and any other captured properties as a JSON-like `event_context`. Select the `event_name` and `page_urlpath` atomic properties if you want those columns populated; anything else you capture appears in `event_context`.
+
+Here's an example response:
+
+```text
+[START CONTEXT]
+45 seconds on the current page. Session started 90 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
+## Real-time user behaviour
+Events are ordered from oldest to most recent.
+seconds_since_start_of_session, event, url, event_context
+0, page_view, /checkout, {}
+45, add_to_cart, /cart, {sku: 'SKU123'}
+[END CONTEXT]
+```

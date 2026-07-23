@@ -61,14 +61,16 @@ Navigator.pop(context);
 
 Event classes supported by the Flutter Tracker:
 
-| Method             | Event type tracked                                          |
-| ------------------ | ----------------------------------------------------------- |
-| `SelfDescribing`   | Custom event based on "self-describing" JSON schema         |
-| `Structured`       | Semi-custom structured event                                |
-| `ScreenView`       | View of a screen in the app                                 |
-| `Timing`           | User timing events such as how long resources take to load. |
-| `ConsentGranted`   | User opting into data collection.                           |
-| `ConsentWithdrawn` | User withdrawing consent for data collection.               |
+| Method                  | Event type tracked                                          |
+| ----------------------- | ----------------------------------------------------------- |
+| `SelfDescribing`        | Custom event based on "self-describing" JSON schema         |
+| `Structured`            | Semi-custom structured event                                |
+| `ScreenView`            | View of a screen in the app                                 |
+| `Timing`                | User timing events such as how long resources take to load. |
+| `ConsentGranted`        | User opting into data collection.                           |
+| `ConsentWithdrawn`      | User withdrawing consent for data collection.               |
+| `DeepLinkReceived`      | Deep link received in the app (iOS and Android only). See [deep link and push notification tracking](/docs/sources/flutter-tracker/tracking-events/deep-link-and-push-notifications/index.md). |
+| `MessageNotification`   | Push or local notification (iOS and Android only). See [deep link and push notification tracking](/docs/sources/flutter-tracker/tracking-events/deep-link-and-push-notifications/index.md). |
 
 All the methods share common features and parameters. Every type of event can have an optional context added. See the [next page](/docs/sources/flutter-tracker/adding-data/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 

@@ -77,7 +77,7 @@ The table below lists all available arguments for a `RuleIntervention`:
 Criteria are the conditional rules that determine when an intervention should trigger.
 
 :::note[Sent once]
-An intervention is sent only the first time the criteria are met. Read an example of how this works in the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example).
+An intervention is sent only the first time the criteria are met. Read an example of how this works in the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example). The [`changed` operator](#the-changed-operator) is the exception: it sends the intervention every time the attribute's value changes.
 :::
 
 When a referenced attribute is updated, the updated and previous states are evaluated against the criteria. If the previous state did not meet the conditions but the newly updated state does, the trigger activates. Criteria always refer to the latest published version of the attribute group that contains the attribute.
@@ -127,6 +127,7 @@ This table shows the available operators:
 | `not in`      | Value not in list           | ✅ (list)           |
 | `is null`     | Value is null/empty         | ❌                  |
 | `is not null` | Value exists                | ❌                  |
+| `changed`     | Value changed               | ❌                  |
 
 For more complex conditions, `criteria` also accepts `InterventionCriteriaAll`, `InterventionCriteriaAny`, and `InterventionCriteriaNone`.
 You can use these classes to combine multiple criteria as lists with the following parameters:
@@ -157,6 +158,22 @@ criteria = InterventionCriteriaAll(all=[
 
 </TabItem>
 </Tabs>
+
+### The `changed` operator
+
+Most operators trigger an intervention the first time the criteria become true. The `changed` operator is different: it triggers every time the attribute's value changes, regardless of the new value. Use it to react to updates to an attribute, for example to re-fetch a user's profile whenever any of their attributes change.
+
+`changed` takes no value. It triggers whenever the attribute's previous and current values differ, including when the attribute is set for the first time (from no value to its first value).
+
+:::note[Requires Signals 0.14.6 or later]
+The `changed` operator is available from Signals version 0.14.6.
+:::
+
+A few things to be aware of:
+
+* `changed` is only supported on its own or within an `InterventionCriteriaAll` (`all`) group. It can't be used inside an `any` or `none` group, because those wouldn't reliably trigger on every change.
+* Change detection is best-effort. When many events for the same attribute key are processed at once, an intermediate change can occasionally be missed. The first change (from no value to a value) always triggers.
+* The [preview](#preview) can't evaluate `changed` against warehouse data, since it's a change over time rather than a condition on the current value. A preview treats `changed` as always matching, so any other criteria still filter the count.
 
 ## Target and payload
 

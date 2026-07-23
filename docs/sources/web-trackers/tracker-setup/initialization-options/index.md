@@ -104,6 +104,7 @@ The following table shows all the configuration parameters. These are **all opti
 | [`onRequestSuccess`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#onrequestsuccess-callback)                             | Callback executed when a request succeeds (2xx status).                                              |                                       | `function`                 |
 | [`onRequestFailure`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#onrequestfailure-callback)                             | Callback executed when a request fails (non-2xx status).                                             |                                       | `function`                 |
 | [`preservePageViewIdForUrl`](/docs/sources/web-trackers/tracking-events/page-views/index.md#change-id-behavior-for-spas)                    | Control when a new page view ID is generated based on URL changes.                                   | `false`                               | `boolean` or `string` enum |
+| [`preserveOriginalReferrer`](/docs/sources/web-trackers/tracking-events/page-views/index.md#preserve-the-original-referrer-in-spas)          | Freeze the original external referrer for all subsequent page views in a single-page app.            | `false`                               | `boolean`                  |
 | [`customFetch`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#custom-event-store)                                         | Override the default fetch function with a custom implementation.                                    |                                       | `function`                 |
 | [`eventStore`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#custom-event-store)                                          | Custom EventStore implementation for storing events before sending.                                  |                                       | `object`                   |
 | [`keepalive`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests)                      | Allow requests to outlive the webpage. Enables requests to complete even if the page is closed.      | `false`                               | `boolean`                  |
@@ -171,6 +172,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
   preservePageViewIdForUrl: false,
+  preserveOriginalReferrer: false,
   keepalive: false, // Introduced in v4
   customFetch: undefined, // Introduced in v4
   eventStore: undefined, // Introduced in v4
@@ -232,6 +234,7 @@ newTracker('sp', '{{collector_url_here}}', {
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
   preservePageViewIdForUrl: false,
+  preserveOriginalReferrer: false,
   keepalive: false, // Introduced in v4
   customFetch: undefined, // Introduced in v4
   eventStore: undefined, // Introduced in v4

@@ -134,6 +134,41 @@ tracker.preservePageViewIdForUrl('pathname');
   </TabItem>
 </Tabs>
 
+### Preserve the original referrer in SPAs
+
+In a single-page application, the referrer for each `trackPageView()` call is normally the previous internal URL. This means the original external referrer (for example, the search engine that brought the user to your site) is only visible on the first page view.
+
+Set `preserveOriginalReferrer: true` in the tracker configuration to freeze the original external referrer for all subsequent page views in the session. The tracker captures `document.referrer` at initialization and uses it as the referrer for every `trackPageView()` call, regardless of internal navigation.
+
+If `document.referrer` is empty at initialization (for example, when the user navigated directly to the site), this option has no effect and the default per-navigation referrer behavior applies.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newTracker', 'sp', 'collector.example.com', {
+  appId: 'my-app',
+  preserveOriginalReferrer: true
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+
+newTracker('sp', 'collector.example.com', {
+  appId: 'my-app',
+  preserveOriginalReferrer: true
+});
+```
+
+  </TabItem>
+</Tabs>
+
+If you also call [`setReferrerUrl()`](/docs/sources/web-trackers/tracking-events/index.md#custom-page-url-and-referrer-url) after initialization, the explicit value takes precedence over the preserved referrer.
+
 ## Reset page activity on page view
 
 By default, tracking a page view using `trackPageView()`resets [activity tracking](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).

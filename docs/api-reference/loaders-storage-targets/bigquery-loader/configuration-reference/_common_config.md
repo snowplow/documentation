@@ -52,6 +52,20 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value 5. Maximum number of attempts to make before giving up on a transient error.</td>
 </tr>
 <tr>
+    <td><code>retries.alterTableWait.delay</code></td>
+    <td>
+      <p>Optional. Default value <code>1 second</code>.</p>
+      <p>Configures backoff when waiting for the BigQuery Writer to detect that the loader has altered the table by adding new columns.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>retries.tooManyColumns.delay</code></td>
+    <td>
+      <p>Optional. Default value <code>300 seconds</code>.</p>
+      <p>Relevant when the BigQuery table is close to exceeding the limit on max allowed columns in a single table. The loader will ignore a failure to alter the table due to too many columns, and it will continue to run. Some events will inevitably go to the failed events output topic until new columns have been added. This parameter configures how often the loader will retry to alter the table after an earlier failure.</p>
+    </td>
+</tr>
+<tr>
     <td><code>skipSchemas</code></td>
     <td>
       <p>Optional, e.g. <code>\["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>\["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>.</p>
@@ -134,6 +148,14 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>monitoring.webhook.heartbeat.*</code></td>
     <td>Optional. Default value <code>5.minutes</code>. How often to send a heartbeat event to the webhook when healthy.</td>
+</tr>
+<tr>
+    <td><code>monitoring.healthProbe.port</code></td>
+    <td>Optional. Default value <code>8000</code>. Open a HTTP server that returns OK only if the app is healthy.</td>
+</tr>
+<tr>
+    <td><code>monitoring.healthProbe.unhealthyLatency</code></td>
+    <td>Optional. Default value <code>5 minutes</code>. Health probe becomes unhealthy if any received event is still not fully processed before this cutoff time.</td>
 </tr>
 <tr>
     <td><code>monitoring.sentry.dsn</code></td>

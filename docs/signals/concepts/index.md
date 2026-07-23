@@ -43,11 +43,11 @@ Attributes can be categorized into four main types, depending on the type of use
 | Type         | Description                                            | Example                              |
 | ------------ | ------------------------------------------------------ | ------------------------------------ |
 | Period-based | Actions that happened within a configured period       | `products_added_to_cart_last_10_min` |
-| No-period aggregate | Calculated over all available data (subject to TTL) | `total_product_price_clv`            |
+| Lifetime    | Calculated over all available data (subject to TTL) | `total_product_price_clv`            |
 | First touch  | The first event or property that happened              | `first_mkt_source`                   |
 | Last touch   | The most recent event or property that happened        | `last_device_class`                  |
 
-For period-based attributes, the period is configured on each attribute. Data retention is controlled by the TTL configured on the attribute group.
+The period is configured on each attribute. For lifetime attributes, a TTL (time-to-live) controls how long stale values are retained. See [Set the period](/docs/signals/attributes/attributes/index.md#set-the-period) for details.
 
 Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/attributes/attributes/index.md) page.
 
@@ -91,7 +91,7 @@ This table summarizes the options for different types of processing:
 | ---------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------- |
 | Real-time calculation                           | ✅                                                                 | ✅                                                                       | ❌                         |
 | Period-based calculations                       | ✅                                                                 | ✅                                                                       | ❌                         |
-| Calculations over all available data (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                               | ❌                         |
+| Lifetime calculations (within TTL)                | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                               | ❌                         |
 | Historical data                                 | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp | ✅ any pre-calculated data |
 | Non-Snowplow data                               | ❌                                                                 | ❌                                                                       | ✅                         |
 | Warehouse connection required                   | ❌                                                                 | ✅                                                                       | ✅                         |
@@ -209,4 +209,4 @@ Agentic contexts follow the same draft-then-publish model as other Signals resou
 
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.
 
-The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure for each attribute group. It acts as the central source of truth for your Signals deployment.
+The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure. It acts as the central source of truth for your Signals deployment.

@@ -31,6 +31,25 @@ The steps are explained [in the documentation for React Navigation](https://reac
 When using the [React Native Navigation](https://wix.github.io/react-native-navigation/docs/before-you-start/) library for navigation in your app, you can automatically track screen views by registering a listener when your component appears on screen.
 Use the `Navigation.events().registerComponentDidAppearListener` callback to subscribe the listener and track screen views as [documented here](https://wix.github.io/react-native-navigation/api/events/#componentdidappear).
 
+## Using screen tracking in a browser SPA
+
+When you deploy the React Native tracker in a browser SPA via react-native-web, screen view tracking works without a navigation library integration. Calling `trackScreenViewEvent` directly triggers screen transitions, and the screen context entity and screen_end events are produced as they are on iOS and Android.
+
+For these events and entities to appear, you must `await newTracker()` before the first `trackScreenViewEvent` call:
+
+```typescript
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+});
+
+tracker.trackScreenViewEvent({ name: 'home' });
+// screen_end fires automatically before the next screen view
+tracker.trackScreenViewEvent({ name: 'product' });
+```
+
+If `newTracker()` rejects silently (commonly caused by a missing AsyncStorage web adapter), no events are sent and neither the screen context entity nor screen_end will appear. See [Using with react-native-web](/docs/sources/react-native-tracker/index.md#using-with-react-native-web) for the full setup requirements.
+
 ## Screen context entity
 
 ```typescript

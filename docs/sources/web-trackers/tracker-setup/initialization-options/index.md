@@ -111,6 +111,7 @@ The following table shows all the configuration parameters. These are **all opti
 | [`maxLocalStorageQueueSize`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#local-storage-queue-size)    | Maximum events to queue in local storage when they are failing to send.                              | 1000                                  | `int`                      |
 | [`useLocalStorage`](/docs/sources/web-trackers/configuring-how-events-sent/index.md)                                                        | Whether the event queue persists to localStorage.                                                    | `true`                                | `boolean`                  |
 | [`useStm`](/docs/sources/web-trackers/configuring-how-events-sent/index.md)                                                                 | Whether to add the sent timestamp to GET events.                                                     | `true`                                | `boolean`                  |
+| [`disableSessionContextWithinWebView`](/docs/sources/web-trackers/tracking-events/webview/index.md)                                         | Suppress the `client_session` entity when running inside a mobile WebView, preventing duplicate session entities in hybrid apps. | `false`                               | `boolean`                  |
 
 
 ## Example configuration code

@@ -80,6 +80,24 @@ The forwarded events will have the web tracker version, e.g. "js-4.3.0", but the
 
 Hybrid events are still compatible with the Snowplow [Unified Digital dbt model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md).
 
+### Suppress the client session entity in WebViews
+
+When `contexts.session: true` is set on the JavaScript tracker running inside a WebView, the forwarded events carry both a web-side `client_session` entity (from the JavaScript tracker's cookie or local storage) and a native-side `client_session` entity (added by the mobile tracker). This produces two `client_session` entities per event, which causes logic errors in the Unified Digital dbt model and results in mismatched session IDs in downstream data.
+
+To prevent this, set `disableSessionContextWithinWebView: true` in the tracker configuration. When this option is enabled and the tracker detects a mobile WebView interface at event-fire time, it skips attaching its own `client_session` entity. The mobile tracker's session entity is still added, so session data remains complete.
+
+```javascript
+newTracker('sp1', '{{collector_url}}', {
+  contexts: {
+    session: true,
+  },
+  disableSessionContextWithinWebView: true, // suppress web-side session entity in WebViews
+  plugins: [ WebViewPlugin() ],
+});
+```
+
+This option defaults to `false` (opt-in). Enable it whenever you use `contexts.session: true` alongside the WebView plugin in a hybrid app.
+
 ## Install plugin
 
 <Tabs groupId="platform" queryString>

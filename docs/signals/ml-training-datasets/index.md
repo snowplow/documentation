@@ -186,14 +186,14 @@ The `execute()` method runs three stages in order:
 2. Creates one attribute table per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values
 3. Assembles the final training dataset (`signals_training_dataset`) by joining all tables together
 
-If a stage fails, it raises an `ExecutionError` with details of the failed stage and a list of completed stages.
+If a stage fails, it raises an `ExecutionError` with the name of the failed stage, the target table, and the underlying cause.
 
 ### Get results as a DataFrame
 
-After execution, access the `dataframe` attribute to get the training dataset as a pandas DataFrame, ready for model training.
+After execution, call `to_pandas()` to pull the training dataset into a pandas DataFrame, ready for model training. By default, it fetches up to 10,000 rows.
 
 ```python
-df = result.dataframe
+df = result.to_pandas()
 ```
 
 The resulting DataFrame contains one row per anchor, with columns for the attribute key, anchor timestamp, label, and every attribute from your attribute groups:

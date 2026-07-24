@@ -7,11 +7,17 @@ keywords: ["training datasets", "machine learning", "dataset builder", "anchors"
 date: "2026-07-15"
 ---
 
-Training a machine learning model on behavioral data requires a labeled dataset where each row represents a moment in time, with features computed only from events that had occurred up to that point. Building these datasets manually is error-prone: it is easy to accidentally include future information (data leakage), which produces models that perform well in testing but fail in production.
+The Signals dataset builder lets you create labeled training datasets for machine learning models directly from your Snowplow event data. It generates point-in-time correct features from your existing [attribute groups](/docs/signals/attributes/attribute-groups/index.md), so the features your model trains on are identical to the features it receives at inference time.
 
-The Signals dataset builder automates this process. You define the outcome you want to predict, and Signals generates SQL that scans your historical event data, identifies labeled anchor points, computes attribute values using only prior events, and assembles a ready-to-use training dataset. Because the dataset builder uses the same [attribute groups](/docs/signals/attributes/attribute-groups/index.md) that power your real-time Signals deployment, the features your model trains on are identical to the features it receives at inference time.
+Training a machine learning model on behavioral data requires a dataset where each row represents a moment in time, with features computed only from events that had occurred up to that point. Building these datasets manually is error-prone: it is easy to accidentally include future information (data leakage), which produces models that perform well in testing but fail in production. The dataset builder automates this process, enforcing point-in-time correctness by construction.
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
+
+## Why point-in-time correctness matters
+
+When you serve predictions in real time, your model only has access to events that have happened so far in the session. If your training data includes attributes computed from the full session (including events after the prediction point), your model learns patterns it will never see in production. This is called data leakage, and it is the most common reason ML models degrade after deployment.
+
+The dataset builder prevents this by computing each attribute value using only events that occurred before the anchor timestamp. Because it uses the same attribute group definitions that power your real-time Signals deployment, training and serving are guaranteed to use the same feature logic.
 
 ## Workflow
 
@@ -27,6 +33,30 @@ Building and using an ML training dataset follows this process:
 ## How it works
 
 The dataset builder produces a training dataset in three stages:
+
+```mermaid
+flowchart LR
+    subgraph stage1["1. Anchors"]
+        direction TB
+        A1["Scan sessions in\ntraining window"] --> A2{"Goal event\noccurred?"}
+        A2 -- Yes --> A3["Positive anchor\n(label = 1)"]
+        A2 -- No --> A4["Negative anchor\n(label = 0)"]
+        A3 --> A5["Downsample\nnegatives"]
+        A4 --> A5
+    end
+
+    subgraph stage2["2. Attributes"]
+        direction TB
+        B1["For each anchor,\nfind preceding events"] --> B2["Compute attribute\nvalues using only\nevents before\nanchor timestamp"]
+    end
+
+    subgraph stage3["3. Assembly"]
+        direction TB
+        C1["Join anchors +\nattributes into\nlabeled dataset"] --> C2["One row per anchor\nOne column per attribute"]
+    end
+
+    stage1 --> stage2 --> stage3
+```
 
 1. Anchors: scan sessions within the training window and identify anchor points. Sessions where the goal event occurred produce positive anchors (label=1). Sessions without the goal produce negative anchors (label=0). Negative anchors are downsampled to avoid class imbalance.
 2. Attributes: for each anchor, compute attribute values using only the events that preceded the anchor timestamp in that session. This enforces point-in-time correctness, so attributes reflect only what was known at the moment of the anchor.
@@ -50,7 +80,7 @@ Signals provides two approaches: session anchors (automatically derived from you
 
 ### Session anchors
 
-Use `build_dataset_with_session_anchors()` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window, labels each based on whether the goal was achieved, and produces one anchor per qualifying session.
+Use `build_dataset_with_session_anchors()` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
 
 ```python
 from datetime import datetime, timezone
@@ -89,14 +119,14 @@ bundle = sp_signals.build_dataset_with_session_anchors(
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `goal_criteria` | Criteria that define a positive anchor (label=1) | `Criteria` | ✅ |
 | `training_span` | Time window to scan for anchor events | `TrainingSpan` | ✅ |
-| `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to ensure each anchor has enough behavioral signal for meaningful features. | `int` | Default: `1` |
-| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions. | `int` or `None` | Default: `None` |
-| `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. | `float` | Default: `5.0` |
+| `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to filter out anchors with too little behavioral signal, for example set to `5` to ensure each anchor has at least 5 prior events. | `int` | Default: `1` |
+| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions, for example set to `1` to ensure each session contributes at most one training example. | `int` or `None` | Default: `None` |
+| `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. For example, set to `1.0` for a balanced 1:1 dataset. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
-| `anchors_table` | Override the output table location for the anchors table | `WarehouseTable` | Default: `None` |
-| `attributes_table` | Override the output table configuration for intermediate per-attribute-key tables (database, schema, table prefix) | `AttributesWarehouseTable` | Default: `None` |
-| `dataset_table` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
-| `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. Override it to widen or narrow the event window. | `int` | Default: derived from attribute periods |
+| `anchors_table` | Custom output table location for the anchors table. By default, a table named `signals_anchors` is created in your warehouse. | `WarehouseTable` | Default: `None` |
+| `attributes_table` | Override the output table location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. | `AttributesWarehouseTable` | Default: `None` |
+| `dataset_table` | Custom output table location for the final assembled dataset. By default, a table named `signals_training_dataset` is created in your warehouse. | `WarehouseTable` | Default: `None` |
+| `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. Set a lower value to narrow the event window, or a higher value to include older events. | `int` | Default: derived from attribute periods |
 
 ### User-supplied anchors
 
@@ -134,13 +164,13 @@ bundle = sp_signals.build_dataset_with_custom_anchors(
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `anchors_table` | Table containing your pre-built anchor events | `WarehouseTable` | ✅ |
 | `anchors_have_label` | Whether the source table contains a `label` column. Set to `False` if your anchors are unlabeled. | `bool` | Default: `True` |
-| `attributes_table` | Override the output table configuration for intermediate per-attribute-key tables (database, schema, table prefix) | `AttributesWarehouseTable` | Default: `None` |
+| `attributes_table` | Override the output table location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. | `AttributesWarehouseTable` | Default: `None` |
 | `dataset_table` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |
 
 ## Inspect and save the SQL bundle
 
-Both `build_dataset_with_session_anchors()` and `build_dataset_with_custom_anchors()` return a `DatasetBundle` containing the generated SQL files. You can inspect them, save them to disk, or execute them directly.
+Both `build_dataset_with_session_anchors()` and `build_dataset_with_custom_anchors()` return a `DatasetBundle` containing the generated SQL files. Inspecting the generated SQL is useful for understanding exactly what queries will run against your warehouse, verifying the logic before execution, or sharing with your data team for review. You can save them to disk or execute them directly.
 
 ### Save SQL to disk
 
@@ -158,11 +188,11 @@ This creates:
 
 ## Execute against your warehouse
 
-Once you have a `DatasetBundle`, execute the SQL against your warehouse to produce the training dataset. The warehouse connection is separate from your Signals API credentials because the SQL runs directly against your data warehouse, not through the Signals API.
+Once you have a `DatasetBundle`, execute the SQL against your warehouse to produce the training dataset. The dataset builder executes SQL directly against the same data warehouse that your Signals deployment reads from. The warehouse connection is configured separately from your Signals API credentials because the queries run against your warehouse, not through the Signals API.
 
 ### Snowflake
 
-Snowflake supports key-pair authentication for programmatic access. Wrap your Snowflake connection in a `SnowflakeConnection` and pass it to `execute()`.
+Snowflake supports [key-pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth) for programmatic access, where `private_key` is the DER-encoded private key from your Snowflake key pair. Wrap your Snowflake connection in a `SnowflakeConnection` and pass it to `execute()`.
 
 ```python
 import snowflake.connector
@@ -180,7 +210,9 @@ sf_conn = SnowflakeConnection(
 result = bundle.execute(sf_conn)
 ```
 
-The `execute()` method runs three stages in order:
+The `execute()` method returns an `ExecutionResult` that holds references to the tables created in your warehouse. You can then call `to_pandas()` on the result to fetch the final dataset as a DataFrame.
+
+It runs three stages in order:
 
 1. Creates the anchors table (`signals_anchors`)
 2. Creates one attribute table per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values

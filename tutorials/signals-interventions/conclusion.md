@@ -33,7 +33,7 @@ Now that you understand how Signals works, here are some ways to continue your j
 ### Explore more Signals capabilities
 
 * Try defining attributes with different [aggregations](/docs/signals/attributes/attributes/#choose-an-aggregation) (min, max, average, etc.)
-* Experiment with [time windows](/docs/signals/attributes/attributes/#set-a-time-period) for attributes
+* Experiment with [time windows](/docs/signals/attributes/attributes/#set-the-period) for attributes
 * Create more complex intervention criteria using multiple attributes
 * Define attributes based on different [event types](/docs/fundamentals/events/)
 

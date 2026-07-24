@@ -146,7 +146,7 @@ Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Wareho
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Configure the attribute group fields described at the top of this page. Additional options such as backfill and TTL are covered in the sections below.
+Configure the attribute group fields described at the top of this page. Additional options such as backfill are covered in the sections below.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -176,16 +176,16 @@ All attribute groups need an [attribute key](/docs/signals/concepts/index.md#att
 
 ### Attribute lifetimes
 
-TTL (time-to-live) configuration applies to attributes without a period. For attributes with a period, the TTL is set automatically to match the period and any configured TTL is ignored.
+For stream attribute groups, data retention is controlled by the [period](/docs/signals/attributes/attributes/index.md#set-the-period) configured on each attribute. Attributes with a rolling period retain data for the duration of that period. Attributes with a **Lifetime** period use a configurable TTL (time-to-live) to control how long stale values persist.
 
-We recommend setting a TTL on your attribute group to avoid stale values persisting in your Profiles Store indefinitely. The defaults are 7 days for stream attribute groups and 365 days for warehouse attribute groups. If no TTL is set on the attribute group, the attribute key's TTL is used; if neither is set, the defaults apply.
+For warehouse attribute groups, TTL is configured at the group level. The default is 365 days.
 
 When an attribute has not been updated for its defined TTL, its value is deleted: fetching it will return a `None` value. If Signals then processes a new event that updates the attribute, or syncs new data from the warehouse, the expiration timer is reset.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Configure a TTL when creating or updating the attribute group.
+Configure a TTL when creating or updating a warehouse attribute group.
 
 ![Attribute group TTL configuration field](../../images/ttl.png)
 

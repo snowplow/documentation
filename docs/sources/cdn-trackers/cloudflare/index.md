@@ -1,9 +1,9 @@
 ---
-title: "Cloudflare Worker"
+title: "Track agent page views via Cloudflare"
 sidebar_position: 10
 sidebar_label: "Cloudflare"
 description: "Track page views at the CDN level using a Cloudflare Worker to capture visits from bots, AI agents, and other clients that don't run JavaScript."
-keywords: ["cdn tracking", "cloudflare worker", "server-side tracking", "agent tracking"]
+keywords: ["cloudflare tracking", "cloudflare worker", "cdn tracking", "ai agent tracking"]
 date: "2026-04-27"
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "CloudFront access logs via Firehose"
+title: "Track agent page views via CloudFront"
 sidebar_position: 20
 sidebar_label: "CloudFront"
-description: "Track page views from CloudFront access logs by forwarding them to Snowplow through Amazon Data Firehose."
+description: "Track page views at the CDN level using CloudFront access logs to capture visits from bots, AI agents, and other clients that don't run JavaScript."
 keywords: ["cloudfront tracking", "cloudfront access logs", "amazon firehose", "cdn tracking", "ai agent tracking"]
 date: "2026-06-10"
 ---

@@ -21,7 +21,7 @@ Attribute calculation starts when the definitions are published, and values are 
 
 ## Configure the attribute
 
-Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-a-time-period) and [criteria](#filter-with-criteria) settings are optional refinements.
+Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-the-period) and [criteria](#filter-with-criteria) settings are optional refinements.
 
 In Console, open your attribute group and use the attribute configuration interface to fill in the fields. The time period and criteria settings are within **More options**.
 
@@ -173,28 +173,41 @@ EntityProperty(
 </TabItem>
 </Tabs>
 
-### Set a time period
+### Set the period
 
-Add an optional time period to aggregate over a rolling window. Signals won't include events older than the specified time period in the calculation.
+Every stream attribute has a period that controls the time window for the calculation. Choose a rolling time window (for example, 7 days or 15 minutes) to aggregate over recent events, or select **Lifetime** to aggregate over all available data.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Find the time period option within **More options**. Click **Done** to save it.
+Select the period when creating or editing an attribute.
 
-![Time period configuration dialog for setting rolling window attributes](../../images/attribute-set-period.png)
+When you select a rolling time window, Signals only includes events within that window in the calculation:
+
+![Period configuration set to a rolling time window](../../images/attribute-set-period.png)
+
+When you select **Lifetime**, a **Time to live (TTL)** field appears. TTL controls how long a stale value is retained in the Profiles Store before it is deleted. The default is 7 days. If Signals processes a new event that updates the attribute, the TTL timer resets.
+
+![Period set to Lifetime with TTL configuration](../../images/attribute-set-period-lifetime.png)
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Set `period` on your `Attribute` using a Python `timedelta`:
+Set `period` on your `Attribute` using a Python `timedelta`. For lifetime attributes, omit `period` and set `ttl` instead:
 
 ```python
 from datetime import timedelta
 
+# Rolling period
 my_attribute = Attribute(
     ...,
     period=timedelta(minutes=10),
+)
+
+# Lifetime with TTL
+my_lifetime_attribute = Attribute(
+    ...,
+    ttl=timedelta(days=7),
 )
 ```
 
@@ -270,7 +283,8 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
 | `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
-| `period` | The time window over which to calculate the aggregation | `timedelta` | ❌ |
+| `period` | The time window over which to calculate the aggregation, or `Lifetime` to aggregate over all available data | `timedelta` | ❌ |
+| `ttl` | Time-to-live for lifetime attributes (no `period`). Falls back to the attribute group TTL if not set. Cannot be used together with `period`. | `timedelta` | ❌ |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
 ## Examples

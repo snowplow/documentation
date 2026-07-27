@@ -2,12 +2,16 @@
 title: "Deep link and push notification tracking"
 sidebar_label: "Deep links and push notifications"
 sidebar_position: 200
-description: "Track deep links received in your Flutter app and push notifications using the DeepLinkReceived and MessageNotification event types."
+description: "Track deep links received in your Flutter app and push notifications using the DeepLinkReceived and MessageNotification event types, available since version 0.11.0."
 keywords: ["flutter deep link", "flutter push notification", "deep link tracking", "message notification", "snowplow flutter"]
-date: "2025-09-09"
+date: "2026-07-27"
 ---
 
-The Flutter tracker provides two event types for tracking how users arrive at your app through deep links and push notifications: `DeepLinkReceived` and `MessageNotification`. Both event types are supported on iOS and Android. They are not supported on Web.
+:::note[Introduced in version 0.11 of the tracker]
+Deep link and push notification tracking is available in the Flutter tracker since version 0.11.0.
+:::
+
+The Flutter tracker provides two event types for tracking how users arrive at your app through deep links and push notifications: `DeepLinkReceived` and `MessageNotification`. Both event types are supported on iOS and Android. They are not supported on the Web.
 
 ## Track deep link received events
 
@@ -24,7 +28,7 @@ tracker.track(DeepLinkReceived(
 
 After tracking a `DeepLinkReceived` event, the tracker automatically attaches a `deep_link` entity to the next `ScreenView` event. This entity makes it easy to analyze the relationship between the deep link source and the screen the user viewed.
 
-The `DeepLinkReceived` event and the subsequent `ScreenView` event also have the URL and referrer information added to the `page_url` and `page_referrer` atomic event properties. This makes them compatible with data models and enrichments built for web events.
+The `DeepLinkReceived` event and the subsequent `ScreenView` event also have the URL and referrer information added to the `page_url` and `page_referrer` atomic event properties. This makes them compatible with data models and enrichments built for events tracked on the Web.
 
 The `DeepLinkReceived` event can be used with the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) in your Snowplow pipeline. When a user taps an advertising banner or marketing message that opens your app via a deep link, the enrichment can parse UTM parameters in the URL to attribute the session back to the originating campaign.
 

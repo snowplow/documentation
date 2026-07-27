@@ -40,21 +40,21 @@ The dataset builder produces a training dataset in three stages:
 flowchart LR
     subgraph stage1["1. Anchors"]
         direction TB
-        A1["Scan sessions in\ntraining window"] --> A2{"Goal event\noccurred?"}
-        A2 -- Yes --> A3["Positive anchor\n(label = 1)"]
-        A2 -- No --> A4["Negative anchor\n(label = 0)"]
-        A3 --> A5["Downsample\nnegatives"]
+        A1["Scan sessions in<br>training window"] --> A2{"Goal event<br>occurred?"}
+        A2 -- Yes --> A3["Positive anchor<br>(label = 1)"]
+        A2 -- No --> A4["Negative anchor<br>(label = 0)"]
+        A3 --> A5["Downsample<br>negatives"]
         A4 --> A5
     end
 
     subgraph stage2["2. Attributes"]
         direction TB
-        B1["For each anchor,\nfind preceding events"] --> B2["Compute attribute\nvalues using only\nevents before\nanchor timestamp"]
+        B1["For each anchor,<br>find preceding events"] --> B2["Compute attribute<br>values using only<br>events before<br>anchor timestamp"]
     end
 
     subgraph stage3["3. Assembly"]
         direction TB
-        C1["Join anchors +\nattributes into\nlabeled dataset"] --> C2["One row per anchor\nOne column per attribute"]
+        C1["Join anchors +<br>attributes into<br>labeled dataset"] --> C2["One row per anchor<br>One column per attribute"]
     end
 
     stage1 --> stage2 --> stage3
@@ -125,10 +125,27 @@ bundle = sp_signals.build_dataset_with_session_anchors(
 | `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions, for example set to `1` to ensure each session contributes at most one training example. | `int` or `None` | Default: `None` |
 | `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. For example, set to `1.0` for a balanced 1:1 dataset. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
-| `anchors_table` | Custom output table location for the anchors table. By default, a table named `signals_anchors` is created in your warehouse. | `WarehouseTable` | Default: `None` |
-| `attributes_table` | Override the output table location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. | `AttributesWarehouseTable` | Default: `None` |
-| `dataset_table` | Custom output table location for the final assembled dataset. By default, a table named `signals_training_dataset` is created in your warehouse. | `WarehouseTable` | Default: `None` |
+| `anchors_table` | Override the output location for the anchors table. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). The default table name is `signals_anchors`. | `WarehouseTable` | Default: `None` |
+| `attributes_table` | Override the output location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. Supports `database`, `schema`, and `table_prefix` fields - all default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `AttributesWarehouseTable` | Default: `None` |
+| `dataset_table` | Override the output location for the final assembled dataset. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). The default table name is `signals_training_dataset`. | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. Set a lower value to narrow the event window, or a higher value to include older events. | `int` | Default: derived from attribute periods |
+
+#### Customizing output tables
+
+By default, the dataset builder creates tables using the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). To write tables to a different location, pass a `WarehouseTable`. Only `table` is required - `database` and `schema` are optional overrides.
+
+```python
+from snowplow_signals import WarehouseTable
+
+bundle = sp_signals.build_dataset_with_session_anchors(
+    ...
+    dataset_table=WarehouseTable(
+        table="my_training_dataset",   # required
+        database="analytics",          # optional, defaults to Signals connection
+        schema="ml",                   # optional, defaults to Signals connection
+    ),
+)
+```
 
 ### User-supplied anchors
 
@@ -166,8 +183,8 @@ bundle = sp_signals.build_dataset_with_custom_anchors(
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `anchors_table` | Table containing your pre-built anchor events | `WarehouseTable` | ✅ |
 | `anchors_have_label` | Whether the source table contains a `label` column. Set to `False` if your anchors are unlabeled. | `bool` | Default: `True` |
-| `attributes_table` | Override the output table location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. | `AttributesWarehouseTable` | Default: `None` |
-| `dataset_table` | Override the output table location for the final assembled dataset | `WarehouseTable` | Default: `None` |
+| `attributes_table` | Override the output location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. Supports `database`, `schema`, and `table_prefix` fields - all default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `AttributesWarehouseTable` | Default: `None` |
+| `dataset_table` | Override the output location for the final assembled dataset. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |
 
 ## Inspect and save the SQL bundle

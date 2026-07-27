@@ -136,6 +136,10 @@ tracker.preservePageViewIdForUrl('pathname');
 
 ### Preserve the original referrer in SPAs
 
+:::info
+This feature is available since version 4.10 of the tracker.
+:::
+
 In a single-page application, the referrer for each `trackPageView()` call is normally the previous internal URL. This means the original external referrer (for example, the search engine that brought the user to your site) is only visible on the first page view.
 
 Set `preserveOriginalReferrer: true` in the tracker configuration to freeze the original external referrer for all subsequent page views in the session. The tracker captures `document.referrer` at initialization and uses it as the referrer for every `trackPageView()` call, regardless of internal navigation.

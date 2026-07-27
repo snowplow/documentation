@@ -11,6 +11,8 @@ The Signals dataset builder lets you create labeled training datasets for machin
 
 Training a machine learning model on behavioral data requires a dataset where each row represents a moment in time, with features computed only from events that had occurred up to that point. Building these datasets manually is error-prone: it is easy to accidentally include future information (data leakage), which produces models that perform well in testing but fail in production. The dataset builder automates this process, enforcing point-in-time correctness by construction.
 
+To follow along with a working example, open the [dataset builder notebook](https://colab.research.google.com/github/snowplow/documentation/blob/signals-dataset-builder/static/notebooks/signals-dataset-builder.ipynb) in Google Colab.
+
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
 
 ## Why point-in-time correctness matters

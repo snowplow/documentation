@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:
 * A name that describes the attribute
-* Which event schema or event specification to calculate it from
+* Which event schemas or event specifications to calculate it from, or leave the event filter empty to target all event types
 * What property in the schema to consider for the calculation
 * What kind of aggregation you want to calculate over time, e.g. `mean` or `last`
 
@@ -21,7 +21,7 @@ Attribute calculation starts when the definitions are published, and values are 
 
 ## Configure the attribute
 
-Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-the-period) and [criteria](#filter-with-criteria) settings are optional refinements.
+Every attribute needs an [aggregation](#choose-an-aggregation) to calculate. The [event filter](#select-events) is optional — omit it to target all event types, or specify one or more events to restrict the attribute to those types. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-the-period) and [criteria](#filter-with-criteria) settings are optional refinements.
 
 In Console, open your attribute group and use the attribute configuration interface to fill in the fields. The time period and criteria settings are within **More options**.
 
@@ -31,7 +31,7 @@ With the Python SDK, these settings are arguments to the `Attribute` class, list
 
 ### Select events
 
-Use the event filter to choose which event type to calculate the attribute from.
+Use the event filter to choose which event type to calculate the attribute from. The event filter is optional — leaving it empty calculates the attribute from all event types.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -50,10 +50,14 @@ The search finds direct matches only, so use the exact name of the event, schema
 
 Once you've selected an event and version, click **Confirm** to add the attribute to your attribute group.
 
+:::tip[Targeting all events]
+Leave the event filter empty to calculate the attribute from all event types. This is useful for global engagement counters and first/last-value attributes that should apply regardless of which event carries the data — for example, counting all events in the last 30 days or tracking the first `mkt_medium` value a user ever sent.
+:::
+
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-The `events` list describes the types of events the attribute is calculated from, as references to Snowplow event schemas.
+The `events` list describes the types of events the attribute is calculated from, as references to Snowplow event schemas. Pass an empty list (or omit `events`, which defaults to `[]`) to calculate the attribute from all event types.
 
 An `Event` accepts the following parameters:
 
@@ -87,6 +91,9 @@ sp_page_view = Event(name="page_view", vendor="com.snowplowanalytics.snowplow", 
 sp_page_ping = Event(name="page_ping", vendor="com.snowplowanalytics.snowplow", version="1-0-0")
 # Structured events
 sp_structured = Event(name="event", vendor="com.google.analytics", version="1-0-0")
+
+# All event types — empty list or omit events entirely
+events=[]
 ```
 
 </TabItem>
@@ -278,7 +285,7 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | --- | --- | --- | --- |
 | `name` | The name of the attribute | `string` | ✅ |
 | `description` | The description of the attribute | `string` | ❌ |
-| `events` | List of Snowplow `Event`s to calculate the attribute from | list of `Event` | ✅ |
+| `events` | List of Snowplow `Event`s to calculate the attribute from. An empty list (the default) means all event types. | list of `Event` | ❌ |
 | `aggregation` | The calculation to perform | one of: `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `most_frequent`, `least_frequent`, `approx_count_distinct`, `category_count`, `unique_list` | ✅ |
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
@@ -368,6 +375,42 @@ referrer_source_attribute = Attribute(
         Event(name="login_landing", vendor="com.business.example", version="1-0-0"),
     ],
     aggregation="last",
+    property=AtomicProperty(name="mkt_medium"),
+)
+```
+
+### Global event counter
+
+Count all events across the entire pipeline over a 30-day rolling window, regardless of event type. This is useful for overall engagement scoring.
+
+```python
+from snowplow_signals import Attribute
+from datetime import timedelta
+
+n_events_30d = Attribute(
+    name="n_events_30d",
+    description="Total number of events in the last 30 days",
+    type="int32",
+    events=[],  # empty list — matches all event types
+    aggregation="counter",
+    period=timedelta(days=30),
+    default_value=0
+)
+```
+
+### First UTM medium across all events
+
+Track the first marketing medium value ever seen for a user, sourced from the `mkt_medium` atomic property on any event. Because `mkt_medium` is an atomic field present on all events, no specific event type needs to be enumerated.
+
+```python
+from snowplow_signals import Attribute, AtomicProperty
+
+first_utm_medium = Attribute(
+    name="first_utm_medium",
+    description="First marketing medium seen across all events",
+    type="string",
+    events=[],  # empty list — matches all event types
+    aggregation="first",
     property=AtomicProperty(name="mkt_medium"),
 )
 ```

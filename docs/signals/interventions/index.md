@@ -165,10 +165,6 @@ Most operators trigger an intervention the first time the criteria become true. 
 
 `changed` takes no value. It triggers whenever the attribute's previous and current values differ, including when the attribute is set for the first time (from no value to its first value).
 
-:::note[Requires Signals 0.14.6 or later]
-The `changed` operator is available from Signals version 0.14.6.
-:::
-
 A few things to be aware of:
 
 * `changed` is only supported on its own or within an `InterventionCriteriaAll` (`all`) group. It can't be used inside an `any` or `none` group, because those wouldn't reliably trigger on every change.

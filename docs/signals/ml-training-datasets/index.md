@@ -84,20 +84,43 @@ Signals provides two approaches: session anchors (automatically derived from you
 
 Use `build_dataset_with_session_anchors()` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
 
+The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, event properties, or entity properties.
+
+To match on an event name (an atomic field):
+
 ```python
 from datetime import datetime, timezone
 
 from snowplow_signals import (
+    AtomicProperty,
     Criteria,
     Criterion,
-    EventProperty,
     TrainingSpan,
 )
 
 bundle = sp_signals.build_dataset_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
-        any=[
+        all=[
+            Criterion.eq(AtomicProperty(name="event"), "transaction"),
+        ]
+    ),
+    training_span=TrainingSpan(
+        start_time=datetime(2024, 1, 1, tzinfo=timezone.utc),
+        end_time=datetime(2024, 4, 1, tzinfo=timezone.utc),
+    ),
+)
+```
+
+To filter on a property within a self-describing event:
+
+```python
+from snowplow_signals import Criteria, Criterion, EventProperty, TrainingSpan
+
+bundle = sp_signals.build_dataset_with_session_anchors(
+    attribute_groups=[my_attribute_group],
+    goal_criteria=Criteria(
+        all=[
             Criterion.eq(
                 EventProperty(
                     vendor="com.snowplowanalytics.snowplow.ecommerce",

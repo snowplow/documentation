@@ -9,15 +9,11 @@ date: "2026-06-10"
 
 If your website is served through Amazon CloudFront, you can forward access logs to Snowplow to capture page views from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each log entry as a [page view event](/docs/fundamentals/events/index.md), which appears alongside your existing web analytics events.
 
-This integration uses [CloudFront standard logging](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) with Amazon Data Firehose as the delivery mechanism. Firehose forwards log batches to the Snowplow Collector via HTTP, where they are processed by the CloudFront Firehose adapter in Enrich. This adapter is available from Enrich 6.12.0.
-
-:::note[CDN tracking vs. web tracking]
-
-CDN-level tracking captures all requests, including from bots and agents that don't run JavaScript. However, for single-page applications, multiple client-side page views typically correspond to only a single CDN request. Treat CDN events and browser events as complementary rather than equivalent.
-
-:::
+See [CDN trackers](/docs/sources/cdn-trackers/index.md) for background on how CDN-level tracking compares to client-side web tracking.
 
 ## How it works
+
+This integration uses [CloudFront standard logging](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) with Amazon Data Firehose as the delivery mechanism.
 
 CloudFront sends batches of access log records to a Firehose stream. Firehose forwards each batch to the Snowplow Collector, and Enrich produces one page view event per log entry.
 
@@ -30,28 +26,7 @@ flowchart LR
   enrich --> events(Page view events)
 ```
 
-The following CloudFront log fields are mapped to Snowplow event fields:
-
-| CloudFront field | Snowplow field | Notes |
-|---|---|---|
-| `x-host-header` | `page_url` | Combined with `cs-uri-stem` and `cs-uri-query` to form the full URL |
-| `cs-uri-stem` | `page_urlpath` | |
-| `cs-uri-query` | `page_urlquery` | |
-| `cs(Referer)` | `page_referrer` | |
-| `cs(User-Agent)` | `useragent` | |
-| `timestamp(ms)` | `dvce_sent_tstamp` | Milliseconds since epoch |
-| `c-ip` | `user_ipaddress` | Optional — see note on IP collection below |
-
-In addition to the mapped fields, every event has the following fixed values:
-
-| Field | Value |
-|---|---|
-| `event` | `page_view` |
-| `platform` | `srv` |
-| `v_tracker` | `com.amazon.aws.cloudfront/firehose` |
-| `app_id` | `cloudfront` by default; override with the `aid` query parameter |
-
-To set a custom `app_id`, append `?aid=<value>` to the collector endpoint URL when configuring Firehose.
+Enrich maps CloudFront log fields to Snowplow event fields — see [event fields](#event-fields) for the full reference.
 
 :::note[IP address collection]
 
@@ -116,14 +91,28 @@ CloudFront logs every request, including images, fonts, JavaScript files, and ot
 
 You can filter records before they reach Snowplow using Firehose's [data transformation](https://docs.aws.amazon.com/firehose/latest/dev/create-transform.html) feature. When enabled, Firehose invokes an AWS Lambda function on each batch. The Lambda tags individual records as `Ok`, `Dropped`, or `ProcessingFailed`; only `Ok` records are delivered to the Collector.
 
-The following is a reference Lambda implementation that retains only records whose user agent matches known AI agents and drops everything else:
+A typical filtering strategy combines two checks:
+
+1. **User agent filtering** — retain only requests from known AI agents (Claude, ChatGPT, etc.)
+2. **URI filtering** — drop requests for static assets (CSS, JS, images, fonts) that aren't meaningful page views
+
+The following is a reference Lambda implementation that applies both filters. A record must pass both checks to be delivered to the Collector: the user agent must match a known AI agent, _and_ the URI must not end with a known asset extension.
+
+<details>
+<summary>Reference Lambda — user agent + URI filtering</summary>
 
 ```python
 """
 Firehose data-transformation Lambda for CloudFront ingestion.
 
-Retains only access-log records whose cs(User-Agent) field matches a
-known AI agent. Everything else is dropped before it reaches the Collector.
+Keeps only access-log records that satisfy BOTH conditions:
+  1. cs(User-Agent) looks like an AI agent (Claude, ChatGPT, etc.)
+  2. cs-uri-stem is NOT an asset request (CSS, JS, images, fonts, media)
+
+Page hits and any non-asset URL pass through: static HTML (.html / .htm), the
+site root (/), dynamic backends (.php, .aspx, .jsp), REST/SPA routes
+(extension-less, e.g. /about or /api/users). Only unambiguous static assets are
+dropped.
 
 Runtime: Python 3.12
 Handler: lambda_handler
@@ -138,36 +127,71 @@ import logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# Extend this list to match additional agents.
+# Case-insensitive substrings used to identify AI-agent traffic in the
+# User-Agent header. Extend as needed.
 AGENT_UA_SUBSTRINGS = (
-    "claude",       # Claude, Anthropic clients
-    "chatgpt",      # ChatGPT
-    "gptbot",       # OpenAI crawler
-    "openai",       # Other OpenAI clients
-    "gemini",       # Google Gemini
-    "perplexity",   # Perplexity
-    "copilot",      # GitHub Copilot / Microsoft Copilot
+    "claude",        # Claude Code, Claude Desktop, anthropic-* clients
+    "chatgpt",       # ChatGPT app
+    "gptbot",        # OpenAI's crawler
+    "openai",        # other OpenAI clients
+    "gemini",        # Google Gemini
+    "perplexity",    # Perplexity
+    "copilot",       # GitHub Copilot / Microsoft Copilot
+)
+
+# Case-insensitive suffixes identifying static assets. URIs ending in any of
+# these are dropped. Everything else — including HTML pages, dynamic backends,
+# extension-less REST/SPA routes, and the site root — passes through.
+ASSET_EXTENSIONS = (
+    # Styles
+    ".css",
+    # Scripts
+    ".js", ".mjs", ".map",
+    # Images
+    ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".ico", ".bmp",
+    ".tif", ".tiff", ".avif", ".heic",
+    # Fonts
+    ".woff", ".woff2", ".ttf", ".otf", ".eot",
+    # Audio / Video
+    ".mp3", ".wav", ".ogg", ".m4a", ".flac",
+    ".mp4", ".webm", ".mov", ".m4v", ".avi", ".mkv", ".flv",
+    # Archives / downloads
+    ".zip", ".tar", ".gz", ".tgz", ".bz2", ".7z", ".rar",
 )
 
 USER_AGENT_FIELD = "cs(User-Agent)"
+URI_STEM_FIELD = "cs-uri-stem"
 
 
 def is_agent(user_agent):
+    """Return True if user_agent looks like an AI agent."""
     if not user_agent or user_agent == "-":
         return False
     lower = user_agent.lower()
     return any(needle in lower for needle in AGENT_UA_SUBSTRINGS)
 
 
+def is_asset_request(uri_stem):
+    """Return True if uri_stem ends with a known static-asset extension."""
+    if not uri_stem or uri_stem == "-":
+        return False
+    return uri_stem.lower().endswith(ASSET_EXTENSIONS)
+
+
 def classify(record):
+    """Decide what to do with a single Firehose record."""
     try:
         payload = base64.b64decode(record["data"])
         log_entry = json.loads(payload)
     except Exception as e:
         logger.warning("Could not parse record %s: %s", record.get("recordId"), e)
         return "ProcessingFailed"
+
     ua = log_entry.get(USER_AGENT_FIELD, "")
-    return "Ok" if is_agent(ua) else "Dropped"
+    stem = log_entry.get(URI_STEM_FIELD, "")
+    if is_agent(ua) and not is_asset_request(stem):
+        return "Ok"
+    return "Dropped"
 
 
 def lambda_handler(event, context):
@@ -182,4 +206,24 @@ def lambda_handler(event, context):
     return {"records": output}
 ```
 
-You can extend `AGENT_UA_SUBSTRINGS` to include additional user agents, or replace the filtering logic to suit your use case — for example, to also drop requests for static assets based on the `cs-uri-stem` field.
+</details>
+
+You can adjust both filter lists to suit your use case. For example, if you want to be more conservative with URI filtering, a minimal set of `(".css", ".js", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico", ".woff", ".woff2")` covers the most common static assets.
+
+## Event fields
+
+Each log entry produces a page view event. The following table shows how CloudFront log fields map to Snowplow event fields:
+
+| Field | Value | Notes |
+|-------|-------|-------|
+| `event` | `page_view` | Event type |
+| `platform` | `srv` | Server-side, to distinguish from browser events |
+| `app_id` | `cloudfront` | Override with the `aid` query parameter on the collector endpoint URL |
+| `v_tracker` | `com.amazon.aws.cloudfront/firehose` | Tracker version |
+| `useragent` | from `cs(User-Agent)` | The visitor's `User-Agent` header |
+| `page_url` | from `x-host-header`, `cs-uri-stem`, `cs-uri-query` | Combined to form the full URL |
+| `page_urlpath` | from `cs-uri-stem` | Path component of the URL |
+| `page_urlquery` | from `cs-uri-query` | Query string component of the URL |
+| `page_referrer` | from `cs(Referer)` | The referring URL, if present |
+| `dvce_sent_tstamp` | from `timestamp(ms)` | Milliseconds since epoch |
+| `user_ipaddress` | from `c-ip` | Only if `c-ip` is included in the log fields |

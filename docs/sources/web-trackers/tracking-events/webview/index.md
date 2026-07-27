@@ -82,7 +82,11 @@ Hybrid events are still compatible with the Snowplow [Unified Digital dbt model]
 
 ### Suppress the client session entity in WebViews
 
-When `contexts.session: true` is set on the JavaScript tracker running inside a WebView, the forwarded events carry both a web-side `client_session` entity (from the JavaScript tracker's cookie or local storage) and a native-side `client_session` entity (added by the mobile tracker). This produces two `client_session` entities per event, which causes logic errors in the Unified Digital dbt model and results in mismatched session IDs in downstream data.
+:::note
+This feature is available since version 4.10 of the tracker.
+:::
+
+When `contexts.session: true` is set on the JavaScript tracker running inside a WebView, the forwarded events carry both a web-side `client_session` entity (from the JavaScript tracker's cookie or local storage) and a native-side `client_session` entity (added by the mobile tracker). This produces two `client_session` entities per event, which causes logic errors and mismatched session IDs in downstream data.
 
 To prevent this, set `disableSessionContextWithinWebView: true` in the tracker configuration. When this option is enabled and the tracker detects a mobile WebView interface at event-fire time, it skips attaching its own `client_session` entity. The mobile tracker's session entity is still added, so session data remains complete.
 

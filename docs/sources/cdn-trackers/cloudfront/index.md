@@ -11,6 +11,12 @@ If your website is served through Amazon CloudFront, you can forward access logs
 
 See [CDN trackers](/docs/sources/cdn-trackers/index.md) for background on how CDN-level tracking compares to client-side web tracking.
 
+:::note[Availability]
+
+This integration requires Enrich 6.12 or newer.
+
+:::
+
 ## How it works
 
 This integration uses [CloudFront standard logging](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) with Amazon Data Firehose as the delivery mechanism.

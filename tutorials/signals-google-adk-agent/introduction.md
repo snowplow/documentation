@@ -45,10 +45,14 @@ The flow works like this:
 
 ## Prerequisites
 
-- A Snowplow account with [Signals deployed](/docs/signals/connection/)
+- A Snowplow account with [Signals enabled](/docs/signals/setup/)
 - Node.js 18+ and npm/pnpm
 - Python 3.12+
 - A Google AI Studio API key
   - [AI Studio](https://aistudio.google.com/app/apikey)
   - [Vertex AI](https://docs.cloud.google.com/agent-builder/agent-engine/quickstart-adk)
 - Basic familiarity with React, Python, and TypeScript
+
+:::note[Snowplow account required]
+The agent fetches session attributes that Signals computes from your live event stream, so you need a Snowplow account with Signals enabled. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::

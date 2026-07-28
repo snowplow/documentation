@@ -22,10 +22,14 @@ This tutorial assumes that you have:
 
 * Snowplow page view tracking on a web application
 * Snowflake warehouse
-* A Signals connection
+* Signals enabled on your Snowplow account
 
-## Connecting to Signals
+:::note[Snowplow account required]
+Signals calculates attributes from events flowing through your Snowplow pipeline, so you need a Snowplow account to complete this tutorial. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::
+
+## Enable Signals
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-You'll need to [set up a Signals connection](/docs/signals/connection/) if you don't have one yet.
+You'll need to [enable Signals](/docs/signals/setup/) if you haven't already.

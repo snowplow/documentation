@@ -21,9 +21,13 @@ You'll build a complete personalization system that captures user interests thro
 
 ## Prerequisites
 
-* Signals enabled for your CDI pipeline
+* [Signals enabled](/docs/signals/setup/) for your CDI pipeline
 * The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) browser extension installed
 * Familiarity with running Jupyter notebooks, either locally or in Google Colab
 * [Docker](https://www.docker.com/) installed and configured
 * Access to the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb)
 * Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses
+
+:::note[Snowplow account required]
+Signals processes the behavioral data from events flowing through your Snowplow pipeline, so you need a Snowplow account with Signals enabled. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::

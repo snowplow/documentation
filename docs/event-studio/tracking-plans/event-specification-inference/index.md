@@ -40,7 +40,7 @@ Once a specification is published, the pipeline evaluates every eligible incomin
 2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification according to the cardinality rules. Extra entities with different schemas on the event are ignored.
 3. **Property instructions**: any property-level instructions defined on those data structures in the specification — for example, `category = "product"` — must be satisfied.
 
-The pipeline does not match on `appId`, environment, or any other source attribute. A single incoming event can match more than one specification if multiple published specifications share overlapping definitions.
+The pipeline does not match on `appId`, source applications, environment, or any other source attribute. A single incoming event can match more than one specification if multiple published specifications share overlapping definitions.
 
 When a match occurs, the pipeline:
 
@@ -59,6 +59,8 @@ An incoming `page_view` event carrying a `product` entity where `category = "ele
 The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity rule is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
 
 Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its rules.
+
+To try inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). It matches events against your published specifications and against the latest draft of each one, so you can check that an event matches before publishing.
 
 :::tip[No tracking changes needed]
 You do not need to change your tracking implementation to benefit from inference. Events already flowing through your pipeline will be matched against newly published specifications automatically.

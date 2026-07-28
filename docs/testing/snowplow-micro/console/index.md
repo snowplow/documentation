@@ -51,8 +51,8 @@ To enable or disable enrichments and edit their configurations, select the **Enr
 
 ## Validate event specifications
 
-Development environments validate incoming events against every published version of your [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md), following the same rules as [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) in a pipeline. Unlike pipelines, they also validate against the latest draft of each specification: you don't need to publish the tracking plan or its event specifications to test your tracking against them.
+Development environments validate incoming events against every published version of your [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md), following the same rules as [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) in a pipeline. Unlike pipelines, they also validate against the current draft of each specification, so you don't need to publish the tracking plan or its event specifications to test your tracking against them.
 
-Edit the specification in Console, send a test event, and inspect the result in the [Micro dashboard](/docs/testing/snowplow-micro/ui/index.md): events that fail validation carry an `event_specification_validation` entity describing each error. The environment picks up specification changes automatically within a few minutes.
+Edit the specification in Console, send a test event, and inspect the result in the [Micro dashboard](/docs/testing/snowplow-micro/ui/index.md). Events that fail validation carry an `event_specification_validation` entity describing each error, and the environment picks up specification changes automatically within a few minutes.
 
-Events that arrive without an `event_specification` entity are matched by [inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead, against both published specifications and the latest drafts.
+The environment infers a specification for events that arrive without an `event_specification` entity, matching them against both published specifications and drafts. See [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) for the matching rules.

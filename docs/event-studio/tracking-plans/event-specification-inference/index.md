@@ -60,7 +60,7 @@ The same `page_view` event carrying a `product` entity where `category = "clothi
 
 Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its rules.
 
-To try inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). It matches events against your published specifications and against the latest draft of each one, so you can check that an event matches before publishing.
+To try inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). It matches events against your published specifications and against the current draft of each one, so you can check that an event matches before publishing.
 
 :::tip[No tracking changes needed]
 You do not need to change your tracking implementation to benefit from inference. Events already flowing through your pipeline will be matched against newly published specifications automatically.

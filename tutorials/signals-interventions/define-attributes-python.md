@@ -6,11 +6,6 @@ description: "Use the Signals Python SDK to programmatically define real-time ec
 keywords: ["signals python sdk", "ecommerce attributes"]
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 In this section, you'll define [attributes](/docs/signals/concepts/#attribute-groups) that calculate real-time user behavior metrics from ecommerce events. These attributes will track product views, cart additions, and cart value.
 
 You'll create three attributes to track user shopping behavior:
@@ -196,8 +191,8 @@ Once published, Signals begins calculating these attributes in real time as even
 You can retrieve attribute values for a specific user by calling:
 
 ```python
-stream_service.get_attributes(
-    signals=sp_signals,
+sp_signals.get_service_attributes(
+    name="ecom_attributes",
     attribute_key="domain_userid",
     identifier="your-domain-userid-here", # the value will be a UUID
 )

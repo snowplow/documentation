@@ -20,7 +20,7 @@ You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your 
 You'll need the same connection credentials you used in the previous step:
 
 ```python
-API_URL = 'example.signals.snowplowanalytics.com'
+API_URL = 'https://YOUR_ID.signals.snowplowanalytics.com'
 API_KEY = 'YOUR_API_KEY'
 API_KEY_ID = 'YOUR_API_KEY_ID'
 ORG_ID = 'YOUR_ORG_ID'
@@ -43,15 +43,15 @@ culinary_tourist_tags = ["food", "street food", "multicultural", "traditional", 
 The notebook defines these `counter` attributes:
 
 * `page_view_count`
-* `dest_page_view_count`
+* `destination_page_view_count`
 * `family_destination_count`
 * `cultural_explorer`
 * `modern_urbanite`
 * `tranquil_seeker`
 * `family_fun`
 * `culinary_tourist`
-* `budget_conscious`
-* `luxury_inclined`
+* `budget_conscious_count`
+* `luxury_inclined_count`
 
 And these attributes with the `last` aggregation:
 

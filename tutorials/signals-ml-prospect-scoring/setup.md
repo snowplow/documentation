@@ -26,4 +26,21 @@ SP_API_KEY_ID = userdata.get('SP_API_KEY_ID') # Signals API key ID
 SP_ORG_ID = userdata.get('SP_ORG_ID')         # Snowplow org ID
 ```
 
-Once you've added the secrets, start working through the tutorial. If you prefer to run the cells in one go with Run all, update your details in the required places first - they're marked with `UPDATE THIS`.
+## Connect to Signals
+
+Install the Signals Python SDK by running `%pip install snowplow-signals` in a notebook cell.
+
+Next, create the Signals client using your credentials. The rest of the tutorial uses this `sp_signals` object to test and publish configuration, and to retrieve calculated attributes.
+
+```python
+from snowplow_signals import Signals
+
+sp_signals = Signals(
+    api_url=SP_API_URL,
+    api_key=SP_API_KEY,
+    api_key_id=SP_API_KEY_ID,
+    org_id=SP_ORG_ID,
+)
+```
+
+Once you've added the secrets and connected to Signals, start working through the tutorial. If you prefer to run the cells in one go with Run all, update your details in the required places first - they're marked with `UPDATE THIS`.

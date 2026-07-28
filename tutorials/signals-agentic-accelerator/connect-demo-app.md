@@ -33,7 +33,7 @@ AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AGENTCORE_MEMORY_ID=your_memory_id
 
-NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=https://example.signals.snowplowanalytics.com
+NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your_api_key
 SNOWPLOW_SIGNALS_API_KEY_ID=your_api_key_id
 SNOWPLOW_SIGNALS_ORGANIZATION_ID=your_org_id

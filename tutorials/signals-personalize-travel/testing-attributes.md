@@ -27,7 +27,7 @@ Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate 
 ![Snowplow Inspector browser extension open in Chrome DevTools showing the Events tab with 15 events on the /destinations page, including multiple Page Ping events and an SD Event for filter_tag_applied, with the detail panel showing event type, application ID (travel_bug), and timestamps](images/inspector.jpg)
 
 1. In the **Events** tab, verify you can see page view events being sent to your collector endpoint
-2. In the **Attributes** tab, check that the `page_view_count` and `dest_page_view_count` attributes have non-zero values
+2. In the **Attributes** tab, check that the `page_view_count` and `destination_page_view_count` attributes have non-zero values
 
 If you're not using the Chrome extension, you can check the developer console logs instead. Note that the logs are output when the page is refreshed, so they may lag behind the values shown in the Inspector.
 

@@ -16,7 +16,7 @@ These attributes form a behavioral profile that the agent's `get_signals` tool f
 You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
 
 ```python
-API_URL = 'example.signals.snowplowanalytics.com'
+API_URL = 'https://YOUR_ID.signals.snowplowanalytics.com'
 API_KEY = ''
 API_KEY_ID = ''
 ORG_ID = ''

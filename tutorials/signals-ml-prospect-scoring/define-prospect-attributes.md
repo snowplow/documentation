@@ -16,17 +16,13 @@ Let's imagine that for this use case our data science team came up with the foll
 | `num_pricing_views`   | Number of `page_view` events of the `/pricing` page     | int  | `counter`   |
 | `num_customers_views` | Number of `page_view` events of the `*customers*` pages | int  | `counter`   |
 
-## Install Signals Python SDK
-
-Run `%pip install snowplow-signals`.
-
 ## Define attributes
 
 Next, define the attributes to calculate.
 
 ```python
 # Imports
-from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty, EntityProperty
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty, Event
 
 # Define an event
 sp_page_view = Event(
@@ -111,7 +107,7 @@ If you're using Signals in the Console, you can test the attribute outputs on a 
 
 ```python
 sp_signals_test = sp_signals.test(
-    attribute_group=user_attribute_group,
+    attribute_group=user_attributes_group,
     app_ids=["website"]
 )
 sp_signals_test
@@ -127,7 +123,7 @@ The result should look similar to this:
 Apply the attribute group and service configurations to Signals.
 
 ```python
-applied = sp_signals.publish([user_attribute_group, prospect_scoring_tutorial_service])
+applied = sp_signals.publish([user_attributes_group, prospect_scoring_tutorial_service])
 
 # This should print "2 objects applied"
 print(f"{len(applied)} objects applied")

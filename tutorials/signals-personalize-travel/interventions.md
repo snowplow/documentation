@@ -15,13 +15,13 @@ Instead of waiting for users to click the chat icon, you can automatically trigg
 
 ## How it works
 
-You'll create an intervention in Signals that triggers the agent to appear when a user has viewed more than three destination pages in a single session. This demonstrates how you can use interventions to control when an agent appears based on user behavior.
+You'll create an intervention in Signals that triggers the agent to appear when a user has viewed three or more destination pages in a single session. This demonstrates how you can use interventions to control when an agent appears based on user behavior.
 
-When the user views their fourth destination page, the agent will automatically appear and offer assistance.
+When the user views their third destination page, the agent will automatically appear and offer assistance.
 
 ## Create the intervention
 
-Open your Jupyter notebook and run the final cell. This creates an intervention based on the `dest_page_view_count` attribute.
+Open your Jupyter notebook and run the final cell. This creates an intervention based on the `destination_page_view_count` attribute.
 
 ```python
 from snowplow_signals import RuleIntervention, InterventionCriterion, LinkAttributeKey
@@ -49,7 +49,7 @@ The travel site automatically subscribes to interventions for the current user a
 Once you've created the intervention, test it by:
 
 1. Navigating to the travel site
-2. Viewing more than three destination pages
-3. When you view the fourth page, the agent should automatically expand, rather than requiring a click, and offer assistance
+2. Viewing three or more destination pages
+3. When you view the third page, the agent should automatically expand, rather than requiring a click, and offer assistance
 
 This proactive approach can significantly improve user experience by providing help at the right moment based on behavioral signals.

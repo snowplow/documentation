@@ -36,7 +36,7 @@ cp .env.example .env
 Edit the `.env` file with your Signals connection credentials:
 
 ```bash
-NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=signals.snowplow.com
+NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=
 SNOWPLOW_SIGNALS_API_KEY_ID=
 SNOWPLOW_SIGNALS_ORGANIZATION_ID=

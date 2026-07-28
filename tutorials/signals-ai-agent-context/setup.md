@@ -68,7 +68,7 @@ AI_GATEWAY_API_KEY=your-vercel-ai-gateway-api-key
 NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=https://your-collector-url.com
 
 # Snowplow Signals
-SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
+SNOWPLOW_SIGNALS_BASE_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
 SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
 SNOWPLOW_SIGNALS_ORG_ID=your-org-id

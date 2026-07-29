@@ -335,7 +335,14 @@ Open the CopilotKit sidebar and ask a general question. If your Signals service 
 
 ## Verify Signals context
 
-You can verify that the app is receiving the Signals context by checking the agent logs. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the first turn:
+The [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension is the quickest way to check that tracking and attribute calculation are working, without touching any code. Its [Signals integration](/docs/testing/snowplow-inspector/signals-integration/) connects to Signals and displays live attribute values in your browser developer tools.
+
+With your app open, open the Inspector:
+
+* the **Events** tab lists the events the Browser tracker is sending, so you can confirm your interactions are reaching the Collector
+* the **Attributes** tab shows the values Signals has calculated for your session, such as `page_views_count`, refreshing automatically as new events arrive
+
+Once both look correct, verify that the agent is receiving the Signals context by checking the agent logs. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the first turn:
 
 ```
 [agent] before_model_callback: state_keys=['snowplowDomainSessionId', '_ag_ui_thread_id', '_ag_ui_app_name', '_ag_ui_user_id'] snowplow_session_id='472f97c1-eec1-45fe-b081-3ff695c30415'
@@ -343,7 +350,7 @@ You can verify that the app is receiving the Signals context by checking the age
 ```
 
 If the session ID is missing, the Snowplow tracker never initialized. Check:
-* The browser's Network tab for requests to your Collector
+* The Inspector's **Events** tab (or the browser's Network tab) for requests to your Collector
 * That your Collector URL environment variable is set and exposed to the browser (`NEXT_PUBLIC_` prefix in the scaffold)
 * That `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx`
 

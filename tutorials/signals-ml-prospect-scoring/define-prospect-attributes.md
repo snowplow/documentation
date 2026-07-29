@@ -141,7 +141,11 @@ Signals will start populating your Profiles Store with attributes calculated fro
 This section expects that you [integrated](/docs/sources/web-trackers/quick-start-guide/) `sp.js` into a website and have events flowing to the collector.
 :::
 
-Go to your website, and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
+Before wiring the attributes into an ML model, verify that Signals is calculating them as expected. The quickest way is the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension: its [Signals integration](/docs/testing/snowplow-inspector/signals-integration/) connects to Signals and displays live attribute values in your browser developer tools, without writing any code.
+
+Go to your website with the Inspector open, and click around to generate some page view events, including a visit to your pricing page. Switch to the Inspector's **Attributes** tab: you should see the `prospect_scoring_tutorial` attribute group, with values for your own `domain_userid`. The tab refreshes automatically as new events arrive, so `num_page_views` and `num_pricing_views` will increase as you continue to browse.
+
+To retrieve the same values programmatically, first find your own `domain_userid` in outbound web events on the Inspector's **Events** tab.
 
 ![Snowplow Inspector browser extension showing a page_ping event from /docs/, with the User section expanded and the Domain User ID value circled in red](./images/get_domain_userid.png)
 

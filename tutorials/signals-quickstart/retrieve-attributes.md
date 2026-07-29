@@ -1,24 +1,42 @@
 ---
 position: 4
-title: Retrieve calculated attributes using the Signals Python SDK
-sidebar_label: Retrieve attributes using Python
-description: "Access and consume calculated behavioral data attributes from the Snowplow Signals Profiles Store using the Python SDK."
-keywords: ["signals python sdk", "profiles store"]
+title: Verify and retrieve calculated attributes
+sidebar_label: Retrieve attributes
+description: "Verify calculated attributes in the Snowplow Inspector browser extension, then retrieve them from the Snowplow Signals Profiles Store using the Python SDK."
+keywords: ["snowplow inspector", "signals python sdk", "profiles store"]
 ---
+
+Signals is now calculating attributes from your real-time event stream. In this step, you'll verify the calculated values in your browser using the Snowplow Inspector extension, then retrieve them with the Signals Python SDK, the way your application would.
+
+## Verify attributes in Snowplow Inspector
+
+The quickest way to see your calculated attributes is the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension, without writing any code. Its [Signals integration](/docs/testing/snowplow-inspector/signals-integration/) connects to Signals and displays live attribute values for your own session in your browser developer tools.
+
+To set up the integration, log in to Snowplow Console through the extension, and add API credentials for your organization in the extension options.
+
+Once connected:
+
+1. Go to your web application, and open the Inspector in your browser developer tools
+2. Click around to generate some page view events: they'll appear in the **Events** tab
+3. Switch to the **Attributes** tab to see the values Signals has calculated for your session
+
+You should see the `quickstart_group` attribute group, with values for the `page_view_count`, `most_recent_browser`, and `first_referrer` attributes. The **Attributes** tab refreshes automatically as new events arrive: browse a few more pages and watch `page_view_count` increase.
+
+## Use attributes in your application
 
 For a real use case, you'll want to consume calculated attributes in your applications. Read more about this [in the Signals documentation](/docs/signals/attributes/).
 
 For this tutorial, we've provided a [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb) so you can quickly explore attribute retrieval using the Signals Python SDK.
 
-## Finding your current session ID
+### Find your current session ID
 
 In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [the JavaScript tracker](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values) documentation.
 
-To test this out, use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension to find out your current session ID on your web application. Click around and generate some page view events. Then find your `Domain Session ID` in the Inspector.
+To test this out, use the Inspector to find your current session ID on your web application. Find your `Domain Session ID` in the **Events** tab.
 
 ![Screenshot showing the session ID in the Snowplow Inspector](./images/inspector-session.png)
 
-## Connecting to Signals
+### Connect to Signals
 
 Install the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) into the notebook, and connect to Signals.
 
@@ -47,7 +65,7 @@ sp_signals = Signals(
 )
 ```
 
-## Retrieving your session attributes
+### Retrieve your session attributes
 
 Use your current session ID to retrieve the attributes that Signals has just calculated about your session.
 
@@ -69,7 +87,9 @@ The result should look something like this:
 | ----------------- | --------------------- | ---------------- |
 | 2.0               | `Firefox`             | `snowplow.io`    |
 
-### Retrieving single attributes
+The values should match what you saw in the Inspector's **Attributes** tab.
+
+### Retrieve single attributes
 
 To retrieve individual attributes rather than using a service, use the `get_group_attributes()` method.
 

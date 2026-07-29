@@ -64,8 +64,8 @@ As the extension builds its list of attribute keys based on observed events, it 
 
 If an intervention triggers on a subscription, the interventions counter will increase and you can switch to this tab to view the intervention content of each observed intervention.
 
-Clicking an intervention from the list of received interventions on the will display the contents, including the targeted attribute key and any associated attributes at the time of the intervention.
+Click an intervention in the list of received interventions to display its contents, including the targeted attribute key and any associated attributes at the time of the intervention.
 
 For rule-based interventions, you can also expand the definition of the intervention to see the logic used to trigger it.
 
-![Screenshot of the Snowplow Inspector viewing interventions. The most recent of two triggered interventions is displayed.](../images/signals-attributes.png)
+![Screenshot of the Snowplow Inspector viewing interventions. The most recent of two triggered interventions is displayed.](../images/signals-interventions.png)

@@ -30,7 +30,7 @@ function getFirstStepPath(tutorialId: string): string | null {
 }
 
 const gridColumns =
-  'lg:grid lg:grid-cols-[minmax(0,2.6fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_4.5rem] lg:gap-4 lg:items-center'
+  'lg:grid lg:grid-cols-[minmax(0,2.6fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_5rem] lg:gap-5 lg:items-center'
 
 const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const firstStep = getFirstStepPath(tutorial.meta.id)
@@ -39,25 +39,25 @@ const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const rowContent = (
     <div
       className={cn(
-        'px-3 py-2.5 transition-colors duration-150',
+        'px-4 py-4 transition-colors duration-150',
         firstStep && 'group-hover:bg-muted',
         gridColumns
       )}
     >
       {/* Tutorial title and description */}
-      <div className="mb-1.5 lg:mb-0 lg:pr-2">
-        <div className="text-sm font-semibold text-foreground leading-snug">
+      <div className="mb-2 lg:mb-0 lg:pr-2">
+        <div className="text-base font-semibold text-foreground leading-snug">
           {firstStep
             ? tutorial.meta.title
             : `${tutorial.meta.title} (No steps found)`}
         </div>
-        <p className="text-muted-foreground text-xs leading-snug mt-0.5 mb-0 lg:truncate">
+        <p className="text-muted-foreground text-sm leading-normal mt-1 mb-0 lg:truncate">
           {tutorial.meta.description}
         </p>
       </div>
 
       {/* Use case */}
-      <div className="mb-0.5 lg:mb-0 text-xs text-foreground">
+      <div className="mb-1 lg:mb-0 text-sm text-foreground">
         <span className="lg:hidden text-muted-foreground mr-1.5">
           Use case:
         </span>
@@ -65,13 +65,13 @@ const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
       </div>
 
       {/* Topic */}
-      <div className="mb-0.5 lg:mb-0 text-xs text-foreground">
+      <div className="mb-1 lg:mb-0 text-sm text-foreground">
         <span className="lg:hidden text-muted-foreground mr-1.5">Topic:</span>
         {tutorial.meta.label}
       </div>
 
       {/* Technologies */}
-      <div className="mb-0.5 lg:mb-0 text-xs text-foreground">
+      <div className="mb-1 lg:mb-0 text-sm text-foreground">
         <span className="lg:hidden text-muted-foreground mr-1.5">
           Technology:
         </span>
@@ -84,13 +84,13 @@ const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
 
       {/* Progress */}
       <div className="flex items-center gap-2 lg:justify-end">
-        <span className="lg:hidden text-xs text-muted-foreground">
+        <span className="lg:hidden text-sm text-muted-foreground">
           Progress:
         </span>
-        <span className="text-xs text-foreground tabular-nums">
+        <span className="text-sm text-foreground tabular-nums">
           {progress.completed}/{tutorial.steps.length}
         </span>
-        <div className="w-10 h-1 rounded-full bg-muted overflow-hidden">
+        <div className="w-12 h-1.5 rounded-full bg-muted overflow-hidden">
           <div
             className="h-full rounded-full bg-green-500 transition-all duration-300"
             style={{ width: `${progress.percentage}%` }}
@@ -136,7 +136,7 @@ export const TutorialTable: React.FC<TutorialTableProps> = ({
       {/* Column headers - desktop only */}
       <div
         className={cn(
-          'hidden px-3 pb-2 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wide',
+          'hidden px-4 pb-2 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wide',
           gridColumns
         )}
       >

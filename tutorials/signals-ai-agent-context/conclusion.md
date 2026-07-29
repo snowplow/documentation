@@ -3,8 +3,8 @@ title: "Conclusion and next steps"
 position: 7
 sidebar_label: "Conclusion"
 description: "Summary of the Signals AI agent tutorial and ideas for extending it with richer attributes, interventions, and multi-dimensional context."
-keywords: ["signals next steps", "ai agent extensions", "interventions", "attribute groups"]
-date: "2026-04-10"
+keywords: ["signals next steps", "ai agent extensions", "interventions", "attribute groups", "agentic context"]
+date: "2026-07-29"
 ---
 
 In this tutorial, you've built a Next.js AI agent that uses Snowplow Signals to deliver personalized, context-aware responses based on live user behavior.
@@ -14,8 +14,9 @@ Here's what you set up:
 * Snowplow Browser tracker capturing page views, page pings, and link clicks
 * A Signals attribute group computing real-time session-level attributes
 * A Signals service exposing those attributes via API
+* A Signals agentic context capturing the session's recent activity as an LLM-ready narrative
 * A floating chat widget that passes the Snowplow session ID with every request
-* A Vercel AI SDK agent that fetches and injects those attributes into its system prompt
+* A Vercel AI SDK agent that fetches both, and injects them into its system prompt
 
 Here are some next steps ideas for extending what you've built.
 

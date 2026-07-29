@@ -2,16 +2,21 @@
 title: "Build the Signals AI integration using the Vercel AI SDK"
 position: 5
 sidebar_label: "Connect Signals and AI agent"
-description: "Connect Snowplow Signals to a Vercel AI SDK agent by fetching user attributes and injecting them into the system prompt."
-keywords: ["vercel ai sdk", "system prompt", "signals context", "ai agent", "streaming", "next.js api route"]
-date: "2026-04-10"
+description: "Connect Snowplow Signals to a Vercel AI SDK agent by fetching profile attributes and the agentic context narrative, and injecting both into the system prompt."
+keywords: ["vercel ai sdk", "system prompt", "signals context", "agentic context", "ai agent", "streaming", "next.js api route"]
+date: "2026-07-29"
 ---
 
 The next step is to connect Signals to your AI agent, via the Vercel AI SDK.
 
 ## Fetch Signals context
 
-Create the module that fetches and formats user attributes from Signals:
+Your agent will fetch two kinds of context from Signals on every chat request, using the same session ID for both:
+
+* Profile attributes, from the service: computed aggregates that you format into a prompt section yourself
+* Recent session activity, from the [agentic context](/docs/signals/applications/agentic-contexts/): fetched with `format: "narrative"`, which returns a ready-made text block, so there's no formatting code to write
+
+Create the module that fetches both:
 
 ```tsx
 // lib/signals-context.ts
@@ -36,15 +41,49 @@ function getSignalsClient(): Signals | null {
 }
 
 const SERVICE_NAME = "web-agent-context";
+const AGENTIC_CONTEXT_NAME = "web_agent_activity";
 
-function formatAttributes(attributes: Record<string, unknown>): string {
+// Profile attributes: computed aggregates, served by the Signals service
+async function getProfileSection(
+  signals: Signals,
+  domainSessionId: string,
+): Promise<string> {
+  const attributes = await signals.getServiceAttributes({
+    name: SERVICE_NAME,
+    attribute_key: "domain_sessionid",
+    identifier: domainSessionId,
+  });
+
+  if (!attributes || Object.keys(attributes).length === 0) {
+    return "";
+  }
+
   const lines = Object.entries(attributes).map(
     ([key, value]) => `- ${key}: ${JSON.stringify(value)}`,
   );
   return [
-    "## Real-Time User Context (Snowplow Signals)",
-    "The following attributes describe the current user's session behavior on this application:",
+    "## User profile (Snowplow Signals attributes)",
+    "Computed attributes describing the current user's session so far:",
     ...lines,
+  ].join("\n");
+}
+
+// Session activity: LLM-ready narrative, served by the agentic context
+async function getActivitySection(
+  signals: Signals,
+  domainSessionId: string,
+): Promise<string> {
+  const narrative = await signals.getAgenticContext({
+    name: AGENTIC_CONTEXT_NAME,
+    identifier: domainSessionId,
+    format: "narrative",
+  });
+
+  if (!narrative) return "";
+
+  return [
+    "## Recent session activity (Snowplow Signals agentic context)",
+    narrative,
   ].join("\n");
 }
 
@@ -54,29 +93,26 @@ export async function getSignalsContext(
   const signals = getSignalsClient();
   if (!signals) return "";
 
-  try {
-    const attributes = await signals.getServiceAttributes({
-      name: SERVICE_NAME,
-      attribute_key: "domain_sessionid",
-      identifier: domainSessionId,
-    });
+  // Fetch both in parallel; if one fails, the other is still used
+  const [profile, activity] = await Promise.allSettled([
+    getProfileSection(signals, domainSessionId),
+    getActivitySection(signals, domainSessionId),
+  ]);
 
-    if (!attributes || Object.keys(attributes).length === 0) {
-      return "";
+  const sections: string[] = [];
+  for (const result of [profile, activity]) {
+    if (result.status === "fulfilled" && result.value) {
+      sections.push(result.value);
+    } else if (result.status === "rejected") {
+      console.error("[signals-context] Signals fetch failed:", result.reason);
     }
-
-    return formatAttributes(attributes);
-  } catch (error) {
-    console.error(
-      "[signals-context] Failed to fetch signals attributes:",
-      error,
-    );
-    return "";
   }
+
+  return sections.join("\n\n");
 }
 ```
 
-The raw response format from the service, pulled using `signals.getServiceAttributes()`, looks like this:
+The profile fetch returns raw attribute values from the service, which `getProfileSection()` formats into a markdown list:
 
 ```json
 {
@@ -87,18 +123,26 @@ The raw response format from the service, pulled using `signals.getServiceAttrib
 }
 ```
 
-The `formatAttributes()` function converts that into a markdown section that can be appended to the agent's system prompt, for example:
+The activity fetch needs no formatting at all. With `format: "narrative"`, `getAgenticContext()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from a five-page browsing session:
 
-```markdown
-## Real-Time User Context (Snowplow Signals)
-The following attributes describe the current user's session behavior on this application:
-- page_views_count: 12
-- unique_pages_viewed: 5
-- first_event_timestamp: "2026-04-09T14:23:01.000Z"
-- last_event_timestamp: "2026-04-09T14:41:03.000Z"
+```text
+You are a helpful assistant for the Signal Shop web store. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.
+[START CONTEXT]
+10 seconds on the current page. Session started 132 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
+## Real-time user behaviour
+Events are ordered from oldest to most recent.
+seconds_since_start_of_session, event, url, event_context
+0, page_view, /, {page_title: 'Signal Shop'}
+25, page_view, /products, {page_title: 'All products | Signal Shop'}
+56, page_view, /products/3, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
+91, page_view, /products/7, {page_title: 'Linen Overshirt | Signal Shop'}
+122, page_view, /products/3, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
+[END CONTEXT]
 ```
 
-If Signals isn't configured or a fetch fails, the `getSignalsContext()` function returns an empty string. The agent still works without the Signals context.
+The opening summary and the event table are generated by Signals from the events you selected when defining the agentic context. Notice the difference between the two sections: the attributes summarize the session in aggregate, while the narrative shows the user's actual path through the site, oldest event first. An aggregate count can tell the agent the user is engaged; only the narrative can tell it they came back to `/products/3` after looking at something else.
+
+If Signals isn't configured or both fetches fail, the `getSignalsContext()` function returns an empty string. The agent still works without the Signals context.
 
 ## Build the agent
 
@@ -109,8 +153,10 @@ Create the function that constructs the system prompt with the Signals context a
 const BASE_INSTRUCTIONS = `You are a helpful assistant for this application.
 Help users understand features, answer questions, and guide them through their journey.
 
-When you have real-time user context available (provided below), use it to personalize
-your responses. Reference what the user has been looking at to give more relevant answers.`;
+When real-time user context is available below, use it to personalize your responses.
+The user profile section describes the session in aggregate. The recent session
+activity section lists what the user has just been doing, oldest event first.
+Reference what the user has been looking at to give more relevant answers.`;
 
 export function createAgent(signalsContext?: string) {
   const systemPrompt =
@@ -120,7 +166,7 @@ export function createAgent(signalsContext?: string) {
 }
 ```
 
-The model treats the Signals block as factual context about the current user. No special prompting is needed beyond including it: LLMs naturally incorporate provided context when formulating responses.
+The model treats both Signals sections as factual context about the current user. No special prompting is needed beyond including them: LLMs naturally incorporate provided context when formulating responses. The agentic context's own `prompt` instructions arrive at the top of the narrative string, ahead of `[START CONTEXT]`, so you can steer the agent from your Signals configuration as well as from `BASE_INSTRUCTIONS`.
 
 ## Build the chat API route
 
@@ -144,7 +190,8 @@ export async function POST(request: Request) {
   // Extract the Snowplow session ID passed from the frontend
   const snowplowDomainSessionId = pageContext?.snowplowDomainSessionId || "";
 
-  // Fetch real-time user attributes from Signals
+  // Fetch real-time user context from Signals:
+  // profile attributes + the session activity narrative
   let signalsContext = "";
   if (snowplowDomainSessionId) {
     signalsContext = await getSignalsContext(snowplowDomainSessionId);

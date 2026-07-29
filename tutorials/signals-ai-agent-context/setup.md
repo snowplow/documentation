@@ -4,7 +4,7 @@ position: 2
 sidebar_label: "Set up the project"
 description: "Scaffold a Next.js project and install the required dependencies for Snowplow tracking, Signals, and the Vercel AI SDK."
 keywords: ["next.js setup", "vercel ai sdk", "snowplow browser tracker", "project scaffold"]
-date: "2026-04-10"
+date: "2026-07-29"
 ---
 
 First, you'll need to create a Next.js project. You could also use an existing project.
@@ -68,7 +68,7 @@ AI_GATEWAY_API_KEY=your-vercel-ai-gateway-api-key
 NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=https://your-collector-url.com
 
 # Snowplow Signals
-SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
+SNOWPLOW_SIGNALS_BASE_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
 SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
 SNOWPLOW_SIGNALS_ORG_ID=your-org-id

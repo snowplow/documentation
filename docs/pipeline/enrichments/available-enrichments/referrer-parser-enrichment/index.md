@@ -2,8 +2,8 @@
 title: "Referrer parser enrichment"
 sidebar_position: 3
 sidebar_label: Referrer parser
-description: "Extract attribution data from referrer URLs to identify traffic sources, search terms, and marketing channels."
-keywords: ["referrer parser", "traffic source", "attribution", "referer"]
+description: "Extract attribution data from referrer URLs and utm_source parameters to identify traffic sources, search terms, and marketing channels."
+keywords: ["referrer parser", "traffic source", "attribution", "referer", "utm_source", "chatbot"]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,6 +12,8 @@ import TabItem from '@theme/TabItem';
 This enrichment uses the [Snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referrer URLs.
 
 This is particularly useful when looking for traffic from specific search engine providers or social networks.
+
+Since version 6.13.0 of Enrich, it also classifies traffic sources that identify themselves through a [`utm_source` query parameter](#identifying-referrers-from-utm_source) rather than a `Referer` header, which is how most AI chatbots send their traffic.
 
 ## Configuration
 
@@ -48,6 +50,12 @@ Configure the parameters in the Console enrichment editor. Keep the Console defa
       "Social website": {
         "domains": ["social.acme.com"]
       }
+    },
+    "chatbot": {
+      "Acme Assistant": {
+        "domains": ["assistant.acme.com"],
+        "utm_sources": ["assistant.acme.com"]
+      }
     }
   }
 }
@@ -60,7 +68,7 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-1",
+  "schema": "iglu:com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-2",
   "data": {
     "name": "referer_parser",
     "vendor": "com.snowplowanalytics.snowplow",
@@ -83,12 +91,24 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
           "Social website": {
             "domains": ["social.acme.com"]
           }
+        },
+        "chatbot": {
+          "Acme Assistant": {
+            "domains": ["assistant.acme.com"],
+            "utm_sources": ["assistant.acme.com"]
+          }
         }
       }
     }
   }
 }
 ```
+
+:::note
+
+The `utm_sources` field requires configuration schema version `2-0-2`, available since version 6.13.0 of Enrich. Earlier schema versions (`2-0-0`, `2-0-1`) remain valid, but reject `utm_sources`.
+
+:::
 
   </TabItem>
 </Tabs>
@@ -143,7 +163,8 @@ The `referrers` parameter is a nested object structured like this:
   "<medium>": {
     "<source name>": {
       "domains": ["<domain1>", "<domain2>"],
-      "parameters": ["<param1>"]
+      "parameters": ["<param1>"],
+      "utm_sources": ["<utm_source1>"]
     }
   }
 }
@@ -155,6 +176,7 @@ The `referrers` parameter is a nested object structured like this:
 | `<source name>` | A human-readable name for the source e.g., `"Google"`, `"Internal Search"`. This value populates `refr_source`.   |
 | `domains`       | An array of hostnames to match against the referrer URL. At least one domain is required.                         |
 | `parameters`    | An optional array of URL query parameter names to extract search terms from. Matched values populate `refr_term`. |
+| `utm_sources`   | An optional array of `utm_source` values identifying this source. See [Identifying referrers from `utm_source`](#identifying-referrers-from-utm_source). Available since version 6.13.0 of Enrich. |
 
 For example, to classify a custom search engine and a social network:
 
@@ -188,6 +210,54 @@ You can use custom referrer mappings to immediately test new categorizations in 
 
 :::
 
+## Identifying referrers from `utm_source`
+
+:::note[Availability]
+This feature is available since version 6.13.0 of Enrich.
+:::
+
+Not every traffic source sets a `Referer` header. Many — AI chatbots in particular — instead append a `utm_source` query parameter to the links they send, for example:
+
+```
+https://www.example.com/product?utm_source=chatgpt.com
+```
+
+Because there's no referrer URL, the `refr_*` fields stay empty and this traffic is indistinguishable from direct traffic. To close that gap, the enrichment also matches the `utm_source` parameter of the page URL against the `utm_sources` entries in the referer database, and attaches a `utm_referrer` entity to the event when it recognizes the value.
+
+The hosted database includes `utm_sources` entries for the major chatbot providers — ChatGPT, Claude.ai, Google Gemini, Microsoft Copilot, META.ai, Mistral.ai, Perplexity.ai, Character.AI and Poe — so this works out of the box, as long as you use the actively-maintained database file (`referers-5.3`). You can recognize additional sources by adding `utm_sources` to your [custom referrer mappings](#custom-referrer-mappings).
+
+### Output entity
+
+On a match, the enrichment attaches a [`utm_referrer`](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/utm_referrer/jsonschema/1-0-0) entity to `derived_contexts`:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/utm_referrer/jsonschema/1-0-0",
+  "data": {
+    "source": "ChatGPT",
+    "medium": "chatbot"
+  }
+}
+```
+
+| Field    | Description                                                                           |
+| -------- | ------------------------------------------------------------------------------------- |
+| `source` | The name of the matched source e.g., `ChatGPT`. Equivalent to `refr_source`.           |
+| `medium` | The medium of the matched source e.g., `chatbot`. Equivalent to `refr_medium`.         |
+| `term`   | The search term. Always absent for `utm_source` matches. Equivalent to `refr_term`.    |
+
+### How it relates to referrer URL parsing
+
+The `utm_source` classification is deliberately kept separate from the `Referer` header parsing described above:
+
+* It **doesn't populate** `refr_medium`, `refr_source`, or `refr_term`. Those fields continue to reflect the referrer URL only, so existing data models and queries are unaffected.
+* It's **additive**. If an event has both a recognized referrer URL and a recognized `utm_source`, you get the `refr_*` fields *and* the `utm_referrer` entity. The two can legitimately disagree — for instance, a chatbot link opened from an email client — and keeping them apart lets you decide which signal to trust.
+* It's **independent of the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)**, which copies `utm_source` into `mkt_source` verbatim. The referrer parser instead resolves the value to a known source and medium. Both can run on the same event.
+
+Matching is an exact, case-sensitive comparison of the full `utm_source` value against the `utm_sources` entries, and only the page URL's query string is inspected. Values from your own `referrers` configuration take precedence over the database.
+
 ## Output
 
 This enrichment populates the `refr_medium`, `refr_source`, and `refr_term` [atomic event fields](/docs/fundamentals/canonical-event/index.md#page-fields).
+
+Since version 6.13.0 of Enrich, it can additionally attach a [`utm_referrer` entity](#output-entity) to `derived_contexts`.

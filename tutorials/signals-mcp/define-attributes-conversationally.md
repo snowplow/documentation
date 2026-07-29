@@ -74,7 +74,7 @@ You'll confirm the same details in Snowplow Console on the next page. If anythin
 
 ## Test against warehouse data
 
-Before publishing, you can test what the group would calculate. The `signals_test_attribute_group` tool runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as the **Run preview** button in Console.
+Before publishing, you can test what the group would calculate. The `signals_test_attribute_group` tool runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as [previewing an attribute group](/tutorials/signals-quickstart/define-attribute-group#test-the-attribute-definitions) in Console.
 
 ```text
 Test tut_mcp_session_metrics against recent events before we publish.
@@ -89,7 +89,7 @@ The result is a small table: one row per `domain_sessionid` value found in the s
 Adjust the draft as many times as you like: ask for a different period, another filter, or an extra attribute, and test again.
 
 :::note[Testing requires a warehouse connection]
-Signals runs test queries against your warehouse, not the live stream. If your organization has no warehouse destination connected, the test fails with an error like `This functionality is not available because there is no destination connection set up.` — this is expected on trial accounts without a warehouse. You can skip testing and publish the draft: the verification steps on the next page will confirm the attributes calculate correctly from live events.
+Signals runs test queries against your warehouse, not the live stream. If your organization has no warehouse destination connected, the test fails with an error like `This functionality is not available because there is no destination connection set up.`, and Console doesn't offer its **Run preview** option at all. This is expected on trial accounts without a warehouse. You can skip testing and publish the draft: the verification steps on the next page will confirm the attributes calculate correctly from live events.
 :::
 
 ## Publish the attribute group

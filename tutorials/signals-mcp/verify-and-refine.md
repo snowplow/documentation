@@ -13,12 +13,16 @@ The assistant reports success, but the real test is whether the configuration ex
 
 Log in to [Snowplow Console](https://console.snowplowanalytics.com) and go to **Signals** > **Attribute groups**. You should see `tut_mcp_session_metrics` in the list, at version 1, with a published status.
 
+![The attribute groups list in Console, showing tut_mcp_session_metrics as a published stream group keyed on domain_sessionid with three attributes](./images/console-attribute-groups-list.png)
+
 Open it and check the definition against what you reviewed in the previous step:
 
 * Attribute key: `domain_sessionid`
 * `page_view_count`: counter of `page_view` events, 15-minute period
 * `most_recent_browser`: last `agentName` from the `yauaa_context` entity
 * `first_referrer`: first `refr_urlhost`, filtered to non-empty referrers
+
+![The attribute group detail page, showing the domain_sessionid attribute key and the three attribute definitions with their aggregations and properties](./images/console-attribute-group-detail.png)
 
 This is the same screen you'd have used to build the group by hand in the [quick start](/tutorials/signals-quickstart/define-attribute-group). Whether a group was created through the Console UI, the Python SDK, or an AI assistant, it lands in the same registry, and Console is always the neutral place to audit what's deployed.
 
@@ -91,7 +95,11 @@ The update tool edits the version you name and returns it to draft until it's pu
 Editing a group in place is convenient while you're iterating alone. If applications already consume the group in production, ask the assistant to create the next version instead, and migrate consumers deliberately. See [versioning](/docs/signals/attributes/attribute-groups/#versioning) for how versions behave.
 :::
 
-Verify the change the same way as before: the group's page in Console now lists four attributes, and after viewing another page on your site, a retrieval call for the extra attribute returns its value:
+Verify the change the same way as before: the group's page in Console now lists four attributes.
+
+![The attribute group detail page after republishing, with most_recent_page_title added as a fourth attribute](./images/console-attribute-group-four-attributes.png)
+
+After viewing another page on your site, a retrieval call for the extra attribute returns its value:
 
 ```text
 {'first_referrer': 'www.google.com', 'most_recent_browser': 'Chrome', 'most_recent_page_title': 'Checkout', 'page_view_count': 4}

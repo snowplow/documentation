@@ -30,7 +30,7 @@ function getFirstStepPath(tutorialId: string): string | null {
 }
 
 const gridColumns =
-  'lg:grid lg:grid-cols-[minmax(0,2.6fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_5rem] lg:gap-5 lg:items-center'
+  'lg:grid lg:grid-cols-[minmax(0,3.2fr)_minmax(0,1fr)_minmax(0,1fr)_5rem] lg:gap-5 lg:items-center'
 
 const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const firstStep = getFirstStepPath(tutorial.meta.id)
@@ -64,12 +64,6 @@ const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
         {tutorial.meta.useCase}
       </div>
 
-      {/* Topic */}
-      <div className="mb-1 lg:mb-0 text-sm text-foreground">
-        <span className="lg:hidden text-muted-foreground mr-1.5">Topic:</span>
-        {tutorial.meta.label}
-      </div>
-
       {/* Technologies */}
       <div className="mb-1 lg:mb-0 text-sm text-foreground">
         <span className="lg:hidden text-muted-foreground mr-1.5">
@@ -83,7 +77,7 @@ const TutorialRow: React.FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
       </div>
 
       {/* Progress */}
-      <div className="flex items-center gap-2 lg:justify-end">
+      <div className="flex items-center gap-2 lg:flex-col lg:items-end lg:gap-1">
         <span className="lg:hidden text-sm text-muted-foreground">
           Progress:
         </span>
@@ -142,7 +136,6 @@ export const TutorialTable: React.FC<TutorialTableProps> = ({
       >
         <div>Tutorial</div>
         <div>Use case</div>
-        <div>Topic</div>
         <div>Technology</div>
         <div className="lg:text-right">Progress</div>
       </div>

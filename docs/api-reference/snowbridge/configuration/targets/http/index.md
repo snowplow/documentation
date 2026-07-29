@@ -18,6 +18,10 @@ Version 4.0.0 makes breaking changes to the HTTP target. Details on migrating ca
 Version 5.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-5-X-X/index.md)
 :::
 
+:::note
+Version 6.0.0 makes breaking changes to the HTTP target's OAuth2 configuration. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md)
+:::
+
 ## Basic authentication
 
 Where basicauth is used, it may be configured using the `basic_auth_username` and `basic_auth_password` options. Where an authorization header is used, it may be set via the `headers` option.
@@ -28,9 +32,37 @@ TLS may be configured by providing the `key_file`, `cert_file` and `ca_file` opt
 
 ## OAuth2
 
-Snowbridge supports sending authorized requests to OAuth2-compliant HTTP targets. This can be enabled by setting `oauth2_client_id`, `oauth2_client_secret`, `oauth2_refresh_token` (these three are long-lived credentials used to generate short-lived bearer access tokens), and `oauth2_token_url` (which is the URL of the authorization server providing access tokens).
+Snowbridge supports sending authorized requests to OAuth2-compliant HTTP targets, via one of two flows. The `oauth_client {}` and `oauth_jwt {}` blocks are mutually exclusive — configuring both fails at startup.
 
 Like in the case of basic authentication, we recommend using environment variables for sensitive values.
+
+:::note
+Before version 6.0.0, the client credentials flow was configured through top-level `oauth2_*` settings. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for how to migrate.
+:::
+
+### Client credentials flow
+
+Configure the `oauth_client {}` block with `client_id`, `client_secret` and `refresh_token` (these three are long-lived credentials used to generate short-lived bearer access tokens), and `token_url` (which is the URL of the authorization server providing access tokens).
+
+### JWT bearer flow
+
+:::note
+This feature was added in version 6.0.0
+:::
+
+Where the target expects a [JWT bearer assertion](https://datatracker.ietf.org/doc/html/rfc7523) instead of client credentials — as service accounts on Google APIs do, for example — configure the `oauth_jwt {}` block. Snowbridge signs a JWT with your private key and exchanges it for an access token at `token_url`.
+
+The private key must be PEM-encoded; RSA (PKCS#1 and PKCS#8) and EC keys are supported. Supply it either inline via `key`, or as a path to a key file via `key_file`. These two are mutually exclusive.
+
+| Setting | Required | Description |
+|---|---|---|
+| `key` | one of `key`/`key_file` | PEM-encoded private key, supplied as a string. |
+| `key_file` | one of `key`/`key_file` | Path to a file containing the PEM-encoded private key. |
+| `issuer` | yes | Issuer claim (`iss`) — typically a service account email or client identifier. |
+| `token_url` | yes | URL of the authorization server providing access tokens. |
+| `subject` | no | Subject claim (`sub`), for impersonation flows. |
+| `audience` | no | Audience claim (`aud`). Defaults to `token_url`. |
+| `scopes` | no | Scopes to request in the token exchange. |
 
 ## Dynamic headers
 

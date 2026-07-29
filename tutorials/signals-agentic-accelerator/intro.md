@@ -3,8 +3,8 @@ title: "Learn how to build a Signals-powered AI agent with AWS Bedrock AgentCore
 sidebar_label: "Introduction"
 position: 1
 description: "Build a customer-facing AI agent personalized with real-time behavioral data from Snowplow Signals, using Strands Agents and AWS Bedrock AgentCore Memory."
-keywords: ["Snowplow Signals", "AWS Bedrock", "AgentCore", "Strands Agents", "personalization", "AI agent", "behavioral data"]
-date: "2026-03-27"
+keywords: ["Snowplow Signals", "AWS Bedrock", "AgentCore", "Strands Agents", "agentic context", "personalization", "AI agent", "behavioral data"]
+date: "2026-07-29"
 ---
 
 Customer-facing AI agents are most effective when they understand what a user is doing right now - not just what they type into a chat window. Traditional agents respond generically, forcing users to repeat preferences and explain context that their browsing behavior has already revealed.
@@ -18,17 +18,27 @@ The code examples use a travel domain, but the pattern applies to any customer-f
 By the end of this accelerator you will have:
 
 * An AI agent built with Strands Agents and AWS Bedrock
-* Behavioral attributes defined and published via Snowplow Signals
+* Profile attributes defined and published via Snowplow Signals
+* An agentic context capturing the session's recent activity as an LLM-ready narrative
 * Persistent customer memory using AgentCore Memory
-* An agent that combines behavioral context and memory to deliver personalized responses
+* An agent that combines both kinds of behavioral context with memory to deliver personalized responses
 
 The accelerator takes approximately 1 hour to complete. All source code is available in the accompanying [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb).
+
+## Two kinds of Signals context
+
+The agent draws on two complementary kinds of Signals context, each through its own tool:
+
+* Profile attributes: computed aggregates about the session, such as how many destination pages the user has viewed and which interests they keep filtering for, served by a Signals [service](/docs/signals/applications/services/). Use attributes when you want defined metrics that your agent, or any other consumer, can rely on.
+* An [agentic context](/docs/signals/agentic-contexts/): the user's recent activity, returned as an LLM-ready narrative. Use it when you want to ground the agent in the user's immediate journey, without writing aggregation or formatting logic.
+
+They answer different questions. Attributes tell the agent that this user leans cultural and family-friendly. The narrative tells it that the user opened Siem Reap three times, moved on to Bali, then filtered for street food. This accelerator uses both.
 
 ## Architecture
 
 The accelerator combines three components:
 
-* [Snowplow Signals](/docs/signals/) processes raw [event](/docs/fundamentals/events/) data into behavioral attributes served via the Profiles API. The agent fetches these at runtime to understand what the user is doing right now.
+* [Snowplow Signals](/docs/signals/) processes raw [event](/docs/fundamentals/events/) data into profile attributes served via the Profiles API, and buffers the session's recent events for the agentic context. The agent fetches both at runtime to understand what the user is doing right now.
 * [AgentCore Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html) provides managed short-term and long-term memory, automatically extracting preferences and facts from conversations so the agent can build context over time.
 * [Strands Agents](https://strandsagents.com/) is an open-source Python framework for building AI agents with custom tools and foundation models.
 
@@ -36,9 +46,15 @@ Together, Signals provides real-time behavioral context while AgentCore Memory p
 
 ## Prerequisites
 
-* A Snowplow CDI pipeline with Signals enabled - the agent fetches behavioral attributes from the Signals Profiles API
+* A Snowplow CDI pipeline with [Signals enabled](/docs/signals/setup/) - the agent fetches profile attributes and the session activity narrative from Signals
 * An AWS account with [Amazon Bedrock](https://aws.amazon.com/bedrock/) access and AgentCore Memory access - the agent runs on Claude via Bedrock, and your IAM user needs permissions for `bedrock:InvokeModel`, `bedrock-agentcore:*`, and `iam:PassRole` (scoped to `bedrock-agentcore.amazonaws.com`) to create AgentCore Memory resources
 * [AWS CLI](https://aws.amazon.com/cli/) installed and configured - used to authenticate with AWS services from the notebook
 * Python 3.11 or later - required by the Strands Agents framework
 * Familiarity with Python and running Jupyter notebooks
+
+:::note[A full pipeline is required]
+Signals computes attributes and captures session activity from real events flowing through your pipeline, so this accelerator can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
+
+If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::
 

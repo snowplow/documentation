@@ -3,8 +3,8 @@ title: "Create the agent prototype with Strands Agents"
 sidebar_label: "Create the agent"
 position: 2
 description: "Build an AI agent prototype using the Strands Agents framework with tools for destination lookup, web search, and Snowplow Signals integration."
-keywords: ["Strands Agents", "AI agent", "tools", "AWS Bedrock", "Claude", "prototype"]
-date: "2026-03-27"
+keywords: ["Strands Agents", "AI agent", "tools", "agentic context", "AWS Bedrock", "Claude", "prototype"]
+date: "2026-07-29"
 ---
 
 In this step, you'll build a working agent prototype using the [Strands Agents](https://strandsagents.com/) framework. The agent combines a foundation model with custom tools to answer queries, look up information, and fetch behavioral data from Snowplow Signals.
@@ -19,16 +19,24 @@ Use the Strands Agents framework in a Jupyter notebook to build the agent. You c
 
 Strands Agents uses the `@tool` decorator to turn Python functions into tools the agent can invoke. Each tool should have a single, well-defined responsibility and return structured output the agent can reason about.
 
-Run the notebook cell that defines four tools for the agent:
+Run the notebook cell that defines five tools for the agent:
 
 | Tool | Purpose |
 | :--- | :------ |
 | `get_destination_info` | Look up destination details from a local data source |
 | `get_experience_info` | Retrieve information about available experiences |
 | `web_search` | Search the web for current information via DuckDuckGo |
-| `get_signals` | Fetch behavioral attributes from Snowplow Signals |
+| `get_signals` | Fetch the user's profile attributes from Snowplow Signals |
+| `get_session_activity` | Fetch the user's recent session activity as a narrative |
 
-The `get_signals` tool connects to the Snowplow Signals Profiles API using the credentials you configured in the previous cell. You will define the attributes it retrieves in the next step.
+Both Signals tools use the credentials you configured in the previous cell, and both look the user up by the same session ID. They differ in what they return:
+
+* `get_signals` calls the Profiles API for computed aggregates, such as segment affinities and preferred experience length
+* `get_session_activity` calls the [agentic context](/docs/signals/applications/agentic-contexts/) for a narrative of the user's recent events, in the order they happened
+
+Writing precise tool docstrings matters here: the model chooses between the two based on what those docstrings say, so each one states what it returns and when to prefer it.
+
+You'll define the attributes and the agentic context these tools read in the next step.
 
 ## Configure the foundation model
 
@@ -44,14 +52,19 @@ model = BedrockModel(
 
 The `temperature` parameter controls how random the model's output is, on a scale from 0 to 1. A value of 0.3 produces more consistent, predictable responses - appropriate for a customer-facing agent where accuracy matters more than creativity.
 
+:::note[Model choice]
+To use a different model, change the model string in `model_id`. Make sure the model you pick is enabled in your Bedrock console and available in your region. The Signals integration works the same way regardless of which model you choose.
+:::
+
 ## Create and configure the agent
 
-Run the notebook cell that combines the model, tools, and a system prompt into a functioning agent. The system prompt defines the agent's role and includes an explicit instruction to use `get_signals` and explain how the returned behavioral data influenced the recommendation. This is key to delivering transparent, personalized responses.
+Run the notebook cell that combines the model, tools, and a system prompt into a functioning agent. The system prompt defines the agent's role and tells the agent to draw on both Signals tools, then explain how what they returned influenced the recommendation. This is key to delivering transparent, personalized responses.
 
 ```python
 agent = Agent(
     model=model,
-    tools=[get_destination_info, get_experience_info, web_search, get_signals],
+    tools=[get_destination_info, get_experience_info, web_search, get_signals,
+           get_session_activity],
     system_prompt=SYSTEM_PROMPT,
 )
 ```
@@ -89,4 +102,4 @@ Bangkok is a great base for exploring Southeast Asia, with easy
 connections to Thailand's islands and neighboring countries.
 ```
 
-At this point, the `get_signals` tool will not return data because you have not yet configured Signals attributes. In the next step, you will define and publish behavioral attributes that the agent can use for personalization.
+At this point, neither Signals tool will return data, because you have not yet configured Signals. In the next step, you will define and publish the profile attributes and the agentic context that the agent uses for personalization.

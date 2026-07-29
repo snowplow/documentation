@@ -23,6 +23,6 @@ The following hash algorithms are supported:
 { foo: .user_id |  hash("sha1"; "${env.SHA1_SALT}") }
 ```
 
-:::caution
-Version 6.0.0 changes the values this function returns. Before 6.0.0 it returned a PBKDF2-derived key rather than the digest, so hashes produced by 6.x will not match those produced by earlier versions for the same input. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for details.
+:::warning[hash output changes in version 6.0.0]
+Version 6.0.0 changes the values this function returns. Before 6.0.0 it returned a PBKDF2-derived key rather than the digest, so hashes produced by 6.x do not match those produced by earlier versions for the same input. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for details.
 :::

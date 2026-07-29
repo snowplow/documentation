@@ -10,6 +10,8 @@ keywords: ["snowbridge 6.x upgrade", "upgrade guide", "snowbridge migration", "v
 
 ## Version 6.0.0 breaking changes
 
+Version 6.0.0 restructures the HTTP target's OAuth2 settings, changes the values returned by the `hash` transformation helper, and rebuilds the Docker images on a distroless base. Only the OAuth2 change requires a configuration edit, but review each section below before upgrading.
+
 ### HTTP target OAuth2 configuration
 
 The four top-level `oauth2_*` settings have been replaced by an `oauth_client {}` block. This makes room for the new [JWT bearer flow](/docs/api-reference/snowbridge/configuration/targets/http/index.md#jwt-bearer-flow), which is configured through a separate `oauth_jwt {}` block.
@@ -56,17 +58,17 @@ target {
 
 ### `hash` transformation helper
 
-The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md) now returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
+The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md) returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
 
-**No configuration change is required, but the output values change**:
+**Output values change**, but no configuration change is required:
 
 * Unsalted hashing returns the plain digest of the selected function.
 * Salted hashing returns an HMAC of the input, keyed with the salt.
-* Output length now follows the selected function — 40 hex characters for `sha1`, 64 for `sha256`, 32 for `md5` — instead of the fixed 48 hex characters produced by PBKDF2.
+* Output length follows the selected function — 40 hex characters for `sha1`, 64 for `sha256`, 32 for `md5` — instead of the fixed 48 hex characters produced by PBKDF2.
 
-**Migration required if you depend on hash values matching data produced by earlier versions.** Values hashed by Snowbridge 6.x will not match values hashed by 5.x or earlier for the same input, so any downstream joins, deduplication, or identity stitching on a hashed field will break across the upgrade boundary. Where a destination stores previously hashed values, plan for the change of value — for example by re-hashing historical data, or by switching to a new field.
+**Migration required** if you depend on hash values matching data produced by earlier versions. Values hashed by Snowbridge 6.x will not match values hashed by 5.x or earlier for the same input, so any downstream joins, deduplication, or identity stitching on a hashed field will break across the upgrade boundary. Where a destination stores previously hashed values, plan for the change of value — for example by re-hashing historical data, or by switching to a new field.
 
-### Docker images are now distroless
+### Distroless Docker images
 
 Both the main and AWS-only images are built on `gcr.io/distroless/static-debian12:nonroot` instead of Alpine. The image contains only the Snowbridge binary — there is no shell, package manager, or other userland.
 
@@ -78,4 +80,4 @@ This has no effect on how Snowbridge is configured or run, but it does change a 
 
 ### Go module path
 
-The Go module path is now `github.com/snowplow/snowbridge/v6`. This only affects you if you import Snowbridge packages in your own Go code — for example the [HTTP target's request templater](https://github.com/snowplow/snowbridge/tree/master/pkg/target/http). Update your imports from `github.com/snowplow/snowbridge/v5/...` to `github.com/snowplow/snowbridge/v6/...`.
+The Go module path is `github.com/snowplow/snowbridge/v6`. This only affects you if you import Snowbridge packages in your own Go code — for example the [HTTP target's request templater](https://github.com/snowplow/snowbridge/tree/master/pkg/target/http). Update your imports from `github.com/snowplow/snowbridge/v5/...` to `github.com/snowplow/snowbridge/v6/...`.

@@ -138,7 +138,7 @@ The headers will only be included if the target has the [`dynamic_headers = true
 
 ## Helper functions
 
-* `hash(input, algorithm)` hashes the input value, returning the hex-encoded digest. Salt is configured using the `hash_salt_secret` parameter in the hcl configuration. Where a salt is provided, the result is an HMAC of the input keyed with the salt; where no value is provided, this function will perform an unsalted hash of the input.
+* `hash(input, algorithm)` hashes the input value, returning the hex-encoded digest. Salt is configured using the `hash_salt_secret` parameter in the hcl configuration. Where a salt is provided, the result is an HMAC of the input keyed with the salt; where no value is provided, this function performs an unsalted hash of the input.
 
 The following hash algorithms are supported:
 - `sha1` - SHA-1 hash (160 bits)
@@ -149,8 +149,8 @@ The following hash algorithms are supported:
 hash(input.Data["app_id"], "sha1")
 ```
 
-:::caution
-Version 6.0.0 changes the values this function returns. Before 6.0.0 it returned a PBKDF2-derived key rather than the digest, so hashes produced by 6.x will not match those produced by earlier versions for the same input. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for details.
+:::warning[hash output changes in version 6.0.0]
+Version 6.0.0 changes the values this function returns. Before 6.0.0 it returned a PBKDF2-derived key rather than the digest, so hashes produced by 6.x do not match those produced by earlier versions for the same input. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for details.
 :::
 
 * `allContexts(data, contextName)` returns an array of all entity instances for a given entity name across all schema versions present in the data object. Instances are ordered by schema version descending (highest version first). `contextName` is the snake_case vendor and name portion of the key, without the `contexts_` prefix and version suffix. Returns an empty array if no matching keys are found.

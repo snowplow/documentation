@@ -182,8 +182,8 @@ const TutorialList: FC = () => {
             </div>
           )}
 
-          {/* Main content - Aligned next to the filter sidebar */}
-          <div className="flex-1 px-6 pb-6">
+          {/* Main content - Aligned next to the filter sidebar, which already pads its right edge */}
+          <div className="flex-1 pr-6 pb-6">
             <div className="w-full max-w-6xl">
               {/* Tutorial list */}
               <TutorialTable tutorials={content.tutorials} />

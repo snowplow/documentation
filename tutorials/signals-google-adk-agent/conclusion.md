@@ -3,8 +3,8 @@ title: "Conclusion and next steps"
 sidebar_label: "Conclusion"
 position: 6
 description: "Run the full stack, debug common issues, and explore extensions like interventions, richer attributes, generative UI, multi-agent routing, and Vertex AI deployment."
-keywords: ["debugging", "interventions", "generative UI", "multi-agent", "Vertex AI Agent Engine"]
-date: "2026-04-17"
+keywords: ["debugging", "interventions", "agentic context", "generative UI", "multi-agent", "Vertex AI Agent Engine"]
+date: "2026-07-29"
 ---
 
 In this tutorial, you've built a Next.js app with a Google ADK agent that uses Snowplow Signals to deliver personalized, context-aware responses based on live user behavior.
@@ -14,8 +14,9 @@ Here's what you set up:
 * Snowplow Browser tracker capturing page views, page pings, and link clicks
 * A Signals attribute group computing real-time session-level attributes
 * A Signals service exposing those attributes via API
+* A Signals agentic context buffering the session's recent events as an LLM-ready narrative
 * A CopilotKit sidebar that passes the Snowplow session ID with every request
-* A Google ADK agent that fetches and injects those attributes into its system prompt
+* A Google ADK agent whose `before_model_callback` fetches both kinds of context and injects them into its system instruction each turn
 
 Here are some next steps ideas for extending what you've built.
 

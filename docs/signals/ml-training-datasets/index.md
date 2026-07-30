@@ -2,8 +2,8 @@
 title: "Create ML training datasets"
 sidebar_position: 32
 sidebar_label: "ML training datasets"
-description: "Build labeled, point-in-time correct training datasets for machine learning models using the Signals Python SDK. Define anchor events, generate SQL, and execute against your warehouse."
-keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "signals python sdk", "snowflake", "ML"]
+description: "Build labeled, point-in-time correct training datasets for machine learning models using the Signals Python SDK. Define anchor events, build datasets, and retrieve results."
+keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "signals python sdk", "ML"]
 date: "2026-07-15"
 ---
 
@@ -26,11 +26,10 @@ The dataset builder prevents this by computing each attribute value using only e
 Building and using an ML training dataset follows this process:
 
 1. [Define your attribute groups](/docs/signals/attributes/attribute-groups/index.md) with the features you want your model to learn from (e.g. `product_view_count`, `add_to_cart_count`)
-2. Build the dataset SQL bundle by calling the appropriate method - `build_dataset_with_session_anchors()` for auto-generated anchors, or `build_dataset_with_custom_anchors()` for a pre-existing anchor table
-3. Optionally inspect or save the generated SQL
-4. Execute the SQL against your warehouse to produce the training dataset
-5. Train your model on the resulting DataFrame
-6. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
+2. Submit a dataset run by calling the appropriate method - `submit_dataset_run_with_session_anchors()` for auto-generated anchors, or `submit_dataset_run_with_custom_anchors()` for a pre-existing anchor table
+3. Poll for completion with `get_dataset_run_status()`, then retrieve a preview with `get_dataset_run_preview()`
+4. Train your model on the resulting DataFrame
+5. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
 
 ## How it works
 
@@ -82,7 +81,7 @@ Signals provides two approaches: session anchors (automatically derived from you
 
 ### Session anchors
 
-Use `build_dataset_with_session_anchors()` to automatically generate anchors from your event data. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
+Use `submit_dataset_run_with_session_anchors()` to automatically generate anchors from your event data and build the training dataset server-side. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
 
 The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, event properties, or entity properties.
 
@@ -98,7 +97,7 @@ from snowplow_signals import (
     TrainingSpan,
 )
 
-bundle = sp_signals.build_dataset_with_session_anchors(
+run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
         all=[
@@ -117,7 +116,7 @@ To filter on a property within a self-describing event:
 ```python
 from snowplow_signals import Criteria, Criterion, EventProperty, TrainingSpan
 
-bundle = sp_signals.build_dataset_with_session_anchors(
+run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
         all=[
@@ -160,7 +159,7 @@ By default, the dataset builder creates tables using the output database and sch
 ```python
 from snowplow_signals import WarehouseTable
 
-bundle = sp_signals.build_dataset_with_session_anchors(
+run = sp_signals.submit_dataset_run_with_session_anchors(
     ...
     dataset_table=WarehouseTable(
         table="my_training_dataset",   # required
@@ -172,7 +171,7 @@ bundle = sp_signals.build_dataset_with_session_anchors(
 
 ### User-supplied anchors
 
-If you already have a table of labeled anchor events, use `build_dataset_with_custom_anchors()` instead. Your table must contain the following columns:
+If you already have a table of labeled anchor events, use `submit_dataset_run_with_custom_anchors()` instead. Your table must contain the following columns:
 
 | Column | Type | Description |
 | --- | --- | --- |
@@ -190,7 +189,7 @@ For example, if your attribute groups use `domain_sessionid` as the attribute ke
 ```python
 from snowplow_signals import WarehouseTable
 
-bundle = sp_signals.build_dataset_with_custom_anchors(
+run = sp_signals.submit_dataset_run_with_custom_anchors(
     attribute_groups=[my_attribute_group],
     anchors_table=WarehouseTable(
         database="analytics",
@@ -210,64 +209,41 @@ bundle = sp_signals.build_dataset_with_custom_anchors(
 | `dataset_table` | Override the output location for the final assembled dataset. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |
 
-## Inspect and save the SQL bundle
+## Poll for completion and retrieve results
 
-Both `build_dataset_with_session_anchors()` and `build_dataset_with_custom_anchors()` return a `DatasetBundle` containing the generated SQL files. Inspecting the generated SQL is useful for understanding exactly what queries will run against your warehouse, verifying the logic before execution, or sharing with your data team for review. You can save them to disk or execute them directly.
+The `submit_dataset_run_with_session_anchors()` and `submit_dataset_run_with_custom_anchors()` methods return a `DatasetRunResponse` immediately. The dataset is built server-side, so you need to poll for completion before retrieving results.
 
-### Save SQL to disk
+### Check run status
 
-Use `save_to()` to write the generated SQL files, a manifest, and a README to a directory. This is useful for reviewing the SQL before execution or committing it to version control.
-
-```python
-bundle.save_to("./dataset_output")
-```
-
-This creates:
-
-- Individual SQL files for each stage (`signals_anchors.sql`, `signals_attributes_domain_sessionid.sql`, `signals_training_dataset.sql`)
-- `manifest.json` with input configuration and output table mappings
-- `README.md` documenting the execution order
-
-## Execute against your warehouse
-
-Once you have a `DatasetBundle`, execute the SQL against your warehouse to produce the training dataset. The dataset builder executes SQL directly against the same data warehouse that your Signals deployment reads from. The warehouse connection is configured separately from your Signals API credentials because the queries run against your warehouse, not through the Signals API.
-
-### Snowflake
-
-Snowflake supports [key-pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth) for programmatic access, where `private_key` is the DER-encoded private key from your Snowflake key pair. Wrap your Snowflake connection in a `SnowflakeConnection` and pass it to `execute()`.
+Use `get_dataset_run_status()` to check whether the run has finished. The `status` field is one of `pending`, `success`, or `failed`.
 
 ```python
-import snowflake.connector
-from snowplow_signals.execution.snowflake import SnowflakeConnection
-
-sf_conn = SnowflakeConnection(
-    snowflake.connector.connect(
-        account=os.environ["SNOWFLAKE_ACCOUNT"],
-        user=os.environ["SNOWFLAKE_USER"],
-        warehouse=os.environ["SNOWFLAKE_WAREHOUSE"],
-        private_key=private_key_der,
-    )
-)
-
-result = bundle.execute(sf_conn)
+status = sp_signals.get_dataset_run_status(run.id)
+print(status.status)  # "pending", "success", or "failed"
 ```
 
-The `execute()` method returns an `ExecutionResult` that holds references to the tables created in your warehouse. You can then call `to_pandas()` on the result to fetch the final dataset as a DataFrame.
+To wait for completion in a notebook or script:
 
-It runs three stages in order:
+```python
+import time
+from snowplow_signals import DatasetRunStatus
 
-1. Creates the anchors table (`signals_anchors`)
-2. Creates one attribute table per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values
-3. Assembles the final training dataset (`signals_training_dataset`) by joining all tables together
-
-If a stage fails, it raises an `ExecutionError` with the name of the failed stage, the target table, and the underlying cause.
+while True:
+    status = sp_signals.get_dataset_run_status(run.id)
+    if status.status == DatasetRunStatus.SUCCESS:
+        break
+    if status.status == DatasetRunStatus.FAILED:
+        raise RuntimeError("Dataset run failed")
+    time.sleep(5)
+```
 
 ### Get results as a DataFrame
 
-After execution, call `to_pandas()` to pull the training dataset into a pandas DataFrame, ready for model training. By default, it fetches up to 10,000 rows.
+Once the run status is `success`, call `get_dataset_run_preview()` to fetch a preview of the completed dataset. By default, it returns up to 100 rows. You can set `limit` up to 10,000.
 
 ```python
-df = result.to_pandas()
+preview = sp_signals.get_dataset_run_preview(run.id, limit=10000)
+df = preview.to_pandas()
 ```
 
 The resulting DataFrame contains one row per anchor, with columns for the attribute key, anchor timestamp, label, and every attribute from your attribute groups:
@@ -277,3 +253,33 @@ The resulting DataFrame contains one row per anchor, with columns for the attrib
 | 0 | abc-123 | 2024-01-15 09:32:00 | 1 | 5 | 2 |
 | 1 | def-456 | 2024-01-15 10:01:00 | 0 | 3 | 0 |
 | 2 | ghi-789 | 2024-01-16 14:22:00 | 1 | 8 | 4 |
+
+The full dataset is also written to your warehouse at the table location shown in `run.dataset`. You can query this table directly for the complete result set.
+
+### Cancel a run
+
+To cancel a dataset build that is still in progress:
+
+```python
+sp_signals.cancel_dataset_run(run.id)
+```
+
+## Inspect the generated SQL
+
+If you want to review the SQL that the dataset builder produces without executing it, use `build_dataset_with_session_anchors()` or `build_dataset_with_custom_anchors()`. These return a `DatasetBundle` containing the generated SQL files, which you can save to disk for inspection or manual execution.
+
+```python
+bundle = sp_signals.build_dataset_with_session_anchors(
+    attribute_groups=[my_attribute_group],
+    goal_criteria=goal,
+    training_span=span,
+)
+
+bundle.save_to("./dataset_output")
+```
+
+This creates:
+
+- Individual SQL files for each stage (`signals_anchors.sql`, `signals_attributes_domain_sessionid.sql`, `signals_training_dataset.sql`)
+- `manifest.json` with input configuration and output table mappings
+- `README.md` documenting the execution order

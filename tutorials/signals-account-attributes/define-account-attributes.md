@@ -168,6 +168,8 @@ Open **Signals** in Console to confirm that your attribute key, attribute group,
 
 Publishing isn't instant: it takes a short while for the definitions to be applied to the [streaming engine](/docs/signals/concepts/#stream-source). Signals computes attributes only from events processed after that point, so the events you tracked earlier don't contribute to the values, and neither do events that arrive before the definitions are applied.
 
+A published attribute group can't be edited in place, so to change an attribute, unpublish the group first, or publish your change as a new version of the group.
+
 :::note[Counting events from before you published]
 If you want an attribute group to start life with history rather than at zero, [enable backfill](/docs/signals/attributes/attribute-groups/#backfill-attributes) by setting `backfill_since_tstamp` on the group. Signals then computes the initial values from your `atomic` events table for the period between that timestamp and the publish time. This needs a warehouse connection, and only Snowflake and BigQuery are supported, so it isn't an option on a bare trial pipeline. This tutorial starts from zero instead.
 :::

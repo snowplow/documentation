@@ -50,7 +50,7 @@ Then add the registration call to the existing mount effect, after `startMediaTr
   }, []);
 ```
 
-Nothing answers that route yet, and this `fetch` has no error handling, so the registration fails silently until you build the back-end. That's the same failure you'd see later if you opened the video page before starting the back-end: the page tracks media events normally, but the viewer never appears on the dashboard.
+Nothing answers that route until you build the back-end. The video page tracks media events either way, but a viewer only reaches the dashboard once this registration call succeeds, so start the back-end before you open the video page.
 
 ## Create the back-end
 
@@ -300,8 +300,7 @@ The two counts per video differ on purpose. `Watching` comes from `active_viewer
 
 If the dashboard doesn't show what you expect, work through these:
 
-* `Back-end returned 502` with a `404` from Signals: a service name in `server.js` doesn't match a published service. Check **Signals** > **Services** in Console.
-* `Back-end returned 502` with an attribute key error: the `attribute_key` values in `server.js` must be `domain_sessionid` and the name you gave your custom key, `video_id`.
-* The row shows `Waiting for events` and zeros: the session is registered but has no computed attributes yet. Make sure you interacted with the video after the attribute groups finished publishing, since earlier events are never counted, and allow a minute or two for the definitions to be applied to the streaming engine.
+* The dashboard reports an error from the back-end: check that the service names in `server.js` match the services you published, under **Signals** > **Services** in Console, and that the `attribute_key` values are `domain_sessionid` and the name you gave your custom key, `video_id`.
+* The back-end can't authenticate with Signals: check all four credential values in `.env`, and make sure you started the server with `--env-file=.env`.
+* The row shows `Waiting for events` and zeros: the session is registered but has no computed attributes yet. Interact with the video after the attribute groups have finished publishing, since earlier events aren't counted.
 * The row disappears after a back-end restart: the in-memory set is empty again. Reload the video page to re-register.
-* `[Signals] Failed to fetch access token`: check all four credential values in `.env`, and make sure you started the server with `--env-file=.env`.

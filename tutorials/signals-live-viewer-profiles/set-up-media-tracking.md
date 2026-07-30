@@ -213,7 +213,7 @@ export default function VideoPage() {
 ```
 
 :::note[Media type strings]
-The media plugin's type definitions include a `MediaType` enum, but the npm package (4.10.0) doesn't export it at runtime, so importing it fails in the browser. Pass the string `'video'` or `'audio'` for `mediaType` instead.
+Pass `mediaType` as a string, either `'video'` or `'audio'`. The media plugin exports `MediaPlayerAdBreakType` for ad break types, but media types have no exported enum.
 :::
 
 Replace `src/main.jsx` to render the video page and initialize the tracker:

@@ -228,7 +228,7 @@ video_audience_service = Service(
 ```
 
 :::note[One service per attribute key]
-A service can only bundle attribute groups that share an attribute key. Putting both groups in one service fails with `422: Service can only reference attribute groups with the same attribute key`, so the two groups need a service each. The dashboard back-end makes one call per service.
+A service bundles attribute groups that share an attribute key, so each of these two groups needs its own service. The dashboard back-end makes one call per service.
 :::
 
 Nothing exists in Signals until you publish. Include the custom attribute key in the same list, and put it before the group that uses it: an attribute group can only be published once its key exists.
@@ -252,7 +252,7 @@ Run the script:
 python define_attributes.py
 ```
 
-Publishing isn't instant: it can take a minute or two for the definitions to be applied to the streaming engine, and Signals only computes attributes from events processed after that point. Events you tracked before publishing don't contribute to the values.
+Publishing isn't instant: give the definitions a moment to reach the streaming engine. Signals only computes attributes from events processed after that point, so events you tracked before publishing don't contribute to the values.
 
 Open **Signals** > **Attribute groups** in [Snowplow Console](https://console.snowplowanalytics.com) and select `viewer_profile` to review what you published:
 
@@ -261,9 +261,7 @@ Open **Signals** > **Attribute groups** in [Snowplow Console](https://console.sn
 Your new `video_id` key appears under **Attribute keys**, alongside the four built-in keys, and both services appear under **Services**.
 
 :::note[Republishing]
-Running the script a second time fails with `400: Cannot update published attribute group`. A published attribute group version is immutable: to change the definition, increment `version` and publish again.
-
-Deleting a group and re-creating it at the same name and version doesn't reset the values in the Profiles Store either, so counters resume where they left off. Increment `version` when you want to start counting from zero.
+A published attribute group version is immutable, so running the script again as it stands won't change anything. To change a definition, increment `version` and publish again.
 :::
 
 ## Define the attributes with an AI assistant

@@ -4,7 +4,7 @@ position: 1
 sidebar_label: "Introduction"
 description: "Build a Next.js AI agent that uses Snowplow Signals to understand what your users are doing in real time."
 keywords: ["snowplow signals", "ai agent", "vercel ai sdk", "real-time context", "agentic context", "next.js"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 In this tutorial, you'll build a Next.js AI agent that uses [Snowplow Signals](/docs/signals/introduction/) to understand what your users are doing in real time. Instead of responding generically to every user, the agent will have live awareness of the current user's session behavior: which pages they've visited, what they've been exploring, and how long they've been on the site.
@@ -47,7 +47,38 @@ The flow works like this:
 - The Next.js `/api/chat` route uses that session ID to fetch both the profile attributes and the activity narrative from Signals, and appends both to the system prompt
 - The model's response is streamed back through the Vercel AI Gateway to the browser
 
-<img src={require('./vercel-architecture.png').default} alt="Architecture diagram showing the full data and request flow. In the browser, the Snowplow tracker fires page views, page pings, and link clicks to the Snowplow Collector. The Collector produces enriched events, which flow into Snowplow Signals. Signals computes session attributes and exposes them via a GET attributes by session endpoint. On the Next.js server, the API Chat route receives messages and a Session ID from the browser chat widget, calls the Signals endpoint to fetch session attributes, and passes those attributes as a system prompt alongside the messages to Vercel AI Gateway. The gateway returns a streamed response, which the browser renders in the chat widget." style={{maxWidth: '600px', width: '100%'}} />
+```mermaid
+flowchart TD
+    subgraph browser ["Browser"]
+        tracker["<b>Snowplow Browser tracker</b><br/>page views, page pings, link clicks"]
+        widget["<b>ChatWidget</b><br/>reads the session ID<br/>from the tracker cookie"]
+    end
+
+    collector["<b>Snowplow Collector</b><br/>and enrichment"]
+
+    subgraph signals ["Snowplow Signals"]
+        service["<b>Service</b><br/>computed profile attributes"]
+        agentic["<b>Agentic context</b><br/>buffer of recent session events"]
+    end
+
+    subgraph server ["Next.js server"]
+        route["<b>/api/chat route</b>"]
+        prompt["<b>System prompt</b><br/>base instructions<br/>+ profile attributes<br/>+ activity narrative"]
+    end
+
+    gateway["<b>Vercel AI Gateway</b>"]
+
+    tracker --> collector
+    collector --> service
+    collector --> agentic
+    widget -- "messages and session ID" --> route
+    route -- "getServiceAttributes" --> service
+    route -- "getAgenticContext, narrative format" --> agentic
+    service -- "attribute values" --> prompt
+    agentic -- "narrative text block" --> prompt
+    prompt --> gateway
+    gateway -- "streamed response" --> widget
+```
 
 ## Prerequisites
 

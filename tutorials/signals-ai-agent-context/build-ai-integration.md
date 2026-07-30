@@ -4,7 +4,7 @@ position: 5
 sidebar_label: "Connect Signals and AI agent"
 description: "Connect Snowplow Signals to a Vercel AI SDK agent by fetching profile attributes and the agentic context narrative, and injecting both into the system prompt."
 keywords: ["vercel ai sdk", "system prompt", "signals context", "agentic context", "ai agent", "streaming", "next.js api route"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 The next step is to connect Signals to your AI agent, via the Vercel AI SDK.
@@ -54,11 +54,18 @@ async function getProfileSection(
     identifier: domainSessionId,
   });
 
-  if (!attributes || Object.keys(attributes).length === 0) {
+  // The service returns a key for every attribute it serves, with a null value
+  // until the session has produced data. Drop those, so a brand new session
+  // yields no profile section rather than a list of nulls.
+  const populated = Object.entries(attributes ?? {}).filter(
+    ([, value]) => value !== null && value !== undefined,
+  );
+
+  if (populated.length === 0) {
     return "";
   }
 
-  const lines = Object.entries(attributes).map(
+  const lines = populated.map(
     ([key, value]) => `- ${key}: ${JSON.stringify(value)}`,
   );
   return [
@@ -116,12 +123,30 @@ The profile fetch returns raw attribute values from the service, which `getProfi
 
 ```json
 {
-  "page_views_count": 12,
-  "unique_pages_viewed": 5,
-  "first_event_timestamp": "2026-04-09T14:23:01.000Z",
-  "last_event_timestamp": "2026-04-09T14:41:03.000Z"
+  "page_views_count": 5,
+  "unique_pages_viewed": [
+    "https://signal-shop.example.com/",
+    "https://signal-shop.example.com/products",
+    "https://signal-shop.example.com/products/3",
+    "https://signal-shop.example.com/products/7"
+  ],
+  "first_event_timestamp": "2026-07-29T14:14:13.013Z",
+  "last_event_timestamp": "2026-07-29T14:16:13.976Z"
 }
 ```
+
+Watch the null filter in `getProfileSection()`. A service always returns a key for every attribute it serves, so a session that hasn't produced any events yet comes back fully populated with nulls:
+
+```json
+{
+  "page_views_count": null,
+  "unique_pages_viewed": null,
+  "first_event_timestamp": null,
+  "last_event_timestamp": null
+}
+```
+
+That object is neither missing nor empty, so a guard that tests only for those two cases lets `page_views_count: null` through to the model as though it were a fact about the user. Filtering the nulls out first means a session with no data yet contributes no profile section at all, and the model reads nothing about the user instead of reading something false.
 
 The activity fetch needs no formatting at all. With `format: "narrative"`, `getAgenticContext()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from a five-page browsing session:
 

@@ -244,7 +244,7 @@ On a match, the enrichment attaches a [`utm_referrer`](https://github.com/snowpl
 | -------- | ------------------------------------------------------------------------------------- |
 | `source` | The name of the matched source e.g., `ChatGPT`. Equivalent to `refr_source`.           |
 | `medium` | The medium of the matched source e.g., `chatbot`. Equivalent to `refr_medium`.         |
-| `term`   | The search term. Always absent for `utm_source` matches. Equivalent to `refr_term`.    |
+| `term`   | The search term. Currently, always absent for `utm_source` matches. Equivalent to `refr_term`.    |
 
 ### How it relates to referrer URL parsing
 

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Your agentic context is live, so browse a few pages on your tracked site to give it something to capture. Visit several different pages, and leave a few seconds between them, so the record has a shape you can recognize later.
 
-Remember that buffering only started when you published, and a minute or two after that. If you browsed before publishing, that activity isn't there.
+Remember that buffering only started once your published configuration went live. If you browsed before publishing, that activity isn't there.
 
 ## Get the session identifier
 

@@ -144,14 +144,12 @@ Click **Publish**. Every edit you make in Console starts as a draft, and the ver
 
 The `publish()` call in the code above both registers the agentic context and sends it to your Signals infrastructure.
 
-:::warning[`publish()` only creates, it can't update]
-In `snowplow-signals` 0.4.6, calling `publish()` again for a name that already exists fails with a `409` error rather than updating it. The same applies to `unpublish()`. Use Console to change or unpublish an agentic context you've already published. This is a bug in the SDK, not the intended behavior.
-:::
+To change an agentic context you've already published, edit it in Console and publish the draft, as you'll do later in this tutorial.
 
 </TabItem>
 </Tabs>
 
-Buffering begins once your streaming infrastructure picks up the new configuration, which takes a minute or two. Events from before that point aren't captured retroactively, so publish first and browse afterwards.
+Buffering begins once your streaming infrastructure picks up the new configuration, shortly after you publish. Events from before that point aren't captured retroactively, so publish first and browse afterwards.
 
 :::note[No versions to manage]
 Unlike other Signals resources, you don't manage versions of an agentic context. There's one live agentic context per name, and publishing replaces whatever was live before.

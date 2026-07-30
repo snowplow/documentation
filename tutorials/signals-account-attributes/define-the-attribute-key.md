@@ -4,7 +4,7 @@ position: 3
 sidebar_label: "Define the attribute key"
 description: "Create a custom Signals attribute key from the account entity's account_id property, in Snowplow Console or with the Signals Python SDK."
 keywords: ["custom attribute key", "entity property", "signals console", "AttributeKey", "EntityProperty"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 ```mdx-code-block
@@ -36,7 +36,9 @@ Click **Confirm** to close the picker, then add an optional description. The **O
 Click **Create attribute key** to save it. There's no name field: the key's name is taken from the selected property, so it appears in the list as `account_id`.
 
 :::note[No entities listed?]
-The property picker lists events and entities from your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet. The catalog refreshes periodically rather than instantly, so this can take a while. Continue with the Python SDK tab, or come back once the entity appears.
+The property picker lists events and entities from your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet.
+
+The catalog refreshes periodically rather than instantly, and the wait is long enough to derail your afternoon: on a trial pipeline the new `account` entity was still missing 25 minutes after the first events, and present when checked again around two hours later. Treat anything up to a couple of hours as normal. Rather than waiting, switch to the Python SDK tab, which doesn't depend on the catalog at all, and come back to Console later if you want to see the key there.
 :::
 
 </TabItem>
@@ -58,6 +60,8 @@ account_id_key = AttributeKey(
     ),
 )
 ```
+
+`major_version=1` picks the schema's major version, so minor and patch revisions of the `account` schema keep working with this key.
 
 This only creates a local object. The key is registered with Signals when you publish it, which you'll do together with the attribute group in the next section. An attribute group can only reference keys that already exist in Signals, so the publish call there includes the key.
 

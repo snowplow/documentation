@@ -4,7 +4,7 @@ position: 6
 sidebar_label: "Conclusion"
 description: "Recap of building account-level attributes with a custom Signals attribute key, with variations and next steps."
 keywords: ["snowplow signals", "custom attribute keys", "account-level attributes", "next steps"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 You've built a real-time, account-level personalization loop for a multi-tenant B2B app. Along the way you:
@@ -15,6 +15,30 @@ You've built a real-time, account-level personalization loop for a multi-tenant 
 * retrieved an account's live profile by `account_id` and reacted to an account-level intervention
 
 The pattern generalizes to any grouping your events carry. The attribute key doesn't have to mean "account": it's whatever identifier you point it at.
+
+## Clean up
+
+Published definitions keep computing whether or not anything reads them, so tear yours down if this was an experiment. Unpublish before deleting, because deleting a published definition fails with `400 Cannot delete published intervention`, or the equivalent for the other types.
+
+Unpublish one definition at a time, in reverse dependency order:
+
+```python
+for definition in (
+    account_expansion_nudge,
+    account_service,
+    account_activity,
+    account_id_key,
+):
+    sp_signals.unpublish([definition])
+
+sp_signals.delete(
+    [account_expansion_nudge, account_service, account_activity, account_id_key]
+)
+```
+
+One call per definition matters here. Passing all four to `unpublish()` at once fails with `400 Attribute key 'account_id' is used by attribute group 'account_activity' version 1, can't unpublish`, because `unpublish()` sorts the list by type and handles attribute keys first. That order is right for publishing and backwards for taking things down. `delete()` handles the dependency order itself, so one call is enough there.
+
+Your two data structures aren't Signals resources and aren't affected. Leave them in place if you want to keep tracking against them, or hide them from the **Data structures** list in Console.
 
 ## Variations
 

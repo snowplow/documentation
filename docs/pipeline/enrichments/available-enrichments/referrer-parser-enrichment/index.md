@@ -222,7 +222,7 @@ The `Referer` header is not set when users share or copy and paste the link, rat
 https://www.example.com/product?utm_source=chatgpt.com
 ```
 
-Because there's no referrer URL, the `refr_*` fields stay empty and this traffic is indistinguishable from direct traffic. To close that gap, the enrichment also matches the `utm_source` parameter of the page URL against the `utm_sources` entries in the referer database, and attaches a `utm_referrer` entity to the event when it recognizes the value.
+The enrichment parses both the `Referer` header and the `utm_source` parameter and preserves both pieces of information. The header, if present, populates the `refr_*` fields of the event. If a referrer is detected through the `utm_source` parameter, the enrichment adds a `utm_referrer` entity to the event.
 
 The hosted database includes `utm_sources` entries for the major chatbot providers — ChatGPT, Claude.ai, Google Gemini, Microsoft Copilot, META.ai, Mistral.ai, Perplexity.ai, Character.AI and Poe — so this works out of the box, as long as you use the actively-maintained database file (`referers-5.3`). You can recognize additional sources by adding `utm_sources` to your [custom referrer mappings](#custom-referrer-mappings).
 

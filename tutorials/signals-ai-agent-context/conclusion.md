@@ -4,7 +4,7 @@ position: 7
 sidebar_label: "Conclusion"
 description: "Summary of the Signals AI agent tutorial and ideas for extending it with richer attributes, interventions, and multi-dimensional context."
 keywords: ["signals next steps", "ai agent extensions", "interventions", "attribute groups", "agentic context"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 In this tutorial, you've built a Next.js AI agent that uses Snowplow Signals to deliver personalized, context-aware responses based on live user behavior.
@@ -41,7 +41,7 @@ Try exploring how you could use interventions within this application.
 
 You can combine Signals real-time stream attributes with automatic ingestion of batch attributes, using data sources within your warehouse, to give your agent a complete picture of the user. This could include attributes such as user profile data, CRM attributes, or product usage history.
 
-Try setting up a batch attribute group to ingest as part of your `web-agent-context` service.
+Try setting up a batch attribute group to ingest as part of your `web_agent_context` service.
 
 The Vercel AI SDK's system prompt is just a string: you can compose it from as many sources as you need.
 

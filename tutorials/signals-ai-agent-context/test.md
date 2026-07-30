@@ -4,7 +4,7 @@ position: 6
 sidebar_label: "Test the app"
 description: "Run your Next.js app, build up behavioral context by browsing, and see how the AI agent uses real-time Signals data."
 keywords: ["testing", "signals context", "agentic context", "ai agent demo", "real-time personalization"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 Your application is now ready to try out.
@@ -43,7 +43,7 @@ If the profile section is missing, check:
 * Did you create a service with the right name?
 * Have you been browsing for long enough for events to flow through the pipeline?
 
-To rerun the attribute group test query in Console, click **Edit** on your attribute group page > **Run Preview**.
+A brand new session shows no profile section at all, which is expected rather than broken. The service returns every attribute as `null` until events arrive, and `getProfileSection()` filters those out.
 
 If the activity section is missing, check:
 * Is your agentic context published?

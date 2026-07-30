@@ -40,7 +40,7 @@ function getSignalsClient(): Signals | null {
   return signalsInstance;
 }
 
-const SERVICE_NAME = "web-agent-context";
+const SERVICE_NAME = "web_agent_context";
 const AGENTIC_CONTEXT_NAME = "web_agent_activity";
 
 // Profile attributes: computed aggregates, served by the Signals service

@@ -83,7 +83,7 @@ The service returns attributes for a given session ID in this format:
 }
 ```
 
-That's a real response from a six-page session on the local app. Six page views produced five entries in `unique_pages_viewed`, because one product page was visited twice, which is the kind of pattern the aggregates flatten and the agentic context preserves.
+In this six-page session, six page views produce five entries in `unique_pages_viewed`, because one product page was visited twice. That's the kind of pattern the aggregates flatten and the agentic context preserves.
 
 ## Create an agentic context
 
@@ -177,6 +177,8 @@ sp_signals.publish([web_agent_activity])
 ```
 
 Run this as a one-off script, separately from the agent. Defining Signals resources is a setup task, not something your agent does at runtime.
+
+To change the agentic context after publishing it, use **Edit** and **Publish** on its details page in Console, under **Signals** > **Agentic contexts**.
 
   </TabItem>
 </Tabs>

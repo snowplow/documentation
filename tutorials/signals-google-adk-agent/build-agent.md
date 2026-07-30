@@ -150,7 +150,7 @@ The profile fetch returns raw attribute values from the service, which `_get_pro
 
 `unique_pages_viewed` holds full URLs, because the Basic Web template builds it from the `page_url` atomic property. Your agentic context selects `page_urlpath` instead, so the same six page views appear there as paths. Both describe the same browsing at different levels of detail.
 
-The activity fetch needs no formatting at all. With `format="narrative"`, `get_agentic_context()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from the same six-page browsing session:
+The activity fetch needs no formatting at all. With `format="narrative"`, `get_agentic_context()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. For the same six-page browsing session, that looks like:
 
 ```text
 You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.

@@ -2,8 +2,8 @@
 title: "Define the viewer attributes"
 position: 3
 sidebar_label: "Define viewer attributes"
-description: "Define two Signals stream attribute groups from Snowplow media events: session-level viewer state, watch time, and skipped ads, and video-level audience metrics on a custom attribute key."
-keywords: ["stream attribute group", "domain_sessionid", "custom attribute key", "media events", "signals python sdk", "viewer state"]
+description: "Define two Signals stream attribute groups from Snowplow media events, with the Python SDK or an AI assistant: session-level viewer state, watch time, and skipped ads, and video-level audience metrics on a custom attribute key."
+keywords: ["stream attribute group", "domain_sessionid", "custom attribute key", "media events", "signals python sdk", "snowplow mcp", "viewer state"]
 date: "2026-07-30"
 ---
 
@@ -12,7 +12,7 @@ With media events flowing, you can tell Signals what to compute from them. In th
 * `viewer_profile`, keyed on the built-in `domain_sessionid` [attribute key](/docs/signals/attributes/attribute-keys/), so that each viewing session gets its own profile
 * `video_audience`, keyed on a custom `video_id` attribute key, so that every session watching the same video updates one shared set of counters
 
-You'll also define a [service](/docs/signals/applications/services/) for each group, and publish everything in a single call.
+You'll also define a [service](/docs/signals/applications/services/) for each group, and publish everything in a single call. If you'd rather describe the definitions than write them, [an AI assistant can create the same configuration](#define-the-attributes-with-an-ai-assistant) from a single prompt.
 
 ## How viewer actions map to session attributes
 
@@ -264,6 +264,56 @@ Your new `video_id` key appears under **Attribute keys**, alongside the four bui
 Running the script a second time fails with `400: Cannot update published attribute group`. A published attribute group version is immutable: to change the definition, increment `version` and publish again.
 
 Deleting a group and re-creating it at the same name and version doesn't reset the values in the Profiles Store either, so counters resume where they left off. Increment `version` when you want to start counting from zero.
+:::
+
+## Define the attributes with an AI assistant
+
+The Python above is a description of what to compute, and an AI assistant with access to your Signals registry can work from that description instead. Two ways to get one:
+
+* Any MCP-capable assistant, such as Claude Code or Cursor, connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which exposes the Signals registry as tools alongside the rest of your Snowplow account
+* The [Snowplow Assistant](/docs/llms-support/console-agent/), if your organization has it enabled in [Snowplow Console](https://console.snowplowanalytics.com): it covers the same Signals capabilities with nothing to set up
+
+Paste this prompt into the assistant. It asks for the whole configuration: the custom attribute key, both attribute groups, and both services.
+
+```text
+Using the Snowplow tools available to you, set up Snowplow Signals for a live
+viewer profiles dashboard, computed from the standard Snowplow media events.
+Create everything as drafts and don't publish anything yet.
+
+1. An attribute key called video_id that reads the label property of the
+   media_player entity (vendor com.snowplowanalytics.snowplow, major
+   version 2). Our video page puts the video's ID in that label.
+
+2. A stream attribute group called viewer_profile, keyed on the built-in
+   domain_sessionid attribute key, with three attributes over the
+   com.snowplowanalytics.snowplow.media events at version 1-0-0:
+   - viewer_state (string): the last event_name across play_event,
+     pause_event, and end_event, so the most recent playback state wins
+   - seconds_watched (double): the last value of timePlayed from the media
+     session entity (com.snowplowanalytics.snowplow.media session, major
+     version 1), across ping_event, pause_event, and end_event. timePlayed
+     is already a running total, so read its most recent value, don't sum it
+   - ads_skipped (int32): a counter of ad_skip_event, default 0
+   All three cover the whole session, so none of them has a period.
+
+3. A stream attribute group called video_audience, keyed on video_id, with:
+   - active_viewers (int32): approximate distinct count of domain_sessionid
+     over ping_event, within a five-minute period, default 0
+   - viewers (int32): approximate distinct count of domain_sessionid over
+     play_event and ping_event, with no period, default 0
+   - total_ads_skipped (int32): a counter of ad_skip_event, default 0
+
+4. One service per group: viewer_profile_service for viewer_profile, and
+   video_audience_service for video_audience. A service can only reference
+   groups that share an attribute key, so these two can't be combined.
+```
+
+The prompt spells out the aggregations because they're the design decisions this section is about, not details to leave to an assistant: `timePlayed` is a running total that has to be read with `last` rather than summed, and the two audience counts differ only in their window. Everything else is the assistant's job: the exact shape of each property reference, and the order the resources have to be published in.
+
+What comes back is the same five resources as the Python script, with the same aggregations, properties, periods, and attribute key wiring. The one field an assistant can't fill in is `owner`: the MCP tools don't accept one, so groups and services created this way record no owner. Define them with the SDK if your team relies on that metadata.
+
+:::note[Review before you publish]
+Signals saves new definitions as drafts. Nothing reaches the streaming engine, and nothing is calculated, until you publish, which is your safety net for a configuration you didn't write yourself. Ask the assistant to show you the full definition of each group, or open **Signals** > **Attribute groups** in Console, and check the aggregations, properties, and periods against this page before you tell it to publish.
 :::
 
 ## Verify the attributes while a video plays

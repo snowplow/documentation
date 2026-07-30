@@ -30,4 +30,5 @@ Continue with these related resources:
 * [Set up Signals for real-time calculation](/tutorials/signals-quickstart/start) is the quick start for the wider Signals workflow
 * [Trigger real-time actions with interventions](/tutorials/signals-interventions/start) covers the push-based side of Signals
 * [Attribute keys](/docs/signals/attributes/attribute-keys/) documents the built-in keys and how to define your own
+* [The Snowplow MCP server](/docs/llms-support/snowplow-mcp/) lets an AI assistant create Signals definitions like these from a prompt
 * [Live viewer profiles with Kafka](/tutorials/kafka-live-viewer-profiles/introduction) is the self-managed alternative to this accelerator

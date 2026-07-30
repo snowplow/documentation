@@ -39,7 +39,7 @@ Everything between the Collector and the Profiles Store is managed by Snowplow. 
 You'll build them in this order:
 
 1. A React video page that tracks play, pause, seek, ping, and ad events with the Snowplow [media tracking plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/)
-2. Two Signals [attribute groups](/docs/signals/attributes/attribute-groups/): one keyed on the session, for each viewer's state, watch time, and skipped ads, and one keyed on a custom [attribute key](/docs/signals/attributes/attribute-keys/) for the video, for audience metrics across sessions
+2. Two Signals [attribute groups](/docs/signals/attributes/attribute-groups/): one keyed on the session, for each viewer's state, watch time, and skipped ads, and one keyed on a custom [attribute key](/docs/signals/attributes/attribute-keys/) for the video, for audience metrics across sessions. Define them with the [Signals Python SDK](/docs/signals/connection/), or from a single prompt with an AI assistant
 3. A dashboard page backed by a one-route Node.js server that reads both groups with the [Signals Node.js SDK](/docs/signals/connection/)
 
 Every file you need is listed in full in these pages, so there's nothing to clone and nothing to download. This accelerator should take around one hour to complete.
@@ -51,7 +51,7 @@ This accelerator assumes that you have:
 * A Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
 * [Signals enabled](/docs/signals/setup/) on your Snowplow account, since the viewer profiles depend on it
 * Node.js 20.6 or later, to run the demo app and its back-end
-* Python 3.9 or later, to define the Signals configuration with the [Signals Python SDK](/docs/signals/connection/)
+* Python 3.9 or later, to define the Signals configuration with the [Signals Python SDK](/docs/signals/connection/), unless you define it with an AI assistant instead
 * Basic familiarity with React and with [Snowplow events and entities](/docs/fundamentals/events/)
 
 :::note[A full pipeline is required]

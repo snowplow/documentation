@@ -8,6 +8,7 @@ keywords: ["referrer parser", "traffic source", "attribution", "referer", "utm_s
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 This enrichment uses the [Snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referrer URLs.
 
@@ -228,23 +229,17 @@ The hosted database includes `utm_sources` entries for the major chatbot provide
 
 ### Output entity
 
-On a match, the enrichment attaches a [`utm_referrer`](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/utm_referrer/jsonschema/1-0-0) entity to `derived_contexts`:
+On a match, the enrichment attaches a `utm_referrer` entity to `derived_contexts`.
 
-```json
-{
-  "schema": "iglu:com.snowplowanalytics.snowplow/utm_referrer/jsonschema/1-0-0",
-  "data": {
-    "source": "ChatGPT",
-    "medium": "chatbot"
-  }
-}
-```
+<SchemaProperties
+  overview={{ entity: true }}
+  example={{
+    source: "ChatGPT",
+    medium: "chatbot"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Referer identified from an injected utm_source query parameter, classified by the referer parser enrichment against its utm_sources database entries", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "utm_referrer", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "source": { "type": "string", "description": "The name of the referer source (e.g. ChatGPT), equivalent to refr_source", "maxLength": 128 }, "medium": { "type": "string", "description": "The medium of the referer (e.g. chatbot), equivalent to refr_medium", "maxLength": 64 }, "term": { "type": ["string", "null"], "description": "The search term extracted from the referer, equivalent to refr_term", "maxLength": 512 } }, "required": ["source", "medium"], "additionalProperties": false }} />
 
-| Field    | Description                                                                           |
-| -------- | ------------------------------------------------------------------------------------- |
-| `source` | The name of the matched source e.g., `ChatGPT`. Equivalent to `refr_source`.           |
-| `medium` | The medium of the matched source e.g., `chatbot`. Equivalent to `refr_medium`.         |
-| `term`   | The search term. Currently, always absent for `utm_source` matches. Equivalent to `refr_term`.    |
+Currently, the `term` field is always absent for `utm_source` matches, as there's no referrer URL to extract a search term from.
 
 ### How it relates to referrer URL parsing
 

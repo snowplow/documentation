@@ -162,9 +162,7 @@ Publish it to send the configuration to your Signals infrastructure:
 sp_signals.publish([web_agent_activity])
 ```
 
-:::warning[`publish()` only creates, it can't update]
-In `snowplow-signals` 0.4.6, calling `publish()` again for a name that already exists fails with a `409` error rather than updating it. The same applies to `unpublish()`. Use Console to change or unpublish an agentic context you've already published. This is a bug in the SDK, not the intended behavior.
-:::
+To change the agentic context after publishing it, use **Edit** and **Publish** on its details page in Console, under **Signals** > **Agentic contexts**.
 
   </TabItem>
 </Tabs>

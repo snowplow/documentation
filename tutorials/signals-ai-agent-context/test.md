@@ -43,7 +43,7 @@ If the profile section is missing, check:
 * Did you create a service with the right name?
 * Have you been browsing for long enough for events to flow through the pipeline?
 
-A brand new session shows no profile section at all, which is expected rather than broken. The service returns every attribute as `null` until events arrive, and `getProfileSection()` filters those out.
+A brand new session shows no profile section at all: the service returns every attribute as `null` until events arrive, and `getProfileSection()` filters those out.
 
 If the activity section is missing, check:
 * Is your agentic context published?

@@ -135,7 +135,7 @@ The profile fetch returns raw attribute values from the service, which `getProfi
 }
 ```
 
-Watch the null filter in `getProfileSection()`. A service always returns a key for every attribute it serves, so a session that hasn't produced any events yet comes back fully populated with nulls:
+Note the null filter in `getProfileSection()`. A service returns a key for every attribute it serves, valued `null` until the session has produced data:
 
 ```json
 {
@@ -146,9 +146,9 @@ Watch the null filter in `getProfileSection()`. A service always returns a key f
 }
 ```
 
-That object is neither missing nor empty, so a guard that tests only for those two cases lets `page_views_count: null` through to the model as though it were a fact about the user. Filtering the nulls out first means a session with no data yet contributes no profile section at all, and the model reads nothing about the user instead of reading something false.
+Filter those nulls out before formatting, so a session with no data yet contributes no profile section at all, rather than a list of nulls the model could read as facts about the user.
 
-The activity fetch needs no formatting at all. With `format: "narrative"`, `getAgenticContext()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from a five-page browsing session:
+The activity fetch needs no formatting at all. With `format: "narrative"`, `getAgenticContext()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. For a five-page browsing session, that looks like:
 
 ```text
 You are a helpful assistant for the Signal Shop web store. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.

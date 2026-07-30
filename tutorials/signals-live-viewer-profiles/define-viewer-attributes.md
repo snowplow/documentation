@@ -34,7 +34,7 @@ Two details of the [media schemas](/docs/events/ootb-data/media-events/) shape t
 `ads_skipped` is a plain counter: it increments every time Signals processes an `ad_skip_event` for the session. All three attributes use the `Lifetime` period, so they cover the whole session rather than a rolling time window.
 
 :::note[Why this group is defined in code]
-`viewer_state` and `seconds_watched` each aggregate across several media event types, and the Console attribute editor takes one event type per attribute, so this group can't be expressed there. The rest of the configuration follows the same route, which keeps the whole definition in one script you can re-run and version. You'll review the published result in Console at the end of this section.
+`viewer_state` and `seconds_watched` each aggregate across several media event types, and the Console attribute editor takes one event type per attribute, so this group can't be expressed there. The rest of the configuration follows the same route, which keeps the whole definition in one file you can version alongside your app. You'll review the published result in Console at the end of this section.
 :::
 
 ## Connect to Signals
@@ -262,6 +262,8 @@ Your new `video_id` key appears under **Attribute keys**, alongside the four bui
 
 :::note[Republishing]
 Running the script a second time fails with `400: Cannot update published attribute group`. A published attribute group version is immutable: to change the definition, increment `version` and publish again.
+
+Deleting a group and re-creating it at the same name and version doesn't reset the values in the Profiles Store either, so counters resume where they left off. Increment `version` when you want to start counting from zero.
 :::
 
 ## Verify the attributes while a video plays

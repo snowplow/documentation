@@ -27,7 +27,7 @@ print("last_plan:", attributes.get("last_plan"))
 
 The result is a plain dictionary keyed by attribute name. Read it with `.get()` rather than `attributes["..."]`, so an attribute Signals hasn't computed yet returns `None` instead of raising `KeyError` halfway through your output.
 
-The first time you run this, expect `0`, `None`, and `None`: the empty profile described in the previous section. Signals computes attributes only from events processed after your published definitions reached the streaming engine, so the events you tracked earlier don't appear. Once a minute or two has passed since publishing, re-run the **Track team activity** block from the [tracking section](/tutorials/signals-account-attributes/track-the-account-entity#track-team-activity) to send fresh events under the same `account_id`, then retrieve again.
+The first time you run this, expect `0`, `None`, and `None`: the empty profile described in the previous section. Signals computes attributes only from events processed after your published definitions reached the streaming engine, so the events you tracked earlier don't appear. Once your definitions have been applied, re-run the **Track team activity** block from the [tracking section](/tutorials/signals-account-attributes/track-the-account-entity#track-team-activity) to send fresh events under the same `account_id`, then retrieve again.
 
 :::note[Allow for propagation latency]
 Attributes are computed from a live stream, so there's a short delay between tracking an event and the updated attribute becoming available. If a value looks stale or comes back as `None` immediately after tracking, wait a moment and retrieve again, rather than assuming the value is wrong.
@@ -82,10 +82,7 @@ subscription = sp_signals.pull_interventions(targets)
 subscription.add_handler(lambda intervention: print("INTERVENTION:", intervention))
 subscription.start()
 
-# Block until an intervention arrives. This account crossed the threshold
-# before anything was subscribed to it, so there's nothing left to deliver and
-# queue.Empty is the expected outcome. The full script below triggers the
-# intervention for real, on a fresh account.
+# Block until an intervention arrives, or the timeout expires.
 try:
     print("Received:", subscription.get(timeout=30))
 except queue.Empty:
@@ -94,16 +91,14 @@ finally:
     subscription.stop()
 ```
 
-The handler runs for every intervention as it arrives, and `subscription.get()` additionally returns each one, blocking until an intervention is available or the timeout raises `queue.Empty`. In your app, the handler is where you'd act, for example by notifying the account's admin that the team is outgrowing its plan.
+`subscription.start()` returns immediately, because it hands the request to a background thread and leaves your own code free to carry on. The handler runs for every intervention as it arrives, and `subscription.get()` additionally returns each one, blocking until an intervention is available or the timeout raises `queue.Empty`. In your app, the handler is where you'd act, for example by notifying the account's admin that the team is outgrowing its plan.
 
-:::note[A successful `start()` proves nothing]
-`subscription.start()` returns immediately whatever happens, because it only builds the request and hands it to a background thread. If the request is rejected, for instance because the credentials are wrong or an identifier isn't a UUID, you get a traceback from a thread named `SignalsInterventions-` followed by a number, while your own code waits out the full timeout and then raises `queue.Empty`. When nothing arrives, search your output for that thread name before concluding that the intervention never fired.
-
-To prove the delivery path independently of your criteria, open the intervention in Console, find **Test this intervention**, enter an `account_id` value, and click **Send**. A subscription listening for that value receives the intervention within a few seconds.
+:::tip[Test the delivery path]
+To check the delivery path independently of your criteria, open the intervention in Console, find **Test this intervention**, enter an `account_id` value, and click **Send**. A subscription listening for that value receives the intervention.
 :::
 
 :::note[Interventions fire only once per target]
-An intervention is sent only the first time its criteria are met for a given target. Re-running with the same `account_id` won't fire it again. To test repeatedly, mint a fresh `account_id` (a new UUID) and track enough `task_completed` events to cross the threshold under that new account.
+An intervention is sent only the first time its criteria are met for a given target. This account crossed the threshold before you subscribed to it, so there's nothing left to deliver and the subscription above times out. To see a delivery, mint a fresh `account_id` (a new UUID) and track enough `task_completed` events to cross the threshold under that new account, which is what the full script below does.
 :::
 
 ## Put it all together
@@ -185,7 +180,7 @@ try:
             )
     tracker.flush()
 
-    # --- Poll until the attributes compute (stream propagation takes a few seconds) ---
+    # --- Poll until the attributes compute ---
     attributes = {}
     for _ in range(12):
         time.sleep(5)
@@ -244,7 +239,7 @@ The script mints a fresh account each run, so you can run it repeatedly. If it p
 If the values or the intervention don't turn up, work through these:
 
 * Attributes come back as the empty profile (`0`, `None`, `None`): confirm you're retrieving with the same `account_id` value your events carry, and that the group and service are published.
-* Attributes stay empty even though you tracked events after publishing: the streaming engine applies new definitions with a delay of a minute or two, and events processed before then aren't counted retroactively. Wait, send fresh events, and retrieve again.
+* Attributes stay empty even though you tracked events after publishing: the streaming engine applies new definitions with a short delay, and events processed before then aren't counted retroactively. Wait, send fresh events, and retrieve again.
 * `active_users` is `1` instead of `2`: all the events carried the same `domain_userid`. Check that each `Subject` sets its own `domain_user_id` and that each `track()` call passes the right `event_subject`.
-* The subscription thread fails with `400: only UUIDs allowed as attribute key values`: your `account_id` isn't a canonically formatted UUID. Attribute retrieval works with any string, but intervention subscriptions require UUIDs.
 * The intervention never arrives: it fires only the first time the threshold is crossed for a target. Use a fresh `account_id` and re-track enough events. Also confirm the intervention is published and its threshold matches how many events you sent.
+* No interventions arrive for an account at all: check that its `account_id` is a canonically formatted UUID. Attribute retrieval works with any string, but intervention subscriptions accept UUIDs only.

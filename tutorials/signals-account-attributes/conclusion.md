@@ -18,9 +18,9 @@ The pattern generalizes to any grouping your events carry. The attribute key doe
 
 ## Clean up
 
-Published definitions keep computing whether or not anything reads them, so tear yours down if this was an experiment. Unpublish before deleting, because deleting a published definition fails with `400 Cannot delete published intervention`, or the equivalent for the other types.
+Published definitions keep computing whether or not anything reads them, so tear yours down if this was an experiment. Signals only deletes definitions that aren't published, so unpublish each one first.
 
-Unpublish one definition at a time, in reverse dependency order:
+Unpublish one definition per call, in reverse dependency order: the intervention, then the service, then the attribute group, then the attribute key. A single `delete()` call is enough afterwards, because `delete()` works through the dependency order for you.
 
 ```python
 for definition in (
@@ -35,8 +35,6 @@ sp_signals.delete(
     [account_expansion_nudge, account_service, account_activity, account_id_key]
 )
 ```
-
-One call per definition matters here. Passing all four to `unpublish()` at once fails with `400 Attribute key 'account_id' is used by attribute group 'account_activity' version 1, can't unpublish`, because `unpublish()` sorts the list by type and handles attribute keys first. That order is right for publishing and backwards for taking things down. `delete()` handles the dependency order itself, so one call is enough there.
 
 Your two data structures aren't Signals resources and aren't affected. Leave them in place if you want to keep tracking against them, or hide them from the **Data structures** list in Console.
 

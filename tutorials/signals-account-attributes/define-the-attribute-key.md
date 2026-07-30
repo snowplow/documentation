@@ -36,9 +36,9 @@ Click **Confirm** to close the picker, then add an optional description. The **O
 Click **Create attribute key** to save it. There's no name field: the key's name is taken from the selected property, so it appears in the list as `account_id`.
 
 :::note[The data catalog refreshes periodically]
-The property picker lists events and entities from your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet.
+The property picker shows the events and entities in your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet.
 
-The catalog refreshes periodically rather than instantly, and the wait is long enough to derail your afternoon: on a trial pipeline the new `account` entity was still missing 25 minutes after the first events, and present when checked again around two hours later. Treat anything up to a couple of hours as normal. Rather than waiting, switch to the Python SDK tab, which doesn't depend on the catalog at all, and come back to Console later if you want to see the key there.
+The catalog refreshes periodically rather than instantly, so wait and reload the page. Rather than waiting, switch to the Python SDK tab, which doesn't depend on the catalog at all, and come back to Console later if you want to see the key there.
 :::
 
 </TabItem>

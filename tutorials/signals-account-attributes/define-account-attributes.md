@@ -48,8 +48,8 @@ sp_signals = Signals(
 
 :::tip[Common connection mistakes]
 * Pass the arguments by keyword. The client takes no positional arguments, and there is no `endpoint=` argument — use `api_url=`.
-* If `api_key`, `api_key_id`, or `org_id` is empty, the constructor raises `ValueError: When auth_mode is 'bdp' api_key, api_key_id, and org_id must be provided`.
-* A bad `api_url` isn't caught until the first API call, because the constructor makes no network requests. A URL without a scheme raises `httpx.UnsupportedProtocol`, and a URL whose host doesn't resolve, such as the `YOUR_ID` placeholder, raises `httpx.ConnectError`. Both surface at `publish()`, not at construction.
+* Provide all of `api_key`, `api_key_id`, and `org_id`. The constructor rejects empty values.
+* A bad `api_url` isn't caught until the first API call, because the constructor makes no network requests. Include the `https://` scheme, and replace the `YOUR_ID` placeholder with your own Signals host, or the first `publish()` call is where you'll find out.
 :::
 
 ## Define the attribute group
@@ -166,7 +166,7 @@ sp_signals.publish([account_id_key, account_activity, account_service])
 
 Open **Signals** in Console to confirm that your attribute key, attribute group, and service appear there.
 
-Publishing isn't instant: it can take a minute or two for the definitions to be applied to the [streaming engine](/docs/signals/concepts/#stream-source). Signals computes attributes only from events processed after that point, so the events you tracked earlier don't contribute to the values, and neither do events that arrive before the definitions are applied.
+Publishing isn't instant: it takes a short while for the definitions to be applied to the [streaming engine](/docs/signals/concepts/#stream-source). Signals computes attributes only from events processed after that point, so the events you tracked earlier don't contribute to the values, and neither do events that arrive before the definitions are applied.
 
 :::note[Counting events from before you published]
 If you want an attribute group to start life with history rather than at zero, [enable backfill](/docs/signals/attributes/attribute-groups/#backfill-attributes) by setting `backfill_since_tstamp` on the group. Signals then computes the initial values from your `atomic` events table for the period between that timestamp and the publish time. This needs a warehouse connection, and only Snowflake and BigQuery are supported, so it isn't an option on a bare trial pipeline. This tutorial starts from zero instead.
@@ -174,11 +174,10 @@ If you want an attribute group to start life with history rather than at zero, [
 
 ## Troubleshooting
 
-Publishing rejects invalid definitions with a message that usually names the cause:
+Publishing rejects invalid definitions. If `publish()` fails, check these:
 
-* `422: Attribute key 'account_id' does not exist`: the key wasn't part of the publish call. Include the `AttributeKey` object in the `publish()` list alongside the group, or create the key in Console first.
-* `422: ... aggregation requires a property to be set`: value-reading aggregations such as `approx_count_distinct` and `last` need a `property` (an `AtomicProperty`, `EventProperty`, or `EntityProperty`). Only `counter` works without one.
-* `400: Cannot update published attribute group`: a published group is immutable, so editing an attribute and republishing fails. Unpublish it first, as shown in the [cleanup section](/tutorials/signals-account-attributes/conclusion#clean-up), then publish your change.
-* `owner` validation error: `owner` must be a valid email address.
-* `KeyError: 'SIGNALS_API_KEY'`: the environment variables aren't set in the shell that started this Python session. Export them and restart the session, since a notebook kernel won't pick up variables exported after it launched.
+* Every attribute group must be published together with the attribute key it uses, so include the `AttributeKey` object in the `publish()` list alongside the group, or create the key in Console first.
+* Value-reading aggregations such as `approx_count_distinct` and `last` need a `property` (an `AtomicProperty`, `EventProperty`, or `EntityProperty`). Only `counter` works without one.
+* `owner` must be a valid email address.
+* If Python can't read the credential environment variables, they weren't set in the shell that started this session. Export them and restart the session, since a notebook kernel won't pick up variables exported after it launched.
 * Attributes stay empty later: check that the `EntityProperty` vendor, name, and version match the schema exactly, and that your events actually attach the `account` entity.

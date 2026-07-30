@@ -17,7 +17,7 @@ Start by installing both Python SDKs. You'll use the tracker in this section, an
 pip install snowplow-tracker snowplow-signals
 ```
 
-Run this on Python 3.11 or later. Every published version of `snowplow-signals` declares `>=3.11,<4.0`, so on Python 3.9 or 3.10 the install fails with a "could not find a version that satisfies the requirement" error that doesn't mention your Python version at all.
+Run this on Python 3.11 or later. Every published version of `snowplow-signals` declares `>=3.11,<4.0`, so the install fails on Python 3.9 or 3.10.
 
 This tutorial is written against `snowplow-tracker` 1.1.0 and `snowplow-signals` 0.4.6. If your installed versions differ, check the [Python tracker](/docs/sources/python-tracker/) and [Signals](/docs/signals/) documentation for any signature changes.
 
@@ -62,7 +62,7 @@ Once in production, these schemas resolve to the following Iglu URIs, which you'
 
 Choose the `account_id` format deliberately, because it becomes a Signals attribute key identifier. You'll retrieve attributes by it, and target interventions at it.
 
-The intervention subscription endpoint doesn't perform authentication: knowing an attribute key ID grants access to its interventions. That's why Signals requires key ID values to be [non-enumerable](/docs/signals/applications/subscribe/), so they can't be guessed. In practice, Signals only accepts canonically formatted UUIDs when you subscribe to interventions, and rejects other formats with a `400` error. Attribute computation and retrieval accept any string value, but because this tutorial subscribes to account-level interventions, use a UUID for every `account_id`.
+The intervention subscription endpoint doesn't perform authentication: knowing an attribute key ID grants access to its interventions. That's why Signals requires key ID values to be [non-enumerable](/docs/signals/applications/subscribe/), so they can't be guessed. In practice, Signals only accepts canonically formatted UUIDs when you subscribe to interventions. Attribute computation and retrieval accept any string value, but because this tutorial subscribes to account-level interventions, use a UUID for every `account_id`.
 
 In a real application, don't expose your internal account identifiers. Map each account to a stable UUID (for example, a deterministic UUID derived from the internal ID) and use that mapped value in the entity.
 
@@ -140,9 +140,9 @@ tracker.flush()
 
 By default the tracker batches events before sending them, so the `tracker.flush()` call forces any buffered events to be sent immediately.
 
-When a later section asks you to send fresh events, re-run this block only. Running `Snowplow.create_tracker()` a second time with the same namespace raises `TypeError: Tracker with this namespace already exists`, and re-running the whole tracker section would also mint a new `account_id` behind your back.
+When a later section asks you to send fresh events, re-run this block only. Re-running the whole tracker section would mint a new `account_id`, and creating a second tracker with the `project-app` namespace in the same session isn't allowed.
 
-Send these events before you move on, rather than waiting until the Signals definitions exist. The Console property picker you'll use in the next section lists entities from your pipeline's data catalog, which is built from processed events, so tracking first is what makes the `account` entity selectable there. That catalog is not quick: on a trial pipeline the new entity appeared somewhere between 25 minutes and two hours after the first events.
+Send these events before you move on, rather than waiting until the Signals definitions exist. The Console property picker you'll use in the next section lists entities from your pipeline's data catalog, which is built from processed events, so tracking first is what makes the `account` entity selectable there. The catalog refreshes periodically rather than instantly, so the sooner your events flow, the sooner the entity appears.
 
 ## Confirm your events arrived
 
@@ -154,12 +154,12 @@ Do this before moving on. Everything from here depends on these events reaching 
 * A request that can't connect, for example because the host doesn't resolve, does at least produce a `WARNING`
 * Events that reach the Collector and then fail validation look like complete success from the tracker's side, because the Collector accepted them
 
-To watch both failure mechanisms fire, point `COLLECTOR_URL` at a hostname that doesn't exist and re-run this section. You get a warning naming the resolution failure, then your own `Collector rejected 10 events (0 sent)` line, because the callback runs once per failed request rather than once per `flush()`. Ten rather than twelve, because the emitter had already flushed a batch of ten automatically and stops attempting sends once it's backing off.
+To check that your callback works, point `COLLECTOR_URL` at a hostname that doesn't exist and re-run this section. You get a warning naming the resolution failure, followed by your own callback output. The callback runs once per failed request rather than once per `flush()`, so it can print more than once.
 
 Then check the pipeline itself, in Console:
 
-1. Go to **Monitoring** > **Collection volumes**. With **Group by App ID** selected, look for `project-app-backend` with a `py-1.1.0` tracker. The **EVENT COUNT** and **LAST SEEN** columns tell you whether your events arrived. The page auto-refreshes every five minutes, so use the **Refresh** button rather than waiting.
-2. Go to **Monitoring** > **Data quality**. The overview compares **Valid events** with **Failed events** for the period. Twelve valid events and no new failed events means you're ready for the next section. A jump in failed events means the events arrived but didn't validate, and the **Failed events by type** breakdown names the schema at fault. Failed events can take up to 20 minutes to appear here.
+1. Go to **Monitoring** > **Collection volumes**. With **Group by App ID** selected, look for `project-app-backend` with a `py-1.1.0` tracker. The **EVENT COUNT** and **LAST SEEN** columns tell you whether your events arrived. Use the **Refresh** button rather than waiting for the page to update on its own.
+2. Go to **Monitoring** > **Data quality**. The overview compares **Valid events** with **Failed events** for the period. Twelve valid events and no new failed events means you're ready for the next section. A jump in failed events means the events arrived but didn't validate, and the **Failed events by type** breakdown names the schema at fault. Failed events aren't reported instantly, so check again if the counts look surprising.
 
 If your events are missing from **Collection volumes** entirely, the problem is between your code and the Collector: check `COLLECTOR_URL` and look for your `on_failure` output. If they're there but counted as failed events, the problem is the schemas: check that both are in production, and that the entity payload matches the schema.
 
@@ -167,9 +167,9 @@ If your events are missing from **Collection volumes** entirely, the problem is 
 
 These are the failures you're most likely to hit in this section:
 
-* `pip` reports it "could not find a version that satisfies the requirement snowplow-signals": you're on Python 3.10 or earlier. Create a virtual environment with Python 3.11 or later and install again.
-* `TypeError: Tracker with this namespace already exists`: you ran `Snowplow.create_tracker()` twice in the same session. Reuse the existing `tracker` variable, or call `Snowplow.remove_tracker_by_namespace("project-app")` first.
-* `SelfDescribing.__init__() got an unexpected keyword argument 'event'`: `SelfDescribing` takes the `SelfDescribingJson` as its first positional argument. The keyword form is `event_json=`, not `event=`.
+* `pip` can't find a version of `snowplow-signals` to install: you're on Python 3.10 or earlier. Create a virtual environment with Python 3.11 or later and install again.
+* Creating the tracker fails: you can only call `Snowplow.create_tracker()` once per namespace in a session. Reuse the existing `tracker` variable, or call `Snowplow.remove_tracker_by_namespace("project-app")` first.
+* Constructing the event fails: `SelfDescribing` takes the `SelfDescribingJson` as its first positional argument. The keyword form is `event_json=`, not `event=`.
 * Events arrive but the entity is missing: pass the entity in the `context` list argument, not inside the event's data payload. The entity must be a `SelfDescribingJson` referencing the `account` schema.
 * Events fail validation: check that both schemas are in production, not still drafts or development-only, and that the entity payload matches the schema exactly, including property names. Failed events appear in Console under **Monitoring** > **Data quality**.
 * All events attributed to one user: pass `event_subject=member` on each `track()` call. Without it, events carry no per-user identifiers.

@@ -24,7 +24,7 @@ By the end you'll have working code that:
 
 You don't need to complete the Python tracking and Signals tutorial first, although this tutorial follows the same patterns. All of the code here stands alone.
 
-Budget around 45 minutes of hands-on work, plus some unavoidable waiting. Publishing Signals definitions takes a minute or two to reach the streaming engine, and if you create the attribute key in Console you may wait considerably longer for your new entity to appear in the data catalog: in one trial pipeline that took somewhere between 25 minutes and two hours after the first events arrived. The Python SDK path doesn't depend on the catalog, so choose it if you'd rather not wait.
+This tutorial takes about 45 minutes of hands-on work to complete, plus some waiting. Published Signals definitions take a short while to reach the streaming engine, and if you create the attribute key in Console you'll also wait for your new entity to appear in the data catalog. The Python SDK path doesn't depend on the catalog, so choose it if you'd rather not wait.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ This tutorial assumes that you have:
 
 * A Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
 * [Signals enabled](/docs/signals/setup/) on your Snowplow account, since the account-level attributes and interventions depend on it
-* Python 3.11 or later, because `snowplow-signals` requires it: the package declares `>=3.11,<4.0`, so `pip install` fails on Python 3.9 or 3.10 with a message about finding no matching distribution
+* Python 3.11 or later, because `snowplow-signals` requires it: the package declares `>=3.11,<4.0`, so `pip install` fails on Python 3.9 or 3.10
 * Basic familiarity with Python and with [Snowplow events, entities, and schemas](/docs/fundamentals/events/)
 
 You also need Snowplow Console access that lets you do three things: create [data structures](/docs/event-studio/data-structures/), migrate them to production, and create an API key. Only Admin users can migrate a data structure to production, so if you're not an Admin, line up someone who is before you start. You don't need any API keys yet, because you'll generate the Signals credentials as one of the steps.

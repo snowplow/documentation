@@ -216,7 +216,7 @@ You can use custom referrer mappings to immediately test new categorizations in 
 This feature is available since version 6.13.0 of Enrich.
 :::
 
-Not every traffic source sets a `Referer` header. Many — AI chatbots in particular — instead append a `utm_source` query parameter to the links they send, for example:
+The `Referer` header is not set when users share or copy and paste the link, rather than click it directly. To circumvent this limitation and make attribution more reliable, some sites also append a `utm_source` query parameter. For example:
 
 ```
 https://www.example.com/product?utm_source=chatgpt.com

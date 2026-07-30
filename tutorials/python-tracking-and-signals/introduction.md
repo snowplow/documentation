@@ -30,7 +30,7 @@ This tutorial should take around 45 minutes to complete.
 This tutorial assumes that you have:
 
 * a Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
-* [Signals enabled](/docs/signals/get-started/) on your Snowplow account, since the personalization features depend on it
+* [Signals enabled](/docs/signals/setup/) on your Snowplow account, since the personalization features depend on it
 * Python 3.9 or later, to run the SDKs
 * basic familiarity with Python and with [Snowplow events, entities, and schemas](/docs/fundamentals/events/)
 

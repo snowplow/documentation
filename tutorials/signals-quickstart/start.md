@@ -25,11 +25,11 @@ This tutorial assumes that you have:
 * Signals enabled on your Snowplow account
 
 :::note[Snowplow account required]
-Signals calculates attributes from events flowing through your Snowplow pipeline, so you need a Snowplow account to complete this tutorial. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+Signals calculates attributes from events flowing through your Snowplow pipeline. If you don't have an account, you can sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
 :::
 
 ## Enable Signals
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-You'll need to [enable Signals](/docs/signals/setup/) if you haven't already.
+If Signals isn't enabled for your organization yet, follow [Set up Signals](/docs/signals/setup/) first.

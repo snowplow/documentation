@@ -3,7 +3,7 @@ title: "Define the attribute key"
 position: 3
 sidebar_label: "Define the attribute key"
 description: "Create a custom Signals attribute key from the account entity's account_id property, in Snowplow Console or with the Signals Python SDK."
-keywords: ["custom attribute key", "entity property", "signals console", "AttributeKey", "EntityProperty"]
+keywords: ["custom attribute key", "entity property", "signals console", "signals python sdk", "attribute key from schema property"]
 date: "2026-07-30"
 ---
 
@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-With account-carrying events flowing, you can now tell Signals to group them by account. An [attribute key](/docs/signals/attributes/attribute-keys/) is the identifier that attributes are calculated against. Signals ships with four built-in keys, all scoped to a user, device, or session, and lets you define custom keys from any property in your events.
+With account-carrying events flowing, you can tell Signals to group them by account. An [attribute key](/docs/signals/attributes/attribute-keys/) is the identifier that attributes are calculated against. Signals ships with four built-in keys, all scoped to a user, device, or session, and lets you define custom keys from any property in your events.
 
 Here you'll create a custom attribute key named `account_id`, based on the `account_id` property of the `account` entity. Any attribute group that uses this key aggregates events per account.
 
@@ -35,7 +35,7 @@ Click **Confirm** to close the picker, then add an optional description. The **O
 
 Click **Create attribute key** to save it. There's no name field: the key's name is taken from the selected property, so it appears in the list as `account_id`.
 
-:::note[No entities listed?]
+:::note[The data catalog refreshes periodically]
 The property picker lists events and entities from your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet.
 
 The catalog refreshes periodically rather than instantly, and the wait is long enough to derail your afternoon: on a trial pipeline the new `account` entity was still missing 25 minutes after the first events, and present when checked again around two hours later. Treat anything up to a couple of hours as normal. Rather than waiting, switch to the Python SDK tab, which doesn't depend on the catalog at all, and come back to Console later if you want to see the key there.
@@ -68,12 +68,8 @@ This only creates a local object. The key is registered with Signals when you pu
 </TabItem>
 </Tabs>
 
-The property reference is what makes this key account-scoped: for every event, Signals reads `account_id` from the attached `account` entity and uses that value as the profile identifier.
+The property reference is what makes this key account-scoped: for every event, Signals reads `account_id` from the attached `account` entity and uses that value as the profile identifier. That's specific to stream attribute groups. For [warehouse attribute groups](/docs/signals/attributes/warehouse-config/), the attributes are pre-calculated in a warehouse table, so the key names the table column holding the key values with `external_column` in place of `property`.
 
 :::note[When built-in keys are enough]
 If you want attributes per user, session, or device, skip custom keys and use the built-in `user_id`, `domain_userid`, `domain_sessionid`, or `network_userid` keys directly. See [attribute keys](/docs/signals/attributes/attribute-keys/) for the full list.
-:::
-
-:::note[Warehouse attribute groups use columns instead]
-For [warehouse attribute groups](/docs/signals/attributes/warehouse-config/), attributes are pre-calculated in a warehouse table, so the key is defined by the table column that holds the key values, using `external_column` instead of `property`. See [attribute keys](/docs/signals/attributes/attribute-keys/) for details.
 :::

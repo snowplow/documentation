@@ -3,11 +3,11 @@ title: "Retrieve attributes and intervene on account activity"
 position: 5
 sidebar_label: "Retrieve and intervene"
 description: "Retrieve live account-level attributes by account_id, define an intervention targeting the custom attribute key, and run the full multi-user loop end to end."
-keywords: ["get_service_attributes", "rule intervention", "pull_interventions", "account-level intervention", "custom attribute key"]
+keywords: ["retrieve signals attributes", "rule intervention", "subscribe to interventions", "account-level intervention", "custom attribute key"]
 date: "2026-07-30"
 ---
 
-With definitions published, your application can now look up any account's live profile and react when the whole team's activity crosses a threshold. Everything keys on `account_id`, so it works the same no matter which user triggered the events.
+With definitions published, your application can look up any account's live profile and react when the whole team's activity crosses a threshold. Everything keys on `account_id`, so it works the same no matter which user triggered the events.
 
 ## Retrieve attributes by account
 
@@ -96,13 +96,13 @@ finally:
 
 The handler runs for every intervention as it arrives, and `subscription.get()` additionally returns each one, blocking until an intervention is available or the timeout raises `queue.Empty`. In your app, the handler is where you'd act, for example by notifying the account's admin that the team is outgrowing its plan.
 
-:::warning[A successful `start()` proves nothing]
+:::note[A successful `start()` proves nothing]
 `subscription.start()` returns immediately whatever happens, because it only builds the request and hands it to a background thread. If the request is rejected, for instance because the credentials are wrong or an identifier isn't a UUID, you get a traceback from a thread named `SignalsInterventions-` followed by a number, while your own code waits out the full timeout and then raises `queue.Empty`. When nothing arrives, search your output for that thread name before concluding that the intervention never fired.
 
 To prove the delivery path independently of your criteria, open the intervention in Console, find **Test this intervention**, enter an `account_id` value, and click **Send**. A subscription listening for that value receives the intervention within a few seconds.
 :::
 
-:::warning[Interventions fire only once per target]
+:::note[Interventions fire only once per target]
 An intervention is sent only the first time its criteria are met for a given target. Re-running with the same `account_id` won't fire it again. To test repeatedly, mint a fresh `account_id` (a new UUID) and track enough `task_completed` events to cross the threshold under that new account.
 :::
 
@@ -235,11 +235,13 @@ Five things in there are worth reading closely:
 * `active_users: 2`, even though no single event knows about more than one user. That's the whole point of the custom key: `approx_count_distinct` counted two `domain_userid` values across events keyed on one `account_id`.
 * The intervention appears twice, first from the handler and then from `subscription.get()`. It's the same delivery reaching two consumers, not two firings.
 * The handler line lands before the attribute prints because the intervention arrived while the script was still polling. That ordering varies between runs.
-* `attributes={}` is empty because this intervention carries no attribute payload. Set `payload_attribute_groups` on the `RuleIntervention` to have the group's latest values delivered with it. See [interventions](/docs/signals/interventions/) for the details.
+* `attributes={}` is empty because this intervention carries no attribute payload. Set `payload_attribute_groups` on the `RuleIntervention` to have the group's most recent values delivered with it. See [interventions](/docs/signals/interventions/) for the details.
 
 The script mints a fresh account each run, so you can run it repeatedly. If it prints the empty profile (`0`, `None`, `None`) after all twelve polls, the streaming engine hadn't applied your definitions yet when the events flowed through. Wait a moment and run it again.
 
 ## Troubleshooting
+
+If the values or the intervention don't turn up, work through these:
 
 * Attributes come back as the empty profile (`0`, `None`, `None`): confirm you're retrieving with the same `account_id` value your events carry, and that the group and service are published.
 * Attributes stay empty even though you tracked events after publishing: the streaming engine applies new definitions with a delay of a minute or two, and events processed before then aren't counted retroactively. Wait, send fresh events, and retrieve again.

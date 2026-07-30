@@ -3,7 +3,7 @@ title: "Track the account entity"
 position: 2
 sidebar_label: "Track the account entity"
 description: "Create an account entity schema, attach it to task_completed events, and track activity from multiple users of the same B2B account with the Snowplow Python tracker."
-keywords: ["snowplow python tracker", "entity", "account entity", "multi-tenant tracking", "subject"]
+keywords: ["snowplow python tracker", "entity schema", "account entity", "multi-tenant tracking", "server-side tracking"]
 date: "2026-07-30"
 ---
 
@@ -11,9 +11,7 @@ In this section you'll make your project-management app's tracking multi-tenant.
 
 The key idea is identity: every event carries the account's `account_id` in the entity. Signals later uses that property as the attribute key, so all events with the same `account_id` roll up into one account profile, no matter which user sent them.
 
-## Install the SDKs
-
-Install both Python SDKs. You'll use the tracker in this section, and the Signals SDK in the next ones.
+Start by installing both Python SDKs. You'll use the tracker in this section, and the Signals SDK in the next ones.
 
 ```bash
 pip install snowplow-tracker snowplow-signals
@@ -29,12 +27,12 @@ Your app emits a custom `task_completed` [self-describing event](/docs/fundament
 
 Create two [data structures](/docs/event-studio/data-structures/) in Console (or with the [Snowplow CLI](/docs/api-reference/snowplow-cli/)). Use the vendor `com.example` to match the rest of this tutorial. If you completed the [Python tracking and Signals tutorial](/tutorials/python-tracking-and-signals/set-up-tracking), you already have the `task_completed` event schema.
 
-A `task_completed` event schema with these properties:
+The `task_completed` event schema needs these properties:
 
 * `task_id` (string)
 * `priority` (string: `low`, `medium`, or `high`)
 
-An `account` entity schema with these properties:
+The `account` entity schema needs these properties:
 
 * `account_id` (string, carrying a UUID)
 * `plan` (string)
@@ -112,7 +110,7 @@ In production, you wouldn't mint these identifiers with `uuid.uuid4()` on every 
 
 ## Track team activity
 
-Define the `account` entity once, then attach it to every event as context. Pass each event's `Subject` with the `event_subject` argument, so one tracker can send events on behalf of different users.
+Define the `account` entity once, then attach it to every event. Pass each event's `Subject` with the `event_subject` argument, so one tracker can send events on behalf of different users.
 
 ```python
 from snowplow_tracker import SelfDescribing, SelfDescribingJson
@@ -144,19 +142,21 @@ By default the tracker batches events before sending them, so the `tracker.flush
 
 When a later section asks you to send fresh events, re-run this block only. Running `Snowplow.create_tracker()` a second time with the same namespace raises `TypeError: Tracker with this namespace already exists`, and re-running the whole tracker section would also mint a new `account_id` behind your back.
 
-Send these events now, rather than waiting until the Signals definitions exist. The Console property picker you'll use in the next section lists entities from your pipeline's data catalog, which is built from processed events, so tracking first is what makes the `account` entity selectable there. That catalog is not quick: on a trial pipeline the new entity appeared somewhere between 25 minutes and two hours after the first events.
+Send these events before you move on, rather than waiting until the Signals definitions exist. The Console property picker you'll use in the next section lists entities from your pipeline's data catalog, which is built from processed events, so tracking first is what makes the `account` entity selectable there. That catalog is not quick: on a trial pipeline the new entity appeared somewhere between 25 minutes and two hours after the first events.
 
 ## Confirm your events arrived
 
 Do this before moving on. Everything from here depends on these events reaching your pipeline and validating, and the tracker is close to useless as a witness:
 
-* `tracker.flush()` never raises, whatever happens.
-* The emitter logs `Sending POST request to <your collector>...` and `Finished synchronous flush` at INFO level, which proves only that a request was attempted.
-* If the Collector answers with a non-2xx status, nothing at all is logged. Your `on_failure` callback is the only thing that makes it visible, and it runs once per failed request rather than once per `flush()`.
-* If the request can't connect at all, for example because the host doesn't resolve, the emitter logs a `WARNING`. Point `COLLECTOR_URL` at a hostname that doesn't exist and re-run this section to watch both mechanisms fire: a warning naming the resolution failure, then your own `Collector rejected 10 events (0 sent)` line. Ten rather than twelve, because the emitter had already flushed a batch of ten automatically and stops attempting sends once it's backing off.
-* Events that reach the Collector and then fail validation look like complete success from the tracker's side, because the Collector accepted them.
+* `tracker.flush()` never raises, whatever happens
+* The emitter logs `Sending POST request to <your collector>...` and `Finished synchronous flush` at INFO level, which proves only that a request was attempted
+* A non-2xx answer from the Collector is logged nowhere at all, so your `on_failure` callback is the only thing that makes it visible
+* A request that can't connect, for example because the host doesn't resolve, does at least produce a `WARNING`
+* Events that reach the Collector and then fail validation look like complete success from the tracker's side, because the Collector accepted them
 
-So check the pipeline itself, in Console:
+To watch both failure mechanisms fire, point `COLLECTOR_URL` at a hostname that doesn't exist and re-run this section. You get a warning naming the resolution failure, then your own `Collector rejected 10 events (0 sent)` line, because the callback runs once per failed request rather than once per `flush()`. Ten rather than twelve, because the emitter had already flushed a batch of ten automatically and stops attempting sends once it's backing off.
+
+Then check the pipeline itself, in Console:
 
 1. Go to **Monitoring** > **Collection volumes**. With **Group by App ID** selected, look for `project-app-backend` with a `py-1.1.0` tracker. The **EVENT COUNT** and **LAST SEEN** columns tell you whether your events arrived. The page auto-refreshes every five minutes, so use the **Refresh** button rather than waiting.
 2. Go to **Monitoring** > **Data quality**. The overview compares **Valid events** with **Failed events** for the period. Twelve valid events and no new failed events means you're ready for the next section. A jump in failed events means the events arrived but didn't validate, and the **Failed events by type** breakdown names the schema at fault. Failed events can take up to 20 minutes to appear here.
@@ -164,6 +164,8 @@ So check the pipeline itself, in Console:
 If your events are missing from **Collection volumes** entirely, the problem is between your code and the Collector: check `COLLECTOR_URL` and look for your `on_failure` output. If they're there but counted as failed events, the problem is the schemas: check that both are in production, and that the entity payload matches the schema.
 
 ## Troubleshooting
+
+These are the failures you're most likely to hit in this section:
 
 * `pip` reports it "could not find a version that satisfies the requirement snowplow-signals": you're on Python 3.10 or earlier. Create a virtual environment with Python 3.11 or later and install again.
 * `TypeError: Tracker with this namespace already exists`: you ran `Snowplow.create_tracker()` twice in the same session. Reuse the existing `tracker` variable, or call `Snowplow.remove_tracker_by_namespace("project-app")` first.

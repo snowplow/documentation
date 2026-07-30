@@ -7,7 +7,7 @@ keywords: ["snowplow signals", "custom attribute key", "account-level attributes
 date: "2026-07-30"
 ---
 
-In this tutorial you'll compute real-time attributes for a B2B **account**, rather than for an individual user, using a custom Signals [attribute key](/docs/signals/attributes/attribute-keys/).
+In this tutorial you'll compute real-time attributes for a B2B account, rather than for an individual user, using a custom Signals [attribute key](/docs/signals/attributes/attribute-keys/).
 
 Signals computes attributes against an attribute key: the identifier that event data is grouped by. The built-in keys (`user_id`, `domain_userid`, `domain_sessionid`, and `network_userid`) all identify a single user, device, or session. That's the right granularity for questions like "how many tasks has this user completed", but it can't answer "how active is this *account*", because an account's activity is spread across many users.
 
@@ -17,10 +17,10 @@ To make this concrete, you'll extend the imaginary SaaS project-management app f
 
 By the end you'll have working code that:
 
-* tracks `task_completed` events from multiple users, each carrying an `account` entity
-* defines a custom attribute key from the entity's `account_id` property, in Console or with the Signals Python SDK
-* computes account-level attributes, including a distinct count of active users
-* retrieves an account's live attributes and reacts to an account-level intervention
+* Tracks `task_completed` events from multiple users, each carrying an `account` entity
+* Defines a custom attribute key from the entity's `account_id` property, in Console or with the Signals Python SDK
+* Computes account-level attributes, including a distinct count of active users
+* Retrieves an account's live attributes and reacts to an account-level intervention
 
 You don't need to complete the Python tracking and Signals tutorial first, although this tutorial follows the same patterns. All of the code here stands alone.
 
@@ -30,10 +30,10 @@ Budget around 45 minutes of hands-on work, plus some unavoidable waiting. Publis
 
 This tutorial assumes that you have:
 
-* a Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
+* A Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
 * [Signals enabled](/docs/signals/setup/) on your Snowplow account, since the account-level attributes and interventions depend on it
 * Python 3.11 or later, because `snowplow-signals` requires it: the package declares `>=3.11,<4.0`, so `pip install` fails on Python 3.9 or 3.10 with a message about finding no matching distribution
-* basic familiarity with Python and with [Snowplow events, entities, and schemas](/docs/fundamentals/events/)
+* Basic familiarity with Python and with [Snowplow events, entities, and schemas](/docs/fundamentals/events/)
 
 You also need Snowplow Console access that lets you do three things: create [data structures](/docs/event-studio/data-structures/), migrate them to production, and create an API key. Only Admin users can migrate a data structure to production, so if you're not an Admin, line up someone who is before you start. You don't need any API keys yet, because you'll generate the Signals credentials as one of the steps.
 

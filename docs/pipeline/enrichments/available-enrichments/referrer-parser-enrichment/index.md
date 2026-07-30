@@ -246,7 +246,7 @@ Currently, the `term` field is always absent for `utm_source` matches, as there'
 The `utm_source` classification is deliberately kept separate from the `Referer` header parsing described above:
 
 * It **doesn't populate** `refr_medium`, `refr_source`, or `refr_term`. Those fields continue to reflect the referrer URL only, so existing data models and queries are unaffected.
-* It's **additive**. If an event has both a recognized referrer URL and a recognized `utm_source`, you get the `refr_*` fields *and* the `utm_referrer` entity.
+* It's **additive**. If an event has both a recognized referrer URL and a recognized `utm_source`, you get the `refr_*` fields *and* the `utm_referrer` entity. The two can disagree: if a user shares a ChatGPT link over Instagram messages and the recipient clicks it, `refr_source` is `Instagram` while the `utm_referrer` entity is `ChatGPT`. Rely on the `utm_referrer` entity for first-touch attribution.
 * It's **independent of the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)**, which copies `utm_source` into `mkt_source` verbatim. The referrer parser instead resolves the value to a known source and medium. Both can run on the same event.
 
 Matching is an exact, case-sensitive comparison of the full `utm_source` value against the `utm_sources` entries, and only the page URL's query string is inspected. Values from your own `referrers` configuration take precedence over the database.

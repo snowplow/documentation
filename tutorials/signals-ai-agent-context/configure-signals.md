@@ -4,7 +4,7 @@ position: 4
 sidebar_label: "Configure Signals"
 description: "Create an attribute group, a service, and an agentic context to serve real-time profile attributes and session activity to your AI agent."
 keywords: ["snowplow signals", "attribute group", "signals service", "agentic context", "real-time attributes", "profiles store"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 ```mdx-code-block
@@ -83,15 +83,33 @@ Your app also tracks page pings and link clicks. Leave the page pings out: the b
 <Tabs groupId="signals-impl" queryString>
   <TabItem value="console" label="Console" default>
 
-1. Navigate to **Signals** > **Agentic contexts**
-2. Click to create a new agentic context, and configure the basics:
-   - **Name**: `web_agent_activity`
-   - **Description**: `Recent session activity for the web store support agent`
-   - **Prompt instructions**: `You are a helpful assistant for this web store. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.`
-   - **Owner**: your email address
-3. Select the events to capture: choose the `page_view` event, keeping the `event_name`, `page_urlpath`, and `page_title` atomic properties
-4. Set the limits: retain a maximum of 50 events, with a maximum age of 1800 seconds (30 minutes)
-5. Click **Publish** to send the configuration to your Signals infrastructure
+Go to **Signals** > **Agentic contexts** in Console and create a new agentic context. The **Create context** form is a single page you scroll through, so work down it section by section.
+
+Start with **Details** and **Prompt**:
+
+| Field         | Value                                                     |
+| ------------- | --------------------------------------------------------- |
+| Name          | `web_agent_activity`                                      |
+| Primary owner | Your email address, which Console fills in for you         |
+| Description   | `Recent session activity for the web store support agent`  |
+| Prompt        | The prompt text below                                     |
+
+Use this as the prompt:
+
+```text
+You are a helpful assistant for this web store. Use this recent activity to
+understand what the user is exploring right now, and tailor your answers to it.
+```
+
+{/* TODO(pending-browser): screenshot of the Create context form, Details and Prompt sections */}
+
+Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes. The details page shows the same setting as **Max Age (seconds)**, where 30 minutes reads as `1800`.
+
+Under **Events and Properties**, click **Add event** and choose `page_view` at version `1-0-0`. Then use **Add property** to attach `event_name`, `page_urlpath`, and `page_title` to it.
+
+{/* TODO(pending-browser): screenshot of the Lookback Window and Events and Properties sections */}
+
+Save the form. Console creates the agentic context as a draft, marked **Not Published**, so click **Publish** on its details page to send the configuration to your Signals infrastructure. To change it later, use **Edit** on the same page, which starts a new draft and leaves the published version live until you publish again.
 
   </TabItem>
   <TabItem value="sdk" label="Python SDK">
@@ -141,6 +159,10 @@ Publish it to send the configuration to your Signals infrastructure:
 ```python
 sp_signals.publish([web_agent_activity])
 ```
+
+:::warning[`publish()` only creates, it can't update]
+In `snowplow-signals` 0.4.6, calling `publish()` again for a name that already exists fails with a `409` error rather than updating it. The same applies to `unpublish()`. Use Console to change or unpublish an agentic context you've already published. This is a bug in the SDK, not the intended behavior.
+:::
 
   </TabItem>
 </Tabs>

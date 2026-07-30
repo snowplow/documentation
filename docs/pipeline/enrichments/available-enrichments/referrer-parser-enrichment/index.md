@@ -223,7 +223,7 @@ The `Referer` header is not set when users share or copy and paste the link, rat
 https://www.example.com/product?utm_source=chatgpt.com
 ```
 
-The enrichment parses both the `Referer` header and the `utm_source` parameter and preserves both pieces of information. The header, if present, populates the `refr_*` fields of the event. If a referrer is detected through the `utm_source` parameter, the enrichment adds a `utm_referrer` entity to the event.
+Note that an event might contain both a `Referer` header value *and* a `utm_source` value. These values might not match. For example, if person A shared the above link with person B via Instagram messages, and person B clicked the link, `Referer` would be `instagram.com`. In these cases, you should rely on the `utm_source` value for first-touch attribution.
 
 The hosted database includes `utm_sources` entries for the major chatbot providers — ChatGPT, Claude.ai, Google Gemini, Microsoft Copilot, META.ai, Mistral.ai, Perplexity.ai, Character.AI and Poe — so this works out of the box, as long as you use the actively-maintained database file (`referers-5.3`). You can recognize additional sources by adding `utm_sources` to your [custom referrer mappings](#custom-referrer-mappings).
 
@@ -246,7 +246,7 @@ Currently, the `term` field is always absent for `utm_source` matches, as there'
 The `utm_source` classification is deliberately kept separate from the `Referer` header parsing described above:
 
 * It **doesn't populate** `refr_medium`, `refr_source`, or `refr_term`. Those fields continue to reflect the referrer URL only, so existing data models and queries are unaffected.
-* It's **additive**. If an event has both a recognized referrer URL and a recognized `utm_source`, you get the `refr_*` fields *and* the `utm_referrer` entity. The two can disagree: if a user shares a ChatGPT link over Instagram messages and the recipient clicks it, `refr_source` is `Instagram` while the `utm_referrer` entity is `ChatGPT`. Rely on the `utm_referrer` entity for first-touch attribution.
+* It's **additive**. If an event has both a recognized referrer URL and a recognized `utm_source`, you get the `refr_*` fields *and* the `utm_referrer` entity.
 * It's **independent of the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)**, which copies `utm_source` into `mkt_source` verbatim. The referrer parser instead resolves the value to a known source and medium. Both can run on the same event.
 
 Matching is an exact, case-sensitive comparison of the full `utm_source` value against the `utm_sources` entries, and only the page URL's query string is inspected. Values from your own `referrers` configuration take precedence over the database.

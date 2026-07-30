@@ -4,7 +4,7 @@ sidebar_label: "Connect Signals and agent"
 position: 5
 description: "Fetch Signals profile attributes and the agentic context narrative from Python, inject both into a Google ADK agent's system instruction each turn, and forward the Snowplow session ID from the React frontend through CopilotKit."
 keywords: ["Google ADK", "CopilotKit", "AG-UI", "Signals", "agentic context", "LlmAgent", "before_model_callback"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 The next step is to connect Signals to the Google ADK agent, and forward the Snowplow session ID through CopilotKit so the agent knows which user to fetch context for.
@@ -135,27 +135,27 @@ The profile fetch returns raw attribute values from the service, which `_get_pro
 
 ```json
 {
+  "first_event_timestamp": "2026-07-30T14:02:53.477Z",
+  "last_event_timestamp": "2026-07-30T14:03:12.840Z",
   "page_views_count": 6,
   "unique_pages_viewed": [
-    "/",
-    "/products/electronics",
-    "/products/clothing/linen-overshirt",
-    "/products/electronics/wireless-headphones",
-    "/pricing"
-  ],
-  "first_event_timestamp": "2026-07-29T15:33:51.278Z",
-  "last_event_timestamp": "2026-07-29T15:34:11.573Z"
+    "http://localhost:3000/",
+    "http://localhost:3000/products/electronics",
+    "http://localhost:3000/products/clothing/linen-overshirt",
+    "http://localhost:3000/products/electronics/wireless-headphones",
+    "http://localhost:3000/pricing"
+  ]
 }
 ```
 
-Whether `unique_pages_viewed` holds paths or full URLs depends on which URL property your attribute group captures, so your values may differ from these.
+`unique_pages_viewed` holds full URLs, because the Basic Web template builds it from the `page_url` atomic property. Your agentic context selects `page_urlpath` instead, so the same six page views appear there as paths. Both describe the same browsing at different levels of detail.
 
-The activity fetch needs no formatting at all. With `format="narrative"`, `get_agentic_context()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from a six-page browsing session:
+The activity fetch needs no formatting at all. With `format="narrative"`, `get_agentic_context()` returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from the same six-page browsing session:
 
 ```text
 You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.
 [START CONTEXT]
-57 seconds on the current page. Session started 77 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
+59 seconds on the current page. Session started 78 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
 ## Real-time user behaviour
 Events are ordered from oldest to most recent.
 seconds_since_start_of_session, event, url, event_context
@@ -163,8 +163,8 @@ seconds_since_start_of_session, event, url, event_context
 3, page_view, /products/electronics, {page_title: 'Electronics | Signal Shop'}
 7, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
 11, page_view, /products/clothing/linen-overshirt, {page_title: 'Linen Overshirt | Signal Shop'}
-17, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
-20, page_view, /pricing, {page_title: 'Pricing | Signal Shop'}
+16, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
+19, page_view, /pricing, {page_title: 'Pricing | Signal Shop'}
 [END CONTEXT]
 ```
 
@@ -309,15 +309,15 @@ Reference what the user has been looking at to give more relevant answers.
 
 ## User profile (Snowplow Signals attributes)
 Computed attributes describing the current user's session so far:
-- first_event_timestamp: 2026-07-29T15:33:51.278Z
-- last_event_timestamp: 2026-07-29T15:34:11.573Z
+- first_event_timestamp: 2026-07-30T14:02:53.477Z
+- last_event_timestamp: 2026-07-30T14:03:12.840Z
 - page_views_count: 6
-- unique_pages_viewed: ['/', '/products/electronics', '/products/clothing/linen-overshirt', '/products/electronics/wireless-headphones', '/pricing']
+- unique_pages_viewed: ['http://localhost:3000/', 'http://localhost:3000/products/electronics', 'http://localhost:3000/products/clothing/linen-overshirt', 'http://localhost:3000/products/electronics/wireless-headphones', 'http://localhost:3000/pricing']
 
 ## Recent session activity (Snowplow Signals agentic context)
 You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.
 [START CONTEXT]
-519 seconds on the current page. Session started 539 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
+89 seconds on the current page. Session started 109 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
 ## Real-time user behaviour
 Events are ordered from oldest to most recent.
 seconds_since_start_of_session, event, url, event_context
@@ -325,8 +325,8 @@ seconds_since_start_of_session, event, url, event_context
 3, page_view, /products/electronics, {page_title: 'Electronics | Signal Shop'}
 7, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
 11, page_view, /products/clothing/linen-overshirt, {page_title: 'Linen Overshirt | Signal Shop'}
-17, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
-20, page_view, /pricing, {page_title: 'Pricing | Signal Shop'}
+16, page_view, /products/electronics/wireless-headphones, {page_title: 'Aurora Wireless Headphones | Signal Shop'}
+19, page_view, /pricing, {page_title: 'Pricing | Signal Shop'}
 [END CONTEXT]
 ```
 
@@ -448,10 +448,10 @@ Open the CopilotKit sidebar and ask a general question. If Signals is returning 
 You can verify that the agent is receiving both kinds of context by checking the agent logs. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the first turn, one HTTP request per fetch, and both sections injected:
 
 ```text
-[agent] before_model_callback: state_keys=['snowplowDomainSessionId', '_ag_ui_thread_id', '_ag_ui_app_name', '_ag_ui_user_id'] snowplow_session_id='89eeb434-eb25-42bc-8543-d36fadb0c235'
+[agent] before_model_callback: state_keys=['snowplowDomainSessionId', '_ag_ui_thread_id', '_ag_ui_app_name', '_ag_ui_user_id'] snowplow_session_id='3c18a125-024d-44bb-93db-b6aed895a5a3'
 [agent] HTTP Request: POST https://YOUR_ID.signals.snowplowanalytics.com/api/v1/get-online-attributes "HTTP/1.1 200 OK"
-[agent] HTTP Request: GET https://YOUR_ID.signals.snowplowanalytics.com/api/v1/event_log?name=web_agent_activity&identifier=89eeb434-eb25-42bc-8543-d36fadb0c235&format=narrative "HTTP/1.1 200 OK"
-[agent] injecting 2 signals section(s), 1398 chars total
+[agent] HTTP Request: GET https://YOUR_ID.signals.snowplowanalytics.com/api/v1/event_log?name=web_agent_activity&identifier=3c18a125-024d-44bb-93db-b6aed895a5a3&format=narrative "HTTP/1.1 200 OK"
+[agent] injecting 2 signals section(s), 1502 chars total
 ```
 
 A count of `2 signals section(s)` means both the profile attributes and the activity narrative arrived. Because each fetch is handled independently, one section can appear without the other. That's deliberate: a failure to reach either won't take the agent down.
@@ -466,7 +466,7 @@ If the profile section is missing, check:
 * Did you create a service with the name in `SNOWPLOW_SIGNALS_SERVICE_NAME`?
 * Have you been browsing for long enough for events to flow through the pipeline?
 
-To rerun the attribute group test query in Console, click **Edit** on your attribute group page > **Run Preview**.
+A service returns a key for every attribute it serves, valued `null` until the session has produced one. Because `_get_profile_section()` drops those, a session Signals has no data for yet yields no profile section at all rather than a section full of nulls.
 
 If the activity section is missing, check:
 * Is your agentic context published?
@@ -478,4 +478,4 @@ An agentic context with nothing buffered yet still returns a narrative, with `No
 
 ## Inspect the Signals integration in the browser
 
-To confirm the tracker and Signals agree on your session, use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/signals-integration/). It shows the events leaving the page alongside the live attribute values Signals holds for your session, which separates a tracking problem from a Signals configuration problem.
+To confirm the tracker and Signals agree on your session, use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/signals-integration/). Connect it to Console and add your API credentials in the extension options, then browse the app with the extension open so it can pick up attribute keys from the events it observes. Its **Attributes** tab then requests the attribute values Signals holds for those keys, and comparing them with the **Events** tab separates a tracking problem from a Signals configuration problem.

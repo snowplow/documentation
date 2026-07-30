@@ -21,33 +21,33 @@ The two work together. Attributes tell your agent what the session adds up to, w
 
 ## Create a Basic Web attribute group
 
-Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute-groups) templates to define attributes. Use the `domain_sessionid` as attribute key to compute session-level attributes.
+Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute-groups) templates to define attributes, with `domain_sessionid` as the attribute key so the attributes are scoped to a session.
 
-1. In [Console](https://console.snowplowanalytics.com), navigate to **Signals** > **Attribute Groups**
-2. Click **Create attribute group** and choose **Basic Web**
-3. Set the **Attribute Key** to `domain_sessionid`
+1. In [Console](https://console.snowplowanalytics.com), navigate to **Signals** > **Attribute groups**
+2. Click **Create attribute group**, then click **Use** on the **Basic Web** card
+3. Set the **Attribute key** to `domain_sessionid`
 
-The Basic Web template includes these attributes:
+Applying the template fills in the name `basic_web` and its four attributes. Rename it if you like, and leave **Source** as **Stream** so Signals computes from the event stream in real time.
 
-| Attribute               | Description                                |
-| ----------------------- | ------------------------------------------ |
-| `page_views_count`      | Total number of page views in the session  |
-| `unique_pages_viewed`   | List of unique URLs visited in the session |
-| `first_event_timestamp` | When the session started                   |
-| `last_event_timestamp`  | When the most recent event was recorded    |
+| Attribute               | Type          | Aggregation   | Property                | Description                                    |
+| ----------------------- | ------------- | ------------- | ----------------------- | ---------------------------------------------- |
+| `page_views_count`      | `int32`       | `counter`     | none                    | Total number of page views in the session      |
+| `unique_pages_viewed`   | `string_list` | `unique_list` | atomic `page_url`       | Full URLs of the pages visited in the session  |
+| `first_event_timestamp` | `string`      | `first`       | atomic `derived_tstamp` | When the session started                       |
+| `last_event_timestamp`  | `string`      | `last`        | atomic `derived_tstamp` | When the most recent event was recorded        |
 
-Test your attribute group by clicking **Run Preview** before saving, to verify it's computing correctly based on recent events in your pipeline. This runs a query against your event data in your data warehouse and shows the computed attributes for recent sessions.
+Note the property behind `unique_pages_viewed`: the template reads `page_url`, so the values are full URLs rather than paths. The agentic context you define later reads `page_urlpath` instead, which is worth knowing when you compare the two in your agent's instruction.
 
-Click **Create attribute group** when you're happy with the attribute group.
+Click **Create attribute group** when you're happy with it.
 
 ## Publish the attribute group
 
-[Attribute groups](/docs/signals/concepts/#attribute-groups) need to be published before Signals will start computing:
+[Attribute groups](/docs/signals/concepts/#attribute-groups) need to be published before Signals will start computing. A new group starts as `v1 (Not published)`:
 
 1. Open your attribute group and click **Publish**
-2. Confirm the publish to deploy the computation logic to the pipeline
+2. Confirm the publish to deploy the group and its four attributes to the Profiles Store
 
-Once published, Signals starts computing attributes for each user session as events arrive.
+The version label changes to `v1 (Published)`, and Signals starts computing attributes for each user session as events arrive.
 
 ## Create a service
 
@@ -55,7 +55,7 @@ A [service](/docs/signals/concepts/#services) provides a pull-based API endpoint
 
 Services allow you to combine multiple attribute groups if needed, but for this tutorial, use just the one you created in the last step.
 
-Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in your `.env` file.
+Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in your `.env` file. Service names take letters, numbers, and underscores only.
 
 1. Navigate to **Signals** > **Services**
 2. Click **Create service**
@@ -64,24 +64,26 @@ Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME
    - **Attribute groups**: Select the attribute group you just published
 4. Click **Create service**
 
+The **Attribute groups** picker only lists published attribute groups, so publishing first isn't optional. If your group is still a draft, the picker reports no options.
+
 The service returns attributes for a given session ID in this format:
 
 ```json
 {
-  "page_views_count": 12,
+  "first_event_timestamp": "2026-07-30T14:02:53.477Z",
+  "last_event_timestamp": "2026-07-30T14:03:12.840Z",
+  "page_views_count": 6,
   "unique_pages_viewed": [
     "http://localhost:3000/",
     "http://localhost:3000/products/electronics",
+    "http://localhost:3000/products/clothing/linen-overshirt",
     "http://localhost:3000/products/electronics/wireless-headphones",
-    "http://localhost:3000/products/electronics/smart-speaker-mini",
     "http://localhost:3000/pricing"
-  ],
-  "first_event_timestamp": "2026-04-09T14:23:01.000Z",
-  "last_event_timestamp": "2026-04-09T14:41:03.000Z"
+  ]
 }
 ```
 
-The `unique_pages_viewed` attribute is a list of URLs the user has visited during the session, showing the agent which pages they have been browsing.
+That's a real response from a six-page session on the local app. Six page views produced five entries in `unique_pages_viewed`, because one product page was visited twice, which is the kind of pattern the aggregates flatten and the agentic context preserves.
 
 ## Create an agentic context
 
@@ -104,22 +106,24 @@ Use this exact agentic context name. It's the same as the `SNOWPLOW_SIGNALS_AGEN
 <Tabs groupId="signals-impl" queryString>
   <TabItem value="console" label="Console" default>
 
-Navigate to **Signals** > **Agentic contexts** and create a new agentic context. The **Create context** form is one scrolling page with four sections: **Details**, **Prompt**, **Lookback Window**, and **Events and Properties**.
+Navigate to **Signals** > **Agentic contexts** and click **Create context**. The form is one scrolling page with four sections: **Details**, **Prompt**, **Lookback Window**, and **Events and Properties**.
 
 Fill in **Details** and **Prompt**:
 
 | Field | Value |
 | ----- | ----- |
 | Name | `web_agent_activity` |
+| Primary owner | Your email address, filled in for you and read-only |
 | Description | `Recent session activity for the Signal Shop support agent` |
-| Primary owner | Your email address, filled in for you |
 | Prompt | `You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.` |
 
-Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes.
+![The Create context form in Snowplow Console, with the Details section holding the name web_agent_activity, a greyed-out Primary owner field, and the description Recent session activity for the Signal Shop support agent, and the Prompt section below it holding the Signal Shop instructions under the helper text about adding them on top of the retrieved agentic context](./images/agentic-context-create-form.png)
 
-Under **Events and Properties**, click **Add event** and choose `page_view` at version `1-0-0`. Then use **Add property** to attach `event_name`, `page_urlpath`, and `page_title` to it.
+Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes. The details page later shows the same setting as **Max Age (seconds)** `1800`.
 
-The new agentic context has a details page with **Edit** and **Publish** buttons. Click **Publish** to send the configuration to your Signals infrastructure. Later changes go through **Edit** and start as a draft, so the published version stays live while you work on it.
+Under **Events and Properties**, click **Add event** and choose `page_view` on the **Data structures** tab. The version fills in as `1-0-0`. Then use **Add property** three times to attach `event_name`, `page_urlpath`, and `page_title` from the **Atomic** tab.
+
+Click **Create**. Your agentic context now has a details page showing **Status** **Draft**. Click **Publish** there and confirm, and the status changes to **Published**. Later changes go through **Edit** and start as a draft, so the published version stays live while you work on it.
 
   </TabItem>
   <TabItem value="sdk" label="Python SDK">

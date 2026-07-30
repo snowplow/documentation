@@ -4,7 +4,7 @@ title: "Retrieve a Signals agentic context as JSON or a narrative"
 sidebar_label: "Retrieve the context"
 description: "Find the domain_sessionid for a live session, then read the agentic context back from Signals as structured JSON or as an LLM-ready narrative, in Python or Node.js."
 keywords: ["agentic context", "get_agentic_context", "domain_sessionid", "narrative format", "signals node sdk"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 ```mdx-code-block
@@ -20,7 +20,7 @@ Remember that buffering only started when you published, and a minute or two aft
 
 An agentic context is scoped to one session, so you read it for a single `domain_sessionid` value. There are two ways to get one.
 
-To find the identifier for the session you just generated, open the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/) browser extension on your site. It shows the Signals data for the current session, including the session ID you need.
+To find the identifier for the session you just generated, connect the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/) browser extension to Signals, then browse your site with the extension open. Inspector builds its list of attribute keys from the events it observes, so the **Attributes** tab shows the `domain_sessionid` value for the session you're in.
 
 In application code, read it client-side with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/#domain-session-id) method and send it to your back end, because retrieval happens server-side:
 

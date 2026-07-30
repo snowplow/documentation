@@ -4,7 +4,7 @@ title: "Define and publish a Signals agentic context"
 sidebar_label: "Define the agentic context"
 description: "Define a Signals agentic context that buffers page views for the current session, choose the properties to keep, and publish it using Snowplow Console or the Python SDK."
 keywords: ["agentic context", "event log", "signals python sdk", "publish", "event selection"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 ```mdx-code-block
@@ -19,14 +19,14 @@ Do this in Snowplow Console or with the Signals Python SDK. Both produce the sam
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Go to **Signals** > **Agentic contexts** in Snowplow Console and click **Create agentic context**. Fill in the first step:
+Go to **Signals** > **Agentic contexts** in Snowplow Console and create a new agentic context. On the **Create context** form, fill in the **Details** and **Prompt** sections:
 
 | Field | Value |
 | ----- | ----- |
 | Name | `session_context` |
+| Primary owner | Your email address |
 | Description | `Rolling record of the pages a user has viewed in their current session` |
-| Prompt instructions | The prompt text below |
-| Owner | Your email address |
+| Prompt | The prompt text below |
 
 Use this as the prompt:
 
@@ -37,7 +37,13 @@ then answer their question in that context. If the activity is too thin to tell,
 say so rather than guessing.
 ```
 
-{/* TODO(pending-browser): screenshot of the Create agentic context form → ./images/agentic-context-create-form.png */}
+![The Create context form in Snowplow Console, with the Details section filled in with the name session_context and a description of the rolling record, and the Prompt section holding the support assistant instructions](./images/agentic-context-create-form.png)
+
+Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes.
+
+Under **Events and Properties**, click **Add event** and choose `page_view` at version `1-0-0`. Then use **Add property** to attach `event_name`, `page_urlpath`, and `page_title` to it.
+
+![The Lookback Window section of the form set to 50 max events and 30 minutes max age, and the Events and Properties section below it showing page_view version 1-0-0 with the three attached properties event_name, page_urlpath, and page_title](./images/agentic-context-event-selection.png)
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">

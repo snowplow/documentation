@@ -4,7 +4,7 @@ title: "Use a Signals agentic context with an LLM"
 sidebar_label: "Use it with an LLM"
 description: "Paste a Signals agentic context narrative into any chat LLM, ask questions about the user's session, and refine the answers by editing the agentic context prompt."
 keywords: ["agentic context", "llm context", "prompt engineering", "ai agent", "signals"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 The narrative format exists so you can hand a model real user activity without writing any glue code. Before wiring it into an agent framework, it's worth doing it by hand once, to see what the model can and can't infer from what you chose to capture.
@@ -45,13 +45,14 @@ seconds_since_start_of_session, event, url, event_context
 36, page_view, /support/returns-policy, {page_title: 'Returns policy | Example Shop'}
 109, page_view, /cart, {page_title: 'Your cart | Example Shop'}
 119, page_view, /checkout, {page_title: 'Checkout | Example Shop'}
+[END CONTEXT]
 ```
 
 Paste this newer version into a fresh chat and ask the same question. The answer should change, because the situation has: this user has reached a checkout, not idly browsing a product page. That's what "real-time context" buys you, and it's why an agent should re-read the context on every turn rather than caching it.
 
 ## Change the prompt, not the capture
 
-So far the prompt has framed this as a support job. Change that framing and the same activity supports a different conclusion. Edit the **Prompt instructions** field of your agentic context in Console and publish it again:
+So far the prompt has framed this as a support job. Change that framing and the same activity supports a different conclusion. Click **Edit** on your agentic context's details page in Console, replace the **Prompt** text with this, then publish the draft:
 
 ```text
 You are a conversion assistant on a product website. From the activity below,

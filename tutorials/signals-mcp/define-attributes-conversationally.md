@@ -89,7 +89,7 @@ The result is a small table: one row per `domain_sessionid` value found in the s
 Adjust the draft as many times as you like: ask for a different period, another filter, or an extra attribute, and test again.
 
 :::note[Testing requires a warehouse connection]
-Signals runs test queries against your warehouse, not the live stream. If your organization has no warehouse destination connected, the test fails with an error like `This functionality is not available because there is no destination connection set up`, and Console doesn't offer its **Run preview** option at all. This is expected on trial accounts without a warehouse. You can skip testing and publish the draft: the verification steps on the next page will confirm the attributes calculate correctly from live events.
+Signals runs test queries against your warehouse rather than the live stream, so testing attribute definitions requires a warehouse destination connected to your organization. Without one, publish the draft and verify it against live events instead: the next page checks the values Signals calculates.
 :::
 
 ## Publish the attribute group

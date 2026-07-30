@@ -4,7 +4,7 @@ sidebar_label: "Configure Signals"
 position: 4
 description: "Create an attribute group, a service, and an agentic context to serve real-time profile attributes and session activity to your Google ADK agent."
 keywords: ["Signals", "attribute group", "service", "agentic context", "Basic Web", "domain_sessionid"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 ```mdx-code-block
@@ -104,15 +104,22 @@ Use this exact agentic context name. It's the same as the `SNOWPLOW_SIGNALS_AGEN
 <Tabs groupId="signals-impl" queryString>
   <TabItem value="console" label="Console" default>
 
-1. Navigate to **Signals** > **Agentic contexts**
-2. Click to create a new agentic context, and configure the basics:
-   - **Name**: `web_agent_activity`
-   - **Description**: `Recent session activity for the Signal Shop support agent`
-   - **Prompt instructions**: `You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.`
-   - **Owner**: your email address
-3. Select the events to capture: choose the `page_view` event, keeping the `event_name`, `page_urlpath`, and `page_title` atomic properties
-4. Set the limits: retain a maximum of 50 events, with a maximum age of 1800 seconds (30 minutes)
-5. Click **Publish** to send the configuration to your Signals infrastructure
+Navigate to **Signals** > **Agentic contexts** and create a new agentic context. The **Create context** form is one scrolling page with four sections: **Details**, **Prompt**, **Lookback Window**, and **Events and Properties**.
+
+Fill in **Details** and **Prompt**:
+
+| Field | Value |
+| ----- | ----- |
+| Name | `web_agent_activity` |
+| Description | `Recent session activity for the Signal Shop support agent` |
+| Primary owner | Your email address, filled in for you |
+| Prompt | `You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.` |
+
+Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes.
+
+Under **Events and Properties**, click **Add event** and choose `page_view` at version `1-0-0`. Then use **Add property** to attach `event_name`, `page_urlpath`, and `page_title` to it.
+
+The new agentic context has a details page with **Edit** and **Publish** buttons. Click **Publish** to send the configuration to your Signals infrastructure. Later changes go through **Edit** and start as a draft, so the published version stays live while you work on it.
 
   </TabItem>
   <TabItem value="sdk" label="Python SDK">

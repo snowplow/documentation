@@ -4,7 +4,7 @@ sidebar_label: "Conclusion"
 position: 6
 description: "Summary of the Signals-powered AI agent accelerator, cleanup instructions, and next steps for production deployment."
 keywords: ["conclusion", "cleanup", "next steps", "AgentCore", "Signals", "agentic context", "production"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 You've built an AI agent that combines real-time behavioral data from Snowplow Signals with persistent memory from AWS Bedrock AgentCore Memory. The agent can:
@@ -35,7 +35,7 @@ memory_client.gmcp_client.delete_memory(memoryId=memory_id)
 print(f"Deleted memory resource: {memory_id}")
 ```
 
-If you published a Signals service and attribute group, run the optional cleanup cell at the end of the notebook to remove them. Take the service out first: an attribute group can't be unpublished while a service still references it.
+If you published a Signals service and attribute group, run the optional cleanup cell at the end of the notebook to remove them. Unpublish and delete the service first, then the attribute group it uses.
 
 ```python
 sp_signals.unpublish([travel_service])
@@ -46,7 +46,7 @@ sp_signals.delete([session_attributes_group])
 ```
 
 :::note[Removing the agentic context]
-Unpublish and delete the agentic context in Console, under **Signals** > **Agentic contexts**. At the time of writing, the Python SDK's `unpublish()` returns a 409 error for a published agentic context, so Console is the reliable route. See [deleting an agentic context](/docs/signals/agentic-contexts/).
+Unpublish and delete the agentic context in Console, under **Signals** > **Agentic contexts**. See [deleting an agentic context](/docs/signals/agentic-contexts/).
 :::
 
 ## Next steps

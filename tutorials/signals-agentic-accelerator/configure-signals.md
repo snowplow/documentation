@@ -4,7 +4,7 @@ sidebar_label: "Configure Signals"
 position: 3
 description: "Define and publish profile attributes and an agentic context using Snowplow Signals to provide real-time user context to your AI agent."
 keywords: ["Snowplow Signals", "behavioral attributes", "agentic context", "Profile API", "streaming engine", "personalization"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step, you'll set up two complementary kinds of real-time context in Snowplow Signals, and validate that both compute correctly from raw events:
@@ -202,8 +202,6 @@ This accelerator defines everything from the notebook, but you can create and pu
 
 Run the notebook cells that send synthetic test events, then read back both kinds of context. The Snowplow tracker in the notebook sends events directly to your event Collector - no demo site or web application is needed. The `page_url` field is metadata used by the attribute criteria to match against URL patterns.
 
-The tracker pauses for a second between events, so that the agentic context records a sequence rather than one simultaneous burst.
-
 ### Profile attributes
 
 After sending the events, retrieve the results:
@@ -253,7 +251,7 @@ narrative = sp_signals.get_agentic_context(
 print(narrative)
 ```
 
-With `format="narrative"`, Signals returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. Here's a real capture from the test events:
+With `format="narrative"`, Signals returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. For the test events above, that looks like:
 
 ```text
 You are a travel assistant for a Southeast Asia travel site. Use this recent activity to understand what the user is exploring right now, and tailor your recommendations to it.
@@ -281,8 +279,6 @@ seconds_since_start_of_session, event, url, event_context
 ```
 
 Signals generates the opening summary and the event table from the events you selected, so there's no formatting code to write. You can also read the same activity as structured JSON by leaving `format` at its default: see [retrieving agentic contexts](/docs/signals/applications/agentic-contexts/).
-
-`seconds_since_start_of_session` counts from the moment the session buffer starts, so the earliest events can all show `0` even though the notebook sends them a second apart.
 
 Compare the two responses. The counters say this user is engaged with cultural and family content. Only the narrative says they opened Siem Reap three times, moved on to Bali, then filtered for food and picked a half-day experience. That sequence is what makes a recommendation feel like it follows the conversation the user is already having with your site.
 

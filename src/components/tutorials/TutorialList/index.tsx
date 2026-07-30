@@ -182,8 +182,9 @@ const TutorialList: FC = () => {
             </div>
           )}
 
-          {/* Main content - Aligned next to the filter sidebar, which already pads its right edge */}
-          <div className="flex-1 pr-6 pb-6">
+          {/* Main content - Aligned next to the filter sidebar, which already pads its right edge.
+              Top padding matches the sidebar's so the column headers line up with the search box. */}
+          <div className="flex-1 pt-6 pr-6 pb-6">
             <div className="w-full max-w-6xl">
               {/* Tutorial list */}
               <TutorialTable tutorials={content.tutorials} />

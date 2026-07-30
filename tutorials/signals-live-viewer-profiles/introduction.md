@@ -2,54 +2,57 @@
 title: "Learn how to create live viewer profiles using Signals"
 position: 1
 sidebar_label: "Introduction"
-description: "Build a real-time viewer profile dashboard for a video streaming site with Snowplow media tracking and Signals, replacing Kafka, DynamoDB, and custom stream processing with a managed service."
-keywords: ["snowplow signals", "live viewer profiles", "media tracking", "real-time video analytics", "streaming infrastructure"]
-date: "2026-07-29"
+description: "Build a real-time viewer profile dashboard for a video streaming site with Snowplow media tracking and Signals, with per-session and per-video metrics and no stream processing to operate."
+keywords: ["snowplow signals", "live viewer profiles", "media tracking", "real-time video analytics", "custom attribute key"]
+date: "2026-07-30"
 ---
 
-In this solution accelerator you'll build live viewer profiles for a video streaming site: a dashboard that shows who's watching right now, whether they're playing or paused, how many seconds they've watched, and how many ads they've skipped.
+In this solution accelerator you'll build live viewer profiles for a video streaming site: a dashboard that shows who's watching right now, whether they're playing or paused, how many seconds they've watched, and how many ads they've skipped. It also aggregates the same events per video, so you can see how many people are watching each title across every session.
 
-This is the [Snowplow Signals](/docs/signals/introduction/) counterpart to the [live viewer profiles with Kafka accelerator](/tutorials/kafka-live-viewer-profiles/introduction). Both accelerators solve the same problem with the same Snowplow media events. The difference is what you have to build and operate. The Kafka version consumes the event stream with self-managed infrastructure: Snowbridge forwards events to Kafka, a Java application processes them into viewer state, DynamoDB stores the profiles, and a WebSocket back-end pushes updates to the dashboard. Signals replaces all of that: the [streaming engine](/docs/signals/concepts/) computes the profiles inside your Snowplow pipeline, and your only custom code is the tracking page and a thin dashboard.
+[Snowplow Signals](/docs/signals/introduction/) computes the profiles inside your Snowplow pipeline, from the media events your trackers already send. There's no stream processing to write and no profile store to operate, so the only code you write is the tracking page and a thin dashboard. If you'd rather own the stream processing yourself, the [live viewer profiles with Kafka accelerator](/tutorials/kafka-live-viewer-profiles/introduction) builds the same dashboard on self-managed infrastructure.
 
-| Component | Kafka accelerator | This accelerator |
-| --- | --- | --- |
-| Video page with media tracking | React app | React app |
-| Event delivery to the consumer | Snowbridge and Kafka | Not needed: Signals reads the enriched stream |
-| Viewer state computation | Java consumer application | Signals attribute group (managed) |
-| Profile storage | DynamoDB | Signals Profiles Store (managed) |
-| Serving profiles to the dashboard | WebSocket back-end | One-route Node.js back-end |
-| Dashboard | HTML and JavaScript front-end | React page |
-| Local infrastructure | Docker Compose, LocalStack, or Terraform | None |
+On the left side of the image below, someone is watching a video with Snowplow media tracking. On the right, the dashboard lists their session with its live state, watch time, and skipped ad count, alongside a row for each video, all served from the Signals Profiles Store.
 
-Seven moving parts become three: a video page, a Signals configuration, and a small dashboard app. If you want full control of the stream processing instead, the Kafka accelerator remains the self-managed alternative.
+![Split screen with a video page playing the Sintel trailer on the left, and the live viewers dashboard on the right showing two video rows and three session rows with their state, watch time, and skipped ad counts](images/viewer-and-dashboard-split-screen.png)
 
-On the left side of the image below, someone is watching a video with Snowplow media tracking. On the right, the dashboard lists their session with its live state, watch time, and skipped ad count, served from the Signals Profiles Store.
+## Architecture
 
-![Split screen with a video page playing the Sintel trailer on the left, and the live viewers dashboard on the right showing one session with state Playing, 63 seconds watched, and 1 ad skipped](images/viewer-and-dashboard-split-screen.png)
+The video page sends media events to your Snowplow pipeline like any other tracked application. Signals reads the enriched stream, folds the events into attributes, and serves them from the Profiles Store. Your dashboard back-end reads those attributes over HTTPS:
 
-## What you'll build
+```mermaid
+flowchart LR
+    page["<b>Video page</b><br/>browser tracker<br/>and media plugin"]
+    collector["<b>Collector</b>"]
+    enrich["<b>Enrich</b>"]
+    engine["<b>Signals</b><br/>streaming engine"]
+    store["<b>Profiles Store</b>"]
+    backend["<b>Back-end</b><br/>Signals Node.js SDK"]
+    dashboard["<b>Dashboard</b>"]
 
-The accelerator has three parts, and you'll build them in order:
+    page --> collector --> enrich --> engine --> store
+    store --> backend --> dashboard
+    page -. "registers its session" .-> backend
+```
+
+Everything between the Collector and the Profiles Store is managed by Snowplow. You build the boxes at either end: the video page and the dashboard, joined by a back-end that does little more than pass identifiers to Signals and hand the attributes back.
+
+You'll build them in this order:
 
 1. A React video page that tracks play, pause, seek, ping, and ad events with the Snowplow [media tracking plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/)
-2. A Signals [attribute group](/docs/signals/attributes/attribute-groups/) that computes each session's viewer state, watch time, and skipped ads from those events in real time
-3. A dashboard page backed by a one-route Node.js server that looks up live sessions with the [Signals Node.js SDK](/docs/signals/connection/)
+2. Two Signals [attribute groups](/docs/signals/attributes/attribute-groups/): one keyed on the session, for each viewer's state, watch time, and skipped ads, and one keyed on a custom [attribute key](/docs/signals/attributes/attribute-keys/) for the video, for audience metrics across sessions
+3. A dashboard page backed by a one-route Node.js server that reads both groups with the [Signals Node.js SDK](/docs/signals/connection/)
 
-This accelerator should take around one hour to complete.
-
-## Solution accelerator code
-
-The finished demo application is available in the [signals-live-viewer-profiles repository](https://github.com/snowplow-industry-solutions/signals-live-viewer-profiles) on GitHub. The instructions for building and running it are all in these pages.
+Every file you need is listed in full in these pages, so there's nothing to clone and nothing to download. This accelerator should take around one hour to complete.
 
 ## Prerequisites
 
 This accelerator assumes that you have:
 
-* a Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
+* A Snowplow pipeline with a [Collector endpoint](/docs/sources/) you can send events to, because Signals computes attributes from your live event stream
 * [Signals enabled](/docs/signals/setup/) on your Snowplow account, since the viewer profiles depend on it
 * Node.js 20.6 or later, to run the demo app and its back-end
 * Python 3.9 or later, to define the Signals configuration with the [Signals Python SDK](/docs/signals/connection/)
-* basic familiarity with React and with [Snowplow events and entities](/docs/fundamentals/events/)
+* Basic familiarity with React and with [Snowplow events and entities](/docs/fundamentals/events/)
 
 :::note[A full pipeline is required]
 This accelerator computes attributes from real events flowing through your pipeline, so it can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.

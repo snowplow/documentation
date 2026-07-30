@@ -4,7 +4,7 @@ position: 2
 sidebar_label: "Set up media tracking"
 description: "Build a React video page that tracks play, pause, seek, ping, and ad events with the Snowplow browser tracker and media plugin, and verify the events in Snowplow Inspector."
 keywords: ["media tracking plugin", "snowplow browser tracker", "react video player", "ad events", "media session"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 In this section you'll build the video page: a React app that plays a trailer and tracks how the user interacts with it. The [Snowplow media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/) sends a [self-describing event](/docs/fundamentals/events/#self-describing-events) for each playback action, along with entities describing the player state and the media session. Signals will compute the viewer profiles from these events in the next section.
@@ -53,7 +53,9 @@ Create `src/VideoPage.jsx`. It renders an HTML5 `<video>` element and wires its 
 * `onTimeUpdate` calls `updateMediaTracking` so the plugin always knows the current playback position. It updates internal state without sending an event.
 * The first play triggers a simulated pre-roll ad break. Completing it tracks `ad_complete_event`, and the skip button tracks `ad_skip_event`.
 
-The video is the trailer for [Sintel](https://durian.blender.org/), an open movie by the Blender Foundation, served from the W3C's public media server.
+The page offers a catalog of two videos, chosen with a `?video=` query parameter, because the dashboard reports metrics per video as well as per session. The `label` you pass to `startMediaTracking` is attached to every media event in the `media_player` entity, so this page sets it to the video's ID. That gives Signals a per-video value to aggregate on.
+
+The videos are trailers for [Sintel](https://durian.blender.org/) and [Big Buck Bunny](https://peach.blender.org/), open movies by the Blender Foundation, served from the W3C's public media server.
 
 ```jsx
 import { useEffect, useRef, useState } from 'react';
@@ -74,8 +76,21 @@ import {
   MediaPlayerAdBreakType,
 } from '@snowplow/browser-plugin-media';
 
-const VIDEO_SRC = 'https://media.w3.org/2010/05/sintel/trailer.mp4';
+const VIDEOS = {
+  'sintel-trailer': {
+    title: 'Sintel',
+    src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+  },
+  'bunny-trailer': {
+    title: 'Big Buck Bunny',
+    src: 'https://media.w3.org/2010/05/bunny/trailer.mp4',
+  },
+};
 const AD_LENGTH = 8; // seconds
+
+// The video to play, from ?video=<id>, falling back to the first one.
+const requested = new URLSearchParams(window.location.search).get('video');
+const videoId = Object.hasOwn(VIDEOS, requested) ? requested : Object.keys(VIDEOS)[0];
 
 export default function VideoPage() {
   const videoRef = useRef(null);
@@ -90,7 +105,7 @@ export default function VideoPage() {
     mediaIdRef.current = id;
     startMediaTracking({
       id,
-      player: { label: 'Sintel trailer', mediaType: 'video' },
+      player: { label: videoId, mediaType: 'video' },
       pings: { pingInterval: 10 },
     });
     return () => endMediaTracking({ id });
@@ -156,11 +171,22 @@ export default function VideoPage() {
 
   return (
     <main className="page">
-      <h1>Now playing: Sintel</h1>
+      <h1>Now playing: {VIDEOS[videoId].title}</h1>
+      <nav className="catalog">
+        {Object.entries(VIDEOS).map(([catalogId, video]) => (
+          <a
+            key={catalogId}
+            href={`?video=${catalogId}`}
+            aria-current={catalogId === videoId ? 'page' : undefined}
+          >
+            {video.title}
+          </a>
+        ))}
+      </nav>
       <div className="player">
         <video
           ref={videoRef}
-          src={VIDEO_SRC}
+          src={VIDEOS[videoId].src}
           controls
           onPlay={onPlay}
           onPause={onPause}
@@ -201,7 +227,7 @@ import VideoPage from './VideoPage.jsx';
 createRoot(document.getElementById('root')).render(<VideoPage />);
 ```
 
-Replace `src/index.css` with styles for the player, the ad overlay, and the dashboard table you'll add later:
+Replace `src/index.css` with styles for the player, the ad overlay, and the dashboard tables you'll add later:
 
 ```css
 body {
@@ -215,6 +241,21 @@ body {
   max-width: 720px;
   margin: 2rem auto;
   padding: 0 1rem;
+}
+
+.catalog {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.catalog a {
+  color: #a48fd6;
+}
+
+.catalog a[aria-current='page'] {
+  color: #f4f3ec;
+  font-weight: 600;
 }
 
 .player {
@@ -251,6 +292,13 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+caption {
+  padding-bottom: 0.5rem;
+  text-align: left;
+  color: #a9a5b8;
 }
 
 th,
@@ -282,4 +330,4 @@ To verify the events, open the [Snowplow Inspector](/docs/testing/snowplow-inspe
 * `ping_event` every 10 seconds during playback
 * `ad_break_start_event` and `ad_start_event`, then `ad_skip_event` or `ad_complete_event` depending on whether you skipped, and finally `ad_break_end_event`
 
-Select any of these events and confirm it carries the `media_player` entity, with the current playback position, and the media `session` entity, with cumulative statistics such as `timePlayed` and `adsSkipped`. These events and entities are all standard Snowplow media schemas, described in the [media events documentation](/docs/events/ootb-data/media-events/), so there are no custom schemas to create.
+Select any of these events and confirm it carries two entities: `media_player`, with the current playback position and the `label` set to the video's ID, and the media `session` entity, with cumulative statistics such as `timePlayed` and `adsSkipped`. These events and entities are all standard Snowplow media schemas, described in the [media events documentation](/docs/events/ootb-data/media-events/), so there are no custom schemas to create.

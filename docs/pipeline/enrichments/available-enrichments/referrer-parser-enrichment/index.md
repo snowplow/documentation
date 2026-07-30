@@ -13,7 +13,7 @@ This enrichment uses the [Snowplow referer-parser](https://github.com/snowplow/r
 
 This is particularly useful when looking for traffic from specific search engine providers or social networks.
 
-Since version 6.13.0 of Enrich, it also classifies traffic sources that identify themselves through a [`utm_source` query parameter](#identifying-referrers-from-utm_source) rather than a `Referer` header, which is how most AI chatbots send their traffic.
+Since version 6.13.0 of Enrich, it also classifies traffic sources that identify themselves through a [`utm_source` query parameter](#identifying-referrers-from-utm_source) rather than (or in addition to) a `Referer` header. An example would be ChatGPT setting `utm_source=chatgpt.com`.
 
 ## Configuration
 

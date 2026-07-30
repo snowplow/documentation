@@ -4,10 +4,10 @@ position: 3
 sidebar_label: "Define attributes"
 description: "Prompt your AI assistant to create a Signals stream attribute group, test it against warehouse data, and publish it using the Snowplow MCP tools."
 keywords: ["signals attribute group", "mcp tools", "conversational configuration", "test attributes", "publish signals"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
-With the MCP server connected, you can now define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
+With the MCP server connected, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
 
 * How many page views occurred in the last 15 minutes, per session
 * The last seen browser name, per session
@@ -89,7 +89,7 @@ The result is a small table: one row per `domain_sessionid` value found in the s
 Adjust the draft as many times as you like: ask for a different period, another filter, or an extra attribute, and test again.
 
 :::note[Testing requires a warehouse connection]
-Signals runs test queries against your warehouse, not the live stream. If your organization has no warehouse destination connected, the test fails with an error like `This functionality is not available because there is no destination connection set up.`, and Console doesn't offer its **Run preview** option at all. This is expected on trial accounts without a warehouse. You can skip testing and publish the draft: the verification steps on the next page will confirm the attributes calculate correctly from live events.
+Signals runs test queries against your warehouse, not the live stream. If your organization has no warehouse destination connected, the test fails with an error like `This functionality is not available because there is no destination connection set up`, and Console doesn't offer its **Run preview** option at all. This is expected on trial accounts without a warehouse. You can skip testing and publish the draft: the verification steps on the next page will confirm the attributes calculate correctly from live events.
 :::
 
 ## Publish the attribute group

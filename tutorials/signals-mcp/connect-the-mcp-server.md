@@ -2,9 +2,9 @@
 title: "Connect the MCP server"
 position: 2
 sidebar_label: "Connect the MCP server"
-description: "Install the Snowplow MCP server in Claude Code or any MCP client, and authenticate with OAuth or Console API credentials, including the Bearer token flow."
-keywords: ["snowplow mcp install", "claude code plugin", "mcp authentication", "console api key", "bearer token"]
-date: "2026-07-29"
+description: "Install the Snowplow MCP server in Claude Code or any MCP client, and authenticate with OAuth or Console API credentials."
+keywords: ["snowplow mcp install", "claude code plugin", "mcp authentication", "console api key", "mcp-remote"]
+date: "2026-07-30"
 ---
 
 The Snowplow MCP server is a remote server, hosted by Snowplow: there's no server for you to deploy or maintain. Connecting your assistant to it means pointing your MCP client at the server URL and authenticating with your Snowplow Console account.
@@ -20,7 +20,7 @@ If you use Claude Code, install the Snowplow plugin from its native marketplace.
 
 This installs the Snowplow MCP server plus six bundled skills, including the `signals` skill that guides the assistant through Signals workflows like the one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the `signals` skill, so there's no slash command to run.
 
-The plugin source lives at [github.com/snowplow/skills](https://github.com/snowplow/skills), and Claude Code updates it automatically when the repository changes.
+The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills), and Claude Code updates it automatically when the repository changes.
 
 ### Other MCP clients
 
@@ -53,7 +53,8 @@ The configurations above use OAuth: the first time your assistant calls a Snowpl
 OAuth tokens expire, which means occasional re-authentication prompts. For a connection that keeps working without a browser, authenticate with a Console API key instead. You'll need three values:
 
 1. Your organization ID, from the **Manage organization** page in Console settings
-2. An API key ID and API key, which you [create in Console](/docs/account-management/#create-an-api-key)
+2. An API key ID, which you get when you [create an API key in Console](/docs/account-management/#create-an-api-key)
+3. The API key itself, which Console shows only once, at creation
 
 Then pass them as headers in your MCP client configuration:
 
@@ -82,32 +83,7 @@ Then pass them as headers in your MCP client configuration:
 By default, API keys are created with all permissions, which may be broader than you intend for an assistant. If you want the assistant to operate with your user account's more limited permissions, use OAuth instead. Store the key securely, and never paste credentials into the assistant's chat.
 :::
 
-### How the credentials work
-
-Behind the scenes, Snowplow services exchange your API key and key ID for a temporary access token, using the Console Credentials API. The token is a JWT, valid for 24 hours, that's passed as a Bearer token on each request. The MCP server and the Signals SDKs do this exchange for you, but you can run it yourself with any HTTP client:
-
-```bash
-curl \
-  --header 'X-API-Key-ID: <API_KEY_ID>' \
-  --header 'X-API-Key: <API_KEY>' \
-  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
-```
-
-This returns a JWT:
-
-```json
-{ "accessToken": "<JWT>" }
-```
-
-You can then call the [Signals API](/docs/signals/connection/) directly with the token, for example to list your attribute groups. Note the trailing slash on the endpoint, which is required:
-
-```bash
-curl \
-  --header 'Authorization: Bearer <JWT>' \
-  https://YOUR_ID.signals.snowplowanalytics.com/api/v1/registry/attribute_groups/
-```
-
-Your Signals API URL, in the form `https://YOUR_ID.signals.snowplowanalytics.com`, is shown in Console under **Signals** > **Overview**. You'll use it again later in this tutorial to retrieve calculated attribute values with the Signals Python SDK. See [Connect to Snowplow Signals](/docs/signals/connection/) for the full list of connection credentials and where to find each one.
+See [Connect to Snowplow Signals](/docs/signals/connection/) for the full list of connection credentials and where to find each one.
 
 ## Check the connection
 

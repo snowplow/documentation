@@ -1,10 +1,10 @@
 ---
-title: "Conclusion"
+title: "Conclusions and next steps from the Signals MCP tutorial"
 position: 5
 sidebar_label: "Conclusion"
 description: "Recap of managing Signals conversationally through the Snowplow MCP server, with next steps for services, interventions, and the Console-embedded Snowplow Assistant."
 keywords: ["snowplow mcp", "signals services", "interventions", "snowplow assistant", "next steps"]
-date: "2026-07-29"
+date: "2026-07-30"
 ---
 
 In this tutorial you connected the Snowplow MCP server to an AI assistant and managed a complete Signals workflow conversationally:
@@ -12,10 +12,10 @@ In this tutorial you connected the Snowplow MCP server to an AI assistant and ma
 * Installed the Snowplow plugin and authenticated with Console credentials
 * Defined a stream attribute group with three session metrics, saved as a draft
 * Tested the definitions and published the group
-* Verified the configuration in Console, and the live values with the Signals SDK
-* Added an attribute and republished, without leaving the conversation
+* Verified the configuration in Console, and the live values in the Snowplow Inspector
+* Added an attribute and published the new version, without leaving the conversation
 
-The pattern that makes this work is the same at every step: the assistant stages the change, and you confirm the result somewhere the assistant can't embellish — Console, the Snowplow Inspector, or a retrieval call against the Profiles Store.
+The pattern that makes this work is the same at every step: the assistant stages the change, and you confirm the result somewhere the assistant can't embellish — Console, or the Snowplow Inspector reading the Profiles Store directly.
 
 ## Beyond attribute groups
 
@@ -28,7 +28,7 @@ The MCP server covers the full [Signals](/docs/signals/introduction/) surface, s
 
 It also manages the rest of Snowplow Console, from data structures and tracking plans to pipeline health and failed events. See the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) documentation for the full capability list.
 
-## No-setup alternative
+## Use the Snowplow Assistant instead
 
 If you want the same conversational control without configuring an MCP client, the [Snowplow Assistant](/docs/llms-support/console-agent/) is built into Snowplow Console and uses the same set of tools, operating with your existing Console permissions. It's a practical option for teammates who don't work in AI coding tools.
 

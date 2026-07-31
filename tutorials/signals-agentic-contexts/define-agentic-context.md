@@ -19,7 +19,7 @@ Do this by asking an AI assistant, in Snowplow Console, or with the Signals Pyth
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="assistant" label="AI assistant" default>
 
-Use the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, which needs no setup, or your own MCP-capable assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/). To connect your own assistant, follow [Connect the MCP server](/tutorials/signals-mcp/connect-the-mcp-server).
+Use the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, which needs no setup, or your own MCP-capable assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/).
 
 Paste this prompt into the chat:
 

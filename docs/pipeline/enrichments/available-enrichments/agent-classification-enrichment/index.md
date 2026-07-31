@@ -44,7 +44,7 @@ Configure the parameters in the Console enrichment editor. Keep the Console defa
     "database": "<use default value from Console>"
   },
   "classification": {
-    "MyInternalBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
+    "SomeBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
   }
 }
 ```

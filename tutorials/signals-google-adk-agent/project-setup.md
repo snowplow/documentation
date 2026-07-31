@@ -2,9 +2,9 @@
 title: "Set up the project"
 sidebar_label: "Set up the project"
 position: 2
-description: "Scaffold a Google ADK agent and React frontend with the CopilotKit starter, install Snowplow dependencies, and configure environment variables."
+description: "Scaffold a Google ADK agent and React front-end with the CopilotKit starter, install Snowplow dependencies, and configure environment variables."
 keywords: ["CopilotKit", "Google ADK", "scaffold", "setup", "uv", "Next.js"]
-date: "2026-07-29"
+date: "2026-07-31"
 ---
 
 CopilotKit ships a starter that scaffolds both the ADK Python back-end and a React front-end in one command.
@@ -25,13 +25,9 @@ This creates:
 
 The scaffold's Python side uses `uv` rather than pip. The agent virtual environment lives at `agent/.venv`.
 
-:::note[React frameworks]
-The scaffold uses Next.js as a convenience. It provides a development server, routing, and an API endpoint to host the CopilotKit proxy.
+The scaffold uses Next.js as a convenience, for its development server, routing, and an API endpoint to host the CopilotKit proxy. CopilotKit itself is a React library that works with any framework.
 
-CopilotKit itself is a React library that works with any framework.
-:::
-
-## Install frontend and backend dependencies
+## Install front-end and back-end dependencies
 
 ```bash
 npm install

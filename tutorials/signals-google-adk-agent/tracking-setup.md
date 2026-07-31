@@ -4,7 +4,7 @@ sidebar_label: "Set up Snowplow tracking"
 position: 3
 description: "Initialize the Snowplow Browser tracker, track page views on client-side route changes, and wire the tracker into the React layout."
 keywords: ["Snowplow Browser SDK", "tracker", "page views", "activity tracking", "link clicks"]
-date: "2026-04-17"
+date: "2026-07-31"
 ---
 
 [Snowplow Signals](/docs/signals/get-started/) computes user attributes from your Snowplow behavioral event stream. Follow these steps to create events to work with.
@@ -100,9 +100,7 @@ export function SnowplowProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-:::note[Using a different framework?]
 The scaffold uses `usePathname` from `next/navigation` for route-change detection. In a Vite application, swap this for `useLocation` from `react-router-dom`. The Snowplow tracker itself is framework-agnostic.
-:::
 
 ## Add to the root layout
 

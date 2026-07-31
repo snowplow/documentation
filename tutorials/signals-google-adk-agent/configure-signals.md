@@ -1,10 +1,10 @@
 ---
-title: "Configure Snowplow Signals"
+title: "Configure Signals attributes and an agentic context"
 sidebar_label: "Configure Signals"
 position: 4
 description: "Create an attribute group, a service, and an agentic context to serve real-time profile attributes and session activity to your Google ADK agent."
 keywords: ["Signals", "attribute group", "service", "agentic context", "Basic Web", "domain_sessionid"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 ```mdx-code-block
@@ -17,7 +17,23 @@ The next step is to define the real-time context you want Signals to serve. You'
 * An [attribute group](/docs/signals/concepts/#attribute-groups) and [service](/docs/signals/concepts/#services) that compute and serve profile attributes: aggregate metrics that describe the session, such as how many pages the user has viewed
 * An [agentic context](/docs/signals/agentic-contexts/) that captures recent session activity: the user's latest events, readable as an LLM-ready narrative
 
-The two work together. Attributes tell your agent what the session adds up to, while the agentic context tells it what the user has just been doing, event by event. Both are scoped to the same `domain_sessionid` attribute key, so your agent can fetch both with the session ID it already reads from the tracker cookie.
+The two work together. Attributes describe the session in aggregate, while the agentic context records what the user has just been doing, event by event. Both are scoped to the same `domain_sessionid` attribute key, so your agent can fetch both with the session ID it already reads from the tracker cookie.
+
+## Ask the Snowplow Assistant
+
+You can create all three resources by asking an AI assistant: the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, or your own assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which you can install with `npx plugins add snowplow/skills`. Paste this prompt:
+
+```text
+In Signals, create and publish an attribute group from the Basic Web template with
+domain_sessionid as the attribute key, and a service called web_agent_context that serves
+it. Then create and publish an agentic context called web_agent_activity, also keyed on
+domain_sessionid, buffering the last 50 page_view events from the last 30 minutes and
+keeping the event_name, page_urlpath, and page_title properties. Set its prompt to: "You
+are a helpful assistant for Signal Shop. Use this recent activity to understand what the
+user is exploring right now, and tailor your answers to it."
+```
+
+Use these exact names, because they match the `SNOWPLOW_SIGNALS_SERVICE_NAME` and `SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME` variables you configured in your `.env` file. To set the same resources up by hand instead, work through the sections below.
 
 ## Create a Basic Web attribute group
 
@@ -83,15 +99,15 @@ The service returns attributes for a given session ID in this format:
 }
 ```
 
-In this six-page session, six page views produce five entries in `unique_pages_viewed`, because one product page was visited twice. That's the kind of pattern the aggregates flatten and the agentic context preserves.
+In this six-page session, six page views produce five entries in `unique_pages_viewed`, because one product page was visited twice.
 
 ## Create an agentic context
 
-The service you just created serves computed aggregates. To also give your agent a play-by-play of what the user is doing right now, [define an agentic context](/docs/signals/agentic-contexts/): a rolling record of the user's recent events that Signals can return as a plain-language narrative, ready to drop into your agent's instruction.
+The service you just created serves computed aggregates. To also give your agent a chronological record of what the user is doing, [define an agentic context](/docs/signals/agentic-contexts/): a rolling record of the user's recent events that Signals can return as a plain-language narrative, ready to drop into your agent's instruction.
 
 For this app, capture page view events, keeping three properties from each one:
 
-| Property       | Why                                                              |
+| Property       | Purpose                                                          |
 | -------------- | ---------------------------------------------------------------- |
 | `event_name`   | Populates the event column of the narrative table                 |
 | `page_urlpath` | Populates the URL column of the narrative table                   |
@@ -130,7 +146,7 @@ Click **Create**. Your agentic context now has a details page showing **Status**
 
 You can also define agentic contexts programmatically with the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), where the `EventLog` class is the building block. You already added this SDK to the agent's dependencies during project setup.
 
-Start by [connecting to Signals](/docs/signals/connection/) to create a `Signals` object, then define the agentic context:
+Start by [connecting to Signals](/docs/signals/connection/) to create a `Signals` object called `sp_signals`, then define the agentic context:
 
 ```python
 from snowplow_signals import (
@@ -176,9 +192,7 @@ Publish it to send the configuration to your Signals infrastructure:
 sp_signals.publish([web_agent_activity])
 ```
 
-Run this as a one-off script, separately from the agent. Defining Signals resources is a setup task, not something your agent does at runtime.
-
-To change the agentic context after publishing it, use **Edit** and **Publish** on its details page in Console, under **Signals** > **Agentic contexts**.
+Run this as a one-off script, separately from the agent.
 
   </TabItem>
 </Tabs>

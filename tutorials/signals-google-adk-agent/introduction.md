@@ -4,15 +4,15 @@ sidebar_label: "Introduction"
 position: 1
 description: "Add Snowplow Signals to a Google ADK agent so it gets real-time user context for every response, and embed it in a React app with CopilotKit."
 keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "agentic context", "Gemini", "AI agents", "personalization"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 In this tutorial, you'll add [Snowplow Signals](/docs/signals/) to a Google ADK agent so the agent gets fresh context about the current user's session before every response. Instead of responding generically, the agent will know which pages the user has been browsing, how long they've been on the site, and what they've been looking at.
 
 The agent will draw on two complementary kinds of Signals context:
 
-* Profile attributes: computed aggregates about the session, such as page view counts, served by a Signals [service](/docs/signals/concepts/#services). Use attributes when you want defined metrics that your agent, or any other consumer, can rely on.
-* An [agentic context](/docs/signals/agentic-contexts/): the user's recent activity, returned as an LLM-ready narrative. Use it when you want to ground the agent in the user's immediate journey, without writing aggregation or formatting logic.
+- Profile attributes: computed aggregates about the session, such as page view counts, served by a Signals [service](/docs/signals/concepts/#services). Use attributes when you want defined metrics that your agent, or any other consumer, can rely on.
+- An [agentic context](/docs/signals/agentic-contexts/): the user's recent activity, returned as an LLM-ready narrative. Use it when you want to ground the agent in the user's immediate journey, without writing aggregation or formatting logic.
 
 The app will:
 
@@ -88,7 +88,7 @@ flowchart TD
 
 ## Prerequisites
 
-- A Snowplow account with [Signals enabled](/docs/signals/setup/)
+- A Snowplow account and pipeline with [Signals enabled](/docs/signals/setup/)
 - Node.js 18+ and npm/pnpm
 - Python 3.12+
 - A Google AI Studio API key
@@ -96,8 +96,4 @@ flowchart TD
   - [Vertex AI](https://docs.cloud.google.com/agent-builder/agent-engine/quickstart-adk)
 - Basic familiarity with React, Python, and TypeScript
 
-:::note[A full pipeline is required]
-Signals computes attributes and captures session activity from real events flowing through your pipeline, so this tutorial can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
-
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
-:::
+This tutorial should take approximately 45 minutes to complete.

@@ -4,7 +4,7 @@ position: 6
 sidebar_label: "Test the app"
 description: "Run your Next.js app, build up behavioral context by browsing, and see how the AI agent uses real-time Signals data."
 keywords: ["testing", "signals context", "agentic context", "ai agent demo", "real-time personalization"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 Your application is now ready to try out.
@@ -36,22 +36,12 @@ console.log(
 );
 ```
 
-A healthy log contains both sections: the profile attributes as a markdown list, and the activity narrative wrapped in `[START CONTEXT]` and `[END CONTEXT]`.
+A healthy log contains both sections: the profile attributes as a Markdown list, and the activity narrative wrapped in `[START CONTEXT]` and `[END CONTEXT]`.
 
-If the profile section is missing, check:
-* Is your attribute group published?
-* Did you create a service with the right name?
-* Have you been browsing for long enough for events to flow through the pipeline?
+For the profile section, confirm in Console that your attribute group is published and that your service uses the name from the previous step, then browse for long enough that events flow through the pipeline. You can also ask the Snowplow Assistant to confirm both are published. A brand new session shows no profile section at all: the service returns every attribute as `null` until events arrive, and `getProfileSection()` filters those out.
 
-A brand new session shows no profile section at all: the service returns every attribute as `null` until events arrive, and `getProfileSection()` filters those out.
+For the activity section, confirm your agentic context is published, that you selected the `page_view` event when you defined it, and that your events are newer than the `max_age_seconds` you configured.
 
-If the activity section is missing, check:
-* Is your agentic context published?
-* Did you select the `page_view` event when you defined it?
-* Are your events newer than the `max_age_seconds` you configured?
-
-Because each fetch is handled independently, one section can appear without the other. That's deliberate: a failure to reach either won't take the agent down.
-
-## Inspect the Signals integration in the browser
+Because each fetch is handled independently, one section can appear without the other, so a failure to reach either won't take the agent down.
 
 To confirm the tracker and Signals agree on your session, use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/signals-integration/). It shows the events leaving the page alongside the live attribute values Signals holds for your session, which separates a tracking problem from a Signals configuration problem.

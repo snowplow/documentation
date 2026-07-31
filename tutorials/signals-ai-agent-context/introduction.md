@@ -4,7 +4,7 @@ position: 1
 sidebar_label: "Introduction"
 description: "Build a Next.js AI agent that uses Snowplow Signals to understand what your users are doing in real time."
 keywords: ["snowplow signals", "ai agent", "vercel ai sdk", "real-time context", "agentic context", "next.js"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 In this tutorial, you'll build a Next.js AI agent that uses [Snowplow Signals](/docs/signals/introduction/) to understand what your users are doing in real time. Instead of responding generically to every user, the agent will have live awareness of the current user's session behavior: which pages they've visited, what they've been exploring, and how long they've been on the site.
@@ -84,16 +84,10 @@ flowchart TD
 
 This tutorial requires:
 
-* A Snowplow account with [Signals enabled](/docs/signals/setup/)
+* A Snowplow account and pipeline with [Signals enabled](/docs/signals/setup/)
 * Node.js 18+ and npm/pnpm
 * A [Vercel AI Gateway API key](https://vercel.com/docs/ai-gateway/getting-started)
   * This tutorial uses `openai/gpt-4o-mini` via AI Gateway, but any supported model works
 * Basic familiarity with Next.js and TypeScript
-
-:::note[A full pipeline is required]
-Signals computes attributes and captures session activity from real events flowing through your pipeline, so this tutorial can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
-
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
-:::
 
 This tutorial should take approximately 30 minutes to complete.

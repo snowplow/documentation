@@ -57,9 +57,8 @@ The agent categories in the default configuration are:
 * `LINK_PREVIEW` — agents that visit links in order to provide a preview of the content, e.g. `BingPreview`
 * `SEARCH_INDEX` — agents powering traditional search, e.g. `Bingbot`
 
-
-  </TabItem>
-  <TabItem value="self-hosted" label="Self-Hosted">
+</TabItem>
+<TabItem value="self-hosted" label="Self-Hosted">
 
 For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md). For example:
 

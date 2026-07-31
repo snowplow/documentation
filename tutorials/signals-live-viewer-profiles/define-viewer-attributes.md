@@ -2,7 +2,7 @@
 title: "Define the viewer attributes"
 position: 3
 sidebar_label: "Define viewer attributes"
-description: "Define two Signals stream attribute groups from Snowplow media events, using the Python SDK or an AI assistant. One group holds session-level viewer state, watch time, and skipped ads, and the other holds video-level audience metrics on a custom attribute key."
+description: "Define two Signals stream attribute groups from Snowplow media events, using an AI assistant or the Python SDK. One group holds session-level viewer state, watch time, and skipped ads, and the other holds video-level audience metrics on a custom attribute key."
 keywords: ["stream attribute group", "domain_sessionid", "custom attribute key", "media events", "signals python sdk", "snowplow mcp", "viewer state"]
 date: "2026-07-31"
 ---
@@ -12,7 +12,7 @@ With media events flowing, you can tell Signals what to compute from them. In th
 * `viewer_profile`, keyed on the built-in `domain_sessionid` [attribute key](/docs/signals/attributes/attribute-keys/), so that each viewing session gets its own profile
 * `video_audience`, keyed on a custom `video_id` attribute key, so that every session watching the same video updates one shared set of counters
 
-You'll also define a [service](/docs/signals/applications/services/) for each group, and publish everything in a single call. There are two routes to the same configuration: [describe it to an AI assistant](#define-the-attributes-with-an-ai-assistant), or write it with the [Signals Python SDK](/docs/signals/connection/).
+You'll also define a [service](/docs/signals/applications/services/) for each group, and publish the whole configuration.
 
 ## Map viewer actions to session attributes
 
@@ -33,9 +33,23 @@ Two details of the [media schemas](/docs/events/ootb-data/media-events/) shape t
 
 `ads_skipped` is a plain counter: it increments every time Signals processes an `ad_skip_event` for the session. All three attributes use the `Lifetime` period, so they cover the whole session rather than a rolling time window.
 
-## Define the attributes with an AI assistant
+## Aggregate metrics per video
 
-That design is a description of what to compute, and an AI assistant with access to your Signals registry can work from the description rather than from code. Two ways to get one:
+The session profiles answer "What is this viewer doing?" A dashboard for the whole catalog also needs the opposite view: "How many people are watching this title, across every session?" Signals answers that with a second attribute group keyed on the video rather than the session.
+
+Attribute keys aren't limited to the built-in user, device, and session identifiers. A [custom attribute key](/docs/signals/attributes/attribute-keys/) points at any property in your events, and Signals aggregates against whatever value that property holds. The standard `media_player` entity has no field for the content itself, so the video page sets its `label` to the video's ID, and the `video_id` attribute key reads that.
+
+Because the `video_audience` group aggregates across sessions, `domain_sessionid` becomes something to count rather than something to group by, and the group computes three attributes.
+
+`active_viewers` and `viewers` both use `approx_count_distinct` on the `domain_sessionid` atomic property, which counts how many different sessions produced the events. The difference is the window: `active_viewers` has a five-minute `period`, so it only counts sessions that pinged recently, which is a reasonable stand-in for concurrent viewers when the page pings every 10 seconds. `viewers` has no `period`, so it counts every session that has ever played the video. `total_ads_skipped` is the same counter as the session-level `ads_skipped`, but summed over everyone watching.
+
+`approx_count_distinct` uses [HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) internally, so at high cardinality it's a close approximation rather than an exact count. At the handful of viewers in this accelerator it's exact.
+
+That's the whole design. Both routes below produce the same configuration, so pick one: [describe it to an AI assistant](#define-using-the-ai-assistant), or [write it with the Signals Python SDK](#define-using-the-python-sdk).
+
+## Define using the AI assistant
+
+The design above is a description of what to compute, and an AI assistant with access to your Signals registry can work from the description rather than from code. Two ways to get one:
 
 * Any MCP-capable assistant, such as Claude Code or Cursor, connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which exposes the Signals registry as tools alongside the rest of your Snowplow account
 * The [Snowplow Assistant](/docs/llms-support/console-agent/), if your organization has it enabled in [Snowplow Console](https://console.snowplowanalytics.com): it covers the same Signals capabilities with nothing to set up
@@ -79,9 +93,13 @@ Create everything as drafts and don't publish anything yet.
 Signals saves new definitions as drafts. Nothing reaches the streaming engine, and nothing is calculated, until you publish, which is your safety net for a configuration you didn't write yourself. Ask the assistant to show you the full definition of each group, or open **Signals** > **Attribute groups** in Console, and check the aggregations, properties, and periods against this page before you tell it to publish.
 :::
 
-Once you've reviewed the definitions and told the assistant to publish them, skip ahead to [verifying the attributes](/tutorials/signals-live-viewer-profiles/verify-the-attributes). The rest of this page builds the same configuration with the Python SDK.
+Once the definitions match this page, tell the assistant to publish them. You can also publish the drafts yourself from **Signals** > **Attribute groups** in Snowplow Console.
 
-## Connect to Signals
+## Define using the Python SDK
+
+This route builds the same configuration as a script, with the [Signals Python SDK](/docs/signals/connection/).
+
+### Connect to Signals
 
 Install the Signals Python SDK into your Python environment:
 
@@ -126,7 +144,7 @@ sp_signals = Signals(
 OWNER = "you@example.com"  # replace with your email address
 ```
 
-## Define the session attributes
+### Define the session attributes
 
 Each `Event` object references a media schema by vendor, name, and version, exactly as the schema URIs appear in the Inspector. Defining them once keeps the attributes readable, because several attributes read the same events:
 
@@ -183,11 +201,9 @@ viewer_profile = StreamAttributeGroup(
 )
 ```
 
-## Aggregate metrics per video
+### Define the video attributes
 
-The session profiles answer "What is this viewer doing?" A dashboard for the whole catalog also needs the opposite view: "How many people are watching this title, across every session?" Signals answers that with a second attribute group keyed on the video rather than the session.
-
-Attribute keys aren't limited to the built-in user, device, and session identifiers. A [custom attribute key](/docs/signals/attributes/attribute-keys/) points at any property in your events, and Signals aggregates against whatever value that property holds. The standard `media_player` entity has no field for the content itself, so the video page sets its `label` to the video's ID, and the attribute key reads that:
+The custom `video_id` attribute key comes first, because the attribute group references it:
 
 ```python
 video_id = AttributeKey(
@@ -202,7 +218,7 @@ video_id = AttributeKey(
 )
 ```
 
-The group keyed on `video_id` aggregates across sessions, so `domain_sessionid` becomes something to count rather than something to group by:
+Then the group keyed on it:
 
 ```python
 video_audience = StreamAttributeGroup(
@@ -243,11 +259,7 @@ video_audience = StreamAttributeGroup(
 )
 ```
 
-`active_viewers` and `viewers` both use `approx_count_distinct` on the `domain_sessionid` atomic property, which counts how many different sessions produced the events. The difference is the window: `active_viewers` has a five-minute `period`, so it only counts sessions that pinged recently, which is a reasonable stand-in for concurrent viewers when the page pings every 10 seconds. `viewers` has no `period`, so it counts every session that has ever played the video. `total_ads_skipped` is the same counter as the session-level `ads_skipped`, but summed over everyone watching.
-
-`approx_count_distinct` uses [HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) internally, so at high cardinality it's a close approximation rather than an exact count. At the handful of viewers in this accelerator it's exact.
-
-## Publish the definitions
+### Publish the definitions
 
 Retrieving attributes through a service is the recommended pattern for applications, because the service name stays stable while you iterate on attribute group versions. Pass the group objects straight to `Service`, and the SDK records the group name and version for you:
 
@@ -290,7 +302,7 @@ Run the script:
 python define_attributes.py
 ```
 
-Publishing isn't instant: give the definitions a moment to reach the streaming engine. Signals only computes attributes from events processed after that point, so events you tracked before publishing don't contribute to the values.
+Publishing isn't instant: give the definitions a moment to reach the streaming engine. Signals only computes attributes from events processed after that point, so events you tracked before publishing don't contribute.
 
 Open **Signals** > **Attribute groups** in Snowplow Console and select `viewer_profile` to review what you published:
 

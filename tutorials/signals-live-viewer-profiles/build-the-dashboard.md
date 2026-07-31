@@ -1,10 +1,10 @@
 ---
 title: "Build the dashboard"
-position: 4
+position: 5
 sidebar_label: "Build the dashboard"
-description: "Serve live viewer profiles to a React dashboard with a one-route Node.js back-end that registers sessions and retrieves session and video attributes in batch with the Signals Node.js SDK."
+description: "Serve live viewer profiles to a React dashboard with a one-route Node.js back-end. The back-end registers sessions and retrieves session and video attributes in batch with the Signals Node.js SDK."
 keywords: ["signals node sdk", "getBatchServiceAttributes", "live dashboard", "domain_sessionid", "profiles store"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 In this section you'll build the dashboard: a page that lists every live viewer with their state, watch time, and skipped ads, and every video with its audience metrics, polling for fresh values every few seconds.
@@ -50,7 +50,7 @@ Then add the registration call to the existing mount effect, after `startMediaTr
   }, []);
 ```
 
-Nothing answers that route until you build the back-end. The video page tracks media events either way, but a viewer only reaches the dashboard once this registration call succeeds, so start the back-end before you open the video page.
+Nothing answers that route until you build the back-end. The video page tracks media events either way, but a viewer only reaches the dashboard once this registration call succeeds.
 
 ## Create the back-end
 
@@ -290,7 +290,7 @@ npm run dev
 
 Open `http://localhost:5173` and start the video, then open `http://localhost:5173/dashboard` in a second tab or window. Within a few seconds the dashboard shows your session's row. Skip an ad and watch `Ads skipped` increment, pause the video and watch the state flip to `Paused`, and leave it playing to see `Seconds watched` climb with each ping.
 
-To see the video-level attributes do their job, open the same video in a second browser, or in a private window, so that two different sessions are watching it. The session table gains a row, and the video's `Watching` count goes to 2 while both keep pinging. Opening `http://localhost:5173/?video=bunny-trailer` adds a second video row, aggregating only the sessions watching that title.
+To see the video-level attributes do their job, open the same video in a second browser, or in a private window, so that two different sessions are watching it. The session table gains a row, and the video's `Watching` count goes to two while both keep pinging. Opening `http://localhost:5173/?video=bunny-trailer` adds a second video row, aggregating only the sessions watching that title.
 
 ![Live viewers dashboard with a by-video table showing sintel-trailer with 2 watching, 6 viewers, and 8 ads skipped, and bunny-trailer with 1 watching, 3 viewers, and 3 ads skipped, above a by-session table with three session rows](images/dashboard-live-viewers.png)
 
@@ -300,7 +300,7 @@ The two counts per video differ on purpose. `Watching` comes from `active_viewer
 
 If the dashboard doesn't show what you expect, work through these:
 
-* The dashboard reports an error from the back-end: check that the service names in `server.js` match the services you published, under **Signals** > **Services** in Console, and that the `attribute_key` values are `domain_sessionid` and the name you gave your custom key, `video_id`.
-* The back-end can't authenticate with Signals: check all four credential values in `.env`, and make sure you started the server with `--env-file=.env`.
+* The dashboard reports an error from the back-end: check that the service names in `server.js` match the services you published, under **Signals** > **Services** in Console, and that the `attribute_key` values are `domain_sessionid` and the name you gave your custom key, `video_id`
+* The back-end can't authenticate with Signals: check all four credential values in `.env`, and make sure you started the server with `--env-file=.env`
 * The row shows `Waiting for events` and zeros: the session is registered but has no computed attributes yet. Interact with the video after the attribute groups have finished publishing, since earlier events aren't counted.
 * The row disappears after a back-end restart: the in-memory set is empty again. Reload the video page to re-register.

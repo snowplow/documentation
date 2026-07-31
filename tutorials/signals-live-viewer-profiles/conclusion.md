@@ -1,10 +1,10 @@
 ---
 title: "Conclusion"
-position: 5
+position: 6
 sidebar_label: "Conclusion"
 description: "Review the infrastructure you didn't have to build for live viewer profiles, and extend the accelerator with push updates, engagement scoring, and ad performance attributes."
 keywords: ["signals conclusion", "streaming infrastructure", "changed operator", "engagement scoring", "concurrent viewers"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 You've built a live viewer profile system for a video streaming site. A React page tracks standard Snowplow media events, Signals computes each session's state, watch time, and skipped ads alongside per-video audience metrics, and a dashboard reads both through services with one batch call each.
@@ -18,12 +18,12 @@ Switching from session-level to video-level metrics was a custom attribute key a
 Some directions to take this further:
 
 * Push instead of polling: the dashboard polls every three seconds. Signals [interventions](/docs/signals/interventions/) support a [`changed` operator](/docs/signals/interventions/#the-changed-operator) that fires every time an attribute's value changes, which is a natural fit for pushing `viewer_state` transitions to the dashboard the moment a viewer pauses. Note that the Node.js SDK doesn't support intervention subscriptions: subscribe with the Python SDK, the browser plugin, or the Signals API, as described in [subscribe to interventions](/docs/signals/applications/subscribe/). The [interventions tutorial](/tutorials/signals-interventions/start) walks through the full workflow.
-* Engagement scoring: add attributes such as a `seek_count` counter or a `mean` of playback rate, and combine them into an engagement score for each session in your back-end.
+* Engagement scoring: add attributes such as a `seek_count` counter or a `mean` of playback rate, and combine them into an engagement score for each session in your back-end
 * Trending titles: the `video_audience` group already gives you a live count per video. Add a shorter `period` for a "watching in the last minute" figure, and sort the dashboard's video table by it to get a trending list.
 * Ad performance: the media schemas include ad quartile, click, pause, and resume events. Attributes over those events give you per-session or per-video ad engagement, for example a `category_count` of ad event names.
 * Viewer-level profiles: this accelerator keys sessions on `domain_sessionid`. Adding a third attribute group keyed on `domain_userid` gives you profiles that persist across sessions on the same device.
 
-## Learn more
+## Next steps
 
 Continue with these related resources:
 

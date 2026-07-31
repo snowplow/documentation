@@ -3,6 +3,6 @@
   "description": "Build a real-time viewer profile dashboard for a video streaming site with Snowplow media tracking and Signals, with no streaming infrastructure to manage.",
   "label": "Solution accelerator",
   "useCase": "Real-time personalization",
-  "technologies": ["React"],
+  "technologies": ["React", "Node.js", "Python"],
   "snowplowTech": ["Signals"]
 }

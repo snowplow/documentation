@@ -4,7 +4,7 @@ position: 2
 sidebar_label: "Set up media tracking"
 description: "Build a React video page that tracks play, pause, seek, ping, and ad events with the Snowplow browser tracker and media plugin, and verify the events in Snowplow Inspector."
 keywords: ["media tracking plugin", "snowplow browser tracker", "react video player", "ad events", "media session"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 In this section you'll build the video page: a React app that plays a trailer and tracks how the user interacts with it. The [Snowplow media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/) sends a [self-describing event](/docs/fundamentals/events/#self-describing-events) for each playback action, along with entities describing the player state and the media session. Signals will compute the viewer profiles from these events in the next section.
@@ -49,7 +49,7 @@ export const tracker = newTracker('sp1', import.meta.env.VITE_COLLECTOR_URL, {
 Create `src/VideoPage.jsx`. It renders an HTML5 `<video>` element and wires its DOM events to the media plugin's tracking functions:
 
 * `startMediaTracking` begins a media session when the page loads, with a ping every 10 seconds during playback. Each ping carries a media session [entity](/docs/fundamentals/entities/) with cumulative statistics such as `timePlayed`, which Signals will use for watch time.
-* `onPlay`, `onPause`, `onEnded`, `onSeeking`, and `onSeeked` track the corresponding media events.
+* `onPlay`, `onPause`, `onEnded`, `onSeeking`, and `onSeeked` track the corresponding media events
 * `onTimeUpdate` calls `updateMediaTracking` so the plugin always knows the current playback position. It updates internal state without sending an event.
 * The first play triggers a simulated pre-roll ad break. Completing it tracks `ad_complete_event`, and the skip button tracks `ad_skip_event`.
 
@@ -211,10 +211,6 @@ export default function VideoPage() {
   );
 }
 ```
-
-:::note[Media type strings]
-Pass `mediaType` as a string, either `'video'` or `'audio'`. The media plugin exports `MediaPlayerAdBreakType` for ad break types, but media types have no exported enum.
-:::
 
 Replace `src/main.jsx` to render the video page and initialize the tracker:
 

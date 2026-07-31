@@ -1,10 +1,10 @@
 ---
-title: "Configure Snowplow Signals"
+title: "Configure Signals attributes and an agentic context"
 sidebar_label: "Configure Signals"
 position: 3
 description: "Define and publish profile attributes and an agentic context using Snowplow Signals to provide real-time user context to your AI agent."
-keywords: ["Snowplow Signals", "behavioral attributes", "agentic context", "Profile API", "streaming engine", "personalization"]
-date: "2026-07-30"
+keywords: ["Snowplow Signals", "profile attributes", "agentic context", "Profiles API", "streaming engine", "personalization"]
+date: "2026-07-31"
 ---
 
 Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step, you'll set up two complementary kinds of real-time context in Snowplow Signals, and validate that both compute correctly from raw events:
@@ -12,7 +12,7 @@ Users express intent through their browsing behavior - page views, filter intera
 * An [attribute group](/docs/signals/attributes/attribute-groups/) and [service](/docs/signals/applications/services/) that compute and serve profile attributes: aggregate metrics that describe the session, such as how many destination pages the user has viewed
 * An [agentic context](/docs/signals/agentic-contexts/) that captures recent session activity: the user's latest events, readable as an LLM-ready narrative
 
-The two work together. Attributes tell your agent what the session adds up to, while the agentic context tells it what the user has just been doing, event by event. Both are scoped to the same `domain_sessionid` attribute key, so the agent can fetch both using the session ID it already has: the `get_signals` tool reads the attributes, and `get_session_activity` reads the narrative.
+The two work together. Attributes describe the session in aggregate, while the agentic context records what the user has just been doing, event by event. Both are scoped to the same `domain_sessionid` attribute key, so the agent can fetch both using the session ID it already has: the `get_signals` tool reads the attributes, and `get_session_activity` reads the narrative.
 
 ## Set up your credentials
 
@@ -57,9 +57,7 @@ And these attributes with the `last` aggregation:
 
 Running this cell defines the attributes locally but does not publish them yet.
 
-:::note[Snowplow schemas]
-These attributes are designed around specific Snowplow [events](/docs/fundamentals/events/) and [entities](/docs/fundamentals/entities/) (for example, `filter_tag_applied`, `destination_filter`, and the `content` entity). To use them on your own site, your tracking implementation must send the same events with matching schemas. You can adapt the attribute definitions to match your own event data instead.
-:::
+These attributes are designed around specific Snowplow [events](/docs/fundamentals/events/) and [entities](/docs/fundamentals/entities/), for example `filter_tag_applied`, `destination_filter`, and the `content` entity. To use them on your own site, send the same events with matching schemas, or adapt the attribute definitions to match your own event data.
 
 ## Create an attribute group
 
@@ -78,7 +76,7 @@ session_attributes_group = StreamAttributeGroup(
 )
 ```
 
-## Create a service
+## Create a service and publish
 
 Run the notebook cell that defines a [service](/docs/signals/applications/services/) to manage the attribute group:
 
@@ -93,9 +91,7 @@ travel_service = Service(
 
 The service name `travel_service` is what the agent's `get_signals` tool uses when querying the Profiles API.
 
-## Publish to Signals
-
-Run the cell that publishes the attribute group and service:
+Then run the cell that publishes the attribute group and service:
 
 ```python
 response = sp_signals.publish([session_attributes_group, travel_service])
@@ -105,11 +101,23 @@ Signals will start processing attributes from your real-time event stream.
 
 ## Define an agentic context
 
-The service you just published serves computed aggregates. To also give the agent a play-by-play of what the user is doing right now, [define an agentic context](/docs/signals/agentic-contexts/): a rolling record of the user's recent events that Signals can return as a plain-language narrative, ready to drop into a prompt.
+The service you just published serves computed aggregates. To also give the agent a chronological record of what the user is doing, [define an agentic context](/docs/signals/agentic-contexts/): a rolling record of the user's recent events that Signals can return as a plain-language narrative, ready to drop into a prompt.
 
-Run the next notebook cell. It captures the three events that reveal what a user is exploring, keeping a few properties from each:
+You can create and publish this agentic context by asking an AI assistant instead: the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, or your own assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which you can install with `npx plugins add snowplow/skills`. Paste this prompt:
 
-| Event | Properties kept | Why |
+```text
+In Signals, create and publish an agentic context called travel_agent_activity, keyed on
+domain_sessionid, buffering the last 50 events from the last 30 minutes. Capture page_view
+(keeping event_name, page_urlpath, and the content entity's primary_tag), filter_tag_applied
+(event_name and tag_name), and experience_filter (event_name and filter_value). Set its
+prompt to: "You are a travel assistant for a Southeast Asia travel site. Use this recent
+activity to understand what the user is exploring right now, and tailor your
+recommendations to it."
+```
+
+To define it from the notebook, run the next cell. It captures the three events that reveal what a user is exploring, keeping a few properties from each:
+
+| Event | Properties kept | Purpose |
 | :---- | :-------------- | :-- |
 | `page_view` | `event_name`, `page_urlpath`, and the `content` entity's `primary_tag` | Which destination pages the user opened, and what kind of content they hold |
 | `filter_tag_applied` | `event_name`, `tag_name` | Which interests the user filtered for |
@@ -184,7 +192,7 @@ travel_agent_activity = EventLog(
 )
 ```
 
-The buffer holds the most recent 50 events from the last 30 minutes. Leave high-frequency events like page pings out of a selection like this: heartbeats crowd out the meaningful activity.
+The buffer holds the most recent 50 events from the last 30 minutes, so leave high-frequency events like page pings out of a selection like this to stop heartbeats crowding out the meaningful activity.
 
 Run the next cell to publish it:
 
@@ -194,94 +202,4 @@ response = sp_signals.publish([travel_agent_activity])
 
 The `prompt` text travels with the agentic context. Signals hands it to your agent alongside the captured activity, so you can refine those instructions later without touching your agent code.
 
-:::note[Defining agentic contexts in Console]
-This accelerator defines everything from the notebook, but you can create and publish agentic contexts in Console instead. See [defining agentic contexts](/docs/signals/agentic-contexts/) for the Console walkthrough.
-:::
-
-## Validate what Signals computes
-
-Run the notebook cells that send synthetic test events, then read back both kinds of context. The Snowplow tracker in the notebook sends events directly to your event Collector - no demo site or web application is needed. The `page_url` field is metadata used by the attribute criteria to match against URL patterns.
-
-### Profile attributes
-
-After sending the events, retrieve the results:
-
-```python
-response = sp_signals.get_service_attributes(
-    name="travel_service",
-    attribute_key="domain_sessionid",
-    identifier=user_id,
-)
-
-print(response)
-```
-
-You should see a response similar to the following (exact counts depend on the test events sent):
-
-```json
-{
-  "budget_conscious_count": 2,
-  "culinary_tourist": 2,
-  "cultural_explorer": 5,
-  "destination_page_view_count": 10,
-  "family_destination_count": 3,
-  "family_fun": 5,
-  "latest_schedule": null,
-  "luxury_inclined_count": null,
-  "modern_urbanite": null,
-  "page_view_count": 10,
-  "preferred_experience_length": "half-day",
-  "tranquil_seeker": 1
-}
-```
-
-Attributes that no test event matched come back as `null`. The synthetic events never sort by price descending or touch luxury and urban content, so `luxury_inclined_count` and `modern_urbanite` stay empty, and `latest_schedule` stays empty because the notebook sends no `schedule_update` event.
-
-### Session activity
-
-Run the cell that reads the same session back as a narrative. This is exactly what the agent's `get_session_activity` tool returns:
-
-```python
-narrative = sp_signals.get_agentic_context(
-    name="travel_agent_activity",
-    identifier=user_id,
-    format="narrative",
-)
-
-print(narrative)
-```
-
-With `format="narrative"`, Signals returns the prompt you configured, followed by a block delimited by `[START CONTEXT]` and `[END CONTEXT]`. For the test events above, that looks like:
-
-```text
-You are a travel assistant for a Southeast Asia travel site. Use this recent activity to understand what the user is exploring right now, and tailor your recommendations to it.
-[START CONTEXT]
-Last activity 90 seconds ago. Session started 102 seconds ago. Based on last 50 recorded events for the last 1800 seconds.
-## Real-time user behaviour
-Events are ordered from oldest to most recent.
-seconds_since_start_of_session, event, url, event_context
-0, page_view, /destinations, {}
-0, page_view, /destinations, {}
-0, page_view, /destinations, {}
-0, page_view, /destinations, {}
-0, page_view, /destinations, {}
-0, page_view, /destinations/siem-reap, {primary_tag: 'culture'}
-1, page_view, /destinations/siem-reap, {primary_tag: 'history'}
-2, page_view, /destinations/siem-reap, {primary_tag: 'temples'}
-3, page_view, /destinations/bali, {primary_tag: 'family-friendly'}
-4, page_view, /destinations/bali, {primary_tag: 'beaches'}
-6, filter_tag_applied, , {tag_name: 'culture'}
-7, filter_tag_applied, , {tag_name: 'temples'}
-8, filter_tag_applied, , {tag_name: 'food'}
-9, filter_tag_applied, , {tag_name: 'street food'}
-11, experience_filter, , {filter_value: 'half-day'}
-[END CONTEXT]
-```
-
-Signals generates the opening summary and the event table from the events you selected, so there's no formatting code to write. You can also read the same activity as structured JSON by leaving `format` at its default: see [retrieving agentic contexts](/docs/signals/applications/agentic-contexts/).
-
-Compare the two responses. The counters say this user is engaged with cultural and family content. Only the narrative says they opened Siem Reap three times, moved on to Bali, then filtered for food and picked a half-day experience. That sequence is what makes a recommendation feel like it follows the conversation the user is already having with your site.
-
-:::tip
-Both tools use the same Signals credentials you configured earlier in the notebook.
-:::
+With all three resources published, the next step is to confirm that Signals computes both kinds of context.

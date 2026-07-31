@@ -4,7 +4,7 @@ sidebar_label: "Create the agent"
 position: 2
 description: "Build an AI agent prototype using the Strands Agents framework with tools for destination lookup, web search, and Snowplow Signals integration."
 keywords: ["Strands Agents", "AI agent", "tools", "agentic context", "AWS Bedrock", "Claude", "prototype"]
-date: "2026-07-29"
+date: "2026-07-31"
 ---
 
 In this step, you'll build a working agent prototype using the [Strands Agents](https://strandsagents.com/) framework. The agent combines a foundation model with custom tools to answer queries, look up information, and fetch behavioral data from Snowplow Signals.
@@ -34,7 +34,7 @@ Both Signals tools use the credentials you configured in the previous cell, and 
 * `get_signals` calls the Profiles API for computed aggregates, such as segment affinities and preferred experience length
 * `get_session_activity` calls the [agentic context](/docs/signals/applications/agentic-contexts/) for a narrative of the user's recent events, in the order they happened
 
-Writing precise tool docstrings matters here: the model chooses between the two based on what those docstrings say, so each one states what it returns and when to prefer it.
+The model chooses between the two based on what their docstrings say, so each one states what it returns and when to prefer it.
 
 You'll define the attributes and the agentic context these tools read in the next step.
 
@@ -52,13 +52,11 @@ model = BedrockModel(
 
 The `temperature` parameter controls how random the model's output is, on a scale from 0 to 1. A value of 0.3 produces more consistent, predictable responses - appropriate for a customer-facing agent where accuracy matters more than creativity.
 
-:::note[Model choice]
-To use a different model, change the model string in `model_id`. Make sure the model you pick is enabled in your Bedrock console and available in your region. The Signals integration works the same way regardless of which model you choose.
-:::
+To use a different model, change the model string in `model_id`, making sure the model you pick is enabled in your Bedrock console and available in your region.
 
 ## Create and configure the agent
 
-Run the notebook cell that combines the model, tools, and a system prompt into a functioning agent. The system prompt defines the agent's role and tells the agent to draw on both Signals tools, then explain how what they returned influenced the recommendation. This is key to delivering transparent, personalized responses.
+Run the notebook cell that combines the model, tools, and a system prompt into a functioning agent. The system prompt defines the agent's role and tells the agent to draw on both Signals tools, then explain how the returned context influenced the recommendation.
 
 ```python
 agent = Agent(

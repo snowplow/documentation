@@ -32,7 +32,7 @@ The agent draws on two complementary kinds of Signals context, each through its 
 * Profile attributes: computed aggregates about the session, such as how many destination pages the user has viewed and which interests they keep filtering for, served by a Signals [service](/docs/signals/applications/services/). Use attributes when you want defined metrics that your agent, or any other consumer, can rely on.
 * An [agentic context](/docs/signals/agentic-contexts/): the user's recent activity, returned as an LLM-ready narrative. Use it when you want to ground the agent in the user's immediate journey, without writing aggregation or formatting logic.
 
-They answer different questions. Attributes tell the agent that this user leans cultural and family-friendly. The narrative tells it that the user opened Siem Reap three times, moved on to Bali, then filtered for street food. This accelerator uses both.
+They answer different questions, and this accelerator uses both.
 
 ## Architecture
 
@@ -46,15 +46,10 @@ Together, Signals provides real-time behavioral context while AgentCore Memory p
 
 ## Prerequisites
 
-* A Snowplow CDI pipeline with [Signals enabled](/docs/signals/setup/) - the agent fetches profile attributes and the session activity narrative from Signals
+* A Snowplow account and pipeline with [Signals enabled](/docs/signals/setup/)
 * An AWS account with [Amazon Bedrock](https://aws.amazon.com/bedrock/) access and AgentCore Memory access - the agent runs on Claude via Bedrock, and your IAM user needs permissions for `bedrock:InvokeModel`, `bedrock-agentcore:*`, and `iam:PassRole` (scoped to `bedrock-agentcore.amazonaws.com`) to create AgentCore Memory resources
 * [AWS CLI](https://aws.amazon.com/cli/) installed and configured - used to authenticate with AWS services from the notebook
 * Python 3.11 or later - required by the Strands Agents framework
 * Familiarity with Python and running Jupyter notebooks
 
-:::note[A full pipeline is required]
-Signals computes attributes and captures session activity from real events flowing through your pipeline, so this accelerator can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
-
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
-:::
 

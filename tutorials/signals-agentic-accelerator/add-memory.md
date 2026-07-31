@@ -1,10 +1,10 @@
 ---
 title: "Add persistent customer context with AgentCore Memory"
 sidebar_label: "Add agent memory"
-position: 4
+position: 5
 description: "Integrate AWS Bedrock AgentCore Memory to give your AI agent persistent context across conversations using preference and semantic memory strategies."
 keywords: ["AgentCore Memory", "persistent memory", "personalization", "hooks", "Strands Agents", "long-term memory", "agentic context"]
-date: "2026-07-29"
+date: "2026-07-31"
 ---
 
 Without persistent memory, every conversation with an AI agent starts from zero. Users must repeat their preferences, explain their history, and re-establish context each time.
@@ -31,9 +31,7 @@ response = memory_client.create_memory_and_wait(
 )
 ```
 
-:::note[Creation time]
-Memory resource creation can take a couple of minutes. Wait for the confirmation message before proceeding.
-:::
+Memory resource creation takes a couple of minutes, so wait for the confirmation message before proceeding.
 
 ## Seed customer history
 
@@ -73,7 +71,7 @@ The `retrieve_memories` call uses semantic search - it finds memories relevant t
 
 ## Test personalized responses
 
-Run the notebook cells that rebuild the agent with memory hooks and test it. The agent now has three sources of context to draw on: memory (the seeded customer history), profile attributes (the aggregates computed from your test events), and session activity (the narrative of those same events, in order).
+Run the notebook cells that rebuild the agent with memory hooks and test it. The agent now has three sources of context to draw on: memory, profile attributes, and session activity.
 
 ```python
 agent_with_memory = Agent(
@@ -119,7 +117,7 @@ response = agent_with_memory(
 )
 ```
 
-This query is deliberately explicit to verify the tool works. You should see a response like:
+You should see a response like:
 
 ```
 Tool #1: get_signals
@@ -151,6 +149,6 @@ response = agent_with_memory(
 )
 ```
 
-The tool hands the agent the same narrative you printed when you validated the agentic context, so the agent can name the destination pages the user opened most recently and the filters they applied, instead of reasoning from counters alone. Attributes can tell it this user is drawn to cultural content; only the narrative can tell it they were reading about Siem Reap two minutes ago.
+The tool hands the agent the same narrative you printed when you validated the agentic context, so the agent can name the destination pages the user opened most recently and the filters they applied, instead of reasoning from counters alone.
 
 In a production deployment, the agent calls both Signals tools automatically based on the system prompt instructions - users would not need to explicitly ask about their browsing behavior. The session ID would come from the application context rather than being hardcoded, so the agent personalizes every response using real-time behavioral data alongside stored memory.

@@ -4,7 +4,7 @@ position: 3
 sidebar_label: "Define the attribute key"
 description: "Create a custom Signals attribute key from the account entity's account_id property, in Snowplow Console or with the Signals Python SDK."
 keywords: ["custom attribute key", "entity property", "signals console", "signals python sdk", "attribute key from schema property"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 ```mdx-code-block
@@ -35,12 +35,6 @@ Click **Confirm** to close the picker, then add an optional description. The **O
 
 Click **Create attribute key** to save it. There's no name field: the key's name is taken from the selected property, so it appears in the list as `account_id`.
 
-:::note[The data catalog refreshes periodically]
-The property picker shows the events and entities in your pipeline's data catalog, which is built from events your pipeline has processed. If the **Entity** tab is empty, the `task_completed` events from the previous section haven't been cataloged yet.
-
-The catalog refreshes periodically rather than instantly, so wait and reload the page. Rather than waiting, switch to the Python SDK tab, which doesn't depend on the catalog at all, and come back to Console later if you want to see the key there.
-:::
-
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
@@ -69,7 +63,3 @@ This only creates a local object. The key is registered with Signals when you pu
 </Tabs>
 
 The property reference is what makes this key account-scoped: for every event, Signals reads `account_id` from the attached `account` entity and uses that value as the profile identifier. That's specific to stream attribute groups. For [warehouse attribute groups](/docs/signals/attributes/warehouse-config/), the attributes are pre-calculated in a warehouse table, so the key names the table column holding the key values with `external_column` in place of `property`.
-
-:::note[When built-in keys are enough]
-If you want attributes per user, session, or device, skip custom keys and use the built-in `user_id`, `domain_userid`, `domain_sessionid`, or `network_userid` keys directly. See [attribute keys](/docs/signals/attributes/attribute-keys/) for the full list.
-:::

@@ -4,7 +4,7 @@ position: 6
 sidebar_label: "Conclusion"
 description: "Recap of building account-level attributes with a custom Signals attribute key, with variations and next steps."
 keywords: ["snowplow signals", "custom attribute keys", "account-level attributes", "next steps"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 You've built a real-time, account-level personalization loop for a multi-tenant B2B app. Along the way you:
@@ -35,6 +35,8 @@ sp_signals.delete(
     [account_expansion_nudge, account_service, account_activity, account_id_key]
 )
 ```
+
+If you built your definitions in Console, ask the [Snowplow Assistant](/docs/llms-support/console-agent/) to tear them down instead: "Unpublish and delete my account_expansion_nudge intervention, my account_activity_service service, version 1 of my account_activity attribute group, and my account_id attribute key, in that order."
 
 Your two data structures aren't Signals resources and aren't affected. Leave them in place if you want to keep tracking against them, or hide them from the **Data structures** list in Console.
 

@@ -4,7 +4,7 @@ position: 5
 sidebar_label: "Retrieve and intervene"
 description: "Retrieve live account-level attributes by account_id, define an intervention targeting the custom attribute key, and run the full multi-user loop end to end."
 keywords: ["retrieve signals attributes", "rule intervention", "subscribe to interventions", "account-level intervention", "custom attribute key"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 With definitions published, your application can look up any account's live profile and react when the whole team's activity crosses a threshold. Everything keys on `account_id`, so it works the same no matter which user triggered the events.
@@ -28,10 +28,6 @@ print("last_plan:", attributes.get("last_plan"))
 The result is a plain dictionary keyed by attribute name. Read it with `.get()` rather than `attributes["..."]`, so an attribute Signals hasn't computed yet returns `None` instead of raising `KeyError` halfway through your output.
 
 The first time you run this, expect `0`, `None`, and `None`: the empty profile described in the previous section. Signals computes attributes only from events processed after your published definitions reached the streaming engine, so the events you tracked earlier don't appear. Once your definitions have been applied, re-run the **Track team activity** block from the [tracking section](/tutorials/signals-account-attributes/track-the-account-entity#track-team-activity) to send fresh events under the same `account_id`, then retrieve again.
-
-:::note[Allow for propagation latency]
-Attributes are computed from a live stream, so there's a short delay between tracking an event and the updated attribute becoming available. If a value looks stale or comes back as `None` immediately after tracking, wait a moment and retrieve again, rather than assuming the value is wrong.
-:::
 
 Retrieving through a service is one of several options. See [retrieve attributes](/docs/signals/applications/retrieve-attributes/) for the alternatives, including reading a single attribute group directly, and the Node.js SDK and HTTP API equivalents.
 
@@ -112,7 +108,6 @@ import sys
 import time
 import uuid
 from snowplow_tracker import (
-    EmitterConfiguration,
     SelfDescribing,
     SelfDescribingJson,
     Snowplow,
@@ -132,18 +127,12 @@ print("account_id:", account_id)
 alice = Subject().set_user_id(str(uuid.uuid4())).set_domain_user_id(str(uuid.uuid4()))
 bob = Subject().set_user_id(str(uuid.uuid4())).set_domain_user_id(str(uuid.uuid4()))
 
-
-def on_send_failure(successful_count, unsent_events):
-    print(f"Collector rejected {len(unsent_events)} events ({successful_count} sent)")
-
-
 # --- Tracker. The namespace differs from the earlier snippets, so this script
 # --- can run in a session that already created a "project-app" tracker.
 tracker = Snowplow.create_tracker(
     namespace="project-app-full-run",
     endpoint=COLLECTOR_URL,
     app_id="project-app-backend",
-    emitter_config=EmitterConfiguration(on_failure=on_send_failure),
 )
 
 # --- Signals client ---

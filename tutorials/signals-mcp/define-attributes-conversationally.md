@@ -4,7 +4,7 @@ position: 3
 sidebar_label: "Define attributes"
 description: "Prompt your AI assistant to create a Signals stream attribute group, test it against warehouse data, and publish it using the Snowplow MCP tools."
 keywords: ["signals attribute group", "mcp tools", "conversational configuration", "test attributes", "publish signals"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 With the MCP server connected, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
@@ -55,7 +55,7 @@ The `most_recent_browser` attribute relies on the [YAUAA enrichment](/docs/pipel
 
 ## Review the draft
 
-New attribute groups are saved as drafts: definitions in the registry that aren't deployed to any compute engine. Nothing is calculated, and nothing reaches your applications, until you publish. This is what makes conversational configuration safe — the assistant can only stage changes, and you decide what goes live.
+New attribute groups are saved as drafts: definitions in the registry that aren't deployed to any compute engine. Nothing is calculated, and nothing reaches your applications, until you publish.
 
 Before moving on, review what was actually created rather than trusting the summary. Ask the assistant to show the full definition:
 

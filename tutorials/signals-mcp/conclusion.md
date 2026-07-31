@@ -4,18 +4,16 @@ position: 5
 sidebar_label: "Conclusion"
 description: "Recap of managing Signals conversationally through the Snowplow MCP server, with next steps for services, interventions, and the Console-embedded Snowplow Assistant."
 keywords: ["snowplow mcp", "signals services", "interventions", "snowplow assistant", "next steps"]
-date: "2026-07-30"
+date: "2026-07-31"
 ---
 
 In this tutorial you connected the Snowplow MCP server to an AI assistant and managed a complete Signals workflow conversationally:
 
-* Installed the Snowplow plugin and authenticated with Console credentials
+* Installed the Snowplow plugin and authenticated with your Console account
 * Defined a stream attribute group with three session metrics, saved as a draft
 * Tested the definitions and published the group
 * Verified the configuration in Console, and the live values in the Snowplow Inspector
 * Added an attribute and published the new version, without leaving the conversation
-
-The pattern that makes this work is the same at every step: the assistant stages the change, and you confirm the result somewhere the assistant can't embellish — Console, or the Snowplow Inspector reading the Profiles Store directly.
 
 ## Beyond attribute groups
 

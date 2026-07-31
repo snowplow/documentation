@@ -4,7 +4,7 @@ sidebar_label: "Personalize the AI agent"
 position: 6
 description: "Integrate Snowplow Signals with an AI chatbot to provide personalized travel recommendations based on user behavioral data."
 keywords: ["chatbot", "AI personalization", "OpenAI", "conversational AI", "behavioral data"]
-date: "2026-07-29"
+date: "2025-01-21"
 ---
 
 ```mdx-code-block
@@ -21,9 +21,7 @@ When a user asks the agent a question, the system fetches the attribute values f
 
 A toggle button on the chat widget allows you to enable or disable the tool call so you can see the difference in responses with and without Signals personalization.
 
-:::note[Agentic contexts]
-Signals can also build a prompt block like this for you. An [agentic context](/docs/signals/agentic-contexts/) captures a user's recent in-session activity, and you can [retrieve it](/docs/signals/applications/agentic-contexts/) as an LLM-ready narrative. The demo app doesn't support agentic contexts yet, so this tutorial uses attributes only. To see the native pattern, follow the [AI agent with real-time user context tutorial](/tutorials/signals-ai-agent-context/introduction). The two approaches complement each other: attributes give the agent a computed profile of the user, while an agentic context grounds it in the current session.
-:::
+Signals can also assemble this personalization context for you: an [agentic context](/docs/signals/agentic-contexts/) captures a user's recent in-session activity, which you can [retrieve](/docs/signals/applications/agentic-contexts/) as a plain-language narrative — see [Give an AI agent real-time session context with Signals](/tutorials/signals-agentic-contexts/start). This tutorial uses attributes.
 
 ## Data flow
 

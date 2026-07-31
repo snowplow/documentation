@@ -7,13 +7,13 @@ keywords: ["enrich 6.11", "enriched stream compression", "compression feature", 
 date: "2026-07-31"
 ---
 
-Enrich 6.11.0 introduces enriched stream compression, a new feature that significantly reduces the size (and therefore, cost) of data written to your enriched output stream.
+Enrich 6.11.0 introduces enriched stream compression, a feature that reduces the size (and therefore, cost) of data written to your enriched output stream.
 
-The compression feature allows Enrich to compress enriched events before writing them to the output stream. This provides several benefits:
+Enrich compresses enriched events before writing them to the output stream. This provides several benefits:
 
-* **Reduced storage costs**: compressed events take up less space in your output streams
-* **Improved throughput**: smaller records reduce the overhead of stream processing
-* **Better performance**: downstream consumers can process data more efficiently
+* Reduced storage costs — compressed events take up less space in your output streams
+* Improved throughput — smaller records reduce the overhead of stream processing
+* Faster downstream processing — consumers handle smaller messages more efficiently
 
 ## Enabling compression
 
@@ -33,9 +33,9 @@ Do not enable this setting if your downstream consumer is not in this list.
 
 :::
 
-When upgrading to Enrich 6.11.0, compression is an optional feature that can be configured in your [Enrich settings](/docs/api-reference/enrichment-components/configuration-reference/index.md). If this feature is not enabled, there are no changes to the data format or size.
+When upgrading to Enrich 6.11.0, compression is an optional feature that you can configure in your [Enrich settings](/docs/api-reference/enrichment-components/configuration-reference/index.md). If you don't enable this feature, the data format and size remain unchanged.
 
-After upgrading your downstream consumers, compression in Enrich can be enabled by adding the following config section:
+After upgrading your downstream consumers, enable compression in Enrich by adding the following config section:
 
 ```hocon
 compression {
@@ -43,20 +43,10 @@ compression {
 }
 ```
 
-You can also configure the compression algorithm and level:
-
-```hocon
-compression {
-  enabled = true
-  type = "zstd"            # or "gzip"
-  zstdCompressionLevel = 9 # 1–22, default 9
-}
-```
-
-The default algorithm is `zstd`, which generally provides a better compression ratio than `gzip` at comparable speeds.
+See the [configuration reference](/docs/api-reference/enrichment-components/configuration-reference/index.md) for additional options such as the compression algorithm (`zstd` or `gzip`) and compression level.
 
 ### Impact on metrics
 
-When compression is enabled, there will be a big decrease in the size of messages sent to the enriched event stream, i.e. Kinesis, Pub/Sub or Kafka, depending on your cloud. You will notice this decrease if you monitor metrics on the enriched stream.
+When compression is enabled, there will be a decrease in the size of messages sent to the enriched event stream, i.e. Kinesis, Pub/Sub or Kafka, depending on your cloud. You will notice this decrease if you monitor metrics on the enriched stream.
 
 This is perfectly normal and does not indicate any drop in event volumes.

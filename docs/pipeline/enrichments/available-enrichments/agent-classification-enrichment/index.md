@@ -67,7 +67,7 @@ For Self-Hosted, [provide a complete JSON](/docs/pipeline/enrichments/managing-e
         "database": "agent-classifications.json"
       },
       "classification": {
-        "MyInternalBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
+        "SomeBot": {"operator": "Acme Corp", "purpose": "Monitoring"}
       }
     }
   }

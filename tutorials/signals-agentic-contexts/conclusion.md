@@ -27,6 +27,14 @@ These tutorials take the same building block into real frameworks, each with a w
 * [Build a real-time context-aware agent with Signals, Google ADK, and CopilotKit](/tutorials/signals-google-adk-agent/introduction), for a Google ADK agent embedded in React
 * [Build a Signals-powered AI agent with AWS Bedrock AgentCore](/tutorials/signals-agentic-accelerator/intro), for Strands Agents with Bedrock AgentCore Memory
 
+You can also keep working conversationally: the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console and the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) manage agentic contexts alongside the rest of your Signals configuration.
+
 ## Tidy up
 
-If you built this only to try it out, unpublish the agentic context and then delete it. Signals won't let you delete one while it's published, so that order matters. Do both from the `⋮` menu on the agentic context's details page in Console.
+If you built this only to try it out, unpublish the agentic context, then delete it, from the `⋮` menu on its details page in Console.
+
+Your assistant can do it for you:
+
+```text
+Unpublish and delete my session_context agentic context.
+```

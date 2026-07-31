@@ -21,17 +21,10 @@ There's no agent framework here and nothing to scaffold. Everything you learn tr
 
 This tutorial assumes that you have:
 
-* a Snowplow pipeline with a [Collector endpoint](/docs/sources/) receiving events, because an agentic context buffers events from your live stream
-* [Signals enabled](/docs/signals/setup/) on your Snowplow account
-* [page view tracking](/docs/sources/web-trackers/tracking-events/page-views/) on a website you can browse, to generate the session activity you'll read back
-* Python 3.9 or later, if you want to follow the SDK steps rather than using Snowplow Console
+* A Snowplow account and pipeline
+* [Signals enabled](/docs/signals/setup/) on your account
+* [Page view tracking](/docs/sources/web-trackers/tracking-events/page-views/) on a website you can browse
 
-:::note[A full pipeline is required]
-An agentic context buffers real events flowing through your pipeline, so this tutorial can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
-
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
-:::
-
-You'll also need your [Signals connection credentials](/docs/signals/connection/) for the SDK steps: the Signals API URL, an API key, an API key ID, and your organization ID.
+If you don't have a Snowplow pipeline yet, you can follow along with a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial).
 
 This tutorial takes less than 15 minutes.

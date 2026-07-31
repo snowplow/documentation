@@ -2,9 +2,9 @@
 position: 3
 title: "Retrieve a Signals agentic context as JSON or a narrative"
 sidebar_label: "Retrieve the context"
-description: "Find the domain_sessionid for a live session, then read the agentic context back from Signals as structured JSON or as an LLM-ready narrative, in Python or Node.js."
+description: "Find the domain_sessionid for a live session, then read the agentic context back from Signals as structured JSON or as a plain-language narrative, in Python or Node.js."
 keywords: ["agentic context", "get_agentic_context", "domain_sessionid", "narrative format", "signals node sdk"]
-date: "2026-07-30"
+date: "2026-07-29"
 ---
 
 ```mdx-code-block
@@ -14,15 +14,13 @@ import TabItem from '@theme/TabItem';
 
 Your agentic context is live, so browse a few pages on your tracked site to give it something to capture. Visit several different pages, and leave a few seconds between them, so the record has a shape you can recognize later.
 
-Remember that buffering only started once your published configuration went live. If you browsed before publishing, that activity isn't there.
-
 ## Get the session identifier
 
 An agentic context is scoped to one session, so you read it for a single `domain_sessionid` value. There are two ways to get one.
 
 To find the identifier for the session you just generated, connect the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/) browser extension to Signals, then browse your site with the extension open. Inspector builds its list of attribute keys from the events it observes, so the **Attributes** tab shows the `domain_sessionid` value for the session you're in.
 
-In application code, read it client-side with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/#domain-session-id) method and send it to your back end, because retrieval happens server-side:
+In application code, read it client-side with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/#domain-session-id) method and send it to your back-end, because retrieval happens server-side:
 
 ```javascript
 const domainSessionId = sp.getDomainSessionId();
@@ -30,7 +28,28 @@ const domainSessionId = sp.getDomainSessionId();
 
 ## Read it as JSON
 
-Use `format="json"` when you want to work with the activity programmatically, for example to build your own prompt or apply your own logic. Pass the name of your agentic context and the session identifier:
+The quickest way to see what's in the buffer is to ask your assistant:
+
+```text
+Show me the contents of my session_context agentic context for session
+2f8b41d0-5c6e-4a1b-9f3a-7d21c4e8b905.
+```
+
+In your own code, use `format="json"` when you want to work with the activity programmatically, for example to build your own prompt or apply your own logic. If you defined the agentic context in Console or with an assistant, install the SDK with `pip install snowplow-signals` and connect it using your [Signals connection credentials](/docs/signals/connection/):
+
+```python
+import os
+from snowplow_signals import Signals
+
+sp_signals = Signals(
+    api_url=os.environ["SP_API_URL"],
+    api_key=os.environ["SP_API_KEY"],
+    api_key_id=os.environ["SP_API_KEY_ID"],
+    org_id=os.environ["SP_ORG_ID"],
+)
+```
+
+Then pass the name of your agentic context and the session identifier:
 
 ```python
 context = sp_signals.get_agentic_context(
@@ -79,7 +98,7 @@ For a session that visited a product page, its reviews, the size guide, and then
 }
 ```
 
-Three things are worth noticing. The events are ordered oldest to most recent, so the last entry is the page the user is on. Each event carries only the properties you selected, plus a `derived_tstamp` that Signals adds for you. And the `prompt` you wrote travels with the data, so whatever reads this context also gets its instructions.
+The events are ordered oldest to most recent, so the last entry is the page the user is on, and each one carries the properties you selected plus a `derived_tstamp` that Signals adds for you. The `prompt` you wrote travels with the data, so whatever reads this context also gets its instructions.
 
 ## Read it as a narrative
 
@@ -136,4 +155,4 @@ const narrative = await signals.getAgenticContext({
 console.log(narrative);
 ```
 
-This returns exactly the same string as the Python call. The Node.js SDK reads agentic contexts but can't define them, so keep using Console or the Python SDK for that.
+Define agentic contexts in Console, with an assistant, or with the Python SDK, and read them back from either SDK.

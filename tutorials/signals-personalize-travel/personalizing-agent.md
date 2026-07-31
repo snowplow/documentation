@@ -21,7 +21,7 @@ When a user asks the agent a question, the system fetches the attribute values f
 
 A toggle button on the chat widget allows you to enable or disable the tool call so you can see the difference in responses with and without Signals personalization.
 
-Signals can also assemble this personalization context for you: an [agentic context](/docs/signals/agentic-contexts/) captures a user's recent in-session activity, which you can [retrieve](/docs/signals/applications/agentic-contexts/) as a plain-language narrative — see [Give an AI agent real-time session context with Signals](/tutorials/signals-agentic-contexts/start). This tutorial uses attributes.
+Signals can also assemble this personalization context for you: an [agentic context](/docs/signals/agentic-contexts/) captures a user's recent in-session activity, which you can [retrieve](/docs/signals/applications/agentic-contexts/) as a plain-language narrative. This tutorial uses attributes.
 
 ## Data flow
 

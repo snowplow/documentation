@@ -1,10 +1,10 @@
 ---
 title: "Connect the SEA Explorer demo app"
 sidebar_label: "Connect the demo app"
-position: 5
+position: 6
 description: "Connect the SEA Explorer travel demo app to your Bedrock agent with Signals and AgentCore Memory integration."
 keywords: ["SEA Explorer", "demo app", "Bedrock", "Signals", "AgentCore Memory", "Docker"]
-date: "2026-03-27"
+date: "2026-07-31"
 ---
 
 Now that you have a working agent with Signals attributes and AgentCore Memory, you can connect it to a frontend application. The SEA Explorer demo app is a Next.js travel site that calls Bedrock directly using the same model and credentials from the notebook.
@@ -55,7 +55,7 @@ The app header includes two read-only status dropdowns:
 * **Signals** — shows whether Signals is connected, and which credentials are configured
 * **AgentCore** — shows the current Bedrock model, AWS region, and memory ID
 
-If either dropdown shows "Not set" for required fields, check that the corresponding environment variables are present in your `.env` file and restart the container.
+Both dropdowns should list the credentials you configured. If a required field reads "Not set", add the corresponding environment variable to your `.env` file and restart the container.
 
 ## Test the integration
 
@@ -65,6 +65,4 @@ If either dropdown shows "Not set" for required fields, check that the correspon
 
 3. **Test Signals**: browse some destination and experience pages to generate tracking events. Then ask the agent "Based on my browsing behavior, what experiences would suit me?" The agent will fetch your behavioral profile from Signals and personalize its response.
 
-:::tip
-All configuration is managed through environment variables. To change settings, update your `.env` file and restart the container.
-:::
+The demo app reads the profile attributes from your service. It doesn't read the agentic context you defined in the notebook, so its answers reflect the computed aggregates rather than the session's event-by-event narrative.

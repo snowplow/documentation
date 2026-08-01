@@ -1,10 +1,10 @@
 ---
 title: "Add persistent customer context with AgentCore Memory"
 sidebar_label: "Add agent memory"
-position: 4
+position: 5
 description: "Integrate AWS Bedrock AgentCore Memory to give your AI agent persistent context across conversations using preference and semantic memory strategies."
-keywords: ["AgentCore Memory", "persistent memory", "personalization", "hooks", "Strands Agents", "long-term memory"]
-date: "2026-03-27"
+keywords: ["AgentCore Memory", "persistent memory", "personalization", "hooks", "Strands Agents", "long-term memory", "agentic context"]
+date: "2026-07-31"
 ---
 
 Without persistent memory, every conversation with an AI agent starts from zero. Users must repeat their preferences, explain their history, and re-establish context each time.
@@ -31,9 +31,7 @@ response = memory_client.create_memory_and_wait(
 )
 ```
 
-:::note[Creation time]
-Memory resource creation can take a couple of minutes. Wait for the confirmation message before proceeding.
-:::
+Memory resource creation takes a couple of minutes, so wait for the confirmation message before proceeding.
 
 ## Seed customer history
 
@@ -73,13 +71,14 @@ The `retrieve_memories` call uses semantic search - it finds memories relevant t
 
 ## Test personalized responses
 
-Run the notebook cells that rebuild the agent with memory hooks and test it. The agent now has access to both memory (the seeded customer history) and Signals (the behavioral attributes from your test events).
+Run the notebook cells that rebuild the agent with memory hooks and test it. The agent now has three sources of context to draw on: memory, profile attributes, and session activity.
 
 ```python
 agent_with_memory = Agent(
     model=model,
     hooks=[memory_hooks],
-    tools=[get_destination_info, get_experience_info, web_search, get_signals],
+    tools=[get_destination_info, get_experience_info, web_search, get_signals,
+           get_session_activity],
     system_prompt=SYSTEM_PROMPT,
 )
 ```
@@ -110,7 +109,7 @@ recommendations:
 Would you like more details on any of these destinations?
 ```
 
-To test Signals integration, ask the agent a question that triggers the `get_signals` tool:
+To test the profile attributes, ask the agent a question that triggers the `get_signals` tool:
 
 ```python
 response = agent_with_memory(
@@ -118,7 +117,7 @@ response = agent_with_memory(
 )
 ```
 
-This query is deliberately explicit to verify the tool works. You should see a response like:
+You should see a response like:
 
 ```
 Tool #1: get_signals
@@ -142,4 +141,14 @@ These recommendations are based on your browsing patterns showing
 strong interest in cultural and family-friendly content.
 ```
 
-In a production deployment, the agent would call the `get_signals` tool automatically based on the system prompt instructions - users would not need to explicitly ask about their browsing behavior. The session ID would come from the application context rather than being hardcoded, so the agent seamlessly personalizes every response using real-time behavioral data alongside stored memory.
+Then ask something that depends on the order of what the user did, rather than on totals. This is what the `get_session_activity` tool is for:
+
+```python
+response = agent_with_memory(
+    "What was I just looking at, and what should I do there?"
+)
+```
+
+The tool hands the agent the same narrative you printed when you validated the agentic context, so the agent can name the destination pages the user opened most recently and the filters they applied, instead of reasoning from counters alone.
+
+In a production deployment, the agent calls both Signals tools automatically based on the system prompt instructions - users would not need to explicitly ask about their browsing behavior. The session ID would come from the application context rather than being hardcoded, so the agent personalizes every response using real-time behavioral data alongside stored memory.

@@ -2,9 +2,9 @@
 title: "Set up the project"
 sidebar_label: "Set up the project"
 position: 2
-description: "Scaffold a Google ADK agent and React frontend with the CopilotKit starter, install Snowplow dependencies, and configure environment variables."
+description: "Scaffold a Google ADK agent and React front-end with the CopilotKit starter, install Snowplow dependencies, and configure environment variables."
 keywords: ["CopilotKit", "Google ADK", "scaffold", "setup", "uv", "Next.js"]
-date: "2026-04-17"
+date: "2026-07-31"
 ---
 
 CopilotKit ships a starter that scaffolds both the ADK Python back-end and a React front-end in one command.
@@ -25,13 +25,9 @@ This creates:
 
 The scaffold's Python side uses `uv` rather than pip. The agent virtual environment lives at `agent/.venv`.
 
-:::note[React frameworks]
-The scaffold uses Next.js as a convenience. It provides a development server, routing, and an API endpoint to host the CopilotKit proxy.
+The scaffold uses Next.js as a convenience, for its development server, routing, and an API endpoint to host the CopilotKit proxy. CopilotKit itself is a React library that works with any framework.
 
-CopilotKit itself is a React library that works with any framework.
-:::
-
-## Install frontend and backend dependencies
+## Install front-end and back-end dependencies
 
 ```bash
 npm install
@@ -63,12 +59,15 @@ AGENT_URL=http://localhost:8000
 NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=https://your-collector-url.com
 
 # Snowplow Signals (consumed server-side by the Python agent)
-SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
+SNOWPLOW_SIGNALS_BASE_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
 SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
 SNOWPLOW_SIGNALS_ORG_ID=your-org-id
 SNOWPLOW_SIGNALS_SERVICE_NAME=web_agent_context
+SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME=web_agent_activity
 ```
+
+`SNOWPLOW_SIGNALS_SERVICE_NAME` and `SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME` name the two Signals resources you'll create in a later step. Keep these values as they are, and use the same names when you create them.
 
 You'll find your Snowplow Collector URL in [Snowplow Console](https://console.snowplowanalytics.com) > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
 

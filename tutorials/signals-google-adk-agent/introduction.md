@@ -3,17 +3,23 @@ title: "Build a real-time context-aware agent with Signals, Google ADK, and Copi
 sidebar_label: "Introduction"
 position: 1
 description: "Add Snowplow Signals to a Google ADK agent so it gets real-time user context for every response, and embed it in a React app with CopilotKit."
-keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "Gemini", "AI agents", "personalization"]
-date: "2026-04-17"
+keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "agentic context", "Gemini", "AI agents", "personalization"]
+date: "2026-07-31"
 ---
 
 In this tutorial, you'll add [Snowplow Signals](/docs/signals/) to a Google ADK agent so the agent gets fresh context about the current user's session before every response. Instead of responding generically, the agent will know which pages the user has been browsing, how long they've been on the site, and what they've been looking at.
+
+The agent will draw on two complementary kinds of Signals context:
+
+- Profile attributes: computed aggregates about the session, such as page view counts, served by a Signals [service](/docs/signals/concepts/#services). Use attributes when you want defined metrics that your agent, or any other consumer, can rely on.
+- An [agentic context](/docs/signals/agentic-contexts/): the user's recent activity, returned as an LLM-ready narrative. Use it when you want to ground the agent in the user's immediate journey, without writing aggregation or formatting logic.
 
 The app will:
 
 - Track user behavior automatically using the [Snowplow Browser tracker](/docs/sources/web-trackers/)
 - Compute live session attributes with Snowplow Signals
-- Inject those attributes into the agent's system instruction on every turn, using a `before_model_callback`
+- Capture recent session activity with a Signals agentic context
+- Inject both into the agent's system instruction on every turn, using a `before_model_callback`
 - Deliver contextually aware responses via a React + CopilotKit chat sidebar
 
 Adding real-time context from Signals can improve responses. In this example, the user has spent 20 minutes browsing enterprise pricing:
@@ -36,19 +42,58 @@ The agent can tailor its response based on the user's actual behavior.
 
 The flow works like this:
 - The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
-- Signals computes live session attributes from that stream
+- Signals computes live session attributes from that stream, and buffers the session's recent events for the agentic context
 - On the front-end, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop
 - The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
-- The ADK agent's `before_model_callback` uses that session ID to fetch fresh attributes from Signals and append them to the system instruction
+- The ADK agent's `before_model_callback` uses that session ID to fetch both the profile attributes and the activity narrative from Signals, and appends both to the system instruction
 
-<img src={require('./adk-architecture.png').default} alt="Architecture diagram showing the full data and request flow. In the browser, the Snowplow tracker fires page views, page pings, and link clicks to the Snowplow Collector. The CopilotKit client communicates with the React app via the AG-UI protocol. In the React app (port 3000), a CopilotKit sidebar renders the chat UI and a CopilotRuntime proxy forwards requests to the ADK backend as an HttpAgent, including the Snowplow session ID in forwarded_props. The FastAPI server (port 8000) runs ADKAgent middleware containing an LlmAgent (Gemini) with a before_model_callback. Before each model call, the callback fetches fresh session attributes from Signals using a GET attributes by session ID request. In the Snowplow layer, the Collector receives raw events, produces enriched events, and feeds them into Signals, which maintains real-time session attributes." style={{maxWidth: '600px', width: '100%'}} />
+```mermaid
+flowchart TD
+    subgraph browser["Browser"]
+        tracker["Snowplow Browser tracker"]
+        sidebar["CopilotProvider and chat sidebar<br/>reads the session ID from the tracker cookie"]
+    end
+
+    subgraph react["React app, port 3000"]
+        proxy["CopilotRuntime proxy<br/>/api/copilotkit"]
+    end
+
+    subgraph fastapi["FastAPI server, port 8000"]
+        adk["ADKAgent middleware"]
+        callback["before_model_callback"]
+        llm["LlmAgent, Gemini"]
+    end
+
+    subgraph snowplow["Snowplow"]
+        collector["Collector"]
+        enriched["Enriched events"]
+        subgraph signals["Signals"]
+            service["Service<br/>profile attributes"]
+            agentic["Agentic context<br/>session activity"]
+        end
+    end
+
+    tracker -->|"page views, page pings, link clicks"| collector
+    collector --> enriched
+    enriched --> service
+    enriched --> agentic
+
+    sidebar -->|"session ID in properties"| proxy
+    proxy -->|"HttpAgent, AG-UI, session ID in forwarded_props"| adk
+    adk --> callback
+    callback <-->|"get_service_attributes"| service
+    callback <-->|"get_agentic_context, narrative"| agentic
+    callback -->|"append_instructions, both sections"| llm
+```
 
 ## Prerequisites
 
-- A Snowplow account with [Signals deployed](/docs/signals/connection/)
+- A Snowplow account and pipeline with [Signals enabled](/docs/signals/setup/)
 - Node.js 18+ and npm/pnpm
 - Python 3.12+
 - A Google AI Studio API key
   - [AI Studio](https://aistudio.google.com/app/apikey)
   - [Vertex AI](https://docs.cloud.google.com/agent-builder/agent-engine/quickstart-adk)
 - Basic familiarity with React, Python, and TypeScript
+
+This tutorial should take approximately 45 minutes to complete.

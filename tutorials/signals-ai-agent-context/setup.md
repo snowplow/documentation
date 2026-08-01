@@ -4,7 +4,7 @@ position: 2
 sidebar_label: "Set up the project"
 description: "Scaffold a Next.js project and install the required dependencies for Snowplow tracking, Signals, and the Vercel AI SDK."
 keywords: ["next.js setup", "vercel ai sdk", "snowplow browser tracker", "project scaffold"]
-date: "2026-04-10"
+date: "2026-07-31"
 ---
 
 First, you'll need to create a Next.js project. You could also use an existing project.
@@ -23,9 +23,7 @@ This will create a new Next.js app using TypeScript and Tailwind CSS.
 
 As well as installing the Vercel AI SDK, it'll add the Snowplow browser tracker and link click plugin for client-side tracking, and the Signals Node client to fetch user attributes server-side.
 
-:::note[Existing projects]
-The code in this tutorial uses the `@/*` path alias (e.g. `@/lib/snowplow`, `@/components/chat-widget`). This is configured by default by `create-next-app`. If you're adding to an existing project, make sure your `tsconfig.json` has `"@/*": ["./*"]` in `compilerOptions.paths`.
-:::
+The code in this tutorial uses the `@/*` path alias (for example `@/lib/snowplow`, `@/components/chat-widget`), which `create-next-app` configures by default. If you're adding to an existing project, make sure your `tsconfig.json` has `"@/*": ["./*"]` in `compilerOptions.paths`.
 
 ## Install AI Elements
 
@@ -68,7 +66,7 @@ AI_GATEWAY_API_KEY=your-vercel-ai-gateway-api-key
 NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=https://your-collector-url.com
 
 # Snowplow Signals
-SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
+SNOWPLOW_SIGNALS_BASE_URL=https://YOUR_ID.signals.snowplowanalytics.com
 SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
 SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
 SNOWPLOW_SIGNALS_ORG_ID=your-org-id

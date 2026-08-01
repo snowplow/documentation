@@ -12,7 +12,7 @@ In addition to the native functions available in the jq language, the following 
 { foo: .collector_tstamp | epochMillis }
 ```
 
-* `hash(algorithm, salt)` hashes the input value. To use unsalted hash, pass an empty string for salt. Salt may be provided as an environment variable using hcl syntax.
+* `hash(algorithm, salt)` hashes the input value, returning the hex-encoded digest. Where a salt is provided, the result is an HMAC of the input keyed with the salt. To use unsalted hash, pass an empty string for salt. Salt may be provided as an environment variable using hcl syntax.
 
 The following hash algorithms are supported:
 - `sha1` - SHA-1 hash (160 bits)
@@ -22,3 +22,7 @@ The following hash algorithms are supported:
 ```
 { foo: .user_id |  hash("sha1"; "${env.SHA1_SALT}") }
 ```
+
+:::warning[hash output changes in version 6.0.0]
+Version 6.0.0 changes the values this function returns. Before 6.0.0 it returned a PBKDF2-derived key rather than the digest, so hashes produced by 6.x do not match those produced by earlier versions for the same input. See the [6.x upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-6-X-X/index.md) for details.
+:::

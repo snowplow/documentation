@@ -47,10 +47,14 @@ The flow works like this:
 
 This tutorial requires:
 
-* A Snowplow account with [Signals deployed](/docs/signals/connection/)
+* A Snowplow account with Signals enabled (see [Set up Signals](/docs/signals/setup/))
 * Node.js 18+ and npm/pnpm
 * A [Vercel AI Gateway API key](https://vercel.com/docs/ai-gateway/getting-started)
   * This tutorial uses `openai/gpt-4o-mini` via AI Gateway, but any supported model works
 * Basic familiarity with Next.js and TypeScript
+
+:::note[Snowplow account required]
+Signals computes the session attributes from real events flowing through your pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::
 
 This tutorial should take approximately 30 minutes to complete.

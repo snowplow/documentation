@@ -16,7 +16,7 @@ Define the behavior you want to capture in [attribute groups](/docs/signals/conc
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions.
+To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions. You can also start from an [attribute group template](/docs/signals/attributes/templated-attribute-groups/index.md) for common use cases like web analytics, marketing attribution, or ecommerce.
 
 ![Create attribute group form with name, description, data source, and owner fields](../../images/attribute-group-create.png)
 

@@ -177,7 +177,7 @@ If you already have a table of labeled anchor events, use `submit_dataset_run_wi
 | --- | --- | --- |
 | Attribute key column (e.g. `domain_sessionid`) | `VARCHAR` | The attribute key used by your attribute groups. The column name must match the attribute key name. |
 | `anchor_ts` | `TIMESTAMP` | The timestamp of the anchor event |
-| `label` | `INTEGER` | `1` for positive, `0` for negative. Only required when `anchors_have_label` is `True`. |
+| `label` | `INTEGER` | `1` for positive, `0` for negative. |
 
 For example, if your attribute groups use `domain_sessionid` as the attribute key:
 
@@ -196,7 +196,6 @@ run = sp_signals.submit_dataset_run_with_custom_anchors(
         schema="ml",
         table="my_anchor_events",
     ),
-    anchors_have_label=True,
 )
 ```
 
@@ -204,7 +203,6 @@ run = sp_signals.submit_dataset_run_with_custom_anchors(
 | --- | --- | --- | --- |
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `anchors_table` | Table containing your pre-built anchor events | `WarehouseTable` | ✅ |
-| `anchors_have_label` | Whether the source table contains a `label` column. Set to `False` if your anchors are unlabeled. | `bool` | Default: `True` |
 | `attributes_table` | Override the output location for the intermediate attribute tables. During execution, one table is created per attribute key (e.g. `signals_attributes_domain_sessionid`), joining each anchor with its point-in-time attribute values. Supports `database`, `schema`, and `table_prefix` fields - all default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `AttributesWarehouseTable` | Default: `None` |
 | `dataset_table` | Override the output location for the final assembled dataset. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |

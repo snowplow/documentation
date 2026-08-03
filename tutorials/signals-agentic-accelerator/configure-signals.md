@@ -13,13 +13,18 @@ These attributes form a behavioral profile that the agent's `get_signals` tool f
 
 ## Set up your credentials
 
-You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](/docs/signals/connection/). These are the same values you configured in the notebook's credentials cell:
+You need your Signals connection credentials. If you haven't set these up yet, see [connecting to Signals](/docs/signals/connection/).
+
+If you're running the notebook in Google Colab, store the values as Colab secrets named `SIGNALS_API_URL`, `SIGNALS_API_KEY`, `SIGNALS_API_KEY_ID`, `SIGNALS_ORG_ID`, and `SIGNALS_COLLECTOR_URL`. The notebook's credentials cell loads them automatically.
+
+If you're running the notebook locally, set the values directly in the credentials cell:
 
 ```python
 API_URL = 'example.signals.snowplowanalytics.com'
 API_KEY = ''
 API_KEY_ID = ''
 ORG_ID = ''
+COLLECTOR_URL = 'https://your-collector.svc.snplow.net'
 ```
 
 ## Define attributes

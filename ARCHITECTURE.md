@@ -88,11 +88,11 @@ The plugin uses the title, description, and keywords from the page frontmatter. 
 
 ## Cookies and tracking
 
-The site uses [`cookie-though`](https://github.com/Cookie-Though/cookie-though) for consent management. It's initialized in `cookieConsent.js`.
+The site uses [Ketch](https://www.ketch.com/) for consent management. The Ketch boot script is injected as an inline `<script>` tag via the `headTags` config in `docusaurus.config.ts`.
 
-User preferences are stored in a cookie keyed by `COOKIE_PREF_KEY`, with per-policy flags (`analytics:0` / `analytics:1`).
+User preferences are stored in the `_ketch_consent_v1_` cookie as a base64-encoded JSON object. Tracking scripts subscribe to consent changes via `window.ketch('on', 'consent', ...)` and read `consent.purposes.analytics` to determine whether analytics tracking is granted.
 
-The user-facing preferences page is `src/pages/cookie-preferences.mdx`, linked to from the site footer.
+The user-facing preferences page is `src/pages/cookie-preferences.md`, linked to from the site footer. The **Preferences** button on that page calls `window.ketch('showPreferences')` to open the Ketch consent modal.
 
 ### Tracking scripts
 

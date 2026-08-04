@@ -4,10 +4,10 @@ title: "Next steps after building a Signals agentic context"
 sidebar_label: "Conclusion"
 description: "Review what you built with Signals agentic contexts, then combine them with attribute services or add them to a full agent framework."
 keywords: ["agentic context", "signals", "ai agent", "attribute services", "next steps"]
-date: "2026-07-29"
+date: "2026-08-04"
 ---
 
-You've built an agentic context end to end. You defined which events to capture and which properties to keep, published it, read the same session back as both JSON and a narrative, and used the prompt to change how a model interpreted the activity without touching what was captured.
+You've built an agentic context end to end. You defined which events to capture and which properties to keep, published it, read the same session back as both JSON and a narrative, appended that narrative to a system prompt the way a customer-facing agent does per turn, and used the prompt to change how a model interpreted the activity without touching what was captured.
 
 Nothing in this tutorial was framework-specific, which is the point. Any agent that can read a string can use what you just built.
 

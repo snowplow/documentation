@@ -1,25 +1,17 @@
 ---
 position: 4
-title: "Use a Signals agentic context with an LLM"
-sidebar_label: "Use it with an LLM"
-description: "Paste a Signals agentic context narrative into any chat LLM, ask questions about the user's session, and refine the answers by editing the agentic context prompt."
-keywords: ["agentic context", "llm context", "prompt engineering", "ai agent", "signals"]
-date: "2026-07-29"
+title: "Feed a Signals agentic context to your agent"
+sidebar_label: "Feed it to your agent"
+description: "Paste a Signals agentic context narrative into a chat LLM, then append it to your customer-facing agent's system prompt on every turn so its answers reflect the user's current session."
+keywords: ["agentic context", "system prompt", "customer-facing agent", "llm context", "ai agent", "signals"]
+date: "2026-08-04"
 ---
 
-The narrative format exists so you can hand a model real user activity without writing any glue code. Do it by hand once, to see what the model infers from what you chose to capture.
+The narrative is a plain string, so any model can read it and any language can build it into a prompt. Try it by hand first, to see what a model infers from what you chose to capture, then put the same string into your agent.
 
-## Ask a model about the user
+## See what a model makes of it
 
-If your assistant is connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), it can fetch the context and answer in one step:
-
-```text
-Fetch the session_context agentic context for session
-2f8b41d0-5c6e-4a1b-9f3a-7d21c4e8b905, then answer as the support assistant would.
-The user has just asked: "Do these run true to size?"
-```
-
-Otherwise, copy the whole narrative string from the previous page, paste it into any chat LLM, and add a question underneath:
+Copy the whole narrative string from the previous page, paste it into any chat LLM, and add a question underneath:
 
 ```text
 [paste the narrative here]
@@ -28,11 +20,32 @@ The user has just asked: "Do these run true to size?"
 Answer them.
 ```
 
-The model should pick up that this user has already read the reviews and the size guide, so it answers about fit rather than pointing them back to either. Your prompt and the `[START CONTEXT]` markers do the rest of the work, so there's no format to explain.
+The model picks up that this user has already read the reviews and the size guide, so it answers about fit rather than pointing them back to either. Your prompt and the `[START CONTEXT]` markers do the rest of the work, so there's no format to explain.
+
+## Add the narrative to your system prompt
+
+Your agent does that same read on every turn, without anyone pasting anything. Its back-end already knows which session the conversation belongs to, so it retrieves the narrative for that `domain_sessionid` and appends it to the instructions it sends to the model. Your own instructions go first, and the narrative brings both the prompt you wrote and the activity itself:
+
+```python
+BASE_INSTRUCTIONS = (
+    "You are the support assistant for Example Shop. "
+    "Answer in two sentences or fewer, and link to a page on the site where it helps."
+)
+
+def build_system_prompt(domain_session_id):
+    narrative = sp_signals.get_agentic_context(
+        name="session_context",
+        identifier=domain_session_id,
+        format="narrative",
+    )
+    return f"{BASE_INSTRUCTIONS}\n\n{narrative}"
+```
+
+This uses the same `sp_signals` connection you built on the previous page, and `getAgenticContext` from the Node.js SDK slots in the same way. Call `build_system_prompt` at the start of every turn, then pass what it returns as the system prompt, or instructions, of your model call, alongside the conversation history and the user's new message. Whatever provider or framework you're on, that's the whole integration: one string, rebuilt per turn.
 
 ## Browse more, then ask again
 
-The buffer is live, so keep browsing your site: add something to a cart, or move to a checkout page. Wait a few seconds, then retrieve the narrative again with the same session identifier.
+Rebuilding per turn is what keeps the agent current, because the buffer is live. Keep browsing your site: add something to a cart, or move to a checkout page. Wait a few seconds, then retrieve the narrative again with the same session identifier.
 
 The two new page views appear at the end, with the seconds since the session started showing the gap:
 
@@ -52,11 +65,11 @@ seconds_since_start_of_session, event, url, event_context
 [END CONTEXT]
 ```
 
-Paste this newer version into a fresh chat and ask the same question. The answer should change: this user has reached a checkout rather than idly browsing a product page. Retrieve the context on every turn, so your agent always sees the current session.
+Paste this newer version into a fresh chat and ask the same question. The answer changes: this user has reached a checkout rather than idly browsing a product page. An agent that rebuilds its system prompt each turn follows that shift on its own.
 
 ## Change the prompt, not the capture
 
-So far the prompt has framed this as a support job. Change that framing and the same activity supports a different conclusion. Ask your assistant to replace the prompt and publish the change, or click **Edit** on your agentic context's details page in Console, replace the **Prompt** text with this, then publish the draft:
+Your agent's own instructions live in your code, but the prompt that tells it how to read the activity lives in the agentic context, so you can reshape its behavior without a deploy. So far that prompt has framed the job as support. Change the framing and the same activity supports a different conclusion. Ask your assistant to replace the prompt and publish the change, or click **Edit** on your agentic context's details page in Console, replace the **Prompt** text with this, then publish the draft:
 
 ```text
 You are a conversion assistant on a product website. From the activity below,
@@ -74,3 +87,11 @@ You are a conversion assistant on a product website. From the activity below, id
 The captured events are unchanged, because the prompt doesn't affect what's buffered, so you can refine your wording against a session that's still in flight.
 
 Ask a model the same question with this version and the emphasis moves. Where the support framing explained the returns policy, the conversion framing reads that same visit as hesitation about fit, and suggests addressing it at the checkout.
+
+## Take it into a framework
+
+The pattern above holds wherever your agent runs. These tutorials build it into a working application, with the provider calls filled in:
+
+* [Vercel AI SDK, in a Next.js application](/tutorials/signals-ai-agent-context/introduction)
+* [Google ADK, with a React front end](/tutorials/signals-google-adk-agent/introduction)
+* [Strands Agents on AWS Bedrock AgentCore](/tutorials/signals-agentic-accelerator/intro)

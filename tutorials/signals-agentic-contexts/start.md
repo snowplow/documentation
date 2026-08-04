@@ -2,18 +2,20 @@
 position: 1
 title: "Give an AI agent real-time session context with Signals"
 sidebar_label: "Introduction"
-description: "Learn what a Signals agentic context is, and how it differs from attributes, before building one to ground an AI agent in a user's live session activity."
-keywords: ["agentic context", "signals", "ai agent context", "llm context", "session activity"]
-date: "2026-07-29"
+description: "Give a customer-facing agent the user's live session as a plain-language narrative: what a Signals agentic context is, how it differs from attributes, and how to build one."
+keywords: ["agentic context", "signals", "ai agent context", "llm context", "session activity", "customer-facing agent"]
+date: "2026-08-04"
 ---
 
-An [agentic context](/docs/signals/agentic-contexts/) is a live, rolling record of what a user has just been doing, which you hand to an agent so it can answer in light of the current session. You choose which events to capture and which of their properties to keep, attach a written prompt for the agent, and read the result back as JSON or as a plain-language narrative.
+A customer-facing agent — a support bot, a shopping assistant, an in-app copilot — answers blind. It may know your product catalog and your documentation, but not that this user has just read your size guide twice, so it asks for information the session already holds.
+
+An [agentic context](/docs/signals/agentic-contexts/) hands the agent that session as a plain-language narrative it can read directly. It's a live, rolling record of what a user has just been doing: you choose which events to capture and which of their properties to keep, attach a written prompt for the agent, and read the result back as JSON or as narrative.
 
 This is a different shape of data from [Signals attributes](/docs/signals/attributes/). Attributes are values Signals computes for you, such as a count of product views or a running cart total. An agentic context hands over the recent activity itself, event by event, and lets the model do the interpreting.
 
 ## What you'll build
 
-You'll define an agentic context that captures page views for the current session, publish it, and retrieve it for a real session. Then you'll paste the narrative into any chat LLM, ask a question about the user, and refine the answer by editing the prompt.
+You'll define an agentic context that captures page views for the current session, publish it, and retrieve it for a real session. Then you'll paste the narrative into a chat LLM to see what a model makes of it, and append it to a system prompt the way a customer-facing agent does on every turn.
 
 There's no agent framework here and nothing to scaffold. Everything you learn transfers to whichever framework you build in later.
 

@@ -7,15 +7,15 @@ keywords: ["agentic context", "signals", "ai agent", "attribute services", "next
 date: "2026-08-04"
 ---
 
-You've built an agentic context end to end. You defined which events to capture and which properties to keep, published it, read the same session back as both JSON and a narrative, appended that narrative to a system prompt the way a customer-facing agent does per turn, and used the prompt to change how a model interpreted the activity without touching what was captured.
+You've built an agentic context end to end. You defined which events to capture and which properties to keep, published it, and read the same session back as both JSON and a narrative. You then appended that narrative to a system prompt the way a customer-facing agent does per turn, and used the prompt to change how a model interpreted the activity without changing what the agentic context captured.
 
 Nothing in this tutorial was framework-specific, which is the point. Any agent that can read a string can use what you just built.
 
 ## Combine it with attributes
 
-An agentic context gives an agent the raw recent activity. [Attributes](/docs/signals/attributes/) give it computed values over longer windows, such as a lifetime order count or a running cart total, which no amount of reading recent page views will tell it.
+An agentic context gives an agent the raw recent activity. [Attributes](/docs/signals/attributes/) give it computed values over longer windows, such as a lifetime order count or a running cart total, which no amount of reading recent page views can tell it.
 
-Most production agents want both. Group your attributes into a [service](/docs/signals/applications/services/) so your application can [retrieve them in one call](/docs/signals/applications/retrieve-attributes/), then pass the attributes and the agentic context narrative to the model together: the aggregates say who this user is, and the agentic context says what they're doing right now.
+Most production agents want both. Group your attributes into a [service](/docs/signals/applications/services/) so your application can [retrieve them in one call](/docs/signals/applications/retrieve-attributes/), then pass the attributes and the agentic context narrative to the model together: the aggregates say who this user is, and the agentic context says what they're doing in the moment.
 
 You can also let Signals start the conversation rather than waiting for the user, by triggering an [intervention](/docs/signals/interventions/) when behavior crosses a threshold you define.
 
@@ -31,7 +31,7 @@ You can also keep working conversationally: the [Snowplow Assistant](/docs/llms-
 
 ## Tidy up
 
-If you built this only to try it out, unpublish the agentic context, then delete it, from the `⋮` menu on its details page in Console.
+If you built this only to try it out, unpublish the agentic context and then delete it, using the `⋮` menu on its details page in Console.
 
 Your assistant can do it for you:
 

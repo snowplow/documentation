@@ -93,5 +93,5 @@ Ask a model the same question with this version and the emphasis moves. Where th
 The pattern above holds wherever your agent runs. These tutorials build it into a working application, with the provider calls filled in:
 
 * [Vercel AI SDK, in a Next.js application](/tutorials/signals-ai-agent-context/introduction)
-* [Google ADK, with a React front end](/tutorials/signals-google-adk-agent/introduction)
+* [Google ADK, with a React front-end](/tutorials/signals-google-adk-agent/introduction)
 * [Strands Agents on AWS Bedrock AgentCore](/tutorials/signals-agentic-accelerator/intro)

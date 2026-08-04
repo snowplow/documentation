@@ -4,7 +4,7 @@ title: "Define and publish a Signals agentic context"
 sidebar_label: "Define the agentic context"
 description: "Define a Signals agentic context that buffers page views for the current session, choose the properties to keep, and publish it using an AI assistant, Snowplow Console, or the Python SDK."
 keywords: ["agentic context", "event log", "snowplow assistant", "snowplow mcp", "signals python sdk", "publish", "event selection"]
-date: "2026-07-29"
+date: "2026-08-04"
 ---
 
 ```mdx-code-block
@@ -19,7 +19,7 @@ Do this by asking an AI assistant, in Snowplow Console, or with the Signals Pyth
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="assistant" label="AI assistant" default>
 
-Use the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, which needs no setup, or your own MCP-capable assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/).
+Use the [Snowplow Assistant](/docs/llms-support/console-agent/) in Console, which needs no configuration, or your own MCP-capable assistant connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/).
 
 Paste this prompt into the chat:
 
@@ -60,7 +60,7 @@ say so rather than guessing.
 
 ![The Create context form in Snowplow Console, with the Details section filled in with the name session_context and a description of the rolling record, and the Prompt section holding the support assistant instructions](./images/agentic-context-create-form.png)
 
-Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console shows the window it will use underneath the fields.
+Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Underneath the fields, Console shows the window it uses.
 
 Under **Events and Properties**, click **Add event** and choose `page_view` at version `1-0-0`. Then use **Add property** to attach `event_name`, `page_urlpath`, and `page_title` to it.
 
@@ -135,7 +135,7 @@ sp_signals.publish([session_context])
 
 ## Choose which properties to keep
 
-An agentic context doesn't store whole events. For each event you select, you list the properties to project, and only those reach the agent. Properties can come from the [atomic](/docs/fundamentals/canonical-event/) event, the event's own schema, or its entities.
+An agentic context doesn't store whole events. For each event you select, you list the properties to project, and only those reach the agent. Properties can come from the [atomic event](/docs/fundamentals/canonical-event/), the event's own schema, or its entities.
 
 Here you keep three atomic properties of each page view:
 
@@ -149,7 +149,7 @@ For the full range of selection options, including schema and entity properties,
 
 ## Publish it
 
-Publishing sends the definition to your Signals infrastructure and starts the buffering. Until you publish, nothing is captured.
+Publishing sends the definition to your Signals infrastructure and starts the buffering. Until you publish, Signals captures nothing.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="assistant" label="AI assistant" default>

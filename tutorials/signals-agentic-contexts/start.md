@@ -9,7 +9,7 @@ date: "2026-08-04"
 
 A customer-facing agent — a support bot, a shopping assistant, an in-app copilot — answers blind. It may know your product catalog and your documentation, but not that this user has just read your size guide twice, so it asks for information the session already holds.
 
-An [agentic context](/docs/signals/agentic-contexts/) hands the agent that session as a plain-language narrative it can read directly. It's a live, rolling record of what a user has just been doing: you choose which events to capture and which of their properties to keep, attach a written prompt for the agent, and read the result back as JSON or as narrative.
+An [agentic context](/docs/signals/agentic-contexts/) hands the agent that session as a plain-language narrative it can read directly. It's a live, rolling record of what a user has just been doing: you choose which events to capture and which of their properties to keep, attach a written prompt for the agent, and read the result back as JSON or as a narrative.
 
 This is a different shape of data from [Signals attributes](/docs/signals/attributes/). Attributes are values Signals computes for you, such as a count of product views or a running cart total. An agentic context hands over the recent activity itself, event by event, and lets the model do the interpreting.
 

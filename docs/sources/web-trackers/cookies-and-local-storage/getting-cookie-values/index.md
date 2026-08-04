@@ -145,6 +145,33 @@ console.log(domainSessionIndex);
   </TabItem>
 </Tabs>
 
+### Domain session ID
+
+The `getDomainSessionId` method returns the session ID stored in the first-party cookie:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+ var sp = this.sp;
+ var domainSessionId = sp.getDomainSessionId();
+ console.log(domainSessionId);
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+const domainSessionId = sp.getDomainSessionId();
+console.log(domainSessionId);
+```
+
+  </TabItem>
+</Tabs>
+
 ## Get cookie values without tracker access
 
 You can use the following function to extract the Domain User Information from the ID cookie:

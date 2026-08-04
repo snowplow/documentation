@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react'
 import Head from '@docusaurus/Head'
 import { Meta, Tutorial } from '../models'
 import { getSteps } from '../utils'
-import TutorialGrid from '../TutorialGrid'
+import TutorialTable from '../TutorialTable'
 import TutorialSearch from '../TutorialSearch'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@site/src/components/ui/accordion'
 import {
@@ -182,11 +182,12 @@ const TutorialList: FC = () => {
             </div>
           )}
 
-          {/* Main content - Center aligned with page */}
-          <div className="flex-1 flex justify-center px-6 pb-6">
+          {/* Main content - Aligned next to the filter sidebar, which already pads its right edge.
+              Top padding matches the sidebar's so the column headers line up with the search box. */}
+          <div className="flex-1 pt-6 pr-6 pb-6">
             <div className="w-full max-w-6xl">
-              {/* Tutorial Grid */}
-              <TutorialGrid tutorials={content.tutorials} />
+              {/* Tutorial list */}
+              <TutorialTable tutorials={content.tutorials} />
             </div>
           </div>
         </div>

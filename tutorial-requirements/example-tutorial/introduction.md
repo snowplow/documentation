@@ -18,14 +18,14 @@ Include 1-3 paragraphs about the goal of the tutorial:
 * Where will they be carrying out the steps? E.g. Snowplow Console, a notebook, their own command line
 * Roughly how long will it take to follow the tutorial?
 
-State if a Snowplow account is required, or if they can use Sandbox, Micro, or Local.
+State if a Snowplow account is required, or if they can use Micro or Local.
 
 Include a diagram or screenshot if it helps explain the purpose of the tutorial.
 
 ## Prerequisites
 
 Add a bullet point list of requirements:
-* Is it for customers only, or can they use Sandbox, Micro, or Local?
+* Is it for customers only, or can they use Micro or Local?
 * Any specific technical knowledge required? Aim to make the tutorial as accessible as possible for new users.
 * Any other third-party tools required?
 * Is there a minimum release version required for any of the components?

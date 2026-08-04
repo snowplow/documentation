@@ -21,7 +21,7 @@ Attribute calculation starts when the definitions are published, and values are 
 
 ## Configure the attribute
 
-Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-a-time-period) and [criteria](#filter-with-criteria) settings are optional refinements.
+Every attribute needs [events](#select-events) to calculate from, and an [aggregation](#choose-an-aggregation) to calculate. Most aggregations also operate on a [property](#select-a-property) of those events. The [time period](#set-the-period) and [criteria](#filter-with-criteria) settings are optional refinements.
 
 In Console, open your attribute group and use the attribute configuration interface to fill in the fields. The time period and criteria settings are within **More options**.
 
@@ -96,22 +96,30 @@ sp_structured = Event(name="event", vendor="com.google.analytics", version="1-0-
 
 Signals supports the following aggregation types:
 
-| Aggregation | Description | Required property type in schema |
-| --- | --- | --- |
-| Counter | Count events | No property used for this aggregation |
-| Sum | Sum of property values | Numeric |
-| Min | Minimum property value | Numeric |
-| Max | Maximum property value | Numeric |
-| Mean | Average of property values | Numeric |
-| First | First property value seen | String, Numeric, Boolean |
-| Last | Last property value seen | String, Numeric, Boolean |
-| Most Frequent | Most frequent property value seen | String, Numeric, Boolean |
-| Least Frequent | Least frequent property value seen | String, Numeric, Boolean |
-| Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean |
-| Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean |
-| Unique List | List of unique property values | String, Numeric, Boolean |
+| Aggregation | Description | Required property type in schema | Notes |
+| --- | --- | --- | --- |
+| Counter | Count events | No property used for this aggregation | |
+| Sum | Sum of property values | Numeric | |
+| Min | Minimum property value | Numeric | |
+| Max | Maximum property value | Numeric | |
+| Mean | Average of property values | Numeric | |
+| First | First property value seen | String, Numeric, Boolean | Earliest by `derived_tstamp`, not by arrival order |
+| Last | Last property value seen | String, Numeric, Boolean | Latest by `derived_tstamp`, not by arrival order |
+| Most Frequent | Most frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
+| Least Frequent | Least frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
+| Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
+| Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
+| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
+
+Attributes calculated over high-cardinality properties, such as a product ID or a search term, can exceed the 100-value limits noted above. Consider a criteria filter to narrow the set of events, or a lower-cardinality property.
+
+#### Unique list ordering
+
+A unique list is ordered by when each value was *most recently* seen, oldest first. Seeing a value again doesn't add a second entry: it moves the existing entry to the end of the list. For example, viewing pages `/home`, `/products`, then `/home` again produces `["/products", "/home"]`.
+
+This also determines which values are dropped once the list reaches 100 entries: the least recently seen value is removed first, so a frequently repeated value is retained even if it was first seen long ago.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -173,28 +181,41 @@ EntityProperty(
 </TabItem>
 </Tabs>
 
-### Set a time period
+### Set the period
 
-Add an optional time period to aggregate over a rolling window. Signals won't include events older than the specified time period in the calculation.
+Every stream attribute has a period that controls the time window for the calculation. Choose a rolling time window (for example, 7 days or 15 minutes) to aggregate over recent events, or select **Lifetime** to aggregate over all available data.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Find the time period option within **More options**. Click **Done** to save it.
+Select the period when creating or editing an attribute.
 
-![Time period configuration dialog for setting rolling window attributes](../../images/attribute-set-period.png)
+When you select a rolling time window, Signals only includes events within that window in the calculation:
+
+![Period configuration set to a rolling time window](../../images/attribute-set-period.png)
+
+When you select **Lifetime**, a **Time to live (TTL)** field appears. TTL controls how long a stale value is retained in the Profiles Store before it is deleted. The default is 7 days. If Signals processes a new event that updates the attribute, the TTL timer resets.
+
+![Period set to Lifetime with TTL configuration](../../images/attribute-set-period-lifetime.png)
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Set `period` on your `Attribute` using a Python `timedelta`:
+Set `period` on your `Attribute` using a Python `timedelta`. For lifetime attributes, omit `period` and set `ttl` instead:
 
 ```python
 from datetime import timedelta
 
+# Rolling period
 my_attribute = Attribute(
     ...,
     period=timedelta(minutes=10),
+)
+
+# Lifetime with TTL
+my_lifetime_attribute = Attribute(
+    ...,
+    ttl=timedelta(days=7),
 )
 ```
 
@@ -270,7 +291,8 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
 | `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
-| `period` | The time window over which to calculate the aggregation | `timedelta` | ❌ |
+| `period` | The time window over which to calculate the aggregation, or `Lifetime` to aggregate over all available data | `timedelta` | ❌ |
+| `ttl` | Time-to-live for lifetime attributes (no `period`). Falls back to the attribute group TTL if not set. Cannot be used together with `period`. | `timedelta` | ❌ |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
 ## Examples

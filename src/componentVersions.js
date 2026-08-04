@@ -22,9 +22,9 @@ export const versions = {
 
   // Core pipeline
   collector: '3.7.0',
-  enrich: '6.11.0',
+  enrich: '6.13.0',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.8',
+  dataflowRunner: '0.7.9',
   snowbridge: '5.2.0',
 
   // Loaders
@@ -47,7 +47,7 @@ export const versions = {
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '1.0.1',
-  dbtSnowplowUtils: '1.0.0',
+  dbtSnowplowUtils: '1.0.1',
   dbtSnowplowNormalize: '1.0.0',
   dbtSnowplowFractribution: '0.3.6',
   dbtSnowplowEcommerce: '1.0.1',
@@ -69,7 +69,7 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.14.1',
+  igluServer: '0.14.2',
   igluctl: '0.13.0',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',

@@ -28,13 +28,6 @@ const domainSessionId = sp.getDomainSessionId();
 
 ## Read it as JSON
 
-The quickest way to see what's in the buffer is to ask your assistant:
-
-```text
-Show me the contents of my session_context agentic context for session
-2f8b41d0-5c6e-4a1b-9f3a-7d21c4e8b905.
-```
-
 In your own code, use `format="json"` when you want to work with the activity programmatically, for example to build your own prompt or apply your own logic. If you defined the agentic context in Console or with an assistant, install the SDK with `pip install snowplow-signals` and connect it using your [Signals connection credentials](/docs/signals/connection/):
 
 ```python

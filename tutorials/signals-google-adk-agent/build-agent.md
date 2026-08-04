@@ -4,7 +4,7 @@ sidebar_label: "Connect Signals and agent"
 position: 5
 description: "Fetch Signals profile attributes and the agentic context narrative from Python, inject both into a Google ADK agent's system instruction each turn, and forward the Snowplow session ID from the React front-end through CopilotKit."
 keywords: ["Google ADK", "CopilotKit", "AG-UI", "Signals", "agentic context", "LlmAgent", "before_model_callback"]
-date: "2026-07-31"
+date: "2026-08-04"
 ---
 
 The next step is to connect Signals to the Google ADK agent, and forward the Snowplow session ID through CopilotKit so the agent knows which user to fetch context for.
@@ -286,10 +286,6 @@ if __name__ == "__main__":
 
 The `inject_signals_context` method is the `before_model_callback`. It runs every turn, just before the LLM is called. It reads the session ID from state, fetches both kinds of fresh Signals context, and appends them to the system instruction. Because it runs on every turn, the context reflects the user's latest behavior, including pages they've visited during the conversation.
 
-Within `inject_signals_context`, `append_instructions` is an ADK `LlmRequest` method that adds content to the system instruction for this turn only. It doesn't mutate the agent's `instruction` field permanently; every turn starts fresh and gets the latest Signals data appended. It takes a list, so the profile and activity sections are passed straight through as separate instruction blocks.
-
-The `extract_snowplow_session` method is an `ag_ui_adk` hook that runs before the ADK session is created. It reads from `input_data.forwarded_props`, which is populated by CopilotKit's `properties` prop. It returns a dictionary that gets merged into the ADK session state. Because `forwarded_props` is sent on every AG-UI request, the session ID is available for each chat message.
-
 The resulting system instruction for a turn where Signals has both kinds of context looks like:
 
 ```text
@@ -325,8 +321,6 @@ seconds_since_start_of_session, event, url, event_context
 ```
 
 The agentic context's own `prompt` instructions arrive at the top of the narrative, ahead of `[START CONTEXT]`, so you can steer the agent from your Signals configuration as well as from `BASE_INSTRUCTION`.
-
-This example uses `gemini-2.5-flash`. To use a different model, change the model string in the `LlmAgent` constructor, for example `model="gemini-2.5-pro"`. The Signals integration works the same way whether you run against AI Studio or Vertex AI.
 
 ## Forward the session ID from front-end to agent
 
@@ -419,33 +413,24 @@ This is a thin proxy. `CopilotRuntime` handles the AG-UI envelope including stat
 
 ## Try it out and verify Signals context
 
-Your application is now ready to try out.
-
 Run the stack:
 
 ```bash
 npm run dev
 ```
 
-Make sure you've replaced the placeholder values in `.env` with real credentials.
+Open [http://localhost:3000](http://localhost:3000) and browse a handful of pages, revisiting one product page after looking at another. Then open the CopilotKit sidebar and ask a general question, such as "Can you help me understand your pricing?".
 
-Open [http://localhost:3000](http://localhost:3000) and browse around for a few minutes. Visit different pages, click some links. Revisit one product page after looking at another, so the activity narrative has a pattern worth noticing. The Browser tracker records these interactions, Signals computes your attributes in real time, and the agentic context buffers the events themselves.
+A grounded response names what you just did: for the six-page session above, it picks out the return to the wireless headphones and the pricing page, rather than listing the plans generically.
 
-Open the CopilotKit sidebar and ask a general question. If Signals is returning context for your session, the agent's response will reference what you've been doing.
-
-You can verify that the agent is receiving both kinds of context by checking the agent logs. When you run `npm run dev`, watch the `[agent]` prefix. You should see the session ID present from the first turn, one request per fetch, and both sections injected:
+The `[agent]` lines in your `npm run dev` output confirm both fetches landed:
 
 ```text
-[agent] before_model_callback: state_keys=['snowplowDomainSessionId', '_ag_ui_thread_id', '_ag_ui_app_name', '_ag_ui_user_id'] snowplow_session_id='3c18a125-024d-44bb-93db-b6aed895a5a3'
 [agent] injecting 2 signals section(s)
 ```
 
-A count of `2 signals section(s)` means both the profile attributes and the activity narrative arrived. Because each fetch is handled independently, one section can appear without the other, so a failure to reach either won't take the agent down.
+Two sections means the profile attributes and the activity narrative both arrived.
 
-For the session ID, confirm the tracker initialized: look for requests to your Collector in the browser's Network tab, check that your Collector URL environment variable is set and exposed to the browser (`NEXT_PUBLIC_` prefix in the scaffold), and confirm `SnowplowProvider` wraps `CopilotProvider` in `layout.tsx`.
+On the Signals side, check in Console that your attribute group, service, and agentic context are published under the names you set in `.env`, or ask the [Snowplow Assistant](/docs/llms-support/console-agent/) to confirm them for you.
 
-For the profile section, confirm in Console that your attribute group is published and that your service uses the name in `SNOWPLOW_SIGNALS_SERVICE_NAME`, then browse for long enough that events flow through the pipeline. A service returns a key for every attribute it serves, valued `null` until the session has produced one. Because `_get_profile_section()` drops those, a session Signals has no data for yet yields no profile section at all rather than a section full of nulls.
-
-For the activity section, confirm your agentic context is published under the name in `SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME`, that you selected the `page_view` event when you defined it, and that your events are newer than the `max_age_seconds` you configured. An agentic context with nothing buffered yet still returns a narrative, with `No events buffered.` in place of the event table, which means your configuration is good and Signals is waiting on qualifying events for this session.
-
-To confirm the tracker and Signals agree on your session, use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/signals-integration/). Connect it to Console and add your API credentials in the extension options, then browse the app with the extension open so it can pick up attribute keys from the events it observes. Its **Attributes** tab then requests the attribute values Signals holds for those keys, and comparing them with the **Events** tab separates a tracking problem from a Signals configuration problem.
+To confirm the tracker and Signals agree on your session, use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/signals-integration/). Connect it to Console, add your API credentials in the extension options, then browse the app with the extension open and compare its **Attributes** tab with its **Events** tab.

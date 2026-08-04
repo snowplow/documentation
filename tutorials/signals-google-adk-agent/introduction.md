@@ -4,7 +4,7 @@ sidebar_label: "Introduction"
 position: 1
 description: "Add Snowplow Signals to a Google ADK agent so it gets real-time user context for every response, and embed it in a React app with CopilotKit."
 keywords: ["Signals", "Google ADK", "CopilotKit", "AG-UI", "agentic context", "Gemini", "AI agents", "personalization"]
-date: "2026-07-31"
+date: "2026-08-04"
 ---
 
 In this tutorial, you'll add [Snowplow Signals](/docs/signals/) to a Google ADK agent so the agent gets fresh context about the current user's session before every response. Instead of responding generically, the agent will know which pages the user has been browsing, how long they've been on the site, and what they've been looking at.
@@ -44,7 +44,7 @@ The flow works like this:
 - The Snowplow Browser tracker streams behavioral [events](/docs/fundamentals/events/) to your Collector
 - Signals computes live session attributes from that stream, and buffers the session's recent events for the agentic context
 - On the front-end, `CopilotProvider` reads the Snowplow session ID from the tracker's cookie and passes it to CopilotKit via a `properties` prop
-- The session ID gets sent as `forwarded_props` in every CopilotKit request, including the very first turn
+- CopilotKit sends the session ID as `forwarded_props` in every request, including the very first turn
 - The ADK agent's `before_model_callback` uses that session ID to fetch both the profile attributes and the activity narrative from Signals, and appends both to the system instruction
 
 ```mermaid
@@ -87,6 +87,8 @@ flowchart TD
 ```
 
 ## Prerequisites
+
+To follow this tutorial, you'll need:
 
 - A Snowplow account and pipeline with [Signals enabled](/docs/signals/setup/)
 - Node.js 18+ and npm/pnpm

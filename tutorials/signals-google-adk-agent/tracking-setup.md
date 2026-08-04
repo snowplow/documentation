@@ -4,7 +4,7 @@ sidebar_label: "Set up Snowplow tracking"
 position: 3
 description: "Initialize the Snowplow Browser tracker, track page views on client-side route changes, and wire the tracker into the React layout."
 keywords: ["Snowplow Browser SDK", "tracker", "page views", "activity tracking", "link clicks"]
-date: "2026-07-31"
+date: "2026-08-04"
 ---
 
 [Snowplow Signals](/docs/signals/get-started/) computes user attributes from your Snowplow behavioral event stream. Follow these steps to create events to work with.
@@ -69,7 +69,7 @@ export function getDomainSessionId(): string {
 }
 ```
 
-The [session ID](/docs/events/identifiers/#session-identifiers) is stored in the [`_sp_id` cookie](/docs/sources/web-trackers/cookies-and-local-storage/), which the [`getDomainUserInfo()` method](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/) reads. You'll use this value later to fetch the current user's Signals attributes.
+The tracker stores the [session ID](/docs/events/identifiers/#session-identifiers) in the [`_sp_id` cookie](/docs/sources/web-trackers/cookies-and-local-storage/), which the [`getDomainUserInfo()` method](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/) reads. You'll use this value later to fetch the current user's Signals attributes.
 
 ## Track page views on route changes
 
@@ -137,7 +137,7 @@ export default function RootLayout({
 }
 ```
 
-`CopilotProvider` is a thin wrapper around `<CopilotKit>`. Create the placeholder version now so the layout compiles. You'll extend it in the next step to read the Snowplow session ID from the tracker cookie.
+`CopilotProvider` is a thin wrapper around `<CopilotKit>`. Create the placeholder version so the layout compiles. You'll extend it in the next step to read the Snowplow session ID from the tracker cookie.
 
 ```tsx
 // src/components/copilot-provider.tsx
@@ -179,4 +179,4 @@ export function ChatShell({ children }: { children: React.ReactNode }) {
 }
 ```
 
-With this in place, every route change fires a page view event, page pings track ongoing engagement, and link clicks are captured automatically. That gives Signals a rich behavioral event stream to compute attributes from.
+With this in place, every route change fires a page view event, page pings track ongoing engagement, and the tracker captures link clicks automatically. That gives Signals a rich behavioral event stream to compute attributes from.

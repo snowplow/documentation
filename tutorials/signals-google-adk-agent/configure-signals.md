@@ -4,7 +4,7 @@ sidebar_label: "Configure Signals"
 position: 4
 description: "Create an attribute group, a service, and an agentic context to serve real-time profile attributes and session activity to your Google ADK agent."
 keywords: ["Signals", "attribute group", "service", "agentic context", "Basic Web", "domain_sessionid"]
-date: "2026-07-31"
+date: "2026-08-04"
 ---
 
 ```mdx-code-block
@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 The next step is to define the real-time context you want Signals to serve. You'll set up two complementary resources:
 
 * An [attribute group](/docs/signals/concepts/#attribute-groups) and [service](/docs/signals/concepts/#services) that compute and serve profile attributes: aggregate metrics that describe the session, such as how many pages the user has viewed
-* An [agentic context](/docs/signals/agentic-contexts/) that captures recent session activity: the user's latest events, readable as an LLM-ready narrative
+* An [agentic context](/docs/signals/agentic-contexts/) that captures recent session activity: the user's most recent events, readable as an LLM-ready narrative
 
 The two work together. Attributes describe the session in aggregate, while the agentic context records what the user has just been doing, event by event. Both are scoped to the same `domain_sessionid` attribute key, so your agent can fetch both with the session ID it already reads from the tracker cookie.
 
@@ -37,7 +37,7 @@ Use these exact names, because they match the `SNOWPLOW_SIGNALS_SERVICE_NAME` an
 
 ## Create a Basic Web attribute group
 
-Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute-groups) templates to define attributes, with `domain_sessionid` as the attribute key so the attributes are scoped to a session.
+Use one of Signals' built-in [attribute group](/docs/signals/concepts/#attribute-groups) templates to define attributes, with `domain_sessionid` as the attribute key so the attributes are scoped to a session:
 
 1. In [Console](https://console.snowplowanalytics.com), navigate to **Signals** > **Attribute groups**
 2. Click **Create attribute group**, then click **Use** on the **Basic Web** card
@@ -47,10 +47,10 @@ Applying the template fills in the name `basic_web` and its four attributes. Ren
 
 | Attribute               | Type          | Aggregation   | Property                | Description                                    |
 | ----------------------- | ------------- | ------------- | ----------------------- | ---------------------------------------------- |
-| `page_views_count`      | `int32`       | `counter`     | none                    | Total number of page views in the session      |
-| `unique_pages_viewed`   | `string_list` | `unique_list` | atomic `page_url`       | Full URLs of the pages visited in the session  |
-| `first_event_timestamp` | `string`      | `first`       | atomic `derived_tstamp` | When the session started                       |
-| `last_event_timestamp`  | `string`      | `last`        | atomic `derived_tstamp` | When the most recent event was recorded        |
+| `page_views_count`      | `int32`       | `counter`     | None                    | Total number of page views in the session      |
+| `unique_pages_viewed`   | `string_list` | `unique_list` | Atomic `page_url`       | Full URLs of the pages visited in the session  |
+| `first_event_timestamp` | `string`      | `first`       | Atomic `derived_tstamp` | When the session started                       |
+| `last_event_timestamp`  | `string`      | `last`        | Atomic `derived_tstamp` | When the most recent event was recorded        |
 
 Note the property behind `unique_pages_viewed`: the template reads `page_url`, so the values are full URLs rather than paths. The agentic context you define later reads `page_urlpath` instead, which is worth knowing when you compare the two in your agent's instruction.
 
@@ -58,7 +58,7 @@ Click **Create attribute group** when you're happy with it.
 
 ## Publish the attribute group
 
-[Attribute groups](/docs/signals/concepts/#attribute-groups) need to be published before Signals will start computing. A new group starts as `v1 (Not published)`:
+You need to publish an [attribute group](/docs/signals/concepts/#attribute-groups) before Signals starts computing. A new group starts as `v1 (Not published)`:
 
 1. Open your attribute group and click **Publish**
 2. Confirm the publish to deploy the group and its four attributes to the Profiles Store
@@ -71,13 +71,13 @@ A [service](/docs/signals/concepts/#services) provides a pull-based API endpoint
 
 Services allow you to combine multiple attribute groups if needed, but for this tutorial, use just the one you created in the last step.
 
-Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in your `.env` file. Service names take letters, numbers, and underscores only.
+Use this exact service name. It's the same as the `SNOWPLOW_SIGNALS_SERVICE_NAME` environment variable you configured in your `.env` file. Service names take letters, numbers, and underscores only:
 
 1. Navigate to **Signals** > **Services**
 2. Click **Create service**
 3. Configure:
    - **Name**: `web_agent_context`
-   - **Attribute groups**: Select the attribute group you just published
+   - **Attribute groups**: select the attribute group you just published
 4. Click **Create service**
 
 The **Attribute groups** picker only lists published attribute groups, so publishing first isn't optional. If your group is still a draft, the picker reports no options.
@@ -133,13 +133,13 @@ Fill in **Details** and **Prompt**:
 | Description | `Recent session activity for the Signal Shop support agent` |
 | Prompt | `You are a helpful assistant for Signal Shop. Use this recent activity to understand what the user is exploring right now, and tailor your answers to it.` |
 
-![The Create context form in Snowplow Console, with the Details section holding the name web_agent_activity, a greyed-out Primary owner field, and the description Recent session activity for the Signal Shop support agent, and the Prompt section below it holding the Signal Shop instructions under the helper text about adding them on top of the retrieved agentic context](./images/agentic-context-create-form.png)
+![The Create context form in Snowplow Console, with the Details section holding the name web_agent_activity, a grayed-out Primary owner field, and the description Recent session activity for the Signal Shop support agent, and the Prompt section below it holding the Signal Shop instructions under the helper text about adding them on top of the retrieved agentic context](./images/agentic-context-create-form.png)
 
 Under **Lookback Window**, set **Max events** to `50` and **Max age** to `30` minutes. Console restates the window underneath the fields, so you can check it reads as the last 50 events within 30 minutes. The details page later shows the same setting as **Max Age (seconds)** `1800`.
 
 Under **Events and Properties**, click **Add event** and choose `page_view` on the **Data structures** tab. The version fills in as `1-0-0`. Then use **Add property** three times to attach `event_name`, `page_urlpath`, and `page_title` from the **Atomic** tab.
 
-Click **Create**. Your agentic context now has a details page showing **Status** **Draft**. Click **Publish** there and confirm, and the status changes to **Published**. Later changes go through **Edit** and start as a draft, so the published version stays live while you work on it.
+Click **Create**. Your agentic context has a details page showing **Status** **Draft**. Click **Publish** there and confirm, and the status changes to **Published**. Later changes go through **Edit** and start as a draft, so the published version stays live while you work on it.
 
   </TabItem>
   <TabItem value="sdk" label="Python SDK">

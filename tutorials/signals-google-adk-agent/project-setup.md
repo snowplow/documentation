@@ -4,7 +4,7 @@ sidebar_label: "Set up the project"
 position: 2
 description: "Scaffold a Google ADK agent and React front-end with the CopilotKit starter, install Snowplow dependencies, and configure environment variables."
 keywords: ["CopilotKit", "Google ADK", "scaffold", "setup", "uv", "Next.js"]
-date: "2026-07-31"
+date: "2026-08-04"
 ---
 
 CopilotKit ships a starter that scaffolds both the ADK Python back-end and a React front-end in one command.
@@ -23,11 +23,11 @@ This creates:
 - `scripts/` — `setup-agent.sh` (runs `uv sync`) and `run-agent.sh`
 - `package.json` scripts: `dev:ui`, `dev:agent`, and `dev` (runs both concurrently)
 
-The scaffold's Python side uses `uv` rather than pip. The agent virtual environment lives at `agent/.venv`.
+The scaffold's Python side uses `uv` rather than `pip`. The agent virtual environment lives at `agent/.venv`.
 
 The scaffold uses Next.js as a convenience, for its development server, routing, and an API endpoint to host the CopilotKit proxy. CopilotKit itself is a React library that works with any framework.
 
-## Install front-end and back-end dependencies
+### Install front-end and back-end dependencies
 
 ```bash
 npm install
@@ -36,7 +36,7 @@ npm install
 Add the packages the tutorial needs on top of the scaffold:
 
 ```bash
-# Snowplow Browser SDK for the frontend
+# Snowplow Browser SDK for the front-end
 npm install @snowplow/browser-tracker @snowplow/browser-plugin-link-click-tracking
 
 # Snowplow Signals Python SDK for the agent
@@ -69,9 +69,9 @@ SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME=web_agent_activity
 
 `SNOWPLOW_SIGNALS_SERVICE_NAME` and `SNOWPLOW_SIGNALS_AGENTIC_CONTEXT_NAME` name the two Signals resources you'll create in a later step. Keep these values as they are, and use the same names when you create them.
 
-You'll find your Snowplow Collector URL in [Snowplow Console](https://console.snowplowanalytics.com) > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
+You'll find your Snowplow Collector URL in [Console](https://console.snowplowanalytics.com) > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
 
-You'll find your Signals base URL (also known as Profiles API URL) and credentials in [Snowplow Console](https://console.snowplowanalytics.com) > **Signals** > **Overview**.
+You'll find your Signals base URL (also known as Profiles API URL) and credentials in [Console](https://console.snowplowanalytics.com) > **Signals** > **Overview**.
 
 ## Verify the scaffold runs
 
@@ -83,7 +83,7 @@ npm run dev
 
 This uses `concurrently` to launch FastAPI on `http://localhost:8000` and the React development server on `http://localhost:3000`, with agent logs prefixed `[agent]` and UI logs prefixed `[ui]`. Open the front-end, open the CopilotKit sidebar, and confirm you can chat with the Gemini-backed agent. Exit the development server with `Ctrl+C` before moving on.
 
-## Strip the scaffold's demo content
+## Replace the scaffold's demo content
 
 Remove the demo components and types the scaffold ships with:
 
@@ -91,11 +91,7 @@ Remove the demo components and types the scaffold ships with:
 rm src/components/proverbs.tsx src/components/weather.tsx src/lib/types.ts
 ```
 
-After this, `src/app/page.tsx` will fail to compile because it still imports those deleted files.
-
-## Replace the scaffold's page contents
-
-The scaffold's `src/app/page.tsx` imports the demo components you just deleted, so it needs to be replaced. The chat sidebar is already mounted by `ChatShell` in `layout.tsx`, so the page itself only needs homepage content:
+The scaffold's `src/app/page.tsx` still imports those deleted files, so you need to replace it too. `ChatShell` in `layout.tsx` already mounts the chat sidebar, so the page itself only needs homepage content:
 
 ```tsx
 // src/app/page.tsx
@@ -113,13 +109,13 @@ export default function HomePage() {
 }
 ```
 
-The project should now compile again. Check it runs with `npm run dev`.
+The project should compile again. Check it runs with `npm run dev`.
 
 ## Add more pages
 
 The scaffolded project starts with only a single page.
 
-To see Signals in action, you'll need multiple pages so there's meaningful browsing behavior to track. The easiest way to add pages is to ask an AI coding assistant to generate some.
+To see Signals in action, you'll need multiple pages so there's meaningful browsing behavior to track. To add pages, ask an AI coding assistant to generate some.
 
 Example prompt:
 
@@ -127,7 +123,7 @@ Example prompt:
 Create a simple multi-page ecommerce site for a fictional store called "Signal Shop". It should have:
 - A homepage with featured products
 - Category landing pages at `/products/[category]` for at least three categories (electronics, clothing, home)
-- Individual product detail pages at `/products/[category]/[slug]` (e.g. `/products/electronics/wireless-headphones`) with at least 8 distinct products spread across the categories
+- Individual product detail pages at `/products/[category]/[slug]` (e.g. `/products/electronics/wireless-headphones`) with at least eight distinct products spread across the categories
 - A `/pricing` page
 
 Every product must have a descriptive, human-readable slug — never a numeric ID. The product name, category, and price should be prominent in the page `<title>`, an `<h1>`, and the visible content.

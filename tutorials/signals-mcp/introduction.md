@@ -1,17 +1,20 @@
 ---
-title: "Manage Snowplow Signals conversationally with the MCP server"
+title: "Manage Snowplow Signals conversationally with the Snowplow Assistant or the MCP server"
 position: 1
 sidebar_label: "Introduction"
-description: "Connect the Snowplow MCP server to your AI coding assistant and manage Snowplow Signals conversationally: define, test, publish, and verify a real-time attribute group."
-keywords: ["snowplow mcp", "model context protocol", "ai assistant", "snowplow signals", "attribute groups"]
-date: "2026-07-31"
+description: "Manage Snowplow Signals conversationally, either with the Snowplow Assistant in Console or with your own MCP-connected assistant: define, test, publish, and verify a real-time attribute group."
+keywords: ["snowplow assistant", "snowplow mcp", "model context protocol", "ai assistant", "snowplow signals", "attribute groups"]
+date: "2026-08-04"
 ---
 
-The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) lets AI assistants work with your Snowplow account through natural language. For [Signals](/docs/signals/introduction/), that means you can define, test, publish, and query real-time attributes by describing what you want, while the assistant makes the API calls for you.
+You can manage [Signals](/docs/signals/introduction/) by describing what you want in plain language and letting an AI assistant make the API calls for you: define, test, publish, and query real-time attributes conversationally. There are two routes, and this tutorial works with either:
 
-In this tutorial you'll use an MCP-capable AI assistant to build the same attribute group as the [Signals quick start](/tutorials/signals-quickstart/start), conversationally instead of through the Console UI. You'll:
+* The [Snowplow Assistant](/docs/llms-support/console-agent/) built into Snowplow Console, where there's nothing to install
+* The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which connects the AI assistant you already work in to your Snowplow account
 
-* Connect the Snowplow MCP server to your assistant and authenticate
+The prompts are the same either way. In this tutorial you'll build the same attribute group as the [Signals quick start](/tutorials/signals-quickstart/start), conversationally instead of through the Console UI. You'll:
+
+* Open the Snowplow Assistant in Console, or connect the MCP server to your own assistant
 * Define a stream attribute group that calculates three session metrics from page view events
 * Test the definition, then publish it to Signals
 * Verify the results in Snowplow Console, and watch the live attribute values in the Snowplow Inspector
@@ -19,11 +22,9 @@ In this tutorial you'll use an MCP-capable AI assistant to build the same attrib
 
 The assistant handles the mechanics, but you stay in control: Signals saves new attribute groups as drafts, so nothing is calculated until you review the definition and publish it. Every step ends with a check you can make yourself in Console or in the [Snowplow Inspector](/docs/testing/snowplow-inspector/), rather than relying on the assistant's own description of what it did.
 
-This tutorial uses [Claude Code](https://claude.com/product/claude-code) in the examples, because Snowplow ships a plugin that bundles the MCP server with Signals-aware skills. Any MCP-capable assistant works, and the prompts are the same.
+The transcripts in this tutorial come from a [Claude Code](https://claude.com/product/claude-code) session, because Snowplow ships a plugin that bundles the MCP server with Signals-aware skills.
 
 This tutorial should take around 20 minutes to complete.
-
-If you'd rather not set up an MCP client at all, the [Snowplow Assistant](/docs/llms-support/console-agent/) built into Console offers the same Signals capabilities with no configuration. This tutorial focuses on the MCP server because it works in your own tools, where your code and workflows live.
 
 ## Prerequisites
 
@@ -31,8 +32,7 @@ This tutorial assumes that you have:
 
 * A Snowplow account with a running pipeline, and page view tracking on a web application, so Signals has events to calculate from
 * [Signals enabled](/docs/signals/setup/) on your account
-* An MCP-capable AI assistant, such as Claude Code, Claude Desktop, or Cursor
-* Permission to create API keys in [Snowplow Console](https://console.snowplowanalytics.com), for authentication
+* Either the [Snowplow Assistant](/docs/llms-support/console-agent/) enabled on your organization, or an MCP-capable AI assistant such as Claude Code, Claude Desktop, or Cursor
 * The [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension, to check the calculated attribute values
 
 :::note[You need a Snowplow account and pipeline]

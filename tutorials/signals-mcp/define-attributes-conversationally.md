@@ -2,19 +2,21 @@
 title: "Define attributes conversationally"
 position: 3
 sidebar_label: "Define attributes"
-description: "Prompt your AI assistant to create a Signals stream attribute group, test it against warehouse data, and publish it using the Snowplow MCP tools."
-keywords: ["signals attribute group", "mcp tools", "conversational configuration", "test attributes", "publish signals"]
-date: "2026-07-31"
+description: "Prompt the Snowplow Assistant or your own AI assistant to create a Signals stream attribute group, test it against warehouse data, and publish it."
+keywords: ["signals attribute group", "snowplow assistant", "conversational configuration", "test attributes", "publish signals"]
+date: "2026-08-04"
 ---
 
-With the MCP server connected, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
+With your assistant ready, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
 
 * How many page views occurred in the last 15 minutes, per session
 * The last seen browser name, per session
 * The first seen page referrer, per session
 
+Send the prompts on this page in the assistant you chose on the previous page. They're the same in the Snowplow Assistant and in an MCP-connected assistant, and so are the resources they create.
+
 :::note[Transcripts are representative]
-The transcript excerpts on this page come from a real Claude Code session, condensed for readability. Assistant output varies between runs and between tools, so your assistant's wording, and even its choice of tool calls, will differ. What stays the same are the MCP tools it uses and the resources it creates, and those are what you'll verify in Console in the next step.
+The transcript excerpts on this page come from a real Claude Code session with the MCP server, condensed for readability. Assistant output varies between runs and between assistants, so the wording you see, and even the steps your assistant takes, will differ. What stays the same are the resources it creates, and those are what you'll verify in Console in the next step.
 :::
 
 ## Describe the attribute group
@@ -63,7 +65,7 @@ Before moving on, review what was actually created rather than trusting the summ
 Show me the full definition of tut_mcp_session_metrics.
 ```
 
-The assistant calls `signals_get_attribute_group` and returns the stored configuration. Check that:
+The assistant returns the stored configuration. Check that:
 
 * The attribute key is `domain_sessionid`
 * `page_view_count` uses a `counter` aggregation with a 15-minute period (`PT15M`)
@@ -74,7 +76,7 @@ You'll confirm the same details in Snowplow Console on the next page. If anythin
 
 ## Test against warehouse data
 
-Before publishing, you can test what the group would calculate. The `signals_test_attribute_group` tool runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as [previewing an attribute group](/tutorials/signals-quickstart/define-attribute-group#test-the-attribute-definitions) in Console.
+Before publishing, you can test what the group would calculate. Testing runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as [previewing an attribute group](/tutorials/signals-quickstart/define-attribute-group#test-the-attribute-definitions) in Console.
 
 ```text
 Test tut_mcp_session_metrics against recent events before we publish.

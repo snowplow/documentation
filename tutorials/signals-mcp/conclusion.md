@@ -1,15 +1,15 @@
 ---
-title: "Conclusions and next steps from the Signals MCP tutorial"
+title: "Conclusions and next steps from the conversational Signals tutorial"
 position: 5
 sidebar_label: "Conclusion"
-description: "Recap of managing Signals conversationally through the Snowplow MCP server, with next steps for services, interventions, and the Console-embedded Snowplow Assistant."
-keywords: ["snowplow mcp", "signals services", "interventions", "snowplow assistant", "next steps"]
-date: "2026-07-31"
+description: "Recap of managing Signals conversationally in the Snowplow Assistant or with the Snowplow MCP server, with next steps for services and interventions."
+keywords: ["snowplow assistant", "snowplow mcp", "signals services", "interventions", "next steps"]
+date: "2026-08-04"
 ---
 
-In this tutorial you connected the Snowplow MCP server to an AI assistant and managed a complete Signals workflow conversationally:
+In this tutorial you managed a complete Signals workflow conversationally, in the Snowplow Assistant or in your own MCP-connected assistant:
 
-* Installed the Snowplow plugin and authenticated with your Console account
+* Opened the assistant in Console, or installed the Snowplow plugin and authenticated with your Console account
 * Defined a stream attribute group with three session metrics, saved as a draft
 * Tested the definitions and published the group
 * Verified the configuration in Console, and the live values in the Snowplow Inspector
@@ -17,18 +17,14 @@ In this tutorial you connected the Snowplow MCP server to an AI assistant and ma
 
 ## Beyond attribute groups
 
-The MCP server covers the full [Signals](/docs/signals/introduction/) surface, so the same conversational workflow extends to:
+Attribute groups are one part of [Signals](/docs/signals/introduction/). The same conversational approach applies to:
 
 * [Services](/docs/signals/applications/services/): bundle attribute groups behind a single name for your applications to query
 * [Interventions](/docs/signals/interventions/): define rules that push an action to your application the moment a user's attributes meet your criteria
 * [Attribute keys](/docs/signals/attributes/attribute-keys/): create custom keys to aggregate by, such as an account or tenant ID
 * [Agentic contexts](/docs/signals/agentic-contexts/): maintain a rolling log of each user's recent events to ground your own AI agents in live behavior
 
-It also manages the rest of Snowplow Console, from data structures and tracking plans to pipeline health and failed events. See the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) documentation for the full capability list.
-
-## Use the Snowplow Assistant instead
-
-If you want the same conversational control without configuring an MCP client, the [Snowplow Assistant](/docs/llms-support/console-agent/) is built into Snowplow Console and uses the same set of tools, operating with your existing Console permissions. It's a practical option for teammates who don't work in AI coding tools.
+Both routes reach beyond Signals into the rest of Snowplow Console, from data structures and tracking plans to pipeline health and failed events. See [Snowplow Assistant](/docs/llms-support/console-agent/) and [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) for what each one covers.
 
 ## Next steps
 

@@ -4,14 +4,14 @@ position: 4
 sidebar_label: "Verify and refine"
 description: "Confirm the conversationally created attribute group in Snowplow Console, watch live attribute values in the Snowplow Inspector, then add an attribute and publish the new version."
 keywords: ["verify attribute group", "snowplow console", "snowplow inspector", "attribute values", "attribute group versions"]
-date: "2026-07-30"
+date: "2026-08-04"
 ---
 
 The assistant reports success, but the real test is whether the configuration exists in your Snowplow account and produces values. In this step you'll verify both, then make your first conversational edit.
 
 ## Confirm the group in Console
 
-Log in to [Snowplow Console](https://console.snowplowanalytics.com) and go to **Signals** > **Attribute groups**. You should see `tut_mcp_session_metrics` in the list, at version 1, with a published status.
+In [Snowplow Console](https://console.snowplowanalytics.com), go to **Signals** > **Attribute groups**. You should see `tut_mcp_session_metrics` in the list, at version 1, with a published status.
 
 ![The attribute groups list in Console, showing tut_mcp_session_metrics as a published stream group keyed on domain_sessionid with three attributes](./images/console-attribute-groups-list.png)
 
@@ -44,7 +44,7 @@ Each attribute group in the list shows its organization, environment, version, a
 
 While you stay on the **Attributes** tab, new events refresh the values automatically, with a final refresh five seconds after the events stop, to allow for processing latency. View another page and watch `page_view_count` increase. If the values still look stale, use the refresh button at the top to request them again.
 
-You can also ask the assistant for the same lookup: give it a session ID from the Inspector's **Events** tab and ask what the current attribute values are, and it calls the `signals_get_online_attributes` tool. Reading the values in the Inspector first keeps the verification independent of the assistant that made the change.
+You can also ask the assistant for the same lookup: give it a session ID from the Inspector's **Events** tab and ask what the current attribute values are, and it reads them from the Profiles Store for you. Reading the values in the Inspector first keeps the verification independent of the assistant that made the change.
 
 :::note[No values yet?]
 Stream attribute groups only calculate from events that arrive after you publish, so events from before that point won't appear. If the list stays empty, check that the extension is observing your page views on the **Events** tab first, and that you added API credentials for the right organization in the extension's options.

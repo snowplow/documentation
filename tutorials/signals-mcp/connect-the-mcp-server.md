@@ -1,15 +1,25 @@
 ---
-title: "Connect the MCP server"
+title: "Open the Snowplow Assistant or connect the MCP server"
 position: 2
-sidebar_label: "Connect the MCP server"
-description: "Install the Snowplow MCP server and skills in any AI assistant, authenticate with OAuth, and check the connection."
-keywords: ["snowplow mcp install", "claude code plugin", "mcp authentication", "console api key", "mcp-remote"]
-date: "2026-07-31"
+sidebar_label: "Connect your assistant"
+description: "Start a conversation with the Snowplow Assistant in Console, or install the Snowplow MCP server in your own AI assistant, authenticate with OAuth, and check the connection."
+keywords: ["snowplow assistant", "snowplow mcp install", "claude code plugin", "mcp authentication", "console api key", "mcp-remote"]
+date: "2026-08-04"
 ---
 
-The Snowplow MCP server is a remote server, hosted by Snowplow: there's no server for you to deploy or maintain. Connecting your assistant to it means pointing your MCP client at the server URL and authenticating with your Snowplow Console account.
+Both routes end in the same place: a conversation that can read and change your Signals configuration on your behalf. Pick the one that fits where you want to work.
+
+## Use the Snowplow Assistant
+
+The [Snowplow Assistant](/docs/llms-support/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
+
+Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/llms-support/console-agent/) for what it covers and how it handles your data.
+
+On this route you can skip straight to [defining attributes](/tutorials/signals-mcp/define-attributes-conversationally). The rest of this page connects the MCP server to your own assistant instead.
 
 ## Install the Snowplow plugin
+
+The Snowplow MCP server is a remote server, hosted by Snowplow: there's no server for you to deploy or maintain. Connecting your assistant to it means pointing your MCP client at the server URL and authenticating with your Snowplow Console account.
 
 The Snowplow plugin bundles the MCP server with six skills, including the `signals` skill that guides the assistant through Signals workflows like the one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the `signals` skill, so there's no slash command to run. The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills).
 

@@ -6,7 +6,7 @@ enum DocsTab {
   Docs = '/docs',
   Tutorials = '/tutorials',
   AI = '/docs/ai',
-  Support = '/support',
+  Support = '/docs/support',
 }
 
 function getCurrentTab(pathname: string): DocsTab {

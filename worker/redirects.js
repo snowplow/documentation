@@ -424,6 +424,8 @@ const fallbackRules = [
   ['/docs/llms-support/documentation-llms.txt/*', '/docs/ai/documentation-llms-txt/:splat', 301],
   ['/docs/llms-support/documentation-markdown/*', '/docs/ai/documentation-markdown/:splat', 301],
   ['/docs/llms-support/console-agent/*', '/docs/ai/snowplow-assistant/:splat', 301],
+  // Support page moved from a standalone src/pages route into the docs tree
+  ['/support/', '/docs/support/', 301],
   // Snowtype restructure
   ['/docs/event-studio/implement-tracking/snowtype/using-the-cli/*', '/docs/event-studio/implement-tracking/install-snowtype/:splat', 301],
   ['/docs/event-studio/implement-tracking/snowtype/snowtype-config/*', '/docs/event-studio/implement-tracking/snowtype-config/:splat', 301],

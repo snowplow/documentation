@@ -421,6 +421,45 @@ button.snowplow-button:focus {
   display: none;
 }
 
+/* Match the Docs/Tutorials tab styling for custom navbar items */
+.navbar__item.docs-tutorial-nav-item > .navbar__link {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: var(--ifm-font-color-base);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar__item.docs-tutorial-nav-item > .navbar__link:hover,
+.navbar__item.docs-tutorial-nav-item > .navbar__link:focus {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.navbar__item.docs-tutorial-nav-item > .navbar__link.navbar__link--active {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.navbar__item.docs-tutorial-nav-item > .navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0;
+  height: 4px;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__item.docs-tutorial-nav-item > .navbar__link:hover::after,
+.navbar__item.docs-tutorial-nav-item > .navbar__link:focus::after,
+.navbar__item.docs-tutorial-nav-item > .navbar__link.navbar__link--active::after {
+  background: var(--ifm-color-primary);
+}
+
 @media (max-width: 996px) {
   a.navbar-cta {
     display: none;
@@ -1427,7 +1466,7 @@ Controls the display of navbar/sidebar items
 }
 
 .theme-doc-markdown > .full-width {
-  grid-column: 1;
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: inherit;
 }

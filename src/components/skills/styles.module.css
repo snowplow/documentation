@@ -1,0 +1,125 @@
+
+.installStrip {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.installCodeContainer {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 280px;
+  max-width: 475px;
+  width: 100%;
+}
+
+.installCodeContainer :global(.theme-code-block) {
+  width: 100%;
+}
+
+.categoryTabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.categoryTabButton,
+.categoryTabButtonActive {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-border-emphasis-200, #ddd);
+  background: transparent;
+  cursor: pointer;
+}
+
+.categoryTabButtonActive {
+  background: var(--ifm-color-primary, #0969da);
+  color: white;
+  border-color: transparent;
+}
+
+.categoryGroup {
+  margin: 0.7rem 0 1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.categoryGroup h2 {
+  margin: 0 0 0.5rem;
+}
+
+.skillRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.25rem;
+  border: 1px solid var(--ifm-color-border-emphasis-100, #eee);
+  border-radius: 16px;
+  background: var(--ifm-background-container-color, #fff);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.skillRow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+}
+
+.skillRowText {
+  min-width: 0;
+}
+
+.skillRowText h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.skillBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  margin: 0 0 0.15rem 0;
+  border: 1px solid var(--ifm-color-primary, #0969da);
+  border-radius: 999px;
+  color: var(--ifm-color-primary, #0969da);
+  background: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.skillRowText h3 {
+  margin: 0 0 0.08rem 0;
+}
+
+.skillRowLink {
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .skillRow {
+    grid-template-columns: 1fr;
+  }
+
+  .skillRowLink {
+    margin-top: 0.75rem;
+  }
+}
+
+.skillRowText p {
+  margin: 0;
+  color: var(--ifm-color-gray-600, #666);
+}
+
+:global(.button.button--primary).githubButton {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  text-decoration: none !important;
+  background-color: var(--ifm-color-primary, #0969da) !important;
+  border-color: transparent !important;
+}

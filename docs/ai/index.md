@@ -16,32 +16,32 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
   <LinkCard
     title="Snowplow Assistant"
     description="Learn about the embedded AI assistant in Snowplow Console and how it helps manage tracking, monitor pipelines, and troubleshoot."
-    href="/docs/ai/snowplow-assistant/"
+    href="/docs/llms-support/console-agent/"
   />
   <LinkCard
     title="Snowplow MCP Server"
     description="Discover the remote MCP server that connects AI assistants to your Snowplow Console account."
-    href="/docs/ai/snowplow-mcp-server/"
+    href="/docs/llms-support/snowplow-mcp/"
   />
   <LinkCard
     title="CLI MCP Server"
     description="Find out how the local CLI MCP server connects AI assistants to your tracking plan files on disk."
-    href="/docs/ai/cli-mcp-server/"
+    href="/docs/llms-support/cli-mcp-server/"
   />
   <LinkCard
     title="Documentation index in llms.txt"
     description="Use the generated llms.txt index to help LLMs explore your Snowplow docs efficiently."
-    href="/docs/ai/documentation-llms-txt/"
+    href="/docs/llms-support/#documentation-index-in-llmstxt"
   />
   <LinkCard
     title="Documentation pages as markdown"
     description="Learn how individual docs pages can be accessed directly as markdown for LLM-friendly retrieval."
-    href="/docs/ai/documentation-markdown/"
+    href="/docs/llms-support/#documentation-pages-as-markdown"
   />
   <LinkCard
     title="Signals"
     description="Explore how Signals delivers real-time behavioral context and profile data for AI use cases."
-    href="/docs/ai/signals/"
+    href="/docs/signals/"
   />
   <LinkCard
     title="Skills Marketplace"
@@ -49,8 +49,8 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
     href="/docs/ai/skills/"
   />
   <LinkCard
-    title="Blog"
-    description="Read articles and updates about AI-driven documentation and data workflows."
+    title="Applied AI Blog"
+    description="Read blog posts that show you how to apply Snowplow's AI solutions to your own workflows."
     href="/docs/ai/blog/"
   />
 </CardGrid>

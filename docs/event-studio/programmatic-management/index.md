@@ -20,7 +20,7 @@ The [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides file-base
 - Validate resources before publishing
 - Integrate with version control and code review workflows
 
-The [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/) enables AI assistants to interact with your tracking plan resources through natural language.
+The [Snowplow CLI MCP server](/docs/llms-support/cli-mcp-server/) enables AI assistants to interact with your tracking plan resources through natural language.
 
 ## Console API
 

@@ -1857,6 +1857,15 @@ pre.mermaid {
   text-decoration: none !important;
 }
 
+/* Blog post cards */
+.blog-post-card {
+  text-decoration: none !important;
+}
+
+.blog-post-card:hover {
+  text-decoration: none !important;
+}
+
 .link-card p.text-foreground {
   color: hsl(var(--foreground)) !important;
 }

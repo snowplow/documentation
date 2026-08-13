@@ -31,7 +31,7 @@ If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](ht
 You will need a [Snowplow pipeline](/docs/get-started/index.md) to use Signals. Your Signals infrastructure is deployed into the same cloud as your pipeline.
 
 :::note[Warehouse support]
-Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
+Snowflake, BigQuery, and Databricks are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 
 Signals consists of several new infrastructure components. When running Signals, your Snowplow pipeline will continue to process events as usual.

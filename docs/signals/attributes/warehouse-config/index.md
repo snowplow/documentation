@@ -17,8 +17,6 @@ To sync existing, pre-calculated attributes from your warehouse to Signals, conf
 If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
 :::
 
-## Provide source table details
-
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
@@ -26,14 +24,36 @@ When creating an attribute group, select **Warehouse** as the data source.
 
 ![Create attribute group form showing where to select the Warehouse data source in Snowplow Console](../../images/warehouse.png)
 
-Then provide the warehouse and table details, and select which fields you want to send to Signals.
+### Provide the basic configuration
+
+Select the `attribute key` you have data for. The [attribute key](/docs/signals/attributes/attribute-keys/index.md) for the group must correspond to a column in the table that contains the key values.
+
+Decide on how long you would like the data to persist in the profile store by setting the `TTL`.
+
+By default, the updates will run on an hourly basis, which you can adjust to a lower cadence by the `sync frequency` selector (6h, 12h, 24h).
+
+You must also specify a `backfill start date`, the earliest date from which Signals should read rows on the first sync.
+
+![Create attribute group form showing where to add basic warehouse configuration in Snowplow Console](../../images/warehouse-config.png)
+
+### Define which fields to sync
+
+Select which `table` to sync from.
+
+Choose the `Modified date` column: the column that tells when a particular row was last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write). The Modified date column must be in UTC. A column in local time will cause rows to be silently matched against the wrong sync window, with no error raised. If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the latest `Modified date` value.
+
+:::warning
+Avoid using a business or event timestamp that doesn't change when a row is reloaded or updated to avoid data being missed.
+:::
+
+Finally, select which `table fields` you want to send to Signals.
 
 ![Warehouse source configuration showing warehouse table and field mapping options](../../images/attribute-group-warehouse-fields.png)
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Configure which table to sync by specifying a `BatchSource` object.
+Start by configuring which table to sync by specifying a `BatchSource` object.
 
 ```python
 from snowplow_signals import BatchSource
@@ -57,25 +77,19 @@ The table below lists all available arguments for a `BatchSource`:
 | `database` | The database where the attributes are stored | `string` | ✅ |
 | `schema` | The schema for the table of interest | `string` | ✅ |
 | `table` | The table where the attributes are stored | `string` | ✅ |
-| `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness | `string` | ❌ |
+| `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness | `string` | ✅ |
 | `owner` | The owner of the source | `string` | ❌ |
 
-The batch engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the greatest `timestamp_field` value.
+The batch engine uses `timestamp_field` as the change-watermark for incremental syncs — it must reflect when a row was actually last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write), not a business or event timestamp that stays fixed once set. `timestamp_field` must be in UTC, a column in local time will cause rows to be silently matched against the wrong sync window, with no error raised.
 
-</TabItem>
-</Tabs>
+If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the greatest `timestamp_field` value.
 
-## Define which fields to sync
+:::warning
+Avoid using a business or event timestamp that doesn't change when a row is reloaded or updated — Signals won't be able to tell the row has changed, and the data may be missed.
+:::
 
-<Tabs groupId="signals-impl" queryString>
-<TabItem value="console" label="Console" default>
 
-Select the fields (columns) from your warehouse table that you want to sync to the Profiles Store. You must also specify a backfill start date — the earliest date from which Signals should read rows on the first sync.
-
-The [attribute key](/docs/signals/attributes/attribute-keys/index.md) for the group must correspond to a column in the table that contains the key values.
-
-</TabItem>
-<TabItem value="sdk" label="Python SDK">
+### Define which fields to sync
 
 Use `ExternalBatchAttributeGroup` to define which source table and fields to use. Instead of `attributes`, this class uses `fields` — abstractions over the warehouse columns.
 
@@ -84,7 +98,7 @@ You must set `backfill_since_tstamp` to tell the batch engine the earliest times
 The attribute key must correspond to a column in the source table. The example below uses the built-in `domain_userid` key, so the table must have a `domain_userid` column. To key on a different column, [define a custom attribute key](/docs/signals/attributes/attribute-keys/index.md#custom-attribute-keys) with `external_column` set to the column name.
 
 ```python
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from snowplow_signals import ExternalBatchAttributeGroup, domain_userid, Field
 
 attribute_group = ExternalBatchAttributeGroup(
@@ -94,6 +108,7 @@ attribute_group = ExternalBatchAttributeGroup(
     owner="user@company.com",
     batch_source=data_source,
     backfill_since_tstamp=datetime(2026, 6, 1, tzinfo=timezone.utc),
+    refresh_rate=timedelta(hours=6),
     fields=[
         Field(name="TOTAL_TRANSACTIONS", type="int32"),
         Field(name="TOTAL_REVENUE", type="int32"),
@@ -111,6 +126,7 @@ The table below lists all available arguments for `ExternalBatchAttributeGroup`:
 | `attribute_key` | The key used to identify profiles. Its name must match a column in the source table | `AttributeKey` | ✅ |
 | `batch_source` | The `BatchSource` defining the warehouse table to sync from | `BatchSource` | ✅ |
 | `backfill_since_tstamp` | The earliest timestamp from which to read rows on the first sync. Accepts tz-aware or naive UTC `datetime`; tz-aware is recommended. | `datetime` | ✅ |
+| `refresh_rate` | How frequently the attribute group should be synced (e.g. `timedelta(hours=1)`, `timedelta(hours=6)`, `timedelta(days=1)`). Defaults to hourly. | `timedelta` | ❌ |
 | `fields` | The list of `Field` objects defining which columns to sync | `list` | ✅ |
 | `description` | A description of the attribute group | `string` | ❌ |
 | `owner` | The owner of the attribute group | `string` | ❌ |

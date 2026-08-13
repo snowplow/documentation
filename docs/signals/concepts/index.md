@@ -117,8 +117,8 @@ Stream attribute groups by default only calculate attributes from the moment the
 
 When backfill is enabled, you select a start date. On publish, Signals uses your Snowplow `atomic` events table to calculate attribute values for all events from that date up to the publish timestamp. The streaming engine starts immediately and processes all new events in real time. Backfill operates within this defined period and can take some time depending on data volume. Once backfill completes, only the streaming engine remains active.
 
-:::info
-When backfilling, the events table filtered on the `load_tstamp` column, since this is typically the partition or cluster key on Snowplow-loaded event tables (by default, or per deployment's instructions). Filtering on it allows queries to prune partitions efficiently.
+:::info[Backfill query performance]
+Signals filters the events table on the `load_tstamp` column. This column is typically the partition or cluster key on Snowplow-loaded event tables, so filtering on it lets queries prune partitions efficiently.
 :::
 
 You can monitor progress in Snowplow Console on the attribute group's details page. While historical values are syncing, a status bar labeled `Backfill in progress` is shown. This status remains visible until the backfill period has completed.

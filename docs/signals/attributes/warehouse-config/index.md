@@ -17,6 +17,8 @@ To sync existing, pre-calculated attributes from your warehouse to Signals, conf
 If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
 :::
 
+## Configure a warehouse source
+
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
@@ -26,27 +28,27 @@ When creating an attribute group, select **Warehouse** as the data source.
 
 ### Provide the basic configuration
 
-Select the `attribute key` you have data for. The [attribute key](/docs/signals/attributes/attribute-keys/index.md) for the group must correspond to a column in the table that contains the key values.
+Select the **Attribute key** you have data for. The [attribute key](/docs/signals/attributes/attribute-keys/index.md) for the group must correspond to a column in the table that contains the key values.
 
-Decide on how long you would like the data to persist in the profile store by setting the `TTL`.
+Set the **TTL** to control how long the data persists in the Profiles Store.
 
-By default, the updates will run on an hourly basis, which you can adjust to a lower cadence by the `sync frequency` selector (6h, 12h, 24h).
+Updates run hourly by default. Use the **Sync frequency** selector to sync less often (6h, 12h, or 24h).
 
-You must also specify a `backfill start date`, the earliest date from which Signals should read rows on the first sync.
+You must also specify a **Backfill start date**: the earliest date from which Signals should read rows on the first sync.
 
 ![Create attribute group form showing where to add basic warehouse configuration in Snowplow Console](../../images/warehouse-config.png)
 
 ### Define which fields to sync
 
-Select which `table` to sync from.
+Select which **Table** to sync from.
 
-Choose the `Modified date` column: the column that tells when a particular row was last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write). The Modified date column must be in UTC. A column in local time will cause rows to be silently matched against the wrong sync window, with no error raised. If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the latest `Modified date` value.
+Choose the **Modified date** column: the column that tells when a particular row was last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write). The **Modified date** column must be in UTC. A column in local time causes rows to be silently matched against the wrong sync window, with no error raised. If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the latest **Modified date** value.
 
-:::warning
-Avoid using a business or event timestamp that doesn't change when a row is reloaded or updated to avoid data being missed.
+:::warning[Use a last-modified timestamp]
+Don't use a business or event timestamp that doesn't change when a row is reloaded or updated. The batch engine won't be able to tell the row has changed, and the data may be missed.
 :::
 
-Finally, select which `table fields` you want to send to Signals.
+Finally, select which **Table fields** you want to send to Signals.
 
 ![Warehouse source configuration showing warehouse table and field mapping options](../../images/attribute-group-warehouse-fields.png)
 
@@ -80,14 +82,13 @@ The table below lists all available arguments for a `BatchSource`:
 | `timestamp_field` | Primary timestamp of the attribute value, indicating data freshness | `string` | ✅ |
 | `owner` | The owner of the source | `string` | ❌ |
 
-The batch engine uses `timestamp_field` as the change-watermark for incremental syncs — it must reflect when a row was actually last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write), not a business or event timestamp that stays fixed once set. `timestamp_field` must be in UTC, a column in local time will cause rows to be silently matched against the wrong sync window, with no error raised.
+The batch engine uses `timestamp_field` as the change-watermark for incremental syncs — it must reflect when a row was actually last written or updated in the table (for example, a `load_tstamp` or `updated_at` column populated by your ETL process on every write), not a business or event timestamp that stays fixed once set. `timestamp_field` must be in UTC. A column in local time causes rows to be silently matched against the wrong sync window, with no error raised.
 
 If multiple rows exist for the same attribute key within a sync period, the engine uses the row with the greatest `timestamp_field` value.
 
-:::warning
-Avoid using a business or event timestamp that doesn't change when a row is reloaded or updated — Signals won't be able to tell the row has changed, and the data may be missed.
+:::warning[Use a last-modified timestamp]
+Don't use a business or event timestamp that doesn't change when a row is reloaded or updated. The batch engine won't be able to tell the row has changed, and the data may be missed.
 :::
-
 
 ### Define which fields to sync
 

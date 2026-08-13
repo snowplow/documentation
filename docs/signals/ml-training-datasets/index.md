@@ -15,6 +15,17 @@ To follow along with a working example, open the [dataset builder notebook](http
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
 
+## Supported warehouses
+
+The dataset builder currently supports Snowflake only. A [Signals warehouse connection](/docs/signals/setup/index.md) is required for [managed runs](#submit-a-managed-run). If you [build the SQL yourself](#build-and-execute-sql-yourself), you can run it directly against your warehouse without a connection configured in Signals.
+
+| Feature | Snowflake |
+| --- | --- |
+| Session anchors | ✅ |
+| User-supplied anchors | ✅ |
+| Managed runs | ✅ |
+| Self-built SQL | ✅ |
+
 ## Why point-in-time correctness matters
 
 When you serve predictions in real time, your model only has access to events that have happened so far in the session. If your training data includes attributes computed from the full session (including events after the prediction point), your model learns patterns it will never see in production. This is called data leakage, and it is the most common reason ML models degrade after deployment.
@@ -26,10 +37,11 @@ The dataset builder prevents this by computing each attribute value using only e
 Building and using an ML training dataset follows this process:
 
 1. [Define your attribute groups](/docs/signals/attributes/attribute-groups/index.md) with the features you want your model to learn from (e.g. `product_view_count`, `add_to_cart_count`)
-2. Submit a dataset run by calling the appropriate method - `submit_dataset_run_with_session_anchors()` for auto-generated anchors, or `submit_dataset_run_with_custom_anchors()` for a pre-existing anchor table
-3. Poll for completion with `get_dataset_run_status()`, then retrieve a preview with `get_dataset_run_preview()`
-4. Train your model on the resulting DataFrame
-5. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
+2. Prepare anchor data - either let Signals [generate anchors automatically](#session-anchors) from your event data, or [supply your own anchor table](#user-supplied-anchors) with pre-labeled events
+3. Build the dataset - either [submit a managed run](#submit-a-managed-run) where Signals executes the queries, or [build the SQL yourself](#build-and-execute-sql-yourself) and run it against your warehouse
+4. Query the resulting dataset from your warehouse
+5. Train your model on the results
+6. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
 
 ## How it works
 
@@ -39,11 +51,8 @@ The dataset builder produces a training dataset in three stages:
 flowchart LR
     subgraph stage1["1. Anchors"]
         direction TB
-        A1["Scan sessions in<br>training window"] --> A2{"Goal event<br>occurred?"}
-        A2 -- Yes --> A3["Positive anchor<br>(label = 1)"]
-        A2 -- No --> A4["Negative anchor<br>(label = 0)"]
-        A3 --> A5["Downsample<br>negatives"]
-        A4 --> A5
+        A1["Session anchors:<br>scan sessions,<br>label by goal"] --> A5["Labeled anchor<br>points"]
+        A6["Custom anchors:<br>use your own<br>pre-labeled table"] --> A5
     end
 
     subgraph stage2["2. Attributes"]
@@ -59,7 +68,7 @@ flowchart LR
     stage1 --> stage2 --> stage3
 ```
 
-1. Anchors: scan sessions within the training window and identify anchor points. Sessions where the goal event occurred produce positive anchors (label=1). Sessions without the goal produce negative anchors (label=0). Negative anchors are downsampled to avoid class imbalance.
+1. Anchors: identify labeled anchor points. With [session anchors](#session-anchors), Signals scans sessions in the training window, labels them by whether a goal event occurred, and downsamples negatives. With [user-supplied anchors](#user-supplied-anchors), you provide your own pre-labeled table and this stage is skipped.
 2. Attributes: for each anchor, compute attribute values using only the events that preceded the anchor timestamp in that session. This enforces point-in-time correctness, so attributes reflect only what was known at the moment of the anchor.
 3. Assembly: join anchors with their computed attribute values into a single labeled dataset, with one row per anchor and one column per attribute.
 
@@ -207,11 +216,15 @@ run = sp_signals.submit_dataset_run_with_custom_anchors(
 | `dataset_table` | Override the output location for the final assembled dataset. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). | `WarehouseTable` | Default: `None` |
 | `max_lookback_days` | How far back from each anchor timestamp to look for events when computing attributes. By default, this is derived from the longest period defined across your attributes. | `int` | Default: derived from attribute periods |
 
-## Poll for completion and retrieve results
+## Build and run the dataset
 
-The `submit_dataset_run_with_session_anchors()` and `submit_dataset_run_with_custom_anchors()` methods return a `DatasetRunResponse` immediately. The dataset is built server-side, so you need to poll for completion before retrieving results.
+Once you have defined your anchors, you can build the dataset in two ways: submit a managed run where Signals executes the queries for you, or generate the SQL and run it yourself.
 
-### Check run status
+### Submit a managed run
+
+Use `submit_dataset_run_with_session_anchors()` or `submit_dataset_run_with_custom_anchors()` to have Signals build the dataset server-side. These methods return a `DatasetRunResponse` immediately while the dataset is built in the background.
+
+#### Check run status
 
 Use `get_dataset_run_status()` to check whether the run has finished. The `status` field is one of `pending`, `success`, or `failed`.
 
@@ -235,9 +248,9 @@ while True:
     time.sleep(5)
 ```
 
-### Get results as a DataFrame
+#### Preview results
 
-Once the run status is `success`, call `get_dataset_run_preview()` to fetch a preview of the completed dataset. By default, it returns up to 100 rows. You can set `limit` up to 10,000.
+Once the run status is `success`, call `get_dataset_run_preview()` to fetch a preview of the completed dataset. The preview returns a subset of rows for quick inspection - by default up to 100, configurable up to 10,000 with the `limit` parameter.
 
 ```python
 preview = sp_signals.get_dataset_run_preview(run.id, limit=10000)
@@ -252,9 +265,23 @@ The resulting DataFrame contains one row per anchor, with columns for the attrib
 | 1 | def-456 | 2024-01-15 10:01:00 | 0 | 3 | 0 |
 | 2 | ghi-789 | 2024-01-16 14:22:00 | 1 | 8 | 4 |
 
-The full dataset is also written to your warehouse at the table location shown in `run.dataset`. You can query this table directly for the complete result set.
+#### Query the full dataset
 
-### Cancel a run
+The complete dataset is written to your warehouse at the table location stored in `run.dataset`. Training datasets can contain millions of rows, so for model training you should query this table directly in your warehouse rather than loading it into memory. The table follows the format `{database}.{schema}.{table}`:
+
+```python
+dataset_location = run.dataset
+print(f"{dataset_location.database}.{dataset_location.schema_}.{dataset_location.table}")
+# e.g. "analytics.ml.signals_training_dataset"
+```
+
+You can then query this table using your warehouse tooling, for example:
+
+```sql
+SELECT * FROM analytics.ml.signals_training_dataset
+```
+
+#### Cancel a run
 
 To cancel a dataset build that is still in progress:
 
@@ -262,9 +289,9 @@ To cancel a dataset build that is still in progress:
 sp_signals.cancel_dataset_run(run.id)
 ```
 
-## Inspect the generated SQL
+### Build and execute SQL yourself
 
-If you want to review the SQL that the dataset builder produces without executing it, use `build_dataset_with_session_anchors()` or `build_dataset_with_custom_anchors()`. These return a `DatasetBundle` containing the generated SQL files, which you can save to disk for inspection or manual execution.
+If you want to review or customize the SQL before running it, use `build_dataset_with_session_anchors()` or `build_dataset_with_custom_anchors()`. These generate the SQL files without executing them, so you can inspect, modify, or run them on your own schedule.
 
 ```python
 bundle = sp_signals.build_dataset_with_session_anchors(
@@ -281,3 +308,5 @@ This creates:
 - Individual SQL files for each stage (`signals_anchors.sql`, `signals_attributes_domain_sessionid.sql`, `signals_training_dataset.sql`)
 - `manifest.json` with input configuration and output table mappings
 - `README.md` documenting the execution order
+
+Run the SQL files in the order specified in `README.md` against your warehouse to produce the training dataset.

@@ -52,14 +52,9 @@ To set the event to calculate this attribute from:
 
 Leave the aggregation as `Counter`. No property is used for this aggregation, so leave the property field blank.
 
-To set the time period:
-1. Click on the **More** button
-2. Update the time period to 15 minutes
-3. Click **Done** to save
+To set the time period, update the **Period** field to 15 minutes.
 
-![Time period configuration set to 15 minutes for page view counter](./images/attribute1-set-period.png)
-
-The purple dot next to **More** indicates that you have extended settings.
+![Period configuration set to 15 minutes for page view counter](./images/attribute1-set-period.png)
 
 ![Completed page view counter attribute with time period indicator](./images/attribute1-complete.png)
 

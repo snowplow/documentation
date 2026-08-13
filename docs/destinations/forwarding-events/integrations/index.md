@@ -15,4 +15,5 @@ Snowplow event forwarding supports the following destinations:
 - [Amplitude](/docs/destinations/forwarding-events/integrations/amplitude/index.md)
 - [Bloomreach](/docs/destinations/forwarding-events/integrations/bloomreach/index.md)
 - [Braze](/docs/destinations/forwarding-events/integrations/braze/index.md)
+- [Meta Conversions API](/docs/destinations/forwarding-events/integrations/meta-conversions/index.md)
 - [Mixpanel](/docs/destinations/forwarding-events/integrations/mixpanel/index.md)

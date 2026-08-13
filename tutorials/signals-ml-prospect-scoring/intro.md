@@ -36,9 +36,13 @@ We're calculating aggregated attributes based off real-time stream event data, s
 
 ## Prerequisites
 
-1. Follow the [Connect to Signals](/docs/signals/connection/) page to set up the Signals connection in the Snowplow Console
+1. [Enable Signals](/docs/signals/setup/) for your Snowplow account
 2. Open this [Google Colab](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb) notebook to follow along
 3. [Optional] Integrate Snowplow into your website
+
+:::note[Snowplow account required]
+Signals calculates the prospect attributes from events flowing through your Snowplow pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::
 
 ## Architecture
 

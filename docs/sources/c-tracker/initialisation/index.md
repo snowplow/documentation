@@ -139,13 +139,14 @@ EmitterConfiguration config2(storage); // you can also pass a custom `EventStore
 
 Additionally, it provides the following setter functions:
 
-| Setter                             | Description                                                                                                                                  | Default     |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `set_batch_size`                   | The maximum amount of events to send at a time.                                                                                              | 250 events  |
-| `set_byte_limit_get`               | The byte limit when sending a GET request.                                                                                                   | 40000 bytes |
-| `set_byte_limit_post`              | The byte limit when sending a POST request.                                                                                                  | 40000 bytes |
-| `set_request_callback`             | Set a callback to call after emit requests are made with the resulting emit status (see page about Emitter for more info).                   | None        |
-| `set_custom_retry_for_status_code` | Set a custom retry rule for when the HTTP status code is received in emit response from Collector (see page about Emitter for more details). | None        |
+| Setter                             | Description                                                                                                                                                                                                        | Default      |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `set_batch_size`                   | The maximum amount of events to send at a time.                                                                                                                                                                    | 250 events   |
+| `set_byte_limit_get`               | The byte limit when sending a GET request.                                                                                                                                                                         | 40000 bytes  |
+| `set_byte_limit_post`              | The byte limit when sending a POST request.                                                                                                                                                                        | 40000 bytes  |
+| `set_flush_timeout_ms`             | The maximum time in milliseconds that `flush()` waits for the event queue to drain before returning. If the deadline expires, undelivered events remain in the event store for the next session (see [Manual flushing](/docs/sources/c-tracker/emitters/index.md#manual-flushing)). | 30000 ms     |
+| `set_request_callback`             | Set a callback to call after emit requests are made with the resulting emit status (see page about Emitter for more info).                                                                                         | None         |
+| `set_custom_retry_for_status_code` | Set a custom retry rule for when the HTTP status code is received in emit response from Collector (see page about Emitter for more details).                                                                        | None         |
 
 ### Session configuration using "SessionConfiguration"
 

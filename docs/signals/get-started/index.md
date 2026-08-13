@@ -66,12 +66,13 @@ Decide what changes in user behavior you're aiming for, and what your applicatio
 * Which [attributes](/docs/signals/concepts/index.md#attribute-groups) to calculate, and at what level — per user, per session, or against a custom [attribute key](/docs/signals/concepts/index.md#attribute-keys)
 * Whether to calculate them from your real-time event stream, sync pre-calculated values from your warehouse, or both — see [data sources](/docs/signals/concepts/index.md#data-sources)
 * Whether your application will pull attribute values on demand, react to [interventions](/docs/signals/concepts/index.md#interventions) pushed by Signals, or both
+* Whether you need to ground an agent in a user's recent session activity, using an [agentic context](/docs/signals/concepts/index.md#agentic-contexts)
 
 The [fundamentals](/docs/signals/concepts/index.md) page explains all of these components.
 
 ### 3. Define and publish your configuration
 
-[Define attribute groups](/docs/signals/attributes/index.md) and [interventions](/docs/signals/interventions/index.md), using Snowplow Console or the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk). Group your published attribute groups into [services](/docs/signals/applications/services/index.md), so your applications consume a stable set of attributes.
+[Define attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), and [agentic contexts](/docs/signals/agentic-contexts/index.md), using Snowplow Console or the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk). Group your published attribute groups into [services](/docs/signals/applications/services/index.md), so your applications consume a stable set of attributes.
 
 Definitions only take effect once published: publishing is what makes Signals start calculating attributes and populating the Profiles Store. The [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow) describes the full lifecycle, including testing definitions before you publish.
 
@@ -80,6 +81,8 @@ Definitions only take effect once published: publishing is what makes Signals st
 [Retrieve the calculated attributes](/docs/signals/applications/retrieve-attributes/index.md) in your application using the Python SDK, Node.js SDK, or API, and use them to personalize the user experience.
 
 To react to user behavior as it happens, [subscribe to interventions](/docs/signals/applications/subscribe/index.md) using the Python SDK, the browser tracker plugin, or the API.
+
+To ground an agent in a user's recent activity and instruct how to interpret behavioral data, [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) using the Python SDK or Node.js SDK.
 
 ## Resources
 

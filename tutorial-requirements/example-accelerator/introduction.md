@@ -17,7 +17,7 @@ Include 1-3 paragraphs about the goal of the accelerator
 * Why would they want to do this?
 * Roughly how long will it take to follow the accelerator?
 
-State if a Snowplow account is required, or if they can use Sandbox, Micro, or Local.
+State if a Snowplow account is required, or if they can use Micro or Local.
 
 ## Architecture
 
@@ -48,7 +48,7 @@ If your demo app includes Snowplow tracking or other Snowplow components, add th
 ## Prerequisites
 
 Add a bullet point list of requirements:
-* Is it for customers only, or can they use Sandbox, Micro, or Local?
+* Is it for customers only, or can they use Micro or Local?
 * Any specific technical knowledge required? Aim to make the accelerator as accessible as possible for new users.
 * Do they need an account for a third-party product?
 * Is there a minimum release version required for any of the components?

@@ -92,7 +92,7 @@ Stream attribute groups only calculate attributes from the moment they are publi
 A warehouse connection is required to use the backfill option. Snowflake, BigQuery, and Databricks are supported.
 :::
 
-Enable **Backfill attributes** when creating the group. A date picker appears — select the date from which Signals should backfill attribute values from your Snowplow `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse.
+Enable **Backfill attributes** when creating the group. A date picker appears — select the date from which Signals should backfill attribute values from your Snowplow `atomic` events table. On publish, Signals backfills all events from that date up to the publish timestamp using your warehouse, based on the `load_tstamp` column.
 
 Backfill operates within a defined period: from your selected start date to the publish timestamp. This can take some time depending on data volume. The streaming engine starts immediately on publish and processes all new events in real time. Once backfill completes its defined period, only the streaming engine is active. You can monitor progress with the status bar in Snowplow Console.
 
@@ -101,7 +101,7 @@ Backfill operates within a defined period: from your selected start date to the 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Set `backfill_since_tstamp` on your `StreamAttributeGroup` to specify the earliest date to backfill from.
+Set `backfill_since_tstamp` on your `StreamAttributeGroup` to specify the earliest date to backfill from. This date is matched against the `load_tstamp` column of your Snowplow `atomic` events table, the time each event was loaded into your warehouse.
 
 ```python
 from datetime import datetime, timezone

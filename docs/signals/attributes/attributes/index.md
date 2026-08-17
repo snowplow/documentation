@@ -110,6 +110,8 @@ Signals supports the following aggregation types:
 | Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
 | Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
 | Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
+| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
+| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
@@ -120,6 +122,14 @@ Attributes calculated over high-cardinality properties, such as a product ID or 
 A unique list is ordered by when each value was *most recently* seen, oldest first. Seeing a value again doesn't add a second entry: it moves the existing entry to the end of the list. For example, viewing pages `/home`, `/products`, then `/home` again produces `["/products", "/home"]`.
 
 This also determines which values are dropped once the list reaches 100 entries: the least recently seen value is removed first, so a frequently repeated value is retained even if it was first seen long ago.
+
+#### Time since aggregations
+
+The `time_since_last` and `time_since_first` aggregations measure how long ago the most recent or earliest matching event occurred. The result is a fractional duration in the unit you choose with the `time_unit` argument: `s` (seconds), `min` (minutes), `h` (hours), or `d` (days).
+
+These aggregations always operate on the event's `derived_tstamp` property. You don't need to set a `property` - it defaults to `derived_tstamp`, and no other property is accepted. The result type must be `float` or `double`.
+
+The value is recomputed at read time, so it reflects the elapsed time between the stored event timestamp and the moment the attribute is retrieved. If an out-of-order event arrives with a timestamp newer than the current stored value, the result is clamped at 0 rather than going negative.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -287,12 +297,13 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `name` | The name of the attribute | `string` | ✅ |
 | `description` | The description of the attribute | `string` | ❌ |
 | `events` | List of Snowplow `Event`s to calculate the attribute from | list of `Event` | ✅ |
-| `aggregation` | The calculation to perform | one of: `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `most_frequent`, `least_frequent`, `approx_count_distinct`, `category_count`, `unique_list` | ✅ |
+| `aggregation` | The calculation to perform | one of: `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `most_frequent`, `least_frequent`, `approx_count_distinct`, `category_count`, `unique_list`, `time_since_last`, `time_since_first` | ✅ |
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
 | `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
 | `period` | The time window over which to calculate the aggregation, or `Lifetime` to aggregate over all available data | `timedelta` | ❌ |
 | `ttl` | Time-to-live for lifetime attributes (no `period`). Falls back to the attribute group TTL if not set. Cannot be used together with `period`. | `timedelta` | ❌ |
+| `time_unit` | The unit for `time_since_last`/`time_since_first` results | one of: `s`, `min`, `h`, `d` | Required for `time_since_last`/`time_since_first` |
 | `default_value` | Default value if aggregation returns no results | | ❌ |
 
 ## Examples
@@ -419,5 +430,28 @@ my_new_attribute = Attribute(
         path="price",
     ),
     default_value=0
+)
+```
+
+### Time since last event
+
+Track how many minutes have passed since the user's most recent page view.
+
+```python
+from snowplow_signals import Attribute, Event
+
+recency = Attribute(
+    name="minutes_since_last_page_view",
+    description="Minutes since the user's most recent page view",
+    type="double",
+    events=[
+        Event(
+            vendor="com.snowplowanalytics.snowplow",
+            name="page_view",
+            version="1-0-0",
+        )
+    ],
+    aggregation="time_since_last",
+    time_unit="min",
 )
 ```

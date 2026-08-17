@@ -129,7 +129,7 @@ The `time_since_last` and `time_since_first` aggregations measure how long ago t
 
 These aggregations always operate on the event's `derived_tstamp` property. You don't need to set a `property` - it defaults to `derived_tstamp`, and no other property is accepted. The result type must be `float` or `double`.
 
-The value is recomputed at read time, so it reflects the elapsed time between the stored event timestamp and the moment the attribute is retrieved. If an out-of-order event arrives with a timestamp newer than the current stored value, the result is clamped at 0 rather than going negative.
+The value is recomputed at read time, so it reflects the elapsed time between the stored event timestamp and the moment the attribute is retrieved. The result is never negative - if the stored event timestamp is later than the retrieval time (which can happen with out-of-order events), the value is clamped at 0.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

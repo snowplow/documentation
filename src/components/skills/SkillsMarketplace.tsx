@@ -17,17 +17,17 @@ export default function SkillsMarketplace(): JSX.Element {
   return (
     <>
       <p>
-        These skills connect your AI assistant, whether that's Claude,
-        Cursor, Codex, or another MCP-compatible tool, to your Snowplow
-        workspace, so it can see your pipelines, schemas, and Console data
-        instead of just describing them.
+        These skills connect your AI assistant — Claude, Cursor, Codex, or
+        another MCP-compatible tool — to your Snowplow workspace, so it can
+        see your pipelines, schemas, and Console data instead of describing
+        them.
       </p>
       <p>
         Every skill on this page needs a one-time connection to the{' '}
-        <a href="/docs/llms-support/snowplow-mcp/" target="_blank" rel="noopener noreferrer">Snowplow MCP server</a>,
+        <Link to="/docs/llms-support/snowplow-mcp/">Snowplow MCP server</Link>,
         which links your AI assistant to your Snowplow Console account.
         The first time you use a skill, you'll be prompted to log in and
-        authorize access. After that, it's ready to go.
+        authorize access.
       </p>
 
       <div className={styles.installStrip}>

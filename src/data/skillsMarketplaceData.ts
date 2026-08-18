@@ -7,10 +7,10 @@
  */
 
 export type SkillCategory =
-  | 'Build & Design'
+  | 'Build and design'
   | 'Operate'
   | 'Troubleshoot'
-  | 'Real-Time & AI';
+  | 'Real-time and AI';
 
 export interface Skill {
   /** Matches the folder name in github.com/snowplow/skills */
@@ -32,15 +32,15 @@ export const skills: Skill[] = [
     name: 'Tracking Design',
     summary:
       "Plan the events, entities, and schemas you'll track before you start building.",
-    category: 'Build & Design',
+    category: 'Build and design',
     githubUrl: `${REPO_BASE}tracking-design`,
   },
   {
     id: 'implementation-guidance',
     name: 'Implementation Guidance',
     summary:
-      'Add Snowplow trackers to your website, app, or backend, and confirm your events are firing correctly.',
-    category: 'Build & Design',
+      'Add Snowplow trackers to your website, app, or back-end, and confirm your events are firing correctly.',
+    category: 'Build and design',
     githubUrl: `${REPO_BASE}implementation-guidance`,
   },
   {
@@ -48,7 +48,7 @@ export const skills: Skill[] = [
     name: 'Signals',
     summary:
       'Set up real-time customer attributes and interventions to personalize experiences as behavior happens.',
-    category: 'Real-Time & AI',
+    category: 'Real-time and AI',
     githubUrl: `${REPO_BASE}signals`,
   },
   {
@@ -78,8 +78,8 @@ export const skills: Skill[] = [
 ];
 
 export const categories: SkillCategory[] = [
-  'Build & Design',
-  'Real-Time & AI',
+  'Build and design',
+  'Real-time and AI',
   'Operate',
   'Troubleshoot',
 ];

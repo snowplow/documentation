@@ -1,8 +1,8 @@
 ---
-title: "Explore Our AI Hub"
+title: "AI hub"
 sidebar_position: 2.1
-sidebar_label: "Explore Our AI Hub"
-description: "Guidance on integrating and using AI features with Snowplow documentation."
+sidebar_label: "AI hub"
+description: "Snowplow's AI capabilities, including the Console assistant, MCP servers, Signals, and skills."
 keywords: ["AI", "LLMs", "generative AI"]
 date: "2026-06-22"
 ---
@@ -20,12 +20,12 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
   />
   <LinkCard
     title="Snowplow MCP Server"
-    description="Discover the remote MCP server that connects AI assistants to your Snowplow Console account."
+    description="The remote MCP server connects AI assistants to your Snowplow Console account."
     href="/docs/llms-support/snowplow-mcp/"
   />
   <LinkCard
     title="CLI MCP Server"
-    description="Find out how the local CLI MCP server connects AI assistants to your tracking plan files on disk."
+    description="The local CLI MCP server connects AI assistants to your tracking plan files on disk."
     href="/docs/llms-support/cli-mcp-server/"
   />
   <LinkCard
@@ -34,22 +34,22 @@ Snowplow supports agentic and LLM-powered workflows in several ways.
     href="/docs/llms-support/#documentation-index-in-llmstxt"
   />
   <LinkCard
-    title="Documentation pages as markdown"
+    title="Documentation pages as Markdown"
     description="Learn how individual docs pages can be accessed directly as markdown for LLM-friendly retrieval."
     href="/docs/llms-support/#documentation-pages-as-markdown"
   />
   <LinkCard
     title="Signals"
-    description="Explore how Signals delivers real-time behavioral context and profile data for AI use cases."
+    description="Signals delivers real-time behavioral context and profile data for AI use cases."
     href="/docs/signals/"
   />
   <LinkCard
-    title="Skills Marketplace"
+    title="Skills marketplace"
     description="Browse practical AI skills and implementation guidance for Snowplow workflows."
     href="/docs/ai/skills/"
   />
   <LinkCard
-    title="Applied AI Blog"
+    title="Applied AI blog"
     description="Read blog posts that show you how to apply Snowplow's AI solutions to your own workflows."
     href="/docs/ai/blog/"
   />

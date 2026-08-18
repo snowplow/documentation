@@ -1,8 +1,9 @@
 ---
-title: "AI Blog"
+title: "Applied AI blog"
 sidebar_label: "Blog"
 sidebar_position: 4
-description: "Updates, announcements, and articles about AI work in Snowplow." 
+description: "Updates, announcements, and articles about AI work in Snowplow."
+keywords: ["AI blog", "agentic AI", "AI agents", "Snowplow AI"]
 date: "2026-06-22"
 ---
 
@@ -10,7 +11,7 @@ import { CardGrid } from '@site/src/components/CardGrid'
 import { BlogPostCard } from '@site/src/components/blog/BlogPostCard'
 import { Laptop } from 'lucide-react'
 
-A running feed of Snowplow's thinking on AI agents, behavioral data, and where the two intersect. We'll add to this page as our product and the industry evolve.
+Posts on AI agents, behavioral data, and where the two intersect. Snowplow adds to this page as the product and the industry evolve.
 
 <CardGrid cols={2}>
   <BlogPostCard

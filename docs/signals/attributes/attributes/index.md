@@ -211,7 +211,7 @@ There are two families of date part:
 
 For `day_of_week`, values follow ISO 8601: 1 = Monday through 7 = Sunday.
 
-Date parts are only valid on date-time properties. For atomic properties, this means the timestamp fields (`derived_tstamp`, `collector_tstamp`, `dvce_created_tstamp`, `dvce_sent_tstamp`, `refr_device_tstamp`, `etl_tstamp`, `true_tstamp`). For event and entity properties, the property's schema must declare `format: date-time` at the target path.
+Date parts are only valid on date-time properties. For atomic properties, this means the timestamp fields (`derived_tstamp`, `collector_tstamp`, `dvce_created_tstamp`, `dvce_sent_tstamp`, `refr_dvce_tstamp`, `etl_tstamp`, `true_tstamp`). For event and entity properties, the property's schema must declare `format: date-time` at the target path.
 
 Not all aggregations support date parts. The following aggregations work with `date_part`:
 
@@ -224,8 +224,6 @@ Not all aggregations support date parts. The following aggregations work with `d
 | Unique List | List of distinct active days |
 | Category Count | Hour-of-day histogram |
 | Approx Count Distinct | Approximate number of distinct active days |
-
-Arithmetic aggregations (`sum`, `min`, `max`, `mean`) are not supported with date parts because they produce meaningless results on cyclical values (the average of 23:00 and 01:00 is not 12:00). `counter` and the `time_since_*` aggregations do not accept date parts either.
 
 The declared attribute `type` must match the date part family's output:
 - Extract date parts (`hour_of_day`, `day_of_week`, `month_of_year`) require `int32` or `int64` (or `int32_list`/`int64_list` for `unique_list`)

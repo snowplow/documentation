@@ -22,9 +22,9 @@ export const versions = {
 
   // Core pipeline
   collector: '3.7.0',
-  enrich: '6.11.0',
+  enrich: '6.13.1',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.8',
+  dataflowRunner: '0.7.10',
   snowbridge: '5.2.0',
 
   // Loaders
@@ -33,10 +33,10 @@ export const versions = {
   esLoader: '3.0.1',
   gcsLoader: '0.5.7',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.6.0',
+  rdbLoader: '6.7.1',
   s3Loader: '3.2.0',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.11.0',
+  lakeLoader: '0.12.0',
   snowflakeStreamingLoader: '0.6.1',
   databricksStreamingLoader: '0.5.0',
 
@@ -47,7 +47,7 @@ export const versions = {
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '1.0.1',
-  dbtSnowplowUtils: '1.0.0',
+  dbtSnowplowUtils: '1.0.1',
   dbtSnowplowNormalize: '1.0.0',
   dbtSnowplowFractribution: '0.3.6',
   dbtSnowplowEcommerce: '1.0.1',
@@ -69,7 +69,7 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.14.1',
+  igluServer: '0.14.2',
   igluctl: '0.13.0',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',

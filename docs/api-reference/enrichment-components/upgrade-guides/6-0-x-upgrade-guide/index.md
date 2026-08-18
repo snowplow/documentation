@@ -1,7 +1,7 @@
 ---
 title: "Enrich 6.0.x upgrade guide"
 sidebar_label: "6.0.x upgrade guide"
-sidebar_position: 50
+sidebar_position: 10
 description: "Upgrade guide for Snowplow Enrich 6.0.x covering common-streams refactoring, configuration changes, and deprecated features."
 keywords: ["enrich 6.0", "common-streams", "configuration migration"]
 ---

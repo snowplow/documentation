@@ -291,7 +291,11 @@ On an SPA, the page URL might change without the page being reloaded. Whenever a
 
 To use `setCustomUrl` within an SPA, call it before all `trackPageView` calls.
 
-If you want to ensure that the original referrer is preserved even though your page URL can change without the page being reloaded, use `setReferrerUrl` like this before sending any events:
+If you want to ensure that the original referrer is preserved even though your page URL can change without the page being reloaded, you have two options:
+
+**Declarative (recommended):** set `preserveOriginalReferrer: true` in the [tracker configuration](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). The tracker automatically captures `document.referrer` at initialization and uses it as the referrer for all subsequent `trackPageView()` calls.
+
+**Imperative:** call `setReferrerUrl` with `document.referrer` before sending any events:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

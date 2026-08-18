@@ -36,9 +36,12 @@ Together, Signals provides real-time behavioral context while AgentCore Memory p
 
 ## Prerequisites
 
-* A Snowplow CDI pipeline with Signals enabled - the agent fetches behavioral attributes from the Signals Profiles API
+* A Snowplow CDI pipeline with Signals enabled (see [Set up Signals](/docs/signals/setup/)) - the agent fetches behavioral attributes from the Signals Profiles API
 * An AWS account with [Amazon Bedrock](https://aws.amazon.com/bedrock/) access and AgentCore Memory access - the agent runs on Claude via Bedrock, and your IAM user needs permissions for `bedrock:InvokeModel`, `bedrock-agentcore:*`, and `iam:PassRole` (scoped to `bedrock-agentcore.amazonaws.com`) to create AgentCore Memory resources
 * [AWS CLI](https://aws.amazon.com/cli/) installed and configured - used to authenticate with AWS services from the notebook
 * Python 3.11 or later - required by the Strands Agents framework
 * Familiarity with Python and running Jupyter notebooks
 
+:::note[Snowplow account required]
+The behavioral attributes in this accelerator come from events flowing through a real Snowplow pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+:::

@@ -103,22 +103,30 @@ events=[]
 
 Signals supports the following aggregation types:
 
-| Aggregation | Description | Required property type in schema |
-| --- | --- | --- |
-| Counter | Count events | No property used for this aggregation |
-| Sum | Sum of property values | Numeric |
-| Min | Minimum property value | Numeric |
-| Max | Maximum property value | Numeric |
-| Mean | Average of property values | Numeric |
-| First | First property value seen | String, Numeric, Boolean |
-| Last | Last property value seen | String, Numeric, Boolean |
-| Most Frequent | Most frequent property value seen | String, Numeric, Boolean |
-| Least Frequent | Least frequent property value seen | String, Numeric, Boolean |
-| Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean |
-| Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean |
-| Unique List | List of unique property values | String, Numeric, Boolean |
+| Aggregation | Description | Required property type in schema | Notes |
+| --- | --- | --- | --- |
+| Counter | Count events | No property used for this aggregation | |
+| Sum | Sum of property values | Numeric | |
+| Min | Minimum property value | Numeric | |
+| Max | Maximum property value | Numeric | |
+| Mean | Average of property values | Numeric | |
+| First | First property value seen | String, Numeric, Boolean | Earliest by `derived_tstamp`, not by arrival order |
+| Last | Last property value seen | String, Numeric, Boolean | Latest by `derived_tstamp`, not by arrival order |
+| Most Frequent | Most frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
+| Least Frequent | Least frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
+| Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
+| Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
+| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
+
+Attributes calculated over high-cardinality properties, such as a product ID or a search term, can exceed the 100-value limits noted above. Consider a criteria filter to narrow the set of events, or a lower-cardinality property.
+
+#### Unique list ordering
+
+A unique list is ordered by when each value was *most recently* seen, oldest first. Seeing a value again doesn't add a second entry: it moves the existing entry to the end of the list. For example, viewing pages `/home`, `/products`, then `/home` again produces `["/products", "/home"]`.
+
+This also determines which values are dropped once the list reaches 100 entries: the least recently seen value is removed first, so a frequently repeated value is retained even if it was first seen long ago.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

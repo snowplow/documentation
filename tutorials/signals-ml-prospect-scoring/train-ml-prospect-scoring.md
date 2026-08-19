@@ -6,6 +6,8 @@ description: "Create and train a machine learning model using historical Snowplo
 keywords: ["logistic regression", "duckdb training data"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 As prospects browse your website, Signals will calculate the aggregated attributes in real time.
 
 We want to score the combination of these attributes using an ML model to better understand if a specific prospect is likely to submit a form.

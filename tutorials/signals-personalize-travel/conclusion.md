@@ -7,6 +7,8 @@ keywords: ["conclusion", "next steps", "personalization", "real-time", "behavior
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 You've successfully built a personalization system using Snowplow Signals that demonstrates the power of real-time behavioral data. Your implementation captures user interactions, processes them into meaningful attributes, and applies these insights to create personalized experiences.
 
 You've learned how to transform raw behavioral events into actionable personalization signals. You've seen how micro-segmentation based on user behavior can drive content customization, from changing images and descriptions to reordering information based on user preferences. The integration with an AI chatbot shows how behavioral data can enhance conversational experiences, making them more contextual and relevant.

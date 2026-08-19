@@ -7,6 +7,8 @@ keywords: ["Snowplow Signals", "personalization", "real-time", "travel", "chatbo
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 Welcome to the **Build a personalized travel agent with Signals** tutorial.
 
 [![Demo travel website showing the Southeast Asia Destinations page with a filters panel, four destination cards (Bangkok, Ho Chi Minh City, Hanoi, Penang) with ratings and category tags, and the SEA Travel Assistant chat widget open with a personalized culinary recommendations response](./images/demo-site.jpg)](./images/demo-site.jpg)
@@ -25,7 +27,7 @@ You'll build a complete personalization system that captures user interests thro
 * The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) browser extension installed
 * Familiarity with running Jupyter notebooks, either locally or in Google Colab
 * [Docker](https://www.docker.com/) installed and configured
-* Access to the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb)
+* Access to the Jupyter notebook (use the link at the top of this page)
 * Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses
 
 :::note[Snowplow account required]

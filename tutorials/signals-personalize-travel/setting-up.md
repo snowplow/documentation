@@ -7,6 +7,8 @@ keywords: ["Docker", "Snowplow Local", "travel website", "setup", "installation"
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 You'll now install and run the example travel website that you'll use to test Snowplow Signals personalization. This website represents a typical ecommerce travel platform where users browse destinations, read content, and interact with various features.
 
 The demo website is part of the [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) repository. It's a React application.

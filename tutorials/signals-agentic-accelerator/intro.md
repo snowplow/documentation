@@ -7,6 +7,8 @@ keywords: ["Snowplow Signals", "AWS Bedrock", "AgentCore", "Strands Agents", "pe
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 Customer-facing AI agents are most effective when they understand what a user is doing right now - not just what they type into a chat window. Traditional agents respond generically, forcing users to repeat preferences and explain context that their browsing behavior has already revealed.
 
 This accelerator shows you how to combine [Snowplow Signals](/docs/signals/introduction/) with [AWS Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/) to build an AI agent that personalizes responses based on real-time behavioral data and persistent memory. The agent uses the [Strands Agents](https://strandsagents.com/) framework and runs in a Jupyter notebook environment.
@@ -22,7 +24,7 @@ By the end of this accelerator you will have:
 * Persistent customer memory using AgentCore Memory
 * An agent that combines behavioral context and memory to deliver personalized responses
 
-The accelerator takes approximately 1 hour to complete. All source code is available in the accompanying [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb).
+The accelerator takes approximately 1 hour to complete. All source code is available in the accompanying notebook linked at the top of this page.
 
 ## Architecture
 

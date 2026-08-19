@@ -6,6 +6,8 @@ description: "Build a real-time prospect scoring system using Snowplow Signals a
 keywords: ["signals machine learning", "prospect scoring system"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 Welcome to the [Snowplow Signals](/docs/signals/introduction/) real-time prospect scoring tutorial.
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
@@ -37,7 +39,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
 ## Prerequisites
 
 1. [Enable Signals](/docs/signals/setup/) for your Snowplow account
-2. Open this [Google Colab](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb) notebook to follow along
+2. Open the notebook using the link at the top of this page
 3. [Optional] Integrate Snowplow into your website
 
 :::note[Snowplow account required]

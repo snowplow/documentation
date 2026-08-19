@@ -6,6 +6,8 @@ description: "Define behavioral data attributes in Snowplow Signals for prospect
 keywords: ["signals python sdk", "page view attributes"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.
 
 Let's imagine that for this use case our data science team came up with the following set of attributes. They'll be calculated against the `domain_userid` device attribute key. Choosing this attribute key allows Signals to calculate attributes from events across multiple sessions for each prospect.

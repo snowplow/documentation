@@ -6,6 +6,8 @@ description: "Use the Signals Python SDK to programmatically define real-time ec
 keywords: ["signals python sdk", "ecommerce attributes"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

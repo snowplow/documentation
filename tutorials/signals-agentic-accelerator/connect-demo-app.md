@@ -7,6 +7,8 @@ keywords: ["SEA Explorer", "demo app", "Bedrock", "Signals", "AgentCore Memory",
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 Now that you have a working agent with Signals attributes and AgentCore Memory, you can connect it to a frontend application. The SEA Explorer demo app is a Next.js travel site that calls Bedrock directly using the same model and credentials from the notebook.
 
 The app includes a chat interface where users can ask travel questions. As users browse destinations and experiences, Snowplow tracking generates the behavioral events that Signals processes into the attributes your agent uses for personalization. AgentCore Memory persists context across chat sessions.

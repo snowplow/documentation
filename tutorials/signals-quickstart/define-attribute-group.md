@@ -5,6 +5,7 @@ sidebar_label: Define an attribute group
 description: "Create an attribute group in Snowplow Signals to calculate session metrics like page views, browser, and referrer data in real time."
 keywords: ["attribute groups", "session metrics"]
 ---
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb" />
 
 [Attribute groups](/docs/signals/concepts/#attribute-groups) are where you define the data you want to calculate. To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and click **Create attribute group**.
 
@@ -15,7 +16,8 @@ Follow these instructions to configure Signals to calculate three different sess
 * The last seen browser name for each session
 * The first seen page referrer for each session
 
-To learn how to define attribute groups using the Python SDK, check out the [Quick Start notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb), hosted on Google Colab.
+
+You can also define attribute groups using the Python SDK. The notebook above contains all the code you need.
 
 ## Configure group information
 

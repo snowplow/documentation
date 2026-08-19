@@ -6,14 +6,16 @@ description: "Define behavioral attributes using the Snowplow Signals Python SDK
 keywords: ["Snowplow Signals", "attributes", "Python SDK", "behavioral data", "user preferences"]
 date: "2025-01-21"
 ---
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
 
 You'll now define behavioral attributes that capture different types of travel preferences based on how users interact with the website. These attributes will serve as the foundation for both on-site content personalization and AI chatbot customization.
 
 The attributes you create will track user engagement with different types of content, destinations, and features. For example, users who frequently view food-related content will have their culinary interest attribute incremented, while those who browse luxury destinations will see their luxury preference attribute increase.
 
+
 ## Open the Jupyter notebook
 
-You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your attributes. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb), or download it locally.
+You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your attributes. You can run the notebook directly using the link above, or download it locally.
 
 ## Set up your credentials
 

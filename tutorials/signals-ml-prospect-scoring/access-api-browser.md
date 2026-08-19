@@ -6,6 +6,8 @@ description: "Deploy the prospect scoring API, and display real-time conversion 
 keywords: ["flask api deployment", "browser javascript integration"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 The final requirement is to see the prospect scores and predictions in the browser. In this tutorial, we'll call the API every 10 seconds.
 
 You need an API endpoint that you can access from your local machine, or from JavaScript in the browser.

@@ -6,6 +6,8 @@ description: "Complete the Signals interventions tutorial and explore next steps
 keywords: ["signals interventions tutorial", "real-time personalization"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
+
 Congratulations! You've successfully completed the Signals interventions tutorial and experienced real-time personalization in action.
 
 In this tutorial, you:

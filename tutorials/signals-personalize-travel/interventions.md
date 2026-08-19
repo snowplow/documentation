@@ -7,6 +7,8 @@ keywords: ["interventions", "chatbot timing", "user engagement", "behavioral tri
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 Use Snowplow Signals interventions to control when the chatbot appears, transforming reactive customer support into proactive assistance based on behavioral triggers.
 
 In the previous section, you personalized chatbot responses based on user behavior. This section shows how to use interventions to automatically present the chatbot when users demonstrate specific behaviors that suggest they might benefit from help.

@@ -6,7 +6,7 @@ description: "Configure Google Colab notebook with Snowplow Signals credentials 
 keywords: ["google colab", "signals credentials"]
 ---
 
-This tutorial uses this Google [Colab notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
 
 For ML training data we will use an artificial set of Snowplow events. Feel free to replace with your warehouse connection to connect to your own dataset.
 

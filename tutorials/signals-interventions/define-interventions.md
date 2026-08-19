@@ -6,6 +6,8 @@ description: "Create rule-based interventions that trigger personalized experien
 keywords: ["rule-based interventions", "ecommerce personalization"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
+
 [Interventions](/docs/signals/concepts/#interventions) are rules that trigger when user attributes meet specific conditions. They enable real-time personalization by activating experiences based on current behavior.
 
 When an intervention triggers:

@@ -27,7 +27,7 @@ You'll build a complete personalization system that captures user interests thro
 * The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) browser extension installed
 * Familiarity with running Jupyter notebooks, either locally or in Google Colab
 * [Docker](https://www.docker.com/) installed and configured
-* Access to the Jupyter notebook (use the link at the top of this page)
+* Access to the Jupyter notebook (use the **Open in Colab** badge)
 * Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses
 
 :::note[Snowplow account required]

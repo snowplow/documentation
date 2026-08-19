@@ -5,6 +5,7 @@ sidebar_label: Connect to Signals using the Python SDK
 description: "Enable Signals through Snowplow Console and obtain your access credentials."
 keywords: ["jupyter notebook setup"]
 ---
+
 <NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
 
 The first step is to set up your Signals connection. Follow the instructions in the [Signals connection documentation](/docs/signals/connection/) to [enable Signals through Snowplow Console](/docs/signals/setup/).
@@ -15,8 +16,7 @@ Once your connection is set up, gather the required credentials as described in 
 
 You can use either Google Colab or a local Jupyter notebook environment for this tutorial.
 
-
-If you want to skip ahead, the notebook above contains all the Python code you'll need for this tutorial. It is also available as a [Jupyter notebook on GitHub](https://github.com/snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb).
+If you want to skip ahead, the **Open in Colab** notebook contains all the Python code you'll need for this tutorial. It is also available as a [Jupyter notebook on GitHub](https://github.com/snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb).
 
 ### Using Google Colab
 

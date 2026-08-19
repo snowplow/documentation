@@ -24,7 +24,7 @@ By the end of this accelerator you will have:
 * Persistent customer memory using AgentCore Memory
 * An agent that combines behavioral context and memory to deliver personalized responses
 
-The accelerator takes approximately 1 hour to complete. All source code is available in the accompanying notebook linked at the top of this page.
+The accelerator takes approximately 1 hour to complete. All source code is available in the accompanying notebook, which you can open with the **Open in Colab** badge.
 
 ## Architecture
 

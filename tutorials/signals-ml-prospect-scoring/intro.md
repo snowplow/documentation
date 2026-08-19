@@ -39,7 +39,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
 ## Prerequisites
 
 1. [Enable Signals](/docs/signals/setup/) for your Snowplow account
-2. Open the notebook using the link at the top of this page
+2. Open the notebook using the **Open in Colab** badge
 3. [Optional] Integrate Snowplow into your website
 
 :::note[Snowplow account required]

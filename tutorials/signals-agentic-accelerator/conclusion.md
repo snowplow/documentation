@@ -7,6 +7,8 @@ keywords: ["conclusion", "cleanup", "next steps", "AgentCore", "Signals", "produ
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 You've built an AI agent that combines real-time behavioral data from Snowplow Signals with persistent memory from AWS Bedrock AgentCore Memory. The agent can:
 
 * Answer queries using custom tools (destination lookup, experience info, web search)

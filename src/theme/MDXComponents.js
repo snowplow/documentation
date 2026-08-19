@@ -15,6 +15,7 @@ import {
   CallToActionCard,
   LinkCard,
 } from '@site/src/components/CardGrid'
+import NotebookLinks from '@site/src/components/NotebookLinks'
 
 library.add(fab, fas, far) // Add all icons to the library so you can use them without importing them individually.
 
@@ -28,4 +29,5 @@ export default {
   FeaturedSection: FeaturedSection,
   CallToActionCard: CallToActionCard,
   LinkCard: LinkCard,
+  NotebookLinks: NotebookLinks,
 }

@@ -7,13 +7,15 @@ keywords: ["Strands Agents", "AI agent", "tools", "AWS Bedrock", "Claude", "prot
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 In this step, you'll build a working agent prototype using the [Strands Agents](https://strandsagents.com/) framework. The agent combines a foundation model with custom tools to answer queries, look up information, and fetch behavioral data from Snowplow Signals.
 
 The example implements a travel assistant, but the same pattern - define tools, configure a model, create an agent with a system prompt - applies to any domain.
 
 ## Open the Jupyter notebook
 
-Use the Strands Agents framework in a Jupyter notebook to build the agent. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb), or download it locally.
+Use the Strands Agents framework in a Jupyter notebook to build the agent. You can run the notebook in Google Colab with the **Open in Colab** badge, or [download it from GitHub](https://github.com/snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb).
 
 ## Define the agent tools
 

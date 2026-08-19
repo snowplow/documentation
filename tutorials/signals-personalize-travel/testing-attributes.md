@@ -7,6 +7,8 @@ keywords: ["testing", "attributes", "Snowplow Inspector", "behavioral events", "
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 You'll now test your attributes to verify they're working correctly by generating behavioral events and checking that the attribute values update as expected.
 
 You'll use the Snowplow Inspector browser extension to monitor both the events being sent to your collector and the resulting attribute values.

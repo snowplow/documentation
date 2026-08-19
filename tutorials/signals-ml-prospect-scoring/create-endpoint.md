@@ -6,6 +6,8 @@ description: "Build an API endpoint to serve Snowplow Signals attributes and ML 
 keywords: ["flask api", "cloudflare tunnels"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 You now have attribute values in your Profiles Store, and a trained ML model. The next step is to create and deploy an endpoint to serve attributes and predictions.
 
 It needs to do the following:

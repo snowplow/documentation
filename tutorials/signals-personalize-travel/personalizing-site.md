@@ -7,6 +7,8 @@ keywords: ["personalization", "content customization", "Signals SDK", "user expe
 date: "2025-01-21"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb" />
+
 ```mdx-code-block
 import Mermaid from '@theme/Mermaid';
 ```

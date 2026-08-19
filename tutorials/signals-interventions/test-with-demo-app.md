@@ -6,6 +6,8 @@ description: "Use the interactive demo e-shop to see your Signals configuration 
 keywords: ["signals demo app", "javascript tracker ecommerce"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
+
 Now that you've defined attributes and interventions, it's time to see them work in a real application. We've prepared a demo React application with Snowplow tracking that can integrate with your Signals instance to demonstrate real-time personalization.
 
 The demo application features:

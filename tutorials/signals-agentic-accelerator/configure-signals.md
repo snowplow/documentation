@@ -7,6 +7,8 @@ keywords: ["Snowplow Signals", "behavioral attributes", "Profile API", "streamin
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 Users express intent through their browsing behavior - page views, filter interactions, content engagement - long before they type a message to an agent. In this step, you'll define behavioral attributes using Snowplow Signals, publish them as a service, and validate that they compute correctly from raw events.
 
 These attributes form a behavioral profile that the agent's `get_signals` tool fetches at runtime, enabling personalized responses without requiring the user to state their preferences manually.

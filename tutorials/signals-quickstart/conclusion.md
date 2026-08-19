@@ -6,6 +6,8 @@ description: "Complete the Snowplow Signals quick start tutorial, and explore ne
 keywords: ["signals quickstart", "attribute groups tutorial"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb" />
+
 In this tutorial you've learned how to use Signals to calculate and serve information about user behavior in real time.
 
 This is the process workflow:

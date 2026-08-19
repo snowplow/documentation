@@ -6,6 +6,8 @@ description: "Get hands-on with Snowplow Signals, using Snowplow Console, to cre
 keywords: ["snowplow signals tutorial", "ecommerce interventions"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-interventions-demo/blob/main/attributes_and_interventions.ipynb" />
+
 Welcome to the **Snowplow Signals** tutorial.
 
 [Snowplow Signals](/docs/signals/introduction/) is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.

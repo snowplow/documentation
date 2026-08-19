@@ -6,6 +6,8 @@ description: "Complete the Snowplow Signals machine learning prospect scoring tu
 keywords: ["signals ml tutorial", "prospect scoring completion"]
 ---
 
+<NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
+
 In this accelerator you've learned how to build a prospect scoring system using Snowplow Signals together with a machine learning model, your own website, and your own Snowplow data.
 
 What you achieved:

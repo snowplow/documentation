@@ -7,6 +7,8 @@ keywords: ["AgentCore Memory", "persistent memory", "personalization", "hooks", 
 date: "2026-03-27"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-agentic-accelerator.ipynb" />
+
 Without persistent memory, every conversation with an AI agent starts from zero. Users must repeat their preferences, explain their history, and re-establish context each time.
 
 [AgentCore Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html) solves this by providing managed short-term and long-term memory for agents. In this step, you'll create a memory resource, seed it with sample customer history, and integrate it into your agent using hooks that automatically retrieve and store context.

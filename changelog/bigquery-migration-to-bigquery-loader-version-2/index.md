@@ -5,7 +5,8 @@ date: "2025-02-27"
 update_type:
   - "Maintenance notification"
 components:
-  - "Loaders"
+  - "Destinations"
+platforms:
   - "BigQuery"
 ---
 As per [our announcement](/changelog/announcing-bigquery-loader-version-2/), BigQuery Loader version 2 is out.

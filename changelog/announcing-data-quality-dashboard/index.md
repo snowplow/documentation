@@ -6,7 +6,7 @@ update_type:
   - "Release notes"
 components:
   - "Console"
-  - "Failed events"
+  - "Monitoring"
 ---
 We are pleased to announce the general availability of the Data Quality Dashboard for Snowflake.
 

@@ -5,10 +5,10 @@ date: "2026-03-03"
 update_type:
   - "Product news"
 components:
-  - "Console"
-  - "Event Studio"
   - "Trackers"
-  - "Snowtype"
+  - "Event Studio"
+  - "Console"
+  - "Developer tools"
 ---
 We are pleased to introduce Event Specification Inference, a new capability rolling out this week within Event Studio that automatically matches incoming events to your defined event specifications in the pipeline. All customers can now benefit from tracking plan observability without needing to implement with Snowtype.
 

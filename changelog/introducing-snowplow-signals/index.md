@@ -6,7 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Signals"
-  - "AI"
+  - "AI tools"
 ---
 We’re excited to announce [Snowplow Signals](https://snowplow.io/signals), a real-time customer intelligence system for AI-powered applications. Snowplow Signals now makes it easy to hyper-personalize user journeys and equip AI agents to overcome the "cold start problem", driving more relevant interactions.
 

@@ -5,8 +5,8 @@ date: "2025-11-25"
 update_type:
   - "Product news"
 components:
-  - "Console"
   - "Event Studio"
+  - "Console"
 ---
 We have introduced tracking code generation directly in the Snowplow Console for event specifications. This feature allows you to quickly generate implementation-ready JavaScript tracking code from your event specs, accelerating the path from tracking design to implementation.
 

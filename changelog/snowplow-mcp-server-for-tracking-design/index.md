@@ -6,7 +6,7 @@ update_type:
   - "Release notes"
 components:
   - "Event Studio"
-  - "AI"
+  - "AI tools"
 ---
 We’re excited to introduce the Snowplow MCP Server for Tracking Design, a new tool that enables data engineers, product managers, and analysts to collaborate with AI to design future-proof Snowplow tracking faster.
 

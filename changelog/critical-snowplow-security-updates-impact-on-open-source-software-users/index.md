@@ -6,10 +6,8 @@ update_type:
   - "Product news"
 components:
   - "Trackers"
-  - "Enrich"
-  - "Collector"
-  - "Iglu"
-  - "Snowbridge"
+  - "Pipeline components"
+  - "Destinations"
   - "Security"
 ---
 > **Action may be required.**

@@ -5,7 +5,7 @@ date: "2025-05-06"
 update_type:
   - "Release notes"
 components:
-  - "Snowplow CLI"
+  - "Developer tools"
 ---
 We are happy to announce a new [release](https://github.com/snowplow/snowplow-cli/releases/tag/v0.0.10) of the snowplow cli.
 

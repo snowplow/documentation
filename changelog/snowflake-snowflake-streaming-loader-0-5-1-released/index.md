@@ -5,7 +5,8 @@ date: "2025-08-21"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
+  - "Destinations"
+platforms:
   - "Snowflake"
 ---
 We have released version 0.5.1 of Snowflake Streaming Loader. This version fixes a potential race condition when loading events concurrently with adding a new table column (for a new JSON schema).

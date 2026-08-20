@@ -5,9 +5,9 @@ date: "2026-05-28"
 update_type:
   - "Product news"
 components:
-  - "Console"
   - "Event Studio"
-  - "AI"
+  - "Console"
+  - "AI tools"
 ---
 Today we're announcing two new ways to work with Snowplow using natural language: **Snowplow Assistant**, an AI assistant built into Snowplow Console, and the **Snowplow MCP server**, a remote Model Context Protocol server that connects your own AI assistant or agent to Snowplow.
 

@@ -5,9 +5,10 @@ date: "2025-05-12"
 update_type:
   - "Maintenance notification"
 components:
+  - "Destinations"
+  - "Data models"
   - "Console"
-  - "Data modeling"
-  - "Loaders"
+platforms:
   - "Databricks"
 ---
 > **This notice only applies to Databricks customers using RDB Loader.**

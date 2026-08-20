@@ -5,7 +5,7 @@ date: "2025-01-21"
 update_type:
   - "Release notes"
 components:
-  - "Snowbridge"
+  - "Destinations"
 ---
 This release improves configurable retries and introduces a breaking change to its configuration. To learn more about how to mitigate the breaking change, see the [Snowbridge upgrade guide](/docs/api-reference/snowbridge/upgrade-guides/).
 

@@ -7,7 +7,7 @@ pages by a `@docusaurus/plugin-content-docs` instance. This plugin reads the fro
 those same files at build time and publishes it as global data, so the listing page can
 search, filter, and sort without pulling every article into the client bundle.
 
-Each article contributes one entry:
+Each entry contributes one row:
 
 | Field         | Source                                              |
 | ------------- | --------------------------------------------------- |
@@ -18,6 +18,7 @@ Each article contributes one entry:
 | `date`        | `date` front matter (`YYYY-MM-DD`)                  |
 | `updateType`  | `update_type` front matter                          |
 | `components`  | `components` front matter                           |
+| `platforms`   | `platforms` front matter                            |
 
 Options:
 

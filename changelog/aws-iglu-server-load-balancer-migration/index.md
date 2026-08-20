@@ -5,8 +5,9 @@ date: "2025-01-27"
 update_type:
   - "Maintenance notification"
 components:
+  - "Pipeline components"
+platforms:
   - "AWS"
-  - "Iglu"
 ---
 > **This notice only applies to AWS customers.**
 

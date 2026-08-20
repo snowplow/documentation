@@ -5,9 +5,9 @@ date: "2025-05-19"
 update_type:
   - "Release notes"
 components:
-  - "Console"
+  - "Data models"
   - "Event Studio"
-  - "Data modeling"
+  - "Console"
 ---
 Snowplow has launched a new version of the Console. Changes include:
 

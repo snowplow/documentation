@@ -6,6 +6,7 @@ update_type:
   - "Maintenance notification"
 components:
   - "Signals"
+platforms:
   - "GCP"
 ---
 > **Final notice only applies to GCP customers.**

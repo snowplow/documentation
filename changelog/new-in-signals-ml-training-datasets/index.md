@@ -6,7 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Signals"
-  - "AI"
+  - "AI tools"
 ---
 Teams already use Signals attributes as model inputs at inference time: retrieving a user's attributes, passing them to a deployed model, and acting on the score while the user is still in session.
 

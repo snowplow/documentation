@@ -5,7 +5,7 @@ date: "2026-05-07"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We're happy to announce a new [release](https://github.com/snowplow/dbt-snowplow-normalize/releases/tag/1.0.0) for Normalize
 

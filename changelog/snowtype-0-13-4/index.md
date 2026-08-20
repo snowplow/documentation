@@ -5,7 +5,7 @@ date: "2025-11-10"
 update_type:
   - "Release notes"
 components:
-  - "Snowtype"
+  - "Developer tools"
 ---
 > **\[10-Nov-2025]**
 

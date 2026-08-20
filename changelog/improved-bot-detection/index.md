@@ -6,7 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Trackers"
-  - "Enrich"
+  - "Pipeline components"
 ---
 When looking at page views, conversion rates, as so on, you typically want to focus on _human_ users. According to [a Cloudflare report](https://radar.cloudflare.com/year-in-review/2025#ai-traffic-share), however, **over 50% of web traffic does not come from people**: it comes from bots and agents.
 

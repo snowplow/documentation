@@ -5,7 +5,7 @@ date: "2025-10-15"
 update_type:
   - "Product news"
 components:
-  - "Event Forwarding"
+  - "Destinations"
 ---
 We're excited to announce that self-service Event Forwarding is now generally available. You can now configure and deploy real-time event delivery to third-party platforms directly within Snowplow Console.
 

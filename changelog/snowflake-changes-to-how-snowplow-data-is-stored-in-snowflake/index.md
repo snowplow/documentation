@@ -5,8 +5,9 @@ date: "2025-02-10"
 update_type:
   - "Maintenance notification"
 components:
-  - "Data modeling"
-  - "Loaders"
+  - "Destinations"
+  - "Data models"
+platforms:
   - "Snowflake"
 ---
 > **This notice only applies to Snowflake customers.**

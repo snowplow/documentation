@@ -5,7 +5,7 @@ date: "2025-10-17"
 update_type:
   - "Product news"
 components:
-  - "Enrich"
+  - "Pipeline components"
   - "Security"
 ---
 **Action is required.**

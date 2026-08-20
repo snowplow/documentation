@@ -5,7 +5,7 @@ date: "2026-05-11"
 update_type:
   - "Product news"
 components:
-  - "Snowplow Mini"
+  - "Testing"
 ---
 Following positive customer feedback since launching Snowplow _Micro_ as our recommended development environment, we’re directing all future development efforts to it.
 

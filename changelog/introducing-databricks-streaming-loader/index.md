@@ -5,7 +5,8 @@ date: "2025-10-02"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
+  - "Destinations"
+platforms:
   - "Databricks"
 ---
 We are excited to introduce the **Databricks Streaming Loader**, a new integration with Databricks that allows you to continuously load data with sub-minute latency.

@@ -5,7 +5,7 @@ date: "2025-05-12"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re excited to announce a new [release](https://github.com/snowplow/dbt-snowplow-ecommerce/releases/tag/0.9.1) for ecommerce.
 

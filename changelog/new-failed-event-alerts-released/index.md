@@ -5,7 +5,7 @@ date: "2025-07-23"
 update_type:
   - "Release notes"
 components:
-  - "Failed events"
+  - "Monitoring"
 ---
 We are excited to introduce **Failed Event Alerts**, a new enhancement to the **Data Quality Dashboard**. This feature allows you to create targeted, workflow-integrated alerts for failed events, enabling your teams to proactively manage and resolve data quality issues faster.
 

@@ -5,7 +5,7 @@ import { ChangelogEntry, ChangelogData } from './models'
 // page never has to pull the article bodies into the client bundle.
 export function useChangelogEntries(): ChangelogEntry[] {
   const data = usePluginData('docusaurus-plugin-changelog')
-  return ChangelogData.parse(data).updates
+  return ChangelogData.parse(data).entries
 }
 
 // Articles are dated to the day, so render them that way rather than guessing at a timezone

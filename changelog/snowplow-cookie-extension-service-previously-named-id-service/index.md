@@ -6,7 +6,7 @@ update_type:
   - "Maintenance notification"
 components:
   - "Trackers"
-  - "Collector"
+  - "Pipeline components"
 ---
 We have renamed the current 'ID Service' to the 'Cookie Extension Service'. You can find these amends across our website, [documentation](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/), and the Javascript tracker. This is a component which extends the lifetime of server-set cookies beyond the usual 7-day limit to 400 days instead.
 

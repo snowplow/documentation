@@ -5,7 +5,7 @@ date: "2025-03-11"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
+  - "Destinations"
 ---
 Like warehouses and other systems, data lakes should be optimized for best performance (efficiency of data ingestion, query speed, and so on).
 

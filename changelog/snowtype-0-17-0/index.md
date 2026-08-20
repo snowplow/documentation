@@ -6,7 +6,7 @@ update_type:
   - "Release notes"
 components:
   - "Event Studio"
-  - "Snowtype"
+  - "Developer tools"
 ---
 > **\[23-Mar-2026]**
 

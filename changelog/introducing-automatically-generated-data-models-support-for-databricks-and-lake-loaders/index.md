@@ -5,9 +5,10 @@ date: "2025-11-12"
 update_type:
   - "Product news"
 components:
+  - "Destinations"
+  - "Data models"
   - "Event Studio"
-  - "Data modeling"
-  - "Loaders"
+platforms:
   - "Databricks"
 ---
 We are pleased to announce that Automatically Generated Data Models now supports Databricks and Lake Loader, expanding multi-warehouse capabilities to include lakehouse architectures alongside Snowflake and BigQuery.

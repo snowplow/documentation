@@ -5,7 +5,7 @@ date: "2025-05-08"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re happy to announce a new [release](https://github.com/snowplow/dbt-snowplow-utils/releases/tag/0.17.2) for the Snowplow Utils dbt package.
 

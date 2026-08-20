@@ -5,6 +5,8 @@ date: "2025-07-28"
 update_type:
   - "Maintenance notification"
 components:
+  - "Pipeline components"
+platforms:
   - "AWS"
 ---
 > **This note only applies to AWS customers on Private Managed Cloud**

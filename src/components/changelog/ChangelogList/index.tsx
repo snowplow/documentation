@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@site/src/components/ui/accordion'
 import ChangelogTable from '../ChangelogTable'
-import { ComponentFilter, UpdateTypeFilter, useChangelogFilters } from './filters'
+import { CheckboxFilter, useChangelogFilters } from './filters'
 
 // Below this width the filter sidebar moves above the list
 const MOBILE_BREAKPOINT = 1024
@@ -37,13 +37,18 @@ const ChangelogList: FC = () => {
     selectedComponents,
     setSelectedComponents,
     allAvailableComponents,
+    selectedPlatforms,
+    setSelectedPlatforms,
+    allAvailablePlatforms,
     filteredAvailableOptions,
     filteredEntries,
     totalCount,
   } = useChangelogFilters()
 
   // Collapsed on mobile so the list stays reachable without scrolling past every filter
-  const defaultAccordionValue = isMobile ? [] : ['update-type', 'components']
+  const defaultAccordionValue = isMobile
+    ? []
+    : ['update-type', 'components', 'platforms']
 
   const filters = (
     <div className="space-y-4">
@@ -58,11 +63,12 @@ const ChangelogList: FC = () => {
         <AccordionItem value="update-type">
           <AccordionTrigger>Filter by update type</AccordionTrigger>
           <AccordionContent>
-            <UpdateTypeFilter
-              selectedTypes={selectedTypes}
-              setSelectedTypes={setSelectedTypes}
-              allAvailableTypes={allAvailableTypes}
-              availableTypes={filteredAvailableOptions.availableTypes}
+            <CheckboxFilter
+              name="update-type"
+              options={allAvailableTypes}
+              selectedValues={selectedTypes}
+              availableValues={filteredAvailableOptions.availableTypes}
+              setSelected={setSelectedTypes}
             />
           </AccordionContent>
         </AccordionItem>
@@ -70,11 +76,25 @@ const ChangelogList: FC = () => {
         <AccordionItem value="components">
           <AccordionTrigger>Filter by component</AccordionTrigger>
           <AccordionContent>
-            <ComponentFilter
-              selectedComponents={selectedComponents}
-              setSelectedComponents={setSelectedComponents}
-              allAvailableComponents={allAvailableComponents}
-              availableComponents={filteredAvailableOptions.availableComponents}
+            <CheckboxFilter
+              name="component"
+              options={allAvailableComponents}
+              selectedValues={selectedComponents}
+              availableValues={filteredAvailableOptions.availableComponents}
+              setSelected={setSelectedComponents}
+            />
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="platforms">
+          <AccordionTrigger>Filter by platform</AccordionTrigger>
+          <AccordionContent>
+            <CheckboxFilter
+              name="platform"
+              options={allAvailablePlatforms}
+              selectedValues={selectedPlatforms}
+              availableValues={filteredAvailableOptions.availablePlatforms}
+              setSelected={setSelectedPlatforms}
             />
           </AccordionContent>
         </AccordionItem>
@@ -100,7 +120,10 @@ const ChangelogList: FC = () => {
           {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
           {!isMobile && (
             <div className="w-[320px] flex-shrink-0">
-              <div className="p-6 sticky top-12">{filters}</div>
+              {/* Three facets can run past the fold, so the sticky column scrolls on its own */}
+              <div className="p-6 sticky top-12 max-h-[calc(100vh-4rem)] overflow-y-auto">
+                {filters}
+              </div>
             </div>
           )}
 

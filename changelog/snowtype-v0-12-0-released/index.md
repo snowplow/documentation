@@ -6,7 +6,7 @@ update_type:
   - "Release notes"
 components:
   - "Trackers"
-  - "Snowtype"
+  - "Developer tools"
 ---
 We’ve just released a new version of Snowtype with a minified code option for Google Tag Manager (GTM). This helps users overcome GTM’s 20,000-character variable limit and simplifies GTM implementation.
 

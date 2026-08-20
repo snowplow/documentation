@@ -39,16 +39,12 @@ const ChangelogRow: React.FC<{ entry: ChangelogEntry }> = ({ entry }) => (
         ))}
       </div>
 
-      {/* Components */}
+      {/* Components, with any platform the entry is scoped to */}
       <div className="mb-1 lg:mb-0 text-sm text-foreground">
         <span className="lg:hidden text-muted-foreground mr-1.5">
           Components:
         </span>
-        {entry.components.length > 0 ? (
-          entry.components.join(', ')
-        ) : (
-          <span className="text-muted-foreground">—</span>
-        )}
+        {[...entry.components, ...entry.platforms].join(', ')}
       </div>
 
       {/* Date */}

@@ -5,7 +5,7 @@ date: "2025-07-24"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re pleased to announce a new [release](https://github.com/snowplow/dbt-snowplow-attribution/releases/tag/0.5.1) for Attribution.
 

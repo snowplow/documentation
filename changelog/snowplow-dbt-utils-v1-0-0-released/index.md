@@ -5,7 +5,7 @@ date: "2026-01-20"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re happy to announce v.1.0.0 [release](https://github.com/snowplow/dbt-snowplow-utils/releases/tag/1.0.0) for dbt-snowplow-utils.
 

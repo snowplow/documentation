@@ -5,7 +5,7 @@ date: "2025-03-06"
 update_type:
   - "Maintenance notification"
 components:
-  - "Snowplow Mini"
+  - "Testing"
 ---
 > **This notice applies to AWS and GCP customers with Snowplow Mini component deployed.**
 

@@ -6,7 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Event Studio"
-  - "Snowtype"
+  - "Developer tools"
 ---
 Event Specification Validation is now available in Event Studio. It checks whether your incoming events conform to the rules defined in your published event specifications, and has been one of our most requested features since Event Studio launched. Validation results land in your warehouse so you can see which events are correct and which aren't.
 

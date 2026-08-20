@@ -5,6 +5,8 @@ date: "2025-06-06"
 update_type:
   - "Maintenance notification"
 components:
+  - "Pipeline components"
+platforms:
   - "GCP"
 ---
 > **This notice only applies to GCP customers.**

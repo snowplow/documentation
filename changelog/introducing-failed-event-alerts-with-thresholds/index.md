@@ -6,7 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Console"
-  - "Failed events"
+  - "Monitoring"
 ---
 We are excited to announce threshold-based alerting for Failed Events, a new enhancement to the Data Quality Dashboard. This feature allows you to set volume thresholds for your failed event alerts, helping you distinguish between minor data quality issues and critical problems that require immediate attention.
 

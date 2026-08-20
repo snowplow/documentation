@@ -5,7 +5,7 @@ date: "2025-09-15"
 update_type:
   - "Release notes"
 components:
-  - "Snowplow Micro"
+  - "Testing"
 ---
 [Snowplow Micro](/docs/testing/snowplow-micro/) is a testing and debugging utility. It’s useful for validating tracking code, developing custom enrichments, and automated testing.
 

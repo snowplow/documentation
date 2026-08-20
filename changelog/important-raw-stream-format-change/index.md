@@ -5,7 +5,7 @@ date: "2025-08-04"
 update_type:
   - "Maintenance notification"
 components:
-  - "Collector"
+  - "Pipeline components"
 ---
 > This notice applies to all Private Managed Cloud (PMC) customers.
 

@@ -5,7 +5,7 @@ date: "2025-07-28"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re pleased to announce a new [release](https://github.com/snowplow/dbt-snowplow-media-player/releases/tag/0.9.3) for Media Player.
 

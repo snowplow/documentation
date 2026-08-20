@@ -5,8 +5,8 @@ date: "2026-01-06"
 update_type:
   - "Product news"
 components:
-  - "Event Studio"
   - "Trackers"
+  - "Event Studio"
 ---
 We have released a new Source Application Setup tab that simplifies tracker initialization for JavaScript implementations allowing you to start tracking Snowplow events in minutes. This feature provides a guided configuration experience directly in Console, generating ready-to-use tracking code snippets based on your selections, configurable automatic tracking, and setting of global entities..
 

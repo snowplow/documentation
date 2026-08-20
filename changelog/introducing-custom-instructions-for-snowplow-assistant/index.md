@@ -5,9 +5,9 @@ date: "2026-08-06"
 update_type:
   - "Product news"
 components:
-  - "Console"
   - "Event Studio"
-  - "AI"
+  - "Console"
+  - "AI tools"
 ---
 Snowplow Assistant can now follow your organization's own conventions. Custom Instructions is a set of instructions you write and store in Console that the Assistant reads at the start of every conversation, across every interaction in your organization.
 

@@ -5,6 +5,8 @@ date: "2026-05-18"
 update_type:
   - "Maintenance notification"
 components:
+  - "Monitoring"
+platforms:
   - "GCP"
 ---
 Snowplow collects observability metrics for monitoring, measuring SLA compliance, and so on. To make metric collection more resilient in case of temporary failures, we are adding a mandatory checkpointing mechanism. **You will need to adjust the IAM permissions to enable this change (see below).**

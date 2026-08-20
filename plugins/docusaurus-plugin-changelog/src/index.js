@@ -44,6 +44,7 @@ function readArticle(contentPath, slug) {
     date,
     updateType,
     components: toArray(data.components),
+    platforms: toArray(data.platforms),
   }
 }
 
@@ -78,7 +79,7 @@ module.exports = function changelogPlugin(context, options = {}) {
     },
 
     async contentLoaded({ content, actions }) {
-      actions.setGlobalData({ updates: content })
+      actions.setGlobalData({ entries: content })
     },
   }
 }

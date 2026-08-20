@@ -5,7 +5,7 @@ date: "2025-07-22"
 update_type:
   - "Release notes"
 components:
-  - "Data modeling"
+  - "Data models"
 ---
 We’re pleased to announce a new [release](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.5.5) for Unified.
 

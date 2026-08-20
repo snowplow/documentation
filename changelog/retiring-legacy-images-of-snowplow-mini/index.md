@@ -5,7 +5,7 @@ date: "2025-02-06"
 update_type:
   - "Release notes"
 components:
-  - "Snowplow Mini"
+  - "Testing"
 ---
 Deprecated
 

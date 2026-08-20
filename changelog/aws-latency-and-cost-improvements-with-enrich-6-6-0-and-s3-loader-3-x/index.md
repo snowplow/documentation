@@ -5,9 +5,10 @@ date: "2026-02-06"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
+  - "Pipeline components"
+  - "Destinations"
+platforms:
   - "AWS"
-  - "Enrich"
 ---
 > This notice only applies to AWS customers.
 

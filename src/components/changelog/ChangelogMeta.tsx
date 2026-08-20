@@ -22,7 +22,7 @@ export const ChangelogMeta: React.FC = () => {
 
   if (!date || updateTypes.length === 0) return null
 
-  const components = toArray(frontMatter.components)
+  const tags = [...toArray(frontMatter.components), ...toArray(frontMatter.platforms)]
 
   return (
     <div className="not-prose max-w-[740px] mx-auto mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
@@ -30,7 +30,7 @@ export const ChangelogMeta: React.FC = () => {
       {updateTypes.map((type) => (
         <UpdateTypeBadge key={type} type={type as UpdateType} />
       ))}
-      {components.length > 0 && <span>{components.join(', ')}</span>}
+      {tags.length > 0 && <span>{tags.join(', ')}</span>}
     </div>
   )
 }

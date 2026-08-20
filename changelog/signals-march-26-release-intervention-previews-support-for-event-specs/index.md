@@ -5,8 +5,8 @@ date: "2026-03-18"
 update_type:
   - "Product news"
 components:
-  - "Signals"
   - "Event Studio"
+  - "Signals"
 ---
 We're excited to share the latest round of improvements to Snowplow Signals. This release brings new tools to validate and refine interventions before they go live, tighter integration between attributes and your event specifications, and a number of other improvements and bug fixes.
 

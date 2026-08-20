@@ -5,8 +5,8 @@ date: "2025-10-30"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
-  - "Collector"
+  - "Pipeline components"
+  - "Destinations"
 ---
 We have released a new feature: **event compression**, available on AWS, Azure and GCP. This feature (losslessly) reduces the amount of data flowing through Snowplow pipelines, resulting in **lower infrastructure costs**.
 

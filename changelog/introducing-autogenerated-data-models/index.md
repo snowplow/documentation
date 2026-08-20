@@ -5,9 +5,9 @@ date: "2025-10-09"
 update_type:
   - "Product news"
 components:
-  - "Console"
+  - "Data models"
   - "Event Studio"
-  - "Data modeling"
+  - "Console"
 ---
 We are excited to announce the general availability of Automatically Generated Data Models, a new capability in Snowplow Console that transforms your tracking plans, event specifications, and custom events into optimized, analysis-ready data models. This feature enables analytics engineers and data teams to go from event specifications to warehouse-ready tables without writing SQL or complex configurations.
 

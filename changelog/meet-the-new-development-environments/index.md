@@ -6,8 +6,7 @@ update_type:
   - "Product news"
 components:
   - "Console"
-  - "Snowplow Micro"
-  - "Snowplow Mini"
+  - "Testing"
 ---
 We are excited to announce an easier to use and more secure replacement for Snowplow Mini.
 

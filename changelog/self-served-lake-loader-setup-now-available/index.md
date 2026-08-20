@@ -5,7 +5,8 @@ date: "2025-01-27"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
+  - "Destinations"
+platforms:
   - "AWS"
 ---
 More and more organizations are adopting the lakehouse paradigm – storing their  data using open table formats like Apache Iceberg and Delta Lake and using a data warehouse for efficient querying. This approach is cost-effective and flexible, since these table formats are supported by many different tools.

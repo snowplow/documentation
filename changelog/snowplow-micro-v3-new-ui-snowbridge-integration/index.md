@@ -5,9 +5,9 @@ date: "2025-11-05"
 update_type:
   - "Release notes"
 components:
-  - "Enrich"
-  - "Snowbridge"
-  - "Snowplow Micro"
+  - "Pipeline components"
+  - "Destinations"
+  - "Testing"
 ---
 Snowplow Micro is a convenient and super-portable tool for testing and debugging your tracking code, enrichments, and so on. Over the past weeks, we’ve released Micro 2.4.0, 3.0.0 and 3.0.1.
 

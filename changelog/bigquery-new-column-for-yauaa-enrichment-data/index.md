@@ -5,9 +5,10 @@ date: "2025-03-28"
 update_type:
   - "Maintenance notification"
 components:
-  - "Loaders"
+  - "Pipeline components"
+  - "Destinations"
+platforms:
   - "BigQuery"
-  - "Enrich"
 ---
 > **This notice is only applicable to customers using BigQuery Loader version 1 or BigQuery Loader version 2 in compatibility mode.**
 

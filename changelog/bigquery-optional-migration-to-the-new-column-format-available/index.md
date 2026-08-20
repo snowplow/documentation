@@ -5,7 +5,8 @@ date: "2025-09-16"
 update_type:
   - "Maintenance notification"
 components:
-  - "Loaders"
+  - "Destinations"
+platforms:
   - "BigQuery"
 ---
 > This notice only applies to BigQuery customers

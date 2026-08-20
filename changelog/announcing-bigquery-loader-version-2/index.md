@@ -5,10 +5,11 @@ date: "2025-02-27"
 update_type:
   - "Release notes"
 components:
-  - "Loaders"
-  - "BigQuery"
+  - "Destinations"
+  - "Monitoring"
+platforms:
   - "GCP"
-  - "Failed events"
+  - "BigQuery"
 ---
 We are pleased to announce BigQuery Loader version 2.
 

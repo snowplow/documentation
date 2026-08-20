@@ -1,5 +1,5 @@
 ---
 type: link
 title: What's new?
-href: /changelog/
+href: /release-notes/
 ---

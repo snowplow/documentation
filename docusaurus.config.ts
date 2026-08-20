@@ -107,14 +107,14 @@ const config: Config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'changelog',
-        path: 'changelog',
-        routeBasePath: 'changelog',
+        id: 'release-notes',
+        path: 'release-notes',
+        routeBasePath: 'release-notes',
         sidebarPath: false,
         showLastUpdateTime: false,
       },
     ],
-    './plugins/docusaurus-plugin-changelog',
+    './plugins/docusaurus-plugin-release-notes',
     './plugins/docusaurus-plugin-snowplow-schema',
     [
       './plugins/docusaurus-plugin-llms-txt',

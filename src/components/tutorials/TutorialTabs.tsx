@@ -5,14 +5,14 @@ import { useHistory, useLocation } from '@docusaurus/router'
 enum DocsTab {
   Docs = '/docs',
   Tutorials = '/tutorials',
-  Changelog = '/changelog',
+  ReleaseNotes = '/release-notes',
 }
 
 // Order matters: the first prefix that matches wins, and /docs is the fallback
 const TABS: { value: DocsTab; label: string }[] = [
   { value: DocsTab.Docs, label: 'Docs' },
   { value: DocsTab.Tutorials, label: 'Tutorials' },
-  { value: DocsTab.Changelog, label: 'Changelog' },
+  { value: DocsTab.ReleaseNotes, label: 'Release notes' },
 ]
 
 function getCurrentTab(pathname: string): DocsTab {

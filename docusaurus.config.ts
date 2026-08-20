@@ -104,6 +104,17 @@ const config: Config = {
         showLastUpdateTime: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'changelog',
+        path: 'changelog',
+        routeBasePath: 'changelog',
+        sidebarPath: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    './plugins/docusaurus-plugin-changelog',
     './plugins/docusaurus-plugin-snowplow-schema',
     [
       './plugins/docusaurus-plugin-llms-txt',

@@ -21,6 +21,7 @@ import { AlignLeft, Download, Copy, Check } from 'lucide-react'
 import HeadJSONLD from '../../../components/SchemaPlugin'
 
 import Demo_Ad from '../../../components/ui/Demo_Ad'
+import ChangelogMeta from '@site/src/components/changelog/ChangelogMeta'
 
 function MarkdownActions() {
   const { pathname } = useLocation()
@@ -124,6 +125,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
               <DocBreadcrumbs />
               <MarkdownActions />
               <DocVersionBadge />
+              <ChangelogMeta />
               {docTOC.mobile}
               {tutorial === TutorialKind.Tutorial ? (
                 <Paper sx={{ p: 2, pt: 2 }}>

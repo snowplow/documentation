@@ -1,0 +1,19 @@
+---
+title: "[BigQuery] Reminder: migration to BigQuery Loader version 2"
+description: "As per our announcement, BigQuery Loader version 2 is out."
+date: "2025-03-11"
+update_type:
+  - "Maintenance notification"
+components:
+  - "Loaders"
+  - "BigQuery"
+---
+As per [our announcement](/changelog/announcing-bigquery-loader-version-2/), BigQuery Loader version 2 is out.
+
+**In March and April 2025, we will be gradually migrating all BigQuery customers to the new version.**
+
+**Please note that during the upgrade, the latency might go up to 15–20 minutes.** Once the new version is fully up and running, the latency will return back to normal.
+
+The loader will be configured to run in the compatibility mode, so **there will be no changes to the format of your data** in BigQuery.
+
+Once the migration is complete, you will have the option to switch to the new data format. As explained in the announcement, the advantage is that the loader would create much fewer BigQuery columns, which makes it easier to work with the data. The new format can be activated either for all schemas (data structures) and columns, or just for new ones. In the meantime, please refer to the [migration guide](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/2-0-0-upgrade-guide/#events-table-format) to make this choice.

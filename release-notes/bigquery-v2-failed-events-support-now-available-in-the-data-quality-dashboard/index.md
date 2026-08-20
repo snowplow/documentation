@@ -2,7 +2,7 @@
 title: "BigQuery v2 failed events support now available in the Data Quality Dashboard"
 description: "We are pleased to announce that the Data Quality Dashboard now fully supports BigQuery V2 Failed Events Loaders, enabling deeper visibility into failed events across your Snowplow pipelines on AWS and GCP."
 date: "2025-04-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

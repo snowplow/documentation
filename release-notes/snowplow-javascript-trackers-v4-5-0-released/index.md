@@ -2,7 +2,7 @@
 title: "Snowplow JavaScript trackers v4.5.0 released"
 description: "We’re happy to announce a new release for JavaScript tracker."
 date: "2025-04-04"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

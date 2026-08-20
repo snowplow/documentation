@@ -2,7 +2,7 @@
 title: "[AWS] Latency and cost improvements with Enrich 6.6.0 and S3 Loader 3.x"
 description: "We have recently released Enrich 6.6.0."
 date: "2026-02-06"
-update_type:
+category:
   - "Release notes"
 components:
   - "Pipeline components"

@@ -2,7 +2,7 @@
 title: "New in Signals: backfill stream attributes and improved Signals metrics"
 description: "We've rebuilt how Signals works with warehouse data, making it simpler to calculate over Snowplow events inside attribute groups."
 date: "2026-06-26"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

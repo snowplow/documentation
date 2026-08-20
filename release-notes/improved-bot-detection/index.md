@@ -2,7 +2,7 @@
 title: "Improved bot detection"
 description: "When looking at page views, conversion rates, as so on, you typically want to focus on human users."
 date: "2026-04-17"
-update_type:
+category:
   - "Product news"
 components:
   - "Trackers"

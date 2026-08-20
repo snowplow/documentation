@@ -2,7 +2,7 @@
 title: "Introducing simplified tracker initialization within source applications"
 description: "We have released a new Source Application Setup tab that simplifies tracker initialization for JavaScript implementations allowing you to start tracking Snowplow events in minutes."
 date: "2026-01-06"
-update_type:
+category:
   - "Product news"
 components:
   - "Trackers"

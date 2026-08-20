@@ -2,7 +2,7 @@
 title: "Snowplow JavaScript trackers v4.6.6 released"
 description: "We’re happy to announce a new release for the JavaScript, Browser, and React Native trackers."
 date: "2025-08-26"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

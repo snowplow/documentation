@@ -2,7 +2,7 @@
 title: "Introducing drafts for data structures"
 description: "We have released a new enhancement to the data structure creation workflow in the Snowplow Console: the ability to save drafts."
 date: "2025-08-06"
-update_type:
+category:
   - "Release notes"
 components:
   - "Event Studio"

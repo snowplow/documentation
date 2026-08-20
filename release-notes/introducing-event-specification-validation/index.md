@@ -2,7 +2,7 @@
 title: "Introducing event specification validation"
 description: "Event Specification Validation is now available in Event Studio."
 date: "2026-05-06"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

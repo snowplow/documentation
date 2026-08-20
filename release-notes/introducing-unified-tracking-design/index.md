@@ -2,7 +2,7 @@
 title: "Introducing unified tracking design"
 description: "We're pleased to announce the release of Unified Tracking Design, a new workflow enhancement in the Snowplow Console that streamlines how you create and manage your tracking."
 date: "2025-10-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Event Studio"

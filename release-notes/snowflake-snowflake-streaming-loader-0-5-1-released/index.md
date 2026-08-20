@@ -2,7 +2,7 @@
 title: "[Snowflake] Snowflake Streaming Loader 0.5.1 released"
 description: "We have released version 0.5.1 of Snowflake Streaming Loader."
 date: "2025-08-21"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

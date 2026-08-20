@@ -2,7 +2,7 @@
 title: "New failed event alerts released"
 description: "We are excited to introduce Failed Event Alerts, a new enhancement to the Data Quality Dashboard."
 date: "2025-07-23"
-update_type:
+category:
   - "Release notes"
 components:
   - "Monitoring"

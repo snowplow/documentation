@@ -125,9 +125,11 @@ const config: Config = {
         excludeRoutes: [
           '/',
           '/tutorials/',
+          '/release-notes/',
           '/docs/signals/',
           '/docs/api-reference/',
         ],
+        contentDirs: ['docs', 'tutorials', 'release-notes'],
         contentSelectors: ['.theme-doc-markdown', 'article', 'main'],
         enableMarkdownFiles: true,
         enableLlmsFullTxt: true,

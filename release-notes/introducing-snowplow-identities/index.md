@@ -2,7 +2,7 @@
 title: "Introducing Snowplow Identities"
 description: "We're excited to announce the general availability of Snowplow Identities, a real-time identity resolution service built natively into your Snowplow pipeline."
 date: "2026-04-09"
-update_type:
+category:
   - "Product news"
 components:
   - "Identities"

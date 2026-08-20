@@ -2,7 +2,7 @@
 title: "Snowplow CLI release 0.0.10"
 description: "We are happy to announce a new release of the snowplow cli."
 date: "2025-05-06"
-update_type:
+category:
   - "Release notes"
 components:
   - "Developer tools"

@@ -2,7 +2,7 @@
 title: "Snowplow dbt Attribution v0.5.0 released"
 description: "We’re excited to announce a new release for Attribution."
 date: "2025-04-16"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

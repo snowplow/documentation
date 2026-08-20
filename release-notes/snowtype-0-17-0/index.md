@@ -2,7 +2,7 @@
 title: "Snowtype 0.17.0"
 description: "This release includes multiple change:."
 date: "2026-03-23"
-update_type:
+category:
   - "Release notes"
 components:
   - "Event Studio"

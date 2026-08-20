@@ -2,7 +2,7 @@
 title: "Introducing improved data modeling in Console"
 description: "This week we are rolling out a new data modeling feature, which will replace the existing Console flows for setting up out-of-the-box and custom data models."
 date: "2026-03-02"
-update_type:
+category:
   - "Product news"
 components:
   - "Data models"

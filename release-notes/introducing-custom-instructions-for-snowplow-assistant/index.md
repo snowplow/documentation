@@ -2,7 +2,7 @@
 title: "Introducing custom instructions for Snowplow Assistant"
 description: "Snowplow Assistant can now follow your organization's own conventions."
 date: "2026-08-06"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

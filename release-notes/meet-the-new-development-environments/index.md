@@ -2,7 +2,7 @@
 title: "Meet the new development environments"
 description: "We are excited to announce an easier to use and more secure replacement for Snowplow Mini."
 date: "2026-03-03"
-update_type:
+category:
   - "Product news"
 components:
   - "Console"

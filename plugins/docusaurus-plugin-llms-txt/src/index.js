@@ -16,6 +16,9 @@ export default function pluginLlmsTxt(context, options) {
     siteTitle = 'Documentation',
     siteDescription = '',
     excludeRoutes = [],
+    // Top-level build directories to scan. Each docs plugin instance that should be readable
+    // as markdown needs its routeBasePath listed here.
+    contentDirs = ['docs', 'tutorials'],
     contentSelectors = ['.theme-doc-markdown', 'article', 'main'],
     enableMarkdownFiles = true,
     enableLlmsFullTxt = true,
@@ -29,9 +32,9 @@ export default function pluginLlmsTxt(context, options) {
         context.siteConfig?.url || 'https://docs.snowplow.io'
       ).replace(/\/$/, '')
 
-      // Scan the build directory for HTML files under docs/ and tutorials/
+      // Scan the build directory for HTML files under each configured content directory
       const htmlFiles = []
-      for (const subdir of ['docs', 'tutorials']) {
+      for (const subdir of contentDirs) {
         const subdirPath = path.join(outDir, subdir)
         try {
           await fs.access(subdirPath)

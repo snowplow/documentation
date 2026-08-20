@@ -2,7 +2,7 @@
 title: "Introducing failed event alerts with thresholds"
 description: "We are excited to announce threshold-based alerting for Failed Events, a new enhancement to the Data Quality Dashboard."
 date: "2025-11-06"
-update_type:
+category:
   - "Product news"
 components:
   - "Console"

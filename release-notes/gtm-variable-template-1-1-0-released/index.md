@@ -2,7 +2,7 @@
 title: "GTM Variable Template 1.1.0 released"
 description: "This release adds the keepalive, idService, and synchronousCookieWrite options to the template."
 date: "2025-03-03"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

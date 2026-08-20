@@ -2,7 +2,7 @@
 title: "Snowplow Android tracker 6.3.1"
 description: "We’re happy to announce a new release of the Snowplow Android Tracker."
 date: "2026-02-19"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

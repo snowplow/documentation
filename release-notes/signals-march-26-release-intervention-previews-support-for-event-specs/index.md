@@ -2,7 +2,7 @@
 title: "Signals March '26 release: intervention previews, support for event specs"
 description: "We're excited to share the latest round of improvements to Snowplow Signals."
 date: "2026-03-18"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

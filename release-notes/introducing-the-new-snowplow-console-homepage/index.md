@@ -2,7 +2,7 @@
 title: "Introducing the new Snowplow Console homepage"
 description: "We're excited to announce the release of a brand-new homepage for Console – your central hub for understanding the state of your Snowplow setup."
 date: "2025-04-14"
-update_type:
+category:
   - "Release notes"
 components:
   - "Console"

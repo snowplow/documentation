@@ -2,7 +2,7 @@
 title: "Snowplow Flutter tracker 0.9.0 released"
 description: "This release introduces global context support, a way to attach context entities to all tracked events without having to pass them to each individual track() call."
 date: "2026-03-27"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

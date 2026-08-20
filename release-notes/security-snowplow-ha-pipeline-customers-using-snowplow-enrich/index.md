@@ -2,7 +2,7 @@
 title: "[Security] Snowplow HA pipeline customers using Snowplow Enrich"
 description: "Snowplow HA Pipeline customers using Snowplow Enrich should upgrade to Enrich 6.1.1 or higher."
 date: "2025-10-17"
-update_type:
+category:
   - "Product news"
 components:
   - "Pipeline components"

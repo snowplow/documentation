@@ -2,7 +2,7 @@
 title: "Announcing BigQuery Loader version 2"
 description: "We are pleased to announce BigQuery Loader version 2."
 date: "2025-02-27"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

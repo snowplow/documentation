@@ -2,7 +2,7 @@
 title: "Snowplow Android tracker 6.1.1 released"
 description: "This patch release fixes a bug that caused screen view events to be tracked when app returns to foreground from a background state in case screen view autotracking is enabled."
 date: "2025-01-22"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

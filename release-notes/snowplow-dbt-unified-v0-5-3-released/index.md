@@ -2,7 +2,7 @@
 title: "Snowplow dbt Unified v0.5.3 released"
 description: "We’re happy to announce a new release for Unified."
 date: "2025-05-23"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

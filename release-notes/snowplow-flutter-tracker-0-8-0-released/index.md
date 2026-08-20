@@ -2,7 +2,7 @@
 title: "Snowplow Flutter tracker 0.8.0 released"
 description: "This release adds support for tracking events from WebViews using the WebView tracker and the WebView plugin for the JavaScript tracker."
 date: "2025-05-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

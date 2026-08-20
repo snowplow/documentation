@@ -2,7 +2,7 @@
 title: "Snowplow dbt Utils v0.17.3 released"
 description: "We’re pleased to announce a new release for Utils."
 date: "2025-07-21"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

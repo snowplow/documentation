@@ -2,7 +2,7 @@
 title: "Snowtype 0.13.4"
 description: "This release adds a namespace option to the configuration for Swift, allowing users to wrap generated Snowtype classes in a Swift namespace to avoid naming conflicts."
 date: "2025-11-10"
-update_type:
+category:
   - "Release notes"
 components:
   - "Developer tools"

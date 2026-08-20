@@ -2,7 +2,7 @@
 title: "Snowplow Golang tracker 3.2.0"
 description: "This release updates the GH Actions to use the latest versions of Ubuntu."
 date: "2025-02-28"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

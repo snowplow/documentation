@@ -2,7 +2,7 @@
 title: "Snowplow Flutter tracker 0.11.0"
 description: "The Flutter tracker now supports tracking deep links and push notifications, so apps can attribute sessions to the campaigns and messages that opened them."
 date: "2026-07-24"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

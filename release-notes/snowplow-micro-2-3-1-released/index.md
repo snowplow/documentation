@@ -2,7 +2,7 @@
 title: "Snowplow Micro 2.3.1 released"
 description: "Snowplow Micro is a testing and debugging utility."
 date: "2025-09-15"
-update_type:
+category:
   - "Release notes"
 components:
   - "Testing"

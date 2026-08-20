@@ -2,7 +2,7 @@
 title: "Google Tag Manager v4"
 description: "We're happy to announce the release of v4 of the Snowplow GTM templates."
 date: "2025-01-27"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

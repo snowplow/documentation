@@ -2,7 +2,7 @@
 title: "Snowplow PHP tracker 0.9.1 released"
 description: "We’re happy to announce a new release for the Snowplow PHP tracker!"
 date: "2025-04-11"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

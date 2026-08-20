@@ -2,7 +2,7 @@
 title: "Snowplow WebView plugin released, plus Android and iOS v6.1"
 description: "We’ve released a set of updates to improve the hybrid app tracking experience."
 date: "2025-01-21"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

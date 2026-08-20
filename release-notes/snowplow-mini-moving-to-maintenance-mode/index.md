@@ -2,7 +2,7 @@
 title: "Snowplow Mini moving to maintenance mode"
 description: "Following positive customer feedback since launching Snowplow Micro as our recommended development environment, we’re directing all future development efforts to it."
 date: "2026-05-11"
-update_type:
+category:
   - "Product news"
 components:
   - "Testing"

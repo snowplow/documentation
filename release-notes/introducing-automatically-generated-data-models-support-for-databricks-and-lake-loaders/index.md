@@ -2,7 +2,7 @@
 title: "Introducing automatically generated data models support for Databricks and Lake Loader"
 description: "We are pleased to announce that Automatically Generated Data Models now supports Databricks and Lake Loader, expanding multi-warehouse capabilities to include lakehouse architectures alongside Snowflake and BigQuery."
 date: "2025-11-12"
-update_type:
+category:
   - "Product news"
 components:
   - "Destinations"

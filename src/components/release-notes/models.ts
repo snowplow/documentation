@@ -1,30 +1,13 @@
 import { z } from 'zod'
 
-// The kinds of update published to /release-notes/. A note usually has one, but an
-// announcement that doubles as a release note can carry both.
-export const UpdateType = z.enum(['Product news', 'Release notes'])
+// The categories published to /release-notes/. A note usually has one, but an announcement
+// that doubles as a release note can carry both.
+export const Category = z.enum(['Product news', 'Release notes'])
 
-export type UpdateType = z.infer<typeof UpdateType>
+export type Category = z.infer<typeof Category>
 
-// Order the type filter reads in: broadest announcement first
-export const UpdateTypeOrder: UpdateType[] = ['Product news', 'Release notes']
-
-// Order the component filter reads in: product surfaces first, supporting tools last
-export const ComponentOrder: string[] = [
-  'Trackers',
-  'Pipeline components',
-  'Destinations',
-  'Data models',
-  'Event Studio',
-  'Console',
-  'Signals',
-  'Identities',
-  'Monitoring',
-  'Testing',
-  'Developer tools',
-  'AI tools',
-  'Security',
-]
+// Order the category filter reads in: broadest announcement first
+export const CategoryOrder: Category[] = ['Product news', 'Release notes']
 
 // The cloud or warehouse a note is scoped to. Kept apart from components because the
 // question differs: readers narrow to the deployment they run, not to the part of the
@@ -44,7 +27,7 @@ export const ReleaseNote = z.object({
   title: z.string(),
   description: z.string(),
   date: z.string(),
-  updateType: z.array(UpdateType),
+  category: z.array(Category),
   components: z.array(z.string()),
   platforms: z.array(z.string()),
 })

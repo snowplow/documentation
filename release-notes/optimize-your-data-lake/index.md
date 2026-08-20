@@ -2,7 +2,7 @@
 title: "Optimize your data lake"
 description: "Like warehouses and other systems, data lakes should be optimized for best performance (efficiency of data ingestion, query speed, and so on)."
 date: "2025-03-11"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

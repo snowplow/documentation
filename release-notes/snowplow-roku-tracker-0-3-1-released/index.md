@@ -2,7 +2,7 @@
 title: "Snowplow Roku tracker 0.3.1 released"
 description: "This is a patch release fixing issues in the v0.3.0 release."
 date: "2025-07-31"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

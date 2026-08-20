@@ -2,7 +2,7 @@
 title: "Snowplow iOS and Android trackers 6.2.0"
 description: "This release adds an option to continue the previously persisted session when the app restarts."
 date: "2025-02-14"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

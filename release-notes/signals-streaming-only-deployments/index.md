@@ -2,7 +2,7 @@
 title: "Signals streaming-only deployments"
 description: "Snowplow Signals now supports streaming-only deployments, enabling organizations to activate real-time customer intelligence without requiring an immediate warehouse connection."
 date: "2025-12-11"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

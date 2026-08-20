@@ -2,7 +2,7 @@
 title: "Mixpanel integration now available for Event Forwarding"
 description: "Snowplow now supports Mixpanel as an Event Forwarding destination."
 date: "2025-12-02"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

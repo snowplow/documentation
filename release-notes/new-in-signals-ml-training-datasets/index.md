@@ -2,7 +2,7 @@
 title: "New in Signals: ML training datasets"
 description: "The Signals Python SDK can now build a labelled ML training dataset in your warehouse from the attribute groups you already use for serving."
 date: "2026-08-18"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

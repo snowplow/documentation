@@ -3,7 +3,7 @@ import Link from '@docusaurus/Link'
 import { cn } from '@site/src/lib/utils'
 import { ReleaseNote } from './models'
 import { formatUpdateDate } from './utils'
-import UpdateTypeBadge from './UpdateTypeBadge'
+import CategoryBadge from './CategoryBadge'
 
 const gridColumns =
   'lg:grid lg:grid-cols-[minmax(0,3.2fr)_minmax(0,1fr)_minmax(0,1.2fr)_7rem] lg:gap-5 lg:items-center'
@@ -32,10 +32,10 @@ const ReleaseNoteRow: React.FC<{ entry: ReleaseNote }> = ({ entry }) => (
       {/* Update type */}
       <div className="mb-1 lg:mb-0 flex flex-wrap items-center gap-1">
         <span className="lg:hidden text-sm text-muted-foreground mr-1.5">
-          Type:
+          Category:
         </span>
-        {entry.updateType.map((type) => (
-          <UpdateTypeBadge key={type} type={type} />
+        {entry.category.map((type) => (
+          <CategoryBadge key={type} type={type} />
         ))}
       </div>
 
@@ -71,7 +71,7 @@ export const ReleaseNotesTable: React.FC<ReleaseNotesTableProps> = ({
     return (
       <div className="text-center py-12">
         <p className="text-muted-foreground text-lg">
-          No release notes found matching your criteria.
+          No releases found matching your criteria.
         </p>
       </div>
     )
@@ -86,8 +86,8 @@ export const ReleaseNotesTable: React.FC<ReleaseNotesTableProps> = ({
           gridColumns
         )}
       >
-        <div>Entry</div>
-        <div>Type</div>
+        <div>Release</div>
+        <div>Category</div>
         <div>Components</div>
         <div className="lg:text-right">Date</div>
       </div>

@@ -2,7 +2,7 @@
 title: "Event Forwarding is now generally available"
 description: "We're excited to announce that self-service Event Forwarding is now generally available."
 date: "2025-10-15"
-update_type:
+category:
   - "Product news"
 components:
   - "Destinations"

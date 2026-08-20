@@ -2,7 +2,7 @@
 title: "Introducing the Event Catalog"
 description: "We are excited to introduce the Event Catalog, a new centralized view in the Snowplow Console that provides a comprehensive list of all your event specifications in one place."
 date: "2026-02-06"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

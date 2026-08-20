@@ -4,10 +4,9 @@ import { Label } from '@site/src/components/ui/label'
 
 import {
   ReleaseNote,
-  ComponentOrder,
   PlatformOrder,
-  UpdateType,
-  UpdateTypeOrder,
+  Category,
+  CategoryOrder,
   orderBy,
 } from '../models'
 import { useReleaseNotes } from '../utils'
@@ -28,14 +27,17 @@ function searchFilter(term: string, entry: ReleaseNote): boolean {
 const matchesAny = (selected: string[], values: string[]) =>
   selected.length === 0 || values.some((value) => selected.includes(value))
 
+// `order` fixes the reading order of a facet whose values have a natural sequence. Without
+// one the values sort alphabetically, which is what a long list of components wants.
 function getAvailable(
   entries: ReleaseNote[],
   pick: (entry: ReleaseNote) => string[],
-  order: string[]
+  order?: string[]
 ): string[] {
   const values = new Set<string>()
   entries.forEach((entry) => pick(entry).forEach((value) => values.add(value)))
-  return Array.from(values).sort(orderBy(order))
+  const found = Array.from(values)
+  return order ? found.sort(orderBy(order)) : found.sort((a, b) => a.localeCompare(b))
 }
 
 // Work out which checkboxes still lead somewhere, ignoring the facet being calculated so that
@@ -43,14 +45,14 @@ function getAvailable(
 function getFilteredAvailableOptions(
   entries: ReleaseNote[],
   search: string,
-  selectedTypes: string[],
+  selectedCategories: string[],
   selectedComponents: string[],
   selectedPlatforms: string[]
 ) {
   const survivors = (exclude: Facet) =>
     entries
       .filter((entry) => searchFilter(search, entry))
-      .filter((e) => exclude === 'types' || matchesAny(selectedTypes, e.updateType))
+      .filter((e) => exclude === 'types' || matchesAny(selectedCategories, e.category))
       .filter(
         (e) => exclude === 'components' || matchesAny(selectedComponents, e.components)
       )
@@ -59,16 +61,12 @@ function getFilteredAvailableOptions(
       )
 
   return {
-    availableTypes: getAvailable(
+    availableCategories: getAvailable(
       survivors('types'),
-      (e) => e.updateType,
-      UpdateTypeOrder
-    ) as UpdateType[],
-    availableComponents: getAvailable(
-      survivors('components'),
-      (e) => e.components,
-      ComponentOrder
-    ),
+      (e) => e.category,
+      CategoryOrder
+    ) as Category[],
+    availableComponents: getAvailable(survivors('components'), (e) => e.components),
     availablePlatforms: getAvailable(
       survivors('platforms'),
       (e) => e.platforms,
@@ -80,19 +78,19 @@ function getFilteredAvailableOptions(
 // Manages all filter state and the derived option lists for the release notes page
 export const useReleaseNoteFilters = () => {
   const [search, setSearch] = useState('')
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([])
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedComponents, setSelectedComponents] = useState<string[]>([])
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([])
 
   const entries = useReleaseNotes()
 
-  const allAvailableTypes = useMemo(
-    () => getAvailable(entries, (e) => e.updateType, UpdateTypeOrder) as UpdateType[],
+  const allAvailableCategories = useMemo(
+    () => getAvailable(entries, (e) => e.category, CategoryOrder) as Category[],
     [entries]
   )
 
   const allAvailableComponents = useMemo(
-    () => getAvailable(entries, (e) => e.components, ComponentOrder),
+    () => getAvailable(entries, (e) => e.components),
     [entries]
   )
 
@@ -106,33 +104,33 @@ export const useReleaseNoteFilters = () => {
       getFilteredAvailableOptions(
         entries,
         search,
-        selectedTypes,
+        selectedCategories,
         selectedComponents,
         selectedPlatforms
       ),
-    [entries, search, selectedTypes, selectedComponents, selectedPlatforms]
+    [entries, search, selectedCategories, selectedComponents, selectedPlatforms]
   )
 
   const filteredEntries = useMemo(
     () =>
       entries
         .filter((entry) => searchFilter(search, entry))
-        .filter((entry) => matchesAny(selectedTypes, entry.updateType))
+        .filter((entry) => matchesAny(selectedCategories, entry.category))
         .filter((entry) => matchesAny(selectedComponents, entry.components))
         .filter((entry) => matchesAny(selectedPlatforms, entry.platforms)),
-    [entries, search, selectedTypes, selectedComponents, selectedPlatforms]
+    [entries, search, selectedCategories, selectedComponents, selectedPlatforms]
   )
 
   return {
     search,
     setSearch,
-    selectedTypes,
-    setSelectedTypes,
+    selectedCategories,
+    setSelectedCategories,
     selectedComponents,
     setSelectedComponents,
     selectedPlatforms,
     setSelectedPlatforms,
-    allAvailableTypes,
+    allAvailableCategories,
     allAvailableComponents,
     allAvailablePlatforms,
     filteredAvailableOptions,

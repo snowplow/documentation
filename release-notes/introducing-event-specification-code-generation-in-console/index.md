@@ -2,7 +2,7 @@
 title: "Introducing event specification code generation in Console"
 description: "We have introduced tracking code generation directly in the Snowplow Console for event specifications."
 date: "2025-11-25"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

@@ -2,7 +2,7 @@
 title: "Introducing event specification inference and a new publishing workflow"
 description: "We are pleased to introduce Event Specification Inference, a new capability rolling out this week within Event Studio that automatically matches incoming events to your defined event specifications in the pipeline."
 date: "2026-03-03"
-update_type:
+category:
   - "Product news"
 components:
   - "Trackers"

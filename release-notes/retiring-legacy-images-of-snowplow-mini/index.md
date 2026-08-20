@@ -2,7 +2,7 @@
 title: "Retiring legacy images of Snowplow Mini"
 description: "This knowledge base article has been deprecated as of 2026, but may still be used for research for legacy component assistance."
 date: "2025-02-06"
-update_type:
+category:
   - "Release notes"
 components:
   - "Testing"

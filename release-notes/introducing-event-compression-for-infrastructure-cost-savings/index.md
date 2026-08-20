@@ -2,7 +2,7 @@
 title: "Introducing event compression for infrastructure cost savings"
 description: "We have released a new feature: event compression, available on AWS, Azure and GCP."
 date: "2025-10-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Pipeline components"

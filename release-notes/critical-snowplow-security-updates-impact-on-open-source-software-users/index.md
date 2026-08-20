@@ -2,7 +2,7 @@
 title: "Critical Snowplow security updates and their impact on open source software users"
 description: "This is an update to our previous notification informing users of Snowplow Open Source Software releases (pre-2024) of the release of security patches for 5 CVEs, of which 4 are critical DOS type issues."
 date: "2025-04-02"
-update_type:
+category:
   - "Product news"
 components:
   - "Trackers"

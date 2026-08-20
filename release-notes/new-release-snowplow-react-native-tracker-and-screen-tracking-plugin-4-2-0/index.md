@@ -2,7 +2,7 @@
 title: "Snowplow React Native tracker and screen tracking plugin 4.2.0 released"
 description: "We are excited to announce the 4.2 release of the Snowplow JavaScript trackers!"
 date: "2025-01-13"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

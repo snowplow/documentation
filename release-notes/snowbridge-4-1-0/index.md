@@ -2,7 +2,7 @@
 title: "Snowbridge 4.1.0"
 description: "This release improves configurable retries and introduces a breaking change to its configuration."
 date: "2025-01-21"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

@@ -23,7 +23,7 @@ function readArticle(contentPath, slug) {
 
   const { data } = matter(fs.readFileSync(file, 'utf8'))
   const date = normalizeDate(data.date)
-  const updateType = toArray(data.update_type)
+  const category = toArray(data.category)
 
   if (!data.title) {
     throw new Error(`[${PLUGIN_NAME}] ${slug}/index.md is missing a title`)
@@ -33,8 +33,8 @@ function readArticle(contentPath, slug) {
       `[${PLUGIN_NAME}] ${slug}/index.md needs a date in YYYY-MM-DD format, got "${date}"`
     )
   }
-  if (updateType.length === 0) {
-    throw new Error(`[${PLUGIN_NAME}] ${slug}/index.md is missing update_type`)
+  if (category.length === 0) {
+    throw new Error(`[${PLUGIN_NAME}] ${slug}/index.md is missing category`)
   }
 
   return {
@@ -42,7 +42,7 @@ function readArticle(contentPath, slug) {
     title: data.title,
     description: data.description ?? '',
     date,
-    updateType,
+    category,
     components: toArray(data.components),
     platforms: toArray(data.platforms),
   }

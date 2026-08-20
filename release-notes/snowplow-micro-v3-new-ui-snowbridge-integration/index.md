@@ -2,7 +2,7 @@
 title: "Snowplow Micro v3: new UI and Snowbridge integration"
 description: "Snowplow Micro is a convenient and super-portable tool for testing and debugging your tracking code, enrichments, and so on."
 date: "2025-11-05"
-update_type:
+category:
   - "Release notes"
 components:
   - "Pipeline components"

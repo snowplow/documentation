@@ -2,7 +2,7 @@
 title: "Snowtype v0.12.0 released"
 description: "We’ve just released a new version of Snowtype with a minified code option for Google Tag Manager (GTM)."
 date: "2025-02-12"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

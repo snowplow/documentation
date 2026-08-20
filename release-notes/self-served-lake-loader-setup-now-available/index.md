@@ -2,7 +2,7 @@
 title: "Self-served Lake Loader setup now available"
 description: "More and more organizations are adopting the lakehouse paradigm – storing their data using open table formats like Apache Iceberg and Delta Lake and using a data warehouse for efficient querying."
 date: "2025-01-27"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"

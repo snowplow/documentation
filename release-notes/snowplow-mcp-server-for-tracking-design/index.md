@@ -2,7 +2,7 @@
 title: "Snowplow MCP Server for tracking design"
 description: "We’re excited to introduce the Snowplow MCP Server for Tracking Design, a new tool that enables data engineers, product managers, and analysts to collaborate with AI to design future-proof Snowplow tracking faster."
 date: "2025-06-25"
-update_type:
+category:
   - "Release notes"
 components:
   - "Event Studio"

@@ -2,7 +2,7 @@
 title: "Snowplow dbt Ecommerce v0.9.3 released"
 description: "We’re pleased to announce a new release for E-Commerce."
 date: "2025-07-28"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

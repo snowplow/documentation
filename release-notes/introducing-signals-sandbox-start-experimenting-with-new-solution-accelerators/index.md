@@ -2,7 +2,7 @@
 title: "Introducing Signals Sandbox: start experimenting with new solution accelerators"
 description: "The Snowplow Signals Sandbox is available today to all users."
 date: "2025-11-05"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

@@ -12,7 +12,7 @@ enum DocsTab {
 const TABS: { value: DocsTab; label: string }[] = [
   { value: DocsTab.Docs, label: 'Docs' },
   { value: DocsTab.Tutorials, label: 'Tutorials' },
-  { value: DocsTab.ReleaseNotes, label: 'Release notes' },
+  { value: DocsTab.ReleaseNotes, label: 'Releases' },
 ]
 
 function getCurrentTab(pathname: string): DocsTab {

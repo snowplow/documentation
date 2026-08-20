@@ -31,9 +31,9 @@ const ReleaseNotesList: FC = () => {
   const isMobile = useIsMobile()
   const {
     setSearch,
-    selectedTypes,
-    setSelectedTypes,
-    allAvailableTypes,
+    selectedCategories,
+    setSelectedCategories,
+    allAvailableCategories,
     selectedComponents,
     setSelectedComponents,
     allAvailableComponents,
@@ -48,11 +48,11 @@ const ReleaseNotesList: FC = () => {
   // Collapsed on mobile so the list stays reachable without scrolling past every filter
   const defaultAccordionValue = isMobile
     ? []
-    : ['update-type', 'components', 'platforms']
+    : ['category', 'components', 'platforms']
 
   const filters = (
     <div className="space-y-4">
-      <SearchInput onSearch={setSearch} placeholder="Search release notes" />
+      <SearchInput onSearch={setSearch} placeholder="Search releases" />
 
       <Accordion
         type="multiple"
@@ -60,15 +60,15 @@ const ReleaseNotesList: FC = () => {
         className="w-full"
         defaultValue={defaultAccordionValue}
       >
-        <AccordionItem value="update-type">
-          <AccordionTrigger>Filter by update type</AccordionTrigger>
+        <AccordionItem value="category">
+          <AccordionTrigger>Filter by category</AccordionTrigger>
           <AccordionContent>
             <CheckboxFilter
-              name="update-type"
-              options={allAvailableTypes}
-              selectedValues={selectedTypes}
-              availableValues={filteredAvailableOptions.availableTypes}
-              setSelected={setSelectedTypes}
+              name="category"
+              options={allAvailableCategories}
+              selectedValues={selectedCategories}
+              availableValues={filteredAvailableOptions.availableCategories}
+              setSelected={setSelectedCategories}
             />
           </AccordionContent>
         </AccordionItem>
@@ -105,7 +105,7 @@ const ReleaseNotesList: FC = () => {
   return (
     <>
       <Head>
-        <title>Release notes | Snowplow Documentation</title>
+        <title>Releases | Snowplow Documentation</title>
       </Head>
 
       <div className="w-full">
@@ -132,7 +132,7 @@ const ReleaseNotesList: FC = () => {
           <div className="flex-1 pt-6 pr-6 pb-6">
             <div className="w-full max-w-6xl">
               <p className="text-sm text-muted-foreground mb-4">
-                Showing {filteredEntries.length} of {totalCount} entries
+                Showing {filteredEntries.length} of {totalCount} releases
               </p>
               <ReleaseNotesTable entries={filteredEntries} />
             </div>

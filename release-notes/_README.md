@@ -14,7 +14,7 @@ descriptive, and do not change it once published.
 title: "Introducing event compression for infrastructure cost savings"
 description: "One or two sentences. Shown on the listing page and used for SEO."
 date: "2025-10-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Destinations"
@@ -24,10 +24,10 @@ platforms:
 ---
 ```
 
-`title`, `date`, and `update_type` are required — the build fails without them. `platforms`
+`title`, `date`, and `category` are required — the build fails without them. `platforms`
 is optional; leave it out unless the note is specific to one cloud or warehouse.
 
-### update_type
+### category
 
 Pick from these two. An announcement that doubles as a release note can carry both.
 

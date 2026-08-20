@@ -2,7 +2,7 @@
 title: "Data products are now tracking plans"
 description: "We have made two updates to simplify how you design and manage your tracking in Snowplow Console: renaming Data Products to Tracking Plans, and merging the Tracking Catalog functionality into Data Structures."
 date: "2025-02-02"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

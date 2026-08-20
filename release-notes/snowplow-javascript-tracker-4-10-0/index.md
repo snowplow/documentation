@@ -2,7 +2,7 @@
 title: "Snowplow JavaScript tracker 4.10.0"
 description: "This release focuses on webview and single-page app tracking."
 date: "2026-07-27"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

@@ -2,7 +2,7 @@
 title: "Snowtype v0.12.2 released"
 description: "We've just released a new version for Snowtype which enhances the event specification context in Snowtype by adding dataproductdomain as an optional field."
 date: "2025-02-20"
-update_type:
+category:
   - "Release notes"
 components:
   - "Developer tools"

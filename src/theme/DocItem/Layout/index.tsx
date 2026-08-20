@@ -61,7 +61,9 @@ function MarkdownActions() {
     'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal hover:text-[color:var(--ifm-color-primary)]'
 
   return (
-    <div className="not-prose max-w-[740px] mx-auto flex items-center gap-3 -mt-1 mb-8 pl-[0.3rem]">
+    // first:mt-8 covers pages whose plugin instance has no sidebar: they render no
+    // breadcrumbs, so these buttons would otherwise sit flush against the navbar
+    <div className="not-prose max-w-[740px] mx-auto flex items-center gap-3 -mt-1 first:mt-8 mb-8 pl-[0.3rem]">
       <button
         onClick={handleDownload}
         className={buttonClass}

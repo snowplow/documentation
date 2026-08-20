@@ -2,7 +2,7 @@
 title: "Signals January 2026 roundup: 10x latency improvements and more"
 description: "We're continuing to invest in Signals to make it faster, more powerful, and easier to use."
 date: "2026-01-26"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

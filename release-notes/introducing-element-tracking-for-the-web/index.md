@@ -2,7 +2,7 @@
 title: "Introducing element tracking for the web"
 description: "We’re excited to announce the release of Snowplow's Element Tracking plugin for the JavaScript and Browser web trackers, which enables simple tracking of the presence and visibility of web page components."
 date: "2025-05-01"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

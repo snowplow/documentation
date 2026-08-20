@@ -2,7 +2,7 @@
 title: "Snowplow PHP tracker 0.9.0"
 description: "This release updates the GH Actions to use the latest versions of Ubuntu."
 date: "2025-03-03"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

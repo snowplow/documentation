@@ -2,7 +2,7 @@
 title: "Snowplow dbt Media Player v1.0.0 released"
 description: "We're happy to announce a new release for Media Player."
 date: "2026-05-07"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

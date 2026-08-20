@@ -2,7 +2,7 @@
 title: "[Snowplow CDI] New workspace details page"
 description: "It is sometimes useful to revisit key details of your cloud account (AWS, GCP, Azure) associated with Snowplow."
 date: "2025-03-18"
-update_type:
+category:
   - "Release notes"
 components:
   - "Console"

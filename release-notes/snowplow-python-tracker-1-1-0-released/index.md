@@ -2,7 +2,7 @@
 title: "Snowplow Python tracker 1.1.0 released"
 description: "This release updates the GH Actions to use the latest versions of Ubuntu."
 date: "2025-02-28"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

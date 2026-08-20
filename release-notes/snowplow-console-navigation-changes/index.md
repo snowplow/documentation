@@ -2,7 +2,7 @@
 title: "Snowplow Console navigation changes"
 description: "Snowplow has launched a new version of the Console."
 date: "2025-05-19"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

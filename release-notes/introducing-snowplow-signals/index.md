@@ -2,7 +2,7 @@
 title: "Introducing Snowplow Signals"
 description: "We’re excited to announce Snowplow Signals, a real-time customer intelligence system for AI-powered applications."
 date: "2025-05-28"
-update_type:
+category:
   - "Product news"
 components:
   - "Signals"

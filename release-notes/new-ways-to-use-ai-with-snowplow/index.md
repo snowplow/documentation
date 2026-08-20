@@ -2,7 +2,7 @@
 title: "New ways to use AI with Snowplow"
 description: "Today we're announcing two new ways to work with Snowplow using natural language: Snowplow Assistant, an AI assistant built into Snowplow Console, and the Snowplow MCP server, a remote Model Context…"
 date: "2026-05-28"
-update_type:
+category:
   - "Product news"
 components:
   - "Event Studio"

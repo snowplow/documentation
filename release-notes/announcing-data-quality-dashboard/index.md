@@ -2,7 +2,7 @@
 title: "Announcing Data Quality Dashboard"
 description: "We are pleased to announce the general availability of the Data Quality Dashboard for Snowflake."
 date: "2025-03-05"
-update_type:
+category:
   - "Release notes"
 components:
   - "Console"

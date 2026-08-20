@@ -2,7 +2,7 @@
 title: "Snowplow dbt Normalize v0.4.1 released"
 description: "We’re pleased to announce a new release for Normalize."
 date: "2025-07-30"
-update_type:
+category:
   - "Release notes"
 components:
   - "Data models"

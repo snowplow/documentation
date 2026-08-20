@@ -2,7 +2,7 @@
 title: "Snowplow iOS tracker v6.2.1 released"
 description: "We’re happy to announce a new release for the iOS tracker."
 date: "2025-04-04"
-update_type:
+category:
   - "Release notes"
 components:
   - "Trackers"

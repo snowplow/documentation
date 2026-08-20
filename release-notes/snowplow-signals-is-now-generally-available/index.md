@@ -2,7 +2,7 @@
 title: "Snowplow Signals is now generally available"
 description: "Snowplow Signals is now generally available."
 date: "2025-09-30"
-update_type:
+category:
   - "Product news"
   - "Release notes"
 components:

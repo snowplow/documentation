@@ -198,6 +198,8 @@ Make sure that lifecycle autotracking is enabled (it is by default) in order for
 The foreground time is translated into the engaged time during modeling with the unified dbt package (see below).
 Foreground and background time together result in the absolute time on screen.
 
+{/* Confirm the iOS tracker version in the paragraph below before merging: it documents a fix that isn't released yet. */}
+
 On iOS, when the app is launched directly into the background and the user later opens it, the time on screen before the app becomes visible counts toward `background_sec`. Before iOS tracker version 6.3.0 it counted toward `foreground_sec`. A screen that both starts and ends while the app is in the background still counts toward `foreground_sec`, because no foreground or background transition happens during its lifetime. Read more about [background-only launches](/docs/sources/mobile-trackers/tracking-events/lifecycle-tracking/index.md#background-only-launches).
 
 ### List item view tracking

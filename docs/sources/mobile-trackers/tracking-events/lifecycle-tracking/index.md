@@ -70,8 +70,10 @@ Reading the application state at tracker creation also tells session tracking th
 Because the `Foreground` event is tracked, the `screen_summary` entity attributes the time before it to `background_sec` rather than `foreground_sec`. Read more in [Screen time](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-time).
 :::
 
+The background-only launch behavior described above is specific to iOS and tvOS. The other platforms that the native mobile trackers support behave differently.
+
 ### Platform coverage
 
-Of the platforms supported by the iOS tracker, only iOS and tvOS observe application lifecycle transitions. On macOS, watchOS, and visionOS, the tracker doesn't track `Foreground` or `Background` events, and the `LifecycleEntity` always reports `isVisible: true`.
+Of the platforms supported by the iOS tracker, only iOS and tvOS observe application lifecycle transitions. On macOS, watchOS, and visionOS, the tracker doesn't track `Foreground` or `Background` events, so the `LifecycleEntity` reports `isVisible: true` unless you track a `Background` event yourself.
 
 The Android tracker reports `isVisible: true` for events tracked in a background-only launch, such as one started by WorkManager or Firebase Cloud Messaging.

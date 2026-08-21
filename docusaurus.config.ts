@@ -104,6 +104,17 @@ const config: Config = {
         showLastUpdateTime: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'release-notes',
+        path: 'release-notes',
+        routeBasePath: 'release-notes',
+        sidebarPath: false,
+        showLastUpdateTime: false,
+      },
+    ],
+    './plugins/docusaurus-plugin-release-notes',
     './plugins/docusaurus-plugin-snowplow-schema',
     [
       './plugins/docusaurus-plugin-llms-txt',
@@ -114,9 +125,11 @@ const config: Config = {
         excludeRoutes: [
           '/',
           '/tutorials/',
+          '/release-notes/',
           '/docs/signals/',
           '/docs/api-reference/',
         ],
+        contentDirs: ['docs', 'tutorials', 'release-notes'],
         contentSelectors: ['.theme-doc-markdown', 'article', 'main'],
         enableMarkdownFiles: true,
         enableLlmsFullTxt: true,

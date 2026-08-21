@@ -62,7 +62,7 @@ curl -s -X POST "$IDENTITIES_URL/erasure" \
       {"type": "user_id", "value": "alice@example.com"},
       {"type": "user_id", "value": "nobody@example.com"}
     ],
-    "snowplow_ids": ["550e8400-e29b-41d4-a716-446655440000"],
+    "snowplow_ids": ["sp_5ntwgrjc3kdm7vhq2bzxf4pyla"],
     "dry_run": true
   }'
 ```
@@ -76,14 +76,14 @@ Response (`200 OK`):
     {
       "request": {"type": "user_id", "value": "alice@example.com"},
       "result": {
-        "snowplow_ids": ["7c9e6679-...", "a1b2c3d4-..."],
+        "snowplow_ids": ["sp_2bzxf4pyla5ntwgrjc3kdm7vhq", "sp_kdm7vhq2bzxf4pyla5ntwgrjc3"],
         "identifiers_affected": 5
       }
     },
     {
-      "request": {"snowplow_id": "550e8400-e29b-41d4-a716-446655440000"},
+      "request": {"snowplow_id": "sp_5ntwgrjc3kdm7vhq2bzxf4pyla"},
       "result": {
-        "snowplow_ids": ["550e8400-..."],
+        "snowplow_ids": ["sp_5ntwgrjc3kdm7vhq2bzxf4pyla"],
         "identifiers_affected": 2
       }
     }
@@ -115,7 +115,7 @@ curl -s -X POST "$IDENTITIES_URL/erasure" \
       {"type": "user_id", "value": "alice@example.com"},
       {"type": "user_id", "value": "nobody@example.com"}
     ],
-    "snowplow_ids": ["550e8400-e29b-41d4-a716-446655440000"]
+    "snowplow_ids": ["sp_5ntwgrjc3kdm7vhq2bzxf4pyla"]
   }'
 ```
 
@@ -128,14 +128,14 @@ Response (`200 OK`):
     {
       "request": {"type": "user_id", "value": "alice@example.com"},
       "result": {
-        "snowplow_ids": ["7c9e6679-...", "a1b2c3d4-..."],
+        "snowplow_ids": ["sp_2bzxf4pyla5ntwgrjc3kdm7vhq", "sp_kdm7vhq2bzxf4pyla5ntwgrjc3"],
         "identifiers_affected": 5
       }
     },
     {
-      "request": {"snowplow_id": "550e8400-e29b-41d4-a716-446655440000"},
+      "request": {"snowplow_id": "sp_5ntwgrjc3kdm7vhq2bzxf4pyla"},
       "result": {
-        "snowplow_ids": ["550e8400-..."],
+        "snowplow_ids": ["sp_5ntwgrjc3kdm7vhq2bzxf4pyla"],
         "identifiers_affected": 2
       }
     }

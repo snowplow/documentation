@@ -15,6 +15,8 @@ The [Snowplow Assistant](/docs/llms-support/console-agent/) is built into [Snowp
 
 Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/llms-support/console-agent/) for what it covers and how it handles your data.
 
+![The Manage organization page in Console settings, with the Snowplow Assistant section showing an Enabled badge, a custom instructions panel, and a Disable button](./images/console-assistant-enabled.png)
+
 On this route you can skip straight to [defining attributes](/tutorials/signals-mcp/define-attributes-conversationally). The rest of this page connects the MCP server to your own assistant instead.
 
 ## Install the Snowplow plugin

@@ -82,7 +82,7 @@ Before publishing, you can test what the group would calculate. Testing runs the
 Test tut_mcp_session_metrics against recent events before we publish.
 ```
 
-The result is a small table: one row per `domain_sessionid` value found in the sample, with a column for each of the three attributes. Use it to sanity-check the definitions, and iterate conversationally if something looks wrong:
+The assistant presents the sample results in its own way: some render a small table with one row per `domain_sessionid` value found in the sample, others summarize the values for each attribute in prose. Either way, use the results to sanity-check the definitions, and iterate conversationally if something looks wrong:
 
 * If `most_recent_browser` is always null, the YAUAA enrichment probably isn't enabled on your pipeline
 * If `first_referrer` is mostly null, your traffic may be mostly direct, so try a test visit that arrives via a link

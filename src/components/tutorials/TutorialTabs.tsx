@@ -5,27 +5,40 @@ import { useHistory, useLocation } from '@docusaurus/router'
 enum DocsTab {
   Docs = '/docs',
   Tutorials = '/tutorials',
+  ReleaseNotes = '/release-notes',
 }
+
+// Order matters: the first prefix that matches wins, and /docs is the fallback
+const TABS: { value: DocsTab; label: string }[] = [
+  { value: DocsTab.Docs, label: 'Docs' },
+  { value: DocsTab.Tutorials, label: 'Tutorials' },
+  { value: DocsTab.ReleaseNotes, label: 'Releases' },
+]
 
 function getCurrentTab(pathname: string): DocsTab {
-  return pathname.startsWith(DocsTab.Tutorials)
-    ? DocsTab.Tutorials
-    : DocsTab.Docs
+  const match = TABS.find(
+    ({ value }) => value !== DocsTab.Docs && pathname.startsWith(value)
+  )
+  return match ? match.value : DocsTab.Docs
 }
 
-export const DocsTutorialsTabsMobile: React.FC = () => {
-  const history = useHistory()
+function useCurrentTab(): DocsTab {
   const location = useLocation()
-
   const [tab, setTab] = useState<DocsTab>(DocsTab.Docs)
 
   useEffect(() => {
     setTab(getCurrentTab(location.pathname))
   }, [location.pathname])
 
+  return tab
+}
+
+export const DocsTutorialsTabsMobile: React.FC = () => {
+  const history = useHistory()
+  const tab = useCurrentTab()
+
   const handleChange = (_e: SyntheticEvent, newValue: DocsTab) => {
     history.push(newValue)
-    setTab(newValue)
   }
 
   return (
@@ -46,30 +59,21 @@ export const DocsTutorialsTabsMobile: React.FC = () => {
         },
       }}
     >
-      <Tab value={DocsTab.Docs} label="Docs" sx={{ textTransform: 'none' }} />
-      <Tab
-        value={DocsTab.Tutorials}
-        label="Tutorials"
-        sx={{ textTransform: 'none' }}
-      />
+      {TABS.map(({ value, label }) => (
+        <Tab
+          key={value}
+          value={value}
+          label={label}
+          sx={{ textTransform: 'none' }}
+        />
+      ))}
     </Tabs>
   )
 }
 
 export const DocsTutorialsTabsDesktop: React.FC = () => {
   const history = useHistory()
-  const location = useLocation()
-
-  const [tab, setTab] = useState<DocsTab>(DocsTab.Docs)
-
-  useEffect(() => {
-    setTab(getCurrentTab(location.pathname))
-  }, [location.pathname])
-
-  const changeTab = (tab: DocsTab) => {
-    history.push(tab)
-    setTab(tab)
-  }
+  const tab = useCurrentTab()
 
   return (
     <Tabs
@@ -82,18 +86,15 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
         className: 'docs-tutorial-tab-indicator',
       }}
     >
-      <Tab
-        onClick={() => changeTab(DocsTab.Docs)}
-        value={DocsTab.Docs}
-        label="Docs"
-        sx={{ textTransform: 'none' }}
-      />
-      <Tab
-        onClick={() => changeTab(DocsTab.Tutorials)}
-        value={DocsTab.Tutorials}
-        label="Tutorials"
-        sx={{ textTransform: 'none' }}
-      />
+      {TABS.map(({ value, label }) => (
+        <Tab
+          key={value}
+          onClick={() => history.push(value)}
+          value={value}
+          label={label}
+          sx={{ textTransform: 'none' }}
+        />
+      ))}
     </Tabs>
   )
 }

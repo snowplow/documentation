@@ -176,7 +176,8 @@ const TutorialList: FC = () => {
           {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
           {!isMobile && (
             <div className="w-[320px] flex-shrink-0">
-              <div className="p-6 sticky top-12">
+              {/* Four facets can run past the fold, so the sticky column scrolls on its own */}
+              <div className="p-6 sticky top-12 max-h-[calc(100vh-4rem)] overflow-y-auto">
                 {content.filters}
               </div>
             </div>

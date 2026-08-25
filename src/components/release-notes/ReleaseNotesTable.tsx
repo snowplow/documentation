@@ -2,11 +2,11 @@ import React from 'react'
 import Link from '@docusaurus/Link'
 import { cn } from '@site/src/lib/utils'
 import { ReleaseNote } from './models'
-import { formatUpdateDate } from './utils'
+import { formatUpdateDateShort } from './utils'
 import CategoryBadge from './CategoryBadge'
 
 const gridColumns =
-  'lg:grid lg:grid-cols-[minmax(0,3.2fr)_minmax(0,1fr)_minmax(0,1.2fr)_7rem] lg:gap-5 lg:items-center'
+  'lg:grid lg:grid-cols-[minmax(0,3.9fr)_minmax(0,1fr)_minmax(0,0.9fr)_7rem] lg:gap-5 lg:items-center'
 
 const ReleaseNoteRow: React.FC<{ entry: ReleaseNote }> = ({ entry }) => (
   <Link
@@ -51,7 +51,7 @@ const ReleaseNoteRow: React.FC<{ entry: ReleaseNote }> = ({ entry }) => (
       <div className="flex items-center gap-2 lg:justify-end">
         <span className="lg:hidden text-sm text-muted-foreground">Date:</span>
         <span className="text-sm text-muted-foreground tabular-nums whitespace-nowrap">
-          {formatUpdateDate(entry.date)}
+          {formatUpdateDateShort(entry.date)}
         </span>
       </div>
     </div>

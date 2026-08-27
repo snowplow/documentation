@@ -16,6 +16,11 @@ we recommend using environment variables for sensitive values - which can be don
 
 TLS may be configured by providing the `key_file`, `cert_file` and `ca_file` options with paths to the relevant TLS files.
 
+To compress data before sending it, set the `compression_type` option to `gzip`, `snappy`, `lz4`, or `zstd`. For the `gzip` and `zstd` codecs, you can also tune the compression level with the `compression_level` option. Compression reduces network usage but may add latency. The `zstd` codec requires Kafka version 2.1.0 or later, and `lz4` requires 0.10.0 or later.
+
+:::note[Added in version 6.1.0]
+These options replace the deprecated `compress` boolean option, which compresses with `snappy`. Setting `compress` still works but logs a warning. If both are set, `compression_type` takes precedence.
+:::
 
 ## Configuration options
 

@@ -1,6 +1,6 @@
 ---
 title: "New in Signals: attributes built for ML features"
-description: "Recency and tenure aggregations, date part modifiers on timestamp properties, and an optional event filter make it possible to express common ML model features as Signals attributes."
+description: "Recency, tenure, and time-of-day attributes, plus attributes that span every event type, cover more of the feature set a behavioral model needs."
 date: "2026-08-27"
 category:
   - "Product news"
@@ -8,68 +8,32 @@ components:
   - "Signals"
   - "AI tools"
 ---
-The [training dataset builder](/release-notes/new-in-signals-ml-training-datasets/) turns the attribute groups you already serve from into a labeled training table in your warehouse, so one definition produces both the feature your model trains on and the feature it scores against.
+A propensity model is mostly a question about timing and habit. Is this visitor back sooner than usual, or have they gone quiet? Are they new, or have they been around for months? Do they shop on weekday evenings, and is this a weekday evening? How many separate days have they shown up at all?
 
-That makes the definitions the limit. Three additions widen what you can express as an attribute.
+Those features were awkward to build in Signals. You could count a user's page views and take the last value of a property, but recency, tenure, and time-of-day meant pulling raw timestamps out and doing the arithmetic yourself, in two places: once over history to train, and again at serving time to score. Since the [training dataset builder](/release-notes/new-in-signals-ml-training-datasets/) now generates training data from the same attribute definitions you serve from, anything you can't define as an attribute is work you maintain twice.
 
-## Measure recency and tenure
+Three additions close most of that gap.
 
-`time_since_last` and `time_since_first` return how long ago an event happened, in the `time_unit` you pick (`s`, `min`, `h`, or `d`). Minutes since the last page view:
+## Recency and tenure
 
-```python
-Attribute(
-    name="minutes_since_last_page_view",
-    type="double",
-    aggregation="time_since_last",
-    time_unit="min",
-    events=[Event(vendor="com.snowplowanalytics.snowplow", name="page_view", version="1-0-0")],
-)
-```
+[Time since aggregations](/docs/signals/attributes/attributes/#time-since-aggregations) answer "how long ago" directly, in seconds, minutes, hours, or days. `time_since_last` gives you recency, the signal behind churn, re-engagement, and whether a session has gone quiet. `time_since_first` gives you tenure: cohort age, onboarding progress, lifecycle stage.
 
-Swap the aggregation for `time_since_first` and the same definition gives you tenure instead of recency: how long since the user's first page view, for cohort age or lifecycle stage. Recency feeds churn and re-engagement features, or an intervention rule such as "this session has gone quiet for more than five minutes."
+Both are computed when you read the attribute, not when the event arrives, so a model scoring someone mid-session sees how long they have actually been idle. They also work in [intervention rules](/docs/signals/interventions/), which is how you act on "this visitor has been inactive for five minutes" while they are still on the page.
 
-Both always measure against the event's `derived_tstamp`, so there's no `property` to set. Signals computes the value when you read the attribute, not when the event arrives, so a model scoring a visitor mid-session sees how long that visitor has actually been idle rather than a stored number that ages. Out-of-order events can't produce a negative result, as the value is clamped at 0.
+## Seasonality and habit
 
-## Apply a date part to a timestamp
+A raw timestamp is close to unusable as a feature, since every value is unique. [Date parts](/docs/signals/attributes/attributes/#apply-a-date-part) reduce one to the part a model can learn from: hour of day, day of week, month of year, or the day, week, and month a user was active.
 
-A raw timestamp is hard to use as a feature because every value is distinct. The `date_part` modifier transforms it before aggregation, into either a cyclical integer (`hour_of_day`, `day_of_week`, `month_of_year`) or a truncated date string (`active_day`, `active_week`, `active_month`).
+Combined with the aggregations Signals already has, that covers a useful range. Peak shopping hour, most common active weekday, an hour-by-hour histogram of when someone engages, or a count of the distinct days they have shown up, which is a decent proxy for habit. Date parts also work in [criteria](/docs/signals/attributes/attributes/#filter-with-criteria), so you can build features from weekday traffic only.
 
-```python
-AtomicProperty(name="derived_tstamp", date_part="hour_of_day")
-```
+## Whole-pipeline features
 
-Because the transform happens before aggregation, the aggregation you pair it with decides the feature:
+Some features are about a user's overall activity rather than one behavior, and those needed you to list every event schema in your pipeline and keep the list current. The [event filter is now optional](/docs/signals/attributes/attributes/#select-events): leave it empty and the attribute covers every event Signals processes, including event types you add later.
 
-| Aggregation over `hour_of_day` | Result |
-| --- | --- |
-| `most_frequent` | The user's peak hour, as an `int32` such as `14` |
-| `category_count` | An hour-of-day histogram of event counts |
-| `unique_list` | The distinct hours the user was active |
-
-Pair `active_day` with `unique_list` for the list of dates a user showed up, or with `approx_count_distinct` for a count of active days. Filtering to weekdays is `day_of_week` `in` `[1,2,3,4,5]`, following ISO 8601 where 1 is Monday.
-
-The modifier works on atomic timestamp fields such as `derived_tstamp`, and on any event or entity property whose schema declares `format: date-time`, so a timestamp you track yourself behaves the same way.
-
-## Calculate attributes across all event types
-
-Pass `events=[]` and the attribute is calculated from every event Signals processes, including event types you add later. A total engagement counter over a rolling 30-day window:
-
-```python
-Attribute(
-    name="n_events_30d",
-    type="int32",
-    events=[],
-    aggregation="counter",
-    period=timedelta(days=30),
-)
-```
-
-Previously this meant listing every schema in your pipeline and updating the list whenever someone added an event. The same applies to attributes over atomic properties: a `first` aggregation on `mkt_medium` with no event filter captures first-touch marketing medium from whichever event carried it, with no need to work out in advance which schemas those are.
-
-One thing to know: an empty filter looks the same as one you meant to fill in and didn't. Signals treats it as match-all rather than returning a validation error, so check that's what you intended.
+That makes total engagement counters a single definition, and it lets an attribute follow a property wherever it appears, such as capturing first-touch `mkt_medium` from whichever event carried it. Worth knowing: an empty filter looks the same as one you meant to fill in and didn't, and Signals reads it as match-all rather than flagging it.
 
 ## Getting started
 
-All three are available in Console and in the Python SDK, for both stream and batch attribute groups. Upgrade to `snowplow-signals` version 0.4.8 or later to define them from the SDK.
+All three are available in Console and in the Python SDK, for both stream and batch attribute groups. Upgrade to `snowplow-signals` version 0.4.8 or later to use them from the SDK.
 
-The documentation on [defining attributes](/docs/signals/attributes/attributes/) has the full reference, including every aggregation that accepts a date part and the attribute types each date part family requires. For using these attributes as model features, see [creating ML training datasets](/docs/signals/ml-training-datasets/).
+The [defining attributes](/docs/signals/attributes/attributes/) page has runnable examples for each, including [time since last event](/docs/signals/attributes/attributes/#time-since-last-event), [most frequent hour of day](/docs/signals/attributes/attributes/#most-frequent-hour-of-day), and a [global event counter](/docs/signals/attributes/attributes/#global-event-counter). To use these as model features, see [creating ML training datasets](/docs/signals/ml-training-datasets/).

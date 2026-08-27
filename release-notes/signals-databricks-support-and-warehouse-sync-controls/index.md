@@ -24,7 +24,7 @@ Warehouse attribute groups sync hourly by default. If your source table updates 
 You can now pick a sync frequency of 6, 12, or 24 hours when you create the group in Console. In the Python SDK, set `refresh_rate` on your `ExternalBatchAttributeGroup`:
 
 ```python
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 attribute_group = ExternalBatchAttributeGroup(
     name="user_transactions",

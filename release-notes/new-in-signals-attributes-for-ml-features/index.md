@@ -18,7 +18,7 @@ Three additions close most of that gap.
 
 [Time since aggregations](/docs/signals/attributes/attributes/#time-since-aggregations) answer "how long ago" directly, in seconds, minutes, hours, or days. `time_since_last` gives you recency, the signal behind churn, re-engagement, and whether a session has gone quiet. `time_since_first` gives you tenure: cohort age, onboarding progress, lifecycle stage.
 
-Both are computed when you read the attribute, not when the event arrives, so a model scoring someone mid-session sees how long they have actually been idle. They also work in [intervention rules](/docs/signals/interventions/), which is how you act on "this visitor has been inactive for five minutes" while they are still on the page.
+Both are computed when you read the attribute, not when the event arrives, so a model scoring someone mid-session sees how long they have actually been idle rather than a value that aged in storage.
 
 ## Seasonality and habit
 

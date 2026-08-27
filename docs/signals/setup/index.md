@@ -20,7 +20,7 @@ Log in to Console and navigate to the **Signals** section. Click **Enable** to s
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
 
 :::note[Warehouse connection]
-Signals can also be deployed without connecting to a warehouse. Only Snowflake and BigQuery are supported currently.
+Signals can also be deployed without connecting to a warehouse. Snowflake, BigQuery, and Databricks are supported.
 :::
 
 You'll need to:

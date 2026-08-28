@@ -42,6 +42,15 @@ Following the `llms.txt` standard, you can access the Markdown page directly by 
 
 Let your LLM know that this format is available, so it can retrieve content efficiently.
 
+### Tutorials as single pages
+
+Each tutorial is also available as a single Markdown file containing all of its steps in order. Tutorials have no page of their own on the site, so these files don't follow the URL pattern above. Append `.md` to the tutorial's directory path instead:
+
+- Tutorial step: `https://docs.snowplow.io/tutorials/signals-quickstart/start/`
+- Complete tutorial: `https://docs.snowplow.io/tutorials/signals-quickstart.md`
+
+The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.
+
 ## Signals
 
 Use [Signals](/docs/signals/concepts/index.md) to provide real-time behavioral context to your AI applications. It computes user attributes from your event stream and warehouse data, and makes them available to your applications via the [Profiles Store](/docs/signals/concepts/index.md#profiles-store) API.

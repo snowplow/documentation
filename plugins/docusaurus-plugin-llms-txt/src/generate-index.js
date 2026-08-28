@@ -188,6 +188,11 @@ function buildTutorialsGroup(pages, tutorialMeta, linkOptions) {
   }
 }
 
+/**
+ * Keep the separators ASCII. These files are served as text/plain and
+ * text/markdown with no charset, so any multi-byte character we introduce
+ * turns into mojibake for clients that fall back to Latin-1.
+ */
 function formatTutorialFacets(meta, stepCount) {
   const facets = []
 
@@ -199,7 +204,7 @@ function formatTutorialFacets(meta, stepCount) {
 
   facets.push(`${stepCount} ${stepCount === 1 ? 'step' : 'steps'}`)
 
-  return facets.join(' · ')
+  return facets.join('; ')
 }
 
 // --- Release notes ----------------------------------------------------------
@@ -213,7 +218,7 @@ function buildReleaseNotesGroup(pages, linkOptions) {
   if (releaseNotes.length === 0) return null
 
   const entries = releaseNotes.map((page) => {
-    const date = page.date ? `${page.date} — ` : ''
+    const date = page.date ? `${page.date} ` : ''
     const components = page.components?.length ? ` (${page.components.join(', ')})` : ''
     const desc = page.description ? `: ${page.description}` : ''
 

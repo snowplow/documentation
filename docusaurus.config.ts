@@ -40,6 +40,7 @@ const config: Config = {
     require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
     require.resolve('./src/js/mermaidEnlarge.js'),
+    require.resolve('./src/js/snowplowReferrer.js'),
     require.resolve('./src/qualified.js'),
   ],
 

@@ -326,6 +326,79 @@ Snowplow.defaultTracker.track(event);
   </TabItem>
 </Tabs>
 
+### Manually ending a screen
+
+Automatic screen view tracking doesn't always produce a `screen_end` event when the user actually leaves a screen. This happens, for example, when a WebView using the JavaScript tracker is presented on top of a native screen: a `page_view` tracked from the WebView doesn't end the underlying native screen, so the [`screen_summary` entity](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity) keeps accumulating engagement time and events tracked from the WebView still carry the native screen in their [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity). The same gap appears on screens built with Jetpack Compose or SwiftUI that aren't covered by [automatic screen view tracking](#screen-view-tracking-in-jetpack-compose-apps), since no screen view event fires to end the previous screen.
+
+To close out the currently active screen without tracking a new screen view, track an `EndScreenView` event:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let event = EndScreenView()
+Snowplow.defaultTracker()?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = EndScreenView()
+Snowplow.defaultTracker?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+EndScreenView event = new EndScreenView();
+Snowplow.defaultTracker.track(event);
+```
+
+  </TabItem>
+</Tabs>
+
+Ending a screen this way:
+
+- Closes out [screen engagement tracking](#screen-engagement-tracking) for the ended screen, the same way an automatic `screen_end` event does: foreground and background time, list item, and scroll depth metrics stop accumulating against it.
+- Clears the [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity), so it's no longer attached to events tracked after the call, until a new `ScreenView` event is tracked.
+
+It does not affect the `previousName`, `previousId`, and `previousType` properties of the next [screen view event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views) you track: they report the manually-ended screen, the same as they would after a normal screen-to-screen transition.
+
+#### Guarding against stale calls
+
+Pass the `screenId` of the screen you want to end, matching the `id` the tracker generated for that screen's `ScreenView` event, to guard against ending the wrong screen:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let event = EndScreenView(screenId: screenViewId)
+Snowplow.defaultTracker()?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = EndScreenView(screenId = screenViewId)
+Snowplow.defaultTracker?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+EndScreenView event = new EndScreenView(screenViewId);
+Snowplow.defaultTracker.track(event);
+```
+
+  </TabItem>
+</Tabs>
+
+If the supplied `screenId` doesn't match the currently active screen, for example because the app has already navigated to a different native screen by the time a delayed call runs, the event is a no-op and doesn't clear the new screen's state. Omit `screenId` to end whichever screen is currently active.
+
 ### Modeled data using the Snowplow Unified dbt package
 
 Starting with version 0.2.0, the [Snowplow Unified Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) will process the screen engagement information in the `screen_summary` entity to provide the following metrics:

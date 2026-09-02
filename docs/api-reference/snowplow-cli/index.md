@@ -75,7 +75,7 @@ If SSO is enabled for your Snowplow organization, you will need to follow the [M
 
 If you prefer manual configuration, you will need these values:
 
-* An API Key ID and the corresponding API Key (secret), which you [create in Console](/docs/account-management/index.md#create-an-api-key). The key needs _View_ on environments, plus _View_ on tracking plans and data structures for read-only use, or _Edit_ on both to make changes (including publishing to production for data structures).
+* An API Key ID and the corresponding API Key (secret), which you [create in Console](/docs/account-management/index.md#create-an-api-key).
 * Your Organization ID, which you can find [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.

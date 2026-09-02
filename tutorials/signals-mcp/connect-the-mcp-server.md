@@ -110,7 +110,7 @@ Then pass them as headers in your MCP client configuration:
 ```
 
 :::warning[Scope the key to what the assistant needs]
-The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs, for example the _View_ level on each feature for read-only use. API keys created before scoped API keys were introduced have full admin permissions, so create a new key rather than reusing one. Store the key securely, and never paste credentials into the assistant's chat.
+The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs, for example the **View** level on each feature for read-only use. API keys created before scoped API keys were introduced have full admin permissions, so create a new key rather than reusing one. Store the key securely, and never paste credentials into the assistant's chat.
 :::
 
 See [Connect to Snowplow Signals](/docs/signals/connection/) for the full list of connection credentials and where to find each one.

@@ -11,7 +11,7 @@ You can control Snowplow Console (e.g., to automate certain actions) through its
 
 ## Create an API key
 
-In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **View and manage API keys**. To view this page, you need the _View_ permission on API keys. To create keys, you need the _Manage_ permission. See [permissions](/docs/account-management/managing-permissions/index.md) for details.
+In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **View and manage API keys**. To view this page, you need the **View** permission on API keys. To create keys, you need the **Manage** permission. See [permissions](/docs/account-management/managing-permissions/index.md) for details.
 
 Click **Create API key**, give the key a name for future reference, and select **Snowplow API key** as the type.
 
@@ -19,7 +19,7 @@ A Snowplow API key is granted only the permissions you select when you create it
 
 The following rules apply:
 
-- You can only grant permissions that you hold yourself. Permissions you do not have are shown but cannot be selected.
+- You can only grant permissions that you hold yourself. Console shows permissions you do not have, but you cannot select them.
 - A key must have at least one permission.
 - A key can never manage API keys or access Visualizations, so these features are not offered.
 - A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.
@@ -27,17 +27,17 @@ The following rules apply:
 
 When you create a key, Console shows the _API key ID_ and the _API key_ itself once. Store both in a secure location. This pair works like a combination of a username and password, and you should treat it with the same level of security.
 
-You can create multiple API keys. It's also possible to delete any key.
+You can create multiple keys, and delete any key.
 
 :::tip[Grant the minimum permissions]
 
-Create a separate key for each integration and grant it only the permissions that integration needs. For example, Snowtype only reads tracking plans and data structures, so its key only needs _View_ on those two features.
+Create a separate key for each integration and grant it only the permissions that integration needs. For example, Snowtype only reads tracking plans and data structures, so its key only needs **View** on those two features.
 
 :::
 
 :::warning[Legacy keys have admin privileges]
 
-API keys created before scoped API keys were introduced have admin privileges across the whole organization. They are marked as _Global admin_ on the API keys page. Replace them with scoped keys that grant only what each integration needs, and delete the legacy keys.
+API keys created before scoped API keys were introduced have admin privileges across the whole organization. They are marked as **Global admin** on the API keys page. Replace them with scoped keys that grant only what each integration needs, and delete the legacy keys.
 
 :::
 

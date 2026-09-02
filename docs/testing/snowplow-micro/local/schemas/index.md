@@ -59,7 +59,7 @@ Make sure to fully spell out the URL, including the protocol (`http://` or `http
 
 :::tip
 
-If you use Snowplow CDI, you can find your Iglu Resolver URLs and create Iglu Server keys in Console under **Settings** > **Manage organization** > **View and manage API keys**.
+If you use Snowplow CDI, you can find your Iglu resolver URLs and create Iglu Server keys in Console under **Settings** > **Manage organization** > **View and manage API keys**.
 
 :::
 

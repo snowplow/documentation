@@ -223,7 +223,7 @@ First, [create an API key](/docs/account-management/index.md#create-an-api-key) 
 ```
 
 :::warning[Scope the key to what the assistant needs]
-The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs. For read-only use, select the _View_ level on each feature. API keys created before scoped API keys were introduced have full admin permissions, so create a new key rather than reusing one. Store the key securely and only use this method in environments you trust.
+The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs. For read-only use, select the **View** level on each feature. API keys created before scoped API keys were introduced have full admin permissions, so create a new key rather than reusing one. Store the key securely and only use this method in environments you trust.
 :::
 
 ## Capabilities of the server

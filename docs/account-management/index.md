@@ -4,24 +4,40 @@ sidebar_label: "Account management"
 date: "2020-02-15"
 sidebar_position: 8.7
 description: "Manage your Snowplow account configuration, users, and API keys through Console, including instructions for obtaining JWT tokens via the Credentials API."
-keywords: ["account management", "Credentials API", "API keys", "JWT authentication", "Console API"]
+keywords: ["account management", "Credentials API", "API keys", "scoped API keys", "JWT authentication", "Console API"]
 ---
 
 You can control Snowplow Console (e.g., to automate certain actions) through its [API](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml). To use this API, you need to first obtain an API token.
 
 ## Create an API key
 
-In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **API keys for managing Snowplow**. To view this page, you need a _View API keys_ permission.
+In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **View and manage API keys**. To view this page, you need the _View_ permission on API keys. To create keys, you need the _Manage_ permission. See [permissions](/docs/account-management/managing-permissions/index.md) for details.
 
-![API keys generation view](images/accessing-generated-api-keys.png)
+Click **Create API key**, give the key a name for future reference, and select **Snowplow API key** as the type.
+
+A Snowplow API key is granted only the permissions you select when you create it. For each Console feature, such as environments, tracking plans, or data structures, choose the permission level the key should have. The features and levels are the same as the ones available for [user permissions](/docs/account-management/managing-permissions/index.md#what-permissions-can-be-set).
+
+The following rules apply:
+
+- You can only grant permissions that you hold yourself. Permissions you do not have are shown but cannot be selected.
+- A key must have at least one permission.
+- A key can never manage API keys or access Visualizations, so these features are not offered.
+- A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.
+- Only users can create API keys. Requests authenticated with an API key cannot create other keys.
+
+When you create a key, Console shows the _API key ID_ and the _API key_ itself once. Store both in a secure location. This pair works like a combination of a username and password, and you should treat it with the same level of security.
 
 You can create multiple API keys. It's also possible to delete any key.
 
-When you create an API key, store the _API key ID_ and the _API key_ itself in a secure location. This pair works like a combination of a username and password, and you should treat it with the same level of security.
+:::tip[Grant the minimum permissions]
 
-:::warning[Key privileges]
+Create a separate key for each integration and grant it only the permissions that integration needs. For example, Snowtype only reads tracking plans and data structures, so its key only needs _View_ on those two features.
 
-All API keys have admin privileges. Do not share these keys with people or systems you do not trust.
+:::
+
+:::warning[Legacy keys have admin privileges]
+
+API keys created before scoped API keys were introduced have admin privileges across the whole organization. They are marked as _Global admin_ on the API keys page. Replace them with scoped keys that grant only what each integration needs, and delete the legacy keys.
 
 :::
 

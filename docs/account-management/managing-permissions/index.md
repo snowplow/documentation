@@ -66,15 +66,17 @@ The following tables describe the default permissions for each role.
 | Data models & jobs  | Customized by you, per user |
 | API keys            | Customized by you, per user |
 
-A note on API keys and permissions
+:::note[API keys and permissions]
 
-Please note:
+A [Snowplow API key](/docs/account-management/index.md#create-an-api-key) is scoped to the permissions selected when it is created, and can never hold more than its creator's own permissions. Two exceptions apply:
 
-1) Any API keys you create have full admin permissions
+1) API keys created before scoped API keys were introduced have full admin permissions. They appear as _Global admin_ on the API keys page. Replace them with scoped keys and delete them.
 
-2) Any existing Iglu API keys allow permissions to be side-stepped by connecting directly to Iglu servers
+2) Iglu Server keys authenticate directly against the Iglu Server, so they bypass Console permissions entirely.
 
-The recommended approach is to remove all existing API keys and Iglu keys, and set the API keys permission respectively so that only trusted users can create new keys.
+Set the API keys permission so that only trusted users can create new keys.
+
+:::
 
 ## What does each permission mean?
 

@@ -222,8 +222,8 @@ First, [create an API key](/docs/account-management/index.md#create-an-api-key) 
 }
 ```
 
-:::warning[API keys use admin permissions by default]
-By default, API keys are created with all permissions, which may be broader than you intend for an assistant. The assistant can perform any action the key allows. If you need the assistant to operate with limited permissions, use [OAuth](#oauth) instead, which is scoped to your user account. Store the key securely and only use this method in environments you trust.
+:::warning[Scope the key to what the assistant needs]
+The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs. For read-only use, select the _View_ level on each feature. API keys created before scoped API keys were introduced have full admin permissions, so create a new key rather than reusing one. Store the key securely and only use this method in environments you trust.
 :::
 
 ## Capabilities of the server

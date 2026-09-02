@@ -19,7 +19,7 @@ A Snowplow API key is granted only the permissions you select when you create it
 
 The following rules apply:
 
-- You can only grant permissions that you hold yourself. Console shows permissions you do not have, but you cannot select them.
+- You can only grant permissions that you hold yourself. Console only offers the permissions you have.
 - A key must have at least one permission.
 - A key can never manage API keys or access Visualizations, so these features are not offered.
 - A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.

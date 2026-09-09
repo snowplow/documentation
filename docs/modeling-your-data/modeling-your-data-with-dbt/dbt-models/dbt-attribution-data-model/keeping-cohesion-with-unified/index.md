@@ -10,6 +10,14 @@ In case there are data issues (e.g. you may want to reprocess the analysis based
 
 There is, however, no dependency between the packages when it comes to syncing them. You may want to run your Unified package once an hour for the more business critical tables to get updated, while you can process the Attribution package once a month, if that's what makes sense for your business. There is no concept of backfill limits or partials reprocessing for the Attribution package, regardless of the last run, the package will reprocess all the data since the last processed conversion event that became available in the source tables.
 
+:::warning[Monitor the Attribution package for failed runs]
+If the Attribution package repeatedly fails to run while the Unified package continues to advance, the gap between them grows. Since the Attribution package always reprocesses all data since its last successful run in a single pass, the larger this gap becomes, the greater the risk that the next run fails outright, because it has to process a growing volume of data in one go.
+
+Even once a run succeeds again, the catch-up run can silently produce incomplete results. The path lookback window (`snowplow__path_lookback_days`) is calculated from the last processed conversion, not from each individual conversion in the backlog, so the most recently backlogged conversions can end up with a much shorter effective lookback than intended, with no error to indicate this happened.
+
+We recommend monitoring the Attribution package for failed runs and addressing them promptly, rather than letting a backlog accumulate. If a backlog has already built up, consider temporarily widening `snowplow__path_lookback_days` for the catch-up run to cover the full gap since the last successful run.
+:::
+
 ### Running both Unified and Attribution dbt packages from the same project
 
 It might be practical to run both the Unified Digital and Attribution dbt packages from the same project.

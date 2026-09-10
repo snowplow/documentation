@@ -36,7 +36,7 @@ export const versions = {
   rdbLoader: '6.7.2',
   s3Loader: '3.2.0',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.12.0',
+  lakeLoader: '0.13.0',
   snowflakeStreamingLoader: '0.6.1',
   databricksStreamingLoader: '0.5.0',
 
@@ -70,7 +70,7 @@ export const versions = {
 
   // Iglu
   igluServer: '0.14.2',
-  igluctl: '0.13.0',
+  igluctl: '0.13.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',
 

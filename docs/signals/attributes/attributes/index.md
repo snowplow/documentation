@@ -202,9 +202,9 @@ EntityProperty(
 
 ### Calculated properties
 
-A calculated property combines the values of other properties from the same event into a single derived value, using one of a fixed set of operations. The properties you combine can mix atomic, event, and entity properties freely.
+A calculated property combines the values of other properties from the same event into a single derived value, using one of a fixed set of operations. The properties you combine can mix atomic, event, and entity properties.
 
-Calculated properties work in both aggregations and [criteria](#filter-with-criteria). They aren't supported as attribute keys, and aren't supported in intervention criteria. A calculated property can't contain another calculated property.
+Calculated properties work in both aggregations and [criteria](#filter-with-criteria). They aren't supported as [attribute keys](/docs/signals/attributes/attribute-keys/index.md) or in [intervention](/docs/signals/interventions/index.md) criteria. A calculated property can't contain another calculated property.
 
 The following operations are available:
 
@@ -217,14 +217,14 @@ The following operations are available:
 | `max` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
 | `coalesce` | String, integer, number, or boolean, and every property must be the same type | Same as the properties | Returns the first non-null property, in order. Null only if every property is null |
 
-`concat` rejects number and boolean properties because floating point and boolean values don't format identically across the streaming engine and every supported warehouse. It accepts an optional `separator` argument, inserted between the non-null values and defaulting to an empty string. Setting a separator on any other operation is rejected.
+`concat` rejects number and boolean properties because floating-point and boolean values don't format identically across the streaming engine and every supported warehouse. It accepts an optional `separator` argument, inserted between the non-null values and defaulting to an empty string. Setting a separator on any other operation is rejected.
 
-Every operation except `coalesce` needs at least two properties, and all of them accept at most 50.
+Every operation except `coalesce` needs at least two properties, and no operation accepts more than 50.
 
 :::note[Nulls behave differently per operation]
 A skipped `concat` property takes its separator with it. Concatenating `experimentId` and `variantId` with a `-` separator gives `exp3-blue` when both are populated, but `exp3` when `variantId` is null, not `exp3-`.
 
-For `sum`, `product`, `min`, and `max`, a null property isn't treated as zero: it makes the whole result null. Where the attribute drops null values, the event then contributes nothing to the aggregation.
+For `sum`, `product`, `min`, and `max`, a null property isn't treated as zero: it makes the whole result null, and the event contributes nothing to the aggregation.
 :::
 
 <Tabs groupId="signals-impl" queryString>
@@ -292,7 +292,7 @@ The declared attribute `type` must match the date part family's output:
 - Extract date parts (`hour_of_day`, `day_of_week`, `month_of_year`) require `int32` or `int64` (or `int32_list`/`int64_list` for `unique_list`)
 - Truncate date parts (`active_day`, `active_week`, `active_month`) require `string` (or `string_list` for `unique_list`)
 
-Both restrictions above apply to an attribute whose value is itself the date part. Inside a [calculated property](#calculated-properties), each property you combine can carry its own date part, and neither restriction applies: the date part contributes its output type as one input to the operation, so any aggregation compatible with the operation's result works. For example, `hour_of_day` on a timestamp can be summed with an integer property, or `active_day` concatenated with a string property.
+Both restrictions above — the supported aggregations and the required attribute type — apply to an attribute whose value is itself the date part. Inside a [calculated property](#calculated-properties), each property you combine can carry its own date part, and neither restriction applies: the date part contributes its output type as one input to the operation, so any aggregation compatible with the operation's result works. For example, `hour_of_day` on a timestamp can be summed with an integer property, or `active_day` concatenated with a string property.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -649,7 +649,7 @@ peak_hour = Attribute(
 )
 ```
 
-The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a count per hour, covering the hours the user was actually active — an hour with no events has no key in the result, rather than a key set to zero.
+The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a count per hour, covering the hours the user was active — an hour with no events has no key in the result, rather than a key set to zero.
 
 ### Sum of two properties (price including tax)
 
@@ -690,7 +690,7 @@ total_spend = Attribute(
 )
 ```
 
-The two `sum`s do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If either property is null on an event, the calculated property is null and that event contributes nothing to the total.
+The two uses of `sum` do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If either property is null on an event, the calculated property is null and that event contributes nothing to the total.
 
 ### Unique list of two properties (A/B test variants seen)
 

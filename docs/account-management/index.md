@@ -25,7 +25,7 @@ The following rules apply:
 - A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.
 - Only users can create API keys. Requests authenticated with an API key cannot create other keys.
 
-When you create a key, Console shows the _API key ID_ and the _API key_ itself once. Store both in a secure location. This pair works like a combination of a username and password, and you should treat it with the same level of security.
+When you create a key, Console shows the _API key ID_ and the _API key_ itself. You will not be able to access the API key again, so store it in a secure location. The pair works like a combination of a username and password, and you should treat it with the same level of security.
 
 You can create multiple keys, and delete any key.
 

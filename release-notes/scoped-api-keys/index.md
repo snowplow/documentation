@@ -17,7 +17,7 @@ Key creation follows these rules:
 
 * When creating a key, you can only grant it permissions that you yourself hold
 * A key can never manage other API keys
-* A key's permissions are fixed at creation and do not change when the creator's permissions change.
+* Your key's permissions are fixed at creation and do not change when your own permissions change
 
 The API keys page, under **Settings** > **Manage organization** > **View and manage API keys**, has also been redesigned. Snowplow API keys and Iglu Server keys, previously called utility keys, now appear in one table with a **Scope** column that shows whether a key has read-only access, write access, or legacy global admin access. From the same page you can:
 

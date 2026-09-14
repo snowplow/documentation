@@ -21,7 +21,7 @@ The following rules apply:
 
 - You can only grant permissions that you hold yourself. Console only offers the permissions you have.
 - A key must have at least one permission.
-- A key can never manage API keys or access Visualizations, so these features are not offered.
+- A key can never manage API keys so that feature is not offered.
 - A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.
 - Only users can create API keys. Requests authenticated with an API key cannot create other keys.
 

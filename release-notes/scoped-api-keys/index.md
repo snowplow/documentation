@@ -25,7 +25,7 @@ The API keys page, under **Settings** > **Manage organization** > **View and man
 * Filter by key type and sort by any column
 * View the exact permissions a key holds
 * Clone a key to rotate it without re-selecting its permissions
-* Copy the Iglu resolver URLs for both environments from the overflow menu
+* Copy the Iglu resolver URLs for both environments from the `...` menu
 
 Existing API keys keep working unchanged. They appear as **Global admin** in the **Scope** column and cannot be cloned. Replace them with scoped keys that grant only what each integration needs.
 

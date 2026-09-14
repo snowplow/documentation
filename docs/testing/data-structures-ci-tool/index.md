@@ -17,7 +17,7 @@ In order to be able to perform tasks with the tool, you will need to supply both
 
 You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
-An API Key can be created [here](https://console.snowplowanalytics.com/credentials).
+[Create an API key](/docs/account-management/index.md#create-an-api-key) in Console.
 
 ## Create your manifest file
 

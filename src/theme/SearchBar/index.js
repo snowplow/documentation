@@ -13,6 +13,7 @@ import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react'
 import { useAlgoliaContextualFacetFilters } from '@docusaurus/theme-search-algolia/client'
 import Translate from '@docusaurus/Translate'
 import translations from '@theme/SearchTranslations'
+import AskAiNavbarItem from '@site/src/components/Assistant/AskAiNavbarItem'
 
 let DocSearchModal = null
 function Hit({ hit, children }) {
@@ -150,14 +151,17 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
         />
       </Head>
 
-      <DocSearchButton
-        onTouchStart={importDocSearchModalIfNeeded}
-        onFocus={importDocSearchModalIfNeeded}
-        onMouseOver={importDocSearchModalIfNeeded}
-        onClick={onOpen}
-        ref={searchButtonRef}
-        translations={translations.button}
-      />
+      <div className="sp-navbar-search-group">
+        <DocSearchButton
+          onTouchStart={importDocSearchModalIfNeeded}
+          onFocus={importDocSearchModalIfNeeded}
+          onMouseOver={importDocSearchModalIfNeeded}
+          onClick={onOpen}
+          ref={searchButtonRef}
+          translations={translations.button}
+        />
+        <AskAiNavbarItem />
+      </div>
 
       {isOpen &&
         DocSearchModal &&

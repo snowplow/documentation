@@ -314,6 +314,19 @@ Release notes live in `release-notes/<slug>/index.md`. Read [`release-notes/_REA
 
 Notes carry a slug that becomes the published URL, so keep it short and don't change it after the note ships. Link out to the docs with absolute paths such as `/docs/signals/`; the build fails on a broken link, which is how a moved docs page gets caught.
 
+## Run the assistant locally
+
+The "Ask AI" drawer calls `/api/assistant/chat`, which only exists when the Cloudflare Worker is in front of the site. To try it locally you need the `console-agent` service running (`npm run dev` in that repo, port 3001) and the Worker:
+
+1. Create `.dev.vars` in this repo (it is gitignored):
+   ```
+   DOCS_ASSISTANT_AGENT_URL=http://localhost:3001
+   DOCS_ASSISTANT_SHARED_SECRET=<same value as the agent's DOCS_ASSISTANT_SHARED_SECRET>
+   ```
+2. Either build the site and serve it through the Worker with `yarn build && npx wrangler dev` (everything on `http://localhost:8787`), or keep the hot-reloading dev server and proxy only the assistant calls to the Worker: run `npx wrangler dev` in one terminal and `ASSISTANT_PROXY_TARGET=http://localhost:8787 yarn start` in another.
+
+Without the Worker the drawer still opens, but sending a message shows "The assistant is unavailable right now".
+
 ## Submit changes
 
 Before opening a PR, run `yarn build` locally. This runs the full production build, and catches errors, broken internal links, and broken anchors before they get to CI.

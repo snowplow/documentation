@@ -5,6 +5,7 @@ An overview of how the docs site is built. For writing guidelines see [`CONTRIBU
 - [Overview](#overview)
 - [Gotchas](#gotchas)
 - [Cloudflare Worker](#cloudflare-worker)
+- [Snowplow Assistant](#snowplow-assistant)
 - [Custom plugins](#custom-plugins)
   - [LLMs.txt and Markdown generation](#llmstxt-and-markdown-generation)
   - [JSON-LD schema](#json-ld-schema)
@@ -20,7 +21,7 @@ An overview of how the docs site is built. For writing guidelines see [`CONTRIBU
 
 ## Overview
 
-This is a Docusaurus project, deployed on Cloudflare Pages. The Docusaurus configuration is in `docusaurus.config.js`. Search is provided by [Algolia DocSearch](https://docsearch.algolia.com).
+This is a Docusaurus project, deployed as a Cloudflare Worker with static assets. The Docusaurus configuration is in `docusaurus.config.js`. Search is provided by [Algolia DocSearch](https://docsearch.algolia.com).
 
 Pages are MDX under the hood, but mostly carry `.md` extensions for Docusaurus legacy reasons.
 
@@ -54,12 +55,25 @@ Non-obvious things that could cause confusion if you don't know about them:
 
 ## Cloudflare Worker
 
-`worker/index.js` runs on every request and does three things:
-1. **Server-side Snowplow tracking**
-2. **Forced redirects** via `findForcedRedirect(pathname)`, checked before asset fetch, returns 301 on match
-3. **Fallback redirects** via `findFallbackRedirect(pathname)`, checked only after a 404
+`worker/index.js` runs on every request and does four things:
+1. **Assistant API proxy** for `/api/*` requests, handled first so they never fire a server-side page view (see [Snowplow Assistant](#snowplow-assistant))
+2. **Server-side Snowplow tracking**
+3. **Forced redirects** via `findForcedRedirect(pathname)`, checked before asset fetch, returns 301 on match
+4. **Fallback redirects** via `findFallbackRedirect(pathname)`, checked only after a 404
 
 Both redirect tiers are defined in `worker/redirects.js`. `move.sh` appends to it automatically.
+
+## Snowplow Assistant
+
+The "Ask AI" button in the navbar opens a chat drawer that answers questions from the documentation. It is the Snowplow Console's assistant (the `console-agent` service) running in a documentation-only mode: the agent only has the two documentation tools, and the current-version `llms.txt` index is loaded into its prompt up front so it can pick pages without an extra round trip.
+
+**Request path.** The widget posts to the same-origin `POST /api/assistant/chat`. [`worker/assistant.js`](worker/assistant.js) checks the method and body size, applies a per-IP rate limit (the `ASSISTANT_RATE_LIMITER` binding in `wrangler.jsonc`, 10 requests per minute), then forwards the body to `${DOCS_ASSISTANT_AGENT_URL}/api/agent/docs/chat` with the `X-Docs-Assistant-Secret` header and streams the response back unchanged. The browser never talks to the agent directly and never sees the secret. JSON error bodies carry a `status` field so the widget can show a rate-limit countdown or a size message.
+
+**Configuration.** `DOCS_ASSISTANT_AGENT_URL` is a plain var in `wrangler.jsonc`. `DOCS_ASSISTANT_SHARED_SECRET` is a Worker secret set in the Cloudflare dashboard (or `npx wrangler secret put DOCS_ASSISTANT_SHARED_SECRET`); it must match the agent's `DOCS_ASSISTANT_SHARED_SECRET`. Without both the Worker answers 503. For local development see [Run the assistant locally](CONTRIBUTING.md#run-the-assistant-locally).
+
+**Frontend.** `src/components/Assistant/` holds the widget: `AssistantProvider` and `AssistantHost` are mounted in `src/theme/Root.js` (above the per-route layout, so an open conversation survives navigating to a linked page), `AskAiNavbarItem` is registered as the `custom-askAi` navbar item, and `AssistantDrawer` is lazy-loaded on first open so docs pages do not download the chat bundle. The chat is built on the Vercel AI SDK (`useChat` + `DefaultChatTransport`) and AI Elements components vendored into `src/components/ai-elements/` and ported to Tailwind 3; markdown answers render with `streamdown`. Internal links open in the same tab through Docusaurus routing. A single conversation is kept in `sessionStorage`.
+
+**Analytics.** The widget emits `assistant_interaction` events (`open`, `close`, `message_submit`, `suggestion_click`) using the same schema and event specifications as the Console. The prompt form carries the `sp-assistant-form` class, which `snowplow.js` excludes from form tracking so questions are never sent as form payloads.
 
 ## Custom plugins
 
@@ -105,6 +119,7 @@ The repo has multiple tracking implementations. Each tracking script manages its
 | `reoTracking.js`   | [Reo.dev](https://reo.dev) tracker                              | Loaded unconditionally | N/A                                                                         | N/A                                                                                            |
 | `src/qualified.js` | [Qualified](https://www.qualified.com) chat/conversion tracking | Loaded unconditionally | N/A                                                                         | N/A                                                                                            |
 | `worker/index.js`  | Page view tracking for `.md` and `llms.txt` requests            | Anonymous tracking     | N/A                                                                         | N/A                                                                                            |
+| `src/components/Assistant/tracking.ts` | `assistant_interaction` events from the AI assistant drawer | Follows `snowplow.js` consent state | N/A                                                            | N/A                                                                                            |
 
 ## Styling and CSS
 

@@ -104,7 +104,15 @@ const setupBrowserTracker = () => {
   }) // precise tracking for the unified log
 
   enableButtonClickTracking()
-  enableFormTracking()
+  // The assistant's prompt form is excluded so user questions are never sent
+  // as form-tracking payloads.
+  enableFormTracking({
+    options: {
+      forms: {
+        filter: (form) => !form.classList.contains('sp-assistant-form'),
+      },
+    },
+  })
 }
 
 if (ExecutionEnvironment.canUseDOM) {

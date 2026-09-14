@@ -11,7 +11,7 @@ You can control Snowplow Console (e.g., to automate certain actions) through its
 
 ## Create an API key
 
-In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **View and manage API keys**. To view this page, you need the **View** permission on API keys. To create keys, you need the **Manage** permission. See [permissions](/docs/account-management/managing-permissions/index.md) for details.
+In [Console](https://console.snowplowanalytics.com/), navigate to **Settings** > **Manage organization** > **View and manage API keys**. To view this page, you need the **View** permission on API keys. To create or delete keys, you need the **Manage** permission. See [permissions](/docs/account-management/managing-permissions/index.md) for details.
 
 Click **Create API key**, give the key a name for future reference, and select **Snowplow API key** as the type.
 

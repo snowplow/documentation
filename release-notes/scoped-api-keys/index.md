@@ -15,7 +15,7 @@ Snowplow Console API keys are now scoped. When you create a key, you choose the 
 
 Key creation follows these rules:
 
-* A key can only be granted permissions that its creator holds. Requesting more returns HTTP 403.
+* When creating a key, you can only grant it permissions that you yourself hold
 * A key can never manage other API keys
 * A key's permissions are fixed at creation and do not change when the creator's permissions change.
 

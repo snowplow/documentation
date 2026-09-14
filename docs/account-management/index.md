@@ -19,25 +19,24 @@ A Snowplow API key is granted only the permissions you select when you create it
 
 The following rules apply:
 
-- You can only grant permissions that you hold yourself. Console only offers the permissions you have.
+- You can grant only the permissions you hold. Console only offers the permissions you have.
 - A key must have at least one permission.
-- A key can never manage API keys so that feature is not offered.
+- A key can never manage other API keys, so that feature is not offered. Only users can create keys.
 - A key's permissions are fixed at creation time. Changing your own permissions later does not change the key. To change what a key can do, create a new key and delete the old one.
-- Only users can create API keys. Requests authenticated with an API key cannot create other keys.
 
 When you create a key, Console shows the _API key ID_ and the _API key_ itself. You will not be able to access the API key again, so store it in a secure location. The pair works like a combination of a username and password, and you should treat it with the same level of security.
 
-You can create multiple keys, and delete any key.
+You can create multiple keys and delete any of them.
 
 :::tip[Grant the minimum permissions]
 
-Create a separate key for each integration and grant it only the permissions that integration needs. For example, Snowtype only reads tracking plans and data structures, so its key only needs **View** on those two features.
+Create a separate key for each integration and grant it only the permissions that integration needs. For example, Snowtype reads tracking plans and data structures, so its key only needs **View** on those two features.
 
 :::
 
 :::warning[Legacy keys have admin privileges]
 
-API keys created before scoped API keys were introduced have admin privileges across the whole organization. They are marked as **Global admin** on the API keys page. Replace them with scoped keys that grant only what each integration needs, and delete the legacy keys.
+Keys marked **Global admin** on the API keys page have admin privileges across the whole organization. Replace them with scoped keys that grant only what each integration needs, and delete the legacy keys.
 
 :::
 

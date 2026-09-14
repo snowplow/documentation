@@ -1,6 +1,5 @@
 ---
 title: "Scoped API keys and a redesigned API keys page in Console"
-sidebar_label: "Scoped API keys"
 description: "Snowplow API keys are now scoped to the permissions you select at creation, and Snowplow API keys and Iglu Server keys are managed from a single redesigned page in Console."
 keywords: ["scoped API keys", "API keys", "Console API", "permissions", "Iglu Server keys", "key rotation"]
 date: "2026-09-02"
@@ -27,6 +26,6 @@ The API keys page, under **Settings** > **Manage organization** > **View and man
 * Clone a key to rotate it without having to re-select the same permissions again
 * Copy the Iglu resolver URLs for both environments from the `...` menu
 
-Existing API keys keep working unchanged. They appear as **Global admin** in the **Scope** column and cannot be cloned. Replace them with scoped keys that grant only what each integration needs.
+Existing API keys keep working as before. They appear as **Global admin** in the **Scope** column and cannot be cloned. Replace them with scoped keys, granting only what each integration needs.
 
-See [Account management](/docs/account-management/) for how to create and manage keys.
+See [Account management](/docs/account-management/#create-an-api-key) for how to create and manage keys.

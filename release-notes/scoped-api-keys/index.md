@@ -16,7 +16,7 @@ Snowplow Console API keys are now scoped. When you create a key, you choose the 
 Key creation follows these rules:
 
 * A key can only be granted permissions that its creator holds. Requesting more returns HTTP 403.
-* A key can never manage API keys or access Visualizations.
+* A key can never manage other API keys
 * A key's permissions are fixed at creation and do not change when the creator's permissions change.
 
 The API keys page, under **Settings** > **Manage organization** > **View and manage API keys**, has also been redesigned. Snowplow API keys and Iglu Server keys, previously called utility keys, now appear in one table with a **Scope** column that shows whether a key has read-only access, write access, or legacy global admin access. From the same page you can:

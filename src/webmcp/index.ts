@@ -55,8 +55,12 @@ export function WebMcpTools(): null {
     // Loaded on demand, so a reader without an agent downloads none of this and
     // the tutorial index the tools read stays out of the bundle every page
     // already pays for.
-    Promise.all([import('./docsTools'), import('./tutorialTools')])
-      .then(([docsTools, tutorialTools]) => {
+    Promise.all([
+      import('./docsTools'),
+      import('./tutorialTools'),
+      import('./demoTools'),
+    ])
+      .then(([docsTools, tutorialTools, demoTools]) => {
         if (controller.signal.aborted) {
           return undefined
         }
@@ -65,6 +69,7 @@ export function WebMcpTools(): null {
           [
             ...docsTools.createDocsTools({ algolia, navigate }),
             ...tutorialTools.createTutorialTools({ navigate }),
+            ...demoTools.createDemoTools(),
           ]
             .map(reportErrors)
             .map((tool) =>

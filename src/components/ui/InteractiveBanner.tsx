@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Loader2 } from 'lucide-react'
 import { Button } from './button.tsx'
+import { DEMO_BOOKING_URL } from '@site/src/constants/config'
 
 function Frame941() {
   return (
@@ -60,7 +61,7 @@ function AnimatedButton() {
         disabled={isLoading}
       >
         <a
-          href="https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/"
+          href={DEMO_BOOKING_URL}
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleClick}

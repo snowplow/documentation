@@ -144,7 +144,7 @@ As well as the [custom `llms.txt` and JSON-LD schema plugins](#custom-plugins), 
 
 ## WebMCP tools
 
-The site exposes seven tools to browser AI agents through [WebMCP](https://webmachinelearning.github.io/webmcp/), a Web Machine Learning Community Group draft that lets a page register callable tools on `document.modelContext`. An agent can search the docs, walk the navigation, open a page as Markdown, and follow a tutorial without scraping the DOM.
+The site exposes eight tools to browser AI agents through [WebMCP](https://webmachinelearning.github.io/webmcp/), a Web Machine Learning Community Group draft that lets a page register callable tools on `document.modelContext`. An agent can search the docs, walk the navigation, open a page as Markdown, follow a tutorial, and put the demo booking page in front of the reader, without scraping the DOM.
 
 The tools live in `src/webmcp/` and are registered once, for the lifetime of the app, by the `WebMcpTools` component mounted in `src/theme/Root.js`:
 
@@ -157,6 +157,7 @@ The tools live in `src/webmcp/` and are registered once, for the lifetime of the
 | `list_tutorials`           | The tutorials index, filterable by use case, topic, and technology   |
 | `get_tutorial`             | A tutorial's steps and the reader's progress                         |
 | `set_tutorial_progress`    | Opens a step, or ticks it off in the progress tracker                |
+| `book_demo`                | Opens the demo booking page, or the free trial, and returns its URL  |
 
 Three things are worth knowing:
 
@@ -164,7 +165,9 @@ Three things are worth knowing:
 - **`useDocsSidebar()` only resolves inside `DocRoot`**, which is above where the tools are registered. `src/theme/DocRoot/Layout/index.tsx` is a wrapper swizzle that exists solely to publish the active sidebar into `src/webmcp/pageContext.ts` for the tools to read at call time.
 - **`open_doc` reuses the Markdown twins** written by the [llms-txt plugin](#llmstxt-and-markdown-generation), so it carries the same local-development caveat as the Copy Markdown button. On a dev server the `.md` files don't exist yet and the tool falls back to the rendered page text.
 
-Tutorial progress is per-reader browser state. `src/components/tutorials/progress.ts` owns the `localStorage` key and an update event, so the progress tracker and `set_tutorial_progress` stay in step.
+Two pieces of shared state keep a tool and the UI it overlaps with from drifting apart. Tutorial progress is per-reader browser state: `src/components/tutorials/progress.ts` owns the `localStorage` key and an update event, so the progress tracker and `set_tutorial_progress` stay in step. The two marketing calls to action are in `src/constants/config.js`, read by both the "Book a demo" banner and `book_demo`.
+
+`book_demo` is the one tool that isn't read-only, and it stops short of booking anything. Both pages it opens are on `snowplow.io`, a different origin, and each asks the reader for their own details, so the tool takes no personal information as arguments and submits no form. It opens a new tab and returns the URL; a tool call carries no user activation, so a popup blocker may refuse the tab, and the result says whether it opened.
 
 ## Product Fruits feedback widget
 

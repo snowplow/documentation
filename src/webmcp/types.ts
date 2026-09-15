@@ -101,6 +101,25 @@ export function readNumber(
   return parsed
 }
 
+export function readBoolean(
+  input: Record<string, unknown> | undefined,
+  key: string
+): boolean | undefined {
+  const value = input?.[key]
+  if (value === undefined || value === null) {
+    return undefined
+  }
+  if (typeof value === 'boolean') {
+    return value
+  }
+  // Agents that build arguments from a JSON schema by hand often send the
+  // string, so take it rather than failing the call over a quoting choice.
+  if (value === 'true' || value === 'false') {
+    return value === 'true'
+  }
+  throw new Error(`\`${key}\` must be a boolean.`)
+}
+
 // Wraps a tool so a thrown message comes back as data the agent can act on.
 export function reportErrors(tool: WebMcpTool): WebMcpTool {
   return {

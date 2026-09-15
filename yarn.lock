@@ -3416,6 +3416,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mcp-b/global@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@mcp-b/global@npm:5.1.0"
+  dependencies:
+    "@mcp-b/transports": "npm:5.1.0"
+    "@mcp-b/webmcp-polyfill": "npm:5.1.0"
+    "@mcp-b/webmcp-ts-sdk": "npm:5.1.0"
+    "@mcp-b/webmcp-types": "npm:5.1.0"
+    "@modelcontextprotocol/server": "npm:2.0.0"
+  checksum: 10c0/d58677d4df2e8c9a3f458bd6bff545e893b6c874ec7e38c1e3488a33f81815486151e74fddc90aa2de70761db8a5dbf4f56ee39c17e91cbadf2c79ba8dd5134d
+  languageName: node
+  linkType: hard
+
+"@mcp-b/transports@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@mcp-b/transports@npm:5.1.0"
+  dependencies:
+    "@modelcontextprotocol/core": "npm:2.0.0"
+    "@modelcontextprotocol/server": "npm:2.0.0"
+  checksum: 10c0/e12c1b2acac99ee9decfe40cb7adc089a610bdb1391808adb2d9128dd73b09d2236e4703b277d1b3e0483caba08149fb0b52e96cac9b3a538696ec093d407467
+  languageName: node
+  linkType: hard
+
 "@mcp-b/webmcp-polyfill@npm:5.1.0":
   version: 5.1.0
   resolution: "@mcp-b/webmcp-polyfill@npm:5.1.0"
@@ -3423,6 +3446,17 @@ __metadata:
     "@mcp-b/webmcp-types": "npm:5.1.0"
     "@standard-schema/spec": "npm:^1.1.0"
   checksum: 10c0/e7aae0ec99b9e0a31b0fcdd02587883779a35fe372a7deb02bae1324ca11a987d2407c673f99eccce6a234b5f6cd39db22eea61450b09c5f1d100c42dc086112
+  languageName: node
+  linkType: hard
+
+"@mcp-b/webmcp-ts-sdk@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@mcp-b/webmcp-ts-sdk@npm:5.1.0"
+  dependencies:
+    "@mcp-b/webmcp-polyfill": "npm:5.1.0"
+    "@mcp-b/webmcp-types": "npm:5.1.0"
+    "@modelcontextprotocol/server": "npm:2.0.0"
+  checksum: 10c0/30b918a463722a48b1da8c1aeafe3c4577736a8fb52b5ebdf9b785084d4a3f41c0a27296835818d884068e347d3c95802d05f8dc70842ffe367b0bd88cac3069
   languageName: node
   linkType: hard
 
@@ -8979,7 +9013,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^6.5.1"
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
-    "@mcp-b/webmcp-polyfill": "npm:5.1.0"
+    "@mcp-b/global": "npm:5.1.0"
     "@mdx-js/react": "npm:^3.0.0"
     "@mermaid-js/layout-elk": "npm:^0.1.9"
     "@mui/icons-material": "npm:^5.11.16"

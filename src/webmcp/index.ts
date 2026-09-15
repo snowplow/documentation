@@ -29,39 +29,47 @@ function readAlgoliaConfig(value: unknown): AlgoliaConfig | null {
 
 type ResolvedContext = {
   modelContext: ModelContext
-  // Undoes a polyfill this component installed. A no-op when the browser
-  // brought its own implementation, which is never ours to tear down.
+  // Takes down the server, the transport, and any polyfill this component
+  // installed. A no-op for anything it found already in place.
   release: () => void
 }
 
 // Registering a tool needs `document.modelContext`, and almost no browser
 // provides it yet: it is behind a flag or an origin trial in Chrome and Edge,
-// and absent everywhere else, agent browsers included. Relying on native
-// support alone meant nothing registered for the agents this is built for, so
-// where the browser has no implementation we install the reference polyfill and
-// register against that.
+// and absent everywhere else, agent browsers included. Registering is also only
+// half the job. The WebMCP API has no notion of a connection, so a page that
+// only registers tools is still invisible from outside itself: an extension or
+// a desktop agent reaches the page over an MCP transport, and with no server
+// listening it reports the site as having no WebMCP at all.
 //
-// The polyfill is loaded in its own chunk, after hydration, so it costs nothing
+// `@mcp-b/global` supplies both halves. It installs the reference polyfill
+// where the browser has no WebMCP, and in every browser it puts an MCP server
+// and a tab transport in front of whatever context is there, native or
+// polyfilled, mirroring registrations down so a native consumer still sees
+// them. So it runs unconditionally rather than only as a fallback.
+//
+// The runtime is loaded in its own chunk, after hydration, so it costs nothing
 // until the page is interactive — but unlike the tools it does load for every
 // reader, because an agent arrives unannounced and the page cannot know to wait
 // for one.
 async function resolveModelContext(): Promise<ResolvedContext | null> {
-  const native = getModelContext()
-  if (native) {
-    return { modelContext: native, release: () => {} }
-  }
+  // The module initializes itself on import, with a transport that accepts any
+  // origin. Opt out of that so the connection is configured here instead.
+  window.__webModelContextOptions = { autoInitialize: false }
 
-  const polyfill = await import('@mcp-b/webmcp-polyfill')
-  polyfill.initializeWebMCPPolyfill()
+  const runtime = await import('@mcp-b/global')
+  runtime.initializeWebModelContext({
+    // An agent connects by injecting a client into this page, so it posts from
+    // this origin; nothing else has any business connecting.
+    transport: { tabServer: { allowedOrigins: [window.location.origin] } },
+  })
 
-  const polyfilled = getModelContext()
-  if (!polyfilled) {
+  // Absent over plain HTTP on a public host, where WebMCP does not run at all.
+  const modelContext = getModelContext()
+  if (!modelContext) {
     return null
   }
-  return {
-    modelContext: polyfilled,
-    release: polyfill.cleanupWebMCPPolyfill,
-  }
+  return { modelContext, release: runtime.cleanupWebModelContext }
 }
 
 // Exposes the documentation site to browser AI agents through WebMCP

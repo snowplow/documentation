@@ -38,7 +38,7 @@ The following roles are also required if using [RDB Loader](/docs/api-reference/
 - [`Roles/secretmanager.secretAccessor`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretAccessor)
 - [`Roles/secretmanager.secretVersionAdder`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretVersionAdder)
 
-The following role is also required if you enable GKE application-layer secrets encryption:
+The following role is also required if you enable [GKE application-layer secrets encryption](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/encrypting-secrets):
 
 - [`Roles/cloudkms.admin`](https://cloud.google.com/iam/docs/roles-permissions/cloudkms#cloudkms.admin)
 

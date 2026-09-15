@@ -3,7 +3,10 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx,md,mdx}',
     './docs/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './docusaurus.config.js',
+    './docusaurus.config.ts',
+    // Streamdown ships pre-built class names for the assistant's markdown output.
+    './node_modules/streamdown/dist/*.js',
+    './node_modules/@streamdown/code/dist/*.js',
   ],
   theme: {
     extend: {
@@ -126,6 +129,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('tailwindcss-animate'),
   ],
   darkMode: ['class', '[data-theme="dark"]'],
   // Important: This ensures Tailwind doesn't conflict with Docusaurus styles

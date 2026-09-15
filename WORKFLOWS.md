@@ -8,11 +8,13 @@ CI and deployment. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.m
 
 ## Build and deploy
 
-The site is deployed by **Cloudflare Pages** on push to `main`. Cloudflare runs the `yarn build:cf` script, which:
+The site is deployed as a **Cloudflare Worker with static assets** (see `wrangler.jsonc`) on push to `main`, through Cloudflare's git integration. Cloudflare runs the `yarn build:cf` script, which:
 
 1. Sets `NODE_OPTIONS='--max-old-space-size=4096'` (the build needs more than the default heap).
 2. Runs `docusaurus build`.
 3. Deletes `build/_redirects` — this is the file Docusaurus auto-generates from any installed redirect plugin. Removing it means nothing leaks into the deployed bundle. All redirects live in the [Cloudflare Worker](ARCHITECTURE.md#cloudflare-worker) instead.
+
+The Worker needs one secret, `DOCS_ASSISTANT_SHARED_SECRET`, for the [Snowplow Assistant](ARCHITECTURE.md#snowplow-assistant) proxy. Set it once in the Cloudflare dashboard (Workers & Pages → documentation → Settings → Variables and Secrets) or with `npx wrangler secret put DOCS_ASSISTANT_SHARED_SECRET`. The agent URL is a plain var in `wrangler.jsonc`. Preview deployments share the same secret and var, so they talk to the same agent as production.
 
 Other `package.json` scripts:
 

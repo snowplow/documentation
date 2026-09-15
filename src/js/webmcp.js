@@ -309,8 +309,9 @@ const tools = [
 
 // Tool failures come back as results rather than rejections, so the agent can
 // read the message and recover instead of seeing an opaque error.
-function withErrorHandling(execute) {
+function withErrorHandling(name, execute) {
   return async (input) => {
+    console.log(`WebMCP: ${name} called`, input ?? {})
     try {
       return await execute(input ?? {})
     } catch (error) {
@@ -326,7 +327,7 @@ async function registerTools(modelContext) {
     try {
       await modelContext.registerTool({
         ...tool,
-        execute: withErrorHandling(tool.execute),
+        execute: withErrorHandling(tool.name, tool.execute),
       })
     } catch (error) {
       console.warn(`WebMCP: could not register the "${tool.name}" tool`, error)

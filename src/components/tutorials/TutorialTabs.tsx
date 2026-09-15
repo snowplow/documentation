@@ -9,7 +9,7 @@ enum DocsTab {
 }
 
 // Order matters: the first prefix that matches wins, and /docs is the fallback
-const TABS: { value: DocsTab; label: string }[] = [
+export const TABS: { value: DocsTab; label: string }[] = [
   { value: DocsTab.Docs, label: 'Docs' },
   { value: DocsTab.Tutorials, label: 'Tutorials' },
   { value: DocsTab.ReleaseNotes, label: 'Releases' },

@@ -15,6 +15,7 @@ An overview of how the docs site is built. For writing guidelines see [`CONTRIBU
 - [Mermaid](#mermaid)
 - [Tutorials](#tutorials)
 - [LLM support](#llm-support)
+- [WebMCP tools](#webmcp-tools)
 - [Product Fruits feedback widget](#product-fruits-feedback-widget)
 - [Snowplow event-sending component](#snowplow-event-sending-component)
 
@@ -140,6 +141,30 @@ As well as the [custom `llms.txt` and JSON-LD schema plugins](#custom-plugins), 
 - `CLAUDE.md` instructions
 - LLM-targeted style guide at `src/pages/style-guide/llm/index.md`.
 - Download or Copy Markdown buttons on every docs page, implemented in `src/theme/DocItem/Layout/index.tsx`. Note that these buttons don't provide the correct output when running locally.
+
+## WebMCP tools
+
+The site exposes seven tools to browser AI agents through [WebMCP](https://webmachinelearning.github.io/webmcp/), a Web Machine Learning Community Group draft that lets a page register callable tools on `document.modelContext`. An agent can search the docs, walk the navigation, open a page as Markdown, and follow a tutorial without scraping the DOM.
+
+The tools live in `src/webmcp/` and are registered once, for the lifetime of the app, by the `WebMcpTools` component mounted in `src/theme/Root.js`:
+
+| Tool                       | Does                                                                 |
+| -------------------------- | --------------------------------------------------------------------- |
+| `search_docs`              | Queries the site's own Algolia DocSearch index                       |
+| `list_navigation_sections` | Top-level site areas and docs sections                               |
+| `open_doc`                 | Navigates to a page and returns its Markdown twin                    |
+| `list_sidebar_topics`      | Breadcrumbs, siblings, and children in the active sidebar            |
+| `list_tutorials`           | The tutorials index, filterable by use case, topic, and technology   |
+| `get_tutorial`             | A tutorial's steps and the reader's progress                         |
+| `set_tutorial_progress`    | Opens a step, or ticks it off in the progress tracker                |
+
+Three things are worth knowing:
+
+- **It is a progressive enhancement.** `getModelContext()` returns null in a browser without WebMCP, nothing registers, and nothing else on the page changes. No polyfill ships with the site, so tools only appear in browsers that implement the API natively.
+- **`useDocsSidebar()` only resolves inside `DocRoot`**, which is above where the tools are registered. `src/theme/DocRoot/Layout/index.tsx` is a wrapper swizzle that exists solely to publish the active sidebar into `src/webmcp/pageContext.ts` for the tools to read at call time.
+- **`open_doc` reuses the Markdown twins** written by the [llms-txt plugin](#llmstxt-and-markdown-generation), so it carries the same local-development caveat as the Copy Markdown button. On a dev server the `.md` files don't exist yet and the tool falls back to the rendered page text.
+
+Tutorial progress is per-reader browser state. `src/components/tutorials/progress.ts` owns the `localStorage` key and an update event, so the progress tracker and `set_tutorial_progress` stay in step.
 
 ## Product Fruits feedback widget
 

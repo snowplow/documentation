@@ -7,6 +7,7 @@ import {
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
+import { WebMcpTools } from '@site/src/webmcp'
 
 // MUI keeps its own color scheme, which never follows the Docusaurus theme toggle,
 // so every MUI component renders light-palette colors on a dark page. Root sits above
@@ -77,6 +78,8 @@ export default function Root({ children }) {
           lifeCycle="unmount"
         />
       )}
+
+      <WebMcpTools />
 
       {getInitColorSchemeScript()}
       <CssVarsProvider theme={theme}>

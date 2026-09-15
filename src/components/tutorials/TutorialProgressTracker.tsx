@@ -5,6 +5,11 @@ import { Button } from '@site/src/components/ui/button'
 import RadialProgress from './RadialProgress'
 import styles from './TutorialProgressTracker.module.css'
 import { useHistory } from '@docusaurus/router'
+import {
+  TUTORIAL_PROGRESS_EVENT,
+  readCompletedSteps,
+  writeCompletedSteps,
+} from './progress'
 
 interface TutorialProgressTrackerProps {
   className?: string
@@ -33,34 +38,16 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
     setIsClient(true)
   }, [])
 
-  // Load visited steps from localStorage
+  // Load visited steps from localStorage, and reload them whenever something else
+  // updates progress (the WebMCP `set_tutorial_progress` tool does)
   useEffect(() => {
     if (!meta?.id || typeof window === 'undefined' || !isClient) return
 
-    const loadProgress = () => {
-      try {
-        const storedVisited = localStorage.getItem(`tutorial-progress-${meta.id}`)
-        if (storedVisited) {
-          const parsed = JSON.parse(storedVisited)
-          if (Array.isArray(parsed)) {
-            const validSteps = parsed.filter(item => typeof item === 'string' && item.length > 0)
-            if (validSteps.length > 0) {
-              setVisitedSteps(new Set(validSteps))
-            } else {
-              localStorage.removeItem(`tutorial-progress-${meta.id}`)
-            }
-          }
-        }
-      } catch (error) {
-        localStorage.removeItem(`tutorial-progress-${meta.id}`)
-      }
-    }
+    const loadProgress = () => setVisitedSteps(new Set(readCompletedSteps(meta.id)))
 
-    if (typeof localStorage !== 'undefined') {
-      loadProgress()
-    } else {
-      setTimeout(loadProgress, 100)
-    }
+    loadProgress()
+    window.addEventListener(TUTORIAL_PROGRESS_EVENT, loadProgress)
+    return () => window.removeEventListener(TUTORIAL_PROGRESS_EVENT, loadProgress)
   }, [meta?.id, isClient])
 
 
@@ -84,15 +71,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       const newSteps = [...currentSteps, stepKey].filter((item, index, arr) =>
         typeof item === 'string' && arr.indexOf(item) === index // deduplicate
       )
-      const newVisited = new Set(newSteps)
-      setVisitedSteps(newVisited)
-
-      try {
-        const dataToSave = Array.from(newVisited)
-        localStorage.setItem(`tutorial-progress-${meta.id}`, JSON.stringify(dataToSave))
-      } catch (error) {
-        // Silently fail - tutorial progress is not critical
-      }
+      setVisitedSteps(new Set(writeCompletedSteps(meta.id, newSteps)))
     }
   }, [scrollProgress, activeStep, meta?.id, visitedSteps])
 

@@ -3416,6 +3416,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mcp-b/webmcp-polyfill@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@mcp-b/webmcp-polyfill@npm:5.1.0"
+  dependencies:
+    "@mcp-b/webmcp-types": "npm:5.1.0"
+    "@standard-schema/spec": "npm:^1.1.0"
+  checksum: 10c0/e7aae0ec99b9e0a31b0fcdd02587883779a35fe372a7deb02bae1324ca11a987d2407c673f99eccce6a234b5f6cd39db22eea61450b09c5f1d100c42dc086112
+  languageName: node
+  linkType: hard
+
+"@mcp-b/webmcp-types@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@mcp-b/webmcp-types@npm:5.1.0"
+  dependencies:
+    "@modelcontextprotocol/server": "npm:2.0.0"
+  checksum: 10c0/4da3e2010295d001627af42c180a583c0cb323c595f5036e0a5a3c568c1f8a901cb7e3598f1efdbb282b5c2aec97ea5f5d4e5c46b7f9b2a8a06eb8861cb0e81b
+  languageName: node
+  linkType: hard
+
 "@mdx-js/mdx@npm:^3.0.0":
   version: 3.1.1
   resolution: "@mdx-js/mdx@npm:3.1.1"
@@ -3488,6 +3507,25 @@ __metadata:
   dependencies:
     langium: "npm:^4.0.0"
   checksum: 10c0/449e594a1f9ff1e24da7eb66b7d85694f1c48bdf1d27e798e0e182659e907fd3438a69bf30754807a8a8e286ab3173fa1b8e43ee102be31e30ee7632b9bc1d03
+  languageName: node
+  linkType: hard
+
+"@modelcontextprotocol/core@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@modelcontextprotocol/core@npm:2.0.0"
+  dependencies:
+    zod: "npm:^4.2.0"
+  checksum: 10c0/1cb96fcebfb60651775bcaa3b1e92b47b9317239e9e0352a2d6a404f77d1abfb68ce5b462becd073cddc4db08f2f0024cd3c7dd2582e3463ddb958f65b73fbe3
+  languageName: node
+  linkType: hard
+
+"@modelcontextprotocol/server@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@modelcontextprotocol/server@npm:2.0.0"
+  dependencies:
+    "@modelcontextprotocol/core": "npm:2.0.0"
+    zod: "npm:^4.2.0"
+  checksum: 10c0/18f5dbb4c533eda392a66565d8177d792c8018d3455d2cb241102917f660c0c73181e80cbf2b76b1c0e8efae22e7ee0fbb1c27e667d439ba596f1c6059c1d8af
   languageName: node
   linkType: hard
 
@@ -4936,6 +4974,13 @@ __metadata:
     tslib: "npm:^2.3.1"
     uuid: "npm:^10.0.0"
   checksum: 10c0/6b6940b8cc0472b85f1ea44e53126016566779240188f88b78599d4833be97b61cb812bddfc302148084e6e4ffdfabbfd15b359937a8fe0f5432634fe5b9bd73
+  languageName: node
+  linkType: hard
+
+"@standard-schema/spec@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@standard-schema/spec@npm:1.1.0"
+  checksum: 10c0/d90f55acde4b2deb983529c87e8025fa693de1a5e8b49ecc6eb84d1fd96328add0e03d7d551442156c7432fd78165b2c26ff561b970a9a881f046abb78d6a526
   languageName: node
   linkType: hard
 
@@ -8934,6 +8979,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^6.5.1"
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
+    "@mcp-b/webmcp-polyfill": "npm:5.1.0"
     "@mdx-js/react": "npm:^3.0.0"
     "@mermaid-js/layout-elk": "npm:^0.1.9"
     "@mui/icons-material": "npm:^5.11.16"
@@ -18795,6 +18841,13 @@ __metadata:
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
+  languageName: node
+  linkType: hard
+
+"zod@npm:^4.2.0":
+  version: 4.6.5
+  resolution: "zod@npm:4.6.5"
+  checksum: 10c0/32eb6c5e98becbe045675b2141c3611451c16ba567f9779231d79af41c4d651ca1c22f154aef7e6c6e77b929f23e43f1154ca05b82e119e922353725d6776af5
   languageName: node
   linkType: hard
 

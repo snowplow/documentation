@@ -32,7 +32,7 @@ export type WebMcpTool = {
   ) => Promise<unknown>
 }
 
-type ModelContext = {
+export type ModelContext = {
   registerTool: (
     tool: WebMcpTool,
     options?: { signal?: AbortSignal }

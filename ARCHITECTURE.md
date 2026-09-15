@@ -159,10 +159,11 @@ The tools live in `src/webmcp/` and are registered once, for the lifetime of the
 | `set_tutorial_progress`    | Opens a step, or ticks it off in the progress tracker                |
 | `book_demo`                | Opens the demo booking page, or the free trial, and returns its URL  |
 
-Three things are worth knowing:
+Four things are worth knowing:
 
-- **It is a progressive enhancement.** `getModelContext()` returns null in a browser without WebMCP, nothing registers, and nothing else on the page changes. No polyfill ships with the site, so tools only appear in browsers that implement the API natively.
+- **The polyfill is what makes it work anywhere.** Almost no browser implements the draft yet — it is behind a flag or an origin trial in Chrome and Edge, and absent everywhere else, agent browsers included. So when `getModelContext()` finds no native implementation, `src/webmcp/index.ts` loads [`@mcp-b/webmcp-polyfill`](https://www.npmjs.com/package/@mcp-b/webmcp-polyfill) and registers against that. Without it nothing registered at all, and an agent driving the page saw no `document.modelContext` and no tools. The polyfill is a separate chunk loaded after hydration, but unlike the tools it loads for every reader, because an agent arrives unannounced. It declines to install on an insecure origin, so plain `http://` other than localhost still gets nothing.
 - **`useDocsSidebar()` only resolves inside `DocRoot`**, which is above where the tools are registered. `src/theme/DocRoot/Layout/index.tsx` is a wrapper swizzle that exists solely to publish the active sidebar into `src/webmcp/pageContext.ts` for the tools to read at call time.
+- **Tools are called with a JSON string, not an object.** `executeTool(tool, inputArgsJson)` parses its second argument, so `executeTool(tool, {})` fails with `Failed to parse input arguments`; pass `JSON.stringify(args)`. The result comes back as a JSON string too.
 - **`open_doc` reuses the Markdown twins** written by the [llms-txt plugin](#llmstxt-and-markdown-generation), so it carries the same local-development caveat as the Copy Markdown button. On a dev server the `.md` files don't exist yet and the tool falls back to the rendered page text.
 
 Two pieces of shared state keep a tool and the UI it overlaps with from drifting apart. Tutorial progress is per-reader browser state: `src/components/tutorials/progress.ts` owns the `localStorage` key and an update event, so the progress tracker and `set_tutorial_progress` stay in step. The two marketing calls to action are in `src/constants/config.js`, read by both the "Book a demo" banner and `book_demo`.

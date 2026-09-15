@@ -41,6 +41,7 @@ const config: Config = {
     require.resolve('./google.js'),
     require.resolve('./src/js/mermaidEnlarge.js'),
     require.resolve('./src/qualified.js'),
+    require.resolve('./src/js/webmcp.js'),
   ],
 
   markdown: {

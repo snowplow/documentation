@@ -38,6 +38,10 @@ The following roles are also required if using [RDB Loader](/docs/api-reference/
 - [`Roles/secretmanager.secretAccessor`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretAccessor)
 - [`Roles/secretmanager.secretVersionAdder`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretVersionAdder)
 
+The following role is also required if you enable [application-layer secrets encryption](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/encrypting-secrets) on Google Kubernetes Engine (GKE):
+
+- [`Roles/cloudkms.admin`](https://cloud.google.com/iam/docs/roles-permissions/cloudkms#cloudkms.admin)
+
 ### Enable billing for the project
 
 Please enable billing on the project as failing to do so will prevent the pipeline from being installed. For details on enabling billing for your project, please refer to the GCP documentation for [APIs and billing](https://support.google.com/googleapi/answer/6158867).

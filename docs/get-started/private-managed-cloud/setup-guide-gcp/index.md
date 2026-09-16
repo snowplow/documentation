@@ -48,6 +48,7 @@ The following is a list of Organizational Policy constraints that we require to 
 
 - `constraints/compute.requireShieldedVm`
 - `constraints/gcp.resourceLocations`
+- `constraints/gcp.restrictServiceUsage`
 - `constraints/iam.disableServiceAccountCreation`
 - `constraints/iam.disableServiceAccountKeyCreation`
 - `constraints/sql.restrictPublicIp`

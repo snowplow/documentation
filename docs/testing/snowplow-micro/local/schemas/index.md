@@ -59,7 +59,7 @@ Make sure to fully spell out the URL, including the protocol (`http://` or `http
 
 :::tip
 
-You can find your Iglu registry URLs and generate API keys [via the console](https://console.snowplowanalytics.com/iglu-keys).
+If you use Snowplow CDI, you can find your Iglu resolver URLs and create Iglu Server keys in Console under **Settings** > **Manage organization** > **View and manage API keys**.
 
 :::
 

@@ -1,8 +1,33 @@
 import React, { useState, useEffect } from 'react'
-import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from '@mui/material/styles'
+import {
+  Experimental_CssVarsProvider as CssVarsProvider,
+  getInitColorSchemeScript,
+  useColorScheme,
+} from '@mui/material/styles'
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
+
+// MUI keeps its own color scheme, which never follows the Docusaurus theme toggle,
+// so every MUI component renders light-palette colors on a dark page. Root sits above
+// Docusaurus's ColorModeProvider, so mirror the data-theme attribute rather than
+// calling useColorMode.
+function SyncMuiColorScheme() {
+  const { setMode } = useColorScheme()
+
+  useEffect(() => {
+    const root = document.documentElement
+    const sync = () =>
+      setMode(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')
+
+    sync()
+    const observer = new MutationObserver(sync)
+    observer.observe(root, { attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [setMode])
+
+  return null
+}
 
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')
@@ -54,7 +79,10 @@ export default function Root({ children }) {
       )}
 
       {getInitColorSchemeScript()}
-      <CssVarsProvider theme={theme}>{children}</CssVarsProvider>
+      <CssVarsProvider theme={theme}>
+        <SyncMuiColorScheme />
+        {children}
+      </CssVarsProvider>
     </>
   )
 }

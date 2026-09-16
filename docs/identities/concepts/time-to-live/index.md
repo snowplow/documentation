@@ -13,11 +13,17 @@ Use a TTL for identifiers whose values stop being relevant once they stop appear
 
 You configure the TTL per identifier type in [Console](/docs/identities/configuration/index.md#set-a-time-to-live).
 
-## When values are removed
+## When Identities removes values
 
-Identities records a last-seen date for an identifier value the first time it appears in an event after its type has a TTL, and updates it on each later event. The last-seen date is the current UTC date when the event is processed, not the event's own timestamp, so reprocessing an old event sets the date to today. The date never moves to an earlier day. Identities records last-seen dates asynchronously and on a best-effort basis, so a sighting can occasionally be lost. A lost sighting leaves the last-seen date earlier than the truth, which can remove a value that is still in use.
+Identities records a last-seen date for an identifier value the first time it appears in an event after its type has a TTL, and updates it on each later event. Three details of the last-seen date affect when a value is removed:
 
-A value is due for removal once its last-seen date is more than the TTL number of days before the current UTC date. With a TTL of 30 days, a value last seen on 1 March is due for removal from 1 April. Removal runs in the background, so a value can stay in the graph for some time after it becomes due. A value that appears in an event before removal reaches it gets a new last-seen date and stays.
+* The last-seen date is the UTC date when the event is processed, not the event's own timestamp, so reprocessing an old event sets the date to the processing date
+* The date never moves to an earlier day
+* Identities records last-seen dates asynchronously and on a best-effort basis, so a sighting can occasionally be lost
+
+A lost sighting leaves the last-seen date earlier than the truth, so Identities can remove a value that is still in use.
+
+A value is due for removal once its last-seen date is more than the TTL number of days before the current UTC date. With a TTL of 30 days, a value last seen on 1 March is due for removal from 1 April. Removal runs in the background, so a value can stay in the graph for some time after it becomes due. A value that appears in an event before Identities removes it gets a new last-seen date and stays.
 
 A value with no last-seen date is never removed. When you add a TTL to a type that already has values in the graph, each existing value is removed only after it has been seen once more and then gone unseen for the TTL period.
 

@@ -57,6 +57,22 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value 3.  How many times the internal spark context should be retry a task in case of failure</td>
 </tr>
 <tr>
+    <td><code>spark.writerPartitioning.splitsPerFairShare</code> (since 0.14.0)</td>
+    <td>
+      <p>Optional. Default value <code>4</code>.</p>
+      <p>Before committing a window, the loader spreads its events across the threads that write to the lake, so that each thread gets a similar amount of work. An <code>event_name</code> holding more events than its fair share is split across several threads, and this setting controls how finely: the loader aims for pieces of one fair share divided by this number. Smaller pieces balance the threads more evenly, at the cost of an extra output file per piece.</p>
+      <p>The loader only splits an <code>event_name</code> when leaving it whole would load the threads unevenly, so a window that already balances well is not fragmented whatever you set here.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>spark.writerPartitioning.minEventsPerSplit</code> (since 0.14.0)</td>
+    <td>
+      <p>Optional. Default value <code>5000</code>.</p>
+      <p>A floor on how small a piece of a split <code>event_name</code> can be. No piece ever holds fewer events than this, so an <code>event_name</code> is only split at all once it holds at least twice this many events.</p>
+      <p>Raise it if your output parquet files are coming out too small. Lower it if the writer threads are loaded unevenly and commits take longer than you expect. This is the setting to reach for before <code>splitsPerFairShare</code>.</p>
+    </td>
+</tr>
+<tr>
     <td><code>retries.setupErrors.delay</code></td>
     <td>
       Optional. Default value <code>30 seconds</code>.
@@ -103,7 +119,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>
-    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how Snowflake is set up for this loader.</td>
+    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how the lake is set up for this loader.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.tags.*</code></td>

@@ -13,7 +13,7 @@ Event specification inference allows the Snowplow pipeline to automatically matc
 
 Each event specification uses an explicit publishing model, replacing the previous "Live" status that the Console assigned automatically when it first observed matching events. Each specification has one of three statuses:
 
-- **Draft**: the specification is being edited and is not yet active in the pipeline. The pipeline does not match events against it, and no inference occurs.
+- **Draft**: the specification is being edited and is not yet active in a pipeline. A pipeline does not match events against it, and no inference occurs. A [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications) does match events against the draft, so you can test a specification before publishing it.
 - **Publishing**: a transitional state, lasting a few minutes, while the pipeline propagates the specification. You do not need to take any action during this phase.
 - **Published**: the specification is active. The pipeline matches incoming events against it, attaches an `event_specification` entity to it, and surfaces volume data and "last seen" timestamps in the Console.
 
@@ -47,6 +47,8 @@ When a match occurs, the pipeline:
 - Attaches an [entity](/docs/fundamentals/entities/index.md) to the event containing the specification name and ID, making the business context available for downstream consumers.
 - Records the event against the specification in the Console, updating the total volume count and "last seen" timestamp.
 
+To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). There, inference considers the current draft of a specification when there is one, and the highest published version otherwise, so you can check that an event matches before publishing.
+
 ### Example
 
 Consider a specification named "Product page view" that defines:
@@ -59,8 +61,6 @@ An incoming `page_view` event carrying a `product` entity where `category = "ele
 The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity rule is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
 
 Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its rules.
-
-To try inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). There, inference considers the current draft of a specification instead of its highest published version, so you can check that an event matches before publishing.
 
 :::tip[No tracking changes needed]
 You do not need to change your tracking implementation to benefit from inference. Events already flowing through your pipeline will be matched against newly published specifications automatically.

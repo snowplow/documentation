@@ -2,21 +2,21 @@
 title: "Event specification validation"
 sidebar_label: "Validation"
 sidebar_position: 3
-description: "Event specification validation checks events that arrive with a specification entity attached against the rules defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
+description: "Event specification validation checks events that arrive with a specification entity attached against the instructions defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
 keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "property instructions"]
 date: "2026-04-27"
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Event specification validation checks whether incoming events conform to the rules defined in the [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) you have published.
+Event specification validation checks whether incoming events conform to the instructions defined in the [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) you have published.
 
 The pipeline runs validation on events that arrive with an `event_specification` entity already attached, typically from a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md) version 0.17.0 or later (see [Validate against a new specification version](#validate-against-a-new-specification-version) for the upgrade steps). For events that arrive without one, the pipeline runs [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Each event takes one path or the other; the two paths are mutually exclusive per event. Inference never produces a validation entity, even when an event would have failed validation.
 
-When an event fails validation, the pipeline attaches an [entity](/docs/fundamentals/entities/index.md) to it describing the failure. The pipeline still enriches and delivers events that fail validation alongside successful ones; only the validation entity reflects the failure. You don't need to change your tracking implementation, as validation runs against newly published specifications immediately.
+When an event fails validation, the pipeline attaches an [entity](/docs/fundamentals/entities/index.md) to it describing the failure. By default, the pipeline still enriches and delivers events that fail validation alongside successful ones; only the validation entity reflects the failure. You don't need to change your tracking implementation, as validation runs against newly published specifications immediately.
 
-:::note[Validation failures don't drop events]
-The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md).
+:::note[Validation failures don't drop events by default]
+The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md), unless you configure the tracking plan to [send invalid events to failed events](#send-invalid-events-to-failed-events).
 :::
 
 In your warehouse, three cases are possible:
@@ -24,9 +24,11 @@ In your warehouse, three cases are possible:
 - **Passed validation, or matched by inference**: the event has an `event_specification` entity but no `event_specification_validation` entity. Either the event was Snowtype-tracked and passed validation, or the pipeline matched it to a specification by inference.
 - **Not associated with a specification**: the event has neither entity. No specification was attached at tracking time, and the pipeline did not match the event to a published specification.
 
+These cases assume the default **Data quality rules** setting. If the tracking plan [sends invalid events to failed events](#send-invalid-events-to-failed-events), events that fail validation don't reach your warehouse `events` table.
+
 ## Validation entity
 
-The pipeline attaches an `event_specification_validation` entity to events that fail validation.
+The pipeline attaches an `event_specification_validation` entity to events that fail validation. It also attaches one when it cannot find the declared specification, either because it was never published or because its instructions are not valid, which stops the pipeline from loading it.
 
 <SchemaProperties
   overview={{ entity: true }}
@@ -50,7 +52,7 @@ Events that pass validation receive no entity. Use the entity's presence in your
 
 ## Understand what the pipeline validates
 
-The pipeline evaluates each event against three categories of rule defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:
+The pipeline evaluates each event against three categories of check defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:
 
 1. **Event property instructions**: property-level instructions defined on the event data structure, such as expected values or ranges
 2. **Entity cardinality**: how many of each entity listed in the specification must be present on the event. Cardinality is checked per entity schema.
@@ -62,7 +64,7 @@ If the event payload itself fails its schema validation, the pipeline doesn't ev
 
 Consider a published specification "Add to cart" that defines:
 
-- Event: `add_to_cart` (`iglu:com.acme/add_to_cart/jsonschema/1-0-0`) with rule `currency = "USD"`
+- Event: `add_to_cart` (`iglu:com.acme/add_to_cart/jsonschema/1-0-0`) with the instruction `currency = "USD"`
 - Required entity: `product` (`iglu:com.acme/product/jsonschema/1-0-0`) with cardinality of exactly one
 
 The `add_to_cart` data structure's schema permits `currency` to be either `"USD"` or `"EUR"`. The specification narrows it to `"USD"`, so the event property instruction catches values that the underlying schema would otherwise accept.
@@ -85,7 +87,7 @@ An `add_to_cart` event arrives with:
 - An event payload where `currency = "USD"`
 - Two `product` entities
 
-The event fails the entity cardinality check. The pipeline attaches a validation entity with `isValid: false`, and an error identifying the `product` entity schema and the violated cardinality rule.
+The event fails the entity cardinality check. The pipeline attaches a validation entity with `isValid: false`, and an error identifying the `product` entity schema and the cardinality it does not meet.
 
 ## Validate against a new specification version
 
@@ -94,10 +96,24 @@ A Snowtype-tracked event declares a specific `(id, version)` pair in its `event_
 :::info[Enable validation for an existing tracking implementation]
 1. Update the Snowtype dependency in your package manager or CI configuration to 0.17.0 or later
 2. Regenerate the tracker code with `snowtype generate`, either manually or as part of your build pipeline
-3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; validation doesn't run against drafts
+3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; pipelines don't validate against drafts. To validate against a draft before publishing, use a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications).
 4. Deploy the regenerated tracker code
 :::
 
 When you publish a new version of a specification, events from existing tracker code continue to declare the previous version, validating against its instructions. The new version applies once you regenerate your tracker code with [Snowtype](/docs/event-studio/implement-tracking/index.md) and deploy the updated tracker code, after which new events declare and validate against the new version.
 
 Different versions of a specification can coexist. Each event validates against the version it declares, whether the variation comes from a rolling update, from different applications using different versions, or from different deployment stages.
+
+## Send invalid events to failed events
+
+Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. In the Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md#tracking-plans) on tracking plans to change this setting.
+
+The default is **Send to valid events and mark as violation**, which keeps those events with your enriched ones. Select **Send to failed events as validation error** to route them to [failed events](/docs/fundamentals/failed-events/index.md) instead, keeping events that don't conform to their specifications out of your warehouse `events` table.
+
+!["Data quality rules" dialog for a tracking plan, showing the options "Send to valid events and mark as violation" and "Send to failed events as validation error"](images/data-quality-rules-dialog.png)
+
+The setting applies to all event specifications in the tracking plan and all their versions. Changes take effect within a few minutes, with no new specification version to publish and no tracking code to redeploy.
+
+These events appear in failed events as enrichment failures from the event specification enrichment. They keep both the `event_specification` and `event_specification_validation` entities, so you can inspect why each event failed.
+
+If the pipeline cannot find the specification an event declares, that event stays with your enriched events, even when the tracking plan sends invalid events to failed events.

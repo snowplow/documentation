@@ -48,3 +48,11 @@ Do not send production data to development environments. Anyone with the _View e
 :::
 
 To enable or disable enrichments and edit their configurations, select the **Enrichments** tab. The process is the same as for regular pipelines. We highly recommend testing enrichments in a development environment before deploying them to production.
+
+## Validate event specifications
+
+Development environments validate incoming events the same way [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) does in a pipeline. The environment checks each event against the version that its `event_specification` entity declares. An event that declares a published version validates against that version even when a draft exists. Unlike pipelines, development environments also load the draft of each [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md), so you can test a draft without publishing the specification.
+
+Edit the specification in Console, send a test event, and inspect the result in the [Micro dashboard](/docs/testing/snowplow-micro/ui/index.md). Events that fail validation carry an `event_specification_validation` entity describing each error. The environment picks up specification changes within a few minutes.
+
+The environment infers a specification for events that arrive without an `event_specification` entity. Inference considers one version of each specification: the draft when there is one, and the highest published version otherwise. See [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) for how the pipeline matches an event.

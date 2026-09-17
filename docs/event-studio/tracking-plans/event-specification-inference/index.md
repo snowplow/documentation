@@ -47,8 +47,6 @@ When a match occurs, the pipeline:
 - Attaches an [entity](/docs/fundamentals/entities/index.md) to the event containing the specification name and ID, making the business context available for downstream consumers.
 - Records the event against the specification in the Console, updating the total volume count and "last seen" timestamp.
 
-To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications), which also matches events against draft specifications.
-
 ### Example
 
 Consider a specification named "Product page view" that defines:
@@ -61,6 +59,8 @@ An incoming `page_view` event carrying a `product` entity where `category = "ele
 The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity rule is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
 
 Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its rules.
+
+To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications), which also matches events against draft specifications.
 
 :::tip[No tracking changes needed]
 You do not need to change your tracking implementation to benefit from inference. Events already flowing through your pipeline will be matched against newly published specifications automatically.

@@ -113,3 +113,5 @@ By default, the pipeline still delivers events that fail validation as enriched 
 The setting applies to all event specifications in the tracking plan and all their versions. Changing it takes effect automatically, with no new specification version to publish and no tracking code to redeploy.
 
 Events sent to failed events appear as enrichment failures and keep both the `event_specification` and the `event_specification_validation` entities, so you can inspect why each event failed.
+
+The pipeline also attaches a validation entity when it cannot find the declared specification, either because nobody published it or because its rules do not compile. Those events stay with your enriched events even when the tracking plan sends invalid events to failed events.

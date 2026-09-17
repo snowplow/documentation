@@ -2,14 +2,14 @@
 title: "Event specification validation"
 sidebar_label: "Validation"
 sidebar_position: 3
-description: "Event specification validation checks events that arrive with a specification entity attached against the rules defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
+description: "Event specification validation checks events that arrive with a specification entity attached against the instructions defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
 keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "property instructions"]
 date: "2026-04-27"
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Event specification validation checks whether incoming events conform to the rules defined in the [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) you have published.
+Event specification validation checks whether incoming events conform to the instructions defined in the [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) you have published.
 
 The pipeline runs validation on events that arrive with an `event_specification` entity already attached, typically from a tracker using [Snowtype](/docs/event-studio/implement-tracking/index.md) version 0.17.0 or later (see [Validate against a new specification version](#validate-against-a-new-specification-version) for the upgrade steps). For events that arrive without one, the pipeline runs [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) instead. Each event takes one path or the other; the two paths are mutually exclusive per event. Inference never produces a validation entity, even when an event would have failed validation.
 
@@ -28,7 +28,7 @@ These cases assume the default **Data quality rules** setting. If the tracking p
 
 ## Validation entity
 
-The pipeline attaches an `event_specification_validation` entity to events that fail validation. It also attaches one when it cannot find the declared specification, either because it was never published or because its rules are invalid.
+The pipeline attaches an `event_specification_validation` entity to events that fail validation. It also attaches one when it cannot find the declared specification, either because it was never published or because its instructions are not valid, which stops the pipeline from loading it.
 
 <SchemaProperties
   overview={{ entity: true }}
@@ -52,7 +52,7 @@ Events that pass validation receive no entity. Use the entity's presence in your
 
 ## Understand what the pipeline validates
 
-The pipeline evaluates each event against three categories of rule defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:
+The pipeline evaluates each event against three categories of check defined in its specification, in addition to the [schema validation](/docs/fundamentals/schemas/index.md) that always runs as part of enrichment:
 
 1. **Event property instructions**: property-level instructions defined on the event data structure, such as expected values or ranges
 2. **Entity cardinality**: how many of each entity listed in the specification must be present on the event. Cardinality is checked per entity schema.
@@ -64,7 +64,7 @@ If the event payload itself fails its schema validation, the pipeline doesn't ev
 
 Consider a published specification "Add to cart" that defines:
 
-- Event: `add_to_cart` (`iglu:com.acme/add_to_cart/jsonschema/1-0-0`) with rule `currency = "USD"`
+- Event: `add_to_cart` (`iglu:com.acme/add_to_cart/jsonschema/1-0-0`) with the instruction `currency = "USD"`
 - Required entity: `product` (`iglu:com.acme/product/jsonschema/1-0-0`) with cardinality of exactly one
 
 The `add_to_cart` data structure's schema permits `currency` to be either `"USD"` or `"EUR"`. The specification narrows it to `"USD"`, so the event property instruction catches values that the underlying schema would otherwise accept.
@@ -87,7 +87,7 @@ An `add_to_cart` event arrives with:
 - An event payload where `currency = "USD"`
 - Two `product` entities
 
-The event fails the entity cardinality check. The pipeline attaches a validation entity with `isValid: false`, and an error identifying the `product` entity schema and the violated cardinality rule.
+The event fails the entity cardinality check. The pipeline attaches a validation entity with `isValid: false`, and an error identifying the `product` entity schema and the cardinality it does not meet.
 
 ## Validate against a new specification version
 

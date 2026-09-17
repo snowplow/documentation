@@ -37,7 +37,7 @@ Before publishing completes, the Console checks whether all [data structures](/d
 Once a specification is published, the pipeline evaluates every eligible incoming event against it. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/index.md) already contain an `event_specification` entity, so the pipeline bypasses inference for them entirely. All other events are evaluated using the following criteria, in order:
 
 1. **Event schema**: the event's schema must match the event data structure defined in the specification.
-2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification according to the cardinality rules. Extra entities with different schemas on the event are ignored.
+2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification, within the cardinality defined for each one. Extra entities with different schemas on the event are ignored.
 3. **Property instructions**: any property-level instructions defined on those data structures in the specification — for example, `category = "product"` — must be satisfied.
 
 The pipeline does not match on `appId`, [source applications](/docs/event-studio/source-applications/index.md), environment, or any other source attribute. A single incoming event can match more than one specification if multiple published specifications share overlapping definitions.
@@ -52,13 +52,13 @@ When a match occurs, the pipeline:
 Consider a specification named "Product page view" that defines:
 
 - **Event**: `page_view` (`iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`)
-- **Entity**: `product` (`iglu:com.acme/product/jsonschema/1-0-0`) with a rule `category = "electronics"`
+- **Entity**: `product` (`iglu:com.acme/product/jsonschema/1-0-0`) with an instruction `category = "electronics"`
 
 An incoming `page_view` event carrying a `product` entity where `category = "electronics"` matches the specification. The pipeline attaches an `event_specification` entity to the event and increments the specification's volume count in the Console.
 
-The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity rule is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
+The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity property instruction is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
 
-Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its rules.
+Inference is the path the pipeline takes for events that do not arrive with an `event_specification` entity already attached. For events that do, the pipeline runs [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) against that specification instead, which produces explicit per-event findings when an event fails to conform to its instructions.
 
 To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications), which also matches events against draft specifications.
 

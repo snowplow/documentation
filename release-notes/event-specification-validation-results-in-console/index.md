@@ -1,6 +1,8 @@
 ---
 title: "Event specification validation results in Console"
-description: "Console now shows how many events matched each tracking plan and event specification over the last 30 days, split into valid, inferred, violations, and failed events, with a per-version breakdown for each event specification."
+description: "Console now shows how many events matched each tracking plan and event specification over the last 30 days, split into valid events, inferred events, events with violations, and failed events, with a per-version breakdown for each event specification."
+sidebar_label: "Validation results in Console"
+keywords: ["event specification validation", "tracking plans", "data quality", "Event Studio", "Console"]
 date: "2026-09-18"
 category:
   - "Product news"
@@ -20,7 +22,7 @@ Every event volume figure in Event Studio is split into four categories: valid e
 * **Tracking plans list and Event Catalog**: the volume column shows the breakdown for each tracking plan and event specification
 * **Tracking summary tab**: each event specification has a new tab with metrics per specification version and application ID. You can see which applications send which version, and whether an application sends the event without being listed in the specification
 
-Failed events counts require the data quality dashboard to be connected to the selected pipeline. Whether an event that fails validation counts as a violation or as a failed event depends on the tracking plan's [data quality rules](/docs/event-studio/tracking-plans/event-specification-validation/#send-invalid-events-to-failed-events).
+Failed event counts require the data quality dashboard to be connected to the selected pipeline. Whether an event that fails validation counts as a violation or as a failed event depends on the tracking plan's [data quality rules](/docs/event-studio/tracking-plans/event-specification-validation/#send-invalid-events-to-failed-events).
 
 ## Documentation
 

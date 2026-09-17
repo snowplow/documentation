@@ -2,7 +2,7 @@
 title: "Monitor tracking plan data quality in Console"
 sidebar_label: "Data quality"
 sidebar_position: 4
-description: "See how many events matched each tracking plan and event specification over the last 30 days, and how many of them were valid, inferred, had violations, or failed."
+description: "See how many events matched each tracking plan and event specification over the last 30 days, and how many of them were valid or inferred, had violations, or failed."
 keywords: ["tracking plan data quality", "event specification validation", "event volume", "events with violations", "failed events", "tracking summary", "Console"]
 date: "2026-09-17"
 ---
@@ -13,7 +13,7 @@ Metrics cover the last 30 days for one pipeline at a time. Every view that shows
 
 ## Understand the event categories
 
-Console sorts every event that the pipeline associated with a published event specification into one of four categories:
+Console sorts every event that the pipeline matches to a published event specification into one of four categories:
 
 | Category               | Meaning                                                                                                                                                                                                                                                                                                        |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -26,17 +26,17 @@ Only events that arrive with an `event_specification` entity go through validati
 
 The total volume is the sum of the four categories. Where Console shows a bar next to a volume, each segment is one category. Hover over the bar to see the count for each category.
 
-Failed events counts come from your [data quality dashboard](/docs/monitoring/index.md), not from the Console API. They are available when the selected pipeline loads failed events into your warehouse, the data quality dashboard is connected to that pipeline, and you have permission to view it. Otherwise the failed events category shows N/A, volumes exclude failed events, and a warning icon next to the volume explains why.
+Failed event counts come from your [data quality dashboard](/docs/monitoring/index.md), not from the Console API. They are available when the selected pipeline loads failed events into your warehouse, the data quality dashboard is connected to that pipeline, and you have permission to view it. Otherwise the failed events category shows N/A, volumes exclude failed events, and a warning icon next to the volume explains why.
 
 ## View data quality for a tracking plan
 
 Open a tracking plan to see its **Data quality** panel. The chart shows the total number of events across all event specifications in the plan, split by category, with the share and count of each. Click **View details** to open the data quality dashboard for the selected pipeline, or the failed events page when the dashboard isn't connected.
 
-![E-commerce Web tracking plan page with a Data quality panel showing a donut chart of 139.78k total events on the prod pipeline over the last 30 days, split into valid, inferred, violations, and failed events, above an event specifications table with a volume bar per specification](images/tracking-plan-data-quality.png)
+![E-commerce Web tracking plan page with a Data quality panel showing a donut chart of 139.78k total events on the prod pipeline over the last 30 days, split into valid events, inferred events, events with violations, and failed events, above an event specifications table with a volume bar per specification](images/tracking-plan-data-quality.png)
 
 The event specifications table shows the same breakdown per event specification in its **Volume** column. The **Last seen** column shows the most recent event for the specification, whether it was valid or failed.
 
-The **Data quality rules** button in the page header decides whether events that fail validation count as events with violations or as failed events. See [Send invalid events to failed events](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events).
+The **Data quality rules** button in the page header controls whether events that fail validation count as events with violations or as failed events. See [Send invalid events to failed events](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events).
 
 ## Compare tracking plans and event specifications
 

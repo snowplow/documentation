@@ -44,7 +44,7 @@ In the image below, you can see an example of a tracking plan. It provides an ov
 Sharing and subscribing is only available for users registered in Snowplow Console.
 :::
 
-![E-commerce Web tracking plan overview showing general information with owner and domain, a Data quality panel with a donut chart of valid, inferred, violations, and failed events, and an event specifications table with published events such as Add to cart and Checkout Step using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
+![E-commerce Web tracking plan overview showing general information with owner and domain, a Data quality panel with a donut chart of valid events, inferred events, events with violations, and failed events, and an event specifications table with published events such as Add to cart and Checkout Step using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
 
 ![Add to cart event specification page showing event description, four tracked application IDs, the snowplow_ecommerce_action 1-0-2 data structure with a "type" property set to "add_to_cart", and product and cart entity data structures](images/event-specification-details.png)
 

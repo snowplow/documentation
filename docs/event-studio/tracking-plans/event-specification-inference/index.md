@@ -13,7 +13,7 @@ Event specification inference allows the Snowplow pipeline to automatically matc
 
 Each event specification uses an explicit publishing model, replacing the previous "Live" status that the Console assigned automatically when it first observed matching events. Each specification has one of three statuses:
 
-- **Draft**: the specification is being edited and is not yet active in a pipeline. A pipeline does not match events against it, and no inference occurs. A [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications) does match events against the draft, so you can test a specification before publishing it.
+- **Draft**: the specification is being edited and is not yet active in the pipeline. The pipeline does not match events against it, and no inference occurs. [Development environments](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications) do match events against the draft, so you can test a specification before publishing it.
 - **Publishing**: a transitional state, lasting a few minutes, while the pipeline propagates the specification. You do not need to take any action during this phase.
 - **Published**: the specification is active. The pipeline matches incoming events against it, attaches an `event_specification` entity to it, and surfaces volume data and "last seen" timestamps in the Console.
 
@@ -47,7 +47,7 @@ When a match occurs, the pipeline:
 - Attaches an [entity](/docs/fundamentals/entities/index.md) to the event containing the specification name and ID, making the business context available for downstream consumers.
 - Records the event against the specification in the Console, updating the total volume count and "last seen" timestamp.
 
-To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications). There, inference considers the current draft of a specification when there is one, and the highest published version otherwise, so you can check that an event matches before publishing.
+To test inference without affecting production, send test events to a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications), which also matches events against draft specifications.
 
 ### Example
 

@@ -16,7 +16,7 @@ The pipeline runs validation on events that arrive with an `event_specification`
 When an event fails validation, the pipeline attaches an [entity](/docs/fundamentals/entities/index.md) to it describing the failure. By default, the pipeline still enriches and delivers events that fail validation alongside successful ones; only the validation entity reflects the failure. You don't need to change your tracking implementation, as validation runs against newly published specifications immediately.
 
 :::note[Validation failures don't drop events by default]
-The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md), unless the tracking plan is configured to [send invalid events to failed events](#send-invalid-events-to-failed-events).
+The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md), unless you configure the tracking plan to [send invalid events to failed events](#send-invalid-events-to-failed-events).
 :::
 
 In your warehouse, three cases are possible:
@@ -24,11 +24,11 @@ In your warehouse, three cases are possible:
 - **Passed validation, or matched by inference**: the event has an `event_specification` entity but no `event_specification_validation` entity. Either the event was Snowtype-tracked and passed validation, or the pipeline matched it to a specification by inference.
 - **Not associated with a specification**: the event has neither entity. No specification was attached at tracking time, and the pipeline did not match the event to a published specification.
 
-These cases assume the default behavior. If the tracking plan [sends invalid events to failed events](#send-invalid-events-to-failed-events), events that fail validation don't reach your warehouse events table.
+These cases assume the default **Data quality rules** setting. If the tracking plan [sends invalid events to failed events](#send-invalid-events-to-failed-events), events that fail validation don't reach your warehouse `events` table.
 
 ## Validation entity
 
-The pipeline attaches an `event_specification_validation` entity to events that fail validation.
+The pipeline attaches an `event_specification_validation` entity to events that fail validation. It also attaches one when it cannot find the declared specification, either because it was never published or because its rules are invalid.
 
 <SchemaProperties
   overview={{ entity: true }}
@@ -106,14 +106,14 @@ Different versions of a specification can coexist. Each event validates against 
 
 ## Send invalid events to failed events
 
-Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. Open the tracking plan and select **Data quality rules**. You need permission to edit the tracking plan to change it.
+Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. In Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md) on tracking plans to change this setting.
 
-Select **Send to failed events as validation error** to route events that fail validation to [failed events](/docs/fundamentals/failed-events/index.md) instead. This keeps events that don't conform to their specifications out of your warehouse events table. The default is **Send to valid events and mark as violation**.
+The default is **Send to valid events and mark as violation**, which keeps those events with your enriched ones. Select **Send to failed events as validation error** to route them to [failed events](/docs/fundamentals/failed-events/index.md) instead, keeping events that don't conform to their specifications out of your warehouse `events` table.
 
-!["Data quality rules" dialog showing the two routing options for a tracking plan](images/data-quality-rules-dialog.png)
+!["Data quality rules" dialog for a tracking plan, showing the options "Send to valid events and mark as violation" and "Send to failed events as validation error"](images/data-quality-rules-dialog.png)
 
 The setting applies to all event specifications in the tracking plan and all their versions. Changes take effect within a few minutes, with no new specification version to publish and no tracking code to redeploy.
 
-Events sent to failed events appear as enrichment failures attributed to the event specification enrichment, and keep both the `event_specification` and the `event_specification_validation` entities, so you can inspect why each event failed.
+These events appear in failed events as enrichment failures from the event specification enrichment. They keep both the `event_specification` and `event_specification_validation` entities, so you can inspect why each event failed.
 
-The pipeline also attaches a validation entity when it cannot find the declared specification, either because it was never published or because its rules are invalid. Those events stay with your enriched events even when the tracking plan sends invalid events to failed events.
+Events whose declared specification the pipeline cannot find stay with your enriched events, even when the tracking plan sends invalid events to failed events.

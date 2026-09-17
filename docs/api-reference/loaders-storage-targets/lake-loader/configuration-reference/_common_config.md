@@ -60,16 +60,15 @@ import Link from '@docusaurus/Link';
     <td><code>spark.writerPartitioning.splitsPerFairShare</code> (since 0.14.0)</td>
     <td>
       <p>Optional. Default value <code>4</code>.</p>
-      <p>Before committing a window, the loader spreads its events across the threads that write to the lake, so that each thread gets a similar amount of work. An <code>event_name</code> holding more events than its fair share is split across several threads, and this setting controls how finely: the loader aims for pieces of one fair share divided by this number. Smaller pieces balance the threads more evenly, at the cost of an extra output file per piece.</p>
-      <p>The loader only splits an <code>event_name</code> when leaving it whole would load the threads unevenly, so it leaves a well-balanced window whole, whatever you set here.</p>
+      <p>Tunes how evenly the loader spreads a window's events across the threads that write to the lake. A higher value spreads the work more evenly, so commits finish sooner, at the cost of more output files in the lake.</p>
     </td>
 </tr>
 <tr>
     <td><code>spark.writerPartitioning.minEventsPerSplit</code> (since 0.14.0)</td>
     <td>
       <p>Optional. Default value <code>5000</code>.</p>
-      <p>A floor on how small a piece of a split <code>event_name</code> can be. No piece ever holds fewer events than this, so an <code>event_name</code> is only split at all once it holds at least twice this many events.</p>
-      <p>Raise it if your output parquet files are coming out too small. Lower it if the writer threads are loaded unevenly and commits take longer than you expect. This is the setting to reach for before <code>splitsPerFairShare</code>.</p>
+      <p>Sets the smallest number of events the loader will split off when it spreads a window's events across the threads that write to the lake. A lower value spreads the work more evenly, so commits finish sooner, at the cost of more output files in the lake. Raise it if your output parquet files are coming out too small.</p>
+      <p>Of the two settings, tune this one first.</p>
     </td>
 </tr>
 <tr>

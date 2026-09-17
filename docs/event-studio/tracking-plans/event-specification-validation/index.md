@@ -96,7 +96,7 @@ A Snowtype-tracked event declares a specific `(id, version)` pair in its `event_
 :::info[Enable validation for an existing tracking implementation]
 1. Update the Snowtype dependency in your package manager or CI configuration to 0.17.0 or later
 2. Regenerate the tracker code with `snowtype generate`, either manually or as part of your build pipeline
-3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; validation in pipelines doesn't run against drafts. To validate against a draft before publishing, use a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications).
+3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; pipelines don't validate against drafts. To validate against a draft before publishing, use a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications).
 4. Deploy the regenerated tracker code
 :::
 
@@ -106,7 +106,7 @@ Different versions of a specification can coexist. Each event validates against 
 
 ## Send invalid events to failed events
 
-Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. In Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md) on tracking plans to change this setting.
+Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. In the Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md#tracking-plans) on tracking plans to change this setting.
 
 The default is **Send to valid events and mark as violation**, which keeps those events with your enriched ones. Select **Send to failed events as validation error** to route them to [failed events](/docs/fundamentals/failed-events/index.md) instead, keeping events that don't conform to their specifications out of your warehouse `events` table.
 
@@ -116,4 +116,4 @@ The setting applies to all event specifications in the tracking plan and all the
 
 These events appear in failed events as enrichment failures from the event specification enrichment. They keep both the `event_specification` and `event_specification_validation` entities, so you can inspect why each event failed.
 
-Events whose declared specification the pipeline cannot find stay with your enriched events, even when the tracking plan sends invalid events to failed events.
+If the pipeline cannot find the specification an event declares, that event stays with your enriched events, even when the tracking plan sends invalid events to failed events.

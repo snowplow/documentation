@@ -13,9 +13,9 @@ Two additions to [event specification validation](/docs/event-studio/tracking-pl
 
 ## Test a specification before publishing it
 
-A [development environment](/docs/testing/snowplow-micro/console/) validates incoming events with the same rules as a pipeline, and it also loads the draft of each specification. Edit a specification in Console, send a test event, and inspect the result in the Micro dashboard. Events that fail validation carry an entity describing each error, and the environment picks up your edits within a few minutes.
+A [development environment](/docs/testing/snowplow-micro/console/) validates incoming events with the same rules as a pipeline, and it also loads the draft of each specification. Edit a specification in the Console, send a test event, and inspect the result in the [Micro dashboard](/docs/testing/snowplow-micro/ui/). Events that fail validation carry an `event_specification_validation` entity describing each error, and the environment picks up your edits within a few minutes.
 
-Inference works there too, so an event that arrives without an event specification entity is matched against the draft.
+Inference works there too, so the environment matches events that arrive without an `event_specification` entity against the draft.
 
 ## Send events that fail validation to failed events
 

@@ -91,7 +91,7 @@ If you tune this setting correctly, then your lake can support efficient analyti
 
 The Lake Loader requires an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
 
-## Monitoring the loader
+## Monitor the loader
 
 The Lake Loader reports metrics covering event counts, latency, the state of the table after each commit, and the disk and memory used by its internal Spark instance. It can send them to StatsD, to Prometheus, or to both.
 

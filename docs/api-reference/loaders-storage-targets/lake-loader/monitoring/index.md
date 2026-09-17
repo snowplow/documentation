@@ -111,7 +111,7 @@ The loader runs an internal Spark instance, which stages each window in memory a
 | `spark_storage_memory_bytes` | Staged batches held in memory, measured at the point in each window where occupancy peaks.                                                              |
 | `spark_storage_disk_bytes`   | Staged batches that Spark has written out to local disk, measured at the same point.                                                                    |
 
-The last three are not a breakdown of the first. A staged batch that Spark wrote to disk is counted by `spark_storage_disk_bytes` and by `spark_disk_bytes` both, whereas shuffle files are not held as storage blocks and so reach `spark_disk_bytes` without appearing in either storage gauge. Treat `spark_disk_bytes` as the number to alarm on, and the others as the breakdown that explains where it came from.
+The last three are not a breakdown of the first. A staged batch that Spark wrote to disk is counted by both `spark_storage_disk_bytes` and `spark_disk_bytes`, whereas shuffle files are not held as storage blocks and so reach `spark_disk_bytes` without appearing in either storage gauge. Treat `spark_disk_bytes` as the number to alarm on, and the others as the breakdown that explains where it came from.
 
 The two storage gauges hold a peak rather than tracking current use, and a window that staged nothing takes no measurement at all. On an idle pipeline they therefore keep their last reading, rather than dropping to zero.
 

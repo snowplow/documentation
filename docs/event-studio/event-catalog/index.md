@@ -20,7 +20,7 @@ When your organization has multiple tracking plans across different teams and do
 
 Navigate to **Event Catalog** in the main navigation.
 
-![Event Catalog page listing six event specifications across multiple tracking plans, showing their entities, event volume, last seen date, and status (Draft or Published), with a "Create event specification" button in the top right](images/event-catalog-overview.png)
+![Event Catalog page listing published event specifications from the E-commerce Web tracking plan, showing their entities, tracking plan, event volume with a colored bar, last seen date, and status, with a pipeline selector and a "Create event specification" button in the top right](images/event-catalog-overview.png)
 
 ## Browse event specifications
 
@@ -31,8 +31,8 @@ The Event Catalog provides a comprehensive list of all event specifications defi
 | Event specification name | The name and schema identifier of the event specification                  |
 | Entities                 | The [entities](/docs/fundamentals/entities/index.md) attached to the event |
 | Tracking plan            | The tracking plan containing the event specification                       |
-| Volume                   | The number of events collected                                             |
-| Last seen                | When the event was last received                                           |
+| Volume                   | The number of events collected over the last 30 days on the selected pipeline, split into valid, inferred, violations, and failed events. See [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md) |
+| Last seen                | When the event was last received on the selected pipeline                  |
 | Status                   | The status of the event specification                                      |
 
 ### Filter and search
@@ -42,6 +42,7 @@ You can filter and search the list to find specific event specifications. Use th
 - **Search**: enter text to filter by event specification name
 - **Status filter**: show all specifications or filter by Draft or Published status
 - **Entity filter**: filter specifications by attached entities
+- **Pipeline selector**: choose the pipeline for the volume and last seen columns. It defaults to your production pipeline
 
 ## Create event specifications
 

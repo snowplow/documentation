@@ -51,6 +51,8 @@ The period is configured on each attribute. For lifetime attributes, a TTL (time
 
 Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/attributes/attributes/index.md) page.
 
+Any of these types can aggregate a single event, entity, or atomic property, or a [calculated property](/docs/signals/attributes/attributes/index.md#calculated-properties): a value derived by combining several properties from the same event, such as adding a price and a tax together.
+
 ### Attribute keys
 
 An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. For stream attribute groups, the identifier can be any property of a Snowplow event: an atomic field such as `domain_userid`, a property within a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events), or a property within an [entity](/docs/fundamentals/entities/index.md). For warehouse attribute groups, the identifier is a column in your warehouse table.

@@ -217,7 +217,7 @@ The following operations are available:
 | `max` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
 | `coalesce` | String, integer, number, or boolean, and every property must be the same type | Same as the properties | Returns the first non-null property, in order. Null only if every property is null |
 
-`concat` rejects number and boolean properties because floating-point and boolean values don't format identically across the streaming engine and every supported warehouse. It accepts an optional `separator` argument, inserted between the non-null values and defaulting to an empty string. Setting a separator on any other operation is rejected.
+`concat` accepts string and integer properties only. It accepts an optional `separator` argument, inserted between the non-null values and defaulting to an empty string. Setting a separator on any other operation is rejected.
 
 Every operation except `coalesce` needs at least two properties, and no operation accepts more than 50.
 

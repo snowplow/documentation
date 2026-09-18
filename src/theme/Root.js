@@ -7,6 +7,8 @@ import {
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
+import { AssistantProvider } from '@site/src/components/Assistant/AssistantContext'
+import AssistantHost from '@site/src/components/Assistant/AssistantHost'
 
 // MUI keeps its own color scheme, which never follows the Docusaurus theme toggle,
 // so every MUI component renders light-palette colors on a dark page. Root sits above
@@ -68,7 +70,7 @@ export default function Root({ children }) {
   }
 
   return (
-    <>
+    <AssistantProvider>
       {isClient && (
         <ProductFruits
           workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
@@ -77,12 +79,15 @@ export default function Root({ children }) {
           lifeCycle="unmount"
         />
       )}
+      {/* The assistant drawer lives here, above the per-route Layout, so an open
+          conversation survives navigating to a page the assistant linked to. */}
+      {isClient && <AssistantHost />}
 
       {getInitColorSchemeScript()}
       <CssVarsProvider theme={theme}>
         <SyncMuiColorScheme />
         {children}
       </CssVarsProvider>
-    </>
+    </AssistantProvider>
   )
 }

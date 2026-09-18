@@ -116,6 +116,7 @@ const config: Config = {
     ],
     './plugins/docusaurus-plugin-release-notes',
     './plugins/docusaurus-plugin-snowplow-schema',
+    './plugins/docusaurus-plugin-assistant-dev-proxy',
     [
       './plugins/docusaurus-plugin-llms-txt',
       {
@@ -304,6 +305,9 @@ const config: Config = {
   ],
 
   customFields: {
+    // Where the Snowplow Assistant widget sends chat requests. Same-origin by
+    // default (served by the Cloudflare Worker); override for local testing.
+    assistantApiUrl: process.env.ASSISTANT_API_URL ?? '/api/assistant/chat',
     webpack: {
       configure: (config) => {
         // Add JSX runtime resolution

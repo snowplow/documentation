@@ -1,4 +1,5 @@
 import { findForcedRedirect, findFallbackRedirect } from './redirects.js';
+import { handleAssistantRequest } from './assistant.js';
 
 function toResponse(redirect, url) {
   if (!redirect) return null;
@@ -57,6 +58,12 @@ async function trackRequest(request) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith('/api/')) {
+      const response = await handleAssistantRequest(request, env, url);
+      console.log(`${request.method} ${url.pathname} -> ${response.status} (assistant)`);
+      return response;
+    }
 
     if (shouldTrackRequest(url.pathname)) {
       ctx.waitUntil(trackRequest(request));

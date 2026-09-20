@@ -10,7 +10,7 @@ keywords: ["snowplow signals", "real-time attributes"]
 
 Welcome to the [Snowplow Signals](/docs/signals/introduction/) Quick Start tutorial.
 
-Snowplow Signals computes attributes from your behavioral data in real time, and serves them to your applications over an API. It works with both in-session stream data and historical warehouse data.
+Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. It works with both in-session stream data and historical warehouse data.
 
 This guide will walk you through the steps to calculate user behavior attributes from your Snowplow event stream, and to retrieve them for use in your application. This will unlock real-time personalization use cases for your business.
 
@@ -27,7 +27,7 @@ This tutorial assumes that you have:
 * Signals enabled on your Snowplow account
 
 :::note[Snowplow account required]
-Signals calculates attributes from events flowing through your Snowplow pipeline. If you don't have an account, you can sign up for a [free Signals trial](https://signals.snowplow.io/start) to follow along.
+Signals calculates attributes from events flowing through your Snowplow pipeline. If you don't have an account, you can sign up for a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
 :::
 
 ## Enable Signals

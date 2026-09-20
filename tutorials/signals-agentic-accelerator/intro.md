@@ -45,5 +45,5 @@ Together, Signals provides real-time behavioral context while AgentCore Memory p
 * Familiarity with Python and running Jupyter notebooks
 
 :::note[Snowplow account required]
-The behavioral attributes in this accelerator come from events flowing through a real Snowplow pipeline. If you don't have one, you can deploy and use a [free Signals trial](https://signals.snowplow.io/start) to follow along.
+The behavioral attributes in this accelerator come from events flowing through a real Snowplow pipeline. If you don't have one, you can deploy and use a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
 :::

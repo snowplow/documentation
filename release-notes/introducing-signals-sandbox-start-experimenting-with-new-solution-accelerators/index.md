@@ -8,13 +8,13 @@ components:
   - "Signals"
 ---
 
-:::warning[The Signals Sandbox has been retired]
+:::note[The Signals Sandbox has been retired]
 
-The Sandbox described below is no longer available. To try Signals, start a [free 14-day trial](https://signals.snowplow.io/start).
+The Sandbox described below is no longer available. To try Signals, start a [free 14-day Signals trial](https://signals.snowplow.io/start).
 
 :::
 
-The Snowplow [Signals Sandbox](https://signals.snowplow.io/start) is available today to all users.
+The Snowplow Signals Sandbox is available today to all users.
 
 This free, ready-to-use environment allows developers to experiment with real-time customer intelligence without setting up any infrastructure.
 
@@ -22,16 +22,16 @@ We’re also releasing two Solution Accelerators that make it easy to explore wh
 
 ## **Try Snowplow Signals in Minutes**
 
-The [Signals Sandbox](https://signals.snowplow.io/start) provides a ready-to-use environment for testing how behavioral data becomes real-time intelligence. No Kafka setup, Flink configuration, or Redis deployment is required.
+The Signals Sandbox provides a ready-to-use environment for testing how behavioral data becomes real-time intelligence. No Kafka setup, Flink configuration, or Redis deployment is required.
 
-Simply sign up with your GitHub account at try-signals.snowplow.io and you get:
+Sign up with your GitHub account and you get:
 
 * A complete Signals environment with streaming data from a live e-commerce demo
 * Real-time feature computation and profile updates you can watch happen
 * The ability to write and test Interventions using Python scripts
 * Direct integration with OpenAI or AWS Bedrock to experiment with AI agents
 
-New users should start with our [E-Commerce Interventions Tutorial](/tutorials/signals-interventions/start/). This walks you through the fundamentals of tracking events, computing features, updating user profiles, and defining rule-based interventions.
+New users should start with our [ecommerce interventions tutorial](/tutorials/signals-interventions/start/). This walks you through the fundamentals of tracking events, computing features, updating user profiles, and defining rule-based interventions.
 
 From there, you can explore the more advanced use cases in our Solution Accelerators.
 
@@ -83,9 +83,9 @@ This eliminates the need for a separate feature store or heavy orchestration.[ ]
 
 ## **Start building today:**
 
-1. Try the [Signals Sandbox](https://signals.snowplow.io/start)
+1. Start a [free 14-day Signals trial](https://signals.snowplow.io/start)
 
-2. Complete the [E-Commerce Interventions Tutorial](/tutorials/signals-interventions/start/)
+2. Complete the [ecommerce interventions tutorial](/tutorials/signals-interventions/start/)
 
 3. Explore Solution Accelerators:
 

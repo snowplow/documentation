@@ -143,7 +143,7 @@ The table below lists all available arguments for a `Field`:
 </TabItem>
 </Tabs>
 
-For why the same definition runs in both the streaming and batch engines, see [Signals vs a feature store](https://signals.snowplow.io/evaluate/feature-stores) on the Signals site.
+To understand why the same definition runs in both the streaming and batch engines, see [Signals vs a feature store](https://signals.snowplow.io/evaluate/feature-stores) on the Signals site.
 
 ```mdx-code-block
 import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"

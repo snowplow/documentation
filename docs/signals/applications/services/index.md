@@ -119,3 +119,9 @@ sp_signals.publish([
 
 </TabItem>
 </Tabs>
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

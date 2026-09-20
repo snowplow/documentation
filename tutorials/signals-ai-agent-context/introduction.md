@@ -54,7 +54,7 @@ This tutorial requires:
 * Basic familiarity with Next.js and TypeScript
 
 :::note[Snowplow account required]
-Signals computes the session attributes from real events flowing through your pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+Signals computes the session attributes from real events flowing through your pipeline. If you don't have one, you can deploy and use a [free Signals trial](https://signals.snowplow.io/start) to follow along.
 :::
 
 This tutorial should take approximately 30 minutes to complete.

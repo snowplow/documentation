@@ -54,5 +54,5 @@ The flow works like this:
 - Basic familiarity with React, Python, and TypeScript
 
 :::note[Snowplow account required]
-The agent fetches session attributes that Signals computes from your live event stream. If you don't have a pipeline, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+The agent fetches session attributes that Signals computes from your live event stream. If you don't have a pipeline, you can deploy and use a [free Signals trial](https://signals.snowplow.io/start) to follow along.
 :::

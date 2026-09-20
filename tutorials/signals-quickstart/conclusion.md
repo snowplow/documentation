@@ -2,7 +2,7 @@
 position: 5
 title: "Conclusions and next steps from the Signals quick start tutorial"
 sidebar_label: "Conclusion"
-description: "Complete the Snowplow Signals quick start tutorial, and explore next steps for real-time customer intelligence."
+description: "Complete the Snowplow Signals quick start tutorial, and explore next steps for working with real-time attributes."
 keywords: ["signals quickstart", "attribute groups tutorial"]
 ---
 

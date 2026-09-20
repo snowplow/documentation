@@ -38,5 +38,5 @@ This tutorial assumes that you have:
 :::note[You need a Snowplow account and pipeline]
 Signals computes attributes from real events flowing through your pipeline, so you need a Snowplow account with a running pipeline and Signals enabled.
 
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+If you don't have one, you can deploy and use a [free Signals trial](https://signals.snowplow.io/start) to follow along.
 :::

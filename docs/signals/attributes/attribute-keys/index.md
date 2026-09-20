@@ -131,3 +131,9 @@ Custom attribute keys are used in attribute groups in the same way as built-in k
 
 </TabItem>
 </Tabs>
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

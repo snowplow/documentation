@@ -15,7 +15,7 @@ Each event specification uses an explicit publishing model, replacing the previo
 
 - **Draft**: the specification is being edited and is not yet active in the pipeline, so no inference occurs there. [Development environments](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications) do match events against drafts, so you can test a specification before publishing it.
 - **Publishing**: a transitional state, lasting a few minutes, while the pipeline propagates the specification. You do not need to take any action during this phase.
-- **Published**: the specification is active. The pipeline matches incoming events against it, attaches an `event_specification` entity to it, and surfaces volume data and "last seen" timestamps in the Console.
+- **Published**: the specification is active. The pipeline matches incoming events against it, attaches an `event_specification` entity to it, and surfaces [volume data and "last seen" timestamps](/docs/event-studio/tracking-plans/data-quality/index.md) in Console.
 
 The tracking plan list view reflects the status of the specifications it contains. A tracking plan shows **Published** if all of its specifications are published, and **With Drafts** if any specification remains in draft.
 

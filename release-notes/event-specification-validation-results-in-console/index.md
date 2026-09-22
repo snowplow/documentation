@@ -3,7 +3,7 @@ title: "Event specification validation results in Console"
 description: "Console now shows how many events matched each tracking plan and event specification over the last 30 days, split into valid events, inferred events, events with violations, and failed events, with a per-version breakdown for each event specification."
 sidebar_label: "Validation results in Console"
 keywords: ["event specification validation", "tracking plans", "data quality", "Event Studio", "Console"]
-date: "2026-09-18"
+date: "2026-09-22"
 category:
   - "Product news"
 components:

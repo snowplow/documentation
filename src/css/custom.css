@@ -239,11 +239,21 @@ article[class*='markdown'] p {
   line-height: unset !important;
 }
 
+.sp-navbar-search-group {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 480px;
+}
 .DocSearch-Button {
-  position: fixed !important;
-  top: 32px !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  position: relative !important;
+  flex: 1 1 auto;
+  min-width: 0;
   max-width: 360px !important;
   width: 100% !important;
   border-radius: 8px !important;
@@ -260,18 +270,25 @@ article[class*='markdown'] p {
   width: 16px;
 }
 @media screen and (max-width: 1280px) {
+  .sp-navbar-search-group {
+    max-width: 340px;
+  }
   .DocSearch-Button {
     max-width: 240px !important;
   }
 }
 @media screen and (max-width: 640px) {
+  .sp-navbar-search-group {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+    max-width: none;
+  }
   .DocSearch-Button {
     max-width: 40px !important;
-    position: relative !important;
-    left: auto !important;
-    transform: none !important;
     width: fit-content !important;
-    top: auto !important;
   }
 }
 
@@ -1831,4 +1848,115 @@ pre.mermaid {
   [data-name='Book a demo'] {
     display: none;
   }
+}
+
+/*** Snowplow Assistant (AI chat drawer) */
+/* Tailwind preflight is disabled site-wide, so give the drawer a minimal reset
+   scoped to its own subtree. Nothing here affects the rest of the site. */
+.sp-assistant,
+.sp-assistant *,
+.sp-assistant ::before,
+.sp-assistant ::after {
+  box-sizing: border-box;
+}
+.sp-assistant button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.sp-assistant textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  resize: none;
+}
+.sp-assistant svg {
+  display: block;
+  vertical-align: middle;
+}
+.sp-assistant p,
+.sp-assistant ul,
+.sp-assistant ol,
+.sp-assistant pre,
+.sp-assistant h1,
+.sp-assistant h2,
+.sp-assistant h3,
+.sp-assistant h4 {
+  margin-top: 0;
+}
+.sp-assistant a {
+  color: hsl(var(--primary));
+}
+.sp-assistant pre {
+  margin-bottom: 0.75rem;
+}
+
+/* Navbar entry point */
+.sp-assistant-navbar-button {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  background: hsl(var(--accent));
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+.sp-assistant-navbar-button:hover,
+.sp-assistant-navbar-button:focus-visible {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+.sp-assistant-navbar-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.sp-assistant-navbar-mobile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+@media (max-width: 1280px) {
+  .sp-assistant-navbar-label {
+    display: none;
+  }
+  .sp-assistant-navbar-button {
+    padding: 0 10px;
+  }
+}
+
+/* The drawer sits above third-party widgets (Product Fruits, Qualified) but the
+   search modal must stay above the drawer so Cmd+K keeps working. */
+.DocSearch-Container {
+  z-index: 100002 !important;
+}
+/* Hide floating third-party widgets while the drawer is open so they never
+   overlap the composer. */
+html.sp-assistant-open .productfruits--container,
+html.sp-assistant-open #q-messenger-frame,
+html.sp-assistant-open .q-messenger-frame {
+  display: none !important;
+}
+/* Disable the slide animation while the user is dragging the resize handle. */
+.sp-assistant.select-none {
+  animation: none !important;
+  transition: none !important;
 }

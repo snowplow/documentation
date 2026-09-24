@@ -140,6 +140,7 @@ As well as the [custom `llms.txt` and JSON-LD schema plugins](#custom-plugins), 
 - `CLAUDE.md` instructions
 - LLM-targeted style guide at `src/pages/style-guide/llm/index.md`.
 - Download or Copy Markdown buttons on every docs page, implemented in `src/theme/DocItem/Layout/index.tsx`. Note that these buttons don't provide the correct output when running locally.
+- WebMCP tools registered by the `src/js/webmcp.js` client module: `search_docs`, `list_tutorials`, `get_tutorial`, and `book_demo`. Agents that support WebMCP, such as the ChatGPT desktop app's built-in browser, discover them through `document.modelContext`. Search goes to the same Algolia index as the search box; the tutorial tools reuse the tutorial metadata helpers and the progress the tutorial tracker stores in `localStorage`.
 
 ## Product Fruits feedback widget
 

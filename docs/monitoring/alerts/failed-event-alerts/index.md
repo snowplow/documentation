@@ -9,7 +9,7 @@ keywords: ["failed event alerts", "warehouse alerts", "Slack notifications", "va
 Failed event alerts automatically notify you when [failed events](/docs/fundamentals/failed-events/index.md) occur in your data pipeline. Set up alerts to receive notifications via email or Slack when validation errors, resolution errors, or other data quality issues arise.
 
 - The alerting system monitors your failed events and sends notifications based on the filters you configure.
-- Alerts are checked every 10 minutes. A "When above value" alert notifies you when the number of matching failed events goes above your threshold. An "On any new issue" alert notifies you once when a new type of failure appears. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.
+- Snowplow checks all alerts every 10 minutes. A **When above value** alert notifies you when the number of matching failed events goes above your threshold. An **On any new issue** alert notifies you once when a new type of failure appears. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.
 
 These alert destinations are supported:
 

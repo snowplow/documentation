@@ -80,14 +80,14 @@ Set up when alerts should be triggered based on failed event conditions:
 
 Choose from the available trigger options:
 
-- **When above value**: Set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
-- **On any new issue**: Alert when a new type of failure appears
+- **When above value**: set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
+- **On any new issue**: alert when a new type of failure appears
 
 ![Alert trigger type selector with two options: "When above value" for setting an absolute failed event threshold, and "On any new issue" for alerting when a new failure type appears, with "On any new issue" selected](images/data_quality_trigger_types.png)
 
 ### Threshold configuration
 
-When using "When above value" trigger:
+When using the **When above value** trigger:
 
 1. **Value**: Enter the threshold number of failed events
 2. **Time period**: Select the time window (10 minutes, hour, or day)
@@ -97,7 +97,7 @@ When using "When above value" trigger:
 
 #### Insights from recent data
 
-When configuring a threshold alert, the Insights panel displays data from the last 7 days to help you choose an appropriate threshold:
+When configuring a threshold alert, the Insights panel displays data from the last seven days to help you choose an appropriate threshold:
 
 - **Average events volume** - Shows the average counts of valid and failed events (per relevant time unit)
 - **Suggested threshold** - Provides a recommended threshold value based on recent patterns
@@ -115,4 +115,4 @@ Use these insights to set realistic thresholds that reflect your actual event pa
 
 ## Alert frequency
 
-Alerts are checked every 10 minutes. What triggers a notification depends on the trigger type. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.
+Snowplow checks all alerts every 10 minutes. What triggers a notification depends on the trigger type. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.

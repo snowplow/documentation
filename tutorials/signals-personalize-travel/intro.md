@@ -31,5 +31,5 @@ You'll build a complete personalization system that captures user interests thro
 * Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses
 
 :::note[Snowplow account required]
-Signals processes the behavioral data from events flowing through your Snowplow pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+Signals processes the behavioral data from events flowing through your Snowplow pipeline. If you don't have one, you can deploy and use a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
 :::

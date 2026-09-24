@@ -336,3 +336,11 @@ sp_signals.push_intervention(
   )
 )
 ```
+
+For an overview of interventions and the destinations they can reach, see [real-time triggers](https://signals.snowplow.io/products/real-time-triggers) on the Signals site.
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

@@ -3,7 +3,7 @@ title: "Get started with Snowplow Signals"
 sidebar_label: "Get started"
 sidebar_position: 5
 description: "Learn how to use Snowplow Signals to compute user attributes from event data, retrieve them in real time for personalization and agentic applications, and trigger automated actions based on user behavior."
-keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
+keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
 ---
 
 ```mdx-code-block
@@ -24,7 +24,11 @@ Use Signals to:
 
 By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
-If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to experience Signals and Snowplow Console.
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```
 
 ## Architecture
 

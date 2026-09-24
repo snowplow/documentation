@@ -2,8 +2,8 @@
 title: "Snowplow Signals Documentation"
 sidebar_label: "Introduction"
 sidebar_position: 1
-description: "Snowplow Signals is a real-time personalization engine that computes and acts on behavioral data from your pipeline. It enables in-session stream and historical user data access for personalized experiences, recommendations, and dynamic pricing."
-keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
+description: "Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. Use it for in-session personalization, customer-aware agents, real-time triggers, and machine learning features."
+keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
 ---
 
 Snowplow Signals computes user attributes from your behavioral data in real time, and serves them to your applications over an API. Attributes are calculated from your Snowplow event stream as events arrive, or synced from tables in your warehouse.
@@ -14,7 +14,11 @@ Use Signals to:
 * Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
 * Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
-If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to try Signals in Snowplow Console.
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```
 
 ## Explore Signals
 
@@ -78,3 +82,5 @@ Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, b
 </CardGrid>
 
 [See all tutorials ->](/tutorials)
+
+For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate).

@@ -191,3 +191,11 @@ sp_signals.delete([my_agentic_context])
 
 </TabItem>
 </Tabs>
+
+For worked examples of what an application does with an agentic context, see [customer-aware AI agents](https://signals.snowplow.io/use-cases/customer-aware-agents) on the Signals site.
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

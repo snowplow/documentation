@@ -97,7 +97,7 @@ When using the **When above value** trigger:
 
 #### Insights from recent data
 
-When configuring a threshold alert, the Insights panel displays data from the last seven days to help you choose an appropriate threshold:
+When configuring a threshold alert, the Insights panel displays data from the last 7 days to help you choose an appropriate threshold:
 
 - **Average events volume** - Shows the average counts of valid and failed events (per relevant time unit)
 - **Suggested threshold** - Provides a recommended threshold value based on recent patterns
@@ -115,4 +115,4 @@ Use these insights to set realistic thresholds that reflect your actual event pa
 
 ## Alert frequency
 
-Snowplow checks all alerts every 10 minutes. What triggers a notification depends on the trigger type. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.
+Alerts are checked every 10 minutes. What triggers a notification depends on the trigger type. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.

@@ -36,10 +36,10 @@ This page explains how to edit, delete, or review existing failed event alerts.
 
 ### Trigger frequency
 
-Snowplow checks all alerts every 10 minutes. What happens next depends on the trigger type:
+All alerts are checked every 10 minutes. What happens next depends on the trigger type:
 
-- **When above value**: the alert counts the failed events that match your filters in the chosen time window (10 minutes, one hour, or one day). If the count is above your threshold, you get a notification. The alert then waits for the delivery frequency period before it can notify you again.
-- **On any new issue**: the alert notifies you when a new type of failure appears. A failure is new if the same error on the same schema hasn't occurred in the last seven days. You get one notification per new failure type, and the same failure type doesn't notify you again until it has been absent for seven days. This trigger has no delivery frequency setting. Use **When above value** if you want notifications about failures that keep happening.
+- **When above value**: the alert counts the failed events that match your filters in the chosen time window (10 minutes, hour, or day). If the count is above your threshold, you get a notification. The alert then waits for the delivery frequency period before it can notify you again.
+- **On any new issue**: the alert notifies you when a new type of failure appears. A failure is new if the same error on the same schema hasn't occurred in the last 7 days. You get one notification per new failure type, and the same failure type doesn't notify you again until it has been absent for 7 days. This trigger has no delivery frequency setting. Use **When above value** if you want notifications about failures that keep happening.
 
 ### Multiple notifications
 

@@ -22,7 +22,7 @@ To create a data structure within Console, go to **Data collection** > **Data st
 The data structure builder supports the following types:
 
 - String
-- Enumerated list
+- Enumerated list of strings
 - Integer
 - Decimal
 - Boolean

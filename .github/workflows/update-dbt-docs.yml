@@ -14,12 +14,12 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         fetch-depth: 0 # otherwise, you will fail to push refs to the destination repo
 
     - name: Python setup
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
       with:
         python-version: "3.9.x"
         cache: 'pip' # caching pip dependencies
@@ -30,7 +30,7 @@ jobs:
         python utils/dbt_docs/get_dbt_package_versions.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
 
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
       with:
         title: '[Auto-Generated] Update dbt reference docs'
         branch: dbt-reference-docs

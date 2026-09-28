@@ -1,12 +1,69 @@
 ---
-title: "Skills marketplace"
-sidebar_label: "Skills marketplace"
+title: "Skills library"
+sidebar_label: "Skills library"
 sidebar_position: 4
 description: "Browse Snowplow skills for Claude and other AI assistants."
 keywords: ["skills", "Claude", "MCP", "AI assistants"]
 date: "2026-06-22"
 ---
 
-import SkillsMarketplace from '@site/src/components/skills/SkillsMarketplace';
+import { CardGrid, LinkCard } from '@site/src/components/CardGrid'
 
-<SkillsMarketplace />
+Snowplow skills connect your AI assistant, such as Claude, Cursor, Codex, or another MCP-compatible tool, to your Snowplow account. With a skill, your assistant can work with your pipelines, schemas, and Console data directly instead of describing them.
+
+Every skill requires a one-time connection to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), which links your AI assistant to your Snowplow Console account. The first time you use a skill, you'll be prompted to log in and authorize access.
+
+## Install the skills
+
+The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. To install them in Claude Code, run:
+
+```txt
+/plugin marketplace add snowplow/skills
+/plugin install snowplow@snowplow
+```
+
+## Build and design
+
+<CardGrid cols={2}>
+  <LinkCard
+    title="Tracking design"
+    description="Plan the events, entities, and schemas you'll track before you start building."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/tracking-design"
+  />
+  <LinkCard
+    title="Implementation guidance"
+    description="Add Snowplow trackers to your website, app, or back-end, and confirm your events are firing correctly."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/implementation-guidance"
+  />
+</CardGrid>
+
+## Real-time and AI
+
+<CardGrid cols={2}>
+  <LinkCard
+    title="Signals"
+    description="Set up real-time customer attributes and interventions to personalize experiences as behavior happens."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/signals"
+  />
+</CardGrid>
+
+## Operate
+
+<CardGrid cols={2}>
+  <LinkCard
+    title="Pipeline infrastructure"
+    description="Configure collectors and enrichments, and monitor pipeline health from collection through to your warehouse."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/pipeline-infrastructure"
+  />
+  <LinkCard
+    title="Console operations"
+    description="Manage pipelines, enrichments, and tracking plans directly in Snowplow Console."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/console-operations"
+  />
+  <LinkCard
+    title="Troubleshooting"
+    description="Diagnose failed events and enrichment issues, and get pointed toward a fix."
+    href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/troubleshooting"
+  />
+</CardGrid>
+

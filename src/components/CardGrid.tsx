@@ -63,7 +63,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
 // Call to Action Card - clickable card with subtle background, no subpage links
 interface CallToActionCardProps {
   title: string
-  description: string
+  description: React.ReactNode
   href: string
 }
 
@@ -98,11 +98,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   return (
     <Link
       to={href}
-      className="link-card block rounded-lg p-6 transition-all duration-200 hover:shadow-md"
-      style={{
-        border: '1px solid hsl(var(--border))',
-        background: 'linear-gradient(135deg, rgba(111, 76, 255, 0.12) 0%, rgba(111, 76, 255, 0.04) 100%)',
-      }}
+      className="link-card block rounded-lg bg-card p-6 transition-all duration-200 hover:shadow-md"
+      style={{ border: '1px solid hsl(var(--border))' }}
     >
       <p className="mb-3 text-xl font-semibold text-foreground">{title}</p>
       <p className="text-base text-muted-foreground mb-0">{description}</p>

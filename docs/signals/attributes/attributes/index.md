@@ -204,7 +204,7 @@ EntityProperty(
 
 A calculated property combines the values of other properties from the same event into a single derived value, using one of a fixed set of operations. The properties you combine can mix atomic, event, and entity properties.
 
-Calculated properties work in both aggregations and [criteria](#filter-with-criteria). They aren't supported as [attribute keys](/docs/signals/attributes/attribute-keys/index.md) or in [intervention](/docs/signals/interventions/index.md) criteria. A calculated property can't contain another calculated property.
+Calculated properties work in both aggregations and [criteria](#filter-with-criteria). They aren't supported as [attribute keys](/docs/signals/attributes/attribute-keys/index.md) or in [agentic contexts](/docs/signals/agentic-contexts/index.md). A calculated property can't contain another calculated property.
 
 The following operations are available:
 

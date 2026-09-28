@@ -10,6 +10,12 @@ date: "2026-06-10"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="This enrichment is a part of the paid Agent Intelligence package for Snowplow CDI. For self-hosted pipelines, only the enrichment is available, but not the underlying dataset."
+/>
 
 :::note[Availability]
 This enrichment is available since version 6.12.0 of Enrich.

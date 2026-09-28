@@ -515,7 +515,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/testing/snowplow-micro/advanced-usage/* /docs/testing/snowplow-micro/local/advanced-usage/:splat 301
 /docs/testing/snowplow-micro/adding-schemas/* /docs/testing/snowplow-micro/local/schemas/:splat 301
 
-/docs/event-studio/mcp-server/* /docs/llms-support/mcp-server/:splat 301
+/docs/event-studio/mcp-server/* /docs/ai/cli-mcp-server/:splat 301
+/docs/llms-support/mcp-server/* /docs/ai/cli-mcp-server/:splat 301
+/docs/llms-support/* /docs/ai/:splat 301
 
 # Snowtype restructure
 /docs/event-studio/implement-tracking/snowtype/using-the-cli/* /docs/event-studio/implement-tracking/install-snowtype/:splat 301

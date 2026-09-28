@@ -421,7 +421,10 @@ const fallbackRules = [
   ['/docs/testing/snowplow-micro/remote-usage/*', '/docs/testing/snowplow-micro/local/remote-usage/:splat', 301],
   ['/docs/testing/snowplow-micro/advanced-usage/*', '/docs/testing/snowplow-micro/local/advanced-usage/:splat', 301],
   ['/docs/testing/snowplow-micro/adding-schemas/*', '/docs/testing/snowplow-micro/local/schemas/:splat', 301],
-  ['/docs/event-studio/mcp-server/*', '/docs/llms-support/mcp-server/:splat', 301],
+  // AI pages moved from llms-support to ai (mcp-server was renamed to cli-mcp-server before the move)
+  ['/docs/event-studio/mcp-server/*', '/docs/ai/cli-mcp-server/:splat', 301],
+  ['/docs/llms-support/mcp-server/*', '/docs/ai/cli-mcp-server/:splat', 301],
+  ['/docs/llms-support/*', '/docs/ai/:splat', 301],
   // Snowtype restructure
   ['/docs/event-studio/implement-tracking/snowtype/using-the-cli/*', '/docs/event-studio/implement-tracking/install-snowtype/:splat', 301],
   ['/docs/event-studio/implement-tracking/snowtype/snowtype-config/*', '/docs/event-studio/implement-tracking/snowtype-config/:splat', 301],

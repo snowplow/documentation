@@ -24,7 +24,7 @@ Attribute groups are one part of [Signals](/docs/signals/introduction/). The sam
 * [Attribute keys](/docs/signals/attributes/attribute-keys/): create custom keys to aggregate by, such as an account or tenant ID
 * [Agentic contexts](/docs/signals/agentic-contexts/): maintain a rolling log of each user's recent events to ground your own AI agents in live behavior
 
-Both routes reach beyond Signals into the rest of Snowplow Console, from data structures and tracking plans to pipeline health and failed events. See [Snowplow Assistant](/docs/llms-support/console-agent/) and [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) for what each one covers.
+Both routes reach beyond Signals into the rest of Snowplow Console, from data structures and tracking plans to pipeline health and failed events. See [Snowplow Assistant](/docs/ai/console-agent/) and [Snowplow MCP server](/docs/ai/snowplow-mcp/) for what each one covers.
 
 ## Next steps
 

@@ -177,6 +177,12 @@ const config: Config = {
             className: 'mobile-only',
           },
           {
+            href: 'https://support.snowplow.io/',
+            label: 'Support',
+            position: 'right',
+            className: 'navbar-support-link',
+          },
+          {
             href: 'https://snowplow.io/get-started/snowplow-free-trial',
             label: 'Try for free',
             position: 'right',

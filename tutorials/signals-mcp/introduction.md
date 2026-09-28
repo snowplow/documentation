@@ -9,8 +9,8 @@ date: "2026-08-04"
 
 You can manage [Signals](/docs/signals/introduction/) by describing what you want in plain language and letting an AI assistant make the API calls for you: define, test, publish, and query real-time attributes conversationally. There are two routes, and this tutorial works with either:
 
-* The [Snowplow Assistant](/docs/llms-support/console-agent/) built into Snowplow Console, where there's nothing to install
-* The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which connects the AI assistant you already work in to your Snowplow account
+* The [Snowplow Assistant](/docs/ai/console-agent/) built into Snowplow Console, where there's nothing to install
+* The [Snowplow MCP server](/docs/ai/snowplow-mcp/), which connects the AI assistant you already work in to your Snowplow account
 
 The prompts are the same either way. In this tutorial you'll build the same attribute group as the [Signals quick start](/tutorials/signals-quickstart/start), conversationally instead of through the Console UI. You'll:
 
@@ -32,7 +32,7 @@ This tutorial assumes that you have:
 
 * A Snowplow account with a running pipeline, and page view tracking on a web application, so Signals has events to calculate from
 * [Signals enabled](/docs/signals/setup/) on your account
-* Either the [Snowplow Assistant](/docs/llms-support/console-agent/) enabled on your organization, or an MCP-capable AI assistant such as Claude Code, Claude Desktop, or Cursor
+* Either the [Snowplow Assistant](/docs/ai/console-agent/) enabled on your organization, or an MCP-capable AI assistant such as Claude Code, Claude Desktop, or Cursor
 * The [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension, to check the calculated attribute values
 
 :::note[You need a Snowplow account and pipeline]

@@ -3,6 +3,8 @@ title: "Snowplow + AI"
 sidebar_position: -1
 sidebar_label: "Snowplow + AI"
 sidebar_class_name: "ai-hub-sidebar"
+sidebar_custom_props:
+  plus_icon: true
 description: "Snowplow's AI capabilities, including the Console assistant, MCP servers, Signals, and skills."
 keywords: ["AI", "LLMs", "generative AI"]
 date: "2026-06-22"

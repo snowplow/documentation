@@ -400,7 +400,7 @@ button.snowplow-button:focus {
   align-items: center;
   justify-content: center;
   height: 36px;
-  margin: auto 0 auto 0.5rem;
+  margin: auto 1rem auto 0.5rem;
   padding: 0 16px;
   border: none;
   border-radius: 4px;
@@ -421,43 +421,21 @@ button.snowplow-button:focus {
   display: none;
 }
 
-/* Match the Docs/Tutorials tab styling for custom navbar items */
-.navbar__item.docs-tutorial-nav-item > .navbar__link {
-  position: relative;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem 0.5rem 0 0;
+/* Plain Support link next to the free trial call to action */
+[data-theme] a.navbar-support-link {
   color: var(--ifm-font-color-base);
   font-weight: 500;
-  transition: color 0.2s ease;
 }
 
-.navbar__item.docs-tutorial-nav-item > .navbar__link:hover,
-.navbar__item.docs-tutorial-nav-item > .navbar__link:focus {
+[data-theme] a.navbar-support-link:hover,
+[data-theme] a.navbar-support-link:focus {
   color: var(--ifm-color-primary);
   text-decoration: none;
 }
 
-.navbar__item.docs-tutorial-nav-item > .navbar__link.navbar__link--active {
-  color: var(--ifm-color-primary);
-  text-decoration: none;
-}
-
-.navbar__item.docs-tutorial-nav-item > .navbar__link::after {
-  content: '';
-  position: absolute;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 0;
-  height: 4px;
-  border-radius: 999px 999px 0 0;
-  background: transparent;
-  transition: background-color 0.2s ease;
-}
-
-.navbar__item.docs-tutorial-nav-item > .navbar__link:hover::after,
-.navbar__item.docs-tutorial-nav-item > .navbar__link:focus::after,
-.navbar__item.docs-tutorial-nav-item > .navbar__link.navbar__link--active::after {
-  background: var(--ifm-color-primary);
+/* Hide the auto-injected "opens in new tab" icon on the Support link */
+[data-theme] a.navbar-support-link svg {
+  display: none;
 }
 
 @media (max-width: 996px) {
@@ -967,6 +945,11 @@ aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
     var(--ifm-menu-link-padding-horizontal);
 }
 
+/* Slightly larger label for the AI hub sidebar entry */
+.menu__list-item.ai-hub-sidebar > .menu__list-item-collapsible > .menu__link {
+  font-size: 1.05rem;
+}
+
 .menu__link:hover {
   text-decoration: none;
   color: hsl(var(--foreground));
@@ -1466,7 +1449,7 @@ Controls the display of navbar/sidebar items
 }
 
 .theme-doc-markdown > .full-width {
-  grid-column: 1 / -1;
+  grid-column: 1;
   display: grid;
   grid-template-columns: inherit;
 }
@@ -1854,15 +1837,6 @@ pre.mermaid {
 }
 
 .link-card:hover {
-  text-decoration: none !important;
-}
-
-/* Blog post cards */
-.blog-post-card {
-  text-decoration: none !important;
-}
-
-.blog-post-card:hover {
   text-decoration: none !important;
 }
 

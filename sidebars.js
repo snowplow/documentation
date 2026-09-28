@@ -36,25 +36,12 @@ const swap = (allItems, linkItems, descriptions) => {
         ? { ...item.customProps, description: descriptions[item.link.id] }
         : item.customProps
 
-      const linkItem = item.link?.id
-        ? linkItems[item.link.id] ||
-          linkItems[item.link.id.replace(/\/index$/, '')] ||
-          linkItems[`${item.link.id}/index`]
-        : undefined
-      const link = linkItem
-        ? {
-            type: 'doc',
-            id: linkItem.id,
-          }
-        : item.link
-
       if (item.items.length > 0)
         return [
           {
             ...item,
             className,
             customProps,
-            link,
             items: swap(item.items, linkItems, descriptions),
           },
         ]
@@ -100,7 +87,7 @@ const buildSection = (label, link, items) => ({
 
 // Wrap items into collapsible sections based on header markers in customProps
 /** @param {any[]} items */
-const wrapInSections = (items, linkItems = {}) => {
+const wrapInSections = (items) => {
   const result = []
   let currentSection = null
   let sectionItems = []
@@ -118,22 +105,7 @@ const wrapInSections = (items, linkItems = {}) => {
       // Start new section
       currentSection = header
       sectionLink =
-        item.link ||
-        (item.type === 'link'
-          ? { type: 'link', href: item.href, label: item.label }
-          : item.type === 'doc' && linkItems[item.id]
-          ? {
-              type: 'link',
-              href: linkItems[item.id].href,
-              label:
-                item.label ||
-                linkItems[item.id].sidebar_label ||
-                linkItems[item.id].title ||
-                item.id,
-            }
-          : item.type === 'doc'
-          ? { type: 'doc', id: item.id }
-          : null)
+        item.link || (item.type === 'doc' ? { type: 'doc', id: item.id } : null)
 
       // Add the item itself (without the header prop to avoid recursion issues)
       const { header: _, ...restCustomProps } = item.customProps || {}
@@ -197,7 +169,7 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
   }
 
   const swapped = swap(generatedDocs, linkItems, descriptions)
-  return wrapInSections(swapped, linkItems)
+  return wrapInSections(swapped)
 }
 
 module.exports = { swapDocItemsToLinkItems }

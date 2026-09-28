@@ -41,8 +41,8 @@ Snowplow Assistant is an AI assistant built into Snowplow Console. You describe 
 
 You can read more about this feature and related features here:
 
-* [Snowplow Assistant](/docs/llms-support/console-agent/)
+* [Snowplow Assistant](/docs/ai/console-agent/)
 
-* [Adding Custom Instructions](/docs/llms-support/console-agent/#custom-instructions)
+* [Adding Custom Instructions](/docs/ai/console-agent/#custom-instructions)
 
-* [Snowplow MCP Server](/docs/llms-support/snowplow-mcp/)
+* [Snowplow MCP Server](/docs/ai/snowplow-mcp/)

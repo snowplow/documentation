@@ -24,7 +24,7 @@ export default function SkillsMarketplace(): JSX.Element {
       </p>
       <p>
         Every skill on this page needs a one-time connection to the{' '}
-        <Link to="/docs/llms-support/snowplow-mcp/">Snowplow MCP server</Link>,
+        <Link to="/docs/ai/snowplow-mcp/">Snowplow MCP server</Link>,
         which links your AI assistant to your Snowplow Console account.
         The first time you use a skill, you'll be prompted to log in and
         authorize access.

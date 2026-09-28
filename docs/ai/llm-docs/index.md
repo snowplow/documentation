@@ -1,25 +1,13 @@
 ---
-title: "Working with AI"
-sidebar_label: "Working with AI"
-description: "How Snowplow supports LLM and AI-powered workflows, from real-time behavioral context to tracking plan management and AI-readable documentation."
-keywords: ["LLMs", "AI", "MCP", "Signals", "agentic applications", "AI assistant", "agentic"]
-date: "2026-03-04"
-sidebar_position: 2.5
+title: "Documentation for LLMs"
+sidebar_label: "Documentation for LLMs"
+sidebar_position: 6
+description: "Give LLMs efficient access to the Snowplow documentation through the llms.txt index and Markdown versions of every page."
+keywords: ["llms.txt", "LLMs", "Markdown", "AI-readable documentation", "AI assistants"]
+date: "2026-09-28"
 ---
 
-Snowplow supports agentic and LLM-powered workflows in several ways.
-
-## Snowplow Assistant
-
-The [Snowplow Assistant](/docs/llms-support/console-agent/index.md) is an AI assistant embedded in Snowplow Console. It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation, using your existing Console permissions.
-
-## Snowplow MCP server
-
-The [Snowplow MCP server](/docs/llms-support/snowplow-mcp/index.md) is a remote MCP server that connects AI assistants to your Snowplow Console account. It provides broad access to Console functionality, including pipelines, failed events, event specifications, the data catalog, and more.
-
-## CLI MCP server
-
-The [Snowplow CLI MCP server](/docs/llms-support/cli-mcp-server/index.md) runs locally and connects AI assistants to your tracking plan files on disk. It is included in the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) and is focused on tracking plan design and validation.
+The Snowplow documentation is available in formats designed for LLMs, so your AI assistant can find and read the pages it needs.
 
 ## Documentation index in `llms.txt`
 
@@ -50,7 +38,3 @@ Each tutorial is also available as a single Markdown file containing all of its 
 - Complete tutorial: `https://docs.snowplow.io/tutorials/signals-quickstart.md`
 
 The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.
-
-## Signals
-
-Use [Signals](/docs/signals/concepts/index.md) to provide real-time behavioral context to your AI applications. It computes user attributes from your event stream and warehouse data, and makes them available to your applications via the [Profiles Store](/docs/signals/concepts/index.md#profiles-store) API.

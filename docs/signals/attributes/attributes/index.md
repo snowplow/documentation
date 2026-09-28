@@ -230,7 +230,18 @@ For `sum`, `product`, `min`, and `max`, a null property isn't treated as zero: i
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Select **Calculated** as the property type, choose an operation, then add each property you want to combine.
+In the property picker, select two or more properties using the checkboxes in the **Atomic**, **Event**, and **Entities** tabs. Selections are kept as you switch tabs, so you can combine properties from different sources. Once two are selected, a **Calculated property** panel appears.
+
+In the panel:
+1. Drag the properties into the order you want. Order matters for `concat`, which joins values in that order, and for `coalesce`, which returns the first non-null value.
+2. Choose an operation.
+3. For `concat`, optionally enter a separator.
+
+Click **Confirm** to use the calculated property for this attribute.
+
+![Calculated property panel combining geo_country and geo_city with the concat operation and a hyphen separator](../../images/calculated-properties.png)
+
+The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as shown above, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -651,9 +662,9 @@ peak_hour = Attribute(
 
 The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a count per hour, covering the hours the user was active — an hour with no events has no key in the result, rather than a key set to zero.
 
-### Sum of two properties (price including tax)
+### Sum of two properties (subtotal including tax)
 
-Total what a user has spent, where each event carries the price and the tax as separate properties. A [calculated property](#calculated-properties) adds the two together per event, and the `sum` aggregation then totals that across events.
+Total what a user has spent, where each order event carries the subtotal and the tax as separate properties. A [calculated property](#calculated-properties) adds the two together per event, and the `sum` aggregation then totals that across events.
 
 ```python
 from snowplow_signals import Attribute, Event, CalculatedProperty, EventProperty
@@ -677,7 +688,7 @@ total_spend = Attribute(
                 vendor="com.example",
                 name="order_complete",
                 major_version=1,
-                path="price"
+                path="subtotal"
             ),
             EventProperty(
                 vendor="com.example",
@@ -691,6 +702,8 @@ total_spend = Attribute(
 ```
 
 The two uses of `sum` do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If either property is null on an event, the calculated property is null and that event contributes nothing to the total.
+
+Make sure `tax` is always tracked, as `0` where no tax applies. Otherwise an order without tax is left out of `total_spend` entirely, not only its tax. A nested `coalesce` can't substitute a default, because a calculated property can't contain another calculated property.
 
 ### Unique list of two properties (A/B test variants seen)
 

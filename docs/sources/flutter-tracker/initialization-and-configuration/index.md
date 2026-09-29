@@ -34,6 +34,7 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `subjectConfig`         | `SubjectConfiguration?`         | Subject information about tracked user and device that is added to events.           |
 | `emitterConfig`         | `EmitterConfiguration?`         | Configuration for how the events are sent.                                           |
 | `globalContextsConfig`  | `GlobalContextsConfiguration?`  | Configuration of global context entities attached to all events.                    |
+| `sessionConfig`         | `SessionConfiguration?`         | Configuration of session timeouts. See [session tracking](/docs/sources/flutter-tracker/sessions-and-data-model/index.md#configure-session-timeouts). |
 
 :::note
 The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
@@ -44,6 +45,10 @@ The `EmitterConfiguration` class was added in v0.3.0.
 
 :::note[Version support]
 The `GlobalContextsConfiguration` class was added in 0.9.0.
+:::
+
+:::note[Version support]
+The `SessionConfiguration` class was added in 0.11.1.
 :::
 
 ## Configuration of tracker properties: `TrackerConfiguration`
@@ -65,6 +70,7 @@ The `GlobalContextsConfiguration` class was added in 0.9.0.
 | `userAnonymisation`            | `bool?`                      | Anonymizes certain user identifiers.                                                                                                                                                       | ✔       | ✔   | ✔   | false                                         |
 | `lifecycleAutotracking`        | `bool?`                      | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.             | ✔       | ✔   |     | true                                          |
 | `screenEngagementAutotracking` | `bool?`                      | Indicates whether to enable tracking of the screen end event and the screen summary context entity.                                                                                        | ✔       | ✔   |     | true                                          |
+| `installAutotracking`          | `bool?`                      | Indicates whether to track an [application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events) event.                                                         | ✔       | ✔   |     | false                                         |
 | `platformContextProperties`    | `PlatformContextProperties?` | Overrides for the values for properties of the platform context entity.                                                                                                                    | ✔       | ✔   |     | null                                          |
 
 :::note
@@ -75,6 +81,10 @@ The ability to enable `userAnonymisation`, or the screen and application context
 The ability to enable `lifecycleAutotracking` was added in v0.5.0.
 :::
 
+:::note
+The ability to enable `installAutotracking` was added in v0.11.1.
+:::
+
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
 
 Activity tracking monitors whether a user continues to engage with a page over time, and record how they digest content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
@@ -83,15 +93,49 @@ Lifecycle autotracking is only available on mobile apps (iOS and Android). When 
 
 Screen engagement autotracking is also only available on mobile apps (iOS and Android). When configured (it is enabled by default), a screen summary context entity will be tracked along with screen end, foreground and background events. Make sure that you have lifecycle autotracking enabled for screen summary to have complete information.
 
+Install autotracking is also only available on mobile apps (iOS and Android), and is disabled by default in the Flutter tracker. When enabled, the tracker sends an [application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events) event once per device, the first time a tracker is created with the option enabled.
+
+```dart
+SnowplowTracker tracker = await Snowplow.createTracker(
+    namespace: 'ns1',
+    endpoint: 'http://...',
+    trackerConfig: const TrackerConfiguration(installAutotracking: true));
+```
+
+:::warning[Enabling install tracking in a released app]
+The tracker only records that the install event was sent while `installAutotracking` is enabled. If you enable it in an app version that is already released, each existing user sends one install event the first time they open the updated app. Account for this in any install metrics around the rollout.
+:::
+
 See [this page](/docs/sources/flutter-tracker/anonymous-tracking/index.md) for information about anonymous tracking.
 
 ## Configuration of emitter properties: `EmitterConfiguration`
 
-This Configuration class was added in v0.3.0. Currently, the only property is `serverAnonymisation`.
+This Configuration class was added in v0.3.0. It configures how the tracker sends events and how long it keeps events that it couldn't send yet.
 
-| Attribute             | Type    | Description                                        | Android | iOS | Web | Default |
-| --------------------- | ------- | -------------------------------------------------- | ------- | --- | --- | ------- |
-| `serverAnonymisation` | `bool?` | Prevents tracking of server-side user identifiers. | ✔       | ✔   | ✔   | false   |
+| Attribute             | Type        | Description                                                                 | Android | iOS | Web | Default |
+| --------------------- | ----------- | --------------------------------------------------------------------------- | ------- | --- | --- | ------- |
+| `serverAnonymisation` | `bool?`     | Prevents tracking of server-side user identifiers.                          | ✔       | ✔   | ✔   | false   |
+| `maxEventStoreSize`   | `int?`      | Maximum number of unsent events to keep in the event store.                 | ✔       | ✔   |     | 1000    |
+| `maxEventStoreAge`    | `Duration?` | Maximum time to keep unsent events in the event store, in whole seconds.    | ✔       | ✔   |     | 30 days |
+
+:::note
+The `maxEventStoreSize` and `maxEventStoreAge` options were added in v0.11.1.
+:::
+
+On iOS and Android, the tracker stores events in a local database until the collector accepts them. When the device is offline for a long time, for example on poor connectivity, the stored events accumulate. The event store limits control how many of them the tracker keeps, and for how long.
+
+Before each attempt to send events, the tracker removes events older than `maxEventStoreAge`. If more than `maxEventStoreSize` events remain, it removes the oldest ones until the number is under the limit.
+
+```dart
+SnowplowTracker tracker = await Snowplow.createTracker(
+    namespace: 'ns1',
+    endpoint: 'http://...',
+    emitterConfig: const EmitterConfiguration(
+        maxEventStoreSize: 5000,
+        maxEventStoreAge: Duration(days: 7)));
+```
+
+`maxEventStoreSize` must be greater than 0, and `maxEventStoreAge` must be at least 1 second. The tracker throws an `ArgumentError` for smaller values, since they would remove all unsent events. On Web, the JavaScript tracker keeps its own event queue and the event store limits have no effect.
 
 ## Configuration of subject information: `SubjectConfiguration`
 

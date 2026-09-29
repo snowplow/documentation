@@ -81,8 +81,8 @@ The ability to enable `userAnonymisation`, or the screen and application context
 The ability to enable `lifecycleAutotracking` was added in v0.5.0.
 :::
 
-:::note
-The ability to enable `installAutotracking` was added in v0.11.1.
+:::note[Version support]
+The ability to enable `installAutotracking` was added in version 0.11.1.
 :::
 
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
@@ -110,7 +110,7 @@ See [this page](/docs/sources/flutter-tracker/anonymous-tracking/index.md) for i
 
 ## Configuration of emitter properties: `EmitterConfiguration`
 
-This Configuration class was added in v0.3.0. It configures how the tracker sends events and how long it keeps events that it couldn't send yet.
+The `EmitterConfiguration` class was added in version 0.3.0. It configures how the tracker sends events and how long it keeps events that it couldn't send yet.
 
 | Attribute             | Type        | Description                                                                 | Android | iOS | Web | Default |
 | --------------------- | ----------- | --------------------------------------------------------------------------- | ------- | --- | --- | ------- |
@@ -118,8 +118,8 @@ This Configuration class was added in v0.3.0. It configures how the tracker send
 | `maxEventStoreSize`   | `int?`      | Maximum number of unsent events to keep in the event store.                 | ✔       | ✔   |     | 1000    |
 | `maxEventStoreAge`    | `Duration?` | Maximum time to keep unsent events in the event store, in whole seconds.    | ✔       | ✔   |     | 30 days |
 
-:::note
-The `maxEventStoreSize` and `maxEventStoreAge` options were added in v0.11.1.
+:::note[Version support]
+The `maxEventStoreSize` and `maxEventStoreAge` options were added in version 0.11.1.
 :::
 
 On iOS and Android, the tracker stores events in a local database until the collector accepts them. When the device is offline for a long time, for example on poor connectivity, the stored events accumulate. The event store limits control how many of them the tracker keeps, and for how long.

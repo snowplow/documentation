@@ -24,7 +24,7 @@ In addition to adopting screen view events, the unified data model defines that 
 
 On Android and iOS, session data is maintained for the life of the application being installed on a device. The session ID changes when the tracker isn't used within an inactivity timeout. There are two timeouts: one while the app is in the foreground, and one while it's in the background. Both default to 30 minutes.
 
-On the Web, the tracker uses domain (`duid`) and session cookies (`sid`) as implemented by the JavaScript tracker. The session cookie expires after 30 minutes of inactivity by default. This means that a user leaving the site and returning in under 30 minutes does not change the session. In contrast with the JavaScript tracker, the Flutter tracker also adds the `client_session` context entity that wraps the domain and session IDs.
+On the Web, the tracker uses domain (`duid`) and session cookies (`sid`) as implemented by the JavaScript tracker. The session cookie expires after 30 minutes of inactivity by default. This means that a user leaving the site and returning in under 30 minutes does not change the session. In contrast with the JavaScript tracker, the Flutter tracker also adds the `client_session` entity that wraps the domain and session IDs.
 
 :::note[Version support]
 The `SessionConfiguration` class was added in version 0.11.1. Earlier versions always use the default timeouts.
@@ -45,7 +45,7 @@ SnowplowTracker tracker = await Snowplow.createTracker(
 | -------------------------- | ----------- | ------------------------------------------------------------------------------------ | ------- | --- | --- | ---------- |
 | `foregroundTimeout`        | `Duration?` | Inactivity timeout while the app is in the foreground. On Web, the session cookie timeout. | ✔       | ✔   | ✔   | 30 minutes |
 | `backgroundTimeout`        | `Duration?` | Inactivity timeout while the app is in the background.                               | ✔       | ✔   |     | 30 minutes |
-| `continueSessionOnRestart` | `bool?`     | Whether to continue the previous session when the app restarts. See [below](#continue-sessions-after-an-app-restart). | ✔       | ✔   |     | false      |
+| `continueSessionOnRestart` | `bool?`     | Whether to continue the previous session when the app restarts. See [Continue sessions after an app restart](#continue-sessions-after-an-app-restart). | ✔       | ✔   |     | false      |
 
 Timeouts use whole seconds and must be at least 1 second. The tracker throws an `ArgumentError` for shorter values. Options that you don't set keep their default values.
 

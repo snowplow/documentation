@@ -24,6 +24,8 @@ The Snowplow Agent Analytics dbt package transforms raw Snowplow [events](/docs/
 
 The package combines two event sources. Events from [CDN trackers](/docs/sources/cdn-trackers/index.md) record every request, including requests from agents that don't run JavaScript. Client-side page view events from the [JavaScript tracker](/docs/sources/web-trackers/index.md) capture human page views, as well as page views from agents that do run JavaScript. The package identifies agents using the [bot detection](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md), [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), and [agent classification](/docs/pipeline/enrichments/available-enrichments/agent-classification-enrichment/index.md) enrichments.
 
+This dbt package is included in the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
+
 Currently, the package supports Snowflake only.
 
 Check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md) and [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) pages to get started.

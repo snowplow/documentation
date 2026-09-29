@@ -11,6 +11,8 @@ You might want to track page views by bots and AI agents to understand how they 
 
 If your website is deployed through a CDN, you can track events at that level, which would include _all_ requests.
 
+CDN trackers are part of the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
+
 ```mermaid
 flowchart LR
   agent(Agent) --> cdn(CDN) -->|serve| website(Website content)

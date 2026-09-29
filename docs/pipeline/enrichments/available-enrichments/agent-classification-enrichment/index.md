@@ -23,6 +23,8 @@ This enrichment is available since version 6.12.0 of Enrich.
 
 The agent classification enrichment identifies automated agents — AI crawlers, bots, and other non-human clients — by matching the agent name parsed by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) against a lookup of known agents. For each match, it adds an [entity](/docs/fundamentals/entities/index.md) to the event identifying the operator (e.g. `OpenAI`) and, where known, the agent's purpose (e.g. `AI_TRAINING`).
 
+This enrichment is part of the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
+
 ## Prerequisites
 
 To use this enrichment, you need to enable the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md). The agent classification enrichment reads the `agentName` field from the YAUAA entity. If YAUAA is not active, no agent classification entity is attached.

@@ -64,11 +64,11 @@ Refer to [the documentation to learn more](/docs/sources/react-native-tracker/tr
 
 ### Changed values in the platform context entity
 
-v2 took the platform context values from the native iOS and Android trackers. v4 reads them from React Native, so some values have a different format.
-Version 4.6.6 changed some of them back to match v2.
+Version 2 took the platform context values from the native iOS and Android trackers. Version 4 reads them from React Native, so some values have a different format.
+Version 4.6.6 changed some of them back to match version 2.
 The following table lists the values that changed:
 
-| Property                 | v2                        | v4.2.0 to v4.6.5                                         | v4.6.6 and later                                         |
+| Property                 | Version 2                 | 4.2.0 to 4.6.5                                           | 4.6.6 and later                                          |
 | ------------------------ | ------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | iOS `osType`             | `ios`                     | System name reported by the device, such as `iOS` or `iPadOS` | System name reported by the device, such as `iOS` or `iPadOS` |
 | iOS `deviceModel`        | Hardware model identifier | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` |

@@ -62,6 +62,20 @@ See the [documentation for screen view tracking options](/docs/sources/react-nat
 There are fewer automatically tracked properties in the platform context entity, but it's possible to provide values for them manually.
 Refer to [the documentation to learn more](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md).
 
+### Changed values in the platform context entity
+
+v2 took the platform context values from the native iOS and Android trackers. v4 reads them from React Native, so some values have a different format.
+Version 4.6.6 changed some of them back to match v2.
+The following table lists the values that changed:
+
+| Property                 | v2                        | v4.2.0 to v4.6.5                                         | v4.6.6 and later                                         |
+| ------------------------ | ------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| iOS `osType`             | `ios`                     | System name reported by the device, such as `iOS` or `iPadOS` | System name reported by the device, such as `iOS` or `iPadOS` |
+| iOS `deviceModel`        | Hardware model identifier | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` |
+| iOS `deviceManufacturer` | `Apple Inc.`              | `Apple`                                                  | `Apple Inc.`                                             |
+| Android `osType`         | `android`                 | `Android`                                                | `android`                                                |
+| Android `osVersion`      | Android release version   | Android API level                                        | Android release version                                  |
+
 ### Not possible to access from native code
 
 Since the tracker is now purely implemented in JavaScript, it is no longer possible to access it from mobile native iOS or Android code.

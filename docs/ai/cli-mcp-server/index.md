@@ -1,8 +1,8 @@
 ---
 title: "CLI MCP server"
 sidebar_label: "CLI MCP server"
-sidebar_position: 80
-description: "Use the Snowplow CLI MCP server to interact with your tracking plans through AI assistants."
+sidebar_position: 3
+description: "Use the local Snowplow CLI MCP server to work with the tracking plan files on your disk through AI assistants."
 keywords: ["mcp", "model context protocol", "ai", "cli", "tracking plan"]
 date: "2026-01-08"
 ---

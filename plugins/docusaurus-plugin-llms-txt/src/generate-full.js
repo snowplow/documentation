@@ -42,6 +42,14 @@ export async function generateFull(outDir, pages, options) {
     }
     lines.push(`> Source: ${pageUrl}`)
 
+    // Date a release note so it can't be read as current documentation
+    if (page.kind === 'release-note') {
+      if (page.date) lines.push(`> Date: ${page.date}`)
+      if (page.components?.length) {
+        lines.push(`> Components: ${page.components.join(', ')}`)
+      }
+    }
+
     lines.push('')
     lines.push(page.markdown)
     lines.push('')

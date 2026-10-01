@@ -326,6 +326,57 @@ Snowplow.defaultTracker.track(event);
   </TabItem>
 </Tabs>
 
+### Manually ending a screen
+
+:::note[Available since version 6.3.0 on iOS]
+The `ScreenEnd` event has always been public on the Android tracker. On the iOS tracker it became public in version 6.3.0.
+:::
+
+When [screen engagement tracking](#screen-engagement-tracking) is enabled, **you don't normally need to end a screen yourself**. The tracker automatically tracks a [`screen_end` event](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event) immediately before each new screen view event, closing out the previous screen and attaching its final [`screen_summary` entity](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity).
+
+That covers screen-to-screen navigation. It doesn't cover a user leaving a screen without a new screen view being tracked, in which case the screen never ends. This happens when a WebView using the JavaScript tracker is presented on top of a native screen: a `page_view` tracked from the WebView doesn't end the underlying native screen, so its `screen_summary` keeps accumulating engagement time against a screen the user is no longer looking at.
+
+In that case, track a `ScreenEnd` event yourself to close out the currently active screen without tracking a new screen view. It's the same event the tracker sends automatically, so nothing else about screen tracking changes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let event = ScreenEnd()
+Snowplow.defaultTracker()?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ScreenEnd()
+Snowplow.defaultTracker?.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+ScreenEnd event = new ScreenEnd();
+Snowplow.defaultTracker.track(event);
+```
+
+  </TabItem>
+</Tabs>
+
+A manually tracked `ScreenEnd` behaves exactly like the automatic one: foreground and background time, list item, and scroll depth metrics stop accumulating against the ended screen, and the event carries that screen's final `screen_summary` entity.
+
+You don't need to suppress the automatic behaviour when you do this, and there's no need to check whether the tracker has already ended a screen. If you later track a `ScreenView` event, the automatic `screen_end` preceding it reports only the time elapsed since your manual call, so engagement time is never counted twice.
+
+:::note
+`ScreenEnd` ends the screen's *engagement summary*, but doesn't clear the [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity). Events tracked after the call still carry the ended screen until the next `ScreenView` event is tracked, in the same way that they do while the app is in the background.
+
+The `previousName`, `previousId`, and `previousType` properties of the next [screen view event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views) also report the manually-ended screen, the same as they would after a normal screen-to-screen transition.
+:::
+
+If there's no active screen to end, for example because no `ScreenView` event has been tracked yet, the event isn't tracked at all.
+
 ### Modeled data using the Snowplow Unified dbt package
 
 Starting with version 0.2.0, the [Snowplow Unified Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) will process the screen engagement information in the `screen_summary` entity to provide the following metrics:

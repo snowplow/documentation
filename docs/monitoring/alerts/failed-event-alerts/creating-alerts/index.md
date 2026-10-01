@@ -30,7 +30,7 @@ Choose how you want to receive notifications:
 4. Configure triggers as needed
 5. Enter alert name (e.g., "mobile-app")
 
-![Create alert form with Email selected as the destination, two recipient addresses added, trigger set to "When above value" with insights showing 750 failed events per day and a suggested threshold of 1.50k, delivery set to Daily, and the alert named "web-login"](images/data_quality_create_email_alert.png)
+![Create alert form with Email selected as the destination, two recipient addresses added, trigger set to "When above value" with insights showing 313 failed events per day and a suggested threshold of 626, delivery set to Daily, and the alert named "web-login"](images/data_quality_create_email_alert.png)
 
 ### Slack notifications
 
@@ -40,7 +40,7 @@ Choose how you want to receive notifications:
 4. Configure triggers as needed
 5. Enter alert name (e.g., "web-app")
 
-![Create alert form with Slack selected as the destination and #slack-alerts-test chosen as the Slack channel](images/data_quality_create_slack_alert.png)
+![Create alert form with Slack selected as the destination and the Slack channel dropdown open, listing three channels including #slack-alerts-test](images/data_quality_create_slack_alert.png)
 
 When no active Slack integration is found, a `Connect with Slack` button will appear instead of the list of channels.
 
@@ -80,14 +80,14 @@ Set up when alerts should be triggered based on failed event conditions:
 
 Choose from the available trigger options:
 
-- **When above value**: Set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
-- **On any issue**: Alert when any failed events are detected
+- **When above value**: set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
+- **On any new issue**: alert when a new type of failure appears
 
-![Alert trigger type selector with two options: "When above value" for setting an absolute failed event threshold, and "On any issue" for alerting whenever any failed events are detected](images/data_quality_trigger_types.png)
+![Alert trigger type selector with two options: "When above value" for setting an absolute failed event threshold, and "On any new issue" for alerting when a new failure type appears, with "On any new issue" selected](images/data_quality_trigger_types.png)
 
 ### Threshold configuration
 
-When using "When above value" trigger:
+When using the **When above value** trigger:
 
 1. **Value**: Enter the threshold number of failed events
 2. **Time period**: Select the time window (10 minutes, hour, or day)
@@ -115,4 +115,4 @@ Use these insights to set realistic thresholds that reflect your actual event pa
 
 ## Alert frequency
 
-Alerts are checked every 10 minutes. You'll receive notifications when new failed events match your filter criteria.
+Alerts are checked every 10 minutes. What triggers a notification depends on the trigger type. See [alert behavior](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md#alert-behavior) for details.

@@ -57,6 +57,21 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value 3.  How many times the internal spark context should be retry a task in case of failure</td>
 </tr>
 <tr>
+    <td><code>spark.writerPartitioning.splitsPerFairShare</code> (since 0.14.0)</td>
+    <td>
+      <p>Optional. Default value <code>4</code>.</p>
+      <p>Tunes how evenly the loader spreads a window's events across the threads that write to the lake. A higher value spreads the work more evenly, so commits finish sooner, at the cost of more output files in the lake.</p>
+    </td>
+</tr>
+<tr>
+    <td><code>spark.writerPartitioning.minEventsPerSplit</code> (since 0.14.0)</td>
+    <td>
+      <p>Optional. Default value <code>5000</code>.</p>
+      <p>Sets the smallest number of events the loader will split off when it spreads a window's events across the threads that write to the lake. A lower value spreads the work more evenly, so commits finish sooner, at the cost of more output files in the lake. Raise it if your output parquet files are coming out too small.</p>
+      <p>Of the two settings, tune this one first.</p>
+    </td>
+</tr>
+<tr>
     <td><code>retries.setupErrors.delay</code></td>
     <td>
       Optional. Default value <code>30 seconds</code>.
@@ -103,7 +118,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>
-    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how Snowflake is set up for this loader.</td>
+    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how the lake is set up for this loader.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.tags.*</code></td>

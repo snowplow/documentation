@@ -35,7 +35,13 @@ To add more information or modify an existing event specification, follow these 
 2. Select the desired event specification
 3. This action will open an overview of the selected event specification containing the details that have been added to date
 
-This interface is divided into focused sections; explore each section below for more details.
+The event specification page has three tabs:
+
+- **Details**: the sections described below
+- **Tracking summary**: event volumes per specification version and application ID, see [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md#track-specification-versions-and-application-ids)
+- **History**: the list of versions of the specification, with the changes between any two versions
+
+The **Details** tab is divided into focused sections; explore each section below for more details.
 
 ![Product Added to Cart event specification showing event description, source application, the cart_action 1-0-0 data structure with a type property required to be "add", user and product entity data structures, and an Add to Cart button trigger](images/event-specification-overview.png)
 

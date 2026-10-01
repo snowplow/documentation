@@ -63,7 +63,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
 // Call to Action Card - clickable card with subtle background, no subpage links
 interface CallToActionCardProps {
   title: string
-  description: string
+  description: React.ReactNode
   href: string
 }
 

@@ -11,9 +11,9 @@ Both routes end in the same place: a conversation that can read and change your 
 
 ## Use the Snowplow Assistant
 
-The [Snowplow Assistant](/docs/llms-support/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
+The [Snowplow Assistant](/docs/ai/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
 
-Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/llms-support/console-agent/) for what it covers and how it handles your data.
+Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/ai/console-agent/) for what it covers and how it handles your data.
 
 ![The Manage organization page in Console settings, with the Snowplow Assistant section showing an Enabled badge, a custom instructions panel, and a Disable button](./images/console-assistant-enabled.png)
 
@@ -70,7 +70,7 @@ Any MCP-capable client can connect to the server directly. For example, using [`
 }
 ```
 
-See [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) for tested configurations for Claude.ai, Claude Desktop, Claude Code, Codex, and Cursor. You won't get the bundled skills this way, but all the Signals tools work the same.
+See [Snowplow MCP server](/docs/ai/snowplow-mcp/) for tested configurations for Claude.ai, Claude Desktop, Claude Code, Codex, and Cursor. You won't get the bundled skills this way, but all the Signals tools work the same.
 
 ## Authenticate with your Console account
 
@@ -109,8 +109,8 @@ Then pass them as headers in your MCP client configuration:
 }
 ```
 
-:::warning[API keys use admin permissions by default]
-By default, API keys are created with all permissions, which may be broader than you intend for an assistant. If you want the assistant to operate with your user account's more limited permissions, stay with OAuth. Store the key securely, and never paste credentials into the assistant's chat.
+:::warning[Scope the key to what the assistant needs]
+The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs, for example the **View** level on each feature for read-only use. Keys marked **Global admin** have full admin permissions, so create a new key rather than reusing one. Store the key securely, and never paste credentials into the assistant's chat.
 :::
 
 See [Connect to Snowplow Signals](/docs/signals/connection/) for the full list of connection credentials and where to find each one.

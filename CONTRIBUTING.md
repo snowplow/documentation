@@ -23,6 +23,7 @@ This guide covers how to write and edit documentation in this repo. For how the 
   - [Mark a page as outdated, hidden, or noindex](#mark-a-page-as-outdated-hidden-or-noindex)
   - [Make a sidebar entry link to an external URL](#make-a-sidebar-entry-link-to-an-external-url)
 - [Write a new tutorial](#write-a-new-tutorial)
+- [Write a release note](#write-a-release-note)
 - [Submit changes](#submit-changes)
 - [Tooling](#tooling)
   - [Check spelling and grammar with Vale](#check-spelling-and-grammar-with-vale)
@@ -32,10 +33,11 @@ This guide covers how to write and edit documentation in this repo. For how the 
 
 ## Docs and tutorials
 
-The repo has two separate content trees, rendered as two sections of the site:
+The repo has three separate content trees, rendered as three sections of the site:
 
 - **`docs/`**: reference and conceptual documentation, served at `docs.snowplow.io/docs/*`. The sidebar is generated from the folder structure. Most of this guide is about `docs/`.
 - **`tutorials/`**: step-by-step tutorials and solution accelerators, served at `docs.snowplow.io/tutorials/*`. Tutorials use custom metadata, a custom navigation, and slightly different link conventions. See [Write a new tutorial](#write-a-new-tutorial) below.
+- **`release-notes/`**: product news and component release notes, served at `docs.snowplow.io/release-notes/*`. There is no sidebar; notes are listed by date and filtered by category, component, and platform. See [Write a release note](#write-a-release-note) below.
 
 Instructions below apply to `docs/` unless stated otherwise.
 
@@ -303,6 +305,14 @@ Key differences from `docs/` pages:
 - Internal links within `tutorials/` do **not** end in `/index.md`. See [`tutorials/_README.md`](tutorials/_README.md) for the full rules.
 - The `sidebar_custom_props` frontmatter flags don't apply.
 - Downloadable Jupyter notebooks accompanying tutorials live as static assets in `static/notebooks/`, not as rendered pages.
+
+## Write a release note
+
+Release notes live in `release-notes/<slug>/index.md`. Read [`release-notes/_README.md`](release-notes/_README.md) for the required frontmatter and the `category`, `components`, and `platforms` values.
+
+**Docs for new functionality need a release note.** If your change documents a feature that didn't exist before, a behavior change, or support for a new platform or warehouse, write a release note for it. Add it in the same PR where that makes sense, or in a follow-up PR that links back. Editorial work on functionality that already shipped does not need one. See [When to add a note](release-notes/_README.md#when-to-add-a-note) for where the line falls.
+
+Notes carry a slug that becomes the published URL, so keep it short and don't change it after the note ships. Link out to the docs with absolute paths such as `/docs/signals/`; the build fails on a broken link, which is how a moved docs page gets caught.
 
 ## Submit changes
 

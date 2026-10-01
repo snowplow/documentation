@@ -240,6 +240,40 @@ You can also get back session data from the tracker at runtime, that may be usef
 
 You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [session tracking documentation](/docs/sources/react-native-tracker/tracking-events/session-tracking/index.md#getting-session-data-from-the-tracker).
 
+## Using with react-native-web
+
+The React Native tracker supports browser SPA deployments via react-native-web, which polyfills the React Native APIs the tracker relies on. Screen view tracking, the screen context entity, and screen_end events all work correctly in a browser SPA environment once the following prerequisites are met.
+
+### Prerequisites
+
+The event store requires configuration on web. By default, the tracker uses `@react-native-async-storage/async-storage` for persistent event storage. On web, you must either configure the AsyncStorage web adapter or disable persistent storage by setting `useAsyncStorageForEventStore: false`:
+
+```typescript
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    useAsyncStorageForEventStore: false, // use in-memory event store on web
+});
+```
+
+If the AsyncStorage web adapter is absent and `useAsyncStorageForEventStore` is not set to `false`, `newTracker()` rejects silently and no events are sent.
+
+You must also `await newTracker()` before calling any tracking method. Calling tracking methods before the initialization Promise resolves results in missing entities and events, including the screen context entity and screen_end events:
+
+```typescript
+// correct: await initialization before tracking
+const tracker = await newTracker({ ... });
+tracker.trackScreenViewEvent({ name: 'home' });
+```
+
+### Known limitations
+
+When `Platform.OS === 'web'`, the following limitations apply compared to iOS and Android builds.
+
+The `platformContext` entity is not tracked. All four required properties (`osType`, `osVersion`, `deviceManufacturer`, `deviceModel`) are unavailable in a browser environment, so the platform context entity is absent from all events.
+
+When `lifecycleAutotracking` is enabled, foreground and background events fire based on the browser tab's visibility state rather than native app state transitions.
+
 ## Removing a tracker
 
 The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Removing trackers at runtime](/docs/sources/react-native-tracker/advanced-usage/index.md) documentation.

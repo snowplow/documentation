@@ -15,7 +15,7 @@ A calculated property removes that step. It's a derived value built by combining
 
 ## Key benefits
 
-**No retracking.** The combination is part of the attribute definition, so you can add or change one without touching your schemas or your tracker, and it applies to events you've already collected.
+**No retracking.** The combination is part of the attribute definition, so you can add or change one without touching your schemas or your tracker. With a [backfill](/docs/signals/attributes/attribute-groups/#backfill-attributes) configured, Signals also calculates it over the events you've already collected.
 
 **Six operations.** `concat` joins values as strings with an optional separator. `sum`, `product`, `min`, and `max` work over numeric properties. `coalesce` returns the first non-null property, for fallback chains.
 

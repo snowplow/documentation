@@ -160,3 +160,9 @@ curl \
   --header 'Authorization: Bearer <JWT>' \
   {{API_URL}}/api/v1/registry/interventions
 ```
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

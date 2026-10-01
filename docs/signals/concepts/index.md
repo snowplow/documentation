@@ -214,3 +214,11 @@ Agentic contexts follow the same draft-then-publish model as other Signals resou
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.
 
 The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure. It acts as the central source of truth for your Signals deployment.
+
+For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes) on the Signals site.
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

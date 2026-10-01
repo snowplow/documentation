@@ -347,3 +347,9 @@ sp_signals.delete([my_attribute_group])
 
 </TabItem>
 </Tabs>
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

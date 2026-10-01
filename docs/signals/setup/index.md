@@ -11,7 +11,11 @@ sidebar_custom_props:
 
 Before you can define attributes or interventions, you'll need to enable Signals for your organization. This is a one-time task, done in [Snowplow Console](https://console.snowplowanalytics.com).
 
-If you don't have a Snowplow account yet, sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to experience Signals in Console.
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```
 
 ## Enable Signals
 
@@ -38,3 +42,5 @@ Once the infrastructure is ready, navigate to the **Signals** section to manage 
 ![Console Signals landing page with navigation for attribute groups, services, and interventions](../images/console-landing.png)
 
 To work with Signals programmatically, using the SDKs or API instead of (or alongside) Console, see [Connect to Signals](/docs/signals/connection/index.md).
+
+For deployment options and how Signals is metered, see [pricing](https://signals.snowplow.io/pricing) on the Signals site.

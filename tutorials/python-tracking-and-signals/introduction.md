@@ -39,5 +39,5 @@ You don't need any API keys yet. You'll generate the Signals credentials as one 
 :::note[A full pipeline is required]
 The Signals parts of this tutorial compute attributes from real events flowing through your pipeline, so they can't be completed with [Snowplow Micro](/docs/testing/snowplow-micro/) or in a purely local setup. You need a running Snowplow pipeline with Signals enabled.
 
-If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+If you don't have one, you can deploy and use a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
 :::

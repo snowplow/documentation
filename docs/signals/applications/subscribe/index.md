@@ -185,3 +185,9 @@ Assuming it's the user's first session, the flow looks like this:
 This user has already seen more than 10 pages, so `intervention1` can never be triggered by that rule for them. However, if their current session expires, and the application subscribes to their new `domain_sessionid` ID, `intervention1` can be triggered again by the first ad event of the session.
 
 Likewise, the user has already clicked a button more than 20 times, so `intervention2` will never be sent to them again.
+
+```mdx-code-block
+import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+
+<SignalsTrial/>
+```

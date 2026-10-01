@@ -37,4 +37,6 @@ Calculated properties are available in Console and in the Python SDK, for both s
 
 In Console, select two or more properties in the attribute's property picker and a **Calculated property** panel appears, where you order the properties and choose an operation. In the SDK, pass a `CalculatedProperty` as the attribute's `property`.
 
+You can also ask the [Snowplow Assistant](/docs/llms-support/console-agent/) or an agent connected to the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) to create a calculated property, for example to concatenate `geo_country` and `geo_city` into one attribute.
+
 See [Calculated properties](/docs/signals/attributes/attributes/#calculated-properties) for the full list of operations, their input types, and how each handles nulls.

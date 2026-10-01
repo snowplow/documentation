@@ -95,6 +95,20 @@ The background event is tracked when the app is no longer visible, such as when 
 
 When lifecycle autotracking is enabled, this entity is automatically attached to all events. It indicates whether the app was in the foreground or background when the event occurred.
 
+The trackers keep the visibility state in memory. They set it when the tracker is created, then update it on each foreground and background transition. The operating system can also launch an app straight into the background, without it ever becoming visible, for example through a silent push notification or a background refresh. Support for that case varies by platform:
+
+{/* Confirm the iOS tracker version below before merging: it documents a fix that isn't released yet. */}
+
+| Platform                     | `isVisible` during a background-only launch                          |
+| ---------------------------- | -------------------------------------------------------------------- |
+| iOS and tvOS                 | `false`, from iOS tracker version 6.3.0                              |
+| macOS, watchOS, and visionOS | `true`, because these platforms don't observe lifecycle transitions  |
+| Android                      | `true`                                                               |
+| React Native                 | `false`, because the tracker reads the app state when it's created   |
+| Flutter                      | Matches the native tracker for the platform                          |
+
+For how the native mobile trackers derive this value, see [Track application lifecycle changes](/docs/sources/mobile-trackers/tracking-events/lifecycle-tracking/index.md#background-only-launches).
+
 <SchemaProperties
   overview={{event: false}}
   example={{

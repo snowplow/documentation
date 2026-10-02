@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Calculated attribute values are stored in the Profiles Store and consumed by your applications via the Python SDK, Node.js SDK, or API.
+Calculated attribute values are stored in the Profiles Store and consumed by your applications via the Python SDK, Node.js SDK, or API. If you'd rather an agent chose what to read at runtime, it can fetch attribute values itself through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
 

@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Once an agentic context is [published](/docs/signals/agentic-contexts/index.md), fetch it in your application to inspect real-time events or ground an agent in a user's recent activity, using the Python SDK or Node.js SDK.
+Once an agentic context is [published](/docs/signals/agentic-contexts/index.md), fetch it in your application to inspect real-time events or ground an agent in a user's recent activity, using the Python SDK or Node.js SDK. If you'd rather an agent chose what to read at runtime, it can fetch agentic contexts itself through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
 
 An agentic context tracks a single user's activity within their current session, so you retrieve it for a specific `domain_sessionid` value. Start by [connecting to Signals](/docs/signals/connection/index.md).
 

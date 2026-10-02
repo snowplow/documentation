@@ -4,7 +4,7 @@ sidebar_position: 27
 sidebar_label: "Signals MCP server"
 description: "Connect an agent in your application to the Signals MCP server, so it can discover and read calculated attributes and agentic contexts as tools."
 keywords: ["signals mcp server", "model context protocol", "agent tools", "calculated attributes", "agentic contexts", "vercel ai sdk", "google adk", "openai agents sdk", "langchain", "mcp inspector"]
-date: "2026-10-02"
+date: "2026-10-15"
 ---
 
 ```mdx-code-block

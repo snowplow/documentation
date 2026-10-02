@@ -11,7 +11,7 @@ sidebar_custom_props:
 You'll connect to Signals for one of two reasons:
 
 * **To define and manage configurations**: create attribute groups, services, and interventions, and publish them to Signals. This is typically done by a data team, using Snowplow Console, the Python SDK, or the API.
-* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, or API.
+* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, API, or MCP server.
 
 This table shows which interface supports which task:
 
@@ -22,10 +22,11 @@ This table shows which interface supports which task:
 | [Node.js SDK](#signals-nodejs-sdk)              | ❌                     | ✅                   | ❌                          |
 | [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
 | [Signals API](#signals-api)                     | ✅                     | ✅                   | ✅                          |
+| [Signals MCP server](#signals-mcp-server)       | ❌                     | ✅                   | ❌                          |
 
 Console doesn't require any connection setup: log in and navigate to the **Signals** section. If Signals isn't enabled for your organization yet, see [Set up Signals](/docs/signals/setup/index.md).
 
-For the SDKs, plugin, and API, you'll need [connection credentials](#connection-credentials).
+For the SDKs, plugin, API, and MCP server, you'll need [connection credentials](#connection-credentials).
 
 ## Connection credentials
 
@@ -121,6 +122,18 @@ The created `Signals` object has the following methods:
 | `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
 
 See [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for usage examples.
+
+## Signals MCP server
+
+The [Signals MCP server](/docs/signals/applications/mcp-server/index.md) lets an agent in your application discover and read Signals data as tools, instead of your code naming what to fetch. It serves calculated attributes and agentic contexts, and every tool is read-only.
+
+Your agent connects over streamable HTTP, using your Signals API URL followed by `/mcp`:
+
+```bash
+{{API_URL}}/mcp
+```
+
+It takes your API key and key ID directly, as the `X-API-Key-Id` and `X-API-Key` headers, so there's no token exchange step. See [Signals MCP server](/docs/signals/applications/mcp-server/index.md) for client configuration and the tools it exposes.
 
 ## Signals API
 

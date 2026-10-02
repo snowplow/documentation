@@ -1,7 +1,7 @@
 ---
 title: "Introducing the Signals MCP server"
 description: "Signals deployments now serve calculated attributes and agentic contexts over the Model Context Protocol, so an agent in your application can discover what is published and read the current user's data."
-date: "2026-09-01"
+date: "2026-10-02"
 category:
   - "Product news"
 components:

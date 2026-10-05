@@ -1,7 +1,7 @@
 ---
 title: "Introducing the full-page Snowplow Assistant workspace"
 description: "Snowplow Assistant now has a dedicated full-page workspace in Console, and you can switch between it and the side panel without losing your conversation."
-date: "2026-10-09"
+date: "2026-09-30"
 category:
   - "Product news"
 components:

@@ -10,16 +10,13 @@ components:
   - "Console"
   - "AI tools"
 ---
-Snowplow Assistant has a dedicated full-page workspace in Console. This is the first milestone of the redesigned Assistant experience, and it gives you more room to work through a task, from the first question to the action that resolves it, without losing context.
+Snowplow Assistant has a dedicated full-page workspace in Console. Use it when you need more space for longer conversations and results. This is the first milestone of the redesigned Assistant experience.
 
 ## What's new
 
-* **Full-page workspace.** Open the Assistant as a full-page canvas when you need more space for longer conversations and results.
-
-* **Switch between views.** Move between the side panel and the full-page canvas at any time.
-
+* **Full-page workspace.** Open the Assistant in a full-page workspace instead of the side panel.
+* **Switch between views.** Move between the side panel and the full-page workspace at any time.
 * **Shared conversation and context.** The same conversation and context carry across both views, so you can switch without starting over.
-
 * **New entry points.** Open the Assistant directly from the side navigation, or from the dedicated card on the Console homepage.
 
 ## Additional information

@@ -1,6 +1,6 @@
 ---
 title: "Introducing the full-page Snowplow Assistant workspace"
-description: "Snowplow Assistant now has a dedicated full-page workspace in Console, and you can switch between it and the side panel without losing your conversation."
+description: "Snowplow Assistant has a dedicated full-page workspace in Console, and you can switch between it and the side panel without losing your conversation."
 date: "2026-09-30"
 category:
   - "Product news"
@@ -8,7 +8,7 @@ components:
   - "Console"
   - "AI tools"
 ---
-Snowplow Assistant now has a dedicated full-page workspace in Console. This is the first milestone of the new Assistant experience, and it gives you more room to work through a task, from the first question to the action that resolves it, without losing context.
+Snowplow Assistant has a dedicated full-page workspace in Console. This is the first milestone of the redesigned Assistant experience, and it gives you more room to work through a task, from the first question to the action that resolves it, without losing context.
 
 ## What's new
 
@@ -22,8 +22,8 @@ Snowplow Assistant now has a dedicated full-page workspace in Console. This is t
 
 ## Additional information
 
-Snowplow Assistant is an AI assistant built into Snowplow Console. You describe what you want to do in plain language and it calls the relevant tools to act on your behalf, whether that is designing a tracking plan, creating data structures, checking pipeline health, investigating failed events, or configuring Signals. It authenticates with your current Console session, so it can only do what your account is already permitted to do.
+Snowplow Assistant is an AI assistant in Console that acts on your behalf using your current Console permissions.
 
-You can read more about this feature here:
+For more information, see the Snowplow Assistant documentation:
 
 * [Snowplow Assistant](/docs/ai/console-agent/)

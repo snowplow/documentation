@@ -10,7 +10,7 @@ components:
   - "Console"
   - "AI tools"
 ---
-Snowplow Assistant has a dedicated full-page workspace in Console. Use it when you need more space for longer conversations and results. This is the first milestone of the redesigned Assistant experience.
+Snowplow Assistant has a dedicated full-page workspace in Console. Use it when you need more space for longer conversations and results.
 
 ## What's new
 

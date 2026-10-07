@@ -234,14 +234,17 @@ In the property picker, select two or more properties using the checkboxes in th
 
 In the panel:
 1. Drag the properties into the order you want. Order matters for `concat`, which joins values in that order, and for `coalesce`, which returns the first non-null value.
-2. Choose an operation.
-3. For `concat`, optionally enter a separator.
+2. For a timestamp property, optionally choose a granularity on its chip to apply a [date part](#apply-a-date-part).
+3. Choose an operation.
+4. For `concat`, optionally enter a separator.
 
 Click **Confirm** to use the calculated property for this attribute.
 
 ![Calculated property panel combining geo_country and geo_city with the concat operation and a hyphen separator](../../images/calculated-properties.png)
 
 The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as shown above, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
+
+The aggregation also decides which operations are offered. With `sum`, `mean`, `min`, or `max`, you can choose `sum`, `product`, `min`, `max`, or `coalesce`, but not `concat`. With `time_since_last` or `time_since_first`, you can only select one property, so calculated properties aren't available.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -662,16 +665,16 @@ peak_hour = Attribute(
 
 The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a count per hour, covering the hours the user was active — an hour with no events has no key in the result, rather than a key set to zero.
 
-### Sum of two properties (subtotal including tax)
+### Sum of several properties (order total)
 
-Total what a user has spent, where each order event carries the subtotal and the tax as separate properties. A [calculated property](#calculated-properties) adds the two together per event, and the `sum` aggregation then totals that across events.
+Total what a user has spent, where each order event carries the subtotal, tax, and shipping as separate properties. A [calculated property](#calculated-properties) adds them together per event, and the `sum` aggregation then totals that across events.
 
 ```python
 from snowplow_signals import Attribute, Event, CalculatedProperty, EventProperty
 
 total_spend = Attribute(
     name="total_spend",
-    description="Total spent, including tax",
+    description="Total spent, including tax and shipping",
     type="double",
     events=[
         Event(
@@ -696,14 +699,24 @@ total_spend = Attribute(
                 major_version=1,
                 path="tax"
             ),
+            EventProperty(
+                vendor="com.example",
+                name="order_complete",
+                major_version=1,
+                path="shipping"
+            ),
         ]
     ),
 )
 ```
 
-The two uses of `sum` do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If either property is null on an event, the calculated property is null and that event contributes nothing to the total.
+The two uses of `sum` do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If any property is null on an event, the calculated property is null and that event contributes nothing to the total.
 
-Make sure `tax` is always tracked, as `0` where no tax applies. Otherwise an order without tax is left out of `total_spend` entirely, not only its tax. A nested `coalesce` can't substitute a default, because a calculated property can't contain another calculated property.
+Make sure `tax` and `shipping` are always tracked, as `0` where none applies. Otherwise, an order without tax or shipping is left out of `total_spend` entirely, not only that amount. A nested `coalesce` can't substitute a default, because a calculated property can't contain another calculated property.
+
+The total is only as complete as its inputs. There's no subtraction operation, so for discounts, use a subtotal with discounts already taken off, or track the discount as a negative amount and add it as another property.
+
+Adding amounts in different currencies doesn't give a meaningful total. If you sell in more than one currency, add [criteria](#filter-with-criteria) on the currency property to keep one attribute per currency, or sum amounts your tracking has already converted to a single currency.
 
 ### Unique list of two properties (A/B test variants seen)
 

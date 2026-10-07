@@ -50,4 +50,4 @@ The dataset builder fits where the outcome you are predicting is itself somethin
 
 The dataset builder is available to all Signals customers with a warehouse connection configured, at no additional cost. Upgrade to `snowplow-signals` v0.4.7 or later to get started.
 
-Learn more in our documentation on [creating ML training datasets](/docs/signals/ml-training-datasets/). Our documentation also shares a runnable Google Colab notebook so you can see it in action, you only need to add your Signals credentials, and the finished dataset comes back as a pandas DataFrame ready to train on.
+Learn more in our documentation on [creating ML training datasets](/docs/signals/datasets/). Our documentation also shares a runnable Google Colab notebook so you can see it in action, you only need to add your Signals credentials, and the finished dataset comes back as a pandas DataFrame ready to train on.

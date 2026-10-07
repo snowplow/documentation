@@ -1,7 +1,7 @@
 ---
 title: "New in Signals: calculated properties"
 description: "Combine several properties from the same event into one derived value, with operations such as concat, sum, and coalesce, without retracking."
-date: "2026-10-01"
+date: "2026-10-07"
 category:
   - "Product news"
 components:

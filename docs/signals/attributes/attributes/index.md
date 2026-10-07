@@ -234,7 +234,7 @@ In the property picker, select two or more properties using the checkboxes in th
 
 In the panel:
 1. Drag the properties into the order you want. Order matters for `concat`, which joins values in that order, and for `coalesce`, which returns the first non-null value.
-2. For a timestamp property, optionally choose a granularity on its chip to apply a [date part](#apply-a-date-part).
+2. For a timestamp property, optionally choose a granularity next to its name in the panel to apply a [date part](#apply-a-date-part).
 3. Choose an operation.
 4. For `concat`, optionally enter a separator.
 

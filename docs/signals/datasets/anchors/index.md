@@ -144,20 +144,33 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
 
 ## Trigger anchors
 
-Use `submit_dataset_run_with_trigger_anchors()` to create anchors at the moments a rule over attribute values would have held, for a model that your application calls when a condition is met. The criteria use the same format and operators as [intervention criteria](/docs/signals/interventions/index.md#criteria), including the [`changed` operator](/docs/signals/interventions/index.md#the-changed-operator).
+Use `submit_dataset_run_with_trigger_anchors()` to create anchors at the moments a rule over attribute values would have held, for a model that your application calls when a condition is met.
+
+Each trigger is a rule built from `AttributeCriterion` conditions, combined with `AttributeCriteriaAll`, `AttributeCriteriaAny`, or `AttributeCriteriaNone`. A condition references an attribute as `attribute_group:attribute` and compares it with one of these operators:
+
+| Operator | Holds when the attribute |
+| --- | --- |
+| `=`, `!=`, `<`, `>`, `<=`, `>=` | Compares as stated with `value` |
+| `like`, `not like` | Matches, or doesn't match, a SQL `LIKE` pattern |
+| `rlike`, `not rlike` | Contains, or doesn't contain, a match for a regular expression |
+| `in`, `not in` | Is, or isn't, one of a list of values. With a single value and a list attribute, contains it, or doesn't. |
+| `is null`, `is not null` | Has no value, or has one |
+| `changed` | Has a different value after the event than before it |
+
+A condition on an attribute with no value holds only for `is null`, or for `changed` if the attribute had a value before the event.
 
 Signals replays the rule the way the streaming engine evaluates it:
 
 - Every event that updates one of the dataset's attributes is a candidate moment.
-- The criteria are evaluated against the attribute values after that event, so attributes and agentic contexts in the dataset include the triggering event.
+- The criteria are evaluated against the attribute values after that event, so attributes and agentic contexts in the dataset include the triggering event. `changed` compares the values just before and just after the event.
 - The evaluation policy keeps the first moment per session where the rule holds, then each next one at least `cooldown_seconds` later, up to `max_per_session` per session.
 
 ```python
 from snowplow_signals import (
     AgenticAttributeEvaluationPolicy,
+    AttributeCriteriaAll,
+    AttributeCriterion,
     CriteriaTrigger,
-    InterventionCriteriaAll,
-    InterventionCriterion,
     SessionSample,
     TrainingSpan,
 )
@@ -166,14 +179,14 @@ run = sp_signals.submit_dataset_run_with_trigger_anchors(
     attribute_groups=[session_attributes],
     triggers=[
         CriteriaTrigger(
-            criteria=InterventionCriteriaAll(
+            criteria=AttributeCriteriaAll(
                 all=[
-                    InterventionCriterion(
+                    AttributeCriterion(
                         attribute="session_attributes:product_views",
                         operator=">=",
                         value=3,
                     ),
-                    InterventionCriterion(
+                    AttributeCriterion(
                         attribute="session_attributes:cart_adds",
                         operator="is null",
                     ),

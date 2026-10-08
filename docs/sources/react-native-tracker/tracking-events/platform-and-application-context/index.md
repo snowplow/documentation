@@ -53,10 +53,10 @@ By default only the following properties are tracked automatically:
 
 | Property             | Type   | Description                                                                                                                                             | Required in schema |
 | -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `osType`             | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android")                                                                         | Yes                |
+| `osType`             | String | Type of the operating system. On iOS, the system name reported by the device, such as `iOS` or `iPadOS`. On Android, `android`.                        | Yes                |
 | `osVersion`          | String | Version of the mobile operating system.                                                                                                                 | Yes                |
 | `deviceManufacturer` | String | Device vendor.                                                                                                                                          | Yes                |
-| `deviceModel`        | String | Model of the device.                                                                                                                                    | Yes                |
+| `deviceModel`        | String | Model of the device. On iOS, the device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac`.                                                     | Yes                |
 | `language`           | String | System language currently used on the device (ISO 639)                                                                                                  | No                 |
 | `resolution`         | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes                       | No                 |
 | `scale`              | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No                 |

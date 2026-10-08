@@ -66,7 +66,7 @@ Each row captures the values as they were at the anchor timestamp, not at the en
 
 ## Supported warehouses
 
-The dataset builder currently supports Snowflake only. A [Signals warehouse connection](/docs/signals/setup/index.md) is required for [managed runs](/docs/signals/datasets/run/index.md#submit-a-managed-run). If you [build the SQL yourself](/docs/signals/datasets/run/index.md#build-and-execute-sql-yourself), you can run it directly against your warehouse without a connection configured in Signals.
+The dataset builder supports Snowflake only. A [Signals warehouse connection](/docs/signals/setup/index.md) is required for [managed runs](/docs/signals/datasets/run/index.md#submit-a-managed-run). If you [build the SQL yourself](/docs/signals/datasets/run/index.md#build-and-execute-sql-yourself), you can run it directly against your warehouse without a connection configured in Signals.
 
 | Feature | Snowflake |
 | --- | --- |

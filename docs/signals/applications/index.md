@@ -19,3 +19,9 @@ This section covers:
 * [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md): fetch calculated attribute values using a service or directly from an attribute group
 * [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md): fetch a user's recent session activity as JSON or a narrative summary, to ground your agents
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```

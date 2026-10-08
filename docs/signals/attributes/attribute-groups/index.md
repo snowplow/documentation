@@ -347,3 +347,9 @@ sp_signals.delete([my_attribute_group])
 
 </TabItem>
 </Tabs>
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```

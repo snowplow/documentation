@@ -160,3 +160,9 @@ curl \
   --header 'Authorization: Bearer <JWT>' \
   {{API_URL}}/api/v1/registry/interventions
 ```
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```

@@ -759,3 +759,9 @@ experiment_variants_seen = Attribute(
 ```
 
 Each event contributes one entry, such as `"exp3-blue"`, and `unique_list` keeps the distinct ones. If either property can be missing on an event, add [criteria](#filter-with-criteria) requiring both to be set: `concat` skips a null property, so an event with an experiment but no variant would otherwise contribute `"exp3"`, colliding with any other event that produces `"exp3"`.
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```

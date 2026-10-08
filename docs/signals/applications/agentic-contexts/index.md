@@ -133,3 +133,9 @@ seconds_since_start_of_session, event, url, event_context
 45, add_to_cart, /cart, {sku: 'SKU123'}
 [END CONTEXT]
 ```
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```

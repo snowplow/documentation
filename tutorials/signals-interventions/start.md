@@ -17,7 +17,7 @@ This tutorial provides a hands-on introduction to Signals. You'll use Python to 
 To follow this tutorial, you'll need a Snowplow account with Signals enabled.
 
 :::note[Snowplow account required]
-If you don't have a Snowplow account, you can sign up for a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
+If you don't have a Snowplow account, you can sign up for the [Signals free tier](https://signals.snowplow.io/start) to follow along.
 :::
 
 This tutorial should take approximately 20-30 minutes to complete.

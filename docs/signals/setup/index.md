@@ -12,9 +12,9 @@ sidebar_custom_props:
 Before you can define attributes or interventions, you'll need to enable Signals for your organization. This is a one-time task, done in [Snowplow Console](https://console.snowplowanalytics.com).
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```
 
 ## Enable Signals

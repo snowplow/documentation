@@ -43,7 +43,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
 3. [Optional] Integrate Snowplow into your website
 
 :::note[Snowplow account required]
-Signals calculates the prospect attributes from events flowing through your Snowplow pipeline. If you don't have one, you can deploy and use a [free 14-day Signals trial](https://signals.snowplow.io/start) to follow along.
+Signals calculates the prospect attributes from events flowing through your Snowplow pipeline. If you don't have one, you can use the [Signals free tier](https://signals.snowplow.io/start) to follow along.
 :::
 
 ## Architecture

@@ -349,7 +349,7 @@ sp_signals.delete([my_attribute_group])
 </Tabs>
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

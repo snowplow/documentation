@@ -25,9 +25,9 @@ Use Signals to:
 By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```
 
 ## Architecture

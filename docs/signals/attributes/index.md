@@ -45,7 +45,7 @@ Attribute groups move through the same lifecycle whether you manage them in Cons
 Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

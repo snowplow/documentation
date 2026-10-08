@@ -21,7 +21,7 @@ This section covers:
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

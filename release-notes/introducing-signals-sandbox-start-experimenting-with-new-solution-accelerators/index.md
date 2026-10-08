@@ -10,7 +10,7 @@ components:
 
 :::note[The Signals Sandbox has been retired]
 
-The Sandbox described below is no longer available. To try Signals, start a [free 14-day Signals trial](https://signals.snowplow.io/start).
+The Sandbox described below is no longer available. To try Signals, start on the [Signals free tier](https://signals.snowplow.io/start).
 
 :::
 
@@ -83,7 +83,7 @@ This eliminates the need for a separate feature store or heavy orchestration.[ ]
 
 ## **Start building today:**
 
-1. Start a [free 14-day Signals trial](https://signals.snowplow.io/start)
+1. Start on the [Signals free tier](https://signals.snowplow.io/start)
 
 2. Complete the [ecommerce interventions tutorial](/tutorials/signals-interventions/start/)
 

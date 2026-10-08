@@ -187,7 +187,7 @@ This user has already seen more than 10 pages, so `intervention1` can never be t
 Likewise, the user has already clicked a button more than 20 times, so `intervention2` will never be sent to them again.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

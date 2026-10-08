@@ -218,7 +218,7 @@ The Profiles Store keeps track of current attribute values, and automatically re
 For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes) on the Signals site.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

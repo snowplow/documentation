@@ -146,7 +146,7 @@ The table below lists all available arguments for a `Field`:
 To understand why the same definition runs in both the streaming and batch engines, see [Signals vs a feature store](https://signals.snowplow.io/evaluate/feature-stores) on the Signals site.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

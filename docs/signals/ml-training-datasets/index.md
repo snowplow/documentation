@@ -314,7 +314,7 @@ Run the SQL files in the order specified in `README.md` against your warehouse t
 To understand how a training dataset relates to the attributes you serve in production, see [real-time features for ML](https://signals.snowplow.io/use-cases/model-features) on the Signals site.
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

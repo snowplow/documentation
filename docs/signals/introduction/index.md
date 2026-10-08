@@ -15,9 +15,9 @@ Use Signals to:
 * Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```
 
 ## Explore Signals

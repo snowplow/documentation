@@ -133,7 +133,7 @@ Custom attribute keys are used in attribute groups in the same way as built-in k
 </Tabs>
 
 ```mdx-code-block
-import SignalsTrial from "@site/docs/reusable/signals-trial/_index.md"
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
-<SignalsTrial/>
+<SignalsFreeTier/>
 ```

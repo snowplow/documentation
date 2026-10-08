@@ -1,6 +1,8 @@
 ---
 title: "New in Signals: recency, tenure, and time-of-day attributes"
+sidebar_label: "Signals recency, tenure, and time-of-day attributes"
 description: "Time since aggregations, date part modifiers on timestamps, and an optional event filter cover more of the feature set a behavioral model needs."
+keywords: ["signals", "attributes", "time since", "date part", "ml features"]
 date: "2026-08-27"
 category:
   - "Product news"

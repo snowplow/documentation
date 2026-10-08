@@ -24,7 +24,7 @@ Session, event, and trigger anchors require an attribute group with the `domain_
 
 Use `submit_dataset_run_with_session_anchors()` to generate labeled anchors from your event data for model training. You specify a goal, the criteria that define a positive outcome, and a time window to scan. Signals scans all sessions in the window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions, anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
 
-The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, event properties, or entity properties.
+The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, properties of [self-describing events](/docs/fundamentals/events/index.md#self-describing-events), or properties of [entities](/docs/fundamentals/entities/index.md).
 
 To match on an event name (an atomic field):
 
@@ -84,7 +84,7 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 | `attribute_groups` | Attribute groups that provide the feature columns. Each attribute in these groups becomes a column in the final dataset. | `list[AttributeGroup]` | ✅ |
 | `goal_criteria` | Criteria that define a positive anchor (label=1) | `Criteria` | ✅ |
 | `training_span` | Time window to scan for anchor events | `TrainingSpan` | ✅ |
-| `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to filter out anchors with too little behavioral signal, for example set to `5` to ensure each anchor has at least 5 prior events. | `int` | Default: `1` |
+| `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to filter out anchors with too little behavioral signal, for example set to `5` to ensure each anchor has at least five prior events. | `int` | Default: `1` |
 | `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions, for example set to `1` to ensure each session contributes at most one training example. | `int` or `None` | Default: `None` |
 | `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. For example, set to `1.0` for a balanced 1:1 dataset. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
@@ -93,7 +93,7 @@ All anchor methods also accept the output, context, and outcome arguments descri
 
 ## Event anchors
 
-Use `submit_dataset_run_with_event_anchors()` to create one anchor for every event that matches criteria. This matches an application that calls a model in response to an event, for example on a product page view or an add to cart. The criteria use the same `Criteria` and `Criterion` classes as session goals. Events in the same session that share a collector timestamp become one anchor.
+Use `submit_dataset_run_with_event_anchors()` to create one anchor for every event that matches criteria. This matches an application that calls a model in response to an event, for example on a product page view or an add to cart. The criteria use the same `Criteria` and `Criterion` classes as session goals. Events in the same session that share a `collector_tstamp` become one anchor.
 
 ```python
 from snowplow_signals import (
@@ -211,7 +211,7 @@ run = sp_signals.submit_dataset_run_with_trigger_anchors(
 | `attribute_groups` | Attribute groups that provide the attribute columns. Must include every attribute the triggers reference, and a group with the `domain_sessionid` attribute key. | `list[AttributeGroup]` | ✅ |
 | `triggers` | One to five criteria triggers. An anchor is created when any of them holds. Attributes are referenced as `attribute_group:attribute`. | `list[CriteriaTrigger]` | ✅ |
 | `training_span` | Time window to replay | `TrainingSpan` | ✅ |
-| `evaluation_policy` | `cooldown_seconds` between anchors in a session (10 to 86400) and `max_per_session` (1 to 100) | `AgenticAttributeEvaluationPolicy` | Default: 600 seconds, 3 per session |
+| `evaluation_policy` | `cooldown_seconds` between anchors in a session (10 to 86400) and `max_per_session` (1 to 100) | `AgenticAttributeEvaluationPolicy` | Default: 600 seconds, three per session |
 | `sample` | Replay a deterministic sample of sessions. See [Sample sessions](#sample-sessions). | `SessionSample` | Default: all sessions |
 
 Trigger anchors compute the referenced attributes at every candidate event before applying the criteria. For long time windows on large sites, use `sample` to limit the work.

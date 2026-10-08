@@ -1,6 +1,8 @@
 ---
 title: "New in Signals: ML training datasets"
+sidebar_label: "Signals ML training datasets"
 description: "The Signals Python SDK can now build a labelled ML training dataset in your warehouse from the attribute groups you already use for serving."
+keywords: ["signals", "ml training datasets", "dataset builder", "point-in-time", "python sdk"]
 date: "2026-08-18"
 category:
   - "Product news"

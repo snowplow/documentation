@@ -27,28 +27,15 @@ Start from the call your application already makes. Each part of it maps to part
 | When the application makes the call | The anchors. Use [user-supplied anchors](/docs/signals/datasets/anchors/index.md#user-supplied-anchors) from logs of past calls, [event anchors](/docs/signals/datasets/anchors/index.md#event-anchors) when the call responds to an event, or [trigger anchors](/docs/signals/datasets/anchors/index.md#trigger-anchors) when it responds to a condition over attributes. |
 | The Signals data the state is built from | The attribute groups and the agentic contexts the application reads, passed as `attribute_groups` and `agentic_contexts`. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md). |
 | How the state is built | Your own state-building code, run over each dataset row instead of a live Signals response |
-| What the decision is meant to predict or change | [Outcome columns](/docs/signals/datasets/context-and-outcomes/index.md#outcomes), such as a purchase later in the session |
+| What the decision is meant to predict or change | [Outcome columns](/docs/signals/datasets/context-and-outcomes/index.md#add-outcome-columns), such as a purchase later in the session |
 
 If the state also uses data that Signals doesn't have, such as fields from your own database, add it as extra columns on user-supplied anchors, or note that it's missing from the evaluation.
 
 ## Evaluate with a coding agent
 
-The Snowplow skills include an `evaluate-decision-context` skill that runs the whole evaluation from your coding agent. It reads your code to find the call, builds the dataset, renders each state with your own state-building code, asks the model, runs the checks described in [Interpret the results](#interpret-the-results), and writes a report. It asks before it creates warehouse tables or calls a model.
+The [Snowplow skills](/docs/ai/skills/index.mdx) include an `evaluate-decision-context` skill that runs the whole evaluation from your coding agent. It reads your code to find the call, builds the dataset, renders each state with your own state-building code, asks the model, runs the checks described in [Interpret the results](#interpret-the-results), and writes a report. It asks before it creates warehouse tables or calls a model.
 
-To add the Snowplow skills to Claude Code:
-
-```bash
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
-To add them to another agent:
-
-```bash
-npx plugins add snowplow/skills
-```
-
-Then point the agent at the call:
+[Install the skills](/docs/ai/skills/index.mdx#install-the-skills), then point the agent at the call:
 
 ```txt
 We call Jev on product pages in src/decide.ts to tag each visitor's shopping
@@ -158,9 +145,9 @@ Two answers overlap when the model often gives one with the other close behind. 
 
 When the model is unsure about one answer, read a sample of the states behind it. The cause is usually one of these:
 
-1. **Missing data.** The state doesn't contain what the answer depends on, such as visits to a sale section. Add an attribute or change the agentic context, then rebuild the context on the same anchors.
-2. **Noisy data.** The state contains entries that look relevant but aren't, such as promotion impressions with no promotion name. Change the agentic context or how the state is built.
-3. **An ambiguous definition.** The state has the data, but the criteria don't say how to treat it, such as whether a single sale page visit counts as looking for a bargain. Rewrite the criteria. Outcomes can help you choose: compare what users with and without that behavior did next.
+1. Missing data: the state doesn't contain what the answer depends on, such as visits to a sale section. Add an attribute or change the agentic context, then rebuild the context on the same anchors.
+2. Noisy data: the state contains entries that look relevant but aren't, such as promotion impressions with no promotion name. Change the agentic context or how the state is built.
+3. An ambiguous definition: the state has the data, but the criteria don't say how to treat it, such as whether a single sale page visit counts as looking for a bargain. Rewrite the criteria. Outcomes can help you choose: compare what users with and without that behavior did next.
 
 ### Outcomes
 

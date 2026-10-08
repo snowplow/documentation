@@ -9,7 +9,7 @@ date: "2026-10-07"
 
 Each row in a dataset holds the context your application would have read at the anchor, and optionally what happened afterwards. Context comes from your attribute groups and agentic contexts. What happened afterwards comes from labels on the anchors or from outcome columns.
 
-## Attributes at each anchor
+## Add attributes at each anchor
 
 Every attribute in the `attribute_groups` you pass becomes a column. Signals computes each value from the events for that attribute key before the anchor, looking back as far as the longest period across your attributes. Use `max_lookback_days` to override that window.
 
@@ -24,7 +24,7 @@ Whether the anchor event itself is included depends on the anchor type:
 
 The attribute groups don't need to be published. You can pass a draft definition to test it before it goes live.
 
-## Agentic contexts at each anchor
+## Add agentic contexts at each anchor
 
 Pass [agentic context](/docs/signals/agentic-contexts/index.md) definitions as `agentic_contexts` to add one column per agentic context. Each column holds an array of the entries the streaming engine would have buffered at that anchor, oldest first, in the same shape as the JSON returned when you [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md).
 
@@ -45,9 +45,9 @@ The entries follow the agentic context's configuration:
 - Entries older than `max_age_seconds` before the newest entry are dropped, and only the newest `max_events` are kept.
 - If no matching event arrived within `max_age_seconds` before the anchor, the column holds an empty array.
 
-Agentic contexts in datasets require Snowflake. Event selections that use an event specification ID are not supported yet.
+Agentic contexts in datasets require Snowflake. Event selections that use an event specification ID aren't supported.
 
-## Outcomes
+## Add outcome columns
 
 Outcomes are boolean columns that record whether something happened after each anchor, for example whether the user purchased later in the session. Use them to check a model's answers against what users did next, or as labels for training. Outcomes never select or filter anchors, so they work with every anchor type.
 
@@ -74,7 +74,7 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
 )
 ```
 
-An outcome is `true` when an event matching `criteria` has a later collector timestamp than the anchor, has the anchor's value of `attribute_key`, and occurs within `within_seconds` of the anchor if set.
+An outcome is `true` when an event matching `criteria` has a later `collector_tstamp` than the anchor, has the anchor's value of `attribute_key`, and occurs within `within_seconds` of the anchor if set.
 
 | Field | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -83,7 +83,7 @@ An outcome is `true` when an event matching `criteria` has a later collector tim
 | `attribute_key` | Attribute key the outcome follows. Only events with the anchor's value of this key count. Must be the key of one of the dataset's attribute groups. | `str` | Default: `"domain_sessionid"` |
 | `within_seconds` | Only count events up to this many seconds after the anchor. Required for any attribute key other than `domain_sessionid`. Without it, an outcome on `domain_sessionid` covers the rest of the session. | `int` | Default: `None` |
 
-## Example row
+## Review an example row
 
 A dataset with event anchors, two session attributes, a `recent_activity` agentic context, and a `purchased_later` outcome has rows like this:
 

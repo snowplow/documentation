@@ -26,7 +26,7 @@ The attribute groups don't need to be published. You can pass a draft definition
 
 ## Agentic contexts at each anchor
 
-Pass [agentic context](/docs/signals/agentic-contexts/index.md) definitions as `event_logs` to add one column per agentic context. Each column holds an array of the entries the streaming engine would have buffered at that anchor, oldest first, in the same shape as the JSON returned when you [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md).
+Pass [agentic context](/docs/signals/agentic-contexts/index.md) definitions as `agentic_contexts` to add one column per agentic context. Each column holds an array of the entries the streaming engine would have buffered at that anchor, oldest first, in the same shape as the JSON returned when you [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md).
 
 ```python
 agentic_context = sp_signals.get_event_log(name="recent_activity")
@@ -35,7 +35,7 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
     attribute_groups=[session_attributes],
     criteria=product_view,
     training_span=span,
-    event_logs=[agentic_context],
+    agentic_contexts=[agentic_context],
 )
 ```
 

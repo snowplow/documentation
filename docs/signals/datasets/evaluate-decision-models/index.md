@@ -25,7 +25,7 @@ Start from the call your application already makes. Each part of it maps to part
 | Part of the call | Dataset setting |
 | --- | --- |
 | When the application makes the call | The anchors. Use [user-supplied anchors](/docs/signals/datasets/anchors/index.md#user-supplied-anchors) from logs of past calls, [event anchors](/docs/signals/datasets/anchors/index.md#event-anchors) when the call responds to an event, or [trigger anchors](/docs/signals/datasets/anchors/index.md#trigger-anchors) when it responds to a condition over attributes. |
-| The Signals data the state is built from | The attribute groups and the agentic contexts the application reads, passed as `attribute_groups` and `event_logs`. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md). |
+| The Signals data the state is built from | The attribute groups and the agentic contexts the application reads, passed as `attribute_groups` and `agentic_contexts`. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md). |
 | How the state is built | Your own state-building code, run over each dataset row instead of a live Signals response |
 | What the decision is meant to predict or change | [Outcome columns](/docs/signals/datasets/context-and-outcomes/index.md#outcomes), such as a purchase later in the session |
 
@@ -85,7 +85,7 @@ add_to_cart = Criteria(all=[Criterion.eq(AtomicProperty(name="event_name"), "add
 
 run = sp_signals.submit_dataset_run_with_event_anchors(
     attribute_groups=[sp_signals.get_attribute_group(name="session_shopping")],
-    event_logs=[sp_signals.get_event_log(name="recent_activity")],
+    agentic_contexts=[sp_signals.get_event_log(name="recent_activity")],
     criteria=product_view,
     training_span=TrainingSpan(
         start_time=datetime(2026, 1, 1, tzinfo=timezone.utc),
@@ -136,7 +136,7 @@ To change the Signals data, for example to add an attribute or change what an ag
 run_v2 = sp_signals.submit_dataset_run_with_custom_anchors(
     attribute_groups=[sp_signals.get_attribute_group(name="session_shopping_v2")],
     anchors_table=WarehouseTable(table="intent_eval_anchors"),
-    event_logs=[sp_signals.get_event_log(name="recent_activity_v2")],
+    agentic_contexts=[sp_signals.get_event_log(name="recent_activity_v2")],
     outcomes=[
         DatasetOutcome(name="purchased_later", criteria=purchase),
         DatasetOutcome(name="added_to_cart_within_10m", criteria=add_to_cart, within_seconds=600),

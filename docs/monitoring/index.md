@@ -3,8 +3,8 @@ title: "Monitor failed events"
 date: "2020-02-15"
 sidebar_position: 8.6
 sidebar_label: "Monitoring"
-description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards, and Console API access."
-keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity"]
+description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards for Snowflake, BigQuery, and Databricks, and Console API access."
+keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity", "Databricks data quality"]
 ---
 
 ```mdx-code-block
@@ -31,13 +31,19 @@ The data quality dashboard and the default view are both useful in monitoring fo
 | **Requirements**      | Deployed Failed Events Loader         | No additional infrastructure needed          |
 | **Detail provided**   | Complete failed events JSON           | Aggregated data with redacted error messages |
 | **PII security**      | Data never leaves your infrastructure | Redacted data flows through Snowplow systems |
-| **Warehouse support** | Snowflake and BigQuery only           | All warehouses                               |
+| **Warehouse support** | Snowflake, BigQuery, and Databricks (via the Iceberg REST catalog) | All warehouses |
 
 ## Data quality dashboard
 
 The data quality dashboard allows you to see failed events directly from your warehouse. Your browser connects directly to an API running within your infrastructure, such that no failed event information flows through Snowplow. The discussion of architecture is important as it highlights the trade-offs between the two ways of monitoring failed events. The aforementioned API is a simple proxy that connects to your warehouse and serves the failed events to your browser. The connection is fully secure, using an encrypted channel (HTTPS) and authenticating/authorizing via the same mechanism used by Console.
 
-In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/monitoring/exploring-failed-events/index.md#configure). The data quality dashboard currently supports Snowflake and Bigquery connections.
+In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/monitoring/exploring-failed-events/index.md#configure). The data quality dashboard supports Snowflake, BigQuery, and Databricks connections. For Databricks, the dashboard reads failed events loaded through the [Iceberg REST catalog](/docs/destinations/warehouses-lakes/iceberg/index.md). The dashboard doesn't support failed events loaded by the Databricks Streaming Loader. To set up the dashboard for Databricks, see [Set up the dashboard for Databricks](#set-up-the-dashboard-for-databricks).
+
+:::note[Databricks workspaces]
+
+The data quality dashboard supports Databricks workspaces hosted on AWS.
+
+:::
 
 ![Architecture diagram showing user-generated events flowing through the pipeline to a warehouse, with the Data Quality API connecting directly to the warehouse, and the Console UI in the browser sending failed event queries to the Data Quality API while authenticating via the Console API.](images/dqd-architecture.png)
 
@@ -64,6 +70,23 @@ Some columns are too wide to fit in the table: click on them to see the full pre
 Finally, you can click on the **View SQL query** button to see the SQL query that was used to fetch the failed events from your warehouse:
 
 ![View SQL query modal showing the SELECT statement used to fetch failed events from atomic_failed.events, including lateral flatten operations on the failure context column and a WHERE clause filtering by error hash and load timestamp range.](images/sql-query.png)
+
+### Set up the dashboard for Databricks
+
+The dashboard queries failed events through a Databricks SQL warehouse, using the service principal of your Databricks connection. The Iceberg REST loader itself doesn't use the SQL warehouse.
+
+Before you enable the dashboard:
+* Add the SQL warehouse HTTP path to your Databricks connection. You can find it in your Databricks workspace under **SQL Warehouses** > **Connection details**. Console doesn't let you enable the dashboard for a connection without an HTTP path.
+* Grant the service principal the **Can use** permission on the SQL warehouse, under **SQL Warehouses** > **Permissions**.
+* Grant the service principal read access to the catalog and schema that contain your failed events:
+
+```sql
+GRANT USE CATALOG ON CATALOG <CATALOG> TO `<CLIENT_ID>`;
+GRANT USE SCHEMA ON SCHEMA <CATALOG>.<SCHEMA> TO `<CLIENT_ID>`;
+GRANT SELECT ON SCHEMA <CATALOG>.<SCHEMA> TO `<CLIENT_ID>`;
+```
+
+Replace `<CLIENT_ID>` with the client ID of the service principal used by your Databricks connection. Console shows the same statements, filled in with your catalog and schema, when you enable the dashboard.
 
 ### Missing warehouse permissions
 
@@ -135,14 +158,40 @@ SHOW GRANTS ON WAREHOUSE <WAREHOUSE_NAME>;
 ```
 
   </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+The dashboard queries failed events as the service principal of your Databricks connection. If it lacks the required permissions, you may receive one of the following errors.
+
+If the service principal lacks the `CAN USE` permission on the SQL warehouse, the dashboard can't run queries and you may receive the following error:
+* Error code: `31000`
+* Description: `Missing permission on Databricks: CAN USE missing on SQL warehouse`
+
+To fix the error, open the SQL warehouse in your Databricks workspace, go to **SQL Warehouses** > **Permissions**, and grant **Can use** to the service principal.
+
+If the service principal lacks privileges on the catalog or schema that contains your failed events, you may receive the following error:
+* Error code: `31001`
+* Description: `Missing permission on Databricks: Catalog or schema privileges missing`
+
+Verify the current privileges on the failed events schema:
+
+```sql
+SHOW GRANTS ON CATALOG <CATALOG>;
+SHOW GRANTS ON SCHEMA <CATALOG>.<SCHEMA>;
+```
+
+If necessary, grant the `USE CATALOG`, `USE SCHEMA`, and `SELECT` privileges to the service principal, as described in [Set up the dashboard for Databricks](#set-up-the-dashboard-for-databricks).
+
+  </TabItem>
 </Tabs>
 
 
 ### Query timeouts
 
 Long-running queries, a large volume of failed events, or resource pool exhaustion can cause the data quality dashboard to time out when fetching failed events. You may receive the following errors:
-* Error codes: `12xxx` or `22xxx`
+* Error codes: `12xxx`, `22xxx`, or `32xxx`
 * Description: `Query exceeded timeout` or `Query execution time limit exceeded`
+
+On Databricks, a `32xxx` timeout often means the SQL warehouse was stopped after being idle, rather than that the query was slow. The dashboard starts the warehouse when it connects, but the startup time depends on the warehouse type: a serverless warehouse starts in a few seconds, while a pro or classic warehouse can take several minutes. If the first query times out while the warehouse starts, retry once the warehouse is running.
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="bigquery" label="BigQuery" default>
@@ -185,6 +234,31 @@ WHERE start_time >= DATEADD('day', -1, CURRENT_TIMESTAMP())
 ORDER BY execution_time DESC
 LIMIT 10;
 ```
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+Diagnose the cause of the error by running:
+
+```sql
+-- Check recent query performance on the SQL warehouse
+SELECT
+  statement_id,
+  executed_by,
+  statement_text,
+  total_duration_ms,
+  read_bytes
+FROM system.query.history
+WHERE compute.warehouse_id = '<WAREHOUSE_ID>'
+  AND start_time >= current_timestamp() - INTERVAL 1 DAY
+  AND execution_status = 'FINISHED'
+ORDER BY total_duration_ms DESC
+LIMIT 10;
+```
+
+Querying `system.query.history` requires access to Databricks [system tables](https://docs.databricks.com/aws/en/admin/system-tables/).
+
+If slow queries cause the timeouts, scale up your Databricks SQL warehouse to increase capacity.
 
   </TabItem>
 </Tabs>

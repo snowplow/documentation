@@ -7,6 +7,8 @@ keywords: ["agentic attribute", "llm", "ai classification", "session intent", "a
 date: "2026-10-09"
 ---
 
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+
 :::note[Private preview]
 Agentic attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
 :::
@@ -135,6 +137,43 @@ Publishing fails if any of these are true:
 To change an agentic attribute, send the full definition to `PUT {{API_URL}}/api/v1/registry/agentic_attributes/<name>`. This creates a new draft version, and the published version stays live until you publish the draft. To discard the draft instead, send `DELETE {{API_URL}}/api/v1/registry/agentic_attributes/<name>/draft`.
 
 To stop evaluating an agentic attribute, unpublish it with `POST {{API_URL}}/api/v1/engines/unpublish` and the same request body as publishing. You can delete an agentic attribute with `DELETE {{API_URL}}/api/v1/registry/agentic_attributes/<name>` only once it's unpublished. Deleting removes every version.
+
+## Analyze agentic attribute values in your warehouse
+
+Every time Signals writes an agentic attribute value, it also tracks an `agentic_attribute` [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) into your Snowplow pipeline. The event records the value, the model's justification, and the data the model was shown. Use it to analyze the model's decisions alongside the rest of your behavioral data, or to audit why it chose a value.
+
+Signals sends these events server-side, with `platform` set to `srv` and, by default, `app_id` set to `signals`. Two rules decide which values reach your warehouse:
+
+* Only written values are tracked: an evaluation skipped by the evaluation policy, or one the model declines to answer, produces no event
+* Tracking is best-effort: Signals stores the value before sending the event, and drops the event without retrying if the Collector can't be reached
+
+The `context` field holds the stream attribute values and agentic context events the model received, as a JSON document. It's capped at 65,535 characters. If the context is longer, Signals drops whole events from it until it fits and sets `context_truncated` to `true`.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    "attribute_name": "session_state",
+    "attribute_version": 1,
+    "attribute_key_name": "domain_sessionid",
+    "attribute_key_value": "c6ef3124-b53a-4b13-a233-0088f79dcbcb",
+    "output_type": "enum",
+    "value": "stuck",
+    "available_options": [
+      "progressing",
+      "stuck",
+      "exploring"
+    ],
+    "justification": "Ran the same search five times with small changes and opened no results.",
+    "model_tier": "fast",
+    "agentic_contexts": [
+      "session_log_v1"
+    ],
+    "context": "{\"attributes\": {\"search_count\": 5}, \"event_logs\": {\"session_log\": [...]}}",
+    "context_truncated": false,
+    "model_identifier": "<MODEL_ID>",
+    "decided_at": "2026-10-09T14:03:12Z"
+  }}
+  schema={{"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "An agentic attribute evaluated by Snowplow Signals.", "self": {"vendor": "com.snowplowanalytics.signals", "name": "agentic_attribute", "format": "jsonschema", "version": "1-0-0"}, "type": "object", "properties": {"attribute_name": {"description": "Name of the published agentic attribute that was evaluated.", "type": "string", "minLength": 1, "maxLength": 255}, "attribute_version": {"description": "Version of the published agentic attribute that produced this result.", "type": "integer", "minimum": 1, "maximum": 32767}, "attribute_key_name": {"description": "Name of the attribute key identifying the profile the attribute was made for, e.g. domain_userid.", "type": "string", "minLength": 1, "maxLength": 255}, "attribute_key_value": {"description": "Value of the attribute key identifying the profile the attribute was made for.", "type": "string", "minLength": 1, "maxLength": 1024}, "output_type": {"description": "Type of the attribute's output contract, which tells the consumer how to interpret value.", "type": "string", "enum": ["enum", "boolean", "number"]}, "value": {"description": "The attribute result, rendered as a string. Interpret it according to output_type: the chosen name for enum, \"true\"/\"false\" for boolean, a decimal literal for number.", "type": "string", "maxLength": 1024}, "available_options": {"description": "The options the attribute allowed, rendered as strings. Empty for number types.", "type": "array", "items": {"type": "string", "maxLength": 512}, "maxItems": 64}, "justification": {"description": "The model's stated reasoning for the result.", "type": ["string", "null"], "maxLength": 4096}, "model_tier": {"description": "Model tier the attribute was evaluated with, as configured on the attribute's agent config.", "type": "string", "enum": ["fast", "advanced"]}, "agentic_contexts": {"description": "The event logs that fed this evaluation, each as name_vN (e.g. session_log_v2).", "type": ["array", "null"], "items": {"type": "string", "maxLength": 512}, "maxItems": 64}, "context": {"description": "The context supplied to the model, as a JSON document: {\"attributes\": {name: value}, \"event_logs\": {context_name: [event, ...]}}. When truncation occurred context_truncated is true.", "type": ["string", "null"], "maxLength": 65535}, "context_truncated": {"description": "Whether entries were dropped from context to fit its length cap. False means context is the complete set of values the model was given.", "type": "boolean"}, "model_identifier": {"description": "Identifier of the model that produced the attribute.", "type": "string", "minLength": 1, "maxLength": 255}, "decided_at": {"description": "When the attribute was written, UTC.", "type": "string", "format": "date-time"}}, "required": ["attribute_name", "attribute_version", "context_truncated", "attribute_key_name", "attribute_key_value", "output_type", "value", "available_options", "model_tier", "model_identifier", "decided_at"], "additionalProperties": false}} />
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

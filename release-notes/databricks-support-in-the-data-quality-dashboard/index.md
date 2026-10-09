@@ -8,12 +8,11 @@ components:
   - "Console"
   - "Monitoring"
 platforms:
-  - "AWS"
   - "Databricks"
 ---
 The data quality dashboard now supports Databricks. If you load failed events into Databricks through the [Iceberg REST catalog](/docs/destinations/warehouses-lakes/iceberg/), you can inspect them in Console in the same way as failed events in Snowflake or BigQuery.
 
-Databricks support is currently available for pipelines running on AWS.
+The data quality dashboard supports Databricks workspaces hosted on AWS.
 
 With this release, you can:
 

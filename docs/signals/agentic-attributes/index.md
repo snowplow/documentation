@@ -17,6 +17,8 @@ Use an agentic attribute when a judgment is too nuanced for a threshold rule. Qu
 
 Before you start, define and publish at least one [agentic context](/docs/signals/agentic-contexts/index.md). It selects the events the model reviews.
 
+Once defined and published, [retrieve an agentic attribute](/docs/signals/applications/agentic-attributes/index.md) in your application.
+
 ## How agentic attributes are evaluated
 
 Signals evaluates an agentic attribute in four steps:
@@ -133,40 +135,6 @@ Publishing fails if any of these are true:
 To change an agentic attribute, send the full definition to `PUT {{API_URL}}/api/v1/registry/agentic_attributes/<name>`. This creates a new draft version, and the published version stays live until you publish the draft. To discard the draft instead, send `DELETE {{API_URL}}/api/v1/registry/agentic_attributes/<name>/draft`.
 
 To stop evaluating an agentic attribute, unpublish it with `POST {{API_URL}}/api/v1/engines/unpublish` and the same request body as publishing. You can delete an agentic attribute with `DELETE {{API_URL}}/api/v1/registry/agentic_attributes/<name>` only once it's unpublished. Deleting removes every version.
-
-## Read the result in your application
-
-Read the most recent value for a session from the `agentic_attribute` endpoint. Pass the session's `domain_sessionid` as `identifier` and the agentic attribute's name as `name`. To get the session ID from the browser, see [Get the session identifier](/docs/signals/applications/agentic-contexts/index.md#get-the-session-identifier).
-
-```bash
-curl \
-  --header 'Authorization: Bearer <JWT>' \
-  '{{API_URL}}/api/v1/agentic_attribute?identifier=<DOMAIN_SESSIONID>&name=session_state'
-```
-
-The response contains the model's answer and its reasoning:
-
-```json
-{
-  "value": "stuck",
-  "version": 1,
-  "justification": "Ran the same search five times with small changes and opened no results.",
-  "available_options": ["progressing", "stuck", "exploring"],
-  "decided_at": "2026-10-09T14:03:12Z"
-}
-```
-
-The table below describes each field in the response.
-
-| Field               | Description                                                                                |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| `value`             | The model's answer: a string for `enum`, a boolean for `boolean`, or a number for `number` |
-| `version`           | The published version of the agentic attribute that produced the value                     |
-| `justification`     | The model's reasoning for the answer                                                       |
-| `available_options` | The values the model could choose from. `[true, false]` for `boolean`, and empty for `number` |
-| `decided_at`        | When the value was written, in UTC                                                         |
-
-The endpoint returns `404` if the session has no value yet, for example because its triggers haven't fired. Values are kept for seven days after they're written.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

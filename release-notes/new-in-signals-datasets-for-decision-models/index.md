@@ -38,10 +38,6 @@ Add boolean columns that record whether something happened after each moment, su
 
 Use a deterministic sample of sessions, so that the same seed always selects the same sessions and different versions of a context can be compared on the same moments.
 
-## Evaluate with a coding agent
-
-The new `evaluate-decision-context` skill in the [Snowplow skills](/docs/ai/skills/) runs the evaluation from your coding agent. It finds the call in your code, builds the dataset, asks the model, and checks the answers for overlap, confidence, and what users did next.
-
 ## Getting started
 
 These features are in the Signals Python SDK, and managed dataset runs require Snowflake. See [Evaluate decision models on past traffic](/docs/signals/datasets/evaluate-decision-models/) to get started, and [Choose dataset anchors](/docs/signals/datasets/anchors/) for the new anchor types.

@@ -31,24 +31,9 @@ Start from the call your application already makes. Each part of it maps to part
 
 If the state also uses data that Signals doesn't have, such as fields from your own database, add it as extra columns on user-supplied anchors, or note that it's missing from the evaluation.
 
-## Evaluate with a coding agent
-
-The [Snowplow skills](/docs/ai/skills/index.mdx) include an `evaluate-decision-context` skill that runs the whole evaluation from your coding agent. It reads your code to find the call, builds the dataset, renders each state with your own state-building code, asks the model, runs the checks described in [Interpret the results](#interpret-the-results), and writes a report. It asks before it creates warehouse tables or calls a model.
-
-[Install the skills](/docs/ai/skills/index.mdx#install-the-skills), then point the agent at the call:
-
-```txt
-We call Jev on product pages in src/decide.ts to tag each visitor's shopping
-intent. Test it on last month's traffic: replay it at product views, tell me
-which answers overlap or come back unsure, and check them against what
-visitors did next.
-```
-
-The skill reads your Signals credentials from `SIGNALS_API_URL`, `SIGNALS_API_KEY`, `SIGNALS_API_KEY_ID`, and `SIGNALS_ORG_ID`, and your model credentials from the environment. It supports Jev directly, and any other model through a command that reads states and returns answers. It keeps every request, state, and answer as files in a working directory, so you can rerun or review the evaluation later.
-
 ## Evaluate with the Python SDK
 
-You can run the same steps yourself with the [Signals Python SDK](/docs/signals/connection/index.md). This example evaluates a call made on product views that asks which shopping intent a visitor has. It assumes two functions:
+Run the evaluation with the [Signals Python SDK](/docs/signals/connection/index.md). This example evaluates a call made on product views that asks which shopping intent a visitor has. It assumes two functions:
 
 - `decide(state)` makes your existing model call and returns a dictionary with the chosen `answer`, its `confidence`, and the `probabilities` of every allowed answer
 - `build_state(row)` is adapted from your application's state-building code, and builds the state from a dataset row
@@ -132,6 +117,20 @@ run_v2 = sp_signals.submit_dataset_run_with_custom_anchors(
     has_label=False,
 )
 ```
+
+## Evaluate with a coding agent
+
+The evaluation is a loop that a coding agent can run for you. Point it at the code that makes the call and at this page, for example:
+
+```txt
+We call Jev on product pages in src/decide.ts to tag each visitor's shopping
+intent. Following https://docs.snowplow.io/docs/signals/datasets/evaluate-decision-models/,
+test it on last month's traffic with a Signals dataset. Replay it at product
+views, tell me which answers overlap or come back unsure, and check them
+against what visitors did next.
+```
+
+Ask the agent to show you the dataset request before it creates tables in your warehouse, and to save the model's answers so that it can rerun the checks without calling the model again.
 
 ## Interpret the results
 

@@ -39,9 +39,9 @@ The data quality dashboard allows you to see failed events directly from your wa
 
 In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/monitoring/exploring-failed-events/index.md#configure). The data quality dashboard supports Snowflake, BigQuery, and Databricks connections. For Databricks, the dashboard reads failed events loaded through the [Iceberg REST catalog](/docs/destinations/warehouses-lakes/iceberg/index.md). The dashboard doesn't support failed events loaded by the Databricks Streaming Loader. To set up the dashboard for Databricks, see [Set up the dashboard for Databricks](#set-up-the-dashboard-for-databricks).
 
-:::note[Databricks workspaces]
+:::note[Databricks availability]
 
-The data quality dashboard supports Databricks workspaces hosted on AWS.
+Databricks support requires your pipeline and your Databricks workspace to be hosted on AWS.
 
 :::
 

@@ -11,6 +11,10 @@ The Snowplow free trial is a 14-day trial of [Snowplow CDI Cloud](/docs/get-star
 
 Use the trial to evaluate Snowplow end to end: define your data, send events from your application, and load validated data into a warehouse or lake destination.
 
+:::tip[Signals free tier]
+To use [Signals](/docs/signals/index.md) without a time limit, sign up for the [Signals free tier](/docs/signals/get-started/free-tier/index.md) instead.
+:::
+
 ## Start the trial
 
 Sign up for the free trial on the [Snowplow website](https://snowplow.io/get-started/snowplow-free-trial).

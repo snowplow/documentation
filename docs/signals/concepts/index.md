@@ -237,7 +237,7 @@ For an overview of what these attributes are used for, see [real-time attributes
 
 ## Workflow
 
-Using Signals follows these steps, and the rest of this documentation follows the same order. The [quickstart](/docs/signals/quickstart/index.md) runs through all of them with an AI assistant.
+Using Signals follows these steps, and the rest of this documentation follows the same order. The [quickstart](/docs/signals/quickstart/index.md) runs through all of them with a coding agent.
 
 1. [Set up Signals](/docs/signals/setup/index.md) in Snowplow Console. This one-time task deploys the Signals infrastructure. Connecting a warehouse is optional, but you'll need one to backfill stream attributes, sync warehouse tables, or test definitions before publishing.
 2. Plan your use case. Decide which attributes to calculate and at what level, whether they come from the stream or the warehouse, and whether your application will pull attributes, react to interventions, or ground an agent with an agentic context.

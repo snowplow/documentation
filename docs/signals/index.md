@@ -19,4 +19,4 @@ Use Signals to:
 
 By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
-Follow the [quickstart](/docs/signals/quickstart/index.md) to publish your first attribute group with an AI assistant, read the [fundamentals](/docs/signals/concepts/index.md) for an overview of the architecture and workflow, or try Signals on the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral).
+Follow the [quickstart](/docs/signals/quickstart/index.md) to publish your first attribute group with a coding agent, read the [fundamentals](/docs/signals/concepts/index.md) for an overview of the architecture and workflow, or try Signals on the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral).

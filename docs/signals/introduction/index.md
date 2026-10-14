@@ -20,6 +20,8 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
+To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). You'll connect an AI assistant to your account and publish your first attribute group in about 10 minutes.
+
 ## Explore Signals
 
 <CardGrid cols={3} breakout>

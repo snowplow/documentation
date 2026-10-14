@@ -30,6 +30,8 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
+To try Signals hands-on first, follow the [quickstart](/docs/signals/quickstart/index.md). It uses an AI assistant to create and publish your first attribute group in about 10 minutes.
+
 ## Architecture
 
 You will need a [Snowplow pipeline](/docs/get-started/index.md) to use Signals. Your Signals infrastructure is deployed into the same cloud as your pipeline.
@@ -56,7 +58,7 @@ These are the high-level steps for using Signals, and the documentation in this 
 3. Define and publish your configuration
 4. Take action in your application
 
-Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a hands-on walkthrough.
+Check out the [quickstart](/docs/signals/quickstart/index.md) to run through these steps with an AI assistant, or the [quick start tutorial](/tutorials/signals-quickstart/start) to do them in Console.
 
 ### 1. Set up Signals
 

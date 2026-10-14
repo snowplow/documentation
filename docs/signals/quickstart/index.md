@@ -67,7 +67,7 @@ The first call opens a browser window for you to log in to Console. The agent th
 
 ## Run the starter prompt
 
-Copy this prompt into your agent. Instead of building a fixed example, the agent asks what you want Signals to do in your app, then plans and builds that.
+Copy this prompt into your agent. The agent asks what you want Signals to do in your app, then plans and builds that.
 
 ```text
 I'm new to Snowplow Signals and want to use it in this project. Use my

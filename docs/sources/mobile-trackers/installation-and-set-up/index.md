@@ -15,16 +15,25 @@ import TabItem from '@theme/TabItem';
 <Badges badgeType="Actively Maintained"></Badges>
 ```
 
-<Tabs groupId="platform" queryString>
-<TabItem value="ios" label="iOS" default>
+The following table shows platform requirements for the native mobile trackers:
 
+| Platform | Minimum version |
+|---|---|
+| iOS | 11.0+ |
+| macOS | 10.13+ |
+| tvOS | 12.0+ |
+| watchOS | 6.0+ |
+| visionOS | 1.0+ |
+| Android | 5 (API level 21+) |
 
-The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+, watchOS 6.0+, and visionOS 1.0+.
-It can be used both in Swift as well as in Objective-C code.
+The iOS tracker can be used in both Swift and Objective-C code.
 
 ## Installing
 
-The iOS Tracker SDK can be installed using various dependency managers.
+Install the tracker SDK using the dependency manager for your platform.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="ios" label="iOS" default>
 
 **Swift Package Manager** (Recommended)
 
@@ -51,9 +60,47 @@ To install Snowplow Tracker with Cocoapods:
 Support for installing the tracker using Carthage was dropped in version 5 of the tracker.
 :::
 
+</TabItem>
+<TabItem value="android" label="Android (Kotlin)">
+
+Add into your `build.gradle` file:
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
+  ...
+}
+```
+No other dependencies are required to track events. However, some **optional** dependencies can be added:
+- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md).
+-  `Play Services` dependencies for [tracking the app set ID and AAID](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md).
+
+</TabItem>
+<TabItem value="android-java" label="Android (Java)">
+
+Add into your `build.gradle` file:
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
+  ...
+}
+```
+No other dependencies are required to track events. However, some **optional** dependencies can be added:
+- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md).
+-  `Play Services` dependencies for [tracking the app set ID and AAID](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md).
+
+</TabItem>
+</Tabs>
+
 ## Setting up
 
-Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
+Once the tracker SDK is correctly set as a dependency in your app project, instrument the tracker.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="ios" label="iOS" default>
 
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 
@@ -121,35 +168,8 @@ The trackers created with the above method are configured "locally" only. To cre
 
 The [Examples Github repository](https://github.com/snowplow-industry-solutions/snowplow-ios-tracker-examples) includes demo apps for Swift and Objective-C covering the most popular dependencies managers. They are provided as simple reference apps to help you set up the tracker.
 
-
 </TabItem>
 <TabItem value="android" label="Android (Kotlin)">
-
-
-The Android Tracker SDK supports Android 5 (**API level 21+**).
-
-## Installing
-
-The Android Tracker SDK can be installed using Gradle.
-
-**Gradle**
-
-Add into your `build.gradle` file:
-
-```gradle
-dependencies {
-  ...
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
-  ...
-}
-```
-No other dependencies are required to track events. However, some **optional** dependencies can be added:
-- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md).
--  `Play Services` dependencies for [tracking the app set ID and AAID](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md).
-
-## Setting up
-
-Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
 1. In your `Application` subclass, set up the SDK as follows:
 
@@ -222,50 +242,8 @@ The trackers created with the above method are configured "locally" only. To cre
 
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.
 
-## Using the tracker with R8 optimization
-
-Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
-
-```
-# Reflection for the appSetId
--keep class com.google.android.gms.appset.AppSet { *; }
--keep class com.google.android.gms.appset.AppSetIdInfo { *; }
--keep class com.google.android.gms.internal.appset.zzr { *; }
--keep class com.google.android.gms.tasks.Tasks { *; }
-
-# Reflection for the AAID (AndroidIdfa)
--keep class com.google.android.gms.ads.identifier.** { *; }
-```
-
-
 </TabItem>
 <TabItem value="android-java" label="Android (Java)">
-
-
-The Android Tracker SDK supports Android 5 (**API level 21+**).
-
-## Installing
-
-The Android Tracker SDK can be installed using Gradle.
-
-**Gradle**
-
-Add into your `build.gradle` file:
-
-```gradle
-dependencies {
-  ...
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
-  ...
-}
-```
-No other dependencies are required to track events. However, some **optional** dependencies can be added:
-- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md).
--  `Play Services` dependencies for [tracking the app set ID and AAID](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md).
-
-## Setting up
-
-Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
 1. In your `Application` subclass, set up the SDK as follows:
 
@@ -330,9 +308,29 @@ The trackers created with the above method are configured "locally" only. To cre
 
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.
 
-## Using the tracker with R8 optimization
+</TabItem>
+</Tabs>
+
+## Use the tracker with R8 optimization (Android)
 
 Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="android" label="Android (Kotlin)" default>
+
+```
+# Reflection for the appSetId
+-keep class com.google.android.gms.appset.AppSet { *; }
+-keep class com.google.android.gms.appset.AppSetIdInfo { *; }
+-keep class com.google.android.gms.internal.appset.zzr { *; }
+-keep class com.google.android.gms.tasks.Tasks { *; }
+
+# Reflection for the AAID (AndroidIdfa)
+-keep class com.google.android.gms.ads.identifier.** { *; }
+```
+
+</TabItem>
+<TabItem value="android-java" label="Android (Java)">
 
 ```
 # Reflection for the appSetId

@@ -104,7 +104,7 @@ In normal operation, priority doesn't affect how Snowplow IDs are linked. All id
 
 ## Identities and Signals
 
-Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). To use the Snowplow ID as a unified identifier in Signals, set an attribute group's key to `snowplow_id` and map it to the `snowplow_id` property in the identity entity.
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/introduction/index.md). To use the Snowplow ID as a unified identifier in Signals, set an attribute group's key to `snowplow_id` and map it to the `snowplow_id` property in the identity entity.
 
 ## Data types
 

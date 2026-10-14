@@ -2,7 +2,7 @@
 title: "Signals fundamentals"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, interventions for triggering actions, and agentic contexts for grounding agents. Learn about data sources, attribute keys, and the Profiles Store."
+description: "Learn how Signals is deployed and used. Signals introduces attribute groups for defining behavioral data, services for consuming attributes, interventions for triggering actions, and agentic contexts for grounding agents. Learn about data sources, attribute keys, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
 ---
 
@@ -25,6 +25,22 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
+
+## Architecture
+
+Signals runs alongside a [Snowplow pipeline](/docs/get-started/index.md), and is deployed into the same cloud. Your pipeline continues to process events as usual.
+
+:::note[Warehouse support]
+Snowflake, BigQuery, and Databricks are supported. You can also use Signals without the warehouse functionality.
+:::
+
+Signals adds these infrastructure components:
+* **Profiles Store**: stores calculated attributes and configurations
+* Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
+* **Streaming engine**: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
+* **Batch engine**: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
+
+![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 
 ## Attribute groups
 
@@ -218,6 +234,15 @@ The Profiles Store is a database where Signals saves all your calculated attribu
 The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure. It acts as the central source of truth for your Signals deployment.
 
 For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
+
+## Workflow
+
+Using Signals follows these steps, and the rest of this documentation follows the same order. The [quickstart](/docs/signals/quickstart/index.md) runs through all of them with an AI assistant.
+
+1. [Set up Signals](/docs/signals/setup/index.md) in Snowplow Console. This one-time task deploys the Signals infrastructure. Connecting a warehouse is optional, but you'll need one to backfill stream attributes, sync warehouse tables, or test definitions before publishing.
+2. Plan your use case. Decide which attributes to calculate and at what level, whether they come from the stream or the warehouse, and whether your application will pull attributes, react to interventions, or ground an agent with an agentic context.
+3. Define and publish your configuration. Create [attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), and [agentic contexts](/docs/signals/agentic-contexts/index.md) in Console or with the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk), and group attribute groups into [services](/docs/signals/applications/services/index.md). Signals only calculates attributes once you publish; see the [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow).
+4. Take action in your application. [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md), [subscribe to interventions](/docs/signals/applications/subscribe/index.md), or [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) using the SDKs or API.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

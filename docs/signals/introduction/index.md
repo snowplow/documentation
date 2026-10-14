@@ -83,4 +83,4 @@ Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, b
 
 [See all tutorials ->](/tutorials)
 
-For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate).
+For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).

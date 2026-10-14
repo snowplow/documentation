@@ -1,0 +1,81 @@
+name: Notify Slack on PR Events
+
+on:
+  pull_request:
+    types: [opened, closed]
+ 
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          # Determine PR event type
+          if [ "${{ github.event.action }}" = "opened" ]; then
+            STATUS="🔵 Opened"
+            COLOR="#1f78d1"
+          elif [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+            STATUS="✅ Merged"
+            COLOR="#2eb886"
+          else
+            STATUS="❌ Closed without merge"
+            COLOR="#dc3545"
+          fi
+ 
+          # Build reviewers list
+          REVIEWERS=$(echo '${{ toJson(github.event.pull_request.requested_reviewers) }}' | jq -r '[.[].login] | join(", ")' 2>/dev/null)
+          if [ -z "$REVIEWERS" ] || [ "$REVIEWERS" = "null" ]; then
+            REVIEWERS="None assigned"
+          fi
+ 
+          # Build labels list
+          LABELS=$(echo '${{ toJson(github.event.pull_request.labels) }}' | jq -r '[.[].name] | join(", ")' 2>/dev/null)
+          if [ -z "$LABELS" ] || [ "$LABELS" = "null" ]; then
+            LABELS="None"
+          fi
+ 
+          # Post to Slack via incoming webhook
+          curl -sf -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d @- <<EOF
+          {
+            "channel": "#cloudflare-deployments",
+            "attachments": [
+              {
+                "color": "${COLOR}",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "PR ${STATUS}: ${{ github.event.pull_request.title }}"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      { "type": "mrkdwn", "text": "*Author:*\n<${{ github.event.pull_request.user.html_url }}|${{ github.event.pull_request.user.login }}>" },
+                      { "type": "mrkdwn", "text": "*Status:*\n${STATUS}" },
+                      { "type": "mrkdwn", "text": "*Reviewers:*\n${REVIEWERS}" },
+                      { "type": "mrkdwn", "text": "*Labels:*\n${LABELS}" },
+                      { "type": "mrkdwn", "text": "*Branch:*\n\`${{ github.event.pull_request.head.ref }}\` → \`${{ github.event.pull_request.base.ref }}\`" },
+                      { "type": "mrkdwn", "text": "*Repo:*\n${{ github.repository }}" }
+                    ]
+                  },
+                  {
+                    "type": "actions",
+                    "elements": [
+                      {
+                        "type": "button",
+                        "text": { "type": "plain_text", "text": "View PR" },
+                        "url": "${{ github.event.pull_request.html_url }}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+          EOF

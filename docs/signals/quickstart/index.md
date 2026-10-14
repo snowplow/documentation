@@ -100,7 +100,7 @@ When the agent asks what you want to do, describe the outcome in your own words.
 * "Give our support chatbot a summary of what the user did before they opened the chat."
 * "Offer a discount when someone adds three items to their cart and then goes idle."
 
-The agent turns your answer into a plan. It picks which [attributes](/docs/signals/concepts/index.md#attribute-groups), [interventions](/docs/signals/concepts/index.md#interventions), or [agentic contexts](/docs/signals/concepts/index.md#agentic-contexts) to use, so you don't need to know the Signals concepts first. Check the plan before you approve it. If it's more than you want for a first try, ask the agent to cut it down to one attribute group.
+The agent turns your answer into a plan. It picks which [attributes](/docs/signals/concepts/index.md#attribute-groups), [interventions](/docs/signals/concepts/index.md#interventions), or [agentic contexts](/docs/signals/concepts/index.md#agentic-contexts) to use, so you don't need to know the Signals concepts first. Check the plan before you approve it.
 
 Signals saves new configuration as drafts and calculates nothing until it's published, so you review every definition before it goes live. After you approve, the agent publishes it, and the streaming engine starts calculating from new events.
 
@@ -120,8 +120,8 @@ To see the attribute values without relying on the agent or your app code, use t
 <summary>Troubleshooting</summary>
 
 * **The browser login didn't open:** in Claude Code, run `/mcp`, select the Snowplow server, and choose **Authenticate**. For other clients, see [authentication](/docs/ai/snowplow-mcp/index.md#authentication).
-* **The agent is connected to the wrong organization:** add an `X-Org-Id` header to the server configuration, as described in [OAuth](/docs/ai/snowplow-mcp/index.md#oauth).
-* **The attribute values are empty:** Signals only calculates from events received after publishing, so generate a few more events in your app. If they're still empty, open your browser's network tab and check that page view requests reach your collector endpoint. Ad blockers can stop them.
+* **The attribute values are empty:** Signals only calculates from events received after publishing, so generate a few more events in your app. If they're still empty, open your browser's network tab and check that your tracking requests reach your collector endpoint.
+* **Ad blockers stop the tracking requests:** ad blockers often block requests to a collector endpoint. Turn off your ad blocker for local testing. In production, serve the collector from your own domain, or proxy the requests through your backend. See [cookies and ad blockers](/docs/get-started/tracking/cookies-and-ad-blockers/index.md).
 
 </details>
 

@@ -20,7 +20,7 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
-To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent adds tracking to your web app and publishes your first attribute group, in about 10 minutes.
+To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app.
 
 ## Explore Signals
 

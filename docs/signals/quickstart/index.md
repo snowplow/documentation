@@ -2,7 +2,7 @@
 title: "Signals quickstart with your coding agent"
 sidebar_label: "Quickstart"
 sidebar_position: 3
-description: "Sign up for Snowplow Signals, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that adds tracking to your web app and publishes your first real-time attribute group."
+description: "Sign up for Snowplow Signals, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that asks what you want to build, then adds tracking and Signals configuration to your web app."
 keywords: ["signals quickstart", "snowplow mcp", "coding agent", "claude code", "cursor", "real-time attributes"]
 date: "2026-10-14"
 ---
@@ -12,14 +12,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This quickstart takes you from no account to live, real-time attributes for your own browsing session in about 10 minutes. You give a coding agent one starter prompt. It adds Snowplow tracking to your web app, creates the Signals configuration in your account, and writes the code that reads the attributes back.
+This quickstart takes you from no account to Signals running in your own web app. You give a coding agent one starter prompt. It asks what you want Signals to do, adds Snowplow tracking to your app, creates the Signals configuration in your account, and writes the code that uses it.
 
 You'll need:
 * A coding agent that supports MCP, such as Claude Code, Cursor, or Codex
 * A web app you can run locally, open in the agent. If you don't have one, the agent can create a minimal one.
 * Node.js 18 or later
 
-If you'd rather click through Console, follow the [Signals quick start tutorial](/tutorials/signals-quickstart/start) instead. It builds similar attributes without an agent.
+If you'd rather click through Console, follow the [Signals quick start tutorial](/tutorials/signals-quickstart/start) instead. It builds a set of session attributes without an agent.
 
 ## Create your account
 
@@ -67,58 +67,68 @@ The first call opens a browser window for you to log in to Console. The agent th
 
 ## Run the starter prompt
 
-Copy this prompt into your agent. It asks for page view tracking and one attribute group keyed on the session, so you can watch the values change as you browse.
+Copy this prompt into your agent. Instead of building a fixed example, the agent asks what you want Signals to do in your app, then plans and builds that.
 
 ```text
-I'm new to Snowplow Signals. Using my connected Snowplow account and this project:
+I'm new to Snowplow Signals and want to use it in this project. Use my
+connected Snowplow account.
 
+Before you change anything:
 1. Check that Signals is enabled for my organization, and find my pipeline's
    collector endpoint.
-2. Add the Snowplow browser tracker to this web app, sending to that collector,
-   with page view tracking enabled. If there's no web app here, create a
-   minimal one with a few pages.
-3. Create a stream attribute group called quickstart_session, keyed on
-   domain_sessionid, with these attributes calculated from page_view events:
-   - page_view_count: how many page views in the last 30 minutes
-   - first_referrer: the first non-empty referrer host
-   - last_page_title: the title of the most recent page viewed
-4. Save it as a draft, show me the definition, and wait for my approval
-   before you publish it.
-5. Add a server-side endpoint that fetches quickstart_session for the current
-   session with the Signals Node.js or Python SDK. Read credentials from
-   environment variables and never print them.
-6. Start the app, and tell me which pages to visit.
-7. Prove it works: after I've viewed a few pages, read the current values for
-   my session from Signals and show them to me.
+2. Look at this project, then ask me what I want Signals to do in it. Give me
+   a few examples that fit this app. Ask follow-up questions until you
+   understand the goal.
+3. Propose a plan: the events to track, the Signals configuration to create
+   (attribute groups, interventions, or agentic contexts), and the code you'll
+   add to use it. Wait for my approval.
+
+Once I approve:
+4. Add the Snowplow browser tracker, sending to my collector, with the
+   tracking the plan needs. If there's no web app here, create a minimal one.
+5. Create the Signals configuration as drafts, show me the definitions, and
+   wait for my approval before you publish.
+6. Add the code that uses the results, with the Signals Node.js or Python SDK
+   on the server. Read credentials from environment variables and never
+   print them.
+7. Start the app, tell me what to do in it, then read the live values from
+   Signals and show me that it works.
 ```
 
-The agent shows you its plan and the code it adds to your app. For the attribute group, it picks the aggregations and the event and entity references, and saves the group as a draft. Signals calculates nothing until a group is published, so review the definition before you approve. The exact wording of the replies varies between agents and between runs.
+When the agent asks what you want to do, describe the outcome in your own words. For example:
+* "Show a different homepage banner to visitors who've looked at pricing twice this session."
+* "Give our support chatbot a summary of what the user did before they opened the chat."
+* "Offer a discount when someone adds three items to their cart and then goes idle."
 
-After you approve, the agent publishes the group. Publishing tells the streaming engine to start calculating the attributes from new events. Fetching attributes needs Signals API credentials: the agent tells you which environment variables to set, and where to find each value in Console. See [Connect to Signals](/docs/signals/connection/index.md) for the full list.
+The agent turns your answer into a plan. It picks which [attributes](/docs/signals/concepts/index.md#attribute-groups), [interventions](/docs/signals/concepts/index.md#interventions), or [agentic contexts](/docs/signals/concepts/index.md#agentic-contexts) to use, so you don't need to know the Signals concepts first. Check the plan before you approve it. If it's more than you want for a first try, ask the agent to cut it down to one attribute group.
 
-## See your attributes update
+Signals saves new configuration as drafts and calculates nothing until it's published, so you review every definition before it goes live. After you approve, the agent publishes it, and the streaming engine starts calculating from new events.
 
-Check that the configuration exists, then generate some data.
+Reading attributes from your app needs Signals API credentials. The agent tells you which environment variables to set, and where to find each value in Console. See [Connect to Signals](/docs/signals/connection/index.md) for the full list.
 
-1. In [Snowplow Console](https://console.snowplowanalytics.com), go to **Signals** > **Attribute groups**. You should see `quickstart_session` with a published status.
-2. Open your app in the browser and view a few pages.
-3. Call the endpoint the agent added, or let the agent read the values for you as in step 7 of the prompt.
+## Check that it works
 
-`page_view_count` should match the number of pages you viewed. To check the values without relying on the agent, use the [Signals integration](/docs/testing/snowplow-inspector/signals-integration/index.md) in the Snowplow Inspector browser extension, which reads them straight from the Profiles Store.
+The agent finishes by reading live values from Signals. To check for yourself:
+
+1. In [Snowplow Console](https://console.snowplowanalytics.com), open the **Signals** section. You should see the configuration the agent created, with a published status.
+2. Open your app in the browser and do what the agent told you to, such as viewing a few pages.
+3. Check that your app responds the way you planned, using the code the agent added.
+
+To see the attribute values without relying on the agent or your app code, use the [Signals integration](/docs/testing/snowplow-inspector/signals-integration/index.md) in the Snowplow Inspector browser extension, which reads them straight from the Profiles Store.
 
 <details>
 <summary>Troubleshooting</summary>
 
 * **The browser login didn't open:** in Claude Code, run `/mcp`, select the Snowplow server, and choose **Authenticate**. For other clients, see [authentication](/docs/ai/snowplow-mcp/index.md#authentication).
 * **The agent is connected to the wrong organization:** add an `X-Org-Id` header to the server configuration, as described in [OAuth](/docs/ai/snowplow-mcp/index.md#oauth).
-* **The attribute values are empty:** Signals only calculates from events received after publishing, so view a few more pages. If they're still empty, open your browser's network tab and check that page view requests reach your collector endpoint. Ad blockers can stop them.
+* **The attribute values are empty:** Signals only calculates from events received after publishing, so generate a few more events in your app. If they're still empty, open your browser's network tab and check that page view requests reach your collector endpoint. Ad blockers can stop them.
 
 </details>
 
 ## Next steps
 
-You now have tracking in your app, a published attribute group, and an endpoint that retrieves it. From here:
-* Use the attributes to change what your app shows; see [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for the SDK options
-* Ask your agent to create an [intervention](/docs/signals/interventions/index.md) that fires when `page_view_count` passes a threshold
+You now have tracking in your app, published Signals configuration, and code that uses it. From here:
+* Run the prompt again with a different goal, or ask the agent to extend what it built
 * Read the [Signals fundamentals](/docs/signals/concepts/index.md) to learn how attribute keys, attribute groups, services, and interventions fit together
+* See [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [subscribe to interventions](/docs/signals/applications/subscribe/index.md) for the SDK options your app code can use
 * Follow the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a longer walkthrough, including testing definitions against warehouse data

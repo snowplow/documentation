@@ -16,7 +16,7 @@ This quickstart takes you from no account to Signals running in your own web app
 
 You'll need:
 * A coding agent that supports MCP, such as Claude Code, Cursor, or Codex
-* A web app you can run locally, open in the agent. If you don't have one, the agent can create a minimal one.
+* A web app you can run locally. If you don't have one, the agent can create one.
 * Node.js 18 or later
 
 If you'd rather click through Console, follow the [Signals quick start tutorial](/tutorials/signals-quickstart/start) instead. It builds a set of session attributes without an agent.
@@ -31,7 +31,7 @@ If you already use Snowplow CDI, log in to [Snowplow Console](https://console.sn
 
 ## Connect your coding agent
 
-The Snowplow plugin installs the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and a set of [skills](/docs/ai/skills/index.mdx), including the `signals` skill. The MCP server gives your agent tools to read and change your Console configuration. The skills tell it how to use those tools: `implementation-guidance` covers adding the tracker to your app, and `signals` covers attribute definitions and publishing.
+The Snowplow plugin installs the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and a set of [skills](/docs/ai/skills/index.mdx). The MCP server gives your agent tools to read and change your Console configuration. The skills tell it how to use those tools: `implementation-guidance` covers adding the tracker to your app, and `signals` covers the Signals configuration and the code that uses it. That's why the starter prompt can stay short.
 
 <Tabs groupId="mcp-client" queryString>
   <TabItem value="any" label="Any agent" default>
@@ -70,29 +70,17 @@ The first call opens a browser window for you to log in to Console. The agent th
 Copy this prompt into your agent. The agent asks what you want Signals to do in your app, then plans and builds that.
 
 ```text
-I'm new to Snowplow Signals and want to use it in this project. Use my
-connected Snowplow account.
+Help me add Snowplow Signals to this project, using my connected Snowplow account.
 
-Before you change anything:
-1. Check that Signals is enabled for my organization, and find my pipeline's
-   collector endpoint.
-2. Look at this project, then ask me what I want Signals to do in it. Give me
-   a few examples that fit this app. Ask follow-up questions until you
-   understand the goal.
-3. Propose a plan: the events to track, the Signals configuration to create
-   (attribute groups, interventions, or agentic contexts), and the code you'll
-   add to use it. Wait for my approval.
+Look at the project first, including any Snowplow tracking that's already in
+place. Ask me what I want Signals to do, with a few examples that fit this app.
+Then propose a plan, including what I'll see when it works, and wait for my
+approval. If there's no web app here, create a minimal one.
 
-Once I approve:
-4. Add the Snowplow browser tracker, sending to my collector, with the
-   tracking the plan needs. If there's no web app here, create a minimal one.
-5. Create the Signals configuration as drafts, show me the definitions, and
-   wait for my approval before you publish.
-6. Add the code that uses the results, with the Signals Node.js or Python SDK
-   on the server. Read credentials from environment variables and never
-   print them.
-7. Start the app, tell me what to do in it, then read the live values from
-   Signals and show me that it works.
+Wait for my approval again before you publish anything. Keep API credentials
+on the server, in environment variables, and never print them. When you're
+done, show me it working with live values from Signals, and list the files
+you changed and the Signals resources you created.
 ```
 
 When the agent asks what you want to do, describe the outcome in your own words. For example:
@@ -100,19 +88,19 @@ When the agent asks what you want to do, describe the outcome in your own words.
 * "Give our support chatbot a summary of what the user did before they opened the chat."
 * "Offer a discount when someone adds three items to their cart and then goes idle."
 
-The agent turns your answer into a plan. It picks which [attributes](/docs/signals/concepts/index.md#attribute-groups), [interventions](/docs/signals/concepts/index.md#interventions), or [agentic contexts](/docs/signals/concepts/index.md#agentic-contexts) to use, so you don't need to know the Signals concepts first. Check the plan before you approve it.
+The agent turns your answer into a plan, including what you'll see when it works. It picks which [attributes](/docs/signals/concepts/index.md#attribute-groups), [interventions](/docs/signals/concepts/index.md#interventions), or [agentic contexts](/docs/signals/concepts/index.md#agentic-contexts) to use, so you don't need to know the Signals concepts first. Check the plan before you approve it.
 
 Signals saves new configuration as drafts and calculates nothing until it's published, so you review every definition before it goes live. After you approve, the agent publishes it, and the streaming engine starts calculating from new events.
 
-Reading attributes from your app needs Signals API credentials. The agent tells you which environment variables to set, and where to find each value in Console. See [Connect to Signals](/docs/signals/connection/index.md) for the full list.
+Code that calls the Signals API needs API credentials, and runs on your server so the credentials stay out of the browser. The agent tells you which environment variables to set, and where to find each value in Console. See [Connect to Signals](/docs/signals/connection/index.md) for the full list.
 
 ## Check that it works
 
-The agent finishes by reading live values from Signals. To check for yourself:
+The agent finishes by showing live values from Signals, and listing the files it changed and the Signals resources it created. Review that list before you commit the changes. To check for yourself:
 
 1. In [Snowplow Console](https://console.snowplowanalytics.com), open the **Signals** section. You should see the configuration the agent created, with a published status.
 2. Open your app in the browser and do what the agent told you to, such as viewing a few pages.
-3. Check that your app responds the way you planned, using the code the agent added.
+3. Check that you see what the plan said you would.
 
 To see the attribute values without relying on the agent or your app code, use the [Signals integration](/docs/testing/snowplow-inspector/signals-integration/index.md) in the Snowplow Inspector browser extension, which reads them straight from the Profiles Store.
 

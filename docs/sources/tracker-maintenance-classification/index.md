@@ -7,7 +7,7 @@ description: "Understand Snowplow tracker maintenance groups including actively 
 keywords: ["tracker maintenance", "support status", "production readiness"]
 ---
 
-Snowplow Trackers and dbt packages have been categorized into 4 maintenance groups. These groups are designed to give some expectations into how they will maintained in the future. Each tracker GitHub repository contains a "Snowplow" Badge that shows the maintenance group for that specific tracker and links back to this page.
+Snowplow Trackers, dbt packages and Signals SDKs have been categorized into 4 maintenance groups. These groups are designed to give some expectations into how they will maintained in the future. Each tracker GitHub repository contains a "Snowplow" Badge that shows the maintenance group for that specific tracker and links back to this page.
 
 * * *
 

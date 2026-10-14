@@ -68,7 +68,7 @@ Start a new session in your assistant and check the connection:
 Which Snowplow organization am I connected to?
 ```
 
-The first call opens a browser window for you to log in to Console. The assistant then replies with your organization's name and ID. It acts with your Console permissions, so it can only see and change what you can.
+The first call opens a browser window for you to log in to Console. The assistant then replies with your organization's name and ID. It acts with your Console permissions, so it can only see and change what you can. Don't paste API keys or other credentials into the chat: OAuth handles authentication.
 
 ## Run the starter prompt
 
@@ -87,6 +87,8 @@ I'm new to Snowplow Signals. Using my connected Snowplow account:
 4. Wait for me to approve it, then publish it.
 5. Once it's published, show me how to fetch these attributes for a session
    from a Node.js or Python application.
+6. Prove it works: after I view a few pages, read the current values for my
+   latest session from Signals and show them to me.
 ```
 
 The assistant picks the aggregations and the event and entity references, and saves the group as a draft. Signals calculates nothing until a group is published, so review the definition before you approve. The exact wording of the reply varies between assistants and between runs.
@@ -102,6 +104,15 @@ Check that the configuration exists, then generate some data.
 3. Ask your assistant: `What are the current quickstart_session attributes for my latest session?`
 
 `page_view_count` should match the number of pages you viewed. To check the values without relying on the assistant, use the [Signals integration](/docs/testing/snowplow-inspector/signals-integration/index.md) in the Snowplow Inspector browser extension, which reads them straight from the Profiles Store.
+
+<details>
+<summary>Troubleshooting</summary>
+
+* **The browser login didn't open:** in Claude Code, run `/mcp`, select the Snowplow server, and choose **Authenticate**. For other clients, see [authentication](/docs/ai/snowplow-mcp/index.md#authentication).
+* **The assistant is connected to the wrong organization:** add an `X-Org-Id` header to the server configuration, as described in [OAuth](/docs/ai/snowplow-mcp/index.md#oauth).
+* **The attribute values are empty:** Signals only calculates from events received after publishing. Check that your site sends page view events to your pipeline, then view a few more pages.
+
+</details>
 
 ## Next steps
 

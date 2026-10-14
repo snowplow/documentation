@@ -217,7 +217,7 @@ The Profiles Store is a database where Signals saves all your calculated attribu
 
 The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure. It acts as the central source of truth for your Signals deployment.
 
-For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes) on the Signals site.
+For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

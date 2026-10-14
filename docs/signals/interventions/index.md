@@ -337,7 +337,7 @@ sp_signals.push_intervention(
 )
 ```
 
-For an overview of interventions and the destinations they can reach, see [real-time triggers](https://signals.snowplow.io/products/real-time-triggers) on the Signals site.
+For an overview of interventions and the destinations they can reach, see [real-time triggers](https://signals.snowplow.io/products/real-time-triggers?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

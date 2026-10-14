@@ -2,7 +2,7 @@
 title: "Signals fundamentals"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "Learn how Signals is deployed and used. Signals introduces attribute groups for defining behavioral data, services for consuming attributes, interventions for triggering actions, and agentic contexts for grounding agents. Learn about data sources, attribute keys, and the Profiles Store."
+description: "How Signals is deployed alongside your pipeline, and the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
 ---
 

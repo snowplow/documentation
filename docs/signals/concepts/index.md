@@ -2,7 +2,7 @@
 title: "Signals fundamentals"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "How Signals is deployed alongside your pipeline, and the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
+description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
 ---
 
@@ -35,10 +35,10 @@ Snowflake, BigQuery, and Databricks are supported. You can also use Signals with
 :::
 
 Signals adds these infrastructure components:
-* **Profiles Store**: stores calculated attributes and configurations
-* Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
-* **Streaming engine**: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
-* **Batch engine**: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
+* Profiles Store: stores calculated attributes and configurations
+* Signals SDKs and API: allow you to manage and fetch attributes and interventions
+* Streaming engine: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
+* Batch engine: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
 
 ![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 

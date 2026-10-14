@@ -19,7 +19,7 @@ You'll need:
 * A web app you can run locally. If you don't have one, the agent can create one.
 * Node.js 18 or later
 
-If you'd rather click through Console, follow the [Signals quick start tutorial](/tutorials/signals-quickstart/start) instead. It builds a set of session attributes without an agent.
+If you'd rather click through Console, follow the [Console quickstart tutorial](/tutorials/signals-quickstart/start) instead. It builds a set of session attributes without an agent.
 
 ## Create your account
 
@@ -107,9 +107,9 @@ To see the attribute values without relying on the agent or your app code, use t
 <details>
 <summary>Troubleshooting</summary>
 
-* **The browser login didn't open:** in Claude Code, run `/mcp`, select the Snowplow server, and choose **Authenticate**. For other clients, see [authentication](/docs/ai/snowplow-mcp/index.md#authentication).
-* **The attribute values are empty:** Signals only calculates from events received after publishing, so generate a few more events in your app. If they're still empty, open your browser's network tab and check that your tracking requests reach your collector endpoint.
-* **Ad blockers stop the tracking requests:** ad blockers often block requests to a collector endpoint. Turn off your ad blocker for local testing. In production, serve the collector from your own domain, or proxy the requests through your backend. See [cookies and ad blockers](/docs/get-started/tracking/cookies-and-ad-blockers/index.md).
+* If the browser login doesn't open, run `/mcp` in Claude Code, select the Snowplow server, and choose **Authenticate**. For other clients, see [authentication](/docs/ai/snowplow-mcp/index.md#authentication).
+* If the attribute values are empty, generate a few more events in your app. Signals only calculates from events received after publishing. If they're still empty, open your browser's network tab and check that your tracking requests reach the Collector endpoint.
+* If an ad blocker stops the tracking requests, turn it off for local testing. In production, serve the Collector from your own domain, or proxy the requests through your backend. See [cookies and ad blockers](/docs/get-started/tracking/cookies-and-ad-blockers/index.md).
 
 </details>
 

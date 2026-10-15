@@ -19,7 +19,7 @@ It exposes four read-only tools, in two families. `list_attribute_groups` and `g
 
 Because the agent reads the tool descriptions at call time rather than at build time, the descriptions you write when defining attributes and agentic contexts are what steer the agent toward or away from reading them. Anything you publish later becomes available to a connected agent without a change to your application.
 
-This is not to be confused with the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/), which connects an assistant such as Claude Code or Cursor to your Snowplow account for managing resources like data structures, pipelines, and Signals configuration. The Signals MCP server is there to discover and fetch available Signals resources, such as calculated attributes and agentic contexts, for an agent running in your own product.
+This is not to be confused with the [Snowplow MCP server](/docs/ai/snowplow-mcp/), which connects an assistant such as Claude Code or Cursor to your Snowplow account for managing resources like data structures, pipelines, and Signals configuration. The Signals MCP server is there to discover and fetch available Signals resources, such as calculated attributes and agentic contexts, for an agent running in your own product.
 
 ## Links
 

@@ -311,7 +311,7 @@ This creates:
 
 Run the SQL files in the order specified in `README.md` against your warehouse to produce the training dataset.
 
-To understand how a training dataset relates to the attributes you serve in production, see [real-time features for ML](https://signals.snowplow.io/use-cases/model-features) on the Signals site.
+To understand how a training dataset relates to the attributes you serve in production, see [real-time features for ML](https://signals.snowplow.io/use-cases/model-features?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

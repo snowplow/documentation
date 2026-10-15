@@ -43,4 +43,4 @@ Once the infrastructure is ready, navigate to the **Signals** section to manage 
 
 To work with Signals programmatically, using the SDKs or API instead of (or alongside) Console, see [Connect to Signals](/docs/signals/connection/index.md).
 
-For deployment options and how Signals is metered, see [pricing](https://signals.snowplow.io/pricing) on the Signals site.
+For deployment options and how Signals is metered, see [pricing](https://signals.snowplow.io/pricing?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.

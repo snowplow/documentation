@@ -1,5 +1,7 @@
 ---
 title: "Introducing the Signals MCP server"
+sidebar_label: "Signals MCP server"
+keywords: ["Signals", "MCP server", "calculated attributes", "agentic contexts"]
 description: "Signals deployments now serve calculated attributes and agentic contexts over the Model Context Protocol, so an agent in your application can discover what is published and read the current user's data."
 date: "2026-10-15"
 category:

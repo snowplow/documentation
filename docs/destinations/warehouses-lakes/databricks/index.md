@@ -24,15 +24,18 @@ The Snowplow Databricks integration allows you to load enriched event data (as w
 
 Depending on the cloud provider for your Snowplow pipeline, there are different options for this integration:
 
-| Integration                                                                                                                                  |        AWS         |        Azure        |         GCP         | Failed events support |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | :----------------: | :-----------------: | :-----------------: | :-------------------: |
-| Direct, batch-based ([RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md))                                 | :white_check_mark: |         :x:         |         :x:         |          :x:          |
-| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md))                                             |        :x:¹        | :white_check_mark:² | :white_check_mark:² |  :white_check_mark:   |
-| Streaming / Lakeflow ([Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)) | :white_check_mark: | :white_check_mark:  | :white_check_mark:  |  :white_check_mark:   |
+| Integration                                                                                                                                  |        AWS          |        Azure        |         GCP         | Failed events support |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------: | :-----------------: | :-----------------: | :-------------------: |
+| Direct, batch-based ([RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md))                                 | :white_check_mark:  |         :x:         |         :x:         |          :x:          |
+| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md))                                             |        :x:¹         | :white_check_mark:² | :white_check_mark:² |  :white_check_mark:   |
+| Via Iceberg ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md))                                                | :white_check_mark:² |         :x:         |        :x:³         |  :white_check_mark:   |
+| Streaming / Lakeflow ([Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md))                  | :white_check_mark:  | :white_check_mark:  | :white_check_mark:  |  :white_check_mark:   |
 
 _¹ Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
 
 _² The lake must be in the same cloud as the pipeline._
+
+_³ Iceberg+Databricks combination is currently not supported for GCP pipelines._
 
 ## What you will need
 
@@ -57,12 +60,17 @@ Keep in mind that you will need to be able to do a few things.
   * `CAN USE` on the SQL warehouse
 
 </TabItem>
-<TabItem value="lake-loader" label="Via Delta Lake (Azure, GCP)" default>
+<TabItem value="lake-loader-delta" label="Via Delta Lake (Azure, GCP)">
 
 See [Delta Lake](../delta/index.md).
 
 </TabItem>
-<TabItem value="streaming-loader" label="Streaming" default>
+<TabItem value="lake-loader-iceberg" label="Via Iceberg (AWS)">
+
+See [Iceberg](../iceberg/index.md).
+
+</TabItem>
+<TabItem value="streaming-loader" label="Streaming">
 
 * Create an S3 or GCS bucket or ADLS storage container, located in the same cloud and region as your Databricks instance
 * Create a storage credential to allow Databricks to access the bucket or container
@@ -91,14 +99,19 @@ You can add a Databricks destination through the Snowplow Console.
 <SetupInstructions destinationName="Databricks" connectionType="Databricks" />
 
 </TabItem>
-<TabItem value="lake-loader" label="Via Delta Lake (Azure, GCP)" default>
+<TabItem value="lake-loader-delta" label="Via Delta Lake (Azure, GCP)">
 
 Follow the instructions for [Delta Lake](../delta/index.md#getting-started).
 
 Then create an external table in Databricks pointing to the Delta Lake location.
 
 </TabItem>
-<TabItem value="streaming-loader" label="Streaming" default>
+<TabItem value="lake-loader-iceberg" label="Via Iceberg (AWS)">
+
+Follow the instructions for [Iceberg](../iceberg/index.md#getting-started).
+
+</TabItem>
+<TabItem value="streaming-loader" label="Streaming">
 
 (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) instead.)
 
@@ -119,12 +132,17 @@ Once the loader is up and running, click on the “...” button in the **Loader
 For more details on the loading flow, see the [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) reference page, where you will find additional information and diagrams.
 
 </TabItem>
-<TabItem value="lake-loader" label="Via Delta Lake (Azure, GCP)" default>
+<TabItem value="lake-loader-delta" label="Via Delta Lake (Azure, GCP)">
 
 For more details on the loading flow, see the [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) reference page, where you will find additional information and diagrams.
 
 </TabItem>
-<TabItem value="streaming-loader" label="Streaming" default>
+<TabItem value="lake-loader-iceberg" label="Via Iceberg (AWS)">
+
+For more details on the loading flow, see the [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) reference page, where you will find additional information and diagrams.
+
+</TabItem>
+<TabItem value="streaming-loader" label="Streaming">
 
 For more details on the loading flow, see the [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) reference page, where you will find additional information and diagrams.
 

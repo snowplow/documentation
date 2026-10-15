@@ -52,7 +52,7 @@ You can select up to three caller identifiers. Choose the identifiers your appli
 
 The names depend on your Identities configuration. For example, your known ID might be a custom field called `acme_customer_id`.
 
-An identifier stops resolving if it doesn't appear on an event for longer than your attributes keyed on `snowplow_id` keep their data. That's the TTL of your lifetime attributes, 7 days by default, or the period of your longest windowed attribute, whichever is longer. Anonymous and known IDs appear often enough that this rarely matters. An occasional ID can expire between appearances. For example, with the default TTL, an email captured once at signup stops resolving a week later.
+An identifier stops resolving if it doesn't appear on an event for longer than your attributes keyed on `snowplow_id` keep their data. That's the TTL of your lifetime attributes, 7 days by default, or slightly more than the period of your longest windowed attribute, such as 32 days for a 30-day window, whichever is longer. Anonymous and known IDs appear often enough that this rarely matters. An occasional ID can expire between appearances. For example, with the default TTL, an email captured once at signup stops resolving a week later.
 
 {/* TODO: confirm with the team whether occasional IDs expiring is acceptable for M1, or whether redirect keys need their own TTL. */}
 
@@ -111,8 +111,6 @@ Identity resolution is being released in stages. This table shows which use case
 The [limitations](#limitations-for-every-use-case) at the end of this section apply to all of them.
 
 The examples show what a read returns for one caller identifier of each [role](#choose-caller-identifiers): `domain_userid` as the anonymous ID, `user_id` as the known ID, and `email` as the occasional ID.
-
-{/* TODO: interventions keyed on snowplow_id. Supported in this release, or add a limitation? */}
 
 ### Anonymous to known
 
@@ -230,6 +228,7 @@ These apply whichever use case you're working with:
 * **No activity from before you enable identity resolution.** An identifier resolves to its person only after it appears on an event sent after you select it as a caller identifier. Events from before that aren't included.
 * **Occasional IDs can expire.** An identifier that doesn't appear on an event for longer than your attributes keep their data stops resolving. See [Choose caller identifiers](#choose-caller-identifiers).
 * **Stream attribute groups only.** Attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or backfill.
+* **Interventions can't target `snowplow_id`.** An [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
 * **Deleting by identifier doesn't delete the person's attributes.** Deleting data for a caller identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain.
 * **An identifier can briefly resolve to the wrong person.** If Identities can't resolve an event in time, it attaches a [fallback ID](/docs/identities/concepts/index.md#fallback-ids-and-identifier-priority) to it. Until the next event with that identifier arrives, reads by the identifier can return the wrong attributes, or none.
 

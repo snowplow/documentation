@@ -11,9 +11,11 @@ This guide walks you through setting up the [Snowplow Identities dbt package](/d
 
 ## Requirements
 
-- dbt 1.10.6 or later
-- Snowflake or BigQuery warehouse
+- dbt Core 1.10.6 or later, below 2.0.0
+- Snowflake, BigQuery, or Databricks warehouse
 - The [Snowplow Identities service](/docs/identities/index.md) must be enabled and generating identity entities and merge events in your atomic schema
+
+For Databricks, use `dbt-databricks` with a Databricks SQL warehouse or Runtime 12.2 LTS or later. The source events must contain identity entities as typed arrays of structs and merge events as typed structs, as produced by the Snowplow Databricks loader. The package does not support standalone Spark.
 
 ## Installation
 
@@ -22,8 +24,10 @@ Add the package from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow
 ```yaml title="packages.yml"
 packages:
   - git: "https://github.com/snowplow-incubator/dbt-snowplow-identities.git"
-    revision: "main"
+    revision: "0.1.0"
 ```
+
+If you previously installed from `main`, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md) before upgrading.
 
 Then run:
 
@@ -91,6 +95,17 @@ vars:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
+
+On Databricks, `snowplow__database` is ignored. Set the source catalog with `snowplow__databricks_catalog` (default: `hive_metastore`) and the source schema with `snowplow__atomic_schema`:
+
+```yaml title="dbt_project.yml"
+vars:
+  snowplow_identities:
+    snowplow__databricks_catalog: catalog_with_snowplow_events
+    snowplow__atomic_schema: schema_with_snowplow_events
+```
+
+Configure the destination catalog and schema in your dbt Databricks profile. If your source table is not named `events`, set `snowplow__events_table`.
 
 ### 6. Filter your data set *(optional)*
 

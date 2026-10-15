@@ -17,7 +17,7 @@ Your agent can fetch Signals data using the [Model Context Protocol](https://mod
 The server is part of your Signals deployment, so there's nothing to install or host. It serves the same data as the [SDKs and API](/docs/signals/connection/index.md), and every tool is read-only.
 
 :::note[Two different MCP servers]
-This page covers serving Signals *data* to an agent inside your own application at runtime. To manage Signals *configuration* conversationally from an AI assistant such as Claude Code or Cursor, use the [Snowplow MCP server](/docs/llms-support/snowplow-mcp/index.md) instead.
+This page covers serving Signals *data* to an agent inside your own application at runtime. To manage Signals *configuration* conversationally from an AI assistant such as Claude Code or Cursor, use the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) instead.
 :::
 
 ## When to use the MCP server

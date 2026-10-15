@@ -3,7 +3,7 @@ title: "Load to Databricks through the Iceberg REST catalog, and monitor failed 
 description: "On AWS, the Lake Loader can now write Iceberg tables to Databricks Unity Catalog through the Iceberg REST catalog, and the data quality dashboard can query failed events loaded this way."
 date: "2026-10-15"
 category:
-  - "Product news"
+  - "Release notes"
 components:
   - "Destinations"
   - "Monitoring"

@@ -12,13 +12,23 @@ platforms:
   - "Databricks"
 ---
 
-AWS pipelines can now load events into Databricks as Iceberg tables, using Databricks Unity Catalog as the Iceberg REST catalog for the [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/). Failed events are supported.
+AWS pipelines can now load events into Databricks as Iceberg tables, and you can inspect failed events loaded this way in the data quality dashboard. Both features require your pipeline and your Databricks workspace to be hosted on AWS.
 
-If you load failed events this way, you can also inspect them in the [data quality dashboard](/docs/monitoring/), in the same way as for Snowflake and BigQuery. The dashboard doesn't support failed events loaded by the Databricks Streaming Loader.
+## Load to Databricks through the Iceberg REST catalog
 
-Both features require your pipeline and your Databricks workspace to be hosted on AWS.
+The [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/) can now use Databricks Unity Catalog as its Iceberg REST catalog. The loader writes Iceberg tables to a Unity Catalog external location and registers them in the catalog, so you can query them from Databricks. Failed events are supported.
 
-## Links
+This adds a third way to load AWS pipelines into Databricks, alongside the RDB Loader and the Databricks Streaming Loader. You can set it up in Console, using a Databricks service principal for authentication.
+
+The REST catalog integration has now been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, and Databricks Unity Catalog.
+
+## Monitor Databricks failed events in the data quality dashboard
+
+The [data quality dashboard](/docs/monitoring/) now supports Databricks, alongside Snowflake and BigQuery. If you load failed events through the Iceberg REST catalog, you can browse them, see their root causes, and inspect sample rows in Console without the failed event data leaving your infrastructure. The dashboard doesn't support failed events loaded by the Databricks Streaming Loader.
+
+The dashboard queries your failed events through a Databricks SQL warehouse, using the service principal of your Databricks connection. If the connection is missing permissions or a query times out, the dashboard shows Databricks-specific errors with steps to fix them.
+
+To learn more, see:
 
 * [Databricks](/docs/destinations/warehouses-lakes/databricks/)
 * [Iceberg](/docs/destinations/warehouses-lakes/iceberg/)

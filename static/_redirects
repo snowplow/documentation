@@ -492,7 +492,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
 /docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
 /docs/signals/receive-interventions/* /docs/signals/applications/subscribe/:splat 301
-/docs/signals/resources/* /docs/signals/get-started/:splat 301
+/docs/signals/resources/* /docs/signals/concepts/ 301
+/docs/signals/get-started/* /docs/signals/concepts/ 301
 /docs/signals/ /docs/signals/introduction/ 301!
 
 # Signals define/consume restructure

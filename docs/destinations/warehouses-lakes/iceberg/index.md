@@ -27,6 +27,7 @@ Iceberg data can be consumed using various tools and products, for example:
 * Amazon Redshift Spectrum
 * Apache Spark or Amazon EMR
 * Snowflake
+* Databricks
 * ClickHouse
 
 We currently support the following catalogs:
@@ -35,7 +36,7 @@ We currently support the following catalogs:
 | Glue | :white_check_mark: | :x: |
 | REST¹ | :white_check_mark: | :white_check_mark: |
 
-_¹The REST catalog has only been tested with the Snowflake Open Catalog implementation._
+_¹The REST catalog has only been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, and Databricks Unity Catalog._
 
 ## What you will need
 
@@ -50,9 +51,13 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 Keep in mind that you will need to be able to:
 
 <Tabs groupId="catalog" queryString>
-  <TabItem value="rest" label="REST" default>
-    * Specify your Snowflake Open Catalog account id and region, as well as namespace
-    * Create a service connection to the catalog and provide the client id and client secret
+  <TabItem value="rest-snowflake" label="REST (Snowflake)" default>
+    * Specify your Snowflake Open Catalog account ID and region, as well as namespace
+    * Create a service connection to the catalog and provide the OAuth client ID and client secret
+  </TabItem>
+  <TabItem value="rest-databricks" label="REST (Databricks)">
+    * Create an external location, a catalog, and a schema, and provide the catalog and schema names
+    * Create a service principal and provide the OAuth client ID and client secret
   </TabItem>
   <TabItem value="glue" label="AWS Glue">
     * Specify your AWS account ID

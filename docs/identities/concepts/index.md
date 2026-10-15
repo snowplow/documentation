@@ -104,7 +104,9 @@ In normal operation, priority doesn't affect how Snowplow IDs are linked. All id
 
 ## Identities and Signals
 
-Identities is designed to work alongside [Snowplow Signals](/docs/signals/introduction/index.md). To use the Snowplow ID as a unified identifier in Signals, set an attribute group's key to `snowplow_id` and map it to the `snowplow_id` property in the identity entity.
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). Signals can calculate attributes per Snowplow ID, using its built-in `snowplow_id` attribute key, and your application can read them by any of a person's identifiers, such as a `domain_userid` or a `user_id`.
+
+Identity resolution in Signals is being released in stages, and some use cases are only partly supported so far. To set it up, and to see which use cases are supported, read [Read attributes by any linked identifier](/docs/signals/attributes/identity-resolution/index.md).
 
 ## Data types
 
@@ -120,7 +122,7 @@ When Identities resolves identity for an event, it attaches an identity [entity]
     snowplow_id: "sp_abcdefabcdefabcdefabcdefab",
     created_at: "2024-01-15T10:30:00.000Z"
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity", "format": "jsonschema", "version": "2-0-1" }, "description": "Identity entity that is enriched onto events by Snowplow Identities", "properties": { "created_at": { "type": "string", "format": "date-time" }, "decision_reasons": { "description": "Why the service made this decision. Absent when there is nothing to report.", "type": "array", "items": { "type": "string", "maxLength": 128 } }, "snowplow_id": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplow_id", "created_at"], "additionalProperties": false }} />
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity", "format": "jsonschema", "version": "2-0-0" }, "description": "Identity entity that is enriched onto events by Snowplow Identities", "properties": { "created_at": { "type": "string", "format": "date-time" }, "snowplow_id": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplow_id", "created_at"], "additionalProperties": false }} />
 
 ### Merge events
 

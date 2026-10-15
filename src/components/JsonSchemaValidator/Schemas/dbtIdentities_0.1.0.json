@@ -177,8 +177,8 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Merge-limit collapse",
-      "description": "Collapse duplicate identifier mappings caused by the identity service merge limit",
-      "longDescription": "Enable only when no identifier is configured as unique in the identity service. When enabled, the model collapses eligible duplicate mappings as each identifier next appears in a batch; it does not update all historical mappings immediately. A full refresh from `snowplow__start_date` applies the logic to all reprocessed data. Mappings that could represent identifier TTL eviction are left unchanged.",
+      "description": "Collapse duplicate identifier mappings caused by the Identities service merge limit",
+      "longDescription": "Enable only when no identifier is configured as unique in the Identities service. When enabled, the model collapses eligible duplicate mappings as each identifier next appears in a batch; it does not update all historical mappings immediately. A full refresh from `snowplow__start_date` applies the logic to all reprocessed data. Mappings that could represent identifier TTL eviction are left unchanged.",
       "packageDefault": "false",
       "group": "Operation and Logic"
     }

@@ -15,7 +15,7 @@ This guide walks you through setting up the [Snowplow Identities dbt package](/d
 - Snowflake, BigQuery, or Databricks warehouse
 - The [Snowplow Identities service](/docs/identities/index.md) must be enabled and generating identity entities and merge events in your atomic schema
 
-For Databricks, use `dbt-databricks` with a Databricks SQL warehouse or Runtime 12.2 LTS or later. The source events must contain identity entities as typed arrays of structs and merge events as typed structs, as produced by the Snowplow Databricks loader. Standalone Spark is not included in the supported warehouses.
+For Databricks, use `dbt-databricks` with a Databricks SQL warehouse or Runtime 12.2 LTS or later. The source events must contain identity entities as typed arrays of structs and merge events as typed structs, as produced by the Snowplow Databricks loader. The package does not support standalone Spark.
 
 ## Installation
 

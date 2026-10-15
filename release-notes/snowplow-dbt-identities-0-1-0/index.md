@@ -23,4 +23,4 @@ Use `dbt-databricks` with a Databricks SQL warehouse or Runtime 12.2 LTS or late
 
 The package requires dbt Core 1.10.6 or later, below 2.0.0. Pin `revision: "0.1.0"` in your Git package definition and run `dbt deps`.
 
-If you previously installed from `main`, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/) to review your installed revision and the optional merge-limit collapse setting. The setting defaults to `false` and must only be enabled when no identifier is configured as unique in the Identities service.
+If you previously installed from `main`, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/) to review your installed revision and the optional merge-limit collapse setting. The setting defaults to `false`, and you should enable it only when no identifier is configured as unique in the Identities service.

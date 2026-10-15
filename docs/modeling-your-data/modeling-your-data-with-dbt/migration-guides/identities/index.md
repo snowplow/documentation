@@ -11,7 +11,7 @@ Use this guide when upgrading an existing Snowplow Identities dbt project. For a
 
 ## Upgrade to 0.1.0
 
-Version 0.1.0 is the first tagged package release. Earlier installation instructions used the Git `main` branch, so existing projects can have different installed commits. Check your `package-lock.yml` and review the changes between that commit and [0.1.0](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.1.0) before upgrading. A full refresh requirement depends on the changes since your installed commit.
+Version 0.1.0 is the first tagged package release. Earlier installation instructions used the Git `main` branch, so existing projects can have different installed commits. Check your `package-lock.yml` and review the changes between that commit and [0.1.0](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.1.0) before upgrading. Whether you need a full refresh depends on the changes since your installed commit.
 
 The package requires dbt Core 1.10.6 or later, below 2.0.0. Pin the Git revision in `packages.yml`:
 
@@ -33,4 +33,4 @@ See the [quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-qu
 
 The `snowplow__merge_limit_collapse` variable defaults to `false`. Enable it only when no identifier is configured as unique in the Identities service.
 
-When enabled, eligible duplicate identifier mappings are corrected as each identifier next appears in an incremental batch. A full refresh from `snowplow__start_date` applies the logic to all reprocessed data. See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) before enabling it.
+When enabled, the package corrects eligible duplicate identifier mappings as each identifier next appears in an incremental batch. A full refresh from `snowplow__start_date` applies the logic to all reprocessed data. See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) before enabling it.

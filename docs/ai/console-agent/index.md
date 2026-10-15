@@ -18,23 +18,23 @@ The Snowplow Assistant is an AI assistant embedded in [Snowplow Console](https:/
 
 ## How it works
 
-The Snowplow Assistant runs as a chat interface inside the Console. When you send a message, the assistant determines which tools and skills to use, calls the relevant Snowplow APIs on your behalf, and returns the results in a conversational format.
+The Snowplow Assistant runs as a chat interface inside the Console. When you send a message, the Snowplow Assistant determines which tools and skills to use, calls the relevant Snowplow APIs on your behalf, and returns the results in a conversational format.
 
 ### Permissions
 
 The Snowplow Assistant operates with **your existing Console permissions**. It authenticates using your current session and can only perform actions that your account is authorized to do. It cannot escalate privileges or access resources outside your organization.
 
-Any action that modifies data (creating a schema, updating an enrichment, deleting an alert) requires your explicit confirmation before the assistant proceeds.
+Any action that modifies data (creating a schema, updating an enrichment, deleting an alert) requires your explicit confirmation before the Snowplow Assistant proceeds.
 
 ### Data privacy
 
 The Snowplow Assistant does not have access to personal data or PII such as names or email addresses. It operates only on Snowplow configuration and metadata (schemas, tracking plans, pipeline settings, failed event error details, and similar).
 
 :::warning[Third-party LLM processing]
-To provide this functionality, the content of your messages and the configuration data the assistant retrieves on your behalf are sent to a third-party LLM provider for processing. Do not enter personal data, credentials, or other sensitive information into the chat.
+To provide this functionality, the content of your messages and the configuration data the Snowplow Assistant retrieves on your behalf are sent to a third-party LLM provider for processing. Do not enter personal data, credentials, or other sensitive information into the chat.
 :::
 
-### Enabling and disabling the assistant
+### Enabling and disabling the Snowplow Assistant
 
 You can enable or disable the Snowplow Assistant for your organization from the **Settings** section of the Snowplow Console. When disabled, the chat interface does not appear in the Console for any user in your organization.
 
@@ -57,7 +57,7 @@ The Snowplow Assistant has token limits that refresh weekly at the organization 
 
 ## Capabilities
 
-The assistant provides support across several areas of the Console. It loads specialized skills on demand based on your request.
+The Snowplow Assistant provides support across several areas of the Console. It loads specialized skills on demand based on your request.
 
 ### Tracking design
 
@@ -114,7 +114,7 @@ Perform day-to-day management tasks:
 
 ### Signals
 
-If [Signals](/docs/signals/concepts/index.md) is enabled for your organization, the assistant can help you configure and manage it:
+If [Signals](/docs/signals/concepts/index.md) is enabled for your organization, the Snowplow Assistant can help you configure and manage it:
 
 - Define and manage attribute keys and attribute groups
 - Create services for pull-based attribute access

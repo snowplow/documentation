@@ -9,25 +9,25 @@ components:
   - "Console"
   - "AI tools"
 ---
-Snowplow Assistant can now follow your organization's own conventions. Custom Instructions is a set of instructions you write and store in Console that the Assistant reads at the start of every conversation, across every interaction in your organization.
+Snowplow Assistant can now follow your organization's own conventions. Custom Instructions is a set of instructions you write and store in Console that the Snowplow Assistant reads at the start of every conversation, across every interaction in your organization.
 
-Until now the Assistant reasoned from Snowplow's general best practices. That works well for a tracking plan which follows our conventions, but many organizations have their own naming rules, schema patterns and internal vocabulary, and there was nowhere to declare them. Custom Instructions gives you one place to write your standards down so every interaction with the Snowplow Assistant starts from them.
+Until now the Snowplow Assistant reasoned from Snowplow's general best practices. That works well for a tracking plan which follows our conventions, but many organizations have their own naming rules, schema patterns and internal vocabulary, and there was nowhere to declare them. Custom Instructions gives you one place to write your standards down so every interaction with the Snowplow Assistant starts from them.
 
 ## Key benefits
 
-* **Consistency across teams.** Everyone using the Assistant works from the same conventions, whether they are designing a tracking plan, creating a data structure or investigating failed events.
+* **Consistency across teams.** Everyone using the Snowplow Assistant works from the same conventions, whether they are designing a tracking plan, creating a data structure or investigating failed events.
 
-* **Less repeating yourself.** You state your naming rules and terminology once instead of correcting the Assistant in each conversation.
+* **Less repeating yourself.** You state your naming rules and terminology once instead of correcting the Snowplow Assistant in each conversation.
 
-* **Output that fits your business.** The Assistant knows what your organization does, what your product areas are called and which team owns what, so its suggestions are relevant to you and not only structurally correct.
+* **Output that fits your business.** The Snowplow Assistant knows what your organization does, what your product areas are called and which team owns what, so its suggestions are relevant to you and not only structurally correct.
 
 ## What to put in it
 
-Custom Instructions describes your preferences and your business. It sits over the Snowplow best practices the Assistant already knows, so you only need to write down what is specific to you.
+Custom Instructions describes your preferences and your business. It sits over the Snowplow best practices the Snowplow Assistant already knows, so you only need to write down what is specific to you.
 
 * **Naming conventions** for tracking plans, event specifications, data structures and properties, including any vendor prefix you use.
 
-* **Design preferences** the Assistant would otherwise have to guess at, such as whether you favour atomic or grouped schemas, how you split properties between events and entities, and what you expect people to reuse rather than create.
+* **Design preferences** the Snowplow Assistant would otherwise have to guess at, such as whether you favour atomic or grouped schemas, how you split properties between events and entities, and what you expect people to reuse rather than create.
 
 * **Business and domain context,** covering what your organization does, your product areas, which teams own which tracking plans, and a glossary of internal terms.
 

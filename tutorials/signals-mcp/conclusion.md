@@ -9,7 +9,7 @@ date: "2026-08-04"
 
 In this tutorial you managed a complete Signals workflow conversationally, in the Snowplow Assistant or in your own MCP-connected assistant:
 
-* Opened the assistant in Console, or installed the Snowplow plugin and authenticated with your Console account
+* Opened the Snowplow Assistant in Console, or installed the Snowplow plugin and authenticated with your Console account
 * Defined a stream attribute group with three session metrics, saved as a draft
 * Tested the definitions and published the group
 * Verified the configuration in Console, and the live values in the Snowplow Inspector

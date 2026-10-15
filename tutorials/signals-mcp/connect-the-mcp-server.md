@@ -13,7 +13,7 @@ Both routes end in the same place: a conversation that can read and change your 
 
 The [Snowplow Assistant](/docs/ai/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
 
-Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/ai/console-agent/) for what it covers and how it handles your data.
+Log in to Console, open the Snowplow Assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the Snowplow Assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/ai/console-agent/) for what it covers and how it handles your data.
 
 ![The Manage organization page in Console settings, with the Snowplow Assistant section showing an Enabled badge, a custom instructions panel, and a Disable button](./images/console-assistant-enabled.png)
 

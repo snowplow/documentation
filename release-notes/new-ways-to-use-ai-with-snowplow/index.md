@@ -29,7 +29,7 @@ The Snowplow MCP Server exposes the same tools as the Snowplow Assistant to any 
 
 We've put a lot of effort into making Snowplow simpler to use and decreasing the time it takes to go from your newly provisioned Snowplow pipeline to high-quality behavioral data driving insights, powering real-time operational, or unlocking agentic use-cases.
 
-The Assistant and the MCP server put Snowplow expertise directly into the tools your teams already use:
+The Snowplow Assistant and the MCP server put Snowplow expertise directly into the tools your teams already use:
 
 * **Tracking design.** A product manager can design a tracking plan in minutes within the Snowplow Console or Claude by sharing a screenshot, connecting to the Figma MCP server, or even linking to your website publicly.
 * **Implementation.** A developer can implement Snowplow events from a tracking plan in Cursor without requiring an in-depth understanding of Snowplow SDKs or testing methodology.
@@ -38,7 +38,7 @@ The Assistant and the MCP server put Snowplow expertise directly into the tools 
 
 ## Coming soon
 
-This is the first step in our effort to make AI a first-class way of working with Snowplow. Over the coming week and months, our Product and Professional Services teams will be publishing skills you can drop into Claude, Cursor, and other AI tools. These skills are designed to work alongside the Assistant and the MCP server, so the AI you're already using gets smarter about Snowplow.
+This is the first step in our effort to make AI a first-class way of working with Snowplow. Over the coming week and months, our Product and Professional Services teams will be publishing skills you can drop into Claude, Cursor, and other AI tools. These skills are designed to work alongside the Snowplow Assistant and the MCP server, so the AI you're already using gets smarter about Snowplow.
 
 ## Get started
 

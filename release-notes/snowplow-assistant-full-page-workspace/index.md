@@ -14,10 +14,10 @@ Snowplow Assistant has a dedicated full-page workspace in Console.
 
 ## What's new
 
-* **Full-page workspace.** Open the Assistant in a full-page workspace instead of the side panel.
+* **Full-page workspace.** Open the Snowplow Assistant in a full-page workspace instead of the side panel.
 * **Switch between views.** Move between the side panel and the full-page workspace at any time.
 * **Shared conversation and context.** The same conversation and context carry across both views, so you can switch without starting over.
-* **New entry points.** Open the Assistant directly from the side navigation, or from the dedicated card on the Console homepage.
+* **New entry points.** Open the Snowplow Assistant directly from the side navigation, or from the dedicated card on the Console homepage.
 
 ## Additional information
 

@@ -61,4 +61,13 @@ Postgres is technically supported in the models within the package, however one 
 | 0.3.0                             | >=1.6.0 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |   ❌   |
 
 </TabItem>
+<TabItem value="identities" label="Snowplow Identities">
+
+| snowplow-identities version | dbt versions | BigQuery | Databricks | Redshift | Snowflake | Postgres | Spark |
+| -------------------------- | ------------ | :------: | :--------: | :------: | :-------: | :------: | :---: |
+| {versions.dbtSnowplowIdentities} | >=1.10.6 to \<2.0.0 | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ |
+
+Databricks requires a SQL warehouse or Runtime 12.2 LTS or later. See the [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) for source data requirements.
+
+</TabItem>
 </Tabs>

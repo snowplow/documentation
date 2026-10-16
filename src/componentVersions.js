@@ -70,7 +70,7 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.14.2',
+  igluServer: '0.15.0',
   igluctl: '0.13.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',

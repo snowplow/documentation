@@ -2,7 +2,7 @@
 title: "Iglu Server"
 sidebar_label: "Iglu Server"
 sidebar_position: 10
-date: "2026-05-14"
+date: "2026-10-16"
 description: "Iglu Server is a RESTful schema registry for publishing, validating, and serving Iglu schemas in self-hosted Snowplow pipelines."
 keywords: ["iglu server", "schema registry", "self-hosted snowplow", "self-hosted"]
 ---
@@ -34,6 +34,10 @@ Iglu Server exposes a RESTful API for managing schemas, validating data, and iss
 ```text
 http://YOUR_IGLU_HOST/static/swagger-ui/index.html
 ```
+
+Each service also serves its API description at `/api/<service>/swagger.json`, for example `/api/schemas/swagger.json`. Since version 0.15.0, these are OpenAPI 3.0.3 documents; earlier versions served Swagger 2.0.
+
+If Postgres aborts a schema upload because of a deadlock or a serialization failure, for example when concurrent uploads supersede overlapping versions, Iglu Server retries the write up to 3 times. Since version 0.15.0, if the write still fails, the server returns `503 Service Unavailable`, so that clients know they can retry the request.
 
 Iglu Server expects an API key in the `apikey` header for any endpoint that requires read access to private schemas or write access to the registry. See [Generate API keys](#generate-api-keys) below for how to generate them.
 
@@ -96,6 +100,28 @@ psql -U postgres -c "CREATE DATABASE igludb"
   snowplow/iglu-server:${versions.igluServer} setup --config /iglu/config.hocon
 `}</CodeBlock>
 
+#### Upgrade to 0.15.0
+
+The `iglu_schemas` and `iglu_drafts` tables have a primary key. Fresh installs create it with the tables. For databases created by an older version, Iglu Server adds the primary key on startup if it's missing.
+
+Since version 0.15.0, the primary key is mandatory: if Iglu Server can't add it, for example because the table contains duplicate rows, it fails to start instead of running without it. Version 0.14.2 tried to add the primary key too, but kept running if it failed, logging a `Could not add the primary key to table` error along with the duplicate rows.
+
+Before upgrading, check that your tables have no duplicate rows:
+
+```sql
+SELECT vendor, name, format, model, revision, addition, COUNT(*)
+FROM iglu_schemas
+GROUP BY vendor, name, format, model, revision, addition
+HAVING COUNT(*) > 1;
+
+SELECT vendor, name, format, version, COUNT(*)
+FROM iglu_drafts
+GROUP BY vendor, name, format, version
+HAVING COUNT(*) > 1;
+```
+
+If either query returns rows, remove the duplicates before starting version 0.15.0.
+
 ## Generate API keys
 
 The super API key in your configuration file lets you generate further keys for your applications via the API key generation service.
@@ -136,7 +162,7 @@ To enable dummy mode, set `database.type` to `"dummy"` in your config. The dummy
 
 ### Logging
 
-Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html), configurable via system properties. For example, to redirect logs to a file and suppress verbose connection loop output:
+Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html), configurable via system properties. For example, to redirect logs to a file and suppress verbose connection loop output:
 
 ```bash
 -Dorg.slf4j.simpleLogger.logFile=server.log

@@ -1,7 +1,7 @@
 ---
 title: "Iglu Server configuration reference"
 sidebar_label: "Configuration"
-date: "2026-05-14"
+date: "2026-10-16"
 sidebar_position: 10
 description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
 keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON", "self-hosted"]
@@ -43,8 +43,9 @@ license {
 | `database.dbname` | Required. Name of Postgres database. |
 | `database.username` | Required. Username for connecting to Postgres. |
 | `database.password` | Required. Password for connecting to Postgres. |
+| `database.enableStartupChecks` | Optional. Default: `true`. Whether to ping Postgres during startup and fail immediately if it isn't available. Recommended for production, so the instance isn't considered healthy until the Postgres connection is healthy. |
 | `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customize the api base url in Swagger. Helpful for when running Iglu Server behind a proxy server. |
-| `debug` | Optional. Default: `false`.  Enable additional debug api endpoint to respond with all internal state. |
+| `debug` | Optional. Default: `true`. Enable the additional `/api/debug` endpoint, which responds with all internal state. |
 | `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [amending schemas](/docs/fundamentals/schemas/versioning/index.md). |
 | `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples on GitHub](https://github.com/snowplow/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
 | `webhooks.schemaPublished.uri` | Required. URI of the HTTP server that will receive the webhook event. |
@@ -59,7 +60,7 @@ These advanced options have sensible defaults and rarely need changing.
 
 | parameter | description |
 |-|-|
-| `repoServer.threadPool.type` | Default: `fixed` for a fixed thread pool. Can be `cached` for a cached thread pool. Type of the thread pool used by the underlying BlazeServer for executing Futures. |
+| `repoServer.threadPool.type` | Default: `fixed` for a fixed thread pool. Can be `cached` for a cached thread pool, or `global` for the global execution context. Type of the thread pool used by the HTTP server and the webhooks HTTP client. |
 | `repoServer.threadPool.size` | Optional. Default: `4`. Size of the thread pool if the type is `fixed`. |
 | `repoServer.maxConnections` | Optional. Default: `1024`. Maximum number of client connections that may be active at any time. |
 | `database.pool.type` | Optional. Default: `hikari` (recommended for production). Can be changed to `nopool` to remove the upper bound on the number of connections. |
@@ -69,6 +70,8 @@ These advanced options have sensible defaults and rarely need changing.
 | `database.pool.minimumIdle` | Optional. Default: `5`. Minimum number of idle connections in the Hikari pool. |
 | `database.pool.connectionPool.type` | Optional. Default: `fixed` for a fixed thread pool (recommended in production). Type of the thread pool used for awaiting connection to the database. |
 | `database.pool.connectionPool.size` | Optional. Default: `4`. Number of threads to use when the connection pool has type `fixed`. |
-| `database.pool.transactionPool.type` | Optional. Default: `cached` (recommended for production). Type of the thread pool used for blocking JDBC operations. |
+| `database.driver` | Optional. Default: `org.postgresql.Driver`. JDBC driver class used to connect to Postgres. |
 | `preTerminationPeriod` (since *0.8.0*) | Optional. Default: `1 second`. How long the server should pause after receiving a sigterm before starting the graceful shutdown. During this period the server continues to accept new connections and respond to requests. |
 | `preTerminationUnhealthy` (since *0.8.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the server can be configured to return 503s on the `/health` endpoint. Can be helpful for removing the server from a load balancer's targets. |
+
+The `database.pool.transactionPool` (Hikari) and `database.pool.threadPool` (`nopool`) options were removed in 0.15.0: blocking JDBC calls now run on the blocking pool of the runtime. Configurations that still set them keep loading, and the values are ignored.

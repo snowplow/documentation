@@ -100,27 +100,9 @@ psql -U postgres -c "CREATE DATABASE igludb"
   snowplow/iglu-server:${versions.igluServer} setup --config /iglu/config.hocon
 `}</CodeBlock>
 
-#### Upgrade to 0.15.0
+#### Upgrade
 
-The `iglu_schemas` and `iglu_drafts` tables have a primary key. Fresh installs create it with the tables. For databases created by an older version, Iglu Server adds the primary key on startup if it's missing.
-
-Since version 0.15.0, the primary key is mandatory: if Iglu Server can't add it, for example because the table contains duplicate rows, it fails to start instead of running without it. Version 0.14.2 tried to add the primary key too, but kept running if it failed, logging a `Could not add the primary key to table` error along with the duplicate rows.
-
-Before upgrading, check that your tables have no duplicate rows:
-
-```sql
-SELECT vendor, name, format, model, revision, addition, COUNT(*)
-FROM iglu_schemas
-GROUP BY vendor, name, format, model, revision, addition
-HAVING COUNT(*) > 1;
-
-SELECT vendor, name, format, version, COUNT(*)
-FROM iglu_drafts
-GROUP BY vendor, name, format, version
-HAVING COUNT(*) > 1;
-```
-
-If either query returns rows, remove the duplicates before starting version 0.15.0.
+Some versions need extra steps when upgrading, for example a database change. See the [upgrade guides](/docs/api-reference/iglu/iglu-repositories/iglu-server/upgrade-guides/index.md).
 
 ## Generate API keys
 

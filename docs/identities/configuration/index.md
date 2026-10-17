@@ -3,8 +3,8 @@ title: "Configure and manage Identities"
 sidebar_label: "Configuration"
 date: "2025-02-25"
 sidebar_position: 2
-description: "Configure identifiers, aliases, and event filters for Snowplow Identities identity resolution."
-keywords: ["identities", "identity resolution", "identifiers", "aliases", "event filters", "configuration"]
+description: "Configure identifiers, time to live, aliases, and event filters for Snowplow Identities identity resolution."
+keywords: ["identities", "identity resolution", "identifiers", "time to live", "TTL", "aliases", "event filters", "configuration"]
 ---
 
 Manage your Identities deployment and configure identifiers using [Snowplow Console](https://console.snowplowanalytics.com).
@@ -25,12 +25,13 @@ The fields you choose affect both resolution quality and the cost and latency of
 
 Each identifier type has:
 
-| Field    | Description                                                                              | Required? |
-| -------- | ---------------------------------------------------------------------------------------- | --------- |
-| Name     | A unique name for this identifier type, e.g. `acme_user_id`                              | Yes       |
-| Property | The event property to extract the identifier value from                                  | Yes       |
-| Unique   | Whether this identifier should prevent merges between Snowplow IDs with different values | No        |
-| Priority | The priority used when generating fallback IDs; higher is preferred                      | Yes       |
+| Field        | Description                                                                              | Required? |
+| ------------ | ---------------------------------------------------------------------------------------- | --------- |
+| Name         | A unique name for this identifier type, e.g. `acme_user_id`                              | Yes       |
+| Property     | The event property to extract the identifier value from                                  | Yes       |
+| Unique       | Whether this identifier should prevent merges between Snowplow IDs with different values | No        |
+| Priority     | The priority used when generating fallback IDs; higher is preferred                      | Yes       |
+| Time to live | How many days to keep a value after it was last seen in an event, or **Forever**         | Yes       |
 
 Only one identifier can be marked as unique.
 
@@ -42,6 +43,22 @@ Follow the steps in Console to create a new identifier.
 
 :::warning[Removing identifiers]
 Removing an identifier affects identity resolution for all future events. Snowplow IDs that would have been connected through this identifier will appear as separate Snowplow IDs going forward. Historical identities won't change. This can't be undone.
+:::
+
+### Set a time to live
+
+Set a [time to live](/docs/identities/concepts/time-to-live/index.md) (TTL) for each identifier type to remove values that haven't been seen in events for that many days. Enter a number of days between 7 and 36500, or choose **Forever** to keep values indefinitely.
+
+Every identifier defaults to 180 days, including the identifiers Console pre-populates when you first configure Identities and the ones it adds when you enable cross-domain tracking aliases. Identifiers deployed without a time to live show as **Forever**.
+
+Changing a TTL affects values already in the graph in three ways:
+
+* Shortening or lengthening an existing TTL applies to every value that already has a last-seen date
+* Adding a TTL to an identifier type that never had one removes existing values only after each has been seen again
+* Choosing **Forever** stops removal for that identifier type but keeps its last-seen dates, so re-adding a TTL later makes any value already outside the new window due for removal
+
+:::warning[Shortening a TTL]
+When you shorten a TTL, any value whose last-seen date is already outside the new window becomes due for removal as soon as the change is deployed. Check how long the user goes between events before lowering the value.
 :::
 
 ### Enable cross-domain tracking aliases

@@ -3,8 +3,8 @@ title: "Identities concepts"
 sidebar_label: "Concepts"
 date: "2025-02-25"
 sidebar_position: 1
-description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, and identity resolution."
-keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges"]
+description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, identity resolution, and time to live."
+keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges", "time to live", "TTL"]
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -15,6 +15,7 @@ Identities is based on several core concepts.
 * **[Merges](/docs/identities/concepts/merges/index.md)** occur when identifiers link two previously separate Snowplow IDs together
 * **[Unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)** prevent incorrect merges when users share devices
 * **[Cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md)** resolves identity across sites with different cookie domains
+* **[Time to live](/docs/identities/concepts/time-to-live/index.md)** removes identifier values that haven't been seen for a configured number of days
 
 ## Identifiers
 

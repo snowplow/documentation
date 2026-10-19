@@ -25,7 +25,7 @@ Enrich tracks the following metrics:
 
 The count metrics (`raw`, `good`, `good_bytes`, `bad`, `failed`, `dropped`, and `invalid_enriched`) refer to the count since the previous measurement. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
 
-The two latency metrics carry no unit in their name, because the unit depends on the protocol: StatsD carries milliseconds and Prometheus carries seconds, and each adds its own suffix. So `latency` is reported as `latency_millis` to StatsD and as `latency_seconds` to Prometheus.
+The latency metric names carry no unit, because each protocol adds its own suffix: StatsD reports milliseconds and Prometheus reports seconds. For example, StatsD reports `latency` as `latency_millis`, and Prometheus reports it as `latency_seconds`.
 
 In StatsD, the latency metrics refer to the maximum latency across all events since the previous measurement.
 
@@ -89,7 +89,7 @@ Prometheus is configured under `monitoring.metrics.prometheus` in your configura
 
 The `tags` map adds common labels to all metrics. Point your Prometheus scrape config at `http://<host>:<port>/metrics`, where `<port>` is the health probe port (default `8000`, configured via `monitoring.healthProbe.port`).
 
-Unlike StatsD, Prometheus metrics carry no name prefix, and each metric is exposed under the series that Prometheus naming conventions imply:
+Unlike StatsD, Prometheus metrics carry no name prefix. Enrich exposes each metric under the series name that Prometheus naming conventions imply:
 
 | Metric             | Prometheus series                                                                                                   |
 |--------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -100,16 +100,16 @@ Unlike StatsD, Prometheus metrics carry no name prefix, and each metric is expos
 | `bad`              | `bad_total`                                                                                                         |
 | `dropped`          | `dropped_total`                                                                                                     |
 | `invalid_enriched` | `invalid_enriched_total`                                                                                            |
-| `latency`          | `latency_seconds`, and a `latency_observations_total` counter of how often it has been recorded                     |
+| `latency`          | `latency_seconds`, and a `latency_observations_total` counter that counts how often Enrich records it               |
 | `e2e_latency`      | `e2e_latency_seconds_bucket`, `e2e_latency_seconds_count`, `e2e_latency_seconds_sum`, and `e2e_latency_seconds_max` |
 
 `latency` is a gauge, reporting how far behind the input stream Enrich is. It reads the highest latency seen over roughly the last three minutes, or the current latency if that is higher. With Kinesis and Pub/Sub, `latency_observations_total` stops increasing when Enrich stops receiving records from its source, so `rate(latency_observations_total[5m])` dropping to zero signals a stalled source. With Kafka and NSQ, the counter keeps increasing either way, so it does not detect a stalled source.
 
-`e2e_latency` publishes histogram buckets, so you can compute quantiles over it with `histogram_quantile`. The buckets range from 0.1 to 100 seconds. Anything slower falls into the `+Inf` bucket, where quantiles saturate and read back as a flat, plausible-looking value.
+`e2e_latency` publishes histogram buckets, so you can compute quantiles over it with `histogram_quantile`. The buckets range from 0.1 to 100 seconds. Latencies above 100 seconds fall into the `+Inf` bucket. Quantiles computed from that bucket report a capped value rather than the true latency.
 
 :::note[Prometheus series renamed in 6.14.0]
 
-Before version 6.14.0, the Prometheus latency series were named `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, although their values were in seconds, and the stream latency did not reach Prometheus. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
+Before version 6.14.0, Enrich exposed the Prometheus latency series as `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, even though the values were in seconds. Enrich also didn't send the stream latency to Prometheus. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
 
 :::
 

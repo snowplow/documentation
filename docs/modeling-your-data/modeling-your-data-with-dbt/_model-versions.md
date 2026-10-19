@@ -70,4 +70,13 @@ Postgres is technically supported in the models within the package, however one 
 Databricks requires a SQL warehouse or Runtime 12.2 LTS or later. See the [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) for source data requirements.
 
 </TabItem>
+<TabItem value="agent-analytics" label="Snowplow Agent Analytics">
+
+| snowplow-agent-analytics version | dbt versions | BigQuery | Databricks | Redshift | Snowflake | Postgres | Spark |
+| ------------------------------- | ------------ | :------: | :--------: | :------: | :-------: | :------: | :---: |
+| Git `main` (no tagged release yet) | >=1.10.6 to \<2.0.0 | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+
+See the [Agent Analytics quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md) for installation and source data requirements.
+
+</TabItem>
 </Tabs>

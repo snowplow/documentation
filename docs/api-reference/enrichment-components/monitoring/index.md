@@ -103,12 +103,6 @@ The `tags` map is the only Prometheus setting, and it adds common labels to ever
 
 `e2e_latency` therefore publishes histogram buckets, so you can compute quantiles over it with `histogram_quantile`. The bucket range runs from 0.1 seconds up to 100 seconds. Anything above the top of that range falls into the `+Inf` bucket, where quantiles saturate and read back as a flat, plausible-looking value.
 
-:::note[Prometheus series renamed in 6.14.0]
-
-Before version 6.14.0, Enrich exposed the Prometheus latency series as `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, even though the values were in seconds. The Prometheus latency also didn't include the lag of a batch Enrich was still processing, so it stayed flat while Enrich was stuck. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
-
-:::
-
 ## Sentry
 
 [Sentry](https://docs.sentry.io/) is a popular error monitoring service, which helps developers diagnose and fix problems in an application. Enrich can send an error report to Sentry whenever something unexpected happens when trying to enrich an event. The reasons for the error can then be explored in the Sentry server's UI.

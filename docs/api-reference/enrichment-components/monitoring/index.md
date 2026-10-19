@@ -21,7 +21,7 @@ Enrich tracks the following metrics:
 - `dropped`: a count of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events)
 - `invalid_enriched`: a count of enriched events that were not valid against the [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema
 - `latency` (since version 6.0.0): the delay between input records being written to the source stream and Enrich starting to process them
-- `e2e_latency` (`latency` before version 6.0.0): the end-to-end latency of the Snowplow pipeline up to Enrich. For each event, the time from the event being received by the Collector until Enrich emits it to the output stream.
+- `e2e_latency` (`latency` before version 6.0.0): the end-to-end latency of the Snowplow pipeline up to Enrich. For each batch of events, the time from the first event being received by the Collector until the batch is written to the output stream.
 
 The two duration metrics carry no unit in their name, because the unit depends on the protocol: StatsD carries milliseconds and Prometheus carries seconds, and each adds its own suffix. So `latency` is reported as `latency_millis` to StatsD and as `latency_seconds` to Prometheus.
 
@@ -99,13 +99,13 @@ The `tags` map is the only Prometheus setting, and it adds common labels to ever
 | `latency`          | `latency_seconds`, and a `latency_observations_total` counter of how often it has been recorded                     |
 | `e2e_latency`      | `e2e_latency_seconds_bucket`, `e2e_latency_seconds_count`, `e2e_latency_seconds_sum`, and `e2e_latency_seconds_max` |
 
-`latency` is a gauge rather than a histogram, because it describes how far behind the stream Enrich is, which is a property of the application as a whole. `e2e_latency` is recorded once per event, so it has a distribution worth summarizing and is published as a histogram instead.
+`latency` is a gauge rather than a histogram, because it describes how far behind the stream Enrich is, which is a property of the application as a whole. `e2e_latency` is recorded once per batch, when the batch is written, so it has a distribution worth summarizing and is published as a histogram instead.
 
 `e2e_latency` therefore publishes histogram buckets, so you can compute quantiles over it with `histogram_quantile`. The bucket range runs from 0.1 seconds up to 100 seconds. Anything above the top of that range falls into the `+Inf` bucket, where quantiles saturate and read back as a flat, plausible-looking value.
 
 :::note[Prometheus series renamed in 6.14.0]
 
-Before version 6.14.0, Enrich exposed the Prometheus latency series as `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, even though the values were in seconds. Enrich also didn't send the stream latency to Prometheus. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
+Before version 6.14.0, Enrich exposed the Prometheus latency series as `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, even though the values were in seconds. The Prometheus latency also didn't include the lag of a batch Enrich was still processing, so it stayed flat while Enrich was stuck. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
 
 :::
 

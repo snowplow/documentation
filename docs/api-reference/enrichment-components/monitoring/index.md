@@ -19,13 +19,15 @@ Enrich tracks the following metrics:
 - `failed` (`incomplete` before version 6.0.0): the number of failed events produced due to [common failures](/docs/fundamentals/failed-events/index.md#common-failures), e.g. schema violations or enrichment failures.
 - `bad`: total number of all types of failed events, e.g. due to schema violations, invalid collector payloads, or enrichment failures.
 - `dropped`: total number of events explicitly dropped by calling `event.drop()` in a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md#discard-events).
-- `e2e_latency_millis` (`latency` before version 6.0.0): time difference between the collector timestamp and when the event is emitted to the output stream.
-- `latency_millis` (since version 6.0.0): delay between an input record being written to the stream and Enrich starting to process it.
+- `e2e_latency` (`latency` before version 6.0.0): time difference between the collector timestamp and when the event is emitted to the output stream.
+- `latency` (since version 6.0.0): delay between an input record being written to the stream and Enrich starting to process it.
 - `invalid_enriched`: number of enriched events that were not valid against the [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.
 
 The count metrics (`raw`, `good`, `good_bytes`, `bad`, `failed`, `dropped`, and `invalid_enriched`) refer to the count since the previous measurement. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
 
-The latency metrics (`e2e_latency_millis` and `latency_millis`) refer to the maximum latency across all events since the previous measurement.
+The two latency metrics carry no unit in their name, because the unit depends on the protocol: StatsD carries milliseconds and Prometheus carries seconds, and each adds its own suffix. So `latency` is reported as `latency_millis` to StatsD and as `latency_seconds` to Prometheus.
+
+In StatsD, the latency metrics refer to the maximum latency across all events since the previous measurement.
 
 You can report these metrics using StatsD or Prometheus (or both).
 
@@ -86,6 +88,30 @@ Prometheus is configured under `monitoring.metrics.prometheus` in your configura
 ```
 
 The `tags` map adds common labels to all metrics. Point your Prometheus scrape config at `http://<host>:<port>/metrics`, where `<port>` is the health probe port (default `8000`, configured via `monitoring.healthProbe.port`).
+
+Unlike StatsD, Prometheus metrics carry no name prefix, and each metric is exposed under the series that Prometheus naming conventions imply:
+
+| Metric             | Prometheus series                                                                                                   |
+|--------------------|---------------------------------------------------------------------------------------------------------------------|
+| `raw`              | `raw_total`                                                                                                         |
+| `good`             | `good_total`                                                                                                        |
+| `good_bytes`       | `good_bytes_total`                                                                                                  |
+| `failed`           | `failed_total`                                                                                                      |
+| `bad`              | `bad_total`                                                                                                         |
+| `dropped`          | `dropped_total`                                                                                                     |
+| `invalid_enriched` | `invalid_enriched_total`                                                                                            |
+| `latency`          | `latency_seconds`, and a `latency_observations_total` counter of how often it has been recorded                     |
+| `e2e_latency`      | `e2e_latency_seconds_bucket`, `e2e_latency_seconds_count`, `e2e_latency_seconds_sum`, and `e2e_latency_seconds_max` |
+
+`latency` is a gauge, reporting how far behind the input stream Enrich is. It reads the highest latency seen over roughly the last three minutes, or the current latency if that is higher. With Kinesis and Pub/Sub, `latency_observations_total` stops increasing when Enrich stops receiving records from its source, so `rate(latency_observations_total[5m])` dropping to zero signals a stalled source. With Kafka and NSQ, the counter keeps increasing either way, so it does not detect a stalled source.
+
+`e2e_latency` publishes histogram buckets, so you can compute quantiles over it with `histogram_quantile`. The buckets range from 0.1 to 100 seconds. Anything slower falls into the `+Inf` bucket, where quantiles saturate and read back as a flat, plausible-looking value.
+
+:::note[Prometheus series renamed in 6.14.0]
+
+Before version 6.14.0, the Prometheus latency series were named `latency_millis_seconds_*` and `e2e_latency_millis_seconds_*`, although their values were in seconds, and the stream latency did not reach Prometheus. If a query or alert uses the old names, rewrite it with the series above. StatsD names are unchanged.
+
+:::
 
 ## Sentry
 

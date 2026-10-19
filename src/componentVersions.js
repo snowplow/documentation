@@ -22,7 +22,7 @@ export const versions = {
 
   // Core pipeline
   collector: '3.8.0',
-  enrich: '6.13.1',
+  enrich: '6.14.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.10',
   snowbridge: '6.1.0',

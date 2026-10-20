@@ -12,7 +12,7 @@ This guide walks you through setting up the [Snowplow Agent Analytics dbt packag
 ## Requirements
 
 - dbt 1.10.6 or later, below 2.0.0
-- Snowflake warehouse. Other warehouses are not currently supported.
+- Snowflake warehouse (other warehouses aren't supported)
 - Events from a [CDN tracker](/docs/sources/cdn-trackers/index.md) loaded into your atomic events table, with a dedicated `app_id`
 - Client-side page view events from the [JavaScript tracker](/docs/sources/web-trackers/index.md)
 - These enrichments enabled on your pipeline:
@@ -114,7 +114,7 @@ seeds:
 
 ### 7. Run the package
 
-Load the seeds, then run the package:
+Load the seeds with `--full-refresh` to recreate their tables with any updated column types, then run the package:
 
 ```bash
 dbt seed --select snowplow_agent_analytics --full-refresh

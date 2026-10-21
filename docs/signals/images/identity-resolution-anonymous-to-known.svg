@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" width="1000" height="330">
+<defs>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#a98af0"/>
+ </marker>
+ <g id="incognito">
+  <path d="M-9,-5 L-6,-13 Q0,-15 6,-13 L9,-5 Z" fill="currentColor"/>
+  <rect x="-13" y="-6" width="26" height="3" rx="1.5" fill="currentColor"/>
+  <g fill="none" stroke="currentColor" stroke-width="2"><circle cx="-5.5" cy="4" r="4"/><circle cx="5.5" cy="4" r="4"/><path d="M-1.5,3 h3"/></g>
+ </g>
+</defs>
+<rect width="1000" height="330" fill="#ffffff"/>
+<g font-family="'Source Sans 3', Helvetica, Arial, sans-serif" text-anchor="middle">
+
+ <!-- three events on one device -->
+ <g fill="#ffffff" stroke="#d9cdf3" stroke-width="2">
+  <rect x="40" y="30" width="280" height="160" rx="12"/>
+  <rect x="360" y="30" width="280" height="160" rx="12"/>
+  <rect x="680" y="30" width="280" height="160" rx="12"/>
+ </g>
+ <g font-size="16" font-weight="700" fill="#2b1a4f">
+  <text x="180" y="60">1. Browse a product page</text>
+  <text x="500" y="60">2. Sign up and log in</text>
+  <text x="820" y="60">3. Subscribe to the newsletter</text>
+ </g>
+
+ <!-- identifier pills: the new identifier on each event is highlighted -->
+ <g stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="60" y="76" width="240" height="28" rx="14" fill="#6638b8" stroke="#6638b8"/>
+  <rect x="380" y="76" width="240" height="28" rx="14" fill="#f1ebfb"/>
+  <rect x="380" y="112" width="240" height="28" rx="14" fill="#6638b8" stroke="#6638b8"/>
+  <rect x="700" y="76" width="240" height="28" rx="14" fill="#f1ebfb"/>
+  <rect x="700" y="112" width="240" height="28" rx="14" fill="#f1ebfb"/>
+  <rect x="700" y="148" width="240" height="28" rx="14" fill="#6638b8" stroke="#6638b8"/>
+ </g>
+ <g font-family="ui-monospace, Menlo, monospace" font-size="13">
+  <text x="180" y="95" fill="#ffffff">domain_userid: d123</text>
+  <text x="500" y="95" fill="#2b1a4f">domain_userid: d123</text>
+  <text x="500" y="131" fill="#ffffff">user_id: u001</text>
+  <text x="820" y="95" fill="#2b1a4f">domain_userid: d123</text>
+  <text x="820" y="131" fill="#2b1a4f">user_id: u001</text>
+  <text x="820" y="167" fill="#ffffff">hashed_email: 3f9a…c21e</text>
+ </g>
+
+ <use href="#incognito" color="#ffffff" transform="translate(80,91)"/>
+
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M322,110 H356"/>
+  <path d="M642,110 H676"/>
+  <path d="M180,192 V224"/>
+  <path d="M500,192 V224"/>
+  <path d="M820,192 V224"/>
+ </g>
+
+ <!-- one Snowplow ID -->
+ <rect x="40" y="228" width="920" height="54" rx="10" fill="#6638b8"/>
+ <text x="500" y="252" font-size="17" font-weight="700" fill="#ffffff">sp_001</text>
+ <text x="500" y="272" font-size="14" fill="#e4d8fa">all three events count towards one Snowplow ID, including the browsing from before the login</text>
+
+ <text x="500" y="314" font-size="16" fill="#2b1a4f">Each identifier reads sp_001 from the first event it appears on.</text>
+</g>
+</svg>

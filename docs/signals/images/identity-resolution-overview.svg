@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300">
+<defs>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#a98af0"/>
+ </marker>
+ <g id="mini">
+  <rect x="-11" y="2" width="22" height="22" rx="7" fill="currentColor"/>
+  <circle cx="0" cy="-12" r="13" fill="#f2d3c0"/>
+  <path d="M-13,-14 Q-14,-28 -2,-27 Q2,-33 9,-29 Q15,-26 13,-14 Q8,-21 0,-20 Q-8,-21 -13,-14 Z" fill="#2b1a4f"/>
+  <g stroke="#2b1a4f" stroke-width="1.6"><circle cx="-5" cy="-11" r="4" fill="#fff"/><circle cx="5" cy="-11" r="4" fill="#fff"/></g>
+ </g>
+</defs>
+<rect width="1000" height="300" fill="#ffffff"/>
+<g font-family="'Source Sans 3', Helvetica, Arial, sans-serif" text-anchor="middle">
+
+ <!-- one person, several identifiers -->
+ <use href="#mini" color="#6638b8" transform="translate(58,145) scale(1.5)"/>
+ <text x="58" y="210" font-size="14" fill="#2b1a4f">one person</text>
+ <text x="210" y="64" font-size="14" font-weight="700" fill="#6638b8">Identifiers on your events</text>
+ <g fill="#f1ebfb" stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="110" y="82" width="200" height="36" rx="18"/>
+  <rect x="110" y="132" width="200" height="36" rx="18"/>
+  <rect x="110" y="182" width="200" height="36" rx="18"/>
+ </g>
+ <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#2b1a4f">
+  <text x="210" y="105">domain_userid: d123</text>
+  <text x="210" y="155">user_id: u001</text>
+  <text x="210" y="205">hashed_email: 3f9a…c21e</text>
+ </g>
+
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M310,100 C334,100 334,146 352,148"/>
+  <path d="M310,150 H352"/>
+  <path d="M310,200 C334,200 334,154 352,152"/>
+  <path d="M516,150 H562"/>
+ </g>
+
+ <!-- Identities -->
+ <rect x="356" y="112" width="160" height="76" rx="10" fill="#6638b8"/>
+ <text x="436" y="142" font-size="17" font-weight="700" fill="#fff">Identities</text>
+ <text x="436" y="162" font-size="13" fill="#e4d8fa">stamps a Snowplow ID</text>
+ <text x="436" y="178" font-size="13" fill="#e4d8fa">on each event</text>
+
+ <!-- Signals -->
+ <rect x="566" y="96" width="200" height="108" rx="10" fill="#6638b8"/>
+ <text x="666" y="124" font-size="17" font-weight="700" fill="#fff">Signals</text>
+ <text x="666" y="144" font-size="13" fill="#e4d8fa">calculates attributes</text>
+ <text x="666" y="160" font-size="13" fill="#e4d8fa">per Snowplow ID</text>
+ <rect x="616" y="170" width="100" height="24" rx="12" fill="#f1ebfb"/>
+ <text x="666" y="187" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#6638b8">sp_001</text>
+
+ <!-- your application -->
+ <rect x="842" y="96" width="138" height="108" rx="10" fill="#f1ebfb" stroke="#d9cdf3" stroke-width="2"/>
+ <text x="911" y="126" font-size="17" font-weight="700" fill="#2b1a4f">Your app</text>
+ <text x="911" y="158" font-size="13" fill="#6638b8">reads by any</text>
+ <text x="911" y="174" font-size="13" fill="#6638b8">lookup identifier</text>
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M838,128 H772"/>
+  <path d="M770,176 H836"/>
+ </g>
+ <text x="804" y="120" font-size="12" fill="#2b1a4f">read</text>
+ <text x="804" y="196" font-size="12" fill="#2b1a4f">attributes</text>
+
+ <text x="500" y="268" font-size="18" fill="#2b1a4f">Each lookup identifier reads the person it was most recently seen with.</text>
+</g>
+</svg>

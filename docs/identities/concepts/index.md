@@ -104,9 +104,9 @@ In normal operation, priority doesn't affect how Snowplow IDs are linked. All id
 
 ## Identities and Signals
 
-Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). Signals can calculate attributes per Snowplow ID, using its built-in `snowplow_id` attribute key, and your application can read them by any of a person's identifiers, such as a `domain_userid` or a `user_id`.
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). Signals can calculate attributes per Snowplow ID, using its built-in `snowplow_id` attribute key, and your application can read them by up to three lookup identifiers you choose, such as a `domain_userid` or a `user_id`.
 
-Identity resolution in Signals is being released in stages, and some use cases are only partly supported so far. To set it up, and to see which use cases are supported, read [Read attributes by any linked identifier](/docs/signals/attributes/identity-resolution/index.md).
+To set it up, and to see the use cases it supports, such as anonymous to known and shared devices, read [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
 
 ## Data types
 

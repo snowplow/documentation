@@ -29,7 +29,7 @@ Every application that reads from your enriched stream must support compressed r
 * [Snowflake Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (since 0.6.0)
 * [Snowbridge](/docs/api-reference/snowbridge/index.md) (since 5.2.0)
 
-If you run your own consumer of the enriched stream, [update it to read compressed records](/docs/pipeline/enriched-stream-compression/index.md) first.
+If you run your own consumer of the enriched stream, [update it to read compressed records](/docs/destinations/custom-streaming/enriched-stream-compression/index.md) first.
 
 :::
 

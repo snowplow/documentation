@@ -12,4 +12,6 @@ Read more about Snowplow data destinations [here](/docs/fundamentals/destination
 
 Snowplow also supports many ways to [forward events](/docs/destinations/forwarding-events/index.md) to a variety of platforms. Snowplow has native integrations as well as supporting Snowplow, vendor and community authored destinations via Google Tag Manager Server Side.
 
+If you run a Private Managed Cloud or Self-Hosted pipeline, you can also build your own [custom streaming](/docs/destinations/custom-streaming/index.md) applications that consume events directly from the enriched stream.
+
 Finally, [reverse ETL](/docs/destinations/reverse-etl/index.md) enables you to publish data from your warehouse directly to marketing platforms, where it can be activated.

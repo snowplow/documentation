@@ -1,7 +1,7 @@
 ---
 title: "Read compressed records from the enriched stream"
 sidebar_label: "Enriched stream compression"
-sidebar_position: 1001
+sidebar_position: 2
 description: "Specification of the compressed record format in the Snowplow enriched stream, with example parsers in Python, Go, Java, and Scala, and example records for testing a custom consumer."
 keywords: ["enriched stream compression", "zstd", "custom consumer", "enriched stream format", "decompress enriched events"]
 date: "2026-10-22"
@@ -16,7 +16,7 @@ Enrich can compress the enriched stream. When compression is enabled, Enrich bat
 
 The Snowplow loaders, Snowbridge (Event Forwarding) and Signals read compressed records. If you run your own application that consumes directly from the enriched stream, you need to update it to decompress the records before you enable compression. This page describes the record format so that you can write that code, in any language, with or without help from an AI coding agent.
 
-Each enriched event inside a compressed record uses the same [enriched TSV format](/docs/pipeline/enriched-tsv-format/index.md) as an uncompressed record. Once your consumer has split a compressed record into individual events, you can process those events exactly as before, including with the [Analytics SDKs](/docs/api-reference/analytics-sdk/index.md).
+Each enriched event inside a compressed record uses the same [enriched TSV format](/docs/destinations/custom-streaming/enriched-tsv-format/index.md) as an uncompressed record. Once your consumer has split a compressed record into individual events, you can process those events exactly as before, including with the [Analytics SDKs](/docs/api-reference/analytics-sdk/index.md).
 
 ## Prepare your consumer before enabling compression
 
@@ -207,7 +207,7 @@ func ParseRecordToEvents(record []byte) ([]analytics.ParsedEvent, error) {
   </TabItem>
   <TabItem value="java" label="Java">
 
-This example requires Java 9 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library. Snowplow doesn't provide an Analytics SDK for Java, so this example has no conversion function. The [enriched TSV format](/docs/pipeline/enriched-tsv-format/index.md) page lists the fields in each event.
+This example requires Java 9 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library. Snowplow doesn't provide an Analytics SDK for Java, so this example has no conversion function. The [enriched TSV format](/docs/destinations/custom-streaming/enriched-tsv-format/index.md) page lists the fields in each event.
 
 ```java
 import com.github.luben.zstd.ZstdInputStream;

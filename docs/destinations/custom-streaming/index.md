@@ -1,12 +1,23 @@
 ---
-title: "Build custom integrations for event streams"
-sidebar_label: "Custom integrations"
-sidebar_position: 60
+title: "Custom streaming"
+sidebar_label: "Custom streaming"
+sidebar_position: 4
 description: "Build custom consumers for Snowplow event streams using AWS Lambda, GCP Cloud Functions, KCL applications, or Pub/Sub client libraries to integrate with any third-party platform."
-keywords: ["custom integrations", "AWS Lambda", "Cloud Functions", "stream consumers", "event processing"]
+keywords: ["custom streaming", "custom integrations", "AWS Lambda", "Cloud Functions", "stream consumers", "event processing"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['pmc', 'selfHosted']}
+  helpContent="Custom streaming requires direct access to the enriched stream, which is available for Private Managed Cloud and Self-Hosted pipelines."
+/>
+```
+
 Snowplow is underpinned by event streams: AWS Kinesis, GCP PubSub, or Apache Kafka. Before a Snowplow pipeline loads the events to a data warehouse, the enriched events are available on a stream. You can build a custom consumer to consume these events. Below we describe some high level concepts which can be used to consume the enriched event streams.
+
+Custom streaming is available for Private Managed Cloud and Self-Hosted pipelines, where you have direct access to the enriched stream. The [enriched TSV format](/docs/destinations/custom-streaming/enriched-tsv-format/index.md) describes each event in the stream, and [Read compressed records from the enriched stream](/docs/destinations/custom-streaming/enriched-stream-compression/index.md) describes the record format when compression is enabled.
 
 ## Transforming the Enriched Stream to JSON
 

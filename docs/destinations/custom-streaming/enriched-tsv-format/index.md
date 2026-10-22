@@ -1,7 +1,7 @@
 ---
 title: "Enriched stream TSV file format"
 sidebar_label: "Stream file format"
-sidebar_position: 1000
+sidebar_position: 1
 description: "Understand the Tab Separated Values format of enriched Snowplow data streams with field definitions and analytics SDK references."
 keywords: ["enriched TSV format", "Snowplow data format", "analytics SDK"]
 ---
@@ -24,7 +24,7 @@ For explanations of what each field represents, please see the [Canonical Event 
 
 :::note[Compressed enriched streams]
 
-If compression is enabled for the enriched stream, each stream record contains a compressed batch of TSV events instead of a single event. See [Read compressed records from the enriched stream](/docs/pipeline/enriched-stream-compression/index.md) for the record format.
+If compression is enabled for the enriched stream, each stream record contains a compressed batch of TSV events instead of a single event. See [Read compressed records from the enriched stream](/docs/destinations/custom-streaming/enriched-stream-compression/index.md) for the record format.
 
 :::
 

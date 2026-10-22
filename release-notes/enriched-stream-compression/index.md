@@ -34,7 +34,7 @@ Enriched stream compression is an _opt-in_ feature.
 
 :::warning
 
-Compression changes the data format in the enriched stream. If you have custom apps consuming from the enriched stream, [update them to read compressed records](/docs/pipeline/enriched-stream-compression/) before you enable compression.
+Compression changes the data format in the enriched stream. If you have custom apps consuming from the enriched stream, [update them to read compressed records](/docs/destinations/custom-streaming/enriched-stream-compression/) before you enable compression.
 
 :::
 

@@ -3,7 +3,7 @@ title: "CDN trackers"
 sidebar_position: 136
 sidebar_label: "CDN trackers"
 description: "Track page views at the CDN level to capture visits from bots, AI agents, and other clients that don't run JavaScript."
-keywords: ["cdn tracking", "cloudflare worker", "cloudfront access logs", "server-side tracking", "agent tracking"]
+keywords: ["cdn tracking", "cloudflare worker", "cloudfront access logs", "fastly log streaming", "server-side tracking", "agent tracking"]
 date: "2026-04-27"
 ---
 
@@ -31,3 +31,4 @@ For example, for single-page applications (SPAs), client-side tracking will corr
 
 * [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md) — track requests using a Cloudflare Worker that sends page view events to Snowplow
 * [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md) — forward CloudFront standard access logs to Snowplow via Amazon Data Firehose
+* [Fastly](/docs/sources/cdn-trackers/fastly/index.md) — stream Fastly request logs to Snowplow via an HTTPS logging endpoint

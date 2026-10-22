@@ -77,18 +77,19 @@ Snowplow writes each zstd frame in streaming mode, so the frame header doesn't d
 
 :::
 
-The following examples implement this algorithm. Each one takes the bytes of a single stream record and returns the enriched events as a list of TSV strings.
+The following examples implement this algorithm. Each one takes the bytes of a single stream record and returns the enriched events as a list of TSV strings. Where Snowplow provides an [Analytics SDK](/docs/api-reference/analytics-sdk/index.md) for the language, the example also includes an optional second function. It takes the same bytes, calls the first function, and returns the events parsed by the SDK. You only need it if you use the SDK.
 
 <Tabs groupId="language" queryString>
   <TabItem value="python" label="Python" default>
 
-This example requires Python 3.9 or later and uses the [`zstandard`](https://pypi.org/project/zstandard/) package.
+This example requires Python 3.9 or later and uses the [`zstandard`](https://pypi.org/project/zstandard/) package. The optional `parse_record_to_events` function uses the [Python Analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-python/index.md).
 
 ```python
 import io
 import struct
 
 import zstandard  # pip install zstandard
+from snowplow_analytics_sdk.event_transformer import transform  # Optional: pip install snowplow_analytics_sdk
 
 ZSTD_MAGIC = b"\x28\xb5\x2f\xfd"
 
@@ -120,12 +121,17 @@ def parse_record(record: bytes) -> list[str]:
         events.append(data[pos : pos + size].decode("utf-8"))
         pos += size
     return events
+
+
+def parse_record_to_events(record: bytes) -> list[dict]:
+    """Optional: returns the enriched events in a stream record, parsed by the Python Analytics SDK."""
+    return [transform(event) for event in parse_record(record)]
 ```
 
   </TabItem>
   <TabItem value="go" label="Go">
 
-This example uses the [`github.com/klauspost/compress/zstd`](https://pkg.go.dev/github.com/klauspost/compress/zstd) package.
+This example uses the [`github.com/klauspost/compress/zstd`](https://pkg.go.dev/github.com/klauspost/compress/zstd) package. The optional `ParseRecordToEvents` function uses the [Go Analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md).
 
 ```go
 package main
@@ -137,6 +143,7 @@ import (
 	"io"
 
 	"github.com/klauspost/compress/zstd"
+	"github.com/snowplow/snowplow-golang-analytics-sdk/analytics" // Optional
 )
 
 var zstdMagic = []byte{0x28, 0xb5, 0x2f, 0xfd}
@@ -178,12 +185,29 @@ func ParseRecord(record []byte) ([]string, error) {
 	}
 	return events, nil
 }
+
+// ParseRecordToEvents is optional: it returns the enriched events in a stream record, parsed by the Go Analytics SDK.
+func ParseRecordToEvents(record []byte) ([]analytics.ParsedEvent, error) {
+	events, err := ParseRecord(record)
+	if err != nil {
+		return nil, err
+	}
+	parsed := make([]analytics.ParsedEvent, 0, len(events))
+	for _, event := range events {
+		p, err := analytics.ParseEvent(event)
+		if err != nil {
+			return nil, err
+		}
+		parsed = append(parsed, p)
+	}
+	return parsed, nil
+}
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-This example requires Java 9 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library.
+This example requires Java 9 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library. Snowplow doesn't provide an Analytics SDK for Java, so this example has no conversion function. The [enriched TSV format](/docs/pipeline/enriched-tsv-format/index.md) page lists the fields in each event.
 
 ```java
 import com.github.luben.zstd.ZstdInputStream;
@@ -243,10 +267,12 @@ public class SnowplowRecordParser {
   </TabItem>
   <TabItem value="scala" label="Scala">
 
-This example requires Scala 2.13 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library.
+This example requires Scala 2.13 or later and uses the [`zstd-jni`](https://github.com/luben/zstd-jni) library. The optional `parseRecordToEvents` function uses the [Scala Analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-scala/index.md).
 
 ```scala
+import cats.implicits._
 import com.github.luben.zstd.ZstdInputStream
+import com.snowplowanalytics.snowplow.analytics.scalasdk.{Event, ParsingError} // Optional
 
 import java.io.ByteArrayInputStream
 import java.nio.ByteBuffer
@@ -283,6 +309,10 @@ object SnowplowRecordParser {
         }
         .toList
     }
+
+  /** Optional: returns the enriched events in a stream record, parsed by the Scala Analytics SDK. */
+  def parseRecordToEvents(record: Array[Byte]): Either[ParsingError, List[Event]] =
+    parseRecord(record).traverse(Event.parse(_).toEither)
 }
 ```
 

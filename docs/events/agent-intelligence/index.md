@@ -32,7 +32,7 @@ The Agent Intelligence package consists of three components. Each one covers a d
 
 [CDN trackers](/docs/sources/cdn-trackers/index.md) track requests at the CDN level, so they capture every request to your site, including requests from agents that don't run JavaScript. Snowplow processes each request as a page view [event](/docs/fundamentals/events/index.md).
 
-Snowplow supports [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md) and [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md).
+Snowplow supports [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), and [Fastly](/docs/sources/cdn-trackers/fastly/index.md).
 
 ### Agent classification enrichment
 
@@ -77,6 +77,6 @@ The dbt package then counts agent requests per page, deduplicating agents that a
 To start measuring agent traffic:
 
 1. Request the Agent Intelligence package [in Console](https://console.snowplowanalytics.com/all-products)
-2. Deploy a CDN tracker for [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md) or [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md)
+2. Deploy a CDN tracker for [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), or [Fastly](/docs/sources/cdn-trackers/fastly/index.md)
 3. Enable the enrichments listed in the Agent Analytics [requirements](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md#requirements), including the agent classification enrichment
 4. Follow the Agent Analytics [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md) to install and run the dbt package

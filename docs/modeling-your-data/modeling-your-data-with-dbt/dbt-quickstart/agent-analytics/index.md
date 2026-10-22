@@ -76,7 +76,7 @@ vars:
 
 ### 4. Identify your event sources
 
-Set `cdn_app_ids` to the `app_id` values of your [CDN tracker](/docs/sources/cdn-trackers/index.md) events. For [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), use `cloudfront`. For [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), use the same `appId` you set in the Worker script.
+Set `cdn_app_ids` to the `app_id` values of your [CDN tracker](/docs/sources/cdn-trackers/index.md) events. For [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), use `cloudfront`. For [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), use the same `appId` you set in the Worker script. For [Fastly](/docs/sources/cdn-trackers/fastly/index.md), use the `aid` value from the log format.
 
 If your pipeline also receives client-side events from other properties that you don't want to analyze, set `client_app_ids` to the `app_id` values of your website. By default, the package includes client-side page views from every `app_id`.
 

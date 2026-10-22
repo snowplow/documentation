@@ -34,7 +34,7 @@ Before Fastly sends any logs, it verifies that you control the endpoint by sendi
 
 Logging happens after Fastly serves the response, so it doesn't add latency for the client.
 
-## Set up
+## Configure the HTTPS logging endpoint
 
 You need a Fastly service for your website, permission to edit its configuration, and your Snowplow Collector domain.
 
@@ -69,7 +69,7 @@ Expand **Advanced options** and set the following:
 | Select a log line format | Blank (default) |
 | Compression | None |
 
-The `sp-anonymous` header prevents the Collector from recording the user or agent IP address. We recommend anonymous tracking for two reasons:
+The `sp-anonymous` header prevents the Collector from recording the user or agent IP address. Snowplow recommends anonymous tracking for two reasons:
 
 * There is no mechanism for the user to opt out, since the IP address is collected upon the very first visit.
 * With a focus on bot and agent traffic, the IP address is not very relevant.
@@ -134,8 +134,8 @@ Each log entry produces a page view event with the following fields (as well as 
 |-------|-------|-------------|
 | `event` | `page_view` | Event type |
 | `platform` | `srv` | Server-side, to distinguish from browser events |
-| `app_id` | your app id | Application identifier, so you can filter these events in your data |
+| `app_id` | Your app ID | Application identifier, so you can filter these events in your data |
 | `v_tracker` | `fastly-1.0.0` | Tracker version |
-| `useragent` | from the original request | The visitor's `User-Agent` header |
-| `page_url` | from the original request | The URL of the requested page |
-| `dvce_created_tstamp` | from `time.start.msec` | The time Fastly started processing the request |
+| `useragent` | From the original request | The visitor's `User-Agent` header |
+| `page_url` | From the original request | The URL of the requested page |
+| `dvce_created_tstamp` | From `time.start.msec` | The time Fastly started processing the request |

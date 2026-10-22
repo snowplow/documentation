@@ -25,6 +25,8 @@ Some good use cases for the SDKs include:
 3. Performing analytics-on-write in AWS Lambda as part of our Kinesis real-time pipeline
 4. Within Snowplow pipeline components to process event data
 
+The Analytics SDKs parse one enriched event at a time. If you read from an enriched stream with compression enabled, each stream record contains many events. [Decompress the record and split it into events](/docs/pipeline/enriched-stream-compression/index.md) before passing each event to the SDK.
+
 ## Snowplow Analytics SDKs
 
 - [Scala Analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-scala/index.md) - lets you work with Snowplow enriched events in your Scala event processing, data modeling and machine-learning jobs. You can use this SDK with Apache Spark, AWS Lambda, GCP Cloud Functions, Apache Flink and other Scala-compatible data processing frameworks.

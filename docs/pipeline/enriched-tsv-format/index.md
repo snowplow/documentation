@@ -22,6 +22,12 @@ Additionally, Snowplow has a number of Analytics SDKs available which help parse
 
 For explanations of what each field represents, please see the [Canonical Event Model](/docs/fundamentals/canonical-event/index.md).
 
+:::note[Compressed enriched streams]
+
+If compression is enabled for the enriched stream, each stream record contains a compressed batch of TSV events instead of a single event. See [Read compressed records from the enriched stream](/docs/pipeline/enriched-stream-compression/index.md) for the record format.
+
+:::
+
 ## TSV header
 
 Copy this if you need a header to work with the Snowplow TSV files.

@@ -12,7 +12,8 @@ This guide walks you through setting up the [Snowplow Agent Analytics dbt packag
 ## Requirements
 
 - dbt 1.10.6 or later, below 2.0.0
-- Snowflake warehouse (other warehouses aren't supported)
+- Snowflake, BigQuery, Databricks, or Redshift
+- For Databricks, `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later
 - Events from a [CDN tracker](/docs/sources/cdn-trackers/index.md) loaded into your atomic events table, with a dedicated `app_id`
 - Client-side page view events from the [JavaScript tracker](/docs/sources/web-trackers/index.md)
 - These enrichments enabled on your pipeline:
@@ -84,6 +85,10 @@ vars:
     snowplow__database: database_with_snowplow_events
 ```
 
+The events table must include `load_tstamp`. Use the native entity format produced by your Snowplow loader: Snowflake VARIANT arrays, BigQuery repeated records, or Databricks typed arrays of structs.
+
+For Redshift, the package also reads the YAUAA, bot detection, agent classification, and UTM referrer entity tables from the same database and schema. It joins them to events on both `root_id` and `root_tstamp`. If you use different table names, set the [Redshift entity table variables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md#warehouse-and-source-data).
+
 ### 5. Identify your event sources
 
 Set `cdn_app_ids` to the `app_id` values of your [CDN tracker](/docs/sources/cdn-trackers/index.md) events. For [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), use `cloudfront`. For [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), use the same `appId` you set in the Worker script.
@@ -128,6 +133,8 @@ dbt test --select snowplow_agent_analytics
 ```
 
 ## Enable the semantic view *(optional)*
+
+The semantic view is available on Snowflake. On other warehouses, `enable_semantic_views: true` builds only the conformed dimension tables and does not require the Snowflake materialization package.
 
 To build the [Snowflake semantic view](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-agent-analytics-data-model/index.md#query-with-a-snowflake-semantic-view), add the [`Snowflake-Labs/dbt_semantic_view`](https://github.com/Snowflake-Labs/dbt_semantic_view) package to your `packages.yml`. The Agent Analytics package doesn't install it for you, because the semantic view is disabled by default.
 

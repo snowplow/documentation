@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Enrich can compress the enriched stream. When compression is enabled, Enrich batches many enriched events into a single stream record (a Kinesis record, Pub/Sub message, Kafka record, or Event Hubs event) and compresses that record. This reduces the volume of data in the stream, which reduces your cloud streaming costs.
 
-The Snowplow loaders and Snowbridge read compressed records. If you run your own application that consumes directly from the enriched stream, you need to update it to decompress the records before you enable compression. This page describes the record format so that you can write that code, in any language, with or without help from an AI coding agent.
+The Snowplow loaders, Snowbridge (Event Forwarding) and Signals read compressed records. If you run your own application that consumes directly from the enriched stream, you need to update it to decompress the records before you enable compression. This page describes the record format so that you can write that code, in any language, with or without help from an AI coding agent.
 
 Each enriched event inside a compressed record uses the same [enriched TSV format](/docs/pipeline/enriched-tsv-format/index.md) as an uncompressed record. Once your consumer has split a compressed record into individual events, you can process those events exactly as before, including with the [Analytics SDKs](/docs/api-reference/analytics-sdk/index.md).
 

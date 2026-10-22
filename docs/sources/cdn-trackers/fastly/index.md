@@ -13,7 +13,7 @@ See [CDN trackers](/docs/sources/cdn-trackers/index.md) for background on how CD
 
 :::note[Availability]
 
-This integration requires [Collector](/docs/pipeline/collector/index.md) 3.8.1 or newer. Earlier versions don't respond to the Fastly endpoint ownership challenge, so Fastly can't send logs to them.
+This integration requires [Collector](/docs/pipeline/collector/index.md) 3.9.0 or newer. Earlier versions don't respond to the Fastly endpoint ownership challenge, so Fastly can't send logs to them.
 
 :::
 

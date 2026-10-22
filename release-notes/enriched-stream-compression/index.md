@@ -34,7 +34,7 @@ Enriched stream compression is an _opt-in_ feature.
 
 :::warning
 
-Do not enable compression if you have any custom apps consuming from the enriched stream (aside from the apps maintained by Snowplow). Because compression changes the data format, custom apps will not be able to parse the data.
+Compression changes the data format in the enriched stream. If you have custom apps consuming from the enriched stream, [update them to read compressed records](/docs/destinations/custom-streaming/enriched-stream-compression/) before you enable compression.
 
 :::
 

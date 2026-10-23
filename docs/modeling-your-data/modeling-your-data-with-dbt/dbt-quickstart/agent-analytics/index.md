@@ -12,7 +12,7 @@ This guide walks you through setting up the [Snowplow Agent Analytics dbt packag
 ## Requirements
 
 - dbt 1.10.6 or later, below 2.0.0
-- Snowflake, BigQuery, Databricks, or Redshift
+- Snowflake, BigQuery, or Databricks
 - For Databricks, `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later
 - Events from a [CDN tracker](/docs/sources/cdn-trackers/index.md) loaded into your atomic events table, with a dedicated `app_id`
 - Client-side page view events from the [JavaScript tracker](/docs/sources/web-trackers/index.md)
@@ -86,8 +86,6 @@ vars:
 ```
 
 The events table must include `load_tstamp`. Use the native entity format produced by your Snowplow loader: Snowflake VARIANT arrays, BigQuery repeated records, or Databricks typed arrays of structs.
-
-For Redshift, the package also reads the YAUAA, bot detection, agent classification, and UTM referrer entity tables from the same database and schema. It joins them to events on both `root_id` and `root_tstamp`. If you use different table names, set the [Redshift entity table variables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md#warehouse-and-source-data).
 
 ### 5. Identify your event sources
 

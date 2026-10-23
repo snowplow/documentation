@@ -1,8 +1,8 @@
 ---
-title: "Agent Analytics adds BigQuery, Databricks, and Redshift support"
+title: "Agent Analytics adds BigQuery and Databricks support"
 sidebar_label: "Agent Analytics warehouse support"
-description: "Run the Agent Analytics dbt package on BigQuery, Databricks, and Redshift, with the same agent and referral metrics as Snowflake."
-keywords: ["Agent Analytics", "dbt", "BigQuery", "Databricks", "Redshift", "Snowflake"]
+description: "Run the Agent Analytics dbt package on BigQuery and Databricks, with the same agent and referral metrics as Snowflake."
+keywords: ["Agent Analytics", "dbt", "BigQuery", "Databricks", "Snowflake"]
 date: "2026-10-22"
 category:
   - "Release notes"
@@ -12,12 +12,11 @@ platforms:
   - "Snowflake"
   - "BigQuery"
   - "Databricks"
-  - "AWS"
 ---
 
-The Snowplow Agent Analytics dbt package adds BigQuery, Databricks, and Redshift support alongside Snowflake. The new adapters use the same agent attribution rules, daily aggregates, and summary metrics. Snowflake semantic views remain available only on Snowflake.
+The Snowplow Agent Analytics dbt package adds BigQuery and Databricks support alongside Snowflake. The new adapters use the same agent attribution rules, daily aggregates, and summary metrics. Snowflake semantic views remain available only on Snowflake.
 
-Databricks requires `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later. Redshift reads the native shredded entity tables alongside atomic events.
+Databricks requires `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later.
 
 The package also checks license acceptance and warehouse support before running its models.
 

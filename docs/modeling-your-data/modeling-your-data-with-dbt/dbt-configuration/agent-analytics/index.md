@@ -27,15 +27,6 @@ These variables tell the package where to find your events, and which events to 
 | `cdn_app_ids`             | `['cdn']`         | `app_id` values that identify [CDN tracker](/docs/sources/cdn-trackers/index.md) events                                                                                                             |
 | `client_app_ids`          | `[]`              | `app_id` values to restrict client-side page views to. An empty list includes every `app_id`. Set it if your pipeline also receives events from other properties. |
 
-On Redshift, entities live in separate tables. These variables override the entity table names in `snowplow__atomic_schema`:
-
-| Variable | Default table |
-|----------|---------------|
-| `snowplow__yauaa_context` | `nl_basjes_yauaa_context_1` |
-| `snowplow__bot_detection_context` | `com_snowplowanalytics_snowplow_bot_detection_1` |
-| `snowplow__agent_classification_context` | `com_snowplowanalytics_snowplow_agent_classification_1` |
-| `snowplow__utm_referrer_context` | `com_snowplowanalytics_snowplow_utm_referrer_1` |
-
 ## Operation and logic
 
 These variables control incremental processing and the snapshots in the summary tables.

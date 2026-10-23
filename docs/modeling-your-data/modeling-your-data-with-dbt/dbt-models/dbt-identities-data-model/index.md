@@ -28,14 +28,17 @@ The package uses a simplified, timestamp-based incremental strategy rather than 
 This means that the standard guidance around [package mechanics](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/index.md), [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), and [dbt operations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) doesn't apply to this package.
 :::
 
-## Version 0.2.0
+:::warning[Breaking changes in 0.2.0]
 
 This is a breaking upgrade from 0.1.0. It removes the `id_changes` and `id_mapping_scd`
 outputs and renames `new_identities` to `identities`. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md)
 before changing existing projects. Retain the 0.1.0 history tables if consumers need
 historical point-in-time state; current mappings cannot reconstruct that history exactly.
+:::
 
 ## Key fields
+
+The Identities models use these field names consistently:
 
 | Field | Meaning |
 | --- | --- |
@@ -44,6 +47,8 @@ historical point-in-time state; current mappings cannot reconstruct that history
 | `load_tstamp` | Warehouse arrival time used for incremental progress. Backdated reloads beyond the lookback need explicit reprocessing. |
 
 ## Public models
+
+The package produces the following output models for downstream queries. Databricks tables also include `load_tstamp_date`, a date derived from `load_tstamp` for physical partitioning.
 
 ### `snowplow_identities_snowplow_id_mapping`
 
@@ -57,8 +62,15 @@ left join snowplow_identities_snowplow_id_mapping m
   on s.snowplow_id = m.snowplow_id
 ```
 
-Columns: `snowplow_id`, `active_snowplow_id`, `merged_at`, `merge_event_id`,
-`triggering_event_id`, `load_tstamp`, `model_tstamp`.
+| Column | Description |
+| --- | --- |
+| `snowplow_id` | Merged child identity. |
+| `active_snowplow_id` | Current surviving root. |
+| `merged_at` | Child merge time from the cumulative payload. |
+| `merge_event_id` | Merge event contributing the resolved mapping. |
+| `triggering_event_id` | Event that triggered the child's merge. |
+| `load_tstamp` | Latest warehouse arrival contributing the resolved mapping. |
+| `model_tstamp` | Time this mapping row was modeled. |
 
 `merged_at` comes from the cumulative payload and can remain the original child merge
 time when its root changes. `load_tstamp` records the newest arrival contributing the
@@ -68,13 +80,19 @@ mapping, including a later root change. These are not a history of every root tr
 
 A view containing one row per `(active_snowplow_id, id_type, id_value)`. It resolves immutable
 identifier rows against the current root mapping at query time. Identifier types are
-lowercase; the `uuid` is derived from the root, type and value.
+lowercase; the `uuid` is derived from the root, type, and value.
 
-| Columns | Meaning |
+| Column | Description |
 | --- | --- |
-| `uuid`, `active_snowplow_id`, `id_type`, `id_value` | Resolved identifier key, owner, type and value (or normalized SHA-256 hash when enabled). |
-| `first_seen_at`, `last_seen_at`, `first_seen_event_id` | Observed event-time range and first contributing event. |
-| `first_app_id`, `last_app_id` | Applications at the ends of that observed range. |
+| `uuid` | Key derived from the resolved owner, identifier type, and value. |
+| `active_snowplow_id` | Current owner of the identifier. |
+| `id_type` | Lowercase identifier type. |
+| `id_value` | Identifier value, or normalized SHA-256 hash when hashing is enabled. |
+| `first_seen_at` | Earliest observed event time for this owner and identifier. |
+| `last_seen_at` | Latest observed event time for this owner and identifier. |
+| `first_seen_event_id` | First contributing event. |
+| `first_app_id` | Application at the start of the observed range. |
+| `last_app_id` | Application at the end of the observed range. |
 | `mapping_state` | `single` for one owner; `multiple` for owners the heuristic can rank; `unranked` for missing creation dates or an unresolved tie. |
 | `is_preferred` | True for a single owner. For multiple owners, selection requires the opt-in heuristic and an unambiguous winner. |
 
@@ -86,19 +104,36 @@ identifier reappearing after TTL expiry retains its old and new ownership rows. 
 
 ### `snowplow_identities_identities`
 
-One row per identity with `snowplow_id`, `created_at`, `first_seen_event_id`,
-`first_app_id`, `last_app_id`, `first_derived_tstamp`, `last_derived_tstamp` and `load_tstamp`.
-Configured identifier values are in the identifier mapping, not separate columns here.
+One row per identity. Configured identifier values are in the identifier mapping, rather than separate columns here.
+
+| Column | Description |
+| --- | --- |
+| `snowplow_id` | Identity attached to the source events. |
+| `created_at` | Creation time supplied by the identity entity. |
+| `first_seen_event_id` | Earliest observed event for this identity. |
+| `first_app_id` | Application on the earliest observed event. |
+| `last_app_id` | Application on the latest observed event. |
+| `first_derived_tstamp` | Earliest observed derived event timestamp. |
+| `last_derived_tstamp` | Latest observed derived event timestamp. |
+| `load_tstamp` | Latest warehouse arrival observed for this identity. |
 
 ### `snowplow_identities_merge_events`
 
-One row per merge event, with `merge_event_id`, `active_snowplow_id`, `collector_tstamp`,
-`derived_tstamp`, `load_tstamp`, `merged` (the cumulative child payloads) and `merges`
-(the cumulative merge-event IDs). The log retains the raw merge history used by the mapping.
+One row per merge event. The log retains the raw merge history used by the mapping.
+
+| Column | Description |
+| --- | --- |
+| `merge_event_id` | Unique merge event ID. |
+| `active_snowplow_id` | Surviving identity reported by the merge event. |
+| `collector_tstamp` | Collector timestamp of the merge event. |
+| `derived_tstamp` | Derived timestamp of the merge event. |
+| `load_tstamp` | Warehouse arrival timestamp of the merge event. |
+| `merged` | Cumulative child merge payloads. |
+| `merges` | Cumulative merge event IDs. |
 
 ## Internal models and operation
 
-`snowplow_identities_stg_identity_events` holds identity-context events in the scratch schema.
+`snowplow_identities_stg_identity_events` holds events with the identity entity in the scratch schema.
 `snowplow_identities_identifier_mapping_base` holds immutable event-time identifier rows;
 consumers should normally query the resolved view.
 

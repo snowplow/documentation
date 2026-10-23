@@ -1,4 +1,13 @@
 {
+  "definitions": {
+    "partition_tstamp_type": {
+      "type": "string",
+      "enum": [
+        "timestamp",
+        "date"
+      ]
+    }
+  },
   "type": "object",
   "properties": {
     "snowplow__atomic_schema": {
@@ -42,7 +51,7 @@
       "format": "date",
       "title": "Start Date",
       "group": "Operation and Logic",
-      "longDescription": "The earliest load_tstamp to process on the initial build or a full refresh. Verify source retention before rebuilding.",
+      "longDescription": "The earliest `load_tstamp` to process on the initial build or a full refresh. Verify source retention before rebuilding.",
       "packageDefault": "2026-01-01",
       "description": "The date to start processing events from on first run or a full refresh"
     },
@@ -123,7 +132,7 @@
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
       "title": "App IDs",
-      "longDescription": "Filter application identity-context events. Merge events use snowplow__identities_app_id separately.",
+      "longDescription": "Filter application events with the identity entity. Merge events use `snowplow__identities_app_id` separately.",
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
@@ -160,7 +169,7 @@
       "type": "boolean",
       "title": "Merge-limit collapse",
       "description": "Select a preferred owner without deleting other owners",
-      "longDescription": "Enable only when the service has no configured unique identifiers. All owners remain. is_preferred selects the latest sighting, breaking ties by oldest identity creation time. Missing creation dates or a remaining tie produce no preferred owner. Also applies to identifiers reappearing after TTL expiry.",
+      "longDescription": "Enable only when the service has no configured unique identifiers. All owners remain. `is_preferred` selects the latest sighting, breaking ties by oldest identity creation time. Missing creation dates or a remaining tie produce no preferred owner. Also applies to identifiers reappearing after TTL expiry.",
       "packageDefault": "false",
       "group": "Operation and Logic"
     },
@@ -180,8 +189,8 @@
       "type": "array",
       "title": "Identity-service app IDs",
       "packageDefault": "['snowplow-identities']",
-      "description": "Filter merge events by their service app_id. An empty list disables this filter.",
-      "longDescription": "Filter merge events by their service app_id. An empty list disables this filter.",
+      "description": "Filter merge events by their service `app_id`. An empty list disables this filter.",
+      "longDescription": "Filter merge events by their service `app_id`. An empty list disables this filter.",
       "group": "Contexts, Filters, and Logs",
       "consoleGroup": "advanced",
       "recommendFullRefresh": false,
@@ -202,7 +211,6 @@
       "order": 74
     },
     "snowplow__partition_tstamp_type": {
-      "type": "string",
       "title": "Atomic partition type",
       "packageDefault": "timestamp",
       "description": "Type of the configured physical partition column.",
@@ -211,17 +219,14 @@
       "consoleGroup": "advanced",
       "recommendFullRefresh": false,
       "order": 75,
-      "enum": [
-        "timestamp",
-        "date"
-      ]
+      "$ref": "#/definitions/partition_tstamp_type"
     },
     "snowplow__partition_buffer_days": {
       "type": "integer",
       "title": "Partition buffer days",
       "packageDefault": "2",
-      "description": "Extra days on the partition predicate when its column differs from load_tstamp. Must cover the actual arrival lag.",
-      "longDescription": "Extra days on the partition predicate when its column differs from load_tstamp. Must cover the actual arrival lag.",
+      "description": "Extra days on the partition predicate when its column differs from `load_tstamp`. Must cover the actual arrival lag.",
+      "longDescription": "Extra days on the partition predicate when its column differs from `load_tstamp`. Must cover the actual arrival lag.",
       "group": "Warehouse and Tracker",
       "consoleGroup": "advanced",
       "recommendFullRefresh": false,

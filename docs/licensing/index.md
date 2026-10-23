@@ -9,6 +9,8 @@ keywords: ["Snowplow licensing", "community license", "limited use license", "co
 
 This section provides information about the different licenses used in Snowplow components and projects.
 
+The licenses below apply when you run Snowplow components yourself. Snowplow CDI Cloud and Private Managed Cloud, including the [free trial](/docs/get-started/free-trial/index.md), are provided under a commercial agreement, so you do not need to choose a license to use a hosted environment. See the [deployment options](/docs/get-started/index.md) for how the two relate.
+
 
 ```mdx-code-block
 import Link from '@docusaurus/Link';

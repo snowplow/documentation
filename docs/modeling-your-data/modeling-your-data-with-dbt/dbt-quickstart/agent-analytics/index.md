@@ -11,8 +11,9 @@ This guide walks you through setting up the [Snowplow Agent Analytics dbt packag
 
 ## Requirements
 
-- dbt 1.10.6 or later
-- Snowflake warehouse
+- dbt 1.10.6 or later, below 2.0.0
+- Snowflake, BigQuery, or Databricks
+- For Databricks, `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later
 - Events from a [CDN tracker](/docs/sources/cdn-trackers/index.md) loaded into your atomic events table, with a dedicated `app_id`
 - Client-side page view events from the [JavaScript tracker](/docs/sources/web-trackers/index.md)
 - These enrichments enabled on your pipeline:
@@ -42,7 +43,17 @@ dbt deps
 
 The steps below walk through each variable you need to set in your `dbt_project.yml` to get the package running. Check out the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) for more details.
 
-### 1. Override the dispatch order
+### 1. Configure license acceptance
+
+The package requires the [Snowplow Personal and Academic License](/personal-and-academic-license-1.0/) or a commercial agreement with Snowplow. Set the following variable to confirm that you meet these terms:
+
+```yaml title="dbt_project.yml"
+vars:
+  snowplow_agent_analytics:
+    snowplow__license_accepted: true
+```
+
+### 2. Override the dispatch order
 
 To take advantage of the optimized upserts that the Snowplow packages offer, ensure that certain macros are called from `snowplow_utils` before `dbt-core`. Add the following to the top level of your `dbt_project.yml`:
 
@@ -52,7 +63,7 @@ dispatch:
     search_order: ['snowplow_utils', 'dbt']
 ```
 
-### 2. Set the start date
+### 3. Set the start date
 
 Set `snowplow__start_date` to the date from which you want to begin processing events, and `dbt_start_date` to the earliest event date to include in the daily tables:
 
@@ -63,7 +74,7 @@ vars:
     dbt_start_date: 'yyyy-mm-dd'
 ```
 
-### 3. Check source data
+### 4. Check source data
 
 The package reads from your atomic events table. By default, it assumes the `atomic` schema in your `target.database`. To override this, add the following to your `dbt_project.yml`:
 
@@ -74,7 +85,9 @@ vars:
     snowplow__database: database_with_snowplow_events
 ```
 
-### 4. Identify your event sources
+The events table must include `load_tstamp`. Use the native entity format produced by your Snowplow loader: Snowflake VARIANT arrays, BigQuery repeated records, or Databricks typed arrays of structs.
+
+### 5. Identify your event sources
 
 Set `cdn_app_ids` to the `app_id` values of your [CDN tracker](/docs/sources/cdn-trackers/index.md) events. For [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md), use `cloudfront`. For [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md), use the same `appId` you set in the Worker script. For [Fastly](/docs/sources/cdn-trackers/fastly/index.md), use the `aid` value from the log format.
 
@@ -87,7 +100,7 @@ vars:
     client_app_ids: ['my_website']
 ```
 
-### 5. Map operators to referral sources *(optional)*
+### 6. Map operators to referral sources *(optional)*
 
 This step is optional. The package attributes human page views to AI operators using the `operator_referral_sources` seed. The seed maps each operator to the `source` and `medium` values that the referrer parser enrichment assigns to its products, for example `OpenAI` to `ChatGPT` and `chatbot`. Operator names must match the `operator` values from the agent classification enrichment exactly.
 
@@ -102,12 +115,12 @@ seeds:
       +enabled: false
 ```
 
-### 6. Run the package
+### 7. Run the package
 
-Load the seeds, then run the package:
+Load the seeds with `--full-refresh` to recreate their tables with any updated column types, then run the package:
 
 ```bash
-dbt seed --select snowplow_agent_analytics
+dbt seed --select snowplow_agent_analytics --full-refresh
 dbt run --select snowplow_agent_analytics
 ```
 
@@ -118,6 +131,8 @@ dbt test --select snowplow_agent_analytics
 ```
 
 ## Enable the semantic view *(optional)*
+
+The semantic view is available on Snowflake. On other warehouses, `enable_semantic_views: true` builds only the conformed dimension tables and does not require the Snowflake materialization package.
 
 To build the [Snowflake semantic view](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-agent-analytics-data-model/index.md#query-with-a-snowflake-semantic-view), add the [`Snowflake-Labs/dbt_semantic_view`](https://github.com/Snowflake-Labs/dbt_semantic_view) package to your `packages.yml`. The Agent Analytics package doesn't install it for you, because the semantic view is disabled by default.
 

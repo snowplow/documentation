@@ -12,7 +12,7 @@ date: "2026-06-22"
 
 import { CardGrid, CallToActionCard } from '@site/src/components/CardGrid'
 
-Snowplow supports agentic and LLM-powered workflows in several ways.
+Snowplow supports agentic and LLM-powered workflows in several ways. New to Snowplow? [Snowplow quickstart with your coding agent](/docs/get-started/quickstart/index.md) goes from a hosted environment to validated events with the assistant doing the setup.
 
 :::tip[Snowplow Signals]
 

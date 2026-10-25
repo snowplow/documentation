@@ -68,7 +68,7 @@ flowchart LR
     stage1 --> stage2 --> stage3
 ```
 
-1. Anchors: identify labeled anchor points. With [session anchors](#session-anchors), Signals scans sessions in the training window, labels them by whether a goal event occurred, and downsamples negatives. With [user-supplied anchors](#user-supplied-anchors), you provide your own pre-labeled table and this stage is skipped.
+1. Anchors: identify labeled anchor points. With [session anchors](#session-anchors), Signals turns each event before a session's first goal event into an anchor, labels it by whether the session went on to reach the goal, and downsamples negatives. With [user-supplied anchors](#user-supplied-anchors), you provide your own pre-labeled table and this stage is skipped.
 2. Attributes: for each anchor, compute attribute values using only the events that preceded the anchor timestamp in that session. This enforces point-in-time correctness, so attributes reflect only what was known at the moment of the anchor.
 3. Assembly: join anchors with their computed attribute values into a single labeled dataset, with one row per anchor and one column per attribute.
 
@@ -90,7 +90,9 @@ Signals provides two approaches: session anchors (automatically derived from you
 
 ### Session anchors
 
-Use `submit_dataset_run_with_session_anchors()` to automatically generate anchors from your event data and build the training dataset server-side. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
+Use `submit_dataset_run_with_session_anchors()` to automatically generate anchors from your event data and build the training dataset server-side. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and treats each event in a session as a candidate anchor, except for excluded events such as `page_ping`. Anchors stop at the first goal event: the goal event itself and any events after it are dropped, so each anchor represents a moment before the outcome is known. Every anchor in a session that later reaches the goal gets `label = 1`, and every anchor in a session that never reaches it gets `label = 0`. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
+
+Because a session contributes one anchor per eligible event, long sessions produce more rows than short ones. When you split the dataset for training and evaluation, keep all the anchors from a session on the same side of the split.
 
 The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, event properties, or entity properties.
 
@@ -153,7 +155,7 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 | `goal_criteria` | Criteria that define a positive anchor (label=1) | `Criteria` | ✅ |
 | `training_span` | Time window to scan for anchor events | `TrainingSpan` | ✅ |
 | `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to filter out anchors with too little behavioral signal, for example set to `5` to ensure each anchor has at least 5 prior events. | `int` | Default: `1` |
-| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions, for example set to `1` to ensure each session contributes at most one training example. | `int` or `None` | Default: `None` |
+| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions. Signals keeps the earliest eligible anchors in each session, so setting it to `1` keeps only the first event after `min_events`. | `int` or `None` | Default: `None` |
 | `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. For example, set to `1.0` for a balanced 1:1 dataset. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
 | `anchors_table` | Override the output location for the anchors table. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). The default table name is `signals_anchors`. | `WarehouseTable` | Default: `None` |

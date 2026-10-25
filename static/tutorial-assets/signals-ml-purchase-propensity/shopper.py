@@ -73,7 +73,10 @@ def main() -> None:
         time.sleep(SECONDS_BETWEEN_STEPS)
 
         prediction = requests.get(PREDICT_URL, params={"domain_sessionid": session_id}, timeout=10).json()
-        attributes = ", ".join(f"{name}={value}" for name, value in prediction["attributes"].items())
+        attributes = ", ".join(
+            f"{name}={round(value, 2) if isinstance(value, float) else value}"
+            for name, value in prediction["attributes"].items()
+        )
         print(f"{step:<28} score={prediction['score']:.3f}  {attributes}")
 
 

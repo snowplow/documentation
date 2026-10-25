@@ -113,16 +113,16 @@ SNOWPLOW_COLLECTOR_URL=https://YOUR_COLLECTOR_URL python shopper.py
 The script prints the session's `domain_sessionid`, then the score and attributes after each step. With the model trained on the sample data, the output looks like this:
 
 ```txt
-domain_sessionid: 8eb5978f-f3a2-4545-8b9f-d0a0e94d02e5
+domain_sessionid: 31766963-742f-4e16-9782-ebc4ed9fd841
 
-Land on the home page        score=0.034  page_views=1, product_views=None, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.0
-Browse a category            score=0.071  page_views=2, product_views=None, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.17
-View two products            score=0.078  page_views=4, product_views=2, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.35
-Add the hoodie to the cart   score=0.213  page_views=4, product_views=2, add_to_carts=1, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.52
-Start the checkout           score=0.362  page_views=5, product_views=2, add_to_carts=1, remove_from_carts=None, checkout_steps=1, minutes_in_session=0.7
+Land on the home page        score=0.065  page_views=1, product_views=None, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.18
+Browse a category            score=0.067  page_views=2, product_views=None, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.37
+View two products            score=0.089  page_views=4, product_views=2, add_to_carts=None, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.56
+Add the hoodie to the cart   score=0.215  page_views=4, product_views=2, add_to_carts=1, remove_from_carts=None, checkout_steps=None, minutes_in_session=0.76
+Start the checkout           score=0.362  page_views=5, product_views=2, add_to_carts=1, remove_from_carts=None, checkout_steps=1, minutes_in_session=0.95
 ```
 
-Your values for `minutes_in_session` depend on how long each step takes, so the scores will differ slightly. To try another journey, edit the `JOURNEY` list in the script.
+`minutes_in_session` is measured when the endpoint reads the attributes, so it includes the 10-second waits, and your values and scores will differ slightly. To try another journey, edit the `JOURNEY` list in the script.
 
 </TabItem>
 </Tabs>

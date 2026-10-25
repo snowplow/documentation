@@ -31,7 +31,7 @@ This starter set counts the main shopping actions and measures how long the sess
 | `checkout_steps` | Checkout steps reached in the session | `counter` |
 | `minutes_in_session` | Minutes since the first event in the session | `time_since_first` |
 
-All the ecommerce actions are the same `snowplow_ecommerce_action` event, so each counter filters on the event's `type` property. Signals matches events by exact version, so check which version of `snowplow_ecommerce_action` your tracker sends, for example in the `event_version` column of `atomic.events`.
+All the ecommerce actions are the same `snowplow_ecommerce_action` event, so each counter filters on the event's `type` property. Signals matches events by exact version, so check which version of `snowplow_ecommerce_action` your tracker sends, for example in the `event_version` column of `atomic.events`. With the sample data, use `1-0-2`: the sample table and the shopper script both use it.
 
 ### Choose features that exist at prediction time
 

@@ -7,7 +7,12 @@ keywords: ["dataset builder", "session anchors", "training dataset", "point-in-t
 date: "2026-10-25"
 ---
 
-In this step you'll ask Signals to build a labeled training table from your historical events, using the attribute group you just defined. Signals runs the queries in your Snowflake account and writes the result there.
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+In this step you'll get a labeled training table built by the Signals dataset builder from the attribute group you defined. With your own data, Signals runs the queries in your Snowflake account and writes the result there. With the sample data, you'll download a table that was built the same way.
 
 ## Understand what each row means
 
@@ -19,7 +24,10 @@ The dataset builder uses [session anchors](/docs/signals/ml-training-datasets/#s
 
 For each anchor, Signals computes every attribute using only the events in that session that happened before the anchor. A row for the third event of a session has the counts from the first two events. This is the same information the model will have when it scores a live session partway through.
 
-## Submit the dataset run
+## Build the dataset
+
+<Tabs groupId="data-source" queryString>
+  <TabItem value="own" label="Your own data" default>
 
 Load the attribute group you published from Signals, so the dataset uses exactly the definition that Signals serves:
 
@@ -84,8 +92,6 @@ The model learns what purchasing sessions have in common, and you'll hold out 20
 
 The dataset builder writes its tables to the output database and schema from your Signals warehouse connection. To write somewhere else, set `database` and `schema` on `WarehouseTable`.
 
-## Wait for the run to finish
-
 The run happens in the background. Poll until it succeeds:
 
 ```python
@@ -107,7 +113,55 @@ print(f"{dataset.database}.{dataset.schema_}.{dataset.table}")
 
 Depending on the window and your event volume, this takes from a few minutes to over an hour. If you need to stop it, call `sp_signals.cancel_dataset_run(run.id)`.
 
+  </TabItem>
+  <TabItem value="sample" label="Sample data">
+
+The sample table was built with this call, using the `purchase_propensity` attribute group from the previous step. It ran against the [Google Analytics 4 Merchandise Store sample](https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset), converted to Snowplow events. You don't need to run it: it needs a Snowflake warehouse connection, and the result is ready to download in the next section.
+
+```python
+from datetime import datetime, timezone
+
+from snowplow_signals import Criteria, Criterion, EventProperty, TrainingSpan, WarehouseTable
+
+purchase = Criteria(
+    all=[
+        Criterion.eq(
+            EventProperty(
+                vendor="com.snowplowanalytics.snowplow.ecommerce",
+                name="snowplow_ecommerce_action",
+                major_version=1,
+                path="type",
+            ),
+            "transaction",
+        )
+    ]
+)
+
+run = sp_signals.submit_dataset_run_with_session_anchors(
+    attribute_groups=[sp_signals.get_attribute_group("purchase_propensity")],
+    goal_criteria=purchase,
+    training_span=TrainingSpan(
+        start_time=datetime(2020, 11, 1, tzinfo=timezone.utc),
+        end_time=datetime(2021, 2, 1, tzinfo=timezone.utc),
+    ),
+    dataset_table=WarehouseTable(table="purchase_propensity_dataset"),
+)
+```
+
+To keep the file small, the published table keeps a random 14% of sessions, with every row of each session it keeps, so the balance of positives and negatives is unchanged. It has about 300,000 rows from about 47,000 sessions, of which 659 include a purchase. The session IDs are replaced with random UUIDs.
+
+Two columns behave differently from data tracked with Snowplow:
+
+* `page_views` is higher than on a typical Snowplow site, because the GA4 export often records the same page view more than once
+* `remove_from_carts` is always empty, because the sample has no cart removals
+
+  </TabItem>
+</Tabs>
+
 ## Load the dataset
+
+<Tabs groupId="data-source" queryString>
+  <TabItem value="own" label="Your own data" default>
 
 Load the full table into pandas with the Snowflake connector. Don't use `get_dataset_run_preview()` for training: it returns the first rows of the table without sampling them, so it isn't a representative mix of positives and negatives.
 
@@ -131,6 +185,24 @@ df.head()
 ```
 
 Use whichever Snowflake authentication method your account requires, such as key pair authentication, in place of a password.
+
+  </TabItem>
+  <TabItem value="sample" label="Sample data">
+
+Load the sample table straight from GitHub:
+
+```python
+import pandas as pd
+
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/snowplow/documentation/main/static/tutorial-assets/signals-ml-purchase-propensity/purchase_propensity_sample.csv.gz",
+    parse_dates=["anchor_ts"],
+)
+df.head()
+```
+
+  </TabItem>
+</Tabs>
 
 The table has one row per anchor, with the attribute key, the anchor timestamp, the label, and one column per attribute:
 

@@ -76,7 +76,7 @@ print(f"Average precision: {average_precision_score(y_test, scores):.3f}")
 print(f"Positive rate:     {y_test.mean():.3f}")
 ```
 
-If the results are close to chance, check that the training window contains enough purchases, and that the ecommerce event version in your attributes matches your tracking.
+If the results are close to chance, check the number of purchasing sessions in the window, as described in [Build the dataset](../build-training-dataset/#submit-the-dataset-run), and that the ecommerce event version in your attributes matches your tracking.
 
 ### Interpret the scores
 

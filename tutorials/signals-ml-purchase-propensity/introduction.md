@@ -54,7 +54,7 @@ Each row in the training table is a moment in a past session, called an anchor. 
 This tutorial assumes that you have:
 
 * [Signals enabled](/docs/signals/setup/) with a Snowflake warehouse connection, because the dataset builder runs its queries in your Snowflake account
-* At least a few weeks of [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/) events in your Snowflake `atomic.events` table, including `product_view`, `add_to_cart`, and `transaction` actions, so there are enough purchases to learn from
+* [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/) events from a website in your Snowflake `atomic.events` table, including `product_view`, `add_to_cart`, and `transaction` actions, so the model has purchases to learn from: you'll check whether you have enough in [Build the dataset](../build-training-dataset/)
 * A website that sends those events to your pipeline now, so you can watch scores for a live session
 * Python 3.10 or later, and basic familiarity with pandas and scikit-learn
 * Snowflake credentials that can read the schema Signals writes to, to load the training table

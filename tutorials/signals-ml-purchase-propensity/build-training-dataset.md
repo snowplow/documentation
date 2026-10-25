@@ -64,7 +64,23 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 print(run.id)
 ```
 
-Choose a window long enough to contain at least a few thousand purchases. A longer window gives the model more examples, but takes longer to build. End the window at least a day in the past, so that every session in it has finished.
+End the window at least a day in the past, so that every session in it has finished. A longer window gives the model more examples, but takes longer to build.
+
+Before you submit, check how many sessions in the window include a purchase. Run this in Snowflake, with your own table and window:
+
+```sql
+SELECT
+    COUNT(DISTINCT domain_sessionid) AS sessions,
+    COUNT(DISTINCT CASE
+        WHEN unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type::STRING = 'transaction'
+        THEN domain_sessionid
+    END) AS purchasing_sessions
+FROM atomic.events
+WHERE collector_tstamp >= '2026-08-01'
+  AND collector_tstamp < '2026-10-01'
+```
+
+The model learns what purchasing sessions have in common, and you'll hold out 20% of sessions to evaluate it. Aim for a few hundred purchasing sessions or more, so that the held-out set has enough purchases for the metrics to be stable. If you have fewer, widen the window.
 
 The dataset builder writes its tables to the output database and schema from your Signals warehouse connection. To write somewhere else, set `database` and `schema` on `WarehouseTable`.
 

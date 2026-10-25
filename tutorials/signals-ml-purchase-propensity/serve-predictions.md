@@ -73,7 +73,7 @@ At the start of the session, the counters are empty and the score is low:
 
 ```json
 {
-  "domain_sessionid": "4f1c2e8a-...",
+  "domain_sessionid": "4f1c2e8a-6b0d-4c1e-9a7f-2d3b5e8c1a90",
   "score": 0.071,
   "attributes": {
     "page_views": 2,

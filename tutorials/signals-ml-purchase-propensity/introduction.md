@@ -11,15 +11,15 @@ In this tutorial you'll build a model that predicts whether an ecommerce session
 
 The hard part of a real-time model is usually not the model. It's making sure that the features it trains on are computed the same way as the features it sees in production. If you write a SQL pipeline for training and separate code for serving, the two drift apart, and the model quietly gets worse. Signals avoids this by using one definition for both:
 
-* the [dataset builder](/docs/signals/ml-training-datasets/) turns an [attribute group](/docs/signals/attributes/attribute-groups/) into a training table in your warehouse, computing each attribute as it was at each moment in the past
-* the same attribute group, once published, is computed in real time from your event stream and served through the [Signals API](/docs/signals/applications/retrieve-attributes/)
+* The [dataset builder](/docs/signals/ml-training-datasets/) turns an [attribute group](/docs/signals/attributes/attribute-groups/) into a training table in your warehouse, computing each attribute as it was at each moment in the past
+* The same attribute group, once published, is computed in real time from your event stream and served through the [Signals API](/docs/signals/applications/retrieve-attributes/)
 
 By the end you'll have:
 
-* a published attribute group with in-session shopping behavior, such as product views, cart additions, and checkout steps
-* a labeled training dataset in Snowflake, built by Signals from your historical events
-* a gradient-boosted model trained and evaluated on that dataset
-* a `/predict` endpoint that fetches a session's live attributes from Signals and returns a purchase score
+* A published attribute group with in-session shopping behavior, such as product views, cart additions, and checkout steps
+* A labeled training dataset in Snowflake, built by Signals from your historical events
+* A gradient-boosted model trained and evaluated on that dataset
+* A `/predict` endpoint that fetches a session's live attributes from Signals and returns a purchase score
 
 This tutorial is for data scientists and engineers who already have Snowplow ecommerce events in Snowflake. You'll write and run the code in your own Python environment, for example a Jupyter notebook. It should take around an hour, most of which is waiting for the dataset to build.
 
@@ -54,8 +54,8 @@ Each row in the training table is a moment in a past session, called an anchor. 
 This tutorial assumes that you have:
 
 * [Signals enabled](/docs/signals/setup/) with a Snowflake warehouse connection, because the dataset builder runs its queries in your Snowflake account
-* at least a few weeks of [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/) events in your Snowflake `atomic.events` table, including `product_view`, `add_to_cart`, and `transaction` actions, so there are enough purchases to learn from
-* a website that sends those events to your pipeline now, so you can watch scores for a live session
+* At least a few weeks of [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/) events in your Snowflake `atomic.events` table, including `product_view`, `add_to_cart`, and `transaction` actions, so there are enough purchases to learn from
+* A website that sends those events to your pipeline now, so you can watch scores for a live session
 * Python 3.10 or later, and basic familiarity with pandas and scikit-learn
 * Snowflake credentials that can read the schema Signals writes to, to load the training table
 

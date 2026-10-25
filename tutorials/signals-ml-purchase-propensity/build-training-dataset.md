@@ -13,9 +13,9 @@ In this step you'll ask Signals to build a labeled training table from your hist
 
 The dataset builder uses [session anchors](/docs/signals/ml-training-datasets/#session-anchors). It scans the sessions in a time window you choose, and treats each event in a session as a possible prediction moment:
 
-* events after a session's first purchase are dropped, because there's nothing left to predict
-* the remaining events in a session that went on to buy get `label = 1`
-* events in sessions that never bought get `label = 0`, and are downsampled so there are at most five negatives for every positive
+* Events after a session's first purchase are dropped, because there's nothing left to predict
+* The remaining events in a session that went on to buy get `label = 1`
+* Events in sessions that never bought get `label = 0`, and are downsampled so there are at most five negatives for every positive
 
 For each anchor, Signals computes every attribute using only the events in that session that happened before the anchor. A row for the third event of a session has the counts from the first two events. This is the same information the model will have when it scores a live session partway through.
 
@@ -109,9 +109,9 @@ Use whichever Snowflake authentication method your account requires, such as key
 
 The table has one row per anchor, with the attribute key, the anchor timestamp, the label, and one column per attribute:
 
-| domain_sessionid | anchor_ts | label | page_views | product_views | add_to_carts | remove_from_carts | checkout_steps | minutes_in_session |
+| `domain_sessionid` | `anchor_ts` | `label` | `page_views` | `product_views` | `add_to_carts` | `remove_from_carts` | `checkout_steps` | `minutes_in_session` |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `4f1c…` | 2026-08-03 10:12:44 | 1 | 3 | 2 | 1 | | 1 | 6.4 |
-| `9a2e…` | 2026-08-03 10:15:02 | 0 | 2 | 1 | | | | 1.9 |
+| `4f1c2e8a-6b0d-4c1e-9a7f-2d3b5e8c1a90` | 2026-08-03 10:12:44 | 1 | 3 | 2 | 1 | | 1 | 6.4 |
+| `9a2e7d41-3c5f-4b8a-8e6d-1f0c9b7a4e23` | 2026-08-03 10:15:02 | 0 | 2 | 1 | | | | 1.9 |
 
 Counters with no matching events are null rather than zero. Live attributes can also be null, for example before a session's first cart addition, so in the next step you'll fill them the same way for training and serving.

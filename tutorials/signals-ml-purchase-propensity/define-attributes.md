@@ -130,8 +130,8 @@ propensity_service = Service(
 
 A feature is only useful if it has a value when you score. Two kinds of attribute cause problems:
 
-* attributes that only change after the outcome, such as a count of `transaction` events in the session: the dataset builder only places anchors before a session's first purchase, so this column would always be empty in training
-* attributes whose meaning depends on exactly when you read them, such as `time_since_last` on all events: in training it measures the gap before the anchor event, but if you score right after an event it's close to zero every time
+* Attributes that only change after the outcome, such as a count of `transaction` events in the session: the dataset builder only places anchors before a session's first purchase, so this column would always be empty in training
+* Attributes whose meaning depends on exactly when you read them, such as `time_since_last` on all events: in training it measures the gap before the anchor event, but if you score right after an event it's close to zero every time
 
 Counts and session duration don't have these problems, which is why the starter set uses them. Once the pipeline works, try adding attributes such as the number of distinct products viewed or the value of items added to the cart, and keep the ones that improve the evaluation metrics in [Train the model](../train-model/).
 

@@ -67,7 +67,7 @@ The response includes the attributes alongside the score, so you can see which v
 ## Watch the score change
 
 <Tabs groupId="data-source" queryString>
-  <TabItem value="own" label="Your own data" default>
+<TabItem value="own" label="Your own data" default>
 
 Signals only counts events received after you published the attribute group, so start a new session: open your website in a private browser window, which has no existing Snowplow cookies.
 
@@ -98,8 +98,8 @@ At the start of the session, the counters are empty and the score is low:
 
 Now view a few products, add one to your cart, and start the checkout. Request a score after each action. The attributes update within seconds of each event, and the score changes with them. The exact values depend on your model.
 
-  </TabItem>
-  <TabItem value="sample" label="Sample data">
+</TabItem>
+<TabItem value="sample" label="Sample data">
 
 Without a website of your own, use a script to play a shopper. [`shopper.py`](https://github.com/snowplow/documentation/blob/main/static/tutorial-assets/signals-ml-purchase-propensity/shopper.py) starts a new session, and sends the Snowplow events of a short journey to your Collector: two page views, two product views, a cart addition, and the start of the checkout. After each step it waits 10 seconds, so that Signals can process the events, then asks your `/predict` endpoint for the session's score.
 
@@ -124,7 +124,7 @@ Start the checkout           score=0.362  page_views=5, product_views=2, add_to_
 
 Your values for `minutes_in_session` depend on how long each step takes, so the scores will differ slightly. To try another journey, edit the `JOURNEY` list in the script.
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Use the score in your application

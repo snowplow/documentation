@@ -69,7 +69,7 @@ sp_signals = Signals(
 Create an attribute group called `purchase_propensity` with the six attributes, and a [service](/docs/signals/applications/services/) called `purchase_propensity_service` to retrieve them from your `/predict` endpoint later. Keep these names: the code in the rest of the tutorial uses them.
 
 <Tabs groupId="signals-route" queryString>
-  <TabItem value="sdk" label="Python SDK" default>
+<TabItem value="sdk" label="Python SDK" default>
 
 Define the attributes. A helper function builds the five ecommerce counters, which differ only in name and action type:
 
@@ -167,8 +167,8 @@ published = sp_signals.publish([propensity_group, propensity_service])
 print(f"{len(published)} objects published")
 ```
 
-  </TabItem>
-  <TabItem value="assistant" label="Snowplow Assistant or MCP">
+</TabItem>
+<TabItem value="assistant" label="Snowplow Assistant or MCP">
 
 Open the Snowplow Assistant in Console, or an assistant connected to the Snowplow MCP server. The [conversational Signals tutorial](/tutorials/signals-mcp/connect-the-mcp-server) explains both. Then describe the attribute group and service:
 
@@ -209,7 +209,7 @@ When the definition and test results look right, publish both:
 Looks good. Publish purchase_propensity and purchase_propensity_service.
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 From this point, Signals calculates the attributes in real time for every new session on your site. Stream attribute groups only process events received after publishing.

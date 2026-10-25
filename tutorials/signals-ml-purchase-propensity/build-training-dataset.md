@@ -27,7 +27,7 @@ For each anchor, Signals computes every attribute using only the events in that 
 ## Build the dataset
 
 <Tabs groupId="data-source" queryString>
-  <TabItem value="own" label="Your own data" default>
+<TabItem value="own" label="Your own data" default>
 
 Load the attribute group you published from Signals, so the dataset uses exactly the definition that Signals serves:
 
@@ -113,8 +113,8 @@ print(f"{dataset.database}.{dataset.schema_}.{dataset.table}")
 
 Depending on the window and your event volume, this takes from a few minutes to over an hour. If you need to stop it, call `sp_signals.cancel_dataset_run(run.id)`.
 
-  </TabItem>
-  <TabItem value="sample" label="Sample data">
+</TabItem>
+<TabItem value="sample" label="Sample data">
 
 The sample table was built with this call, using the `purchase_propensity` attribute group from the previous step. It ran against the [Google Analytics 4 Merchandise Store sample](https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset), converted to Snowplow events. You don't need to run it: it needs a Snowflake warehouse connection, and the result is ready to download in the next section.
 
@@ -155,13 +155,13 @@ Two columns behave differently from data tracked with Snowplow:
 * `page_views` is higher than on a typical Snowplow site, because the GA4 export often records the same page view more than once
 * `remove_from_carts` is always empty, because the sample has no cart removals
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Load the dataset
 
 <Tabs groupId="data-source" queryString>
-  <TabItem value="own" label="Your own data" default>
+<TabItem value="own" label="Your own data" default>
 
 Load the full table into pandas with the Snowflake connector. Don't use `get_dataset_run_preview()` for training: it returns the first rows of the table without sampling them, so it isn't a representative mix of positives and negatives.
 
@@ -186,8 +186,8 @@ df.head()
 
 Use whichever Snowflake authentication method your account requires, such as key pair authentication, in place of a password.
 
-  </TabItem>
-  <TabItem value="sample" label="Sample data">
+</TabItem>
+<TabItem value="sample" label="Sample data">
 
 Load the sample table straight from GitHub:
 
@@ -201,7 +201,7 @@ df = pd.read_csv(
 df.head()
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 The table has one row per anchor, with the attribute key, the anchor timestamp, the label, and one column per attribute:

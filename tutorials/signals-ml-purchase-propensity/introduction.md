@@ -59,7 +59,7 @@ Each row in the training table is a moment in a past session, called an anchor. 
 You can follow the tutorial with your own ecommerce data, or with a sample dataset if you don't have any. The sample is a training table built from the public Google Analytics 4 Merchandise Store sample, converted to Snowplow events, and a script that sends shopper events in place of a website.
 
 <Tabs groupId="data-source" queryString>
-  <TabItem value="own" label="Your own data" default>
+<TabItem value="own" label="Your own data" default>
 
 This route assumes that you have:
 
@@ -69,8 +69,8 @@ This route assumes that you have:
 * Snowflake credentials that can read the schema Signals writes to, to load the training table
 * Python 3.10 or later, and basic familiarity with pandas and scikit-learn
 
-  </TabItem>
-  <TabItem value="sample" label="Sample data">
+</TabItem>
+<TabItem value="sample" label="Sample data">
 
 This route assumes that you have:
 
@@ -79,7 +79,7 @@ This route assumes that you have:
 
 You don't need a warehouse or a website. You'll load the training table from a file, and send events with the Snowplow [Python tracker](/docs/sources/python-tracker/).
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 :::note[A pipeline is required]

@@ -7,7 +7,14 @@ keywords: ["signals machine learning", "purchase propensity", "next steps"]
 date: "2026-10-25"
 ---
 
-In this tutorial you trained a purchase propensity model on Signals attributes and scored live sessions with it. The attribute group you published in the first step defined the features for both: the dataset builder computed its historical values for training, and Signals computes its live values for serving. Neither side needed its own feature code beyond the shared `features.py`.
+In this tutorial you trained a purchase propensity model on Signals attributes and scored live sessions with it. Along the way you:
+
+* Defined, tested, and published a `domain_sessionid` attribute group and service, with the Python SDK or an AI assistant
+* Built a labeled, point-in-time correct training dataset in Snowflake from the published definition
+* Trained a gradient-boosted model, and evaluated it on held-out sessions
+* Served the model behind a `/predict` endpoint that reads the same attributes live from Signals
+
+The published attribute group defined the features for both training and serving, so the only feature code you wrote was the shared `features.py`.
 
 ## Next steps
 

@@ -61,7 +61,9 @@ The response includes the attributes alongside the score, so you can see which v
 
 ## Watch the score change
 
-Open your website in a new browser window, and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) to find the `domain_sessionid` of your session in any outgoing event.
+Signals only counts events received after you published the attribute group, so start a new session: open your website in a private browser window, which has no existing Snowplow cookies.
+
+Use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension to follow along. Find the `domain_sessionid` of your session in any event on the **Events** tab. If you connect the Inspector to Signals with the [Signals integration](/docs/testing/snowplow-inspector/signals-integration/), the **Attributes** tab also shows the live values of `purchase_propensity` for your session as you browse, so you can compare them with what your endpoint receives.
 
 Request a score for your session:
 
@@ -93,3 +95,10 @@ Now view a few products, add one to your cart, and start the checkout. Request a
 Call `/predict` from wherever you need the score, for example from your site's backend when it renders a page, or after specific events such as a cart addition. Typical uses are to show a discount only to sessions that are unlikely to buy without one, or to offer live chat to sessions with a full cart and a falling score.
 
 Before you act on scores, choose a threshold using the precision and recall from [Train the model](../train-model/), rather than a fixed value such as `0.5`. The training data overrepresents purchases, so the scores aren't calibrated probabilities.
+
+## Troubleshooting
+
+* All the attributes are `null`: the session started before you published the attribute group, or the `domain_sessionid` is from a different session. Start a new session in a private window and copy the ID again.
+* The ecommerce counters stay `null` while `page_views` increases: the ecommerce events aren't reaching Signals with the version in the attribute group. Check the events in the Inspector's **Events** tab.
+* The values lag behind your actions: Signals calculates attributes from the event stream, so allow a few seconds after an event before requesting a score.
+* `KeyError` for an environment variable when starting the server: set the four `SP_` variables in the shell where you run `uvicorn`.

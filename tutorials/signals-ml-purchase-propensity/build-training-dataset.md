@@ -21,6 +21,15 @@ For each anchor, Signals computes every attribute using only the events in that 
 
 ## Submit the dataset run
 
+Load the attribute group you published from Signals, so the dataset uses exactly the definition that Signals serves:
+
+```python
+propensity_group = sp_signals.get_attribute_group("purchase_propensity")
+print(f"{propensity_group.name} v{propensity_group.version}")
+```
+
+Without a `version` argument, `get_attribute_group()` returns the latest version.
+
 Define the goal and the training window, then submit the run:
 
 ```python
@@ -115,3 +124,11 @@ The table has one row per anchor, with the attribute key, the anchor timestamp, 
 | `9a2e7d41-3c5f-4b8a-8e6d-1f0c9b7a4e23` | 2026-08-03 10:15:02 | 0 | 2 | 1 | | | | 1.9 |
 
 Counters with no matching events are null rather than zero. Live attributes can also be null, for example before a session's first cart addition, so in the next step you'll fill them the same way for training and serving.
+
+## Troubleshooting
+
+* `400` with "requires a Snowflake warehouse connection": the dataset builder only runs on Snowflake. Check the warehouse connection in your Signals setup.
+* The run status is `failed`: find the failed query in your Snowflake query history to see the error, for example a missing table or permission.
+* The table has very few rows with `label = 1`: the training window contains few purchases, or the `transaction` action isn't tracked with `snowplow_ecommerce_action`. Widen the window, or check the goal criteria against your events.
+* Every ecommerce counter is null: the `snowplow_ecommerce_action` version in the attribute group doesn't match the one your tracker sends.
+* `KeyError: 'label'` or similar in pandas: lowercase the column names after loading, as in the example above.

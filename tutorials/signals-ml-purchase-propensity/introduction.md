@@ -21,7 +21,7 @@ By the end you'll have:
 * A gradient-boosted model trained and evaluated on that dataset
 * A `/predict` endpoint that fetches a session's live attributes from Signals and returns a purchase score
 
-This tutorial is for data scientists and engineers who already have Snowplow ecommerce events in Snowflake. You'll write and run the code in your own Python environment, for example a Jupyter notebook. It should take around an hour, most of which is waiting for the dataset to build.
+This tutorial is for data scientists and engineers who already have Snowplow ecommerce events in Snowflake. You'll write and run the code in your own Python environment, for example a Jupyter notebook. To create the attribute group, you can use either the Python SDK or an AI assistant: the [Snowplow Assistant](/docs/ai/console-agent/) in Console, or your own assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/). It should take around an hour, most of which is waiting for the dataset to build.
 
 ## How the pieces fit together
 

@@ -105,13 +105,13 @@ while True:
         break
     if status.status == DatasetRunStatus.FAILED:
         raise RuntimeError("Dataset run failed")
-    time.sleep(30)
+    time.sleep(5)
 
 dataset = status.dataset
 print(f"{dataset.database}.{dataset.schema_}.{dataset.table}")
 ```
 
-Depending on the window and your event volume, this takes from a few minutes to over an hour. If you need to stop it, call `sp_signals.cancel_dataset_run(run.id)`.
+The build usually takes seconds to a few minutes. For example, building the sample dataset from 4.3 million events over three months took under 30 seconds. Larger event volumes and longer windows take longer. If you need to stop it, call `sp_signals.cancel_dataset_run(run.id)`.
 
 </TabItem>
 <TabItem value="sample" label="Sample data">

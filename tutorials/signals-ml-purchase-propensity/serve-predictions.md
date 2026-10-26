@@ -7,12 +7,12 @@ keywords: ["real-time ml inference", "predict endpoint", "fastapi", "signals api
 date: "2026-10-25"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
 
 In this step you'll put the model behind a `/predict` endpoint. For each request, the endpoint fetches the session's current attributes from Signals, prepares them with the same `features.py` you used for training, and returns a score.
 

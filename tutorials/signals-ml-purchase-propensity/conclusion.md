@@ -7,6 +7,8 @@ keywords: ["signals machine learning", "purchase propensity", "next steps"]
 date: "2026-10-25"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 In this tutorial you trained a purchase propensity model on Signals attributes and scored live sessions with it. Along the way you:
 
 * Defined, tested, and published a `domain_sessionid` attribute group and service, with the Python SDK or an AI assistant

@@ -7,12 +7,12 @@ keywords: ["signals attributes", "ml features", "ecommerce attributes", "attribu
 date: "2026-10-25"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
 
 The features for your model are Signals [attributes](/docs/signals/attributes/attributes/). You'll define them once in this step, and use the same published definition for training and serving.
 

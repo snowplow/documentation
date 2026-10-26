@@ -7,12 +7,12 @@ keywords: ["dataset builder", "session anchors", "training dataset", "point-in-t
 date: "2026-10-25"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
 
 In this step you'll get a labeled training table built by the Signals dataset builder from the attribute group you defined. With your own data, Signals runs the queries in your Snowflake account and writes the result there. With the sample data, you'll download a table that was built the same way.
 

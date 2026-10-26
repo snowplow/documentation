@@ -3,7 +3,7 @@ export const versions = {
   androidTracker: '6.2.0',
   dotNetTracker: '1.3.0',
   cppTracker: '2.0.0',
-  flutterTracker: '0.8.0',
+  flutterTracker: '0.11.1',
   golangTracker: '3.1.0',
   googleAmpTracker: '1.1.0',
   iosTracker: '6.2.1',
@@ -21,32 +21,32 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
-  collector: '3.7.0',
-  enrich: '6.13.1',
-  sqs2kinesis: '1.0.4',
+  collector: '3.9.0',
+  enrich: '6.14.1',
   dataflowRunner: '0.7.10',
   snowbridge: '6.1.0',
 
   // Loaders
-  bqLoader: '2.2.1',
+  bqLoader: '2.2.2',
   bqLoader1x: '1.7.2',
-  esLoader: '3.0.1',
+  esLoader: '3.0.2',
   gcsLoader: '0.5.7',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.7.2',
-  s3Loader: '3.2.0',
+  rdbLoader: '6.9.0',
+  s3Loader: '3.2.1',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.12.0',
-  snowflakeStreamingLoader: '0.6.1',
+  lakeLoader: '0.14.1',
+  snowflakeStreamingLoader: '0.6.2',
   databricksStreamingLoader: '0.5.0',
 
   // Data Modelling
   // dbt
   dbtSnowplowAttribution: '1.0.0',
   dbtSnowplowUnified: '1.0.0',
+  dbtSnowplowIdentities: '0.1.0',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowMediaPlayer: '1.0.1',
+  dbtSnowplowMediaPlayer: '1.0.2',
   dbtSnowplowUtils: '1.0.1',
   dbtSnowplowNormalize: '1.0.0',
   dbtSnowplowFractribution: '0.3.6',
@@ -69,12 +69,12 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.14.2',
-  igluctl: '0.13.0',
+  igluServer: '0.15.2',
+  igluctl: '0.13.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',
 
   // Testing & debugging
-  snowplowMicro: '4.5.2',
+  snowplowMicro: '4.6.2',
   snowplowMini: '0.26.0',
 }

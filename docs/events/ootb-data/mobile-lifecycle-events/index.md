@@ -24,7 +24,7 @@ This table shows the support for mobile application install tracking across the 
 | [iOS](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)               | ✅         | 1.1.0         | ✅             |                                 |
 | [Android](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)           | ✅         | 1.1.0         | ✅             |                                 |
 | [React Native](/docs/sources/react-native-tracker/tracking-events/installation-tracking/index.md) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
-| Flutter                                                                                           | ❌         |               |               |                                 |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)               | ✅         | 0.11.1        | ✅             | Disabled by default             |
 | Roku                                                                                              | ❌         |               |               |                                 |
 | Google Tag Manager                                                                                | ❌         |               |               |                                 |
 

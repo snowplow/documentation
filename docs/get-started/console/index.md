@@ -57,7 +57,7 @@ Once data is flowing, you can deploy a data model to transform raw events into s
 
 ## Configure Signals for real-time use cases
 
-[Signals](/docs/signals/get-started/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
+[Signals](/docs/signals/introduction/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
 :::note[Paid add-on]
 Signals is a paid add-on. Contact your account team to enable it.

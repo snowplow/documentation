@@ -425,8 +425,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/monitoring/monitoring-failed-events/alerts/* /docs/monitoring/alerts/:splat 301
 /docs/monitoring/monitoring-failed-events/* /docs/monitoring/:splat 301
 
-/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/pipeline/enriched-tsv-format/index.md/:splat 301
-/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/pipeline/enriched-tsv-format/:splat 301
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/destinations/custom-streaming/enriched-tsv-format/index.md/:splat 301
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/destinations/custom-streaming/enriched-tsv-format/:splat 301
 /docs/fundamentals/schemas/json-schema-reference/* /docs/api-reference/json-schema-reference/:splat 301
 /docs/events/custom-events/context-entities/* /docs/events/event-types/custom-events/:splat 301
 /docs/events/custom-events/self-describing-events/* /docs/events/event-types/custom-events/:splat 301
@@ -492,7 +492,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
 /docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
 /docs/signals/receive-interventions/* /docs/signals/applications/subscribe/:splat 301
-/docs/signals/resources/* /docs/signals/get-started/:splat 301
+/docs/signals/resources/* /docs/signals/concepts/ 301
+/docs/signals/get-started/* /docs/signals/concepts/ 301
 /docs/signals/ /docs/signals/introduction/ 301!
 
 # Signals define/consume restructure
@@ -515,7 +516,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/testing/snowplow-micro/advanced-usage/* /docs/testing/snowplow-micro/local/advanced-usage/:splat 301
 /docs/testing/snowplow-micro/adding-schemas/* /docs/testing/snowplow-micro/local/schemas/:splat 301
 
-/docs/event-studio/mcp-server/* /docs/llms-support/mcp-server/:splat 301
+/docs/event-studio/mcp-server/* /docs/ai/cli-mcp-server/:splat 301
+/docs/llms-support/mcp-server/* /docs/ai/cli-mcp-server/:splat 301
+/docs/llms-support/* /docs/ai/:splat 301
 
 # Snowtype restructure
 /docs/event-studio/implement-tracking/snowtype/using-the-cli/* /docs/event-studio/implement-tracking/install-snowtype/:splat 301
@@ -527,5 +530,10 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Bot filtering moved to events section
 /docs/pipeline/enrichments/filtering-bot-events/* /docs/events/filtering-bot-events/:splat 301
+
+# Custom streaming moved to its own destinations section
+/docs/destinations/forwarding-events/custom-integrations/* /docs/destinations/custom-streaming/:splat 301
+/docs/pipeline/enriched-tsv-format/* /docs/destinations/custom-streaming/enriched-tsv-format/:splat 301
+/docs/pipeline/enriched-stream-compression/* /docs/destinations/custom-streaming/enriched-stream-compression/:splat 301
 
 /deprecation-policy /lifecycle-policy 301

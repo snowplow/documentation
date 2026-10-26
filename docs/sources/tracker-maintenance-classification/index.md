@@ -3,11 +3,11 @@ title: "Tracker maintenance classification"
 sidebar_label: "Tracker maintenance classification"
 date: "2020-07-08"
 sidebar_position: 999
-description: "Understand Snowplow tracker maintenance groups including actively maintained, maintained, early release, and unsupported status with production readiness and update schedules."
-keywords: ["tracker maintenance", "support status", "production readiness"]
+description: "Understand the maintenance groups for Snowplow trackers, dbt packages, and Signals SDKs, including production readiness and update schedules."
+keywords: ["tracker maintenance", "support status", "production readiness", "Signals SDK", "dbt packages"]
 ---
 
-Snowplow Trackers and dbt packages have been categorized into 4 maintenance groups. These groups are designed to give some expectations into how they will maintained in the future. Each tracker GitHub repository contains a "Snowplow" Badge that shows the maintenance group for that specific tracker and links back to this page.
+Snowplow trackers, dbt packages, and Signals SDKs are categorized into four maintenance groups. These groups set expectations for how Snowplow maintains each project. Each GitHub repository contains a "Snowplow" badge that shows its maintenance group and links back to this page.
 
 * * *
 
@@ -26,7 +26,7 @@ Deprecated.
 <Badges badgeType="Early Release"></Badges>
 ```
 
-Pre-Version 1.0.0, may be missing core tracker features.
+Pre-Version 1.0.0, may be missing core features.
 Accepting community contributions.
 Snowplow Team will test and release contributions.
 Snowplow Team will update to fix critical or high severity vulnerabilities.

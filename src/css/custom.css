@@ -400,7 +400,7 @@ button.snowplow-button:focus {
   align-items: center;
   justify-content: center;
   height: 36px;
-  margin: auto 0 auto 0.5rem;
+  margin: auto 1rem auto 0.5rem;
   padding: 0 16px;
   border: none;
   border-radius: 4px;
@@ -418,6 +418,23 @@ button.snowplow-button:focus {
 
 /* Hide the auto-injected "opens in new tab" icon on the CTA button */
 [data-theme] a.navbar-cta svg {
+  display: none;
+}
+
+/* Plain Support link next to the free trial call to action */
+[data-theme] a.navbar-support-link {
+  color: var(--ifm-font-color-base);
+  font-weight: 500;
+}
+
+[data-theme] a.navbar-support-link:hover,
+[data-theme] a.navbar-support-link:focus {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+/* Hide the auto-injected "opens in new tab" icon on the Support link */
+[data-theme] a.navbar-support-link svg {
   display: none;
 }
 
@@ -926,6 +943,11 @@ aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
   font-size: 0.93825rem;
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
+}
+
+/* Slightly larger label for the AI hub sidebar entry */
+.menu__list-item.ai-hub-sidebar > .menu__list-item-collapsible > .menu__link {
+  font-size: 1.05rem;
 }
 
 .menu__link:hover {

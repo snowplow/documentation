@@ -19,7 +19,7 @@ Enrich compresses enriched events before writing them to the output stream. This
 
 :::danger[Compatible downstream applications required]
 
-Before enabling compression, you must ensure your downstream consumers support decompression. The following applications are compatible:
+Every application that reads from your enriched stream must support compressed records before you enable compression. All Snowplow applications support them from these versions:
 
 * [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) (since 2.2.0)
 * [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) (since 0.5.0)
@@ -29,7 +29,7 @@ Before enabling compression, you must ensure your downstream consumers support d
 * [Snowflake Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (since 0.6.0)
 * [Snowbridge](/docs/api-reference/snowbridge/index.md) (since 5.2.0)
 
-Do not enable this setting if your downstream consumer is not in this list.
+If you run your own consumer of the enriched stream, [update it to read compressed records](/docs/destinations/custom-streaming/enriched-stream-compression/index.md) first.
 
 :::
 
@@ -44,6 +44,12 @@ compression {
 ```
 
 See the [configuration reference](/docs/api-reference/enrichment-components/configuration-reference/index.md) for additional options such as the compression algorithm (`zstd` or `gzip`) and compression level.
+
+:::warning[Partition keys and attributes]
+
+When compression is enabled, Enrich batches events with different field values into one stream record, so it does not apply `output.good.partitionKey` (Kinesis and Kafka) or `output.good.attributes` (Pub/Sub message attributes and Kafka record headers) to the enriched stream. If a downstream consumer relies on these, change it to read the values from the enriched events instead.
+
+:::
 
 ### Impact on metrics
 

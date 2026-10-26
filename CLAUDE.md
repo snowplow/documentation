@@ -103,6 +103,15 @@ Critical warnings about severe consequences such as pipeline outages
 ## Tutorials
 See `/tutorials/_README.md` for tutorial-specific guidelines.
 
+## Release notes
+Product news and component release notes live in `release-notes/<slug>/index.md`, published at `/release-notes/`.
+
+* **New functionality needs a release note.** If a docs change documents a new feature, a behavior change, or new platform/warehouse support, add a release note in the same PR (or a follow-up PR, linked).
+* Editorial work does not: typo fixes, restructures, clarifications, and expanded examples for functionality that already shipped.
+* If you're unsure whether a change is user-facing enough to announce, ask rather than guessing.
+
+See [`release-notes/_README.md`](release-notes/_README.md) for the required frontmatter, the `category` and `components` values, and the writing rules.
+
 ## Development workflow
 * Use `yarn`, not `npm`.
 * Start dev server: `yarn start` or `yarn dev`

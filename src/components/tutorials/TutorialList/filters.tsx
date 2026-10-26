@@ -1,4 +1,5 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
+import { useHistory } from '@docusaurus/router'
 import { Checkbox } from '@site/src/components/ui/checkbox'
 import { Label } from '@site/src/components/ui/label'
 
@@ -50,6 +51,25 @@ function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
 }
 
 const TopicValues: string[] = Object.values(TopicType.Values)
+
+// Resolve a comma-separated query param against the canonical option values,
+// ignoring case, so hand-typed links still match checkbox values exactly
+function parseFilterParam(
+  params: URLSearchParams,
+  name: string,
+  canonicalValues: string[]
+): string[] {
+  const raw = params.get(name)
+  if (!raw) return []
+  return raw
+    .split(',')
+    .map((value) =>
+      canonicalValues.find(
+        (canonical) => canonical.toLowerCase() === value.trim().toLowerCase()
+      )
+    )
+    .filter((value): value is string => value !== undefined)
+}
 
 // Get available options based on current filters
 function getFilteredAvailableOptions(
@@ -171,31 +191,77 @@ function filterTutorials(
 
 // Custom hook to manage all filter state and derived data
 export const useTutorialFilters = (getParsedTutorials: (tutorials: Meta[]) => Tutorial[]) => {
+  const history = useHistory()
   const [search, setSearch] = useState('')
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
   const [selectedSnowplowTech, setSelectedSnowplowTech] = useState<string[]>([])
-  
+  // The page is server-rendered without a query string, so the URL is read
+  // after hydration; until then the URL must not be written back
+  const [syncedWithUrl, setSyncedWithUrl] = useState(false)
+
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
   )
-  
+
   const allAvailableUseCases = useMemo<string[]>(
     () => getAvailableUseCases(parsedTutorials),
     [parsedTutorials]
   )
-  
+
   const allAvailableTechnologies = useMemo<string[]>(
     () => getAvailableTechnologies(parsedTutorials),
     [parsedTutorials]
   )
-  
+
   const allAvailableSnowplowTech = useMemo<string[]>(
     () => getAvailableSnowplowTech(parsedTutorials),
     [parsedTutorials]
   )
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const topics = parseFilterParam(params, 'topic', TopicValues)
+    const useCases = parseFilterParam(params, 'useCase', allAvailableUseCases)
+    const technologies = parseFilterParam(
+      params,
+      'technology',
+      allAvailableTechnologies
+    )
+    const snowplowTech = parseFilterParam(
+      params,
+      'snowplowTech',
+      allAvailableSnowplowTech
+    )
+    if (topics.length > 0) setSelectedTopics(topics)
+    if (useCases.length > 0) setSelectedUseCases(useCases)
+    if (technologies.length > 0) setSelectedTechnologies(technologies)
+    if (snowplowTech.length > 0) setSelectedSnowplowTech(snowplowTech)
+    setSyncedWithUrl(true)
+  }, [])
+
+  // Reflect selections back into the URL so the current view is linkable
+  useEffect(() => {
+    if (!syncedWithUrl) return
+    const params = new URLSearchParams()
+    if (selectedTopics.length > 0) params.set('topic', selectedTopics.join(','))
+    if (selectedUseCases.length > 0)
+      params.set('useCase', selectedUseCases.join(','))
+    if (selectedTechnologies.length > 0)
+      params.set('technology', selectedTechnologies.join(','))
+    if (selectedSnowplowTech.length > 0)
+      params.set('snowplowTech', selectedSnowplowTech.join(','))
+    const query = params.toString()
+    history.replace({ search: query ? `?${query}` : '' })
+  }, [
+    syncedWithUrl,
+    selectedTopics,
+    selectedUseCases,
+    selectedTechnologies,
+    selectedSnowplowTech,
+  ])
 
   const filteredAvailableOptions = useMemo(() => {
     return getFilteredAvailableOptions(

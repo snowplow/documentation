@@ -38,11 +38,12 @@ Our dbt packages are available under a mix of licenses. For more information abo
 
 Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
-There are 4 core snowplow dbt packages:
+There are 5 core snowplow dbt packages:
 - [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-unified/#!/overview/snowplow_unified)): for modeling your web and mobile data for page and screen views, sessions, users, and consent
 - [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player)): for modeling your media elements for play statistics
 - [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your Ecommerce interactions across carts, products, checkouts, and transactions
 - [Snowplow Attribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-attribution/#!/overview/attribution)): used for Attribution Modeling with Snowplow
+- [Snowplow Agent Analytics](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-agent-analytics-data-model/index.md) ([dbt model docs](https://snowplow-incubator.github.io/dbt-snowplow-agent-analytics/#!/overview/snowplow_agent_analytics)): for modeling AI agent traffic to your site, and the human page views and sessions that AI products refer back
 
 We also have 2 utility packages:
 - [Snowplow Normalize](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/index.md) package that makes it easy for you to build models that transform your events data into a different structure that may be better suited for downstream consumers

@@ -19,6 +19,7 @@ import Link from '@docusaurus/Link'
 import { translate } from '@docusaurus/Translate'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 import DocSidebarItems from '@theme/DocSidebarItems'
+import { HeartHandshake } from 'lucide-react'
 
 // If we navigate to a category and it becomes active, it should automatically
 // expand itself
@@ -53,6 +54,24 @@ function useCategoryHrefWithSSRFallback(item) {
     }
     return findFirstSidebarItemLink(item)
   }, [item, isBrowser])
+}
+
+// Replaces "+" in a sidebar label with an icon, e.g. "Snowplow + AI".
+// Enable with `sidebar_custom_props: { plus_icon: true }` in the category's index page.
+function SidebarLabel({ label, customProps }) {
+  if (!customProps?.plus_icon || !label.includes('+')) return label
+  const [before, after] = label.split('+')
+  return (
+    <span>
+      {before}
+      <HeartHandshake
+        size="1em"
+        aria-hidden="true"
+        style={{ verticalAlign: '-0.125em' }}
+      />
+      {after}
+    </span>
+  )
 }
 
 function CollapseButton({ categoryLabel, collapsed, updateCollapsed }) {
@@ -175,7 +194,7 @@ export default function DocSidebarItemCategory({
               href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
               {...props}
             >
-              {label}
+              <SidebarLabel label={label} customProps={item.customProps} />
             </Link>
             {href && collapsible && (
               <CollapseButton

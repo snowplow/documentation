@@ -1,11 +1,16 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { convertHtmlToMarkdown } from './convert.js'
-import { writePages } from './write-pages.js'
+import { writePages, writeTutorialPages } from './write-pages.js'
 import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
+import {
+  attachSourceMetadata,
+  buildTutorialMeta,
+  sortPages,
+} from './content-metadata.js'
 
 /**
  * @param {import('@docusaurus/types').LoadContext} context
@@ -91,27 +96,35 @@ export default function pluginLlmsTxt(context, options) {
       // Enrich dbt config pages with variable tables from JSON schemas
       await enrichDbtSchemas(pages, context.siteDir)
 
+      // Read back the frontmatter Docusaurus doesn't carry into the built HTML,
+      // then put tutorial steps in step order and release notes newest first
+      await attachSourceMetadata(pages, context.siteDir)
+      const tutorialMeta = await buildTutorialMeta(context.siteDir)
+      const sortedPages = sortPages(pages)
+
       // Build the set of outdated route prefixes from frontmatter
       const outdatedPrefixes = await buildOutdatedPaths(context.siteDir)
 
-      // Write per-page .md files
+      // Write per-page .md files, plus one combined .md per tutorial
       if (enableMarkdownFiles) {
-        await writePages(outDir, pages, siteUrl, outdatedPrefixes)
+        await writePages(outDir, sortedPages, siteUrl, outdatedPrefixes)
+        await writeTutorialPages(outDir, sortedPages, siteUrl, tutorialMeta)
       }
 
       // Generate llms.txt index
-      await generateIndex(outDir, pages, {
+      await generateIndex(outDir, sortedPages, {
         siteTitle,
         siteDescription,
         siteUrl,
         enableMarkdownFiles,
         siteDir: context.siteDir,
         outdatedPrefixes,
+        tutorialMeta,
       })
 
       // Generate llms-full.txt
       if (enableLlmsFullTxt) {
-        await generateFull(outDir, pages, {
+        await generateFull(outDir, sortedPages, {
           siteTitle,
           siteDescription,
           siteUrl,

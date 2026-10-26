@@ -3,13 +3,15 @@ title: "CDN trackers"
 sidebar_position: 136
 sidebar_label: "CDN trackers"
 description: "Track page views at the CDN level to capture visits from bots, AI agents, and other clients that don't run JavaScript."
-keywords: ["cdn tracking", "cloudflare worker", "cloudfront access logs", "server-side tracking", "agent tracking"]
+keywords: ["cdn tracking", "cloudflare worker", "cloudfront access logs", "fastly log streaming", "server-side tracking", "agent tracking"]
 date: "2026-04-27"
 ---
 
 You might want to track page views by bots and AI agents to understand how they consume your content. Regular [web tracking](/docs/sources/web-trackers/index.md), however, does not capture these events because many bots and agents don't execute JavaScript.
 
 If your website is deployed through a CDN, you can track events at that level, which would include _all_ requests.
+
+CDN trackers are part of the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
 
 ```mermaid
 flowchart LR
@@ -29,3 +31,4 @@ For example, for single-page applications (SPAs), client-side tracking will corr
 
 * [Cloudflare](/docs/sources/cdn-trackers/cloudflare/index.md) — track requests using a Cloudflare Worker that sends page view events to Snowplow
 * [CloudFront](/docs/sources/cdn-trackers/cloudfront/index.md) — forward CloudFront standard access logs to Snowplow via Amazon Data Firehose
+* [Fastly](/docs/sources/cdn-trackers/fastly/index.md) — stream Fastly request logs to Snowplow via an HTTPS logging endpoint

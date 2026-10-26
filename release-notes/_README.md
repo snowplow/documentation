@@ -4,6 +4,25 @@ Product news and component release notes, published at
 [/release-notes/](https://docs.snowplow.io/release-notes/). These were migrated from the Pylon
 knowledge base; this directory is now the source of truth.
 
+## When to add a note
+
+Anything that changes what a user can do needs a note. If a docs PR documents a feature that
+didn't exist before, a change in behavior, or support for a new platform or warehouse, it
+needs an accompanying release note. Write it in the same PR where that's practical, or in a
+follow-up PR that links back to the docs change.
+
+Docs work that doesn't change the product doesn't need a note:
+
+- typo, grammar, and link fixes
+- restructures and rewrites of pages about functionality that already shipped
+- new examples, clarifications, or expanded reference tables for existing behavior
+- internal repo changes, such as tooling and CI
+
+The awkward cases are usually docs that catch up on something that shipped quietly weeks ago,
+and reference pages that gain a row for an option nobody announced. Both are worth a note. If
+you can't tell whether a change is user-facing enough to announce, ask the product manager for
+that area rather than guessing.
+
 ## Add a note
 
 Create `release-notes/<slug>/index.md`. The slug becomes the URL, so keep it short and

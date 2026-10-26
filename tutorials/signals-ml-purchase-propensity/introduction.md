@@ -17,7 +17,7 @@ In this tutorial you'll build a model that predicts whether an ecommerce session
 The hard part of a real-time model is usually not the model. It's making sure that the features it trains on are computed the same way as the features it sees in production. If you write a SQL pipeline for training and separate code for serving, the two drift apart, and the model quietly gets worse. Signals avoids this by using one definition for both:
 
 * The [dataset builder](/docs/signals/ml-training-datasets/) turns an [attribute group](/docs/signals/attributes/attribute-groups/) into a training table in your warehouse, computing each attribute as it was at each moment in the past
-* The same attribute group, once published, is computed in real time from your event stream and served through the [Signals API](/docs/signals/applications/retrieve-attributes/)
+* The same attribute group, once published, is computed in real time from your event stream and served through the [Signals Profiles API](/docs/signals/applications/retrieve-attributes/)
 
 By the end you'll have:
 
@@ -30,26 +30,36 @@ This tutorial is for data scientists and engineers who want to train models on S
 
 ## How the pieces fit together
 
-The model runs in your own service. Signals provides the features, both historical and live:
+The `purchase_propensity` attribute group you'll define is used by two Signals components. The dataset builder computes it from the history in your warehouse, for training. The streaming engine computes it from live events, and the Profiles API serves the result, for scoring. The model itself runs in your own code:
 
 ```mermaid
 flowchart LR
+    site["Your website"] -- "events" --> pipeline["Snowplow pipeline"]
+
+    subgraph warehouse["Your Snowflake"]
+        events[("atomic.events")]
+        table[("Training table")]
+    end
+
     subgraph signals["Signals"]
-        AG["Attribute group<br>purchase_propensity"]
+        builder["Dataset builder"]
+        engine["Streaming engine"]
+        profiles["Profiles API"]
     end
 
-    subgraph train["Training"]
-        DB["Dataset builder"] --> T["Training table<br>in Snowflake"] --> M["Trained model"]
+    subgraph yours["Your code"]
+        notebook["Training notebook"]
+        predict["/predict endpoint"]
     end
 
-    subgraph serve["Serving"]
-        API["Signals API"] --> P["Your /predict<br>endpoint"]
-    end
-
-    AG --> DB
-    AG --> API
-    M --> P
-    W["Your website"] -- "events" --> API
+    pipeline --> events
+    pipeline --> engine
+    events --> builder
+    builder --> table
+    table --> notebook
+    notebook -- "trained model" --> predict
+    engine --> profiles
+    profiles -- "live attributes" --> predict
 ```
 
 Each row in the training table is a moment in a past session, called an anchor. The row has the attribute values as they were at that moment, and a label that says whether the session went on to buy. At serving time, the live attribute values for a session describe the same moment: "now". The model sees the same columns in both cases.

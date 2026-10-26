@@ -2,6 +2,7 @@
   "title": "Example tutorial title",
   "label": "Data modeling",
   "description": "Example description for the tutorial card on the landing page.",
+  "date": "2025-01-01",
   "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Snowplow CLI"]

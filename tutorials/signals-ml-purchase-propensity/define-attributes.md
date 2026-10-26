@@ -12,6 +12,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 The features for your model are Signals [attributes](/docs/signals/attributes/attributes/). You'll define them once in this step, and use the same published definition for training and serving.
 
 You can create the definition with the Signals Python SDK, or by describing it to the [Snowplow Assistant](/docs/ai/console-agent/) in Console or to your own AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/). The rest of the tutorial is in Python either way, because it builds the dataset and trains the model in code.

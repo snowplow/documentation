@@ -7,6 +7,8 @@ keywords: ["purchase propensity model", "gradient boosting", "scikit-learn", "mo
 date: "2026-10-25"
 ---
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 In this step you'll train a classifier on the dataset, check how well it ranks sessions it hasn't seen, and save it for the `/predict` endpoint.
 
 ## Share the feature preparation code

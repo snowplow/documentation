@@ -12,6 +12,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+<NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-ml-purchase-propensity.ipynb" />
+
 In this tutorial you'll build a model that predicts whether an ecommerce session will end in a purchase, and score live sessions with it while the user is still browsing.
 
 The hard part of a real-time model is usually not the model. It's making sure that the features it trains on are computed the same way as the features it sees in production. If you write a SQL pipeline for training and separate code for serving, the two drift apart, and the model quietly gets worse. Signals avoids this by using one definition for both:
@@ -26,7 +28,7 @@ By the end you'll have:
 * A gradient-boosted model trained and evaluated on that dataset
 * A `/predict` endpoint that fetches a session's live attributes from Signals and returns a purchase score
 
-This tutorial is for data scientists and engineers who want to train models on Snowplow behavioral data. You'll write and run the code in your own Python environment, for example a Jupyter notebook. To create the attribute group, you can use either the Python SDK or an AI assistant: the [Snowplow Assistant](/docs/ai/console-agent/) in Console, or your own assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/). It should take around 30 minutes.
+This tutorial is for data scientists and engineers who want to train models on Snowplow behavioral data. You'll write and run the code in your own Python environment. To run it all in Google Colab instead, use the **Open in Colab** badge: the notebook has the same steps, and uses the sample data unless you switch it to your own. To create the attribute group, you can use either the Python SDK or an AI assistant: the [Snowplow Assistant](/docs/ai/console-agent/) in Console, or your own assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/). It should take around 30 minutes.
 
 ## How the pieces fit together
 

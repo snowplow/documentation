@@ -35,6 +35,7 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `emitterConfig`         | `EmitterConfiguration?`         | Configuration for how the events are sent.                                           |
 | `globalContextsConfig`  | `GlobalContextsConfiguration?`  | Configuration of global context entities attached to all events.                    |
 | `sessionConfig`         | `SessionConfiguration?`         | Configuration of session timeouts. See [session tracking](/docs/sources/flutter-tracker/sessions-and-data-model/index.md#configure-session-timeouts). |
+| `plugins`               | `List<PluginConfiguration>?`    | Plugins that inspect tracked events. See [plugins](/docs/sources/flutter-tracker/plugins/index.md). |
 
 :::note
 The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
@@ -49,6 +50,10 @@ The `GlobalContextsConfiguration` class was added in 0.9.0.
 
 :::note[Version support]
 The `SessionConfiguration` class was added in 0.11.1.
+:::
+
+:::note[Version support]
+The `plugins` argument was added in 0.11.2.
 :::
 
 ## Configuration of tracker properties: `TrackerConfiguration`

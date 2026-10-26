@@ -21,23 +21,22 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
-  collector: '3.8.0',
-  enrich: '6.14.0',
-  sqs2kinesis: '1.0.4',
+  collector: '3.9.0',
+  enrich: '6.14.1',
   dataflowRunner: '0.7.10',
   snowbridge: '6.1.0',
 
   // Loaders
-  bqLoader: '2.2.1',
+  bqLoader: '2.2.2',
   bqLoader1x: '1.7.2',
-  esLoader: '3.0.1',
+  esLoader: '3.0.2',
   gcsLoader: '0.5.7',
   postgresLoader: '0.3.3',
   rdbLoader: '6.9.0',
-  s3Loader: '3.2.0',
+  s3Loader: '3.2.1',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.14.0',
-  snowflakeStreamingLoader: '0.6.1',
+  lakeLoader: '0.14.1',
+  snowflakeStreamingLoader: '0.6.2',
   databricksStreamingLoader: '0.5.0',
 
   // Data Modelling
@@ -70,7 +69,7 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.15.0',
+  igluServer: '0.15.2',
   igluctl: '0.13.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '4.0.3',

@@ -92,10 +92,6 @@ You don't need a warehouse or a website. You'll load the training table from a f
 </TabItem>
 </Tabs>
 
-:::note[A pipeline is required]
-Signals computes the live attributes from events flowing through your pipeline, so you can't complete this tutorial with [Snowplow Micro](/docs/testing/snowplow-micro/).
-:::
-
 Install the Python packages you'll use:
 
 ```bash

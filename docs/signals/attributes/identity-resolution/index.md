@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The same person often reaches you through more than one identifier. For example, a user browses anonymously with a `domain_userid` cookie, then logs in with a `user_id`. Attributes keyed on `domain_userid` or `user_id` keep that activity in separate profiles.
 
-With identity resolution, Signals calculates attributes against the Snowplow ID that [Identities](/docs/identities/index.md) assigns to each person, so all of their activity counts toward one profile. Your application keeps reading with whichever identifier it already has, and Signals returns that person's attributes.
+With identity resolution, Signals calculates attributes against the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) that [Identities](/docs/identities/index.md) assigns to each person, so all of their activity counts toward one profile. Your application keeps reading with whichever identifier it already has, and Signals returns that person's attributes.
 
 ## How identity resolution works
 
@@ -36,7 +36,7 @@ To use identity resolution, you need:
 * The identifiers you want to read by included in your Identities configuration. For advice on picking them, see [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md).
 * Stream attribute groups. Attribute groups keyed on `snowplow_id` can't use a warehouse source or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 
-{/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. */}
+{/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. The Python SDK needs the release with AISP-1742 (lookup_identifiers and the built-in snowplow_id key). The Node.js SDK needs no change. */}
 
 ## Configure the snowplow_id attribute key
 
@@ -55,6 +55,8 @@ Choose the identifiers your application has at the moment it reads attributes. T
 | Occasional ID | A hashed email address, a loyalty card number, or another field the user provides now and then | Only the events that capture it, such as a newsletter signup or checkout | The person it was last seen with, which can be out of date until it appears on another event |
 
 The names depend on your Identities configuration. For example, your known ID might be a custom field called `acme_customer_id`.
+
+Some identifiers are shared by many people. For example, offices, households, and mobile networks put many people behind one IP address. A read by a shared identifier returns whoever was most recently seen with it, which might not be the person making the request. Select one only if that's acceptable for your use case.
 
 If you use an email address as an identifier, send and read it hashed rather than as plain text, so the address doesn't appear in your requests or logs. Normalize the address before hashing it, for example by trimming spaces and converting it to lowercase. Hash it the same way when you track it and when you read by it, so that the values match.
 
@@ -79,16 +81,48 @@ Select the lookup identifiers on the `snowplow_id` attribute key.
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-{/* TODO: write once the Console UI is final. Add a screenshot to ../../images/. */}
+Navigate to **Signals** > **Attribute keys** in Console and open the `snowplow_id` key. The **Lookup identifiers** card lists the identifiers from your pipeline's [Identities configuration](/docs/identities/configuration/index.md), in priority order, with the property each one is read from.
 
-Navigate to **Signals** > **Attribute keys** in Console and open the `snowplow_id` key. Console lists the identifiers from your pipeline's Identities configuration. Select up to three, and save.
+![The snowplow_id attribute key in Console. The Lookup identifiers card lists five Identities identifiers with their priority, property, and whether they're unique. user_id, domain_userid, and client_session_user_id are enabled for lookup. user_ipaddress and refr_domain_userid aren't.](../../images/identity-resolution-console-lookup-identifiers.png)
+
+To select lookup identifiers:
+
+1. Click **Edit**. If no identifiers are enabled yet, you can click **Enable identifiers** instead.
+2. Under **Lookup identifiers**, select up to three identifiers.
+3. Click **Update attribute key**.
+
+![The Edit snowplow_id page in Console. In the Lookup identifiers section, user_id, domain_userid, and client_session_user_id are selected, and user_ipaddress and refr_domain_userid aren't. Below them is the Update attribute key button.](../../images/identity-resolution-console-edit-lookup-identifiers.png)
+
+Console flags the `snowplow_id` key when its selection and your Identities configuration don't match:
+
+| Console shows | Cause | What to do |
+| --- | --- | --- |
+| **Requires Identities** in the attribute keys list | Your pipeline doesn't have Identities set up | Click **Configure** to set up Identities. See [Configure Identities](/docs/identities/configuration/index.md) |
+| **Needs attention** in the attribute keys list | A selected identifier was removed from your Identities configuration | Open the key and click **Remove from this key**, or add the identifier back in Identities. You can't change the selection until you do |
+| **Identifiers are still enabled without Identities** on the key | Identities was removed from your pipeline while identifiers were selected | Click **Clear identifiers** |
+
+The **Configure** button only appears if you have permission to create or edit the Identities configuration.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-{/* TODO: SDK support is pending. Replace this with the SDK example once it's released. */}
+Publish an `AttributeKey` named `snowplow_id`, with `lookup_identifiers` set to the names of up to three identifiers from your [Identities configuration](/docs/identities/configuration/index.md):
 
-Python SDK support for lookup identifiers is coming soon.
+```python
+from snowplow_signals import AttributeKey, Signals
+
+sp_signals = Signals({{ config }})
+
+sp_signals.publish([
+    AttributeKey(name="snowplow_id", lookup_identifiers=["domain_userid", "user_id"]),
+])
+```
+
+The SDK fills in the rest of the built-in key's definition, so don't set `property` or `key`.
+
+Every name must be in your current Identities configuration. If one isn't, for example because of a typo or because you've removed it from Identities, Signals rejects the change with an HTTP 422 error that names it.
+
+Publishing `snowplow_id` without `lookup_identifiers` keeps the current selection, including one made in Console. To remove every lookup identifier, set `lookup_identifiers` to an empty list.
 
 </TabItem>
 </Tabs>
@@ -98,6 +132,20 @@ After you change the selection, a new lookup identifier resolves from the next e
 ### Create attribute groups keyed on snowplow_id
 
 To calculate attributes per person, create a stream [attribute group](/docs/signals/attributes/attribute-groups/index.md) and select `snowplow_id` as its attribute key.
+
+In the Python SDK, set `attribute_key` to the built-in `snowplow_id`:
+
+```python
+from snowplow_signals import StreamAttributeGroup, snowplow_id
+
+person_attribute_group = StreamAttributeGroup(
+    name="person_attributes",
+    version=1,
+    attribute_key=snowplow_id,
+    owner="user@company.com",
+    attributes=[page_view_count],
+)
+```
 
 ## Retrieve attributes by a lookup identifier
 

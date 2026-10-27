@@ -16,11 +16,17 @@ The same person often reaches you through more than one identifier. For example,
 
 With identity resolution, Signals calculates attributes against the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) that [Identities](/docs/identities/index.md) assigns to each person, so all of their activity counts toward one profile. Your application keeps reading with whichever identifier it already has, and Signals returns that person's attributes.
 
+If Identities is already set up on your pipeline, setting up identity resolution takes three steps, with no changes to your application or its reads:
+
+1. [Select up to three lookup identifiers](#select-lookup-identifiers) on the built-in `snowplow_id` attribute key, such as `domain_userid` and `user_id`.
+2. [Create stream attribute groups](#create-attribute-groups-keyed-on-snowplow_id) keyed on `snowplow_id`, and publish them.
+3. [Read attributes](#retrieve-attributes-by-a-lookup-identifier) as before, with a lookup identifier as the attribute key.
+
 ## How identity resolution works
 
 Identities resolves each event to a Snowplow ID and attaches it to the event in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Signals includes a built-in `snowplow_id` [attribute key](/docs/signals/attributes/attribute-keys/index.md) that reads the Snowplow ID from that entity, so you can calculate attributes per person instead of per device or per session.
 
-Your application doesn't need to know the Snowplow ID, and shouldn't rely on it: when Identities [merges](/docs/identities/concepts/merges/index.md) two Snowplow IDs, the person is represented by the one that's kept. Instead, to read attributes keyed on `snowplow_id`, you choose up to three **lookup identifiers** from the identifiers in your Identities configuration. These are the identifiers your application can read attributes by.
+Your application doesn't need to know the Snowplow ID, and shouldn't rely on it: when Identities [merges](/docs/identities/concepts/merges/index.md) two Snowplow IDs, the person is represented by the one that's kept. Instead, to read attributes keyed on `snowplow_id`, you choose up to three **lookup identifiers** from the identifiers in your Identities configuration. These are the identifiers your application can read attributes by. Each read uses one identifier, so selecting several lets each part of your application read the same person with the identifier it has. For example, your website can read by the `domain_userid` cookie, and your backend by the `user_id` of a logged-in user.
 
 When you read by a lookup identifier, Signals returns the attributes of the person that identifier was most recently seen with on your events.
 
@@ -36,7 +42,7 @@ To use identity resolution, you need:
 * The identifiers you want to read by included in your Identities configuration. For advice on picking them, see [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md).
 * Stream attribute groups. Attribute groups keyed on `snowplow_id` can't use a warehouse source or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 
-{/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. The Python SDK needs the release with AISP-1742 (lookup_identifiers and the built-in snowplow_id key). The Node.js SDK needs no change. */}
+{/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. The Python SDK needs the release with AISP-1742 (lookup_identifiers and the built-in snowplow_id key). The Node.js SDK needs no change. The Snowplow Assistant and MCP server need console-agent #352 (AISP-1794) in production. */}
 
 ## Configure the snowplow_id attribute key
 
@@ -127,6 +133,8 @@ Publishing `snowplow_id` without `lookup_identifiers` keeps the current selectio
 </TabItem>
 </Tabs>
 
+You can also ask the [Snowplow Assistant](/docs/ai/console-agent/index.md) or an agent connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) to select lookup identifiers, for example to let your application read `snowplow_id` attributes by `domain_userid` and `user_id`.
+
 After you change the selection, a new lookup identifier resolves from the next event that carries it. You don't need to republish your attribute groups. If you remove a lookup identifier, reads by it return an HTTP 400 error immediately.
 
 ### Create attribute groups keyed on snowplow_id
@@ -180,8 +188,8 @@ You can only read attributes keyed on `snowplow_id` by `snowplow_id` or by one o
 
 | Situation | What the read returns |
 | --- | --- |
-| The identifier appeared on an event since you selected it | The attributes of the person it was most recently seen with |
-| The identifier hasn't appeared on an event since you selected it, or has [expired](#decide-which-identifiers-to-use) | `null` for each attribute |
+| The identifier appeared on an event while it was a lookup identifier | The attributes of the person it was most recently seen with |
+| The identifier hasn't appeared on an event while it was a lookup identifier, or has [expired](#decide-which-identifiers-to-use) | `null` for each attribute |
 | The attribute key is neither `snowplow_id` nor one of its lookup identifiers, for example one you haven't selected or have removed | An HTTP 400 error that lists the lookup identifiers you can use |
 
 After a [merge](#cross-device), an identifier keeps returning the Snowplow ID that isn't kept until it appears on another event.
@@ -191,8 +199,6 @@ Signals links an identifier to a person based on the identifiers that arrive on 
 
 Reading attributes needs an API key, so reads run on your backend. Before your backend shows a person's attributes to the user, or acts on them in a reply, check that the identifier belongs to that user, for example a `user_id` from an authenticated session. Treat reads by an anonymous ID as unverified.
 :::
-
-{/* TODO: review the warning wording with the team. Mitigations are planned (M5). */}
 
 ## Supported use cases
 
@@ -335,11 +341,8 @@ These apply whichever use case you're working with:
 * **Stream attribute groups only.** Attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 * **Interventions can't target `snowplow_id`.** An [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
 * **Deleting by identifier doesn't delete the person's attributes.** To delete data, call the Signals API's `DELETE /api/v1/{attribute_key}/{identifier}` endpoint. Deleting by a lookup identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain. To delete the person's attributes, use `snowplow_id` as the attribute key and their Snowplow ID as the identifier. You can find it on their events in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Reads by their lookup identifiers then return `null`. Deleting doesn't remove the person from Identities, so new events calculate their attributes again under the same Snowplow ID.
-{/* TODO: the interventions bullet's "Signals rejects the intervention" is only true once signals-monorepo #808 merges, and whether to block at all is still open. Reword once decided. */}
 
 {/* TODO: add test_deleting_by_snowplow_id_removes_the_persons_attributes to the e2e tests (#799). */}
-
-{/* TODO: confirm with engineering whether re-selecting a removed lookup identifier within the TTL makes its old redirect keys resolve again, which would contradict the "hasn't appeared since you selected it" row. */}
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

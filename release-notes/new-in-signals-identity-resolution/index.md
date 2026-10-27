@@ -8,7 +8,7 @@ components:
   - "Signals"
   - "Identities"
 ---
-{/* TODO: set the date to the release day, and fill in the minimum signals-api and snowplow-signals versions below. Merge only once console-agent #352 (AISP-1794) is in production. */}
+{/* TODO: set the date to the release day, and add the minimum Signals and Python SDK versions. */}
 
 The same person often reaches you through more than one identifier. They browse anonymously with a `domain_userid` cookie, log in with a `user_id`, and come back on their phone. Until now, Signals attributes were keyed on one of those identifiers, so each one built a separate profile of the same person.
 

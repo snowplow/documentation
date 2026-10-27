@@ -30,7 +30,7 @@ Identity resolution works best today for people who browse anonymously and then 
 
 Identities resolves each event to a Snowplow ID and attaches it to the event in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Signals includes a built-in `snowplow_id` [attribute key](/docs/signals/attributes/attribute-keys/index.md) that reads the Snowplow ID from that entity, so you can calculate attributes per person instead of per device or per session.
 
-Your application doesn't need to know the Snowplow ID, and shouldn't rely on it: when Identities [merges](/docs/identities/concepts/merges/index.md) two Snowplow IDs, the person is represented by the one that's kept. Instead, to read attributes keyed on `snowplow_id`, you choose up to three **lookup identifiers** from the identifiers in your Identities configuration. These are the identifiers your application can read attributes by. Each read uses one identifier, so selecting several lets each part of your application read the same person with the identifier it has. For example, your website can read by the `domain_userid` cookie, and your backend by the `user_id` of a logged-in user.
+Your application doesn't need to know the Snowplow ID, and shouldn't rely on it: when Identities [merges](/docs/identities/concepts/merges/index.md) two Snowplow IDs, the person is represented by the one that's kept. Instead, to read attributes keyed on `snowplow_id`, you choose up to three lookup identifiers from the identifiers in your Identities configuration. These are the identifiers your application can read attributes by. Each read uses one identifier, so selecting several lets each part of your application read the same person with the identifier it has. For example, your website can read by the `domain_userid` cookie, and your backend by the `user_id` of a logged-in user.
 
 When you read by a lookup identifier, Signals returns the attributes of the person that identifier was most recently seen with on your events.
 
@@ -44,7 +44,7 @@ For examples of what a read returns, see [Supported use cases](#supported-use-ca
 
 To use identity resolution, you need Identities set up on the same pipeline as your Signals deployment, with the identifiers you want to read by in its configuration, and that configuration finished deploying. You can set it up yourself in Console. See [Configure Identities](/docs/identities/configuration/index.md), and for advice on picking identifiers, [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md).
 
-{/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. The Python SDK needs the release with AISP-1742 (lookup_identifiers and the built-in snowplow_id key). The Node.js SDK needs no change. The Snowplow Assistant and MCP server need console-agent #352 (AISP-1794) in production. */}
+{/* TODO: add the minimum Signals and Python SDK versions. */}
 
 ## Configure the snowplow_id attribute key
 
@@ -79,10 +79,10 @@ Each event that carries an identifier keeps it linked to its person for as long 
 
 Signals keeps the link from an identifier to its person for as long as your longest-lived attribute keyed on `snowplow_id` keeps its data, counted from the identifier's latest event:
 
-* A lifetime attribute keeps its data for its attribute group's [TTL](/docs/signals/attributes/attribute-groups/index.md#attribute-lifetimes). For stream attribute groups, that's 7 days by default.
+* A lifetime attribute keeps its data for its attribute group's [TTL](/docs/signals/attributes/attribute-groups/index.md#attribute-lifetimes). For stream attribute groups, that's seven days by default.
 * A windowed attribute keeps its data for slightly longer than its period, for example 32 days for a 30-day window.
 
-For example, if all your attributes keyed on `snowplow_id` are lifetime attributes with the default TTL, an identifier stops resolving after 7 days without an event.
+For example, if all your attributes keyed on `snowplow_id` are lifetime attributes with the default TTL, an identifier stops resolving after seven days without an event.
 
 </details>
 
@@ -222,11 +222,11 @@ Identity resolution is being released in stages. This table shows which use case
 
 The [limitations](#limitations-for-every-use-case) at the end of this section apply to all of them.
 
-The examples show what a read returns for one lookup identifier of each [role](#decide-which-identifiers-to-use): `domain_userid` as the anonymous ID, `user_id` as the known ID, and `hashed_email` as the occasional ID. In the **Returns** column, a Snowplow ID such as `sp_001` stands for the attributes calculated for that Snowplow ID.
+The examples show what a read returns for one lookup identifier of each [role](#decide-which-identifiers-to-use): `domain_userid` as the anonymous ID, `user_id` as the known ID, and `hashed_email` as the occasional ID. In the Returns column, a Snowplow ID such as `sp_001` stands for the attributes calculated for that Snowplow ID.
 
 ### Anonymous to known
 
-✅ **Supported.** A user browses anonymously, then logs in to a new account, or to an account they've already logged in to on this device. Identities links the `user_id` to the device's Snowplow ID, so all of the user's activity, including the browsing from before the login, counts toward one Snowplow ID.
+Supported. A user browses anonymously, then logs in to a new account, or to an account they've already logged in to on this device. Identities links the `user_id` to the device's Snowplow ID, so all of the user's activity, including the browsing from before the login, counts toward one Snowplow ID.
 
 ![Diagram: three events on one device. A product page view carries domain_userid d123, the login adds user_id u001, and the newsletter signup adds hashed_email. All three events count toward Snowplow ID sp_001.](../../images/identity-resolution-anonymous-to-known.svg)
 
@@ -249,7 +249,7 @@ The examples show what a read returns for one lookup identifier of each [role](#
 
 ### Cross-domain
 
-✅ **Supported.** A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
+Supported. A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
 
 If the user has visited the second site before, its `domain_userid` already has its own Snowplow ID, and Identities merges the two. In that case, the [cross-device](#cross-device) limitations apply.
 
@@ -273,7 +273,7 @@ If the user has visited the second site before, its `domain_userid` already has 
 
 ### Shared device
 
-✅ **Supported**, when `user_id` is marked as a [unique identifier](/docs/identities/concepts/unique-identifiers/index.md) in Identities. Each person who logs in keeps their own Snowplow ID. Reads by a known or occasional ID return the right person. Reads by the device's anonymous ID return whoever used the device most recently.
+Supported when `user_id` is marked as a [unique identifier](/docs/identities/concepts/unique-identifiers/index.md) in Identities. Each person who logs in keeps their own Snowplow ID. Reads by a known or occasional ID return the right person. Reads by the device's anonymous ID return whoever used the device most recently.
 
 To stop one person's anonymous activity counting toward the next, [reset identifiers on logout](/docs/identities/configuration/choosing-identifiers/index.md#reset-identifiers-on-logout).
 
@@ -289,7 +289,7 @@ To stop one person's anonymous activity counting toward the next, [reset identif
 
 | Read by | Returns |
 | --- | --- |
-| `domain_userid` (`d123`) | `sp_002`, Ben, because he used the tablet last |
+| `domain_userid` (`d123`) | `sp_002`, Ben, who used the tablet last |
 | `user_id` (`u001`) or `hashed_email` (`3f9a…c21e`) | `sp_001`, Ann |
 | `user_id` (`u002`) | `sp_002`, Ben |
 
@@ -297,12 +297,12 @@ To stop one person's anonymous activity counting toward the next, [reset identif
 
 ### Cross-device
 
-⚠️ **Partly supported.** A user browses anonymously on a device or browser that isn't linked to their account yet, for example a new phone or a browser with cleared cookies, then logs in to their existing account. The device already has its own Snowplow ID, so Identities [merges](/docs/identities/concepts/merges/index.md) the two and keeps the older one. All new activity counts toward the Snowplow ID that's kept.
+Partly supported. A user browses anonymously on a device or browser that isn't linked to their account yet, for example a new phone or a browser with cleared cookies, then logs in to their existing account. The device already has its own Snowplow ID, so Identities [merges](/docs/identities/concepts/merges/index.md) the two and keeps the older one. All new activity counts toward the Snowplow ID that's kept.
 
 What isn't supported:
 
-* **Activity from before the merge stays split.** Attributes calculated under the Snowplow ID that isn't kept aren't added to the one that's kept.
-* **Identifiers switch over only when they next appear.** An identifier that hasn't appeared on an event since the merge keeps returning the Snowplow ID that isn't kept until it does. For an anonymous ID, this is usually the first event of a returning visit. For an occasional ID, such as a hashed email, it can last until the user next provides it.
+* Activity from before the merge stays split: attributes calculated under the Snowplow ID that isn't kept aren't added to the one that's kept.
+* Identifiers switch over only when they next appear: an identifier that hasn't appeared on an event since the merge keeps returning the Snowplow ID that isn't kept until it does. For an anonymous ID, this is usually the first event of a returning visit. For an occasional ID, such as a hashed email, it can last until the user next provides it.
 
 ![Diagram: on a laptop, earlier, the website's domain_userid d123, user_id u001, and hashed_email belong to sp_001. A new phone browses as domain_userid p456 under sp_002, then logs in with user_id u001. Identities merges sp_002 into sp_001, which is kept. Each identifier reads the Snowplow ID it was last seen with, so from the login on, the phone's p456 reads sp_001, and the phone browsing from before the login stays under sp_002. Adding sp_002's attribute values to sp_001 on a merge is coming soon.](../../images/identity-resolution-cross-device.svg)
 
@@ -345,11 +345,11 @@ If the device's Snowplow ID is the older one, for example because the user brows
 
 These apply whichever use case you're working with:
 
-* **No backfill.** Attributes keyed on `snowplow_id` include only events processed after you publish the attribute group, so they start empty and build up over time. An identifier can read them only after it appears on an event sent after you select it as a lookup identifier.
-* **Occasional IDs can expire.** An identifier that doesn't appear on an event for longer than your attributes keep their data stops resolving. See [Decide which identifiers to use](#decide-which-identifiers-to-use).
-* **Stream attribute groups only.** Attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
-* **Interventions can't target `snowplow_id`.** An [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
-* **Deleting by identifier doesn't delete the person's attributes.** To delete data, call the Signals API's `DELETE /api/v1/{attribute_key}/{identifier}` endpoint. Deleting by a lookup identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain. To delete the person's attributes, use `snowplow_id` as the attribute key and their Snowplow ID as the identifier. You can find it on their events in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Reads by their lookup identifiers then return `null`. Deleting doesn't remove the person from Identities, so new events calculate their attributes again under the same Snowplow ID.
+* No backfill: attributes keyed on `snowplow_id` include only events processed after you publish the attribute group, so they start empty and build up over time. An identifier can read them only after it appears on an event sent after you select it as a lookup identifier.
+* Occasional IDs can expire: an identifier that doesn't appear on an event for longer than your attributes keep their data stops resolving. See [Decide which identifiers to use](#decide-which-identifiers-to-use).
+* Stream attribute groups only: attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
+* Interventions can't target `snowplow_id`: an [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
+* Deleting by identifier doesn't delete the person's attributes: to delete data, call the Signals API's `DELETE /api/v1/{attribute_key}/{identifier}` endpoint. Deleting by a lookup identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain. To delete the person's attributes, use `snowplow_id` as the attribute key and their Snowplow ID as the identifier. You can find it on their events in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Reads by their lookup identifiers then return `null`. Deleting doesn't remove the person from Identities, so new events calculate their attributes again under the same Snowplow ID.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

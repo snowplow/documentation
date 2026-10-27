@@ -36,11 +36,7 @@ For examples of what a read returns, see [Supported use cases](#supported-use-ca
 
 ## Before you start
 
-To use identity resolution, you need:
-
-* Identities set up on the same pipeline as your Signals deployment, with a configuration that has finished deploying. See [Configure Identities](/docs/identities/configuration/index.md).
-* The identifiers you want to read by included in your Identities configuration. For advice on picking them, see [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md).
-* Stream attribute groups. Attribute groups keyed on `snowplow_id` can't use a warehouse source or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
+To use identity resolution, you need Identities set up on the same pipeline as your Signals deployment, with the identifiers you want to read by in its configuration, and that configuration finished deploying. You can set it up yourself in Console. See [Configure Identities](/docs/identities/configuration/index.md), and for advice on picking identifiers, [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md).
 
 {/* TODO: confirm the minimum versions (Signals, Python SDK, Node.js SDK) once released. The Python SDK needs the release with AISP-1742 (lookup_identifiers and the built-in snowplow_id key). The Node.js SDK needs no change. The Snowplow Assistant and MCP server need console-agent #352 (AISP-1794) in production. */}
 
@@ -62,9 +58,13 @@ Choose the identifiers your application has at the moment it reads attributes. T
 
 The names depend on your Identities configuration. For example, your known ID might be a custom field called `acme_customer_id`.
 
+:::tip[Shared identifiers]
 Some identifiers are shared by many people. For example, offices, households, and mobile networks put many people behind one IP address. A read by a shared identifier returns whoever was most recently seen with it, which might not be the person making the request. Select one only if that's acceptable for your use case.
+:::
 
+:::tip[Hash email addresses]
 If you use an email address as an identifier, send and read it hashed rather than as plain text, so the address doesn't appear in your requests or logs. Normalize the address before hashing it, for example by trimming spaces and converting it to lowercase. Hash it the same way when you track it and when you read by it, so that the values match.
+:::
 
 Each event that carries an identifier keeps it linked to its person for as long as your attributes keep their data. Anonymous and known IDs appear often enough to stay linked. An occasional ID, such as a hashed email captured once at signup, can stop resolving between appearances.
 

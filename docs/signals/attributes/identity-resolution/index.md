@@ -193,13 +193,7 @@ const attributes = await signals.getServiceAttributes({
 </TabItem>
 </Tabs>
 
-You can only read attributes keyed on `snowplow_id` by `snowplow_id` or by one of its lookup identifiers. What a read returns depends on the attribute key you use, and on whether Signals has seen the identifier:
-
-| Situation | What the read returns |
-| --- | --- |
-| The identifier appeared on an event while it was a lookup identifier | The attributes of the person it was most recently seen with |
-| The identifier hasn't appeared on an event while it was a lookup identifier, or has [expired](#decide-which-identifiers-to-use) | `null` for each attribute |
-| The attribute key is neither `snowplow_id` nor one of its lookup identifiers, for example one you haven't selected or have removed | An HTTP 400 error that lists the lookup identifiers you can use |
+A read returns the attributes of the person the identifier was most recently seen with. If Signals hasn't seen the identifier on an event yet, or its link has [expired](#decide-which-identifiers-to-use), each attribute is `null`. Reading by any attribute key other than `snowplow_id` or one of its lookup identifiers returns an HTTP 400 error that lists the ones you can use.
 
 After a [merge](#cross-device), an identifier keeps returning the Snowplow ID that isn't kept until it appears on another event.
 

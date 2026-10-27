@@ -34,8 +34,6 @@ Your application doesn't need to know the Snowplow ID, and shouldn't rely on it:
 
 When you read by a lookup identifier, Signals returns the attributes of the person that identifier was most recently seen with on your events.
 
-To find that person, Signals looks up the identifier before it reads the attributes. In our load tests with three lookup identifiers, this added about 1 ms to each read, and the extra writes had no measurable effect on event processing at normal load. Your results depend on your deployment and traffic.
-
 ![Diagram: one person's domain_userid, user_id, and hashed_email arrive on events. Identities stamps a Snowplow ID on each event, Signals calculates attributes per Snowplow ID, and your application reads them by any lookup identifier instead of the Snowplow ID. Each lookup identifier reads the person it was most recently seen with.](../../images/identity-resolution-overview.svg)
 
 For examples of what a read returns, see [Supported use cases](#supported-use-cases).
@@ -68,23 +66,7 @@ The names depend on your Identities configuration. For example, your known ID mi
 Some identifiers are shared by many people. For example, offices, households, and mobile networks put many people behind one IP address. A read by a shared identifier returns whoever was most recently seen with it, which might not be the person making the request. Select one only if that's acceptable for your use case.
 :::
 
-:::tip[Hash email addresses]
-If you use an email address as an identifier, send and read it hashed rather than as plain text, so the address doesn't appear in your requests or logs. Normalize the address before hashing it, for example by trimming spaces and converting it to lowercase. Hash it the same way when you track it and when you read by it, so that the values match.
-:::
-
 Each event that carries an identifier keeps it linked to its person for as long as your attributes keep their data. Anonymous and known IDs appear often enough to stay linked. An occasional ID, such as a hashed email captured once at signup, can stop resolving between appearances.
-
-<details>
-<summary>How long an identifier stays linked</summary>
-
-Signals keeps the link from an identifier to its person for as long as your longest-lived attribute keyed on `snowplow_id` keeps its data, counted from the identifier's latest event:
-
-* A lifetime attribute keeps its data for its attribute group's [TTL](/docs/signals/attributes/attribute-groups/index.md#attribute-lifetimes). For stream attribute groups, that's seven days by default.
-* A windowed attribute keeps its data for slightly longer than its period, for example 32 days for a 30-day window.
-
-For example, if all your attributes keyed on `snowplow_id` are lifetime attributes with the default TTL, an identifier stops resolving after seven days without an event.
-
-</details>
 
 ### Select lookup identifiers
 

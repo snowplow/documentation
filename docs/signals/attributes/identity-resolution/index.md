@@ -22,6 +22,10 @@ If Identities is already set up on your pipeline, setting up identity resolution
 2. [Create stream attribute groups](#create-attribute-groups-keyed-on-snowplow_id) keyed on `snowplow_id`, and publish them.
 3. [Read attributes](#retrieve-attributes-by-a-lookup-identifier) as before, with a lookup identifier as the attribute key.
 
+Attributes start empty and build up from the events processed after you publish the attribute group, so a lifetime attribute covers only the activity since then.
+
+Identity resolution works best today for people who browse anonymously and then log in on the same device, and for people who move between your own sites. Logging in to an existing account from another device is [partly supported](#cross-device) in this release, with full support coming soon. See [Supported use cases](#supported-use-cases) for what a read returns in each case.
+
 ## How identity resolution works
 
 Identities resolves each event to a Snowplow ID and attaches it to the event in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Signals includes a built-in `snowplow_id` [attribute key](/docs/signals/attributes/attribute-keys/index.md) that reads the Snowplow ID from that entity, so you can calculate attributes per person instead of per device or per session.
@@ -29,6 +33,8 @@ Identities resolves each event to a Snowplow ID and attaches it to the event in 
 Your application doesn't need to know the Snowplow ID, and shouldn't rely on it: when Identities [merges](/docs/identities/concepts/merges/index.md) two Snowplow IDs, the person is represented by the one that's kept. Instead, to read attributes keyed on `snowplow_id`, you choose up to three **lookup identifiers** from the identifiers in your Identities configuration. These are the identifiers your application can read attributes by. Each read uses one identifier, so selecting several lets each part of your application read the same person with the identifier it has. For example, your website can read by the `domain_userid` cookie, and your backend by the `user_id` of a logged-in user.
 
 When you read by a lookup identifier, Signals returns the attributes of the person that identifier was most recently seen with on your events.
+
+To find that person, Signals looks up the identifier before it reads the attributes. In our load tests with three lookup identifiers, this added about 1 ms to each read, and the extra writes had no measurable effect on event processing at normal load. Your results depend on your deployment and traffic.
 
 ![Diagram: one person's domain_userid, user_id, and hashed_email arrive on events. Identities stamps a Snowplow ID on each event, Signals calculates attributes per Snowplow ID, and your application reads them by any lookup identifier instead of the Snowplow ID. Each lookup identifier reads the person it was most recently seen with.](../../images/identity-resolution-overview.svg)
 
@@ -339,7 +345,7 @@ If the device's Snowplow ID is the older one, for example because the user brows
 
 These apply whichever use case you're working with:
 
-* **No backfill.** Attributes keyed on `snowplow_id` include only events processed after you publish the attribute group. An identifier can read them only after it appears on an event sent after you select it as a lookup identifier.
+* **No backfill.** Attributes keyed on `snowplow_id` include only events processed after you publish the attribute group, so they start empty and build up over time. An identifier can read them only after it appears on an event sent after you select it as a lookup identifier.
 * **Occasional IDs can expire.** An identifier that doesn't appear on an event for longer than your attributes keep their data stops resolving. See [Decide which identifiers to use](#decide-which-identifiers-to-use).
 * **Stream attribute groups only.** Attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 * **Interventions can't target `snowplow_id`.** An [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.

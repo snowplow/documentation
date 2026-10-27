@@ -131,9 +131,18 @@ Every name must be in your current Identities configuration. If one isn't, for e
 Publishing `snowplow_id` without `lookup_identifiers` keeps the current selection, including one made in Console. To remove every lookup identifier, set `lookup_identifiers` to an empty list.
 
 </TabItem>
-</Tabs>
+<TabItem value="assistant" label="Snowplow Assistant">
 
-You can also ask the [Snowplow Assistant](/docs/ai/console-agent/index.md) or an agent connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) to select lookup identifiers, for example to let your application read `snowplow_id` attributes by `domain_userid` and `user_id`.
+Ask the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console to select the lookup identifiers, naming the identifiers you want, for example:
+
+```txt
+Let my application read snowplow_id attributes by domain_userid and user_id.
+```
+
+The Assistant asks you to approve the change before it saves it. You can ask the same of an agent connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+
+</TabItem>
+</Tabs>
 
 After you change the selection, a new lookup identifier resolves from the next event that carries it. You don't need to republish your attribute groups. If you remove a lookup identifier, reads by it return an HTTP 400 error immediately.
 

@@ -9,7 +9,7 @@ date: "2026-10-22"
 
 Each UI framework has its own surface hook. It builds the surface request your app sends with its prompt, and puts the surface's *live values* where the generated UI can read them, so a block can appear once the user's behavior reaches a point, without a new request.
 
-The live values are the surface's tracker fields, at `/signals/<name>` in the framework's state, and, with default event counts on, its event counts, at `/signals/event_counts/<event name>`. Before its event happens, a count field is `0`, a first or last field is `null`, a unique list is `[]`, and an event count is missing. Signals data isn't live.
+The live values are the surface's client-side attributes, at `/signals/<name>` in the framework's state, and, with default event counts on, its event counts, at `/signals/event_counts/<event name>`. Before its event happens, a count attribute is `0`, a first or last attribute is `null`, a unique list is `[]`, and an event count is missing.
 
 ## json-render
 

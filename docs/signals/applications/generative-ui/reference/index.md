@@ -56,7 +56,7 @@ The hooks return:
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `live` | `Record<string, number \| boolean \| string \| null \| array>` | The surface's tracker field values, by name. A unique list is an array. Updates as events arrive. |
+| `live` | `Record<string, number \| boolean \| string \| null \| array>` | The surface's client-side attribute values, by name. A unique list is an array. Updates as events arrive. |
 | `eventCounts` | `Record<string, number>` | With default event counts on: how many times each event happened, by event name. Otherwise `undefined`. |
 | `liveState` | `object` | `useJsonRenderSurface` only. What goes at `/signals` in json-render's state: `live`, plus `eventCounts` under `event_counts`. |
 | `request` | `() => SurfaceRequest` | Builds a [surface request](#surface-request) for your request body. Synchronous, never throws, and stable across renders. |
@@ -73,7 +73,7 @@ The hooks return:
 | `selectionId` | `string` | A new ID for every request. The tracked events carry it as `selection_id`. |
 | `configVersion` | `number` | The version of the surface the values were computed with. Your server uses the values only when it has the same version. |
 | `identity` | `object` | The user's `domain_userid`, `domain_sessionid`, and `user_id`, when set |
-| `fields` | `object` | The surface's tracker field values, by name |
+| `fields` | `object` | The surface's client-side attribute values, by name |
 | `eventCounts` | `object` | With default event counts on: the event counts, by event name |
 | `renderer` | `object` | The UI framework the live values are wired into, and their path. Absent with `useSignalsSurface`. |
 | `capturedAt` | `number` | When the request was built, as a Unix timestamp in milliseconds |

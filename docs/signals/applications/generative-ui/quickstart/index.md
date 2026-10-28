@@ -109,18 +109,18 @@ A surface tells Signals GenUI which behavior to compute, and tells the model wha
 
 {/* TODO: add the Console navigation path to the surface editor, and the name of the save button, once confirmed. */}
 
-Create a surface, and add one tracker field that counts the page pings on the current page:
+Create a surface, and add one client-side attribute that counts the page pings on the current page:
 
 1. Set **Surface ID** to `pdp_purchase_assist`, the ID your component passes to the SDK
-2. Under **Tracker fields**, click **Add field**, and set:
+2. Under **Client-side attributes**, click **Add attribute**, and set:
     * **Name**: `pings_on_page`
     * **Events**: `page_ping`
     * **Aggregation**: **Count**
     * **Scope**: **Page view**, so the count restarts on every page
-3. In the field's description, write what the value means for the model: "Activity heartbeats on this page, about one per 10 seconds of active reading. 2 means about 20 seconds engaged."
+3. In the attribute's description, write what the value means for the model: "Activity heartbeats on this page, about one per 10 seconds of active reading. 2 means about 20 seconds engaged."
 4. Save the surface
 
-![The surface editor in Console, with the surface ID, default event counts, tracker fields, Signals inputs, and a preview of what the model sees](../../../images/genui-create-surface.png)
+![The surface editor in Console, with the surface ID, default event counts, client-side attributes, Signals inputs, and a preview of what the model sees](../../../images/genui-create-surface.png)
 
 **What the model sees**, at the bottom of the editor, shows the lines Signals GenUI adds to the model's system prompt for this surface. They update as you edit.
 
@@ -251,4 +251,4 @@ Ask the model for a block that depends on behavior, for example by adding a rule
 2. Stay on the page and scroll: after about 20 seconds of reading, the new block appears, without a new request
 3. In [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md), find two `surface_render` events: one when the generated UI rendered, and one when the block appeared. Your server sends a `surface_decision` event for the same request, which you can find with [Snowplow Micro](/docs/testing/snowplow-micro/index.md) or in your warehouse.
 
-Next, [configure your surfaces](/docs/signals/applications/generative-ui/configure-surfaces/index.md) with more tracker fields, and with what Signals knows about the user from earlier visits. Your code doesn't change.
+Next, [configure your surfaces](/docs/signals/applications/generative-ui/configure-surfaces/index.md) with more client-side attributes, and with what Signals knows about the user from earlier visits. Your code doesn't change.

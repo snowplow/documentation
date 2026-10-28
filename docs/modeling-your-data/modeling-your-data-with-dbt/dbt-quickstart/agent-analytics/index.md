@@ -132,7 +132,7 @@ dbt test --select snowplow_agent_analytics
 
 ## Enable the semantic view *(optional)*
 
-The semantic view is available on Snowflake. On other warehouses, `enable_semantic_views: true` builds only the conformed dimension tables and does not require the Snowflake materialization package.
+The semantic view and its conformed dimension tables are available on Snowflake. The `enable_semantic_views` variable has no effect on BigQuery or Databricks.
 
 To build the [Snowflake semantic view](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-agent-analytics-data-model/index.md#query-with-a-snowflake-semantic-view), add the [`Snowflake-Labs/dbt_semantic_view`](https://github.com/Snowflake-Labs/dbt_semantic_view) package to your `packages.yml`. The Agent Analytics package doesn't install it for you, because the semantic view is disabled by default.
 
@@ -153,6 +153,26 @@ vars:
 Run `dbt deps` and `dbt run` again. If you enable the semantic view without adding the package, dbt fails when it parses the project.
 
 ## Full refresh
+
+If you upgrade from a revision that stored raw entities in `base_events`, rebuild the
+whole package to populate the extracted UTM fields and create the date partitions.
+An incremental run stops with an upgrade error until you rebuild. New installations
+need no extra step.
+
+Before rebuilding, back up your outputs and confirm that your source retains all events
+from `snowplow__start_date`. If source history has expired, preserve your existing tables
+and plan a migration before upgrading; a full refresh cannot recover missing events.
+
+```bash
+dbt run --select snowplow_agent_analytics --full-refresh --vars '{snowplow__allow_refresh: true}'
+dbt run --select snowplow_agent_analytics
+dbt test --select snowplow_agent_analytics
+```
+
+Repeat normal runs until the manifest catches up. Each run processes at most
+`snowplow__backfill_limit_days`. Validate the complete outputs before resuming downstream
+jobs. Do not refresh `base_events` alone while retaining the old manifest or source lookup.
+
 
 By default, running `dbt run --full-refresh` won't drop the incremental manifest, `base_events`, or `int_agent_source_lookup`, as this would reset all incremental processing. To allow a full reset, set `snowplow__allow_refresh` to `true` before running:
 

@@ -54,17 +54,46 @@ Once a forwarder is deployed, you can configure one or more email addresses to s
 
 You can monitor forwarders in a few ways:
 
-- **Console metrics**: you can view high-level delivery statistics in Console.
+- **Console metrics**: you can view delivery statistics and errors for each forwarder in Console.
 - **Cloud monitoring metrics**: forwarders emit a set of metrics to your cloud provider's observability service.
 - **Failed event logs**: for failed deliveries, Snowplow saves detailed logs to your cloud storage bucket. Consume these logs for automated monitoring in your observability platform of choice.
 
 ### Console metrics
 
-In Snowplow Console, you can see the number of filtered, failed, and successfully delivered events over the last seven days.
+In Snowplow Console, you can see the number of filtered, failed, and successfully delivered events for each forwarder.
 
-To view these metrics, navigate to **Destinations** > **Event forwarding**. In the event forwarders table, you will see metrics for each forwarder.
+To view these metrics, navigate to **Destinations** > **Event forwarding**. The event forwarders table shows metrics for each forwarder over the last seven days.
 
 ![Console metrics dashboard showing forwarder statistics including filtered, failed, and delivered event counts](images/event-forwarding-console-metrics.png)
+
+For more detail and other time ranges, click a forwarder's name in the table to open its dashboard. It shows these figures:
+
+- **Matching the filter**: events that matched the forwarder's filter and finished processing, either delivered or failed permanently, and their share of all pipeline events
+- **Successful**: events delivered to the destination
+- **Invalid**: events that failed permanently and were logged as failed events, including [transformation, oversized data, and unrecoverable failures](#failure-types-and-handling), and transient failures that exceeded their retry limit
+- **Retry attempts**: retries caused by [transient failures](#destination-failures), such as connection failures or timeouts
+
+An event that's being retried increments **Retry attempts** on each retry. It's counted as **Successful** or **Invalid** only once it's delivered or fails permanently. Because **Matching the filter** leaves out events waiting for a retry, the figure can drop in short time ranges during a destination outage, even though your filter hasn't changed.
+
+Each figure corresponds to one of the forwarder's [cloud monitoring metrics](#cloud-monitoring-metrics):
+
+| Console figure     | Cloud monitoring metric  |
+| ------------------ | ------------------------ |
+| **Successful**     | `target_success`         |
+| **Invalid**        | `failure_target_success` |
+| **Retry attempts** | `target_failed`          |
+
+A chart breaks down successful, invalid, and filtered-out events over time. The **Errors by type** table lists each error code the forwarder encountered, with its description, count, and when it was last seen.
+
+![Event forwarder dashboard in Console, showing events matching the filter, success and invalid rates, and retry attempts, above a chart of outcomes over time and a table of errors by type](images/event-forwarding-dashboard.webp)
+
+You can view the last seven days, six hours, or one hour. Use the one-hour view when you're debugging a forwarder:
+
+- After changing the forwarder's filter, mappings, or credentials, check that events still match the filter and are delivered successfully
+- If retry attempts rise, check the **Errors by type** table for connection failures, timeouts, or 5xx responses from the destination
+- After fixing a problem, confirm that the error stops appearing by checking its last-seen time
+
+To inspect individual failed events, query the [failed event logs](#inspecting-and-debugging-failures).
 
 ### Cloud monitoring metrics
 

@@ -1,7 +1,7 @@
 ---
 title: "Erase user identities for GDPR requests"
 sidebar_label: "Erasure"
-sidebar_position: 4
+sidebar_position: 5
 description: "Erase a user's entries from the Snowplow Identities graph to fulfill a GDPR right-to-erasure request. Explains what the API removes, what it does not, and how to call it."
 keywords: ["gdpr", "erasure", "right to be forgotten", "dsar", "identity deletion", "data subject request"]
 date: "2026-05-22"

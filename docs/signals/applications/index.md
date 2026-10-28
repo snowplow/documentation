@@ -19,6 +19,7 @@ This section covers:
 * [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md): fetch calculated attribute values using a service or directly from an attribute group
 * [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md): fetch a user's recent session activity as JSON or a narrative summary, to ground your agents
 * [Signals MCP server](/docs/signals/applications/mcp-server/index.md): let your agent discover the attribute groups and agentic contexts your deployment publishes and read the ones that fit the task
+* [Generative UI](/docs/signals/applications/generative-ui/index.md): give the model that composes your UI the user's behavior, and let the generated UI react as the user keeps browsing, with the Signals GenUI SDK
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
 
 ```mdx-code-block

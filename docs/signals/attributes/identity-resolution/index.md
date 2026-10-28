@@ -24,7 +24,7 @@ If Identities is already set up on your pipeline, setting up identity resolution
 
 Attributes start empty and build up from the events processed after you publish the attribute group, so a lifetime attribute covers only the activity since then.
 
-Identity resolution works best today for people who browse anonymously and then log in on the same device, and for people who move between your own sites. Logging in to an existing account from another device is [partly supported](#cross-device) in this release, with full support coming soon. See [Supported use cases](#supported-use-cases) for what a read returns in each case.
+Identity resolution works best today for people who browse anonymously and then log in on the same device, and for people who move between your own sites. Logging in to an existing account from another device is [partly supported](#cross-device), with full support coming soon. See [Supported use cases](#supported-use-cases) for what a read returns in each case.
 
 ## How identity resolution works
 
@@ -50,7 +50,7 @@ Select the lookup identifiers on the built-in `snowplow_id` attribute key, then 
 
 ### Decide which identifiers to use
 
-You can select up to three lookup identifiers. Each lookup identifier adds a write to every event that carries it, so the number is limited in the current release, and may be raised later. If you need more, [contact Snowplow Support](https://support.snowplow.io/).
+You can select up to three lookup identifiers. Each lookup identifier adds a write to every event that carries it, so the number is limited, and may be raised later. If you need more, [contact Snowplow Support](https://support.snowplow.io/).
 
 Choose the identifiers your application has at the moment it reads attributes. They usually fall into three roles, and each one behaves differently:
 
@@ -202,7 +202,7 @@ Identity resolution is being released in stages. This table shows which use case
 | [Shared device](#shared-device) | Several people use the same device | ✅ Supported, with `user_id` as a unique identifier |
 | [Cross-device](#cross-device) | A user switches between devices or browsers | ⚠️ Partly supported |
 
-The [limitations](#limitations-for-every-use-case) at the end of this section apply to all of them.
+The [known limitations](#known-limitations) at the end of this section apply to all of them.
 
 The examples show what a read returns for one lookup identifier of each [role](#decide-which-identifiers-to-use): `domain_userid` as the anonymous ID, `user_id` as the known ID, and `hashed_email` as the occasional ID. In the Returns column, a Snowplow ID such as `sp_001` stands for the attributes calculated for that Snowplow ID.
 
@@ -311,6 +311,7 @@ If the device's Snowplow ID is the older one, for example because the user brows
 
 | Event | Identifiers | Snowplow ID |
 | --- | --- | --- |
+| Last week: browse the app on the phone without logging in | `domain_userid` (`p012`) | `sp_001` |
 | Monday: sign up on the laptop | `domain_userid` (`l789`), `user_id` (`u001`), `hashed_email` (`3f9a…c21e`) | `sp_002` |
 | Tuesday: log in on the phone, which has an older Snowplow ID | `domain_userid` (`p012`), `user_id` (`u001`) | `sp_001`, after merging `sp_002` into it |
 | Wednesday: first page view back on the laptop | `domain_userid` (`l789`) | `sp_001` |
@@ -323,9 +324,9 @@ If the device's Snowplow ID is the older one, for example because the user brows
 
 </details>
 
-### Limitations for every use case
+### Known limitations
 
-These apply whichever use case you're working with:
+The following limitations apply to every use case. They're temporary, and Snowplow is working on removing them:
 
 * No backfill: attributes keyed on `snowplow_id` include only events processed after you publish the attribute group, so they start empty and build up over time. An identifier can read them only after it appears on an event sent after you select it as a lookup identifier.
 * Occasional IDs can expire: an identifier that doesn't appear on an event for longer than your attributes keep their data stops resolving. See [Decide which identifiers to use](#decide-which-identifiers-to-use).

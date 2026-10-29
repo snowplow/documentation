@@ -23,6 +23,8 @@ For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/g
 
 :::
 
+The cloud you deploy the loader in determines the stream it reads from. Since 0.15.0, the loader can write to S3, GCS, or ADLS Gen2 from any cloud.
+
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
     <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>

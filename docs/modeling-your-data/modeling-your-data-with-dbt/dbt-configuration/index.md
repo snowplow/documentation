@@ -80,7 +80,7 @@ ALTER TABLE \{TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = 
 
 ### BigQuery
 
-As mentioned in the [Quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md), many of our packages allow you to specify which column your events table is partitioned on using the `snowplow__session_timestamp` variable. It will likely be partitioned on `load_tstamp`. Unless it is partitioned on `derived_tstamp` (legacy behavior) you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
+As mentioned in the [Quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md), many Snowplow dbt packages allow you to specify which column your events table is partitioned on using the `snowplow__session_timestamp` variable. It will likely be partitioned on `load_tstamp`. Unless it's partitioned on `derived_tstamp` (legacy behavior), set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"
 vars:

@@ -7,7 +7,7 @@ keywords: ["agent analytics migration", "Snowflake", "dbt package upgrade"]
 date: "2026-10-29"
 ---
 
-Use this guide when upgrading a Snowflake installation that stores raw entity columns in `base_events`. The updated package stores 19 scalar columns, including `utm_source`, `utm_medium`, and `load_tstamp_date`. You can derive these columns from the existing table without replaying atomic events or resetting incremental processing. New installations need no migration.
+Use this guide when upgrading to Agent Analytics 0.2.0 from a Snowflake installation that stores raw entity columns in `base_events`. Version 0.2.0 stores 19 scalar columns, including `utm_source`, `utm_medium`, and `load_tstamp_date`. You can derive these columns from the existing table without replaying atomic events or resetting incremental processing. New installations need no migration.
 
 ## Choose an upgrade path
 
@@ -43,7 +43,7 @@ Replacing the table makes dependent Snowflake streams stale, including streams o
 
 ## Replace the base table
 
-Install the updated package with `dbt deps`, but do not run its models yet. The following statement reads the existing table and replaces it with the 19-column schema. It retains all rows and derives the new scalar fields from the stored entities. It does not read the atomic events table.
+Pin `revision: "0.2.0"` in the Git package entry in your `packages.yml`, then run `dbt deps`. Do not run the package models yet. The following statement reads the existing table and replaces it with the 19-column schema. It retains all rows and derives the new scalar fields from the stored entities. It does not read the atomic events table.
 
 ```sql
 create or replace transient table ANALYTICS.AGENT_ANALYTICS.BASE_EVENTS

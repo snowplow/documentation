@@ -25,13 +25,15 @@ This guide walks you through setting up the [Snowplow Agent Analytics dbt packag
 
 ## Installation
 
-Add the package from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics) to your `packages.yml`:
+Pin version 0.2.0 from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics/releases/tag/0.2.0) in your `packages.yml`:
 
 ```yaml title="packages.yml"
 packages:
   - git: "https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics.git"
-    revision: "main"
+    revision: "0.2.0"
 ```
+
+If you installed an earlier revision, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/agent-analytics/index.md) before upgrading.
 
 Then run:
 

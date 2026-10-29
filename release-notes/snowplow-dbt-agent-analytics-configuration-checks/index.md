@@ -1,6 +1,6 @@
 ---
-title: "Agent Analytics adds BigQuery and Databricks support"
-sidebar_label: "Agent Analytics warehouse support"
+title: "Agent Analytics 0.2.0 adds BigQuery and Databricks support"
+sidebar_label: "Agent Analytics 0.2.0"
 description: "Run the Agent Analytics dbt package on BigQuery and Databricks, with the same agent and referral metrics as Snowflake."
 keywords: ["Agent Analytics", "dbt", "BigQuery", "Databricks", "Snowflake"]
 date: "2026-10-22"
@@ -14,9 +14,9 @@ platforms:
   - "Databricks"
 ---
 
-The Snowplow Agent Analytics dbt package adds BigQuery and Databricks support alongside Snowflake. The new adapters use the same agent attribution rules, daily aggregates, and summary metrics. Snowflake semantic views remain available only on Snowflake.
+[Snowplow Agent Analytics 0.2.0](https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics/releases/tag/0.2.0) adds BigQuery and Databricks support alongside Snowflake. The new adapters use the same agent attribution rules, daily aggregates, and summary metrics. Snowflake semantic views remain available only on Snowflake.
 
-Databricks requires `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later.
+Databricks requires `dbt-databricks` 1.11 or later and a SQL warehouse or Runtime 12.2 LTS or later. Install the package from Git with `revision: "0.2.0"`, following the [quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/).
 
 The package also checks license acceptance and warehouse support before running its models.
 

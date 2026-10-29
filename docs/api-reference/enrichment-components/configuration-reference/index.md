@@ -15,9 +15,9 @@ Enrich is released under the [Snowplow Limited Use License](/limited-use-license
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
-```json
-"license": {
-  "accept": true
+```hocon
+license: {
+  accept: true
 }
 ```
 
@@ -181,9 +181,9 @@ If an event is not valid against `atomic` schema, a [failed event](/docs/fundame
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.
 For this reason, this new validation was added as a feature that can be deactivated like that:
 
-```json
-"validation": {
-  "acceptInvalid": true
+```hocon
+validation: {
+  acceptInvalid: true
 }
 ```
 
@@ -200,18 +200,16 @@ When we'll know that all our customers don't have any invalid enriched events an
 
 Since `4.0.0`, it is possible to configure the lengths of the atomic fields, below is an example:
 
-```hcl
-{
-  ...
-  # Optional. Configuration section for various validation-oriented settings.
-  "validation": {
-    # Optional. Configuration for custom maximum atomic fields (strings) length.
-    # Map-like structure with keys being field names and values being their max allowed length
-    "atomicFieldsLimits": {
-        "app_id": 5
-        "mkt_clickid": 100000
-        # ...and any other 'atomic' field with custom limit
-    }
+```hocon
+...
+# Optional. Configuration section for various validation-oriented settings.
+validation: {
+  # Optional. Configuration for custom maximum atomic fields (strings) length.
+  # Map-like structure with keys being field names and values being their max allowed length
+  atomicFieldsLimits: {
+    app_id: 5
+    mkt_clickid: 100000
+    # ...and any other 'atomic' field with custom limit
   }
 }
 ```

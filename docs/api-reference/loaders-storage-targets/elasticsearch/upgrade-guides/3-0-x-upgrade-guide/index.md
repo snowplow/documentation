@@ -36,8 +36,8 @@ The configuration format has changed significantly. The sections below describe 
 A new top-level `license` section is required:
 
 ```hocon
-"license": {
-  "accept": true
+license: {
+  accept: true
 }
 ```
 
@@ -49,15 +49,15 @@ The `input.type` field is removed. Kinesis is the only supported input and no lo
 
 ```hocon
 # Before
-"input": {
-  "initialPosition": "TRIM_HORIZON"
-  "initialTimestamp": "2023-01-01T00:00:00Z"  # only used for AT_TIMESTAMP
+input: {
+  initialPosition: TRIM_HORIZON
+  initialTimestamp: "2023-01-01T00:00:00Z"  # only used for AT_TIMESTAMP
 }
 
 # After
-"input": {
-  "initialPosition": {
-    "type": "TRIM_HORIZON"
+input: {
+  initialPosition: {
+    type: TRIM_HORIZON
     # "timestamp": "2023-01-01T00:00:00Z"  # only required for AT_TIMESTAMP
   }
 }
@@ -67,15 +67,15 @@ The `input.type` field is removed. Kinesis is the only supported input and no lo
 
 ```hocon
 # Before
-"input": {
-  "maxRecords": 10000
+input: {
+  maxRecords: 10000
 }
 
 # After
-"input": {
-  "retrievalMode": {
-    "type": "Polling"
-    "maxRecords": 750
+input: {
+  retrievalMode: {
+    type: Polling
+    maxRecords: 750
   }
 }
 ```
@@ -94,20 +94,20 @@ The `output.good.type` field is removed. Elasticsearch is the only supported out
 
 ```hocon
 # Before
-"output": {
-  "good": {
-    "client": {
-      "endpoint": "localhost"
-      "port": 9200
-      "ssl": false
+output: {
+  good: {
+    client: {
+      endpoint: localhost
+      port: 9200
+      ssl: false
     }
   }
 }
 
 # After
-"output": {
-  "good": {
-    "url": "http://localhost:9200"
+output: {
+  good: {
+    url: "http://localhost:9200"
   }
 }
 ```
@@ -116,22 +116,22 @@ Authentication is now configured via a unified `output.good.auth` object, replac
 
 ```hocon
 # Before (HTTP Basic Auth)
-"output": {
-  "good": {
-    "client": {
-      "username": "elastic"
-      "password": "changeme"
+output: {
+  good: {
+    client: {
+      username: elastic
+      password: changeme
     }
   }
 }
 
 # After (HTTP Basic Auth)
-"output": {
-  "good": {
-    "auth": {
-      "type": "Basic"
-      "username": "elastic"
-      "password": "changeme"
+output: {
+  good: {
+    auth: {
+      type: Basic
+      username: elastic
+      password: changeme
     }
   }
 }
@@ -139,22 +139,22 @@ Authentication is now configured via a unified `output.good.auth` object, replac
 
 ```hocon
 # Before (AWS SigV4 signing)
-"output": {
-  "good": {
-    "aws": {
-      "signing": true
-      "region": "eu-west-1"
+output: {
+  good: {
+    aws: {
+      signing: true
+      region: eu-west-1
     }
   }
 }
 
 # After (AWS SigV4 signing)
-"output": {
-  "good": {
-    "auth": {
-      "type": "AWSSigning"
-      "region": "eu-west-1"
-      "serviceSigningName": "es"  # use "aoss" for OpenSearch Serverless
+output: {
+  good: {
+    auth: {
+      type: AWSSigning
+      region: eu-west-1
+      serviceSigningName: es  # use "aoss" for OpenSearch Serverless
     }
   }
 }
@@ -164,19 +164,19 @@ Authentication is now configured via a unified `output.good.auth` object, replac
 
 ```hocon
 # Before
-"output": {
-  "good": {
-    "cluster": {
-      "index": "snowplow"
-      "documentType": "_doc"
+output: {
+  good: {
+    cluster: {
+      index: snowplow
+      documentType: _doc
     }
   }
 }
 
 # After
-"output": {
-  "good": {
-    "index": "snowplow"
+output: {
+  good: {
+    index: snowplow
     # "documentType": "_doc"  # only needed for ES 6.x
   }
 }
@@ -186,21 +186,21 @@ Index sharding fields move from `output.good.client` into a dedicated `output.go
 
 ```hocon
 # Before
-"output": {
-  "good": {
-    "client": {
-      "shardDateFormat": "yyyy-MM-dd"
-      "shardDateField": "derived_tstamp"
+output: {
+  good: {
+    client: {
+      shardDateFormat: yyyy-MM-dd
+      shardDateField: derived_tstamp
     }
   }
 }
 
 # After
-"output": {
-  "good": {
-    "sharding": {
-      "dateFormat": "yyyy-MM-dd"
-      "dateField": "derived_tstamp"
+output: {
+  good: {
+    sharding: {
+      dateFormat: yyyy-MM-dd
+      dateField: derived_tstamp
     }
   }
 }
@@ -222,19 +222,19 @@ Index sharding fields move from `output.good.client` into a dedicated `output.go
 
 ```hocon
 # After
-"monitoring": {
-  "metrics": {
-    "statsd": {
-      "hostname": "127.0.0.1"
-      "port": 8125
-      "period": "1 minute"
-      "prefix": "snowplow.elasticsearch.loader"
+monitoring: {
+  metrics: {
+    statsd: {
+      hostname: "127.0.0.1"
+      port: 8125
+      period: 1 minute
+      prefix: snowplow.elasticsearch.loader
     }
     # or expose a Prometheus /metrics endpoint:
     # "prometheus": {}
   }
-  "healthProbe": {
-    "port": 8000
+  healthProbe: {
+    port: 8000
   }
 }
 ```

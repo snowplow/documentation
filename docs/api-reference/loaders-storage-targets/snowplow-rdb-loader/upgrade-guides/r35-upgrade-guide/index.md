@@ -102,81 +102,79 @@ Common configuration file, previously known as `config.yml` and target JSON conf
 
 Here's an example:
 
-```json
-{
-  # Human-readable identificator, can be random
-  "name": "Acme Redshift",
-  # Machine-readable unique identificator, must be UUID
-  "id": "123e4567-e89b-12d3-a456-426655440000",
+```hocon
+# Human-readable identificator, can be random
+name: Acme Redshift
+# Machine-readable unique identificator, must be UUID
+id: "123e4567-e89b-12d3-a456-426655440000"
 
-  # Data Lake (S3) region
-  "region": "us-east-1",
-  # SQS topic name used by Shredder and Loader to communicate
-  "messageQueue": "messages.fifo",
+# Data Lake (S3) region
+region: us-east-1
+# SQS topic name used by Shredder and Loader to communicate
+messageQueue: messages.fifo
 
-  # Shredder-specific configs
-  "shredder": {
-    # Path to enriched archive (must be populated separately with run=YYYY-MM-DD-hh-mm-ss directories)
-    "input": "s3://com-acme/ernched/archive/",
-    # Path to shredded output
-    "output": "s3://com-acme/shredded/good/",
-    # Path to data failed being processed
-    "outputBad": "s3://com-acje/shredded/bad/",
-    # Shredder output compression, GZIP or NONE
-    "compression": "GZIP"
-  },
+# Shredder-specific configs
+shredder: {
+  # Path to enriched archive (must be populated separately with run=YYYY-MM-DD-hh-mm-ss directories)
+  input: "s3://com-acme/ernched/archive/"
+  # Path to shredded output
+  output: "s3://com-acme/shredded/good/"
+  # Path to data failed being processed
+  outputBad: "s3://com-acje/shredded/bad/"
+  # Shredder output compression, GZIP or NONE
+  compression: GZIP
+}
 
-  # Optional. S3 path that holds JSONPaths
-  "jsonpaths": "s3://bucket/jsonpaths/",
+# Optional. S3 path that holds JSONPaths
+jsonpaths: "s3://bucket/jsonpaths/"
 
-  # Schema-specific format settings (recommended to leave all three groups empty and use TSV as default)
-  # To make it compatible with R34, leave default = TSV and populate json array with things from blacklistTabular
-  "formats": {
-    # Format used by default (TSV or JSON)
-    "default": "TSV",
-    # Schemas to be shredded as JSONs, corresponding JSONPath files must be present. Automigrations will be disabled
-    "json": [ ],
-    # Schemas to be shredded as TSVs, presence of the schema on Iglu Server is necessary. Automigartions enabled
-    "tsv": [ ],
-    # Schemas that won't be loaded
-    "skip": [ ]
-  },
+# Schema-specific format settings (recommended to leave all three groups empty and use TSV as default)
+# To make it compatible with R34, leave default = TSV and populate json array with things from blacklistTabular
+formats: {
+  # Format used by default (TSV or JSON)
+  default: TSV
+  # Schemas to be shredded as JSONs, corresponding JSONPath files must be present. Automigrations will be disabled
+  json: [ ]
+  # Schemas to be shredded as TSVs, presence of the schema on Iglu Server is necessary. Automigartions enabled
+  tsv: [ ]
+  # Schemas that won't be loaded
+  skip: [ ]
+}
 
-  # Warehouse connection details, identical to storage target config
-  "storage": {
-    # Database, redshift is the only acceptable option
-    "type": "redshift",
-    # Redshift hostname
-    "host": "redshift.amazon.com",
-    # Database name
-    "database": "snowplow",
-    # Database port
-    "port": 5439,
-    # AWS Role ARN allowing Redshift to load data from S3
-    "roleArn": "arn:aws:iam::123456789012:role/RedshiftLoadRole",
-    # DB schema name
-    "schema": "atomic",
-    # DB user with permissions to load data
-    "username": "storage-loader",
-    # DB password
-    "password": "secret",
-    # Custom JDBC configuration
-    "jdbc": {"ssl": true},
-    # MAXERROR, amount of acceptable loading errors
-    "maxError": 10,
-    "compRows": 100000
-  },
+# Warehouse connection details, identical to storage target config
+storage: {
+  # Database, redshift is the only acceptable option
+  type: redshift
+  # Redshift hostname
+  host: redshift.amazon.com
+  # Database name
+  database: snowplow
+  # Database port
+  port: 5439
+  # AWS Role ARN allowing Redshift to load data from S3
+  roleArn: "arn:aws:iam::123456789012:role/RedshiftLoadRole"
+  # DB schema name
+  schema: atomic
+  # DB user with permissions to load data
+  username: storage-loader
+  # DB password
+  password: secret
+  # Custom JDBC configuration
+  jdbc: { ssl: true }
+  # MAXERROR, amount of acceptable loading errors
+  maxError: 10
+  compRows: 100000
+}
 
-  # Additional steps. analyze, vacuum and transit_load are valid values
-  "steps": ["analyze"],
+# Additional steps. analyze, vacuum and transit_load are valid values
+steps: [analyze]
 
-  # Observability and logging opitons
-  "monitoring": {
-    # Snowplow tracking (optional)
-    "snowplow": null,
-    # Sentry (optional)
-    "sentry": null
-  }
+# Observability and logging opitons
+monitoring: {
+  # Snowplow tracking (optional)
+  snowplow: null
+  # Sentry (optional)
+  sentry: null
 }
 ```
 

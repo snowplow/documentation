@@ -25,9 +25,9 @@ The Databricks Streaming Loader is released under the [Snowplow Limited Use Lice
 
 To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
 
-```json
-"license": {
-  "accept": true
+```hocon
+license: {
+  accept: true
 }
 ```
 
@@ -91,11 +91,13 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 
-```json
-"input.consumerConf": {
-    "security.protocol": "SASL_SSL"
-    "sasl.mechanism": "PLAIN"
-    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=<PASSWORD>;"
+```hocon
+input: {
+  consumerConf: {
+    "security.protocol": SASL_SSL
+    "sasl.mechanism": PLAIN
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=<PASSWORD>;"
+  }
 }
 ```
 

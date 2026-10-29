@@ -236,43 +236,39 @@ Your configuration file should be a hocon file, following the [reference example
 
 Example:
 
-```json
-  {
-    "lint": {
-      "skipWarnings": true
-      "includedChecks": [
-        "rootObject"
-        "unknownFormats"
-        "numericMinMax"
-        "stringLength"
-        "optionalNull"
-        "description"
-        "stringMaxLengthRange"
-      ]
-    }
-
-    "generate": {
-      "dbschema": "atomic"
-      "force": false
-    }
-
-
-    "actions": [
-      {
-        "action": "push"
-        "isPublic": true
-        "apikey": "bd96b5ff-7eb7-4085-83e0-97ac4954b891"
-        "apikey": ${APIKEY_1}
-      }
-      {
-        "action": "s3cp"
-        "uploadFormat": "jsonschema"
-        "profile": "profile-1"
-        "region": "eu-east-2"
-      }
-    ]
-
+```hocon
+lint: {
+  skipWarnings: true
+  includedChecks: [
+    rootObject
+    unknownFormats
+    numericMinMax
+    stringLength
+    optionalNull
+    description
+    stringMaxLengthRange
+  ]
 }
+
+generate: {
+  dbschema: atomic
+  force: false
+}
+
+actions: [
+  {
+    action: push
+    isPublic: true
+    apikey: bd96b5ff-7eb7-4085-83e0-97ac4954b891
+    apikey: ${?APIKEY_1}  # Overrides the value above if APIKEY_1 is set
+  }
+  {
+    action: s3cp
+    uploadFormat: jsonschema
+    profile: profile-1
+    region: eu-east-2
+  }
+]
 ```
 
 ## `server keygen`

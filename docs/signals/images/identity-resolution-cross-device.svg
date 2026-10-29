@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 416" width="1000" height="416">
+<defs>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#a98af0"/>
+ </marker>
+ <marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#c4b3ec"/>
+ </marker>
+ <g id="incognito">
+  <path d="M-9,-5 L-6,-13 Q0,-15 6,-13 L9,-5 Z" fill="currentColor"/>
+  <rect x="-13" y="-6" width="26" height="3" rx="1.5" fill="currentColor"/>
+  <g fill="none" stroke="currentColor" stroke-width="2"><circle cx="-5.5" cy="4" r="4"/><circle cx="5.5" cy="4" r="4"/><path d="M-1.5,3 h3"/></g>
+ </g>
+</defs>
+<rect width="1000" height="416" fill="#ffffff"/>
+<g font-family="'Source Sans 3', Helvetica, Arial, sans-serif" text-anchor="middle">
+
+ <!-- the laptop, earlier -->
+ <rect x="40" y="30" width="290" height="208" rx="12" fill="#ffffff" stroke="#d9cdf3" stroke-width="2"/>
+ <rect x="60" y="52" width="48" height="32" rx="4" fill="#2b1a4f"/>
+ <rect x="64" y="56" width="40" height="24" rx="2" fill="#a98af0"/>
+ <rect x="54" y="84" width="60" height="6" rx="3" fill="#2b1a4f"/>
+ <text x="202" y="70" font-size="16" font-weight="700" fill="#2b1a4f">A laptop</text>
+ <text x="202" y="90" font-size="13" fill="#6638b8">earlier, on the website</text>
+ <g fill="#f1ebfb" stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="65" y="118" width="240" height="28" rx="14"/>
+  <rect x="65" y="156" width="240" height="28" rx="14"/>
+  <rect x="65" y="194" width="240" height="28" rx="14"/>
+ </g>
+ <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#2b1a4f">
+  <text x="185" y="137">domain_userid: d123</text>
+  <text x="185" y="175">user_id: u001</text>
+  <text x="185" y="213">hashed_email: 3f9a…c21e</text>
+ </g>
+
+ <!-- the new phone -->
+ <rect x="670" y="30" width="290" height="208" rx="12" fill="#ffffff" stroke="#d9cdf3" stroke-width="2"/>
+ <rect x="694" y="46" width="34" height="58" rx="7" fill="#2b1a4f"/>
+ <rect x="698" y="53" width="26" height="44" rx="3" fill="#a98af0"/>
+ <text x="832" y="70" font-size="16" font-weight="700" fill="#2b1a4f">A new phone</text>
+ <text x="832" y="90" font-size="13" fill="#6638b8">browses, then logs in</text>
+ <g stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="695" y="118" width="240" height="28" rx="14" fill="#f1ebfb"/>
+  <rect x="695" y="156" width="240" height="28" rx="14" fill="#6638b8" stroke="#6638b8"/>
+ </g>
+ <g font-family="ui-monospace, Menlo, monospace" font-size="13">
+  <text x="815" y="137" fill="#2b1a4f">domain_userid: p456</text>
+  <text x="815" y="175" fill="#ffffff">+ user_id: u001</text>
+ </g>
+
+ <use href="#incognito" color="#2b1a4f" transform="translate(714,133)"/>
+ <!-- Snowplow IDs -->
+ <rect x="400" y="60" width="200" height="70" rx="10" fill="#6638b8"/>
+ <text x="500" y="88" font-size="17" font-weight="700" fill="#ffffff">sp_001, kept</text>
+ <text x="500" y="108" font-size="13" fill="#e4d8fa">website activity and</text>
+ <text x="500" y="123" font-size="13" fill="#e4d8fa">everything from the login on</text>
+
+ <rect x="400" y="236" width="200" height="66" rx="10" fill="#f1ebfb" stroke="#c4b3ec" stroke-width="2" stroke-dasharray="6 5"/>
+ <text x="500" y="262" font-size="17" font-weight="700" fill="#6638b8">sp_002, merged</text>
+ <text x="500" y="284" font-size="13" fill="#2b1a4f">phone browsing before the login</text>
+
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M332,170 C366,170 366,100 396,100"/>
+  <path d="M692,170 C640,170 630,112 604,112"/>
+ </g>
+ <path d="M692,132 C658,132 660,268 604,268" fill="none" stroke="#c4b3ec" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrow-faint)"/>
+ <text x="618" y="294" font-size="13" text-anchor="start" fill="#a98af0">before the login</text>
+ <path d="M500,232 V136" fill="none" stroke="#c4b3ec" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrow-faint)"/>
+ <text x="512" y="182" font-size="13" text-anchor="start" fill="#a98af0">Identities merges</text>
+ <text x="512" y="198" font-size="13" text-anchor="start" fill="#a98af0">sp_002 into sp_001</text>
+
+ <!-- key -->
+ <g font-size="15" fill="#2b1a4f">
+  <text x="500" y="346"><tspan font-weight="700" fill="#6638b8">Currently:</tspan> each identifier reads the Snowplow ID it was last seen with.</text>
+  <text x="500" y="368">From the login on, the phone's p456 reads sp_001, without sp_002's values.</text>
+  <text x="500" y="394"><tspan font-weight="700" fill="#6638b8">Coming soon:</tspan> sp_002's values are added to sp_001, so every identifier returns the whole person.</text>
+ </g>
+</g>
+</svg>

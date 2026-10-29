@@ -19,15 +19,15 @@ For Databricks, use `dbt-databricks` with a Databricks SQL warehouse or Runtime 
 
 ## Installation
 
-Add the package from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-identities) to your `packages.yml`:
+Pin version 0.2.0 from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0) in your `packages.yml`:
 
 ```yaml title="packages.yml"
 packages:
   - git: "https://github.com/snowplow-incubator/dbt-snowplow-identities.git"
-    revision: "0.1.0"
+    revision: "0.2.0"
 ```
 
-If you previously installed from `main`, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md) before upgrading.
+If you use 0.1.0 or previously installed from `main`, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md) before upgrading.
 
 Then run:
 
@@ -117,6 +117,10 @@ vars:
     snowplow__app_id: ['my_app_1', 'my_app_2']
 ```
 
+Identity-service merge events use a separate filter, `snowplow__identities_app_id`,
+which defaults to `['snowplow-identities']`. Set it to the actual service app ID if different;
+`snowplow__app_id` filters your application identity events only.
+
 ### 7. Hash identifiers *(optional)*
 
 This step is optional. If your identifiers contain PII, set `snowplow__hash_identifiers` to `true`. This applies a SHA-256 hash to all `id_value` entries in the `snowplow_identities_identifier_mapping` output table:
@@ -132,19 +136,30 @@ vars:
 Run the package with this command:
 
 ```bash
-dbt run --select snowplow_identities
+dbt run --select package:snowplow_identities
 ```
 
 Run this package before any other Snowplow dbt packages, so that downstream models can reference the resolved identities.
 
-## Full refresh
+## Full refresh and backfill
 
-By default, running `dbt run --full-refresh` won't drop the incremental manifest, as this would reset all incremental processing. To allow a full reset, set `snowplow__allow_refresh` to `true` before running:
+Version 0.2.0 tracks progress from each model's `load_tstamp`; it has no progress manifest.
+The old `snowplow__allow_refresh` and `snowplow__dev_target_name` variables no longer apply.
+A full refresh rebuilds package outputs from `snowplow__start_date`, so verify source
+retention and back up existing outputs first.
 
-```yaml title="dbt_project.yml"
-vars:
-  snowplow_identities:
-    snowplow__allow_refresh: true
+```bash
+dbt run --full-refresh --select package:snowplow_identities
 ```
 
-On development targets, the manifest is always dropped on full refresh without needing this flag. Development targets are identified by the `snowplow__dev_target_name` variable, which you can set to match your development target name if it's not the default `dev`.
+The first build processes the configured backfill window. Run again without `--full-refresh`
+to continue. Empty periods advance to the first eligible day. Before switching consumers,
+finish the backfill and run:
+
+```bash
+dbt test --select package:snowplow_identities
+```
+
+The [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md)
+explains the required first full refresh for 0.1.0 installations, removed history tables,
+source-retention requirements and rollback.

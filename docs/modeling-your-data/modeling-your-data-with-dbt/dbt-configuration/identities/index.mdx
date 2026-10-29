@@ -40,6 +40,20 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
   )
 }
 
+export const IdentityOutputSchemas = ({ schemaVersion }) => {
+  if (schemaVersion === '0.1.0') {
+    return <><DbtSchemas /><SchemaSetter output={printSchemaVariables} /></>;
+  }
+  return <>
+    <p>Version 0.2.0 uses derived and scratch schemas, with no progress manifest. These suffixes combine with your target schema unless you override dbt's schema naming macro.</p>
+    <CodeBlock language="yaml">{`models:
+  snowplow_identities:
+    +schema: my_derived_schema
+    staging:
+      +schema: my_scratch_schema`}</CodeBlock>
+  </>;
+};
+
 export const printYamlVariables = (data) => {
   return(
     <>
@@ -69,7 +83,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 <JsonToTable groupFilter="Operation and Logic" />
 
-### Contexts, filters, and logs
+### Entities (contexts), filters, and logs
 
 <JsonToTable groupFilter="Contexts, Filters, and Logs" />
 
@@ -81,8 +95,6 @@ Use the inputs below to generate configuration code for your `dbt_project.yml`. 
 
 ## Output schemas
 
-<DbtSchemas/>
-
-<SchemaSetter output={printSchemaVariables} />
+<IdentityOutputSchemas />
 
 </DbtConfigurationPage>

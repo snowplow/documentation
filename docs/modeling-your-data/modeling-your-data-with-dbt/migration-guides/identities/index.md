@@ -81,7 +81,13 @@ to drop them after validation.
 
 ### Upgrade steps
 
-1. **Bump the package version** in your `packages.yml`.
+1. Pin the Git revision to `0.2.0` in your `packages.yml`, then run `dbt deps`:
+
+   ```yaml title="packages.yml"
+   packages:
+     - git: "https://github.com/snowplow-incubator/dbt-snowplow-identities.git"
+       revision: "0.2.0"
+   ```
 
 2. **Back up the existing outputs and confirm source retention**, per
    [Rebuild the package on the first run](#rebuild-the-package-on-the-first-run).

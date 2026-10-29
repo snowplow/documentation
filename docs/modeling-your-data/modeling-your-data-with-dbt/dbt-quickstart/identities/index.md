@@ -19,7 +19,7 @@ For Databricks, use `dbt-databricks` with a Databricks SQL warehouse or Runtime 
 
 ## Installation
 
-Add the package from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-identities) to your `packages.yml`:
+Pin version 0.2.0 from [GitHub](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0) in your `packages.yml`:
 
 ```yaml title="packages.yml"
 packages:

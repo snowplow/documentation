@@ -17,7 +17,7 @@ A predictive attribute replaces the guess with a model. You define a goal, such 
 
 ## Key benefits
 
-**Trained on your own data.** Signals builds the training dataset in your Snowflake warehouse, from the same attribute definitions it uses to score live sessions. For each training example, it calculates the attribute values as they were at that moment, so the model learns from the same view of a session that it sees when scoring.
+**Trained on your own data.** Signals builds the training dataset in your Snowflake warehouse, from the same attribute definitions it uses to score live sessions. For each training example, it calculates point-in-time correct attribute values, so the features the model scores are calculated the same way as the features it trained on.
 
 **Scored on request.** Signals calculates the score when your application asks for it, from the most recent attribute values Signals has calculated for the session.
 

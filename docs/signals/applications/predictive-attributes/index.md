@@ -110,7 +110,7 @@ The table below describes each field in the response.
 
 ### Interpret the score
 
-Use the score to rank sessions against each other, not as an exact probability. Signals corrects scores for the sampling it uses in training, so they're on the scale of your real goal rate, but they aren't guaranteed to be calibrated. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely. Choose thresholds by looking at the scores your sessions receive, and revisit them each time you publish a new training, because a new model can shift the range of scores.
+A higher score means the model considers the goal more likely. Use the score to rank sessions and set a threshold to act above, not as an exact probability. Signals corrects scores for the sampling it uses in training, so they're on the scale of your real goal rate, but they aren't guaranteed to be calibrated. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely. Choose thresholds by looking at the scores your sessions receive, and revisit them each time you publish a new training, because a new model can shift the range of scores.
 
 Signals scores a session whatever state it's in. Scores are less reliable for states that training doesn't cover, such as a very short session, or a session that has already reached the goal.
 

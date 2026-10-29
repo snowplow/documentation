@@ -12,14 +12,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-A predictive attribute is a score between 0 and 1 for how likely a session is to reach a goal you define, for example a purchase or a sign-up. Signals recalculates your existing stream [attributes](/docs/signals/attributes/index.md) from the event history in your warehouse, trains a model on those values, then scores sessions in real time from the most recent values of those attributes.
+A predictive attribute predicts how likely a session is to reach a goal you define, such as a purchase or a sign-up. Signals trains a model on your own stream [attributes](/docs/signals/attributes/index.md), then returns a score between 0 and 1 each time your application requests one.
 
-Use a predictive attribute when the behavior that leads to a goal is hard to express as a rule. An [intervention](/docs/signals/interventions/index.md) that triggers on at least three product views and one add to cart captures one pattern, with thresholds you choose. A predictive attribute learns from all the input attributes you give it, weighted by how often they preceded the goal in your own data. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
+Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both. Compared with a hand-written rule, such as an [intervention](/docs/signals/interventions/index.md) that triggers on at least three product views and one add to cart, a predictive attribute learns from your own data which inputs matter and how much. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
 
 A predictive attribute has these properties:
-* Training and scoring use the same attribute definitions, so the values the model learned from are calculated the same way as the values it scores
+* Training and scoring use the same attribute definitions, so the features the model scores are calculated the same way as the features it trained on
 * Signals calculates the score each time your application requests it, from the most recent attribute values, rather than on a schedule
-* The model is trained on your own event data, from attributes you choose
+* The model is trained on your own event data, with point-in-time correct attribute values: each one uses only the events before that moment in the session
 * Inputs can combine attribute groups with different attribute keys, such as session-level and user-level attributes
 * Every training is kept with its quality metrics, so you can compare trainings, publish the one you want, and roll back
 
@@ -29,7 +29,7 @@ Setting up a predictive attribute takes four steps:
 3. Train a model
 4. Publish a training, then request scores from your application
 
-Your application requests the score through the Signals SDKs or API, and decides what to do with it. To trigger an [intervention](/docs/signals/interventions/index.md) from a score, request the score in your backend and push a [direct intervention](/docs/signals/interventions/index.md#direct-interventions) when it meets your threshold.
+Signals calculates the score and serves it to your application through the Signals SDKs or API. Your application decides what to do with it. To trigger an [intervention](/docs/signals/interventions/index.md) from a score, request the score in your backend and push a [direct intervention](/docs/signals/interventions/index.md#direct-interventions) when it meets your threshold.
 
 Before you start, you'll need:
 * A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Signals builds the training data in Snowflake, so other warehouses can't be used for training.
@@ -163,7 +163,7 @@ The table below lists the fields of a predictive attribute.
 
 ### Choose input attributes
 
-The input attributes are everything the model knows about a session. Choose attributes that describe behavior leading up to the goal, such as counts of product views, time since the last search, or the most frequent category viewed.
+The input attributes are the model's features: everything it knows about a session. Choose attributes that describe behavior leading up to the goal, such as counts of product views, time since the last search, or the most frequent category viewed.
 
 Input attributes follow these rules:
 * They come from stream attribute groups

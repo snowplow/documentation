@@ -21,6 +21,7 @@ import Link from '@docusaurus/Link';
       Optional. Default value <code>500</code>.
       The maximum number of schemas the loader keeps track of, so that every batch gets the same Spark schema and Spark does not keep compiling new code.
       Each entry is a schema family used as a self-describing event or an entity.
+      If your events use more schemas than this, the loader still loads every event, but batches carrying the extra schemas cost more CPU and memory to process.
       Raise this if the loader logs a warning that schemas did not fit.
       The <code>entity_superset_entries</code> metric reports how many schemas the loader is tracking.
     </td>

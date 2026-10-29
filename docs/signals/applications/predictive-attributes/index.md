@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 Predictive attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
 :::
 
-Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes.
+Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes. The score isn't available in intervention criteria or through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md), so request it from your application.
 
 Start by [connecting to Signals](/docs/signals/connection/index.md).
 

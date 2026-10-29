@@ -20,6 +20,8 @@ A predictive attribute is a score between 0 and 1 for how likely a session is to
 
 Use a predictive attribute when the behavior that leads to a goal is hard to express as a rule. An [intervention](/docs/signals/interventions/index.md) that triggers on at least three product views and one add to cart captures one pattern, with thresholds you choose. A predictive attribute learns from all the input attributes you give it, weighted by how often they preceded the goal in your own data. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
 
+A predictive attribute isn't a stream attribute. You can't use its score in intervention criteria, and the [Signals MCP server](/docs/signals/applications/mcp-server/index.md) doesn't expose it. Your application requests the score directly.
+
 Before you start, you'll need:
 * A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Training supports only Snowflake warehouses.
 * At least one published [stream attribute group](/docs/signals/attributes/attribute-groups/index.md#stream) whose attributes describe the behavior you want the model to learn from
@@ -173,7 +175,7 @@ Signals converts each input into model features based on its aggregation. Numeri
 
 The goal is the event that counts as success, for example a `transaction` or a `sign_up`. The model scores how likely each session is to reach it. Define the goal with the same [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) syntax as attribute filters, using `all` or `any` conditions on atomic, event, or entity properties.
 
-Choose a goal that happens within a session. A goal that usually happens days after the activity that leads to it, such as a renewal, gives the model few examples to learn from.
+The goal must happen later in the same session. A goal reached in a later session, such as a renewal days afterward, doesn't count, so the model has no examples of it to learn from. The goal is a single event that matches the criteria. Goals based on how often an event happens, on an event not happening, or on a sequence of events aren't supported.
 
 The goal, inputs, and excluded events are fixed once you create a version. To predict something different or change the inputs, create a new version.
 
@@ -268,6 +270,8 @@ Predictive attributes have two levels of version:
 * The training, shown in Console as the minor version, such as `v2.1`, changes every time you retrain
 
 Retraining doesn't affect the published model. It keeps serving until you publish the new training. To roll back, publish an earlier training.
+
+Signals doesn't retrain models automatically, or track how a published model performs over time. To keep a model current, retrain it on a more recent training window and compare the results before you publish.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

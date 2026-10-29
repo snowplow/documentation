@@ -232,9 +232,9 @@ Agentic contexts follow the same draft-then-publish model as other Signals resou
 
 ## Predictive attributes
 
-Predictive attributes score how likely a session is to reach a goal you define, such as a purchase. Signals trains a model in your Snowflake warehouse on the history of the stream attributes you choose as inputs, then calculates a score on request from the current values of those attributes.
+Predictive attributes score how likely a session is to reach a goal you define, such as a purchase. Signals builds a training dataset in your Snowflake warehouse from the history of the stream attributes you choose as inputs, trains a model on it, then calculates a score on request from the current values of those attributes.
 
-A predictive attribute has two levels of version. The version changes when you change the goal or the inputs, and each retraining creates a new training of that version. Publishing a training makes it the live model, and retraining doesn't affect the live model until you publish again. Learn how to [define a predictive attribute](/docs/signals/predictive-attributes/index.md) and [retrieve a score](/docs/signals/applications/predictive-attributes/index.md) in your application.
+A predictive attribute has two levels of version. You create a new version to change the goal, the inputs, or the excluded events, and each retraining creates a new training of that version. Publishing a training makes it the live model, and retraining doesn't affect the live model until you publish again. Learn how to [define a predictive attribute](/docs/signals/predictive-attributes/index.md) and [retrieve a score](/docs/signals/applications/predictive-attributes/index.md) in your application.
 
 ## Profiles Store
 

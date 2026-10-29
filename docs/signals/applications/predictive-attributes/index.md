@@ -16,15 +16,15 @@ import TabItem from '@theme/TabItem';
 Predictive attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
 :::
 
-Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the current values of the model's input attributes, so it reflects everything the user has done up to that moment.
+Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes.
 
 Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Get the identifiers
 
-A predictive attribute can use input attributes with different [attribute keys](/docs/signals/attributes/attribute-keys/index.md), for example session-level attributes keyed on `domain_sessionid` and user-level attributes keyed on `domain_userid`. To score it, pass one identifier for each attribute key its inputs use. Signals ignores identifiers for other keys.
+A predictive attribute can use input attributes with different [attribute keys](/docs/signals/attributes/attribute-keys/index.md), for example session-level attributes keyed on `domain_sessionid` and user-level attributes keyed on `domain_userid`. To score it, pass one identifier for each attribute key its inputs use. An empty identifier counts as missing, and Signals ignores identifiers for other keys. An identifier Signals hasn't seen before still gets a score, calculated from empty attribute values.
 
-Scoring happens server-side, so you'll need to pass your backend the current identifiers. In the browser, read them with the tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) and [`getDomainUserId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-user-id) methods, then send them to your server, for example as request parameters.
+Requests to Signals need credentials, so request scores from your server. In the browser, read the identifiers with the tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) and [`getDomainUserId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-user-id) methods, then send them to your server, for example as request parameters.
 
 ## Retrieve a score
 
@@ -90,9 +90,7 @@ curl \
 </TabItem>
 </Tabs>
 
-You can't use an attribute key called `name` in a predictive attribute's inputs, because the parameter is reserved for the predictive attribute's name.
-
-## Response format
+## Read the response
 
 The response contains the score and the version of the model that produced it:
 
@@ -116,9 +114,9 @@ The table below describes each field in the response.
 
 ### Interpret the score
 
-Use the score to rank sessions against each other, not as an exact probability. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely. Choose thresholds by looking at the scores your sessions actually receive, and revisit them each time you publish a new training, because a new model can shift the range of scores.
+Use the score to rank sessions against each other, not as an exact probability. Signals corrects scores for the sampling it uses in training, so they're on the scale of your real goal rate, but they aren't guaranteed to be calibrated. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely. Choose thresholds by looking at the scores your sessions receive, and revisit them each time you publish a new training, because a new model can shift the range of scores.
 
-Signals scores a session whatever state it's in. Scores are less reliable for states that were rare in the training data, such as a session's first event, or a session that has already reached the goal.
+Signals scores a session whatever state it's in. Scores are less reliable for states that training doesn't cover, such as a very short session, or a session that has already reached the goal.
 
 ### Handle errors
 
@@ -126,10 +124,14 @@ The endpoint returns these error codes:
 
 | Status | Cause                                                                                                       |
 | ------ | ----------------------------------------------------------------------------------------------------------- |
-| `400`  | The request is missing the name, or an identifier for one of the attribute keys the inputs use              |
-| `404`  | No version of the predictive attribute is published                                                          |
-| `503`  | The model is being published or loaded. Retry after a few seconds                                            |
-| `504`  | Reading the input attributes took longer than the request timeout                                            |
+| `400`  | The name is missing or invalid, a parameter appears more than once, or there's no identifier for one of the attribute keys the inputs use |
+| `401`  | The token is missing, invalid, or expired                                                                     |
+| `404`  | No version of the predictive attribute is published                                                           |
+| `500`  | An unexpected error, for example an input attribute group is no longer published                             |
+| `503`  | Scoring is temporarily unavailable, for example while the model is being published or loaded. Retry after a few seconds |
+| `504`  | Reading the input attributes took longer than the request timeout                                             |
+
+The SDKs raise these as a `SignalsAPIError` that carries the status code.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

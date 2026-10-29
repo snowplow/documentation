@@ -1,6 +1,8 @@
 ---
 title: "New in Signals: predictive attributes"
-description: "Train a model on your stream attributes in your Snowflake warehouse, and score how likely each session is to reach a goal in real time. Available in private preview."
+description: "Train a model on the history of your stream attributes, using event data in your Snowflake warehouse, and score how likely each session is to reach a goal in real time. Available in private preview."
+sidebar_label: "Signals predictive attributes"
+keywords: ["predictive attributes", "propensity score", "machine learning", "conversion prediction", "Signals", "Snowflake"]
 date: "2026-10-26"
 category:
   - "Product news"
@@ -19,11 +21,11 @@ Predictive attributes are in private preview. Contact Snowplow to enable them fo
 
 **Trained on your own data.** Signals builds the training dataset in your Snowflake warehouse, from the same attribute definitions it uses to score live sessions. For each training example, it calculates the attribute values as they were at that moment, so the model learns from the same view of a session that it sees when scoring.
 
-**Scored on request.** Signals calculates the score when your application asks for it, from the latest attribute values, so the score reflects everything the user has done up to that point in the session.
+**Scored on request.** Signals calculates the score when your application asks for it, from the most recent attribute values Signals has calculated for the session.
 
 **Session and user inputs together.** Inputs can come from attribute groups with different attribute keys, so one model can combine what a user is doing in this session with what they've done before.
 
-**Quality you can check.** Each training reports its AUC, top-decile lift, baseline conversion rate, and the importance of each input attribute. You can compare trainings, publish the one you want, and roll back to an earlier one.
+**Quality you can check.** Each training reports its AUC, top-decile lift, baseline goal rate, Brier score, and the importance of each input attribute. You can compare trainings, publish the one you want, and roll back to an earlier one.
 
 ## Example use cases
 
@@ -31,7 +33,7 @@ Predictive attributes are in private preview. Contact Snowplow to enable them fo
 
 **Prioritized support.** Route high-intent sessions to live chat first.
 
-**Retargeting.** Rank users by their latest score to decide who to include in a campaign.
+**Returning users.** Score users when they come back, and use the score to decide whether to include them in a campaign.
 
 ## How to use predictive attributes
 

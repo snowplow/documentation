@@ -330,7 +330,7 @@ If the attribute group version is used by a [service](/docs/signals/concepts/ind
 
 If the attribute group version is used by a published [intervention](/docs/signals/concepts/index.md#interventions), deleting or unpublishing it will unpublish the intervention.
 
-If the attribute group version is used by a [predictive attribute](/docs/signals/predictive-attributes/index.md), you can't delete it. You also can't unpublish it while that predictive attribute is published.
+If the attribute group version is used by any version of a [predictive attribute](/docs/signals/predictive-attributes/index.md), published or not, you can't delete it. You also can't unpublish it while that predictive attribute is published.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -339,7 +339,7 @@ Use `unpublish()` to stop active calculation without losing the attribute group 
 
 Use `delete()` to permanently remove the attribute group and its calculated attribute values from the Profiles Store. You must unpublish before deleting.
 
-Attribute groups used by a [predictive attribute](/docs/signals/predictive-attributes/index.md) can't be deleted, or unpublished while the predictive attribute is published.
+If any version of a [predictive attribute](/docs/signals/predictive-attributes/index.md) uses the attribute group version, published or not, you can't delete it. You also can't unpublish it while that predictive attribute is published.
 
 ```python
 # Unpublish

@@ -83,6 +83,36 @@ The REST catalog integration has been tested with Snowflake Open Catalog (Apache
           <IcebergRestConfig/>
         </tbody>
     </table>
+
+Since 0.15.0, the loader can authenticate to Snowflake Horizon Catalog with a Snowflake key pair. Set `rest.auth.type` in `output.good.catalog.options` to select the loader's key-pair authentication, and provide the key pair's details alongside it. The loader exchanges a signed JWT for a catalog token at the catalog's `/v1/oauth/tokens` endpoint, and renews it before it expires.
+
+```json
+"options": {
+  "rest.auth.type": "com.snowplowanalytics.snowplow.lakes.SnowflakeKeyPairAuthManager"
+
+  # -- Snowflake account identifier
+  "snowflake.auth.account": "MYORG-MYACCT"
+
+  # -- The Snowflake user the public key is registered against
+  "snowflake.auth.user": "LAKE_LOADER_SVC"
+
+  # -- The PKCS#8 private key in PEM format
+  "snowflake.auth.private-key": ${SNOWFLAKE_PRIVATE_KEY}
+
+  # -- Optional. Passphrase of an encrypted private key
+  "snowflake.auth.private-key-passphrase": ${SNOWFLAKE_PRIVATE_KEY_PASSPHRASE}
+
+  # -- The Snowflake role the loader acts as
+  "scope": "session:role:LAKE_LOADER_ROLE"
+}
+```
+
+:::note[Account identifier format]
+
+Write `snowflake.auth.account` as `<ORG>-<ACCOUNT>`, with a hyphen rather than a period, or as an account locator without its region, for example `XY12345` rather than `XY12345.us-east-1`. Snowflake rejects any other format as bad credentials.
+
+:::
+
   </TabItem>
 
 </Tabs>

@@ -13,7 +13,9 @@ components:
 
 [Snowplow Identities 0.2.0](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0)
 simplifies current identity resolution on Snowflake, BigQuery, and Databricks. Immutable
-identifier rows resolve through a view, so merges no longer rewrite those rows.
+identifier rows resolve through a view, so merges no longer rewrite those rows. Install
+the package from Git with `revision: "0.2.0"`, following the
+[quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/).
 
 The mapping view adds `mapping_state` and `is_preferred`. The optional merge-limit heuristic
 retains every owner and marks an unambiguous preferred owner; it also covers identifiers

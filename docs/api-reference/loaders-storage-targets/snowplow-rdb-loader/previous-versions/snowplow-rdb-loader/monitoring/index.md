@@ -27,12 +27,12 @@ The RDB loader can `POST` an http webhook to a configurable uri whenever there i
 
 You can configure where the webhook is sent by setting the `monitoring.webhook` section in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "webhook": {
-    "endpoint": "http://example.com/receiver"
-    "tags": {
-      "tag1": "value1"
+```hocon
+monitoring: {
+  webhook: {
+    endpoint: "http://example.com/receiver"
+    tags: {
+      tag1: value1
     }
   }
 }
@@ -47,11 +47,11 @@ A webhook alert is sent when the RDB loader identifies inconsistencies between t
 
 Folder monitoring is configured by setting the `monitoring.folders` section in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "folders": {
-    "staging": "s3://mybucket/loader/logs"
-    "period": "1 hour"
+```hocon
+monitoring: {
+  folders: {
+    staging: "s3://mybucket/loader/logs"
+    period: 1 hour
   }
 }
 ```
@@ -62,11 +62,11 @@ _Added in version 2.1.0._ The RDB loader can send an alert if the warehouse does
 
 The health check is configured by setting the `monitoring.healthCheck` section in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "healthCheck": {
-    "frequency": "20 minutes"
-    "timeout": "15 seconds"
+```hocon
+monitoring: {
+  healthCheck: {
+    frequency: 20 minutes
+    timeout: 15 seconds
   }
 }
 ```
@@ -89,16 +89,16 @@ snowplow.rdbloader.count_good:42|c|#tag1:value1snowplow.rdbloader.latency_collec
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "metrics": {
-    "hostname": "localhost"
-    "port": 8125
-    "tags": {
-      "tag1": "value1"
-      "tag2": "value2"
+```hocon
+monitoring: {
+  metrics: {
+    hostname: localhost
+    port: 8125
+    tags: {
+      tag1: value1
+      tag2: value2
     }
-    "prefix": "snowplow.rdbloader"
+    prefix: snowplow.rdbloader
   }
 }
 ```
@@ -111,9 +111,9 @@ Common reasons might be lost connection to the database, or an http error fetchi
 
 Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md) with the url of your sentry server:
 
-```json
-"monitoring": {
-  "dsn": "http://sentry.acme.com"
+```hocon
+monitoring: {
+  dsn: "http://sentry.acme.com"
 }
 ```
 
@@ -123,9 +123,9 @@ The loader can emit a Snowplow event to a collector when the application crashes
 
 Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "appId": "redshift-loader"
-  "collector": "collector.acme.com"
+```hocon
+monitoring: {
+  appId: redshift-loader
+  collector: collector.acme.com
 }
 ```

@@ -49,21 +49,21 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.aws.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.gcp.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.azure.minimal.hocon
 ```
 
@@ -81,10 +81,8 @@ See the [configuration reference](/docs/api-reference/loaders-storage-targets/la
 
 The default setting is `5 minutes`.  For moderate to high volumes, this value strikes a nice balance between the need for large output parquet files and the need for reasonably low latency data.
 
-```
-{
-  "windowing": "5 minutes"
-}
+```hocon
+windowing: 5 minutes
 ```
 
 If you tune this setting correctly, then your lake can support efficient analytic queries without the need to run an `OPTIMIZE` job on the files.

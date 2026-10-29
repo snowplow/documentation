@@ -48,18 +48,18 @@ The count metrics are reported on every cycle, emitting a zero when the loader h
 
 StatsD is configured under `monitoring.metrics.statsd` in your configuration file:
 
-```json
-"monitoring": {
-  "metrics": {
-    "statsd": {
-      "hostname": "localhost"
-      "port": 8125
-      "tags": {
-        "tag1": "value1"
-        "tag2": "value2"
+```hocon
+monitoring: {
+  metrics: {
+    statsd: {
+      hostname: localhost
+      port: 8125
+      tags: {
+        tag1: value1
+        tag2: value2
       }
-      "prefix": "snowplow.lakeloader"
-      "period": "1 minute"
+      prefix: snowplow.lakeloader
+      period: 1 minute
     }
   }
 }
@@ -71,13 +71,13 @@ StatsD is configured under `monitoring.metrics.statsd` in your configuration fil
 
 Prometheus is configured under `monitoring.metrics.prometheus` in your configuration file:
 
-```json
-"monitoring": {
-  "metrics": {
-    "prometheus": {
-      "tags": {
-        "tag1": "value1"
-        "tag2": "value2"
+```hocon
+monitoring: {
+  metrics: {
+    prometheus: {
+      tags: {
+        tag1: value1
+        tag2: value2
       }
     }
   }
@@ -123,10 +123,10 @@ The two storage gauges hold a peak rather than tracking current use, and a windo
 
 Sentry is configured by setting the `monitoring.sentry.dsn` key in your configuration file with the URL of your Sentry server:
 
-```json
-"monitoring": {
-  "sentry": {
-    "dsn": "http://sentry.acme.com"
+```hocon
+monitoring: {
+  sentry: {
+    dsn: "http://sentry.acme.com"
   }
 }
 ```

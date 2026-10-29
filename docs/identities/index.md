@@ -48,7 +48,7 @@ Identities is self-serviceable from [Console](/docs/identities/configuration/ind
 
 To use Identities, start by deciding which user identifiers are most relevant to your use cases. Identities supports standard Snowplow identifiers such as `user_id` and `domain_userid`, as well as custom identifiers derived from any field in the event payload. Because your choice of identifiers affects both resolution quality and cost, follow the guidance in [choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md) before you configure them.
 
-After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables.
+After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables. To check how your identity graph is developing, see [Monitor your identity graph](/docs/identities/monitoring/index.md).
 
 ## Fulfill GDPR erasure requests
 

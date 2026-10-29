@@ -21,6 +21,7 @@ The Lake Loader tracks the following metrics:
 - `e2e_latency`: the end-to-end latency of the Snowplow pipeline. For each window of events, the time from the first event being received by the Collector until every event in the window is written and committed to the lake.
 - `table_data_files_total`: the number of data files in the table after a commit. Use it to monitor table growth and whether your [compaction strategy](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md) is keeping up.
 - `table_snapshots_retained`: the number of snapshots retained in the table metadata. Use it to monitor snapshot accumulation and whether your [snapshot expiration policy](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md) is keeping up.
+- `entity_superset_entries` (Prometheus only): the number of schemas the loader tracks so that every batch gets the same Spark schema. It is capped by [`entitySupersetCapacity`](/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/index.md), which you should raise if the loader logs warnings that schemas did not fit.
 
 The three duration metrics carry no unit in their name, because the unit depends on the protocol: StatsD carries milliseconds and Prometheus carries seconds, and each adds its own suffix. So `latency` is reported as `latency_millis` to StatsD and as `latency_seconds` to Prometheus.
 
@@ -95,6 +96,7 @@ The `tags` map is the only Prometheus setting, and it adds common labels to ever
 | `e2e_latency`              | `e2e_latency_seconds_bucket`, `e2e_latency_seconds_count`, `e2e_latency_seconds_sum`, and `e2e_latency_seconds_max`                             |
 | `table_data_files_total`   | `table_data_files_total`                                                                                                                        |
 | `table_snapshots_retained` | `table_snapshots_retained`                                                                                                                      |
+| `entity_superset_entries`  | `entity_superset_entries`                                                                                                                       |
 
 `latency` is a gauge rather than a histogram, because it describes how far behind the stream the loader is, which is a property of the loader as a whole. The other two are recorded once per window, when the window commits, so they have a distribution worth summarizing and are published as histograms instead.
 

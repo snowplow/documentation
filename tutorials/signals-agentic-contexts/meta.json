@@ -1,0 +1,8 @@
+{
+  "title": "Give an AI agent real-time session context with Signals",
+  "description": "Define an agentic context to capture a user's recent session activity, and retrieve it as a plain-language narrative for any agent framework.",
+  "label": "Signals implementation",
+  "useCase": "Customer-facing AI agents",
+  "technologies": ["AI assistants", "Python"],
+  "snowplowTech": ["Signals", "Console"]
+}

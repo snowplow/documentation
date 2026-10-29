@@ -1,6 +1,6 @@
 ---
 title: "New in Signals: predictive attributes"
-description: "Train a model on the history of your stream attributes, using event data in your Snowflake warehouse, and score how likely each session is to reach a goal in real time. Available in private preview."
+description: "Train a model on the history of your stream attributes, using event data in your Snowflake warehouse, and score how likely each session is to reach a goal in real time."
 sidebar_label: "Signals predictive attributes"
 keywords: ["predictive attributes", "propensity score", "machine learning", "conversion prediction", "Signals", "Snowflake"]
 date: "2026-10-26"
@@ -14,8 +14,6 @@ platforms:
 Stream attributes tell you what a user has done in a session: how many products they've viewed, what they added to their cart, how long since their last search. Deciding what that means for the session's outcome has meant writing rules by hand, such as "three product views and an add to cart", and guessing at the thresholds.
 
 A predictive attribute replaces the guess with a model. You define a goal, such as a `transaction` event, and choose the stream attributes that describe the behavior leading up to it. Signals trains a model on your event history, then scores live sessions from the current values of those attributes. The score is a number between 0 and 1 for how likely the session is to reach the goal.
-
-Predictive attributes are in private preview. Contact Snowplow to enable them for your Signals deployment.
 
 ## Key benefits
 

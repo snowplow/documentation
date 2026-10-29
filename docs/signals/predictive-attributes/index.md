@@ -12,18 +12,27 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::note[Private preview]
-Predictive attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
-:::
-
 A predictive attribute is a score between 0 and 1 for how likely a session is to reach a goal you define, for example a purchase or a sign-up. Signals recalculates your existing stream [attributes](/docs/signals/attributes/index.md) from the event history in your warehouse, trains a model on those values, then scores sessions in real time from the most recent values of those attributes.
 
 Use a predictive attribute when the behavior that leads to a goal is hard to express as a rule. An [intervention](/docs/signals/interventions/index.md) that triggers on at least three product views and one add to cart captures one pattern, with thresholds you choose. A predictive attribute learns from all the input attributes you give it, weighted by how often they preceded the goal in your own data. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
 
-A predictive attribute isn't a stream attribute. You can't use its score in intervention criteria, and the [Signals MCP server](/docs/signals/applications/mcp-server/index.md) doesn't expose it. Your application requests the score directly.
+A predictive attribute has these properties:
+* Training and scoring use the same attribute definitions, so the values the model learned from are calculated the same way as the values it scores
+* Signals calculates the score each time your application requests it, from the most recent attribute values, rather than on a schedule
+* The model is trained on your own event data, from attributes you choose
+* Inputs can combine attribute groups with different attribute keys, such as session-level and user-level attributes
+* Every training is kept with its quality metrics, so you can compare trainings, publish the one you want, and roll back
+
+Setting up a predictive attribute takes four steps:
+1. Define the goal and the input attributes
+2. Check that your warehouse has enough data
+3. Train a model
+4. Publish a training, then request scores from your application
+
+Your application requests the score through the Signals SDKs or API, and decides what to do with it. To trigger an [intervention](/docs/signals/interventions/index.md) from a score, request the score in your backend and push a [direct intervention](/docs/signals/interventions/index.md#direct-interventions) when it meets your threshold.
 
 Before you start, you'll need:
-* A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Training supports only Snowflake warehouses.
+* A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Signals builds the training data in Snowflake, so other warehouses can't be used for training.
 * At least one published [stream attribute group](/docs/signals/attributes/attribute-groups/index.md#stream) whose attributes describe the behavior you want the model to learn from
 * Enough history in your warehouse: at least 50 sessions that reach the goal and 50 that don't, in both the training and evaluation data
 
@@ -37,17 +46,11 @@ Once published, [retrieve a predictive attribute score](/docs/signals/applicatio
 
 Signals turns your event history into training examples, then trains a binary classifier on them. Understanding how the examples are built helps you choose the training settings.
 
-Events in a session that come before the session's first goal event can become training examples, called anchors. The [training options](#train-the-model) control which events qualify: `min_events` skips the first events of each session, `max_anchors_per_session` limits anchors to the first events after that, and events in `excluded_events`, such as `page_ping`, never become anchors. For each anchor, Signals calculates the value each input attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. This means the model learns from the same partial view of a session that it sees when it scores a live session.
+Events in a session that come before the session's first goal event become training examples, called anchors. For each anchor, Signals calculates the value each input attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. The model learns from the same partial view of a session that it sees when it scores a live session. The [training options](#train-the-model) control which events become anchors.
 
-Signals then:
-1. Reduces the negative examples to a maximum ratio against the positive ones, while building the examples in Snowflake
-2. Keeps up to one million examples, as whole sessions
-3. Holds out the most recent 20% of sessions for evaluation
-4. Trains a LightGBM model on the rest, using the most recent 10% of them to decide when to stop training
-5. Exports the model in ONNX format, adjusting its scores to undo the reduction of negative examples
-6. Measures the model's quality on the evaluation split
+Signals builds the examples with queries in your Snowflake warehouse, and balances them so that sessions that don't reach the goal don't dominate. It holds out the most recent 20% of sessions to measure the model's quality, and trains a LightGBM model on the rest. Scores are adjusted to account for the balancing, so they're on the scale of your real goal rate. Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes.
 
-Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes. The training dataset is built with queries in your Snowflake warehouse. Each training keeps its dataset as a table in the output database and schema of your [Signals warehouse connection](/docs/signals/setup/index.md). Signals doesn't delete these tables.
+Each training keeps its dataset as a table in the output database and schema of your [Signals warehouse connection](/docs/signals/setup/index.md), so you can inspect the data the model learned from. Signals doesn't delete these tables.
 
 :::tip[Train your own model]
 Predictive attributes build their training data the same way as [ML training datasets](/docs/signals/ml-training-datasets/index.md): anchors with point-in-time correct attribute values. To train and host your own model instead, for example with a different algorithm, or with labels from your own anchor table, use the dataset builder to create the training data.
@@ -162,20 +165,20 @@ The table below lists the fields of a predictive attribute.
 
 The input attributes are everything the model knows about a session. Choose attributes that describe behavior leading up to the goal, such as counts of product views, time since the last search, or the most frequent category viewed.
 
-Input attributes must follow these rules:
-* They come from stream attribute groups. Warehouse attribute groups aren't supported.
+Input attributes follow these rules:
+* They come from stream attribute groups
 * Each attribute group is pinned to one version, and that version must be published before you publish the predictive attribute
-* Timestamp attributes aren't supported. Use a `time_since_last` or `time_since_first` aggregation instead.
+* For time-based inputs, use a `time_since_last` or `time_since_first` aggregation. Timestamp values can't be used as inputs.
 
 Inputs can come from attribute groups with different [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Combining session-level and user-level attributes lets the model compare what the user does in the current session with what they've done before. Include some session-level attributes where you can, because they describe the current session.
 
-Signals converts each input into model features based on its aggregation. Numeric aggregations such as `counter`, `sum`, and `mean` are used as they are. Categorical values, such as from `most_frequent` or `unique_list`, become one column per common value, up to 50 values for single values and 100 for lists. Values that appear fewer than five times in the training data are ignored. Each extra column reduces how many examples fit into training, so a large number of categorical inputs can make training fail.
+Signals converts each input into model features based on its aggregation, so you don't need to encode values yourself. Numeric aggregations such as `counter`, `sum`, and `mean` are used as they are. Categorical values, such as from `most_frequent` or `unique_list`, become one column per common value, up to 50 values for single values and 100 for lists. Values that appear fewer than five times in the training data are ignored. Each column uses part of the training capacity, so prefer a few focused categorical inputs over many broad ones.
 
 ### Define the goal
 
 The goal is the event that counts as success, for example a `transaction` or a `sign_up`. The model scores how likely each session is to reach it. Define the goal with the same [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) syntax as attribute filters, using `all` or `any` conditions on atomic, event, or entity properties.
 
-The goal must happen later in the same session. A goal reached in a later session, such as a renewal days afterward, doesn't count, so the model has no examples of it to learn from. The goal is a single event that matches the criteria. Goals based on how often an event happens, on an event not happening, or on a sequence of events aren't supported.
+The goal is a single event that matches the criteria, later in the same session. Choose an outcome that the session's own activity leads to, such as a purchase, a sign-up, or a form submission. A goal reached in a later session, such as a renewal days afterward, doesn't count as reaching the goal.
 
 The goal, inputs, and excluded events are fixed once you create a version. To predict something different or change the inputs, create a new version.
 
@@ -189,6 +192,8 @@ Before training, check that the window has enough data. The check counts the exa
 * 1,000 examples in total
 
 Signals uses up to one million examples, keeping whole sessions together.
+
+Only the training window is required. Every other option has a default, so start with the defaults and adjust them once you've reviewed the first training.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -271,7 +276,7 @@ Predictive attributes have two levels of version:
 
 Retraining doesn't affect the published model. It keeps serving until you publish the new training. To roll back, publish an earlier training.
 
-Signals doesn't retrain models automatically, or track how a published model performs over time. To keep a model current, retrain it on a more recent training window and compare the results before you publish.
+You decide when to retrain. To keep a model current as user behavior changes, retrain it on a more recent training window, compare the metrics with the live training, and publish the new training if it performs better.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

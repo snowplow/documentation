@@ -56,9 +56,9 @@ To simplify migration to the new table format, it is possible to run the 2.x loa
 
 For example:
 
-```json
-"legacyColumns": [
-  "iglu:com.example/legacy_a/jsonschema/1-0-0",
+```hocon
+legacyColumns: [
+  "iglu:com.example/legacy_a/jsonschema/1-0-0"
   "iglu:com.example/legacy_b/jsonschema/1-*-*"
 ]
 ```

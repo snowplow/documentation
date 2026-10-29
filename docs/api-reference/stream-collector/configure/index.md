@@ -14,9 +14,9 @@ The collector is released under the [Snowplow Limited Use License](/limited-use-
 
 To accept the terms of license and run the collector, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `collector.license.accept` option, like this:
 
-```hcl
-collector {
-  license { accept = true }
+```hocon
+collector: {
+  license: { accept: true }
 }
 ```
 
@@ -172,16 +172,16 @@ If no domain is specified, the cookie will be set against the full collector dom
 
 In earlier versions, you could specify a `domain` to tie the cookie to. For example, if set to `.snplow.com`, the cookie would have been accessible to other applications running on `*.snplow.com`. To do the same in this version, use the `fallbackDomain` setting but **make sure** that you no longer include a leading dot:
 
-```properties
-fallbackDomain = "snplow.com"
+```hocon
+fallbackDomain: snplow.com
 ```
 
 The cookie set by the collector can be treated differently by browsers, depending on whether it's considered to be a first-party or a third-party cookie. In earlier versions (0.15.0 and earlier), if you had two collector endpoints, one on `collector.snplow.com` and one on `collector.snplow.net`, you could only specify one of those domains in the configuration. That meant that you were only able to set a first-party cookie server-side on either `.snplow.com` or `.snplow.net`, but not on both. From version 0.16.0, you can specify a list of domains to be used for the cookie (**note the lack of a leading dot**):
 
-```properties
-domains = [
-  "snplow.com"
-  "snplow.net"
+```hocon
+domains: [
+  snplow.com
+  snplow.net
 ]
 ```
 
@@ -204,11 +204,11 @@ The collector responds with a cookie to requests with a path that matches the `v
 
 You can also map any valid (ie, two-segment) path to one of the three defaults via the `collector.paths` section of the configuration file. Your custom path must be the key and the value must be one of the corresponding default paths. Both must be full valid paths starting with a leading slash:
 
-```properties
-paths {
-  "/com.acme/track"    = "/com.snowplowanalytics.snowplow/tp2"
-  "/com.acme/redirect" = "/r/tp2"
-  "/com.acme/iglu"     = "/com.snowplowanalytics.iglu/v1"
+```hocon
+paths: {
+  "/com.acme/track": /com.snowplowanalytics.snowplow/tp2
+  "/com.acme/redirect": /r/tp2
+  "/com.acme/iglu": /com.snowplowanalytics.iglu/v1
 }
 ```
 
@@ -296,9 +296,9 @@ This section only applies to the case when SQS is used as a fallback sink when K
 
 To start using this feature, you will first need to set up the SQS queues. Two separate queues are required for good (raw) events and bad events. The Collector then needs to be informed about the queue names, and this can be done by adding these as entries to `config.hocon`:
 
-```properties
-sqsGoodBuffer = {good-sqs-queue-url}
-sqsBadBuffer = {bad-sqs-queue-url}
+```hocon
+sqsGoodBuffer: <good-sqs-queue-url>
+sqsBadBuffer: <bad-sqs-queue-url>
 ```
 
 ### Networking

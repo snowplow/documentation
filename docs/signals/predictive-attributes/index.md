@@ -14,7 +14,12 @@ import TabItem from '@theme/TabItem';
 
 A predictive attribute predicts how likely a session is to reach a goal you define, such as a purchase or a sign-up. Signals trains a model on your own stream [attribute](/docs/signals/attributes/index.md) definitions, then returns a score between 0 and 1 each time your application requests one.
 
-Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both. Compared with a hand-written rule, such as an [intervention](/docs/signals/interventions/index.md) that triggers on a given rule, a predictive attribute learns from your own data which inputs matter and how much. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
+Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both.
+
+For example, use a predictive attribute to:
+* Show a discount only to sessions unlikely to convert on their own
+* Route high-intent sessions to live chat first
+* Decide whether to include a returning user in a campaign
 
 Setting up a predictive attribute takes three steps:
 1. Define the goal and the input attributes

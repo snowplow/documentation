@@ -11,9 +11,9 @@ components:
 platforms:
   - "Snowflake"
 ---
-Stream attributes tell you what a user has done in a session: how many products they've viewed, what they added to their cart, how long since their last search. Deciding what that means for the session's outcome has meant writing rules by hand, such as "three product views and an add to cart", and guessing at the thresholds.
+Signals shows you what your users are doing in real time: the products they've viewed, what's in their cart, how long since their last search. Knowing what they'll do next, such as whether this session ends in a purchase, has meant building a propensity model yourself, along with the pipeline to train and serve it.
 
-A predictive attribute replaces the guess with a model. You define a goal, such as a `transaction` event, and choose the stream attributes that describe the behavior leading up to it. Signals trains a model on your event history, then scores live sessions from the current values of those attributes. The score is a number between 0 and 1 for how likely the session is to reach the goal.
+Predictive attributes give you that prediction as a score. You define a goal, such as a purchase, and choose the user behavior the model learns from, such as product views and cart additions. Signals trains a model on your own event history, then scores a session whenever your application asks, while the user is still on your site. The score is a number between 0 and 1 for how likely the session is to reach the goal.
 
 ## Key benefits
 
@@ -21,9 +21,9 @@ A predictive attribute replaces the guess with a model. You define a goal, such 
 
 **Scored on request.** Signals calculates the score when your application asks for it, from the most recent attribute values Signals has calculated for the session.
 
-**Session and user inputs together.** Inputs can come from attribute groups with different attribute keys, so one model can combine what a user is doing in this session with what they've done before.
+**Session and user behavior together.** One model can combine what a user is doing in this session with what they've done in earlier sessions.
 
-**Quality you can check.** Each training reports its AUC, top-decile lift, baseline goal rate, Brier score, and the importance of each input attribute. You can compare trainings, publish the one you want, and roll back to an earlier one.
+**Quality you can check.** Each training reports its AUC, top-decile lift, baseline goal rate, Brier score, and how much each input contributed. You can compare trainings, publish the one you want, and roll back to an earlier one.
 
 ## Example use cases
 

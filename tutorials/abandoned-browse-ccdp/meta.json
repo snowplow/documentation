@@ -2,6 +2,7 @@
   "title": "Implement an abandoned browse system with composable CDP",
   "label": "Solution accelerator",
   "description": "Engage with customers that show intent to purchase, using Snowplow composable CDP with Braze.",
+  "date": "2025-02-18",
   "useCase": "Composable CDP",
   "technologies": ["Census", "Braze"],
   "snowplowTech": ["Local"]

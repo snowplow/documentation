@@ -1,6 +1,7 @@
 {
   "title": "Implement real-time interventions in an ecommerce app using Signals",
   "description": "Get hands-on with Signals interventions and a demo e-shop application.",
+  "date": "2025-10-30",
   "label": "Signals implementation",
   "useCase": "Real-time personalization",
   "technologies": ["Jupyter notebook", "React"],

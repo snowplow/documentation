@@ -2,6 +2,7 @@
   "title": "Track events on Android",
   "label": "Tracking implementation",
   "description": "Track events using our Android SDK to better understand your users' behavior on mobile devices.",
+  "date": "2024-10-23",
   "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Micro"]

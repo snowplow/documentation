@@ -41,7 +41,7 @@ Use the event filter to choose which event types to calculate the attribute from
 Click the dropdown to see the available events, listed by name and vendor:
 
 * **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) from an existing [tracking plan](/docs/event-studio/tracking-plans/index.md).
-* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
+* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. [Structured](/docs/events/custom-events/index.md#structured-events) events aren't listed here. To calculate an attribute from them, see [Calculate attributes from structured events](#calculate-attributes-from-structured-events).
 * **Custom events**: select any schema or data structure available within your pipeline.
 
 :::note[Searching for events]
@@ -428,6 +428,55 @@ criteria = Criteria(
     ]
 )
 ```
+
+</TabItem>
+</Tabs>
+
+### Calculate attributes from structured events
+
+[Structured events](/docs/events/custom-events/index.md#structured-events) don't have their own schema. Their data is stored in the `se_category`, `se_action`, `se_label`, `se_property`, and `se_value` [atomic properties](/docs/fundamentals/canonical-event/index.md#structured-events), which are only populated for structured events.
+
+To calculate an attribute from structured events, leave the event filter set to all events, and add a [criteria](#filter-with-criteria) filter on one or more of the `se_` properties. Events without a value for that property, such as page views, don't match the criteria, so only the structured events you've described update the attribute.
+
+You can also use the `se_` properties as the attribute's [property](#select-a-property). For example, use `se_label` with a `unique_list` aggregation, or `se_value` with a `sum` aggregation.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+To count the structured events with category `Product` and action `View`:
+
+1. Leave the event filter as **All events**
+2. Choose the `counter` aggregation
+3. Within **More options**, add a criterion on the atomic property `se_category`, with the `=` operator and the value `Product`
+4. Add a second criterion on `se_action`, with the `=` operator and the value `View`, and require `all` criteria to be met
+
+You'll find the `se_` properties on the **Atomic** tab of the property selector.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+This example counts the structured events with category `Product` and action `View`:
+
+```python
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty
+
+product_views = Attribute(
+    name="product_view_count",
+    description="Number of structured events with category Product and action View",
+    type="int32",
+    events=[],
+    aggregation="counter",
+    criteria=Criteria(
+        all=[
+            Criterion.eq(AtomicProperty(name="se_category"), "Product"),
+            Criterion.eq(AtomicProperty(name="se_action"), "View"),
+        ]
+    ),
+    default_value=0
+)
+```
+
+With the Python SDK, you can also restrict the attribute to structured events by passing `Event(name="event", vendor="com.google.analytics", version="1-0-0")` in `events`, together with the same criteria.
 
 </TabItem>
 </Tabs>

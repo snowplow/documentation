@@ -12,9 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes. Your application requests the score and decides what to do with it. To trigger an intervention from a score, request the score in your backend and push a [direct intervention](/docs/signals/interventions/index.md#direct-interventions) when it meets your threshold.
-
-Start by [connecting to Signals](/docs/signals/connection/index.md).
+Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes. Your application requests the score and decides what to do with it. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Get the identifiers
 

@@ -12,27 +12,19 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-A predictive attribute predicts how likely a session is to reach a goal you define, such as a purchase or a sign-up. Signals trains a model on your own stream [attributes](/docs/signals/attributes/index.md), then returns a score between 0 and 1 each time your application requests one.
+A predictive attribute predicts how likely a session is to reach a goal you define, such as a purchase or a sign-up. Signals trains a model on your own stream [attribute](/docs/signals/attributes/index.md) definitions, then returns a score between 0 and 1 each time your application requests one.
 
-Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both. Compared with a hand-written rule, such as an [intervention](/docs/signals/interventions/index.md) that triggers on at least three product views and one add to cart, a predictive attribute learns from your own data which inputs matter and how much. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
+Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both. Compared with a hand-written rule, such as an [intervention](/docs/signals/interventions/index.md) that triggers on a given rule, a predictive attribute learns from your own data which inputs matter and how much. For example, use it to show a discount only to sessions unlikely to convert on their own, or to route high-intent sessions to live chat first.
 
-A predictive attribute has these properties:
-* Training and scoring use the same attribute definitions, so the features the model scores are calculated the same way as the features it trained on
-* Signals calculates the score each time your application requests it, from the most recent attribute values, rather than on a schedule
-* The model is trained on your own event data, with point-in-time correct attribute values: each one uses only the events before that moment in the session
-* Inputs can combine attribute groups with different attribute keys, such as session-level and user-level attributes
-* Every training is kept with its quality metrics, so you can compare trainings, publish the one you want, and roll back
-
-Setting up a predictive attribute takes four steps:
+Setting up a predictive attribute takes three steps:
 1. Define the goal and the input attributes
-2. Check that your warehouse has enough data
-3. Train a model
-4. Publish a training, then request scores from your application
+2. Train a model
+3. Request scores from your application
 
-Signals calculates the score and serves it to your application through the Signals SDKs or API. Your application decides what to do with it. To trigger an [intervention](/docs/signals/interventions/index.md) from a score, request the score in your backend and push a [direct intervention](/docs/signals/interventions/index.md#direct-interventions) when it meets your threshold.
+Signals calculates the score and serves it to your application through the Signals SDKs or API. Your application decides what to do with it.
 
 Before you start, you'll need:
-* A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Signals builds the training data in Snowflake, so other warehouses can't be used for training.
+* A Snowflake warehouse connected to Signals, as described in [warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Predictive attribute training supports Snowflake.
 * At least one published [stream attribute group](/docs/signals/attributes/attribute-groups/index.md#stream) whose attributes describe the behavior you want the model to learn from
 * Enough history in your warehouse: at least 50 sessions that reach the goal and 50 that don't, in both the training and evaluation data
 
@@ -46,15 +38,11 @@ Once published, [retrieve a predictive attribute score](/docs/signals/applicatio
 
 Signals turns your event history into training examples, then trains a binary classifier on them. Understanding how the examples are built helps you choose the training settings.
 
-Events in a session that come before the session's first goal event become training examples, called anchors. For each anchor, Signals calculates the value each input attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. The model learns from the same partial view of a session that it sees when it scores a live session. The [training options](#train-the-model) control which events become anchors.
+Events in a session that come before the session's first goal event become training examples, called anchors. For each anchor, Signals calculates the value each attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. The model learns from the same partial view of a session that it sees when it scores a live session. The [training options](#train-the-model) control which events become anchors.
 
-Signals builds the examples with queries in your Snowflake warehouse, and balances them so that sessions that don't reach the goal don't dominate. It holds out the most recent 20% of sessions to measure the model's quality, and trains a LightGBM model on the rest. Scores are adjusted to account for the balancing, so they're on the scale of your real goal rate. Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes.
+Signals builds the examples with queries in your Snowflake warehouse, and balances them so that sessions that don't reach the goal don't dominate. It holds out the most recent 20% of sessions to measure the model's quality, and trains the model on the rest. Scores are adjusted to account for the balancing, so they're on the scale of your real goal rate. Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes.
 
 Each training keeps its dataset as a table in the output database and schema of your [Signals warehouse connection](/docs/signals/setup/index.md), so you can inspect the data the model learned from. Signals doesn't delete these tables.
-
-:::tip[Train your own model]
-Predictive attributes build their training data the same way as [ML training datasets](/docs/signals/ml-training-datasets/index.md): anchors with point-in-time correct attribute values. To train and host your own model instead, for example with a different algorithm, or with labels from your own anchor table, use the dataset builder to create the training data.
-:::
 
 ## Create a predictive attribute
 
@@ -63,13 +51,19 @@ A predictive attribute defines what to predict, and which attributes to predict 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-To create a predictive attribute using the UI, go to **Signals** > **Attribute groups** in Snowplow Console and create a predictive attribute. Predictive attributes are listed alongside your attribute groups.
+To create a predictive attribute using the UI, go to **Signals** > **Attribute groups** in Snowplow Console, click **Create attribute group**, and select **Start** under **Predictive attribute**. Predictive attributes are listed alongside your attribute groups.
 
 The form has four sections:
 * **Attribute details**: a unique name in lowercase snake case, and an optional description and owner
 * **Goal**: the goal event, and optional criteria the event must meet
 * **Input features**: the stream attribute groups the model learns from. Expand a group to leave out individual attributes.
 * **Configuration**: the [training settings](#train-the-model)
+
+![Create predictive attribute form with the attribute name, description, and owner filled in, and a goal of the snowplow_ecommerce_action event where type equals transaction](../images/predictive-attribute-create.png)
+
+Click **Add attribute groups** to choose the input features.
+
+![Add feature inputs panel with two attribute groups selected, one expanded to show its attributes with one attribute unticked](../images/predictive-attribute-inputs.png)
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -198,9 +192,11 @@ Only the training window is required. Every other option has a default, so start
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Set the training options in the **Configuration** section, then click **Check data**. You can't save until the check passes. Saving starts the first training.
+Set the training options in the **Configuration** section, then click **Check data**. The check shows how many sessions reach the goal, and whether there's enough data to train. You can't save until the check passes. Click **Create and train** to save the predictive attribute and start the first training.
 
-To train again with different settings, open the predictive attribute, click the `⋯` button on a row of the **Model versions** table, and select **Retrain from**. Only one training can run at a time for each version.
+![Configuration section with the training window and options set, and a passing data check showing sessions that reach the goal and the number of training rows](../images/predictive-attribute-check-data.png)
+
+To train again, open the predictive attribute and click **Retrain now**. To start from a specific training's settings, go to the **Model versions** tab, click the `⋯` button on that training's row, and select **Retrain from**. Only one training can run at a time for each version.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -262,7 +258,9 @@ Each successful training records quality metrics, measured on the evaluation spl
 | `rows_used`          | The number of examples the model was trained on, excluding the evaluation data                                |
 | `feature_importance` | How much each input attribute contributed to the model, highest first                                         |
 
-In Console, these are on the **Training review** page for each training, which rates AUC from **Poor** to **Excellent**. In the SDK, they're in the `metrics` field of the training.
+In Console, go to the **Model versions** tab, click the `⋯` button on a training's row, and select **Review**. The review page rates AUC from **Poor** to **Excellent**, shows how much each input attribute contributed, and compares the training with another one, such as the published training. In the SDK, the metrics are in the `metrics` field of the training.
+
+![Training review page comparing a training with the published one, showing AUC rated Good, baseline conversion, training examples, top-10% lift, and the input attributes that most influenced the model](../images/predictive-attribute-training-review.png)
 
 If an input attribute contributes almost nothing, consider removing it in a new version. If AUC is close to `0.5`, the inputs don't describe the behavior that leads to the goal, and adding different attributes will help more than changing the training options.
 
@@ -281,7 +279,11 @@ You decide when to retrain. To keep a model current as user behavior changes, re
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-To publish, open the predictive attribute, click the `⋯` button on the training's row of the **Model versions** table, and select **Publish**. To unpublish or delete, click the `⋯` button on the top right of the details page and select **Unpublish** or **Delete version**.
+To publish, open the predictive attribute's **Model versions** tab, click the `⋯` button on the training's row, and select **Publish**. You can also click **Publish** on a training's review page.
+
+![Model versions tab listing versions and their trainings with status and AUC, with a training's menu open showing Review, Publish, and Retrain from](../images/predictive-attribute-model-versions.png)
+
+To unpublish, click the `⋯` button on the top right of the details page and select **Unpublish**. Once the version is unpublished, the same menu shows **Delete version**.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">

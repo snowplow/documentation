@@ -2,21 +2,24 @@
 title: "Signals fundamentals"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
-keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
+description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, predictive attributes, and the Profiles Store."
+keywords: ["attribute groups", "services", "interventions", "agentic contexts", "predictive attributes", "profiles store", "attribute keys"]
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-Signals has four main configurable components:
+Signals has five main configurable components:
 * **Attribute groups**, for defining and calculating attributes
 * **Agentic contexts**, for grounding agents in a user's recent session activity
+* **Predictive attributes**, for scoring how likely a session is to reach a goal
 * **Services**, for consuming calculated attributes in your applications
 * **Interventions**, for consuming calculated attributes and triggering actions in your applications
 
 **Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure or take action on - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups; they are effectively properties of the attribute group.
 
 **Agentic contexts** are a separate resource, for capturing a rolling window of session activity to ground an agent, along with instructions to guide it.
+
+**Predictive attributes** are models trained on the history of your stream attributes. They score sessions in real time from the current attribute values.
 
 To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 
@@ -227,6 +230,12 @@ Each agentic context also carries a free-text prompt, stored and returned alongs
 
 Agentic contexts follow the same draft-then-publish model as other Signals resources, but aren't versioned: there's a single published agentic context per name, and publishing a draft replaces it. Learn how to [define an agentic context](/docs/signals/agentic-contexts/index.md) and [retrieve one](/docs/signals/applications/agentic-contexts/index.md) in your application.
 
+## Predictive attributes
+
+Predictive attributes score how likely a session is to reach a goal you define, such as a purchase. Signals builds a training dataset in your Snowflake warehouse from the history of the stream attributes you choose as inputs, trains a model on it, then calculates a score on request from the current values of those attributes.
+
+A predictive attribute has two levels of version. You create a new version to change the goal, the inputs, or the excluded events, and each retraining creates a new training of that version. Publishing a training makes it the live model, and retraining doesn't affect the live model until you publish again. Learn how to [define a predictive attribute](/docs/signals/predictive-attributes/index.md) and [retrieve a score](/docs/signals/applications/predictive-attributes/index.md) in your application.
+
 ## Profiles Store
 
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.
@@ -241,8 +250,8 @@ Using Signals follows these steps, and the rest of this documentation follows th
 
 1. [Set up Signals](/docs/signals/setup/index.md) in Snowplow Console. This one-time task deploys the Signals infrastructure. Connecting a warehouse is optional, but you'll need one to backfill stream attributes, sync warehouse tables, or test definitions before publishing.
 2. Plan your use case. Decide which attributes to calculate and at what level, whether they come from the stream or the warehouse, and whether your application will pull attributes, react to interventions, or ground an agent with an agentic context.
-3. Define and publish your configuration. Create [attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), and [agentic contexts](/docs/signals/agentic-contexts/index.md) in Console or with the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk), and group attribute groups into [services](/docs/signals/applications/services/index.md). Signals only calculates attributes once you publish; see the [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow).
-4. Take action in your application. [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md), [subscribe to interventions](/docs/signals/applications/subscribe/index.md), or [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) using the SDKs or API.
+3. Define and publish your configuration. Create [attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), [agentic contexts](/docs/signals/agentic-contexts/index.md), and [predictive attributes](/docs/signals/predictive-attributes/index.md) in Console or with the [Signals Python SDK](/docs/signals/connection/index.md#signals-python-sdk), and group attribute groups into [services](/docs/signals/applications/services/index.md). Signals only calculates attributes once you publish; see the [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow).
+4. Take action in your application. [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md), [subscribe to interventions](/docs/signals/applications/subscribe/index.md), [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md), or [score a predictive attribute](/docs/signals/applications/predictive-attributes/index.md) using the SDKs or API.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

@@ -156,30 +156,6 @@ Run `dbt deps` and `dbt run` again. If you enable the semantic view without addi
 
 ## Full refresh
 
-If you upgrade from a revision that stored raw entities in `base_events`, follow the
-[Agent Analytics migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/agent-analytics/index.md).
-Existing Snowflake installations can migrate the stored table to scalar fields while
-retaining their event history, manifest, and source lookup. This avoids a full refresh
-for the schema change. New installations need no extra step.
-
-For BigQuery or Databricks, or when the Snowflake migration is not applicable, rebuild
-the whole package to populate the extracted UTM fields and create the date partitions.
-An incremental run stops with an upgrade error while the required scalar fields are missing.
-
-Before rebuilding, back up your outputs and confirm that your source retains all events
-from `snowplow__start_date`. If source history has expired, preserve your existing tables
-and plan a migration before upgrading; a full refresh cannot recover missing events.
-
-```bash
-dbt run --select snowplow_agent_analytics --full-refresh --vars '{snowplow__allow_refresh: true}'
-dbt run --select snowplow_agent_analytics
-dbt test --select snowplow_agent_analytics
-```
-
-Repeat normal runs until the manifest catches up. Each run processes at most
-`snowplow__backfill_limit_days`. Validate the complete outputs before resuming downstream
-jobs. Do not refresh `base_events` alone while retaining the old manifest or source lookup.
-
 By default, running `dbt run --full-refresh` won't drop the incremental manifest, `base_events`, or `int_agent_source_lookup`, as this would reset all incremental processing. To allow a full reset, set `snowplow__allow_refresh` to `true` before running:
 
 ```yaml title="dbt_project.yml"

@@ -134,4 +134,12 @@ Check the outputs and the manifest's progress, then resume scheduled runs and do
 
 A coordinated full refresh is the alternative when you cannot migrate the existing table. Back up the package outputs and confirm that the atomic source retains all events from `snowplow__start_date` before rebuilding. A full refresh cannot recover events that have expired from the source.
 
-Follow the [full-refresh instructions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md#full-refresh) to rebuild the whole package and repeat incremental runs until the manifest catches up. Do not refresh `base_events` alone while retaining an old manifest or source lookup.
+Pause scheduled Agent Analytics runs and downstream jobs before rebuilding. Pin `revision: "0.2.0"` in your Git package entry and run `dbt deps`. Rebuild the whole package with `snowplow__allow_refresh: true` so the manifest, base table, and source lookup reset together:
+
+```bash
+dbt run --select snowplow_agent_analytics --full-refresh --vars '{snowplow__allow_refresh: true}'
+dbt run --select snowplow_agent_analytics
+dbt test --select snowplow_agent_analytics
+```
+
+Repeat normal runs without `--full-refresh` until the manifest catches up. Each run processes at most `snowplow__backfill_limit_days`. Validate the complete outputs before resuming scheduled runs and downstream jobs. Do not refresh `base_events` alone while retaining an old manifest or source lookup.

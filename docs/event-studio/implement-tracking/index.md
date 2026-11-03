@@ -8,6 +8,7 @@ keywords: ["tracking implementation", "code generation", "Snowtype", "tracking c
 
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
@@ -26,6 +27,12 @@ This provides several key advantages over manual implementation:
 * Workflow integration: use CI/CD GitOps-like processes to [keep your tracking code in sync](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md) with your schemas
 
 For custom tracking on web, you also have the option of using the ready-to-use event specification code snippets in [Console](https://console.snowplowanalytics.com), with or without Snowtype. See below for details.
+
+:::tip[Implement tracking with your AI assistant]
+A coding agent connected to the Snowplow MCP server can read your tracking plans and event specifications, add the tracking to your application, and check that the events arrive. For example: "Implement the event specifications from our checkout tracking plan in this app, and confirm each event reaches my development pipeline."
+
+<AiAssistantInstall />
+:::
 
 ## Snowtype workflow
 

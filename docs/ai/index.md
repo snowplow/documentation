@@ -14,6 +14,8 @@ import { CardGrid, CallToActionCard } from '@site/src/components/CardGrid'
 
 Snowplow supports agentic and LLM-powered workflows in several ways. New to Snowplow? [Snowplow quickstart with your coding agent](/docs/get-started/quickstart/index.md) goes from a hosted environment to validated events with the assistant doing the setup.
 
+To connect your own coding agent, such as Claude Code or Cursor, to your Snowplow account, run `npx plugins add snowplow/skills`. This installs the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx). Your agent can then answer questions about your account, design and implement tracking, configure your pipeline, and troubleshoot failed events.
+
 :::tip[Snowplow Signals]
 
 Looking for real-time behavioral context and profile data for your AI use cases?

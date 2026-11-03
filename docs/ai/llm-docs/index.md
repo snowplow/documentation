@@ -9,6 +9,8 @@ date: "2026-09-28"
 
 The Snowplow documentation is available in formats designed for LLMs, so your AI assistant can find and read the pages it needs.
 
+If your assistant is connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), it can also fetch documentation pages through the server's documentation tool, alongside working with your Snowplow account.
+
 ## Documentation index in `llms.txt`
 
 This documentation follows the [`llms.txt` standard](https://llmstxt.org/), providing structured information to help an LLM use the site.

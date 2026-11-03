@@ -146,7 +146,9 @@ The Snowplow CLI includes a local Model Context Protocol (MCP) server that enabl
 - Analyze tracking requirements and suggest implementations
 - Validate tracking plans and source applications
 
-For setup instructions and configuration examples for different MCP clients, see our [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
+For setup instructions and configuration examples for different MCP clients, see [CLI MCP server](/docs/ai/cli-mcp-server/index.md) and the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
+
+The CLI MCP server works on tracking plan files on your machine. To work directly with your Snowplow Console account, including pipelines, failed events, enrichments, and Signals, use the remote [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). Install it in your coding agent, together with the Snowplow [skills](/docs/ai/skills/index.mdx), with `npx plugins add snowplow/skills`.
 
 ## Use cases
 

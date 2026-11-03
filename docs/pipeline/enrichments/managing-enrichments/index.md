@@ -6,6 +6,8 @@ description: "Enable, configure, and deploy enrichments for your pipelines using
 keywords: ["manage enrichments", "enable enrichments", "enrichment configuration"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 Snowplow [Console](https://console.snowplowanalytics.com) enables you to manage enrichments that run on each of your pipelines and development environments.
 
 ## Recommended workflow
@@ -38,6 +40,12 @@ Click on the enrichment you want to change. You will see the current configurati
 
 Never put credentials, API keys, or salts directly in your enrichment configuration. For enrichments that require secrets (e.g., API Request enrichment, SQL Query, PII Pseudonymization), use the [Credentials Sharing Form](https://console.snowplowanalytics.com/contact-us) to share sensitive information with Snowplow. The Support team will place the secrets in secured environment variables on your behalf.
 
+:::
+
+:::tip[Configure enrichments with your AI assistant]
+An AI assistant connected to the Snowplow MCP server can show which enrichments are enabled on each pipeline and development environment, and update their configuration for you. Follow the same recommended workflow: ask it to change a development environment first. For example: "Enable the IP lookups enrichment on my development environment, and show me the configuration before you publish it." The secrets guidance above also applies to assistants: don't paste credentials into the conversation.
+
+<AiAssistantInstall />
 :::
 
 ## Deploy an enrichment from a development environment to a pipeline

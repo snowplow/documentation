@@ -8,6 +8,7 @@ sidebar_position: 100
 ---
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
@@ -21,5 +22,11 @@ The **JavaScript tracker** is loaded via tag: add code snippets to your website 
 The **Browser tracker** is available via `npm` (`@snowplow/browser-tracker`) and can be directly bundled into your application. It supports core tracking methods out of the box and can be extended through plugins (`@snowplow/browser-plugin-*`). This tracker is often used when natively integrating tracking into React, Angular and Vue applications.
 
 As the API is similar, we have combined the documentation for both trackers. We've marked the sections which are only relevant to one tracker or another.
+
+:::tip[Add the tracker with your AI assistant]
+If you use Snowplow CDI, a coding agent connected to the Snowplow MCP server can add the JavaScript or Browser tracker to your website and check that the events arrive in your pipeline. For example: "Add the Snowplow Browser tracker to this app, track page views and link clicks, and confirm the events reach my development pipeline."
+
+<AiAssistantInstall />
+:::
 
 The JavaScript and Browser tracker, along with the [Node.js](/docs/sources/node-js-tracker/index.md) tracker, are part of [one monorepo](https://github.com/snowplow/snowplow-javascript-tracker). The current version is {versions.javaScriptTracker}.

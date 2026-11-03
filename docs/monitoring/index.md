@@ -8,6 +8,7 @@ keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Conso
 ---
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
@@ -21,6 +22,12 @@ Snowplow offers two different ways to monitor failed events in [Snowplow Console
 - The default view
 
 You can also use the Console API to monitor failed events.
+
+:::tip[Investigate failed events with your AI assistant]
+An AI assistant connected to the Snowplow MCP server can investigate your failed events, explain why they failed, point you toward a fix, and manage your data quality alerts. For example: "Show me the failed events from the last 24 hours, grouped by error, and tell me what's causing them."
+
+<AiAssistantInstall />
+:::
 
 ## Monitoring dashboard comparison
 

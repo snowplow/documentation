@@ -6,6 +6,8 @@ description: "Migrate from Google Analytics to Snowplow, including data layer im
 keywords: ["google analytics", "ga4", "migration", "data layer", "gtm", "google tag manager"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 This guide is to help technical implementers migrate from Google Analytics to Snowplow.
 
 ## Platform differences
@@ -174,8 +176,12 @@ You'll need to translate your GA4 event configuration into Snowplow [tracking pl
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
-:::info[Snowplow CLI MCP server]
-The Snowplow CLI includes an [MCP server](/docs/api-reference/snowplow-cli/index.md#mcp-server) to help you translate your GA4 event configuration into Snowplow tracking plans.
+:::tip[Use your AI assistant]
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can translate your GA4 event configuration into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our GA4 event list. Design Snowplow tracking plans for it, using built-in Snowplow events where they fit, and create the schemas in my account."
+
+<AiAssistantInstall />
+
+To work on tracking plan files on your machine instead, use the [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md).
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:

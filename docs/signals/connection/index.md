@@ -11,7 +11,7 @@ sidebar_custom_props:
 You'll connect to Signals for one of two reasons:
 
 * **To define and manage configurations**: create attribute groups, services, and interventions, and publish them to Signals. This is typically done by a data team, using Snowplow Console, the Python SDK, or the API.
-* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, API, or MCP server.
+* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, API, or Signals MCP server.
 
 This table shows which interface supports which task:
 
@@ -23,8 +23,11 @@ This table shows which interface supports which task:
 | [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
 | [Signals API](#signals-api)                     | ✅                     | ✅                   | ✅                          |
 | [Signals MCP server](#signals-mcp-server)       | ❌                     | ✅                   | ❌                          |
+| [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) | ✅                     | ❌                   | ❌                          |
 
 Console doesn't require any connection setup: log in and navigate to the **Signals** section. If Signals isn't enabled for your organization yet, see [Set up Signals](/docs/signals/setup/index.md).
+
+The Snowplow MCP server connects your own AI assistant, such as Claude Code or Cursor, to your Snowplow Console account, so that it can create and publish attribute groups, services, and interventions for you. It uses your Console login or a Console API key, not Signals connection credentials. Install it in your coding agent, together with the Snowplow [skills](/docs/ai/skills/index.mdx), with `npx plugins add snowplow/skills`.
 
 For the SDKs, plugin, API, and MCP server, you'll need [connection credentials](#connection-credentials).
 

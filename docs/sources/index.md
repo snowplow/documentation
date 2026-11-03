@@ -8,6 +8,7 @@ keywords: ["snowplow trackers", "event tracking sdks", "snowplow sources", "webh
 ---
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
@@ -19,6 +20,12 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 Snowplow supports a wide range of sources which send events to your Collector endpoint.
 
 Snowplow tracker SDKs are client- or server-side libraries that enable you to collect events from your own applications. For tracking events from third-party applications, use [webhooks](/docs/sources/webhooks/index.md).
+
+:::tip[Add a tracker with your AI assistant]
+If you use Snowplow CDI, a coding agent connected to the Snowplow MCP server can choose the right tracker for your application, add it, and check that the events arrive in your pipeline. For example: "Add Snowplow tracking to this app for the events in our tracking plan, and confirm they reach my development pipeline."
+
+<AiAssistantInstall />
+:::
 
 You can find the source code for each tracker on GitHub, where possible. The JavaScript tracker repository is a multirepository containing the web (JavaScript and Browser), Node.js, and React Native trackers.
 

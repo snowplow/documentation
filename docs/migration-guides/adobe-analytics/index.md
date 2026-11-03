@@ -7,6 +7,8 @@ description: "Migrate from Adobe Analytics to Snowplow with guidance on event tr
 keywords: ["adobe analytics", "migration", "tracking plan", "evars", "props", "event tracking", "adobe experience platform"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 This guide is to help technical implementers migrate from Adobe Analytics to Snowplow. For more advice on tracking plans, check out our [best practices guide](/docs/fundamentals/tracking-design-best-practice/index.md).
 
 ## Platform differences
@@ -165,8 +167,12 @@ You'll need to translate your Adobe Analytics configuration into Snowplow [track
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
-:::info[Snowplow CLI MCP server]
-The Snowplow CLI includes an [MCP server](/docs/ai/cli-mcp-server/index.md) to help you translate your Adobe Analytics event configuration into Snowplow tracking plans.
+:::tip[Use your AI assistant]
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can translate your Adobe Analytics event configuration into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our Adobe Analytics solution design reference. Group our props and eVars into Snowplow entities, design tracking plans, and create the schemas in my account."
+
+<AiAssistantInstall />
+
+To work on tracking plan files on your machine instead, use the [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md).
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:

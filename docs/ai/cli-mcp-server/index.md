@@ -16,6 +16,10 @@ The [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) includes a local M
 - Analyze tracking requirements and suggest implementations
 - Validate tracking plans and source applications
 
+:::note[Snowplow MCP server]
+This server works on tracking plan files on your machine. To work directly with your Snowplow Console account, including pipelines, failed events, enrichments, and Signals, use the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). Install it in your coding agent, together with the Snowplow [skills](/docs/ai/skills/index.mdx), with `npx plugins add snowplow/skills`.
+:::
+
 :::info[Read more]
 For a step-by-step guide to using the Snowplow CLI MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
 :::

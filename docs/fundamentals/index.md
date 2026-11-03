@@ -6,6 +6,8 @@ description: "An overview of what a Snowplow pipeline does and what steps it inc
 keywords: ["Snowplow pipeline", "architecture", "trackers", "enrichment", "data warehouses", "collector"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 ![Snowplow pipeline architecture diagram showing data flowing from web, mobile, server-side, pixel, and webhook sources through Collect, Validate, and Enrich stages. Validated events route to a Real-Time Good Stream and on to a data warehouse and BI tools; invalid events route to a Real-Time Bad Stream and Bad Logs.](images/architecture.png)
 
 The diagram above illustrates a typical Snowplow pipeline with data flowing left to right.
@@ -17,6 +19,12 @@ The diagram above illustrates a typical Snowplow pipeline with data flowing left
 - The enriched events are sent to real-time streams (Kinesis on AWS, PubSub on GCP). At this point, data can be [**forwarded**](/docs/destinations/forwarding-events/index.md) to other applications to power real-time use cases.
 - [**Loaders**](/docs/destinations/warehouses-lakes/index.md) then load your data off the real-time streams into the various destinations you have set up for your pipeline. Typically these include a data warehouse (Redshift, Snowflake, BigQuery, Databricks) or a data lake (S3, GCS, ADLS / OneLake). Note that you can also connect a data warehouse to a data lake (e.g. Synapse Analytics + ADLS) instead of loading to a warehouse directly.
 - Your event-level data is now in your chosen destinations. From here we recommend this raw data is [**modelled**](/docs/modeling-your-data/index.md) into smaller, cleaner tables that are easier to perform analysis on. At this stage it can also be joined with other data sets. We have out-of-the-box data models for web and mobile to help you get started.
+
+:::tip[Ask your AI assistant]
+Have questions about how this applies to your own pipeline? Ask the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console, or connect your own AI assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). Both can read your Snowplow configuration, such as pipelines, enrichments, and data structures, and look up these docs to answer you. For example: "Which enrichments are enabled on my production pipeline, and what do they add to my events?"
+
+<AiAssistantInstall />
+:::
 
 ## Why do we use this architecture?
 

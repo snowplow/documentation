@@ -10,6 +10,10 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 
 **Important**: the MCP tool creates and validates files on your local filesystem only. To sync changes to Console, you'll use the regular CLI commands like `snowplow-cli ds publish` afterward.
 
+:::note[Work directly in your Snowplow account]
+To have your AI assistant work directly with your Snowplow Console account instead of local files, use the remote [Snowplow MCP server](/docs/ai/snowplow-mcp/). Install it in your coding agent, together with the Snowplow [skills](/docs/ai/skills/), with `npx plugins add snowplow/skills`.
+:::
+
 ## What you'll learn
 
 - How to set up the Snowplow CLI MCP tool with AI assistants like Claude Desktop, Cursor, or Copilot

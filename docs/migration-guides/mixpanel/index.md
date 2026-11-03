@@ -7,6 +7,8 @@ description: "Migrate from Mixpanel to Snowplow with guidance on event tracking,
 keywords: ["mixpanel", "migration", "tracking plan", "user profiles", "super properties", "event tracking"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 This guide is to help technical implementers migrate from Mixpanel to Snowplow.
 
 ## Platform differences
@@ -181,10 +183,6 @@ Snowplow includes in-product management and tools for [tracking plans](/docs/fun
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/implement-tracking/index.md) to automatically generate the tracking code snippets.
 
-:::info[Snowplow CLI MCP server]
-The Snowplow CLI includes an [MCP server](/docs/ai/cli-mcp-server/index.md) to help you translate your Mixpanel Tracking Plans into Snowplow tracking plans.
-:::
-
 ## Migration phases
 
 Use a parallel-run migration approach. This process can be divided into three phases:
@@ -212,6 +210,14 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [tracking pl
 * Are there sets of event properties used in multiple places that could be defined as reusable entities instead?
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plan tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
+
+:::tip[Use your AI assistant]
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can translate your Mixpanel Tracking Plans into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our exported Mixpanel Tracking Plan. Design Snowplow tracking plans for it, model our super properties as entities, and create the schemas in my account."
+
+<AiAssistantInstall />
+
+To work on tracking plan files on your machine instead, use the [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md).
+:::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
 * Coexistence: leave historical Mixpanel data in existing tables. Write queries that combine data from both systems, using a transformation layer (for example, in dbt) to create compatible structures.

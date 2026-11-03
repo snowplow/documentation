@@ -3,7 +3,7 @@ title: "Agent Analytics 0.2.0 adds BigQuery and Databricks support"
 sidebar_label: "Agent Analytics 0.2.0"
 description: "Run the Agent Analytics dbt package on BigQuery and Databricks, with the same agent and referral metrics as Snowflake."
 keywords: ["Agent Analytics", "dbt", "BigQuery", "Databricks", "Snowflake"]
-date: "2026-11-02"
+date: "2026-11-03"
 category:
   - "Release notes"
 components:

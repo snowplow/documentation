@@ -21,7 +21,7 @@ To use Snowplow successfully, you need to have a good idea of:
 The final outcome of your planning will be a set of tracking plans.
 
 :::tip[Design tracking with your AI assistant]
-The Snowplow `tracking-design` skill applies this guidance for you. Connected to the Snowplow MCP server, your AI assistant asks about your business and decisions, proposes events and entities, and creates the tracking plans and data structures in your account. For example: "Design a tracking plan for our signup and onboarding flow, reusing existing data structures where possible."
+The Snowplow skills apply this guidance for you. Connected to the Snowplow MCP server, your AI assistant asks about your business and decisions, proposes events and entities, and creates the tracking plans and data structures in your account. For example: "Design a tracking plan for our signup and onboarding flow, reusing existing data structures where possible."
 
 <AiAssistantInstall />
 :::

@@ -22,7 +22,7 @@ The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://
 npx plugins add snowplow/skills
 ```
 
-This installs the Snowplow MCP server plus six bundled skills — `tracking-design`, `implementation-guidance`, `signals`, `pipeline-infrastructure`, `console-operations`, and `troubleshooting` — into any detected agent tool in a single step. The plugin source lives at [github.com/snowplow/skills](https://github.com/snowplow/skills).
+This installs the Snowplow MCP server plus the Snowplow [skills](/docs/ai/skills/index.mdx) into any detected agent tool in a single step. The plugin source lives at [github.com/snowplow/skills](https://github.com/snowplow/skills).
 
 The `plugins` CLI auto-detects [Claude Code](https://claude.com/product/claude-code) and [Cursor](https://cursor.com/). Pass `--target claude-code` or `--target cursor` to scope the install to a specific tool.
 
@@ -41,7 +41,7 @@ If you use [Claude Code](https://claude.com/product/claude-code), you can instal
 /plugin install snowplow@snowplow
 ```
 
-This installs the Snowplow MCP server plus the same six bundled skills as the [`plugins` CLI](#one-line-install-claude-code-cursor). Claude Code reads the plugin directly from the [repository](https://github.com/snowplow/skills) and updates it automatically when the repository changes.
+This installs the Snowplow MCP server plus the same bundled skills as the [`plugins` CLI](#one-line-install-claude-code-cursor). Claude Code reads the plugin directly from the [repository](https://github.com/snowplow/skills) and updates it automatically when the repository changes.
 
 Prefer a single command across Claude Code, Cursor, and Codex? Use the vendor-neutral [`plugins` CLI](#one-line-install-claude-code-cursor) instead.
 

@@ -17,12 +17,10 @@ Every skill requires a one-time connection to the [Snowplow MCP server](/docs/ai
 
 ## Install the skills
 
-The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. The plugin installs the Snowplow MCP server and all six skills in one step.
+The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. The plugin installs the Snowplow MCP server and the skills in one step.
 
 <Tabs groupId="mcp-client" queryString>
   <TabItem value="any" label="Any agent" default>
-
-Run this command from any terminal. The [`plugins` CLI](https://github.com/vercel-labs/plugins) detects the supported AI tools on your machine, such as Claude Code and Cursor, and installs the plugin into each one:
 
 ```bash
 npx plugins add snowplow/skills

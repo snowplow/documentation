@@ -71,7 +71,7 @@ schemas you created, and how I can see the events arriving.
 
 When the agent asks what you want to measure, describe it in the words of your product. For example, "product views, add to basket, each checkout step, and purchase, with the product and the basket on every event".
 
-The agent loads the relevant skill on its own: `tracking-design` plans the [events](/docs/fundamentals/events/index.md), [entities](/docs/fundamentals/entities/index.md), and [schemas](/docs/fundamentals/schemas/index.md), `implementation-guidance` adds and configures the [tracker](/docs/sources/index.md), and `troubleshooting` reads [failed events](/docs/fundamentals/failed-events/index.md) and proposes a fix.
+The agent loads the relevant Snowplow skill on its own as it plans the [events](/docs/fundamentals/events/index.md), [entities](/docs/fundamentals/entities/index.md), and [schemas](/docs/fundamentals/schemas/index.md), adds and configures the [tracker](/docs/sources/index.md), and reads [failed events](/docs/fundamentals/failed-events/index.md) to propose a fix.
 
 ## Check that it works
 

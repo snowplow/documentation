@@ -23,7 +23,7 @@ On this route you can skip straight to [defining attributes](/tutorials/signals-
 
 The Snowplow MCP server is a remote server, hosted by Snowplow: there's no server for you to deploy or maintain. Connecting your assistant to it means pointing your MCP client at the server URL and authenticating with your Snowplow Console account.
 
-The Snowplow plugin bundles the MCP server with six skills, including the `signals` skill that guides the assistant through Signals workflows like the one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the `signals` skill, so there's no slash command to run. The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills).
+The Snowplow plugin bundles the MCP server with the Snowplow skills, which guide the assistant through Snowplow workflows such as the Signals one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the relevant skill, so there's no slash command to run. The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills).
 
 ### Install in any assistant
 

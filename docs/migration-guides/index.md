@@ -24,7 +24,7 @@ A **full re-architecture** or "rip-and-replace" approach is faster but riskier, 
 A full re-architecture strategy requires thorough testing in a staging environment to prevent data loss.
 
 :::tip[Use your AI assistant]
-An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can help with both strategies. It can answer questions about how concepts from your current tool map to Snowplow, translate your existing tracking plan into Snowplow data structures and event specifications, add Snowplow trackers to your application alongside your current tracking, and check that the events arrive. For example: "We track these events in our current analytics tool. Design the equivalent Snowplow tracking plan and create it in my account."
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can help with both strategies. It can answer questions about how concepts from your current tool map to Snowplow, help translate your existing tracking plan into Snowplow data structures and event specifications, add Snowplow trackers to your application alongside your current tracking, and check that the events arrive. For example: "We track these events in our current analytics tool. Design the equivalent Snowplow tracking plan and create it in my account."
 
 <AiAssistantInstall />
 :::

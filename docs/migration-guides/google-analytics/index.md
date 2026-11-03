@@ -177,7 +177,7 @@ You'll need to translate your GA4 event configuration into Snowplow [tracking pl
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 :::tip[Use your AI assistant]
-An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can translate your GA4 event configuration into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our GA4 event list. Design Snowplow tracking plans for it, using built-in Snowplow events where they fit, and create the schemas in my account."
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can help translate your GA4 event configuration into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our GA4 event list. Design Snowplow tracking plans for it, using built-in Snowplow events where they fit, and create the schemas in my account."
 
 <AiAssistantInstall />
 

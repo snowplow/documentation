@@ -212,7 +212,7 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [tracking pl
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plan tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 :::tip[Use your AI assistant]
-An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can translate your Mixpanel Tracking Plans into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our exported Mixpanel Tracking Plan. Design Snowplow tracking plans for it, model our super properties as entities, and create the schemas in my account."
+An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can help translate your Mixpanel Tracking Plans into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our exported Mixpanel Tracking Plan. Design Snowplow tracking plans for it, model our super properties as entities, and create the schemas in my account."
 
 <AiAssistantInstall />
 

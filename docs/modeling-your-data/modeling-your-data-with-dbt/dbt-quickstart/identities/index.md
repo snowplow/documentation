@@ -152,6 +152,10 @@ retention and back up existing outputs first.
 dbt run --full-refresh --select package:snowplow_identities
 ```
 
+For an upgrade from 0.1.0, select every enabled package model and remove any
+`full_refresh: false` overrides on incremental package models. The startup check rejects
+partial upgrades, but does not block runs that select only unrelated models.
+
 The first build processes the configured backfill window. Run again without `--full-refresh`
 to continue. Empty periods advance to the first eligible day. Before switching consumers,
 finish the backfill and run:

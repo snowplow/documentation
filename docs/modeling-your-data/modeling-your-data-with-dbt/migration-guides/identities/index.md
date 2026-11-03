@@ -45,7 +45,10 @@ own table for the newest `load_tstamp` it holds and processes forward from there
 failed run leaves that model slightly behind and it catches up on the next one. This
 deletes the manifest, three supporting models, the whole `_this_run` scratch layer, and
 the manifest-maintenance hooks. The package goes from 15 models to five models and one view. A read-only startup
-check rejects an upgrade that is missing the required full refresh.
+check rejects an upgrade that is missing the required full refresh. It runs only when
+an Identities model is selected, so unrelated models can still run. While legacy tables
+remain, a full refresh must include every enabled package model; a partial selection
+or a `full_refresh: false` override on an incremental package model does not bypass the check.
 
 Removed variables: `snowplow__allow_refresh`, `snowplow__dev_target_name`,
 and the `models_to_remove` variable (all belonged to the manifest). A `--full-refresh`
@@ -167,6 +170,14 @@ longer present in the service's cumulative payload. Repeating an unchanged batch
 not rewrite the mapping rows. These rules rely on the identity service's cumulative,
 acyclic merge semantics; the package's no-chain and stale-root tests remain required.
 
+The fallback for pruned payloads follows one additional parent, not an arbitrary chain.
+For example, a stored `A -> B` can remain chained if `B -> C` and `C -> D` arrive in the
+same window after both A and B have been pruned from D's cumulative payload. TTL eviction,
+erasure, or `max_merges` truncation can produce this case. The no-chain test detects the
+remaining intermediate parent; do not switch consumers to outputs that fail it. Retain
+the prior outputs and source history while investigating. A larger backfill window alone
+does not guarantee recovery of links omitted from the payloads.
+
 `load_tstamp` must describe warehouse arrival. Rows inserted with an old `load_tstamp`
 outside the configured lookback are not automatically rediscovered. Increase the lookback
 or rebuild the affected period after such a backdated reload. Partition-buffer settings
@@ -175,7 +186,9 @@ must also cover the actual difference between the partition timestamp and `load_
 ### Monitor processing windows
 
 Incremental models log their watermark and resolved processing window. Windows can differ
-between identity and merge streams. Initial-build logging reports the requested starting
+between identity and merge streams. Each model resolves its bounds once and reuses those
+dates for both the predicate and log, avoiding a second atomic gap probe for logging.
+Initial-build logging reports the requested starting
 window; source gaps or an upstream anchor can extend its upper bound.
 
 ## Adapt downstream models
@@ -197,8 +210,10 @@ current `active_snowplow_id` on read. Merges are reflected the moment
 
 Consider these consequences:
 
-- **The view does the resolution work on every query.** If you query it heavily and it
-  becomes a bottleneck, materialize it in your own project:
+- **The view does the resolution work on every query.** It joins the immutable identifier
+  base to the complete child-to-root mapping and identities, then ranks owners using
+  window functions. If you query it heavily and it becomes a bottleneck, materialize it
+  in your own project:
 
   ```sql
   -- models/my_identifier_mapping.sql
@@ -206,12 +221,30 @@ Consider these consequences:
   select * from {{ ref('snowplow_identities_identifier_mapping') }}
   ```
 
+  That table pays the full resolution cost on each rebuild and remains unchanged between
+  rebuilds. The view pays per read and reflects new merges immediately. Choose based on
+  query frequency and freshness needs.
+
 - An identifier can belong to more than one identity over its lifetime. If an
   identifier expires from the identity engine and later reappears under a new identity,
   both rows are kept in `identifier_mapping_base`. Previously the second sighting
   overwrote the first. The view still shows one row per
   `(active_snowplow_id, id_type, id_value)`, so this only surfaces if the two identities
   have not merged, in which case you correctly see two owners.
+
+### Benchmark before a large rollout
+
+The integration fixtures verify correctness; they do not establish production-scale
+performance. On a representative copy, measure a full read of `identifier_mapping` and
+the queries consumers actually run, then compare them with the cost and frequency of
+rebuilding a consumer-owned table. Record elapsed time, bytes scanned, shuffle or spill,
+warehouse size, graph size, and whether result caching was used.
+
+Also measure an incremental `snowplow_id_mapping` run with merges and an unchanged repeat.
+The model reads the existing mapping to resolve delayed parents and retained children,
+even though it writes only changed rows. Include sparse atomic periods, large merge
+groups, and shared identifiers in the benchmark; a small new batch does not imply a
+small scan of the stored graph.
 
 ### Rebuild the wide identity row
 

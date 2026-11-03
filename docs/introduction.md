@@ -31,10 +31,6 @@ sidebar_custom_props:
 
 Install the [Snowplow MCP](/docs/ai/snowplow-mcp/index.md) to set up Snowplow through your AI agent, with minimal manual setup.
 
-```bash
-npx plugins add snowplow/skills
-```
-
 :::
 
 ## Explore Snowplow Customer Data Infrastructure

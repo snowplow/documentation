@@ -190,8 +190,8 @@ The loader is configured using a HOCON file. You can find a minimal example and 
 The loader requires explicit acceptance of the [Snowplow Limited Use License Agreement](https://docs.snowplow.io/limited-use-license-1.1):
 
 ```hocon
-"license": {
-  "accept": true
+license: {
+  accept: true
 }
 ```
 

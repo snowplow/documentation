@@ -26,13 +26,13 @@ RDB Loader and RDB Stream Shredder distributed as Docker images, published on Do
 
 All configuration changes are scoped to `monitoring` property.
 
-```json
-"monitoring": {
-  "webhook": {
-    "endpoint": "https://webhooks.acme.com/rdb-loader",
-    "tags": {            # Custom set of tags
-      "host": $HOST,     # Environment variables are supported
-      "pipeline": "production"
+```hocon
+monitoring: {
+  webhook: {
+    endpoint: "https://webhooks.acme.com/rdb-loader"
+    tags: {                # Custom set of tags
+      host: ${HOST}        # Environment variables are supported
+      pipeline: production
     }
   }
 }
@@ -44,12 +44,12 @@ It's up to you to setup a preferable webhook backend. It can be a Snowplow Iglu 
 
 All configuration changes are scoped to `monitoring` property.
 
-```json
-"monitoring": {
-  "folders": {
-    "staging": "s3://snowplow-acme-com/logging/",    # This path will contain temporary files
-                                                     # Redshift role must have an access for this folder
-    "period": "2 hours"                              # How often the check should be performed
+```hocon
+monitoring: {
+  folders: {
+    staging: "s3://snowplow-acme-com/logging/"  # This path will contain temporary files
+                                                # Redshift role must have an access for this folder
+    period: 2 hours                             # How often the check should be performed
   }
 }
 ```

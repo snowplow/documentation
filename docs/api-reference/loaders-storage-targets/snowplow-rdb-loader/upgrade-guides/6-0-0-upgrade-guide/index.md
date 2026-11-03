@@ -154,14 +154,12 @@ Schema casting rules could be found [here](/docs/api-reference/loaders-storage-t
 If you have older schemas with breaking changes and don’t want the loader to apply the new logic to them, you can use `$.featureFlags.disableRecovery` configuration. For the provided schema criterions only, RDB Loader will neither migrate the corresponding shredded table nor create recovery tables for breaking schema versions. Loader will attempt to load to the corresponding shredded table without migrating.
 
 You can set it as follows:
-```json
-{
-  ...
-  "featureFlags": {
-    "disableRecovery": [
-      "iglu:com.example/myschema1/jsonschema/1-*-*",
-      "iglu:com.example/myschema2/jsonschema/1-*-*"
-    ]
-  }
+```hocon
+...
+featureFlags: {
+  disableRecovery: [
+    "iglu:com.example/myschema1/jsonschema/1-*-*"
+    "iglu:com.example/myschema2/jsonschema/1-*-*"
+  ]
 }
 ```

@@ -30,12 +30,11 @@ All configuration changes are scoped to `shredder` property.
 
 Since we added another type of a shredder, one has to specify the type explicitly:
 
-```json
-
-"shredder": {
-  "type" : "batch",                                  # Was not necessary in R35
-  "input": "s3://snowplow-enriched-archive/path/",   # Remains the same
-  "output": ...                                      # Explained below
+```hocon
+shredder: {
+  type: batch                                    # Was not necessary in R35
+  input: "s3://snowplow-enriched-archive/path/"  # Remains the same
+  output: ...                                    # Explained below
 }
 ```
 
@@ -67,34 +66,34 @@ You only need to choose one Shredder: batch or stream. **For production environm
 
 Stream Shredder is configured within same configuration file as RDB Loader and RDB Batch Shredder, but using following properties:
 
-```json
-  "shredder": {
-    # A batch loader would fail, if stream type encountered
-    "type" : "stream",
-    # Input stream information
-    "input": {
-      # file is another option, but used for debugging only
-      "type": "kinesis",
-      # KCL app name - a DynamoDB table will be created with the same name
-      "appName": "acme-rdb-shredder",
-      # Kinesis Stream name, must exist
-      "streamName": "enriched-events",
-      # Kinesis region
-      "region": "us-east-1",
-      # Kinesis position: LATEST or TRIM_HORIZON
-      "position": "LATEST"
-    },
+```hocon
+shredder: {
+  # A batch loader would fail, if stream type encountered
+  type: stream
+  # Input stream information
+  input: {
+    # file is another option, but used for debugging only
+    type: kinesis
+    # KCL app name - a DynamoDB table will be created with the same name
+    appName: acme-rdb-shredder
+    # Kinesis Stream name, must exist
+    streamName: enriched-events
+    # Kinesis region
+    region: us-east-1
+    # Kinesis position: LATEST or TRIM_HORIZON
+    position: LATEST
+  }
 
-    # A frequency to emit loading finished message - 5,10,15,20,30,60 etc minutes, this is what controls how often your data will be loaded
-    "windowing": "10 minutes",
+  # A frequency to emit loading finished message - 5,10,15,20,30,60 etc minutes, this is what controls how often your data will be loaded
+  windowing: 10 minutes
 
-    # Path to shredded archive, same as for batch
-    "output": {
-      # Path to shredded output
-      "path": "s3://bucket/good/",
-      # Shredder output compression, GZIP or NONE
-      "compression": "GZIP"
-    }
+  # Path to shredded archive, same as for batch
+  output: {
+    # Path to shredded output
+    path: "s3://bucket/good/"
+    # Shredder output compression, GZIP or NONE
+    compression: GZIP
+  }
 }
 ```
 

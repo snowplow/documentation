@@ -36,10 +36,10 @@ If you’ve previously used both HTTP and HTTPS ports in the collector, this fea
 
 You have to explicitly accept the [Snowplow Limited Use License](/limited-use-license-1.0/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
 
-```hcl
-collector {
-  license {
-    accept = true
+```hocon
+collector: {
+  license: {
+    accept: true
   }
   ...
 }
@@ -55,38 +55,38 @@ Sink configurations can now be defined similarly as with our other services. Eac
 
 Example:
 
-```hcl
-collector {
+```hocon
+collector: {
   ...
-  streams {
-    good {
-      name = "good"
-      brokers = "localhost:9092,another.host:9092"
-      producerConf {
-        acks = all
-        "key.serializer"     = "org.apache.kafka.common.serialization.StringSerializer"
-        "value.serializer"   = "org.apache.kafka.common.serialization.StringSerializer"
+  streams: {
+    good: {
+      name: good
+      brokers: "localhost:9092,another.host:9092"
+      producerConf: {
+        acks: all
+        "key.serializer": org.apache.kafka.common.serialization.StringSerializer
+        "value.serializer": org.apache.kafka.common.serialization.StringSerializer
       }
-      buffer {
-        byteLimit = 3145728
-        recordLimit = 500
-        timeLimit = 5000
+      buffer: {
+        byteLimit: 3145728
+        recordLimit: 500
+        timeLimit: 5000
       }
     }
 
-    bad {
-      name = "bad"
-      brokers = "localhost:9092,another.host:9092
-      producerConf {
-        acks = all
-        "key.serializer"     = "org.apache.kafka.common.serialization.StringSerializer"
-        "value.serializer"   = "org.apache.kafka.common.serialization.StringSerializer"
+    bad: {
+      name: bad
+      brokers: "localhost:9092,another.host:9092"
+      producerConf: {
+        acks: all
+        "key.serializer": org.apache.kafka.common.serialization.StringSerializer
+        "value.serializer": org.apache.kafka.common.serialization.StringSerializer
       }
-      maxBytes = 1000000
-      buffer {
-        byteLimit = 3145728
-        recordLimit = 500
-        timeLimit = 5000
+      maxBytes: 1000000
+      buffer: {
+        byteLimit: 3145728
+        recordLimit: 500
+        timeLimit: 5000
       }
     }
   }
@@ -102,12 +102,12 @@ Optional networking settings were previously a part of Akka HTTP configuration s
 
 Example:
 
-```hcl
-collector {
+```hocon
+collector: {
   ...
-  networking {
-    maxConnections = 1024
-    idleTimeout = 610 seconds
+  networking: {
+    maxConnections: 1024
+    idleTimeout: 610 seconds
   }
   ...
 }

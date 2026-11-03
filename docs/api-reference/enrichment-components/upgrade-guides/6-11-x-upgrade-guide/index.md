@@ -38,8 +38,8 @@ When upgrading to Enrich 6.11.0, compression is an optional feature that you can
 After upgrading your downstream consumers, enable compression in Enrich by adding the following config section:
 
 ```hocon
-compression {
-  enabled = true
+compression: {
+  enabled: true
 }
 ```
 

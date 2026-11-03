@@ -11,9 +11,9 @@ S3 Loader is released under the [Snowplow Limited Use License](/limited-use-lice
 
 To accept the terms of license and run S3 Loader, configure the `license.accept` option, like this:
 
-```hcl
-license {
-  accept = true
+```hocon
+license: {
+  accept: true
 }
 ```
 

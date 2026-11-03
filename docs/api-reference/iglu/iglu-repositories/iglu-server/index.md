@@ -71,16 +71,14 @@ docker run --rm \\
 A minimal configuration looks like this:
 
 ```hocon
-{
-  "database": {
-    "host": "postgres"
-    "dbname": "igludb"
-    "username": "postgres"
-    "password": "mysecret"
-  }
-
-  "superApiKey": "bb7b7503-40d3-459c-943a-f8d31a6f5638"
+database: {
+  host: postgres
+  dbname: igludb
+  username: postgres
+  password: mysecret
 }
+
+superApiKey: bb7b7503-40d3-459c-943a-f8d31a6f5638
 ```
 
 See the [configuration reference](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) for all available parameters. A [docker-compose.yml](https://github.com/snowplow/iglu-server/blob/master/docker/docker-compose.yml) is also provided in the repository to help you get started.

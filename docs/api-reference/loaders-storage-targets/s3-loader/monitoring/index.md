@@ -29,16 +29,16 @@ snowplow.s3loader.e2e_latency_millis:123|g|#tag1:value1
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
-```json
-"monitoring": {
-  "metrics": {
-    "hostname": "localhost"
-    "port": 8125
-    "tags": {
-      "tag1": "value1"
-      "tag2": "value2"
+```hocon
+monitoring: {
+  metrics: {
+    hostname: localhost
+    port: 8125
+    tags: {
+      tag1: value1
+      tag2: value2
     }
-    "prefix": "snowplow.s3loader"
+    prefix: snowplow.s3loader
   }
 }
 ```
@@ -54,8 +54,8 @@ Common reasons might be failure to read or write from Kinesis, or failure to wri
 
 Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md) with the url of your sentry server:
 
-```json
-"monitoring": {
-  "dsn": "http://sentry.acme.com"
+```hocon
+monitoring: {
+  dsn: "http://sentry.acme.com"
 }
 ```

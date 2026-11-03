@@ -24,9 +24,9 @@ The BigQuery Loader is released under the [Snowplow Limited Use License](/limite
 
 To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
 
-```json
-"license": {
-  "accept": true
+```hocon
+license: {
+  accept: true
 }
 ```
 

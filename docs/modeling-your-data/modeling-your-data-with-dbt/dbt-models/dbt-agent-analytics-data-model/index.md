@@ -26,7 +26,7 @@ The package combines two event sources. Events from [CDN trackers](/docs/sources
 
 This dbt package is included in the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
 
-Currently, the package supports Snowflake only.
+The package supports Snowflake, BigQuery, and Databricks. See the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md#requirements) for adapter and runtime requirements.
 
 Check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md) and [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) pages to get started.
 

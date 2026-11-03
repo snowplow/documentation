@@ -60,34 +60,32 @@ Iglu Central is static registry and if you use Snowplow-authored schemas - you n
 
 The configuration file is in HOCON format, and it specifies connection details for the target database and the input stream of events.
 
-```json
-{
-  "input": {
-    "type": "Kinesis"
-    "streamName": "enriched-events"
-    "region": "eu-central-1"
-  }
-  "output" : {
-    "good": {
-      "type": "Postgres"
-      "host": "localhost"
-      "database": "snowplow"
-      "username": "postgres"
-      "password": ${POSTGRES_PASSWORD}
-      "schema": "atomic"
-    }
+```hocon
+input: {
+  type: Kinesis
+  streamName: enriched-events
+  region: eu-central-1
+}
+output: {
+  good: {
+    type: Postgres
+    host: localhost
+    database: snowplow
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+    schema: atomic
   }
 }
 ```
 
 The `input` section can alternatively specify a GCP PubSub subscription, instead of a kinesis stream like in the example above.
 
-```json
-  "input": {
-    "type": "PubSub"
-    "projectId": "my-project"
-    "subscriptionId": "my-subscription"
-  }
+```hocon
+input: {
+  type: PubSub
+  projectId: my-project
+  subscriptionId: my-subscription
+}
 ```
 
 See [the configuration reference](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/postgres-loader-configuration-reference/index.md) for a complete description of all parameters.

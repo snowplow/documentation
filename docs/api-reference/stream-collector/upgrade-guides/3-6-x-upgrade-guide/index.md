@@ -29,8 +29,8 @@ When upgrading to Collector 3.6.0, compression is an optional feature that can b
 After upgrading Enrich, compression in Collector can be enabled by adding the following config section:
 
 ```hocon
-compression {
-  enabled = true
+compression: {
+  enabled: true
 }
 ```
 

@@ -80,7 +80,7 @@ For more extensive changes, you can also bring your own configuration file (`mic
 <details>
 <summary>Example</summary>
 
-```hcl reference title="micro.conf"
+```hocon reference title="micro.conf"
 https://github.com/snowplow/snowplow-micro/blob/master/example/micro.conf
 ```
 
@@ -101,17 +101,17 @@ By default, Micro only stores events in memory. Since version 4.0.0, you can con
 
 To enable this, first create a storage configuration file:
 
-```hcl title="storage.conf"
-host = "localhost"
-port = 5432
-database = "micro_test"
-user = "test_user"
+```hocon title="storage.conf"
+host: localhost
+port: 5432
+database: micro_test
+user: test_user
 
-// How long to keep the events for (minimum: 5m)
-ttl = "7d"
+# How long to keep the events for (minimum: 5m)
+ttl: 7d
 
-// How often to clean up expired events (minimum: 1m)
-cleanupInterval = "1h"
+# How often to clean up expired events (minimum: 1m)
+cleanupInterval: 1h
 ```
 
 Next, place the database password into an [environment variable](https://en.wikipedia.org/wiki/Environment_variable) named `MICRO_POSTGRESQL_PASSWORD`.

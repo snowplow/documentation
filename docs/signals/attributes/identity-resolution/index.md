@@ -183,6 +183,10 @@ const attributes = await signals.getServiceAttributes({
 
 A read returns the attributes of the person the identifier was most recently seen with. If Signals hasn't seen the identifier on an event yet, or its link has [expired](#decide-which-identifiers-to-use), each attribute is `null`. Reading by any attribute key other than `snowplow_id` or one of its lookup identifiers returns an HTTP 400 error that lists the ones you can use.
 
+:::note[Pipelines that pseudonymize identifiers]
+If your pipeline uses the [PII pseudonymization enrichment](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md) on a lookup identifier, such as `user_id` or `domain_userid`, Signals receives the pseudonymized value and links that to the Snowplow ID. Read by the value as it appears in your enriched events. A read by the original value returns `null` for each attribute. The same applies to any attribute key whose field is pseudonymized.
+:::
+
 After a [merge](#cross-device), an identifier keeps returning the Snowplow ID that isn't kept until it appears on another event.
 
 :::warning[Only read by identifiers you've verified]

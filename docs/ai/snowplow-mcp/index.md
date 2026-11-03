@@ -14,7 +14,7 @@ Snowplow MCP is a remote [Model Context Protocol](https://modelcontextprotocol.i
 
 The MCP server exposes the same set of tools as the Snowplow Assistant, but in your choice of harness and model. The server authenticates through your existing Snowplow Console login via OAuth, or with a Console API key to avoid re-authenticating — see [Authentication](#authentication).
 
-## One-line install (Claude Code, Cursor)
+## One-line install (Claude Code, Cursor, Codex)
 
 The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://github.com/vercel-labs/plugins), a vendor-neutral installer that auto-detects supported AI tools. From any terminal, run:
 
@@ -24,7 +24,7 @@ npx plugins add snowplow/skills
 
 This installs the Snowplow MCP server plus the Snowplow [skills](/docs/ai/skills/index.mdx) into any detected agent tool in a single step. The plugin source lives at [github.com/snowplow/skills](https://github.com/snowplow/skills).
 
-The `plugins` CLI auto-detects [Claude Code](https://claude.com/product/claude-code) and [Cursor](https://cursor.com/). Pass `--target claude-code` or `--target cursor` to scope the install to a specific tool.
+The `plugins` CLI auto-detects [Claude Code](https://claude.com/product/claude-code), [Cursor](https://cursor.com/), and [Codex](https://openai.com/codex/). Pass `--target` with a tool name, such as `--target claude-code` or `--target cursor`, to scope the install to a specific tool.
 
 On first use, your tool opens a browser for OAuth against [Snowplow Console](https://console.snowplowanalytics.com) — see [Authentication](#authentication) for the permissions model.
 
@@ -41,9 +41,9 @@ If you use [Claude Code](https://claude.com/product/claude-code), you can instal
 /plugin install snowplow@snowplow
 ```
 
-This installs the Snowplow MCP server plus the same bundled skills as the [`plugins` CLI](#one-line-install-claude-code-cursor). Claude Code reads the plugin directly from the [repository](https://github.com/snowplow/skills) and updates it automatically when the repository changes.
+This installs the Snowplow MCP server plus the same bundled skills as the [`plugins` CLI](#one-line-install-claude-code-cursor-codex). Claude Code reads the plugin directly from the [repository](https://github.com/snowplow/skills) and updates it automatically when the repository changes.
 
-Prefer a single command across Claude Code, Cursor, and Codex? Use the vendor-neutral [`plugins` CLI](#one-line-install-claude-code-cursor) instead.
+Prefer a single command across Claude Code, Cursor, and Codex? Use the vendor-neutral [`plugins` CLI](#one-line-install-claude-code-cursor-codex) instead.
 
 ## Configure the MCP server
 

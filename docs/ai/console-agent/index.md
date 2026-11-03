@@ -16,7 +16,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 The Snowplow Assistant is an AI assistant embedded in [Snowplow Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
 
-To use the same tools from your own AI assistant, such as Claude Code, Cursor, or Claude.ai, connect it to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). In a coding agent, `npx plugins add snowplow/skills` installs the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx).
+To use the same tools from your own AI assistant, such as Claude Code, Cursor, Codex, or Claude.ai, connect it to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). In a coding agent, `npx plugins add snowplow/skills` installs the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx).
 
 ## How it works
 

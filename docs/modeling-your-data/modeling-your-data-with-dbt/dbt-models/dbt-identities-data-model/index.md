@@ -141,7 +141,13 @@ The atomic readers advance across gaps, and downstream models follow their upstr
 watermarks. Delayed merge events resolve through stored parents, and children follow a
 root that merges again. Run the package's tests to verify unique keys and flat root mappings.
 
+Pruned cumulative payloads can leave an intermediate parent when several root changes
+arrive in the same processing window. The fallback follows one additional parent; see
+the [pruned-payload limitation](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#process-sparse-streams-and-delayed-merges)
+before switching consumers to the new outputs.
+
 The gap lookup adds source reads when a normal forward window is empty, and the view
-resolves owners at read time. Measure warehouse usage and downstream query performance
-on representative data before a production cutover; no general performance improvement
-is guaranteed.
+resolves owners at read time. Incremental child-to-root mapping runs also read the existing
+graph, even when they write only changed rows. Follow the
+[benchmark guidance](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#benchmark-before-a-large-rollout)
+before a production cutover; no general performance improvement is guaranteed.

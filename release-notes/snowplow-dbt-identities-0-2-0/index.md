@@ -23,7 +23,8 @@ that reappear after TTL expiry. Enable it only when the service has no configure
 identifiers.
 
 Incremental readers advance across empty periods. Delayed merge events retain the
-current root, and stored children follow subsequent root changes.
+current root, and stored children follow subsequent root changes, subject to the
+[pruned-payload limitation](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/#process-sparse-streams-and-delayed-merges).
 
 ## Breaking upgrade
 
@@ -31,7 +32,8 @@ This release removes `id_changes` and `id_mapping_scd`, renames `new_identities`
 `identities`, lowercases `id_type`, and converts `identifier_mapping` to a view. Derived
 identifier keys can change with the normalized type.
 
-Upgrading from 0.1.0 requires a full refresh, adequate retained source history, and a backup.
+Upgrading from 0.1.0 requires a full refresh of every enabled package model, adequate
+retained source history, and a backup. The startup check rejects partial upgrades.
 Prefer a separate output schema, finish backfilling, validate the models and downstream
 queries, then switch consumers. Retain old history tables until their consumers have a
 validated replacement. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/)

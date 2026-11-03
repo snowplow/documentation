@@ -42,14 +42,14 @@ Never put credentials, API keys, or salts directly in your enrichment configurat
 
 :::
 
-:::tip[Configure enrichments with your AI assistant]
-An AI assistant connected to the Snowplow MCP server can show which enrichments are enabled on each pipeline and development environment, and update their configuration for you. Follow the same recommended workflow: ask it to change a development environment first. For example: "Enable the IP lookups enrichment on my development environment, and show me the configuration before you publish it." The secrets guidance above also applies to assistants: don't paste credentials into the conversation.
-
-<AiAssistantInstall />
-:::
-
 ## Deploy an enrichment from a development environment to a pipeline
 
 If you followed the recommended workflow to test an enrichment in a development environment, you will need to copy the same configuration into a pipeline.
 
 To do that, navigate to the development environment under **Pipelines**, select the **Enrichments** tab and click on the enrichment in question. Then click **Deploy**, select the desired pipeline and click **Deploy configuration**.
+
+:::tip[Configure enrichments with your AI assistant]
+An AI assistant connected to the Snowplow MCP server can show which enrichments are enabled on each pipeline and development environment, and update their configuration for you. Follow the same recommended workflow: ask it to change a development environment first, then deploy the tested configuration to your pipeline. For example: "Enable the IP lookups enrichment on my development environment, and show me the configuration before you publish it." Don't paste credentials or other secrets into the conversation.
+
+<AiAssistantInstall />
+:::

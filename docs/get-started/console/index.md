@@ -11,6 +11,12 @@ import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.
 
 The Getting Started dashboard in Console guides you through collecting and acting on your behavioral data. It organizes workflows into three sections: **Fundamentals**, **Analytics**, and **Real-time use cases**.
 
+:::tip[Use your AI assistant]
+You can also complete these workflows by asking an AI assistant. Connected to the Snowplow MCP server, your coding agent can create a tracking plan, add the tracker to your application and check the events, and configure Signals. For example: "Create a tracking plan for our checkout flow, add the tracking to this app, and confirm the events arrive."
+
+<AiAssistantInstall />
+:::
+
 ![The Getting Started dashboard in Console showing Fundamentals, Analytics, and Real-time use cases sections with guided workflow cards](images/console-getting-started.png)
 
 ## How the dashboard is organized
@@ -19,12 +25,6 @@ Each section contains workflow cards for a specific task, from designing a track
 
 :::note[Console availability]
 The Getting Started dashboard is available to Snowplow CDI customers with Console access.
-:::
-
-:::tip[Use your AI assistant]
-You can also complete these workflows by asking an AI assistant. Connected to the Snowplow MCP server, your coding agent can create a tracking plan, add the tracker to your application and check the events, and configure Signals. For example: "Create a tracking plan for our checkout flow, add the tracking to this app, and confirm the events arrive."
-
-<AiAssistantInstall />
 :::
 
 ## Design and implement tracking

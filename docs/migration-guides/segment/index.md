@@ -1,5 +1,6 @@
 ---
 title: "Segment to Snowplow"
+sidebar_label: "Segment to Snowplow"
 date: "2025-08-04"
 sidebar_position: 0
 description: "A guide for technical implementers migrating from Segment to Snowplow, covering event structure differences, tracking plan translation, and a phased migration approach."

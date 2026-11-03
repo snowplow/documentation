@@ -1,5 +1,6 @@
 ---
 title: "Migration guides"
+sidebar_label: "Migration guides"
 sidebar_position: 12
 description: "Migrate to Snowplow from other analytics solutions using parallel-run or full re-architecture approaches."
 keywords: ["migration", "parallel-run", "dual tracking", "analytics migration", "tracking plan", "re-architecture"]

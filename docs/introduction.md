@@ -27,6 +27,16 @@ sidebar_custom_props:
 
 </CardGrid>
 
+:::tip[Set up Snowplow with your AI agent]
+
+Install the [Snowplow MCP](/docs/ai/snowplow-mcp/index.md) to set up Snowplow through your AI agent, with minimal manual setup.
+
+```bash
+npx plugins add snowplow/skills
+```
+
+:::
+
 ## Explore Snowplow Customer Data Infrastructure
 
 <CardGrid cols={3} breakout>

@@ -27,9 +27,9 @@ This table shows which interface supports which task:
 
 Console doesn't require any connection setup: log in and navigate to the **Signals** section. If Signals isn't enabled for your organization yet, see [Set up Signals](/docs/signals/setup/index.md).
 
-The Snowplow MCP server connects your own AI assistant, such as Claude Code, Cursor, or Codex, to your Snowplow Console account, so that it can create and publish attribute groups, services, and interventions for you. It uses your Console login or a Console API key, not Signals connection credentials. Install the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
+The Snowplow MCP server connects your own AI assistant, such as Claude Code, Cursor, or Codex, to your Snowplow Console account, so that it can create and publish attribute groups, services, and interventions for you. It authenticates with your Console account or a Console API key, not with Signals connection credentials. Install the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
 
-For the SDKs, plugin, API, and MCP server, you'll need [connection credentials](#connection-credentials).
+For the SDKs, plugin, API, and Signals MCP server, you'll need [connection credentials](#connection-credentials).
 
 ## Connection credentials
 

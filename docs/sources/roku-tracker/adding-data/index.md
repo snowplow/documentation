@@ -101,6 +101,24 @@ m.global.snowplow.init = {
 }
 ```
 
+### Updating the user ID at runtime
+
+The `userId` is also available as a field you can update at runtime, without reinitializing the tracker. This is useful when a user logs in or out, or switches accounts, during an active session.
+
+```brightscript
+m.global.snowplow.setUserId = "new_user_id"
+```
+
+This updates `userId` on all initialized tracker instances. To update a specific tracker instead, scope the call to its namespace, as described in [configuring tracker namespaces](/docs/sources/roku-tracker/configuration/index.md#tracker-namespaces):
+
+```brightscript
+m.global.snowplow.ns1.setUserId = "new_user_id"
+```
+
+To represent a logged-out user, set `setUserId` to an empty string; the `uid` field is then omitted from subsequent events.
+
+`setUserId` only changes the business user ID. It does not affect `domainUserId`, `networkUserId`, or the `client_session` entity's user ID, and it doesn't start a new session.
+
 ## Event timestamps
 
 Processed Snowplow events have five different timestamps.

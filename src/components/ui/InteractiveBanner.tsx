@@ -100,7 +100,7 @@ function AnimatedBackground() {
 export default function InteractiveBanner() {
   return (
     <motion.div
-      className="relative rounded-lg size-full overflow-hidden"
+      className="group relative rounded-lg size-full overflow-hidden"
       data-name="Free trial"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -121,7 +121,16 @@ export default function InteractiveBanner() {
         aria-hidden="true"
         className="absolute border border-border border-solid inset-0 pointer-events-none rounded-lg"
       />
-      
+
+      {/* Hover glow effect with primary color */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, rgba(102, 56, 184, 0.1) 0%, transparent 70%)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative size-full z-10 pointer-events-none">
         <div className="box-border content-stretch flex flex-col gap-2 items-start justify-start px-6 py-8 relative size-full">

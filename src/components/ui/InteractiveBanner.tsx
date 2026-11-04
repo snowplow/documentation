@@ -44,7 +44,7 @@ function AnimatedButton() {
         className="snowplow-button shimmer-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
       >
         <a
-          href="https://snowplow.io/get-started/snowplow-free-trial"
+          href="https://snowplow.io/get-started/sign-up"
           target="_blank"
           rel="noopener noreferrer"
         >

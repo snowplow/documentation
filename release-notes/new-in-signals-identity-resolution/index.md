@@ -1,7 +1,7 @@
 ---
 title: "New in Signals: calculate attributes per person with Identities"
 description: "Calculate Signals attributes per Snowplow ID from Identities, and read them in your application by the identifier it already has, such as a cookie ID or a user ID."
-date: "2026-10-29"
+date: "2026-11-04"
 category:
   - "Product news"
 components:

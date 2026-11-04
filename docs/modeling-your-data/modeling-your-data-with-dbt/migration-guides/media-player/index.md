@@ -6,6 +6,20 @@ description: "Migration guide for upgrading the Snowplow Media Player dbt packag
 keywords: ["media player migration", "media player upgrade", "dbt media player version"]
 ---
 
+### Upgrading to 1.1.0
+
+**We recommend a [full refresh run](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) if you have been using any previous versions.** Without one, `snowplow_media_player_base` and `snowplow_media_player_media_stats` will hold a mix of values calculated under the old and the new definitions. `snowplow_media_player_base` only reprocesses rows within the `snowplow__upsert_lookback_days` window, so older rows keep their existing values, and `snowplow_media_player_media_stats` accumulates `avg_percent_played` as a weighted average across runs, so it blends the two definitions permanently.
+
+**Behavior changes:**
+
+- `duration_secs` in `snowplow_media_player_base`, and therefore in `snowplow_media_player_plays_by_pageview`, now keeps the duration reported by the play's own events. It only falls back to the longest duration reported for the same `media_identifier` when the play reported none. Previously the media-level value overwrote the play's own. See [how the media duration is resolved](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md#how-the-media-duration-is-resolved).
+- `is_complete_play` now divides by that same resolved duration rather than by the media-level maximum, so it agrees with `content_watched_percent`. The two previously used different denominators.
+- Plays that reported no duration of their own are no longer excluded from `content_watched_percent` when another play of the same media supplies a fallback duration.
+- `avg_percent_played`, `complete_plays`, and `completion_rate_by_plays` in `snowplow_media_player_media_stats` pick up the new values, as do the equivalent columns in the optional `snowplow_media_player_session_stats` and `snowplow_media_player_user_stats` custom models.
+- `duration_secs` in `snowplow_media_player_media_stats` is unchanged. It still reports the longest duration seen for each `media_identifier`.
+
+No configuration changes are required, and no columns have been added, removed, or retyped.
+
 ### Upgrading to 1.0.0
 
 - Version 1.10.6 of `dbt-core` now required

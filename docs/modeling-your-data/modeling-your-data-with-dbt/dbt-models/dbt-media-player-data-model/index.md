@@ -88,6 +88,21 @@ The package generates robust identifiers for use in the incremental logic and ke
 | `media_ad_view_id`   | The unique identifier for each individual ad view. It is generated from the `play_id`, `ad_break_id` and `media_ad_id` fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 
+## How the media duration is resolved
+
+The `snowplow_media_player_base` and `snowplow_media_player_plays_by_pageview` tables report a `duration_secs` column, holding the length of the media content in seconds. Trackers do not always populate the duration on every event, and some plays report no duration at all — a play that only fired a `ready` event, for example.
+
+The package resolves `duration_secs` for each `play_id` in two steps:
+
+1. take the longest duration reported by that play's own events.
+2. if the play reported no duration at all, fall back to the longest duration reported for the same `media_identifier` by any other play processed in the same run.
+
+A duration the play reported itself is never overwritten by the media-level fallback. The `duration_secs`, `is_complete_play`, and `content_watched_percent` columns are all derived from this same resolved value, as are `avg_percent_played`, `complete_plays`, and `completion_rate_by_plays` in `snowplow_media_player_media_stats`.
+
+:::note[The fallback only covers the current run]
+The fallback is scoped to the events processed in a single run of the package, not to the full history of the media content. A play with no duration of its own is only filled in when another play of the same media, carrying a duration, falls into the same run. Otherwise `duration_secs` stays null, and the metrics derived from it are null too. The `duration_secs` column in `snowplow_media_player_media_stats` is not affected by this, as it takes the maximum across runs.
+:::
+
 ## Mixing web and mobile events
 
 The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `domain_sessionid_array` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, you can set the `snowplow__enable_web_events` to `false`.

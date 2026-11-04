@@ -13,12 +13,12 @@ import TabItem from '@theme/TabItem';
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against. All attribute groups need an attribute key.
 
-Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
+Signals includes five built-in attribute keys. Four are based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events. The fifth, `snowplow_id`, calculates attributes per person, using the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) from [Identities](/docs/identities/index.md) when Identities is enabled on your pipeline. See [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, and `user_id`.
+The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, `user_id`, and `snowplow_id`. The `snowplow_id` key shows **Requires Identities** until you [configure Identities](/docs/identities/configuration/index.md) on your pipeline.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -31,6 +31,7 @@ from snowplow_signals import (
     domain_sessionid,
     user_id,
     network_userid,
+    snowplow_id,
 )
 ```
 

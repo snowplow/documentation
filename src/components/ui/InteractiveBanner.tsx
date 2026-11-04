@@ -55,6 +55,27 @@ function AnimatedButton() {
   )
 }
 
+function DemoLink() {
+  return (
+    <motion.p
+      className="m-0 text-sm text-muted-foreground [text-wrap:pretty]"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+    >
+      Want to see a custom demo instead?{' '}
+      <a
+        href="https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-primary underline underline-offset-2 whitespace-nowrap"
+      >
+        Book a demo
+      </a>
+    </motion.p>
+  )
+}
+
 // Animated background gradient
 function AnimatedBackground() {
   return (
@@ -146,6 +167,9 @@ export default function InteractiveBanner() {
           <Frame941 />
           <div className="pointer-events-auto">
             <AnimatedButton />
+          </div>
+          <div className="pointer-events-auto pt-1">
+            <DemoLink />
           </div>
         </div>
       </div>

@@ -39,15 +39,6 @@ The CLI detects which agent tools you have on your machine and installs the plug
 npx plugins add snowplow/skills --target claude-code
 ```
 
-### Install in Claude Code
-
-Claude Code also has a native plugin marketplace, which reads the plugin definition straight from the repository and updates it automatically when the repository changes. Run these two commands inside Claude Code:
-
-```text
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
 ### Other MCP clients
 
 Any MCP-capable client can connect to the server directly. For example, using [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) in a JSON-based client configuration such as Claude Desktop or Cursor:

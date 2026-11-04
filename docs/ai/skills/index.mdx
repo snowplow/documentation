@@ -8,8 +8,6 @@ date: "2026-06-22"
 ---
 
 import { CardGrid, LinkCard } from '@site/src/components/CardGrid'
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 Snowplow skills connect your AI assistant, such as Claude, Cursor, Codex, or another MCP-compatible tool, to your Snowplow account. With a skill, your assistant can work with your pipelines, schemas, and Console data directly instead of describing them.
 
@@ -19,25 +17,9 @@ Every skill requires a one-time connection to the [Snowplow MCP server](/docs/ai
 
 The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. The plugin installs the Snowplow MCP server and the skills in one step.
 
-<Tabs groupId="mcp-client" queryString>
-  <TabItem value="any" label="Any agent" default>
-
 ```bash
 npx plugins add snowplow/skills
 ```
-
-  </TabItem>
-  <TabItem value="claude-code" label="Claude Code">
-
-Install the plugin from the Claude Code plugin marketplace by running these commands inside Claude Code:
-
-```txt
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
-  </TabItem>
-</Tabs>
 
 For other clients, such as Claude.ai, see [Configure the MCP server](/docs/ai/snowplow-mcp/index.md#configure-the-mcp-server).
 

@@ -7,11 +7,6 @@ keywords: ["signals quickstart", "snowplow mcp", "coding agent", "claude code", 
 date: "2026-10-14"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Add Signals to your web app with one prompt. Your coding agent asks what you want to build, then adds the tracking, the Signals configuration, and the code that uses it.
 
 You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Codex, and Node.js 18 or later. If you don't have a web app, the agent can create one.
@@ -26,23 +21,9 @@ Already on Snowplow CDI? Log in to [Console](https://console.snowplowanalytics.c
 
 The plugin adds the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and [skills](/docs/ai/skills/index.mdx) to your agent.
 
-<Tabs groupId="mcp-client" queryString>
-  <TabItem value="any" label="Any agent" default>
-
 ```bash
 npx plugins add snowplow/skills
 ```
-
-  </TabItem>
-  <TabItem value="claude-code" label="Claude Code">
-
-```text
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
-  </TabItem>
-</Tabs>
 
 The first time the agent uses a Snowplow tool, a browser window opens for you to log in to Console.
 

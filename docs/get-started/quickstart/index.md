@@ -7,11 +7,6 @@ keywords: ["snowplow quickstart", "getting started", "snowplow mcp", "coding age
 date: "2026-10-23"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Add Snowplow tracking to your application with one prompt. Your coding agent asks what you want to measure, then designs the tracking plan, creates the schemas in your Snowplow account, adds the tracker, and checks that the events arrive and pass validation.
 
 You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Codex. If you don't have an application to track, the agent can create one.
@@ -28,23 +23,9 @@ Already on Snowplow CDI? Log in to [Console](https://console.snowplowanalytics.c
 
 The plugin adds the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and [skills](/docs/ai/skills/index.mdx) to your agent.
 
-<Tabs groupId="mcp-client" queryString>
-  <TabItem value="any" label="Any agent" default>
-
 ```bash
 npx plugins add snowplow/skills
 ```
-
-  </TabItem>
-  <TabItem value="claude-code" label="Claude Code">
-
-```text
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
-  </TabItem>
-</Tabs>
 
 The first time the agent uses a Snowplow tool, a browser window opens for you to log in to Console. The agent then works with the permissions of your Console account.
 

@@ -1,6 +1,8 @@
 ---
 title: "Snowplow Signals is now generally available"
+sidebar_label: "Signals generally available"
 description: "Snowplow Signals is now generally available."
+keywords: ["snowplow signals", "general availability", "real-time customer context", "release notes"]
 date: "2025-09-30"
 category:
   - "Product news"

@@ -68,7 +68,7 @@ Once data is flowing, you can deploy a data model to transform raw events into s
 [Signals](/docs/signals/introduction/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
 :::note[Signals free tier]
-You can start on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) without a credit card or a sales call. Your account team quotes usage beyond the free tier.
+You can start on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) without a credit card or a sales call. To use Signals beyond the free tier, contact your account team.
 :::
 
 ### Design Signals attributes

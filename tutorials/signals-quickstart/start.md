@@ -22,11 +22,11 @@ This tutorial shows how to define attributes using the Snowplow Console UI, as w
 
 This tutorial assumes that you have:
 
-* A web application you can add the Snowplow JavaScript tracker to, with page view tracking
+* A web application where you can add the JavaScript tracker and track page views
 * Snowflake warehouse
 * Signals enabled on your Snowplow account
 
-:::note[Snowplow account required]
+:::note[Signals free tier]
 You don't need to run a Snowplow pipeline first. If you don't have an account, sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral), which includes event collection, to follow along.
 :::
 

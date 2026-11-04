@@ -1,6 +1,8 @@
 ---
 title: "Introducing Snowplow Signals"
+sidebar_label: "Introducing Snowplow Signals"
 description: "We’re excited to announce Snowplow Signals, real-time customer context for AI-powered applications."
+keywords: ["snowplow signals", "real-time customer context", "profiles store", "release notes"]
 date: "2025-05-28"
 category:
   - "Product news"

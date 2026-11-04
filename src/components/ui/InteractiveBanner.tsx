@@ -132,7 +132,7 @@ export default function InteractiveBanner() {
       />
 
       {/* Content */}
-      <div className="relative size-full z-10 pointer-events-none">
+      <div className="relative size-full z-10">
         <div className="box-border content-stretch flex flex-col gap-2 items-start justify-start px-6 py-8 relative size-full">
           <Frame941 />
           <div className="pointer-events-auto">

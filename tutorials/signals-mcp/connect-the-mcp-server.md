@@ -27,7 +27,7 @@ The Snowplow plugin bundles the MCP server with the Snowplow skills, which guide
 
 ### Install in any assistant
 
-Whichever assistant you use, the recommended way to install is the vendor-neutral [open-plugin](https://github.com/vercel-labs/plugins) CLI, which installs the MCP server and the skills together:
+Whichever assistant you use, the recommended way to install is the vendor-neutral [open-plugin](https://www.npmjs.com/package/plugins) CLI, which installs the MCP server and the skills together:
 
 ```bash
 npx plugins add snowplow/skills

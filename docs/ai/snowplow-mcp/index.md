@@ -16,7 +16,7 @@ The MCP server exposes the same set of tools as the Snowplow Assistant, but in y
 
 ## One-line install (Claude Code, Cursor, Codex)
 
-The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://github.com/vercel-labs/plugins), a vendor-neutral installer that auto-detects supported AI tools. From any terminal, run:
+The recommended way to install Snowplow MCP is with the [`plugins` CLI](https://www.npmjs.com/package/plugins), a vendor-neutral installer that auto-detects supported AI tools. From any terminal, run:
 
 ```bash
 npx plugins add snowplow/skills

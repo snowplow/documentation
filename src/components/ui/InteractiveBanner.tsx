@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { motion } from 'motion/react'
 import { Button } from './button.tsx'
 
@@ -98,55 +98,16 @@ function AnimatedBackground() {
 }
 
 export default function InteractiveBanner() {
-  const [isHovered, setIsHovered] = useState(false)
-  const [clickEffect, setClickEffect] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(true)
-  const [isPageVisible, setIsPageVisible] = useState(true)
-
-  const handleClick = () => {
-    setClickEffect(true)
-    setTimeout(() => setClickEffect(false), 1200)
-  }
-
-  // Observe banner visibility in viewport
-  useEffect(() => {
-    if (!containerRef.current || typeof IntersectionObserver === 'undefined') return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0]
-        setIsVisible(entry.isIntersecting)
-      },
-      { root: null, threshold: 0.1 }
-    )
-    observer.observe(containerRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  // Page/tab visibility
-  useEffect(() => {
-    const handleVisibility = () => setIsPageVisible(!document.hidden)
-    document.addEventListener('visibilitychange', handleVisibility)
-    handleVisibility()
-    return () => document.removeEventListener('visibilitychange', handleVisibility)
-  }, [])
-
-  const shouldRenderParticles = isHovered && isVisible && isPageVisible
-
   return (
     <motion.div
-      ref={containerRef}
-      className="relative rounded-lg size-full overflow-hidden cursor-pointer"
+      className="relative rounded-lg size-full overflow-hidden"
       data-name="Free trial"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      whileHover={{ 
-        boxShadow: "0 20px 40px rgba(102, 56, 184, 0.15)" 
+      whileHover={{
+        boxShadow: "0 20px 40px rgba(102, 56, 184, 0.15)"
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
     >
       {/* Subtle Tailwind-only gradient background */}
       <div
@@ -173,18 +134,6 @@ export default function InteractiveBanner() {
           </div>
         </div>
       </div>
-
-      {/* Hover glow effect with primary color */}
-      <motion.div
-        className="absolute inset-0 rounded-lg opacity-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at center, rgba(102, 56, 184, 0.1) 0%, transparent 70%)",
-        }}
-        animate={{ 
-          opacity: isHovered ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
-      />
     </motion.div>
   );
 }

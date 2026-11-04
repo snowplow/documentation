@@ -172,7 +172,7 @@ An AI assistant connected to the Snowplow MCP server can help translate your Ado
 
 <AiAssistantInstall />
 
-To work on tracking plan files on your machine instead, use the [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md).
+To work on tracking plan files on your machine instead, use the Snowplow CLI MCP server.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:

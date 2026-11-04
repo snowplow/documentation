@@ -127,11 +127,11 @@ You'll need to translate your Segment Tracking Plans into Snowplow [tracking pla
 The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md).
 
 :::tip[Use your AI assistant]
-An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) can help translate your Segment Tracking Plans into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our Segment Tracking Plan. Design Snowplow tracking plans for it, using built-in Snowplow events where they fit, and create the schemas in my account."
+An AI assistant connected to the Snowplow MCP server can help translate your Segment Tracking Plans into Snowplow tracking plans, and create the data structures and event specifications in your Snowplow account. For example: "Here's our Segment Tracking Plan. Design Snowplow tracking plans for it, using built-in Snowplow events where they fit, and create the schemas in my account."
 
 <AiAssistantInstall />
 
-To work on tracking plan files on your machine instead, use the [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md).
+To work on tracking plan files on your machine instead, use the Snowplow CLI MCP server.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:

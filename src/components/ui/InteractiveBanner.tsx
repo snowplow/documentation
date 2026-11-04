@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import { Loader2 } from 'lucide-react'
 import { Button } from './button.tsx'
 
 function Frame941() {
@@ -14,7 +13,7 @@ function Frame941() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground text-pretty">Want to see a <span className="inline-block">custom demo?</span></h3>
+        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground [text-wrap:balance]">Try Snowplow Free&nbsp;for 14&nbsp;Days</h3>
       </motion.div>
       <motion.div 
         className="flex flex-col justify-center relative shrink-0  w-full"
@@ -22,8 +21,8 @@ function Frame941() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <p className="font-normal text-base text-balance text-muted-foreground">
-        Our technical experts <span className="inline-block">are here to help.</span>
+        <p className="font-normal text-base [text-wrap:pretty] text-muted-foreground">
+          Collect behavioral data and act on it in real time. Design a schema, send an event, and fetch live context with the AI Assistant and MCP server.
         </p>
       </motion.div>
     </div>
@@ -31,20 +30,6 @@ function Frame941() {
 }
 
 function AnimatedButton() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleClick = async (e?: React.MouseEvent) => {
-    if (isLoading) {
-      e?.preventDefault();
-      return;
-    }
-    setIsLoading(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsLoading(false)
-    // Here you would typically handle the actual demo booking
-  }
-
   return (
     <motion.div
       className="relative w-full"
@@ -56,31 +41,14 @@ function AnimatedButton() {
     >
       <Button
         asChild
-        className="snowplow-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
-        disabled={isLoading}
+        className="snowplow-button shimmer-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
       >
         <a
-          href="https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/"
+          href="https://snowplow.io/get-started/snowplow-free-trial"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleClick}
         >
-          {isLoading && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center"
-            >
-              <Loader2 className="w-4 h-4 animate-spin mr-2" />
-            </motion.span>
-          )}
-          <motion.span
-            animate={{ x: isLoading ? 8 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {isLoading ? 'Booking...' : 'Book a demo'}
-          </motion.span>
+          Start Free Trial
         </a>
       </Button>
     </motion.div>
@@ -148,7 +116,7 @@ export default function InteractiveBanner() {
     <motion.div
       ref={containerRef}
       className="relative rounded-lg size-full overflow-hidden cursor-pointer"
-      data-name="Book a demo"
+      data-name="Free trial"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}

@@ -21,7 +21,7 @@ The diagram above illustrates a typical Snowplow pipeline with data flowing left
 - Your event-level data is now in your chosen destinations. From here we recommend this raw data is [**modelled**](/docs/modeling-your-data/index.md) into smaller, cleaner tables that are easier to perform analysis on. At this stage it can also be joined with other data sets. We have out-of-the-box data models for web and mobile to help you get started.
 
 :::tip[Ask your AI assistant]
-Have questions about how this applies to your own pipeline? Ask an AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). It can read your Snowplow configuration, such as pipelines, enrichments, and data structures, and look up these docs to answer you. For example: "Which enrichments are enabled on my production pipeline, and what do they add to my events?"
+Have questions about how this applies to your own pipeline? Ask an AI assistant connected to the Snowplow MCP server. It can read your Snowplow configuration, such as pipelines, enrichments, and data structures, and look up these docs to answer you. For example: "Which enrichments are enabled on my production pipeline, and what do they add to my events?"
 
 <AiAssistantInstall />
 :::

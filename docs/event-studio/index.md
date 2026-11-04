@@ -10,7 +10,6 @@ sidebar_custom_props:
 ---
 
 ```mdx-code-block
-import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <AvailabilityBadges
@@ -29,9 +28,7 @@ Event Studio is a comprehensive set of tools for designing and implementing beha
 The Event Studio UI is included in [Snowplow Console](https://console.snowplowanalytics.com).
 
 :::tip[Use your AI assistant]
-You can also work with Event Studio through an AI assistant. Connected to the Snowplow MCP server, it can answer questions about your tracking plans, design new ones, create data structures and event specifications, and add the tracking to your application. For example: "What tracking plans do we have for the mobile app, and which event specifications have no recent events?"
-
-<AiAssistantInstall />
+You can also work with Event Studio through an AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
 :::
 
 These tools help organizations move from ad-hoc tracking implementations to a structured, governed, collaborative approach.

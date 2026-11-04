@@ -7,6 +7,7 @@ keywords: ["event tracking", "trackers", "JavaScript tracker", "web tracking", "
 ---
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
@@ -83,6 +84,12 @@ Now, let’s take a look at how to set up actual event tracking.
 The [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
 
 To use the JavaScript tracker on your site, you will need to obtain a code snippet first.
+
+:::tip[Add the tracker with your AI assistant]
+If you use Snowplow CDI, you can ask your coding agent to add the tracker instead of copying the snippet by hand. Connected to the Snowplow MCP server, it reads your pipeline details, adds the tracker to your application, and checks that the events arrive. For example: "Add the Snowplow JavaScript tracker to this app, track page views, and confirm the events reach my pipeline."
+
+<AiAssistantInstall />
+:::
 
 <Tabs groupId="offering" queryString>
   <TabItem value="pmc" label="CDI Private Managed Cloud" default>

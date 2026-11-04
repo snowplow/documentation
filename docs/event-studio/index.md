@@ -27,6 +27,10 @@ Event Studio is a comprehensive set of tools for designing and implementing beha
 
 The Event Studio UI is included in [Snowplow Console](https://console.snowplowanalytics.com).
 
+:::tip[Use your AI assistant]
+You can also work with Event Studio through an AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+:::
+
 These tools help organizations move from ad-hoc tracking implementations to a structured, governed, collaborative approach.
 
 :::tip

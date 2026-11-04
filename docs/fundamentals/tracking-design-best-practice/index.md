@@ -7,6 +7,8 @@ description: "Learn how to design effective behavioral data tracking by analyzin
 keywords: ["tracking design", "tracking plan", "event specifications"]
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 Good tracking design is essential for successful data collection. This guide will help you approach the design process systematically.
 
 To use Snowplow successfully, you need to have a good idea of:
@@ -17,6 +19,12 @@ To use Snowplow successfully, you need to have a good idea of:
 * What you need to know about those events to make those decisions
 
 The final outcome of your planning will be a set of tracking plans.
+
+:::tip[Design tracking with your AI assistant]
+The Snowplow skills apply this guidance for you. Connected to the Snowplow MCP server, your AI assistant asks about your business and decisions, proposes events and entities, and creates the tracking plans and data structures in your account. For example: "Design a tracking plan for our signup and onboarding flow, reusing existing data structures where possible."
+
+<AiAssistantInstall />
+:::
 
 ## Snowplow tracking concepts
 

@@ -7,11 +7,6 @@ keywords: ["snowplow quickstart", "getting started", "snowplow mcp", "coding age
 date: "2026-10-23"
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Add Snowplow tracking to your application with one prompt. Your coding agent asks what you want to measure, then designs the tracking plan, creates the schemas in your Snowplow account, adds the tracker, and checks that the events arrive and pass validation.
 
 You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Codex. If you don't have an application to track, the agent can create one.
@@ -28,23 +23,9 @@ Already on Snowplow CDI? Log in to [Console](https://console.snowplowanalytics.c
 
 The plugin adds the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and [skills](/docs/ai/skills/index.mdx) to your agent.
 
-<Tabs groupId="mcp-client" queryString>
-  <TabItem value="any" label="Any agent" default>
-
 ```bash
 npx plugins add snowplow/skills
 ```
-
-  </TabItem>
-  <TabItem value="claude-code" label="Claude Code">
-
-```text
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
-```
-
-  </TabItem>
-</Tabs>
 
 The first time the agent uses a Snowplow tool, a browser window opens for you to log in to Console. The agent then works with the permissions of your Console account.
 
@@ -71,7 +52,7 @@ schemas you created, and how I can see the events arriving.
 
 When the agent asks what you want to measure, describe it in the words of your product. For example, "product views, add to basket, each checkout step, and purchase, with the product and the basket on every event".
 
-The agent loads the relevant skill on its own: `tracking-design` plans the [events](/docs/fundamentals/events/index.md), [entities](/docs/fundamentals/entities/index.md), and [schemas](/docs/fundamentals/schemas/index.md), `implementation-guidance` adds and configures the [tracker](/docs/sources/index.md), and `troubleshooting` reads [failed events](/docs/fundamentals/failed-events/index.md) and proposes a fix.
+The agent loads the relevant Snowplow skill on its own as it plans the [events](/docs/fundamentals/events/index.md), [entities](/docs/fundamentals/entities/index.md), and [schemas](/docs/fundamentals/schemas/index.md), adds and configures the [tracker](/docs/sources/index.md), and reads [failed events](/docs/fundamentals/failed-events/index.md) to propose a fix.
 
 ## Check that it works
 

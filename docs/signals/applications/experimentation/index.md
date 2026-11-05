@@ -55,9 +55,16 @@ The Optimizely, GrowthBook, and LaunchDarkly SDKs evaluate rules locally, so rea
 
 ## Pass attributes at assignment
 
+Each time your server decides which variant to show, it does two things:
+
+1. Reads the user's attributes from a Signals service
+2. Passes those attributes to the experimentation SDK, which applies your targeting rules and returns a variant
+
 Start by [connecting to Signals](/docs/signals/connection/index.md) and defining a [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on. Create the `Signals` client once when your server starts, and reuse it for every request.
 
-Assignment shouldn't wait on Signals. This helper returns an empty set of attributes if the read takes longer than your timeout or fails. It also drops `null` values, because experimentation tools skip conditions on missing or wrongly typed values.
+### Read the user's attributes
+
+In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID, read from the `_sp_id` cookie.
 
 <Tabs groupId="signals-language" queryString>
 <TabItem value="nodejs" label="Node.js" default>
@@ -72,6 +79,159 @@ const signals = new Signals({
   organizationId: ORG_ID,
 });
 
+// In your request handler
+const attributes = await signals.getServiceAttributes({
+  name: 'checkout_intent',
+  attribute_key: 'domain_userid',
+  identifier: domainUserId,
+});
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+# sp_signals is the Signals client from Connect to Signals
+attributes = sp_signals.get_service_attributes(
+    name="checkout_intent",
+    attribute_key="domain_userid",
+    identifier=domain_user_id,
+)
+```
+
+</TabItem>
+</Tabs>
+
+Signals returns the service's attributes for that user, for example:
+
+```json
+{
+  "cart_value": 120,
+  "product_views_last_10_min": 6,
+  "is_returning_customer": true
+}
+```
+
+### Pass the attributes to your experimentation tool
+
+Pass the attributes wherever your experimentation SDK accepts user attributes. The tool then applies your targeting rules, such as "show the offer when `product_views_last_10_min` is at least 5", and returns the variant to show. Each example uses `attributes` from the previous step.
+
+<Tabs groupId="experimentation-tool" queryString>
+<TabItem value="optimizely" label="Optimizely" default>
+
+Create each attribute in your Optimizely project before you use it in an audience.
+
+```typescript
+import {
+  createInstance,
+  createPollingProjectConfigManager,
+  createBatchEventProcessor,
+} from '@optimizely/optimizely-sdk';
+
+const optimizely = createInstance({
+  projectConfigManager: createPollingProjectConfigManager({ sdkKey: OPTIMIZELY_SDK_KEY }),
+  eventProcessor: createBatchEventProcessor(),
+});
+await optimizely.onReady();
+
+// In your request handler
+const user = optimizely.createUserContext(domainUserId, attributes);
+const decision = user.decide('checkout_offer');
+```
+
+</TabItem>
+<TabItem value="growthbook" label="GrowthBook">
+
+Add each attribute in GrowthBook under **SDK Configuration** > **Attributes** so you can target on it.
+
+```typescript
+import { GrowthBookClient } from '@growthbook/growthbook';
+
+const growthbook = new GrowthBookClient({
+  apiHost: GROWTHBOOK_API_HOST,
+  clientKey: GROWTHBOOK_CLIENT_KEY,
+});
+await growthbook.init();
+
+// In your request handler
+const gb = growthbook.createScopedInstance({
+  attributes: { id: domainUserId, ...attributes },
+});
+const offer = gb.getFeatureValue('checkout-offer', 'control');
+```
+
+</TabItem>
+<TabItem value="launchdarkly" label="LaunchDarkly">
+
+LaunchDarkly targets on any attribute in the context, with no setup in the LaunchDarkly UI.
+
+```typescript
+import { init } from '@launchdarkly/node-server-sdk';
+
+const launchdarkly = init(LAUNCHDARKLY_SDK_KEY);
+await launchdarkly.waitForInitialization({ timeout: 10 });
+
+// In your request handler
+const detail = await launchdarkly.variationDetail(
+  'checkout-offer',
+  { kind: 'user', key: domainUserId, ...attributes },
+  false,
+);
+```
+
+</TabItem>
+<TabItem value="conductrics" label="Conductrics">
+
+Conductrics selects a variation through its REST API, and takes attributes as traits in `type:value` form. Create each trait in the Conductrics admin first, because Conductrics ignores traits it doesn't know. Group numeric attributes into trait values, such as `intent:high`, or send them as `inputs`.
+
+```typescript
+const CONDUCTRICS_URL = 'https://api.v3.conductrics.com/{{owner_code}}/v3/agent-api';
+
+function toTraits(attributes: Record<string, string | number | boolean>): string[] {
+  const views = Number(attributes.product_views_last_10_min ?? 0);
+  return [`intent:${views >= 5 ? 'high' : views >= 2 ? 'medium' : 'low'}`];
+}
+
+// In your request handler
+const params = new URLSearchParams({ apikey: CONDUCTRICS_API_KEY, session: domainUserId });
+const response = await fetch(`${CONDUCTRICS_URL}?${params}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    commands: [{ a: 'checkout-offer' }],
+    traits: toTraits(attributes),
+  }),
+});
+const selection = await response.json();
+const offer = selection.sels['checkout-offer'];
+```
+
+</TabItem>
+</Tabs>
+
+Other tools follow the same pattern. For example, Kameleoon calls user attributes custom data.
+
+### Choose the user key
+
+The user key is the identifier the experimentation tool uses to assign a variant. Use `domain_userid` by default, as in the examples, so experiment exposures, Signals attributes, and Snowplow events all join on the same ID. Don't let the experimentation tool create its own anonymous ID as well.
+
+Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your tool keeps assignments the same across login.
+
+Your server can read `domain_userid` from the `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). On a user's first page view the cookie may not exist yet, so experiments that target in-session behavior should assign on a later request.
+
+### Handle slow or missing attributes
+
+The examples above wait for Signals before assigning a variant. In production, assignment shouldn't depend on Signals: if a read is slow or fails, assign without Signals attributes rather than delay the page.
+
+This helper replaces the read above. It does two things:
+
+* Returns an empty set of attributes if Signals doesn't reply within your timeout, or returns an error
+* Drops `null` values, because experimentation tools skip targeting conditions on missing or wrongly typed values
+
+<Tabs groupId="signals-language" queryString>
+<TabItem value="nodejs" label="Node.js" default>
+
+```typescript
 type Scalar = string | number | boolean;
 
 export async function readSignals(
@@ -105,7 +265,7 @@ export async function readSignals(
 </TabItem>
 <TabItem value="python" label="Python">
 
-The Python SDK call is synchronous, so the helper runs it in a thread pool to apply a timeout.
+The Python SDK call is synchronous, so this helper runs it in a thread pool to apply a timeout.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
@@ -129,114 +289,7 @@ def read_signals(service: str, domain_user_id: str, timeout_s: float) -> dict:
 </TabItem>
 </Tabs>
 
-Then pass the attributes to your experimentation SDK. In each example, `domainUserId` is the user's Snowplow ID, read from the `_sp_id` cookie, and `checkout_intent` is a Signals service.
-
-<Tabs groupId="experimentation-tool" queryString>
-<TabItem value="optimizely" label="Optimizely" default>
-
-Create each attribute in your Optimizely project before you use it in an audience.
-
-```typescript
-import {
-  createInstance,
-  createPollingProjectConfigManager,
-  createBatchEventProcessor,
-} from '@optimizely/optimizely-sdk';
-
-const optimizely = createInstance({
-  projectConfigManager: createPollingProjectConfigManager({ sdkKey: OPTIMIZELY_SDK_KEY }),
-  eventProcessor: createBatchEventProcessor(),
-});
-await optimizely.onReady();
-
-// In your request handler
-const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
-const user = optimizely.createUserContext(domainUserId, attributes);
-const decision = user.decide('checkout_offer');
-```
-
-</TabItem>
-<TabItem value="growthbook" label="GrowthBook">
-
-Add each attribute in GrowthBook under **SDK Configuration** > **Attributes** so you can target on it.
-
-```typescript
-import { GrowthBookClient } from '@growthbook/growthbook';
-
-const growthbook = new GrowthBookClient({
-  apiHost: GROWTHBOOK_API_HOST,
-  clientKey: GROWTHBOOK_CLIENT_KEY,
-});
-await growthbook.init();
-
-// In your request handler
-const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
-const gb = growthbook.createScopedInstance({
-  attributes: { id: domainUserId, ...attributes },
-});
-const offer = gb.getFeatureValue('checkout-offer', 'control');
-```
-
-</TabItem>
-<TabItem value="launchdarkly" label="LaunchDarkly">
-
-LaunchDarkly targets on any attribute in the context, with no setup in the LaunchDarkly UI.
-
-```typescript
-import { init } from '@launchdarkly/node-server-sdk';
-
-const launchdarkly = init(LAUNCHDARKLY_SDK_KEY);
-await launchdarkly.waitForInitialization({ timeout: 10 });
-
-// In your request handler
-const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
-const detail = await launchdarkly.variationDetail(
-  'checkout-offer',
-  { kind: 'user', key: domainUserId, ...attributes },
-  false,
-);
-```
-
-</TabItem>
-<TabItem value="conductrics" label="Conductrics">
-
-Conductrics selects a variation through its REST API, and takes attributes as traits in `type:value` form. Create each trait in the Conductrics admin first, because Conductrics ignores traits it doesn't know. Group numeric attributes into trait values, such as `intent:high`, or send them as `inputs`.
-
-```typescript
-const CONDUCTRICS_URL = 'https://api.v3.conductrics.com/{{owner_code}}/v3/agent-api';
-
-function toTraits(attributes: Record<string, string | number | boolean>): string[] {
-  const views = Number(attributes.product_views_last_10_min ?? 0);
-  return [`intent:${views >= 5 ? 'high' : views >= 2 ? 'medium' : 'low'}`];
-}
-
-// In your request handler
-const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
-const params = new URLSearchParams({ apikey: CONDUCTRICS_API_KEY, session: domainUserId });
-const response = await fetch(`${CONDUCTRICS_URL}?${params}`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    commands: [{ a: 'checkout-offer' }],
-    traits: toTraits(attributes),
-  }),
-});
-const selection = await response.json();
-const offer = selection.sels['checkout-offer'];
-```
-
-</TabItem>
-</Tabs>
-
-Other tools follow the same pattern: read the attributes, then pass them wherever the SDK accepts user attributes. For example, Kameleoon calls them custom data.
-
-### Choose the user key
-
-The user key is the identifier the experimentation tool uses to assign a variant. Use `domain_userid` by default, as in the examples, so experiment exposures, Signals attributes, and Snowplow events all join on the same ID. Don't let the experimentation tool create its own anonymous ID as well.
-
-Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your tool keeps assignments the same across login.
-
-Your server can read `domain_userid` from the `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). On a user's first page view the cookie may not exist yet, so experiments that target in-session behavior should assign on a later request.
+Call the helper in place of the direct read, for example `const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);`.
 
 Users without Signals attributes, because the read timed out or because they're new, don't match conditions built on Signals attributes, and see the default variant. Keep this in mind when you report results.
 

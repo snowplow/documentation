@@ -17,6 +17,6 @@ Both patterns require a [connection to Signals](/docs/signals/connection/index.m
 This section covers:
 * [Services](/docs/signals/applications/services/index.md): stable interfaces that group attribute group versions together for your applications, recommended for production use
 * [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md): fetch calculated attribute values using a service or directly from an attribute group
-* [Proxy attributes to the frontend](/docs/signals/applications/proxy-attributes/index.md): build a server-side or edge endpoint that reads the tracker cookies and returns attribute values to the browser
+* [Proxy attributes to the browser](/docs/signals/applications/proxy-attributes/index.md): build a server-side or edge endpoint that reads the tracker cookies and returns attribute values to the browser
 * [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md): fetch a user's recent session activity as JSON or a narrative summary, to ground your agents
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application

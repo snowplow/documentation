@@ -1,8 +1,8 @@
 ---
-title: "Serve attributes to your frontend through a server-side proxy"
+title: "Serve attributes to the browser through a server-side proxy"
 sidebar_position: 22
-sidebar_label: "Proxy attributes to the frontend"
-description: "Build a small server-side or edge endpoint, for example on Vercel or Cloudflare Workers, that reads the Snowplow tracker cookies, fetches attributes from Signals, and returns them to your frontend."
+sidebar_label: "Proxy attributes to the browser"
+description: "Build a small server-side or edge endpoint, for example on Vercel or Cloudflare Workers, that reads the Snowplow tracker cookies, fetches attributes from Signals, and returns them to the browser."
 keywords: ["signals proxy", "edge function", "cloudflare workers", "vercel", "next.js", "domain_userid", "real-time personalization"]
 date: "2026-11-05"
 ---
@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Signals API credentials must never reach the browser, so your frontend can't call Signals directly to [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md). Instead, add a small endpoint on your own domain that acts as a proxy: it reads the user's identifier from the Snowplow tracker cookies sent with the request, calls Signals with your credentials, and returns only the attribute values your frontend needs.
+Signals API credentials must never reach the browser, so your front-end can't call Signals directly to [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md). Instead, add a small endpoint on your own domain that acts as a proxy: it reads the user's identifier from the Snowplow tracker cookies sent with the request, calls Signals with your credentials, and returns only the attribute values your front-end needs.
 
 Use this pattern when you want to personalize a web page in the browser, for example to show a discount banner, reorder content, or change a call to action, based on what the user has just done. Running the proxy as an edge function, such as a Vercel Function or a Cloudflare Worker, keeps the extra round trip short.
 
@@ -21,7 +21,7 @@ The request flow looks like this:
 1. The user's browser calls your endpoint, for example `GET /api/signals`. Because the endpoint is on your site's domain, the browser sends the Snowplow cookies automatically.
 2. The endpoint parses the `domain_userid` from the `_sp_id` cookie.
 3. The endpoint calls Signals to get the attributes for a [service](/docs/signals/applications/services/index.md), using that identifier as the [attribute key](/docs/signals/attributes/attribute-keys/index.md) value.
-4. The endpoint returns a filtered JSON response, and your frontend acts on the values.
+4. The endpoint returns a filtered JSON response, and your front-end acts on the values.
 
 ## Read the user identifier from the tracker cookies
 
@@ -135,7 +135,7 @@ export async function GET(request: NextRequest) {
       identifier: domainUserId,
     });
 
-    // Return only what the frontend needs
+    // Return only what the front-end needs
     return NextResponse.json(
       {
         attributes: {
@@ -202,7 +202,7 @@ export default {
         identifier: domainUserId,
       });
 
-      // Return only what the frontend needs
+      // Return only what the front-end needs
       return json({
         attributes: {
           page_view_count: values.page_view_count ?? null,
@@ -224,9 +224,9 @@ Store the credentials with `wrangler secret put`, and add a [route](https://deve
 
 If your runtime doesn't support Node.js APIs, call the [Signals API](/docs/signals/connection/index.md#signals-api) directly with `fetch` instead. See the Swagger documentation for your deployment, at `{{API_URL}}/docs/`, for the attribute retrieval endpoints.
 
-## Call the endpoint from your frontend
+## Call the endpoint from your front-end
 
-Call the endpoint with a same-origin `fetch`. The browser includes the Snowplow cookies, so the frontend doesn't need to pass the identifier.
+Call the endpoint with a same-origin `fetch`. The browser includes the Snowplow cookies, so the front-end doesn't need to pass the identifier.
 
 ```javascript
 async function getPersonalization() {
@@ -251,11 +251,11 @@ To have Signals tell your application when a user meets a condition, instead of 
 
 The proxy exposes attribute data on a public URL, so limit what it can return and to whom:
 
-* **Read the identifier from the cookie, not from the request**: don't accept a `domain_userid` in a query string or body. If the endpoint trusts a client-supplied identifier, anyone can request attributes for other users.
-* **Return only the attributes the frontend uses**: filter the Signals response instead of passing it through. Keep sensitive or internal attributes on the server.
-* **Hard-code the service name**: don't let the caller choose which service or attribute group to read.
-* **Prevent shared caching**: send `Cache-Control: private, no-store` so that a CDN or edge cache never serves one user's attributes to another.
-* **Keep credentials server-side**: store the API key, API key ID, and organization ID as platform secrets, and never bundle them into client code.
-* **Rate-limit the endpoint**: use your platform's rate limiting to protect your Signals deployment from excessive traffic.
+* Read the identifier from the cookie, not from the request: don't accept a `domain_userid` in a query string or body. If the endpoint trusts a client-supplied identifier, anyone can request attributes for other users.
+* Return only the attributes the front-end uses: filter the Signals response instead of passing it through. Keep sensitive or internal attributes on the server.
+* Hard-code the service name: don't let the caller choose which service or attribute group to read.
+* Prevent shared caching: send `Cache-Control: private, no-store` so that a CDN or edge cache never serves one user's attributes to another.
+* Keep credentials server-side: store the API key, API key ID, and organization ID as platform secrets, and never bundle them into client code.
+* Rate-limit the endpoint: use your platform's rate limiting to protect your Signals deployment from excessive traffic.
 
 Remember that cookie values, and therefore the attributes tied to them, describe a pseudonymous browser rather than an authenticated user. Don't use this endpoint to make access-control decisions.

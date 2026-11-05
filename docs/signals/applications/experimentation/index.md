@@ -2,8 +2,8 @@
 title: "Use Signals attributes in experiments"
 sidebar_position: 40
 sidebar_label: "Use in experiments"
-description: "Pass Signals attributes to your experimentation or feature flag tool when it assigns a variant, and track exposures in Snowplow so results join to your behavioral data."
-keywords: ["signals", "experimentation", "a/b testing", "feature flags", "targeting", "exposure tracking", "multi-armed bandit"]
+description: "Pass Signals attributes to Optimizely, GrowthBook, LaunchDarkly, or another experimentation tool when it assigns a variant, and track exposures in Snowplow so results join to your behavioral data."
+keywords: ["signals", "experimentation", "a/b testing", "feature flags", "optimizely", "growthbook", "launchdarkly", "exposure tracking"]
 date: "2026-11-04"
 ---
 
@@ -12,48 +12,55 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Experimentation and feature flag tools, such as Optimizely, GrowthBook, LaunchDarkly, Kameleoon, and Conductrics, decide which variant a user sees. They evaluate targeting rules and bandit models against the attributes your application passes in at the moment of assignment. Signals computes what the user is doing in the current session, so passing Signals attributes at assignment lets an experiment target in-session behavior, such as intent or hesitation, rather than audiences synced from another system.
+Experimentation and feature flag tools, such as Optimizely, GrowthBook, and LaunchDarkly, decide which variant each user sees. They make that decision using the attributes your application passes in. Signals gives them attributes that describe what the user is doing right now, so your experiments can target and learn from behavior in the current session.
 
-The experimentation tool still owns the split, the holdout, and the statistics. This page describes a pattern that works with any tool whose SDK accepts user attributes:
+Your experimentation tool still assigns variants, holds out a control group, and calculates results. Signals provides the attributes, and Snowplow records which variant each user saw.
 
-1. Read the user's attributes from Signals on your server, with a timeout
-2. Pass the attributes to the experimentation SDK when it assigns a variant
-3. Track the exposure in Snowplow, so experiment results join to your events in the warehouse
+## Why use Signals with your experimentation tool
 
-Start by [connecting to Signals](/docs/signals/connection/index.md) and defining a [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on.
+Experimentation tools usually target on what they can see on the page, or on audiences synced from another system. Synced audiences arrive minutes or hours later, so they describe a past session rather than the current one.
 
-## Read attributes before assignment
+Passing Signals attributes at assignment lets you:
 
-Reading attributes requires an API key, so read them on your server, in an edge function, or in a back-end endpoint, never in the browser. Client-side experimentation tools need a first-party endpoint that holds the key and returns attributes only for the caller's own identifier.
+* Target on in-session behavior: show a variant to users who are comparing prices, hesitating at checkout, or returning for the third time today
+* Give bandits better context: contextual bandits, such as Optimizely's contextual multi-armed bandit, learn from the attributes they receive at each decision
+* Use one definition everywhere: the attribute you target on is the same attribute you segment results by, so "high intent" means the same thing in targeting and in analysis
+* Analyze results in your own warehouse: exposures are part of your Snowplow data, so you can join them to every other event a user generated
+* Start an experiment at the right moment: trigger an assignment when a user meets a condition, using [interventions](/docs/signals/interventions/index.md)
+
+## How it works
+
+The integration runs in your server code, the same code that handles a page request or an API call. For example, an Express route, a Next.js route handler or server component, or a Python view. Reading attributes needs an API key, so it can't run in the browser.
 
 ```mermaid
-sequenceDiagram
-    participant B as Browser tracker
-    participant C as Collector
-    participant S as Signals
-    participant A as Your server
-    participant V as Experimentation SDK
-    B->>C: Events with domain_userid
-    C->>S: Attributes updated
-    B->>A: Request with _sp_id cookie
-    A->>S: Read service attributes for domain_userid
-    alt Reply within your timeout
-        S-->>A: Attributes
-    else Timeout, error, or unknown identifier
-        A->>A: Use empty attributes
-    end
-    A->>V: Assign with user key domain_userid and attributes
-    V-->>A: Variant
-    A->>B: Render variant
-    B->>C: Page view with exposure entity
+flowchart LR
+    A["Your website"] -->|"1. Events"| S["Signals"]
+    S -->|"2. Attributes"| B["Your server"]
+    B -->|"3. Attributes"| E["Experimentation tool"]
+    E -->|"4. Variant"| B
+    B -->|"5. Variant"| A
+    A -->|"6. Exposure"| P["Snowplow"]
 ```
 
-Assignment shouldn't wait on Signals. Race the read against a timeout that fits your latency budget, and fall back to an empty set of attributes on a timeout or an error. Experimentation SDKs skip targeting conditions on values of the wrong type, so pass only strings, numbers, and booleans, and drop `null` values.
+In order:
 
-<Tabs groupId="signals-experiments" queryString>
+1. Your website sends events to Snowplow, and Signals updates the user's attributes
+2. When the user requests a page, your server reads their attributes from Signals
+3. Your server passes the attributes to the experimentation SDK
+4. The SDK assigns a variant
+5. Your server renders the variant
+6. Your website tracks which variant the user saw, as part of the page view
+
+The experimentation SDKs in this page evaluate rules locally, so reading from Signals is the only network call this adds to the request.
+
+## Pass attributes at assignment
+
+Start by [connecting to Signals](/docs/signals/connection/index.md) and defining a [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on. Create the `Signals` client once when your server starts, and reuse it for every request.
+
+Assignment shouldn't wait on Signals. This helper returns an empty set of attributes if the read takes longer than your timeout or fails. It also drops `null` values, because experimentation tools skip conditions on missing or wrongly typed values.
+
+<Tabs groupId="signals-language" queryString>
 <TabItem value="nodejs" label="Node.js" default>
-
-Create the `Signals` client once, outside your request handler, and reuse it across requests.
 
 ```typescript
 import { Signals } from '@snowplow/signals-node';
@@ -69,8 +76,7 @@ type Scalar = string | number | boolean;
 
 export async function readSignals(
   service: string,
-  attributeKey: string,
-  identifier: string,
+  domainUserId: string,
   timeoutMs: number,
 ): Promise<Record<string, Scalar>> {
   const timeout = new Promise<Record<string, unknown>>((resolve) =>
@@ -78,7 +84,11 @@ export async function readSignals(
   );
   try {
     const values = await Promise.race([
-      signals.getServiceAttributes({ name: service, attribute_key: attributeKey, identifier }),
+      signals.getServiceAttributes({
+        name: service,
+        attribute_key: 'domain_userid',
+        identifier: domainUserId,
+      }),
       timeout,
     ]);
     return Object.fromEntries(
@@ -95,23 +105,23 @@ export async function readSignals(
 </TabItem>
 <TabItem value="python" label="Python">
 
-The Python SDK call is synchronous, so run it in a thread pool to apply a timeout.
+The Python SDK call is synchronous, so the helper runs it in a thread pool to apply a timeout.
 
 ```python
-from concurrent.futures import ThreadPoolExecutor, TimeoutError
+from concurrent.futures import ThreadPoolExecutor
 
 executor = ThreadPoolExecutor(max_workers=8)
 
-def read_signals(service: str, attribute_key: str, identifier: str, timeout_s: float) -> dict:
+def read_signals(service: str, domain_user_id: str, timeout_s: float) -> dict:
     future = executor.submit(
         sp_signals.get_service_attributes,
         name=service,
-        attribute_key=attribute_key,
-        identifier=identifier,
+        attribute_key="domain_userid",
+        identifier=domain_user_id,
     )
     try:
         values = future.result(timeout=timeout_s)
-    except Exception:  # Includes TimeoutError
+    except Exception:  # Includes the timeout
         return {}
     return {k: v for k, v in (values or {}).items() if isinstance(v, (str, int, float, bool))}
 ```
@@ -119,89 +129,230 @@ def read_signals(service: str, attribute_key: str, identifier: str, timeout_s: f
 </TabItem>
 </Tabs>
 
-Then merge the attributes into the user object your experimentation SDK expects, and assign. For example, with an SDK that takes a user object:
+Then pass the attributes to your experimentation SDK. In each example, `domainUserId` is the user's Snowplow ID, read from the `_sp_id` cookie, and `checkout_intent` is a Signals service.
+
+<Tabs groupId="experimentation-tool" queryString>
+<TabItem value="optimizely" label="Optimizely" default>
+
+Create each attribute in your Optimizely project before you use it in an audience.
 
 ```typescript
-const attributes = await readSignals('checkout_intent', 'domain_userid', domainUserId, TIMEOUT_MS);
+import {
+  createInstance,
+  createPollingProjectConfigManager,
+  createBatchEventProcessor,
+} from '@optimizely/optimizely-sdk';
 
-// Replace with your experimentation SDK's assignment call
-const variant = experiments.assign('checkout_offer', {
-  key: domainUserId,
-  ...attributes,
+const optimizely = createInstance({
+  projectConfigManager: createPollingProjectConfigManager({ sdkKey: OPTIMIZELY_SDK_KEY }),
+  eventProcessor: createBatchEventProcessor(),
 });
+await optimizely.onReady();
+
+// In your request handler
+const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
+const user = optimizely.createUserContext(domainUserId, attributes);
+const decision = user.decide('checkout_offer');
 ```
 
-The method and object names depend on the tool: a user context in Optimizely, attributes in GrowthBook, a context in LaunchDarkly, custom data in Kameleoon, or traits on a Conductrics selection. Users without Signals attributes don't match conditions built on them, so they fall into the default or control path. This means a Signals-targeted experiment mostly includes users who have already generated some events. Describe that population when you report results.
+</TabItem>
+<TabItem value="growthbook" label="GrowthBook">
 
-## Choose the identifiers
+Add each attribute in GrowthBook under **SDK Configuration** > **Attributes** so you can target on it.
 
-Two identifiers are involved in each assignment, and they can be different:
+```typescript
+import { GrowthBookClient } from '@growthbook/growthbook';
 
-* **Bucketing key**: the identifier the experimentation tool hashes to assign a variant
-* **Attribute key**: the identifier you read Signals attributes with, set by the [attribute keys](/docs/signals/attributes/attribute-keys/index.md) of your attribute groups
+const growthbook = new GrowthBookClient({
+  apiHost: GROWTHBOOK_API_HOST,
+  clientKey: GROWTHBOOK_CLIENT_KEY,
+});
+await growthbook.init();
 
-Choose the bucketing key to match the unit of the outcome you measure:
+// In your request handler
+const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
+const gb = growthbook.createScopedInstance({
+  attributes: { id: domainUserId, ...attributes },
+});
+const offer = gb.getFeatureValue('checkout-offer', 'control');
+```
 
-* Use `domain_userid` by default, and set it as the experimentation tool's user key, so exposures, Signals attributes, and atomic events join without a mapping table
-* Use `domain_sessionid` only for experiments whose outcome happens within the same session, because Snowplow sessions roll over after a period of inactivity and each new session would be assigned again
-* Use `user_id` only if the experimentation tool keeps the assignment sticky across login, otherwise users can switch variants when they log in
+</TabItem>
+<TabItem value="launchdarkly" label="LaunchDarkly">
 
-Don't let the experimentation tool generate its own anonymous identifier alongside Snowplow's. You can still read session-keyed attributes while bucketing on `domain_userid`, or use [identity resolution](/docs/signals/attributes/identity-resolution/index.md) to read one person's attributes by `domain_userid` before and after login.
+LaunchDarkly targets on any attribute in the context, with no setup in the LaunchDarkly UI.
 
-On your server, get `domain_userid` and `domain_sessionid` from the `_sp_id` cookie, or send them from the browser with `getDomainUserId()` and `getDomainSessionId()`. See [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). On a user's first page view the cookie may not exist yet, so experiments that target in-session behavior should assign on a later request or on an interaction.
+```typescript
+import { init } from '@launchdarkly/node-server-sdk';
+
+const launchdarkly = init(LAUNCHDARKLY_SDK_KEY);
+await launchdarkly.waitForInitialization({ timeout: 10 });
+
+// In your request handler
+const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
+const detail = await launchdarkly.variationDetail(
+  'checkout-offer',
+  { kind: 'user', key: domainUserId, ...attributes },
+  false,
+);
+```
+
+</TabItem>
+</Tabs>
+
+Other tools follow the same pattern: read the attributes, then pass them wherever the SDK accepts user attributes. For example, Kameleoon calls them custom data and Conductrics calls them traits.
+
+### Choose the user key
+
+The user key is the identifier the experimentation tool uses to assign a variant. Use `domain_userid` by default, as in the examples, so experiment exposures, Signals attributes, and Snowplow events all join on the same ID. Don't let the experimentation tool create its own anonymous ID as well.
+
+Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your tool keeps assignments the same across login.
+
+Your server can read `domain_userid` from the `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). On a user's first page view the cookie may not exist yet, so experiments that target in-session behavior should assign on a later request.
+
+Users without Signals attributes, because the read timed out or because they're new, don't match conditions built on Signals attributes, and see the default variant. Keep this in mind when you report results.
 
 ## Track exposures in Snowplow
 
-Track each assignment the user actually sees as part of your Snowplow data, so you can analyze experiment results in your warehouse alongside the rest of your behavioral data. Use the schema your experimentation tool already provides, if there is one. For example, the [Optimizely plugin](/docs/sources/web-trackers/tracking-events/optimizely/index.md) adds Optimizely entities to web events, and GrowthBook publishes `iglu:io.growthbook/experiment_viewed/jsonschema/1-0-0` on Iglu Central.
+Track which variant each user saw as part of your Snowplow data. You can then analyze experiment results in your warehouse alongside the rest of your behavioral data.
 
-Otherwise, define your own [entity](/docs/fundamentals/entities/index.md) in [Event Studio](/docs/event-studio/data-structures/index.md) and attach it to the page view that renders the variant. Attaching it to the page view means the JavaScript tracker sets `domain_userid` and `domain_sessionid` for you. A useful exposure entity includes:
+Define an [entity](/docs/fundamentals/entities/index.md) for exposures in [Event Studio](/docs/event-studio/data-structures/index.md). A useful exposure entity includes:
 
 | Field | Description |
 | --- | --- |
-| `vendor` | The tool that assigned the variant, for example `optimizely` or `growthbook` |
-| `experiment_id` | The tool's experiment, flag, or agent key |
+| `vendor` | The tool that assigned the variant, for example `optimizely` |
+| `experiment_id` | The experiment or flag key |
 | `variation_id` | The variant the user was assigned |
-| `assignment_key` | The identifier the tool bucketed on, for example `domain_userid` |
-| `signals_service` | The Signals service you read, if any |
 | `signals_attributes_used` | The names of the Signals attributes passed to the tool, not their values |
+
+On your server, build the exposure from the SDK's result, and return it with the page:
+
+<Tabs groupId="experimentation-tool" queryString>
+<TabItem value="optimizely" label="Optimizely" default>
+
+```typescript
+const exposures = decision.variationKey
+  ? [{
+      vendor: 'optimizely',
+      experiment_id: decision.ruleKey ?? decision.flagKey,
+      variation_id: decision.variationKey,
+      signals_attributes_used: Object.keys(attributes),
+    }]
+  : [];
+```
+
+</TabItem>
+<TabItem value="growthbook" label="GrowthBook">
+
+GrowthBook calls `trackingCallback` for each experiment the user is assigned to.
+
+```typescript
+const exposures = [];
+const gb = growthbook.createScopedInstance({
+  attributes: { id: domainUserId, ...attributes },
+  trackingCallback: (experiment, result) => {
+    exposures.push({
+      vendor: 'growthbook',
+      experiment_id: experiment.key,
+      variation_id: String(result.key),
+      signals_attributes_used: Object.keys(attributes),
+    });
+  },
+});
+const offer = gb.getFeatureValue('checkout-offer', 'control');
+```
+
+GrowthBook also publishes its own exposure event, `iglu:io.growthbook/experiment_viewed/jsonschema/1-0-0`, which you can track instead.
+
+</TabItem>
+<TabItem value="launchdarkly" label="LaunchDarkly">
+
+`variationDetail` tells you whether the user is in an experiment.
+
+```typescript
+const exposures = detail.reason.inExperiment
+  ? [{
+      vendor: 'launchdarkly',
+      experiment_id: 'checkout-offer',
+      variation_id: String(detail.variationIndex),
+      signals_attributes_used: Object.keys(attributes),
+    }]
+  : [];
+```
+
+</TabItem>
+</Tabs>
+
+Then attach the exposures to the page view in the browser. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
 
 ```javascript
 window.snowplow('trackPageView', {
-  context: [{
+  context: exposures.map((data) => ({
     schema: 'iglu:com.example/experiment_exposure/jsonschema/1-0-0',
-    data: {
-      vendor: 'growthbook',
-      experiment_id: 'checkout_offer',
-      variation_id: '1',
-      assignment_key: 'domain_userid',
-      signals_service: 'checkout_intent',
-      signals_attributes_used: ['cart_value', 'product_views_last_10_min'],
-    },
-  }],
+    data,
+  })),
 });
 ```
 
-Record attribute names rather than values. The values stay in Signals, and you can join them back in the warehouse if you need them for analysis. For decisions made only on the server, track a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) with the [Node.js tracker](/docs/sources/node-js-tracker/tracking-events/index.md) instead, and set `domain_userid` on it explicitly.
+Record attribute names rather than values. The values stay in Signals, and you can join them back in the warehouse if you need them.
 
-## Trigger an assignment from an intervention
+## Trigger an experiment from an intervention
 
-[Interventions](/docs/signals/interventions/index.md) let you run an experiment at the moment a user meets a condition, for example when a user hesitates at checkout. Subscribe to interventions with the [browser plugin](/docs/signals/applications/subscribe/index.md), and call the experimentation tool from your intervention handler:
+[Interventions](/docs/signals/interventions/index.md) let you assign a variant at the moment a user meets a condition, for example when they hesitate at checkout, rather than on the next page load.
+
+Subscribe to interventions with the [browser plugin](/docs/signals/applications/subscribe/index.md). The intervention payload includes the user's attributes, so your handler can pass them straight to your experimentation tool's browser SDK. Each example assumes you've already initialized the tool's browser SDK for the current user.
+
+<Tabs groupId="experimentation-tool" queryString>
+<TabItem value="optimizely" label="Optimizely" default>
 
 ```typescript
 addInterventionHandlers({
-  async checkoutHesitation(intervention) {
-    // Ask your server to assign, using the pattern above
-    const variant = await assignFromServer('checkout_offer');
-    if (variant !== 'control') {
-      showOffer(variant);
+  checkoutHesitation(intervention) {
+    const user = optimizely.createUserContext(domainUserId, intervention.attributes);
+    const decision = user.decide('checkout_offer');
+    if (decision.variationKey && decision.variationKey !== 'control') {
+      showOffer(decision.variationKey);
     }
   },
 });
 ```
 
-Call the experimentation tool from one handler only, so each intervention produces one assignment. Users in the control group still generate an `intervention_handle` event but see no change, which gives you a clean comparison between users who met the condition and were treated, and those who met it and weren't.
+</TabItem>
+<TabItem value="growthbook" label="GrowthBook">
 
-The intervention subscription endpoint doesn't authenticate subscribers, so don't include personal or sensitive attributes in interventions keyed on anonymous identifiers. See [Subscribe to interventions](/docs/signals/applications/subscribe/index.md).
+```typescript
+addInterventionHandlers({
+  async checkoutHesitation(intervention) {
+    await growthbook.updateAttributes(intervention.attributes);
+    const offer = growthbook.getFeatureValue('checkout-offer', 'control');
+    if (offer !== 'control') {
+      showOffer(offer);
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="launchdarkly" label="LaunchDarkly">
+
+```typescript
+addInterventionHandlers({
+  async checkoutHesitation(intervention) {
+    await ldClient.identify({ ...ldClient.getContext(), ...intervention.attributes });
+    const offer = ldClient.variation('checkout-offer', false);
+    if (offer) {
+      showOffer(offer);
+    }
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
+Users in the control group still trigger the intervention but see no change. This gives you a fair comparison between users who met the condition and were treated, and those who met it and weren't. Track the exposure with the same entity as above.
+
+The intervention subscription endpoint doesn't authenticate subscribers, so don't include personal or sensitive attributes in interventions. See [Subscribe to interventions](/docs/signals/applications/subscribe/index.md).
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { motion } from 'motion/react'
-import { Loader2 } from 'lucide-react'
 import { Button } from './button.tsx'
 
 function Frame941() {
@@ -14,7 +13,7 @@ function Frame941() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground text-pretty">Want to see a <span className="inline-block">custom demo?</span></h3>
+        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground [text-wrap:balance]">Try Snowplow Free&nbsp;for 14&nbsp;Days</h3>
       </motion.div>
       <motion.div 
         className="flex flex-col justify-center relative shrink-0  w-full"
@@ -22,8 +21,8 @@ function Frame941() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <p className="font-normal text-base text-balance text-muted-foreground">
-        Our technical experts <span className="inline-block">are here to help.</span>
+        <p className="font-normal text-base [text-wrap:pretty] text-muted-foreground">
+          Collect behavioral data and act on it in real time. Design a schema, send an event, and fetch live context with the AI Assistant and MCP server.
         </p>
       </motion.div>
     </div>
@@ -31,20 +30,6 @@ function Frame941() {
 }
 
 function AnimatedButton() {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleClick = async (e?: React.MouseEvent) => {
-    if (isLoading) {
-      e?.preventDefault();
-      return;
-    }
-    setIsLoading(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsLoading(false)
-    // Here you would typically handle the actual demo booking
-  }
-
   return (
     <motion.div
       className="relative w-full"
@@ -56,34 +41,38 @@ function AnimatedButton() {
     >
       <Button
         asChild
-        className="snowplow-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
-        disabled={isLoading}
+        className="snowplow-button shimmer-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
       >
         <a
-          href="https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/"
+          href="https://snowplow.io/get-started/sign-up"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleClick}
         >
-          {isLoading && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center"
-            >
-              <Loader2 className="w-4 h-4 animate-spin mr-2" />
-            </motion.span>
-          )}
-          <motion.span
-            animate={{ x: isLoading ? 8 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {isLoading ? 'Booking...' : 'Book a demo'}
-          </motion.span>
+          Start Free Trial
         </a>
       </Button>
     </motion.div>
+  )
+}
+
+function DemoLink() {
+  return (
+    <motion.p
+      className="m-0 text-sm text-muted-foreground [text-wrap:pretty]"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+    >
+      Want to see a custom demo instead?{' '}
+      <a
+        href="https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-primary underline underline-offset-2 whitespace-nowrap"
+      >
+        Book a demo
+      </a>
+    </motion.p>
   )
 }
 
@@ -109,55 +98,16 @@ function AnimatedBackground() {
 }
 
 export default function InteractiveBanner() {
-  const [isHovered, setIsHovered] = useState(false)
-  const [clickEffect, setClickEffect] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(true)
-  const [isPageVisible, setIsPageVisible] = useState(true)
-
-  const handleClick = () => {
-    setClickEffect(true)
-    setTimeout(() => setClickEffect(false), 1200)
-  }
-
-  // Observe banner visibility in viewport
-  useEffect(() => {
-    if (!containerRef.current || typeof IntersectionObserver === 'undefined') return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0]
-        setIsVisible(entry.isIntersecting)
-      },
-      { root: null, threshold: 0.1 }
-    )
-    observer.observe(containerRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  // Page/tab visibility
-  useEffect(() => {
-    const handleVisibility = () => setIsPageVisible(!document.hidden)
-    document.addEventListener('visibilitychange', handleVisibility)
-    handleVisibility()
-    return () => document.removeEventListener('visibilitychange', handleVisibility)
-  }, [])
-
-  const shouldRenderParticles = isHovered && isVisible && isPageVisible
-
   return (
     <motion.div
-      ref={containerRef}
-      className="relative rounded-lg size-full overflow-hidden cursor-pointer"
-      data-name="Book a demo"
+      className="group relative rounded-lg size-full overflow-hidden"
+      data-name="Free trial"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      whileHover={{ 
-        boxShadow: "0 20px 40px rgba(102, 56, 184, 0.15)" 
+      whileHover={{
+        boxShadow: "0 20px 40px rgba(102, 56, 184, 0.15)"
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
     >
       {/* Subtle Tailwind-only gradient background */}
       <div
@@ -171,28 +121,28 @@ export default function InteractiveBanner() {
         aria-hidden="true"
         className="absolute border border-border border-solid inset-0 pointer-events-none rounded-lg"
       />
-      
+
+      {/* Hover glow effect with primary color */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, rgba(102, 56, 184, 0.1) 0%, transparent 70%)",
+        }}
+      />
+
       {/* Content */}
-      <div className="relative size-full z-10 pointer-events-none">
+      <div className="relative size-full z-10">
         <div className="box-border content-stretch flex flex-col gap-2 items-start justify-start px-6 py-8 relative size-full">
           <Frame941 />
           <div className="pointer-events-auto">
             <AnimatedButton />
           </div>
+          <div className="pointer-events-auto pt-1">
+            <DemoLink />
+          </div>
         </div>
       </div>
-
-      {/* Hover glow effect with primary color */}
-      <motion.div
-        className="absolute inset-0 rounded-lg opacity-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at center, rgba(102, 56, 184, 0.1) 0%, transparent 70%)",
-        }}
-        animate={{ 
-          opacity: isHovered ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
-      />
     </motion.div>
   );
 }

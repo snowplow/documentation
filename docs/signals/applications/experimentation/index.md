@@ -2,8 +2,8 @@
 title: "Use Signals attributes in experiments"
 sidebar_position: 40
 sidebar_label: "Use in experiments"
-description: "Pass Signals attributes to Optimizely, GrowthBook, LaunchDarkly, or another experimentation tool when it assigns a variant, and track exposures in Snowplow so results join to your behavioral data."
-keywords: ["signals", "experimentation", "a/b testing", "feature flags", "optimizely", "growthbook", "launchdarkly", "exposure tracking"]
+description: "Pass Signals attributes to Optimizely, GrowthBook, LaunchDarkly, Conductrics, or another experimentation tool when it assigns a variant, and track exposures in Snowplow so results join to your behavioral data."
+keywords: ["signals", "experimentation", "a/b testing", "feature flags", "optimizely", "growthbook", "launchdarkly", "conductrics", "exposure tracking"]
 date: "2026-11-04"
 ---
 
@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Experimentation and feature flag tools, such as Optimizely, GrowthBook, and LaunchDarkly, decide which variant each user sees. They make that decision using the attributes your application passes in. Signals gives them attributes that describe what the user is doing right now, so your experiments can target and learn from behavior in the current session.
+Experimentation and feature flag tools, such as Optimizely, GrowthBook, LaunchDarkly, and Conductrics, decide which variant each user sees. They make that decision using the attributes your application passes in. Signals gives them attributes that describe what the user is doing right now, so your experiments can target and learn from behavior in the current session.
 
 Your experimentation tool still assigns variants, holds out a control group, and calculates results. Signals provides the attributes, and Snowplow records which variant each user saw.
 
@@ -51,7 +51,7 @@ In order:
 5. Your server renders the variant
 6. Your website tracks which variant the user saw, as part of the page view
 
-The experimentation SDKs in this page evaluate rules locally, so reading from Signals is the only network call this adds to the request.
+The Optimizely, GrowthBook, and LaunchDarkly SDKs evaluate rules locally, so reading from Signals is the only network call this adds to the request. Conductrics makes its selection through an API call, so the request makes two calls in sequence.
 
 ## Pass attributes at assignment
 
@@ -198,9 +198,37 @@ const detail = await launchdarkly.variationDetail(
 ```
 
 </TabItem>
+<TabItem value="conductrics" label="Conductrics">
+
+Conductrics selects a variation through its REST API, and takes attributes as traits in `type:value` form. Create each trait in the Conductrics admin first, because Conductrics ignores traits it doesn't know. Group numeric attributes into trait values, such as `intent:high`, or send them as `inputs`.
+
+```typescript
+const CONDUCTRICS_URL = 'https://api.v3.conductrics.com/{{owner_code}}/v3/agent-api';
+
+function toTraits(attributes: Record<string, string | number | boolean>): string[] {
+  const views = Number(attributes.product_views_last_10_min ?? 0);
+  return [`intent:${views >= 5 ? 'high' : views >= 2 ? 'medium' : 'low'}`];
+}
+
+// In your request handler
+const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
+const params = new URLSearchParams({ apikey: CONDUCTRICS_API_KEY, session: domainUserId });
+const response = await fetch(`${CONDUCTRICS_URL}?${params}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    commands: [{ a: 'checkout-offer' }],
+    traits: toTraits(attributes),
+  }),
+});
+const selection = await response.json();
+const offer = selection.sels['checkout-offer'];
+```
+
+</TabItem>
 </Tabs>
 
-Other tools follow the same pattern: read the attributes, then pass them wherever the SDK accepts user attributes. For example, Kameleoon calls them custom data and Conductrics calls them traits.
+Other tools follow the same pattern: read the attributes, then pass them wherever the SDK accepts user attributes. For example, Kameleoon calls them custom data.
 
 ### Choose the user key
 
@@ -281,6 +309,24 @@ const exposures = detail.reason.inExperiment
 ```
 
 </TabItem>
+<TabItem value="conductrics" label="Conductrics">
+
+Each selection in the response includes a policy, `p`. A policy of `p` means the agent is paused, so the user isn't in an experiment.
+
+```typescript
+const exposures = selection.items
+  .filter((item) => item.p !== 'p')
+  .map((item) => ({
+    vendor: 'conductrics',
+    experiment_id: item.a,
+    variation_id: item.c,
+    signals_attributes_used: Object.keys(attributes),
+  }));
+```
+
+Conductrics can also send its own selection events to your Snowplow pipeline. Ask Conductrics to set this up for your account.
+
+</TabItem>
 </Tabs>
 
 Then attach the exposures to the page view in the browser. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
@@ -341,6 +387,28 @@ addInterventionHandlers({
     await ldClient.identify({ ...ldClient.getContext(), ...intervention.attributes });
     const offer = ldClient.variation('checkout-offer', false);
     if (offer) {
+      showOffer(offer);
+    }
+  },
+});
+```
+
+</TabItem>
+<TabItem value="conductrics" label="Conductrics">
+
+The Conductrics API key stays on your server, so the handler asks your server to make the selection. The server endpoint runs the selection call shown in [Pass attributes at assignment](#pass-attributes-at-assignment), with the intervention's attributes converted to traits.
+
+```typescript
+addInterventionHandlers({
+  async checkoutHesitation(intervention) {
+    const response = await fetch('/api/conductrics/select', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agent: 'checkout-offer', attributes: intervention.attributes }),
+    });
+    const { offer } = await response.json();
+    // In this example, variation A is the control
+    if (offer !== 'A') {
       showOffer(offer);
     }
   },

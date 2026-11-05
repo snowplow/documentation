@@ -3,8 +3,21 @@
   margin-top: 0;
 }
 
-@media (min-width: 997px) {
+/* The right-hand TOC column (with the free trial banner) only shows from
+   1280px (Tailwind `xl`). Below that it is too narrow, so the doc column takes
+   the full width. Keep this breakpoint in sync with `xl:block` in index.tsx. */
+@media (min-width: 1280px) {
   .docItemCol {
     max-width: 75% !important;
+  }
+}
+
+/* Between the desktop breakpoint (997px) and 1280px, show the collapsible
+   "On this page" TOC that the theme otherwise hides from 997px up.
+   !important is needed because the production build inflates the theme's
+   rule with a :not(#\#):not(#\#) specificity hack. */
+@media screen and (min-width: 997px) and (max-width: 1279.98px) {
+  .docItemContainer :global(.theme-doc-toc-mobile) {
+    display: block !important;
   }
 }

@@ -144,7 +144,9 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
           </div>
         </div>
         {docTOC.desktop && (
-          <div className="col col--3">
+          // Below 1280px a 25% column is too narrow for the TOC and banner, so the
+          // collapsible mobile TOC is shown instead (see styles.module.css)
+          <div className="col col--3 hidden xl:block">
             <div className="sticky top-16">
               <div className="flex items-center gap-2 my-1">
                 <AlignLeft size={16} className="opacity-70 text-foreground" />

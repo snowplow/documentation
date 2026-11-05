@@ -28,7 +28,9 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 
 ## Architecture
 
-Signals runs alongside a [Snowplow pipeline](/docs/get-started/index.md), and is deployed into the same cloud. Your pipeline continues to process events as usual.
+You don't need to run a Snowplow pipeline before you use Signals. Signals includes event collection: add a Snowplow tracker to your application, and Signals computes attributes from the events it sends. Signals is deployed into the same cloud as the [pipeline](/docs/get-started/index.md) that collects those events.
+
+If you already run Snowplow, Signals reads the events from your existing pipeline, which continues to process events as usual.
 
 :::note[Warehouse support]
 Snowflake, BigQuery, and Databricks are supported. You can also use Signals without the warehouse functionality.

@@ -400,62 +400,7 @@ button.snowplow-button:focus {
   border-color: var(--ifm-color-primary-lighter);
 }
 
-/* Call to action buttons */
-
-[data-theme] a.snowplow-button.cta-button,
-[data-theme] button.snowplow-button.cta-button {
-  background-color: var(--ifm-color-accent);
-  border-color: var(--ifm-color-accent);
-  color: white;
-}
-
-[data-theme] a.snowplow-button.cta-button:active,
-[data-theme] button.snowplow-button.cta-button:active,
-[data-theme] a.snowplow-button.cta-button:hover,
-[data-theme] button.snowplow-button.cta-button:hover,
-[data-theme] a.snowplow-button.cta-button:focus,
-[data-theme] button.snowplow-button.cta-button:focus {
-  background-color: var(--ifm-color-accent-darker);
-  border-color: var(--ifm-color-accent-darker);
-  color: white;
-}
-
-/* Free trial call to action in the navbar.
-   Properties are set explicitly here (rather than relying on the base
-   .snowplow-button rules winning the cascade against Infima's
-   .navbar__link) so the button renders identically in the dev server and
-   the minified production build. */
-
-[data-theme] a.navbar-cta {
-  /* display and color use !important to override Infima's theme rules,
-     which the production build inflates with a :not(#\#):not(#\#)
-     specificity hack that a normal selector cannot beat. */
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  margin: auto 1rem auto 0.5rem;
-  padding: 0 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--ifm-color-accent);
-  color: white !important;
-  font-weight: 500;
-}
-
-[data-theme] a.navbar-cta:hover,
-[data-theme] a.navbar-cta:focus,
-[data-theme] a.navbar-cta:active {
-  background-color: var(--ifm-color-accent-darker);
-  color: white !important;
-}
-
-/* Hide the auto-injected "opens in new tab" icon on the CTA button */
-[data-theme] a.navbar-cta svg {
-  display: none;
-}
-
-/* Plain Support link next to the free trial call to action */
+/* Plain Support link in the navbar */
 [data-theme] a.navbar-support-link {
   color: var(--ifm-font-color-base);
   font-weight: 500;
@@ -470,12 +415,6 @@ button.snowplow-button:focus {
 /* Hide the auto-injected "opens in new tab" icon on the Support link */
 [data-theme] a.navbar-support-link svg {
   display: none;
-}
-
-@media (max-width: 996px) {
-  a.navbar-cta {
-    display: none;
-  }
 }
 
 /* Alert buttons */

@@ -11,6 +11,11 @@ pagination_next: signals/concepts/index
 
 <NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb" />
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 [Snowplow Signals](/docs/signals/introduction/index.md) computes attributes from your behavioral data in real time and serves them to your applications over an API. In this tutorial you calculate three session attributes from page views in your event stream, then retrieve them for your current session.
 
 You define the attributes in Snowplow Console. If you'd rather define them in code, the **Open in Colab** notebook has the same steps for the [Signals Python SDK](https://pypi.org/project/snowplow-signals/). To have a coding agent do this for you instead, follow the [quickstart with your coding agent](/docs/signals/quickstart/index.md).
@@ -220,6 +225,9 @@ sp_signals = Signals(
 
 Use your session ID to retrieve the attributes that Signals has calculated for your session:
 
+<Tabs groupId="signals-retrieve" queryString>
+<TabItem value="python" label="Python" default>
+
 ```python
 import pandas as pd
 
@@ -231,6 +239,32 @@ attributes = sp_signals.get_service_attributes(
 
 pd.DataFrame([attributes])
 ```
+
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+
+To retrieve the attributes from Node.js instead of the notebook, install `@snowplow/signals-node` and create a client from the same credentials, as described in [Connect to Signals](/docs/signals/connection/index.md):
+
+```typescript
+import { Signals } from '@snowplow/signals-node';
+
+const signals = new Signals({
+  baseUrl: process.env.SIGNALS_API_URL,
+  apiKey: process.env.SNOWPLOW_API_KEY,
+  apiKeyId: process.env.SNOWPLOW_API_KEY_ID,
+  organizationId: process.env.SNOWPLOW_ORG_ID,
+});
+
+const attributes = await signals.getServiceAttributes({
+  name: "quickstart_service",
+  attribute_key: "domain_sessionid",
+  identifier: "472f97c1-eec1-45fe-b081-3ff695c30415", // UPDATE THIS
+});
+console.log(attributes);
+```
+
+</TabItem>
+</Tabs>
 
 The result looks something like this:
 

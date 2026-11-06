@@ -39,6 +39,10 @@ from snowplow_signals import (
 </TabItem>
 </Tabs>
 
+## Choose a key your application can read by
+
+Your application reads attributes by the same attribute key the attribute group is calculated on, and it reads them on your backend, because reads need an API key. Choose a key whose value your backend has at read time: for example, `domain_sessionid` passed from the browser for session attributes, or `user_id` from an authenticated session for a logged-in user. See [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md#handle-the-response).
+
 ## Custom attribute keys
 
 You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/data-sources/events/index.md#choose-a-data-source).

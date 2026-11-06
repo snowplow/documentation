@@ -90,7 +90,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for users and sessions. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with five predefined attribute keys, for users, sessions, and people. Four of their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 | Attribute key      | Type     |
 | ------------------ | -------- |
@@ -98,6 +98,7 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 | `domain_userid`    | `uuid`   |
 | `network_userid`   | `uuid`   |
 | `domain_sessionid` | `uuid`   |
+| `snowplow_id`      | The [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids), when Identities is enabled. See [identity resolution](/docs/signals/attributes/identity-resolution/index.md). |
 
 ## Data sources
 

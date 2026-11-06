@@ -15,6 +15,8 @@ import TabItem from '@theme/TabItem';
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications. They provide a stable interface for [retrieving attributes](/docs/signals/applications/retrieve-attributes/index.md): we strongly recommend using services in production applications.
 
+The Node.js SDK reads services but can't create them. Use Console or the Python SDK to define services.
+
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 

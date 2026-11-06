@@ -1,6 +1,6 @@
 ---
 title: "Snowplow dbt packages"
-sidebar_label: "Our packages"
+sidebar_label: "Choose a package"
 sidebar_position: 10
 description: "Overview of Snowplow dbt packages including Unified Digital, Attribution, Ecommerce, Identities, Media Player, Normalize, Utils, and Agent Analytics."
 keywords: ["dbt packages", "Snowplow dbt", "data modeling packages", "dbt models", "snowplow data models"]

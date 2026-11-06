@@ -53,7 +53,7 @@
       "minimum": 0,
       "title": "Heartbeat",
       "description": "Page ping heartbeat time as defined in your tracker configuration",
-      "longDescription": "Page ping heartbeat time as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).",
+      "longDescription": "Page ping heartbeat time as defined in your [tracker configuration](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).",
       "packageDefault": "10",
       "group": "Warehouse and Tracker"
     },
@@ -65,7 +65,7 @@
       "minimum": 0,
       "title": "Min Visit length",
       "description": "Minimum visit length as defined in your tracker configuration",
-      "longDescription": "Minimum visit length as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).",
+      "longDescription": "Minimum visit length as defined in your [tracker configuration](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).",
       "packageDefault": "5",
       "group": "Warehouse and Tracker"
     },

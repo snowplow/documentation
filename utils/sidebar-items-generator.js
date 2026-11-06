@@ -10,6 +10,8 @@
  *
  * - removes the previous-versions trees (LEGACY_DIRS), unless the pick asks
  *   for one of them, so old versions only appear under Reference > Legacy
+ * - removes any paths listed in `exclude`, so a page can be picked into a
+ *   different group without appearing twice
  * - optionally hoists a category's children up one level (`hoist`), putting
  *   the category's index page first
  * - applies label, className, and collapsed overrides
@@ -100,6 +102,19 @@ function withoutLegacy(items, docsById, keep) {
     }
     if (item.type === 'category') {
       return [{ ...item, items: withoutLegacy(item.items, docsById, keep) }]
+    }
+    return [item]
+  })
+}
+
+/** Remove the items for the given docs paths (and their children) */
+function withoutPaths(items, docsById, paths) {
+  if (!paths || paths.length === 0) return items
+  return items.flatMap((item) => {
+    const p = itemPath(item, docsById)
+    if (p && paths.some((dir) => isUnder(p, dir))) return []
+    if (item.type === 'category') {
+      return [{ ...item, items: withoutPaths(item.items, docsById, paths) }]
     }
     return [item]
   })
@@ -210,7 +225,11 @@ async function sidebarItemsGenerator(args) {
     )
   }
 
-  let picked = withoutLegacy([found], docsById, target)
+  let picked = withoutPaths(
+    withoutLegacy([found], docsById, target),
+    docsById,
+    pickOpts.exclude
+  )
   if (pickOpts.indexOnly && picked[0]?.type === 'category') {
     const { link, customProps, className } = picked[0]
     picked = [{ type: 'doc', id: link.id, customProps, className }]

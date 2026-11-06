@@ -8,7 +8,7 @@ keywords: ["feature comparison", "CDI features", "Self-Hosted features", "produc
 content_type: reference
 ---
 
-Here is a detailed list of product features, showing which are available as part of Snowplow [Customer Data Infrastructure](/docs/get-started/index.md#customer-data-infrastructure) (CDI) or [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted).
+Here is a detailed list of product features, showing which are available as part of Snowplow [Customer Data Infrastructure](/docs/get-started/deployment-options/index.md#customer-data-infrastructure) (CDI) or [Snowplow Self-Hosted](/docs/get-started/deployment-options/index.md#self-hosted).
 
 Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-description) to learn more about which features are available for CDI Cloud or CDI Private Managed Cloud deployments.
 

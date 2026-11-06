@@ -1,0 +1,156 @@
+## Skeptical review: structure (IA) and design recommendations
+
+### High severity
+
+1. **Cascade layers are already on, so design Step 6.2.3 is wrong and the `!important` plan rests on a false premise.**
+   - Evidence: `docusaurus.config.ts:26-27` sets `future: { v4: true }`. The Docusaurus config docs say `true` is "a shorthand to enable all the flags". `node_modules/@docusaurus/core/lib/server/configValidation.js:82` sets `useCssCascadeLayers: true` and `siteStorageNamespacing: true` in the v4 preset.
+   - So Infima is already layered today, and the 189 `!important` declarations exist under that setup. The design doc says to "enable" the flag and then run visual regression for a "3.8 behavior change". That change has already shipped to production.
+   - Correction: restate the baseline as "layers already on". Find out why unlayered `custom.css` still needs `!important`: Tailwind `important: true`, hashed selectors, and `prose`. Drop Step 3. Note that `siteStorageNamespacing` is also on already, which matters for the theme-toggle storage key (DevTools §6 row 14).
+
+2. **The three-state theme toggle is costed as a swizzle, but the stock component already does it.**
+   - Evidence: `node_modules/@docusaurus/theme-classic/lib/theme/ColorModeToggle/index.js:37-38,87` has a "system mode" state and a `systemToggleIcon`. The site doesn't show it because the repo swizzles `ColorModeToggle` for MUI sync, and `respectPrefersColorScheme` is unset.
+   - Correction: in both docs, replace "build by swizzling `ColorModeToggle`" with "delete the MUI-sync swizzle and use the 3.10 stock toggle". This is a phase 0 task, not a phase 2 task.
+
+3. **The page templates break the CLAUDE.md "3–5 H2 sections" rule. The design doc's claim that its integration template complies is false once the structure doc's shared rule is applied.**
+   - Evidence: the structure doc's how-to template has 6 required H2s: Overview, Before you begin, Steps, Verify, Troubleshooting, Next steps. Its shared rule says "End with a 'Next steps' section" for every type. That makes the integration template 6 H2s, while design §5.4 says "five H2s, inside the 3–5 limit". The research it cites (Peers §2: Overview → … → Common errors) also has 6 and also wrongly claims to fit.
+   - The how-to template also doesn't reconcile with the CLAUDE.md feature-page shape (description → when/why → basic example → configuration).
+   - Correction: make "Next steps" a non-H2 footer component, or demote "Verify" to H3 under Steps. Or explicitly propose amending CLAUDE.md. Also reconcile the CLAUDE.md feature-page shape with the how-to template.
+
+4. **The two documents describe different IAs.**
+   - Navigation model:
+     - Structure: four sidebars (`cdi`, `signals`, `reference`, `platform`) and navbar tabs.
+     - Design: a product switcher, two sidebars (`cdi`/`signals`, §6.4 config row), a "Reference" group inside each product sidebar (§3.2), and an "API reference" navbar tab.
+   - CDI groups:
+     - Structure (7): Get started, Design tracking, Collect events, Validate and enrich, Load and forward, Model and unify, Monitor and operate.
+     - Design (9, over the structure doc's own "≤7" rule): Get started, Collect, Validate, Enrich, Load, Model, Forward, Operate, Reference.
+   - Signals groups:
+     - Structure: Connect, Define attributes, Serve attributes, Intervene, Publish and operate.
+     - Design: Define, Publish, Serve, Intervene, Monitor, Reference.
+   - Lifecycle strips:
+     - Structure: Design→Collect→Validate→Load→Model, and Define→Serve→Intervene.
+     - Design: Collect→Validate→Load and model→Activate, and Define→Publish→Serve→Intervene.
+   - Product-card links:
+     - Structure: Quickstart / Reference / SDKs for both cards.
+     - Design §5.1: CDI gets "Tracker reference · Trackers and SDKs" and Signals gets "Define attributes". Yet design §4.1 says the `product` card has "three fixed links: Quickstart / Reference / SDKs".
+   - Signals persona router:
+     - Structure: "Personalize an app vs Feed an AI agent".
+     - Design: App developer / Data engineer / ML engineer.
+   - Release notes: an external link (structure) vs a "Releases" tab (design).
+   - Correction: make the structure doc the single source for IA. Have the design doc reference it rather than restate it, and reconcile every item above.
+
+5. **Rollout timelines contradict each other.**
+   - Evidence: design phase 2 splits the sidebars in "2–2.5 weeks", with a total of 13–16 engineering weeks. Structure puts the same sidebar split in phase 2 at "1–2 quarters", followed by 2–3 quarters of file moves.
+   - Design phase 5 does the "Regroup the sidebar by lifecycle verbs" work that structure phases 2–3 cover.
+   - Correction: produce one merged roadmap. Separate the chrome mechanism (the switcher, roughly weeks) from the editorial regrouping and merges (quarters).
+
+6. **The "sidebars without moving files" phase is not feasible as described for Reference and Legacy.**
+   - Evidence: autogenerated `dirName` sidebars pull in whole directories. `sources/web-trackers/previous-versions/` and the loader `previous-versions/` would stay in the CDI sidebar. Without file moves or a custom `sidebarItemsGenerator`, there's no way to put them in a separate Reference › Legacy sidebar.
+   - The "Validate and enrich" group mixes `pipeline/` and `testing/`, and "Reference" needs only part of `api-reference/`. Both need hand-written category arrays, not pure autogeneration.
+   - Correction: state that phase 2 needs a custom `sidebarItemsGenerator` (filter on `sidebar_custom_props.outdated`) or the phase 3 moves. Budget for it.
+
+7. **Shared Fundamentals will throw readers out of their product sidebar.**
+   - Evidence: in Docusaurus, a doc displays the sidebar it belongs to. Putting `fundamentals/` in a `platform` sidebar (structure) means a Signals reader who follows a "link, don't re-explain" link lands in the Platform & AI tree and the switcher state is lost. The design doc says "Fundamentals is shared and linked from both" but doesn't address this.
+   - Correction: accept and design for the context switch (a "Back to Signals" affordance), or list Fundamentals in each product sidebar and accept that the first sidebar wins. Either way, call it out.
+
+### Medium severity
+
+8. **The Vercel eval is misapplied.**
+   - Verified: the 100% result came from an 8 KB compressed docs index embedded in `AGENTS.md`, with the full docs downloaded locally to `.next-docs/`. It was not a pasteable snippet that points to remote `llms.txt`.
+   - The structure doc (principle 10 and §6.5) cites "100% vs 53%" as support for a pointer snippet.
+   - Correction: cite it only as evidence for passive, always-in-context indexes. For pointers, use Ahrefs ("fetched when directed").
+
+9. **The hosted docs MCP server, Ask AI, and agent-traffic logging are presented as plugin-level work. Each needs infrastructure or vendor setup that the documents don't cost.**
+   - The site is a static Netlify deploy (`static/_redirects`, 517 lines), so an MCP server needs a separately hosted service.
+   - Logging `.md`/`llms.txt` requests by user agent needs CDN log access, such as Netlify Log Drains, which depend on the plan tier.
+   - DocSearch v4 Ask AI needs an Algolia AskAI assistant created and configured under `themeConfig.algolia.askAi` (verified in the 3.9 release post). Pricing and plan aren't stated. The current config (`docusaurus.config.ts:262-268`) is plain DocSearch, and an ejected `SearchBar` is also slated for deletion.
+   - Correction: add owner, hosting, and cost lines for each item. Make "verify the Algolia AskAI plan" and "confirm Netlify log access" phase 0 spikes.
+
+10. **No search strategy for a product-scoped site.**
+    - Evidence: there is one Algolia index with `contextualSearch: true`. Neither document covers scoping or faceting search results by product (CDI vs Signals vs Legacy), down-ranking the 277 legacy pages, zero-result tracking, or synonyms (for example "context" → entity, "unstructured" → self-describing).
+    - Correction: add a search section covering crawler config with a product/type attribute fed from `content_type` and the sidebar, legacy down-weighting, and Algolia analytics review.
+
+11. **Gap: docs-usage analytics and success measures.**
+    - Design metrics are engineering-only (`!important` count, CSS lines, axe, H1 position). Structure measures only agent fetches, and justifies that with "57% don't track leads", which is a different metric.
+    - Neither defines baselines or targets for:
+      - time to first event or first attribute;
+      - Signals discovery rate from the home page;
+      - search exit or refinement rate;
+      - quickstart completion funnel;
+      - 404s after moves;
+      - feedback No-rate by `content_type`.
+    - The docs site already runs the Snowplow tracker as a client module, so these can be measured with the product itself.
+    - Correction: add a measurement plan with pre-change baselines, captured in phase 0.
+
+12. **Gap: governance and ownership.**
+    - Nothing says who owns:
+      - each sidebar group or product area;
+      - review cadence and staleness, given `date` is on only 56% of pages;
+      - assignment of support tiers (Flagship/Maintained/Community) and integration maintainer labels;
+      - enforcement of `content_type` (lint or CI);
+      - the tracker and destination manifests;
+      - sign-off for removing marketing elements (the `Demo_Ad` banner, the Product Fruits tab, Qualified/Reo deferral).
+    - Correction: add CODEOWNERS per area, a frontmatter lint for `content_type` and `date`, a freshness report, and named decision owners for the marketing and product-ops removals.
+
+13. **Gap: personas are incomplete and inconsistent.**
+    - Structure has data engineer, analytics engineer, app/ML engineer, and agent.
+    - Missing roles:
+      - tracking implementer: the front-end or mobile developer who owns trackers, the largest corpus (508 files);
+      - data or product analyst consuming Event Studio and tracking plans;
+      - platform or security admin for Self-Hosted, the shared responsibility model, and restrictive access;
+      - evaluator or buyer (Hopsworks' "Evaluator"; GitBook data says 88% weigh docs when buying).
+    - Correction: define a persona list once and map each to a journey and a home-page entry point.
+
+14. **Gap: localization and versioning edge cases.**
+    - Localization: `i18n.locales: ['en']`, and neither document states that localization is out of scope. Design font subsetting to "Latin + Latin Extended" closes off future locales silently. State that it's out of scope explicitly.
+    - Versioning: Signals SDK (Python/TypeScript) versioning and API versioning aren't addressed. "Requires vX.Y" callouts have no source of truth or check, so they will rot (Uddin's "obsolete" blocker). Generate them from the version manifest.
+
+15. **The `important: '#__docusaurus'` selector strategy will break portalled UI.**
+    - Evidence: Radix popovers and dialogs (`components/ui`), the DocSearch modal, and toasts render into `document.body`, outside `#__docusaurus`. Utilities on those elements lose the ID-scoped specificity.
+    - Correction: note this caveat and test portalled components in phase 0 regression.
+
+16. **The proposal to relax the "never re-explain" rule is stated as if it matched CLAUDE.md.**
+    - Structure principle 3 says "this matches the existing CLAUDE.md rule … allow a one-sentence inline definition". CLAUDE.md says "Never re-explain them inline."
+    - Correction: frame it as a proposed CLAUDE.md and style-guide amendment that needs owner approval.
+
+17. **Phase 1 is labeled "no URL changes" but includes one.** Deleting and redirecting `docs/signals/index.md` changes a URL. Moving it to phase 2, or relabeling phase 1, keeps the claim honest.
+
+18. **Standalone `.md` files conflict with CLAUDE.md and aren't addressed.**
+    - Evidence: more than 30 non-index `.md` files under `api-reference/snowbridge/...`, plus `sources/web-trackers/example-app.md`, violate "Always create a directory with `index.md`".
+    - Phase 3 moves Snowbridge config into a generated Reference without saying whether these files get converted.
+    - Correction: list them explicitly in phase 3.
+
+### Low severity
+
+19. **"Inter is the most common body face on modern developer docs"** (structure, existing strengths) overstates DevTools §5. Inter appears on 4 sites, custom brand faces on 6 or more, and AI-labs "Common patterns" lists a named brand typeface as the norm. Correction: "Inter is a common neutral choice."
+20. **"All five AI labs ship this baseline"** (structure, existing strengths) ignores AI-labs' finding that Mistral's `.md` coverage is incomplete (a 404 on a quickstart `.md`).
+21. **The Claude product-card pattern is misquoted as a fixed Quickstart/Reference/SDKs triple.**
+    - Verified: Messages links Quickstart, API reference and Client SDKs. Managed Agents links Quickstart, API reference and Define your agent. The third link is product-specific.
+    - The design §5.1 Signals card, with "Define attributes", is actually the more faithful reading. Fix design §4.1 and the structure doc.
+22. **Correlational evidence is cited as causal.** The Google log study's 3.92 odds ratio and GitBook's 9%→41% AI traffic (vendor data from its own platform) lose their caveats in the structure doc. Restore them.
+23. **The design accessibility claim "All token pairs … are 4.8:1 or higher" is slightly off.** `--fg-subtle` `#71717a` on `--bg-subtle` `#fafafa` is 4.63:1, which still passes AA. The audit's "#999 on #1b1b1d ≈ 6.3:1" recomputes to 6.04:1. Correct the numbers, and include the bg-subtle pairs in the proposed unit test.
+24. **"Inter Display" as a separate `font-family: "InterDisplay"`** conflicts with using `InterVariable`, whose `opsz` axis provides the display cut. Correction: use `font-optical-sizing: auto` or `font-variation-settings: "opsz" 32` on the variable file. Otherwise you ship a second font file.
+25. **The legacy move may interact with `llms-full.txt` exclusion.**
+    - Exclusion is driven by `sidebar_custom_props.outdated` frontmatter as a route prefix (`plugins/docusaurus-plugin-llms-txt/src/version-utils.js:10-20`), not by the folder name, so moving files is safe only if each moved subtree root keeps that frontmatter.
+    - It also means 277 redirects plus external-link and SEO impact. Correction: add a check that the `llms-full.txt` page count is unchanged after the move.
+26. **The `<Feedback>` widget sends a Snowplow event** but the documents don't address consent gating with the existing cookie-consent module.
+27. **"KaTeX CSS only on pages with math"** has an unstated cost. Docusaurus `stylesheets` are global, so per-page loading needs an MDX wrapper or component.
+
+### Claims verified as correct
+
+- Ahrefs: about 28% of 137K domains publish `llms.txt`, 97% of those files got zero requests (May 2026), and "Agents fetch llms.txt when directed, not speculatively."
+- Vercel evals: 53% / 53% / 79% / 100% pass rates.
+- GitBook: AI readers went from about 9% of traffic (January 2025) to about 41–42% (December 2025).
+- Docusaurus 3.9 adds DocSearch v4 with opt-in Ask AI (an assistant configured under `algolia.askAi`) and Mermaid ELK layout (`@mermaid-js/layout-elk`).
+- `future.v4: true` turns on `useCssCascadeLayers` (docs and `node_modules` agree).
+- Confluent uses product tabs (Cloud, Platform, Connectors, Clients), so the structure doc's Confluent claim holds even though the Peers notes describe it differently.
+- The Claude home page has a 9-language hero (Python, TypeScript, Go, Java, Ruby, PHP, C#, cURL, CLI), "Choose how you build" product cards, and a "From idea to production" journey with Get started → Build → Evaluate and ship → Operate tabs per product.
+- Repo facts:
+  - `static/_redirects` exists.
+  - `src/components/EventForwardingSchemaTable` exists.
+  - `docs/signals/index.md` is linked from `docs/get-started/index.md:9` and `docs/glossary/index.md:69`.
+  - Position ties at 8.7 (`account-management`, `signals`) and 6 (`identities`, `destinations`).
+  - `custom.css` has 1,791 lines and 189 `!important`.
+  - Tailwind has `important: true`.
+  - Docusaurus 3.10.0 is installed.
+  - `respectPrefersColorScheme` defaults to false and isn't set.
+- Design token contrast ratios recompute correctly to within 0.05: 7.44, 6.96, 8.62, 8.87, 4.83, 5.67, 7.73, 7.47, 17.72, 17.42, and the callout values 7.1, 6.67, 6.43 and 6.05.

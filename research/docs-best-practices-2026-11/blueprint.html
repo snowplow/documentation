@@ -1,0 +1,661 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Snowplow Docs Blueprint</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Sora:wght@500;600&display=swap">
+<style>
+/* Layout: sticky contents rail on the left, one 720px reading column, wide breakouts for tables and figures. */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f8f7fb;
+  --surface: #f1eff6;
+  --border: #e3e0ea;
+  --border-strong: #cfcad9;
+  --fg: #19171f;
+  --fg-muted: #4f4b5a;
+  --fg-subtle: #6e6979;
+  --accent: #6638b8;
+  --accent-subtle: #f3eefb;
+  --accent-fg: #ffffff;
+  --ok: #166534; --ok-bg: #effaf3; --ok-bd: #bfe5cc;
+  --warn: #8a4b06; --warn-bg: #fff8eb; --warn-bd: #f5d9a6;
+  --bad: #b42318; --bad-bg: #fef3f2; --bad-bd: #f6c9c4;
+  --info: #1e4fa3; --info-bg: #eff5ff; --info-bd: #c7d9fb;
+  --font-display: "Sora", "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --prose: 44rem;
+  --wide: 60rem;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111015; --bg-subtle: #16151b; --surface: #1d1b23; --border: #2a2731; --border-strong: #3d3946;
+  --fg: #f2f0f5; --fg-muted: #b3aebd; --fg-subtle: #8f8a99;
+  --accent: #b096f2; --accent-subtle: #221c33; --accent-fg: #111015;
+  --ok: #7dd3a0; --ok-bg: #0f1f17; --ok-bd: #1f4a32;
+  --warn: #f5c46b; --warn-bg: #231a0b; --warn-bd: #5a4214;
+  --bad: #f7a19a; --bad-bg: #2a1311; --bad-bd: #5e2520;
+  --info: #93b4f5; --info-bg: #121a2b; --info-bd: #24365c;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #111015; --bg-subtle: #16151b; --surface: #1d1b23; --border: #2a2731; --border-strong: #3d3946;
+  --fg: #f2f0f5; --fg-muted: #b3aebd; --fg-subtle: #8f8a99;
+  --accent: #b096f2; --accent-subtle: #221c33; --accent-fg: #111015;
+  --ok: #7dd3a0; --ok-bg: #0f1f17; --ok-bd: #1f4a32;
+  --warn: #f5c46b; --warn-bg: #231a0b; --warn-bd: #5a4214;
+  --bad: #f7a19a; --bad-bg: #2a1311; --bad-bd: #5e2520;
+  --info: #93b4f5; --info-bg: #121a2b; --info-bd: #24365c;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 24px; }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.7 var(--font-body); -webkit-font-smoothing: antialiased; }
+.shell { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 3.5rem; max-width: 84rem; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); padding-block: 0 6rem; }
+nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; max-height: 100vh; overflow-y: auto; padding-block: 3rem 2rem; font-size: 13.5px; }
+nav.toc .k { font: 600 11px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--fg-subtle); margin-bottom: .75rem; }
+nav.toc ol { list-style: none; margin: 0; padding: 0 0 0 .75rem; border-left: 1px solid var(--border); display: grid; gap: .1rem; counter-reset: s; }
+nav.toc li { counter-increment: s; }
+nav.toc a { display: block; color: var(--fg-muted); text-decoration: none; padding: .3rem 0; line-height: 1.35; }
+nav.toc a::before { content: counter(s) ". "; color: var(--fg-subtle); font-variant-numeric: tabular-nums; }
+nav.toc a:hover { color: var(--accent); }
+main { min-width: 0; padding-top: 3rem; }
+main > * { max-width: var(--prose); }
+main > .wide, main > figure, main > .tw { max-width: var(--wide); }
+
+.eyebrow { font: 500 12px/1 var(--font-mono); color: var(--accent); letter-spacing: .02em; margin: 0 0 1rem; }
+h1 { font: 600 2.6rem/1.12 var(--font-display); letter-spacing: -.025em; margin: 0 0 1rem; text-wrap: balance; }
+.lede { font-size: 1.15rem; color: var(--fg-muted); margin: 0 0 1.5rem; }
+.meta { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; font-size: 13px; color: var(--fg-subtle); padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+.meta b { color: var(--fg-muted); font-weight: 500; }
+h2 { font: 600 1.6rem/1.25 var(--font-display); letter-spacing: -.015em; margin: 4.5rem 0 .75rem; text-wrap: balance; }
+h2 .n { font: 500 13px/1 var(--font-mono); color: var(--accent); display: block; margin-bottom: .6rem; letter-spacing: 0; }
+h3 { font: 600 1.15rem/1.35 var(--font-body); margin: 2.25rem 0 .5rem; }
+p { margin: 0 0 1rem; }
+ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+li { margin-bottom: .4rem; }
+li::marker { color: var(--fg-subtle); }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code { font: 400 .86em var(--font-mono); background: var(--surface); padding: .1em .35em; border-radius: 4px; overflow-wrap: anywhere; }
+strong { font-weight: 600; }
+.muted { color: var(--fg-muted); }
+small, .small { font-size: 13.5px; color: var(--fg-subtle); }
+
+.verdict { border: 1px solid var(--border); background: var(--bg-subtle); border-radius: 10px; padding: 1.5rem 1.6rem; margin: 0 0 2rem; }
+.verdict p:last-child { margin: 0; }
+.verdict h3 { margin-top: 0; font-family: var(--font-display); font-weight: 600; }
+
+.recs { list-style: none; padding: 0; counter-reset: r; display: grid; gap: 0; border-top: 1px solid var(--border); }
+.recs li { counter-increment: r; display: grid; grid-template-columns: 2.25rem minmax(0,1fr); gap: .25rem; padding: .9rem 0; border-bottom: 1px solid var(--border); margin: 0; }
+.recs li::before { content: counter(r, decimal-leading-zero); font: 500 13px/1.9 var(--font-mono); color: var(--accent); grid-row: 1 / span 2; }
+.recs strong, .recs span { grid-column: 2; }
+.recs strong { display: block; }
+.recs span { color: var(--fg-muted); font-size: 15px; }
+
+.tw { overflow-x: auto; margin: 1.25rem 0 1.75rem; border: 1px solid var(--border); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.5; }
+th, td { text-align: left; vertical-align: top; padding: .65rem .85rem; border-bottom: 1px solid var(--border); }
+th { font-weight: 600; font-size: 12.5px; background: var(--bg-subtle); color: var(--fg-muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 500; }
+td.nw { white-space: nowrap; }
+
+.callout { border: 1px solid var(--bd); background: var(--bgc); border-radius: 8px; padding: 1rem 1.15rem; margin: 1.25rem 0 1.5rem; font-size: 15px; }
+.callout .t { font-weight: 600; color: var(--c); display: block; margin-bottom: .25rem; font-size: 14px; }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.c-info { --bd: var(--info-bd); --bgc: var(--info-bg); --c: var(--info); }
+.c-warn { --bd: var(--warn-bd); --bgc: var(--warn-bg); --c: var(--warn); }
+.c-ok { --bd: var(--ok-bd); --bgc: var(--ok-bg); --c: var(--ok); }
+.c-bad { --bd: var(--bad-bd); --bgc: var(--bad-bg); --c: var(--bad); }
+
+pre.tree { font: 400 13px/1.6 var(--font-mono); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.25rem; overflow-x: auto; margin: 1.25rem 0 1.75rem; color: var(--fg); }
+pre.tree .g { color: var(--fg-subtle); }
+pre.tree .h { color: var(--accent); font-weight: 500; }
+
+figure { margin: 1.5rem 0 2rem; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; }
+figcaption { font-size: 13.5px; color: var(--fg-subtle); margin-top: .6rem; }
+.shots { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+
+.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin: 1.25rem 0 1.75rem; }
+.panel { border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.15rem; }
+.panel h4 { margin: 0 0 .5rem; font: 600 14px/1.3 var(--font-body); }
+.panel ul { margin: 0; font-size: 14.5px; }
+.panel.keep h4 { color: var(--ok); }
+.panel.fix h4 { color: var(--bad); }
+
+/* Proposed chrome mock: drawn with the proposed tokens, scaled down */
+.mock { --m-bg: #ffffff; --m-sub: #fafafa; --m-surf: #f4f4f5; --m-bd: #e4e4e7; --m-fg: #18181b; --m-mut: #52525b; --m-subt: #71717a; --m-acc: #6638b8; --m-accs: #f5f1fc; --m-accf: #532d97;
+  border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; background: var(--m-bg); color: var(--m-fg); font: 400 13px/1.5 var(--font-body); margin: 1.25rem 0 .6rem; }
+.mock.dark { --m-bg: #0f0f11; --m-sub: #141417; --m-surf: #1a1a1e; --m-bd: #27272a; --m-fg: #f4f4f5; --m-mut: #a1a1aa; --m-subt: #8b8b94; --m-acc: #a98bf0; --m-accs: #1d1830; --m-accf: #c4b0f5; }
+.m-nav { display: flex; align-items: center; gap: 1rem; height: 46px; padding: 0 14px; border-bottom: 1px solid var(--m-bd); flex-wrap: nowrap; overflow: hidden; }
+.m-logo { font: 600 13px/1 var(--font-display); color: var(--m-acc); white-space: nowrap; }
+.m-switch { border: 1px solid var(--m-bd); border-radius: 6px; padding: 4px 9px; font-weight: 500; white-space: nowrap; }
+.m-tabs { display: flex; gap: 14px; color: var(--m-mut); white-space: nowrap; }
+.m-tabs .on { color: var(--m-fg); box-shadow: inset 0 -2px 0 var(--m-acc); padding-bottom: 13px; margin-bottom: -15px; }
+.m-search { margin-left: auto; background: var(--m-surf); border-radius: 6px; padding: 4px 10px; color: var(--m-subt); min-width: 9rem; white-space: nowrap; }
+.m-body { display: grid; grid-template-columns: 11rem minmax(0,1fr) 9rem; min-height: 300px; }
+.m-side { padding: 14px 10px; border-right: 1px solid var(--m-bd); }
+.m-grp { font: 600 10px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--m-subt); margin: 12px 6px 6px; }
+.m-grp:first-child { margin-top: 0; }
+.m-item { padding: 4px 6px; border-radius: 5px; color: var(--m-mut); }
+.m-item.on { background: var(--m-accs); color: var(--m-accf); font-weight: 500; }
+.m-main { padding: 16px 22px; min-width: 0; }
+.m-crumb { display: flex; justify-content: space-between; color: var(--m-subt); font-size: 11.5px; gap: .5rem; }
+.m-btn { border: 1px solid var(--m-bd); border-radius: 6px; padding: 1px 8px; color: var(--m-mut); white-space: nowrap; }
+.m-h1 { font: 600 21px/1.2 var(--font-display); margin: 12px 0 4px; letter-spacing: -.02em; }
+.m-lede { color: var(--m-mut); margin: 0 0 8px; }
+.m-badges { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.m-badge { border: 1px solid var(--m-bd); border-radius: 4px; padding: 0 6px; font-size: 11px; color: var(--m-mut); }
+.m-code { background: var(--m-sub); border: 1px solid var(--m-bd); border-radius: 8px; font: 400 11.5px/1.6 var(--font-mono); overflow: hidden; }
+.m-code .hd { display: flex; gap: 12px; padding: 5px 10px; border-bottom: 1px solid var(--m-bd); color: var(--m-subt); }
+.m-code .hd .on { color: var(--m-fg); box-shadow: inset 0 -2px 0 var(--m-acc); }
+.m-code .bd { padding: 8px 10px; white-space: pre; overflow-x: auto; }
+.m-toc { padding: 16px 10px; font-size: 11.5px; color: var(--m-mut); }
+.m-toc .k { font: 600 10px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--m-subt); margin-bottom: 8px; }
+.m-toc div { border-left: 1px solid var(--m-bd); padding: 3px 0 3px 8px; }
+.m-toc div.on { border-left: 2px solid var(--m-acc); color: var(--m-fg); }
+.mock-toggle { display: flex; gap: .5rem; margin: 1.25rem 0 0; }
+.mock-toggle button { font: 500 13px/1 var(--font-body); background: transparent; color: var(--fg-muted); border: 1px solid var(--border); border-radius: 6px; padding: .45rem .8rem; cursor: pointer; }
+.mock-toggle button[aria-pressed="true"] { background: var(--accent-subtle); color: var(--fg); border-color: var(--accent); }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: .6rem; margin: 1rem 0 1.5rem; }
+.sw { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-size: 12px; }
+.sw i { display: block; height: 2.6rem; }
+.sw i + i { border-top: 1px solid var(--border); }
+.sw span { display: block; padding: .45rem .55rem; line-height: 1.35; }
+.sw code { background: none; padding: 0; font-size: 11.5px; color: var(--fg-subtle); }
+
+.phase { display: grid; grid-template-columns: 7.5rem minmax(0,1fr); gap: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--border); }
+.phase:last-of-type { border-bottom: 1px solid var(--border); }
+.phase .when { font: 500 13px/1.5 var(--font-mono); color: var(--accent); }
+.phase .when small { display: block; font-family: var(--font-body); color: var(--fg-subtle); margin-top: .2rem; }
+.phase h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+.phase ul { font-size: 15px; margin-bottom: 0; }
+
+details { border: 1px solid var(--border); border-radius: 8px; padding: .75rem 1rem; margin: .75rem 0; }
+details[open] { padding-bottom: 1rem; }
+summary { cursor: pointer; font-weight: 600; }
+summary + * { margin-top: .75rem; }
+
+.sources { columns: 2 18rem; column-gap: 2rem; font-size: 13.5px; padding-left: 1rem; }
+.sources li { break-inside: avoid; }
+
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0,1fr); gap: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  nav.toc { position: static; max-height: none; padding-block: 2rem 0; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+  main { padding-top: 2rem; }
+  h1 { font-size: 2rem; }
+  .shots, .cols2 { grid-template-columns: minmax(0,1fr); }
+  .m-body { grid-template-columns: minmax(0,1fr); }
+  .m-side, .m-toc { display: none; }
+  .m-tabs { display: none; }
+  .phase { grid-template-columns: minmax(0,1fr); gap: .35rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<div class="shell">
+<nav class="toc" aria-label="Contents">
+  <div class="k">Contents</div>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#evidence">What the evidence says</a></li>
+    <li><a href="#benchmarks">How the leaders do it</a></li>
+    <li><a href="#today">Where our docs are today</a></li>
+    <li><a href="#structure">Proposed structure</a></li>
+    <li><a href="#design">Proposed design</a></li>
+    <li><a href="#agents">Docs for AI agents</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#decisions">Open decisions</a></li>
+    <li><a href="#method">Method and sources</a></li>
+  </ol>
+</nav>
+
+<main>
+<p class="eyebrow">docs.snowplow.io · research · 5 Nov 2026</p>
+<h1>A structure and design blueprint for the Snowplow docs</h1>
+<p class="lede">I looked at what the research on developer documentation recommends, how the AI labs, the best developer-tool companies and our direct competitors build their docs, and how our site is put together. This page covers how to structure the docs for CDI and Signals, and what a cleaner, more modern design would look like in our Docusaurus setup.</p>
+<div class="meta">
+  <span><b>Scope</b> 30+ external doc sites, 15 papers and frameworks, full audit of this repo</span>
+  <span><b>Run</b> 9 agents, ~300 fetches and file reads, one adversarial review pass</span>
+  <span><b>Detail</b> full sourced reports are on the branch <code>claude/docs-best-practices-research-05t91t</code> under <code>research/</code></span>
+</div>
+
+<h2 id="summary"><span class="n">01</span>Summary</h2>
+
+<div class="verdict">
+  <h3>The verdict</h3>
+  <p>Our writing system is better than most vendors' sites. The style guide, its LLM twin, the CLAUDE.md rules, the Fundamentals hub, and the <code>llms.txt</code> plugin with a <code>.md</code> copy of every page put us ahead of most of the companies I looked at. The weak points are navigation and the visual layer. Signals sits below roughly 20 CDI items in one shared sidebar. Sections are named after internal components ("Pipeline", "Components"). The CSS is 1,791 lines with 189 <code>!important</code> rules, and four separate color palettes and three styling systems compete with each other. None of this needs a platform migration. Docusaurus 3.10 can do everything below.</p>
+</div>
+
+<p>The recommendations, in rough priority order:</p>
+<ol class="recs">
+  <li><strong>Split navigation by product.</strong><span>A CDI | Signals switcher in the navbar, each scoping its own sidebar. Claude, OpenAI, Mistral, Stripe, Vercel and Confluent all do some version of this. URLs stay the same.</span></li>
+  <li><strong>Name sidebar groups after what the reader is doing.</strong><span>CDI: Design tracking, Collect events, Validate and enrich, Load and forward, Model and unify, Monitor and operate. Signals: Connect, Define attributes, Serve attributes, Intervene. This follows RudderStack and Tecton, and the information-scent research.</span></li>
+  <li><strong>Give the home page two equal product cards and a lifecycle map.</strong><span>Each card links to its quickstart, its reference and one product-specific page, the same pattern as the Claude docs home. Add quickstarts with time estimates (Mistral) and a block for setting up coding agents (Vercel, Cloudflare).</span></li>
+  <li><strong>Move reference and legacy content out of the task path.</strong><span>Put a separate Reference area beside the guides, as all five AI labs do, and send the 277 <code>previous-versions/</code> pages to Reference › Legacy.</span></li>
+  <li><strong>Standardize page anatomy by content type.</strong><span>Add <code>content_type</code> frontmatter and fixed templates for concept, how-to, tutorial, reference, integration and tracker pages. Split mixed pages one at a time rather than creating empty Diátaxis folders.</span></li>
+  <li><strong>Rebuild the CSS on one token set.</strong><span>Restrained neutrals, one purple accent, a 672px reading column, and a designed dark mode. The aim is to drop from 189 to 10 or fewer <code>!important</code> rules and from about 1,800 to about 450 lines of CSS.</span></li>
+  <li><strong>Consolidate components.</strong><span>One Card, Button, Badge, Callout, Code group, Steps and Parameter table each. Retire FontAwesome, framer-motion, the animated demo banner under the table of contents, and MUI outside the few widgets that need it.</span></li>
+  <li><strong>Point agents at the docs.</strong><span>Put agent instructions at the top of <code>llms.txt</code>, add per-product indexes, a hosted docs MCP server, "Open in Claude/ChatGPT" page actions and a copy-paste <code>AGENTS.md</code> snippet. Agents only fetch <code>llms.txt</code> when told to (Ahrefs: 97% of these files get zero requests).</span></li>
+</ol>
+
+<h2 id="evidence"><span class="n">02</span>What the evidence says</h2>
+<p>There are good studies on developer documentation, and they mostly agree. These are the principles with the strongest support, in order of how much they should shape our decisions.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Principle</th><th>Evidence</th><th>What it means for us</th></tr></thead>
+<tbody>
+<tr><td>Accuracy and completeness come before presentation</td><td>Uddin and Robillard (IEEE Software 2015) found ambiguity, incompleteness and incorrectness were the most severe problems, and six problem types made developers abandon an API. Write the Docs: incorrect docs are worse than missing docs.</td><td>Fix the duplicates and contradictions before the redesign. Querying is covered 3 times, cross-domain tracking 3 times, and two pages share the title "User and session identifiers".</td></tr>
+<tr><td>Developers start from code examples</td><td>Meng et al. (2019) watched developers go straight to examples. In a 2020 follow-up, clean copy-pasteable examples reduced errors.</td><td>Every how-to needs a complete, working snippet near the top, with its parts explained.</td></tr>
+<tr><td>Organize by task, not by internals</td><td>Robillard and DeLine (2011), Meng Guideline 1.1, Carroll's minimalism research (replicated by Lazonder and van der Meij, 1993: minimal manuals produced faster and better learning).</td><td>"Pipeline" and "Components" are internal names. Readers think "collect events", "load data", "fix failed events".</td></tr>
+<tr><td>Put concepts where the task needs them</td><td>About half of the developers observed barely opened the Concepts page (Meng 2019). Write the Docs accepts some repetition (ARID).</td><td>Keep Fundamentals as the canonical explanation, but allow a one-sentence inline definition before the link. This needs a CLAUDE.md change (see Open decisions).</td></tr>
+<tr><td>Every page is page one</td><td>Mark Baker (2013): readers arrive at pages, not sites. Retrieval tools like kapa.ai now say the same about LLM chunking.</td><td>Each page states its context and prerequisites. No "as described above".</td></tr>
+<tr><td>Keep content types separate, and separate them gradually</td><td>Diátaxis: mixed types weaken each other. Its author warns against setting up four empty sections first. Hillel Wayne adds a "conceptual overview" type, which a platform product like ours needs.</td><td>The collector, Signals connection and web tracker pages mix how-to and reference. Tag pages first, then split them one by one.</td></tr>
+<tr><td>Write for scanning, with labels that say what's there</td><td>NN/g eye-tracking studies, Pirolli and Card's information foraging theory (1999), Google's headings guidance.</td><td>Front-load headings and nav labels with the words people search for.</td></tr>
+<tr><td>Fewer, more complete pages</td><td>Uddin and Robillard name "10s of clicks" as a problem. Meng Guideline 1.3: keep information on one page when search is weak.</td><td>Failed events are spread over 4 places, and manual recovery alone has 15 pages.</td></tr>
+<tr><td>Never hide required content in tabs or diagrams</td><td>NN/g: non-default tabs should only hold supplementary content. kapa.ai: give diagrams a text version.</td><td>Keep the platform tabs CLAUDE.md requires, but put prerequisites and warnings outside them.</td></tr>
+<tr><td>Agents read docs now, but only when pointed at them</td><td>GitBook: AI readers rose from about 9% to about 41% of traffic on its platform during 2025 (vendor data). Ahrefs (May 2026): 97% of <code>llms.txt</code> files got zero requests. Vercel's evals: a docs index kept in the agent's context reached a 100% pass rate, against 53–79% without one.</td><td>Ship the files, then tell agents about them: a snippet for <code>AGENTS.md</code>, an MCP server, and a short pointer on each page.</td></tr>
+</tbody></table></div>
+
+<div class="callout c-info"><span class="t">Two caveats</span>
+<p>The Google log study (new users who visited guide pages had 3.92 times the odds of a successful first API call) and GitBook's traffic numbers show correlation, and come from vendor-run platforms. Use them as direction, not as proof.</p></div>
+
+<h2 id="benchmarks"><span class="n">03</span>How the leaders do it</h2>
+<p>I looked at four groups of sites: AI labs, best-in-class developer tools, data infrastructure peers, and feature-store products that resemble Signals.</p>
+
+<h3>AI labs: Anthropic, OpenAI, Google Gemini, Mistral, Cohere</h3>
+<div class="tw"><table>
+<thead><tr><th>Pattern</th><th>Who does it</th><th>Take for Snowplow?</th></tr></thead>
+<tbody>
+<tr><td>Top navigation split by product</td><td>Claude (Messages / Managed Agents / Admin), OpenAI (API / ChatGPT / Codex), Mistral. Cohere splits by doc type instead, which suits a single-API company.</td><td>Yes. Our products have different readers.</td></tr>
+<tr><td>Guides and API reference in separate trees</td><td>All five</td><td>Yes</td></tr>
+<tr><td>Code on the home page</td><td>Claude (9 language tabs), Gemini (6)</td><td>Yes, a 3-line snippet per product card</td></tr>
+<tr><td>Home page as a lifecycle map</td><td>Claude: Get started → Build → Evaluate and ship → Operate, one tab per product</td><td>Yes</td></tr>
+<tr><td>Language switcher that persists across the site</td><td>OpenAI (7), Claude (9), Cohere (8)</td><td>We already have it via <code>groupId</code></td></tr>
+<tr><td><code>llms.txt</code> plus a <code>.md</code> copy of every page</td><td>All five. Claude, OpenAI, Gemini and Cohere add a pointer on every page.</td><td>We have both. Add the pointer.</td></tr>
+<tr><td>Docs MCP server</td><td>Claude, OpenAI, Cohere, Gemini</td><td>Yes</td></tr>
+<tr><td>Ask AI in search</td><td>Claude (Inkeep), Claude Code (Mintlify), OpenAI, Cohere (Fern)</td><td>Yes, via DocSearch v4</td></tr>
+<tr><td>Legacy content in a labeled section, not versioned docs</td><td>OpenAI "Legacy APIs", Mistral <code>/resources/deprecated/</code>. Only Cohere versions the whole site.</td><td>Yes. Version components, not the site.</td></tr>
+<tr><td>Theme toggle with System option, dark mode designed into the tokens</td><td>All five</td><td>Yes</td></tr>
+</tbody></table></div>
+<p class="small">Build vs buy is split. Claude Platform, OpenAI (Starlight), Mistral and Gemini are custom builds. Claude Code uses Mintlify and Cohere uses Fern. Anthropic's two sites have the same feature set, so a framework doesn't decide quality.</p>
+
+<h3>Developer tools: Stripe, Vercel, Supabase, Cloudflare, Twilio, PostHog, and docs platforms</h3>
+<p>These sites look current for the same handful of reasons. The platforms that set the visual trend (Mintlify, Fern, Starlight, Fumadocs, Nextra) all follow the same conventions:</p>
+<ul>
+<li><strong>Quiet chrome.</strong> Neutral surfaces, one accent used for links, the active item and focus, hairline borders instead of shadows, radii of 6–8px.</li>
+<li><strong>A narrow reading column inside a wide shell.</strong> Vercel's article column is 640px, Clerk's 696px, Starlight's 720px. Ours is 736px, about 90 characters per line.</li>
+<li><strong>A neutral sans with a distinct mono.</strong> Cloudflare and Fumadocs use JetBrains Mono, Vercel uses Geist Mono. Brand typefaces are common among the AI labs.</li>
+<li><strong>A page header with actions.</strong> Breadcrumbs plus "Copy page" with a menu (View as Markdown, Open in Claude, Open in ChatGPT). Mintlify made this a standard feature.</li>
+<li><strong>A page footer with feedback.</strong> "Was this helpful?", last updated, previous and next.</li>
+<li><strong>A shared component set.</strong> Cards, Steps, callouts, code groups with language tabs, parameter fields, badges for availability and status.</li>
+<li><strong>A sidebar filter and a scoped sidebar.</strong> Cloudflare's "Filter navigation", Vercel's "Back to all sections".</li>
+</ul>
+
+<h3>Our market: Segment, RudderStack, mParticle, Amplitude, PostHog, dbt, Snowflake, Confluent, Fivetran, Hightouch</h3>
+<div class="tw"><table>
+<thead><tr><th>Problem we share with them</th><th>Best pattern seen</th></tr></thead>
+<tbody>
+<tr><td>Several products, one site</td><td>Confluent's product tabs (Cloud, Platform, Connectors, Clients). RudderStack's verb-named groups: Collect, Unify, Activate, Govern, Monitor.</td></tr>
+<tr><td>A shared concepts layer</td><td>Segment's Spec, which collection and destinations both link to. This is our Fundamentals.</td></tr>
+<tr><td>Hundreds of integrations</td><td>A hub with a full compatibility matrix (Segment), query-string filters you can link to (mParticle), and the same H2s in the same order on every integration page (Fivetran, Hightouch). Settings tables generated from config schemas, matching the product UI.</td></tr>
+<tr><td>Many SDKs in many languages</td><td>PostHog's feature-support matrix on the SDK hub. Segment and Amplitude label each SDK with a support tier.</td></tr>
+<tr><td>Managed vs self-hosted</td><td>Inline markers per page (Confluent's tags), not separate doc sets</td></tr>
+<tr><td>Versioned components</td><td>dbt's "Applies to" markers and per-component release notes (Fivetran)</td></tr>
+</tbody></table></div>
+
+<h3>Products like Signals: Feast, Tecton, Hopsworks, Featureform</h3>
+<ul>
+<li><strong>Tecton</strong> groups its sidebar by workflow verbs and teaches every concept with one running example.</li>
+<li><strong>Feast</strong> explains push vs pull serving on its own architecture page, and labels each integration as core or community.</li>
+<li><strong>Hopsworks</strong> routes readers by persona on its landing page, including an "Evaluator" path, and has <code>llms.txt</code>, <code>.md</code> pages and "Copy for LLM" throughout.</li>
+</ul>
+<p>Signals maps cleanly onto this: one running example (say, a cart-abandonment score), a push vs pull page (interventions vs services), and a router for "personalize an app" vs "feed an AI agent".</p>
+
+<h2 id="today"><span class="n">04</span>Where our docs are today</h2>
+<p>An agent built the site locally and took screenshots in both themes at 1440px and 390px. These two show the main problems.</p>
+
+<figure class="wide">
+<div class="shots">
+  <img src="img/signals-sidebar-1440.jpg" alt="The current Signals introduction page at 1440px wide in light mode. The left sidebar lists 15 CDI items under Data Infrastructure before the Signals section starts. A Book a demo banner sits under the table of contents.">
+  <img src="img/tracker-page-390.jpg" alt="The current Track page views on web page at 390px wide. Breadcrumbs wrap to three lines, followed by Download and Copy Markdown links and an On this page toggle, so the page title starts about 330px down the screen.">
+</div>
+<figcaption>Left: Signals starts halfway down one shared sidebar, and a "Book a demo" banner competes with the table of contents. Right: on a phone, the page title starts about 330px down, below three lines of breadcrumbs and the page actions.</figcaption>
+</figure>
+
+<div class="cols2">
+<div class="panel keep"><h4>Keep and build on</h4><ul>
+<li>The style guide, its LLM twin, and the CLAUDE.md rules</li>
+<li>The Fundamentals hub and "link, don't re-explain"</li>
+<li>Build checks that fail on broken links and anchors</li>
+<li><code>description</code> and <code>keywords</code> on 100% of pages</li>
+<li>The <code>llms.txt</code> plugin: <code>llms-full.txt</code>, a <code>.md</code> copy of every page, version-aware exclusions</li>
+<li>Copy Markdown and Download on every page</li>
+<li>Persisted platform tabs (<code>groupId</code>, <code>queryString</code>)</li>
+<li><code>AvailabilityBadges</code>, <code>EventForwardingSchemaTable</code></li>
+<li>Signals' four-part structure: concepts, connection, attributes, interventions</li>
+<li>Inter Variable as the body font</li>
+</ul></div>
+<div class="panel fix"><h4>Fix</h4><ul>
+<li>CDI and Signals share one sidebar; the CDI section has 13 siblings</li>
+<li>The CDI get-started path ends on a comparison table with no next step</li>
+<li>The Signals quickstart lives in <code>/tutorials</code>, outside the Signals sidebar</li>
+<li>No <code>content_type</code> metadata; how-to and reference mixed on key pages</li>
+<li>Sidebar depth reaches 7–9 levels in <code>previous-versions/</code></li>
+<li>Four color palettes: shadcn tokens, Infima, MUI, hard-coded hex</li>
+<li>Dark mode mixes three greys and black; body text is dimmed to <code>#999</code></li>
+<li>Stock Infima admonitions, the most dated element on the site</li>
+<li>Sidebar carets hidden until hover; navbar tabs are buttons, not links</li>
+<li>CSS targets generated class names that change on upgrade</li>
+</ul></div>
+</div>
+
+<p>The technical debt matters because it blocks a redesign. <code>tailwind.config.js</code> sets <code>important: true</code>, so every utility is <code>!important</code>. MUI's provider wraps the whole app even though most pages only use it for <code>Grid</code> and <code>Paper</code>. FontAwesome registers every icon globally. About 32 files are swizzled; <code>src/theme/DocPage/*</code> is a dead Docusaurus v2 swizzle, and <code>SearchBar</code> is an unchanged copy of upstream. Small edits to <code>custom.css</code> won't work here; the file needs a rewrite.</p>
+
+<h2 id="structure"><span class="n">05</span>Proposed structure</h2>
+
+<h3>Top-level layout</h3>
+<p>Keep one <code>docs</code> plugin so <code>/docs/...</code> URLs and the <code>/index.md</code> link rule stay intact. Replace the single sidebar with four: <code>cdi</code>, <code>signals</code>, <code>reference</code> and <code>platform</code>. A product switcher in the navbar picks between CDI and Signals; Reference, Tutorials and Platform &amp; AI are plain tabs.</p>
+
+<pre class="tree"><span class="h">Navbar</span>  [Snowplow CDI ▾ | Signals]   Reference   Tutorials   Platform &amp; AI   Release notes ↗   [Search · Ask AI]  [◐]
+
+<span class="h">CDI sidebar</span>                 <span class="g">7 groups, named for what the reader does</span>
+├─ Get started             <span class="g">overview · choose deployment · set up Console · first event · query · model · try with Micro</span>
+├─ Design tracking         <span class="g">tracking plans · data structures · Snowtype · Event Studio</span>
+├─ Collect events          <span class="g">trackers hub + feature matrix · web · mobile · server · built-in events and entities</span>
+├─ Validate and enrich     <span class="g">collector · enrichments · failed events · testing (Micro, Inspector)</span>
+├─ Load and forward        <span class="g">warehouses and lakes · streams · event forwarding catalog · reverse ETL</span>
+├─ Model and unify         <span class="g">dbt packages · Identities</span>
+└─ Monitor and operate     <span class="g">monitoring · alerts · recovery · self-hosted operations</span>
+
+<span class="h">Signals sidebar</span>
+├─ Get started             <span class="g">overview + persona router · quickstart · Sandbox</span>
+├─ Concepts                <span class="g">one running example · push vs pull · architecture</span>
+├─ Connect                 <span class="g">Console · credentials · Python / TypeScript SDK install</span>
+├─ Define attributes       <span class="g">attribute keys · attribute groups · stream vs batch</span>
+├─ Serve attributes        <span class="g">services · retrieve in apps · serve to AI agents</span>
+├─ Intervene               <span class="g">define · subscribe · examples</span>
+└─ Publish and operate     <span class="g">publish lifecycle · Inspector · monitoring</span>
+
+<span class="h">Reference sidebar</span>           <span class="g">lookup only</span>
+├─ APIs · SDK reference · Component configuration · Schemas and data
+├─ Versions and compatibility
+└─ Legacy                  <span class="g">all previous-versions/ trees, collapsed</span>
+
+<span class="h">Platform &amp; AI sidebar</span>        <span class="g">shared by both products</span>
+├─ Fundamentals · Working with AI · Account management
+└─ Security and policies · Migration guides · Glossary</pre>
+
+<div class="callout c-warn"><span class="t">Shared Fundamentals changes the reader's sidebar</span>
+<p>In Docusaurus, each page shows the sidebar it belongs to. A Signals reader who follows a link to <code>/docs/fundamentals/entities/</code> lands in the Platform &amp; AI sidebar. Either design for that (a "Back to Signals" link at the top of shared pages) or list Fundamentals in both product sidebars and accept that the first listing wins. I'd do the first.</p></div>
+
+<h3>Page templates by content type</h3>
+<p>Add <code>content_type: concept | how-to | tutorial | reference | integration | sdk | landing</code> to the required frontmatter. Each template below stays within the CLAUDE.md limit of 3–5 H2s. "Next steps" becomes a footer component rather than an H2.</p>
+<div class="tw"><table>
+<thead><tr><th>Type</th><th>H2 sections, in order</th><th>Modeled on</th></tr></thead>
+<tbody>
+<tr><td>Concept</td><td>What it is and why it matters · How it works (diagram plus a text version) · Example · Related concepts</td><td>Diátaxis explanation, Tecton</td></tr>
+<tr><td>How-to</td><td>Before you begin · Steps (verify as the last step) · Troubleshooting (exact error string → fix)</td><td>Good Docs Project, Google procedures, Claude Code</td></tr>
+<tr><td>Tutorial</td><td>What you'll build (with "≈ N min") · Requirements · Steps · Clean up</td><td>Minimalism, Mistral</td></tr>
+<tr><td>Reference</td><td>Parameters (generated table) · Example · Errors · Version applicability</td><td>Claude and OpenAI API reference, Cohere</td></tr>
+<tr><td>Integration</td><td>Compatibility · Connect · Configure (generated by <code>EventForwardingSchemaTable</code>) · Troubleshooting</td><td>Fivetran, Hightouch, Segment</td></tr>
+<tr><td>Tracker SDK</td><td>Feature support (row from the hub matrix) · Install and initialize · Track your first event · Next steps</td><td>Segment, PostHog</td></tr>
+</tbody></table></div>
+<p>The how-to template keeps the existing CLAUDE.md feature-page shape (description → when/why → example → configuration): the opening paragraph covers description and when/why before the first H2.</p>
+
+<h3>Getting-started paths by reader</h3>
+<div class="tw"><table>
+<thead><tr><th>Reader</th><th>Path</th><th>Today</th><th>Target</th></tr></thead>
+<tbody>
+<tr><td>Data engineer, deploying CDI</td><td>Home → CDI Quickstart → choose deployment → set up Console → first event → query</td><td>4–5 pages, dead end at the comparison table</td><td class="nw">3 clicks to setup</td></tr>
+<tr><td>Tracking implementer, front-end or mobile</td><td>Home → Collect events → tracker hub → tracker landing → first event</td><td>Deep in a 508-file <code>sources/</code> tree</td><td class="nw">3 clicks</td></tr>
+<tr><td>Analytics engineer</td><td>Home → Model → dbt packages hub with a compatibility table → install</td><td>Inside the 112-file <code>modeling-your-data</code></td><td class="nw">2 clicks</td></tr>
+<tr><td>App or ML engineer, using Signals</td><td>Home → Signals Quickstart, inside the Signals sidebar</td><td>~5 pages, jumps to <code>/tutorials</code> or the external Sandbox</td><td class="nw">2 clicks</td></tr>
+<tr><td>Evaluator</td><td>Home → product landing → architecture overview → "Try with Micro" or Sandbox</td><td>No dedicated path</td><td class="nw">2 clicks</td></tr>
+<tr><td>Coding agent</td><td>Human pastes the snippet → agent reads <code>/llms.txt</code> → fetches <code>.md</code> pages or queries the MCP server</td><td>Nothing points agents at <code>llms.txt</code></td><td class="nw">0 human clicks</td></tr>
+</tbody></table></div>
+
+<h3>Catalogs, trackers and versions</h3>
+<ul>
+<li><strong>Destinations catalog hub.</strong> One matrix of destination × type (forwarder, loader, Snowbridge target, reverse ETL) × delivery × cloud × status. Filters go in the query string so every view can be linked. Build them as a static component over a JSON manifest so the <code>.md</code> export still lists every row.</li>
+<li><strong>Tracker feature matrix.</strong> Generate it from a YAML manifest: page or screen views, activity tracking, built-in entities, anonymous tracking, media, e-commerce, Snowtype, consent. The same manifest feeds the agent rules in <code>llms.txt</code>.</li>
+<li><strong>Support tiers.</strong> Flagship, Maintained or Community on every tracker and integration. Today "deprecated" is the only status label.</li>
+<li><strong>Versions.</strong> Don't adopt Docusaurus whole-site versioning. Use inline "Applies to Enrich 5.x+" markers generated from the version manifest so they can't drift, plus a Versions and compatibility page.</li>
+</ul>
+
+<h2 id="design"><span class="n">06</span>Proposed design</h2>
+<p>The direction is quiet chrome, a narrow reading column and one accent. Purple appears only on links, the active nav item, focus rings and the primary button. The mock below uses the proposed tokens; toggle it to see the dark version.</p>
+
+<div class="mock-toggle" role="group" aria-label="Mock theme">
+  <button type="button" id="mock-light" aria-pressed="true">Light</button>
+  <button type="button" id="mock-dark" aria-pressed="false">Dark</button>
+</div>
+<div class="mock wide" id="mock" role="img" aria-label="Mock of the proposed docs layout: a navbar with a Snowplow CDI product switcher, section tabs and a search field; a sidebar grouped by Get started, Collect events and Validate and enrich; a page titled Track page views with a summary line, availability badges, a code block with language tabs, and an On this page list.">
+  <div class="m-nav">
+    <span class="m-logo">snowplow</span>
+    <span class="m-switch">Snowplow CDI ▾</span>
+    <span class="m-tabs"><span class="on">Docs</span><span>Reference</span><span>Tutorials</span><span>Platform &amp; AI</span></span>
+    <span class="m-search">Search…  ⌘K</span>
+  </div>
+  <div class="m-body">
+    <div class="m-side">
+      <div class="m-grp">Get started</div>
+      <div class="m-item">Overview</div>
+      <div class="m-item">Track your first event</div>
+      <div class="m-grp">Collect events</div>
+      <div class="m-item">Trackers overview</div>
+      <div class="m-item">Web trackers</div>
+      <div class="m-item on">Track page views</div>
+      <div class="m-item">Mobile trackers</div>
+      <div class="m-grp">Validate and enrich</div>
+      <div class="m-item">Enrichments</div>
+    </div>
+    <div class="m-main">
+      <div class="m-crumb"><span>Collect events › Web trackers</span><span class="m-btn">Copy page ▾</span></div>
+      <div class="m-h1">Track page views on web</div>
+      <p class="m-lede">Send a page view event each time a page loads or the route changes.</p>
+      <div class="m-badges"><span class="m-badge">CDI Cloud</span><span class="m-badge">Self-hosted</span><span class="m-badge">JavaScript tracker v4+</span></div>
+      <div class="m-code"><div class="hd"><span class="on">Browser (npm)</span><span>JavaScript (tag)</span></div><div class="bd">import { trackPageView } from '@snowplow/browser-tracker';
+
+trackPageView();</div></div>
+    </div>
+    <div class="m-toc">
+      <div class="k">On this page</div>
+      <div class="on">Before you begin</div>
+      <div>Track a page view</div>
+      <div>Set a custom title</div>
+      <div>Troubleshooting</div>
+    </div>
+  </div>
+</div>
+<p class="small">Illustration only. The real layout is 1440px wide: a 272px sidebar, a 672px reading column (code and tables can widen to 896px) and a 224px table of contents.</p>
+
+<h3>Tokens</h3>
+<p>One file, <code>src/design/tokens.js</code>, becomes the source for <code>tokens.css</code>, the Tailwind theme, the Prism themes and (while it remains) the MUI theme. Primary purple is defined once instead of five times.</p>
+
+<div class="swatches">
+  <div class="sw"><i style="background:#ffffff"></i><i style="background:#0f0f11"></i><span>Page<br><code>#ffffff · #0f0f11</code></span></div>
+  <div class="sw"><i style="background:#fafafa"></i><i style="background:#141417"></i><span>Code, table head<br><code>#fafafa · #141417</code></span></div>
+  <div class="sw"><i style="background:#e4e4e7"></i><i style="background:#27272a"></i><span>Border<br><code>#e4e4e7 · #27272a</code></span></div>
+  <div class="sw"><i style="background:#18181b"></i><i style="background:#f4f4f5"></i><span>Text<br><code>#18181b · #f4f4f5</code></span></div>
+  <div class="sw"><i style="background:#52525b"></i><i style="background:#a1a1aa"></i><span>Muted text<br><code>#52525b · #a1a1aa</code></span></div>
+  <div class="sw"><i style="background:#6638b8"></i><i style="background:#a98bf0"></i><span>Accent<br><code>#6638b8 · #a98bf0</code></span></div>
+  <div class="sw"><i style="background:#f5f1fc"></i><i style="background:#1d1830"></i><span>Active item<br><code>#f5f1fc · #1d1830</code></span></div>
+</div>
+<p class="small">Top half light, bottom half dark. Every text pair is at least 4.6:1 (WCAG AA). The orange <code>#fc5e35</code> CTA accent is retired: two accents compete.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Token</th><th>Value</th><th>Change from today</th></tr></thead>
+<tbody>
+<tr><td>Body</td><td>Inter Variable 16px / 28px, woff2, subset</td><td>From <code>.ttf</code> at 26.4px line height. Drop the global negative letter-spacing.</td></tr>
+<tr><td>Mono</td><td>JetBrains Mono 400/600 (or Geist Mono)</td><td>From the default system stack</td></tr>
+<tr><td>H1 / H2 / H3</td><td>36 / 24 / 18px, weight 600, tighter tracking</td><td>H2 drops from 700, H3 from 20px</td></tr>
+<tr><td>Reading column</td><td>672px; code, tables and diagrams up to 896px</td><td>From 736px</td></tr>
+<tr><td>Sidebar / TOC</td><td>272px / 224px</td><td>From 330px, defined three ways</td></tr>
+<tr><td>Radii</td><td>4 / 6 / 8 / 12px</td><td>Fixes the Tailwind map that turns <code>lg</code> into 4px</td></tr>
+<tr><td>Shadows</td><td>None by default; one for hover, one for popovers</td><td>Remove framer-motion glow on the demo banner</td></tr>
+<tr><td>Callouts</td><td>1px border on all sides, tinted background, icon and title in the semantic color, body in normal text color</td><td>From stock Infima: saturated fills, thick left border, uppercase labels</td></tr>
+<tr><td>Dark mode</td><td>Surfaces step lighter for elevation; same accent hue as light; body text at full <code>--fg</code></td><td>From three greys plus black, and dimmed <code>#999</code> text</td></tr>
+</tbody></table></div>
+
+<h3>Components</h3>
+<div class="tw"><table>
+<thead><tr><th>Standardize on</th><th>Replaces</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;Card&gt;</code> with link, product, quickstart and compact variants; titles are real headings</td><td><code>CardGrid.tsx</code>'s three variants, <code>ui/card.tsx</code>, <code>.cta-card</code>, <code>.link-card</code>, the DocCard styling</td></tr>
+<tr><td><code>&lt;Button&gt;</code>: primary, secondary, ghost, link</td><td><code>.snowplow-button</code>, <code>.cta-button</code>, <code>.featured-section-button</code></td></tr>
+<tr><td><code>&lt;Badge&gt;</code> for availability, lifecycle, tier and version</td><td><code>Badges.js</code> (shields.io images) and <code>availability-badges.tsx</code></td></tr>
+<tr><td><code>&lt;CodeGroup&gt;</code>: language tabs inside the code header, persisted</td><td>Indented <code>.tabs-container</code> that misaligns code with text</td></tr>
+<tr><td><code>&lt;Steps&gt;</code>: numbered rail, each step an anchorable H3</td><td>Hand-written numbered H3s</td></tr>
+<tr><td><code>&lt;ParamTable&gt;</code>: name, type, required, default, since</td><td>Static uses of <code>MarkdownTableAsMui</code> (MUI data grid premium)</td></tr>
+<tr><td><code>&lt;FeatureMatrix&gt;</code> for tracker and destination hubs</td><td>Hand-written Markdown tables</td></tr>
+<tr><td><code>&lt;PageActions&gt;</code>: Copy page plus View as Markdown, Open in Claude, Open in ChatGPT, Copy MCP URL</td><td>The Download and Copy Markdown row</td></tr>
+<tr><td><code>&lt;Feedback&gt;</code>: "Was this page helpful?" as a Snowplow event, gated by cookie consent</td><td>The Product Fruits side tab on doc pages</td></tr>
+<tr><td>lucide icons</td><td>FontAwesome (all sets registered globally) and <code>@mui/icons-material</code></td></tr>
+</tbody></table></div>
+
+<h3>Home page</h3>
+<p>Give <code>docs/introduction.md</code> a <code>layout: home</code> frontmatter flag so the existing <code>DocItem/Layout</code> swizzle drops breadcrumbs, page actions and the table of contents. Then, top to bottom:</p>
+<ol>
+<li>Search-first hero, with a panel for connecting a coding agent (Claude Code, Cursor, Codex tabs).</li>
+<li>Two equal product cards with a 3-line snippet each. CDI links to Quickstart, Tracker reference, Trackers and SDKs. Signals links to Quickstart, Signals API and SDK reference, Define attributes.</li>
+<li>A lifecycle strip with one tab per product: Design → Collect → Validate → Load → Model, and Define → Serve → Intervene.</li>
+<li>Quickstarts with time estimates, filterable by product through <code>?filter=</code>.</li>
+<li>An "I want to…" table that maps about 8 common tasks to their pages.</li>
+<li>The three latest releases.</li>
+</ol>
+
+<h3>Implementation notes</h3>
+<ul>
+<li><strong>Cascade layers are already on.</strong> <code>future: { v4: true }</code> enables <code>useCssCascadeLayers</code>, so Infima is already layered. The <code>!important</code> rules come from Tailwind's <code>important: true</code>, selectors on hashed class names, and the <code>prose</code> wrapper fighting Infima. Remove <code>prose</code> from the doc body and style <code>.markdown</code> from tokens.</li>
+<li><strong>Scope Tailwind carefully.</strong> <code>important: '#__docusaurus'</code> breaks anything rendered in a portal (Radix popovers, the DocSearch modal, toasts). Test those, or go straight to <code>important: false</code> once the prose fight is gone.</li>
+<li><strong>The three-way theme toggle is free.</strong> Docusaurus 3.10's stock <code>ColorModeToggle</code> has a System state. Delete our MUI-sync swizzle and set <code>respectPrefersColorScheme: true</code>.</li>
+<li><strong>Split CSS by job.</strong> Tokens, Infima variable mapping, prose, and chrome, with stylelint in CI: an <code>!important</code> budget of 10 and a ban on <code>[class*=…]</code>, <code>_xxxx</code> hash and <code>.css-…</code> selectors.</li>
+<li><strong>Isolate MUI.</strong> Move the provider out of <code>Root.js</code> into a lazy-loaded wrapper around <code>JsonSchemaValidator</code>, <code>DbtSchemaSelector</code> and the data grids.</li>
+<li><strong>Accessibility.</strong> axe in CI on 20 URLs × 2 themes × 2 widths, underlined prose links, 24px minimum targets (WCAG 2.2), and a cookie banner that doesn't cover focused content.</li>
+</ul>
+
+<h2 id="agents"><span class="n">07</span>Docs for AI agents</h2>
+<p>We already ship the baseline that all five AI labs ship. The gap is getting agents to use it. In order:</p>
+<ol>
+<li><strong>Agent instructions at the top of <code>/llms.txt</code>.</strong> Current tracker majors and Signals SDK packages, what's deprecated, "use self-describing events and entities, never 'unstructured event' or 'context'", and "check registries for current versions". Stripe and Gemini do this.</li>
+<li><strong>Per-product indexes:</strong> <code>/docs/signals/llms.txt</code>, a CDI index and a Reference index, with a router at the root (OpenAI, Cohere). Tracker pages currently dominate <code>llms-full.txt</code>.</li>
+<li><strong>A pointer on every page</strong> plus a <code>rel="alternate" type="text/markdown"</code> link.</li>
+<li><strong>A copy-paste <code>AGENTS.md</code> snippet</strong> on the home page and the Working with AI page.</li>
+<li><strong>Page actions:</strong> Open in Claude, Open in ChatGPT, View as Markdown.</li>
+<li><strong>A hosted docs MCP server</strong> with <code>search_docs</code> and <code>get_page</code>, separate from the existing Snowplow MCP server. This needs hosting outside Netlify.</li>
+<li><strong>Ask AI in search</strong> via DocSearch v4, which Docusaurus 3.9+ supports. Needs an Algolia AskAI assistant; check the plan cost first.</li>
+<li><strong>Writing rules for retrieval</strong> in the LLM style guide: no "above"/"below", exact error strings next to fixes, diagrams restated as steps.</li>
+</ol>
+
+<h2 id="roadmap"><span class="n">08</span>Roadmap</h2>
+<p>The two synthesis agents produced conflicting timelines (13–16 engineering weeks vs several quarters), because one counted front-end work and the other counted editorial work. They run in parallel. The front-end track is measured in weeks; the editorial track (re-sorting pages, merging duplicates, moving files) takes quarters.</p>
+
+<div class="phase"><div class="when">Phase 0<small>~2 weeks</small></div><div>
+<h3>Baselines and quick wins</h3>
+<ul>
+<li>Visual regression baselines, axe and stylelint in CI.</li>
+<li>Capture docs-usage baselines with our own tracker: search refinement rate, quickstart completion, Signals discovery from home, 404s, feedback.</li>
+<li>Delete dead code: <code>DocPage/*</code>, the unchanged <code>SearchBar</code> eject, <code>tailwind-full-config.js</code>, the no-op <code>webpack.configure</code>.</li>
+<li>Remove the demo banner, framer-motion and motion. Switch to the stock theme toggle.</li>
+<li>Add a next step to the end of <code>get-started/index.md</code>, fix the sidebar position ties, add a Signals card to the home page.</li>
+<li>Agent instructions in <code>llms.txt</code>; Open in Claude/ChatGPT actions.</li>
+<li>Spikes: Algolia AskAI cost, Netlify log access, docs MCP hosting.</li>
+</ul></div></div>
+
+<div class="phase"><div class="when">Phase 1<small>~3 weeks</small></div><div>
+<h3>Tokens and CSS rewrite</h3>
+<ul>
+<li><code>tokens.js</code>, generated CSS, Infima mapped from tokens.</li>
+<li>woff2 fonts, JetBrains Mono, matched Prism theme pair.</li>
+<li>Rewrite <code>custom.css</code> into split files; drop <code>prose</code>; remove <code>important: true</code>.</li>
+</ul></div></div>
+
+<div class="phase"><div class="when">Phase 2<small>~3 weeks</small></div><div>
+<h3>Navigation</h3>
+<ul>
+<li>Product switcher, four sidebars, link-based navbar tabs.</li>
+<li>Restyled sidebar with visible carets and a filter field; mobile header that puts the H1 within 140px of the top.</li>
+<li>This needs a custom <code>sidebarItemsGenerator</code> to keep <code>previous-versions/</code> out of the CDI sidebar before files move. Budget for it.</li>
+</ul></div></div>
+
+<div class="phase"><div class="when">Phase 3<small>~3 weeks</small></div><div>
+<h3>Components and home page</h3>
+<ul>
+<li>Card, Button, Badge, callouts, CodeGroup, Steps, ParamTable, FeatureMatrix, PageActions, Feedback.</li>
+<li>Codemod MDX usages; document the components in the style guide.</li>
+<li>New home page and product landing pages; tracker hub matrix; destinations hub.</li>
+</ul></div></div>
+
+<div class="phase"><div class="when">Editorial<small>2–3 quarters, in parallel</small></div><div>
+<h3>Content</h3>
+<ul>
+<li><code>content_type</code> frontmatter in batches; update the style guide and CLAUDE.md.</li>
+<li>Merge duplicates (identifiers, cross-domain, querying, tracking plans, schema versioning), each with a redirect.</li>
+<li>Move the Signals quickstart into the Signals sidebar.</li>
+<li>Split mixed how-to/reference pages one at a time.</li>
+<li>File moves, one group per PR, with <code>_redirects</code> entries and a check that the <code>llms-full.txt</code> page count doesn't change. Convert the 30+ standalone <code>.md</code> files under <code>api-reference/snowbridge/</code> to <code>index.md</code> directories on the way.</li>
+</ul></div></div>
+
+<h2 id="decisions"><span class="n">09</span>Open decisions</h2>
+<p>The review agent found gaps neither synthesis covered. These need an owner before work starts.</p>
+<ul>
+<li><strong>CLAUDE.md changes.</strong> Allowing a one-sentence inline definition before a Fundamentals link, and adding <code>content_type</code> to required frontmatter, both change current rules.</li>
+<li><strong>Marketing elements in the docs.</strong> Removing the demo banner and the Product Fruits tab, and deferring Qualified and Reo until consent, need sign-off from marketing and product ops.</li>
+<li><strong>Search.</strong> The Algolia index has no product facet. Decide on product and content-type attributes, down-weighting the 277 legacy pages, synonyms ("context" → entity, "unstructured" → self-describing), and a zero-results review.</li>
+<li><strong>Ownership.</strong> CODEOWNERS per sidebar group, a freshness report (only 56% of pages have a <code>date</code>), and who maintains the tracker and destination manifests.</li>
+<li><strong>Brand typeface.</strong> The AI labs mostly use a named brand face. If Snowplow brand guidelines specify one with a web license, use it for headings; otherwise Inter plus JetBrains Mono.</li>
+<li><strong>Localization.</strong> Out of scope today (<code>locales: ['en']</code>). Say so explicitly, since font subsetting to Latin would close it off.</li>
+</ul>
+
+<h2 id="method"><span class="n">10</span>Method and sources</h2>
+<p>A Claude Code workflow ran four research agents in parallel (frameworks and papers, AI labs, developer tools and docs platforms, data-infrastructure and feature-store peers) alongside two audit agents (information architecture, and visual design with live screenshots). Two agents synthesized structure and design recommendations, and a final agent reviewed both adversarially, re-fetching the eight most load-bearing claims. This page applies that review's corrections. Each agent cited URLs or file paths for its claims; pages that couldn't be fetched are listed in the full reports.</p>
+
+<details>
+<summary>Key sources</summary>
+<ul class="sources">
+<li><a href="https://diataxis.fr/">Diátaxis</a> and <a href="https://www.hillelwayne.com/post/problems-with-the-4doc-model/">Hillel Wayne's critique</a></li>
+<li><a href="https://www.cs.mcgill.ca/~martin/papers/ieeesw2015.pdf">Uddin and Robillard, How API documentation fails (2015)</a></li>
+<li><a href="https://www.cs.mcgill.ca/~martin/papers/ese2011.pdf">Robillard and DeLine, A field study of API learning obstacles (2011)</a></li>
+<li><a href="https://mangold-international.com/resources/meng-et-al-how-developers-use-api-documentation-2019.pdf">Meng et al., How developers use API documentation (2019)</a></li>
+<li><a href="https://mangold-international.com/resources/meng-et-al-optimizing-api-documentation-2020.pdf">Meng et al., Optimizing API documentation (2020)</a></li>
+<li><a href="https://research.utwente.nl/en/publications/f811580e-953a-4312-a1ee-9916b3f98e05">Lazonder and van der Meij, minimal manual replication (1993)</a></li>
+<li><a href="https://everypageispageone.com/the-book/">Mark Baker, Every Page is Page One</a></li>
+<li><a href="https://www.writethedocs.org/guide/writing/docs-principles/">Write the Docs principles</a></li>
+<li><a href="https://developers.google.com/style/highlights">Google developer documentation style guide</a></li>
+<li><a href="https://www.thegooddocsproject.dev/template">The Good Docs Project templates</a></li>
+<li><a href="https://www.nngroup.com/articles/tabs-used-right/">NN/g, Tabs used right</a></li>
+<li><a href="https://ahrefs.com/blog/llmstxt-study/">Ahrefs llms.txt study</a></li>
+<li><a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals">Vercel, AGENTS.md agent evals</a></li>
+<li><a href="https://docs.kapa.ai/improving/writing-best-practices">kapa.ai writing best practices</a></li>
+<li><a href="https://platform.claude.com/docs/en/home">Claude Platform docs</a> and <a href="https://code.claude.com/docs/en/overview">Claude Code docs</a></li>
+<li><a href="https://developers.openai.com/">OpenAI developer docs</a></li>
+<li><a href="https://ai.google.dev/">Gemini API docs</a>, <a href="https://docs.mistral.ai/">Mistral</a>, <a href="https://docs.cohere.com/">Cohere</a></li>
+<li><a href="https://docs.stripe.com/">Stripe</a>, <a href="https://vercel.com/docs">Vercel</a>, <a href="https://developers.cloudflare.com/">Cloudflare</a></li>
+<li><a href="https://www.mintlify.com/docs/organize/navigation">Mintlify navigation</a>, <a href="https://starlight.astro.build/">Starlight</a></li>
+<li><a href="https://www.twilio.com/docs/segment">Segment</a>, <a href="https://www.rudderstack.com/docs/">RudderStack</a>, <a href="https://posthog.com/docs/libraries">PostHog libraries</a></li>
+<li><a href="https://fivetran.com/docs/connectors/applications/salesforce">Fivetran connector page</a>, <a href="https://docs.hightouch.com/destinations/braze">Hightouch destination page</a></li>
+<li><a href="https://docs.tecton.ai/docs/introduction">Tecton</a>, <a href="https://docs.hopsworks.ai/latest/">Hopsworks</a></li>
+</ul>
+</details>
+</main>
+</div>
+
+<script>
+(function () {
+  var mock = document.getElementById('mock');
+  var l = document.getElementById('mock-light'), d = document.getElementById('mock-dark');
+  function set(dark) {
+    mock.classList.toggle('dark', dark);
+    l.setAttribute('aria-pressed', String(!dark));
+    d.setAttribute('aria-pressed', String(dark));
+  }
+  l.addEventListener('click', function () { set(false); });
+  d.addEventListener('click', function () { set(true); });
+})();
+</script>
+
+</body></html>

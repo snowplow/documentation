@@ -1,8 +1,8 @@
 ---
 type: link
-title: "Querying your first events"
+title: "Query your first events"
 sidebar_position: 6.5
-sidebar_label: "Query the data"
+sidebar_label: "Query your first events"
 href: /docs/destinations/warehouses-lakes/querying-data/#connect-to-your-warehouse
 description: "This page moved to Query Snowplow data in your warehouse."
 ---

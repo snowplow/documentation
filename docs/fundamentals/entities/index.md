@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Snowplow entities"
-sidebar_label: "Entities (context)"
+sidebar_label: "Entities"
 sidebar_position: 2
 description: "Entities are a good way to deal with common fields across various events"
 keywords: ["entities", "context", "contextual data", "custom entities"]

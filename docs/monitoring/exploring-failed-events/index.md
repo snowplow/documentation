@@ -1,7 +1,7 @@
 ---
-title: "Load failed events into warehouse or lake"
+title: "Load failed events into your warehouse or lake"
 sidebar_position: 3
-sidebar_label: "Load failed events into table"
+sidebar_label: "Load failed events into your warehouse"
 description: "Load common types of failed events to a separate table in your warehouse or lake to analyze them easily."
 keywords: ["failed events loader", "load failed events", "warehouse failed events table"]
 ---

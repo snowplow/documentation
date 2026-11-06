@@ -14,7 +14,7 @@ export const PRODUCT_INDEXES = [
     file: 'docs/cdi/llms.txt',
     title: 'Snowplow CDI',
     description:
-      'Snowplow Customer Data Infrastructure: designing tracking, trackers and webhooks, the pipeline and enrichments, destinations, data models, identities, and monitoring.',
+      'Snowplow Customer Data Infrastructure: getting started, designing tracking, trackers and webhooks, testing and enrichments, destinations, querying and modeling data, identities, monitoring, and core concepts such as events, entities, and schemas.',
   },
   {
     sidebar: 'signals',
@@ -37,7 +37,7 @@ export const PRODUCT_INDEXES = [
     file: 'docs/platform/llms.txt',
     title: 'Snowplow platform and AI',
     description:
-      'Pages shared by Snowplow CDI and Signals: fundamentals, working with AI, account management, security and licensing, migration guides, and the glossary.',
+      'Running and administering Snowplow, for CDI and Signals: deployment options and setup, infrastructure and security, users and access, migration guides, working with AI, and the glossary.',
   },
 ]
 

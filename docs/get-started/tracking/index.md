@@ -1,5 +1,5 @@
 ---
-title: "Tracking your first events"
+title: "Track your first events"
 sidebar_position: 5
 sidebar_label: "Track events"
 description: "Tracking your first Snowplow events"

@@ -7,13 +7,15 @@ keywords: ["attributes", "attribute groups", "attribute keys", "warehouse config
 content_type: landing
 ---
 
+You can define attributes in Console, with the [Python SDK](/docs/signals/connection/reference/index.md#python-sdk), or with your coding agent through the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). The Node.js SDK only retrieves attribute values.
+
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value.
 
 Attributes are defined within [attribute groups](/docs/signals/attributes/attribute-groups/index.md). Each group specifies an [attribute key](/docs/signals/attributes/attribute-keys/index.md) (the identifier to calculate against), the [attributes](/docs/signals/attributes/attributes/index.md) to compute, and a data source — either a real-time event stream or a [warehouse table](/docs/signals/attributes/warehouse-config/index.md).
 
 This section covers the definition workflow:
 * [Attribute groups](/docs/signals/attributes/attribute-groups/index.md): create a group, choose a data source, and publish it
-* [Attributes](/docs/signals/attributes/attributes/index.md): configure the individual calculations within a group
+* [Attribute properties](/docs/signals/attributes/attributes/index.md): configure the individual calculations within a group
 * [Attribute keys](/docs/signals/attributes/attribute-keys/index.md): use built-in identifiers or define custom ones
 * [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md): sync pre-calculated warehouse tables to Signals
 

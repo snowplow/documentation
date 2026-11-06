@@ -1,5 +1,5 @@
 ---
-title: "Manage your Snowplow account using the Credentials API"
+title: "Create API keys and access tokens"
 sidebar_label: "Account management"
 date: "2020-02-15"
 sidebar_position: 8.7

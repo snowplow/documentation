@@ -1,5 +1,5 @@
 ---
-title: "Setting up Snowplow CDI"
+title: "Set up Private Managed Cloud"
 sidebar_position: 3.5
 sidebar_label: "Setting up Snowplow CDI"
 description: "Get started with Snowplow Customer Data Infrastructure on Cloud or Private Managed Cloud with setup guides for AWS, Azure, and GCP."

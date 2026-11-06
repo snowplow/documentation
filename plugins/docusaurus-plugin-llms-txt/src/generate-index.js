@@ -3,6 +3,7 @@ import fs from 'node:fs/promises'
 import { htmlPathToMdPath, tutorialMdPath } from './write-pages.js'
 import { isPreviousVersion } from './version-utils.js'
 import { groupTutorialSteps } from './content-metadata.js'
+import { buildAgentInstructions } from './agent-instructions.js'
 
 /**
  * Generate llms.txt index file.
@@ -16,6 +17,7 @@ export async function generateIndex(outDir, pages, options) {
     siteDir,
     outdatedPrefixes,
     tutorialMeta,
+    agentInstructions = true,
   } = options
 
   const labelMap = await buildLabelMap(siteDir)
@@ -28,6 +30,10 @@ export async function generateIndex(outDir, pages, options) {
   if (siteDescription) {
     lines.push(`> ${siteDescription}`)
     lines.push('')
+  }
+
+  if (agentInstructions) {
+    lines.push(...(await buildAgentInstructions({ siteDir, siteUrl })))
   }
 
   const groups = [

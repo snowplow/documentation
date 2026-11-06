@@ -27,10 +27,18 @@ export default function pluginLlmsTxt(context, options) {
     contentSelectors = ['.theme-doc-markdown', 'article', 'main'],
     enableMarkdownFiles = true,
     enableLlmsFullTxt = true,
+    // Write instructions for AI agents at the top of llms.txt and llms-full.txt
+    agentInstructions = true,
   } = options
 
   return {
     name: 'docusaurus-plugin-llms-txt',
+
+    // Tell the theme which routes have a .md copy, so doc pages only link
+    // to Markdown files that exist
+    async contentLoaded({ actions }) {
+      actions.setGlobalData({ enableMarkdownFiles, excludeRoutes })
+    },
 
     async postBuild({ outDir }) {
       const siteUrl = (
@@ -120,6 +128,7 @@ export default function pluginLlmsTxt(context, options) {
         siteDir: context.siteDir,
         outdatedPrefixes,
         tutorialMeta,
+        agentInstructions,
       })
 
       // Generate llms-full.txt
@@ -129,6 +138,8 @@ export default function pluginLlmsTxt(context, options) {
           siteDescription,
           siteUrl,
           outdatedPrefixes,
+          siteDir: context.siteDir,
+          agentInstructions,
         })
       }
 

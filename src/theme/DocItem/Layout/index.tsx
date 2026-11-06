@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useWindowSize } from '@docusaurus/theme-common'
 import { useDoc, useDocsSidebar } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
@@ -19,10 +19,6 @@ import HeadJSONLD from '../../../components/SchemaPlugin'
 
 import ReleaseNoteMeta from '@site/src/components/release-notes/ReleaseNoteMeta'
 import BackToProduct from '@site/src/components/navigation/BackToProduct'
-import {
-  SHARED_SIDEBARS,
-  rememberProduct,
-} from '@site/src/components/navigation/products'
 import PageActions from '@site/src/components/PageActions'
 import Feedback from '@site/src/components/Feedback'
 import MobileToc from './MobileToc'
@@ -162,13 +158,6 @@ function DefaultLayout({ children }: Props): JSX.Element {
   const markdown = useMarkdownCopy()
   const sidebarName = useDocsSidebar()?.name
   const { pathname } = useLocation()
-  const sharedPage = !!sidebarName && SHARED_SIDEBARS.includes(sidebarName)
-
-  // Remember the product (CDI or Signals) for the "Back to" link on shared pages
-  useEffect(() => {
-    rememberProduct(sidebarName, pathname)
-  }, [sidebarName, pathname])
-
   return (
     <>
       <HeadJSONLD />
@@ -180,7 +169,7 @@ function DefaultLayout({ children }: Props): JSX.Element {
           <article className="doc-article">
             <AgentPointer sidebar={sidebarName} />
             <div className="doc-header">
-              {sharedPage && <BackToProduct />}
+              <BackToProduct sidebar={sidebarName} path={pathname} />
               <DocBreadcrumbs />
               {docTOC.mobile}
               {markdown && <PageActions markdown={markdown} />}

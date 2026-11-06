@@ -61,3 +61,61 @@ export function readLastProduct(): LastProduct | null {
   }
   return null
 }
+
+const ORIGIN_KEY = 'snowplow-docs:cross-product-origin'
+
+function readOrigin(): LastProduct | null {
+  try {
+    const raw = window.sessionStorage.getItem(ORIGIN_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    if (productForSidebar(parsed?.product) && typeof parsed.path === 'string') {
+      return parsed as LastProduct
+    }
+  } catch {
+    // Storage unavailable or malformed
+  }
+  return null
+}
+
+function writeOrigin(origin: LastProduct | null): void {
+  try {
+    if (origin) window.sessionStorage.setItem(ORIGIN_KEY, JSON.stringify(origin))
+    else window.sessionStorage.removeItem(ORIGIN_KEY)
+  } catch {
+    // Storage unavailable: the "Back to" link stays hidden
+  }
+}
+
+/**
+ * Work out where the "Back to" link on this page should go, then remember
+ * this page. Call once per page view, in the browser.
+ *
+ * - On shared pages (Reference, Platform & AI): back to the last product page.
+ * - On a product page reached from the other product (for example a tracker
+ *   page linked from the Signals docs): back to the page the reader came
+ *   from. The link stays while the reader browses the other product, and
+ *   clears when they return to the original product or open a product's
+ *   landing page from the switcher.
+ */
+export function resolveBackLink(
+  sidebar: string | undefined,
+  path: string
+): LastProduct | null {
+  const last = readLastProduct()
+  if (sidebar && SHARED_SIDEBARS.includes(sidebar)) return last
+
+  const current = productForSidebar(sidebar)
+  if (!current) return null
+
+  let origin = readOrigin()
+  const isLanding = PRODUCTS.some((p) => p.href === path)
+  if ((origin && origin.product === current.id) || isLanding) {
+    origin = null
+  } else if (!origin && last && last.product !== current.id) {
+    origin = last
+  }
+  writeOrigin(origin)
+  rememberProduct(sidebar, path)
+  return origin
+}

@@ -255,7 +255,7 @@ Cards, buttons, badges, code groups, steps, parameter tables, feature matrices, 
 A few common cases:
 
 * Put the maintenance group and latest version at the top of a tracker or package page with `<BadgeGroup>`, `<TierBadge tier="maintained" />`, and `<VersionBadge component="pythonTracker" />`. The version comes from `src/componentVersions.js`.
-* Mark the minimum version a feature needs with `<AppliesTo feature="asn-lookup-enrichment" />`. Add new features to `src/data/feature-versions.json`, which also feeds the versions and compatibility page.
+* Mark the minimum version a feature needs with `<AppliesTo feature="asn-lookup-enrichment" />`. Add new features to `src/data/feature-versions.json`, which also feeds the versions and compatibility page. The build fails if a marker names a version newer than the latest release.
 * Change the tracker feature matrix or the destinations catalog by editing `src/data/trackers.json` or `src/data/destinations.json`, not the pages.
 
 ## Sidebar and visibility

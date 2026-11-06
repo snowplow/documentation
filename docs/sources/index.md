@@ -33,7 +33,7 @@ All Snowplow trackers have open-source licenses (Apache 2.0 License, except for 
 
 ## Compare trackers
 
-This matrix shows which features each tracker supports, and its [maintenance group](/docs/sources/tracker-maintenance-classification/index.md). Use the filters to narrow it to one platform or tier. Each filtered view has its own URL, for example `?category=mobile`.
+This matrix shows which features each tracker supports, and its [maintenance group](/docs/sources/tracker-maintenance-classification/index.md). Use the filters to narrow it to one platform or tier. Each filtered view has its own URL, for example `?category=mobile`. For the latest version of each tracker, see [tracker versions](/docs/api-reference/versions/index.md#trackers).
 
 ```mdx-code-block
 import TrackerMatrix from '@site/src/components/catalogs/TrackerMatrix';

@@ -22,6 +22,33 @@ In short, almost everything is compatible with almost everything. We rarely chan
 
 You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
+## Trackers
+
+The latest version of each tracker. For other components, see [Latest versions](#latest-versions).
+
+| Tracker                                                             |        Latest version        |
+| :------------------------------------------------------------------ | :--------------------------: |
+| [JavaScript (Web and Node.js)](/docs/sources/web-trackers/index.md) | {versions.javaScriptTracker} |
+| [iOS](/docs/sources/mobile-trackers/index.md)                       |    {versions.iosTracker}     |
+| [Android](/docs/sources/mobile-trackers/index.md)                   |  {versions.androidTracker}   |
+| [React Native](/docs/sources/react-native-tracker/index.md)         | {versions.javaScriptTracker} |
+| [Flutter](/docs/sources/flutter-tracker/index.md)                   |  {versions.flutterTracker}   |
+| [WebView](/docs/sources/webview-tracker/index.md)                   |  {versions.webViewTracker}   |
+| [Roku](/docs/sources/roku-tracker/index.md)                         |    {versions.rokuTracker}    |
+| [Google AMP](/docs/sources/google-amp-tracker/index.md)             | {versions.googleAmpTracker}  |
+| [Pixel](/docs/sources/pixel-tracker/index.md)                       |   {versions.pixelTracker}    |
+| [Golang](/docs/sources/golang-tracker/index.md)                     |   {versions.golangTracker}   |
+| [.NET](/docs/sources/net-tracker/index.md)                          |   {versions.dotNetTracker}   |
+| [Java](/docs/sources/java-tracker/index.md)                         |    {versions.javaTracker}    |
+| [Python](/docs/sources/python-tracker/index.md)                     |   {versions.pythonTracker}   |
+| [Scala](/docs/sources/scala-tracker/index.md)                       |   {versions.scalaTracker}    |
+| [Ruby](/docs/sources/ruby-tracker/index.md)                         |    {versions.rubyTracker}    |
+| [Rust](/docs/sources/rust-tracker/index.md)                         |    {versions.rustTracker}    |
+| [PHP](/docs/sources/php-tracker/index.md)                           |    {versions.phpTracker}     |
+| [C++](/docs/sources/c-tracker/index.md)                             |    {versions.cppTracker}     |
+| [Unity](/docs/sources/unity-tracker/index.md)                       |   {versions.unityTracker}    |
+| [Lua](/docs/sources/lua-tracker/index.md)                           |    {versions.luaTracker}     |
+
 ## Upgrades and deprecation
 
 :::info[Snowplow CDI]
@@ -30,19 +57,30 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to d
 
 :::
 
-Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
+Some major upgrades might have breaking changes. In this case, we provide upgrade guides:
+
+* [Collector](/docs/api-reference/stream-collector/upgrade-guides/index.md)
+* [Enrich](/docs/api-reference/enrichment-components/upgrade-guides/index.md)
+* [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/index.md)
+* [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/upgrade-guides/index.md)
+* [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md)
+* [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/upgrade-guides/index.md)
+* [Snowbridge](/docs/api-reference/snowbridge/upgrade-guides/index.md)
+* [Snowplow Self-Hosted](/docs/get-started/self-hosted/upgrade-guide/index.md)
 
 From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](https://community.snowplow.io/).
 
 ## Feature availability by version
 
-Some features need a minimum version of a component. Pages that document these features show an inline marker, such as <AppliesTo feature="asn-lookup-enrichment" />, generated from the same list as this table. The list is in `src/data/feature-versions.json`, and the build fails if a marker names a version newer than the latest release.
+Some features need a minimum version of a component. Pages that document these features show an inline marker, such as <AppliesTo feature="asn-lookup-enrichment" />, generated from the same list as this table.
 
 <FeatureVersionTable />
 
 ---
 
 ## Latest versions
+
+The pipeline component versions matter mainly if you run Snowplow Self-Hosted.
 
 ### Core pipeline
 
@@ -113,31 +151,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | :------------------------------------------------------------------------------------- | :------------------------: |
 | [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)         |   {versions.igluServer}    |
 | [`igluctl` utility](/docs/api-reference/iglu/igluctl/index.md)                       |     {versions.igluctl}     |
-
-### Trackers
-
-| Tracker                                                             |        Latest version        |
-| :------------------------------------------------------------------ | :--------------------------: |
-| [JavaScript (Web and Node.js)](/docs/sources/web-trackers/index.md) | {versions.javaScriptTracker} |
-| [iOS](/docs/sources/mobile-trackers/index.md)                       |    {versions.iosTracker}     |
-| [Android](/docs/sources/mobile-trackers/index.md)                   |  {versions.androidTracker}   |
-| [React Native](/docs/sources/react-native-tracker/index.md)         | {versions.javaScriptTracker} |
-| [Flutter](/docs/sources/flutter-tracker/index.md)                   |  {versions.flutterTracker}   |
-| [WebView](/docs/sources/webview-tracker/index.md)                   |  {versions.webViewTracker}   |
-| [Roku](/docs/sources/roku-tracker/index.md)                         |    {versions.rokuTracker}    |
-| [Google AMP](/docs/sources/google-amp-tracker/index.md)             | {versions.googleAmpTracker}  |
-| [Pixel](/docs/sources/pixel-tracker/index.md)                       |   {versions.pixelTracker}    |
-| [Golang](/docs/sources/golang-tracker/index.md)                     |   {versions.golangTracker}   |
-| [.NET](/docs/sources/net-tracker/index.md)                          |   {versions.dotNetTracker}   |
-| [Java](/docs/sources/java-tracker/index.md)                         |    {versions.javaTracker}    |
-| [Python](/docs/sources/python-tracker/index.md)                     |   {versions.pythonTracker}   |
-| [Scala](/docs/sources/scala-tracker/index.md)                       |   {versions.scalaTracker}    |
-| [Ruby](/docs/sources/ruby-tracker/index.md)                         |    {versions.rubyTracker}    |
-| [Rust](/docs/sources/rust-tracker/index.md)                         |    {versions.rustTracker}    |
-| [PHP](/docs/sources/php-tracker/index.md)                           |    {versions.phpTracker}     |
-| [C++](/docs/sources/c-tracker/index.md)                             |    {versions.cppTracker}     |
-| [Unity](/docs/sources/unity-tracker/index.md)                       |   {versions.unityTracker}    |
-| [Lua](/docs/sources/lua-tracker/index.md)                           |    {versions.luaTracker}     |
 
 ### Data models
 

@@ -80,7 +80,7 @@ Criteria are the conditional rules that determine when an intervention should tr
 An intervention is sent only the first time the criteria are met. Read an example of how this works in the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example). The [`changed` operator](#the-changed-operator) is the exception: it sends the intervention every time the attribute's value changes.
 :::
 
-Criteria can reference [formula attributes](/docs/signals/attributes/formula-attributes/index.md) as well as stored attributes. The intervention [preview](#preview) doesn't support criteria on formula attributes yet.
+Criteria can reference [formula attributes](/docs/signals/attributes/formula-attributes/index.md) as well as stored attributes. The intervention [preview](#preview) doesn't support criteria on formula attributes yet. Criteria also can't use [map formulas](/docs/signals/attributes/map-formulas/index.md) or other formulas over category counts yet: read them through a service instead.
 
 When a referenced attribute is updated, the updated and previous states are evaluated against the criteria. If the previous state did not meet the conditions but the newly updated state does, the trigger activates. Criteria always refer to the latest published version of the attribute group that contains the attribute.
 

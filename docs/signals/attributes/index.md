@@ -14,6 +14,7 @@ This section covers the definition workflow:
 * [Attribute groups](/docs/signals/attributes/attribute-groups/index.md): create a group, choose a data source, and publish it
 * [Attributes](/docs/signals/attributes/attributes/index.md): configure the individual calculations within a group
 * [Formula attributes](/docs/signals/attributes/formula-attributes/index.md): combine a stream group's attributes into ratios, scores, flags, and tiers
+* [Map formulas](/docs/signals/attributes/map-formulas/index.md): weight, add, and rank category counts, for example to score a user's interest per channel
 * [Attribute keys](/docs/signals/attributes/attribute-keys/index.md): use built-in identifiers or define custom ones
 * [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md): sync pre-calculated warehouse tables to Signals
 

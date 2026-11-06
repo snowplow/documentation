@@ -11,7 +11,7 @@ content_type: sdk
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="node-js" />
 ```
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.

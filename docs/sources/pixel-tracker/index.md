@@ -8,7 +8,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="maintained" />
+<TrackerTier id="pixel" />
 ```
 
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.

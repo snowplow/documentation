@@ -3,12 +3,15 @@ title: "Configure Kafka as a Snowbridge target"
 sidebar_label: "Kafka"
 description: "Configure Kafka target for Snowplow Snowbridge to write data to Kafka topics with SASL authentication and TLS encryption."
 keywords: ["snowbridge config", "kafka target", "kafka producer", "sasl authentication", "kafka topic"]
+content_type: reference
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+<IntegrationBadges id="snowbridge-kafka" />
 
 Where SASL is used, it may be enabled via the `enable_sasl`, `sasl_username`, and `sasl_password` and `sasl_algorithm` options.
 

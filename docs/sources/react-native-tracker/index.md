@@ -12,7 +12,7 @@ content_type: sdk
 import {versions} from '@site/src/componentVersions';
 
 <BadgeGroup>
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="react-native" />
 <VersionBadge component="javaScriptTracker" href="https://www.npmjs.com/package/@snowplow/react-native-tracker" />
 </BadgeGroup>
 ```

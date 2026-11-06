@@ -4,7 +4,10 @@ sidebar_label: "Custom streaming"
 sidebar_position: 4
 description: "Build custom consumers for Snowplow event streams using AWS Lambda, GCP Cloud Functions, KCL applications, or Pub/Sub client libraries to integrate with any third-party platform."
 keywords: ["custom streaming", "custom integrations", "AWS Lambda", "Cloud Functions", "stream consumers", "event processing"]
+content_type: integration
 ---
+
+<IntegrationBadges id="custom-stream" />
 
 ```mdx-code-block
 <Availability

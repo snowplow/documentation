@@ -9,7 +9,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="maintained" />
+<TrackerTier id="java" />
 ```
 
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.

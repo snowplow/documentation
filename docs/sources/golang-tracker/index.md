@@ -8,7 +8,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="golang" />
 ```
 
 The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) allows you to track Snowplow events from your Golang apps and servers.

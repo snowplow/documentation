@@ -12,7 +12,7 @@ content_type: sdk
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="web" />
 ```
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.

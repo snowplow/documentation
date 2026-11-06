@@ -11,7 +11,7 @@ content_type: sdk
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="lua" />
 ```
 
 The Snowplow Lua Tracker allows you to track Snowplow events in your Lua applications.

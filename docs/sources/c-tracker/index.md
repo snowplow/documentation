@@ -9,7 +9,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="cpp" />
 ```
 
 The [Snowplow C++ Tracker](https://github.com/snowplow/snowplow-cpp-tracker) allows you to track Snowplow events from your C++ apps, games and servers.

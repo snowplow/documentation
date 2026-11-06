@@ -3,12 +3,15 @@ title: "Configure HTTP as a Snowbridge target"
 sidebar_label: "HTTP"
 description: "Configure HTTP target for Snowplow Snowbridge to send data over HTTP with authentication, OAuth2, request templating, and response rules."
 keywords: ["snowbridge config", "http target", "http endpoint", "oauth2", "request templating", "gtm server side"]
+content_type: reference
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+<IntegrationBadges id="snowbridge-http" />
 
 :::note
 Version 4.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-4-X-X/index.md)

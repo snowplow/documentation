@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="early-release" />
+<TrackerTier id="webview" />
 ```
 
 <p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>

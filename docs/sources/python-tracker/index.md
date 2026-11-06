@@ -10,7 +10,7 @@ content_type: sdk
 
 ```mdx-code-block
 <BadgeGroup>
-<TierBadge tier="early-release" />
+<TrackerTier id="python" />
 <VersionBadge component="pythonTracker" href="https://pypi.org/project/snowplow-tracker/" />
 </BadgeGroup>
 ```

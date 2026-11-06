@@ -76,6 +76,17 @@ Badges are text, not images, so they read correctly in dark mode, in screen read
 | `<LicenseBadge license="..." />` | `scl`, `spal`, `slul` | <LicenseBadge license="scl" /> |
 | `<Badge>` | Anything else, with `variant`, `tone`, and `href` | <Badge>Label</Badge> |
 
+### Support tier labels
+
+Tracker and integration landing pages read their labels from the catalog manifests, so a page can't disagree with the tracker matrix or the destinations catalog. Change the manifest, not the page.
+
+| Component | Use for | Example |
+| --- | --- | --- |
+| `<TrackerTier id="..." />` | A tracker's maintenance group, from `src/data/trackers.json` | <TrackerTier id="python" /> |
+| `<IntegrationBadges id="..." />` | Who supports a destination, its status, type, delivery, and clouds, from `src/data/destinations.json` | <IntegrationBadges id="forwarder-braze" /> |
+
+Put the label row first on the page, after any imports.
+
 `<Availability>` lists the platforms a feature is available on, with an optional note in a popover:
 
 <Availability available={['cloud', 'pmc']} note="An example note about where this feature is available." />

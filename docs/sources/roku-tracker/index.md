@@ -11,7 +11,7 @@ content_type: sdk
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="roku" />
 ```
 
 <p>The Snowplow Roku Tracker allows you to track Snowplow events in your BrightScript and BrighterScript applications. The tracker is compatible with SceneGraph channels. The current version is {versions.rokuTracker}.</p>

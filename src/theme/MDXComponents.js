@@ -19,6 +19,7 @@ import ParamTable, { Param } from '@site/src/components/ParamTable'
 import FeatureMatrix from '@site/src/components/FeatureMatrix'
 import AppliesTo from '@site/src/components/AppliesTo'
 import NotebookLinks from '@site/src/components/NotebookLinks'
+import { IntegrationBadges, TrackerTier } from '@site/src/components/catalogs/IntegrationBadges'
 
 /**
  * Components available in every MDX file without an import. The component
@@ -47,4 +48,6 @@ export default {
   Param,
   FeatureMatrix,
   AppliesTo,
+  IntegrationBadges,
+  TrackerTier,
 }

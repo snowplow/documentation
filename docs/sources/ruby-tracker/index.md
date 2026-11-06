@@ -11,7 +11,7 @@ content_type: sdk
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 
-<TierBadge tier="actively-maintained" />
+<TrackerTier id="ruby" />
 ```
 
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.

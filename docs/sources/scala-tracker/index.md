@@ -8,7 +8,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="maintained" />
+<TrackerTier id="scala" />
 ```
 
 The Snowplow Scala Tracker allows you to track Snowplow events in your Scala apps and servers. The tracker should be straightforward to use if you are comfortable with Scala development.

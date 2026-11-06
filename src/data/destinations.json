@@ -1,5 +1,5 @@
 {
-  "$comment": "Destinations catalog manifest. Renders the matrix on /docs/destinations/ (<DestinationsCatalog>). Sources: the pages under docs/destinations/ and docs/api-reference/snowbridge/configuration/targets/. delivery: streaming (continuous), real-time (per event, seconds), or batch (on a schedule or window). cloud: the pipeline clouds the destination works with; any means it doesn't depend on the pipeline cloud.",
+  "$comment": "Destinations catalog manifest. support: who builds and supports the integration (snowplow, the default, or partner); shown by <IntegrationBadges> on each destination page. Renders the matrix on /docs/destinations/ (<DestinationsCatalog>). Sources: the pages under docs/destinations/ and docs/api-reference/snowbridge/configuration/targets/. delivery: streaming (continuous), real-time (per event, seconds), or batch (on a schedule or window). cloud: the pipeline clouds the destination works with; any means it doesn't depend on the pipeline cloud.",
   "types": {
     "loader": "Warehouse or lake loader",
     "forwarder": "Event forwarder",
@@ -17,6 +17,10 @@
     "available": "Available",
     "add-on": "Paid add-on",
     "partner": "Partner tool"
+  },
+  "support": {
+    "snowplow": { "label": "Snowplow supported", "description": "Built and supported by Snowplow" },
+    "partner": { "label": "Partner supported", "description": "Built and supported by a partner. Snowplow documents how to use it with Snowplow data." }
   },
   "destinations": [
     { "id": "snowflake", "name": "Snowflake", "href": "/docs/destinations/warehouses-lakes/snowflake/", "type": "loader", "delivery": ["streaming", "batch"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Snowflake Streaming Loader, or RDB Loader for batch" },
@@ -47,6 +51,6 @@
 
     { "id": "custom-stream", "name": "Your own stream consumer", "href": "/docs/destinations/custom-streaming/", "type": "custom-stream", "delivery": ["streaming"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Private Managed Cloud and Self-Hosted only" },
 
-    { "id": "reverse-etl", "name": "Fivetran Activations", "href": "/docs/destinations/reverse-etl/", "type": "reverse-etl", "delivery": ["batch"], "cloud": ["any"], "status": "partner", "detail": "Sync warehouse tables to ad, CRM, and marketing tools" }
+    { "id": "reverse-etl", "name": "Fivetran Activations", "href": "/docs/destinations/reverse-etl/", "type": "reverse-etl", "delivery": ["batch"], "cloud": ["any"], "status": "partner", "support": "partner", "detail": "Sync warehouse tables to ad, CRM, and marketing tools" }
   ]
 }

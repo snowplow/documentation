@@ -8,7 +8,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="maintained" />
+<TrackerTier id="dotnet" />
 ```
 
 The Snowplow .NET Tracker allows you to track Snowplow events from your .NET websites and desktop applications. It's split into two libraries:

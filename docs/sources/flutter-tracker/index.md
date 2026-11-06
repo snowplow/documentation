@@ -9,7 +9,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="early-release" />
+<TrackerTier id="flutter" />
 ```
 
 The Snowplow Flutter Tracker allows you to add analytics to your Flutter apps for Web, Android, and iOS when using a Snowplow pipeline.

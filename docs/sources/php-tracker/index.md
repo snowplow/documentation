@@ -10,7 +10,7 @@ content_type: sdk
 
 ```mdx-code-block
 <BadgeGroup>
-<TierBadge tier="early-release" />
+<TrackerTier id="php" />
 <VersionBadge component="phpTracker" href="https://packagist.org/packages/snowplow/snowplow-tracker" />
 </BadgeGroup>
 ```

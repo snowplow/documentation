@@ -5,12 +5,15 @@ description: "Send Snowplow events to Mixpanel for product analytics and user be
 sidebar_position: 3.5
 keywords: ["mixpanel", "event forwarding", "product analytics", "user tracking"]
 date: "2025-11-24"
+content_type: integration
 ---
 
 ```mdx-code-block
 import EventForwardingSchemaTable from '@site/src/components/EventForwardingSchemaTable';
 import mixpanelSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/mixpanel.json';
 ```
+
+<IntegrationBadges id="forwarder-mixpanel" />
 
 Send Snowplow events to Mixpanel to power product analytics, user behavior tracking, and funnel analysis using Mixpanel's [Import API](https://developer.mixpanel.com/reference/import-events).
 

@@ -65,8 +65,8 @@ Every template stays within 3-5 H2 sections. Don't add a "Next steps" H2: end wi
 | `how-to` | Before you begin · Steps (in `<Steps>`, verify last) · Troubleshooting (exact error string → fix; omit if none known) |
 | `tutorial` | What you'll build (with "≈ N min") · Requirements · Steps · Clean up |
 | `reference` | Parameters (`<ParamTable>`) · Example · Errors · Version applicability (`<AppliesTo>`) |
-| `integration` | Compatibility · Connect · Configure · Troubleshooting |
-| `sdk` | Feature support · Install and initialize · Track your first event (show the tier with `<TierBadge>`) |
+| `integration` | Compatibility (show support and status with `<IntegrationBadges id>`) · Connect · Configure · Troubleshooting |
+| `sdk` | Feature support · Install and initialize · Track your first event (show the tier with `<TrackerTier id>`) |
 | `landing` | Task table ("I want to" → page), then grouped links |
 
 Never mix how-to and reference content on one page. Split it into two pages that link to each other.

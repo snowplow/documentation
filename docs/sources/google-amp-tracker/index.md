@@ -9,7 +9,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="maintained" />
+<TrackerTier id="google-amp" />
 ```
 
 Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project](https://www.ampproject.org/) (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.

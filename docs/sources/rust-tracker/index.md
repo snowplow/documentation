@@ -9,7 +9,7 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-<TierBadge tier="early-release" />
+<TrackerTier id="rust" />
 ```
 
 The Snowplow Rust Tracker allows you to add analytics to your Rust apps.

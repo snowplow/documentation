@@ -1,47 +1,44 @@
 ---
-title: "Configure the Collector"
+title: "Check your Collector configuration"
 sidebar_position: 1
 sidebar_label: "Collector"
-description: "View and configure Snowplow collector settings via Console UI or API, including cookie domains, paths, and HTTP headers."
-keywords: ["collector configuration", "collector API", "HTTP headers", "event collector"]
+description: "View your Snowplow Collector configuration in Console, or retrieve it from the Console API to add Collector health checks to your own monitoring."
+keywords: ["collector configuration", "collector API", "collector health check", "event collector", "cookie domains"]
+content_type: how-to
 ---
 
-Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+The Collector is the pipeline component that receives events from your [trackers](/docs/sources/index.md) and webhooks. Its configuration sets the cookie domains, the request paths it accepts, and its cookie attributes. Check it when you set up a new tracker, change your cookie domain, or debug events that don't arrive.
 
-Read more about the technical aspects of the collector [here](/docs/api-reference/stream-collector/index.md).
+You can view the configuration in Snowplow Console, or retrieve it from the Console API. Snowplow monitors Collector health around the clock, but if you want Collector checks in your own monitoring systems, use the API: read the Collector endpoints and settings from it, then run your health checks against them. That way your checks follow any configuration change.
 
-## Viewing collector configuration in Snowplow Console
+To look up a field in the API response, or the HTTP headers the Collector accepts, see the [Collector configuration reference](/docs/pipeline/collector/configuration-reference/index.md). If you run Snowplow Self-Hosted, configure the Collector with its [configuration file](/docs/api-reference/stream-collector/configure/index.md) instead.
 
-The easiest way to access collector configuration is to view it within the Snowplow Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
+## Before you begin
+
+You'll need:
+
+* Access to your pipeline in [Snowplow Console](https://console.snowplowanalytics.com)
+* To use the API, a Console user account for API access, and a `clientid` and `clientsecret` for the API service. Create the user on the [**Users** page](https://console.snowplowanalytics.com/users), and request the credentials from the [**Credentials** page](https://console.snowplowanalytics.com/credentials) in Console.
+
+## Steps
+
+To only view the configuration, the first step is enough. The remaining steps retrieve the same configuration from the API.
+
+<Steps>
+
+### View the configuration in Console
+
+Log in to Console and click **Pipeline Configuration** in the navigation menu for your pipeline.
 
 ![Snowplow Console showing a pipeline with the Configuration tab selected (indicated by a red arrow), and the left sidebar showing configuration sections including COLLECTOR (Collector domains, Tracker request paths, Collector settings), VALIDATION, COMPONENTS, and ALERTS.](images/image-1.png)
 
-Selecting the pipeline configuration tab
-
-You can then view your configuration, with the default values displayed for empty fields:
+Console shows your configuration, with default values displayed for empty fields. This view reads the same API that the rest of these steps use.
 
 ![Snowplow Console Collector configuration page showing the Tracker request paths section with a table of default paths: POST at /com.snowplowanalytics.snowplow/tp2, Redirect at /r/tp2, and Iglu at /com.snowplowanalytics.iglu/v1.](images/image-2.png)
 
-Example collector configuration
+### Get an access token
 
-This view is consuming the respective API that you can also access, as discussed in the next section.
-
-## Consuming the collector configuration API
-
-As a Snowplow customer you already benefit from 24x7 monitoring of pipeline collector health. If you wish to add collector monitoring to your internal monitoring systems nevertheless, the maintainable way to do this is to retrieve collector endpoints and other configuration values via the available API, then invoke your health checks on them.
-
-### Authorization
-
-To start using the API you’ll need authorization credentials.
-
-First, you’ll need to:
-
-- [Create a new user account for your API authorization in console](https://console.snowplowanalytics.com/users)
-- Request the `clientid` and `clientsecret` for the API service from the [admin section in console](https://console.snowplowanalytics.com/credentials).
-
-Once you have these you can exchange credentials for a token.
-
-Here is an example CURL to use to fetch the token:
+Exchange your credentials for a token:
 
 ```bash
 curl --request POST \
@@ -55,101 +52,32 @@ curl --request POST \
   --data client_secret='YOUR_CLIENT_SECRET'
 ```
 
-This token will be needed in any request to the API in the form of `Authorization: Bearer {{token}}`
+Send the token with every API request, in the `Authorization: Bearer {{token}}` header.
 
-### Getting started
+### Find your organization and pipeline IDs
 
-You can have a look at and interact with the collector configuration endpoint in the normative [API specification](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/configuration/getOrganizationsOrganizationidResourcesV1PipelinesPipelineidConfigurationCollector).
+Your organization ID is on the [**Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
-### Authorizing in the API documentation
-
-To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
-
-The endpoint for the API is:
-
-`https://console.snowplowanalytics.com/api/msc/v1/organizations/{organizationId}/resources/v1/pipelines/{pipelineId}/configuration/collector`
-
-and the only supported HTTP verb is `GET`.
-
-You can find your organization ID [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
-
-Similarly, the pipeline ID can be found in the location bar as the second UUID there:
+The pipeline ID is the second UUID in the browser's address bar when you view the pipeline in Console:
 
 ![Snowplow Console browser address bar showing a URL where the pipeline ID UUID is highlighted as the second UUID in the path.](images/image-4.png)
 
-The Pipeline ID is the second UUID in the location bar.
+### Call the configuration endpoint
 
-### Invoking the API
+Send a `GET` request to the Collector configuration endpoint, with your IDs and token:
 
-Invoking this API will return an object of the following form:
-
-```json
-{
-    "cookieDomains":
-    {
-        "fallback": "mydomain.com",
-        "domains": []
-    },
-    "paths": {
-        "post": {
-            "paths": []
-        },
-        "webhook": {
-            "paths": []
-        },
-        "redirect": {
-            "paths": [],
-            "enabled": true
-        }
-    },
-    "cookieAttributes": {
-        "secure": true,
-        "sameSite": "None",
-        "httpOnly": false
-    },
-    "blockUnencrypted": false
-}
+```bash
+curl \
+  --header 'Authorization: Bearer {{token}}' \
+  'https://console.snowplowanalytics.com/api/msc/v1/organizations/{organizationId}/resources/v1/pipelines/{pipelineId}/configuration/collector'
 ```
 
-The `cookieDomains` object is always expected to be available and holds two properties:
+To try the endpoint in your browser instead, open the [API specification](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/configuration/getOrganizationsOrganizationidResourcesV1PipelinesPipelineidConfigurationCollector), click **Authorize** at the top of the page, and enter your token. The specification then uses it for every request you send.
 
-- `domains` is a non-optional list of domains for which collector cookies are being set. The value may be an empty list.
-- `fallback` represents the default fallback cookie domain. The property is optional and if unavailable it defaults to `none`.
+### Check the response
 
-The `paths` object is always expected to be available and holds the following three non-optional properties:
+The response is a JSON object with the `cookieDomains`, `paths`, `cookieAttributes`, and `blockUnencrypted` fields. Compare it with the values Console showed in the first step. The [Collector configuration reference](/docs/pipeline/collector/configuration-reference/index.md#response-fields) describes each field and its default.
 
-- `post` contains a non-optional list of paths that accept Tracker Protocol 2 compatible POST requests
-- `redirect` contains
-    - a non-optional flag weather redirect-based tracking is enabled, and
-    - a non-optional list of paths that support this kind of tracking
-- `webhook` contains a non-optional list of paths for tracking events sent via a `GET` or `POST` request containing an [Iglu](https://github.com/snowplow/iglu)\-compatible event payload.
+To monitor the Collector, have your monitoring system read the configuration from this endpoint, and point your health checks at the request paths it lists.
 
-The `cookieAttributes` object is always expected to be available and contains three non-optional properties:
-
-- `secure` is a boolean value indicating whether secure connections should be enforced;
-- `httpOnly` is a boolean value set to true if the cookie must be inaccessible to non-HTTP requests; and
-- `sameSite` is a string that can take one of the following values:
-    - `lax`
-    - `none`
-    - `strict`
-
-Finally, `blockUnencrypted` is an optional boolean property indicating whether un-encrypted traffic should be allowed or not. If not available, the default is `false` (i.e. "do not block").
-
-## Configuring the collector for Snowplow Self-Hosted users
-
-After you have installed the [Collector](/docs/api-reference/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/self-hosted/index.md) or [manually](/docs/api-reference/stream-collector/setup/index.md)), you can follow the [reference page](/docs/api-reference/stream-collector/configure/index.md) to configure it.
-
-## HTTP request headers
-
-The Collector will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.
-
-Additionally, the following two headers can be sent on requests:
-
-| Header       | Allowed Values     | Description                                                                                                |
-| ------------ | ------------------ | ---------------------------------------------------------------------------------------------------------- |
-| Content-Type | `application/json` | See [MDN Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)             |
-| SP-Anonymous | `*`                | Enables Server Side Anonymization, preventing the User IP Address and Network User ID from being collected |
-
-### Cookie header
-
-The Collector will collect any cookie information sent in the `Cookie` HTTP header. Cookies can be attached to events using the [Cookie extractor enrichment](/docs/pipeline/enrichments/available-enrichments/cookie-extractor-enrichment/index.md)
+</Steps>

@@ -31,7 +31,7 @@ Two properties are worth planning around:
 
 ## Connect to the server
 
-To authenticate you need your Snowplow API key and key ID, passed as the `X-API-Key-Id` and `X-API-Key` headers. The server rejects connections that don't send both headers. See [connection credentials](/docs/signals/connection/index.md#connection-credentials) for where to find each value.
+To authenticate you need your Snowplow API key and key ID, passed as the `X-API-Key-Id` and `X-API-Key` headers. The server rejects connections that don't send both headers. See [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials) for where to find each value.
 
 :::warning[Connect from server-side code]
 The API key grants access to your organization's Signals data. Connect to the server from server-side code and keep the credentials in your environment secrets. Never ship them to a browser or a mobile app.

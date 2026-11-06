@@ -97,7 +97,7 @@ The Signals sidebar follows the order you set Signals up in: connect, define att
     href="/docs/signals/connection/"
     description="Connect to Signals from Python, Node.js, the browser, or over HTTP."
     links={[
-      { label: 'Signals Python SDK', href: '/docs/signals/connection/#signals-python-sdk' },
+      { label: 'Signals Python SDK', href: '/docs/signals/connection/reference/#python-sdk' },
       { label: 'Define attributes in code', href: '/docs/signals/attributes/' },
       { label: 'Define interventions in code', href: '/docs/signals/interventions/' },
     ]}

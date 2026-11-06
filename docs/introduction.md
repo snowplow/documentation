@@ -104,6 +104,46 @@ Install the [Snowplow MCP](/docs/ai/snowplow-mcp/index.md) to set up Snowplow th
 
 </CardGrid>
 
+## Explore Snowplow Signals
+
+Signals computes real-time attributes from your event stream and serves them to applications and AI agents.
+
+<CardGrid cols={3} breakout>
+  <FeaturedSection
+    title="Get started with Signals"
+    description="Set up Signals and learn how it works"
+    href="/docs/signals/"
+  >
+    [Signals quickstart](/docs/signals/quickstart/index.md)
+    [Set up Signals](/docs/signals/setup/index.md)
+    [Signals fundamentals](/docs/signals/concepts/index.md)
+    [Connect to Signals](/docs/signals/connection/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Attributes and interventions"
+    description="Define what to calculate and when to act"
+    href="/docs/signals/attributes/"
+  >
+    [Attribute groups](/docs/signals/attributes/attribute-groups/index.md)
+    [Attribute keys](/docs/signals/attributes/attribute-keys/index.md)
+    [Interventions](/docs/signals/interventions/index.md)
+    [Agentic contexts](/docs/signals/agentic-contexts/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Use Signals in your application"
+    description="Serve attributes to applications and AI agents"
+    href="/docs/signals/applications/"
+  >
+    [Define services](/docs/signals/applications/services/index.md)
+    [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
+    [Subscribe to interventions](/docs/signals/applications/subscribe/index.md)
+    [Signals MCP server](/docs/signals/applications/mcp-server/index.md)
+  </FeaturedSection>
+
+</CardGrid>
+
 ## Build with Snowplow
 
 :::tip[More resources]

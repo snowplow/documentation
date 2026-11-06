@@ -1,6 +1,6 @@
 import type { Config } from '@docusaurus/types'
 
-const sidebar = require('./sidebars')
+const { sidebarItemsGenerator } = require('./utils/sidebar-items-generator')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
@@ -76,15 +76,9 @@ const config: Config = {
             ],
             katex,
           ],
-          async sidebarItemsGenerator({
-            defaultSidebarItemsGenerator,
-            ...args
-          }) {
-            return sidebar.swapDocItemsToLinkItems(
-              await defaultSidebarItemsGenerator(args),
-              args.docs
-            )
-          },
+          // Four sidebars (cdi, signals, reference, platform) built from docs/
+          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarItemsGenerator,
         },
         theme: {
           customCss: [

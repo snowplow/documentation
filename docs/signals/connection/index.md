@@ -4,8 +4,6 @@ sidebar_position: 35
 sidebar_label: "Connect to Signals"
 description: "Connect to Signals using the Python SDK, Node.js SDK, or REST API with your deployment credentials, to manage configurations or consume calculated values."
 keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "connection credentials"]
-sidebar_custom_props:
-  space_above: true
 ---
 
 You'll connect to Signals for one of two reasons:

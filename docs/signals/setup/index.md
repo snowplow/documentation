@@ -5,8 +5,6 @@ sidebar_label: "Set up Signals"
 description: "Enable Signals in Snowplow Console and connect your warehouse to deploy Signals infrastructure alongside your pipeline."
 keywords: ["signals setup", "enable signals", "warehouse connection", "signals deployment"]
 date: "2026-06-11"
-sidebar_custom_props:
-  space_above: true
 ---
 
 Before you can define attributes or interventions, you'll need to enable Signals for your organization. This is a one-time task, done in [Snowplow Console](https://console.snowplowanalytics.com).

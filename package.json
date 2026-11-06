@@ -15,6 +15,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "format": "prettier --write .",
     "lint:css": "stylelint \"src/**/*.css\"",
+    "check:sidebars": "node utils/check-sidebars.js",
     "qa:a11y": "playwright test -c quality/playwright.config.mjs quality/a11y.spec.mjs",
     "qa:a11y:summary": "node quality/a11y-summary.mjs",
     "qa:visual": "playwright test -c quality/playwright.config.mjs quality/visual.spec.mjs",

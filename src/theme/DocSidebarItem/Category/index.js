@@ -169,7 +169,10 @@ export default function DocSidebarItemCategory({
           'menu__list-item-collapsible--active': isCurrentPage,
         })}
       >
-        {isSectionHeader && collapsible ? (
+        {isSectionHeader && !collapsible ? (
+          // A plain group label: sidebars.js groups are not links
+          <span className="menu__link section-header__label">{label}</span>
+        ) : isSectionHeader && collapsible ? (
           <button
             type="button"
             className={clsx('clean-btn', 'menu__link', 'section-header__toggle', {

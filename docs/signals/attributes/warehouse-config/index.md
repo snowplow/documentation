@@ -1,7 +1,7 @@
 ---
 title: "Sync warehouse tables to Signals"
 sidebar_position: 30
-sidebar_label: "Warehouse configuration"
+sidebar_label: "Sync warehouse tables"
 description: "Connect Signals to existing warehouse tables to sync pre-calculated attributes. Configure table details, timestamp fields, and field mappings using the Console or the Python SDK."
 keywords: ["warehouse attributes", "batch source", "warehouse tables", "field mapping", "backfill", "timestamp sync", "ExternalBatchAttributeGroup"]
 content_type: how-to
@@ -13,10 +13,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To sync existing, pre-calculated attributes from your warehouse to Signals, configure an attribute group with a warehouse source. No additional modeling is required — the batch engine reads rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
+To sync existing, pre-calculated attributes from your warehouse to Signals, configure an attribute group with a warehouse (batch) source. No additional modeling is required — the batch engine reads rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
 
 :::tip[Use stream attributes with backfill when possible]
-If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
+If your source data comes from Snowplow events, consider using a stream attribute group with [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
 :::
 
 ## Configure a warehouse source

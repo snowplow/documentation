@@ -17,7 +17,28 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
-Use events as the data source when you need attributes that update in real time, such as the number of products a user viewed in the last ten minutes. To bring in pre-calculated values such as CRM or transactional data, [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) instead. [Data sources](/docs/signals/concepts/index.md#data-sources) compares the two.
+Use events as the data source when you need attributes that update in real time, such as the number of products a user viewed in the last ten minutes. To bring in pre-calculated values such as CRM or transactional data, [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) instead. [Choose a data source](#choose-a-data-source) compares the options.
+
+## Choose a data source
+
+Whether to compute attributes in real time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
+* Stream for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's purchase history.
+* Warehouse to bring in modeled data from your warehouse, such as transactional data or CRM attributes.
+
+This table summarizes the options:
+
+| Feature                            | Stream                                                            | [Stream with backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) | [Warehouse](/docs/signals/attributes/warehouse-config/index.md) |
+| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Freshness                          | Real time                                                         | Real time, plus a one-off backfill up to the publish time                                       | Hourly by default, or every 6, 12, or 24 hours                   |
+| Real-time calculation              | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Period-based calculations          | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Lifetime calculations (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                                                       | ❌                                                                |
+| Historical data                    | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp                         | ✅ any pre-calculated data                                        |
+| Non-Snowplow data                  | ❌                                                                 | ❌                                                                                               | ✅                                                                |
+| Needs a warehouse connection       | ❌                                                                 | ✅                                                                                               | ✅                                                                |
+| Python SDK class                   | `StreamAttributeGroup`                                            | `StreamAttributeGroup` with `backfill_since_tstamp`                                             | `ExternalBatchAttributeGroup` with a `BatchSource`               |
+
+How backfill works is described in [How Signals works](/docs/signals/concepts/index.md#backfill). The rest of this page covers the stream source.
 
 ## Before you begin
 

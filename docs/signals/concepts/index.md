@@ -101,20 +101,7 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 
 ## Data sources
 
-Whether to compute attributes in real-time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
-* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's purchase history.
-* **Warehouse** to bring in modeled data from your warehouse, such as transactional data or CRM attributes
-
-This table summarizes the options for different types of processing:
-
-| Feature                                        | Stream                                                            | Stream with backfill                                                    | Warehouse                 |
-| ---------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------- |
-| Real-time calculation                           | ✅                                                                 | ✅                                                                       | ❌                         |
-| Period-based calculations                       | ✅                                                                 | ✅                                                                       | ❌                         |
-| Lifetime calculations (within TTL)                | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                               | ❌                         |
-| Historical data                                 | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp | ✅ any pre-calculated data |
-| Non-Snowplow data                               | ❌                                                                 | ❌                                                                       | ✅                         |
-| Warehouse connection required                   | ❌                                                                 | ✅                                                                       | ✅                         |
+Signals computes attributes in real time from the event stream, optionally backfilled from your warehouse, or syncs pre-calculated values from warehouse tables. To compare the options and pick one, see [Choose a data source](/docs/signals/data-sources/events/index.md#choose-a-data-source).
 
 ### Stream source
 

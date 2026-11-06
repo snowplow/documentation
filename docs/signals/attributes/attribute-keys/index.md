@@ -41,7 +41,7 @@ from snowplow_signals import (
 
 ## Custom attribute keys
 
-You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/concepts/index.md#data-sources).
+You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/data-sources/events/index.md#choose-a-data-source).
 
 For stream attribute groups, the key can be any property in your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md#common-fields) properties: fields of the core Snowplow event, available for all events

@@ -150,6 +150,12 @@ const config: Config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      // Light, dark, and system modes. System follows the reader's OS setting
+      // and is the default for first-time visitors.
+      colorMode: {
+        defaultMode: 'light',
+        respectPrefersColorScheme: true,
+      },
       docs: {
         sidebar: {
           autoCollapseCategories: true,

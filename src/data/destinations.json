@@ -1,0 +1,52 @@
+{
+  "$comment": "Destinations catalog manifest. Renders the matrix on /docs/destinations/ (<DestinationsCatalog>). Sources: the pages under docs/destinations/ and docs/api-reference/snowbridge/configuration/targets/. delivery: streaming (continuous), real-time (per event, seconds), or batch (on a schedule or window). cloud: the pipeline clouds the destination works with; any means it doesn't depend on the pipeline cloud.",
+  "types": {
+    "loader": "Warehouse or lake loader",
+    "forwarder": "Event forwarder",
+    "gtm-ss": "GTM Server Side tag",
+    "snowbridge": "Snowbridge target",
+    "custom-stream": "Custom stream consumer",
+    "reverse-etl": "Reverse ETL"
+  },
+  "delivery": {
+    "streaming": "Streaming",
+    "real-time": "Real time",
+    "batch": "Batch"
+  },
+  "status": {
+    "available": "Available",
+    "add-on": "Paid add-on",
+    "partner": "Partner tool"
+  },
+  "destinations": [
+    { "id": "snowflake", "name": "Snowflake", "href": "/docs/destinations/warehouses-lakes/snowflake/", "type": "loader", "delivery": ["streaming", "batch"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Snowflake Streaming Loader, or RDB Loader for batch" },
+    { "id": "databricks", "name": "Databricks", "href": "/docs/destinations/warehouses-lakes/databricks/", "type": "loader", "delivery": ["streaming", "batch"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Databricks Streaming Loader, Lake Loader, or RDB Loader on AWS" },
+    { "id": "bigquery", "name": "BigQuery", "href": "/docs/destinations/warehouses-lakes/bigquery/", "type": "loader", "delivery": ["streaming"], "cloud": ["aws", "gcp"], "status": "available", "detail": "BigQuery Loader" },
+    { "id": "redshift", "name": "Redshift", "href": "/docs/destinations/warehouses-lakes/redshift/", "type": "loader", "delivery": ["batch"], "cloud": ["aws"], "status": "available", "detail": "RDB Loader" },
+    { "id": "iceberg", "name": "Apache Iceberg", "href": "/docs/destinations/warehouses-lakes/iceberg/", "type": "loader", "delivery": ["batch"], "cloud": ["aws", "gcp"], "status": "available", "detail": "Lake Loader, with a Glue or REST catalog" },
+    { "id": "delta", "name": "Delta Lake", "href": "/docs/destinations/warehouses-lakes/delta/", "type": "loader", "delivery": ["batch"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Lake Loader" },
+
+    { "id": "forwarder-amplitude", "name": "Amplitude", "href": "/docs/destinations/forwarding-events/integrations/amplitude/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+    { "id": "forwarder-bloomreach", "name": "Bloomreach", "href": "/docs/destinations/forwarding-events/integrations/bloomreach/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+    { "id": "forwarder-braze", "name": "Braze", "href": "/docs/destinations/forwarding-events/integrations/braze/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+    { "id": "forwarder-meta", "name": "Meta Conversions API", "href": "/docs/destinations/forwarding-events/integrations/meta-conversions/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+    { "id": "forwarder-mixpanel", "name": "Mixpanel", "href": "/docs/destinations/forwarding-events/integrations/mixpanel/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+
+    { "id": "gtm-amplitude", "name": "Amplitude", "href": "/docs/destinations/forwarding-events/google-tag-manager-server-side/amplitude-tag-for-gtm-ss/", "type": "gtm-ss", "delivery": ["real-time"], "cloud": ["any"], "status": "available", "detail": "Snowplow-authored tag" },
+    { "id": "gtm-braze", "name": "Braze", "href": "/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/", "type": "gtm-ss", "delivery": ["real-time"], "cloud": ["any"], "status": "available", "detail": "Snowplow-authored tag" },
+    { "id": "gtm-iterable", "name": "Iterable", "href": "/docs/destinations/forwarding-events/google-tag-manager-server-side/iterable-tag-for-gtm-ss/", "type": "gtm-ss", "delivery": ["real-time"], "cloud": ["any"], "status": "available", "detail": "Snowplow-authored tag" },
+    { "id": "gtm-launchdarkly", "name": "LaunchDarkly", "href": "/docs/destinations/forwarding-events/google-tag-manager-server-side/launchdarkly-tag-for-gtm-ss/", "type": "gtm-ss", "delivery": ["real-time"], "cloud": ["any"], "status": "available", "detail": "Snowplow-authored tag" },
+    { "id": "gtm-http", "name": "Any HTTP API", "href": "/docs/destinations/forwarding-events/google-tag-manager-server-side/http-request-tag-for-gtm-ss/", "type": "gtm-ss", "delivery": ["real-time"], "cloud": ["any"], "status": "available", "detail": "HTTP Request tag" },
+
+    { "id": "snowbridge-kinesis", "name": "Amazon Kinesis", "href": "/docs/api-reference/snowbridge/configuration/targets/kinesis/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["aws"], "status": "available" },
+    { "id": "snowbridge-sqs", "name": "Amazon SQS", "href": "/docs/api-reference/snowbridge/configuration/targets/sqs/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["aws"], "status": "available" },
+    { "id": "snowbridge-pubsub", "name": "Google Pub/Sub", "href": "/docs/api-reference/snowbridge/configuration/targets/pubsub/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["gcp"], "status": "available" },
+    { "id": "snowbridge-eventhub", "name": "Azure Event Hubs", "href": "/docs/api-reference/snowbridge/configuration/targets/eventhub/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["azure"], "status": "available" },
+    { "id": "snowbridge-kafka", "name": "Apache Kafka", "href": "/docs/api-reference/snowbridge/configuration/targets/kafka/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["any"], "status": "available" },
+    { "id": "snowbridge-http", "name": "Any HTTP API", "href": "/docs/api-reference/snowbridge/configuration/targets/http/", "type": "snowbridge", "delivery": ["streaming"], "cloud": ["any"], "status": "available" },
+
+    { "id": "custom-stream", "name": "Your own stream consumer", "href": "/docs/destinations/custom-streaming/", "type": "custom-stream", "delivery": ["streaming"], "cloud": ["aws", "azure", "gcp"], "status": "available", "detail": "Private Managed Cloud and Self-Hosted only" },
+
+    { "id": "reverse-etl", "name": "Fivetran Activations", "href": "/docs/destinations/reverse-etl/", "type": "reverse-etl", "delivery": ["batch"], "cloud": ["any"], "status": "partner", "detail": "Sync warehouse tables to ad, CRM, and marketing tools" }
+  ]
+}

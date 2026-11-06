@@ -861,4 +861,10 @@
   .tutorial-paginator > :only-child {
     grid-column: 1 / -1;
   }
+
+  /* Pointer for AI agents (DocItem/Layout AgentPointer): kept in the HTML for
+     HTML-to-text tools, never displayed or read out */
+  .agent-pointer {
+    display: none;
+  }
 }

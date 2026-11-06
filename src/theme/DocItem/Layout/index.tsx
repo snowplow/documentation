@@ -59,6 +59,52 @@ function MarkdownAlternateLink() {
   )
 }
 
+// The llms.txt index for each sidebar, written by
+// plugins/docusaurus-plugin-llms-txt/src/product-indexes.js
+const SIDEBAR_INDEXES: Record<string, string> = {
+  cdi: '/docs/cdi/llms.txt',
+  signals: '/docs/signals/llms.txt',
+  reference: '/docs/api-reference/llms.txt',
+  platform: '/docs/platform/llms.txt',
+}
+
+/**
+ * A short pointer for AI agents that read the HTML page: where the Markdown
+ * copy and the llms.txt indexes are. Hidden with CSS (not the hidden
+ * attribute), so screen readers and sighted readers skip it but HTML-to-text
+ * tools keep it. The llms-ignore class keeps it out of the .md export.
+ */
+function AgentPointer({ sidebar }: { sidebar?: string }) {
+  const markdown = useMarkdownCopy()
+  const { siteConfig } = useDocusaurusContext()
+  if (!markdown) return null
+  const site = siteConfig.url.replace(/\/$/, '')
+  const productIndex = sidebar ? SIDEBAR_INDEXES[sidebar] : undefined
+  return (
+    <p className="agent-pointer llms-ignore">
+      For AI agents: a Markdown version of this page is at {markdown.url}. The index of all
+      documentation pages is at {site}/llms.txt
+      {productIndex ? `, and the index for this section is at ${site}${productIndex}` : ''}.
+    </p>
+  )
+}
+
+/**
+ * Facets for the Algolia crawler: which sidebar (product) the page is in and
+ * its content type. The crawler config has to map these meta tags to record
+ * attributes before search can filter or rank on them.
+ */
+function SearchFacets({ sidebar }: { sidebar?: string }) {
+  const { frontMatter } = useDoc()
+  const contentType = (frontMatter as { content_type?: string }).content_type
+  return (
+    <Head>
+      {sidebar && <meta name="docsearch:product" content={sidebar} />}
+      {contentType && <meta name="docsearch:content_type" content={contentType} />}
+    </Head>
+  )
+}
+
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
  */
@@ -94,6 +140,7 @@ function HomeLayout({ children }: { children: React.ReactNode }): JSX.Element {
       <div className="doc-layout doc-layout--home">
         <div className="doc-layout__main">
           <article className="doc-article">
+            <AgentPointer />
             <DocItemContent>{children}</DocItemContent>
           </article>
         </div>
@@ -126,10 +173,12 @@ function DefaultLayout({ children }: Props): JSX.Element {
     <>
       <HeadJSONLD />
       <MarkdownAlternateLink />
+      <SearchFacets sidebar={sidebarName} />
       <div className="doc-layout">
         <div className="doc-layout__main">
           <DocVersionBanner />
           <article className="doc-article">
+            <AgentPointer sidebar={sidebarName} />
             <div className="doc-header">
               {sharedPage && <BackToProduct />}
               <DocBreadcrumbs />

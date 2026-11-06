@@ -200,6 +200,11 @@ article.markdown,
   color: hsl(var(--primary)) !important;
 }
 
+/* Page actions under the breadcrumbs: links styled like the buttons beside them */
+.prose a.page-action:not(:hover) {
+  color: var(--ifm-font-color-base) !important;
+}
+
 /* Override Docusaurus article styles that interfere with prose */
 article[class*='markdown'] p {
   font-size: inherit !important;

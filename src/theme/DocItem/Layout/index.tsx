@@ -3,6 +3,9 @@ import clsx from 'clsx'
 import { useWindowSize } from '@docusaurus/theme-common'
 import { useDoc } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
+import Head from '@docusaurus/Head'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { usePluginData } from '@docusaurus/useGlobalData'
 import DocItemPaginator from '@theme/DocItem/Paginator'
 import DocVersionBanner from '@theme/DocVersionBanner'
 import DocVersionBadge from '@theme/DocVersionBadge'
@@ -17,14 +20,56 @@ import styles from './styles.module.css'
 import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
-import { AlignLeft, Download, Copy, Check } from 'lucide-react'
+import {
+  AlignLeft,
+  Download,
+  Copy,
+  Check,
+  FileText,
+  MessageSquare,
+} from 'lucide-react'
 import HeadJSONLD from '../../../components/SchemaPlugin'
 
 import ReleaseNoteMeta from '@site/src/components/release-notes/ReleaseNoteMeta'
 
-function MarkdownActions() {
+/**
+ * Path and absolute URL of the current page's Markdown copy, written by
+ * plugins/docusaurus-plugin-llms-txt. Null when the plugin skips this route.
+ */
+function useMarkdownCopy(): { path: string; url: string } | null {
   const { pathname } = useLocation()
-  const markdownUrl = pathname.replace(/\/$/, '') + '.md'
+  const { siteConfig } = useDocusaurusContext()
+  const llms = usePluginData('docusaurus-plugin-llms-txt') as
+    | { enableMarkdownFiles?: boolean; excludeRoutes?: string[] }
+    | undefined
+
+  if (!llms?.enableMarkdownFiles) return null
+  const route = pathname.endsWith('/') ? pathname : `${pathname}/`
+  if (llms.excludeRoutes?.includes(route)) return null
+
+  const path = route.replace(/\/$/, '') + '.md'
+  return { path, url: siteConfig.url.replace(/\/$/, '') + path }
+}
+
+/**
+ * Point browsers, crawlers, and agents at the Markdown copy of the page.
+ */
+function MarkdownAlternateLink() {
+  const markdown = useMarkdownCopy()
+  if (!markdown) return null
+  return (
+    <Head>
+      <link rel="alternate" type="text/markdown" href={markdown.url} />
+    </Head>
+  )
+}
+
+function assistantPrompt(markdownUrl: string): string {
+  return `Read ${markdownUrl} so I can ask you questions about it. It's a page from the Snowplow documentation.`
+}
+
+function MarkdownActions() {
+  const markdown = useMarkdownCopy()
   const [copied, setCopied] = useState(false)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -34,6 +79,9 @@ function MarkdownActions() {
     },
     []
   )
+
+  if (!markdown) return null
+  const markdownUrl = markdown.path
 
   function handleDownload() {
     const a = document.createElement('a')
@@ -56,33 +104,65 @@ function MarkdownActions() {
     }
   }
 
+  const prompt = encodeURIComponent(assistantPrompt(markdown.url))
+  const claudeUrl = `https://claude.ai/new?q=${prompt}`
+  const chatGptUrl = `https://chatgpt.com/?q=${prompt}`
+
   const buttonClass =
-    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal hover:text-[color:var(--ifm-color-primary)]'
+    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal no-underline hover:no-underline hover:text-[color:var(--ifm-color-primary)]'
 
   return (
     // first:mt-8 covers pages whose plugin instance has no sidebar: they render no
     // breadcrumbs, so these buttons would otherwise sit flush against the navbar
-    <div className="not-prose max-w-[740px] mx-auto flex items-center gap-3 -mt-1 first:mt-8 mb-8 pl-[0.3rem]">
-      <button
-        onClick={handleDownload}
-        className={buttonClass}
-        title="Download page as a Markdown file"
-        aria-label="Download this page as Markdown"
-        type="button"
-      >
-        <Download size={16} />
-        <span>Download</span>
-      </button>
+    <div className="not-prose max-w-[740px] mx-auto flex flex-wrap items-center gap-x-3 gap-y-1 -mt-1 first:mt-8 mb-8 pl-[0.3rem]">
       <button
         onClick={handleCopy}
         className={buttonClass}
         title="Copy page as Markdown (for LLM)"
-        aria-label="Copy this page's Markdown to clipboard"
         type="button"
       >
         {copied ? <Check size={16} /> : <Copy size={16} />}
         <span>{copied ? 'Copied!' : 'Copy Markdown'}</span>
       </button>
+      <a
+        href={markdownUrl}
+        className={`page-action ${buttonClass}`}
+        title="View this page as Markdown"
+        target="_blank"
+        rel="noopener"
+      >
+        <FileText size={16} />
+        <span>View as Markdown</span>
+      </a>
+      <button
+        onClick={handleDownload}
+        className={buttonClass}
+        title="Download page as a Markdown file"
+        type="button"
+      >
+        <Download size={16} />
+        <span>Download</span>
+      </button>
+      <a
+        href={claudeUrl}
+        className={`page-action ${buttonClass}`}
+        title="Open this page in Claude"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MessageSquare size={16} />
+        <span>Open in Claude</span>
+      </a>
+      <a
+        href={chatGptUrl}
+        className={`page-action ${buttonClass}`}
+        title="Open this page in ChatGPT"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MessageSquare size={16} />
+        <span>Open in ChatGPT</span>
+      </a>
     </div>
   )
 }
@@ -118,6 +198,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   return (
     <>
       <HeadJSONLD />
+      <MarkdownAlternateLink />
       <div className="row">
         <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
           <DocVersionBanner />

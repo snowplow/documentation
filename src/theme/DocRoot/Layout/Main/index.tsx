@@ -106,7 +106,6 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
         >
           <Grid item>
             <TutorialProgressTracker
-              className="w-full max-w-none"
               meta={meta}
               steps={steps}
               activeStep={activeStep}
@@ -145,7 +144,6 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
               maxWidth: { xs: '200px', sm: '220px', md: '240px', lg: '280px' }
             }}>
               <TutorialProgressTracker
-                className="sticky top-4"
                 meta={meta}
                 steps={steps}
                 activeStep={activeStep}
@@ -194,11 +192,13 @@ export default function DocRootLayoutMain({
   return (
     <main
       className={clsx(
+        'doc-main',
         styles.docMainContainer,
         (hiddenSidebarContainer || !sidebar) && styles.docMainContainerEnhanced,
       )}>
       <div
         className={clsx(
+          'doc-main__inner',
           styles.docItemWrapper,
           hiddenSidebarContainer && styles.docItemWrapperEnhanced,
         )}>

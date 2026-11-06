@@ -1,29 +1,20 @@
 .manageButton {
   display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  margin-left: 10px;
-  background: #f0ebf8;
-  width: auto;
-  height: 40px;
-  box-shadow: 0px 1px 2px 0px #1018280d;
-  border: 1px solid #f0ebf8;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: 4px;
-
-  
-  font-size: 14px;
-  line-height: 20px;
-  color: #412476;
+  justify-content: center;
+  min-height: 36px;
+  margin-left: var(--sp-space-2);
+  padding: 0 var(--sp-space-4);
+  border: 1px solid var(--sp-color-border);
+  border-radius: var(--sp-radius-md);
+  background: var(--sp-color-surface-raised);
+  color: var(--sp-color-fg);
+  font-size: var(--sp-text-sm);
+  font-weight: var(--sp-weight-medium);
+  cursor: pointer;
 }
 
 .manageButton:hover,
-.manageButton:active,
-.manageButton:focus {
-  background: #e4dcef;
-  border-color: #e4dcef;
-  cursor: pointer;
+.manageButton:focus-visible {
+  border-color: var(--sp-color-border-strong);
 }

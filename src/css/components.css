@@ -1,0 +1,346 @@
+/* Components used inside pages: callouts, code blocks, tabs, cards, buttons, diagrams */
+@layer snowplow.components {
+  /*
+   * Callouts (admonitions): 1px border on all sides, tinted background, icon
+   * and title in the semantic color, body in the normal text color.
+   */
+  .callout {
+    --callout-border: var(--sp-callout-note-border);
+    --callout-bg: var(--sp-callout-note-bg);
+    --callout-fg: var(--sp-callout-note-fg);
+
+    padding: var(--sp-space-3) var(--sp-space-4);
+    border: 1px solid var(--callout-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--callout-bg);
+    box-shadow: none;
+    color: var(--sp-color-fg);
+    font-size: var(--sp-text-body);
+    line-height: var(--sp-leading-body);
+  }
+
+  .theme-admonition-info {
+    --callout-border: var(--sp-callout-info-border);
+    --callout-bg: var(--sp-callout-info-bg);
+    --callout-fg: var(--sp-callout-info-fg);
+  }
+
+  .theme-admonition-tip {
+    --callout-border: var(--sp-callout-tip-border);
+    --callout-bg: var(--sp-callout-tip-bg);
+    --callout-fg: var(--sp-callout-tip-fg);
+  }
+
+  :is(.theme-admonition-warning, .theme-admonition-caution) {
+    --callout-border: var(--sp-callout-warning-border);
+    --callout-bg: var(--sp-callout-warning-bg);
+    --callout-fg: var(--sp-callout-warning-fg);
+  }
+
+  .theme-admonition-danger {
+    --callout-border: var(--sp-callout-danger-border);
+    --callout-bg: var(--sp-callout-danger-bg);
+    --callout-fg: var(--sp-callout-danger-fg);
+  }
+
+  .callout__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-space-2);
+    color: var(--callout-fg);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-semibold);
+    line-height: var(--sp-leading-sm);
+  }
+
+  .callout__heading:not(:last-child) {
+    margin-bottom: var(--sp-space-1);
+  }
+
+  .callout__icon {
+    display: inline-flex;
+  }
+
+  /* Default titles are the lowercase type name ("note"), so capitalize them */
+  .callout__title {
+    display: inline-block;
+  }
+
+  .callout__title::first-letter {
+    text-transform: uppercase;
+  }
+
+  .callout__icon svg {
+    width: 16px;
+    height: 16px;
+    fill: currentcolor;
+  }
+
+  .callout__content > :last-child {
+    margin-bottom: 0;
+  }
+
+  .callout__content a.snowplow-button {
+    display: inline-flex;
+    margin-top: var(--sp-space-1);
+  }
+
+  /* Details (collapsible sections) */
+  .markdown details {
+    --ifm-alert-background-color: var(--sp-color-bg);
+    --ifm-alert-background-color-highlight: var(--sp-color-surface-raised);
+    --ifm-alert-border-color: var(--sp-color-border);
+    --ifm-alert-foreground-color: var(--sp-color-fg);
+    --ifm-alert-border-left-width: 1px;
+
+    padding: var(--sp-space-3) var(--sp-space-4);
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--sp-color-bg);
+    box-shadow: none;
+    color: var(--sp-color-fg);
+  }
+
+  .markdown details > summary {
+    font-weight: var(--sp-weight-medium);
+  }
+
+  /* Code blocks */
+  .theme-code-block {
+    overflow: hidden;
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--sp-color-surface);
+    box-shadow: none;
+  }
+
+  .theme-code-block pre {
+    margin: 0;
+    border-radius: 0;
+    scrollbar-color: var(--sp-color-border-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  .theme-code-block pre,
+  .theme-code-block code {
+    font-family: var(--sp-font-mono);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .markdown .tabs-container + .theme-code-block,
+  .tabs-container .theme-code-block {
+    margin-top: 0;
+  }
+
+  /* Tabs */
+  .tabs-container {
+    margin-bottom: 0;
+  }
+
+  .tabs {
+    gap: var(--sp-space-1);
+    margin-bottom: var(--sp-space-4);
+    border-bottom: 1px solid var(--sp-color-border);
+  }
+
+  .tabs__item {
+    margin-bottom: -1px;
+    padding: var(--sp-space-2) var(--sp-space-3);
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--sp-color-fg-muted);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-medium);
+    line-height: var(--sp-leading-sm);
+  }
+
+  .tabs__item:hover {
+    background: none;
+    color: var(--sp-color-fg);
+  }
+
+  .tabs__item--active,
+  .tabs__item--active:hover {
+    border-bottom-color: var(--sp-color-accent);
+    color: var(--sp-color-fg);
+  }
+
+  /* Cards: a 1px border at rest, a border and the hover shadow on hover */
+  .card,
+  .cta-card,
+  .link-card {
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--sp-color-bg);
+    box-shadow: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  [data-theme='dark'] :is(.card, .cta-card, .link-card) {
+    background: var(--sp-color-surface);
+  }
+
+  :is(a.card, .cta-card, .link-card):hover {
+    border-color: var(--sp-color-border-strong);
+    box-shadow: var(--sp-shadow-hover);
+    text-decoration: none;
+  }
+
+  .cta-card {
+    border-color: var(--sp-color-accent-border);
+    background: var(--sp-color-accent-soft);
+  }
+
+  [data-theme='dark'] .cta-card {
+    background: var(--sp-color-accent-soft);
+  }
+
+  .card .text--truncate {
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+  }
+
+  .col .card {
+    height: 100%;
+  }
+
+  .featured-section-links a {
+    display: block;
+    padding: 2px 0;
+  }
+
+  /* Buttons */
+  .snowplow-button,
+  .featured-section-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 var(--sp-space-4);
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-md);
+    background: var(--sp-color-surface-raised);
+    color: var(--sp-color-fg);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-medium);
+    text-decoration: none;
+  }
+
+  :is(.snowplow-button, .featured-section-button):hover {
+    border-color: var(--sp-color-border-strong);
+    color: var(--sp-color-fg);
+    text-decoration: none;
+  }
+
+  .snowplow-button.cta-button {
+    border-color: var(--sp-color-accent);
+    background: var(--sp-color-accent);
+    color: var(--sp-color-accent-fg);
+  }
+
+  .snowplow-button.cta-button:hover {
+    background: var(--sp-color-accent-hover);
+    color: var(--sp-color-accent-fg);
+  }
+
+  /* Badges */
+  .snowplow-badge-container {
+    display: inline-block;
+    margin: 0 var(--sp-space-1) var(--sp-space-1) 0;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .markdown > p:has(.snowplow-badge-container) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-space-1);
+  }
+
+  img.shield {
+    vertical-align: text-bottom;
+  }
+
+  .coloredSvg {
+    fill: var(--sp-color-accent);
+    stroke: var(--sp-color-accent);
+  }
+
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--sp-space-5);
+    padding: var(--sp-space-5);
+  }
+
+  /* Mermaid diagrams */
+  .docusaurus-mermaid-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  [id^='mermaid-'] foreignObject :is(.nodeLabel, .edgeLabel) p {
+    margin-bottom: 0;
+  }
+
+  .mermaid-container {
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .mermaid-container {
+      cursor: zoom-in;
+    }
+
+    .mermaid-container::after {
+      content: 'Tap to enlarge';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      padding: 2px var(--sp-space-2);
+      border-radius: var(--sp-radius-sm);
+      background: var(--sp-color-fg);
+      color: var(--sp-color-bg);
+      font-size: var(--sp-text-xs);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+  }
+
+  /* Pagination */
+  .pagination-nav__link {
+    border-color: var(--sp-color-border);
+  }
+
+  .pagination-nav__link:hover {
+    border-color: var(--sp-color-accent);
+  }
+
+  .pagination-nav__sublabel {
+    color: var(--sp-color-fg-muted);
+    font-size: var(--sp-text-sm);
+  }
+
+  .pagination-nav__label {
+    font-weight: var(--sp-weight-medium);
+  }
+
+  [data-theme='light'] .dbt details {
+    --ifm-alert-background-color: transparent;
+  }
+}
+
+/*
+ * MUI writes its styles at runtime without a layer, so these overrides stay
+ * unlayered and rely on a more specific selector.
+ */
+.JsonValidator .MuiGrid-root.MuiGrid-item {
+  padding-top: var(--sp-space-2);
+}
+
+.JsonValidator .MuiFormControl-root.MuiTextField-root {
+  margin-bottom: var(--sp-space-4);
+}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import clsx from 'clsx'
 import { useWindowSize } from '@docusaurus/theme-common'
 import { useDoc } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
@@ -16,7 +15,6 @@ import DocItemContent from '@theme/DocItem/Content'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import type { Props } from '@theme/DocItem/Layout'
 
-import styles from './styles.module.css'
 import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
@@ -108,13 +106,10 @@ function MarkdownActions() {
   const claudeUrl = `https://claude.ai/new?q=${prompt}`
   const chatGptUrl = `https://chatgpt.com/?q=${prompt}`
 
-  const buttonClass =
-    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal no-underline hover:no-underline hover:text-[color:var(--ifm-color-primary)]'
+  const buttonClass = 'page-action'
 
   return (
-    // first:mt-8 covers pages whose plugin instance has no sidebar: they render no
-    // breadcrumbs, so these buttons would otherwise sit flush against the navbar
-    <div className="not-prose max-w-[740px] mx-auto flex flex-wrap items-center gap-x-3 gap-y-1 -mt-1 first:mt-8 mb-8 pl-[0.3rem]">
+    <div className="page-actions">
       <button
         onClick={handleCopy}
         className={buttonClass}
@@ -126,7 +121,7 @@ function MarkdownActions() {
       </button>
       <a
         href={markdownUrl}
-        className={`page-action ${buttonClass}`}
+        className={buttonClass}
         title="View this page as Markdown"
         target="_blank"
         rel="noopener"
@@ -145,7 +140,7 @@ function MarkdownActions() {
       </button>
       <a
         href={claudeUrl}
-        className={`page-action ${buttonClass}`}
+        className={buttonClass}
         title="Open this page in Claude"
         target="_blank"
         rel="noopener noreferrer"
@@ -155,7 +150,7 @@ function MarkdownActions() {
       </a>
       <a
         href={chatGptUrl}
-        className={`page-action ${buttonClass}`}
+        className={buttonClass}
         title="Open this page in ChatGPT"
         target="_blank"
         rel="noopener noreferrer"
@@ -199,42 +194,36 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
     <>
       <HeadJSONLD />
       <MarkdownAlternateLink />
-      <div className="row">
-        <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
+      <div className="doc-layout">
+        <div className="doc-layout__main">
           <DocVersionBanner />
-          <div className={styles.docItemContainer}>
-            <article className="max-w-full overflow-x-hidden leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:block prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block [&_nav.theme-doc-breadcrumbs]:max-w-[740px] [&_nav.theme-doc-breadcrumbs]:mx-auto [&_nav.theme-doc-breadcrumbs]:mt-8 [&_footer.theme-doc-footer]:max-w-[740px] [&_footer.theme-doc-footer]:mx-auto [&_footer.theme-doc-footer]:mt-8 [&_table_thead_tr_th_h3]:my-2 [&_table_tbody_tr_td_h3]:my-2 [&_table_thead_a]:font-semibold [&_table_thead_a]:no-underline">
-              <DocBreadcrumbs />
-              <MarkdownActions />
-              <DocVersionBadge />
-              <ReleaseNoteMeta />
-              {docTOC.mobile}
-              {tutorial === TutorialKind.Tutorial ? (
-                <Paper sx={{ p: 2, pt: 2 }}>
-                  <DocItemContent>{children}</DocItemContent>
-                </Paper>
-              ) : (
+          <article className="doc-article">
+            <DocBreadcrumbs />
+            <MarkdownActions />
+            <DocVersionBadge />
+            <ReleaseNoteMeta />
+            {docTOC.mobile}
+            {tutorial === TutorialKind.Tutorial ? (
+              <Paper sx={{ p: 2, pt: 2 }}>
                 <DocItemContent>{children}</DocItemContent>
-              )}
-              <DocItemFooter />
-            </article>
-            <div className="max-w-[740px] mx-auto mt-8">
-              <DocItemPaginator />
-            </div>
+              </Paper>
+            ) : (
+              <DocItemContent>{children}</DocItemContent>
+            )}
+            <DocItemFooter />
+          </article>
+          <div className="doc-article__paginator">
+            <DocItemPaginator />
           </div>
         </div>
         {docTOC.desktop && (
-          <div className="col col--3">
-            <div className="sticky top-16">
-              <div className="flex items-center gap-2 my-1">
-                <AlignLeft size={16} className="opacity-70 text-foreground" />
-                <p className="text-[0.825rem] font-normal opacity-70 text-foreground m-0 pl-1">
-                  On this page
-                </p>
-              </div>
-              {docTOC.desktop}
-            </div>
-          </div>
+          <aside className="doc-layout__toc">
+            <p className="doc-layout__toc-title">
+              <AlignLeft size={16} aria-hidden="true" />
+              On this page
+            </p>
+            {docTOC.desktop}
+          </aside>
         )}
       </div>
     </>

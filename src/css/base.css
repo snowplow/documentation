@@ -1,0 +1,89 @@
+/*
+ * Site CSS, split by job:
+ *
+ *   tokens.css      generated from src/design/tokens.js (design tokens plugin)
+ *   base.css        layer order, Tailwind, page-level defaults
+ *   infima.css      Infima and DocSearch variables mapped to the tokens
+ *   prose.css       the doc body (.markdown)
+ *   chrome.css      navbar, sidebar, table of contents, breadcrumbs, footer
+ *   components.css  callouts, code blocks, tabs, cards, buttons, diagrams
+ *
+ * Layers: Docusaurus puts Infima and its theme CSS in docusaurus.* layers.
+ * Ours come after them, so they win without !important. Tailwind utilities
+ * stay unlayered, so a utility class in JSX beats any rule here.
+ */
+@layer snowplow.base, snowplow.infima, snowplow.prose, snowplow.chrome, snowplow.components;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer snowplow.base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+  }
+
+  body {
+    background: var(--sp-color-bg);
+    color: var(--sp-color-fg);
+    font-family: var(--sp-font-sans);
+    font-feature-settings: 'cv11';
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--sp-color-focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--sp-color-accent-soft);
+    color: var(--sp-color-fg);
+  }
+
+  :is(h1, h2, h3, h4)[id] {
+    scroll-margin-top: calc(var(--sp-layout-navbar) + var(--sp-space-4));
+  }
+
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    font-family: inherit;
+    font-size: var(--sp-text-sm);
+  }
+
+  textarea {
+    max-width: 100%;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  abbr[data-title] {
+    position: relative;
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+
+  abbr[data-title]:is(:hover, :focus)::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    z-index: 9998;
+    padding: 2px 6px;
+    border-radius: var(--sp-radius-sm);
+    background: var(--sp-color-fg);
+    box-shadow: var(--sp-shadow-popover);
+    color: var(--sp-color-bg);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-regular);
+    white-space: nowrap;
+  }
+
+  .hidden:is(li, article) {
+    display: none;
+  }
+}

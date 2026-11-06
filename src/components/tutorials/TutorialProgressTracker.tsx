@@ -181,7 +181,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
         </Button>
       </div>
 
-      <div className={cn("h-fit sticky", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
+      <div className={cn("h-fit", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
         {/* Header Card */}
       <div className="bg-accent text-foreground rounded-lg p-6 mb-4 leading-tight">
       <div className="flex flex-wrap gap-1 mb-4">
@@ -234,8 +234,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               className={cn(
                 "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                 "hover:bg-accent/50",
-                isActive && isCompleted && "bg-primary/10 border border-green-300/40 hover:bg-foreground/5",
-                isActive && !isCompleted && "bg-primary/25 border border-primary/20 hover:bg-foreground/5",
+                isActive && "bg-primary-soft border border-primary/30",
                 !isActive && isCompleted && "bg-transparent hover:bg-foreground/5",
                 isFuture && "bg-transparent border border-border hover:bg-foreground/5"
               )}
@@ -270,7 +269,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               {/* Step Title */}
               <div className="flex-1 min-w-0">
                 <p className={cn(
-                  "font-light truncat m-0",
+                  "font-light truncate m-0",
                   isActive && "text-primary",
                   isCompleted && "text-muted-foreground",
                   isFuture && "text-foreground"
@@ -350,8 +349,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                   className={cn(
                     "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                     "hover:bg-accent/50",
-                    isActive && isCompleted && "bg-green-100/80 border border-green-300/40 hover:bg-green-100",
-                    isActive && !isCompleted && "bg-primary/10 border border-primary/20",
+                    isActive && "bg-primary-soft border border-primary/30",
                     !isActive && isCompleted && "bg-transparent hover:bg-accent",
                     isFuture && "bg-transparent border border-border"
                   )}

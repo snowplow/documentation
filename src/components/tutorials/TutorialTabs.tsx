@@ -77,13 +77,17 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
 
   return (
     <Tabs
-      className="desktop-only docs-tutorial-tabs"
+      className="desktop-only"
       value={tab}
-      TabScrollButtonProps={{
-        className: 'docs-tutorial-tab-scroll-button',
+      sx={{
+        alignSelf: 'stretch',
+        minHeight: 'var(--sp-layout-navbar)',
+        overflow: 'visible',
+        // Let the indicator sit on the navbar's bottom border
+        '& .MuiTabs-scroller': { overflow: 'visible' },
       }}
       TabIndicatorProps={{
-        className: 'docs-tutorial-tab-indicator',
+        sx: { height: '2px', bottom: '-1px', transition: 'none' },
       }}
     >
       {TABS.map(({ value, label }) => (
@@ -92,7 +96,17 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
           onClick={() => history.push(value)}
           value={value}
           label={label}
-          sx={{ textTransform: 'none' }}
+          sx={{
+            minWidth: 'auto',
+            minHeight: 'var(--sp-layout-navbar)',
+            px: 1.5,
+            fontSize: 'var(--sp-text-sm)',
+            fontWeight: 500,
+            textTransform: 'none',
+            color: 'var(--sp-color-fg-muted)',
+            '&:hover': { color: 'var(--sp-color-fg)' },
+            '&.Mui-selected': { color: 'var(--sp-color-fg)' },
+          }}
         />
       ))}
     </Tabs>

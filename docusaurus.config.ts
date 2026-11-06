@@ -87,13 +87,21 @@ const config: Config = {
           },
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/base.css'),
+            require.resolve('./src/css/infima.css'),
+            require.resolve('./src/css/prose.css'),
+            require.resolve('./src/css/chrome.css'),
+            require.resolve('./src/css/components.css'),
+          ],
         },
       },
     ],
   ],
 
   plugins: [
+    // Design tokens (src/design/tokens.js) to CSS variables, plus the fonts
+    './plugins/docusaurus-plugin-design-tokens',
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -210,7 +218,7 @@ const config: Config = {
             items: [
               {
                 href: 'https://github.com/snowplow/',
-                label: 'Github',
+                label: 'GitHub',
               },
               {
                 href: 'https://snowplow.io/',
@@ -227,8 +235,7 @@ const config: Config = {
             items: [
               {
                 href: 'https://community.snowplow.io/',
-                label: 'Snowplow Community',
-                className: 'capitalize text-sm text-muted-foreground',
+                label: 'Snowplow community',
               },
               {
                 href: 'https://support.snowplow.io/',
@@ -244,11 +251,11 @@ const config: Config = {
                 href: '/cookie-preferences',
               },
               {
-                label: 'Terms and Conditions',
+                label: 'Terms and conditions',
                 href: '/terms-and-conditions',
               },
               {
-                label: 'Licensing Overview',
+                label: 'Licensing overview',
                 href: '/docs/licensing/',
               },
             ],

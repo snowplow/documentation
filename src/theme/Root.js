@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
-import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
+import { useLocation } from '@docusaurus/router'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
 
 const useCookie = () => {
@@ -29,8 +28,24 @@ const useCookie = () => {
   return [userId, sessionId]
 }
 
+/**
+ * Doc pages have their own "Was this page helpful?" block
+ * (src/components/Feedback), so Product Fruits, which adds a feedback side
+ * tab, only loads outside /docs/.
+ */
+function useProductFruitsEnabled() {
+  const { pathname } = useLocation()
+  return !pathname.startsWith('/docs/')
+}
+
+/**
+ * MUI is no longer provided here. The widgets that still use it
+ * (JsonSchemaValidator, DbtSchemaSelector, FirstSteps) wrap themselves in
+ * <MuiScope>, so MUI only loads with the pages that use them.
+ */
 export default function Root({ children }) {
   const [isClient, setIsClient] = useState(false)
+  const productFruits = useProductFruitsEnabled()
 
   useEffect(() => {
     setIsClient(true)
@@ -44,7 +59,7 @@ export default function Root({ children }) {
 
   return (
     <>
-      {isClient && (
+      {isClient && productFruits && (
         <ProductFruits
           workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
           language="en"
@@ -52,20 +67,7 @@ export default function Root({ children }) {
           lifeCycle="unmount"
         />
       )}
-
-      {/*
-        MUI's palette CSS variables are keyed on the data-theme attribute that
-        Docusaurus already sets on <html>, so MUI components follow the
-        Docusaurus color mode with no JavaScript sync. colorSchemeNode={null}
-        stops MUI writing that attribute itself.
-      */}
-      <CssVarsProvider
-        theme={theme}
-        attribute="data-theme"
-        colorSchemeNode={null}
-      >
-        {children}
-      </CssVarsProvider>
+      {children}
     </>
   )
 }

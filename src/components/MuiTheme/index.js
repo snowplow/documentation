@@ -1,7 +1,4 @@
-import {
-  experimental_extendTheme as extendTheme,
-  createTheme,
-} from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
 import tokens from '@site/src/design/tokens'
 
 function palette(mode) {
@@ -24,17 +21,8 @@ const shared = {
   shape: { borderRadius: tokens.radius.md },
 }
 
-/** Theme for the app-wide CssVarsProvider; follows html[data-theme]. */
-const extTheme = extendTheme({
-  ...shared,
-  colorSchemes: {
-    light: { palette: palette('light') },
-    dark: { palette: palette('dark') },
-  },
-})
-
 /** Fixed-mode themes for widgets that pick a ThemeProvider from useColorMode. */
 export const lightTheme = createTheme({ ...shared, palette: palette('light') })
 export const darkTheme = createTheme({ ...shared, palette: palette('dark') })
 
-export default extTheme
+export default lightTheme

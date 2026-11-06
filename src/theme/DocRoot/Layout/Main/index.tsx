@@ -9,9 +9,7 @@ import React, {type ReactNode, useMemo, useState, useEffect} from 'react';
 import clsx from 'clsx';
 import {useDocsSidebar} from '@docusaurus/plugin-content-docs/client';
 import { useLocation } from '@docusaurus/router';
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import type {Props} from '@theme/DocRoot/Layout/Main';
-import Steps from '@site/src/components/tutorials/Steps';
 import { getSteps } from '@site/src/components/tutorials/utils';
 import { Meta, Step } from '@site/src/components/tutorials/models';
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks';
@@ -65,10 +63,12 @@ function findStepFromLocation(location: any, steps: Step[]): Step | null {
   return null
 }
 
+/**
+ * Tutorial pages: the progress tracker beside the content, stacked on narrow
+ * screens. Plain CSS grid (tutorial-layout in chrome.css), no MUI.
+ */
 const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
   const location = useLocation()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const meta = useMemo<Meta>(() => getMeta(location), [location])
   const steps = useMemo<Step[]>(() => getSteps(meta.id), [meta.id])
@@ -78,12 +78,7 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
   const [prev, setPrev] = useState<Step | null>(null)
 
   useEffect(() => {
-    const step = findStepFromLocation(location, steps)
-    if (step) {
-      setActiveStep(step)
-    } else {
-      setActiveStep(null)
-    }
+    setActiveStep(findStepFromLocation(location, steps))
   }, [location, steps])
 
   useEffect(() => {
@@ -93,84 +88,30 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
     }
   }, [activeStep, steps])
 
-  if (isMobile) {
-    return (
-      <main className="tutorial-doc-page flex w-full">
-        <Grid
-          sx={{ m: 0, mt: 0 }}
-          rowSpacing={2}
-          container
-          direction="column"
-          wrap="nowrap"
-          className='p-4'
-        >
-          <Grid item>
-            <TutorialProgressTracker
-              meta={meta}
-              steps={steps}
-              activeStep={activeStep}
-              setActiveStep={setActiveStep}
-            />
-          </Grid>
-
-          <Grid item>
-            <div className={clsx("tutorial-content", styles.docItemWrapper)}>
-              {children}
-            </div>
-            <div style={{ marginTop: '2rem', marginBottom: '2rem', maxWidth: '100%' }}>
-              <Paginators
-                next={next}
-                prev={prev}
-                setActiveStep={setActiveStep}
-                isMobile
-                currentStep={activeStep}
-                tutorialId={meta?.id}
-              />
-            </div>
-          </Grid>
-        </Grid>
-      </main>
-    )
-  }
-
   return (
-    <main className="tutorial-doc-page flex w-full">
-      <Grid container sx={{width: '100%' }} columnSpacing={2} className='px-4 py-8'>
-        <Grid container item direction="column">
-          <Grid container item wrap="nowrap" columnGap={3}>
-            {/* Progress Tracker Sidebar - Responsive sizing */}
-            <Grid item xs={12} sm={4} md={3} lg={3} sx={{
-              minWidth: { xs: '200px', sm: '220px', md: '240px', lg: '280px' },
-              maxWidth: { xs: '200px', sm: '220px', md: '240px', lg: '280px' }
-            }}>
-              <TutorialProgressTracker
-                meta={meta}
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-              />
-            </Grid>
-
-            {/* Main Content - Responsive sizing */}
-            <Grid container item xs={12} sm={8} md={9} lg={9}>
-              <Grid sx={{ width: '100%' }} item>
-                <div className={clsx("tutorial-content", styles.docItemWrapper)}>
-                  {children}
-                </div>
-                <div style={{ marginTop: '2rem', marginBottom: '2rem', maxWidth: '75%' }}>
-                  <Paginators
-                    next={next}
-                    prev={prev}
-                    setActiveStep={setActiveStep}
-                    currentStep={activeStep}
-                    tutorialId={meta?.id}
-                  />
-                </div>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+    <main className="tutorial-doc-page tutorial-layout">
+      <div className="tutorial-layout__tracker">
+        <TutorialProgressTracker
+          meta={meta}
+          steps={steps}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
+      </div>
+      <div className="tutorial-layout__content">
+        <div className={clsx("tutorial-content", styles.docItemWrapper)}>
+          {children}
+        </div>
+        <div className="tutorial-layout__paginator">
+          <Paginators
+            next={next}
+            prev={prev}
+            setActiveStep={setActiveStep}
+            currentStep={activeStep}
+            tutorialId={meta?.id}
+          />
+        </div>
+      </div>
     </main>
   )
 }

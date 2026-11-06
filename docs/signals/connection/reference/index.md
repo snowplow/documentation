@@ -1,7 +1,7 @@
 ---
 title: "Signals connection reference"
 sidebar_position: 10
-sidebar_label: "Connection reference"
+sidebar_label: "SDK and API reference"
 description: "Reference for connecting to Snowplow Signals: which interface supports which task, connection credentials, SDK client options and methods, and Signals API and MCP server endpoints."
 keywords: ["signals connection", "signals credentials", "snowplow-signals", "@snowplow/signals-node", "signals api", "signals sdk methods"]
 date: "2026-11-06"

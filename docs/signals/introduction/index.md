@@ -64,7 +64,7 @@ If you want features for a machine learning model instead, see [create ML traini
 
 ## Explore Signals
 
-The Signals sidebar follows the order you set Signals up in: connect, define attributes, serve them, then act on them.
+The Signals sidebar follows the order you set Signals up in: set up and connect, send data, define attributes, serve them, then feed agents or trigger interventions.
 
 <CardGrid cols={3} breakout>
   <Card

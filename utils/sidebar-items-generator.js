@@ -13,7 +13,8 @@
  * - removes any paths listed in `exclude`, so a page can be picked into a
  *   different group without appearing twice
  * - optionally hoists a category's children up one level (`hoist`), putting
- *   the category's index page first
+ *   the category's index page first (`indexClassName` styles that page's
+ *   row, for example 'hidden' for a router page linked from elsewhere)
  * - applies label, className, and collapsed overrides
  * - swaps `type: link` docs for link items, and copies index-page
  *   descriptions onto categories so DocCardList can show them
@@ -269,6 +270,7 @@ async function sidebarItemsGenerator(args) {
               type: 'doc',
               id: category.link.id,
               label: pickOpts.indexLabel ?? category.label,
+              ...(pickOpts.indexClassName ? { className: pickOpts.indexClassName } : {}),
             },
           ]
         : []

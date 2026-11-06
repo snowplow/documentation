@@ -175,7 +175,7 @@ const sidebars = {
   signals: [
     group('Get started', [
       pick('signals/introduction', { label: 'Signals overview' }),
-      pick('signals/quickstart', { label: 'Quickstart with your coding agent' }),
+      pick('signals/quickstart', { label: 'Quickstart with an agent' }),
       pick('signals/get-started/quickstart-tutorial', { label: 'Quickstart in Console' }),
       // Redirects to the introduction (worker/redirects.js), so it stays hidden
       pick('signals', { indexOnly: true, label: 'Signals', className: 'hidden' }),
@@ -183,13 +183,13 @@ const sidebars = {
     group('Set up and connect', [
       pick('signals/concepts', { hoist: true, indexLabel: 'How Signals works' }),
       pick('signals/setup'),
-      pick('signals/connection', { label: 'Connect your app' }),
-    ]),
+      pick('signals/connection', { label: 'Connect with SDKs or API' }),
+    ], { collapsible: true, collapsed: true }),
     // Where attribute values come from: events (stream) or warehouse tables
     group('Data sources', [
       pick('signals/data-sources/events'),
-      pick('signals/attributes/warehouse-config', { label: 'Warehouse tables' }),
-    ]),
+      pick('signals/attributes/warehouse-config', { label: 'Sync warehouse tables' }),
+    ], { collapsible: true, collapsed: true }),
     group('Define attributes', [
       pick('signals/attributes', {
         hoist: true,
@@ -197,28 +197,30 @@ const sidebars = {
         exclude: ['signals/attributes/warehouse-config'],
       }),
       pick('signals/publish'),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Serve attributes', [
       pick('signals/applications', {
         hoist: true,
         indexLabel: 'Use in your application',
+        // The router page is linked from the overview, so its row stays hidden
+        indexClassName: 'hidden',
         exclude: [
           'signals/applications/agentic-contexts',
           'signals/applications/mcp-server',
           'signals/applications/subscribe',
         ],
       }),
-      pick('signals/ml-training-datasets'),
-    ]),
+      pick('signals/ml-training-datasets', { label: 'Build training datasets' }),
+    ], { collapsible: true, collapsed: true }),
     group('Feed AI agents', [
       pick('signals/agentic-contexts', { label: 'Define agentic contexts' }),
       pick('signals/applications/agentic-contexts', { label: 'Retrieve agentic contexts' }),
       pick('signals/applications/mcp-server'),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Intervene', [
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
   ],
 
   reference: [

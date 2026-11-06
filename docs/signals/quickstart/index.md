@@ -1,6 +1,6 @@
 ---
 title: "Signals quickstart with your coding agent"
-sidebar_label: "Quickstart"
+sidebar_label: "Quickstart with an agent"
 sidebar_position: 3
 description: "Sign up for Snowplow Signals, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that asks what you want to build, then adds tracking and Signals configuration to your web app."
 keywords: ["signals quickstart", "snowplow mcp", "coding agent", "claude code", "cursor", "real-time attributes"]
@@ -67,6 +67,6 @@ The agent finishes by showing live values and listing what it changed. To check 
 ## Next steps
 
 These pages explain what the agent built and other ways to work with Signals:
-* Read the [Signals fundamentals](/docs/signals/concepts/index.md) to understand the configuration the agent created
+* Read [How Signals works](/docs/signals/concepts/index.md) to understand the configuration the agent created
 * Follow the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a longer walkthrough
 * Prefer working in Console? Try the [Console quickstart tutorial](/docs/signals/get-started/quickstart-tutorial/index.md)

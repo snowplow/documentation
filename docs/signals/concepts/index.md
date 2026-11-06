@@ -1,5 +1,5 @@
 ---
-title: "Signals fundamentals"
+title: "How Signals works"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
 description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."

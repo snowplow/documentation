@@ -1,5 +1,5 @@
 ---
-title: "Use Signals in your application"
+title: "Choose how to use Signals attributes"
 sidebar_position: 30
 sidebar_label: "Use in your application"
 description: "Consume Signals in your applications by retrieving calculated attributes on demand, or by subscribing to interventions that push actions in real time."

@@ -1,7 +1,7 @@
 ---
 title: "Connect to Snowplow Signals"
 sidebar_position: 35
-sidebar_label: "Connect to Signals"
+sidebar_label: "Connect with SDKs or API"
 description: "Get your Signals connection credentials, then connect with the Python SDK, Node.js SDK, or Signals API to manage configurations or consume calculated values."
 keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "connection credentials"]
 content_type: how-to

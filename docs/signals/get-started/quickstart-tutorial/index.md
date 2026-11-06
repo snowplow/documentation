@@ -6,6 +6,7 @@ description: "Use Snowplow Console to define a Signals attribute group and servi
 keywords: ["signals quickstart", "signals tutorial", "real-time attributes", "attribute groups", "signals python sdk", "snowplow console"]
 date: "2026-11-06"
 content_type: tutorial
+pagination_next: signals/concepts/index
 ---
 
 <NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb" />

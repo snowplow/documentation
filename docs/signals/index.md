@@ -5,6 +5,8 @@ description: "Snowplow Signals computes attributes from your behavioral data in 
 keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
 sidebar_label: "Signals"
 content_type: landing
+pagination_prev: null
+pagination_next: null
 ---
 
 {/* This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artificially hoisted to look like they're all top-level sections. Requests for this page are redirected to introduction/index.md (see worker/redirects.js). Keep this summary short: the full content lives on the introduction page. */}

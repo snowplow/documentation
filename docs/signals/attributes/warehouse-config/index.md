@@ -71,7 +71,7 @@ data_source = BatchSource(
 )
 ```
 
-The table below lists all available arguments for a `BatchSource`:
+This table lists all available arguments for a `BatchSource`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -119,7 +119,7 @@ attribute_group = ExternalBatchAttributeGroup(
 )
 ```
 
-The table below lists all available arguments for `ExternalBatchAttributeGroup`:
+This table lists all available arguments for `ExternalBatchAttributeGroup`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -133,7 +133,7 @@ The table below lists all available arguments for `ExternalBatchAttributeGroup`:
 | `description` | A description of the attribute group | `string` | ❌ |
 | `owner` | The owner of the attribute group | `string` | ❌ |
 
-The table below lists all available arguments for a `Field`:
+This table lists all available arguments for a `Field`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |

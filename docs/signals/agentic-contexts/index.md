@@ -70,7 +70,7 @@ my_agentic_context = EventLog(
 )
 ```
 
-The table below lists the main fields of an agentic context.
+This table lists the main fields of an agentic context.
 
 | Field             | Description                                                     | Required? |
 | ----------------- | ---------------------------------------------------------------- | --------- |

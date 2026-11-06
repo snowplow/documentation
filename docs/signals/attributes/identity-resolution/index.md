@@ -104,9 +104,15 @@ The **Configure** button only appears if you have permission to create or edit t
 Publish an `AttributeKey` named `snowplow_id`, with `lookup_identifiers` set to the names of up to three identifiers from your [Identities configuration](/docs/identities/configuration/index.md):
 
 ```python
+import os
 from snowplow_signals import AttributeKey, Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
 sp_signals.publish([
     AttributeKey(name="snowplow_id", lookup_identifiers=["domain_userid", "user_id"]),
@@ -144,6 +150,7 @@ In the Python SDK, set `attribute_key` to the built-in `snowplow_id`:
 ```python
 from snowplow_signals import StreamAttributeGroup, snowplow_id
 
+# page_view_count: an attribute you have defined (see Configure attributes)
 person_attribute_group = StreamAttributeGroup(
     name="person_attributes",
     version=1,
@@ -161,6 +168,7 @@ Read attributes keyed on `snowplow_id` the same way as any other attributes, usi
 <TabItem value="python" label="Python" default>
 
 ```python
+# sp_signals: the client from Connect to Signals
 attributes = sp_signals.get_service_attributes(
     name="my_service",
     attribute_key="domain_userid",

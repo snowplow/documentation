@@ -59,7 +59,7 @@ sp_signals.publish([hello_intervention])
 
 Once applied and active, this intervention will trigger the first time Signals processes an event that first sets the `example_group` attribute group's `test_attribute` attribute to a value that is not null (e.g. the first time it gets set).
 
-The table below lists all available arguments for a `RuleIntervention`:
+This table lists all available arguments for a `RuleIntervention`:
 
 | Argument                | Description                                                                                                                                                                   | Type                                                                                                              | Required? |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------- |
@@ -107,7 +107,7 @@ The simplest `criteria` tree takes an `InterventionCriterion` instance, with pos
 | Argument    | Description                                                              | Type                                                                                           |
 | ----------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
 | `attribute` | The attribute group and attribute name to evaluate, separated by a colon | `string`                                                                                       |
-| `operator`  | The operator used for evaluating the attribute                           | `str`, see table below                                                                         |
+| `operator`  | The operator used for evaluating the attribute                           | `str`, see the operators table                                                                  |
 | `value`     | If required by the `operator`, the comparison value                      | `str`, `int`, `float`, `bool`, `list[str]`, `list[int]`, `list[float]`, `list[bool]` or `None` |
 
 This table shows the available operators:

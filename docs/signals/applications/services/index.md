@@ -58,7 +58,7 @@ my_service = Service(
 )
 ```
 
-The table below lists all available arguments for a `Service`:
+This table lists all available arguments for a `Service`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -108,10 +108,17 @@ To delete a service, go to the service details page and click the `⋮` button, 
 Use `publish()` to register services with Signals.
 
 ```python
+import os
 from snowplow_signals import Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
+# my_service and my_other_service: services defined as in Create a service
 sp_signals.publish([
     my_service,
     my_other_service,

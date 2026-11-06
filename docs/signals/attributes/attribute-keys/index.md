@@ -81,7 +81,7 @@ app_id_attribute_key = AttributeKey(
 )
 ```
 
-The table below lists all available arguments:
+This table lists all available arguments:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |

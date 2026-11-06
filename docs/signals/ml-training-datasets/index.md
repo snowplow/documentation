@@ -109,6 +109,8 @@ from snowplow_signals import (
     TrainingSpan,
 )
 
+# sp_signals: the client from Connect to Signals
+# my_attribute_group: an attribute group keyed on domain_sessionid
 run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
@@ -126,8 +128,11 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 To filter on a property within a self-describing event:
 
 ```python
+from datetime import datetime, timezone
+
 from snowplow_signals import Criteria, Criterion, EventProperty, TrainingSpan
 
+# sp_signals and my_attribute_group: as in the previous example
 run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
@@ -171,8 +176,9 @@ By default, the dataset builder creates tables using the output database and sch
 ```python
 from snowplow_signals import WarehouseTable
 
+# sp_signals: the client from Connect to Signals
 run = sp_signals.submit_dataset_run_with_session_anchors(
-    ...
+    ...,  # attribute_groups, goal_criteria, and training_span as above
     dataset_table=WarehouseTable(
         table="my_training_dataset",   # required
         database="analytics",          # optional, defaults to Signals connection
@@ -201,6 +207,7 @@ For example, if your attribute groups use `domain_sessionid` as the attribute ke
 ```python
 from snowplow_signals import WarehouseTable
 
+# sp_signals and my_attribute_group: as in the session-anchor examples
 run = sp_signals.submit_dataset_run_with_custom_anchors(
     attribute_groups=[my_attribute_group],
     anchors_table=WarehouseTable(
@@ -232,6 +239,7 @@ Use `submit_dataset_run_with_session_anchors()` or `submit_dataset_run_with_cust
 Use `get_dataset_run_status()` to check whether the run has finished. The `status` field is one of `pending`, `success`, or `failed`.
 
 ```python
+# run: the response from a submit_dataset_run_* call
 status = sp_signals.get_dataset_run_status(run.id)
 print(status.status)  # "pending", "success", or "failed"
 ```
@@ -242,6 +250,7 @@ To wait for completion in a notebook or script:
 import time
 from snowplow_signals import DatasetRunStatus
 
+# sp_signals and run: as in the previous block
 while True:
     status = sp_signals.get_dataset_run_status(run.id)
     if status.status == DatasetRunStatus.SUCCESS:
@@ -256,6 +265,7 @@ while True:
 Once the run status is `success`, call `get_dataset_run_preview()` to fetch a preview of the completed dataset. The preview returns a subset of rows for quick inspection - by default up to 100, configurable up to 10,000 with the `limit` parameter.
 
 ```python
+# sp_signals and run: as in Check run status
 preview = sp_signals.get_dataset_run_preview(run.id, limit=10000)
 df = preview.to_pandas()
 ```
@@ -273,6 +283,7 @@ The resulting DataFrame contains one row per anchor, with columns for the attrib
 The complete dataset is written to your warehouse at the table location stored in `run.dataset`. Training datasets can contain millions of rows, so for model training you should query this table directly in your warehouse rather than loading it into memory. The table follows the format `{database}.{schema}.{table}`:
 
 ```python
+# run: the response from a submit_dataset_run_* call
 dataset_location = run.dataset
 print(f"{dataset_location.database}.{dataset_location.schema_}.{dataset_location.table}")
 # e.g. "analytics.ml.signals_training_dataset"
@@ -289,6 +300,7 @@ SELECT * FROM analytics.ml.signals_training_dataset
 To cancel a dataset build that is still in progress:
 
 ```python
+# sp_signals and run: as in Check run status
 sp_signals.cancel_dataset_run(run.id)
 ```
 
@@ -297,6 +309,21 @@ sp_signals.cancel_dataset_run(run.id)
 If you want to review or customize the SQL before running it, use `build_dataset_with_session_anchors()` or `build_dataset_with_custom_anchors()`. These generate the SQL files without executing them, so you can inspect, modify, or run them on your own schedule.
 
 ```python
+from datetime import datetime, timezone
+
+from snowplow_signals import AtomicProperty, Criteria, Criterion, TrainingSpan
+
+goal = Criteria(
+    all=[
+        Criterion.eq(AtomicProperty(name="event"), "transaction"),
+    ]
+)
+span = TrainingSpan(
+    start_time=datetime(2024, 1, 1, tzinfo=timezone.utc),
+    end_time=datetime(2024, 4, 1, tzinfo=timezone.utc),
+)
+
+# sp_signals and my_attribute_group: as in the session-anchor examples
 bundle = sp_signals.build_dataset_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=goal,

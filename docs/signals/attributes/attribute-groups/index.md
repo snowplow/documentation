@@ -33,17 +33,34 @@ The first step is to specify:
 Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream.
 
 ```python
-from snowplow_signals import StreamAttributeGroup, domain_sessionid
+from snowplow_signals import Attribute, Event, StreamAttributeGroup, domain_sessionid
 
-my_stream_attribute_group = StreamAttributeGroup(
-    name="my_stream_attribute_group",
+# Attributes are defined separately: see Configure attributes
+page_view_count = Attribute(
+    name="page_view_count",
+    type="int32",
+    events=[
+        Event(vendor="com.snowplowanalytics.snowplow", name="page_view", version="1-0-0")
+    ],
+    aggregation="counter",
+)
+button_click_counter = Attribute(
+    name="button_click_counter",
+    type="int32",
+    events=[
+        Event(vendor="com.snowplowanalytics.snowplow", name="button_click", version="1-0-0")
+    ],
+    aggregation="counter",
+)
+
+my_attribute_group = StreamAttributeGroup(
+    name="my_attribute_group",
     version=1,
     attribute_key=domain_sessionid,
     owner="user@company.com",
     attributes=[
-        # Previously defined attributes
         page_view_count,
-        products_added_to_cart_feature,
+        button_click_counter,
     ],
 )
 ```
@@ -108,8 +125,10 @@ Set `backfill_since_tstamp` on your `StreamAttributeGroup` to specify the earlie
 from datetime import datetime, timezone
 from snowplow_signals import StreamAttributeGroup, domain_userid
 
-my_stream_attribute_group = StreamAttributeGroup(
-    name="my_stream_attribute_group",
+# page_view_count: the attribute from Define the attribute group
+
+my_attribute_group = StreamAttributeGroup(
+    name="my_attribute_group",
     version=1,
     attribute_key=domain_userid,
     owner="user@company.com",
@@ -125,7 +144,7 @@ my_stream_attribute_group = StreamAttributeGroup(
 
 Attribute groups with a warehouse source don't require attribute definition, as no calculation is performed. This source type syncs existing, pre-calculated warehouse values to your Profiles Store using the batch engine.
 
-See [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md) for full configuration details.
+See [Sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) for full configuration details.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -137,7 +156,7 @@ Provide the warehouse and table details, and select which fields you want to sen
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md) for the full SDK reference.
+Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) for the full SDK reference.
 
 </TabItem>
 </Tabs>
@@ -147,12 +166,12 @@ Use `ExternalBatchAttributeGroup` instead of `StreamAttributeGroup`. See [Wareho
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-Configure the attribute group fields described at the top of this page. Additional options such as backfill are covered in the sections below.
+Configure the attribute group fields from [Define the attribute group](#define-the-attribute-group). For backfill, see [Backfill attributes](#backfill-attributes).
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-The table below lists all available arguments for `StreamAttributeGroup`:
+This table lists all available arguments for `StreamAttributeGroup`:
 
 | Argument | Description | Type | Default | Required? |
 | --- | --- | --- | --- | --- |
@@ -199,6 +218,8 @@ Set `ttl` on your attribute group using a `timedelta`:
 from datetime import timedelta
 from snowplow_signals import StreamAttributeGroup, user_id
 
+# page_view_count and session_duration: attributes you have defined (see Configure attributes)
+
 stream_attribute_group = StreamAttributeGroup(
     name="comprehensive_stream_attribute_group",
     version=2,
@@ -233,10 +254,17 @@ Click the **Run preview** button in the bottom right corner.
 Use the `test()` method.
 
 ```python
+import os
 from snowplow_signals import Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
+# my_attribute_group: the group from Define the attribute group
 test_data = sp_signals.test(
     attribute_group=my_attribute_group,
     app_ids=["website"]
@@ -246,6 +274,7 @@ test_data = sp_signals.test(
 To inspect an existing attribute group's definition, use `get_attribute_group()`:
 
 ```python
+# sp_signals: the client from the previous block
 attribute_definitions = sp_signals.get_attribute_group(
     name="my_attribute_group",
     version=1,
@@ -282,10 +311,17 @@ Click **Edit** to make changes. To send the configuration to your Signals infras
 Use `publish()` to register attribute groups with Signals.
 
 ```python
+import os
 from snowplow_signals import Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
+# my_attribute_group and my_other_attribute_group: groups defined earlier
 sp_signals.publish([
     my_attribute_group,
     my_other_attribute_group,
@@ -339,6 +375,8 @@ Use `unpublish()` to stop active calculation without losing the attribute group 
 Use `delete()` to permanently remove the attribute group and its calculated attribute values from the Profiles Store. You must unpublish before deleting.
 
 ```python
+# sp_signals and my_attribute_group: from Publish attribute groups
+
 # Unpublish
 sp_signals.unpublish([my_attribute_group])
 

@@ -217,7 +217,7 @@ Here are two pieces of older content that only partially follow the style guide.
     | on top of that |
     | quickly        |
 
-- Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
+- Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section. If the reader needs the concept to follow the task, one sentence defining it before the link is fine
   - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
   - No ellipses ("...")
 
@@ -339,6 +339,28 @@ See the [components page](/style-guide/components/) for the MDX components that 
 - Images should be a sensible size (max 2000px x 500px)
 - Highlighting the relevant part of an image is recommended
 - For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as they adjust automatically
+
+## Content types and page templates
+
+Every docs page has a `content_type` in its frontmatter. The type says what the page is for, and each type has a fixed shape, so readers learn where to look and search tools can filter by type. Pick the type before you start writing, and follow its template.
+
+Templates stay within the 3 to 5 H2 limit. Put the description, and when or why to use the feature, in the opening paragraphs before the first H2. Don't add a "Next steps" heading: end the page with a short paragraph of links instead.
+
+| `content_type` | Use it for                                                    | H2 sections, in order                                                                                      |
+| -------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `concept`      | Explaining what something is and why it matters               | What it is and why it matters · How it works (diagram plus a text version) · Example · Related concepts    |
+| `how-to`       | Doing one task                                                | Before you begin · Steps (verify as the last step) · Troubleshooting (exact error string, then the fix)   |
+| `tutorial`     | A guided example that builds something end to end            | What you'll build (with a time estimate) · Requirements · Steps · Clean up                                 |
+| `reference`    | Lookup material such as parameters, fields, and methods       | Parameters (generated table) · Example · Errors · Version applicability                                    |
+| `integration`  | Connecting a destination or third-party tool                  | Compatibility · Connect · Configure · Troubleshooting                                                       |
+| `sdk`          | A tracker or SDK landing page                                 | Feature support (row from the tracker matrix) · Install and initialize · Track your first event            |
+| `landing`      | Hubs and overviews that route readers to other pages          | A task table, then short groups of links                                                                   |
+
+Some rules that go with the templates:
+
+- Use `<Steps>` for the Steps section of how-to and tutorial pages, and `<ParamTable>` for reference parameters. See the [components page](/style-guide/components/).
+- Leave out Troubleshooting or Errors when there are no known errors. Don't write generic advice to fill the section.
+- Don't mix how-to and reference content on one page. Split it into a how-to page and a reference page that link to each other. [Check your Collector configuration](/docs/pipeline/collector/) and the [Collector configuration reference](/docs/pipeline/collector/configuration-reference/) are an example.
 
 ## Inclusive language
 ### Allowlist and denylist

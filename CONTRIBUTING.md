@@ -72,8 +72,11 @@ sidebar_label: "Short title"                   # Sidebar text (optional, falls b
 description: "One to two sentences for SEO."   # Used for SEO
 keywords: ["keyword1", "keyword2"]             # SEO keywords
 date: "2025-09-09"                             # Creation date (YYYY-MM-DD)
+content_type: how-to                           # concept | how-to | tutorial | reference | integration | sdk | landing
 ---
 ```
+
+`content_type` picks the page template: the style guide's "Content types and page templates" section lists the H2 sections for each type. The build warns about pages that don't set it.
 
 `sidebar_position` controls where the page appears in the sidebar; lower numbers come first.
 

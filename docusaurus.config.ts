@@ -126,6 +126,8 @@ const config: Config = {
     ],
     './plugins/docusaurus-plugin-release-notes',
     './plugins/docusaurus-plugin-snowplow-schema',
+    // Warns about docs pages without a valid content_type (see CLAUDE.md)
+    './plugins/docusaurus-plugin-content-type-check',
     [
       './plugins/docusaurus-plugin-llms-txt',
       {

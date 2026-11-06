@@ -14,9 +14,6 @@ import DocItemContent from '@theme/DocItem/Content'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import type { Props } from '@theme/DocItem/Layout'
 
-import { Paper } from '@mui/material'
-
-import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
 import { AlignLeft } from 'lucide-react'
 import HeadJSONLD from '../../../components/SchemaPlugin'
 
@@ -26,7 +23,8 @@ import {
   SHARED_SIDEBARS,
   rememberProduct,
 } from '@site/src/components/navigation/products'
-import PageActions from './PageActions'
+import PageActions from '@site/src/components/PageActions'
+import Feedback from '@site/src/components/Feedback'
 import MobileToc from './MobileToc'
 
 /**
@@ -85,9 +83,35 @@ function useDocTOC() {
   }
 }
 
+/**
+ * The docs home (`layout: home` in front matter) is a landing page: no
+ * breadcrumbs, page actions, table of contents, feedback, or pagination.
+ */
+function HomeLayout({ children }: { children: React.ReactNode }): JSX.Element {
+  return (
+    <>
+      <MarkdownAlternateLink />
+      <div className="doc-layout doc-layout--home">
+        <div className="doc-layout__main">
+          <article className="doc-article">
+            <DocItemContent>{children}</DocItemContent>
+          </article>
+        </div>
+      </div>
+    </>
+  )
+}
+
 export default function DocItemLayout({ children }: Props): JSX.Element {
+  const { frontMatter } = useDoc()
+  if ((frontMatter as { layout?: string }).layout === 'home') {
+    return <HomeLayout>{children}</HomeLayout>
+  }
+  return <DefaultLayout>{children}</DefaultLayout>
+}
+
+function DefaultLayout({ children }: Props): JSX.Element {
   const docTOC = useDocTOC()
-  const tutorial = useTutorial()
   const markdown = useMarkdownCopy()
   const sidebarName = useDocsSidebar()?.name
   const { pathname } = useLocation()
@@ -114,14 +138,9 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
             </div>
             <DocVersionBadge />
             <ReleaseNoteMeta />
-            {tutorial === TutorialKind.Tutorial ? (
-              <Paper sx={{ p: 2, pt: 2 }}>
-                <DocItemContent>{children}</DocItemContent>
-              </Paper>
-            ) : (
-              <DocItemContent>{children}</DocItemContent>
-            )}
+            <DocItemContent>{children}</DocItemContent>
             <DocItemFooter />
+            {pathname.startsWith('/docs/') && <Feedback />}
           </article>
           <div className="doc-article__paginator">
             <DocItemPaginator />

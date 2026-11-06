@@ -8,13 +8,28 @@ date: "2026-11-06"
 content_type: how-to
 ---
 
-Signals calculates stream attributes from Snowplow [events](/docs/fundamentals/events/index.md). You don't need a separate pipeline: Signals includes event collection, so you add a Snowplow tracker to your application and point it at your Collector endpoint. If you already run Snowplow, Signals reads the events from your existing pipeline, and you don't need to change your tracking.
+Signals calculates stream attributes from Snowplow [events](/docs/fundamentals/events/index.md). On the free tier, event collection is included, so you add a Snowplow tracker to your application and point it at your Collector endpoint. If you already run Snowplow, Signals reads the events from your existing pipeline, and you don't need to change your tracking.
+
+```mdx-code-block
+import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+
+<SignalsFreeTier/>
+```
 
 Use events as the data source when you need attributes that update in real time, such as the number of products a user viewed in the last ten minutes. To bring in pre-calculated values such as CRM or transactional data, [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) instead. [Data sources](/docs/signals/concepts/index.md#data-sources) compares the two.
 
 ## Before you begin
 
-You need a Signals environment and your Collector endpoint. If you don't have an environment yet, [set up Signals](/docs/signals/setup/index.md) first.
+You need a Signals environment. If you don't have one yet, [set up Signals](/docs/signals/setup/index.md) first. Then:
+
+* On the free tier: have your Collector endpoint and Signals API URL ready.
+* With an existing Snowplow pipeline: nothing changes, because your trackers already send to your Collector.
+
+On either path, these are the only additions Signals needs:
+
+* Set `user_id` in your tracker if you want attributes per logged-in user.
+* Add the [Signals browser plugin](/docs/signals/applications/subscribe/index.md) if a web application receives interventions.
+* Check that your events carry the identifiers your [attribute keys](/docs/signals/attributes/attribute-keys/index.md) need.
 
 ## Add a tracker to your application
 

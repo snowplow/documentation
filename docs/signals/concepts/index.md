@@ -29,9 +29,7 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 
 ## Architecture
 
-You don't need to run a Snowplow pipeline before you use Signals. Signals includes event collection: add a Snowplow tracker to your application, and Signals computes attributes from the events it sends. Signals is deployed into the same cloud as the [pipeline](/docs/cdi/index.md) that collects those events.
-
-If you already run Snowplow, Signals reads the events from your existing pipeline, which continues to process events as usual.
+Signals runs in the same cloud as the Snowplow [pipeline](/docs/cdi/index.md) that collects your events: the one provisioned with the free tier, or your existing CDI pipeline. If you already run Snowplow, Signals reads the events from your existing pipeline, which continues to process events as usual.
 
 :::note[Warehouse support]
 Snowflake, BigQuery, and Databricks are supported. You can also use Signals without the warehouse functionality.
@@ -246,9 +244,3 @@ Using Signals follows these steps, and the rest of this documentation follows th
 2. Plan your use case. Decide which attributes to calculate and at what level, whether they come from the stream or the warehouse, and whether your application will pull attributes, react to interventions, or ground an agent with an agentic context.
 3. Define and publish your configuration. Create [attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), and [agentic contexts](/docs/signals/agentic-contexts/index.md) in Console or with the [Signals Python SDK](/docs/signals/connection/reference/index.md#python-sdk), and group attribute groups into [services](/docs/signals/applications/services/index.md). Signals only calculates attributes once you publish; see the [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow).
 4. Take action in your application. [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md), [subscribe to interventions](/docs/signals/applications/subscribe/index.md), or [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) using the SDKs or API.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

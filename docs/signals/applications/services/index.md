@@ -120,9 +120,3 @@ sp_signals.publish([
 
 </TabItem>
 </Tabs>
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

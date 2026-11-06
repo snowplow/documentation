@@ -159,9 +159,3 @@ curl \
 A list of interventions, even an empty one, means the connection works. The [Signals API reference](/docs/signals/connection/reference/index.md#signals-api-endpoints) shows where to find the full API documentation for your deployment.
 
 </Steps>
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

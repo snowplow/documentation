@@ -39,7 +39,7 @@ You'll need:
 * A Python notebook environment, such as Google Colab or Jupyter
 
 :::note[Signals free tier]
-You don't need to run a Snowplow pipeline first. If you don't have an account, sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral), which includes event collection, to follow along.
+If you don't have a Snowplow account, sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral), which includes event collection, to follow along.
 :::
 
 ## Steps

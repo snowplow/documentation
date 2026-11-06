@@ -338,9 +338,3 @@ The following limitations apply to every use case. They're temporary, and Snowpl
 * Stream attribute groups only: attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 * Interventions can't target `snowplow_id`: an [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
 * Deleting by identifier doesn't delete the person's attributes: to delete data, call the Signals API's `DELETE /api/v1/{attribute_key}/{identifier}` endpoint. Deleting by a lookup identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain. To delete the person's attributes, use `snowplow_id` as the attribute key and their Snowplow ID as the identifier. You can find it on their events in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Reads by their lookup identifiers then return `null`. Deleting doesn't remove the person from Identities, so new events calculate their attributes again under the same Snowplow ID.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

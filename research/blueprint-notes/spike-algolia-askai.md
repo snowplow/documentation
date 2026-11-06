@@ -42,7 +42,7 @@ Ask AI is a conversational mode in the DocSearch v4 modal. The reader asks a que
 
 ## Not done locally
 
-Needs dashboard access to the Algolia app and an LLM provider key. No config change is in this branch, because an `askAi` block without a valid assistant ID breaks the search modal.
+Needs dashboard access to the Algolia app and an LLM provider key. Because an `askAi` block without a valid assistant ID breaks the search modal, `docusaurus.config.ts` only adds the block when the `ALGOLIA_ASKAI_ASSISTANT_ID` environment variable is set at build time. To try it on a preview build, set that variable to the assistant ID; nothing changes when it's unset.
 
 ## Sources
 

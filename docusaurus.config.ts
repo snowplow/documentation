@@ -330,6 +330,17 @@ const config: Config = {
         indexName: 'snowplow',
         contextualSearch: true,
         insights: true,
+        // Ask AI in the search modal (DocSearch v4). Off until an Algolia
+        // assistant exists: an askAi block without a valid assistant ID breaks
+        // the modal. See research/blueprint-notes/spike-algolia-askai.md.
+        ...(process.env.ALGOLIA_ASKAI_ASSISTANT_ID
+          ? {
+              askAi: {
+                assistantId: process.env.ALGOLIA_ASKAI_ASSISTANT_ID,
+                suggestedQuestions: true,
+              },
+            }
+          : {}),
       },
     },
 

@@ -20,7 +20,6 @@ import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
 import { AlignLeft, Download, Copy, Check } from 'lucide-react'
 import HeadJSONLD from '../../../components/SchemaPlugin'
 
-import Demo_Ad from '../../../components/ui/Demo_Ad'
 import ReleaseNoteMeta from '@site/src/components/release-notes/ReleaseNoteMeta'
 
 function MarkdownActions() {
@@ -153,7 +152,6 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
                 </p>
               </div>
               {docTOC.desktop}
-              <Demo_Ad />
             </div>
           </div>
         )}

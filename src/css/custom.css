@@ -93,39 +93,6 @@
   animation: subtle-gradient-shift 12s linear infinite;
 }
 
-/* A band of light sweeps across the button, then pauses before the next pass */
-.shimmer-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-button::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(255, 255, 255, 0.6) 50%,
-    transparent 75%
-  );
-  transform: translateX(-100%);
-  animation: shimmer 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes shimmer {
-  60%,
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shimmer-button::after {
-    animation: none;
-  }
-}
 /* You can override the default Infima variables here. */
 
 /**
@@ -1881,10 +1848,4 @@ pre.mermaid {
 .link-card p.text-muted-foreground {
   color: hsl(var(--muted-foreground)) !important;
   font-weight: 400 !important;
-}
-
-@media print {
-  [data-name='Free trial'] {
-    display: none;
-  }
 }

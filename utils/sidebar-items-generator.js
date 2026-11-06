@@ -227,8 +227,22 @@ async function sidebarItemsGenerator(args) {
       : {}),
   }))
 
+  // Docusaurus prefers a doc's sidebar_label front matter over the label in
+  // sidebars.js, so a label override on a page is written to its front matter
+  // (the same object the docs plugin renders from)
+  const relabel = (id, label) => {
+    if (label && docsById[id]) docsById[id].frontMatter.sidebar_label = label
+  }
+  // Directories holding only an index page come back as empty categories,
+  // which swap() turns into docs, so relabel the index page of those too
+  if (picked[0]?.type === 'doc') relabel(picked[0].id, pickOpts.label)
+  if (picked[0]?.type === 'category' && picked[0].items.length === 0) {
+    relabel(picked[0].link?.id, pickOpts.label)
+  }
+
   if (pickOpts.hoist && picked[0]?.type === 'category') {
     const category = picked[0]
+    if (category.link?.type === 'doc') relabel(category.link.id, pickOpts.indexLabel)
     const index =
       category.link?.type === 'doc'
         ? [

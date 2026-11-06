@@ -34,20 +34,6 @@ export const QUICKSTARTS: Quickstart[] = [
     time: '10 min',
   },
   {
-    product: 'cdi',
-    title: 'Create your first custom events',
-    description: 'Define a self-describing event and an entity, and track them.',
-    href: '/docs/get-started/custom-events/',
-    time: '15 min',
-  },
-  {
-    product: 'cdi',
-    title: 'Run your first data models',
-    description: 'Turn raw events into sessions, views, and users with a dbt package.',
-    href: '/docs/get-started/modeling/',
-    time: '20 min',
-  },
-  {
     product: 'signals',
     title: 'Signals quickstart with your coding agent',
     description: 'Describe what you want to build, and let your agent add the tracking and Signals configuration.',

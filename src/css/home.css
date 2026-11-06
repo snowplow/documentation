@@ -48,6 +48,22 @@
     background: var(--sp-color-surface);
   }
 
+  .home-hero__agent ul {
+    margin: 0 0 var(--sp-space-3);
+    padding-left: var(--sp-space-5);
+  }
+
+  .home-hero__agent li {
+    margin: var(--sp-space-1) 0;
+  }
+
+  .home-hero .home-hero__note {
+    margin: var(--sp-space-3) 0 0;
+    color: var(--sp-color-fg-muted);
+    font-size: var(--sp-text-sm);
+    line-height: 1.5;
+  }
+
   .home-hero .home-hero__agent-title {
     margin: 0 0 var(--sp-space-2);
     color: var(--sp-color-fg);

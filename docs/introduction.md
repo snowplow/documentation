@@ -12,7 +12,7 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import { HomeSearch, AgentSetup, Lifecycle, Quickstarts, LatestReleases } from '@site/src/components/home'
+import { HomeSearch, Quickstarts, LatestReleases } from '@site/src/components/home'
 
 <div className="home-hero breakout">
 <div className="home-hero__intro">
@@ -21,19 +21,24 @@ Snowplow CDI collects, validates, and models behavioral data from your apps, and
 
 <HomeSearch />
 
+<p className="home-hero__note">Using a coding agent? <a href="/docs/ai/#connect-your-coding-agent">Connect it to the docs</a>.</p>
+
 </div>
 <div className="home-hero__agent">
 
-<p className="home-hero__agent-title">Connect your coding agent</p>
+<p className="home-hero__agent-title">Evaluating or running Snowplow?</p>
 
-<AgentSetup compact />
+* [How the pipeline works](/docs/fundamentals/index.md)
+* [Deployment options](/docs/get-started/deployment-options/index.md)
+* [Try Snowplow free](/docs/get-started/free-trial/index.md)
+* [Coming from Segment, GA, Adobe, or Mixpanel](/docs/migration-guides/index.md)
 
 </div>
 </div>
 
 ## Choose a product
 
-Both products use the same events, entities, and schemas. Most teams start with CDI and add Signals when they need user attributes in real time.
+Both products use the same events, entities, and schemas. CDI collects, validates, and models behavioral data. Signals computes attributes in real time, from events it collects itself or from a CDI pipeline.
 
 <CardGrid cols={2} breakout>
   <Card
@@ -66,7 +71,7 @@ trackPageView();
     description="Calculate user attributes as events arrive, and read them from your app or agent with one API call."
     links={[
       { label: 'Quickstart', href: '/docs/signals/quickstart/' },
-      { label: 'Signals API and SDK reference', href: '/docs/signals/connection/' },
+      { label: 'Connect with the SDKs', href: '/docs/signals/connection/' },
       { label: 'Define attributes', href: '/docs/signals/attributes/' },
     ]}
   >
@@ -80,17 +85,7 @@ const attributes = await signals.getServiceAttributes({ name: 'my_service', attr
   </Card>
 </CardGrid>
 
-## Follow the data lifecycle
-
-Each stage links to the part of the docs that covers it. The stages match the groups in each product's sidebar.
-
-<Lifecycle />
-
-## Start with a quickstart
-
-Each quickstart ends with events or attributes you can see. Times assume you have the prerequisites listed on the page.
-
-<Quickstarts />
+Deploying or administering Snowplow? See the [platform overview](/docs/platform/index.md).
 
 ## Find a task
 
@@ -101,12 +96,18 @@ If you know what you want to do, start from the page in this table.
 | Add tracking to a website                           | [Set up the web tracker](/docs/sources/web-trackers/tracker-setup/index.md)                                 |
 | Add tracking to a mobile app                        | [Set up the mobile trackers](/docs/sources/mobile-trackers/installation-and-set-up/index.md)                |
 | Define a custom event                               | [Create a data structure](/docs/event-studio/data-structures/index.md)                                       |
-| Find out why events failed validation               | [Explore failed events](/docs/monitoring/exploring-failed-events/index.md)                                   |
+| Find out why events failed validation               | [See failed events in Console](/docs/monitoring/index.md)                                   |
 | Test tracking on my machine                         | [Run Snowplow Micro locally](/docs/testing/snowplow-micro/local/index.md)                                    |
 | Load events into Snowflake, BigQuery, or Databricks | [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)                              |
 | Build sessions and users tables                     | [Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) |
 | Give an AI agent real-time context about a user     | [Retrieve Signals attributes](/docs/signals/applications/retrieve-attributes/index.md)                       |
 | Check which component versions I need               | [Versions and compatibility](/docs/api-reference/versions/index.md)                                          |
+
+## Start with a quickstart
+
+Each quickstart ends with events or attributes you can see. Times assume you have the prerequisites listed on the page.
+
+<Quickstarts />
 
 ## Latest releases
 

@@ -224,8 +224,10 @@ const config: Config = {
             position: 'right',
             className: 'navbar-support-link',
           },
+          // Links to the Signals free tier on Signals pages, and to the
+          // CDI Cloud free trial everywhere else
           {
-            href: 'https://snowplow.io/get-started/snowplow-free-trial',
+            type: 'custom-tryForFree',
             label: 'Try for free',
             position: 'right',
             className: 'navbar-cta',

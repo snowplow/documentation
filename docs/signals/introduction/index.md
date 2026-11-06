@@ -49,7 +49,7 @@ Signals serves the same attributes to both kinds of consumer. The path through t
     headingLevel={3}
     eyebrow="For AI and agent teams"
     title="Feed an AI agent"
-    href="/docs/signals/agentic-contexts/"
+    href="/docs/signals/applications/#agents"
     description="Ground a chatbot or agent in what the user is doing right now, as structured JSON or a short narrative."
     links={[
       { label: 'Define agentic contexts', href: '/docs/signals/agentic-contexts/' },

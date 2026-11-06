@@ -98,7 +98,7 @@ If you know what you want to do, start from the page in this table.
 | Test tracking on my machine                         | [Run Snowplow Micro locally](/docs/testing/snowplow-micro/local/index.md)                                    |
 | Load events into Snowflake, BigQuery, or Databricks | [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)                              |
 | Build sessions and users tables                     | [Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) |
-| Give an AI agent real-time context about a user     | [Retrieve Signals attributes](/docs/signals/applications/retrieve-attributes/index.md)                       |
+| Give an AI agent real-time context about a user     | [Choose how to feed an agent](/docs/signals/applications/index.md)                                           |
 | Check which component versions I need               | [Versions and compatibility](/docs/api-reference/versions/index.md)                                          |
 
 ## Start with a quickstart

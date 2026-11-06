@@ -1,7 +1,7 @@
 ---
 title: "Create ML training datasets"
 sidebar_position: 32
-sidebar_label: "ML training datasets"
+sidebar_label: "Build training datasets"
 description: "Build labeled, point-in-time correct training datasets for machine learning models using the Signals Python SDK. Define anchor events, build datasets, and retrieve results."
 keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "signals python sdk", "ML"]
 date: "2026-07-15"

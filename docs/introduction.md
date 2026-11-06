@@ -1,173 +1,117 @@
 ---
-title: "Snowplow Documentation"
+title: "Snowplow documentation"
 slug: "/"
+layout: home
+displayed_sidebar: null
+hide_table_of_contents: true
 sidebar_position: 0
-sidebar_label: "Introduction"
-description: "Snowplow CDI delivers validated, enriched event-level data to your warehouse, lake, or stream in real time. Define custom events with flexible schemas and distinguish AI agent traffic from human visitors."
-keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "ai-powered analytics", "signals"]
+sidebar_label: "Docs home"
+description: "Documentation for Snowplow CDI, which collects, validates, and models behavioral data in your own cloud, and Snowplow Signals, which serves real-time attributes to applications and AI agents."
+keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "signals", "coding agent"]
 pagination_next: null
+pagination_prev: null
 ---
 
-**Deliver validated, enriched event data to your warehouse, lake, or stream in real time with Snowplow**.
+import { HomeSearch, AgentSetup, Lifecycle, Quickstarts, LatestReleases } from '@site/src/components/home'
 
-<CardGrid cols={2}>
-  <CallToActionCard
-    title="Get started with Snowplow CDI"
-    description="Your data foundation, deployed in your cloud or ours"
-    href="/docs/get-started/"
-  />
+# Snowplow documentation
 
-  <CallToActionCard
-    title="Snowplow Signals"
-    description="Real-time customer context for AI agents and personalized experiences"
+<div className="home-hero breakout">
+<div className="home-hero__intro">
+
+Snowplow CDI collects, validates, and models behavioral data from your apps, and delivers it to your warehouse, lake, or stream. Signals calculates attributes from that data in real time and serves them to your applications and AI agents.
+
+<HomeSearch />
+
+</div>
+<div className="home-hero__agent">
+
+<p className="home-hero__agent-title">Connect your coding agent</p>
+
+<AgentSetup compact />
+
+</div>
+</div>
+
+## Choose a product
+
+Both products use the same events, entities, and schemas. Most teams start with CDI and add Signals when they need user attributes in real time.
+
+<CardGrid cols={2} breakout>
+  <Card
+    variant="product"
+    eyebrow="Customer data infrastructure"
+    title="Snowplow CDI"
+    href="/docs/cdi/"
+    headingLevel={3}
+    description="Track events from any platform, validate them against your schemas, and load them into your warehouse."
+    links={[
+      { label: 'Quickstart', href: '/docs/get-started/quickstart/' },
+      { label: 'Tracker reference', href: '/docs/api-reference/trackers/' },
+      { label: 'Trackers and SDKs', href: '/docs/sources/' },
+    ]}
+  >
+
+```js
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+newTracker('sp', '{{collector_url}}', { appId: 'my-app' });
+trackPageView();
+```
+
+  </Card>
+  <Card
+    variant="product"
+    eyebrow="Real-time customer context"
+    title="Signals"
     href="/docs/signals/introduction/"
-  />
+    headingLevel={3}
+    description="Calculate user attributes as events arrive, and read them from your app or agent with one API call."
+    links={[
+      { label: 'Quickstart', href: '/docs/signals/quickstart/' },
+      { label: 'Signals API and SDK reference', href: '/docs/signals/connection/' },
+      { label: 'Define attributes', href: '/docs/signals/attributes/' },
+    ]}
+  >
 
+```ts
+import { Signals } from '@snowplow/signals-node';
+const signals = new Signals({ baseUrl, apiKey, apiKeyId, organizationId });
+const attributes = await signals.getServiceAttributes({ name: 'my_service', attribute_key: 'domain_userid', identifier });
+```
+
+  </Card>
 </CardGrid>
 
-:::tip[Set up Snowplow with your AI agent]
+## Follow the data lifecycle
 
-Install the [Snowplow MCP](/docs/ai/snowplow-mcp/index.md) to set up Snowplow through your AI agent.
+Each stage links to the part of the docs that covers it. The stages match the groups in each product's sidebar.
 
-:::
+<Lifecycle />
 
-## Explore Snowplow Customer Data Infrastructure
+## Start with a quickstart
 
-<CardGrid cols={3} breakout>
-  <FeaturedSection
-    title="Fundamentals"
-    description="Learn about core Snowplow concepts"
-    href="/docs/fundamentals/"
-  >
-    [Events](/docs/fundamentals/events/index.md)
-    [Entities](/docs/fundamentals/entities/index.md)
-    [Schemas](/docs/fundamentals/schemas/index.md)
-    [Atomic event fields reference](/docs/fundamentals/canonical-event/index.md)
-  </FeaturedSection>
+Each quickstart ends with events or attributes you can see. Times assume you have the prerequisites listed on the page.
 
-  <FeaturedSection
-    title="Event collection"
-    description="Manage your tracking"
-    href="/docs/event-studio"
-  >
-    [Tracking plans](/docs/event-studio/tracking-plans/index.md)
-    [Source applications](/docs/event-studio/source-applications/index.md)
-    [Create a data structure](/docs/event-studio/data-structures/index.md)
-    [Snowtype](/docs/event-studio/implement-tracking/index.md)
-  </FeaturedSection>
+<Quickstarts />
 
-  <FeaturedSection
-    title="Destinations"
-    description="Send data to warehouses, lakes, and third-party tools"
-    href="/docs/destinations/"
-  >
-    [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
-    [Event forwarding](/docs/destinations/forwarding-events/index.md)
-    [How to query Snowplow data](/docs/destinations/warehouses-lakes/querying-data/index.md)
-    [Google Tag Manager Server-Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)
-  </FeaturedSection>
+## Find a task
 
-  <FeaturedSection
-    title="Trackers"
-    description="Instrument 20+ SDKs for web, mobile, and servers"
-    href="/docs/sources/"
-  >
-    [Get started on web](/docs/sources/web-trackers/tracker-setup/index.md)
-    [Track page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
-    [Get started on mobile](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
-    [Track screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
-  </FeaturedSection>
+If you know what you want to do, start from the page in this table.
 
-  <FeaturedSection
-    title="Pipeline"
-    description="Configure your Collector and enrichments"
-    href="/docs/pipeline/"
-  >
-    [Collector](/docs/pipeline/collector/index.md)
-    [Enrichments](/docs/pipeline/enrichments/index.md)
-    [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)
-    [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
-  </FeaturedSection>
+| I want to                                           | Start here                                                                                                   |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Add tracking to a website                           | [Set up the web tracker](/docs/sources/web-trackers/tracker-setup/index.md)                                 |
+| Add tracking to a mobile app                        | [Set up the mobile trackers](/docs/sources/mobile-trackers/installation-and-set-up/index.md)                |
+| Define a custom event                               | [Create a data structure](/docs/event-studio/data-structures/index.md)                                       |
+| Find out why events failed validation               | [Explore failed events](/docs/monitoring/exploring-failed-events/index.md)                                   |
+| Test tracking on my machine                         | [Run Snowplow Micro locally](/docs/testing/snowplow-micro/local/index.md)                                    |
+| Load events into Snowflake, BigQuery, or Databricks | [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)                              |
+| Build sessions and users tables                     | [Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) |
+| Give an AI agent real-time context about a user     | [Retrieve Signals attributes](/docs/signals/applications/retrieve-attributes/index.md)                       |
+| Check which component versions I need               | [Versions and compatibility](/docs/api-reference/versions/index.md)                                          |
 
-  <FeaturedSection
-    title="Data modeling"
-    description="Transform raw events into analytics-ready tables"
-    href="/docs/modeling-your-data/"
-  >
-    [Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md)
-    [Attribution dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
-    [Incremental processing logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)
-    [Identity stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md)
-  </FeaturedSection>
+## Latest releases
 
-</CardGrid>
+New features and fixes across Snowplow components, newest first.
 
-## Explore Snowplow Signals
-
-Signals computes real-time attributes from your event stream and serves them to applications and AI agents.
-
-<CardGrid cols={3} breakout>
-  <FeaturedSection
-    title="Get started with Signals"
-    description="Set up Signals and learn how it works"
-    href="/docs/signals/"
-  >
-    [Signals quickstart](/docs/signals/quickstart/index.md)
-    [Set up Signals](/docs/signals/setup/index.md)
-    [Signals fundamentals](/docs/signals/concepts/index.md)
-    [Connect to Signals](/docs/signals/connection/index.md)
-  </FeaturedSection>
-
-  <FeaturedSection
-    title="Attributes and interventions"
-    description="Define what to calculate and when to act"
-    href="/docs/signals/attributes/"
-  >
-    [Attribute groups](/docs/signals/attributes/attribute-groups/index.md)
-    [Attribute keys](/docs/signals/attributes/attribute-keys/index.md)
-    [Interventions](/docs/signals/interventions/index.md)
-    [Agentic contexts](/docs/signals/agentic-contexts/index.md)
-  </FeaturedSection>
-
-  <FeaturedSection
-    title="Use Signals in your application"
-    description="Serve attributes to applications and AI agents"
-    href="/docs/signals/applications/"
-  >
-    [Define services](/docs/signals/applications/services/index.md)
-    [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
-    [Subscribe to interventions](/docs/signals/applications/subscribe/index.md)
-    [Signals MCP server](/docs/signals/applications/mcp-server/index.md)
-  </FeaturedSection>
-
-</CardGrid>
-
-## Build with Snowplow
-
-:::tip[More resources]
-
-Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
-
-:::
-
-<CardGrid cols={3} breakout>
-  <LinkCard
-    title="Implement an abandoned browse system with composable CDP"
-    description="Engage with customers that show intent to purchase but leave without buying"
-    href="/tutorials/abandoned-browse-ccdp/introduction/"
-  />
-
-  <LinkCard
-    title="Set up the Unified Digital dbt package"
-    description="Transform your raw web and mobile event data into derived tables"
-    href="/tutorials/unified-digital/intro/"
-  />
-
-  <LinkCard
-    title="Use the Snowplow CLI MCP tool"
-    description="Let Claude or other MCP clients help with your data structure management"
-    href="/tutorials/snowplow-cli-mcp/introduction/"
-  />
-</CardGrid>
-
-[See all tutorials ->](/tutorials)
+<LatestReleases />

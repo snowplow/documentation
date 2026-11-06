@@ -56,7 +56,8 @@ const sub = (label, items) => ({
 const sidebars = {
   cdi: [
     group('Get started', [
-      pick('introduction', { label: 'Introduction' }),
+      pick('introduction', { label: 'Docs home' }),
+      pick('cdi', { label: 'CDI overview' }),
       pick('get-started', { hoist: true, indexLabel: 'First steps' }),
     ]),
     group('Design tracking', [

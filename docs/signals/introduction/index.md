@@ -1,6 +1,6 @@
 ---
-title: "Snowplow Signals Documentation"
-sidebar_label: "Introduction"
+title: "Snowplow Signals overview"
+sidebar_label: "Signals overview"
 sidebar_position: 1
 description: "Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. Use it for in-session personalization, customer-aware agents, real-time triggers, and machine learning features."
 keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
@@ -24,67 +24,106 @@ To see Signals working with your own data, follow the [quickstart](/docs/signals
 
 The quickstart uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. Once connected, your assistant can also answer questions about your Signals setup, and create and publish attribute groups, services, and interventions as you describe them. To do this from Console instead, use the [Snowplow Assistant](/docs/ai/console-agent/index.md). See the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a walkthrough.
 
-## Explore Signals
+## Choose your path
 
-<CardGrid cols={3} breakout>
+Signals serves the same attributes to both kinds of consumer. The path through the docs depends on what reads them.
 
-  <FeaturedSection
-    title="Attributes"
-    description="Calculate user attributes in real time"
-  >
-    [Learn about attributes](/docs/signals/concepts/index.md#attribute-groups)
-    [Define attributes](/docs/signals/attributes/index.md)
-    [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
-  </FeaturedSection>
-
-  <FeaturedSection
-    title="Interventions"
-    description="Trigger actions automatically"
-  >
-    [Learn about interventions](/docs/signals/concepts/index.md#interventions)
-    [Define interventions](/docs/signals/interventions/index.md)
-    [Subscribe to interventions](/docs/signals/applications/subscribe/index.md)
-  </FeaturedSection>
-
-  <FeaturedSection
-    title="Signals Python SDK"
-    description="Use Signals within a notebook"
-  >
-    [Connect to Signals](/docs/signals/connection/index.md#signals-python-sdk)
-    [Define attributes](/docs/signals/attributes/index.md)
-    [Define interventions](/docs/signals/interventions/index.md)
-  </FeaturedSection>
-
+<CardGrid cols={2}>
+  <Card
+    variant="product"
+    headingLevel={3}
+    eyebrow="For product and web teams"
+    title="Personalize an app"
+    href="/docs/signals/applications/"
+    description="Change content, offers, or flows while the user is still in the session, based on what they've done."
+    links={[
+      { label: 'Define attribute groups', href: '/docs/signals/attributes/attribute-groups/' },
+      { label: 'Group attributes into a service', href: '/docs/signals/applications/services/' },
+      { label: 'Retrieve attributes in your app', href: '/docs/signals/applications/retrieve-attributes/' },
+      { label: 'React to interventions', href: '/docs/signals/applications/subscribe/' },
+    ]}
+  />
+  <Card
+    variant="product"
+    headingLevel={3}
+    eyebrow="For AI and agent teams"
+    title="Feed an AI agent"
+    href="/docs/signals/agentic-contexts/"
+    description="Ground a chatbot or agent in what the user is doing right now, as structured JSON or a short narrative."
+    links={[
+      { label: 'Define agentic contexts', href: '/docs/signals/agentic-contexts/' },
+      { label: 'Retrieve agentic contexts', href: '/docs/signals/applications/agentic-contexts/' },
+      { label: 'Serve attributes through the MCP server', href: '/docs/signals/applications/mcp-server/' },
+      { label: 'Build an agent with Google ADK', href: '/tutorials/signals-google-adk-agent/introduction/' },
+    ]}
+  />
 </CardGrid>
 
-## Get hands on with Signals
+If you want features for a machine learning model instead, see [create ML training datasets](/docs/signals/ml-training-datasets/index.md).
 
-:::tip[More resources]
+## Explore Signals
 
-Visit our [Developer Hub](https://snowplow.io/developer-hub/) for demo videos, blog posts, workshops, and more.
-
-:::
+The Signals sidebar follows the order you set Signals up in: connect, define attributes, serve them, then act on them.
 
 <CardGrid cols={3} breakout>
-  <LinkCard
+  <Card
+    variant="product"
+    headingLevel={3}
+    title="Attributes"
+    href="/docs/signals/attributes/"
+    description="Calculate user attributes in real time or from warehouse tables."
+    links={[
+      { label: 'How attributes work', href: '/docs/signals/concepts/#attribute-groups' },
+      { label: 'Define attributes', href: '/docs/signals/attributes/' },
+      { label: 'Retrieve attributes', href: '/docs/signals/applications/retrieve-attributes/' },
+    ]}
+  />
+  <Card
+    variant="product"
+    headingLevel={3}
+    title="Interventions"
+    href="/docs/signals/interventions/"
+    description="Trigger actions automatically when a user meets your criteria."
+    links={[
+      { label: 'How interventions work', href: '/docs/signals/concepts/#interventions' },
+      { label: 'Define interventions', href: '/docs/signals/interventions/' },
+      { label: 'Subscribe to interventions', href: '/docs/signals/applications/subscribe/' },
+    ]}
+  />
+  <Card
+    variant="product"
+    headingLevel={3}
+    title="SDKs and API"
+    href="/docs/signals/connection/"
+    description="Connect to Signals from Python, Node.js, the browser, or over HTTP."
+    links={[
+      { label: 'Signals Python SDK', href: '/docs/signals/connection/#signals-python-sdk' },
+      { label: 'Define attributes in code', href: '/docs/signals/attributes/' },
+      { label: 'Define interventions in code', href: '/docs/signals/interventions/' },
+    ]}
+  />
+</CardGrid>
+
+## Try a tutorial
+
+Each tutorial builds a working demo on top of Signals. Visit the [Developer Hub](https://snowplow.io/developer-hub/) for videos, blog posts, and workshops.
+
+<CardGrid cols={3} breakout>
+  <Card
     title="Build a personalized travel agent"
-    description="Set up a demo travel site, and integrate with Snowplow Signals to personalize content and chatbot responses based on user behavior"
+    description="Set up a demo travel site, and personalize content and chatbot responses based on user behavior."
     href="/tutorials/signals-personalize-travel/intro/"
   />
-
-  <LinkCard
-    title="Score prospects in real time using Signals and ML"
-    description="Try out Signals for live prospect scoring with machine learning"
+  <Card
+    title="Score prospects in real time"
+    description="Use Signals and a machine learning model for live prospect scoring."
     href="/tutorials/signals-ml-prospect-scoring/intro/"
   />
-
-  <LinkCard
-    title="Implement real-time interventions in an ecommerce app"
-    description="Explore Signals interventions in a demo e-shop application"
+  <Card
+    title="Implement real-time interventions"
+    description="Explore Signals interventions in a demo ecommerce app."
     href="/tutorials/signals-interventions/start/"
   />
 </CardGrid>
 
-[See all tutorials ->](/tutorials)
-
-For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
+[See all tutorials](/tutorials). For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).

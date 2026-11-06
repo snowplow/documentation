@@ -35,6 +35,12 @@ const config: Config = {
     },
   },
 
+  customFields: {
+    // Shown as "Copy MCP URL" in the page actions menu once the docs MCP
+    // server is deployed (research/blueprint-notes/spike-docs-mcp-hosting.md)
+    docsMcpUrl: process.env.DOCS_MCP_URL || null,
+  },
+
   clientModules: [
     require.resolve('./snowplow.js'),
     require.resolve('./reoTracking.js'),
@@ -87,6 +93,8 @@ const config: Config = {
             require.resolve('./src/css/prose.css'),
             require.resolve('./src/css/chrome.css'),
             require.resolve('./src/css/components.css'),
+            require.resolve('./src/css/kit.css'),
+            require.resolve('./src/css/home.css'),
           ],
         },
       },
@@ -218,7 +226,7 @@ const config: Config = {
             href: 'https://snowplow.io/get-started/snowplow-free-trial',
             label: 'Try for free',
             position: 'right',
-            className: 'snowplow-button cta-button navbar-cta',
+            className: 'navbar-cta',
           },
         ],
       },

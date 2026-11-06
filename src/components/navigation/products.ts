@@ -12,7 +12,7 @@ export interface Product {
 }
 
 export const PRODUCTS: Product[] = [
-  { id: 'cdi', label: 'Snowplow CDI', href: '/docs/' },
+  { id: 'cdi', label: 'Snowplow CDI', href: '/docs/cdi/' },
   { id: 'signals', label: 'Signals', href: '/docs/signals/introduction/' },
 ]
 

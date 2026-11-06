@@ -6,6 +6,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
+import { buildSidebarMap } from './product-indexes.js'
 import {
   attachSourceMetadata,
   buildTutorialMeta,
@@ -40,7 +41,7 @@ export default function pluginLlmsTxt(context, options) {
       actions.setGlobalData({ enableMarkdownFiles, excludeRoutes })
     },
 
-    async postBuild({ outDir }) {
+    async postBuild({ outDir, plugins }) {
       const siteUrl = (
         context.siteConfig?.url || 'https://docs.snowplow.io'
       ).replace(/\/$/, '')
@@ -129,6 +130,8 @@ export default function pluginLlmsTxt(context, options) {
         outdatedPrefixes,
         tutorialMeta,
         agentInstructions,
+        // Which sidebar each docs page is in, for the per-product indexes
+        sidebarMap: buildSidebarMap(plugins),
       })
 
       // Generate llms-full.txt

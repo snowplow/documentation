@@ -21,9 +21,26 @@ An extended version is also available at [`llms-full.txt`](pathname:///llms-full
 
 The `llms-full.txt` file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 
+### Product indexes
+
+The root `llms.txt` starts with instructions for agents and a list of smaller indexes, one for each part of the docs. An agent working on one product can fetch only the index it needs:
+
+| Index | Covers |
+| --- | --- |
+| [`/docs/cdi/llms.txt`](pathname:///docs/cdi/llms.txt) | Snowplow CDI: tracking design, trackers, pipeline, destinations, data models, and monitoring |
+| [`/docs/signals/llms.txt`](pathname:///docs/signals/llms.txt) | Snowplow Signals: attributes, services, interventions, and SDKs |
+| [`/docs/api-reference/llms.txt`](pathname:///docs/api-reference/llms.txt) | Reference: APIs, SDK and configuration reference, versions, and previous versions |
+| [`/docs/platform/llms.txt`](pathname:///docs/platform/llms.txt) | Pages shared by both products: fundamentals, AI, account management, and policies |
+
+Each index lists the same pages, in the same format, as the matching sections of the root `llms.txt`.
+
+### Tell your agent about the indexes
+
+Agents rarely fetch `llms.txt` unless their instructions say to. Add the snippet from [connect your coding agent](/docs/ai/index.md#connect-your-coding-agent) to your project's `AGENTS.md` or `CLAUDE.md`.
+
 ## Documentation pages as Markdown
 
-Every documentation page is available as Markdown. To download a page's content, use the **Download** or **Copy Markdown** buttons above the page title.
+Every documentation page is available as Markdown. To copy a page's content, use the **Copy page** button above the page title. Its menu also has **View as Markdown**, **Download Markdown**, **Open in Claude**, and **Open in ChatGPT**.
 
 Following the `llms.txt` standard, you can access the Markdown page directly by changing the trailing `/` in the URL to `.md`. For example:
 

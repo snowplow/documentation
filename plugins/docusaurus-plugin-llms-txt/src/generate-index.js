@@ -4,6 +4,7 @@ import { htmlPathToMdPath, tutorialMdPath } from './write-pages.js'
 import { isPreviousVersion } from './version-utils.js'
 import { groupTutorialSteps } from './content-metadata.js'
 import { buildAgentInstructions } from './agent-instructions.js'
+import { buildProductRouter, writeProductIndexes } from './product-indexes.js'
 
 /**
  * Generate llms.txt index file.
@@ -18,6 +19,7 @@ export async function generateIndex(outDir, pages, options) {
     outdatedPrefixes,
     tutorialMeta,
     agentInstructions = true,
+    sidebarMap = new Map(),
   } = options
 
   const labelMap = await buildLabelMap(siteDir)
@@ -34,6 +36,10 @@ export async function generateIndex(outDir, pages, options) {
 
   if (agentInstructions) {
     lines.push(...(await buildAgentInstructions({ siteDir, siteUrl })))
+  }
+
+  if (sidebarMap.size > 0) {
+    lines.push(...buildProductRouter(siteUrl))
   }
 
   const groups = [
@@ -57,6 +63,18 @@ export async function generateIndex(outDir, pages, options) {
 
   const outputPath = path.join(outDir, 'llms.txt')
   await fs.writeFile(outputPath, lines.join('\n'), 'utf8')
+
+  // The same groups, one file per product sidebar
+  await writeProductIndexes(
+    outDir,
+    pages,
+    sidebarMap,
+    (subset) => [
+      ...buildDocsGroups(subset, labelMap, linkOptions),
+      buildTutorialsGroup(subset, tutorialMeta, linkOptions),
+    ],
+    { siteUrl, tutorialMeta }
+  )
   console.log(
     `[llms-txt] Wrote llms.txt (${groups.length} sections, ${groups.reduce(
       (n, g) => n + g.entries.length,

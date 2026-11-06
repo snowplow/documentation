@@ -1,0 +1,207 @@
+---
+title: "Docs components"
+description: "The MDX components for the Snowplow docs: cards, buttons, badges, code groups, steps, parameter tables, feature matrices, and version markers."
+---
+
+# Docs components
+
+These components are available in every MDX file without an import. They're styled from the design tokens in `src/design/tokens.js`, work in light and dark mode, and render plain HTML, so the Markdown copy of each page keeps their text. The source is in `src/components/`, and the styles are in `src/css/kit.css`.
+
+Use these instead of hand-written HTML, Tailwind classes, or the older components they replace. The [style guide](/style-guide/) covers when to use each one in prose.
+
+## Cards and buttons
+
+Cards link to other pages. The title is a real heading (`h3` by default, set with `headingLevel`), so the page outline stays correct. On clickable cards, the title link covers the whole card.
+
+### Card variants
+
+The four variants are `link` (the default), `product`, `quickstart`, and `compact`. Put cards in a `<CardGrid>` with `cols` of 1 to 4. Add `breakout` to widen the grid to the 896px track used by code blocks.
+
+<CardGrid cols={2}>
+  <Card title="Link card" href="/docs/fundamentals/" description="A title and a description. The whole card is a link." />
+  <Card variant="quickstart" eyebrow="Snowplow CDI" time="10 min" title="Quickstart card" href="/docs/get-started/tracking/" description="Adds a product label and a time estimate." />
+  <Card
+    variant="product"
+    eyebrow="Product"
+    title="Product card"
+    href="/docs/cdi/"
+    description="A description, an optional snippet or other children, and a list of links."
+    links={[
+      { label: 'First link', href: '/docs/get-started/' },
+      { label: 'Second link', href: '/docs/sources/' },
+    ]}
+  />
+  <Card variant="compact" title="Compact card" href="/docs/sources/" />
+</CardGrid>
+
+```mdx
+<CardGrid cols={2}>
+  <Card title="Link card" href="/docs/fundamentals/" description="..." />
+  <Card variant="quickstart" eyebrow="Snowplow CDI" time="10 min" title="..." href="..." description="..." />
+  <Card variant="product" title="..." href="..." description="..." links={[{ label: '...', href: '...' }]}>
+    Optional children, such as a code block
+  </Card>
+  <Card variant="compact" title="Compact card" href="/docs/sources/" />
+</CardGrid>
+```
+
+`<DocCardList />` renders the same cards for the pages in the current sidebar category.
+
+### Buttons
+
+Use `primary` for the one main action in a region, `secondary` for other actions, `ghost` for toolbar actions, and `link` for an action that reads as a text link. A button with `href` renders a link.
+
+<p>
+  <Button variant="primary" href="/docs/get-started/">Primary</Button>{' '}
+  <Button variant="secondary" href="/docs/get-started/">Secondary</Button>{' '}
+  <Button variant="ghost" href="/docs/get-started/">Ghost</Button>{' '}
+  <Button variant="link" href="/docs/get-started/">Link</Button>
+</p>
+
+```mdx
+<Button variant="primary" href="/docs/get-started/">Get started</Button>
+```
+
+## Badges and version markers
+
+Badges are text, not images, so they read correctly in dark mode, in screen readers, and in the Markdown copy. Group badges with `<BadgeGroup>`.
+
+### Badge types
+
+| Component | Use for | Example |
+| --- | --- | --- |
+| `<TierBadge tier="..." />` | Maintenance group: `actively-maintained`, `maintained`, `early-release`, `unsupported` | <TierBadge tier="actively-maintained" /> <TierBadge tier="early-release" /> |
+| `<VersionBadge component="..." />` | Latest version, from `src/componentVersions.js` | <VersionBadge component="javaScriptTracker" /> |
+| `<LifecycleBadge stage="..." />` | `preview`, `beta`, `early-access`, `ga`, `deprecated`, `legacy` | <LifecycleBadge stage="beta" /> <LifecycleBadge stage="deprecated" /> |
+| `<LicenseBadge license="..." />` | `scl`, `spal`, `slul` | <LicenseBadge license="scl" /> |
+| `<Badge>` | Anything else, with `variant`, `tone`, and `href` | <Badge>Label</Badge> |
+
+`<Availability>` lists the platforms a feature is available on, with an optional note in a popover:
+
+<Availability available={['cloud', 'pmc']} note="An example note about where this feature is available." />
+
+```mdx
+<Availability available={['cloud', 'pmc']} note="..." />
+```
+
+### Version markers
+
+`<AppliesTo>` marks the minimum version a feature needs. The versions come from `src/data/feature-versions.json`, which also renders the table on the [versions and compatibility](/docs/api-reference/versions/#feature-availability-by-version) page. The build fails if a marker names a version newer than the latest release in `src/componentVersions.js`.
+
+<AppliesTo feature="asn-lookup-enrichment" />
+
+```mdx
+<AppliesTo feature="asn-lookup-enrichment" />
+<AppliesTo component="snowbridge" since="6.0.0" />
+```
+
+## Code and steps
+
+Code groups and steps keep multi-part instructions readable without hand-built markup.
+
+### Code groups
+
+`<CodeGroup>` shows the same example in several languages, with the tabs in the code header. The reader's choice is remembered across the site for the same `groupId`. Each tab is labeled with the block's `title`, or its language.
+
+<CodeGroup>
+
+```js title="Browser"
+import { newTracker } from '@snowplow/browser-tracker';
+newTracker('sp', '{{collector_url}}', { appId: 'my-app' });
+```
+
+```kotlin title="Android"
+Snowplow.createTracker(context, "sp", "{{collector_url}}")
+```
+
+</CodeGroup>
+
+````mdx
+<CodeGroup>
+
+```js title="Browser"
+...
+```
+
+```kotlin title="Android"
+...
+```
+
+</CodeGroup>
+````
+
+### Steps
+
+`<Steps>` draws a numbered rail. Write each step as a `###` heading inside it, so every step can be linked to, appears in the table of contents, and is kept in the Markdown copy. Don't number the headings yourself.
+
+<Steps>
+
+### Install the tracker
+
+Add the package to your project.
+
+### Create a tracker
+
+Call `newTracker` with your Collector URL.
+
+</Steps>
+
+```mdx
+<Steps>
+
+### Install the tracker
+
+Add the package to your project.
+
+### Create a tracker
+
+Call `newTracker` with your Collector URL.
+
+</Steps>
+```
+
+## Tables
+
+Both table components render plain HTML tables, so the Markdown copy keeps every row.
+
+### Parameter tables
+
+`<ParamTable>` documents configuration options and function arguments. Columns with no values, such as `since`, are left out. Each row has an anchor, `#param-<name>`.
+
+<ParamTable>
+  <Param name="appId" type="string" required>
+    The application ID, sent as `app_id` on every event.
+  </Param>
+  <Param name="eventMethod" type="'post' | 'get'" default="post">
+    How the tracker sends events.
+  </Param>
+  <Param name="useClientSideDetection" type="boolean" default="false" since="6.10.0">
+    Use the bot detection result sent by the tracker.
+  </Param>
+</ParamTable>
+
+```mdx
+<ParamTable>
+  <Param name="appId" type="string" required>
+    The application ID.
+  </Param>
+  <Param name="eventMethod" type="'post' | 'get'" default="post" since="3.0.0">
+    How the tracker sends events.
+  </Param>
+</ParamTable>
+```
+
+### Feature matrices
+
+`<FeatureMatrix>` renders comparison tables for catalog hubs, with optional filters that write to the query string. The tracker matrix on the [sources overview](/docs/sources/#compare-trackers) reads `src/data/trackers.json`, and the [destinations catalog](/docs/destinations/#destinations-catalog) reads `src/data/destinations.json`. Edit the manifest, not the page, to change a row.
+
+Cell values are `true`, `false`, `"partial"`, a string, or `{ "value": ..., "note": "..." }`.
+
+## Page furniture
+
+Two components appear on every doc page without being added to the MDX. Neither needs any front matter.
+
+* **Page actions**: the **Copy page** button and its menu, in the page header. The menu has **View as Markdown**, **Download Markdown**, **Open in Claude**, and **Open in ChatGPT**. **Copy MCP URL** appears once `customFields.docsMcpUrl` is set.
+* **Feedback**: "Was this page helpful?" at the end of each page under `/docs/`. Answers are sent as Snowplow structured events (category `docs`, action `page_feedback`), only when the reader has allowed analytics cookies.
+
+Set `layout: home` in front matter for a landing page with no breadcrumbs, page actions, table of contents, or feedback. The docs home uses it.

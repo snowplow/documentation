@@ -65,6 +65,17 @@
 * Never use exclamation marks.
 * Use emojis only for information (✅ or ❌ in tables). Never use emojis for decoration.
 
+## Writing for retrieval
+
+Search engines and AI agents often read one section of a page, or one chunk of the Markdown copy, without the rest. Write every section so it makes sense on its own.
+
+* Never use "above", "below", "previous section", or "the following" to point at other content. Name it or link to it: `see [Configure the tracker](#configure-the-tracker)`.
+* Put the exact error string next to its fix, in a code span or block, in the same paragraph or list item, so a search for the message finds the fix. Copy the string from the real output. Never paraphrase it.
+* Restate every diagram as numbered steps or a list in the text. The Markdown copy keeps the diagram's alt text but not its layout.
+* Repeat the subject in each section instead of "it" or "this": "The Enrich configuration file" not "This file".
+* Give version requirements with `<AppliesTo>`, not "available since version X" in prose, so the marker and the versions page can't disagree.
+* Keep tables as real Markdown or HTML tables, not images, so every row is in the Markdown copy.
+
 ## Diagrams and images
 
 * Always provide alt text.
@@ -118,3 +129,16 @@
 * Use triple backticks and specify the language for code blocks.
 * Use Docusaurus admonitions sparingly. Always set custom headings using bracket syntax: `:::note[Title]`.
 * Use Tip for actions, Note or Info for information, Warning for data loss or security risks, Danger for pipeline outages.
+
+## Components
+
+These components are available in every MDX file without an import. See `/style-guide/components/` for examples.
+
+* `<Card>` and `<CardGrid>`: link, product, quickstart, and compact cards. Never hand-write card markup.
+* `<Button>`: primary, secondary, ghost, or link. One primary button per region.
+* `<Badge>`, `<TierBadge>`, `<VersionBadge>`, `<LifecycleBadge>`, `<LicenseBadge>`, `<Availability>`: text badges. Never use shields.io images.
+* `<CodeGroup>`: the same example in several languages, as tabs in the code header. Use it instead of `<Tabs>` around code blocks.
+* `<Steps>`: a numbered rail. Write each step as a `###` heading inside it. Never number headings by hand.
+* `<ParamTable>` and `<Param>`: configuration options and function arguments, with name, type, required, default, and since.
+* `<FeatureMatrix>`: comparison tables for catalog hubs, generated from a manifest in `src/data/`.
+* `<AppliesTo>`: an inline minimum-version marker from `src/data/feature-versions.json`.

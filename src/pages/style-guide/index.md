@@ -320,6 +320,18 @@ Here are two pieces of older content that only partially follow the style guide.
     | ---------------------------------------------- |
     | 🎉 Reduce your data loading costs by up to 80%. |
 
+### Writing for retrieval
+
+Search engines and AI agents often read one section of a page, or one chunk of its Markdown copy, without the rest of the page. Write each section so it makes sense on its own:
+
+- Don't point at other content with "above", "below", or "the following". Name the section or link to it instead.
+- Put the exact error string next to its fix, formatted as code, so a search for the message finds the fix.
+- Restate every diagram as numbered steps or a list in the text. The Markdown copy of the page keeps the diagram's alt text, but not its layout.
+- Repeat the subject of each section instead of starting with "it" or "this".
+- Use the `<AppliesTo>` component for version requirements, so the marker and the versions page come from the same list.
+
+See the [components page](/style-guide/components/) for the MDX components that help with this, such as `<Steps>` and `<ParamTable>`.
+
 ### Diagrams and images
 - Adding diagrams and images is encouraged
 - Diagrams and images should have white backgrounds

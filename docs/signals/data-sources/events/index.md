@@ -44,7 +44,7 @@ How backfill works is described in [How Signals works](/docs/signals/concepts/in
 
 You need a Signals environment. If you don't have one yet, [set up Signals](/docs/signals/setup/index.md) first. Then:
 
-* On the free tier: have your Collector endpoint and Signals API URL ready.
+* On the free tier: have your Collector endpoint and Signals API URL ready. Find the Collector URL in Console > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**, and the Signals API URL in Console > **Signals** > **Overview**.
 * With an existing Snowplow pipeline: nothing changes, because your trackers already send to your Collector.
 
 On either path, these are the only additions Signals needs:

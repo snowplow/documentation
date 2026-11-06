@@ -26,6 +26,8 @@ Sign up at [signals.snowplow.io/start](https://signals.snowplow.io/start?utm_sou
 
 To connect from code later, find your Signals API URL and organization ID in Console > **Signals** > **Overview**, as listed in [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials).
 
+To point a tracker at your pipeline, find your Collector URL in Console > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
+
 ### Add Signals to an existing Snowplow account
 
 Log in to Console and navigate to the **Signals** section. Click **Enable** to start setting up Signals.

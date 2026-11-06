@@ -201,7 +201,7 @@ const sidebars = {
     group('Serve attributes', [
       pick('signals/applications', {
         hoist: true,
-        indexLabel: 'Use in your application',
+        indexLabel: 'Choose how to use attributes',
         // The router page is linked from the overview, so its row stays hidden
         indexClassName: 'hidden',
         exclude: [

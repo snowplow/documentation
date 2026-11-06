@@ -5,6 +5,7 @@ sidebar_label: "Identity resolution"
 description: "Calculate attributes per person with the Snowplow ID from Identities, and read them in your application with whichever identifier it already has, such as a cookie ID or a user ID."
 keywords: ["identity resolution", "identity stitching", "snowplow_id", "Snowplow ID", "Identities", "lookup identifiers", "cross-device"]
 date: "2026-10-14"
+content_type: how-to
 ---
 
 ```mdx-code-block

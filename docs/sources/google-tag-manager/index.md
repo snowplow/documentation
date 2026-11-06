@@ -5,6 +5,7 @@ date: "2020-08-10"
 sidebar_position: 135
 description: "Deploy the Snowplow JavaScript tracker through Google Tag Manager using custom templates for v4. Configure event tracking, ecommerce, and custom variables with server-side and client-side GTM tags."
 keywords: ["google tag manager", "gtm templates", "javascript tracker v4", "gtm custom templates", "server-side gtm"]
+content_type: sdk
 ---
 
 

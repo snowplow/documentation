@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 220
 description: "Track events in Ruby applications, gems, and Rails web apps with the Snowplow Ruby tracker SDK compatible with Ruby 2.1+ and 3.0+."
 keywords: ["ruby tracker", "rails tracking", "server-side tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_position: 25
 sidebar_label: "Define interventions"
 description: "Create rule-based interventions with criteria and targeting to automatically trigger actions when attribute values change, or push direct interventions. Configure using Console UI, Python SDK, or API."
 keywords: ["interventions", "rule-based triggers", "direct interventions", "intervention criteria", "attribute targeting", "python sdk interventions"]
+content_type: how-to
 ---
 
 ```mdx-code-block

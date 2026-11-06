@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Sign up for a hosted Snowplow environment, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that designs your tracking, creates the schemas, adds the tracker, and checks the events."
 keywords: ["snowplow quickstart", "getting started", "snowplow mcp", "coding agent", "claude code", "cursor", "codex", "tracking setup"]
 date: "2026-10-23"
+content_type: tutorial
 ---
 
 Add Snowplow tracking to your application with one prompt. Your coding agent asks what you want to measure, then designs the tracking plan, creates the schemas in your Snowplow account, adds the tracker, and checks that the events arrive and pass validation.

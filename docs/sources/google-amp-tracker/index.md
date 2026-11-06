@@ -5,6 +5,7 @@ date: "2020-02-25"
 sidebar_position: 150
 description: "Integrate Snowplow tracking into Google AMP (Accelerated Mobile Pages) using amp-analytics. Track page views, structured events, page pings, and custom events from mobile-optimized AMP pages with cross-domain session linking."
 keywords: ["google amp tracker", "amp analytics", "accelerated mobile pages", "amp integration", "mobile web tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block

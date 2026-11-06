@@ -5,6 +5,7 @@ sidebar_label: "CDI overview"
 description: "Snowplow CDI tracks behavioral data from your apps, validates it against your schemas, enriches it, and loads it into your warehouse, lake, or stream. Find the docs for each stage."
 keywords: ["snowplow cdi", "customer data infrastructure", "behavioral data pipeline", "event tracking", "data warehouse"]
 date: "2026-11-06"
+content_type: landing
 ---
 
 Snowplow Customer Data Infrastructure (CDI) is a pipeline for behavioral data. You define the [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md) you want, trackers in your apps send them to a Collector, and the pipeline checks each event against its [schema](/docs/fundamentals/schemas/index.md), enriches it, and loads it into your warehouse, lake, or stream. Events that don't match their schema become [failed events](/docs/fundamentals/failed-events/index.md), so they aren't loaded and aren't lost.

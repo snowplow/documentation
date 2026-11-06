@@ -5,6 +5,7 @@ sidebar_position: 4
 sidebar_label: "Setting up Self-Hosted"
 description: "Deploy Snowplow Community Edition yourself with Terraform modules on AWS, GCP, or Azure. Self-hosting is optional: the hosted free trial needs no infrastructure."
 keywords: ["Self-Hosted", "Community Edition", "Terraform", "self-hosted deployment", "Snowplow setup"]
+content_type: landing
 ---
 
 ```mdx-code-block

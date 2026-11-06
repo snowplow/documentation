@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 137
 description: "Track events from web views in mobile hybrid apps by forwarding events to native iOS, Android, or React Native trackers with shared session data."
 keywords: ["webview tracker", "hybrid app tracking", "mobile webview events"]
+content_type: sdk
 ---
 
 ```mdx-code-block

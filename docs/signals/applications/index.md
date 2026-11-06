@@ -5,6 +5,7 @@ sidebar_label: "Use in your application"
 description: "Consume Signals in your applications by retrieving calculated attributes on demand, or by subscribing to interventions that push actions in real time."
 keywords: ["retrieve attributes", "subscribe interventions", "signals sdk", "profiles store", "real-time personalization"]
 date: "2026-06-11"
+content_type: landing
 ---
 
 Once you've defined and published your [attributes](/docs/signals/attributes/index.md) and [interventions](/docs/signals/interventions/index.md), your applications can consume them in two ways:

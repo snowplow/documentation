@@ -4,6 +4,7 @@ sidebar_position: 30
 sidebar_label: "Subscribe to interventions"
 description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
+content_type: how-to
 ---
 
 Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:

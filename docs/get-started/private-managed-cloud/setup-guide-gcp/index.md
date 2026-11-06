@@ -6,6 +6,7 @@ sidebar_position: 31
 coverImage: "gcp_logo.png"
 description: "Set up Snowplow CDI Private Managed Cloud on GCP with project configuration, IAM roles, and service account permissions."
 keywords: ["GCP setup", "Private Managed Cloud", "Google Cloud", "IAM roles", "GCP project"]
+content_type: how-to
 ---
 
 To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.

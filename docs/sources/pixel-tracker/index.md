@@ -4,6 +4,7 @@ sidebar_label: "Pixel tracker"
 sidebar_position: 160
 description: "Track views of HTML-only content like emails with the Snowplow Pixel tracker using simple image tags without JavaScript."
 keywords: ["pixel tracker", "html email tracking", "no-js tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block

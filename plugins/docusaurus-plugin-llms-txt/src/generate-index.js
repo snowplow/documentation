@@ -20,6 +20,7 @@ export async function generateIndex(outDir, pages, options) {
     tutorialMeta,
     agentInstructions = true,
     sidebarMap = new Map(),
+    sidebarOutlines = new Map(),
   } = options
 
   const labelMap = await buildLabelMap(siteDir)
@@ -73,7 +74,13 @@ export async function generateIndex(outDir, pages, options) {
       ...buildDocsGroups(subset, labelMap, linkOptions),
       buildTutorialsGroup(subset, tutorialMeta, linkOptions),
     ],
-    { siteUrl, tutorialMeta }
+    {
+      siteUrl,
+      tutorialMeta,
+      sidebarOutlines,
+      buildTutorialGroups: (subset) => [buildTutorialsGroup(subset, tutorialMeta, linkOptions)],
+      formatDocsEntry: (page) => formatDocsEntry(page, linkOptions),
+    }
   )
   console.log(
     `[llms-txt] Wrote llms.txt (${groups.length} sections, ${groups.reduce(

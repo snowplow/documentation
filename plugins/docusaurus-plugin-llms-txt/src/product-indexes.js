@@ -21,9 +21,13 @@ export const PRODUCT_INDEXES = [
     file: 'docs/signals/llms.txt',
     title: 'Snowplow Signals',
     description:
-      'Snowplow Signals: connecting to Signals, defining attributes and agentic contexts, serving them through services and the MCP server, and interventions.',
+      'Snowplow Signals: getting started, setting up and connecting, data sources (events and warehouse tables), defining attributes, serving them through services and training datasets, feeding AI agents with agentic contexts and the MCP server, and interventions.',
     // Tutorials that use Signals are listed in this index too
     tutorialTech: 'Signals',
+    // List the docs under the sidebar's section headers, in sidebar order
+    groupBySidebar: true,
+    // Hidden in the sidebar, but an entry point worth listing
+    includeHidden: ['signals/applications/index'],
   },
   {
     sidebar: 'reference',
@@ -64,6 +68,89 @@ export function buildSidebarMap(plugins = []) {
   return map
 }
 
+const classesOf = (item) => String(item.className ?? '').split(/\s+/)
+
+/**
+ * The section headers of each sidebar, each with the permalinks of the docs
+ * under it in sidebar order, from the docs plugin's loaded content. Hidden
+ * items are skipped unless their doc ID is in `includeHidden`.
+ *
+ * @param {import('@docusaurus/types').LoadedPlugin[]} plugins
+ * @returns {Map<string, {sidebar: object[], permalinkOf: Map<string, string>}>}
+ */
+export function buildSidebarOutlines(plugins = []) {
+  const outlines = new Map()
+  for (const plugin of plugins) {
+    if (plugin.name !== 'docusaurus-plugin-content-docs') continue
+    for (const version of plugin.content?.loadedVersions ?? []) {
+      const permalinkOf = new Map(
+        (version.docs ?? []).map((doc) => [doc.id, normalizeRoute(doc.permalink)])
+      )
+      for (const [name, sidebar] of Object.entries(version.sidebars ?? {})) {
+        outlines.set(name, { sidebar, permalinkOf })
+      }
+    }
+  }
+  return outlines
+}
+
+/**
+ * Split a sidebar into its section headers, each listing its doc routes in
+ * order. Top-level docs outside any header go into a group of their own.
+ */
+function sidebarSections({ sidebar, permalinkOf }, includeHidden = []) {
+  const sections = []
+  const collect = (item, out) => {
+    const docId =
+      item.type === 'doc' || item.type === 'ref'
+        ? item.id
+        : item.type === 'category' && item.link?.type === 'doc'
+          ? item.link.id
+          : null
+    const hidden = classesOf(item).includes('hidden')
+    if (!hidden || includeHidden.includes(docId)) {
+      if (docId && permalinkOf.has(docId)) out.push(permalinkOf.get(docId))
+    }
+    if (item.type === 'category' && !hidden) item.items.forEach((child) => collect(child, out))
+    return out
+  }
+  for (const item of sidebar) {
+    if (item.type === 'category' && classesOf(item).includes('section-header')) {
+      sections.push({ label: item.label, routes: collect({ ...item, link: undefined }, []) })
+    } else {
+      const routes = collect(item, [])
+      const last = sections[sections.length - 1]
+      if (last && last.loose) last.routes.push(...routes)
+      else sections.push({ label: null, loose: true, routes })
+    }
+  }
+  return sections.filter((s) => s.routes.length > 0)
+}
+
+/**
+ * Docs groups that follow the sidebar's section headers. Pages in the
+ * sidebar map but not reached through the outline are listed at the end, so
+ * the set of links matches the URL-ordered listing.
+ */
+function sidebarGroups(docPages, outline, includeHidden, formatEntry) {
+  const byRoute = new Map(docPages.map((page) => [normalizeRoute(page.routePath), page]))
+  const used = new Set()
+  const groups = []
+  for (const section of sidebarSections(outline, includeHidden)) {
+    const entries = []
+    for (const route of section.routes) {
+      const page = byRoute.get(route)
+      if (!page || used.has(route)) continue
+      used.add(route)
+      entries.push(formatEntry(page))
+    }
+    groups.push({ label: section.label ?? 'Overview', entries })
+  }
+  const rest = docPages.filter((page) => !used.has(normalizeRoute(page.routePath)))
+  if (rest.length > 0) groups.push({ label: 'More pages', entries: rest.map(formatEntry) })
+  return groups
+}
+
 /**
  * The "Indexes by product" section for the top of the root llms.txt.
  */
@@ -88,9 +175,18 @@ export function buildProductRouter(siteUrl) {
  * @param {Map<string, string>} sidebarMap route to sidebar
  * @param {(pages: object[], meta: object) => {label: string, entries: string[], note?: string}[]} buildGroups
  *   builds the docs and tutorials groups for a subset of pages, as in llms.txt
- * @param {{ siteUrl: string, tutorialMeta: Map<string, object> }} options
+ * @param {{ siteUrl: string, tutorialMeta: Map<string, object>,
+ *   sidebarOutlines?: Map<string, object>,
+ *   buildTutorialGroups?: (pages: object[]) => object[],
+ *   formatDocsEntry?: (page: object) => string }} options
  */
-export async function writeProductIndexes(outDir, pages, sidebarMap, buildGroups, { siteUrl, tutorialMeta }) {
+export async function writeProductIndexes(
+  outDir,
+  pages,
+  sidebarMap,
+  buildGroups,
+  { siteUrl, tutorialMeta, sidebarOutlines = new Map(), buildTutorialGroups, formatDocsEntry }
+) {
   if (sidebarMap.size === 0) {
     console.warn('[llms-txt] No sidebar data from the docs plugin, so no product indexes were written')
     return
@@ -106,7 +202,21 @@ export async function writeProductIndexes(outDir, pages, sidebarMap, buildGroups
       return false
     })
 
-    const groups = buildGroups(subset).filter((g) => g && g.entries.length > 0)
+    const outline = sidebarOutlines.get(index.sidebar)
+    const ordered = index.groupBySidebar && outline && buildTutorialGroups && formatDocsEntry
+    const groups = (
+      ordered
+        ? [
+            ...sidebarGroups(
+              subset.filter((page) => page.kind === 'doc'),
+              outline,
+              index.includeHidden,
+              formatDocsEntry
+            ),
+            ...buildTutorialGroups(subset),
+          ]
+        : buildGroups(subset)
+    ).filter((g) => g && g.entries.length > 0)
     const lines = [`# ${index.title}`, '', `> ${index.description}`, '']
     lines.push(
       `This index is part of the Snowplow documentation. Read the instructions for AI agents at the top of ${siteUrl}/llms.txt before you write Snowplow code. Every link points to a Markdown copy of the page.`

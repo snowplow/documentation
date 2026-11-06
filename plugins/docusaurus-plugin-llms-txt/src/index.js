@@ -7,7 +7,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
-import { buildSidebarMap } from './product-indexes.js'
+import { buildSidebarMap, buildSidebarOutlines } from './product-indexes.js'
 import {
   attachSourceMetadata,
   buildTutorialMeta,
@@ -136,6 +136,9 @@ export default function pluginLlmsTxt(context, options) {
         agentInstructions,
         // Which sidebar each docs page is in, for the per-product indexes
         sidebarMap: buildSidebarMap(plugins),
+        // Section headers and doc order of each sidebar, for indexes that
+        // follow the sidebar
+        sidebarOutlines: buildSidebarOutlines(plugins),
       })
 
       // Generate llms-full.txt

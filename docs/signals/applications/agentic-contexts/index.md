@@ -134,3 +134,5 @@ seconds_since_start_of_session, event, url, event_context
 45, add_to_cart, /cart, {sku: 'SKU123'}
 [END CONTEXT]
 ```
+
+To build an agent that uses Signals context, follow the [Vercel AI SDK agent tutorial](/tutorials/signals-ai-agent-context/introduction), the [Google ADK agent tutorial](/tutorials/signals-google-adk-agent/introduction), or the [AWS Bedrock AgentCore accelerator](/tutorials/signals-agentic-accelerator/intro). The Vercel AI SDK and Google ADK tutorials read attributes through a service rather than an agentic context.

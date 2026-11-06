@@ -150,3 +150,5 @@ When you handle the response:
 * If Signals hasn't seen the identifier on an event yet, each attribute is `null`.
 * Read with the attribute key that the attribute groups in the service are calculated on. For attributes keyed on `snowplow_id`, reading by any key other than `snowplow_id` or one of its [lookup identifiers](/docs/signals/attributes/identity-resolution/index.md#retrieve-attributes-by-a-lookup-identifier) returns an HTTP 400 error.
 * Reads need an API key, so they run on your backend. A web app passes `domain_userid` or `domain_sessionid` from the browser to its server, for example as a request parameter. Read the session ID with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) method.
+
+To use retrieved attributes in a demo app, follow [Build a personalized travel agent](/tutorials/signals-personalize-travel/intro) or [Score prospects in real time](/tutorials/signals-ml-prospect-scoring/intro).

@@ -51,6 +51,10 @@ The injection happens in a plain Python callback, so you can pull context from a
 
 The ADK integration supports deployment to [Vertex AI Agent Engine](https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/overview), Google's managed runtime for ADK agents. Set `GOOGLE_GENAI_USE_VERTEXAI=True`, swap your API key for a service account, and deploy.
 
+## Next steps in the Signals docs
+
+To ground the agent in the user's recent session events instead of calculated attributes, use an [agentic context](/docs/signals/applications/agentic-contexts/). To let the agent choose which Signals data to read as tools, connect it to the [Signals MCP server](/docs/signals/applications/mcp-server/).
+
 ## Other Signals tutorials
 
 Check out these other Signals tutorials and solution accelerators for inspiration:

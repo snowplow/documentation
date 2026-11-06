@@ -71,10 +71,10 @@ Create a `Signals` object with your connection credentials:
 from snowplow_signals import Signals
 
 sp_signals = Signals(
-    api_url=SIGNALS_DEPLOYED_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
+    api_url=SIGNALS_API_URL,
+    api_key=SNOWPLOW_API_KEY,
+    api_key_id=SNOWPLOW_API_KEY_ID,
+    org_id=SNOWPLOW_ORG_ID,
 )
 ```
 
@@ -82,10 +82,10 @@ sp_signals = Signals(
 import { Signals } from '@snowplow/signals-node';
 
 const signals = new Signals({
-  baseUrl: SIGNALS_DEPLOYED_URL,
-  apiKey: CONSOLE_API_KEY,
-  apiKeyId: CONSOLE_API_KEY_ID,
-  organizationId: ORG_ID,
+  baseUrl: SIGNALS_API_URL,
+  apiKey: SNOWPLOW_API_KEY,
+  apiKeyId: SNOWPLOW_API_KEY_ID,
+  organizationId: SNOWPLOW_ORG_ID,
 });
 ```
 
@@ -159,3 +159,5 @@ curl \
 A list of interventions, even an empty one, means the connection works. The [Signals API reference](/docs/signals/connection/reference/index.md#signals-api-endpoints) shows where to find the full API documentation for your deployment.
 
 </Steps>
+
+To connect, define attributes, and act on interventions from Python end to end, follow the [Python tracking and Signals tutorial](/tutorials/python-tracking-and-signals/introduction).

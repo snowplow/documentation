@@ -58,10 +58,10 @@ import { generateText } from 'ai';
 const mcp = await createMCPClient({
   transport: {
     type: 'http',
-    url: `${process.env.SIGNALS_DEPLOYED_URL}/mcp`,
+    url: `${process.env.SIGNALS_API_URL}/mcp`,
     headers: {
-      'X-API-Key-Id': process.env.CONSOLE_API_KEY_ID!,
-      'X-API-Key': process.env.CONSOLE_API_KEY!,
+      'X-API-Key-Id': process.env.SNOWPLOW_API_KEY_ID!,
+      'X-API-Key': process.env.SNOWPLOW_API_KEY!,
     },
   },
 });
@@ -92,12 +92,12 @@ import { LlmAgent, MCPToolset } from '@google/adk';
 
 const signals = new MCPToolset({
   type: 'StreamableHTTPConnectionParams',
-  url: `${process.env.SIGNALS_DEPLOYED_URL}/mcp`,
+  url: `${process.env.SIGNALS_API_URL}/mcp`,
   transportOptions: {
     requestInit: {
       headers: {
-        'X-API-Key-Id': process.env.CONSOLE_API_KEY_ID!,
-        'X-API-Key': process.env.CONSOLE_API_KEY!,
+        'X-API-Key-Id': process.env.SNOWPLOW_API_KEY_ID!,
+        'X-API-Key': process.env.SNOWPLOW_API_KEY!,
       },
     },
   },
@@ -130,10 +130,10 @@ from agents.mcp import MCPServerStreamableHttp
 signals = MCPServerStreamableHttp(
     name="Snowplow Signals",
     params={
-        "url": f"{SIGNALS_DEPLOYED_URL}/mcp",
+        "url": f"{SIGNALS_API_URL}/mcp",
         "headers": {
-            "X-API-Key-Id": CONSOLE_API_KEY_ID,
-            "X-API-Key": CONSOLE_API_KEY,
+            "X-API-Key-Id": SNOWPLOW_API_KEY_ID,
+            "X-API-Key": SNOWPLOW_API_KEY,
         },
     },
 )
@@ -161,10 +161,10 @@ client = MultiServerMCPClient(
     {
         "snowplow_signals": {
             "transport": "streamable_http",
-            "url": f"{SIGNALS_DEPLOYED_URL}/mcp",
+            "url": f"{SIGNALS_API_URL}/mcp",
             "headers": {
-                "X-API-Key-Id": CONSOLE_API_KEY_ID,
-                "X-API-Key": CONSOLE_API_KEY,
+                "X-API-Key-Id": SNOWPLOW_API_KEY_ID,
+                "X-API-Key": SNOWPLOW_API_KEY,
             },
         }
     }
@@ -185,8 +185,8 @@ Most MCP clients take a remote server as a URL with headers. Add the server to y
       "type": "http",
       "url": "https://{{123abc}}.signals.snowplowanalytics.com/mcp",
       "headers": {
-        "X-API-Key-Id": "<CONSOLE_API_KEY_ID>",
-        "X-API-Key": "<CONSOLE_API_KEY>"
+        "X-API-Key-Id": "<SNOWPLOW_API_KEY_ID>",
+        "X-API-Key": "<SNOWPLOW_API_KEY>"
       }
     }
   }
@@ -245,3 +245,5 @@ In the Inspector UI:
 4. Click **Connect**
 
 The server is fully behind authentication, so without both headers it rejects the connection during initialization. Once connected, open the **Tools** tab to list the tools, read their descriptions and annotations, and run one with your own arguments.
+
+To build an agent that uses Signals context, follow the [Vercel AI SDK agent tutorial](/tutorials/signals-ai-agent-context/introduction) or the [Google ADK agent tutorial](/tutorials/signals-google-adk-agent/introduction). Both read attributes through a service rather than the MCP server. To manage Signals configuration from an AI assistant instead, follow the [conversational Signals tutorial](/tutorials/signals-mcp/introduction).

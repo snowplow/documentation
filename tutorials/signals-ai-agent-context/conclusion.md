@@ -44,6 +44,10 @@ Try setting up a batch attribute group to ingest as part of your `web-agent-cont
 
 The Vercel AI SDK's system prompt is just a string: you can compose it from as many sources as you need.
 
+## Next steps in the Signals docs
+
+To ground the agent in the user's recent session events instead of calculated attributes, use an [agentic context](/docs/signals/applications/agentic-contexts/). To let the agent choose which Signals data to read as tools, connect it to the [Signals MCP server](/docs/signals/applications/mcp-server/).
+
 ## Other Signals tutorials
 
 Check out these other Signals tutorials and solution accelerators for inspiration:

@@ -113,6 +113,7 @@ const sidebars = {
       pick('identities'),
     ]),
     group('Monitor and operate', [
+      pick('failed-events', { label: 'Failed events hub' }),
       pick('monitoring', { hoist: true, indexLabel: 'Monitor failed events' }),
     ]),
   ],

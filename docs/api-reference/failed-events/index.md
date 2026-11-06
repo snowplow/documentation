@@ -6,7 +6,7 @@ description: "Reference guide for Snowplow failed event types including schema v
 keywords: ["failed events", "bad rows", "schema validation", "event recovery", "invalid events"]
 ---
 
-This page lists all the possible types of [failed events](/docs/fundamentals/failed-events/index.md).
+This page lists all the possible types of [failed events](/docs/fundamentals/failed-events/index.md). The [failed events hub](/docs/failed-events/index.md) lists every page about failed events, from monitoring and alerts to recovery.
 
 ## Where do failed events originate?
 

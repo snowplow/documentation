@@ -8,7 +8,7 @@ keywords: ["failed events", "validation", "schema validation", "bad data"]
 
 If you have defined some custom events in the previous section, we recommend playing around with sending invalid data to see what happens.
 
-For example, if your custom event has a numeric field, try sending a string. It will not reach your warehouse! Instead, a [failed event](/docs/fundamentals/failed-events/index.md) will be generated.
+For example, if your custom event has a numeric field, try sending a string. It will not reach your warehouse! Instead, a [failed event](/docs/fundamentals/failed-events/index.md) will be generated. The [failed events hub](/docs/failed-events/index.md) lists every page about failed events, from monitoring and alerts to recovery.
 
 :::tip
 

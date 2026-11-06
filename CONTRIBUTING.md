@@ -18,6 +18,7 @@ This guide covers how to write and edit documentation in this repo. For how the 
   - [Use codeblocks](#use-codeblocks)
   - [Use tabs for platform-specific content](#use-tabs-for-platform-specific-content)
   - [Reuse content across pages](#reuse-content-across-pages)
+  - [Use the docs components](#use-the-docs-components)
 - [Sidebar and visibility](#sidebar-and-visibility)
   - [Reorder the sidebar](#reorder-the-sidebar)
   - [Mark a page as outdated, hidden, or noindex](#mark-a-page-as-outdated-hidden-or-noindex)
@@ -243,6 +244,16 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 <TestingWithMicro/>
 ```
+
+### Use the docs components
+
+Cards, buttons, badges, code groups, steps, parameter tables, feature matrices, and version markers are available in every MDX file without an import. The [components page of the style guide](https://docs.snowplow.io/style-guide/components/) (`src/pages/style-guide/components/index.mdx`) shows each one with an example.
+
+A few common cases:
+
+* Put the maintenance group and latest version at the top of a tracker or package page with `<BadgeGroup>`, `<TierBadge tier="maintained" />`, and `<VersionBadge component="pythonTracker" />`. The version comes from `src/componentVersions.js`.
+* Mark the minimum version a feature needs with `<AppliesTo feature="asn-lookup-enrichment" />`. Add new features to `src/data/feature-versions.json`, which also feeds the versions and compatibility page.
+* Change the tracker feature matrix or the destinations catalog by editing `src/data/trackers.json` or `src/data/destinations.json`, not the pages.
 
 ## Sidebar and visibility
 

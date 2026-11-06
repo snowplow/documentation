@@ -304,6 +304,29 @@ href: https://snowplow.github.io/snowplow-java-tracker
 
 `noindex` will be applied automatically.
 
+## Merge duplicate pages
+
+When two pages cover the same topic, keep the more complete one as the canonical page and move the other page's unique content into it. Then:
+
+1. Turn the old page into a `type: link` stub that points at the merged page, usually at the section that replaced it. Keep its `sidebar_label` and `sidebar_position`, so the sidebar still lists the topic where readers look for it:
+
+   ```yaml
+   ---
+   type: link
+   title: "Cross-domain tracking"
+   sidebar_label: "Cross-domain tracking"
+   sidebar_position: 2855
+   href: /docs/events/cross-navigation/#configure-the-web-tracker
+   description: "This page moved to Cross-domain tracking."
+   ---
+   ```
+
+2. Add forced redirects for the old URL and its `.md` copy to the `forcedRules` list in `worker/redirects.js`.
+3. Update every inbound link, including links to anchors on the old page, to point at the merged page.
+4. Run `yarn build` and compare the `llms-full.txt` page count it reports with the count before the change. It should drop by exactly the number of stubs you created.
+
+If you move a page instead, add a fallback redirect, update the `pick()` paths in `sidebars.js`, and run `yarn check:sidebars` after the build.
+
 ## Write a new tutorial
 
 Tutorials live in `tutorials/`, not `docs/`. Before starting, read [`tutorial-requirements/README.md`](tutorial-requirements/README.md): it covers the tutorial vs. solution accelerator distinction, the required `meta.json` schema, and conventions for demo apps and notebooks.

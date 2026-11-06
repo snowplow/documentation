@@ -85,6 +85,8 @@ One docs plugin serves every `/docs/` page, so URLs don't depend on the navigati
 
 Both redirect tiers are defined in `worker/redirects.js`. `move.sh` appends to it automatically.
 
+Merged pages use forced redirects. When two pages are merged, the old page stays as a `type: link` stub so the sidebar still lists the topic in its old place, and a forced rule sends both the old URL and its `.md` copy to the merged page. Forced rules run before the asset fetch, so the stub page is never served in production.
+
 ## Custom plugins
 
 Live under `plugins/`.
@@ -107,6 +109,10 @@ After the agent instructions, the root `llms.txt` has an "Indexes by product" se
 The plugin also exposes `enableMarkdownFiles` and `excludeRoutes` as global data, so doc pages only link to `.md` files that exist.
 
 The plugin includes scripts for converting different types of content or components into Markdown.
+
+### Content type check
+
+This [plugin](plugins/docusaurus-plugin-content-type-check/index.js) warns during the build about docs pages with a missing or unknown `content_type` front matter value. It never fails the build. It skips `type: link` pages and previous-version pages, and prints a count with the directories that have the most missing pages. Set `CONTENT_TYPE_REPORT=1` to list every page. The valid values are exported as `CONTENT_TYPES`; the page template for each is in the style guide and `CLAUDE.md`.
 
 ### JSON-LD schema
 
@@ -203,9 +209,11 @@ Icons come from `lucide-react`. FontAwesome and `@mui/icons-material` are no lon
 Hub tables are generated from JSON manifests in `src/data/`, and render static HTML so the `.md` copy of the page lists every row:
 
 - `trackers.json`: the tracker feature matrix on `/docs/sources/` (`src/components/catalogs/TrackerMatrix.tsx`). Tiers use the maintenance groups from `/docs/sources/tracker-maintenance-classification/`.
-- `destinations.json`: the destinations catalog on `/docs/destinations/` (`src/components/catalogs/DestinationsCatalog.tsx`).
+- `destinations.json`: the destinations catalog on `/docs/destinations/` (`src/components/catalogs/DestinationsCatalog.tsx`). Its `support` field (Snowplow or partner) feeds the label row on each destination page.
 - `feature-versions.json`: minimum versions for `<AppliesTo>` markers and the table on `/docs/api-reference/versions/`. The build fails if a marker names a version newer than `src/componentVersions.js`.
 - `components.js`: display names and links for the keys in `src/componentVersions.js`.
+
+The tracker and destination landing pages read their label rows from the same manifests: `<TrackerTier id>` shows a tracker's tier from `trackers.json`, and `<IntegrationBadges id>` shows support, status, type, delivery, and clouds from `destinations.json` (both in `src/components/catalogs/IntegrationBadges.tsx`).
 
 Matrix filters write to the query string (`?category=mobile`, `?type=forwarder&cloud=gcp`) and only apply after hydration.
 

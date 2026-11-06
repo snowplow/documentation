@@ -67,4 +67,4 @@ The agent finishes by showing live values and listing what it changed. To check 
 These pages explain what the agent built and other ways to work with Signals:
 * Read the [Signals fundamentals](/docs/signals/concepts/index.md) to understand the configuration the agent created
 * Follow the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a longer walkthrough
-* Prefer working in Console? Try the [Console quickstart tutorial](/tutorials/signals-quickstart/start)
+* Prefer working in Console? Try the [Console quickstart tutorial](/docs/signals/get-started/quickstart-tutorial/index.md)

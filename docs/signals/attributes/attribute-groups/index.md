@@ -77,7 +77,7 @@ Attribute groups are configured differently based on the data source.
 
 ### Stream
 
-Signals calculates attributes from events in your real-time stream. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
+Signals calculates attributes from events in your real-time stream. Check out the [quickstart tutorial](/docs/signals/get-started/quickstart-tutorial/index.md) for a step-by-step guide.
 
 You'll need to define the [attributes](/docs/signals/attributes/attributes/index.md) you want to calculate from your event stream.
 

@@ -48,7 +48,7 @@ The Vercel AI SDK's system prompt is just a string: you can compose it from as m
 
 Check out these other Signals tutorials and solution accelerators for inspiration:
 
-* [Set up Signals for real-time calculation](/tutorials/signals-quickstart/start)
+* [Set up Signals for real-time calculation](/docs/signals/get-started/quickstart-tutorial/)
 * [Implement real-time interventions using Signals](/tutorials/signals-interventions/start)
 * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro)
 * [Use AWS BedRock to supplement Signals with persistent user context](/tutorials/signals-agentic-accelerator/intro)

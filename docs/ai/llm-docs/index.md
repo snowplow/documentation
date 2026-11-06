@@ -53,7 +53,7 @@ Let your LLM know that this format is available, so it can retrieve content effi
 
 Each tutorial is also available as a single Markdown file containing all of its steps in order. Tutorials have no page of their own on the site, so these files don't follow the URL pattern above. Append `.md` to the tutorial's directory path instead:
 
-- Tutorial step: `https://docs.snowplow.io/tutorials/signals-quickstart/start/`
-- Complete tutorial: `https://docs.snowplow.io/tutorials/signals-quickstart.md`
+- Tutorial step: `https://docs.snowplow.io/tutorials/signals-interventions/start/`
+- Complete tutorial: `https://docs.snowplow.io/tutorials/signals-interventions.md`
 
 The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.

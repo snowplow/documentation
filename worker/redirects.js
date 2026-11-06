@@ -451,6 +451,13 @@ const fallbackRules = [
   // JS enrichment flattened
   ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
   ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
+  // Signals quickstart tutorial moved into the Signals docs
+  ['/tutorials/signals-quickstart/define-attribute-group/', '/docs/signals/get-started/quickstart-tutorial/#create-the-attribute-group', 301],
+  ['/tutorials/signals-quickstart/define-service/', '/docs/signals/get-started/quickstart-tutorial/#create-the-service', 301],
+  ['/tutorials/signals-quickstart/retrieve-attributes/', '/docs/signals/get-started/quickstart-tutorial/#find-your-session-id', 301],
+  ['/tutorials/signals-quickstart/conclusion/', '/docs/signals/get-started/quickstart-tutorial/#clean-up', 301],
+  ['/tutorials/signals-quickstart.md', '/docs/signals/get-started/quickstart-tutorial.md', 301],
+  ['/tutorials/signals-quickstart/*', '/docs/signals/get-started/quickstart-tutorial/', 301],
   // Iglu docs refactor — deleted/relocated pages
   ['/docs/api-reference/iglu/igluctl-2/*', '/docs/api-reference/iglu/igluctl/:splat', 301],
   ['/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/', '/docs/fundamentals/schemas/#self-describing-json-schema-anatomy', 301],

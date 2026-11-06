@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Anonymous tracking is a feature that enables anonymization of various user and session identifiers, to support user privacy when consent for tracking the identifiers isn't given.
 
-On React Native, the following [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) can be anonymized:
+On React Native, the following [user and session identifiers](/docs/events/identifiers/index.md) can be anonymized:
 
 * Client-side user identifiers:
    * `user_id`, `domain_userid`, `network_userid`, and `user_ipaddress`, set by you in `Subject`

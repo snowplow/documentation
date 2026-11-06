@@ -235,7 +235,7 @@ Supported. A user browses anonymously, then logs in to a new account, or to an a
 
 ### Cross-domain
 
-Supported. A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
+Supported. A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
 
 If the user has visited the second site before, its `domain_userid` already has its own Snowplow ID, and Identities merges the two. In that case, the [cross-device](#cross-device) limitations apply.
 

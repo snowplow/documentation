@@ -69,7 +69,7 @@ The agent finishes by listing what it created and changed. To check for yourself
 
 ## Connect a destination
 
-When the events look right in Micro, connect a [warehouse or lake destination](/docs/destinations/warehouses-lakes/index.md) in Console so validated events load into it. The trial allows one warehouse or lake destination and one [event forwarding](/docs/destinations/forwarding-events/index.md) destination. From there you can [query your data](/docs/get-started/querying/index.md) and [model it](/docs/get-started/modeling/index.md) with the dbt packages.
+When the events look right in Micro, connect a [warehouse or lake destination](/docs/destinations/warehouses-lakes/index.md) in Console so validated events load into it. The trial allows one warehouse or lake destination and one [event forwarding](/docs/destinations/forwarding-events/index.md) destination. From there you can [query your data](/docs/destinations/warehouses-lakes/querying-data/index.md) and [model it](/docs/get-started/modeling/index.md) with the dbt packages.
 
 ## Next steps
 

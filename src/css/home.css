@@ -9,7 +9,7 @@
     --sp-layout-wide: 1120px;
   }
 
-  .doc-layout--home .markdown > h1 {
+  .doc-layout--home .markdown > header h1 {
     font-size: 40px;
     line-height: 48px;
   }

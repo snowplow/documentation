@@ -14,8 +14,6 @@ pagination_prev: null
 
 import { HomeSearch, AgentSetup, Lifecycle, Quickstarts, LatestReleases } from '@site/src/components/home'
 
-# Snowplow documentation
-
 <div className="home-hero breakout">
 <div className="home-hero__intro">
 

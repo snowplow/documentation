@@ -5,6 +5,8 @@ sidebar_label: "Get started"
 description: "Start Snowplow on a hosted environment in about 20 minutes with no infrastructure to run, optionally with an AI assistant doing the setup."
 keywords: ["getting started", "Snowplow CDI", "free trial", "free tier", "AI assistant", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options"]
 content_type: landing
+pagination_prev: null
+pagination_next: null
 ---
 
 Snowplow is the customer context layer that provides the data foundation for your organization. It transforms raw behavioral data into real-time customer context for AI agents and advanced analytics, using [Snowplow Signals](/docs/signals/index.md) and the Snowplow Customer Data Infrastructure (CDI) platform.

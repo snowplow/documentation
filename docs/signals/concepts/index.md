@@ -29,7 +29,7 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 
 ## Architecture
 
-You don't need to run a Snowplow pipeline before you use Signals. Signals includes event collection: add a Snowplow tracker to your application, and Signals computes attributes from the events it sends. Signals is deployed into the same cloud as the [pipeline](/docs/get-started/index.md) that collects those events.
+You don't need to run a Snowplow pipeline before you use Signals. Signals includes event collection: add a Snowplow tracker to your application, and Signals computes attributes from the events it sends. Signals is deployed into the same cloud as the [pipeline](/docs/cdi/index.md) that collects those events.
 
 If you already run Snowplow, Signals reads the events from your existing pipeline, which continues to process events as usual.
 

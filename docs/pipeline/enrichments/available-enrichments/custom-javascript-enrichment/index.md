@@ -261,7 +261,7 @@ Accessing request headers is supported since Enrich 5.1.1.
 
 :::note[Availability]
 
-For security reasons, this feature isn't available to [Snowplow CDI Cloud](/docs/get-started/index.md) customers.
+For security reasons, this feature isn't available to [Snowplow CDI Cloud](/docs/get-started/deployment-options/index.md) customers.
 
 :::
 

@@ -24,7 +24,7 @@ Identities allows you to:
 Use the provided Identities data models to build identifier mapping tables. These tables help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
 :::note[Deployment support]
-Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/index.md). Azure isn't supported.
+Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/private-managed-cloud/index.md). Azure isn't supported.
 :::
 
 ## How Identities fits into the Snowplow pipeline

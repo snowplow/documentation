@@ -13,7 +13,7 @@ To help clarify, we've categorized the terms:
 * **Component**: a pipeline application, package, SDK, or other code-based tool or set of tools, e.g. [Snowplow Micro](/docs/testing/snowplow-micro/index.md)
 * **Concept**: names for Snowplow things and ideas, e.g. [tracking plan](/docs/fundamentals/tracking-plans/index.md)
 * **Legal**: about licensing, e.g. [SLULA](/docs/licensing/index.md)
-* **Offering**: a Snowplow product that you can buy, e.g. [Snowplow CDI Cloud](/docs/get-started/index.md) or [Snowplow Signals](/docs/signals/introduction/index.md)
+* **Offering**: a Snowplow product that you can buy, e.g. [Snowplow CDI Cloud](/docs/get-started/deployment-options/index.md) or [Snowplow Signals](/docs/signals/introduction/index.md)
 
 | Term                                   | Category  | Description                                                                                                                                                           | More information                                                                                   |
 | -------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |

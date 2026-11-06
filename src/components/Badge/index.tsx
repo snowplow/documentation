@@ -235,7 +235,7 @@ export function Availability({
           >
             <p>{help}</p>
             <p className="sp-availability__more">
-              Find out more about <Link to="/docs/get-started/">Snowplow CDI</Link> and{' '}
+              Find out more about <Link to="/docs/cdi/">Snowplow CDI</Link> and{' '}
               <Link to="/docs/get-started/feature-comparison/">product availability</Link>, or contact{' '}
               <a href="https://support.snowplow.io" target="_blank" rel="noopener noreferrer">
                 Support

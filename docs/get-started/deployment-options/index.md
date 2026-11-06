@@ -8,7 +8,7 @@ date: "2026-11-06"
 content_type: concept
 ---
 
-You don't need to choose a deployment to start with Snowplow: the [hosted environment](/docs/get-started/index.md#start-on-a-hosted-environment) needs no infrastructure, and the same account carries over to a paid deployment. Use this page when you're planning for production. For a feature-by-feature list, see the [feature comparison](/docs/get-started/feature-comparison/index.md).
+You don't need to choose a deployment to start with Snowplow: the [hosted environment](/docs/cdi/index.md#start-here) needs no infrastructure, and the same account carries over to a paid deployment. Use this page when you're planning for production. For a feature-by-feature list, see the [feature comparison](/docs/get-started/feature-comparison/index.md).
 
 Snowplow runs as a managed platform, hosted either by Snowplow or in your own cloud account, or as a self-hosted deployment that you run yourself.
 

@@ -14,13 +14,16 @@ Use CDI when you need event-level data you control: for product and marketing an
 
 ## Start here
 
-Most teams start on a hosted environment, then choose a deployment for production. The quickstart sets up tracking, schemas, and a first data load with your coding agent.
+You can start on a hosted environment that Snowplow provisions for you, with no infrastructure to deploy. The [free trial](/docs/get-started/free-trial/index.md) is 14 days of Snowplow CDI Cloud, with access instructions in around 20 minutes. Once the environment exists, either hand the setup to your coding agent with the quickstart, or follow the steps yourself to track your first events and query them. When you're ready for production, see [Choose a Snowplow deployment](/docs/get-started/deployment-options/index.md).
 
-<CardGrid cols={3}>
+<CardGrid cols={2}>
   <Card variant="quickstart" eyebrow="Quickstart" time="30 min" title="Quickstart with your coding agent" href="/docs/get-started/quickstart/" description="Get a hosted environment and send validated events from your app." />
-  <Card title="First steps" href="/docs/get-started/" description="Start a trial, then compare Cloud, Private Managed Cloud, and Self-Hosted." />
-  <Card title="Fundamentals" href="/docs/fundamentals/" description="Events, entities, schemas, and how the pipeline processes them." />
+  <Card title="Step by step" href="/docs/get-started/free-trial/" description="Get access to Console, track your first events, and query them." />
+  <Card title="Already have data in your warehouse?" href="/docs/destinations/warehouses-lakes/querying-data/" description="Query the atomic events table, then build sessions and users tables with Unified Digital." />
+  <Card title="Core concepts" href="/docs/fundamentals/" description="Events, entities, schemas, and how the pipeline processes them." />
 </CardGrid>
+
+Coming from Segment, Google Analytics, Adobe Analytics, or Mixpanel? See [Migrate from another tool](/docs/migration-guides/index.md).
 
 ## Explore by stage
 
@@ -54,13 +57,13 @@ The CDI sidebar follows the path an event takes, from design to data model. Each
   <Card
     variant="product"
     headingLevel={3}
-    title="Validate and enrich"
-    href="/docs/pipeline/"
-    description="Configure the Collector and enrichments, and test tracking before it reaches production."
+    title="Test and enrich"
+    href="/docs/testing/"
+    description="Check your tracking before it reaches production, and add data to events with enrichments."
     links={[
-      { label: 'Enrichments', href: '/docs/pipeline/enrichments/' },
+      { label: 'Snowplow Inspector', href: '/docs/testing/snowplow-inspector/' },
       { label: 'Snowplow Micro', href: '/docs/testing/snowplow-micro/' },
-      { label: 'Collector', href: '/docs/pipeline/collector/' },
+      { label: 'Enrichments', href: '/docs/pipeline/enrichments/' },
     ]}
   />
   <Card
@@ -78,10 +81,11 @@ The CDI sidebar follows the path an event takes, from design to data model. Each
   <Card
     variant="product"
     headingLevel={3}
-    title="Model and unify"
-    href="/docs/modeling-your-data/"
-    description="Build sessions, users, and attribution tables with dbt packages, and stitch identities."
+    title="Query and model data"
+    href="/docs/destinations/warehouses-lakes/querying-data/"
+    description="Query the atomic events table, build sessions, users, and attribution tables with dbt packages, and stitch identities."
     links={[
+      { label: 'Atomic event fields', href: '/docs/fundamentals/canonical-event/' },
       { label: 'dbt packages', href: '/docs/modeling-your-data/modeling-your-data-with-dbt/' },
       { label: 'Identities', href: '/docs/identities/' },
     ]}
@@ -89,11 +93,11 @@ The CDI sidebar follows the path an event takes, from design to data model. Each
   <Card
     variant="product"
     headingLevel={3}
-    title="Monitor and operate"
-    href="/docs/monitoring/"
+    title="Monitor data quality"
+    href="/docs/failed-events/"
     description="Find and fix failed events, and set up data quality alerts."
     links={[
-      { label: 'Explore failed events', href: '/docs/monitoring/exploring-failed-events/' },
+      { label: 'See failed events in Console', href: '/docs/monitoring/' },
       { label: 'Alerts', href: '/docs/monitoring/alerts/' },
     ]}
   />
@@ -106,3 +110,4 @@ Configuration options, API references, and component versions are in the Referen
 * [Tracker API reference](/docs/api-reference/trackers/index.md)
 * [Component configuration](/docs/api-reference/index.md)
 * [Versions and compatibility](/docs/api-reference/versions/index.md)
+* [Tracker versions](/docs/api-reference/versions/index.md#trackers)

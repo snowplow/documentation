@@ -247,7 +247,8 @@ You can use the below generator to generate the conversion events variable, make
 ```mdx-code-block
 import CodeBlock from '@theme/CodeBlock';
 import { useState } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme, lightTheme } from '@site/src/components/MuiTheme';
 import { useColorMode } from '@docusaurus/theme-common';
 import validator from '@rjsf/validator-ajv8';
 import Form from '@rjsf/mui';
@@ -306,18 +307,6 @@ export const printYamlVariables = (data) => {
     </>
   )
 };
-
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
 
 export const JsonSchemaGenerator = ({ output, children, schema }) => {
   const [formData, setFormData] = useState(null)

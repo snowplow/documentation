@@ -4,7 +4,7 @@ sidebar_label: "Sessions and data model"
 description: "Enable session tracking with the client_session entity across Android, iOS, and Web. Configure session timeouts, continue sessions after an app restart, and start a new session on demand."
 keywords: ["session tracking", "client session", "unified data model", "session timeout", "session context", "new session", "SessionConfiguration"]
 date: "2022-01-31"
-sidebar_position: 5000
+sidebar_position: 5010
 ---
 
 import Tabs from '@theme/Tabs';

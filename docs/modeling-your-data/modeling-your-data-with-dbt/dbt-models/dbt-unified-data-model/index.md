@@ -1,7 +1,7 @@
 ---
 title: "Snowplow Unified Digital dbt package"
 sidebar_label: "Unified Digital"
-sidebar_position: 10
+sidebar_position: 15
 description: "Transform raw web and mobile event data into derived tables for views, sessions, users, and conversions with the Unified Digital dbt package."
 keywords: ["unified digital dbt", "web and mobile data", "sessions modeling", "user modeling", "page views"]
 ---

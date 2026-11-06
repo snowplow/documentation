@@ -1,6 +1,6 @@
 ---
 title: "Setting up Snowplow CDI"
-sidebar_position: 3
+sidebar_position: 3.5
 sidebar_label: "Setting up Snowplow CDI"
 description: "Get started with Snowplow Customer Data Infrastructure on Cloud or Private Managed Cloud with setup guides for AWS, Azure, and GCP."
 keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud setup", "AWS setup", "Azure setup", "GCP setup"]

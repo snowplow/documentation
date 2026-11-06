@@ -1,6 +1,6 @@
 ---
 title: "Timezone and geolocation"
-sidebar_position: 100
+sidebar_position: 105
 description: "Documentation for Timezone and geolocation in the web tracker."
 keywords: ["tracker", "configuration"]
 ---

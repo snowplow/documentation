@@ -3,7 +3,7 @@ title: "New derived model"
 sidebar_label: "New derived model"
 description: "Create new incremental derived models in Snowplow dbt packages building from events this run with optimized upserts."
 keywords: ["new derived model", "custom incremental model", "derived table", "incremental dbt model"]
-sidebar_position: 20
+sidebar_position: 25
 ---
 
 We have always seen our packages as a starting point for your analysis and insight generation; there to get you started and give you an idea of what you can do, while providing the framework to build your own models on top to meet your bespoke needs. Assuming that customizing the existing derived tables does not suit your needs the next steps is to create a custom derived model.

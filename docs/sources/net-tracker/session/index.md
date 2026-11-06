@@ -2,7 +2,7 @@
 title: "Track session data with the .NET tracker"
 sidebar_label: "Session"
 date: "2020-02-26"
-sidebar_position: 60
+sidebar_position: 65
 description: "Track user sessions with persistent session data including session ID, index, and timeout configuration for .NET applications."
 keywords: [".net session tracking", "client session", "session management"]
 ---

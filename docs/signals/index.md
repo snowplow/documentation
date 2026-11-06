@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Snowplow Signals"
-sidebar_position: 8.7
+sidebar_position: 8.8
 description: "Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. Use it for in-session personalization, customer-aware agents, real-time triggers, and machine learning features."
 keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
 sidebar_label: "Signals"

@@ -2,7 +2,7 @@
 title: "Introduction to Snowplow Identities"
 sidebar_label: "Identities"
 date: "2025-02-25"
-sidebar_position: 6
+sidebar_position: 6.5
 description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified Snowplow IDs."
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
 ---

@@ -2,7 +2,7 @@
 title: "Migration guide for Snowplow Android Tracker SDK from version 2.x to 3.0"
 date: "2021-11-23"
 sidebar_label: "From version 2.x to 3.0 for Android"
-sidebar_position: -1
+sidebar_position: 0
 description: "Migrate your Android tracker from version 2.x to 3.0 which removes the deprecated v1 API."
 keywords: ["android migration", "version 3.0", "api removal"]
 ---

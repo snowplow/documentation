@@ -1,7 +1,7 @@
 ---
 title: "Track screen views on web"
 sidebar_label: "Screen views"
-sidebar_position: 60
+sidebar_position: 65
 description: "Track screen views with mobile-style tracking on web including screen engagement metrics for time spent and scroll depth analysis."
 keywords: ["screen views", "mobile tracking"]
 ---

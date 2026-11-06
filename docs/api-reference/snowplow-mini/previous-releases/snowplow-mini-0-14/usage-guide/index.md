@@ -2,7 +2,7 @@
 title: "Usage Guide"
 sidebar_label: "Usage Guide"
 date: "2021-05-11"
-sidebar_position: -10
+sidebar_position: -7
 description: "Usage guide for Snowplow Mini 0.14.x testing and debugging."
 keywords: ["snowplow mini", "usage guide", "mini 0.14", "testing"]
 ---

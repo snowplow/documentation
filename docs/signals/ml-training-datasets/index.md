@@ -17,7 +17,13 @@ Training a machine learning model on behavioral data requires a dataset where ea
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
 
-## Supported warehouses
+## Before you begin
+
+You need:
+* Your events in a supported warehouse. Managed runs also need a Signals warehouse connection: see [Supported warehouses](#supported-warehouses).
+* For session anchors, attribute groups keyed on `domain_sessionid`. The dataset builder requires this key when it generates session anchors.
+
+### Supported warehouses
 
 The dataset builder currently supports Snowflake only. A [Signals warehouse connection](/docs/signals/setup/index.md) is required for [managed runs](#submit-a-managed-run). If you [build the SQL yourself](#build-and-execute-sql-yourself), you can run it directly against your warehouse without a connection configured in Signals.
 
@@ -28,13 +34,17 @@ The dataset builder currently supports Snowflake only. A [Signals warehouse conn
 | Managed runs | ✅ |
 | Self-built SQL | ✅ |
 
-## Why point-in-time correctness matters
+## How it works
+
+The dataset builder turns attribute group definitions into a labeled, point-in-time correct dataset.
+
+### Why point-in-time correctness matters
 
 When you serve predictions in real time, your model only has access to events that have happened so far in the session. If your training data includes attributes computed from the full session (including events after the prediction point), your model learns patterns it will never see in production. This is called data leakage, and it is the most common reason ML models degrade after deployment.
 
 The dataset builder prevents this by computing each attribute value using only events that occurred before the anchor timestamp. Because it uses the same attribute group definitions that power your real-time Signals deployment, training and serving are guaranteed to use the same feature logic.
 
-## Workflow
+### Workflow
 
 Building and using an ML training dataset follows this process:
 
@@ -45,7 +55,7 @@ Building and using an ML training dataset follows this process:
 5. Train your model on the results
 6. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
 
-## How it works
+### Dataset stages
 
 The dataset builder produces a training dataset in three stages:
 
@@ -343,3 +353,5 @@ This creates:
 Run the SQL files in the order specified in `README.md` against your warehouse to produce the training dataset.
 
 To understand how a training dataset relates to the attributes you serve in production, see [real-time features for ML](https://signals.snowplow.io/use-cases/model-features?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
+
+For a complete walkthrough, from defining attributes to training and serving the model, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).

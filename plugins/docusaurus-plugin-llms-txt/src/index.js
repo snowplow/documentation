@@ -1,6 +1,7 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { convertHtmlToMarkdown } from './convert.js'
+import { checkCodeBlocks } from './check-code-blocks.js'
 import { writePages, writeTutorialPages } from './write-pages.js'
 import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
@@ -101,6 +102,9 @@ export default function pluginLlmsTxt(context, options) {
       }
 
       console.log(`[llms-txt] Converted ${pages.length} pages to markdown`)
+
+      // Code blocks must keep their source line breaks
+      checkCodeBlocks(pages)
 
       // Enrich dbt config pages with variable tables from JSON schemas
       await enrichDbtSchemas(pages, context.siteDir)

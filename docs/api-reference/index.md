@@ -18,6 +18,7 @@ These pages describe the interfaces you call from your own code or scripts:
 * [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md): manage data structures and tracking plans from the command line
 * [Tracker API documentation](/docs/api-reference/trackers/index.md): generated API reference for each tracker SDK
 * [Analytics SDKs](/docs/api-reference/analytics-sdk/index.md): parse enriched events in Scala, JavaScript, Go, Python, or .NET
+* [Signals SDKs and API](/docs/signals/connection/reference/index.md): the Signals Python and Node.js SDKs, credentials, and Signals API endpoints
 
 ## Component configuration
 

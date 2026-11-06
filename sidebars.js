@@ -233,6 +233,8 @@ const sidebars = {
     group('SDK reference', [
       pick('api-reference/trackers'),
       pick('api-reference/analytics-sdk'),
+      // The page itself is in the signals sidebar; this is a cross-link
+      { type: 'link', label: 'Signals SDKs and API', href: '/docs/signals/connection/reference/' },
     ]),
     group('Component configuration', [
       pick('api-reference/stream-collector', { label: 'Collector configuration' }),

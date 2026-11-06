@@ -6,8 +6,6 @@ sidebar_label: "Introduction"
 description: "Snowplow CDI delivers validated, enriched event-level data to your warehouse, lake, or stream in real time. Define custom events with flexible schemas and distinguish AI agent traffic from human visitors."
 keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "ai-powered analytics", "signals"]
 pagination_next: null
-sidebar_custom_props:
-  header: "Data Infrastructure"
 ---
 
 **Deliver validated, enriched event data to your warehouse, lake, or stream in real time with Snowplow**.

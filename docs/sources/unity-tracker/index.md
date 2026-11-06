@@ -8,10 +8,9 @@ keywords: ["unity tracker", "unity game analytics", "unity event tracking"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 <p>The Snowplow Unity Tracker allows you to track Snowplow events from your Unity games and apps. The current tracker version is {versions.unityTracker}.</p>

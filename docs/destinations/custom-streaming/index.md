@@ -7,11 +7,9 @@ keywords: ["custom streaming", "custom integrations", "AWS Lambda", "Cloud Funct
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['pmc', 'selfHosted']}
-  helpContent="Custom streaming requires direct access to the enriched stream, which is available for Private Managed Cloud and Self-Hosted pipelines."
+  note="Custom streaming requires direct access to the enriched stream, which is available for Private Managed Cloud and Self-Hosted pipelines."
 />
 ```
 

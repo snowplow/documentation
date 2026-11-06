@@ -8,14 +8,11 @@ keywords: ["react native tracker", "mobile analytics", "expo tracking"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import {versions} from '@site/src/componentVersions';
 
 <BadgeGroup>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="React Native Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker React Native Release"></Badges>
+<TierBadge tier="actively-maintained" />
+<VersionBadge component="javaScriptTracker" href="https://www.npmjs.com/package/@snowplow/react-native-tracker" />
 </BadgeGroup>
 ```
 

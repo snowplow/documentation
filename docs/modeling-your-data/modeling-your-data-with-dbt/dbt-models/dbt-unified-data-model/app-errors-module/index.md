@@ -6,11 +6,8 @@ keywords: ["app errors", "error tracking", "application errors module", "crash t
 sidebar_position: 101
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
 
 ```mdx-code-block
 import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"

@@ -8,9 +8,7 @@ sidebar_position: 4000
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Snowplow Tracker JavaScript Release"></Badges>
+<VersionBadge component="javaScriptTracker" href="https://github.com/snowplow/snowplow-javascript-tracker/releases" />
 ```
 
 

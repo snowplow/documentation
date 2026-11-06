@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronRight, ArrowLeft, Check, X, ListChecks } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
-import { Button } from '@site/src/components/ui/button'
+import Button from '@site/src/components/Button'
 import RadialProgress from './RadialProgress'
 import styles from './TutorialProgressTracker.module.css'
 import { useHistory } from '@docusaurus/router'
@@ -171,13 +171,11 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       {/* Tutorial Chapters Button - Mobile Only */}
       <div className="w-full flex justify-end mb-4 block md:hidden">
         <Button
-          variant="outline"
-          size="lg"
-          className="w-auto justify-between border border-border bg-card hover:bg-accent text-foreground font-regular py-3 px-4 rounded-lg shadow-sm"
+          variant="secondary"
           onClick={() => setIsSheetOpen(true)}
+          iconAfter={<ListChecks size={16} />}
         >
-          <span className="text-base font-regular">Tutorial Chapters</span>
-          <ListChecks className="w-5 h-5 ml-2 text-foreground" />
+          Tutorial chapters
         </Button>
       </div>
 
@@ -297,14 +295,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
 
       {/* Back to Tutorials Button - Hidden on mobile */}
       <div className="mt-4 hidden md:block">
-        <Button
-          variant="outline"
-          size="lg"
-          className="justify-start gap-2 rounded-lg"
-          onClick={() => window.location.href = '/tutorials'}
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Tutorials
+        <Button variant="secondary" href="/tutorials" icon={<ArrowLeft size={16} />}>
+          Back to tutorials
         </Button>
       </div>
     </div>
@@ -323,12 +315,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
           {/* Sheet Header */}
           <div className="flex items-center justify-between p-4 border-b">
             <h2 className="text-lg font-semibold">Tutorial Chapters</h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsSheetOpen(false)}
-            >
-              <X className="w-4 h-4" />
+            <Button variant="ghost" size="sm" onClick={() => setIsSheetOpen(false)} aria-label="Close">
+              <X size={16} aria-hidden="true" />
             </Button>
           </div>
 

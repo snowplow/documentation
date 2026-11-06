@@ -6,11 +6,8 @@ keywords: ["core web vitals", "LCP", "FID", "CLS", "web performance", "page perf
 sidebar_position: 300
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
 
 ```mdx-code-block
 import CoreWebVitals from "@site/docs/reusable/data-modeling/core-web-vitals/_index.md";

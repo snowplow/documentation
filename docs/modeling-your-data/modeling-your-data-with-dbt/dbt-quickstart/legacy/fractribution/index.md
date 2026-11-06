@@ -9,7 +9,6 @@ keywords: ["fractribution quickstart", "legacy attribution", "fractribution setu
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Badges from '@site/src/components/Badges';
 ```
 
 :::note
@@ -319,7 +318,7 @@ To help debug easier we have included logs to be printed each time a table is cr
 <details>
 <summary>Run python with docker</summary>
 
-#### I. Pull the docker image ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>
+#### I. Pull the docker image ​<Badge href="https://hub.docker.com/r/snowplow/fractribution">Docker Hub: snowplow/fractribution</Badge>
 
 You can pull the latest docker image from Docker Hub: `docker pull snowplow/fractribution:latest`. Alternatively, you can pull it based on the package version: `docker pull snowplow/fractribution:0.2.0`
 

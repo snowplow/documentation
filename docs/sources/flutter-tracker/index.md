@@ -8,9 +8,7 @@ keywords: ["flutter tracker", "flutter analytics", "cross-platform tracking", "f
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Early Release"></Badges>
+<TierBadge tier="early-release" />
 ```
 
 The Snowplow Flutter Tracker allows you to add analytics to your Flutter apps for Web, Android, and iOS when using a Snowplow pipeline.

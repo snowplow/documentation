@@ -6,11 +6,8 @@ description: "How to run our models on lakehouses including Databricks and other
 keywords: ["dbt data lakes", "dbt lakehouses", "Databricks dbt"]
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="Early Release"></Badges>
+<TierBadge tier="early-release" />
 
 :::info
 

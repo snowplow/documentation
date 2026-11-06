@@ -7,11 +7,10 @@ description: "Document and manage your tracking implementation across different 
 keywords: ["source applications", "app id", "application entities", "global context", "data sources"]
 ---
 
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we refer to as source applications.
 

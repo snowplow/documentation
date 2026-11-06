@@ -8,11 +8,9 @@ keywords: ["analytics sdk", "enriched events", "event transformation"]
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Analytics SDKs are included with all Snowplow platforms."
+  note="Analytics SDKs are included with all Snowplow platforms."
 />
 ```
 

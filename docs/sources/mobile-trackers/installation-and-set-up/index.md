@@ -8,11 +8,10 @@ keywords: ["mobile tracker installation", "ios setup", "android setup"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 <Tabs groupId="platform" queryString>

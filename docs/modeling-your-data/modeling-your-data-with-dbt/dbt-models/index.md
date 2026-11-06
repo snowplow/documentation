@@ -7,11 +7,9 @@ keywords: ["dbt packages", "Snowplow dbt", "data modeling packages", "dbt models
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted', 'addon']}
-  helpContent="Data models are a paid addon for Snowplow CDI or Self-Hosted."
+  note="Data models are a paid addon for Snowplow CDI or Self-Hosted."
 />
 ```
 

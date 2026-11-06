@@ -8,9 +8,7 @@ keywords: ["rust tracker", "rust analytics", "crates.io package"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Early Release"></Badges>
+<TierBadge tier="early-release" />
 ```
 
 The Snowplow Rust Tracker allows you to add analytics to your Rust apps.

@@ -9,10 +9,9 @@ sidebar_position: 100
 
 ```mdx-code-block
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.

@@ -9,9 +9,8 @@ keywords: ["mobile tracker", "ios", "android"]
 
 ```mdx-code-block
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
-import Badges from '@site/src/components/Badges';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Use our Snowplow [Android](https://github.com/snowplow/snowplow-android-tracker) and [iOS](https://github.com/snowplow/snowplow-ios-tracker) trackers to collect data from Android, iOS, macOS, tvOS and watchOS apps.

@@ -8,11 +8,9 @@ date: "2026-03-11"
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowbridge is included with all Snowplow platforms."
+  note="Snowbridge is included with all Snowplow platforms."
 />
 
 ```

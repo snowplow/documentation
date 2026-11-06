@@ -8,13 +8,9 @@ keywords: ["php tracker", "php analytics", "composer package"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Snowplow Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker PHP Release"></Badges>
+<TierBadge tier="early-release" />
+<VersionBadge component="phpTracker" href="https://packagist.org/packages/snowplow/snowplow-tracker" />
 </BadgeGroup>
 ```
 

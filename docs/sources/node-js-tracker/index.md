@@ -8,10 +8,9 @@ keywords: ["node.js tracker", "nodejs analytics", "typescript tracker"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.

@@ -6,11 +6,8 @@ keywords: ["consent module", "GDPR tracking", "consent preferences", "marketing 
 sidebar_position: 200
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
 
 ```mdx-code-block
 import Consent from "@site/docs/reusable/data-modeling/consent/_index.md"

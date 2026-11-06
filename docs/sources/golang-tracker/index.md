@@ -7,9 +7,7 @@ sidebar_position: 170
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) allows you to track Snowplow events from your Golang apps and servers.

@@ -9,11 +9,10 @@ keywords: ["tracking implementation", "code generation", "Snowtype", "tracking c
 
 ```mdx-code-block
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Snowtype is available for Snowplow CDI customers only."
+  note="Snowtype is available for Snowplow CDI customers only."
 />
 ```
 

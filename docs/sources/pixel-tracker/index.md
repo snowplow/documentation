@@ -7,9 +7,7 @@ keywords: ["pixel tracker", "html email tracking", "no-js tracking"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Maintained"></Badges>
+<TierBadge tier="maintained" />
 ```
 
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.

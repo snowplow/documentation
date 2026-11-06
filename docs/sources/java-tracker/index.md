@@ -8,9 +8,7 @@ keywords: ["java tracker", "server-side tracking", "java analytics"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Maintained"></Badges>
+<TierBadge tier="maintained" />
 ```
 
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.

@@ -9,7 +9,6 @@ keywords: ["micro basic usage", "docker", "run micro", "test events", "micro das
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
-import Badges from '@site/src/components/Badges';
 ```
 
 :::tip[Micro in Console]
@@ -20,7 +19,7 @@ For general use, we recommend [running Micro through Snowplow Console](/docs/tes
 
 The easiest way to run Micro locally is through [Docker](https://www.docker.com/).
 
-<Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
+<Badge href="https://hub.docker.com/r/snowplow/snowplow-micro">Docker Hub: snowplow/snowplow-micro</Badge>
 
 Run the following command:
 

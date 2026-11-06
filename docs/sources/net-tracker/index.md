@@ -7,9 +7,7 @@ keywords: [".net tracker", "xamarin tracking", "dotnet analytics"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Maintained"></Badges>
+<TierBadge tier="maintained" />
 ```
 
 The Snowplow .NET Tracker allows you to track Snowplow events from your .NET websites and desktop applications. It's split into two libraries:

@@ -7,11 +7,10 @@ keywords: ["identities dbt", "identity resolution", "snowplow_id", "identity map
 date: "2026-03-23"
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Identities is a paid addon for Snowplow CDI."
+  note="Identities is a paid addon for Snowplow CDI."
 />
 
 **The package source code can be found in the [snowplow-incubator/dbt-snowplow-identities](https://github.com/snowplow-incubator/dbt-snowplow-identities/) repository.**

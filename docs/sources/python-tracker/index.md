@@ -8,13 +8,9 @@ keywords: ["python tracker", "python analytics", "pypi package"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Pypi Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker Pypi Release"></Badges>
+<TierBadge tier="early-release" />
+<VersionBadge component="pythonTracker" href="https://pypi.org/project/snowplow-tracker/" />
 </BadgeGroup>
 ```
 

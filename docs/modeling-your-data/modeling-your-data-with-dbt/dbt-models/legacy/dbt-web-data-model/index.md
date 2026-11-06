@@ -7,16 +7,14 @@ sidebar_position: 700
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import {versions} from '@site/src/componentVersions';
 
 ```
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>
-<Badges badgeType="Maintained"></Badges>
-<Badges badgeType="SCL"></Badges>
+<VersionBadge component="dbtSnowplowWeb" />
+<TierBadge tier="maintained" />
+<LicenseBadge license="scl" />
 </BadgeGroup>
 
 :::info

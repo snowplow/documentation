@@ -7,11 +7,9 @@ keywords: ["event forwarding", "real-time delivery", "Snowbridge", "event transf
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Event forwarding is a paid addon for Snowplow CDI."
+  note="Event forwarding is a paid addon for Snowplow CDI."
 />
 ```
 

@@ -8,10 +8,9 @@ keywords: ["roku tracker", "brightscript tracking", "scenegraph channels"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 <p>The Snowplow Roku Tracker allows you to track Snowplow events in your BrightScript and BrighterScript applications. The tracker is compatible with SceneGraph channels. The current version is {versions.rokuTracker}.</p>

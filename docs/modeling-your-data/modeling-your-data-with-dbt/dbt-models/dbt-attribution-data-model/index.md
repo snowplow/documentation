@@ -8,23 +8,15 @@ sidebar_position: 10
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
-import AvailabilityBadges from '@site/src/components/ui/availability-badges'
-
-export const datagridProps = {
-    hideFooter: true
-  };
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowAttribution" />
+<TierBadge tier="early-release" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
-<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Attribution package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+<Availability available={['cloud', 'pmc', 'addon']} note="The Attribution package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 
 
@@ -141,15 +133,11 @@ Please bear in mind, if you would like to calculate the attribution for conversi
 
 You will also need a source table to track your user journey / path with fields to be able to classify your marketing channels. The perfect table for this is your `derived.snowplow_unified_views` table (default):
 
-<div>
-  {MarkdownTableToMuiDataGrid(`
-  | user_identifier | user_id | start_tstamp     | mkt_medium | mkt_source  |
-  | --------------- | ------- | ---------------- | ---------- | ----------- |
-  | user_id1        | user1   | 2022-06-04 06:12 | organic    | google      |
-  | user_id1        | user1   | 2022-06-05 14:45 | cpc        | youtube.com |
-  | user_id2        | user2   | 2022-06-04 18:13 | referral   | quora.com   |
-`, datagridProps)}
-</div>
+| user_identifier | user_id | start_tstamp     | mkt_medium | mkt_source  |
+| --------------- | ------- | ---------------- | ---------- | ----------- |
+| user_id1        | user1   | 2022-06-04 06:12 | organic    | google      |
+| user_id1        | user1   | 2022-06-05 14:45 | cpc        | youtube.com |
+| user_id2        | user2   | 2022-06-04 18:13 | referral   | quora.com   |
 
 Alternatively, you could use the `derived.snowplow_unified_sessions` table as well, but bear in mind that this will mean only the first channel/campaign will be counted within a session, and you will have to make sure the correct field reference is used in the `snowplow_attribution_paths_to_conversion` table by overwriting the `paths_to_conversion()` macro in your project (e.g `first_page_urlhost` instead of `page_urlhost`).
 
@@ -163,14 +151,10 @@ To fully finish the config you might need to overwrite the `channel_classificati
 
 You most likely have a warehouse with marketing (ad) spend information by channel and date, something like this:
 
-<div>
-  {MarkdownTableToMuiDataGrid(`
-  | channel           | campaign  | spend | spend_tstamp     |
-  | ----------------- | --------- | ----- | ---------------- |
-  | Paid_Search_Other | campaign1 | 10000 | 2022-05-04 18:32 |
-  | Video             | campaign2 | 10000 | 2022-05-04 18:32 |
-`, datagridProps)}
-</div>
+| channel           | campaign  | spend | spend_tstamp     |
+| ----------------- | --------- | ----- | ---------------- |
+| Paid_Search_Other | campaign1 | 10000 | 2022-05-04 18:32 |
+| Video             | campaign2 | 10000 | 2022-05-04 18:32 |
 
 To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/tutorials/attribution/intro).
 

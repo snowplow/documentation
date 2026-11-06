@@ -7,11 +7,9 @@ keywords: ["failed events loader", "load failed events", "warehouse failed event
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Failed events loaders are included with all Snowplow platforms."
+  note="Failed events loaders are included with all Snowplow platforms."
 />
 ```
 

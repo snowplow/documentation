@@ -7,11 +7,9 @@ keywords: ["snowplow micro", "test pipeline", "automated testing", "local testin
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow Micro is included with all platforms."
+  note="Snowplow Micro is included with all platforms."
 />
 ```
 

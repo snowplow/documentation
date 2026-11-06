@@ -5,6 +5,7 @@ sidebar_label: "Define attributes"
 description: "Define attributes within attribute groups to calculate behavioral data from real-time streams or your warehouse, then test and publish the configuration to Signals."
 keywords: ["attributes", "attribute groups", "attribute keys", "warehouse configuration", "configuration workflow", "publish"]
 content_type: landing
+pagination_prev: signals/attributes/warehouse-config/index
 ---
 
 You can define attributes in Console, with the [Python SDK](/docs/signals/connection/reference/index.md#python-sdk), or with your coding agent through the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). The Node.js SDK only retrieves attribute values.

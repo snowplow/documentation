@@ -5,6 +5,7 @@ sidebar_position: 10
 description: "Services group multiple versioned attribute groups into stable consumption interfaces for applications. Create and manage services to control which attribute versions your applications use."
 keywords: ["services", "attribute group versioning", "stable interfaces", "python sdk services", "service configuration"]
 content_type: how-to
+pagination_prev: signals/publish/index
 ---
 
 ```mdx-code-block

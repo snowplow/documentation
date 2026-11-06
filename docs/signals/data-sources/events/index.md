@@ -6,6 +6,7 @@ description: "Add a Snowplow tracker to your application so Signals can calculat
 keywords: ["signals tracking", "signals events", "stream attributes", "snowplow tracker", "signals data source"]
 date: "2026-11-06"
 content_type: how-to
+pagination_prev: signals/connection/reference/index
 ---
 
 Signals calculates stream attributes from Snowplow [events](/docs/fundamentals/events/index.md). On the free tier, event collection is included, so you add a Snowplow tracker to your application and point it at your Collector endpoint. If you already run Snowplow, Signals reads the events from your existing pipeline, and you don't need to change your tracking.

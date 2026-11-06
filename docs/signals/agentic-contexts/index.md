@@ -5,6 +5,7 @@ sidebar_label: "Define agentic contexts"
 description: "Configure agentic contexts in Snowplow Signals using the Console or Python SDK to capture a user's recent session activity and ground your agents in real-time behavior."
 keywords: ["agentic context", "event log", "llm context", "prompt", "session activity", "python sdk"]
 content_type: how-to
+pagination_prev: signals/ml-training-datasets/index
 ---
 
 ```mdx-code-block

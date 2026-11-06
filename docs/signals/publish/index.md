@@ -6,6 +6,7 @@ description: "How attribute groups, interventions, services, and agentic context
 keywords: ["publish attribute groups", "publish interventions", "signals versioning", "unpublish", "signals lifecycle"]
 date: "2026-11-06"
 content_type: concept
+pagination_next: signals/applications/services/index
 ---
 
 Signals only acts on configuration that you've published. Until you publish an attribute group, Signals doesn't calculate its attributes, and until you publish an intervention, Signals doesn't check its criteria. This page explains the lifecycle that every Signals resource follows, how the resources depend on each other, and how to check a change after you publish it.

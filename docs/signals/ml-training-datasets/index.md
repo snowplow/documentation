@@ -6,6 +6,7 @@ description: "Build labeled, point-in-time correct training datasets for machine
 keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "signals python sdk", "ML"]
 date: "2026-07-15"
 content_type: how-to
+pagination_next: signals/agentic-contexts/index
 ---
 
 <NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-dataset-builder.ipynb" />

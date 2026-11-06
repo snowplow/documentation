@@ -6,6 +6,7 @@ description: "Reference for connecting to Snowplow Signals: which interface supp
 keywords: ["signals connection", "signals credentials", "snowplow-signals", "@snowplow/signals-node", "signals api", "signals sdk methods"]
 date: "2026-11-06"
 content_type: reference
+pagination_next: signals/data-sources/events/index
 ---
 
 This page lists the interfaces, credentials, client options, and methods for connecting to Signals. To set up a connection step by step, see [Connect to Snowplow Signals](/docs/signals/connection/index.md).

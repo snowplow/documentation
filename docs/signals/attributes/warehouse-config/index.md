@@ -5,6 +5,7 @@ sidebar_label: "Warehouse configuration"
 description: "Connect Signals to existing warehouse tables to sync pre-calculated attributes. Configure table details, timestamp fields, and field mappings using the Console or the Python SDK."
 keywords: ["warehouse attributes", "batch source", "warehouse tables", "field mapping", "backfill", "timestamp sync", "ExternalBatchAttributeGroup"]
 content_type: how-to
+pagination_next: signals/attributes/index
 ---
 
 ```mdx-code-block

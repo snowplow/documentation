@@ -6,6 +6,7 @@ description: "Connect an agent in your application to the Signals MCP server, so
 keywords: ["signals mcp server", "model context protocol", "agent tools", "calculated attributes", "agentic contexts", "vercel ai sdk", "google adk", "openai agents sdk", "langchain", "mcp inspector"]
 date: "2026-10-15"
 content_type: how-to
+pagination_next: signals/interventions/index
 ---
 
 ```mdx-code-block

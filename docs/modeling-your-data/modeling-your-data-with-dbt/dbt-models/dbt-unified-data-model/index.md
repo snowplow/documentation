@@ -18,7 +18,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 <Availability available={['cloud', 'pmc', 'addon']} note="The Unified Digital package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
-**Next steps:** [install the package](/tutorials/unified-digital/setting-up-locally/), then [configure it](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.md).
+**Next steps:** [install the package](/tutorials/unified-digital/setting-up-locally/), then [configure it](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx).
 
 **The package source code can be found in the [snowplow/dbt-snowplow-unified repo](https://github.com/snowplow/dbt-snowplow-unified), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-unified/#!/overview/snowplow_unified).**
 

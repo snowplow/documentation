@@ -14,8 +14,8 @@ const availabilityBadgeVariants = cva(
   {
     variants: {
       variant: {
-        active: "bg-primary text-primary-foreground shadow-sm",
-        inactive: "bg-muted text-muted-foreground opacity-50"
+        active: "bg-primary text-primary-foreground",
+        inactive: "bg-transparent text-muted-foreground border border-dashed border-border"
       }
     },
     defaultVariants: {

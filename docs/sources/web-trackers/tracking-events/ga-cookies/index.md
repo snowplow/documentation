@@ -27,9 +27,9 @@ GA cookies information is **automatically tracked** once configured.
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ga-cookies@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
@@ -48,7 +48,7 @@ GA cookies information is **automatically tracked** once configured.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@4.10.2/dist/index.umd.min.js",
   ["snowplowGaCookies", "GaCookiesPlugin"],
   [pluginOptions] // note: for sp.js, pluginOptions can also be specified when calling `newTracker`; e.g. `contexts: { gaCookies: { ua: true, ga4: false } }`
 );

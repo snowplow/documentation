@@ -33,13 +33,13 @@ The timezone property is **automatically tracked**.
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-timezone@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-timezone@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-timezone@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-timezone@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-timezone@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-timezone@4.10.2/dist/index.umd.min.js",
   ["snowplowTimezone", "TimezonePlugin"]
 );
 ```
@@ -93,15 +93,15 @@ This plugin was included in `sp.js` in version 3, but removed from the default b
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDeliv</a><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">r</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDeliv</a><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@3.24.6/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">r</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-geolocation@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
 To enable after initialization:
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@4.10.2/dist/index.umd.min.js",
   ["snowplowGeolocation", "GeolocationPlugin"],
 );
 
@@ -114,7 +114,7 @@ To enable at initialization:
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@4.10.2/dist/index.umd.min.js",
   ["snowplowGeolocation", "GeolocationPlugin"],
   [true] // Prompts for permission immediately
 );

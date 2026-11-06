@@ -33,12 +33,12 @@ Web vitals events are **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js">unpkg</a></td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js',
     ['snowplowWebVitals', 'WebVitalsPlugin']
 );
 ```
@@ -68,11 +68,13 @@ newTracker('sp1', '{{collector_url}}', {
 
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
-|        Option         |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
-| :-------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
-| `loadWebVitalsScript` |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
-|   `webVitalsSource`   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js` |
-|       `context`       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
+|        Option         |       Type       |                                                                                    Description                                                                                     |                        Default value                        |
+| :-------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------: |
+| `loadWebVitalsScript` |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                            `true`                            |
+|   `webVitalsSource`   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@4.2.4/dist/web-vitals.iife.js` |
+|       `context`       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                              |
+
+The default `webVitalsSource` is pinned to an exact `web-vitals` version. When you use this default, the plugin adds an `integrity` attribute (a SHA-384 [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) hash) and `crossorigin="anonymous"` to the script tag, so the browser refuses to execute the file if it does not match the expected hash. If you set a custom `webVitalsSource`, the plugin does not add these attributes, since it cannot know the hash of a script it did not pin.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -82,7 +84,7 @@ Pass configuration options as an array in the fourth parameter of `addPlugin`:
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js',
     ['snowplowWebVitals', 'WebVitalsPlugin'],
     [{
         loadWebVitalsScript: true,

@@ -33,7 +33,7 @@ You do not need to adjust the Template permissions to allow loading plugins from
 
 ### Plugin URL
 
-The URL to load the plugin from, e.g. `https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js`
+The URL to load the plugin from, e.g. `https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@4.10.2/dist/index.umd.min.js`
 
 The tracker will try to load plugins each time they are requested.
 This is usually acceptable as the browser will have cached the first request; if you don't want this behavior we suggest creating an empty `Custom Command` Tag with no commands that loads the plugins; you can make this Tag fire [once per page](https://support.google.com/tagmanager/answer/6279951) and add it as a [Setup Tag](https://support.google.com/tagmanager/answer/6238868) to any other Tags that use its commands.

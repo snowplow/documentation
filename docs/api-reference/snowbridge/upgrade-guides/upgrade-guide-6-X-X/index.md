@@ -58,7 +58,7 @@ target {
 
 ### `hash` transformation helper
 
-The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md) returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
+The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq/index.md) returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
 
 **Output values change**, but no configuration change is required:
 

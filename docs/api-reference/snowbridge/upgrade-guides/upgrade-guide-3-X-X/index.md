@@ -14,7 +14,7 @@ The below breaking changes were made in version 3.0.0. All other functionality i
 
 ### Lua support removed
 
-Support for Lua transformations has been removed. If you are running a Lua transformation, you can port the logic to [Javascript](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [JQ](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md).
+Support for Lua transformations has been removed. If you are running a Lua transformation, you can port the logic to [Javascript](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [JQ](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq/index.md).
 
 ### HTTP target: non-JSON data no longer supported
 

@@ -12,7 +12,7 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import { HomeSearch, Quickstarts, LatestReleases } from '@site/src/components/home'
+import { HomeSearch, Quickstarts } from '@site/src/components/home'
 
 <div className="home-hero breakout">
 <div className="home-hero__intro">
@@ -50,7 +50,6 @@ Both products use the same events, entities, and schemas. CDI collects, validate
     description="Track events from any platform, validate them against your schemas, and load them into your warehouse."
     links={[
       { label: 'Quickstart', href: '/docs/get-started/quickstart/' },
-      { label: 'Tracker reference', href: '/docs/api-reference/trackers/' },
       { label: 'Trackers and SDKs', href: '/docs/sources/' },
     ]}
   >
@@ -72,7 +71,6 @@ trackPageView();
     links={[
       { label: 'Quickstart', href: '/docs/signals/quickstart/' },
       { label: 'Connect with the SDKs', href: '/docs/signals/connection/' },
-      { label: 'Define attributes', href: '/docs/signals/attributes/' },
     ]}
   >
 
@@ -108,9 +106,3 @@ If you know what you want to do, start from the page in this table.
 Each quickstart ends with events or attributes you can see. Times assume you have the prerequisites listed on the page.
 
 <Quickstarts />
-
-## Latest releases
-
-New features and fixes across Snowplow components, newest first.
-
-<LatestReleases />

@@ -2,7 +2,7 @@
 title: "Security overview"
 sidebar_position: 3
 sidebar_label: "Security overview"
-description: "Find the security controls for your Snowplow pipeline: deployment roles and permissions, network setup, encryption keys, PII handling, single sign-on, API keys, and the Collector domain."
+description: "Find the security controls for your Snowplow pipeline: deployment roles and permissions, network setup, encryption keys, PII handling, single sign-on, and API keys."
 keywords: ["pipeline security", "data encryption", "security best practices", "iam role", "vpc", "sso", "pii"]
 ---
 
@@ -23,8 +23,6 @@ These enrichments change personal data in events before they're loaded:
 
 * [PII pseudonymization enrichment](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md) hashes personally identifiable fields
 * [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) masks part of the user's IP address
-
-To serve the Collector from your own domain, see [First-party tracking](/docs/sources/first-party-tracking/index.md).
 
 ## Console access
 

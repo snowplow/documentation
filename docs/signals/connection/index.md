@@ -37,7 +37,7 @@ These steps connect with the Python or Node.js SDK. The code tabs remember your 
 
 ### Get your connection credentials
 
-The SDKs, plugin, API, and Signals MCP server all use the same four values. Find the Signals API URL and organization ID in Console under **Signals** > **Overview**, and [create an API key](/docs/account-management/index.md) to get the API key and its ID. The [connection credentials reference](/docs/signals/connection/reference/index.md#connection-credentials) lists the format of each.
+The SDKs, Signals API, and Signals MCP server use the same four values. The browser plugin needs only your Signals API URL, because the subscription endpoint doesn't authenticate. Find the Signals API URL and organization ID in Console under **Signals** > **Overview**, and [create an API key](/docs/account-management/index.md) to get the API key and its ID. The [connection credentials reference](/docs/signals/connection/reference/index.md#connection-credentials) lists the format of each.
 
 Add the four values to your environment secrets. Keep them on the server: don't commit them or send them to the browser.
 

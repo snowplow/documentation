@@ -12,27 +12,27 @@ This page lists the interfaces, credentials, client options, and methods for con
 
 ## Parameters
 
-Every interface except Console and the Snowplow MCP server uses the same connection credentials.
+The SDKs, the Signals API, and the Signals MCP server use the same connection credentials. The browser plugin needs only the Signals API URL, and Console and the Snowplow MCP server use your Console login.
 
 ### Interfaces
 
 This table shows which interface supports which task:
 
-| Interface                                                       | Define configurations | Retrieve attributes | Subscribe to interventions |
-| --------------------------------------------------------------- | --------------------- | ------------------- | -------------------------- |
-| [Snowplow Console](https://console.snowplowanalytics.com)       | ✅                     | ❌                   | ❌                          |
-| [Python SDK](#python-sdk)                                       | ✅                     | ✅                   | ✅                          |
-| [Node.js SDK](#nodejs-sdk)                                      | ❌                     | ✅                   | ❌                          |
-| [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
-| [Signals API](#signals-api-endpoints)                           | ✅                     | ✅                   | ✅                          |
-| [Signals MCP server](#signals-mcp-server-endpoint)              | ❌                     | ✅                   | ❌                          |
-| [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md)           | ✅                     | ✅                   | ❌                          |
+| Interface                                                       | Define configurations | Retrieve attributes | Subscribe to interventions | Credentials          |
+| --------------------------------------------------------------- | --------------------- | ------------------- | -------------------------- | -------------------- |
+| [Snowplow Console](https://console.snowplowanalytics.com)       | ✅                     | ❌                   | ❌                          | Console login        |
+| [Python SDK](#python-sdk)                                       | ✅                     | ✅                   | ✅                          | API key              |
+| [Node.js SDK](#nodejs-sdk)                                      | ❌                     | ✅                   | ❌                          | API key              |
+| [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          | Signals API URL only |
+| [Signals API](#signals-api-endpoints)                           | ✅                     | ✅                   | ✅                          | API key              |
+| [Signals MCP server](#signals-mcp-server-endpoint)              | ❌                     | ✅                   | ❌                          | API key              |
+| [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md)           | ✅                     | ✅                   | ❌                          | Console login        |
 
 Console uses your Console login. The Snowplow MCP server authenticates with your Console account or a Console API key.
 
 ### Connection credentials
 
-The SDKs, browser plugin, Signals API, and Signals MCP server need four values. Add them to your environment secrets.
+The SDKs, Signals API, and Signals MCP server use the same four values. The browser plugin needs only your Signals API URL, because the subscription endpoint doesn't authenticate. Add the values to your environment secrets.
 
 | Value           | Description                             | Where to get it                                                  | Format                                             |
 | --------------- | --------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |

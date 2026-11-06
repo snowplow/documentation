@@ -62,7 +62,8 @@ const sub = (label, items, { collapsed = true } = {}) => ({
 const sidebars = {
   cdi: [
     // Only the path to a first result. Deployment, infrastructure, and
-    // account pages live in the platform sidebar.
+    // account pages live in the platform sidebar. Every other group starts
+    // collapsed; the group holding the current page opens automatically.
     group('Get started', [
       // The docs home hides its sidebar; listed here so it belongs to one
       pick('introduction', { label: 'Docs home', className: 'hidden' }),
@@ -78,8 +79,8 @@ const sidebars = {
           pick('get-started/tracking', { indexOnly: true, label: 'Track your first events' }),
           pick('get-started/custom-events', { label: 'Define custom events' }),
           pick('get-started/querying', { label: 'Query your first events' }),
-        ],
-        { collapsed: false }
+        ]
+        // Collapsed elsewhere; opens automatically on its own pages
       ),
     ]),
     group('Design tracking', [
@@ -88,7 +89,7 @@ const sidebars = {
         indexLabel: 'Event Studio',
         exclude: ['event-studio/query-sql'],
       }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Collect events', [
       pick('sources', { indexOnly: true, label: 'Trackers overview' }),
       sub('Web', [
@@ -122,18 +123,18 @@ const sidebars = {
       ]),
       pick('sources/webhooks'),
       pick('events', { label: 'Built-in events and entities' }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Test and enrich', [
       pick('testing', { hoist: true, indexLabel: 'Test your tracking' }),
       pick('pipeline/enrichments'),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Load and forward', [
       pick('destinations', {
         hoist: true,
         indexLabel: 'Destinations overview',
         exclude: ['destinations/warehouses-lakes/querying-data'],
       }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     // The shape of the data in the warehouse, then the models built on it
     group('Query and model data', [
       pick('destinations/warehouses-lakes/querying-data', { label: 'Query your data' }),
@@ -151,12 +152,12 @@ const sidebars = {
       pick('identities'),
       // A `type: link` stub that redirects to Query your data
       pick('event-studio/query-sql', { className: 'hidden' }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     group('Monitor data quality', [
       pick('failed-events', { label: 'Find and fix failed events' }),
       pick('get-started/failed-events', { label: 'Inspect your first failed events' }),
       pick('monitoring', { hoist: true, indexLabel: 'Monitor failed events in Console' }),
-    ]),
+    ], { collapsible: true, collapsed: true }),
     // Events, entities, and schemas: linked from every CDI page
     group(
       'Core concepts',
@@ -181,6 +182,7 @@ const sidebars = {
     ]),
     group('Set up and connect', [
       pick('signals/concepts', { hoist: true, indexLabel: 'How Signals works' }),
+      pick('signals/setup'),
       pick('signals/connection', { label: 'Connect your app' }),
     ]),
     // Where attribute values come from: events (stream) or warehouse tables
@@ -294,7 +296,6 @@ const sidebars = {
     ]),
     group('Users and access', [
       pick('account-management', { hoist: true, indexLabel: 'API keys and access tokens' }),
-      pick('signals/setup', { label: 'Enable Signals for an account' }),
       pick('licensing'),
     ]),
     group('Migrate from another tool', [

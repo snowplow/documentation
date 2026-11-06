@@ -8,6 +8,17 @@ for (const url of urls) {
   test(`visual ${url}`, async ({ page }) => {
     await gotoAndSettle(page, url)
 
+    // Load lazy images now, so screenshots don't depend on timing
+    await page.evaluate(async () => {
+      const images = [...document.images]
+      images.forEach((img) => (img.loading = 'eager'))
+      await Promise.all(
+        images
+          .filter((img) => !img.complete)
+          .map((img) => new Promise((done) => { img.onload = img.onerror = done; setTimeout(done, 5000) }))
+      )
+    })
+
     // Hide things that change on every build or render
     await page.addStyleTag({
       content: `

@@ -78,6 +78,19 @@
     height: 16px;
   }
 
+  /* In the search modal, ring the whole search form rather than the input,
+     which sits between the magnifier and the Clear and Close actions.
+     DocSearch's own outline: none on the input loses to our :focus-visible,
+     because its stylesheet is in a lower layer. */
+  .DocSearch-Input:focus-visible {
+    outline: none;
+  }
+
+  .DocSearch-Form:focus-within {
+    outline: 2px solid var(--sp-color-focus);
+    outline-offset: -2px;
+  }
+
   @media (max-width: 1360px) {
     .DocSearch-Button {
       width: 160px;

@@ -7,6 +7,7 @@
   }
 
   .navbar__brand {
+    flex-shrink: 0;
     margin-right: var(--sp-space-4);
   }
 
@@ -19,6 +20,7 @@
   .navbar__link {
     font-size: var(--sp-text-sm);
     font-weight: var(--sp-weight-medium);
+    white-space: nowrap;
   }
 
   /* Hide the "opens in new tab" icon on the Support and free trial links */
@@ -48,10 +50,14 @@
     }
   }
 
-  /* The search button sits in the middle of the navbar on wide screens */
+  /* Search sits at the start of the right-hand group, before the theme toggle */
+  .navbar__items--right > .navbar__search,
+  .navbar__items--right > div:has(> .DocSearch-Button) {
+    margin-right: var(--sp-space-2);
+  }
+
   .DocSearch-Button {
-    width: 100%;
-    max-width: 360px;
+    width: 220px;
     height: 36px;
     margin: 0;
     padding: 0 var(--sp-space-3);
@@ -72,25 +78,84 @@
     height: 16px;
   }
 
-  @media (min-width: 641px) {
+  @media (max-width: 1360px) {
     .DocSearch-Button {
-      position: fixed;
-      top: calc(var(--sp-layout-navbar) / 2);
-      left: 50%;
-      transform: translate(-50%, -50%);
+      width: 160px;
+    }
+
+    .navbar__link.navbar-support-link {
+      display: none;
     }
   }
 
-  @media (max-width: 1280px) {
-    .DocSearch-Button {
-      max-width: 240px;
-    }
-  }
-
-  @media (max-width: 640px) {
+  @media (max-width: 996px) {
     .DocSearch-Button {
       width: auto;
     }
+  }
+
+  /* Tabs: plain links, with the active one underlined on the navbar border */
+  .navbar__items:not(.navbar__items--right) > .navbar__item.navbar__link {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-space-3);
+    color: var(--sp-color-fg-muted);
+  }
+
+  .navbar__items:not(.navbar__items--right) > .navbar__item.navbar__link:hover {
+    color: var(--sp-color-fg);
+  }
+
+  .navbar__items:not(.navbar__items--right) > .navbar__item.navbar__link--active {
+    color: var(--sp-color-fg);
+  }
+
+  .navbar__items:not(.navbar__items--right) > .navbar__item.navbar__link--active::after {
+    content: "";
+    position: absolute;
+    right: var(--sp-space-3);
+    bottom: -1px;
+    left: var(--sp-space-3);
+    height: 2px;
+    background: var(--sp-color-accent);
+  }
+
+  /* Product switcher: Snowplow CDI | Signals */
+  .product-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-right: var(--sp-space-3);
+    padding: 3px;
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--sp-color-surface);
+  }
+
+  .product-switcher__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 var(--sp-space-3);
+    border-radius: var(--sp-radius-md);
+    color: var(--sp-color-fg-muted);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-medium);
+    white-space: nowrap;
+  }
+
+  .product-switcher__link:hover {
+    color: var(--sp-color-fg);
+    text-decoration: none;
+  }
+
+  .product-switcher__link--active,
+  .product-switcher__link--active:hover {
+    background: var(--sp-color-bg);
+    box-shadow: inset 0 0 0 1px var(--sp-color-border);
+    color: var(--sp-color-accent);
   }
 
   /* Doc layout: 272px sidebar, reading column, 224px table of contents */
@@ -117,7 +182,7 @@
     width: var(--sp-layout-toc);
   }
 
-  .doc-article > :is(nav, .page-actions, .theme-doc-version-badge, .theme-doc-toc-mobile, footer),
+  .doc-article > :is(.theme-doc-version-badge, footer),
   .doc-article__paginator {
     max-width: var(--sp-layout-content);
     margin-inline: auto;
@@ -138,31 +203,230 @@
     }
   }
 
-  /* Page actions under the breadcrumbs */
-  .page-actions {
+  /* Page header row: breadcrumbs, "On this page" (mobile), and page actions */
+  .doc-header {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-space-1) var(--sp-space-4);
-    margin-bottom: var(--sp-space-8);
+    align-items: center;
+    gap: var(--sp-space-2);
+    max-width: var(--sp-layout-content);
+    margin: 0 auto var(--sp-space-6);
   }
 
-  .page-action {
+  .doc-header > nav {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-header > nav,
+  .doc-header .breadcrumbs {
+    margin-bottom: 0;
+  }
+
+  .back-to-product {
     display: inline-flex;
+    flex-basis: 100%;
     align-items: center;
     gap: var(--sp-space-1);
     min-height: var(--sp-layout-target);
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--sp-color-fg-muted);
+    color: var(--sp-color-accent);
+    font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-medium);
+  }
+
+  .back-to-product:hover {
+    color: var(--sp-color-accent-hover);
+  }
+
+  .page-actions,
+  .mobile-toc {
+    position: relative;
+    display: flex;
+    flex: none;
+  }
+
+  /* The TOC panel spans the header row, not just its button */
+  .mobile-toc {
+    position: static;
+  }
+
+  .page-actions__copy,
+  .page-actions__toggle,
+  .mobile-toc__button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-space-1);
+    height: 32px;
+    padding: 0 var(--sp-space-3);
+    border: 1px solid var(--sp-color-border);
+    background: var(--sp-color-bg);
+    color: var(--sp-color-fg);
     font: inherit;
     font-size: var(--sp-text-sm);
+    font-weight: var(--sp-weight-medium);
+    white-space: nowrap;
     cursor: pointer;
   }
 
+  .page-actions__copy {
+    border-radius: var(--sp-radius-md) 0 0 var(--sp-radius-md);
+  }
+
+  .page-actions__toggle {
+    margin-left: -1px;
+    padding: 0 var(--sp-space-2);
+    border-radius: 0 var(--sp-radius-md) var(--sp-radius-md) 0;
+  }
+
+  .mobile-toc__button {
+    border-radius: var(--sp-radius-md);
+  }
+
+  :is(.page-actions__copy, .page-actions__toggle, .mobile-toc__button):hover,
+  :is(.page-actions__toggle, .mobile-toc__button)[aria-expanded="true"] {
+    background: var(--sp-color-surface-raised);
+  }
+
+  .page-actions__menu,
+  .mobile-toc__panel {
+    position: absolute;
+    z-index: calc(var(--ifm-z-index-dropdown) + 1);
+    top: calc(100% + var(--sp-space-1));
+    right: 0;
+    margin: 0;
+    padding: var(--sp-space-1);
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    background: var(--sp-color-surface-overlay);
+    box-shadow: var(--sp-shadow-popover);
+    list-style: none;
+  }
+
+  .page-actions__menu {
+    min-width: 220px;
+  }
+
+  .page-actions__menu[hidden],
+  .mobile-toc__panel[hidden] {
+    display: none;
+  }
+
+  .page-action {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-space-2);
+    min-height: 32px;
+    padding: 0 var(--sp-space-2);
+    border-radius: var(--sp-radius-md);
+    color: var(--sp-color-fg);
+    font-size: var(--sp-text-sm);
+  }
+
   .page-action:hover {
-    color: var(--sp-color-accent);
+    background: var(--sp-color-surface-raised);
+    color: var(--sp-color-fg);
     text-decoration: none;
+  }
+
+  .mobile-toc__panel {
+    left: 0;
+    overflow-y: auto;
+    max-height: 60vh;
+    font-size: var(--sp-text-sm);
+  }
+
+  .mobile-toc__panel ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .mobile-toc__panel ul ul {
+    padding-left: var(--sp-space-3);
+  }
+
+  .mobile-toc__panel a {
+    display: block;
+    padding: var(--sp-space-1) var(--sp-space-2);
+    border-radius: var(--sp-radius-sm);
+    color: var(--sp-color-fg-muted);
+    line-height: var(--sp-leading-sm);
+  }
+
+  .mobile-toc__panel a:hover {
+    background: var(--sp-color-surface-raised);
+    color: var(--sp-color-fg);
+    text-decoration: none;
+  }
+
+  @media (min-width: 997px) {
+    .mobile-toc {
+      display: none;
+    }
+  }
+
+  /* Phones: one-line breadcrumbs, icon-only "On this page" */
+  @media (max-width: 640px) {
+    /* On shared pages the "Back to" link takes the breadcrumbs' place */
+    .back-to-product {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-header:has(> .back-to-product) > nav {
+      display: none;
+    }
+
+    .doc-header {
+      flex-wrap: nowrap;
+      margin-bottom: var(--sp-space-4);
+    }
+
+    .doc-header .breadcrumbs {
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    .doc-header .breadcrumbs__item {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .doc-header .breadcrumbs__item:first-child {
+      flex-shrink: 0;
+    }
+
+    /* Keep home and the parent page: the H1 below names the current page */
+    .doc-header .breadcrumbs__item:not(:first-child, :nth-last-child(2)) {
+      display: none;
+    }
+
+    .doc-header .breadcrumbs__item:nth-last-child(2)::after {
+      display: none;
+    }
+
+    .doc-header .breadcrumbs__link {
+      display: block;
+      overflow: hidden;
+      max-width: 100%;
+      line-height: var(--sp-layout-target);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mobile-toc__button {
+      padding: 0 var(--sp-space-2);
+    }
+
+    .mobile-toc__button > span {
+      position: absolute;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
   }
 
   /* Breadcrumbs */
@@ -309,6 +573,92 @@
 
   .menu__caret:hover {
     background: var(--sp-color-surface-raised);
+  }
+
+  /* Filter navigation field, above the sidebar items */
+  .sidebar-filter {
+    position: relative;
+    flex: none;
+    margin: var(--sp-space-4) var(--sp-space-3) 0;
+  }
+
+  .sidebar-filter__icon {
+    position: absolute;
+    top: 50%;
+    left: var(--sp-space-3);
+    color: var(--sp-color-fg-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .sidebar-filter__input {
+    width: 100%;
+    height: 32px;
+    padding: 0 var(--sp-space-8) 0 calc(var(--sp-space-3) + 16px + var(--sp-space-2));
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-md);
+    background: var(--sp-color-bg);
+    color: var(--sp-color-fg);
+    font: inherit;
+    font-size: var(--sp-text-sm);
+  }
+
+  .sidebar-filter__input::placeholder {
+    color: var(--sp-color-fg-muted);
+    opacity: 1;
+  }
+
+  .sidebar-filter__input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  .sidebar-filter__input:focus-visible {
+    border-color: var(--sp-color-accent);
+    outline: 2px solid var(--sp-color-focus);
+    outline-offset: 1px;
+  }
+
+  .sidebar-filter__clear {
+    position: absolute;
+    top: 50%;
+    right: var(--sp-space-1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sp-layout-target);
+    height: var(--sp-layout-target);
+    padding: 0;
+    border: none;
+    border-radius: var(--sp-radius-sm);
+    background: none;
+    color: var(--sp-color-fg-muted);
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .sidebar-filter__clear:hover {
+    background: var(--sp-color-surface-raised);
+    color: var(--sp-color-fg);
+  }
+
+  .sidebar-filter__empty {
+    margin: var(--sp-space-4) var(--sp-space-4);
+    color: var(--sp-color-fg-muted);
+    font-size: var(--sp-text-sm);
+  }
+
+  .navbar-sidebar .sidebar-filter {
+    margin: 0 0 var(--sp-space-2);
+  }
+
+  /* Group labels: the top level of every sidebar (sidebars.js group()) */
+  .section-header__label {
+    cursor: default;
+  }
+
+  .section-header > .menu__list-item-collapsible > .section-header__label:hover {
+    background: none;
+    color: var(--sp-color-fg);
   }
 
   /* Section headers group the sidebar, via sidebars.js */
@@ -461,21 +811,6 @@
   }
 
   .tutorial-home-page article > footer {
-    display: none;
-  }
-}
-
-/*
- * The navbar tabs are MUI components, whose runtime styles are unlayered, so
- * these visibility rules stay unlayered too.
- */
-.navbar__items > .mobile-only,
-.menu__list > .desktop-only {
-  display: none;
-}
-
-@media (max-width: 996px) {
-  .navbar__items > .desktop-only {
     display: none;
   }
 }

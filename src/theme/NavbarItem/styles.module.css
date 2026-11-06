@@ -1,5 +1,5 @@
-/* Below 1070px the navbar items move into the mobile menu */
-@media screen and (max-width: 1070px) {
+/* Below 1200px the navbar items move into the mobile menu */
+@media screen and (max-width: 1200px) {
   :global(.navbar__inner) .customized {
     display: none;
   }

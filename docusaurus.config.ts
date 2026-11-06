@@ -175,14 +175,39 @@ const config: Config = {
           src: 'img/snowplow-logo.svg',
         },
         items: [
+          // Snowplow CDI | Signals: selects the cdi or signals sidebar
           {
-            type: 'custom-docsTutorialsTabsDesktop',
+            type: 'custom-productSwitcher',
+            position: 'left',
+          },
+          // Plain link tabs. A docSidebar tab is active on any page in its sidebar.
+          {
+            type: 'docSidebar',
+            sidebarId: 'reference',
+            label: 'Reference',
             position: 'left',
           },
           {
-            type: 'custom-docsTutorialsTabsMobile',
+            to: '/tutorials/',
+            label: 'Tutorials',
             position: 'left',
-            className: 'mobile-only',
+            activeBaseRegex: '^/tutorials/',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'platform',
+            label: 'Platform & AI',
+            position: 'left',
+          },
+          {
+            to: '/release-notes/',
+            label: 'Release notes',
+            position: 'left',
+            activeBaseRegex: '^/release-notes/',
+          },
+          {
+            type: 'search',
+            position: 'right',
           },
           {
             href: 'https://support.snowplow.io/',

@@ -1,11 +1,7 @@
 import ComponentTypes from '@theme-original/NavbarItem/ComponentTypes'
-import {
-  DocsTutorialsTabsDesktop,
-  DocsTutorialsTabsMobile,
-} from '@site/src/components/tutorials/TutorialTabs'
+import ProductSwitcher from '@site/src/components/navigation/ProductSwitcher'
 
 export default {
   ...ComponentTypes,
-  'custom-docsTutorialsTabsDesktop': DocsTutorialsTabsDesktop,
-  'custom-docsTutorialsTabsMobile': DocsTutorialsTabsMobile,
+  'custom-productSwitcher': ProductSwitcher,
 }

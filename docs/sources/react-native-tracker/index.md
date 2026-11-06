@@ -17,6 +17,8 @@ import {versions} from '@site/src/componentVersions';
 </BadgeGroup>
 ```
 
+<TrackerFeatures id="react-native" />
+
 The Snowplow React Native Tracker is purely implemented in JavaScript/TypeScript without the use of native iOS/Android modules. This enables it to support all these platforms and frameworks:
 
 - React Native for mobile and Web

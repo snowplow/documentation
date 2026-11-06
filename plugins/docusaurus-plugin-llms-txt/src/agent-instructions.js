@@ -80,6 +80,52 @@ export async function readComponentVersions(siteDir, file = 'src/componentVersio
   }
 }
 
+const TIER_LABELS = {
+  'actively-maintained': 'actively maintained',
+  maintained: 'maintained',
+  'early-release': 'early release',
+  unsupported: 'unsupported, do not use for new code',
+}
+
+/**
+ * Read src/data/trackers.json, the manifest behind the tracker matrix on
+ * /docs/sources/, so the matrix and these instructions can't disagree.
+ */
+export async function readTrackerManifest(siteDir, file = 'src/data/trackers.json') {
+  try {
+    return JSON.parse(await fs.readFile(path.join(siteDir, file), 'utf8'))
+  } catch {
+    return null
+  }
+}
+
+/** One line per tracker: support tier, then supported and missing features. */
+export function trackerSupportLines(manifest, siteUrl) {
+  if (!manifest?.trackers || !manifest?.features) return []
+  const lines = []
+  for (const t of manifest.trackers) {
+    const yes = []
+    const partial = []
+    const no = []
+    for (const [key, feature] of Object.entries(manifest.features)) {
+      const raw = t.features?.[key]
+      const value = raw && typeof raw === 'object' ? raw.value : raw
+      const label = feature.label
+      if (value === false || value === undefined || value === null) no.push(label)
+      else if (value === 'partial') partial.push(label)
+      else if (typeof value === 'string') yes.push(`${label} (${value})`)
+      else yes.push(label)
+    }
+    const parts = [`support tier: ${TIER_LABELS[t.tier] ?? t.tier}`]
+    if (yes.length) parts.push(`supports: ${yes.join(', ')}`)
+    if (partial.length) parts.push(`partial: ${partial.join(', ')}`)
+    if (no.length) parts.push(`not supported: ${no.join(', ')}`)
+    const href = t.href ? ` ${siteUrl}${t.href.replace(/\/$/, '')}.md` : ''
+    lines.push(`- ${t.name}:${href}. ${parts.join('; ')}.`)
+  }
+  return lines
+}
+
 /**
  * Build the agent instructions as markdown lines.
  */
@@ -108,6 +154,18 @@ export async function buildAgentInstructions({ siteDir, siteUrl }) {
     lines.push(`- ${tracker.name}: ${majorLabel}, check ${tracker.registry}`)
   }
   lines.push('')
+
+  const trackerLines = trackerSupportLines(await readTrackerManifest(siteDir), siteUrl)
+  if (trackerLines.length) {
+    lines.push('### Tracker feature support')
+    lines.push('')
+    lines.push(
+      `Check this list before you suggest a tracker feature. For a feature that isn't supported, the tracker has no built-in method or plugin, so track it yourself with self-describing events and entities. The full matrix is at ${siteUrl}/docs/sources.md.`
+    )
+    lines.push('')
+    lines.push(...trackerLines)
+    lines.push('')
+  }
 
   lines.push('### Signals SDKs')
   lines.push('')

@@ -14,6 +14,8 @@ import {versions} from '@site/src/componentVersions';
 <TrackerTier id="lua" />
 ```
 
+<TrackerFeatures id="lua" />
+
 The Snowplow Lua Tracker allows you to track Snowplow events in your Lua applications.
 
 <p>The current version is {versions.luaTracker}. It is compatible with Lua >= 5.1, along with LuaJIT.</p>

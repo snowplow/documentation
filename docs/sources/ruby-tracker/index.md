@@ -14,6 +14,8 @@ import {versions} from '@site/src/componentVersions';
 <TrackerTier id="ruby" />
 ```
 
+<TrackerFeatures id="ruby" />
+
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.
 
 <p>The Ruby tracker is compatible with Ruby 2.1+, including Ruby 3.0+. The current tracker version is {versions.rubyTracker}.</p>

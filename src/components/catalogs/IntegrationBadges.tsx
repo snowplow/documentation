@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from '@docusaurus/Link'
+import { Check, CircleDot, Minus } from 'lucide-react'
 import { Badge, BadgeGroup, TierBadge, type Tier } from '@site/src/components/Badge'
 import destinations from '@site/src/data/destinations.json'
 import trackers from '@site/src/data/trackers.json'
@@ -81,4 +83,51 @@ export function TrackerTier({ id }: { id: string }): JSX.Element {
   const entry = list.find((t) => t.id === id)
   if (!entry) throw new Error(`<TrackerTier>: no tracker "${id}" in src/data/trackers.json`)
   return <TierBadge tier={entry.tier} />
+}
+
+type FeatureValue = boolean | string | { value: boolean | string; note?: string }
+
+/**
+ * The tracker's row from the tracker matrix on /docs/sources/, as a compact
+ * list for the top of a tracker landing page (the "Feature support" part of
+ * the SDK page template). Reads src/data/trackers.json.
+ *
+ * ```mdx
+ * <TrackerFeatures id="python" />
+ * ```
+ */
+export function TrackerFeatures({ id }: { id: string }): JSX.Element {
+  const features = trackers.features as Record<string, { label: string; description: string }>
+  const list = (trackers as { trackers: { id: string; features: Record<string, FeatureValue> }[] }).trackers
+  const entry = list.find((t) => t.id === id)
+  if (!entry) throw new Error(`<TrackerFeatures>: no tracker "${id}" in src/data/trackers.json`)
+
+  return (
+    <div className="sp-feature-support">
+      <p className="sp-feature-support__title">
+        Feature support <Link to="/docs/sources/#compare-trackers">Compare trackers</Link>
+      </p>
+      <ul className="sp-feature-support__list">
+        {Object.entries(features).map(([key, feature]) => {
+          const raw = entry.features[key]
+          const value = raw && typeof raw === 'object' ? raw.value : raw
+          const note = raw && typeof raw === 'object' ? raw.note : undefined
+          const state = value === 'partial' ? 'partial' : value ? 'yes' : 'no'
+          const detail = typeof value === 'string' && value !== 'partial' ? value : undefined
+          return (
+            <li key={key} className={`sp-feature-support__item is-${state}`} title={note ?? feature.description}>
+              {state === 'yes' && <Check size={14} aria-hidden="true" />}
+              {state === 'partial' && <CircleDot size={14} aria-hidden="true" />}
+              {state === 'no' && <Minus size={14} aria-hidden="true" />}
+              <span className="sr-only">
+                {state === 'yes' ? 'Supported: ' : state === 'partial' ? 'Partial: ' : 'Not supported: '}
+              </span>
+              {feature.label}
+              {detail && <span className="sp-feature-support__detail"> ({detail})</span>}
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
 }

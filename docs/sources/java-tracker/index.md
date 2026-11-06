@@ -12,4 +12,6 @@ content_type: sdk
 <TrackerTier id="java" />
 ```
 
+<TrackerFeatures id="java" />
+
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.

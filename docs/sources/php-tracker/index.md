@@ -15,6 +15,8 @@ content_type: sdk
 </BadgeGroup>
 ```
 
+<TrackerFeatures id="php" />
+
 The Snowplow PHP Tracker allows you to track Snowplow events from your PHP apps and scripts.
 
 There are three basic types of object you will create when using the Snowplow PHP Tracker: Trackers, Subjects and Emitters.

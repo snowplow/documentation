@@ -11,6 +11,8 @@ content_type: sdk
 <TrackerTier id="golang" />
 ```
 
+<TrackerFeatures id="golang" />
+
 The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) allows you to track Snowplow events from your Golang apps and servers.
 
 There are four basic types of object you will create when using the Snowplow Golang Tracker: subjects, emitters, storage and trackers.

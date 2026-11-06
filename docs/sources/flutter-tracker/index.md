@@ -12,6 +12,8 @@ content_type: sdk
 <TrackerTier id="flutter" />
 ```
 
+<TrackerFeatures id="flutter" />
+
 The Snowplow Flutter Tracker allows you to add analytics to your Flutter apps for Web, Android, and iOS when using a Snowplow pipeline.
 
 The tracker is published on pub.dev as [snowplow_tracker](https://pub.dev/packages/snowplow_tracker).

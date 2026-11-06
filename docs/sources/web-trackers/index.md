@@ -15,6 +15,8 @@ import {versions} from '@site/src/componentVersions';
 <TrackerTier id="web" />
 ```
 
+<TrackerFeatures id="web" />
+
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.
 
 The **JavaScript tracker** is loaded via tag: add code snippets to your website or Tag Manager solution. Some plugins are included in the standard tag, but we also provide customization options.

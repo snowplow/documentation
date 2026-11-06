@@ -14,6 +14,8 @@ import {versions} from '@site/src/componentVersions';
 <TrackerTier id="node-js" />
 ```
 
+<TrackerFeatures id="node-js" />
+
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.
 
 The tracker should be straightforward to use if you are comfortable with JavaScript development; any prior experience with other Snowplow trackers is helpful but not necessary. It is written in TypeScript.

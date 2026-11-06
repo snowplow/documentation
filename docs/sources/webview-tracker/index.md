@@ -16,6 +16,8 @@ import {versions} from '@site/src/componentVersions';
 <TrackerTier id="webview" />
 ```
 
+<TrackerFeatures id="webview" />
+
 <p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>
 
 Hybrid apps are mobile apps that in addition to a native interface, provide part of the UI through an embedded web view.

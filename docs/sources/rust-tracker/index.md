@@ -12,6 +12,8 @@ content_type: sdk
 <TrackerTier id="rust" />
 ```
 
+<TrackerFeatures id="rust" />
+
 The Snowplow Rust Tracker allows you to add analytics to your Rust apps.
 
 The tracker is published on crates.io as [snowplow_tracker](https://crates.io/crates/snowplow_tracker).

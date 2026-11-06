@@ -12,6 +12,8 @@ content_type: sdk
 <TrackerTier id="google-tag-manager" />
 ```
 
+<TrackerFeatures id="google-tag-manager" />
+
 Using the Snowplow GTM custom templates you can deploy, implement, and configure the Snowplow [JavaScript tracker](/docs/sources/web-trackers/index.md) directly on the website using Google Tag Manager.
 
 The main Tag template that you will need to use when setting up the JavaScript Tracker v4 in GTM is available in the [Tag Manager Template Gallery](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-tag-template-v4). To setup the Snowplow v4 Tag, you will also need the Snowplow v4 Settings Variable template. The templates you will need are:

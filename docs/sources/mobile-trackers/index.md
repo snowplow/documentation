@@ -14,6 +14,8 @@ import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.
 <TrackerTier id="android" />
 ```
 
+<TrackerFeatures id="android" />
+
 Use our Snowplow [Android](https://github.com/snowplow/snowplow-android-tracker) and [iOS](https://github.com/snowplow/snowplow-ios-tracker) trackers to collect data from Android, iOS, macOS, tvOS and watchOS apps.
 
 :::tip[Add the tracker with your AI assistant]

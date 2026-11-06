@@ -11,6 +11,8 @@ content_type: sdk
 <TrackerTier id="pixel" />
 ```
 
+<TrackerFeatures id="pixel" />
+
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
 
 In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow Collector via the querystring are calculated on the fly. Examples of data points that are calculated like this include `user_id`, or `page_title`.

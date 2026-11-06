@@ -87,6 +87,10 @@ Tracker and integration landing pages read their labels from the catalog manifes
 
 Put the label row first on the page, after any imports.
 
+On tracker landing pages, put `<TrackerFeatures id="..." />` after the label row. It shows the tracker's row from the tracker matrix as a list, from the same manifest:
+
+<TrackerFeatures id="python" />
+
 `<Availability>` lists the platforms a feature is available on, with an optional note in a popover:
 
 <Availability available={['cloud', 'pmc']} note="An example note about where this feature is available." />

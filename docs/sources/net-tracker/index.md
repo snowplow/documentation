@@ -11,6 +11,8 @@ content_type: sdk
 <TrackerTier id="dotnet" />
 ```
 
+<TrackerFeatures id="dotnet" />
+
 The Snowplow .NET Tracker allows you to track Snowplow events from your .NET websites and desktop applications. It's split into two libraries:
 
 #### `Snowplow.Tracker`

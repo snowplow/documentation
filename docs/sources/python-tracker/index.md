@@ -15,6 +15,8 @@ content_type: sdk
 </BadgeGroup>
 ```
 
+<TrackerFeatures id="python" />
+
 The Snowplow Python Tracker allows you to track Snowplow events from your Python apps and games.
 
 The tracker should be straightforward to use if you are comfortable with Python development; any prior experience with Snowplow's [JavaScript Tracker](/docs/sources/web-trackers/index.md), Google Analytics or Mixpanel (which have similar APIs to Snowplow) is helpful but not necessary.

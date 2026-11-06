@@ -1,5 +1,6 @@
 import React, { Children, useState, cloneElement } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { darkTheme, lightTheme } from '@site/src/components/MuiTheme'
 import { Autocomplete, TextField } from '@mui/material'
 import { useColorMode } from '@docusaurus/theme-common'
 import { customizeValidator } from '@rjsf/validator-ajv8'
@@ -34,18 +35,8 @@ export const schemaImports = importAll(
   require.context('./Schemas/', false, /\.(json)$/)
 )
 
-// Theming
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-})
+// Themes come from the design tokens
+export { darkTheme, lightTheme }
 
 // Custom validator configuration to allow "sql" as a valid format
 const validator = customizeValidator({

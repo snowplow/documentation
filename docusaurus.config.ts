@@ -182,6 +182,12 @@ const config: Config = {
             position: 'right',
             className: 'navbar-support-link',
           },
+          {
+            href: 'https://snowplow.io/get-started/snowplow-free-trial',
+            label: 'Try for free',
+            position: 'right',
+            className: 'snowplow-button cta-button navbar-cta',
+          },
         ],
       },
       footer: {

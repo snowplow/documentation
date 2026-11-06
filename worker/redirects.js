@@ -1,7 +1,6 @@
 // Rules that always apply, before trying to serve the page.
 const forcedRules = [
   ['/docs/signals/', '/docs/signals/introduction/', 301],
-  ['/docs/api-reference/', '/docs/api-reference/versions/', 301],
 ];
 
 // Rules that only apply when the page is not found.

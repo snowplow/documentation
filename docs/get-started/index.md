@@ -102,3 +102,12 @@ If you have an existing Snowplow implementation, either Community Edition or a l
 | **Data plane**                              |                    |               |
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
+
+## Next steps
+
+Pick the path that matches what you want to do first:
+
+* To have a coding agent set up tracking for you, follow [Snowplow quickstart with your coding agent](/docs/get-started/quickstart/index.md)
+* To set up a hosted environment yourself, start the [free trial](/docs/get-started/free-trial/index.md), then follow [Tracking your first events](/docs/get-started/tracking/index.md)
+* To build real-time customer attributes for an application or AI agent, follow the [Signals quickstart](/docs/signals/quickstart/index.md)
+* To deploy into your own cloud account, see [Setting up Snowplow CDI](/docs/get-started/private-managed-cloud/index.md) or [Set up Snowplow Self-Hosted](/docs/get-started/self-hosted/index.md)

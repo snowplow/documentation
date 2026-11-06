@@ -13,7 +13,7 @@ Once you've defined and published your [attributes](/docs/signals/attributes/ind
 * **Pull**: retrieve calculated attribute values from the Profiles Store on demand, for example, to personalize a page or provide context to a chatbot
 * **Push**: subscribe to interventions, so that Signals notifies your application as soon as a user meets the trigger criteria
 
-Both patterns require a [connection to Signals](/docs/signals/connection/index.md) using the Python SDK, Node.js SDK, browser plugin, or API. If the consumer is an agent, it can instead discover and read the same data as tools through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
+[Pull attributes or push interventions](/docs/signals/concepts/pull-and-push/index.md) compares the two patterns. Both require a [connection to Signals](/docs/signals/connection/index.md) using the Python SDK, Node.js SDK, browser plugin, or API. If the consumer is an agent, it can instead discover and read the same data as tools through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
 
 This section covers:
 * [Services](/docs/signals/applications/services/index.md): stable interfaces that group attribute group versions together for your applications, recommended for production use

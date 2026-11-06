@@ -126,7 +126,9 @@ const sidebars = {
       // Redirects to the introduction (worker/redirects.js), so it stays hidden
       pick('signals', { indexOnly: true, label: 'Signals', className: 'hidden' }),
     ]),
-    group('Concepts', [pick('signals/concepts', { label: 'How Signals works' })]),
+    group('Concepts', [
+      pick('signals/concepts', { hoist: true, indexLabel: 'How Signals works' }),
+    ]),
     group('Connect', [pick('signals/setup'), pick('signals/connection')]),
     group('Define attributes', [
       pick('signals/attributes', { hoist: true, indexLabel: 'Attributes overview' }),
@@ -137,18 +139,7 @@ const sidebars = {
       pick('signals/ml-training-datasets'),
     ]),
     group('Intervene', [pick('signals/interventions')]),
-    group('Publish and operate', [
-      {
-        type: 'link',
-        label: 'Publish attribute groups',
-        href: '/docs/signals/attributes/attribute-groups/#publish-attribute-groups',
-      },
-      {
-        type: 'link',
-        label: 'Publish interventions',
-        href: '/docs/signals/interventions/#publish-and-manage-the-intervention',
-      },
-    ]),
+    group('Publish and operate', [pick('signals/publish')]),
   ],
 
   reference: [

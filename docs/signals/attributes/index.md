@@ -45,7 +45,7 @@ Attribute groups move through the same lifecycle whether you manage them in Cons
 
 [Interventions](/docs/signals/interventions/index.md) follow the same lifecycle. [Services](/docs/signals/applications/services/index.md) are simpler: they're published automatically as soon as they're created, and aren't versioned.
 
-Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps.
+Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps. [Publish and manage Signals configuration](/docs/signals/publish/index.md) covers how the steps differ for each resource, and how resources depend on each other.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

@@ -19,7 +19,7 @@ Signals has four main configurable components:
 
 **Agentic contexts** are a separate resource, for capturing a rolling window of session activity to ground an agent, along with instructions to guide it.
 
-To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
+To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions. [Pull attributes or push interventions](/docs/signals/concepts/pull-and-push/index.md) compares the two.
 
 **Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes.
 

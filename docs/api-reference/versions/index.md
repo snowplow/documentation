@@ -11,6 +11,7 @@ keywords: ["component versions", "version compatibility", "latest versions", "up
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
+import { FeatureVersionTable } from '@site/src/components/AppliesTo';
 ```
 
 This page lists the most recent versions of Snowplow components.
@@ -32,6 +33,12 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to d
 Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
 From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](https://community.snowplow.io/).
+
+## Feature availability by version
+
+Some features need a minimum version of a component. Pages that document these features show an inline marker, such as <AppliesTo feature="asn-lookup-enrichment" />, generated from the same list as this table. The list is in `src/data/feature-versions.json`, and the build fails if a marker names a version newer than the latest release.
+
+<FeatureVersionTable />
 
 ---
 

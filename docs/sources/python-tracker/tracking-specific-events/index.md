@@ -1,6 +1,6 @@
 ---
 title: "Track specific events with the Python tracker"
-sidebar_label: "Event tracking"
+sidebar_label: "Track events"
 sidebar_position: 50
 description: "Track page views, screen views, structured events, and custom self-describing events with the Python tracker using Event classes and custom context."
 keywords: ["python event tracking", "page view tracking", "self-describing events"]
@@ -186,11 +186,11 @@ tracker.track(page_view)
 
 More detail on the `Subject` class can be found [here](/docs/sources/python-tracker/subject/index.md).
 
-### Custom context
+### Custom entities
 
-Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. You can read more about custom contexts and the possible use cases [here](/docs/fundamentals/entities/index.md#custom-entities).
+Custom entities can be used to augment any standard Snowplow event type, including self-describing events, with additional data. You can read more about custom entities and the possible use cases [here](/docs/fundamentals/entities/index.md#custom-entities).
 
-Custom context can be added as an extra argument to any of Snowplow’s Event classes. The `context` argument should consist of a list of one or more instances of the `SelfDescribingJson` class.
+Custom entities can be added as an extra argument to any of Snowplow’s Event classes. The `context` argument should consist of a list of one or more instances of the `SelfDescribingJson` class.
 
 For example, if a server-side Python application can determine visitor's geoposition, this can be attached to the event using the `geolocation_context` that is predefined on [Iglu Central](https://github.com/snowplow/iglu-central):
 

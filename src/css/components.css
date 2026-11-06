@@ -80,7 +80,7 @@
     margin-bottom: 0;
   }
 
-  .callout__content a.snowplow-button {
+  .callout__content a.sp-button {
     display: inline-flex;
     margin-top: var(--sp-space-1);
   }
@@ -164,100 +164,6 @@
   .tabs__item--active:hover {
     border-bottom-color: var(--sp-color-accent);
     color: var(--sp-color-fg);
-  }
-
-  /* Cards: a 1px border at rest, a border and the hover shadow on hover */
-  .card,
-  .cta-card,
-  .link-card {
-    border: 1px solid var(--sp-color-border);
-    border-radius: var(--sp-radius-lg);
-    background: var(--sp-color-bg);
-    box-shadow: none;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
-  }
-
-  [data-theme='dark'] :is(.card, .cta-card, .link-card) {
-    background: var(--sp-color-surface);
-  }
-
-  :is(a.card, .cta-card, .link-card):hover {
-    border-color: var(--sp-color-border-strong);
-    box-shadow: var(--sp-shadow-hover);
-    text-decoration: none;
-  }
-
-  .cta-card {
-    border-color: var(--sp-color-accent-border);
-    background: var(--sp-color-accent-soft);
-  }
-
-  [data-theme='dark'] .cta-card {
-    background: var(--sp-color-accent-soft);
-  }
-
-  .card .text--truncate {
-    overflow: visible;
-    text-overflow: initial;
-    white-space: normal;
-  }
-
-  .col .card {
-    height: 100%;
-  }
-
-  .featured-section-links a {
-    display: block;
-    padding: 2px 0;
-  }
-
-  /* Buttons */
-  .snowplow-button,
-  .featured-section-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 36px;
-    padding: 0 var(--sp-space-4);
-    border: 1px solid var(--sp-color-border);
-    border-radius: var(--sp-radius-md);
-    background: var(--sp-color-surface-raised);
-    color: var(--sp-color-fg);
-    font-size: var(--sp-text-sm);
-    font-weight: var(--sp-weight-medium);
-    text-decoration: none;
-  }
-
-  :is(.snowplow-button, .featured-section-button):hover {
-    border-color: var(--sp-color-border-strong);
-    color: var(--sp-color-fg);
-    text-decoration: none;
-  }
-
-  .snowplow-button.cta-button {
-    border-color: var(--sp-color-accent);
-    background: var(--sp-color-accent);
-    color: var(--sp-color-accent-fg);
-  }
-
-  .snowplow-button.cta-button:hover {
-    background: var(--sp-color-accent-hover);
-    color: var(--sp-color-accent-fg);
-  }
-
-  /* Badges */
-  .snowplow-badge-container {
-    display: inline-block;
-    margin: 0 var(--sp-space-1) var(--sp-space-1) 0;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  .markdown > p:has(.snowplow-badge-container) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--sp-space-1);
   }
 
   img.shield {

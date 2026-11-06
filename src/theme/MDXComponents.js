@@ -1,33 +1,50 @@
-import React from 'react'
-// Import the original mapper
 import MDXComponents from '@theme-original/MDXComponents'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' // Import the FontAwesomeIcon component.
-import { library } from '@fortawesome/fontawesome-svg-core' // Import the library component.
-import { fab } from '@fortawesome/free-brands-svg-icons' // Import all brands icons.
-import { fas } from '@fortawesome/free-solid-svg-icons' // Import all solid icons.
-import { far } from '@fortawesome/free-regular-svg-icons' // Import all regular icons.
-
 import ThemedImage from '@theme/ThemedImage'
 import ReactMarkdown from 'react-markdown'
+
+import Button from '@site/src/components/Button'
+import { Card, CardGrid } from '@site/src/components/Card'
 import {
-  CardGrid,
-  FeaturedSection,
-  CallToActionCard,
-  LinkCard,
-} from '@site/src/components/CardGrid'
+  Badge,
+  BadgeGroup,
+  TierBadge,
+  LifecycleBadge,
+  VersionBadge,
+  LicenseBadge,
+  Availability,
+} from '@site/src/components/Badge'
+import CodeGroup from '@site/src/components/CodeGroup'
+import Steps from '@site/src/components/Steps'
+import ParamTable, { Param } from '@site/src/components/ParamTable'
+import FeatureMatrix from '@site/src/components/FeatureMatrix'
+import AppliesTo from '@site/src/components/AppliesTo'
 import NotebookLinks from '@site/src/components/NotebookLinks'
 
-library.add(fab, fas, far) // Add all icons to the library so you can use them without importing them individually.
-
+/**
+ * Components available in every MDX file without an import. The component
+ * set is documented at /style-guide/components/.
+ */
 export default {
-  // Re-use the default mapping
   ...MDXComponents,
-  Icon: FontAwesomeIcon, // Make the FontAwesomeIcon component available in MDX as <icon />.
-  ThemedImage: ThemedImage, // Make ThemedImage available in MDX
-  ReactMarkdown: ReactMarkdown, // Make ReactMarkdown available in MDX
-  CardGrid: CardGrid,
-  FeaturedSection: FeaturedSection,
-  CallToActionCard: CallToActionCard,
-  LinkCard: LinkCard,
-  NotebookLinks: NotebookLinks,
+  ThemedImage,
+  ReactMarkdown,
+  NotebookLinks,
+
+  // Component set (src/components)
+  Button,
+  Card,
+  CardGrid,
+  Badge,
+  BadgeGroup,
+  TierBadge,
+  LifecycleBadge,
+  VersionBadge,
+  LicenseBadge,
+  Availability,
+  CodeGroup,
+  Steps,
+  ParamTable,
+  Param,
+  FeatureMatrix,
+  AppliesTo,
 }

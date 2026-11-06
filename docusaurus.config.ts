@@ -308,51 +308,6 @@ const config: Config = {
         '!function(){window.semaphore=window.semaphore||[],window.ketch=function(){window.semaphore.push(arguments)};var e=document.createElement("script");e.type="text/javascript",e.src="https://global.ketchcdn.com/web/v3/config/snowplow_analytics/website_smart_tag/boot.js",e.defer=e.async=!0,document.getElementsByTagName("head")[0].appendChild(e)}();',
     },
   ],
-
-  customFields: {
-    webpack: {
-      configure: (config) => {
-        // Add JSX runtime resolution
-        config.resolve.alias = {
-          ...config.resolve.alias,
-          'react/jsx-runtime': require.resolve('react/jsx-runtime'),
-          'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
-        }
-
-        // Add module rules for CSS processing
-        config.module.rules.push({
-          test: /\.css$/,
-          use: [
-            require.resolve('style-loader'),
-            require.resolve('css-loader'),
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                postcssOptions: {
-                  plugins: [
-                    require.resolve('tailwindcss'),
-                    require.resolve('autoprefixer'),
-                  ],
-                },
-              },
-            },
-          ],
-        })
-
-        // Add resolve extensions
-        config.resolve.extensions = [
-          '.js',
-          '.jsx',
-          '.ts',
-          '.tsx',
-          '.json',
-          '.mjs',
-        ]
-
-        return config
-      },
-    },
-  },
 }
 
 export default config

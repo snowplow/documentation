@@ -68,13 +68,11 @@ newTracker('sp1', '{{collector_url}}', {
 
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
-|        Option         |       Type       |                                                                                    Description                                                                                     |                        Default value                        |
-| :-------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------: |
-| `loadWebVitalsScript` |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                            `true`                            |
-|   `webVitalsSource`   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@4.2.4/dist/web-vitals.iife.js` |
-|       `context`       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                              |
-
-The default `webVitalsSource` is pinned to an exact `web-vitals` version. When you use this default, the plugin adds an `integrity` attribute (a SHA-384 [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) hash) and `crossorigin="anonymous"` to the script tag, so the browser refuses to execute the file if it does not match the expected hash. If you set a custom `webVitalsSource`, the plugin does not add these attributes, since it cannot know the hash of a script it did not pin.
+|        Option         |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
+| :-------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
+| `loadWebVitalsScript` |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
+|   `webVitalsSource`   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js` |
+|       `context`       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

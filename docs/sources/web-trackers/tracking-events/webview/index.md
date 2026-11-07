@@ -118,12 +118,12 @@ To include the WebView plugin in a custom `sp.js` bundle, set `webView = true` i
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">GitHub Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">GitHub Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@4.10.2/dist/index.umd.min.js">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-webview@4.10.2/dist/index.umd.min.js">unpkg</a></td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@4.10.2/dist/index.umd.min.js',
     ['snowplowWebViewTracking', 'WebViewPlugin']
 );
 ```
@@ -158,7 +158,7 @@ By default, the plugin will forward events to the default initialized Snowplow t
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@4.10.2/dist/index.umd.min.js',
     ["snowplowWebViewTracking", "WebViewPlugin"],
     [
       {

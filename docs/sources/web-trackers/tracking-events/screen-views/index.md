@@ -44,13 +44,13 @@ Screen tracking events must be **manually tracked**. The plugin will add the rel
     <tr>
       <td>Available on jsDelivr</td>
       <td>
-        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)
+        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@4.10.2/dist/index.umd.min.js">jsDelivr</a>
       </td>
     </tr>
     <tr>
       <td>Available on unpkg</td>
       <td>
-        <a href="https://unpkg.com/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)
+        <a href="https://unpkg.com/@snowplow/browser-plugin-screen-tracking@4.10.2/dist/index.umd.min.js">unpkg</a>
       </td>
     </tr>
   </tbody>
@@ -74,7 +74,7 @@ In order to make use of the plugin, you will need to register it with the tracke
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@4.10.2/dist/index.umd.min.js',
     ['snowplowScreenTracking', 'ScreenTrackingPlugin']
 );
 ```
@@ -145,7 +145,7 @@ However, if you haven't tracked any screen views, no `screen` entity will be att
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@4.10.2/dist/index.umd.min.js',
     ['snowplowScreenTracking', 'ScreenTrackingPlugin'],
     [
       {
@@ -188,7 +188,7 @@ Because this feature was designed for mobile platforms, not all the functionalit
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@4.10.2/dist/index.umd.min.js',
     ['snowplowScreenTracking', 'ScreenTrackingPlugin'],
     [
       {

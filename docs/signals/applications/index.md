@@ -20,6 +20,7 @@ This section covers:
 * [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md): fetch a user's recent session activity as JSON or a narrative summary, to ground your agents
 * [Signals MCP server](/docs/signals/applications/mcp-server/index.md): let your agent discover the attribute groups and agentic contexts your deployment publishes and read the ones that fit the task
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
+* [Use in experiments](/docs/signals/applications/experimentation/index.md): pass attributes to your experimentation or feature flag tool at assignment, and track exposures in Snowplow
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

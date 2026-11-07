@@ -27,6 +27,8 @@ Each page in this section documents two approaches side by side, using tabs:
 
 You can also use the [Signals API](/docs/signals/connection/index.md#signals-api) to interact with Signals directly over HTTP.
 
+To define attributes by describing them in plain language, use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console, or connect your own AI assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). The assistant drafts, tests, and publishes attribute groups and services for you. In a coding agent, run `npx plugins add snowplow/skills` to install the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx). See the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a walkthrough.
+
 ![Signals section of the Console navigation sidebar showing Overview, Attribute groups, Services, Attribute keys, and Interventions as menu items](../images/console-navbar.png)
 
 ## Configuration workflow

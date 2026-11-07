@@ -15,12 +15,13 @@ Every skill requires a one-time connection to the [Snowplow MCP server](/docs/ai
 
 ## Install the skills
 
-The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. To install them in Claude Code, run:
+The skills are published as a plugin in the [`snowplow/skills`](https://github.com/snowplow/skills) GitHub repository. The plugin installs the Snowplow MCP server and the skills in one step.
 
-```txt
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
+```bash
+npx plugins add snowplow/skills
 ```
+
+For other clients, such as Claude.ai, see [Configure the MCP server](/docs/ai/snowplow-mcp/index.md#configure-the-mcp-server).
 
 ## Build and design
 

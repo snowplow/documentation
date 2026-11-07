@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" width="1000" height="350">
+<defs>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#a98af0"/>
+ </marker>
+ <marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#d9cdf3"/>
+ </marker>
+ <g id="mini">
+  <rect x="-11" y="2" width="22" height="22" rx="7" fill="currentColor"/>
+  <circle cx="0" cy="-12" r="13" fill="#f2d3c0"/>
+  <path d="M-13,-14 Q-14,-28 -2,-27 Q2,-33 9,-29 Q15,-26 13,-14 Q8,-21 0,-20 Q-8,-21 -13,-14 Z" fill="#2b1a4f"/>
+  <g stroke="#2b1a4f" stroke-width="1.6"><circle cx="-5" cy="-11" r="4" fill="#fff"/><circle cx="5" cy="-11" r="4" fill="#fff"/></g>
+ </g>
+</defs>
+<rect width="1000" height="350" fill="#ffffff"/>
+<g font-family="'Source Sans 3', Helvetica, Arial, sans-serif" text-anchor="middle">
+
+ <!-- Ann -->
+ <use href="#mini" color="#6638b8" transform="translate(170,78) scale(1.6)"/>
+ <text x="170" y="138" font-size="16" font-weight="700" fill="#2b1a4f">Ann, first</text>
+ <g fill="#f1ebfb" stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="50" y="150" width="240" height="28" rx="14"/>
+  <rect x="50" y="186" width="240" height="28" rx="14"/>
+ </g>
+ <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#2b1a4f">
+  <text x="170" y="169">user_id: u001</text>
+  <text x="170" y="205">hashed_email: 3f9a…c21e</text>
+ </g>
+
+ <!-- Ben -->
+ <use href="#mini" color="#a98af0" transform="translate(830,78) scale(1.6)"/>
+ <text x="830" y="138" font-size="16" font-weight="700" fill="#2b1a4f">Ben, last</text>
+ <rect x="710" y="150" width="240" height="28" rx="14" fill="#f1ebfb" stroke="#d9cdf3" stroke-width="1.5"/>
+ <text x="830" y="169" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#2b1a4f">user_id: u002</text>
+
+ <!-- the family tablet -->
+ <rect x="440" y="34" width="120" height="150" rx="14" fill="#2b1a4f"/>
+ <rect x="450" y="46" width="100" height="120" rx="6" fill="#f1ebfb"/>
+ <circle cx="500" cy="175" r="4" fill="#a98af0"/>
+ <text x="500" y="102" font-size="13" font-weight="700" fill="#6638b8">family</text>
+ <text x="500" y="118" font-size="13" font-weight="700" fill="#6638b8">tablet</text>
+ <rect x="390" y="196" width="220" height="30" rx="15" fill="#6638b8"/>
+ <text x="500" y="216" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#ffffff">domain_userid: d123</text>
+
+ <!-- Snowplow IDs -->
+ <rect x="70" y="262" width="200" height="54" rx="10" fill="#6638b8"/>
+ <text x="170" y="286" font-size="17" font-weight="700" fill="#ffffff">sp_001</text>
+ <text x="170" y="305" font-size="13" fill="#e4d8fa">Ann</text>
+ <rect x="730" y="262" width="200" height="54" rx="10" fill="#6638b8"/>
+ <text x="830" y="286" font-size="17" font-weight="700" fill="#ffffff">sp_002</text>
+ <text x="830" y="305" font-size="13" fill="#e4d8fa">Ben</text>
+
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M170,216 V258"/>
+  <path d="M830,180 V258"/>
+  <path d="M612,211 C690,211 700,289 726,289"/>
+ </g>
+ <path d="M388,211 C310,211 300,289 274,289" fill="none" stroke="#d9cdf3" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrow-faint)"/>
+ <text x="352" y="268" font-size="13" fill="#a98af0">before Ben</text>
+ <text x="652" y="268" font-size="13" font-weight="700" fill="#6638b8">used it last</text>
+
+ <text x="500" y="342" font-size="16" fill="#2b1a4f">The tablet's domain_userid reads whoever used it last. Ann's and Ben's own IDs read the right person.</text>
+</g>
+</svg>

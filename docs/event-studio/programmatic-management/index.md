@@ -22,6 +22,8 @@ The [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides file-base
 
 The [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md) enables AI assistants to interact with your tracking plan resources through natural language.
 
+To work with the tracking plans and data structures in your Snowplow account directly from your codebase, install the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
+
 ## Console API
 
 Use the Console REST API for direct programmatic access to tracking plans and data structures. This is useful for integration with other tools, or when you need more control than file-based workflows allow.

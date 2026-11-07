@@ -22,6 +22,10 @@ For a step-by-step guide to using the Snowplow CLI MCP server, see the [MCP tuto
 
 The MCP server allows AI assistants to interact with the Snowplow CLI using the `snowplow-cli mcp` command.
 
+:::note[Snowplow MCP server]
+This server works on tracking plan files on your machine. To work with your Snowplow Console account, including pipelines, failed events, enrichments, and Signals, directly from your codebase, install the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
+:::
+
 ## Install the MCP server
 
 The MCP server is included with [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md). Start by installing the CLI and authenticating to your Snowplow account.

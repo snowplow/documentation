@@ -91,6 +91,8 @@ Once you've completed these steps, click **Save to tracking plan** to save the m
 
 You can view the SQL at any time by choosing **View data model code** from the `⋮` menu.
 
+You can also ask the [Snowplow Assistant](/docs/ai/console-agent/index.md), or any AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), to create a data model for a tracking plan. It shows you the SQL, and can also generate a [semantic model](/docs/modeling-your-data/automatically-generated-data-models/semantic-models/index.md) for the data model's table. The assistant doesn't run SQL in your warehouse.
+
 ![Generated data models list showing example_model as a View on Snowflake prod1, generated on 29 September 2025, with a menu open showing "View data model code" and "Delete data model" options](./images/created.png)
 
 ## Deploying models

@@ -7,6 +7,8 @@ keywords: ["free trial", "Snowplow trial", "CDI Cloud", "14-day trial", "trial l
 date: "2026-06-16"
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 The Snowplow free trial is a 14-day trial of [Snowplow CDI Cloud](/docs/get-started/index.md#cdi-cloud). Snowplow hosts and manages the pipeline infrastructure, so you can collect, validate, and load behavioral data without setting up any cloud infrastructure yourself.
 
 Use the trial to evaluate Snowplow end to end: define your data, send events from your application, and load validated data into a warehouse or lake destination.
@@ -18,6 +20,12 @@ Sign up for the free trial on the [Snowplow website](https://snowplow.io/get-sta
 After you sign up, your trial environment is provisioned automatically. You will receive access instructions within around 20 minutes.
 
 The trial runs for 14 days. To request an extension, [contact sales](https://console.snowplowanalytics.com/contact-us).
+
+:::tip[Set up the trial with your AI assistant]
+Once you have access, you can hand the setup to your coding agent. Connected to the Snowplow MCP server, it asks what you want to measure, designs the tracking plan, creates the schemas in your trial account, adds the tracker to your application, and checks that the events arrive. See [Snowplow quickstart with your coding agent](/docs/get-started/quickstart/index.md).
+
+<AiAssistantInstall />
+:::
 
 ## Product limitations
 

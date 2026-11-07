@@ -18,6 +18,7 @@ This section covers:
 * [Services](/docs/signals/applications/services/index.md): stable interfaces that group attribute group versions together for your applications, recommended for production use
 * [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md): fetch calculated attribute values using a service or directly from an attribute group
 * [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md): fetch a user's recent session activity as JSON or a narrative summary, to ground your agents
+* [Predictive attributes](/docs/signals/applications/predictive-attributes/index.md): score how likely a session is to reach a goal, using a published model
 * [Signals MCP server](/docs/signals/applications/mcp-server/index.md): let your agent discover the attribute groups and agentic contexts your deployment publishes and read the ones that fit the task
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md): receive intervention payloads and react to them in your application
 

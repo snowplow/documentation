@@ -45,6 +45,10 @@ Resources refer to each other, so a change to one can affect another:
 * Unpublishing or deleting an attribute group version that a published intervention uses also unpublishes the intervention.
 * Intervention criteria always use the latest published version of the attribute group that contains each attribute. Publishing a new attribute group version that drops an attribute doesn't break the intervention: Signals keeps using the latest version that still has it.
 
+## Use Signals with more than one pipeline
+
+Each pipeline has its own Signals deployment. If you run separate pipelines, for example for development and production, each has its own attribute groups, services, and interventions. Signals doesn't copy or migrate configuration between deployments: to use the same configuration in another deployment, define and publish it there. Defining your configuration in code with the [Signals Python SDK](/docs/signals/connection/reference/index.md#python-sdk) lets you publish the same definitions to each deployment.
+
 ## Check a change after you publish
 
 After you publish, confirm that Signals is doing what you expect:

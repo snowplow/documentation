@@ -1,6 +1,7 @@
 {
   "title": "Train and serve a purchase propensity model with Signals",
   "description": "Build a point-in-time correct training dataset from Signals attributes, train a model on it, and score live sessions with the same attributes.",
+  "date": "2026-10-27",
   "label": "Signals implementation",
   "useCase": "Real-time personalization",
   "technologies": ["Python", "Snowflake", "scikit-learn", "FastAPI"],

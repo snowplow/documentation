@@ -1,6 +1,7 @@
 {
   "title": "Build an AI agent with real-time user context using Signals and Vercel AI SDK",
   "description": "Build a Next.js AI agent that uses Snowplow Signals to deliver contextually aware responses based on live user behavior.",
+  "date": "2026-04-17",
   "label": "Signals implementation",
   "useCase": "Customer-facing AI agents",
   "technologies": ["Vercel AI SDK", "Next.js"],

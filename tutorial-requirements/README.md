@@ -73,6 +73,10 @@ Formatting:
 * Starts with a verb
 * One sentence for the description
 
+### Date
+
+The `date` is the date you created the tutorial or accelerator, in `YYYY-MM-DD` format. The tutorials landing page lists the newest ones first.
+
 ### Label and use case
 
 The `label` and `useCase` categories help users find the right tutorial or accelerator, support our marketing messaging, and clarify the goal of each one. They're enums; there's a short list of choices for each.

@@ -96,13 +96,24 @@ Package: [`@snowplow/signals-node`](https://www.npmjs.com/package/@snowplow/sign
 
 #### Node.js SDK methods
 
-| Method                      | Description                                                                 |
-| --------------------------- | --------------------------------------------------------------------------- |
-| `getServiceAttributes`      | Retrieves attributes for a specific service from the Profiles Store         |
-| `getGroupAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
-| `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
+All methods are asynchronous and return a promise. This table describes version 0.4 of the SDK.
 
-[Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) documents the arguments for each retrieval method.
+| Method | Arguments | Returns |
+| --- | --- | --- |
+| `getServiceAttributes` | `{ name, attribute_key, identifier }` | An object of attribute names and values for one identifier |
+| `getBatchServiceAttributes` | `{ name, attribute_key, identifiers }`, where `identifiers` is a non-empty array | An object of attribute names, each with an array of values in the same order as `identifiers` |
+| `getGroupAttributes` | `{ name, version, attributes, attribute_key, identifier }`, where `attributes` is a non-empty array of attribute names | An object of attribute names and values for one identifier |
+| `getAgenticContext` | `{ name, identifier, format }`, where `format` is `"json"` (default) or `"narrative"` | An object with `attribute_key`, `identifier`, `name`, `started_at_ms`, `events`, and optional `prompt` and `version`; or a string for `"narrative"` |
+
+The `attribute_key` argument takes any attribute key name, such as `domain_userid`. The SDK also exports `SnowplowStandardAttributeKeys` with the four built-in keys: `USER_ID`, `DOMAIN_USER_ID`, `DOMAIN_SESSION_ID`, and `NETWORK_USER_ID`.
+
+[Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [Retrieve agentic contexts](/docs/signals/applications/agentic-contexts/index.md) show each method in use.
+
+#### Authentication and errors
+
+The SDK exchanges your API key and key ID for an access token from Console on the first request, and reuses it until it expires. The constructor throws if `baseUrl` is missing, or if the API key, key ID, or organization ID is missing.
+
+When a request fails, the method rejects with an `Error` whose message starts with `[Signals] API error:`, followed by the HTTP status and the response body. If the access token can't be fetched, the message is `[Signals] Failed to fetch access token`. The SDK doesn't set a request timeout or retry failed requests, so add them in your application if you need them.
 
 ## Endpoints
 

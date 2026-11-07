@@ -190,7 +190,9 @@ Another use for custom targeting is when you want to target an attribute key tha
 
 Define a custom intervention target scope by selecting attribute keys. These are the attribute keys that will receive the information.
 
-You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups.
+You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups. The selected groups must use the same attribute key as the intervention's target.
+
+Interventions don't carry custom content, such as the text or value of an offer. Your application decides what to show, based on the intervention `name` and the attribute values that come with it.
 
 ![Intervention delivery configuration showing attribute key targeting and attribute group payload selection](../images/intervention-delivery.png)
 
@@ -302,7 +304,7 @@ Signals provides two ways to test an intervention in Snowplow Console: a preview
 
 ### Preview
 
-While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined.
+While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined. The preview needs a warehouse connection.
 
 ![Intervention preview showing test results with match count against scanned warehouse records](../images/intervention-preview.png)
 

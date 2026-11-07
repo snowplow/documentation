@@ -39,7 +39,6 @@ You'll finish by retrieving the attribute values for your own browsing session w
 You'll need:
 
 * A web application where you can add the JavaScript tracker and track page views
-* A Snowflake warehouse
 * Signals enabled on your Snowplow account
 * A Python notebook environment, such as Google Colab or Jupyter
 
@@ -149,7 +148,7 @@ Add a criteria filter so that the attribute only considers events where the refe
 
 ### Preview and publish the attribute group
 
-Click **Run preview** to test your attribute group configuration.
+If you've connected a warehouse to Signals, click **Run preview** to test your attribute group configuration. The preview needs a warehouse connection. Without one, skip to creating the attribute group, and check the values in the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/index.md) once it's published.
 
 ![Attribute group with three attributes ready for preview testing](images/attribute-group-ready-to-test.png)
 

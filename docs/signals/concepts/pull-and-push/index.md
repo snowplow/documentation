@@ -54,7 +54,7 @@ An online store calculates `product_view_count_last_10_min` for each session, in
 
 With pull, the product page calls a service when it loads and reads the session's `product_view_count_last_10_min`. If the value is high, the page shows a "Recently viewed" panel. The application decides what to do, and it asks again on the next page load.
 
-With push, the store defines an intervention with the criteria `product_view_count_last_10_min >= 5` and a name, such as `discount_offer`, that the page recognizes. The browser subscribes to interventions for the current `domain_sessionid`. When the fifth product view arrives, Signals updates the attribute, sees that the criteria are met, and sends the payload. The page shows the offer. Signals doesn't send it again for that session.
+With push, the store defines an intervention with the criteria `product_view_count_last_10_min >= 5` and a name, such as `discount_offer`, that the page recognizes. The browser subscribes to interventions for the current `domain_sessionid`. When the fifth product view arrives, Signals updates the attribute, sees that the criteria are met, and sends the payload: the intervention name plus the attribute values you chose to send with it. The page recognizes `discount_offer` and shows the offer, whose content lives in the page, not in the intervention. Signals doesn't send it again for that session.
 
 For an ecommerce app that reacts to interventions, see [Implement real-time interventions](/tutorials/signals-interventions/start).
 

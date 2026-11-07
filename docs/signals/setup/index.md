@@ -22,20 +22,22 @@ Pick the path that matches your account. Both end with Signals ready to configur
 
 ### Start on the Signals free tier
 
-Sign up at [signals.snowplow.io/start](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral). The free tier is provisioned with a pipeline and with Signals already enabled, so you don't need to click **Enable**.
+Sign up at [signals.snowplow.io/start](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral). The free tier is provisioned with a pipeline and with Signals already enabled, so you don't need to click **Enable**. Snowplow hosts it on AWS, in the US or the EU depending on the region you sign up from.
 
 To connect from code later, find your Signals API URL and organization ID in Console > **Signals** > **Overview**, as listed in [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials).
 
-To point a tracker at your pipeline, find your Collector URL in Console > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
+To point a tracker at your pipeline, find your Collector URL in Console > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**, the same place as for any Snowplow pipeline.
 
 ### Add Signals to an existing Snowplow account
+
+For Snowplow CDI Cloud and Private Managed Cloud accounts, the Signals package must be enabled on your account before you can deploy it. Contact your account team to enable it. Once it's enabled, you deploy Signals yourself from Console, in the AWS region you choose.
 
 Log in to Console and navigate to the **Signals** section. Click **Enable** to start setting up Signals.
 
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
 
 :::note[Warehouse connection]
-A warehouse connection is optional. You need one to [test attribute definitions](/docs/signals/attributes/attribute-groups/index.md#test-attribute-definitions), [backfill stream attributes](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes), and [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md). Snowflake, BigQuery, and Databricks are supported.
+A warehouse connection is optional. Without one, you can still check attribute values as they're calculated, using the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/index.md). You need a warehouse connection to [test attribute definitions](/docs/signals/attributes/attribute-groups/index.md#test-attribute-definitions), [backfill stream attributes](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes), and [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md). Snowflake, BigQuery, and Databricks are supported.
 :::
 
 To connect a warehouse:

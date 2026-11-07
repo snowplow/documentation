@@ -238,7 +238,7 @@ stream_attribute_group = StreamAttributeGroup(
 After defining one or more [attributes](/docs/signals/attributes/attributes/index.md) for stream attribute groups, you can test the configuration before publishing. This outputs a table of attributes calculated from your `atomic` events table, using a random subset of events from the last hour.
 
 :::note[Warehouse connection]
-A warehouse connection is required to test attribute definitions.
+A warehouse connection is required to test attribute definitions. Without one, publish the attribute group and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/index.md) to watch the attribute values update as you generate events. The events must carry the identifiers your attribute key uses, such as `domain_userid`.
 :::
 
 <Tabs groupId="signals-impl" queryString>

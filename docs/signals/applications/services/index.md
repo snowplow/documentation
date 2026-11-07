@@ -17,6 +17,8 @@ import TabItem from '@theme/TabItem';
 
 The Node.js SDK reads services but can't create them. Use Console or the Python SDK to define services.
 
+A service can include both stream attribute groups and [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md). If they use the same attribute key, one request to the service returns the real-time and warehouse attributes for that user together.
+
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 

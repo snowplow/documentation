@@ -22,6 +22,7 @@ Start by [connecting to Signals](/docs/signals/connection/index.md) to create a 
 You need:
 * Your events in a supported warehouse. Managed runs also need a Signals warehouse connection: see [Supported warehouses](#supported-warehouses).
 * For session anchors, attribute groups keyed on `domain_sessionid`. The dataset builder requires this key when it generates session anchors.
+* Stream attribute groups as features. The dataset builder doesn't support [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md) yet.
 
 ### Supported warehouses
 

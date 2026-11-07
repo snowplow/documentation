@@ -85,3 +85,12 @@ If you have an existing Snowplow implementation, either Community Edition or a l
 | **Data plane**                              |                    |               |
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
+
+## Snowplow Signals
+
+Where [Signals](/docs/signals/introduction/index.md) runs depends on how you start:
+
+* **Signals free tier**: hosted and managed by Snowplow on AWS, in the US or the EU depending on the region you sign up from. Event collection is included.
+* **Snowplow CDI Cloud and Private Managed Cloud**: once the Signals package is enabled on your account, you deploy Signals from Console in the AWS region you choose. Signals reads events from your existing pipeline.
+
+See [Set up Signals](/docs/signals/setup/index.md) for the steps.

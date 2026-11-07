@@ -73,7 +73,7 @@ The workflow is:
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';
 import {
-  SignalsInterventionsPlugin,
+  SignalsPlugin,
   addInterventionHandlers,
   subscribeToInterventions,
 } from '@snowplow/signals-browser-plugin';
@@ -81,7 +81,7 @@ import {
 // Install the Signals Intervention plugin
 newTracker('sp1', '{{collector_url}}', {
   appId: 'my-app-id',
-  plugins: [ SignalsInterventionsPlugin() ],
+  plugins: [ SignalsPlugin() ],
 });
 
 // Add custom handlers
@@ -102,7 +102,9 @@ subscribeToInterventions({
 });
 ```
 
-By default, the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys.
+Set `endpoint` to your Signals API URL. You can give the hostname alone, as in the example, or the full URL: if there's no scheme, the plugin adds `https://`. The plugin appends `/api/v1/interventions` and keeps a server-sent events connection open to receive interventions. Use the `apiPath` option to change the path, and `connectionTimeoutMs` to change how long it waits for the connection, 2.5 seconds by default.
+
+By default, the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys, reading their values from the events the tracker sends.
 
 You can optionally configure the plugin for additional attribute keys. There are two options:
 * `attributeKeyTargets`: dynamically subscribe to attribute key IDs extracted from the tracker's generated events
@@ -136,7 +138,7 @@ The plugin generates Snowplow events to track interventions. The events include 
 
 ## Payload
 
-When delivered, interventions contain the following information:
+When delivered, interventions contain the following information. They don't carry custom content: the `attributes` are the latest values from the attribute groups you [selected to send](/docs/signals/interventions/index.md#target-and-payload) with the intervention.
 
 | Field                       | Description                                                             | Type      |
 | --------------------------- | ----------------------------------------------------------------------- | --------- |

@@ -122,6 +122,8 @@ Signals supports the following aggregation types:
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
+To weight, add, or rank `category_count` attributes of text properties, for example to score a user's interest per channel, use [map formulas](/docs/signals/attributes/map-formulas/index.md).
+
 Attributes calculated over high-cardinality properties, such as a product ID or a search term, can exceed the 100-value limits noted above. Consider a criteria filter to narrow the set of events, or a lower-cardinality property.
 
 #### Unique list ordering

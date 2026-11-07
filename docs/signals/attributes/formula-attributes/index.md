@@ -36,6 +36,7 @@ Formula attributes have some limits on where you can use them:
 * The intervention [preview](/docs/signals/interventions/index.md#preview) doesn't support criteria on formula attributes yet
 * The [ML training dataset builder](/docs/signals/ml-training-datasets/index.md) doesn't include formula attributes as features
 * An attribute group can't contain only formula attributes: it needs at least one attribute calculated from events
+* Intervention criteria can't use formulas over category counts yet
 
 ## Create a formula attribute
 
@@ -111,7 +112,7 @@ The table below lists the arguments for `FormulaAttribute`:
 | `expression` | The formula, up to 1000 characters | `string` | ✅ |
 | `default_value` | The fallback value, used when the formula has data but no answer | `bool`, `int`, `float`, or `string` | ❌ |
 | `description` | A description of the formula attribute | `string` | ❌ |
-| `type` | The expected result type: `int64`, `double`, `bool`, or `string`. If you set it, Signals checks it against the type it works out from the formula | `string` | ❌ |
+| `type` | The expected result type: `int64`, `double`, `bool`, `string`, `map_int64`, or `map_double`. If you set it, Signals checks it against the type it works out from the formula | `string` | ❌ |
 
 Use `test()` to preview the group. The result has one column per formula attribute, after the attribute columns. The preview reads a sample of events from the last hour, so formula values can differ from live values, which use each attribute's full history.
 
@@ -141,7 +142,7 @@ Reference an attribute by its exact name. Names are case-sensitive. Put a name i
 
 Write numbers as `10`, `0.5`, or `1e3`. Write text in single quotes, such as `'gold'`. To include a single quote in text, double it: `'it''s'` is the text `it's`. The literals `true` and `false` are true/false values. Keywords and function names are case-insensitive, so `case when` and `CASE WHEN` mean the same thing.
 
-You can't use attributes whose type is a list, a dictionary, a timestamp, or bytes in a formula.
+You can't use attributes whose type is a list, a dictionary, a timestamp, or bytes in a formula. The exception is `category_count` attributes of text properties, which [map formulas](/docs/signals/attributes/map-formulas/index.md) can use.
 
 ### Operators and functions
 
@@ -182,7 +183,7 @@ CASE WHEN total_spend > 1000 THEN 'gold' WHEN total_spend > 100 THEN 'silver' EL
 
 Only this form of `CASE` is supported. Write `CASE WHEN plan = 'gold' THEN 1 END`, not `CASE plan WHEN 'gold' THEN 1 END`. There's no `IF` function, and `NULL` isn't supported: use `coalesce` or a fallback value to handle missing data.
 
-You can only use text with `=` and `!=`, as an argument to `coalesce`, or as a `CASE` result. Text comparisons are exact and case-sensitive, so `plan = 'Gold'` is false when `plan` is `gold`.
+You can only use text with `=` and `!=`, as an argument to `coalesce`, as a `CASE` result, or as the category in the [map function](/docs/signals/attributes/map-formulas/index.md#functions) `get`. Text comparisons are exact and case-sensitive, so `plan = 'Gold'` is false when `plan` is `gold`.
 
 ### Result types
 
@@ -196,6 +197,8 @@ Signals works out each formula's result type from the formula and the types of i
 | Text | **Text** | `string` | `CASE WHEN total_spend > 1000 THEN 'gold' ELSE 'standard' END` |
 
 Adding, subtracting, or multiplying two whole numbers gives a whole number. Mixing a whole number and a decimal gives a decimal. A `counter` or `approx_count_distinct` attribute is always a whole number, and a `mean` or time since aggregation is always a decimal.
+
+A formula over `category_count` attributes of text properties returns a map of category to number, with the **Map** badge in Console and the type `map_int64` or `map_double` in the Python SDK. See [Combine category counts with map formulas](/docs/signals/attributes/map-formulas/index.md).
 
 ### Formula limits
 

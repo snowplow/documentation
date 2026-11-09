@@ -53,19 +53,17 @@ flink run -m yarn-cluster -sae /home/hadoop/event-recovery.jar \
   --config <base64>
 ```
 
-`-m yarn-cluster` starts a Flink cluster on YARN for this job only, and waits for the job to finish. The EMR step fails when the job fails, and the step's log contains either the run summary or the failure message. `-sae` shuts down that Flink cluster if the `flink run` client stops, for example when you cancel the step, so that the job doesn't keep writing to Kinesis.
+The EMR step fails if the job fails. The step's log contains either the run summary or the failure message.
 
 ### Cluster requirements
 
-The templates set up the cluster as follows. If you build your own cluster configuration, keep these settings:
+The templates already meet these requirements. If you build your own cluster configuration, it needs:
 
-- EMR release `7.13.0` with the `Flink` application: this release ships Flink 1.20.0, the version the job is built against. EMR 7.9 to 7.12 also ship Flink 1.20.0, but AWS lists a known issue in those releases where step logs may not be uploaded to S3 for steps that run longer than three hours, and the step log contains the job's summary.
-- Java 11: EMR 7 runs Flink on Java 17 by default, which can't run the job. Tasks fail with `IllegalArgumentException: too many arguments` in `scala.runtime.LambdaDeserializer`. The templates set `env.java.home`, `containerized.master.env.JAVA_HOME`, and `containerized.taskmanager.env.JAVA_HOME` in `flink-conf`, and `JAVA_HOME` in `hadoop-env`, all to `/usr/lib/jvm/jre-11`.
-- No bootstrap action: EMR 7.13's Flink already includes the S3 file system plugin. Installing a second copy stops the JobManager with `Delegation token provider with service name s3-hadoop has multiple implementations`.
-- A raised `client.heartbeat.timeout`: on EMR 7.13, the JobManager rejects the heartbeats that `flink run -sae` sends, and cancels any job that runs longer than about four minutes. The templates set `client.heartbeat.timeout` to `3650d` in `flink-conf`.
-- Instance types that EMR 7.13 supports: the templates use `m5.xlarge`. EMR 7.13 doesn't support any m4 type, and a cluster on an unsupported type fails to start with "application provisioning timed out". To list the supported types for your region, run `aws emr list-supported-instance-types --release-label emr-7.13.0`.
-
-The templates also set `classloader.check-leaked-classloader` to `false`. This hides a harmless `Trying to access closed classloader` stack trace that the client prints after each run.
+- EMR release `7.13.0`, with the `Flink` application
+- Flink running on Java 11: set `env.java.home`, `containerized.master.env.JAVA_HOME`, and `containerized.taskmanager.env.JAVA_HOME` in `flink-conf`, and `JAVA_HOME` in `hadoop-env`, all to `/usr/lib/jvm/jre-11`
+- No bootstrap action
+- `client.heartbeat.timeout` set to `3650d` in `flink-conf`
+- An instance type that EMR 7.13 supports, such as `m5.xlarge`
 
 ## Grant permissions
 
@@ -76,11 +74,9 @@ The cluster's instance profile, `AWS_IAM_ROLE`, needs:
 - S3 list and read access on the input path
 - S3 write access on the failed, unrecoverable, and directory output paths
 
-:::warning[The default EMR role can't write to Kinesis]
-AWS's managed `AmazonElasticMapReduceforEC2Role` policy, used by `EMR_EC2_DefaultRole`, grants `kinesis:DescribeStream` and the single-record `kinesis:PutRecord`, but not `kinesis:PutRecords`.
+If you use `EMR_EC2_DefaultRole`, add `kinesis:PutRecords` to it. Its managed policy, `AmazonElasticMapReduceforEC2Role`, only grants the single-record `kinesis:PutRecord`.
 
-Before the run starts, the job checks that it can describe the output stream, and fails immediately if it can't. This check can't tell whether the role is allowed to write to the stream. If `kinesis:PutRecords` or `kms:GenerateDataKey` is missing, the job retries indefinitely and makes no progress. In that case, `numRecordsOutErrors` on the `kinesis: Writer` operator keeps rising, and the task logs show `AccessDeniedException` or `KMSAccessDeniedException`. Stop the run and fix the permissions.
-:::
+If the role can't write to the stream, the job retries indefinitely and makes no progress, and the task logs show `AccessDeniedException` or `KMSAccessDeniedException`. Stop the run and fix the permissions.
 
 ## Configure the job
 
@@ -101,7 +97,7 @@ The job accepts the following arguments:
 
 You must set `--output`, `--directory-output`, or both.
 
-The job also accepts the argument names used by the former Spark job: `--failedOutput` for `--failed`, `--unrecoverableOutput` for `--unrecoverable`, `--batchSize` for `--batch-size`, and `--directoryOutput` for `--directory-output`. The Beam job uses the first two of these names as well.
+The job also accepts the argument names used by the former Spark job: `--failedOutput` for `--failed`, `--unrecoverableOutput` for `--unrecoverable`, `--batchSize` for `--batch-size`, and `--directoryOutput` for `--directory-output`.
 
 ### Choose the input
 
@@ -111,7 +107,7 @@ The job doesn't expand globs, so a path such as `s3a://bucket/path/*` doesn't wo
 
 ### Test a configuration with a dry run
 
-To check what a recovery produces before sending events to your pipeline, use `--directory-output` without `--output`. The job then writes each recovered event as a line of JSON, keyed by the Collector payload's field names, such as `path`, `querystring`, `body`, and `headers`. The files are named `part-<id>-<n>.json`, in one directory per hour: `<directory>/<yyyy-MM-dd--HH>/`. If a run recovers no events, it writes no files.
+To check what a recovery produces before sending events to your pipeline, use `--directory-output` without `--output`. The job then writes JSON files under that path, with one recovered event per line, keyed by the Collector payload's field names, such as `path`, `querystring`, `body`, and `headers`.
 
 To test a configuration against a small sample on your own machine, use the [command line tool](/docs/monitoring/recovering-failed-events/manual/testing/index.md) instead.
 
@@ -120,7 +116,3 @@ To test a configuration against a small sample on your own machine, use the [com
 The job retries records that Kinesis throttles until they're written, and never drops a record. When a run finishes successfully, every recovered event is in the output stream or directory. To track a run while it's in progress, see [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#monitor-the-flink-job-on-aws).
 
 If a run fails, Flink doesn't restart it. To recover the events, run the job again on the same input. The new run starts from the beginning, so it sends again any events that the failed run had already written to Kinesis. Your pipeline might therefore receive some events twice.
-
-:::note[Checkpointing is not supported]
-The job has `--checkpoint-interval` and `--checkpoint-dir` arguments, which turn on Flink checkpointing so that a failed run can be resumed with `flink run -s <checkpoint>`. Don't use them. On EMR 7.13, resuming from some checkpoints fails every time because of [FLINK-25920](https://issues.apache.org/jira/browse/FLINK-25920). A resumed run also sends again the events written after its checkpoint, so it doesn't avoid duplicates.
-:::

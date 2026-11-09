@@ -25,13 +25,11 @@ While the job runs, you can follow its metrics in the Flink web UI, or through a
 
 | Metric | Meaning |
 |---|---|
-| `events.recovered`, `events.failed`, `events.unrecoverable` | The number of events leaving the recovery step, before they're written anywhere. `events.recovered` counts events handed to the Kinesis sink, not events that Kinesis accepted. |
-| `numRecordsOut` on the `kinesis: Writer` operator | The number of records sent to Kinesis, counting each retry again. |
-| `numRecordsOutErrors` on the `kinesis: Writer` operator | The number of records that Kinesis rejected, and that the job will retry. |
+| `events.recovered` | The number of events recovered so far. |
+| `events.failed` | The number of events the recovery configuration couldn't fix so far. |
+| `events.unrecoverable` | The number of unrecoverable events so far. |
 
-To estimate how many records the job has written to Kinesis so far, subtract `numRecordsOutErrors` from `numRecordsOut` on the `kinesis: Writer` operator. This relies on Kinesis reporting an accurate failed record count for each `PutRecords` call.
-
-If `numRecordsOutErrors` keeps rising and the job makes no progress, check the task logs for `AccessDeniedException` or `KMSAccessDeniedException`. See [Grant permissions](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#grant-permissions).
+If `numRecordsOutErrors` on the `kinesis: Writer` operator keeps rising and the job makes no progress, check the task logs for `AccessDeniedException` or `KMSAccessDeniedException`. See [Grant permissions](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#grant-permissions).
 
 ## Monitor the Beam job on GCP
 

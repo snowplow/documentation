@@ -7,9 +7,9 @@ description: "Track recovery job progress using the Flink job's run summary and 
 keywords: ["recovery job monitoring", "EMR recovery metrics", "Flink recovery metrics", "Dataflow monitoring"]
 ---
 
-When you run a recovery job against your production pipeline, you can track its progress in two ways.
+When you run a recovery job against your production pipeline, you can track its progress through the job's outputs and through the counts it reports.
 
-The first is the job's outputs: the `failed` and `unrecoverable` paths in S3 or GCS, and the Kinesis stream or Pub/Sub topic that receives recovered events. The second is the job's own counts of how many failed events it recovered, couldn't recover, or found to be unrecoverable.
+The outputs are the failed and unrecoverable paths in S3 or GCS, and the Kinesis stream or Pub/Sub topic that receives recovered events. The counts show how many failed events the job recovered, couldn't recover, or found to be unrecoverable. Each runtime reports its counts differently.
 
 ## Monitor the Flink job on AWS
 

@@ -92,7 +92,7 @@ The job accepts the following arguments:
 | `--region` | Required. The region of the Kinesis stream. |
 | `--resolver` | Required. The Base64-encoded Iglu resolver configuration. |
 | `--config` | Required. The Base64-encoded recovery configuration. |
-| `--batch-size` | The number of records in each Kinesis `PutRecords` call, between 1 and 500. |
+| `--batch-size` | The number of records in each Kinesis `PutRecords` call, between 1 and 500. Defaults to 500. |
 | `--max-buffered` | The number of records the Kinesis sink buffers before applying backpressure. Defaults to 10000. |
 
 You must set `--output`, `--directory-output`, or both.

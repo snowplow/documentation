@@ -13,7 +13,7 @@ For that purpose we provide a `snowplow-event-recovery` command line interface. 
 
 The CLI provides commands for validating (`snowplow-event-recovery validate`) and running test recoveries (`snowplow-event-recovery run`).  See `snowplow-event-recovery --help` for the most up-to-date options descriptions.
 
-The `run` command needs Java 21 or later. The `validate` command runs on earlier Java versions.
+The `run` command needs Java 21 or later.
 
 ### Validate
 

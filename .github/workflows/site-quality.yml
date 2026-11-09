@@ -1,9 +1,9 @@
 name: Site quality checks
 
 # Stylelint, axe accessibility checks, and visual regression screenshots for
-# the docs site. These report problems but don't block merges yet: the CSS
-# rewrite in Phase 1 of the docs redesign is what brings them to green.
-# Once it lands, remove the continue-on-error lines.
+# the docs site. Stylelint blocks merges. Axe and visual regression report
+# problems without blocking: axe still flags upstream DocSearch markup, and
+# visual diffs need a human to judge them.
 
 on:
   pull_request:
@@ -36,7 +36,6 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - name: Lint CSS
-        continue-on-error: true
         run: yarn lint:css
 
   browser-checks:

@@ -12,7 +12,7 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import { HomeSearch, Quickstarts } from '@site/src/components/home'
+import { HomeSearch, PipelineMap, Quickstarts } from '@site/src/components/home'
 
 <div className="home-hero breakout">
 <div className="home-hero__intro">
@@ -36,9 +36,15 @@ Snowplow CDI collects, validates, and models behavioral data from your apps, and
 </div>
 </div>
 
+## Explore the pipeline
+
+Events flow from left to right: you design them, trackers collect them, and the pipeline validates, enriches, loads, and models them. Signals reads the same events as they arrive. Select any step to go to its docs.
+
+<PipelineMap />
+
 ## Choose a product
 
-Both products use the same events, entities, and schemas. CDI collects, validates, and models behavioral data. Signals computes attributes in real time, from events it collects itself or from a CDI pipeline.
+Both products use the same events, entities, and schemas, so you can start with either.
 
 <CardGrid cols={2} breakout>
   <Card
@@ -47,7 +53,7 @@ Both products use the same events, entities, and schemas. CDI collects, validate
     title="Snowplow CDI"
     href="/docs/cdi/"
     headingLevel={3}
-    description="Track events from any platform, validate them against your schemas, and load them into your warehouse."
+    description="Track events from any platform, validate them against your schemas, load them into your warehouse, and model them into tables for analysis."
     links={[
       { label: 'Quickstart', href: '/docs/get-started/quickstart/' },
       { label: 'Trackers and SDKs', href: '/docs/sources/' },

@@ -9,6 +9,8 @@ date: "2026-11-09"
 
 On this page, you'll set up the Snowplow side of the integration. By the end, the storefront will be tracking events into your pipeline, and Signals will be calculating attributes for each browsing session.
 
+You'll need a Snowplow environment with Signals enabled. If you don't have one, [sign up for a Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial?utm_source=docs.snowplow.io&utm_medium=referral) now. Your trial environment is provisioned automatically after you verify your email address, and it includes everything this page needs: Console, a Collector, and Signals. Once you can sign in to Console, check that Signals is enabled for your organization.
+
 :::tip[Use the setup script]
 The repository includes an interactive script, `scripts/setup-trial-org.sh`, that asks for your credentials and runs the commands on this page and the next one for you. This page explains each step, so you know what the script does. If you use the script, read along and skip the commands.
 :::

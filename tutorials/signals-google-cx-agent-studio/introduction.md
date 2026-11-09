@@ -31,6 +31,10 @@ The shopper didn't mention the blazer or the dress. The agent read them from Sig
 
 Gemini Enterprise for CX agents are built in CX Agent Studio, a managed agent platform that you configure in the Google Cloud console. With a code-first framework such as Google ADK, you control the agent runtime and can add context in a callback, as shown in the [Google ADK accelerator](/tutorials/signals-google-adk-agent/introduction). CX Agent Studio doesn't give you access to the runtime. Your integration points are OpenAPI tool schemas, the agent's instructions, and session variables, and this accelerator uses only those three.
 
+:::note[Snowplow account required]
+This accelerator runs on a live Snowplow pipeline with Signals, because Signals calculates the agent's context from real browsing events. If you don't have a Snowplow environment, start a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial?utm_source=docs.snowplow.io&utm_medium=referral) before you begin. The 14-day trial includes a hosted pipeline, Signals, and one warehouse or lake destination. See [Snowplow free trial](/docs/get-started/free-trial/) for what the trial includes.
+:::
+
 :::warning[Reference integration]
 The companion repository is a reference integration for demos and evaluation. It runs against demo data, protects the agent tool endpoints with a single shared secret, and includes an unauthenticated attributes endpoint for its on-page debug panel. Don't deploy it against production data or traffic. The [conclusion](/tutorials/signals-google-cx-agent-studio/conclusion) lists what you'd change for production.
 :::
@@ -124,7 +128,7 @@ The agent events use the generic agent tracking schemas from [Iglu Central](http
 
 You'll need:
 
-- A Snowplow account with Signals enabled. A [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) is enough.
+- A Snowplow account with Signals enabled. If you don't have one, start a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial?utm_source=docs.snowplow.io&utm_medium=referral). Signals stops calculating attributes when the 14-day trial ends, so plan to finish the accelerator within that time.
 - A Google Cloud project where Gemini Enterprise for CX (CX Agent Studio) is available, with permission to create agents, Secret Manager secrets, and IAM bindings
 - The [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) (`gcloud`)
 - A [Vercel](https://vercel.com/) account and the Vercel CLI

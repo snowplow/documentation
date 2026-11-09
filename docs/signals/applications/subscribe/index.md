@@ -61,7 +61,7 @@ The workflow is:
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';
 import {
-  SignalsInterventionsPlugin,
+  SignalsPlugin,
   addInterventionHandlers,
   subscribeToInterventions,
 } from '@snowplow/signals-browser-plugin';
@@ -69,7 +69,7 @@ import {
 // Install the Signals Intervention plugin
 newTracker('sp1', '{{collector_url}}', {
   appId: 'my-app-id',
-  plugins: [ SignalsInterventionsPlugin() ],
+  plugins: [ SignalsPlugin() ],
 });
 
 // Add custom handlers

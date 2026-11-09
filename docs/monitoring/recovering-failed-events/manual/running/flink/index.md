@@ -7,7 +7,7 @@ description: "Run the event recovery Flink job on Amazon EMR to recover failed e
 keywords: ["Flink event recovery", "EMR Flink recovery", "AWS event recovery", "Kinesis recovery"]
 ---
 
-The Flink job reads failed events from S3, applies your recovery configuration, and writes the recovered events to a Kinesis stream. Events that the configuration can't fix are written back to S3, split into failed and unrecoverable.
+The Flink job reads [failed events](/docs/fundamentals/failed-events/index.md) from S3, applies your recovery configuration, and writes the recovered events to a Kinesis stream. Events that the configuration can't fix are written back to S3, split into failed and unrecoverable.
 
 Use the Flink job for pipelines running on AWS. For pipelines on GCP, use the [Beam job](/docs/monitoring/recovering-failed-events/manual/running/gcp-beam/index.md).
 
@@ -29,16 +29,16 @@ dataflow-runner run-transient \
 Where:
 
 - `BUCKET`: the S3 bucket that holds the failed events to recover. The job also writes its failed and unrecoverable outputs and the EMR logs to this bucket, under `failed/`, `unrecoverable/`, and `logs/`.
-- `INPUT_DIRECTORY`: the path in `BUCKET` to read failed events from, starting with `/`, for example `/partitioned/enrichment_failures/`.
+- `INPUT_DIRECTORY`: the path in `BUCKET` to read failed events from, starting with `/`, for example `/partitioned/enrichment_failures/`
 - `ASSETS_BUCKET`: the Snowplow hosted assets bucket that holds the job jar. Use `snowplow-hosted-assets` in `eu-west-1`, or `snowplow-hosted-assets-<region>` in other regions, for example `snowplow-hosted-assets-eu-central-1`.
-- `AWS_REGION`: the region to run the cluster in, for example `eu-central-1`.
-- `AWS_SUBNET`: the subnet to run the cluster in.
+- `AWS_REGION`: the region to run the cluster in, for example `eu-central-1`
+- `AWS_SUBNET`: the subnet to run the cluster in
 - `AWS_IAM_ROLE`: the EC2 instance profile for the cluster nodes. See [Grant permissions](#grant-permissions) for what it needs.
-- `AWS_KEYPAIR`: the EC2 key pair for the cluster nodes.
-- `JOB_OWNER`: a tag that marks the owner of the job.
+- `AWS_KEYPAIR`: the EC2 key pair for the cluster nodes
+- `JOB_OWNER`: a tag that marks the owner of the job
 - `KINESIS_OUTPUT`: the name of the Kinesis stream to write recovered events to. This is usually your pipeline's raw stream.
-- `RECOVERY_CONFIG`: the Base64-encoded recovery configuration, as described in [Configuration](/docs/monitoring/recovering-failed-events/manual/configuration/index.md).
-- `IGLU_RESOLVER`: the Base64-encoded Iglu resolver configuration, as described in [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md#encode-configuration).
+- `RECOVERY_CONFIG`: the Base64-encoded recovery configuration, as described in [Configuration](/docs/monitoring/recovering-failed-events/manual/configuration/index.md)
+- `IGLU_RESOLVER`: the Base64-encoded Iglu resolver configuration, as described in [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md#encode-configuration)
 
 The playbook copies the jar to the cluster and runs it with:
 
@@ -71,10 +71,10 @@ The templates also set `classloader.check-leaked-classloader` to `false`. This h
 
 The cluster's instance profile, `AWS_IAM_ROLE`, needs:
 
-- `kinesis:DescribeStream` and `kinesis:PutRecords` on the output stream.
-- `kms:GenerateDataKey` on the stream's key, if the stream is encrypted.
-- S3 list and read access on the input path.
-- S3 write access on the failed, unrecoverable, and directory output paths.
+- `kinesis:DescribeStream` and `kinesis:PutRecords` on the output stream
+- `kms:GenerateDataKey` on the stream's key, if the stream is encrypted
+- S3 list and read access on the input path
+- S3 write access on the failed, unrecoverable, and directory output paths
 
 :::warning[The default EMR role can't write to Kinesis]
 AWS's managed `AmazonElasticMapReduceforEC2Role` policy, used by `EMR_EC2_DefaultRole`, grants `kinesis:DescribeStream` and the single-record `kinesis:PutRecord`, but not `kinesis:PutRecords`.
@@ -111,16 +111,16 @@ The job doesn't expand globs, so a path such as `s3a://bucket/path/*` doesn't wo
 
 ### Test a configuration with a dry run
 
-To check what a recovery produces before sending events to your pipeline, use `--directory-output` without `--output`. The job then writes each recovered event as a line of JSON, keyed by the collector payload's field names such as `path`, `querystring`, `body`, and `headers`. The files are named `part-<id>-<n>.json`, in one directory per hour: `<directory>/<yyyy-MM-dd--HH>/`. If a run recovers no events, it writes no files.
+To check what a recovery produces before sending events to your pipeline, use `--directory-output` without `--output`. The job then writes each recovered event as a line of JSON, keyed by the Collector payload's field names, such as `path`, `querystring`, `body`, and `headers`. The files are named `part-<id>-<n>.json`, in one directory per hour: `<directory>/<yyyy-MM-dd--HH>/`. If a run recovers no events, it writes no files.
 
 To test a configuration against a small sample on your own machine, use the [command line tool](/docs/monitoring/recovering-failed-events/manual/testing/index.md) instead.
 
 ## Understand delivery and reruns
 
-The job retries records that Kinesis throttles until they're written, and never drops a record. When a run finishes successfully, every recovered event is in the output stream or directory. To track a run while it's in progress, see [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#aws-flink).
+The job retries records that Kinesis throttles until they're written, and never drops a record. When a run finishes successfully, every recovered event is in the output stream or directory. To track a run while it's in progress, see [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#monitor-the-flink-job-on-aws).
 
 If a run fails, Flink doesn't restart it. To recover the events, run the job again on the same input. The new run starts from the beginning, so it sends again any events that the failed run had already written to Kinesis. Your pipeline might therefore receive some events twice.
 
 :::note[Checkpointing is not supported]
-The job has `--checkpoint-interval` and `--checkpoint-dir` arguments, which turn on Flink checkpointing so that a failed run can be resumed with `flink run -s <checkpoint>`. Don't use them yet. On EMR 7.13, resuming from some checkpoints fails every time because of [FLINK-25920](https://issues.apache.org/jira/browse/FLINK-25920). A resumed run also sends again the events written after its checkpoint, so it doesn't avoid duplicates.
+The job has `--checkpoint-interval` and `--checkpoint-dir` arguments, which turn on Flink checkpointing so that a failed run can be resumed with `flink run -s <checkpoint>`. Don't use them. On EMR 7.13, resuming from some checkpoints fails every time because of [FLINK-25920](https://issues.apache.org/jira/browse/FLINK-25920). A resumed run also sends again the events written after its checkpoint, so it doesn't avoid duplicates.
 :::

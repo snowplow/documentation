@@ -11,7 +11,7 @@ When you run a recovery job against your production pipeline, you can track its 
 
 The first is the job's outputs: the `failed` and `unrecoverable` paths in S3 or GCS, and the Kinesis stream or Pub/Sub topic that receives recovered events. The second is the job's own counts of how many failed events it recovered, couldn't recover, or found to be unrecoverable.
 
-## AWS (Flink)
+## Monitor the Flink job on AWS
 
 When a run finishes successfully, the Flink job logs a summary to the EMR step log:
 
@@ -33,7 +33,7 @@ To estimate how many records the job has written to Kinesis so far, subtract `nu
 
 If `numRecordsOutErrors` keeps rising and the job makes no progress, check the task logs for `AccessDeniedException` or `KMSAccessDeniedException`. See [Grant permissions](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#grant-permissions).
 
-## GCP (Beam)
+## Monitor the Beam job on GCP
 
 On Google Dataflow, the Beam job reports real-time metrics using Dataflow's built-in counters:
 

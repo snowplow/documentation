@@ -35,26 +35,18 @@ As a Snowplow customer you already benefit from 24x7 monitoring of pipeline coll
 
 To start using the API you’ll need authorization credentials.
 
-First, you’ll need to:
+You’ll need a Snowplow API key and its key ID, with read access to pipelines. See [create an API key](/docs/account-management/index.md#create-an-api-key).
 
-- [Create a new user account for your API authorization in console](https://console.snowplowanalytics.com/users)
-- Request the `clientid` and `clientsecret` for the API service from the [admin section in console](https://console.snowplowanalytics.com/credentials).
-
-Once you have these you can exchange credentials for a token.
-
-Here is an example CURL to use to fetch the token:
+Exchange your API key and key ID for an access token, which is valid for 24 hours. Your organization ID is on the [**Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```bash
-curl --request POST \
-  --url 'https://id.snowplowanalytics.com/oauth/token' \
-  --header 'content-type: application/x-www-form-urlencoded' \
-  --data grant_type=password \
-  --data username=USER@DOMAIN.COM \
-  --data password='PASSWORD' \
-  --data audience=https://snowplowanalytics.com/api/ \
-  --data client_id='YOUR_CLIENT_ID' \
-  --data client_secret='YOUR_CLIENT_SECRET'
+curl \
+  --header 'X-API-Key-ID: <API_KEY_ID>' \
+  --header 'X-API-Key: <API_KEY>' \
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
+
+The response contains the token, as `{ "accessToken": "<JWT>" }`. [Obtain an access token](/docs/account-management/index.md#obtain-an-access-token) has the details.
 
 This token will be needed in any request to the API in the form of `Authorization: Bearer {{token}}`
 

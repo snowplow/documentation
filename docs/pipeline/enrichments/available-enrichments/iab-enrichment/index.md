@@ -4,6 +4,7 @@ sidebar_position: 0
 sidebar_label: IAB bot detection
 description: "Identify bot and spider traffic using the IAB/ABC International Spiders and Bots List based on IP and user agent."
 keywords: ["IAB enrichment", "bot detection", "spider detection"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

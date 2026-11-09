@@ -4,6 +4,7 @@ sidebar_position: 8
 sidebar_label: HTTP header extractor
 description: "Extract HTTP request headers using regex patterns and attach them to events as entities."
 keywords: ["HTTP headers", "header extraction", "request headers"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

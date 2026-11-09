@@ -5,6 +5,7 @@ date: "2021-11-24"
 sidebar_position: 100
 description: "Configure IP forwarding, sp.js hosting, custom paths, common event mapping, and entity merging for the Snowplow Client in GTM Server Side."
 keywords: ["Snowplow Client configuration", "common event mapping", "entity merging", "sp.js hosting"]
+content_type: reference
 ---
 
 :::tip[Populating common User Data]

@@ -4,6 +4,7 @@ sidebar_label: "Destinations"
 sidebar_position: 6
 description: "Send Snowplow data to warehouses, lakes, and third-party platforms with event forwarding, native integrations, and reverse ETL for data activation."
 keywords: ["data destinations", "event forwarding", "data warehouses", "data lakes", "reverse ETL"]
+content_type: landing
 ---
 
 Read more about Snowplow data destinations [here](/docs/fundamentals/destinations/index.md).

@@ -5,6 +5,7 @@ sidebar_position: 5
 sidebar_label: "Pipeline"
 description: "Configure collector settings, manage enrichments, and secure your Snowplow data pipeline infrastructure."
 keywords: ["pipeline configuration", "Snowplow pipeline", "collector configuration"]
+content_type: landing
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

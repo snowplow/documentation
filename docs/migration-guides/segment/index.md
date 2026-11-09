@@ -5,6 +5,7 @@ date: "2025-08-04"
 sidebar_position: 0
 description: "A guide for technical implementers migrating from Segment to Snowplow, covering event structure differences, tracking plan translation, and a phased migration approach."
 keywords: ["Segment", "migration", "tracking plan", "event tracking", "Snowplow CLI"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

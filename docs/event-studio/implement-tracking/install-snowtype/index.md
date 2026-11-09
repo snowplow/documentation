@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Install Snowtype, authenticate with your Snowplow account, and initialize your project."
 keywords: ["Snowtype", "install", "setup", "getting started", "code generation", "authenticate", "initialize"]
 date: "2026-03-19"
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

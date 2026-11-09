@@ -4,6 +4,7 @@ sidebar_label: "Programmatic management"
 sidebar_position: 70
 description: "Automate Event Studio workflows using Snowplow CLI for git-ops integration or the APIs for custom tooling and CI/CD pipelines."
 keywords: ["Snowplow CLI", "API", "automation", "git-ops", "CI/CD", "programmatic access"]
+content_type: landing
 ---
 
 Data structures and tracking plans can be managed programmatically, enabling git-ops workflows, CI/CD integration, and custom tooling.

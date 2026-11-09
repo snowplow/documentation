@@ -5,6 +5,7 @@ sidebar_position: 30
 date: "2025-02-25"
 description: "How Snowplow Identities resolves user identity across sites with different cookie domains using cross-domain tracking."
 keywords: ["identities", "identity resolution", "cross-domain tracking", "cross-navigation"]
+content_type: concept
 ---
 
 When users navigate between sites with different cookie domains, or from a mobile app to a webview, each destination assigns its own `domain_userid`. Without cross-domain tracking, these appear as separate users. [Cross-domain](/docs/events/cross-navigation/index.md), or cross-navigation, tracking solves this by passing the `domain_userid` from the source site or app in the URL. Events captured on the destination contain a `refr_domain_userid` field with the source's `domain_userid`.

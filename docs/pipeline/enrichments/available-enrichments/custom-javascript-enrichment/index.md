@@ -4,6 +4,7 @@ sidebar_position: 13
 sidebar_label: Custom JavaScript
 description: "Write custom JavaScript code to transform and enrich events with flexible data manipulation logic."
 keywords: ["JavaScript enrichment", "custom enrichment", "event transformation"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

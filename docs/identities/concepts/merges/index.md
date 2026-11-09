@@ -5,6 +5,7 @@ sidebar_position: 10
 date: "2025-02-25"
 description: "How Snowplow Identities merges Snowplow IDs when identifiers link previously separate users."
 keywords: ["identities", "identity resolution", "merges", "Snowplow ID"]
+content_type: concept
 ---
 
 Merges happen when an event contains identifiers that are linked to different Snowplow IDs. This typically occurs when a user's anonymous activity is later connected to their known identity.

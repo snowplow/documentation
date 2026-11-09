@@ -5,6 +5,7 @@ date: "2024-01-18"
 sidebar_position: 1
 description: "Create and manage tracking plans in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
 keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

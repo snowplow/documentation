@@ -4,6 +4,7 @@ sidebar_position: 12
 sidebar_label: Bot detection
 description: "Consolidate bot indicators from multiple enrichments into a single entity for easier filtering and analysis."
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

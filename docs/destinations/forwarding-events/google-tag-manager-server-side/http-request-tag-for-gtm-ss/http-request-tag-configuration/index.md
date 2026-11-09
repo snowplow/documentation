@@ -5,6 +5,7 @@ date: "2022-01-06"
 sidebar_position: 100
 description: "Configure JSON request body construction, entity mapping, custom headers, and post-processing for the HTTP Request Tag in GTM Server Side."
 keywords: ["HTTP Request Tag configuration", "JSON body", "entity mapping", "custom endpoints"]
+content_type: reference
 ---
 
 In the following short video a complete example configuration of the Snowplow GTM SS HTTP Request Tag is presented.

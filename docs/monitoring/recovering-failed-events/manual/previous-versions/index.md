@@ -9,7 +9,7 @@ sidebar_custom_props:
   outdated: true
 ---
 
-This page describes how to run event recovery on AWS with version 0.7.2 and earlier, using either the Spark job or the Flink job. It's kept for reference. Neither setup is supported.
+This page describes how to recover [failed events](/docs/fundamentals/failed-events/index.md) on AWS with version 0.7.2 and earlier, using either the Spark job or the Flink job. It's kept for reference. Neither setup is supported.
 
 Upgrade to the current [Flink job](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md). See the [0.8.0 upgrade guide](/docs/monitoring/recovering-failed-events/manual/upgrade-guides/0-8-0-upgrade-guide/index.md).
 
@@ -30,17 +30,17 @@ dataflow-runner run-transient \
 
 Where:
 
-- `BUCKET_INPUT`: the S3 bucket that holds the failed events to recover.
-- `BUCKET_INPUT_DIRECTORY`: the directory in `BUCKET_INPUT` to read failed events from.
-- `AWS_REGION`: the region to run the cluster in, for example `eu-central-1`.
-- `AWS_SUBNET`: the subnet to run the cluster in.
-- `AWS_IAM_ROLE`: the IAM role for the cluster nodes.
-- `AWS_KEYPAIR`: the EC2 key pair for the cluster nodes.
-- `JOB_OWNER`: a tag that marks the owner of the job.
-- `RECOVERY_VERSION`: the application version, for example `0.7.2`.
-- `RECOVERY_CONFIG`: the Base64-encoded recovery configuration, as described in [Configuration](/docs/monitoring/recovering-failed-events/manual/configuration/index.md).
-- `IGLU_RESOLVER`: the Base64-encoded Iglu resolver configuration, as described in [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md#encode-configuration).
-- `KINESIS_OUTPUT`: the Kinesis stream to write recovered events to.
+- `BUCKET_INPUT`: the S3 bucket that holds the failed events to recover
+- `BUCKET_INPUT_DIRECTORY`: the directory in `BUCKET_INPUT` to read failed events from
+- `AWS_REGION`: the region to run the cluster in, for example `eu-central-1`
+- `AWS_SUBNET`: the subnet to run the cluster in
+- `AWS_IAM_ROLE`: the IAM role for the cluster nodes
+- `AWS_KEYPAIR`: the EC2 key pair for the cluster nodes
+- `JOB_OWNER`: a tag that marks the owner of the job
+- `RECOVERY_VERSION`: the application version, for example `0.7.2`
+- `RECOVERY_CONFIG`: the Base64-encoded recovery configuration, as described in [Configuration](/docs/monitoring/recovering-failed-events/manual/configuration/index.md)
+- `IGLU_RESOLVER`: the Base64-encoded Iglu resolver configuration, as described in [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md#encode-configuration)
+- `KINESIS_OUTPUT`: the Kinesis stream to write recovered events to
 
 The playbook copies the job jar from `s3://<bucket>/3-enrich/snowplow-event-recovery/`. Copy `snowplow-event-recovery-spark-0.7.2.jar` there from the Snowplow hosted assets bucket for your region, or from the [0.7.2 GitHub release](https://github.com/snowplow-incubator/snowplow-event-recovery/releases/tag/0.7.2).
 
@@ -104,9 +104,9 @@ The cluster template runs a bootstrap action from `s3://<bucket>/3-enrich/snowpl
 
 The CloudWatch agent publishes the job's metrics to the `snowplow/event-recovery` namespace, including:
 
-- `taskmanager_container_XXXX_XXX__Process_0_events_recovered`: the number of recovered events.
-- `taskmanager_container_XXXX_XXX__Process_0_events_failed`: the number of failed recovery attempts.
-- `taskmanager_container_XXXX_XXX__Process_0_events_unrecoverable`: the number of unrecoverable events.
-- `taskmanager_container_XXXX_XXX__Process_0_numRecordsIn`: the total number of events read.
+- `taskmanager_container_XXXX_XXX__Process_0_events_recovered`: the number of recovered events
+- `taskmanager_container_XXXX_XXX__Process_0_events_failed`: the number of failed recovery attempts
+- `taskmanager_container_XXXX_XXX__Process_0_events_unrecoverable`: the number of unrecoverable events
+- `taskmanager_container_XXXX_XXX__Process_0_numRecordsIn`: the total number of events read
 
 Flink's `numRecordsOut` metric for the Kinesis sink doesn't reflect the number of records written to the stream.

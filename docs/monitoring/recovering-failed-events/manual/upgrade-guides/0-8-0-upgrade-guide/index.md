@@ -7,7 +7,7 @@ keywords: ["event recovery 0.8.0", "upgrade guide", "Spark to Flink migration", 
 date: "2026-11-09"
 ---
 
-Version 0.8.0 makes the Flink job the only way to run event recovery on AWS, and moves it to a current EMR release. This guide covers what you need to change if you run recoveries with the Spark job, or with the Flink job from version 0.7.x or earlier.
+Version 0.8.0 makes the Flink job the only way to recover [failed events](/docs/fundamentals/failed-events/index.md) on AWS, and moves it to a current EMR release. This guide covers what you need to change if you run recoveries with the Spark job, or with the Flink job from version 0.7.x or earlier.
 
 Recovery configurations don't change. Configurations that work with 0.7.x work with 0.8.0.
 
@@ -29,7 +29,7 @@ The Flink job runs on Flink 1.20, and needs EMR 7.13 with Java 11. The cluster c
 
 ### CloudWatch metrics removed
 
-The 0.7.x bootstrap action installed a CloudWatch agent that published the job's metrics to the `snowplow/event-recovery` namespace. Version 0.8.0 has no bootstrap action, so these metrics are no longer published. Any dashboards or alarms based on them stop receiving data. See [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#aws-flink) for the summary and metrics that 0.8.0 provides.
+The 0.7.x bootstrap action installed a CloudWatch agent that published the job's metrics to the `snowplow/event-recovery` namespace. Version 0.8.0 has no bootstrap action, so these metrics are no longer published. Any dashboards or alarms based on them stop receiving data. See [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#monitor-the-flink-job-on-aws) for the summary and metrics that 0.8.0 provides.
 
 ### Checkpointing no longer used
 
@@ -41,15 +41,15 @@ Use the [0.8.0 dataflow-runner templates](https://github.com/snowplow-incubator/
 
 If you run the job with your own command line, rather than the templates, the Flink job accepts the Spark job's argument names `--failedOutput`, `--unrecoverableOutput`, `--batchSize`, and `--directoryOutput`. You need to replace `spark-submit` with `flink run -m yarn-cluster -sae`, and run it on a cluster that meets the [cluster requirements](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#cluster-requirements).
 
-Update any monitoring that relies on the Spark job's `event-recovery.driver.summary` metrics. See [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#aws-flink) for what the Flink job reports.
+Update any monitoring that relies on the Spark job's `event-recovery.driver.summary` metrics. See [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#monitor-the-flink-job-on-aws) for what the Flink job reports.
 
 ## Update your EMR configuration
 
 If you run the Flink job with the dataflow-runner templates, download the [0.8.0 templates](https://github.com/snowplow-incubator/snowplow-event-recovery/tree/0.8.0/.dataflow-runner) and make these changes to your `run-transient` command:
 
 - Add the `assetsBucket` variable, set to the Snowplow hosted assets bucket for your region, for example `snowplow-hosted-assets-eu-central-1`. In 0.7.x, the playbook copied the jar from your own `bucket`.
-- Remove the `interval` variable.
-- Set `version` to `0.8.0`.
+- Remove the `interval` variable
+- Set `version` to `0.8.0`
 
 If you maintain your own cluster configuration, compare it with the templates. The main differences from 0.7.x are:
 

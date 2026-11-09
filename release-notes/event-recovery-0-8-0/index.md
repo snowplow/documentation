@@ -1,6 +1,8 @@
 ---
 title: "Event recovery 0.8.0"
+sidebar_label: "Event recovery 0.8.0"
 description: "The Flink job is the supported way to recover failed events on AWS, running on EMR 7.13. The Spark job is removed, and event recovery moves to the Snowplow Limited Use License."
+keywords: ["event recovery", "failed events", "Flink", "EMR", "upgrade"]
 date: "2026-11-09"
 category:
   - "Release notes"
@@ -32,7 +34,7 @@ Documentation for the Spark job and for earlier Flink releases is available unde
 
 This release also includes these changes:
 
-- Event recovery is licensed under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/)).
-- The command line tool's `run` command uses Enrich 6, and needs Java 21 or later.
-- The Beam job's Docker image runs on Java 11.
-- Dependencies are updated.
+- Event recovery is licensed under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/))
+- The command line tool's `run` command uses Enrich 6, and needs Java 21 or later
+- The Beam job's Docker image runs on Java 11
+- Dependencies are updated

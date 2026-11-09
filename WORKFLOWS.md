@@ -10,9 +10,10 @@ CI and deployment. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.m
 
 The site is deployed by **Cloudflare Pages** on push to `main`. Cloudflare runs the `yarn build:cf` script, which:
 
-1. Sets `NODE_OPTIONS='--max-old-space-size=4096'` (the build needs more than the default heap).
-2. Runs `docusaurus build`.
-3. Deletes `build/_redirects` — this is the file Docusaurus auto-generates from any installed redirect plugin. Removing it means nothing leaks into the deployed bundle. All redirects live in the [Cloudflare Worker](ARCHITECTURE.md#cloudflare-worker) instead.
+1. Fetches the full git history if the clone is shallow. Docusaurus takes each page's "Last updated" date from git, so a shallow clone gives every page the deploy date. Commits with a `Last-Update: ignore` trailer are skipped when working out the date (see `utils/last-update.js`); use it for bulk metadata changes.
+2. Sets `NODE_OPTIONS='--max-old-space-size=4096'` (the build needs more than the default heap).
+3. Runs `docusaurus build`.
+4. Deletes `build/_redirects` — this is the file Docusaurus auto-generates from any installed redirect plugin. Removing it means nothing leaks into the deployed bundle. All redirects live in the [Cloudflare Worker](ARCHITECTURE.md#cloudflare-worker) instead.
 
 Other `package.json` scripts:
 

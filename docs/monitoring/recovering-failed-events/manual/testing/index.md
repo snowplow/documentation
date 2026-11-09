@@ -13,6 +13,8 @@ For that purpose we provide a `snowplow-event-recovery` command line interface. 
 
 The CLI provides commands for validating (`snowplow-event-recovery validate`) and running test recoveries (`snowplow-event-recovery run`).  See `snowplow-event-recovery --help` for the most up-to-date options descriptions.
 
+The `run` command needs Java 21 or later. The `validate` command runs on earlier Java versions.
+
 ### Validate
 
 Validation checks configuration schema to verify that actual job can be ran. To validate the configuration, run:
@@ -20,6 +22,8 @@ Validation checks configuration schema to verify that actual job can be ran. To 
 ```
 snowplow-event-recovery validate --config /opt/scenarios.json
 ```
+
+By default, `validate` resolves schemas against Iglu Central. To use your own Iglu resolver configuration, add `--resolver /opt/resolver.json`.
 
 Which will result in:
 ```
@@ -52,14 +56,15 @@ into `good.txt` and json-serialized failed events into `bad.txt`.
 
 Which for successful recovery will print the progress and output summary:
 ```
-Config loaded
+Resolver and enrichments configured...
+Config loaded...
 Enriching event...
 Enriched event 2dfeb9b7-5a87-4214-8a97-a8b23176856b
 ...
 Total Lines: 156, Recovered: 142
 ```
 
-By default no enrichments are configured, but local-only (ones that do not depend on upstream resource storage) enrichments can be enabled by setting `--enrichments` flag:
+By default no enrichments are configured. To enable enrichments, set the `--enrichments` flag to a directory of enrichment configuration files. Only enrichments that don't need external resources are supported. For example, the IP lookups enrichment needs a database file, and the API request enrichment calls an API, so neither works. If the directory contains an enrichment that needs external resources, the command fails with an error. Otherwise, it runs the recovery with your enrichments:
 
 ```
 snowplow-event-recovery run --config $PWD/scenarios.json -o /tmp -i $PWD/input/ --resolver $PWD/resolver.json --enrichments $PWD/enrichments

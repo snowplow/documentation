@@ -3,67 +3,42 @@ title: "Monitor event recovery jobs"
 sidebar_label: "Monitoring"
 date: "2020-08-26"
 sidebar_position: 40
-description: "Track recovery job progress using EMR metrics, Google Dataflow UI, and business processing metrics for failed, recovered, and unrecoverable events."
-keywords: ["recovery job monitoring", "EMR recovery metrics", "Dataflow monitoring"]
+description: "Track recovery job progress using the Flink job's run summary and metrics on EMR, or the Beam job's metrics in Google Dataflow."
+keywords: ["recovery job monitoring", "EMR recovery metrics", "Flink recovery metrics", "Dataflow monitoring"]
 ---
 
-When running a recovery job in your production pipeline, you'll likely find it useful to keep an eye on it's progress.
+When you run a recovery job against your production pipeline, you can track its progress in two ways.
 
-In order to verify the process is running properly there are several locations in your **infrastructure** that can be monitored, depending on your runtime environment. These are: datasinks (for recovery job processed output): `failedOutput` (S3/GCS bucket), `unrecoverableOutput` (S3/GCS bucket), `output` (Kinesis/PubSub streams) and job runners (tracking job status and processing in real-time).
+The first is the job's outputs: the `failed` and `unrecoverable` paths in S3 or GCS, and the Kinesis stream or Pub/Sub topic that receives recovered events. The second is the job's own counts of how many failed events it recovered, couldn't recover, or found to be unrecoverable.
 
-Beyond monitoring infrastructure, each job exposes “business” processing metrics that summarise failed, unrecoverable and recovered bad rows that have been processed.
+## AWS (Flink)
 
-### Amazon EMR
+When a run finishes successfully, the Flink job logs a summary to the EMR step log:
 
-On EMR recovery job exposes run summary using a [built-in reporting library delivering](https://spark.apache.org/docs/latest/monitoring.html) count summaries for:
-
-- `event-recovery.driver.summary.Recovered`
-- `event-recovery.driver.summary.Failed`
-- `event-recovery.driver.summary.Unrecoverable`
-
-The metrics can be accessed trough variety of ways (sinks) and can be configured upon cluster creation parameters.
-
-To enable desired sink set EMR’s `spark-metrics` classification parameters following [possible values](https://github.com/apache/spark/blob/master/conf/metrics.properties.template) using EMR’s classifiers.
-
-To expose metrics over http accessible at `http://${SPARK_HOST}:4040/metrics/json`:
-
-```json
-  {
-    "classification": "spark-metrics",
-    "properties": {
-        "spark.metrics.namespace": "event-revovery",
-        "*.sink.servlet.class": "org.apache.spark.metrics.sink.MetricsServlet",
-        "*.sink.servlet.period": "1",
-        "*.sink.servlet.unit": "seconds",
-        "*.sink.servlet.path": "/metrics/json",
-        "master.sink.servlet.path": "/metrics/master/json",
-        "applications.sink.servlet.path": "metrics/applications/json",
-        "*.source.metrics.class": "org.apache.spark.metrics.source.Metrics"
-
-    }
+```txt
+Recovery finished: <n> recovered and written to Kinesis stream <stream> and <directory>, <n> failed (written to <path>), <n> unrecoverable (written to <path>)
 ```
 
-To push metrics to output logs to console appender:
+The summary only names the outputs that you set. Each input event is counted once. Failed and unrecoverable events are written to S3, and never reach Kinesis.
 
-```json
-  {
-    "classification": "spark-metrics",
-    "properties": {
-        "spark.metrics.namespace": "$name",
-        "*.sink.console.class": "org.apache.spark.metrics.sink.ConsoleSink",
-        "*.source.metrics.class": "org.apache.spark.metrics.source.Metrics"
+While the job runs, you can follow its metrics in the Flink web UI, or through a Flink metrics reporter if you configure one on the cluster. The reference templates don't configure a reporter.
 
-    }
-```
+| Metric | Meaning |
+|---|---|
+| `events.recovered`, `events.failed`, `events.unrecoverable` | The number of events leaving the recovery step, before they're written anywhere. `events.recovered` counts events handed to the Kinesis sink, not events that Kinesis accepted. |
+| `numRecordsOut` on the `kinesis: Writer` operator | The number of records sent to Kinesis, counting each retry again. |
+| `numRecordsOutErrors` on the `kinesis: Writer` operator | The number of records that Kinesis rejected, and that the job will retry. |
 
-For more sinks see [Spark documentation on monitoring](https://spark.apache.org/docs/latest/monitoring.html).
+To estimate how many records the job has written to Kinesis so far, subtract `numRecordsOutErrors` from `numRecordsOut` on the `kinesis: Writer` operator. This relies on Kinesis reporting an accurate failed record count for each `PutRecords` call.
 
-### Google Dataflow
+If `numRecordsOutErrors` keeps rising and the job makes no progress, check the task logs for `AccessDeniedException` or `KMSAccessDeniedException`. See [Grant permissions](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#grant-permissions).
 
-On Google Dataflow recovery job exposes realtime run metrics using a dataflow’s native functions. The metrics are:
+## GCP (Beam)
+
+On Google Dataflow, the Beam job reports real-time metrics using Dataflow's built-in counters:
 
 - `recovered`
 - `failed`
 - `unrecoverable`
 
-The metrics can be accessed through the web UI directly in Dataflow.
+You can view the metrics in the Dataflow web UI.

@@ -86,6 +86,7 @@ All pipeline apps:
 * [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) _(0.2.0+)_
 * Other loaders
 * [Snowbridge](/docs/api-reference/snowbridge/index.md) _(2.4.0+)_
+* [Event recovery](/docs/monitoring/recovering-failed-events/manual/index.md) _(0.8.0+)_
 * Community Edition terraform modules _(2024+)_
 
 </td>

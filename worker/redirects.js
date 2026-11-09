@@ -344,6 +344,7 @@ const fallbackRules = [
   ['/docs/monitoring/monitoring-failed-events/troubleshooting/*', '/docs/monitoring/:splat', 301],
   ['/docs/monitoring/monitoring-failed-events/alerts/*', '/docs/monitoring/alerts/:splat', 301],
   ['/docs/monitoring/monitoring-failed-events/*', '/docs/monitoring/:splat', 301],
+  ['/docs/monitoring/recovering-failed-events/manual/running/spark/*', '/docs/monitoring/recovering-failed-events/manual/previous-versions/', 301],
   ['/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/*', '/docs/pipeline/enriched-tsv-format/index.md/:splat', 301],
   ['/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/*', '/docs/pipeline/enriched-tsv-format/:splat', 301],
   ['/docs/fundamentals/schemas/json-schema-reference/*', '/docs/api-reference/json-schema-reference/:splat', 301],

@@ -18,13 +18,13 @@ The iOS and Android trackers can connect your app to [Signals](/docs/signals/ind
 
 The tracker identifies the user and session with the `userId` and `sessionId` from the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md). In Signals, these correspond to the built-in `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Define your attribute groups, services, and interventions with these keys to use them from your app.
 
-:::note
+:::note[Tracker versions]
 Signals support is available from version 6.4.0 of the iOS tracker and version 6.5.0 of the Android tracker.
 :::
 
 ## Configure the tracker
 
-Pass a `SignalsConfiguration` with your Signals API URL when creating the tracker. You'll find the URL on the Console **Signals** > **Overview** page. The app doesn't need an API key.
+Pass a `SignalsConfiguration` with your Signals API URL when creating the tracker. You'll find the URL on the **Signals** > **Overview** page in Console. The app doesn't need an API key.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -73,7 +73,7 @@ TrackerController tracker = Snowplow.createTracker(
   </TabItem>
 </Tabs>
 
-The `timeout` is optional and defaults to 5 seconds. If you omit the URL scheme, the tracker uses `https://`.
+The `timeout` is optional and defaults to five seconds. If you omit the URL scheme, the tracker uses `https://`.
 
 Access the Signals controller with `tracker.signals`, or `tracker.getSignals()` in Java. Without a `SignalsConfiguration`, its methods log a message and don't send any requests.
 

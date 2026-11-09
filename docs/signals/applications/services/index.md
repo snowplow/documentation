@@ -93,8 +93,8 @@ Specify the version of each attribute group in the `attribute_groups` list using
 
 Each service has an access mode that decides who can read its attributes:
 
-* `authenticated`: reading the service requires a Snowplow API token, so only your own backend can read it. This is the default
-* `public`: websites and apps can also read the service directly, without a token, for one identifier at a time. See [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md)
+* `authenticated`: reading the service requires a Snowplow API token, so only your own backend can read it. This is the default.
+* `public`: websites and apps can also read the service directly, without a token, for one identifier at a time. See [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md).
 
 Use a public service when you want to personalize a page or screen with the current user's attributes, without building a backend to hold the API token and proxy the request.
 

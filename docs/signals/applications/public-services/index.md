@@ -12,10 +12,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-A [service](/docs/signals/applications/services/index.md) with the `public` access mode can be read directly from a website or mobile app, without a Snowplow API token. Use this to personalize a page or screen with the current user's attributes, such as showing recently viewed products or adapting content to engagement level, without building a backend to proxy the request.
+Websites and mobile apps can read a [service](/docs/signals/applications/services/index.md) with the `public` access mode directly, without a Snowplow API token. Use this to personalize a page or screen with the current user's attributes, such as showing recently viewed products or adapting content to engagement level, without building a backend to proxy the request.
 
 Each read returns every attribute in the service for one identifier. Reading a public service works the same way as [retrieving attributes](/docs/signals/applications/retrieve-attributes/index.md) with an API token, with these differences:
-* Only services with the `public` access mode can be read this way. Any other service returns a `404` error
+* Only services with the `public` access mode can be read this way. Any other service returns a `404` error.
 * The identifier must be a UUID, and each request reads one identifier
 * Requests are allowed from any origin, and responses are never cached
 
@@ -31,7 +31,7 @@ The service must be keyed by the same attribute key that your application reads 
 
 ## Read the service
 
-The Signals browser plugin and the iOS and Android trackers read the service for the current user by default. You'll need your Signals API URL, from the Console **Signals** > **Overview** page. No other [connection credentials](/docs/signals/connection/index.md#connection-credentials) are needed.
+The Signals browser plugin and the iOS and Android trackers read the service for the current user by default. You'll need your Signals API URL, from the **Signals** > **Overview** page in Console. You don't need any other [connection credentials](/docs/signals/connection/index.md#connection-credentials).
 
 <Tabs groupId="signals-client" queryString>
 <TabItem value="browser" label="Browser" default>

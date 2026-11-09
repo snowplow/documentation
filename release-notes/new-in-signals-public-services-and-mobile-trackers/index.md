@@ -1,7 +1,7 @@
 ---
 title: "New in Signals: read attributes from websites and apps, and Signals in the mobile trackers"
 sidebar_label: "Public services and mobile tracker support"
-description: "Public Signals services can be read directly from a website or app without an API token, and the iOS and Android trackers can now read attributes and receive interventions."
+description: "Public Signals services can be read directly from a website or app without an API token, and the iOS and Android trackers can read attributes and receive interventions."
 keywords: ["snowplow signals", "public services", "mobile trackers", "interventions", "release notes"]
 date: "2026-11-08"
 category:
@@ -10,11 +10,11 @@ components:
   - "Signals"
   - "Trackers"
 ---
-Your websites and apps can now read Signals attributes directly, without an API token or a backend to proxy the request.
+Your websites and apps can read Signals attributes directly, without an API token or a backend to proxy the request.
 
 ### Public services
 
-A service now has an access mode. Services are `authenticated` by default, and need an API token to read, as before. A service with the `public` access mode can also be read without a token, for one UUID identifier at a time, such as the current user's `domain_userid`. Set the access mode in Console, where public services are marked with a **Public** badge, or with the Python SDK.
+Services have an access mode. Services are `authenticated` by default, and need an API token to read, as before. A service with the `public` access mode can also be read without a token, for one UUID identifier at a time, such as the current user's `domain_userid`. Set the access mode in Console, where public services are marked with a **Public** badge, or with the Python SDK.
 
 Anyone who has an identifier can read a public service's attributes for it, so only include attributes that are safe to show to the user they describe. See [Read attributes from websites and apps](/docs/signals/applications/public-services/).
 

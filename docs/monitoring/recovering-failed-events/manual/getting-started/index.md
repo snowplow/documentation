@@ -34,7 +34,7 @@ The typical flow for recovery and some prerequisites to consider would be:
 
 **Testing the configuration**
 
-- Ability to edit/run a Scala script locally
+- Ability to run the [command line tool](/docs/monitoring/recovering-failed-events/manual/testing/index.md) locally, which needs Java 21 or later
 
 **Run the recovery**
 
@@ -42,4 +42,4 @@ The typical flow for recovery and some prerequisites to consider would be:
 
 **Monitor the recovery**
 
-- Access to DataFlow UI (GCP) or EMR reporting (AWS)
+- Access to the Dataflow UI (GCP), or to the EMR step logs and Flink web UI (AWS)

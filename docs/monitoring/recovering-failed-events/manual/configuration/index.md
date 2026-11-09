@@ -130,7 +130,7 @@ In principle data is sourced from bucket storage and delivered back into a colle
 
 #### AWS
 
-<table><tbody><tr><td>input</td><td>output</td><td>failed output</td><td>unrecoverable output</td></tr><tr><td>S3<br/>(<code>--input</code>)</td><td>Kinesis<br/>(<code>--output</code>)</td><td>S3<br/>(<code>--failedOutput</code>)</td><td>S3<br/>(<code>--unrecoverableOutput</code>)</td></tr></tbody></table>
+<table><tbody><tr><td>input</td><td>output</td><td>failed output</td><td>unrecoverable output</td></tr><tr><td>S3<br/>(<code>--input</code>)</td><td>Kinesis<br/>(<code>--output</code>)</td><td>S3<br/>(<code>--failed</code>)</td><td>S3<br/>(<code>--unrecoverable</code>)</td></tr></tbody></table>
 
 #### GCP
 

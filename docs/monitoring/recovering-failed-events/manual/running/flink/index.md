@@ -1,63 +1,118 @@
 ---
-title: "Run event recovery on Flink"
+title: "Run event recovery on AWS with Flink"
 date: "2020-04-14"
 sidebar_position: 10
-sidebar_label: "Flink"
-description: "Deploy event recovery jobs on Apache Flink using EMR with fault tolerance and CloudWatch metrics monitoring."
-keywords: ["Flink event recovery", "EMR Flink recovery"]
+sidebar_label: "AWS - Flink"
+description: "Run the event recovery Flink job on Amazon EMR to recover failed events from S3 into a Kinesis stream."
+keywords: ["Flink event recovery", "EMR Flink recovery", "AWS event recovery", "Kinesis recovery"]
 ---
 
-The Flink job reads bad rows from an S3 location and stores the recovered payloads in Kinesis, unrecovered and unrecoverable in other S3 buckets.
+The Flink job reads [failed events](/docs/fundamentals/failed-events/index.md) from S3, applies your recovery configuration, and writes the recovered events to a Kinesis stream. Events that the configuration can't fix are written back to S3, split into failed and unrecoverable.
 
-#### Building
+Use the Flink job for pipelines running on AWS. For pipelines on GCP, use the [Beam job](/docs/monitoring/recovering-failed-events/manual/running/gcp-beam/index.md).
 
-To build the fat jar, run:
+This page describes version 0.8.0. If you're upgrading from an earlier version, or from the Spark job, read the [0.8.0 upgrade guide](/docs/monitoring/recovering-failed-events/manual/upgrade-guides/0-8-0-upgrade-guide/index.md) first.
 
-```bash
-sbt flink/assembly
-```
+## Run the job on EMR
 
-#### Running
+The job runs as a step on a transient EMR cluster. The simplest way to start one is with [dataflow-runner](https://github.com/snowplow/dataflow-runner), using the [reference templates](https://github.com/snowplow-incubator/snowplow-event-recovery/tree/0.8.0/.dataflow-runner) `flink-cluster.json.tmpl` and `flink-playbook.json.tmpl`.
 
-Event recovery jobs are usually ran using our [dataflow-runner](https://github.com/snowplow/dataflow-runner) application. A configuration template for running is [available in the repository](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/master/.dataflow-runner).
-
-To run a transient EMR cluster and execute the job using the templates, download [Flink dataflow-runner templates](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/master/.dataflow-runner) from the repository and run:
+Download both templates and run:
 
 ```bash
 dataflow-runner run-transient \
-  --emr-playbook flink-playbook.json.tmpl \
   --emr-config flink-cluster.json.tmpl \
-  --vars bucket,$BUCKET_INPUT,region,$AWS_REGION,subnet,$AWS_SUBNET,role,$AWS_IAM_ROLE,keypair,$AWS_KEYPAIR,client,$JOB_OWNER,version,$RECOVERY_VERSION,config,$RECOVERY_CONFIG,resolver,$IGLU_RESOLVER,output,$KINESIS_OUTPUT,inputdir,$BUCKET_INPUT_DIRECTORY,interval,$INTERVAL
-  ```
+  --emr-playbook flink-playbook.json.tmpl \
+  --vars bucket,$BUCKET,inputdir,$INPUT_DIRECTORY,assetsBucket,$ASSETS_BUCKET,version,0.8.0,region,$AWS_REGION,subnet,$AWS_SUBNET,role,$AWS_IAM_ROLE,keypair,$AWS_KEYPAIR,client,$JOB_OWNER,output,$KINESIS_OUTPUT,config,$RECOVERY_CONFIG,resolver,$IGLU_RESOLVER
+```
+
 Where:
-- `BUCKET_INPUT` - S3 bucket containing bad events to be recovered (eg. geoffs-bad-events)
-- `BUCKET_INPUT_DIRECTORY` - directory in the `BUCKET_INPUT` to use as the source for bad events
-- `AWS_REGION` - region in which the job is being ran (eg. eu-central-1)
-- `AWS_SUBNET` - network subnet to run the job in (eg. subnet-435010347a21886ab)
-- `AWS_IAM_ROLE` - AWS IAM role to assume while running the job (eg. geoffs-recovery-role)
-- `AWS_KEYPAIR` - AWS EC2 key pair to use for the instances (eg. geoffs-keypair)
-- `JOB_OWNER` - tag to use to mark the owner of the job (eg. goeff)
-- `RECOVERY_VERSION` - application version (eg. 0.6.0)
-- `RECOVERY_CONFIG` - recovery job config as described in [Configuration](../../configuration/index.md)
-- `IGLU_RESOLVER` - iglu resolver configuration as described in  [Configuration](../../configuration/index.md)
-- `KINESIS_OUTPUT` - Kinesis stream to output recovered events to
-- `INTERVAL` - job checkpointing interval (we recommend starting with 10 minutes and tuning to your job's characteristics)
 
+- `BUCKET`: the S3 bucket that holds the failed events to recover. The job also writes its failed and unrecoverable outputs and the EMR logs to this bucket, under `failed/`, `unrecoverable/`, and `logs/`.
+- `INPUT_DIRECTORY`: the path in `BUCKET` to read failed events from, starting with `/`, for example `/partitioned/enrichment_failures/`
+- `ASSETS_BUCKET`: the Snowplow hosted assets bucket that holds the job jar. Use `snowplow-hosted-assets` in `eu-west-1`, or `snowplow-hosted-assets-<region>` in other regions, for example `snowplow-hosted-assets-eu-central-1`.
+- `AWS_REGION`: the region to run the cluster in, for example `eu-central-1`
+- `AWS_SUBNET`: the subnet to run the cluster in
+- `AWS_IAM_ROLE`: the EC2 instance profile for the cluster nodes. See [Grant permissions](#grant-permissions) for what it needs.
+- `AWS_KEYPAIR`: the EC2 key pair for the cluster nodes
+- `JOB_OWNER`: a tag that marks the owner of the job
+- `KINESIS_OUTPUT`: the name of the Kinesis stream to write recovered events to. This is usually your pipeline's raw stream.
+- `RECOVERY_CONFIG`: the Base64-encoded recovery configuration, as described in [Configuration](/docs/monitoring/recovering-failed-events/manual/configuration/index.md)
+- `IGLU_RESOLVER`: the Base64-encoded Iglu resolver configuration, as described in [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md#encode-configuration)
 
-The job uses [checkpointing](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/datastream/fault-tolerance/checkpointing/) to allow for job restarts. Kinesis connector which is a part of the checkpointing mechanism [guarantees](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/connectors/datastream/kinesis/#kinesis-sinks-and-fault-tolerance) at-least-once delivery semantics and provides backpressure to the job.
+The playbook copies the jar to the cluster and runs it with:
 
-#### Monitoring
+```bash
+flink run -m yarn-cluster -sae /home/hadoop/event-recovery.jar \
+  --input s3a://<bucket><inputdir> \
+  --output <stream> \
+  --failed s3a://<bucket>/failed \
+  --unrecoverable s3a://<bucket>/unrecoverable \
+  --region <region> \
+  --resolver <base64> \
+  --config <base64>
+```
 
-EMR Flink Job emits a wide range of metrics through Cloudwatch Agent which is installed during cluster bootstrap using a provided script (see project repo's dataflow-runner directory). Custom metrics include:
-- number of unrecoverable events in the run: `taskmanager_container_XXXX_XXX__Process_0_events_unrecoverable`
-- number of failed recovery attempts: `taskmanager_container_XXXX_XXX__Process_0_events_failed`
-- number of recovered events: `taskmanager_container_XXXX_XXX__Process_0_events_recovered`
-- total number of events submitted for processing: `taskmanager_container_XXXX_XXX__Process_0_numRecordsIn`
+The EMR step fails if the job fails. The step's log contains either the run summary or the failure message.
 
-The metrics are delivered to `snowplow/event-recovery` Cloudwatch namespace.
+### Cluster requirements
 
-Given a one-second aggregation in Cloudwatch the diagram should show an always increasing metrics that should balance themselves up to total sum.
+The templates already meet these requirements. If you build your own cluster configuration, it needs:
 
-:::note
-Flink's `numRecordsOut` metric for sinks does not reflect an actual number of records saved in the sink.
-:::
+- EMR release `7.13.0`, with the `Flink` application
+- Flink running on Java 11: set `env.java.home`, `containerized.master.env.JAVA_HOME`, and `containerized.taskmanager.env.JAVA_HOME` in `flink-conf`, and `JAVA_HOME` in `hadoop-env`, all to `/usr/lib/jvm/jre-11`
+- No bootstrap action
+- `client.heartbeat.timeout` set to `3650d` in `flink-conf`
+- An instance type that EMR 7.13 supports, such as `m5.xlarge`
+
+## Grant permissions
+
+The cluster's instance profile, `AWS_IAM_ROLE`, needs:
+
+- `kinesis:DescribeStream` and `kinesis:PutRecords` on the output stream
+- `kms:GenerateDataKey` on the stream's key, if the stream is encrypted
+- S3 list and read access on the input path
+- S3 write access on the failed, unrecoverable, and directory output paths
+
+If you use `EMR_EC2_DefaultRole`, add `kinesis:PutRecords` to it. Its managed policy, `AmazonElasticMapReduceforEC2Role`, only grants the single-record `kinesis:PutRecord`.
+
+If the role can't write to the stream, the job retries indefinitely and makes no progress, and the task logs show `AccessDeniedException` or `KMSAccessDeniedException`. Stop the run and fix the permissions.
+
+## Configure the job
+
+The job accepts the following arguments:
+
+| Argument | Description |
+|---|---|
+| `--input` | Required. The S3 path to read failed events from, using the `s3a://` scheme. |
+| `--output` | The name of the Kinesis stream to write recovered events to. |
+| `--directory-output` | A path to write recovered events to as files, instead of or as well as Kinesis. |
+| `--failed` | The path for failed events that the configuration didn't fix. Defaults to `<input>/unrecovered`. |
+| `--unrecoverable` | The path for failed events that can never be recovered. Defaults to `<failed>/unrecoverable` if `--failed` is set, otherwise `<input>/unrecoverable`. |
+| `--region` | Required. The region of the Kinesis stream. |
+| `--resolver` | Required. The Base64-encoded Iglu resolver configuration. |
+| `--config` | Required. The Base64-encoded recovery configuration. |
+| `--batch-size` | The number of records in each Kinesis `PutRecords` call, between 1 and 500. Defaults to 500. |
+| `--max-buffered` | The number of records the Kinesis sink buffers before applying backpressure. Defaults to 10000. |
+
+You must set `--output`, `--directory-output`, or both.
+
+The job also accepts the argument names used by the former Spark job: `--failedOutput` for `--failed`, `--unrecoverableOutput` for `--unrecoverable`, `--batchSize` for `--batch-size`, and `--directoryOutput` for `--directory-output`.
+
+### Choose the input
+
+`--input` is a directory or a single file. The job reads a directory recursively, including subdirectories. It skips hidden files, whose names start with `.` or `_`, and it skips its own failed, unrecoverable, and directory outputs. This means that if you run the job again on the same input, it doesn't pick up the failed events from the previous run.
+
+The job doesn't expand globs, so a path such as `s3a://bucket/path/*` doesn't work. Use `s3a://bucket/path/` instead.
+
+### Test a configuration with a dry run
+
+To check what a recovery produces before sending events to your pipeline, use `--directory-output` without `--output`. The job then writes JSON files under that path, with one recovered event per line, keyed by the Collector payload's field names, such as `path`, `querystring`, `body`, and `headers`.
+
+To test a configuration against a small sample on your own machine, use the [command line tool](/docs/monitoring/recovering-failed-events/manual/testing/index.md) instead.
+
+## Understand delivery and reruns
+
+The job retries records that Kinesis throttles until they're written, and never drops a record. When a run finishes successfully, every recovered event is in the output stream or directory. To track a run while it's in progress, see [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md#monitor-the-flink-job-on-aws).
+
+If a run fails, Flink doesn't restart it. To recover the events, run the job again on the same input. The new run starts from the beginning, so it sends again any events that the failed run had already written to Kinesis. Your pipeline might therefore receive some events twice.

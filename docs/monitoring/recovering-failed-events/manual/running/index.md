@@ -3,7 +3,7 @@ title: "Run event recovery jobs"
 sidebar_label: "Running"
 date: "2020-07-22"
 sidebar_position: 30
-description: "Define and encode recovery configuration, then deploy recovery jobs using Spark, Flink, or Beam runtimes."
+description: "Define and encode recovery configuration, then run the recovery job with Flink on AWS or Beam on GCP."
 keywords: ["run recovery job", "deploy event recovery"]
 ---
 
@@ -82,8 +82,13 @@ amm ./encode.sc resolver-config.json
 amm ./encode.sc job-config.json
 ```
 
-Once the configuration files are encrypted it's time to deploy the recovery job on your pipeline.
+Once the configuration files are encoded, you can run the recovery job on your pipeline.
 
 ## Deploy the job
 
-There are several runtimes that recovery process can be deployed to:
+The recovery job runs on a different runtime depending on your cloud:
+
+- AWS: the [Flink job](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md) runs on Amazon EMR, reads failed events from S3, and writes recovered events to Kinesis
+- GCP: the [Beam job](/docs/monitoring/recovering-failed-events/manual/running/gcp-beam/index.md) runs on Google Cloud Dataflow, reads failed events from GCS, and writes recovered events to Pub/Sub
+
+The Spark job for AWS was removed in version 0.8.0. If you still use it, see [Previous versions](/docs/monitoring/recovering-failed-events/manual/previous-versions/index.md) and the [0.8.0 upgrade guide](/docs/monitoring/recovering-failed-events/manual/upgrade-guides/0-8-0-upgrade-guide/index.md).

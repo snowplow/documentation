@@ -7,7 +7,7 @@ description: "Diagnose and resolve process failures, recovery failures, and unex
 keywords: ["recovery troubleshooting", "recovery failures", "recovery errors"]
 ---
 
-In order to verify the process is running properly there are several locations that can be monitored, depending on your runtime environment these are: datasinks (for recovery job processed output): `failedOutput` (S3/GCS bucket), `unrecoverableOutput` (S3/GCS bucket), `output` (Kinesis/PubSub streams) and job runners (tracking job status and processing in real-time).
+To check that a recovery is running properly, look at the job's outputs and its counts. The outputs are the failed and unrecoverable paths in S3 or GCS, and the Kinesis stream or Pub/Sub topic that receives recovered events. The Flink job sets the failed path with `--failed`, and the Beam job with `--failedOutput`. See [Monitoring](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md) for the counts each job reports.
 
 ## Possible Failures
 
@@ -15,7 +15,7 @@ There are two main reasons why recovery process may fail. Process Failures preve
 
 ### Process Failures
 
-Process failures are usually caused by misconfiguration. They usually happen as the job is submitted to its runner (Apache Beam, Spark, Flink). Reported failures may differ, but usually they boil down to:
+Process failures are usually caused by misconfiguration. They usually happen as the job is submitted to its runner (Apache Beam or Flink). Reported failures may differ, but usually they boil down to:
 
 #### Missing Resources
 
@@ -31,7 +31,7 @@ The largest group of issues causing early process termination are configuration 
 
 ### Recovery Failures
 
-Definitely the largest and the most common issue with automated recovery process are recovery failures. These are runtime errors that prevent application from recovering given lines / bad rows. These failures will produce values under `failedOutput` directory.
+Definitely the largest and the most common issue with automated recovery process are recovery failures. These are runtime errors that prevent application from recovering given lines / bad rows. These failures will produce values under the failed output path.
 
 Recovery error is yet another bad row type that is able to be recovered. For convenience recovery errors use original configurations and do not require another recovery flows configured especially for them.
 
@@ -49,13 +49,13 @@ Happens when trying to recover a line for which no recovery flow configuration c
 
 #### Replacement Failures
 
-Actual replacement specified with Replace Step has failed. Reason will be supplied along with exported `RecoveryError` bad row under `unrecoveredOutput`.
+Actual replacement specified with Replace Step has failed. Reason will be supplied along with exported `RecoveryError` bad row under the failed output path.
 
 **Action:** consult the exported message. This likely means that configuration supplied to modify the source bad row needs adjusting. Either with another recovery flow (when faulty row is a special case) or direct adjustment to recovery flow supplied with `RecoveryError`.
 
 #### Cast Failures
 
-Much like Replacement Failures, Cast Failures occur when modifying actual value with a Cast Step has failed. The reason is supplied along with exported `RecoveryError` bad row under `unrecoveredOutput`.
+Much like Replacement Failures, Cast Failures occur when modifying actual value with a Cast Step has failed. The reason is supplied along with exported `RecoveryError` bad row under the failed output path.
 
 **Action:** consult the exported message. This likely means that configuration supplied to modify the source bad row needs adjusting. Either with another recovery flow (when faulty row is a special case) or direct adjustment to recovery flow supplied with `RecoveryError`.
 
@@ -81,7 +81,7 @@ Happens whenever input data is not a valid `BadRow` JSON format.
 
 This set of failures should not really occur but means that there was an error serializing data with thrift (ThriftFailure) or Base64 coding. Some of these issues might be related to runtime locale.
 
-**Action:** Consult supplied error message outputted along with BadRow into `unrecoveredOutput`. Verify that bad row producer source has the same locale as recovery worker – UTF-8.
+**Action:** Consult supplied error message outputted along with BadRow into the failed output path. Verify that bad row producer source has the same locale as recovery worker – UTF-8.
 
 ### Unexpected Behavior
 

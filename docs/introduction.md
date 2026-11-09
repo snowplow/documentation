@@ -17,7 +17,7 @@ import { HomeSearch, Quickstarts } from '@site/src/components/home'
 <div className="home-hero breakout">
 <div className="home-hero__intro">
 
-Snowplow CDI collects, validates, and models behavioral data from your apps, and delivers it to your warehouse, lake, or stream. Signals calculates attributes from that data in real time and serves them to your applications and AI agents.
+Snowplow Customer Data Infrastructure (CDI) collects behavioral data from your websites, apps, and servers, validates every event against your schemas, and delivers it to your own warehouse, lake, or stream. Signals uses the same events to calculate user attributes in real time, and serves them to your applications and AI agents.
 
 <HomeSearch />
 
@@ -38,13 +38,13 @@ Snowplow CDI collects, validates, and models behavioral data from your apps, and
 
 ## Choose a product
 
-Both products use the same events, entities, and schemas, so you can start with either.
+Use CDI to collect behavioral data and analyze it in your warehouse. Use Signals to act on that behavior in real time, in your app or AI agent.
 
 <CardGrid cols={2} breakout>
   <Card
     variant="product"
-    eyebrow="Customer data infrastructure"
-    title="Snowplow CDI"
+    eyebrow="Snowplow CDI"
+    title="Behavioral data in your warehouse"
     href="/docs/cdi/"
     headingLevel={3}
     description="Track events from any platform, validate them against your schemas, load them into your warehouse, and model them into tables for analysis."
@@ -63,8 +63,8 @@ trackPageView();
   </Card>
   <Card
     variant="product"
-    eyebrow="Real-time customer context"
-    title="Signals"
+    eyebrow="Signals"
+    title="Real-time user attributes for apps and agents"
     href="/docs/signals/introduction/"
     headingLevel={3}
     description="Calculate user attributes as events arrive, and read them from your app or agent with one API call."

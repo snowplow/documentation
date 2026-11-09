@@ -24,11 +24,14 @@ jobs:
       - name: Get changed markdown files
         id: changed-files
         run: |
-          # Get list of changed .md and .mdx files, excluding files starting with underscore
+          # Get list of changed .md and .mdx files, excluding partials (files starting
+          # with underscore), repo-root files such as README.md, and research notes
           git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD | \
             grep -E '\.(md|mdx)$' | \
             grep -v '^_' | \
-            grep -v '/_' > changed_files.txt || true
+            grep -v '/_' | \
+            grep '/' | \
+            grep -v '^research/' > changed_files.txt || true
 
           if [ -s changed_files.txt ]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
@@ -88,6 +91,17 @@ jobs:
               missing_fields+=("sidebar_label")
             fi
 
+            # Docs pages need a content_type that picks their page template
+            # (see CLAUDE.md). Previous-version pages are frozen, so skip them.
+            if [[ "$file" == docs/* ]] && ! echo "$file" | grep -qE '/(previous-versions?|previous_versions|previous-releases)/'; then
+              ct=$(echo "$frontmatter" | grep '^content_type:' | sed 's/^content_type:[[:space:]]*//' | tr -d '"'"'"'[:space:]' || true)
+              if [ -z "$ct" ]; then
+                missing_fields+=("content_type")
+              elif ! echo "concept how-to tutorial reference integration sdk landing" | grep -qw -- "$ct"; then
+                missing_fields+=("content_type (unknown value: $ct)")
+              fi
+            fi
+
             if [ ${#missing_fields[@]} -gt 0 ]; then
               # Join array elements with ", " separator
               fields_str=$(printf "%s, " "${missing_fields[@]}")
@@ -124,6 +138,7 @@ jobs:
             - \`sidebar_label\`: Short title for navigation sidebar (can be the same as the main title)
             - \`description\`: One to two sentences summarizing the page contents
             - \`keywords\`: Array of marketing/SEO keywords
+            - \`content_type\` (pages under \`docs/\`): one of concept, how-to, tutorial, reference, integration, sdk, or landing. It picks the page template in the style guide.
 
             Please add the missing metadata.`;
 

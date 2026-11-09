@@ -40,7 +40,8 @@ jobs:
         run: yarn lint:css
 
   browser-checks:
-    runs-on: ubuntu-latest
+    # Playwright 1.57 can't install Chromium on ubuntu-latest (26.04) yet
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0

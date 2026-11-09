@@ -178,7 +178,7 @@ const sidebars = {
     group('Get started', [
       pick('signals/introduction', { label: 'Signals overview' }),
       pick('signals/quickstart', { label: 'Quickstart with your coding agent' }),
-      { type: 'link', label: 'Quickstart step by step', href: '/tutorials/signals-quickstart/start/' },
+      pick('signals/get-started/quickstart-tutorial', { label: 'Quickstart step by step' }),
       // Redirects to the introduction (worker/redirects.js), so it stays hidden
       pick('signals', { indexOnly: true, label: 'Signals', className: 'hidden' }),
     ]),

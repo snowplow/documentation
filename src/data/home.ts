@@ -44,7 +44,7 @@ export const QUICKSTARTS: Quickstart[] = [
     product: 'signals',
     title: 'Calculate attributes in real time',
     description: 'Define attributes, publish them, and read them back with the Python SDK or Console.',
-    href: '/tutorials/signals-quickstart/start/',
+    href: '/docs/signals/get-started/quickstart-tutorial/',
     time: '10 min',
   },
 ]

@@ -80,6 +80,8 @@ Criteria are the conditional rules that determine when an intervention should tr
 An intervention is sent only the first time the criteria are met. Read an example of how this works in the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example). The [`changed` operator](#the-changed-operator) is the exception: it sends the intervention every time the attribute's value changes.
 :::
 
+Criteria can reference [formula attributes](/docs/signals/attributes/formula-attributes/index.md) as well as stored attributes. The intervention [preview](#preview) doesn't support criteria on formula attributes yet.
+
 When a referenced attribute is updated, the updated and previous states are evaluated against the criteria. If the previous state did not meet the conditions but the newly updated state does, the trigger activates. Criteria always refer to the latest published version of the attribute group that contains the attribute.
 
 <Tabs groupId="signals-impl" queryString>
@@ -301,6 +303,8 @@ Signals provides two ways to test an intervention in Snowplow Console: a preview
 ### Preview
 
 While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined.
+
+The preview doesn't support criteria on [formula attributes](/docs/signals/attributes/formula-attributes/index.md) yet. To check a formula's values, use **Run preview** on its attribute group instead.
 
 ![Intervention preview showing test results with match count against scanned warehouse records](../images/intervention-preview.png)
 

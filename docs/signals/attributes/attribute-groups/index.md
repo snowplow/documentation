@@ -79,7 +79,7 @@ Attribute groups are configured differently based on the data source.
 
 Signals calculates attributes from events in your real-time stream. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
 
-You'll need to define the [attributes](/docs/signals/attributes/attributes/index.md) you want to calculate from your event stream.
+You'll need to define the [attributes](/docs/signals/attributes/attributes/index.md) you want to calculate from your event stream. Stream attribute groups can also have [formula attributes](/docs/signals/attributes/formula-attributes/index.md), which combine the group's attributes into a new value each time they're read.
 
 #### Backfill attributes
 

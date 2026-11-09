@@ -248,7 +248,7 @@ As well as the [custom `llms.txt` and JSON-LD schema plugins](#custom-plugins), 
 - A `<link rel="alternate" type="text/markdown">` tag in the head of every docs page, pointing to its `.md` copy.
 - A pointer for agents at the top of every docs page (`AgentPointer` in `src/theme/DocItem/Layout`), naming the `.md` copy, `/llms.txt`, and the index for the page's sidebar. It's hidden with CSS (`.agent-pointer`), so readers and screen readers skip it while HTML-to-text tools keep it, and it's left out of the `.md` export. Each `.md` file has a `> Documentation index:` line instead.
 - `docsearch:product` (the page's sidebar) and `docsearch:content_type` meta tags on every docs page, for the Algolia crawler. They have no effect until the crawler config maps them to record attributes.
-- Ask AI in the search modal, switched on by setting `ALGOLIA_ASKAI_ASSISTANT_ID` at build time (see `research/blueprint-notes/spike-algolia-askai.md`).
+- Ask AI in the search modal, switched on by setting `ALGOLIA_ASKAI_ASSISTANT_ID` at build time.
 
 ## Page feedback and Product Fruits
 

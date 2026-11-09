@@ -31,8 +31,7 @@ function send(action: string, path: string, property: string) {
  * = answer). Nothing is sent without analytics consent: the reader sees a
  * thank-you and a link to their cookie preferences instead.
  *
- * Replaces the Product Fruits feedback side tab on doc pages. See
- * research/blueprint-notes/usage-baselines.md for how the events are queried.
+ * Replaces the Product Fruits feedback side tab on doc pages.
  */
 export default function Feedback(): JSX.Element {
   const { pathname } = useLocation()

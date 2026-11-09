@@ -23,8 +23,7 @@ type Copied = 'page' | 'mcp' | null
  * MCP URL.
  *
  * Copy MCP URL only appears when `customFields.docsMcpUrl` is set in
- * docusaurus.config.ts, because the docs MCP server isn't deployed yet (see
- * research/blueprint-notes/spike-docs-mcp-hosting.md).
+ * docusaurus.config.ts, because the docs MCP server isn't deployed yet.
  */
 export default function PageActions({ markdown }: { markdown: MarkdownCopy }): JSX.Element {
   const { siteConfig } = useDocusaurusContext()

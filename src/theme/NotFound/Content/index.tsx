@@ -12,8 +12,7 @@ type Props = WrapperProps<typeof ContentType>
  * and missing redirects. The page view alone doesn't say the page was a 404,
  * because the URL is whatever the reader requested.
  *
- * A structured event avoids publishing a new schema for one counter. See
- * research/blueprint-notes/usage-baselines.md for how the metric is queried.
+ * A structured event avoids publishing a new schema for one counter.
  */
 export default function ContentWrapper(props: Props): JSX.Element {
   useEffect(() => {

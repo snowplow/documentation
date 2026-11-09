@@ -38,7 +38,7 @@ const config: Config = {
 
   customFields: {
     // Shown as "Copy MCP URL" in the page actions menu once the docs MCP
-    // server is deployed (research/blueprint-notes/spike-docs-mcp-hosting.md)
+    // server is deployed
     docsMcpUrl: process.env.DOCS_MCP_URL || null,
   },
 
@@ -345,7 +345,7 @@ const config: Config = {
         insights: true,
         // Ask AI in the search modal (DocSearch v4). Off until an Algolia
         // assistant exists: an askAi block without a valid assistant ID breaks
-        // the modal. See research/blueprint-notes/spike-algolia-askai.md.
+        // the modal.
         ...(process.env.ALGOLIA_ASKAI_ASSISTANT_ID
           ? {
               askAi: {

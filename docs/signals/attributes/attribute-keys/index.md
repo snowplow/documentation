@@ -13,12 +13,17 @@ import TabItem from '@theme/TabItem';
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against. All attribute groups need an attribute key.
 
-Signals includes five built-in attribute keys. Four are based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events. The fifth, `snowplow_id`, calculates attributes per person, using the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) from [Identities](/docs/identities/index.md) when Identities is enabled on your pipeline. See [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
+Signals includes seven built-in attribute keys:
+* `domain_userid`, `domain_sessionid`, `network_userid`, and `user_id`: based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events
+* `client_session_user_id` and `client_session_session_id`: based on the `userId` and `sessionId` in the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md) that the mobile trackers add to events. These are the mobile equivalents of `domain_userid` and `domain_sessionid`, and the keys the [iOS and Android trackers](/docs/sources/mobile-trackers/signals/index.md) use by default to read attributes and receive interventions
+* `snowplow_id`: calculates attributes per person, using the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) from [Identities](/docs/identities/index.md) when Identities is enabled on your pipeline. See [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md)
+
+The `client_session_user_id` and `client_session_session_id` keys are based on an entity rather than an atomic field, so you can use them with stream attribute groups, but not with batch attribute groups.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, `user_id`, and `snowplow_id`. The `snowplow_id` key shows **Requires Identities** until you [configure Identities](/docs/identities/configuration/index.md) on your pipeline.
+The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, `user_id`, `client_session_user_id`, `client_session_session_id`, and `snowplow_id`. The `snowplow_id` key shows **Requires Identities** until you [configure Identities](/docs/identities/configuration/index.md) on your pipeline.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">

@@ -65,6 +65,7 @@ The table below lists all available arguments for a `Service`:
 | `description` | A description of the service | `string` | ❌ |
 | `owner` | The owner of the service | `string` | ✅ |
 | `attribute_groups` | List of attribute groups with optional version specification | list of `AttributeGroup` or dict | ❌ |
+| `access_mode` | Who can read the service: `authenticated` (the default) or `public`. See [Control who can read a service](#control-who-can-read-a-service) | `string` | ❌ |
 
 </TabItem>
 </Tabs>
@@ -87,6 +88,55 @@ Specify the version of each attribute group in the `attribute_groups` list using
 
 </TabItem>
 </Tabs>
+
+## Control who can read a service
+
+Each service has an access mode that decides who can read its attributes:
+
+* `authenticated`: reading the service requires a Snowplow API token, so only your own backend can read it. This is the default
+* `public`: websites and apps can also read the service directly, without a token, for one identifier at a time. See [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md)
+
+Use a public service when you want to personalize a page or screen with the current user's attributes, without building a backend to hold the API token and proxy the request.
+
+:::warning[Public services expose their attributes]
+Anyone who has an identifier, such as a user's `domain_userid`, can read that user's attributes from a public service. Every attribute group in the service is exposed. Only make a service public if all of its attributes are safe to show to the user they describe, and are keyed by an identifier the browser or device already holds, such as `domain_userid` or `client_session_user_id`. Don't include personal or sensitive data in a public service.
+:::
+
+Signals only answers public reads for identifiers in UUID format, which can't be guessed or enumerated. A public service can still be read with an API token, in the same way as any other service.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+Choose the access mode in the **Access** section of the service form: **Private** or **Public**. Choosing **Public** opens a confirmation dialog that describes what becomes readable. Click **Make public** to confirm.
+
+Public services show a **Public** badge in the services list and on the service details page. In the attribute groups tables, the badge also marks every attribute group that's part of a public service.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+Set `access_mode` to `public` when defining the service:
+
+```python
+from snowplow_signals import Service
+
+my_public_service = Service(
+    name='my_public_service',
+    owner="user@company.com",
+    attribute_groups=[
+        {"name": "page_engagement", "version": 1},
+    ],
+    access_mode="public",
+)
+
+sp_signals.publish([my_public_service])
+```
+
+To make a public service private again, publish it with `access_mode="authenticated"`.
+
+</TabItem>
+</Tabs>
+
+Changes to the access mode take effect within a few seconds of publishing the service.
 
 ## Manage services
 

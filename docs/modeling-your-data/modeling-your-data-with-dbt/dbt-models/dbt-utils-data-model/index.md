@@ -4,6 +4,7 @@ sidebar_label: "Utils"
 description: "Core macros and helper functions for Snowplow dbt packages including incremental logic, optimized upserts, and utility macros."
 keywords: ["dbt utils", "dbt macros", "helper functions", "Snowplow utils", "dbt utilities"]
 sidebar_position: 60
+content_type: concept
 ---
 
 ```mdx-code-block

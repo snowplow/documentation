@@ -4,6 +4,7 @@ sidebar_label: "Media Player"
 description: "Transform raw media player event data into derived tables for media plays, ad views, and media stats across HTML5, YouTube, and Vimeo."
 keywords: ["media player dbt", "video analytics", "media tracking", "HTML5 video", "YouTube tracking", "media data model"]
 sidebar_position: 20
+content_type: concept
 ---
 
 ```mdx-code-block

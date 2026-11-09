@@ -4,6 +4,7 @@ sidebar_label: "Ecommerce"
 sidebar_position: 40
 description: "Transform raw ecommerce event data into derived tables for carts, checkouts, products, transactions, and sessions."
 keywords: ["ecommerce dbt", "ecommerce tracking", "cart analysis", "transaction modeling", "checkout funnel", "ecommerce data model", "ecommerce dbt package"]
+content_type: concept
 ---
 
 ```mdx-code-block

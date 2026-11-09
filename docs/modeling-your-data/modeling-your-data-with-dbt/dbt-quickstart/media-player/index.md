@@ -4,6 +4,7 @@ sidebar_position: 20
 title: "Media Player Quickstart"
 description: "Quick start guide for the Snowplow Media Player dbt package to model video and audio engagement data."
 keywords: ["media player quickstart", "media player setup", "dbt media player installation"]
+content_type: how-to
 ---
 
 ```mdx-code-block

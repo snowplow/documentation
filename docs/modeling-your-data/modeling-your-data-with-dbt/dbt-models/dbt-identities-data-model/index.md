@@ -5,6 +5,7 @@ sidebar_position: 70
 description: "Transform raw identity entities and merge events into derived tables for identity resolution, identifier mapping, and audit."
 keywords: ["identities dbt", "identity resolution", "snowplow_id", "identity mapping", "dbt identities"]
 date: "2026-03-23"
+content_type: reference
 ---
 
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';

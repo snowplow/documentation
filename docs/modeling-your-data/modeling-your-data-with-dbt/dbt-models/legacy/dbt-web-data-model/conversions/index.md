@@ -4,6 +4,7 @@ sidebar_label: "Conversions"
 description: "Conversion modeling for the legacy Web dbt package. Superseded by the Unified Digital Conversions module."
 keywords: ["web conversions legacy", "legacy conversion tracking", "web conversion modeling"]
 sidebar_position: 100
+content_type: reference
 ---
 
 ```mdx-code-block

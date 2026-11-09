@@ -4,6 +4,7 @@ sidebar_label: "Fractribution"
 description: "Legacy Fractribution dbt package for marketing attribution analysis. Superseded by the Attribution package."
 keywords: ["fractribution legacy", "legacy attribution", "deprecated fractribution"]
 sidebar_position: 900
+content_type: concept
 ---
 
 ```mdx-code-block

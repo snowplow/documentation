@@ -5,6 +5,7 @@ sidebar_position: 80
 description: "Transform CDN and client-side events into derived tables that show which AI agents crawl your site, which pages they request, and how many human page views their operators refer back."
 keywords: ["agent analytics dbt", "AI crawler analytics", "AI agent traffic", "answer engine optimization", "AEO", "bot traffic modeling"]
 date: "2026-09-28"
+content_type: reference
 ---
 
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';

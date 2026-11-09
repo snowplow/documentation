@@ -4,6 +4,7 @@ sidebar_label: "Configuration"
 description: "Configure Snowplow dbt packages, including warehouse-specific settings for Postgres, Spark, Databricks, and BigQuery."
 keywords: ["dbt configuration", "dbt variables", "Databricks Unity Catalog", "BigQuery partitioning"]
 sidebar_position: 40
+content_type: reference
 ---
 
 This page details general configurations that can apply across many of our packages. Each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.

@@ -4,6 +4,7 @@ sidebar_label: "Running on data lakes"
 sidebar_position: 50
 description: "How to run our models on lakehouses including Databricks and other data lake platforms."
 keywords: ["dbt data lakes", "dbt lakehouses", "Databricks dbt"]
+content_type: how-to
 ---
 
 ```mdx-code-block

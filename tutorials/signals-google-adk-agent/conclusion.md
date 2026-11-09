@@ -59,3 +59,4 @@ Check out these other Signals tutorials and solution accelerators for inspiratio
 * [Implement real-time interventions using Signals](/tutorials/signals-interventions/start)
 * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro)
 * [Use AWS BedRock to supplement Signals with persistent user context](/tutorials/signals-agentic-accelerator/intro)
+* [Personalize a Gemini Enterprise for CX agent with Snowplow Signals](/tutorials/signals-google-cx-agent-studio/introduction)

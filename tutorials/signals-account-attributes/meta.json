@@ -1,0 +1,8 @@
+{
+  "title": "Personalize by account with custom Signals attribute keys",
+  "description": "Define a custom attribute key from an entity property to aggregate behavior across all users of a B2B account, and trigger interventions on account-level activity.",
+  "label": "Signals implementation",
+  "useCase": "Real-time personalization",
+  "technologies": ["Python"],
+  "snowplowTech": ["Signals", "Console"]
+}

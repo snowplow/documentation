@@ -57,18 +57,15 @@ If you maintain your own cluster configuration, compare it with the templates. T
 |---|---|---|
 | EMR release | `6.9.0` | `7.13.0` |
 | Instance types | `m4.large` | `m5.xlarge` |
-| Java | `/usr/lib/jvm/java-11-amazon-corretto.x86_64`, set in `hadoop-env` and by the bootstrap action | `/usr/lib/jvm/jre-11`, set in `hadoop-env` and in `env.java.home`, `containerized.master.env.JAVA_HOME`, and `containerized.taskmanager.env.JAVA_HOME` in `flink-conf` |
+| Java | Java 11 | Java 11, set explicitly for Flink in `flink-conf` |
 | Bootstrap action | Installs the S3 file system plugin and the CloudWatch agent | None |
 | `flink run` options | `-m yarn-cluster` | `-m yarn-cluster -sae` |
 | `client.heartbeat.timeout` | Not set | `3650d` |
 | Checkpointing | `--checkpoint-interval` and `--checkpoint-dir` | Not used |
-| StatsD metrics reporter | Configured in `flink-conf` | Not configured |
 
-:::warning[Remove the bootstrap action]
-If you keep the 0.7.x bootstrap action on EMR 7.13, the cluster fails to start. EMR 7.13's Flink already includes the S3 file system plugin that the bootstrap action installed, and a second copy stops the JobManager with `Delegation token provider with service name s3-hadoop has multiple implementations`.
-:::
+Make sure you remove the 0.7.x bootstrap action. EMR 7.13's Flink already includes the S3 file system plugin that the bootstrap action installed, and a second copy stops the JobManager with `Delegation token provider with service name s3-hadoop has multiple implementations`.
 
-The [cluster requirements](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#cluster-requirements) explain why each of these settings is needed.
+See the [cluster requirements](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#cluster-requirements) for the full list.
 
 ## Check permissions and inputs
 
@@ -86,6 +83,6 @@ The Flink job doesn't expand globs in `--input`. If your input path ends with `*
 
 These changes don't need any action for most users:
 
-- Command line tool: the `run` command needs Java 21 or later. The `--enrichments` option only accepts enrichments that don't need external resources, and fails with an error for any others. The `validate` command reads the file passed to `--resolver`.
+- Command line tool: the `run` command needs Java 21 or later. The `--enrichments` option only accepts enrichments that don't need external resources, and fails with an error for any others.
 - Beam job: the Docker image runs on Java 11. The job's arguments haven't changed.
 - File output for the Flink job: the Flink job can write recovered events to files with `--directory-output`, as the Spark job could with `--directoryOutput`. See [Test a configuration with a dry run](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#test-a-configuration-with-a-dry-run).

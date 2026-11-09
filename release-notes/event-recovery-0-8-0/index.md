@@ -35,6 +35,6 @@ Documentation for the Spark job and for earlier Flink releases is available unde
 This release also includes these changes:
 
 - Event recovery is licensed under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/))
-- The command line tool's `run` command uses Enrich 6, and needs Java 21 or later
+- The command line tool's `run` command needs Java 21 or later
 - The Beam job's Docker image runs on Java 11
 - Dependencies are updated

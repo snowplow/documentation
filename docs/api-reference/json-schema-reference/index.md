@@ -1,5 +1,6 @@
 ---
 title: "JSON Schema reference"
+sidebar_label: "JSON Schema reference"
 sidebar_position: 10
 description: "Complete reference for JSON Schema draft 4 features supported in Snowplow data structures, including validation keywords and type definitions."
 keywords: ["json schema", "data structures", "schema validation", "iglu", "schema reference", "type validation"]

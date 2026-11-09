@@ -1,5 +1,6 @@
 ---
 title: "Optimizely X"
+sidebar_label: "Optimizely X"
 date: "2021-04-07"
 sidebar_position: 14000
 description: "Documentation for Optimizely X in the web tracker."

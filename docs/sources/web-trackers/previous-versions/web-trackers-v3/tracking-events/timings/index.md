@@ -1,5 +1,6 @@
 ---
 title: "Timings"
+sidebar_label: "Timings"
 sidebar_position: 98
 description: "Documentation for Timings in the web tracker."
 keywords: ["tracker", "configuration"]

@@ -1,5 +1,6 @@
 ---
 title: "GA Cookies"
+sidebar_label: "GA Cookies"
 date: "2021-04-07"
 sidebar_position: 10000
 description: "Documentation for GA Cookies in the web tracker."

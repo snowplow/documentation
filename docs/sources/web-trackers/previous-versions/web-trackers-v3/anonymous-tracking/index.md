@@ -1,5 +1,6 @@
 ---
 title: "Opt-outs and anonymous tracking"
+sidebar_label: "Opt-outs and anonymous tracking"
 date: "2022-08-30"
 sidebar_position: 2860
 description: "Documentation for tracking Opt-outs and anonymous with the web tracker."

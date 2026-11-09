@@ -1,5 +1,6 @@
 ---
 title: "Site Tracking"
+sidebar_label: "Site Tracking"
 date: "2021-04-07"
 sidebar_position: 15000
 description: "Documentation for tracking Site Tracking with the web tracker."

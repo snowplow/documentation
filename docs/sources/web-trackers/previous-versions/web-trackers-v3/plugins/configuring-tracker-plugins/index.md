@@ -1,5 +1,6 @@
 ---
 title: "Configuring tracker plugins"
+sidebar_label: "Configuring tracker plugins"
 sidebar_position: 750
 description: "Plugin documentation for Configuring tracker s functionality in the tracker."
 keywords: ["plugin", "configuring"]

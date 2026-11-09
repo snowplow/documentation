@@ -1,5 +1,6 @@
 ---
 title: "Advanced Usage"
+sidebar_label: "Advanced Usage"
 date: "2020-02-21"
 sidebar_position: 60
 description: "Advanced configuration and usage patterns for Usage."

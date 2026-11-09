@@ -5,6 +5,7 @@ date: "2021-05-11"
 sidebar_position: 1
 description: "Deploy Snowplow Mini on AWS for a single-instance testing environment."
 keywords: ["snowplow mini", "aws setup", "mini deployment"]
+content_type: how-to
 ---
 
 ```mdx-code-block

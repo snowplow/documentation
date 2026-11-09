@@ -4,6 +4,7 @@ sidebar_label: "Tracking plans"
 sidebar_position: 30
 description: "Use the Snowplow CLI data-products command to create, download, validate, sync, and release tracking plans, event specifications, and source applications with git-ops workflows."
 keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifications CLI", "source applications CLI", "CLI commands"]
+content_type: how-to
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

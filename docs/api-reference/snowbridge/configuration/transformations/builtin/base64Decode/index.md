@@ -3,6 +3,7 @@ title: "Snowbridge base64Decode transformation"
 sidebar_label: "base64Decode"
 description: "Base64 decode message data from base64 byte array to decoded byte array representation for Snowbridge."
 keywords: ["snowbridge config", "base64 decode", "decode transformation", "base64", "data decoding"]
+content_type: reference
 ---
 
 ```mdx-code-block

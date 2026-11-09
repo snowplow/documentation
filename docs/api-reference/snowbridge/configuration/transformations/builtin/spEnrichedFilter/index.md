@@ -3,6 +3,7 @@ title: "Snowbridge spEnrichedFilter transformation"
 sidebar_label: "spEnrichedFilter"
 description: "Filter Snowplow enriched events based on regex matches against atomic fields with keep or drop actions, with Snowbridge."
 keywords: ["snowbridge config", "enriched filter", "atomic fields", "regex filter", "snowplow filtering"]
+content_type: reference
 ---
 
 ```mdx-code-block

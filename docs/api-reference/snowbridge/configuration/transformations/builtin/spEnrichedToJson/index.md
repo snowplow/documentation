@@ -3,6 +3,7 @@ title: "Snowbridge spEnrichedToJson transformation"
 sidebar_label: "spEnrichedToJson"
 description: "Transform Snowplow enriched TSV data to JSON format using the Go Analytics SDK, with Snowbridge."
 keywords: ["snowbridge config", "tsv to json", "enriched to json", "analytics sdk", "json transformation"]
+content_type: reference
 ---
 
 ```mdx-code-block

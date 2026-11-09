@@ -6,6 +6,7 @@ date: "2026-07-15"
 sidebar_position: 600
 description: "Upgrade Snowbridge to version 6.X.X with breaking changes to HTTP target OAuth2 configuration, the hash transformation helper, and the Docker base image."
 keywords: ["snowbridge 6.x upgrade", "upgrade guide", "snowbridge migration", "version 6"]
+content_type: how-to
 ---
 
 ## Version 6.0.0 breaking changes

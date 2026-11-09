@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 100
 description: "Create custom JavaScript Snowbridge transformations to modify data, filter messages, set partition keys, and add HTTP headers."
 keywords: ["snowbridge config", "custom scripts", "javascript transformations", "goja engine", "transform scripts"]
+content_type: reference
 ---
 
 ```mdx-code-block

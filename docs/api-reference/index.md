@@ -7,6 +7,7 @@ description: "Technical reference documentation for Snowplow components and appl
 keywords: ["API reference", "technical documentation", "Snowplow components", "self-hosted configuration"]
 sidebar_custom_props:
   header: "Components"
+content_type: landing
 ---
 
 {/* This page isn't seen because of how the navigation sidebar is structured, with the subsections artifically hoisted to look like they're all top-level sections */}

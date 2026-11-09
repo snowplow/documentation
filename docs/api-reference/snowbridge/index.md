@@ -5,6 +5,7 @@ sidebar_label: "Snowbridge"
 description: "Replicate Snowplow event streams to multiple destinations with Snowbridge, a configurable tool supporting Kinesis, PubSub, Kafka, HTTP, and more."
 keywords: ["snowbridge", "stream replication", "kinesis", "pubsub", "kafka", "event streaming"]
 date: "2026-03-11"
+content_type: concept
 ---
 
 ```mdx-code-block

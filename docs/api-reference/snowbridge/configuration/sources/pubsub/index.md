@@ -3,6 +3,7 @@ title: "Configure Pub/Sub as a Snowbridge source"
 sidebar_label: "PubSub"
 description: "Configure PubSub source for Snowplow Snowbridge to read from GCP Pub/Sub subscriptions with service account authentication."
 keywords: ["snowbridge config", "pubsub source", "gcp pubsub", "pubsub subscription", "google cloud"]
+content_type: reference
 ---
 
 ```mdx-code-block

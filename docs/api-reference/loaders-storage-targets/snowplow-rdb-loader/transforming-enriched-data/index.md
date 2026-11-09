@@ -5,6 +5,7 @@ date: "2022-04-04"
 sidebar_position: 10
 description: "Transform Snowplow enriched events into shredded data for Redshift or wide row format for Snowflake and Databricks using Spark or stream transformers."
 keywords: ["data transformation", "shredded data", "wide row format", "redshift transformation", "snowflake transformation"]
+content_type: concept
 ---
 
 _For a high-level overview of the RDB Loader architecture, of which the transformer is a part, see [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)._

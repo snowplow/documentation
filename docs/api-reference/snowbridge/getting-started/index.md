@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 100
 description: "Install and configure Snowbridge using Docker or binaries to start replicating event streams between sources and targets."
 keywords: ["snowbridge setup", "docker installation", "stream replication setup", "snowbridge quickstart"]
+content_type: how-to
 ---
 
 ```mdx-code-block

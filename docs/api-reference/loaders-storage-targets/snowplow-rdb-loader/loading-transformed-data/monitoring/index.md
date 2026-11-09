@@ -5,6 +5,7 @@ date: "2022-04-05"
 sidebar_position: 400
 description: "Monitor RDB Loader with folder checks, health checks, StatsD metrics, Sentry alerts, and Snowplow tracking for warehouse loading."
 keywords: ["rdb loader monitoring", "folder monitoring", "health checks", "statsd metrics", "warehouse monitoring"]
+content_type: reference
 ---
 
 The loader app has several types of monitoring built in to help the pipeline operator: folder monitoring, warehouse health checks, StatsD metrics, Sentry alerts, and Snowplow tracking.

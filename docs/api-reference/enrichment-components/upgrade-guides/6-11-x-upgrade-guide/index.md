@@ -5,6 +5,7 @@ sidebar_position: 0
 description: "Upgrade guide for Enrich 6.11.x introducing enriched stream compression to reduce storage costs and improve throughput, requiring compatible downstream loaders."
 keywords: ["enrich 6.11", "enriched stream compression", "compression feature", "cost reduction"]
 date: "2026-07-31"
+content_type: how-to
 ---
 
 Enrich 6.11.0 introduces enriched stream compression, a feature that reduces the size (and therefore, cost) of data written to your enriched output stream.

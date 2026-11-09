@@ -3,6 +3,7 @@ title: "Snowbridge spEnrichedSetPk transformation"
 sidebar_label: "spEnrichedSetPk"
 description: "Set destination partition key for Snowplow enriched events using atomic field values, with Snowbridge."
 keywords: ["snowbridge config", "partition key", "enriched partition", "atomic fields", "snowplow partitioning"]
+content_type: reference
 ---
 
 ```mdx-code-block

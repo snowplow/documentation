@@ -3,6 +3,7 @@ title: "Snowbridge spEnrichedFilterContext transformation"
 sidebar_label: "spEnrichedFilterContext"
 description: "Filter Snowplow enriched events based on regex matches against entity fields using jsonpath notation, with Snowbridge."
 keywords: ["snowbridge config", "context filter", "entity filtering", "regex filter", "snowplow entities"]
+content_type: reference
 ---
 
 ```mdx-code-block

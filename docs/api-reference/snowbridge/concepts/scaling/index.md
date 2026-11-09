@@ -5,6 +5,7 @@ date: "2026-03-11"
 sidebar_position: 150
 description: "Scale Snowbridge horizontally across multiple instances with per-target concurrency controls and target provisioning for optimal throughput."
 keywords: ["horizontal scaling", "concurrent writes", "snowbridge performance", "throughput optimization"]
+content_type: concept
 ---
 
 Snowbridge is built for a **horizontal scaling** model. You can deploy multiple instances consuming from the same source without additional configuration. No coordination setup is required between instances.

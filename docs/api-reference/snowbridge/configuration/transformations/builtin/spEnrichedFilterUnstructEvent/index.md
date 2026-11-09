@@ -3,6 +3,7 @@ title: "Snowbridge spEnrichedFilterUnstructEvent transformation"
 sidebar_label: "spEnrichedFilterUnstructEvent"
 description: "Filter Snowplow enriched events based on regex matches against self-describing event fields using jsonpath notation, with Snowbridge."
 keywords: ["snowbridge config", "unstruct event filter", "custom event filter", "self-describing events", "event filtering"]
+content_type: reference
 ---
 
 ```mdx-code-block

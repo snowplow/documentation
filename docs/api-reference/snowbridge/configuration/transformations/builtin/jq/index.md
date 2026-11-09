@@ -3,6 +3,7 @@ title: "Snowbridge jq transformation"
 sidebar_label: "jq"
 description: "Run jq commands on message data to transform JSON structures with custom queries and helper functions, with Snowbridge."
 keywords: ["snowbridge config", "jq transformation", "json query", "jq command", "data transformation"]
+content_type: reference
 ---
 
 ```mdx-code-block

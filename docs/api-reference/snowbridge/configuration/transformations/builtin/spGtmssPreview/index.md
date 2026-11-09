@@ -3,6 +3,7 @@ title: "Snowbridge spGtmssPreview transformation"
 sidebar_label: "spGtmssPreview"
 description: "Extract GTM Server Side preview mode header from Snowplow context for debugging with GTM preview mode, with Snowbridge."
 keywords: ["snowbridge config", "gtm preview", "gtm server side", "preview mode", "gtm debugging"]
+content_type: reference
 ---
 
 ```mdx-code-block

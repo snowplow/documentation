@@ -1,6 +1,6 @@
 import type { Config } from '@docusaurus/types'
 
-const sidebar = require('./sidebars')
+const { sidebarItemsGenerator } = require('./utils/sidebar-items-generator')
 const { lastUpdateOverride } = require('./utils/last-update')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
@@ -34,6 +34,12 @@ const config: Config = {
       rspackBundler: true,
       mdxCrossCompilerCache: true,
     },
+  },
+
+  customFields: {
+    // Shown as "Copy MCP URL" in the page actions menu once the docs MCP
+    // server is deployed (research/blueprint-notes/spike-docs-mcp-hosting.md)
+    docsMcpUrl: process.env.DOCS_MCP_URL || null,
   },
 
   clientModules: [
@@ -87,24 +93,28 @@ const config: Config = {
             ],
             katex,
           ],
-          async sidebarItemsGenerator({
-            defaultSidebarItemsGenerator,
-            ...args
-          }) {
-            return sidebar.swapDocItemsToLinkItems(
-              await defaultSidebarItemsGenerator(args),
-              args.docs
-            )
-          },
+          // Four sidebars (cdi, signals, reference, platform) built from docs/
+          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarItemsGenerator,
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/base.css'),
+            require.resolve('./src/css/infima.css'),
+            require.resolve('./src/css/prose.css'),
+            require.resolve('./src/css/chrome.css'),
+            require.resolve('./src/css/components.css'),
+            require.resolve('./src/css/kit.css'),
+            require.resolve('./src/css/home.css'),
+          ],
         },
       },
     ],
   ],
 
   plugins: [
+    // Design tokens (src/design/tokens.js) to CSS variables, plus the fonts
+    './plugins/docusaurus-plugin-design-tokens',
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -127,6 +137,8 @@ const config: Config = {
     ],
     './plugins/docusaurus-plugin-release-notes',
     './plugins/docusaurus-plugin-snowplow-schema',
+    // Warns about docs pages without a valid content_type (see CLAUDE.md)
+    './plugins/docusaurus-plugin-content-type-check',
     [
       './plugins/docusaurus-plugin-llms-txt',
       {
@@ -138,7 +150,6 @@ const config: Config = {
           '/tutorials/',
           '/release-notes/',
           '/docs/signals/',
-          '/docs/api-reference/',
         ],
         contentDirs: ['docs', 'tutorials', 'release-notes'],
         contentSelectors: ['.theme-doc-markdown', 'article', 'main'],
@@ -161,6 +172,12 @@ const config: Config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      // Light, dark, and system modes. System follows the reader's OS setting
+      // and is the default for first-time visitors.
+      colorMode: {
+        defaultMode: 'light',
+        respectPrefersColorScheme: true,
+      },
       docs: {
         sidebar: {
           autoCollapseCategories: true,
@@ -178,14 +195,39 @@ const config: Config = {
           src: 'img/snowplow-logo.svg',
         },
         items: [
+          // Snowplow CDI | Signals: selects the cdi or signals sidebar
           {
-            type: 'custom-docsTutorialsTabsDesktop',
+            type: 'custom-productSwitcher',
+            position: 'left',
+          },
+          // Plain link tabs. A docSidebar tab is active on any page in its sidebar.
+          {
+            type: 'docSidebar',
+            sidebarId: 'reference',
+            label: 'Reference',
             position: 'left',
           },
           {
-            type: 'custom-docsTutorialsTabsMobile',
+            to: '/tutorials/',
+            label: 'Tutorials',
             position: 'left',
-            className: 'mobile-only',
+            activeBaseRegex: '^/tutorials/',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'platform',
+            label: 'Platform & AI',
+            position: 'left',
+          },
+          {
+            to: '/release-notes/',
+            label: 'Release notes',
+            position: 'left',
+            activeBaseRegex: '^/release-notes/',
+          },
+          {
+            type: 'search',
+            position: 'right',
           },
           {
             href: 'https://support.snowplow.io/',
@@ -193,11 +235,13 @@ const config: Config = {
             position: 'right',
             className: 'navbar-support-link',
           },
+          // Links to the Signals free tier on Signals pages, and to the
+          // CDI Cloud free trial everywhere else
           {
-            href: 'https://snowplow.io/get-started/snowplow-free-trial',
+            type: 'custom-tryForFree',
             label: 'Try for free',
             position: 'right',
-            className: 'snowplow-button cta-button navbar-cta',
+            className: 'navbar-cta',
           },
         ],
       },
@@ -215,7 +259,7 @@ const config: Config = {
             items: [
               {
                 href: 'https://github.com/snowplow/',
-                label: 'Github',
+                label: 'GitHub',
               },
               {
                 href: 'https://snowplow.io/',
@@ -232,8 +276,7 @@ const config: Config = {
             items: [
               {
                 href: 'https://community.snowplow.io/',
-                label: 'Snowplow Community',
-                className: 'capitalize text-sm text-muted-foreground',
+                label: 'Snowplow community',
               },
               {
                 href: 'https://support.snowplow.io/',
@@ -249,11 +292,11 @@ const config: Config = {
                 href: '/cookie-preferences',
               },
               {
-                label: 'Terms and Conditions',
+                label: 'Terms and conditions',
                 href: '/terms-and-conditions',
               },
               {
-                label: 'Licensing Overview',
+                label: 'Licensing overview',
                 href: '/docs/licensing/',
               },
             ],
@@ -300,6 +343,17 @@ const config: Config = {
         indexName: 'snowplow',
         contextualSearch: true,
         insights: true,
+        // Ask AI in the search modal (DocSearch v4). Off until an Algolia
+        // assistant exists: an askAi block without a valid assistant ID breaks
+        // the modal. See research/blueprint-notes/spike-algolia-askai.md.
+        ...(process.env.ALGOLIA_ASKAI_ASSISTANT_ID
+          ? {
+              askAi: {
+                assistantId: process.env.ALGOLIA_ASKAI_ASSISTANT_ID,
+                suggestedQuestions: true,
+              },
+            }
+          : {}),
       },
     },
 
@@ -319,51 +373,6 @@ const config: Config = {
         '!function(){window.semaphore=window.semaphore||[],window.ketch=function(){window.semaphore.push(arguments)};var e=document.createElement("script");e.type="text/javascript",e.src="https://global.ketchcdn.com/web/v3/config/snowplow_analytics/website_smart_tag/boot.js",e.defer=e.async=!0,document.getElementsByTagName("head")[0].appendChild(e)}();',
     },
   ],
-
-  customFields: {
-    webpack: {
-      configure: (config) => {
-        // Add JSX runtime resolution
-        config.resolve.alias = {
-          ...config.resolve.alias,
-          'react/jsx-runtime': require.resolve('react/jsx-runtime'),
-          'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
-        }
-
-        // Add module rules for CSS processing
-        config.module.rules.push({
-          test: /\.css$/,
-          use: [
-            require.resolve('style-loader'),
-            require.resolve('css-loader'),
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                postcssOptions: {
-                  plugins: [
-                    require.resolve('tailwindcss'),
-                    require.resolve('autoprefixer'),
-                  ],
-                },
-              },
-            },
-          ],
-        })
-
-        // Add resolve extensions
-        config.resolve.extensions = [
-          '.js',
-          '.jsx',
-          '.ts',
-          '.tsx',
-          '.json',
-          '.mjs',
-        ]
-
-        return config
-      },
-    },
-  },
 }
 
 export default config

@@ -1,5 +1,6 @@
 ---
 title: "Timezone"
+sidebar_label: "Timezone"
 date: "2021-04-07"
 sidebar_position: 16000
 description: "Documentation for Timezone in the web tracker."

@@ -1,5 +1,5 @@
 ---
-title: "Collector configuration reference"
+title: "Collector configuration options"
 sidebar_label: "Configure"
 sidebar_position: 2
 description: "Complete configuration reference for the Collector HOCON config file, including common options, sink-specific settings, cookie management, networking, and TLS configuration."

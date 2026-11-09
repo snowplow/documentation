@@ -1,8 +1,17 @@
 // Rules that always apply, before trying to serve the page.
 const forcedRules = [
   ['/docs/signals/', '/docs/signals/introduction/', 301],
-  // The dbt Unified quickstart was a dead end, so it now points readers at
-  // the Unified Digital tutorial. The page stays as a `type: link` stub.
+  // Editorial merges. The old pages stay as `type: link` stubs so the
+  // sidebar still lists the topic where readers look for it, but they
+  // always redirect to the merged page.
+  ['/docs/events/ootb-data/user-and-session-identification/', '/docs/events/identifiers/', 301],
+  ['/docs/events/ootb-data/user-and-session-identification.md', '/docs/events/identifiers.md', 301],
+  ['/docs/sources/web-trackers/cross-domain-tracking/', '/docs/events/cross-navigation/#configure-the-web-tracker', 301],
+  ['/docs/sources/web-trackers/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
+  ['/docs/identities/concepts/cross-domain-tracking/', '/docs/events/cross-navigation/#identities-and-cross-domain-tracking', 301],
+  ['/docs/identities/concepts/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
+  ['/docs/event-studio/query-sql/', '/docs/destinations/warehouses-lakes/querying-data/#get-example-queries-from-console', 301],
+  ['/docs/event-studio/query-sql.md', '/docs/destinations/warehouses-lakes/querying-data.md', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified.md', '/tutorials/unified-digital/setting-up-locally.md', 301],
   // First steps merged into the CDI overview. Exact rules, so the pages

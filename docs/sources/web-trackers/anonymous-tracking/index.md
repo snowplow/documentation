@@ -19,7 +19,7 @@ Anonymous tracking can be configured on initialization, but can be reset later. 
 
 For information about tracking user consent interactions and GDPR basis for processing, check out [this page](/docs/sources/web-trackers/tracking-events/consent-gdpr/index.md). Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
-On web, the following [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) can be anonymized:
+On web, the following [user and session identifiers](/docs/events/identifiers/index.md) can be anonymized:
 
 * Client-side user identifiers:
    * `user_id`, a business identifier provided by you

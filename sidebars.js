@@ -88,7 +88,7 @@ const sidebars = {
         hoist: true,
         indexLabel: 'Event Studio',
         // Snowtype code generation lives with the trackers, under Collect events
-        exclude: ['event-studio/implement-tracking'],
+        exclude: ['event-studio/query-sql', 'event-studio/implement-tracking'],
       }),
     ], { collapsible: true, collapsed: true }),
     group('Collect events', [
@@ -152,6 +152,8 @@ const sidebars = {
         exclude: ['modeling-your-data/modeling-your-data-with-sql-runner'],
       }),
       pick('identities'),
+      // A `type: link` stub that redirects to Query your data
+      pick('event-studio/query-sql', { className: 'hidden' }),
     ], { collapsible: true, collapsed: true }),
     group('Monitor data quality', [
       pick('failed-events', { label: 'Find and fix failed events' }),

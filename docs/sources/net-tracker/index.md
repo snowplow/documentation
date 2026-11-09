@@ -4,6 +4,7 @@ sidebar_label: ".NET tracker"
 sidebar_position: 180
 description: "Track events in .NET websites and desktop applications with the Snowplow .NET tracker SDK for .NET Standard and Xamarin."
 keywords: [".net tracker", "xamarin tracking", "dotnet analytics"]
+content_type: sdk
 ---
 
 ```mdx-code-block

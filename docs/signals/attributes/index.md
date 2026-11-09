@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Define attributes"
 description: "Define attributes within attribute groups to calculate behavioral data from real-time streams or your warehouse, then test and publish the configuration to Signals."
 keywords: ["attributes", "attribute groups", "attribute keys", "warehouse configuration", "configuration workflow", "publish"]
+content_type: landing
 ---
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value.

@@ -4,6 +4,7 @@ sidebar_position: 1
 sidebar_label: "Collector"
 description: "View and configure Snowplow collector settings via Console UI or API, including cookie domains, paths, and HTTP headers."
 keywords: ["collector configuration", "collector API", "HTTP headers", "event collector"]
+content_type: how-to
 ---
 
 Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.

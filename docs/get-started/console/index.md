@@ -5,6 +5,7 @@ sidebar_label: "Console getting started"
 description: "Use the Getting Started dashboard in Console to design tracking, implement it, deploy data models, and configure Signals."
 keywords: ["console", "getting started", "onboarding", "tracking plan", "implement tracking", "signals", "data model"]
 date: "2026-03-09"
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

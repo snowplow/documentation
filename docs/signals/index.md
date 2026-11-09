@@ -6,6 +6,7 @@ keywords: ["real-time customer context", "real-time personalization", "behaviora
 sidebar_label: "Signals"
 sidebar_custom_props:
   header: "Signals"
+content_type: landing
 ---
 
 {/* This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artificially hoisted to look like they're all top-level sections. Requests for this page are redirected to introduction/index.md (see worker/redirects.js). Keep this summary short: the full content lives on the introduction page. */}

@@ -4,6 +4,7 @@ sidebar_position: 8
 sidebar_label: "Define custom events"
 description: "How to define your own events and entities"
 keywords: ["custom events", "self-describing events", "custom entities", "event schemas"]
+content_type: tutorial
 ---
 
 While Snowplow provides various [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md) out of the box, you can define your own to match your business more closely.

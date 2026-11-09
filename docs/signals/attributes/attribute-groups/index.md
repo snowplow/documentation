@@ -4,6 +4,7 @@ sidebar_position: 1
 sidebar_label: "Attribute groups"
 description: "Define attribute groups to calculate behavioral data from real-time event streams or sync pre-calculated warehouse tables. Configure attributes, attribute keys, TTL lifetimes, and test definitions before publishing."
 keywords: ["attribute groups", "stream attributes", "warehouse attributes", "attribute keys", "ttl", "backfill", "python sdk attribute groups", "stream attribute group"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_position: 2
 sidebar_label: "Fundamentals"
 description: "An overview of what a Snowplow pipeline does and what steps it includes"
 keywords: ["Snowplow pipeline", "architecture", "trackers", "enrichment", "data warehouses", "collector"]
+content_type: landing
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

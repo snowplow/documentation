@@ -3,6 +3,7 @@ title: "Configure HTTP as a Snowbridge target"
 sidebar_label: "HTTP"
 description: "Configure HTTP target for Snowplow Snowbridge to send data over HTTP with authentication, OAuth2, request templating, and response rules."
 keywords: ["snowbridge config", "http target", "http endpoint", "oauth2", "request templating", "gtm server side"]
+content_type: reference
 ---
 
 ```mdx-code-block

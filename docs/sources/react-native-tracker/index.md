@@ -5,6 +5,7 @@ date: "2020-07-09"
 sidebar_position: 120
 description: "Track events in React Native apps for iOS, Android, and Web with the Snowplow tracker SDK supporting Expo and React Navigation."
 keywords: ["react native tracker", "mobile analytics", "expo tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block

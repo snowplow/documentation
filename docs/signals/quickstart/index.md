@@ -5,6 +5,7 @@ sidebar_position: 3
 description: "Sign up for Snowplow Signals, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that asks what you want to build, then adds tracking and Signals configuration to your web app."
 keywords: ["signals quickstart", "snowplow mcp", "coding agent", "claude code", "cursor", "real-time attributes"]
 date: "2026-10-14"
+content_type: tutorial
 ---
 
 Add Signals to your web app with one prompt. Your coding agent asks what you want to build, then adds the tracking, the Signals configuration, and the code that uses it.

@@ -5,6 +5,7 @@ date: "2020-07-08"
 sidebar_position: 999
 description: "Understand the maintenance groups for Snowplow trackers, dbt packages, and Signals SDKs, including production readiness and update schedules."
 keywords: ["tracker maintenance", "support status", "production readiness", "Signals SDK", "dbt packages"]
+content_type: reference
 ---
 
 Snowplow trackers, dbt packages, and Signals SDKs are categorized into four maintenance groups. These groups set expectations for how Snowplow maintains each project. Each GitHub repository contains a "Snowplow" badge that shows its maintenance group and links back to this page.

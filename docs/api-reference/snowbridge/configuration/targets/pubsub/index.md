@@ -3,6 +3,7 @@ title: "Configure Pub/Sub as a Snowbridge target"
 sidebar_label: "PubSub"
 description: "Configure PubSub target for Snowplow Snowbridge to write data to GCP Pub/Sub topics with service account authentication."
 keywords: ["snowbridge config", "pubsub target", "gcp pubsub", "pubsub topic", "google cloud"]
+content_type: reference
 ---
 
 ```mdx-code-block

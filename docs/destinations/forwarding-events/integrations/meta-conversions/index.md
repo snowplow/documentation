@@ -5,6 +5,7 @@ sidebar_position: 4
 description: "Send Snowplow events to Meta for ad measurement, attribution, and optimization using the Conversions API with server-side user matching and event data."
 keywords: ["Meta", "Facebook", "Conversions API", "ad measurement", "attribution", "event forwarding"]
 date: "2026-07-03"
+content_type: integration
 ---
 
 ```mdx-code-block

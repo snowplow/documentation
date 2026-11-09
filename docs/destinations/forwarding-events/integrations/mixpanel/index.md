@@ -5,6 +5,7 @@ description: "Send Snowplow events to Mixpanel for product analytics and user be
 sidebar_position: 3
 keywords: ["mixpanel", "event forwarding", "product analytics", "user tracking"]
 date: "2025-11-24"
+content_type: integration
 ---
 
 ```mdx-code-block

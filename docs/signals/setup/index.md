@@ -7,6 +7,7 @@ keywords: ["signals setup", "enable signals", "warehouse connection", "signals d
 date: "2026-06-11"
 sidebar_custom_props:
   space_above: true
+content_type: how-to
 ---
 
 Before you can define attributes or interventions, you'll need to enable Signals for your organization. This is a one-time task, done in [Snowplow Console](https://console.snowplowanalytics.com).

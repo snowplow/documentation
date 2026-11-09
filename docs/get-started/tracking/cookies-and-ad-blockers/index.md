@@ -3,6 +3,7 @@ title: "Strong cookies and ad-blockers"
 sidebar_label: "Cookies and ad-blockers"
 description: "Configure first-party cookies and ad-blocker resilient tracking with Cookie Extension service and custom collector domains."
 keywords: ["first-party cookies", "ad-blockers", "Cookie Extension", "ITP", "tracking resilience"]
+content_type: concept
 ---
 
 This page details a few recommendations to set up your Snowplow tracking.

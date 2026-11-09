@@ -5,6 +5,7 @@ description: "Configure cross-domain tracking to maintain user identity between 
 date: "2025-07-26"
 sidebar_position: 5
 keywords: ["cross-domain tracking", "link decoration", "user identity", "cross-navigation"]
+content_type: concept
 ---
 
 When users navigate between different domains in your ecosystem, their user identity may get fragmented. Examples include navigation from your main website to a partner site, or to a mobile app. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.

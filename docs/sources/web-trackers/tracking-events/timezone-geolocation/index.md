@@ -4,6 +4,7 @@ sidebar_label: "Timezone and geolocation"
 sidebar_position: 100
 description: "Capture user timezone information and geolocation coordinates with accuracy data through browser APIs for location-based analysis."
 keywords: ["timezone", "geolocation"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ description: "Upgrade to JavaScript tracker v4 with changes to cookie handling, 
 keywords: ["v3 to v4 migration", "tracker upgrade", "cookie domain", "async cookies", "fetch api"]
 date: "2021-03-24"
 sidebar_position: 1100
+content_type: how-to
 ---
 
 ```mdx-code-block

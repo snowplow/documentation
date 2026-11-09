@@ -5,6 +5,7 @@ description: "Build a customized version of sp.js with your own naming to avoid 
 keywords: ["white-label", "custom build", "ad blocker bypass", "tracker customization"]
 date: "2022-09-14"
 sidebar_position: 4000
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_label: "Enhanced (legacy)"
 sidebar_position: 70
 description: "Legacy plugin based on Google Analytics Enhanced Ecommerce that has been superseded by the newer Snowplow ecommerce plugin."
 keywords: ["enhanced ecommerce", "legacy"]
+content_type: how-to
 ---
 
 ```mdx-code-block

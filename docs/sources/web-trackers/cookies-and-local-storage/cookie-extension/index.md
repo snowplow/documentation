@@ -5,6 +5,7 @@ description: "How to create and use a Cookie Extension service, previously known
 date: "2020-02-26"
 sidebar_position: 3.5
 keywords: ["Cookie Extension service", "ITP", "Safari tracking prevention", "user identification", "cookie lifetime", "cookie lifespan"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

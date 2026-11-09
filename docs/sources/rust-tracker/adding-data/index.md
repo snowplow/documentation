@@ -5,6 +5,7 @@ date: "2022-10-24"
 sidebar_position: 4000
 description: "Add event context entities and subject data with user and platform information to Rust tracker events using self-describing JSON schemas."
 keywords: ["rust event context", "subject configuration", "context entities"]
+content_type: how-to
 ---
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset:

@@ -4,6 +4,7 @@ sidebar_label: "Event tracking"
 sidebar_position: 50
 description: "Track page views, screen views, structured events, and custom self-describing events with the Python tracker using Event classes and custom context."
 keywords: ["python event tracking", "page view tracking", "self-describing events"]
+content_type: how-to
 ---
 
 The Python tracker makes it simple to track a selection of out-of-the-box events as well as the ability to define your own custom events.

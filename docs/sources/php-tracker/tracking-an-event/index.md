@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 50
 description: "Track page views, ecommerce transactions, screen views, and custom events with the PHP tracker SDK."
 keywords: ["php event tracking", "page view tracking", "ecommerce tracking"]
+content_type: how-to
 ---
 
 Tracking methods supported by the PHP Tracker:

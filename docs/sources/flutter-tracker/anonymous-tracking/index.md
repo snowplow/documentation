@@ -5,6 +5,7 @@ description: "Anonymize user identifiers including domain_userid, session IDs, n
 keywords: ["anonymous tracking", "user anonymization", "privacy", "gdpr", "server anonymization"]
 date: "2022-01-31"
 sidebar_position: 6000
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

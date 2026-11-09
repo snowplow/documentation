@@ -5,6 +5,7 @@ description: "Get started quickly with the JavaScript or Browser tracker to trac
 keywords: ["quick start", "getting started", "setup guide", "page view tracking"]
 date: "2021-03-24"
 sidebar_position: 100
+content_type: how-to
 ---
 
 ```mdx-code-block

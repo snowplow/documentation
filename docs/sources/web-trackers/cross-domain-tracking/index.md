@@ -5,6 +5,7 @@ description: "Track users across multiple domains by decorating links with user 
 keywords: ["cross-domain tracking", "link decoration", "multi-domain tracking"]
 date: "2022-08-30"
 sidebar_position: 2850
+content_type: how-to
 ---
 
 ```mdx-code-block

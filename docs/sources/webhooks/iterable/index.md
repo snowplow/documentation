@@ -5,6 +5,7 @@ date: "2022-05-17"
 sidebar_position: 30
 description: "Track email opens, clicks, SMS, push notifications, and other Iterable system webhook events directly into Snowplow."
 keywords: ["iterable webhook integration", "iterable email tracking", "iterable system webhooks"]
+content_type: integration
 ---
 
 This webhook integration lets you track a variety of events provided by Iterable through their [System Webhooks](https://support.iterable.com/hc/en-us/articles/208013936-System-Webhooks). The event types include email opens and clicks, sent SMS or push notifications, and more.

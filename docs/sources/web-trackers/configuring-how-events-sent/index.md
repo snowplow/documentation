@@ -5,6 +5,7 @@ description: "Configure request methods, payload sizes, retries, and custom head
 keywords: ["event transmission", "post requests", "get requests", "batch sending", "retry configuration"]
 date: "2021-04-07"
 sidebar_position: 2750
+content_type: reference
 ---
 
 ```mdx-code-block

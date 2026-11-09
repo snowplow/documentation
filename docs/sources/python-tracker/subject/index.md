@@ -4,6 +4,7 @@ sidebar_label: "Subject"
 sidebar_position: 40
 description: "Configure subject data for tracked events including user ID, platform, screen resolution, timezone, and IP address for tracker-level or event-level subjects."
 keywords: ["python subject", "user properties", "event context"]
+content_type: reference
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.

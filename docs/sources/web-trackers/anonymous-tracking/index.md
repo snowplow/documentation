@@ -5,6 +5,7 @@ description: "Capture Snowplow web events without user or session identifiers, w
 keywords: ["anonymous tracking", "privacy", "opt-out", "cookieless tracking"]
 date: "2022-08-30"
 sidebar_position: 2860
+content_type: how-to
 ---
 
 ```mdx-code-block

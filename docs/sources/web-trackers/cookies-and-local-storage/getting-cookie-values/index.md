@@ -5,6 +5,7 @@ description: "Retrieve domain user ID, session ID, and other cookie values from 
 keywords: ["get cookie values", "domain userid", "session id", "cookie retrieval"]
 date: "2021-04-07"
 sidebar_position: 500
+content_type: how-to
 ---
 
 ```mdx-code-block

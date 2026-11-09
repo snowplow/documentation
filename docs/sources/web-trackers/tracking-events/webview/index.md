@@ -4,6 +4,7 @@ sidebar_label: "Hybrid applications"
 sidebar_position: 180
 description: "Integrate web tracking in hybrid mobile apps by forwarding events from web views to native iOS, Android, or React Native trackers."
 keywords: ["webview", "hybrid apps"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_label: "Media"
 sidebar_position: 75
 description: "Choose from four media tracking plugins supporting HTML5, YouTube, Vimeo, and custom players with version 2 media schemas."
 keywords: ["media tracking", "video"]
+content_type: landing
 ---
 
 There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:

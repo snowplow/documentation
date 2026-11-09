@@ -5,6 +5,7 @@ description: "Configure tracker behavior with options for cookies, events, anony
 keywords: ["tracker configuration", "initialization options", "configuration object", "tracker settings"]
 date: "2021-03-31"
 sidebar_position: 2000
+content_type: reference
 ---
 
 ```mdx-code-block

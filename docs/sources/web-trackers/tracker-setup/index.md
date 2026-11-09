@@ -5,6 +5,7 @@ description: "Install and initialize the JavaScript or Browser tracker with cust
 keywords: ["tracker setup", "initialization", "newtracker", "sp.js", "npm package"]
 date: "2021-03-31"
 sidebar_position: 1000
+content_type: how-to
 ---
 
 ```mdx-code-block

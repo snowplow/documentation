@@ -68,7 +68,8 @@ const sidebars = {
       // The docs home hides its sidebar; listed here so it belongs to one
       pick('introduction', { label: 'Docs home', className: 'hidden' }),
       pick('cdi', { label: 'CDI overview' }),
-      pick('get-started', { indexOnly: true, label: 'First steps' }),
+      // Redirects to the CDI overview (worker/redirects.js), so it stays hidden
+      pick('get-started', { indexOnly: true, label: 'First steps', className: 'hidden' }),
       pick('get-started/quickstart', { label: 'Quickstart with your coding agent' }),
       sub(
         'Quickstart step by step',
@@ -277,6 +278,7 @@ const sidebars = {
   platform: [
     pick('platform', { label: 'Platform overview' }),
     group('Deploy Snowplow', [
+      pick('get-started/deployment-options'),
       pick('get-started/feature-comparison'),
       pick('get-started/private-managed-cloud', { label: 'Private Managed Cloud setup' }),
       pick('get-started/self-hosted', { label: 'Self-Hosted' }),

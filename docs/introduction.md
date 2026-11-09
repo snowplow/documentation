@@ -30,7 +30,7 @@ Snowplow Customer Data Infrastructure (CDI) collects behavioral data from your w
 <p className="home-hero__agent-title">Evaluating or running Snowplow?</p>
 
 * [How the pipeline works](/docs/fundamentals/index.md)
-* [Deployment options](/docs/get-started/index.md#customer-data-infrastructure)
+* [Deployment options](/docs/get-started/deployment-options/index.md)
 * [Try Snowplow free](/docs/get-started/free-trial/index.md)
 * [Coming from Segment, GA, Adobe, or Mixpanel](/docs/migration-guides/index.md)
 

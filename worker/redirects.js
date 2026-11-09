@@ -5,6 +5,10 @@ const forcedRules = [
   // the Unified Digital tutorial. The page stays as a `type: link` stub.
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified.md', '/tutorials/unified-digital/setting-up-locally.md', 301],
+  // First steps merged into the CDI overview. Exact rules, so the pages
+  // under /docs/get-started/ are still served.
+  ['/docs/get-started/', '/docs/cdi/', 301],
+  ['/docs/get-started.md', '/docs/cdi.md', 301],
 ];
 
 // Rules that only apply when the page is not found.
@@ -276,7 +280,7 @@ const fallbackRules = [
   ['/docs/using-the-snowplow-console/*', '/docs/account-management/:splat', 301],
   ['/docs/discovering-data/*', '/docs/data-product-studio', 301],
   ['/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/', '/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/', 301],
-  ['/docs/get-started/deployment-model/*', '/docs/get-started/', 301],
+  ['/docs/get-started/deployment-model/*', '/docs/cdi/', 301],
   ['/docs/get-started/snowplow-bdp/private-managed-cloud/*', '/docs/get-started/snowplow-bdp/:splat', 301],
   ['/docs/get-started/snowplow-bdp/cloud/*', '/docs/get-started/snowplow-bdp/', 301],
   ['/docs/get-started/snowplow-community-edition/what-is-community-edition/', '/docs/get-started/snowplow-community-edition/', 301],

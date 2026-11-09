@@ -17,7 +17,7 @@ import { FeatureVersionTable } from '@site/src/components/AppliesTo';
 
 This page lists the most recent versions of Snowplow components.
 
-Some information about components is relevant only for [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) users, as [Snowplow CDI](/docs/get-started/index.md#customer-data-infrastructure) customers won't need to configure all their own components.
+Some information about components is relevant only for [Snowplow Self-Hosted](/docs/get-started/deployment-options/index.md#self-hosted) users, as [Snowplow CDI](/docs/get-started/deployment-options/index.md#customer-data-infrastructure) customers won't need to configure all their own components.
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 

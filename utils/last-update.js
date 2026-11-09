@@ -69,10 +69,13 @@ function buildIndex(repoRoot) {
  * `Last-Update: ignore`, or null to keep the Docusaurus default.
  */
 function lastUpdateOverride(filePath, repoRoot) {
+  const rel = path.relative(repoRoot, filePath).split(path.sep).join('/')
+  // Partials (_file.md, or anything under a _folder) can't carry front
+  // matter: Docusaurus fails the build if they do
+  if (rel.split('/').some((segment) => segment.startsWith('_'))) return null
   if (cache === undefined) return null
   if (cache === null) cache = buildIndex(repoRoot) ?? undefined
   if (!cache) return null
-  const rel = path.relative(repoRoot, filePath).split(path.sep).join('/')
   if (!cache.newestIsIgnored.get(rel)) return null
   return cache.keptDate.get(rel) ?? null
 }

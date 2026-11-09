@@ -15,7 +15,7 @@ You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Co
 
 Start a [free trial](https://snowplow.io/get-started/snowplow-free-trial) of Snowplow CDI Cloud, or create an account on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) for a hosted environment with no end date. Neither needs a credit card.
 
-Your environment is provisioned automatically. You'll receive access instructions within around 20 minutes, and there's no infrastructure to set up. See the [free trial](/docs/get-started/free-trial/index.md) page for the limits that apply.
+Your environment is provisioned automatically. You'll usually receive access instructions within moments of verifying your email address, and there's no infrastructure to set up. See the [free trial](/docs/get-started/free-trial/index.md) page for the limits that apply.
 
 Already on Snowplow CDI? Log in to [Console](https://console.snowplowanalytics.com) and skip to the next step.
 

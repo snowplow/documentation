@@ -15,6 +15,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+<IntegrationBadges id="iceberg" />
+
 :::info[Cloud availability]
 
 The Iceberg integration is available for Snowplow pipelines running on **AWS** and **GCP** only.

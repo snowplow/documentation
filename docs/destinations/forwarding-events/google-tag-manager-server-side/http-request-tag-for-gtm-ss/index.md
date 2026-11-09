@@ -8,6 +8,8 @@ keywords: ["HTTP Request Tag", "GTM SS HTTP", "custom endpoints", "API integrati
 content_type: integration
 ---
 
+<IntegrationBadges id="gtm-http" />
+
 The HTTP Request Tag for GTM SS allows events to be forwarded to any JSON HTTP endpoint. This Tag works best with events from the Snowplow Client, but can also work with other GTM SS Clients such as GAv4.
 
 ## Template installation

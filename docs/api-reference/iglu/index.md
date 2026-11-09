@@ -9,11 +9,9 @@ content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="All Snowplow platforms include Iglu. It's managed under-the-hood for CDI customers."
+  note="All Snowplow platforms include Iglu. It's managed under-the-hood for CDI customers."
 />
 ```
 

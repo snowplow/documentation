@@ -11,11 +11,9 @@ content_type: landing
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Event Studio is a paid addon for Snowplow CDI."
+  note="Event Studio is a paid addon for Snowplow CDI."
 />
 ```
 

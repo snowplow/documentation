@@ -1,6 +1,6 @@
 ---
 title: "Migration guides for dbt data models"
-sidebar_label: "Migration guides"
+sidebar_label: "dbt package upgrade guides"
 sidebar_position: 80
 description: "Migration guides for upgrading from previous versions of Snowplow dbt packages including breaking changes and configuration updates."
 keywords: ["dbt migration", "package upgrade", "breaking changes", "version upgrade"]

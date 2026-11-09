@@ -9,9 +9,7 @@ keywords: ["tracker", "configuration"]
 
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Using the Snowplow GTM custom templates you can now deploy, implement, and configure the Snowplow JavaScript tracker directly on the website using Google Tag Manager.

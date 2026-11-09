@@ -7,11 +7,8 @@ sidebar_position: 200
 content_type: concept
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>
+<VersionBadge component="dbtSnowplowWeb" />
 
 ```mdx-code-block
 import Consent from "@site/docs/reusable/data-modeling/consent/_index.md";

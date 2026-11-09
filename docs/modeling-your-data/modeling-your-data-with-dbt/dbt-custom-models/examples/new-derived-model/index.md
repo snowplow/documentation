@@ -3,7 +3,7 @@ title: "New derived model"
 sidebar_label: "New derived model"
 description: "Create new incremental derived models in Snowplow dbt packages building from events this run with optimized upserts."
 keywords: ["new derived model", "custom incremental model", "derived table", "incremental dbt model"]
-sidebar_position: 20
+sidebar_position: 25
 content_type: how-to
 ---
 

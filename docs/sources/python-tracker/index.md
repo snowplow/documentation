@@ -9,15 +9,13 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Pypi Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker Pypi Release"></Badges>
+<TrackerTier id="python" />
+<VersionBadge component="pythonTracker" href="https://pypi.org/project/snowplow-tracker/" />
 </BadgeGroup>
 ```
+
+<TrackerFeatures id="python" />
 
 The Snowplow Python Tracker allows you to track Snowplow events from your Python apps and games.
 

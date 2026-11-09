@@ -1,6 +1,6 @@
 ---
 title: "Initialize the Python tracker"
-sidebar_label: "Initialization"
+sidebar_label: "Initialize"
 sidebar_position: 20
 description: "Initialize the Python tracker using the Snowplow class or Tracker, Emitter, and Subject classes with configuration for namespace, endpoint, and encoding."
 keywords: ["python tracker initialization", "tracker configuration", "snowplow class"]

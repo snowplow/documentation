@@ -10,7 +10,6 @@ import { useReleaseNotes, formatUpdateDate } from '@site/src/components/release-
 import { QUICKSTARTS, LIFECYCLE, type ProductKey } from '@site/src/data/home'
 
 export { default as AgentSetup } from './AgentSetup'
-export { default as PipelineMap } from './PipelineMap'
 
 // --- Search -----------------------------------------------------------------
 

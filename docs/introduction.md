@@ -12,7 +12,7 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import { HomeSearch, PipelineMap, Quickstarts } from '@site/src/components/home'
+import { HomeSearch, Quickstarts } from '@site/src/components/home'
 
 <div className="home-hero breakout">
 <div className="home-hero__intro">
@@ -35,12 +35,6 @@ Snowplow CDI collects, validates, and models behavioral data from your apps, and
 
 </div>
 </div>
-
-## Explore the pipeline
-
-Events flow from left to right: you design them, trackers collect them, and the pipeline validates, enriches, loads, and models them. Signals reads the same events as they arrive. Select any step to go to its docs.
-
-<PipelineMap />
 
 ## Choose a product
 

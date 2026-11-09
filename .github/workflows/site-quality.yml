@@ -1,0 +1,101 @@
+name: Site quality checks
+
+# Stylelint, axe accessibility checks, and visual regression screenshots for
+# the docs site. These report problems but don't block merges yet: the CSS
+# rewrite in Phase 1 of the docs redesign is what brings them to green.
+# Once it lands, remove the continue-on-error lines.
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'static/**'
+      - 'docusaurus.config.ts'
+      - 'tailwind.config.js'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'quality/**'
+      - 'stylelint.config.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stylelint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: corepack enable
+      - run: yarn install --immutable
+      - name: Lint CSS
+        continue-on-error: true
+        run: yarn lint:css
+
+  browser-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: corepack enable
+      - run: yarn install --immutable
+      - name: Install Chromium
+        run: yarn playwright install --with-deps chromium
+
+      # Baselines come from the base branch, so the diff shows what this PR changes
+      - name: Build base branch
+        if: github.event_name == 'pull_request'
+        run: |
+          git worktree add ../base origin/${{ github.base_ref }}
+          cd ../base
+          yarn install --immutable
+          NODE_OPTIONS='--max-old-space-size=4096' yarn build
+      - name: Capture base screenshots
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_URL: http://localhost:3001
+          VR_DIR: ${{ runner.temp }}/baselines
+        run: |
+          yarn docusaurus serve --dir ../base/build --port 3001 --no-open &
+          timeout 60 bash -c 'until curl -sf http://localhost:3001/docs/ > /dev/null; do sleep 1; done'
+          yarn qa:visual:capture
+          kill %1
+
+      - name: Build this branch
+        run: NODE_OPTIONS='--max-old-space-size=4096' yarn build
+
+      - name: Accessibility (axe)
+        continue-on-error: true
+        run: yarn qa:a11y
+      - name: Accessibility summary
+        if: always()
+        run: yarn qa:a11y:summary >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Visual regression
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        env:
+          VR_DIR: ${{ runner.temp }}/baselines
+        run: yarn qa:visual
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-quality-report
+          path: |
+            quality/playwright-report
+            quality/test-results
+            quality/a11y-report
+          retention-days: 14

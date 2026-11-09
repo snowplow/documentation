@@ -1,6 +1,6 @@
 ---
 title: "Calculate your first attributes in real time with Signals"
-sidebar_label: "Quickstart tutorial"
+sidebar_label: "Quickstart step by step"
 sidebar_position: 10
 description: "Use Snowplow Console to define a Signals attribute group and service that calculate session metrics from page views in real time, then retrieve them with the Signals Python SDK."
 keywords: ["signals quickstart", "signals tutorial", "real-time attributes", "attribute groups", "signals python sdk", "snowplow console"]
@@ -38,13 +38,27 @@ You'll finish by retrieving the attribute values for your own browsing session w
 
 You'll need:
 
-* A web application where you can add the JavaScript tracker and track page views
-* Signals enabled on your Snowplow account
+* A web application where you can add the JavaScript tracker
 * A Python notebook environment, such as Google Colab or Jupyter
 
-:::note[Signals free tier]
-If you don't have a Snowplow account, sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral), which includes event collection, to follow along.
-:::
+What else you need depends on where you're starting from:
+
+<Tabs groupId="signals-start" queryString>
+<TabItem value="new" label="New to Snowplow" default>
+
+1. Sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral). It comes with event collection and with Signals already enabled.
+2. Add the JavaScript tracker to your web application and send page views, by following [Track your first events](/docs/get-started/tracking/index.md). It shows where to find your Collector URL.
+3. Continue from [Create the attribute group](#create-the-attribute-group).
+
+</TabItem>
+<TabItem value="tracking" label="Already tracking with Snowplow">
+
+1. Check that your web application sends page views with the [JavaScript tracker](/docs/sources/web-trackers/index.md). This tutorial calculates attributes per session, from the `domain_sessionid` the tracker sets.
+2. Make sure Signals is enabled on your account. If it isn't, follow [Set up Signals](/docs/signals/setup/index.md).
+3. Continue from [Create the attribute group](#create-the-attribute-group).
+
+</TabItem>
+</Tabs>
 
 ## Steps
 
@@ -57,6 +71,10 @@ Each step builds on the one before it. Keep your web application open in another
 Log in to [Console](https://console.snowplowanalytics.com) and go to the **Signals** section.
 
 If Signals isn't enabled for your organization yet, follow [Set up Signals](/docs/signals/setup/index.md) first.
+
+### Track page views
+
+Signals calculates these attributes from page views. If your web application doesn't send Snowplow page views yet, follow [Track your first events](/docs/get-started/tracking/index.md) to add the JavaScript tracker, then come back. Open a few pages and check the page views in the [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md) before you continue.
 
 ### Create the attribute group
 

@@ -72,7 +72,7 @@ const sidebars = {
       pick('get-started', { indexOnly: true, label: 'First steps', className: 'hidden' }),
       pick('get-started/quickstart', { label: 'Quickstart with your coding agent' }),
       sub(
-        'Set up step by step',
+        'Quickstart step by step',
         [
           pick('get-started/free-trial', { label: 'Start a free trial' }),
           pick('get-started/console', { label: 'Explore Console' }),
@@ -87,11 +87,13 @@ const sidebars = {
       pick('event-studio', {
         hoist: true,
         indexLabel: 'Event Studio',
-        exclude: ['event-studio/query-sql'],
+        // Snowtype code generation lives with the trackers, under Collect events
+        exclude: ['event-studio/query-sql', 'event-studio/implement-tracking'],
       }),
     ], { collapsible: true, collapsed: true }),
     group('Collect events', [
       pick('sources', { indexOnly: true, label: 'Trackers overview' }),
+      pick('event-studio/implement-tracking', { label: 'Generate tracking code with Snowtype' }),
       sub('Web', [
         pick('sources/web-trackers'),
         pick('sources/google-tag-manager'),
@@ -175,8 +177,8 @@ const sidebars = {
   signals: [
     group('Get started', [
       pick('signals/introduction', { label: 'Signals overview' }),
-      pick('signals/quickstart', { label: 'Quickstart with an agent' }),
-      pick('signals/get-started/quickstart-tutorial', { label: 'Quickstart in Console' }),
+      pick('signals/quickstart', { label: 'Quickstart with your coding agent' }),
+      pick('signals/get-started/quickstart-tutorial', { label: 'Quickstart step by step' }),
       // Redirects to the introduction (worker/redirects.js), so it stays hidden
       pick('signals', { indexOnly: true, label: 'Signals', className: 'hidden' }),
     ]),

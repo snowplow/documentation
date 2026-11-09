@@ -1,6 +1,6 @@
 ---
 title: "Signals quickstart with your coding agent"
-sidebar_label: "Quickstart with an agent"
+sidebar_label: "Quickstart with your coding agent"
 sidebar_position: 3
 description: "Sign up for Snowplow Signals, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that asks what you want to build, then adds tracking and Signals configuration to your web app."
 keywords: ["signals quickstart", "snowplow mcp", "coding agent", "claude code", "cursor", "real-time attributes"]

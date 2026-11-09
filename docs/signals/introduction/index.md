@@ -35,7 +35,7 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
-To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. To do the same steps yourself in Console, follow [Quickstart in Console](/docs/signals/get-started/quickstart-tutorial/index.md).
+To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. To do the same steps yourself in Console, follow the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md).
 
 The quickstart uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. Once connected, your assistant can also answer questions about your Signals setup, and create and publish attribute groups, services, and interventions as you describe them. To do this from Console instead, use the [Snowplow Assistant](/docs/ai/console-agent/index.md). See the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a walkthrough.
 

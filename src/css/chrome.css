@@ -671,12 +671,13 @@
 
   .section-header > .menu__list-item-collapsible > .section-header__label:hover {
     background: none;
-    color: var(--sp-color-fg);
+    color: var(--sp-color-fg-muted);
   }
 
-  /* Section headers group the sidebar, via sidebars.js */
+  /* Section headers group the sidebar, via sidebars.js. They're muted, so
+     they read as labels and the page links stand out. */
   .section-header > .menu__list-item-collapsible > .menu__link {
-    color: var(--sp-color-fg);
+    color: var(--sp-color-fg-muted);
     font-size: var(--sp-text-xs);
     font-weight: var(--sp-weight-semibold);
     letter-spacing: 0.04em;
@@ -694,6 +695,7 @@
 
   .section-header > .menu__list-item-collapsible > .menu__link:hover {
     background: var(--sp-color-surface-raised);
+    color: var(--sp-color-fg);
   }
 
   .section-header__toggle {

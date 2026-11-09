@@ -25,13 +25,14 @@ jobs:
         id: changed-files
         run: |
           # Get list of changed .md and .mdx files, excluding partials (files starting
-          # with underscore), repo-root files such as README.md, and research notes
+          # with underscore), repo-root files such as README.md, research notes, and the quality/ tooling docs
           git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD | \
             grep -E '\.(md|mdx)$' | \
             grep -v '^_' | \
             grep -v '/_' | \
             grep '/' | \
-            grep -v '^research/' > changed_files.txt || true
+            grep -v '^research/' | \
+            grep -v '^quality/' > changed_files.txt || true
 
           if [ -s changed_files.txt ]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT

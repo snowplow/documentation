@@ -2,7 +2,7 @@
 title: "Choose how to use Signals attributes"
 sidebar_position: 30
 sidebar_label: "Use in your application"
-description: "Choose how your application, agent, or model reads Signals data: services and retrieved attributes, agentic contexts, the Signals MCP server, interventions, or training datasets."
+description: "Choose how your application, agent, or model reads Signals data: services, agentic contexts, the Signals MCP server, interventions, or training datasets."
 keywords: ["retrieve attributes", "subscribe interventions", "agentic contexts", "signals mcp server", "real-time personalization"]
 date: "2026-06-11"
 content_type: landing

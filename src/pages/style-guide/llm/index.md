@@ -1,3 +1,10 @@
+---
+title: "Snowplow documentation style guide"
+sidebar_label: "Snowplow documentation style guide"
+description: "The full writing and formatting rules for the Snowplow documentation, used for style reviews."
+keywords: ["documentation style guide", "style review", "writing rules"]
+---
+
 # Snowplow documentation style guide
 
 ## Grammar and spelling

@@ -1,9 +1,11 @@
 ---
 title: "3.0.0 upgrade guide"
+sidebar_label: "3.0.0 upgrade guide"
 date: "2025-10-27"
 sidebar_position: 10.5
 description: "Guide for upgrading to S3 Loader 3.0.0, covering buffering changes, LZO deprecation, configuration refactoring, and filename changes."
 keywords: ["S3 Loader", "upgrade guide", "AWS SDK", "Kinesis", "S3"]
+content_type: how-to
 ---
 
 ```mdx-code-block

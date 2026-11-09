@@ -2,7 +2,7 @@
 title: "Pull attributes or push interventions"
 sidebar_position: 10
 sidebar_label: "Pull and push"
-description: "Signals delivers calculated attributes to your applications in two ways: your application pulls attribute values when it needs them, or Signals pushes interventions when a user meets trigger criteria."
+description: "Signals delivers attributes in two ways: your application pulls attribute values when it needs them, or Signals pushes interventions when a user meets criteria."
 keywords: ["signals services", "signals interventions", "pull vs push", "retrieve attributes", "subscribe interventions"]
 date: "2026-11-06"
 content_type: concept

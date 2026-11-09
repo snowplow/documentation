@@ -1,5 +1,6 @@
 ---
 title: "Google Tag Manager"
+sidebar_label: "Google Tag Manager"
 date: "2020-08-10"
 sidebar_position: 3100
 description: "Documentation for Google Tag Manager in the web tracker."

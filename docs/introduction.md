@@ -6,7 +6,7 @@ displayed_sidebar: null
 hide_table_of_contents: true
 sidebar_position: 0
 sidebar_label: "Docs home"
-description: "Documentation for Snowplow CDI, which collects, validates, and models behavioral data in your own cloud, and Snowplow Signals, which serves real-time attributes to applications and AI agents."
+description: "Docs for Snowplow CDI, which collects, validates, and models behavioral data in your cloud, and Signals, which serves real-time attributes to apps and agents."
 keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "signals", "coding agent"]
 pagination_next: null
 pagination_prev: null

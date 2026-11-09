@@ -1,5 +1,6 @@
 ---
 title: "HTML5 Media Tracking"
+sidebar_label: "HTML5 Media Tracking"
 date: "2022-01-11"
 sidebar_position: 12510
 description: "Documentation for tracking HTML5 Media Tracking with the web tracker."

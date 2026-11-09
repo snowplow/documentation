@@ -2,7 +2,7 @@
 title: "Signals connection reference"
 sidebar_position: 10
 sidebar_label: "SDK and API reference"
-description: "Reference for connecting to Snowplow Signals: which interface supports which task, connection credentials, SDK client options and methods, and Signals API and MCP server endpoints."
+description: "Reference for connecting to Snowplow Signals: interface support by task, connection credentials, SDK client options and methods, and API and MCP endpoints."
 keywords: ["signals connection", "signals credentials", "snowplow-signals", "@snowplow/signals-node", "signals api", "signals sdk methods"]
 date: "2026-11-06"
 content_type: reference
@@ -72,8 +72,8 @@ Package: [`snowplow-signals`](https://pypi.org/project/snowplow-signals/) on PyP
 | `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store         |
 | `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
 | `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                        |
-| `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
-| `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
+| `push_intervention`      | Pushes an intervention to subscribers for a set of attribute keys           |
+| `pull_interventions`     | Opens a streaming subscription of interventions for a set of attribute keys |
 
 ### Node.js SDK
 

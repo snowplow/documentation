@@ -1,7 +1,7 @@
 ---
 title: "Cross-domain tracking"
 sidebar_label: "Cross-domain tracking"
-description: "Maintain user identity between domains and apps with cross-domain (cross-navigation) tracking: how link decoration works, how to configure the web tracker, tracker support, and how Identities resolves cross-domain users."
+description: "Keep user identity across domains and apps with cross-navigation tracking: how link decoration works, how to configure the web tracker, and tracker support."
 date: "2025-07-26"
 sidebar_position: 5
 keywords: ["cross-domain tracking", "link decoration", "user identity", "cross-navigation", "crossDomainLinker", "refr_domain_userid", "identities"]

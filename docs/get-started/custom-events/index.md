@@ -2,7 +2,7 @@
 title: "Create your first custom events"
 sidebar_position: 8
 sidebar_label: "Define custom events"
-description: "Create a custom event and an entity in Console, deploy them to your development environment, track them with the web tracker, and check them in Snowplow Inspector."
+description: "Create a custom event and entity in Console, deploy them to your development environment, track them with the web tracker, and check them in the Inspector."
 keywords: ["custom events", "self-describing events", "custom entities", "event schemas"]
 content_type: tutorial
 pagination_next: get-started/querying/index

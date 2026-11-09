@@ -2,7 +2,7 @@
 title: "Snowplow CDI overview"
 sidebar_position: 1
 sidebar_label: "CDI overview"
-description: "Snowplow CDI tracks behavioral data from your apps, validates it against your schemas, enriches it, and loads it into your warehouse, lake, or stream. Find the docs for each stage."
+description: "Snowplow CDI tracks behavioral data from your apps, validates and enriches it, and loads it into your warehouse, lake, or stream. Find the docs for each stage."
 keywords: ["snowplow cdi", "customer data infrastructure", "behavioral data pipeline", "event tracking", "data warehouse"]
 date: "2026-11-06"
 content_type: landing

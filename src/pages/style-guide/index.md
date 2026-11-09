@@ -1,3 +1,10 @@
+---
+title: "Snowplow style guide"
+sidebar_label: "Snowplow style guide"
+description: "Writing rules for all Snowplow content, including documentation, blog posts, and marketing copy."
+keywords: ["style guide", "writing guidelines", "snowplow content"]
+---
+
 # Snowplow style guide
 
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.

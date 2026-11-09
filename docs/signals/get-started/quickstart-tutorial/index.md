@@ -2,7 +2,7 @@
 title: "Calculate your first attributes in real time with Signals"
 sidebar_label: "Quickstart step by step"
 sidebar_position: 10
-description: "Use Snowplow Console to define a Signals attribute group and service that calculate session metrics from page views in real time, then retrieve them with the Signals Python SDK."
+description: "Use Snowplow Console to define a Signals attribute group and service that calculate session metrics in real time, then retrieve them with the Python SDK."
 keywords: ["signals quickstart", "signals tutorial", "real-time attributes", "attribute groups", "signals python sdk", "snowplow console"]
 date: "2026-11-06"
 content_type: tutorial

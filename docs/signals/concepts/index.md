@@ -102,7 +102,23 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 
 ## Data sources
 
-Signals computes attributes in real time from the event stream, optionally backfilled from your warehouse, or syncs pre-calculated values from warehouse tables. To compare the options and pick one, see [Choose a data source](/docs/signals/data-sources/events/index.md#choose-a-data-source).
+Signals computes attributes in real time from the event stream, optionally backfilled from your warehouse, or syncs pre-calculated values from warehouse tables.
+
+### Choose a data source
+
+Use the stream for real-time use cases, such as the latest product a user viewed, or the number of page views in a session. Enable backfill to add historical data from your warehouse, such as a user's purchase history. Use a warehouse source to bring in modeled data, such as transactional data or CRM attributes. To send events for a stream source, see [Send events to Signals](/docs/signals/data-sources/events/index.md).
+
+| Feature                            | Stream                                                            | [Stream with backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) | [Warehouse](/docs/signals/attributes/warehouse-config/index.md) |
+| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Freshness                          | Real time                                                         | Real time, plus a one-off backfill up to the publish time                                       | Hourly by default, or every 6, 12, or 24 hours                   |
+| Real-time calculation              | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Period-based calculations          | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Lifetime calculations (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                                                       | ❌                                                                |
+| Historical data                    | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp                         | ✅ any pre-calculated data                                        |
+| Non-Snowplow data                  | ❌                                                                 | ❌                                                                                               | ✅                                                                |
+| Needs a warehouse connection       | ❌                                                                 | ✅                                                                                               | ✅                                                                |
+| Python SDK class                   | `StreamAttributeGroup`                                            | `StreamAttributeGroup` with `backfill_since_tstamp`                                             | `ExternalBatchAttributeGroup` with a `BatchSource`               |
+
 
 ### Stream source
 

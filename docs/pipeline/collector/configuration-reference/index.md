@@ -1,5 +1,5 @@
 ---
-title: "Collector configuration reference"
+title: "Collector configuration API reference"
 sidebar_position: 10
 sidebar_label: "Configuration reference"
 description: "Reference for the Console API Collector configuration endpoint, its response fields and defaults, and the HTTP request headers the Snowplow Collector accepts."

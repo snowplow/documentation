@@ -2,7 +2,7 @@
 title: "Data destinations overview"
 sidebar_label: "Destinations"
 sidebar_position: 6
-description: "Every place Snowplow can send your events: warehouse and lake loaders, event forwarders, GTM Server Side tags, Snowbridge targets, custom stream consumers, and reverse ETL."
+description: "Every place Snowplow can send your events: warehouse and lake loaders, event forwarders, GTM Server Side, Snowbridge targets, stream consumers, and reverse ETL."
 keywords: ["data destinations", "event forwarding", "data warehouses", "data lakes", "reverse ETL", "snowbridge"]
 ---
 

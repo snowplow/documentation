@@ -2,7 +2,7 @@
 title: "Failed events hub"
 sidebar_label: "Failed events hub"
 sidebar_position: 1
-description: "Find every page about Snowplow failed events in one place: what they are, how to see them in a new pipeline, how to monitor and alert on them, how to load and query them, and how to recover them."
+description: "Every page about Snowplow failed events: what they are, how to see them in a new pipeline, how to monitor, alert on, and query them, and how to recover them."
 keywords: ["failed events", "data quality", "failed event recovery", "failed events loader", "data quality dashboard", "failed event alerts"]
 date: "2026-11-06"
 content_type: landing
@@ -10,7 +10,7 @@ content_type: landing
 
 Failed events are events the pipeline couldn't process, for example because they didn't match their schema or an enrichment failed. The pipeline keeps them separate, so they don't affect the data in your warehouse, and you can fix and reprocess many of them. The [failed events fundamentals](/docs/fundamentals/failed-events/index.md) page explains why events fail and where they go.
 
-The pages about failed events live in four parts of the docs: Fundamentals, Get started, Monitor and operate, and Reference. This page lists them by task. Start with the task you have now.
+The pages about failed events live in four parts of the docs: Fundamentals, Get started, Monitor and operate, and Reference. This page lists them by task.
 
 | I want to                                         | Go to                                                                                                       |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ How you recover failed events depends on where they are. If you load them into a
 * [Recover failed events](/docs/monitoring/recovering-failed-events/index.md): choose a recovery method
 * [Recover loaded events from a failed events table with SQL](/docs/monitoring/recovering-failed-events/recover-with-sql/index.md): the recommended method
 
-### Manual recovery from buckets
+### Recover failed events manually from buckets
 
 Manual recovery runs a job that reads failed events from your buckets, applies the fixes you configure, such as replacing or removing values or casting types, and replays the fixed events through your pipeline. Work through the pages in this order:
 

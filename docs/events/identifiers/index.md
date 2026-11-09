@@ -1,7 +1,7 @@
 ---
 title: "User and session identifiers"
 sidebar_label: "User and session identifiers"
-description: "Track user and session identifiers including domain_userid, network_userid, session IDs, business user IDs, and the Snowplow ID from Identities, with tracker support, session timeouts, and the client session entity."
+description: "Track user and session identifiers, including domain_userid, network_userid, session IDs, business user IDs, and the Snowplow ID, with session timeouts."
 sidebar_position: 3
 keywords: ["user identification", "session tracking", "domain_userid", "user_id", "session ID", "Snowplow ID", "identity resolution", "Identities", "client_session", "session timeout"]
 content_type: concept

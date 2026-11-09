@@ -1,5 +1,6 @@
 ---
 title: "Snowplow Plugin for getanalytics.io"
+sidebar_label: "Snowplow Plugin for getanalytics.io"
 date: "2020-08-10"
 sidebar_position: 4001
 description: "Plugin documentation for Snowplow Plugin for getanalytics.io functionality in the tracker."

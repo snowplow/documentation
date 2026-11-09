@@ -24,11 +24,14 @@ jobs:
       - name: Get changed markdown files
         id: changed-files
         run: |
-          # Get list of changed .md and .mdx files, excluding files starting with underscore
+          # Get list of changed .md and .mdx files, excluding partials (files starting
+          # with underscore), repo-root files such as README.md, and research notes
           git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD | \
             grep -E '\.(md|mdx)$' | \
             grep -v '^_' | \
-            grep -v '/_' > changed_files.txt || true
+            grep -v '/_' | \
+            grep '/' | \
+            grep -v '^research/' > changed_files.txt || true
 
           if [ -s changed_files.txt ]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT

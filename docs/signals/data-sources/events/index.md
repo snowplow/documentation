@@ -17,28 +17,7 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
-Use events as the data source when you need attributes that update in real time, such as the number of products a user viewed in the last ten minutes. To bring in pre-calculated values such as CRM or transactional data, [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) instead. [Choose a data source](#choose-a-data-source) compares the options.
-
-## Choose a data source
-
-Whether to compute attributes in real time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
-* Stream for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's purchase history.
-* Warehouse to bring in modeled data from your warehouse, such as transactional data or CRM attributes.
-
-This table summarizes the options:
-
-| Feature                            | Stream                                                            | [Stream with backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) | [Warehouse](/docs/signals/attributes/warehouse-config/index.md) |
-| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Freshness                          | Real time                                                         | Real time, plus a one-off backfill up to the publish time                                       | Hourly by default, or every 6, 12, or 24 hours                   |
-| Real-time calculation              | ✅                                                                 | ✅                                                                                               | ❌                                                                |
-| Period-based calculations          | ✅                                                                 | ✅                                                                                               | ❌                                                                |
-| Lifetime calculations (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                                                       | ❌                                                                |
-| Historical data                    | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp                         | ✅ any pre-calculated data                                        |
-| Non-Snowplow data                  | ❌                                                                 | ❌                                                                                               | ✅                                                                |
-| Needs a warehouse connection       | ❌                                                                 | ✅                                                                                               | ✅                                                                |
-| Python SDK class                   | `StreamAttributeGroup`                                            | `StreamAttributeGroup` with `backfill_since_tstamp`                                             | `ExternalBatchAttributeGroup` with a `BatchSource`               |
-
-How backfill works is described in [How Signals works](/docs/signals/concepts/index.md#backfill). The rest of this page covers the stream source.
+Use events as the data source when you need attributes that update in real time, such as the number of products a user viewed in the last ten minutes. To bring in pre-calculated values such as CRM or transactional data, [sync warehouse tables](/docs/signals/attributes/warehouse-config/index.md) instead. [Choose a data source](/docs/signals/concepts/index.md#choose-a-data-source) compares the options.
 
 ## Before you begin
 
@@ -53,7 +32,13 @@ On either path, these are the only additions Signals needs:
 * Add the [Signals browser plugin](/docs/signals/applications/subscribe/index.md) if a web application receives interventions.
 * Check that your events carry the identifiers your [attribute keys](/docs/signals/attributes/attribute-keys/index.md) need.
 
-## Add a tracker to your application
+## Add tracking for Signals
+
+Follow these steps to add tracking, send the identifiers Signals needs, and check that events arrive.
+
+<Steps>
+
+### Add a tracker to your application
 
 Each Snowplow tracker sends events to the Collector, and the Signals streaming engine inspects every event as it arrives. Choose the tracker for the platform that generates the behavior you want to calculate attributes from:
 
@@ -69,7 +54,7 @@ Built-in events such as page views, page pings, and screen views work without ex
 
 To have a coding agent add the tracking for you, follow the [Signals quickstart with your coding agent](/docs/signals/quickstart/index.md).
 
-## Send the identifiers your attribute keys use
+### Send the identifiers your attribute keys use
 
 Signals calculates each attribute per [attribute key](/docs/signals/attributes/attribute-keys/index.md), such as a user or a session. The built-in attribute keys read the atomic [user fields](/docs/fundamentals/canonical-event/index.md#user-fields) that the trackers set on every event:
 
@@ -79,9 +64,7 @@ Signals calculates each attribute per [attribute key](/docs/signals/attributes/a
 
 If you want attributes per logged-in user, set the user ID in your tracker when the user logs in.
 
-To receive interventions in a web application, also add the [Signals browser plugin](/docs/signals/applications/subscribe/index.md) to the JavaScript tracker.
-
-## Check that events arrive
+### Check that events arrive
 
 Signals only calculates attributes from events received after you publish the attribute group, unless you enable [backfill](/docs/signals/concepts/index.md#backfill). To check your tracking:
 
@@ -89,3 +72,5 @@ Signals only calculates attributes from events received after you publish the at
 2. Check your browser's network tab for tracking requests to the Collector endpoint. If an ad blocker stops them, see [cookies and ad blockers](/docs/get-started/tracking/cookies-and-ad-blockers/index.md).
 3. Inspect the events with the [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md) browser extension to confirm they include the identifiers your attribute keys need.
 4. [Retrieve the attributes](/docs/signals/applications/retrieve-attributes/index.md) to confirm Signals is calculating them.
+
+</Steps>

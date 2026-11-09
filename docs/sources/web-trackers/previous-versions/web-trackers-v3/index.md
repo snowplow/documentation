@@ -1,5 +1,6 @@
 ---
 title: "Web trackers (v3)"
+sidebar_label: "Web trackers (v3)"
 date: "2021-03-24"
 sidebar_position: 100
 description: "Documentation for tracking Web ers (v3) with the web tracker."

@@ -2,7 +2,7 @@
 title: "Publish and manage Signals configuration"
 sidebar_position: 60
 sidebar_label: "Publish and manage"
-description: "How attribute groups, interventions, services, and agentic contexts move from draft to published, how versions work, and what happens when you unpublish or delete them."
+description: "How attribute groups, interventions, services, and agentic contexts move from draft to published, how versions work, and what unpublishing and deleting do."
 keywords: ["publish attribute groups", "publish interventions", "signals versioning", "unpublish", "signals lifecycle"]
 date: "2026-11-06"
 content_type: concept
@@ -13,7 +13,7 @@ Signals only acts on configuration that you've published. Until you publish an a
 
 The steps are the same in Snowplow Console and the [Signals Python SDK](/docs/signals/connection/reference/index.md#python-sdk). In Console you use the **Publish**, **Edit**, **Unpublish**, and **Delete** actions on a resource's details page. With the SDK you call `publish()`, `unpublish()`, and `delete()`.
 
-## The lifecycle
+## Understand the publishing lifecycle
 
 Attribute groups and interventions move through these stages:
 

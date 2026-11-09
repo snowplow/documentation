@@ -2,7 +2,7 @@
 title: "Security overview"
 sidebar_position: 3
 sidebar_label: "Security overview"
-description: "Find the security controls for your Snowplow pipeline: deployment roles and permissions, network setup, encryption keys, PII handling, single sign-on, and API keys."
+description: "Find the security controls for your Snowplow pipeline: deployment roles, network setup, encryption keys, PII handling, single sign-on, and API keys."
 keywords: ["pipeline security", "data encryption", "security best practices", "iam role", "vpc", "sso", "pii"]
 ---
 

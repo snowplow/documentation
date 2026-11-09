@@ -74,7 +74,7 @@ An attribute group definition has several parts, described in this section. The 
 
 ### Data source
 
-There are two [sources](/docs/signals/data-sources/events/index.md#choose-a-data-source) to choose from:
+There are two [sources](/docs/signals/concepts/index.md#choose-a-data-source) to choose from:
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>

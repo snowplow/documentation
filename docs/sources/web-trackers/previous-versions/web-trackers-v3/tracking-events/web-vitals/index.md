@@ -1,5 +1,6 @@
 ---
 title: "Core web vitals"
+sidebar_label: "Core web vitals"
 sidebar_position: 96
 description: "Documentation for Core web vitals in the web tracker."
 keywords: ["tracker", "configuration"]

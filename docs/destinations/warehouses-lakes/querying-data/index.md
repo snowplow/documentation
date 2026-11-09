@@ -2,7 +2,7 @@
 title: "Query Snowplow data in your warehouse"
 sidebar_label: "Querying data"
 sidebar_position: 1
-description: "Connect to your warehouse or lake and query Snowplow data, including self-describing events, entities, example queries from Console, and handling duplicate events."
+description: "Connect to your warehouse or lake and query Snowplow data, including self-describing events, entities, example queries, and duplicate events."
 keywords: ["querying data", "SQL queries", "self-describing events", "entities", "deduplication", "connect to warehouse", "atomic events"]
 content_type: how-to
 ---

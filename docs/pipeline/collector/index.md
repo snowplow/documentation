@@ -18,7 +18,7 @@ To look up a field in the API response, or the HTTP headers the Collector accept
 You'll need:
 
 * Access to your pipeline in [Snowplow Console](https://console.snowplowanalytics.com)
-* To use the API, a Console user account for API access, and a `clientid` and `clientsecret` for the API service. Create the user on the [**Users** page](https://console.snowplowanalytics.com/users), and request the credentials from the [**Credentials** page](https://console.snowplowanalytics.com/credentials) in Console.
+* To use the API, a Snowplow API key and its key ID, with read access to pipelines. See [create an API key](/docs/account-management/index.md#create-an-api-key).
 
 ## Steps
 
@@ -38,25 +38,20 @@ Console shows your configuration, with default values displayed for empty fields
 
 ### Get an access token
 
-Exchange your credentials for a token:
+Exchange your API key and key ID for an access token, which is valid for 24 hours. Your organization ID is on the [**Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```bash
-curl --request POST \
-  --url 'https://id.snowplowanalytics.com/oauth/token' \
-  --header 'content-type: application/x-www-form-urlencoded' \
-  --data grant_type=password \
-  --data username=USER@DOMAIN.COM \
-  --data password='PASSWORD' \
-  --data audience=https://snowplowanalytics.com/api/ \
-  --data client_id='YOUR_CLIENT_ID' \
-  --data client_secret='YOUR_CLIENT_SECRET'
+curl \
+  --header 'X-API-Key-ID: <API_KEY_ID>' \
+  --header 'X-API-Key: <API_KEY>' \
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
+
+The response contains the token, as `{ "accessToken": "<JWT>" }`. [Obtain an access token](/docs/account-management/index.md#obtain-an-access-token) has the details.
 
 Send the token with every API request, in the `Authorization: Bearer {{token}}` header.
 
-### Find your organization and pipeline IDs
-
-Your organization ID is on the [**Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
+### Find your pipeline ID
 
 The pipeline ID is the second UUID in the browser's address bar when you view the pipeline in Console:
 

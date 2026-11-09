@@ -2,7 +2,7 @@
 title: "Event recovery 0.8.0 upgrade guide"
 sidebar_label: "0.8.0 upgrade guide"
 sidebar_position: -80
-description: "Upgrade Snowplow Event Recovery to 0.8.0, covering the removal of the Spark job, the new EMR 7.13 setup for the Flink job, IAM permissions, and monitoring changes."
+description: "Upgrade event recovery to 0.8.0, covering the removal of the Spark job, the new EMR 7.13 setup for the Flink job, IAM permissions, and monitoring changes."
 keywords: ["event recovery 0.8.0", "upgrade guide", "Spark to Flink migration", "EMR 7.13"]
 date: "2026-11-09"
 ---
@@ -17,7 +17,7 @@ Version 0.8.0 changes how you run recoveries on AWS, and changes the license.
 
 ### New license
 
-Since version 0.8.0, Snowplow Event Recovery uses the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)).
+Since version 0.8.0, event recovery uses the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)).
 
 ### Spark job removed
 
@@ -63,7 +63,7 @@ If you maintain your own cluster configuration, compare it with the templates. T
 | `client.heartbeat.timeout` | Not set | `3650d` |
 | Checkpointing | `--checkpoint-interval` and `--checkpoint-dir` | Not used |
 
-Make sure you remove the 0.7.x bootstrap action. EMR 7.13's Flink already includes the S3 file system plugin that the bootstrap action installed, and a second copy stops the JobManager with `Delegation token provider with service name s3-hadoop has multiple implementations`.
+Make sure you remove the 0.7.x bootstrap action. EMR 7.13's Flink already includes the S3 file system plugin that the bootstrap action installed, and with a second copy the job fails to start with `Delegation token provider with service name s3-hadoop has multiple implementations`.
 
 See the [cluster requirements](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md#cluster-requirements) for the full list.
 

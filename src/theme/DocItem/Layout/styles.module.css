@@ -3,8 +3,44 @@
   margin-top: 0;
 }
 
-@media (min-width: 997px) {
+/* The right-hand TOC column (with the free trial banner) only shows from
+   1280px, and never on touch devices:
+   - below 1280px a 25% column is too narrow for the TOC and the banner
+   - on touch devices, the (pointer: coarse) rule in custom.css forces the doc
+     column to full width, which would push this column below the article
+   Keep these queries in sync with the navbar free trial button rule
+   (a.navbar-cta) in src/css/custom.css. */
+.tocCol {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .tocCol {
+    display: block;
+  }
+
   .docItemCol {
     max-width: 75% !important;
+  }
+}
+
+@media (pointer: coarse) {
+  .tocCol {
+    display: none;
+  }
+}
+
+/* Wherever the column is hidden on a desktop-width screen, show the
+   collapsible "On this page" TOC that the theme otherwise hides from 997px up,
+   aligned with the 740px content column like the breadcrumbs above it.
+   !important is needed because the production build inflates the theme's
+   rule with a :not(#\#):not(#\#) specificity hack. */
+@media screen and (min-width: 997px) and (max-width: 1279.98px),
+  screen and (min-width: 997px) and (pointer: coarse) {
+  .docItemContainer :global(.theme-doc-toc-mobile) {
+    display: block !important;
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

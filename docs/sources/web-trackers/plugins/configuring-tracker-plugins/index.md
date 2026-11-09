@@ -106,7 +106,7 @@ Use `addPlugin` with a URL to load the plugin dynamically.
 ```javascript
 snowplow(
   'addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@4.10.2/dist/index.umd.min.js",
   ["snowplowPerformanceNavigationTiming", "PerformanceNavigationTimingPlugin"]
 );
 ```

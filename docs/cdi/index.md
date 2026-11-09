@@ -14,7 +14,7 @@ Use CDI when you need event-level data you control: for product and marketing an
 
 ## Start here
 
-You can start on a hosted environment that Snowplow provisions for you, with no infrastructure to deploy. The [free trial](/docs/get-started/free-trial/index.md) is 14 days of Snowplow CDI Cloud, with access instructions in around 20 minutes. Once the environment exists, either hand the setup to your coding agent with the quickstart, or follow the steps yourself to track your first events and query them. When you're ready for production, see [Choose a Snowplow deployment](/docs/get-started/deployment-options/index.md).
+You can start on a hosted environment that Snowplow provisions for you, with no infrastructure to deploy. The [free trial](/docs/get-started/free-trial/index.md) is 14 days of Snowplow CDI Cloud, and you usually receive access instructions within moments of verifying your email address. Once the environment exists, either hand the setup to your coding agent with the quickstart, or follow the steps yourself to track your first events and query them. When you're ready for production, see [Choose a Snowplow deployment](/docs/get-started/deployment-options/index.md).
 
 <CardGrid cols={2}>
   <Card variant="quickstart" eyebrow="Quickstart" time="30 min" title="Quickstart with your coding agent" href="/docs/get-started/quickstart/" description="Get a hosted environment and send validated events from your app." />

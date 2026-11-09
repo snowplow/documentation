@@ -134,7 +134,9 @@ function HomeLayout({ children }: { children: React.ReactNode }): JSX.Element {
     <>
       <MarkdownAlternateLink />
       <div className="doc-layout doc-layout--home">
-        <div className="doc-layout__main">
+        {/* docItemContainer is kept for the Algolia crawler, whose Docusaurus
+            template finds page titles and headings with [class*='docItemContainer'] */}
+        <div className="doc-layout__main docItemContainer">
           <article className="doc-article">
             <AgentPointer />
             <DocItemContent>{children}</DocItemContent>
@@ -164,7 +166,9 @@ function DefaultLayout({ children }: Props): JSX.Element {
       <MarkdownAlternateLink />
       <SearchFacets sidebar={sidebarName} />
       <div className="doc-layout">
-        <div className="doc-layout__main">
+        {/* docItemContainer is kept for the Algolia crawler, whose Docusaurus
+            template finds page titles and headings with [class*='docItemContainer'] */}
+        <div className="doc-layout__main docItemContainer">
           <DocVersionBanner />
           <article className="doc-article">
             <AgentPointer sidebar={sidebarName} />

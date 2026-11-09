@@ -10,8 +10,6 @@ const forcedRules = [
   ['/docs/sources/web-trackers/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
   ['/docs/identities/concepts/cross-domain-tracking/', '/docs/events/cross-navigation/#identities-and-cross-domain-tracking', 301],
   ['/docs/identities/concepts/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
-  ['/docs/get-started/querying/', '/docs/destinations/warehouses-lakes/querying-data/#connect-to-your-warehouse', 301],
-  ['/docs/get-started/querying.md', '/docs/destinations/warehouses-lakes/querying-data.md', 301],
   ['/docs/event-studio/query-sql/', '/docs/destinations/warehouses-lakes/querying-data/#get-example-queries-from-console', 301],
   ['/docs/event-studio/query-sql.md', '/docs/destinations/warehouses-lakes/querying-data.md', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],

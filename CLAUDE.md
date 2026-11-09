@@ -6,8 +6,9 @@
 * Use professional, technical tone. Never use marketing language.
 * Use active voice: "the Collector receives events".
 * Address readers as "you". Refer to the reader's users as "the user".
-* Link to concepts in `/docs/fundamentals/`. Never re-explain them inline.
-* Structure feature pages as: description → when/why → basic example → configuration.
+* Link to concepts in `/docs/fundamentals/`. Never re-explain them inline. A one-sentence definition before the link is allowed when the task needs it.
+* Structure feature pages as: description → when/why → basic example → configuration. For how-to pages, the description and when/why go in the opening paragraphs, before the first H2.
+* Follow the page template for the page's `content_type`. See "Content types and page templates" below.
 * **IMPORTANT**: When asked for a style review, read the extended style guide at `src/pages/style-guide/llm/index.md`.
 
 ## Headings and organization
@@ -49,8 +50,26 @@ sidebar_label: "Short title"                    # To display in navigation sideb
 description: "One to two sentences for SEO."    # Grammatically correct
 keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing/SEO keywords
 date: "2025-09-09"                              # Creation date (YYYY-MM-DD)
+content_type: how-to                            # concept | how-to | tutorial | reference | integration | sdk | landing
 ---
 ```
+
+The frontmatter check on pull requests flags pages under `docs/` without `content_type`, or with an unknown value. Pages with `type: link`, previous-version pages, and partials don't need it.
+
+## Content types and page templates
+Every template stays within 3-5 H2 sections. Don't add a "Next steps" H2: end with a short paragraph of links. Full rules are in the style guide (`src/pages/style-guide/llm/index.md`, "Content types and page templates").
+
+| `content_type` | H2 sections, in order |
+| --- | --- |
+| `concept` | What it is and why it matters · How it works (diagram plus text version) · Example · Related concepts |
+| `how-to` | Before you begin · Steps (verify last) · Troubleshooting (exact error string → fix; omit if none known) |
+| `tutorial` | What you'll build (with "≈ N min") · Requirements · Steps · Clean up |
+| `reference` | Parameters (table) · Example · Errors · Version applicability |
+| `integration` | Compatibility · Connect · Configure · Troubleshooting |
+| `sdk` | Feature support · Install and initialize · Track your first event |
+| `landing` | Task table ("I want to" → page), then grouped links |
+
+Never mix how-to and reference content on one page. Split it into two pages that link to each other.
 
 ## Key concept links
 Always link to these paths:

@@ -22,7 +22,7 @@ In the simulator, there's no storefront to send the shopper's session ID, so you
 
 Then test the fallback for unknown visitors. Change the variable to a made-up value, or clear it, and start a new conversation. The agent should greet you as a new customer, without mentioning errors or missing data.
 
-When you've finished testing, untick the **Set a default value** option. A leftover default would make the widget read your test session's context for every shopper.
+When you've finished testing, clear the **Set a default value** option. A leftover default would make the widget read your test session's context for every shopper.
 
 :::note[The tool tester doesn't inject variables]
 The console's tool tester only sends parameters that the model would produce. It doesn't fill in `x-ces-session-context` parameters, so the context tool always returns the empty payload in the tester. Use the simulator to test session variables.

@@ -27,7 +27,7 @@ Concierge: "The blazer in your bag and the silk dress you were just looking
             [product carousel with two jewelry pieces]
 ```
 
-The shopper didn't mention the blazer or the dress. The agent read them from Signals, using the shopper's Snowplow session cookie as the lookup key. The shopper didn't need an account or a login.
+The shopper didn't mention the blazer or the dress. The agent read them from Signals, using the shopper's Snowplow session cookie as the lookup key. The shopper didn't need to create an account or log in.
 
 Gemini Enterprise for CX agents are built in CX Agent Studio, a managed agent platform that you configure in the Google Cloud console. With a code-first framework such as Google ADK, you control the agent runtime and can add context in a callback, as shown in the [Google ADK accelerator](/tutorials/signals-google-adk-agent/introduction). CX Agent Studio doesn't give you access to the runtime. Your integration points are OpenAPI tool schemas, the agent's instructions, and session variables, and this accelerator uses only those three.
 
@@ -100,7 +100,7 @@ Four identifiers connect the shopper's browsing, the conversation, and the agent
 | `domain_sessionid` | Snowplow browser tracker cookie  | `snowplow_session_id` variable, `x-snowplow-session-id` header | Signals lookup key, and joining agent events to browsing events             |
 | `domain_userid`    | Snowplow browser tracker cookie  | `snowplow_user_id` variable, `x-snowplow-user-id` header       | The `domain_userid` field on agent events                                   |
 | Turn ID            | Storefront, once per chat turn   | `snowplow_turn_id` variable, `x-snowplow-turn-id` header       | Grouping every event from one turn                                          |
-| Chat session ID    | CX Agent Studio                  | built-in session context, `x-ces-session-id` header            | Grouping every event from one conversation                                 |
+| Chat session ID    | CX Agent Studio                  | Built-in session context, `x-ces-session-id` header            | Grouping every event from one conversation                                 |
 
 A single shopper message produces events from both the browser and the server, all linked through these IDs:
 
@@ -126,7 +126,7 @@ You'll need:
 
 - A Snowplow account with Signals enabled. A [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) is enough.
 - A Google Cloud project where Gemini Enterprise for CX (CX Agent Studio) is available, with permission to create agents, Secret Manager secrets, and IAM bindings
-- The [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) (`gcloud`)
+- The [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) (`gcloud`)
 - A [Vercel](https://vercel.com/) account and the Vercel CLI
 - Node.js 20.9 or later, and npm
 - Python 3.11 or later

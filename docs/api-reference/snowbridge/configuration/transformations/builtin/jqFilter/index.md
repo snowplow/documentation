@@ -15,7 +15,7 @@ This transformation was added in version 3.0.0.
 :::
 
 ```mdx-code-block
-import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
+import JQDescriptionSharedBlock from "../reusable/_jqDescription.md"
 
 <JQDescriptionSharedBlock/>
 ```
@@ -111,7 +111,7 @@ JQEOT
 ## Helper Functions
 
 ```mdx-code-block
-import JQHelpersSharedBlock from "./reusable/_jqHelpers.md"
+import JQHelpersSharedBlock from "../reusable/_jqHelpers.md"
 
 <JQHelpersSharedBlock/>
 ```

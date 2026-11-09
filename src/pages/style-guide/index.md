@@ -367,7 +367,7 @@ Some rules that go with the templates:
 
 - Use `<Steps>` for the Steps section of how-to and tutorial pages, and `<ParamTable>` for reference parameters. See the [components page](/style-guide/components/).
 - Leave out Troubleshooting or Errors when there are no known errors. Don't write generic advice to fill the section.
-- Don't mix how-to and reference content on one page. Split it into a how-to page and a reference page that link to each other.
+- Don't mix how-to and reference content on one page. Split it into a how-to page and a reference page that link to each other. [Check your Collector configuration](/docs/pipeline/collector/) and the [Collector configuration reference](/docs/pipeline/collector/configuration-reference/) are an example.
 
 ## Inclusive language
 ### Allowlist and denylist

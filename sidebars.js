@@ -297,7 +297,7 @@ const sidebars = {
     group('Infrastructure and security', [
       pick('pipeline', { indexOnly: true, label: 'Pipeline overview' }),
       pick('pipeline/security', { label: 'Security overview' }),
-      pick('pipeline/collector', { label: 'Configure the Collector' }),
+      pick('pipeline/collector', { label: 'Check Collector configuration' }),
       pick('sources/first-party-tracking', { label: 'First-party Collector domain' }),
     ]),
     group('Users and access', [

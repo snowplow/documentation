@@ -104,9 +104,15 @@ The **Configure** button only appears if you have permission to create or edit t
 Publish an `AttributeKey` named `snowplow_id`, with `lookup_identifiers` set to the names of up to three identifiers from your [Identities configuration](/docs/identities/configuration/index.md):
 
 ```python
+import os
 from snowplow_signals import AttributeKey, Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
 sp_signals.publish([
     AttributeKey(name="snowplow_id", lookup_identifiers=["domain_userid", "user_id"]),
@@ -144,6 +150,7 @@ In the Python SDK, set `attribute_key` to the built-in `snowplow_id`:
 ```python
 from snowplow_signals import StreamAttributeGroup, snowplow_id
 
+# page_view_count: an attribute you have defined (see Configure attributes)
 person_attribute_group = StreamAttributeGroup(
     name="person_attributes",
     version=1,
@@ -161,6 +168,7 @@ Read attributes keyed on `snowplow_id` the same way as any other attributes, usi
 <TabItem value="python" label="Python" default>
 
 ```python
+# sp_signals: the client from Connect to Signals
 attributes = sp_signals.get_service_attributes(
     name="my_service",
     attribute_key="domain_userid",
@@ -236,7 +244,7 @@ Supported. A user browses anonymously, then logs in to a new account, or to an a
 
 ### Cross-domain
 
-Supported. A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
+Supported. A user moves from one of your sites to another with a different cookie domain. With [cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking) enabled in Identities, the second site's `domain_userid` is linked to the first site's Snowplow ID, so the activity on both sites counts toward one Snowplow ID.
 
 If the user has visited the second site before, its `domain_userid` already has its own Snowplow ID, and Identities merges the two. In that case, the [cross-device](#cross-device) limitations apply.
 
@@ -338,9 +346,3 @@ The following limitations apply to every use case. They're temporary, and Snowpl
 * Stream attribute groups only: attribute groups keyed on `snowplow_id` can't use a [warehouse source](/docs/signals/attributes/warehouse-config/index.md) or [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes).
 * Interventions can't target `snowplow_id`: an [intervention](/docs/signals/interventions/index.md) with criteria on attributes keyed on `snowplow_id` needs a target your application has, such as `domain_userid`. Signals delivers it to the device whose event triggered it. If you don't set a target, Signals rejects the intervention.
 * Deleting by identifier doesn't delete the person's attributes: to delete data, call the Signals API's `DELETE /api/v1/{attribute_key}/{identifier}` endpoint. Deleting by a lookup identifier stops it resolving to the person, but the attributes calculated for their Snowplow ID remain. To delete the person's attributes, use `snowplow_id` as the attribute key and their Snowplow ID as the identifier. You can find it on their events in the [identity entity](/docs/identities/concepts/index.md#identity-entity). Reads by their lookup identifiers then return `null`. Deleting doesn't remove the person from Identities, so new events calculate their attributes again under the same Snowplow ID.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

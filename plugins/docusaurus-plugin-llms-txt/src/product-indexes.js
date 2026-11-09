@@ -21,7 +21,7 @@ export const PRODUCT_INDEXES = [
     file: 'docs/signals/llms.txt',
     title: 'Snowplow Signals',
     description:
-      'Snowplow Signals: getting started, setting up and connecting, defining attributes (including syncing warehouse tables), serving them through services and training datasets, feeding AI agents with agentic contexts and the MCP server, and interventions.',
+      'Snowplow Signals: getting started, setting up and connecting, data sources (events and warehouse tables), defining attributes, serving them through services and training datasets, feeding AI agents with agentic contexts and the MCP server, and interventions.',
     // Tutorials that use Signals are listed in this index too
     tutorialTech: 'Signals',
     // List the docs under the sidebar's section headers, in sidebar order

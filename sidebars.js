@@ -187,16 +187,25 @@ const sidebars = {
       pick('signals/setup'),
       pick('signals/connection', { label: 'Connect with SDKs or API' }),
     ], { collapsible: true, collapsed: true }),
+    // Where attribute values come from: events (stream) or warehouse tables
+    group('Data sources', [
+      pick('signals/data-sources/events'),
+      pick('signals/attributes/warehouse-config', { label: 'Sync warehouse tables' }),
+    ], { collapsible: true, collapsed: true }),
     group('Define attributes', [
       pick('signals/attributes', {
         hoist: true,
         indexLabel: 'Attributes overview',
+        exclude: ['signals/attributes/warehouse-config'],
       }),
+      pick('signals/publish'),
     ], { collapsible: true, collapsed: true }),
     group('Serve attributes', [
       pick('signals/applications', {
         hoist: true,
-        indexLabel: 'Use in your application',
+        indexLabel: 'Choose how to use attributes',
+        // The router page is linked from the overview, so its row stays hidden
+        indexClassName: 'hidden',
         exclude: [
           'signals/applications/agentic-contexts',
           'signals/applications/mcp-server',
@@ -227,7 +236,7 @@ const sidebars = {
       pick('api-reference/trackers'),
       pick('api-reference/analytics-sdk'),
       // The page itself is in the signals sidebar; this is a cross-link
-      { type: 'link', label: 'Signals SDKs and API', href: '/docs/signals/connection/' },
+      { type: 'link', label: 'Signals SDKs and API', href: '/docs/signals/connection/reference/' },
     ]),
     group('Component configuration', [
       pick('api-reference/stream-collector', { label: 'Collector configuration' }),

@@ -5,6 +5,7 @@ sidebar_label: "Define interventions"
 description: "Create rule-based interventions with criteria and targeting to automatically trigger actions when attribute values change, or push direct interventions. Configure using Console UI, Python SDK, or API."
 keywords: ["interventions", "rule-based triggers", "direct interventions", "intervention criteria", "attribute targeting", "python sdk interventions"]
 content_type: how-to
+pagination_prev: signals/applications/mcp-server/index
 ---
 
 ```mdx-code-block
@@ -59,7 +60,7 @@ sp_signals.publish([hello_intervention])
 
 Once applied and active, this intervention will trigger the first time Signals processes an event that first sets the `example_group` attribute group's `test_attribute` attribute to a value that is not null (e.g. the first time it gets set).
 
-The table below lists all available arguments for a `RuleIntervention`:
+This table lists all available arguments for a `RuleIntervention`:
 
 | Argument                | Description                                                                                                                                                                   | Type                                                                                                              | Required? |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------- |
@@ -107,7 +108,7 @@ The simplest `criteria` tree takes an `InterventionCriterion` instance, with pos
 | Argument    | Description                                                              | Type                                                                                           |
 | ----------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
 | `attribute` | The attribute group and attribute name to evaluate, separated by a colon | `string`                                                                                       |
-| `operator`  | The operator used for evaluating the attribute                           | `str`, see table below                                                                         |
+| `operator`  | The operator used for evaluating the attribute                           | `str`, see the operators table                                                                  |
 | `value`     | If required by the `operator`, the comparison value                      | `str`, `int`, `float`, `bool`, `list[str]`, `list[int]`, `list[float]`, `list[bool]` or `None` |
 
 This table shows the available operators:
@@ -189,7 +190,9 @@ Another use for custom targeting is when you want to target an attribute key tha
 
 Define a custom intervention target scope by selecting attribute keys. These are the attribute keys that will receive the information.
 
-You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups.
+You can also select one or more attribute groups to be sent with the intervention. When the intervention triggers, it will include the latest values for all attributes in the selected groups. The selected groups must use the same attribute key as the intervention's target.
+
+Interventions don't carry custom content, such as the text or value of an offer. Your application decides what to show, based on the intervention `name` and the attribute values that come with it.
 
 ![Intervention delivery configuration showing attribute key targeting and attribute group payload selection](../images/intervention-delivery.png)
 
@@ -301,7 +304,7 @@ Signals provides two ways to test an intervention in Snowplow Console: a preview
 
 ### Preview
 
-While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined.
+While defining an intervention, you can preview how many users would have received it by running it against the current state of your warehouse data. Click **Run preview** to see how many attribute keys match the criteria you've defined. The preview needs a warehouse connection.
 
 ![Intervention preview showing test results with match count against scanned warehouse records](../images/intervention-preview.png)
 
@@ -340,8 +343,4 @@ sp_signals.push_intervention(
 
 For an overview of interventions and the destinations they can reach, see [real-time triggers](https://signals.snowplow.io/products/real-time-triggers?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
 
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```
+To try interventions in a demo ecommerce app, follow [Implement real-time interventions](/tutorials/signals-interventions/start).

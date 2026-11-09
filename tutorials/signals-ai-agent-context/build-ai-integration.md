@@ -22,10 +22,10 @@ let signalsInstance: Signals | null = null;
 function getSignalsClient(): Signals | null {
   if (signalsInstance) return signalsInstance;
 
-  const baseUrl = process.env.SNOWPLOW_SIGNALS_BASE_URL;
-  const apiKey = process.env.SNOWPLOW_SIGNALS_API_KEY;
-  const apiKeyId = process.env.SNOWPLOW_SIGNALS_API_KEY_ID;
-  const organizationId = process.env.SNOWPLOW_SIGNALS_ORG_ID;
+  const baseUrl = process.env.SIGNALS_API_URL;
+  const apiKey = process.env.SNOWPLOW_API_KEY;
+  const apiKeyId = process.env.SNOWPLOW_API_KEY_ID;
+  const organizationId = process.env.SNOWPLOW_ORG_ID;
 
   if (!baseUrl || !apiKey || !apiKeyId || !organizationId) {
     return null;

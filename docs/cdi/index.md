@@ -29,7 +29,7 @@ Coming from Segment, Google Analytics, Adobe Analytics, or Mixpanel? See [Migrat
 
 The CDI sidebar follows the path an event takes, from design to data model. Each card opens the first page of a sidebar group.
 
-<CardGrid cols={3}>
+<CardGrid cols={2}>
   <Card
     variant="product"
     headingLevel={3}
@@ -57,13 +57,35 @@ The CDI sidebar follows the path an event takes, from design to data model. Each
   <Card
     variant="product"
     headingLevel={3}
-    title="Test and enrich"
+    title="Test your tracking"
     href="/docs/testing/"
-    description="Check your tracking before it reaches production, and add data to events with enrichments."
+    description="Check the events your tracking sends before they reach production."
     links={[
       { label: 'Snowplow Inspector', href: '/docs/testing/snowplow-inspector/' },
       { label: 'Snowplow Micro', href: '/docs/testing/snowplow-micro/' },
-      { label: 'Enrichments', href: '/docs/pipeline/enrichments/' },
+    ]}
+  />
+  <Card
+    variant="product"
+    headingLevel={3}
+    title="Enrich events"
+    href="/docs/pipeline/enrichments/"
+    description="Add data to events in the pipeline, such as location, parsed user agents, and campaign details, or mask personal data."
+    links={[
+      { label: 'Available enrichments', href: '/docs/pipeline/enrichments/available-enrichments/' },
+      { label: 'IP anonymization', href: '/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/' },
+    ]}
+  />
+  <Card
+    variant="product"
+    headingLevel={3}
+    title="Identities"
+    href="/docs/identities/"
+    description="Stitch a user's identifiers into one Snowplow ID in real time, across devices and logins."
+    links={[
+      { label: 'How merges work', href: '/docs/identities/concepts/merges/' },
+      { label: 'Choose identifiers', href: '/docs/identities/configuration/choosing-identifiers/' },
+      { label: 'Erase identity data', href: '/docs/identities/erasure/' },
     ]}
   />
   <Card
@@ -83,11 +105,10 @@ The CDI sidebar follows the path an event takes, from design to data model. Each
     headingLevel={3}
     title="Query and model data"
     href="/docs/destinations/warehouses-lakes/querying-data/"
-    description="Query the atomic events table, build sessions, users, and attribution tables with dbt packages, and stitch identities."
+    description="Query the atomic events table, and build sessions, users, and attribution tables with dbt packages."
     links={[
       { label: 'Atomic event fields', href: '/docs/fundamentals/canonical-event/' },
       { label: 'dbt packages', href: '/docs/modeling-your-data/modeling-your-data-with-dbt/' },
-      { label: 'Identities', href: '/docs/identities/' },
     ]}
   />
   <Card

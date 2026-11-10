@@ -126,9 +126,16 @@ const sidebars = {
       pick('sources/webhooks'),
       pick('events', { label: 'Built-in events and entities' }),
     ], { collapsible: true, collapsed: true }),
-    group('Test and enrich', [
-      pick('testing', { hoist: true, indexLabel: 'Test your tracking' }),
-      pick('pipeline/enrichments'),
+    group('Test your tracking', [
+      pick('testing', { hoist: true, indexLabel: 'Testing overview' }),
+    ], { collapsible: true, collapsed: true }),
+    group('Enrich events', [
+      pick('pipeline/enrichments', { hoist: true, indexLabel: 'Enrichments overview' }),
+    ], { collapsible: true, collapsed: true }),
+    // Identities runs in the pipeline, after enrichment, so it sits here and
+    // not under Query and model data
+    group('Identities', [
+      pick('identities', { hoist: true, indexLabel: 'Identities overview' }),
     ], { collapsible: true, collapsed: true }),
     group('Load and forward', [
       pick('destinations', {
@@ -151,7 +158,7 @@ const sidebars = {
         indexLabel: 'Data models overview',
         exclude: ['modeling-your-data/modeling-your-data-with-sql-runner'],
       }),
-      pick('identities'),
+      { type: 'link', label: 'Identities data models', href: '/docs/identities/data-models/' },
       // A `type: link` stub that redirects to Query your data
       pick('event-studio/query-sql', { className: 'hidden' }),
     ], { collapsible: true, collapsed: true }),

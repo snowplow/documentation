@@ -1,0 +1,237 @@
+{
+  "definitions": {
+    "partition_tstamp_type": {
+      "type": "string",
+      "enum": [
+        "timestamp",
+        "date"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
+      "type": "string",
+      "title": "Schema",
+      "description": "Schema (dataset) that contains your atomic events",
+      "longDescription": "The schema (dataset for BigQuery) that contains your atomic events table.",
+      "packageDefault": "atomic",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
+      "type": "string",
+      "title": "Database",
+      "description": "Database that contains your atomic events",
+      "longDescription": "The database that contains your atomic events table. Ignored on Databricks; use `snowplow__databricks_catalog` instead.",
+      "packageDefault": "target.database",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__events": {
+      "recommendFullRefresh": false,
+      "order": 9999,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Events Table",
+      "description": "Reference to your events table",
+      "longDescription": "This is used internally by the package to reference your events table based on other variable values and should not be changed.",
+      "packageDefault": "{{ source('atomic', 'events') }}",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
+      "type": "string",
+      "format": "date",
+      "title": "Start Date",
+      "group": "Operation and Logic",
+      "longDescription": "The earliest `load_tstamp` to process on the initial build or a full refresh. Verify source retention before rebuilding.",
+      "packageDefault": "2026-01-01",
+      "description": "The date to start processing events from on first run or a full refresh"
+    },
+    "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
+      "type": "integer",
+      "minimum": 1,
+      "title": "Backfill Limit",
+      "group": "Operation and Logic",
+      "longDescription": "The normal forward window in days. Extended through the first eligible day after a gap or the upstream watermark. This does not guarantee a limit on bytes scanned.",
+      "packageDefault": "30",
+      "description": "Days in the normal forward processing window"
+    },
+    "snowplow__hash_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 20,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "Hash Identifiers",
+      "group": "Operation and Logic",
+      "longDescription": "When set to `true`, all identifier values stored in `snowplow_identities_identifier_mapping` are hashed using SHA-256 before being written to the table. Recommended when identifiers contain PII.",
+      "packageDefault": "false",
+      "description": "Hash all identifier values with SHA-256 before storing them (recommended for PII compliance)"
+    },
+    "snowplow__identifiers": {
+      "recommendFullRefresh": true,
+      "order": 10,
+      "consoleGroup": "basic",
+      "type": "array",
+      "title": "Identifiers",
+      "group": "Operation and Logic",
+      "longDescription": "The list of identifiers to extract from events and link to each `snowplow_id`. Each entry has a `reference` (the column name in your events table) and an `alias` (the name used in the output tables). Add any event-level fields you want to track as identifiers, such as `email` or `phone`.",
+      "packageDefault": "[{'reference': 'domain_userid', 'alias': 'domain_userid'}, {'reference': 'user_id', 'alias': 'user_id'}]",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "title": "Identifier",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference",
+            "description": "Column name in the events table",
+            "order": 1
+          },
+          "alias": {
+            "type": "string",
+            "title": "Alias",
+            "description": "Name to use in the output tables",
+            "order": 2
+          }
+        },
+        "required": [
+          "reference",
+          "alias"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "snowplow__license_accepted": {
+      "recommendFullRefresh": false,
+      "order": 127,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "License accepted",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to accept the Snowplow Personal and Academic License or specify that you have a commercial agreement with Snowplow.",
+      "packageDefault": "false",
+      "description": "Use this field to accept the Snowplow user license."
+    },
+    "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
+      "type": "array",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 0,
+      "title": "App IDs",
+      "longDescription": "Filter application events with the identity entity. Merge events use `snowplow__identities_app_id` separately.",
+      "packageDefault": "[ ] (no filter applied)",
+      "group": "Contexts, Filters, and Logs",
+      "items": {
+        "type": "string"
+      }
+    },
+    "snowplow__databricks_catalog": {
+      "recommendFullRefresh": true,
+      "order": 2,
+      "consoleGroup": "required",
+      "type": "string",
+      "title": "Databricks catalog",
+      "warehouse": "Databricks",
+      "description": "Catalog that contains your atomic events on Databricks",
+      "longDescription": "The Databricks catalog containing your source events. Set the source schema with `snowplow__atomic_schema`. Configure the destination catalog and schema in your dbt profile.",
+      "packageDefault": "hive_metastore",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__events_table": {
+      "recommendFullRefresh": true,
+      "order": 4,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Events table name",
+      "description": "Name of your atomic events table",
+      "longDescription": "The name of the events table within your configured source database or catalog and schema.",
+      "packageDefault": "events",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__merge_limit_collapse": {
+      "recommendFullRefresh": false,
+      "order": 21,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Merge-limit collapse",
+      "description": "Select a preferred owner without deleting other owners",
+      "longDescription": "Enable only when the service has no configured unique identifiers. All owners remain. `is_preferred` selects the latest sighting, breaking ties by oldest identity creation time. Missing creation dates or a remaining tie produce no preferred owner. Also applies to identifiers reappearing after TTL expiry.",
+      "packageDefault": "false",
+      "group": "Operation and Logic"
+    },
+    "snowplow__lookback_days": {
+      "type": "integer",
+      "title": "Lookback days",
+      "packageDefault": "1",
+      "description": "Days of overlap re-read for late arrival. Backdated load timestamps outside the overlap require explicit reprocessing.",
+      "longDescription": "Days of overlap re-read for late arrival. Backdated load timestamps outside the overlap require explicit reprocessing.",
+      "group": "Operation and Logic",
+      "consoleGroup": "advanced",
+      "recommendFullRefresh": false,
+      "order": 72,
+      "minimum": 1
+    },
+    "snowplow__identities_app_id": {
+      "type": "array",
+      "title": "Identity-service app IDs",
+      "packageDefault": "['snowplow-identities']",
+      "description": "Filter merge events by their service `app_id`. An empty list disables this filter.",
+      "longDescription": "Filter merge events by their service `app_id`. An empty list disables this filter.",
+      "group": "Contexts, Filters, and Logs",
+      "consoleGroup": "advanced",
+      "recommendFullRefresh": false,
+      "order": 73,
+      "items": {
+        "type": "string"
+      }
+    },
+    "snowplow__partition_tstamp": {
+      "type": "string",
+      "title": "Atomic partition column",
+      "packageDefault": "load_tstamp",
+      "description": "Physical partition column used to prune atomic source reads.",
+      "longDescription": "Physical partition column used to prune atomic source reads.",
+      "group": "Warehouse and Tracker",
+      "consoleGroup": "advanced",
+      "recommendFullRefresh": false,
+      "order": 74
+    },
+    "snowplow__partition_tstamp_type": {
+      "title": "Atomic partition type",
+      "packageDefault": "timestamp",
+      "description": "Type of the configured physical partition column.",
+      "longDescription": "Type of the configured physical partition column.",
+      "group": "Warehouse and Tracker",
+      "consoleGroup": "advanced",
+      "recommendFullRefresh": false,
+      "order": 75,
+      "$ref": "#/definitions/partition_tstamp_type"
+    },
+    "snowplow__partition_buffer_days": {
+      "type": "integer",
+      "title": "Partition buffer days",
+      "packageDefault": "2",
+      "description": "Extra days on the partition predicate when its column differs from `load_tstamp`. Must cover the actual arrival lag.",
+      "longDescription": "Extra days on the partition predicate when its column differs from `load_tstamp`. Must cover the actual arrival lag.",
+      "group": "Warehouse and Tracker",
+      "consoleGroup": "advanced",
+      "recommendFullRefresh": false,
+      "order": 76,
+      "minimum": 0
+    }
+  }
+}

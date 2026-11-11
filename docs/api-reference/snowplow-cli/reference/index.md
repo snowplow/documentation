@@ -1016,6 +1016,150 @@ snowplow-cli setup [flags]
 
 
 
+## Signals
+
+
+Work with Snowplow Signals
+
+### Options
+
+```
+  -h, --help                  help for signals
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Signals Setup
+
+
+Set up Snowplow Signals in this project with your coding agent
+
+### Synopsis
+
+Sign in once, then get this project and your coding agent ready for Snowplow Signals:
+
+  - writes Signals credentials for your app to .env (a key that can read and edit Signals)
+  - installs the Snowplow plugin (skills and MCP)
+  - starts your agent with a prompt that walks through the Signals setup
+
+The Snowplow MCP signs in with your Snowplow account the first time your agent uses it.
+
+Requires Node.js 18 or later.
+
+```
+snowplow-cli signals setup [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli signals setup
+  $ snowplow-cli signals setup --pipeline Production
+  $ npx @snowplow/snowplow-cli signals setup
+```
+
+### Options
+
+```
+  -h, --help              help for setup
+      --pipeline string   Name or ID of the pipeline whose Signals environment to use
+```
+
+### Options inherited from parent commands
+
+```
+      --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                              Then on:
+                                Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                                Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                                Windows %AppData%\snowplow\snowplow.yml
+      --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output           Log output as json
+  -q, --quiet                 Log output level to Warn
+  -s, --silent                Disable output
+```
+
+
+
+## Signals Status
+
+
+Check that the Signals credentials in .env work
+
+### Synopsis
+
+Check the app's Signals credentials the way the app uses them: exchange the
+key in .env for a token, then make an authenticated call to the Signals API.
+
+With --json-output the result is a single JSON object, for coding agents.
+The command exits non-zero when the check fails.
+
+```
+snowplow-cli signals status [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli signals status
+  $ snowplow-cli signals status --json-output
+```
+
+### Options
+
+```
+      --env string   The .env file holding the SNOWPLOW_SIGNALS_* values (default ".env")
+  -h, --help         help for status
+```
+
+### Options inherited from parent commands
+
+```
+      --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                              Then on:
+                                Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                                Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                                Windows %AppData%\snowplow\snowplow.yml
+      --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output           Log output as json
+  -q, --quiet                 Log output level to Warn
+  -s, --silent                Disable output
+```
+
+
+
 ## Status
 
 

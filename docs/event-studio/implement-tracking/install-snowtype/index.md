@@ -58,14 +58,14 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. You can let Snowtype create one for you, or provide one yourself.
+Snowtype needs a Console API key to read your event specifications and data structures. You can let Snowtype create one for you, or provide one yourself. If you do both, CLI flags and environment variables take precedence over the credentials saved by `setup`.
 
 ### Sign in with your browser
 
 Run the `setup` command to sign in to Console in your browser:
 
 ```bash
-npx @snowplow/snowtype setup
+npx snowtype setup
 ```
 
 Snowtype creates an API key for the organization you select and saves it to `~/.config/snowplow/snowplow.yml`. Your Console account needs permission to create API keys.
@@ -104,8 +104,6 @@ export SNOWPLOW_CONSOLE_API_KEY_ID=your-api-key-id
 </Tabs>
 
 You can also pass the credentials directly as CLI flags (`--apiKey` and `--apiKeyId`), but environment variables are easier to manage and keep credentials out of your command history.
-
-CLI flags and environment variables take precedence over the credentials saved by `setup`.
 
 ## Initialize your project
 

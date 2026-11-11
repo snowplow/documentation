@@ -51,6 +51,7 @@ Please enable billing on the project as failing to do so will prevent the pipeli
 
 The following is a list of Organizational Policy constraints that we require to be turned off, otherwise we are unable to deploy the pipeline.  For some, more specific configuration would enable the constraint to stay and the pipeline to deploy. This list will be updated as we discover more constraints that are not compatible with the pipeline deployment.
 
+- `constraints/compute.managed.requireOsLogin`
 - `constraints/compute.requireShieldedVm`
 - `constraints/gcp.resourceLocations`
 - `constraints/gcp.restrictServiceUsage`

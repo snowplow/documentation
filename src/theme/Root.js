@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { ProductFruits } from 'react-product-fruits'
 import { useLocation } from '@docusaurus/router'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
@@ -20,8 +20,10 @@ const useCookie = () => {
 
     if (cookieValue) {
       const parts = cookieValue.split('.')
-      setUserId(parts[0] ?? 'unknown_user')
-      setSessionId(parts[5] ?? 'unknown_session')
+      // `||`, not `??`: the tracker can write empty fields, and Product
+      // Fruits throws if it's initialized with an empty username
+      setUserId(parts[0] || 'unknown_user')
+      setSessionId(parts[5] || 'unknown_session')
     }
   }, [])
 
@@ -39,6 +41,29 @@ function useProductFruitsEnabled() {
 }
 
 /**
+ * Product Fruits is a third-party widget: if it throws, render nothing
+ * instead of letting the error crash the page.
+ */
+class ProductFruitsBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { failed: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error) {
+    console.warn('Product Fruits failed to load:', error)
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
+}
+
+/**
  * MUI is no longer provided here. The widgets that still use it
  * (JsonSchemaValidator, DbtSchemaSelector, FirstSteps) wrap themselves in
  * <MuiScope>, so MUI only loads with the pages that use them.
@@ -52,20 +77,24 @@ export default function Root({ children }) {
   }, [])
 
   const [userId, sessionId] = useCookie()
-  const userInfo = {
-    username: userId,
-    props: { sessionId: sessionId },
-  }
+  // Stable between renders, so Product Fruits only gets an update when the
+  // user ID or session ID changes
+  const userInfo = useMemo(
+    () => ({ username: userId, props: { sessionId } }),
+    [userId, sessionId]
+  )
 
   return (
     <>
       {isClient && productFruits && (
-        <ProductFruits
-          workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
-          language="en"
-          user={userInfo}
-          lifeCycle="unmount"
-        />
+        <ProductFruitsBoundary>
+          <ProductFruits
+            workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
+            language="en"
+            user={userInfo}
+            lifeCycle="unmount"
+          />
+        </ProductFruitsBoundary>
       )}
       {children}
     </>

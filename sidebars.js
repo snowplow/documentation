@@ -87,13 +87,12 @@ const sidebars = {
     // the trackers, under Collect events; the hand-off page links to it.
     group('Design tracking', [
       pick('event-studio', { indexOnly: true, label: 'Event Studio overview' }),
-      pick('event-studio/event-catalog', { label: 'Find existing events' }),
       pick('event-studio/source-applications', { label: 'Plan source applications' }),
       pick('event-studio/data-structures', {
         label: 'Manage data structures',
-        exclude: ['event-studio/data-structures/versioning', 'event-studio/data-structures/json-editor'],
+        exclude: ['event-studio/data-structures/json-editor'],
       }),
-      sub('Build tracking plans', [
+      sub('Manage tracking plans', [
         pick('event-studio/tracking-plans', {
           hoist: true,
           indexLabel: 'Tracking plan elements',
@@ -103,16 +102,16 @@ const sidebars = {
             'event-studio/tracking-plans/event-specification-validation',
           ],
         }),
+        pick('event-studio/event-catalog', { label: 'Find existing events' }),
+        sub('Monitor tracking plans', [
+          pick('event-studio/tracking-plans/data-quality', { label: 'Check volumes and violations' }),
+          pick('event-studio/tracking-plans/event-specification-inference', { label: 'How inference matches events' }),
+          pick('event-studio/tracking-plans/event-specification-validation', { label: 'How validation checks events' }),
+        ]),
       ]),
       pick('event-studio/hand-off-to-implementation', { label: 'Hand off to developers' }),
       pick('event-studio/test-and-publish', { label: 'Test, promote, and publish' }),
-      sub('Monitor tracking plans', [
-        pick('event-studio/tracking-plans/data-quality', { label: 'Check volumes and violations' }),
-        pick('event-studio/tracking-plans/event-specification-inference', { label: 'How inference matches events' }),
-        pick('event-studio/tracking-plans/event-specification-validation', { label: 'How validation checks events' }),
-      ]),
       pick('event-studio/evolve-tracking-design', { label: 'Evolve your tracking design' }),
-      pick('event-studio/data-structures/versioning', { label: 'Version data structures' }),
       // The overview, not the API pages, covers the CLI and CI/CD, so it gets its own entry
       sub('Manage tracking as code', [
         pick('event-studio/programmatic-management', { hoist: true, indexLabel: 'Automate with the CLI and CI/CD' }),

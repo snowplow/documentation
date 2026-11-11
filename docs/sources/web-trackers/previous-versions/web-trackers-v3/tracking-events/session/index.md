@@ -1,5 +1,6 @@
 ---
 title: "Sessions"
+sidebar_label: "Sessions"
 sidebar_position: 35
 description: "Documentation for Sessions in the web tracker."
 keywords: ["tracker", "configuration"]

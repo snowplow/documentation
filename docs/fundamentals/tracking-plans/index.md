@@ -4,6 +4,7 @@ sidebar_position: 7
 sidebar_label: "Tracking plans"
 description: "Snowplow's tracking plans enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 keywords: ["tracking plans", "event specifications", "data governance", "data quality", "data contracts"]
+content_type: concept
 ---
 
 Tracking plans are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data and unlock self-service analytics at scale.
@@ -119,3 +120,5 @@ By adding screenshots, and descriptions to the event specification, you are also
 A data structure can be used across event specifications, and across tracking plans. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via tracking plans.
 
 To understand how to get started with tracking plans, see [Defining the Data to collect with Tracking Plans](/docs/event-studio/tracking-plans/index.md) for further details.
+
+You can also ask an AI assistant to draft a tracking plan from a description of your product. Connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), it creates the tracking plan, event specifications, and data structures in your account. Run `npx plugins add snowplow/skills` to install the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent, or use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console.

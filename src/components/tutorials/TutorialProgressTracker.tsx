@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronRight, ArrowLeft, Check, X, ListChecks } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
-import { Button } from '@site/src/components/ui/button'
+import Button from '@site/src/components/Button'
 import RadialProgress from './RadialProgress'
 import styles from './TutorialProgressTracker.module.css'
 import { useHistory } from '@docusaurus/router'
@@ -171,17 +171,15 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       {/* Tutorial Chapters Button - Mobile Only */}
       <div className="w-full flex justify-end mb-4 block md:hidden">
         <Button
-          variant="outline"
-          size="lg"
-          className="w-auto justify-between border border-border bg-card hover:bg-accent text-foreground font-regular py-3 px-4 rounded-lg shadow-sm"
+          variant="secondary"
           onClick={() => setIsSheetOpen(true)}
+          iconAfter={<ListChecks size={16} />}
         >
-          <span className="text-base font-regular">Tutorial Chapters</span>
-          <ListChecks className="w-5 h-5 ml-2 text-foreground" />
+          Tutorial chapters
         </Button>
       </div>
 
-      <div className={cn("h-fit sticky", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
+      <div className={cn("h-fit", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
         {/* Header Card */}
       <div className="bg-accent text-foreground rounded-lg p-6 mb-4 leading-tight">
       <div className="flex flex-wrap gap-1 mb-4">
@@ -234,8 +232,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               className={cn(
                 "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                 "hover:bg-accent/50",
-                isActive && isCompleted && "bg-primary/10 border border-green-300/40 hover:bg-foreground/5",
-                isActive && !isCompleted && "bg-primary/25 border border-primary/20 hover:bg-foreground/5",
+                isActive && "bg-primary-soft border border-primary/30",
                 !isActive && isCompleted && "bg-transparent hover:bg-foreground/5",
                 isFuture && "bg-transparent border border-border hover:bg-foreground/5"
               )}
@@ -270,7 +267,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               {/* Step Title */}
               <div className="flex-1 min-w-0">
                 <p className={cn(
-                  "font-light truncat m-0",
+                  "font-light truncate m-0",
                   isActive && "text-primary",
                   isCompleted && "text-muted-foreground",
                   isFuture && "text-foreground"
@@ -298,14 +295,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
 
       {/* Back to Tutorials Button - Hidden on mobile */}
       <div className="mt-4 hidden md:block">
-        <Button
-          variant="outline"
-          size="lg"
-          className="justify-start gap-2 rounded-lg"
-          onClick={() => window.location.href = '/tutorials'}
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Tutorials
+        <Button variant="secondary" href="/tutorials" icon={<ArrowLeft size={16} />}>
+          Back to tutorials
         </Button>
       </div>
     </div>
@@ -324,12 +315,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
           {/* Sheet Header */}
           <div className="flex items-center justify-between p-4 border-b">
             <h2 className="text-lg font-semibold">Tutorial Chapters</h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsSheetOpen(false)}
-            >
-              <X className="w-4 h-4" />
+            <Button variant="ghost" size="sm" onClick={() => setIsSheetOpen(false)} aria-label="Close">
+              <X size={16} aria-hidden="true" />
             </Button>
           </div>
 
@@ -350,8 +337,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                   className={cn(
                     "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                     "hover:bg-accent/50",
-                    isActive && isCompleted && "bg-green-100/80 border border-green-300/40 hover:bg-green-100",
-                    isActive && !isCompleted && "bg-primary/10 border border-primary/20",
+                    isActive && "bg-primary-soft border border-primary/30",
                     !isActive && isCompleted && "bg-transparent hover:bg-accent",
                     isFuture && "bg-transparent border border-border"
                   )}

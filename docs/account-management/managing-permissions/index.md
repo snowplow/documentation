@@ -4,6 +4,7 @@ sidebar_label: "Permissions"
 sidebar_position: 2
 description: "Configure user permissions in Snowplow Console with Global Admin, User, and Custom roles to control access to environments, data structures, tracking plans, data models, and API keys."
 keywords: ["user permissions", "role management", "access control", "Admin role", "Custom permissions", "Console permissions"]
+content_type: reference
 ---
 
 To set a user's permissions, navigate to **Settings** > **Users** and then to the user whose account you'd like to manage.
@@ -66,15 +67,17 @@ The following tables describe the default permissions for each role.
 | Data models & jobs  | Customized by you, per user |
 | API keys            | Customized by you, per user |
 
-A note on API keys and permissions
+:::note[API keys and permissions]
 
-Please note:
+A [Snowplow API key](/docs/account-management/index.md#create-an-api-key) is scoped to the permissions selected when it is created, and can never hold more than its creator's own permissions. Two exceptions apply:
 
-1) Any API keys you create have full admin permissions
+- Keys marked **Global admin** on the API keys page have full admin permissions. Replace them with scoped keys and delete them.
 
-2) Any existing Iglu API keys allow permissions to be side-stepped by connecting directly to Iglu servers
+- Iglu Server keys authenticate directly against the Iglu Server, so they bypass Console permissions entirely.
 
-The recommended approach is to remove all existing API keys and Iglu keys, and set the API keys permission respectively so that only trusted users can create new keys.
+Set the API keys permission so that only trusted users can create new Iglu Server keys.
+
+:::
 
 ## What does each permission mean?
 

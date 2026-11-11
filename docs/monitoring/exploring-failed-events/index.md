@@ -1,17 +1,16 @@
 ---
-title: "Load failed events into warehouse or lake"
+title: "Load failed events into your warehouse or lake"
 sidebar_position: 3
-sidebar_label: "Load failed events into table"
+sidebar_label: "Load failed events into your warehouse"
 description: "Load common types of failed events to a separate table in your warehouse or lake to analyze them easily."
 keywords: ["failed events loader", "load failed events", "warehouse failed events table"]
+content_type: reference
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Failed events loaders are included with all Snowplow platforms."
+  note="Failed events loaders are included with all Snowplow platforms."
 />
 ```
 
@@ -101,13 +100,13 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 ## Configure
 
-To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/pipeline/enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
+To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/destinations/custom-streaming/enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
 The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 
 :::note[Infrastructure costs]
 
-An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/index.md#cdi-cloud)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
+An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/deployment-options/index.md#cdi-cloud)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
 
 :::
 

@@ -4,12 +4,12 @@ sidebar_label: "Run locally"
 sidebar_position: 2
 description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the dashboard, API, or exported TSV/JSON format."
 keywords: ["micro basic usage", "docker", "run micro", "test events", "micro dashboard"]
+content_type: how-to
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
-import Badges from '@site/src/components/Badges';
 ```
 
 :::tip[Micro in Console]
@@ -20,7 +20,7 @@ For general use, we recommend [running Micro through Snowplow Console](/docs/tes
 
 The easiest way to run Micro locally is through [Docker](https://www.docker.com/).
 
-<Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
+<Badge href="https://hub.docker.com/r/snowplow/snowplow-micro">Docker Hub: snowplow/snowplow-micro</Badge>
 
 Run the following command:
 
@@ -118,7 +118,7 @@ curl localhost:9090/micro/good
 
 ## Exporting events
 
-Snowplow pipelines output data in the [_enriched TSV format_](/docs/pipeline/enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/api-reference/snowbridge/index.md).
+Snowplow pipelines output data in the [_enriched TSV format_](/docs/destinations/custom-streaming/enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/api-reference/snowbridge/index.md).
 
 With Micro, you can see what your data would look like in this format — useful if you want to test any logic that is parsing this data.
 

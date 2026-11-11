@@ -1,9 +1,10 @@
 ---
 title: "Manage event specifications using Console"
 sidebar_label: "Event specifications"
-sidebar_position: 1
+sidebar_position: 1.5
 description: "Create and manage event specifications in Snowplow Console UI as documented events within tracking plans with data structures and implementation details."
 keywords: ["event specifications UI", "Console UI", "create event specifications", "event documentation"]
+content_type: how-to
 ---
 
 Event specifications are complete definitions of business events. They define what data should be tracked, when the event occurs, along with additional metadata about the event such as ownership.
@@ -35,7 +36,13 @@ To add more information or modify an existing event specification, follow these 
 2. Select the desired event specification
 3. This action will open an overview of the selected event specification containing the details that have been added to date
 
-This interface is divided into focused sections; explore each section below for more details.
+The event specification page has three tabs:
+
+- **Details**: the sections described below
+- **Tracking summary**: event volumes per specification version and application ID, see [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md#track-specification-versions-and-application-ids)
+- **History**: the list of versions of the specification, with the changes between any two versions
+
+The **Details** tab is divided into focused sections; explore each section below for more details.
 
 ![Product Added to Cart event specification showing event description, source application, the cart_action 1-0-0 data structure with a type property required to be "add", user and product entity data structures, and an Add to Cart button trigger](images/event-specification-overview.png)
 

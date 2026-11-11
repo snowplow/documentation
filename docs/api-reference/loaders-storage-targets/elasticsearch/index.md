@@ -5,6 +5,7 @@ date: "2020-11-25"
 sidebar_position: 64
 description: "Load Snowplow enriched and bad events from a Kinesis stream into Elasticsearch or OpenSearch clusters."
 keywords: ["elasticsearch loader", "opensearch", "kinesis elasticsearch", "event search"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -190,8 +191,8 @@ The loader is configured using a HOCON file. You can find a minimal example and 
 The loader requires explicit acceptance of the [Snowplow Limited Use License Agreement](https://docs.snowplow.io/limited-use-license-1.1):
 
 ```hocon
-"license": {
-  "accept": true
+license: {
+  accept: true
 }
 ```
 

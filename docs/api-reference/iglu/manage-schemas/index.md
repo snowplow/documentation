@@ -5,6 +5,7 @@ date: "2026-05-14"
 sidebar_position: 30
 description: "Manage schemas with Iglu Server or host a static Iglu registry in Amazon S3 or Google Cloud Storage for self-hosted Snowplow deployments."
 keywords: ["Iglu Server", "schema management", "static registry", "S3 registry", "GCS registry", "self-hosted"]
+content_type: how-to
 ---
 
 ```mdx-code-block

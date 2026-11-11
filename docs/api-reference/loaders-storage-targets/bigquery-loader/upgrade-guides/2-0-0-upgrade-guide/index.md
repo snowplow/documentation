@@ -4,6 +4,7 @@ sidebar_label: "2.0.0 upgrade guide"
 sidebar_position: -20
 description: "Guide for upgrading to BigQuery Loader 2.0.0, including configuration changes, new column naming strategy, and recovery columns for schema evolution."
 keywords: ["BigQuery Loader", "upgrade guide", "schema evolution", "recovery columns", "BigQuery"]
+content_type: how-to
 ---
 
 ## Configuration
@@ -56,9 +57,9 @@ To simplify migration to the new table format, it is possible to run the 2.x loa
 
 For example:
 
-```json
-"legacyColumns": [
-  "iglu:com.example/legacy_a/jsonschema/1-0-0",
+```hocon
+legacyColumns: [
+  "iglu:com.example/legacy_a/jsonschema/1-0-0"
   "iglu:com.example/legacy_b/jsonschema/1-*-*"
 ]
 ```

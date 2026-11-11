@@ -1,13 +1,21 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { isPreviousVersion } from './version-utils.js'
+import { buildAgentInstructions } from './agent-instructions.js'
 
 /**
  * Generate llms-full.txt — index header + page content concatenated.
  * Excludes any sections with `sidebar_custom_props.outdated`.
  */
 export async function generateFull(outDir, pages, options) {
-  const { siteTitle, siteDescription, siteUrl, outdatedPrefixes } = options
+  const {
+    siteTitle,
+    siteDescription,
+    siteUrl,
+    outdatedPrefixes,
+    siteDir,
+    agentInstructions = true,
+  } = options
 
   const currentPages = pages.filter(
     (p) => !isPreviousVersion(p.routePath, outdatedPrefixes)
@@ -22,6 +30,10 @@ export async function generateFull(outDir, pages, options) {
   if (siteDescription) {
     lines.push(`> ${siteDescription}`)
     lines.push('')
+  }
+
+  if (agentInstructions && siteDir) {
+    lines.push(...(await buildAgentInstructions({ siteDir, siteUrl })))
   }
 
   lines.push(
@@ -41,6 +53,14 @@ export async function generateFull(outDir, pages, options) {
       lines.push(`> ${page.description}`)
     }
     lines.push(`> Source: ${pageUrl}`)
+
+    // Date a release note so it can't be read as current documentation
+    if (page.kind === 'release-note') {
+      if (page.date) lines.push(`> Date: ${page.date}`)
+      if (page.components?.length) {
+        lines.push(`> Components: ${page.components.join(', ')}`)
+      }
+    }
 
     lines.push('')
     lines.push(page.markdown)

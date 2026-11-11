@@ -2,9 +2,10 @@
 title: "Transformer Pub/Sub for GCP streams"
 sidebar_label: "Transformer PubSub"
 date: "2022-10-13"
-sidebar_position: 20
+sidebar_position: 25
 description: "Stream transformer for GCP that reads enriched events from Pub/Sub and writes transformed data to GCS in real-time."
 keywords: ["transformer pubsub", "gcp transformer", "pubsub to gcs", "stream transformation", "google cloud transformer"]
+content_type: how-to
 ---
 
 ```mdx-code-block

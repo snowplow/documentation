@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Available enrichments"
 description: "Browse the complete catalog of Snowplow enrichments that add entities and enhance event data during processing."
 keywords: ["enrichments catalog", "enrichment list", "enrichment order"]
+content_type: reference
 ---
 
 
@@ -30,6 +31,7 @@ You can only configure one instance of each enrichment.
 | [Cookie Extractor](/docs/pipeline/enrichments/available-enrichments/cookie-extractor-enrichment/index.md)                | Extract values of specific cookies into extra entities.                                                                                          |
 | [HTTP Header Extractor](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md)      | Extract values of specific HTTP headers into extra entities.                                                                                     |
 | [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)                                      | Parse the user agent string and attach an entity with detailed user agent information.                                                           |
+| [Agent Classification](/docs/pipeline/enrichments/available-enrichments/agent-classification-enrichment/index.md)        | Identify AI crawlers and automated agents by classifying them by operator and purpose using the YAUAA agent name.                                |
 | [IP Lookup](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)                              | Look up useful data on the IP address in the MaxMind database.                                                                                   |
 | [ASN Lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md)                            | Flag bot traffic by checking ASNs against known bad ASN lists.                                                                                   |
 | [Bot Detection](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md)                      | Consolidate bot signals from YAUAA, IAB, and ASN lookup into a single entity.                                                                    |

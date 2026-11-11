@@ -4,6 +4,7 @@ sidebar_label: "Adding custom schemas"
 sidebar_position: 4
 description: "Connect Snowplow Micro to Iglu registries or add schemas directly. Point Micro to Console registries, Iglu Server, or mount local schema files for custom event validation."
 keywords: ["custom schemas", "iglu registry", "schema validation", "local schemas", "data structures"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -59,7 +60,7 @@ Make sure to fully spell out the URL, including the protocol (`http://` or `http
 
 :::tip
 
-You can find your Iglu registry URLs and generate API keys [via the console](https://console.snowplowanalytics.com/iglu-keys).
+If you use Snowplow CDI, you can find your Iglu resolver URLs and create Iglu Server keys in Console under **Settings** > **Manage organization** > **View and manage API keys**.
 
 :::
 

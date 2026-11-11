@@ -5,18 +5,17 @@ date: "2023-06-14"
 sidebar_position: 200
 description: "Track events in Python applications and games with the Snowplow Python tracker SDK using subjects, emitters, and trackers."
 keywords: ["python tracker", "python analytics", "pypi package"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Pypi Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker Pypi Release"></Badges>
+<TrackerTier id="python" />
+<VersionBadge component="pythonTracker" href="https://pypi.org/project/snowplow-tracker/" />
 </BadgeGroup>
 ```
+
+<TrackerFeatures id="python" />
 
 The Snowplow Python Tracker allows you to track Snowplow events from your Python apps and games.
 

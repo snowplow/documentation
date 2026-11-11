@@ -5,6 +5,7 @@ date: "2021-11-16"
 sidebar_position: 3000
 description: "Add event context entities, subject data with user and platform information, and custom timestamps to Roku tracker events."
 keywords: ["roku event context", "subject configuration", "custom timestamps"]
+content_type: how-to
 ---
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset. Each of them involves a different class from the Roku tracker.
@@ -100,6 +101,28 @@ m.global.snowplow.init = {
     }
 }
 ```
+
+### Updating the user ID at runtime
+
+Available since version 0.4.0.
+
+The `userId` is also available as a field you can update at runtime, without reinitializing the tracker. This is useful when a user logs in or out, or switches accounts, during an active session.
+
+```brightscript
+m.global.snowplow.setUserId = "new_user_id"
+```
+
+This updates `userId` on all initialized tracker instances. To update a specific tracker instead, scope the call to its namespace, as described in [Tracker namespaces](/docs/sources/roku-tracker/configuration/index.md#tracker-namespaces):
+
+```brightscript
+m.global.snowplow.ns1.setUserId = "new_user_id"
+```
+
+`setUserId` applies only to trackers that are already initialized, so set it after `init`. Reinitializing a tracker replaces its configuration, including the user ID.
+
+To represent a logged-out user, set `setUserId` to an empty string. The `user_id` field (`uid` in the tracker payload) is then omitted from subsequent events.
+
+`setUserId` only changes the business user ID. It doesn't affect `domainUserId`, `networkUserId`, or the `client_session` entity's user ID, and it doesn't start a new session.
 
 ## Event timestamps
 

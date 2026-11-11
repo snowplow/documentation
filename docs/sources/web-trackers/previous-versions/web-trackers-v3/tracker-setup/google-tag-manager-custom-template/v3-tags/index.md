@@ -1,5 +1,6 @@
 ---
 title: "Snowplow v3 Tags"
+sidebar_label: "Snowplow v3 Tags"
 sidebar_position: 1000
 description: "Documentation for Snowplow v3 Tags in the web tracker."
 keywords: ["tracker", "configuration"]

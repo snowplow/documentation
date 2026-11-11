@@ -5,6 +5,7 @@ sidebar_label: "Proxy attributes to the browser"
 description: "Build a small server-side or edge endpoint, for example on Vercel or Cloudflare Workers, that reads the Snowplow tracker cookies, fetches attributes from Signals, and returns them to the browser."
 keywords: ["signals proxy", "edge function", "cloudflare workers", "vercel", "next.js", "domain_userid", "real-time personalization"]
 date: "2026-11-05"
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -101,12 +102,12 @@ If the tracker uses [anonymous tracking](/docs/events/anonymous-tracking/index.m
 
 ## Create the proxy endpoint
 
-Store your [connection credentials](/docs/signals/connection/index.md#connection-credentials) as environment secrets in your hosting platform. The examples below call a service named `web_personalization` and return two attributes from it.
+Store your [connection credentials](/docs/signals/connection/index.md#get-your-connection-credentials) as environment secrets in your hosting platform. The proxy only reads attributes, so use an API key with the **View** permission. The examples below call a service named `web_personalization` and return two attributes from it.
 
 <Tabs groupId="signals-proxy" queryString>
 <TabItem value="vercel" label="Vercel (Next.js)" default>
 
-This Next.js route handler uses the [Signals Node.js SDK](/docs/signals/connection/index.md#signals-nodejs-sdk), which handles authentication and token refresh. Create the client at module scope so that warm invocations reuse the access token.
+This Next.js route handler uses the [Signals Node.js SDK](/docs/signals/connection/index.md#install-the-sdk), which handles authentication and token refresh. Create the client at module scope so that warm invocations reuse the access token.
 
 ```typescript title="app/api/signals/route.ts"
 import { NextRequest, NextResponse } from "next/server";
@@ -155,7 +156,7 @@ export async function GET(request: NextRequest) {
 </TabItem>
 <TabItem value="cloudflare" label="Cloudflare Workers">
 
-This Worker also uses the [Signals Node.js SDK](/docs/signals/connection/index.md#signals-nodejs-sdk). The SDK relies on Node.js APIs, so enable the `nodejs_compat` compatibility flag in your Wrangler configuration:
+This Worker also uses the [Signals Node.js SDK](/docs/signals/connection/index.md#install-the-sdk). The SDK relies on Node.js APIs, so enable the `nodejs_compat` compatibility flag in your Wrangler configuration:
 
 ```toml title="wrangler.toml"
 compatibility_date = "2025-09-01"

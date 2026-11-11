@@ -1,5 +1,6 @@
 ---
 title: "YouTube"
+sidebar_label: "YouTube"
 sidebar_position: 20
 description: "Documentation for YouTube in the web tracker."
 keywords: ["tracker", "configuration"]

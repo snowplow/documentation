@@ -1,11 +1,18 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { convertHtmlToMarkdown } from './convert.js'
-import { writePages } from './write-pages.js'
+import { checkCodeBlocks } from './check-code-blocks.js'
+import { writePages, writeTutorialPages } from './write-pages.js'
 import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
+import { buildSidebarMap, buildSidebarOutlines } from './product-indexes.js'
+import {
+  attachSourceMetadata,
+  buildTutorialMeta,
+  sortPages,
+} from './content-metadata.js'
 
 /**
  * @param {import('@docusaurus/types').LoadContext} context
@@ -22,12 +29,20 @@ export default function pluginLlmsTxt(context, options) {
     contentSelectors = ['.theme-doc-markdown', 'article', 'main'],
     enableMarkdownFiles = true,
     enableLlmsFullTxt = true,
+    // Write instructions for AI agents at the top of llms.txt and llms-full.txt
+    agentInstructions = true,
   } = options
 
   return {
     name: 'docusaurus-plugin-llms-txt',
 
-    async postBuild({ outDir }) {
+    // Tell the theme which routes have a .md copy, so doc pages only link
+    // to Markdown files that exist
+    async contentLoaded({ actions }) {
+      actions.setGlobalData({ enableMarkdownFiles, excludeRoutes })
+    },
+
+    async postBuild({ outDir, plugins }) {
       const siteUrl = (
         context.siteConfig?.url || 'https://docs.snowplow.io'
       ).replace(/\/$/, '')
@@ -88,34 +103,53 @@ export default function pluginLlmsTxt(context, options) {
 
       console.log(`[llms-txt] Converted ${pages.length} pages to markdown`)
 
+      // Code blocks must keep their source line breaks
+      checkCodeBlocks(pages)
+
       // Enrich dbt config pages with variable tables from JSON schemas
       await enrichDbtSchemas(pages, context.siteDir)
+
+      // Read back the frontmatter Docusaurus doesn't carry into the built HTML,
+      // then put tutorial steps in step order and release notes newest first
+      await attachSourceMetadata(pages, context.siteDir)
+      const tutorialMeta = await buildTutorialMeta(context.siteDir)
+      const sortedPages = sortPages(pages)
 
       // Build the set of outdated route prefixes from frontmatter
       const outdatedPrefixes = await buildOutdatedPaths(context.siteDir)
 
-      // Write per-page .md files
+      // Write per-page .md files, plus one combined .md per tutorial
       if (enableMarkdownFiles) {
-        await writePages(outDir, pages, siteUrl, outdatedPrefixes)
+        await writePages(outDir, sortedPages, siteUrl, outdatedPrefixes)
+        await writeTutorialPages(outDir, sortedPages, siteUrl, tutorialMeta)
       }
 
       // Generate llms.txt index
-      await generateIndex(outDir, pages, {
+      await generateIndex(outDir, sortedPages, {
         siteTitle,
         siteDescription,
         siteUrl,
         enableMarkdownFiles,
         siteDir: context.siteDir,
         outdatedPrefixes,
+        tutorialMeta,
+        agentInstructions,
+        // Which sidebar each docs page is in, for the per-product indexes
+        sidebarMap: buildSidebarMap(plugins),
+        // Section headers and doc order of each sidebar, for indexes that
+        // follow the sidebar
+        sidebarOutlines: buildSidebarOutlines(plugins),
       })
 
       // Generate llms-full.txt
       if (enableLlmsFullTxt) {
-        await generateFull(outDir, pages, {
+        await generateFull(outDir, sortedPages, {
           siteTitle,
           siteDescription,
           siteUrl,
           outdatedPrefixes,
+          siteDir: context.siteDir,
+          agentInstructions,
         })
       }
 

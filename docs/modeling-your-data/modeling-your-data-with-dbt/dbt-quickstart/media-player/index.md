@@ -4,19 +4,18 @@ sidebar_position: 20
 title: "Media Player Quickstart"
 description: "Quick start guide for the Snowplow Media Player dbt package to model video and audio engagement data."
 keywords: ["media player quickstart", "media player setup", "dbt media player installation"]
+content_type: how-to
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowMediaPlayer" />
+<TierBadge tier="actively-maintained" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
 ## Requirements
@@ -105,7 +104,7 @@ vars:
 ### 5. Additional vendor specific configuration
 
 :::info[BigQuery Only]
-Verify which column your events table is partitioned on. It will likely be partitioned on `load_tstamp` or `collector_tstamp`. Unless it is partitioned on `derived_tstamp` (legacy behavior) you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
+Verify which column your events table is partitioned on. It will likely be partitioned on `load_tstamp`. Unless it's partitioned on `derived_tstamp` (legacy behavior), set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `snowplow__session_timestamp` column is used for partition pruning when querying the events table:
 
 ```yml title=dbt_project.yml
 ...

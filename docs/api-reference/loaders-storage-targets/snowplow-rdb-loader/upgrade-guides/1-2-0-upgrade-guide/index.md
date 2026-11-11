@@ -5,6 +5,7 @@ date: "2021-09-03"
 sidebar_position: 190
 description: "Upgrade RDB Loader to 1.2.0 with webhook monitoring, folder monitoring, and enhanced observability for Redshift loading."
 keywords: ["rdb loader 1.2 upgrade", "webhook monitoring", "folder monitoring", "loader observability", "rdb monitoring"]
+content_type: how-to
 ---
 
 RDB Loader 1.2.0 brings many improvements for monitoring subsystem. If you're not interested in new features - you can just bump versions. If you need webhook monitoring - read below instructions on how to enable it.
@@ -26,13 +27,13 @@ RDB Loader and RDB Stream Shredder distributed as Docker images, published on Do
 
 All configuration changes are scoped to `monitoring` property.
 
-```json
-"monitoring": {
-  "webhook": {
-    "endpoint": "https://webhooks.acme.com/rdb-loader",
-    "tags": {            # Custom set of tags
-      "host": $HOST,     # Environment variables are supported
-      "pipeline": "production"
+```hocon
+monitoring: {
+  webhook: {
+    endpoint: "https://webhooks.acme.com/rdb-loader"
+    tags: {                # Custom set of tags
+      host: ${HOST}        # Environment variables are supported
+      pipeline: production
     }
   }
 }
@@ -44,12 +45,12 @@ It's up to you to setup a preferable webhook backend. It can be a Snowplow Iglu 
 
 All configuration changes are scoped to `monitoring` property.
 
-```json
-"monitoring": {
-  "folders": {
-    "staging": "s3://snowplow-acme-com/logging/",    # This path will contain temporary files
-                                                     # Redshift role must have an access for this folder
-    "period": "2 hours"                              # How often the check should be performed
+```hocon
+monitoring: {
+  folders: {
+    staging: "s3://snowplow-acme-com/logging/"  # This path will contain temporary files
+                                                # Redshift role must have an access for this folder
+    period: 2 hours                             # How often the check should be performed
   }
 }
 ```

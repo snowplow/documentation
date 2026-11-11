@@ -1,9 +1,10 @@
 ---
 title: "Track core web vitals performance metrics with the web trackers"
 sidebar_label: "Core web vitals"
-sidebar_position: 95
+sidebar_position: 96
 description: "Automatically track Core Web Vitals metrics including LCP, FID, and CLS using the web-vitals library for user experience analysis."
 keywords: ["web vitals", "performance"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -33,12 +34,12 @@ Web vitals events are **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js">unpkg</a></td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js',
     ['snowplowWebVitals', 'WebVitalsPlugin']
 );
 ```
@@ -82,7 +83,7 @@ Pass configuration options as an array in the fourth parameter of `addPlugin`:
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@4.10.2/dist/index.umd.min.js',
     ['snowplowWebVitals', 'WebVitalsPlugin'],
     [{
         loadWebVitalsScript: true,

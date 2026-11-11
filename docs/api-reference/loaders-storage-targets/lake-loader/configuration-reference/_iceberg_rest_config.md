@@ -20,7 +20,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>output.good.location</code></td>
-    <td>Optional. URI of the bucket location to which to write Snowplow enriched events in Iceberg format. The URI should start with <code>s3a://</code>, <code>gs://</code>, or <code>abfs://</code> depending on your cloud provider. If not provided, the catalog's default warehouse location will be used.</td>
+    <td>Optional. URI of the bucket location to which to write Snowplow enriched events in Iceberg format. The URI should start with <code>s3a://</code>, <code>gs://</code>, or <code>abfs://</code>, depending on where your bucket is. Since 0.15.0, the loader can write to any of these, regardless of which cloud it runs in. If not provided, the catalog's default warehouse location will be used.</td>
 </tr>
 <tr>
     <td><code>output.good.database</code></td>

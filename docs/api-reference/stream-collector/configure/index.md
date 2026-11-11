@@ -1,9 +1,10 @@
 ---
-title: "Collector configuration reference"
+title: "Collector configuration options"
 sidebar_label: "Configure"
 sidebar_position: 2
 description: "Complete configuration reference for the Collector HOCON config file, including common options, sink-specific settings, cookie management, networking, and TLS configuration."
 keywords: ["collector configuration", "HOCON config", "collector setup", "Kinesis config", "PubSub config", "Kafka config"]
+content_type: reference
 ---
 
 This is a complete list of the options that can be configured in the collector HOCON config file. The [example configs in github](https://github.com/snowplow/stream-collector/tree/master/examples) show how to prepare an input file. Some features are described in more detail at the bottom of this page.
@@ -14,9 +15,9 @@ The collector is released under the [Snowplow Limited Use License](/limited-use-
 
 To accept the terms of license and run the collector, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `collector.license.accept` option, like this:
 
-```hcl
-collector {
-  license { accept = true }
+```hocon
+collector: {
+  license: { accept: true }
 }
 ```
 
@@ -65,12 +66,21 @@ collector {
 | `collector.preTerminationPeriod` (since *2.5.0*)                                  | Optional. Default: `10 seconds`. Configures how long the collector should pause after receiving a sigterm before starting the graceful shutdown. During this period the collector continues to accept new connections and respond to requests.                                                                                                                  |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*)                  | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics.                                                                                                                                                                                                       |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric.                                                                                                                                                                                                                                        |
+| `collector.monitoring.metrics.statsd.enabled` (since *2.6.0*)                     | Optional. Default: `false`. When enabled, the collector sends metrics to a [StatsD](https://github.com/statsd/statsd) server over UDP.                                                                                                                                                                                                                          |
+| `collector.monitoring.metrics.statsd.hostname` (since *2.6.0*)                    | Optional. Default: `localhost`. Hostname of the StatsD server to send metrics to.                                                                                                                                                                                                                                                                               |
+| `collector.monitoring.metrics.statsd.port` (since *2.6.0*)                        | Optional. Default: `8125`. Port of the StatsD server.                                                                                                                                                                                                                                                                                                           |
+| `collector.monitoring.metrics.statsd.period` (since *2.6.0*)                      | Optional. Default: `10 seconds`. How frequently to send metrics to the StatsD server.                                                                                                                                                                                                                                                                           |
+| `collector.monitoring.metrics.statsd.prefix` (since *2.6.0*)                      | Optional. Default: `snowplow.collector`. Prefix of the StatsD metric names.                                                                                                                                                                                                                                                                                     |
+| `collector.monitoring.metrics.statsd.tags` (since *3.0.0*)                        | Optional. Default: empty. E.g. `{ "env": "prod" }`. Key-value pairs attached to each metric sent to StatsD to provide contextual information.                                                                                                                                                                                                                   |
 | `collector.telemetry.disable`                                                     | Optional. Set to `true` to disable [telemetry](/docs/get-started/self-hosted/telemetry/index.md).                                                                                                                                                                                                                                                               |
 | `collector.telemetry.userProvidedId`                                              | Optional. See [here](/docs/get-started/self-hosted/telemetry/index.md#how-can-i-help) for more information.                                                                                                                                                                                                                                                     |
 | `collector.compression.enabled` (since *3.6.0*)                                   | Optional. Default: `false`. Enable compression on the output. Compression should only be enabled with Enrich >=6.1.0.                                                                                                                                                                                                                                           |
 | `collector.compression.type` (since *3.6.0*)                                      | Optional. Default: `zstd`. Compression algorithm to use.                                                                                                                                                                                                                                                                                                        |
 | `collector.compression.gzipCompressionLevel` (since *3.6.0*)                      | Optional. Default: `6`. The compression level for GZIP compression. It is between 1 and 9. Lower levels have faster compression speed, but worse compression ratio.                                                                                                                                                                                             |
 | `collector.compression.zstdCompressionLevel` (since *3.6.0*)                      | Optional. Default: `9`. The compression level for ZSTD compression. It is between 1 and 22. Lower levels have faster compression speed, but worse compression ratio.                                                                                                                                                                                            |
+
+{/* `collector.streams.http.baseUri` is deliberately left undocumented: it swaps the good sink for the
+common-streams HTTP sink and is not intended for public use. Verified against collector 3.8.0. */}
 
 ### Kinesis collector options
 
@@ -129,7 +139,7 @@ collector {
 | `collector.streams.sink.{good,bad}.backoffPolicy.initialRpcTimeout` (deprecated since *3.5.0*)   | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried.                                                                                                                                                 |
 | `collector.streams.sink.{good,bad}.backoffPolicy.maxRpcTimeout` (deprecated since *3.5.0*)       | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried.                                                                                                                                           |
 | `collector.streams.sink.{good,bad}.backoffPolicy.rpcTimeoutMultipler` (deprecated since *3.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried.                                                                                                                                                                                 |
-| `collector.streams.sink.{good,bad}..maxBytes` (since *2.9.0*)                                    | Optional. Default: `10000000` (10 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation failed event is emitted instead.                                                                              |
+| `collector.streams.sink.{good,bad}.maxBytes` (since *2.9.0*)                                     | Optional. Default: `9000000` (9 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation failed event is emitted instead. The Pub/Sub message size limit is 10 MB, so the default leaves headroom for message metadata.                                                                                                                             |
 | `collector.streams.sink.{good,bad}.startupCheckInterval` (since *2.9.0*)                         | Optional. Default: `1 second`.  When collector starts, it checks if PubSub topics exist with `listTopics`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
 | `collector.streams.sink.{good,bad}.retryInterval` (since *2.9.0*)                                | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of PubSub API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them.                                |
 | `collector.streams.{good,bad}.buffer.byteLimit`                                                  | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events                                                                                   |
@@ -163,16 +173,16 @@ If no domain is specified, the cookie will be set against the full collector dom
 
 In earlier versions, you could specify a `domain` to tie the cookie to. For example, if set to `.snplow.com`, the cookie would have been accessible to other applications running on `*.snplow.com`. To do the same in this version, use the `fallbackDomain` setting but **make sure** that you no longer include a leading dot:
 
-```properties
-fallbackDomain = "snplow.com"
+```hocon
+fallbackDomain: snplow.com
 ```
 
 The cookie set by the collector can be treated differently by browsers, depending on whether it's considered to be a first-party or a third-party cookie. In earlier versions (0.15.0 and earlier), if you had two collector endpoints, one on `collector.snplow.com` and one on `collector.snplow.net`, you could only specify one of those domains in the configuration. That meant that you were only able to set a first-party cookie server-side on either `.snplow.com` or `.snplow.net`, but not on both. From version 0.16.0, you can specify a list of domains to be used for the cookie (**note the lack of a leading dot**):
 
-```properties
-domains = [
-  "snplow.com"
-  "snplow.net"
+```hocon
+domains: [
+  snplow.com
+  snplow.net
 ]
 ```
 
@@ -195,11 +205,11 @@ The collector responds with a cookie to requests with a path that matches the `v
 
 You can also map any valid (ie, two-segment) path to one of the three defaults via the `collector.paths` section of the configuration file. Your custom path must be the key and the value must be one of the corresponding default paths. Both must be full valid paths starting with a leading slash:
 
-```properties
-paths {
-  "/com.acme/track"    = "/com.snowplowanalytics.snowplow/tp2"
-  "/com.acme/redirect" = "/r/tp2"
-  "/com.acme/iglu"     = "/com.snowplowanalytics.iglu/v1"
+```hocon
+paths: {
+  "/com.acme/track": /com.snowplowanalytics.snowplow/tp2
+  "/com.acme/redirect": /r/tp2
+  "/com.acme/iglu": /com.snowplowanalytics.iglu/v1
 }
 ```
 
@@ -287,9 +297,9 @@ This section only applies to the case when SQS is used as a fallback sink when K
 
 To start using this feature, you will first need to set up the SQS queues. Two separate queues are required for good (raw) events and bad events. The Collector then needs to be informed about the queue names, and this can be done by adding these as entries to `config.hocon`:
 
-```properties
-sqsGoodBuffer = {good-sqs-queue-url}
-sqsBadBuffer = {bad-sqs-queue-url}
+```hocon
+sqsGoodBuffer: <good-sqs-queue-url>
+sqsBadBuffer: <bad-sqs-queue-url>
 ```
 
 ### Networking

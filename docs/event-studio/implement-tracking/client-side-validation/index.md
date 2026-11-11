@@ -4,6 +4,7 @@ sidebar_label: "Client-side validation for web"
 sidebar_position: 4
 description: "Enable real-time schema and event specification validation in the browser for JavaScript and TypeScript trackers to catch tracking errors before events are sent, using Snowtype."
 keywords: ["snowtype", "client-side validation", "browser validation", "schema validation", "event specification validation", "JavaScript validation", "TypeScript validation", "instructions"]
+content_type: how-to
 ---
 
 Using Snowtype you can get notified, at runtime, if tracked events don't match their schema definitions, or the rules defined in their event specification. This allows you to catch errors before they reach production.

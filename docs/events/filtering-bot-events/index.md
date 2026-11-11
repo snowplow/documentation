@@ -5,6 +5,7 @@ sidebar_label: "Filtering bot events"
 description: "Detect and filter out bot traffic to keep your analytics accurate and your data warehouse or lake clean."
 keywords: ["bot filtering", "bot detection", "spam events", "event filtering", "IAB", "YAUAA"]
 date: "2026-03-24"
+content_type: how-to
 ---
 
 Bot traffic — crawlers, scrapers, and automated agents — can make up a significant share of the events flowing through your pipeline.
@@ -56,6 +57,24 @@ For this enrichment to work, you also need to enable the [IP lookup enrichment](
 ### Bot detection enrichment
 
 The [bot detection enrichment](/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/index.md) consolidates the outputs of the sources above (including the client-side bot detection plugin and the server-side enrichments) into a single `bot_detection` entity. It uses "any positive = bot" logic: if any enabled source indicates that the event is a bot, the `bot` field is set to `true`, along with a list of which sources contributed to the decision. This gives you a single field to check instead of querying multiple entities separately.
+
+## Exclude your own server-side tracking
+
+Events from your own server-side trackers can look like bot traffic:
+* They typically originate from cloud providers or data centers
+* Their user agent string often comes from an HTTP client library that a bot might use, such as `okhttp/4.2.2`
+
+As a result, the enrichments above may flag these events as bots, and any filtering based on the `bot` field would remove legitimate data.
+
+To prevent this, configure the IAB and ASN lookup enrichments so they don't flag your server-side events.
+
+### Allowlist your user agents in the IAB enrichment
+
+Configure your server-side trackers to send a custom user agent string that identifies your application, like `my-server-side-tracker/1.0`. Then add this string to [`includeUseragents`](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md#custom-user-agent-lists). The enrichment classifies matching user agents as non-bots and skips the IP address check. Avoid allowlisting a default HTTP client user agent like `okhttp/4.2.2`, as genuine bots often use the same libraries.
+
+### Bypass the ASN check for server-side platforms
+
+Add the platform of your server-side events, typically `srv`, to [`bypassPlatforms`](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md#bypassplatforms). The enrichment ignores events with a matching [`platform`](/docs/fundamentals/canonical-event/index.md#application-fields) field.
 
 ## Filter out bot events
 

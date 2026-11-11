@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Install Snowtype, authenticate with your Snowplow account, and initialize your project."
 keywords: ["Snowtype", "install", "setup", "getting started", "code generation", "authenticate", "initialize"]
 date: "2026-03-19"
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';
@@ -58,7 +59,7 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. You can create or find your API key in [Console](https://console.snowplowanalytics.com/settings) > **Settings** > **Manage organization**.
+Snowtype needs a Console API key to read your event specifications and data structures. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
 
 You need both the **API key** and the **API key ID**.
 

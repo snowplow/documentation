@@ -5,6 +5,7 @@ description: "Configure the Snowplow Identities dbt package for identity resolut
 keywords: ["Identities configuration", "dbt identities package", "configure identities", "configure dbt", "variables"]
 sidebar_position: 35
 date: "2026-03-23"
+content_type: reference
 ---
 
 import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
@@ -20,11 +21,21 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
     {`models:
   snowplow_identities:
     +schema: ${derivedSchema}
-      base:
-        manifest:
-          +schema: ${manifestSchema}
-        scratch:
-          +schema: ${scratchSchema}`}
+    base:
+      manifest:
+        +schema: ${manifestSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    merge_events:
+      +schema: ${derivedSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    new_identities:
+      +schema: ${derivedSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    scratch:
+      +schema: ${scratchSchema}`}
     </CodeBlock>
     </>
   )

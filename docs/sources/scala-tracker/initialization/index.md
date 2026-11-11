@@ -5,6 +5,7 @@ date: "2022-9-15"
 sidebar_position: 10
 description: "Initialize Scala tracker with ID or http4s emitters, configure buffer size, retry policies, event queue policies, and add callbacks for event sending."
 keywords: ["scala emitter configuration", "http4s emitter", "buffer config"]
+content_type: how-to
 ---
 
 Assuming you have completed the Scala Tracker Setup, you are ready to initialize the Scala Tracker.

@@ -11,9 +11,9 @@ Both routes end in the same place: a conversation that can read and change your 
 
 ## Use the Snowplow Assistant
 
-The [Snowplow Assistant](/docs/llms-support/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
+The [Snowplow Assistant](/docs/ai/console-agent/) is built into [Snowplow Console](https://console.snowplowanalytics.com) as a chat interface, so there's nothing to install and no credentials to configure. It authenticates with your current Console session and operates with your existing Console permissions, and it asks you to confirm any action that changes your configuration before it proceeds.
 
-Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/llms-support/console-agent/) for what it covers and how it handles your data.
+Log in to Console, open the assistant, and you're ready to start prompting. If the chat interface doesn't appear, an administrator can enable the assistant for your organization from the **Settings** section of Console: see [Snowplow Assistant](/docs/ai/console-agent/) for what it covers and how it handles your data.
 
 ![The Manage organization page in Console settings, with the Snowplow Assistant section showing an Enabled badge, a custom instructions panel, and a Disable button](./images/console-assistant-enabled.png)
 
@@ -23,11 +23,11 @@ On this route you can skip straight to [defining attributes](/tutorials/signals-
 
 The Snowplow MCP server is a remote server, hosted by Snowplow: there's no server for you to deploy or maintain. Connecting your assistant to it means pointing your MCP client at the server URL and authenticating with your Snowplow Console account.
 
-The Snowplow plugin bundles the MCP server with six skills, including the `signals` skill that guides the assistant through Signals workflows like the one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the `signals` skill, so there's no slash command to run. The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills).
+The Snowplow plugin bundles the MCP server with the Snowplow skills, which guide the assistant through Snowplow workflows such as the Signals one in this tutorial. The skills are loaded on demand: when you ask about attribute groups, the assistant automatically engages the relevant skill, so there's no slash command to run. The plugin source lives in the [`snowplow/skills` repository](https://github.com/snowplow/skills).
 
 ### Install in any assistant
 
-Whichever assistant you use, the recommended way to install is the vendor-neutral [open-plugin](https://github.com/vercel-labs/plugins) CLI, which installs the MCP server and the skills together:
+Whichever assistant you use, the recommended way to install is the vendor-neutral [open-plugin](https://www.npmjs.com/package/plugins) CLI, which installs the MCP server and the skills together:
 
 ```bash
 npx plugins add snowplow/skills
@@ -37,15 +37,6 @@ The CLI detects which agent tools you have on your machine and installs the plug
 
 ```bash
 npx plugins add snowplow/skills --target claude-code
-```
-
-### Install in Claude Code
-
-Claude Code also has a native plugin marketplace, which reads the plugin definition straight from the repository and updates it automatically when the repository changes. Run these two commands inside Claude Code:
-
-```text
-/plugin marketplace add snowplow/skills
-/plugin install snowplow@snowplow
 ```
 
 ### Other MCP clients
@@ -70,7 +61,7 @@ Any MCP-capable client can connect to the server directly. For example, using [`
 }
 ```
 
-See [Snowplow MCP server](/docs/llms-support/snowplow-mcp/) for tested configurations for Claude.ai, Claude Desktop, Claude Code, Codex, and Cursor. You won't get the bundled skills this way, but all the Signals tools work the same.
+See [Snowplow MCP server](/docs/ai/snowplow-mcp/) for tested configurations for Claude.ai, Claude Desktop, Claude Code, Codex, and Cursor. You won't get the bundled skills this way, but all the Signals tools work the same.
 
 ## Authenticate with your Console account
 
@@ -109,8 +100,8 @@ Then pass them as headers in your MCP client configuration:
 }
 ```
 
-:::warning[API keys use admin permissions by default]
-By default, API keys are created with all permissions, which may be broader than you intend for an assistant. If you want the assistant to operate with your user account's more limited permissions, stay with OAuth. Store the key securely, and never paste credentials into the assistant's chat.
+:::warning[Scope the key to what the assistant needs]
+The assistant can perform any action the key allows. When you create the key, grant only the permissions the assistant needs, for example the **View** level on each feature for read-only use. Keys marked **Global admin** have full admin permissions, so create a new key rather than reusing one. Store the key securely, and never paste credentials into the assistant's chat.
 :::
 
 See [Connect to Snowplow Signals](/docs/signals/connection/) for the full list of connection credentials and where to find each one.

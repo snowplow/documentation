@@ -5,6 +5,7 @@ description: "Enable client session tracking in the C++ tracker to track user se
 keywords: ["client session", "session tracking", "session timeout", "session context", "foreground timeout"]
 date: "2020-02-25"
 sidebar_position: 70
+content_type: how-to
 ---
 
 You can optionally decide to include Client Sessionization. This object will keep track of your users sessions and can be configured to timeout after a certain amount of inactivity.

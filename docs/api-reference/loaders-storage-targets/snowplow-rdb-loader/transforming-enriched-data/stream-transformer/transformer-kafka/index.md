@@ -4,6 +4,7 @@ sidebar_label: "Transformer Kafka"
 sidebar_position: 30
 description: "Stream transformer for Azure that reads enriched events from Kafka and writes transformed data to Azure Blob Storage in real-time."
 keywords: ["transformer kafka", "azure transformer", "kafka transformer", "azure blob storage", "event hubs transformer"]
+content_type: how-to
 ---
 
 ```mdx-code-block

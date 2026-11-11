@@ -10,14 +10,14 @@ keywords: ["snowplow signals tutorial", "ecommerce interventions"]
 
 Welcome to the **Snowplow Signals** tutorial.
 
-[Snowplow Signals](/docs/signals/introduction/) is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+[Snowplow Signals](/docs/signals/introduction/) computes attributes from your behavioral data in real time and serves them to your applications over an API. It works with both in-session stream data and historical warehouse data.
 
 This tutorial provides a hands-on introduction to Signals. You'll use Python to programmatically define attributes, services, and interventions, then test them with a demo ecommerce application.
 
 To follow this tutorial, you'll need a Snowplow account with Signals enabled.
 
 :::note[Snowplow account required]
-If you don't have a Snowplow account, you can sign up for a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+If you don't have a Snowplow account, you can sign up for the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) to follow along.
 :::
 
 This tutorial should take approximately 20-30 minutes to complete.
@@ -34,9 +34,10 @@ In this tutorial, you will:
 
 ## Deployment
 
-If you have a Snowplow account, you can [enable Signals through Snowplow Console](/docs/signals/setup/). This provides:
+You can [enable Signals through Snowplow Console](/docs/signals/setup/) on any Snowplow account, including the Signals free tier. Signals includes event collection, so you don't need to run a Snowplow pipeline first. If you already run Snowplow, Signals reads the events from your existing pipeline.
 
-* Integration with your existing Snowplow data pipeline
+Enabling Signals in Console provides:
+
 * Access to your production behavioral data
 * Full production capabilities and support
 

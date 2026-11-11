@@ -3,15 +3,18 @@ title: "Set up Snowplow Self-Hosted"
 date: "2020-10-30"
 sidebar_position: 4
 sidebar_label: "Setting up Self-Hosted"
-description: "Deploy Snowplow Community Edition using Terraform modules on AWS, GCP, or Azure for non-production testing and evaluation."
+description: "Deploy Snowplow Community Edition yourself with Terraform modules on AWS, GCP, or Azure. Self-hosting is optional: the hosted free trial needs no infrastructure."
 keywords: ["Self-Hosted", "Community Edition", "Terraform", "self-hosted deployment", "Snowplow setup"]
+content_type: landing
 ---
 
 ```mdx-code-block
 import LicenseNotice from '@site/docs/get-started/self-hosted/_license-notice.md';
 ```
 
-This page is an introduction for the [Self-Hosted](/docs/get-started/index.md#self-hosted) [Quick Start guide](docs/get-started/self-hosted/quick-start/index.md). Follow the Quick Start to set up a self-hosted deployment.
+Self-hosting is one of the ways to run Snowplow, and it is optional. If you want to evaluate Snowplow, or run it without operating the infrastructure yourself, start with a hosted environment instead: the [free trial](/docs/get-started/free-trial/index.md) is provisioned by Snowplow, usually within moments of signing up, and the [quickstart](/docs/get-started/quickstart/index.md) takes you from sign-up to validated events. Self-Hosted is for teams that want to deploy and operate the pipeline in their own cloud account, with the [deployment options](/docs/get-started/deployment-options/index.md) describing the managed alternatives.
+
+This page is an introduction for the [Self-Hosted](/docs/get-started/deployment-options/index.md#self-hosted) [Quick Start guide](docs/get-started/self-hosted/quick-start/index.md). Follow the Quick Start to set up a self-hosted deployment.
 
 We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow Community Edition pipeline, with just a handful of input variables required on your side.
 

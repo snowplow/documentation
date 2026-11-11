@@ -4,6 +4,7 @@ sidebar_label: "Versioning"
 sidebar_position: 40
 description: "Fix mistakes in existing schema versions by amending them, with guidelines on when amendments are appropriate and how to handle production schemas."
 keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas"]
+content_type: concept
 ---
 
 ```mdx-code-block

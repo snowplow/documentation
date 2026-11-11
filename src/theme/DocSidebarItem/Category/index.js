@@ -19,6 +19,7 @@ import Link from '@docusaurus/Link'
 import { translate } from '@docusaurus/Translate'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 import DocSidebarItems from '@theme/DocSidebarItems'
+import { HeartHandshake } from 'lucide-react'
 
 // If we navigate to a category and it becomes active, it should automatically
 // expand itself
@@ -53,6 +54,24 @@ function useCategoryHrefWithSSRFallback(item) {
     }
     return findFirstSidebarItemLink(item)
   }, [item, isBrowser])
+}
+
+// Replaces "+" in a sidebar label with an icon, e.g. "Snowplow + AI".
+// Enable with `sidebar_custom_props: { plus_icon: true }` in the category's index page.
+function SidebarLabel({ label, customProps }) {
+  if (!customProps?.plus_icon || !label.includes('+')) return label
+  const [before, after] = label.split('+')
+  return (
+    <span>
+      {before}
+      <HeartHandshake
+        size="1em"
+        aria-hidden="true"
+        style={{ verticalAlign: '-0.125em' }}
+      />
+      {after}
+    </span>
+  )
 }
 
 function CollapseButton({ categoryLabel, collapsed, updateCollapsed }) {
@@ -150,7 +169,10 @@ export default function DocSidebarItemCategory({
           'menu__list-item-collapsible--active': isCurrentPage,
         })}
       >
-        {isSectionHeader && collapsible ? (
+        {isSectionHeader && !collapsible ? (
+          // A plain group label: sidebars.js groups are not links
+          <span className="menu__link section-header__label">{label}</span>
+        ) : isSectionHeader && collapsible ? (
           <button
             type="button"
             className={clsx('clean-btn', 'menu__link', 'section-header__toggle', {
@@ -174,8 +196,25 @@ export default function DocSidebarItemCategory({
               aria-expanded={collapsible ? !collapsed : undefined}
               href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
               {...props}
+              // After the spread so nothing in props replaces the toggle.
+              // Matches upstream DocSidebarItemCategory: a category without a
+              // page toggles on click; one with a page expands as it navigates,
+              // and toggles when it is already the current page.
+              onClick={(e) => {
+                onItemClick?.(item)
+                if (!collapsible) return
+                if (!href) {
+                  e.preventDefault()
+                  updateCollapsed()
+                } else if (isCurrentPage) {
+                  e.preventDefault()
+                  updateCollapsed()
+                } else {
+                  updateCollapsed(false)
+                }
+              }}
             >
-              {label}
+              <SidebarLabel label={label} customProps={item.customProps} />
             </Link>
             {href && collapsible && (
               <CollapseButton

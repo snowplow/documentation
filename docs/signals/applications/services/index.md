@@ -4,6 +4,8 @@ sidebar_label: "Services"
 sidebar_position: 10
 description: "Services group multiple versioned attribute groups into stable consumption interfaces for applications. Create and manage services to control which attribute versions your applications use."
 keywords: ["services", "attribute group versioning", "stable interfaces", "python sdk services", "service configuration"]
+content_type: how-to
+pagination_prev: signals/publish/index
 ---
 
 ```mdx-code-block
@@ -12,6 +14,10 @@ import TabItem from '@theme/TabItem';
 ```
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications. They provide a stable interface for [retrieving attributes](/docs/signals/applications/retrieve-attributes/index.md): we strongly recommend using services in production applications.
+
+The Node.js SDK reads services but can't create them. Use Console or the Python SDK to define services.
+
+A service can include both stream attribute groups and [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md). If they use the same attribute key, one request to the service returns the real-time and warehouse attributes for that user together.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -57,7 +63,7 @@ my_service = Service(
 )
 ```
 
-The table below lists all available arguments for a `Service`:
+This table lists all available arguments for a `Service`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -107,10 +113,17 @@ To delete a service, go to the service details page and click the `⋮` button, 
 Use `publish()` to register services with Signals.
 
 ```python
+import os
 from snowplow_signals import Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
+# my_service and my_other_service: services defined as in Create a service
 sp_signals.publish([
     my_service,
     my_other_service,

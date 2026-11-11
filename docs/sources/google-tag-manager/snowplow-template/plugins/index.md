@@ -4,6 +4,7 @@ sidebar_label: "Plugins"
 sidebar_position: 200
 description: "Load JavaScript tracker plugins in Google Tag Manager to extend tracking functionality. Configure external and inline custom plugins with CDN URLs or custom JavaScript variables for enhanced event tracking."
 keywords: ["gtm plugins", "tracker plugins", "javascript tracker plugins", "custom plugins", "inline plugins"]
+content_type: reference
 ---
 
 Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/web-trackers/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.
@@ -33,7 +34,7 @@ You do not need to adjust the Template permissions to allow loading plugins from
 
 ### Plugin URL
 
-The URL to load the plugin from, e.g. `https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js`
+The URL to load the plugin from, e.g. `https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@4.10.2/dist/index.umd.min.js`
 
 The tracker will try to load plugins each time they are requested.
 This is usually acceptable as the browser will have cached the first request; if you don't want this behavior we suggest creating an empty `Custom Command` Tag with no commands that loads the plugins; you can make this Tag fire [once per page](https://support.google.com/tagmanager/answer/6279951) and add it as a [Setup Tag](https://support.google.com/tagmanager/answer/6238868) to any other Tags that use its commands.

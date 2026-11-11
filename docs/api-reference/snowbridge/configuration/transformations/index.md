@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 200
 description: "Configure transformations and filters to modify or exclude messages with built-in transformations or custom scripts."
 keywords: ["snowbridge config", "transformation config", "filters", "message transformation", "custom scripts"]
+content_type: reference
 ---
 
 ```mdx-code-block

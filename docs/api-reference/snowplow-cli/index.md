@@ -4,16 +4,16 @@ sidebar_label: "Snowplow CLI"
 sidebar_position: 110
 description: "Command-line tool for downloading and syncing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
 keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow CLI works with any pipeline. Sending events works with any Collector; managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+  note="Snowplow CLI works with any pipeline. Sending events works with any Collector; managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 <TrackingPlansNomenclature />
@@ -75,7 +75,7 @@ If SSO is enabled for your Snowplow organization, you will need to follow the [M
 
 If you prefer manual configuration, you will need these values:
 
-* An API Key ID and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in Console.
+* An API Key ID and the corresponding API Key (secret), which you [create in Console](/docs/account-management/index.md#create-an-api-key).
 * Your Organization ID, which you can find [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
@@ -146,7 +146,9 @@ The Snowplow CLI includes a local Model Context Protocol (MCP) server that enabl
 - Analyze tracking requirements and suggest implementations
 - Validate tracking plans and source applications
 
-For setup instructions and configuration examples for different MCP clients, see our [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
+For setup instructions and configuration examples for different MCP clients, see [CLI MCP server](/docs/ai/cli-mcp-server/index.md) and the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
+
+The CLI MCP server works on tracking plan files on your machine. To work with your Snowplow Console account, including pipelines, failed events, enrichments, and Signals, directly from your codebase, install the remote [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
 
 ## Use cases
 

@@ -4,7 +4,11 @@ sidebar_position: 20
 sidebar_label: "Define attributes"
 description: "Define attributes within attribute groups to calculate behavioral data from real-time streams or your warehouse, then test and publish the configuration to Signals."
 keywords: ["attributes", "attribute groups", "attribute keys", "warehouse configuration", "configuration workflow", "publish"]
+content_type: landing
+pagination_prev: signals/attributes/warehouse-config/index
 ---
+
+You can define attributes in Console, with the [Python SDK](/docs/signals/connection/reference/index.md#python-sdk), or with your coding agent through the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). The Node.js SDK only retrieves attribute values.
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are the behavioral facts you want Signals to calculate, such as a user's page view count or lifetime value.
 
@@ -12,7 +16,7 @@ Attributes are defined within [attribute groups](/docs/signals/attributes/attrib
 
 This section covers the definition workflow:
 * [Attribute groups](/docs/signals/attributes/attribute-groups/index.md): create a group, choose a data source, and publish it
-* [Attributes](/docs/signals/attributes/attributes/index.md): configure the individual calculations within a group
+* [Attribute properties](/docs/signals/attributes/attributes/index.md): configure the individual calculations within a group
 * [Attribute keys](/docs/signals/attributes/attribute-keys/index.md): use built-in identifiers or define custom ones
 * [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md): sync pre-calculated warehouse tables to Signals
 
@@ -27,6 +31,8 @@ Each page in this section documents two approaches side by side, using tabs:
 
 You can also use the [Signals API](/docs/signals/connection/index.md#signals-api) to interact with Signals directly over HTTP.
 
+To define attributes by describing them in plain language, use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console, or connect your own AI assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). The assistant drafts, tests, and publishes attribute groups and services for you. In a coding agent, run `npx plugins add snowplow/skills` to install the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx). See the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a walkthrough.
+
 ![Signals section of the Console navigation sidebar showing Overview, Attribute groups, Services, Attribute keys, and Interventions as menu items](../images/console-navbar.png)
 
 ## Configuration workflow
@@ -34,7 +40,7 @@ You can also use the [Signals API](/docs/signals/connection/index.md#signals-api
 Attribute groups move through the same lifecycle whether you manage them in Console or with the Python SDK:
 
 1. **Define**: [create the attribute group](/docs/signals/attributes/attribute-groups/index.md#define-the-attribute-group), choosing its data source, attribute key, and attributes. In Console, new attribute groups are saved as drafts, so you can edit them freely before publishing.
-2. **Test**: [preview the attribute values](/docs/signals/attributes/attribute-groups/index.md#test-attribute-definitions) the group would produce, calculated from recent events in your warehouse.
+2. **Test**: [preview the attribute values](/docs/signals/attributes/attribute-groups/index.md#test-attribute-definitions) the group would produce, calculated from recent events in your warehouse. Without a warehouse connection, publish the group and check the values in the [Snowplow Inspector](/docs/testing/snowplow-inspector/signals-integration/index.md) instead.
 3. **Publish**: [apply the configuration](/docs/signals/attributes/attribute-groups/index.md#publish-attribute-groups) to your Signals infrastructure. Signals starts calculating attributes, or syncing warehouse tables, and populating the Profiles Store. Definitions only take effect once published: values are calculated from this point onwards, unless you've configured a backfill.
 4. **Update**: editing a published attribute group creates a new [version](/docs/signals/attributes/attribute-groups/index.md#versioning), leaving the published version unchanged. This means you can iterate on definitions without breaking downstream processes, then migrate consumers by updating your [service](/docs/signals/applications/services/index.md) definitions.
 5. **Unpublish**: [stop calculation](/docs/signals/attributes/attribute-groups/index.md#delete-an-attribute-group) for a specific version without losing its definition. Existing values remain in the Profiles Store, and you can republish later.
@@ -42,4 +48,4 @@ Attribute groups move through the same lifecycle whether you manage them in Cons
 
 [Interventions](/docs/signals/interventions/index.md) follow the same lifecycle. [Services](/docs/signals/applications/services/index.md) are simpler: they're published automatically as soon as they're created, and aren't versioned.
 
-Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps.
+Each page in this section, along with the services and interventions pages, documents the Console and Python SDK specifics for these steps. [Publish and manage Signals configuration](/docs/signals/publish/index.md) covers how the steps differ for each resource, and how resources depend on each other.

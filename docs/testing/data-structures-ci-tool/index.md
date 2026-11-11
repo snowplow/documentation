@@ -5,6 +5,7 @@ description: "Integrate Data Structures CI into your deployment pipelines to ver
 keywords: ["data structures ci", "schema dependencies", "ci/cd integration", "github action", "schema validation"]
 date: "2020-06-01"
 sidebar_position: 4
+content_type: how-to
 ---
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").
@@ -17,7 +18,7 @@ In order to be able to perform tasks with the tool, you will need to supply both
 
 You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
-An API Key can be created [here](https://console.snowplowanalytics.com/credentials).
+[Create an API key](/docs/account-management/index.md#create-an-api-key) in Console.
 
 ## Create your manifest file
 

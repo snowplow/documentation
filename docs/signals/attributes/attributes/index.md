@@ -1,9 +1,10 @@
 ---
-title: "Define attributes"
+title: "Configure attributes"
 sidebar_position: 10
-sidebar_label: "Attributes"
+sidebar_label: "Configure attributes"
 description: "Define individual attributes within attribute groups by selecting event schemas or event specifications, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection", "python sdk attributes", "attribute configuration"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -41,7 +42,7 @@ Use the event filter to choose which event types to calculate the attribute from
 Click the dropdown to see the available events, listed by name and vendor:
 
 * **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) from an existing [tracking plan](/docs/event-studio/tracking-plans/index.md).
-* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
+* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. [Structured](/docs/events/custom-events/index.md#structured-events) events aren't listed here. To calculate an attribute from them, see [Calculate attributes from structured events](#calculate-attributes-from-structured-events).
 * **Custom events**: select any schema or data structure available within your pipeline.
 
 :::note[Searching for events]
@@ -116,9 +117,9 @@ Signals supports the following aggregation types:
 | Least Frequent | Least frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
 | Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
 | Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
-| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
-| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
-| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
+| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See [Unique list ordering](#unique-list-ordering) |
+| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
+| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
@@ -157,6 +158,7 @@ You can calculate attributes based on properties in any part of your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md) properties: available for all events
 * Event schema properties: properties within your chosen event
 * Entity properties: properties from schemas tracked as entities with your chosen event
+* Calculated properties: a value derived by combining other properties, described [below](#calculated-properties)
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -173,6 +175,7 @@ Use the `property` argument on `Attribute` with one of these helper classes:
 * `AtomicProperty` — targets atomic properties in the event payload
 * `EventProperty` — targets properties in the event data structure
 * `EntityProperty` — targets properties in entity data structures
+* `CalculatedProperty` — combines several of the above into a derived value, described [below](#calculated-properties)
 
 ```python
 # Atomic property
@@ -192,6 +195,81 @@ EntityProperty(
     name="user_context",
     major_version=1,
     path="age"
+)
+```
+
+</TabItem>
+</Tabs>
+
+### Calculated properties
+
+A calculated property combines the values of other properties from the same event into a single derived value, using one of a fixed set of operations. The properties you combine can mix atomic, event, and entity properties.
+
+Calculated properties work in both aggregations and [criteria](#filter-with-criteria). They aren't supported as [attribute keys](/docs/signals/attributes/attribute-keys/index.md) or in [agentic contexts](/docs/signals/agentic-contexts/index.md). A calculated property can't contain another calculated property.
+
+The following operations are available:
+
+| Operation | Input types | Output type | Null behavior |
+| --- | --- | --- | --- |
+| `concat` | String, integer | String | Null properties are skipped, and the remaining values are joined. Null only if every property is null |
+| `sum` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
+| `product` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
+| `min` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
+| `max` | Integer, number | Integer if every property is an integer, otherwise number | Null if any property is null |
+| `coalesce` | String, integer, number, or boolean, and every property must be the same type | Same as the properties | Returns the first non-null property, in order. Null only if every property is null |
+
+`concat` accepts string and integer properties only. It accepts an optional `separator` argument, inserted between the non-null values and defaulting to an empty string. Setting a separator on any other operation is rejected.
+
+Every operation except `coalesce` needs at least two properties, and no operation accepts more than 50.
+
+:::note[Nulls behave differently per operation]
+A skipped `concat` property takes its separator with it. Concatenating `experimentId` and `variantId` with a `-` separator gives `exp3-blue` when both are populated, but `exp3` when `variantId` is null, not `exp3-`.
+
+For `sum`, `product`, `min`, and `max`, a null property isn't treated as zero: it makes the whole result null, and the event contributes nothing to the aggregation.
+:::
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+In the property picker, select two or more properties using the checkboxes in the **Atomic**, **Event**, and **Entities** tabs. Selections are kept as you switch tabs, so you can combine properties from different sources. Once two are selected, a **Calculated property** panel appears.
+
+In the panel:
+1. Drag the properties into the order you want. Order matters for `concat`, which joins values in that order, and for `coalesce`, which returns the first non-null value.
+2. For a timestamp property, optionally choose a granularity next to its name in the panel to apply a [date part](#apply-a-date-part).
+3. Choose an operation.
+4. For `concat`, optionally enter a separator.
+
+Click **Confirm** to use the calculated property for this attribute.
+
+![Calculated property panel combining geo_country and geo_city with the concat operation and a hyphen separator](../../images/calculated-properties.png)
+
+The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as in the screenshot, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
+
+The aggregation also decides which operations are offered. With `sum`, `mean`, `min`, or `max`, you can choose `sum`, `product`, `min`, `max`, or `coalesce`, but not `concat`. With `time_since_last` or `time_since_first`, you can only select one property, so calculated properties aren't available.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+Use `CalculatedProperty` with an `operation` and a list of `properties` to combine. For example, to build an experiment and variant identifier from two event properties:
+
+```python
+CalculatedProperty(
+    operation="concat",
+    separator="-",
+    properties=[
+        EventProperty(
+            vendor="com.example",
+            name="experiment_view",
+            major_version=1,
+            path="experimentId"
+        ),
+        EventProperty(
+            vendor="com.example",
+            name="experiment_view",
+            major_version=1,
+            path="variantId"
+        ),
+    ]
 )
 ```
 
@@ -228,6 +306,8 @@ Not all aggregations support date parts. The following aggregations work with `d
 The declared attribute `type` must match the date part family's output:
 - Extract date parts (`hour_of_day`, `day_of_week`, `month_of_year`) require `int32` or `int64` (or `int32_list`/`int64_list` for `unique_list`)
 - Truncate date parts (`active_day`, `active_week`, `active_month`) require `string` (or `string_list` for `unique_list`)
+
+Both restrictions above — the supported aggregations and the required attribute type — apply to an attribute whose value is itself the date part. Inside a [calculated property](#calculated-properties), each property you combine can carry its own date part, and neither restriction applies: the date part contributes its output type as one input to the operation, so any aggregation compatible with the operation's result works. For example, `hour_of_day` on a timestamp can be summed with an integer property, or `active_day` concatenated with a string property.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -353,9 +433,58 @@ criteria = Criteria(
 </TabItem>
 </Tabs>
 
+### Calculate attributes from structured events
+
+[Structured events](/docs/events/custom-events/index.md#structured-events) don't have their own schema. Their data is stored in the `se_category`, `se_action`, `se_label`, `se_property`, and `se_value` [atomic properties](/docs/fundamentals/canonical-event/index.md#structured-events), which are only populated for structured events.
+
+To calculate an attribute from structured events, leave the event filter set to all events, and add a [criteria](#filter-with-criteria) filter on one or more of the `se_` properties. Events without a value for that property, such as page views, don't match the criteria, so only the structured events you've described update the attribute.
+
+You can also use the `se_` properties as the attribute's [property](#select-a-property). For example, use `se_label` with a `unique_list` aggregation, or `se_value` with a `sum` aggregation.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+To count the structured events with category `Product` and action `View`:
+
+1. Leave the event filter as **All events**
+2. Choose the `counter` aggregation
+3. Within **More options**, add a criterion on the atomic property `se_category`, with the `=` operator and the value `Product`
+4. Add a second criterion on `se_action`, with the `=` operator and the value `View`, and require `all` criteria to be met
+
+You'll find the `se_` properties on the **Atomic** tab of the property selector.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+This example counts the structured events with category `Product` and action `View`:
+
+```python
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty
+
+product_views = Attribute(
+    name="product_view_count",
+    description="Number of structured events with category Product and action View",
+    type="int32",
+    events=[],
+    aggregation="counter",
+    criteria=Criteria(
+        all=[
+            Criterion.eq(AtomicProperty(name="se_category"), "Product"),
+            Criterion.eq(AtomicProperty(name="se_action"), "View"),
+        ]
+    ),
+    default_value=0
+)
+```
+
+With the Python SDK, you can also restrict the attribute to structured events by passing `Event(name="event", vendor="com.google.analytics", version="1-0-0")` in `events`, together with the same criteria.
+
+</TabItem>
+</Tabs>
+
 ## All attribute options
 
-The table below lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
+This table lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -365,7 +494,7 @@ The table below lists all available arguments for a Python SDK `Attribute`. The 
 | `aggregation` | The calculation to perform | one of: `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `most_frequent`, `least_frequent`, `approx_count_distinct`, `category_count`, `unique_list`, `time_since_last`, `time_since_first` | ✅ |
 | `type` | The type of the aggregation result | one of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `dict`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list` | ✅ |
 | `criteria` | Filters to apply to events | `Criteria` | ❌ |
-| `property` | The property of the event or entity to use in the aggregation | `string` | ❌ |
+| `property` | The property to use in the aggregation, or a [calculated property](#calculated-properties) combining several | `AtomicProperty`, `EventProperty`, `EntityProperty`, or `CalculatedProperty` | ❌ |
 | `period` | The time window over which to calculate the aggregation, or `Lifetime` to aggregate over all available data | `timedelta` | ❌ |
 | `ttl` | Time-to-live for lifetime attributes (no `period`). Falls back to the attribute group TTL if not set. Cannot be used together with `period`. | `timedelta` | ❌ |
 | `time_unit` | The unit for `time_since_last`/`time_since_first` results | one of: `s`, `min`, `h`, `d` | Required for `time_since_last`/`time_since_first` |
@@ -584,4 +713,99 @@ peak_hour = Attribute(
 )
 ```
 
-The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a full hour-by-hour histogram.
+The `hour_of_day` date part extracts the hour (0-23) from each event's timestamp before aggregation. Because `most_frequent` is used, the result is the single hour with the highest event count. Use `category_count` instead to get a count per hour, covering the hours the user was active — an hour with no events has no key in the result, rather than a key set to zero.
+
+### Sum of several properties (order total)
+
+Total what a user has spent, where each order event carries the subtotal, tax, and shipping as separate properties. A [calculated property](#calculated-properties) adds them together per event, and the `sum` aggregation then totals that across events.
+
+```python
+from snowplow_signals import Attribute, Event, CalculatedProperty, EventProperty
+
+total_spend = Attribute(
+    name="total_spend",
+    description="Total spent, including tax and shipping",
+    type="double",
+    events=[
+        Event(
+            vendor="com.example",
+            name="order_complete",
+            version="1-0-0",
+        )
+    ],
+    aggregation="sum",
+    property=CalculatedProperty(
+        operation="sum",
+        properties=[
+            EventProperty(
+                vendor="com.example",
+                name="order_complete",
+                major_version=1,
+                path="subtotal"
+            ),
+            EventProperty(
+                vendor="com.example",
+                name="order_complete",
+                major_version=1,
+                path="tax"
+            ),
+            EventProperty(
+                vendor="com.example",
+                name="order_complete",
+                major_version=1,
+                path="shipping"
+            ),
+        ]
+    ),
+)
+```
+
+The two uses of `sum` do different jobs: the operation adds properties within one event, and the aggregation adds the results across events. If any property is null on an event, the calculated property is null and that event contributes nothing to the total.
+
+Make sure `tax` and `shipping` are always tracked, as `0` where none applies. Otherwise, an order without tax or shipping is left out of `total_spend` entirely, not only that amount. A nested `coalesce` can't substitute a default, because a calculated property can't contain another calculated property.
+
+The total is only as complete as its inputs. There's no subtraction operation, so for discounts, use a subtotal with discounts already taken off, or track the discount as a negative amount and add it as another property.
+
+Adding amounts in different currencies doesn't give a meaningful total. If you sell in more than one currency, add [criteria](#filter-with-criteria) on the currency property to keep one attribute per currency, or sum amounts your tracking has already converted to a single currency.
+
+### Unique list of two properties (A/B test variants seen)
+
+Track which A/B test variants a user has been exposed to, so you can personalize on what they've already seen. Each `experiment_view` event carries the experiment and the variant separately, and neither identifies the exposure on its own — it's the pair that does. Concatenating them into a single [calculated property](#calculated-properties) makes that pair the value the aggregation collects.
+
+```python
+from snowplow_signals import Attribute, Event, CalculatedProperty, EventProperty
+
+experiment_variants_seen = Attribute(
+    name="experiment_variants_seen",
+    description="Distinct experiment and variant combinations seen",
+    type="string_list",
+    events=[
+        Event(
+            vendor="com.example",
+            name="experiment_view",
+            version="1-0-0",
+        )
+    ],
+    aggregation="unique_list",
+    property=CalculatedProperty(
+        operation="concat",
+        separator="-",
+        properties=[
+            EventProperty(
+                vendor="com.example",
+                name="experiment_view",
+                major_version=1,
+                path="experimentId"
+            ),
+            EventProperty(
+                vendor="com.example",
+                name="experiment_view",
+                major_version=1,
+                path="variantId"
+            ),
+        ]
+    ),
+)
+```
+
+Each event contributes one entry, such as `"exp3-blue"`, and `unique_list` keeps the distinct ones. If either property can be missing on an event, add [criteria](#filter-with-criteria) requiring both to be set: `concat` skips a null property, so an event with an experiment but no variant would otherwise contribute `"exp3"`, colliding with any other event that produces `"exp3"`.

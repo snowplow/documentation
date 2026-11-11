@@ -5,24 +5,18 @@ date: "2021-08-14"
 sidebar_position: 120
 description: "Snowplow Mini is a single-instance development environment for testing tracker updates and schema changes."
 keywords: ["snowplow mini", "development environment", "testing environment", "mini setup"]
+content_type: concept
 ---
 
-```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+:::warning
 
-<AvailabilityBadges
-  available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow Mini is included with all Snowplow platforms."
-/>
-```
-
-[Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development environment, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
-
-:::tip
+Snowplow Mini entered [Maintenance Mode](https://docs.snowplow.io/lifecycle-policy/#maintenance-mode) on August 11, 2026 and is scheduled to reach [End of Life](https://docs.snowplow.io/lifecycle-policy/#sunset--end-of-life-eol) on November 11, 2026.
 
 For new testing environments, we recommend using [Snowplow Micro](/docs/testing/snowplow-micro/index.md), which you can [deploy through Console](/docs/testing/snowplow-micro/console/index.md) or [run locally](/docs/testing/snowplow-micro/local/index.md). New Snowplow Mini deployments are no longer available through Console.
 
 :::
+
+[Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development environment, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
 
 You might use Snowplow Mini when:
 

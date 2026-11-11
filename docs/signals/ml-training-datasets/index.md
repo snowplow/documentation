@@ -1,10 +1,12 @@
 ---
 title: "Create ML training datasets"
 sidebar_position: 32
-sidebar_label: "ML training datasets"
+sidebar_label: "Build training datasets"
 description: "Build labeled, point-in-time correct training datasets for machine learning models using the Signals Python SDK. Define anchor events, build datasets, and retrieve results."
 keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "signals python sdk", "ML"]
 date: "2026-07-15"
+content_type: how-to
+pagination_next: signals/agentic-contexts/index
 ---
 
 <NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-dataset-builder.ipynb" />
@@ -15,7 +17,14 @@ Training a machine learning model on behavioral data requires a dataset where ea
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
 
-## Supported warehouses
+## Before you begin
+
+You need:
+* Your events in a supported warehouse. Managed runs also need a Signals warehouse connection: see [Supported warehouses](#supported-warehouses).
+* For session anchors, attribute groups keyed on `domain_sessionid`. The dataset builder requires this key when it generates session anchors.
+* Stream attribute groups as features. The dataset builder doesn't support [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md) yet.
+
+### Supported warehouses
 
 The dataset builder currently supports Snowflake only. A [Signals warehouse connection](/docs/signals/setup/index.md) is required for [managed runs](#submit-a-managed-run). If you [build the SQL yourself](#build-and-execute-sql-yourself), you can run it directly against your warehouse without a connection configured in Signals.
 
@@ -26,13 +35,17 @@ The dataset builder currently supports Snowflake only. A [Signals warehouse conn
 | Managed runs | ✅ |
 | Self-built SQL | ✅ |
 
-## Why point-in-time correctness matters
+## How it works
+
+The dataset builder turns attribute group definitions into a labeled, point-in-time correct dataset.
+
+### Why point-in-time correctness matters
 
 When you serve predictions in real time, your model only has access to events that have happened so far in the session. If your training data includes attributes computed from the full session (including events after the prediction point), your model learns patterns it will never see in production. This is called data leakage, and it is the most common reason ML models degrade after deployment.
 
 The dataset builder prevents this by computing each attribute value using only events that occurred before the anchor timestamp. Because it uses the same attribute group definitions that power your real-time Signals deployment, training and serving are guaranteed to use the same feature logic.
 
-## Workflow
+### Workflow
 
 Building and using an ML training dataset follows this process:
 
@@ -43,7 +56,7 @@ Building and using an ML training dataset follows this process:
 5. Train your model on the results
 6. Deploy your model, serving it the same attributes in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md)
 
-## How it works
+### Dataset stages
 
 The dataset builder produces a training dataset in three stages:
 
@@ -68,7 +81,7 @@ flowchart LR
     stage1 --> stage2 --> stage3
 ```
 
-1. Anchors: identify labeled anchor points. With [session anchors](#session-anchors), Signals scans sessions in the training window, labels them by whether a goal event occurred, and downsamples negatives. With [user-supplied anchors](#user-supplied-anchors), you provide your own pre-labeled table and this stage is skipped.
+1. Anchors: identify labeled anchor points. With [session anchors](#session-anchors), Signals turns each event before a session's first goal event into an anchor, labels it by whether the session went on to reach the goal, and downsamples negatives. With [user-supplied anchors](#user-supplied-anchors), you provide your own pre-labeled table and this stage is skipped.
 2. Attributes: for each anchor, compute attribute values using only the events that preceded the anchor timestamp in that session. This enforces point-in-time correctness, so attributes reflect only what was known at the moment of the anchor.
 3. Assembly: join anchors with their computed attribute values into a single labeled dataset, with one row per anchor and one column per attribute.
 
@@ -90,7 +103,9 @@ Signals provides two approaches: session anchors (automatically derived from you
 
 ### Session anchors
 
-Use `submit_dataset_run_with_session_anchors()` to automatically generate anchors from your event data and build the training dataset server-side. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and labels each based on whether the goal was achieved. For positive sessions, anchors are placed at the goal event itself. For negative sessions (where the goal was never achieved), anchors are placed at randomly selected events within the session. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
+Use `submit_dataset_run_with_session_anchors()` to automatically generate anchors from your event data and build the training dataset server-side. You specify a goal (the criteria that define a positive outcome) and a time window to scan. Signals scans all sessions in the training window and treats each event in a session as a candidate anchor, except for excluded events such as `page_ping`. Anchors stop at the first goal event: the goal event itself and any events after it are dropped, so each anchor represents a moment before the outcome is known. Every anchor in a session that later reaches the goal gets `label = 1`, and every anchor in a session that never reaches it gets `label = 0`. Negative anchors are then downsampled according to `max_negative_ratio` to avoid class imbalance.
+
+Because a session contributes one anchor per eligible event, long sessions produce more rows than short ones. When you split the dataset for training and evaluation, keep all the anchors from a session on the same side of the split.
 
 The `goal_criteria` argument uses the same `Criteria` and `Criterion` classes as [attribute criteria](/docs/signals/attributes/attributes/index.md). You can filter on atomic fields, event properties, or entity properties.
 
@@ -106,6 +121,8 @@ from snowplow_signals import (
     TrainingSpan,
 )
 
+# sp_signals: the client from Connect to Signals
+# my_attribute_group: an attribute group keyed on domain_sessionid
 run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
@@ -123,8 +140,11 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 To filter on a property within a self-describing event:
 
 ```python
+from datetime import datetime, timezone
+
 from snowplow_signals import Criteria, Criterion, EventProperty, TrainingSpan
 
+# sp_signals and my_attribute_group: as in the previous example
 run = sp_signals.submit_dataset_run_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=Criteria(
@@ -153,7 +173,7 @@ run = sp_signals.submit_dataset_run_with_session_anchors(
 | `goal_criteria` | Criteria that define a positive anchor (label=1) | `Criteria` | ✅ |
 | `training_span` | Time window to scan for anchor events | `TrainingSpan` | ✅ |
 | `min_events` | Minimum number of prior in-session events before an anchor is eligible. Increase this to filter out anchors with too little behavioral signal, for example set to `5` to ensure each anchor has at least 5 prior events. | `int` | Default: `1` |
-| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions, for example set to `1` to ensure each session contributes at most one training example. | `int` or `None` | Default: `None` |
+| `max_anchors_per_session` | Maximum anchor events per session. `None` for unlimited. Set this to limit overrepresentation of long sessions. Signals keeps the earliest eligible anchors in each session, so setting it to `1` keeps only the first event after `min_events`. | `int` or `None` | Default: `None` |
 | `max_negative_ratio` | Maximum ratio of negative to positive anchors. Negative anchors are downsampled to this ratio. Lower values produce more balanced datasets; higher values preserve more data. For example, set to `1.0` for a balanced 1:1 dataset. | `float` | Default: `5.0` |
 | `excluded_events` | Events to exclude from anchor generation. By default, `page_ping` events are excluded because they do not represent meaningful user actions. | `list` | Default: `page_ping` events excluded |
 | `anchors_table` | Override the output location for the anchors table. Only the `table` field is required - `database` and `schema` default to the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). The default table name is `signals_anchors`. | `WarehouseTable` | Default: `None` |
@@ -168,8 +188,9 @@ By default, the dataset builder creates tables using the output database and sch
 ```python
 from snowplow_signals import WarehouseTable
 
+# sp_signals: the client from Connect to Signals
 run = sp_signals.submit_dataset_run_with_session_anchors(
-    ...
+    ...,  # attribute_groups, goal_criteria, and training_span as above
     dataset_table=WarehouseTable(
         table="my_training_dataset",   # required
         database="analytics",          # optional, defaults to Signals connection
@@ -198,6 +219,7 @@ For example, if your attribute groups use `domain_sessionid` as the attribute ke
 ```python
 from snowplow_signals import WarehouseTable
 
+# sp_signals and my_attribute_group: as in the session-anchor examples
 run = sp_signals.submit_dataset_run_with_custom_anchors(
     attribute_groups=[my_attribute_group],
     anchors_table=WarehouseTable(
@@ -229,6 +251,7 @@ Use `submit_dataset_run_with_session_anchors()` or `submit_dataset_run_with_cust
 Use `get_dataset_run_status()` to check whether the run has finished. The `status` field is one of `pending`, `success`, or `failed`.
 
 ```python
+# run: the response from a submit_dataset_run_* call
 status = sp_signals.get_dataset_run_status(run.id)
 print(status.status)  # "pending", "success", or "failed"
 ```
@@ -239,6 +262,7 @@ To wait for completion in a notebook or script:
 import time
 from snowplow_signals import DatasetRunStatus
 
+# sp_signals and run: as in the previous block
 while True:
     status = sp_signals.get_dataset_run_status(run.id)
     if status.status == DatasetRunStatus.SUCCESS:
@@ -253,6 +277,7 @@ while True:
 Once the run status is `success`, call `get_dataset_run_preview()` to fetch a preview of the completed dataset. The preview returns a subset of rows for quick inspection - by default up to 100, configurable up to 10,000 with the `limit` parameter.
 
 ```python
+# sp_signals and run: as in Check run status
 preview = sp_signals.get_dataset_run_preview(run.id, limit=10000)
 df = preview.to_pandas()
 ```
@@ -270,6 +295,7 @@ The resulting DataFrame contains one row per anchor, with columns for the attrib
 The complete dataset is written to your warehouse at the table location stored in `run.dataset`. Training datasets can contain millions of rows, so for model training you should query this table directly in your warehouse rather than loading it into memory. The table follows the format `{database}.{schema}.{table}`:
 
 ```python
+# run: the response from a submit_dataset_run_* call
 dataset_location = run.dataset
 print(f"{dataset_location.database}.{dataset_location.schema_}.{dataset_location.table}")
 # e.g. "analytics.ml.signals_training_dataset"
@@ -286,6 +312,7 @@ SELECT * FROM analytics.ml.signals_training_dataset
 To cancel a dataset build that is still in progress:
 
 ```python
+# sp_signals and run: as in Check run status
 sp_signals.cancel_dataset_run(run.id)
 ```
 
@@ -294,6 +321,21 @@ sp_signals.cancel_dataset_run(run.id)
 If you want to review or customize the SQL before running it, use `build_dataset_with_session_anchors()` or `build_dataset_with_custom_anchors()`. These generate the SQL files without executing them, so you can inspect, modify, or run them on your own schedule.
 
 ```python
+from datetime import datetime, timezone
+
+from snowplow_signals import AtomicProperty, Criteria, Criterion, TrainingSpan
+
+goal = Criteria(
+    all=[
+        Criterion.eq(AtomicProperty(name="event"), "transaction"),
+    ]
+)
+span = TrainingSpan(
+    start_time=datetime(2024, 1, 1, tzinfo=timezone.utc),
+    end_time=datetime(2024, 4, 1, tzinfo=timezone.utc),
+)
+
+# sp_signals and my_attribute_group: as in the session-anchor examples
 bundle = sp_signals.build_dataset_with_session_anchors(
     attribute_groups=[my_attribute_group],
     goal_criteria=goal,
@@ -310,3 +352,7 @@ This creates:
 - `README.md` documenting the execution order
 
 Run the SQL files in the order specified in `README.md` against your warehouse to produce the training dataset.
+
+To understand how a training dataset relates to the attributes you serve in production, see [real-time features for ML](https://signals.snowplow.io/use-cases/model-features?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
+
+For a complete walkthrough, from defining attributes to training and serving the model, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).

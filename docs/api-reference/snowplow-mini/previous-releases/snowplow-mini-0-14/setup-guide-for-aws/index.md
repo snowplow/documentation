@@ -2,7 +2,7 @@
 title: "Setup Guide for AWS"
 sidebar_label: "Setup Guide for AWS"
 date: "2021-05-11"
-sidebar_position: -10
+sidebar_position: -9
 description: "Deploy Snowplow Mini 0.14.x on AWS with CloudFormation."
 keywords: ["snowplow mini", "aws setup", "mini 0.14", "cloudformation"]
 ---

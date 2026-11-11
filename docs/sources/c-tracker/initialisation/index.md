@@ -5,6 +5,7 @@ description: "Create a C++ tracker using the Snowplow interface with default or 
 keywords: ["c++ initialization", "tracker configuration", "emitter configuration", "session configuration", "network configuration"]
 date: "2020-02-25"
 sidebar_position: 20
+content_type: how-to
 ---
 
 Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).

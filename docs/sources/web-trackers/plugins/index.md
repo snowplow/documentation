@@ -5,6 +5,7 @@ description: "Extend the web tracker with plugins for tracking ads, ecommerce, m
 keywords: ["plugins", "tracker extensions", "ecommerce tracking", "form tracking", "media tracking"]
 date: "2021-04-07"
 sidebar_position: 2800
+content_type: reference
 ---
 
 ```mdx-code-block
@@ -18,6 +19,8 @@ The JavaScript Tracker is based around a plugin architecture which allows new fu
 ## All plugins
 
 The following table lists the Snowplow plugins in alphabetical order. It shows what kinds of data are created using them, and their [distribution](/docs/sources/web-trackers/tracker-setup/index.md) for the JavaScript tracker. Read more about configuring plugins [here](/docs/sources/web-trackers/plugins/configuring-tracker-plugins/index.md) or on the individual pages.
+
+Using Signals? See [Send events to Signals](/docs/signals/data-sources/events/index.md) and the [Signals browser plugin](/docs/signals/applications/subscribe/index.md).
 
 If you're using the JavaScript tracker with the full `sp.js` distribution and your plugin is included, no further installation or initialization is required. You can use it straight away.
 

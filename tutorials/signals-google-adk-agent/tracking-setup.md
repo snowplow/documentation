@@ -7,7 +7,7 @@ keywords: ["Snowplow Browser SDK", "tracker", "page views", "activity tracking",
 date: "2026-04-17"
 ---
 
-[Snowplow Signals](/docs/signals/get-started/) computes user attributes from your Snowplow behavioral event stream. Follow these steps to create events to work with.
+[Snowplow Signals](/docs/signals/introduction/) computes user attributes from your Snowplow behavioral event stream. Follow these steps to create events to work with.
 
 Signals doesn't need custom events: standard [page views](/docs/sources/web-trackers/tracking-events/page-views/), [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/), and [link clicks](/docs/sources/web-trackers/tracking-events/link-click/) are enough to build meaningful real-time context.
 

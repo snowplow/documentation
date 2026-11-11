@@ -2,9 +2,10 @@
 title: "Tracking plan templates"
 sidebar_label: "Templates"
 date: "2024-06-17"
-sidebar_position: 4
+sidebar_position: 5
 description: "Pre-defined tracking plan templates for Base Web, Base Mobile, Ecommerce, and Media tracking with included event specifications and implementation guidance."
 keywords: ["tracking plan templates", "Base Web template", "Base Mobile template", "ecommerce template", "media tracking template"]
+content_type: reference
 ---
 
 To create a new tracking plan based on a pre-defined template, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" or "Templates" buttons.

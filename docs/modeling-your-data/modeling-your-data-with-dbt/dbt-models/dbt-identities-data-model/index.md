@@ -5,22 +5,22 @@ sidebar_position: 70
 description: "Transform raw identity entities and merge events into derived tables for identity resolution, identifier mapping, and audit."
 keywords: ["identities dbt", "identity resolution", "snowplow_id", "identity mapping", "dbt identities"]
 date: "2026-03-23"
+content_type: reference
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Identities is a paid addon for Snowplow CDI."
+  note="Identities is a paid addon for Snowplow CDI."
 />
 
 **The package source code can be found in the [snowplow-incubator/dbt-snowplow-identities](https://github.com/snowplow-incubator/dbt-snowplow-identities/) repository.**
 
 The Snowplow Identities dbt package transforms the raw [identity entities and merge events](/docs/identities/concepts/index.md#data-types) produced by [Identities](/docs/identities/index.md) into a set of derived tables for identity resolution, identifier lookup, and audit.
 
-The package supports Snowflake and BigQuery.
+The package supports Snowflake, BigQuery, and Databricks. Databricks support is available from version 0.1.0.
 
-Check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) and [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) pages to get started.
+Check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md), [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md), and [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/identities/index.mdx) pages to get started.
 
 :::note[Simple incremental strategy]
 The package uses a simplified, timestamp-based incremental strategy rather than the session-based incremental logic used by other Snowplow dbt packages.

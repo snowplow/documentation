@@ -4,6 +4,7 @@ sidebar_label: "Daily aggregate model"
 description: "Build daily aggregate tables in Snowplow dbt packages by scanning derived tables with date range filters for accurate aggregations."
 keywords: ["daily aggregates", "aggregate model", "daily reporting", "dbt aggregations"]
 sidebar_position: 20
+content_type: how-to
 ---
 
 Because of the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of our packages, all of the [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) tables contain events (or a higher level) for only the sessions being processed in that run. For this reason, it is not possible to build daily aggregate tables directly off of any this run tables.

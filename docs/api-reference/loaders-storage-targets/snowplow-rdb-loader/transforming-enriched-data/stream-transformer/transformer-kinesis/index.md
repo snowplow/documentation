@@ -5,6 +5,7 @@ date: "2022-10-13"
 sidebar_position: 20
 description: "Stream transformer for AWS that reads enriched events from Kinesis and writes transformed data to S3 in real-time."
 keywords: ["transformer kinesis", "aws transformer", "kinesis to s3", "stream transformation", "rdb transformer"]
+content_type: how-to
 ---
 
 ```mdx-code-block

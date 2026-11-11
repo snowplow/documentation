@@ -4,6 +4,7 @@ sidebar_position: 13
 sidebar_label: Custom JavaScript
 description: "Write custom JavaScript code to transform and enrich events with flexible data manipulation logic."
 keywords: ["JavaScript enrichment", "custom enrichment", "event transformation"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';
@@ -261,7 +262,7 @@ Accessing request headers is supported since Enrich 5.1.1.
 
 :::note[Availability]
 
-For security reasons, this feature isn't available to [Snowplow CDI Cloud](/docs/get-started/index.md) customers.
+For security reasons, this feature isn't available to [Snowplow CDI Cloud](/docs/get-started/deployment-options/index.md) customers.
 
 :::
 

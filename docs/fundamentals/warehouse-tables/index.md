@@ -4,6 +4,7 @@ description: A summary of the Snowplow events table and its fields, including cu
 sidebar_label: "Warehouse tables"
 sidebar_position: 4
 keywords: ["atomic events table", "warehouse tables", "events table", "Redshift tables"]
+content_type: concept
 ---
 
 All Snowplow events have the same underlying structure and standard fields. All of these fields can be found in the `atomic.events` table, which is a "wide" (many columns) table.

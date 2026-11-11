@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 300
 description: "Configure Snowbridge using HCL format to define sources, transformations, targets, and monitoring for stream replication."
 keywords: ["snowbridge config", "hcl configuration", "snowbridge setup", "stream config"]
+content_type: reference
 ---
 
 ```mdx-code-block

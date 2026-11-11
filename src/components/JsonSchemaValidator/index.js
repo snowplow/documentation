@@ -1,5 +1,7 @@
 import React, { Children, useState, cloneElement } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { darkTheme, lightTheme } from '@site/src/components/MuiTheme'
+import MuiScope from '@site/src/components/MuiScope'
 import { Autocomplete, TextField } from '@mui/material'
 import { useColorMode } from '@docusaurus/theme-common'
 import { customizeValidator } from '@rjsf/validator-ajv8'
@@ -34,18 +36,8 @@ export const schemaImports = importAll(
   require.context('./Schemas/', false, /\.(json)$/)
 )
 
-// Theming
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-})
+// Themes come from the design tokens
+export { darkTheme, lightTheme }
 
 // Custom validator configuration to allow "sql" as a valid format
 const validator = customizeValidator({
@@ -138,7 +130,6 @@ export function JsonSchemaGenerator({
 
 // Table of config details
 export function JsonToTable({ children, versionedSchema, groupFilter }) {
-  const { colorMode, setColorMode } = useColorMode()
 
   if (versionedSchema === null) {
     return <></>
@@ -291,9 +282,10 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
     },
   })
 
-  // Loop over all the headers and output a table for each, filtering and sorting the rows per
+  // Loop over all the headers and output a table for each, filtering and sorting the rows per.
+  // MUI isn't provided site-wide, so the grids need their own themed scope.
   return (
-    <>
+    <MuiScope>
       {children}
       {Object.keys(groupedObjects).map((header, index) => (
         <div
@@ -340,16 +332,16 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
               width: '100%',
               height: 'auto',
               '.MuiDataGrid-virtualScroller': {
-                borderTop: '1px solid rgba(224, 224, 224, 1)',
+                borderTop: 1,
+                borderColor: 'divider',
                 overflow: 'visible',
               },
               '.MuiDataGrid-main': {
                 overflow: 'visible',
               },
               '.MuiDataGrid-cell': {
-                borderTop: `1px solid ${
-                  colorMode !== 'dark' ? '#303030' : '#A08ACA'
-                }`,
+                borderTop: 1,
+                borderColor: 'divider',
               },
               [`& .${gridClasses.cell}`]: {
                 py: 0.5,
@@ -359,7 +351,7 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
           <br />
         </div>
       ))}
-    </>
+    </MuiScope>
   )
 }
 
@@ -409,7 +401,11 @@ export function DbtConfigurationPage({
     )
   }
 
-  return <SelectSchemaVersion versions={versions} label={label} />
+  return (
+    <MuiScope>
+      <SelectSchemaVersion versions={versions} label={label} />
+    </MuiScope>
+  )
 }
 
 // Function to return a list of versions from the schema folder that start with a specific name

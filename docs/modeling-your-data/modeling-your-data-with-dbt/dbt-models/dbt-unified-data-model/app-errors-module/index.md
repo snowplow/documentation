@@ -4,13 +4,11 @@ sidebar_label: "App errors module"
 description: "Track and analyze application errors with the App errors module for the Unified Digital dbt package."
 keywords: ["app errors", "error tracking", "application errors module", "crash tracking", "error analysis", "model errors"]
 sidebar_position: 101
+content_type: how-to
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
 
 ```mdx-code-block
 import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"

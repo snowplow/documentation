@@ -1,5 +1,6 @@
 ---
 title: "Tracker Information"
+sidebar_label: "Tracker Information"
 date: "2021-04-07"
 sidebar_position: 2000
 description: "Documentation for tracking Tracker Information with the web tracker."

@@ -1,5 +1,6 @@
 ---
 title: "Error Tracking"
+sidebar_label: "Error Tracking"
 date: "2021-04-07"
 sidebar_position: 8000
 description: "Documentation for tracking Error Tracking with the web tracker."

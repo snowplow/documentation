@@ -3,6 +3,7 @@ title: "Snowplow Community License FAQ"
 sidebar_label: "Community License FAQ"
 description: "Frequently asked questions about the Snowplow Community License terms, usage rights, and restrictions."
 keywords: ["community license", "SCL", "license FAQ"]
+content_type: concept
 ---
 
 :::info[Note]

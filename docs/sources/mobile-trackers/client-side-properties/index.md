@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 30
 description: "Configure user and device properties to automatically attach to all mobile tracker events using SubjectConfiguration."
 keywords: ["client properties", "subject configuration", "user identifiers"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,11 +5,20 @@ date: "2024-01-18"
 sidebar_position: 1
 description: "Create and manage tracking plans in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
 keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
+content_type: how-to
 ---
+
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 
 To create a new tracking plan, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" button.
 
-![Tracking plans list page showing six tracking plans with their domain, status, event volume, event spec count, and last modified date, with a "+ Create tracking plan" button in the top right](images/create-tracking-plan-v2.png)
+:::tip[Create tracking plans with your AI assistant]
+As an alternative to the steps on this page, you can ask an AI assistant connected to the Snowplow MCP server to create and update tracking plans for you, including their event specifications and data structures. For example: "Create a tracking plan for our checkout flow, with an event specification for each step and a product entity."
+
+<AiAssistantInstall />
+:::
+
+![Console with the Data collection section of the sidebar expanded and Tracking plans selected, showing five tracking plans with their domain, status, event spec count, event volume with a colored bar, and last modified date, with a "+ Create tracking plan" button in the top right](images/create-tracking-plan-v2.png)
 
 A modal will appear on the page, giving you the possibility to quickly create a tracking plan by using one of the existing templates or create one from scratch.
 
@@ -33,17 +42,18 @@ When clicking on an event specification row, a page will allow you to enter addi
 
 The breadcrumb navigation allows you to quickly navigate to the tracking plan overview as well as to the list of tracking plans. Alternatively, you can access the list of available tracking plans by clicking `Tracking plans` prominently displayed in the navigation bar on the left.
 
-In the image below, you can see an example of a tracking plan. It not only provides an overview of all the event specifications but also allows you to access three important pieces of functionality.
+In the image below, you can see an example of a tracking plan. It provides an overview of all the event specifications and of the [data quality](/docs/event-studio/tracking-plans/data-quality/index.md) of the plan over the last 30 days, and gives access to the following functionality:
 
 - **Share**; allow other members of your organization to access the tracking plan
 - **Subscribe**; receive notifications of any changes in the tracking plan
+- **Data quality rules**; choose whether events that fail [validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events) are loaded to your warehouse marked as violations, or sent to failed events
 - **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/index.md))
 
 :::note
 Sharing and subscribing is only available for users registered in Snowplow Console.
 :::
 
-![E-commerce Web tracking plan overview showing general information, E-commerce domain ownership, and an event specifications table with four draft events (Add to cart, Checkout step, Internal promotion click, Internal promotion view) all using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
+![E-commerce Web tracking plan overview showing general information with owner and domain, a Data quality panel with a donut chart of valid events, inferred events, events with violations, and failed events, and an event specifications table with published events such as Add to cart and Checkout Step using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
 
 ![Add to cart event specification page showing event description, four tracked application IDs, the snowplow_ecommerce_action 1-0-2 data structure with a "type" property set to "add_to_cart", and product and cart entity data structures](images/event-specification-details.png)
 

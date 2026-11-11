@@ -5,6 +5,7 @@ description: "Track user behavior on websites using the JavaScript tracker or Br
 keywords: ["javascript tracker", "browser tracker", "web tracking", "npm package"]
 date: "2021-03-24"
 sidebar_position: 100
+content_type: sdk
 ---
 
 ```mdx-code-block

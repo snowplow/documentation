@@ -4,6 +4,7 @@ sidebar_label: "Out-of-the-box data"
 sidebar_position: 2
 description: "Overview of Snowplow's built-in event types and entities for web and mobile tracking including ecommerce, media, and performance data."
 keywords: ["out-of-the-box data", "built-in events", "pre-built entities", "automatic tracking"]
+content_type: landing
 ---
 
 Snowplow has provided these out-of-the-box [event](/docs/fundamentals/events/index.md) and [entity](/docs/fundamentals/entities/index.md) types so you can get started quickly with tracking user data.

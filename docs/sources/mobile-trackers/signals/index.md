@@ -5,6 +5,7 @@ sidebar_position: 75
 description: "Configure the iOS and Android trackers to read public Signals services and receive Signals interventions for the current app user and session."
 keywords: ["signals", "mobile signals", "interventions", "service attributes", "personalization", "SignalsConfiguration"]
 date: "2026-11-08"
+content_type: how-to
 ---
 
 ```mdx-code-block

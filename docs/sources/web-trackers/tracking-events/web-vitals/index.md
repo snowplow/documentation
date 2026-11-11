@@ -4,6 +4,7 @@ sidebar_label: "Core web vitals"
 sidebar_position: 95
 description: "Automatically track Core Web Vitals metrics including LCP, FID, and CLS using the web-vitals library for user experience analysis."
 keywords: ["web vitals", "performance"]
+content_type: how-to
 ---
 
 ```mdx-code-block

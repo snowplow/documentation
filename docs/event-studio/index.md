@@ -7,6 +7,7 @@ description: "Design and implement behavioral data tracking with schema manageme
 keywords: ["tracking plan studio", "tracking design", "schema management", "event specifications", "data governance"]
 sidebar_custom_props:
   space_above: true
+content_type: landing
 ---
 
 ```mdx-code-block

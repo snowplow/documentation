@@ -5,6 +5,7 @@ sidebar_label: "Free trial"
 description: "Start a free 14-day trial of Snowplow CDI Cloud, and learn about the product and capacity limitations that apply during the trial."
 keywords: ["free trial", "Snowplow trial", "CDI Cloud", "14-day trial", "trial limitations", "getting started"]
 date: "2026-06-16"
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
@@ -17,7 +18,7 @@ Use the trial to evaluate Snowplow end to end: define your data, send events fro
 
 Sign up for the free trial on the [Snowplow website](https://snowplow.io/get-started/snowplow-free-trial).
 
-After you sign up, your trial environment is provisioned automatically. You will receive access instructions within around 20 minutes.
+After you sign up, your trial environment is provisioned automatically. You'll usually receive access instructions within moments of verifying your email address.
 
 The trial runs for 14 days. To request an extension, [contact sales](https://console.snowplowanalytics.com/contact-us).
 

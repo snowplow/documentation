@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Sign up for a hosted Snowplow environment, connect your coding agent with the Snowplow MCP server and skills, and run a starter prompt that designs your tracking, creates the schemas, adds the tracker, and checks the events."
 keywords: ["snowplow quickstart", "getting started", "snowplow mcp", "coding agent", "claude code", "cursor", "codex", "tracking setup"]
 date: "2026-10-23"
+content_type: tutorial
 ---
 
 Add Snowplow tracking to your application with one prompt. Your coding agent asks what you want to measure, then designs the tracking plan, creates the schemas in your Snowplow account, adds the tracker, and checks that the events arrive and pass validation.
@@ -15,7 +16,7 @@ You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Co
 
 Start a [free trial](https://snowplow.io/get-started/snowplow-free-trial) of Snowplow CDI Cloud, or create an account on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) for a hosted environment with no end date. Neither needs a credit card.
 
-Your environment is provisioned automatically. You'll receive access instructions within around 20 minutes, and there's no infrastructure to set up. See the [free trial](/docs/get-started/free-trial/index.md) page for the limits that apply.
+Your environment is provisioned automatically. You'll usually receive access instructions within moments of verifying your email address, and there's no infrastructure to set up. See the [free trial](/docs/get-started/free-trial/index.md) page for the limits that apply.
 
 Already on Snowplow CDI? Log in to [Console](https://console.snowplowanalytics.com) and skip to the next step.
 

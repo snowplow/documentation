@@ -6,6 +6,7 @@ date: "2026-03-11"
 sidebar_position: 400
 description: "Upgrade Snowbridge to version 4.X.X with configuration changes for transformations, new features, and breaking changes."
 keywords: ["snowbridge 4.x upgrade", "upgrade guide", "snowbridge migration", "version 4"]
+content_type: how-to
 ---
 
 ## Version 4.0.0 Breaking Changes

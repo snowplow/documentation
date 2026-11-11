@@ -4,6 +4,7 @@ sidebar_label: "Tracking plans API"
 sidebar_position: 2
 description: "Programmatically manage tracking plans through the API with endpoints for creating, updating, retrieving, and managing subscriptions for automated workflows and version control integration."
 keywords: ["tracking plans API", "API endpoints", "programmatic management", "subscription management", "automation"]
+content_type: reference
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

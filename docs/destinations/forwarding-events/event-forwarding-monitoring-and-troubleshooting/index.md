@@ -4,6 +4,7 @@ sidebar_label: "Monitoring and troubleshooting forwarders"
 sidebar_position: 15
 description: "Monitor event forwarder performance, debug failures, and understand retry logic with cloud metrics, failed event logs, and Console statistics."
 keywords: ["forwarder monitoring", "troubleshooting", "failed events", "retry logic", "performance metrics"]
+content_type: how-to
 ---
 
 This page outlines how to monitor event forwarder performance and diagnose delivery issues. Snowplow provides both summary metrics and detailed failed event logs to help you understand failure patterns and troubleshoot specific problems.

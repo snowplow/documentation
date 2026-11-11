@@ -4,6 +4,7 @@ sidebar_label: "Event forwarding"
 sidebar_position: 2
 description: "Send Snowplow events to third-party platforms in real-time using Snowplow's managed event forwarding solution with built-in filtering, field mapping, and JavaScript transformations."
 keywords: ["event forwarding", "real-time delivery", "Snowbridge", "event transformations", "destination APIs"]
+content_type: concept
 ---
 
 ```mdx-code-block

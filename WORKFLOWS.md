@@ -10,9 +10,10 @@ CI and deployment. For writing guidelines see [`CONTRIBUTING.md`](CONTRIBUTING.m
 
 The site is deployed by **Cloudflare Pages** on push to `main`. Cloudflare runs the `yarn build:cf` script, which:
 
-1. Sets `NODE_OPTIONS='--max-old-space-size=4096'` (the build needs more than the default heap).
-2. Runs `docusaurus build`.
-3. Deletes `build/_redirects` — this is the file Docusaurus auto-generates from any installed redirect plugin. Removing it means nothing leaks into the deployed bundle. All redirects live in the [Cloudflare Worker](ARCHITECTURE.md#cloudflare-worker) instead.
+1. Fetches the full git history if the clone is shallow. Docusaurus takes each page's "Last updated" date from git, so a shallow clone gives every page the deploy date. Commits with a `Last-Update: ignore` trailer are skipped when working out the date (see `utils/last-update.js`); use it for bulk metadata changes.
+2. Sets `NODE_OPTIONS='--max-old-space-size=4096'` (the build needs more than the default heap).
+3. Runs `docusaurus build`.
+4. Deletes `build/_redirects` — this is the file Docusaurus auto-generates from any installed redirect plugin. Removing it means nothing leaks into the deployed bundle. All redirects live in the [Cloudflare Worker](ARCHITECTURE.md#cloudflare-worker) instead.
 
 Other `package.json` scripts:
 
@@ -22,19 +23,22 @@ Other `package.json` scripts:
 - `yarn swizzle`: Docusaurus's interactive component-swizzling tool.
 - `yarn clear`: clear the Docusaurus build cache.
 - `yarn format`: Prettier.
+- `yarn lint:css`: stylelint over `src/**/*.css`. Main's CSS doesn't pass yet, so this exits non-zero locally; CI reports the result without failing.
+- `yarn qa:a11y`, `yarn qa:visual`: Playwright accessibility and visual regression checks against a built site. See [`quality/README.md`](quality/README.md).
 
 ## GitHub Actions
 
 CI workflows live in `.github/workflows/`.
 
-| Workflow                   | Description                                                                                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `claude-code-review.yml`   | Runs on every opened PR. Reviews writing quality against the style guide and leaves the review as a PR comment.                      |
-| `claude.yml`               | Triggered by `@claude` mentions in issue comments, PR review comments, and new issues. Dispatches Claude to work on the issue or PR. |
-| `validate-frontmatter.yml` | Runs on PR opened against any `.md` or `.mdx` file. Validates frontmatter of changed files and leaves results as a PR comment.       |
-| `validate_schema.yml`      | Runs on PR changes to `src/components/JsonSchemaValidator/**`. Validates JSON Schema files against `dbt-variables-meta-schema.json`. |
-| `update-dbt-docs.yml`      | Runs weekly and on manual dispatch. Refreshes dbt package version metadata and opens a PR if anything changed.                       |
-| `release-dbt-update.yml`   | Manual dispatch only. Updates reference docs for a given dbt package name and version.                                               |
+| Workflow                   | Description                                                                                                                                                                                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `claude-code-review.yml`   | Runs on every opened PR. Reviews writing quality against the style guide and leaves the review as a PR comment.                                                                                                                                                                      |
+| `claude.yml`               | Triggered by `@claude` mentions in issue comments, PR review comments, and new issues. Dispatches Claude to work on the issue or PR.                                                                                                                                                 |
+| `site-quality.yml`         | Runs on PRs that change `src/**`, `static/**`, the site config, `package.json`, `yarn.lock`, `quality/**`, or `stylelint.config.mjs`. Runs stylelint, axe accessibility checks, and visual regression screenshots against the base branch. Reports problems without blocking merges. |
+| `validate-frontmatter.yml` | Runs on PR opened against any `.md` or `.mdx` file. Validates frontmatter of changed files and leaves results as a PR comment.                                                                                                                                                       |
+| `validate_schema.yml`      | Runs on PR changes to `src/components/JsonSchemaValidator/**`. Validates JSON Schema files against `dbt-variables-meta-schema.json`.                                                                                                                                                 |
+| `update-dbt-docs.yml`      | Runs weekly and on manual dispatch. Refreshes dbt package version metadata and opens a PR if anything changed.                                                                                                                                                                       |
+| `release-dbt-update.yml`   | Manual dispatch only. Updates reference docs for a given dbt package name and version.                                                                                                                                                                                               |
 
 ### dbt reference automation
 

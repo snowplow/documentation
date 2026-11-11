@@ -1,5 +1,6 @@
 ---
 title: "Kantar Focal Meter"
+sidebar_label: "Kantar Focal Meter"
 sidebar_position: 180
 description: "Documentation for Kantar Focal Meter in the web tracker."
 keywords: ["tracker", "configuration"]

@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 70
 description: "Track events from WebViews in React Native hybrid apps using event forwarding from the Web tracker or WebView tracker."
 keywords: ["react native hybrid apps", "webview tracking", "event forwarding", "hybrid app"]
+content_type: how-to
 ---
 
 :::info

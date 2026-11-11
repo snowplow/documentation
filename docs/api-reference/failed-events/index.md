@@ -4,6 +4,7 @@ sidebar_label: "Failed event types"
 sidebar_position: 15
 description: "Reference guide for Snowplow failed event types including schema violations, enrichment failures, and loader errors, with recovery recommendations."
 keywords: ["failed events", "bad rows", "schema validation", "event recovery", "invalid events"]
+content_type: reference
 ---
 
 This page lists all the possible types of [failed events](/docs/fundamentals/failed-events/index.md).

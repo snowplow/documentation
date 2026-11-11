@@ -4,6 +4,7 @@ sidebar_label: "Conversions"
 description: "Model and track conversion events with the Unified Digital dbt package for attribution and funnel analysis."
 keywords: ["conversion tracking", "conversion events", "conversion modeling", "funnel analysis", "conversion attribution"]
 sidebar_position: 100
+content_type: how-to
 ---
 
 ```mdx-code-block

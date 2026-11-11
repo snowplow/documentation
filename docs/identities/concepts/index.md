@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 1
 description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, and identity resolution."
 keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges"]
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

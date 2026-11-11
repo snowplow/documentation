@@ -1,5 +1,6 @@
 ---
 title: "YouTube Tracking"
+sidebar_label: "YouTube Tracking"
 date: "2022-01-12"
 sidebar_position: 17000
 description: "Documentation for tracking YouTube Tracking with the web tracker."

@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 6
 description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified Snowplow IDs."
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
+content_type: concept
 ---
 
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';

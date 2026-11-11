@@ -5,6 +5,7 @@ sidebar_label: "CloudFront"
 description: "Track page views at the CDN level using CloudFront access logs to capture visits from bots, AI agents, and other clients that don't run JavaScript."
 keywords: ["cloudfront tracking", "cloudfront access logs", "amazon firehose", "cdn tracking", "ai agent tracking"]
 date: "2026-06-10"
+content_type: integration
 ---
 
 If your website is served through Amazon CloudFront, you can forward access logs to Snowplow to capture page views from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each log entry as a [page view event](/docs/fundamentals/events/index.md), which appears alongside your existing web analytics events.

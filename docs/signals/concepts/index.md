@@ -4,6 +4,7 @@ sidebar_position: 10
 sidebar_label: "Fundamentals"
 description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
+content_type: concept
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.

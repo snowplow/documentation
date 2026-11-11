@@ -5,6 +5,7 @@ sidebar_position: 2
 sidebar_label: "Enrichments"
 description: "Configure enrichments to add extra data to your Snowplow events."
 keywords: ["enrichments", "event enrichment", "configurable enrichments"]
+content_type: concept
 ---
 
 ```mdx-code-block

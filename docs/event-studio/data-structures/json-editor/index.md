@@ -4,6 +4,7 @@ sidebar_label: "JSON editor"
 sidebar_position: 1
 description: "Define complex data structures with heavy nesting and advanced data types using the JSON Editor for full JSON Schema support."
 keywords: ["JSON editor", "complex schemas", "nested structures", "JSON Schema editor", "advanced data types"]
+content_type: how-to
 ---
 
 :::info

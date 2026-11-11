@@ -5,6 +5,7 @@ sidebar_label: "Read from websites and apps"
 description: "Read a public Signals service directly from a website or mobile app, without an API token or a backend proxy, using the browser plugin, the iOS and Android trackers, or the Signals API."
 keywords: ["public services", "client-side attributes", "browser plugin", "ios tracker", "android tracker", "getServiceAttributes", "personalization"]
 date: "2026-11-08"
+content_type: how-to
 ---
 
 ```mdx-code-block

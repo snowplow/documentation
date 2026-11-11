@@ -4,6 +4,7 @@ sidebar_label: "Optimizely"
 sidebar_position: 170
 description: "Automatically capture Optimizely X experiment and variation data as context entities on all tracked events for A/B testing analysis."
 keywords: ["optimizely", "ab testing"]
+content_type: integration
 ---
 
 ```mdx-code-block

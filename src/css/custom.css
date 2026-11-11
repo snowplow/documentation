@@ -472,9 +472,15 @@ button.snowplow-button:focus {
   display: none;
 }
 
-@media (max-width: 996px) {
-  a.navbar-cta {
-    display: none;
+/* Show the navbar free trial button only where the free trial banner in the
+   doc TOC column is not visible. The column shows from 1280px on non-touch
+   devices (see .tocCol in src/theme/DocItem/Layout/styles.module.css); keep
+   these queries in sync with it. Pages without the banner always show the
+   button. */
+@media (min-width: 1280px) and (pointer: fine),
+  (min-width: 1280px) and (pointer: none) {
+  html:has([data-name='Free trial']) a.navbar-cta {
+    display: none !important;
   }
 }
 

@@ -4,6 +4,7 @@ sidebar_position: 30
 sidebar_label: "Subscribe to interventions"
 description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, iOS and Android trackers, or Signals API to receive intervention payloads."
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "mobile trackers", "intervention payload"]
+content_type: how-to
 ---
 
 ```mdx-code-block

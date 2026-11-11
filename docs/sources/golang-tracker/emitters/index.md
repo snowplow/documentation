@@ -5,6 +5,7 @@ description: "Configure emitters with collector URI, storage implementation (mem
 keywords: ["golang emitter", "storage configuration", "sqlite3 storage", "memory storage", "http client", "emitter callback"]
 date: "2020-02-26"
 sidebar_position: 50
+content_type: reference
 ---
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter and how it works under the hood.

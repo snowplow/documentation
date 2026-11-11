@@ -5,6 +5,7 @@ description: "Extend the web tracker with plugins for tracking ads, ecommerce, m
 keywords: ["plugins", "tracker extensions", "ecommerce tracking", "form tracking", "media tracking"]
 date: "2021-04-07"
 sidebar_position: 2800
+content_type: reference
 ---
 
 ```mdx-code-block

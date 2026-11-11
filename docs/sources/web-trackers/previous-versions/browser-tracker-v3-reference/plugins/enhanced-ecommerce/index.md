@@ -1,5 +1,6 @@
 ---
 title: "Enhanced Ecommerce"
+sidebar_label: "Enhanced Ecommerce"
 date: "2021-04-07"
 sidebar_position: 7000
 description: "Documentation for Enhanced Ecommerce in the web tracker."

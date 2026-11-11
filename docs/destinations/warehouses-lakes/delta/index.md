@@ -4,6 +4,7 @@ sidebar_label: "Delta Lake"
 sidebar_position: 70
 description: "Send Snowplow data to Delta Lake for analytics and data processing with ACID transactions, schema evolution, and time travel capabilities."
 keywords: ["Delta Lake", "data lake", "ACID transactions", "lakehouse", "Databricks"]
+content_type: integration
 ---
 
 ```mdx-code-block

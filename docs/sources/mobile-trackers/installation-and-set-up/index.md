@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 0
 description: "Install the Snowplow mobile tracker SDK for iOS or Android and configure it to track events from your mobile application."
 keywords: ["mobile tracker installation", "ios setup", "android setup"]
+content_type: how-to
 ---
 
 ```mdx-code-block

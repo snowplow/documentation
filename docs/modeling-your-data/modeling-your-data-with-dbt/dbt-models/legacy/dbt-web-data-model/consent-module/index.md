@@ -4,6 +4,7 @@ sidebar_label: "Consent module"
 description: "Consent module for the legacy Web dbt package. Superseded by the Unified Digital Consent module."
 keywords: ["web consent legacy", "legacy consent module", "web GDPR tracking"]
 sidebar_position: 200
+content_type: concept
 ---
 
 ```mdx-code-block

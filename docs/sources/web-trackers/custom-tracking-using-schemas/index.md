@@ -5,6 +5,7 @@ description: "Track self-describing events and attach custom entities using JSON
 keywords: ["self-describing events", "custom entities", "json schemas", "custom tracking"]
 date: "2022-08-30"
 sidebar_position: 2600
+content_type: how-to
 ---
 
 ```mdx-code-block

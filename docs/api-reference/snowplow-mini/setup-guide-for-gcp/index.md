@@ -5,6 +5,7 @@ date: "2021-05-11"
 sidebar_position: 2
 description: "Deploy Snowplow Mini on GCP for a single-instance testing environment."
 keywords: ["snowplow mini", "gcp setup", "mini deployment"]
+content_type: how-to
 ---
 
 ```mdx-code-block

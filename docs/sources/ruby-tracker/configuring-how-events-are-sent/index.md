@@ -5,6 +5,7 @@ date: "2021-10-26"
 sidebar_position: 30
 description: "Configure Ruby emitters and async emitters with collector endpoint, HTTP method, buffer size, and manual flushing for event delivery."
 keywords: ["ruby emitter configuration", "async emitter", "event buffering"]
+content_type: how-to
 ---
 
 ```mdx-code-block

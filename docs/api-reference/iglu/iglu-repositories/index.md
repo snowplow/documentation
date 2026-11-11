@@ -5,6 +5,7 @@ date: "2026-05-14"
 sidebar_position: 10
 description: "Remote Iglu repositories for storing and serving JSON schemas via HTTP."
 keywords: ["iglu repositories", "schema storage", "iglu server", "static repo", "self-hosted"]
+content_type: landing
 ---
 
 ```mdx-code-block

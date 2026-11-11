@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Available enrichments"
 description: "Browse the complete catalog of Snowplow enrichments that add entities and enhance event data during processing."
 keywords: ["enrichments catalog", "enrichment list", "enrichment order"]
+content_type: reference
 ---
 
 

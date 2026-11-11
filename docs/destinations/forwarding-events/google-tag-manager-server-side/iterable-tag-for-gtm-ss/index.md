@@ -5,6 +5,7 @@ date: "2021-11-24"
 sidebar_position: 500
 description: "Forward Snowplow events to Iterable from GTM Server Side using the Iterable Tag for cross-channel marketing automation and customer engagement."
 keywords: ["Iterable Tag", "GTM SS Iterable", "marketing automation", "customer engagement"]
+content_type: integration
 ---
 
 The Iterable Tag for GTM SS allows events to be forwarded to Iterable. This Tag works best with events from the Snowplow Client, but can also construct Iterable events from other GTM SS Clients such as GAv4.

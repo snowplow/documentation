@@ -4,6 +4,7 @@ sidebar_label: "Core web vitals module"
 description: "Track Core Web Vitals metrics including LCP, FID, CLS, INP, and TTFB with the Core Web Vitals module."
 keywords: ["core web vitals", "LCP", "FID", "CLS", "web performance", "page performance"]
 sidebar_position: 300
+content_type: concept
 ---
 
 ```mdx-code-block

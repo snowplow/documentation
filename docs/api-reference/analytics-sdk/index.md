@@ -5,6 +5,7 @@ date: "2020-11-02"
 sidebar_position: 80
 description: "Transform Snowplow enriched TSV events into JSON for data modeling and machine learning in Scala, JavaScript, Go, Python, and .NET."
 keywords: ["analytics sdk", "enriched events", "event transformation"]
+content_type: landing
 ---
 
 ```mdx-code-block

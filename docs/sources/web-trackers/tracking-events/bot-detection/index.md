@@ -5,6 +5,7 @@ sidebar_position: 55
 description: "Detect automated browsers client-side using FingerprintJS BotD and attach a bot detection entity to every event."
 keywords: ["bot detection", "botd", "fingerprint", "automated browsers", "bot filtering"]
 date: "2026-03-24"
+content_type: how-to
 ---
 
 ```mdx-code-block

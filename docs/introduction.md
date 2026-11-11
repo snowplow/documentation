@@ -8,6 +8,7 @@ keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-leve
 pagination_next: null
 sidebar_custom_props:
   header: "Data Infrastructure"
+content_type: landing
 ---
 
 **Deliver validated, enriched event data to your warehouse, lake, or stream in real time with Snowplow**.

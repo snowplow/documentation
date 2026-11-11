@@ -5,6 +5,7 @@ sidebar_position: 2
 date: "2026-06-15"
 description: "How to choose stable identifiers for Snowplow Identities and validate their cardinality against your warehouse before configuring them."
 keywords: ["identities", "identity resolution", "identifiers", "cardinality", "best practices"]
+content_type: how-to
 ---
 
 The quality of identity resolution, and the cost and latency of running Identities, both depend on which event fields you configure as [identifiers](/docs/identities/concepts/index.md#identifiers). Before adding an identifier in [Console](/docs/identities/configuration/index.md), choose fields that are stable for each user and specific to one user, and validate their cardinality against your warehouse.

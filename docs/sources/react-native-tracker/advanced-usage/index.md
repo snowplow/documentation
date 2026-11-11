@@ -5,6 +5,7 @@ date: "2021-08-09"
 sidebar_position: 40
 description: "Remove individual trackers by namespace or remove all trackers at runtime using the React Native tracker API."
 keywords: ["react native remove tracker", "tracker cleanup", "runtime removal"]
+content_type: how-to
 ---
 
 The React Native tracker provides two functions that allow you to remove a tracker (or all of them) at runtime.

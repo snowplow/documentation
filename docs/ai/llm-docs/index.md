@@ -5,6 +5,7 @@ sidebar_position: 6
 description: "Give LLMs efficient access to the Snowplow documentation through the llms.txt index and Markdown versions of every page."
 keywords: ["llms.txt", "LLMs", "Markdown", "AI-readable documentation", "AI assistants"]
 date: "2026-09-28"
+content_type: reference
 ---
 
 The Snowplow documentation is available in formats designed for LLMs, so your AI assistant can find and read the pages it needs.

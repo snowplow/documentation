@@ -4,6 +4,7 @@ sidebar_label: "Screen view and engagement"
 sidebar_position: 40
 description: "Automatically track screen changes, time spent on screens, and user engagement metrics in mobile applications."
 keywords: ["screen view tracking", "screen engagement", "mobile analytics"]
+content_type: how-to
 ---
 
 ```mdx-code-block

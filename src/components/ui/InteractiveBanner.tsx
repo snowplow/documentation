@@ -41,7 +41,7 @@ function AnimatedButton() {
     >
       <Button
         asChild
-        className="snowplow-button shimmer-button w-full h-11 flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
+        className="snowplow-button shimmer-button w-full h-auto min-h-[2.75rem] whitespace-normal text-center leading-tight flex items-center justify-center gap-2 text-base font-medium relative rounded-lg"
       >
         <a
           href="https://snowplow.io/get-started/sign-up"

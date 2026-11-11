@@ -4,6 +4,7 @@ sidebar_label: "Querying data"
 sidebar_position: 1
 description: "Introduction to querying Snowplow data in warehouses including self-describing events, entities, and handling duplicate events with SQL techniques."
 keywords: ["querying data", "SQL queries", "self-describing events", "entities", "deduplication"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_label: "Snowplow CLI"
 sidebar_position: 110
 description: "Command-line tool for downloading and syncing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
 keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

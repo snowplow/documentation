@@ -1,6 +1,7 @@
 import type { Config } from '@docusaurus/types'
 
 const sidebar = require('./sidebars')
+const { lastUpdateOverride } = require('./utils/last-update')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
@@ -45,6 +46,16 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    // Bulk metadata commits marked `Last-Update: ignore` don't change the
+    // visible "Last updated" date. See utils/last-update.js.
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params)
+      if (!result.frontMatter.last_update) {
+        const date = lastUpdateOverride(params.filePath, __dirname)
+        if (date) result.frontMatter.last_update = { date }
+      }
+      return result
+    },
     hooks: {
       onBrokenMarkdownLinks: 'throw',
     },

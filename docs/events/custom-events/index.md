@@ -4,6 +4,7 @@ sidebar_label: "Custom data"
 sidebar_position: 1
 description: "Track custom self-describing events and entities with JSON schemas for flexible data collection."
 keywords: ["custom events", "self-describing events", "entities", "structured events", "JSON schemas"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

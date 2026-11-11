@@ -5,6 +5,7 @@ sidebar_position: 12.5
 sidebar_label: "Licensing"
 description: "Information about the different licenses used in Snowplow components and projects, including the Community License, Limited Use License, and Personal and Academic License."
 keywords: ["Snowplow licensing", "community license", "limited use license", "contributor license agreement"]
+content_type: reference
 ---
 
 This section provides information about the different licenses used in Snowplow components and projects.

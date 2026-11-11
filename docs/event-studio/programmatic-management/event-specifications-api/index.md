@@ -4,6 +4,7 @@ sidebar_label: "Event specifications API"
 sidebar_position: 3
 description: "Programmatically retrieve, create, edit, publish, deprecate, and delete event specifications using the Event Specifications API endpoints."
 keywords: ["event specifications API", "API endpoints", "programmatic management", "tracking scenarios API"]
+content_type: reference
 ---
 
 The event specifications Console API endpoints allow you to retrieve, create, edit, publish, deprecate, or delete event specifications.

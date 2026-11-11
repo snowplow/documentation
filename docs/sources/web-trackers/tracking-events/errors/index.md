@@ -4,6 +4,7 @@ sidebar_label: "Errors"
 sidebar_position: 110
 description: "Track handled and unhandled JavaScript exceptions with manual error tracking and automatic error tracking capabilities."
 keywords: ["error tracking", "exceptions"]
+content_type: how-to
 ---
 
 ```mdx-code-block

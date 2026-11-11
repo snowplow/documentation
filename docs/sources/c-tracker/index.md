@@ -5,6 +5,7 @@ description: "The Snowplow C++ Tracker enables event tracking from C++ applicati
 keywords: ["c++ tracker", "cpp tracker", "c++ sdk", "server-side tracking", "game tracking"]
 date: "2020-02-25"
 sidebar_position: 240
+content_type: sdk
 ---
 
 ```mdx-code-block

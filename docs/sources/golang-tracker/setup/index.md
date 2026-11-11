@@ -5,6 +5,7 @@ description: "Install the Golang tracker using go modules with support for Go 1.
 keywords: ["golang installation", "go get", "go modules", "golang tracker v3"]
 date: "2020-02-26"
 sidebar_position: 10
+content_type: how-to
 ---
 
 ```mdx-code-block

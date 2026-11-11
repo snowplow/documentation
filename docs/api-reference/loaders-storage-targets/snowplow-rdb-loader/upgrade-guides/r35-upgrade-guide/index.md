@@ -5,6 +5,7 @@ date: "2021-01-27"
 sidebar_position: 300
 description: "Upgrade RDB Loader to R35 with independent Loader architecture, SQS messaging, and removal of EmrEtlRunner dependency."
 keywords: ["rdb loader r35", "sqs messaging", "independent loader", "emretlrunner removal", "r35 architecture"]
+content_type: how-to
 ---
 
 R35 is a release with major changes in pipeline architecture:

@@ -5,6 +5,7 @@ sidebar_position: 20
 date: "2025-02-25"
 description: "How Snowplow Identities handles merge conflicts using unique identifiers to prevent incorrect merges."
 keywords: ["identities", "identity resolution", "unique identifiers", "merge conflicts"]
+content_type: concept
 ---
 
 **Unique identifiers** are identifiers that should never cause two Snowplow IDs to merge together if they have different values. For example, if you mark `user_id` as unique, two events with different `user_id` values will never cause their Snowplow IDs to merge, even if they share other identifiers like `domain_userid`. This prevents incorrect merges such as when multiple users share a device or browser.

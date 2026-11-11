@@ -6,6 +6,7 @@ sidebar_position: 10
 coverImage: "aws_logo_0.png"
 description: "Set up Snowplow CDI Private Managed Cloud on AWS with sub-account configuration, IAM roles, and cross-account access."
 keywords: ["AWS setup", "Private Managed Cloud", "AWS sub-account", "IAM roles", "cross-account access"]
+content_type: how-to
 ---
 
 To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com). You will receive an account as part of your onboarding.

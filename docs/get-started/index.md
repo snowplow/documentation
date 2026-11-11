@@ -2,8 +2,9 @@
 title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
-description: "Start Snowplow on a hosted environment in about 20 minutes with no infrastructure to run, optionally with an AI assistant doing the setup, then compare the deployment options for production."
+description: "Start Snowplow on a hosted environment with no infrastructure to run, optionally with an AI assistant doing the setup, then compare the deployment options for production."
 keywords: ["getting started", "Snowplow CDI", "free trial", "free tier", "AI assistant", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options"]
+content_type: landing
 ---
 
 Snowplow is the customer context layer that provides the data foundation for your organization. It transforms raw behavioral data into real-time customer context for AI agents and advanced analytics, using [Snowplow Signals](/docs/signals/index.md) and the Snowplow Customer Data Infrastructure (CDI) platform.
@@ -22,7 +23,7 @@ Snowplow is the customer context layer that provides the data foundation for you
 
 The fastest way to start is a hosted environment that Snowplow provisions for you. There is no infrastructure to deploy, and you can send events, see them validated, and load them into a warehouse or lake on the day you sign up.
 
-* The [free trial](/docs/get-started/free-trial/index.md) is 14 days of Snowplow CDI Cloud. Sign up on the [Snowplow website](https://snowplow.io/get-started/snowplow-free-trial), with no credit card and no sales call, and receive access instructions within around 20 minutes.
+* The [free trial](/docs/get-started/free-trial/index.md) is 14 days of Snowplow CDI Cloud. Sign up on the [Snowplow website](https://snowplow.io/get-started/snowplow-free-trial), with no credit card and no sales call, and usually receive access instructions within moments of verifying your email address.
 * The [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) is the same hosted environment with no end date, capped at 5 million events a month, for building real-time customer attributes with [Signals](/docs/signals/index.md).
 
 Once the environment exists, you can do the setup yourself by following the rest of this guide, or hand it to an AI assistant. The [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) connects Claude Code, Cursor, Codex, or any MCP client to your account with one command, and the [Snowplow Assistant](/docs/ai/console-agent/index.md) does the same from inside Console. Either can design the tracking plan, create the schemas, add the tracker to your application, and check the events. See [Snowplow quickstart with your coding agent](/docs/get-started/quickstart/index.md).

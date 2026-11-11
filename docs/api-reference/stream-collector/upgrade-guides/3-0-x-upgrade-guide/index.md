@@ -4,6 +4,7 @@ sidebar_label: "3.0.x upgrade guide"
 sidebar_position: 20
 description: "Upgrade guide for Collector 3.0.x covering breaking changes including the new license, migration from Akka HTTP to http4s, single endpoint port, and updated configuration requirements."
 keywords: ["collector 3.0", "Akka HTTP migration", "http4s", "license acceptance", "breaking changes"]
+content_type: how-to
 ---
 
 ## Breaking changes

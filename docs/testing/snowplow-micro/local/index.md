@@ -4,6 +4,7 @@ sidebar_label: "Run locally"
 sidebar_position: 2
 description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the dashboard, API, or exported TSV/JSON format."
 keywords: ["micro basic usage", "docker", "run micro", "test events", "micro dashboard"]
+content_type: how-to
 ---
 
 ```mdx-code-block

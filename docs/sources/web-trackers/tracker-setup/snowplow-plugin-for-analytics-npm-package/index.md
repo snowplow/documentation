@@ -5,6 +5,7 @@ description: "Deploy the web tracker through the analytics npm package to send e
 keywords: ["getanalytics.io", "analytics package", "multi-provider tracking"]
 date: "2020-08-10"
 sidebar_position: 4000
+content_type: integration
 ---
 
 The Snowplow JavaScript tracker can now be deployed directly into your web and node applications using the `analytics` and `@analytics/snowplow` NPM packages.

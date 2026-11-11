@@ -5,6 +5,7 @@ sidebar_label: "Retrieve attributes"
 description: "Retrieve calculated attribute values from the Profiles Store using the Signals Python SDK, Node.js SDK, or API, either via a service or directly from an attribute group."
 keywords: ["retrieve attributes", "services", "signals python sdk", "signals node sdk", "signals api", "profiles store"]
 date: "2026-06-11"
+content_type: how-to
 ---
 
 ```mdx-code-block

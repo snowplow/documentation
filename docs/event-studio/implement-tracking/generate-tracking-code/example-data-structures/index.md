@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Example configuration files, generated output, and how to use them for each Snowtype-supported tracker and language."
 keywords: ["Snowtype", "code generation", "output", "example", "tracker"]
 date: "2026-03-19"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

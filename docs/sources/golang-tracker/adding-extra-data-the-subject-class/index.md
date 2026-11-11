@@ -5,6 +5,7 @@ description: "Attach user and device information to Golang tracker events using 
 keywords: ["golang subject", "user data", "device information", "user id", "screen resolution"]
 date: "2020-02-26"
 sidebar_position: 30
+content_type: reference
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.

@@ -4,6 +4,7 @@ sidebar_label: "User and session identifiers"
 description: "Track user and session identifiers including domain_userid, network_userid, session IDs, business user IDs, and the Snowplow ID from Identities."
 sidebar_position: 3
 keywords: ["user identification", "session tracking", "domain_userid", "user_id", "session ID", "Snowplow ID", "identity resolution", "Identities"]
+content_type: concept
 ---
 
 Snowplow tracks several identifiers to help you understand user behavior across sessions and devices. These include tracker-generated IDs stored on the client, server-generated IDs from the Collector, and business user IDs you set in your app.

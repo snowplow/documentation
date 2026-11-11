@@ -4,6 +4,7 @@ sidebar_label: "BigQuery Loader"
 sidebar_position: 2
 description: "Stream Snowplow events to BigQuery from Kinesis or Pub/Sub with real-time loading and schema evolution."
 keywords: ["bigquery loader", "google bigquery", "streaming loader", "snowplow gcp"]
+content_type: how-to
 ---
 
 ```mdx-code-block

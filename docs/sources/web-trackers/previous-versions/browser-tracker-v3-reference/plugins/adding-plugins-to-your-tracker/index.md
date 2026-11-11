@@ -1,5 +1,6 @@
 ---
 title: "Adding plugins to your tracker"
+sidebar_label: "Adding plugins to your tracker"
 date: "2021-04-19"
 sidebar_position: 500
 description: "Plugin documentation for Adding s to your tracker functionality in the tracker."

@@ -16,7 +16,7 @@ import { getSteps } from '@site/src/components/tutorials/utils';
 import { Meta, Step } from '@site/src/components/tutorials/models';
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks';
 import TutorialProgressTracker from '@site/src/components/tutorials/TutorialProgressTracker';
-import { Paginators } from '@site/src/theme/DocPage/Layout/Main/Paginators';
+import { Paginators } from './Paginators';
 
 import styles from './styles.module.css';
 

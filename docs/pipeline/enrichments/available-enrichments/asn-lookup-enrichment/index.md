@@ -4,6 +4,7 @@ sidebar_position: 11
 sidebar_label: ASN lookup
 description: "Flag bot traffic by checking autonomous system numbers against known bad ASN lists."
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

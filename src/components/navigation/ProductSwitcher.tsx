@@ -53,6 +53,7 @@ export default function ProductSwitcher({
               active && 'product-switcher__link--active'
             )}
             aria-current={active ? 'true' : undefined}
+            title={active ? undefined : `Switch to the ${product.label} docs`}
           >
             {product.label}
           </Link>

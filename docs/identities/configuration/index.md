@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 2
 description: "Configure identifiers, aliases, and event filters for Snowplow Identities identity resolution."
 keywords: ["identities", "identity resolution", "identifiers", "aliases", "event filters", "configuration"]
+content_type: how-to
 ---
 
 Manage your Identities deployment and configure identifiers using [Snowplow Console](https://console.snowplowanalytics.com).

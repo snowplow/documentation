@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 300
 description: "Transform and filter messages with built-in transformations for Snowplow data or custom JavaScript scripts for flexible data processing."
 keywords: ["transformations", "filters", "javascript transformations", "data transformation", "message filtering"]
+content_type: concept
 ---
 
 

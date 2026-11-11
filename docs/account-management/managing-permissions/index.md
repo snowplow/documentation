@@ -4,6 +4,7 @@ sidebar_label: "Permissions"
 sidebar_position: 2
 description: "Configure user permissions in Snowplow Console with Global Admin, User, and Custom roles to control access to environments, data structures, tracking plans, data models, and API keys."
 keywords: ["user permissions", "role management", "access control", "Admin role", "Custom permissions", "Console permissions"]
+content_type: reference
 ---
 
 To set a user's permissions, navigate to **Settings** > **Users** and then to the user whose account you'd like to manage.

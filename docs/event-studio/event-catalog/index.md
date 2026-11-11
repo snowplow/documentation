@@ -5,6 +5,7 @@ sidebar_position: 30
 description: "Browse, search, and manage all event specifications across tracking plans from a single location to improve event discoverability and governance."
 keywords: ["event catalog", "event specifications", "event discovery", "event governance", "tracking plans"]
 date: "2025-02-05"
+content_type: how-to
 ---
 
 The Event Catalog provides a centralized location to discover and manage all event specifications across your [tracking plans](/docs/event-studio/tracking-plans/index.md). Instead of navigating through individual tracking plans to find specific events, you can browse, search, and filter all event specifications from a single view.

@@ -2,10 +2,11 @@
 title: "Private Managed Cloud on GCP"
 sidebar_label: "GCP setup guide"
 date: "2020-01-30"
-sidebar_position: 30
+sidebar_position: 31
 coverImage: "gcp_logo.png"
 description: "Set up Snowplow CDI Private Managed Cloud on GCP with project configuration, IAM roles, and service account permissions."
 keywords: ["GCP setup", "Private Managed Cloud", "Google Cloud", "IAM roles", "GCP project"]
+content_type: how-to
 ---
 
 To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.
@@ -50,6 +51,7 @@ Please enable billing on the project as failing to do so will prevent the pipeli
 
 The following is a list of Organizational Policy constraints that we require to be turned off, otherwise we are unable to deploy the pipeline.  For some, more specific configuration would enable the constraint to stay and the pipeline to deploy. This list will be updated as we discover more constraints that are not compatible with the pipeline deployment.
 
+- `constraints/compute.managed.requireOsLogin`
 - `constraints/compute.requireShieldedVm`
 - `constraints/gcp.resourceLocations`
 - `constraints/gcp.restrictServiceUsage`

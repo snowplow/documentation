@@ -5,6 +5,7 @@ sidebar_position: 5
 description: "Erase a user's entries from the Snowplow Identities graph to fulfill a GDPR right-to-erasure request. Explains what the API removes, what it does not, and how to call it."
 keywords: ["gdpr", "erasure", "right to be forgotten", "dsar", "identity deletion", "data subject request"]
 date: "2026-05-22"
+content_type: how-to
 ---
 
 Snowplow Identities provides an API to erase a user's entries from the [identity graph](/docs/identities/concepts/index.md) to fulfill GDPR right-to-erasure requests. Use the [dry-run mode](#preview-a-deletion-dry-run) first to preview what will be deleted.

@@ -5,6 +5,7 @@ date: "2021-10-18"
 sidebar_position: 200
 description: "Lightweight JavaScript and TypeScript library to transform Snowplow enriched TSV events into JSON for serverless functions and Node.js."
 keywords: ["javascript analytics sdk", "typescript", "snowplow nodejs", "aws lambda"]
+content_type: sdk
 ---
 
 ## Overview

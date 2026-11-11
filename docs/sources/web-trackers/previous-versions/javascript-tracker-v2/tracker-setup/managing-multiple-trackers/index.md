@@ -1,5 +1,6 @@
 ---
 title: "Managing multiple trackers"
+sidebar_label: "Managing multiple trackers"
 date: "2020-03-03"
 sidebar_position: 40
 description: "Documentation for tracking Managing multiple ers with the web tracker."

@@ -1,9 +1,10 @@
 ---
 title: "Manage event specifications using Console"
 sidebar_label: "Event specifications"
-sidebar_position: 1
+sidebar_position: 1.5
 description: "Create and manage event specifications in Snowplow Console UI as documented events within tracking plans with data structures and implementation details."
 keywords: ["event specifications UI", "Console UI", "create event specifications", "event documentation"]
+content_type: how-to
 ---
 
 Event specifications are complete definitions of business events. They define what data should be tracked, when the event occurs, along with additional metadata about the event such as ownership.

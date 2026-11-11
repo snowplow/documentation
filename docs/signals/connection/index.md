@@ -1,98 +1,55 @@
 ---
 title: "Connect to Snowplow Signals"
 sidebar_position: 35
-sidebar_label: "Connect to Signals"
-description: "Connect to Signals using the Python SDK, Node.js SDK, or REST API with your deployment credentials, to manage configurations or consume calculated values."
+sidebar_label: "Connect with SDKs or API"
+description: "Get your Signals connection credentials, then connect with the Python SDK, Node.js SDK, or Signals API to manage configurations or consume calculated values."
 keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "connection credentials"]
-sidebar_custom_props:
-  space_above: true
+content_type: how-to
 ---
 
-You'll connect to Signals for one of two reasons:
+You connect to Signals for one of two reasons: to define and manage configurations, such as attribute groups, services, and interventions, or to consume calculated values in your application. A data team usually does the first with Console or the Python SDK. Application code does the second with the SDKs, the browser plugin, the API, or the Signals MCP server.
 
-* **To define and manage configurations**: create attribute groups, services, and interventions, and publish them to Signals. This is typically done by a data team, using Snowplow Console, the Python SDK, or the API.
-* **To consume calculated values in your application**: retrieve attributes on demand, or subscribe to interventions. This is typically done in application code, using the SDKs, browser plugin, API, or MCP server.
+Console needs no connection setup: log in and go to the **Signals** section. The Snowplow MCP server, which lets your own coding agent manage Signals for you, authenticates with your Console account rather than with Signals credentials. Install it, with the Snowplow [skills](/docs/ai/skills/index.mdx), using `npx plugins add snowplow/skills`.
 
-This table shows which interface supports which task:
+This page covers connecting from code. For the full list of interfaces and what each supports, the client constructor options, and the SDK methods, see the [Signals connection reference](/docs/signals/connection/reference/index.md).
 
-| Interface                                       | Define configurations | Retrieve attributes | Subscribe to interventions |
-| ----------------------------------------------- | --------------------- | ------------------- | -------------------------- |
-| [Snowplow Console](https://console.snowplowanalytics.com) | ✅                     | ❌                   | ❌                          |
-| [Python SDK](#signals-python-sdk)               | ✅                     | ✅                   | ✅                          |
-| [Node.js SDK](#signals-nodejs-sdk)              | ❌                     | ✅                   | ❌                          |
-| [Browser plugin](/docs/signals/applications/subscribe/index.md) | ❌                     | ❌                   | ✅                          |
-| [Signals API](#signals-api)                     | ✅                     | ✅                   | ✅                          |
-| [Signals MCP server](#signals-mcp-server)       | ❌                     | ✅                   | ❌                          |
+## Before you begin
 
-Console doesn't require any connection setup: log in and navigate to the **Signals** section. If Signals isn't enabled for your organization yet, see [Set up Signals](/docs/signals/setup/index.md).
+You'll need:
 
-For the SDKs, plugin, API, and MCP server, you'll need [connection credentials](#connection-credentials).
+* Signals enabled for your organization. If it isn't, see [Set up Signals](/docs/signals/setup/index.md).
+* Permission to create API keys in Console. See [Account management](/docs/account-management/index.md).
+* Python 3, or Node.js, depending on the SDK you use
 
-## Connection credentials
+Choose your interface:
 
-To connect to Signals using the Signals SDKs or API, you will need four values. Use the Console **Overview** page to access them.
+* **To define configurations in code**: use the [Python SDK](/docs/signals/connection/reference/index.md#python-sdk). We recommend keeping your configurations in a new repository. A Jupyter notebook is the easiest place to start.
+* **To retrieve attributes in a Node.js application**: use the [Node.js SDK](/docs/signals/connection/reference/index.md#nodejs-sdk).
+* **To subscribe to interventions in the browser**: use the [browser plugin](/docs/signals/applications/subscribe/index.md).
+* **From any other language, or over plain HTTP**: use the [Signals API](#signals-api).
+* **From an AI agent in your application**: use the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
 
-| Value           | Description                             | Where to get it                                                  | Format                                             |
-| --------------- | --------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
-| Signals API URL | The API URL for your Signals deployment | Console > **Signals** > **Overview**                             | `https://{{123abc}}.signals.snowplowanalytics.com` |
-| API key         | A Snowplow API key                      | [Generated by you](/docs/account-management/index.md) in Console | UUID                                               |
-| API key ID      | A Snowplow API key ID                   | [Generated by you](/docs/account-management/index.md) in Console | UUID                                               |
-| Organization ID | Your Snowplow organization ID           | Console > **Signals** > **Overview**                             | UUID                                               |
+## Steps
 
-Add these four tokens to your environment secrets.
+These steps connect with the Python or Node.js SDK. The code tabs remember your choice.
 
-## Signals Python SDK
+<Steps>
 
-Use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups, services, and interventions via code. You can also retrieve calculated attributes and subscribe to interventions using this SDK.
+### Get your connection credentials
 
-To use the Python SDK, first choose where to store your Signals configurations. We recommend creating a new repository. The easiest way to use the SDK is within a Jupyter notebook.
+The SDKs, Signals API, and Signals MCP server use the same four values. The browser plugin needs only your Signals API URL, because the subscription endpoint doesn't authenticate. Find the Signals API URL and organization ID in Console under **Signals** > **Overview**, and [create an API key](/docs/account-management/index.md) to get the API key and its ID. Signals has two API key permissions: **View** for reading attributes and agentic contexts, and **Edit** for also creating and publishing configuration. Give an application that only reads attributes a key with **View**. The [connection credentials reference](/docs/signals/connection/reference/index.md#connection-credentials) lists the format of each.
 
-Install the SDK into your environment:
+Add the four values to your environment secrets. Keep them on the server: don't commit them or send them to the browser.
 
-```bash
+### Install the SDK
+
+<CodeGroup groupId="signals-sdk">
+
+```bash title="Python"
 pip install snowplow-signals
 ```
 
-Once installed, you can start to define configuration components. To test or publish your configuration, or retrieve calculated attributes or interventions from the Profiles Store, you'll need to connect to your Signals deployment.
-
-Create a `Signals` object by passing in the required values:
-
-```python
-from snowplow_signals import Signals
-
-sp_signals = Signals(
-    api_url=SIGNALS_DEPLOYED_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
-)
-```
-
-The created `Signals` object has the following methods:
-
-| Method                   | Description                                                                 |
-| ------------------------ | --------------------------------------------------------------------------- |
-| `publish`                | Registers the provided objects with Signals                                 |
-| `unpublish`              | Unpublishes objects from Signals                                            |
-| `delete`                 | Fully deletes objects from Signals (must unpublish first)                   |
-| `test`                   | Tests an attribute group against the atomic events table                    |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store         |
-| `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
-| `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                        |
-| `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
-| `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
-
-To define configurations programmatically, check out the [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md) pages. The [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow) describes how publishing, versioning, unpublishing, and deletion fit together.
-
-To consume calculated values in your application, see [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [subscribe to interventions](/docs/signals/applications/subscribe/index.md).
-
-## Signals Node.js SDK
-
-Use the [Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) to retrieve calculated attributes.
-
-Install the SDK into your application:
-
-```bash
+```bash title="Node.js"
 npm i @snowplow/signals-node
 # or
 yarn add @snowplow/signals-node
@@ -100,58 +57,79 @@ yarn add @snowplow/signals-node
 pnpm i @snowplow/signals-node
 ```
 
-Create a `Signals` object by passing in the required values:
+</CodeGroup>
 
-```typescript
+To call the Signals API directly, skip this step and go to [Signals API](#signals-api).
+
+### Create a Signals client
+
+Create a `Signals` object with your connection credentials:
+
+<CodeGroup groupId="signals-sdk">
+
+```python title="Python"
+from snowplow_signals import Signals
+
+sp_signals = Signals(
+    api_url=SIGNALS_API_URL,
+    api_key=SNOWPLOW_API_KEY,
+    api_key_id=SNOWPLOW_API_KEY_ID,
+    org_id=SNOWPLOW_ORG_ID,
+)
+```
+
+```typescript title="Node.js"
 import { Signals } from '@snowplow/signals-node';
 
 const signals = new Signals({
-  baseUrl: SIGNALS_DEPLOYED_URL,
-  apiKey: CONSOLE_API_KEY,
-  apiKeyId: CONSOLE_API_KEY_ID,
-  organizationId: ORG_ID,
+  baseUrl: SIGNALS_API_URL,
+  apiKey: SNOWPLOW_API_KEY,
+  apiKeyId: SNOWPLOW_API_KEY_ID,
+  organizationId: SNOWPLOW_ORG_ID,
 });
 ```
 
-The created `Signals` object has the following methods:
+</CodeGroup>
 
-| Method                      | Description                                                                 |
-| --------------------------- | --------------------------------------------------------------------------- |
-| `getServiceAttributes`      | Retrieves attributes for a specific service from the Profiles Store         |
-| `getGroupAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
-| `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
+### Verify the connection
 
-See [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for usage examples.
+Retrieve attributes from a published service. Replace `my_service` with one of your services, and the identifier with an attribute key value that has events, such as your own `domain_userid`:
 
-## Signals MCP server
+<CodeGroup groupId="signals-sdk">
 
-The [Signals MCP server](/docs/signals/applications/mcp-server/index.md) lets an agent in your application discover and read Signals data as tools, instead of your code naming what to fetch. It serves calculated attributes and agentic contexts, and every tool is read-only.
-
-Your agent connects over streamable HTTP, using your Signals API URL followed by `/mcp`:
-
-```bash
-{{API_URL}}/mcp
+```python title="Python"
+sp_signals.get_service_attributes(
+    name="my_service",
+    attribute_key="domain_userid",
+    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
+)
 ```
 
-It takes your API key and key ID directly, as the `X-API-Key-Id` and `X-API-Key` headers, so there's no token exchange step. See [Signals MCP server](/docs/signals/applications/mcp-server/index.md) for client configuration and the tools it exposes.
+```typescript title="Node.js"
+await signals.getServiceAttributes({
+  name: "my_service",
+  attribute_key: "domain_userid",
+  identifier: "218e8926-3858-431d-b2ed-66da03a1cbe5",
+});
+```
+
+</CodeGroup>
+
+A response with attribute values, even empty ones, means the connection works. If you don't have a service yet, follow the [quickstart tutorial](/docs/signals/get-started/quickstart-tutorial/index.md) to create one.
+
+</Steps>
+
+Next, define configurations with [attribute groups](/docs/signals/attributes/attribute-groups/index.md), [services](/docs/signals/applications/services/index.md), and [interventions](/docs/signals/interventions/index.md), or consume them with [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [subscribe to interventions](/docs/signals/applications/subscribe/index.md).
 
 ## Signals API
 
-The Signals API allows you to directly configure and retrieve attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
+The SDKs handle authentication for you. When you call the Signals API directly, exchange your API key for a token first, then send it with each request.
 
-```bash
-{{API_URL}}/docs/
-```
+<Steps>
 
-Your API documentation is linked in Console on the **Overview** page, under **Configuration details**.
+### Get an access token
 
-### Authenticate to the Signals API
-
-The SDKs handle authentication for you. When you call the Signals API directly, each request must include a Bearer token in the `Authorization` header.
-
-To obtain this token, exchange your Snowplow API key and key ID for a temporary access token using the Console Credentials API. The token is a JWT valid for 24 hours. See [Account management](/docs/account-management/index.md#obtain-an-access-token) for the full process, including how to create an API key.
-
-First, exchange your API key and key ID for an access token:
+Exchange your API key and key ID for an access token, using the Console Credentials API:
 
 ```bash
 curl \
@@ -160,13 +138,17 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 
-This returns a JWT:
+This returns a JWT, valid for 24 hours:
 
 ```json
 { "accessToken": "<JWT>" }
 ```
 
-Then use the JWT as a Bearer token in your Signals API requests:
+[Account management](/docs/account-management/index.md#obtain-an-access-token) describes the full process, including how to create an API key.
+
+### Call the API
+
+Send the JWT as a Bearer token in the `Authorization` header:
 
 ```bash
 curl \
@@ -174,8 +156,8 @@ curl \
   {{API_URL}}/api/v1/registry/interventions
 ```
 
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+A list of interventions, even an empty one, means the connection works. The [Signals API reference](/docs/signals/connection/reference/index.md#signals-api-endpoints) shows where to find the full API documentation for your deployment.
 
-<SignalsFreeTier/>
-```
+</Steps>
+
+To connect, define attributes, and act on interventions from Python end to end, follow the [Python tracking and Signals tutorial](/tutorials/python-tracking-and-signals/introduction).

@@ -5,6 +5,7 @@ date: "2022-10-17"
 sidebar_position: 100
 description: "Configure RDB Loader 4.0.x with Redshift, Snowflake, and Databricks storage settings including JDBC and authentication options."
 keywords: ["rdb loader 4.0 config", "redshift 4.0 config", "snowflake 4.0 config", "databricks 4.0 config", "loader 4.0 settings"]
+content_type: reference
 ---
 
 All applications use a common module for core functionality, so only the `storage` sections are different in their config.

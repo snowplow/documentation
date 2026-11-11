@@ -5,6 +5,7 @@ date: "2021-04-07"
 sidebar_position: 2
 description: "Configure the Node.js tracker with platform, user ID, session properties, and device information for enriched event tracking."
 keywords: ["node.js tracker configuration", "user properties", "platform settings"]
+content_type: reference
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to your Snowplow pipeline with each event.

@@ -4,6 +4,7 @@ sidebar_label: "Upgrading to newer versions"
 sidebar_position: 100
 description: "Upgrade to newer versions of the Python tracker with migration guides for v1.0.0 and v0.13.0+ breaking changes and new features."
 keywords: ["python tracker upgrade", "migration guide", "version upgrade"]
+content_type: how-to
 ---
 
 This page gives instructions to upgrading to newer versions of the Python Tracker

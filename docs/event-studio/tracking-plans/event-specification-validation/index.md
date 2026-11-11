@@ -5,6 +5,7 @@ sidebar_position: 3
 description: "Event specification validation checks events that arrive with a specification entity attached against the instructions defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
 keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "property instructions"]
 date: "2026-04-27"
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

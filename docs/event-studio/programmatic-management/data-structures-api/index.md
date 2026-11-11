@@ -4,6 +4,7 @@ sidebar_label: "Data structures API"
 sidebar_position: 1
 description: "Programmatically manage data structures through the API with endpoints for retrieving, validating, and deploying schemas to development and production registries."
 keywords: ["data structures API", "schema API", "validation API", "deployment API", "Iglu Server"]
+content_type: reference
 ---
 
 The data structures Console API endpoints focus on the main operations in the workflow around:

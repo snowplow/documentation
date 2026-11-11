@@ -1,9 +1,10 @@
 ---
-title: "Define attributes"
+title: "Configure attributes"
 sidebar_position: 10
-sidebar_label: "Attributes"
+sidebar_label: "Configure attributes"
 description: "Define individual attributes within attribute groups by selecting event schemas or event specifications, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection", "python sdk attributes", "attribute configuration"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -41,7 +42,7 @@ Use the event filter to choose which event types to calculate the attribute from
 Click the dropdown to see the available events, listed by name and vendor:
 
 * **Event Specifications**: select any [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) from an existing [tracking plan](/docs/event-studio/tracking-plans/index.md).
-* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
+* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. [Structured](/docs/events/custom-events/index.md#structured-events) events aren't listed here. To calculate an attribute from them, see [Calculate attributes from structured events](#calculate-attributes-from-structured-events).
 * **Custom events**: select any schema or data structure available within your pipeline.
 
 :::note[Searching for events]
@@ -116,9 +117,9 @@ Signals supports the following aggregation types:
 | Least Frequent | Least frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
 | Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
 | Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
-| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
-| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
-| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
+| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See [Unique list ordering](#unique-list-ordering) |
+| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
+| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
@@ -242,7 +243,7 @@ Click **Confirm** to use the calculated property for this attribute.
 
 ![Calculated property panel combining geo_country and geo_city with the concat operation and a hyphen separator](../../images/calculated-properties.png)
 
-The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as shown above, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
+The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as in the screenshot, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
 
 The aggregation also decides which operations are offered. With `sum`, `mean`, `min`, or `max`, you can choose `sum`, `product`, `min`, `max`, or `coalesce`, but not `concat`. With `time_since_last` or `time_since_first`, you can only select one property, so calculated properties aren't available.
 
@@ -432,9 +433,58 @@ criteria = Criteria(
 </TabItem>
 </Tabs>
 
+### Calculate attributes from structured events
+
+[Structured events](/docs/events/custom-events/index.md#structured-events) don't have their own schema. Their data is stored in the `se_category`, `se_action`, `se_label`, `se_property`, and `se_value` [atomic properties](/docs/fundamentals/canonical-event/index.md#structured-events), which are only populated for structured events.
+
+To calculate an attribute from structured events, leave the event filter set to all events, and add a [criteria](#filter-with-criteria) filter on one or more of the `se_` properties. Events without a value for that property, such as page views, don't match the criteria, so only the structured events you've described update the attribute.
+
+You can also use the `se_` properties as the attribute's [property](#select-a-property). For example, use `se_label` with a `unique_list` aggregation, or `se_value` with a `sum` aggregation.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+To count the structured events with category `Product` and action `View`:
+
+1. Leave the event filter as **All events**
+2. Choose the `counter` aggregation
+3. Within **More options**, add a criterion on the atomic property `se_category`, with the `=` operator and the value `Product`
+4. Add a second criterion on `se_action`, with the `=` operator and the value `View`, and require `all` criteria to be met
+
+You'll find the `se_` properties on the **Atomic** tab of the property selector.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+This example counts the structured events with category `Product` and action `View`:
+
+```python
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty
+
+product_views = Attribute(
+    name="product_view_count",
+    description="Number of structured events with category Product and action View",
+    type="int32",
+    events=[],
+    aggregation="counter",
+    criteria=Criteria(
+        all=[
+            Criterion.eq(AtomicProperty(name="se_category"), "Product"),
+            Criterion.eq(AtomicProperty(name="se_action"), "View"),
+        ]
+    ),
+    default_value=0
+)
+```
+
+With the Python SDK, you can also restrict the attribute to structured events by passing `Event(name="event", vendor="com.google.analytics", version="1-0-0")` in `events`, together with the same criteria.
+
+</TabItem>
+</Tabs>
+
 ## All attribute options
 
-The table below lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
+This table lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -759,9 +809,3 @@ experiment_variants_seen = Attribute(
 ```
 
 Each event contributes one entry, such as `"exp3-blue"`, and `unique_list` keeps the distinct ones. If either property can be missing on an event, add [criteria](#filter-with-criteria) requiring both to be set: `concat` skips a null property, so an event with an experiment but no variant would otherwise contribute `"exp3"`, colliding with any other event that produces `"exp3"`.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

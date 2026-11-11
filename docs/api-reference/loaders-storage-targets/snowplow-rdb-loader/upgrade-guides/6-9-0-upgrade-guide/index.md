@@ -5,6 +5,7 @@ sidebar_position: -30
 description: "Upgrade RDB Loader to 6.9.0, which renames Databricks recovery columns, and update the queries that read them."
 keywords: ["rdb loader 6.9 upgrade", "recovery columns", "databricks", "parquet", "schema evolution"]
 date: "2026-10-20"
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -2,16 +2,16 @@
 title: "Introduction to Snowplow Identities"
 sidebar_label: "Identities"
 date: "2025-02-25"
-sidebar_position: 6
+sidebar_position: 6.5
 description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified Snowplow IDs."
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
+content_type: concept
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Identities is a paid addon for Snowplow CDI."
+  note="Identities is a paid addon for Snowplow CDI."
 />
 
 Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
@@ -25,7 +25,7 @@ Identities allows you to:
 Use the provided Identities data models to build identifier mapping tables. These tables help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
 :::note[Deployment support]
-Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/index.md). Azure isn't supported.
+Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/private-managed-cloud/index.md). Azure isn't supported.
 :::
 
 ## How Identities fits into the Snowplow pipeline

@@ -4,6 +4,7 @@ description: "Guides for setting up the legacy SQL Runner and running our web an
 keywords: ["SQL Runner", "legacy SQL models", "SQL Runner setup", "web model SQL"]
 sidebar_label: "SQL Runner models (legacy)"
 sidebar_position: 99999
+content_type: concept
 ---
 
 ```mdx-code-block

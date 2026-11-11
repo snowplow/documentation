@@ -25,7 +25,7 @@ export const ReleaseNoteMeta: React.FC = () => {
   const tags = [...toArray(frontMatter.components), ...toArray(frontMatter.platforms)]
 
   return (
-    <div className="not-prose max-w-[740px] mx-auto mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+    <div className="not-prose max-w-content mx-auto mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
       <time dateTime={date}>{formatUpdateDate(date)}</time>
       {categorys.map((type) => (
         <CategoryBadge key={type} type={type as Category} />

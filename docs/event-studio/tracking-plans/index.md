@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Tracking plans"
 description: "Create logical groupings of behavioral data by domain with explicit ownership, event specifications, and source applications to improve governance and collaboration across your organization."
 keywords: ["tracking plans", "event specifications", "data ownership", "data governance", "tracking implementation"]
+content_type: concept
 ---
 
 As described in [Tracking Plans Introduction](/docs/fundamentals/tracking-plans/index.md), a tracking plan is a logical grouping of the data you collect as an organization by domain, with an explicit owner.
@@ -22,8 +23,8 @@ Each tracking plan contains event specifications that define the events you want
 
 Event specifications bridge the gap between tracking design and data collection:
 
-- **Design phase**: you document your tracking requirements by creating event specifications that capture both technical structure and business context
-- **Implementation phase**: developers use these specifications to instrument tracking code, either manually or through code generation within the Snowplow Console or using tools like Snowtype. Snowtype generated code ensures type-safety and alignment with specifications, reducing implementation errors and accelerating development time
+- **Design phase**: you document your tracking requirements by creating event specifications that capture both technical structure and business context. You can also ask an AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) to draft and create them for you.
+- **Implementation phase**: developers use these specifications to instrument tracking code, either manually or through code generation within the Snowplow Console or using tools like Snowtype. Snowtype generated code ensures type-safety and alignment with specifications, reducing implementation errors and accelerating development time. A coding agent with the Snowplow [skills](/docs/ai/skills/index.mdx) can also add the tracking to your application and check that the events arrive.
 - **Observability phase**: monitor event specification usage directly in Console. See the total number of events collected for each specification, when each was last seen, and how many of those events were valid or inferred, had violations, or failed. This helps you confirm implementations are live, identify unused specifications, and find implementation problems. See [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md)
 - **Data modeling phase**: event specifications enable automatically generated dbt models that transform atomic events into analysis-ready tables. These models understand the structure defined in your specifications, creating consistent table schemas and joining related [entities](/docs/fundamentals/entities/index.md). As you update specifications, corresponding data models can be regenerated, keeping your warehouse transformations synchronized with your tracking design
 

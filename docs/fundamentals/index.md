@@ -1,14 +1,19 @@
 ---
 title: "Snowplow fundamentals"
 sidebar_position: 2
-sidebar_label: "Fundamentals"
+sidebar_label: "Concepts overview"
 description: "An overview of what a Snowplow pipeline does and what steps it includes"
 keywords: ["Snowplow pipeline", "architecture", "trackers", "enrichment", "data warehouses", "collector"]
+content_type: landing
 ---
+
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
+A Snowplow pipeline turns behavioral data from your apps into validated, enriched events in your warehouse, lake, or stream. Trackers send [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md) to a Collector, the pipeline checks each event against its [schema](/docs/fundamentals/schemas/index.md), enriches it, and loads it into your destinations. Events that don't match their schema become [failed events](/docs/fundamentals/failed-events/index.md), so they aren't loaded and aren't lost. To choose where the pipeline runs, see [Choose a Snowplow deployment](/docs/get-started/deployment-options/index.md). For how Signals computes attributes from these events, see [How Signals works](/docs/signals/concepts/index.md).
 
 ![Snowplow pipeline architecture diagram showing data flowing from web, mobile, server-side, pixel, and webhook sources through Collect, Validate, and Enrich stages. Validated events route to a Real-Time Good Stream and on to a data warehouse and BI tools; invalid events route to a Real-Time Bad Stream and Bad Logs.](images/architecture.png)
 
-The diagram above illustrates a typical Snowplow pipeline with data flowing left to right.
+In a typical pipeline, data flows through these stages:
 
 - [**Trackers**](/docs/sources/index.md) generate [event](/docs/fundamentals/events/index.md) data and send this to your Collector. We have trackers covering web, mobile, desktop, server and IoT. Additionally, [**webhooks**](/docs/sources/webhooks/index.md) allow third-party software to send their own internal event streams to your Collector for further processing.
 - Events hit the **Collector** application and it saves the raw events to storage (S3 on AWS and Google Cloud Storage on GCP) and then sends them down the pipeline to Enrich.
@@ -17,6 +22,12 @@ The diagram above illustrates a typical Snowplow pipeline with data flowing left
 - The enriched events are sent to real-time streams (Kinesis on AWS, PubSub on GCP). At this point, data can be [**forwarded**](/docs/destinations/forwarding-events/index.md) to other applications to power real-time use cases.
 - [**Loaders**](/docs/destinations/warehouses-lakes/index.md) then load your data off the real-time streams into the various destinations you have set up for your pipeline. Typically these include a data warehouse (Redshift, Snowflake, BigQuery, Databricks) or a data lake (S3, GCS, ADLS / OneLake). Note that you can also connect a data warehouse to a data lake (e.g. Synapse Analytics + ADLS) instead of loading to a warehouse directly.
 - Your event-level data is now in your chosen destinations. From here we recommend this raw data is [**modelled**](/docs/modeling-your-data/index.md) into smaller, cleaner tables that are easier to perform analysis on. At this stage it can also be joined with other data sets. We have out-of-the-box data models for web and mobile to help you get started.
+
+:::tip[Ask your AI assistant]
+Have questions about how this applies to your own pipeline? Ask an AI assistant connected to the Snowplow MCP server. It can read your Snowplow configuration, such as pipelines, enrichments, and data structures, and look up these docs to answer you. For example: "Which enrichments are enabled on my production pipeline, and what do they add to my events?"
+
+<AiAssistantInstall />
+:::
 
 ## Why do we use this architecture?
 

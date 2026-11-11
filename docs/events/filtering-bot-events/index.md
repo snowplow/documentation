@@ -5,6 +5,7 @@ sidebar_label: "Filtering bot events"
 description: "Detect and filter out bot traffic to keep your analytics accurate and your data warehouse or lake clean."
 keywords: ["bot filtering", "bot detection", "spam events", "event filtering", "IAB", "YAUAA"]
 date: "2026-03-24"
+content_type: how-to
 ---
 
 Bot traffic — crawlers, scrapers, and automated agents — can make up a significant share of the events flowing through your pipeline.

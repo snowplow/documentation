@@ -5,6 +5,7 @@ description: "Migrate from JavaScript tracker v2 to v3 with the new tracking API
 keywords: ["v2 to v3 migration", "tracker upgrade", "breaking changes", "api changes"]
 date: "2021-03-24"
 sidebar_position: 1200
+content_type: how-to
 ---
 
 A number of features which have been deprecated for a number of v2.x releases have been removed in v3 and a new API for `track` methods has been introduced which is a major breaking change.

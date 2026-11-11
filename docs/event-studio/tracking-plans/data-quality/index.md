@@ -5,6 +5,7 @@ sidebar_position: 4
 description: "See how many events matched each tracking plan and event specification over the last 30 days, and how many of them were valid or inferred, had violations, or failed."
 keywords: ["tracking plan data quality", "event specification validation", "event volume", "events with violations", "failed events", "tracking summary", "Console"]
 date: "2026-09-17"
+content_type: how-to
 ---
 
 Console shows the results of [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) and [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) next to your tracking plans and event specifications. Every event volume figure is split into valid events, inferred events, events with violations, and failed events. You can see how well an implementation matches its specification without querying your warehouse.

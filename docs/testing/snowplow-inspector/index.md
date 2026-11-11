@@ -4,14 +4,13 @@ sidebar_position: 1
 sidebar_label: "Snowplow Inspector"
 description: "Validate and debug Snowplow web tracking using the Inspector browser extension. View events, attributes, and interventions in real-time with schema validation support for Chrome, Edge, and Firefox."
 keywords: ["snowplow inspector", "browser extension", "event debugging", "web tracking validation", "chrome extension"]
+content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow Inspector is included with all Snowplow platforms."
+  note="Snowplow Inspector is included with all Snowplow platforms."
 />
 ```
 

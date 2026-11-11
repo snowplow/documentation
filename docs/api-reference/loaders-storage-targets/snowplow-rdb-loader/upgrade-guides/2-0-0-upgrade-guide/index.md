@@ -5,6 +5,7 @@ date: "2021-12-01"
 sidebar_position: -10
 description: "Upgrade RDB Loader to 2.0.0 with separate configs for Loader and Shredder, SNS messaging, and split configuration architecture."
 keywords: ["rdb loader 2.0 upgrade", "sns messaging", "split configs", "shredder config", "loader config"]
+content_type: how-to
 ---
 
 RDB Loader 2.0.0 brings ability to send shredding complete messages from Shredder to SNS topic and splits configs of RDB Loader and RDB Shredder. From now on, Loader and Shredder will not use same config.
@@ -26,11 +27,11 @@ RDB Loader and RDB Stream Shredder distributed as Docker images, published on Do
 
 Shredding complete message can be sent to SNS topic with following queue configuration:
 
-```json
-"queue": {
-  "type": "sns",
-  "topicArn": "arn:aws:sns:eu-central-1:123456789:test-sns-topic",
-  "region": "eu-central-1"
+```hocon
+queue: {
+  type: sns
+  topicArn: "arn:aws:sns:eu-central-1:123456789:test-sns-topic"
+  region: eu-central-1
 }
 ```
 

@@ -5,6 +5,7 @@ date: "2022-03-24"
 sidebar_position: 50
 description: "Configure network connections, event batching, buffering, and retry logic for the Java tracker to optimize event delivery to your collector."
 keywords: ["java tracker configuration", "event batching", "network configuration"]
+content_type: how-to
 ---
 
 A user interacts with your app: an event is generated and tracked using `Tracker.track()`. But the event must be sent to your event collector, to enter your pipeline, before it has any value.

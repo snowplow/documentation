@@ -4,6 +4,7 @@ sidebar_label: "Legacy packages"
 sidebar_position: 9999
 description: "Configuration for legacy Snowplow dbt packages including Web, Mobile, and Fractribution that have been superseded by newer packages."
 keywords: ["legacy dbt packages", "deprecated dbt packages", "web dbt legacy", "mobile dbt legacy"]
+content_type: landing
 ---
 
 :::note

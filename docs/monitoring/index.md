@@ -5,22 +5,30 @@ sidebar_position: 8.6
 sidebar_label: "Monitoring"
 description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards for Snowflake, BigQuery, and Databricks, and Console API access."
 keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity", "Databricks data quality"]
+content_type: concept
 ---
 
 ```mdx-code-block
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
 [Failed events](/docs/fundamentals/failed-events/index.md) are events the pipeline had some problem processing. Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems.
 
-We provide tooling for monitoring, [loading](/docs/monitoring/exploring-failed-events/index.md), and [recovering](/docs/monitoring/recovering-failed-events/index.md) failed events.
+We provide tooling for monitoring, [loading](/docs/monitoring/exploring-failed-events/index.md), and [recovering](/docs/monitoring/recovering-failed-events/index.md) failed events. The [failed events hub](/docs/failed-events/index.md) lists every page about failed events, from monitoring and alerts to recovery.
 
 Snowplow offers two different ways to monitor failed events in [Snowplow Console](https://console.snowplowanalytics.com):
 - The data quality dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging easier
 - The default view
 
 You can also use the Console API to monitor failed events.
+
+:::tip[Investigate failed events with your AI assistant]
+An AI assistant connected to the Snowplow MCP server can investigate your failed events, explain why they failed, point you toward a fix, and manage your data quality alerts. For example: "Show me the failed events from the last 24 hours, grouped by error, and tell me what's causing them."
+
+<AiAssistantInstall />
+:::
 
 ## Monitoring dashboard comparison
 

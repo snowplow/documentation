@@ -4,6 +4,7 @@ sidebar_label: "Configuring enrichments"
 sidebar_position: 3
 description: "Add enrichments to Snowplow Micro including YAUAA, IP Lookup, and JavaScript enrichment. Mount enrichment configuration files to test pipeline behavior locally."
 keywords: ["enrichments", "yauaa", "ip lookup enrichment", "javascript enrichment", "enrichment testing"]
+content_type: how-to
 ---
 
 ```mdx-code-block

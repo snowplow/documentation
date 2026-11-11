@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 1
 description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, and identity resolution."
 keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges"]
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -14,7 +15,7 @@ Identities is based on several core concepts.
 * **A Snowplow ID** is a persistent, immutable identifier for a collection of linked identifiers that represent a single user
 * **[Merges](/docs/identities/concepts/merges/index.md)** occur when identifiers link two previously separate Snowplow IDs together
 * **[Unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)** prevent incorrect merges when users share devices
-* **[Cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md)** resolves identity across sites with different cookie domains
+* **[Cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking)** resolves identity across sites with different cookie domains
 
 ## Identifiers
 
@@ -104,7 +105,9 @@ In normal operation, priority doesn't affect how Snowplow IDs are linked. All id
 
 ## Identities and Signals
 
-Identities is designed to work alongside [Snowplow Signals](/docs/signals/introduction/index.md). To use the Snowplow ID as a unified identifier in Signals, set an attribute group's key to `snowplow_id` and map it to the `snowplow_id` property in the identity entity.
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/introduction/index.md). Signals can calculate attributes per Snowplow ID, using its built-in `snowplow_id` attribute key, and your application can read them by up to three lookup identifiers you choose, such as a `domain_userid` or a `user_id`.
+
+To set it up, and to see the use cases it supports, such as anonymous to known and shared devices, see [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
 
 ## Data types
 
@@ -120,7 +123,7 @@ When Identities resolves identity for an event, it attaches an identity [entity]
     snowplow_id: "sp_abcdefabcdefabcdefabcdefab",
     created_at: "2024-01-15T10:30:00.000Z"
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity", "format": "jsonschema", "version": "2-0-1" }, "description": "Identity entity that is enriched onto events by Snowplow Identities", "properties": { "created_at": { "type": "string", "format": "date-time" }, "decision_reasons": { "description": "Why the service made this decision. Absent when there is nothing to report.", "type": "array", "items": { "type": "string", "maxLength": 128 } }, "snowplow_id": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplow_id", "created_at"], "additionalProperties": false }} />
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity", "format": "jsonschema", "version": "2-0-0" }, "description": "Identity entity that is enriched onto events by Snowplow Identities", "properties": { "created_at": { "type": "string", "format": "date-time" }, "snowplow_id": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplow_id", "created_at"], "additionalProperties": false }} />
 
 ### Merge events
 

@@ -7,14 +7,13 @@ description: "Design and implement behavioral data tracking with schema manageme
 keywords: ["tracking plan studio", "tracking design", "schema management", "event specifications", "data governance"]
 sidebar_custom_props:
   space_above: true
+content_type: landing
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Event Studio is a paid addon for Snowplow CDI."
+  note="Event Studio is a paid addon for Snowplow CDI."
 />
 ```
 
@@ -26,6 +25,10 @@ Event Studio is a comprehensive set of tools for designing and implementing beha
 * **Tracking plans**: document and manage your tracking implementation
 
 The Event Studio UI is included in [Snowplow Console](https://console.snowplowanalytics.com).
+
+:::tip[Use your AI assistant]
+You can also work with Event Studio through an AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+:::
 
 These tools help organizations move from ad-hoc tracking implementations to a structured, governed, collaborative approach.
 

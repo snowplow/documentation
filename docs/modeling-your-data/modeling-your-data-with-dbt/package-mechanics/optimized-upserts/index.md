@@ -4,6 +4,7 @@ sidebar_label: "Snowplow optimized materialization"
 description: "Details on our optimized version of the dbt incremental materialization and how to enable it."
 keywords: ["optimized upserts", "incremental materialization", "dbt optimization", "upsert performance"]
 sidebar_position: 80
+content_type: concept
 ---
 
 :::tip

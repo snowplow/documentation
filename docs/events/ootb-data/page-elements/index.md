@@ -5,6 +5,7 @@ sidebar_position: 140
 description: "Track page element visibility, button clicks, and form interactions to understand how users engage with specific components on your web pages."
 keywords: ["element tracking", "button clicks", "form tracking", "visibility tracking", "page elements"]
 date: "2026-01-15"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

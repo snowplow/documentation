@@ -4,6 +4,7 @@ sidebar_label: "Activity (page pings)"
 sidebar_position: 30
 description: "Monitor user engagement over time with page ping events that track scrolling, mouse movement, and tab focus on web pages."
 keywords: ["page pings", "activity tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

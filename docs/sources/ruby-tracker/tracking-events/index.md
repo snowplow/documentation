@@ -5,6 +5,7 @@ date: "2021-10-15"
 sidebar_position: 10
 description: "Track self-describing events, structured events, page views, screen views, and ecommerce transactions with the Ruby tracker SDK."
 keywords: ["ruby event tracking", "self-describing events", "ecommerce tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

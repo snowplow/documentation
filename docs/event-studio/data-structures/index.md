@@ -5,6 +5,7 @@ date: "2024-12-04"
 sidebar_position: 40
 description: "Create, manage, and update data structures (schemas) using Snowplow Console UI, Data Structures API, Snowplow CLI, or Iglu for community users."
 keywords: ["data structures", "schemas", "JSON schemas", "schema management"]
+content_type: how-to
 ---
 
 
@@ -12,6 +13,7 @@ This section explains how to create, manage, and update [data structures](/docs/
 * Snowplow Console UI
 * [Data structures API](/docs/event-studio/programmatic-management/data-structures-api/index.md)
 * [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md)
+* An AI assistant connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), or the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console: describe the data you need, and the assistant creates the data structure for you. It can also search [Iglu Central](https://github.com/snowplow/iglu-central) for an existing public schema you can reuse.
 * For Community users: [Iglu](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)
 
 ## Create a data structure

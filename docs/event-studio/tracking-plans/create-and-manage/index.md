@@ -5,9 +5,18 @@ date: "2024-01-18"
 sidebar_position: 1
 description: "Create and manage tracking plans in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
 keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
+content_type: how-to
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 To create a new tracking plan, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" button.
+
+:::tip[Create tracking plans with your AI assistant]
+As an alternative to the steps on this page, you can ask an AI assistant connected to the Snowplow MCP server to create and update tracking plans for you, including their event specifications and data structures. For example: "Create a tracking plan for our checkout flow, with an event specification for each step and a product entity."
+
+<AiAssistantInstall />
+:::
 
 ![Console with the Data collection section of the sidebar expanded and Tracking plans selected, showing five tracking plans with their domain, status, event spec count, event volume with a colored bar, and last modified date, with a "+ Create tracking plan" button in the top right](images/create-tracking-plan-v2.png)
 

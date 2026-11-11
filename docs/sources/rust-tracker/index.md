@@ -5,13 +5,14 @@ date: "2022-10-24"
 sidebar_position: 225
 description: "Add event tracking to Rust applications using the Snowplow Rust tracker SDK with async event sending and retry policies."
 keywords: ["rust tracker", "rust analytics", "crates.io package"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Early Release"></Badges>
+<TrackerTier id="rust" />
 ```
+
+<TrackerFeatures id="rust" />
 
 The Snowplow Rust Tracker allows you to add analytics to your Rust apps.
 

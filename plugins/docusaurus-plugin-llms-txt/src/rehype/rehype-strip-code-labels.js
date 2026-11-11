@@ -1,10 +1,14 @@
 import { visit } from 'unist-util-visit'
+import { toString } from 'hast-util-to-string'
 import { getClassString } from './utils.js'
 
 /**
  * Clean up code blocks:
  * 1. Strip the language label header div (badge + buttons) above code blocks
  * 2. Ensure the language class is on <code> so rehype-remark produces fenced blocks
+ * 3. Replace the Prism line markup with the code's plain text. Each line is a
+ *    block <div class="token-line"> that also ends in <br>, so converting it
+ *    as-is puts a blank line after every line of code
  *
  * HTML structure:
  * <div class="language-bash codeBlockContainer_xxx theme-code-block">
@@ -53,11 +57,27 @@ export default function rehypeStripCodeLabels() {
         }
       }
 
+      for (const child of pre.children || []) {
+        if (child.type === 'element' && child.tagName === 'code') flattenLines(child)
+      }
+
       // Replace the container with just the <pre>
       parent.children.splice(index, 1, pre)
       return index
     })
   }
+}
+
+/**
+ * Turn <code><div class="token-line">…<br></div>…</code> into one text node,
+ * one source line per line
+ */
+function flattenLines(code) {
+  const lines = (code.children || []).filter(
+    (c) => c.type === 'element' && getClassString(c).includes('token-line')
+  )
+  if (lines.length === 0) return
+  code.children = [{ type: 'text', value: lines.map((l) => toString(l)).join('\n') }]
 }
 
 function extractLanguage(className) {

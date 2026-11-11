@@ -12,6 +12,7 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 import { getAppIdError, getCollectorEndpointError } from './utils'
 import { sampleTrackingCode } from './sampleTrackingCode'
 import styles from './styles.module.css'
+import { withMuiScope } from '@site/src/components/MuiScope'
 
 type EventComponentNotification = {
   collectorUrl: string,
@@ -51,7 +52,7 @@ const SnowplowSandbox = (props) => (
   />
 )
 
-export default function EventComponent() {
+function EventComponent() {
   const [state, setState] = React.useState<EventComponentState>({
     collectorUrl: '',
     appId: 'test',
@@ -188,3 +189,5 @@ export default function EventComponent() {
     </>
   )
 }
+
+export default withMuiScope(EventComponent)

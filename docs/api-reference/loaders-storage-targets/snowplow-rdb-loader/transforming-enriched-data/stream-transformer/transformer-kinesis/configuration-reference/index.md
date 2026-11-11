@@ -5,6 +5,7 @@ date: "2022-10-13"
 sidebar_position: 12
 description: "Configure Transformer Kinesis with stream settings, S3 output, windowing, and monitoring for AWS real-time transformation."
 keywords: ["transformer kinesis config", "kinesis transformer settings", "stream transformer config", "aws transformer configuration"]
+content_type: reference
 ---
 
 ```mdx-code-block

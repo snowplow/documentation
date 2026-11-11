@@ -1,5 +1,6 @@
 ---
 title: "Forms"
+sidebar_label: "Forms"
 sidebar_position: 60
 description: "Documentation for Forms in the web tracker."
 keywords: ["tracker", "configuration"]

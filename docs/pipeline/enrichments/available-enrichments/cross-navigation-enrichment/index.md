@@ -4,6 +4,7 @@ sidebar_position: 5
 sidebar_label: Cross-navigation
 description: "Parse cross-navigation data from query string parameters to track user journeys across domains and platforms."
 keywords: ["cross-navigation", "cross-domain tracking", "user journey", "cross domain"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

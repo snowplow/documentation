@@ -5,13 +5,13 @@ sidebar_label: "Agent traffic"
 description: "Measure how AI agents consume your content and how many users their platforms refer back, using CDN trackers, agent classification, and the Agent Analytics dbt package."
 keywords: ["agent intelligence", "AI agent traffic", "AI crawler analytics", "agent analytics", "answer engine optimization", "AEO"]
 date: "2026-09-29"
+content_type: concept
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="These features are part of the paid Agent Intelligence package for Snowplow CDI."
+  note="These features are part of the paid Agent Intelligence package for Snowplow CDI."
 />
 
 AI platforms such as ChatGPT, Claude, and Perplexity send agents to your website to train models, index content for AI search, and fetch pages on behalf of their users. Traditional analytics doesn't see this traffic, because most agents don't execute JavaScript and so never trigger client-side tracking.

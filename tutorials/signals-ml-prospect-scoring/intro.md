@@ -8,6 +8,10 @@ keywords: ["signals machine learning", "prospect scoring system"]
 
 <NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
 
+:::tip[Build training datasets with the dataset builder]
+To build point-in-time correct training data from Signals attributes with the dataset builder, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).
+:::
+
 Welcome to the [Snowplow Signals](/docs/signals/introduction/) real-time prospect scoring tutorial.
 
 Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. It works with both in-session stream data and historical warehouse data.

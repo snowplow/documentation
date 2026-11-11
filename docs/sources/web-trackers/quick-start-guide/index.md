@@ -16,6 +16,8 @@ import TabItem from '@theme/TabItem';
 
 Follow these instructions to quickly implement a Snowplow web tracker with default configuration, and track a page view.
 
+Using Signals? See [Send events to Signals](/docs/signals/data-sources/events/index.md) and the [Signals browser plugin](/docs/signals/applications/subscribe/index.md).
+
 :::tip[Use your AI assistant]
 If you use Snowplow CDI, you can ask a coding agent connected to the Snowplow MCP server to follow these steps for you, and to check that the page view arrives in your pipeline. For example: "Add the Snowplow web tracker to this app with default configuration, track a page view, and confirm it reaches my development pipeline."
 

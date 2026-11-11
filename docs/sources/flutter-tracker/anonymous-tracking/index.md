@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Anonymous tracking is a feature that enables anonymization of various user and session identifiers, to support user privacy when consent for tracking the identifiers isn't given.
 
-This table shows the [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) that can be anonymized on web and mobile:
+This table shows the [user and session identifiers](/docs/events/identifiers/index.md) that can be anonymized on web and mobile:
 
 | Identifier          | Location in event        | Tracked on web                              | Tracked on mobile  |
 | ------------------- | ------------------------ | ------------------------------------------- | ------------------ |

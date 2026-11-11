@@ -11,8 +11,6 @@ content_type: concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<TierBadge tier="actively-maintained" />
-
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we refer to as source applications.
 
 :::tip

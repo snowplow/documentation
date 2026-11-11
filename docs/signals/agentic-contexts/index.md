@@ -5,6 +5,7 @@ sidebar_label: "Define agentic contexts"
 description: "Configure agentic contexts in Snowplow Signals using the Console or Python SDK to capture a user's recent session activity and ground your agents in real-time behavior."
 keywords: ["agentic context", "event log", "llm context", "prompt", "session activity", "python sdk"]
 content_type: how-to
+pagination_prev: signals/ml-training-datasets/index
 ---
 
 ```mdx-code-block
@@ -14,11 +15,17 @@ import TabItem from '@theme/TabItem';
 
 An agentic context is a live, rolling record of a user's recent activity that you can hand to an agent to ground it in what the user is doing right now. You choose which events to capture and which of their details to keep, attach a written prompt for the agent, and read the result as JSON or as a plain-language narrative.
 
+An agentic context tracks a single user's activity within their current session, scoped to the `domain_sessionid` attribute key. Following a user across sessions is on the roadmap, but not available yet. For context across sessions, or about a logged-in user, use an attribute group keyed on `user_id` or `domain_userid`.
+
+## Before you begin
+
+Events must reach Signals: see [Send events to Signals](/docs/signals/data-sources/events/index.md). You define agentic contexts in Console or with the Python SDK, then [retrieve them](/docs/signals/applications/agentic-contexts/index.md) with the Python SDK, the Node.js SDK, or the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).
+
+## Define an agentic context
+
 There are two methods for defining agentic contexts in Signals:
 * Snowplow Console UI
 * Signals Python SDK
-
-Once defined, [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) in your application.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -49,6 +56,8 @@ from snowplow_signals import (
 
 my_agentic_context = EventLog(
     name="my_agentic_context",
+    description="Pages the user viewed in this session",
+    prompt="You are a support assistant. Use the pages the user viewed to understand what they're looking for.",
     attribute_key=domain_sessionid,
     max_events=50,
     max_age_seconds=1800,
@@ -60,6 +69,9 @@ my_agentic_context = EventLog(
                 version="1-0-0",
             ),
             properties=[
+                # event_name and page_urlpath fill the narrative's event and URL columns
+                EventLogAtomicProperty(name="event_name"),
+                EventLogAtomicProperty(name="page_urlpath"),
                 EventLogAtomicProperty(name="page_url"),
                 EventLogEventProperty(
                     vendor="com.acme", name="my_field", major_version=1, path="$.foo"
@@ -70,7 +82,7 @@ my_agentic_context = EventLog(
 )
 ```
 
-The table below lists the main fields of an agentic context.
+This table lists the main fields of an agentic context.
 
 | Field             | Description                                                     | Required? |
 | ----------------- | ---------------------------------------------------------------- | --------- |
@@ -86,7 +98,7 @@ The table below lists the main fields of an agentic context.
 </TabItem>
 </Tabs>
 
-## Selecting events
+### Select events
 
 Choose which events to capture in the agentic context, and which details to keep from each one. This lets you shape the context around a purpose, so your system or an agent reads only what's relevant to its job. You can select up to 20 events, and for each event project up to 50 properties. Properties can come from the [atomic](/docs/fundamentals/canonical-event/index.md) event, the event schema, or entities attached to the event.
 
@@ -125,7 +137,7 @@ All three accept an optional `output_name` to set the property's key in the resu
 </TabItem>
 </Tabs>
 
-## Limits
+### Limits
 
 An agentic context is a rolling window of recent activity, not a full history. It keeps the most recent events, up to the limits you set:
 * A maximum number of events (up to 100)
@@ -133,15 +145,11 @@ An agentic context is a rolling window of recent activity, not a full history. I
 
 Older activity rolls off once either limit is reached.
 
-:::note[Session scope]
-An agentic context tracks a single user's activity within their current session, scoped to the `domain_sessionid` attribute key. Following a user across sessions is on the roadmap, but not available yet.
-:::
-
-## Prompt
+### Prompt
 
 Each agentic context carries a free-text prompt: instructions handed to the agent alongside the captured activity. Use it to tell the agent what job it's doing and what to do with this specific data, for example its role, what it should conclude from the activity, or what action to take next. The prompt has no effect on which events are captured. It only shapes how the agent interprets and acts on them. Edit this text and re-publish to refine that interpretation without changing the underlying data or how the agentic context is consumed.
 
-## Publishing an agentic context
+## Publish an agentic context
 
 Every change you make starts as a draft. Your currently published agentic context stays live while you edit, with no danger of half-finished changes going live. Publishing takes effect within a few seconds. If you change your mind, discard the draft and the live version is unaffected.
 
@@ -168,7 +176,7 @@ sp_signals.publish([my_agentic_context])
 </TabItem>
 </Tabs>
 
-## Deleting an agentic context
+## Delete an agentic context
 
 You can't delete an agentic context while it's published. Unpublish it first, then delete it. This prevents accidentally breaking any live system depending on an agentic context.
 
@@ -194,9 +202,3 @@ sp_signals.delete([my_agentic_context])
 </Tabs>
 
 For worked examples of what an application does with an agentic context, see [customer-aware AI agents](https://signals.snowplow.io/use-cases/customer-aware-agents?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

@@ -136,4 +136,4 @@ You'll need:
 - Python 3.11 or later
 - The [Snowplow CLI](/docs/api-reference/snowplow-cli/)
 - Git and `openssl`
-- Optional: a BigQuery destination for your Snowplow pipeline. Snowplow Console doesn't show the event trace for a conversation, so you need BigQuery to view the events the storefront and agent send, and to run the queries on the [analytics page](/tutorials/signals-google-cx-agent-studio/agentic-analytics). The free trial includes one warehouse or lake destination.
+- Optional: a data warehouse destination for your Snowplow pipeline. Snowplow Console doesn't show the event trace for a conversation, so you need a warehouse to view the events the storefront and agent send. This accelerator uses BigQuery, but any [warehouse that Snowplow supports](/docs/destinations/warehouses-lakes/), such as Snowflake, Databricks, or Redshift, works. The companion repository's queries are written in BigQuery SQL, so for another warehouse you'd need to edit them yourself. The free trial includes one warehouse or lake destination.

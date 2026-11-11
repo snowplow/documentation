@@ -19,6 +19,8 @@ The repository includes an interactive script, `scripts/setup-trial-org.sh`, tha
 
 This step is optional. The personalization works without it, but Snowplow Console doesn't show the event trace for a conversation. To view the events the storefront and agent send, connect a warehouse. This accelerator uses BigQuery: the [analytics page](/tutorials/signals-google-cx-agent-studio/agentic-analytics) queries the agent's events alongside the shopper's browsing events.
 
+You can use any [warehouse that Snowplow supports](/docs/destinations/warehouses-lakes/) instead, such as Snowflake, Databricks, or Redshift. The queries in the companion repository are written in BigQuery SQL, so you'd need to edit them for your warehouse.
+
 In Console, add a BigQuery destination and follow the setup steps it shows. See [load Snowplow data to BigQuery](/docs/destinations/warehouses-lakes/bigquery/) for the Google Cloud project, service account, and permissions you'll need. The setup script doesn't do this step for you.
 
 If you plan to use the analytics page, connect the destination now, so that the events from your testing in the rest of the accelerator load into BigQuery.

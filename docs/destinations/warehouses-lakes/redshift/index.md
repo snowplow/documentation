@@ -12,6 +12,8 @@ import SetupInstructions from '../_setup-instructions.mdx';
 import HowLoadingWorks from '../_how-loading-works.mdx';
 ```
 
+<IntegrationBadges id="redshift" />
+
 :::info[Cloud availability]
 
 The Redshift integration is available for Snowplow pipelines running on **AWS** only.

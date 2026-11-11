@@ -13,6 +13,8 @@ import EventForwardingSchemaTable from '@site/src/components/EventForwardingSche
 import bloomreachSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/bloomreach.json';
 ```
 
+<IntegrationBadges id="forwarder-bloomreach" />
+
 Send Snowplow events to Bloomreach Engagement for real-time customer analytics, segmentation, and personalization using the [Batch Commands API](https://documentation.bloomreach.com/engagement/reference/batch-commands-2).
 
 ## Prerequisites

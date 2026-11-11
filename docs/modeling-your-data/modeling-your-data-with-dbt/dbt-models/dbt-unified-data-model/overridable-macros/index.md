@@ -1,7 +1,7 @@
 ---
 title: "How to override macros in the Unified Digital package"
 sidebar_label: "Overridable macros"
-sidebar_position: 100
+sidebar_position: 100.5
 description: "Override macros in the Unified Digital dbt package to customize channel classification, conversion definitions, and event processing."
 keywords: ["override macros", "custom macros", "macro customization", "channel classification", "dbt dispatch"]
 content_type: reference

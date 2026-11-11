@@ -11,9 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-:::note[Availability]
-This enrichment is available since version 6.9.0 of Enrich.
-:::
+<AppliesTo feature="asn-lookup-enrichment" />
 
 This enrichment checks the autonomous system number (ASN) attached to an event against a configurable list of ASNs associated with bots, cloud providers, or abusive networks. When a match is found, the enrichment sets `likelyBot` to `true` on the ASN [entity](/docs/fundamentals/entities/index.md) added by the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md).
 

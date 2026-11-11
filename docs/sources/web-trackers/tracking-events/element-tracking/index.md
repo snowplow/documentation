@@ -1,7 +1,7 @@
 ---
 title: "Track page element visibility and lifecycle on web"
 sidebar_label: "Element visibility tracking"
-sidebar_position: 55
+sidebar_position: 56
 description: "Declaratively track page element visibility and lifecycle events as they are created, destroyed, scrolled into view, or scrolled out of view with configurable rules."
 keywords: ["element tracking", "visibility", "impression tracking"]
 content_type: how-to

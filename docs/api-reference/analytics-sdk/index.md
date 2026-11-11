@@ -9,11 +9,9 @@ content_type: landing
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Analytics SDKs are included with all Snowplow platforms."
+  note="Analytics SDKs are included with all Snowplow platforms."
 />
 ```
 

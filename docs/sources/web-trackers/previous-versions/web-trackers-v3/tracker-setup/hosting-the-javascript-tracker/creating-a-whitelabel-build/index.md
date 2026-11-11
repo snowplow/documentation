@@ -7,11 +7,6 @@ description: "Documentation for Creating a white-label build in the web tracker.
 keywords: ["tracker", "configuration"]
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Snowplow Tracker JavaScript Release"></Badges>
-```
 
 
 Every time the snowplow tracker loads on the page, a queue-like object `GlobalSnowplowNamespace` is initialised on the global window scope. This object is then used to queue commands before the tracker snippet (sp.js) has fully loaded.

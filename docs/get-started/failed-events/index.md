@@ -1,5 +1,5 @@
 ---
-title: "Inspecting your first failed events"
+title: "Inspect your first failed events"
 sidebar_position: 9
 sidebar_label: "Inspect failed events"
 description: "How validation and failed events work"
@@ -7,9 +7,11 @@ keywords: ["failed events", "validation", "schema validation", "bad data"]
 content_type: tutorial
 ---
 
+## See why an event failed
+
 If you have defined some custom events in the previous section, we recommend playing around with sending invalid data to see what happens.
 
-For example, if your custom event has a numeric field, try sending a string. It will not reach your warehouse! Instead, a [failed event](/docs/fundamentals/failed-events/index.md) will be generated.
+For example, if your custom event has a numeric field, try sending a string. It will not reach your warehouse! Instead, a [failed event](/docs/fundamentals/failed-events/index.md) will be generated. The [failed events hub](/docs/failed-events/index.md) lists every page about failed events, from monitoring and alerts to recovery.
 
 :::tip
 
@@ -24,4 +26,7 @@ curl 'https://{{COLLECTOR_URL}}/com.snowplowanalytics.snowplow/tp2' \
 
 :::
 
-Follow the [documentation](/docs/monitoring/exploring-failed-events/index.md) to explore your failed events.
+To find the event you sent, and why it failed:
+
+* [See why events failed in Console](/docs/monitoring/index.md#default-view)
+* [Look up the error type](/docs/api-reference/failed-events/index.md)

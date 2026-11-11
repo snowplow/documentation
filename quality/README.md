@@ -19,4 +19,4 @@ yarn build && VR_DIR=/tmp/baselines/before yarn qa:visual
 yarn playwright show-report quality/playwright-report
 ```
 
-Third-party requests (consent banner, chat, analytics) are blocked during the checks so results are stable. None of these checks are part of `yarn build`. The `Site quality checks` GitHub workflow runs them on pull requests without blocking merges.
+Third-party requests (consent banner, chat, analytics) are blocked during the checks so results are stable. None of these checks are part of `yarn build`. The `Site quality checks` GitHub workflow runs them on pull requests. Stylelint failures block merges; the accessibility and visual regression checks report problems without blocking.

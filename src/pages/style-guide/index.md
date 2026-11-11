@@ -327,6 +327,18 @@ Here are two pieces of older content that only partially follow the style guide.
     | ---------------------------------------------- |
     | 🎉 Reduce your data loading costs by up to 80%. |
 
+### Writing for retrieval
+
+Search engines and AI agents often read one section of a page, or one chunk of its Markdown copy, without the rest of the page. Write each section so it makes sense on its own:
+
+- Don't point at other content with "above", "below", or "the following". Name the section or link to it instead.
+- Put the exact error string next to its fix, formatted as code, so a search for the message finds the fix.
+- Restate every diagram as numbered steps or a list in the text. The Markdown copy of the page keeps the diagram's alt text, but not its layout.
+- Repeat the subject of each section instead of starting with "it" or "this".
+- Use the `<AppliesTo>` component for version requirements, so the marker and the versions page come from the same list.
+
+See the [components page](/style-guide/components/) for the MDX components that help with this, such as `<Steps>` and `<ParamTable>`.
+
 ### Diagrams and images
 - Adding diagrams and images is encouraged
 - Diagrams and images should have white backgrounds
@@ -337,7 +349,7 @@ Here are two pieces of older content that only partially follow the style guide.
 
 ## Content types and page templates
 
-Every docs page has a `content_type` in its frontmatter. The type says what the page is for, and each type has a fixed shape, so readers learn where to look. Pick the type before you start writing, and follow its template.
+Every docs page has a `content_type` in its frontmatter. The type says what the page is for, and each type has a fixed shape, so readers learn where to look and search tools can filter by type. Pick the type before you start writing, and follow its template.
 
 Templates stay within the 3 to 5 H2 limit. Put the description, and when or why to use the feature, in the opening paragraphs before the first H2. Don't add a "Next steps" heading: end the page with a short paragraph of links instead.
 
@@ -348,11 +360,12 @@ Templates stay within the 3 to 5 H2 limit. Put the description, and when or why 
 | `tutorial`     | A guided example that builds something end to end            | What you'll build (with a time estimate) · Requirements · Steps · Clean up                                 |
 | `reference`    | Lookup material such as parameters, fields, and methods       | Parameters (generated table) · Example · Errors · Version applicability                                    |
 | `integration`  | Connecting a destination or third-party tool                  | Compatibility · Connect · Configure · Troubleshooting                                                       |
-| `sdk`          | A tracker or SDK landing page                                 | Feature support · Install and initialize · Track your first event                                          |
+| `sdk`          | A tracker or SDK landing page                                 | Feature support (row from the tracker matrix) · Install and initialize · Track your first event            |
 | `landing`      | Hubs and overviews that route readers to other pages          | A task table, then short groups of links                                                                   |
 
 Some rules that go with the templates:
 
+- Use `<Steps>` for the Steps section of how-to and tutorial pages, and `<ParamTable>` for reference parameters. See the [components page](/style-guide/components/).
 - Leave out Troubleshooting or Errors when there are no known errors. Don't write generic advice to fill the section.
 - Don't mix how-to and reference content on one page. Split it into a how-to page and a reference page that link to each other.
 

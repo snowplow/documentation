@@ -1,7 +1,10 @@
 // Rules that always apply, before trying to serve the page.
 const forcedRules = [
   ['/docs/signals/', '/docs/signals/introduction/', 301],
-  ['/docs/api-reference/', '/docs/api-reference/versions/', 301],
+  // The dbt Unified quickstart was a dead end, so it now points readers at
+  // the Unified Digital tutorial. The page stays as a `type: link` stub.
+  ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],
+  ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified.md', '/tutorials/unified-digital/setting-up-locally.md', 301],
 ];
 
 // Rules that only apply when the page is not found.

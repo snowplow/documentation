@@ -15,6 +15,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+<IntegrationBadges id="databricks" />
+
 :::info[Cloud availability]
 
 The Databricks integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.

@@ -8,12 +8,11 @@ content_type: reference
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>
+<VersionBadge component="dbtSnowplowWeb" />
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 

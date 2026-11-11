@@ -8,11 +8,10 @@ date: "2026-04-10"
 content_type: concept
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc','addon']}
-  helpContent="Snowplow Assistant is part of Event Studio, which is a paid addon for Snowplow CDI."
+  note="Snowplow Assistant is part of Event Studio, which is a paid addon for Snowplow CDI."
 />
 
 The Snowplow Assistant is an AI assistant embedded in [Snowplow Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.

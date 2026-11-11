@@ -1,7 +1,7 @@
 ---
 title: "Ecommerce tracking (original)"
 sidebar_label: "Original"
-sidebar_position: 70
+sidebar_position: 71
 description: "Documentation for tracking Ecommerce  (original) with the web tracker."
 keywords: ["tracking", "events"]
 ---

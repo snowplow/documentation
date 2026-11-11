@@ -11,6 +11,8 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+<IntegrationBadges id="snowbridge-http" />
+
 :::note
 Version 4.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-4-X-X/index.md)
 :::
@@ -47,9 +49,7 @@ Configure the `oauth_client {}` block with `client_id`, `client_secret`, and `re
 
 ### JWT bearer flow
 
-:::note[Added in version 6.0.0]
-Snowbridge supports the JWT bearer flow from version 6.0.0 onwards.
-:::
+<AppliesTo feature="snowbridge-http-jwt" />
 
 Where the target expects a [JWT bearer assertion](https://datatracker.ietf.org/doc/html/rfc7523) instead of client credentials — as service accounts on Google APIs do, for example — configure the `oauth_jwt {}` block. Snowbridge signs a JWT with your private key and exchanges it for an access token at `token_url`.
 

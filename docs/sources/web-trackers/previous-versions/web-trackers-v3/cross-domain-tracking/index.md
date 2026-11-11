@@ -2,7 +2,7 @@
 title: "Cross-domain tracking"
 sidebar_label: "Cross-domain tracking"
 date: "2022-08-30"
-sidebar_position: 2850
+sidebar_position: 2855
 description: "Documentation for tracking Cross-domain with the web tracker."
 keywords: ["tracking", "events"]
 ---

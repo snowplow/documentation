@@ -8,11 +8,10 @@ date: "2026-09-28"
 content_type: reference
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="The Agent Analytics package is a part of the paid Agent Intelligence package for Snowplow CDI."
+  note="The Agent Analytics package is a part of the paid Agent Intelligence package for Snowplow CDI."
 />
 
 **The package source code can be found in the [snowplow-incubator/dbt-snowplow-agent-analytics](https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics/) repository, and the docs for the [model design here](https://snowplow-incubator.github.io/dbt-snowplow-agent-analytics/#!/overview/snowplow_agent_analytics).**

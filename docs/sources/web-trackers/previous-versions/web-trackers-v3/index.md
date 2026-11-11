@@ -8,9 +8,7 @@ keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.

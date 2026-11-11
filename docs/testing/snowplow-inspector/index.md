@@ -8,11 +8,9 @@ content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow Inspector is included with all Snowplow platforms."
+  note="Snowplow Inspector is included with all Snowplow platforms."
 />
 ```
 

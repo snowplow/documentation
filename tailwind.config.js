@@ -1,3 +1,5 @@
+const tokens = require('./src/design/tokens')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,45 +9,40 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
+      // Colors, radii, widths, and fonts come from src/design/tokens.js.
+      // Color utilities read the CSS variables that the design tokens plugin
+      // generates, so they switch with the color mode and support opacity
+      // modifiers such as bg-primary/10.
+      colors: Object.fromEntries(
+        [
+          'border', 'input', 'ring', 'background', 'foreground', 'surface',
+          'primary', 'primary-foreground', 'primary-soft',
+          'secondary', 'secondary-foreground',
+          'destructive', 'destructive-foreground',
+          'muted', 'muted-foreground',
+          'accent', 'accent-foreground',
+          'popover', 'popover-foreground',
+          'card', 'card-foreground',
+        ].map((name) => [name, `hsl(var(--${name}) / <alpha-value>)`])
+      ),
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: `${tokens.radius.sm}px`,
+        DEFAULT: `${tokens.radius.sm}px`,
+        md: `${tokens.radius.md}px`,
+        lg: `${tokens.radius.lg}px`,
+        xl: `${tokens.radius.xl}px`,
+      },
+      fontFamily: {
+        sans: tokens.font.sans.split(/,\s*/),
+        mono: tokens.font.mono.split(/,\s*/),
+      },
+      maxWidth: {
+        content: `${tokens.layout.content}px`,
+        wide: `${tokens.layout.wide}px`,
+      },
+      boxShadow: {
+        hover: 'var(--sp-shadow-hover)',
+        popover: 'var(--sp-shadow-popover)',
       },
       keyframes: {
         "accordion-down": {
@@ -86,51 +83,13 @@ module.exports = {
         "slide-in-from-bottom-full": "slide-in-from-bottom 0.15s ease-out",
         "slide-out-to-right-full": "slide-out-to-right 0.15s ease-in",
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            '--tw-prose-body': 'hsl(var(--muted-foreground))',
-            '--tw-prose-headings': 'hsl(var(--foreground))',
-            '--tw-prose-links': 'hsl(var(--primary))',
-            '--tw-prose-bold': 'hsl(var(--foreground))',
-            '--tw-prose-counters': 'hsl(var(--muted-foreground))',
-            '--tw-prose-bullets': 'hsl(var(--muted-foreground))',
-            '--tw-prose-hr': 'hsl(var(--border))',
-            '--tw-prose-kbd': 'hsl(var(--foreground))',
-            '--tw-prose-quotes': 'hsl(var(--foreground))',
-            '--tw-prose-quote-borders': 'hsl(var(--border))',
-            '--tw-prose-captions': 'hsl(var(--muted-foreground))',
-            '--tw-prose-code': 'hsl(var(--foreground))',
-            '--tw-prose-pre-code': 'hsl(var(--foreground))',
-            '--tw-prose-pre-bg': 'hsl(var(--prism-background-color))',
-            '--tw-prose-th-borders': 'hsl(var(--border))',
-            '--tw-prose-td-borders': 'hsl(var(--border))',
-            '--tw-prose-invert-body': 'hsl(var(--foreground))',
-            '--tw-prose-invert-headings': 'hsl(var(--foreground))',
-            '--tw-prose-invert-links': 'hsl(var(--primary))',
-            '--tw-prose-invert-bold': 'hsl(var(--foreground))',
-            '--tw-prose-invert-counters': 'hsl(var(--muted-foreground))',
-            '--tw-prose-invert-bullets': 'hsl(var(--muted-foreground))',
-            '--tw-prose-invert-hr': 'hsl(var(--border))',
-            '--tw-prose-invert-quotes': 'hsl(var(--foreground))',
-            '--tw-prose-invert-quote-borders': 'hsl(var(--border))',
-            '--tw-prose-invert-captions': 'hsl(var(--muted-foreground))',
-            '--tw-prose-invert-code': 'hsl(var(--foreground))',
-            '--tw-prose-invert-pre-code': 'hsl(var(--foreground))',
-            '--tw-prose-invert-th-borders': 'hsl(var(--border))',
-            '--tw-prose-invert-td-borders': 'hsl(var(--border))',
-          },
-        },
-      },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
   darkMode: ['class', '[data-theme="dark"]'],
-  // Important: This ensures Tailwind doesn't conflict with Docusaurus styles
-  important: true,
-  // This ensures Tailwind classes don't conflict with Docusaurus classes
+  // No `important`: Infima and the Docusaurus theme CSS sit in cascade layers,
+  // so unlayered utilities already win over them.
+  // Preflight is off so Tailwind does not reset the Docusaurus base styles
   corePlugins: {
     preflight: false,
   },

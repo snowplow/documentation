@@ -9,16 +9,15 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import {versions} from '@site/src/componentVersions';
 
 <BadgeGroup>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="React Native Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker React Native Release"></Badges>
+<TrackerTier id="react-native" />
+<VersionBadge component="javaScriptTracker" href="https://www.npmjs.com/package/@snowplow/react-native-tracker" />
 </BadgeGroup>
 ```
+
+<TrackerFeatures id="react-native" />
 
 The Snowplow React Native Tracker is purely implemented in JavaScript/TypeScript without the use of native iOS/Android modules. This enables it to support all these platforms and frameworks:
 

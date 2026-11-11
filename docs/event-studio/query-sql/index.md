@@ -1,7 +1,7 @@
 ---
 title: "Query your data"
 sidebar_label: "Query your data"
-sidebar_position: 44
+sidebar_position: 54
 description: "Use example SQL queries from Console to retrieve and analyze your event data in your data warehouse."
 keywords: ["SQL queries", "event data", "data warehouse", "querying events", "data analysis"]
 content_type: how-to

@@ -8,12 +8,11 @@ content_type: how-to
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 
@@ -249,7 +248,8 @@ You can use the below generator to generate the conversion events variable, make
 ```mdx-code-block
 import CodeBlock from '@theme/CodeBlock';
 import { useState } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme, lightTheme } from '@site/src/components/MuiTheme';
 import { useColorMode } from '@docusaurus/theme-common';
 import validator from '@rjsf/validator-ajv8';
 import Form from '@rjsf/mui';
@@ -308,18 +308,6 @@ export const printYamlVariables = (data) => {
     </>
   )
 };
-
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
 
 export const JsonSchemaGenerator = ({ output, children, schema }) => {
   const [formData, setFormData] = useState(null)

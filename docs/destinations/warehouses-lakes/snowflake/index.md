@@ -13,6 +13,8 @@ import HowLoadingWorks from '../_how-loading-works.mdx';
 import SingleTableFormat from '../_single-table-format.mdx';
 ```
 
+<IntegrationBadges id="snowflake" />
+
 :::info[Cloud availability]
 
 The Snowflake integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.

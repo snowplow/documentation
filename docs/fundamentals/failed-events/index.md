@@ -7,7 +7,7 @@ keywords: ["failed events", "validation errors", "enrichment failures", "bad dat
 content_type: concept
 ---
 
-_Failed events_ is an umbrella term for events that the pipeline had some problem processing.
+_Failed events_ is an umbrella term for events that the pipeline had some problem processing. The [failed events hub](/docs/failed-events/index.md) lists every page about failed events, from monitoring and alerts to recovery.
 
 These problems can arise at various stages:
 * Collection (e.g. invalid payload format)

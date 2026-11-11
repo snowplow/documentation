@@ -1,7 +1,7 @@
 ---
 title: "Privacy Sandbox"
 sidebar_label: "Privacy Sandbox"
-sidebar_position: 14500
+sidebar_position: 14510
 description: "Documentation for Privacy Sandbox in the web tracker."
 keywords: ["tracker", "configuration"]
 ---

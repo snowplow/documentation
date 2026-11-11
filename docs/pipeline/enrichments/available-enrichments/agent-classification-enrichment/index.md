@@ -11,16 +11,13 @@ content_type: reference
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="This enrichment is a part of the paid Agent Intelligence package for Snowplow CDI. For self-hosted pipelines, only the enrichment is available, but not the underlying dataset."
+  note="This enrichment is a part of the paid Agent Intelligence package for Snowplow CDI. For self-hosted pipelines, only the enrichment is available, but not the underlying dataset."
 />
 
-:::note[Availability]
-This enrichment is available since version 6.12.0 of Enrich.
-:::
+<AppliesTo feature="agent-classification-enrichment" />
 
 The agent classification enrichment identifies automated agents — AI crawlers, bots, and other non-human clients — by matching the agent name parsed by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) against a lookup of known agents. For each match, it adds an [entity](/docs/fundamentals/entities/index.md) to the event identifying the operator (e.g. `OpenAI`) and, where known, the agent's purpose (e.g. `AI_TRAINING`).
 

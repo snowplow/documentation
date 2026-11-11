@@ -8,6 +8,8 @@ keywords: ["Braze Tag", "GTM SS Braze", "marketing automation", "Track Users API
 content_type: integration
 ---
 
+<IntegrationBadges id="gtm-braze" />
+
 The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.braze.com/). This Tag works best with the [Snowplow Client](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md), but can also work with other GTM SS Clients such as GAv4.
 
 ## Template installation

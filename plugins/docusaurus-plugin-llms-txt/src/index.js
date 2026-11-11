@@ -7,6 +7,7 @@ import { generateIndex } from './generate-index.js'
 import { generateFull } from './generate-full.js'
 import { enrichDbtSchemas } from './enrich-dbt-schemas.js'
 import { buildOutdatedPaths, buildLinkRoutes } from './version-utils.js'
+import { buildSidebarMap, buildSidebarOutlines } from './product-indexes.js'
 import {
   attachSourceMetadata,
   buildTutorialMeta,
@@ -28,12 +29,20 @@ export default function pluginLlmsTxt(context, options) {
     contentSelectors = ['.theme-doc-markdown', 'article', 'main'],
     enableMarkdownFiles = true,
     enableLlmsFullTxt = true,
+    // Write instructions for AI agents at the top of llms.txt and llms-full.txt
+    agentInstructions = true,
   } = options
 
   return {
     name: 'docusaurus-plugin-llms-txt',
 
-    async postBuild({ outDir }) {
+    // Tell the theme which routes have a .md copy, so doc pages only link
+    // to Markdown files that exist
+    async contentLoaded({ actions }) {
+      actions.setGlobalData({ enableMarkdownFiles, excludeRoutes })
+    },
+
+    async postBuild({ outDir, plugins }) {
       const siteUrl = (
         context.siteConfig?.url || 'https://docs.snowplow.io'
       ).replace(/\/$/, '')
@@ -124,6 +133,12 @@ export default function pluginLlmsTxt(context, options) {
         siteDir: context.siteDir,
         outdatedPrefixes,
         tutorialMeta,
+        agentInstructions,
+        // Which sidebar each docs page is in, for the per-product indexes
+        sidebarMap: buildSidebarMap(plugins),
+        // Section headers and doc order of each sidebar, for indexes that
+        // follow the sidebar
+        sidebarOutlines: buildSidebarOutlines(plugins),
       })
 
       // Generate llms-full.txt
@@ -133,6 +148,8 @@ export default function pluginLlmsTxt(context, options) {
           siteDescription,
           siteUrl,
           outdatedPrefixes,
+          siteDir: context.siteDir,
+          agentInstructions,
         })
       }
 

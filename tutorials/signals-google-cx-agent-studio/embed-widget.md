@@ -36,15 +36,15 @@ The web widget doesn't serve your draft agent. It serves a published app version
 
 ## Create the web widget deployment
 
-On the agent, create a **Web Widget** deployment and configure it:
+On the agent, create a **Web Widget** channel. The console calls it a channel, while the API and its resource name call it a deployment. Configure the channel:
 
-- Turn on public access
-- Turn on origin checking, and add your storefront's exact origin, `https://<your-storefront-url>`, to the allowed origins
-- Turn reCAPTCHA off
+- In **Agent Version**, select the app version you just published
+- In the **Security** section, turn on **Public Access**
+- Turn on **Allow origins verification**, and add your storefront's exact origin, `https://<your-storefront-url>`, to **Allowed origins**
+- Turn **Recaptcha** off
 - Select the managed token broker
-- Pin the app version you just published
 
-The storefront uses the open-source [`ces-messenger`](https://github.com/GoogleCloudPlatform/ces-messenger) web component, which doesn't support reCAPTCHA. With reCAPTCHA on, every chat session fails with `400 INVALID_ARGUMENT: "Recaptcha token is missing."` For this demo, public access with origin checking is the protection level.
+The storefront uses the open-source [`ces-messenger`](https://github.com/GoogleCloudPlatform/ces-messenger) web component, which doesn't support reCAPTCHA. With reCAPTCHA on, every chat session fails with `400 INVALID_ARGUMENT: "Recaptcha token is missing."` For this demo, public access with origin verification is the protection level.
 
 Copy the deployment's full resource name. It has the format `projects/<project>/locations/<location>/apps/<app>/deployments/<deployment>`.
 

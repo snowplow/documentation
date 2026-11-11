@@ -39,7 +39,7 @@ The companion repository is a reference integration, and is deliberately simple.
 - Remove the unauthenticated `/api/signals/attributes` endpoint, which exists only for the storefront's debug panel and returns any session's attributes without authentication
 - Replace the single shared secret with a stronger authentication method that CX Agent Studio supports, such as a service agent ID token, and rotate credentials regularly
 - Host the tool endpoints separately from the storefront, so you can scale, secure, and deploy them independently
-- Review the chat widget's access settings, which use public access with origin checking and no reCAPTCHA
+- Review the chat widget's access settings, which use public access with origin verification and no reCAPTCHA
 - Decide whether to track message previews, using `NEXT_PUBLIC_WIDGET_MESSAGE_PREVIEWS_ENABLED`, based on your privacy requirements
 - Replace the demo catalog endpoint with your own product search
 

@@ -69,7 +69,7 @@ sed "s#https://your-storefront.example.com#https://<your-storefront-url>#" \
   agent/instructions.console.widgets.txt > /tmp/atelier-tools/instructions.txt
 ```
 
-Open the **Root Agent** node on the agent canvas, and paste the contents of your copy into its instructions field. Don't paste them into **Settings** > **Advanced**. That field sets the app-wide global instruction, which would apply the concierge persona to any agent you add to the app later.
+Open the **Root agent** node on the agent canvas, and paste the contents of your copy into its instructions field. Don't paste them into **Settings** > **Advanced**. That field sets the app-wide global instruction, which would apply the concierge persona to any agent you add to the app later.
 
 The instructions tell the agent to:
 

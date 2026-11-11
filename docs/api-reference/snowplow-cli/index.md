@@ -48,6 +48,20 @@ snowplow-cli --help
 
 ## Configure
 
+### Log in with your browser
+
+The quickest way to start is the `login` command:
+
+```bash
+snowplow-cli login
+```
+
+This signs you in to Snowplow Console in your browser and saves the login to `~/.config/snowplow/login.json`. No API key is created. Commands use the saved login when no API key is configured, with the organization you chose at login unless you set an organization ID. The login is refreshed automatically.
+
+[Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) shares the same login. If you have already run `snowtype login`, you don't need to log in again.
+
+Logging in needs a terminal and a browser. For CI and other automated environments, configure an API key with one of the methods below.
+
 ### Automated Setup
 
 The easiest way to configure Snowplow CLI is using the built-in `setup` command:

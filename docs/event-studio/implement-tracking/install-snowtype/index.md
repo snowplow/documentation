@@ -16,7 +16,7 @@ To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
-- A Console API key, or a Console account that can create one
+- A Console user account, or a Console API key
 
 ## Install Snowtype
 
@@ -58,23 +58,21 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. You can let Snowtype create one for you, or provide one yourself. If you do both, CLI flags and environment variables take precedence over the credentials saved by `setup`.
+Snowtype needs access to Console to read your event specifications and data structures. You can log in with your browser, or provide a Console API key. If you do both, the API key takes precedence.
 
-### Sign in with your browser
+### Log in with your browser
 
-Run the `setup` command to sign in to Console in your browser:
+Run the `login` command to sign in to Console in your browser:
 
 ```bash
-npx snowtype setup
+npx snowtype login
 ```
 
-Snowtype creates an API key for the organization you select and saves it to `~/.config/snowplow/snowplow.yml`. Your Console account needs permission to create API keys.
+Snowtype saves the login to `~/.config/snowplow/login.json` and refreshes it automatically. No API key is created.
 
-[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) reads and writes the same file. If you have already run `snowplow-cli setup`, Snowtype uses those credentials and you don't need to sign in again.
+[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) shares the same login. If you have already run `snowplow-cli login`, you don't need to log in again.
 
-:::note[For SSO-enabled Snowplow organizations]
-If SSO is enabled for your Snowplow organization, provide an API key instead.
-:::
+Logging in needs a terminal and a browser. For CI and other automated environments, provide an API key instead.
 
 ### Provide an API key
 

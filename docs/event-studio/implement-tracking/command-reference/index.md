@@ -33,6 +33,15 @@ These options work with any command.
 | `-s, --apiKeyId <string>` | Snowplow Console API key ID.       |
 | `-v, --verbose`           | Enable verbose logging.            |
 
+## `setup`
+
+Signs in to Console in your browser, creates an API key, and saves it to `~/.config/snowplow/snowplow.yml` for Snowtype and [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) to use. See [how to authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate).
+
+| Flag                     | Description                            |
+| ------------------------ | -------------------------------------- |
+| `--clientId <string>`    | Auth0 client ID for device sign-in.    |
+| `--auth0Domain <string>` | Auth0 domain for device sign-in.       |
+
 ## `init`
 
 Initializes Snowtype in a project by creating the configuration file.

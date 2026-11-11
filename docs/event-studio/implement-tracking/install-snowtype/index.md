@@ -16,7 +16,7 @@ To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
-- A Console API key
+- A Console API key, or a Console account that can create one
 
 ## Install Snowtype
 
@@ -58,7 +58,27 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
+Snowtype needs a Console API key to read your event specifications and data structures. You can let Snowtype create one for you, or provide one yourself.
+
+### Sign in with your browser
+
+Run the `setup` command to sign in to Console in your browser:
+
+```bash
+npx @snowplow/snowtype setup
+```
+
+Snowtype creates an API key for the organization you select and saves it to `~/.config/snowplow/snowplow.yml`. Your Console account needs permission to create API keys.
+
+[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) reads and writes the same file. If you have already run `snowplow-cli setup`, Snowtype uses those credentials and you don't need to sign in again.
+
+:::note[For SSO-enabled Snowplow organizations]
+If SSO is enabled for your Snowplow organization, provide an API key instead.
+:::
+
+### Provide an API key
+
+[Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
 
 You need both the **API key** and the **API key ID**.
 
@@ -84,6 +104,8 @@ export SNOWPLOW_CONSOLE_API_KEY_ID=your-api-key-id
 </Tabs>
 
 You can also pass the credentials directly as CLI flags (`--apiKey` and `--apiKeyId`), but environment variables are easier to manage and keep credentials out of your command history.
+
+CLI flags and environment variables take precedence over the credentials saved by `setup`.
 
 ## Initialize your project
 

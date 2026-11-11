@@ -13,6 +13,8 @@ import EventForwardingSchemaTable from '@site/src/components/EventForwardingSche
 import metaConversionsSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/meta-conversions.json';
 ```
 
+<IntegrationBadges id="forwarder-meta" />
+
 Send Snowplow events to Meta for ad measurement, attribution, and campaign optimization using the [Conversions API](https://developers.facebook.com/docs/marketing-api/conversions-api). The Conversions API delivers events server-side, which complements the browser Pixel and improves measurement when browser signals are unavailable.
 
 ## Prerequisites

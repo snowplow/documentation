@@ -8,11 +8,8 @@ keywords: ["source applications", "app id", "application entities", "global cont
 content_type: concept
 ---
 
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-<Badges badgeType="Actively Maintained"></Badges>
 
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we refer to as source applications.
 

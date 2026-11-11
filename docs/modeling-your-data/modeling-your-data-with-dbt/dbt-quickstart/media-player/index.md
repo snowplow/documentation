@@ -10,14 +10,12 @@ content_type: how-to
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowMediaPlayer" />
+<TierBadge tier="actively-maintained" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
 ## Requirements

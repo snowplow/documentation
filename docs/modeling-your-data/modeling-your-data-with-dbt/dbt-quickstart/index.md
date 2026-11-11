@@ -1,6 +1,6 @@
 ---
 title: "Quick start guide for Snowplow dbt packages"
-sidebar_label: "Quick Start"
+sidebar_label: "Install a package"
 sidebar_position: 20
 description: "Quick start guides for setting up and running Snowplow dbt packages including database privileges and package installation steps."
 keywords: ["dbt quickstart", "dbt setup", "Snowplow dbt installation"]

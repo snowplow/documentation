@@ -2,7 +2,7 @@
 title: "Iterable webhook"
 sidebar_label: "Iterable"
 date: "2022-05-17"
-sidebar_position: 30
+sidebar_position: 40
 description: "Track email opens, clicks, SMS, push notifications, and other Iterable system webhook events directly into Snowplow."
 keywords: ["iterable webhook integration", "iterable email tracking", "iterable system webhooks"]
 content_type: integration

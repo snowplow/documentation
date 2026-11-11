@@ -1,90 +1,103 @@
-import React, { useState, useEffect, useRef } from 'react'
-import clsx from 'clsx'
+import React from 'react'
 import { useWindowSize } from '@docusaurus/theme-common'
-import { useDoc } from '@docusaurus/plugin-content-docs/client'
+import { useDoc, useDocsSidebar } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
+import Head from '@docusaurus/Head'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { usePluginData } from '@docusaurus/useGlobalData'
 import DocItemPaginator from '@theme/DocItem/Paginator'
 import DocVersionBanner from '@theme/DocVersionBanner'
 import DocVersionBadge from '@theme/DocVersionBadge'
 import DocItemFooter from '@theme/DocItem/Footer'
-import DocItemTOCMobile from '@theme/DocItem/TOC/Mobile'
 import DocItemTOCDesktop from '@theme/DocItem/TOC/Desktop'
 import DocItemContent from '@theme/DocItem/Content'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import type { Props } from '@theme/DocItem/Layout'
 
-import styles from './styles.module.css'
-import { Paper } from '@mui/material'
-
-import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
-import { AlignLeft, Download, Copy, Check } from 'lucide-react'
+import { AlignLeft } from 'lucide-react'
 import HeadJSONLD from '../../../components/SchemaPlugin'
 
-import Demo_Ad from '../../../components/ui/Demo_Ad'
 import ReleaseNoteMeta from '@site/src/components/release-notes/ReleaseNoteMeta'
+import BackToProduct from '@site/src/components/navigation/BackToProduct'
+import PageActions from '@site/src/components/PageActions'
+import Feedback from '@site/src/components/Feedback'
+import MobileToc from './MobileToc'
 
-function MarkdownActions() {
+/**
+ * Path and absolute URL of the current page's Markdown copy, written by
+ * plugins/docusaurus-plugin-llms-txt. Null when the plugin skips this route.
+ */
+function useMarkdownCopy(): { path: string; url: string } | null {
   const { pathname } = useLocation()
-  const markdownUrl = pathname.replace(/\/$/, '') + '.md'
-  const [copied, setCopied] = useState(false)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const { siteConfig } = useDocusaurusContext()
+  const llms = usePluginData('docusaurus-plugin-llms-txt') as
+    | { enableMarkdownFiles?: boolean; excludeRoutes?: string[] }
+    | undefined
 
-  useEffect(
-    () => () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    },
-    []
-  )
+  if (!llms?.enableMarkdownFiles) return null
+  const route = pathname.endsWith('/') ? pathname : `${pathname}/`
+  if (llms.excludeRoutes?.includes(route)) return null
 
-  function handleDownload() {
-    const a = document.createElement('a')
-    a.href = markdownUrl
-    a.download = ''
-    a.click()
-  }
+  const path = route.replace(/\/$/, '') + '.md'
+  return { path, url: siteConfig.url.replace(/\/$/, '') + path }
+}
 
-  async function handleCopy() {
-    try {
-      const res = await fetch(markdownUrl)
-      if (!res.ok) throw new Error(`Failed to fetch Markdown: ${res.status}`)
-      const text = await res.text()
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      clearTimeout(timeoutRef.current ?? undefined)
-      timeoutRef.current = setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.warn('Failed to copy Markdown to clipboard:', err)
-    }
-  }
-
-  const buttonClass =
-    'inline-flex items-center gap-1 text-sm text-[color:var(--ifm-font-color-base)] transition-colors cursor-pointer bg-transparent border-none p-0 font-normal hover:text-[color:var(--ifm-color-primary)]'
-
+/**
+ * Point browsers, crawlers, and agents at the Markdown copy of the page.
+ */
+function MarkdownAlternateLink() {
+  const markdown = useMarkdownCopy()
+  if (!markdown) return null
   return (
-    // first:mt-8 covers pages whose plugin instance has no sidebar: they render no
-    // breadcrumbs, so these buttons would otherwise sit flush against the navbar
-    <div className="not-prose max-w-[740px] mx-auto flex items-center gap-3 -mt-1 first:mt-8 mb-8 pl-[0.3rem]">
-      <button
-        onClick={handleDownload}
-        className={buttonClass}
-        title="Download page as a Markdown file"
-        aria-label="Download this page as Markdown"
-        type="button"
-      >
-        <Download size={16} />
-        <span>Download</span>
-      </button>
-      <button
-        onClick={handleCopy}
-        className={buttonClass}
-        title="Copy page as Markdown (for LLM)"
-        aria-label="Copy this page's Markdown to clipboard"
-        type="button"
-      >
-        {copied ? <Check size={16} /> : <Copy size={16} />}
-        <span>{copied ? 'Copied!' : 'Copy Markdown'}</span>
-      </button>
-    </div>
+    <Head>
+      <link rel="alternate" type="text/markdown" href={markdown.url} />
+    </Head>
+  )
+}
+
+// The llms.txt index for each sidebar, written by
+// plugins/docusaurus-plugin-llms-txt/src/product-indexes.js
+const SIDEBAR_INDEXES: Record<string, string> = {
+  cdi: '/docs/cdi/llms.txt',
+  signals: '/docs/signals/llms.txt',
+  reference: '/docs/api-reference/llms.txt',
+  platform: '/docs/platform/llms.txt',
+}
+
+/**
+ * A short pointer for AI agents that read the HTML page: where the Markdown
+ * copy and the llms.txt indexes are. Hidden with CSS (not the hidden
+ * attribute), so screen readers and sighted readers skip it but HTML-to-text
+ * tools keep it. The llms-ignore class keeps it out of the .md export.
+ */
+function AgentPointer({ sidebar }: { sidebar?: string }) {
+  const markdown = useMarkdownCopy()
+  const { siteConfig } = useDocusaurusContext()
+  if (!markdown) return null
+  const site = siteConfig.url.replace(/\/$/, '')
+  const productIndex = sidebar ? SIDEBAR_INDEXES[sidebar] : undefined
+  return (
+    <p className="agent-pointer llms-ignore">
+      For AI agents: a Markdown version of this page is at {markdown.url}. The index of all
+      documentation pages is at {site}/llms.txt
+      {productIndex ? `, and the index for this section is at ${site}${productIndex}` : ''}.
+    </p>
+  )
+}
+
+/**
+ * Facets for the Algolia crawler: which sidebar (product) the page is in and
+ * its content type. The crawler config has to map these meta tags to record
+ * attributes before search can filter or rank on them.
+ */
+function SearchFacets({ sidebar }: { sidebar?: string }) {
+  const { frontMatter } = useDoc()
+  const contentType = (frontMatter as { content_type?: string }).content_type
+  return (
+    <Head>
+      {sidebar && <meta name="docsearch:product" content={sidebar} />}
+      {contentType && <meta name="docsearch:content_type" content={contentType} />}
+    </Head>
   )
 }
 
@@ -98,7 +111,7 @@ function useDocTOC() {
   const hidden = frontMatter.hide_table_of_contents
   const canRender = !hidden && toc.length > 0
 
-  const mobile = canRender ? <DocItemTOCMobile /> : undefined
+  const mobile = canRender ? <MobileToc /> : undefined
 
   const desktop =
     canRender && (windowSize === 'desktop' || windowSize === 'ssr') ? (
@@ -112,52 +125,77 @@ function useDocTOC() {
   }
 }
 
-export default function DocItemLayout({ children }: Props): JSX.Element {
-  const docTOC = useDocTOC()
-  const tutorial = useTutorial()
+/**
+ * The docs home (`layout: home` in front matter) is a landing page: no
+ * breadcrumbs, page actions, table of contents, feedback, or pagination.
+ */
+function HomeLayout({ children }: { children: React.ReactNode }): JSX.Element {
+  return (
+    <>
+      <MarkdownAlternateLink />
+      <div className="doc-layout doc-layout--home">
+        {/* docItemContainer is kept for the Algolia crawler, whose Docusaurus
+            template finds page titles and headings with [class*='docItemContainer'] */}
+        <div className="doc-layout__main docItemContainer">
+          <article className="doc-article">
+            <AgentPointer />
+            <DocItemContent>{children}</DocItemContent>
+          </article>
+        </div>
+      </div>
+    </>
+  )
+}
 
+export default function DocItemLayout({ children }: Props): JSX.Element {
+  const { frontMatter } = useDoc()
+  if ((frontMatter as { layout?: string }).layout === 'home') {
+    return <HomeLayout>{children}</HomeLayout>
+  }
+  return <DefaultLayout>{children}</DefaultLayout>
+}
+
+function DefaultLayout({ children }: Props): JSX.Element {
+  const docTOC = useDocTOC()
+  const markdown = useMarkdownCopy()
+  const sidebarName = useDocsSidebar()?.name
+  const { pathname } = useLocation()
   return (
     <>
       <HeadJSONLD />
-      <div className="row">
-        <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
+      <MarkdownAlternateLink />
+      <SearchFacets sidebar={sidebarName} />
+      <div className="doc-layout">
+        {/* docItemContainer is kept for the Algolia crawler, whose Docusaurus
+            template finds page titles and headings with [class*='docItemContainer'] */}
+        <div className="doc-layout__main docItemContainer">
           <DocVersionBanner />
-          <div className={styles.docItemContainer}>
-            <article className="max-w-full overflow-x-hidden leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:block prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block [&_nav.theme-doc-breadcrumbs]:max-w-[740px] [&_nav.theme-doc-breadcrumbs]:mx-auto [&_nav.theme-doc-breadcrumbs]:mt-8 [&_footer.theme-doc-footer]:max-w-[740px] [&_footer.theme-doc-footer]:mx-auto [&_footer.theme-doc-footer]:mt-8 [&_table_thead_tr_th_h3]:my-2 [&_table_tbody_tr_td_h3]:my-2 [&_table_thead_a]:font-semibold [&_table_thead_a]:no-underline">
+          <article className="doc-article">
+            <AgentPointer sidebar={sidebarName} />
+            <div className="doc-header">
+              <BackToProduct sidebar={sidebarName} path={pathname} />
               <DocBreadcrumbs />
-              <MarkdownActions />
-              <DocVersionBadge />
-              <ReleaseNoteMeta />
               {docTOC.mobile}
-              {tutorial === TutorialKind.Tutorial ? (
-                <Paper sx={{ p: 2, pt: 2 }}>
-                  <DocItemContent>{children}</DocItemContent>
-                </Paper>
-              ) : (
-                <DocItemContent>{children}</DocItemContent>
-              )}
-              <DocItemFooter />
-            </article>
-            <div className="max-w-[740px] mx-auto mt-8">
-              <DocItemPaginator />
+              {markdown && <PageActions markdown={markdown} />}
             </div>
+            <DocVersionBadge />
+            <ReleaseNoteMeta />
+            <DocItemContent>{children}</DocItemContent>
+            <DocItemFooter />
+            {pathname.startsWith('/docs/') && <Feedback />}
+          </article>
+          <div className="doc-article__paginator">
+            <DocItemPaginator />
           </div>
         </div>
         {docTOC.desktop && (
-          // Shown only from 1280px on non-touch devices; elsewhere the collapsible
-          // mobile TOC is shown instead (see styles.module.css)
-          <div className={clsx('col col--3', styles.tocCol)}>
-            <div className="sticky top-16">
-              <div className="flex items-center gap-2 my-1">
-                <AlignLeft size={16} className="opacity-70 text-foreground" />
-                <p className="text-[0.825rem] font-normal opacity-70 text-foreground m-0 pl-1">
-                  On this page
-                </p>
-              </div>
-              {docTOC.desktop}
-              <Demo_Ad />
-            </div>
-          </div>
+          <aside className="doc-layout__toc">
+            <p className="doc-layout__toc-title">
+              <AlignLeft size={16} aria-hidden="true" />
+              On this page
+            </p>
+            {docTOC.desktop}
+          </aside>
         )}
       </div>
     </>

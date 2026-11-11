@@ -12,6 +12,8 @@ import EventForwardingSchemaTable from '@site/src/components/EventForwardingSche
 import amplitudeSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/amplitude.json';
 ```
 
+<IntegrationBadges id="forwarder-amplitude" />
+
 Send Snowplow events to Amplitude to power product and marketing analytics or guide and survey personalization using Amplitude's [HTTP API v2](https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/).
 
 ## Prerequisites

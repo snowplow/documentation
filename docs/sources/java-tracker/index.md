@@ -9,9 +9,9 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Maintained"></Badges>
+<TrackerTier id="java" />
 ```
+
+<TrackerFeatures id="java" />
 
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.

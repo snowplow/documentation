@@ -1,11 +1,12 @@
 ---
 title: "Signals quickstart with your coding agent"
-sidebar_label: "Quickstart"
+sidebar_label: "Quickstart with your coding agent"
 sidebar_position: 3
 description: "Sign up for Snowplow Signals, run one Snowplow CLI command to set up your project and coding agent, then let the agent add tracking, Signals configuration, and the code that uses it."
 keywords: ["signals quickstart", "snowplow cli", "snowplow mcp", "coding agent", "claude code", "cursor", "codex", "real-time attributes"]
 date: "2026-10-14"
 content_type: tutorial
+pagination_next: signals/get-started/quickstart-tutorial/index
 ---
 
 Add Signals to your web app with one command. The command sets up your project and your coding agent, and the agent then adds the tracking, the Signals configuration, and the code that uses it.
@@ -46,7 +47,7 @@ To set up by hand, install the plugin:
 npx plugins add snowplow/skills
 ```
 
-Get the four [connection credentials](/docs/signals/connection/index.md#connection-credentials) and add them to `.env` as `SNOWPLOW_SIGNALS_API_URL`, `SNOWPLOW_SIGNALS_ORG_ID`, `SNOWPLOW_SIGNALS_API_KEY_ID`, and `SNOWPLOW_SIGNALS_API_KEY`. Then start your agent and send:
+Get the four [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials) and add them to `.env` as `SNOWPLOW_SIGNALS_API_URL`, `SNOWPLOW_SIGNALS_ORG_ID`, `SNOWPLOW_SIGNALS_API_KEY_ID`, and `SNOWPLOW_SIGNALS_API_KEY`. Then start your agent and send:
 
 ```txt
 Use the signals-setup skill to set up Snowplow Signals in this project.
@@ -76,6 +77,6 @@ npx @snowplow/snowplow-cli signals status
 ## Next steps
 
 These pages explain what the agent built and other ways to work with Signals:
-* Read the [Signals fundamentals](/docs/signals/concepts/index.md) to understand the configuration the agent created
+* Read [How Signals works](/docs/signals/concepts/index.md) to understand the configuration the agent created
 * Follow the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a longer walkthrough
-* Prefer working in Console? Try the [Console quickstart tutorial](/tutorials/signals-quickstart/start)
+* Prefer working in Console? Try the [Console quickstart tutorial](/docs/signals/get-started/quickstart-tutorial/index.md)

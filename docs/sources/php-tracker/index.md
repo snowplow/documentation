@@ -9,15 +9,13 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Snowplow Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker PHP Release"></Badges>
+<TrackerTier id="php" />
+<VersionBadge component="phpTracker" href="https://packagist.org/packages/snowplow/snowplow-tracker" />
 </BadgeGroup>
 ```
+
+<TrackerFeatures id="php" />
 
 The Snowplow PHP Tracker allows you to track Snowplow events from your PHP apps and scripts.
 

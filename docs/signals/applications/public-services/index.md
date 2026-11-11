@@ -32,7 +32,7 @@ The service must be keyed by the same attribute key that your application reads 
 
 ## Read the service
 
-The Signals browser plugin and the iOS and Android trackers read the service for the current user by default. You'll need your Signals API URL, from the **Signals** > **Overview** page in Console. You don't need any other [connection credentials](/docs/signals/connection/index.md#connection-credentials).
+The Signals browser plugin and the iOS and Android trackers read the service for the current user by default. You'll need your Signals API URL, from the **Signals** > **Overview** page in Console. You don't need any other [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials).
 
 <Tabs groupId="signals-client" queryString>
 <TabItem value="browser" label="Browser" default>

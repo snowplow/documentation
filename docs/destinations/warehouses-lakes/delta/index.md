@@ -15,6 +15,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+<IntegrationBadges id="delta" />
+
 :::info[Cloud availability]
 
 The Delta Lake integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.

@@ -1,10 +1,11 @@
 ---
-title: "Querying your first events"
-sidebar_position: 6
-sidebar_label: "Query the data"
-description: "Inspecting the events you tracked"
-keywords: ["querying data", "atomic events", "data warehouse", "SQL queries"]
+title: "Query your first events"
+sidebar_position: 6.5
+sidebar_label: "Query your first events"
+description: "Connect to your warehouse or lake, find the page views you tracked, and query the fields of your first custom event and entity."
+keywords: ["querying data", "atomic events", "data warehouse", "SQL queries", "first events"]
 content_type: tutorial
+date: "2026-11-09"
 ---
 
 ```mdx-code-block
@@ -12,98 +13,108 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Once you've tracked some events, you'll want to look at them in your data warehouse, database, or lake. The exact steps will depend on your choice of storage and your Snowplow platform.
+Snowplow loads every validated event into one `events` table in your warehouse or lake, with a row per event. This page follows on from [Create your first custom events](/docs/get-started/custom-events/index.md): you'll find the page views you tracked, then read the fields of the `product_viewed` event and `user` entity.
 
-For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your connection details in [Snowplow Console](https://console.snowplowanalytics.com/destinations/warehouses-lakes), under the destination you've selected.
+## Connect to your warehouse
 
-Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for advice on querying your data.
+In [Snowplow Console](https://console.snowplowanalytics.com/destinations/warehouses-lakes), open **Destinations** and select your warehouse or lake destination to see its connection details: the database or catalog, the schema, and the `events` table. Connect with your usual SQL client or the warehouse's own UI.
 
-## Snowplow Self-Hosted
+On Snowplow Self-Hosted, the connection details come from your Terraform variables instead. See [connect to your warehouse](/docs/destinations/warehouses-lakes/querying-data/index.md#snowplow-self-hosted) for each warehouse.
 
-If you don't have access to Snowplow Console, follow these instructions to connect to your Snowplow data:
+Events usually take a few minutes to arrive after you track them. In the queries below, replace `<events>` with the full name of your `events` table.
+
+## Find your page views
+
+Every event has the same standard columns, such as `event_name`, `app_id`, `collector_tstamp`, and `domain_userid`. This query returns the most recent page views:
+
+```sql
+SELECT
+    collector_tstamp,
+    app_id,
+    domain_userid,
+    page_urlpath
+FROM <events>
+WHERE event_name = 'page_view'
+    AND collector_tstamp > CURRENT_DATE - 1
+ORDER BY collector_tstamp DESC
+LIMIT 10
+```
+
+The filter on `collector_tstamp` matters: the `events` table is partitioned on it, so the filter keeps the query fast and cheap as your data grows. [Atomic event fields](/docs/fundamentals/canonical-event/index.md) describes every standard column.
+
+If you don't see your events, check that they passed validation. Events that fail validation aren't loaded: you'll find them in [Inspect your first failed events](/docs/get-started/failed-events/index.md).
+
+## Query your custom event and entity
+
+Each custom event and entity gets its own column in the `events` table, named after its schema. For the `product_viewed` event with the vendor `com.example_company`, the column is `unstruct_event_com_example_company_product_viewed_1`. The `user` entity is in `contexts_com_example_company_user_1`, as an array, because an event can carry more than one entity of the same type.
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="postgres" label="Postgres" default>
+<TabItem value="snowflake" label="Snowflake" default>
 
-Your database will be named according to the `postgres_db_name` Terraform variable. It will contain two schemas:
-* `atomic` — the validated events
-* `atomic_bad` — the [failed events](/docs/fundamentals/failed-events/index.md)
+```sql
+SELECT
+    collector_tstamp,
+    unstruct_event_com_example_company_product_viewed_1:productId::varchar AS product_id,
+    unstruct_event_com_example_company_product_viewed_1:price::number(10,2) AS price,
+    contexts_com_example_company_user_1[0]:userType::varchar AS user_type
+FROM <events>
+WHERE event_name = 'product_viewed'
+    AND collector_tstamp > CURRENT_DATE - 1
+```
 
-You can connect to the database using the credentials you provided for the loader in the Terraform variables (`postgres_db_username` and `postgres_db_password`), along with the `postgres_db_address` and `postgres_db_port` Terraform outputs.
+Fields are `VARIANT` values, so cast them to the type you need.
 
-:::tip
+</TabItem>
+<TabItem value="bigquery" label="BigQuery">
 
-If you need to reset your username or password, you can follow [these steps](https://aws.amazon.com/premiumsupport/knowledge-center/reset-master-user-password-rds/).
+```sql
+SELECT
+    collector_tstamp,
+    unstruct_event_com_example_company_product_viewed_1.product_id,
+    unstruct_event_com_example_company_product_viewed_1.price,
+    contexts_com_example_company_user_1[SAFE_OFFSET(0)].user_type
+FROM <events>
+WHERE event_name = 'product_viewed'
+    AND collector_tstamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+```
 
-:::
+Field names are converted to snake case, so `productId` becomes `product_id`.
 
-See [the AWS RDS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html) for more details on how to connect.
+</TabItem>
+<TabItem value="databricks" label="Databricks">
 
-:::note
+```sql
+SELECT
+    collector_tstamp,
+    unstruct_event_com_example_company_product_viewed_1.product_id,
+    unstruct_event_com_example_company_product_viewed_1.price,
+    contexts_com_example_company_user_1[0].user_type
+FROM <events>
+WHERE event_name = 'product_viewed'
+    AND collector_tstamp > current_date() - 1
+```
 
-If you opted for the `secure` option, you will first need to create a tunnel into your VPC to be able to connect to your RDS instance and be able to query the data. A common solution to this issue is to configure a bastion host as described [here](https://repost.aws/knowledge-center/rds-connect-using-bastion-host-linux).
+Field names are converted to snake case, so `productId` becomes `product_id`.
 
-:::
+</TabItem>
+<TabItem value="redshift" label="Redshift">
 
+On Redshift, each custom event and entity is in its own table, named after its schema, such as `com_example_company_product_viewed_1`. Join it to the `events` table on the event ID and timestamp:
 
-  </TabItem>
-  <TabItem value="redshift" label="Redshift">
+```sql
+SELECT
+    ev.collector_tstamp,
+    pv.product_id,
+    pv.price
+FROM <schema>.events ev
+JOIN <schema>.com_example_company_product_viewed_1 pv
+    ON pv.root_id = ev.event_id AND pv.root_tstamp = ev.collector_tstamp
+WHERE ev.collector_tstamp > CURRENT_DATE - 1
+```
 
-The database name and the schema name will be defined by the `redshift_database` and `redshift_schema` variables in Terraform.
-
-There are two different ways to login to the database:
-* The first option is to use the credentials you configured for the loader in the Terraform variables (`redshift_loader_user` and `redshift_loader_password`)
-* The second option is to grant `SELECT` permissions on the schema to an existing user
-
-To connect, you can use the Redshift UI or something like [`psql`](https://www.postgresql.org/docs/current/app-psql.html).
-
-  </TabItem>
-  <TabItem value="bigquery" label="BigQuery">
-
-The database will be called `<prefix>_snowplow_db`, where `<prefix>` is the prefix you picked in your Terraform variables file. It will contain an `atomic` schema with your validated events.
-
-You can access the database via the [BigQuery UI](https://console.cloud.google.com/bigquery).
-
-  </TabItem>
-  <TabItem value="snowflake" label="Snowflake">
-
-The database name and the schema name will be defined by the `snowflake_database` and `snowflake_schema` variables in Terraform.
-
-There are two different ways to login to the database:
-* The first option is to use the credentials you configured for the loader in the Terraform variables (`snowflake_loader_user` and `snowflake_loader_password`)
-* The second option is to grant `SELECT` permissions on the schema to an existing user
-
-To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.snowflake.com/en/user-guide/snowsql.html).
-
-  </TabItem>
-  <TabItem value="databricks" label="Databricks">
-
-:::info[Azure-specific instructions]
-
-On Azure, you have created an external table in the [last step of the guide](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
-
-:::
-
-The database name and the schema name will be defined by the `databricks_database` and `databricks_schema` variables in Terraform.
-
-There are two different ways to login to the database:
-* The first option is to use the credentials you configured for the loader in the Terraform variables (`databricks_loader_user` and `databricks_loader_password`, or alternatively the `databricks_auth_token`)
-* The second option is to grant `SELECT` permissions on the schema to an existing user
-
-See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-start.html) for more details on how to connect. The documentation on [Unity Catalog](https://docs.databricks.com/data-governance/unity-catalog/queries.html) is also useful.
-
-  </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics">
-
-In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-container`).
-
-Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
-
-:::tip[Fabric and OneLake]
-
-If you created a OneLake shortcut in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
-
-:::
-
-  </TabItem>
+</TabItem>
 </Tabs>
+
+[How schemas become columns](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) explains the naming rules, including what happens when you publish a new schema version. For entities with several values, duplicate events, and Synapse Analytics, see [Query Snowplow data in your warehouse](/docs/destinations/warehouses-lakes/querying-data/index.md).
+
+Rather than writing every query against raw events, most teams [run a data model](/docs/get-started/modeling/index.md) next, which builds page view, session, and user tables from the `events` table.

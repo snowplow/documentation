@@ -14,6 +14,8 @@ import brazeEvents from '@site/src/components/EventForwardingSchemaTable/Schemas
 import brazePurchases from '@site/src/components/EventForwardingSchemaTable/Schemas/brazePurchases.json';
 ```
 
+<IntegrationBadges id="forwarder-braze" />
+
 Send Snowplow events to Braze for real-time personalization, user tracking, and campaign automation using Braze's [Track Users API](https://www.braze.com/docs/api/endpoints/user_data/post_user_track).
 
 Snowplow supports the following Braze object types:

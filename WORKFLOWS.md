@@ -23,7 +23,8 @@ Other `package.json` scripts:
 - `yarn swizzle`: Docusaurus's interactive component-swizzling tool.
 - `yarn clear`: clear the Docusaurus build cache.
 - `yarn format`: Prettier.
-- `yarn lint:css`: stylelint over `src/**/*.css`. Main's CSS doesn't pass yet, so this exits non-zero locally; CI reports the result without failing.
+- `yarn lint:css`: stylelint over `src/**/*.css`. The `site-quality.yml` workflow fails the PR if it reports errors.
+- `yarn check:sidebars`: after a build, checks that every docs page is in exactly one sidebar. See [`ARCHITECTURE.md`](ARCHITECTURE.md).
 - `yarn qa:a11y`, `yarn qa:visual`: Playwright accessibility and visual regression checks against a built site. See [`quality/README.md`](quality/README.md).
 
 ## GitHub Actions
@@ -34,7 +35,7 @@ CI workflows live in `.github/workflows/`.
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `claude-code-review.yml`   | Runs on every opened PR. Reviews writing quality against the style guide and leaves the review as a PR comment.                                                                                                                                                                      |
 | `claude.yml`               | Triggered by `@claude` mentions in issue comments, PR review comments, and new issues. Dispatches Claude to work on the issue or PR.                                                                                                                                                 |
-| `site-quality.yml`         | Runs on PRs that change `src/**`, `static/**`, the site config, `package.json`, `yarn.lock`, `quality/**`, or `stylelint.config.mjs`. Runs stylelint, axe accessibility checks, and visual regression screenshots against the base branch. Reports problems without blocking merges. |
+| `site-quality.yml`         | Runs on PRs that change `src/**`, `static/**`, the site config, `package.json`, `yarn.lock`, `quality/**`, or `stylelint.config.mjs`. Runs stylelint, axe accessibility checks, and visual regression screenshots against the base branch. Stylelint failures block merges; axe and visual regression report problems without blocking. |
 | `validate-frontmatter.yml` | Runs on PR opened against any `.md` or `.mdx` file. Validates frontmatter of changed files and leaves results as a PR comment.                                                                                                                                                       |
 | `validate_schema.yml`      | Runs on PR changes to `src/components/JsonSchemaValidator/**`. Validates JSON Schema files against `dbt-variables-meta-schema.json`.                                                                                                                                                 |
 | `update-dbt-docs.yml`      | Runs weekly and on manual dispatch. Refreshes dbt package version metadata and opens a PR if anything changed.                                                                                                                                                                       |

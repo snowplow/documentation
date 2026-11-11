@@ -8,6 +8,8 @@ keywords: ["Amplitude Tag", "GTM SS Amplitude", "product analytics", "HTTP API v
 content_type: integration
 ---
 
+<IntegrationBadges id="gtm-amplitude" />
+
 The [Amplitude Tag for GTM SS](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-server-side-amplitude-tag) allows events to be forwarded to Amplitude. This Tag works best with events from the Snowplow Client, but can also construct Amplitude events from other GTM SS Clients such as GAv4.
 
 The tag is designed to work best with Self Describing Events, and atomic events, from a Snowplow Tracker, allowing for events to automatically merged into an Amplitude events properties. Additionally, any other client event properties can be included within the event properties or user properties of the Amplitude event.

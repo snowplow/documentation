@@ -10,11 +10,12 @@ content_type: sdk
 
 ```mdx-code-block
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="web" />
 ```
+
+<TrackerFeatures id="web" />
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.
 

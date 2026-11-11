@@ -9,11 +9,12 @@ content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="lua" />
 ```
+
+<TrackerFeatures id="lua" />
 
 The Snowplow Lua Tracker allows you to track Snowplow events in your Lua applications.
 

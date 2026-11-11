@@ -54,7 +54,7 @@ content_type: how-to                            # concept | how-to | tutorial | 
 ---
 ```
 
-The frontmatter check on pull requests flags pages under `docs/` without `content_type`, or with an unknown value. Pages with `type: link`, previous-version pages, and partials don't need it.
+`content_type` is checked twice: the build logs a warning for a page without it, or with an unknown value, and the frontmatter check on pull requests flags the same pages under `docs/`. Pages with `type: link`, previous-version pages, and partials don't need it.
 
 ## Content types and page templates
 Every template stays within 3-5 H2 sections. Don't add a "Next steps" H2: end with a short paragraph of links. Full rules are in the style guide (`src/pages/style-guide/llm/index.md`, "Content types and page templates").
@@ -62,11 +62,11 @@ Every template stays within 3-5 H2 sections. Don't add a "Next steps" H2: end wi
 | `content_type` | H2 sections, in order |
 | --- | --- |
 | `concept` | What it is and why it matters · How it works (diagram plus text version) · Example · Related concepts |
-| `how-to` | Before you begin · Steps (verify last) · Troubleshooting (exact error string → fix; omit if none known) |
+| `how-to` | Before you begin · Steps (in `<Steps>`, verify last) · Troubleshooting (exact error string → fix; omit if none known) |
 | `tutorial` | What you'll build (with "≈ N min") · Requirements · Steps · Clean up |
-| `reference` | Parameters (table) · Example · Errors · Version applicability |
-| `integration` | Compatibility · Connect · Configure · Troubleshooting |
-| `sdk` | Feature support · Install and initialize · Track your first event |
+| `reference` | Parameters (`<ParamTable>`) · Example · Errors · Version applicability (`<AppliesTo>`) |
+| `integration` | Compatibility (show support and status with `<IntegrationBadges id>`) · Connect · Configure · Troubleshooting |
+| `sdk` | Feature support · Install and initialize · Track your first event (show the tier with `<TrackerTier id>` and features with `<TrackerFeatures id>`) |
 | `landing` | Task table ("I want to" → page), then grouped links |
 
 Never mix how-to and reference content on one page. Split it into two pages that link to each other.

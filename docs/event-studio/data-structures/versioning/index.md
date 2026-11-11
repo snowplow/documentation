@@ -1,8 +1,8 @@
 ---
 title: "Version and amend data structures"
-sidebar_label: "Version and amend"
+sidebar_label: "Version data structures"
 date: "2020-02-25"
-sidebar_position: 2
+sidebar_position: 3
 description: "Evolve your tracking design safely with backwards-compatible data structure versioning using JSON schema version numbers to control warehouse loader behavior."
 keywords: ["schema versioning", "backwards compatibility", "breaking changes", "schema evolution"]
 content_type: how-to
@@ -36,9 +36,17 @@ When using the JSON editor, at the point of publishing a data structure you'll b
 
 ![Publish version to development environment dialog for "subscription_payment_failed" showing four version options: Non-breaking (1-0-1), Non-breaking (1-1-0), Breaking (2-0-0) — currently selected with a recommended upgrade warning — and Patch (1-0-0). A caution banner warns about the impact of selecting the wrong version increment.](images/json_editor_version_options.png)
 
+In this example, for a schema at version `1-0-0`, the dialog offers:
+
+- **Non-breaking**: `1-0-1` or `1-1-0`
+- **Breaking**: `2-0-0`
+- **Patch**: [patch the current version](#patch-a-schema), which overwrites the existing schema and leaves it at `1-0-0`
+
+For the deployment steps, see [Deploy data structures to your development environment](/docs/event-studio/test-and-publish/index.md#deploy-data-structures-to-your-development-environment).
+
 ## Patch a schema
 
-To [patch a schema](/docs/fundamentals/schemas/versioning/index.md#overwrite-a-schema), i.e. apply changes to it without updating the version, select the **Patch** option when saving the schema.
+To [patch a schema](/docs/fundamentals/schemas/versioning/index.md#overwrite-a-schema), which means applying changes to it without updating the version, select the **Patch** option when saving the schema.
 
 Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it's controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 
@@ -51,3 +59,5 @@ You'll need to explicitly enable patching in the [Iglu Server configuration](/do
 ## Mark a schema as superseded
 
 To [mark a schema as superseded](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded), use the JSON editor and add a `$supersedes` field.
+
+To roll out a new data structure version to the event specifications and tracking code that use it, see [Evolve a tracking design](/docs/event-studio/evolve-tracking-design/index.md).

@@ -11,7 +11,7 @@ On this page, you'll build the concierge agent in CX Agent Studio. You'll import
 
 The files in `agent/` are the source of truth for the agent. You'll paste or import them into the console, rather than writing the configuration by hand. If you'd rather create the agent as code, see the [Terraform section of the conclusion](/tutorials/signals-google-cx-agent-studio/conclusion#create-the-agent-with-terraform).
 
-{/* TODO screenshot: CX Agent Studio agent canvas showing the Root Agent node with the attached tools */}
+![CX Agent Studio canvas showing the Root agent node with its Tools panel open, listing end_session, getUserContext, searchCatalog, and selfTracking](images/agent-canvas-tools.png)
 
 ## Create the agent and import the tools
 

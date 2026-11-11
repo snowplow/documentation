@@ -16,7 +16,7 @@ In the simulator, there's no storefront to send the shopper's session ID, so you
 1. Browse your deployed storefront, add a product to the cart, and copy your `domain_sessionid` from the debug panel.
 2. In the simulator, set the `snowplow_session_id` variable to that session ID, using the **Set a default value at the start of the conversation** option.
 3. Start a conversation. The agent's first reply should mention what you browsed or added to your cart, without you telling it.
-4. Open the execution trace for the `getUserContext` call, and check that the request includes your session ID.
+4. Open the execution trace for the `getUserContext` call, and check that the **Output** contains a profile that matches what you browsed. The **Input** shows `{}`, because CX Agent Studio injects the session ID from the variable at call time, so the trace doesn't display it.
 5. Ask for a recommendation. Any product the agent suggests should be a real catalog item.
 6. Check the execution trace for the self-tracking calls. Each turn should have a `selfTracking_trackUserIntent` call, plus a `selfTracking_trackAgentDecision` call in the same step as each `searchCatalog` call.
 
@@ -28,7 +28,7 @@ When you've finished testing, clear the **Set a default value** option. A leftov
 The console's tool tester only sends parameters that the model would produce. It doesn't fill in `x-ces-session-context` parameters, so the context tool always returns the empty payload in the tester. Use the simulator to test session variables.
 :::
 
-{/* TODO screenshot: simulator with the snowplow_session_id variable set and the execution trace open on getUserContext */}
+![CX Agent Studio simulator with the execution trace for one turn, showing getUserContext, selfTracking_trackUserIntent, searchCatalog, and selfTracking_trackAgentDecision calls. The trackUserIntent call is open, with a browse_inspiration intent as its input and an intent_id as its output. The Variables panel shows snowplow_session_id with a default value set](images/simulator-session-variable.png)
 
 ## Publish an app version
 

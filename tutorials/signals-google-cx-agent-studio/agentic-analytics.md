@@ -2,12 +2,12 @@
 title: "Analyze the agent's behavior"
 sidebar_label: "Analyze agent behavior"
 position: 6
-description: "Learn how the concierge agent tracks its own intents, decisions, and constraint violations, find the agent's events in Snowplow Console, and query them in BigQuery alongside the shopper's browsing events."
+description: "Learn how the concierge agent tracks its own intents, decisions, and constraint violations, then query the agent's events in BigQuery alongside the shopper's browsing events."
 keywords: ["agentic analytics", "agent self-tracking", "tool_execution", "user_intent_detected", "constraint_violation", "BigQuery"]
 date: "2026-11-09"
 ---
 
-Every turn of the conversation now produces Snowplow events from the browser and the storefront server. On this page, you'll see how the agent decides when to track its own reasoning, find a turn's events in Snowplow Console, and query the agent's behavior in BigQuery.
+Every turn of the conversation now produces Snowplow events from the browser and the storefront server. On this page, you'll see how the agent decides when to track its own reasoning, then query the agent's events in BigQuery alongside the shopper's browsing.
 
 The events use the generic agent tracking schemas from Iglu Central. The [agentic self-tracking accelerator](/tutorials/agentic-self-tracking/introduction) explains how those schemas are designed, and how to add your own domain-specific entities.
 
@@ -32,23 +32,6 @@ The widget rule comes from testing on a live agent. When the instructions asked 
 
 Every call to a business tool also produces a `tool_execution` event from the endpoint, without the agent doing anything. Each of these has an entity describing the call: `context_lookup` for `getUserContext`, with the number of attributes returned and the Signals response time, and `catalog_search` for `searchCatalog`, with the filters the agent chose and the product IDs returned.
 
-## Find the agent's events in Console
-
-Send a message to the concierge on your deployed storefront, then open the event explorer in Snowplow Console.
-
-Server-side agent events have the app ID `atelier-storefront-agent` and the platform `srv`. The shopper's browser events have the app ID `atelier-storefront` and the platform `web`. Filter by app ID or platform to separate them.
-
-For one turn, you should see:
-
-- A `message_sent` event from the browser
-- A `tool_execution` event for each business tool call
-- A `user_intent_detected` event, and an `agent_decision_logged` event if the agent searched the catalog
-- A `message_received` event from the browser
-
-Check that the `invocation_id` in the server events' `agent_context` entity matches the `turn_id` in the browser events' `conversation` entity. That shared ID is how you group every event from one turn.
-
-{/* TODO screenshot: Console event explorer filtered to one turn, showing browser and server events */}
-
 ## Query agent behavior in BigQuery
 
 The repository's `analytics/agent-self-tracking.sql` file contains BigQuery queries over the atomic events table. Before you run them, replace the `PROJECT.DATASET.` placeholder with the dataset your BigQuery Loader writes to. From the repository root:
@@ -61,6 +44,25 @@ On macOS, use `sed -i ''` instead of `sed -i`.
 
 Each query is self-contained, so you can copy one into the BigQuery console. The BigQuery Loader only creates a column for a schema after it loads the first event using it, so a `Field name ... does not exist` error means no events of that type have loaded yet.
 
+### View one session's events
+
+Send a message or two to the concierge on your deployed storefront, then run query 7c, "One session's full timeline", from `analytics/agent-self-tracking.sql`. With no changes, it selects the most recent session that has agent events, and returns every event in that session in order: the shopper's browsing, their messages, and the agent's tool calls.
+
+Server-side agent events have the app ID `atelier-storefront-agent` and the platform `srv`. The shopper's browser events have the app ID `atelier-storefront` and the platform `web`.
+
+For one turn, you should see:
+
+- A `message_sent` event from the browser
+- A `tool_execution` event for each business tool call
+- A `user_intent_detected` event, and an `agent_decision_logged` event if the agent searched the catalog
+- A `message_received` event from the browser
+
+All of these events share the same value in the query's `turn_id` column. On server events, the query reads it from `invocation_id` in the `agent_context` entity. On browser events, it reads it from `turn_id` in the `conversation` entity. That shared ID is how you group every event from one turn.
+
+![BigQuery results for one session, showing the shopper's page views, product views, and cart updates, followed by a single turn's message_sent, user_intent_detected, tool_execution, agent_decision_logged, and message_received events sharing one turn_id](images/bigquery-session-timeline.png)
+
+### Explore the other queries
+
 The queries are grouped by the questions they answer:
 
 | Section                      | Example questions                                                                       |
@@ -71,6 +73,7 @@ The queries are grouped by the questions they answer:
 | Constraint violations        | What does the catalog fail to provide, and what did the agent recommend instead?        |
 | What the agent recommends    | Which products and designers does the agent show, compared with what shoppers browse?   |
 | Recommendation follow-through | Do shoppers click on and buy the products the agent recommended?                      |
+| User journey                 | How do agent-assisted sessions differ from others? What happened in one session or turn? |
 
 This query from the tool usage section shows how often the agent had Signals context:
 

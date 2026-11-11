@@ -2,7 +2,7 @@
 title: "Set up Snowplow tracking and Signals for the storefront"
 sidebar_label: "Set up Snowplow"
 position: 2
-description: "Clone the Atelier Signals storefront, publish its tracking plan and Signals configuration to your Snowplow organization, and check that Signals calculates attributes for a browsing session."
+description: "Connect a BigQuery destination, clone the Atelier Signals storefront, publish its tracking plan and Signals configuration to your Snowplow organization, and check that Signals calculates attributes for a browsing session."
 keywords: ["Signals", "tracking plan", "Snowtype", "attribute group", "agentic context", "Snowplow CLI"]
 date: "2026-11-09"
 ---
@@ -14,6 +14,14 @@ You'll need a Snowplow environment with Signals enabled. If you don't have one, 
 :::tip[Use the setup script]
 The repository includes an interactive script, `scripts/setup-trial-org.sh`, that asks for your credentials and runs the commands on this page and the next one for you. This page explains each step, so you know what the script does. If you use the script, read along and skip the commands.
 :::
+
+## Connect a BigQuery destination
+
+The storefront and the agent send their events to your pipeline, but you need a warehouse to query them. This accelerator uses BigQuery: the [analytics page](/tutorials/signals-google-cx-agent-studio/agentic-analytics) queries the agent's events alongside the shopper's browsing events.
+
+In Console, add a BigQuery destination and follow the setup steps it shows. See [load Snowplow data to BigQuery](/docs/destinations/warehouses-lakes/bigquery/) for the Google Cloud project, service account, and permissions you'll need. The setup script doesn't do this step for you.
+
+Connect the destination now, so that the events from your testing in the rest of the accelerator load into BigQuery.
 
 ## Clone the repository and add your credentials
 

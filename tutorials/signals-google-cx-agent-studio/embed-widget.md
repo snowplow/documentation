@@ -48,7 +48,7 @@ The storefront uses the open-source [`ces-messenger`](https://github.com/GoogleC
 
 Copy the deployment's full resource name. It has the format `projects/<project>/locations/<location>/apps/<app>/deployments/<deployment>`.
 
-{/* TODO screenshot: web widget deployment settings with origin checking on and reCAPTCHA off */}
+![CX Agent Studio Edit channel page for the web widget, with the Security section showing Public Access on, Allow origins verification on with the storefront URL as the allowed origin, and Recaptcha off](images/widget-channel-security.png)
 
 In the Vercel dashboard, add the resource name as a production environment variable:
 
@@ -126,4 +126,4 @@ If the agent describes a different shopper's browsing, the agent isn't receiving
 
 If the widget loads but never connects, check that your storefront's exact origin is in the deployment's allowed origins.
 
-{/* TODO screenshot: storefront with the chat open, showing a personalized first reply and a product carousel */}
+![Atelier Signals storefront on a product page, with the Atelier Concierge chat open. The agent answers an accessories request by referencing the shopper's interest in Atelier Lune knitwear and shows a carousel of two Atelier Lune scarves. The Signals demo panel shows the shopper's top attributes, including favorite category Knitwear and favorite designer Atelier Lune](images/storefront-chat-widget.png)

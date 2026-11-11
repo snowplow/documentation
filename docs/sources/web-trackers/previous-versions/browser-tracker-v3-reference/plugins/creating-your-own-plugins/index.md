@@ -1,5 +1,6 @@
 ---
 title: "Creating your own plugins"
+sidebar_label: "Creating your own plugins"
 sidebar_position: 750
 description: "Plugin documentation for Creating your own s functionality in the tracker."
 keywords: ["plugin", "creating"]

@@ -1,5 +1,6 @@
 ---
 title: "Ad Tracking"
+sidebar_label: "Ad Tracking"
 date: "2021-04-07"
 sidebar_position: 1000
 description: "Documentation for tracking Ad Tracking with the web tracker."

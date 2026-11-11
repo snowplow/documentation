@@ -4,6 +4,7 @@ sidebar_label: "HTML5"
 sidebar_position: 10
 description: "Automatically track HTML5 video and audio elements with media events including play, pause, seek, buffer, and progress milestones."
 keywords: ["html5 media", "video tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

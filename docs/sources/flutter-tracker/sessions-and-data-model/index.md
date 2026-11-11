@@ -5,6 +5,7 @@ description: "Enable session tracking with the client_session entity across Andr
 keywords: ["session tracking", "client session", "unified data model", "session timeout", "session context", "new session", "SessionConfiguration"]
 date: "2022-01-31"
 sidebar_position: 5000
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

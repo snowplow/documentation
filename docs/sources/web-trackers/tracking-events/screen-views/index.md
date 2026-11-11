@@ -4,6 +4,7 @@ sidebar_label: "Screen views"
 sidebar_position: 60
 description: "Track screen views with mobile-style tracking on web including screen engagement metrics for time spent and scroll depth analysis."
 keywords: ["screen views", "mobile tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

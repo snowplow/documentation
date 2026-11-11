@@ -5,6 +5,7 @@ sidebar_label: Agent classification
 description: "Identify AI crawlers and automated agents by classifying them by operator and purpose."
 keywords: ["agent classification", "AI crawler", "bot classification", "YAUAA"]
 date: "2026-06-10"
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

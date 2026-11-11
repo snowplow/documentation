@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 60
 description: "Track user sessions with persistent session data including session ID, index, and timeout configuration for .NET applications."
 keywords: [".net session tracking", "client session", "session management"]
+content_type: reference
 ---
 
 The Session object is responsible for maintaining persistent data around user sessions over the life-time of an application.

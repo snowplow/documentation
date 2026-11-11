@@ -3,6 +3,7 @@ title: "Configure HTTP as a Snowbridge target"
 sidebar_label: "HTTP"
 description: "Configure HTTP target for Snowplow Snowbridge to send data over HTTP with authentication, OAuth2, request templating, and response rules."
 keywords: ["snowbridge config", "http target", "http endpoint", "oauth2", "request templating", "gtm server side"]
+content_type: reference
 ---
 
 ```mdx-code-block
@@ -151,7 +152,7 @@ If you want to use this as a [failure target](/docs/api-reference/snowbridge/con
 
 You can use the HTTP target to send events to Google Tag Manager Server Side, where the [Snowplow Client tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md) is installed.
 
-To do this, you will need to include a [transformation](/docs/api-reference/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson.md).
+To do this, you will need to include a [transformation](/docs/api-reference/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson/index.md).
 
 Here’s an example configuration. Replace `<your-gtm-host>` with the hostname of your Google Tag Manager instance, and — optionally — `<preview-token>` with your preview mode token.
 

@@ -5,6 +5,7 @@ date: "2020-02-25"
 sidebar_position: 2
 description: "Evolve your tracking design safely with backwards-compatible data structure versioning using JSON schema version numbers to control warehouse loader behavior."
 keywords: ["schema versioning", "backwards compatibility", "breaking changes", "schema evolution"]
+content_type: how-to
 ---
 
 Every data structure is based on a [versioned schema](/docs/fundamentals/schemas/versioning/index.md).

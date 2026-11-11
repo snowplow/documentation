@@ -5,6 +5,7 @@ sidebar_position: 3.1
 description: "Track events without collecting user identifiers, IP addresses, or cookies to support privacy compliance and user consent requirements."
 keywords: ["anonymous tracking", "privacy", "GDPR", "cookieless", "user identifiers", "PII"]
 date: "2026-01-19"
+content_type: concept
 ---
 
 import Tabs from '@theme/Tabs';

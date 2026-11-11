@@ -5,6 +5,7 @@ date: "2021-10-04"
 sidebar_position: 30
 description: "Monitor S3 Loader with StatsD metrics, Sentry error tracking, and Snowplow event tracking for application health and failures."
 keywords: ["s3 loader monitoring", "statsd metrics", "sentry alerts", "loader health", "application monitoring"]
+content_type: reference
 ---
 
 The S3 loader has several types of monitoring built in, to help the pipeline operator: Statsd metrics, Sentry alerts, and Snowplow tracking.

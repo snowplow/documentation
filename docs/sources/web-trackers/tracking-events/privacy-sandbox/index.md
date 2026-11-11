@@ -4,6 +4,7 @@ sidebar_label: "Privacy Sandbox"
 sidebar_position: 160
 description: "Capture Privacy Sandbox data including Topics API information for privacy-preserving interest-based advertising and content personalization."
 keywords: ["privacy sandbox", "topics api"]
+content_type: how-to
 ---
 
 ```mdx-code-block

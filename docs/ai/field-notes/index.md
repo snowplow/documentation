@@ -5,6 +5,7 @@ sidebar_position: 5
 description: "Updates, announcements, and articles about AI work in Snowplow."
 keywords: ["AI field notes", "agentic AI", "AI agents", "Snowplow AI"]
 date: "2026-06-22"
+content_type: landing
 ---
 
 import { CardGrid, CallToActionCard } from '@site/src/components/CardGrid'

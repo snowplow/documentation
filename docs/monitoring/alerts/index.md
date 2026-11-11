@@ -5,6 +5,7 @@ sidebar_label: "Alerts"
 sidebar_position: 1
 description: "Configure alerts for failed events using warehouse-based alerts or classic alerts with email and Slack notifications."
 keywords: ["failed event alerts", "Snowplow alerts", "data quality alerts", "event monitoring"]
+content_type: concept
 ---
 
 

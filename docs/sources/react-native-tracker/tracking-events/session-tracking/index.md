@@ -4,6 +4,7 @@ sidebar_label: "Sessions"
 sidebar_position: 20
 description: "Track user sessions with client_session entities, configure foreground and background timeouts, and retrieve session data at runtime."
 keywords: ["react native session tracking", "session timeout", "client session entity"]
+content_type: how-to
 ---
 
 

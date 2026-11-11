@@ -4,6 +4,7 @@ sidebar_label: "Event specifications"
 sidebar_position: 115
 description: "Use the event specifications plugin to automatically attach event specification entities from your tracking plan to matching browser events."
 keywords: ["event specifications", "tracking plan", "browser tracker", "javascript tracker", "media web"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs'

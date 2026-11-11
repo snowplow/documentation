@@ -6,6 +6,7 @@ description: "Connect to Signals using the Python SDK, Node.js SDK, or REST API 
 keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "connection credentials"]
 sidebar_custom_props:
   space_above: true
+content_type: how-to
 ---
 
 You'll connect to Signals for one of two reasons:

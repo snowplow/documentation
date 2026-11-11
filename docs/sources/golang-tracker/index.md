@@ -4,6 +4,7 @@ sidebar_label: "Golang tracker"
 description: "The Snowplow Golang Tracker enables server-side event tracking from Go applications. Create subjects, emitters, and trackers with persistent storage to send behavioral events to your Snowplow collector."
 keywords: ["golang tracker", "go tracker", "go sdk", "server-side tracking", "go modules"]
 sidebar_position: 170
+content_type: sdk
 ---
 
 ```mdx-code-block

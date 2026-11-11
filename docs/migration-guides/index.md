@@ -7,6 +7,7 @@ keywords: ["migration", "parallel-run", "dual tracking", "analytics migration", 
 date: "2025-01-08"
 sidebar_custom_props:
   header: "Resources"
+content_type: concept
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

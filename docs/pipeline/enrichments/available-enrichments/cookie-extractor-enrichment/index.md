@@ -4,6 +4,7 @@ sidebar_position: 7
 sidebar_label: Cookie extractor
 description: "Extract name-value pairs from first-party cookies and attach them to events as derived contexts."
 keywords: ["cookie extraction", "first-party cookies", "cookie enrichment"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

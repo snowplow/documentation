@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 60
 description: "Enable anonymous tracking to mask user identifiers and session information in mobile tracker events for privacy compliance."
 keywords: ["anonymous tracking", "user anonymization", "mobile privacy"]
+content_type: how-to
 ---
 
 ```mdx-code-block

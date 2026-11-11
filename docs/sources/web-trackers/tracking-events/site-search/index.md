@@ -4,6 +4,7 @@ sidebar_label: "Site search"
 sidebar_position: 120
 description: "Track internal site search queries with search terms, filters, and result counts to analyze user search behavior and content discovery."
 keywords: ["site search", "search tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

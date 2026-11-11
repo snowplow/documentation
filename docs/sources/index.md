@@ -5,6 +5,7 @@ date: "2020-02-15"
 sidebar_position: 4
 description: "Overview of Snowplow tracker SDKs for web, mobile, server-side platforms, and third-party webhook integrations to collect event data."
 keywords: ["snowplow trackers", "event tracking sdks", "snowplow sources", "webhooks", "tracker sdk", "event generation", "event creation"]
+content_type: landing
 ---
 
 ```mdx-code-block

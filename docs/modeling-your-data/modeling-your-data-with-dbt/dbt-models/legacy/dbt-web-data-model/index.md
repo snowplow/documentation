@@ -4,6 +4,7 @@ sidebar_label: "Web"
 description: "Legacy Web dbt package for web event data modeling. Superseded by the Unified Digital package."
 keywords: ["web dbt legacy", "legacy web package", "deprecated web"]
 sidebar_position: 700
+content_type: concept
 ---
 
 ```mdx-code-block

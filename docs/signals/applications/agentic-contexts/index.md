@@ -4,6 +4,7 @@ sidebar_position: 25
 sidebar_label: "Agentic contexts"
 description: "Fetch an agentic context from Snowplow Signals as structured JSON or a plain-language narrative to ground your agents in real-time user activity."
 keywords: ["agentic context", "event log", "llm context", "signals python sdk", "signals node sdk"]
+content_type: how-to
 ---
 
 ```mdx-code-block

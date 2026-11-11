@@ -5,6 +5,7 @@ date: "2022-01-31"
 sidebar_position: 3000
 description: "Track events in Flutter using SelfDescribing, Structured, ScreenView, Timing, and Consent events. Enable auto-tracking of page views with SnowplowObserver or manually track custom events with schemas."
 keywords: ["flutter events", "self-describing events", "screen view tracking", "auto-tracking", "snowplow observer"]
+content_type: how-to
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.

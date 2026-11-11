@@ -4,6 +4,7 @@ sidebar_label: "Duplicates"
 description: "How we deal with duplicate events in our packages."
 keywords: ["deduplication", "duplicate events", "event deduplication", "duplicate handling"]
 sidebar_position: 60
+content_type: concept
 ---
 
 Duplicates in your data can happen, because of Snowplow's _At Least Once_ delivery approach. However, it's important for analysis and reporting that these duplicates are removed when doing any kind of data modeling. As part of our packages, we make sure to remove duplicate events at the very start to ensure any downstream data is correct.

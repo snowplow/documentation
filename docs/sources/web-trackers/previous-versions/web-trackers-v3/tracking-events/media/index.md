@@ -1,5 +1,6 @@
 ---
 title: "Media"
+sidebar_label: "Media"
 sidebar_position: 75
 description: "Documentation for Media in the web tracker."
 keywords: ["tracker", "configuration"]

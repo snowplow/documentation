@@ -4,6 +4,7 @@ sidebar_label: "Mobile"
 description: "Legacy Mobile dbt package for mobile event data modeling. Superseded by the Unified Digital package."
 keywords: ["mobile dbt legacy", "legacy mobile package", "deprecated mobile"]
 sidebar_position: 800
+content_type: concept
 ---
 
 ```mdx-code-block

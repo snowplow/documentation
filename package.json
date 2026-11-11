@@ -6,14 +6,19 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "build:cf": "NODE_OPTIONS='--max-old-space-size=4096' docusaurus build && rm -f build/_redirects",
+    "build:cf": "(git rev-parse --is-shallow-repository | grep -q true && git fetch --unshallow --quiet || true) && NODE_OPTIONS='--max-old-space-size=4096' docusaurus build && rm -f build/_redirects",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "qa:a11y": "playwright test -c quality/playwright.config.mjs quality/a11y.spec.mjs",
+    "qa:a11y:summary": "node quality/a11y-summary.mjs",
+    "qa:visual": "playwright test -c quality/playwright.config.mjs quality/visual.spec.mjs",
+    "qa:visual:capture": "playwright test -c quality/playwright.config.mjs quality/visual.spec.mjs --update-snapshots"
   },
   "dependencies": {
     "@braintree/sanitize-url": "^6.0.1",
@@ -87,10 +92,12 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4",
     "@docusaurus/module-type-aliases": "^3.10.1",
     "@docusaurus/types": "^3.10.1",
     "@mermaid-js/layout-elk": "^0.1.9",
     "@mui/system": "^5.18.0",
+    "@playwright/test": "~1.57.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/mdx-js__react": "^2.0.0",
     "@types/react": "^18.2.0",
@@ -109,6 +116,7 @@
     "rehype-remark": "^10.0.1",
     "remark-stringify": "^11.0.0",
     "style-loader": "3.3.3",
+    "stylelint": "^16",
     "tailwindcss": "3.3.0",
     "typescript": "^5.5.4",
     "unified": "^11.0.5",

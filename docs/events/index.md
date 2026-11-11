@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_label: "Events"
 sidebar_position: 3.5
 keywords: ["events", "custom events", "tracking", "out-of-the-box data"]
+content_type: landing
 ---
 
 This section gives an overview of the different kinds of Snowplow events, as well as general tracking concepts.

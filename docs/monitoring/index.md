@@ -5,6 +5,7 @@ sidebar_position: 8.6
 sidebar_label: "Monitoring"
 description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards for Snowflake, BigQuery, and Databricks, and Console API access."
 keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity", "Databricks data quality"]
+content_type: concept
 ---
 
 ```mdx-code-block

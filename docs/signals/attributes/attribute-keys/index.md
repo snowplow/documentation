@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Attribute keys"
 description: "Create custom attribute keys based on any event property to specify the analytical context for attribute calculations. Use built-in keys like domain_userid or define your own."
 keywords: ["attribute keys", "custom attribute keys", "analytical context", "atomic properties", "event properties", "entity properties"]
+content_type: how-to
 ---
 
 ```mdx-code-block

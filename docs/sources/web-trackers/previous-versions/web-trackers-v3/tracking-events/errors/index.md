@@ -1,5 +1,6 @@
 ---
 title: "Errors"
+sidebar_label: "Errors"
 sidebar_position: 110
 description: "Documentation for Errors in the web tracker."
 keywords: ["tracker", "configuration"]

@@ -5,6 +5,7 @@ date: "2023-04-14"
 sidebar_position: 300
 description: "Test Snowbridge configurations locally using stdin and stdout sources before deploying to production stream infrastructure."
 keywords: ["snowbridge testing", "local testing", "stdin stdout", "snowbridge development"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -1,5 +1,6 @@
 ---
 title: "Performance Timing"
+sidebar_label: "Performance Timing"
 date: "2021-04-07"
 sidebar_position: 14000
 description: "Documentation for Performance Timing in the web tracker."

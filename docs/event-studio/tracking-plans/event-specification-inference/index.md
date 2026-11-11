@@ -5,6 +5,7 @@ sidebar_position: 2
 description: "Event specification inference enables the Snowplow pipeline to automatically match incoming events to your published event specifications, surfacing business context and volume metrics without changes to your tracking implementation."
 keywords: ["event specification inference", "event matching", "published status", "tracking plans", "data quality", "event validation", "property instructions"]
 date: "2026-03-01"
+content_type: concept
 ---
 
 Event specification inference allows the Snowplow pipeline to automatically match incoming events against your published [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). Once a specification is published, the pipeline can attach business context to matching events and surface volume and recency data in the Console — without any changes to your tracking implementation.

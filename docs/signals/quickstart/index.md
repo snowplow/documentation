@@ -5,6 +5,7 @@ sidebar_position: 3
 description: "Sign up for Snowplow Signals, run one Snowplow CLI command to set up your project and coding agent, then let the agent add tracking, Signals configuration, and the code that uses it."
 keywords: ["signals quickstart", "snowplow cli", "snowplow mcp", "coding agent", "claude code", "cursor", "codex", "real-time attributes"]
 date: "2026-10-14"
+content_type: tutorial
 ---
 
 Add Signals to your web app with one command. The command sets up your project and your coding agent, and the agent then adds the tracking, the Signals configuration, and the code that uses it.

@@ -4,6 +4,7 @@ sidebar_position: 10
 sidebar_label: "Attributes"
 description: "Define individual attributes within attribute groups by selecting event schemas or event specifications, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection", "python sdk attributes", "attribute configuration"]
+content_type: how-to
 ---
 
 ```mdx-code-block

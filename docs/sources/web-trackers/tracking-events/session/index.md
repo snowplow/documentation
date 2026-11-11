@@ -4,6 +4,7 @@ sidebar_label: "Sessions"
 sidebar_position: 35
 description: "Automatically track session information including session IDs, event indexes, and references to previous sessions with configurable session timeouts."
 keywords: ["sessions", "session tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

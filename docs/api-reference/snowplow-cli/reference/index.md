@@ -5,6 +5,7 @@ date: 2026-03-06
 sidebar_position: 0
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
+content_type: reference
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

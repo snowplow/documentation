@@ -4,6 +4,7 @@ sidebar_label: "Snowtype and Google Tag Manager"
 sidebar_position: 5
 description: "Generate tracking code specifically formatted for Google Tag Manager custom JavaScript with Snowtype's GTM target for easier tag implementation."
 keywords: ["Snowtype GTM", "Google Tag Manager", "GTM tracking", "GTM custom JavaScript", "GTM code generation"]
+content_type: how-to
 ---
 
 Snowtype can generate tracking code specifically formatted for Google Tag Manager (GTM). Instead of importing the code into a JavaScript project, you copy the generated output into a [Custom JavaScript variable](https://support.google.com/tagmanager/answer/7683362?hl=en#custom_javascript) in GTM.

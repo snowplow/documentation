@@ -5,6 +5,7 @@ description: "Install and configure plugins for the JavaScript tag and Browser n
 keywords: ["plugin configuration", "plugin installation", "addplugin", "browser tracker plugins", "javascript tracker plugins", "custom plugins"]
 date: "2021-04-07"
 sidebar_position: 750
+content_type: how-to
 ---
 
 ```mdx-code-block

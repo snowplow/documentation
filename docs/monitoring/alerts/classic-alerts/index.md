@@ -5,6 +5,7 @@ sidebar_label: "Classic alerts"
 sidebar_position: 2
 description: "Set up cost-effective classic alerts for new failed events and daily digests using internal telemetry data."
 keywords: ["classic alerts", "pipeline alerts", "failed event notifications", "email alerts"]
+content_type: how-to
 ---
 
 

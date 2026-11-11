@@ -4,6 +4,7 @@ sidebar_label: "Adding custom schemas"
 sidebar_position: 4
 description: "Connect Snowplow Micro to Iglu registries or add schemas directly. Point Micro to Console registries, Iglu Server, or mount local schema files for custom event validation."
 keywords: ["custom schemas", "iglu registry", "schema validation", "local schemas", "data structures"]
+content_type: how-to
 ---
 
 ```mdx-code-block

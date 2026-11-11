@@ -1,5 +1,6 @@
 ---
 title: "Tracking Events"
+sidebar_label: "Tracking Events"
 sidebar_position: 40
 description: "Documentation for tracking Tracking Events with the web tracker."
 keywords: ["tracking", "events"]

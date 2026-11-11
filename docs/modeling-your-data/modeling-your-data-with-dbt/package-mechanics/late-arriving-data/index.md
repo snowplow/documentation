@@ -4,6 +4,7 @@ sidebar_label: "Late arriving data"
 description: "A detailed overview of how the data flows and how to manage variables for handling edge cases."
 keywords: ["late arriving data", "late sent events", "late loaded events", "data timing"]
 sidebar_position: 70
+content_type: concept
 ---
 
 ```mermaid

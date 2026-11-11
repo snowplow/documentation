@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "The Snowplow Assistant is an AI assistant built into Snowplow Console that lets you manage your tracking plans, pipelines, and data quality through natural language."
 keywords: ["snowplow assistant", "ai assistant", "ai agent", "natural language", "console", "automation"]
 date: "2026-04-10"
+content_type: concept
 ---
 
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';

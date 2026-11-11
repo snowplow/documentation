@@ -5,6 +5,7 @@ date: "2021-07-07"
 sidebar_position: 0
 description: "Configure Postgres Loader with Kinesis, Pub/Sub, or local input sources and database connection settings for event loading."
 keywords: ["postgres loader config", "database config", "kinesis input", "pubsub input", "postgres settings"]
+content_type: reference
 ---
 
 This is a complete list of the options that can be configured in the postgres loader's HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/snowplow-postgres-loader/tree/master/config) show how to prepare an input file.

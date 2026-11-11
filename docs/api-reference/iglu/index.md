@@ -5,6 +5,7 @@ sidebar_position: 90
 date: "2026-05-14"
 description: "Iglu is the schema registry that powers schema validation in Snowplow pipelines, with public schemas in Iglu Central and private schemas in Iglu Server."
 keywords: ["iglu", "schema registry", "json schema", "schema validation"]
+content_type: concept
 ---
 
 ```mdx-code-block

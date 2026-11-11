@@ -4,6 +4,7 @@ sidebar_label: "Initialization and configuration"
 sidebar_position: 2000
 description: "Initialize the Flutter tracker with createTracker method and configure TrackerConfiguration, SubjectConfiguration, GdprConfiguration, and EmitterConfiguration. Set up app identifiers, context entities, session tracking, and anonymous tracking options."
 keywords: ["flutter configuration", "tracker initialization", "tracker configuration", "subject configuration", "gdpr configuration"]
+content_type: reference
 ---
 
 The package provides a single method to initialize and configure a new tracker, the `Snowplow.createTracker` method. It accepts configuration parameters for the tracker and returns a `SnowplowTracker` instance.

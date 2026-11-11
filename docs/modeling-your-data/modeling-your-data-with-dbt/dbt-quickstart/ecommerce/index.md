@@ -4,6 +4,7 @@ sidebar_position: 40
 title: "Ecommerce Quickstart"
 description: "Quick start guide for the Snowplow Ecommerce dbt package to model cart, checkout, product, and transaction data."
 keywords: ["ecommerce quickstart", "ecommerce setup", "dbt ecommerce installation"]
+content_type: how-to
 ---
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:

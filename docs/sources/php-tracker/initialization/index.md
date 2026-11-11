@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 20
 description: "Initialize the PHP tracker with emitter, subject, namespace, and encoding configuration for event tracking."
 keywords: ["php tracker initialization", "tracker configuration", "emitter setup"]
+content_type: how-to
 ---
 
 To instantiate a new Tracker instance we need to make sure the Snowplow Tracker classes are available.

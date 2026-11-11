@@ -5,6 +5,7 @@ sidebar_position: 2
 description: "Send Snowplow events to Bloomreach Engagement for real-time customer analytics and personalization using the Batch Commands API."
 keywords: ["Bloomreach", "Bloomreach Engagement", "event forwarding", "customer data platform", "personalization"]
 date: "2026-05-05"
+content_type: integration
 ---
 
 ```mdx-code-block

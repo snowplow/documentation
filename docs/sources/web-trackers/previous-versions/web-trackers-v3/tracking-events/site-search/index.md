@@ -1,5 +1,6 @@
 ---
 title: "Site search"
+sidebar_label: "Site search"
 sidebar_position: 120
 description: "Documentation for Site search in the web tracker."
 keywords: ["tracker", "configuration"]

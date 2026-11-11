@@ -8,6 +8,7 @@ sidebar_custom_props:
 description: "Snowplow's AI capabilities, including the Console assistant, MCP servers, Signals, and skills."
 keywords: ["AI", "LLMs", "generative AI"]
 date: "2026-06-22"
+content_type: landing
 ---
 
 import { CardGrid, CallToActionCard } from '@site/src/components/CardGrid'

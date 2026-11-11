@@ -5,6 +5,7 @@ sidebar_label: "Agent traffic"
 description: "Measure how AI agents consume your content and how many users their platforms refer back, using CDN trackers, agent classification, and the Agent Analytics dbt package."
 keywords: ["agent intelligence", "AI agent traffic", "AI crawler analytics", "agent analytics", "answer engine optimization", "AEO"]
 date: "2026-09-29"
+content_type: concept
 ---
 
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';

@@ -5,6 +5,7 @@ description: "Attach user and device information to tracked events using the Sub
 keywords: ["subject class", "user data", "device information", "screen resolution", "user id"]
 date: "2020-02-25"
 sidebar_position: 30
+content_type: reference
 ---
 
 Subject information describes the user and device associated with the event, such as their user ID, what type of device they used, or what size screen that device had.

@@ -5,6 +5,7 @@ date: "2023-06-14"
 sidebar_position: 10
 description: "Install the Python tracker from PyPI using pip for event tracking in Python applications with minimal dependencies."
 keywords: ["python tracker installation", "pip install", "pypi setup"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ sidebar_position: 10
 sidebar_label: "Source applications"
 description: "Document and manage your tracking implementation across different applications with source applications in Event Studio."
 keywords: ["source applications", "app id", "application entities", "global context", "data sources"]
+content_type: concept
 ---
 
 import Badges from '@site/src/components/Badges';

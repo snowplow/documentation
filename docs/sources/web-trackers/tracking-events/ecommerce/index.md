@@ -4,6 +4,7 @@ sidebar_label: "Ecommerce"
 sidebar_position: 70
 description: "Track comprehensive ecommerce interactions including product views, cart actions, checkout steps, transactions, and refunds with standardized event schemas."
 keywords: ["ecommerce", "transactions"]
+content_type: how-to
 ---
 
 ```mdx-code-block

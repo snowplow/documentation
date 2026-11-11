@@ -4,6 +4,7 @@ sidebar_label: "Settings template"
 sidebar_position: 500
 description: "Configure the Snowplow Settings Variable template for GTM with tracker options, collector endpoints, privacy settings, cookies, dispatching methods, and predefined context entities for consistent tracking configuration."
 keywords: ["gtm settings variable", "tracker configuration", "collector endpoint", "privacy settings", "cookie configuration"]
+content_type: reference
 ---
 
 This page describes the settings available in the Snowplow Settings Variable template for Google Tag Manager.

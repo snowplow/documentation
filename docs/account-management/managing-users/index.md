@@ -5,6 +5,7 @@ date: "2020-02-15"
 sidebar_position: 1
 description: "Add and remove users in Snowplow Console, configure Single Sign-On with identity providers including Google Workspace, Entra ID, Okta, and OpenID Connect."
 keywords: ["user management", "SSO setup", "Single Sign-On", "SAML", "identity provider", "Entra ID", "Google Workspace", "Okta"]
+content_type: how-to
 ---
 
 There are two ways to add and remove users in Console: directly managed in Console, or managed through your Single Sign-On (SSO) provider.

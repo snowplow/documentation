@@ -4,6 +4,7 @@ sidebar_position: 6
 sidebar_label: "Query the data"
 description: "Inspecting the events you tracked"
 keywords: ["querying data", "atomic events", "data warehouse", "SQL queries"]
+content_type: tutorial
 ---
 
 ```mdx-code-block

@@ -83,13 +83,41 @@ const sidebars = {
         // Collapsed elsewhere; opens automatically on its own pages
       ),
     ]),
+    // In the order people do the work. Snowtype code generation lives with
+    // the trackers, under Collect events; the hand-off page links to it.
     group('Design tracking', [
-      pick('event-studio', {
-        hoist: true,
-        indexLabel: 'Event Studio',
-        // Snowtype code generation lives with the trackers, under Collect events
-        exclude: ['event-studio/query-sql', 'event-studio/implement-tracking'],
+      pick('event-studio', { indexOnly: true, label: 'Event Studio overview' }),
+      pick('event-studio/source-applications', { label: 'Plan source applications' }),
+      pick('event-studio/data-structures', {
+        label: 'Manage data structures',
+        exclude: ['event-studio/data-structures/json-editor'],
       }),
+      sub('Manage tracking plans', [
+        pick('event-studio/tracking-plans', {
+          hoist: true,
+          indexLabel: 'Tracking plan elements',
+          exclude: [
+            'event-studio/tracking-plans/data-quality',
+            'event-studio/tracking-plans/event-specification-inference',
+            'event-studio/tracking-plans/event-specification-validation',
+          ],
+        }),
+        pick('event-studio/event-catalog', { label: 'Find existing events' }),
+        sub('Monitor tracking plans', [
+          pick('event-studio/tracking-plans/data-quality', { label: 'Check volumes and violations' }),
+          pick('event-studio/tracking-plans/event-specification-inference', { label: 'How inference matches events' }),
+          pick('event-studio/tracking-plans/event-specification-validation', { label: 'How validation checks events' }),
+        ]),
+      ]),
+      pick('event-studio/hand-off-to-implementation', { label: 'Hand off to developers' }),
+      pick('event-studio/test-and-publish', { label: 'Test, promote, and publish' }),
+      pick('event-studio/evolve-tracking-design', { label: 'Evolve your tracking design' }),
+      // The overview, not the API pages, covers the CLI and CI/CD, so it gets its own entry
+      sub('Manage tracking as code', [
+        pick('event-studio/programmatic-management', { hoist: true, indexLabel: 'Automate with the CLI and CI/CD' }),
+      ]),
+      // Redirects to Create a data structure (worker/redirects.js), so it stays hidden
+      pick('event-studio/data-structures/json-editor', { className: 'hidden' }),
     ], { collapsible: true, collapsed: true }),
     group('Collect events', [
       pick('sources', { indexOnly: true, label: 'Trackers overview' }),

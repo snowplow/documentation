@@ -47,7 +47,7 @@ To set up by hand, install the plugin:
 npx plugins add snowplow/skills
 ```
 
-Get the four [connection credentials](/docs/signals/connection/index.md#connection-credentials) and add them to `.env` as `SNOWPLOW_SIGNALS_API_URL`, `SNOWPLOW_SIGNALS_ORG_ID`, `SNOWPLOW_SIGNALS_API_KEY_ID`, and `SNOWPLOW_SIGNALS_API_KEY`. Then start your agent and send:
+Get the four [connection credentials](/docs/signals/connection/reference/index.md#connection-credentials) and add them to `.env` as `SNOWPLOW_SIGNALS_API_URL`, `SNOWPLOW_SIGNALS_ORG_ID`, `SNOWPLOW_SIGNALS_API_KEY_ID`, and `SNOWPLOW_SIGNALS_API_KEY`. Then start your agent and send:
 
 ```txt
 Use the signals-setup skill to set up Snowplow Signals in this project.

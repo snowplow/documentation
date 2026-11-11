@@ -38,7 +38,7 @@ Check out the documentation for [managing](/docs/event-studio/data-structures/in
 ## Self-describing JSON schema anatomy
 
 :::info[Data structures builder]
-Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/index.md), without worrying about how it works under the hood.
+Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-builder), without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).

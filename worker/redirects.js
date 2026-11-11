@@ -12,6 +12,8 @@ const forcedRules = [
   ['/docs/identities/concepts/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
   ['/docs/event-studio/query-sql/', '/docs/destinations/warehouses-lakes/querying-data/#get-example-queries-from-console', 301],
   ['/docs/event-studio/query-sql.md', '/docs/destinations/warehouses-lakes/querying-data.md', 301],
+  ['/docs/event-studio/data-structures/json-editor/', '/docs/event-studio/data-structures/create/#create-a-data-structure-with-the-json-editor', 301],
+  ['/docs/event-studio/data-structures/json-editor.md', '/docs/event-studio/data-structures/create.md', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],
   ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified.md', '/tutorials/unified-digital/setting-up-locally.md', 301],
   // First steps merged into the CDI overview. Exact rules, so the pages
@@ -402,7 +404,7 @@ const fallbackRules = [
   ['/docs/event-studio/data-structures/manage/cli/*', '/docs/api-reference/snowplow-cli/data-structures/:splat', 301],
   ['/docs/event-studio/data-structures/manage/api/*', '/docs/event-studio/programmatic-management/data-structures-api/:splat', 301],
   ['/docs/event-studio/data-structures/manage/iglu/*', '/docs/api-reference/iglu/manage-schemas/:splat', 301],
-  ['/docs/event-studio/data-structures/manage/builder/*', '/docs/event-studio/data-structures/:splat', 301],
+  ['/docs/event-studio/data-structures/manage/builder/*', '/docs/event-studio/data-structures/create/#create-a-data-structure-with-the-builder', 301],
   ['/docs/event-studio/data-structures/manage/*', '/docs/event-studio/data-structures/:splat', 301],
   ['/docs/event-studio/event-specifications/api/*', '/docs/event-studio/programmatic-management/event-specifications-api/:splat', 301],
   ['/docs/event-studio/event-specifications/*', '/docs/event-studio/tracking-plans/event-specifications/:splat', 301],

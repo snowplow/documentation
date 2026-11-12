@@ -7,7 +7,7 @@ keywords: ["real-time customer context", "real-time personalization", "behaviora
 content_type: landing
 ---
 
-Snowplow Signals computes user attributes from your behavioral data in real time, and serves them to your applications over an API. Attributes are calculated from your Snowplow event stream as events arrive, or synced from tables in your warehouse.
+Snowplow Signals computes user attributes from your behavioral data in real time, and serves them to your applications over an API. Attributes are calculated from your Snowplow event stream as events arrive, or synced from tables in Snowflake, BigQuery, or Databricks.
 
 Use Signals to:
 * Personalize content, recommendations, and pricing based on what the user is doing in their current session
@@ -21,68 +21,62 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 <SignalsFreeTier/>
 ```
 
-To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. It uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. To do the same steps yourself in Console, follow the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md).
+To try Signals on your own web app, follow the [quickstart](/docs/signals/quickstart/index.md), where a coding agent adds the tracking and configuration for you, or the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md) to do the same steps in Console.
 
 ## Why teams use Signals
 
-Signals covers every step from collecting an event to serving an attribute, so you don't assemble and run that path yourself.
+Signals handles collection, calculation, and serving:
 
-* **Collection is built in.** A Snowplow tracker sends events, the pipeline validates them against their schemas, and Signals calculates attributes from them. You don't build an event pipeline, a stream processor, or an online store, or connect them to each other. The free tier comes with a pipeline and Signals already enabled.
-* **You describe behavior, not processing code.** An attribute is a short definition: the events to include, an aggregation such as `counter` or `unique_list`, and optionally a time period. For example, "product pages viewed in the last 10 minutes". Signals keeps it up to date as each event arrives.
-* **It acts while the user is still in the session.** Attributes update as each event arrives, and your application reads them in the same request.
-* **One read returns live behavior and warehouse history.** A service combines attributes calculated from the event stream with values synced from Snowflake, BigQuery, or Databricks.
-* **One definition serves both real time and training.** The same attribute definitions serve live values and build point-in-time training datasets.
-* **Your systems make the decisions.** Signals computes and serves the values. Your application, ranking model, messaging tool, or agent decides what to do with them.
+* **Collection is built in**: your Snowplow pipeline tracks and validates events, so you don't build a separate event pipeline, stream processor, or online store.
+* **Attributes are short definitions, not code**: choose the events, an aggregation, and a time period, such as "product pages viewed in the last 10 minutes".
+* **Values update in the session**: attributes update as each event arrives, so your application reads current values while the session is still in progress.
+* **One read combines live and historical data**: a service returns stream attributes alongside warehouse-synced values.
+* **One definition serves real time and training**: the same attributes build point-in-time datasets for ML models.
+* **Your systems decide**: Signals serves the values, and your application, model, or agent decides what to do with them.
 
 ### Why teams choose Signals over other tools
 
-Teams that evaluate Signals usually compare it with a feature store, a customer data platform (CDP), or building the same thing in-house:
-
 | Instead of | Why teams choose Signals |
 | --- | --- |
-| A feature store | A feature store only serves features computed from data you already collect and process, so you still build the ingestion and the stream processing. Signals includes collection, so attributes come straight from validated behavioral events. You define them with a few settings rather than streaming code, and the same definitions also build point-in-time training datasets. |
-| A customer data platform (CDP) | CDPs build profiles and audiences for marketing tools, and update them in batches or with a delay. Signals updates attributes as each event arrives and serves them in the same request, so your application or agent can respond to what the user is doing in this session. |
-| Building it in-house | An in-house version needs event collection, schema validation, stream processing, a low-latency store, an API, and someone to run all of them. Signals provides these as one managed service, with versioned definitions, so you can go from the quickstart to live attributes without building infrastructure. |
+| A feature store | A feature store serves data you already collect and process. Signals collects and processes the events too, so you don't build ingestion. |
+| A customer data platform (CDP) | CDPs update profiles and audiences in batches for marketing tools. Signals updates attributes as each event arrives, for use in the current session. |
+| Building it in-house | You don't build or run your own collection, stream processing, low-latency store, or API. |
 
-Signals doesn't replace every tool here: many teams keep their CDP for marketing audiences, or their feature store for non-behavioral features, and use Signals for in-session behavior. For named vendor comparisons, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
+Many teams keep their CDP or feature store alongside Signals. For named vendor comparisons, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
 
 ## How Signals works
 
-Signals reads the events your Snowplow pipeline collects, calculates attributes from them, and stores the latest values in the Profiles Store. Your application, agent, or model then reads the values, or Signals pushes a message to it when a user meets criteria you define.
+Signals calculates attributes from your events and stores the latest values in the Profiles Store, where your applications and agents read them.
 
 ![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
 
-The same flow, as steps:
+1. A Snowplow tracker sends events to your pipeline.
+2. Signals updates the values of your **attribute groups** as each event arrives, or syncs them from warehouse tables.
+3. Applications read the values through a **service**. Agents read the user's recent events through an **agentic context**, or attribute values through the Signals MCP server.
+4. When values meet an **intervention**'s criteria, Signals pushes the intervention to subscribed applications.
 
-1. A Snowplow tracker sends events from your app or website to your pipeline.
-2. Signals evaluates each event against your published **attribute groups**, and updates the attribute values in the Profiles Store. Warehouse attribute groups sync pre-calculated values from your warehouse tables instead.
-3. Your application reads the values it needs through a **service**, or an agent reads them through an **agentic context** or the Signals MCP server.
-4. When updated values meet the criteria of an **intervention**, Signals pushes it to the applications that subscribe to it.
+The components you configure:
 
-These are the components you configure:
+* **Attribute group**: a versioned set of attributes, such as `product_view_count_last_10_min`, calculated for one attribute key.
+* **Attribute key**: who or what attributes describe, such as `domain_userid` for a user or `domain_sessionid` for a session.
+* **Service**: attribute groups pinned to specific versions, for applications to read.
+* **Intervention**: an if-then rule on attribute values. The first time a user meets the rule, Signals pushes the intervention to subscribed applications, such as the browser plugin.
+* **Agentic context**: the user's most recent events in the current session, up to 100 events and no older than 1 hour, as JSON or a narrative for an agent.
 
-* **Attribute**: a fact about user behavior, such as `product_view_count_last_10_min` or `first_mkt_source`. Attributes exist only inside attribute groups.
-* **Attribute group**: a versioned set of attributes, with the data source they're calculated from and the attribute key they're calculated for.
-* **Attribute key**: the identifier that attributes are calculated for, such as `domain_userid` for a user or `domain_sessionid` for a session.
-* **Service**: a stable interface for applications, made of attribute groups pinned to specific versions.
-* **Intervention**: an if-then rule on attribute values. When a user first meets the criteria, Signals sends the intervention to subscribed applications.
-* **Agentic context**: a rolling record of a user's activity in the current session, up to 100 events or 1 hour, with a prompt, returned as JSON or a plain-language narrative.
-
-[How Signals works](/docs/signals/concepts/index.md) covers each component in detail, and [pull and push](/docs/signals/concepts/pull-and-push/index.md) compares services with interventions.
+See [How Signals works](/docs/signals/concepts/index.md) for detail on each.
 
 ### Requirements and interfaces
 
-Signals runs alongside a Snowplow pipeline, and reads events from it:
+Signals runs alongside a Snowplow pipeline:
 
-* **Pipeline**: the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) includes a hosted pipeline. Snowplow CDI Cloud and Private Managed Cloud customers deploy Signals from Console in the AWS region they choose, after their account team enables it. See [Set up Signals](/docs/signals/setup/index.md).
-* **Data sources**: the real-time event stream, optionally backfilled from your warehouse, or pre-calculated values in warehouse tables. Snowflake, BigQuery, and Databricks are supported.
-* **Defining configuration**: Console, the Python SDK, or the Snowplow MCP server.
-* **Reading values**: the Python SDK (`snowplow-signals`), the Node.js SDK (`@snowplow/signals-node`), the Signals API over HTTP, and the Signals MCP server. The browser plugin subscribes to interventions.
-* **Authentication**: a Snowplow API key. Use a key with the **View** permission to read attributes, and **Edit** to also create and publish configuration. Keep keys on the server.
+* **Pipeline**: the free tier includes one, or Snowplow CDI customers [deploy Signals](/docs/signals/setup/index.md) on their existing pipeline.
+* **Configure with**: Console, the Python SDK, or the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+* **Read with**: the Python SDK (`snowplow-signals`), Node.js SDK (`@snowplow/signals-node`), Signals API, or, for agents, the Signals MCP server. The browser plugin subscribes to interventions.
+* **Authenticate with**: a Snowplow API key with **View** permission to read, or **Edit** to also publish configuration.
 
 ## Retrieve attributes in your application
 
-This example reads the attributes of a service called `my_service` for one user, identified by their `domain_userid`. Find the four connection values in Console, as described in [Connect to Signals](/docs/signals/connection/index.md).
+This example reads a service's attributes for one user. It needs four connection values: the Signals API URL, API key, API key ID, and organization ID. [Connect to Signals](/docs/signals/connection/index.md) explains where to find them.
 
 <CodeGroup groupId="signals-sdk">
 
@@ -122,11 +116,9 @@ attributes = sp_signals.get_service_attributes(
 
 </CodeGroup>
 
-To define the service first, see [Services](/docs/signals/applications/services/index.md). [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) covers batch lookups, reading an attribute group directly, and the Signals API.
+See [Services](/docs/signals/applications/services/index.md) to define a service, and [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for batch lookups and the Signals API.
 
 ## Find the right page
-
-Use this table to find the page for what you want to do:
 
 | I want to | Page |
 | --- | --- |

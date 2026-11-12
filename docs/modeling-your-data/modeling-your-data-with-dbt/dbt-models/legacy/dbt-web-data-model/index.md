@@ -4,19 +4,18 @@ sidebar_label: "Web"
 description: "Legacy Web dbt package for web event data modeling. Superseded by the Unified Digital package."
 keywords: ["web dbt legacy", "legacy web package", "deprecated web"]
 sidebar_position: 700
+content_type: concept
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import {versions} from '@site/src/componentVersions';
 
 ```
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>
-<Badges badgeType="Maintained"></Badges>
-<Badges badgeType="SCL"></Badges>
+<VersionBadge component="dbtSnowplowWeb" />
+<TierBadge tier="maintained" />
+<LicenseBadge license="scl" />
 </BadgeGroup>
 
 :::info

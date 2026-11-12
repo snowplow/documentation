@@ -4,6 +4,7 @@ sidebar_label: "Ecommerce"
 sidebar_position: 70
 description: "Track ecommerce transactions, carts, checkouts, products, and promotions with Snowplow ecommerce events and context entities."
 keywords: ["ecommerce tracking", "transaction events", "cart tracking", "checkout tracking", "product events"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

@@ -1,5 +1,6 @@
 ---
 title: "Third Party CDN Hosting"
+sidebar_label: "Third Party CDN Hosting"
 date: "2020-10-12"
 sidebar_position: 4100
 description: "Documentation for Third Party CDN Hosting in the web tracker."

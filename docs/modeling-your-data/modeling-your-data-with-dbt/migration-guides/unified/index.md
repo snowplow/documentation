@@ -4,6 +4,7 @@ sidebar_label: "Unified Digital"
 sidebar_position: 10
 description: "Migration guide for upgrading the Snowplow Unified Digital dbt package including breaking changes and configuration updates."
 keywords: ["unified digital migration", "unified upgrade", "dbt unified version"]
+content_type: how-to
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -5,6 +5,7 @@ date: "2022-10-14"
 sidebar_position: 1
 description: "Troubleshoot and resolve data model failures in Snowplow Console including debugging steps and common issues."
 keywords: ["data model failures", "dbt debugging", "model troubleshooting", "Console errors"]
+content_type: how-to
 ---
 
 ## Receive alerts

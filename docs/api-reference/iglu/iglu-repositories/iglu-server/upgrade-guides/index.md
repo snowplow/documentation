@@ -5,6 +5,7 @@ sidebar_position: 100
 description: "Guides for upgrading Iglu Server to newer versions, with breaking changes and migration instructions."
 keywords: ["iglu server upgrade", "migration guide", "version upgrade"]
 date: "2026-10-16"
+content_type: landing
 ---
 
 ```mdx-code-block

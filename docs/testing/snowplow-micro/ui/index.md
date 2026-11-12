@@ -4,6 +4,7 @@ sidebar_position: 4
 sidebar_label: "Explore events"
 description: "Access the Micro dashboard to view, filter, and investigate good and bad events. Share the dashboard with colleagues through public domain names."
 keywords: ["micro dashboard", "event inspection", "filter events", "view events"]
+content_type: how-to
 ---
 
 Micro provides a user interface that helps you explore events sent to it, including [failed events](/docs/fundamentals/failed-events/index.md).

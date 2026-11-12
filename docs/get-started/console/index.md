@@ -5,6 +5,7 @@ sidebar_label: "Console getting started"
 description: "Use the Getting Started dashboard in Console to design tracking, implement it, deploy data models, and configure Signals."
 keywords: ["console", "getting started", "onboarding", "tracking plan", "implement tracking", "signals", "data model"]
 date: "2026-03-09"
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
@@ -67,8 +68,8 @@ Once data is flowing, you can deploy a data model to transform raw events into s
 
 [Signals](/docs/signals/introduction/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
-:::note[Paid add-on]
-Signals is a paid add-on. Contact your account team to enable it.
+:::note[Signals free tier]
+You can start on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) without a credit card or a sales call. To use Signals beyond the free tier, contact your account team.
 :::
 
 ### Design Signals attributes

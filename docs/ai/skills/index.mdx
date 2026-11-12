@@ -5,9 +5,8 @@ sidebar_position: 4
 description: "Browse Snowplow skills for Claude and other AI assistants."
 keywords: ["skills", "Claude", "MCP", "AI assistants"]
 date: "2026-06-22"
+content_type: landing
 ---
-
-import { CardGrid, LinkCard } from '@site/src/components/CardGrid'
 
 Snowplow skills connect your AI assistant, such as Claude, Cursor, Codex, or another MCP-compatible tool, to your Snowplow account. With a skill, your assistant can work with your pipelines, schemas, and Console data directly instead of describing them.
 
@@ -26,12 +25,12 @@ For other clients, such as Claude.ai, see [Configure the MCP server](/docs/ai/sn
 ## Build and design
 
 <CardGrid cols={2}>
-  <LinkCard
+  <Card
     title="Tracking design"
     description="Plan the events, entities, and schemas you'll track before you start building."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/tracking-design"
   />
-  <LinkCard
+  <Card
     title="Implementation guidance"
     description="Add Snowplow trackers to your website, app, or back-end, and confirm your events are firing correctly."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/implementation-guidance"
@@ -41,7 +40,7 @@ For other clients, such as Claude.ai, see [Configure the MCP server](/docs/ai/sn
 ## Real-time and AI
 
 <CardGrid cols={2}>
-  <LinkCard
+  <Card
     title="Signals"
     description="Set up real-time customer attributes and interventions to personalize experiences as behavior happens."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/signals"
@@ -51,17 +50,17 @@ For other clients, such as Claude.ai, see [Configure the MCP server](/docs/ai/sn
 ## Operate
 
 <CardGrid cols={2}>
-  <LinkCard
+  <Card
     title="Pipeline infrastructure"
     description="Configure collectors and enrichments, and monitor pipeline health from collection through to your warehouse."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/pipeline-infrastructure"
   />
-  <LinkCard
+  <Card
     title="Console operations"
     description="Manage pipelines, enrichments, and tracking plans directly in Snowplow Console."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/console-operations"
   />
-  <LinkCard
+  <Card
     title="Troubleshooting"
     description="Diagnose failed events and enrichment issues, and get pointed toward a fix."
     href="https://github.com/snowplow/skills/tree/main/plugins/snowplow/skills/troubleshooting"

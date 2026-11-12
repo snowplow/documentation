@@ -5,6 +5,7 @@ date: "2020-10-22"
 sidebar_position: 20
 description: "Standalone JVM application for enriching Snowplow events from Google Cloud PubSub with configurable enrichments and validation."
 keywords: ["enrich pubsub", "google cloud pubsub", "snowplow gcp"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 900
 description: "View example Snowbridge JavaScript transformations for Snowplow and non-Snowplow data including filtering, field modification, and partition keys."
 keywords: ["snowbridge config", "transformation examples", "javascript examples", "snowplow mode", "script examples"]
+content_type: reference
 ---
 
 ```mdx-code-block

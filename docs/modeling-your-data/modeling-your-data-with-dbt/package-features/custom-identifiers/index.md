@@ -5,6 +5,7 @@ sidebar_position: 50
 description: "Define custom session and user identifiers in Snowplow dbt packages using SQL expressions and custom logic."
 keywords: ["custom sessionization", "session identifiers", "user identifiers", "custom SQL identifiers"]
 toc_max_heading_level: 5
+content_type: how-to
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

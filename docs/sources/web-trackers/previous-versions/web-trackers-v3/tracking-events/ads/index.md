@@ -1,5 +1,6 @@
 ---
 title: "Ads"
+sidebar_label: "Ads"
 sidebar_position: 95
 description: "Documentation for Ads in the web tracker."
 keywords: ["tracker", "configuration"]

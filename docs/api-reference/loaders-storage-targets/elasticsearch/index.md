@@ -5,6 +5,7 @@ date: "2020-11-25"
 sidebar_position: 64
 description: "Load Snowplow enriched and bad events from a Kinesis stream into Elasticsearch or OpenSearch clusters."
 keywords: ["elasticsearch loader", "opensearch", "kinesis elasticsearch", "event search"]
+content_type: how-to
 ---
 
 ```mdx-code-block

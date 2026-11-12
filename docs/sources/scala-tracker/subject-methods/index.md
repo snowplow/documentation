@@ -5,6 +5,7 @@ date: "2022-9-15"
 sidebar_position: 30
 description: "Configure Scala tracker subject with platform, user ID, screen resolution, viewport, timezone, language, IP address, and domain user ID properties."
 keywords: ["scala subject configuration", "user properties", "domain user id"]
+content_type: reference
 ---
 
 A list of the methods used to add data to the Subject class.

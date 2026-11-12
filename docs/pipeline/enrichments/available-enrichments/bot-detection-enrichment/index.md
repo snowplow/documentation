@@ -4,15 +4,14 @@ sidebar_position: 12
 sidebar_label: Bot detection
 description: "Consolidate bot indicators from multiple enrichments into a single entity for easier filtering and analysis."
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-:::note[Availability]
-This enrichment is available since version 6.9.0 of Enrich.
-:::
+<AppliesTo feature="bot-detection-enrichment" />
 
 Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). In addition, the [bot detection tracker plugin](/docs/sources/web-trackers/tracking-events/bot-detection/index.md) for web can detect automated browsers client-side.
 
@@ -43,12 +42,20 @@ It's safe to enable all sources - `useYauaa`, `useIab`, `useAsnLookups`, `useCli
 
 The enrichment takes these parameters:
 
-| Parameter                | Required | Description                                                                  |
-| ------------------------ | -------- | ---------------------------------------------------------------------------- |
-| `useYauaa`               | ✅        | Whether to use YAUAA `deviceClass`/`agentClass` as a bot signal.             |
-| `useIab`                 | ✅        | Whether to use IAB spiders and robots as a bot signal.                       |
-| `useAsnLookups`          | ✅        | Whether to use ASN lookups as a bot signal.                                  |
-| `useClientSideDetection` | ✅        | Whether to use the client-side bot detection tracker plugin as a bot signal. |
+<ParamTable>
+  <Param name="useYauaa" type="boolean" required>
+    Whether to use YAUAA `deviceClass` and `agentClass` as a bot signal.
+  </Param>
+  <Param name="useIab" type="boolean" required>
+    Whether to use IAB spiders and robots as a bot signal.
+  </Param>
+  <Param name="useAsnLookups" type="boolean" required>
+    Whether to use ASN lookups as a bot signal.
+  </Param>
+  <Param name="useClientSideDetection" type="boolean" required since="6.10.0">
+    Whether to use the client-side bot detection tracker plugin as a bot signal.
+  </Param>
+</ParamTable>
 
 <Tabs groupId="deployment" queryString>
   <TabItem value="console" label="Console" default>
@@ -95,7 +102,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-The `useClientSideDetection` parameter is available since Enrich 6.10.0.
+The `useClientSideDetection` parameter needs Enrich 6.10.0 or later. <AppliesTo feature="bot-detection-client-side" />
 
 ## Output
 

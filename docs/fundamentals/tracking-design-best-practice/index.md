@@ -5,6 +5,7 @@ date: "2020-02-15"
 sidebar_position: 8
 description: "Learn how to design effective behavioral data tracking by analyzing use cases, defining entities and events, and creating comprehensive tracking plans."
 keywords: ["tracking design", "tracking plan", "event specifications"]
+content_type: concept
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
@@ -128,7 +129,7 @@ This approach can be useful when:
 * **Analysis**: the actions are closely related and often analyzed together
 * **Simplicity**: you want to reduce the number of event schemas and columns in your data warehouse
 
-Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/tracking-plans/event-specifications/index.md#properties). Tools like [Snowtype](/docs/event-studio/implement-tracking/index.md) can also help simplify this complexity during implementation.
+Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/tracking-plans/event-specifications/index.md#add-property-instructions). Tools like [Snowtype](/docs/event-studio/implement-tracking/index.md) can also help simplify this complexity during implementation.
 
 ### Approach 2: One event schema per action
 

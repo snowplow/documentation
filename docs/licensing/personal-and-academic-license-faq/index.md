@@ -3,6 +3,7 @@ title: "Snowplow Personal and Academic License FAQ"
 sidebar_label: "Personal & Academic License FAQ"
 description: "Frequently asked questions about the Snowplow Personal and Academic License eligibility and terms."
 keywords: ["academic license", "SPAL", "personal use license"]
+content_type: concept
 ---
 
 :::info[Note]

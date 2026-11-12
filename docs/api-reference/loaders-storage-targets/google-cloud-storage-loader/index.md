@@ -4,6 +4,7 @@ sidebar_label: "Google Cloud Storage Loader"
 sidebar_position: 6
 description: "Archive Snowplow events from Pub/Sub to Google Cloud Storage buckets using Dataflow with windowing and partitioning."
 keywords: ["gcs loader", "google cloud storage", "dataflow", "pubsub to gcs"]
+content_type: how-to
 ---
 
 

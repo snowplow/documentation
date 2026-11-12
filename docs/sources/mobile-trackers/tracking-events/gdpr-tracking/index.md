@@ -4,6 +4,7 @@ sidebar_label: "Consent"
 sidebar_position: 61
 description: "Add GDPR consent context entities to all tracked events for legal compliance and privacy management."
 keywords: ["gdpr tracking", "consent management", "privacy compliance"]
+content_type: how-to
 ---
 
 ```mdx-code-block

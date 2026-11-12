@@ -11,6 +11,7 @@ import { toHtml } from 'hast-util-to-html'
 import rehypeStripNav from './rehype/rehype-strip-nav.js'
 import rehypeStripHeadingAnchors from './rehype/rehype-strip-heading-anchors.js'
 import rehypeStripBadges from './rehype/rehype-strip-badges.js'
+import rehypeBadgeGroups from './rehype/rehype-badge-groups.js'
 import rehypeStripCodeLabels from './rehype/rehype-strip-code-labels.js'
 import rehypeTabsToSections from './rehype/rehype-tabs-to-sections.js'
 import rehypeAdmonitions from './rehype/rehype-admonitions.js'
@@ -46,6 +47,7 @@ export async function convertHtmlToMarkdown(html, contentSelectors) {
     .use(rehypeStripNav)
     .use(rehypeStripHeadingAnchors)
     .use(rehypeStripBadges)
+    .use(rehypeBadgeGroups)
     .use(rehypeStripCodeLabels)
     .use(rehypeSchemaProperties)
     .use(rehypeTabsToSections)

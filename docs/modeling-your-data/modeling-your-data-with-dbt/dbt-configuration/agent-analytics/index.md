@@ -5,6 +5,7 @@ description: "Configure the Snowplow Agent Analytics dbt package for AI agent tr
 keywords: ["Agent Analytics configuration", "dbt agent analytics package", "configure agent analytics", "configure dbt", "variables"]
 sidebar_position: 40
 date: "2026-09-28"
+content_type: reference
 ---
 
 This page lists the variables you can set to configure the Snowplow Agent Analytics dbt package. The package sets each variable to a recommended default. To override a value, add it to your `dbt_project.yml`:

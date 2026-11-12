@@ -5,14 +5,14 @@ date: "2022-08-30"
 sidebar_position: 0
 description: "Install the Snowplow mobile tracker SDK for iOS or Android and configure it to track events from your mobile application."
 keywords: ["mobile tracker installation", "ios setup", "android setup"]
+content_type: how-to
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 <Tabs groupId="platform" queryString>

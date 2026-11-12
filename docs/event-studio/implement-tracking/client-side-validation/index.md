@@ -182,7 +182,7 @@ A warning also appears when a required entity is missing entirely:
 
 ## Property instructions validation
 
-[Property rule](/docs/event-studio/tracking-plans/create-and-manage/index.md) instructions are constraints you define on event or entity properties within an event specification.
+[Property rule](/docs/event-studio/tracking-plans/event-specifications/index.md#add-property-instructions) instructions are constraints you define on event or entity properties within an event specification.
 
 Snowtype creates [types for property rules](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#property-rules-and-instructions) for all trackers. This additional runtime validation layer can catch any mistakes that slip through, such as when using dynamic values.
 

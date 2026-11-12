@@ -1,0 +1,8 @@
+{
+  "title": "Personalize a Gemini Enterprise for CX agent with Snowplow Signals",
+  "label": "Solution accelerator",
+  "description": "Give a CX Agent Studio concierge real-time shopper context from Signals, and track the agent's tool calls, intents, and decisions back into your pipeline.",
+  "useCase": "Customer-facing AI agents",
+  "technologies": ["Gemini Enterprise for CX", "CX Agent Studio", "Next.js", "Vercel", "BigQuery"],
+  "snowplowTech": ["Signals"]
+}

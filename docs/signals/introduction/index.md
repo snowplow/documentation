@@ -11,6 +11,7 @@ Snowplow Signals computes user attributes from your behavioral data in real time
 
 Use Signals to:
 * Personalize content, recommendations, and pricing based on what the user is doing in their current session
+* Serve scores and predictions calculated in your warehouse, such as churn propensity, to your applications through one API
 * Give chatbots and AI agents context about the user they're interacting with
 * Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
 * Serve up-to-date behavioral features to ML models, for use cases like lead scoring
@@ -32,7 +33,7 @@ Signals handles collection, calculation, and serving:
 * **Values update in the session**: attributes update as each event arrives, so your application reads current values while the session is still in progress.
 * **One read combines live and historical data**: a service returns stream attributes alongside warehouse-synced values.
 * **One definition serves real time and training**: the same attributes build point-in-time datasets for ML models.
-* **Your systems decide**: Signals serves the values, and your application, model, or agent decides what to do with them.
+* **Your systems decide**: Signals serves the values, and your application, model, agent, or personalization engine decides what to do with them.
 
 ### Why teams choose Signals over other tools
 
@@ -40,7 +41,7 @@ Signals handles collection, calculation, and serving:
 | --- | --- |
 | A feature store | A feature store serves data you already collect and process. Signals collects and processes the events too, so you don't build ingestion. |
 | A customer data platform (CDP) | CDPs update profiles and audiences in batches for marketing tools. Signals updates attributes as each event arrives, for use in the current session. |
-| Building it in-house | You don't build or run your own collection, stream processing, low-latency store, or API. |
+| Building it in-house | You don't build, run, or maintain your own collection, stream processing, low-latency store, or API, so your engineers can work on your product instead. |
 
 Many teams keep their CDP or feature store alongside Signals. For named vendor comparisons, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
 

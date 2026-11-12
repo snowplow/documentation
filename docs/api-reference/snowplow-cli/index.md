@@ -62,6 +62,8 @@ This signs you in to Snowplow Console in your browser and saves the login to `~/
 
 Logging in needs a terminal and a browser. For CI and other automated environments, configure an API key with one of the methods below.
 
+To log out, run `snowplow-cli logout`. This revokes the saved login and deletes the file, which also logs Snowtype out. An API key, if you have one configured, keeps working.
+
 ### Automated Setup
 
 The easiest way to configure Snowplow CLI is using the built-in `setup` command:

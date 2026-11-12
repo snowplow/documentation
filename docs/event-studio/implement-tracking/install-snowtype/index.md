@@ -74,6 +74,8 @@ Snowtype saves the login to `~/.config/snowplow/login.json` and refreshes it aut
 
 Logging in needs a terminal and a browser. For CI and other automated environments, provide an API key instead.
 
+To log out, run `npx snowtype logout`. This revokes the saved login and deletes the file, which also logs Snowplow CLI out. An API key, if you have one configured, keeps working.
+
 ### Provide an API key
 
 [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.

@@ -42,6 +42,12 @@ Logs in to Console in your browser and saves the login to `~/.config/snowplow/lo
 | `--clientId <string>`    | Auth0 client ID for device sign-in. |
 | `--auth0Domain <string>` | Auth0 domain for device sign-in.    |
 
+## `logout`
+
+Logs out of Console: revokes the login saved by `login` and deletes `~/.config/snowplow/login.json`. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) shares the same login, so this logs it out too. API keys are not affected.
+
+This command has no flags of its own.
+
 ## `init`
 
 Initializes Snowtype in a project by creating the configuration file.

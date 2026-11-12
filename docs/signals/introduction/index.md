@@ -23,6 +23,29 @@ import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
 To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. It uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. To do the same steps yourself in Console, follow the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md).
 
+## Why teams use Signals
+
+Signals covers every step from collecting an event to serving an attribute, so you don't assemble and run that path yourself.
+
+* **Collection is built in.** A Snowplow tracker sends events, the pipeline validates them against their schemas, and Signals calculates attributes from them. You don't build an event pipeline, a stream processor, or an online store, or connect them to each other. The free tier comes with a pipeline and Signals already enabled.
+* **You describe behavior, not processing code.** An attribute is a short definition: the events to include, an aggregation such as `counter` or `unique_list`, and optionally a time period. For example, "product pages viewed in the last 10 minutes". Signals keeps it up to date as each event arrives.
+* **It acts while the user is still in the session.** Attributes update as each event arrives, and your application reads them in the same request.
+* **One read returns live behavior and warehouse history.** A service combines attributes calculated from the event stream with values synced from Snowflake, BigQuery, or Databricks.
+* **One definition serves both real time and training.** The same attribute definitions serve live values and build point-in-time training datasets.
+* **Your systems make the decisions.** Signals computes and serves the values. Your application, ranking model, messaging tool, or agent decides what to do with them.
+
+### Why teams choose Signals over other tools
+
+Teams that evaluate Signals usually compare it with a feature store, a customer data platform (CDP), or building the same thing in-house:
+
+| Instead of | Why teams choose Signals |
+| --- | --- |
+| A feature store | A feature store only serves features computed from data you already collect and process, so you still build the ingestion and the stream processing. Signals includes collection, so attributes come straight from validated behavioral events. You define them with a few settings rather than streaming code, and the same definitions also build point-in-time training datasets. |
+| A customer data platform (CDP) | CDPs build profiles and audiences for marketing tools, and update them in batches or with a delay. Signals updates attributes as each event arrives and serves them in the same request, so your application or agent can respond to what the user is doing in this session. |
+| Building it in-house | An in-house version needs event collection, schema validation, stream processing, a low-latency store, an API, and someone to run all of them. Signals provides these as one managed service, with versioned definitions, so you can go from the quickstart to live attributes without building infrastructure. |
+
+Signals doesn't replace every tool here: many teams keep their CDP for marketing audiences, or their feature store for non-behavioral features, and use Signals for in-session behavior. For named vendor comparisons, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
+
 ## How Signals works
 
 Signals reads the events your Snowplow pipeline collects, calculates attributes from them, and stores the latest values in the Profiles Store. Your application, agent, or model then reads the values, or Signals pushes a message to it when a user meets criteria you define.
@@ -47,7 +70,7 @@ These are the components you configure:
 
 [How Signals works](/docs/signals/concepts/index.md) covers each component in detail, and [pull and push](/docs/signals/concepts/pull-and-push/index.md) compares services with interventions.
 
-## Requirements and interfaces
+### Requirements and interfaces
 
 Signals runs alongside a Snowplow pipeline, and reads events from it:
 
@@ -140,5 +163,3 @@ Each tutorial builds a working demo on top of Signals. [See all tutorials](/tuto
     href="/tutorials/signals-interventions/start/"
   />
 </CardGrid>
-
-For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).

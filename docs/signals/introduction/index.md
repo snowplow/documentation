@@ -65,59 +65,6 @@ The components you configure:
 
 See [How Signals works](/docs/signals/concepts/index.md) for detail on each.
 
-### Requirements and interfaces
-
-Signals runs alongside a Snowplow pipeline:
-
-* **Pipeline**: the free tier includes one, or Snowplow CDI customers [deploy Signals](/docs/signals/setup/index.md) on their existing pipeline.
-* **Configure with**: Console, the Python SDK, or the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
-* **Read with**: the Python SDK (`snowplow-signals`), Node.js SDK (`@snowplow/signals-node`), Signals API, or, for agents, the Signals MCP server. The browser plugin subscribes to interventions.
-* **Authenticate with**: a Snowplow API key with **View** permission to read, or **Edit** to also publish configuration.
-
-## Retrieve attributes in your application
-
-This example reads a service's attributes for one user. It needs four connection values: the Signals API URL, API key, API key ID, and organization ID. [Connect to Signals](/docs/signals/connection/index.md) explains where to find them.
-
-<CodeGroup groupId="signals-sdk">
-
-```typescript title="Node.js"
-import { Signals } from '@snowplow/signals-node';
-
-const signals = new Signals({
-  baseUrl: SIGNALS_API_URL,
-  apiKey: SNOWPLOW_API_KEY,
-  apiKeyId: SNOWPLOW_API_KEY_ID,
-  organizationId: SNOWPLOW_ORG_ID,
-});
-
-const attributes = await signals.getServiceAttributes({
-  name: "my_service",
-  attribute_key: "domain_userid",
-  identifier: "218e8926-3858-431d-b2ed-66da03a1cbe5",
-});
-```
-
-```python title="Python"
-from snowplow_signals import Signals
-
-sp_signals = Signals(
-    api_url=SIGNALS_API_URL,
-    api_key=SNOWPLOW_API_KEY,
-    api_key_id=SNOWPLOW_API_KEY_ID,
-    org_id=SNOWPLOW_ORG_ID,
-)
-
-attributes = sp_signals.get_service_attributes(
-    name="my_service",
-    attribute_key="domain_userid",
-    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
-)
-```
-
-</CodeGroup>
-
-See [Services](/docs/signals/applications/services/index.md) to define a service, and [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) for batch lookups and the Signals API.
-
 ## Find the right page
 
 | I want to | Page |

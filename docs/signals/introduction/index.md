@@ -15,113 +15,113 @@ Use Signals to:
 * Trigger actions automatically when users meet criteria you define, such as offering a discount when a high-value cart is abandoned
 * Serve up-to-date behavioral features to ML models, for use cases like lead scoring
 
-For example, in the [Google ADK agent tutorial](/tutorials/signals-google-adk-agent/introduction/), the user has spent 20 minutes browsing enterprise pricing:
-
-```txt
-User: "Can you help me understand your pricing?"
-
-// Without Signals context
-Agent: "Sure! We offer three plans: Starter, Pro, and Enterprise..."
-
-// With Signals context
-Agent: "I can see you've been exploring our Enterprise plan — happy to help.
-       Are you mainly comparing SSO requirements, infrastructure options,
-       or SLA tiers?"
-```
-
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
 
 <SignalsFreeTier/>
 ```
 
-To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. To do the same steps yourself in Console, follow the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md).
+To see Signals working with your own data, follow the [quickstart](/docs/signals/quickstart/index.md). A coding agent asks what you want to build, then adds the tracking and Signals configuration to your web app. It uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. To do the same steps yourself in Console, follow the [step-by-step quickstart](/docs/signals/get-started/quickstart-tutorial/index.md).
 
-The quickstart uses the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx), which you install in your coding agent with `npx plugins add snowplow/skills`. Once connected, your assistant can also answer questions about your Signals setup, and create and publish attribute groups, services, and interventions as you describe them. To do this from Console instead, use the [Snowplow Assistant](/docs/ai/console-agent/index.md). See the [conversational Signals tutorial](/tutorials/signals-mcp/introduction) for a walkthrough.
+## How Signals works
 
-## Choose your path
+Signals reads the events your Snowplow pipeline collects, calculates attributes from them, and stores the latest values in the Profiles Store. Your application, agent, or model then reads the values, or Signals pushes a message to it when a user meets criteria you define.
 
-Signals serves the same attributes to both kinds of consumer. The path through the docs depends on what reads them.
+![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
 
-<CardGrid cols={2}>
-  <Card
-    variant="product"
-    headingLevel={3}
-    eyebrow="For product and web teams"
-    title="Personalize an app"
-    href="/docs/signals/applications/"
-    description="Change content, offers, or flows while the user is still in the session, based on what they've done."
-    links={[
-      { label: 'Define attribute groups', href: '/docs/signals/attributes/attribute-groups/' },
-      { label: 'Group attributes into a service', href: '/docs/signals/applications/services/' },
-      { label: 'Retrieve attributes in your app', href: '/docs/signals/applications/retrieve-attributes/' },
-      { label: 'React to interventions', href: '/docs/signals/applications/subscribe/' },
-    ]}
-  />
-  <Card
-    variant="product"
-    headingLevel={3}
-    eyebrow="For AI and agent teams"
-    title="Feed an AI agent"
-    href="/docs/signals/applications/#agents"
-    description="Ground a chatbot or agent in what the user is doing right now, as structured JSON or a short narrative."
-    links={[
-      { label: 'Define agentic contexts', href: '/docs/signals/agentic-contexts/' },
-      { label: 'Serve attributes through the MCP server', href: '/docs/signals/applications/mcp-server/' },
-      { label: 'Build an agent with Google ADK', href: '/tutorials/signals-google-adk-agent/introduction/' },
-      { label: 'Build an agent with the Vercel AI SDK', href: '/tutorials/signals-ai-agent-context/introduction/' },
-    ]}
-  />
-</CardGrid>
+The same flow, as steps:
 
-If you want features for a machine learning model instead, see [create ML training datasets](/docs/signals/ml-training-datasets/index.md).
+1. A Snowplow tracker sends events from your app or website to your pipeline.
+2. Signals evaluates each event against your published **attribute groups**, and updates the attribute values in the Profiles Store. Warehouse attribute groups sync pre-calculated values from your warehouse tables instead.
+3. Your application reads the values it needs through a **service**, or an agent reads them through an **agentic context** or the Signals MCP server.
+4. When updated values meet the criteria of an **intervention**, Signals pushes it to the applications that subscribe to it.
 
-## Explore Signals
+These are the components you configure:
 
-The Signals sidebar follows the order you set Signals up in: set up and connect, send data, define attributes, serve them, then feed agents or trigger interventions.
+* **Attribute**: a fact about user behavior, such as `product_view_count_last_10_min` or `first_mkt_source`. Attributes exist only inside attribute groups.
+* **Attribute group**: a versioned set of attributes, with the data source they're calculated from and the attribute key they're calculated for.
+* **Attribute key**: the identifier that attributes are calculated for, such as `domain_userid` for a user or `domain_sessionid` for a session.
+* **Service**: a stable interface for applications, made of attribute groups pinned to specific versions.
+* **Intervention**: an if-then rule on attribute values. When a user first meets the criteria, Signals sends the intervention to subscribed applications.
+* **Agentic context**: a rolling record of a user's activity in the current session, up to 100 events or 1 hour, with a prompt, returned as JSON or a plain-language narrative.
 
-<CardGrid cols={3} breakout>
-  <Card
-    variant="product"
-    headingLevel={3}
-    title="Attributes"
-    href="/docs/signals/attributes/"
-    description="Calculate user attributes in real time or from warehouse tables."
-    links={[
-      { label: 'How attributes work', href: '/docs/signals/concepts/#attribute-groups' },
-      { label: 'Define attributes', href: '/docs/signals/attributes/' },
-      { label: 'Sync warehouse tables', href: '/docs/signals/attributes/warehouse-config/' },
-    ]}
-  />
-  <Card
-    variant="product"
-    headingLevel={3}
-    title="Interventions"
-    href="/docs/signals/interventions/"
-    description="Trigger actions automatically when a user meets your criteria."
-    links={[
-      { label: 'How interventions work', href: '/docs/signals/concepts/#interventions' },
-      { label: 'Define interventions', href: '/docs/signals/interventions/' },
-      { label: 'Test an intervention', href: '/docs/signals/interventions/#test-the-intervention' },
-    ]}
-  />
-  <Card
-    variant="product"
-    headingLevel={3}
-    title="SDKs and API"
-    href="/docs/signals/connection/"
-    description="Connect to Signals from Python, Node.js, the browser, or over HTTP."
-    links={[
-      { label: 'Connect from code', href: '/docs/signals/connection/' },
-      { label: 'Node.js SDK', href: '/docs/signals/connection/reference/#nodejs-sdk' },
-      { label: 'Call the Signals API', href: '/docs/signals/connection/#signals-api' },
-    ]}
-  />
-</CardGrid>
+[How Signals works](/docs/signals/concepts/index.md) covers each component in detail, and [pull and push](/docs/signals/concepts/pull-and-push/index.md) compares services with interventions.
+
+## Requirements and interfaces
+
+Signals runs alongside a Snowplow pipeline, and reads events from it:
+
+* **Pipeline**: the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) includes a hosted pipeline. Snowplow CDI Cloud and Private Managed Cloud customers deploy Signals from Console in the AWS region they choose, after their account team enables it. See [Set up Signals](/docs/signals/setup/index.md).
+* **Data sources**: the real-time event stream, optionally backfilled from your warehouse, or pre-calculated values in warehouse tables. Snowflake, BigQuery, and Databricks are supported.
+* **Defining configuration**: Console, the Python SDK, or the Snowplow MCP server.
+* **Reading values**: the Python SDK (`snowplow-signals`), the Node.js SDK (`@snowplow/signals-node`), the Signals API over HTTP, and the Signals MCP server. The browser plugin subscribes to interventions.
+* **Authentication**: a Snowplow API key. Use a key with the **View** permission to read attributes, and **Edit** to also create and publish configuration. Keep keys on the server.
+
+## Retrieve attributes in your application
+
+This example reads the attributes of a service called `my_service` for one user, identified by their `domain_userid`. Find the four connection values in Console, as described in [Connect to Signals](/docs/signals/connection/index.md).
+
+<CodeGroup groupId="signals-sdk">
+
+```typescript title="Node.js"
+import { Signals } from '@snowplow/signals-node';
+
+const signals = new Signals({
+  baseUrl: SIGNALS_API_URL,
+  apiKey: SNOWPLOW_API_KEY,
+  apiKeyId: SNOWPLOW_API_KEY_ID,
+  organizationId: SNOWPLOW_ORG_ID,
+});
+
+const attributes = await signals.getServiceAttributes({
+  name: "my_service",
+  attribute_key: "domain_userid",
+  identifier: "218e8926-3858-431d-b2ed-66da03a1cbe5",
+});
+```
+
+```python title="Python"
+from snowplow_signals import Signals
+
+sp_signals = Signals(
+    api_url=SIGNALS_API_URL,
+    api_key=SNOWPLOW_API_KEY,
+    api_key_id=SNOWPLOW_API_KEY_ID,
+    org_id=SNOWPLOW_ORG_ID,
+)
+
+attributes = sp_signals.get_service_attributes(
+    name="my_service",
+    attribute_key="domain_userid",
+    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
+)
+```
+
+</CodeGroup>
+
+To define the service first, see [Services](/docs/signals/applications/services/index.md). [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) covers batch lookups, reading an attribute group directly, and the Signals API.
+
+## Find the right page
+
+Use this table to find the page for what you want to do:
+
+| I want to | Page |
+| --- | --- |
+| Try Signals on my own web app | [Quickstart](/docs/signals/quickstart/index.md) |
+| Enable Signals on an existing Snowplow CDI account | [Set up Signals](/docs/signals/setup/index.md) |
+| Send events for Signals to calculate from | [Send events to Signals](/docs/signals/data-sources/events/index.md) |
+| Calculate attributes from events or warehouse tables | [Define attributes](/docs/signals/attributes/index.md) |
+| Read attributes in my application | [Services](/docs/signals/applications/services/index.md), then [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) |
+| Ground an AI agent in the user's current session | [Define agentic contexts](/docs/signals/agentic-contexts/index.md) |
+| Let an agent read Signals data as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) |
+| React when a user meets criteria | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) |
+| Build training data for an ML model | [Create ML training datasets](/docs/signals/ml-training-datasets/index.md) |
+
+To manage Signals from a chat instead, connect your assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), or use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console.
 
 ## Try a tutorial
 
-Each tutorial builds a working demo on top of Signals. Visit the [Developer Hub](https://snowplow.io/developer-hub/) for videos, blog posts, and workshops.
+Each tutorial builds a working demo on top of Signals. [See all tutorials](/tutorials), or visit the [Developer Hub](https://snowplow.io/developer-hub/) for videos, blog posts, and workshops.
 
 <CardGrid cols={3} breakout>
   <Card
@@ -141,4 +141,4 @@ Each tutorial builds a working demo on top of Signals. Visit the [Developer Hub]
   />
 </CardGrid>
 
-[See all tutorials](/tutorials). For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).
+For a comparison of Signals with feature stores, CDPs, and building the same thing in-house, see [Evaluate Signals](https://signals.snowplow.io/evaluate?utm_source=docs.snowplow.io&utm_medium=referral).

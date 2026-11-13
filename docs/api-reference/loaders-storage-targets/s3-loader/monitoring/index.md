@@ -17,7 +17,7 @@ The S3 Loader tracks the following metrics:
 - `count`: a count of events written to S3
 - `latency`: the delay between records being written to the source Kinesis stream and the loader reading them
 - `e2e_latency`: the end-to-end latency of the Snowplow pipeline. For each batch of events, the time from the earliest event in the batch being received by the Collector until the batch is written to S3. The loader only records this metric when `purpose` is `ENRICHED_EVENTS`, because self-describing data carries no Collector timestamp.
-- `latency_collector_to_load` (legacy): the same measurement as `e2e_latency`, in whole seconds. It is kept for backwards compatibility and will be removed in a future version, so use `e2e_latency` instead.
+- `latency_collector_to_load` (deprecated): the same measurement as `e2e_latency`, in whole seconds. It exists for backward compatibility, so use `e2e_latency` instead.
 
 The two duration metrics, `latency` and `e2e_latency`, carry no unit in their name, because the unit depends on the protocol: StatsD carries milliseconds and Prometheus carries seconds, and each adds its own suffix. So `latency` is reported as `latency_millis` to StatsD and as `latency_seconds` to Prometheus.
 
@@ -36,7 +36,7 @@ snowplow.s3loader.e2e_latency_millis:150000|g|#tag1:value1
 snowplow.s3loader.latency_collector_to_load:150|g|#tag1:value1
 ```
 
-The count metric refers to the count since the previous report, and is reported on every cycle, emitting a zero when the loader has been quiet, so that series is continuous. The duration metrics report the maximum latency since the previous report. They and the legacy gauge are suppressed when nothing has been recorded since the last report, so gaps in those series are normal: a report carries no `e2e_latency_millis` if the loader wrote no files during that period.
+The count metric refers to the count since the previous report, and is reported on every cycle, emitting a zero when the loader has been quiet, so that series is continuous. The duration metrics report the maximum latency since the previous report. The duration metrics and `latency_collector_to_load` are suppressed when nothing has been recorded since the last report, so gaps in those series are normal: a report carries no `e2e_latency_millis` if the loader wrote no files during that period.
 
 StatsD is configured under `monitoring.metrics.statsd` in your configuration file:
 

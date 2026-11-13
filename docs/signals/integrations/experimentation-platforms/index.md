@@ -3,7 +3,7 @@ title: "Use Signals with experimentation platforms"
 sidebar_position: 10
 sidebar_label: "Experimentation platforms"
 description: "Pass Signals attributes to your A/B testing or feature flag platform when it assigns a variant, and track exposures in Snowplow so results join to your behavioral data."
-keywords: ["signals", "experimentation platform", "a/b testing", "feature flags", "optimizely", "growthbook", "launchdarkly", "conductrics", "exposure tracking"]
+keywords: ["signals", "experimentation platform", "public services", "a/b testing", "feature flags", "optimizely", "growthbook", "launchdarkly", "conductrics", "exposure tracking"]
 date: "2026-11-04"
 content_type: concept
 ---
@@ -42,15 +42,15 @@ Passing Signals attributes at assignment lets you:
 
 ## How it works
 
-Reading attributes from Signals needs an API key, so the read always happens on your server. The experimentation decision can happen on your server or in the browser. Use the setup that matches where your platform's SDK already runs:
+Your server can read any Signals service with an API key. Websites and mobile apps can read a [public service](/docs/signals/applications/public-services/index.md) directly, without a key, for the current user. So the experimentation decision can happen wherever your platform's SDK already runs:
 
-| | On your server | In the browser |
-| --- | --- | --- |
-| Use it when | Your server renders pages, or already calls the platform's server-side SDK | Your site is a single-page app or a static site, or the platform runs only in the browser |
-| How attributes reach the SDK | Your server reads them and passes them to the SDK | The browser calls an endpoint on your server, which reads them and returns them |
-| What the user sees | The page arrives with the variant already applied | The page waits for the attributes before it shows the variant |
+| | On your server | In the browser | In a mobile app |
+| --- | --- | --- | --- |
+| Use it when | Your server renders pages, or already calls the platform's server-side SDK | Your site is a single-page app or a static site, or the platform runs only in the browser | Your iOS or Android app runs the platform's mobile SDK |
+| How attributes reach the SDK | Your server reads them with an API key | The Signals browser plugin reads a public service | The Snowplow mobile tracker reads a public service |
+| What the user sees | The page arrives with the variant already applied | The page waits for the attributes before it shows the variant | The screen waits for the attributes before it shows the variant |
 
-Both setups read attributes the same way. In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID. Create the `Signals` client once when your server starts, as described in [Connect to Signals](/docs/signals/connection/index.md), and reuse it for every request.
+On your server, you read attributes like this. In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID. Create the `Signals` client once when your server starts, as described in [Connect to Signals](/docs/signals/connection/index.md), and reuse it for every request.
 
 <Tabs groupId="signals-language" queryString>
 <TabItem value="nodejs" label="Node.js" default>
@@ -114,27 +114,37 @@ In order:
 
 ### In the browser
 
-You add one endpoint to your server that reads the current user's attributes and returns them as JSON. The browser calls it and passes the attributes to the platform's browser SDK.
+The browser reads the current user's attributes from a public service, with the Signals browser plugin, and passes them to the platform's browser SDK. No request goes through your server.
 
 ```mermaid
 flowchart LR
     A["Your website"] -->|"1. Events"| S["Signals"]
-    A -->|"2. Request"| B["Your endpoint"]
-    B -->|"3. Read"| S
-    B -->|"4. Attributes"| A
-    A -->|"6. Exposure"| P["Snowplow"]
+    A -->|"2. Read"| S
+    S -->|"3. Attributes"| A
+    A -->|"5. Exposure"| P["Snowplow"]
 ```
 
 In order:
 
 1. Your website sends events to Snowplow, and Signals updates the user's attributes
-2. When the page loads, the browser calls your endpoint
-3. The endpoint reads the user's attributes from the Signals service
-4. The endpoint returns the attributes the browser is allowed to see
-5. The browser SDK applies your targeting rules and assigns a variant
-6. Your website shows the variant, and tracks which variant the user saw as part of the page view
+2. When the page loads, the browser plugin reads the public service for the tracker's `domain_userid`
+3. Signals returns the attributes in that service
+4. The browser SDK applies your targeting rules and assigns a variant
+5. Your website shows the variant, and tracks which variant the user saw as part of the page view
 
-The user waits for the endpoint before the variant appears, so keep its timeout short. Most platforms' browser snippets already hide the page until they assign a variant.
+The user waits for the read before the variant appears, so keep its timeout short. Most platforms' browser snippets already hide the page until they assign a variant.
+
+A public service can be read by anyone who has the user's identifier, and the attributes you pass to a browser SDK are visible in the browser. Create a separate public service for the browser that contains only attributes that are safe to show to the user they describe, and keep the rest in a service that only your server reads. See [Read attributes in the browser](#read-attributes-in-the-browser).
+
+### In a mobile app
+
+The [iOS and Android trackers](/docs/sources/mobile-trackers/signals/index.md) read a public service in the same way, keyed by the tracker's session `userId` under the built-in `client_session_user_id` attribute key. Define the attribute groups behind the service with that key, and pass the attributes to the platform's mobile SDK as you would in the browser.
+
+```swift
+let attributes = try await tracker.signals.getServiceAttributes(service: "checkout_intent_app")
+```
+
+Use the same rules as in the browser: keep the timeout short, show the default experience if the read fails, and only include attributes that are safe to show to the user.
 
 ## Choose the user key
 
@@ -168,6 +178,8 @@ def get_domain_user_id(cookies: dict) -> str | None:
 </Tabs>
 
 If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
+
+In a mobile app, use the session `userId` from the Snowplow tracker, `tracker.session?.userId`, as the user key. It's the identifier the tracker reads Signals attributes by.
 
 ## Handle slow or missing attributes
 
@@ -239,20 +251,46 @@ def read_signals(service: str, domain_user_id: str, timeout_s: float) -> dict:
 
 Users without Signals attributes, because the read timed out or because they're new, don't match conditions built on Signals attributes, and see the default variant. Keep this in mind when you report results.
 
-### Serve attributes to the browser
+### Read attributes in the browser
 
-For the browser setup, add an endpoint that calls the helper and returns the result. Two rules keep it safe:
+For the browser setup, create a service for the browser and set its access mode to `public`, as described in [Control who can read a service](/docs/signals/applications/services/index.md#control-who-can-read-a-service). In these examples it's called `checkout_intent_browser`. Only include attribute groups whose attributes are safe to show to the user they describe, such as product view counts, and keep values like cart value or predicted revenue in a service that only your server reads.
 
-* Read the user's ID from their own cookie, never from a query parameter, so a visitor can only fetch their own attributes
-* Return only the attributes the browser needs, because the user can see anything you return
+The platform pages call this helper. It reads the public service with `getServiceAttributes()` from the [Signals browser plugin](/docs/signals/applications/public-services/index.md), for the tracker's `domain_userid`. Like the server helper, it returns an empty set of attributes if the read is slow or fails, and drops `null` values.
 
-This example uses Express in Node.js, or Flask in Python:
+```typescript
+import { getServiceAttributes } from '@snowplow/signals-browser-plugin';
+
+export async function fetchSignalsAttributes(
+  timeoutMs: number,
+): Promise<Record<string, string | number | boolean>> {
+  try {
+    const values = await getServiceAttributes({
+      endpoint: SIGNALS_API_URL,
+      service: 'checkout_intent_browser',
+      timeoutMs,
+    });
+    return Object.fromEntries(
+      Object.entries(values).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, string | number | boolean>;
+  } catch {
+    return {};
+  }
+}
+```
+
+The plugin must be installed on your browser tracker, as shown in [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md#read-the-service).
+
+#### Serve private attributes from your server
+
+If the browser needs an attribute that shouldn't be public, add an endpoint to your server that reads it with your API key and returns only what the browser needs. Read the user's ID from their own cookie, never from a query parameter, so a visitor can only fetch their own attributes.
 
 <Tabs groupId="signals-language" queryString>
 <TabItem value="nodejs" label="Node.js" default>
 
 ```typescript
-const BROWSER_ATTRIBUTES = ['product_views_last_10_min', 'is_returning_customer'];
+const BROWSER_ATTRIBUTES = ['cart_value'];
 
 app.get('/api/signals-attributes', async (req, res) => {
   const domainUserId = getDomainUserId(req.headers.cookie ?? '');
@@ -272,7 +310,7 @@ app.get('/api/signals-attributes', async (req, res) => {
 <TabItem value="python" label="Python">
 
 ```python
-BROWSER_ATTRIBUTES = {"product_views_last_10_min", "is_returning_customer"}
+BROWSER_ATTRIBUTES = {"cart_value"}
 
 @app.get("/api/signals-attributes")
 def signals_attributes():
@@ -286,22 +324,7 @@ def signals_attributes():
 </TabItem>
 </Tabs>
 
-In the browser, call the endpoint with its own timeout, and fall back to no attributes if it's slow or fails. The platform pages call this helper:
-
-```typescript
-export async function fetchSignalsAttributes(
-  timeoutMs: number,
-): Promise<Record<string, string | number | boolean>> {
-  try {
-    const response = await fetch('/api/signals-attributes', {
-      signal: AbortSignal.timeout(timeoutMs),
-    });
-    return response.ok ? await response.json() : {};
-  } catch {
-    return {};
-  }
-}
-```
+Then have `fetchSignalsAttributes` call this endpoint with `fetch`, with the same timeout, instead of or as well as reading the public service.
 
 ## Track exposures in Snowplow
 
@@ -316,7 +339,7 @@ Define an [entity](/docs/fundamentals/entities/index.md) for exposures in [Event
 | `variation_id` | The variant the user was assigned |
 | `signals_attributes_used` | The names of the Signals attributes passed to the platform, not their values |
 
-Each platform page shows how to build the exposures from the SDK's result. In the server setup, return them with the page. In the browser setup, build them in the browser, and assign the variant before you track the page view. Either way, attach them to the page view. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
+Each platform page shows how to build the exposures from the SDK's result. In the server setup, return them with the page. In the browser setup, build them in the browser, and assign the variant before you track the page view. In a mobile app, attach the entity to the screen view. Either way, attach them to the page view. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
 
 ```javascript
 window.snowplow('trackPageView', {

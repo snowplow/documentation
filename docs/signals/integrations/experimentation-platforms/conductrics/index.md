@@ -26,7 +26,7 @@ You need:
 * Your Conductrics owner code and API key
 * Each trait you plan to send, created in the Conductrics admin. Conductrics ignores traits it doesn't know.
 
-This page calls the Conductrics selection API from your server, so your API key stays there. If your site renders in the browser, the browser asks your server for the selection, as shown in [Select from the browser](#select-from-the-browser). [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two setups.
+This page calls the Conductrics selection API from your server, so your API key stays there. Your server reads Signals with its own API key at the same time, so you don't need a [public service](/docs/signals/applications/public-services/index.md). If your site renders in the browser, the browser asks your server for the selection, as shown in [Select from the browser](#select-from-the-browser). [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two setups.
 
 ## Integrate on your server
 

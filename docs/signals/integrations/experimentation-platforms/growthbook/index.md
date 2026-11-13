@@ -24,7 +24,7 @@ You need:
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
 * Each Signals attribute added in GrowthBook under **SDK Configuration** > **Attributes**, so you can target on it
 * For the server setup, the `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
-* For the browser setup, the attributes endpoint and `fetchSignalsAttributes` helper from [Serve attributes to the browser](/docs/signals/integrations/experimentation-platforms/index.md#serve-attributes-to-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
+* For the browser setup, a public Signals service and the `fetchSignalsAttributes` helper, as described in [Read attributes in the browser](/docs/signals/integrations/experimentation-platforms/index.md#read-attributes-in-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
 
 Use the setup that matches where you run the GrowthBook SDK. [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two.
 
@@ -80,7 +80,9 @@ Open a page that runs the experiment with [Snowplow Inspector](/docs/testing/sno
 
 ## Integrate in the browser
 
-Use this setup if your site is a single-page app or a static site. The browser fetches the user's attributes from your endpoint and passes them to the GrowthBook SDK running in the browser.
+Use this setup if your site is a single-page app or a static site. The browser reads the user's attributes from a public Signals service and passes them to the GrowthBook SDK running in the browser.
+
+For an iOS or Android app, follow the same steps with the GrowthBook mobile SDK. Read the attributes with the Snowplow tracker, and use the tracker's session `userId` as the user key, as described in [In a mobile app](/docs/signals/integrations/experimentation-platforms/index.md#in-a-mobile-app).
 
 <Steps>
 
@@ -135,7 +137,7 @@ window.snowplow('trackPageView', {
 
 ### Check the browser integration
 
-Open the page with Snowplow Inspector installed, and with your browser's developer tools on the **Network** tab. The request to `/api/signals-attributes` should return your attributes, and the page view should carry an `experiment_exposure` entity with `vendor` set to `growthbook`.
+Open the page with Snowplow Inspector installed, and with your browser's developer tools on the **Network** tab. The request to your Signals API URL should return the public service's attributes, and the page view should carry an `experiment_exposure` entity with `vendor` set to `growthbook`.
 
 </Steps>
 

@@ -1,8 +1,8 @@
 {
-  "title": "Manage data structures with Git",
+  "title": "Manage tracking from a repository with Snowtype and Snowplow CLI",
   "label": "Data governance",
-  "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures.",
+  "description": "Keep data structures and tracking plans in your application's repository, generate tracking code with Snowtype, and check and publish every change with Snowplow CLI and GitHub Actions.",
   "useCase": "Composable analytics",
-  "technologies": [],
-  "snowplowTech": ["Snowplow CLI"]
+  "technologies": ["GitHub Actions"],
+  "snowplowTech": ["Snowplow CLI", "Snowtype"]
 }

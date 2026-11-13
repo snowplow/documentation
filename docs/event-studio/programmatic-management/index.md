@@ -11,7 +11,7 @@ Data structures and tracking plans can be managed programmatically, enabling git
 
 Partnered with other tools like the data structures [CI tool](/docs/testing/data-structures-ci-tool/index.md) and the testing pipeline [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
-To manage data structures and tracking plans from a CI/CD pipeline, follow the tutorial to [set up a GitHub CI/CD pipeline to manage data structures and tracking plans](/tutorials/data-structures-in-git/introduction).
+To keep data structures and tracking plans in your application's repository, generate the tracking code from them with Snowtype, and check and publish every change from GitHub Actions, follow the tutorial to [manage tracking from a repository with Snowtype and Snowplow CLI](/tutorials/data-structures-in-git/introduction).
 
 ## Snowplow CLI
 

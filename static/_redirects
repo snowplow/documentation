@@ -537,3 +537,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/pipeline/enriched-stream-compression/* /docs/destinations/custom-streaming/enriched-stream-compression/:splat 301
 
 /deprecation-policy /lifecycle-policy 301
+
+# Data structures in Git tutorial rewrite
+/tutorials/data-structures-in-git/validation-and-publishing/ /tutorials/data-structures-in-git/local-setup/ 301
+/tutorials/data-structures-in-git/follow-up-with-data-products/ /tutorials/data-structures-in-git/local-setup/ 301
+/tutorials/data-structures-in-git/verify-github-setup/ /tutorials/data-structures-in-git/change-and-promote/ 301
+/tutorials/data-structures-in-git/conclusion/ /tutorials/data-structures-in-git/clean-up/ 301

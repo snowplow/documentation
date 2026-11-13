@@ -202,10 +202,7 @@ data:
             maxCardinality: 1
 ```
 
-Snowtype uses these fields from each event specification:
-- `resourceName`: the event specification ID in the generated code
-- `version`: the event specification version in the generated code. Snowtype doesn't look it up in Console, so keep it matching the version in Console.
-- `event.source` and `entities.tracked`: the data structures to generate code for. Snowtype looks them up only in your `repositories` and `igluCentralSchemas`, never in Console.
+For the fields Snowtype reads from each event specification, see [local tracking plan fields](/docs/event-studio/implement-tracking/configuration-reference/index.md#local-tracking-plan-fields).
 
 Snowtype doesn't connect to Console, and doesn't need Console credentials, when the configuration lists `localDataProducts` and no `dataStructures`, `eventSpecificationIds`, or `dataProductIds`.
 
@@ -215,7 +212,7 @@ Run `snowtype generate` to write the code. When Snowtype generates only from you
 npx snowtype generate
 ```
 
-```bash
+```text
 ✔: Valid configuration found
 ⚠ Warning: Generating from local definitions only. Schemas are not checked against the environments they are deployed to.
 ✔: Code generated, writing...

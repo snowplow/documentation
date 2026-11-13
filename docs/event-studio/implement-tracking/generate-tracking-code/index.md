@@ -27,7 +27,7 @@ When you run `snowtype generate`, Snowtype will produce a single output file, at
 
 Snowtype will generate code for you to track all schemas as either a self-describing event or entity, regardless of how you've defined your data structures in Console.
 
-The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file, unless the configuration generates only from [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans). This pins the versions of the event specifications from Console used for generation, so subsequent runs produce consistent output. To check for newer event specification versions, [use `snowtype update`](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md).
+The first time you run `generate`, Snowtype creates a `.snowtype-lock.json` file next to your configuration file, unless the configuration generates only from [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans). The lock file pins the versions of the event specifications from Console used for generation, so subsequent runs produce consistent output. To check for newer event specification versions, [use `snowtype update`](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md).
 
 The generated code isn't minified and includes inline documentation. You can modify it to suit your project, but any changes will be overwritten the next time you run `generate`.
 

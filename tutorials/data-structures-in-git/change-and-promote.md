@@ -92,9 +92,13 @@ The check against Console catches a change that someone else published while you
 12:26PM ERRO validation failed 1 errors
 ```
 
-Your pull request reports this failure only if its checks run again after the teammate's merge. Turn on [Require branches to be up to date before merging](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging) for `develop`, so that GitHub makes you update the branch, and the checks run again, before you can merge.
+Your pull request reports this failure only if its checks run after the teammate's merge. Before you merge, update your branch with the latest `develop`, or run the checks again, so the version check sees changes other people merged after your checks ran.
 
-Without that setting, the checks that passed earlier stay green and the pull request can merge. The failure then happens before publishing: the publish workflow fails at `dp sync` with the same `needs a bump` error, before it writes the tracking plan to Console.
+:::tip[Require up-to-date branches]
+In your repository's branch protection for `develop`, turn on [Require branches to be up to date before merging](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging). GitHub then runs the checks again against the latest `develop` before every merge, and a version conflict with someone else's change fails in the pull request instead of in the publish workflow.
+:::
+
+If a pull request merges with checks that ran before the teammate's merge, the publish workflow fails at `dp sync` with the same `needs a bump` error, before it writes the tracking plan to Console.
 
 For the other errors the checks can report, see [Troubleshooting](/docs/api-reference/snowplow-cli/tracking-plans/#troubleshooting).
 

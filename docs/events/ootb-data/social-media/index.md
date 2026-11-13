@@ -5,6 +5,7 @@ sidebar_position: 160
 description: "Track user interactions with social media widgets including likes, shares, and retweets across Facebook, Twitter, and other platforms."
 keywords: ["social media", "social interactions", "facebook", "twitter", "likes", "shares"]
 date: "2026-01-15"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

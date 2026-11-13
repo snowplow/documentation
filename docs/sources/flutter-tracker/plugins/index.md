@@ -5,6 +5,7 @@ sidebar_position: 4500
 date: "2026-10-26"
 description: "Register Flutter tracker plugins with an afterTrack callback to inspect every tracked event, including events the tracker tracks automatically. Add plugins at initialization or at runtime."
 keywords: ["flutter plugins", "aftertrack", "inspectable event", "plugin configuration", "event inspection"]
+content_type: how-to
 ---
 
 Plugins let your Dart code see every event the tracker tracks. Each plugin has an `afterTrack` callback that the tracker calls after it tracks an event, including the events it tracks automatically, such as screen views from the `SnowplowObserver`, screen end, lifecycle, installation, and media events.

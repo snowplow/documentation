@@ -1,6 +1,6 @@
 ---
 type: link
 title: API reference
-sidebar_position: 5000
+sidebar_position: 5001
 href: https://github.com/snowplow/snowplow-javascript-tracker/blob/master/api-docs/docs/node-tracker/node-tracker.api.md
 ---

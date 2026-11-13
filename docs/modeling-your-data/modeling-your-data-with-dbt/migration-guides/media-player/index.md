@@ -1,9 +1,10 @@
 ---
 title: "Migration guide for Media Player"
 sidebar_label: "Media Player"
-sidebar_position: 20
+sidebar_position: 25
 description: "Migration guide for upgrading the Snowplow Media Player dbt package including breaking changes and configuration updates."
 keywords: ["media player migration", "media player upgrade", "dbt media player version"]
+content_type: how-to
 ---
 
 ### Upgrading to 1.0.0

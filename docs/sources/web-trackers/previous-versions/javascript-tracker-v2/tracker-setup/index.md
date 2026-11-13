@@ -1,5 +1,6 @@
 ---
 title: "Tracker Setup"
+sidebar_label: "Tracker Setup"
 date: "2020-02-21"
 sidebar_position: 30
 description: "Documentation for tracking Tracker Setup with the web tracker."

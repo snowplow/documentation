@@ -1,4 +1,5 @@
 import { visit } from 'unist-util-visit'
+import { toString } from 'hast-util-to-string'
 import { getClassString } from './utils.js'
 
 const ADMONITION_TYPES = ['note', 'tip', 'info', 'warning', 'danger', 'caution']
@@ -27,6 +28,7 @@ export default function rehypeAdmonitions() {
 
       // Find the admonition content (skip the heading/icon)
       const contentChildren = extractAdmonitionContent(node)
+      const title = extractAdmonitionTitle(node)
 
       // Build the label prefix
       const labelNodes = [
@@ -42,7 +44,23 @@ export default function rehypeAdmonitions() {
       // Prepend label to first paragraph, or create a new one
       const blockquoteChildren = []
 
-      if (contentChildren.length > 0) {
+      if (title && title.toLowerCase() !== type.toLowerCase()) {
+        // A custom title gets its own paragraph: > **Note: Title**
+        blockquoteChildren.push({
+          type: 'element',
+          tagName: 'p',
+          properties: {},
+          children: [
+            {
+              type: 'element',
+              tagName: 'strong',
+              properties: {},
+              children: [{ type: 'text', value: `${type}: ${title}` }],
+            },
+          ],
+        })
+        blockquoteChildren.push(...contentChildren)
+      } else if (contentChildren.length > 0) {
         const first = contentChildren[0]
         if (first.type === 'element' && first.tagName === 'p') {
           // Prepend label to existing first paragraph
@@ -84,25 +102,40 @@ export default function rehypeAdmonitions() {
 }
 
 /**
+ * Extract the title text from an admonition heading (custom theme: callout__title).
+ */
+function extractAdmonitionTitle(node) {
+  for (const child of node.children || []) {
+    if (child.type !== 'element') continue
+    const className = getClassString(child)
+    if (className.includes('admonitionHeading') || className.includes('callout__heading')) {
+      return toString(child).trim()
+    }
+  }
+  return ''
+}
+
+/**
  * Extract the content children from an admonition, skipping the heading/icon row.
+ * Handles both the stock theme (admonitionContent) and the custom theme
+ * (callout__content).
  */
 function extractAdmonitionContent(node) {
   if (!node.children) return []
 
-  // Look for the content div (class contains "admonitionContent")
   for (const child of node.children) {
     if (child.type !== 'element') continue
     const className = getClassString(child)
-    if (className.includes('admonitionContent')) {
+    if (className.includes('admonitionContent') || className.includes('callout__content')) {
       return child.children || []
     }
   }
 
-  // Fallback: skip the first child (heading) and return the rest
+  // Fallback: skip the heading and return the rest
   const nonHeadingChildren = node.children.filter((child) => {
     if (child.type !== 'element') return true
     const className = getClassString(child)
-    return !className.includes('admonitionHeading')
+    return !className.includes('admonitionHeading') && !className.includes('callout__heading')
   })
 
   return nonHeadingChildren

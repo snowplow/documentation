@@ -36,9 +36,15 @@ export default function MDXContentWrapper(props) {
     docMetadata?.metadata?.frontMatter.sidebar_custom_props?.noindex
 
   if (outdated) {
-    const latest = _.last(
-      _.takeWhile(breadcrumbs, (item) => !item.customProps?.outdated)
-    ).href
+    // Previous versions live under Reference > Legacy, so the current version
+    // is the directory above the outdated category, not its sidebar parent
+    const outdatedHref = _.find(
+      _.initial(breadcrumbs),
+      (item) => item.customProps?.outdated
+    )?.href
+    const latest = outdatedHref
+      ? outdatedHref.replace(/[^/]+\/?$/, '')
+      : '/docs/'
     admonitions.push(
       <Admonition type="caution" key="outdated">
         You are reading documentation for an outdated version. Here's the{' '}

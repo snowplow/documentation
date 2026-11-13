@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 100
 description: "Create custom JavaScript Snowbridge transformations to modify data, filter messages, set partition keys, and add HTTP headers."
 keywords: ["snowbridge config", "custom scripts", "javascript transformations", "goja engine", "transform scripts"]
+content_type: reference
 ---
 
 ```mdx-code-block
@@ -55,7 +56,7 @@ function main(input) {
 Scripts can access the message Data at `input.Data`, and can return modified data by returning it in the `Data` field of the output. Likewise for the partition key to be used for the destination - `input.PartitionKey` and the `PartitionKey` field of the output.
 
 By default, the input's `Data` field will be a string in [enriched TSV format](/docs/destinations/custom-streaming/enriched-tsv-format/index.md).
-This can be changed with the [SpEnrichedToJson](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson.md) transform, or the Javascript transformation itself has a `snowplow_mode` option, which transforms the data to an object first.
+This can be changed with the [SpEnrichedToJson](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson/index.md) transform, or the Javascript transformation itself has a `snowplow_mode` option, which transforms the data to an object first.
 
 The output of the script must be an object which maps to engineProtocol.
 

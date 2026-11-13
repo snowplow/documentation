@@ -5,14 +5,13 @@ sidebar_position: 2
 sidebar_label: "Enrichments"
 description: "Configure enrichments to add extra data to your Snowplow events."
 keywords: ["enrichments", "event enrichment", "configurable enrichments"]
+content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Enrichments are included with all Snowplow platforms."
+  note="Enrichments are included with all Snowplow platforms."
 />
 ```
 

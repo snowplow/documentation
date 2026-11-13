@@ -4,6 +4,7 @@ sidebar_label: "Command reference"
 sidebar_position: 11
 description: "Summary of Snowtype CLI commands and options for code generation, with details on usage scenarios and configuration."
 keywords: ["Snowtype commands", "CLI reference", "command options", "Snowtype CLI"]
+content_type: reference
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

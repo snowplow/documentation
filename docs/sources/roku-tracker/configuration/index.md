@@ -5,6 +5,7 @@ date: "2021-11-16"
 sidebar_position: 4000
 description: "Configure Roku tracker network settings with collector endpoint, HTTP method, server anonymization, and tracker namespaces for multiple collectors."
 keywords: ["roku tracker configuration", "collector endpoint", "tracker namespaces"]
+content_type: how-to
 ---
 
 When you initialize your tracker (using the `init` method), you will need to provide its network configuration as an associative array under the `network` property. The configuration consists of the collector endpoint and HTTP method type (see below table).

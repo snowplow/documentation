@@ -68,17 +68,17 @@ AI_GATEWAY_API_KEY=your-vercel-ai-gateway-api-key
 NEXT_PUBLIC_SNOWPLOW_COLLECTOR_URL=https://your-collector-url.com
 
 # Snowplow Signals
-SNOWPLOW_SIGNALS_BASE_URL=https://signals.snowplowanalytics.com
-SNOWPLOW_SIGNALS_API_KEY=your-signals-api-key
-SNOWPLOW_SIGNALS_API_KEY_ID=your-signals-api-key-id
-SNOWPLOW_SIGNALS_ORG_ID=your-org-id
+SIGNALS_API_URL=https://{{123abc}}.signals.snowplowanalytics.com
+SNOWPLOW_API_KEY=your-signals-api-key
+SNOWPLOW_API_KEY_ID=your-signals-api-key-id
+SNOWPLOW_ORG_ID=your-org-id
 ```
 
 Note the `NEXT_PUBLIC_` prefix on the Collector URL: this makes it available to the Browser tracker on the client-side.
 
 You'll find your Snowplow Collector URL in [Snowplow Console](https://console.snowplowanalytics.com) > **Pipelines** > select your pipeline > **Configuration** > **Collector Domains**.
 
-You'll find your Signals base URL (also known as Profiles API URL) and credentials in [Snowplow Console](https://console.snowplowanalytics.com) > **Signals** > **Overview**.
+You'll find your Signals API URL, in the format `https://{{123abc}}.signals.snowplowanalytics.com`, and your credentials in [Snowplow Console](https://console.snowplowanalytics.com) > **Signals** > **Overview**.
 
 ## Add more pages
 

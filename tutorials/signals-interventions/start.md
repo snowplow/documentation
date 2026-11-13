@@ -34,9 +34,10 @@ In this tutorial, you will:
 
 ## Deployment
 
-If you have a Snowplow account, you can [enable Signals through Snowplow Console](/docs/signals/setup/). This provides:
+You can [enable Signals through Snowplow Console](/docs/signals/setup/) on any Snowplow account, including the Signals free tier. Signals includes event collection, so you don't need to run a Snowplow pipeline first. If you already run Snowplow, Signals reads the events from your existing pipeline.
 
-* Integration with your existing Snowplow data pipeline
+Enabling Signals in Console provides:
+
 * Access to your production behavioral data
 * Full production capabilities and support
 

@@ -1,33 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import {
-  Experimental_CssVarsProvider as CssVarsProvider,
-  getInitColorSchemeScript,
-  useColorScheme,
-} from '@mui/material/styles'
-import theme from '@site/src/components/MuiTheme'
+import React, { useState, useEffect, useMemo } from 'react'
 import { ProductFruits } from 'react-product-fruits'
+import { useLocation } from '@docusaurus/router'
 import { PRODUCT_FRUITS_WORKSPACE_CODE } from '@site/src/constants/config'
-
-// MUI keeps its own color scheme, which never follows the Docusaurus theme toggle,
-// so every MUI component renders light-palette colors on a dark page. Root sits above
-// Docusaurus's ColorModeProvider, so mirror the data-theme attribute rather than
-// calling useColorMode.
-function SyncMuiColorScheme() {
-  const { setMode } = useColorScheme()
-
-  useEffect(() => {
-    const root = document.documentElement
-    const sync = () =>
-      setMode(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')
-
-    sync()
-    const observer = new MutationObserver(sync)
-    observer.observe(root, { attributeFilter: ['data-theme'] })
-    return () => observer.disconnect()
-  }, [setMode])
-
-  return null
-}
 
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')
@@ -46,43 +20,83 @@ const useCookie = () => {
 
     if (cookieValue) {
       const parts = cookieValue.split('.')
-      setUserId(parts[0] ?? 'unknown_user')
-      setSessionId(parts[5] ?? 'unknown_session')
+      // `||`, not `??`: the tracker can write empty fields, and Product
+      // Fruits throws if it's initialized with an empty username
+      setUserId(parts[0] || 'unknown_user')
+      setSessionId(parts[5] || 'unknown_session')
     }
   }, [])
 
   return [userId, sessionId]
 }
 
+/**
+ * Doc pages have their own "Was this page helpful?" block
+ * (src/components/Feedback), so Product Fruits, which adds a feedback side
+ * tab, only loads outside /docs/.
+ */
+function useProductFruitsEnabled() {
+  const { pathname } = useLocation()
+  return !pathname.startsWith('/docs/')
+}
+
+/**
+ * Product Fruits is a third-party widget: if it throws, render nothing
+ * instead of letting the error crash the page.
+ */
+class ProductFruitsBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { failed: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error) {
+    console.warn('Product Fruits failed to load:', error)
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
+}
+
+/**
+ * MUI is no longer provided here. The widgets that still use it
+ * (JsonSchemaValidator, DbtSchemaSelector, FirstSteps) wrap themselves in
+ * <MuiScope>, so MUI only loads with the pages that use them.
+ */
 export default function Root({ children }) {
   const [isClient, setIsClient] = useState(false)
+  const productFruits = useProductFruitsEnabled()
 
   useEffect(() => {
     setIsClient(true)
   }, [])
 
   const [userId, sessionId] = useCookie()
-  const userInfo = {
-    username: userId,
-    props: { sessionId: sessionId },
-  }
+  // Stable between renders, so Product Fruits only gets an update when the
+  // user ID or session ID changes
+  const userInfo = useMemo(
+    () => ({ username: userId, props: { sessionId } }),
+    [userId, sessionId]
+  )
 
   return (
     <>
-      {isClient && (
-        <ProductFruits
-          workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
-          language="en"
-          user={userInfo}
-          lifeCycle="unmount"
-        />
+      {isClient && productFruits && (
+        <ProductFruitsBoundary>
+          <ProductFruits
+            workspaceCode={PRODUCT_FRUITS_WORKSPACE_CODE}
+            language="en"
+            user={userInfo}
+            lifeCycle="unmount"
+          />
+        </ProductFruitsBoundary>
       )}
-
-      {getInitColorSchemeScript()}
-      <CssVarsProvider theme={theme}>
-        <SyncMuiColorScheme />
-        {children}
-      </CssVarsProvider>
+      {children}
     </>
   )
 }

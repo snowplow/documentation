@@ -4,6 +4,7 @@ sidebar_position: 2
 sidebar_label: "Managing alerts"
 description: "Manage existing failed event alerts by editing filters, changing destinations, or deleting alerts in the data quality dashboard."
 keywords: ["edit failed event alerts", "delete alerts", "alert management"]
+content_type: how-to
 ---
 
 This page explains how to edit, delete, or review existing failed event alerts.

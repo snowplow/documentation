@@ -1,16 +1,14 @@
 ---
 title: "Run models on data lakes"
 sidebar_label: "Running on data lakes"
-sidebar_position: 50
+sidebar_position: 55
 description: "How to run our models on lakehouses including Databricks and other data lake platforms."
 keywords: ["dbt data lakes", "dbt lakehouses", "Databricks dbt"]
+content_type: how-to
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="Early Release"></Badges>
+<TierBadge tier="early-release" />
 
 :::info
 

@@ -4,6 +4,7 @@ sidebar_label: "Performance timings"
 sidebar_position: 98
 description: "Track page load performance metrics using the PerformanceNavigationTiming API including DNS lookup, connection times, and resource loading duration."
 keywords: ["performance", "page load"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -43,13 +44,13 @@ You can also create and track general timing events using the [site tracking plu
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-performance-navigation-timing@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@4.10.2/dist/index.umd.min.js",
   ["snowplowPerformanceNavigationTiming", "PerformanceNavigationTimingPlugin"]
 );
 ```
@@ -131,13 +132,13 @@ This plugin was included in `sp.js` in version 3, but removed in version 4 in fa
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-performance-timing@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-performance-timing@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@4.10.2/dist/index.umd.min.js",
   ["snowplowPerformanceTiming", "PerformanceTimingPlugin"]
 );
 ```

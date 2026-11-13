@@ -4,6 +4,7 @@ sidebar_label: "Importing events"
 sidebar_position: 20
 description: "Import events into Inspector from HAR files, failed events, ElasticSearch, ngrok tunnels, or remote debugging sessions. View and debug events from mobile devices and other sources as if generated locally."
 keywords: ["import events", "har files", "failed events", "remote debugging", "ngrok", "elasticsearch"]
+content_type: how-to
 ---
 
 Within the Snowplow Inspector, the main **Events** view allows you to import events from other devices that you can view, as if your own browser generated them.

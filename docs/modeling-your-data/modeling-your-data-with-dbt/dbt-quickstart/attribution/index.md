@@ -4,6 +4,7 @@ sidebar_position: 30
 title: "Attribution Quickstart"
 description: "Quick start guide for the Snowplow Attribution dbt package to analyze marketing attribution and conversion paths."
 keywords: ["attribution quickstart", "attribution setup", "dbt attribution installation"]
+content_type: landing
 ---
 
 :::info

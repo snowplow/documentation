@@ -4,16 +4,16 @@ sidebar_label: "Snowplow CLI"
 sidebar_position: 110
 description: "Command-line tool for downloading and syncing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
 keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Snowplow CLI works with any pipeline. Sending events works with any Collector; managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+  note="Snowplow CLI works with any pipeline. Sending events works with any Collector; managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 <TrackingPlansNomenclature />

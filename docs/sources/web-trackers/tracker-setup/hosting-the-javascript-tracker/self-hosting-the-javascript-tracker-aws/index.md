@@ -5,6 +5,7 @@ description: "Host sp.js on AWS CloudFront and S3 for fast, reliable tracker del
 keywords: ["aws hosting", "cloudfront", "s3 hosting", "cdn"]
 date: "2021-03-24"
 sidebar_position: 100
+content_type: how-to
 ---
 
 ## Pre-requisites

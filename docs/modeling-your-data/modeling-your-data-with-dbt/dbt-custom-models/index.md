@@ -4,6 +4,7 @@ sidebar_label: "Custom models"
 description: "Create, update, and remove custom models in Snowplow dbt packages with incremental, drop+recompute, and this run model types."
 keywords: ["custom dbt models", "incremental models", "dbt customization", "Snowplow model extensions"]
 sidebar_position: 60
+content_type: how-to
 ---
 
 The Snowplow packages are designed to be easily customized or extended within your own dbt project by building your own custom models. The standard models we provide (base, page/screen views, sessions and users) are not designed to be modified by you.

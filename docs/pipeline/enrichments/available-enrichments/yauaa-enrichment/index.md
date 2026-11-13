@@ -4,6 +4,7 @@ sidebar_position: 9
 sidebar_label: YAUAA
 description: "Parse user agent strings with advanced detection using Yet Another UserAgent Analyzer for detailed device insights."
 keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

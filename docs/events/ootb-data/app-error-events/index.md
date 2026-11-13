@@ -4,6 +4,7 @@ sidebar_label: "Application error events"
 sidebar_position: 30
 description: "Automatically track exceptions and application errors with the application_error event schema on web and mobile."
 keywords: ["error tracking", "exception tracking", "application_error", "crash reporting"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

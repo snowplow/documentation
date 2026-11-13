@@ -5,6 +5,7 @@ date: "2020-11-09"
 sidebar_position: 50
 description: "Technical documentation for Snowplow enrichment applications that validate and enrich collector payloads on Kinesis, PubSub, Kafka, and NSQ."
 keywords: ["enrich", "enrichment", "event validation"]
+content_type: landing
 ---
 
 This is the technical documentation for the enrichment step. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/pipeline/enrichments/index.md).

@@ -5,6 +5,7 @@ date: "2021-08-14"
 sidebar_position: 120
 description: "Snowplow Mini is a single-instance development environment for testing tracker updates and schema changes."
 keywords: ["snowplow mini", "development environment", "testing environment", "mini setup"]
+content_type: concept
 ---
 
 :::warning

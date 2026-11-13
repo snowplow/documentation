@@ -1,6 +1,8 @@
 ---
 title: "Snowplow Signals is now generally available"
+sidebar_label: "Signals generally available"
 description: "Snowplow Signals is now generally available."
+keywords: ["snowplow signals", "general availability", "real-time customer context", "release notes"]
 date: "2025-09-30"
 category:
   - "Product news"
@@ -8,7 +10,7 @@ category:
 components:
   - "Signals"
 ---
-Snowplow Signals is now generally available. Signals is a real-time customer intelligence system that computes and serves user context. With Signals, you can power in-session personalization, recommendations engines, adaptive UIs, and agentic experiences like AI copilots and chatbots — without spending months or years building and maintaining the underlying infrastructure yourself.
+Snowplow Signals is now generally available. Signals computes and serves real-time customer context: attributes calculated from behavioral data, served to your applications and agents. With Signals, you can power in-session personalization, recommendations engines, adaptive UIs, and agentic experiences like AI copilots and chatbots — without spending months or years building and maintaining the underlying infrastructure yourself.
 
 The new release includes:
 

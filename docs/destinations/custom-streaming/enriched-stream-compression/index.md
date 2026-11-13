@@ -5,6 +5,7 @@ sidebar_position: 2
 description: "Specification of the compressed record format in the Snowplow enriched stream, with example parsers in Python, Go, Java, and Scala, and example records for testing a custom consumer."
 keywords: ["enriched stream compression", "zstd", "custom consumer", "enriched stream format", "decompress enriched events"]
 date: "2026-10-22"
+content_type: reference
 ---
 
 ```mdx-code-block

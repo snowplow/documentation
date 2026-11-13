@@ -5,14 +5,16 @@ date: "2020-02-26"
 sidebar_position: 220
 description: "Track events in Ruby applications, gems, and Rails web apps with the Snowplow Ruby tracker SDK compatible with Ruby 2.1+ and 3.0+."
 keywords: ["ruby tracker", "rails tracking", "server-side tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="ruby" />
 ```
+
+<TrackerFeatures id="ruby" />
 
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.
 

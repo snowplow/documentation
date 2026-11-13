@@ -5,6 +5,7 @@ sidebar_position: 2
 description: "Connect your AI assistant to your Snowplow Console account through the remote Snowplow MCP server, for natural language Console management."
 keywords: ["mcp", "model context protocol", "ai", "snowplow mcp"]
 date: "2026-05-21"
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,5 +1,6 @@
 ---
 title: "Optimizely Classic"
+sidebar_label: "Optimizely Classic"
 date: "2021-04-07"
 sidebar_position: 13000
 description: "Documentation for Optimizely Classic in the web tracker."

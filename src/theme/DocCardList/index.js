@@ -1,33 +1,63 @@
-// npm run swizzle @docusaurus/theme-classic DocCardList -- --eject
-// This is marked as a “safe” swizzle by Docusaurus.
-// See below for the changed part.
-import React from 'react';
-import clsx from 'clsx';
+// Ejected from @docusaurus/theme-classic DocCardList (a "safe" swizzle).
+// Renders sidebar categories and links with the site's <Card> instead of the
+// stock DocCard, so <DocCardList /> matches every other card on the site.
+import React from 'react'
+import clsx from 'clsx'
 import {
   useCurrentSidebarCategory,
   filterDocCardListItems,
-} from '@docusaurus/theme-common';
-import DocCard from '@theme/DocCard';
-function DocCardListForCurrentSidebarCategory({className}) {
-  const category = useCurrentSidebarCategory();
-  return <DocCardList items={category.items} className={className} />;
+  useDocById,
+} from '@docusaurus/plugin-content-docs/client'
+import { Card, CardGrid } from '@site/src/components/Card'
+
+function DocCardListForCurrentSidebarCategory({ className }) {
+  const category = useCurrentSidebarCategory()
+  return <DocCardList items={category.items} className={className} />
 }
-export default function DocCardList(props) {
-  const {items, className} = props;
-  if (!items) {
-    return <DocCardListForCurrentSidebarCategory {...props} />;
-  }
-  const filteredItems = filterDocCardListItems(items);
+
+function LinkItemCard({ item }) {
+  const doc = useDocById(item.docId ?? undefined)
   return (
-    <section className={clsx('row', className)}>
-      {filteredItems.map((item, index) => (
-        // changed part:
-        // * add the item class to the card
-        // * propagate description for categories
-        <article key={index} className={`col col--6 margin-bottom--lg ${item.className || ''}`}>
-          <DocCard item={{...item, description: item.description || item.customProps?.description}} />
-        </article>
-      ))}
-    </section>
-  );
+    <Card
+      variant="link"
+      className={item.className}
+      title={item.label}
+      href={item.href}
+      description={item.description ?? item.customProps?.description ?? doc?.description}
+    />
+  )
+}
+
+function CategoryItemCard({ item }) {
+  const href = item.href ?? item.items?.find((i) => i.href)?.href
+  if (!href) return null
+  const count = filterDocCardListItems(item.items).length
+  return (
+    <Card
+      variant="link"
+      className={item.className}
+      title={item.label}
+      href={href}
+      description={item.description ?? item.customProps?.description ?? `${count} ${count === 1 ? 'page' : 'pages'}`}
+    />
+  )
+}
+
+export default function DocCardList(props) {
+  const { items, className } = props
+  if (!items) {
+    return <DocCardListForCurrentSidebarCategory {...props} />
+  }
+  const filteredItems = filterDocCardListItems(items)
+  return (
+    <CardGrid cols={2} className={clsx('doc-card-list', className)}>
+      {filteredItems.map((item, index) =>
+        item.type === 'category' ? (
+          <CategoryItemCard key={index} item={item} />
+        ) : (
+          <LinkItemCard key={index} item={item} />
+        )
+      )}
+    </CardGrid>
+  )
 }

@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 110
 description: "Track SendGrid email notification events including processed, delivered, bounced, opened, clicked, unsubscribed, and spam report events."
 keywords: ["sendgrid webhook integration", "sendgrid email tracking", "email notification events"]
+content_type: integration
 ---
 
 This webhook integration lets you track a variety of events logged by [SendGrid](http://sendgrid.com/).

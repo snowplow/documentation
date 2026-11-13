@@ -4,6 +4,7 @@ sidebar_label: "Databricks"
 sidebar_position: 20
 description: "Send Snowplow data to Databricks for analytics and data processing with Delta Lake tables, schema evolution, and lakehouse architecture support."
 keywords: ["Databricks", "Delta Lake", "lakehouse", "data platform", "Apache Spark"]
+content_type: integration
 ---
 
 ```mdx-code-block
@@ -13,6 +14,8 @@ import SingleTableFormat from '../_single-table-format.mdx';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+<IntegrationBadges id="databricks" />
 
 :::info[Cloud availability]
 

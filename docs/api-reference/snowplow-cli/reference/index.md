@@ -1,10 +1,11 @@
 ---
 title: "Snowplow CLI command reference"
 sidebar_label: "Command reference"
-date: 2026-03-06
+date: 2026-11-12
 sidebar_position: 0
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
+content_type: reference
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
@@ -140,6 +141,7 @@ snowplow-cli data-products download {directory ./data-products} [flags]
   -h, --help                   help for download
   -f, --output-format string   Format of the files to read/write. json or yaml are supported (default "yaml")
       --plain                  Don't include any comments in yaml files
+      --versions               Write the current version of each event specification. Tracking plans whose local file already declares versions keep them without this flag
 ```
 
 ### Options inherited from parent commands
@@ -434,9 +436,65 @@ snowplow-cli data-products validate [paths...] [flags]
 
 ```
   -c, --concurrency int   The number of validation requests to perform at once (maximum 10) (default 3)
+      --fix               Write the version Snowplow Console will assign into each event specification, replacing a declared one that differs and adding it where none is declared and it can be known
       --full              Perform compatibility check on all files, not only the ones that were changed
       --gh-annotate       Output suitable for github workflow annotation (ignores -s)
   -h, --help              help for validate
+```
+
+### Options inherited from parent commands
+
+```
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
+      --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                              Then on:
+                                Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                                Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                                Windows %AppData%\snowplow\snowplow.yml
+      --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output           Log output as json
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+  -q, --quiet                 Log output level to Warn
+  -s, --silent                Disable output
+```
+
+
+
+## Data-Products Validate Offline
+
+
+Validate event specification versions against a git ref, without Snowplow Console
+
+### Synopsis
+
+Checks the event specification versions declared in tracking plans from \<path\> against the files at the merge base of HEAD and --base-ref, without connecting to Snowplow Console. Needs git installed, the full git history and the ref fetched (for example actions/checkout with fetch-depth: 0).
+
+```
+snowplow-cli data-products validate offline [paths...] [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli dp validate offline --base-ref origin/main
+  $ snowplow-cli dp validate offline --base-ref origin/main --fix ./data-products
+```
+
+### Options
+
+```
+      --base-ref string   The git ref whose merge base with HEAD holds the versions to check against
+      --fix               Write the version each event specification will get into its file, replacing a declared one that differs and adding it where none is declared and it can be known from the base
+      --gh-annotate       Output suitable for github workflow annotation (ignores -s)
+  -h, --help              help for offline
 ```
 
 ### Options inherited from parent commands
@@ -864,6 +922,103 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
 
 
 
+## Events
+
+
+Work with Snowplow events
+
+### Examples
+
+```
+  $ snowplow-cli events send --collector collector.example.com --sdjson '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
+```
+
+### Options
+
+```
+  -h, --help   help for events
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Events Send
+
+
+Send a single event to a Snowplow collector
+
+### Synopsis
+
+Send a single self-describing event to a Snowplow collector.
+
+Provide either a full self-describing JSON via --sdjson, or a --schema URI plus a
+--json data payload. Optionally attach entities via --entities.
+
+```
+snowplow-cli events send [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli events send -c collector.example.com -d iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0 -j '{"category":"test","action":"click"}'
+  $ snowplow-cli events send -c collector.example.com -J '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
+```
+
+### Options
+
+```
+  -a, --app-id string       Application ID (default "snowplowcli")
+  -c, --collector string    Collector domain, e.g. collector.example.com (required)
+  -e, --entities string     JSON array of self-describing JSON entities to attach (default "[]")
+  -h, --help                help for send
+  -i, --ip-address string   Custom IP address to track
+  -j, --json string         Non-self-describing JSON data of the form {...}
+  -m, --method string       HTTP method [POST|GET] (default "POST")
+  -p, --protocol string     Protocol [http|https] (default "https")
+  -d, --schema string       Schema (data structure) URI, of the form iglu:...
+  -J, --sdjson string       Self-describing JSON of the form {"schema":"iglu:...","data":{...}}
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
 ## Mcp
 
 
@@ -1015,6 +1170,150 @@ snowplow-cli setup [flags]
 
 
 
+## Signals
+
+
+Work with Snowplow Signals
+
+### Options
+
+```
+  -h, --help          help for signals
+  -H, --host string   Snowplow Console host (default "https://console.snowplowanalytics.com")
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Signals Setup
+
+
+Set up Snowplow Signals in this project with your coding agent
+
+### Synopsis
+
+Sign in once, then get this project and your coding agent ready for Snowplow Signals:
+
+  - writes Signals credentials for your app to .env (a key that can read and edit Signals)
+  - installs the Snowplow plugin (skills and MCP)
+  - starts your agent with a prompt that walks through the Signals setup
+
+The Snowplow MCP signs in with your Snowplow account the first time your agent uses it.
+
+Requires Node.js 18 or later.
+
+```
+snowplow-cli signals setup [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli signals setup
+  $ snowplow-cli signals setup --pipeline Production
+  $ npx @snowplow/snowplow-cli signals setup
+```
+
+### Options
+
+```
+  -h, --help              help for setup
+      --pipeline string   Name or ID of the pipeline whose Signals environment to use
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+  -H, --host string       Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Signals Status
+
+
+Check that the Signals credentials in .env work
+
+### Synopsis
+
+Check the app's Signals credentials the way the app uses them: exchange the
+key in .env for a token, then make an authenticated call to the Signals API.
+
+With --json-output the result is a single JSON object, for coding agents.
+The command exits non-zero when the check fails.
+
+```
+snowplow-cli signals status [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli signals status
+  $ snowplow-cli signals status --json-output
+```
+
+### Options
+
+```
+      --env string   The .env file holding the SNOWPLOW_SIGNALS_* values (default ".env")
+  -h, --help         help for status
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+  -H, --host string       Snowplow Console host (default "https://console.snowplowanalytics.com")
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
 ## Status
 
 
@@ -1062,91 +1361,6 @@ snowplow-cli status [flags]
       --json-output       Log output as json
   -q, --quiet             Log output level to Warn
   -s, --silent            Disable output
-```
-
-## Events
-
-
-Work with Snowplow events
-
-### Examples
-
-```
-  $ snowplow-cli events send --collector collector.example.com --sdjson '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
-```
-
-### Options
-
-```
-  -h, --help   help for events
-```
-
-### Options inherited from parent commands
-
-```
-      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
-                        Then on:
-                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
-                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
-                          Windows %AppData%\snowplow\snowplow.yml
-      --debug           Log output level to Debug
-      --json-output     Log output as json
-  -q, --quiet           Log output level to Warn
-  -s, --silent          Disable output
-```
-
-
-
-## Events Send
-
-
-Send a single event to a Snowplow collector
-
-### Synopsis
-
-Send a single self-describing event to a Snowplow collector.
-
-Provide either a full self-describing JSON via --sdjson, or a --schema URI plus a
---json data payload. Optionally attach entities via --entities.
-
-```
-snowplow-cli events send [flags]
-```
-
-### Examples
-
-```
-  $ snowplow-cli events send -c collector.example.com -d iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0 -j '{"category":"test","action":"click"}'
-  $ snowplow-cli events send -c collector.example.com -J '{"schema":"iglu:com.snowplowanalytics.snowplow/custom_event/jsonschema/1-0-0","data":{"category":"test","action":"click"}}'
-```
-
-### Options
-
-```
-  -a, --app-id string       Application ID (default "snowplowcli")
-  -c, --collector string    Collector domain, e.g. collector.example.com (required)
-  -e, --entities string     JSON array of self-describing JSON entities to attach (default "[]")
-  -h, --help                help for send
-  -i, --ip-address string   Custom IP address to track
-  -j, --json string         Non-self-describing JSON data of the form {...}
-  -m, --method string       HTTP method [POST|GET] (default "POST")
-  -p, --protocol string     Protocol [http|https] (default "https")
-  -d, --schema string       Schema (data structure) URI, of the form iglu:...
-  -J, --sdjson string       Self-describing JSON of the form {"schema":"iglu:...","data":{...}}
-```
-
-### Options inherited from parent commands
-
-```
-      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
-                        Then on:
-                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
-                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
-                          Windows %AppData%\snowplow\snowplow.yml
-      --debug           Log output level to Debug
-      --json-output     Log output as json
-  -q, --quiet           Log output level to Warn
-  -s, --silent          Disable output
 ```
 
 

@@ -6,6 +6,7 @@ date: "2026-03-11"
 sidebar_position: 500
 description: "Upgrade Snowbridge to version 5.X.X with breaking changes to transformation configuration, target batching, and metrics."
 keywords: ["snowbridge 5.x upgrade", "upgrade guide", "snowbridge migration", "version 5"]
+content_type: how-to
 ---
 
 ## Version 5.0.0 breaking changes

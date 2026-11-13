@@ -4,6 +4,7 @@ sidebar_label: "Attribution"
 sidebar_position: 20
 description: "Migration guide for upgrading the Snowplow Attribution dbt package including breaking changes and configuration updates."
 keywords: ["attribution migration", "attribution upgrade", "dbt attribution version"]
+content_type: how-to
 ---
 
 ### Upgrading to 1.0.0

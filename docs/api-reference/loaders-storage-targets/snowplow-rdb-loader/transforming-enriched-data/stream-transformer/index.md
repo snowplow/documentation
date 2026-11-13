@@ -5,6 +5,7 @@ date: "2022-04-04"
 sidebar_position: 20
 description: "Transform enriched Snowplow data in real-time from Kinesis, Pub/Sub, or Kafka streams without Spark or EMR."
 keywords: ["stream transformer", "real-time transformation", "kinesis transformer", "pubsub transformer", "kafka transformer"]
+content_type: concept
 ---
 
 

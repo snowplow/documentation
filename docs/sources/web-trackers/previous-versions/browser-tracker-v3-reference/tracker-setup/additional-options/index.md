@@ -1,5 +1,6 @@
 ---
 title: "Additional options"
+sidebar_label: "Additional options"
 sidebar_position: 3000
 description: "Documentation for Additional options in the web tracker."
 keywords: ["tracker", "configuration"]

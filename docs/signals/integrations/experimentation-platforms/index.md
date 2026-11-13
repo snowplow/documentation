@@ -8,11 +8,6 @@ date: "2026-11-04"
 content_type: concept
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 Experimentation platforms, the A/B testing and feature flag tools such as Optimizely, GrowthBook, LaunchDarkly, and Conductrics, decide which variant each user sees. They make that decision using the attributes your application passes in. Signals gives them attributes that describe what the user is doing right now, so your experiments can target and learn from behavior in the current session.
 
 Your experimentation platform still assigns variants, holds out a control group, and calculates results. Signals provides the attributes, and Snowplow records which variant each user saw.
@@ -50,34 +45,7 @@ Your server can read any Signals service with an API key. Websites and mobile ap
 | How attributes reach the SDK | Your server reads them with an API key | The Signals browser plugin reads a public service | The Snowplow mobile tracker reads a public service |
 | What the user sees | The page arrives with the variant already applied | The page waits for the attributes before it shows the variant | The screen waits for the attributes before it shows the variant |
 
-On your server, you read attributes like this. In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID. Create the `Signals` client once when your server starts, as described in [Connect to Signals](/docs/signals/connection/index.md), and reuse it for every request.
-
-<Tabs groupId="signals-language" queryString>
-<TabItem value="nodejs" label="Node.js" default>
-
-```typescript
-const attributes = await signals.getServiceAttributes({
-  name: 'checkout_intent',
-  attribute_key: 'domain_userid',
-  identifier: domainUserId,
-});
-```
-
-</TabItem>
-<TabItem value="python" label="Python">
-
-```python
-attributes = sp_signals.get_service_attributes(
-    name="checkout_intent",
-    attribute_key="domain_userid",
-    identifier=domain_user_id,
-)
-```
-
-</TabItem>
-</Tabs>
-
-Signals returns the service's attributes for that user, for example:
+In these examples, `checkout_intent` is a Signals service, and `domain_userid` is the user's Snowplow ID. For each user, Signals returns the attributes in the service, for example:
 
 ```json
 {
@@ -134,7 +102,7 @@ In order:
 
 The user waits for the read before the variant appears, so keep its timeout short. Most platforms' browser snippets already hide the page until they assign a variant.
 
-A public service can be read by anyone who has the user's identifier, and the attributes you pass to a browser SDK are visible in the browser. Create a separate public service for the browser that contains only attributes that are safe to show to the user they describe, and keep the rest in a service that only your server reads. See [Read attributes in the browser](#read-attributes-in-the-browser).
+A public service can be read by anyone who has the user's identifier, and the attributes you pass to a browser SDK are visible in the browser. Create a separate public service for the browser that contains only attributes that are safe to show to the user they describe, and keep the rest in a service that only your server reads. See [Choose what the browser can read](#choose-what-the-browser-can-read).
 
 ### In a mobile app
 
@@ -152,142 +120,28 @@ The user key is the identifier the experimentation platform uses to assign a var
 
 Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your platform keeps assignments the same across login.
 
-The JavaScript tracker stores `domain_userid` as the first value in its `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). The cookie's full name is `_sp_id.` followed by a hash. This helper reads it from a cookie header on your server, or from `document.cookie` in the browser:
-
-<Tabs groupId="signals-language" queryString>
-<TabItem value="nodejs" label="Node.js" default>
-
-```typescript
-export function getDomainUserId(cookies: string): string | undefined {
-  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
-}
-```
-
-</TabItem>
-<TabItem value="python" label="Python">
-
-```python
-def get_domain_user_id(cookies: dict) -> str | None:
-    for name, value in cookies.items():
-        if name.startswith("_sp_id."):
-            return value.split(".")[0]
-    return None
-```
-
-</TabItem>
-</Tabs>
-
-If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
+The JavaScript tracker stores `domain_userid` as the first value in its `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md), so your server and the browser can both read it. Each platform guide includes a helper that reads it. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
 
 In a mobile app, use the session `userId` from the Snowplow tracker, `tracker.session?.userId`, as the user key. It's the identifier the tracker reads Signals attributes by.
 
 ## Handle slow or missing attributes
 
-Assignment shouldn't depend on Signals. If a read is slow or fails, assign without Signals attributes rather than delay the page. The platform pages call this helper in place of the direct read. It does two things:
+Assignment shouldn't depend on Signals. If a read is slow or fails, assign without Signals attributes rather than delay the page. The helpers in each platform guide follow two rules:
 
-* Returns an empty set of attributes if Signals doesn't reply within your timeout, or returns an error
-* Drops `null` values, because experimentation platforms skip targeting conditions on missing or wrongly typed values
+* Return an empty set of attributes if Signals doesn't reply within your timeout, or returns an error
+* Drop `null` values, because experimentation platforms skip targeting conditions on missing or wrongly typed values
 
-<Tabs groupId="signals-language" queryString>
-<TabItem value="nodejs" label="Node.js" default>
-
-```typescript
-type Scalar = string | number | boolean;
-
-export async function readSignals(
-  service: string,
-  domainUserId: string,
-  timeoutMs: number,
-): Promise<Record<string, Scalar>> {
-  const timeout = new Promise<Record<string, unknown>>((resolve) =>
-    setTimeout(() => resolve({}), timeoutMs),
-  );
-  try {
-    const values = await Promise.race([
-      signals.getServiceAttributes({
-        name: service,
-        attribute_key: 'domain_userid',
-        identifier: domainUserId,
-      }),
-      timeout,
-    ]);
-    return Object.fromEntries(
-      Object.entries(values ?? {}).filter(([, v]) =>
-        ['string', 'number', 'boolean'].includes(typeof v),
-      ),
-    ) as Record<string, Scalar>;
-  } catch {
-    return {};
-  }
-}
-```
-
-</TabItem>
-<TabItem value="python" label="Python">
-
-The Python SDK call is synchronous, so this helper runs it in a thread pool to apply a timeout.
-
-```python
-from concurrent.futures import ThreadPoolExecutor
-
-executor = ThreadPoolExecutor(max_workers=8)
-
-def read_signals(service: str, domain_user_id: str, timeout_s: float) -> dict:
-    future = executor.submit(
-        sp_signals.get_service_attributes,
-        name=service,
-        attribute_key="domain_userid",
-        identifier=domain_user_id,
-    )
-    try:
-        values = future.result(timeout=timeout_s)
-    except Exception:  # Includes the timeout
-        return {}
-    return {k: v for k, v in (values or {}).items() if isinstance(v, (str, int, float, bool))}
-```
-
-</TabItem>
-</Tabs>
+Keep the timeout short. On your server, it adds to the time before the page starts to arrive. In the browser or an app, the user waits for it before the variant appears.
 
 Users without Signals attributes, because the read timed out or because they're new, don't match conditions built on Signals attributes, and see the default variant. Keep this in mind when you report results.
 
-### Read attributes in the browser
+## Choose what the browser can read
 
-For the browser setup, create a service for the browser and set its access mode to `public`, as described in [Control who can read a service](/docs/signals/applications/services/index.md#control-who-can-read-a-service). In these examples it's called `checkout_intent_browser`. Only include attribute groups whose attributes are safe to show to the user they describe, such as product view counts, and keep values like cart value or predicted revenue in a service that only your server reads.
+The browser and mobile setups read a [public service](/docs/signals/applications/public-services/index.md). Anyone who has a user's identifier can read that user's attributes from a public service, so create a separate service for the browser, and set its access mode to `public` as described in [Control who can read a service](/docs/signals/applications/services/index.md#control-who-can-read-a-service). Only include attribute groups whose attributes are safe to show to the user they describe, such as product view counts. Keep values like cart value or predicted revenue in a service that only your server reads.
 
-The platform pages call this helper. It reads the public service with `getServiceAttributes()` from the [Signals browser plugin](/docs/signals/applications/public-services/index.md), for the tracker's `domain_userid`. Like the server helper, it returns an empty set of attributes if the read is slow or fails, and drops `null` values.
+Attributes you pass to a browser or mobile SDK are also visible on the device, and most platforms send them on to their own servers. Check each platform guide for how to keep attributes out of the platform.
 
-```typescript
-import { getServiceAttributes } from '@snowplow/signals-browser-plugin';
-
-export async function fetchSignalsAttributes(
-  timeoutMs: number,
-): Promise<Record<string, string | number | boolean>> {
-  try {
-    const values = await getServiceAttributes({
-      endpoint: SIGNALS_API_URL,
-      service: 'checkout_intent_browser',
-      timeoutMs,
-    });
-    return Object.fromEntries(
-      Object.entries(values).filter(([, v]) =>
-        ['string', 'number', 'boolean'].includes(typeof v),
-      ),
-    ) as Record<string, string | number | boolean>;
-  } catch {
-    return {};
-  }
-}
-```
-
-The plugin must be installed on your browser tracker, as shown in [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md#read-the-service).
-
-#### Serve private attributes from your server
-
-If the browser needs an attribute that shouldn't be public, add an endpoint to your server that reads it with your API key and returns only what the browser needs. Read the user's ID from their own cookie, never from a query parameter, so a visitor can only fetch their own attributes.
-
-<Tabs groupId="signals-language" queryString>
-<TabItem value="nodejs" label="Node.js" default>
+If the browser needs an attribute that shouldn't be public, add an endpoint to your server that reads it with your API key and returns only what the browser needs. Read the user's ID from their own cookie, never from a query parameter, so a visitor can only fetch their own attributes. This example uses the `getDomainUserId` and `readSignals` helpers from the platform guides:
 
 ```typescript
 const BROWSER_ATTRIBUTES = ['cart_value'];
@@ -306,25 +160,7 @@ app.get('/api/signals-attributes', async (req, res) => {
 });
 ```
 
-</TabItem>
-<TabItem value="python" label="Python">
-
-```python
-BROWSER_ATTRIBUTES = {"cart_value"}
-
-@app.get("/api/signals-attributes")
-def signals_attributes():
-    domain_user_id = get_domain_user_id(request.cookies)
-    attributes = read_signals("checkout_intent", domain_user_id, TIMEOUT_S) if domain_user_id else {}
-    response = jsonify({k: v for k, v in attributes.items() if k in BROWSER_ATTRIBUTES})
-    response.headers["Cache-Control"] = "private, no-store"
-    return response
-```
-
-</TabItem>
-</Tabs>
-
-Then have `fetchSignalsAttributes` call this endpoint with `fetch`, with the same timeout, instead of or as well as reading the public service.
+The browser then calls it with `fetch`, with the same short timeout, instead of or as well as reading the public service.
 
 ## Track exposures in Snowplow
 

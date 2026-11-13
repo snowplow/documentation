@@ -21,7 +21,6 @@ Conductrics takes user attributes as traits on each selection call. Its predicti
 You need:
 
 * A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
-* The `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
 * Your Conductrics owner code and API key
 * Each trait you plan to send, created in the Conductrics admin. Conductrics ignores traits it doesn't know.
@@ -33,6 +32,47 @@ This page calls the Conductrics selection API from your server, so your API key 
 Each time your server needs a selection, it reads the user's attributes from Signals, turns them into traits, and sends them on the selection call. The request makes two calls in sequence, so keep the Signals timeout short.
 
 <Steps>
+
+### Read Signals attributes
+
+Add two helpers to your server. `getDomainUserId` reads the user's `domain_userid` from the `_sp_id` cookie that the JavaScript tracker sets. `readSignals` reads the user's attributes from your Signals service, using the `Signals` client you created when your server started, as described in [Connect to Signals](/docs/signals/connection/index.md).
+
+```typescript
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+
+type Scalar = string | number | boolean;
+
+export async function readSignals(
+  service: string,
+  domainUserId: string,
+  timeoutMs: number,
+): Promise<Record<string, Scalar>> {
+  const timeout = new Promise<Record<string, unknown>>((resolve) =>
+    setTimeout(() => resolve({}), timeoutMs),
+  );
+  try {
+    const values = await Promise.race([
+      signals.getServiceAttributes({
+        name: service,
+        attribute_key: 'domain_userid',
+        identifier: domainUserId,
+      }),
+      timeout,
+    ]);
+    return Object.fromEntries(
+      Object.entries(values ?? {}).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, Scalar>;
+  } catch {
+    return {};
+  }
+}
+```
+
+If Signals is slow or returns an error, `readSignals` returns no attributes, so the user still gets the default experience without waiting. It also drops `null` values, which Conductrics can't target on. See [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes). If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match.
 
 ### Turn attributes into traits
 
@@ -72,6 +112,7 @@ async function selectVariation(agent: string, domainUserId: string) {
 In your request handler, call it for each agent on the page:
 
 ```typescript
+const domainUserId = getDomainUserId(req.headers.cookie ?? '');
 const { variation, selection, attributes } = await selectVariation('checkout-offer', domainUserId);
 ```
 

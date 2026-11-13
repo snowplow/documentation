@@ -23,11 +23,11 @@ This page uses Optimizely Feature Experimentation with the JavaScript SDK v6, wh
 
 You need:
 
-* A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
+* A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
 * An Optimizely Feature Experimentation project, with an attribute created for each Signals attribute you want to use in an audience
-* For the server setup, the `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
-* For the browser setup, a public Signals service and the `fetchSignalsAttributes` helper, as described in [Read attributes in the browser](/docs/signals/integrations/experimentation-platforms/index.md#read-attributes-in-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
+* For the server setup, a [connection to Signals](/docs/signals/connection/index.md) from your server
+* For the browser setup, the [Signals browser plugin](/docs/signals/applications/public-services/index.md#read-the-service) on your tracker
 
 Use the setup that matches where you run the Optimizely SDK. [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two.
 
@@ -55,18 +55,60 @@ const optimizely = createInstance({
 await optimizely.onReady();
 ```
 
+### Read Signals attributes
+
+Add two helpers to your server. `getDomainUserId` reads the user's `domain_userid` from the `_sp_id` cookie that the JavaScript tracker sets. `readSignals` reads the user's attributes from your Signals service, using the `Signals` client you created when your server started, as described in [Connect to Signals](/docs/signals/connection/index.md).
+
+```typescript
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+
+type Scalar = string | number | boolean;
+
+export async function readSignals(
+  service: string,
+  domainUserId: string,
+  timeoutMs: number,
+): Promise<Record<string, Scalar>> {
+  const timeout = new Promise<Record<string, unknown>>((resolve) =>
+    setTimeout(() => resolve({}), timeoutMs),
+  );
+  try {
+    const values = await Promise.race([
+      signals.getServiceAttributes({
+        name: service,
+        attribute_key: 'domain_userid',
+        identifier: domainUserId,
+      }),
+      timeout,
+    ]);
+    return Object.fromEntries(
+      Object.entries(values ?? {}).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, Scalar>;
+  } catch {
+    return {};
+  }
+}
+```
+
+If Signals is slow or returns an error, `readSignals` returns no attributes, so the user still gets the default experience without waiting. It also drops `null` values, which Optimizely can't target on. See [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes). If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match.
+
 ### Pass Signals attributes to the user context
 
 In your request handler, read the attributes and create the user context with `domain_userid` as the user ID.
 
 ```typescript
+const domainUserId = getDomainUserId(req.headers.cookie ?? '');
 const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
 
 const user = optimizely.createUserContext(domainUserId, attributes);
 const decision = user.decide('checkout_offer');
 ```
 
-Optimizely attributes aren't typed, and a value of the wrong type makes the audience condition evaluate to false. Keep numeric Signals attributes as numbers, and use the `readSignals` helper to drop `null` values.
+Optimizely attributes aren't typed, and a value of the wrong type makes the audience condition evaluate to false. Keep numeric Signals attributes as numbers. `readSignals` already drops `null` values.
 
 For rules that use a contextual multi-armed bandit, call `decideAsync` instead of `decide`. Optimizely caches bandit decisions for each combination of attribute values, so pass grouped values, such as an intent band of `low`, `medium`, or `high`, rather than raw counts that change on every event.
 
@@ -100,6 +142,41 @@ Use this setup if your site is a single-page app or a static site. The browser r
 For an iOS or Android app, follow the same steps with the Optimizely mobile SDK. Read the attributes with the Snowplow tracker, and use the tracker's session `userId` as the user key, as described in [In a mobile app](/docs/signals/integrations/experimentation-platforms/index.md#in-a-mobile-app).
 
 <Steps>
+
+### Read attributes from a public service
+
+Create a Signals service for the browser with the `public` access mode, containing only attributes that are safe to show to the user, as described in [Choose what the browser can read](/docs/signals/integrations/experimentation-platforms/index.md#choose-what-the-browser-can-read). These examples call it `checkout_intent_browser`.
+
+Read it with `getServiceAttributes()` from the Signals browser plugin, which must be [installed on your tracker](/docs/signals/applications/public-services/index.md#read-the-service). It reads the service for the tracker's `domain_userid`. `getDomainUserId` reads the same ID from the tracker's cookie, to use as the user key in Optimizely.
+
+```typescript
+import { getServiceAttributes } from '@snowplow/signals-browser-plugin';
+
+export async function fetchSignalsAttributes(
+  timeoutMs: number,
+): Promise<Record<string, string | number | boolean>> {
+  try {
+    const values = await getServiceAttributes({
+      endpoint: SIGNALS_API_URL,
+      service: 'checkout_intent_browser',
+      timeoutMs,
+    });
+    return Object.fromEntries(
+      Object.entries(values).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, string | number | boolean>;
+  } catch {
+    return {};
+  }
+}
+
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+```
+
+Like the server helper, `fetchSignalsAttributes` returns no attributes if the read is slow or fails, and drops `null` values.
 
 ### Fetch attributes while Optimizely loads
 

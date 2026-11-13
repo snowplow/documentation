@@ -21,10 +21,10 @@ LaunchDarkly targets on any attribute in the evaluation context, with no setup i
 
 You need:
 
-* A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
+* A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
-* For the server setup, a LaunchDarkly server-side SDK key, and the `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
-* For the browser setup, a LaunchDarkly client-side ID, with the flag made available to client-side SDKs. You also need a public Signals service and the `fetchSignalsAttributes` helper, as described in [Read attributes in the browser](/docs/signals/integrations/experimentation-platforms/index.md#read-attributes-in-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
+* For the server setup, a LaunchDarkly server-side SDK key, and a [connection to Signals](/docs/signals/connection/index.md) from your server
+* For the browser setup, a LaunchDarkly client-side ID, with the flag made available to client-side SDKs. You also need [Signals browser plugin](/docs/signals/applications/public-services/index.md#read-the-service) on your tracker
 
 Use the setup that matches where you run the LaunchDarkly SDK. [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two.
 
@@ -45,11 +45,53 @@ const launchdarkly = init(LAUNCHDARKLY_SDK_KEY);
 await launchdarkly.waitForInitialization({ timeout: 10 });
 ```
 
+### Read Signals attributes
+
+Add two helpers to your server. `getDomainUserId` reads the user's `domain_userid` from the `_sp_id` cookie that the JavaScript tracker sets. `readSignals` reads the user's attributes from your Signals service, using the `Signals` client you created when your server started, as described in [Connect to Signals](/docs/signals/connection/index.md).
+
+```typescript
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+
+type Scalar = string | number | boolean;
+
+export async function readSignals(
+  service: string,
+  domainUserId: string,
+  timeoutMs: number,
+): Promise<Record<string, Scalar>> {
+  const timeout = new Promise<Record<string, unknown>>((resolve) =>
+    setTimeout(() => resolve({}), timeoutMs),
+  );
+  try {
+    const values = await Promise.race([
+      signals.getServiceAttributes({
+        name: service,
+        attribute_key: 'domain_userid',
+        identifier: domainUserId,
+      }),
+      timeout,
+    ]);
+    return Object.fromEntries(
+      Object.entries(values ?? {}).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, Scalar>;
+  } catch {
+    return {};
+  }
+}
+```
+
+If Signals is slow or returns an error, `readSignals` returns no attributes, so the user still gets the default experience without waiting. It also drops `null` values, which LaunchDarkly can't target on. See [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes). If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match.
+
 ### Pass Signals attributes in the context
 
 In your request handler, read the attributes and evaluate the flag with a context keyed on `domain_userid`. List any attribute you don't want sent back to LaunchDarkly in `privateAttributes`.
 
 ```typescript
+const domainUserId = getDomainUserId(req.headers.cookie ?? '');
 const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
 
 const context = {
@@ -93,6 +135,41 @@ Use this setup if your site is a single-page app or a static site. The browser r
 For an iOS or Android app, follow the same steps with the LaunchDarkly mobile SDK. Read the attributes with the Snowplow tracker, and use the tracker's session `userId` as the user key, as described in [In a mobile app](/docs/signals/integrations/experimentation-platforms/index.md#in-a-mobile-app).
 
 <Steps>
+
+### Read attributes from a public service
+
+Create a Signals service for the browser with the `public` access mode, containing only attributes that are safe to show to the user, as described in [Choose what the browser can read](/docs/signals/integrations/experimentation-platforms/index.md#choose-what-the-browser-can-read). These examples call it `checkout_intent_browser`.
+
+Read it with `getServiceAttributes()` from the Signals browser plugin, which must be [installed on your tracker](/docs/signals/applications/public-services/index.md#read-the-service). It reads the service for the tracker's `domain_userid`. `getDomainUserId` reads the same ID from the tracker's cookie, to use as the user key in LaunchDarkly.
+
+```typescript
+import { getServiceAttributes } from '@snowplow/signals-browser-plugin';
+
+export async function fetchSignalsAttributes(
+  timeoutMs: number,
+): Promise<Record<string, string | number | boolean>> {
+  try {
+    const values = await getServiceAttributes({
+      endpoint: SIGNALS_API_URL,
+      service: 'checkout_intent_browser',
+      timeoutMs,
+    });
+    return Object.fromEntries(
+      Object.entries(values).filter(([, v]) =>
+        ['string', 'number', 'boolean'].includes(typeof v),
+      ),
+    ) as Record<string, string | number | boolean>;
+  } catch {
+    return {};
+  }
+}
+
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+```
+
+Like the server helper, `fetchSignalsAttributes` returns no attributes if the read is slow or fails, and drops `null` values.
 
 ### Initialize LaunchDarkly with Signals attributes
 

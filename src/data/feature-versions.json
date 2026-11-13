@@ -72,6 +72,18 @@
       "component": "snowplowCli",
       "since": "0.4.0",
       "href": "/docs/api-reference/snowplow-cli/tracking-plans/"
+    },
+    "snowtype-local-tracking-plans": {
+      "label": "Snowtype: generate from local tracking plans",
+      "component": "snowtype",
+      "since": "0.20.0",
+      "href": "/docs/event-studio/implement-tracking/snowtype-config/"
+    },
+    "snowtype-check-command": {
+      "label": "Snowtype: check command",
+      "component": "snowtype",
+      "since": "0.20.0",
+      "href": "/docs/event-studio/implement-tracking/command-reference/"
     }
   }
 }

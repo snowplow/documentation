@@ -82,7 +82,7 @@ Reports whether the generated code in the output path matches what `generate` wr
 
 When the generated code is out of date, `check` fails with this error and lists each file in the output path that differs, is missing, or isn't one that `generate` writes. To fix it, run `snowtype generate` and commit the result:
 
-```bash
+```text
 ✗ Error: The generated code is not up to date with the tracking definitions. Run `snowtype generate` and commit the result.
   src/tracking/snowplow.ts
 ```

@@ -78,6 +78,14 @@ The configuration file is a JSON, JavaScript, or TypeScript object. You can choo
 
 To find your organization ID, go to [Console](https://console.snowplowanalytics.com/settings) > **Settings** > **Manage organization**.
 
+### Local tracking plan fields
+
+Snowtype uses these fields from each event specification in the tracking plan files that `localDataProducts` lists:
+
+- `resourceName`: the event specification ID in the generated code
+- `version`: the event specification version in the generated code. Snowtype doesn't look it up in Console, so keep it matching the version in Console.
+- `event.source` and `entities.tracked`: the data structures to generate code for. Snowtype looks them up only in your `repositories` and `igluCentralSchemas`, never in Console.
+
 ### File formats
 
 Most of the examples in this documentation show the configuration file in JSON format, but you can also use JavaScript or TypeScript if you prefer. The filename must start with `snowtype.config` — for example, `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts`.

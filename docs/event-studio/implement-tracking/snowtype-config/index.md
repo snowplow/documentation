@@ -179,28 +179,7 @@ If you manage tracking plans as code with [Snowplow CLI](/docs/api-reference/sno
 
 Each path can be a directory or a single file, relative to the location of your configuration file. Snowtype reads every JSON and YAML file under a directory, uses the ones that declare `resourceType: data-product`, and follows their `$ref` links to source applications. `snowtype patch` has no option for `localDataProducts`, so edit the configuration file directly.
 
-Snowtype reads the files in the format Snowplow CLI writes them, for example when you run `snowplow-cli dp download`. This tracking plan has one event specification:
-
-```yaml title="data-products/signup-flow.yaml"
-apiVersion: v1
-resourceType: data-product
-resourceName: a123456b-c222-11d1-e123-1f12345678dp
-data:
-  name: Signup flow
-  sourceApplications:
-    - $ref: ./source-apps/web-app.yaml
-  eventSpecifications:
-    - resourceName: a123456b-c222-11d1-e123-1f123456789g
-      name: Sign up
-      version: 0
-      event:
-        source: iglu:com.example/signup/jsonschema/1-0-0
-      entities:
-        tracked:
-          - source: iglu:com.example/plan/jsonschema/1-0-0
-            minCardinality: 1
-            maxCardinality: 1
-```
+Snowtype reads the files in the format [Snowplow CLI](/docs/api-reference/snowplow-cli/tracking-plans/index.md) writes them, for example when you run `snowplow-cli dp download`.
 
 For the fields Snowtype reads from each event specification, see [local tracking plan fields](/docs/event-studio/implement-tracking/configuration-reference/index.md#local-tracking-plan-fields).
 
@@ -218,24 +197,7 @@ npx snowtype generate
 ✔: Code generated, writing...
 ```
 
-You can list local tracking plans together with tracking plans, event specifications, and data structures from Console. This configuration generates code for one tracking plan from Console and the tracking plans in `./data-products`:
-
-```json
-{
-  "organizationId": "a654321b-c111-33d3-e321-1f123456789g",
-  "tracker": "@snowplow/browser-tracker",
-  "language": "typescript",
-  "outpath": "./src/tracking",
-  "repositories": ["./data-structures"],
-  "localDataProducts": ["./data-products"],
-  "igluCentralSchemas": [],
-  "dataStructures": [],
-  "eventSpecificationIds": [],
-  "dataProductIds": ["b234567c-d333-22e2-f234-2f23456789dp"]
-}
-```
-
-This configuration connects to Console, so `snowtype generate` needs Console credentials. Snowtype generates code for the event specifications from both sources, and writes a `.snowtype-lock.json` file that pins only the event specifications from Console.
+To combine local tracking plans with tracking plans from Console, also list the Console tracking plan IDs in `dataProductIds`. Snowtype then connects to Console and needs Console credentials. It generates code for the event specifications from both sources, and pins only the event specifications from Console in `.snowtype-lock.json`.
 
 Each event specification must come from one place only. A tracking plan downloaded with Snowplow CLI keeps its Console IDs, so list it either in `localDataProducts` or in `dataProductIds`, not in both.
 

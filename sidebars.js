@@ -258,6 +258,9 @@ const sidebars = {
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
     ], { collapsible: true, collapsed: true }),
+    group('Integrations', [
+      pick('signals/integrations', { hoist: true, indexLabel: 'Integrations overview' }),
+    ], { collapsible: true, collapsed: true }),
   ],
 
   reference: [

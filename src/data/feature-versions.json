@@ -66,6 +66,12 @@
       "component": "rdbLoader",
       "since": "6.0.0",
       "href": "/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/"
+    },
+    "snowplow-cli-event-specification-versions": {
+      "label": "Snowplow CLI: declared event specification versions",
+      "component": "snowplowCli",
+      "since": "0.4.0",
+      "href": "/docs/api-reference/snowplow-cli/tracking-plans/"
     }
   }
 }

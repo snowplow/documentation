@@ -2,8 +2,8 @@
 title: "Choose how to use Signals attributes"
 sidebar_position: 30
 sidebar_label: "Use in your application"
-description: "Choose how your application, agent, or model reads Signals data: services, agentic contexts, the Signals MCP server, interventions, or training datasets."
-keywords: ["retrieve attributes", "subscribe interventions", "agentic contexts", "signals mcp server", "real-time personalization"]
+description: "Choose how your application, agent, or model reads Signals data: services, agentic contexts, the Signals MCP server, interventions, predictive attributes, or training datasets."
+keywords: ["retrieve attributes", "subscribe interventions", "agentic contexts", "signals mcp server", "predictive attributes", "real-time personalization"]
 date: "2026-06-11"
 content_type: landing
 ---
@@ -17,6 +17,7 @@ Use this table to find the page for what reads the data:
 | Application code | Calculated attribute values for a user or session | [Services](/docs/signals/applications/services/index.md), then [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md). Services are recommended for production. | Python SDK, Node.js SDK, Signals API |
 | An agent that needs recent session activity and a prompt | The session's latest events, up to 100 events or 1 hour, as JSON or a narrative | [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md), scoped to `domain_sessionid` | Python SDK, Node.js SDK, Signals MCP server |
 | An agent that chooses what to read at runtime | Published attribute groups and agentic contexts, as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) | Any MCP client |
+| Application code that decides how to treat a session | A score between 0 and 1 for how likely the session is to reach a goal | [Define a predictive attribute](/docs/signals/predictive-attributes/index.md), then [retrieve its score](/docs/signals/applications/predictive-attributes/index.md) | Python SDK, Node.js SDK, Signals API |
 | An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, Signals API |
 | Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/ml-training-datasets/index.md) | Python SDK |
 

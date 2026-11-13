@@ -9,7 +9,7 @@ date: "2026-11-13"
 
 This tutorial shows you how to manage your tracking from your application's own repository. The [data structures](/docs/fundamentals/schemas/) and the [tracking plan](/docs/event-studio/tracking-plans/) live as files next to the code that sends the events. [Snowtype](/docs/event-studio/implement-tracking/) generates the tracking code from those files, and [Snowplow CLI](/docs/api-reference/snowplow-cli/) checks every change and publishes it to Console from GitHub Actions.
 
-Managing tracking this way gives every change to your tracking a pull request, a review, and a history, in the same place as the code change that needs it. The checks catch a tracking definition and its generated code drifting apart, and an event specification version that doesn't match what Console will assign, before anything reaches Console.
+Managing tracking this way gives every change to your tracking a pull request, a review, and a history, in the same place as the code change that needs it. The checks catch a tracking definition and its generated code drifting apart, and an event specification version that doesn't match the version Console assigns, before anything reaches Console.
 
 This tutorial is for developers who already track events with the [JavaScript tracker](/docs/sources/web-trackers/) and want their tracking definitions under version control. You'll work in your own terminal and in a GitHub repository. You need a Snowplow account with Console.
 
@@ -44,10 +44,10 @@ To follow this tutorial, you need:
 
 * A Snowplow account, with permission to create API keys in Console, so that the workflows can authenticate
 * A GitHub repository for your application, with a `develop` branch and a `main` branch, and GitHub Actions enabled
-* A TypeScript web app that uses the [Browser tracker](/docs/sources/web-trackers/), with Node.js and npm installed
+* A TypeScript web app that uses the [JavaScript tracker](/docs/sources/web-trackers/) (`@snowplow/browser-tracker`), with Node.js and npm installed
 * [Snowplow CLI](/docs/api-reference/snowplow-cli/) installed
 * [Snowtype](/docs/event-studio/implement-tracking/install-snowtype/) installed in the app as a development dependency
-* Familiarity with [git](https://git-scm.com/) and [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
+* Familiarity with [Git](https://git-scm.com/) and [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
 
 Snowplow CLI must be a version that checks event specification versions, and Snowtype a version that generates code from local tracking plans and has the `check` command:
 

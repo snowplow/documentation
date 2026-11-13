@@ -32,13 +32,13 @@ git switch -c feature/docs-capture-optional-plan
                    maxCardinality: 1
 ```
 
-A change to the entities, including their cardinality, is structural, so Console will assign the event specification a new version. Run the offline check:
+A change to the entities, including their cardinality, is structural, so Console assigns the event specification a new version when the change syncs. Run the offline check:
 
 ```bash
 snowplow-cli dp validate offline --base-ref develop
 ```
 
-The check fails with `version 0 needs a bump`, because the file still declares version `0` after a structural change. To fix it, run the `--fix` command the error names, which changes only the `version` field:
+The check fails, because the file still declares version `0` after a structural change:
 
 ```text
 12:23PM ERRO validating file=data-products/docs-capture-signup-flow.yaml path=/data/eventSpecifications/0
@@ -51,6 +51,8 @@ The check fails with `version 0 needs a bump`, because the file still declares v
 12:23PM ERRO validation failed 1 errors
 ```
 
+To fix `version 0 needs a bump`, run the `--fix` command the error names, which changes only the `version` field:
+
 ```bash
 snowplow-cli dp validate offline --base-ref develop --fix
 ```
@@ -60,7 +62,7 @@ snowplow-cli dp validate offline --base-ref develop --fix
 12:23PM INFO validation success data products found=1 source applications found=1
 ```
 
-The generated code carries the event specification version, so the version change leaves it out of date. `npx snowtype check` fails with `The generated code is not up to date with the tracking definitions`, and lists the file that differs. To fix it, run `npx snowtype generate` and commit the definitions and the generated code together:
+The generated code carries the event specification version, so the version change leaves it out of date. `npx snowtype check` fails and lists the file that differs:
 
 ```text
 ✔: Valid configuration found
@@ -68,6 +70,8 @@ The generated code carries the event specification version, so the version chang
 ✗ Error: The generated code is not up to date with the tracking definitions. Run `snowtype generate` and commit the result.
   src/tracking/snowplow.ts
 ```
+
+To fix `The generated code is not up to date with the tracking definitions`, run `npx snowtype generate` and commit the definitions and the generated code together:
 
 ```bash
 npx snowtype generate
@@ -95,7 +99,7 @@ The check against Console catches a change that someone else published while you
 Your pull request reports this failure only if its checks run after the teammate's merge. Before you merge, update your branch with the latest `develop`, or run the checks again, so the version check sees changes other people merged after your checks ran.
 
 :::tip[Require up-to-date branches]
-In your repository's branch protection for `develop`, turn on [Require branches to be up to date before merging](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging). GitHub then runs the checks again against the latest `develop` before every merge, and a version conflict with someone else's change fails in the pull request instead of in the publish workflow.
+In your repository's branch protection for `develop`, turn on **Require branches to be up to date before merging** (see [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging)). GitHub then runs the checks again against the latest `develop` before every merge, and a version conflict with someone else's change fails in the pull request instead of in the publish workflow.
 :::
 
 If a pull request merges with checks that ran before the teammate's merge, the publish workflow fails at `dp sync` with the same `needs a bump` error, before it writes the tracking plan to Console.

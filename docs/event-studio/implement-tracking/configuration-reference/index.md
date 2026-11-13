@@ -63,7 +63,7 @@ The configuration file is a JSON, JavaScript, or TypeScript object. You can choo
 
 | Property                | Type       | Description                                                                                                                                                                                      | Required |
 | ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| `organizationId`        | `string`   | Your Snowplow account organization ID. Used to fetch tracking plans, event specifications, or data structures from Console. Not required if you're only generating code from a local repository. | ✅/❌      |
+| `organizationId`        | `string`   | Your Snowplow account organization ID. Used to connect to Console and fetch tracking plans, event specifications, or data structures. Not needed when you generate only from `localDataProducts`. | ✅/❌      |
 | `tracker`               | `string`   | The Snowplow tracker to generate code for. This determines the structure of the generated code and which tracker it will work with.                                                              | ✅        |
 | `language`              | `string`   | The programming language to generate code in.                                                                                                                                                    | ✅        |
 | `outpath`               | `string`   | The output path where Snowtype writes the generated code, relative to the current working directory when running the script.                                                                     | ✅        |
@@ -72,6 +72,7 @@ The configuration file is a JSON, JavaScript, or TypeScript object. You can choo
 | `dataStructures`        | `string[]` | An array of schema URIs for [data structures](/docs/fundamentals/schemas/index.md) published in Console to generate code for.                                                                    | ✅        |
 | `igluCentralSchemas`    | `string[]` | An array of schema URIs for [Iglu Central](https://iglucentral.com/) schemas to generate code for.                                                                                               | ❌        |
 | `repositories`          | `string[]` | An array of paths to local [Snowplow CLI](/docs/api-reference/snowplow-cli/data-structures/index.md) schema repositories to generate code for.                            | ❌        |
+| `localDataProducts`     | `string[]` | An array of paths to local [Snowplow CLI](/docs/api-reference/snowplow-cli/tracking-plans/index.md) tracking plan files or directories to generate code for. When the configuration lists these and no `dataStructures`, `eventSpecificationIds`, or `dataProductIds`, `generate` and `check` don't connect to Console and don't need Console credentials. | ❌        |
 | `namespace`             | `string`   | Swift tracker only: a namespace prefix for the generated code. For other trackers it will trigger an error.                                                                                      | ❌        |
 | `options`               | `object`   | Additional settings related to Snowtype behavior. See details below.                                                                                                                             | ❌        |
 
@@ -200,7 +201,7 @@ CLI flags take precedence over values set in the configuration file.
 
 ### `generate`
 
-The `generate` options apply when running `snowtype generate`, which creates the initial code based on your configuration and schemas.
+The `generate` options apply when running `snowtype generate`, which creates the initial code based on your configuration and schemas. They also apply when running `snowtype check`, which compares the generated code with what `snowtype generate` writes.
 
 | Option                                | Type      | Default | Description                                                                                                                                                                                          | Equivalent flag                         |
 | ------------------------------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
@@ -323,6 +324,7 @@ type SnowtypeConfig = {
     dataStructures?: string[];
     igluCentralSchemas?: string[];
     repositories?: string[];
+    localDataProducts?: string[];
     namespace?: string;
     options?: {
         commands: {

@@ -1,30 +1,56 @@
 ---
-title: "Learn how to manage data structures with Git"
+title: "Manage tracking from a repository with Snowtype and Snowplow CLI"
 sidebar_label: "Introduction"
 position: 1
-description: "Manage Snowplow data structures using Git and Snowplow CLI for version control, approval workflows, and automated validation with GitHub Actions."
-keywords: ["data structure version control", "snowplow cli git workflow"]
+description: "Keep data structures and tracking plans in your application's repository, generate the tracking code with Snowtype, and check and publish every change with Snowplow CLI and GitHub Actions."
+keywords: ["tracking as code", "snowplow cli git workflow", "snowtype ci", "tracking plan version control"]
+date: "2026-11-13"
 ---
 
-Snowplow data structures are the artifacts defining the rules for event validation within the Snowplow data pipeline. As such, they are a description of event shapes that the pipeline will allow through, and essentially the basis for the shape of data in the warehouse.
+This tutorial shows you how to manage your tracking from your application's own repository. The [data structures](/docs/fundamentals/schemas/) and the [tracking plan](/docs/event-studio/tracking-plans/) live as files next to the code that sends the events. [Snowtype](/docs/event-studio/implement-tracking/) generates the tracking code from those files, and [Snowplow CLI](/docs/api-reference/snowplow-cli/) checks every change and publishes it to Console from GitHub Actions.
 
-The fact that data structures formalize what the warehouse tables look like makes them a cornerstone of Snowplow's facilities for data governance. An unintended change in a data structure could result in data consumers down the line being unable to process that data (e.g. data models breaking). That is why larger organizations guard Data Structure definitions closely, and need approval workflows to allow or disallow changes. For instance, a Data Protection Officer may want to have the final say about collected events, to ensure no PII is harvested.
+Managing tracking this way gives every change to your tracking a pull request, a review, and a history, in the same place as the code change that needs it. The checks catch a tracking definition and its generated code drifting apart, and an event specification version that doesn't match the version Console assigns, before anything reaches Console.
 
-On top of that, detailed change history can be crucial for such large organizations. It is important to be able to tell in fine detail what was changed, when, and by whom.
+This tutorial is for developers who already track events with the [JavaScript tracker](/docs/sources/web-trackers/) and want their tracking definitions under version control. You'll work in your own terminal and in a GitHub repository. You need a Snowplow account with Console.
 
-The Snowplow Console's UI has facilities to get started quickly with data structures (either using the Builder or the direct JSON editor), and is a solid tool for smaller teams. It doesn't implement such approval processes, neither does it offer such fine-grained visibility around changes.
+## What you'll build
 
-A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
+In about 45 minutes, you'll set up one repository that holds the tracking for a TypeScript web app, and the workflows that check and publish it. The example tracks one [self-describing event](/docs/fundamentals/events/#self-describing-events), `docs_capture_signup`, with one [entity](/docs/fundamentals/entities/), `docs_capture_plan`, through one event specification, `docs-capture signup`.
 
-We have built [Snowplow CLI](/docs/api-reference/snowplow-cli) to help you bridge the gap between these repository-based workflows and Snowplow Console.
+The repository uses two long-lived branches, in one Snowplow organization:
 
-## Prerequisites
+```mermaid
+flowchart LR
+  F[Feature branch] -->|pull request| D[develop]
+  D -->|pull request| M[main]
+  D -->|deploys the app to| Q[QA pipeline or Snowplow Micro]
+  M -->|deploys the app to| P[Production pipeline]
+  D -->|publishes tracking to| O[Snowplow organization]
+  M -->|publishes tracking to| O
+```
 
-* A deployed Snowplow pipeline
-* [Snowplow CLI](/docs/api-reference/snowplow-cli) installed and configured
-* A familiarity with [git](https://git-scm.com/) and an understanding of [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
-* A sensible [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator) and shell
+The same flow, as steps:
 
-## What you'll be doing
+1. You change the tracking definitions and the code on a feature branch, regenerate the tracking code with Snowtype, and check the versions locally without credentials.
+2. A pull request into `develop` runs the checks that need no credentials, and the checks against Console with an API key held in the repository's secrets.
+3. Merging into `develop` publishes the data structures to the organization's development and production registries, then syncs and releases the tracking plan. Your application's `develop` deployment sends events to a QA pipeline or to [Snowplow Micro](/docs/testing/snowplow-micro/).
+4. A pull request from `develop` into `main` runs the checks against Console. Merging it publishes the same files again, and your application's `main` deployment sends events to the production pipeline of the same organization.
 
-This tutorial will walk through creating and deploying a data structure from the command line using [Snowplow CLI](/docs/api-reference/snowplow-cli). It will then show how it is possible to automate the validation and deployment process using [GitHub Actions](https://docs.github.com/en/actions/writing-workflows).
+The tracking plan belongs to the organization, not to a pipeline, so both branches publish the same tracking plan.
+
+## Requirements
+
+To follow this tutorial, you need:
+
+* A Snowplow account, with permission to create API keys in Console, so that the workflows can authenticate
+* A GitHub repository for your application, with a `develop` branch and a `main` branch, and GitHub Actions enabled
+* A TypeScript web app that uses the [JavaScript tracker](/docs/sources/web-trackers/) (`@snowplow/browser-tracker`), with Node.js and npm installed
+* [Snowplow CLI](/docs/api-reference/snowplow-cli/) installed
+* [Snowtype](/docs/event-studio/implement-tracking/install-snowtype/) installed in the app as a development dependency
+* Familiarity with [Git](https://git-scm.com/) and [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
+
+Snowplow CLI must be a version that checks event specification versions, and Snowtype a version that generates code from local tracking plans and has the `check` command:
+
+<AppliesTo feature="snowplow-cli-event-specification-versions" />
+
+<AppliesTo feature="snowtype-local-tracking-plans" />

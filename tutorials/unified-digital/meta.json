@@ -2,6 +2,7 @@
   "title": "Set up the Unified Digital dbt package",
   "label": "Data modeling",
   "description": "Transform your raw web and mobile event data into derived tables.",
+  "date": "2024-10-23",
   "useCase": "Composable analytics",
   "technologies": ["dbt"],
   "snowplowTech": []

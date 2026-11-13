@@ -2,6 +2,7 @@
   "title": "Build a personalized travel agent with Signals",
   "label": "Solution accelerator",
   "description": "Set up a demo travel site, and integrate with Snowplow Signals to personalize content and chatbot responses based on user behavior.",
+  "date": "2025-11-04",
   "useCase": "Customer-facing AI agents",
   "technologies": ["Jupyter notebook", "OpenAI", "AI assistants"],
   "snowplowTech": ["Signals", "Local"]

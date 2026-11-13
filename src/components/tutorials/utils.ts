@@ -22,6 +22,9 @@ export function getMetaData(): Meta[] {
     .filter((meta) => meta !== null)
     .map((meta) => Meta.parse(meta))
 
+  // Newest first; ISO dates sort correctly as strings
+  meta.sort((a, b) => b.date.localeCompare(a.date))
+
   return meta
 }
 

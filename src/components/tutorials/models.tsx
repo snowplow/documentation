@@ -27,6 +27,8 @@ export const Meta = z.object({
   title: z.string(),
   label: Topic,
   description: z.string(),
+  // Creation date (YYYY-MM-DD), used to list the newest tutorials first
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   useCase: UseCase,
   technologies: z.array(z.string()),
   snowplowTech: z.array(z.string()),

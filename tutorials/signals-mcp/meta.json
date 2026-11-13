@@ -1,6 +1,7 @@
 {
   "title": "Manage Signals with AI assistants using the Snowplow MCP server",
   "description": "Connect the Snowplow MCP server to your AI coding assistant and define, test, and publish Signals attribute groups conversationally.",
+  "date": "2026-08-24",
   "label": "Signals implementation",
   "useCase": "Real-time personalization",
   "technologies": ["MCP", "Claude Code"],

@@ -2,8 +2,8 @@
 title: "Starter attribute groups for events from your existing analytics"
 sidebar_label: "Starter attribute groups"
 sidebar_position: 40
-description: "Five attribute groups you can copy to calculate visitor, session, purchase, account and funnel attributes from events that reach Snowplow from Segment, RudderStack, GA4, Amplitude or Adobe."
-keywords: ["attribute groups", "external_event", "segment", "ga4", "amplitude", "adobe", "rudderstack", "python sdk"]
+description: "Five attribute groups you can copy to calculate visitor, session, purchase, account and funnel attributes from events that reach Snowplow from Segment, RudderStack, GA4, Amplitude, Adobe or PostHog."
+keywords: ["attribute groups", "external_event", "segment", "ga4", "amplitude", "adobe", "rudderstack", "posthog", "python sdk"]
 date: "2026-11-13"
 content_type: how-to
 ---
@@ -19,9 +19,9 @@ Once your existing analytics events reach Snowplow, you can calculate Signals at
 Each group lists its attributes, the events and fields it reads, and which approaches support it. The definitions use the [Signals Python SDK](/docs/signals/connection/index.md). You can create the same attributes in Console.
 
 :::caution[Deploy the schemas before you send events]
-These definitions read `external_event` and `external_identity`, published on Iglu Central. If you register your own copies, deploy both to production before you create the groups, and before you send any event that uses them. Signals rejects an attribute on a schema that isn't in production. If your pipeline looks up a schema before it is deployed, it keeps rejecting events that use it for several minutes after deployment.
+These definitions read `external_event` and `external_identity`, which are published on Iglu Central. If you register your own copies, deploy them to production before you create the groups, and before you send any event that uses them. Signals rejects an attribute on a schema that isn't in production. If your pipeline looks up a schema before it is deployed, it keeps rejecting events that use it for several minutes after deployment. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test.
 
-If you register them under your own vendor, such as `com.acme`, use that vendor in the adapter's configuration and in the definitions below. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
+If you register your copies under your own vendor, such as `com.acme`, use that vendor in the adapter's configuration and in the definitions below. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
 :::
 
 ## What the attributes read
@@ -66,9 +66,10 @@ The approaches each tool supports:
 | [GA4 and Google Tag Manager](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md) | Snowplow's tag templates in your web GTM container, or a page script that copies `gtag()` calls | Snowplow's tag in your server-side GTM container |
 | [Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md) | A destination plugin in the Browser SDK that feeds the Snowplow tracker | A Webhook destination with a template |
 | [Adobe](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md) | A Web SDK `onBeforeEventSend` callback, an AppMeasurement pre-track callback, or Tags rules on the Adobe Client Data Layer, each feeding the Snowplow tracker | Event forwarding |
+| [PostHog](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md) | A `before_send` hook in posthog-js that feeds the Snowplow tracker | An HTTP Webhook destination with edited Hog source |
 
 :::caution[Keys on the public intervention endpoint]
-Interventions are delivered through a public endpoint, so the key you use there must be a random value nobody can guess. Use `domain_userid` or `domain_sessionid` from a client-side approach that runs the Snowplow tracker. Never use `user_id`, a GA client ID, a timestamp-based session ID, an Adobe ECID, Amplitude's `device_id` or Segment's `anonymousId` there. On a server-side approach, `domain_userid` holds your tool's ID, so read those attributes from your backend only. See [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) for each tool's IDs.
+Interventions are delivered through a public endpoint, so the key you use there must be a random value nobody can guess. Use `domain_userid` or `domain_sessionid` from a client-side approach that runs the Snowplow tracker. Never use `user_id`, a GA client ID, a timestamp-based session ID, an Adobe ECID, Amplitude's `device_id`, PostHog's `$device_id` or Segment's `anonymousId` there. On a server-side approach, `domain_userid` holds your tool's ID, so read those attributes from your backend only. See [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) for each tool's IDs.
 :::
 
 ## Set up the SDK
@@ -222,6 +223,8 @@ What a visitor is doing right now, in the current session.
 **Supported on:** client-side approaches that run the Snowplow tracker. Page pings need the tracker's activity tracking turned on; the number of pings multiplied by your heartbeat interval approximates engaged time. Server-side approaches have no Snowplow session, so `domain_sessionid` is empty and this group gets no values.
 
 One exception: Amplitude's client-side plugin can post events directly to the Collector without the tracker. It builds a `domain_sessionid` from Amplitude's device and session IDs, so the session counts work, but it sends no page pings. See [Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md).
+
+PostHog's server-side destination also has sessions: it puts PostHog's `$session_id` in `domain_sessionid`, so the session counts work there too, without page pings or scroll depth. See [PostHog](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md).
 
 ```python
 session_engagement = StreamAttributeGroup(
@@ -421,8 +424,9 @@ The account a visitor belongs to and the plan they are on, for B2B and subscript
 
 - **Segment and RudderStack:** `plan` comes from track properties or group traits, and `group_id` from group calls. A plan set only in identify traits is dropped, because identify carries the user ID only.
 - **GA4:** `plan` and `group_id` arrive only when sent as event parameters. User properties set with `gtag('set', 'user_properties', ...)` are not forwarded.
-- **Amplitude:** groups appear on identify and group identify events only, not on later track events.
-- **Adobe:** you map the eVar, prop or XDM field that holds the plan and account when you set up the adapter. Adobe has no group call, so these events arrive with kind `track`.
+- **Amplitude:** `group_id` comes only from identify calls with groups and from group identify events, not from later track events. `plan` comes from any event that carries it, so a later event's plan replaces the one set by group identify.
+- **Adobe:** you map the eVar, prop or XDM field that holds the plan and account when you set up the adapter. Adobe has no group call, so on the Web SDK, AppMeasurement and event forwarding these events arrive with kind `track`, and `group_calls_30d` stays empty. The example Tags rules send a join with kind `group`.
+- **PostHog:** `plan` comes from event properties or from `$group_set` on `$groupidentify`, and `group_id` from `$group_key`. A plan set only with `$set` on the person is dropped.
 
 The group call's `name` differs between tools (for example `group` in Segment and `$groupidentify` in Amplitude), so `group_calls_30d` filters on `kind` instead.
 

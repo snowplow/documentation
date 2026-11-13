@@ -50,8 +50,8 @@ You need:
 - Permission to create Functions in your Segment workspace for the server-side approach. Segment's docs set a default limit of 25 functions per workspace.
 - A Snowplow Collector URL. For the server-side approach, the Collector must accept requests from Segment's functions, which Segment runs in AWS us-west-2 and eu-west-1. Allow-list them if your Collector is behind a firewall.
 - Snowplow Signals enabled on your pipeline.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, deploy them to production before you send any events.
-- The Segment adapter script, which maps each Segment call to a Snowplow event.
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events.
+- The Segment adapter script, which maps each Segment call to a Snowplow event. It sends the two schemas under the `com.snowplowanalytics.snowplow` vendor. If you register your own copies under another vendor, change the vendor in the `external` and `identity` entries of the adapter's `IGLU` object to match. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, so nothing reaches Signals and no error shows in the page or in Segment. Check failed events after your first test.
 
 Check your Segment ecommerce events use Segment's v2 spec names (`Product Viewed`, `Order Completed` and so on) with a price and a currency. Events with other names, or without a currency, become generic `external_event` events instead of Snowplow ecommerce events. See [How Segment events map to Snowplow](#how-segment-events-map-to-snowplow).
 
@@ -86,7 +86,7 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
    <script src="/js/segment-snowplow-adapter.js"></script>
    ```
 
-3. Register the destination plugin once analytics.js is ready.
+3. Register the destination plugin in the same page load as the Segment snippet. Call `analytics.register` directly, not inside `analytics.ready()`. The snippet holds the registration until analytics.js loads, so the plugin receives the snippet's own `analytics.page()` call. A plugin registered inside `analytics.ready()` misses that first page view, and with it the landing page's UTM parameters and referrer.
 
    ```html
    <script>
@@ -117,16 +117,18 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
        };
      });
 
-     analytics.ready(() => analytics.register(snowplowDestination));
+     analytics.register(snowplowDestination);
    </script>
    ```
 
    Ecommerce calls go through the Snowplow ecommerce plugin's own methods, such as `trackProductView` and `trackTransaction`. Everything else is sent with `trackSelfDescribingEvent`.
 
+   Keep the `analytics.page()` call in the Segment snippet. It records the landing page view.
+
 4. Publish the page change.
 
 :::caution[Segment cookies and a same-site Collector]
-If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends Segment's `ajs_anonymous_id`, `ajs_user_id` and `ajs_group_id` cookies with every request to it. `ajs_user_id` can hold an email address if that is what you pass to `identify`. Use a Collector on a different site, or confirm this is acceptable in your privacy review.
+If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends Segment's `ajs_anonymous_id`, `ajs_user_id` and `ajs_group_id` cookies with every request to it. `ajs_user_id` can hold an email address if that is what you pass to `identify`, in clear, even though the events themselves carry only its hash. Use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
 
 ## Set up the server-side approach
@@ -137,7 +139,7 @@ The server-side approach runs in your Segment workspace. A Destination Function 
 
 2. Add two settings to the function: `collectorUrl` (for example `https://collector.example.com`) and `appId`.
 
-3. Paste the function source. It is the Segment adapter script followed by these handlers:
+3. Paste the function source. It is the Segment adapter script followed by these handlers. The adapter keeps its settings in `ADAPTER`.
 
    ```js
    async function send(events, settings) {
@@ -181,27 +183,27 @@ Each event gets a Snowplow `event_id` derived from Segment's `messageId` (a UUID
 
 ## Check it works
 
-Send a few calls from a test page or Segment's debugger, then look at the events in your pipeline or in Snowplow Micro.
+Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
 
-To check locally with Snowplow Micro, start it as below. If you registered your own copies of the two schemas, put them in `iglu/` so Micro loads them as an embedded registry:
+1. In Console, go to **Pipelines** and select your development environment.
+2. Copy its Collector endpoint.
+3. Point the tracker (client-side) or the function's `collectorUrl` setting (server-side) at it.
+4. Send a few calls from a test page or Segment's debugger.
+5. Select **Open dashboard** to see the good and failed events.
 
-```bash
-docker run -p 9090:9090 \
-  -v "$PWD/iglu:/config/iglu-client-embedded" \
-  snowplow/snowplow-micro:4.6.2 --yauaa
-```
-
-Here `iglu/` holds `schemas/com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0` and `.../external_identity/jsonschema/1-0-0`. Point the tracker or the function's `collectorUrl` at `http://localhost:9090`, then open `http://localhost:9090/micro/good` and `http://localhost:9090/micro/bad`.
+Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
 
 For a page view, a product view, an order with two products and an `identify` call, you should see:
 
-- A native `page_view` for each `analytics.page` call.
+- A native `page_view` for each `analytics.page` call, including the snippet's first one with the landing page URL and its UTM parameters.
 - A `snowplow_ecommerce_action` event of type `product_view` with one `product` entity.
 - A `snowplow_ecommerce_action` event of type `transaction` with one `product` entity per product and a `transaction` entity.
 - An `identify` event whose only field is `id`. The email and other traits are not there.
 - An `external_identity` entity on every event that has a Segment `anonymousId`, with `tool` set to `segment` and the original Segment event name in `event_name`.
 - With the client-side approach, `page_ping` events and the same `domain_sessionid` on every event in the visit.
-- Nothing in `/micro/bad`.
+- No failed events.
+
+Once the events look right, point the tracker or the function at your pipeline's Collector, and read the attributes in Signals.
 
 Check failed events in your pipeline as well as Segment's delivery overview. The Collector accepts events before they are validated, so Segment counts an event as delivered even when it later fails validation.
 

@@ -14,7 +14,7 @@ An adapter sends Snowplow only the fields it maps: the standard fields of each S
 
 - **Identify traits and user properties**, such as email, name and plan. Identify calls arrive with the user ID only.
 - **Properties that don't fit a field**, including emails in event properties, Adobe context data and eVars that aren't mapped, and the Email namespace of the Adobe `identityMap`.
-- **Email addresses used as user IDs, on some adapters.** When a user ID contains `@`, the Segment adapter and the Adobe event forwarding converter send an unsalted SHA-256 hash of the lowercased value instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash or remove email-shaped user IDs in your tool first. This is the Segment adapter's function:
+- **Email addresses used as user IDs, on some adapters.** When a user ID contains `@`, the Segment and PostHog adapters and the Adobe event forwarding converter send an unsalted SHA-256 hash of the lowercased value instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash or remove email-shaped user IDs in your tool first. This is the Segment adapter's function:
 
 ```js
 // Some workspaces use the email as userId; hash it so it never reaches the pipeline in clear.
@@ -31,10 +31,10 @@ A hashed email is still personal data. If your user IDs are emails, decide wheth
 
 | Data | Client-side approaches | Server-side approaches | Warehouse history |
 | --- | --- | --- | --- |
-| IP address | The browser's own, from the request | Whatever your tool forwards, such as Segment's `context.ip`, RudderStack's `request_ip` or Amplitude's `ip_address`. Without it, the Collector records your tool's server address | In your tool's export |
+| IP address | The browser's own, from the request | Whatever your tool forwards, such as Segment's `context.ip`, RudderStack's `request_ip`, Amplitude's `ip_address` or PostHog's `$ip`. Without it, the Collector records your tool's server address | In your tool's export |
 | User agent | The browser's own | Whatever your tool forwards. Amplitude's webhook payload has none | In your tool's export |
 | Page URL, referrer and title | Sent, including query strings | Sent when your tool includes them | In your tool's export |
-| User ID | Sent in clear; hashed when it contains `@` on Segment, dropped on Adobe | Sent in clear; hashed when it contains `@` on Segment and Adobe event forwarding | In your tool's export |
+| User ID | Sent in clear; hashed when it contains `@` on Segment and PostHog, dropped on Adobe | Sent in clear; hashed when it contains `@` on Segment, PostHog and Adobe event forwarding | In your tool's export |
 | Search terms and other free text | Sent in `site_search` and `external_event.search_term` | Same | In your tool's export |
 | Your tool's cookies | Reach a Collector on the same site; see below | Not sent | Not applicable |
 | Snowplow cookies | Set by the Snowplow tracker (`_sp_id`, `_sp_ses`) and the Collector | Not set in the browser | Not applicable |
@@ -57,6 +57,7 @@ When your Snowplow Collector is on the same site as your pages, for example `col
 | RudderStack | `rl_anonymous_id`, `rl_user_id`, `rl_trait`, `rl_group_id`, `rl_group_trait`, `rl_session` and `rl_page_init_referrer`. `rl_trait` and `rl_group_trait` hold identify and group traits, including any email, base64-encoded |
 | Amplitude | `AMP_` cookies, which hold `device_id`, `user_id` and UTM values |
 | Adobe | Web SDK `kndctr` identity, cluster and consent cookies; `AMCV`, which holds the ECID and, after `setCustomerIDs`, a customer ID hash; `AMCVS`; and `s_cc` |
+| PostHog | `ph_<project_api_key>_posthog`, set on your parent domain by default, which holds `$device_id`, `distinct_id`, the session ID and the first URL the visitor landed on with its UTM parameters. `distinct_id` holds an email if you identify users by email |
 
 You have three choices:
 
@@ -86,13 +87,17 @@ Client-side adapters hook into your tool's library at the point where it sends a
 | Adobe Web SDK, `onBeforeEventSend` | Held, then sent together when consent is granted | Dropped and never replayed after a later grant |
 | Adobe AppMeasurement, `registerPreTrackCallback`, with ECID opt-in | Held until approval, then sent | Not sent, because AppMeasurement sends no hit without approval |
 | GA4, GTM tag templates | Depends on the consent settings you give the Snowplow tags in GTM | Same |
-| GA4, page script that copies gtag calls | Ignored: sends everything and sets Snowplow cookies | Same |
+| GA4, page script that copies gtag calls | Ignored by the script itself, so load it only after a grant. Calls made before a late grant are then sent at the grant | Nothing sent, if the script isn't loaded |
 | GA4, server-side GTM tag | Ignored unless you add a consent trigger | Same |
 | Segment, Amplitude, RudderStack | The adapter runs on every event your tool processes | Same |
+| PostHog, `before_send` hook | Not sent, because posthog-js doesn't call `before_send` while capturing is off | Not sent |
+| PostHog, destination | The destination runs on every event PostHog ingests | Same |
 
 ### Replayed events carry the time and URL of the grant
 
 When the Adobe Web SDK holds events while consent is pending and releases them on the grant, the adapter receives them all at that moment. Every replayed event carries the page URL and device time of the grant, not of the original action. Attributes that depend on page URL or time, such as pages viewed or time since the last event, will be off for those events.
+
+The GA4 page script behaves the same way when you load it after a grant part way through a visit: it sends every earlier `gtag()` call at the grant, with the current page URL. Single-page-app page views from before the grant aren't sent.
 
 ### Never let the hook throw
 
@@ -111,7 +116,7 @@ If you already have an `onBeforeEventSend` callback, merge the adapter call into
 
 ### Gate server-side GTM on Consent Mode
 
-Snowplow's server-side GTM tag has no consent check of its own, so it forwards every event whatever the consent state. Add a trigger condition so it only fires when analytics storage is granted. GA4 hits carry the Consent Mode state in the `gcs` parameter, and only `G111` and `G101` mean analytics storage is granted:
+Snowplow's server-side GTM tag has no consent check of its own, so it forwards every event whatever the consent state. If your site uses Google Consent Mode, add a trigger condition so the tag doesn't fire when analytics storage is denied. Without Consent Mode, `gtag.js` sends no `gcs` at all, so a condition that requires `G111` or `G101` blocks every event; gate GA4 itself through your consent management platform instead. GA4 hits carry the Consent Mode state in the `gcs` parameter, and only `G111` and `G101` mean analytics storage is granted:
 
 ```js
 if (gcs && gcs !== 'G111' && gcs !== 'G101') {
@@ -135,7 +140,7 @@ Before production traffic, check that none of these reach Snowplow, or agree tha
 - Emails, tokens or names in page URLs, referrers and query strings.
 - Free text in search terms and in any property you map to an `external_event` field.
 - Form field values, if you turn on the Snowplow tracker's form tracking.
-- Your tool's cookies at a same-site Collector, `ajs_user_id` and `AMCV` most of all.
+- Your tool's cookies at a same-site Collector, `ajs_user_id`, `AMCV` and PostHog's `ph_` cookie most of all.
 - IP addresses, if your privacy policy requires them to be truncated or dropped. Use the pipeline's IP anonymization if so.
 
 On Adobe, also check which eVars, props and XDM fields you map into `plan`, `group_id` and `search_term`, since one of them may hold an email on your report suite.

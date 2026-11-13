@@ -14,17 +14,17 @@ Every adapter, client-side or server-side and for every tool, maps an event the 
 
 | Rung | Snowplow event | Examples from your tool |
 | --- | --- | --- |
-| 1 | Page view (`page_view`, native) | Segment and RudderStack `page`, GA4 `page_view`, Amplitude `[Amplitude] Page Viewed`, Adobe page view events |
-| 2 | Ecommerce (`com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action` 1-0-2, with product, cart, checkout step, transaction or refund entities) | Segment and RudderStack `Product Viewed` and `Order Completed`, GA4 `view_item` and `purchase`, Adobe `commerce.purchases` and `purchase` |
-| 3 | Site search (`com.snowplowanalytics.snowplow/site_search` 1-0-0) | Segment and RudderStack `Products Searched`, GA4 `search` and `view_search_results` |
-| 4 | Identify (`com.snowplowanalytics.snowplow/identify` 1-0-0, ID only) | Segment and RudderStack `identify`, GA4 `login`, Amplitude `$identify` with a user ID, Adobe logins |
+| 1 | Page view (`page_view`, native) | Segment and RudderStack `page`, GA4 `page_view`, Amplitude `[Amplitude] Page Viewed`, Adobe page view events, PostHog `$pageview` |
+| 2 | Ecommerce (`com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action` 1-0-2, with product, cart, checkout step, transaction or refund entities) | Segment and RudderStack `Product Viewed` and `Order Completed`, GA4 `view_item` and `purchase`, Adobe `commerce.purchases` and `purchase`, PostHog `Product Viewed` and `Order Completed` |
+| 3 | Site search (`com.snowplowanalytics.snowplow/site_search` 1-0-0) | Segment, RudderStack and PostHog `Products Searched`, GA4 `search` and `view_search_results` |
+| 4 | Identify (`com.snowplowanalytics.snowplow/identify` 1-0-0, ID only) | Segment and RudderStack `identify`, GA4 `login`, Amplitude and PostHog `$identify` with a user ID, Adobe logins |
 | 5 | Google's schemas (GA4 only) | GA4 Enhanced Measurement events such as `scroll`, `click` and `file_download`, `user_engagement`, and recommended events such as `sign_up` and `generate_lead` |
 | 6 | `com.snowplowanalytics.snowplow/external_event` 1-0-0 | Everything else: group and alias calls, your own custom events, autocaptured events, and ecommerce events missing a field Snowplow requires |
 
 Every event, on every rung, also carries an `external_identity` entity with your tool's IDs and the original event name. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
 :::note
-Every schema on this page is published on Iglu Central. If you register your own copies of `external_event` and `external_identity`, deploy them to production before you send events that use them. Events sent before deployment are rejected for several minutes after it.
+Every schema on this page, including `external_event` and `external_identity`, is published on Iglu Central. If you register your own copies of `external_event` and `external_identity`, deploy them to production before you send events that use them. If you register them under a vendor other than `com.snowplowanalytics.snowplow`, set that vendor in the adapter. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test. Events sent before deployment keep failing for several minutes after it.
 :::
 
 ## Rung 1: page views
@@ -66,7 +66,7 @@ Which events take this rung:
 
 | Tool | Events |
 | --- | --- |
-| Segment, RudderStack | `Product Viewed`, `Product Added`, `Product Removed`, `Checkout Started`, `Checkout Step Viewed`, `Checkout Step Completed`, `Order Completed`, `Order Refunded` |
+| Segment, RudderStack, PostHog | `Product Viewed`, `Product Added`, `Product Removed`, `Checkout Started`, `Checkout Step Viewed`, `Checkout Step Completed`, `Order Completed`, `Order Refunded` |
 | GA4 | `view_item`, `view_item_list`, `select_item`, `add_to_cart`, `remove_from_cart`, `begin_checkout`, `add_payment_info`, `purchase`, `refund` |
 | Amplitude | Product viewed, added and removed, checkout started, order completed, refunds and the revenue call, matched by event name, so you list your own names |
 | Adobe | XDM `commerce.productViews`, `productListAdds`, `productListRemovals`, `checkouts` and `purchases`; Analytics `prodView`, `scAdd`, `scRemove`, `scCheckout` and `purchase` |
@@ -74,7 +74,7 @@ Which events take this rung:
 The Snowplow ecommerce schemas require some fields that other tools treat as optional. The adapters fill or skip them like this:
 
 - **Payment method.** The transaction entity requires one. When the event has none, the adapter sends `unknown`. Adobe AppMeasurement hits never carry one.
-- **Product category.** Required on the product entity. Segment and RudderStack adapters send an empty string when it's missing; the GA4 and AppMeasurement adapters send `unknown`.
+- **Product category.** Required on the product entity. Segment, RudderStack and PostHog adapters send an empty string when it's missing; the GA4 and AppMeasurement adapters send `unknown`.
 - **Price and currency.** The Segment adapter leaves out a product with no price or currency. An order with no currency or order ID drops to `external_event` instead.
 - **Cart total.** The cart entity requires a total value, which most tools don't send with add to cart. Segment's adapter leaves the cart entity off when there's no cart total. The GA4 adapter uses the event's value, which is what was added rather than the whole cart. The Adobe and RudderStack adapters fall back to the value of the items in the event.
 
@@ -108,7 +108,7 @@ Logins and identify calls become a Snowplow `identify` event that holds the user
 }
 ```
 
-When a user ID contains `@`, the Segment adapter and the Adobe event forwarding converter send an unsalted SHA-256 hash of it instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash it in your tool first if your user IDs can be emails. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+When a user ID contains `@`, the Segment and PostHog adapters and the Adobe event forwarding converter send an unsalted SHA-256 hash of it instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash it in your tool first if your user IDs can be emails. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
 
 Because traits are dropped, a plan set only in identify traits, or only on an Adobe login hit, doesn't reach Snowplow. Send it on a group call or a track event instead, where it fills the `plan` field of `external_event`.
 

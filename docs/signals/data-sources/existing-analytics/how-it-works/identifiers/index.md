@@ -19,6 +19,7 @@ Signals calculates and serves attributes per [attribute key](/docs/signals/attri
 | GA4 and GTM | Snowplow's random ID from `_sp_id` | GA client ID (server-side GTM) | `user_pseudo_id`, the GA client ID |
 | Amplitude | Snowplow's random ID from `_sp_id` | `device_id` | `device_id` |
 | Adobe | Snowplow's random ID from `_sp_id` | ECID (event forwarding) | `mcvisid`, the ECID |
+| PostHog | Snowplow's random ID from `_sp_id` | `$device_id` | `$device_id` from the event properties, or `distinct_id` |
 
 On every approach, `network_userid` follows the same pattern: the Collector's own cookie on client-side approaches, and your tool's ID on server-side approaches.
 
@@ -27,7 +28,7 @@ Amplitude also has a lighter client-side variant that posts each event straight 
 A few edge cases on server-side approaches:
 
 - **IDs longer than 128 characters** are replaced by their SHA-256 hash, because `domain_userid` and `network_userid` hold at most 128 characters. The original stays in `external_identity`.
-- **Events with only a user ID**, which server libraries often send, are handled differently by each adapter. The Segment adapter leaves `domain_userid` empty and sends no `external_identity` entity, because that entity requires an anonymous ID; read these events by `user_id`. The RudderStack transformation falls back to the user ID, so the user ID becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`. That key is guessable, and holds an email in clear if your user IDs are emails.
+- **Events with only a user ID**, which server libraries often send, are handled differently by each adapter. The Segment adapter leaves `domain_userid` empty, sets a random `network_userid` and sends no `external_identity` entity, because that entity requires an anonymous ID; read these events by `user_id`. The RudderStack transformation falls back to the user ID, so the user ID becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`. That key is guessable, and holds an email in clear if your user IDs are emails.
 - **Server libraries accept any string** as an anonymous ID. A Segment server-side event with the anonymous ID `x` writes `x` into `domain_userid`. Check what your server sources send.
 
 ## Sessions
@@ -38,8 +39,9 @@ A few edge cases on server-side approaches:
 | GA4 and GTM | Snowplow's `domain_sessionid` | None |
 | Amplitude | Snowplow's `domain_sessionid` | A key built from `device_id` and Amplitude's session ID |
 | Adobe | Snowplow's `domain_sessionid` | None |
+| PostHog | Snowplow's `domain_sessionid` | PostHog's `$session_id`, unchanged |
 
-Amplitude is the only tool here whose events carry a session ID. Because `domain_sessionid` must be a UUID, the Amplitude adapter keeps the first 24 characters of `device_id` and puts the session ID, in hexadecimal, in the last 12:
+Amplitude and PostHog are the tools here whose events carry a session ID. PostHog's `$session_id` is a UUID version 7, so the PostHog adapter uses it as `domain_sessionid` as it is. Amplitude's is a start time in milliseconds. Because `domain_sessionid` must be a UUID, the Amplitude adapter keeps the first 24 characters of `device_id` and puts the session ID, in hexadecimal, in the last 12:
 
 ```js
 function sessionKey(deviceId, sessionId) {
@@ -69,6 +71,7 @@ Your application subscribes to [interventions](/docs/signals/interventions/index
 | Adobe ECID | No | Adobe derives it from your org ID and the Audience Manager user ID and doesn't document how random it is |
 | GA client ID | No | Half of it is the first visit time in seconds. With analytics storage denied, GA4 sets no `_ga` cookie, so the ID changes on every full page load |
 | GA session ID, RudderStack `sessionId` | No | Session start times |
+| PostHog `$device_id` and `$session_id` | Not recommended | UUIDs version 7 that posthog-js builds from `crypto.getRandomValues`, so they can't be guessed, but their first 48 bits are the time they were created, to the millisecond. Any script on the page can read them, and `bootstrap.distinctID`, PostHog's server SDKs and the capture API accept any value |
 | `user_id`, `group_id` | No | Chosen by you and often sequential or guessable. Use them only for server-side reads |
 
 So the recommended pattern is:
@@ -94,13 +97,13 @@ Every event carries an `external_identity` entity with the IDs your tool assigne
 }
 ```
 
-| Field | Segment | RudderStack | GA4 | Amplitude | Adobe |
-| --- | --- | --- | --- | --- | --- |
-| `anonymous_id` | `anonymousId` | `anonymousId` | GA client ID | `device_id` | ECID |
-| `user_id` | `userId` | `userId` | GA `user_id` | `user_id` | CRM ID from `identityMap` or `setCustomerIDs` |
-| `session_id` | Empty | `context.sessionId` | GA session ID | Amplitude session ID | Empty |
-| `session_number` | Empty | Empty | GA session number | Not set | Empty |
-| `event_name` | Event name or call type | Event name or call type | GA4 event name | `event_type` | XDM `eventType`, link name or `page_view` |
+| Field | Segment | RudderStack | GA4 | Amplitude | Adobe | PostHog |
+| --- | --- | --- | --- | --- | --- | --- |
+| `anonymous_id` | `anonymousId` | `anonymousId` | GA client ID | `device_id` | ECID | `$device_id` |
+| `user_id` | `userId` | `userId` | GA `user_id` | `user_id` | CRM ID from `identityMap` or `setCustomerIDs` | `distinct_id` after `identify`, hashed when it contains `@` |
+| `session_id` | Empty | `context.sessionId` | GA session ID | Amplitude session ID | Empty | `$session_id` |
+| `session_number` | Empty | Empty | GA session number | Not set | Empty | Empty |
+| `event_name` | Event name or call type | Event name or call type | GA4 event name | `event_type` | XDM `eventType`, link name or `page_view` | PostHog event name |
 
 Use it to:
 
@@ -133,7 +136,7 @@ Read these attributes from your backend only. Your tool's ID isn't safe on the p
 
 ### Alias calls
 
-Segment and RudderStack alias calls become `external_event` with `previous_id` set. This is a record only: Signals doesn't merge the two IDs. Amplitude's Browser SDK has no alias call, and Adobe has none.
+Segment and RudderStack alias calls, and PostHog `$create_alias` events, become `external_event` with `previous_id` set. This is a record only: Signals doesn't merge the two IDs. Amplitude's Browser SDK has no alias call, and Adobe has none.
 
 ## Resolve identities with snowplow_id
 

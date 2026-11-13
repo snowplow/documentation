@@ -17,14 +17,14 @@ content_type: reference
 | Attached to | Every event an adapter sends, whichever rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) it takes |
 
 :::note
-`external_identity` is published on Iglu Central. If you register your own copy, for example under your own vendor, deploy it to production before you send events that carry it. Events sent before deployment are rejected for several minutes after it.
+`external_identity` is published on Iglu Central. If you register your own copy, for example under your own vendor, deploy it to production before you send events that carry it. Events sent before deployment are rejected for several minutes after it. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test.
 :::
 
 ## Fields
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `tool` | string, one of `segment`, `rudderstack`, `amplitude`, `mixpanel`, `ga4`, `adobe`, `heap`, `tealium`, `other` | Yes | The tool that assigned the IDs |
+| `tool` | string, one of `segment`, `rudderstack`, `amplitude`, `mixpanel`, `ga4`, `adobe`, `heap`, `tealium`, `other` | Yes | The tool that assigned the IDs. Tools without their own value, such as PostHog, use `other` |
 | `anonymous_id` | string, 1 to 255 characters | Yes | The tool's visitor or device ID |
 | `user_id` | string or null, up to 255 characters | No | The tool's user ID for a known user |
 | `session_id` | string or null, up to 255 characters | No | The tool's session ID, where it has one |
@@ -33,7 +33,7 @@ content_type: reference
 
 No other properties are allowed.
 
-`anonymous_id` is required, so the Segment adapter sends an event that has no visitor ID, such as a server-side call with only a `userId`, without this entity. The RudderStack transformation puts the `userId` in `anonymous_id` instead.
+`anonymous_id` is required, so the Segment adapter sends an event that has no visitor ID, such as a server-side call with only a `userId`, without this entity. The RudderStack transformation puts the `userId` in `anonymous_id` instead. The PostHog adapter sends no entity in cookieless mode, where there is no `$device_id`.
 
 ## What each tool puts in it
 
@@ -44,8 +44,9 @@ No other properties are allowed.
 | GA4 | GA client ID | GA `user_id` | GA session ID | GA session number |
 | Amplitude | `device_id` | `user_id`, unhashed | Amplitude `session_id` | Empty |
 | Adobe | ECID | The authenticated ID from `identityMap` or `setCustomerIDs` | Empty: Adobe computes visits on its servers | Empty |
+| PostHog | `$device_id` | `distinct_id` after `identify`, hashed with SHA-256 if it contains `@` | `$session_id` | Empty |
 
-`event_name` is the name your tool used, such as a Segment track event name, a GA4 event name, an Amplitude `event_type`, or an Adobe XDM `eventType` or link name. On client-side approaches, page pings carry the entity of the page view they belong to, including its event name.
+`event_name` is the name your tool used, such as a Segment track event name, a GA4 event name, an Amplitude `event_type`, an Adobe XDM `eventType` or link name, or a PostHog event name. On client-side approaches, page pings carry the entity of the page view they belong to, including its event name.
 
 See each tool page under [tools](/docs/signals/data-sources/existing-analytics/tools/segment/index.md) for details.
 
@@ -59,6 +60,7 @@ The IDs in this entity are your tool's, not Snowplow's. Several are guessable or
 - How random an Adobe ECID is isn't documented.
 - An Amplitude `device_id` can be set by a `?deviceId=` link parameter.
 - A Segment `anonymousId` can nearly be rebuilt by anyone who sees raw Segment message IDs, and server libraries accept any value.
+- A PostHog `$device_id` reveals the time of the visitor's first visit, any script on the page can read it, and PostHog's server SDKs and `bootstrap.distinctID` accept any value.
 
 Never use them as the key on the public intervention endpoint. Use them for joins and for reads from your backend. See [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 

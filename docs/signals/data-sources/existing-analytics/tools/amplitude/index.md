@@ -21,7 +21,7 @@ You can connect Amplitude in the browser, from Amplitude's servers, or later fro
 | Visitor key | Snowplow's random `domain_userid` (Amplitude's `device_id` if you skip the tracker, see [Send without the Snowplow tracker](#send-without-the-snowplow-tracker)) | Amplitude's `device_id` | Amplitude's `device_id` or `user_id`, as a custom key |
 | Sessions and engagement | Snowplow sessions and page pings | A session key only when the event has an Amplitude `session_id`; no engagement time | None in real time |
 | Delivery | Sent from the page as each event happens | Amplitude's documented target is 60 seconds at p95, with retries | Batch, on your export schedule |
-| Personal data path | Browser to your Collector: `user_id`, IP address, user agent, page URLs, Snowplow cookies | Amplitude to your Collector: only the fields the template writes (`user_id`, IP address, page URLs, `device_id`, typed fields) | Whatever the export holds, inside your warehouse |
+| Personal data path | Browser to your Collector: `user_id`, IP address, user agent, page URLs, Snowplow cookies, and Amplitude's `AMP_` cookies when the Collector is on the same site | Amplitude to your Collector: only the fields the template writes (`user_id`, IP address, page URLs, `device_id`, typed fields) | Whatever the export holds, inside your warehouse |
 | Plan or license needed | No Amplitude plan requirement known; plugins are a Browser SDK 2 feature | Amplitude's Webhooks documentation lists Plus, Growth and Enterprise; check your plan | An Amplitude export, and a Signals deployment with a warehouse connection |
 
 Choose client-side if:
@@ -46,11 +46,13 @@ Choose the warehouse export for history, for example lifetime order count, along
 - For the server-side approach, an Amplitude plan that includes the Webhook destination.
 - A Snowplow Collector URL and Signals enabled on your pipeline.
 - For browser requests, a Collector that accepts cross-origin POST requests from your site's domain.
-- The `external_event` and `external_identity` schemas, published on Iglu Central. If you register your own copies, deploy them to production before you send any events. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the converter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Amplitude. Check failed events after your first test.
 - Your Amplitude tracking plan, so you can match your event names to the ecommerce and search lists described in [How Amplitude events map to Snowplow](#how-amplitude-events-map-to-snowplow).
 
 :::note[The converter]
-The converter turns each Amplitude event into Snowplow events. This page calls it `AmplitudeSnowplow`. Load it on the page before the plugin runs.
+The client-side code calls a converter, `AmplitudeSnowplow`, that turns each Amplitude event into Snowplow events. The converter isn't printed on this page, and the client-side code doesn't run without it. It provides `fromBrowser`, `toSnowplow`, `identity` and `toPayload`, and holds the ecommerce and search name lists. Load it on the page before the plugin runs.
+
+The converter's `external_event` and `external_identity` schema URIs use the vendor `com.snowplowanalytics.snowplow`. If your copies of these schemas are registered under another vendor, change both URIs to match. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event, so set the app ID in the converter to yours.
 :::
 
 ## Set up the client-side approach
@@ -109,7 +111,27 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
 
 3. Add your own event names to the converter's ecommerce and search lists if they differ from the defaults. Events whose names aren't in a list arrive as `external_event`.
 
-4. Review consent. The Snowplow tracker sets its own `_sp_id` and `_sp_ses` cookies. Load or enable it under the same consent conditions as Amplitude. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+4. Gate both tools on consent. The Snowplow tracker sets its own `_sp_id` and `_sp_ses` cookies as soon as `newTracker` runs, even while Amplitude is opted out, so create it only after the visitor consents. Add `optOut: true` to the `amplitude.init` call from step 2, and move the step 1 tracker code into a function that runs on consent and then opts Amplitude back in:
+
+   ```javascript
+   amplitude.add(snowplowDestination);
+   amplitude.init('YOUR_AMPLITUDE_API_KEY', {
+     optOut: true,
+     // your existing options, unchanged
+   });
+
+   function onAnalyticsConsent() {
+     window.snowplow('newTracker', 'sp', 'https://collector.example.com', {
+       appId: 'my-site',
+       eventMethod: 'post',
+       contexts: { webPage: true },
+     });
+     window.snowplow('enableActivityTracking', { minimumVisitLength: 30, heartbeatDelay: 10 });
+     amplitude.setOptOut(false);
+   }
+   ```
+
+   Call `onAnalyticsConsent` from your consent tool. While Amplitude is opted out, the plugin receives no events and nothing reaches your Collector. Events tracked before consent are dropped, not queued, so neither Amplitude nor Snowplow receives them. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
 
 5. Publish the change to your site.
 
@@ -151,7 +173,7 @@ amplitude.add(snowplowDirect);
 Amplitude's Webhook destination can format each event with a FreeMarker template. The template below writes a Snowplow Collector payload, so Amplitude posts straight to your Collector with no service in between.
 
 :::note
-The template formats each event Amplitude sends, using the fields of Amplitude's documented event export format and the FreeMarker built-ins `?datetime`, `?keep_before_last` and `#function`.
+The template formats each event Amplitude sends, using the fields of Amplitude's documented event export format. It reads event times written as `2026-11-13 18:00:14`, with or without fractional seconds, or as `2026-11-13T18:00:14.123Z`. Prices, quantities and revenue sent as numeric strings, such as `"12.5"`, are read as numbers.
 :::
 
 1. In Amplitude, create a Webhook destination. Follow Amplitude's [Webhooks](https://amplitude.com/docs/data/destination-catalog/webhooks) documentation for where to find it in your project.
@@ -174,10 +196,11 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    <#assign name = (et == "revenue_amount")?then(p["$revenueType"]!et, et)>
    <#assign lname = name?trim?lower_case>
    <#function hex12 n><#local digits = "0123456789abcdef"><#local out = ""><#local v = n><#list 1..12 as i><#local out = digits[(v % 16)] + out><#local v = (v / 16)?floor></#list><#return out></#function>
-   <#function ms t><#return t?keep_before_last(".")?datetime("yyyy-MM-dd HH:mm:ss")?long + (t?keep_after_last(".")?substring(0, 3))?number></#function>
+   <#function ms t><#local s = t?replace("T", " ")?replace("Z", "")><#local frac = s?contains(".")?then(s?keep_after_last("."), "")><#local base = s?contains(".")?then(s?keep_before_last("."), s)><#return base?datetime("yyyy-MM-dd HH:mm:ss")?long + ((frac + "000")?substring(0, 3))?number></#function>
    <#function cur3 v><#if v?is_string && v?matches("[A-Za-z]{3}")><#return v?upper_case></#if><#return ""></#function>
    <#function money v><#return ((v * 100)?round / 100)></#function>
    <#function str v><#if v?is_number><#return v?c></#if><#if v?is_string><#return v></#if><#return ""></#function>
+   <#function num v><#if v?is_number><#return v></#if><#if v?is_string && v?trim?matches(r"-?[0-9]+(\.[0-9]+)?")><#return v?trim?number></#if><#return ""></#function>
    <#assign E = "iglu:com.snowplowanalytics.snowplow.ecommerce/">
    <#assign ECOM = {"product_view": ["product viewed", "view item", "view_item", "viewed product"], "add_to_cart": ["product added", "add to cart", "add_to_cart", "added to cart"], "remove_from_cart": ["product removed", "remove from cart", "remove_from_cart"], "checkout_step": ["checkout started", "begin checkout", "begin_checkout", "checkout step completed"], "transaction": ["order completed", "purchase", "purchase completed", "checkout completed"], "refund": ["order refunded", "refund", "refund completed"]}>
    <#assign SEARCH = ["products searched", "search", "searched", "site search", "search submitted"]>
@@ -186,13 +209,13 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    <#if etype == "" && et == "revenue_amount"><#assign etype = (((p["$price"]!0) * (p["$quantity"]!1)) lt 0)?then("refund", "transaction")></#if></#if>
    <#assign currency = cur3(p.currency!p["$currency"]!"")>
    <#if p.products?? && p.products?is_sequence && p.products?size gt 0><#assign items = p.products>
-   <#else><#assign items = [{"product_id": (p.product_id!p["$productId"]!p.sku!""), "name": (p.name!""), "category": (p.category!""), "price": (p.price!p["$price"]!""), "quantity": (p.quantity!p["$quantity"]!""), "brand": (p.brand!""), "variant": (p.variant!"")}]></#if>
+   <#else><#assign items = [{"product_id": (p.product_id!p["$productId"]!p.sku!""), "name": (p.name!""), "category": (p.category!""), "price": num(p.price!p["$price"]!""), "quantity": num(p.quantity!p["$quantity"]!""), "brand": (p.brand!""), "variant": (p.variant!"")}]></#if>
    <#assign prods = []><#assign prodsOk = true><#assign lines = 0><#assign qty = 0>
    <#list items as it>
-   <#assign pid = str(it.product_id!it.sku!it.id!it["$productId"]!"")><#assign pprice = it.price!"">
+   <#assign pid = str(it.product_id!it.sku!it.id!it["$productId"]!"")><#assign pprice = num(it.price!"")>
    <#assign pcur = cur3(it.currency!"")><#if pcur == ""><#assign pcur = currency></#if>
    <#if pid == "" || !pprice?is_number || pprice lt 0 || pcur == ""><#assign prodsOk = false><#else>
-   <#assign pq = (it.quantity!"")><#assign hasQ = pq?is_number>
+   <#assign pq = num(it.quantity!"")><#assign hasQ = pq?is_number>
    <#assign prods = prods + [{"id": pid, "price": money(pprice), "currency": pcur, "q": hasQ?then(pq?round, -1), "name": str(it.name!""), "category": str(it.category!""), "brand": str(it.brand!""), "variant": str(it.variant!"")}]>
    <#assign lines = lines + pprice * hasQ?then(pq, 1)><#assign qty = qty + hasQ?then(pq?round, 1)>
    </#if>
@@ -216,7 +239,7 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    </#if>
    <#elseif etype != "" && prodsOk>
    <#if etype == "transaction">
-   <#assign rev = p.revenue!p["$revenue"]!p.total!lines><#if !rev?is_number || rev lt 0><#assign rev = lines></#if>
+   <#assign rev = num(p.revenue!p["$revenue"]!p.total!lines)><#if !rev?is_number || rev lt 0><#assign rev = lines></#if>
    <#assign ents>${ents},{"schema":"${E}transaction/jsonschema/1-0-0","data":{"transaction_id":"${(orderId != "")?then(orderId, input["$insert_id"]!input.uuid)?json_string}","revenue":${money(rev)?c},"currency":"${currency}","total_quantity":${qty?c},"payment_method":"${str(p.payment_method!"unknown")?json_string}"}}</#assign>
    <#elseif (etype == "add_to_cart" || etype == "remove_from_cart") && (p.cart_total!p.cart_value!"")?is_number>
    <#assign ents>${ents},{"schema":"${E}cart/jsonschema/1-0-0","data":{"total_value":${money(p.cart_total!p.cart_value)?c},"currency":"${currency}"}}</#assign>
@@ -233,7 +256,7 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    </#if>
    <#if ev == "" && !isPv>
    <#assign data>{"name":"${name?json_string}","tool":"amplitude","kind":"${kind}"<#rt>
-   <#if p.price??>,"value":${p.price?c}<#elseif p["$price"]??>,"value":${(p["$price"] * (p["$quantity"]!1))?c}</#if><#rt>
+   <#if num(p.price!"")?is_number>,"value":${num(p.price)?c}<#elseif (p["$price"]!"")?is_number>,"value":${(p["$price"] * (p["$quantity"]!1))?c}</#if><#rt>
    <#if (p.currency!p["$currency"]!"")?matches("[A-Za-z]{3}")>,"currency":"${(p.currency!p["$currency"])?upper_case}"</#if><#rt>
    <#if (p.product_id!p["$productId"])??>,"item_id":"${(p.product_id!p["$productId"])?json_string}"</#if><#rt>
    <#if p.category??>,"item_category":"${p.category?json_string}"</#if><#rt>
@@ -248,8 +271,9 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    "e":"<#if isPv>pv<#else>ue</#if>","p":"web","tv":"amplitude-webhook-0.2","aid":"my-app",
    "eid":"${input.uuid}",
    "dtm":"${ms(input.client_event_time!input.event_time)?c}","ttm":"${ms(input.client_event_time!input.event_time)?c}","stm":"${ms(input.client_upload_time!input.event_time)?c}",
+   <#assign did = input.device_id?lower_case>
    "duid":"${input.device_id?json_string}","tnuid":"${input.device_id?json_string}",
-   <#if input.session_id?? && input.session_id gt 0 && input.device_id?matches("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")>"sid":"${input.device_id[0..23]}${hex12(input.session_id)}",</#if>
+   <#if input.session_id?? && input.session_id gt 0 && did?matches("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")>"sid":"${did[0..23]}${hex12(input.session_id)}",</#if>
    <#if input.user_id??>"uid":"${input.user_id?json_string}",</#if>
    <#if input.ip_address??>"ip":"${input.ip_address}",</#if>
    <#if p["[Amplitude] Page Location"]??>"url":"${p["[Amplitude] Page Location"]?json_string}",</#if>
@@ -275,17 +299,19 @@ This approach needs a warehouse connection in Signals.
 
 ## Check it works
 
-Run your site or send test events with [Snowplow Micro](/docs/testing/snowplow-micro/index.md) as the Collector, or look at the events in Console. If you registered your own copies of `external_event` and `external_identity`, start Micro with them mounted:
+Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
 
-```bash
-docker run -p 9090:9090 \
-  -v $PWD/iglu:/config/iglu-client-embedded \
-  snowplow/snowplow-micro:4.6.2 --yauaa
-```
+1. In Console, go to **Pipelines** and select your development environment.
+2. Copy its Collector endpoint.
+3. Point the Snowplow tracker or the plugin's Collector URL (client-side), or the Webhook destination's URL (server-side), at it. Keep the `/com.snowplowanalytics.snowplow/tp2` path on URLs that have one.
+4. Send test events from your site.
+5. Select **Open dashboard** to see the good and failed events.
 
-Then check that:
+Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
 
-- Every Amplitude event arrives once, with no failed events in `/micro/bad`.
+In the dashboard, check that:
+
+- Every Amplitude event arrives once, with no failed events.
 - `[Amplitude] Page Viewed` arrives as a `page_view`.
 - Product views and orders arrive as `snowplow_ecommerce_action`, with one `product` entity per item and a `transaction` entity on orders.
 - Searches arrive as `site_search`, and identifies with a user ID arrive as `identify` with the ID only.
@@ -294,6 +320,8 @@ Then check that:
 - No email address appears anywhere in the event.
 
 On the client-side approach, you can compare IDs in the browser console: `amplitude.getDeviceId()` returns the value in `external_identity.anonymous_id`, and `amplitude.getSessionId()` the value in `external_identity.session_id`.
+
+Once the events look right, point the tracker, plugin or Webhook destination at your pipeline's Collector, and read the attributes in Signals.
 
 ## How Amplitude events map to Snowplow
 
@@ -310,7 +338,8 @@ Each event takes the first row that fits. The same mapping runs in the client-si
 | `track` with a search name, such as `Products Searched`, and a `query` | `site_search` | `results_count` becomes `totalResults` |
 | `identify` after `setUserId` | `identify` | ID only. User properties, including any email, aren't sent |
 | `identify` with no user ID | `external_event`, kind `identify` | The SDK sends these for attribution updates |
-| `setGroup` and `groupIdentify` | `external_event`, kind `group` | `group_id` from the group value, `plan` from the group's `plan` property |
+| `setGroup` and `groupIdentify` | `external_event`, kind `group` | `group_id` from the group value, `plan` from the group's `plan` property. A `plan` property on any other event also fills `plan` |
+| `session_start` and `[Amplitude] Viewport Content Updated`, which Browser SDK 2 autocapture sends | `external_event`, kind `track` | Both appear in event counts and recent event lists. Filter them by `name` in attributes where you don't want them |
 | Any other event, including autocaptured ones such as `[Amplitude] File Downloaded` and `[Amplitude] Form Submitted` | `external_event`, kind `track` | `name` is the Amplitude event type. Typed fields are filled from `price`, `currency`, `product_id`, `category`, `query` and `plan` |
 
 Ecommerce and search events are matched by name, ignoring case. The defaults cover common names; add yours to the lists. An ecommerce event falls back to `external_event` if any item lacks an ID, a price or a currency.
@@ -336,7 +365,7 @@ The shared definitions in [Starter attribute groups](/docs/signals/data-sources/
 
 - **Visitor activity** and **purchase intent** work on every approach. Order value comes from the `transaction` entity. Every item arrives as its own `product` entity, and a product attribute reads one entity per event: the first, or the one at the index you set.
 - **Session engagement** needs the client-side approach with the Snowplow tracker, because engagement time comes from page pings. Session counts without engagement time also work without the tracker, keyed on the built `domain_sessionid`.
-- **Account and plan** only see `identify` and group events. The Browser SDK doesn't attach groups to later events, so you can't count product views per account by `group_id` alone.
+- **Account and plan:** `current_plan` takes the `plan` property from any event that has one, so a track event such as a signup with `plan: "pro"` replaces the plan from an earlier `groupIdentify`. `group_id` comes only from `identify` calls with groups and from `groupIdentify`. The Browser SDK doesn't attach groups to later events, so you can't count product views per account by `group_id` alone.
 - **Searches** (`searches_30d` and `search_terms` in purchase intent) read `site_search` events and their `terms`. Events that carry a `query` but aren't in the search list put it in `external_event.search_term` instead.
 
 ## Limits
@@ -345,7 +374,7 @@ Client-side:
 
 1. **Browser events only.** Events from Amplitude server SDKs, the HTTP API or mobile apps don't pass through the plugin.
 2. **Fields outside the schemas are dropped.** Signals only builds attributes on declared properties, so Amplitude properties outside the typed fields, such as `[Amplitude] Element Text`, aren't sent.
-3. **A second tracker and its cookies.** The recommended setup loads the Snowplow tracker, which sets `_sp_id` and `_sp_ses`. Without it you lose page pings, retries and a safe visitor key.
+3. **A second tracker and its cookies.** The recommended setup loads the Snowplow tracker, which sets `_sp_id` and `_sp_ses`. Without it you lose page pings, retries and a safe visitor key. With either variant, a Collector on the same site as your pages also receives Amplitude's `AMP_` cookies, which hold the `device_id`, `user_id`, session and campaign values.
 4. **Ad blockers may block the Collector.** It's a second host the browser has to reach.
 5. **Amplitude remote configuration can change what's sent.** The SDK fetches remote configuration from Amplitude, which can change autocapture without a code change.
 6. **Campaign fields depend on enrichment.** UTM parameters are in `page_url`, so `mkt_source` and the other campaign fields need the campaign attribution enrichment. Amplitude's own `utm_*` properties aren't mapped.

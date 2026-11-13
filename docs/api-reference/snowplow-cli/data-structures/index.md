@@ -63,6 +63,13 @@ This command will find all files under `./folder-name` (if omitted then `./data-
 
 If any validations fail the command will report the problems to stdout and exit with status code 1.
 
+The command also fails when a file skips a version of a data structure that's deployed in Console. For example, a file that moves from `1-0-0` to `1-2-0` while Console holds `1-0-0` fails with `Version 1-1-? not deployed. Cannot skip versions`, and `ds publish` fails with the same error. The error line doesn't name the file, but the `will update` line before it does, with the local and remote versions. To fix it, set the version in the file to the next version after the deployed one, here `1-1-0`.
+
+```text
+12:25PM INFO will update file=data-structures/com.example.docs-capture/docs_capture_plan.yaml local=1-2-0 remote=1-0-0
+12:25PM ERRO validation failed: Version 1-1-? not deployed. Cannot skip versions
+```
+
 
 ### Publishing data structures
 

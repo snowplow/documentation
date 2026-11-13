@@ -15,6 +15,8 @@ Signals shows you what your users are doing in real time: the products they've v
 
 Predictive attributes give you that prediction as a score. You define a goal, such as a purchase, and choose the user behavior the model learns from, such as product views and cart additions. Signals trains a model on your own event history, then scores a session whenever your application asks, while the user is still on your site. The score is a number between 0 and 1 for how likely the session is to reach the goal.
 
+Predictive attributes are in public preview, so their configuration, API, and behavior may change before they're generally available.
+
 ## Key benefits
 
 **Trained on your own data.** Signals builds the training dataset in your Snowflake warehouse, from the same attribute definitions it uses to score live sessions. For each training example, it calculates point-in-time correct attribute values, so the features the model scores are calculated the same way as the features it trained on.

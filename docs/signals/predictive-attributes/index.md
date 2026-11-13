@@ -12,6 +12,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+:::note[Public preview]
+Predictive attributes are in public preview. Their configuration, API, and behavior may change in ways that aren't backward compatible before they're generally available.
+:::
+
 A predictive attribute predicts how likely a session is to reach a goal you define, such as a purchase or a sign-up. Signals trains a model on your own stream [attribute](/docs/signals/attributes/index.md) definitions, then returns a score between 0 and 1 each time your application requests one.
 
 Use a predictive attribute when you want a propensity score in production without building the pipeline around it. A propensity model usually needs labeled training data, a feature pipeline, a way to serve the model, and features in production that match the ones the model trained on. Signals builds the training data and serves the model from your attribute definitions, using the same definitions for both.
@@ -43,7 +47,7 @@ Once published, [retrieve a predictive attribute score](/docs/signals/applicatio
 
 Signals turns your event history into training examples, then trains a binary classifier on them. Understanding how the examples are built helps you choose the training settings.
 
-Events in a session that come before the session's first goal event become training examples, called anchors. For each anchor, Signals calculates the value each attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. The model learns from the same partial view of a session that it sees when it scores a live session. The [training options](#train-the-model) control which events become anchors.
+Events in a session that come before the session's first goal event become training examples, called anchors. For each anchor, Signals calculates the value each attribute had at that moment, using only events before the anchor. The label is `1` if the session went on to reach the goal, and `0` if it didn't. The model learns from the same partial view of a session that it sees when it scores a live session. The [anchor criteria](#choose-where-to-anchor) and the [training options](#train-the-model) control which events become anchors.
 
 Signals builds the examples with queries in your Snowflake warehouse, and balances them so that sessions that don't reach the goal don't dominate. It holds out the most recent 20% of sessions to measure the model's quality, and trains the model on the rest. Scores are adjusted to account for the balancing, so they're on the scale of your real goal rate. Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes.
 
@@ -62,7 +66,7 @@ The form has four sections:
 * **Attribute details**: a unique name in lowercase snake case, and an optional description and owner
 * **Goal**: the goal event, and optional criteria the event must meet
 * **Input features**: the stream attribute groups the model learns from. Expand a group to leave out individual attributes.
-* **Configuration**: the [training settings](#train-the-model)
+* **Configuration**: the [anchor criteria](#choose-where-to-anchor), excluded events, and [training settings](#train-the-model)
 
 ![Create predictive attribute form with the attribute name, description, and owner filled in, and a goal of the snowplow_ecommerce_action event where type equals transaction](../images/predictive-attribute-create.png)
 
@@ -152,6 +156,7 @@ The table below lists the fields of a predictive attribute.
 | `owner`            | The email of the primary maintainer                                                         | ✅         |
 | `input_attributes` | The stream attributes the model learns from, built with `attribute_reference()`              | ✅         |
 | `goal_criteria`    | The [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) an event must meet to count as reaching the goal | ✅         |
+| `anchor_criteria`  | The [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) an event must meet to become an anchor. Defaults to every event |           |
 | `excluded_events`  | Events that never become anchors. Defaults to `page_ping`                                   |           |
 | `description`      | A human-readable description                                                                |           |
 
@@ -175,11 +180,37 @@ Signals converts each input into model features based on its aggregation, so you
 
 ### Define the goal
 
-The goal is the event that counts as success, for example a `transaction` or a `sign_up`. The model scores how likely each session is to reach it. Define the goal with the same [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) syntax as attribute filters, using `all` or `any` conditions on atomic, event, or entity properties.
+The goal is the event that counts as success, for example a `transaction` or a `sign_up`. The model scores how likely each session is to reach it. Define the goal with the same [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) syntax as attribute filters, using `all` or `any` conditions on atomic, event, entity, or [calculated](/docs/signals/attributes/attributes/index.md#calculated-properties) properties.
 
 The goal is a single event that matches the criteria, later in the same session. Choose an outcome that the session's own activity leads to, such as a purchase, a sign-up, or a form submission. A goal reached in a later session, such as a renewal days afterward, doesn't count as reaching the goal.
 
-The goal, inputs, and excluded events are fixed once you create a version. To predict something different or change the inputs, create a new version.
+The goal, inputs, anchor criteria, and excluded events are fixed once you create a version. To predict something different or change the inputs, create a new version.
+
+### Choose where to anchor
+
+By default, any event in a session can become an anchor. If the session cookie is shared by more than one app, such as your store and your documentation site, events from every app become training examples, including ones from apps where your application never requests a score. Set anchor criteria to limit anchors to where you'll read the score, such as one `app_id`.
+
+Anchor criteria use the same [criteria](/docs/signals/attributes/attributes/index.md#filter-with-criteria) syntax as the goal. They only decide which events become anchors:
+* The goal still counts when it happens on any event in the session, including events that don't match the anchor criteria
+* Every event in the session still counts toward `min_events`
+* Attribute values are still calculated from every event
+
+Anchor criteria apply to training only. Signals still returns a score for a session that doesn't match them, from a model that didn't train on sessions like it.
+
+In Console, set **Anchor criteria** in the **Configuration** section. In the Python SDK, set `anchor_criteria` on the predictive attribute:
+
+```python
+from snowplow_signals import AtomicProperty
+
+purchase_propensity = PredictiveAttribute(
+    name="purchase_propensity",
+    version=1,
+    owner="owner@example.com",
+    input_attributes=[...],
+    goal_criteria=Criteria(all=[Criterion.eq(ecom_type, "transaction")]),
+    anchor_criteria=Criteria(all=[Criterion.eq(AtomicProperty(name="app_id"), "my-store")]),
+)
+```
 
 ## Train the model
 
@@ -246,7 +277,7 @@ The table below lists the training options. The Python SDK argument names are sh
 | `training_span`           | The window of events to build examples from. Required                                                               |                     |
 | `preset`                  | `fast` stops training after 30 seconds, for trying out inputs. `thorough` allows up to 10 minutes, for production | `fast` in the SDK, `thorough` in Console |
 | `min_events`              | Minimum number of earlier events in the session before an event can be an anchor                                    | `1`                 |
-| `max_anchors_per_session` | Maximum number of anchors from each session, taken from the first eligible events, so that long sessions don't dominate the dataset | No limit            |
+| `max_anchors_per_session` | Maximum number of anchors from each session, keeping the earliest, so that long sessions don't dominate the dataset. Events collected at the same moment count as one anchor | No limit            |
 | `max_negative_ratio`      | Maximum ratio of negative to positive examples. `1.0` gives a balanced dataset                                      | `5.0`               |
 | `max_lookback_days`       | How many days of events before each anchor to read when calculating attribute values                               | The longest [period](/docs/signals/attributes/attributes/index.md#set-the-period) of the input attributes, or at least 30 days if any are lifetime attributes. Lifetime attributes only include this many days of history in training, but their full history when scored |
 
@@ -274,7 +305,7 @@ If an input attribute contributes almost nothing, consider removing it in a new 
 Publishing loads a training's model into Signals so your application can request scores. Only one version of each predictive attribute is published at a time, so publishing a version unpublishes the one that was live. The input attribute groups must be published first. Publishing takes effect within a few seconds.
 
 Predictive attributes have two levels of version:
-* The version, such as `2`, changes when you create a new definition with different inputs, goal, or excluded events
+* The version, such as `2`, changes when you create a new definition with different inputs, goal, anchor criteria, or excluded events
 * The training, shown in Console as the minor version, such as `v2.1`, changes every time you retrain
 
 Retraining doesn't affect the published model. It keeps serving until you publish the new training. To roll back, publish an earlier training.

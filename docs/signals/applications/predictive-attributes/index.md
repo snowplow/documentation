@@ -12,6 +12,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+:::note[Public preview]
+Predictive attributes are in public preview. Their configuration, API, and behavior may change in ways that aren't backward compatible before they're generally available.
+:::
+
 Once a predictive attribute is [published](/docs/signals/predictive-attributes/index.md), request a score in your application to decide how to treat a session, for example whether to show an offer. Signals calculates the score when you request it, from the most recent values of the model's input attributes. Your application requests the score and decides what to do with it. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Get the identifiers

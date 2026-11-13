@@ -128,7 +128,7 @@ Use `sync` if you only want to push changes without changing event specification
 
 Console gives every event specification a version number. When you declare that version in your tracking plan files, the CLI checks that each change to a file raises it exactly as Console will, so the version in your files is the version Console assigns. The CLI doesn't check an event specification without a `version` field.
 
-The expected version follows one rule:
+Console sets the expected version as follows:
 
 * A new event specification starts at `0`
 * A change to the name, the event, or the entities, including their property rules and entity cardinality, raises the version by one
@@ -229,7 +229,7 @@ The version checks print these errors and exit with status 1. Each error names t
 12:23PM ERRO validation failed 1 errors
 ```
 
-:::warning[Update your branch before running --fix]
+:::warning[Update your branch before running `--fix`]
 
 If you run `--fix` on a branch that isn't up to date, it writes the expected version into a file that still holds the older entities, and the next sync publishes them over the other change.
 
@@ -254,7 +254,7 @@ If you run `--fix` on a branch that isn't up to date, it writes the expected ver
 11:42AM ERRO bad response: {Version mismatch on event spec docs-capture signup id: 947020bc-775c-473d-94cb-adf65501a001: expected version 5, the platform would assign version 6}
 ```
 
-`could not find where the branch started from origin/develop` means the repository doesn't have the base ref, or doesn't have enough history to find where the branch started from it. This happens in the shallow clone that `actions/checkout` creates by default. A clone without the base ref prints `fatal: Not a valid object name origin/develop`, and a clone that has the base ref but not the history prints `exit status 1:` with nothing after it. Fetch the full history, for example with `fetch-depth: 0` on `actions/checkout`, and make sure the base ref is fetched.
+`could not find where the branch started from origin/develop` means the repository doesn't have the base ref, or doesn't have enough history to find where the branch started from it. The error happens in the shallow clone that `actions/checkout` creates by default. A clone without the base ref prints `fatal: Not a valid object name origin/develop`, and a clone that has the base ref but not the history prints `exit status 1:` with nothing after it. Fetch the full history, for example with `fetch-depth: 0` on `actions/checkout`, and make sure the base ref is fetched.
 
 ```text
 12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 128: fatal: Not a valid object name origin/develop

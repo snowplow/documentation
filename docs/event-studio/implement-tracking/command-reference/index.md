@@ -66,17 +66,9 @@ Generates tracking code based on the configuration file.
 
 <AppliesTo feature="snowtype-check-command" />
 
-Reports whether the generated code in the output path matches what `generate` writes, without writing anything. `check` uses the same configuration file, the same `generate` options, and the same flags as `generate`.
+Reports whether the generated code in the output path matches what `generate` writes, without writing anything. `check` uses the same configuration file and takes the same flags as [`generate`](/docs/event-studio/implement-tracking/command-reference/index.md#generate).
 
-| Flag                                    | Description                                                                                                                                                                                      | Default |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| `-c, --config <string>`                 | Config file path.                                                                                                                                                                                |         |
-| `--instructions`                        | Ignore [event specification instructions](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#markdown-instructions) in the output path, and warn that the check doesn't cover them. |         |
-| `--no-instructions`                     | Check as if generating without instructions. `check` reports an instructions file left in the output path as out of date.                                                          |         |
-| `--validations`                         | Include the [runtime validation](/docs/event-studio/implement-tracking/client-side-validation/index.md) files in the check. Available only for the Browser tracker.                              |         |
-| `--no-validations`                      | Check without runtime validations.                                                                                                                                                               |         |
-| `--disallowDevSchemas`                  | Disallow [generation of code](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) using schemas only deployed on DEV environment. | `false` |
-| `--deprecateOnlyOnProdAvailableUpdates` | Show [deprecation warnings](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#deprecation-and-hidden-warnings) only when there are PROD-available schema updates.            | `false` |
+The `--instructions` flag behaves differently: `check` ignores [event specification instructions](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#markdown-instructions) in the output path, and warns that the check doesn't cover them.
 
 `check` exits with code `0` when the generated code is up to date. It exits with code `1` when any file differs or when Snowtype can't generate the code, for example without Console credentials. `check` doesn't compare or update `.snowtype-lock.json`.
 

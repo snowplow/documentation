@@ -17,20 +17,23 @@ Optimizely can also target on audiences synced from other systems, but a sync la
 * Segment results in Optimizely by the same attributes you targeted on
 * Analyze exposures in your warehouse next to the rest of your Snowplow data
 
-This page uses Optimizely Feature Experimentation with the JavaScript SDK v6. For Optimizely Web Experimentation, use the [Optimizely tracking](/docs/sources/web-trackers/tracking-events/optimizely/index.md) plugin to record exposures.
+This page uses Optimizely Feature Experimentation with the JavaScript SDK v6, which runs on your server or in the browser. For Optimizely Web Experimentation, use the [Optimizely tracking](/docs/sources/web-trackers/tracking-events/optimizely/index.md) plugin to record exposures.
 
 ## Before you begin
 
 You need:
 
 * A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
-* The `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
 * An Optimizely Feature Experimentation project, with an attribute created for each Signals attribute you want to use in an audience
+* For the server setup, the `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
+* For the browser setup, the attributes endpoint and `fetchSignalsAttributes` helper from [Serve attributes to the browser](/docs/signals/integrations/experimentation-platforms/index.md#serve-attributes-to-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
 
-## Integrate Signals with Optimizely
+Use the setup that matches where you run the Optimizely SDK. [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two.
 
-Each time your server decides which variation to show, it reads the user's attributes from Signals and passes them to the Optimizely user context.
+## Integrate on your server
+
+Use this setup if your server renders the page. Each time your request handler decides which variation to show, it reads the user's attributes from Signals and passes them to the Optimizely user context.
 
 <Steps>
 
@@ -90,9 +93,81 @@ Open a page that runs the flag with [Snowplow Inspector](/docs/testing/snowplow-
 
 </Steps>
 
+## Integrate in the browser
+
+Use this setup if your site is a single-page app or a static site. The browser fetches the user's attributes from your endpoint and passes them to the Optimizely SDK running in the browser.
+
+<Steps>
+
+### Fetch attributes while Optimizely loads
+
+Create the Optimizely client, and fetch the attributes at the same time, so the user waits for whichever takes longer rather than both in turn.
+
+```typescript
+import {
+  createInstance,
+  createPollingProjectConfigManager,
+  createBatchEventProcessor,
+} from '@optimizely/optimizely-sdk';
+
+const optimizely = createInstance({
+  projectConfigManager: createPollingProjectConfigManager({ sdkKey: OPTIMIZELY_SDK_KEY }),
+  eventProcessor: createBatchEventProcessor(),
+});
+
+const [attributes] = await Promise.all([
+  fetchSignalsAttributes(TIMEOUT_MS),
+  optimizely.onReady(),
+]);
+```
+
+### Decide with Signals attributes
+
+Create the user context with `domain_userid` from the tracker's cookie, and show the variation.
+
+```typescript
+const domainUserId = getDomainUserId(document.cookie);
+const user = optimizely.createUserContext(domainUserId, attributes);
+const decision = user.decide('checkout_offer');
+
+if (decision.variationKey && decision.variationKey !== 'control') {
+  showOffer(decision.variationKey);
+}
+```
+
+The same advice on attribute types and contextual bandits applies as in the server setup.
+
+### Track the exposure with the page view
+
+Build the exposure from the decision, and attach it to the page view.
+
+```typescript
+const exposures = decision.variationKey
+  ? [{
+      vendor: 'optimizely',
+      experiment_id: decision.ruleKey ?? decision.flagKey,
+      variation_id: decision.variationKey,
+      signals_attributes_used: Object.keys(attributes),
+    }]
+  : [];
+
+window.snowplow('trackPageView', {
+  context: exposures.map((data) => ({
+    schema: 'iglu:com.example/experiment_exposure/jsonschema/1-0-0',
+    data,
+  })),
+});
+```
+
+### Check the browser integration
+
+Open the page with Snowplow Inspector installed, and with your browser's developer tools on the **Network** tab. The request to `/api/signals-attributes` should return your attributes, and the page view should carry an `experiment_exposure` entity with `vendor` set to `optimizely`.
+
+</Steps>
+
 ## Assign a variation from an intervention
 
-To decide at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The intervention payload includes the user's attributes, so the handler passes them straight to the Optimizely browser SDK. This example assumes you've already initialized the browser SDK.
+To decide at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The intervention payload includes the user's attributes, so the handler passes them straight to the Optimizely SDK. This example uses the client from [Integrate in the browser](#integrate-in-the-browser).
 
 ```typescript
 addInterventionHandlers({

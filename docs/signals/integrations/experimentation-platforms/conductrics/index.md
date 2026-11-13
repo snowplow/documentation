@@ -21,14 +21,16 @@ Conductrics takes user attributes as traits on each selection call. Its predicti
 You need:
 
 * A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
-* The `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
+* The `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
 * Your Conductrics owner code and API key
 * Each trait you plan to send, created in the Conductrics admin. Conductrics ignores traits it doesn't know.
 
-## Integrate Signals with Conductrics
+This page calls the Conductrics selection API from your server, so your API key stays there. If your site renders in the browser, the browser asks your server for the selection, as shown in [Select from the browser](#select-from-the-browser). [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two setups.
 
-Conductrics selects a variation through its REST API. Each time your server needs a selection, it reads the user's attributes from Signals, turns them into traits, and sends them on the selection call. The request makes two calls in sequence, so keep the Signals timeout short.
+## Integrate on your server
+
+Each time your server needs a selection, it reads the user's attributes from Signals, turns them into traits, and sends them on the selection call. The request makes two calls in sequence, so keep the Signals timeout short.
 
 <Steps>
 
@@ -45,24 +47,32 @@ function toTraits(attributes: Record<string, string | number | boolean>): string
 
 ### Pass traits on the selection call
 
-In your request handler, read the attributes and call the selection API with `domain_userid` as the session.
+Read the attributes and call the selection API with `domain_userid` as the session. Wrap this in a function, so your request handler and the browser endpoint can both use it.
 
 ```typescript
 const CONDUCTRICS_URL = 'https://api.v3.conductrics.com/{{owner_code}}/v3/agent-api';
 
-const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
+async function selectVariation(agent: string, domainUserId: string) {
+  const attributes = await readSignals('checkout_intent', domainUserId, TIMEOUT_MS);
 
-const params = new URLSearchParams({ apikey: CONDUCTRICS_API_KEY, session: domainUserId });
-const response = await fetch(`${CONDUCTRICS_URL}?${params}`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    commands: [{ a: 'checkout-offer' }],
-    traits: toTraits(attributes),
-  }),
-});
-const selection = await response.json();
-const offer = selection.sels['checkout-offer'];
+  const params = new URLSearchParams({ apikey: CONDUCTRICS_API_KEY, session: domainUserId });
+  const response = await fetch(`${CONDUCTRICS_URL}?${params}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      commands: [{ a: agent }],
+      traits: toTraits(attributes),
+    }),
+  });
+  const selection = await response.json();
+  return { variation: selection.sels[agent], selection, attributes };
+}
+```
+
+In your request handler, call it for each agent on the page:
+
+```typescript
+const { variation, selection, attributes } = await selectVariation('checkout-offer', domainUserId);
 ```
 
 ### Track the selection
@@ -70,14 +80,18 @@ const offer = selection.sels['checkout-offer'];
 Each selection in the response includes a policy, `p`. A policy of `p` means the agent is paused, so the user isn't in an experiment. Build the exposures from the other selections, and return them with the page.
 
 ```typescript
-const exposures = selection.items
-  .filter((item) => item.p !== 'p')
-  .map((item) => ({
-    vendor: 'conductrics',
-    experiment_id: item.a,
-    variation_id: item.c,
-    signals_attributes_used: Object.keys(attributes),
-  }));
+function toExposures(selection, attributes) {
+  return selection.items
+    .filter((item) => item.p !== 'p')
+    .map((item) => ({
+      vendor: 'conductrics',
+      experiment_id: item.a,
+      variation_id: item.c,
+      signals_attributes_used: Object.keys(attributes),
+    }));
+}
+
+const exposures = toExposures(selection, attributes);
 ```
 
 In the browser, attach `exposures` to the page view, as shown in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow). Conductrics can also send its own selection events to your Snowplow pipeline. Ask Conductrics to set this up for your account.
@@ -88,22 +102,85 @@ Open a page that runs the agent with [Snowplow Inspector](/docs/testing/snowplow
 
 </Steps>
 
+## Select from the browser
+
+If your site is a single-page app or a static site, add an endpoint that runs the selection on your server, and call it from the browser. The endpoint reads `domain_userid` from the request's cookie, so a visitor can only get selections for themselves.
+
+<Steps>
+
+### Add a selection endpoint
+
+This example uses Express.
+
+```typescript
+app.post('/api/conductrics/select', express.json(), async (req, res) => {
+  const domainUserId = getDomainUserId(req.headers.cookie ?? '');
+  res.set('Cache-Control', 'private, no-store');
+  if (!domainUserId) {
+    return res.json({ variation: null, exposures: [] });
+  }
+  const { variation, selection, attributes } = await selectVariation(req.body.agent, domainUserId);
+  res.json({ variation, exposures: toExposures(selection, attributes) });
+});
+```
+
+### Request the selection and track it
+
+In the browser, call the endpoint with a short timeout, and show the default experience if it's slow or fails. Then attach the exposures to the page view.
+
+```typescript
+let result = { variation: null, exposures: [] };
+try {
+  const response = await fetch('/api/conductrics/select', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agent: 'checkout-offer' }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  });
+  if (response.ok) {
+    result = await response.json();
+  }
+} catch {
+  // Keep the default experience
+}
+
+// In this example, variation A is the control
+if (result.variation && result.variation !== 'A') {
+  showOffer(result.variation);
+}
+
+window.snowplow('trackPageView', {
+  context: result.exposures.map((data) => ({
+    schema: 'iglu:com.example/experiment_exposure/jsonschema/1-0-0',
+    data,
+  })),
+});
+```
+
+The timeout covers both the Signals read and the Conductrics call, so allow for both.
+
+### Check the browser integration
+
+Open the page with Snowplow Inspector installed, and with your browser's developer tools on the **Network** tab. The request to `/api/conductrics/select` should return a variation, and the page view should carry an `experiment_exposure` entity with `vendor` set to `conductrics`.
+
+</Steps>
+
 ## Select from an intervention
 
-To make a selection at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The Conductrics API key stays on your server, so the handler asks your server to make the selection. The server endpoint runs the selection call above, with the intervention's attributes converted to traits.
+To make a selection at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The handler calls the selection endpoint from [Select from the browser](#select-from-the-browser). Signals has already updated the user's attributes, so the endpoint sends the latest traits.
 
 ```typescript
 addInterventionHandlers({
-  async checkoutHesitation(intervention) {
+  async checkoutHesitation() {
     const response = await fetch('/api/conductrics/select', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ agent: 'checkout-offer', attributes: intervention.attributes }),
+      body: JSON.stringify({ agent: 'checkout-offer' }),
     });
-    const { offer } = await response.json();
+    const { variation } = await response.json();
     // In this example, variation A is the control
-    if (offer !== 'A') {
-      showOffer(offer);
+    if (variation && variation !== 'A') {
+      showOffer(variation);
     }
   },
 });

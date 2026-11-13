@@ -42,28 +42,15 @@ Passing Signals attributes at assignment lets you:
 
 ## How it works
 
-The integration runs in your server code, the same code that handles a page request or an API call. For example, an Express route, a Next.js route handler or server component, or a Python view. Reading attributes needs an API key, so it can't run in the browser.
+Reading attributes from Signals needs an API key, so the read always happens on your server. The experimentation decision can happen on your server or in the browser. Use the setup that matches where your platform's SDK already runs:
 
-```mermaid
-flowchart LR
-    A["Your website"] -->|"1. Events"| S["Signals"]
-    S -->|"2. Attributes"| B["Your server"]
-    B -->|"3. Attributes"| E["Experimentation platform"]
-    E -->|"4. Variant"| B
-    B -->|"5. Variant"| A
-    A -->|"6. Exposure"| P["Snowplow"]
-```
+| | On your server | In the browser |
+| --- | --- | --- |
+| Use it when | Your server renders pages, or already calls the platform's server-side SDK | Your site is a single-page app or a static site, or the platform runs only in the browser |
+| How attributes reach the SDK | Your server reads them and passes them to the SDK | The browser calls an endpoint on your server, which reads them and returns them |
+| What the user sees | The page arrives with the variant already applied | The page waits for the attributes before it shows the variant |
 
-In order:
-
-1. Your website sends events to Snowplow, and Signals updates the user's attributes
-2. When the user requests a page, your server reads their attributes from a Signals [service](/docs/signals/applications/services/index.md)
-3. Your server passes the attributes to the experimentation SDK
-4. The SDK applies your targeting rules and assigns a variant
-5. Your server renders the variant
-6. Your website tracks which variant the user saw, as part of the page view
-
-In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID. Create the `Signals` client once when your server starts, as described in [Connect to Signals](/docs/signals/connection/index.md), and reuse it for every request.
+Both setups read attributes the same way. In these examples, `checkout_intent` is a Signals service and `domainUserId` is the user's Snowplow ID. Create the `Signals` client once when your server starts, as described in [Connect to Signals](/docs/signals/connection/index.md), and reuse it for every request.
 
 <Tabs groupId="signals-language" queryString>
 <TabItem value="nodejs" label="Node.js" default>
@@ -102,13 +89,85 @@ Signals returns the service's attributes for that user, for example:
 
 Your platform then applies a rule such as "show the offer when `product_views_last_10_min` is at least 5".
 
+### On your server
+
+Your request handler reads the attributes. A request handler is the server code that runs when a browser requests a page or calls your API, for example an Express route, a Next.js route handler or server component, or a Django view. It passes the attributes to the platform's server-side SDK before the page is rendered.
+
+```mermaid
+flowchart LR
+    A["Your website"] -->|"1. Events"| S["Signals"]
+    S -->|"2. Attributes"| B["Your server"]
+    B -->|"3. Attributes"| E["Experimentation platform"]
+    E -->|"4. Variant"| B
+    B -->|"5. Variant"| A
+    A -->|"6. Exposure"| P["Snowplow"]
+```
+
+In order:
+
+1. Your website sends events to Snowplow, and Signals updates the user's attributes
+2. When the user requests a page, your server reads their attributes from a Signals [service](/docs/signals/applications/services/index.md)
+3. Your server passes the attributes to the experimentation SDK
+4. The SDK applies your targeting rules and assigns a variant
+5. Your server renders the variant
+6. Your website tracks which variant the user saw, as part of the page view
+
+### In the browser
+
+You add one endpoint to your server that reads the current user's attributes and returns them as JSON. The browser calls it and passes the attributes to the platform's browser SDK.
+
+```mermaid
+flowchart LR
+    A["Your website"] -->|"1. Events"| S["Signals"]
+    A -->|"2. Request"| B["Your endpoint"]
+    B -->|"3. Read"| S
+    B -->|"4. Attributes"| A
+    A -->|"6. Exposure"| P["Snowplow"]
+```
+
+In order:
+
+1. Your website sends events to Snowplow, and Signals updates the user's attributes
+2. When the page loads, the browser calls your endpoint
+3. The endpoint reads the user's attributes from the Signals service
+4. The endpoint returns the attributes the browser is allowed to see
+5. The browser SDK applies your targeting rules and assigns a variant
+6. Your website shows the variant, and tracks which variant the user saw as part of the page view
+
+The user waits for the endpoint before the variant appears, so keep its timeout short. Most platforms' browser snippets already hide the page until they assign a variant.
+
 ## Choose the user key
 
 The user key is the identifier the experimentation platform uses to assign a variant. Use `domain_userid` by default, so experiment exposures, Signals attributes, and Snowplow events all join on the same ID. Don't let the platform create its own anonymous ID as well.
 
 Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your platform keeps assignments the same across login.
 
-Your server can read `domain_userid` from the `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). On a user's first page view the cookie may not exist yet, so experiments that target in-session behavior should assign on a later request.
+The JavaScript tracker stores `domain_userid` as the first value in its `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md). The cookie's full name is `_sp_id.` followed by a hash. This helper reads it from a cookie header on your server, or from `document.cookie` in the browser:
+
+<Tabs groupId="signals-language" queryString>
+<TabItem value="nodejs" label="Node.js" default>
+
+```typescript
+export function getDomainUserId(cookies: string): string | undefined {
+  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
+}
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+def get_domain_user_id(cookies: dict) -> str | None:
+    for name, value in cookies.items():
+        if name.startswith("_sp_id."):
+            return value.split(".")[0]
+    return None
+```
+
+</TabItem>
+</Tabs>
+
+If you've changed the tracker's `cookieName`, change the `_sp_id` prefix to match. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
 
 ## Handle slow or missing attributes
 
@@ -180,6 +239,70 @@ def read_signals(service: str, domain_user_id: str, timeout_s: float) -> dict:
 
 Users without Signals attributes, because the read timed out or because they're new, don't match conditions built on Signals attributes, and see the default variant. Keep this in mind when you report results.
 
+### Serve attributes to the browser
+
+For the browser setup, add an endpoint that calls the helper and returns the result. Two rules keep it safe:
+
+* Read the user's ID from their own cookie, never from a query parameter, so a visitor can only fetch their own attributes
+* Return only the attributes the browser needs, because the user can see anything you return
+
+This example uses Express in Node.js, or Flask in Python:
+
+<Tabs groupId="signals-language" queryString>
+<TabItem value="nodejs" label="Node.js" default>
+
+```typescript
+const BROWSER_ATTRIBUTES = ['product_views_last_10_min', 'is_returning_customer'];
+
+app.get('/api/signals-attributes', async (req, res) => {
+  const domainUserId = getDomainUserId(req.headers.cookie ?? '');
+  const attributes = domainUserId
+    ? await readSignals('checkout_intent', domainUserId, TIMEOUT_MS)
+    : {};
+  res.set('Cache-Control', 'private, no-store');
+  res.json(
+    Object.fromEntries(
+      Object.entries(attributes).filter(([name]) => BROWSER_ATTRIBUTES.includes(name)),
+    ),
+  );
+});
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+BROWSER_ATTRIBUTES = {"product_views_last_10_min", "is_returning_customer"}
+
+@app.get("/api/signals-attributes")
+def signals_attributes():
+    domain_user_id = get_domain_user_id(request.cookies)
+    attributes = read_signals("checkout_intent", domain_user_id, TIMEOUT_S) if domain_user_id else {}
+    response = jsonify({k: v for k, v in attributes.items() if k in BROWSER_ATTRIBUTES})
+    response.headers["Cache-Control"] = "private, no-store"
+    return response
+```
+
+</TabItem>
+</Tabs>
+
+In the browser, call the endpoint with its own timeout, and fall back to no attributes if it's slow or fails. The platform pages call this helper:
+
+```typescript
+export async function fetchSignalsAttributes(
+  timeoutMs: number,
+): Promise<Record<string, string | number | boolean>> {
+  try {
+    const response = await fetch('/api/signals-attributes', {
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+    return response.ok ? await response.json() : {};
+  } catch {
+    return {};
+  }
+}
+```
+
 ## Track exposures in Snowplow
 
 Track which variant each user saw as part of your Snowplow data. You can then analyze experiment results in your warehouse alongside the rest of your behavioral data.
@@ -193,7 +316,7 @@ Define an [entity](/docs/fundamentals/entities/index.md) for exposures in [Event
 | `variation_id` | The variant the user was assigned |
 | `signals_attributes_used` | The names of the Signals attributes passed to the platform, not their values |
 
-Each platform page shows how to build the exposures from the SDK's result on your server. Return them with the page, and attach them to the page view in the browser. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
+Each platform page shows how to build the exposures from the SDK's result. In the server setup, return them with the page. In the browser setup, build them in the browser, and assign the variant before you track the page view. Either way, attach them to the page view. The JavaScript tracker adds `domain_userid` and `domain_sessionid` to the event, so the exposure joins to the user's other events.
 
 ```javascript
 window.snowplow('trackPageView', {

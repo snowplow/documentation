@@ -22,13 +22,15 @@ LaunchDarkly targets on any attribute in the evaluation context, with no setup i
 You need:
 
 * A Signals [service](/docs/signals/applications/services/index.md) that returns the attributes you want to target on, and a [connection to Signals](/docs/signals/connection/index.md) from your server
-* The `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
 * An exposure entity, as described in [Track exposures in Snowplow](/docs/signals/integrations/experimentation-platforms/index.md#track-exposures-in-snowplow)
-* A LaunchDarkly server-side SDK key
+* For the server setup, a LaunchDarkly server-side SDK key, and the `readSignals` helper from [Handle slow or missing attributes](/docs/signals/integrations/experimentation-platforms/index.md#handle-slow-or-missing-attributes)
+* For the browser setup, a LaunchDarkly client-side ID, with the flag made available to client-side SDKs. You also need the attributes endpoint and `fetchSignalsAttributes` helper from [Serve attributes to the browser](/docs/signals/integrations/experimentation-platforms/index.md#serve-attributes-to-the-browser), and the `getDomainUserId` helper from [Choose the user key](/docs/signals/integrations/experimentation-platforms/index.md#choose-the-user-key)
 
-## Integrate Signals with LaunchDarkly
+Use the setup that matches where you run the LaunchDarkly SDK. [How it works](/docs/signals/integrations/experimentation-platforms/index.md#how-it-works) compares the two.
 
-Each time your server evaluates a flag, it reads the user's attributes from Signals and adds them to the evaluation context.
+## Integrate on your server
+
+Use this setup if your server renders the page. Each time your request handler evaluates a flag, it reads the user's attributes from Signals and adds them to the evaluation context.
 
 <Steps>
 
@@ -84,9 +86,68 @@ Open a page that evaluates the flag with [Snowplow Inspector](/docs/testing/snow
 
 </Steps>
 
+## Integrate in the browser
+
+Use this setup if your site is a single-page app or a static site. The browser fetches the user's attributes from your endpoint and passes them to the LaunchDarkly SDK running in the browser.
+
+<Steps>
+
+### Initialize LaunchDarkly with Signals attributes
+
+The browser SDK evaluates flags for the context it starts with, so fetch the attributes first. Key the context on `domain_userid` from the tracker's cookie. Set `withReasons` so that `variationDetail` reports whether the user is in an experiment. This example uses version 4 of the JavaScript client-side SDK.
+
+```typescript
+import { createClient } from '@launchdarkly/js-client-sdk';
+
+const attributes = await fetchSignalsAttributes(TIMEOUT_MS);
+
+const ldClient = createClient(
+  LAUNCHDARKLY_CLIENT_SIDE_ID,
+  { kind: 'user', key: getDomainUserId(document.cookie), ...attributes },
+  { withReasons: true },
+);
+ldClient.start();
+await ldClient.waitForInitialization({ timeout: 5 });
+```
+
+Your endpoint already limits which attributes reach the browser. Anything it returns is also sent to LaunchDarkly, unless you list it in `_meta.privateAttributes`.
+
+### Evaluate the flag and track the exposure
+
+Evaluate the flag, then attach the exposure to the page view.
+
+```typescript
+const detail = ldClient.variationDetail('checkout-offer', false);
+if (detail.value) {
+  showOffer(detail.value);
+}
+
+const exposures = detail.reason?.inExperiment
+  ? [{
+      vendor: 'launchdarkly',
+      experiment_id: 'checkout-offer',
+      variation_id: String(detail.variationIndex),
+      signals_attributes_used: Object.keys(attributes),
+    }]
+  : [];
+
+window.snowplow('trackPageView', {
+  context: exposures.map((data) => ({
+    schema: 'iglu:com.example/experiment_exposure/jsonschema/1-0-0',
+    data,
+  })),
+});
+```
+
+### Check the browser integration
+
+Open the page with Snowplow Inspector installed, and with your browser's developer tools on the **Network** tab. The request to `/api/signals-attributes` should return your attributes, and the page view should carry an `experiment_exposure` entity with `vendor` set to `launchdarkly`.
+
+</Steps>
+
 ## Assign a variation from an intervention
 
-To evaluate a flag at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The intervention payload includes the user's attributes, so the handler adds them to the context in the LaunchDarkly browser SDK. This example assumes you've already initialized the browser SDK.
+To evaluate a flag at the moment a user meets a condition, for example when they hesitate at checkout, subscribe to [interventions](/docs/signals/applications/subscribe/index.md) in the browser. The intervention payload includes the user's attributes, so the handler adds them to the context. This example uses the client from [Integrate in the browser](#integrate-in-the-browser).
 
 ```typescript
 addInterventionHandlers({

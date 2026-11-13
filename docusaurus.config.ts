@@ -172,6 +172,11 @@ const config: Config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      // Social card for link previews. Docusaurus emits og:image and
+      // twitter:image from this; a page can override it with `image` in its
+      // frontmatter. Keep it PNG or JPEG: X, LinkedIn, and Slack don't render
+      // AVIF or WebP previews.
+      image: 'img/snowplow-social-card.png',
       // Light, dark, and system modes. System follows the reader's OS setting
       // and is the default for first-time visitors.
       colorMode: {
@@ -358,14 +363,6 @@ const config: Config = {
     },
 
   headTags: [
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:image',
-        content:
-          'https://cdn.prod.website-files.com/661fd4aa0185c5022e931990/66714f936876397066d5fba7_thumbnail-post-category.avif',
-      },
-    },
     {
       tagName: 'script',
       attributes: {},

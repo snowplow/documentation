@@ -4,6 +4,7 @@ sidebar_label: "Ecommerce"
 sidebar_position: 70
 description: "Track comprehensive ecommerce interactions including product views, cart actions, checkouts, and transactions in mobile apps."
 keywords: ["ecommerce tracking", "transaction events", "mobile shopping analytics"]
+content_type: how-to
 ---
 
 ```mdx-code-block

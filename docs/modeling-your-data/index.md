@@ -4,6 +4,7 @@ sidebar_position: 7
 description: "An overview of the purpose of data modeling."
 keywords: ["data modeling", "data transformation", "derived tables", "data aggregation"]
 sidebar_label: "Data models"
+content_type: concept
 ---
 
 At Snowplow, we define data modeling as the process of using business logic to, transform, aggregate, or otherwise process event level data. It occurs in the data warehouse, and allows you to extract value from your events data.

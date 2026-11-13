@@ -82,13 +82,13 @@ from snowplow_signals import Signals, AttributeKeyIdentifiers
 # --- Configuration ---
 COLLECTOR_URL = "YOUR_COLLECTOR_HOST"
 SIGNALS_API_URL = "https://YOUR_ID.signals.snowplowanalytics.com"  # must include https://
-CONSOLE_API_KEY = "YOUR_API_KEY"
-CONSOLE_API_KEY_ID = "YOUR_API_KEY_ID"
-ORG_ID = "YOUR_ORG_ID"
+SNOWPLOW_API_KEY = "YOUR_API_KEY"
+SNOWPLOW_API_KEY_ID = "YOUR_API_KEY_ID"
+SNOWPLOW_ORG_ID = "YOUR_ORG_ID"
 
 if any(
     "YOUR_" in value
-    for value in [COLLECTOR_URL, SIGNALS_API_URL, CONSOLE_API_KEY, CONSOLE_API_KEY_ID, ORG_ID]
+    for value in [COLLECTOR_URL, SIGNALS_API_URL, SNOWPLOW_API_KEY, SNOWPLOW_API_KEY_ID, SNOWPLOW_ORG_ID]
 ):
     sys.exit("Fill in the placeholder configuration values before running.")
 
@@ -108,9 +108,9 @@ tracker = Snowplow.get_tracker("project-app")
 # --- Signals client ---
 sp_signals = Signals(
     api_url=SIGNALS_API_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
+    api_key=SNOWPLOW_API_KEY,
+    api_key_id=SNOWPLOW_API_KEY_ID,
+    org_id=SNOWPLOW_ORG_ID,
 )
 
 # --- Subscribe to interventions before tracking ---

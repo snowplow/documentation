@@ -5,6 +5,7 @@ sidebar_label: "Predictive attributes"
 description: "Score a session in real time with a published Snowplow Signals predictive attribute, using the Python SDK, Node.js SDK, or Signals API."
 keywords: ["predictive attribute", "propensity score", "real-time scoring", "signals python sdk", "signals node sdk"]
 date: "2026-10-26"
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -77,7 +78,7 @@ console.log(result.score);
 </TabItem>
 <TabItem value="api" label="API">
 
-Send a `GET` request to the `predictive_attribute` endpoint. Pass the name as `name`, and each identifier as a query parameter named after its attribute key. Every request needs a Bearer token, as described in [Authenticate to the Signals API](/docs/signals/connection/index.md#authenticate-to-the-signals-api).
+Send a `GET` request to the `predictive_attribute` endpoint. Pass the name as `name`, and each identifier as a query parameter named after its attribute key. Every request needs a Bearer token, as described in [Get an access token](/docs/signals/connection/index.md#get-an-access-token).
 
 ```bash
 curl \

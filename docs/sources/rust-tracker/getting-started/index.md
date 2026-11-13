@@ -5,6 +5,7 @@ date: "2022-10-24"
 sidebar_position: 10
 description: "Install the Rust tracker from crates.io, initialize with namespace and collector URL, and track screen view events with Tokio runtime."
 keywords: ["rust tracker setup", "cargo installation", "tokio async"]
+content_type: how-to
 ---
 
 ```mdx-code-block

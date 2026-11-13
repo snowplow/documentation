@@ -4,6 +4,7 @@ sidebar_label: "Dispatch setup"
 description: "Details on how to setup the dispatch order for macros"
 keywords: ["dbt dispatch", "macro dispatch", "dispatch order", "macro overrides"]
 sidebar_position: 30
+content_type: how-to
 ---
 
 Some of the functionality of our packages overwrites the default functionality of dbt core. To enable the use of our version over dbt, you must add the following must be added to your `dbt_project.yml` file once.

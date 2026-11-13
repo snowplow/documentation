@@ -5,6 +5,7 @@ description: "Install the C++ tracker using CMake, FetchContent, or by copying s
 keywords: ["c++ installation", "cmake", "fetchcontent", "cpp dependencies", "sqlite3"]
 date: "2020-02-25"
 sidebar_position: 10
+content_type: how-to
 ---
 
 ```mdx-code-block

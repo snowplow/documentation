@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 40
 description: "Configure the Unity tracker instance to coordinate event tracking, manage sessions, and control background processing with customizable platform settings."
 keywords: ["unity tracker configuration", "unity tracker instance", "starteventtracking unity"]
+content_type: reference
 ---
 
 The Tracker object is responsible for co-ordinating the saving and sending of events as well as managing the optional Session object.

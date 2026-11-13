@@ -4,7 +4,8 @@ sidebar_label: "Snowplow plugin for getanalytics.io"
 description: "Deploy the web tracker through the analytics npm package to send events to multiple providers."
 keywords: ["getanalytics.io", "analytics package", "multi-provider tracking"]
 date: "2020-08-10"
-sidebar_position: 4000
+sidebar_position: 4001
+content_type: integration
 ---
 
 The Snowplow JavaScript tracker can now be deployed directly into your web and node applications using the `analytics` and `@analytics/snowplow` NPM packages.

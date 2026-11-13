@@ -5,12 +5,11 @@ description: "Build a customized version of sp.js with your own naming to avoid 
 keywords: ["white-label", "custom build", "ad blocker bypass", "tracker customization"]
 date: "2022-09-14"
 sidebar_position: 4000
+content_type: how-to
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Snowplow Tracker JavaScript Release"></Badges>
+<VersionBadge component="javaScriptTracker" href="https://github.com/snowplow/snowplow-javascript-tracker/releases" />
 ```
 
 

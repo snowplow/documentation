@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 500
 description: "Enable or disable telemetry for Snowbridge with user-provided identifiers and privacy controls."
 keywords: ["snowbridge config", "telemetry", "usage tracking", "privacy", "disable telemetry"]
+content_type: reference
 ---
 
 You can read about our telemetry principles [here](/docs/get-started/self-hosted/telemetry/index.md).

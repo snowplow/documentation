@@ -5,13 +5,13 @@ sidebar_position: 80
 description: "Transform CDN and client-side events into derived tables that show which AI agents crawl your site, which pages they request, and how many human page views their operators refer back."
 keywords: ["agent analytics dbt", "AI crawler analytics", "AI agent traffic", "answer engine optimization", "AEO", "bot traffic modeling"]
 date: "2026-09-28"
+content_type: reference
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="The Agent Analytics package is a part of the paid Agent Intelligence package for Snowplow CDI."
+  note="The Agent Analytics package is a part of the paid Agent Intelligence package for Snowplow CDI."
 />
 
 **The package source code can be found in the [snowplow-incubator/dbt-snowplow-agent-analytics](https://github.com/snowplow-incubator/dbt-snowplow-agent-analytics/) repository, and the docs for the [model design here](https://snowplow-incubator.github.io/dbt-snowplow-agent-analytics/#!/overview/snowplow_agent_analytics).**
@@ -26,7 +26,7 @@ The package combines two event sources. Events from [CDN trackers](/docs/sources
 
 This dbt package is included in the [Agent Intelligence](/docs/events/agent-intelligence/index.md) package.
 
-Currently, the package supports Snowflake only.
+The package supports Snowflake, BigQuery, and Databricks. See the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md#requirements) for adapter and runtime requirements.
 
 Check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/agent-analytics/index.md) and [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) pages to get started.
 

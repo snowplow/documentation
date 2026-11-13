@@ -5,6 +5,7 @@ description: "Install and configure plugins for the JavaScript tag and Browser n
 keywords: ["plugin configuration", "plugin installation", "addplugin", "browser tracker plugins", "javascript tracker plugins", "custom plugins"]
 date: "2021-04-07"
 sidebar_position: 750
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -106,7 +107,7 @@ Use `addPlugin` with a URL to load the plugin dynamically.
 ```javascript
 snowplow(
   'addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@4.10.2/dist/index.umd.min.js",
   ["snowplowPerformanceNavigationTiming", "PerformanceNavigationTimingPlugin"]
 );
 ```

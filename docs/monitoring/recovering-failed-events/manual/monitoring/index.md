@@ -5,6 +5,7 @@ date: "2020-08-26"
 sidebar_position: 40
 description: "Track recovery job progress using EMR metrics, Google Dataflow UI, and business processing metrics for failed, recovered, and unrecoverable events."
 keywords: ["recovery job monitoring", "EMR recovery metrics", "Dataflow monitoring"]
+content_type: how-to
 ---
 
 When running a recovery job in your production pipeline, you'll likely find it useful to keep an eye on it's progress.

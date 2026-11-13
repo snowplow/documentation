@@ -1,46 +1,52 @@
 ---
-title: "Defining the data to collect with Tracking Plans"
-sidebar_position: 20
-sidebar_label: "Tracking plans"
-description: "Create logical groupings of behavioral data by domain with explicit ownership, event specifications, and source applications to improve governance and collaboration across your organization."
-keywords: ["tracking plans", "event specifications", "data ownership", "data governance", "tracking implementation"]
+title: "Tracking plan and event specification elements"
+sidebar_position: 40
+sidebar_label: "Tracking plan elements"
+date: "2024-01-30"
+description: "Reference for the elements of a tracking plan and an event specification in Event Studio, including source applications, data structures, triggers, property instructions, statuses, and versions."
+keywords: ["tracking plans", "event specifications", "tracking plan elements", "data ownership", "data contracts"]
+content_type: reference
 ---
 
-As described in [Tracking Plans Introduction](/docs/fundamentals/tracking-plans/index.md), a tracking plan is a logical grouping of the data you collect as an organization by domain, with an explicit owner.
+A tracking plan is a logical grouping of the data you collect as an organization by domain, with an explicit owner. See [Introduction to tracking plans](/docs/fundamentals/tracking-plans/index.md) for how tracking plans support ownership and governance.
 
-With tracking plans, you can:
+Each tracking plan contains event specifications that define the events you want to track. By grouping related event specifications in tracking plans, you organize your data collection by domain, with clear ownership and implementation instructions for each event specification. Event specifications act as data contracts between teams: they define what data your applications should send, what your data warehouse will receive, and what your downstream consumers can rely on.
 
-* Set clear ownership for the data being created
-* Make tracking implementation easier
-* Deliver better governance around your data
-* More easily communicate what the data means and how to use it
-* Collaborate more effectively with the various teams involved in delivering value from your data
-* Drive a self-serve culture around data across your organization
-* See event volume metrics helping to monitor data collection over time.
+## Tracking plan elements
 
-Each tracking plan contains event specifications that define the events you want to track. By grouping related event specifications together in tracking plans, you can better organize your data collection efforts by domain, with clear ownership and implementation instructions for each event specification.
+A tracking plan has these elements:
 
-Event specifications bridge the gap between tracking design and data collection:
+| Element             | Description                                                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Name                | A descriptive name for the tracking plan. The name must be unique                                                  |
+| Description         | A description of the data that the tracking plan captures                                                          |
+| Owner               | The individual responsible for the tracking plan                                                                   |
+| Domain              | The team or business domain that owns the tracking plan                                                            |
+| Source applications | The [source applications](/docs/event-studio/source-applications/index.md) the tracking plan is implemented in      |
+| Event specifications | The events that the tracking plan describes. See [Event specification elements](#event-specification-elements)    |
 
-- **Design phase**: you document your tracking requirements by creating event specifications that capture both technical structure and business context
-- **Implementation phase**: developers use these specifications to instrument tracking code, either manually or through code generation within the Snowplow Console or using tools like Snowtype. Snowtype generated code ensures type-safety and alignment with specifications, reducing implementation errors and accelerating development time
-- **Observability phase**: monitor event specification usage directly in Console. See the total number of events collected for each specification, when each was last seen, and how many of those events were valid or inferred, had violations, or failed. This helps you confirm implementations are live, identify unused specifications, and find implementation problems. See [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md)
-- **Data modeling phase**: event specifications enable automatically generated dbt models that transform atomic events into analysis-ready tables. These models understand the structure defined in your specifications, creating consistent table schemas and joining related [entities](/docs/fundamentals/entities/index.md). As you update specifications, corresponding data models can be regenerated, keeping your warehouse transformations synchronized with your tracking design
+A tracking plan also shows event volume metrics for its event specifications, which help you monitor data collection over time. See [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md).
 
-## Elements of a Tracking Plan
+![Snowplow Console showing the "E-commerce Web" tracking plan Overview tab, including the tracking plan name, description, source application (website), ownership details, and a table of event specifications with their data structures, entities, source applications, last seen dates, and event volume counts.](images/example_tracking_plan_view.png)
 
-**Tracking plan**
+## Event specification elements
 
-- **Name;** a descriptive and unique name for the tracking plan
-- **Description;** a description of the data that the tracking plan captures
-- **Owner;** the individual responsible for the tracking plan
-- **Domain;** the team or business domain that owns the tracking plan
-- **Source Application;** the [source application/s](/docs/event-studio/source-applications/index.md) the Tracking Plan is implemented in
-- **Event specifications**
-    * **Name;** a descriptive name for the event
-    * **Description;** a description to help people understand what action the event is capturing
-    * **Source Applications;** the source application(s) inherited from the tracking plan containing the Application ID(s) that will be sent with this event
-    * **Triggers;** specific instructions on where the event gets triggered (e.g. when a user clicks the "Add to basket" button)
-    * **Event data structure;** the event data structure that this event will validate against as it is processed by your pipeline
-    * **Entities;** the entities that should be attached to this event (e.g. user, product)
-    * **Properties;** any specific rules for each property of the event
+An event specification has these elements:
+
+| Element                | Description                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name                   | A descriptive name for the event                                                                                                                                                                                                                             |
+| Description            | A description to help people understand what action the event is capturing                                                                                                                                                                                  |
+| Source applications    | The source applications inherited from the tracking plan. The event specification inherits their application IDs, which are sent with this event, and references their application entity data structures, which are expected with each event |
+| Triggers               | Instructions on where and when the event gets triggered, for example when a user clicks the "Add to basket" button                                                                                                                                           |
+| Event data structure   | One version of the event [data structure](/docs/event-studio/data-structures/index.md) that this event validates against as your pipeline processes it. It can be a standard data structure, provided by the Snowplow tracker by default, or a custom one, provided by your organization |
+| Entity data structures | The versions of the [entity](/docs/fundamentals/entities/index.md) data structures to attach to this event, for example user or product, and how many of each entity to expect                                                                                |
+| Properties             | Instructions for how each property of the event and entity data structures should be populated, as exact values or as a description                                                                                                                         |
+
+![Snowplow Console showing the "Add to cart" event specification detail page, including event description, source application (website), application IDs with status indicators, the snowplow_ecommerce_action 1-0-2 data structure with a required "type" property set to the exact value "add_to_cart", and entity data structures for product and cart.](images/example_event_specification.png)
+
+## Event specification statuses and versions
+
+Each event specification has one of three statuses: **Draft**, while you edit it and before it's active in the pipeline (development environments still [match events against drafts](/docs/event-studio/tracking-plans/event-specification-inference/index.md)); **Publishing**, a transitional state lasting a few minutes while the pipeline propagates it; and **Published**, once it's active in the pipeline. Event specifications also have versions, which the **History** tab of each specification lists, with the changes between any two versions. See [Test, promote, and publish a tracking design](/docs/event-studio/test-and-publish/index.md) and [Evolve a tracking design](/docs/event-studio/evolve-tracking-design/index.md).
+
+To create a tracking plan, see [Create a tracking plan](/docs/event-studio/tracking-plans/create-and-manage/index.md) or [Tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md). To add event specifications to it, see [Define an event specification](/docs/event-studio/tracking-plans/event-specifications/index.md).

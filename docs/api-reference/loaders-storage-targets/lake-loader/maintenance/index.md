@@ -4,6 +4,7 @@ sidebar_label: "Maintenance"
 sidebar_position: 3
 description: "Maintain Delta Lake and Iceberg tables with OPTIMIZE operations and snapshot expiration to manage file size and storage costs."
 keywords: ["lake maintenance", "delta optimize", "iceberg snapshots", "table maintenance", "file compaction"]
+content_type: how-to
 ---
 
 ```mdx-code-block

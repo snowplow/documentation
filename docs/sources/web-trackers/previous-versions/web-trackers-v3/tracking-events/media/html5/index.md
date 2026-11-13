@@ -1,5 +1,6 @@
 ---
 title: "HTML5"
+sidebar_label: "HTML5"
 sidebar_position: 10
 description: "Documentation for HTML5 in the web tracker."
 keywords: ["tracker", "configuration"]

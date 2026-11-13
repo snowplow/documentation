@@ -4,7 +4,10 @@ sidebar_label: "Custom data"
 sidebar_position: 1
 description: "Track custom self-describing events and entities with JSON schemas for flexible data collection."
 keywords: ["custom events", "self-describing events", "entities", "structured events", "JSON schemas"]
+content_type: how-to
 ---
+
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 
 Snowplow includes three ways to customize tracking:
 * Custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)
@@ -12,6 +15,12 @@ Snowplow includes three ways to customize tracking:
 * Structured events (not recommended)
 
 Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to track and use custom data.
+
+:::tip[Design custom events with your AI assistant]
+An AI assistant connected to the Snowplow MCP server can design custom events and entities with you, search [Iglu Central](https://github.com/snowplow/iglu-central) for an existing schema, create the schemas in your Snowplow account, and add the tracking calls to your application. For example: "We want to track when a user shares an article. Design the event and any entities it needs, and create the schemas in my account."
+
+<AiAssistantInstall />
+:::
 
 ## Custom events
 

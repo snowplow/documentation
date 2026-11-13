@@ -5,6 +5,7 @@ sidebar_label: "Retrieve attributes"
 description: "Retrieve calculated attribute values from the Profiles Store using the Signals Python SDK, Node.js SDK, or API, either via a service or directly from an attribute group."
 keywords: ["retrieve attributes", "services", "signals python sdk", "signals node sdk", "signals api", "profiles store"]
 date: "2026-06-11"
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -36,7 +37,7 @@ calculated_values = sp_signals.get_service_attributes(
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
 | `name` | The name of the service | `string` | ✅ |
-| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for. Use the key the service's attribute groups are calculated on. | `string` | ✅ |
 | `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
@@ -55,7 +56,7 @@ const calculatedValues = await signals.getServiceAttributes({
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
 | `name` | The name of the service | `string` | ✅ |
-| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for. Use the key the service's attribute groups are calculated on. | `string` | ✅ |
 | `identifier` | The specific attribute key value | `string` | ✅ |
 
 ```typescript
@@ -73,7 +74,7 @@ const batchResults = await signals.getBatchServiceAttributes({
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
 | `name` | The name of the service | `string` | ✅ |
-| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅ |
+| `attribute_key` | The attribute key to retrieve attributes for. Use the key the service's attribute groups are calculated on. | `string` | ✅ |
 | `identifiers` | Array of attribute key values to look up | `string[]` | ✅ |
 
 </TabItem>
@@ -103,7 +104,7 @@ calculated_values = sp_signals.get_group_attributes(
 | `name` | The name of the attribute group | `string` | ✅ |
 | `version` | The attribute group version | `int` | ✅ |
 | `attributes` | The names of the attributes to retrieve | `string` or list of `string` | ✅ |
-| `attribute_key` | The attribute key name | `string` | ✅ |
+| `attribute_key` | The attribute key name. Use the key the attribute group is calculated on. | `string` | ✅ |
 | `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
@@ -126,14 +127,28 @@ const calculatedValues = await signals.getGroupAttributes({
 | `name` | The name of the attribute group | `string` | ✅ |
 | `version` | The attribute group version | `number` | ✅ |
 | `attributes` | The names of the attributes to retrieve | `string[]` | ✅ |
-| `attribute_key` | The attribute key name | `string` | ✅ |
+| `attribute_key` | The attribute key name. Use the key the attribute group is calculated on. | `string` | ✅ |
 | `identifier` | The specific attribute key value | `string` | ✅ |
 
 </TabItem>
 </Tabs>
 
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+## Handle the response
 
-<SignalsFreeTier/>
+A read returns an object with one entry per attribute. For example, a service with session attributes returns:
+
+```json
+{
+  "page_views_count": 12,
+  "unique_pages_viewed": 5,
+  "first_event_timestamp": "2026-04-09T14:23:01.000Z",
+  "last_event_timestamp": "2026-04-09T14:41:03.000Z"
+}
 ```
+
+When you handle the response:
+* If Signals hasn't seen the identifier on an event yet, each attribute is `null`.
+* Read with the attribute key that the attribute groups in the service are calculated on. For attributes keyed on `snowplow_id`, reading by any key other than `snowplow_id` or one of its [lookup identifiers](/docs/signals/attributes/identity-resolution/index.md#retrieve-attributes-by-a-lookup-identifier) returns an HTTP 400 error.
+* Reads need an API key, so they run on your backend. A web app passes `domain_userid` or `domain_sessionid` from the browser to its server, for example as a request parameter. Read the session ID with the browser tracker's [`getDomainSessionId`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) method.
+
+To use retrieved attributes in a demo app, follow [Build a personalized travel agent](/tutorials/signals-personalize-travel/intro) or [Score prospects in real time](/tutorials/signals-ml-prospect-scoring/intro).

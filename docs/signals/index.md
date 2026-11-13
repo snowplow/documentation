@@ -1,11 +1,12 @@
 ---
 title: "Introduction to Snowplow Signals"
-sidebar_position: 8.7
+sidebar_position: 8.8
 description: "Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. Use it for in-session personalization, customer-aware agents, real-time triggers, and machine learning features."
 keywords: ["real-time customer context", "real-time personalization", "behavioral data", "signals", "agentic applications", "real-time feature store"]
 sidebar_label: "Signals"
-sidebar_custom_props:
-  header: "Signals"
+content_type: landing
+pagination_prev: null
+pagination_next: null
 ---
 
 {/* This page isn't seen because of how the navigation sidebar is structured, with the Signals subsections artificially hoisted to look like they're all top-level sections. Requests for this page are redirected to introduction/index.md (see worker/redirects.js). Keep this summary short: the full content lives on the introduction page. */}
@@ -19,4 +20,4 @@ Use Signals to:
 
 By default, Signals calculates attributes from your real-time Snowplow event stream, but you can also sync pre-calculated values from your warehouse.
 
-Follow the [quickstart](/docs/signals/quickstart/index.md) to set up Signals in your web app with a coding agent, read the [fundamentals](/docs/signals/concepts/index.md) for an overview of the architecture and workflow, or try Signals on the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral).
+Follow the [quickstart](/docs/signals/quickstart/index.md) to set up Signals in your web app with a coding agent, read [How Signals works](/docs/signals/concepts/index.md) for an overview of the architecture and workflow, or try Signals on the [free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral).

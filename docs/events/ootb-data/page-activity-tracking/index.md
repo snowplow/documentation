@@ -4,6 +4,7 @@ sidebar_label: "Page and screen engagement"
 sidebar_position: 120
 description: "Measure user engagement time and scrolling depth using page ping events on web and screen summary entities on mobile."
 keywords: ["page pings", "activity tracking", "scroll tracking", "engagement tracking", "screen summary"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

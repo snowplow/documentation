@@ -4,6 +4,7 @@ sidebar_position: 1
 sidebar_label: UA parser (legacy)
 description: "Parse user agent strings to extract browser, operating system, and device information."
 keywords: ["user agent parser", "browser detection", "device detection"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

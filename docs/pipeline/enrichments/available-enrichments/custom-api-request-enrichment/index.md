@@ -4,6 +4,7 @@ sidebar_position: 15
 sidebar_label: Custom API request
 description: "Enrich events with data from external HTTP APIs by making custom API requests during event processing."
 keywords: ["API enrichment", "HTTP API", "external data enrichment"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

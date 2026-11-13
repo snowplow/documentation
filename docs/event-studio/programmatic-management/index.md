@@ -1,14 +1,17 @@
 ---
-title: "Programmatic management using CLI or API"
-sidebar_label: "Programmatic management"
-sidebar_position: 70
+title: "Manage your tracking design as code"
+sidebar_label: "Manage tracking as code"
+sidebar_position: 100
 description: "Automate Event Studio workflows using Snowplow CLI for git-ops integration or the APIs for custom tooling and CI/CD pipelines."
 keywords: ["Snowplow CLI", "API", "automation", "git-ops", "CI/CD", "programmatic access"]
+content_type: landing
 ---
 
 Data structures and tracking plans can be managed programmatically, enabling git-ops workflows, CI/CD integration, and custom tooling.
 
 Partnered with other tools like the data structures [CI tool](/docs/testing/data-structures-ci-tool/index.md) and the testing pipeline [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+
+To manage data structures and tracking plans from a CI/CD pipeline, follow the tutorial to [set up a GitHub CI/CD pipeline to manage data structures and tracking plans](/tutorials/data-structures-in-git/introduction).
 
 ## Snowplow CLI
 
@@ -21,6 +24,8 @@ The [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides file-base
 - Integrate with version control and code review workflows
 
 The [Snowplow CLI MCP server](/docs/ai/cli-mcp-server/index.md) enables AI assistants to interact with your tracking plan resources through natural language.
+
+To work with the tracking plans and data structures in your Snowplow account directly from your codebase, install the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Snowplow [skills](/docs/ai/skills/index.mdx) in your coding agent with `npx plugins add snowplow/skills`.
 
 ## Console API
 

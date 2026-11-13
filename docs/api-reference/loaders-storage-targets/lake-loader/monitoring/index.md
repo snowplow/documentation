@@ -5,6 +5,7 @@ sidebar_position: 4
 description: "Monitor the Lake Loader with StatsD or Prometheus metrics for event counts, latency, table state, and Spark resource usage, plus Sentry error reporting."
 keywords: ["lake loader monitoring", "statsd", "prometheus", "loader metrics", "latency alerting"]
 date: "2026-09-17"
+content_type: reference
 ---
 
 The Lake Loader has monitoring built in, to help the pipeline operator.

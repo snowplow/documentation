@@ -5,6 +5,7 @@ sidebar_label: "Define predictive attributes"
 description: "Configure predictive attributes in Snowplow Signals to train a model on your stream attributes and score how likely each session is to reach a goal, such as a purchase."
 keywords: ["predictive attribute", "propensity score", "machine learning", "conversion prediction", "onnx", "python sdk"]
 date: "2026-10-26"
+content_type: how-to
 ---
 
 ```mdx-code-block

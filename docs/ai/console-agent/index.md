@@ -5,16 +5,18 @@ sidebar_position: 1
 description: "The Snowplow Assistant is an AI assistant built into Snowplow Console that lets you manage your tracking plans, pipelines, and data quality through natural language."
 keywords: ["snowplow assistant", "ai assistant", "ai agent", "natural language", "console", "automation"]
 date: "2026-04-10"
+content_type: concept
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc','addon']}
-  helpContent="Snowplow Assistant is part of Event Studio, which is a paid addon for Snowplow CDI."
+  note="Snowplow Assistant is part of Event Studio, which is a paid addon for Snowplow CDI."
 />
 
 The Snowplow Assistant is an AI assistant embedded in [Snowplow Console](https://console.snowplowanalytics.com). It lets you manage your tracking implementation, monitor pipelines, troubleshoot issues, and configure Signals through natural language conversation.
+
+To use the same tools from your own AI assistant, such as Claude Code, Cursor, Codex, or Claude.ai, connect it to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md). In a coding agent, `npx plugins add snowplow/skills` installs the MCP server and the Snowplow [skills](/docs/ai/skills/index.mdx).
 
 ## How it works
 

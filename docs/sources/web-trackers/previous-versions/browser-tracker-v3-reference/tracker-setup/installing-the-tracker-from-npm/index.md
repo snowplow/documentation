@@ -1,5 +1,6 @@
 ---
 title: "Installing the tracker from npm"
+sidebar_label: "Installing the tracker from npm"
 date: "2021-03-31"
 sidebar_position: -10
 description: "Documentation for tracking Installing the er from npm with the web tracker."

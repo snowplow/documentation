@@ -5,6 +5,7 @@ date: "2026-03-11"
 sidebar_position: 500
 description: "Understand how Snowbridge handles message batching across sources and targets for optimal throughput and performance."
 keywords: ["batching model", "message batching", "snowbridge performance", "stream batching"]
+content_type: concept
 ---
 
 Snowbridge processes messages through a channel-based pipeline:

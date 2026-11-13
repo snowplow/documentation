@@ -10,13 +10,9 @@ keywords: ["react native tracker v2", "legacy tracker", "v2 reference"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="React Native Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker React Native Release"></Badges>
+<TierBadge tier="actively-maintained" />
+
 </BadgeGroup>
 ```
 

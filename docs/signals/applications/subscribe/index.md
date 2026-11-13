@@ -2,14 +2,20 @@
 title: "Subscribe to and receive interventions in your applications"
 sidebar_position: 30
 sidebar_label: "Subscribe to interventions"
-description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
-keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
+description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, iOS and Android trackers, or Signals API to receive intervention payloads."
+keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "mobile trackers", "intervention payload"]
 content_type: how-to
 ---
 
-Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+Subscribe to interventions to automatically respond within your application. You have four options for receiving interventions, depending on your use case or application:
 * [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
 * Plugin for the [browser tracker](/docs/sources/web-trackers/index.md)
+* The [iOS and Android trackers](/docs/sources/mobile-trackers/signals/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
 Subscription is by attribute key ID, not by individual intervention. What you need first depends on the option:
@@ -135,6 +141,68 @@ The plugin generates Snowplow events to track interventions. The events include 
 - [`iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0): tracked when the plugin receives an intervention
 - [`iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
 - [`iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports failure (throws an error)
+
+## Subscribe with the mobile trackers
+
+For mobile apps using the Snowplow iOS or Android tracker, first add a `SignalsConfiguration` when [creating the tracker](/docs/sources/mobile-trackers/signals/index.md). Then add handlers to the tracker's Signals controller. Handlers are called on the main thread.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+tracker.signals.addInterventionHandler(id: "discount_banner") { intervention in
+    guard intervention.name == "offer_discount" else { return }
+    showDiscountBanner(attributes: intervention.attributes)
+}
+
+// A handler that throws reports a handling error
+tracker.signals.addInterventionHandler(id: "checkout_nudge") { intervention in
+    try showNudge(for: intervention)
+}
+
+tracker.signals.removeInterventionHandler(id: "discount_banner")
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+tracker.signals.addInterventionHandler("discount_banner") { intervention ->
+    if (intervention.name == "offer_discount") {
+        showDiscountBanner(intervention.attributes)
+    }
+}
+
+tracker.signals.removeInterventionHandler("discount_banner")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+tracker.getSignals().addInterventionHandler("discount_banner", intervention -> {
+    if (intervention.getName().equals("offer_discount")) {
+        showDiscountBanner(intervention.getAttributes());
+    }
+});
+
+tracker.getSignals().removeInterventionHandler("discount_banner");
+```
+
+  </TabItem>
+</Tabs>
+
+The tracker subscribes to interventions for the `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md), using the `userId` and `sessionId` from the session entity. Target these keys in your interventions to deliver them to your app.
+
+The subscription follows the app's state:
+* It's open only while at least one handler is registered, and starts once the tracker has tracked an event in the current session
+* It reconnects with the new identifiers when they change, for example when a new session starts
+* It closes when the app moves to the background, and reopens when it returns to the foreground
+* After a network error or a closed connection, it reconnects with an increasing delay, up to one minute
+
+The tracker doesn't subscribe when session tracking is disabled or user anonymization is enabled. On watchOS, interventions aren't supported.
+
+Like the browser plugin, the trackers track `intervention_receive` when an intervention arrives, and `intervention_handle` or `intervention_handle_error` for each handler, depending on whether the handler throws an error.
 
 ## Payload
 

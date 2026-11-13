@@ -17,7 +17,7 @@ To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
-- A Console API key
+- A Console user account, or a Console API key
 
 ## Install Snowtype
 
@@ -59,7 +59,27 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
+Snowtype needs access to Console to read your event specifications and data structures. You can log in with your browser, or provide a Console API key. If you do both, the API key takes precedence.
+
+### Log in with your browser
+
+Run the `login` command to sign in to Console in your browser:
+
+```bash
+npx snowtype login
+```
+
+Snowtype saves the login to `~/.config/snowplow/login.json` and refreshes it automatically. No API key is created.
+
+[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) shares the same login. If you have already run `snowplow-cli login`, you don't need to log in again.
+
+Logging in needs a terminal and a browser. For CI and other automated environments, provide an API key instead.
+
+To log out, run `npx snowtype logout`. This revokes the saved login and deletes the file, which also logs Snowplow CLI out. An API key, if you have one configured, keeps working.
+
+### Provide an API key
+
+[Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
 
 You need both the **API key** and the **API key ID**.
 

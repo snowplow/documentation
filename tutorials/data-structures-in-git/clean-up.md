@@ -1,5 +1,5 @@
 ---
-title: "Clean up after the tracking from a repository tutorial"
+title: "Clean up the example tracking and API key"
 sidebar_label: "Clean up"
 position: 5
 description: "Remove the API key and the example data structures that you created while following the tutorial on managing tracking from a repository."
@@ -7,7 +7,7 @@ keywords: ["snowplow api key", "hide data structure"]
 date: "2026-11-13"
 ---
 
-If you followed this tutorial with the example tracking rather than your own, remove what it created. If you're keeping the setup for your own tracking, keep the API key and the workflows.
+If you followed this tutorial with the example tracking rather than your own, remove what it created. If you're keeping the configuration for your own tracking, keep the API key and the workflows.
 
 To remove the example:
 

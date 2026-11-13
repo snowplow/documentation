@@ -59,11 +59,13 @@ jobs:
       - run: snowplow-cli dp validate --gh-annotate
 ```
 
-The `fetch-depth: 0` option fetches the full history. The offline check needs it to find the commit where the branch started. Without it, `actions/checkout` creates a shallow clone that has neither `origin/develop` nor the history, and the check fails with `could not find where the branch started from origin/develop`. To fix it, set `fetch-depth: 0` on `actions/checkout`, as in the workflow:
+The `fetch-depth: 0` option fetches the full history. The offline check needs it to find the commit where the branch started. Without it, `actions/checkout` creates a shallow clone that has neither `origin/develop` nor the history, and the check fails:
 
 ```text
 12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 128: fatal: Not a valid object name origin/develop
 ```
+
+To fix `could not find where the branch started from origin/develop`, set `fetch-depth: 0` on `actions/checkout`, as in the workflow.
 
 The offline check runs only on pull requests into `develop`. The pull request that promotes `develop` to `main` is checked against Console instead, for the reason given in [Promote develop to main](/tutorials/data-structures-in-git/change-and-promote#promote-develop-to-main).
 
@@ -107,7 +109,7 @@ The order of the steps matters:
 3. `dp sync` writes the source application, the tracking plan, and the event specifications to Console. A structural change creates a new event specification version in draft.
 4. `dp release` publishes the draft event specifications.
 
-`dp release` refuses to publish an event specification whose data structures aren't deployed to production yet. If the workflow released before publishing to production, for example by publishing data structures to production only from `main`, the release of a change that references a new data structure version, here `docs_capture_plan` `1-0-1`, would fail with `Cannot publish event specs: the following data structures are not deployed to production`. The failed release leaves the new event specification version in Console as a draft, matching your files, so `dp validate` still passes, and every retry of `dp release` fails the same way. To fix it, run `snowplow-cli ds publish prod`, then run `dp release` again:
+`dp release` refuses to publish an event specification whose data structures aren't in production yet. That's why the workflow publishes the data structures to production before it releases. When an event specification references a data structure version that isn't in production, the release fails:
 
 ```text
 12:27PM INFO validation success data products found=1 source applications found=1
@@ -116,6 +118,8 @@ The order of the steps matters:
 12:27PM ERRO Cannot publish event specs: the following data structures are not deployed to production: iglu:com.example.docs-capture/docs_capture_plan/jsonschema/1-0-1
 Use `snowplow-cli ds publish prod` to resolve
 ```
+
+The failed release leaves the new event specification version in Console as a draft, matching your files, so `dp validate` still passes, and every retry of `dp release` fails the same way. To fix `Cannot publish event specs: the following data structures are not deployed to production`, run `snowplow-cli ds publish prod`, then run `dp release` again.
 
 ### Open the first pull request
 

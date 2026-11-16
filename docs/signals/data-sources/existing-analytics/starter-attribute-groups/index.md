@@ -200,6 +200,7 @@ visitor_activity = StreamAttributeGroup(
             events=[page_view],
             aggregation="first",
             property=AtomicProperty(name="refr_medium"),
+            ttl=timedelta(days=365),
         ),
         Attribute(
             name="first_utm_source",
@@ -207,6 +208,7 @@ visitor_activity = StreamAttributeGroup(
             events=[],
             aggregation="first",
             property=AtomicProperty(name="mkt_source"),
+            ttl=timedelta(days=365),
         ),
     ],
 )
@@ -448,6 +450,7 @@ account_and_plan = StreamAttributeGroup(
             aggregation="last",
             criteria=Criteria(all=[Criterion.is_not_null(external_field("plan"))]),
             property=external_field("plan"),
+            ttl=timedelta(days=365),
         ),
         Attribute(
             name="account_id",
@@ -456,6 +459,7 @@ account_and_plan = StreamAttributeGroup(
             aggregation="last",
             criteria=Criteria(all=[Criterion.is_not_null(external_field("group_id"))]),
             property=external_field("group_id"),
+            ttl=timedelta(days=365),
         ),
         Attribute(
             name="group_calls_30d",
@@ -496,6 +500,7 @@ account_plan = StreamAttributeGroup(
             aggregation="last",
             criteria=Criteria(all=[Criterion.is_not_null(external_field("plan"))]),
             property=external_field("plan"),
+            ttl=timedelta(days=365),
         ),
     ],
 )
@@ -536,6 +541,7 @@ funnel = StreamAttributeGroup(
             aggregation="counter",
             criteria=signup_name,
             default_value=0,
+            ttl=timedelta(days=365),
         ),
         Attribute(
             name="minutes_since_signup",
@@ -544,6 +550,7 @@ funnel = StreamAttributeGroup(
             aggregation="time_since_last",
             criteria=signup_name,
             time_unit="min",
+            ttl=timedelta(days=365),
         ),
         Attribute(
             name="logins_30d",
@@ -578,6 +585,8 @@ sp_signals.publish([
     funnel,
 ])
 ```
+
+An attribute without a `period`, such as a first or last value or a lifetime count, keeps its value until it goes 7 days without an update, then Signals deletes it. The groups above set `ttl` to 365 days on the attributes meant to last, such as the first referrer, the current plan and the signup count, so they survive a visitor's gap between visits. The other lifetime attributes keep the 7-day default, so they reflect recent activity. In Console, the same setting is the **Time to live (TTL)** field that appears when you set the period to **Lifetime**. See [Attribute lifetimes](/docs/signals/attributes/attribute-groups/index.md#attribute-lifetimes).
 
 Attributes are calculated from the moment you publish. They change within about a second of each event reaching your Collector, so on server-side approaches add your tool's own delivery delay. The first events after you publish can take a minute or more before their values appear, then later events update at the usual speed. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). Signals counts an event ID once, so a retry from your tool that repeats the ID doesn't count twice. To include earlier events from your atomic events table, set `backfill_since_tstamp` on the group. Backfill needs a warehouse connection. See [Define attribute groups](/docs/signals/attributes/attribute-groups/index.md).
 

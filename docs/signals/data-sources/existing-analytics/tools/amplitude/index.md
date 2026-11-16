@@ -53,14 +53,14 @@ Choose the warehouse export for history, for example lifetime order count, along
 :::note[The converter]
 The client-side code calls a converter, `AmplitudeSnowplow`, that turns each Amplitude event into Snowplow events. The client-side code doesn't run without it. Copy it from [Mapping code](#mapping-code) and load it on the page before the plugin runs. It provides `fromBrowser`, `toSnowplow`, `identity` and `toPayload`, and holds the ecommerce and search name lists.
 
-The converter's `external_event` and `external_identity` schema URIs use the vendor `com.snowplowanalytics.snowplow`. If your copies of these schemas are registered under another vendor, change both URIs to match. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event, so set the app ID in the converter to yours.
+The converter's `external_event` and `external_identity` schema URIs use the vendor `com.snowplowanalytics.snowplow`. If your copies of these schemas are registered under another vendor, change both URIs to match. `ADAPTER.tool` is the tool name the converter puts in `external_event` and `external_identity`, not a schema vendor, so leave it as `amplitude`. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event: set your app ID after loading the converter with `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
 :::
 
 ## Set up the client-side approach
 
 The plugin receives every event the Browser SDK sends, converts it, and passes it to the Snowplow browser tracker. Amplitude keeps receiving its events as before.
 
-1. Load the Snowplow browser tracker and the [converter](#mapping-code) before the Amplitude SDK, and create a tracker. Use the tag snippet or npm package you'd use for any Snowplow web tracking.
+1. Load the Snowplow JavaScript tracker with the [tag snippet](/docs/sources/web-trackers/quick-start-guide/index.md), and the [converter](#mapping-code), before the Amplitude SDK, and create a tracker. The plugin calls `window.snowplow`, which the tag snippet defines, so the npm package doesn't work here.
 
    ```javascript
    window.snowplow('newTracker', 'sp', 'https://collector.example.com', {
@@ -71,7 +71,7 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
    window.snowplow('enableActivityTracking', { minimumVisitLength: 30, heartbeatDelay: 10 });
    ```
 
-   Activity tracking sends page pings, which the engagement attributes need. Don't call `trackPageView` yourself; the plugin forwards Amplitude's page views.
+   Activity tracking sends page pings, which the engagement attributes need. Don't call `trackPageView` yourself; the plugin forwards Amplitude's page views. That needs the Browser SDK's page view autocapture, which is on by default. If you turn page views off in `autocapture` (or `defaultTracking` in older SDK versions), Snowplow receives no page views, and the visitor and session groups stay empty.
 
 2. Add the destination plugin before you call `amplitude.init`.
 
@@ -138,7 +138,7 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
 
 ### Send without the Snowplow tracker
 
-The plugin can also post each converted event straight to the Collector, without loading the Snowplow tracker. It uses Amplitude's `device_id` as `domain_userid`, and builds `domain_sessionid` from the `device_id` and Amplitude's `session_id`, so you can read session attributes without Snowplow cookies.
+The plugin can also post each converted event straight to the Collector, without loading the Snowplow tracker. Use it instead of the plugin above, not alongside it: with both, every event reaches Snowplow twice. It uses Amplitude's `device_id` as `domain_userid`, and builds `domain_sessionid` from the `device_id` and Amplitude's `session_id`, so you can read session attributes without Snowplow cookies.
 
 ```javascript
 const snowplowDirect = {
@@ -168,6 +168,8 @@ amplitude.add(snowplowDirect);
 - **No engagement time.** There are no page pings.
 - **Cookies reach a same-site Collector.** `credentials: 'include'` sends your site's cookies, including Amplitude's `AMP_` cookies, to a Collector on the same site. The Collector must allow credentialed CORS requests from your domain.
 :::
+
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page). The plugin needs the tracker, so it doesn't work when you send without it.
 
 ## Set up the server-side approach
 
@@ -322,9 +324,9 @@ In the dashboard, check that:
 
 On the client-side approach, you can compare IDs in the browser console: `amplitude.getDeviceId()` returns the value in `external_identity.anonymous_id`, and `amplitude.getSessionId()` the value in `external_identity.session_id`.
 
-The plugin forwards every event to Snowplow even when Amplitude rejects it, for example when the API key is wrong. Amplitude then logs `Invalid API key` in the browser console and its upload requests return 400. Clean events in Snowplow don't show that Amplitude is receiving them, so also check **Data** > **Sources** > **Ingestion Debugger** in Amplitude.
+The plugin forwards every event to Snowplow even when Amplitude rejects it, for example when the API key is wrong. Amplitude then logs `Remote config client fetch failed with 403. Invalid API key` in the browser console, and its upload requests return 400. Clean events in Snowplow don't show that Amplitude is receiving them, so also check **Data** > **Sources** > **Ingestion Debugger** in Amplitude.
 
-Once the events look right, point the tracker, plugin or Webhook destination at your pipeline's Collector, and read the attributes in Signals.
+Once the events look right, point the tracker, plugin or Webhook destination at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
 
 ## How Amplitude events map to Snowplow
 
@@ -403,17 +405,18 @@ Where to go next:
 
 ## Mapping code
 
-Both client-side variants load this converter before the plugin. Save it on your site, for example as `/js/amplitude-snowplow.js`, and load it with a `<script>` tag before the Amplitude SDK. It defines `window.AmplitudeSnowplow`.
+Both client-side variants load this converter before the plugin. Save it on your site, for example as `/js/amplitude-snowplow.js`, and load it with a `<script>` tag before the Amplitude SDK. It adds only `window.AmplitudeSnowplow` to the page.
 
 - To use your own event names, add them to the `ECOM` and `SEARCH` lists. The webhook template has the same lists, so edit both together.
 - To use your own copies of `external_event` and `external_identity`, change the vendor in their two schema URIs.
-- When you send without the Snowplow tracker, set `ADAPTER.aid` to your app ID.
+- When you send without the Snowplow tracker, set your app ID after loading the file: `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
 
 ```js
 // Amplitude event (Browser SDK 2 HTTP V2 shape, or the export/webhook shape) -> Snowplow tracker payload.
 // Dependency-free so the same file runs in the page (Amplitude destination plugin) and on a server.
-
-var ADAPTER = { vendor: 'amplitude', tv: 'amplitude-adapter-1.0', aid: 'amplitude-adapter', ns: '6f1c3c2e-5b7a-4d2e-9a51-3e0f6c1d2b4a' };
+// Wrapped so that only AmplitudeSnowplow is added to window.
+(function (root) {
+var ADAPTER = { tool: 'amplitude', tv: 'amplitude-adapter-1.0', aid: 'amplitude-adapter', ns: '6f1c3c2e-5b7a-4d2e-9a51-3e0f6c1d2b4a' };
 function utf8Bytes(str) {
   var out = [];
   for (var i = 0; i < str.length; i++) {
@@ -638,7 +641,7 @@ function products(p, currency) {
     if (id === undefined || price === undefined || !cur) return undefined;
     var q = num(it.quantity);
     out.push(compact({
-      id: String(id), name: str255(it.name), category: String(pick(it.category, '')), price: price, currency: cur,
+      id: String(id), name: str255(it.name), category: str255(pick(it.category)) || '', price: price, currency: cur,
       quantity: q !== undefined ? Math.max(0, Math.round(q)) : undefined, brand: str255(it.brand), variant: str255(it.variant),
       position: num(it.position) !== undefined ? Math.round(it.position) : undefined,
     }));
@@ -693,7 +696,7 @@ function toSnowplow(c) {
     var total2 = num(pick(p.results_count, p.total_results));
     return { e: 'ue', event: sdj('com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0', compact({ terms: [term], totalResults: total2 !== undefined ? Math.max(0, Math.round(total2)) : undefined })), entities: [] };
   }
-  var data = { name: String(pick(name, 'unknown')).slice(0, 255), tool: ADAPTER.vendor, kind: kind };
+  var data = { name: String(pick(name, 'unknown')).slice(0, 255), tool: ADAPTER.tool, kind: kind };
   var sl = slots(c, kind);
   for (var k in sl) if (sl[k] !== undefined) data[k] = sl[k];
   return { e: 'ue', event: sdj('com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0', data), entities: [] };
@@ -701,7 +704,7 @@ function toSnowplow(c) {
 
 function identity(c, anon) {
   return sdj('com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0', compact({
-    tool: ADAPTER.vendor, anonymous_id: anon ? String(anon).slice(0, 255) : null, user_id: c.userId ? String(c.userId).slice(0, 255) : null,
+    tool: ADAPTER.tool, anonymous_id: anon ? String(anon).slice(0, 255) : null, user_id: c.userId ? String(c.userId).slice(0, 255) : null,
     session_id: c.sessionId !== undefined && c.sessionId !== null && c.sessionId >= 0 ? String(c.sessionId) : null,
     event_id: c.insertId ? String(c.insertId).slice(0, 255) : null,
     event_name: c.eventType ? String(c.eventType).slice(0, 255) : null,
@@ -742,5 +745,6 @@ function toPayload(canon) {
 
 var AmplitudeSnowplow = { toTrackerEvent: toTrackerEvent, toPayload: toPayload, fromBrowser: fromBrowser, fromExport: fromExport, kindOf: kindOf, slots: slots, toSnowplow: toSnowplow, identity: identity, uuidv5: uuidv5, sessionKey: sessionKey, amplitudeTime: amplitudeTime, ADAPTER: ADAPTER };
 if (typeof module !== 'undefined' && module.exports) module.exports = AmplitudeSnowplow;
-else if (typeof window !== 'undefined') window.AmplitudeSnowplow = AmplitudeSnowplow;
+else root.AmplitudeSnowplow = AmplitudeSnowplow;
+})(typeof window !== 'undefined' ? window : this);
 ```

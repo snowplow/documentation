@@ -4,7 +4,7 @@ sidebar_label: "Starter attribute groups"
 sidebar_position: 40
 description: "Five attribute groups you can copy to calculate visitor, session, purchase, account and funnel attributes from events that reach Snowplow from Segment, RudderStack, GA4, Amplitude, Adobe or PostHog."
 keywords: ["attribute groups", "external_event", "segment", "ga4", "amplitude", "adobe", "rudderstack", "posthog", "python sdk"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: how-to
 ---
 
@@ -16,12 +16,12 @@ Once your existing analytics events reach Snowplow, you can calculate Signals at
 - [Account and plan](#account-and-plan): the account and plan a visitor belongs to
 - [Funnel](#funnel): your own event names, such as a signup or a login
 
-Each group lists its attributes, the events and fields it reads, and which approaches support it. The definitions use the [Signals Python SDK](/docs/signals/connection/index.md). You can create the same attributes in Console.
+Each group lists its attributes, the events and fields it reads, and which approaches support it. The definitions use the [Signals Python SDK](/docs/signals/connection/index.md). You can create the same attributes in Console instead: each `Attribute`, with its events, criteria, property and aggregation, maps one to one to the fields of Console's attribute form.
 
 :::caution[Deploy the schemas before you send events]
 These definitions read `external_event` and `external_identity`, which are published on Iglu Central. If you register your own copies, deploy them to production before you create the groups, and before you send any event that uses them. Signals rejects an attribute on a schema that isn't in production. If your pipeline looks up a schema before it is deployed, it keeps rejecting events that use it for several minutes after deployment. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test.
 
-If you register your copies under your own vendor, such as `com.acme`, use that vendor in the adapter's configuration and in the definitions below. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
+If you register your copies under your own vendor, such as `com.acme`, use that vendor in the adapter's configuration, and set `VENDOR` in the [SDK setup](#set-up-the-sdk) below. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
 :::
 
 ## What the attributes read
@@ -45,14 +45,14 @@ Most tools can send events to Snowplow in two ways. The approach you use decides
 
 **Client-side approaches** run the Snowplow JavaScript tracker in the page alongside your tool, and copy each of your tool's calls into it. The tracker sets its own random visitor ID (`domain_userid`) and session ID (`domain_sessionid`), and can send page pings. Every starter group works, and you can key them on `domain_userid` or `domain_sessionid`.
 
-**Server-side approaches** convert events in your tool's own workspace and post them to your Collector. They also cover events from your servers and apps. They have no Snowplow session and no page pings, and `domain_userid` holds your tool's own visitor ID. Visitor, purchase, account and funnel groups work. Session engagement does not.
+**Server-side approaches** convert events in your tool's own workspace and post them to your Collector. They also cover events from your servers and apps. They have no page pings, and `domain_userid` holds your tool's own visitor ID. Visitor, purchase, account and funnel groups work. Session engagement works only where the adapter puts your tool's session ID in `domain_sessionid`, on PostHog's HTTP Webhook destination and Amplitude's Webhook destination, and then only its session counts, without page pings or scroll depth.
 
 **Warehouse history** from your tool's export can fill a warehouse attribute group with values from before you connected. It needs a Signals warehouse connection.
 
 | Attribute group | Client-side | Server-side | Warehouse history |
 | --- | --- | --- | --- |
 | Visitor activity | Yes | Yes, keyed on your tool's visitor ID | Possible |
-| Session engagement | Yes, with the tracker's activity tracking turned on | No | No |
+| Session engagement | Yes, with the tracker's activity tracking turned on | Session counts only, on PostHog and Amplitude | No |
 | Purchase intent | Yes | Yes | Possible |
 | Account and plan | Yes | Yes | Possible |
 | Funnel | Yes | Yes | Possible |
@@ -95,6 +95,10 @@ from snowplow_signals import (
     domain_userid,
 )
 
+# The vendor of your external_event and external_identity schemas. Change it only if you
+# registered your own copies under another vendor.
+VENDOR = "com.snowplowanalytics.snowplow"
+
 sp_signals = Signals(
     api_url=os.environ["SIGNALS_API_URL"],
     api_key=os.environ["SNOWPLOW_API_KEY"],
@@ -111,7 +115,7 @@ ecommerce_action = Event(
 )
 site_search = Event(vendor="com.snowplowanalytics.snowplow", name="site_search", version="1-0-0")
 identify = Event(vendor="com.snowplowanalytics.snowplow", name="identify", version="1-0-0")
-external_event = Event(vendor="com.snowplowanalytics.snowplow", name="external_event", version="1-0-0")
+external_event = Event(vendor=VENDOR, name="external_event", version="1-0-0")
 
 
 def ecommerce_type(action_type):
@@ -129,7 +133,7 @@ def ecommerce_type(action_type):
 
 def external_field(path):
     return EventProperty(
-        vendor="com.snowplowanalytics.snowplow",
+        vendor=VENDOR,
         name="external_event",
         major_version=1,
         path=path,
@@ -137,7 +141,7 @@ def external_field(path):
 
 
 original_event_name = EntityProperty(
-    vendor="com.snowplowanalytics.snowplow",
+    vendor=VENDOR,
     name="external_identity",
     major_version=1,
     path="event_name",
@@ -220,9 +224,9 @@ What a visitor is doing right now, in the current session.
 | `product_views_this_session` | `snowplow_ecommerce_action` with type `product_view` | Count |
 | `minutes_since_session_start` | Any event | Time since first |
 
-**Supported on:** client-side approaches that run the Snowplow tracker. Page pings need the tracker's activity tracking turned on; the number of pings multiplied by your heartbeat interval approximates engaged time. Server-side approaches have no Snowplow session, so `domain_sessionid` is empty and this group gets no values.
+**Supported on:** client-side approaches that run the Snowplow tracker. Page pings need the tracker's activity tracking turned on; the number of pings multiplied by your heartbeat interval approximates engaged time. On server-side approaches, `domain_sessionid` is empty and this group gets no values, except on the PostHog and Amplitude approaches below.
 
-One exception: Amplitude's client-side plugin can post events directly to the Collector without the tracker. It builds a `domain_sessionid` from Amplitude's device and session IDs, so the session counts work, but it sends no page pings. See [Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md).
+Amplitude's events carry a session ID. When the client-side plugin posts events directly to the Collector without the tracker, and on Amplitude's Webhook destination, the adapter builds a `domain_sessionid` from Amplitude's device and session IDs, so the session counts work, without page pings. See [Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md).
 
 PostHog's server-side destination also has sessions: it puts PostHog's `$session_id` in `domain_sessionid`, so the session counts work there too, without page pings or scroll depth. See [PostHog](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md).
 
@@ -426,7 +430,7 @@ The account a visitor belongs to and the plan they are on, for B2B and subscript
 - **GA4:** `plan` and `group_id` arrive only when sent as event parameters. User properties set with `gtag('set', 'user_properties', ...)` are not forwarded.
 - **Amplitude:** `group_id` comes only from identify calls with groups and from group identify events, not from later track events. `plan` comes from any event that carries it, so a later event's plan replaces the one set by group identify.
 - **Adobe:** you map the eVar, prop or XDM field that holds the plan and account when you set up the adapter. Adobe has no group call, so on the Web SDK, AppMeasurement and event forwarding these events arrive with kind `track`, and `group_calls_30d` stays empty. The example Tags rules send a join with kind `group`.
-- **PostHog:** `plan` comes from event properties or from `$group_set` on `$groupidentify`, and `group_id` from `$group_key`. A plan set only with `$set` on the person is dropped.
+- **PostHog:** `plan` comes from event properties or from `$group_set` on `$groupidentify`, and `group_id` from `$group_key`. A plan set only with `$set` on the person is dropped. `plan` comes from any event that carries it, so a later event's plan, such as a signup with `plan: "pro"`, replaces the plan from `$groupidentify`.
 
 The group call's `name` differs between tools (for example `group` in Segment and `$groupidentify` in Amplitude), so `group_calls_30d` filters on `kind` instead.
 
@@ -575,7 +579,60 @@ sp_signals.publish([
 ])
 ```
 
-Attributes are calculated from the moment you publish. They change within about a second of each event reaching your Collector, so on server-side approaches add your tool's own delivery delay. Signals counts an event ID once, so a retry from your tool that repeats the ID doesn't count twice. To include earlier events from your atomic events table, set `backfill_since_tstamp` on the group. Backfill needs a warehouse connection. See [Define attribute groups](/docs/signals/attributes/attribute-groups/index.md).
+Attributes are calculated from the moment you publish. They change within about a second of each event reaching your Collector, so on server-side approaches add your tool's own delivery delay. The first events after you publish can take a minute or more before their values appear, then later events update at the usual speed. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). Signals counts an event ID once, so a retry from your tool that repeats the ID doesn't count twice. To include earlier events from your atomic events table, set `backfill_since_tstamp` on the group. Backfill needs a warehouse connection. See [Define attribute groups](/docs/signals/attributes/attribute-groups/index.md).
+
+## Create an intervention
+
+An intervention tells your application that a visitor's attributes have met a condition you set. Signals delivers it to an attribute key, such as `domain_userid`, and your page reacts to it. See [Define interventions](/docs/signals/interventions/index.md) for every option.
+
+This example fires when a visitor adds a product to their cart or places an order, using the [purchase intent](#purchase-intent) group, which is keyed on `domain_userid`. Publish the group first.
+
+In Console, go to **Signals** > **Interventions** and create an intervention named `purchase_intent_nudge` with yourself as owner. Add two criteria, `purchase_intent` `add_to_carts_30d` `>=` `1` and `purchase_intent` `orders_30d` `>=` `1`, and set the intervention to trigger when any of them is met. Keep the default target, `domain_userid`. Save it, then select **Publish**.
+
+With the Python SDK, using the setup above:
+
+```python
+from snowplow_signals import InterventionCriteriaAny, InterventionCriterion, RuleIntervention
+
+purchase_intent_nudge = RuleIntervention(
+    name="purchase_intent_nudge",
+    owner="you@example.com",
+    criteria=InterventionCriteriaAny(any=[
+        InterventionCriterion(attribute="purchase_intent:add_to_carts_30d", operator=">=", value=1),
+        InterventionCriterion(attribute="purchase_intent:orders_30d", operator=">=", value=1),
+    ]),
+)
+
+sp_signals.publish([purchase_intent_nudge])
+```
+
+Deliver interventions only to a key that's safe on the public intervention endpoint, such as `domain_userid` from a client-side approach. See [Keys on the public intervention endpoint](#choose-an-approach-and-a-key).
+
+## Receive interventions in the page
+
+On a client-side approach, the page already runs the Snowplow tracker from the tag snippet, so add the [Signals browser plugin](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin) to it from a CDN. The plugin's `SignalsPlugin`, `addInterventionHandlers` and `subscribeToInterventions` become tracker commands. Run this after `newTracker`:
+
+```js
+snowplow('addPlugin', 'https://cdn.jsdelivr.net/npm/@snowplow/signals-browser-plugin@0.2.2/dist/index.umd.min.js', ['snowplowSignals', 'SignalsPlugin']);
+
+snowplow('addInterventionHandlers', {
+  purchaseIntentNudge: function (intervention) {
+    if (intervention.name === 'purchase_intent_nudge') {
+      // Show the offer in your UI.
+    }
+  },
+});
+
+snowplow('subscribeToInterventions', { endpoint: 'YOUR_SIGNALS_API_URL' });
+```
+
+Set `endpoint` to your Signals API URL. The plugin subscribes to interventions for the `domain_userid` and `domain_sessionid` the tracker sends, and keeps the connection open while the page is open. See [Subscribe to interventions](/docs/signals/applications/subscribe/index.md) for the options.
+
+- **Load the plugin once per page.** Loading the same file again, for example with a `<script>` tag as well as `addPlugin`, creates a second copy of the plugin, and handlers added to one copy don't fire for the other. With tracker 4.10.3, each further `addPlugin` call that loads a URL also sends again the tracking commands queued while earlier plugins were loading, so events arrive twice.
+- **Consent.** The plugin loads with the tracker. If you create the tracker only after consent, add the plugin in the same place.
+- **Without the tracker.** Approaches that post events without the Snowplow tracker, such as Amplitude's plugin without the tracker and every server-side approach, can't use the browser plugin.
+
+In Google Tag Manager, load the plugin from the page view tag. On the **Snowplow v4** page view tag, open **Load Plugins** and add a row with **Plugin URL** set to the URL above and **Plugin Configuration** set to `snowplowSignals,SignalsPlugin`. The tag adds the plugin each time it fires. If your page view tag also fires on **History Change**, split it into two tags with the same settings: one on **Window Loaded** that loads the plugin, and one on **History Change** without it. Otherwise each route change loads the plugin again, and tracker 4.10.3 sends the earlier page views again. Then add a **Custom HTML** tag on **Window Loaded**, fired after the page view tag with tag sequencing, that runs the `addInterventionHandlers` and `subscribeToInterventions` calls above in a `<script>` element. If the page view tag requires consent, a visitor who grants it after the page has loaded gets the plugin, and interventions, from their next page load.
 
 ## Read attributes across identifiers
 

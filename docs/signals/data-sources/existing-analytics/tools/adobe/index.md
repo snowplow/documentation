@@ -483,6 +483,8 @@ If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), yo
 
 These rules don't read the ECID, so their events' `external_identity` has a null `anonymous_id` unless you also set `window.snowplowAdobe.vendorId` from your Adobe library, as in the Web SDK or AppMeasurement sections.
 
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+
 ## Set up the server-side approach: event forwarding
 
 Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK event that reaches the Edge Network. The setup below builds a Snowplow tracker protocol request from each event and posts it to your Collector. Nothing changes in the browser or the app.
@@ -762,7 +764,7 @@ In the dashboard, check that:
 
 In the Adobe Experience Platform Debugger, check that Adobe still receives every event. If an event goes missing for Adobe, your callback is throwing.
 
-Once the events look right, point the shared script or the fetch call at your pipeline's Collector, and read the attributes in Signals.
+Once the events look right, point the shared script or the fetch call at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
 
 For Data Feeds, run the model and check the row counts against Adobe Analytics for the same 90 days. Adobe's reports apply processing the raw feed doesn't, so expect small differences.
 

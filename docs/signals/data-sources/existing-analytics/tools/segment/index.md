@@ -130,6 +130,8 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
 If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends Segment's `ajs_anonymous_id`, `ajs_user_id` and `ajs_group_id` cookies with every request to it. `ajs_user_id` can hold an email address if that is what you pass to `identify`. Use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
 
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+
 ## Set up the server-side approach
 
 The server-side approach runs in your Segment workspace. A Destination Function receives each event, maps it, and posts it to your Collector in Snowplow's tracker protocol. Segment retries failed deliveries, so the function has no state to manage.
@@ -202,7 +204,7 @@ For a page view, a product view, an order with two products and an `identify` ca
 - With the client-side approach, `page_ping` events and the same `domain_sessionid` on every event in the visit.
 - No failed events.
 
-Once the events look right, point the tracker or the function at your pipeline's Collector, and read the attributes in Signals.
+Once the events look right, point the tracker or the function at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
 
 Check failed events in your pipeline as well as Segment's delivery overview. The Collector accepts events before they are validated, so Segment counts an event as delivered even when it later fails validation.
 

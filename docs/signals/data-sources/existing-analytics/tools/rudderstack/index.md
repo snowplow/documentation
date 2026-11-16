@@ -134,8 +134,10 @@ The client-side approach loads the Snowplow JavaScript tracker next to the Rudde
 :::caution[RudderStack cookies and a same-site Collector]
 If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends RudderStack's cookies with every request to it: `rl_anonymous_id`, `rl_user_id`, `rl_trait`, `rl_group_id`, `rl_group_trait`, `rl_session` and `rl_page_init_referrer`. Their values are base64-encoded, which is not encryption, so `rl_trait` and `rl_group_trait` carry any email address you pass in `identify` or `group` traits. The email doesn't reach the Snowplow events, but it is in the request headers your Collector receives.
 
-To keep these cookies off Collector requests, add `credentials: 'omit'` to the `newTracker` options in step 2. The browser then sends no cookies to the Collector, including the Collector's own cookie, so if you rely on `network_userid`, check how your Collector sets it before you use this option. `domain_userid` and `domain_sessionid` are unaffected. Otherwise, use a Collector on a different site, or confirm this is acceptable in your privacy review.
+To keep these cookies off Collector requests, add `credentials: 'omit'` to the `newTracker` options in step 2. The browser then sends no cookies to the Collector, including the Collector's own cookie, so `network_userid` changes on every request. `domain_userid` and `domain_sessionid` are unaffected. Otherwise, use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
+
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
 
 ## Set up the server-side approach
 
@@ -254,7 +256,7 @@ For a page view, a product view, an order with two products and an `identify` ca
 - With the client-side approach, `page_ping` events and the same `domain_sessionid` on every event in the visit. Page pings carry the `external_identity` entity of the page view they follow.
 - No failed events.
 
-Once the events look right, point the tracker or the Webhook destination at your pipeline's Collector, and read the attributes in Signals.
+Once the events look right, point the tracker or the Webhook destination at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
 
 Check failed events in your pipeline as well as RudderStack's delivery status. The Collector accepts events before they are validated, so RudderStack counts an event as delivered even when it later fails validation.
 

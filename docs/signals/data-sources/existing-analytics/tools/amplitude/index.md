@@ -318,7 +318,7 @@ In the dashboard, check that:
 - Searches arrive as `site_search`, and identifies with a user ID arrive as `identify` with the ID only.
 - Every other event arrives as `external_event`, with `name` set to the Amplitude event type.
 - Every event carries an `external_identity` entity with `tool` set to `amplitude` and `anonymous_id` set to the Amplitude `device_id`.
-- No email address appears anywhere in the event.
+- Apart from the user ID, no email address appears in the event.
 
 On the client-side approach, you can compare IDs in the browser console: `amplitude.getDeviceId()` returns the value in `external_identity.anonymous_id`, and `amplitude.getSessionId()` the value in `external_identity.session_id`.
 
@@ -351,11 +351,11 @@ Ecommerce and search events are matched by name, ignoring case. The defaults cov
 
 | Amplitude field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| `device_id` (random UUID in the `AMP_` cookie) | `external_identity.anonymous_id` on every approach. Also `domain_userid` and `network_userid` without the tracker and on the webhook | Not on the public intervention endpoint: a `?deviceId=` link can set it. Fine for server-side reads |
+| `device_id` (random UUID in the `AMP_` cookie) | `external_identity.anonymous_id` on every approach. Also `domain_userid` and `network_userid` without the tracker and on the webhook. Without the tracker, a value longer than 128 characters is replaced by its SHA-256 hash | Not on the public intervention endpoint: a `?deviceId=` link can set it. Fine for server-side reads |
 | Snowplow's own visitor cookie (client-side with the tracker) | `domain_userid` | Yes. Random, set by the Snowplow tracker |
 | Snowplow's own session cookie (client-side with the tracker) | `domain_sessionid`, `domain_sessionidx` | Yes |
 | `session_id` (start time in milliseconds) | `external_identity.session_id`. Without the tracker and on the webhook, also part of `domain_sessionid`: the first 24 characters of `device_id` followed by `session_id` in hex | The raw value is guessable, never a key. The built `domain_sessionid` is only as safe as `device_id` |
-| `user_id` | `user_id`, `external_identity.user_id`, and `identify.id`, unchanged. The adapter doesn't hash an email-shaped `user_id`; see [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) if your user IDs can be emails | Server-side reads only, never on the public intervention endpoint |
+| `user_id` | `user_id`, `external_identity.user_id`, and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only, never on the public intervention endpoint |
 | `insert_id` | `event_id`, as a UUIDv5 of `insert_id`, without the tracker only | Not a key. Lets you deduplicate events |
 | `groups` | `external_event.group_id` | As a custom key for account attributes, server-side reads only |
 | IP address | `user_ipaddress` | Not a key. Personal data |

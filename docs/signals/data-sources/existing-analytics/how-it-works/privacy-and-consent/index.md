@@ -4,7 +4,7 @@ sidebar_label: "Privacy and consent"
 sidebar_position: 30
 description: "Where personal data travels on each approach, which of your tool's cookies reach a same-site Collector, how adapters follow your tool's consent state, and what to strip."
 keywords: ["privacy", "consent", "personal data", "cookies", "same-site collector", "external_identity"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: concept
 ---
 
@@ -14,18 +14,6 @@ An adapter sends Snowplow only the fields it maps: the standard fields of each S
 
 - **Identify traits and user properties**, such as email, name and plan. Identify calls arrive with the user ID only.
 - **Properties that don't fit a field**, including emails in event properties, Adobe context data and eVars that aren't mapped, and the Email namespace of the Adobe `identityMap`.
-- **Email addresses used as user IDs, on some adapters.** When a user ID contains `@`, the Segment and PostHog adapters and the Adobe event forwarding converter send an unsalted SHA-256 hash of the lowercased value instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash or remove email-shaped user IDs in your tool first. This is the Segment adapter's function:
-
-```js
-// Some workspaces use the email as userId; hash it so it never reaches the pipeline in clear.
-function userIdOut(id) {
-  if (id === undefined || id === null || id === '') return undefined;
-  var s = String(id);
-  return s.indexOf('@') > -1 ? hex(sha256(utf8Bytes(s.trim().toLowerCase()))) : s.slice(0, 255);
-}
-```
-
-A hashed email is still personal data. If your user IDs are emails, decide whether a hash may reach Snowplow at all.
 
 ## Where personal data travels
 
@@ -34,7 +22,7 @@ A hashed email is still personal data. If your user IDs are emails, decide wheth
 | IP address | The browser's own, from the request | Whatever your tool forwards, such as Segment's `context.ip`, RudderStack's `request_ip`, Amplitude's `ip_address` or PostHog's `$ip`. Without it, the Collector records your tool's server address | In your tool's export |
 | User agent | The browser's own | Whatever your tool forwards. Amplitude's webhook payload has none | In your tool's export |
 | Page URL, referrer and title | Sent, including query strings | Sent when your tool includes them | In your tool's export |
-| User ID | Sent in clear; hashed when it contains `@` on Segment and PostHog, dropped on Adobe | Sent in clear; hashed when it contains `@` on Segment, PostHog and Adobe event forwarding | In your tool's export |
+| User ID | Sent unchanged, as your tool holds it. If it's an email address, the email reaches Snowplow | Same | In your tool's export |
 | Search terms and other free text | Sent in `site_search` and `external_event.search_term` | Same | In your tool's export |
 | Your tool's cookies | Reach a Collector on the same site; see below | Not sent | Not applicable |
 | Snowplow cookies | Set by the Snowplow tracker (`_sp_id`, `_sp_ses`) and the Collector | Not set in the browser | Not applicable |
@@ -136,7 +124,7 @@ On client-side approaches, the adapter only stops events, not the Snowplow track
 
 Before production traffic, check that none of these reach Snowplow, or agree that they may:
 
-- User IDs that are emails, in clear or hashed.
+- User IDs that are emails.
 - Emails, tokens or names in page URLs, referrers and query strings.
 - Free text in search terms and in any property you map to an `external_event` field.
 - Form field values, if you turn on the Snowplow tracker's form tracking.

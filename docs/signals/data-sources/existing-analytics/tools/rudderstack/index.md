@@ -284,10 +284,10 @@ A product with no category gets an empty category. With the transformation, an e
 
 | RudderStack field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| `anonymousId` (JavaScript SDK: a UUID version 4) | Server-side: `domain_userid` and `network_userid`. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend. Read it in the page with `rudderanalytics.getAnonymousId()`. Not recommended on the public intervention endpoint, because RudderStack doesn't document how it's generated. For interventions, use the client-side approach |
+| `anonymousId` (JavaScript SDK: a UUID version 4) | Server-side: `domain_userid` and `network_userid`, replaced by its SHA-256 hash when longer than 128 characters. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend. Read it in the page with `rudderanalytics.getAnonymousId()`. Not recommended on the public intervention endpoint, because RudderStack doesn't document how it's generated. For interventions, use the client-side approach |
 | Snowplow cookie ID (client-side only) | `domain_userid` | Yes. A random ID set by the Snowplow tracker, safe on the public intervention endpoint |
 | Snowplow session ID (client-side only) | `domain_sessionid` | Yes, for session attributes |
-| `userId` | `user_id`, `external_identity.user_id` and `identify.id`, in clear | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
+| `userId` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
 | `context.sessionId` | `external_identity.session_id` | No. It is a timestamp in milliseconds, so it can be guessed |
 | `groupId` | `external_event.group_id` | Server-side reads only, for account attributes |
 | `previousId` | `external_event.previous_id` | No. Recorded only |
@@ -299,8 +299,6 @@ A product with no category gets an empty category. With the transformation, an e
 :::caution[anonymousId from server SDKs]
 RudderStack's server SDKs and HTTP API accept any string as `anonymousId`. A value longer than 128 characters is stored in `domain_userid` as its SHA-256 hash, with the original in `external_identity`. An event with no `anonymousId` falls back to the `userId`, which then becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`.
 :::
-
-Unlike the Segment adapter, the RudderStack transformation does not hash a `userId` that contains `@`. If your user IDs can be email addresses, hash them before they leave RudderStack.
 
 If your pipeline runs Snowplow Identities, stream attribute groups can be keyed on `snowplow_id`, so a visitor's browser events and their logged-in server events count towards the same attributes. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
@@ -321,17 +319,16 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 2. **Blocked with the RudderStack SDK.** If an ad blocker stops the SDK file or its source configuration from loading, the integration doesn't run and nothing reaches Snowplow. Blocking only RudderStack's data plane doesn't matter: every event still reaches Snowplow.
 3. **Registered too late, it never runs.** The integration must be added before the SDK finishes loading, from a snippet that lists `addCustomIntegration`. See step 4.
 4. **RudderStack cookies can reach a same-site Collector.** See the caution under the setup steps.
-5. **The user ID is sent in clear.**
-6. **Two visitor IDs.** Snowplow's `domain_userid` differs from RudderStack's `anonymousId`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
+5. **Two visitor IDs.** Snowplow's `domain_userid` differs from RudderStack's `anonymousId`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
 
 ### Server-side approach
 
 1. **No sessions or engagement.** `domain_sessionid` is empty and there are no page pings. RudderStack's session ID is kept in `external_identity` but Signals doesn't build session attributes from it.
 2. **Seconds of delay.** RudderStack's processor and router poll their queues, so events arrive seconds after the call. Don't rely on the server-side approach for reactions within a page view.
 3. **A failed event holds up later ones.** RudderStack delivers each user's events in order, so while one event is being retried, that user's later events wait behind it.
-4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID in clear and free-text search terms.
+4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
 5. **Server events without context.** Events with no `context.userAgent` are recorded with RudderStack's own user agent. Events with no IP address record the address of the RudderStack server. Every event is recorded with platform `web`.
-6. **Events with only a `userId` are keyed on it.** The transformation falls back to the `userId` when there is no `anonymousId`, so `domain_userid` holds a guessable value, and an email in clear if your user IDs are emails.
+6. **Events with only a `userId` are keyed on it.** The transformation falls back to the `userId` when there is no `anonymousId`, so `domain_userid` holds a guessable value, and an email address if your user IDs are emails.
 
 ### Both approaches
 

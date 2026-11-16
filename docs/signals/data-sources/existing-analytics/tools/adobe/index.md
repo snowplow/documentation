@@ -172,9 +172,7 @@ All three load the same script. It starts the Snowplow tracker with the ecommerc
        },
        setUser: function (id) {
          if (!id) return;
-         var s = String(id);
-         // Email-shaped IDs never reach Snowplow.
-         cfg.userId = s.indexOf('@') > -1 ? null : s;
+         cfg.userId = String(id);
          snowplow('setUserId', cfg.userId);
        },
        // identify also has an email field; it is never filled.
@@ -499,73 +497,6 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
    ```js
    // Adobe XDM event to Snowplow tracker protocol event.
    // No dependencies, because event forwarding custom code has no require, Buffer or crypto.
-   function utf8Bytes(str) {
-     var out = [];
-     for (var i = 0; i < str.length; i++) {
-       var c = str.charCodeAt(i);
-       if (c >= 0xd800 && c <= 0xdbff && i + 1 < str.length) {
-         var d = str.charCodeAt(i + 1);
-         if (d >= 0xdc00 && d <= 0xdfff) { c = 0x10000 + ((c - 0xd800) << 10) + (d - 0xdc00); i++; }
-       }
-       if (c < 0x80) out.push(c);
-       else if (c < 0x800) out.push(0xc0 | (c >> 6), 0x80 | (c & 63));
-       else if (c < 0x10000) out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
-       else out.push(0xf0 | (c >> 18), 0x80 | ((c >> 12) & 63), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
-     }
-     return out;
-   }
-
-   function padBlocks(bytes) {
-     var len = bytes.length, msg = bytes.slice();
-     msg.push(0x80);
-     while (msg.length % 64 !== 56) msg.push(0);
-     var bits = len * 8, hi = Math.floor(bits / 0x100000000), lo = bits >>> 0;
-     msg.push((hi >>> 24) & 255, (hi >>> 16) & 255, (hi >>> 8) & 255, hi & 255,
-       (lo >>> 24) & 255, (lo >>> 16) & 255, (lo >>> 8) & 255, lo & 255);
-     return msg;
-   }
-
-   function rotl(x, n) { return (x << n) | (x >>> (32 - n)); }
-   function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
-
-   var K256 = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-     0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-     0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-     0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-     0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-     0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-     0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-     0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
-
-   function sha256(bytes) {
-     var m = padBlocks(bytes), w = new Array(64);
-     var h = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
-     for (var o = 0; o < m.length; o += 64) {
-       for (var i = 0; i < 16; i++) w[i] = (m[o + 4 * i] << 24) | (m[o + 4 * i + 1] << 16) | (m[o + 4 * i + 2] << 8) | m[o + 4 * i + 3];
-       for (i = 16; i < 64; i++) {
-         var s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
-         var s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
-         w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0;
-       }
-       var a = h[0], b = h[1], c = h[2], d = h[3], e = h[4], f = h[5], g = h[6], hh = h[7];
-       for (i = 0; i < 64; i++) {
-         var S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25), ch = (e & f) ^ (~e & g);
-         var t1 = (hh + S1 + ch + K256[i] + w[i]) | 0;
-         var S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22), maj = (a & b) ^ (a & c) ^ (b & c);
-         var t2 = (S0 + maj) | 0;
-         hh = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
-       }
-       h[0] = (h[0] + a) | 0; h[1] = (h[1] + b) | 0; h[2] = (h[2] + c) | 0; h[3] = (h[3] + d) | 0;
-       h[4] = (h[4] + e) | 0; h[5] = (h[5] + f) | 0; h[6] = (h[6] + g) | 0; h[7] = (h[7] + hh) | 0;
-     }
-     var out = [];
-     h.forEach(function (x) { out.push((x >>> 24) & 255, (x >>> 16) & 255, (x >>> 8) & 255, x & 255); });
-     return out;
-   }
-
-   function hex(bytes) { return bytes.map(function (b) { return (b < 16 ? '0' : '') + b.toString(16); }).join(''); }
-   function sha256Hex(s) { return hex(sha256(utf8Bytes(s))); }
-
    var IGLU = 'iglu:com.snowplowanalytics.snowplow';
    var ECOM = 'iglu:com.snowplowanalytics.snowplow.ecommerce';
    var XDM2SP = {
@@ -611,8 +542,7 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
    function firstOf(content, paths) { for (var i = 0; i < paths.length; i++) { var v = str255(get(content, paths[i])); if (v !== undefined && v !== '') return v; } }
    function userIdOut(id) {
      if (id === undefined || id === null || id === '') return undefined;
-     var s = String(id);
-     return s.indexOf('@') > -1 ? sha256Hex(s.trim().toLowerCase()) : s.slice(0, 255);
+     return String(id).slice(0, 255);
    }
 
    // The authenticated ID from identityMap. The Email namespace is never read.
@@ -753,7 +683,7 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
    return JSON.stringify(toPayload([xdmToSp(arc.event, { ecid: ecid, ip: head.ip, ua: head.userAgent })]));
    ```
 
-   The converter applies the same mapping as the Web SDK callback, with two differences: it hashes an email-shaped user ID with SHA-256 rather than dropping it, and it sends every item of a product view as a `product` entity, in order, so the viewed product comes first.
+   The converter applies the same mapping as the Web SDK callback, with one difference: it sends every item of a product view as a `product` entity, in order, so the viewed product comes first.
 
 3. Install the Adobe Cloud Connector extension. Create a rule with a Make Fetch Call action that sends a `POST` to `https://<your collector>/com.snowplowanalytics.snowplow/tp2`, with the header `Content-Type: application/json` and the `snowplow body` data element as the body.
 
@@ -828,7 +758,7 @@ In the dashboard, check that:
 - Other events arrive as `external_event`, with `name` set to the XDM `eventType`, the link name or the data layer event.
 - Every event from the Web SDK, AppMeasurement and event forwarding carries `external_identity`, with the ECID in `anonymous_id`.
 - On the client-side approaches, `domain_userid` and `domain_sessionid` are UUIDs. On event forwarding, `domain_userid` is the ECID and `domain_sessionid` is empty.
-- No email address appears anywhere in the events. Search them for `@`.
+- Apart from the user ID, no email address appears in the events. Search them for `@`.
 
 In the Adobe Experience Platform Debugger, check that Adobe still receives every event. If an event goes missing for Adobe, your callback is throwing.
 
@@ -849,7 +779,7 @@ Every approach uses the same order: a standard Snowplow event wherever one fits,
 | Web SDK `commerce.purchases`; Analytics `purchase` | `snowplow_ecommerce_action`, type `transaction`, with a `transaction` entity and one `product` entity per line | Payment method from `commerce.order.payments`; `unknown` on AppMeasurement, whose hits don't carry it |
 | Web SDK `commerce.refunds`, if your schema uses it | `snowplow_ecommerce_action`, type `refund`, with a `refund` entity | Adobe has no standard refund event type |
 | Any Web SDK event with `siteSearch.query`; your Analytics search event with its search variable | `site_search` | |
-| Web SDK `userAccount.login` with a CRMID; any AppMeasurement link hit with the user ID variable | `identify`, with `id` only | Never the email. On the client-side approaches, an email-shaped ID becomes `external_event` with kind `identify` and no ID. On event forwarding, it becomes `identify` with its SHA-256 hash as `id` and `user_id`, and counts as a login |
+| Web SDK `userAccount.login` with a CRMID; any AppMeasurement link hit with the user ID variable | `identify`, with `id` only | The ID is sent unchanged. If it's an email address, the email reaches Snowplow |
 | Everything else: link clicks, form events, account events, your own event types and link names | `external_event`, `tool` set to `adobe` | `name` is the XDM `eventType`, the `s.tl` link name, `exit_link` or `download_link`. Plan, account and search term come from your field map |
 
 ## Identifiers
@@ -859,7 +789,7 @@ Every approach uses the same order: a standard Snowplow event wherever one fits,
 | Snowplow visitor ID (`_sp_id` cookie), client-side approaches only | `domain_userid` | Yes. A random UUID, safe on the public intervention endpoint |
 | Snowplow session ID, client-side approaches only | `domain_sessionid` | Yes, for session attributes |
 | ECID (`kndctr_<org>_identity` cookie for the Web SDK, `AMCV_<org>` for the Visitor service, `mcvisid` in Data Feeds) | `external_identity.anonymous_id`; on event forwarding, also `domain_userid` and `network_userid` | Server-side reads only. Adobe derives it from your org ID and the Audience Manager user ID and doesn't document how random it is, so don't use it on the public intervention endpoint |
-| Authenticated ID: Web SDK `identityMap` CRMID, Visitor `setCustomerIDs`, or your user ID eVar | `user_id`, `external_identity.user_id` and `identify.id` | Server-side reads only. It is chosen by you and can be guessed |
+| Authenticated ID: Web SDK `identityMap` CRMID, Visitor `setCustomerIDs`, or your user ID eVar | `user_id`, `external_identity.user_id` and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only. It is chosen by you and can be guessed |
 | Adobe visit (`visit_num`, Customer Journey Analytics sessions) | Nothing | Adobe computes visits on its servers. Neither library sends a session ID |
 | Email in `identityMap`, context data or eVars | Nothing | Never read by the adapter |
 | Customer ID hash in the `AMCV` cookie | Nothing | Reaches a same-site Collector in the cookie header |
@@ -910,7 +840,7 @@ Event forwarding:
 
 1. **No sessions or engagement.** Session attributes and page pings need the Snowplow tracker in the browser.
 2. **The visitor key is the ECID.** Adobe doesn't document how random it is, so don't use it on the public intervention endpoint.
-3. **The user ID appears only on events that carry it** in `identityMap`, not on the rest of the page. An email-shaped ID is sent as its SHA-256 hash, as `identify.id` and `user_id`.
+3. **The user ID appears only on events that carry it** in `identityMap`, not on the rest of the page.
 4. **Event IDs are assigned by the pipeline** when the event has no `xdm._id`, so a resend arrives with a new ID.
 5. **Web SDK and Mobile SDK only.** AppMeasurement traffic doesn't reach the Edge Network.
 

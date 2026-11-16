@@ -100,7 +100,7 @@ Every event carries an `external_identity` entity with the IDs your tool assigne
 | Field | Segment | RudderStack | GA4 | Amplitude | Adobe | PostHog |
 | --- | --- | --- | --- | --- | --- | --- |
 | `anonymous_id` | `anonymousId` | `anonymousId` | GA client ID | `device_id` | ECID | `$device_id` |
-| `user_id` | `userId` | `userId` | GA `user_id` | `user_id` | CRM ID from `identityMap` or `setCustomerIDs` | `distinct_id` after `identify`, hashed when it contains `@` |
+| `user_id` | `userId` | `userId` | GA `user_id` | `user_id` | CRM ID from `identityMap` or `setCustomerIDs` | `distinct_id` after `identify` |
 | `session_id` | Empty | `context.sessionId` | GA session ID | Amplitude session ID | Empty | `$session_id` |
 | `session_number` | Empty | Empty | GA session number | Not set | Empty | Empty |
 | `event_name` | Event name or call type | Event name or call type | GA4 event name | `event_type` | XDM `eventType`, link name or `page_view` | PostHog event name |

@@ -76,10 +76,9 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
 
    Replace `https://collector.example.com` with your Collector URL and `my-site` with your app ID. Activity tracking sends the page pings that engagement attributes need. `credentials: 'omit'` keeps PostHog's cookie off Collector requests; see the caution below.
 
-2. Load the [mapping code](#mapping-code): `sha256.js`, then `converter.js`. The converter defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event. If you registered your own copies of the two schemas, set your vendor straight after it:
+2. Load `converter.js` from [Mapping code](#mapping-code). It defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event. If you registered your own copies of the two schemas, set your vendor straight after it:
 
    ```html
-   <script src="/js/sha256.js"></script>
    <script src="/js/converter.js"></script>
    <script>PostHogSnowplow.PH.vendor = 'com.example';</script>
    ```
@@ -90,19 +89,19 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
    <script>
    // The client-side adapter: a before_send hook that copies each PostHog event into the Snowplow
    // browser tracker and returns the event unchanged, so PostHog receives exactly what it did before.
-   // Load sha256.js, converter.js and the Snowplow tag first. Put this hook LAST in before_send, so it
+   // Load converter.js and the Snowplow tag first. Put this hook LAST in before_send, so it
    // sees events after the site's own redaction and sampling hooks.
    function snowplowBeforeSend(event) {
      if (!event) return event;
      try {
        var S = window.PostHogSnowplow;
        var c = S.fromBrowser(event);
-       var l = S.ladder(c, window.sha256Hex);
+       var l = S.ladder(c);
        if (!l) return event;
-       var ident = S.identity(c, window.sha256Hex);
+       var ident = S.identity(c);
        var context = ident ? [ident] : [];
        var timestamp = c.timeMs ? { type: 'ttm', value: c.timeMs } : undefined;
-       window.snowplow('setUserId', S.userIdOf(c, window.sha256Hex) || null);
+       window.snowplow('setUserId', S.userIdOf(c) || null);
        // Queued calls can be handed over after the URL changed, so use the URL PostHog recorded.
        if (c.props.$current_url) window.snowplow('setCustomUrl', c.props.$current_url);
        if (l.rung === 'page_view') {
@@ -146,7 +145,7 @@ The hook only sees events posthog-js is about to send. When the visitor has opte
 Session replay (`$snapshot`) and heatmap (`$$heatmap`) events also pass through `before_send`. The converter drops them, so replay DOM snapshots and mouse coordinates never reach Snowplow.
 
 :::caution[PostHog cookies and a same-site Collector]
-If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends PostHog's `ph_<project_token>_posthog` cookie with every request to it. posthog-js sets it on your parent domain by default (`cross_subdomain_cookie`). It holds the `$device_id`, the `distinct_id`, the session ID and the first URL the visitor landed on, with its UTM parameters. After `identify`, the `distinct_id` is your user ID, so if you identify users by email, the email address travels in clear in the cookie header of every Collector request, even though the events carry only its hash.
+If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends PostHog's `ph_<project_token>_posthog` cookie with every request to it. posthog-js sets it on your parent domain by default (`cross_subdomain_cookie`). It holds the `$device_id`, the `distinct_id`, the session ID and the first URL the visitor landed on, with its UTM parameters. After `identify`, the `distinct_id` is your user ID, so if you identify users by email, the email address travels in the cookie header of every Collector request.
 
 `credentials: 'omit'` in step 1 keeps the cookie off Collector requests. The browser then sends no cookies to the Collector, including the Collector's own cookie, so if you rely on `network_userid`, check how your Collector sets it before you use this option. `domain_userid` and `domain_sessionid` are unaffected. Otherwise, use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
@@ -268,7 +267,7 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
      let uid := null
      if (identified and notEmpty(ev.distinct_id)) {
        uid := ev.distinct_id
-       if (position(uid, '@') > 0) { uid := sha256Hex(lower(trim(uid))) } else { uid := substring(uid, 1, 255) }
+       uid := substring(uid, 1, 255)
      }
      let anon := deviceId
      if (anon = null and ev.distinct_id != '$posthog_cookieless' and uid = null) { anon := ev.distinct_id }
@@ -407,7 +406,7 @@ For a page view, a product view, an order with two products, a search and an `id
 - A `snowplow_ecommerce_action` event of type `product_view` with one `product` entity.
 - A `snowplow_ecommerce_action` event of type `transaction` with one `product` entity per product and a `transaction` entity whose `total_quantity` counts every item.
 - A `site_search` event with the search term in `terms`.
-- An `identify` event whose only field is `id`. The email and other person properties are not there. If you identify by email, `id` is a 64-character SHA-256 hash.
+- An `identify` event whose only field is `id`. Person properties are not there.
 - `external_event` for everything else, such as `$groupidentify` (kind `group`, with `group_id` and `plan`), `$create_alias` (kind `alias`), `$autocapture`, `$rageclick`, `$pageleave` (with the seconds on the page in `value`) and your own events, with `name` set to the PostHog event name.
 - An `external_identity` entity on every event, with `tool` set to `posthog`, `anonymous_id` set to PostHog's `$device_id`, `session_id` set to PostHog's `$session_id`, and the original event name in `event_name`. `user_id` is empty until `identify`, then holds the user ID.
 - No `$snapshot` or `$$heatmap` events.
@@ -453,7 +452,7 @@ Ecommerce and search events are matched by name, ignoring case. A product with n
 | Snowplow cookie ID (client-side only) | `domain_userid` | Yes. A random ID set by the Snowplow tracker, safe on the public intervention endpoint |
 | Snowplow session ID (client-side only) | `domain_sessionid` | Yes, for session attributes |
 | `$session_id` (a UUID version 7; new after 30 minutes idle by default) | `external_identity.session_id` on both approaches. Server-side, also `domain_sessionid` | Server-side session key. Same caution as `$device_id` |
-| `distinct_id` | Before `identify`, it equals `$device_id` and isn't sent separately. After `identify`, it is your user ID: `user_id`, `external_identity.user_id` and `identify.id`. Hashed with SHA-256 when it contains `@` | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
+| `distinct_id` | Before `identify`, it equals `$device_id` and isn't sent separately. After `identify`, it is your user ID: `user_id`, `external_identity.user_id` and `identify.id`, unchanged, up to 255 characters. If it's an email address, the email reaches Snowplow | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
 | `$group_key` on `$groupidentify` | `external_event.group_id` | Server-side reads only, for account attributes |
 | `alias` on `$create_alias` | `external_event.previous_id` | No. Recorded only |
 | Event `uuid` | `event_id` (server-side). The client-side approach uses the tracker's own event ID | No. Used to spot duplicates |
@@ -470,7 +469,7 @@ The key each approach uses:
 - Server-side approach: PostHog's `$device_id` for visitors and `$session_id` for sessions. Your page can read the session ID with `posthog.get_session_id()` and pass it to your backend.
 - Client-side approach: the Snowplow tracker's `domain_userid` and `domain_sessionid`.
 
-In cookieless mode (`cookieless_mode`), posthog-js sets no `$device_id`, every visitor shares the `distinct_id` `$posthog_cookieless`, and the browser has no `$session_id`. The adapter then sends no `external_identity` entity. The client-side approach still keys on Snowplow's own IDs, so use it if you run PostHog cookieless.
+In cookieless mode (`cookieless_mode`), posthog-js sets no `$device_id`, every visitor shares the `distinct_id` `$posthog_cookieless`, and the browser has no `$session_id`. The adapter then sends `external_identity` with an empty `anonymous_id`. The client-side approach still keys on Snowplow's own IDs, so use it if you run PostHog cookieless.
 
 ## Starter attribute groups
 
@@ -488,17 +487,16 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 1. **Browser events only.** Events from PostHog's server and mobile SDKs and the capture API don't pass through posthog-js in the page.
 2. **Follows posthog-js.** If posthog-js doesn't load, the visitor has opted out, or posthog-js classes the browser as a bot, the hook doesn't run and nothing reaches Snowplow.
 3. **PostHog's cookie can reach a same-site Collector.** See the caution under the setup steps.
-4. **The user ID is sent in clear unless it contains `@`.** A user ID with `@` is hashed with SHA-256, unsalted, which is still personal data.
-5. **Two visitor IDs.** Snowplow's `domain_userid` differs from PostHog's `$device_id`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
-6. **Device time is in `true_tstamp`.** The hook passes PostHog's event time as the true timestamp, so `dvce_created_tstamp` is empty. Compare device times on `true_tstamp`.
-7. **Two extra scripts.** The page loads the Snowplow tracker and its ecommerce plugin, and the tracker sets its own `_sp_id` and `_sp_ses` cookies. Load it under the same consent as PostHog.
+4. **Two visitor IDs.** Snowplow's `domain_userid` differs from PostHog's `$device_id`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
+5. **Device time is in `true_tstamp`.** The hook passes PostHog's event time as the true timestamp, so `dvce_created_tstamp` is empty. Compare device times on `true_tstamp`.
+6. **Two extra scripts.** The page loads the Snowplow tracker and its ecommerce plugin, and the tracker sets its own `_sp_id` and `_sp_ses` cookies. Load it under the same consent as PostHog.
 
 ### Server-side approach
 
 1. **No page pings.** Sessions work from `$session_id`, but engagement is limited to `$pageleave` durations.
 2. **Delivery depends on PostHog.** Events arrive after PostHog ingests them, and PostHog doesn't document a delivery time for destinations. Expect several seconds per event, and a minute or more for the first events after you create the destination or change its Collector. Don't rely on the server-side approach for reactions within a page view.
 3. **Billed per trigger event.** Beyond PostHog's free allotment, each event that triggers the destination is billed by PostHog.
-4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID (hashed when it contains `@`) and free-text search terms.
+4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
 5. **The visitor key is PostHog's `$device_id`.** See the caution under [Identifiers](#identifiers).
 
 ### Both approaches
@@ -513,79 +511,7 @@ Batch attributes need a Signals warehouse connection, and a Signals deployment r
 
 ## Mapping code
 
-The client-side approach loads two files before the hook: `sha256.js`, which hashes email-shaped user IDs synchronously because `before_send` can't wait for `crypto.subtle`, and `converter.js`, which holds the mapping. The server-side Hog source carries the same mapping and uses PostHog's built-in `sha256Hex`.
-
-<details>
-<summary>sha256.js</summary>
-
-```js
-// Synchronous SHA-256, because before_send can't await crypto.subtle.
-function utf8Bytes(str) {
-  var out = [];
-  for (var i = 0; i < str.length; i++) {
-    var c = str.charCodeAt(i);
-    if (c >= 0xd800 && c <= 0xdbff && i + 1 < str.length) {
-      var d = str.charCodeAt(i + 1);
-      if (d >= 0xdc00 && d <= 0xdfff) { c = 0x10000 + ((c - 0xd800) << 10) + (d - 0xdc00); i++; }
-    }
-    if (c < 0x80) out.push(c);
-    else if (c < 0x800) out.push(0xc0 | (c >> 6), 0x80 | (c & 63));
-    else if (c < 0x10000) out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
-    else out.push(0xf0 | (c >> 18), 0x80 | ((c >> 12) & 63), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
-  }
-  return out;
-}
-function padBlocks(bytes) {
-  var len = bytes.length, msg = bytes.slice();
-  msg.push(0x80);
-  while (msg.length % 64 !== 56) msg.push(0);
-  var bits = len * 8, hi = Math.floor(bits / 0x100000000), lo = bits >>> 0;
-  msg.push((hi >>> 24) & 255, (hi >>> 16) & 255, (hi >>> 8) & 255, hi & 255,
-    (lo >>> 24) & 255, (lo >>> 16) & 255, (lo >>> 8) & 255, lo & 255);
-  return msg;
-}
-function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
-var K256 = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-  0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-  0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-  0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-  0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-  0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
-function sha256(bytes) {
-  var m = padBlocks(bytes), w = new Array(64);
-  var h = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
-  for (var o = 0; o < m.length; o += 64) {
-    for (var i = 0; i < 16; i++) w[i] = (m[o + 4 * i] << 24) | (m[o + 4 * i + 1] << 16) | (m[o + 4 * i + 2] << 8) | m[o + 4 * i + 3];
-    for (i = 16; i < 64; i++) {
-      var s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
-      var s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
-      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0;
-    }
-    var a = h[0], b = h[1], c = h[2], d = h[3], e = h[4], f = h[5], g = h[6], hh = h[7];
-    for (i = 0; i < 64; i++) {
-      var S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25), ch = (e & f) ^ (~e & g);
-      var t1 = (hh + S1 + ch + K256[i] + w[i]) | 0;
-      var S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22), maj = (a & b) ^ (a & c) ^ (b & c);
-      var t2 = (S0 + maj) | 0;
-      hh = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
-    }
-    h[0] = (h[0] + a) | 0; h[1] = (h[1] + b) | 0; h[2] = (h[2] + c) | 0; h[3] = (h[3] + d) | 0;
-    h[4] = (h[4] + e) | 0; h[5] = (h[5] + f) | 0; h[6] = (h[6] + g) | 0; h[7] = (h[7] + hh) | 0;
-  }
-  var out = [];
-  h.forEach(function (x) { out.push((x >>> 24) & 255, (x >>> 16) & 255, (x >>> 8) & 255, x & 255); });
-  return out;
-}
-function hex(bytes) {
-  return bytes.map(function (b) { return (b < 16 ? '0' : '') + b.toString(16); }).join('');
-}
-function sha256Hex(s) { return hex(sha256(utf8Bytes(String(s)))); }
-if (typeof module !== 'undefined' && module.exports) module.exports = { sha256Hex: sha256Hex }; else window.sha256Hex = sha256Hex;
-```
-
-</details>
+The client-side approach loads `converter.js` before the hook. The server-side Hog source carries the same mapping.
 
 <details>
 <summary>converter.js</summary>
@@ -656,11 +582,10 @@ function fromCdp(g) {
 
 // distinct_id becomes the app's user id after identify(); before that it equals $device_id.
 // identify() itself is sent while $user_state is still "anonymous", with the new id as distinct_id.
-function userIdOf(c, sha256Hex) {
+function userIdOf(c) {
   var identified = c.userState === 'identified' || c.name === '$identify' || (c.distinctId && c.deviceId && c.distinctId !== c.deviceId);
   if (!identified || !c.distinctId) return undefined;
-  var id = String(c.distinctId);
-  return id.indexOf('@') >= 0 ? sha256Hex(id.trim().toLowerCase()) : id.slice(0, 255);
+  return String(c.distinctId).slice(0, 255);
 }
 
 function spProduct(it, currency) {
@@ -749,24 +674,24 @@ function externalEvent(c) {
 }
 
 // The ladder. Returns null for events that are never forwarded.
-function ladder(c, sha256Hex) {
+function ladder(c) {
   if (DROP.indexOf(c.name) >= 0) return null;
   if (c.name === '$pageview') return { rung: 'page_view', entities: [] };
-  var uid = userIdOf(c, sha256Hex);
+  var uid = userIdOf(c);
   if (c.name === '$identify' && uid) return { rung: 'identify', event: sdj('identify', { id: uid }), entities: [] };
   var std = standardEvent(c);
   if (std) return { rung: std.event.schema === iglu('siteSearch') ? 'site_search' : 'ecommerce', event: std.event, entities: std.entities, plugin: std.plugin };
   return { rung: 'external_event', event: externalEvent(c), entities: [] };
 }
 
-// Cookieless mode has no $device_id and one shared distinct_id for every visitor, so no entity is sent;
+// Cookieless mode has no $device_id and one shared distinct_id for every visitor, so anonymous_id is null;
 // an identified distinct_id is a user id, never an anonymous one.
-function identity(c, sha256Hex) {
+function identity(c) {
   var anon = c.deviceId;
-  if (anon === undefined && c.distinctId !== '$posthog_cookieless' && !userIdOf(c, sha256Hex)) anon = c.distinctId;
+  if (anon === undefined && c.distinctId !== '$posthog_cookieless' && !userIdOf(c)) anon = c.distinctId;
   return sdj('identity', {
     tool: PH.tool, anonymous_id: anon === undefined || anon === null || anon === '' ? null : String(anon).slice(0, 255),
-    user_id: userIdOf(c, sha256Hex) || null,
+    user_id: userIdOf(c) || null,
     session_id: c.sessionId ? String(c.sessionId) : null, session_number: null, event_id: c.uuid ? String(c.uuid) : null,
     event_name: String(c.name).slice(0, 255),
   });

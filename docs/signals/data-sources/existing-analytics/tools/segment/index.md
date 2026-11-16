@@ -97,7 +97,6 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
      ['page', 'track', 'identify', 'group', 'alias', 'screen'].forEach((method) => {
        snowplowDestination[method] = async (ctx) => {
          const ev = ctx.event;
-         // An email-like userId is hashed with SHA-256 before it leaves the page.
          const uid = userIdOut(ev.userId);
          const ident = externalIdentity(ev, uid);
          const context = ident ? [ident] : [];
@@ -128,7 +127,7 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
 4. Publish the page change.
 
 :::caution[Segment cookies and a same-site Collector]
-If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends Segment's `ajs_anonymous_id`, `ajs_user_id` and `ajs_group_id` cookies with every request to it. `ajs_user_id` can hold an email address if that is what you pass to `identify`, in clear, even though the events themselves carry only its hash. Use a Collector on a different site, or confirm this is acceptable in your privacy review.
+If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends Segment's `ajs_anonymous_id`, `ajs_user_id` and `ajs_group_id` cookies with every request to it. `ajs_user_id` can hold an email address if that is what you pass to `identify`. Use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
 
 ## Set up the server-side approach
@@ -233,10 +232,10 @@ A product with no category gets an empty category. A product with no price or cu
 
 | Segment field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| `anonymousId` | Server-side: `domain_userid` and `network_userid`. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend. Not recommended on the public intervention endpoint; see the caution below |
+| `anonymousId` | Server-side: `domain_userid` and `network_userid`, replaced by its SHA-256 hash when longer than 128 characters. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend. Not recommended on the public intervention endpoint; see the caution below |
 | Snowplow cookie ID (client-side only) | `domain_userid` | Yes. A random ID set by the Snowplow tracker, safe on the public intervention endpoint |
 | Snowplow session ID (client-side only) | `domain_sessionid` | Yes, for session attributes |
-| `userId` | `user_id`, `external_identity.user_id` and `identify.id`. Hashed with SHA-256 when it contains `@` | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
+| `userId` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged, up to 255 characters. If it's an email address, the email reaches Snowplow | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
 | `groupId` | `external_event.group_id` | Server-side reads only, for account attributes |
 | `previousId` | `external_event.previous_id` | No. Recorded only |
 | `messageId` | `event_id` (server-side, as a UUID version 5) | No. Used to spot duplicates |
@@ -271,17 +270,16 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 1. **Browser calls only.** Calls from Segment's server and app libraries don't pass through analytics.js.
 2. **Blocked with analytics.js.** If an ad blocker or consent tool stops analytics.js from loading, the plugin doesn't run either.
 3. **Segment cookies can reach a same-site Collector.** See the caution under the setup steps.
-4. **The user ID is sent in clear unless it contains `@`.** A user ID with `@` is hashed with SHA-256, unsalted, which is still personal data.
-5. **`alias` loses the previous ID.** The call reaches the plugin without `previousId`, so `external_event.previous_id` is empty.
-6. **Two visitor IDs.** Snowplow's `domain_userid` differs from Segment's `anonymousId`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
-7. **Two extra scripts.** The page loads the Snowplow tracker and its ecommerce plugin.
+4. **`alias` loses the previous ID.** The call reaches the plugin without `previousId`, so `external_event.previous_id` is empty.
+5. **Two visitor IDs.** Snowplow's `domain_userid` differs from Segment's `anonymousId`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
+6. **Two extra scripts.** The page loads the Snowplow tracker and its ecommerce plugin.
 
 ### Server-side approach
 
 1. **No sessions or engagement.** Segment has no session ID, so `domain_sessionid` is empty and there are no page pings.
 2. **Delivery depends on Segment's queue.** Events arrive after Segment processes them. Don't rely on the server-side approach for reactions within a page view.
 3. **Function timeouts can duplicate events.** Segment stops a function after 5 seconds and retries it. If the Collector accepted the event but answered late, the event arrives twice with the same `event_id`. Signals counts it once, but both copies reach your pipeline.
-4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID (hashed when it contains `@`) and free-text search terms.
+4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
 5. **Server events without context.** Events that don't set `context.ip` or `context.userAgent` record the sender's IP address and the function runtime's user agent. Every event is recorded with platform `web`.
 6. **Usage is billed.** Function execution time beyond Segment's free allotment is billed by Segment.
 
@@ -430,11 +428,10 @@ function fitId(id) {
   return s.length > 128 ? hex(sha256(utf8Bytes(s))) : s;
 }
 
-// Some workspaces use the email as userId; hash it so it never reaches the pipeline in clear.
+// Sent as Segment holds it; user_id is 255 chars in atomic.events.
 function userIdOut(id) {
   if (id === undefined || id === null || id === '') return undefined;
-  var s = String(id);
-  return s.indexOf('@') > -1 ? hex(sha256(utf8Bytes(s.trim().toLowerCase()))) : s.slice(0, 255);
+  return String(id).slice(0, 255);
 }
 
 function epochMs(ts) {

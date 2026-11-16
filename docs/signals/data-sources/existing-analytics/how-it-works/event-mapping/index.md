@@ -108,7 +108,7 @@ Logins and identify calls become a Snowplow `identify` event that holds the user
 }
 ```
 
-When a user ID contains `@`, the Segment and PostHog adapters and the Adobe event forwarding converter send an unsalted SHA-256 hash of it instead, and the Adobe client-side adapters drop it. The RudderStack and Amplitude adapters send the user ID unchanged, so hash it in your tool first if your user IDs can be emails. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+Every adapter sends the user ID unchanged, as your tool holds it. If it's an email address, the email reaches Snowplow.
 
 Because traits are dropped, a plan set only in identify traits, or only on an Adobe login hit, doesn't reach Snowplow. Send it on a group call or a track event instead, where it fills the `plan` field of `external_event`.
 

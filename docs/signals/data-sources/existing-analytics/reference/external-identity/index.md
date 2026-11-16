@@ -26,7 +26,7 @@ content_type: reference
 | --- | --- | --- | --- |
 | `tool` | string, lower-case letters, digits, `_`, `.` and `-`, up to 64 characters | Yes | The tool that assigned the IDs, such as `segment`, `rudderstack`, `ga4`, `amplitude`, `adobe` or `posthog` |
 | `anonymous_id` | string or null, 1 to 255 characters | No | The tool's visitor or device ID |
-| `user_id` | string or null, up to 255 characters | No | The tool's user ID for a known user |
+| `user_id` | string or null, up to 255 characters | No | The tool's user ID for a known user, sent unchanged |
 | `session_id` | string or null, up to 255 characters | No | The tool's session ID, where it has one |
 | `session_number` | integer or null, 0 or more | No | The tool's count of the visitor's sessions, where it has one |
 | `event_id` | string or null, up to 255 characters | No | The event's own ID in the tool, such as a Segment `messageId` |
@@ -40,12 +40,12 @@ Only `tool` is required, so every event carries the entity. An event with no vis
 
 | Tool | `anonymous_id` | `user_id` | `session_id` | `session_number` | `event_id` |
 | --- | --- | --- | --- | --- | --- |
-| Segment | `anonymousId` | `userId`, hashed with SHA-256 if it looks like an email address | Empty: Segment has no session ID | Empty | `messageId` |
-| RudderStack | `anonymousId`, or `userId` when the event has no `anonymousId` | `userId`, unhashed | `context.sessionId`, where sent | Empty | `messageId` |
+| Segment | `anonymousId` | `userId` | Empty: Segment has no session ID | Empty | `messageId` |
+| RudderStack | `anonymousId`, or `userId` when the event has no `anonymousId` | `userId` | `context.sessionId`, where sent | Empty | `messageId` |
 | GA4 | GA client ID | GA `user_id` | GA session ID | GA session number | Empty: GA4 has no event ID |
-| Amplitude | `device_id` | `user_id`, unhashed | Amplitude `session_id` | Empty | `insert_id`, or `uuid` on the webhook when there's no `insert_id` |
+| Amplitude | `device_id` | `user_id` | Amplitude `session_id` | Empty | `insert_id`, or `uuid` on the webhook when there's no `insert_id` |
 | Adobe | ECID | The authenticated ID from `identityMap` or `setCustomerIDs` | Empty: Adobe computes visits on its servers | Empty | XDM `_id` on event forwarding, otherwise empty |
-| PostHog | `$device_id` | `distinct_id` after `identify`, hashed with SHA-256 if it contains `@` | `$session_id` | Empty | Event `uuid` |
+| PostHog | `$device_id` | `distinct_id` after `identify` | `$session_id` | Empty | Event `uuid` |
 
 `event_name` is the name your tool used, such as a Segment track event name, a GA4 event name, an Amplitude `event_type`, an Adobe XDM `eventType` or link name, or a PostHog event name. On client-side approaches, page pings carry the entity of the page view they belong to, including its event name.
 

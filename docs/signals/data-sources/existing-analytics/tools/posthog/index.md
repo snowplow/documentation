@@ -4,7 +4,7 @@ sidebar_label: "PostHog"
 sidebar_position: 60
 description: "Send the events you already capture with PostHog to Snowplow, from the browser or from a PostHog destination, and build Signals attributes on them without retagging."
 keywords: ["posthog", "posthog-js", "before_send", "hog", "http webhook destination", "external_event", "signals"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: how-to
 ---
 
@@ -24,7 +24,7 @@ You can send PostHog events to Snowplow in two ways, and add a third for history
 | Events covered | Browser events captured by posthog-js | Every event PostHog ingests: posthog-js, server SDKs, mobile SDKs and the capture API | Whatever the export holds |
 | Visitor key | Snowplow's own random cookie ID (`domain_userid`) | PostHog's `$device_id`, copied into `domain_userid` | Depends on the tables you read |
 | Sessions and engagement | Yes: Snowplow sessions, page pings, and time on page from `$pageleave` | Sessions from PostHog's `$session_id`, and time on page from `$pageleave`. No page pings | No |
-| Delivery | Straight from the browser to your Collector | Through PostHog's destination queue, then to your Collector. PostHog doesn't document a delivery time | Batch, from every 5 minutes to weekly, on your export schedule |
+| Delivery | Straight from the browser to your Collector | Through PostHog's destination queue, then to your Collector. PostHog doesn't document a delivery time. Expect several seconds per event | Batch, from every 5 minutes to weekly, on your export schedule |
 | Personal data path | Browser to Collector: IP address, user agent, page URLs, the user ID, search terms, and PostHog's `ph_` cookie if the Collector is on the same site | PostHog to Collector: IP address, user agent, page URL, referrer, title, the user ID and search terms. Person properties stay in PostHog | Stays in your warehouse. PostHog's events model includes person properties and the IP address |
 | Plan or license needed | No PostHog plan requirement known. `before_send` is in posthog-js 1.187.0 and later. Snowplow pipeline with Signals | PostHog's pricing page lists destinations with the first 10,000 trigger events a month free, then billed per event. Check that your plan includes the HTTP Webhook destination. Snowplow pipeline with Signals | A PostHog batch export, with the first 1,000,000 rows a month free according to PostHog's pricing page. A Signals warehouse connection |
 
@@ -47,7 +47,8 @@ You can run both. If you do, add a filter to the destination so it skips events 
 
 You need:
 
-- posthog-js 1.187.0 or later on your site for the client-side approach, which is when `before_send` was added. These steps use posthog-js 1.448.0 loaded from PostHog's snippet.
+- posthog-js 1.187.0 or later on your site for the client-side approach, which is when `before_send` was added. These steps work with posthog-js 1.448.0 and 1.450.0 loaded from PostHog's snippet.
+- Your PostHog project token for the client-side approach. In PostHog, go to **Settings** > **Project** > **General** and copy **Project token** under **Project token & ID**. PostHog also calls it the project API key.
 - Permission to create destinations in your PostHog project for the server-side approach.
 - A Snowplow Collector URL. For the server-side approach, the Collector must accept requests from PostHog's servers. Allow-list PostHog's published IP addresses if your Collector is behind a firewall.
 - Snowplow Signals enabled on your pipeline.
@@ -128,7 +129,7 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
    ```html
    <script>
    // PostHog's snippet from posthog.com/docs/libraries/js goes here.
-   posthog.init('<project_api_key>', {
+   posthog.init('<project_token>', {
      api_host: 'https://us.i.posthog.com',
      defaults: '2026-08-30',
      before_send: [snowplowBeforeSend],
@@ -145,7 +146,7 @@ The hook only sees events posthog-js is about to send. When the visitor has opte
 Session replay (`$snapshot`) and heatmap (`$$heatmap`) events also pass through `before_send`. The converter drops them, so replay DOM snapshots and mouse coordinates never reach Snowplow.
 
 :::caution[PostHog cookies and a same-site Collector]
-If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends PostHog's `ph_<project_api_key>_posthog` cookie with every request to it. posthog-js sets it on your parent domain by default (`cross_subdomain_cookie`). It holds the `$device_id`, the `distinct_id`, the session ID and the first URL the visitor landed on, with its UTM parameters. After `identify`, the `distinct_id` is your user ID, so if you identify users by email, the email address travels in clear in the cookie header of every Collector request, even though the events carry only its hash.
+If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends PostHog's `ph_<project_token>_posthog` cookie with every request to it. posthog-js sets it on your parent domain by default (`cross_subdomain_cookie`). It holds the `$device_id`, the `distinct_id`, the session ID and the first URL the visitor landed on, with its UTM parameters. After `identify`, the `distinct_id` is your user ID, so if you identify users by email, the email address travels in clear in the cookie header of every Collector request, even though the events carry only its hash.
 
 `credentials: 'omit'` in step 1 keeps the cookie off Collector requests. The browser then sends no cookies to the Collector, including the Collector's own cookie, so if you rely on `network_userid`, check how your Collector sets it before you use this option. `domain_userid` and `domain_sessionid` are unaffected. Otherwise, use a Collector on a different site, or confirm this is acceptable in your privacy review.
 :::
@@ -156,26 +157,29 @@ The server-side approach runs in your PostHog project. A destination built from 
 
 Don't use the stock HTTP Webhook template with only its JSON body edited. Body templating substitutes values but can't branch, so it can't choose between page views, ecommerce events and `external_event`. Its default body also sends the whole person, including every person property and any email.
 
-1. In PostHog, go to **Data pipelines**, click **+ New** > **Destination**, search for "Webhook" and click **+ Create**.
+1. In PostHog's left navigation, under **CDP**, open **Destinations**, then click **New destination** (or **Create your first destination** in an empty project). Search for "Webhook" and click **Create** on **HTTP Webhook**.
 
-2. Open **Edit source** and add four inputs:
+2. Click **Edit source code**, then clear the template's own inputs. The form lists **Webhook URL**, **Method**, **JSON Body**, **Headers**, **Secret headers**, **Signing secret** and **Log responses**. **Webhook URL** is required: while it is empty, **Test function** stops with "url: This field is required". Delete it: click its cog, then the red bin. The Hog source below ignores **Method**, **JSON Body**, **Headers**, **Secret headers** and **Signing secret**, so you can delete those too. Keep **Log responses**: it is the `debug` input the source reads.
+
+3. Add three inputs with **Add input variable**. Each new input arrives as `input_N` with type String. Click its cog, type the name in **Input variable name**, press Tab so the name takes effect, set the type, and click **Done**.
 
    | Input | Type | Value |
    |---|---|---|
    | `collector_url` | String | Your Collector URL, for example `https://collector.example.com`, with no trailing slash |
    | `app_id` | String | The app ID these events should carry |
    | `vendor` | String | `com.snowplowanalytics.snowplow`, or your own vendor if you registered copies of `external_event` and `external_identity` |
-   | `debug` | Boolean | On while you set up, to print each event's result in the function logs |
 
-3. Replace the source with the Hog code below.
+   Don't add a second `debug` input. The template's **Log responses** switch is already `debug`, and two inputs with the same name conflict. Turn **Log responses** on while you set up, so each event's result appears in the logs.
+
+4. Replace the source with the Hog code below.
 
    <details>
    <summary>Hog source for the Snowplow Collector</summary>
 
    ```text
-   // Snowplow collector destination for PostHog (paste into a new HTTP Webhook destination, Edit source).
+   // Snowplow collector destination for PostHog (paste into a new HTTP Webhook destination, Edit source code).
    // Inputs: collector_url (https://collector.example.com), app_id, vendor (com.snowplowanalytics.snowplow, or
-   // your own vendor if you registered copies of external_event and external_identity), debug (boolean).
+   // your own vendor if you registered copies of external_event and external_identity), debug (the template's Log responses).
    // Sends each event down the ladder: page_view, Snowplow ecommerce with every product, site_search,
    // identify with the id only, external_event for the rest; external_identity on every event.
    // Person properties, $set and $set_once are never read, so traits such as email stay in PostHog.
@@ -369,11 +373,15 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
 
    The ecommerce names near the top match the client-side converter. Edit both together if you add your own event names.
 
-4. In **Filters**, choose the events to forward. If you also run the client-side approach, add a property filter so `$lib` is not `web`.
+5. In **Filters**, choose the events to forward. If you also run the client-side approach, add a property filter so `$lib` is not `web`.
 
-5. Use the destination's test option to send a sample event, check the logs show `sent` with status 200, then enable the destination and turn `debug` off.
+6. Under **Testing**, click **Start testing**, then **Test function**. The test posts a sample `$pageview` to your Collector for real. The sample has no `$device_id`, so its `domain_userid` is the sample's `distinct_id`. The panel shows **Success** and the test invocation logs.
 
-Each event is posted in its own request. PostHog's event `uuid` becomes the Snowplow `event_id`, so a retried event keeps the same ID. PostHog's docs say it retries a failed destination call up to 3 times, depending on the error code. The destination throws on any Collector status of 400 or above, so PostHog treats it as failed.
+7. Click **Create & enable**. **Enable destination** is on by default, so the destination starts on save.
+
+8. Open the destination's **Invocations** tab. Each event has its own row with its status, attempts, duration and any error. Expand a row to see its logs: with **Log responses** on, a delivered event shows `sent`, the event name and `200`, and a dropped event shows `skipped`. Once the events look right, turn **Log responses** off and save.
+
+Each event is posted in its own request. PostHog's event `uuid` becomes the Snowplow `event_id`, so a retried event keeps the same ID. PostHog's docs say it retries a failed destination call up to 3 times, depending on the error code. The destination throws on any Collector status of 400 or above, so PostHog treats it as failed. A 4xx response, such as a 404 from a wrong Collector URL, fails the invocation without a retry, and the error shows as `Snowplow collector returned 404`. To find such failures, filter the **Invocations** tab by **Logged errors**, fix the cause, and click **Rerun** on each failed row. Events you don't rerun don't reach Snowplow.
 
 ## Set up warehouse history: batch exports
 
@@ -406,7 +414,7 @@ For a page view, a product view, an order with two products, a search and an `id
 - An `external_identity` entity on every event, with `tool` set to `other`, `anonymous_id` set to PostHog's `$device_id`, `session_id` set to PostHog's `$session_id`, and the original event name in `event_name`. `user_id` is empty until `identify`, then holds the user ID.
 - No `$snapshot` or `$$heatmap` events.
 - With the client-side approach, `page_ping` events, one `domain_sessionid` on every event in the visit, and PostHog's event time in `true_tstamp`.
-- With the server-side approach, `domain_userid` equal to `$device_id`, `domain_sessionid` equal to `$session_id`, and `user_ipaddress` set from PostHog's `$ip`.
+- With the server-side approach, `domain_userid` equal to `$device_id`, `domain_sessionid` equal to `$session_id`, `user_ipaddress` set from PostHog's `$ip`, the user agent from `$raw_user_agent`, and `page_title` on each `page_view`.
 - No failed events.
 
 To check that nothing reaches Snowplow without consent, call `posthog.opt_out_capturing()` and reload: the dashboard should show no new events. If your Collector is on the same site, check in your browser's developer tools that no `ph_` cookie appears in the `Cookie` header of requests to it.
@@ -490,7 +498,7 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 ### Server-side approach
 
 1. **No page pings.** Sessions work from `$session_id`, but engagement is limited to `$pageleave` durations.
-2. **Delivery depends on PostHog.** Events arrive after PostHog ingests them, and PostHog doesn't document a delivery time for destinations. Don't rely on the server-side approach for reactions within a page view.
+2. **Delivery depends on PostHog.** Events arrive after PostHog ingests them, and PostHog doesn't document a delivery time for destinations. Expect several seconds per event, and a minute or more for the first events after you create the destination or change its Collector. Don't rely on the server-side approach for reactions within a page view.
 3. **Billed per trigger event.** Beyond PostHog's free allotment, each event that triggers the destination is billed by PostHog.
 4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID (hashed when it contains `@`) and free-text search terms.
 5. **The visitor key is PostHog's `$device_id`.** See the caution under [Identifiers](#identifiers).

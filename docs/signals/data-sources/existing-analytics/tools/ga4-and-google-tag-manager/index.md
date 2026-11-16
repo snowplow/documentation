@@ -79,7 +79,7 @@ This approach adds Snowplow's tag templates to the GTM container that already se
 
    On every Snowplow tag you create below, select this variable: in a **Snowplow v4** tag under **Tracker Initialisation**, **Snowplow Settings**; in a **Snowplow Ecommerce** tag under **Snowplow Tracker and Ecommerce Plugin Settings**, **Tracker Settings**. The Ecommerce tag's option reads "Select a Snowplow v3 Settings variable", and the **Snowplow v4 Settings** variable works there.
 
-3. **Create the identity variable.** This Custom JavaScript variable reads the GA client ID and session from the `_ga` cookies and builds the `external_identity` entity, so you can join Snowplow data back to GA4 later. Name it `CJS - external_identity`. Replace the measurement ID with yours, and create a Data Layer Variable `DLV - user_id` for the `user_id` key your site pushes.
+3. **Create the identity variable.** This Custom JavaScript variable reads the GA client ID and session from the `_ga` cookies and builds the `external_identity` entity, so you can join Snowplow data back to GA4 later. When there is no `_ga` cookie, the entity is still sent, with `anonymous_id` set to null. Name it `CJS - external_identity`. Replace the measurement ID with yours, and create a Data Layer Variable `DLV - user_id` for the `user_id` key your site pushes.
 
    ```js
    function () {
@@ -89,10 +89,8 @@ This approach adds Snowplow's tag templates to the GTM container that already se
        var i = c.indexOf('=');
        if (i > 0) jar[c.slice(0, i)] = c.slice(i + 1);
      });
-     if (!jar._ga) return [];
-     var parts = jar._ga.split('.');
-     if (parts.length < 4) return [];
-     var data = { tool: 'ga4', anonymous_id: parts.slice(-2).join('.') };
+     var parts = jar._ga ? jar._ga.split('.') : [];
+     var data = { tool: 'ga4', anonymous_id: parts.length >= 4 ? parts.slice(-2).join('.') : null };
      var s = jar['_ga_' + MEASUREMENT_ID.replace(/^G-/, '')];
      var m = s && (/^GS2\.\d+\.s(\d+)\$o(\d+)/.exec(s) || /^GS1\.\d+\.(\d+)\.(\d+)/.exec(s));
      if (m) { data.session_id = m[1]; data.session_number = Number(m[2]); }
@@ -109,7 +107,7 @@ This approach adds Snowplow's tag templates to the GTM container that already se
 4. **Add page views.** Create a **Snowplow v4** tag with **Tag Type** set to **Page View**. Fire it on a **Window Loaded** trigger, and on a **History Change** trigger if your site changes pages with `history.pushState`.
 
    :::note
-   Use **Window Loaded**, not **All Pages**. On a first visit, `gtag.js` hasn't set the `_ga` cookie yet when **All Pages** fires, so the first page view would have no `external_identity`.
+   Use **Window Loaded**, not **All Pages**. On a first visit, `gtag.js` hasn't set the `_ga` cookie yet when **All Pages** fires, so the first page view's `external_identity` would have no GA client ID.
    :::
 
    To collect engagement, open **Page View Configuration** on the same tag and set **Enable Page Activity Tracking** to **Yes**. Under **Page Activity Tracking Settings**, set **Minimum Visit Length** and **Heartbeat Interval**, which the template requires and doesn't fill in for you. `5` and `5` seconds match the page script. This sends page pings, which Signals uses for time-engaged attributes.
@@ -186,7 +184,7 @@ This approach adds Snowplow's tag templates to the GTM container that already se
 
    For GA4 recommended events that have a Google schema, create a Self-describing Event tag with that Google schema instead. For `sign_up`, set **Schema URL** to `iglu:com.google.tag-manager.server-side/sign_up/jsonschema/1-0-0` with one parameter, `method`. For `generate_lead`, use `iglu:com.google.tag-manager.server-side/generate_lead/jsonschema/1-0-0` with `currency` and `value`. See [How GA4 events map to Snowplow](#how-ga4-events-map-to-snowplow).
 
-9. **Set consent.** The Snowplow templates have no consent field of their own. On each Snowplow tag, open **Advanced Settings**, then **Consent Settings**, and set the consent checks to match your consent management platform and Google Consent Mode setup. With analytics storage denied there is no `_ga` cookie, so `external_identity` is left off. A tag blocked by its consent checks isn't fired again after a later grant, so events from before the grant, such as the first page view, aren't sent.
+9. **Set consent.** The Snowplow templates have no consent field of their own. On each Snowplow tag, open **Advanced Settings**, then **Consent Settings**, and set the consent checks to match your consent management platform and Google Consent Mode setup. With analytics storage denied there is no `_ga` cookie, so `external_identity` has a null `anonymous_id`. A tag blocked by its consent checks isn't fired again after a later grant, so events from before the grant, such as the first page view, aren't sent.
 
 10. **Preview and publish.** Use GTM Preview to check that each tag fires once per event, then publish the container. Preview keeps the version it loaded: after you save a change, close the Tag Assistant tab and your site's debug tab, then select **Preview** again. The first page view of a Preview session has `tagassistant.google.com` as its referrer, so referrer attributes for that test visitor read it as a search referrer.
 
@@ -688,12 +686,13 @@ The page script loads this file before its own code. Save it on your site, for e
     return out;
   }
 
+  // Sent even without a GA client ID, with anonymous_id null, so user_id and event_name still arrive.
   function identityEntity(ids, eventName) {
-    if (!ids || !ids.clientId) return null;
+    ids = ids || {};
     return {
       schema: S.externalIdentity,
       data: clean({
-        tool: 'ga4', anonymous_id: String(ids.clientId), user_id: ids.userId ? String(ids.userId) : undefined,
+        tool: 'ga4', anonymous_id: ids.clientId ? String(ids.clientId) : null, user_id: ids.userId ? String(ids.userId) : undefined,
         session_id: ids.sessionId ? String(ids.sessionId) : undefined, session_number: ids.sessionNumber,
         event_name: eventName || undefined,
       }),

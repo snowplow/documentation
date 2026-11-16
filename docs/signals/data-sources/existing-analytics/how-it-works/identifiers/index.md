@@ -111,7 +111,7 @@ Use it to:
 - Compare counts between your tool and Snowplow by event name while you check the setup.
 - Keep history keyed on your tool's ID when you later move to native Snowplow tracking.
 
-On client-side approaches, an event can only carry the entity once your tool has set its ID. On the GTM tag template approach, the first page view tag fires on Window Loaded rather than All Pages, so that gtag has set the GA client ID. The GA4 page script waits for it for up to three seconds. The Adobe adapter waits for the ECID from alloy's first response, for up to five seconds, then sends without it. Page pings repeat the entity of the page view they belong to, including its event name.
+On client-side approaches, an event can only carry your tool's ID once your tool has set it; until then the entity is sent with a null `anonymous_id`. On the GTM tag template approach, the first page view tag fires on Window Loaded rather than All Pages, so that gtag has set the GA client ID. The GA4 page script waits for it for up to three seconds. The Adobe adapter waits for the ECID from alloy's first response, for up to five seconds, then sends without it. Page pings repeat the entity of the page view they belong to, including its event name.
 
 ### Calculate attributes on your tool's ID
 

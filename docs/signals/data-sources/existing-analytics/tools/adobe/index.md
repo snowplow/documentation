@@ -481,7 +481,7 @@ If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), yo
 
 5. Publish your Tags library, then [check it works](#check-it-works).
 
-These rules don't read the ECID, so their events carry no `external_identity` entity unless you also set `window.snowplowAdobe.vendorId` from your Adobe library, as in the Web SDK or AppMeasurement sections.
+These rules don't read the ECID, so their events' `external_identity` has a null `anonymous_id` unless you also set `window.snowplowAdobe.vendorId` from your Adobe library, as in the Web SDK or AppMeasurement sections.
 
 ## Set up the server-side approach: event forwarding
 

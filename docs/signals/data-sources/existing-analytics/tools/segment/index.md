@@ -251,7 +251,7 @@ The key each approach uses:
 - Server-side approach: Segment's `anonymousId`, which your page can read with `analytics.user().anonymousId()` and pass to your backend.
 - Client-side approach: the Snowplow tracker's `domain_userid`.
 
-Server events that carry only a `userId` have an empty `domain_userid`, a new `network_userid` on every event, and no `external_identity` entity, because that entity needs an anonymous ID. Read them by `user_id` from your servers.
+Server events that carry only a `userId` have an empty `domain_userid`, a new `network_userid` on every event, and an `external_identity` entity with a null `anonymous_id`. Read them by `user_id` from your servers.
 
 If your pipeline runs Snowplow Identities, stream attribute groups can be keyed on `snowplow_id`, so a visitor's browser events and their logged-in server events count towards the same attributes. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 

@@ -184,7 +184,7 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
    // identify with the id only, external_event for the rest; external_identity on every event.
    // Person properties, $set and $set_once are never read, so traits such as email stay in PostHog.
 
-   let TOOL := 'other' // external_event 1-0-0 has no 'posthog' in its tool enum
+   let TOOL := 'posthog'
    let E := 'iglu:com.snowplowanalytics.snowplow.ecommerce/'
    let V := f'iglu:{inputs.vendor ?? 'com.snowplowanalytics.snowplow'}/'
    let DROP := ['$snapshot', '$$heatmap', '$feature_flag_called', '$web_vitals', '$exception', '$$client_ingestion_warning', '$opt_in', '$set']
@@ -338,11 +338,9 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
        }
      }
 
-     let ctx := ents
-     if (anon != null) {
-       ctx := arrayPushBack(ents, sdj(f'{V}external_identity/jsonschema/1-0-0', {'tool': TOOL, 'anonymous_id': substring(toString(anon), 1, 255),
-         'user_id': uid, 'session_id': p.$session_id ?? null, 'session_number': null, 'event_name': substring(toString(name), 1, 255)}))
-     }
+     let ctx := arrayPushBack(ents, sdj(f'{V}external_identity/jsonschema/1-0-0', {'tool': TOOL,
+       'anonymous_id': anon != null ? substring(toString(anon), 1, 255) : null, 'user_id': uid, 'session_id': p.$session_id ?? null,
+       'session_number': null, 'event_id': ev.uuid ?? null, 'event_name': substring(toString(name), 1, 255)}))
      let t := toString(toUnixTimestampMilli(toDateTime(ev.timestamp)))
      let tp := compact({
        'e': isPv ? 'pv' : 'ue', 'p': 'web', 'tv': 'posthog-hog-0.1', 'aid': inputs.app_id, 'eid': ev.uuid,
@@ -411,7 +409,7 @@ For a page view, a product view, an order with two products, a search and an `id
 - A `site_search` event with the search term in `terms`.
 - An `identify` event whose only field is `id`. The email and other person properties are not there. If you identify by email, `id` is a 64-character SHA-256 hash.
 - `external_event` for everything else, such as `$groupidentify` (kind `group`, with `group_id` and `plan`), `$create_alias` (kind `alias`), `$autocapture`, `$rageclick`, `$pageleave` (with the seconds on the page in `value`) and your own events, with `name` set to the PostHog event name.
-- An `external_identity` entity on every event, with `tool` set to `other`, `anonymous_id` set to PostHog's `$device_id`, `session_id` set to PostHog's `$session_id`, and the original event name in `event_name`. `user_id` is empty until `identify`, then holds the user ID.
+- An `external_identity` entity on every event, with `tool` set to `posthog`, `anonymous_id` set to PostHog's `$device_id`, `session_id` set to PostHog's `$session_id`, and the original event name in `event_name`. `user_id` is empty until `identify`, then holds the user ID.
 - No `$snapshot` or `$$heatmap` events.
 - With the client-side approach, `page_ping` events, one `domain_sessionid` on every event in the visit, and PostHog's event time in `true_tstamp`.
 - With the server-side approach, `domain_userid` equal to `$device_id`, `domain_sessionid` equal to `$session_id`, `user_ipaddress` set from PostHog's `$ip`, the user agent from `$raw_user_agent`, and `page_title` on each `page_view`.
@@ -506,9 +504,8 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 ### Both approaches
 
 1. **Attributes only on declared fields.** Signals builds attributes only on properties a schema declares. Outside the ecommerce events, only `external_event`'s typed fields are kept. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
-2. **`tool` is `other`.** The `tool` field of `external_event` and `external_identity` has no `posthog` value. Use the app ID to tell PostHog events apart from other sources.
-3. **No user traits.** `identify` carries the user ID only, and person properties are never sent.
-4. **One product per attribute.** Every product in an order arrives as its own entity, but an attribute reads one product entity per event: the first, or the one at the index you set.
+2. **No user traits.** `identify` carries the user ID only, and person properties are never sent.
+3. **One product per attribute.** Every product in an order arrives as its own entity, but an attribute reads one product entity per event: the first, or the one at the index you set.
 
 ### Warehouse approach
 
@@ -600,7 +597,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = { sha256He
 // a Hog destination sees ({event: {uuid, event, distinct_id, properties, timestamp}, person}).
 
 var PH = {
-  tool: 'other', // external_event/external_identity 1-0-0 have no "posthog" in the tool enum
+  tool: 'posthog',
   tv: 'posthog-adapter-1.0', aid: 'posthog-adapter',
   vendor: 'com.snowplowanalytics.snowplow',
 };
@@ -767,10 +764,10 @@ function ladder(c, sha256Hex) {
 function identity(c, sha256Hex) {
   var anon = c.deviceId;
   if (anon === undefined && c.distinctId !== '$posthog_cookieless' && !userIdOf(c, sha256Hex)) anon = c.distinctId;
-  if (anon === undefined || anon === null || anon === '') return undefined;
   return sdj('identity', {
-    tool: PH.tool, anonymous_id: String(anon).slice(0, 255), user_id: userIdOf(c, sha256Hex) || null,
-    session_id: c.sessionId ? String(c.sessionId) : null, session_number: null,
+    tool: PH.tool, anonymous_id: anon === undefined || anon === null || anon === '' ? null : String(anon).slice(0, 255),
+    user_id: userIdOf(c, sha256Hex) || null,
+    session_id: c.sessionId ? String(c.sessionId) : null, session_number: null, event_id: c.uuid ? String(c.uuid) : null,
     event_name: String(c.name).slice(0, 255),
   });
 }

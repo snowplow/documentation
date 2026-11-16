@@ -4,7 +4,7 @@ sidebar_label: "Identifiers"
 sidebar_position: 20
 description: "Which ID becomes domain_userid on each approach, which keys are safe on the public intervention endpoint, and how to join and resolve identities across your tool and Snowplow."
 keywords: ["domain_userid", "attribute keys", "external_identity", "interventions", "snowplow_id", "identity resolution"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: concept
 ---
 
@@ -28,7 +28,7 @@ Amplitude also has a lighter client-side variant that posts each event straight 
 A few edge cases on server-side approaches:
 
 - **IDs longer than 128 characters** are replaced by their SHA-256 hash, because `domain_userid` and `network_userid` hold at most 128 characters. The original stays in `external_identity`.
-- **Events with only a user ID**, which server libraries often send, are handled differently by each adapter. The Segment adapter leaves `domain_userid` empty, sets a random `network_userid` and sends no `external_identity` entity, because that entity requires an anonymous ID; read these events by `user_id`. The RudderStack transformation falls back to the user ID, so the user ID becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`. That key is guessable, and holds an email in clear if your user IDs are emails.
+- **Events with only a user ID**, which server libraries often send, are handled differently by each adapter. The Segment adapter leaves `domain_userid` empty, sets a random `network_userid` and sends `external_identity` with a null `anonymous_id`; read these events by `user_id`. The RudderStack transformation falls back to the user ID, so the user ID becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`. That key is guessable, and holds an email in clear if your user IDs are emails.
 - **Server libraries accept any string** as an anonymous ID. A Segment server-side event with the anonymous ID `x` writes `x` into `domain_userid`. Check what your server sources send.
 
 ## Sessions

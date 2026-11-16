@@ -4,7 +4,7 @@ sidebar_label: "Event mapping"
 sidebar_position: 10
 description: "Every adapter maps each event to the first Snowplow event that fits: page view, ecommerce, site search, identify, a Google schema on GA4, or external_event."
 keywords: ["event mapping", "external_event", "snowplow_ecommerce_action", "site_search", "identify", "signals attributes"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: concept
 ---
 
@@ -156,7 +156,7 @@ Everything else becomes `external_event`. It has a fixed set of typed fields:
 | Field | Type | Holds |
 | --- | --- | --- |
 | `name` | string, required | The event name in your tool, such as `Signup Form Submitted`, `signup_form_submitted` or `[Amplitude] Form Submitted` |
-| `tool` | string, required | `segment`, `rudderstack`, `amplitude`, `mixpanel`, `ga4`, `adobe`, `heap`, `tealium` or `other` |
+| `tool` | string, required | Your tool's name in lower case, such as `segment`, `ga4` or `posthog` |
 | `kind` | string, required | `track`, `identify`, `group`, `alias`, `screen` or `page` |
 | `value` | number | A revenue, value, total or price property |
 | `currency` | string | A three-letter currency code |

@@ -4,7 +4,7 @@ sidebar_label: "Adobe"
 sidebar_position: 50
 description: "Copy the events your Adobe Web SDK, AppMeasurement or Adobe Client Data Layer already sends into Snowplow, so Signals can compute attributes without retagging."
 keywords: ["adobe analytics", "adobe experience platform", "web sdk", "appmeasurement", "event forwarding", "data feeds", "signals"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: how-to
 ---
 
@@ -116,12 +116,11 @@ All three load the same script. It starts the Snowplow tracker with the ecommerc
      // The ECID, as an external_identity entity. Adobe sends no session ID, so those fields stay null.
      function identity(eventName, uid) {
        var id = cfg.vendorId && cfg.vendorId();
-       if (!id) return [];
-       return [{ schema: IDENTITY, data: { tool: 'adobe', anonymous_id: String(id), user_id: uid || null,
+       return [{ schema: IDENTITY, data: { tool: 'adobe', anonymous_id: id ? String(id) : null, user_id: uid || null,
          session_id: null, session_number: null, event_name: eventName ? String(eventName).slice(0, 255) : null } }];
      }
      // On a first visit the ECID exists only after Adobe's first response, so events wait for it
-     // (up to 5 seconds) rather than go out without the external_identity entity.
+     // (up to 5 seconds) rather than go out without it in the external_identity entity.
      // A held event keeps the user ID it was sent with, not the one current at the flush.
      var held = [], timer = null;
      function emit(eventName, send) {
@@ -688,8 +687,8 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
      return { as: 'external', data: externalData(content, 'track') };
    }
 
-   function identityEntity(ecid, uid, eventName) {
-     return { schema: XDM2SP.schemas.identity, data: { tool: 'adobe', anonymous_id: String(ecid), user_id: uid || null, session_id: null, session_number: null, event_name: eventName ? String(eventName).slice(0, 255) : null } };
+   function identityEntity(ecid, uid, eventName, eventId) {
+     return { schema: XDM2SP.schemas.identity, data: { tool: 'adobe', anonymous_id: ecid ? String(ecid) : null, user_id: uid || null, session_id: null, session_number: null, event_id: eventId ? String(eventId).slice(0, 255) : null, event_name: eventName ? String(eventName).slice(0, 255) : null } };
    }
 
    // The same entities the Snowplow ecommerce plugin attaches: one product per item, then the
@@ -733,7 +732,7 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
      else if (c.as === 'identify') ue = { schema: XDM2SP.schemas.identify, data: { id: c.id } };
      else ue = { schema: XDM2SP.schemas.external, data: c.data };
      if (ue) { out.e = 'ue'; out.ue_pr = JSON.stringify({ schema: IGLU + '/unstruct_event/jsonschema/1-0-0', data: ue }); }
-     if (ctx.ecid) entities.push(identityEntity(ctx.ecid, uid, xdm.eventType));
+     entities.push(identityEntity(ctx.ecid, uid, xdm.eventType, xdm._id));
      if (entities.length) out.co = JSON.stringify({ schema: IGLU + '/contexts/jsonschema/1-0-1', data: entities });
      var clean = {};
      for (var key in out) if (out[key] !== undefined && out[key] !== null && out[key] !== '') clean[key] = String(out[key]);

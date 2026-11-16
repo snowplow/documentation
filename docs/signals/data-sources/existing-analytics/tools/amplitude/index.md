@@ -267,7 +267,7 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
    <#assign ev>{"schema":"iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0","data":${data}}</#assign>
    </#if>
    <#assign ue>{"schema":"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0","data":${ev}}</#assign>
-   <#assign co>{"schema":"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-1","data":[{"schema":"iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0","data":{"tool":"amplitude","anonymous_id":"${input.device_id?json_string}","user_id":<#if input.user_id??>"${input.user_id?json_string}"<#else>null</#if>,"session_id":<#if input.session_id?? && input.session_id gte 0>"${input.session_id?c}"<#else>null</#if>,"event_name":"${et?json_string}"}}${ents}]}</#assign>
+   <#assign co>{"schema":"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-1","data":[{"schema":"iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0","data":{"tool":"amplitude","anonymous_id":"${input.device_id?json_string}","event_id":"${(input["$insert_id"]!input.uuid)?json_string}","user_id":<#if input.user_id??>"${input.user_id?json_string}"<#else>null</#if>,"session_id":<#if input.session_id?? && input.session_id gte 0>"${input.session_id?c}"<#else>null</#if>,"event_name":"${et?json_string}"}}${ents}]}</#assign>
    {"schema":"iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4","data":[{
    "e":"<#if isPv>pv<#else>ue</#if>","p":"web","tv":"amplitude-webhook-0.2","aid":"my-app",
    "eid":"${input.uuid}",
@@ -701,8 +701,9 @@ function toSnowplow(c) {
 
 function identity(c, anon) {
   return sdj('com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0', compact({
-    tool: ADAPTER.vendor, anonymous_id: String(anon).slice(0, 255), user_id: c.userId ? String(c.userId).slice(0, 255) : null,
+    tool: ADAPTER.vendor, anonymous_id: anon ? String(anon).slice(0, 255) : null, user_id: c.userId ? String(c.userId).slice(0, 255) : null,
     session_id: c.sessionId !== undefined && c.sessionId !== null && c.sessionId >= 0 ? String(c.sessionId) : null,
+    event_id: c.insertId ? String(c.insertId).slice(0, 255) : null,
     event_name: c.eventType ? String(c.eventType).slice(0, 255) : null,
   }));
 }

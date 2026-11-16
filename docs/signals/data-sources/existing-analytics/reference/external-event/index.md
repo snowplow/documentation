@@ -4,7 +4,7 @@ sidebar_label: "external_event schema"
 sidebar_position: 10
 description: "Fields of the external_event schema, which carries events from other analytics tools that have no standard Snowplow schema."
 keywords: ["external_event", "schema", "iglu", "self-describing event", "segment", "ga4", "amplitude", "adobe", "rudderstack"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: reference
 ---
 
@@ -25,7 +25,7 @@ content_type: reference
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `name` | string, up to 255 characters | Yes | The event name in the source tool, such as `Signup Form Submitted`. For calls that aren't named events, the call type, such as `group` or `alias` |
-| `tool` | string, one of `segment`, `rudderstack`, `amplitude`, `mixpanel`, `ga4`, `adobe`, `heap`, `tealium`, `other` | Yes | The tool the event came from. Tools without their own value, such as PostHog, use `other` |
+| `tool` | string, lower-case letters, digits, `_`, `.` and `-`, up to 64 characters | Yes | The tool the event came from, such as `segment`, `rudderstack`, `ga4`, `amplitude`, `adobe` or `posthog` |
 | `kind` | string, one of `track`, `identify`, `group`, `alias`, `screen`, `page` | Yes | The kind of call in the source tool |
 | `value` | number or null | No | A monetary or numeric value on the event, such as revenue or price |
 | `currency` | string or null, three capital letters | No | The ISO 4217 currency code for `value`, such as `USD` |
@@ -44,7 +44,7 @@ Each adapter maps your tool's properties to these fields. As examples, the Segme
 
 | Field | Segment source | PostHog source |
 | --- | --- | --- |
-| `tool` | `segment` | `other` |
+| `tool` | `segment` | `posthog` |
 | `name` | `event` for track calls; otherwise the call type | The PostHog event name, such as `$pageleave` or `Signup Form Submitted` |
 | `kind` | The call type | `group` for `$groupidentify`, `alias` for `$create_alias`, `identify` for `$identify`, otherwise `track` |
 | `value` | The first of `revenue`, `value`, `total` and `price` | The first of `revenue`, `value`, `total` and `price`. On `$pageleave`, `$prev_pageview_duration`, the seconds the page was open |
@@ -119,21 +119,70 @@ When you need a property that isn't on this schema, track that event with a sche
 ```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "description": "An event first tracked by another tool and sent to Snowplow without retagging. Used only when no standard Snowplow schema fits the event.",
-  "self": {"vendor": "com.snowplowanalytics.snowplow", "name": "external_event", "format": "jsonschema", "version": "1-0-0"},
+  "description": "An event first tracked by another analytics tool and sent to Snowplow, for events that no more specific Snowplow schema describes",
+  "self": {
+    "vendor": "com.snowplowanalytics.snowplow",
+    "name": "external_event",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
   "type": "object",
   "properties": {
-    "name": {"type": "string", "maxLength": 255, "description": "The event name in the source tool"},
-    "tool": {"type": "string", "enum": ["segment", "rudderstack", "amplitude", "mixpanel", "ga4", "adobe", "heap", "tealium", "other"]},
-    "kind": {"type": "string", "enum": ["track", "identify", "group", "alias", "screen", "page"]},
-    "value": {"type": ["number", "null"]},
-    "currency": {"type": ["string", "null"], "pattern": "^[A-Z]{3}$"},
-    "item_id": {"type": ["string", "null"], "maxLength": 255},
-    "item_category": {"type": ["string", "null"], "maxLength": 255},
-    "search_term": {"type": ["string", "null"], "maxLength": 255},
-    "plan": {"type": ["string", "null"], "maxLength": 255},
-    "group_id": {"type": ["string", "null"], "maxLength": 255},
-    "previous_id": {"type": ["string", "null"], "maxLength": 255}
+    "name": {
+      "description": "The event name in the source tool",
+      "type": "string",
+      "maxLength": 255
+    },
+    "tool": {
+      "description": "The tool that first tracked the event, in lower case",
+      "type": "string",
+      "pattern": "^[a-z0-9_.-]+$",
+      "maxLength": 64
+    },
+    "kind": {
+      "description": "The type of call in the source tool",
+      "type": "string",
+      "enum": ["track", "identify", "group", "alias", "screen", "page"]
+    },
+    "value": {
+      "description": "A monetary or numeric value carried by the event",
+      "type": ["number", "null"]
+    },
+    "currency": {
+      "description": "ISO 4217 currency code for value",
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{3}$"
+    },
+    "item_id": {
+      "description": "Identifier of the item the event refers to",
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "item_category": {
+      "description": "Category of the item the event refers to",
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "search_term": {
+      "description": "Search term carried by the event",
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "plan": {
+      "description": "Plan or tier carried by the event",
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "group_id": {
+      "description": "Identifier of the group or account the event refers to",
+      "type": ["string", "null"],
+      "maxLength": 255
+    },
+    "previous_id": {
+      "description": "Previous user identifier, for alias calls",
+      "type": ["string", "null"],
+      "maxLength": 255
+    }
   },
   "required": ["name", "tool", "kind"],
   "additionalProperties": false

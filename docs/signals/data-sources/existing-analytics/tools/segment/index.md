@@ -607,13 +607,14 @@ function externalEvent(ev) {
   return { schema: IGLU.external, data: data };
 }
 
-// external_identity requires anonymous_id; a Segment event with only a userId gets no identity entity.
+// Every event gets the entity. A server-side call with only a userId has a null anonymous_id.
 function externalIdentity(ev, uid) {
-  if (ev.anonymousId === undefined || ev.anonymousId === null || ev.anonymousId === '') return undefined;
+  var anon = ev.anonymousId === undefined || ev.anonymousId === null || ev.anonymousId === '' ? null : String(ev.anonymousId).slice(0, 255);
   var type = String(ev.type || '').toLowerCase();
   return { schema: IGLU.identity, data: {
-    tool: ADAPTER.tool, anonymous_id: String(ev.anonymousId).slice(0, 255), user_id: uid || null,
+    tool: ADAPTER.tool, anonymous_id: anon, user_id: uid || null,
     session_id: null, session_number: null,
+    event_id: ev.messageId ? String(ev.messageId).slice(0, 255) : null,
     event_name: (type === 'track' ? String(pick(ev.event, 'track')) : type).slice(0, 255),
   } };
 }

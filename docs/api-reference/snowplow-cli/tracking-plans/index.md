@@ -134,7 +134,7 @@ Console sets the expected version as follows:
 * A change to the name, the event, or the entities, including their property rules and entity cardinality, raises the version by one
 * Any other change, such as a new description, keeps the same version
 
-Console counts versions per organization, so the versions in your files belong to the organization you validate against. If your pipeline publishes the same files to two organizations, the declared versions can match only one of them, and the check fails for the other.
+Console counts versions per organization.
 
 To declare versions and keep them correct, follow these steps.
 
@@ -142,7 +142,7 @@ To declare versions and keep them correct, follow these steps.
 
 ### Add the versions Console holds
 
-To start declaring versions in files that already exist, write the version Console holds into each event specification. Run `dp validate --fix` with credentials, against the organization you publish to:
+To start declaring versions in files that already exist, write the version Console holds into each event specification. Run `dp validate --fix` with credentials:
 
 ```bash
 snowplow-cli dp validate --fix
@@ -156,19 +156,19 @@ Commit the versions in a pull request of their own, with no other change. On tha
 
 ### Raise the version when you change an event specification
 
-When you make a structural change to an event specification, raise its `version` by one. For example, making the plan entity optional changes the entity cardinality, so `docs-capture signup` moves from version `0` to `1`:
+When you make a structural change to an event specification, raise its `version` by one. For example, making the plan entity optional changes the entity cardinality, so `Signup` moves from version `0` to `1`:
 
-```yaml title="./data-products/docs-capture-signup-flow.yaml"
+```yaml title="./data-products/signup-flow.yaml"
     eventSpecifications:
-        - resourceName: 947020bc-775c-473d-94cb-adf65501a001
-          name: docs-capture signup
+        - resourceName: 00000000-0000-4000-8000-000000000003
+          name: Signup
           version: 1
           description: Someone created an account and picked a plan
           event:
-            source: iglu:com.example.docs-capture/docs_capture_signup/jsonschema/1-0-0
+            source: iglu:com.example/signup/jsonschema/1-0-0
           entities:
             tracked:
-                - source: iglu:com.example.docs-capture/docs_capture_plan/jsonschema/1-0-0
+                - source: iglu:com.example/plan/jsonschema/1-0-0
                   minCardinality: 0
                   maxCardinality: 1
 ```
@@ -216,17 +216,17 @@ The command exits with status 0 when every declared version matches the version 
 
 The version checks print these errors and exit with status 1. Each error names the event specification it applies to.
 
-`docs-capture signup: version 0 needs a bump` means your files, or Console, hold a structural change that the declared version doesn't reflect. The message names what changed and the expected version, and the offline check, `dp validate`, `dp sync`, and `dp release` all print it. Update your branch from the base branch first, so your files hold every change already published from other branches. Then run the `--fix` command that the message names, and run the check again.
+`Signup: version 0 needs a bump` means your files, or Console, hold a structural change that the declared version doesn't reflect. The message names what changed and the expected version, and the offline check, `dp validate`, `dp sync`, and `dp release` all print it. Update your branch from the base branch first, so your files hold every change already published from other branches. Then run the `--fix` command that the message names, and run the check again.
 
 ```text
-12:23PM ERRO validating file=data-products/docs-capture-signup-flow.yaml path=/data/eventSpecifications/0
+3:32PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/0
   errors=
-  │ docs-capture signup: version 0 needs a bump
+  │ Signup: version 0 needs a bump
   │ changed: entities
   │ expected version: 1
   │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
 
-12:23PM ERRO validation failed 1 errors
+3:32PM ERRO validation failed 1 errors
 ```
 
 :::warning[Update your branch before running `--fix`]
@@ -235,23 +235,23 @@ If you run `--fix` on a branch that isn't up to date, it writes the expected ver
 
 :::
 
-`docs-capture github signup: version 2 does not match` means the declared version differs from the expected one for any other reason, such as a new event specification that doesn't start at `0`, which the message marks as `new event specification`. Run the `--fix` command that the message names.
+`Signup with GitHub: version 2 does not match` means the declared version differs from the expected one for any other reason, such as a new event specification that doesn't start at `0`, which the message marks as `new event specification`. Run the `--fix` command that the message names.
 
 ```text
-12:23PM ERRO validating file=data-products/docs-capture-signup-flow.yaml path=/data/eventSpecifications/2
+4:25PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/1
   errors=
-  │ docs-capture github signup: version 2 does not match
+  │ Signup with GitHub: version 2 does not match
   │ new event specification
   │ expected version: 0
   │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
 
-12:23PM ERRO validation failed 1 errors
+4:25PM ERRO validation failed 1 errors
 ```
 
 `Version mismatch on event spec` means someone made a structural change to the event specification in Console after `dp sync` or `dp release` checked your files, but before the command wrote them. Console refuses the write, because it would assign a different version from the one in your files, and the command writes nothing. Update your branch so your files hold that change, then run `snowplow-cli dp validate --fix` and run `dp sync` or `dp release` again. If you run `dp validate` first instead, it reports the change as a `needs a bump` error with the new expected version.
 
 ```text
-11:42AM ERRO bad response: {Version mismatch on event spec docs-capture signup id: 947020bc-775c-473d-94cb-adf65501a001: expected version 5, the platform would assign version 6}
+4:27PM ERRO bad response: {Version mismatch on event spec Signup id: 00000000-0000-4000-8000-000000000003: expected version 4, the platform would assign version 5}
 ```
 
 `could not find where the branch started from origin/develop` means the repository doesn't have the base ref, or doesn't have enough history to find where the branch started from it. The error happens in the shallow clone that `actions/checkout` creates by default. A clone without the base ref prints `fatal: Not a valid object name origin/develop`, and a clone that has the base ref but not the history prints `exit status 1:` with nothing after it. Fetch the full history, for example with `fetch-depth: 0` on `actions/checkout`, and make sure the base ref is fetched.

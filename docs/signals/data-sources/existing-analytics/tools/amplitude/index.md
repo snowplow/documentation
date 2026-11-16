@@ -12,55 +12,30 @@ Use the events your Amplitude implementation already sends in Signals, by copyin
 
 ## Choose an approach
 
-You can connect Amplitude in the browser, from Amplitude's servers, or later from your warehouse. The browser approach is a small destination plugin added next to `amplitude.init`. The server approach is a Webhook destination in your Amplitude project with a template that writes the Snowplow payload.
+Most sites should use the **client-side plugin with the Snowplow tracker**. It's a few lines of JavaScript next to `amplitude.init`, it reacts while the visitor is still on the page, and it gives you a random visitor key that is safe to use for interventions.
 
-| | Client-side: Browser SDK destination plugin | Server-side: Webhook destination | Warehouse: Amplitude export |
-|---|---|---|---|
-| What you change | A few lines of JavaScript next to `amplitude.init`, plus the Snowplow browser tracker | A Webhook destination and a FreeMarker template in Amplitude | An Amplitude export to your warehouse, and a warehouse connection in Signals |
-| Events covered | Browser events from Browser SDK 2 | Every source Amplitude streams: browser, server SDKs, HTTP API, mobile apps | Everything in the export, as history |
-| Visitor key | Snowplow's random `domain_userid` (Amplitude's `device_id` if you skip the tracker, see [Send without the Snowplow tracker](#send-without-the-snowplow-tracker)) | Amplitude's `device_id` | Amplitude's `device_id` or `user_id`, as a custom key |
-| Sessions and engagement | Snowplow sessions and page pings | A session key only when the event has an Amplitude `session_id`; no engagement time | None in real time |
-| Delivery | Sent from the page as each event happens | Amplitude's documented target is 60 seconds at p95, with retries | Batch, on your export schedule |
-| Personal data path | Browser to your Collector: `user_id`, IP address, user agent, page URLs, Snowplow cookies, and Amplitude's `AMP_` cookies when the Collector is on the same site | Amplitude to your Collector: only the fields the template writes (`user_id`, IP address, page URLs, `device_id`, typed fields) | Whatever the export holds, inside your warehouse |
-| Plan or license needed | No Amplitude plan requirement known; plugins are a Browser SDK 2 feature | Amplitude's Webhooks documentation lists Plus, Growth and Enterprise; check your plan | An Amplitude export, and a Signals deployment with a warehouse connection |
+Use one of the [other approaches](#other-approaches) when:
 
-Choose client-side if:
+| Approach | Use it when |
+|---|---|
+| [Send without the Snowplow tracker](#send-without-the-snowplow-tracker) | You can't add the Snowplow tracker to your pages |
+| [Webhook destination](#webhook-destination) | Important events come from your servers, mobile apps or the HTTP API, or you can't change the page code. Events arrive within about a minute |
+| [Warehouse history](#warehouse-history) | You want history, such as a lifetime order count, alongside a real-time approach |
 
-- Most of the behavior you want to act on happens on your website.
-- You want session and engagement attributes, or to react while the visitor is still on the page.
-- You want a visitor key that is safe to use for interventions.
-
-Choose server-side if:
-
-- Important events come from your servers, mobile apps or the HTTP API, not the browser.
-- You can't change the page code.
-- Attributes that update within a minute or so are fast enough.
-
-You can run both. Use the client-side plugin for web behavior, and send only server and app events through the webhook, so the same event isn't counted twice.
-
-Choose the warehouse export for history, for example lifetime order count, alongside one of the real-time approaches.
+You can run the plugin and the webhook together. Send only server and app events through the webhook, so the same event isn't counted twice.
 
 ## Before you begin
 
-- Amplitude Browser SDK 2 (`@amplitude/analytics-browser`). The destination plugin uses the Browser SDK 2 plugin API.
-- The Admin or Manager role on your Amplitude project, or someone who has it. Amplitude shows the project's API key, and lets you add sources and destinations, only to those roles. Other members see "You must be an Admin or Manager of this project" when they open a source under **Data** > **Sources** or a destination in **Data** > **Catalog**.
-- For the server-side approach, an Amplitude plan that includes the Webhook destination.
+- Amplitude Browser SDK 2 (`@amplitude/analytics-browser`).
+- The Admin or Manager role on your Amplitude project, or someone who has it. Only those roles can see the API key and add destinations.
 - A Snowplow Collector URL and Signals enabled on your pipeline.
-- For browser requests, a Collector that accepts cross-origin POST requests from your site's domain.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the converter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Amplitude. Check failed events after your first test.
 - Your Amplitude tracking plan, so you can match your event names to the ecommerce and search lists described in [How Amplitude events map to Snowplow](#how-amplitude-events-map-to-snowplow).
-
-:::note[The converter]
-The client-side code calls a converter, `AmplitudeSnowplow`, that turns each Amplitude event into Snowplow events. The client-side code doesn't run without it. Copy it from [Mapping code](#mapping-code) and load it on the page before the plugin runs. It provides `fromBrowser`, `toSnowplow`, `identity` and `toPayload`, and holds the ecommerce and search name lists.
-
-`ADAPTER.tool` is the tool name the converter puts in `external_event` and `external_identity`, so leave it as `amplitude`. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event: set your app ID after loading the converter with `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
-:::
 
 ## Set up the client-side approach
 
-The plugin receives every event the Browser SDK sends, converts it, and passes it to the Snowplow browser tracker. Amplitude keeps receiving its events as before.
+A destination plugin receives every event the Browser SDK sends, converts it, and passes it to the Snowplow browser tracker. Amplitude keeps receiving its events as before.
 
-1. Load the Snowplow JavaScript tracker with the [tag snippet](/docs/sources/web-trackers/quick-start-guide/index.md), and the [converter](#mapping-code), before the Amplitude SDK, and create a tracker. The plugin calls `window.snowplow`, which the tag snippet defines, so the npm package doesn't work here.
+1. Load the Snowplow JavaScript tracker with the [tag snippet](/docs/sources/web-trackers/quick-start-guide/index.md), and the [converter](#mapping-code), before the Amplitude SDK, and create a tracker. The plugin calls `window.snowplow`, which the tag snippet defines, so use the tag snippet rather than the npm package.
 
    ```javascript
    window.snowplow('newTracker', 'sp', 'https://collector.example.com', {
@@ -71,7 +46,7 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
    window.snowplow('enableActivityTracking', { minimumVisitLength: 30, heartbeatDelay: 10 });
    ```
 
-   Activity tracking sends page pings, which the engagement attributes need. Don't call `trackPageView` yourself; the plugin forwards Amplitude's page views. That needs the Browser SDK's page view autocapture, which is on by default. If you turn page views off in `autocapture` (or `defaultTracking` in older SDK versions), Snowplow receives no page views, and the visitor and session groups stay empty.
+   Activity tracking sends the page pings that engagement attributes need. Don't call `trackPageView` yourself: the plugin forwards Amplitude's page views, so keep page views on in the Browser SDK's `autocapture` option, as they are by default.
 
 2. Add the destination plugin before you call `amplitude.init`.
 
@@ -108,11 +83,9 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
    });
    ```
 
-   `timestamp` with `type: 'ttm'` sets the true timestamp to Amplitude's event time, so Snowplow records when the event happened rather than when the plugin ran.
+3. If your ecommerce or search event names differ from the defaults, add them to the converter's `ECOM` and `SEARCH` lists. Events whose names aren't in a list arrive as `external_event`.
 
-3. Add your own event names to the converter's ecommerce and search lists if they differ from the defaults. Events whose names aren't in a list arrive as `external_event`.
-
-4. Gate both tools on consent. The Snowplow tracker sets its own `_sp_id` and `_sp_ses` cookies as soon as `newTracker` runs, even while Amplitude is opted out, so create it only after the visitor consents. Add `optOut: true` to the `amplitude.init` call from step 2, and move the step 1 tracker code into a function that runs on consent and then opts Amplitude back in:
+4. Gate both tools on consent. The Snowplow tracker sets its own cookies as soon as `newTracker` runs, so create it only after the visitor consents. Add `optOut: true` to the `amplitude.init` call from step 2, and move the step 1 tracker code into a function that runs on consent and then opts Amplitude back in:
 
    ```javascript
    amplitude.add(snowplowDestination);
@@ -132,13 +105,37 @@ The plugin receives every event the Browser SDK sends, converts it, and passes i
    }
    ```
 
-   Call `onAnalyticsConsent` from your consent tool. While Amplitude is opted out, the plugin receives no events and nothing reaches your Collector. Events tracked before consent are dropped, not queued, so neither Amplitude nor Snowplow receives them. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+   Call `onAnalyticsConsent` from your consent tool. Events tracked before consent are dropped, so neither Amplitude nor Snowplow receives them. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
 
 5. Publish the change to your site.
 
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+
+## Check it works
+
+Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
+
+1. In Console, go to **Pipelines** and select your development environment.
+2. Copy its Collector endpoint, and point the Snowplow tracker at it. For the other approaches, use it as the plugin's or Webhook destination's URL, keeping the `/com.snowplowanalytics.snowplow/tp2` path.
+3. Send test events from your site.
+4. Select **Open dashboard** to see the good and failed events.
+
+In the dashboard, check that:
+
+- Every Amplitude event arrives once, with no failed events.
+- `[Amplitude] Page Viewed` arrives as a `page_view`.
+- Product views and orders arrive as `snowplow_ecommerce_action`, with one `product` entity per item and a `transaction` entity on orders.
+- Searches arrive as `site_search`, and identifies with a user ID arrive as `identify` with the ID only.
+- Every other event arrives as `external_event`, with `name` set to the Amplitude event type.
+- Every event carries an `external_identity` entity with `tool` set to `amplitude` and `anonymous_id` set to the Amplitude `device_id`.
+
+Once the events look right, point the tracker at your pipeline's Collector.
+
+## Other approaches
+
 ### Send without the Snowplow tracker
 
-The plugin can also post each converted event straight to the Collector, without loading the Snowplow tracker. Use it instead of the plugin above, not alongside it: with both, every event reaches Snowplow twice. It uses Amplitude's `device_id` as `domain_userid`, and builds `domain_sessionid` from the `device_id` and Amplitude's `session_id`, so you can read session attributes without Snowplow cookies.
+The plugin can also post each converted event straight to the Collector, without loading the Snowplow tracker. Use it instead of the plugin above, not alongside it, or every event reaches Snowplow twice. It uses Amplitude's `device_id` as `domain_userid`, and builds `domain_sessionid` from the `device_id` and Amplitude's `session_id`. Set your app ID after loading the converter with `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
 
 ```javascript
 const snowplowDirect = {
@@ -162,27 +159,16 @@ const snowplowDirect = {
 amplitude.add(snowplowDirect);
 ```
 
-:::caution[What you give up without the tracker]
-- **The visitor key can be set by a link.** The Browser SDK reads a `deviceId` query parameter. Opening a page with `?deviceId=<any value>` replaces the visitor's existing `device_id`, and the new value stays on later visits without the parameter. Anyone who gets a visitor to open a link then knows that visitor's `domain_userid` and `domain_sessionid`. Don't use either as a key on the public intervention endpoint in this mode.
-- **No retries.** The plugin doesn't wait for the Collector and always reports success to Amplitude. If the Collector is unreachable, the events are lost for Snowplow, and Amplitude still receives all of them.
-- **No engagement time.** There are no page pings.
-- **Cookies reach a same-site Collector.** `credentials: 'include'` sends your site's cookies, including Amplitude's `AMP_` cookies, to a Collector on the same site. The Collector must allow credentialed CORS requests from your domain.
-:::
+Without the tracker there are no page pings, no retries and no in-page interventions. A `?deviceId=` link can set Amplitude's `device_id`, so don't use `domain_userid` or `domain_sessionid` as a key on the public intervention endpoint in this mode.
 
-To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page). The plugin needs the tracker, so it doesn't work when you send without it.
+### Webhook destination
 
-## Set up the server-side approach
+Amplitude's Webhook destination can format each event with a FreeMarker template. The template below writes a Snowplow Collector payload, so Amplitude posts straight to your Collector with no service in between. It covers every source Amplitude streams, including server SDKs, the HTTP API and mobile apps. Check that your Amplitude plan includes the Webhook destination.
 
-Amplitude's Webhook destination can format each event with a FreeMarker template. The template below writes a Snowplow Collector payload, so Amplitude posts straight to your Collector with no service in between.
-
-:::note
-The template formats each event Amplitude sends, using the fields of Amplitude's documented event export format. It reads event times written as `2026-11-13 18:00:14`, with or without fractional seconds, or as `2026-11-13T18:00:14.123Z`. Prices, quantities and revenue sent as numeric strings, such as `"12.5"`, are read as numbers.
-:::
-
-1. In Amplitude, go to **Data** > **Catalog** and open the **Destinations** tab, then create a Webhook destination that sends events. You need the Admin or Manager role on the project. The catalog lists a **Webhook** card labeled **Cohorts** and a **Create New Destination** card labeled **Cohorts · Events · User Properties**; see Amplitude's [Webhooks](https://amplitude.com/docs/data/destination-catalog/webhooks) documentation for the one that streams events on your plan.
+1. In Amplitude, go to **Data** > **Catalog**, open the **Destinations** tab, and create a Webhook destination that sends events. See Amplitude's [Webhooks](https://amplitude.com/docs/data/destination-catalog/webhooks) documentation.
 2. Set the URL to your Collector's `tp2` endpoint, for example `https://collector.example.com/com.snowplowanalytics.snowplow/tp2`, and add the header `Content-Type: application/json`.
 3. Choose to send events, and select the events to forward. If you also run the client-side plugin, forward only events that don't come from the browser.
-4. Paste the template below as the event payload. Change `"aid":"my-app"` to the app ID you want these events to carry.
+4. Paste the template below as the event payload. Change `"aid":"my-app"` to the app ID you want these events to carry. If you added event names to the converter's lists, add them to the same lists near the top of the template.
 
    <details>
    <summary>FreeMarker template for the Snowplow Collector</summary>
@@ -288,125 +274,66 @@ The template formats each event Amplitude sends, using the fields of Amplitude's
 
    </details>
 
-   The ecommerce and search name lists near the top match the client-side converter. Edit both together if you add your own event names.
-
 5. Send test events from Amplitude, then check them as described in [Check it works](#check-it-works).
 
-## Set up the warehouse approach
+The webhook keys visitors on Amplitude's `device_id`, which a `?deviceId=` link can set, so read these attributes from your backend only. Amplitude's documented delivery target is 60 seconds at the 95th percentile, so don't rely on this approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 
-If you already export Amplitude events to a warehouse such as Snowflake or BigQuery, Signals can read pre-calculated attributes from a table there. Build a table of attributes per Amplitude `device_id` or `user_id` from the export, then configure it as described in [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md), with a custom attribute key for the Amplitude ID.
+### Warehouse history
 
-:::caution
-This approach needs a warehouse connection in Signals.
-:::
-
-## Check it works
-
-Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
-
-1. In Console, go to **Pipelines** and select your development environment.
-2. Copy its Collector endpoint.
-3. Point the Snowplow tracker or the plugin's Collector URL (client-side), or the Webhook destination's URL (server-side), at it. Keep the `/com.snowplowanalytics.snowplow/tp2` path on URLs that have one.
-4. Send test events from your site.
-5. Select **Open dashboard** to see the good and failed events.
-
-In the dashboard, check that:
-
-- Every Amplitude event arrives once, with no failed events.
-- `[Amplitude] Page Viewed` arrives as a `page_view`.
-- Product views and orders arrive as `snowplow_ecommerce_action`, with one `product` entity per item and a `transaction` entity on orders.
-- Searches arrive as `site_search`, and identifies with a user ID arrive as `identify` with the ID only.
-- Every other event arrives as `external_event`, with `name` set to the Amplitude event type.
-- Every event carries an `external_identity` entity with `tool` set to `amplitude` and `anonymous_id` set to the Amplitude `device_id`.
-- Apart from the user ID, no email address appears in the event.
-
-On the client-side approach, you can compare IDs in the browser console: `amplitude.getDeviceId()` returns the value in `external_identity.anonymous_id`, and `amplitude.getSessionId()` the value in `external_identity.session_id`.
-
-The plugin forwards every event to Snowplow even when Amplitude rejects it, for example when the API key is wrong. Amplitude then logs `Remote config client fetch failed with 403. Invalid API key` in the browser console, and its upload requests return 400. Clean events in Snowplow don't show that Amplitude is receiving them, so also check **Data** > **Sources** > **Ingestion Debugger** in Amplitude.
-
-Once the events look right, point the tracker, plugin or Webhook destination at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
+If you already export Amplitude events to a warehouse such as Snowflake or BigQuery, Signals can read pre-calculated attributes from a table there. Build a table of attributes per Amplitude `device_id` or `user_id` from the export, then configure it as described in [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md), with a custom attribute key for the Amplitude ID. This needs a warehouse connection in Signals, and attributes update on your sync schedule.
 
 ## How Amplitude events map to Snowplow
 
-Each event takes the first row that fits. The same mapping runs in the client-side converter and in the webhook template. See [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) for the reasoning.
+Each event takes the first row that fits. The same mapping runs in the converter and in the webhook template. See [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) for the reasoning.
 
 | Amplitude event or call | Snowplow event | Notes |
 |---|---|---|
-| `[Amplitude] Page Viewed` | `page_view` | Page title from `[Amplitude] Page Title`. URL from `[Amplitude] Page Location`, which keeps the query string |
+| `[Amplitude] Page Viewed` | `page_view` | Title from `[Amplitude] Page Title`, URL from `[Amplitude] Page Location` |
 | `track` with a product view name, such as `Product Viewed` | `snowplow_ecommerce_action`, type `product_view`, with a `product` entity | |
-| `track` with an add or remove name, such as `Product Added` | `snowplow_ecommerce_action`, type `add_to_cart` or `remove_from_cart` | A `cart` entity is added only when the event carries a cart total (`cart_total` or `cart_value`) |
-| `track` with a checkout name, such as `Checkout Started` | `snowplow_ecommerce_action`, type `checkout_step`, with a `checkout_step` entity | |
-| `track` with an order name, such as `Order Completed`, or `amplitude.revenue()` | `snowplow_ecommerce_action`, type `transaction`, with one `product` entity per item and a `transaction` entity | Every item in `products` is kept. `payment_method` is set to `unknown` when the event has none, because the schema requires it |
-| `track` with a refund name, or `amplitude.revenue()` with a negative amount | `snowplow_ecommerce_action`, type `refund`, with a `refund` entity | Needs an order ID and a currency |
-| `track` with a search name, such as `Products Searched`, and a `query` | `site_search` | `results_count` becomes `totalResults` |
+| `track` with an add or remove name, such as `Product Added` | `snowplow_ecommerce_action`, type `add_to_cart` or `remove_from_cart` | A `cart` entity when the event has `cart_total` or `cart_value` |
+| `track` with a checkout name, such as `Checkout Started` | `snowplow_ecommerce_action`, type `checkout_step` | |
+| `track` with an order name, such as `Order Completed`, or `amplitude.revenue()` | `snowplow_ecommerce_action`, type `transaction`, with `product` and `transaction` entities | `payment_method` is `unknown` when the event has none |
+| `track` with a refund name, or a negative `amplitude.revenue()` | `snowplow_ecommerce_action`, type `refund` | Needs an order ID and a currency |
+| `track` with a search name, such as `Products Searched`, and a `query` | `site_search` | |
 | `identify` after `setUserId` | `identify` | ID only. User properties, including any email, aren't sent |
-| `identify` with no user ID | `external_event`, kind `identify` | The SDK sends these for attribution updates |
-| `setGroup` and `groupIdentify` | `external_event`, kind `group` | `group_id` from the group value, `plan` from the group's `plan` property. A `plan` property on any other event also fills `plan` |
-| `session_start` and `[Amplitude] Viewport Content Updated`, which Browser SDK 2 autocapture sends | `external_event`, kind `track` | Both appear in event counts and recent event lists. Filter them by `name` in attributes where you don't want them |
-| Any other event, including autocaptured ones such as `[Amplitude] File Downloaded` and `[Amplitude] Form Submitted` | `external_event`, kind `track` | `name` is the Amplitude event type. Typed fields are filled from `price`, `currency`, `product_id`, `category`, `query` and `plan` |
+| `setGroup` and `groupIdentify` | `external_event`, kind `group` | `group_id` from the group value, `plan` from the group's `plan` property |
+| Any other event | `external_event`, kind `track` | `name` is the Amplitude event type. Typed fields from `price`, `currency`, `product_id`, `category`, `query` and `plan` |
 
-Ecommerce and search events are matched by name, ignoring case. The defaults cover common names; add yours to the lists. An ecommerce event falls back to `external_event` if any item lacks an ID, a price or a currency.
+Ecommerce and search events are matched by name, ignoring case. An ecommerce event falls back to `external_event` if any item lacks an ID, a price or a currency. Amplitude properties outside the typed fields aren't sent.
 
 ## Identifiers
 
 | Amplitude field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| `device_id` (random UUID in the `AMP_` cookie) | `external_identity.anonymous_id` on every approach. Also `domain_userid` and `network_userid` without the tracker and on the webhook. Without the tracker, a value longer than 128 characters is replaced by its SHA-256 hash | Not on the public intervention endpoint: a `?deviceId=` link can set it. Fine for server-side reads |
-| Snowplow's own visitor cookie (client-side with the tracker) | `domain_userid` | Yes. Random, set by the Snowplow tracker |
-| Snowplow's own session cookie (client-side with the tracker) | `domain_sessionid`, `domain_sessionidx` | Yes |
-| `session_id` (start time in milliseconds) | `external_identity.session_id`. Without the tracker and on the webhook, also part of `domain_sessionid`: the first 24 characters of `device_id` followed by `session_id` in hex | The raw value is guessable, never a key. The built `domain_sessionid` is only as safe as `device_id` |
-| `user_id` | `user_id`, `external_identity.user_id`, and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only, never on the public intervention endpoint |
-| `insert_id` | `event_id`, as a UUIDv5 of `insert_id`, without the tracker only | Not a key. Lets you deduplicate events |
+| Snowplow's own visitor and session cookies (with the tracker) | `domain_userid`, `domain_sessionid` | Yes, including on the public intervention endpoint |
+| `device_id` | `external_identity.anonymous_id`. Also `domain_userid` without the tracker and on the webhook | Server-side reads only: a `?deviceId=` link can set it |
+| `session_id` | `external_identity.session_id`. Without the tracker and on the webhook, also part of `domain_sessionid` | Never on its own: it's a timestamp |
+| `user_id` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged | Server-side reads only |
 | `groups` | `external_event.group_id` | As a custom key for account attributes, server-side reads only |
-| IP address | `user_ipaddress` | Not a key. Personal data |
 
-The Browser SDK has no alias call, so when `user_id` changes nothing links the old and new values. To combine a visitor's activity across devices and logins, key stream attribute groups on `snowplow_id` with Snowplow Identities. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
+To combine a visitor's activity across devices and logins, key stream attribute groups on `snowplow_id` with Snowplow Identities. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
-## Starter attribute groups
+## Troubleshooting
 
-The shared definitions in [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) work on Amplitude data, with these differences:
-
-- **Visitor activity** and **purchase intent** work on every approach. Order value comes from the `transaction` entity. Every item arrives as its own `product` entity, and a product attribute reads one entity per event: the first, or the one at the index you set.
-- **Session engagement** needs the client-side approach with the Snowplow tracker, because engagement time comes from page pings. Session counts without engagement time also work without the tracker, keyed on the built `domain_sessionid`.
-- **Account and plan:** `current_plan` takes the `plan` property from any event that has one, so a track event such as a signup with `plan: "pro"` replaces the plan from an earlier `groupIdentify`. `group_id` comes only from `identify` calls with groups and from `groupIdentify`. The Browser SDK doesn't attach groups to later events, so you can't count product views per account by `group_id` alone.
-- **Searches** (`searches_30d` and `search_terms` in purchase intent) read `site_search` events and their `terms`. Events that carry a `query` but aren't in the search list put it in `external_event.search_term` instead.
-
-## Limits
-
-Client-side:
-
-1. **Browser events only.** Events from Amplitude server SDKs, the HTTP API or mobile apps don't pass through the plugin.
-2. **Fields outside the schemas are dropped.** Signals only builds attributes on declared properties, so Amplitude properties outside the typed fields, such as `[Amplitude] Element Text`, aren't sent.
-3. **A second tracker and its cookies.** The recommended setup loads the Snowplow tracker, which sets `_sp_id` and `_sp_ses`. Without it you lose page pings, retries and a safe visitor key. With either variant, a Collector on the same site as your pages also receives Amplitude's `AMP_` cookies, which hold the `device_id`, `user_id`, session and campaign values.
-4. **Ad blockers may block the Collector.** It's a second host the browser has to reach.
-5. **Amplitude remote configuration can change what's sent.** The SDK fetches remote configuration from Amplitude, which can change autocapture without a code change.
-6. **Campaign fields depend on enrichment.** UTM parameters are in `page_url`, so `mkt_source` and the other campaign fields need the campaign attribution enrichment. Amplitude's own `utm_*` properties aren't mapped.
-
-Server-side:
-
-1. **The visitor key can be set by a link.** `domain_userid` is Amplitude's `device_id`, which a `?deviceId=` link can set on web visitors.
-2. **No browser details.** The webhook payload has no user agent, so device and browser attributes aren't available.
-3. **No engagement time, and sessions only where Amplitude has them.** Events with no `session_id` get no session key.
-4. **No cross-approach deduplication.** `event_id` is Amplitude's `uuid`, which differs from the client-side event ID. Don't forward the same events through both approaches.
-5. **Delivery depends on Amplitude.** Amplitude's documented target is 60 seconds at p95, and it retries failed requests. Signals' own processing comes on top. Don't rely on the server-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
-
-Warehouse:
-
-1. **Needs a warehouse connection** in Signals.
-2. **Batch only.** Attributes update on your export and sync schedule.
+- **No page views in Snowplow:** page view autocapture is off in the Browser SDK. Turn it back on, or no visitor or session attributes fill.
+- **Events reach Snowplow but not Amplitude:** the plugin forwards events even when Amplitude rejects them, for example with a wrong API key. Check **Data** > **Sources** > **Ingestion Debugger** in Amplitude.
+- **Every event arrives twice:** both the tracker plugin and the no-tracker plugin are loaded, or the webhook forwards browser events the plugin already sends. Keep one path per event.
+- **Server or app events are missing:** the client-side plugin sees browser events only. Add the Webhook destination for the rest.
+- **`plan` changes unexpectedly:** any event with a `plan` property updates it, so a later track event replaces the plan from `groupIdentify`.
 
 Where to go next:
 
-- [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. On the client-side approach with the tracker, `domain_userid` stays the same as you switch, so attributes carry over.
+- Create attributes from these events with the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
+- [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. With the tracker, `domain_userid` stays the same as you switch, so attributes carry over.
 - Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.
-- Compare with the other tools: [Segment](/docs/signals/data-sources/existing-analytics/tools/segment/index.md), [RudderStack](/docs/signals/data-sources/existing-analytics/tools/rudderstack/index.md), [Google Analytics 4 and Google Tag Manager](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md), [Adobe](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md).
 
 ## Mapping code
 
-Both client-side variants load this converter before the plugin. Save it on your site, for example as `/js/amplitude-snowplow.js`, and load it with a `<script>` tag before the Amplitude SDK. It adds only `window.AmplitudeSnowplow` to the page.
+The client-side plugin loads this converter, `window.AmplitudeSnowplow`. Save it on your site, for example as `/js/amplitude-snowplow.js`, and load it with a `<script>` tag before the Amplitude SDK.
 
-- To use your own event names, add them to the `ECOM` and `SEARCH` lists. The webhook template has the same lists, so edit both together.
-- When you send without the Snowplow tracker, set your app ID after loading the file: `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
+<details>
+<summary>amplitude-snowplow.js</summary>
+
 
 ```js
 // Amplitude event (Browser SDK 2 HTTP V2 shape, or the export/webhook shape) -> Snowplow tracker payload.
@@ -745,3 +672,5 @@ if (typeof module !== 'undefined' && module.exports) module.exports = AmplitudeS
 else root.AmplitudeSnowplow = AmplitudeSnowplow;
 })(typeof window !== 'undefined' ? window : this);
 ```
+
+</details>

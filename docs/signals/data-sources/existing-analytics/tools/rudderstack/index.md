@@ -12,53 +12,28 @@ Use the `page`, `track`, `identify`, `group` and `alias` calls you already make 
 
 ## Choose an approach
 
-You can send RudderStack events to Snowplow in two ways, and add a third for history later.
+Most sites should use the **client-side approach**: a custom device mode integration in the RudderStack JavaScript SDK copies each call into the Snowplow JavaScript tracker on the same page. It gives you sessions, page pings and a random visitor ID that is safe for interventions in the page, and the visitor ID stays the same if you later move to native tracking.
 
-- **Client-side:** a custom device mode integration in the RudderStack JavaScript SDK copies each call into the Snowplow JavaScript tracker, which runs on the same page.
-- **Server-side:** a transformation in your RudderStack workspace converts each event and a Webhook destination posts it to your Snowplow Collector. If you can't use transformations, the HTTP Webhook destination can do the same with field mappings and no code.
-- **Warehouse:** RudderStack's warehouse destinations give you history for batch attributes.
+| Approach | Use it when |
+|---|---|
+| [Client-side: custom device mode integration](#set-up-the-client-side-approach) | You can add a few lines to the page where the RudderStack SDK loads |
+| [Server-side: transformation and Webhook destination](#server-side-transformation-and-webhook-destination) | You need events from RudderStack's server or mobile SDKs, or you can't change the page. No sessions, and events arrive seconds later |
+| [Server-side without code: HTTP Webhook mappings](#server-side-without-code-http-webhook-mappings) | As above, but your workspace can't use transformations |
+| [Warehouse history](#warehouse-history) | You want batch attributes from the RudderStack data already in your warehouse |
 
-| | Client-side: custom device mode integration | Server-side: transformation and Webhook destination | Warehouse: RudderStack warehouse destination |
-|---|---|---|---|
-| What you change | A few lines in the page where the RudderStack SDK loads, the Snowplow tracker script, and a Custom Device Mode destination in your workspace | A transformation and a Webhook destination in your RudderStack workspace. No page change | A warehouse connection in Signals |
-| Events covered | Browser calls made through the RudderStack JavaScript SDK | Every event your connected RudderStack sources send: browser, server and app SDKs | Whatever RudderStack has loaded into your warehouse |
-| Visitor key | Snowplow's own random cookie ID (`domain_userid`) | RudderStack's `anonymousId`, copied into `domain_userid` | Depends on the tables you read |
-| Sessions and engagement | Yes: Snowplow sessions, page pings, scroll depth | No Snowplow sessions or page pings. RudderStack's session ID is kept for reference only | No |
-| Delivery | Straight from the browser to your Collector | Through RudderStack's processing and router queues, then to your Collector. Expect seconds, not milliseconds | Batch, on your warehouse sync schedule |
-| Personal data path | Browser to Collector: IP address, user agent, page URLs, the user ID, and RudderStack's own cookies if the Collector is on the same site | RudderStack to Collector: IP address, user agent, page URL, referrer, title, the user ID and search terms. Traits stay in RudderStack | Stays in your warehouse |
-| Plan or license needed | A Custom Device Mode destination in RudderStack, which RudderStack documents as generally available. Snowplow pipeline with Signals | RudderStack transformations, which RudderStack lists on its free plan (up to 5 JavaScript transformations), Growth and Enterprise. Snowplow pipeline with Signals | A RudderStack warehouse destination. A Signals warehouse connection |
-
-Choose client-side if:
-
-- You want session or engagement attributes, such as pages per session or seconds engaged.
-- You want the quickest reaction to what a visitor does, for interventions in the page.
-- You plan to move to native Snowplow tracking later, because the visitor ID stays the same when you do.
-
-Choose server-side if:
-
-- You need events from RudderStack's server or mobile SDKs, not only the browser.
-- You can't change the page, or you want the setup to live in your RudderStack workspace.
-- Visitor and account attributes are enough, and a delay of seconds is acceptable.
-
-You can run both. If you do, connect the server-side destination only to your server and app sources, so browser events don't arrive twice under two visitor keys. Giving each approach its own app ID makes the split easy to check.
+You can run client-side and server-side together. Connect the server-side destination only to your server and app sources, so browser events don't arrive twice under two visitor keys.
 
 ## Before you begin
 
 You need:
 
-- The RudderStack JavaScript SDK v3 (`@rudderstack/analytics-js`) on your site for the client-side approach. Custom device mode integrations need version 3.23.0 or later. Your loading snippet must list `addCustomIntegration` among its methods; older snippets don't, so copy a current one from your source's **Setup** tab if yours lacks it.
-- Permission to create transformations and destinations in your RudderStack workspace for the server-side approach.
-- A Snowplow Collector URL that RudderStack can reach. Allow-list RudderStack's outbound IP addresses if your Collector is behind a firewall.
-- Snowplow Signals enabled on your pipeline.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in RudderStack. Check failed events after your first test.
-
-Check your RudderStack ecommerce events use the ecommerce spec names (`Product Viewed`, `Order Completed` and so on) with a price and a currency. RudderStack shares these names with Segment's v2 spec. Events with other names, or without a currency, become generic `external_event` events instead of Snowplow ecommerce events. See [How RudderStack events map to Snowplow](#how-rudderstack-events-map-to-snowplow).
+- A Snowplow Collector URL for a pipeline with Signals enabled.
+- The RudderStack JavaScript SDK v3 (`@rudderstack/analytics-js`) 3.23.0 or later on your site, loaded with a snippet that lists `addCustomIntegration` among its methods. If yours doesn't, copy a current snippet from your source's **Setup** tab.
+- RudderStack ecommerce events that use the ecommerce spec names (`Product Viewed`, `Order Completed` and so on) with a price and a currency. Other events become generic `external_event` events. See [How RudderStack events map to Snowplow](#how-rudderstack-events-map-to-snowplow).
 
 ## Set up the client-side approach
 
-The client-side approach loads the Snowplow JavaScript tracker next to the RudderStack SDK, then registers a custom device mode integration. RudderStack hands every call to the integration in the browser, and the integration replays it into the Snowplow tracker.
-
-1. In your RudderStack workspace, add a **Custom Device Mode** destination and connect it to your JavaScript source. Copy its destination ID. The SDK only forwards events to a custom integration whose ID matches a Custom Device Mode destination in your source's configuration. With any other ID, the SDK logs an error and nothing reaches Snowplow.
+1. In your RudderStack workspace, add a **Custom Device Mode** destination, connect it to your JavaScript source and copy its destination ID.
 
 2. Load the Snowplow tracker and create a tracker that points at your Collector. Put this after the RudderStack snippet.
 
@@ -78,9 +53,11 @@ The client-side approach loads the Snowplow JavaScript tracker next to the Rudde
 
    Replace `https://collector.example.com` with your Collector URL and `my-site` with your app ID. Activity tracking sends the page pings that engagement attributes need.
 
-3. Add the [mapping code](#mapping-code) to the page, except `toTrackerEvent`, `toPayload`, `transformEvent` and the hashing helpers `utf8Bytes`, `padBlocks`, `rotl`, `rotr`, `sha1`, `K256`, `sha256`, `hex`, `uuidv5` and `fitId`. Keep everything else. The integration below uses its `ladder` function, which returns the Snowplow event and entities for each call.
+   If your Collector is on the same site as your pages, the browser also sends RudderStack's `rl_*` cookies to it, and these can carry an email address from your traits. To keep them off Collector requests, add `credentials: 'omit'` to the `newTracker` options, or use a Collector on a different site.
 
-4. Register the integration. Put this in the page source straight after steps 2 and 3, not in a `rudderanalytics.ready()` callback or a tag that fires later. The SDK only accepts `addCustomIntegration` before it has finished loading; after that it logs `Cannot add custom integration ... after the SDK is loaded` and ignores the integration.
+3. Add the [mapping code](#mapping-code) to the page, except `toTrackerEvent`, `toPayload`, `transformEvent` and the hashing helpers `utf8Bytes`, `padBlocks`, `rotl`, `rotr`, `sha1`, `K256`, `sha256`, `hex`, `uuidv5` and `fitId`. The integration below uses its `ladder` function.
+
+4. Register the integration straight after steps 2 and 3 in the page source, not in a `rudderanalytics.ready()` callback or a tag that fires later. The SDK ignores integrations added after it has loaded.
 
    ```html
    <script>
@@ -125,27 +102,39 @@ The client-side approach loads the Snowplow JavaScript tracker next to the Rudde
    </script>
    ```
 
-   Replace `<destination_id>` with the ID from step 1. Ecommerce calls are sent as the same `snowplow_ecommerce_action` event and entities that the Snowplow ecommerce plugin produces, through `trackSelfDescribingEvent`, so this approach doesn't need the ecommerce plugin.
-
-   The SDK checks `isReady` every 100 milliseconds for up to 11 seconds. Calls made before it returns `true`, including calls made before the SDK itself has loaded, are queued and handed to the integration once it is ready. If it isn't ready within 11 seconds, the SDK drops the integration for that page view and nothing reaches Snowplow. `rudderanalytics.ready()` callbacks wait for the integration, so a slow `isReady` delays them too.
+   Replace `<destination_id>` with the ID from step 1.
 
 5. Publish the page change.
 
-:::caution[RudderStack cookies and a same-site Collector]
-If your Collector is on the same site as your pages, for example `collector.example.com` serving `www.example.com`, the browser sends RudderStack's cookies with every request to it: `rl_anonymous_id`, `rl_user_id`, `rl_trait`, `rl_group_id`, `rl_group_trait`, `rl_session` and `rl_page_init_referrer`. Their values are base64-encoded, which is not encryption, so `rl_trait` and `rl_group_trait` carry any email address you pass in `identify` or `group` traits. The email doesn't reach the Snowplow events, but it is in the request headers your Collector receives.
-
-To keep these cookies off Collector requests, add `credentials: 'omit'` to the `newTracker` options in step 2. The browser then sends no cookies to the Collector, including the Collector's own cookie, so `network_userid` changes on every request. `domain_userid` and `domain_sessionid` are unaffected. Otherwise, use a Collector on a different site, or confirm this is acceptable in your privacy review.
-:::
-
 To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
 
-## Set up the server-side approach
+## Check it works
 
-The server-side approach runs in your RudderStack workspace. A JavaScript transformation turns each RudderStack event into one Snowplow tracker request, and a Webhook destination posts the result to your Collector. RudderStack retries failed deliveries.
+Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
 
-1. In your RudderStack workspace, create a JavaScript transformation and paste the [mapping code](#mapping-code). It has no imports, so it runs in RudderStack's transformation sandbox as it is. Set `aid` in `CONFIG` to your app ID.
+1. In Console, go to **Pipelines**, select your development environment and copy its Collector endpoint.
+2. Point the Snowplow tracker (or the Webhook destination's URL, keeping its path) at it.
+3. Send a few calls from a test page.
+4. Select **Open dashboard** to see the good and failed events.
 
-   The entry point is short:
+For a page view, a product view, an order and an `identify` call, you should see:
+
+- A `page_view` for each `page` call.
+- `snowplow_ecommerce_action` events of type `product_view` and `transaction`, with `product` and `transaction` entities.
+- An `identify` event whose only field is `id`.
+- An `external_identity` entity on every event, with `tool` set to `rudderstack` and the original event name in `event_name`.
+- On the client-side approach, `page_ping` events and one `domain_sessionid` across the visit.
+- No failed events. The Collector accepts events before they are validated, so a failed event shows here, not in RudderStack.
+
+Once the events look right, point the tracker or the destination at your pipeline's Collector, then create your [attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) and an [intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
+
+## Other approaches
+
+The server-side approaches run in your RudderStack workspace and cover RudderStack's server and mobile SDKs too. RudderStack's `anonymousId` becomes `domain_userid`, so read those attributes from your backend, not the public intervention endpoint. There are no sessions or page pings, and events arrive seconds after the call. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). If your Collector is behind a firewall, allow RudderStack's outbound IP addresses.
+
+### Server-side: transformation and Webhook destination
+
+1. Create a JavaScript transformation and paste the [mapping code](#mapping-code). Set `aid` in `CONFIG` to your app ID. The entry point is:
 
    ```js
    export function transformEvent(event, metadata) {
@@ -153,32 +142,19 @@ The server-side approach runs in your RudderStack workspace. A JavaScript transf
    }
    ```
 
-   `toPayload` maps the event and wraps it as a Snowplow `payload_data` body. Each event gets a Snowplow `event_id` derived from RudderStack's `messageId` (a UUID version 5), so a retried event keeps the same ID and Signals counts it once.
+   Each event's `event_id` is derived from RudderStack's `messageId`, so a retried event counts once in Signals.
 
-   The full code is in [Mapping code](#mapping-code) at the end of this page.
-
-2. Add a **Webhook** destination with these settings:
-
-   - **Webhook URL:** `https://collector.example.com/com.snowplowanalytics.snowplow/tp2`
-   - **Method:** `POST`
-
+2. Add a **Webhook** destination with **Webhook URL** `https://collector.example.com/com.snowplowanalytics.snowplow/tp2` and **Method** `POST`.
 3. Connect the transformation to the Webhook destination.
+4. Connect the destination to the sources you want in Snowplow, and enable it.
 
-4. Connect the destination to the sources whose events you want in Snowplow, such as your website source and any server sources.
+When you change the transformation, publish it as a new version.
 
-5. Enable the destination.
+### Server-side without code: HTTP Webhook mappings
 
-The Webhook destination sends one event per request, with the transformation's output as the body.
+If your workspace can't use transformations, the **HTTP Webhook** destination can build the Collector request from field mappings.
 
-:::caution
-RudderStack caches transformation code, for 24 hours by default on a self-hosted rudder-transformer. Publish each change as a new transformation version.
-:::
-
-### No-code alternative: HTTP Webhook mappings
-
-If your workspace can't use transformations, the **HTTP Webhook** destination can build the Collector request from field mappings. Each mapping sets one query parameter of Snowplow's `GET /i` endpoint from an expression on the RudderStack event. The mapping engine accepts conditions, `??`, `Date.parse`, `JSON.stringify`, `.map` and `.reduce`, so it can follow the whole event ladder, including one product entity per product.
-
-1. Add an **HTTP Webhook** destination with URL `https://collector.example.com/i`, method `GET`, no authentication and batching off.
+1. Add an **HTTP Webhook** destination with URL `https://collector.example.com/i`, method `GET`, no authentication and batching off. Use the query parameter mappings, not the JSONata body template.
 
 2. Add these query parameter mappings:
 
@@ -202,7 +178,7 @@ If your workspace can't use transformations, the **HTTP Webhook** destination ca
    | `ue_pr` | See step 3 |
    | `co` | See step 3 |
 
-3. Add the `ue_pr` and `co` mappings. Each value is one complete expression with nothing to fill in, so copy it exactly as it is.
+3. Add the `ue_pr` and `co` mappings. Copy each value exactly as it is.
 
    <details>
    <summary><code>ue_pr</code> value</summary>
@@ -222,41 +198,11 @@ If your workspace can't use transformations, the **HTTP Webhook** destination ca
 
    </details>
 
-   `ue_pr` holds the event: `identify`, `site_search`, the ecommerce action, or `external_event` for everything else. Page views have no `ue_pr`. `co` holds the entities: one `product` entity per item, the `cart`, `checkout_step`, `transaction` or `refund` entity for ecommerce actions, and `external_identity` on every event.
+The mappings send `messageId` as the event ID, which Snowplow requires to be a UUID. The RudderStack JavaScript SDK sends one. For sources whose `messageId` may not be a UUID, use the transformation instead.
 
-:::caution[HTTP Webhook mappings]
-- Wrap numbers you put in a query parameter in `String()`. Without it, timestamps are sent as `1.794478733726e+12` and fail.
-- A second `/` in one expression is read as the start of a regular expression. To round, use `Number(x.toFixed(2))` rather than dividing.
-- The ecommerce rung needs a currency on every event, so a `Checkout Step Completed` without one becomes `external_event` here but `checkout_step` with the transformation.
-- These mappings set no tracker version, so `v_tracker` is empty on every event. The pipeline accepts this.
-- `eid` is the raw `messageId`, and Snowplow requires it to be a UUID. The RudderStack JavaScript SDK sends a UUID. For sources whose `messageId` may not be one, use the transformation, which derives a UUID version 5 from any `messageId`.
-- RudderStack has a second version of this destination that builds the body from a JSONata template. Its template language has no conditions or string functions, so it can only map page views. Use the query parameter mappings.
-:::
+### Warehouse history
 
-## Check it works
-
-Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
-
-1. In Console, go to **Pipelines** and select your development environment.
-2. Copy its Collector endpoint.
-3. Point the Snowplow tracker (client-side) or the Webhook destination's URL (server-side) at it. Keep the path after the host, such as `/com.snowplowanalytics.snowplow/tp2`.
-4. Send a few calls from a test page.
-5. Select **Open dashboard** to see the good and failed events.
-
-For a page view, a product view, an order with two products and an `identify` call, you should see:
-
-- A native `page_view` for each `page` call.
-- A `snowplow_ecommerce_action` event of type `product_view` with one `product` entity.
-- A `snowplow_ecommerce_action` event of type `transaction` with one `product` entity per product and a `transaction` entity whose `total_quantity` counts every item.
-- An `identify` event whose only field is `id`. The email and other traits are not there.
-- An `external_identity` entity on every event, with `tool` set to `rudderstack`, RudderStack's `anonymousId`, its session ID and the original event name in `event_name`.
-- With the server-side approach, `domain_userid` equal to RudderStack's `anonymousId`.
-- With the client-side approach, `page_ping` events and the same `domain_sessionid` on every event in the visit. Page pings carry the `external_identity` entity of the page view they follow.
-- No failed events.
-
-Once the events look right, point the tracker or the Webhook destination at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
-
-Check failed events in your pipeline as well as RudderStack's delivery status. The Collector accepts events before they are validated, so RudderStack counts an event as delivered even when it later fails validation.
+RudderStack's warehouse destinations can fill a warehouse attribute group with history from before you connected. This needs a Signals warehouse connection.
 
 ## How RudderStack events map to Snowplow
 
@@ -278,72 +224,41 @@ Each RudderStack call takes the first rung of the [event mapping](/docs/signals/
 | Any other `track` call | `external_event` | `name` is the RudderStack event name. Typed fields such as `value`, `currency`, `item_id` and `plan` are filled from matching properties |
 | An ecommerce event missing a required field | `external_event` | For example an `Order Completed` with no currency, or a `Product Viewed` with no price |
 
-A product with no category gets an empty category. With the transformation, an ecommerce event with a product that has no price or currency falls to `external_event`. RudderStack properties and traits that don't match a typed field stay in RudderStack.
+
+RudderStack properties and traits that don't match a typed field stay in RudderStack.
 
 ## Identifiers
 
 | RudderStack field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| `anonymousId` (JavaScript SDK: a UUID version 4) | Server-side: `domain_userid` and `network_userid`, replaced by its SHA-256 hash when longer than 128 characters. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend. Read it in the page with `rudderanalytics.getAnonymousId()`. Not recommended on the public intervention endpoint, because RudderStack doesn't document how it's generated. For interventions, use the client-side approach |
-| Snowplow cookie ID (client-side only) | `domain_userid` | Yes. A random ID set by the Snowplow tracker, safe on the public intervention endpoint |
-| Snowplow session ID (client-side only) | `domain_sessionid` | Yes, for session attributes |
-| `userId` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only. Never on the public intervention endpoint, because it can be guessed |
-| `context.sessionId` | `external_identity.session_id` | No. It is a timestamp in milliseconds, so it can be guessed |
-| `groupId` | `external_event.group_id` | Server-side reads only, for account attributes |
-| `previousId` | `external_event.previous_id` | No. Recorded only |
-| `messageId` | `event_id` (transformation: UUID version 5; HTTP Webhook: as sent) | No. Used to spot duplicates |
-| Event name | `external_identity.event_name` on every event | No. Lets an attribute filter on the original RudderStack name |
-| `context.ip`, or `request_ip` when it is absent | `user_ipaddress` | No |
-| `context.userAgent` | `useragent`, parsed by YAUAA | No |
+| Snowplow cookie ID (client-side) | `domain_userid` | Yes. Random, and safe on the public intervention endpoint |
+| Snowplow session ID (client-side) | `domain_sessionid` | Yes, for session attributes |
+| `anonymousId` | Server-side: `domain_userid`. Both: `external_identity.anonymous_id` | Server-side key, for reads from your backend only. Read it in the page with `rudderanalytics.getAnonymousId()`. Never on the public intervention endpoint |
+| `userId` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Backend reads only. Never on the public intervention endpoint |
+| `context.sessionId` | `external_identity.session_id` | No. It's a timestamp, so it can be guessed |
+| `groupId` | `external_event.group_id` | Backend reads only, for account attributes |
+| `messageId` | `event_id` | No |
 
-:::caution[anonymousId from server SDKs]
-RudderStack's server SDKs and HTTP API accept any string as `anonymousId`. A value longer than 128 characters is stored in `domain_userid` as its SHA-256 hash, with the original in `external_identity`. An event with no `anonymousId` falls back to the `userId`, which then becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`.
-:::
+On the server-side approaches, an event with no `anonymousId` is keyed on its `userId`. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) for keying attributes across a visitor's browser and logged-in events.
 
-If your pipeline runs Snowplow Identities, stream attribute groups can be keyed on `snowplow_id`, so a visitor's browser events and their logged-in server events count towards the same attributes. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
+## Troubleshooting
 
-## Starter attribute groups
+- **Nothing reaches Snowplow from the client-side integration:** the destination ID doesn't match a Custom Device Mode destination on your source, or the integration was added after the SDK loaded. Check the ID, and register the integration in the page source straight after the snippet.
+- **Ecommerce events arrive as `external_event`:** the event name isn't a spec name, or it lacks a price, currency or order ID. Rename it, or add the missing field.
+- **Events arrive twice:** both approaches receive your browser source. Connect the server-side destination only to server and mobile sources.
+- **A changed transformation has no effect:** publish it as a new version.
+- **A property is missing from attributes:** Signals only reads fields a schema declares. Map it to a typed `external_event` field. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
 
-The [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) work on RudderStack data with these notes:
+Where to go next:
 
-- **Visitor activity, purchase intent, funnel:** both approaches. To count your own events, filter `external_event` on `name`, for example `Signup Form Submitted`. To count any event by its RudderStack name, including ones mapped to ecommerce, filter on `external_identity.event_name`.
-- **Account and plan:** both approaches. `plan` comes from `track` properties or `group` traits. A plan set only in `identify` traits is dropped.
-- **Session engagement:** client-side only. The server-side approach has no Snowplow sessions and no page pings.
-- **Referrer attributes:** they differ between approaches. On the client-side approach, each later page view in a single-page app carries the previous page as its referrer, so a visitor who arrived directly still gets an `internal` referrer medium. On the server-side approach, every `page` call in a single-page app carries the referrer of the page the visitor landed on, and a `$direct` referrer is dropped, so a visitor who arrived directly has no referrer.
-
-## Limits
-
-### Client-side approach
-
-1. **Browser calls only.** Calls from RudderStack's server and mobile SDKs don't pass through the JavaScript SDK.
-2. **Blocked with the RudderStack SDK.** If an ad blocker stops the SDK file or its source configuration from loading, the integration doesn't run and nothing reaches Snowplow. Blocking only RudderStack's data plane doesn't matter: every event still reaches Snowplow.
-3. **Registered too late, it never runs.** The integration must be added before the SDK finishes loading, from a snippet that lists `addCustomIntegration`. See step 4.
-4. **RudderStack cookies can reach a same-site Collector.** See the caution under the setup steps.
-5. **Two visitor IDs.** Snowplow's `domain_userid` differs from RudderStack's `anonymousId`. They are linked through the `external_identity` entity, but attributes keyed on one don't read by the other.
-
-### Server-side approach
-
-1. **No sessions or engagement.** `domain_sessionid` is empty and there are no page pings. RudderStack's session ID is kept in `external_identity` but Signals doesn't build session attributes from it.
-2. **Seconds of delay.** RudderStack's processor and router poll their queues, so events arrive seconds after the call. Signals' own processing comes on top. Don't rely on the server-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
-3. **A failed event holds up later ones.** RudderStack delivers each user's events in order, so while one event is being retried, that user's later events wait behind it.
-4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
-5. **Server events without context.** Events with no `context.userAgent` are recorded with RudderStack's own user agent. Events with no IP address record the address of the RudderStack server. Every event is recorded with platform `web`.
-6. **Events with only a `userId` are keyed on it.** The transformation falls back to the `userId` when there is no `anonymousId`, so `domain_userid` holds a guessable value, and an email address if your user IDs are emails.
-
-### Both approaches
-
-1. **Attributes only on declared fields.** Signals builds attributes only on properties a schema declares. Outside the ecommerce events, only `external_event`'s typed fields are kept. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
-2. **First product only outside the ecommerce rung.** `external_event` has one `item_id`, so a multi-product event that isn't a spec ecommerce event keeps only its first product.
-3. **No user traits.** `identify` carries the user ID only.
-4. **Ecommerce fields RudderStack doesn't send.** `payment_method` defaults to `unknown`, a missing category becomes empty, and the cart total falls back to the line value.
-
-### Warehouse approach
-
-Batch attributes need a Signals warehouse connection, and a Signals deployment reads one warehouse.
+- Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.
+- Copy the definitions in [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
+- When you are ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. On the client-side approach the visitor ID stays the same, so attributes carry over.
+- Field reference: [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
 
 ## Mapping code
 
-Both approaches use the same mapping code. The server-side transformation uses all of it. The client-side integration uses everything except `toTrackerEvent`, `toPayload`, `transformEvent` and the hashing helpers (`utf8Bytes`, `padBlocks`, `rotl`, `rotr`, `sha1`, `K256`, `sha256`, `hex`, `uuidv5` and `fitId`), and calls its `ladder` function for each RudderStack call.
+Both approaches use this mapping code. The server-side transformation uses all of it. The client-side integration uses everything except `toTrackerEvent`, `toPayload`, `transformEvent` and the hashing helpers, and calls its `ladder` function for each RudderStack call.
 
 <details>
 <summary>Mapping code</summary>
@@ -672,10 +587,3 @@ export function transformEvent(event, metadata) {
 ```
 
 </details>
-
-Where to go next:
-
-- Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.
-- Copy the definitions in [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
-- When you are ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. On the client-side approach the visitor ID stays the same, so attributes carry over. On the server-side approach, `domain_userid` changes from RudderStack's `anonymousId` to Snowplow's cookie ID when you switch.
-- Field reference: [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).

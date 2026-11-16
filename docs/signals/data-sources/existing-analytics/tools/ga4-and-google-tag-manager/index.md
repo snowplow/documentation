@@ -8,78 +8,46 @@ date: "2026-11-16"
 content_type: how-to
 ---
 
-Use the events your site already sends to Google Analytics 4 (GA4) in Signals, by adding Snowplow tags to your Google Tag Manager (GTM) container or to your server-side GTM container.
-
-:::note[Schemas]
-This integration uses two schemas published on Iglu Central, `com.snowplowanalytics.snowplow/external_event` and `com.snowplowanalytics.snowplow/external_identity`. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in GTM. Check failed events after your first test.
-:::
+Use the events your site already sends to Google Analytics 4 (GA4) in Signals, by adding Snowplow tags next to your GA4 tags in Google Tag Manager (GTM).
 
 ## Choose an approach
 
-There are two client-side approaches, one server-side approach and one warehouse approach. The client-side approaches run the Snowplow JavaScript tracker next to GA4 in the browser. The server-side approach forwards the GA4 hits your server-side GTM container already receives.
+Most sites should use **GTM tag templates**. You add Snowplow tags to the web GTM container that already sends your GA4 events, with no page code to change. The Snowplow tracker runs in the browser, so you get Snowplow sessions, page pings and interventions in the page.
 
-| | Client-side: GTM tag templates | Client-side: page script | Server-side: server-side GTM | Warehouse: GA4 BigQuery export |
-|---|---|---|---|---|
-| What you change | Tags, triggers and two variables in your web GTM container | One script added to your pages | One tag in your server-side GTM container | A scheduled query in BigQuery and a Signals batch source |
-| Events covered | Browser events in your data layer, plus Snowplow's own page pings and link clicks if you turn them on | Browser `gtag()` calls, plus Snowplow's own page views, page pings, link clicks, form and site search tracking | Every GA4 event that reaches server-side GTM, including Enhanced Measurement and any server or app events you route there | Everything in your GA4 export, as history |
-| Visitor key | Snowplow's random `domain_userid` | Snowplow's random `domain_userid` | The GA4 client's client ID, which by default is the server-managed `FPID` value, not the `_ga` cookie value | The GA client ID (`user_pseudo_id`) |
-| Sessions and engagement | Yes, Snowplow sessions and page pings | Yes, Snowplow sessions and page pings | No Snowplow sessions | Aggregates only, no live sessions |
-| Delivery | As each event happens | As each event happens | After gtag batches its hits, then through server-side GTM. Values can take a couple of minutes to reach Signals | Periodic batches |
-| Personal data path | Browser to your Collector. Only the fields you map are sent | Browser to your Collector. Only the fields the script maps are sent, plus form field values if you turn on form tracking | Browser to server-side GTM, which sees every GA4 parameter, then to your Collector | Stays in your warehouse |
-| Plan or license needed | GTM (free). A Signals-enabled Snowplow pipeline | A Signals-enabled Snowplow pipeline | A server-side GTM container you host. A Signals-enabled Snowplow pipeline | GA4 BigQuery export turned on. A Signals warehouse connection, which isn't available on the free tier |
+| Approach | Use it when |
+|---|---|
+| [GTM tag templates](#set-up-gtm-tag-templates) (recommended) | Your GA4 tags run in a web GTM container |
+| [Page script](#page-script) | You call `gtag()` directly and don't use GTM |
+| [Server-side GTM](#server-side-gtm) | You already run server-side GTM and can't change the web container or the page. No sessions or in-page interventions, and values arrive a couple of minutes later |
+| [BigQuery export](#warehouse-history-bigquery-export) | You want history from before you connected Snowplow. Needs a Signals warehouse connection |
 
-Choose client-side with GTM tag templates if:
-
-- you already manage GA4 through a web GTM container
-- you want session and engagement attributes, or interventions sent to the visitor's browser
-
-Choose client-side with the page script if:
-
-- you use `gtag()` directly and don't have GTM, or can't change the GTM container
-
-Choose server-side GTM if:
-
-- you already run server-side GTM and can't change the web container or the page
-- visitor-level and account-level attributes, read from your own servers, are enough
-
-Add warehouse history if:
-
-- you want attributes for visitors from before you connected Snowplow, such as 90-day purchase counts
-
-You can combine approaches. For example, run the GTM tag templates for live attributes and add the warehouse export for history.
+You can combine them, for example GTM tag templates for live attributes plus the BigQuery export for history.
 
 ## Before you begin
 
 You need:
 
-- GA4 on your site, through GTM or through `gtag.js`
+- GA4 on your site, through GTM
 - a Snowplow Collector URL for a pipeline with Signals enabled
-- the `external_event` and `external_identity` schemas, published on Iglu Central. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md)
-- for the server-side approach, a running server-side GTM container on an `https://` URL that receives your GA4 hits through the GA4 client
-- for the warehouse approach, the GA4 BigQuery export turned on, and a Signals warehouse connection to BigQuery
 
-Every other schema used on this page, including the Snowplow ecommerce schemas and the Google schemas, is on Iglu Central.
+The `external_event` and `external_identity` schemas, and every other schema on this page, are published on Iglu Central. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
 
-## Set up a client-side approach
+## Set up GTM tag templates
 
-There are two client-side approaches. Use GTM tag templates if your GA4 tags run in Google Tag Manager, or the page script if you load gtag.js directly.
-
-### GTM tag templates
-
-This approach adds Snowplow's tag templates to the GTM container that already sends your GA4 events. The Snowplow tags fire on the same data layer pushes as your GA4 tags, so you don't change any page code. For the templates themselves, see [Snowplow Google Tag Manager templates](/docs/sources/google-tag-manager/index.md).
+The Snowplow tags fire on the same data layer pushes as your GA4 tags. For the templates themselves, see [Snowplow Google Tag Manager templates](/docs/sources/google-tag-manager/index.md).
 
 1. **Add the templates.** In GTM, go to **Templates**. Under **Tag Templates**, select **Search Gallery** and add **Snowplow v4** and **Snowplow Ecommerce**, both by snowplow. Under **Variable Templates**, select its own **Search Gallery** and add **Snowplow v4 Settings** by snowplow.
 
-2. **Create the settings variable.** Go to **Variables**, then under **User-Defined Variables** select **New** (**Create variable** in an empty container) and choose **Snowplow v4 Settings** under **Custom Templates**. Then:
+2. **Create the settings variable.** Go to **Variables**, then under **User-Defined Variables** select **New** and choose **Snowplow v4 Settings**. Then:
 
-   - Set **Collector Endpoint Hostname** to your Collector as a full URL starting with `https://`. With a bare hostname, the tracker uses the page's protocol, so on an `http://` page the Collector redirects and the browser drops every event without an error.
-   - Under **JavaScript Tracker**, set **Snowplow JavaScript Tracker Library** to **jsDelivr** and **Library version** to `4.10.3`. The default, **Self-hosted** with an empty URL, loads no tracker.
+   - Set **Collector Endpoint Hostname** to your Collector as a full URL starting with `https://`.
+   - Under **JavaScript Tracker**, set **Snowplow JavaScript Tracker Library** to **jsDelivr** and **Library version** to `4.10.3`.
    - Set **Application ID** to your app ID.
-   - Under **Predefined Contexts**, keep **webPage**, which is selected by default, and select **session**.
+   - Under **Predefined Contexts**, keep **webPage** and select **session**.
 
-   On every Snowplow tag you create below, select this variable: in a **Snowplow v4** tag under **Tracker Initialisation**, **Snowplow Settings**; in a **Snowplow Ecommerce** tag under **Snowplow Tracker and Ecommerce Plugin Settings**, **Tracker Settings**. The Ecommerce tag's option reads "Select a Snowplow v3 Settings variable", and the **Snowplow v4 Settings** variable works there.
+   Select this variable on every Snowplow tag you create below: **Snowplow Settings** on a **Snowplow v4** tag, **Tracker Settings** on a **Snowplow Ecommerce** tag.
 
-3. **Create the identity variable.** This Custom JavaScript variable reads the GA client ID and session from the `_ga` cookies and builds the `external_identity` entity, so you can join Snowplow data back to GA4 later. When there is no `_ga` cookie, the entity is still sent, with `anonymous_id` set to null. Name it `CJS - external_identity`. Replace the measurement ID with yours, and create a Data Layer Variable `DLV - user_id` for the `user_id` key your site pushes.
+3. **Create the identity variable.** This Custom JavaScript variable reads the GA client ID and session from the `_ga` cookies and builds the `external_identity` entity, so you can join Snowplow data back to GA4. Name it `CJS - external_identity`. Replace the measurement ID with yours, and create a Data Layer Variable `DLV - user_id` for the `user_id` key your site pushes.
 
    ```js
    function () {
@@ -102,21 +70,16 @@ This approach adds Snowplow's tag templates to the GTM container that already se
 
    On every Snowplow tag you create below, open **Additional Tracking Parameters**, then **Add Custom Context Entities**, and add `{{CJS - external_identity}}` in the **Context Entities** column.
 
-   On page views and page pings, `{{Event}}` is a GTM event such as `gtm.load` or `gtm.historyChange`, so their `external_identity` has no `event_name`, and attributes that list GA4 event names don't include `page_view` on this approach.
+4. **Add page views.** Create a **Snowplow v4** tag with **Tag Type** set to **Page View**, fired on a **Window Loaded** trigger. Use **Window Loaded**, not **All Pages**, so the `_ga` cookie is set before the first page view. Under **Page View Configuration**, set **Enable Page Activity Tracking** to **Yes**, with **Minimum Visit Length** and **Heartbeat Interval** set to `5` seconds, to send page pings.
 
-   On the first page view of a returning visitor's new session, `session_id` and `session_number` can still hold the previous session's values, because `gtag.js` hasn't yet updated the `_ga_<id>` cookie. Page pings for that page view repeat them. The client ID is unaffected.
+   If your site changes pages with `history.pushState`, create a second page view tag with the same settings, fired on a **History Change** trigger. Load the Signals plugin from the Window Loaded tag only (step 10).
 
-4. **Add page views.** Create a **Snowplow v4** tag with **Tag Type** set to **Page View**. Fire it on a **Window Loaded** trigger, and on a **History Change** trigger if your site changes pages with `history.pushState`.
+5. **Add site search.** Create a **Snowplow v4** tag with **Tag Type** set to **Site Search**. Add a **terms (required)** parameter set to a variable holding the search term, and fire it on your GA4 `search` or `view_search_results` event.
 
-   :::note
-   Use **Window Loaded**, not **All Pages**. On a first visit, `gtag.js` hasn't set the `_ga` cookie yet when **All Pages** fires, so the first page view's `external_identity` would have no GA client ID.
-   :::
+6. **Add ecommerce.** Create a Data Layer Variable `DLV - ecommerce` (Data Layer Version 2) for the `ecommerce` key. Then create a Custom JavaScript variable named `CJS - snowplow_ecommerce_arg` with the code below. It turns the GA4 `ecommerce` object into the argument the Snowplow Ecommerce tag expects, with every item in the order as a product.
 
-   To collect engagement, open **Page View Configuration** on the same tag and set **Enable Page Activity Tracking** to **Yes**. Under **Page Activity Tracking Settings**, set **Minimum Visit Length** and **Heartbeat Interval**, which the template requires and doesn't fill in for you. `5` and `5` seconds match the page script. This sends page pings, which Signals uses for time-engaged attributes.
-
-5. **Add site search.** Create a **Snowplow v4** tag with **Tag Type** set to **Site Search**. Add a parameter, choose **terms (required)** as its name, and set it to a variable holding the search term. Fire it on your GA4 `search` or `view_search_results` event, or on page views whose URL has your search parameter. A page view trigger fires on every view of the results page, including a full reload after a route change, so the same search can count twice. Firing on the GA4 event avoids that.
-
-6. **Add ecommerce.** Create a Custom JavaScript variable named `CJS - snowplow_ecommerce_arg` that turns the GA4 `ecommerce` object into the argument the Snowplow Ecommerce tag expects. It keeps every item in the order as a product. Create a Data Layer Variable `DLV - ecommerce` (Data Layer Version 2) for the `ecommerce` key first.
+   <details>
+   <summary>CJS - snowplow_ecommerce_arg</summary>
 
    ```js
    function () {
@@ -148,7 +111,9 @@ This approach adds Snowplow's tag templates to the GTM container that already se
    }
    ```
 
-   Then create one **Snowplow Ecommerce** tag per GA4 ecommerce event you send. In each, set **Ecommerce API** to **Snowplow Ecommerce**, set **Ecommerce Function** to the matching function, and set **Ecommerce Argument** to `{{CJS - snowplow_ecommerce_arg}}`.
+   </details>
+
+   Then create one **Snowplow Ecommerce** tag per GA4 ecommerce event you send. In each, set **Ecommerce API** to **Snowplow Ecommerce**, **Ecommerce Function** to the matching function, and **Ecommerce Argument** to `{{CJS - snowplow_ecommerce_arg}}`. Under **Plugin Settings**, set **Snowplow Ecommerce Plugin Library** to **Do not add**, because the tracker build already includes it.
 
    | GA4 event (trigger) | Ecommerce Function |
    |---|---|
@@ -159,17 +124,9 @@ This approach adds Snowplow's tag templates to the GTM container that already se
    | `purchase` | Track Transaction |
    | `refund` | Track Refund |
 
-   :::caution[Don't add the ecommerce plugin again]
-   Don't use the tag's **Google Analytics 4 Ecommerce** mode. It attaches no custom entities, so it can't carry `external_identity`, and it drops options such as the payment method.
-
-   The full tracker build that the settings variable loads, `sp.min.js` from jsDelivr or `sp.js` from unpkg, already includes the Snowplow ecommerce plugin. On every ecommerce tag, open **Snowplow Tracker and Ecommerce Plugin Settings**, then **Plugin Settings**, and change **Snowplow Ecommerce Plugin Library** from its default, **Self-hosted**, to **Do not add**. If every ecommerce tag adds the plugin again, tracker version 4.10.3 replays earlier ecommerce commands each time it loads, and a purchase also resends the earlier product view.
-
-   Only if you load `sp.lite.js` or a custom build without the plugin, add it from a single tag. That tag must fire on every page that sends ecommerce events: a purchase on a page where it doesn't fire is sent without the plugin.
-   :::
-
 7. **Add login.** Create a **Snowplow v4** tag with **Tag Type** set to **[Custom Command]**, with the command `setUserId` and the argument `{{DLV - user_id}}`. Then create a **Self-describing Event** tag with **Schema URL** `iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0` and one parameter, `id`, set to `{{DLV - user_id}}`. Fire both on your `login` event. Never map an email address here.
 
-8. **Add your other events.** For GA4 events that have no Snowplow equivalent, create two **Snowplow v4** tags with **Tag Type** set to **Self-describing Event** and **Schema URL** `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0`: one for `join_group` with `kind` set to `group`, and one for your other events with `kind` set to `track`. A tag's parameter table holds one value per parameter, so one tag can't set both. Add these parameters to each:
+8. **Add your other events.** For GA4 events with no Snowplow equivalent, create two **Snowplow v4** tags with **Tag Type** set to **Self-describing Event** and **Schema URL** `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0`: one for `join_group` and one for your other events. Add these parameters:
 
    | Parameter name | Parameter value |
    |---|---|
@@ -180,21 +137,44 @@ This approach adds Snowplow's tag templates to the GTM container that already se
    | `group_id` | on the `join_group` tag only: a Data Layer Variable for `group_id` |
    | `item_id`, `item_category`, `search_term`, `currency` | Data Layer Variables, if your events carry them |
 
-   A Data Layer Variable returns the last value pushed for its key, with Data Layer Version 1 and 2 alike, so a value carries forward to later events that don't push it. That's why `group_id` goes on the `join_group` tag only: on the other tag, a `group_id` from an earlier `join_group` would be sent with every later event. `plan` and the item fields carry forward the same way.
+   A Data Layer Variable keeps the last value pushed for its key, so `group_id` goes on the `join_group` tag only. Fire the `join_group` tag on a Custom Event trigger for `join_group`, and the other tag on a Custom Event trigger matching your event names, for example `^(signup_form_submitted|request_demo)$` as a regular expression.
 
-   Fire the `join_group` tag on a Custom Event trigger for `join_group`, and the other tag on a Custom Event trigger that matches the event names you want, for example `signup_form_submitted`, or a regular expression such as `^(signup_form_submitted|request_demo)$` for several. Only list events with no better rung on the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md).
+   For `sign_up` and `generate_lead`, which have Google schemas, use a Self-describing Event tag with **Schema URL** `iglu:com.google.tag-manager.server-side/sign_up/jsonschema/1-0-0` (parameter `method`) or `iglu:com.google.tag-manager.server-side/generate_lead/jsonschema/1-0-0` (parameters `currency` and `value`).
 
-   For GA4 recommended events that have a Google schema, create a Self-describing Event tag with that Google schema instead. For `sign_up`, set **Schema URL** to `iglu:com.google.tag-manager.server-side/sign_up/jsonschema/1-0-0` with one parameter, `method`. For `generate_lead`, use `iglu:com.google.tag-manager.server-side/generate_lead/jsonschema/1-0-0` with `currency` and `value`. See [How GA4 events map to Snowplow](#how-ga4-events-map-to-snowplow).
+9. **Set consent.** The Snowplow tags fire whatever the consent state until you add a requirement. On each Snowplow tag, open **Advanced Settings**, then **Consent Settings**, select **Require additional consent for tag to fire**, and add `analytics_storage`, or the consent types your consent management platform sets.
 
-9. **Set consent.** The Snowplow templates have no consent field of their own. GTM lists **Built-In Consent Checks** for them, covering all five storage types, but the templates don't act on consent themselves, so the tags fire whatever the consent state until you add a requirement. On each Snowplow tag, open **Advanced Settings**, then **Consent Settings (BETA)**, select **Require additional consent for tag to fire**, and use **+ Add required consent** to add `analytics_storage`, or the consent types your consent management platform sets. With analytics storage denied there is no `_ga` cookie, so `external_identity` has a null `anonymous_id`. A tag blocked by its consent checks isn't fired again after a later grant, so events from before the grant, such as the first page view, aren't sent.
+10. **Receive interventions.** On the Window Loaded page view tag, open **Load Plugins** and add the Signals browser plugin. Then add a **Custom HTML** tag that subscribes to interventions, with the Window Loaded page view tag as its **Set-up Tag** under **Advanced Settings**, then **Tag Sequencing**. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
 
-10. **Preview and publish.** Use GTM Preview to check that each tag fires once per event, then publish the container. Preview keeps the version it loaded: after you save a change, close the Tag Assistant tab and your site's debug tab, then select **Preview** again. The first page view of a Preview session has `tagassistant.google.com` as its referrer, so referrer attributes for that test visitor read it as a search referrer.
+11. **Preview and publish.** Use GTM Preview to check that each tag fires once per event, then publish the container. After you save a change, close the Tag Assistant tab and your site's tab, then select **Preview** again.
+
+## Check it works
+
+Test with your Console development environment, which runs Snowplow Micro hosted by Snowplow. Every Snowplow trial includes one. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
+
+1. In Console, go to **Pipelines**, select your development environment and copy its Collector endpoint.
+2. Point the Snowplow v4 Settings variable at it, as a full URL starting with `https://`.
+3. Send test traffic from GTM Preview.
+4. Select **Open dashboard** to see the good and failed events.
+
+Check that:
+
+- page views arrive for full loads and route changes, with a `domain_userid` and a `domain_sessionid`
+- a purchase arrives as one `snowplow_ecommerce_action` with `type` `transaction`, a transaction entity and one product entity per item
+- custom events arrive as `external_event` with `tool` `ga4` and `name` set to the GA4 event name
+- every event carries an `external_identity` entity with the GA client ID in `anonymous_id`
+- no event failed, and no email address appears in any event
+
+Once the events look right, point the settings variable at your pipeline's Collector, then create your attribute groups from the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
+
+## Other approaches
 
 ### Page script
 
-This approach suits sites that call `gtag()` directly without GTM. A script on the page wraps `dataLayer.push`, which `gtag()` writes to, and sends each GA4 call through the Snowplow JavaScript tracker. Because `gtag()` doesn't call `dataLayer.push` for its own single-page-app page views or Enhanced Measurement, the script also turns on Snowplow's own page view, page ping, link click, form and site search tracking.
+Use this if you call `gtag()` directly without GTM. A script wraps `dataLayer.push`, which `gtag()` writes to, and sends each GA4 call through the Snowplow JavaScript tracker. It also turns on Snowplow's own page view, page ping, link click and form tracking, because `gtag.js` sends some events without a `dataLayer.push`.
 
-1. **Load the tracker and the ecommerce plugin.** Add the Snowplow JavaScript tracker loader, version 4.10.3, then the tracker setup, before the GA4 snippet, with your Collector URL. Put the loader and steps 1 to 4 in one script, in the order the steps give.
+Save the [ladder.js mapping file](#mapping-file-ladderjs) on your site and load it before the script. Put the steps below in one script, in this order.
+
+1. **Load the tracker.** Add the Snowplow loader and tracker setup with your Collector URL and app ID.
 
    ```js
    ;(function (p, l, o, w, i, n, g) { if (!p[i]) { p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
@@ -212,9 +192,7 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
      ['snowplowEcommerceAccelerator', 'SnowplowEcommercePlugin']);
    ```
 
-   The full `sp.js` build already includes the ecommerce plugin, so the `addPlugin` call is needed only with `sp.lite.js` or a custom build. It does no harm with `sp.js`.
-
-   Then add the identity helpers that the later steps use. They read the GA client ID and session from the `_ga` cookies through `ladder.js`, and `send` holds events until `gtag.js` has set the `_ga` cookie, for up to 3 seconds. Replace the measurement ID with yours.
+   Then add the identity helpers the later steps use. `send` holds each event until `gtag.js` has set the `_ga` cookie, for up to 3 seconds. Replace the measurement ID with yours.
 
    ```js
    var MID = 'G-XXXXXXXXXX';
@@ -235,9 +213,7 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    function ctx(ent) { return ent ? [ent] : []; }
    ```
 
-   `L` is `GA4Snowplow`, which the [`ladder.js` mapping file](#mapping-file-ladderjs) defines. Save that file on your site and load it before this script. It provides `rung`, `ecommerceCalls`, `externalEvent`, `googleEvent`, `readGaCookies`, `identityEntity` and the schema URIs in `S`. The script can't run without it.
-
-2. **Turn on Snowplow's own tracking.** This replaces what GA4 collects outside `gtag()` calls: engagement, outbound and file clicks, and form interactions.
+2. **Turn on Snowplow's own tracking** for engagement, link clicks and forms. Form tracking sends the values people type, so denylist every field that can hold personal data, or leave it off.
 
    ```js
    snowplow('enableActivityTracking', { minimumVisitLength: 5, heartbeatDelay: 5 });
@@ -245,11 +221,7 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    snowplow('enableFormTracking', { options: { fields: { denylist: ['email', 'phone'] } } });
    ```
 
-   :::caution[Form tracking sends field values]
-   Form tracking sends the values people type, except for fields you denylist, so a field such as a company name reaches your Collector unless you list it. List every field that can hold personal data, or leave form tracking off.
-   :::
-
-3. **Send single-page-app page views.** Wrap `history.pushState` so each route change sends a page view, and a site search when the URL has a search term.
+3. **Send single-page-app page views.** Wrap `history.pushState` so each route change sends a page view, and a site search when the URL has a search term. If your site also sends a GA4 `search` event for the same search, delete the `if (q)` line.
 
    ```js
    var lastUrl = location.href;
@@ -268,9 +240,7 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    };
    ```
 
-   If your site also calls `gtag('event', 'search')` or `gtag('event', 'view_search_results')` for the same search, delete the `if (q)` line. Otherwise step 4 sends the search a second time and each search counts twice.
-
-   Then add `external_identity` to Snowplow's own link click and form events, which don't go through `send`. Without this, those events carry no `external_identity`.
+   Then add `external_identity` to Snowplow's own link click and form events:
 
    ```js
    snowplow('addGlobalContexts', [function (a) {
@@ -280,7 +250,7 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    }]);
    ```
 
-4. **Mirror each `gtag()` call.** The script maps each GA4 event with the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) and attaches `external_identity`. `send` waits until `gtag.js` has set the `_ga` cookie, for up to 3 seconds, so the GA client ID is available.
+4. **Mirror each `gtag()` call.** Each GA4 event takes the first rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) that fits, with `external_identity` attached.
 
    ```js
    function handleEvent(name, p) {
@@ -301,7 +271,10 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    }
    ```
 
-   Last, hook the data layer. This handles `gtag('config', ...)` as a page view, `gtag('set', {user_id})` as `setUserId`, and `gtag('event', ...)` through `handleEvent`. It skips `gtag('set', 'user_properties', ...)`. Because `gtag.js` replaces `dataLayer.push` when it loads, the hook stays in place through a property setter.
+   Last, hook the data layer. This handles `gtag('config', ...)` as a page view, `gtag('set', {user_id})` as `setUserId`, and `gtag('event', ...)` through `handleEvent`.
+
+   <details>
+   <summary>Data layer hook</summary>
 
    ```js
    var done = new WeakSet();
@@ -339,23 +312,21 @@ This approach suits sites that call `gtag()` directly without GTM. A script on t
    });
    ```
 
-5. **Gate it on consent.** The script doesn't read Google Consent Mode, so with consent denied it still sets Snowplow cookies and sends every event. Load it, or call `newTracker`, only after your consent management platform grants analytics consent. With consent denied, it then sends nothing and sets no cookies.
+   </details>
 
-   When the script loads after a grant part way through a visit, it handles every `gtag()` call already in the data layer. Those earlier events are sent at grant time with the current page URL, not the URL where they happened, and single-page-app page views from before the grant aren't sent.
+5. **Gate it on consent.** The script doesn't read Google Consent Mode. Load it only after your consent management platform grants analytics consent.
 
-To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker, from the page view tag on the GTM tag templates or with `addPlugin` in the page script. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+To receive interventions, add the Signals browser plugin with `addPlugin`. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
 
-## Set up the server-side approach: server-side GTM
+### Server-side GTM
 
-This approach adds Snowplow's tag to a server-side GTM container that already receives your GA4 hits through the GA4 client. The tag forwards each GA4 event to your Collector. For the tag, see [Google Tag Manager server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md).
+This approach adds Snowplow's tag to a server-side GTM container that already receives your GA4 hits through the GA4 client. It has no Snowplow sessions, no key that's safe on the public intervention endpoint, and values can take a couple of minutes to reach Signals. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). For the tag, see [Google Tag Manager server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md).
 
-Your tagging server needs an `https://` URL. In **Admin**, then **Container Settings**, each entry in **Server container URLs** must start with `https://` and have no trailing `/`.
+Your tagging server needs an `https://` URL, set in **Admin**, then **Container Settings**, under **Server container URLs**.
 
-1. **Add the Snowplow tag.** In the server container, go to **Templates**, then under **Tag Templates** select **Search Gallery** and add **Snowplow** by snowplow. Create a tag from it, set **Collector URL** to your Collector and set an app ID.
+1. **Add the Snowplow tag.** In the server container, go to **Templates**, select **Search Gallery** and add **Snowplow** by snowplow. Create a tag from it, with your **Collector URL** and an app ID. Turn on the built-in **Client Name** variable, and fire the tag on a Custom trigger where **Client Name** equals your GA4 client's name, `GA4` by default.
 
-   To fire it on events claimed by the GA4 client, first go to **Variables**, select **Configure** under **Built-In Variables**, and turn on **Client Name**, which a new server container leaves off. Then create a Custom trigger that fires when **Client Name** equals the name of your GA4 client, `GA4` by default.
-
-2. **Map events to schemas.** Under **Advanced Event Settings**, select **Define events to be sent as Snowplow Self-Describing Events**, then add rows to **Event Name to Schema**. Each row takes one **Event Name** and one **Event Schema**, and the template allows each event name and each schema in one row only, so you map one GA4 event per schema. Choose the event your attributes need most for each schema, for example:
+2. **Map events to schemas.** Under **Advanced Event Settings**, select **Define events to be sent as Snowplow Self-Describing Events**, then add rows to **Event Name to Schema**. Each schema can appear in one row only, so choose the event your attributes need most for each:
 
    | Event Name | Event Schema |
    |---|---|
@@ -364,13 +335,9 @@ Your tagging server needs an `https://` URL. In **Admin**, then **Container Sett
    | `login` | `iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0` |
    | one custom event, for example `signup_form_submitted` | `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0` |
 
-   Events you don't list keep the tag's defaults. `page_view` arrives as a page view. GA4 recommended events, including the other ecommerce events (`add_to_cart`, `begin_checkout`, `purchase` and the rest), `search`, `join_group`, `sign_up` and `generate_lead`, arrive with Google's schemas under `com.google.tag-manager.server-side`, with GA4's `items` array inside the event. Enhanced Measurement events (`scroll`, `click`, `file_download`) arrive under `com.google.ga4.enhanced-measurement`, and `user_engagement` as `com.google.ga4/user_engagement`. Signals builds attributes on these schemas like any other, so build attributes for the events you didn't map on their Google schemas.
+   Events you don't list keep the tag's defaults: `page_view` arrives as a page view, and GA4 recommended and Enhanced Measurement events arrive with Google's schemas, which Signals can build attributes on. A custom event that isn't listed and has no Google schema isn't sent.
 
-   :::caution[One custom event per container]
-   Only one custom event can use `external_event`, because each schema appears in one row. A custom event that isn't listed and has no Google schema fails in the tag and never reaches Snowplow. Send other custom events through a client-side approach.
-   :::
-
-3. **Fill each event's fields.** Add rows to **Event Definitions** for the events you mapped. Rows with **Reference** set to **Client Event Property** read from the GA4 event data; rows set to **Constant or Variable** take the value you type.
+3. **Fill each event's fields.** Add rows to **Event Definitions** for the events you mapped:
 
    | Event Name | Snowplow property name | Type | Reference | Value |
    |---|---|---|---|---|
@@ -384,9 +351,7 @@ Your tagging server needs an `https://` URL. In **Admin**, then **Container Sett
    | `signup_form_submitted` | `group_id` | Default | Client Event Property | `group_id` |
    | `signup_form_submitted` | `item_id` | Default | Client Event Property | `items.0.item_id` |
 
-   If you map a different ecommerce event, set `type` to its action: `add_to_cart`, `remove_from_cart`, `checkout_step` for `begin_checkout` or `add_payment_info`, `transaction` for `purchase`, `list_view`, `list_click` or `refund`. For `join_group`, set `kind` to `group`.
-
-   The mapped ecommerce event arrives with its `type` only, with no product, transaction or cart entities. The entity tables build one entity per schema, and server-side GTM's sandboxed JavaScript can't load the [mapping file](#mapping-file-ladderjs), so there is no way to build one product entity per item in the tag.
+   The mapped ecommerce event arrives with its `type` only, without product or transaction entities.
 
 4. **Add `external_identity` to every event.** Under **Context entities**, add rows to **Define global context entities**, each with **Entity schema** `iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0`:
 
@@ -399,15 +364,11 @@ Your tagging server needs an `https://` URL. In **Admin**, then **Container Sett
    | `session_number` | Default | Client Event Property | `ga_session_number` |
    | `event_name` | String | Client Event Property | `event_name` |
 
-   `client_id` is the GA4 client's client ID. With the GA4 client's default server-managed client ID, it's the value of the `FPID` cookie, not the `_ga` cookie value in the hit's `cid`, so it doesn't match `anonymous_id` from a client-side approach or `user_pseudo_id` in BigQuery. To keep the `_ga` value, set the GA4 client to JavaScript-managed client ID.
+5. **Add a consent condition if you use Google Consent Mode.** The tag forwards every event whatever the consent state. Create a variable that reads the `gcs` query parameter from the request, and add a trigger condition that it matches `^G1[01]1$`. Without Consent Mode, leave this off. See [Gate server-side GTM on Consent Mode](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md#gate-server-side-gtm-on-consent-mode).
 
-5. **Add a consent condition if you use Google Consent Mode.** The tag has no consent check of its own: with analytics storage denied it still forwards every event, under a new client ID on each page load. Analytics consent is granted when the GA4 consent state (`gcs`) is `G111` or `G101`. The GA4 client doesn't put `gcs` in the event data, and the **Consent** tab in Preview shows "Consent not configured". `gcs` is a query parameter of the incoming request, shown in Preview's **Request** tab. Create a variable that reads the `gcs` query parameter from the request, add a trigger condition that it matches the regular expression `^G1[01]1$`, and check in Preview that a denied hit doesn't fire the tag. See [Gate server-side GTM on Consent Mode](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md#gate-server-side-gtm-on-consent-mode).
+6. **Preview and publish.** Set `server_container_url` on your Google tag to your tagging server URL, check each event's outgoing request in Preview, then publish.
 
-   Without Consent Mode, `gtag.js` sends no `gcs` at all, so this condition blocks every event. Leave it off, and gate GA4 itself through your consent management platform.
-
-6. **Preview and publish.** Your site's GA4 hits must go to the server container: set `server_container_url` on your Google tag to your tagging server URL. Then use server-side GTM Preview to check each event's outgoing request to your Collector in the **Request** tab, and publish.
-
-## Set up warehouse history: BigQuery export
+### Warehouse history: BigQuery export
 
 If the GA4 BigQuery export is on, you can give Signals history for visitors it hasn't seen yet. This query builds one row per GA client ID with 90-day totals:
 
@@ -432,149 +393,62 @@ GROUP BY user_pseudo_id;
 2. In Signals, create a batch source on the table, with `ga_client_id` as the key column and `updated_at` as the timestamp field.
 3. Create an attribute key for the GA client ID.
 
-:::caution
-Check whether your Signals batch source needs a load timestamp column, which the GA4 export tables don't have.
-:::
-
-## Check it works
-
-Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
-
-1. In Console, go to **Pipelines** and select your development environment.
-2. Copy its Collector endpoint.
-3. Point the Snowplow v4 Settings variable (GTM tag templates), the page script's tracker, or the Snowplow tag in server-side GTM at it.
-4. Send test traffic, for example from GTM Preview mode.
-5. Select **Open dashboard** to see the good and failed events.
-
-On the client-side approaches, check that:
-
-- page views arrive for full loads and for single-page-app route changes, with a `domain_userid` and a `domain_sessionid`
-- a purchase arrives as one `snowplow_ecommerce_action` with `type` `transaction`, a transaction entity and one product entity for each item in the order
-- a product view arrives once, not again when the purchase fires
-- custom events arrive as `external_event` with `tool` `ga4` and `name` set to the GA4 event name
-- every event carries an `external_identity` entity with the GA client ID in `anonymous_id`
-- no email address appears in any event
-- with the page script, page pings and link clicks arrive
-
-On the server-side approach, check that:
-
-- `domain_userid` holds the GA4 client's client ID and `domain_sessionid` is empty, as expected. With the default server-managed client ID, this is the `FPID` value, not the `_ga` value
-- each event you mapped arrives with its Snowplow schema, and the events you didn't map arrive with Google's schemas
-- `login` arrives as `identify` with `id` only
-- no email address appears in any event
-
-Failed events usually mean a schema is missing from your registry, or was used before it was deployed to production, most often `external_event` or `external_identity`.
-
-Once the events look right, point the tags or the page script at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
+Warehouse attributes update periodically, so they can't trigger interventions.
 
 ## How GA4 events map to Snowplow
 
 Each GA4 event takes the first rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) that fits.
 
-| GA4 event | Snowplow event | Notes |
-|---|---|---|
-| `page_view`, including single-page-app page views | `page_view` | On client-side approaches, sent by the Snowplow tracker on load and route changes |
-| `view_item` | `snowplow_ecommerce_action` with `type` `product_view` and a product entity | On the server-side approach, only the one ecommerce event you map gets this schema, with no entities. The others keep Google's schemas |
-| `view_item_list`, `select_item` | `snowplow_ecommerce_action` with `type` `list_view` or `list_click` | |
-| `add_to_cart`, `remove_from_cart` | `snowplow_ecommerce_action` with product and cart entities | GA4 `value` is the amount added or removed, and it goes in the cart's `total_value` |
-| `begin_checkout`, `add_payment_info` | `snowplow_ecommerce_action` with `type` `checkout_step` | `payment_type` becomes the payment method |
-| `purchase` | `snowplow_ecommerce_action` with `type` `transaction`, a transaction entity and one product entity per item | Payment method is `unknown` when GA4's purchase carries none |
-| `refund` | `snowplow_ecommerce_action` with `type` `refund` | |
-| `search`, `view_search_results` | `site_search` | On the server-side approach, only the one you map |
-| `login` | `identify` with `id` only | Never the email |
-| `sign_up`, `generate_lead`, `share`, `select_content`, `add_to_wishlist`, `exception` | Google's schemas under `com.google.tag-manager.server-side` | |
-| `scroll`, `click`, `file_download` | Google's schemas under `com.google.ga4.enhanced-measurement` | Server-side approach only. Client-side approaches use Snowplow's page pings and link clicks instead |
-| `user_engagement` | `com.google.ga4/user_engagement` | Server-side approach only |
-| Any other event, such as `join_group` or your custom events | `external_event` with `tool` `ga4` and `name` set to the event name | Typed fields only. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md). On the server-side approach, one custom event only, and `join_group` keeps its Google schema |
-| `gtag('set', 'user_properties', ...)` | Not sent | User properties aren't forwarded on any approach |
+| GA4 event | Snowplow event |
+|---|---|
+| `page_view`, including single-page-app page views | `page_view` |
+| `view_item`, `view_item_list`, `select_item` | `snowplow_ecommerce_action` with a product entity |
+| `add_to_cart`, `remove_from_cart` | `snowplow_ecommerce_action` with product and cart entities |
+| `begin_checkout`, `add_payment_info` | `snowplow_ecommerce_action` with `type` `checkout_step` |
+| `purchase`, `refund` | `snowplow_ecommerce_action` with a transaction entity and one product entity per item |
+| `search`, `view_search_results` | `site_search` |
+| `login` | `identify` with `id` only |
+| `sign_up`, `generate_lead` and other recommended events with a Google schema | Google's schema under `com.google.tag-manager.server-side` |
+| Any other event, such as `join_group` or your custom events | `external_event` with `tool` `ga4` and `name` set to the event name |
+| `gtag('set', 'user_properties', ...)` | Not sent |
 
-Every event also carries an `external_identity` entity. See [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
+Every event also carries an `external_identity` entity. See [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). On server-side GTM, only the events you map get Snowplow schemas.
 
 ## Identifiers
 
 | GA4 or GTM field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| Snowplow first-party cookie: `_sp_id.<hash>` with the page script, `spid.<hash>` with the GTM templates, whose **Cookie Name** defaults to `sp` | `domain_userid` | Yes. A random UUID, safe on the public intervention endpoint, and readable on the page through the tracker |
-| Snowplow session (client-side approaches) | `domain_sessionid` | Yes, for session attributes. A random UUID. The server-side approach has none |
-| GA client ID (`_ga` cookie, `cid` in the hit, `user_pseudo_id` in BigQuery) | `external_identity.anonymous_id` on the client-side approaches. On the server-side approach, `domain_userid` and `anonymous_id` hold the GA4 client's client ID instead, which by default is the server-managed `FPID` value, not the `_ga` value | Only for reads from your own servers and joins to BigQuery. Never on the public intervention endpoint: part of it is a timestamp. With analytics storage denied, GA4 sets no `_ga` cookie, so it changes on each full page load |
-| GA session ID (`sid`, `_ga_<id>` cookie) and session number (`sct`) | `external_identity.session_id` and `session_number` | No. The session ID is the session start time in seconds |
-| GA `user_id` | `user_id`, `external_identity.user_id`, and `identify.id` on login | Only for reads from your own servers. You choose it, and it's often guessable |
-| GA4 event name | `external_identity.event_name` and `external_event.name` | No. Use it to filter attributes and to match rows to GA4 events |
-| Collector cookie | `network_userid` | A random UUID on client-side approaches. On the server-side approach it depends on server-side GTM setting the `sp` cookie on a first-party domain |
-| IP address, user agent | `user_ipaddress`, `useragent` | No. On the server-side approach, these are the values the GA4 client passes to the tag |
+| Snowplow first-party cookie | `domain_userid` | Yes. A random ID, safe on the public intervention endpoint |
+| Snowplow session | `domain_sessionid` | Yes, for session attributes. Server-side GTM has none |
+| GA client ID (`_ga` cookie, `user_pseudo_id` in BigQuery) | `external_identity.anonymous_id`. On server-side GTM, also `domain_userid` | Only for reads from your own servers. Never on the public intervention endpoint |
+| GA session ID and session number | `external_identity.session_id` and `session_number` | No |
+| GA `user_id` | `user_id`, `external_identity.user_id`, and `identify.id` on login | Only for reads from your own servers |
 
-If you use Snowplow Identities, you can key stream attribute groups on `snowplow_id` and read them by `domain_userid` or `user_id`. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
+See [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
-## Starter attribute groups
+## Troubleshooting
 
-Start with the shared definitions in [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md). On GA4 data:
-
-- **Visitor activity, purchase intent and funnel** work on every approach. Every item in an order arrives as its own product entity, but a product attribute reads one entity per event: the first, or the one at the index you set.
-- **Purchase intent** on the server-side approach: ecommerce events carry no product or transaction entities, and only one is mapped to the Snowplow schema, so order, cart, product and search attributes stay empty unless you build them on Google's schemas.
-- **Funnel** filters on the event name. GA4 sends `signup_form_submitted`, so change the shared definition's `Signup Form Submitted` filter to `signup_form_submitted`, or the signup attributes stay empty.
-- **Session engagement** needs a client-side approach with page pings turned on, keyed on `domain_sessionid`.
-- **Account and plan** works only when `plan` and `group_id` are sent as event parameters. GA4 user properties aren't forwarded.
-- **UTM source and medium** need the campaign attribution enrichment on your pipeline.
-- **Engagement from GA4's own events** on the server-side approach reads Google's schemas, such as `user_engagement`'s `engagement_time_msec`. Signals builds attributes on these schemas like any other.
-
-## Limits
-
-GTM tag templates (client-side):
-
-1. **No GA4 Enhanced Measurement events.** `gtag.js` sends scroll, outbound click, file download and engagement time itself, not as data layer events your tags can fire on. Use the Snowplow tracker's own page pings and link clicks instead.
-2. **Every event needs a tag and trigger.** Events you don't set up aren't sent.
-3. **Numeric `external_event` fields.** GTM parameter tables hold strings, so the numeric `value` field can be left out. Check in Preview that a variable returning a number keeps its type.
-4. **`view_item` with several items.** The ecommerce argument variable above sends the first item, because one tag fire sends one product view.
-5. **The ecommerce plugin must not be added again.** With `sp.js`, set every ecommerce tag to **Do not add**. See step 6.
-6. **Page views have no GA4 event name.** Their `external_identity` has no `event_name`.
-7. **Data Layer Variables carry values forward** to later events that don't push them, with Data Layer Version 1 and 2. See step 8.
-8. **GA session fields can lag** on the first page view of a returning visitor's new session. See step 3.
-
-Page script (client-side):
-
-1. **Single-page-app page views need the `pushState` wrapper.** Without it, the script sees only page views from `gtag('config', ...)`, not the ones `gtag.js` sends on route changes.
-2. **No Consent Mode support.** You gate the script yourself. After a late grant, earlier calls are sent with the current page URL, and earlier single-page-app page views are lost.
-3. **Form tracking sends field values** unless you denylist the fields.
-4. **Events wait for the `_ga` cookie,** for up to 3 seconds on a first visit.
-5. **Needs `ladder.js`.** The script calls the [mapping file](#mapping-file-ladderjs) for every event.
-6. **One search can be sent twice** when a `?q=` route change and a `gtag()` search event both fire. See step 3.
-
-Server-side GTM (server-side):
-
-1. **No Snowplow sessions.** `domain_sessionid` is empty, and the GA session ID isn't safe as a key.
-2. **No key for the public intervention endpoint.** The only visitor key is the GA client ID.
-3. **Delay.** `gtag.js` batches hits, so events can wait several seconds in the browser before they reach server-side GTM, and values can take a couple of minutes to reach Signals. Use a client-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
-4. **One event per schema.** **Event Name to Schema** accepts each schema once, so one ecommerce event, one search event and one custom event get Snowplow schemas. The rest keep Google's schemas, and a custom event with no Google schema that isn't listed never reaches Snowplow. `external_event`'s item fields hold the first item only.
-5. **Server-side GTM sees all GA4 parameters,** including any email addresses your page puts in them. The tag forwards only the fields you map.
-6. **Some tag defaults drop fields.** The tag's `file_download` mapping reads `file_extention`, so GA4's `file_extension` is dropped, and `scroll` arrives with no fields.
-7. **The consent condition needs Consent Mode.** Without it, `gcs` is missing and the condition in step 6 blocks every event.
-8. **No ecommerce entities.** Ecommerce events carry no product, transaction, cart or checkout step entities.
-9. **Client ID differs from the `_ga` value** with the GA4 client's default server-managed client ID, so joins to client-side data and to BigQuery's `user_pseudo_id` don't match.
-10. **Tagging server on `https://`.** Server container URLs must use `https://`.
-
-Warehouse (warehouse):
-
-1. **Can't trigger interventions.** Warehouse attributes update periodically, and intervention criteria use stream attributes.
-2. **Keyed on the GA client ID.** Not usable on the public intervention endpoint.
-3. **Needs a warehouse connection,** which isn't available on the free tier.
-
-All approaches:
-
-- GA4's own processing, such as modeled conversions and GA4 sessions, isn't reproduced.
-- GA4 user properties aren't forwarded.
+- **No events arrive:** set **Collector Endpoint Hostname** to a full `https://` URL, and set the tracker library to **jsDelivr** with a version. The default loads no tracker.
+- **A purchase also resends the product view:** set **Snowplow Ecommerce Plugin Library** to **Do not add** on every ecommerce tag.
+- **Route changes send extra page views:** load the Signals plugin only from the Window Loaded page view tag, not the History Change one.
+- **An event you expected is missing:** every GA4 event needs its own Snowplow tag and trigger. Enhanced Measurement events, such as scroll and file downloads, aren't in the data layer; use Snowplow's page pings and link clicks.
+- **A custom event carries an old `group_id` or `plan`:** Data Layer Variables keep the last value pushed. Put `group_id` on the `join_group` tag only.
+- **Funnel attributes stay empty:** GA4 event names are lowercase with underscores, such as `signup_form_submitted`. Use them exactly in your attribute filters.
 
 For how each approach handles consent and personal data, see [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
 
 Where to go next:
 
 - Build your first attributes from [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
-- Replace `external_event` with native Snowplow events one at a time: see [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md). On the client-side approaches the Snowplow tracker is already running, so `domain_userid` stays the same and attributes carry over.
+- Replace `external_event` with native Snowplow events one at a time: see [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
 - Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.
-- Read the [overview](/docs/signals/data-sources/existing-analytics/index.md) to compare GA4 with the other tools.
 
 ## Mapping file: ladder.js
 
 The page script loads this file before its own code. Save it on your site, for example as `/js/ladder.js`, and load it with a `<script>` tag before the page script. It defines `window.GA4Snowplow`.
+
+<details>
+<summary>ladder.js</summary>
 
 ```js
 // Maps a GA4 event to the first rung that fits: page_view, Snowplow ecommerce, site_search,
@@ -705,3 +579,5 @@ The page script loads this file before its own code. Save it on your site, for e
   root.GA4Snowplow = { S: S, GOOGLE: GOOGLE, rung: rung, products: products, ecommerceCalls: ecommerceCalls, externalEvent: externalEvent, googleEvent: googleEvent, readGaCookies: readGaCookies, identityEntity: identityEntity, currency: currency };
 })(window);
 ```
+
+</details>

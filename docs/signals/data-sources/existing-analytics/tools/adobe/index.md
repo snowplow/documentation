@@ -10,79 +10,37 @@ content_type: how-to
 
 Copy the events your Adobe setup already sends into Snowplow, so Signals can compute visitor, session and account attributes from them without retagging your site.
 
-## Find your Adobe setup
+## Choose an approach
 
-Most Adobe estates match one of these rows. Each links to the approach that fits it.
+Most sites should use the **Web SDK callback**. One callback in your Web SDK configuration copies each event into the Snowplow tracker as Adobe sends it. The tracker runs in the browser, so you get Snowplow sessions, page pings and interventions in the page.
+
+Find your setup to pick an approach:
 
 | Your setup | How you'll know | Use |
 |---|---|---|
-| Web SDK (alloy.js), deployed with Tags | `_satellite` and `alloy` exist on the page; the Tags property has the Adobe Experience Platform Web SDK extension | [Web SDK callback](#web-sdk-callback), in the extension settings |
-| Web SDK (alloy.js), in page code | `alloy` exists on the page; you call `alloy('configure', ...)` yourself | [Web SDK callback](#web-sdk-callback), in your configure call |
-| AppMeasurement (Adobe Analytics `s` object), with or without Tags | `s_gi` exists on the page; requests go to `/b/ss/` | [AppMeasurement callback](#appmeasurement-callback) |
-| Adobe Client Data Layer and Tags rules | `adobeDataLayer` exists on the page; the Tags property has the Adobe Client Data Layer extension | [Tags rules on the data layer](#tags-rules-on-the-adobe-client-data-layer) |
-| Web SDK or Mobile SDK, with event forwarding licensed | Your contract includes Real-Time CDP Connections, Prime or Ultimate | [Event forwarding](#set-up-the-server-side-approach-event-forwarding) |
-| Analytics history you want in Signals | You receive Analytics Data Feeds in a warehouse | [Data Feeds](#set-up-warehouse-history-data-feeds) |
+| Web SDK (alloy.js), with Tags or in page code | `alloy` exists on the page | [Web SDK callback](#set-up-the-web-sdk-callback) (recommended) |
+| AppMeasurement (Adobe Analytics `s` object) | `s_gi` exists on the page; requests go to `/b/ss/` | [AppMeasurement callback](#appmeasurement-callback) |
+| Adobe Client Data Layer and Tags rules | `adobeDataLayer` exists on the page | [Tags rules on the data layer](#tags-rules-on-the-adobe-client-data-layer) |
+| Web SDK or Mobile SDK, with event forwarding licensed, and you can't add a browser script | Your contract includes Real-Time CDP Connections, Prime or Ultimate | [Event forwarding](#event-forwarding). No sessions or in-page interventions, and values arrive later |
+| Analytics history you want in Signals | You receive Analytics Data Feeds in a warehouse | [Data Feeds](#warehouse-history-data-feeds), beside a live approach |
 
 If your site runs both the Web SDK and AppMeasurement, pick one hook. Using both copies each event twice.
-
-## Choose an approach
-
-The three client-side approaches run the Snowplow JavaScript tracker beside your Adobe library and copy each event as Adobe sends it. Event forwarding runs on Adobe's servers. Data Feeds give you history in batches.
-
-| | Web SDK callback | AppMeasurement callback | Tags rules on the data layer | Event forwarding | Data Feeds |
-|---|---|---|---|---|---|
-| Runs | Client-side | Client-side | Client-side | Server-side, in Adobe | Warehouse |
-| What you change | One callback in the Web SDK configuration, plus a script that loads the Snowplow tracker | One callback on the `s` object, plus the same script and a map of your eVars and props | One Tags rule per event, with custom code | A data element and a rule in an event forwarding property | A SQL model in your warehouse and a batch source in Signals |
-| Events covered | Every event the Web SDK sends from the browser, including its automatic link clicks | Every page view and link hit AppMeasurement sends from the browser, including exit and download links | Only the data layer events you write a rule for | Web SDK and Mobile SDK events that reach the Edge Network; not AppMeasurement | All Analytics hits in the feed, from every source Adobe processed |
-| Visitor key | Snowplow `domain_userid`, a random UUID | Snowplow `domain_userid` | Snowplow `domain_userid` | The Adobe ECID | The Adobe ECID (`mcvisid`) |
-| Sessions and engagement | Snowplow sessions; engagement if you turn on page pings | Snowplow sessions; engagement with page pings | Snowplow sessions; engagement with page pings | No sessions, no engagement | Adobe visit counts as batch values; no live sessions |
-| Delivery | From the browser as each event fires | From the browser as each hit fires | From the browser as each rule fires | After the Edge Network processes the event. Adobe doesn't document a delivery time, so expect at least several seconds | On the schedule of your feed and model |
-| Personal data path | Browser to your Collector: IP, user agent, URLs, user ID; a same-site Collector also receives Adobe cookies | Same as the Web SDK callback | Same, and the full data layer state stays readable by every rule | Everything in the event stays inside Adobe's event forwarding runtime; your Collector receives what your data element builds | The full feed lands in your warehouse; Signals reads only the columns your model outputs |
-| Plan or license needed | Web SDK | AppMeasurement | Tags and the Adobe Client Data Layer extension | Real-Time CDP Connections, Prime or Ultimate | Data Feeds and a Signals warehouse connection |
-
-Choose a client-side approach if:
-
-- You want attributes that update while the visitor is still on the page, or session and engagement attributes.
-- You want to target interventions at visitors. The Snowplow visitor ID is random and safe to use on the public intervention endpoint.
-- You plan to move to native Snowplow tracking later. The visitor ID stays the same when you do.
-
-Among the client-side approaches, use the Web SDK callback on a Web SDK site and the AppMeasurement callback on an AppMeasurement site. Use Tags rules on the data layer only when your site has an Adobe Client Data Layer and you'd rather maintain Tags rules than a callback.
-
-Choose event forwarding if:
-
-- You already hold the license and can't add a script to the browser.
-- You need events from the Adobe Mobile SDK, which no client-side approach here covers.
-- You accept visitor and account attributes only, keyed on the ECID, with no sessions.
-
-Add Data Feeds if you want attributes that cover visitors' history from before you set up Signals. Use them beside a live approach, not instead of one, because warehouse values can't trigger interventions on their own.
 
 ## Before you begin
 
 You need:
 
 - A Snowplow pipeline with Signals enabled, and its Collector URL.
-- Access to change your Adobe setup: the Tags property, the page code that configures the Web SDK or AppMeasurement, or the event forwarding property.
-- A list of where your Adobe data holds the user ID, plan, account ID and search term: the eVars and props in your report suite, or the fields in your XDM schema. The adapter reads only the fields you name.
-- Your consent setup: the Web SDK `defaultConsent` and `setConsent` calls, the ECID opt-in service, or your consent management platform.
+- Access to change your Adobe setup: the Tags property, or the page code that configures the Web SDK.
+- A list of the XDM fields that hold the user ID, plan, account ID and search term. The adapter reads only the fields you name.
 
-Every approach uses these two schemas, published on Iglu Central. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Adobe. Check failed events after your first test.
+The `external_event` and `external_identity` schemas, and the other schemas the adapter uses, are published on Iglu Central. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
 
-- `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0`, described in [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
-- `iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0`, described in [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
+## Set up the Web SDK callback
 
-The other schemas the adapter uses (`snowplow_ecommerce_action` 1-0-2 with its `product`, `transaction`, `cart`, `refund` and `checkout_step` entities, `identify` 1-0-0 and `site_search` 1-0-0) resolve from Iglu Central.
+The Web SDK calls `onBeforeEventSend` with each event just before it sends it. The callback copies the event into Snowplow and lets Adobe's request continue unchanged.
 
-## Set up a client-side approach
-
-There are three client-side approaches, one for each kind of Adobe setup: the Web SDK callback, the AppMeasurement callback and Tags rules on the Adobe Client Data Layer. Complete the shared steps, then the section for your library.
-
-### Shared steps
-
-All three load the same script. It starts the Snowplow tracker with the ecommerce plugin and gives you helper functions that send one Snowplow event per Adobe event, with the `external_identity` entity attached.
-
-1. Host the Snowplow JavaScript tracker and the Snowplow ecommerce plugin where your pages can load them. These steps use version 4.10.3 of both.
-
-2. Add this script to your pages, or to your Tags library, so that it runs before your Adobe library sends its first event. Set `collector` to your Collector URL and `appId` to your app ID.
+1. **Add the shared script.** Host the Snowplow JavaScript tracker and ecommerce plugin, version 4.10.3, where your pages can load them. Then add this script to your pages, or to your Tags library, so that it runs before the Web SDK sends its first event. Set `collector` to your Collector URL and `appId` to your app ID. All Adobe approaches use this script.
 
    <details>
    <summary>snowplow-adobe.js: tracker loader and helpers</summary>
@@ -194,23 +152,13 @@ All three load the same script. It starts the Snowplow tracker with the ecommerc
 
    </details>
 
-3. If you want engagement attributes, turn on page pings after `newTracker`:
+   To send page pings for engagement attributes, add this after `newTracker`:
 
    ```js
    snowplow('enableActivityTracking', { minimumVisitLength: 5, heartbeatDelay: 5 });
    ```
 
-4. Gate the Snowplow tracker on the same consent signal as Adobe. The helpers only send when your Adobe hook fires, and the hooks follow Adobe's consent, but the tracker sets its own cookies when it loads. Load this script only once your consent management platform allows analytics, or configure the tracker's cookies to match your consent policy.
-
-5. Choose a Collector domain. A Collector on the same site as your pages receives every first-party cookie, including Adobe's `kndctr_*`, `AMCV_*`, `AMCVS_*` and `s_cc` cookies. If that's not acceptable, use a Collector on another site.
-
-Then follow the section for your Adobe library.
-
-### Web SDK callback
-
-The Web SDK calls `onBeforeEventSend` with each event just before it sends it. The callback below copies the event into Snowplow and lets Adobe's request continue unchanged.
-
-1. Add the field map and the mapping function to `snowplow-adobe.js`, after the helpers. Replace the paths in `FIELDS` with the paths in your own XDM schema. Tenant fields start with your tenant ID, such as `xdm._yourtenant`.
+2. **Add the field map.** Add the mapping below to `snowplow-adobe.js`, after the helpers. Replace the paths in `FIELDS` with the paths in your own XDM schema. Tenant fields start with your tenant ID, such as `xdm._yourtenant`.
 
    <details>
    <summary>Web SDK mapping: XDM event to Snowplow event</summary>
@@ -314,7 +262,7 @@ The Web SDK calls `onBeforeEventSend` with each event just before it sends it. T
 
    </details>
 
-2. Tell the helpers how to read the ECID. Call `getIdentity` once after your first `sendEvent` resolves, then release any events that were waiting for it. Use your Web SDK instance name; it's `alloy` by default.
+3. **Read the ECID.** Call `getIdentity` once after your first `sendEvent` resolves. Use your Web SDK instance name; it's `alloy` by default.
 
    ```js
    var ecid = null;
@@ -330,9 +278,7 @@ The Web SDK calls `onBeforeEventSend` with each event just before it sends it. T
    // alloy('sendEvent', { xdm: { ... } }).then(function () { if (!ecid) fetchEcid(); }).catch(function () {});
    ```
 
-3. Add the callback. Where you add it depends on how you deploy the Web SDK.
-
-   If you configure the Web SDK in page code, add `onBeforeEventSend` to your `configure` call:
+4. **Add the callback.** If you configure the Web SDK in page code, add `onBeforeEventSend` to your `configure` call:
 
    ```js
    alloy('configure', {
@@ -345,29 +291,50 @@ The Web SDK calls `onBeforeEventSend` with each event just before it sends it. T
    });
    ```
 
-   If you deploy the Web SDK with Tags, open the Adobe Experience Platform Web SDK extension settings and add the same body as the on before event send callback code. The extension provides the event as `content`:
+   If you deploy the Web SDK with Tags, add this to the on before event send callback code in the Adobe Experience Platform Web SDK extension settings. The extension provides the event as `content`:
 
    ```js
    try { if (window.snowplowAdobe && window.snowplowAdobe.mirrorXdm) window.snowplowAdobe.mirrorXdm(content); } catch (e) {}
    ```
 
-   If you already have callback code there, add these lines to it. Don't return `false`: that cancels the event for Adobe as well.
+   Keep the `try` and `catch`, and never return `false`: either would stop the event for Adobe too.
 
-4. Make sure `snowplow-adobe.js` loads before the Web SDK sends its first event. On Tags, either add it as a script tag above your Tags embed code, or load it from a rule that fires on Library Loaded and is ordered before the rule that sends your first event. Events sent before it loads are not copied.
+5. **Gate the tracker on consent.** The tracker sets its own cookies when it loads. Load `snowplow-adobe.js` only once your consent management platform allows analytics.
 
-5. Publish your Tags library or deploy your page code, then [check it works](#check-it-works).
+6. **Publish** your Tags library or deploy your page code, then [check it works](#check-it-works).
 
-:::tip
-Check the callback in a development library with the Adobe Experience Platform Debugger before you publish: Adobe should still receive every event, and each one should reach your Collector.
-:::
+To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+
+## Check it works
+
+Test with your Console development environment, which runs Snowplow Micro hosted by Snowplow. Every Snowplow trial includes one. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
+
+1. In Console, go to **Pipelines**, select your development environment and copy its Collector endpoint.
+2. Point `collector` in the shared script at it. For event forwarding, point the Make Fetch Call action at it, keeping the `/com.snowplowanalytics.snowplow/tp2` path.
+3. Send a page view, a product view, a purchase and a login.
+4. Select **Open dashboard** to see the good and failed events.
+
+Check that:
+
+- no event failed
+- page views arrive as `page_view` events, one per Adobe page view
+- product views and orders arrive as `snowplow_ecommerce_action` events, with a `product` entity per line and a `transaction` entity
+- logins arrive as `identify` events with `id` only
+- other events arrive as `external_event`, with `name` set to the XDM `eventType`, the link name or the data layer event
+- every event carries `external_identity`, with the ECID in `anonymous_id`
+- Adobe still receives every event, in the Adobe Experience Platform Debugger
+
+Once the events look right, point the shared script at your pipeline's Collector, then create your attribute groups from the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
+
+## Other approaches
 
 ### AppMeasurement callback
 
-AppMeasurement calls the function you pass to `s.registerPreTrackCallback` with the final request URL of every `s.t()` and `s.tl()` call. The callback below reads that URL and sends the matching Snowplow event. AppMeasurement's own request is unchanged.
+AppMeasurement calls the function you pass to `s.registerPreTrackCallback` with the request URL of every `s.t()` and `s.tl()` call. The callback reads that URL and sends the matching Snowplow event.
 
-1. Write down which eVars, props and events hold the user ID, plan, account ID and search term. Your report suite's variable list has them. In the request URL, `eVar1` appears as `v1` and `prop3` as `c3`.
+1. Add the [shared script](#set-up-the-web-sdk-callback) from step 1 of the Web SDK callback.
 
-2. Add the mapping to `snowplow-adobe.js`, after the helpers. Set `MAP` to your variables.
+2. Write down which eVars, props and events hold the user ID, plan, account ID and search term. In the request URL, `eVar1` appears as `v1` and `prop3` as `c3`. Add the mapping to `snowplow-adobe.js`, after the helpers, and set `MAP` to your variables. Context data is never read.
 
    <details>
    <summary>AppMeasurement mapping: Analytics hit to Snowplow event</summary>
@@ -417,7 +384,7 @@ AppMeasurement calls the function you pass to `s.registerPreTrackCallback` with 
 
    </details>
 
-3. Register the callback on your `s` object and tell the helpers how to read the ECID from your Visitor instance:
+3. Register the callback on your `s` object and tell the helpers how to read the ECID. If your `s` object already has a Visitor instance, use that one. If Tags deploys AppMeasurement, put this in the Adobe Analytics extension's custom code.
 
    ```js
    var visitor = Visitor.getInstance('YOUR_ORG_ID@AdobeOrg', { trackingServer: 'metrics.example.com' });
@@ -429,23 +396,17 @@ AppMeasurement calls the function you pass to `s.registerPreTrackCallback` with 
    window.snowplowAdobe.vendorId = function () { return visitor.getMarketingCloudVisitorID(); };
    ```
 
-   If your `s` object already has a Visitor instance, use that one rather than creating another.
-
-4. Deploy the change, then [check it works](#check-it-works).
-
-:::note
-If Tags deploys AppMeasurement through the Adobe Analytics extension, register the callback in the extension's custom code for configuring the tracker.
-:::
+4. Gate the tracker on consent, deploy the change, then [check it works](#check-it-works).
 
 ### Tags rules on the Adobe Client Data Layer
 
-If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), you can fire Snowplow events from Tags rules on those pushes. This works whichever Adobe library you run, but you write one rule per event.
+If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), you can fire Snowplow events from Tags rules on those pushes. You write one rule per event.
 
-1. Add `snowplow-adobe.js` to your Tags library, as in the [shared steps](#shared-steps). There is no Snowplow extension for Tags, so rules call the helpers from custom code.
+1. Add the [shared script](#set-up-the-web-sdk-callback) to your Tags library.
 
-2. In the Adobe Client Data Layer extension, create data elements that read named paths from the data layer's computed state, such as `page.name`, `user.id`, `account.id` and `account.plan`. Read named fields only. The computed state keeps every field ever pushed, including emails.
+2. In the Adobe Client Data Layer extension, create data elements that read named paths from the data layer, such as `page.name`, `user.id`, `account.id` and `account.plan`. Read named fields only: the data layer keeps every field ever pushed, including emails.
 
-3. Create one rule per data layer event. Use the extension's Data Pushed event for that specific event name, and a Core Custom Code action that calls a helper. The pushed object is `event.message`. For example:
+3. Create one rule per data layer event, with the extension's Data Pushed event for that event name and a Core Custom Code action that calls a helper. The pushed object is `event.message`. For example:
 
    ```js
    // Rule: SP page view. Event: Data Pushed, specific event "page loaded".
@@ -472,25 +433,17 @@ If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), yo
    window.snowplowAdobe.sp.external('join_group', 'group', { group_id: _satellite.getVar('account id'), plan: _satellite.getVar('account plan') });
    ```
 
-   Adjust the field names to match your data layer.
+   Add rules that call `sp.ecommerce` with type `product_view` and `sp.search` if you want product views and searches. These rules don't read the ECID unless you set `window.snowplowAdobe.vendorId`, as in the other approaches.
 
-   These four rules send no product views or searches. Add rules that call `sp.ecommerce` with type `product_view` and `sp.search` on your data layer's product view and search events if you want them; without them, purchase intent counts orders only, and interventions that fire on a product view never fire.
+4. Publish your Tags library, then [check it works](#check-it-works).
 
-4. If you want link clicks, turn on the Snowplow tracker's own link tracking. The data layer has none unless your site pushes them.
+### Event forwarding
 
-5. Publish your Tags library, then [check it works](#check-it-works).
-
-These rules don't read the ECID, so their events' `external_identity` has a null `anonymous_id` unless you also set `window.snowplowAdobe.vendorId` from your Adobe library, as in the Web SDK or AppMeasurement sections.
-
-To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
-
-## Set up the server-side approach: event forwarding
-
-Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK event that reaches the Edge Network. The setup below builds a Snowplow tracker protocol request from each event and posts it to your Collector. Nothing changes in the browser or the app.
+Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK event that reaches the Edge Network, and posts a Snowplow event to your Collector. Nothing changes in the browser or the app. It has no Snowplow sessions, the visitor key is the ECID, and values arrive later than client-side. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 
 1. Confirm that your contract includes event forwarding. Adobe includes it with Real-Time CDP Connections, Prime and Ultimate.
 
-2. In your event forwarding property, create a Core Custom Code data element, for example `snowplow body`. Paste in the Adobe-to-Snowplow converter below. Set `slots` to the same paths as `FIELDS` in the Web SDK mapping, and `aid` to your app ID.
+2. In your event forwarding property, create a Core Custom Code data element, for example `snowplow body`, and paste in the converter below. Set `slots` to the same paths as `FIELDS` in the Web SDK mapping, and `aid` to your app ID.
 
    <details>
    <summary>Adobe-to-Snowplow converter</summary>
@@ -684,23 +637,17 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
    return JSON.stringify(toPayload([xdmToSp(arc.event, { ecid: ecid, ip: head.ip, ua: head.userAgent })]));
    ```
 
-   The converter applies the same mapping as the Web SDK callback, with one difference: it sends every item of a product view as a `product` entity, in order, so the viewed product comes first.
-
 3. Install the Adobe Cloud Connector extension. Create a rule with a Make Fetch Call action that sends a `POST` to `https://<your collector>/com.snowplowanalytics.snowplow/tp2`, with the header `Content-Type: application/json` and the `snowplow body` data element as the body.
 
 4. Publish the event forwarding library, then [check it works](#check-it-works).
 
-:::caution
-Adobe documents the `arc` object that event forwarding passes to custom code, with the event in `arc.event` and request details in `arc.request`. Log `arc` in a development property to check where your events hold the ECID, IP address and user agent before you publish. Adobe documents a 30-second processing timeout per event.
-:::
+### Warehouse history: Data Feeds
 
-## Set up warehouse history: Data Feeds
-
-If you receive Adobe Analytics Data Feeds in your warehouse, you can turn them into batch attributes per visitor and serve them from Signals beside your live attributes.
+If you receive Adobe Analytics Data Feeds in your warehouse, you can turn them into batch attributes per visitor beside your live attributes. This needs a Signals warehouse connection.
 
 1. Load the Data Feed `hit_data` files into a table in the warehouse Signals reads.
 
-2. Build a model that aggregates the feed per ECID. This example counts visits, page views, product views and orders over 90 days, and keeps the most recent account ID from `eVar5`. Change the eVar and event numbers to match your report suite.
+2. Build a model that aggregates the feed per ECID. This example counts visits, page views, product views and orders over 90 days, and keeps the latest account ID from `eVar5`. Change the eVar and event numbers to match your report suite, and the date functions to match your warehouse.
 
    ```sql
    WITH hits AS (
@@ -730,128 +677,51 @@ If you receive Adobe Analytics Data Feeds in your warehouse, you can turn them i
    GROUP BY h.mcvisid;
    ```
 
-   In `post_event_list`, Adobe uses numeric IDs: `1` is purchase, `2` is product view, and `200` to `299` are `event1` to `event100`. Date functions differ by warehouse; rewrite `DATE('now', '-90 day')` for yours. The model needs window functions (`ROW_NUMBER`).
+   In `post_event_list`, `1` is purchase, `2` is product view, and `200` to `299` are `event1` to `event100`.
 
 3. In Signals, create a custom attribute key for the ECID, and add the model's output as a [batch source](/docs/signals/attributes/warehouse-config/index.md) on that key.
 
-:::caution
-Batch sources need a warehouse connection, which is not on the free tier.
-:::
-
-## Check it works
-
-Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
-
-1. In Console, go to **Pipelines** and select your development environment.
-2. Copy its Collector endpoint.
-3. Point `collector` in the shared script (client-side), or the host in your event forwarding Make Fetch Call action (server-side), at it. Keep the `/com.snowplowanalytics.snowplow/tp2` path in the fetch call.
-4. Send a page view, a product view, a purchase and a login.
-5. Select **Open dashboard** to see the good and failed events.
-
-In the dashboard, check that:
-
-- There are no failed events. If an event failed, its error in the dashboard names the field that didn't validate.
-- Page views arrive as `page_view` events, one per Adobe page view, including single-page app views.
-- Product views and orders arrive as `snowplow_ecommerce_action` events, with one `product` entity for every line of the order and a `transaction` entity.
-- Logins arrive as `identify` events with `id` only. `user_id` is set from the login onward, including on events replayed after a consent grant.
-- Other events arrive as `external_event`, with `name` set to the XDM `eventType`, the link name or the data layer event.
-- Every event from the Web SDK, AppMeasurement and event forwarding carries `external_identity`, with the ECID in `anonymous_id`.
-- On the client-side approaches, `domain_userid` and `domain_sessionid` are UUIDs. On event forwarding, `domain_userid` is the ECID and `domain_sessionid` is empty.
-- Apart from the user ID, no email address appears in the events. Search them for `@`.
-
-In the Adobe Experience Platform Debugger, check that Adobe still receives every event. If an event goes missing for Adobe, your callback is throwing.
-
-Once the events look right, point the shared script or the fetch call at your pipeline's Collector. Create and publish your attribute groups, starting from the [starter attribute groups](#starter-attribute-groups), then read the attributes in Signals. To act on them, [create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention).
-
-For Data Feeds, run the model and check the row counts against Adobe Analytics for the same 90 days. Adobe's reports apply processing the raw feed doesn't, so expect small differences.
+Warehouse attributes update periodically, so they can't trigger interventions.
 
 ## How Adobe events map to Snowplow
 
-Every approach uses the same order: a standard Snowplow event wherever one fits, and `external_event` for the rest. [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) explains why.
+Every approach uses the same [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md): a standard Snowplow event wherever one fits, and `external_event` for the rest.
 
-| Adobe event | Snowplow event | Notes |
-|---|---|---|
-| Web SDK `web.webpagedetails.pageViews`; AppMeasurement `s.t()`; data layer page event | `page_view` | Title from `web.webPageDetails.name` or `pageName` |
-| Web SDK `commerce.productViews`; Analytics `prodView` | `snowplow_ecommerce_action`, type `product_view` | The first item only, as the viewed product. Event forwarding sends every item as a `product` entity, the viewed product first |
-| Web SDK `commerce.productListAdds`, `commerce.productListRemovals`; Analytics `scAdd`, `scRemove` | `snowplow_ecommerce_action`, type `add_to_cart` or `remove_from_cart`, with a `cart` entity | `cart.total_value` is the sum of the items in the event, because Adobe sends no cart total |
-| Web SDK `commerce.checkouts`; Analytics `scCheckout` | `snowplow_ecommerce_action`, type `checkout_step` | Step is always 1 |
-| Web SDK `commerce.purchases`; Analytics `purchase` | `snowplow_ecommerce_action`, type `transaction`, with a `transaction` entity and one `product` entity per line | Payment method from `commerce.order.payments`; `unknown` on AppMeasurement, whose hits don't carry it |
-| Web SDK `commerce.refunds`, if your schema uses it | `snowplow_ecommerce_action`, type `refund`, with a `refund` entity | Adobe has no standard refund event type |
-| Any Web SDK event with `siteSearch.query`; your Analytics search event with its search variable | `site_search` | |
-| Web SDK `userAccount.login` with a CRMID; any AppMeasurement link hit with the user ID variable | `identify`, with `id` only | The ID is sent unchanged. If it's an email address, the email reaches Snowplow |
-| Everything else: link clicks, form events, account events, your own event types and link names | `external_event`, `tool` set to `adobe` | `name` is the XDM `eventType`, the `s.tl` link name, `exit_link` or `download_link`. Plan, account and search term come from your field map |
+| Adobe event | Snowplow event |
+|---|---|
+| Web SDK `web.webpagedetails.pageViews`; AppMeasurement `s.t()`; data layer page event | `page_view` |
+| Web SDK `commerce.productViews`; Analytics `prodView` | `snowplow_ecommerce_action`, type `product_view` |
+| Web SDK `commerce.productListAdds`, `commerce.productListRemovals`; Analytics `scAdd`, `scRemove` | `snowplow_ecommerce_action`, type `add_to_cart` or `remove_from_cart`, with a `cart` entity |
+| Web SDK `commerce.checkouts`; Analytics `scCheckout` | `snowplow_ecommerce_action`, type `checkout_step` |
+| Web SDK `commerce.purchases`; Analytics `purchase` | `snowplow_ecommerce_action`, type `transaction`, with a `transaction` entity and one `product` entity per line |
+| Any Web SDK event with `siteSearch.query`; your Analytics search event | `site_search` |
+| Web SDK `userAccount.login` with a CRMID; an AppMeasurement hit with the user ID variable | `identify`, with `id` only |
+| Everything else: link clicks, form events, your own event types and link names | `external_event`, `tool` set to `adobe` |
 
 ## Identifiers
 
 | Adobe field | Snowplow field | Use as a Signals key? |
 |---|---|---|
-| Snowplow visitor ID (`_sp_id` cookie), client-side approaches only | `domain_userid` | Yes. A random UUID, safe on the public intervention endpoint |
-| Snowplow session ID, client-side approaches only | `domain_sessionid` | Yes, for session attributes |
-| ECID (`kndctr_<org>_identity` cookie for the Web SDK, `AMCV_<org>` for the Visitor service, `mcvisid` in Data Feeds) | `external_identity.anonymous_id`; on event forwarding, also `domain_userid` and `network_userid` | Server-side reads only. Adobe derives it from your org ID and the Audience Manager user ID and doesn't document how random it is, so don't use it on the public intervention endpoint |
-| Authenticated ID: Web SDK `identityMap` CRMID, Visitor `setCustomerIDs`, or your user ID eVar | `user_id`, `external_identity.user_id` and `identify.id`, unchanged. If it's an email address, the email reaches Snowplow | Server-side reads only. It is chosen by you and can be guessed |
-| Adobe visit (`visit_num`, Customer Journey Analytics sessions) | Nothing | Adobe computes visits on its servers. Neither library sends a session ID |
-| Email in `identityMap`, context data or eVars | Nothing | Never read by the adapter |
-| Customer ID hash in the `AMCV` cookie | Nothing | Reaches a same-site Collector in the cookie header |
-| XDM `eventType`, link name or data layer event | `external_identity.event_name`, and `external_event.name` | Lets you trace each row back to the Adobe event |
-| Snowplow identity resolution (`snowplow_id`) | `snowplow_id` | With Snowplow Identities, stream attribute groups keyed on `snowplow_id` can be read by `domain_userid` or `user_id` |
+| Snowplow visitor ID, client-side approaches | `domain_userid` | Yes. A random ID, safe on the public intervention endpoint |
+| Snowplow session ID, client-side approaches | `domain_sessionid` | Yes, for session attributes |
+| ECID | `external_identity.anonymous_id`; on event forwarding, also `domain_userid` | Only for reads from your own servers. Never on the public intervention endpoint |
+| Authenticated ID: Web SDK `identityMap` CRMID, Visitor `setCustomerIDs`, or your user ID eVar | `user_id`, `external_identity.user_id` and `identify.id`, unchanged | Only for reads from your own servers |
+| Adobe visit | Nothing | Adobe computes visits on its servers |
 
-[Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) explains which keys are safe where. [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) covers where each identifier travels.
+See [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
-## Starter attribute groups
+## Troubleshooting
 
-The [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) work on Adobe data, with these differences:
+- **Adobe stops receiving an event:** the callback is throwing or returning `false`. Keep the `try` and `catch`, and return nothing.
+- **The first events on a page aren't copied:** `snowplow-adobe.js` loaded after the Web SDK sent them. Load it first, or from a Library Loaded rule ordered before your first event.
+- **Events arrive without `external_identity`:** the ECID wasn't available within 5 seconds. Check the `getIdentity` call in step 3.
+- **Each event arrives twice:** your site runs both the Web SDK and AppMeasurement hooks. Keep one.
+- **A value is missing from `external_event`:** add its XDM path, eVar or prop to your field map. Attributes read only the typed fields of `external_event`, and Adobe's own processing, such as eVar persistence and processing rules, isn't applied.
 
-- **Visitor activity** works on every approach. UTM attributes need the campaign attribution enrichment on your pipeline.
-- **Purchase intent** works on every approach except Data Feeds. Payment method is `unknown` on the AppMeasurement callback. With Tags rules, it counts only the events you write rules for; the example rules send orders only.
-- **Account and plan** read `external_event.plan` and `group_id` from your field map. A plan sent only on the login hit is lost, because `identify` holds the ID only. Send the plan on another event too. Group calls count only `external_event` rows with kind `group`, which only the Tags rule sends; the Web SDK and AppMeasurement mappings and event forwarding send account events with kind `track`, so the group call count stays empty on them.
-- **Session engagement** needs a client-side approach and page pings turned on. Key it on `domain_sessionid`.
-- **Adobe history** is an Adobe-only group from Data Feeds: visits, page views, product views and orders in 90 days, and last account, on a custom ECID key.
-
-## Limits
-
-All approaches:
-
-1. **Adobe's server-side processing is not reproduced.** The hooks see each event as the browser sends it. eVar persistence and allocation, processing rules, VISTA rules, marketing channels, bot filtering and classifications are applied later by Adobe, so attributes read raw values.
-2. **Attributes read only declared fields.** Signals rejects attributes on properties a schema doesn't declare, so events without a standard Snowplow schema keep only the typed fields of `external_event`. The field map is yours to set.
-3. **Duplicates count once.** If an event reaches the pipeline twice with the same `event_id`, Signals counts it once.
-
-Web SDK callback:
-
-1. **An exception in the callback stops the event for Adobe too.** Keep the `try` and `catch`, and never return `false`.
-2. **Events held for consent replay late.** With consent pending, the Web SDK holds events and sends them at the grant, all with the page URL and device time of the grant. Each keeps the user ID it was sent with. With consent refused, events are dropped and never sent.
-3. **The first event of each page waits for the ECID**, for up to 5 seconds, then goes without the `external_identity` entity.
-4. **The user ID lasts for the page, not across a reload.** It is set again on the next event that carries it.
-
-AppMeasurement callback:
-
-1. **The variable map is per report suite.** eVar and prop meanings differ, so you configure them.
-2. **Context data is ignored**, by design, because that's where emails often sit. If a value you need is only in context data, copy it to an eVar or prop.
-3. **No payment method**, because Analytics hits don't carry one.
-4. **Events held for the ECID opt-in replay late**, as on the Web SDK.
-
-Tags rules on the data layer:
-
-1. **Only events you write a rule for are sent.** There's no Snowplow extension for Tags, so every rule is custom code.
-2. **No ECID** unless you add it from your Adobe library.
-3. **The computed state holds everything ever pushed**, emails included. Rules must read named fields only.
-
-Event forwarding:
-
-1. **No sessions or engagement.** Session attributes and page pings need the Snowplow tracker in the browser.
-2. **The visitor key is the ECID.** Adobe doesn't document how random it is, so don't use it on the public intervention endpoint.
-3. **The user ID appears only on events that carry it** in `identityMap`, not on the rest of the page.
-4. **Event IDs are assigned by the pipeline** when the event has no `xdm._id`, so a resend arrives with a new ID.
-5. **Web SDK and Mobile SDK only.** AppMeasurement traffic doesn't reach the Edge Network.
-6. **Delivery depends on Adobe.** Adobe doesn't document a delivery time for event forwarding. Expect at least several seconds, as with other server-side queues, and don't rely on it for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
-
-Data Feeds:
-
-1. **Periodic, and can't trigger interventions on their own.**
-2. **Keyed on the ECID**, and attributes keyed on `snowplow_id` are stream-only, so Identities can't merge this history into them.
-3. **Needs a warehouse connection**, which is not on the free tier.
+For how each approach handles consent and personal data, see [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
 
 Where to go next:
 
+- Build your first attributes from [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
 - [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. On the client-side approaches, `domain_userid` stays the same, so attributes carry over.
-- Read the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) references.
-- Define [interventions](/docs/signals/interventions/index.md) keyed on `domain_userid`.
+- Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.

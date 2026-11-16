@@ -17,7 +17,7 @@ content_type: reference
 | Sent with | The [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity |
 
 :::note
-`external_event` is published on Iglu Central. If you register your own copy, for example under your own vendor, deploy it to production before you send events that use it. Events sent before deployment are rejected for several minutes after it. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test.
+`external_event` is published on Iglu Central.
 :::
 
 ## Fields

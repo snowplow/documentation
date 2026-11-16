@@ -47,13 +47,13 @@ Choose the warehouse export for history, for example lifetime order count, along
 - For the server-side approach, an Amplitude plan that includes the Webhook destination.
 - A Snowplow Collector URL and Signals enabled on your pipeline.
 - For browser requests, a Collector that accepts cross-origin POST requests from your site's domain.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the converter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Amplitude. Check failed events after your first test.
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the converter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Amplitude. Check failed events after your first test.
 - Your Amplitude tracking plan, so you can match your event names to the ecommerce and search lists described in [How Amplitude events map to Snowplow](#how-amplitude-events-map-to-snowplow).
 
 :::note[The converter]
 The client-side code calls a converter, `AmplitudeSnowplow`, that turns each Amplitude event into Snowplow events. The client-side code doesn't run without it. Copy it from [Mapping code](#mapping-code) and load it on the page before the plugin runs. It provides `fromBrowser`, `toSnowplow`, `identity` and `toPayload`, and holds the ecommerce and search name lists.
 
-The converter's `external_event` and `external_identity` schema URIs use the vendor `com.snowplowanalytics.snowplow`. If your copies of these schemas are registered under another vendor, change both URIs to match. `ADAPTER.tool` is the tool name the converter puts in `external_event` and `external_identity`, not a schema vendor, so leave it as `amplitude`. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event: set your app ID after loading the converter with `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
+`ADAPTER.tool` is the tool name the converter puts in `external_event` and `external_identity`, so leave it as `amplitude`. When you send without the Snowplow tracker, the converter also sets the app ID (`aid`) and tracker version (`tv`) on every event: set your app ID after loading the converter with `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
 :::
 
 ## Set up the client-side approach
@@ -310,8 +310,6 @@ Test with your Console development environment before you send events to your pi
 4. Send test events from your site.
 5. Select **Open dashboard** to see the good and failed events.
 
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
-
 In the dashboard, check that:
 
 - Every Amplitude event arrives once, with no failed events.
@@ -408,7 +406,6 @@ Where to go next:
 Both client-side variants load this converter before the plugin. Save it on your site, for example as `/js/amplitude-snowplow.js`, and load it with a `<script>` tag before the Amplitude SDK. It adds only `window.AmplitudeSnowplow` to the page.
 
 - To use your own event names, add them to the `ECOM` and `SEARCH` lists. The webhook template has the same lists, so edit both together.
-- To use your own copies of `external_event` and `external_identity`, change the vendor in their two schema URIs.
 - When you send without the Snowplow tracker, set your app ID after loading the file: `AmplitudeSnowplow.ADAPTER.aid = 'my-site';`.
 
 ```js

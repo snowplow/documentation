@@ -24,7 +24,7 @@ Every adapter, client-side or server-side and for every tool, maps an event the 
 Every event, on every rung, also carries an `external_identity` entity with your tool's IDs and the original event name. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
 :::note
-Every schema on this page, including `external_event` and `external_identity`, is published on Iglu Central. If you register your own copies of `external_event` and `external_identity`, deploy them to production before you send events that use them. If you register them under a vendor other than `com.snowplowanalytics.snowplow`, set that vendor in the adapter. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test. Events sent before deployment keep failing for several minutes after it.
+Every schema on this page, including `external_event` and `external_identity`, is published on Iglu Central.
 :::
 
 ## Rung 1: page views

@@ -11,7 +11,7 @@ content_type: how-to
 Use the events your site already sends to Google Analytics 4 (GA4) in Signals, by adding Snowplow tags to your Google Tag Manager (GTM) container or to your server-side GTM container.
 
 :::note[Schemas]
-This integration uses two schemas published on Iglu Central, `com.snowplowanalytics.snowplow/external_event` and `com.snowplowanalytics.snowplow/external_identity`. If you register your own copies, deploy them to production before you send any events, and replace the vendor `com.snowplowanalytics.snowplow` in every `external_event` and `external_identity` schema URI on this page with your copies' vendor. Change only the vendor. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in GTM. Check failed events after your first test.
+This integration uses two schemas published on Iglu Central, `com.snowplowanalytics.snowplow/external_event` and `com.snowplowanalytics.snowplow/external_identity`. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in GTM. Check failed events after your first test.
 :::
 
 ## Choose an approach
@@ -54,7 +54,7 @@ You need:
 
 - GA4 on your site, through GTM or through `gtag.js`
 - a Snowplow Collector URL for a pipeline with Signals enabled
-- the `external_event` and `external_identity` schemas, from Iglu Central or as your own copies deployed to production. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md)
+- the `external_event` and `external_identity` schemas, published on Iglu Central. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md)
 - for the server-side approach, a running server-side GTM container on an `https://` URL that receives your GA4 hits through the GA4 client
 - for the warehouse approach, the GA4 BigQuery export turned on, and a Signals warehouse connection to BigQuery
 
@@ -446,8 +446,6 @@ Test with your Console development environment before you send events to your pi
 4. Send test traffic, for example from GTM Preview mode.
 5. Select **Open dashboard** to see the good and failed events.
 
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
-
 On the client-side approaches, check that:
 
 - page views arrive for full loads and for single-page-app route changes, with a `domain_userid` and a `domain_sessionid`
@@ -576,7 +574,7 @@ Where to go next:
 
 ## Mapping file: ladder.js
 
-The page script loads this file before its own code. Save it on your site, for example as `/js/ladder.js`, and load it with a `<script>` tag before the page script. It defines `window.GA4Snowplow`. If you use your own copies of `external_event` and `external_identity`, change the vendor in the first two schema URIs.
+The page script loads this file before its own code. Save it on your site, for example as `/js/ladder.js`, and load it with a `<script>` tag before the page script. It defines `window.GA4Snowplow`.
 
 ```js
 // Maps a GA4 event to the first rung that fits: page_view, Snowplow ecommerce, site_search,

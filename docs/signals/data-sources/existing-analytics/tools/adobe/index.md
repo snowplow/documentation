@@ -65,7 +65,7 @@ You need:
 - A list of where your Adobe data holds the user ID, plan, account ID and search term: the eVars and props in your report suite, or the fields in your XDM schema. The adapter reads only the fields you name.
 - Your consent setup: the Web SDK `defaultConsent` and `setConsent` calls, the ECID opt-in service, or your consent management platform.
 
-Every approach uses these two schemas, published on Iglu Central. If you register your own copies, for example under your own vendor, deploy them to production before you send any events. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Adobe. Check failed events after your first test.
+Every approach uses these two schemas, published on Iglu Central. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in Adobe. Check failed events after your first test.
 
 - `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0`, described in [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
 - `iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0`, described in [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
@@ -82,7 +82,7 @@ All three load the same script. It starts the Snowplow tracker with the ecommerc
 
 1. Host the Snowplow JavaScript tracker and the Snowplow ecommerce plugin where your pages can load them. These steps use version 4.10.3 of both.
 
-2. Add this script to your pages, or to your Tags library, so that it runs before your Adobe library sends its first event. Set `collector` to your Collector URL and `appId` to your app ID. If you registered your own copies of the two `external_*` schemas, set `window.snowplowAdobe.vendor` to their vendor before the script runs.
+2. Add this script to your pages, or to your Tags library, so that it runs before your Adobe library sends its first event. Set `collector` to your Collector URL and `appId` to your app ID.
 
    <details>
    <summary>snowplow-adobe.js: tracker loader and helpers</summary>
@@ -91,8 +91,7 @@ All three load the same script. It starts the Snowplow tracker with the ecommerc
    (function () {
      var cfg = (window.snowplowAdobe = window.snowplowAdobe || {});
      cfg.collector = cfg.collector || 'https://collector.example.com';
-     // The vendor of your external_event and external_identity schemas.
-     var VENDOR = cfg.vendor || 'com.snowplowanalytics.snowplow';
+     var VENDOR = 'com.snowplowanalytics.snowplow';
      var IDENTITY = 'iglu:' + VENDOR + '/external_identity/jsonschema/1-0-0';
      var EXTERNAL = 'iglu:' + VENDOR + '/external_event/jsonschema/1-0-0';
      var PRODUCT = 'iglu:com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0';
@@ -491,7 +490,7 @@ Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK e
 
 1. Confirm that your contract includes event forwarding. Adobe includes it with Real-Time CDP Connections, Prime and Ultimate.
 
-2. In your event forwarding property, create a Core Custom Code data element, for example `snowplow body`. Paste in the Adobe-to-Snowplow converter below. Set `slots` to the same paths as `FIELDS` in the Web SDK mapping, and `aid` to your app ID. If you registered your own copies of the two `external_*` schemas, change `external` and `identity` in `schemas` to your vendor.
+2. In your event forwarding property, create a Core Custom Code data element, for example `snowplow body`. Paste in the Adobe-to-Snowplow converter below. Set `slots` to the same paths as `FIELDS` in the Web SDK mapping, and `aid` to your app ID.
 
    <details>
    <summary>Adobe-to-Snowplow converter</summary>
@@ -749,11 +748,9 @@ Test with your Console development environment before you send events to your pi
 4. Send a page view, a product view, a purchase and a login.
 5. Select **Open dashboard** to see the good and failed events.
 
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
-
 In the dashboard, check that:
 
-- There are no failed events. If an `external_event` or `external_identity` event failed, the schemas aren't registered, or the events were sent before the schemas were deployed.
+- There are no failed events. If an event failed, its error in the dashboard names the field that didn't validate.
 - Page views arrive as `page_view` events, one per Adobe page view, including single-page app views.
 - Product views and orders arrive as `snowplow_ecommerce_action` events, with one `product` entity for every line of the order and a `transaction` entity.
 - Logins arrive as `identify` events with `id` only. `user_id` is set from the login onward, including on events replayed after a consent grant.

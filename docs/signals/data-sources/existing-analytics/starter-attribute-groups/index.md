@@ -18,11 +18,7 @@ Once your existing analytics events reach Snowplow, you can calculate Signals at
 
 Each group lists its attributes, the events and fields it reads, and which approaches support it. The definitions use the [Signals Python SDK](/docs/signals/connection/index.md). You can create the same attributes in Console instead: each `Attribute`, with its events, criteria, property and aggregation, maps one to one to the fields of Console's attribute form.
 
-:::caution[Deploy the schemas before you send events]
-These definitions read `external_event` and `external_identity`, which are published on Iglu Central. If you register your own copies, deploy them to production before you create the groups, and before you send any event that uses them. Signals rejects an attribute on a schema that isn't in production. If your pipeline looks up a schema before it is deployed, it keeps rejecting events that use it for several minutes after deployment. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in your page or your tool. Check failed events after your first test.
-
-If you register your copies under your own vendor, such as `com.acme`, use that vendor in the adapter's configuration, and set `VENDOR` in the [SDK setup](#set-up-the-sdk) below. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
-:::
+These definitions read `external_event` and `external_identity`, which are published on Iglu Central. See the [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) reference pages.
 
 ## What the attributes read
 
@@ -95,8 +91,6 @@ from snowplow_signals import (
     domain_userid,
 )
 
-# The vendor of your external_event and external_identity schemas. Change it only if you
-# registered your own copies under another vendor.
 VENDOR = "com.snowplowanalytics.snowplow"
 
 sp_signals = Signals(

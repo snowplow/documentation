@@ -52,7 +52,7 @@ You need:
 - Permission to create destinations in your PostHog project for the server-side approach.
 - A Snowplow Collector URL. For the server-side approach, the Collector must accept requests from PostHog's servers. Allow-list PostHog's published IP addresses if your Collector is behind a firewall.
 - Snowplow Signals enabled on your pipeline.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events, and set that vendor in the adapter as described in the setup steps. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, so nothing reaches Signals and no error shows in the page or in PostHog. Check failed events after your first test.
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, so nothing reaches Signals and no error shows in the page or in PostHog. Check failed events after your first test.
 
 Check your PostHog ecommerce events use PostHog's ecommerce spec names (`Product Viewed`, `Order Completed`, `Products Searched` and so on) with a price and a currency. They are the same names Segment uses. Events with other names, or without a currency, become generic `external_event` events instead of Snowplow ecommerce events. See [How PostHog events map to Snowplow](#how-posthog-events-map-to-snowplow).
 
@@ -76,12 +76,7 @@ The client-side approach loads the Snowplow JavaScript tracker and its ecommerce
 
    Replace `https://collector.example.com` with your Collector URL and `my-site` with your app ID. Activity tracking sends the page pings that engagement attributes need. `credentials: 'omit'` keeps PostHog's cookie off Collector requests; see the caution below.
 
-2. Load `converter.js` from [Mapping code](#mapping-code). It defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event. If you registered your own copies of the two schemas, set your vendor straight after it:
-
-   ```html
-   <script src="/js/converter.js"></script>
-   <script>PostHogSnowplow.PH.vendor = 'com.example';</script>
-   ```
+2. Load `converter.js` from [Mapping code](#mapping-code). It defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event.
 
 3. Add the hook. It must be defined before `posthog.init` runs.
 
@@ -162,13 +157,12 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
 
 2. Click **Edit source code**, then clear the template's own inputs. The form lists **Webhook URL**, **Method**, **JSON Body**, **Headers**, **Secret headers**, **Signing secret** and **Log responses**. **Webhook URL** is required: while it is empty, **Test function** stops with "url: This field is required". Delete it: click its cog, then the red bin. The Hog source below ignores **Method**, **JSON Body**, **Headers**, **Secret headers** and **Signing secret**, so you can delete those too. Keep **Log responses**: it is the `debug` input the source reads.
 
-3. Add three inputs with **Add input variable**. Each new input arrives named `input_N`, with type String. Click its cog and clear **Input variable name** first, because typing adds to the prefilled `input_N`. Type the name and press Tab, which applies the name and closes the panel. Then enter the value in the editor that appears under the input in the list, not in **Default value** in the cog panel.
+3. Add two inputs with **Add input variable**. Each new input arrives named `input_N`, with type String. Click its cog and clear **Input variable name** first, because typing adds to the prefilled `input_N`. Type the name and press Tab, which applies the name and closes the panel. Then enter the value in the editor that appears under the input in the list, not in **Default value** in the cog panel.
 
    | Input | Type | Value |
    |---|---|---|
    | `collector_url` | String | Your Collector URL, for example `https://collector.example.com`, with no trailing slash. Console shows the Collector endpoint as a hostname, so add `https://` in front |
    | `app_id` | String | The app ID these events should carry |
-   | `vendor` | String | `com.snowplowanalytics.snowplow`, or your own vendor if you registered copies of `external_event` and `external_identity` |
 
    Don't add a second `debug` input. The template's **Log responses** switch is already `debug`, and two inputs with the same name conflict. Turn **Log responses** on while you set up, so each event's result appears in the logs.
 
@@ -179,15 +173,14 @@ Don't use the stock HTTP Webhook template with only its JSON body edited. Body t
 
    ```text
    // Snowplow collector destination for PostHog (paste into a new HTTP Webhook destination, Edit source code).
-   // Inputs: collector_url (https://collector.example.com), app_id, vendor (com.snowplowanalytics.snowplow, or
-   // your own vendor if you registered copies of external_event and external_identity), debug (the template's Log responses).
+   // Inputs: collector_url (https://collector.example.com), app_id, debug (the template's Log responses).
    // Sends each event down the ladder: page_view, Snowplow ecommerce with every product, site_search,
    // identify with the id only, external_event for the rest; external_identity on every event.
    // Person properties, $set and $set_once are never read, so traits such as email stay in PostHog.
 
    let TOOL := 'posthog'
    let E := 'iglu:com.snowplowanalytics.snowplow.ecommerce/'
-   let V := f'iglu:{inputs.vendor ?? 'com.snowplowanalytics.snowplow'}/'
+   let V := 'iglu:com.snowplowanalytics.snowplow/'
    let DROP := ['$snapshot', '$$heatmap', '$feature_flag_called', '$web_vitals', '$exception', '$$client_ingestion_warning', '$opt_in', '$set']
    let ECOM := {
      'product viewed': 'product_view', 'product added': 'add_to_cart', 'product removed': 'remove_from_cart',
@@ -399,8 +392,6 @@ Test with your Console development environment before you send events to your pi
 3. Point the Snowplow tracker (client-side) or the destination's `collector_url` input (server-side) at it.
 4. Send a few events from a test page.
 5. Select **Open dashboard** to see the good and failed events.
-
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
 
 For a page view, a product view, an order with two products, a search and an `identify` call, you should see:
 

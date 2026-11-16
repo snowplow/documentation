@@ -50,8 +50,8 @@ You need:
 - Permission to create Functions in your Segment workspace for the server-side approach. Segment's docs set a default limit of 25 functions per workspace.
 - A Snowplow Collector URL. For the server-side approach, the Collector must accept requests from Segment's functions, which Segment runs in AWS us-west-2 and eu-west-1. Allow-list them if your Collector is behind a firewall.
 - Snowplow Signals enabled on your pipeline.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events.
-- The Segment adapter script, which maps each Segment call to a Snowplow event. It sends the two schemas under the `com.snowplowanalytics.snowplow` vendor. If you register your own copies under another vendor, change the vendor in the `external` and `identity` entries of the adapter's `IGLU` object to match. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, so nothing reaches Signals and no error shows in the page or in Segment. Check failed events after your first test.
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md).
+- The Segment adapter script, which maps each Segment call to a Snowplow event. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, so nothing reaches Signals and no error shows in the page or in Segment. Check failed events after your first test.
 
 Check your Segment ecommerce events use Segment's v2 spec names (`Product Viewed`, `Order Completed` and so on) with a price and a currency. Events with other names, or without a currency, become generic `external_event` events instead of Snowplow ecommerce events. See [How Segment events map to Snowplow](#how-segment-events-map-to-snowplow).
 
@@ -192,8 +192,6 @@ Test with your Console development environment before you send events to your pi
 4. Send a few calls from a test page or Segment's debugger.
 5. Select **Open dashboard** to see the good and failed events.
 
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
-
 For a page view, a product view, an order with two products and an `identify` call, you should see:
 
 - A native `page_view` for each `analytics.page` call, including the snippet's first one with the landing page URL and its UTM parameters.
@@ -307,7 +305,6 @@ Where to go next:
 Both approaches use this adapter script. For the client-side approach, save it on your site as `/js/segment-snowplow-adapter.js` and load it before the plugin. For the server-side approach, paste it at the top of the Destination Function, above the handlers.
 
 - `standardEvent` matches Segment's spec event names, such as `Product Viewed`, `Order Completed` and `Products Searched`. If your names differ, change the matching `name ===` checks.
-- To use your own copies of `external_event` and `external_identity`, change the vendor in the `IGLU` entries `external` and `identity`.
 - On the client-side approach, the tracker sets the app ID. On the server-side approach, the function's `appId` setting overrides `ADAPTER.aid`.
 
 ```js

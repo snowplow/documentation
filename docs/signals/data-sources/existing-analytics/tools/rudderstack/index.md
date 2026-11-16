@@ -50,7 +50,7 @@ You need:
 - Permission to create transformations and destinations in your RudderStack workspace for the server-side approach.
 - A Snowplow Collector URL that RudderStack can reach. Allow-list RudderStack's outbound IP addresses if your Collector is behind a firewall.
 - Snowplow Signals enabled on your pipeline.
-- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). If you register your own copies, for example under your own vendor, deploy them to production before you send any events. An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in RudderStack. Check failed events after your first test.
+- The `external_event` and `external_identity` schemas, published on Iglu Central, alongside the ecommerce, `site_search` and `identify` schemas the adapter also uses. See [external_event](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) and [external_identity](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md). An event that uses a schema your pipeline can't resolve still gets a 200 response from the Collector, then fails validation, with no error in the page or in RudderStack. Check failed events after your first test.
 
 Check your RudderStack ecommerce events use the ecommerce spec names (`Product Viewed`, `Order Completed` and so on) with a price and a currency. RudderStack shares these names with Segment's v2 spec. Events with other names, or without a currency, become generic `external_event` events instead of Snowplow ecommerce events. See [How RudderStack events map to Snowplow](#how-rudderstack-events-map-to-snowplow).
 
@@ -242,8 +242,6 @@ Test with your Console development environment before you send events to your pi
 3. Point the Snowplow tracker (client-side) or the Webhook destination's URL (server-side) at it. Keep the path after the host, such as `/com.snowplowanalytics.snowplow/tp2`.
 4. Send a few calls from a test page.
 5. Select **Open dashboard** to see the good and failed events.
-
-Development environments use your development data structures, so you can also test your own copies of `external_event` and `external_identity` there before you deploy them to production.
 
 For a page view, a product view, an order with two products and an `identify` call, you should see:
 

@@ -388,7 +388,7 @@ Server-side:
 2. **No browser details.** The webhook payload has no user agent, so device and browser attributes aren't available.
 3. **No engagement time, and sessions only where Amplitude has them.** Events with no `session_id` get no session key.
 4. **No cross-approach deduplication.** `event_id` is Amplitude's `uuid`, which differs from the client-side event ID. Don't forward the same events through both approaches.
-5. **Delivery depends on Amplitude.** Amplitude's documented target is 60 seconds at p95, and it retries failed requests.
+5. **Delivery depends on Amplitude.** Amplitude's documented target is 60 seconds at p95, and it retries failed requests. Signals' own processing comes on top. Don't rely on the server-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 
 Warehouse:
 

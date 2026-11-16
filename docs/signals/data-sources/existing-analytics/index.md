@@ -4,7 +4,7 @@ sidebar_label: "Use Signals with existing analytics"
 sidebar_position: 20
 description: "Send the events your site already sends to Segment, RudderStack, GA4, Amplitude, Adobe or PostHog to Snowplow, and calculate Signals attributes on them without retagging."
 keywords: ["existing analytics", "segment", "rudderstack", "ga4", "amplitude", "adobe", "posthog", "external_event", "signals"]
-date: "2026-11-13"
+date: "2026-11-16"
 content_type: landing
 ---
 
@@ -41,7 +41,7 @@ Most tools offer two places to run the adapter.
 | Visitor key in Snowplow | Snowplow's random `domain_userid` | Your tool's ID, such as Segment's `anonymousId`, Amplitude's `device_id`, the GA client ID or the Adobe ECID |
 | Sessions | Snowplow `domain_sessionid` | None, except on Amplitude, whose events carry a session ID the adapter turns into a session key, and PostHog, whose `$session_id` becomes `domain_sessionid` |
 | Engagement | Page pings, link clicks and other tracking from the Snowplow tracker | Only what your tool sends, such as GA4's Enhanced Measurement events through server-side GTM |
-| Delivery | Sent from the browser when the event happens. Attributes update within about a second | Waits for your tool's queue or batching first, then attributes update within about a second of the event reaching your Collector |
+| Delivery | Sent from the browser when the event happens. Interventions typically arrive about 1 to 2 seconds later | Waits for your tool's queue or batching first, which adds from several seconds to a minute or more. See [Delivery and delay](#delivery-and-delay) |
 | Key for interventions | `domain_userid` is safe on the public intervention endpoint | Often not safe; see [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) |
 | Personal data | The browser sends its IP address, user agent, page URLs and user ID to your Collector, plus your tool's cookies if the Collector is on the same site | Only the fields the adapter maps leave your tool; the IP address and user agent are whatever your tool forwards |
 | Consent | Usually follows your tool's consent, because the hook only fires for events your tool sends; the Snowplow tracker's own cookies need gating separately | Depends on the tool; some forward events whatever the consent state unless you add a check |
@@ -56,7 +56,24 @@ Most tools offer two places to run the adapter.
 **Server-side**
 
 - Pros: no change to the page. Covers server, app and imported events. Your tool's traits and user properties stay inside your tool, because the adapter only sends the fields it maps.
-- Cons: no Snowplow sessions or page pings. The visitor key is your tool's ID, which on several tools isn't safe on the public intervention endpoint. Delivery waits for your tool: Segment can batch function calls for up to 10 seconds, and Amplitude's documented target for its streaming destinations is 60 seconds at the 95th percentile. Some approaches need a paid plan or license on your tool.
+- Cons: no Snowplow sessions or page pings. The visitor key is your tool's ID, which on several tools isn't safe on the public intervention endpoint. Delivery waits for your tool's queue, from several seconds to a minute or more. Some approaches need a paid plan or license on your tool.
+
+### Delivery and delay
+
+Client-side approaches send each event from the browser as it happens. Interventions typically arrive about 1 to 2 seconds after the event.
+
+Server-side approaches wait for your tool first: its ingestion, its queue, and any batching or retries. Depending on the tool, that adds from several seconds to a minute or more before the event reaches your Collector, and Signals then processes it like any other event. For reactions within a page view, use a client-side approach.
+
+| Server-side approach | Delay before the event reaches your Collector |
+| --- | --- |
+| [Segment Destination Function](/docs/signals/data-sources/existing-analytics/tools/segment/index.md#choose-an-approach) | Segment's queue. With batching on, batches can wait up to 10 seconds |
+| [RudderStack transformation or Webhook mapping](/docs/signals/data-sources/existing-analytics/tools/rudderstack/index.md#choose-an-approach) | Seconds, while RudderStack's processor and router poll their queues |
+| [Amplitude Webhook destination](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md#choose-an-approach) | Amplitude's documented target is 60 seconds at the 95th percentile |
+| [PostHog HTTP Webhook destination](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md#choose-an-approach) | Typically about 4 to 9 seconds after PostHog receives the event. Interventions arrive within about 10 seconds |
+| [Server-side GTM](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md#choose-an-approach) | `gtag.js` batches hits in the browser before they reach the tagging server. Values can take a couple of minutes to reach Signals |
+| [Adobe event forwarding](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md#choose-an-approach) | Adobe doesn't document a delivery time. Expect at least several seconds |
+
+The first events after you publish an attribute group or intervention can take a minute or more before their values and interventions arrive. Later events arrive at the usual speed, so allow for this when you test a new setup.
 
 ### Which to choose
 

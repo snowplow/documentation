@@ -324,7 +324,7 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 ### Server-side approach
 
 1. **No sessions or engagement.** `domain_sessionid` is empty and there are no page pings. RudderStack's session ID is kept in `external_identity` but Signals doesn't build session attributes from it.
-2. **Seconds of delay.** RudderStack's processor and router poll their queues, so events arrive seconds after the call. Don't rely on the server-side approach for reactions within a page view.
+2. **Seconds of delay.** RudderStack's processor and router poll their queues, so events arrive seconds after the call. Signals' own processing comes on top. Don't rely on the server-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 3. **A failed event holds up later ones.** RudderStack delivers each user's events in order, so while one event is being retried, that user's later events wait behind it.
 4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
 5. **Server events without context.** Events with no `context.userAgent` are recorded with RudderStack's own user agent. Events with no IP address record the address of the RudderStack server. Every event is recorded with platform `web`.

@@ -277,7 +277,7 @@ The [starter attribute groups](/docs/signals/data-sources/existing-analytics/sta
 ### Server-side approach
 
 1. **No sessions or engagement.** Segment has no session ID, so `domain_sessionid` is empty and there are no page pings.
-2. **Delivery depends on Segment's queue.** Events arrive after Segment processes them. Don't rely on the server-side approach for reactions within a page view.
+2. **Delivery depends on Segment's queue.** Events arrive after Segment processes them, and with batching on, batches can wait up to 10 seconds. Signals' own processing comes on top. Don't rely on the server-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 3. **Function timeouts can duplicate events.** Segment stops a function after 5 seconds and retries it. If the Collector accepted the event but answered late, the event arrives twice with the same `event_id`. Signals counts it once, but both copies reach your pipeline.
 4. **Personal data reaches Snowplow.** IP address, user agent, page URL, referrer, title, the user ID and free-text search terms.
 5. **Server events without context.** Events that don't set `context.ip` or `context.userAgent` record the sender's IP address and the function runtime's user agent. Every event is recorded with platform `web`.

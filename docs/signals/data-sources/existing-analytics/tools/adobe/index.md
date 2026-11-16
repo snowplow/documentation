@@ -36,7 +36,7 @@ The three client-side approaches run the Snowplow JavaScript tracker beside your
 | Events covered | Every event the Web SDK sends from the browser, including its automatic link clicks | Every page view and link hit AppMeasurement sends from the browser, including exit and download links | Only the data layer events you write a rule for | Web SDK and Mobile SDK events that reach the Edge Network; not AppMeasurement | All Analytics hits in the feed, from every source Adobe processed |
 | Visitor key | Snowplow `domain_userid`, a random UUID | Snowplow `domain_userid` | Snowplow `domain_userid` | The Adobe ECID | The Adobe ECID (`mcvisid`) |
 | Sessions and engagement | Snowplow sessions; engagement if you turn on page pings | Snowplow sessions; engagement with page pings | Snowplow sessions; engagement with page pings | No sessions, no engagement | Adobe visit counts as batch values; no live sessions |
-| Delivery | From the browser as each event fires | From the browser as each hit fires | From the browser as each rule fires | After the Edge Network processes the event | On the schedule of your feed and model |
+| Delivery | From the browser as each event fires | From the browser as each hit fires | From the browser as each rule fires | After the Edge Network processes the event. Adobe doesn't document a delivery time, so expect at least several seconds | On the schedule of your feed and model |
 | Personal data path | Browser to your Collector: IP, user agent, URLs, user ID; a same-site Collector also receives Adobe cookies | Same as the Web SDK callback | Same, and the full data layer state stays readable by every rule | Everything in the event stays inside Adobe's event forwarding runtime; your Collector receives what your data element builds | The full feed lands in your warehouse; Signals reads only the columns your model outputs |
 | Plan or license needed | Web SDK | AppMeasurement | Tags and the Adobe Client Data Layer extension | Real-Time CDP Connections, Prime or Ultimate | Data Feeds and a Signals warehouse connection |
 
@@ -843,6 +843,7 @@ Event forwarding:
 3. **The user ID appears only on events that carry it** in `identityMap`, not on the rest of the page.
 4. **Event IDs are assigned by the pipeline** when the event has no `xdm._id`, so a resend arrives with a new ID.
 5. **Web SDK and Mobile SDK only.** AppMeasurement traffic doesn't reach the Edge Network.
+6. **Delivery depends on Adobe.** Adobe doesn't document a delivery time for event forwarding. Expect at least several seconds, as with other server-side queues, and don't rely on it for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 
 Data Feeds:
 

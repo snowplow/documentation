@@ -24,7 +24,7 @@ There are two client-side approaches, one server-side approach and one warehouse
 | Events covered | Browser events in your data layer, plus Snowplow's own page pings and link clicks if you turn them on | Browser `gtag()` calls, plus Snowplow's own page views, page pings, link clicks, form and site search tracking | Every GA4 event that reaches server-side GTM, including Enhanced Measurement and any server or app events you route there | Everything in your GA4 export, as history |
 | Visitor key | Snowplow's random `domain_userid` | Snowplow's random `domain_userid` | The GA4 client's client ID, which by default is the server-managed `FPID` value, not the `_ga` cookie value | The GA client ID (`user_pseudo_id`) |
 | Sessions and engagement | Yes, Snowplow sessions and page pings | Yes, Snowplow sessions and page pings | No Snowplow sessions | Aggregates only, no live sessions |
-| Delivery | As each event happens | As each event happens | After gtag batches its hits, then through server-side GTM | Periodic batches |
+| Delivery | As each event happens | As each event happens | After gtag batches its hits, then through server-side GTM. Values can take a couple of minutes to reach Signals | Periodic batches |
 | Personal data path | Browser to your Collector. Only the fields you map are sent | Browser to your Collector. Only the fields the script maps are sent, plus form field values if you turn on form tracking | Browser to server-side GTM, which sees every GA4 parameter, then to your Collector | Stays in your warehouse |
 | Plan or license needed | GTM (free). A Signals-enabled Snowplow pipeline | A Signals-enabled Snowplow pipeline | A server-side GTM container you host. A Signals-enabled Snowplow pipeline | GA4 BigQuery export turned on. A Signals warehouse connection, which isn't available on the free tier |
 
@@ -542,7 +542,7 @@ Server-side GTM (server-side):
 
 1. **No Snowplow sessions.** `domain_sessionid` is empty, and the GA session ID isn't safe as a key.
 2. **No key for the public intervention endpoint.** The only visitor key is the GA client ID.
-3. **Delay.** `gtag.js` batches hits, so events can wait several seconds in the browser before they reach server-side GTM.
+3. **Delay.** `gtag.js` batches hits, so events can wait several seconds in the browser before they reach server-side GTM, and values can take a couple of minutes to reach Signals. Use a client-side approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 4. **One event per schema.** **Event Name to Schema** accepts each schema once, so one ecommerce event, one search event and one custom event get Snowplow schemas. The rest keep Google's schemas, and a custom event with no Google schema that isn't listed never reaches Snowplow. `external_event`'s item fields hold the first item only.
 5. **Server-side GTM sees all GA4 parameters,** including any email addresses your page puts in them. The tag forwards only the fields you map.
 6. **Some tag defaults drop fields.** The tag's `file_download` mapping reads `file_extention`, so GA4's `file_extension` is dropped, and `scroll` arrives with no fields.

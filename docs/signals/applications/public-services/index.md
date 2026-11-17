@@ -175,8 +175,6 @@ The response contains every attribute in the service by name, with `null` where 
 </TabItem>
 </Tabs>
 
-With [user anonymization](/docs/sources/mobile-trackers/anonymous-tracking/index.md) enabled, the mobile trackers' session entity contains a placeholder user ID that's the same for every user. Don't read a service by it.
-
 ## Handle errors
 
 Each method reports failures with a status code and a message:

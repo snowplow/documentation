@@ -14,7 +14,7 @@ Your websites and apps can read Signals attributes directly, without an API toke
 
 ### Public services
 
-Services have an access mode. Services are `authenticated` by default, and need an API token to read, as before. A service with the `public` access mode can also be read without a token, for one UUID identifier at a time, such as the current user's `domain_userid`. Set the access mode in Console or with version 0.4.12 or later of the Python SDK.
+Services have an access mode. Services are `authenticated` by default, and need an API token to read, as before. A service with the `public` access mode can also be read without a token, for one UUID identifier at a time, such as the current user's `domain_userid`. Set the access mode in Console or with version 0.4.13 or later of the Python SDK.
 
 Anyone who has an identifier can read a public service's attributes for it, so only include attributes that are safe to show to the user they describe. See [Read attributes from websites and apps](/docs/signals/applications/public-services/).
 

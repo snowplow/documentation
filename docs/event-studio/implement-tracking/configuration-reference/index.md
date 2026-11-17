@@ -83,7 +83,7 @@ To find your organization ID, go to [Console](https://console.snowplowanalytics.
 Snowtype uses these fields from each event specification in the tracking plan files that `localDataProducts` lists:
 
 - `resourceName`: the event specification ID in the generated code
-- `version`: the event specification version in the generated code. Snowtype doesn't look it up in Console, so keep it matching the version in Console.
+- `version`: the event specification version in the generated code. Snowtype doesn't look it up in Console, so keep it matching the version in Console with `snowplow-cli dp validate --fix`.
 - `event.source` and `entities.tracked`: the data structures to generate code for. Snowtype looks them up only in your `repositories` and `igluCentralSchemas`, never in Console.
 
 ### File formats

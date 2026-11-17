@@ -59,7 +59,7 @@ The checks against Console and the publishing need credentials. [Create an API k
 
 ### Add the checks against Console
 
-Pass the secrets to the pull request workflow and add the two checks that use them. `ds validate` checks the data structures, and `dp validate` checks the tracking plan and its versions against what Console holds:
+Add a second job to the pull request workflow for the two checks that use the secrets. `ds validate` checks the data structures, and `dp validate` checks the tracking plan and its versions against what Console holds. The secrets go only to this job, which doesn't run `npm ci`, so no package your pull request installs runs with the API key:
 
 ```yaml title=".github/workflows/check-pull-request.yml"
 on:
@@ -69,10 +69,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    env:
-      SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
-      SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
-      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -87,6 +83,18 @@ jobs:
 
       - if: github.base_ref == 'develop'
         run: snowplow-cli dp validate offline --base-ref origin/develop --gh-annotate
+
+  check-console:
+    runs-on: ubuntu-latest
+    env:
+      SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
+      SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
+      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds validate --gh-annotate
 

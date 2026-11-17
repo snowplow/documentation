@@ -128,6 +128,23 @@ When the checks pass, merge the pull request. The publish workflow runs from `ma
 
 In Console, the `Signup` event specification moves through **Publishing** to **Published**, which takes a few minutes. Deploy your application from `main` only after the publish workflow succeeds and the event specification shows **Published**. Until the release reaches the pipelines, production events that declare the new version can't be matched to it.
 
+:::note[A change reaches develop during the promotion]
+Both branches publish to the same tracking plan. If a change merged into `develop` syncs to Console after you merge the promotion, but before the publish workflow on `main` reaches `dp sync`, Console already holds a newer version than `main`. The `dp sync` step then fails without writing anything, and the release doesn't run:
+
+```text
+5:03PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/0
+  errors=
+  │ Signup: version 1 needs a bump
+  │ changed: entities
+  │ expected version: 3
+  │ run `snowplow-cli dp validate --fix` to update it
+
+5:03PM ERRO validation failed 1 errors
+```
+
+To fix it, promote `develop` to `main` again. The new pull request brings the latest change from `develop`, and its publish releases both changes. Don't run the `--fix` command from the message on `main`: the next sync from `main` would overwrite the draft that `develop` synced.
+:::
+
 ### Bring fixes made on main back to develop
 
 A fix made directly on `main` publishes and releases like a promotion, so Console moves on without `develop`. Merge `main` back into `develop` before the next merge into `develop`. If you don't, the next pull request into `develop` that changes the same event specification fails the check against Console with `needs a bump`, as described in [Open the pull request into develop](#open-the-pull-request-into-develop), and so does the next sync.

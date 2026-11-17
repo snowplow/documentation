@@ -7,6 +7,7 @@ date: "2024-12-04"
 sidebar_position: 8.5
 sidebar_custom_props:
   space_above: true
+content_type: landing
 ---
 
 There are a number of ways you can test your tracking implementation and QA your pipeline to follow good data practices.

@@ -1,0 +1,241 @@
+/*
+ * The doc body. Docusaurus renders Markdown into .markdown. Tailwind utilities
+ * are unlayered, so a utility on an MDX component always wins over these
+ * rules. Components can opt out of the table and list styles with not-prose.
+ */
+@layer snowplow.prose {
+  /* Reading column with a wider track for code, tables, and diagrams */
+  .markdown {
+    /* Each side track: up to half the extra width, and zero on narrow screens */
+    --gutter: clamp(
+      0px,
+      (100% - var(--sp-layout-content)) / 2,
+      (var(--sp-layout-wide) - var(--sp-layout-content)) / 2
+    );
+
+    display: grid;
+    grid-template-columns:
+      [wide-start] var(--gutter)
+      [content-start] minmax(0, var(--sp-layout-content))
+      [content-end] var(--gutter) [wide-end];
+    justify-content: center;
+    color: var(--sp-color-fg);
+    font-size: var(--sp-text-body);
+    line-height: var(--sp-leading-body);
+  }
+
+  .markdown > * {
+    grid-column: content;
+    min-width: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* One spacing rule instead of margins on both sides (grid items don't collapse) */
+  .markdown > * + * {
+    margin-top: var(--sp-space-5);
+  }
+
+  .markdown > :is(.breakout, .theme-code-block, table, .docusaurus-mermaid-container, .mermaid-container),
+  .markdown > :is(p, div):has(> :is(img, table, .MuiDataGrid-root)) {
+    grid-column: wide;
+    justify-self: center;
+    width: max-content;
+    min-width: min(100%, var(--sp-layout-content));
+    max-width: 100%;
+  }
+
+  .markdown > .breakout {
+    width: 100%;
+  }
+
+  /* Headings: 36 / 24 / 18 / 16px, weight 600, tighter tracking as they grow */
+  .markdown :is(h1, h2, h3, h4) {
+    color: var(--sp-color-fg);
+    font-weight: var(--sp-weight-semibold);
+  }
+
+  .markdown h1 {
+    font-size: var(--sp-text-h1);
+    line-height: var(--sp-leading-h1);
+    letter-spacing: var(--sp-tracking-h1);
+  }
+
+  .markdown h2 {
+    font-size: var(--sp-text-h2);
+    line-height: var(--sp-leading-h2);
+    letter-spacing: var(--sp-tracking-h2);
+  }
+
+  .markdown h3 {
+    font-size: var(--sp-text-h3);
+    line-height: var(--sp-leading-h3);
+    letter-spacing: var(--sp-tracking-h3);
+  }
+
+  .markdown h4 {
+    font-size: var(--sp-text-h4);
+    line-height: var(--sp-leading-h4);
+  }
+
+  .markdown > header + *,
+  .markdown > h1 + * {
+    margin-top: var(--sp-space-4);
+  }
+
+  .markdown > h2 {
+    margin-top: var(--sp-space-12);
+  }
+
+  .markdown > h3 {
+    margin-top: var(--sp-space-8);
+  }
+
+  .markdown > h4 {
+    margin-top: var(--sp-space-6);
+  }
+
+  .markdown > :is(h2, h3, h4) + * {
+    margin-top: var(--sp-space-3);
+  }
+
+  .markdown :is(h1, h2, h3, h4) code {
+    font-size: 0.85em;
+  }
+
+  /* Links in running text are underlined, so they don't rely on color alone */
+  .markdown :is(p, li, td, th, dd, blockquote, summary, figcaption, .callout__content) a:not(.not-prose) {
+    color: var(--sp-color-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--sp-color-link-underline);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .markdown :is(p, li, td, th, dd, blockquote, summary, figcaption, .callout__content) a:not(.not-prose):hover {
+    color: var(--sp-color-accent-hover);
+    text-decoration-color: currentcolor;
+  }
+
+  .markdown strong {
+    font-weight: var(--sp-weight-semibold);
+  }
+
+  /* Lists */
+  .markdown :is(ul, ol):not([role='tablist'], .not-prose, .not-prose *) {
+    margin-bottom: 0;
+    padding-left: var(--sp-space-6);
+  }
+
+  .markdown :is(ul, ol):not([role='tablist']) > li + li,
+  .markdown li > :is(ul, ol) {
+    margin-top: var(--sp-space-1);
+  }
+
+  .markdown li > p {
+    margin-bottom: var(--sp-space-2);
+  }
+
+  .markdown li > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .markdown li::marker {
+    color: var(--sp-color-fg-muted);
+  }
+
+  /* Inline code */
+  .markdown :not(pre) > code {
+    padding: 0.1em 0.3em;
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-sm);
+    background: var(--sp-color-surface);
+    font-size: 0.875em;
+    vertical-align: baseline;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown a > code {
+    color: inherit;
+  }
+
+  /* Tables: narrow ones match the text column, wide ones scroll */
+  .markdown table:not(.not-prose, .not-prose table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--sp-text-sm);
+    line-height: var(--sp-leading-sm);
+  }
+
+  .markdown table:not(.not-prose, .not-prose table) :is(th, td) {
+    padding: var(--sp-space-2) var(--sp-space-3);
+    border: 1px solid var(--sp-color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .markdown thead tr {
+    border-bottom: none;
+  }
+
+  .markdown table:not(.not-prose, .not-prose table) th {
+    background: var(--sp-color-surface);
+    font-weight: var(--sp-weight-semibold);
+  }
+
+  .markdown tr:nth-child(2n) {
+    background: transparent;
+  }
+
+  .markdown :is(th, td) :is(h3, p) {
+    margin: 0;
+  }
+
+  /* Images */
+  .markdown img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .markdown img.shield,
+  .markdown p img:not(:only-child) {
+    display: inline-block;
+    margin: 0;
+    vertical-align: text-bottom;
+  }
+
+  .markdown blockquote {
+    padding-left: var(--sp-space-4);
+    border-left: 2px solid var(--sp-color-border-strong);
+    color: var(--sp-color-fg-muted);
+  }
+
+  .markdown hr {
+    height: 1px;
+    border: none;
+    background: var(--sp-color-border);
+  }
+
+  .markdown kbd {
+    padding: 0 var(--sp-space-1);
+    border: 1px solid var(--sp-color-border);
+    border-radius: var(--sp-radius-sm);
+    background: var(--sp-color-surface);
+    box-shadow: none;
+    font-family: var(--sp-font-mono);
+    font-size: 0.875em;
+  }
+
+  .markdown video {
+    margin: 0;
+  }
+
+  /* Pages outside the docs (src/pages) use the same body styles */
+  .mdx-page__article {
+    max-width: var(--sp-layout-wide);
+    margin: 0 auto;
+  }
+}

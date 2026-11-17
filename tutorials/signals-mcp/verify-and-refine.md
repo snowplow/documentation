@@ -24,7 +24,7 @@ Open it and check the definition against what you reviewed in the previous step:
 
 ![The attribute group detail page, showing the domain_sessionid attribute key and the three attribute definitions with their aggregations and properties](./images/console-attribute-group-detail.png)
 
-This is the same screen you'd have used to build the group by hand in the [quick start](/tutorials/signals-quickstart/define-attribute-group). Groups built in the Console UI, with the Python SDK, or by an AI assistant all land in the same registry, so Console shows you what's actually deployed regardless of how it got there.
+This is the same screen you'd have used to build the group by hand in the [quick start](/docs/signals/get-started/quickstart-tutorial/#create-the-attribute-group). Groups built in the Console UI, with the Python SDK, or by an AI assistant all land in the same registry, so Console shows you what's actually deployed regardless of how it got there.
 
 ## Watch the attribute values in Snowplow Inspector
 

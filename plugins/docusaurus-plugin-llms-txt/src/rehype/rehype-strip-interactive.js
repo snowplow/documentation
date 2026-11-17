@@ -12,6 +12,11 @@ const STRIP_CLASS_PATTERNS = [
   'MuiInput',
   'JsonValidator',
   'jsonschema-validator',
+  // Filter controls on catalog tables and the docs home: the Markdown copy lists every row
+  'sp-matrix__filters',
+  'home-quickstarts__filter',
+  // Any element a component marks as screen-only
+  'llms-ignore',
 ]
 
 /**

@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 1
 description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, identity resolution, and time to live."
 keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges", "time to live", "TTL"]
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -14,8 +15,8 @@ Identities is based on several core concepts.
 * **A Snowplow ID** is a persistent, immutable identifier for a collection of linked identifiers that represent a single user
 * **[Merges](/docs/identities/concepts/merges/index.md)** occur when identifiers link two previously separate Snowplow IDs together
 * **[Unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)** prevent incorrect merges when users share devices
-* **[Cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md)** resolves identity across sites with different cookie domains
 * **[Time to live](/docs/identities/concepts/time-to-live/index.md)** removes identifier values that haven't been seen for a configured number of days
+* **[Cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking)** resolves identity across sites with different cookie domains
 
 ## Identifiers
 
@@ -105,7 +106,9 @@ In normal operation, priority doesn't affect how Snowplow IDs are linked. All id
 
 ## Identities and Signals
 
-Identities is designed to work alongside [Snowplow Signals](/docs/signals/get-started/index.md). To use the Snowplow ID as a unified identifier in Signals, set an attribute group's key to `snowplow_id` and map it to the `snowplow_id` property in the identity entity.
+Identities is designed to work alongside [Snowplow Signals](/docs/signals/introduction/index.md). Signals can calculate attributes per Snowplow ID, using its built-in `snowplow_id` attribute key, and your application can read them by up to three lookup identifiers you choose, such as a `domain_userid` or a `user_id`.
+
+To set it up, and to see the use cases it supports, such as anonymous to known and shared devices, see [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
 
 ## Data types
 

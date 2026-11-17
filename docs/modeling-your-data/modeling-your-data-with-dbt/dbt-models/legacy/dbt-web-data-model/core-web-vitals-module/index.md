@@ -4,13 +4,11 @@ sidebar_label: "Core web vitals module"
 description: "Core Web Vitals module for the legacy Web dbt package. Superseded by the Unified Digital Core Web Vitals module."
 keywords: ["web vitals legacy", "legacy core web vitals", "web performance tracking"]
 sidebar_position: 300
+content_type: concept
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>
+<VersionBadge component="dbtSnowplowWeb" />
 
 ```mdx-code-block
 import CoreWebVitals from "@site/docs/reusable/data-modeling/core-web-vitals/_index.md"

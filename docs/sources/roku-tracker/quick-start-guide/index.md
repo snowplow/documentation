@@ -5,6 +5,7 @@ date: "2021-11-16"
 sidebar_position: 1000
 description: "Install the Roku tracker using ropm or manual installation, initialize tracking, and track structured events in your BrightScript app."
 keywords: ["roku tracker setup", "ropm installation", "brightscript initialization"]
+content_type: how-to
 ---
 
 Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).

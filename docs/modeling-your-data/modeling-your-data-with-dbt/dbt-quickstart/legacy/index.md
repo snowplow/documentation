@@ -4,6 +4,7 @@ sidebar_label: "Legacy packages"
 sidebar_position: 9999
 description: "Quick start guides for legacy Snowplow dbt packages including Web, Mobile, and Fractribution packages."
 keywords: ["legacy dbt packages", "deprecated dbt packages", "legacy quickstart"]
+content_type: landing
 ---
 
 :::note

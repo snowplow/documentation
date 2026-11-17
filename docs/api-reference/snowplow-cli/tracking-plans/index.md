@@ -4,16 +4,16 @@ sidebar_label: "Tracking plans"
 sidebar_position: 30
 description: "Use the Snowplow CLI data-products command to create, download, validate, sync, and release tracking plans, event specifications, and source applications with git-ops workflows."
 keywords: ["Snowplow CLI tracking plans", "tracking plans CLI", "event specifications CLI", "source applications CLI", "CLI commands"]
+content_type: how-to
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 <TrackingPlansNomenclature />
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+  note="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 The `data-products` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.

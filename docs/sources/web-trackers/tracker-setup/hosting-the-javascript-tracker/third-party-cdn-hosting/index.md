@@ -5,6 +5,7 @@ description: "Use jsDelivr or unpkg CDN for quick testing and evaluation before 
 keywords: ["third party cdn", "jsdelivr", "unpkg", "cdn hosting"]
 date: "2020-10-12"
 sidebar_position: 4100
+content_type: how-to
 ---
 
 Whilst we’re offering CDN options, Snowplow does not recommend using third party providers in production for hosting JavaScript assets that you use on your websites. We encourage all users to host `sp.js` on their own servers, and this will always be the recommended best practice.

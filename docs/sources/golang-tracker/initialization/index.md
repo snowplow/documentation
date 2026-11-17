@@ -5,6 +5,7 @@ description: "Create a Golang tracker with InitTracker using collector URI and s
 keywords: ["golang initialization", "init tracker", "emitter configuration", "storage implementation", "tracker builder"]
 date: "2020-02-26"
 sidebar_position: 20
+content_type: how-to
 ---
 
 Import the Golang Tracker library like so:

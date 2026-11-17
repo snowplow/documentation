@@ -5,6 +5,7 @@ sidebar_position: 0
 sidebar_label: "Configuration examples"
 description: "Example recovery configurations including pass-through flows, multiple flow scenarios, and advanced multi-operation recovery patterns."
 keywords: ["recovery config examples", "recovery flow patterns"]
+content_type: reference
 ---
 
 The most basic configuration that will run for the particular failure type: `adapter-failure`, in a particular version, and mark all others as `failed` because of missing configuration mappings would look like this:

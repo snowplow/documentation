@@ -5,6 +5,7 @@ description: "Track behavioral events including SelfDescribing, ScreenView, Page
 keywords: ["golang track events", "self-describing events", "structured events", "ecommerce tracking", "page view tracking"]
 date: "2020-02-26"
 sidebar_position: 40
+content_type: how-to
 ---
 
 Tracking methods supported by the Golang Tracker at a glance:

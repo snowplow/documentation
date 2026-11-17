@@ -4,6 +4,7 @@ sidebar_label: "Configuration"
 sidebar_position: 100
 description: "Configure metric type, authentication, context keys, and event creation time for the LaunchDarkly Tag in GTM Server Side."
 keywords: ["LaunchDarkly Tag configuration", "metric events", "context keys", "experiment tracking"]
+content_type: reference
 ---
 
 This is the configuration of the LaunchDarkly Tag.

@@ -4,6 +4,7 @@ sidebar_label: "4.0.x upgrade guide"
 sidebar_position: 20
 description: "Upgrade guide for Snowplow Enrich 4.0.x covering license acceptance, atomic field limits, and deprecated assets."
 keywords: ["enrich 4.0", "upgrade guide", "atomic fields"]
+content_type: how-to
 ---
 
 ## Breaking changes
@@ -22,13 +23,11 @@ As announced a while ago, these assets are now removed from the codebase.
 
 You have to explicitly accept the [Snowplow Limited Use License](/limited-use-license-1.0/) ([FAQ](/docs/licensing/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
 
-```hcl
-{
-  license {
-    accept = true
-  }
-  ...
+```hocon
+license: {
+  accept: true
 }
+...
 ```
 
 ### Atomic fields limits
@@ -49,18 +48,16 @@ Depending on your [configuration](/docs/api-reference/enrichment-components/conf
 
 Below is an example of how to configure these limits:
 
-```hcl
-{
-  ...
-  # Optional. Configuration section for various validation-oriented settings.
-  "validation": {
-    # Optional. Configuration for custom maximum atomic fields (strings) length.
-    # Map-like structure with keys being field names and values being their max allowed length
-    "atomicFieldsLimits": {
-        "app_id": 5
-        "mkt_clickid": 100000
-        # ...and any other 'atomic' field with custom limit
-    }
+```hocon
+...
+# Optional. Configuration section for various validation-oriented settings.
+validation: {
+  # Optional. Configuration for custom maximum atomic fields (strings) length.
+  # Map-like structure with keys being field names and values being their max allowed length
+  atomicFieldsLimits: {
+    app_id: 5
+    mkt_clickid: 100000
+    # ...and any other 'atomic' field with custom limit
   }
 }
 ```

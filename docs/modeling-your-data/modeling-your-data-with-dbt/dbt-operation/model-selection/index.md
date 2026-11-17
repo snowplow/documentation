@@ -4,6 +4,7 @@ sidebar_label: "Model selection"
 sidebar_position: 30
 description: "Select and run specific Snowplow dbt models using tags and selection syntax to keep incremental tables in sync."
 keywords: ["dbt model selection", "dbt tags", "incremental models"]
+content_type: how-to
 ---
 
 The Snowplow models in each package are designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, run the model using:

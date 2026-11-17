@@ -4,6 +4,7 @@ sidebar_label: "Databricks Streaming Loader"
 sidebar_position: 5
 description: "Load Snowplow events to Databricks with low latency using Lakeflow Declarative Pipelines and Unity Catalog volumes."
 keywords: ["databricks loader", "lakeflow", "unity catalog", "databricks lakehouse"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -51,21 +52,21 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.pubsub.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.kafka.minimal.hocon
 ```
 

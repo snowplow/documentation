@@ -1,5 +1,6 @@
 ---
 title: "Browser (npm) tracker"
+sidebar_label: "Browser (npm) tracker"
 date: "2021-04-19"
 sidebar_position: 500
 description: "Documentation for tracking Browser (npm) er with the web tracker."

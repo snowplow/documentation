@@ -4,6 +4,7 @@ sidebar_label: "Manifest tables"
 description: "Details around the manifest tables we use in our packages."
 keywords: ["manifest tables", "session lifecycle", "quarantine table", "package state"]
 sidebar_position: 50
+content_type: concept
 ---
 
 Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions.

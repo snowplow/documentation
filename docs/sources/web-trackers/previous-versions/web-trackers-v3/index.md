@@ -1,5 +1,6 @@
 ---
 title: "Web trackers (v3)"
+sidebar_label: "Web trackers (v3)"
 date: "2021-03-24"
 sidebar_position: 100
 description: "Documentation for tracking Web ers (v3) with the web tracker."
@@ -7,9 +8,7 @@ keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.

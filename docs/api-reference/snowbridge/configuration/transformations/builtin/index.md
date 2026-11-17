@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 200
 description: "Use built-in Snowbridge transformations for Snowplow data including enriched filtering, JSON conversion, and base64 encoding."
 keywords: ["snowbridge config", "builtin transformations", "enriched filter", "json conversion", "jq transformation"]
+content_type: reference
 ---
 
 Snowbridge includes several configurable built-in transformations.

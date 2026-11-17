@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 30
 description: "Configure the .NET tracker instance with emitter, subject, session, and logging options for coordinating event tracking."
 keywords: [".net tracker configuration", "tracker instance", "session management"]
+content_type: reference
 ---
 
 The Tracker object is responsible for co-ordinating the saving and sending of events as well as managing the optional Session object.

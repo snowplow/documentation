@@ -5,6 +5,7 @@ date: "2022-03-24"
 sidebar_position: 20
 description: "Track page views, screen views, structured events, and custom self-describing events with the Java tracker SDK."
 keywords: ["event tracking", "page view tracking", "custom events"]
+content_type: how-to
 ---
 
 To track an event, pass an `Event` instance to the `Tracker`.

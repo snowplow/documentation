@@ -7,10 +7,11 @@ import Link from '@docusaurus/Link';
     <td>
       Required, e.g. <code>gs://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Delta format.  The URI should start with the following prefix:
       <ul>
-        <li><code>s3a://</code> on AWS</li>
-        <li><code>gs://</code> on GCP</li>
-        <li><code>abfs://</code> on Azure</li>
+        <li><code>s3a://</code> for S3</li>
+        <li><code>gs://</code> for GCS</li>
+        <li><code>abfs://</code> for ADLS Gen2</li>
       </ul>
+      Since 0.15.0, the loader can write to any of these, regardless of which cloud it runs in.
     </td>
 </tr>
 <tr>

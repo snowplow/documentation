@@ -1,0 +1,7 @@
+:::note[Signals free tier and Snowplow CDI]
+
+New to Snowplow: the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) is a hosted environment, with event collection included, capped at 5 million events a month, with no end date or credit card. Snowplow runs it on AWS, in the US or the EU depending on the region you sign up from.
+
+Already run Snowplow CDI: Signals reads events from your existing pipeline, and is deployed in the AWS region you choose. See [Set up Signals](/docs/signals/setup/index.md#choose-your-starting-point).
+
+:::

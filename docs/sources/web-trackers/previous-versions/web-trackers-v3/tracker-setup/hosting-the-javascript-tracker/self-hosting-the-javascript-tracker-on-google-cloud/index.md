@@ -1,5 +1,6 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
+sidebar_label: "Self Hosting the JavaScript Tracker on GCP"
 date: "2020-04-28"
 sidebar_position: 200
 description: "Documentation for tracking Self Hosting the JavaScript Tracker on GCP with the web tracker."

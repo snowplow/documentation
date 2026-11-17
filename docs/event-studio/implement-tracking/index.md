@@ -4,15 +4,16 @@ sidebar_label: "Implement tracking"
 sidebar_position: 44
 description: "Generate and implement tracking code from your event specifications using Snowtype, Console code snippets, or manual SDK integration."
 keywords: ["tracking implementation", "code generation", "Snowtype", "tracking code", "SDK integration"]
+content_type: concept
 ---
 
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Snowtype is available for Snowplow CDI customers only."
+  note="Snowtype is available for Snowplow CDI customers only."
 />
 ```
 
@@ -26,6 +27,12 @@ This provides several key advantages over manual implementation:
 * Workflow integration: use CI/CD GitOps-like processes to [keep your tracking code in sync](/docs/event-studio/implement-tracking/keep-code-up-to-date/index.md) with your schemas
 
 For custom tracking on web, you also have the option of using the ready-to-use event specification code snippets in [Console](https://console.snowplowanalytics.com), with or without Snowtype. See below for details.
+
+:::tip[Implement tracking with your AI assistant]
+A coding agent connected to the Snowplow MCP server can read your tracking plans and event specifications, add the tracking to your application, and check that the events arrive. For example: "Implement the event specifications from our checkout tracking plan in this app, and confirm each event reaches my development pipeline."
+
+<AiAssistantInstall />
+:::
 
 ## Snowtype workflow
 

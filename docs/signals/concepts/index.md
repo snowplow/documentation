@@ -1,9 +1,11 @@
 ---
-title: "Signals fundamentals"
+title: "How Signals works"
 sidebar_position: 10
 sidebar_label: "Fundamentals"
-description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, interventions for triggering actions, and agentic contexts for grounding agents. Learn about data sources, attribute keys, and the Profiles Store."
+description: "Learn how Signals is deployed alongside your pipeline, and about the components you configure: attribute groups, attribute keys, data sources, services, interventions, agentic contexts, and the Profiles Store."
 keywords: ["attribute groups", "services", "interventions", "agentic contexts", "profiles store", "attribute keys"]
+content_type: concept
+pagination_prev: signals/get-started/quickstart-tutorial/index
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
@@ -18,13 +20,29 @@ Signals has four main configurable components:
 
 **Agentic contexts** are a separate resource, for capturing a rolling window of session activity to ground an agent, along with instructions to guide it.
 
-To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
+To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions. [Pull attributes or push interventions](/docs/signals/concepts/pull-and-push/index.md) compares the two.
 
 **Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes.
 
 **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ![Signals component flow showing Snowplow events and batch sources feeding attribute groups, which are calculated into the Profiles Store and consumed by applications through services and interventions](../images/overview-components.svg)
+
+## Architecture
+
+Signals runs in the same cloud as the Snowplow [pipeline](/docs/cdi/index.md) that collects your events: the one provisioned with the free tier, or your existing CDI pipeline. If you already run Snowplow, Signals reads the events from your existing pipeline, which continues to process events as usual.
+
+:::note[Warehouse support]
+Snowflake, BigQuery, and Databricks are supported. You can also use Signals without the warehouse functionality.
+:::
+
+Signals adds these infrastructure components:
+* Profiles Store: stores calculated attributes and configurations
+* Signals SDKs and API: allow you to manage and fetch attributes and interventions
+* Streaming engine: computes attributes from Snowplow events in real time and sends them directly to the Profiles Store
+* Batch engine: reads pre-calculated attribute values from your warehouse tables at a fixed interval and syncs them to the Profiles Store; also backfills historical data for stream attribute groups
+
+![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](../images/overview-incl-batch-engine.svg)
 
 ## Attribute groups
 
@@ -51,6 +69,8 @@ The period is configured on each attribute. For lifetime attributes, a TTL (time
 
 Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/attributes/attributes/index.md) page.
 
+Any of these types can aggregate a single event, entity, or atomic property, or a [calculated property](/docs/signals/attributes/attributes/index.md#calculated-properties): a value derived by combining several properties from the same event, such as adding a price and a tax together.
+
 ### Attribute keys
 
 An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. For stream attribute groups, the identifier can be any property of a Snowplow event: an atomic field such as `domain_userid`, a property within a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events), or a property within an [entity](/docs/fundamentals/entities/index.md). For warehouse attribute groups, the identifier is a column in your warehouse table.
@@ -70,7 +90,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for users and sessions. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with five predefined attribute keys, for users, sessions, and people. Four of their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 | Attribute key      | Type     |
 | ------------------ | -------- |
@@ -78,23 +98,27 @@ You can [define your own attribute keys](/docs/signals/attributes/attribute-grou
 | `domain_userid`    | `uuid`   |
 | `network_userid`   | `uuid`   |
 | `domain_sessionid` | `uuid`   |
+| `snowplow_id`      | The [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids), when Identities is enabled. See [identity resolution](/docs/signals/attributes/identity-resolution/index.md). |
 
 ## Data sources
 
-Whether to compute attributes in real-time from the event stream or to sync pre-calculated values from your warehouse is an important decision. Broadly, you might use:
-* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session. You can optionally enable backfill to enrich stream attributes with historical data from your warehouse, such as a user's purchase history.
-* **Warehouse** to bring in modeled data from your warehouse, such as transactional data or CRM attributes
+Signals computes attributes in real time from the event stream, optionally backfilled from your warehouse, or syncs pre-calculated values from warehouse tables.
 
-This table summarizes the options for different types of processing:
+### Choose a data source
 
-| Feature                                        | Stream                                                            | Stream with backfill                                                    | Warehouse                 |
-| ---------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------- |
-| Real-time calculation                           | ✅                                                                 | ✅                                                                       | ❌                         |
-| Period-based calculations                       | ✅                                                                 | ✅                                                                       | ❌                         |
-| Lifetime calculations (within TTL)                | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                               | ❌                         |
-| Historical data                                 | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp | ✅ any pre-calculated data |
-| Non-Snowplow data                               | ❌                                                                 | ❌                                                                       | ✅                         |
-| Warehouse connection required                   | ❌                                                                 | ✅                                                                       | ✅                         |
+Use the stream for real-time use cases, such as the latest product a user viewed, or the number of page views in a session. Enable backfill to add historical data from your warehouse, such as a user's purchase history. Use a warehouse source to bring in modeled data, such as transactional data or CRM attributes. To send events for a stream source, see [Send events to Signals](/docs/signals/data-sources/events/index.md).
+
+| Feature                            | Stream                                                            | [Stream with backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) | [Warehouse](/docs/signals/attributes/warehouse-config/index.md) |
+| ---------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Freshness                          | Real time                                                         | Real time, plus a one-off backfill up to the publish time                                       | Hourly by default, or every 6, 12, or 24 hours                   |
+| Real-time calculation              | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Period-based calculations          | ✅                                                                 | ✅                                                                                               | ❌                                                                |
+| Lifetime calculations (within TTL) | ✅ from the point at which the attribute was defined               | ✅ from the configured backfill start date                                                       | ❌                                                                |
+| Historical data                    | ❌ attributes are only calculated from the moment they are defined | ✅ backfilled from the `atomic` events table up to the publish timestamp                         | ✅ any pre-calculated data                                        |
+| Non-Snowplow data                  | ❌                                                                 | ❌                                                                                               | ✅                                                                |
+| Needs a warehouse connection       | ❌                                                                 | ✅                                                                                               | ✅                                                                |
+| Python SDK class                   | `StreamAttributeGroup`                                            | `StreamAttributeGroup` with `backfill_since_tstamp`                                             | `ExternalBatchAttributeGroup` with a `BatchSource`               |
+
 
 ### Stream source
 
@@ -214,3 +238,14 @@ Agentic contexts follow the same draft-then-publish model as other Signals resou
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.
 
 The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure. It acts as the central source of truth for your Signals deployment.
+
+For an overview of what these attributes are used for, see [real-time attributes](https://signals.snowplow.io/products/real-time-attributes?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
+
+## Workflow
+
+Using Signals follows these steps, and the rest of this documentation follows the same order. The [quickstart](/docs/signals/quickstart/index.md) runs through all of them with a coding agent.
+
+1. [Set up Signals](/docs/signals/setup/index.md) in Snowplow Console. This one-time task deploys the Signals infrastructure. Connecting a warehouse is optional, but you'll need one to backfill stream attributes, sync warehouse tables, or test definitions before publishing.
+2. Plan your use case. Decide which attributes to calculate and at what level, whether they come from the stream or the warehouse, and whether your application will pull attributes, react to interventions, or ground an agent with an agentic context.
+3. Define and publish your configuration. Create [attribute groups](/docs/signals/attributes/index.md), [interventions](/docs/signals/interventions/index.md), and [agentic contexts](/docs/signals/agentic-contexts/index.md) in Console or with the [Signals Python SDK](/docs/signals/connection/reference/index.md#python-sdk), and group attribute groups into [services](/docs/signals/applications/services/index.md). Signals only calculates attributes once you publish; see the [configuration workflow](/docs/signals/attributes/index.md#configuration-workflow).
+4. Take action in your application. [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md), [subscribe to interventions](/docs/signals/applications/subscribe/index.md), or [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md) using the SDKs or API.

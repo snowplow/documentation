@@ -5,6 +5,7 @@ sidebar_position: 170
 description: "Capture data from third-party tools including Optimizely experiments, Google Analytics cookies, and Kantar Focal Meter for unified analytics."
 keywords: ["optimizely", "google analytics", "focal meter", "a/b testing", "cookies", "integrations"]
 date: "2026-01-15"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

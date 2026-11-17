@@ -1,0 +1,71 @@
+{
+  "$comment": "Minimum component versions for features. Read by <AppliesTo feature=...> and by the table on /docs/api-reference/versions/. The component key must exist in src/componentVersions.js; the build fails if `since` is newer than the latest version there.",
+  "features": {
+    "iab-enrichment-custom-user-agent-lists": {
+      "label": "IAB enrichment: custom user agent lists",
+      "component": "enrich",
+      "since": "6.8.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/iab-enrichment/"
+    },
+    "asn-lookup-enrichment": {
+      "label": "ASN lookup enrichment",
+      "component": "enrich",
+      "since": "6.9.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/"
+    },
+    "bot-detection-enrichment": {
+      "label": "Bot detection enrichment",
+      "component": "enrich",
+      "since": "6.9.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/"
+    },
+    "bot-detection-client-side": {
+      "label": "Bot detection enrichment: useClientSideDetection",
+      "component": "enrich",
+      "since": "6.10.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/bot-detection-enrichment/"
+    },
+    "agent-classification-enrichment": {
+      "label": "Agent classification enrichment",
+      "component": "enrich",
+      "since": "6.12.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/agent-classification-enrichment/"
+    },
+    "referrer-parser-utm-sources": {
+      "label": "Referer parser enrichment: classify utm_source values",
+      "component": "enrich",
+      "since": "6.13.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/"
+    },
+    "javascript-enrichment-erase-derived-contexts": {
+      "label": "JavaScript enrichment: eraseDerived_contexts()",
+      "component": "enrich",
+      "since": "5.4.0",
+      "href": "/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/"
+    },
+    "snowbridge-transform-block": {
+      "label": "Snowbridge: transformations in a single transform block",
+      "component": "snowbridge",
+      "since": "5.0.0",
+      "href": "/docs/api-reference/snowbridge/configuration/transformations/"
+    },
+    "snowbridge-target-batching": {
+      "label": "Snowbridge: configurable batching for all targets",
+      "component": "snowbridge",
+      "since": "5.0.0",
+      "href": "/docs/api-reference/snowbridge/configuration/targets/"
+    },
+    "snowbridge-http-jwt": {
+      "label": "Snowbridge HTTP target: JWT bearer flow",
+      "component": "snowbridge",
+      "since": "6.0.0",
+      "href": "/docs/api-reference/snowbridge/configuration/targets/http/"
+    },
+    "rdb-loader-breaking-schema-changes": {
+      "label": "RDB Loader: load breaking schema changes into a recovery table",
+      "component": "rdbLoader",
+      "since": "6.0.0",
+      "href": "/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/"
+    }
+  }
+}

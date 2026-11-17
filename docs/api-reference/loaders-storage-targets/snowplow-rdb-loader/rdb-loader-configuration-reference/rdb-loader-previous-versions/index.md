@@ -7,6 +7,7 @@ description: "Configuration references for previous versions of RDB Loader with 
 keywords: ["rdb loader config versions", "legacy loader config", "configuration history", "loader config migration"]
 sidebar_custom_props:
   outdated: true
+content_type: landing
 ---
 
 This section contains the documentation for configuring previous versions of the RDB Loader.

@@ -4,6 +4,7 @@ sidebar_label: "Schemas and data structures"
 sidebar_position: 3
 description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
 keywords: ["schemas", "data structures", "JSON Schema", "data validation", "Iglu"]
+content_type: concept
 ---
 
 **Schemas** define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).
@@ -37,7 +38,7 @@ Check out the documentation for [managing](/docs/event-studio/data-structures/in
 ## Self-describing JSON schema anatomy
 
 :::info[Data structures builder]
-Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/index.md), without worrying about how it works under the hood.
+Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-builder), without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).

@@ -1,10 +1,11 @@
 ---
 title: "Configure how events are sent in the native mobile trackers"
-sidebar_label: "Configuring how events are sent"
+sidebar_label: "Configure how events are sent"
 date: "2022-08-30"
 sidebar_position: 40
 description: "Configure network connections, event batching, and retry policies for sending events from mobile trackers to your collector."
 keywords: ["event sending", "mobile tracker configuration", "network configuration"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -4,6 +4,7 @@ sidebar_position: 3
 sidebar_label: "Run in CI/CD"
 description: "Integrate Snowplow Micro with automated testing frameworks like Nightwatch and Cypress. Build end-to-end GitHub Actions workflows to validate tracking implementations with custom commands and assertions."
 keywords: ["automated testing", "nightwatch", "cypress", "github actions", "e2e testing", "ci/cd"]
+content_type: tutorial
 ---
 
 ```mdx-code-block

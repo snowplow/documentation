@@ -4,14 +4,13 @@ sidebar_label: "Event forwarding"
 sidebar_position: 2
 description: "Send Snowplow events to third-party platforms in real-time using Snowplow's managed event forwarding solution with built-in filtering, field mapping, and JavaScript transformations."
 keywords: ["event forwarding", "real-time delivery", "Snowbridge", "event transformations", "destination APIs"]
+content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Event forwarding is a paid addon for Snowplow CDI."
+  note="Event forwarding is a paid addon for Snowplow CDI."
 />
 ```
 
@@ -60,4 +59,4 @@ Using event forwarders is the recommended starting point for most real-time deli
 
 - **[Snowbridge](/docs/api-reference/snowbridge/index.md)**: flexible event routing with custom transformations and destinations (Kafka, Kinesis, HTTP APIs). Use when you need destinations not yet supported by event forwarders, complex custom transformations, non-HTTP destinations, or advanced batching and retry configurations.
 - **[Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)**: use GTM SS to relay enriched events to destinations using rich libraries of tags. Best if your organization is heavily invested in GTM or if you need destinations not yet supported by event forwarders, but supported by GTM SS, such as Google Analytics.
-- **[Custom integrations](/docs/destinations/forwarding-events/custom-integrations/index.md)**: build your own solutions using AWS Lambda, GCP Cloud Functions, or other stream processing systems for fully bespoke requirements.
+- **[Custom streaming](/docs/destinations/custom-streaming/index.md)**: build your own solutions using AWS Lambda, GCP Cloud Functions, or other stream processing systems for fully bespoke requirements.

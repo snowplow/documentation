@@ -8,9 +8,13 @@ keywords: ["signals machine learning", "prospect scoring system"]
 
 <NotebookLinks path="snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb" />
 
+:::tip[Build training datasets with the dataset builder]
+To build point-in-time correct training data from Signals attributes with the dataset builder, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).
+:::
+
 Welcome to the [Snowplow Signals](/docs/signals/introduction/) real-time prospect scoring tutorial.
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+Snowplow Signals computes attributes from your behavioral data in real time and serves them to your applications over an API. It works with both in-session stream data and historical warehouse data.
 
 This guide will through the process of building a real-time prospect scoring system using Signals together with a machine learning model. You'll learn how to leverage Snowplow event data to predict a prospect's likelihood to convert on your website, and how to trigger personalized engagements.
 
@@ -43,7 +47,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
 3. [Optional] Integrate Snowplow into your website
 
 :::note[Snowplow account required]
-Signals calculates the prospect attributes from events flowing through your Snowplow pipeline. If you don't have one, you can deploy and use a [Snowplow free trial](https://snowplow.io/get-started/snowplow-free-trial) to follow along.
+Signals calculates the prospect attributes from events flowing through your Snowplow pipeline. If you don't have one, you can use the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) to follow along.
 :::
 
 ## Architecture

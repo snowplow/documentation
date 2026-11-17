@@ -5,6 +5,7 @@ date: "2022-01-17"
 sidebar_position: 100
 description: "Configure authentication, user identifiers, event mapping, and entity rules for the Braze Tag in GTM Server Side."
 keywords: ["Braze Tag configuration", "external_id", "user alias", "Track Users API"]
+content_type: reference
 ---
 
 ## Configuration options

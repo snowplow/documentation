@@ -5,6 +5,7 @@ date: "2023-01-04"
 sidebar_position: 20
 description: "Integrate mobile trackers with Kantar Focal Meter to send user identifiers for audience measurement."
 keywords: ["focal meter plugin", "kantar integration", "audience measurement"]
+content_type: integration
 ---
 
 ```mdx-code-block

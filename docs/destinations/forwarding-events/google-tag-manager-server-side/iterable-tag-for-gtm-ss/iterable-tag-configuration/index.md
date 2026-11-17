@@ -5,6 +5,7 @@ date: "2021-11-24"
 sidebar_position: 100
 description: "Configure user identifiers, identity events, entity mapping, and event properties for the Iterable Tag in GTM Server Side."
 keywords: ["Iterable Tag configuration", "user identification", "identity events", "event data fields"]
+content_type: reference
 ---
 
 ## Iterable API Key (Required)

@@ -2,9 +2,10 @@
 title: "Iglu Server"
 sidebar_label: "Iglu Server"
 sidebar_position: 10
-date: "2026-05-14"
+date: "2026-10-16"
 description: "Iglu Server is a RESTful schema registry for publishing, validating, and serving Iglu schemas in self-hosted Snowplow pipelines."
 keywords: ["iglu server", "schema registry", "self-hosted snowplow", "self-hosted"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -34,6 +35,10 @@ Iglu Server exposes a RESTful API for managing schemas, validating data, and iss
 ```text
 http://YOUR_IGLU_HOST/static/swagger-ui/index.html
 ```
+
+Each service also serves its API description at `/api/<service>/swagger.json`, for example `/api/schemas/swagger.json`. Since version 0.15.0, these are OpenAPI 3.0.3 documents; earlier versions served Swagger 2.0.
+
+If Postgres aborts a schema upload because of a deadlock or a serialization failure, for example when concurrent uploads supersede overlapping versions, Iglu Server retries the write up to 3 times. Since version 0.15.0, if the write still fails, the server returns `503 Service Unavailable`, so that clients know they can retry the request.
 
 Iglu Server expects an API key in the `apikey` header for any endpoint that requires read access to private schemas or write access to the registry. See [Generate API keys](#generate-api-keys) below for how to generate them.
 
@@ -67,16 +72,14 @@ docker run --rm \\
 A minimal configuration looks like this:
 
 ```hocon
-{
-  "database": {
-    "host": "postgres"
-    "dbname": "igludb"
-    "username": "postgres"
-    "password": "mysecret"
-  }
-
-  "superApiKey": "bb7b7503-40d3-459c-943a-f8d31a6f5638"
+database: {
+  host: postgres
+  dbname: igludb
+  username: postgres
+  password: mysecret
 }
+
+superApiKey: bb7b7503-40d3-459c-943a-f8d31a6f5638
 ```
 
 See the [configuration reference](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) for all available parameters. A [docker-compose.yml](https://github.com/snowplow/iglu-server/blob/master/docker/docker-compose.yml) is also provided in the repository to help you get started.
@@ -95,6 +98,10 @@ psql -U postgres -c "CREATE DATABASE igludb"
   -e ACCEPT_LIMITED_USE_LICENSE=yes \\
   snowplow/iglu-server:${versions.igluServer} setup --config /iglu/config.hocon
 `}</CodeBlock>
+
+#### Upgrade
+
+Some versions need extra steps when upgrading, for example a database change. See the [upgrade guides](/docs/api-reference/iglu/iglu-repositories/iglu-server/upgrade-guides/index.md).
 
 ## Generate API keys
 
@@ -136,7 +143,7 @@ To enable dummy mode, set `database.type` to `"dummy"` in your config. The dummy
 
 ### Logging
 
-Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html), configurable via system properties. For example, to redirect logs to a file and suppress verbose connection loop output:
+Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html), configurable via system properties. For example, to redirect logs to a file and suppress verbose connection loop output:
 
 ```bash
 -Dorg.slf4j.simpleLogger.logFile=server.log

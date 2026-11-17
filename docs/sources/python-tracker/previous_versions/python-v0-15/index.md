@@ -8,13 +8,9 @@ keywords: ["python tracker v0.15", "legacy python tracker", "redis emitter"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 <BadgeGroup>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="Pypi Tracker Release"></Badges>
-<Badges badgeType="Snowplow Tracker Pypi Release"></Badges>
+<TierBadge tier="early-release" />
+
 </BadgeGroup>
 ```
 

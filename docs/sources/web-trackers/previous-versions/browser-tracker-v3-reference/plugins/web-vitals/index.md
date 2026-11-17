@@ -1,5 +1,6 @@
 ---
 title: "Web Vitals"
+sidebar_label: "Web Vitals"
 sidebar_position: 17000
 description: "Documentation for Web Vitals in the web tracker."
 keywords: ["tracker", "configuration"]

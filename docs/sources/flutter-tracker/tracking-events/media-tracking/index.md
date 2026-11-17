@@ -4,6 +4,7 @@ sidebar_label: "Media tracking"
 sidebar_position: 100
 description: "Track media playback events in Flutter applications using the built-in media tracking capabilities available since version 0.7.0."
 keywords: ["flutter media tracking", "flutter tracker media events"]
+content_type: how-to
 ---
 
 ```mdx-code-block

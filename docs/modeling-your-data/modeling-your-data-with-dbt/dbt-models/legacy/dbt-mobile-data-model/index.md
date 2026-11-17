@@ -4,20 +4,19 @@ sidebar_label: "Mobile"
 description: "Legacy Mobile dbt package for mobile event data modeling. Superseded by the Unified Digital package."
 keywords: ["mobile dbt legacy", "legacy mobile package", "deprecated mobile"]
 sidebar_position: 800
+content_type: concept
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import {versions} from '@site/src/componentVersions';
 import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
-<Badges badgeType="Maintained"></Badges>
-<Badges badgeType="SCL"></Badges>
+<VersionBadge component="dbtSnowplowMobile" />
+<TierBadge tier="maintained" />
+<LicenseBadge license="scl" />
 </BadgeGroup>
 
 :::info

@@ -4,6 +4,7 @@ sidebar_label: "Schemas in the warehouse"
 sidebar_position: 100
 description: "How Snowplow JSON schemas map to column types and structures in Redshift, BigQuery, Snowflake, Databricks, Iceberg, and Delta Lake."
 keywords: ["schema mapping", "warehouse schemas", "column types", "schema evolution", "warehouse tables"]
+content_type: reference
 ---
 
 ```mdx-code-block

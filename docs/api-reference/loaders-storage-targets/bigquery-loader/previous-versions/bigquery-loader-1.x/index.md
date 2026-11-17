@@ -88,61 +88,59 @@ The Snowplow BigQuery Loader apps use Pub/Sub topics and subscriptions to store 
 
 Loader / StreamLoader, Mutator and Repeater accept the same configuration file in HOCON format. An example of a minimal configuration file can look like this:
 
-```json
-{
-  "projectId": "com-acme"
+```hocon
+projectId: com-acme
 
-  "loader": {
-    "input": {
-      "subscription": "enriched-sub"
-    }
-
-    "output": {
-      "good": {
-        "datasetId": "snowplow"
-        "tableId": "events"
-      }
-
-      "bad": {
-        "topic": "bad-topic"
-      }
-
-      "types": {
-        "topic": "types-topic"
-      }
-
-      "failedInserts": {
-        "topic": "failed-inserts-topic"
-      }
-    }
+loader: {
+  input: {
+    subscription: enriched-sub
   }
 
-  "mutator": {
-    "input": {
-      "subscription": "types-sub"
+  output: {
+    good: {
+      datasetId: snowplow
+      tableId: events
     }
 
-    "output": {
-      "good": ${loader.output.good} # will be automatically inferred
-    }
-  }
-
-  "repeater": {
-    "input": {
-      "subscription": "failed-inserts-sub"
+    bad: {
+      topic: bad-topic
     }
 
-    "output": {
-      "good": ${loader.output.good} # will be automatically inferred
+    types: {
+      topic: types-topic
+    }
 
-      "deadLetters": {
-        "bucket": "gs://dead-letter-bucket"
-      }
+    failedInserts: {
+      topic: failed-inserts-topic
     }
   }
-
-  "monitoring": {} # disabled
 }
+
+mutator: {
+  input: {
+    subscription: types-sub
+  }
+
+  output: {
+    good: ${loader.output.good} # will be automatically inferred
+  }
+}
+
+repeater: {
+  input: {
+    subscription: failed-inserts-sub
+  }
+
+  output: {
+    good: ${loader.output.good} # will be automatically inferred
+
+    deadLetters: {
+      bucket: "gs://dead-letter-bucket"
+    }
+  }
+}
+
+monitoring: {} # disabled
 ```
 
 The loader takes command line arguments `--config` with a path to the configuration hocon file and `--resolver` with a path to the Iglu resolver file. If you are running the docker image then you should mount the configuration files into the container:

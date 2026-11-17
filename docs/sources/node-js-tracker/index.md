@@ -5,14 +5,16 @@ date: "2021-03-24"
 sidebar_position: 165
 description: "Track events in Node.js applications with the Snowplow Node.js tracker SDK written in TypeScript."
 keywords: ["node.js tracker", "nodejs analytics", "typescript tracker"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="node-js" />
 ```
+
+<TrackerFeatures id="node-js" />
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.
 

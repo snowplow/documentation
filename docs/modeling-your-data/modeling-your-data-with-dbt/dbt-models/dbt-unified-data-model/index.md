@@ -1,25 +1,25 @@
 ---
 title: "Snowplow Unified Digital dbt package"
 sidebar_label: "Unified Digital"
-sidebar_position: 10
+sidebar_position: 15
 description: "Transform raw web and mobile event data into derived tables for views, sessions, users, and conversions with the Unified Digital dbt package."
 keywords: ["unified digital dbt", "web and mobile data", "sessions modeling", "user modeling", "page views"]
+content_type: concept
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowUnified" />
+<TierBadge tier="actively-maintained" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
-<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Unified Digital package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+<Availability available={['cloud', 'pmc', 'addon']} note="The Unified Digital package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+
+**Next steps:** [install the package](/tutorials/unified-digital/setting-up-locally/), then [configure it](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx).
 
 **The package source code can be found in the [snowplow/dbt-snowplow-unified repo](https://github.com/snowplow/dbt-snowplow-unified), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-unified/#!/overview/snowplow_unified).**
 

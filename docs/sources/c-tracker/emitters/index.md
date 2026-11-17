@@ -5,6 +5,7 @@ description: "Configure emitters to send events to your collector with customiza
 keywords: ["emitter configuration", "event store", "http client", "retry logic", "batch sending"]
 date: "2020-02-25"
 sidebar_position: 60
+content_type: how-to
 ---
 
 Emitters are responsible for sending events to the collector. Each tracker is given a single emitter. Once the emitter receives an event from the Tracker a few things start to happen:

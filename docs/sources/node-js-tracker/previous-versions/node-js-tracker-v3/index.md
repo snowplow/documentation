@@ -2,15 +2,13 @@
 title: "Node.js Tracker v3"
 sidebar_label: "Node.js Tracker v3"
 date: "2021-03-24"
-sidebar_position: 200
+sidebar_position: 210
 description: "Documentation for Node.js tracker version 3, a previous release of the Snowplow Node.js tracking SDK."
 keywords: ["node.js tracker v3", "legacy version"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.

@@ -3,12 +3,15 @@ title: "Configure HTTP as a Snowbridge target"
 sidebar_label: "HTTP"
 description: "Configure HTTP target for Snowplow Snowbridge to send data over HTTP with authentication, OAuth2, request templating, and response rules."
 keywords: ["snowbridge config", "http target", "http endpoint", "oauth2", "request templating", "gtm server side"]
+content_type: reference
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+<IntegrationBadges id="snowbridge-http" />
 
 :::note
 Version 4.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/api-reference/snowbridge/upgrade-guides/upgrade-guide-4-X-X/index.md)
@@ -46,9 +49,7 @@ Configure the `oauth_client {}` block with `client_id`, `client_secret`, and `re
 
 ### JWT bearer flow
 
-:::note[Added in version 6.0.0]
-Snowbridge supports the JWT bearer flow from version 6.0.0 onwards.
-:::
+<AppliesTo feature="snowbridge-http-jwt" />
 
 Where the target expects a [JWT bearer assertion](https://datatracker.ietf.org/doc/html/rfc7523) instead of client credentials — as service accounts on Google APIs do, for example — configure the `oauth_jwt {}` block. Snowbridge signs a JWT with your private key and exchanges it for an access token at `token_url`.
 
@@ -151,7 +152,7 @@ If you want to use this as a [failure target](/docs/api-reference/snowbridge/con
 
 You can use the HTTP target to send events to Google Tag Manager Server Side, where the [Snowplow Client tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md) is installed.
 
-To do this, you will need to include a [transformation](/docs/api-reference/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson.md).
+To do this, you will need to include a [transformation](/docs/api-reference/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson/index.md).
 
 Here’s an example configuration. Replace `<your-gtm-host>` with the hostname of your Google Tag Manager instance, and — optionally — `<preview-token>` with your preview mode token.
 

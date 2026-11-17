@@ -4,6 +4,7 @@ sidebar_label: "visionOS and SwiftUI"
 sidebar_position: 190
 description: "Track window groups and immersive spaces in visionOS apps on Apple Vision Pro using SwiftUI context entities and events."
 keywords: ["visionOS", "SwiftUI", "Apple Vision Pro", "window groups", "immersive spaces"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

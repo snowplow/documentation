@@ -5,6 +5,7 @@ sidebar_position: 2.5
 description: "Use Snowtype to generate type-safe tracking code from event specifications, tracking plans, data structures, and Iglu Central schemas."
 keywords: ["Snowtype", "code generation", "tracking code", "event specifications", "data structures"]
 date: "2026-03-19"
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

@@ -5,6 +5,7 @@ sidebar_label: "Cloudflare"
 description: "Track page views at the CDN level using a Cloudflare Worker to capture visits from bots, AI agents, and other clients that don't run JavaScript."
 keywords: ["cloudflare tracking", "cloudflare worker", "cdn tracking", "ai agent tracking"]
 date: "2026-04-27"
+content_type: integration
 ---
 
 If your website is served through Cloudflare, you can send page view events to Snowplow via a [Cloudflare Worker](https://developers.cloudflare.com/workers/) to capture visits from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each request as a [page view event](/docs/fundamentals/events/index.md), which appears alongside your existing web analytics events.

@@ -4,21 +4,19 @@ sidebar_label: "Custom implementations"
 description: "Customize the Attribution dbt package with custom conversion periods, sources, and attribution overview logic."
 keywords: ["custom attribution", "attribution customization", "custom paths to conversions", "attribution macro"]
 sidebar_position: 30
+content_type: how-to
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-
 export const datagridProps = {
     hideFooter: true
   };
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>
-<Badges badgeType="Early Release"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowAttribution" />
+<TierBadge tier="early-release" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
 :::note

@@ -29,9 +29,9 @@ from snowplow_signals import Signals
 
 sp_signals = Signals(
     api_url=SIGNALS_API_URL,        # must include https://, e.g. https://abc123.signals.snowplowanalytics.com
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,  # required — do not omit
-    org_id=ORG_ID,
+    api_key=SNOWPLOW_API_KEY,
+    api_key_id=SNOWPLOW_API_KEY_ID,  # required — do not omit
+    org_id=SNOWPLOW_ORG_ID,
 )
 ```
 

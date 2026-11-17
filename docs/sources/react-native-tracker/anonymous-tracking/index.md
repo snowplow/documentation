@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 25
 description: "Enable anonymous tracking to disable user and session identifiers with client-side and server-side anonymization options."
 keywords: ["react native anonymous tracking", "user anonymization", "privacy tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -14,7 +15,7 @@ import TabItem from '@theme/TabItem';
 
 Anonymous tracking is a feature that enables anonymization of various user and session identifiers, to support user privacy when consent for tracking the identifiers isn't given.
 
-On React Native, the following [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) can be anonymized:
+On React Native, the following [user and session identifiers](/docs/events/identifiers/index.md) can be anonymized:
 
 * Client-side user identifiers:
    * `user_id`, `domain_userid`, `network_userid`, and `user_ipaddress`, set by you in `Subject`

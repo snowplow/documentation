@@ -5,12 +5,17 @@ date: "2021-05-11"
 sidebar_position: 2
 description: "Deploy Snowplow Mini on GCP for a single-instance testing environment."
 keywords: ["snowplow mini", "gcp setup", "mini deployment"]
+content_type: how-to
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+import SunsetCallout from "/docs/reusable/snowplow-mini-sunset/_callout.md"
+
+<SunsetCallout />
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 

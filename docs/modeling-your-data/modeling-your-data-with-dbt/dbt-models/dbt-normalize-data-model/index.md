@@ -4,24 +4,22 @@ sidebar_label: "Normalize"
 sidebar_position: 50
 description: "Flatten and normalize self-describing events and entities into dedicated tables for downstream ETL and analysis tools."
 keywords: ["normalize dbt", "flatten events", "unnest entities", "event normalization", "ETL preparation"]
+content_type: concept
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
-<Badges badgeType="Maintained"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowNormalize" />
+<TierBadge tier="maintained" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
-<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Normalize package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+<Availability available={['cloud', 'pmc', 'addon']} note="The Normalize package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 :::note
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.

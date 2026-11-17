@@ -4,6 +4,7 @@ sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
 description: "Load Snowplow events to Snowflake with sub-minute latency from Kinesis, Pub/Sub, or Kafka using Snowpipe Streaming."
 keywords: ["snowflake loader", "snowpipe streaming", "real-time warehouse", "snowflake data warehouse"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -42,21 +43,21 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.pubsub.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.azure.minimal.hocon
 ```
 

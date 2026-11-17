@@ -1,5 +1,6 @@
 ---
 title: "Javascript (tag) tracker"
+sidebar_label: "Javascript (tag) tracker"
 date: "2023-03-22"
 sidebar_position: 400
 description: "Documentation for tracking Javascript (tag) er with the web tracker."

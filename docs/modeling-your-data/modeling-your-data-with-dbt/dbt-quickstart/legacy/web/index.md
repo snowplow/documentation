@@ -4,6 +4,7 @@ sidebar_position: 700
 title: "Web Quickstart"
 description: "Quick start guide for the legacy Snowplow Web dbt package to model web event data into page views, sessions, and users."
 keywords: ["web quickstart", "legacy web package", "dbt web setup"]
+content_type: how-to
 ---
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:

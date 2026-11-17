@@ -1,5 +1,6 @@
 ---
 title: "Snowplow v3 Settings Variable"
+sidebar_label: "Snowplow v3 Settings Variable"
 sidebar_position: 2000
 description: "Documentation for Snowplow v3 Settings Variable in the web tracker."
 keywords: ["tracker", "configuration"]

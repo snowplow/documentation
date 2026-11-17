@@ -1,9 +1,10 @@
 ---
 title: "S3 Loader"
 sidebar_label: "S3 Loader"
-sidebar_position: 5
+sidebar_position: 5.5
 description: "Archive Snowplow events from Kinesis to S3 in LZO or Gzip format for raw payloads, enriched events, and failed events."
 keywords: ["s3 loader", "kinesis to s3", "aws s3", "lzo compression"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -55,3 +56,9 @@ Here is a standard command to run the loader on a EC2 instance in AWS:
       snowplow/snowplow-s3-loader:${versions.s3Loader} \\
       --config /snowplow/config/config.hocon
 `}</CodeBlock>
+
+## Monitor the loader
+
+The S3 Loader reports metrics covering event counts and latency. It can send them to StatsD, to Prometheus, or to both.
+
+See [Monitoring the S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/monitoring/index.md) for the full list of metrics and for how to configure each protocol.

@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 10
 description: "Install the PHP tracker using Composer for tracking events in PHP applications."
 keywords: ["php tracker installation", "composer setup", "php package"]
+content_type: how-to
 ---
 
 ```mdx-code-block

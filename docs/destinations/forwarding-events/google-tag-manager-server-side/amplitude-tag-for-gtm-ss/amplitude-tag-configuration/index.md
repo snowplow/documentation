@@ -5,6 +5,7 @@ date: "2021-11-24"
 sidebar_position: 100
 description: "Configure event mapping, user properties, entity rules, and session tracking for the Amplitude Tag in GTM Server Side."
 keywords: ["Amplitude Tag configuration", "event mapping", "user properties", "session tracking"]
+content_type: reference
 ---
 
 :::tip[Populating the Amplitude Session ID]

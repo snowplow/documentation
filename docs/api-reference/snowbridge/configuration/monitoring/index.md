@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 400
 description: "Monitor Snowbridge with configurable logging, pprof profiling, StatsD metrics, and Sentry error reporting for observability."
 keywords: ["snowbridge config", "monitoring", "statsd metrics", "sentry", "logging", "snowbridge observability"]
+content_type: reference
 ---
 
 ```mdx-code-block

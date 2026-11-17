@@ -1,5 +1,6 @@
 ---
 title: "Link clicks"
+sidebar_label: "Link clicks"
 sidebar_position: 40
 description: "Documentation for Link clicks in the web tracker."
 keywords: ["tracker", "configuration"]

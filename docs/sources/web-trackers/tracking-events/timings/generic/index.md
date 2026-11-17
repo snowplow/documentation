@@ -4,6 +4,7 @@ sidebar_label: "Generic timing"
 sidebar_position: 98
 description: "Track custom timing events to measure how long resources take to load or user actions take to complete with category and label organization."
 keywords: ["timing events", "performance"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -27,13 +28,13 @@ Timing events must be **manually tracked**.
 
 **Download:**
 
-<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-site-tracking@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-site-tracking@4.10.2/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a></td></tr></tbody></table>
 
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+**Note:** The links to the CDNs above are pinned to a specific version at the time of writing. Check the [plugin's GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) for newer versions, and update the pinned version when you upgrade.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@4.10.2/dist/index.umd.min.js",
   ["snowplowSiteTracking", "SiteTrackingPlugin"]
 );
 ```

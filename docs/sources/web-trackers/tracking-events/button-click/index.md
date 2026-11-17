@@ -4,6 +4,7 @@ sidebar_label: "Button clicks"
 sidebar_position: 50
 description: "Automatically track clicks on button elements and input buttons with configurable filtering and custom context entities."
 keywords: ["button tracking", "click events"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -42,13 +43,13 @@ Button click events are **automatically tracked** once configured.
     <tr>
       <td>Available on jsDelivr</td>
       <td>
-        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)
+        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@4.10.2/dist/index.umd.min.js">jsDelivr</a>
       </td>
     </tr>
     <tr>
       <td>Available on unpkg</td>
       <td>
-        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)
+        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@4.10.2/dist/index.umd.min.js">unpkg</a>
       </td>
     </tr>
   </tbody>
@@ -74,7 +75,7 @@ To start tracking all button clicks, call the `enableButtonClickTracking` functi
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@4.10.2/dist/index.umd.min.js',
     ['snowplowButtonClickTracking', 'ButtonClickTrackingPlugin']
 );
 

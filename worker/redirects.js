@@ -1,7 +1,25 @@
 // Rules that always apply, before trying to serve the page.
 const forcedRules = [
   ['/docs/signals/', '/docs/signals/introduction/', 301],
-  ['/docs/api-reference/', '/docs/api-reference/versions/', 301],
+  // Editorial merges. The old pages stay as `type: link` stubs so the
+  // sidebar still lists the topic where readers look for it, but they
+  // always redirect to the merged page.
+  ['/docs/events/ootb-data/user-and-session-identification/', '/docs/events/identifiers/', 301],
+  ['/docs/events/ootb-data/user-and-session-identification.md', '/docs/events/identifiers.md', 301],
+  ['/docs/sources/web-trackers/cross-domain-tracking/', '/docs/events/cross-navigation/#configure-the-web-tracker', 301],
+  ['/docs/sources/web-trackers/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
+  ['/docs/identities/concepts/cross-domain-tracking/', '/docs/events/cross-navigation/#identities-and-cross-domain-tracking', 301],
+  ['/docs/identities/concepts/cross-domain-tracking.md', '/docs/events/cross-navigation.md', 301],
+  ['/docs/event-studio/query-sql/', '/docs/destinations/warehouses-lakes/querying-data/#get-example-queries-from-console', 301],
+  ['/docs/event-studio/query-sql.md', '/docs/destinations/warehouses-lakes/querying-data.md', 301],
+  ['/docs/event-studio/data-structures/json-editor/', '/docs/event-studio/data-structures/create/#create-a-data-structure-with-the-json-editor', 301],
+  ['/docs/event-studio/data-structures/json-editor.md', '/docs/event-studio/data-structures/create.md', 301],
+  ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/', '/tutorials/unified-digital/setting-up-locally/', 301],
+  ['/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified.md', '/tutorials/unified-digital/setting-up-locally.md', 301],
+  // First steps merged into the CDI overview. Exact rules, so the pages
+  // under /docs/get-started/ are still served.
+  ['/docs/get-started/', '/docs/cdi/', 301],
+  ['/docs/get-started.md', '/docs/cdi.md', 301],
 ];
 
 // Rules that only apply when the page is not found.
@@ -160,7 +178,6 @@ const fallbackRules = [
   ['/docs/getting-started-on-community-edition/what-is-snowplow-open-source/*', '/docs/getting-started-on-community-edition/what-is-community-edition/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/additional-options/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/', 301],
-  ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/snowplow-plugin-for-analytics-npm-package/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/', 301],
@@ -273,7 +290,7 @@ const fallbackRules = [
   ['/docs/using-the-snowplow-console/*', '/docs/account-management/:splat', 301],
   ['/docs/discovering-data/*', '/docs/data-product-studio', 301],
   ['/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/', '/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/', 301],
-  ['/docs/get-started/deployment-model/*', '/docs/get-started/', 301],
+  ['/docs/get-started/deployment-model/*', '/docs/get-started/deployment-options/', 301],
   ['/docs/get-started/snowplow-bdp/private-managed-cloud/*', '/docs/get-started/snowplow-bdp/:splat', 301],
   ['/docs/get-started/snowplow-bdp/cloud/*', '/docs/get-started/snowplow-bdp/', 301],
   ['/docs/get-started/snowplow-community-edition/what-is-community-edition/', '/docs/get-started/snowplow-community-edition/', 301],
@@ -289,7 +306,6 @@ const fallbackRules = [
   ['/docs/pipeline/enrichments/what-is-enrichment/*', '/docs/pipeline/enrichments/:splat', 301],
   ['/docs/pipeline/enrichments/managing-enrichments/ui/*', '/docs/pipeline/enrichments/managing-enrichments/:splat', 301],
   ['/docs/destinations/warehouses-lakes/storage-options/*', '/docs/destinations/warehouses-lakes/:splat', 301],
-  ['/docs/destinations/forwarding-events/snowbridge/getting-started/*', '/docs/destinations/forwarding-events/snowbridge/getting-started/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/concepts/application-overview/*', '/docs/destinations/forwarding-events/snowbridge/concepts/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/configuration/sources/stdin/*', '/docs/destinations/forwarding-events/snowbridge/configuration/sources/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/create-a-script/*', '/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/:splat', 301],
@@ -386,7 +402,7 @@ const fallbackRules = [
   ['/docs/event-studio/data-structures/manage/cli/*', '/docs/api-reference/snowplow-cli/data-structures/:splat', 301],
   ['/docs/event-studio/data-structures/manage/api/*', '/docs/event-studio/programmatic-management/data-structures-api/:splat', 301],
   ['/docs/event-studio/data-structures/manage/iglu/*', '/docs/api-reference/iglu/manage-schemas/:splat', 301],
-  ['/docs/event-studio/data-structures/manage/builder/*', '/docs/event-studio/data-structures/:splat', 301],
+  ['/docs/event-studio/data-structures/manage/builder/*', '/docs/event-studio/data-structures/create/#create-a-data-structure-with-the-builder', 301],
   ['/docs/event-studio/data-structures/manage/*', '/docs/event-studio/data-structures/:splat', 301],
   ['/docs/event-studio/event-specifications/api/*', '/docs/event-studio/programmatic-management/event-specifications-api/:splat', 301],
   ['/docs/event-studio/event-specifications/*', '/docs/event-studio/tracking-plans/event-specifications/:splat', 301],
@@ -403,7 +419,8 @@ const fallbackRules = [
   ['/docs/signals/retrieve-attributes/*', '/docs/signals/attributes/:splat', 301],
   ['/docs/signals/define-interventions/*', '/docs/signals/interventions/:splat', 301],
   ['/docs/signals/receive-interventions/*', '/docs/signals/applications/subscribe/:splat', 301],
-  ['/docs/signals/resources/*', '/docs/signals/get-started/:splat', 301],
+  ['/docs/signals/resources/*', '/docs/signals/concepts/', 301],
+  ['/docs/signals/get-started/*', '/docs/signals/concepts/', 301],
   // Signals define/consume restructure
   ['/docs/signals/attributes/services/*', '/docs/signals/applications/services/:splat', 301],
   ['/docs/signals/interventions/subscribe/*', '/docs/signals/applications/subscribe/:splat', 301],
@@ -411,7 +428,6 @@ const fallbackRules = [
   ['/docs/resources/migration-guides/*', '/docs/migration-guides/:splat', 301],
   ['/docs/resources/*', '/docs/licensing/:splat', 301],
   ['/docs/licensing/copyright-license/*', '/docs/licensing/:splat', 301],
-  ['/docs/api-reference/*', '/docs/api-reference/versions/:splat', 301],
   // New data modeling feature
   ['/docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/*', '/docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat', 301],
   ['/docs/modeling-your-data/running-data-models-via-console/dbt/*', '/docs/modeling-your-data/running-data-models-via-console/', 301],
@@ -421,7 +437,10 @@ const fallbackRules = [
   ['/docs/testing/snowplow-micro/remote-usage/*', '/docs/testing/snowplow-micro/local/remote-usage/:splat', 301],
   ['/docs/testing/snowplow-micro/advanced-usage/*', '/docs/testing/snowplow-micro/local/advanced-usage/:splat', 301],
   ['/docs/testing/snowplow-micro/adding-schemas/*', '/docs/testing/snowplow-micro/local/schemas/:splat', 301],
-  ['/docs/event-studio/mcp-server/*', '/docs/llms-support/mcp-server/:splat', 301],
+  // AI pages moved from llms-support to ai (mcp-server was renamed to cli-mcp-server before the move)
+  ['/docs/event-studio/mcp-server/*', '/docs/ai/cli-mcp-server/:splat', 301],
+  ['/docs/llms-support/mcp-server/*', '/docs/ai/cli-mcp-server/:splat', 301],
+  ['/docs/llms-support/*', '/docs/ai/:splat', 301],
   // Snowtype restructure
   ['/docs/event-studio/implement-tracking/snowtype/using-the-cli/*', '/docs/event-studio/implement-tracking/install-snowtype/:splat', 301],
   ['/docs/event-studio/implement-tracking/snowtype/snowtype-config/*', '/docs/event-studio/implement-tracking/snowtype-config/:splat', 301],
@@ -435,6 +454,13 @@ const fallbackRules = [
   // JS enrichment flattened
   ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
   ['/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/*', '/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/:splat', 301],
+  // Signals quickstart tutorial moved into the Signals docs
+  ['/tutorials/signals-quickstart/define-attribute-group/', '/docs/signals/get-started/quickstart-tutorial/#create-the-attribute-group', 301],
+  ['/tutorials/signals-quickstart/define-service/', '/docs/signals/get-started/quickstart-tutorial/#create-the-service', 301],
+  ['/tutorials/signals-quickstart/retrieve-attributes/', '/docs/signals/get-started/quickstart-tutorial/#find-your-session-id', 301],
+  ['/tutorials/signals-quickstart/conclusion/', '/docs/signals/get-started/quickstart-tutorial/#clean-up', 301],
+  ['/tutorials/signals-quickstart.md', '/docs/signals/get-started/quickstart-tutorial.md', 301],
+  ['/tutorials/signals-quickstart/*', '/docs/signals/get-started/quickstart-tutorial/', 301],
   // Iglu docs refactor — deleted/relocated pages
   ['/docs/api-reference/iglu/igluctl-2/*', '/docs/api-reference/iglu/igluctl/:splat', 301],
   ['/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/', '/docs/fundamentals/schemas/#self-describing-json-schema-anatomy', 301],

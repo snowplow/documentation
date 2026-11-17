@@ -4,6 +4,7 @@ sidebar_label: "Emitters"
 sidebar_position: 30
 description: "Configure emitters to send events to Snowplow collectors with batch size, retry logic, and async support using the Emitter and AsyncEmitter classes."
 keywords: ["python emitters", "asyncemitter", "batch processing"]
+content_type: reference
 ---
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter class and its subclasses.

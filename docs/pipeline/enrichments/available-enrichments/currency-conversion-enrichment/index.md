@@ -4,6 +4,7 @@ sidebar_position: 2
 sidebar_label: Currency conversion (legacy)
 description: "Convert transaction values to a base currency using Open Exchange Rates API for standardized reporting."
 keywords: ["currency conversion", "exchange rates", "multi-currency"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

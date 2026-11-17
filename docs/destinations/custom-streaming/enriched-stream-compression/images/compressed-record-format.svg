@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15">
+  <title>Layout of a compressed enriched stream record</title>
+  <rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+
+  <!-- Outer compressed envelope -->
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#1f1f1f">One stream record</text>
+  <rect x="20" y="45" width="860" height="455" rx="6" fill="#fff4cc" stroke="#8a6d00" stroke-width="1.5"/>
+  <text x="40" y="75" fill="#5c4800">Compressed with zstd (magic bytes <tspan font-family="monospace">28 B5 2F FD</tspan>)</text>
+  <text x="40" y="98" fill="#5c4800" font-style="italic">After decompression:</text>
+
+  <!-- Header -->
+  <rect x="60" y="115" width="70" height="40" fill="#cfe2f3" stroke="#3d5f80"/>
+  <text x="95" y="140" text-anchor="middle" font-family="monospace" fill="#1f1f1f">01</text>
+  <rect x="130" y="115" width="70" height="40" fill="#cfe2f3" stroke="#3d5f80"/>
+  <text x="165" y="140" text-anchor="middle" font-family="monospace" fill="#1f1f1f">01</text>
+  <text x="215" y="132" fill="#3d5f80" font-size="13">header: format version (1 byte),</text>
+  <text x="215" y="149" fill="#3d5f80" font-size="13">then enriched event format version (1 byte)</text>
+
+  <!-- Size + record rows -->
+  <g font-size="14">
+    <rect x="60" y="170" width="90" height="40" fill="#ffe08a" stroke="#8a6d00"/>
+    <text x="105" y="195" text-anchor="middle" fill="#1f1f1f">size</text>
+    <rect x="150" y="170" width="470" height="40" fill="#e3def5" stroke="#5b4a99"/>
+    <text x="385" y="195" text-anchor="middle" fill="#1f1f1f">enriched event (TSV)</text>
+
+    <rect x="60" y="215" width="90" height="40" fill="#ffe08a" stroke="#8a6d00"/>
+    <text x="105" y="240" text-anchor="middle" fill="#1f1f1f">size</text>
+    <rect x="150" y="215" width="560" height="40" fill="#e3def5" stroke="#5b4a99"/>
+    <text x="430" y="240" text-anchor="middle" fill="#1f1f1f">enriched event (TSV)</text>
+
+    <rect x="60" y="260" width="90" height="40" fill="#ffe08a" stroke="#8a6d00"/>
+    <text x="105" y="285" text-anchor="middle" fill="#1f1f1f">size</text>
+    <rect x="150" y="260" width="400" height="40" fill="#e3def5" stroke="#5b4a99"/>
+    <text x="350" y="285" text-anchor="middle" fill="#1f1f1f">enriched event (TSV)</text>
+
+    <rect x="60" y="305" width="90" height="40" fill="#ffe08a" stroke="#8a6d00"/>
+    <text x="105" y="330" text-anchor="middle" fill="#1f1f1f">size</text>
+    <rect x="150" y="305" width="650" height="40" fill="#e3def5" stroke="#5b4a99"/>
+    <text x="475" y="330" text-anchor="middle" fill="#1f1f1f">enriched event (TSV)</text>
+
+    <text x="105" y="370" text-anchor="middle" fill="#5c4800" font-size="20">⋮</text>
+    <text x="385" y="370" text-anchor="middle" fill="#5c4800" font-size="20">⋮</text>
+
+    <rect x="60" y="380" width="90" height="40" fill="#ffe08a" stroke="#8a6d00"/>
+    <text x="105" y="405" text-anchor="middle" fill="#1f1f1f">size</text>
+    <rect x="150" y="380" width="520" height="40" fill="#e3def5" stroke="#5b4a99"/>
+    <text x="410" y="405" text-anchor="middle" fill="#1f1f1f">enriched event (TSV)</text>
+  </g>
+
+  <!-- Annotations -->
+  <text x="60" y="445" fill="#5c4800" font-size="13"><tspan font-weight="600">size:</tspan> four bytes, unsigned 32-bit integer, big-endian</text>
+  <text x="60" y="465" fill="#5c4800" font-size="13"><tspan font-weight="600">enriched event:</tspan> exactly <tspan font-style="italic">size</tspan> bytes, UTF-8, one TSV line with no trailing newline</text>
+  <text x="60" y="485" fill="#5c4800" font-size="13">The size + enriched event pair repeats until the end of the decompressed bytes.</text>
+</svg>

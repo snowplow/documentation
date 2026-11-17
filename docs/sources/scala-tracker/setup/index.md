@@ -5,6 +5,7 @@ date: "2022-9-15"
 sidebar_position: 0
 description: "Install the Snowplow Scala tracker from Maven Central or JCenter using sbt, Gradle, or Maven with support for http4s and id emitters."
 keywords: ["scala tracker installation", "sbt dependency", "maven central"]
+content_type: how-to
 ---
 
 ```mdx-code-block

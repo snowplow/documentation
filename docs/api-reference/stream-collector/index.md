@@ -5,6 +5,7 @@ date: "2020-11-02"
 sidebar_position: 20
 description: "The Snowplow event Collector receives raw Snowplow events from trackers and webhooks, serializes them, and writes them to supported sinks including Kinesis, PubSub, Kafka, NSQ, SQS, and stdout."
 keywords: ["stream collector", "collector API", "HTTP event collection", "Kinesis collector", "PubSub collector", "Kafka collector"]
+content_type: concept
 ---
 
 The collector receives raw Snowplow events sent over HTTP by [trackers](/docs/sources/index.md) or [webhooks](/docs/sources/webhooks/index.md). It serializes them, and then writes them to a sink. Currently supported sinks are:

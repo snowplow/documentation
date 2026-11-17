@@ -5,9 +5,18 @@ sidebar_label: "Console getting started"
 description: "Use the Getting Started dashboard in Console to design tracking, implement it, deploy data models, and configure Signals."
 keywords: ["console", "getting started", "onboarding", "tracking plan", "implement tracking", "signals", "data model"]
 date: "2026-03-09"
+content_type: how-to
 ---
 
+import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
+
 The Getting Started dashboard in Console guides you through collecting and acting on your behavioral data. It organizes workflows into three sections: **Fundamentals**, **Analytics**, and **Real-time use cases**.
+
+:::tip[Use your AI assistant]
+You can also complete these workflows by asking an AI assistant. Connected to the Snowplow MCP server, your coding agent can create a tracking plan, add the tracker to your application and check the events, and configure Signals. For example: "Create a tracking plan for our checkout flow, add the tracking to this app, and confirm the events arrive."
+
+<AiAssistantInstall />
+:::
 
 ![The Getting Started dashboard in Console showing Fundamentals, Analytics, and Real-time use cases sections with guided workflow cards](images/console-getting-started.png)
 
@@ -57,10 +66,10 @@ Once data is flowing, you can deploy a data model to transform raw events into s
 
 ## Configure Signals for real-time use cases
 
-[Signals](/docs/signals/get-started/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
+[Signals](/docs/signals/introduction/index.md) processes your event stream to compute user attributes in real time and trigger automated actions.
 
-:::note[Paid add-on]
-Signals is a paid add-on. Contact your account team to enable it.
+:::note[Signals free tier]
+You can start on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) without a credit card or a sales call. To use Signals beyond the free tier, contact your account team.
 :::
 
 ### Design Signals attributes

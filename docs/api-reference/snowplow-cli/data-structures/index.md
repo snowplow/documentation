@@ -4,13 +4,13 @@ sidebar_label: "Data structures"
 sidebar_position: 20
 description: "Use the Snowplow CLI data-structures command to generate, download, validate, and publish data structures with git-ops workflows and JSON Schema validation."
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
+content_type: how-to
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+  note="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 The `data-structures` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.

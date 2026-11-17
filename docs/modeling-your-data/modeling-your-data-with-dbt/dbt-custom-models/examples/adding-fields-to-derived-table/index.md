@@ -4,6 +4,7 @@ sidebar_label: "Adding fields to a derived table"
 description: "Add custom fields to Snowplow derived tables using passthrough fields, custom aggregations, or custom derived models."
 keywords: ["add fields to derived tables", "passthrough fields", "custom aggregations", "extend derived tables"]
 sidebar_position: 10
+content_type: how-to
 ---
 
 You may often wish to add fields onto the derived tables within our packages; perhaps there is some additional dimension you need for your analysis, or some extra calculation you wish to perform. In most cases this is relatively straight forward to do, and even in the most complex case you don't need to alter the logic for the derived table itself.

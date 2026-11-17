@@ -59,7 +59,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in Console UI](/docs/event-studio/data-structures/#hide-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in Console UI](/docs/event-studio/data-structures/hide-and-lock/#hide-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
 * `data` is the actual [snowplow self describing schema](/docs/fundamentals/schemas/#self-describing-json-schema-anatomy) that this data structure describes

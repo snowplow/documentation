@@ -4,6 +4,7 @@ sidebar_position: 2
 description: "Test JavaScript enrichment code locally using Node.js before deploying to production pipelines."
 sidebar_label: "Testing"
 keywords: ["test JavaScript enrichment", "local testing", "enrichment debugging"]
+content_type: how-to
 ---
 
 ```mdx-code-block

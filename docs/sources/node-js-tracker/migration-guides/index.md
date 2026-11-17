@@ -5,6 +5,7 @@ date: "2021-04-12"
 sidebar_position: 4800
 description: "Upgrade guides to help you migrate between major versions of the Node.js tracker."
 keywords: ["node.js tracker migration", "version upgrade"]
+content_type: landing
 ---
 
 This section contains information to help you upgrade to newer versions of the Node.js tracker.

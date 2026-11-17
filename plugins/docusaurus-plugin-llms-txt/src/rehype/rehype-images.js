@@ -8,6 +8,8 @@ import { getClassString } from './utils.js'
  * - ThemedImage: uses two <img> tags with themedComponent--light/dark classes.
  *   Strip dark-theme images, keep light-theme ones.
  * - ThemedImage <picture>: extract light-theme <img>, convert to ![alt](src)
+ * - Inline images (src starting with data:): replaced with their alt text, so
+ *   the Markdown copy doesn't carry kilobytes of base64
  * - Standard <img>: rehype-remark handles natively
  */
 export default function rehypeImages() {
@@ -47,6 +49,15 @@ export default function rehypeImages() {
         if (className.includes('themedComponent--dark')) {
           parent.children.splice(index, 1)
           return index
+        }
+        // Replace inline data: images with their alt text
+        if (String(node.properties?.src ?? '').startsWith('data:')) {
+          const alt = String(node.properties?.alt ?? '').trim()
+          const replacement = alt
+            ? [{ type: 'element', tagName: 'em', properties: {}, children: [{ type: 'text', value: `Image: ${alt}` }] }]
+            : []
+          parent.children.splice(index, 1, ...replacement)
+          return index + replacement.length
         }
       }
 

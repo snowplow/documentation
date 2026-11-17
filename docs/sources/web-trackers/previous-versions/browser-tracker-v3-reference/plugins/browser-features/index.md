@@ -1,5 +1,6 @@
 ---
 title: "Browser Features"
+sidebar_label: "Browser Features"
 date: "2021-04-07"
 sidebar_position: 2000
 description: "Documentation for Browser Features in the web tracker."

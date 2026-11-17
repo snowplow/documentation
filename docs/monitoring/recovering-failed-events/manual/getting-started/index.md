@@ -5,6 +5,7 @@ date: "2020-07-22"
 sidebar_position: 0
 description: "Understand the recovery workflow, prerequisites, and configuration requirements for manually recovering failed events from storage."
 keywords: ["event recovery prerequisites", "recovery workflow"]
+content_type: concept
 ---
 
 Event recovery at its core, is the ability to fix events that have failed and replay them through your pipeline.

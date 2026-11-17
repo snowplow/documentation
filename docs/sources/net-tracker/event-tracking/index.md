@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 60
 description: "Track page views, structured events, screen views, and custom self-describing events with the .NET tracker SDK."
 keywords: [".net event tracking", "page view tracking", "structured events"]
+content_type: how-to
 ---
 
 Events supported by the .NET Tracker at a glance:

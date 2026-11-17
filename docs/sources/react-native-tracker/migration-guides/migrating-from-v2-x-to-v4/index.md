@@ -5,6 +5,7 @@ date: "2021-08-09"
 sidebar_position: 90
 description: "Migration guide for upgrading React Native tracker from v2 to v4 with JavaScript-only architecture, new platform support, and configuration changes."
 keywords: ["react native tracker v2 to v4", "migration guide", "javascript-only tracker"]
+content_type: how-to
 ---
 
 Version 4 of the React Native tracker brings a significant rearchitecture of the tracker, which is now JavaScript-only instead of building on top of the iOS and Android native trackers.
@@ -61,6 +62,20 @@ See the [documentation for screen view tracking options](/docs/sources/react-nat
 
 There are fewer automatically tracked properties in the platform context entity, but it's possible to provide values for them manually.
 Refer to [the documentation to learn more](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md).
+
+### Changed values in the platform context entity
+
+Version 2 took the platform context values from the native iOS and Android trackers. Version 4 reads them from React Native, so some values have a different format.
+Version 4.6.6 changed some of them back to match version 2.
+The following table lists the values that changed:
+
+| Property                 | Version 2                 | 4.2.0 to 4.6.5                                           | 4.6.6 and later                                          |
+| ------------------------ | ------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| iOS `osType`             | `ios`                     | System name reported by the device, such as `iOS` or `iPadOS` | System name reported by the device, such as `iOS` or `iPadOS` |
+| iOS `deviceModel`        | Hardware model identifier | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` | Device family: `iPhone`, `iPad`, `Apple TV`, `Vision`, or `Mac` |
+| iOS `deviceManufacturer` | `Apple Inc.`              | `Apple`                                                  | `Apple Inc.`                                             |
+| Android `osType`         | `android`                 | `Android`                                                | `android`                                                |
+| Android `osVersion`      | Android release version   | Android API level                                        | Android release version                                  |
 
 ### Not possible to access from native code
 

@@ -5,6 +5,7 @@ date: "2021-10-19"
 sidebar_position: 20
 description: "Add event context entities, subject data with user and platform information, page data, and custom timestamps to Ruby tracker events."
 keywords: ["ruby event context", "subject configuration", "cookie-based identifiers"]
+content_type: how-to
 ---
 
 ```mdx-code-block

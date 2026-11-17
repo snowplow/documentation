@@ -5,6 +5,7 @@ date: "2026-03-11"
 sidebar_position: 600
 description: "Learn how Snowbridge handles target failures, oversized data, invalid data, transformation failures, and fatal errors."
 keywords: ["failure handling", "error recovery", "failed events", "retry logic", "snowbridge errors"]
+content_type: concept
 ---
 
 ## Failure targets

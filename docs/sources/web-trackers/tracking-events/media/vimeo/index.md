@@ -4,6 +4,7 @@ sidebar_label: "Vimeo"
 sidebar_position: 15
 description: "Automatically track Vimeo video players embedded via iframe or Vimeo Player SDK with comprehensive playback and interaction events."
 keywords: ["vimeo", "video tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -28,12 +29,12 @@ Vimeo media events and entities are **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@4.10.2/dist/index.umd.min.js">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-vimeo-tracking@4.10.2/dist/index.umd.min.js">unpkg</a></td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@4.10.2/dist/index.umd.min.js',
     ['snowplowVimeoTracking', 'VimeoTrackingPlugin']
 );
 ```

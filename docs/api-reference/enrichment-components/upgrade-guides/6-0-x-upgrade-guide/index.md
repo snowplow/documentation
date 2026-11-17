@@ -4,6 +4,7 @@ sidebar_label: "6.0.x upgrade guide"
 sidebar_position: 10
 description: "Upgrade guide for Snowplow Enrich 6.0.x covering common-streams refactoring, configuration changes, and deprecated features."
 keywords: ["enrich 6.0", "common-streams", "configuration migration"]
+content_type: how-to
 ---
 
 In version 6.0.0, Enrich is refactored to use [common-streams](https://github.com/snowplow-incubator/common-streams) libraries under the hood. [common-streams](https://github.com/snowplow-incubator/common-streams) is the collection of libraries that contains streaming-related constructs commonly used across many Snowplow streaming applications.

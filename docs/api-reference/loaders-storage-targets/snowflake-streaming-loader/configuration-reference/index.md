@@ -4,6 +4,7 @@ sidebar_label: "Configuration reference"
 sidebar_position: 1
 description: "Configure Snowflake Streaming Loader with Snowpipe Streaming, Kinesis, Pub/Sub, and Kafka settings for real-time warehouse loading."
 keywords: ["snowflake config", "snowpipe streaming", "streaming loader config", "warehouse configuration"]
+content_type: reference
 ---
 
 ```mdx-code-block
@@ -25,9 +26,9 @@ The Snowflake Streaming Loader is released under the [Snowplow Limited Use Licen
 
 To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
 
-```json
-"license": {
-  "accept": true
+```hocon
+license: {
+  accept: true
 }
 ```
 
@@ -91,11 +92,13 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
 
 You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
 
-```json
-"input.consumerConf": {
-    "security.protocol": "SASL_SSL"
-    "sasl.mechanism": "PLAIN"
-    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=<PASSWORD>;"
+```hocon
+input: {
+  consumerConf: {
+    "security.protocol": SASL_SSL
+    "sasl.mechanism": PLAIN
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=<PASSWORD>;"
+  }
 }
 ```
 

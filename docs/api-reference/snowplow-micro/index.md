@@ -4,6 +4,7 @@ sidebar_label: "Snowplow Micro"
 sidebar_position: 115
 description: "Snowplow Micro arguments and environment variables."
 keywords: ["snowplow micro", "micro api", "micro arguments", "testing tool"]
+content_type: reference
 ---
 
 See [this guide](/docs/testing/snowplow-micro/index.md) for learning about Snowplow Micro and getting started with it.

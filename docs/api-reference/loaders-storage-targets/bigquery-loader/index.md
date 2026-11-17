@@ -4,6 +4,7 @@ sidebar_label: "BigQuery Loader"
 sidebar_position: 2
 description: "Stream Snowplow events to BigQuery from Kinesis or Pub/Sub with real-time loading and schema evolution."
 keywords: ["bigquery loader", "google bigquery", "streaming loader", "snowplow gcp"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -41,14 +42,14 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-```json reference
+```hocon reference
 https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.pubsub.minimal.hocon
 ```
 

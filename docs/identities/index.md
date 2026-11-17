@@ -2,16 +2,16 @@
 title: "Introduction to Snowplow Identities"
 sidebar_label: "Identities"
 date: "2025-02-25"
-sidebar_position: 6
+sidebar_position: 6.5
 description: "Snowplow Identities provides real-time identity resolution, stitching user identifiers together to create unified Snowplow IDs."
 keywords: ["identities", "identity resolution", "identity stitching", "snowplow_id"]
+content_type: concept
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Identities is a paid addon for Snowplow CDI."
+  note="Identities is a paid addon for Snowplow CDI."
 />
 
 Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
@@ -25,7 +25,7 @@ Identities allows you to:
 Use the provided Identities data models to build identifier mapping tables. These tables help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
 
 :::note[Deployment support]
-Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/index.md). Azure isn't supported.
+Identities is available on Cloud, and on AWS and GCP via [Private Managed Cloud](/docs/get-started/private-managed-cloud/index.md). Azure isn't supported.
 :::
 
 ## How Identities fits into the Snowplow pipeline
@@ -48,4 +48,8 @@ Identities is self-serviceable from [Console](/docs/identities/configuration/ind
 
 To use Identities, start by deciding which user identifiers are most relevant to your use cases. Identities supports standard Snowplow identifiers such as `user_id` and `domain_userid`, as well as custom identifiers derived from any field in the event payload. Because your choice of identifiers affects both resolution quality and cost, follow the guidance in [choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md) before you configure them.
 
-After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables.
+After configuring Identities, set up the [Identities dbt package](/docs/identities/data-models/index.md) to create your identity tables. To check how your identity graph is developing, see [Monitor your identity graph](/docs/identities/monitoring/index.md).
+
+## Fulfill GDPR erasure requests
+
+Identities exposes an API to remove a user's entries from the identity graph. See [Erasure](/docs/identities/erasure/index.md) for what it does and how to call it.

@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 70
 description: "Track events from both native mobile code and embedded WebViews in hybrid apps using unified session tracking."
 keywords: ["hybrid apps", "webview tracking", "mobile web integration"]
+content_type: how-to
 ---
 
 ```mdx-code-block

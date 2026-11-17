@@ -42,8 +42,8 @@ This is the first step in our effort to make AI a first-class way of working wit
 
 ## Get started
 
-The Snowplow MCP server is available from today. Configuration instructions for each supported client are in the [Snowplow MCP server documentation](/docs/llms-support/snowplow-mcp/).
+The Snowplow MCP server is available from today. Configuration instructions for each supported client are in the [Snowplow MCP server documentation](/docs/ai/snowplow-mcp/).
 
-The Snowplow Assistant rolls out to Console next week. An organization admin can enable it from **Settings** in Console once it's available. Full documentation is on the [Snowplow Assistant page](/docs/llms-support/console-agent/).
+The Snowplow Assistant rolls out to Console next week. An organization admin can enable it from **Settings** in Console once it's available. Full documentation is on the [Snowplow Assistant page](/docs/ai/console-agent/).
 
 Both features are available on Snowplow Cloud and Private Managed Cloud. Talk to your Customer Success Manager or Snowplow Support if you'd like help getting set up.

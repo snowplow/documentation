@@ -5,6 +5,7 @@ sidebar_position: 20
 sidebar_label: "Spark (legacy)"
 description: "Deploy event recovery jobs on Apache Spark using EMR and dataflow-runner."
 keywords: ["Spark event recovery", "EMR recovery job"]
+content_type: how-to
 ---
 
 :::note

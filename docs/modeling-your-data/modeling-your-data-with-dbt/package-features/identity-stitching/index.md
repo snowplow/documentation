@@ -4,6 +4,7 @@ sidebar_label: "Users and identity stitching"
 description: "Details on mapping between `domain_userid` and `user_id` in our packages."
 keywords: ["identity stitching", "user mapping", "user identifiers", "stitched user ID"]
 sidebar_position: 10
+content_type: concept
 ---
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';

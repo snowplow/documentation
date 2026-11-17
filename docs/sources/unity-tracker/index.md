@@ -5,14 +5,16 @@ date: "2020-02-26"
 sidebar_position: 250
 description: "Track Snowplow events from Unity games and apps across multiple platforms including iOS, Android, WebGL, and desktop."
 keywords: ["unity tracker", "unity game analytics", "unity event tracking"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="unity" />
 ```
+
+<TrackerFeatures id="unity" />
 
 <p>The Snowplow Unity Tracker allows you to track Snowplow events from your Unity games and apps. The current tracker version is {versions.unityTracker}.</p>
 

@@ -5,6 +5,7 @@ sidebar_position: 150
 description: "Track internal site search queries with search terms, filters, and result counts to analyze user search behavior and content discovery."
 keywords: ["site search", "search tracking", "search terms", "search results"]
 date: "2026-01-15"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

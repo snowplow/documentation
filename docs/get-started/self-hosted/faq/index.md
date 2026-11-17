@@ -4,6 +4,7 @@ sidebar_label: "Frequently asked questions"
 sidebar_position: 5
 description: "Common questions about managing, upgrading, and troubleshooting Snowplow Self-Hosted deployments with Terraform."
 keywords: ["Self-Hosted FAQ", "Terraform", "enrichments", "upgrades", "troubleshooting"]
+content_type: reference
 ---
 
 ## How do I shut down the pipeline?

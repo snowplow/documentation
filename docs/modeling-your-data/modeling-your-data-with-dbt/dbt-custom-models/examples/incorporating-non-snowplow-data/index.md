@@ -4,6 +4,7 @@ sidebar_label: "Incorporating non-Snowplow data"
 description: "Incorporate external data sources into Snowplow derived tables by joining non-Snowplow data with custom derived models."
 keywords: ["external data", "non-Snowplow data", "data enrichment", "join external tables"]
 sidebar_position: 100
+content_type: how-to
 ---
 
 There may be times when you wish to add some fields to our derived tables that are not coming from the events table itself but from your own external data sources.

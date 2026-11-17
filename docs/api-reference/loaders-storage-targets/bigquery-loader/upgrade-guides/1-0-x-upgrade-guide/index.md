@@ -5,6 +5,7 @@ date: "2021-10-07"
 sidebar_position: 0
 description: "Upgrade BigQuery Loader from 0.6.x to 1.0.x with HOCON config, new load_tstamp field, and StreamLoader migration steps."
 keywords: ["bigquery 1.0 upgrade", "streamloader migration", "hocon config", "load_tstamp", "bigquery upgrade"]
+content_type: how-to
 ---
 
 ## Configuration
@@ -38,61 +39,59 @@ Using Repeater as an example, if your configuration for 0.6.x looked like this:
 
 it will now look like this:
 
-```json
-{
-  "projectId": "com-acme"
+```hocon
+projectId: com-acme
 
-  "loader": {
-    "input": {
-      "subscription": "enriched-sub"
-    }
-
-    "output": {
-      "good": {
-        "datasetId": "snowplow"
-        "tableId": "events"
-      }
-
-      "bad": {
-        "topic": "bad-topic"
-      }
-
-      "types": {
-        "topic": "types-topic"
-      }
-
-      "failedInserts": {
-        "topic": "failed-inserts-topic"
-      }
-    }
+loader: {
+  input: {
+    subscription: enriched-sub
   }
 
-  "mutator": {
-    "input": {
-      "subscription": "types-sub"
+  output: {
+    good: {
+      datasetId: snowplow
+      tableId: events
     }
 
-    "output": {
-      "good": ${loader.output.good} # will be automatically inferred
-    }
-  }
-
-  "repeater": {
-    "input": {
-      "subscription": "failed-inserts-sub"
+    bad: {
+      topic: bad-topic
     }
 
-    "output": {
-      "good": ${loader.output.good} # will be automatically inferred
+    types: {
+      topic: types-topic
+    }
 
-      "deadLetters": {
-        "bucket": "gs://dead-letter-bucket"
-      }
+    failedInserts: {
+      topic: failed-inserts-topic
     }
   }
-
-  "monitoring": {} # disabled
 }
+
+mutator: {
+  input: {
+    subscription: types-sub
+  }
+
+  output: {
+    good: ${loader.output.good} # will be automatically inferred
+  }
+}
+
+repeater: {
+  input: {
+    subscription: failed-inserts-sub
+  }
+
+  output: {
+    good: ${loader.output.good} # will be automatically inferred
+
+    deadLetters: {
+      bucket: "gs://dead-letter-bucket"
+    }
+  }
+}
+
+monitoring: {} # disabled
 ```
 
 And instead of running it like this:

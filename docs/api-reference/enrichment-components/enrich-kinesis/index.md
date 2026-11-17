@@ -5,6 +5,7 @@ date: "2020-10-22"
 sidebar_position: 10
 description: "Standalone JVM application for enriching Snowplow events from AWS Kinesis streams with configurable enrichments and validation."
 keywords: ["enrich kinesis", "aws kinesis", "snowplow aws"]
+content_type: how-to
 ---
 
 ```mdx-code-block

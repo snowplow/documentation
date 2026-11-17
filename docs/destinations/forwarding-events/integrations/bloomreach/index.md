@@ -5,12 +5,15 @@ sidebar_position: 2
 description: "Send Snowplow events to Bloomreach Engagement for real-time customer analytics and personalization using the Batch Commands API."
 keywords: ["Bloomreach", "Bloomreach Engagement", "event forwarding", "customer data platform", "personalization"]
 date: "2026-05-05"
+content_type: integration
 ---
 
 ```mdx-code-block
 import EventForwardingSchemaTable from '@site/src/components/EventForwardingSchemaTable';
 import bloomreachSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/bloomreach.json';
 ```
+
+<IntegrationBadges id="forwarder-bloomreach" />
 
 Send Snowplow events to Bloomreach Engagement for real-time customer analytics, segmentation, and personalization using the [Batch Commands API](https://documentation.bloomreach.com/engagement/reference/batch-commands-2).
 

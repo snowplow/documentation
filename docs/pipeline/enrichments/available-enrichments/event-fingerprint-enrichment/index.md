@@ -4,6 +4,7 @@ sidebar_position: 6
 sidebar_label: Event fingerprint
 description: "Generate unique fingerprints for events using hash functions to enable deduplication and event matching."
 keywords: ["event fingerprint", "deduplication", "event hashing"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

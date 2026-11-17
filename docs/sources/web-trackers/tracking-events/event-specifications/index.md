@@ -4,6 +4,7 @@ sidebar_label: "Event specifications"
 sidebar_position: 115
 description: "Use the event specifications plugin to automatically attach event specification entities from your tracking plan to matching browser events."
 keywords: ["event specifications", "tracking plan", "browser tracker", "javascript tracker", "media web"]
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs'
@@ -33,12 +34,12 @@ The event specification entity is **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@4.10.2/dist/index.umd.min.js">jsDelivr</a></td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-event-specifications@4.10.2/dist/index.umd.min.js">unpkg</a></td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@4.10.2/dist/index.umd.min.js',
     ['eventSpecifications', 'EventSpecificationsPlugin']
 );
 ```
@@ -84,14 +85,14 @@ window.snowplow('newTracker', 'sp1', '{{collector_url}}', {
 // Add the Media plugin
 window.snowplow(
   'addPlugin',
-  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js',
+  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@4.10.2/dist/index.umd.min.js',
   ['snowplowMedia', 'SnowplowMediaPlugin']
 );
 
 // Add the Event Specifications plugin with configuration
 window.snowplow(
   'addPlugin',
-  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js',
+  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@4.10.2/dist/index.umd.min.js',
   ['eventSpecifications', 'EventSpecificationsPlugin'],
   [
     {

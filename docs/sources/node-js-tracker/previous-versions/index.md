@@ -10,9 +10,7 @@ keywords: ["node.js tracker legacy", "previous versions"]
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 This section contains the documentation for the previous versions of the Node.js tracker.

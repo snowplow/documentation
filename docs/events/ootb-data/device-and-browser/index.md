@@ -4,6 +4,7 @@ sidebar_label: "Device and browser information"
 sidebar_position: 60
 description: "Track device, browser, and platform information in atomic fields and context entities including YAUAA parsing, Client Hints, and mobile context."
 keywords: ["device information", "browser context", "mobile context", "YAUAA", "user agent", "client hints"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

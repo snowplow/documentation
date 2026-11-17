@@ -4,6 +4,7 @@ sidebar_label: "Sessions"
 sidebar_position: 20
 description: "Track user sessions with configurable timeouts, session callbacks, and cross-navigation support in mobile applications."
 keywords: ["session tracking", "user sessions", "session timeout"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -44,7 +45,7 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
 
 When enabled, the tracker appends a [`client_session` entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) to each event it sends and it maintains this session information as long as the application is installed on the device.
 
-Sessions correspond to tracked user activity. User information is set via the [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity).
+Sessions correspond to tracked user activity. User information is set via the [session entity](/docs/events/identifiers/index.md#session-entity).
 
 A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 

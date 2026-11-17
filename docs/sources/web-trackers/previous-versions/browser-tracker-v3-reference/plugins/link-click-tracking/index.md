@@ -1,5 +1,6 @@
 ---
 title: "Link Click Tracking"
+sidebar_label: "Link Click Tracking"
 date: "2021-04-07"
 sidebar_position: 12000
 description: "Documentation for tracking Link Click Tracking with the web tracker."

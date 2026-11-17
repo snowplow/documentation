@@ -4,6 +4,7 @@ sidebar_label: "Configure sources and output"
 sidebar_position: 2
 description: "Configure Snowtype code generation with options for output paths, tracker selection, language settings, and custom templates."
 keywords: ["Snowtype configuration", "config options", "code generation settings", "Snowtype setup"]
+content_type: how-to
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

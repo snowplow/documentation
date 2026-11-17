@@ -1,5 +1,6 @@
 ---
 title: "Using an ID service"
+sidebar_label: "Using an ID service"
 sidebar_position: 3000
 description: "Documentation for Using an ID service in the web tracker."
 keywords: ["tracker", "configuration"]

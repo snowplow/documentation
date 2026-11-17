@@ -4,6 +4,7 @@ sidebar_label: "Migrating from v3 to v4"
 sidebar_position: 1100
 description: "Migration guide for upgrading the Node.js tracker from version 3 to version 4 with breaking changes and new features."
 keywords: ["node.js tracker v4", "version upgrade v3 to v4"]
+content_type: how-to
 ---
 
 

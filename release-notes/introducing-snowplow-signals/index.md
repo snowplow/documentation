@@ -1,6 +1,8 @@
 ---
 title: "Introducing Snowplow Signals"
-description: "We’re excited to announce Snowplow Signals, a real-time customer intelligence system for AI-powered applications."
+sidebar_label: "Introducing Snowplow Signals"
+description: "We’re excited to announce Snowplow Signals, real-time customer context for AI-powered applications."
+keywords: ["snowplow signals", "real-time customer context", "profiles store", "release notes"]
 date: "2025-05-28"
 category:
   - "Product news"
@@ -8,13 +10,13 @@ components:
   - "Signals"
   - "AI tools"
 ---
-We’re excited to announce [Snowplow Signals](https://snowplow.io/signals), a real-time customer intelligence system for AI-powered applications. Snowplow Signals now makes it easy to hyper-personalize user journeys and equip AI agents to overcome the "cold start problem", driving more relevant interactions.
+We’re excited to announce [Snowplow Signals](https://signals.snowplow.io/?utm_source=docs.snowplow.io&utm_medium=referral), real-time customer context for AI-powered applications. Snowplow Signals now makes it easy to hyper-personalize user journeys and equip AI agents to overcome the "cold start problem", driving more relevant interactions.
 
 ## How Snowplow Signals Works: Three Core Capabilities
 
 #### 1. Profiles Store
 
-The heart of the customer intelligence system— a low-latency API that gives applications and AI agents instant access to rich customer context. The Profiles Store is populated by two complementary engines:
+The heart of Signals: a low-latency API that gives applications and AI agents instant access to rich customer context. The Profiles Store is populated by two complementary engines:
 
 * **Streaming Engine:** Computes real-time customer attributes from live behavioral data (like current session activity, real-time engagement scores)
 * **Batch Engine:** Enriches profiles with historical intelligence from your data warehouse, including ML-generated attributes, lifecycle stages, and cross-platform behavioral patterns

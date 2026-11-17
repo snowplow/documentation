@@ -1,0 +1,1 @@
+Install the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and [skills](/docs/ai/skills/index.mdx) in your coding agent, such as Claude Code, Cursor, or Codex, with `npx plugins add snowplow/skills`. In Console, the [Snowplow Assistant](/docs/ai/console-agent/index.md) has the same tools.

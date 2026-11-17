@@ -4,6 +4,7 @@ sidebar_position: 20
 sidebar_label: "Attribute keys"
 description: "Create custom attribute keys based on any event property to specify the analytical context for attribute calculations. Use built-in keys like domain_userid or define your own."
 keywords: ["attribute keys", "custom attribute keys", "analytical context", "atomic properties", "event properties", "entity properties"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -13,12 +14,12 @@ import TabItem from '@theme/TabItem';
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against. All attribute groups need an attribute key.
 
-Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
+Signals includes five built-in attribute keys. Four are based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events. The fifth, `snowplow_id`, calculates attributes per person, using the [Snowplow ID](/docs/identities/concepts/index.md#snowplow-ids) from [Identities](/docs/identities/index.md) when Identities is enabled on your pipeline. See [Calculate attributes per person with identity resolution](/docs/signals/attributes/identity-resolution/index.md).
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
 
-The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, and `user_id`.
+The built-in attribute keys are available to select when creating an attribute group in Snowplow Console: `domain_userid`, `domain_sessionid`, `network_userid`, `user_id`, and `snowplow_id`. The `snowplow_id` key shows **Requires Identities** until you [configure Identities](/docs/identities/configuration/index.md) on your pipeline.
 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
@@ -31,15 +32,20 @@ from snowplow_signals import (
     domain_sessionid,
     user_id,
     network_userid,
+    snowplow_id,
 )
 ```
 
 </TabItem>
 </Tabs>
 
+## Choose a key your application can read by
+
+Your application reads attributes by the same attribute key the attribute group is calculated on, and it reads them on your backend, because reads need an API key. Choose a key whose value your backend has at read time: for example, `domain_sessionid` passed from the browser for session attributes, or `user_id` from an authenticated session for a logged-in user. See [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md#handle-the-response).
+
 ## Custom attribute keys
 
-You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/concepts/index.md#data-sources).
+You can define custom attribute keys to calculate attributes against identifiers other than the built-in ones. How you specify the key depends on the attribute group [data source](/docs/signals/concepts/index.md#choose-a-data-source).
 
 For stream attribute groups, the key can be any property in your events:
 * [Atomic](/docs/fundamentals/canonical-event/index.md#common-fields) properties: fields of the core Snowplow event, available for all events
@@ -79,7 +85,7 @@ app_id_attribute_key = AttributeKey(
 )
 ```
 
-The table below lists all available arguments:
+This table lists all available arguments:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |

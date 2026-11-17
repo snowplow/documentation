@@ -1,5 +1,6 @@
 ---
 title: "Tracker Callbacks"
+sidebar_label: "Tracker Callbacks"
 date: "2020-02-26"
 sidebar_position: 0
 description: "Documentation for tracking Tracker Callbacks with the web tracker."

@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 50
 description: "Configure sync, async, and WebGL emitters to send and store Unity tracker events with customizable protocols, methods, and batch sizes."
 keywords: ["unity emitter configuration", "asyncemitter unity", "webgl emitter"]
+content_type: reference
 ---
 
 The Emitter object is responsible for sending and storing all events.

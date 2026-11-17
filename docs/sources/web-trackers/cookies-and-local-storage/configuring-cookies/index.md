@@ -5,6 +5,7 @@ description: "Configure cookie names, domains, lifetimes, and storage strategies
 keywords: ["cookie configuration", "storage strategy", "cookie domain", "samesite cookies"]
 date: "2021-04-07"
 sidebar_position: 1
+content_type: reference
 ---
 
 ```mdx-code-block

@@ -10,7 +10,7 @@ keywords: ["jupyter notebook setup"]
 
 The first step is to set up your Signals connection. Follow the instructions in the [Signals connection documentation](/docs/signals/connection/) to [enable Signals through Snowplow Console](/docs/signals/setup/).
 
-Once your connection is set up, gather the required credentials as described in the [connection credentials section](/docs/signals/connection/#connection-credentials).
+Once your connection is set up, gather the required credentials as described in the [connection credentials section](/docs/signals/connection/reference/#connection-credentials).
 
 ## Set up your Jupyter notebook environment
 

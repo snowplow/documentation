@@ -271,7 +271,7 @@ To track media events on web with the Flutter tracker, configure the JavaScript 
     namespace: namespace,
     endpoint: endpoint,
     trackerConfig: const TrackerConfiguration(
-        jsMediaPluginURL: "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js"
+        jsMediaPluginURL: "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@4.10.2/dist/index.umd.min.js"
     )
 );`}
 </CodeBlock>

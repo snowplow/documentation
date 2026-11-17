@@ -5,6 +5,7 @@ date: "2026-05-14"
 sidebar_position: 20
 description: "Configure Iglu Resolver for schema fetching and validation in Snowplow enrichers and loaders with cache and repository settings."
 keywords: ["iglu resolver", "resolver config", "schema fetching", "iglu client configuration", "self-hosted"]
+content_type: reference
 ---
 
 ```mdx-code-block

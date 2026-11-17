@@ -5,6 +5,7 @@ sidebar_label: "Snowplow Self-Hosted Terraform"
 sidebar_position: 15
 description: "Enable and configure enrichments in Snowplow Self-Hosted deployments using Terraform on AWS, GCP, or Azure."
 keywords: ["Terraform enrichments", "Self-Hosted enrichments", "enrichment deployment"]
+content_type: how-to
 ---
 
 If you have installed Snowplow via [Quick Start](/docs/get-started/self-hosted/index.md), you will have the following enrichments enabled by default:

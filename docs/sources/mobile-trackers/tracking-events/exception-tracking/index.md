@@ -4,6 +4,7 @@ sidebar_label: "Exceptions"
 sidebar_position: 50
 description: "Automatically capture and track unhandled exceptions and crashes within mobile applications."
 keywords: ["exception tracking", "crash tracking", "error monitoring"]
+content_type: how-to
 ---
 
 ```mdx-code-block

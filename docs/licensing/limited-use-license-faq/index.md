@@ -3,6 +3,7 @@ title: "Snowplow Limited Use License FAQ"
 sidebar_label: "Limited Use License FAQ"
 description: "Frequently asked questions about the Snowplow Limited Use License Agreement terms and permitted uses."
 keywords: ["limited use license", "SLULA", "license terms"]
+content_type: concept
 ---
 
 :::info[Note]

@@ -5,6 +5,7 @@ date: "2021-08-14"
 sidebar_position: 50
 description: "Complete HOCON configuration reference for Snowplow Enrich applications including monitoring, validation, and stream-specific settings."
 keywords: ["enrich configuration", "hocon", "enrichment settings"]
+content_type: reference
 ---
 
 This page lists the configuration options for Enrich applications.
@@ -15,9 +16,9 @@ Enrich is released under the [Snowplow Limited Use License](/limited-use-license
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
-```json
-"license": {
-  "accept": true
+```hocon
+license: {
+  accept: true
 }
 ```
 
@@ -26,7 +27,7 @@ To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICEN
 | parameter                                                 | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cpuParallelismFraction` (since *6.0.0*)                  | Optional. Default: `1`. Controls how the app splits the workload into concurrent batches which can be run in parallel. E.g. If there are 4 available processors, and cpuParallelismFactor = 0.75, then we process 3 batches concurrently. Adjusting this value can cause the app to use more or less of the available CPU.                                                                                                                                                               |
-| `sinkParallelismFraction` (since *6.0.0*)                 | Optional. Default: `2`. Controls number of sink job that can be run in parallel. E.g. If there are 4 available processors, and sinkParallelismFraction = 2, then we run 8 sink job concurrently. Adjusting this value can cause the app to use more or less of the available CPU.                                                                                                                                                                                                        |
+| `sinkParallelismFraction` (since *6.0.0*)                 | Optional. Default: `3` for Kinesis (since *6.14.0*), `2` otherwise. Controls number of sink job that can be run in parallel. E.g. If there are 4 available processors, and sinkParallelismFraction = 2, then we run 8 sink job concurrently. Adjusting this value can cause the app to use more or less of the available CPU.                                                                                                                                                            |
 | `assetsUpdatePeriod`                                      | Optional. E.g. `7 days`. Period after which enrich assets (e.g. the maxmind database for the IpLookups enrichment) should be checked for updates. Assets will never be updated if this key is missing.                                                                                                                                                                                                                                                                                   |
 | `monitoring.sentry.dsn`                                   | Optional. E.g. `http://sentry.acme.com`. To track uncaught runtime exceptions in Sentry.                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `monitoring.sentry.environment` (since *6.7.0*)           | Optional. Environment name to use when reporting exceptions in Sentry.                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -51,7 +52,7 @@ To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICEN
 | `iglu.maxRetry` (since *6.5.0*)                           | Optional. Default: `2`. Maximum number of retries for failed Iglu requests. Lower values allow Enrich to fail faster when Iglu Server is unavailable, falling back to cached schemas instead of blocking on retries.                                                                                                                                                                                                                                                                     |
 | `iglu.maxWait` (since *6.5.0*)                            | Optional. Default: `1 second`. Maximum wait time for exponential backoff between Iglu request retries.                                                                                                                                                                                                                                                                                                                                                                                   |
 | `jsAllowedJavaClasses` (since *6.6.0*)                    | Optional. Default: `["*"]`. List of Java classes that the [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md) is allowed to access. This affects both `new <class>` and `<class>.<static method>` usage. Examples: `["java.lang.String", "java.net.URL"]`, `["java.net.*"]`. By default, all classes are allowed.                                                                                                              |
-| `compression.enabled` (since *6.11.0*)                    | Optional. Default: `false`. Enable compression on the enriched output stream. Snowplow consumers that support decompression: BigQuery Loader (since *2.2.0*), Databricks Streaming Loader (since *0.5.0*), Elasticsearch Loader (since *3.0.0*), Lake Loader (since *0.10.0*), S3 Loader (since *3.2.0*), Snowflake Loader (since *0.6.0*), Snowbridge (since *5.2.0*). Do not enable this setting if your downstream consumer is not in this list. |
+| `compression.enabled` (since *6.11.0*)                    | Optional. Default: `false`. Enable compression on the enriched output stream. Before enabling it, make sure every application that reads the enriched stream supports compressed records, as described in the [upgrade guide](/docs/api-reference/enrichment-components/upgrade-guides/6-11-x-upgrade-guide/index.md). When enabled, `output.good.partitionKey` and `output.good.attributes` are not applied. |
 | `compression.type` (since *6.11.0*)                       | Optional. Default: `zstd`. Compression algorithm to use. Valid values: `zstd`, `gzip`. |
 | `compression.zstdCompressionLevel` (since *6.11.0*)       | Optional. Default: `9`. The `zstd` compression level. Valid range: 1–22. Lower levels compress faster but achieve a worse compression ratio. |
 | `compression.gzipCompressionLevel` (since *6.11.0*)       | Optional. Default: `6`. The `gzip` compression level. Valid range: 1–9. Lower levels compress faster but achieve a worse compression ratio. |
@@ -181,9 +182,9 @@ If an event is not valid against `atomic` schema, a [failed event](/docs/fundame
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.
 For this reason, this new validation was added as a feature that can be deactivated like that:
 
-```json
-"validation": {
-  "acceptInvalid": true
+```hocon
+validation: {
+  acceptInvalid: true
 }
 ```
 
@@ -200,18 +201,16 @@ When we'll know that all our customers don't have any invalid enriched events an
 
 Since `4.0.0`, it is possible to configure the lengths of the atomic fields, below is an example:
 
-```hcl
-{
-  ...
-  # Optional. Configuration section for various validation-oriented settings.
-  "validation": {
-    # Optional. Configuration for custom maximum atomic fields (strings) length.
-    # Map-like structure with keys being field names and values being their max allowed length
-    "atomicFieldsLimits": {
-        "app_id": 5
-        "mkt_clickid": 100000
-        # ...and any other 'atomic' field with custom limit
-    }
+```hocon
+...
+# Optional. Configuration section for various validation-oriented settings.
+validation: {
+  # Optional. Configuration for custom maximum atomic fields (strings) length.
+  # Map-like structure with keys being field names and values being their max allowed length
+  atomicFieldsLimits: {
+    app_id: 5
+    mkt_clickid: 100000
+    # ...and any other 'atomic' field with custom limit
   }
 }
 ```

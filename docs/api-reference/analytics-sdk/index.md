@@ -5,14 +5,13 @@ date: "2020-11-02"
 sidebar_position: 80
 description: "Transform Snowplow enriched TSV events into JSON for data modeling and machine learning in Scala, JavaScript, Go, Python, and .NET."
 keywords: ["analytics sdk", "enriched events", "event transformation"]
+content_type: landing
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'selfHosted']}
-  helpContent="Analytics SDKs are included with all Snowplow platforms."
+  note="Analytics SDKs are included with all Snowplow platforms."
 />
 ```
 
@@ -24,6 +23,8 @@ Some good use cases for the SDKs include:
 2. Developing AI/ML models on your event data
 3. Performing analytics-on-write in AWS Lambda as part of our Kinesis real-time pipeline
 4. Within Snowplow pipeline components to process event data
+
+The Analytics SDKs parse one enriched event at a time. If you read from an enriched stream with compression enabled, each stream record contains many events. [Decompress the record and split it into events](/docs/destinations/custom-streaming/enriched-stream-compression/index.md) before passing each event to the SDK.
 
 ## Snowplow Analytics SDKs
 

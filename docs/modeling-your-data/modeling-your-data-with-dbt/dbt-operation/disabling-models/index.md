@@ -4,6 +4,7 @@ sidebar_label: "Turning off models"
 description: "How to turn off a model in our packages using model configuration in your dbt project yaml file."
 keywords: ["disable dbt models", "dbt model configuration", "disable modules"]
 sidebar_position: 40
+content_type: how-to
 ---
 
 If you do not require certain modules provided by the package you have the option to disable them using the [model configuration](https://docs.getdbt.com/reference/resource-configs/enabled) in your project yaml. For instance to disable the users module in the `snowplow_unified` package:

@@ -5,6 +5,7 @@ date: "2022-10-20"
 sidebar_position: 200
 description: "Configure Snowbridge JavaScript transformations using the goja embedded JavaScript engine with script paths and timeout settings."
 keywords: ["snowbridge config", "javascript config", "goja engine", "script configuration", "js transformations"]
+content_type: reference
 ---
 
 ```mdx-code-block

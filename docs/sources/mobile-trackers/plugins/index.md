@@ -4,6 +4,7 @@ sidebar_label: "Tracker plugins"
 sidebar_position: 45
 description: "Extend mobile tracker functionality using plugins to enrich events, filter tracking, or inspect tracked data."
 keywords: ["tracker plugins", "event enrichment", "plugin architecture"]
+content_type: how-to
 ---
 
 ```mdx-code-block

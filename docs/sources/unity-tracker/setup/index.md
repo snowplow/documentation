@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 10
 description: "Install the Unity tracker package for Unity 2022.3+ supporting Windows, macOS, Linux, iOS, Android, tvOS, and WebGL platforms."
 keywords: ["unity tracker installation", "unity tracker dependencies", "unity tracker unitypackage"]
+content_type: how-to
 ---
 
 The Snowplow Unity Tracker has been built and tested using Unity 2022.3 on Windows, Linux, OSX, iOS, Android, tvOS, and WebGL. It is built using .NET Standard 2.0 and requires at least Unity 2018.1.

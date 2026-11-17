@@ -5,6 +5,7 @@ date: "2020-11-03"
 sidebar_position: 500
 description: ".NET SDK with JSON event transformer for processing Snowplow enriched events in Azure Data Lake Analytics, Azure Functions, and C# applications."
 keywords: [".net analytics sdk", "csharp", "snowplow azure", "dotnet"]
+content_type: sdk
 ---
 
 ## 1. Overview

@@ -5,6 +5,7 @@ sidebar_position: 10
 description: "Complete reference for all Snowtype configuration file options, including schema sources, output settings, and command behavior."
 keywords: ["Snowtype", "configuration", "config file", "options", "reference"]
 date: "2026-03-25"
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

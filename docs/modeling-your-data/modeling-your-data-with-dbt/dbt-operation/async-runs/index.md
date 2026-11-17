@@ -4,6 +4,7 @@ sidebar_label: "Asynchronous runs"
 sidebar_position: 60
 description: "Run dbt package modules asynchronously at different intervals using session identifiers and selective model execution."
 keywords: ["async dbt runs", "asynchronous model execution", "dbt scheduling"]
+content_type: how-to
 ---
 
 You may wish to run the modules asynchronously, for instance run the views module hourly but the sessions and users modules daily. You would assume this could be achieved using e.g.:

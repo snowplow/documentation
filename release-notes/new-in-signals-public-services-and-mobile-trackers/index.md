@@ -1,0 +1,31 @@
+---
+title: "New in Signals: read attributes from websites and apps, and Signals in the mobile trackers"
+sidebar_label: "Public services and mobile tracker support"
+description: "Public Signals services can be read directly from a website or app without an API token, and the iOS and Android trackers can read attributes and receive interventions."
+keywords: ["snowplow signals", "public services", "mobile trackers", "interventions", "release notes"]
+date: "2026-11-17"
+category:
+  - "Release notes"
+components:
+  - "Signals"
+  - "Trackers"
+---
+Your websites and apps can read Signals attributes directly, without an API token or a backend to proxy the request.
+
+### Public services
+
+Services have an access mode. Services are `authenticated` by default, and need an API token to read, as before. A service with the `public` access mode can also be read without a token, for one UUID identifier at a time, such as the current user's `domain_userid`. Set the access mode in Console or with version 0.4.13 or later of the Python SDK.
+
+Anyone who has an identifier can read a public service's attributes for it, so only include attributes that are safe to show to the user they describe. See [Read attributes from websites and apps](/docs/signals/applications/public-services/).
+
+### Browser plugin
+
+Version 0.3.0 of the Signals browser plugin adds `getServiceAttributes()`, which reads a public service for an identifier you pass, such as the tracker's `domain_userid`.
+
+### Signals in the iOS and Android trackers
+
+Version 6.5.0 of the iOS tracker and version 6.6.1 of the Android tracker add a Signals controller, `tracker.signals`, configured with `SignalsConfiguration`. It reads public services for an identifier you pass, subscribes to interventions for the current app user and session, and tracks the same intervention events as the browser plugin. See [Use Signals attributes and interventions in your app](/docs/sources/mobile-trackers/signals/).
+
+### Built-in attribute keys for mobile apps
+
+Two new built-in attribute keys, `client_session_user_id` and `client_session_session_id`, read the user and session IDs from the mobile trackers' session entity. Use them to calculate attributes and target interventions for mobile apps. See [Attribute keys](/docs/signals/attributes/attribute-keys/).

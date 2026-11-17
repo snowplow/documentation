@@ -21,6 +21,8 @@ Start by [connecting to Signals](/docs/signals/connection/index.md) to create a 
 
 The preferred way to retrieve attributes is via a [service](/docs/signals/concepts/index.md#services), which lets you fetch attributes from multiple groups in one call. See [Services](/docs/signals/applications/services/index.md) to define one using the Console or Python SDK.
 
+The methods on this page need an API token, so call them from your backend. To read a service directly from a website or mobile app, see [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md).
+
 <Tabs groupId="signals-retrieve" queryString>
 <TabItem value="python" label="Python" default>
 

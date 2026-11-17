@@ -15,9 +15,10 @@ Use this table to find the page for what reads the data:
 | What reads it | What it gets | Use | Interfaces |
 | --- | --- | --- | --- |
 | Application code | Calculated attribute values for a user or session | [Services](/docs/signals/applications/services/index.md), then [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md). Services are recommended for production. | Python SDK, Node.js SDK, Signals API |
+| A website or mobile app | Attribute values for the current user, without an API token | A service with the `public` access mode, read [from websites and apps](/docs/signals/applications/public-services/index.md) | Browser plugin, iOS and Android trackers, Signals API |
 | An agent that needs recent session activity and a prompt | The session's latest events, up to 100 events or 1 hour, as JSON or a narrative | [Agentic contexts](/docs/signals/applications/agentic-contexts/index.md), scoped to `domain_sessionid` | Python SDK, Node.js SDK, Signals MCP server |
 | An agent that chooses what to read at runtime | Published attribute groups and agentic contexts, as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) | Any MCP client |
-| An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, Signals API |
+| An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, iOS and Android trackers, Signals API |
 | Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/ml-training-datasets/index.md) | Python SDK |
 
 ## Agents

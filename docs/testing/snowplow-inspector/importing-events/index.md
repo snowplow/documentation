@@ -29,9 +29,9 @@ The extension will accept an uncompressed file, which you can paste a selection 
 
 ## Importing events from ElasticSearch / OpenSearch
 
-If you use [ElasticSearch](https://www.elastic.co/) / [OpenSearch](https://opensearch.org/) as a destination for your events (or as used in [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md)) you can specify a query to use and the extension will load events as they're indexed.
+If you use [Elasticsearch](https://www.elastic.co/) or [OpenSearch](https://opensearch.org/) as a destination for your events, you can specify a query to use and the extension will load events as they're indexed.
 
-This can be useful for testing many devices at once, e.g. multiple mobile devices that are all sending events to your Snowplow Mini instance.
+This can be useful for testing many devices at once, e.g. multiple mobile devices that are all sending events to the same pipeline.
 
 ## Importing events from an ngrok tunnel
 

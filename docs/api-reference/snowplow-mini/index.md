@@ -3,31 +3,21 @@ title: "Introduction to Snowplow Mini"
 sidebar_label: "Snowplow Mini"
 date: "2021-08-14"
 sidebar_position: 120
-description: "Snowplow Mini is a single-instance development environment for testing tracker updates and schema changes."
+description: "Snowplow Mini was a single-instance development environment for testing tracker updates and schema changes. It reached End of Life on November 11, 2026."
 keywords: ["snowplow mini", "development environment", "testing environment", "mini setup"]
+sidebar_custom_props:
+  legacy: true
 content_type: concept
 ---
 
-:::warning
+import SunsetCallout from "/docs/reusable/snowplow-mini-sunset/_callout.md"
 
-Snowplow Mini entered [Maintenance Mode](https://docs.snowplow.io/lifecycle-policy/#maintenance-mode) on August 11, 2026 and is scheduled to reach [End of Life](https://docs.snowplow.io/lifecycle-policy/#sunset--end-of-life-eol) on November 11, 2026.
+<SunsetCallout />
 
-For new testing environments, we recommend using [Snowplow Micro](/docs/testing/snowplow-micro/index.md), which you can [deploy through Console](/docs/testing/snowplow-micro/console/index.md) or [run locally](/docs/testing/snowplow-micro/local/index.md). New Snowplow Mini deployments are no longer available through Console.
+Snowplow Mini was a single-instance version of Snowplow that served as a development environment. It gave you a quick way to debug tracker updates and changes to your schema and pipeline configuration, for example:
 
-:::
-
-[Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development environment, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
-
-You might use Snowplow Mini when:
-
-- You've updated a schema in your Development environment and wish to send some test events against it before promoting it to Production
-- You want to enable an Enrichment in a test environment before enabling it on Production
-
-## Getting started
-
-New Snowplow Mini instances are no longer available through Console. For new development environments, use [Snowplow Micro](/docs/testing/snowplow-micro/console/index.md) instead.
-
-For Snowplow Self-Hosted, see the setup guides for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
+- Sending test events against a schema updated in your Development environment, before promoting it to Production
+- Enabling an enrichment in a test environment before enabling it on Production
 
 ## Conceptual diagram
 

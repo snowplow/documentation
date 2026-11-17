@@ -41,7 +41,7 @@ const LEGACY_DIRS = [
   'api-reference/loaders-storage-targets/bigquery-loader/previous-versions',
   'api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions',
   'api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/rdb-loader-previous-versions',
-  'api-reference/snowplow-mini/previous-releases',
+  'api-reference/snowplow-mini',
 ]
 
 const isUnder = (p, dir) => p === dir || p.startsWith(dir + '/')

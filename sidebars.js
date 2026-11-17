@@ -286,7 +286,6 @@ const sidebars = {
       }),
       pick('api-reference/snowbridge'),
       pick('api-reference/iglu'),
-      pick('api-reference/snowplow-mini'),
       pick('api-reference/dataflow-runner'),
     ]),
     group('Schemas, data, and versions', [
@@ -316,7 +315,7 @@ const sidebars = {
           'api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/rdb-loader-previous-versions',
           { label: 'RDB Loader configuration' }
         ),
-        pick('api-reference/snowplow-mini/previous-releases', { label: 'Snowplow Mini' }),
+        pick('api-reference/snowplow-mini', { label: 'Snowplow Mini' }),
         pick('sources/snowplow-tracking-cli', { label: 'Tracking CLI (unsupported)' }),
         pick('modeling-your-data/modeling-your-data-with-sql-runner', { label: 'SQL Runner models' }),
       ],

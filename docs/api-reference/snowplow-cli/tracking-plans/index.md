@@ -128,6 +128,8 @@ Use `sync` if you only want to push changes without changing event specification
 
 Console gives every event specification a version number. When you declare that version in your tracking plan files, the CLI checks that each change to a file raises it exactly as Console will, so the version in your files is the version Console assigns. The CLI doesn't check an event specification without a `version` field.
 
+Declare versions when you manage tracking from a repository. Snowtype needs them to generate code from your repository, and they let you review every version change in a pull request. Without a `version` field, Console still assigns a version when you sync, but nothing checks that your files and the generated code match it.
+
 Console sets the expected version as follows:
 
 * A new event specification starts at `0`
@@ -156,7 +158,13 @@ It's best to commit the versions in a pull request of their own. On that pull re
 
 ### Raise the version when you change an event specification
 
-When you make a structural change to an event specification, raise its `version` by one. For example, making the plan entity optional changes the entity cardinality, so `Signup` moves from version `0` to `1`:
+When you make a structural change to an event specification, run `--fix` to raise its version. The `--fix` flag works with the [offline check](#check-versions-against-the-point-where-the-branch-started) and the [check against Console](#verify-the-versions-against-console), and writes the expected version into each event specification: it replaces a declared version that differs, and adds one where none is declared and the expected version is known. Update your branch from the base branch before you run `--fix`, as the warning in [Troubleshooting](#troubleshooting) explains.
+
+```bash
+snowplow-cli dp validate --fix
+```
+
+For example, making the plan entity optional changes the entity cardinality, so `--fix` moves `Signup` from version `0` to `1`:
 
 ```yaml title="./data-products/signup-flow.yaml"
     eventSpecifications:
@@ -173,11 +181,7 @@ When you make a structural change to an event specification, raise its `version`
                   maxCardinality: 1
 ```
 
-Instead of editing the number by hand, you can add `--fix` to the [offline check](#check-versions-against-the-point-where-the-branch-started) or to the [check against Console](#verify-the-versions-against-console). The `--fix` flag writes the expected version into each event specification: it replaces a declared version that differs, and adds one where none is declared and the expected version is known. Update your branch from the base branch before you run `--fix`, as the warning in [Troubleshooting](#troubleshooting) explains.
-
-```bash
-snowplow-cli dp validate --fix
-```
+You can also edit the version by hand: a structural change raises it by one.
 
 ### Check versions against the point where the branch started
 
@@ -222,47 +226,47 @@ The command exits with status 0 when every declared version matches the version 
 
 The version checks print these errors and exit with status 1. Each error names the event specification it applies to.
 
-`Signup: version 0 needs a bump` means your files, or Console, hold a structural change that the declared version doesn't reflect. The message names what changed and the expected version, and the offline check, `dp validate`, `dp sync`, and `dp release` all print it. Update your branch from the base branch first, so your files hold every change already published from other branches. Then run the `--fix` command that the message names, and run the check again.
+* `needs a bump`: your files, or Console, hold a structural change that the declared version doesn't reflect. The offline check, `dp validate`, `dp sync`, and `dp release` all print it, with what changed and the expected version. To fix it, update your branch from the base branch, so your files hold every change already published from other branches, then run the `--fix` command that the message names, and run the check again.
 
-```text
-3:32PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/0
-  errors=
-  │ Signup: version 0 needs a bump
-  │ changed: entities
-  │ expected version: 1
-  │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
+  ```text
+  3:32PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/0
+    errors=
+    │ Signup: version 0 needs a bump
+    │ changed: entities
+    │ expected version: 1
+    │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
 
-3:32PM ERRO validation failed 1 errors
-```
+  3:32PM ERRO validation failed 1 errors
+  ```
+
+* `does not match`: the declared version differs from the expected one for a reason other than a structural change, such as a new event specification that doesn't start at `0`, which the message marks as `new event specification`. To fix it, run the `--fix` command that the message names.
+
+  ```text
+  4:25PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/1
+    errors=
+    │ Signup with GitHub: version 2 does not match
+    │ new event specification
+    │ expected version: 0
+    │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
+
+  4:25PM ERRO validation failed 1 errors
+  ```
+
+* `Version mismatch on event spec`: someone made a structural change to the event specification in Console after `dp sync` or `dp release` checked your files, but before the command wrote them. Console refuses the write, because it would assign a different version from the one in your files, and the command writes nothing. To fix it, update your branch so your files hold that change, run `snowplow-cli dp validate --fix`, and run `dp sync` or `dp release` again. If you run `dp validate` first instead, it reports the change as a `needs a bump` error with the new expected version.
+
+  ```text
+  4:27PM ERRO bad response: {Version mismatch on event spec Signup id: 00000000-0000-4000-8000-000000000003: expected version 4, the platform would assign version 5}
+  ```
+
+* `could not find where the branch started from origin/develop`: the repository doesn't have the base ref, or doesn't have enough history to find where the branch started from it. The error happens in the shallow clone that `actions/checkout` creates by default. A clone without the base ref prints `fatal: Not a valid object name origin/develop`, and a clone that has the base ref but not the history prints `exit status 1:` with nothing after it. To fix it, fetch the full history, for example with `fetch-depth: 0` on `actions/checkout`, and make sure the base ref is fetched.
+
+  ```text
+  12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 128: fatal: Not a valid object name origin/develop
+  12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 1:
+  ```
 
 :::warning[Update your branch before running `--fix`]
 
 If you run `--fix` on a branch that isn't up to date, it writes the expected version into a file that still holds the older entities, and the next sync publishes them over the other change.
 
 :::
-
-`Signup with GitHub: version 2 does not match` means the declared version differs from the expected one for any other reason, such as a new event specification that doesn't start at `0`, which the message marks as `new event specification`. Run the `--fix` command that the message names.
-
-```text
-4:25PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/1
-  errors=
-  │ Signup with GitHub: version 2 does not match
-  │ new event specification
-  │ expected version: 0
-  │ run `snowplow-cli dp validate offline --base-ref develop --fix` to update it
-
-4:25PM ERRO validation failed 1 errors
-```
-
-`Version mismatch on event spec` means someone made a structural change to the event specification in Console after `dp sync` or `dp release` checked your files, but before the command wrote them. Console refuses the write, because it would assign a different version from the one in your files, and the command writes nothing. Update your branch so your files hold that change, then run `snowplow-cli dp validate --fix` and run `dp sync` or `dp release` again. If you run `dp validate` first instead, it reports the change as a `needs a bump` error with the new expected version.
-
-```text
-4:27PM ERRO bad response: {Version mismatch on event spec Signup id: 00000000-0000-4000-8000-000000000003: expected version 4, the platform would assign version 5}
-```
-
-`could not find where the branch started from origin/develop` means the repository doesn't have the base ref, or doesn't have enough history to find where the branch started from it. The error happens in the shallow clone that `actions/checkout` creates by default. A clone without the base ref prints `fatal: Not a valid object name origin/develop`, and a clone that has the base ref but not the history prints `exit status 1:` with nothing after it. Fetch the full history, for example with `fetch-depth: 0` on `actions/checkout`, and make sure the base ref is fetched.
-
-```text
-12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 128: fatal: Not a valid object name origin/develop
-12:23PM ERRO could not find where the branch started from origin/develop: fetch the full history (for example actions/checkout with fetch-depth: 0) and make sure origin/develop is fetched: git merge-base HEAD origin/develop failed: exit status 1:
-```

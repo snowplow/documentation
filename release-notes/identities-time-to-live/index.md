@@ -10,7 +10,7 @@ components:
   - "Identities"
 ---
 
-You can now set a [time to live](/docs/identities/concepts/time-to-live/) (TTL) for each identifier type in [Identities](/docs/identities/). Identities removes an identifier value from the graph once that value has gone unseen in events for longer than the TTL.
+You can now set a [time to live](/docs/identities/concepts/time-to-live/) (TTL) for each identifier type in [Identities](/docs/identities/). For example, you can configure stale `domain_userid` values to be removed from the graph after 30 days.
 
 This feature helps optimize the storage cost of running Identities. With many identifiers, there is no need to store them indefinitely because they naturally stop appearing in the data after a certain time. For instance, users typically get a new value of `domain_user` whenever they log out and log back in. The old value no longer contributes to the identity graph. Adding a TTL to such identifiers makes sure that stale values are removed and don’t take space in the database.
 

@@ -80,12 +80,11 @@ Access the Signals controller with `tracker.signals`, or `tracker.getSignals()` 
 
 ## Requirements for interventions
 
-The tracker only subscribes to interventions when it has a real identifier for the user. It doesn't subscribe when:
+The tracker subscribes to interventions using the session identifiers. It doesn't subscribe when:
 * Session tracking is disabled
-* [User anonymization](/docs/sources/mobile-trackers/anonymous-tracking/index.md) is enabled, because the session entity then contains a placeholder user ID
 * The tracker hasn't tracked an event in the current session yet
 
-Attribute reads don't have these checks, because you pass the identifier yourself. Requests go straight from the app to Signals, without cookies or caching.
+Requests go straight from the app to Signals, without cookies or caching.
 
 ## Use Signals in your app
 

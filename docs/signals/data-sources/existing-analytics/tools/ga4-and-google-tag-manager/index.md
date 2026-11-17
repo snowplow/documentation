@@ -4,7 +4,7 @@ sidebar_label: "Google Analytics 4 and Google Tag Manager"
 sidebar_position: 30
 description: "Send the events your site already sends to Google Analytics 4 into Snowplow, through Google Tag Manager, a page script or server-side Google Tag Manager, and build Signals attributes on them."
 keywords: ["ga4", "google analytics 4", "google tag manager", "server-side gtm", "external_event", "signals"]
-date: "2026-11-16"
+date: "2026-11-17"
 content_type: how-to
 ---
 
@@ -364,7 +364,7 @@ Your tagging server needs an `https://` URL, set in **Admin**, then **Container 
    | `session_number` | Default | Client Event Property | `ga_session_number` |
    | `event_name` | String | Client Event Property | `event_name` |
 
-5. **Add a consent condition if you use Google Consent Mode.** The tag forwards every event whatever the consent state. Create a variable that reads the `gcs` query parameter from the request, and add a trigger condition that it matches `^G1[01]1$`. Without Consent Mode, leave this off. See [Gate server-side GTM on Consent Mode](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md#gate-server-side-gtm-on-consent-mode).
+5. **Add a consent condition if you use Google Consent Mode.** The tag forwards every event whatever the consent state. Create a variable of type **Query Parameter** (under **Request**) with **Parameter Name** `gcs`, and add a condition to the tag's trigger where that variable **matches RegEx** `^G1[01]1$`. Without Consent Mode, leave this off. See [Gate server-side GTM on Consent Mode](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md#gate-server-side-gtm-on-consent-mode).
 
 6. **Preview and publish.** Set `server_container_url` on your Google tag to your tagging server URL, check each event's outgoing request in Preview, then publish.
 

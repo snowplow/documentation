@@ -4,44 +4,34 @@ sidebar_label: "Identifiers"
 sidebar_position: 20
 description: "Which ID becomes domain_userid on each approach, which keys are safe on the public intervention endpoint, and how to join and resolve identities across your tool and Snowplow."
 keywords: ["domain_userid", "attribute keys", "external_identity", "interventions", "snowplow_id", "identity resolution"]
-date: "2026-11-16"
+date: "2026-11-17"
 content_type: concept
 ---
 
-Signals calculates and serves attributes per [attribute key](/docs/signals/attributes/attribute-keys/index.md), such as `domain_userid` for a visitor or `domain_sessionid` for a session. Which value ends up in those fields depends on the approach you choose. Client-side approaches use Snowplow's own random IDs. Server-side approaches use your tool's IDs. Either way, your tool's IDs are kept in the `external_identity` entity so you can join back to your tool's data.
+Signals calculates and serves attributes per [attribute key](/docs/signals/attributes/attribute-keys/index.md), such as `domain_userid` for a visitor or `domain_sessionid` for a session. Client-side approaches fill these with Snowplow's own random IDs. Server-side approaches fill them with your tool's IDs. Either way, your tool's IDs are also kept in the `external_identity` entity, so you can join back to your tool's data.
 
 ## Which ID becomes domain_userid
 
 | Tool | Client-side approach | Server-side approach | Warehouse history |
 | --- | --- | --- | --- |
-| Segment | Snowplow's random ID from the tracker's `_sp_id` cookie | `anonymousId` | `anonymousId` |
-| RudderStack | Snowplow's random ID from `_sp_id` | `anonymousId` | `anonymous_id` |
-| GA4 and GTM | Snowplow's random ID from `_sp_id` | GA client ID (server-side GTM) | `user_pseudo_id`, the GA client ID |
-| Amplitude | Snowplow's random ID from `_sp_id` | `device_id` | `device_id` |
-| Adobe | Snowplow's random ID from `_sp_id` | ECID (event forwarding) | `mcvisid`, the ECID |
-| PostHog | Snowplow's random ID from `_sp_id` | `$device_id` | `$device_id` from the event properties, or `distinct_id` |
+| Segment | Snowplow's random ID | `anonymousId` | `anonymousId` |
+| RudderStack | Snowplow's random ID | `anonymousId` | `anonymous_id` |
+| GA4 and GTM | Snowplow's random ID | GA client ID | `user_pseudo_id`, the GA client ID |
+| Amplitude | Snowplow's random ID | `device_id` | `device_id` |
+| Adobe | Snowplow's random ID | ECID | `mcvisid`, the ECID |
+| PostHog | Snowplow's random ID | `$device_id` | `$device_id`, or `distinct_id` |
 
-On every approach, `network_userid` follows the same pattern: the Collector's own cookie on client-side approaches, and your tool's ID on server-side approaches.
-
-Amplitude also has a lighter client-side variant that posts each event straight to the Collector without loading the Snowplow tracker. It keys on Amplitude's `device_id`, like the server-side approaches. See [Send without the Snowplow tracker](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md#send-without-the-snowplow-tracker).
-
-A few edge cases on server-side approaches:
-
-- **IDs longer than 128 characters** are replaced by their SHA-256 hash, because `domain_userid` and `network_userid` hold at most 128 characters. The original stays in `external_identity`.
-- **Events with only a user ID**, which server libraries often send, are handled differently by each adapter. The Segment adapter leaves `domain_userid` empty, sets a random `network_userid` and sends `external_identity` with a null `anonymous_id`; read these events by `user_id`. The RudderStack transformation falls back to the user ID, so the user ID becomes `domain_userid`, `network_userid` and `external_identity.anonymous_id`. That key is guessable, and holds an email in clear if your user IDs are emails.
-- **Server libraries accept any string** as an anonymous ID. A Segment server-side event with the anonymous ID `x` writes `x` into `domain_userid`. Check what your server sources send.
+Amplitude's [variant without the Snowplow tracker](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md#send-without-the-snowplow-tracker) keys on `device_id`, like the server-side approaches. Server libraries accept any string as an anonymous ID, so check what your server sources send.
 
 ## Sessions
 
-| Tool | Client-side approach | Server-side approach |
-| --- | --- | --- |
-| Segment, RudderStack | Snowplow's `domain_sessionid` | None |
-| GA4 and GTM | Snowplow's `domain_sessionid` | None |
-| Amplitude | Snowplow's `domain_sessionid` | A key built from `device_id` and Amplitude's session ID |
-| Adobe | Snowplow's `domain_sessionid` | None |
-| PostHog | Snowplow's `domain_sessionid` | PostHog's `$session_id`, unchanged |
+On client-side approaches, sessions use Snowplow's `domain_sessionid`. Server-side approaches have no Snowplow sessions, except on two tools whose events carry a session ID:
 
-Amplitude and PostHog are the tools here whose events carry a session ID. PostHog's `$session_id` is a UUID version 7, so the PostHog adapter uses it as `domain_sessionid` as it is. Amplitude's is a start time in milliseconds. Because `domain_sessionid` must be a UUID, the Amplitude adapter keeps the first 24 characters of `device_id` and puts the session ID, in hexadecimal, in the last 12:
+- **PostHog:** `$session_id` becomes `domain_sessionid` unchanged.
+- **Amplitude:** the adapter builds a session key from `device_id` and Amplitude's session ID. Your page can build the same key from `amplitude.getDeviceId()` and `amplitude.getSessionId()` to read session attributes.
+
+<details>
+<summary>How the Amplitude session key is built</summary>
 
 ```js
 function sessionKey(deviceId, sessionId) {
@@ -54,31 +44,26 @@ function sessionKey(deviceId, sessionId) {
 }
 ```
 
-Your page can build the same key from `amplitude.getDeviceId()` and `amplitude.getSessionId()` to read session attributes.
+</details>
 
-The other tools' session IDs, where they have one, are kept in `external_identity.session_id` for joins only. RudderStack's `context.sessionId` and GA4's session ID are session start times, so they're guessable. Adobe sends no session ID: visits are calculated on Adobe's servers.
+Other tools' session IDs, where they have one, are kept in `external_identity.session_id` for joins only.
 
 ## Keys you can use on the public intervention endpoint
 
-Your application subscribes to [interventions](/docs/signals/interventions/index.md) through a public endpoint, by attribute key value. Anyone who knows or can guess a value could subscribe to it, so the value must be random and impossible to enumerate. Use Snowplow's own IDs wherever you can.
+Your application subscribes to [interventions](/docs/signals/interventions/index.md) through a public endpoint, by attribute key value. Anyone who knows or can guess a value could subscribe to it, so use a random value nobody can enumerate.
 
-| Key | Safe on the public endpoint? | Why |
-| --- | --- | --- |
-| Snowplow `domain_userid`, `domain_sessionid` and `network_userid` on client-side approaches | Yes | Random UUIDs set by the Snowplow tracker and Collector |
-| Segment `anonymousId` | Not recommended | A random UUID in analytics.js, but analytics-next 1.84.3 builds it from `Math.random` and from the same pool as the event's `messageId`, so anyone who sees raw message IDs, such as another Segment destination, can nearly reconstruct it. Server libraries and `setAnonymousId()` accept any value |
-| RudderStack `anonymousId` | Not recommended | A UUID in the JavaScript SDK, but RudderStack doesn't document how it's generated, and server SDKs accept any value |
-| Amplitude `device_id`, and the session key built from it | No | A `?deviceId=` link parameter sets it to any value, and the value sticks on later visits, so anyone who gets a visitor to open a link knows their key |
-| Adobe ECID | No | Adobe derives it from your org ID and the Audience Manager user ID and doesn't document how random it is |
-| GA client ID | No | Half of it is the first visit time in seconds. With analytics storage denied, GA4 sets no `_ga` cookie, so the ID changes on every full page load |
-| GA session ID, RudderStack `sessionId` | No | Session start times |
-| PostHog `$device_id` and `$session_id` | Not recommended | UUIDs version 7 that posthog-js builds from `crypto.getRandomValues`, so they can't be guessed, but their first 48 bits are the time they were created, to the millisecond. Any script on the page can read them, and `bootstrap.distinctID`, PostHog's server SDKs and the capture API accept any value |
-| `user_id`, `group_id` | No | Chosen by you and often sequential or guessable. Use them only for server-side reads |
+| Key | Safe on the public endpoint? |
+| --- | --- |
+| Snowplow `domain_userid` and `domain_sessionid` on client-side approaches | Yes |
+| Segment and RudderStack `anonymousId`, PostHog `$device_id` and `$session_id` | Not recommended: they can be predicted in part, or set to any value by server SDKs |
+| Amplitude `device_id`, Adobe ECID, GA client ID, GA and RudderStack session IDs | No: they can be set from a link, aren't documented as random, or contain timestamps |
+| `user_id`, `group_id` | No: chosen by you and often guessable |
 
-So the recommended pattern is:
+The recommended pattern:
 
-- **Interventions:** client-side approach, keyed on `domain_userid` or `domain_sessionid`.
-- **Logged-in reads from your backend:** read by `user_id` through the Profiles API. These reads aren't public.
-- **Server-side approaches:** read attributes server-side by your tool's ID. Don't target interventions at it unless your tool page says it's safe.
+- **Interventions:** a client-side approach, keyed on `domain_userid` or `domain_sessionid`.
+- **Logged-in reads from your backend:** read by `user_id` through the Profiles API, which isn't public.
+- **Server-side approaches:** read attributes from your backend by your tool's ID.
 
 ## Join back to your tool with external_identity
 
@@ -97,25 +82,19 @@ Every event carries an `external_identity` entity with the IDs your tool assigne
 }
 ```
 
-| Field | Segment | RudderStack | GA4 | Amplitude | Adobe | PostHog |
-| --- | --- | --- | --- | --- | --- | --- |
-| `anonymous_id` | `anonymousId` | `anonymousId` | GA client ID | `device_id` | ECID | `$device_id` |
-| `user_id` | `userId` | `userId` | GA `user_id` | `user_id` | CRM ID from `identityMap` or `setCustomerIDs` | `distinct_id` after `identify` |
-| `session_id` | Empty | `context.sessionId` | GA session ID | Amplitude session ID | Empty | `$session_id` |
-| `session_number` | Empty | Empty | GA session number | Not set | Empty | Empty |
-| `event_name` | Event name or call type | Event name or call type | GA4 event name | `event_type` | XDM `eventType`, link name or `page_view` | PostHog event name |
+| Field | Holds |
+| --- | --- |
+| `anonymous_id` | Your tool's visitor ID: `anonymousId`, the GA client ID, `device_id`, the ECID or `$device_id` |
+| `user_id` | Your tool's user ID |
+| `session_id` | Your tool's session ID, where it has one |
+| `session_number` | GA4's session number, on GA4 only |
+| `event_name` | The event's name in your tool |
 
-Use it to:
-
-- Join Snowplow events to your tool's own export, such as the GA4 BigQuery export on `user_pseudo_id` or Adobe Data Feeds on `mcvisid`.
-- Compare counts between your tool and Snowplow by event name while you check the setup.
-- Keep history keyed on your tool's ID when you later move to native Snowplow tracking.
-
-On client-side approaches, an event can only carry your tool's ID once your tool has set it; until then the entity is sent with a null `anonymous_id`. On the GTM tag template approach, the first page view tag fires on Window Loaded rather than All Pages, so that gtag has set the GA client ID. The GA4 page script waits for it for up to three seconds. The Adobe adapter waits for the ECID from alloy's first response, for up to five seconds, then sends without it. Page pings repeat the entity of the page view they belong to, including its event name.
+Use it to join Snowplow events to your tool's own export, to compare counts by event name while you check the setup, and to keep history keyed on your tool's ID when you move to native tracking. Until your tool has set its ID, the entity is sent with a null `anonymous_id`.
 
 ### Calculate attributes on your tool's ID
 
-To calculate attributes per ID your tool assigned, define a custom attribute key on `anonymous_id`. Every event that carries the entity counts towards it, including page pings on client-side approaches:
+To calculate attributes per ID your tool assigned, define a custom attribute key on `anonymous_id`. Read these attributes from your backend only.
 
 ```python
 from snowplow_signals import AttributeKey, EntityProperty
@@ -132,24 +111,12 @@ tool_visitor = AttributeKey(
 )
 ```
 
-Read these attributes from your backend only. Your tool's ID isn't safe on the public intervention endpoint (see the table above).
-
-### Alias calls
-
-Segment and RudderStack alias calls, and PostHog `$create_alias` events, become `external_event` with `previous_id` set. This is a record only: Signals doesn't merge the two IDs. Amplitude's Browser SDK has no alias call, and Adobe has none.
-
 ## Resolve identities with snowplow_id
 
-One attribute read uses one attribute key and one value, so attributes keyed on `domain_userid` and attributes keyed on `user_id` stay separate. To combine a person's anonymous and logged-in activity, use [identity resolution](/docs/signals/attributes/identity-resolution/index.md). It needs [Snowplow Identities](/docs/identities/index.md) set up on the same pipeline.
+One attribute read uses one key, so attributes keyed on `domain_userid` and on `user_id` stay separate. To combine a person's anonymous and logged-in activity, use [identity resolution](/docs/signals/attributes/identity-resolution/index.md), which needs [Snowplow Identities](/docs/identities/index.md) on the same pipeline.
 
-With Identities, each event gets a Snowplow ID, `snowplow_id`, for the person. You key stream attribute groups on `snowplow_id` and select up to three lookup identifiers, such as `domain_userid` and `user_id`. Your website then reads by `domain_userid` and your backend by `user_id`, and both get the same person's attributes. Interventions can use criteria on `snowplow_id` attributes and still be delivered to `domain_userid`, so the public endpoint keeps a random key.
-
-Limits that matter for events from another tool:
-
-- Attributes keyed on `snowplow_id` are stream only, so history from your tool's warehouse export can't be merged into them.
-- Only identifiers configured in Identities can be lookup identifiers.
-- Attributes build up only from events processed after you publish the attribute group.
+Key stream attribute groups on `snowplow_id` and select up to three lookup identifiers, such as `domain_userid` and `user_id`. Your website then reads by `domain_userid` and your backend by `user_id`, and both get the same person's attributes. Interventions are still delivered to `domain_userid`, so the public endpoint keeps a random key. This works for stream attribute groups only, from events processed after you publish.
 
 ## When you move to native tracking
 
-On client-side approaches, `domain_userid` is already Snowplow's own ID, so attributes carry over unchanged when you replace an adapter with native Snowplow tracking. On server-side approaches, `domain_userid` is your tool's ID, and native tracking changes it, so history keyed on it needs a custom attribute key on `external_identity.anonymous_id` or a one-off mapping. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
+On client-side approaches, `domain_userid` is already Snowplow's own ID, so attributes carry over when you replace the adapter with native tracking. On server-side approaches, history keyed on your tool's ID needs a custom key on `external_identity.anonymous_id`. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).

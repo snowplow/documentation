@@ -4,111 +4,64 @@ sidebar_label: "Use Signals with existing analytics"
 sidebar_position: 20
 description: "Send the events your site already sends to Segment, RudderStack, GA4, Amplitude, Adobe or PostHog to Snowplow, and calculate Signals attributes on them without retagging."
 keywords: ["existing analytics", "segment", "rudderstack", "ga4", "amplitude", "adobe", "posthog", "external_event", "signals"]
-date: "2026-11-16"
+date: "2026-11-17"
 content_type: landing
 ---
 
-If your site already sends events to Segment, RudderStack, Google Analytics 4 (GA4), Amplitude, Adobe or PostHog, you can send a copy of each event to Snowplow and calculate Signals attributes on it, without retagging your site. An adapter maps each event to the standard Snowplow event that fits it, such as a page view or an ecommerce transaction, and to a generic `external_event` when nothing fits.
+If your site already sends events to Segment, RudderStack, Google Analytics 4 (GA4), Amplitude, Adobe or PostHog, you can send a copy of each event to Snowplow and calculate Signals attributes on it, without retagging your site. You keep your existing tool and its reports.
 
-You keep your existing tool and its reports. Snowplow receives the same events in parallel, and Signals builds attributes such as pages viewed, products viewed, order value or current plan from them.
-
-:::note[Schemas]
-The adapters use the `external_event` and `external_identity` schemas, published on Iglu Central, alongside Snowplow's ecommerce, site search and identify schemas.
-:::
+An adapter maps each event to the standard Snowplow event that fits it, such as a page view or an ecommerce transaction, and to a generic [`external_event`](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md) when nothing fits. Every event also carries an [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity with your tool's IDs. Both schemas are published on Iglu Central.
 
 ## Choose your tool
 
-Each tool page covers the setup for that tool, how its events map to Snowplow, its identifiers and its limits.
+Each tool page starts with the recommended approach for that tool.
 
-- **[Segment](/docs/signals/data-sources/existing-analytics/tools/segment/index.md)**: a destination plugin for analytics.js that feeds the Snowplow tracker in the page, or a Destination Function in your Segment workspace.
-- **[RudderStack](/docs/signals/data-sources/existing-analytics/tools/rudderstack/index.md)**: a user transformation on a Webhook destination in your RudderStack workspace, or a no-code HTTP Webhook mapping.
-- **[Google Analytics 4 and Google Tag Manager](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md)**: Snowplow's tag templates in your web GTM container, reading the same data layer as GA4, or Snowplow's tag in server-side GTM.
-- **[Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md)**: a destination plugin for the Amplitude Browser SDK, or a Webhook destination with a template that builds Snowplow events.
-- **[Adobe Analytics and Adobe Experience Platform](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md)**: a few lines in the Web SDK `onBeforeEventSend` callback or the AppMeasurement `registerPreTrackCallback`, or Adobe event forwarding.
-- **[PostHog](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md)**: a `before_send` hook in posthog-js that feeds the Snowplow tracker in the page, or an HTTP Webhook destination whose Hog source posts to your Collector.
+| Tool | Recommended approach | Other approaches |
+| --- | --- | --- |
+| [Segment](/docs/signals/data-sources/existing-analytics/tools/segment/index.md) | A destination plugin in analytics.js | Destination Function |
+| [RudderStack](/docs/signals/data-sources/existing-analytics/tools/rudderstack/index.md) | A custom device mode integration in the RudderStack SDK | Transformation on a Webhook destination, or no-code Webhook mappings |
+| [GA4 and Google Tag Manager](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md) | Snowplow's tag templates in your web GTM container | A page script that copies `gtag()` calls, or server-side GTM |
+| [Amplitude](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md) | A destination plugin in the Browser SDK | Webhook destination |
+| [Adobe](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md) | A Web SDK `onBeforeEventSend` callback | AppMeasurement callback, Tags rules, or event forwarding |
+| [PostHog](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md) | A `before_send` hook in posthog-js | HTTP Webhook destination |
 
 ## Client-side and server-side approaches
 
-Most tools offer two places to run the adapter.
+The recommended approaches are client-side: the adapter runs in the page and hands each event to the Snowplow JavaScript tracker, which sends it to your Collector. The tracker sets its own random visitor and session IDs and adds page pings, so every [starter attribute group](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) works and interventions can be delivered to the visitor.
 
-- **Client-side (in the browser).** The adapter runs in the page next to your tool's library. It hooks into the library's plugin or callback API and hands each event to the Snowplow JavaScript tracker, which sends it to your Collector. The Snowplow tracker sets its own random visitor ID and session, and can add page pings and link clicks that your tool doesn't put on the page.
-- **Server-side.** Your tool receives the event as usual, and code or configuration in your tool's workspace forwards it to your Collector. Examples are a Segment Destination Function, a RudderStack transformation, an Amplitude Webhook destination, a PostHog destination, server-side GTM and Adobe event forwarding. There's no Snowplow code in the page, and events from your servers and apps are included, but the visitor key is your tool's own ID and there are no Snowplow sessions.
+Server-side approaches forward events from your tool's workspace to your Collector. They need no change to the page and include events from your servers and apps, but they key visitors on your tool's own ID and have no Snowplow sessions on most tools.
 
 | | Client-side | Server-side |
 | --- | --- | --- |
-| What you change | A plugin, callback or tag manager setting next to your tool's library | Code or configuration in your tool's workspace |
-| Events covered | Events from the browser | Every source your tool receives: browser, servers, apps and imports |
-| Visitor key in Snowplow | Snowplow's random `domain_userid` | Your tool's ID, such as Segment's `anonymousId`, Amplitude's `device_id`, the GA client ID or the Adobe ECID |
-| Sessions | Snowplow `domain_sessionid` | None, except on Amplitude, whose events carry a session ID the adapter turns into a session key, and PostHog, whose `$session_id` becomes `domain_sessionid` |
-| Engagement | Page pings, link clicks and other tracking from the Snowplow tracker | Only what your tool sends, such as GA4's Enhanced Measurement events through server-side GTM |
-| Delivery | Sent from the browser when the event happens. Interventions typically arrive about 1 to 2 seconds later | Waits for your tool's queue or batching first, which adds from several seconds to a minute or more. See [Delivery and delay](#delivery-and-delay) |
-| Key for interventions | `domain_userid` is safe on the public intervention endpoint | Often not safe; see [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) |
-| Personal data | The browser sends its IP address, user agent, page URLs and user ID to your Collector, plus your tool's cookies if the Collector is on the same site | Only the fields the adapter maps leave your tool; the IP address and user agent are whatever your tool forwards |
-| Consent | Usually follows your tool's consent, because the hook only fires for events your tool sends; the Snowplow tracker's own cookies need gating separately | Depends on the tool; some forward events whatever the consent state unless you add a check |
+| Events covered | Events from the browser | Everything your tool receives, including servers and apps |
+| Visitor key | Snowplow's random `domain_userid` | Your tool's ID |
+| Sessions and page pings | Yes | Session IDs on Amplitude and PostHog only, no page pings |
+| Interventions in the page | Yes | No: read attributes from your backend instead |
+| Delivery | As the event happens | After your tool's own queue |
 
-### Pros and cons
-
-**Client-side**
-
-- Pros: Snowplow sessions and a random visitor ID that's safe for interventions. Engagement attributes from page pings. Events reach the Collector without waiting for your tool's servers. Signals history carries over when you [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md), because the visitor ID stays the same.
-- Cons: browser events only. Adds the Snowplow tracker to the page, and its cookies need a consent decision. Your tool's cookies reach a Collector on the same site. The Collector is a second host that an ad blocker could block.
-
-**Server-side**
-
-- Pros: no change to the page. Covers server, app and imported events. Your tool's traits and user properties stay inside your tool, because the adapter only sends the fields it maps.
-- Cons: no Snowplow sessions or page pings. The visitor key is your tool's ID, which on several tools isn't safe on the public intervention endpoint. Delivery waits for your tool's queue, from several seconds to a minute or more. Some approaches need a paid plan or license on your tool.
+Use client-side for web visitors, and add server-side only for events that don't come from the browser. Don't send the same browser events through both, or they arrive twice under two visitor keys.
 
 ### Delivery and delay
 
-Client-side approaches send each event from the browser as it happens. Interventions typically arrive about 1 to 2 seconds after the event.
+On a client-side approach, attributes update within about a second of each event, and interventions typically reach the page in 1 to 2 seconds. A server-side approach first waits for your tool's queue and batching, which adds from several seconds to a minute or more depending on the tool.
 
-Server-side approaches wait for your tool first: its ingestion, its queue, and any batching or retries. Depending on the tool, that adds from several seconds to a minute or more before the event reaches your Collector, and Signals then processes it like any other event. For reactions within a page view, use a client-side approach.
-
-| Server-side approach | Delay before the event reaches your Collector |
-| --- | --- |
-| [Segment Destination Function](/docs/signals/data-sources/existing-analytics/tools/segment/index.md#choose-an-approach) | Segment's queue. With batching on, batches can wait up to 10 seconds |
-| [RudderStack transformation or Webhook mapping](/docs/signals/data-sources/existing-analytics/tools/rudderstack/index.md#choose-an-approach) | Seconds, while RudderStack's processor and router poll their queues |
-| [Amplitude Webhook destination](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md#choose-an-approach) | Amplitude's documented target is 60 seconds at the 95th percentile |
-| [PostHog HTTP Webhook destination](/docs/signals/data-sources/existing-analytics/tools/posthog/index.md#choose-an-approach) | Typically about 4 to 12 seconds after PostHog receives the event. Interventions arrive within about 10 seconds |
-| [Server-side GTM](/docs/signals/data-sources/existing-analytics/tools/ga4-and-google-tag-manager/index.md#choose-an-approach) | `gtag.js` batches hits in the browser before they reach the tagging server. Values can take a couple of minutes to reach Signals |
-| [Adobe event forwarding](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md#choose-an-approach) | Adobe doesn't document a delivery time. Expect at least several seconds |
-
-The first events after you publish an attribute group or intervention can take a minute or more before their values and interventions arrive. Later events arrive at the usual speed, so allow for this when you test a new setup.
-
-### Which to choose
-
-- **Start with client-side** if your users are on the web and you want session attributes, engagement attributes or interventions. This is the recommended approach on every tool that has one.
-- **Choose server-side** if the events that matter come from your servers or apps, or if you can't change the page or tag manager setup. Read attributes server-side by the key your tool provides, and don't use it for interventions unless the tool page says it's safe.
-- **Combine them carefully.** If you add a server-side approach for server and app events, don't also send your browser events through it. The same browser event would arrive twice, under two different visitor keys.
+The first events after you publish an attribute group or intervention can take a minute or more. Later events update at the usual speed.
 
 ### Warehouse history
 
-A third option, where your tool exports to a warehouse, is to calculate batch attributes from that export: Segment's warehouse or Profiles Sync, the GA4 BigQuery export, Adobe Analytics Data Feeds, or PostHog's batch exports. This gives Signals history for visitors it has never seen in the stream.
-
-:::caution
-Warehouse attributes need a Signals warehouse connection, are refreshed periodically rather than in real time, and are keyed on your tool's ID. They can't trigger interventions on their own.
-:::
-
-## What you get
-
-- Page views as Snowplow page views, ecommerce as Snowplow ecommerce events with every product of an order as its own entity, site searches as `site_search` and logins as `identify` with the user ID only. See [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md).
-- Every other event as `external_event`, with your tool's event name and a fixed set of typed fields, so attributes can filter on the name.
-- An `external_identity` entity on every event, holding your tool's IDs, so Snowplow data can be joined back to your tool's data.
-- Attribute groups for visitor activity, purchase intent, account and plan, and funnel steps on every approach, plus session engagement on client-side approaches and session counts on PostHog's and Amplitude's server-side approaches. See [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
+If your tool exports to a warehouse, such as Segment's warehouse, the GA4 BigQuery export, Adobe Data Feeds or PostHog's batch exports, you can also calculate batch attributes on that export, to give Signals history for visitors it hasn't seen in the stream. This needs a Signals warehouse connection, and the values refresh periodically rather than in real time.
 
 ## What you don't get
 
-- **Your tool's server-side processing.** Adobe visits, eVar persistence, processing rules and bot filtering, and anything else your tool computes after it receives an event, aren't reproduced. The adapter sees each event as the page sent it.
-- **Properties outside the mapped fields.** Signals calculates attributes only on properties a schema declares, so anything that doesn't fit a standard Snowplow schema or a typed `external_event` field is dropped. This includes identify traits and GA4 user properties.
-- **Sessions on server-side approaches**, except Amplitude's and PostHog's.
-- **Stitching across keys.** One attribute read uses one key. Joining an anonymous visitor to a logged-in user needs [Snowplow Identities](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md#resolve-identities-with-snowplow_id).
-- **Real-time warehouse attributes.** History from your tool's export is periodic.
+- **Your tool's own processing**, such as Adobe visits, eVar persistence or bot filtering. The adapter sees each event as the page sent it.
+- **Properties outside the mapped fields.** Attributes read only fields a schema declares, so properties that don't map to a standard Snowplow event or an `external_event` field, such as identify traits and GA4 user properties, aren't available. See [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md).
+- **Stitching across keys** without [Snowplow Identities](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md#resolve-identities-with-snowplow_id).
 
 ## Where to start
 
-1. Open your [tool's page](#choose-your-tool) and set up its client-side approach.
+1. Open your [tool's page](#choose-your-tool) and set up its recommended approach.
 2. Test in your Console development environment, a hosted Snowplow Micro included in every trial. Point the adapter at its Collector endpoint, under **Pipelines** in Console, then select **Open dashboard** and check that events arrive with none failed. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md). When the events look right, switch the adapter to your pipeline's Collector.
 3. Agree what personal data may reach Snowplow, and wire consent. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
-4. Create three or four [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) keyed on `domain_userid`.
+4. Create the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) you need.
 5. [Create an intervention](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#create-an-intervention) and [receive it in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
-7. When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+6. When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

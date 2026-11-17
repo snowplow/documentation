@@ -4,11 +4,11 @@ sidebar_label: "Event mapping"
 sidebar_position: 10
 description: "Every adapter maps each event to the first Snowplow event that fits: page view, ecommerce, site search, identify, a Google schema on GA4, or external_event."
 keywords: ["event mapping", "external_event", "snowplow_ecommerce_action", "site_search", "identify", "signals attributes"]
-date: "2026-11-16"
+date: "2026-11-17"
 content_type: concept
 ---
 
-Every adapter, client-side or server-side and for every tool, maps an event the same way. It goes down a ladder of Snowplow event types and takes the first rung that fits. Events that have a standard Snowplow equivalent become that event, so Signals attributes and Snowplow data models built for those events work unchanged. Only what's left becomes the generic `external_event`.
+Every adapter maps an event the same way, whatever the tool or approach. It goes down a ladder of Snowplow event types and takes the first one that fits. Events with a standard Snowplow equivalent become that event, so Signals attributes and Snowplow data models built for them work unchanged. Only what's left becomes the generic `external_event`.
 
 ## The ladder
 
@@ -21,23 +21,20 @@ Every adapter, client-side or server-side and for every tool, maps an event the 
 | 5 | Google's schemas (GA4 only) | GA4 Enhanced Measurement events such as `scroll`, `click` and `file_download`, `user_engagement`, and recommended events such as `sign_up` and `generate_lead` |
 | 6 | `com.snowplowanalytics.snowplow/external_event` 1-0-0 | Everything else: group and alias calls, your own custom events, autocaptured events, and ecommerce events missing a field Snowplow requires |
 
-Every event, on every rung, also carries an `external_identity` entity with your tool's IDs and the original event name. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
+Every event also carries an `external_identity` entity with your tool's IDs and the original event name. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md). Every schema on this page is published on Iglu Central.
 
-:::note
-Every schema on this page, including `external_event` and `external_identity`, is published on Iglu Central.
-:::
+## Page views
 
-## Rung 1: page views
+Page views stay native Snowplow page views, with the page URL, title and referrer in the standard fields.
 
-Page views stay native Snowplow page views, with the page URL, title and referrer in the standard fields. On server-side approaches, Segment and RudderStack `screen` calls also become page views. When the call has no page URL, the URL is `screen://` followed by the screen name.
+## Ecommerce
 
-On client-side approaches, the Snowplow tracker records each page view itself, so it also sets the referrer between pages of a single-page app.
+Ecommerce events become `snowplow_ecommerce_action` events, shaped the way the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) sends them. Each product becomes its own product entity, so every line of an order is kept. A Signals attribute reads one product entity per event.
 
-## Rung 2: ecommerce
+Only the events your tool defines as ecommerce take this rung, such as Segment's `Order Completed` or GA4's `purchase`. Each tool page lists them. Where your tool leaves out a field Snowplow requires, the adapter fills a placeholder, such as a payment method of `unknown`. An order with no currency or order ID becomes `external_event` instead.
 
-Ecommerce events become `snowplow_ecommerce_action` events, shaped the way the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) sends them. Each product becomes its own product entity, so every line of an order is kept in your data. A Signals attribute reads one product entity per event, the first by default or the one at the index you set.
-
-This is a Segment `Order Completed` with two products, as the Segment adapter sends it:
+<details>
+<summary>Example: a Segment order with two products</summary>
 
 ```json
 {
@@ -62,74 +59,21 @@ With these entities:
 ]
 ```
 
-Which events take this rung:
+</details>
 
-| Tool | Events |
-| --- | --- |
-| Segment, RudderStack, PostHog | `Product Viewed`, `Product Added`, `Product Removed`, `Checkout Started`, `Checkout Step Viewed`, `Checkout Step Completed`, `Order Completed`, `Order Refunded` |
-| GA4 | `view_item`, `view_item_list`, `select_item`, `add_to_cart`, `remove_from_cart`, `begin_checkout`, `add_payment_info`, `purchase`, `refund` |
-| Amplitude | Product viewed, added and removed, checkout started, order completed, refunds and the revenue call, matched by event name, so you list your own names |
-| Adobe | XDM `commerce.productViews`, `productListAdds`, `productListRemovals`, `checkouts` and `purchases`; Analytics `prodView`, `scAdd`, `scRemove`, `scCheckout` and `purchase` |
+## Site search
 
-The Snowplow ecommerce schemas require some fields that other tools treat as optional. The adapters fill or skip them like this:
+Searches become `site_search`, with the search term in the `terms` list. In Signals, count searches with a `counter` on `site_search`, and count terms with the `category_count` aggregation on `terms`.
 
-- **Payment method.** The transaction entity requires one. When the event has none, the adapter sends `unknown`. Adobe AppMeasurement hits never carry one.
-- **Product category.** Required on the product entity. Segment, RudderStack and PostHog adapters send an empty string when it's missing; the GA4 and AppMeasurement adapters send `unknown`.
-- **Price and currency.** The Segment adapter leaves out a product with no price or currency. An order with no currency or order ID drops to `external_event` instead.
-- **Cart total.** The cart entity requires a total value, which most tools don't send with add to cart. Segment's adapter leaves the cart entity off when there's no cart total. The GA4 adapter uses the event's value, which is what was added rather than the whole cart. The Adobe and RudderStack adapters fall back to the value of the items in the event.
+## Identify
 
-:::caution
-An event whose name isn't in your tool's ecommerce list never reaches this rung. For example, Segment's `Cart Abandoned` isn't one of Segment's ecommerce events, so it becomes `external_event` and keeps only its first product.
-:::
+Logins and identify calls become a Snowplow `identify` event that holds the user ID and nothing else. Identify traits, such as name, email and plan, are dropped. The user ID is sent unchanged, so if it's an email address, the email reaches Snowplow. To use a plan in attributes, send it on a group call or a track event, where it fills the `plan` field of `external_event`.
 
-## Rung 3: site search
+## Google's schemas on GA4
 
-Searches become `site_search` with the search term in `terms`. This is an Amplitude `Products Searched` event as the adapter sends it:
+On GA4, events that Google defines and Snowplow has no equivalent for, such as Enhanced Measurement's `scroll` and `file_download`, `user_engagement` and recommended events such as `sign_up`, use the Google schemas on Iglu Central. These are the same schemas Snowplow's server-side GTM tag uses. Enhanced Measurement events come only through server-side GTM; on client-side approaches, use the Snowplow tracker's own page pings and link clicks instead.
 
-```json
-{
-  "schema": "iglu:com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0",
-  "data": { "terms": ["blue mug"], "totalResults": 4 }
-}
-```
-
-`terms` is a list. In Signals, count searches with a `counter` on `site_search`, and count terms with the `category_count` aggregation on `terms`, which returns each term with its count.
-
-On Adobe, searches come from the XDM `siteSearch.query` field or from an Analytics search event you configure.
-
-## Rung 4: identify
-
-Logins and identify calls become a Snowplow `identify` event that holds the user ID and nothing else. The `identify` schema also has an email field; the adapters never fill it, and they drop identify traits such as name, email and plan.
-
-```json
-{
-  "schema": "iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0",
-  "data": { "id": "user-123" }
-}
-```
-
-Every adapter sends the user ID unchanged, as your tool holds it. If it's an email address, the email reaches Snowplow.
-
-Because traits are dropped, a plan set only in identify traits, or only on an Adobe login hit, doesn't reach Snowplow. Send it on a group call or a track event instead, where it fills the `plan` field of `external_event`.
-
-## Rung 5: Google's schemas on GA4
-
-On GA4 approaches, events that Google defines and Snowplow has no equivalent for use the Google schemas on Iglu Central, the same ones Snowplow's server-side GTM tag uses:
-
-- `com.google.ga4.enhanced-measurement`: `scroll`, `click`, `file_download` and the other Enhanced Measurement events.
-- `com.google.ga4`: `user_engagement`, with `engagement_time_msec`.
-- `com.google.tag-manager.server-side`: recommended events such as `sign_up`, `generate_lead`, `share`, `select_content`, `add_to_wishlist` and `exception`.
-
-```json
-{
-  "schema": "iglu:com.google.ga4/user_engagement/jsonschema/1-0-0",
-  "data": { "engagement_time_msec": 3024 }
-}
-```
-
-GA4 sends Enhanced Measurement events from gtag itself, not through the data layer, so only the server-side GTM approach receives them. On client-side GA4 approaches, turn on the Snowplow tracker's own page pings, link clicks and site search tracking instead.
-
-Signals attributes work on these schemas like any other. This attribute adds up GA4 engagement time:
+Signals attributes work on these schemas like any other. This one adds up GA4 engagement time:
 
 ```python
 from snowplow_signals import Attribute, Event, EventProperty
@@ -149,9 +93,9 @@ engagement_msec = Attribute(
 )
 ```
 
-## Rung 6: external_event
+## external_event
 
-Everything else becomes `external_event`. It has a fixed set of typed fields:
+Everything else becomes `external_event`, with a fixed set of typed fields:
 
 | Field | Type | Holds |
 | --- | --- | --- |
@@ -167,8 +111,6 @@ Everything else becomes `external_event`. It has a fixed set of typed fields:
 | `group_id` | string | The account or group ID on group calls |
 | `previous_id` | string | The previous ID on alias calls |
 
-This is a Segment group call as the adapter sends it:
-
 ```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0",
@@ -176,31 +118,11 @@ This is a Segment group call as the adapter sends it:
 }
 ```
 
-And a custom event that carried an email, a search term and a plan. The email doesn't fit any field, so it's dropped:
-
-```json
-{
-  "schema": "iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0",
-  "data": { "name": "Signup Form Submitted", "tool": "segment", "kind": "track", "search_term": "snowplow signals", "plan": "pro" }
-}
-```
-
-On Adobe, which eVars, props or XDM fields hold the plan, account and search term differs for every report suite and datastream, so you configure that map yourself. See the [Adobe page](/docs/signals/data-sources/existing-analytics/tools/adobe/index.md).
-
-### Why external_event has fixed fields
-
-Signals calculates attributes only on properties that a schema declares. If `external_event` carried a free-form `properties` object, you couldn't build an attribute on anything inside it. So the schema declares the fields that the starter attribute groups need, such as value, item, plan and account, and the adapter maps your tool's properties into them. Any property that doesn't map to a field is dropped.
-
-This has two consequences:
-
-- Events with several items keep only the first item in `item_id` and `item_category`. Events on the ecommerce rung aren't affected, because each product there is its own entity.
-- If you need an attribute on a property `external_event` doesn't have, track that event natively with its own schema. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
+Signals calculates attributes only on properties a schema declares, which is why `external_event` has fixed fields instead of carrying your tool's properties as they are. Any property that doesn't map to a field is dropped, and events with several items keep only the first in `item_id` and `item_category`. If you need an attribute on a property `external_event` doesn't have, track that event natively. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
 
 ## Filter attributes on the event name
 
-Because every custom event from your tool is the same Snowplow event type, an attribute on `external_event` needs a criteria filter on `name` to pick out one event. Use the name exactly as your tool sends it.
-
-This attribute counts Segment `Signup Form Submitted` events. It uses the Signals Python SDK's [criteria filters](/docs/signals/attributes/attributes/index.md#filter-with-criteria):
+Every custom event from your tool is the same Snowplow event type, so an attribute on `external_event` needs a [criteria filter](/docs/signals/attributes/attributes/index.md#filter-with-criteria) on `name`. Use the name exactly as your tool sends it. This attribute counts Segment `Signup Form Submitted` events:
 
 ```python
 from snowplow_signals import Attribute, Criteria, Criterion, Event, EventProperty
@@ -232,7 +154,7 @@ signup_count = Attribute(
 
 In Console, select the `external_event` schema as the attribute's event, choose the `counter` aggregation, and under **More options** add a criterion on the `name` event property with the `=` operator.
 
-To filter on the original name of any event, including events that became page views or ecommerce events, use the `event_name` property of the `external_identity` entity instead:
+To filter on the original name of any event, including events that became page views or ecommerce events, use `event_name` in the `external_identity` entity:
 
 ```python
 from snowplow_signals import EntityProperty

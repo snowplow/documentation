@@ -17,10 +17,10 @@ The iOS and Android trackers can connect your app to [Signals](/docs/signals/ind
 * Read the attributes of a [public service](/docs/signals/applications/public-services/index.md) for the current user or session
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md#subscribe-with-the-mobile-trackers) for the current user and session, and handle them in your app
 
-The tracker identifies the user and session with the `userId` and `sessionId` from the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md). In Signals, these correspond to the built-in `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Define your attribute groups, services, and interventions with these keys to use them from your app.
+The app's user and session are identified by the `userId` and `sessionId` from the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md). In Signals, these correspond to the built-in `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Define your attribute groups, services, and interventions with these keys to use them from your app. The tracker subscribes to interventions with these identifiers automatically, but to read attributes you pass the attribute key and identifier yourself.
 
 :::note[Tracker versions]
-Signals support is available from version 6.4.0 of the iOS tracker and version 6.5.0 of the Android tracker.
+Signals support is available from version 6.5.0 of the iOS tracker and version 6.6.0 of the Android tracker.
 :::
 
 ## Configure the tracker
@@ -78,17 +78,17 @@ The `timeout` is optional and defaults to five seconds. If you omit the URL sche
 
 Access the Signals controller with `tracker.signals`, or `tracker.getSignals()` in Java. Without a `SignalsConfiguration`, its methods log a message and don't send any requests.
 
-## Requirements for Signals requests
+## Requirements for interventions
 
-The tracker only sends Signals requests when it has a real identifier for the user. It doesn't send any requests when:
+The tracker only subscribes to interventions when it has a real identifier for the user. It doesn't subscribe when:
 * Session tracking is disabled
 * [User anonymization](/docs/sources/mobile-trackers/anonymous-tracking/index.md) is enabled, because the session entity then contains a placeholder user ID
-* The request is keyed by session, and the tracker hasn't tracked an event in the current session yet
+* The tracker hasn't tracked an event in the current session yet
 
-Requests go straight from the app to Signals, without cookies or caching. A failed attribute read reports status `0` in these cases.
+Attribute reads don't have these checks, because you pass the identifier yourself. Requests go straight from the app to Signals, without cookies or caching.
 
 ## Use Signals in your app
 
-To read attributes, see [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md). The service must have the `public` access mode.
+To read attributes, see [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md#read-the-service). The service must have the `public` access mode.
 
 To receive interventions, see [Subscribe with the mobile trackers](/docs/signals/applications/subscribe/index.md#subscribe-with-the-mobile-trackers).

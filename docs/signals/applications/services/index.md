@@ -120,7 +120,7 @@ Public services show a **Public** badge in the services list and on the service 
 </TabItem>
 <TabItem value="sdk" label="Python SDK">
 
-Set `access_mode` to `public` when defining the service:
+Set `access_mode` to `public` when defining the service. This needs version 0.4.12 or later of the Python SDK.
 
 ```python
 from snowplow_signals import Service

@@ -12,11 +12,13 @@ components:
   - "Event Studio"
 ---
 
-You can now keep your tracking plans in your application's repository and generate the tracking code from the same files. A change to an event specification and the code that sends it go through one pull request.
+You can keep your tracking plans in your application's repository and generate the tracking code from the same files. A change to an event specification and the code that sends it go through one pull request.
 
-## Event specification versions in Snowplow CLI 0.4.0
+## Declare event specification versions with Snowplow CLI 0.4.0
 
-Console gives every event specification a version number. Snowplow CLI 0.4.0 lets a tracking plan file declare that version, and checks that each change raises it exactly as Console will. The version in your files, and in the code Snowtype generates from them, is the version Console assigns.
+Console gives every event specification a version number. Snowplow CLI 0.4.0 lets a tracking plan file declare that version, and checks that each change raises it exactly as Console does. The version in your files, and in the code Snowtype generates from them, is the version Console assigns.
+
+Snowplow CLI 0.4.0 adds these checks:
 
 * `dp validate offline --base-ref <branch>` compares your files with the point where your branch started. It needs no credentials, so it runs locally and on every pull request.
 * `--fix` writes the expected version into your files.
@@ -30,6 +32,6 @@ Snowtype 0.20.0 generates tracking code from the tracking plan files in your rep
 
 The new `snowtype check` command reports whether the generated code matches your tracking definitions, without writing anything. Run it in CI to fail a pull request that changes a tracking plan without regenerating the code. See [`check`](/docs/event-studio/implement-tracking/command-reference/#check).
 
-## A tutorial for the whole flow
+## Follow a tutorial for the whole flow
 
 [Manage tracking from a repository with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction/) replaces the "Manage data structures with Git" tutorial. It sets up one repository for a web app, checks every pull request with GitHub Actions, publishes changes merged to `develop` to your development environment, and promotes them to production from `main`.

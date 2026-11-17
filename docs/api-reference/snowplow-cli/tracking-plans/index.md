@@ -142,17 +142,17 @@ To declare versions and keep them correct, follow these steps.
 
 ### Add the versions Console holds
 
-To start declaring versions in files that already exist, write the version Console holds into each event specification. Run `dp validate --fix` with credentials:
+To start declaring versions in files that already exist, write the version Console holds into each event specification:
 
 ```bash
 snowplow-cli dp validate --fix
 ```
 
-The command adds one `version` line per event specification and changes nothing else in your files. Adding versions changes nothing in Console: `dp sync` and `dp release` report no changes to apply.
+The command adds one `version` line per event specification. Adding versions changes nothing in Console: `dp sync` and `dp release` report no changes to apply.
 
 You can also write the versions with `snowplow-cli dp download --versions`. The command writes every tracking plan in the organization in Console's own layout. If you download over your files, keep only the `version` lines from the diff.
 
-Commit the versions in a pull request of their own, with no other change. On that pull request, the [check against the point where the branch started](#check-versions-against-the-point-where-the-branch-started) finds no version at the base, skips those event specifications, and passes.
+It's best to commit the versions in a pull request of their own. On that pull request, the [check against the point where the branch started](#check-versions-against-the-point-where-the-branch-started) finds no version at the base and skips those event specifications, so a structural change in the same pull request would be checked only against Console.
 
 ### Raise the version when you change an event specification
 
@@ -173,10 +173,10 @@ When you make a structural change to an event specification, raise its `version`
                   maxCardinality: 1
 ```
 
-Instead of editing the number by hand, you can add `--fix` to the [offline check](#check-versions-against-the-point-where-the-branch-started) or to the [check against Console](#verify-the-versions-against-console). The `--fix` flag writes the expected version into each event specification: it replaces a declared version that differs, and adds one where none is declared and the expected version is known. It changes only the `version` field. Update your branch from the base branch before you run `--fix`, as the warning in [Troubleshooting](#troubleshooting) explains.
+Instead of editing the number by hand, you can add `--fix` to the [offline check](#check-versions-against-the-point-where-the-branch-started) or to the [check against Console](#verify-the-versions-against-console). The `--fix` flag writes the expected version into each event specification: it replaces a declared version that differs, and adds one where none is declared and the expected version is known. Update your branch from the base branch before you run `--fix`, as the warning in [Troubleshooting](#troubleshooting) explains.
 
 ```bash
-snowplow-cli dp validate offline --base-ref develop --fix
+snowplow-cli dp validate --fix
 ```
 
 ### Check versions against the point where the branch started
@@ -188,6 +188,12 @@ snowplow-cli dp validate offline --base-ref develop
 ```
 
 The offline check exits with status 0 when every version matches, and with status 1 when a version is wrong. See [Troubleshooting](#troubleshooting) for each error and its fix.
+
+To write the expected versions into your files without credentials, add `--fix`:
+
+```bash
+snowplow-cli dp validate offline --base-ref develop --fix
+```
 
 In GitHub Actions, fetch the full history, because the shallow clone that `actions/checkout` creates by default has no point to compare with:
 

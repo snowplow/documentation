@@ -14,6 +14,6 @@ You can now set a [time to live](/docs/identities/concepts/time-to-live/) (TTL) 
 
 A TTL suits identifiers whose old values stop appearing in events, such as the web tracker's `domain_userid` when you reset it on logout. Without a TTL, those values stay in the graph indefinitely, and each one adds to the storage cost of running Identities.
 
-You set the TTL in Console as a number of days between 7 and 36500, or choose **Forever** to keep values indefinitely. New identifiers default to 180 days, and identifiers deployed without a TTL show as **Forever**. Removing a value never changes an existing Snowplow ID or rewrites a [merge](/docs/identities/concepts/merges/).
+Set the TTL in Console as a number of days between 7 and 36500, or choose **Forever** to keep values indefinitely. New identifiers default to 180 days, and identifiers deployed without a TTL show as **Forever**. Removing a value never changes an existing Snowplow ID and never rewrites a [merge](/docs/identities/concepts/merges/).
 
 See [Configure and manage Identities](/docs/identities/configuration/#set-a-time-to-live) for how TTL changes apply to values already in the graph.

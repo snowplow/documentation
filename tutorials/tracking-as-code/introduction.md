@@ -19,10 +19,10 @@ This tutorial is for developers who already track events with the [JavaScript tr
 
 You'll set up one repository that holds the tracking for a TypeScript web app, and the workflows that check and publish it. The example tracks one [self-describing event](/docs/fundamentals/events/#self-describing-events), `signup`, with one [entity](/docs/fundamentals/entities/), `plan`, through one event specification, `Signup`, in a tracking plan called `Signup flow`.
 
-This tutorial follows one example path, with a `develop` and a `main` branch. Adapt the branch names to your own workflow:
+This tutorial follows one example path, with a `develop` and a `main` branch. A single branch works too, without the step where you test a draft before it's released. Adapt the branch names to your own workflow:
 
 ```mermaid
-flowchart LR
+flowchart TB
   F[Feature branch] -->|pull request| D[develop]
   D -->|pull request| M[main]
   D -.->|your app's deployment| SA[Your app in staging]
@@ -36,7 +36,7 @@ flowchart LR
 The same flow, as steps:
 
 1. You change the tracking definitions and the code on a feature branch, regenerate the tracking code with Snowtype, and check the versions locally without credentials.
-2. A pull request into `develop` runs the checks that need no credentials, and the checks against Console.
+2. A pull request into `develop` runs the local checks again, and adds the checks against Console, which catch what the local checks can't see, such as a change that reached Console from another branch.
 3. Merging into `develop` publishes the data structures to the development registry and syncs the tracking plan, so a changed event specification gets a new draft version. Your application, deployed from `develop` to its staging environment, sends events to a [Console development environment](/docs/testing/snowplow-micro/console/), which validates them against the draft.
 4. A pull request from `develop` into `main` runs the checks against Console. Merging it publishes the data structures to the production registry and releases the event specifications. Your application, deployed from `main` to production, sends events to your production pipeline.
 

@@ -124,9 +124,16 @@ data:
                   maxCardinality: 1
 ```
 
-Each `resourceName` must be a UUID v4 of your own, for example from `uuidgen`. Replace the three example values. The `version` field is what lets Snowplow CLI check every change against the version Console assigns, as described in [Declare event specification versions](/docs/api-reference/snowplow-cli/tracking-plans/#declare-event-specification-versions).
+Each `resourceName` must be a UUID v4 of your own. Snowplow CLI can write the files with new ids for you, and you then fill in the fields shown above, including `version: 0`:
 
-If the tracking plan already exists in Console, start from Console's copy instead. `snowplow-cli dp download --versions` writes every tracking plan and source application in your organization, with the versions Console holds, so keep only the files for this tracking plan. [Add the versions Console holds](/docs/api-reference/snowplow-cli/tracking-plans/#add-the-versions-console-holds) explains how to commit the versions.
+```bash
+snowplow-cli dp generate --source-app "Web app" --data-product "Signup flow"
+snowplow-cli dp add-event-spec -e Signup data-products/signup-flow.yaml
+```
+
+The `version` field is what lets Snowplow CLI check every change against the version Console assigns, as described in [Declare event specification versions](/docs/api-reference/snowplow-cli/tracking-plans/#declare-event-specification-versions).
+
+If the tracking plan already exists in Console, start from Console's copy instead. `snowplow-cli dp download --versions` writes every tracking plan and source application in your organization, with the versions Console holds, so keep only the files for this tracking plan.
 
 ### Configure Snowtype
 

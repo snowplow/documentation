@@ -5,6 +5,7 @@ sidebar_position: 40
 date: "2026-09-16"
 description: "How Snowplow Identities removes identifier values that haven't been seen in events for a configured number of days, and what removal changes."
 keywords: ["identities", "identity resolution", "time to live", "TTL", "identifier expiry", "retention"]
+content_type: concept
 ---
 
 Each identifier type can have a time to live (TTL), measured in days. Identities removes an identifier value from the graph once that value has gone unseen in events for longer than the TTL. Identifier types without a TTL keep their values indefinitely.

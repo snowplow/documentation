@@ -18,7 +18,7 @@ You can keep your tracking plans in your application's repository and generate t
 
 Console gives every event specification a version number. Snowplow CLI 0.4.0 lets a tracking plan file declare that version, and checks that each change raises it exactly as Console does. The version in your files, and in the code Snowtype generates from them, is the version Console assigns.
 
-Snowplow CLI 0.4.0 adds these checks:
+Snowplow CLI 0.4.0 adds these options:
 
 * `dp validate offline --base-ref <branch>` compares your files with the point where your branch started. It needs no credentials, so it runs locally and on every pull request.
 * `--fix` writes the expected version into your files.

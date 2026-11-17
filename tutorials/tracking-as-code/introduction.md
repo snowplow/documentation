@@ -11,7 +11,7 @@ This tutorial shows you how to manage your tracking from your application's own 
 
 Managing tracking this way gives every change to your tracking a pull request, a review, and a history, in the same place as the code change that needs it. The checks catch a tracking definition and its generated code drifting apart, and an event specification version that doesn't match the version Console assigns, before anything reaches Console.
 
-Most of the work runs on your machine and in pull request checks that need no Console access: you write the definitions, generate the code, and check the versions offline. Console only comes in when GitHub Actions checks a pull request against Console and publishes the merged tracking.
+Most of the work runs on your machine and in pull request checks that need no Console access: you write the definitions, generate the code, and check the versions offline. You only need Console access when GitHub Actions checks a pull request against Console and publishes the merged tracking.
 
 This tutorial is for developers who already track events with the [JavaScript tracker](/docs/sources/web-trackers/) and want their tracking definitions under version control. You'll work in your own terminal and in a GitHub repository.
 
@@ -50,7 +50,7 @@ To follow this tutorial, you need:
 * A TypeScript web app that uses the [JavaScript tracker](/docs/sources/web-trackers/) (`@snowplow/browser-tracker`), with Node.js and npm installed
 * [Snowplow CLI](/docs/api-reference/snowplow-cli/) installed
 * [Snowtype](/docs/event-studio/implement-tracking/install-snowtype/) installed in the app as a development dependency
-* A Snowplow account with Console and a development environment, for the checks against Console and the publishing
+* A Snowplow account with Console and a development environment, for the checks against Console and the publish workflow
 * Familiarity with [Git](https://git-scm.com/) and [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
 
 Snowplow CLI must be a version that checks event specification versions, and Snowtype a version that generates code from local tracking plans and has the `check` command:

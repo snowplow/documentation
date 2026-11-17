@@ -20,7 +20,7 @@ git switch -c feature/signup-tracking
 
 ### Add the data structures
 
-Create one file per data structure, under a directory named after the vendor. The event `signup` records how someone created an account:
+Create one file per data structure, under a directory named after the vendor. The event `signup` records how the user created an account:
 
 ```yaml title="data-structures/com.example/signup.yaml"
 apiVersion: v1
@@ -51,7 +51,7 @@ data:
   additionalProperties: false
 ```
 
-The entity `plan` records the pricing plan the account picked:
+The entity `plan` records the pricing plan the user picked:
 
 ```yaml title="data-structures/com.example/plan.yaml"
 apiVersion: v1

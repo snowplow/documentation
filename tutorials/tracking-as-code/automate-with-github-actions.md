@@ -9,7 +9,7 @@ date: "2026-11-13"
 
 In this part of the tutorial, you'll add two GitHub Actions workflows to the repository. The first checks every pull request into `develop` or `main`. The second publishes the tracking to your Snowplow organization every time a pull request merges: from `develop` as drafts for testing, and from `main` as released versions for production.
 
-You'll start with the checks that need no credentials. The checks against Console and the publishing need an API key, which you'll add at the point where the workflows first use it. Add the workflows on the same feature branch as the tracking definitions.
+You'll start with the checks that need no credentials. The checks against Console and the publish workflow need an API key, which you'll add at the point where the workflows first use it. Add the workflows on the same feature branch as the tracking definitions.
 
 <Steps>
 
@@ -55,7 +55,7 @@ The `--gh-annotate` flag prints the errors as [GitHub workflow commands](https:/
 
 ### Store an API key in the repository secrets
 
-The checks against Console and the publishing need credentials. [Create an API key](/docs/account-management/#create-an-api-key) with permission to publish data structures to production and to create and edit tracking plans, then add three [repository secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) in GitHub: `SNOWPLOW_CONSOLE_ORG_ID`, `SNOWPLOW_CONSOLE_API_KEY_ID`, and `SNOWPLOW_CONSOLE_API_KEY`. Snowplow CLI reads these variables from the environment.
+The checks against Console and the publish workflow need credentials. [Create an API key](/docs/account-management/#create-an-api-key) with permission to publish data structures to production and to create and edit tracking plans, then add three [repository secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) in GitHub: `SNOWPLOW_CONSOLE_ORG_ID`, `SNOWPLOW_CONSOLE_API_KEY_ID`, and `SNOWPLOW_CONSOLE_API_KEY`. Snowplow CLI reads these variables from the environment.
 
 ### Add the checks against Console
 
@@ -84,6 +84,7 @@ jobs:
       - if: github.base_ref == 'develop'
         run: snowplow-cli dp validate offline --base-ref origin/develop --gh-annotate
 
+  # highlight-start
   check-console:
     runs-on: ubuntu-latest
     env:
@@ -99,6 +100,7 @@ jobs:
       - run: snowplow-cli ds validate --gh-annotate
 
       - run: snowplow-cli dp validate --gh-annotate
+  # highlight-end
 ```
 
 The check against Console catches what the offline check can't see: a change that reached Console from another branch while yours was open.
@@ -139,7 +141,7 @@ jobs:
 On `develop`, the workflow runs two steps:
 
 1. `ds publish dev` publishes the data structures to the development registry, which your [Console development environment](/docs/testing/snowplow-micro/console/) reads. Console locks data structures published with Snowplow CLI against editing in the UI, and shows the `--managed-from` value, your repository, in the lock banner.
-2. `dp sync` writes the source application, the tracking plan, and the event specifications to Console. A structural change creates a new event specification version in draft. Pipelines don't validate events against drafts, development environments do, as described in [Test against draft event specifications](/docs/event-studio/test-and-publish/#test-against-draft-event-specifications).
+2. `dp sync` writes the source application, the tracking plan, and the event specifications to Console. A structural change creates a new event specification version in draft. Pipelines don't validate events against drafts; development environments do, as described in [Test against draft event specifications](/docs/event-studio/test-and-publish/#test-against-draft-event-specifications).
 
 On `main`, the workflow runs four steps:
 

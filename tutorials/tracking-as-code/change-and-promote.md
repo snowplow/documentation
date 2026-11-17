@@ -91,7 +91,15 @@ The check against Console catches a change that reached Console while your branc
 12:35PM ERRO validation failed 1 errors
 ```
 
-To fix `needs a bump` from the check against Console, run `git fetch origin` and merge `origin/develop` into your branch, and resolve any conflict in the tracking plan file so it keeps the other change and yours. Then run `snowplow-cli dp validate offline --base-ref origin/develop --fix`, which needs no credentials and writes the same version Console expects, regenerate the code, and push. Check against `origin/develop`, not your local `develop`: unless you pulled it, your local `develop` doesn't have the other change, and the check passes without raising the version. Don't run `--fix` before updating the branch: it would write the expected version into a file that doesn't hold the other change, and the next sync would publish your file over it.
+To fix `needs a bump` from the check against Console:
+
+1. Run `git fetch origin`.
+2. Merge `origin/develop` into your branch, and resolve any conflict in the tracking plan file so it keeps the other change and yours.
+3. Run `snowplow-cli dp validate offline --base-ref origin/develop --fix`, which needs no credentials and writes the same version Console expects.
+4. Regenerate the code.
+5. Push.
+
+Check against `origin/develop`, not your local `develop`: unless you pulled it, your local `develop` doesn't have the other change, and the check passes without raising the version. Don't run `--fix` before updating the branch: it would write the expected version into a file that doesn't hold the other change, and the next sync would publish your file over it.
 
 Your pull request reports this failure only if its checks run after the other merge. Before you merge, update your branch with the latest `develop`, or run the checks again, so the version check sees changes other people merged after your checks ran.
 
@@ -149,6 +157,12 @@ To fix it, promote `develop` to `main` again. The new pull request brings the la
 
 A fix made directly on `main` publishes and releases like a promotion, so Console moves on without `develop`. Merge `main` back into `develop` before the next merge into `develop`. If you don't, the next pull request into `develop` that changes the same event specification fails the check against Console with `needs a bump`, as described in [Open the pull request into develop](#open-the-pull-request-into-develop), and so does the next sync.
 
-To fix it, merge `main` into your branch, resolve any conflict in the tracking plan file so it keeps both changes, run `snowplow-cli dp validate --fix` with credentials to write the version Console expects, regenerate the code, and push.
+To fix it:
+
+1. Merge `main` into your branch.
+2. Resolve any conflict in the tracking plan file so it keeps both changes.
+3. Run `snowplow-cli dp validate --fix` with credentials to write the version Console expects.
+4. Regenerate the code.
+5. Push.
 
 </Steps>

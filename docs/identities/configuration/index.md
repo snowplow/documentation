@@ -50,6 +50,12 @@ Removing an identifier affects identity resolution for all future events. Snowpl
 
 Set a [time to live](/docs/identities/concepts/time-to-live/index.md) (TTL) for each identifier type to remove values that haven't been seen in events for that many days. Enter a number of days between 7 and 36500, or choose **Forever** to keep values indefinitely.
 
+Use a TTL for identifiers whose values stop being relevant once they stop appearing in events, such as a `domain_userid` that you reset when a user logs out. See [time to live](/docs/identities/concepts/time-to-live/index.md) for more examples.
+
+:::tip[Keep storage costs down]
+Every identifier value in the graph adds to the storage cost of running Identities. A TTL stops the graph from growing with values that no event will contain again.
+:::
+
 Every identifier defaults to 180 days, including the identifiers Console pre-populates when you first configure Identities and the ones it adds when you enable cross-domain tracking aliases. Identifiers deployed without a time to live show as **Forever**.
 
 Changing a TTL affects values already in the graph in three ways:

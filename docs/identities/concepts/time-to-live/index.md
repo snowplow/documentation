@@ -10,15 +10,15 @@ content_type: concept
 
 Each identifier type can have a time to live (TTL), measured in days. Identities removes an identifier value from the graph once that value has gone unseen in events for longer than the TTL. Identifier types without a TTL keep their values indefinitely.
 
-Use a TTL for identifiers whose values stop being relevant once they stop appearing in events. The web tracker's [`domain_userid`](/docs/events/identifiers/index.md#tracker-generated) is an example. [Choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md#reset-identifiers-on-logout) recommends resetting it when a user logs out. Each reset retires a value: the browser continues with a new `domain_userid`, and the old one never appears in another event, so it can no longer help resolve anyone's identity. Without a TTL it stays in the graph indefinitely. With a TTL, Identities removes it after it has gone unseen for the TTL period.
-
-The `network_userid` identifier is another example. The Collector stores it in the [`sp` cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md), which expires after 365 days by default, so a TTL of 365 days removes each value once its cookie has expired.
-
-Custom identifiers work the same way. Suppose your site assigns each guest shopper an ID, and discards that ID 30 days after the guest's last visit. A TTL of 30 days removes each guest ID from the graph once your site has stopped using it.
-
 :::tip[Keep storage costs down]
 Every identifier value in the graph adds to the storage cost of running Identities. A TTL stops the graph from growing with values that no event will contain again.
 :::
+
+Use a TTL for identifiers whose values stop being relevant once they stop appearing in events. For example:
+
+* [`domain_userid`](/docs/events/identifiers/index.md#tracker-generated): [choosing identifiers](/docs/identities/configuration/choosing-identifiers/index.md#reset-identifiers-on-logout) recommends resetting it when a user logs out. Each reset retires a value, because the browser continues with a new `domain_userid` and the old one never appears in another event. With a TTL, Identities removes the old value after it has gone unseen for the TTL period.
+* `network_userid`: the Collector stores it in the [`sp` cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md), which expires after 365 days by default, so a TTL of 365 days removes each value once its cookie has expired.
+* A custom identifier: suppose your site assigns each guest shopper an ID, and discards that ID 30 days after the guest's last visit. A TTL of 30 days removes each guest ID from the graph once your site has stopped using it.
 
 You configure the TTL per identifier type in [Console](/docs/identities/configuration/index.md#set-a-time-to-live).
 

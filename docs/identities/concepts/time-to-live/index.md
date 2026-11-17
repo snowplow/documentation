@@ -14,6 +14,8 @@ Use a TTL for identifiers whose values stop being relevant once they stop appear
 
 The `network_userid` identifier is another example. The Collector stores it in the [`sp` cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md), which expires after 365 days by default, so a TTL of 365 days removes each value once its cookie has expired.
 
+Custom identifiers work the same way. Suppose your site assigns each guest shopper an ID, and discards that ID 30 days after the guest's last visit. A TTL of 30 days removes each guest ID from the graph once your site has stopped using it.
+
 :::tip[Keep storage costs down]
 Every identifier value in the graph adds to the storage cost of running Identities. A TTL stops the graph from growing with values that no event will contain again.
 :::

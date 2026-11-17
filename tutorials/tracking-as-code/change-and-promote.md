@@ -78,7 +78,7 @@ git commit -m "Make the plan entity optional on signup"
 
 Push the branch and open a pull request into `develop`. The pull request workflow runs the same checks you ran locally, plus the checks against Console.
 
-The check against Console catches a change that reached Console while your branch was open, for example a teammate's pull request that changed the same event specification and merged first. Console then holds a version your files don't reflect, and `dp validate` fails with `needs a bump`. In this example, your files declare version `5`, another change has already taken Console to version `5` with different entities, and the expected version is `6`:
+The check against Console catches a change that reached Console while your branch was open, for example a teammate's pull request that changed the same event specification and merged first. Console then holds a version your files don't reflect, and `dp validate` fails with `needs a bump`. For example, if your files declare version `5` and another change has already taken Console to version `5` with different entities, the expected version is `6`:
 
 ```text
 12:35PM ERRO validating file=data-products/signup-flow.yaml path=/data/eventSpecifications/0

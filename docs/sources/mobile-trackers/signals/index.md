@@ -17,7 +17,7 @@ The iOS and Android trackers can connect your app to [Signals](/docs/signals/ind
 * Read the attributes of a [public service](/docs/signals/applications/public-services/index.md) for the current user or session
 * [Subscribe to interventions](/docs/signals/applications/subscribe/index.md#subscribe-with-the-mobile-trackers) for the current user and session, and handle them in your app
 
-The app's user and session are identified by the `userId` and `sessionId` from the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md). In Signals, these correspond to the built-in `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Define your attribute groups, services, and interventions with these keys to use them from your app. The tracker subscribes to interventions with these identifiers automatically, but to read attributes you pass the attribute key and identifier yourself.
+The app's user and session are identified by the `userId` and `sessionId` from the [session entity](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md). In Signals, these correspond to the built-in `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md). Define your attribute groups, services, and interventions with these keys to use them from your app. The tracker subscribes to interventions with these identifiers automatically. To read attributes, pass the attribute key and the identifier from `tracker.session`.
 
 :::note[Tracker versions]
 Signals support is available from version 6.5.0 of the iOS tracker and version 6.6.1 of the Android tracker.

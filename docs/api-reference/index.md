@@ -30,7 +30,6 @@ These pages cover setup and configuration for each pipeline component, for self-
 * [Warehouse and lake loaders](/docs/api-reference/loaders-storage-targets/index.md)
 * [Snowbridge](/docs/api-reference/snowbridge/index.md)
 * [Iglu schema registry](/docs/api-reference/iglu/index.md)
-* [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md)
 * [Dataflow Runner](/docs/api-reference/dataflow-runner/index.md)
 
 ## Schemas, versions, and legacy versions

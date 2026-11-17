@@ -48,7 +48,7 @@ For the deployment steps, see [Deploy data structures to your development enviro
 
 To [patch a schema](/docs/fundamentals/schemas/versioning/index.md#overwrite-a-schema), which means applying changes to it without updating the version, select the **Patch** option when saving the schema.
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it's controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it's controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 
 :::note[Self-Hosted users]
 If you are using Snowplow Self-Hosted, to patch a schema, don't increment the schema version when [uploading it with `igluctl`](/docs/api-reference/iglu/manage-schemas/index.md).

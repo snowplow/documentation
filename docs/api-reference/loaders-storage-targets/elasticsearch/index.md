@@ -17,7 +17,7 @@ If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to
 
 :::note
 
-We only offer this loader on AWS or as part of [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md).
+We only offer this loader on AWS.
 
 :::
 

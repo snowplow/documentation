@@ -87,7 +87,7 @@ Explore and understand your pipeline infrastructure:
 - View real-time pipeline metrics including throughput, enrichment latency, and bad row rates
 - Review collector configuration (CNAME, cookie policy, DNS)
 - List and manage enrichments
-- View mini and Micro development instances
+- View Micro development instances
 
 ### Troubleshooting
 

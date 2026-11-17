@@ -3,7 +3,7 @@ title: "New in Signals: read attributes from websites and apps, and Signals in t
 sidebar_label: "Public services and mobile tracker support"
 description: "Public Signals services can be read directly from a website or app without an API token, and the iOS and Android trackers can read attributes and receive interventions."
 keywords: ["snowplow signals", "public services", "mobile trackers", "interventions", "release notes"]
-date: "2026-11-08"
+date: "2026-11-17"
 category:
   - "Release notes"
 components:

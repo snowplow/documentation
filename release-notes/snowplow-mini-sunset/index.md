@@ -12,7 +12,9 @@ components:
 
 Snowplow Mini reached [End of Life](/lifecycle-policy/) on November 11, 2026, following the Maintenance Mode period that [started on August 11, 2026](/release-notes/snowplow-mini-moving-to-maintenance-mode/).
 
-Existing Mini instances keep running, but they aren't supported and don't receive updates or fixes.
+~Existing Mini instances keep running,~ but they aren't supported and don't receive updates or fixes.
+
+Updated on November 18, 2026: In light of [cve-2026-114938-openjdk](https://openjdk.org/groups/vulnerability/advisories/2026-11-17), we have made the decision to permanently stop existing Mini instances in Snowplow CDI. With fixes no longer being applied to the sunset component, this is the safest option to proceed.
 
 Use [Snowplow Micro](/docs/testing/snowplow-micro/) for testing and development. You can [deploy it through Console](/docs/testing/snowplow-micro/console/) or [run it locally](/docs/testing/snowplow-micro/local/). See the [announcement and migration guidance](/release-notes/meet-the-new-development-environments/) for details.
 

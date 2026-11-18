@@ -12,4 +12,6 @@ Identities includes a [dbt package](/docs/modeling-your-data/modeling-your-data-
 
 The Identities dbt package is currently standalone from our other dbt packages.
 
+The package reads identity entities and merge events, not [correction events](/docs/identities/concepts/index.md#correction-events). It still sees each late merge, because Identities also emits a merge event for it. A correction event carries the same `snowplow_id`, `merges`, and `merged` fields as a merge event, so you can process `identity_correction` events in your own models in the same way as merge events. The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, so deduplicate on that field.
+
 Check out the [Identities dbt package overview](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) for more information.

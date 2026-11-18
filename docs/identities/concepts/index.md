@@ -3,8 +3,8 @@ title: "Identities concepts"
 sidebar_label: "Concepts"
 date: "2025-02-25"
 sidebar_position: 1
-description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, and identity resolution."
-keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges"]
+description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, corrections, and identity resolution."
+keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges", "corrections"]
 content_type: concept
 ---
 
@@ -15,6 +15,7 @@ Identities is based on several core concepts.
 * **A Snowplow ID** is a persistent, immutable identifier for a collection of linked identifiers that represent a single user
 * **[Merges](/docs/identities/concepts/merges/index.md)** occur when identifiers link two previously separate Snowplow IDs together
 * **[Unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)** prevent incorrect merges when users share devices
+* **[Corrections](/docs/identities/concepts/corrections/index.md)** manage graph quality in the background by applying merges that extreme concurrency or an incident left behind, and announce them in a correction event
 * **[Cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking)** resolves identity across sites with different cookie domains
 
 ## Identifiers
@@ -111,7 +112,7 @@ To set it up, and to see the use cases it supports, such as anonymous to known a
 
 ## Data types
 
-Identities adds two data types to your enriched event stream: an identity entity attached to every resolved event, and a merge event emitted when Snowplow IDs are combined.
+Identities adds three data types to your enriched event stream: an identity entity attached to every resolved event, a merge event emitted when Snowplow IDs are combined, and a correction event emitted when a background correction merges Snowplow IDs that were left separate.
 
 ### Identity entity
 
@@ -145,3 +146,29 @@ The `merges` array contains **all** Snowplow IDs that have ever been merged into
     }]
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "identity_merge", "format": "jsonschema", "version": "2-0-0" }, "description": "Event emitted when Snowplow Identities merges user identities", "properties": { "merged": { "type": "array", "items": { "type": "object", "required": ["snowplow_id", "created_at", "merged_at", "triggering_event_id"], "properties": { "merged_at": { "type": "string", "format": "date-time" }, "created_at": { "type": "string", "format": "date-time" }, "snowplow_id": { "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" }, "triggering_event_id": { "type": "string", "maxLength": 36 } }, "additionalProperties": false }, "description": "Detailed info about merged identities" }, "merges": { "type": "array", "items": { "type": "string" }, "description": "List of merged identity IDs" }, "created_at": { "type": "string", "format": "date-time", "description": "When the parent identity was created" }, "snowplow_id": { "description": "The parent/surviving identity ID", "type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$" } }, "required": ["snowplow_id", "created_at", "merges", "merged"], "additionalProperties": false }} />
+
+### Correction events
+
+When a [correction](/docs/identities/concepts/corrections/index.md) merges Snowplow IDs that were left separate, Identities emits a correction event into the enriched event stream, as well as a merge event for the same merge. The correction event carries the same `snowplow_id`, `created_at`, `merges`, and `merged` fields as a merge event, so downstream consumers can process both kinds of event in the same way. The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, which deduplicates the two.
+
+The `correction_id` equals the event's `event_id` and the `triggering_event_id` of every merge the correction made. The `affected_snowplow_ids` array lists the Snowplow IDs this correction merged, while `merges` holds the full merge history of the surviving `snowplow_id`. The `type` is `late_merge` and the `source` is `automatic`.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    correction_id: "0193b2c4-7d1e-7a2b-9c3d-4e5f6a7b8c9d",
+    type: "late_merge",
+    source: "automatic",
+    applied_at: "2024-01-16T09:12:00.000Z",
+    snowplow_id: "sp_abcdefabcdefabcdefabcdefab",
+    created_at: "2024-01-15T10:30:00.000Z",
+    merges: ["sp_zyxwvuzyxwvuzyxwvuzyxwvuzy"],
+    merged: [{
+      snowplow_id: "sp_zyxwvuzyxwvuzyxwvuzyxwvuzy",
+      created_at: "2024-01-15T10:30:05.000Z",
+      merged_at: "2024-01-16T09:12:00.000Z",
+      triggering_event_id: "0193b2c4-7d1e-7a2b-9c3d-4e5f6a7b8c9d"
+    }],
+    affected_snowplow_ids: ["sp_zyxwvuzyxwvuzyxwvuzyxwvuzy"]
+  }}
+  schema={{"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "type": "object", "self": {"vendor": "com.snowplowanalytics.snowplow", "name": "identity_correction", "format": "jsonschema", "version": "1-0-0"}, "description": "Event emitted when Snowplow Identities applies a correction to the identity graph", "properties": {"correction_id": {"type": "string", "maxLength": 36, "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "description": "The correction this event reports. Equal to this event's event_id and to the triggering_event_id of the merge rows the correction wrote"}, "type": {"type": "string", "maxLength": 64, "description": "The class of correction, as the identity service names it. late_merge today; new classes need no schema change"}, "source": {"type": "string", "maxLength": 64, "description": "Who filed the correction, as the identity service names it. automatic today; new sources need no schema change"}, "applied_at": {"type": "string", "format": "date-time", "description": "When the correction changed the graph"}, "snowplow_id": {"type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$", "description": "The parent/surviving identity ID"}, "created_at": {"type": "string", "format": "date-time", "description": "When the parent identity was created"}, "merges": {"type": "array", "items": {"type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$"}, "description": "List of merged identity IDs"}, "merged": {"type": "array", "items": {"type": "object", "required": ["snowplow_id", "created_at", "merged_at", "triggering_event_id"], "properties": {"merged_at": {"type": "string", "format": "date-time", "description": "When this identity was merged into snowplow_id"}, "created_at": {"type": "string", "format": "date-time", "description": "When this identity was created"}, "snowplow_id": {"type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$", "description": "The merged identity ID"}, "triggering_event_id": {"type": "string", "maxLength": 36, "description": "The event that caused this merge. Equal to correction_id for merges this correction wrote"}}, "additionalProperties": false}, "description": "Detailed info about merged identities"}, "affected_snowplow_ids": {"type": "array", "items": {"type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$"}, "description": "The roots this correction merged into snowplow_id. Their subtrees now resolve to snowplow_id; each appears in merged with triggering_event_id equal to correction_id unless it was pruned since"}, "refused_snowplow_ids": {"type": ["array", "null"], "items": {"type": "string", "maxLength": 29, "pattern": "^sp_[A-Za-z2-7]{26}$"}, "description": "Roots the merge guard refused to merge. Absent or null when the guard accepted every root"}}, "required": ["correction_id", "type", "source", "applied_at", "snowplow_id", "created_at", "merges", "merged", "affected_snowplow_ids"], "additionalProperties": false}} />

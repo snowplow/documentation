@@ -21,9 +21,9 @@ snowplow-cli login
 npx snowtype login
 ```
 
-The `login` command signs you in to Console in your browser, the same way you sign in to Console itself, including with SSO. It saves the login to `~/.config/snowplow/login.json`. It doesn't create an API key. The tools use the saved login when no API key is configured, and refresh it when it expires.
+The `login` command signs you in to Console in your browser, the same way you sign in to Console itself, including with SSO. The tools then use this login when no API key is configured.
 
-Both tools share the login, so you only need to log in with one of them. The `logout` command revokes the saved login and deletes it for both tools.
+Both tools share the login, so you only need to log in with one of them. The `logout` command logs both tools out.
 
 API keys keep working, and take precedence over a saved login. Use them for CI and other non-interactive environments.
 

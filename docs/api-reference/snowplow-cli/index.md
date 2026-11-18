@@ -63,9 +63,9 @@ Run the `login` command:
 snowplow-cli login
 ```
 
-The command opens the Console sign-in page in your browser. If you belong to more than one organization, it asks you to select one. It then saves the login to `~/.config/snowplow/login.json`. It doesn't create an API key.
+The command opens the Console sign-in page in your browser. If you belong to more than one organization, it asks you to select one.
 
-Commands use the saved login when no API key is configured, and refresh it when it expires. They use the organization you selected at login, unless you set an organization ID in the configuration.
+After that, commands use this login when no API key is configured. They use the organization you selected at login, unless you set an organization ID in the configuration.
 
 [Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) shares the same login, so you only need to log in with one of the two tools.
 
@@ -75,7 +75,7 @@ To log out, run:
 snowplow-cli logout
 ```
 
-This revokes the saved login and deletes the file, which also logs Snowtype out. It doesn't affect API keys.
+This also logs Snowtype out. It doesn't affect API keys.
 
 :::note[API keys take precedence]
 If an API key is configured, Snowplow CLI uses it instead of the saved login. Remove the API key from your configuration to use the login. To see which one is in use, run [`snowplow-cli status`](#verify-the-configuration).

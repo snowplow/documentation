@@ -73,9 +73,9 @@ Run the `login` command:
 npx snowtype login
 ```
 
-The command prints a sign-in link and offers to open it in your browser. If you belong to more than one organization, it asks you to select a default one. It then saves the login to `~/.config/snowplow/login.json`. It doesn't create an API key.
+The command prints a sign-in link and offers to open it in your browser. If you belong to more than one organization, it asks you to select a default one.
 
-Snowtype uses the saved login when no API key is set, and refreshes it when it expires.
+After that, Snowtype uses this login when no API key is set.
 
 [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login, so you only need to log in with one of the two tools.
 
@@ -85,7 +85,7 @@ To log out, run:
 npx snowtype logout
 ```
 
-This revokes the saved login and deletes the file, which also logs Snowplow CLI out. It doesn't affect API keys.
+This also logs Snowplow CLI out. It doesn't affect API keys.
 
 ### Use an API key
 

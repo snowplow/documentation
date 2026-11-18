@@ -38,7 +38,7 @@ These options work with any command.
 
 <AppliesTo feature="snowtype-login" />
 
-Logs in to Snowplow Console in the browser and saves the login to `~/.config/snowplow/login.json`. Snowtype uses the saved login when no API key is set. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login. See [authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) for when to use a login or an API key.
+Logs in to Snowplow Console in the browser. Snowtype uses the login when no API key is set. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login. See [authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) for when to use a login or an API key.
 
 | Flag                     | Description                                                        |
 | ------------------------ | ------------------------------------------------------------------ |
@@ -49,7 +49,7 @@ Logs in to Snowplow Console in the browser and saves the login to `~/.config/sno
 
 <AppliesTo feature="snowtype-login" />
 
-Logs out of Snowplow Console: revokes the saved login and deletes it. Snowplow CLI shares the same login, so this logs it out too. API keys aren't affected. This command has no flags.
+Logs out of Snowplow Console. Snowplow CLI shares the same login, so this logs it out too. API keys aren't affected. This command has no flags.
 
 ## `init`
 

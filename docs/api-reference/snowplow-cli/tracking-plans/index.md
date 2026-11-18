@@ -152,7 +152,7 @@ snowplow-cli dp validate --fix
 
 The command adds one `version` line per event specification. Adding versions changes nothing in Console: `dp sync` and `dp release` report no changes to apply.
 
-You can also write the versions with `snowplow-cli dp download --versions`. The command writes every tracking plan in the organization in Console's own layout. If you download over your files, keep only the `version` lines from the diff.
+You can also write the versions with `snowplow-cli dp download --versions`. The download overwrites your files with the copy in Console, so any change you haven't synced yet is lost. Use it only when your files match Console. Otherwise, use `dp validate --fix` instead.
 
 It's best to commit the versions in a pull request of their own. On that pull request, the [check against the point where the branch started](#check-versions-against-the-point-where-the-branch-started) finds no version at the base and skips those event specifications, so a structural change in the same pull request would be checked only against Console.
 

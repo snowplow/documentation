@@ -79,6 +79,6 @@ export const versions = {
   snowplowMini: '0.26.0',
 
   // Developer tools
-  snowplowCli: '0.4.0',
-  snowtype: '0.20.1',
+  snowplowCli: '0.5.0',
+  snowtype: '0.21.0',
 }

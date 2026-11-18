@@ -36,18 +36,20 @@ These options work with any command.
 
 ## `login`
 
-Logs in to Console in your browser and saves the login to `~/.config/snowplow/login.json` for Snowtype and [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) to use. No API key is created. See [how to authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate).
+<AppliesTo feature="snowtype-login" />
 
-| Flag                     | Description                         |
-| ------------------------ | ----------------------------------- |
-| `--clientId <string>`    | Auth0 client ID for device sign-in. |
-| `--auth0Domain <string>` | Auth0 domain for device sign-in.    |
+Logs in to Snowplow Console in the browser and saves the login to `~/.config/snowplow/login.json`. Snowtype uses the saved login when no API key is set. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login. See [authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) for when to use a login or an API key.
+
+| Flag                     | Description                                                        |
+| ------------------------ | ------------------------------------------------------------------ |
+| `--clientId <string>`    | Auth0 client ID. The default works for Snowplow Console.           |
+| `--auth0Domain <string>` | Auth0 domain. The default works for Snowplow Console.              |
 
 ## `logout`
 
-Logs out of Console: revokes the login saved by `login` and deletes `~/.config/snowplow/login.json`. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) shares the same login, so this logs it out too. API keys are not affected.
+<AppliesTo feature="snowtype-login" />
 
-This command has no flags of its own.
+Logs out of Snowplow Console: revokes the saved login and deletes it. Snowplow CLI shares the same login, so this logs it out too. API keys aren't affected. This command has no flags.
 
 ## `init`
 

@@ -17,7 +17,6 @@ To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
-- A Console user account, or a Console API key
 
 ## Install Snowtype
 
@@ -59,27 +58,42 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs access to Console to read your event specifications and data structures. You can log in with your browser, or provide a Console API key. If you do both, the API key takes precedence.
+Snowtype needs to authenticate with Console to read your event specifications and data structures. There are two ways to do it:
+
+* [Log in with your browser](#log-in-with-your-browser): for interactive use, when you run Snowtype yourself in a terminal. This is the default.
+* [Use an API key](#use-an-api-key): for non-interactive use, such as CI, where nobody can sign in.
 
 ### Log in with your browser
 
-Run the `login` command to sign in to Console in your browser:
+<AppliesTo feature="snowtype-login" />
+
+Run the `login` command:
 
 ```bash
 npx snowtype login
 ```
 
-Snowtype saves the login to `~/.config/snowplow/login.json` and refreshes it automatically. No API key is created.
+The command prints a sign-in link and offers to open it in your browser. If you belong to more than one organization, it asks you to select a default one. It then saves the login to `~/.config/snowplow/login.json`. It doesn't create an API key.
 
-[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) shares the same login. If you have already run `snowplow-cli login`, you don't need to log in again.
+Snowtype uses the saved login when no API key is set, and refreshes it when it expires.
 
-Logging in needs a terminal and a browser. For CI and other automated environments, provide an API key instead.
+[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login, so you only need to log in with one of the two tools.
 
-To log out, run `npx snowtype logout`. This revokes the saved login and deletes the file, which also logs Snowplow CLI out. An API key, if you have one configured, keeps working.
+To log out, run:
 
-### Provide an API key
+```bash
+npx snowtype logout
+```
 
-[Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
+This revokes the saved login and deletes the file, which also logs Snowplow CLI out. It doesn't affect API keys.
+
+:::note[For SSO-enabled Snowplow organizations]
+If SSO is enabled for your Snowplow organization, the browser sign-in that `login` uses doesn't work. [Use an API key](#use-an-api-key) instead.
+:::
+
+### Use an API key
+
+For non-interactive use, such as CI, use a Console API key. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
 
 You need both the **API key** and the **API key ID**.
 
@@ -105,6 +119,8 @@ export SNOWPLOW_CONSOLE_API_KEY_ID=your-api-key-id
 </Tabs>
 
 You can also pass the credentials directly as CLI flags (`--apiKey` and `--apiKeyId`), but environment variables are easier to manage and keep credentials out of your command history.
+
+If an API key is set, Snowtype uses it instead of the saved login.
 
 ## Initialize your project
 

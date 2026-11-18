@@ -1,7 +1,7 @@
 ---
 title: "Snowplow CLI command reference"
 sidebar_label: "Command reference"
-date: 2026-11-12
+date: 2026-11-18
 sidebar_position: 0
 description: "Complete reference for Snowplow CLI commands including data-products and data-structures subcommands with options and usage examples."
 keywords: ["Snowplow CLI reference", "CLI commands", "command options", "CLI documentation"]
@@ -996,6 +996,111 @@ snowplow-cli events send [flags]
   -p, --protocol string     Protocol [http|https] (default "https")
   -d, --schema string       Schema (data structure) URI, of the form iglu:...
   -J, --sdjson string       Self-describing JSON of the form {"schema":"iglu:...","data":{...}}
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Login
+
+
+Log in to Snowplow Console with your browser
+
+### Synopsis
+
+Authenticate with Snowplow Console using device authentication flow and save the login
+
+No API key is created. Commands use the saved login when no API key is
+configured, and Snowtype shares the same login.
+
+```
+snowplow-cli login [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli login
+```
+
+### Options
+
+```
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
+      --auth0-domain string   Auth0 domain (default "id.snowplowanalytics.com")
+      --client-id string      Auth0 Client ID for device auth (default "EXQ3csSDr6D7wTIiebNPhXpgkSsOzCzi")
+  -h, --help                  help for login
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Logout
+
+
+Log out of Snowplow Console
+
+### Synopsis
+
+Revoke the login saved by 'snowplow-cli login' and delete it
+
+Snowtype shares the same login, so this logs it out too. An API key, if one
+is configured, is not affected and keeps working.
+
+```
+snowplow-cli logout [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli logout
+```
+
+### Options
+
+```
+  -h, --help   help for logout
 ```
 
 ### Options inherited from parent commands

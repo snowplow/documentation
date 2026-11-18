@@ -35,37 +35,38 @@ export async function generateIndex(outDir, pages, options) {
     lines.push('')
   }
 
+  lines.push(...buildReadingGuide(siteUrl))
+
   if (agentInstructions) {
-    lines.push(...(await buildAgentInstructions({ siteDir, siteUrl })))
+    lines.push(...(await buildAgentInstructions({ siteDir, siteUrl: '' })))
   }
 
   if (sidebarMap.size > 0) {
     lines.push(...buildProductRouter(siteUrl))
   }
 
-  const groups = [
-    ...buildDocsGroups(pages, labelMap, linkOptions),
-    buildTutorialsGroup(pages, tutorialMeta, linkOptions),
-    buildReleaseNotesGroup(pages, linkOptions),
-  ].filter((group) => group && group.entries.length > 0)
-
-  for (const group of groups) {
-    lines.push(`## ${group.label}`)
+  const releaseNotes = buildReleaseNotesGroup(pages, linkOptions)
+  if (releaseNotes) {
+    lines.push('## Release notes')
     lines.push('')
-
-    if (group.note) {
-      lines.push(group.note)
-      lines.push('')
-    }
-
-    lines.push(...group.entries)
+    lines.push(
+      `Release notes aren't listed in this file. They have their own index, newest first: /${RELEASE_NOTES_INDEX}`
+    )
     lines.push('')
+    await writeReleaseNotesIndex(outDir, releaseNotes)
   }
+
+  const tree = buildPageTree(pages, labelMap, tutorialMeta, outdatedPrefixes)
+  const treeLines = renderTree(tree)
+  lines.push('## Pages')
+  lines.push('')
+  lines.push(...treeLines)
+  lines.push('')
 
   const outputPath = path.join(outDir, 'llms.txt')
   await fs.writeFile(outputPath, lines.join('\n'), 'utf8')
 
-  // The same groups, one file per product sidebar
+  // The docs and tutorials groups, one file per product sidebar
   await writeProductIndexes(
     outDir,
     pages,
@@ -82,12 +83,100 @@ export async function generateIndex(outDir, pages, options) {
       formatDocsEntry: (page) => formatDocsEntry(page, linkOptions),
     }
   )
-  console.log(
-    `[llms-txt] Wrote llms.txt (${groups.length} sections, ${groups.reduce(
-      (n, g) => n + g.entries.length,
-      0
-    )} entries)`
-  )
+  console.log(`[llms-txt] Wrote llms.txt (${treeLines.length} lines in the page tree)`)
+}
+
+function buildReadingGuide(siteUrl) {
+  return [
+    '## How to build a page URL',
+    '',
+    `Every path in this file is relative to \`${siteUrl}\`. Put that base in front of a path to get the full URL: \`/docs/sources.md\` is \`${siteUrl}/docs/sources.md\`.`,
+    '',
+    'The "Pages" section at the end of this file lists every page as a tree that follows the URL path. Each line is `<path segment>: <title>. <description>`, indented one space deeper than its parent. To build the URL of a page:',
+    '',
+    "1. Start at the page's line and take its path segment.",
+    "2. Walk up to its parent, the nearest line above with one space less of indentation, then to that line's parent, until you reach a line with no indentation. Take the path segment of each.",
+    `3. Join the segments from the top down with \`/\`, put \`${siteUrl}/\` in front and \`.md\` at the end.`,
+    '',
+    'For example, in this tree',
+    '',
+    '```',
+    'docs: Snowplow documentation. ...',
+    ' sources: Snowplow sources overview. ...',
+    '  web-trackers: Web tracker SDKs. ...',
+    '   tracking-events: Track data out-of-the-box with the web trackers. ...',
+    '  mobile-trackers: Native mobile tracker SDKs. ...',
+    '```',
+    '',
+    `the "Track data out-of-the-box with the web trackers" page is \`${siteUrl}/docs/sources/web-trackers/tracking-events.md\` and the "Native mobile tracker SDKs" page is \`${siteUrl}/docs/sources/mobile-trackers.md\`.`,
+    '',
+    'A line that ends in `/` and has no title is a folder with no page of its own. Only the lines below it are pages, and its path segment is the name without the `/`.',
+    '',
+    'A line marked `[previous version]` describes an old version of a component. Each line under `tutorials` is a complete tutorial as a single page. Its steps are also published at their own URLs, listed at the top of the tutorial.',
+    '',
+  ]
+}
+
+function newNode() {
+  return { text: null, children: new Map() }
+}
+
+function addToTree(root, segments, text) {
+  let node = root
+  for (const segment of segments) {
+    if (!node.children.has(segment)) node.children.set(segment, newNode())
+    node = node.children.get(segment)
+  }
+  node.text = text
+}
+
+function buildPageTree(pages, labelMap, tutorialMeta, outdatedPrefixes) {
+  const root = newNode()
+
+  for (const page of pages) {
+    if (page.kind !== 'doc') continue
+    const prevTag = isPreviousVersion(page.routePath, outdatedPrefixes) ? ' [previous version]' : ''
+    addToTree(
+      root,
+      page.routePath.split('/').filter(Boolean),
+      `${titleWithDescription(page.title, page.description)}${prevTag}`
+    )
+  }
+
+  const docs = root.children.get('docs')
+  if (docs) {
+    sortBySidebarPosition(docs, labelMap)
+    for (const section of docs.children.values()) sortBySidebarPosition(section, labelMap)
+  }
+
+  for (const [slug, steps] of groupTutorialSteps(pages)) {
+    const meta = tutorialMeta.get(slug) || {}
+    addToTree(
+      root,
+      ['tutorials', slug],
+      `${titleWithDescription(meta.title || formatSlug(slug), meta.description)} (${formatTutorialFacets(meta, steps.length)})`
+    )
+  }
+
+  return root
+}
+
+function sortBySidebarPosition(node, labelMap) {
+  const position = ([slug]) => labelMap.get(slug)?.position ?? Infinity
+  node.children = new Map([...node.children].sort((a, b) => position(a) - position(b)))
+}
+
+function titleWithDescription(title, description) {
+  if (!description) return title
+  return `${title}${/[.?!]$/.test(title) ? '' : '.'} ${description}`
+}
+
+function renderTree(node, depth = 0, lines = []) {
+  for (const [segment, child] of node.children) {
+    lines.push(`${' '.repeat(depth)}${segment}${child.text ? `: ${child.text}` : '/'}`)
+    renderTree(child, depth + 1, lines)
+  }
+  return lines
 }
 
 /**
@@ -240,6 +329,8 @@ function formatTutorialFacets(meta, stepCount) {
 
 // --- Release notes ----------------------------------------------------------
 
+const RELEASE_NOTES_INDEX = 'release-notes/llms.txt'
+
 /**
  * A single dated section, newest first. Release notes live one per directory,
  * so the generic docs grouping would give each one its own heading.
@@ -257,10 +348,18 @@ function buildReleaseNotesGroup(pages, linkOptions) {
   })
 
   return {
-    label: 'Release notes',
+    label: 'Snowplow release notes',
     note: 'Changes to Snowplow components, newest first. Each note describes one release and is superseded by later ones for the same component.',
     entries,
   }
+}
+
+async function writeReleaseNotesIndex(outDir, group) {
+  const lines = [`# ${group.label}`, '', group.note, '', ...group.entries, '']
+  const outputPath = path.join(outDir, RELEASE_NOTES_INDEX)
+  await fs.mkdir(path.dirname(outputPath), { recursive: true })
+  await fs.writeFile(outputPath, lines.join('\n'), 'utf8')
+  console.log(`[llms-txt] Wrote ${RELEASE_NOTES_INDEX} (${group.entries.length} entries)`)
 }
 
 // --- Shared helpers ---------------------------------------------------------

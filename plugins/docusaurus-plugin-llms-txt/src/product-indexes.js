@@ -157,7 +157,7 @@ function sidebarGroups(docPages, outline, includeHidden, formatEntry) {
 export function buildProductRouter(siteUrl) {
   const lines = ['## Indexes by product', '']
   lines.push(
-    'Each index below lists the pages for one part of the docs, in the same format as this file. Fetch the one that matches your task instead of reading this whole file.'
+    'Each index below lists the pages for one part of the docs, as a list of links to the Markdown copy of each page. Fetch the one that matches your task instead of reading this whole file.'
   )
   lines.push('')
   for (const index of PRODUCT_INDEXES) {
@@ -174,7 +174,7 @@ export function buildProductRouter(siteUrl) {
  * @param {object[]} pages converted pages, in output order
  * @param {Map<string, string>} sidebarMap route to sidebar
  * @param {(pages: object[], meta: object) => {label: string, entries: string[], note?: string}[]} buildGroups
- *   builds the docs and tutorials groups for a subset of pages, as in llms.txt
+ *   builds the docs and tutorials groups for a subset of pages
  * @param {{ siteUrl: string, tutorialMeta: Map<string, object>,
  *   sidebarOutlines?: Map<string, object>,
  *   buildTutorialGroups?: (pages: object[]) => object[],

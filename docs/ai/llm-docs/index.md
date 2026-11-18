@@ -16,7 +16,18 @@ If your assistant is connected to the [Snowplow MCP server](/docs/ai/snowplow-mc
 
 This documentation follows the [`llms.txt` standard](https://llmstxt.org/), providing structured information to help an LLM use the site.
 
-An index is available at [`llms.txt`](pathname:///llms.txt).
+An index is available at [`llms.txt`](pathname:///llms.txt). To keep the file small, it lists the pages as a tree that follows the URL path, instead of a list of links. Each line has one path segment, the page title, and the page description, and is indented one space deeper than its parent:
+
+```text
+docs: Snowplow documentation. ...
+ sources: Snowplow sources overview. ...
+  web-trackers: Web tracker SDKs. ...
+   tracking-events: Track data out-of-the-box with the web trackers. ...
+```
+
+To get the URL of a page, join the segments from the top of the tree down to the page's line with `/`, put `https://docs.snowplow.io/` in front, and add `.md` at the end. The last line in the example is `https://docs.snowplow.io/docs/sources/web-trackers/tracking-events.md`. The file explains this to the LLM before the tree.
+
+Release notes have their own index at [`release-notes/llms.txt`](pathname:///release-notes/llms.txt), newest first.
 
 An extended version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of the current pages. For token efficiency, sections relating to older versions of components aren't included in this file. These sections are still listed in the `llms.txt` index, labeled as `[previous version]`.
 
@@ -24,7 +35,7 @@ The `llms-full.txt` file is very large. It might be more effective to access ind
 
 ### Product indexes
 
-The root `llms.txt` starts with instructions for agents and a list of smaller indexes, one for each part of the docs. An agent working on one product can fetch only the index it needs:
+The root `llms.txt` has a list of smaller indexes before the page tree, one for each part of the docs. An agent working on one product can fetch only the index it needs:
 
 | Index | Covers |
 | --- | --- |
@@ -33,7 +44,7 @@ The root `llms.txt` starts with instructions for agents and a list of smaller in
 | [`/docs/api-reference/llms.txt`](pathname:///docs/api-reference/llms.txt) | Reference: APIs, SDK and configuration reference, versions, and previous versions |
 | [`/docs/platform/llms.txt`](pathname:///docs/platform/llms.txt) | Pages shared by both products: fundamentals, AI, account management, and policies |
 
-Each index lists the same pages, in the same format, as the matching sections of the root `llms.txt`.
+Each index lists the same pages as the matching parts of the root `llms.txt`, as a list of links to the Markdown version of each page.
 
 ### Tell your agent about the indexes
 
@@ -57,4 +68,4 @@ Each tutorial is also available as a single Markdown file containing all of its 
 - Tutorial step: `https://docs.snowplow.io/tutorials/signals-interventions/start/`
 - Complete tutorial: `https://docs.snowplow.io/tutorials/signals-interventions.md`
 
-The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.
+The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index lists these files rather than individual steps, so an LLM retrieves a whole tutorial in one request.

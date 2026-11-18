@@ -2,6 +2,7 @@
   "title": "Manage tracking as code with Snowtype and Snowplow CLI",
   "label": "Data governance",
   "description": "Keep data structures and tracking plans in your application's repository, generate tracking code with Snowtype, and check and publish every change with Snowplow CLI and GitHub Actions.",
+  "date": "2026-11-18",
   "useCase": "Composable analytics",
   "technologies": ["GitHub Actions"],
   "snowplowTech": ["Snowplow CLI", "Snowtype"]

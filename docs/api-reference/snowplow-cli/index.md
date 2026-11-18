@@ -82,7 +82,7 @@ If an API key is configured, Snowplow CLI uses it instead of the saved login. Re
 :::
 
 :::note[For SSO-enabled Snowplow organizations]
-If SSO is enabled for your Snowplow organization, the browser sign-in that `login` and `setup` use doesn't work. [Use an API key](#use-an-api-key) that you create in Console instead.
+If SSO is enabled for your Snowplow organization and the sign-in page asks for a password instead of sending you to your identity provider, SSO isn't enabled for Snowplow CLI in your organization yet. Contact [Snowplow Support](https://support.snowplow.io/) to enable it, or [use an API key](#use-an-api-key) that you create in Console. This applies to both `login` and `setup`.
 :::
 
 ### Use an API key

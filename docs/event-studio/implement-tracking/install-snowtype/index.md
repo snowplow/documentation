@@ -88,7 +88,7 @@ npx snowtype logout
 This revokes the saved login and deletes the file, which also logs Snowplow CLI out. It doesn't affect API keys.
 
 :::note[For SSO-enabled Snowplow organizations]
-If SSO is enabled for your Snowplow organization, the browser sign-in that `login` uses doesn't work. [Use an API key](#use-an-api-key) instead.
+If SSO is enabled for your Snowplow organization and the sign-in page asks for a password instead of sending you to your identity provider, SSO isn't enabled for Snowtype in your organization yet. Contact [Snowplow Support](https://support.snowplow.io/) to enable it, or [use an API key](#use-an-api-key) instead.
 :::
 
 ### Use an API key

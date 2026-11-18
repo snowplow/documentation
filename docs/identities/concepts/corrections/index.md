@@ -8,7 +8,7 @@ keywords: ["identities", "identity resolution", "corrections", "late merge", "co
 content_type: concept
 ---
 
-A correction is a graph consistency change that Identities applies in the background in case the real-time processing missed it. Corrections are how Identities manages the quality of the identity graph, and they're rare. The correction that Identities applies is a late merge: a [merge](/docs/identities/concepts/merges/index.md) that real-time processing missed. Under normal operation, every merge happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A late-merge correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
+A correction is a graph consistency change that Identities applies in the background in case the real-time processing missed it. Corrections are how Identities manages the quality of the identity graph. A late merge correction can apply a [merge](/docs/identities/concepts/merges/index.md) that real-time processing missed. Under normal operation, every merge happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A late merge correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
 
 :::note[No action needed]
 Identities applies corrections automatically, so you don't need to trigger them. If your models map historical events to Snowplow IDs, handle correction events as described in [Recognize a correction in your warehouse](#recognize-a-correction-in-your-warehouse).
@@ -62,7 +62,7 @@ graph LR
 
 ## What a correction changes
 
-A late-merge correction applies the merge that real-time processing missed. It:
+A late merge correction applies the merge that real-time processing missed. It:
 
 * Uses the same rules as a real-time merge, so it merges the Snowplow IDs that share the identifier into the oldest of them
 * Respects the merge limit, which caps how many Snowplow IDs can merge into one, and [unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)

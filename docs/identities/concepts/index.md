@@ -112,7 +112,7 @@ To set it up, and to see the use cases it supports, such as anonymous to known a
 
 ## Data types
 
-Identities adds three data types to your enriched event stream: an identity entity attached to every resolved event, a merge event emitted when Snowplow IDs are combined, and a correction event emitted when a background correction changes the graph, such as merging Snowplow IDs that were left separate.
+Identities adds three data types to your enriched event stream: an identity entity attached to every resolved event, a merge event emitted when Snowplow IDs are combined, and a correction event emitted when a background correction changes the graph.
 
 ### Identity entity
 
@@ -149,7 +149,7 @@ The `merges` array contains **all** Snowplow IDs that have ever been merged into
 
 ### Correction events
 
-When a [correction](/docs/identities/concepts/corrections/index.md) changes the graph, such as merging Snowplow IDs that were left separate, Identities emits a correction event into the enriched event stream, as well as a merge event for any merge the correction made. The correction event carries the same `snowplow_id`, `created_at`, `merges`, and `merged` fields as a merge event, so downstream consumers can process both kinds of event in the same way. The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, which deduplicates the two.
+When a [correction](/docs/identities/concepts/corrections/index.md) changes the graph, Identities emits a correction event into the enriched event stream. For any merge the correction made, Identities also emits a merge event. The correction event carries the same `snowplow_id`, `created_at`, `merges`, and `merged` fields as a merge event, so downstream consumers can process both kinds of event in the same way. The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, which deduplicates the two.
 
 The `affected_snowplow_ids` array lists the Snowplow IDs this correction changed, while `merges` holds the full merge history of the surviving `snowplow_id`.
 

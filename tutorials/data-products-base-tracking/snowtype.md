@@ -3,7 +3,7 @@ position: 9
 title: Install Snowtype to enable code generation from tracking plans
 sidebar_label: Install Snowtype
 description: "Install and initialize Snowtype CLI to generate tracking APIs from event specifications. Automatically attach event_specification entities and enable event count features without additional implementation work."
-keywords: ["snowtype cli installation", "code generation tracking", "event specification api", "console api key setup"]
+keywords: ["snowtype cli installation", "code generation tracking", "event specification api", "snowtype login"]
 ---
 
 After defining your Event Specifications, the next step is implementing those events on your app. To do that you are going to use Snowtype to generate the required APIs for tracking the Event Specifications.
@@ -14,7 +14,7 @@ For some Event Specification features, such as event counts, it is required that
 
 ## Installing Snowtype
 
-After having set up a [Console API key](/docs/event-studio/implement-tracking/install-snowtype/#authenticate) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`.
+Install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`. Then run `npx snowtype login` to [log in to Console](/docs/event-studio/implement-tracking/install-snowtype/#authenticate).
 
 Since this is a project without previous Snowtype installation, we need to go through the [init flow](/docs/event-studio/implement-tracking/install-snowtype/#initialize-your-project).
 

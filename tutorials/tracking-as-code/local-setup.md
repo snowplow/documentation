@@ -206,7 +206,7 @@ snowplow-cli dp validate offline --base-ref develop
 
 A new event specification must start at `0`, and every later [structural change](/docs/api-reference/snowplow-cli/tracking-plans/#declare-event-specification-versions) must raise its version by one. When a version is wrong, the error names the event specification and the `--fix` command that writes the expected version.
 
-The credentials are optional on your machine. If you have them, for example from `snowplow-cli setup`, `snowplow-cli dp validate --fix` also checks against Console and writes the versions Console expects. Otherwise the pull request workflow runs that check for you, as described in [Check and publish with GitHub Actions](/tutorials/tracking-as-code/automate-with-github-actions).
+The credentials are optional on your machine. If you have them, for example from `snowplow-cli login`, `snowplow-cli dp validate --fix` also checks against Console and writes the versions Console expects. Otherwise the pull request workflow runs that check for you, as described in [Check and publish with GitHub Actions](/tutorials/tracking-as-code/automate-with-github-actions).
 
 Commit the files:
 

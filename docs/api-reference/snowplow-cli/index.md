@@ -48,35 +48,45 @@ snowplow-cli --help
 
 ## Configure
 
-### Automated Setup
+Commands that work with Console need to authenticate. There are two ways to do it:
 
-The easiest way to configure Snowplow CLI is using the built-in `setup` command:
+* [Log in with your browser](#log-in-with-your-browser): for interactive use, when you run Snowplow CLI yourself in a terminal. This is the default.
+* [Use an API key](#use-an-api-key): for non-interactive use, such as CI, where nobody can sign in.
+
+### Log in with your browser
+
+<AppliesTo feature="snowplow-cli-login" />
+
+Run the `login` command:
 
 ```bash
-snowplow-cli setup
+snowplow-cli login
 ```
 
-This command will:
-- Guide you through device authentication with Snowplow Console
-- Automatically create and configure your API credentials
-- Set up your organization ID
+The command opens the Console sign-in page in your browser. If you belong to more than one organization, it asks you to select one.
 
-**Prerequisites:** Your Snowplow Console account must have sufficient permissions to create API keys.
+After that, commands use this login when no API key is configured. They use the organization you selected at login, unless you set an organization ID in the configuration.
 
-You can also use optional flags:
-- `--read-only`: Create a read-only API key
-- `--dotenv`: Store configuration as .env file in current working directory
+[Snowtype](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) shares the same login, so you only need to log in with one of the two tools.
 
-:::note[For SSO-enabled Snowplow organizations]
-If SSO is enabled for your Snowplow organization, you will need to follow the [Manual Configuration](#manual-configuration) method instead.
+To log out, run:
+
+```bash
+snowplow-cli logout
+```
+
+This also logs Snowtype out. It doesn't affect API keys.
+
+:::note[API keys take precedence]
+If an API key is configured, Snowplow CLI uses it instead of the saved login. Remove the API key from your configuration to use the login. To see which one is in use, run [`snowplow-cli status`](#verify-the-configuration).
 :::
 
-### Manual Configuration
+### Use an API key
 
-If you prefer manual configuration, you will need these values:
+For non-interactive use, such as CI, configure an API key. You need these values:
 
-* An API Key ID and the corresponding API Key (secret), which you [create in Console](/docs/account-management/index.md#create-an-api-key).
-* Your Organization ID, which you can find [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
+* An API key ID and the corresponding API key (secret), which you [create in Console](/docs/account-management/index.md#create-an-api-key).
+* Your organization ID, which you can find [on the **Manage organization** page](https://console.snowplowanalytics.com/settings) in Console.
 
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
 
@@ -109,23 +119,35 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   </TabItem>
 </Tabs>
 
+The `setup` command can create the API key for you. It signs you in to Console in your browser, creates an API key, and saves it with your organization ID to the configuration file:
+
+```bash
+snowplow-cli setup
+```
+
+Your Console account must have permission to create API keys. The command takes these optional flags:
+- `--read-only`: create a read-only API key
+- `--dotenv`: store the configuration as a `.env` file in the current working directory
+
+### Set the output format
+
 Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`.
 
-### Verify Configuration
+### Verify the configuration
 
-After configuration, you can verify that everything is working correctly using the `status` command:
+To verify that everything works, run the `status` command:
 
 ```bash
 snowplow-cli status
 ```
 
 This command will:
-- Check that your API credentials are properly configured
+- Check that a login or API credentials are configured, and show which of the two is in use (`auth=login` or `auth=api-key`)
 - Verify connectivity to Snowplow Console
 - Confirm your organization access
 - Provide helpful troubleshooting information if issues are found
 
-If the status check fails, the command will suggest the next steps such as running `snowplow-cli setup` to reconfigure your credentials.
+If the status check fails, the command suggests the next steps, such as running `snowplow-cli login` again.
 
 ### Configure YAML language server (optional)
 

@@ -81,10 +81,6 @@ This revokes the saved login and deletes the file, which also logs Snowtype out.
 If an API key is configured, Snowplow CLI uses it instead of the saved login. Remove the API key from your configuration to use the login. To see which one is in use, run [`snowplow-cli status`](#verify-the-configuration).
 :::
 
-:::note[For SSO-enabled Snowplow organizations]
-If SSO is enabled for your Snowplow organization and the sign-in page asks for a password instead of sending you to your identity provider, SSO isn't enabled for Snowplow CLI in your organization yet. Contact [Snowplow Support](https://support.snowplow.io/) to enable it, or [use an API key](#use-an-api-key) that you create in Console. This applies to both `login` and `setup`.
-:::
-
 ### Use an API key
 
 For non-interactive use, such as CI, configure an API key. You need these values:

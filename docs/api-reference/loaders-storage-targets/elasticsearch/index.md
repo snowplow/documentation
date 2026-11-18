@@ -5,6 +5,7 @@ date: "2020-11-25"
 sidebar_position: 64
 description: "Load Snowplow enriched and bad events from a Kinesis stream into Elasticsearch or OpenSearch clusters."
 keywords: ["elasticsearch loader", "opensearch", "kinesis elasticsearch", "event search"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -16,7 +17,7 @@ If you are using [Enrich](/docs/api-reference/enrichment-components/index.md) to
 
 :::note
 
-We only offer this loader on AWS or as part of [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md).
+Snowplow offers this loader only on AWS.
 
 :::
 

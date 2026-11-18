@@ -4,16 +4,16 @@ sidebar_label: "Implement tracking"
 sidebar_position: 44
 description: "Generate and implement tracking code from your event specifications using Snowtype, Console code snippets, or manual SDK integration."
 keywords: ["tracking implementation", "code generation", "Snowtype", "tracking code", "SDK integration"]
+content_type: concept
 ---
 
 
 ```mdx-code-block
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Snowtype is available for Snowplow CDI customers only."
+  note="Snowtype is available for Snowplow CDI customers only."
 />
 ```
 

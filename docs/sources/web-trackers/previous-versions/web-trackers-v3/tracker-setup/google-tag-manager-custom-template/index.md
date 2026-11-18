@@ -1,5 +1,6 @@
 ---
 title: "Google Tag Manager"
+sidebar_label: "Google Tag Manager"
 date: "2020-08-10"
 sidebar_position: 3100
 description: "Documentation for Google Tag Manager in the web tracker."
@@ -8,9 +9,7 @@ keywords: ["tracker", "configuration"]
 
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TierBadge tier="actively-maintained" />
 ```
 
 Using the Snowplow GTM custom templates you can now deploy, implement, and configure the Snowplow JavaScript tracker directly on the website using Google Tag Manager.

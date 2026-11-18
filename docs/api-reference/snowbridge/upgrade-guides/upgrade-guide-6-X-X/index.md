@@ -6,6 +6,7 @@ date: "2026-07-15"
 sidebar_position: 600
 description: "Upgrade Snowbridge to version 6.X.X with breaking changes to HTTP target OAuth2 configuration, the hash transformation helper, and the Docker base image."
 keywords: ["snowbridge 6.x upgrade", "upgrade guide", "snowbridge migration", "version 6"]
+content_type: how-to
 ---
 
 ## Version 6.0.0 breaking changes
@@ -58,7 +59,7 @@ target {
 
 ### `hash` transformation helper
 
-The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md) returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
+The `hash` helper available in [custom scripts](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/index.md) and [jq transformations](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq/index.md) returns the digest of the chosen hash function, rather than a PBKDF2-derived key.
 
 **Output values change**, but no configuration change is required:
 

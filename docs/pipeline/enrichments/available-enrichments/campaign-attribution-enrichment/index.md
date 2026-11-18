@@ -4,6 +4,7 @@ sidebar_position: 4
 sidebar_label: Campaign attribution
 description: "Link events to marketing campaigns by extracting attribution data from query string parameters."
 keywords: ["campaign attribution", "marketing attribution", "UTM parameters"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

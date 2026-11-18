@@ -1,13 +1,14 @@
 ---
 title: "Monitor tracking plan data quality in Console"
-sidebar_label: "Data quality"
+sidebar_label: "Check volumes and violations"
 sidebar_position: 4
 description: "See how many events matched each tracking plan and event specification over the last 30 days, and how many of them were valid or inferred, had violations, or failed."
 keywords: ["tracking plan data quality", "event specification validation", "event volume", "events with violations", "failed events", "tracking summary", "Console"]
 date: "2026-09-17"
+content_type: how-to
 ---
 
-Console shows the results of [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) and [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) next to your tracking plans and event specifications. Every event volume figure is split into valid events, inferred events, events with violations, and failed events. You can see how well an implementation matches its specification without querying your warehouse.
+Console shows the results of [event specification inference](/docs/event-studio/tracking-plans/event-specification-inference/index.md) and [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) next to your tracking plans and event specifications. Every event volume figure is split into valid events, inferred events, events with violations, and failed events. You can see how well an implementation matches its specification without querying your warehouse. Use these metrics to confirm that implementations are live, identify unused specifications, and find implementation problems.
 
 Metrics cover the last 30 days for one pipeline at a time. Every view that shows them has a pipeline selector, which defaults to your production pipeline.
 
@@ -20,7 +21,7 @@ Console sorts every event that the pipeline matches to a published event specifi
 | Valid events           | Events that arrived with an `event_specification` entity and passed validation                                                                                                                                                                                                                                 |
 | Inferred events        | Events that the pipeline matched to the specification by inference. Inferred events are valid events too, but the pipeline doesn't validate them                                                                                                                                                              |
 | Events with violations | Events that arrived with an `event_specification` entity, failed validation, and were loaded to your warehouse with an `event_specification_validation` entity attached                                                                                                                                                                                       |
-| Failed events          | Events attributed to the specification that ended up in [failed events](/docs/fundamentals/failed-events/index.md). This includes events with schema violations, and events that failed validation in a tracking plan that [sends them to failed events](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events) |
+| Failed events          | Events attributed to the specification that ended up in [failed events](/docs/fundamentals/failed-events/index.md). This includes events with schema violations, and events that failed validation in a tracking plan that [sends them to failed events](#send-invalid-events-to-failed-events) |
 
 Only events that arrive with an `event_specification` entity go through validation, so only they can end up as valid events or events with violations. Tracking code generated with [Snowtype](/docs/event-studio/implement-tracking/index.md) attaches this entity for you. Events without it can only be matched by inference.
 
@@ -35,8 +36,6 @@ Open a tracking plan to see its **Data quality** panel. The chart shows the tota
 ![E-commerce Web tracking plan page with a Data quality panel showing a donut chart of 139.78k total events on the prod pipeline over the last 30 days, split into valid events, inferred events, events with violations, and failed events, above an event specifications table with a volume bar per specification](images/tracking-plan-data-quality.png)
 
 The event specifications table shows the same breakdown per event specification in its **Volume** column. The **Last seen** column shows the most recent event for the specification, whether it was valid or failed.
-
-The **Data quality rules** button in the page header controls whether events that fail validation count as events with violations or as failed events. See [Send invalid events to failed events](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events).
 
 ## Compare tracking plans and event specifications
 
@@ -61,3 +60,17 @@ Each row is one version of the specification that the pipeline saw events for in
 | Gray minus     | The app ID belongs to a source application of this version, but didn't send events in the last 30 days          |
 
 A yellow status usually means that an application tracks the event without being listed in the specification. Add its [source application](/docs/event-studio/source-applications/index.md) to the specification, or remove the tracking from that application.
+
+## Send invalid events to failed events
+
+Each tracking plan has a **Data quality rules** setting that controls where events that fail [event specification validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) go. In Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md#tracking-plans) on tracking plans to change this setting.
+
+The default is **Send to valid events and mark as violation**, which keeps those events with your enriched ones. Select **Send to failed events as validation error** to route them to [failed events](/docs/fundamentals/failed-events/index.md) instead, keeping events that don't conform to their specifications out of your warehouse `events` table.
+
+!["Data quality rules" dialog for a tracking plan, showing the options "Send to valid events and mark as violation" and "Send to failed events as validation error"](images/data-quality-rules-dialog.png)
+
+The **Data quality rules** setting applies to all event specifications in the tracking plan and all their versions. Changes take effect within a few minutes, with no new specification version to publish and no tracking code to redeploy.
+
+Events routed this way appear in failed events as enrichment failures from the event specification enrichment. They keep both the `event_specification` and `event_specification_validation` entities, so you can inspect why each event failed. In Console, they count as failed events rather than events with violations, as described in [Understand the event categories](#understand-the-event-categories).
+
+If the pipeline cannot find the specification an event declares, that event stays with your enriched events, even when the tracking plan sends invalid events to failed events.

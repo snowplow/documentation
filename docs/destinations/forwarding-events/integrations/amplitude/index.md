@@ -4,12 +4,15 @@ sidebar_label: "Amplitude"
 sidebar_position: 1
 description: "Send Snowplow events to Amplitude for product analytics and behavioral insights using the HTTP API v2 with support for event tracking and user properties."
 keywords: ["Amplitude", "product analytics", "behavioral insights", "HTTP API", "user properties", "event forwarding"]
+content_type: integration
 ---
 
 ```mdx-code-block
 import EventForwardingSchemaTable from '@site/src/components/EventForwardingSchemaTable';
 import amplitudeSchema from '@site/src/components/EventForwardingSchemaTable/Schemas/amplitude.json';
 ```
+
+<IntegrationBadges id="forwarder-amplitude" />
 
 Send Snowplow events to Amplitude to power product and marketing analytics or guide and survey personalization using Amplitude's [HTTP API v2](https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/).
 

@@ -4,6 +4,7 @@ sidebar_position: 1
 sidebar_label: "Creating alerts"
 description: "Configure email or Slack alerts for failed events with custom filters and thresholds in the data quality dashboard."
 keywords: ["failed event alerts setup", "data quality dashboard alerts", "Slack alert configuration"]
+content_type: how-to
 ---
 
 Set up failed event alerts to receive notifications when failed events occur in your data pipeline.

@@ -5,6 +5,7 @@ sidebar_label: "Fastly"
 description: "Track page views at the CDN level using Fastly real-time log streaming to capture visits from bots, AI agents, and other clients that don't run JavaScript."
 keywords: ["fastly tracking", "fastly log streaming", "fastly https logging", "cdn tracking", "ai agent tracking"]
 date: "2026-10-22"
+content_type: integration
 ---
 
 If your website is served through Fastly, you can stream request logs to Snowplow to capture page views from bots, AI agents, and other clients that don't execute JavaScript. Snowplow processes each log entry as a [page view event](/docs/fundamentals/events/index.md), which appears alongside your existing web analytics events.

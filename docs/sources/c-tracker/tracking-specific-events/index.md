@@ -5,6 +5,7 @@ description: "Track custom behavioral events using SelfDescribingEvent, Structur
 keywords: ["track events", "self-describing events", "structured events", "screen view events", "event context", "custom entities"]
 date: "2020-02-25"
 sidebar_position: 50
+content_type: how-to
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.

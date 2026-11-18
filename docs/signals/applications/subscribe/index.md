@@ -2,19 +2,29 @@
 title: "Subscribe to and receive interventions in your applications"
 sidebar_position: 30
 sidebar_label: "Subscribe to interventions"
-description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
-keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
+description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, iOS and Android trackers, or Signals API to receive intervention payloads."
+keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "mobile trackers", "intervention payload"]
+content_type: how-to
 ---
 
-Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+Subscribe to interventions to automatically respond within your application. You have four options for receiving interventions, depending on your use case or application:
 * [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
 * Plugin for the [browser tracker](/docs/sources/web-trackers/index.md)
+* The [iOS and Android trackers](/docs/sources/mobile-trackers/signals/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
-Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
+Subscription is by attribute key ID, not by individual intervention. What you need first depends on the option:
+* Python SDK: a client, created as described in [Connect to Signals](/docs/signals/connection/index.md#create-a-signals-client)
+* Browser plugin: your Signals API URL, from Console > **Signals** > **Overview**. It doesn't need an API key.
+* Signals API: a JWT, as described in [Connect to Signals](/docs/signals/connection/index.md#signals-api)
 
 :::note[Sent once]
-An intervention is sent only the first time the criteria are met. The [delivery example](#delivery-example) below shows how this works.
+An intervention is sent only the first time the criteria are met. The [delivery example](#delivery-example) shows how this works.
 :::
 
 The subscription endpoint (`api/v1/interventions`) is public: it doesn't perform authentication or authorization, just checks the requested attribute keys. Knowing an attribute key ID grants access to its interventions. This is why ID values must be non-enumerable, such as canonically formatted UUIDs, so that they can't be guessed.
@@ -53,6 +63,14 @@ subscription.stop()
 
 For web applications using the Snowplow [browser tracker](/docs/sources/web-trackers/index.md), you can subscribe to interventions using the [Signals browser plugin](https://www.npmjs.com/package/@snowplow/signals-browser-plugin).
 
+Install the browser tracker and the plugin:
+
+```bash
+npm i @snowplow/browser-tracker @snowplow/signals-browser-plugin
+```
+
+The tracker and the plugin run in the browser. In a server-rendered framework, initialize them in client-side code once the page has loaded.
+
 The workflow is:
 1. Create a Snowplow tracker with the plugin configured
 2. Add custom handlers to react to the interventions
@@ -61,7 +79,7 @@ The workflow is:
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';
 import {
-  SignalsInterventionsPlugin,
+  SignalsPlugin,
   addInterventionHandlers,
   subscribeToInterventions,
 } from '@snowplow/signals-browser-plugin';
@@ -69,13 +87,18 @@ import {
 // Install the Signals Intervention plugin
 newTracker('sp1', '{{collector_url}}', {
   appId: 'my-app-id',
-  plugins: [ SignalsInterventionsPlugin() ],
+  plugins: [ SignalsPlugin() ],
 });
 
 // Add custom handlers
 addInterventionHandlers({
   myHandler(intervention) {
-    console.log("intervention received!", intervention);
+    // Branch on the intervention name from the payload
+    if (intervention.name === "discount_offer") {
+      // Show the offer in your UI
+    } else {
+      console.log("intervention received!", intervention);
+    }
   },
 });
 
@@ -85,7 +108,9 @@ subscribeToInterventions({
 });
 ```
 
-By default, the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys.
+Set `endpoint` to your Signals API URL. You can give the hostname alone, as in the example, or the full URL: if there's no scheme, the plugin adds `https://`. The plugin appends `/api/v1/interventions` and keeps a server-sent events connection open to receive interventions. Use the `apiPath` option to change the path, and `connectionTimeoutMs` to change how long it waits for the connection, 2.5 seconds by default.
+
+By default, the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys, reading their values from the events the tracker sends.
 
 You can optionally configure the plugin for additional attribute keys. There are two options:
 * `attributeKeyTargets`: dynamically subscribe to attribute key IDs extracted from the tracker's generated events
@@ -107,6 +132,8 @@ subscribeToInterventions({
 
 The plugin will automatically disconnect/reconnect whenever the attribute key IDs change. The browser will close the connection on navigation away from the page.
 
+For an ecommerce app that reacts to interventions, see [Implement real-time interventions](/tutorials/signals-interventions/start).
+
 ### Intervention events
 
 The plugin generates Snowplow events to track interventions. The events include the intervention payload as a custom entity.
@@ -115,9 +142,71 @@ The plugin generates Snowplow events to track interventions. The events include 
 - [`iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
 - [`iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports failure (throws an error)
 
+## Subscribe with the mobile trackers
+
+For mobile apps using the Snowplow iOS or Android tracker, first add a `SignalsConfiguration` when [creating the tracker](/docs/sources/mobile-trackers/signals/index.md). Then add handlers to the tracker's Signals controller. Handlers are called on the main thread.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+tracker.signals.addInterventionHandler(id: "discount_banner") { intervention in
+    guard intervention.name == "offer_discount" else { return }
+    showDiscountBanner(attributes: intervention.attributes)
+}
+
+// A handler that throws reports a handling error
+tracker.signals.addInterventionHandler(id: "checkout_nudge") { intervention in
+    try showNudge(for: intervention)
+}
+
+tracker.signals.removeInterventionHandler(id: "discount_banner")
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+tracker.signals.addInterventionHandler("discount_banner") { intervention ->
+    if (intervention.name == "offer_discount") {
+        showDiscountBanner(intervention.attributes)
+    }
+}
+
+tracker.signals.removeInterventionHandler("discount_banner")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+tracker.getSignals().addInterventionHandler("discount_banner", intervention -> {
+    if (intervention.getName().equals("offer_discount")) {
+        showDiscountBanner(intervention.getAttributes());
+    }
+});
+
+tracker.getSignals().removeInterventionHandler("discount_banner");
+```
+
+  </TabItem>
+</Tabs>
+
+The tracker subscribes to interventions for the `client_session_user_id` and `client_session_session_id` [attribute keys](/docs/signals/attributes/attribute-keys/index.md), using the `userId` and `sessionId` from the session entity. Target these keys in your interventions to deliver them to your app.
+
+The subscription follows the app's state:
+* It's open only while at least one handler is registered, and starts once the tracker has tracked an event in the current session
+* It reconnects with the new identifiers when they change, for example when a new session starts
+* It closes when the app moves to the background, and reopens when it returns to the foreground
+* After a network error or a closed connection, it reconnects with an increasing delay, up to one minute
+
+The tracker doesn't subscribe when session tracking is disabled or user anonymization is enabled. On watchOS, interventions aren't supported.
+
+Like the browser plugin, the trackers track `intervention_receive` when an intervention arrives, and `intervention_handle` or `intervention_handle_error` for each handler, depending on whether the handler throws an error.
+
 ## Payload
 
-When delivered, interventions contain the following information:
+When delivered, interventions contain the following information. They don't carry custom content: the `attributes` are the latest values from the attribute groups you [selected to send](/docs/signals/interventions/index.md#target-and-payload) with the intervention.
 
 | Field                       | Description                                                             | Type      |
 | --------------------------- | ----------------------------------------------------------------------- | --------- |
@@ -185,9 +274,3 @@ Assuming it's the user's first session, the flow looks like this:
 This user has already seen more than 10 pages, so `intervention1` can never be triggered by that rule for them. However, if their current session expires, and the application subscribes to their new `domain_sessionid` ID, `intervention1` can be triggered again by the first ad event of the session.
 
 Likewise, the user has already clicked a button more than 20 times, so `intervention2` will never be sent to them again.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

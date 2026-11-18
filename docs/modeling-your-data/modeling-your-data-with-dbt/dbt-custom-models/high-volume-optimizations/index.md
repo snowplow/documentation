@@ -4,6 +4,7 @@ sidebar_label: "High volume optimizations"
 description: "Optimize Snowplow dbt packages for high-volume data processing with reduced columns, ephemeral models, and tuned incremental logic."
 keywords: ["high volume optimization", "dbt performance", "columnar warehouse optimization", "events this run optimization"]
 sidebar_position: 20
+content_type: how-to
 ---
 
 For users with very high data volumes (>100M daily events) you may find that, even with our [optimized upserts](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md) and [incremental sessionization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), the package is still slow in any given run or the processing cost is high. There are a few specific things you can do to help optimize the package even further, which require various levels of effort on your part. In general we have taken the decision to not do these things as part of the "normal" deployment of our packages as there is a trade-off for each one and in the vast majority of use cases they aren't required.

@@ -5,6 +5,7 @@ date: "2022-04-05"
 sidebar_position: 500
 description: "Configure RDB Loader for Redshift, Snowflake, and Databricks with storage, messaging, scheduling, and monitoring settings."
 keywords: ["rdb loader config", "redshift config", "snowflake config", "databricks config", "loader settings"]
+content_type: reference
 ---
 
 The configuration reference in this page is written for RDB Loader 5.0.0 or higher.

@@ -4,6 +4,7 @@ sidebar_label: "Package mechanics"
 description: "Key mechanics of our packages"
 keywords: ["package mechanics", "dbt package logic", "incremental processing", "package internals"]
 sidebar_position: 70
+content_type: landing
 ---
 
 The following pages contain information relating to the core logic and processing of our packages, it is not required to understand these concepts to make use of our packages but they are provided for more advanced users who may wish to produce more complex [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) or better understand what's going on under the hood of the packages. We refer to these elements throughout the docs.

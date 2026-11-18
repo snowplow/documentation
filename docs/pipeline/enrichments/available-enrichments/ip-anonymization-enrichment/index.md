@@ -4,6 +4,7 @@ sidebar_position: 16
 sidebar_label: IP anonymization
 description: "Anonymize IP addresses by masking octets or segments to protect user privacy and comply with regulations."
 keywords: ["IP anonymization", "GDPR compliance", "privacy protection"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

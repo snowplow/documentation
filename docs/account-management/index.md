@@ -1,10 +1,11 @@
 ---
-title: "Manage your Snowplow account using the Credentials API"
+title: "Create API keys and access tokens"
 sidebar_label: "Account management"
 date: "2020-02-15"
 sidebar_position: 8.7
 description: "Manage your Snowplow account configuration, users, and API keys through Console, including instructions for obtaining JWT tokens via the Credentials API."
 keywords: ["account management", "Credentials API", "API keys", "scoped API keys", "JWT authentication", "Console API"]
+content_type: how-to
 ---
 
 You can control Snowplow Console (e.g., to automate certain actions) through its [API](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml). To use this API, you need to first obtain an API token.

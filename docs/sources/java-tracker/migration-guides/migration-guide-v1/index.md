@@ -5,6 +5,7 @@ date: "2022-03-24"
 sidebar_position: 90
 description: "Migration guide for upgrading the Java tracker from version 0.12 to 1.0 with API improvements and configuration changes."
 keywords: ["java tracker v1", "version upgrade 1.0"]
+content_type: how-to
 ---
 
 We've made multiple improvements to the API, and to the configuration, for Java tracker v1. See the [Github changelog](https://github.com/snowplow/snowplow-java-tracker/releases/tag/1.0.0) for full details. See below for a guide to the changes.

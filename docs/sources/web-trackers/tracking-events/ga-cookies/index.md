@@ -4,6 +4,7 @@ sidebar_label: "GA cookies"
 sidebar_position: 130
 description: "Automatically capture Google Analytics cookie values including GA4 and Universal Analytics cookies as context entities on every event."
 keywords: ["google analytics", "cookies"]
+content_type: how-to
 ---
 
 ```mdx-code-block

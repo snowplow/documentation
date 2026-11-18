@@ -1,5 +1,6 @@
 ---
 title: "Generic timing"
+sidebar_label: "Generic timing"
 sidebar_position: 98
 description: "Documentation for Generic timing in the web tracker."
 keywords: ["tracker", "configuration"]

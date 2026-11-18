@@ -4,6 +4,7 @@ sidebar_label: "Vimeo"
 sidebar_position: 15
 description: "Automatically track Vimeo video players embedded via iframe or Vimeo Player SDK with comprehensive playback and interaction events."
 keywords: ["vimeo", "video tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

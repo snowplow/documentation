@@ -5,6 +5,7 @@ date: "2022-03-24"
 sidebar_position: 60
 description: "Understand the structure of enriched Java tracker events with example JSON payloads for different event types."
 keywords: ["event structure", "event payload", "enriched events"]
+content_type: reference
 ---
 
 See [Tracking events](/docs/sources/java-tracker/tracking-events/index.md) to learn how to track events with the Java tracker.

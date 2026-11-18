@@ -4,13 +4,11 @@ sidebar_label: "App errors"
 description: "App errors module for the legacy Mobile dbt package. Superseded by the Unified Digital App errors module."
 keywords: ["mobile app errors", "legacy app errors", "mobile error tracking"]
 sidebar_position: 100
+content_type: reference
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-```
 
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+<VersionBadge component="dbtSnowplowMobile" />
 
 Exception tracking captures any unhandled exceptions within the application. The exception tracking is enabled by default, and it allows the tracker to intercept critical exceptions in the app. Exceptions can crash the app so it's likely that the event will be sent after the restart of the app. Being a critical situation we can't be 100% sure that all the exception stacktraces are reliably stored for sending before the crash of the app.
 

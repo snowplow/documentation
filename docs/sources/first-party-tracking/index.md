@@ -7,6 +7,7 @@ sidebar_custom_props:
   hidden: true
 description: "Configure a custom collector domain matching your primary domain to enable first-party cookies and bypass browser tracking limitations."
 keywords: ["first-party tracking", "custom collector domain", "cookie domain configuration"]
+content_type: how-to
 ---
 
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.

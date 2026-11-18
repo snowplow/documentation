@@ -5,6 +5,7 @@ date: "2020-07-22"
 sidebar_position: 30
 description: "Define and encode recovery configuration, then deploy recovery jobs using Spark, Flink, or Beam runtimes."
 keywords: ["run recovery job", "deploy event recovery"]
+content_type: how-to
 ---
 
 Now that we've discussed configuring the recovery, let's dive in to running it on your pipeline.

@@ -4,6 +4,7 @@ sidebar_position: 2
 description: "The guide to running data models in Snowplow."
 keywords: ["running data models", "Snowplow Console", "dbt execution", "model scheduling"]
 sidebar_label: "Running data models"
+content_type: how-to
 ---
 
 You can use [Snowplow Console](https://console.snowplowanalytics.com) to schedule and run [dbt](https://www.getdbt.com/) data models, including our [out-of-the-box models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), [automatically generated models](/docs/modeling-your-data/automatically-generated-data-models/index.md), and any custom or third party models.

@@ -4,6 +4,7 @@ sidebar_label: "Testing and debugging"
 sidebar_position: 800
 description: "Test and debug Google Tag Manager Server Side tag configurations using Preview Mode before deploying to production environments."
 keywords: ["GTM SS debugging", "Preview Mode", "tag testing", "GTM SS preview"]
+content_type: how-to
 ---
 
 If you are working on some changes to the configuration of your Google Tag Manager tags and would like to test them before applying them in production, you can use GTM’s [Preview Mode](https://developers.google.com/tag-platform/tag-manager/server-side/debug) feature. It shows information about the events it receives, which tags get triggered, etc.
@@ -12,7 +13,7 @@ You can direct some (or all) of your Snowplow events to the Preview Mode, instea
 
 :::note[Snowbridge 2.3+]
 
-To follow the steps below, you will need to be running [Snowbridge](/docs/api-reference/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/api-reference/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow customers using Snowbridge with GTM Server Side).
+To follow the steps below, you will need to be running [Snowbridge](/docs/api-reference/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/api-reference/snowbridge/configuration/transformations/builtin/spGtmssPreview/index.md) activated (this is the default for Snowplow customers using Snowbridge with GTM Server Side).
 
 :::
 

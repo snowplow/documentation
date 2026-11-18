@@ -5,6 +5,7 @@ sidebar_position: 10
 description: "Send Snowplow events to a Collector from the command line with the Snowplow CLI events send command. Useful for sending a test event, verifying a pipeline, or adding tracking to shell scripts and terminal sessions without writing tracker code."
 keywords: ["send events", "send test event", "send event from command line", "send event to collector", "Snowplow CLI events send", "command line tracking"]
 date: "2026-06-09"
+content_type: how-to
 ---
 
 The `events` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) sends events to a Snowplow Collector from the command line. Use it to embed Snowplow tracking into your shell scripts and terminal sessions, or to send a quick test event while validating a pipeline.

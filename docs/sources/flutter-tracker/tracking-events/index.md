@@ -5,6 +5,7 @@ date: "2022-01-31"
 sidebar_position: 3000
 description: "Track events in Flutter using SelfDescribing, Structured, ScreenView, Timing, and Consent events. Enable auto-tracking of page views with SnowplowObserver or manually track custom events with schemas."
 keywords: ["flutter events", "self-describing events", "screen view tracking", "auto-tracking", "snowplow observer"]
+content_type: how-to
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
@@ -174,6 +175,47 @@ tracker.track(ScreenView(
     type: 'full',
     transitionType: 'none'));
 ```
+
+### Keep the screen an event was triggered on
+
+<AppliesTo feature="screen-context-from-event-flutter" />
+
+On iOS and Android, the tracker adds the current screen to each event when the event reaches the native tracker, not when the user acted. If your app tracks an event after async work, the user may have moved to another screen in the meantime, and the event gets the new screen. If you capture the screen yourself and attach it as a [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity), the event ends up with two screen entities.
+
+Enable `screenContextFromEvent` in `TrackerConfiguration` to fix this. With the option on, an event that you track with your own `iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-x-x` entity keeps that entity, and the tracker doesn't add the current screen. Events without their own screen entity still get the current screen.
+
+The option is off by default and only applies when `screenContext` is enabled. It follows these rules:
+
+- Only entities passed in `contexts` count: a screen entity added by [global contexts](/docs/sources/flutter-tracker/adding-data/global-context/index.md) or plugins doesn't stop the tracker from adding the current screen
+- Screen view and screen end events always get the screen they describe
+- The option is mobile only: on Web, the tracker ignores it
+
+This example captures the screen when the user taps a button, and attaches it to an event tracked after async work:
+
+```dart
+SnowplowTracker tracker = await Snowplow.createTracker(
+    namespace: 'ns1',
+    endpoint: 'http://your-collector-endpoint.com',
+    trackerConfig: const TrackerConfiguration(screenContextFromEvent: true));
+
+// Track the screen view and keep its ID
+final screenId = const Uuid().v4(); // from the uuid package
+await tracker.track(ScreenView(id: screenId, name: 'product_detail'));
+
+// When the user taps, capture the screen they're on
+Future<void> onAddToCart() async {
+  final screen = SelfDescribing(
+      schema: 'iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-0-0',
+      data: {'id': screenId, 'name': 'product_detail'});
+
+  await addToCart(product); // the user may navigate away in the meantime
+
+  await tracker.track(const Structured(category: 'cart', action: 'add'),
+      contexts: [screen]);
+}
+```
+
+The `id` must match the `id` of the screen view event that you tracked for the screen.
 
 ### Screen engagement tracking
 

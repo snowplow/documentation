@@ -4,6 +4,7 @@ sidebar_label: "Full or partial refreshes"
 sidebar_position: 20
 description: "Perform full or partial refreshes of Snowplow dbt package models to reprocess data or fix issues."
 keywords: ["dbt refresh", "full refresh", "partial refresh", "reprocess data"]
+content_type: how-to
 ---
 
 ```mdx-code-block

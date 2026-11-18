@@ -4,13 +4,13 @@ sidebar_label: "Data structures"
 sidebar_position: 20
 description: "Use the Snowplow CLI data-structures command to generate, download, validate, and publish data structures with git-ops workflows and JSON Schema validation."
 keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
+content_type: how-to
 ---
 
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc']}
-  helpContent="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
+  note="Managing data structures and tracking plans requires a Snowplow CDI (Console) account."
 />
 
 The `data-structures` subcommand of [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
@@ -62,6 +62,13 @@ This command will find all files under `./folder-name` (if omitted then `./data-
 3. Given the organization's [loading configuration](/docs/destinations/warehouses-lakes/index.md) will any schema version number choices have a potentially negative effect on data loading
 
 If any validations fail the command will report the problems to stdout and exit with status code 1.
+
+The command also fails when a file skips a version of a data structure that's deployed in Console. For example, a file that moves from `1-0-0` to `1-2-0` while Console holds `1-0-0` fails with `Version 1-1-? not deployed. Cannot skip versions`, and `ds publish` fails with the same error. To find the file, look at the `will update` line before the error: it names the file, its local version and the version deployed in Console. To fix it, set the version in the file to the next version after the deployed one, here `1-1-0`.
+
+```text
+4:25PM INFO will update file=data-structures/com.example/plan.yaml local=1-2-0 remote=1-0-0
+4:25PM ERRO validation failed: Version 1-1-? not deployed. Cannot skip versions
+```
 
 
 ### Publishing data structures

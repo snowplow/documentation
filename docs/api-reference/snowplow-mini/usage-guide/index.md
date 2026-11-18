@@ -5,7 +5,12 @@ date: "2021-05-11"
 sidebar_position: 3
 description: "Learn how to use Snowplow Mini for testing, debugging trackers, and exploring Snowplow features."
 keywords: ["snowplow mini", "usage guide", "testing", "debugging", "mini dashboard"]
+content_type: how-to
 ---
+
+import SunsetCallout from "/docs/reusable/snowplow-mini-sunset/_callout.md"
+
+<SunsetCallout />
 
 ## Overview
 

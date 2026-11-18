@@ -12,7 +12,7 @@ You can manage [Signals](/docs/signals/introduction/) by describing what you wan
 * The [Snowplow Assistant](/docs/ai/console-agent/) built into Snowplow Console, where there's nothing to install
 * The [Snowplow MCP server](/docs/ai/snowplow-mcp/), which connects the AI assistant you already work in to your Snowplow account
 
-The prompts are the same either way. In this tutorial you'll build the same attribute group as the [Signals quick start](/tutorials/signals-quickstart/start), conversationally instead of through the Console UI. You'll:
+The prompts are the same either way. In this tutorial you'll build the same attribute group as the [Signals quick start](/docs/signals/get-started/quickstart-tutorial/), conversationally instead of through the Console UI. You'll:
 
 * Open the Snowplow Assistant in Console, or connect the MCP server to your own assistant
 * Define a stream attribute group that calculates three session metrics from page view events

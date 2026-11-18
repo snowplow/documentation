@@ -4,6 +4,7 @@ sidebar_position: 1
 sidebar_label: "Failed event alerts"
 description: "Automatically notify via email or Slack when validation errors, resolution errors, or data quality issues occur in your pipeline."
 keywords: ["failed event alerts", "warehouse alerts", "Slack notifications", "validation error alerts"]
+content_type: concept
 ---
 
 Failed event alerts automatically notify you when [failed events](/docs/fundamentals/failed-events/index.md) occur in your data pipeline. Set up alerts to receive notifications via email or Slack when validation errors, resolution errors, or other data quality issues arise.

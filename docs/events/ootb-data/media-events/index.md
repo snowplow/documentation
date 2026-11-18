@@ -4,6 +4,7 @@ sidebar_label: "Media playback"
 sidebar_position: 100
 description: "Track video and audio playback with media player events covering playback, buffering, quality changes, and ad tracking."
 keywords: ["media tracking", "video playback", "audio playback", "media events", "ad tracking"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

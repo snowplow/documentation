@@ -4,6 +4,7 @@ sidebar_position: 25
 sidebar_label: "Agentic contexts"
 description: "Fetch an agentic context from Snowplow Signals as structured JSON or a plain-language narrative to ground your agents in real-time user activity."
 keywords: ["agentic context", "event log", "llm context", "signals python sdk", "signals node sdk"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -134,8 +135,4 @@ seconds_since_start_of_session, event, url, event_context
 [END CONTEXT]
 ```
 
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```
+To build an agent that uses Signals context, follow the [Vercel AI SDK agent tutorial](/tutorials/signals-ai-agent-context/introduction), the [Google ADK agent tutorial](/tutorials/signals-google-adk-agent/introduction), or the [AWS Bedrock AgentCore accelerator](/tutorials/signals-agentic-accelerator/intro). The Vercel AI SDK and Google ADK tutorials read attributes through a service rather than an agentic context.

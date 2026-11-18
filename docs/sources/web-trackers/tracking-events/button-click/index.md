@@ -4,6 +4,7 @@ sidebar_label: "Button clicks"
 sidebar_position: 50
 description: "Automatically track clicks on button elements and input buttons with configurable filtering and custom context entities."
 keywords: ["button tracking", "click events"]
+content_type: how-to
 ---
 
 ```mdx-code-block

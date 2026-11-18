@@ -5,6 +5,7 @@ date: "2025-01-20"
 sidebar_position: 10
 description: "Migrate from Google Analytics to Snowplow, including data layer implementations with Google Tag Manager."
 keywords: ["google analytics", "ga4", "migration", "data layer", "gtm", "google tag manager"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

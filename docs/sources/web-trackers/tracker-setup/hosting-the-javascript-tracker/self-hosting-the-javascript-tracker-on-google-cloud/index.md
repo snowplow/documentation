@@ -5,6 +5,7 @@ description: "Host sp.js on Google Cloud Storage with CDN for reliable tracker d
 keywords: ["gcp hosting", "google cloud storage", "cloud cdn", "google cloud"]
 date: "2020-04-28"
 sidebar_position: 200
+content_type: how-to
 ---
 
 ## Pre-requisites

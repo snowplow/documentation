@@ -5,6 +5,7 @@ description: "Self-host sp.js on your own domain for better security, performanc
 keywords: ["self-hosting", "sp.js hosting", "tracker deployment", "javascript hosting"]
 date: "2021-03-24"
 sidebar_position: 3200
+content_type: landing
 ---
 
 We recommend self-hosting the Snowplow JavaScript tracker, `sp.js`, as it has some definite advantages over using a third-party-hosted JavaScript:

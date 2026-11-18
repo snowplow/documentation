@@ -30,10 +30,10 @@ def _get_signals_client() -> Optional[Signals]:
     if _signals_client is not None:
         return _signals_client
 
-    api_url = os.getenv("SNOWPLOW_SIGNALS_BASE_URL")
-    api_key = os.getenv("SNOWPLOW_SIGNALS_API_KEY")
-    api_key_id = os.getenv("SNOWPLOW_SIGNALS_API_KEY_ID")
-    org_id = os.getenv("SNOWPLOW_SIGNALS_ORG_ID")
+    api_url = os.getenv("SIGNALS_API_URL")
+    api_key = os.getenv("SNOWPLOW_API_KEY")
+    api_key_id = os.getenv("SNOWPLOW_API_KEY_ID")
+    org_id = os.getenv("SNOWPLOW_ORG_ID")
 
     if not all([api_url, api_key, api_key_id, org_id]):
         return None

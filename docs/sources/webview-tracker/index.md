@@ -5,16 +5,18 @@ date: "2020-02-26"
 sidebar_position: 137
 description: "Track events from web views in mobile hybrid apps by forwarding events to native iOS, Android, or React Native trackers with shared session data."
 keywords: ["webview tracker", "hybrid app tracking", "mobile webview events"]
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 
-<Badges badgeType="Early Release"></Badges>
+<TrackerTier id="webview" />
 ```
+
+<TrackerFeatures id="webview" />
 
 <p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>
 

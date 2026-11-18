@@ -5,6 +5,7 @@ sidebar_position: 1
 description: "Snowplow Micro REST API endpoints for querying events."
 keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 date: "2026-05-22"
+content_type: reference
 ---
 
 

@@ -4,6 +4,8 @@ sidebar_label: "Services"
 sidebar_position: 10
 description: "Services group multiple versioned attribute groups into stable consumption interfaces for applications. Create and manage services to control which attribute versions your applications use."
 keywords: ["services", "attribute group versioning", "stable interfaces", "python sdk services", "service configuration"]
+content_type: how-to
+pagination_prev: signals/publish/index
 ---
 
 ```mdx-code-block
@@ -12,6 +14,10 @@ import TabItem from '@theme/TabItem';
 ```
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications. They provide a stable interface for [retrieving attributes](/docs/signals/applications/retrieve-attributes/index.md): we strongly recommend using services in production applications.
+
+The Node.js SDK reads services but can't create them. Use Console or the Python SDK to define services.
+
+A service can include both stream attribute groups and [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md). If they use the same attribute key, one request to the service returns the real-time and warehouse attributes for that user together.
 
 <Tabs groupId="signals-impl" queryString>
 <TabItem value="console" label="Console" default>
@@ -57,7 +63,7 @@ my_service = Service(
 )
 ```
 
-The table below lists all available arguments for a `Service`:
+This table lists all available arguments for a `Service`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -65,6 +71,7 @@ The table below lists all available arguments for a `Service`:
 | `description` | A description of the service | `string` | ❌ |
 | `owner` | The owner of the service | `string` | ✅ |
 | `attribute_groups` | List of attribute groups with optional version specification | list of `AttributeGroup` or dict | ❌ |
+| `access_mode` | Who can read the service: `authenticated` (the default) or `public`. See [Control who can read a service](#control-who-can-read-a-service) | `string` | ❌ |
 
 </TabItem>
 </Tabs>
@@ -88,6 +95,55 @@ Specify the version of each attribute group in the `attribute_groups` list using
 </TabItem>
 </Tabs>
 
+## Control who can read a service
+
+Each service has an access mode that decides who can read its attributes:
+
+* `authenticated`: reading the service requires a Snowplow API token, so only your own backend can read it. This is the default.
+* `public`: websites and apps can also read the service directly, without a token, for one identifier at a time. See [Read attributes from websites and apps](/docs/signals/applications/public-services/index.md).
+
+Use a public service when you want to personalize a page or screen with the current user's attributes, without building a backend to hold the API token and proxy the request.
+
+:::warning[Public services expose their attributes]
+Anyone who has an identifier, such as a user's `domain_userid`, can read that user's attributes from a public service. Every attribute group in the service is exposed. Only make a service public if all of its attributes are safe to show to the user they describe, and are keyed by an identifier the browser or device already holds, such as `domain_userid` or `client_session_user_id`. Don't include personal or sensitive data in a public service.
+:::
+
+Signals only answers public reads for identifiers in UUID format, which can't be guessed or enumerated. A public service can still be read with an API token, in the same way as any other service.
+
+<Tabs groupId="signals-impl" queryString>
+<TabItem value="console" label="Console" default>
+
+Choose the access mode in the **Access** section of the service form: **Private** or **Public**. Choosing **Public** opens a confirmation dialog that describes what becomes readable. Click **Make public** to confirm.
+
+Public services show a **Public** badge in the services list and on the service details page. In the attribute groups tables, the badge also marks every attribute group that's part of a public service.
+
+</TabItem>
+<TabItem value="sdk" label="Python SDK">
+
+Set `access_mode` to `public` when defining the service. This needs version 0.4.13 or later of the Python SDK.
+
+```python
+from snowplow_signals import Service
+
+my_public_service = Service(
+    name='my_public_service',
+    owner="user@company.com",
+    attribute_groups=[
+        {"name": "page_engagement", "version": 1},
+    ],
+    access_mode="public",
+)
+
+sp_signals.publish([my_public_service])
+```
+
+To make a public service private again, publish it with `access_mode="authenticated"`.
+
+</TabItem>
+</Tabs>
+
+Changes to the access mode take effect within a few seconds of publishing the service.
+
 ## Manage services
 
 <Tabs groupId="signals-impl" queryString>
@@ -107,10 +163,17 @@ To delete a service, go to the service details page and click the `⋮` button, 
 Use `publish()` to register services with Signals.
 
 ```python
+import os
 from snowplow_signals import Signals
 
-sp_signals = Signals({{ config }})
+sp_signals = Signals(
+    api_url=os.environ["SIGNALS_API_URL"],
+    api_key=os.environ["SNOWPLOW_API_KEY"],
+    api_key_id=os.environ["SNOWPLOW_API_KEY_ID"],
+    org_id=os.environ["SNOWPLOW_ORG_ID"],
+)
 
+# my_service and my_other_service: services defined as in Create a service
 sp_signals.publish([
     my_service,
     my_other_service,
@@ -119,9 +182,3 @@ sp_signals.publish([
 
 </TabItem>
 </Tabs>
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

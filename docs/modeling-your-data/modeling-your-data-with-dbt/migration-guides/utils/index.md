@@ -4,6 +4,7 @@ sidebar_label: "Utils"
 sidebar_position: 50
 description: "Migration guide for upgrading the Snowplow Utils dbt package including breaking changes and configuration updates."
 keywords: ["utils migration", "utils upgrade", "dbt utils version"]
+content_type: how-to
 ---
 
 ### Upgrading to 1.0.0

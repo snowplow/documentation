@@ -1,5 +1,6 @@
 ---
 title: "Optional timestamp argument"
+sidebar_label: "Optional timestamp argument"
 date: "2021-03-24"
 sidebar_position: -10
 description: "Documentation for Optional timestamp argument in the web tracker."

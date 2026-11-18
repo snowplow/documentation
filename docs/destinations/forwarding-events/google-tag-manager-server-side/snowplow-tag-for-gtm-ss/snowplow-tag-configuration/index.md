@@ -5,6 +5,7 @@ date: "2021-11-24"
 sidebar_position: 100
 description: "Configure collector URL, cookie settings, advanced event settings, and logging for the Snowplow Tag in GTM Server Side."
 keywords: ["Snowplow Tag configuration", "collector settings", "cookie configuration", "event forwarding"]
+content_type: reference
 ---
 
 ## Collector URL (Required)

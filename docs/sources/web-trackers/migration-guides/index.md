@@ -5,6 +5,7 @@ description: "Upgrade to newer versions of the web trackers with step-by-step mi
 keywords: ["migration", "upgrade guide", "breaking changes"]
 date: "2021-04-12"
 sidebar_position: 4800
+content_type: landing
 ---
 
 This section contains information to help you upgrade to newer versions of the web trackers.

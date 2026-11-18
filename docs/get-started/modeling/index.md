@@ -4,6 +4,7 @@ sidebar_position: 7
 sidebar_label: "Run a data model"
 description: "Using a data model to aggregate your data"
 keywords: ["data modeling", "dbt", "Unified Digital model", "data aggregation"]
+content_type: tutorial
 ---
 
 

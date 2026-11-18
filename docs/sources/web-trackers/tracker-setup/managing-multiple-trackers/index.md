@@ -5,6 +5,7 @@ description: "Run multiple tracker instances to send events to different collect
 keywords: ["multiple trackers", "tracker namespaces", "multi-collector tracking"]
 date: "2021-03-31"
 sidebar_position: 4000
+content_type: how-to
 ---
 
 ```mdx-code-block

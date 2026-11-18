@@ -4,6 +4,7 @@ sidebar_label: "Platform and application data"
 sidebar_position: 10
 description: "Track platform context with device information and application context with app version and build using the React Native tracker."
 keywords: ["react native platform context", "device information", "app version tracking"]
+content_type: how-to
 ---
 
 

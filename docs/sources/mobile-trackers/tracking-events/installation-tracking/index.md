@@ -4,6 +4,7 @@ sidebar_label: "Installs"
 sidebar_position: 60
 description: "Track first-time app installations and capture referrer information from Google Play Store for Android apps."
 keywords: ["install tracking", "app installation", "google play referrer"]
+content_type: how-to
 ---
 
 ```mdx-code-block

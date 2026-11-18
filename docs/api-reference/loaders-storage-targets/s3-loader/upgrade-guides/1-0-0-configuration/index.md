@@ -5,6 +5,7 @@ date: "2021-07-16"
 sidebar_position: 12
 description: "Configure S3 Loader 1.0.0 with HOCON settings for Kinesis or NSQ streams, compression, buffering, and monitoring."
 keywords: ["s3 loader 1.0 config", "kinesis configuration", "nsq configuration", "lzo compression", "s3 settings"]
+content_type: reference
 ---
 
 The sink is configured using a HOCON file. These are the fields:

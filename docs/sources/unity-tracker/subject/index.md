@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 60
 description: "Configure subject properties including user ID, screen resolution, viewport, timezone, and language to attach user context to all tracked events."
 keywords: ["unity subject configuration", "unity user context", "unity tracker user properties"]
+content_type: reference
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.

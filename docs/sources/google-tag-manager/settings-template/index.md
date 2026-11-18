@@ -4,6 +4,7 @@ sidebar_label: "Settings template"
 sidebar_position: 500
 description: "Configure the Snowplow Settings Variable template for GTM with tracker options, collector endpoints, privacy settings, cookies, dispatching methods, and predefined context entities for consistent tracking configuration."
 keywords: ["gtm settings variable", "tracker configuration", "collector endpoint", "privacy settings", "cookie configuration"]
+content_type: reference
 ---
 
 This page describes the settings available in the Snowplow Settings Variable template for Google Tag Manager.
@@ -188,5 +189,5 @@ Available predefined contexts are:
 | `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                       |
 | `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/web-trackers/tracking-events/client-hints/index.md)                                 |
 | `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                              |
-| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity)                               |
+| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/identifiers/index.md#session-entity)                               |
 | `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/web-trackers/tracking-events/timings/index.md)                            |

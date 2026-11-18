@@ -4,6 +4,7 @@ sidebar_label: "Mobile"
 sidebar_position: 910
 description: "Migration guide for upgrading the legacy Snowplow Mobile dbt package including breaking changes and configuration updates."
 keywords: ["mobile migration", "mobile upgrade", "legacy mobile package"]
+content_type: how-to
 ---
 
 This is a legacy package.

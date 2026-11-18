@@ -4,14 +4,13 @@ sidebar_label: "Event forwarding"
 sidebar_position: 2
 description: "Send Snowplow events to third-party platforms in real-time using Snowplow's managed event forwarding solution with built-in filtering, field mapping, and JavaScript transformations."
 keywords: ["event forwarding", "real-time delivery", "Snowbridge", "event transformations", "destination APIs"]
+content_type: concept
 ---
 
 ```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
-
-<AvailabilityBadges
+<Availability
   available={['cloud', 'pmc', 'addon']}
-  helpContent="Event forwarding is a paid addon for Snowplow CDI."
+  note="Event forwarding is a paid addon for Snowplow CDI."
 />
 ```
 

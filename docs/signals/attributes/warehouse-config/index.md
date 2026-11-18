@@ -1,9 +1,11 @@
 ---
 title: "Sync warehouse tables to Signals"
 sidebar_position: 30
-sidebar_label: "Warehouse configuration"
+sidebar_label: "Sync warehouse tables"
 description: "Connect Signals to existing warehouse tables to sync pre-calculated attributes. Configure table details, timestamp fields, and field mappings using the Console or the Python SDK."
 keywords: ["warehouse attributes", "batch source", "warehouse tables", "field mapping", "backfill", "timestamp sync", "ExternalBatchAttributeGroup"]
+content_type: how-to
+pagination_next: signals/attributes/index
 ---
 
 ```mdx-code-block
@@ -11,11 +13,18 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To sync existing, pre-calculated attributes from your warehouse to Signals, configure an attribute group with a warehouse source. No additional modeling is required — the batch engine reads rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
+To sync existing, pre-calculated attributes from your warehouse to Signals, configure an attribute group with a warehouse (batch) source. No additional modeling is required — the batch engine reads rows from your warehouse table at a fixed interval and sends them to the Profiles Store.
 
 :::tip[Use stream attributes with backfill when possible]
-If your source data comes from Snowplow events, consider using a stream attribute group with the backfill option enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
+If your source data comes from Snowplow events, consider using a stream attribute group with [backfill](/docs/signals/attributes/attribute-groups/index.md#backfill-attributes) enabled instead. It gives you real-time updates from your event stream alongside historical backfill, without needing to maintain a separate warehouse table. Attributes that are fetched from a warehouse are best suited for pre-calculated values from non-Snowplow sources, or tables that already exist independently of your event pipeline.
 :::
+
+## Before you begin
+
+You need:
+* Signals with a Snowflake, BigQuery, or Databricks warehouse connection. To add one, see [Set up Signals](/docs/signals/setup/index.md).
+* Read access to the table you want to sync.
+* A column in that table that records, in UTC, when each row was last written or updated, as described in [Configure a warehouse source](#configure-a-warehouse-source).
 
 ## Configure a warehouse source
 
@@ -70,7 +79,7 @@ data_source = BatchSource(
 )
 ```
 
-The table below lists all available arguments for a `BatchSource`:
+This table lists all available arguments for a `BatchSource`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -102,6 +111,8 @@ The attribute key must correspond to a column in the source table. The example b
 from datetime import datetime, timedelta, timezone
 from snowplow_signals import ExternalBatchAttributeGroup, domain_userid, Field
 
+# data_source: the BatchSource from the previous block
+
 attribute_group = ExternalBatchAttributeGroup(
     name="ecommerce_transaction_interactions_attributes",
     version=1,
@@ -111,14 +122,14 @@ attribute_group = ExternalBatchAttributeGroup(
     backfill_since_tstamp=datetime(2026, 6, 1, tzinfo=timezone.utc),
     refresh_rate=timedelta(hours=6),
     fields=[
-        Field(name="TOTAL_TRANSACTIONS", type="int32"),
-        Field(name="TOTAL_REVENUE", type="int32"),
-        Field(name="AVG_TRANSACTION_REVENUE", type="int32"),
+        Field(name="TOTAL_TRANSACTIONS", type="int64"),
+        Field(name="TOTAL_REVENUE", type="double"),
+        Field(name="AVG_TRANSACTION_REVENUE", type="double"),
     ],
 )
 ```
 
-The table below lists all available arguments for `ExternalBatchAttributeGroup`:
+This table lists all available arguments for `ExternalBatchAttributeGroup`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -132,7 +143,7 @@ The table below lists all available arguments for `ExternalBatchAttributeGroup`:
 | `description` | A description of the attribute group | `string` | ❌ |
 | `owner` | The owner of the attribute group | `string` | ❌ |
 
-The table below lists all available arguments for a `Field`:
+This table lists all available arguments for a `Field`:
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -143,10 +154,15 @@ The table below lists all available arguments for a `Field`:
 </TabItem>
 </Tabs>
 
-To understand why the same definition runs in both the streaming and batch engines, see [Signals vs a feature store](https://signals.snowplow.io/evaluate/feature-stores?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.
+## Publish and retrieve
 
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
+Signals starts syncing the table once you publish the attribute group. In Console, click **Publish** on the attribute group. With the Python SDK, use `publish()`, as described in [Publish attribute groups](/docs/signals/attributes/attribute-groups/index.md#publish-attribute-groups):
 
-<SignalsFreeTier/>
+```python
+# sp_signals: the client from Connect to Signals
+sp_signals.publish([attribute_group])
 ```
+
+To read the synced values in your application, add the attribute group to a [service](/docs/signals/applications/services/index.md), then [retrieve the attributes](/docs/signals/applications/retrieve-attributes/index.md).
+
+To understand why the same definition runs in both the streaming and batch engines, see [Signals vs a feature store](https://signals.snowplow.io/evaluate/feature-stores?utm_source=docs.snowplow.io&utm_medium=referral) on the Signals site.

@@ -4,6 +4,7 @@ sidebar_label: "Versioning"
 sidebar_position: 40
 description: "Fix mistakes in existing schema versions by amending them, with guidelines on when amendments are appropriate and how to handle production schemas."
 keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas"]
+content_type: concept
 ---
 
 ```mdx-code-block
@@ -78,7 +79,7 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Micro](/docs/testing/snowplow-micro/index.md), you will need version 1.7.1+.
 
 :::
 
@@ -107,7 +108,7 @@ Here's how this works, at a glance:
 * Draft a new schema version correcting the issue.
 * In the new schema, add the following field at the root: `"$supersedes": ["1-0-2"]`.
 * [Set the version](/docs/event-studio/data-structures/versioning/index.md) of the new schema as usual, i.e. `1-0-3` if there are no breaking changes or `2-0-0` if there are.
-* [Add](/docs/event-studio/data-structures/index.md) the new schema to your production environment.
+* [Add](/docs/event-studio/test-and-publish/index.md#promote-data-structures-to-production) the new schema to your production environment.
 * Events or entities that use schema `1-0-2` will now be automatically updated (in the Enrich application) to use version `1-0-3`, and will be validated against that version. (A special entity will be added to these events to record this fact.)
 
 ### Example
@@ -269,7 +270,7 @@ For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you
 
 :::tip[Schema caching]
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
 
 :::
 

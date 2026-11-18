@@ -5,6 +5,7 @@ description: "Integrate Data Structures CI into your deployment pipelines to ver
 keywords: ["data structures ci", "schema dependencies", "ci/cd integration", "github action", "schema validation"]
 date: "2020-06-01"
 sidebar_position: 4
+content_type: how-to
 ---
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").

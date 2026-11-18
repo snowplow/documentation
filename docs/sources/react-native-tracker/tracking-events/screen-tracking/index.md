@@ -5,6 +5,7 @@ date: "2021-08-06"
 sidebar_position: 40
 description: "Track screen views automatically with React Navigation or React Native Navigation, enable screen context entities, and measure screen engagement."
 keywords: ["react native screen tracking", "screen engagement", "navigation tracking"]
+content_type: how-to
 ---
 
 

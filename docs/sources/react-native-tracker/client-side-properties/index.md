@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 23
 description: "Configure and update subject properties including user ID, IP address, timezone, language, and screen resolution at tracker initialization or runtime."
 keywords: ["react native subject", "user properties", "client-side properties"]
+content_type: how-to
 ---
 
 

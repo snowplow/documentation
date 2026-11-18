@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 2500
 description: "Track page views, structured events, and self-describing events with automatic context entities and custom timestamps using the web trackers."
 keywords: ["tracking", "events"]
+content_type: how-to
 ---
 
 ```mdx-code-block

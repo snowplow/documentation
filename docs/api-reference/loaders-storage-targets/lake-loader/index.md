@@ -4,6 +4,7 @@ sidebar_label: "Lake Loader"
 sidebar_position: 3
 description: "Load Snowplow events to data lakes using Delta or Iceberg table formats on S3, GCS, or Azure ADLS Gen2."
 keywords: ["lake loader", "delta lake", "iceberg", "open table formats", "data lake"]
+content_type: how-to
 ---
 
 ```mdx-code-block

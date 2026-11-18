@@ -1,9 +1,10 @@
 ---
-title: "Collector configuration reference"
+title: "Collector configuration options"
 sidebar_label: "Configure"
 sidebar_position: 2
 description: "Complete configuration reference for the Collector HOCON config file, including common options, sink-specific settings, cookie management, networking, and TLS configuration."
 keywords: ["collector configuration", "HOCON config", "collector setup", "Kinesis config", "PubSub config", "Kafka config"]
+content_type: reference
 ---
 
 This is a complete list of the options that can be configured in the collector HOCON config file. The [example configs in github](https://github.com/snowplow/stream-collector/tree/master/examples) show how to prepare an input file. Some features are described in more detail at the bottom of this page.

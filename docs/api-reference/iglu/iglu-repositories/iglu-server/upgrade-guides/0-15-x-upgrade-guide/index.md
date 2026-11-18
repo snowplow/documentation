@@ -5,6 +5,7 @@ sidebar_position: 0
 description: "Upgrade guide for Iglu Server 0.15.x, which requires a primary key on the schemas and drafts tables and removes the JDBC thread pool settings."
 keywords: ["iglu server 0.15", "primary key", "duplicate schemas", "upgrade"]
 date: "2026-10-16"
+content_type: how-to
 ---
 
 ```mdx-code-block

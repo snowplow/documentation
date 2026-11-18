@@ -5,6 +5,7 @@ description: "Track self-describing events and attach custom entities using JSON
 keywords: ["self-describing events", "custom entities", "json schemas", "custom tracking"]
 date: "2022-08-30"
 sidebar_position: 2600
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -12,7 +13,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The specific data you need might not be covered by the JavaScript tracker's built-in event types and entities. In this case, you can use Snowplow’s [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and custom [entities](/docs/fundamentals/entities/index.md) to track [customised data](docs/events/custom-events/index.md).
+The specific data you need might not be covered by the JavaScript tracker's built-in event types and entities. In this case, you can use Snowplow’s [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and custom [entities](/docs/fundamentals/entities/index.md) to track [customized data](/docs/events/custom-events/index.md).
+
+:::note[Before you start: create the schema]
+Each self-describing event and custom entity needs a schema in your account before you track it. See [managing data structures](/docs/event-studio/data-structures/index.md) to create one in Console.
+:::
 
 ## Track a custom event (self-describing)
 

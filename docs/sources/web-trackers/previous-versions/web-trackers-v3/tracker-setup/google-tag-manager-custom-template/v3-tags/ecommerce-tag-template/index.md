@@ -1,5 +1,6 @@
 ---
 title: "Snowplow v3 Ecommerce"
+sidebar_label: "Snowplow v3 Ecommerce"
 sidebar_position: 2000
 description: "Documentation for Snowplow v3 Ecommerce in the web tracker."
 keywords: ["tracker", "configuration"]

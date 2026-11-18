@@ -337,7 +337,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 
 # Adding content to every section
-/docs/get-started/deployment-model/* /docs/get-started/ 301
+/docs/get-started/deployment-model/* /docs/cdi/ 301
 /docs/get-started/snowplow-bdp/private-managed-cloud/* /docs/get-started/snowplow-bdp/:splat 301
 /docs/get-started/snowplow-bdp/cloud/* /docs/get-started/snowplow-bdp/ 301
 /docs/get-started/snowplow-community-edition/what-is-community-edition/ /docs/get-started/snowplow-community-edition/ 301
@@ -537,3 +537,11 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/pipeline/enriched-stream-compression/* /docs/destinations/custom-streaming/enriched-stream-compression/:splat 301
 
 /deprecation-policy /lifecycle-policy 301
+
+# Data structures in Git tutorial rewrite
+/tutorials/data-structures-in-git/validation-and-publishing/ /tutorials/tracking-as-code/automate-with-github-actions/ 301
+/tutorials/data-structures-in-git/follow-up-with-data-products/ /tutorials/tracking-as-code/local-setup/ 301
+/tutorials/data-structures-in-git/verify-github-setup/ /tutorials/tracking-as-code/change-and-promote/ 301
+/tutorials/data-structures-in-git/conclusion/ /tutorials/tracking-as-code/clean-up/ 301
+/tutorials/data-structures-in-git /tutorials/tracking-as-code/introduction/ 301
+/tutorials/data-structures-in-git/* /tutorials/tracking-as-code/:splat 301

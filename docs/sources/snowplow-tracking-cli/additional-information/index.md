@@ -5,6 +5,7 @@ date: "2020-10-12"
 sidebar_position: 300
 description: "Learn about Tracking CLI implementation details including Golang tracker backend, no buffering behavior, and collector response exit codes."
 keywords: ["tracking cli details", "golang tracker", "exit codes"]
+content_type: reference
 ---
 
 There is no buffering in the Snowplow Tracking CLI - each event is sent as an individual payload whether `GET` or `POST`.

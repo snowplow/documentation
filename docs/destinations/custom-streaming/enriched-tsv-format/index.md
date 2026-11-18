@@ -4,6 +4,7 @@ sidebar_label: "Stream file format"
 sidebar_position: 1
 description: "Understand the Tab Separated Values format of enriched Snowplow data streams with field definitions and analytics SDK references."
 keywords: ["enriched TSV format", "Snowplow data format", "analytics SDK"]
+content_type: reference
 ---
 
 ```mdx-code-block

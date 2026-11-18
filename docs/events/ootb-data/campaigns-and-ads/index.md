@@ -5,6 +5,7 @@ sidebar_position: 40
 description: "Track marketing campaigns with UTM parameters and ad performance with impression, click, and conversion events for attribution analysis."
 keywords: ["utm parameters", "campaign tracking", "ad tracking", "impressions", "ad clicks", "attribution"]
 date: "2026-01-15"
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

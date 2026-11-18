@@ -5,6 +5,7 @@ date: "2022-04-04"
 sidebar_position: 10
 description: "Transform enriched Snowplow data in batches using Spark on EMR with support for deduplication and wide row or shredded output."
 keywords: ["spark transformer", "batch transformation", "emr spark", "deduplication", "rdb shredder"]
+content_type: how-to
 ---
 
 ```mdx-code-block

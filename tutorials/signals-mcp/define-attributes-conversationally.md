@@ -7,7 +7,7 @@ keywords: ["signals attribute group", "snowplow assistant", "conversational conf
 date: "2026-08-04"
 ---
 
-With your assistant ready, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/tutorials/signals-quickstart/define-attribute-group):
+With your assistant ready, you can define your first attribute group by describing it. You'll create a stream [attribute group](/docs/signals/attributes/attribute-groups/) that calculates three session metrics from page view events, the same ones as in the [Signals quick start](/docs/signals/get-started/quickstart-tutorial/#create-the-attribute-group):
 
 * How many page views occurred in the last 15 minutes, per session
 * The last seen browser name, per session
@@ -76,7 +76,7 @@ You'll confirm the same details in Snowplow Console on the next page. If anythin
 
 ## Test against warehouse data
 
-Before publishing, you can test what the group would calculate. Testing runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as [previewing an attribute group](/tutorials/signals-quickstart/define-attribute-group#test-the-attribute-definitions) in Console.
+Before publishing, you can test what the group would calculate. Testing runs the attribute definitions against recent events in your warehouse's atomic events table and returns sample results, the same calculation as [previewing an attribute group](/docs/signals/get-started/quickstart-tutorial/#preview-and-publish-the-attribute-group) in Console.
 
 ```text
 Test tut_mcp_session_metrics against recent events before we publish.

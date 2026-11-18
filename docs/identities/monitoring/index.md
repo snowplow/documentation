@@ -5,6 +5,7 @@ sidebar_position: 3
 description: "Track the size and health of your Snowplow Identities graph in Console, including total and active Snowplow IDs, deduplication rate, and identifiers per profile."
 keywords: ["identities", "identity graph", "monitoring", "deduplication rate", "snowplow_id"]
 date: "2026-10-28"
+content_type: how-to
 ---
 
 The **Overview** tab on the **Identities** page in [Snowplow Console](https://console.snowplowanalytics.com) shows how your identity graph is developing. Use it after you deploy Identities or change your [identifiers](/docs/identities/configuration/index.md#configure-identifiers) to check that events are linking to Snowplow IDs as you expect.

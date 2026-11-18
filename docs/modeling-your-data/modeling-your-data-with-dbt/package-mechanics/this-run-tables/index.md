@@ -4,6 +4,7 @@ sidebar_label: "This run tables"
 description: "Details about the this run table approach use in our packages."
 keywords: ["this run tables", "events this run", "sessions this run", "run-specific tables"]
 sidebar_position: 40
+content_type: concept
 ---
 
 Our packages make use of a series of `this run` tables, named such because they are dropped and recreated each `dbt run` to only contain relevant information that that run. These tables allow for efficient re-use of information throughout a single run, and also allow you to debug any issues should a run fail.

@@ -5,6 +5,7 @@ description: "Track browser information including viewport, device properties, a
 keywords: ["browser entity", "client hints", "privacy sandbox"]
 date: "2021-04-07"
 sidebar_position: 59
+content_type: reference
 ---
 
 The Snowplow web tracker supports tracking in all modern browsers, including newer browser features such as [client hints](/docs/sources/web-trackers/tracking-events/client-hints/index.md).

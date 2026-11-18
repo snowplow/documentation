@@ -4,6 +4,7 @@ sidebar_label: "6.0.0 upgrade guide"
 sidebar_position: -20
 description: "Upgrade RDB Loader to 6.0.0 with recovery tables, schema merging, and improved schema evolution for Redshift and other warehouses."
 keywords: ["rdb loader 6.0 upgrade", "recovery tables", "schema evolution", "schema merging", "redshift migration"]
+content_type: how-to
 ---
 
 ```mdx-code-block

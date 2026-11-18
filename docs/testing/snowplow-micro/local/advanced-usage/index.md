@@ -4,6 +4,7 @@ sidebar_label: "Advanced usage"
 sidebar_position: 6
 description: "Enable HTTPS with SSL/TLS certificates, add custom Iglu resolver configurations, and modify collector settings. Advanced configuration options for Snowplow Micro using bind mounts and environment variables."
 keywords: ["micro advanced", "https configuration", "iglu resolver", "collector config", "ssl certificate"]
+content_type: how-to
 ---
 
 ```mdx-code-block

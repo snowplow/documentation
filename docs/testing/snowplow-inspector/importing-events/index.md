@@ -4,6 +4,7 @@ sidebar_label: "Importing events"
 sidebar_position: 20
 description: "Import events into Inspector from HAR files, failed events, ElasticSearch, ngrok tunnels, or remote debugging sessions. View and debug events from mobile devices and other sources as if generated locally."
 keywords: ["import events", "har files", "failed events", "remote debugging", "ngrok", "elasticsearch"]
+content_type: how-to
 ---
 
 Within the Snowplow Inspector, the main **Events** view allows you to import events from other devices that you can view, as if your own browser generated them.
@@ -28,9 +29,9 @@ The extension will accept an uncompressed file, which you can paste a selection 
 
 ## Importing events from ElasticSearch / OpenSearch
 
-If you use [ElasticSearch](https://www.elastic.co/) / [OpenSearch](https://opensearch.org/) as a destination for your events (or as used in [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md)) you can specify a query to use and the extension will load events as they're indexed.
+If you use [Elasticsearch](https://www.elastic.co/) or [OpenSearch](https://opensearch.org/) as a destination for your events, you can specify a query to use and the extension will load events as they're indexed.
 
-This can be useful for testing many devices at once, e.g. multiple mobile devices that are all sending events to your Snowplow Mini instance.
+This can be useful for testing many devices at once, e.g. multiple mobile devices that are all sending events to the same pipeline.
 
 ## Importing events from an ngrok tunnel
 

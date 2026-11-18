@@ -1,13 +1,14 @@
 ---
-title: "Inspect tracked events with Flutter tracker plugins"
+title: "Inspect events and attach entities with Flutter tracker plugins"
 sidebar_label: "Plugins"
 sidebar_position: 4500
 date: "2026-10-26"
-description: "Register Flutter tracker plugins with an afterTrack callback to inspect every tracked event, including events the tracker tracks automatically. Add plugins at initialization or at runtime."
-keywords: ["flutter plugins", "aftertrack", "inspectable event", "plugin configuration", "event inspection"]
+description: "Register Flutter tracker plugins with an afterTrack callback to inspect every tracked event, or with entities to attach to every event and replace at runtime. Add plugins at initialization or at runtime."
+keywords: ["flutter plugins", "aftertrack", "inspectable event", "plugin configuration", "event inspection", "plugin entities"]
+content_type: how-to
 ---
 
-Plugins let your Dart code see every event the tracker tracks. Each plugin has an `afterTrack` callback that the tracker calls after it tracks an event, including the events it tracks automatically, such as screen views from the `SnowplowObserver`, screen end, lifecycle, installation, and media events.
+Plugins let your Dart code see every event the tracker tracks, and attach [entities](/docs/fundamentals/entities/index.md) to every event. A plugin can have an `afterTrack` callback that the tracker calls after it tracks an event, including the events it tracks automatically, such as screen views from the `SnowplowObserver`, screen end, lifecycle, installation, and media events.
 
 Use a plugin when your app needs to react to tracking activity. For example, you can restart an inactivity timer whenever any event is tracked:
 
@@ -32,12 +33,13 @@ Plugins were added in version 0.11.2.
 
 ## Register a plugin
 
-To create a plugin, instantiate `PluginConfiguration` with a unique `identifier` and an `afterTrack` callback. A tracker has at most one plugin per identifier. Adding a plugin with an identifier that's already registered replaces the existing plugin.
+To create a plugin, instantiate `PluginConfiguration` with a unique `identifier` and an `afterTrack` callback, `entities`, or both. A tracker has at most one plugin per identifier. Adding a plugin with an identifier that's already registered replaces the existing plugin.
 
 | Attribute    | Type                                   | Description                                       |
 | ------------ | -------------------------------------- | ------------------------------------------------- |
 | `identifier` | `String`                               | Unique identifier of the plugin within the tracker. |
 | `afterTrack` | `void Function(InspectableEvent)?`     | Callback that the tracker calls after each tracked event. |
+| `entities`   | `List<SelfDescribing>?`                | Entities that the tracker attaches to every event. See [attach entities from a plugin](#attach-entities-from-a-plugin). |
 
 There are two ways to register a plugin:
 
@@ -71,6 +73,34 @@ await Snowplow.removePlugin('logger', tracker: 'ns1');
 On web, the JavaScript tracker doesn't support removing plugins, so `removePlugin()` stops calling the plugin's callback but leaves the plugin registered with the JavaScript tracker.
 
 If the callback throws an exception, the tracker reports it to `FlutterError.onError` and keeps calling the callback for later events.
+
+## Attach entities from a plugin
+
+<AppliesTo feature="flutter-plugin-entities" />
+
+A plugin with `entities` attaches them to every event the tracker tracks, including the events it tracks automatically, such as screen end, lifecycle, and media events. Unlike [global contexts](/docs/sources/flutter-tracker/adding-data/global-context/index.md), you can replace a plugin's entities at runtime in a single call, for example when the user signs in:
+
+```dart
+SnowplowTracker tracker = await Snowplow.createTracker(
+  namespace: 'ns1',
+  endpoint: 'http://your-collector-endpoint.com',
+  plugins: [
+    PluginConfiguration(identifier: 'user', entities: [guestEntity]),
+  ],
+);
+
+// Later, replace the plugin's entities
+await tracker.setPluginEntities('user', [signedInUserEntity]);
+
+// Or using the static method
+await Snowplow.setPluginEntities('user', [signedInUserEntity], tracker: 'ns1');
+```
+
+Each event gets the entities that were set when it was tracked. Events tracked before the call keep the previous entities, even if the tracker processes them after the call. Pass an empty list to remove the entities.
+
+`setPluginEntities()` only works for plugins created with `entities`. For other plugins it does nothing and logs a warning. To add entities later to a plugin that has none at first, create it with an empty list.
+
+On iOS, `setPluginEntities()` waits until the tracker has processed the events already tracked. Calling it often while many events are being tracked can briefly block the main thread.
 
 ## Inspect the tracked event
 

@@ -5,6 +5,7 @@ date: "2021-04-14"
 sidebar_position: 200
 description: "Upgrade RDB Loader to 1.0.0 with Stream Shredder, unified output partitioning, and new configuration schema for batch processing."
 keywords: ["rdb loader 1.0 upgrade", "stream shredder", "output partitioning", "loader migration", "rdb upgrade"]
+content_type: how-to
 ---
 
 This is a release adding a new experimental Stream Shredder asset and improving independent Loader architecture, introduced in R35.

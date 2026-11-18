@@ -1,9 +1,10 @@
 ---
 title: "Initialize the Python tracker"
-sidebar_label: "Initialization"
+sidebar_label: "Initialize"
 sidebar_position: 20
 description: "Initialize the Python tracker using the Snowplow class or Tracker, Emitter, and Subject classes with configuration for namespace, endpoint, and encoding."
 keywords: ["python tracker initialization", "tracker configuration", "snowplow class"]
+content_type: how-to
 ---
 
 Assuming you have completed the Python Tracker Setup for your Python project, you are now ready to initialize the Python Tracker. There are two ways to this:

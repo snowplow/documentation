@@ -1,9 +1,10 @@
 ---
 title: "Example applications for the Python tracker"
-sidebar_label: "Example Applications"
+sidebar_label: "Example applications"
 sidebar_position: 9999
 description: "Explore example Python tracker applications including Redis, Snowplow API, and Tracker API implementations for reference and quick start."
 keywords: ["python tracker examples", "redis example", "tracker api demo"]
+content_type: landing
 ---
 
 Check out the following example applications that can be used as a reference for how to use the tracker, or as a starting point for your own implementation.

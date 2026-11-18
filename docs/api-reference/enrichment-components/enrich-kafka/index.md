@@ -5,6 +5,7 @@ date: "2022-10-03"
 sidebar_position: 30
 description: "Standalone JVM application for enriching Snowplow events from Kafka topics with configurable enrichments and validation for Azure deployments."
 keywords: ["enrich kafka", "kafka", "snowplow azure"]
+content_type: how-to
 ---
 
 ```mdx-code-block

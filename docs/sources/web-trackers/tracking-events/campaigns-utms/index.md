@@ -4,6 +4,7 @@ sidebar_label: "Campaigns and UTMs"
 sidebar_position: 90
 description: "Identify traffic sources from paid and organic campaigns using UTM parameters and referrer analysis for marketing attribution."
 keywords: ["utm parameters", "campaign tracking"]
+content_type: concept
 ---
 
 

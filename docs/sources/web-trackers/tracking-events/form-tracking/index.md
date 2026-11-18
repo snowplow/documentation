@@ -4,6 +4,7 @@ sidebar_label: "Forms"
 sidebar_position: 60
 description: "Automatically track form changes, submissions, and focus events with configurable allowlists, denylists, and transform functions for field values."
 keywords: ["form tracking", "form interactions"]
+content_type: how-to
 ---
 
 ```mdx-code-block

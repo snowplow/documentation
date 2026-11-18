@@ -4,6 +4,7 @@ sidebar_label: "Mobile lifecycle"
 sidebar_position: 110
 description: "Automatically track mobile app install, foreground, and background events with lifecycle entities for app usage analysis."
 keywords: ["app install", "app lifecycle", "foreground events", "background events", "mobile tracking"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -75,7 +76,7 @@ This table shows the support for mobile lifecycle event tracking across the main
 
 ### Foreground event
 
-The foreground event is tracked each time the app becomes visible on the screen. The `foregroundIndex` property counts how many times the app has been foregrounded since installation.
+The foreground event is tracked each time the app returns to the screen from the background. The trackers don't track it when the user launches the app. The `foregroundIndex` property counts how many times the app has been foregrounded since installation.
 
 <SchemaProperties
   overview={{event: true}}

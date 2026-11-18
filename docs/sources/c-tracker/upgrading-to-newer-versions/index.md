@@ -5,6 +5,7 @@ description: "Migration instructions for upgrading to newer C++ tracker versions
 keywords: ["c++ upgrade", "migration guide", "breaking changes", "version upgrade"]
 date: "2022-04-21"
 sidebar_position: 100
+content_type: how-to
 ---
 
 This page gives instructions for upgrading to newer versions of the C++ tracker.

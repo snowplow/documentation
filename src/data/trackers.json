@@ -1,0 +1,153 @@
+{
+  "$comment": "Tracker feature manifest. Renders the matrix on /docs/sources/ (<TrackerMatrix>) and the tracker list in llms.txt. Sources: the tracker docs under docs/sources/, the support tables under docs/events/ootb-data/ and docs/events/anonymous-tracking/, and the Snowtype configuration reference. Values: true, false, \"partial\", or { \"value\": ..., \"note\": \"...\" }. tier is a maintenance group from /docs/sources/tracker-maintenance-classification/.",
+  "features": {
+    "views": { "label": "Page or screen views", "description": "A method to track page view or screen view events" },
+    "activity": { "label": "Activity tracking", "description": "Page pings on web, screen engagement on mobile" },
+    "entities": { "label": "Built-in entities", "description": "Entities attached automatically, such as web page, session, device, or screen" },
+    "anonymous": { "label": "Anonymous tracking", "description": "Track without user or session identifiers, client side or server side" },
+    "media": { "label": "Media", "description": "Built-in media player events (Media v2)" },
+    "ecommerce": { "label": "Ecommerce", "description": "Snowplow ecommerce events for products, carts, and checkouts. Partial: transaction events (tr, ti) only" },
+    "consent": { "label": "Consent", "description": "Built-in consent events" },
+    "snowtype": { "label": "Snowtype", "description": "Snowtype can generate tracking code for this tracker", "href": "/docs/event-studio/implement-tracking/" }
+  },
+  "trackers": [
+    {
+      "id": "web", "name": "Web (JavaScript and Browser)", "href": "/docs/sources/web-trackers/", "category": "web",
+      "languages": "JavaScript, TypeScript", "tier": "actively-maintained", "versionKey": "javaScriptTracker",
+      "install": "Script tag or npm (@snowplow/browser-tracker)",
+      "features": { "views": { "value": "Page and screen", "note": "Screen views with the screen tracking plugin" }, "activity": true, "entities": true, "anonymous": true, "media": true, "ecommerce": true, "consent": true, "snowtype": true }
+    },
+    {
+      "id": "google-tag-manager", "name": "Google Tag Manager", "href": "/docs/sources/google-tag-manager/", "category": "web",
+      "languages": "JavaScript", "tier": "actively-maintained",
+      "install": "Tag Template Gallery",
+      "features": { "views": "Page", "activity": true, "entities": true, "anonymous": true, "media": false, "ecommerce": { "value": true, "note": "With the ecommerce tag template" }, "consent": true, "snowtype": true }
+    },
+    {
+      "id": "google-amp", "name": "Google AMP", "href": "/docs/sources/google-amp-tracker/", "category": "web",
+      "languages": "HTML", "tier": "maintained", "versionKey": "googleAmpTracker",
+      "install": "amp-analytics tag",
+      "features": { "views": "Page", "activity": true, "entities": true, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "pixel", "name": "Pixel", "href": "/docs/sources/pixel-tracker/", "category": "web",
+      "languages": "HTML", "tier": "maintained", "versionKey": "pixelTracker",
+      "install": "Image tag",
+      "features": { "views": "Page", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "webview", "name": "WebView", "href": "/docs/sources/webview-tracker/", "category": "web",
+      "languages": "JavaScript, TypeScript", "tier": "early-release", "versionKey": "webViewTracker",
+      "install": "npm (@snowplow/webview-tracker) or script tag",
+      "features": { "views": "Page and screen", "activity": false, "entities": { "value": false, "note": "The native tracker it forwards to adds its own" }, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "android", "name": "Android", "href": "/docs/sources/mobile-trackers/", "category": "mobile",
+      "languages": "Kotlin, Java", "tier": "actively-maintained", "versionKey": "androidTracker",
+      "install": "Maven",
+      "features": { "views": "Screen", "activity": { "value": true, "note": "Screen engagement, since 6.0.0" }, "entities": true, "anonymous": true, "media": true, "ecommerce": true, "consent": true, "snowtype": true }
+    },
+    {
+      "id": "ios", "name": "iOS", "href": "/docs/sources/mobile-trackers/", "category": "mobile",
+      "languages": "Swift, Objective-C", "tier": "actively-maintained", "versionKey": "iosTracker",
+      "install": "Swift Package Manager or CocoaPods",
+      "features": { "views": "Screen", "activity": { "value": true, "note": "Screen engagement, since 6.0.0" }, "entities": true, "anonymous": true, "media": true, "ecommerce": true, "consent": true, "snowtype": true }
+    },
+    {
+      "id": "react-native", "name": "React Native", "href": "/docs/sources/react-native-tracker/", "category": "mobile",
+      "languages": "TypeScript, JavaScript", "tier": "actively-maintained", "versionKey": "javaScriptTracker",
+      "install": "npm (@snowplow/react-native-tracker)",
+      "features": { "views": "Page and screen", "activity": { "value": true, "note": "Screen engagement, on mobile" }, "entities": true, "anonymous": { "value": "partial", "note": "Version 4 supports server-side anonymization only" }, "media": false, "ecommerce": { "value": true, "note": "With the ecommerce plugin" }, "consent": { "value": "partial", "note": "Basic consent events" }, "snowtype": true }
+    },
+    {
+      "id": "flutter", "name": "Flutter", "href": "/docs/sources/flutter-tracker/", "category": "mobile",
+      "languages": "Dart", "tier": "early-release", "versionKey": "flutterTracker",
+      "install": "pub.dev",
+      "features": { "views": { "value": "Page and screen", "note": "Page views on web only" }, "activity": true, "entities": true, "anonymous": true, "media": true, "ecommerce": false, "consent": { "value": "partial", "note": "Basic consent events" }, "snowtype": true }
+    },
+    {
+      "id": "roku", "name": "Roku", "href": "/docs/sources/roku-tracker/", "category": "mobile",
+      "languages": "BrightScript", "tier": "actively-maintained", "versionKey": "rokuTracker",
+      "install": "npm (@snowplow/roku-tracker)",
+      "features": { "views": "Screen", "activity": false, "entities": true, "anonymous": true, "media": true, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "unity", "name": "Unity", "href": "/docs/sources/unity-tracker/", "category": "mobile",
+      "languages": "C#", "tier": "actively-maintained", "versionKey": "unityTracker",
+      "install": "GitHub releases",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": true, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "node-js", "name": "Node.js", "href": "/docs/sources/node-js-tracker/", "category": "server",
+      "languages": "TypeScript, JavaScript", "tier": "actively-maintained", "versionKey": "javaScriptTracker",
+      "install": "npm (@snowplow/node-tracker)",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": { "value": "partial", "note": "Server-side anonymization only" }, "media": false, "ecommerce": false, "consent": false, "snowtype": true }
+    },
+    {
+      "id": "python", "name": "Python", "href": "/docs/sources/python-tracker/", "category": "server",
+      "languages": "Python", "tier": "early-release", "versionKey": "pythonTracker",
+      "install": "PyPI (snowplow-tracker)",
+      "features": { "views": "Page and screen", "activity": { "value": "partial", "note": "Page pings tracked manually" }, "entities": false, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "golang", "name": "Golang", "href": "/docs/sources/golang-tracker/", "category": "server",
+      "languages": "Go", "tier": "actively-maintained", "versionKey": "golangTracker",
+      "install": "GitHub releases",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": true }
+    },
+    {
+      "id": "java", "name": "Java", "href": "/docs/sources/java-tracker/", "category": "server",
+      "languages": "Java", "tier": "maintained", "versionKey": "javaTracker",
+      "install": "Maven",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": true }
+    },
+    {
+      "id": "dotnet", "name": ".NET", "href": "/docs/sources/net-tracker/", "category": "server",
+      "languages": "C#", "tier": "maintained", "versionKey": "dotNetTracker",
+      "install": "NuGet (Snowplow.Tracker)",
+      "features": { "views": "Page and screen", "activity": false, "entities": { "value": "partial", "note": "Session entity" }, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "cpp", "name": "C++", "href": "/docs/sources/c-tracker/", "category": "server",
+      "languages": "C++", "tier": "actively-maintained", "versionKey": "cppTracker",
+      "install": "CMake",
+      "features": { "views": "Screen", "activity": false, "entities": { "value": "partial", "note": "Session and desktop entities" }, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "scala", "name": "Scala", "href": "/docs/sources/scala-tracker/", "category": "server",
+      "languages": "Scala", "tier": "maintained", "versionKey": "scalaTracker",
+      "install": "Maven",
+      "features": { "views": "Page", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "ruby", "name": "Ruby", "href": "/docs/sources/ruby-tracker/", "category": "server",
+      "languages": "Ruby", "tier": "actively-maintained", "versionKey": "rubyTracker",
+      "install": "RubyGems",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "php", "name": "PHP", "href": "/docs/sources/php-tracker/", "category": "server",
+      "languages": "PHP", "tier": "early-release", "versionKey": "phpTracker",
+      "install": "Packagist",
+      "features": { "views": "Page and screen", "activity": false, "entities": false, "anonymous": { "value": "partial", "note": "Server-side anonymization only" }, "media": false, "ecommerce": "partial", "consent": false, "snowtype": false }
+    },
+    {
+      "id": "rust", "name": "Rust", "href": "/docs/sources/rust-tracker/", "category": "server",
+      "languages": "Rust", "tier": "early-release", "versionKey": "rustTracker",
+      "install": "crates.io",
+      "features": { "views": "Screen", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "lua", "name": "Lua", "href": "/docs/sources/lua-tracker/", "category": "server",
+      "languages": "Lua", "tier": "actively-maintained", "versionKey": "luaTracker",
+      "install": "LuaRocks",
+      "features": { "views": "Screen", "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    },
+    {
+      "id": "tracking-cli", "name": "Tracking CLI", "href": "/docs/sources/snowplow-tracking-cli/", "category": "server",
+      "languages": "Command line", "tier": "unsupported",
+      "install": "Deprecated: use snowplow-cli events send",
+      "features": { "views": false, "activity": false, "entities": false, "anonymous": false, "media": false, "ecommerce": false, "consent": false, "snowtype": false }
+    }
+  ]
+}

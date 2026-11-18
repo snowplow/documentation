@@ -5,6 +5,7 @@ date: "2021-10-04"
 sidebar_position: 60
 description: "Monitor Snowplow Enrich applications with StatsD or Prometheus metrics for event counts and latency, plus Sentry error reporting."
 keywords: ["enrich monitoring", "statsd", "prometheus", "enrichment metrics"]
+content_type: reference
 ---
 
 Enrich has monitoring built in, to help the pipeline operator.

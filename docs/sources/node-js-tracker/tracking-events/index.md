@@ -5,6 +5,7 @@ date: "2021-04-07"
 sidebar_position: 3
 description: "Track page views, screen views, structured events, and custom self-describing events with the Node.js tracker SDK."
 keywords: ["node.js event tracking", "page view tracking", "self-describing events"]
+content_type: how-to
 ---
 
 Tracking methods supported by the Node.js tracker at a glance:

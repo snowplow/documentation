@@ -4,6 +4,7 @@ sidebar_label: "Configuration reference"
 sidebar_position: 1
 description: "Configure Lake Loader for Delta Lake and Iceberg tables with Kinesis, Pub/Sub, and Kafka stream settings for data lakes."
 keywords: ["lake loader config", "delta config", "iceberg config", "glue catalog", "lake configuration"]
+content_type: reference
 ---
 
 ```mdx-code-block

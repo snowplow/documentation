@@ -5,6 +5,7 @@ sidebar_label: "From version 1.x to 2.0 for Android"
 sidebar_position: -1
 description: "Migrate your Android tracker instrumentation from version 1.x to 2.0 with updated configuration and API changes."
 keywords: ["android migration", "version 2.0", "tracker upgrade"]
+content_type: how-to
 ---
 
 This section describes the main changes when converting an applications instrumentation of the Snowplow Android tracker SDK from version 1.x to version 2.0.

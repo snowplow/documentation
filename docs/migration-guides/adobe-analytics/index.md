@@ -5,6 +5,7 @@ date: "2025-01-19"
 sidebar_position: 1
 description: "Migrate from Adobe Analytics to Snowplow with guidance on event tracking, eVars, props, and warehouse modeling."
 keywords: ["adobe analytics", "migration", "tracking plan", "evars", "props", "event tracking", "adobe experience platform"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

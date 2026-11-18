@@ -4,6 +4,7 @@ sidebar_label: "Iceberg"
 sidebar_position: 60
 description: "Send Snowplow data to Apache Iceberg data lakes for analytics and data processing with open table format, schema evolution, and cross-engine compatibility."
 keywords: ["Iceberg", "Apache Iceberg", "data lake", "open table format", "lake loader"]
+content_type: integration
 ---
 
 ```mdx-code-block
@@ -13,6 +14,8 @@ import SingleTableFormat from '../_single-table-format.mdx';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+<IntegrationBadges id="iceberg" />
 
 :::info[Cloud availability]
 

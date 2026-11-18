@@ -169,7 +169,10 @@ export default function DocSidebarItemCategory({
           'menu__list-item-collapsible--active': isCurrentPage,
         })}
       >
-        {isSectionHeader && collapsible ? (
+        {isSectionHeader && !collapsible ? (
+          // A plain group label: sidebars.js groups are not links
+          <span className="menu__link section-header__label">{label}</span>
+        ) : isSectionHeader && collapsible ? (
           <button
             type="button"
             className={clsx('clean-btn', 'menu__link', 'section-header__toggle', {
@@ -193,6 +196,23 @@ export default function DocSidebarItemCategory({
               aria-expanded={collapsible ? !collapsed : undefined}
               href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
               {...props}
+              // After the spread so nothing in props replaces the toggle.
+              // Matches upstream DocSidebarItemCategory: a category without a
+              // page toggles on click; one with a page expands as it navigates,
+              // and toggles when it is already the current page.
+              onClick={(e) => {
+                onItemClick?.(item)
+                if (!collapsible) return
+                if (!href) {
+                  e.preventDefault()
+                  updateCollapsed()
+                } else if (isCurrentPage) {
+                  e.preventDefault()
+                  updateCollapsed()
+                } else {
+                  updateCollapsed(false)
+                }
+              }}
             >
               <SidebarLabel label={label} customProps={item.customProps} />
             </Link>

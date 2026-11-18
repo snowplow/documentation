@@ -5,6 +5,7 @@ date: "2026-10-16"
 sidebar_position: 10
 description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
 keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON", "self-hosted"]
+content_type: reference
 ---
 
 ```mdx-code-block

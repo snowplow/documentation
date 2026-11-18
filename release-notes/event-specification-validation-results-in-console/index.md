@@ -22,7 +22,7 @@ Every event volume figure in Event Studio is split into four categories: valid e
 * **Tracking plans list and Event Catalog**: the volume column shows the breakdown for each tracking plan and event specification
 * **Tracking summary tab**: each event specification has a new tab with metrics per specification version and application ID. You can see which applications send which version, and whether an application sends the event without being listed in the specification
 
-Failed event counts require the data quality dashboard to be connected to the selected pipeline. Whether an event that fails validation counts as a violation or as a failed event depends on the tracking plan's [data quality rules](/docs/event-studio/tracking-plans/event-specification-validation/#send-invalid-events-to-failed-events).
+Failed event counts require the data quality dashboard to be connected to the selected pipeline. Whether an event that fails validation counts as a violation or as a failed event depends on the tracking plan's [data quality rules](/docs/event-studio/tracking-plans/data-quality/#send-invalid-events-to-failed-events).
 
 ## Documentation
 

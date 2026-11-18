@@ -5,6 +5,7 @@ sidebar_position: 70
 description: "Pin the Snowplow Identities dbt package to version 0.1.0 and configure Databricks sources."
 keywords: ["identities migration", "dbt identities upgrade", "Databricks identities"]
 date: "2026-10-15"
+content_type: how-to
 ---
 
 Use this guide when upgrading an existing Snowplow Identities dbt project. For a new project, follow the [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md).

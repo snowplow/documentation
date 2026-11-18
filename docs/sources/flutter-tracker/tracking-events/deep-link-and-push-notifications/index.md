@@ -5,6 +5,7 @@ sidebar_position: 200
 description: "Track deep links received in your Flutter app and push notifications using the DeepLinkReceived and MessageNotification event types, available since version 0.11.0."
 keywords: ["flutter deep link", "flutter push notification", "deep link tracking", "message notification", "snowplow flutter"]
 date: "2026-07-27"
+content_type: how-to
 ---
 
 :::note[Introduced in version 0.11 of the tracker]

@@ -5,6 +5,7 @@ description: "Anonymize user identifiers including domain_userid, session IDs, n
 keywords: ["anonymous tracking", "user anonymization", "privacy", "gdpr", "server anonymization"]
 date: "2022-01-31"
 sidebar_position: 6000
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Anonymous tracking is a feature that enables anonymization of various user and session identifiers, to support user privacy when consent for tracking the identifiers isn't given.
 
-This table shows the [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) that can be anonymized on web and mobile:
+This table shows the [user and session identifiers](/docs/events/identifiers/index.md) that can be anonymized on web and mobile:
 
 | Identifier          | Location in event        | Tracked on web                              | Tracked on mobile  |
 | ------------------- | ------------------------ | ------------------------------------------- | ------------------ |

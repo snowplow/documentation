@@ -4,6 +4,7 @@ sidebar_label: "Overridable macros"
 sidebar_position: 20
 description: "Override and customize default macros in Snowplow dbt packages to extend package functionality."
 keywords: ["overridable macros", "macro customization", "dbt macros", "custom macros"]
+content_type: how-to
 ---
 
 Many of our packages are built using [macros](https://docs.getdbt.com/docs/build/jinja-macros) to allow easier support of multiple warehouses. Some of these macros are designed to be overridable to give an easy route to customization for the user. You can find a list of the overridable macros for each package in the [package details](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) pages.

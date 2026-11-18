@@ -4,6 +4,7 @@ sidebar_label: "App performance"
 sidebar_position: 20
 description: "Track web vitals, navigation timing, and custom performance metrics using automatic plugins or manual timing events."
 keywords: ["web vitals", "performance tracking", "navigation timing", "timing events"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

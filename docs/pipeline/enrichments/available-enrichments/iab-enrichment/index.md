@@ -4,6 +4,7 @@ sidebar_position: 0
 sidebar_label: IAB bot detection
 description: "Identify bot and spider traffic using the IAB/ABC International Spiders and Bots List based on IP and user agent."
 keywords: ["IAB enrichment", "bot detection", "spider detection"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';
@@ -159,11 +160,7 @@ The database filenames must be as follows:
 
 ### Custom user agent lists
 
-:::note[Availability]
-
-This feature is available since version 6.8.0 of Enrich.
-
-:::
+<AppliesTo feature="iab-enrichment-custom-user-agent-lists" />
 
 In addition to the IAB database files, you can provide custom lists of user agent strings to supplement or override the detection. Two optional fields can be added to the `parameters` section:
 

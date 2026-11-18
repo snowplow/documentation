@@ -4,6 +4,7 @@ sidebar_label: "Client hints"
 sidebar_position: 150
 description: "Capture browser information through client hints as an alternative to user agent strings with basic and high-entropy options."
 keywords: ["client hints", "user-agent"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ sidebar_label: "CDN trackers"
 description: "Track page views at the CDN level to capture visits from bots, AI agents, and other clients that don't run JavaScript."
 keywords: ["cdn tracking", "cloudflare worker", "cloudfront access logs", "fastly log streaming", "server-side tracking", "agent tracking"]
 date: "2026-04-27"
+content_type: sdk
 ---
 
 You might want to track page views by bots and AI agents to understand how they consume your content. Regular [web tracking](/docs/sources/web-trackers/index.md), however, does not capture these events because many bots and agents don't execute JavaScript.

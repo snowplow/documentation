@@ -1,15 +1,16 @@
 ---
-title: "Managing tracking plans using Console"
-sidebar_label: "Create and manage"
+title: "Create a tracking plan"
+sidebar_label: "Create a tracking plan"
 date: "2024-01-18"
 sidebar_position: 1
-description: "Create and manage tracking plans in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
-keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
+description: "Create a tracking plan in Snowplow Console from scratch or from a template, then share it, subscribe to changes, and set its data quality rules."
+keywords: ["create tracking plan", "Console UI", "tracking plan templates", "event specifications", "source applications"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';
 
-To create a new tracking plan, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" button.
+A tracking plan groups the event specifications for one domain, with an explicit owner. You create tracking plans in the **Tracking plans** section of Console, either from scratch or from a template. See [tracking plan elements](/docs/event-studio/tracking-plans/index.md) for the information each plan holds.
 
 :::tip[Create tracking plans with your AI assistant]
 As an alternative to the steps on this page, you can ask an AI assistant connected to the Snowplow MCP server to create and update tracking plans for you, including their event specifications and data structures. For example: "Create a tracking plan for our checkout flow, with an event specification for each step and a product entity."
@@ -17,89 +18,69 @@ As an alternative to the steps on this page, you can ask an AI assistant connect
 <AiAssistantInstall />
 :::
 
+## Before you begin
+
+To create a tracking plan, you need the **Create** permission on tracking plans. Every tracking plan permission also requires at least the **View** permission on data structures. See [managing permissions](/docs/account-management/managing-permissions/index.md#tracking-plans).
+
+Snowplow recommends creating the [source applications](/docs/event-studio/source-applications/create/index.md) the tracking plan is implemented in first, so you can connect them to the plan.
+
+## Create a tracking plan from scratch
+
+Follow these steps to create an empty tracking plan and add event specifications to it.
+
+<Steps>
+
+### Open the Create tracking plan dialog
+
+Navigate to the **Tracking plans** section from the navigation bar and click **Create tracking plan**.
+
 ![Console with the Data collection section of the sidebar expanded and Tracking plans selected, showing five tracking plans with their domain, status, event spec count, event volume with a colored bar, and last modified date, with a "+ Create tracking plan" button in the top right](images/create-tracking-plan-v2.png)
 
-A modal will appear on the page, giving you the possibility to quickly create a tracking plan by using one of the existing templates or create one from scratch.
+### Choose Create new
+
+A dialog offers the existing templates and an option to create a tracking plan from scratch. Select **Create new**.
 
 !["Create tracking plan" dialog offering a "Create new" option and three templates: E-commerce Web (11 events), Base Web (5 events), and Media Web (24 events)](images/create-tracking-plan-modal.png)
 
-After selecting "Create new" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
+### Enter the tracking plan information
 
-:::note
-The name of your tracking plan must be unique to ensure proper identification and avoid conflicts.
+Enter your tracking plan information and click **Create and continue** to navigate to the event specification page. See [tracking plan elements](/docs/event-studio/tracking-plans/index.md) for what a tracking plan holds.
+
+:::note[Names must be unique]
+Each tracking plan name must be unique, including for tracking plans created from a template.
 :::
 
-The next page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
+### Add event specifications
 
-When clicking on an event specification row, a page will allow you to enter additional information into separate modals:
+The next page lets you create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later. See [define event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) for the details you can add.
 
-- **Event information**; describes information such as which applications the event fires in
-- **Event data structure**; determines how your data is structured and define the types of properties of the event
-- **Entity data structures**; describes which entities to attach to the event when it is triggered
-- **Event triggers**; specify the places and circumstances under which the event is triggered
-- **Properties**; specify instructions about how each schema property should be set for this event specification
+</Steps>
 
-The breadcrumb navigation allows you to quickly navigate to the tracking plan overview as well as to the list of tracking plans. Alternatively, you can access the list of available tracking plans by clicking `Tracking plans` prominently displayed in the navigation bar on the left.
+## Create a tracking plan from a template
 
-In the image below, you can see an example of a tracking plan. It provides an overview of all the event specifications and of the [data quality](/docs/event-studio/tracking-plans/data-quality/index.md) of the plan over the last 30 days, and gives access to the following functionality:
+To create a tracking plan based on a pre-defined template, navigate to the **Tracking plans** section from the navigation bar, click **Create tracking plan** or **Templates**, and select a template. See [tracking plan templates](/docs/event-studio/tracking-plans/templates/index.md) for the available templates and the event specifications they include.
 
-- **Share**; allow other members of your organization to access the tracking plan
-- **Subscribe**; receive notifications of any changes in the tracking plan
-- **Data quality rules**; choose whether events that fail [validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md#send-invalid-events-to-failed-events) are loaded to your warehouse marked as violations, or sent to failed events
-- **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/implement-tracking/index.md))
+By default, a tracking plan created from a Base template isn't connected to a source application. Edit the tracking plan and set its source application.
 
-:::note
-Sharing and subscribing is only available for users registered in Snowplow Console.
-:::
+## Manage the tracking plan
+
+The tracking plan overview page shows all the event specifications in the plan and the [data quality](/docs/event-studio/tracking-plans/data-quality/index.md) of the plan over the last 30 days.
 
 ![E-commerce Web tracking plan overview showing general information with owner and domain, a Data quality panel with a donut chart of valid events, inferred events, events with violations, and failed events, and an event specifications table with published events such as Add to cart and Checkout Step using the snowplow_ecommerce_action 1-0-2 data structure](images/tracking-plan-overview.png)
 
-![Add to cart event specification page showing event description, four tracked application IDs, the snowplow_ecommerce_action 1-0-2 data structure with a "type" property set to "add_to_cart", and product and cart entity data structures](images/event-specification-details.png)
+From the overview page, you can use:
 
-If you need to edit a tracking plan at any time, select it from the tracking plans listing accessible from the main menu.
+* **Share**: allow other members of your organization to access the tracking plan
+* **Subscribe**: receive notifications of any changes in the tracking plan
+* **Data quality rules**: choose whether events that fail [validation](/docs/event-studio/tracking-plans/event-specification-validation/index.md) are loaded to your warehouse marked as violations, or [sent to failed events](/docs/event-studio/tracking-plans/data-quality/index.md#send-invalid-events-to-failed-events)
+* **Implement tracking**: automatically generate the code for your tracking plan to include in your application. See [hand off to developers](/docs/event-studio/hand-off-to-implementation/index.md).
 
-## Upgrading Event Specification Instructions
+:::note[Console users only]
+Sharing and subscribing is only available for users registered in Snowplow Console.
+:::
 
-When working with Event Specifications of a Tracking Plan, it's essential to account for the evolution of underlying [Data Structures](/docs/event-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+The breadcrumb navigation takes you to the tracking plan overview or to the list of tracking plans. You can also open the list of tracking plans by clicking **Tracking plans** in the navigation bar on the left.
 
-### Versioning of Data Structures
+To edit a tracking plan at any time, select it from the tracking plans listing in the main menu.
 
-As data and events evolve, Data Structures may be updated to new versions, which can be either compatible or incompatible with previous ones. These changes may cause potential conflicts with the instructions in Event Specifications (both events and entities) that reference an older version of the Data Structure.
-
-### Semi-Automatic Upgrade of Event Specifications via the UI
-
-To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we've implemented a mechanism that allows you to update Event Specification instructions through the UI. Here's how it works:
-
-When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI.
-
-![Event data structure section with a warning that a new version of the data structure is available, showing add_to_cart at version 1-0-0 and an Upgrade button](images/upgrade-event-specification-warning.png)
-
-Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'** button.
-
-!["Upgrade Add Product" page warning that add_product_to_cart will be upgraded from version 1-0-0 to 1-0-1, with a "View changes" button and Upgrade and Cancel actions](images/upgrade-event-specification-page.png)
-
-When clicked it will show the differences between the current version of the Data Structure and the one the user intends to upgrade to.
-
-![Side-by-side diff view showing JSON schema changes between the current version 1-0-0 and the latest version 1-0-1 of a data structure, with additions highlighted](images/upgrade-event-specification-diff.png)
-
-At the bottom, a button will allow users to confirm the upgrade. One of two things can happen when the upgrade is confirmed:
-
-#### 1. Successful automatic upgrade
-
-- If the Event Specification instructions are compatible with the new Data Structure version, the system will automatically upgrade the Event Specification to the latest version of the Data Structure.
-- All instructions will be updated seamlessly without any further user intervention.
-
-!["Upgrade Add Product" page showing a green "Data structure updated" success message with a "Return to Event Specification" button](images/success_upgrade.png)
-
-#### 2. Conflict detection and resolution
-
-If the new version of the Data Structure introduces incompatibilities with the existing Event Specification instructions, the system will flag the conflicting properties.
-
-- The UI will prompt the user to resolve these conflicts before the Event Specification can be upgraded.
-- The conflict resolution UI provides options to the user to modify or delete each instruction depending on the type of incompatibility:
-  - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
-  - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
-
-!["Upgrade Add Product" page showing a conflict where the upgrade from 1-0-1 to 2-0-0 couldn't complete because the Quantity property instruction is incompatible with the new version and requires manual editing](images/conflict_resolution.png)
-
-This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
+When a data structure that an event specification uses gets a new version, you can upgrade the event specification. See [evolve your tracking design](/docs/event-studio/evolve-tracking-design/index.md#upgrade-event-specifications-to-the-new-version).

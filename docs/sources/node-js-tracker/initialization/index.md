@@ -5,6 +5,7 @@ date: "2021-04-07"
 sidebar_position: 1
 description: "Install and initialize the Node.js tracker using npm with emitter configuration for sending events to Snowplow collectors."
 keywords: ["node.js tracker installation", "npm install", "tracker initialization"]
+content_type: how-to
 ---
 
 The Snowplow Node.js Tracker is tested and compatible with Node.js versions from 18 to 20. Installation requires [npm](https://www.npmjs.org/), [pnpm](https://pnpm.js.org/) or [yarn](https://yarnpkg.com/).

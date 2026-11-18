@@ -4,6 +4,7 @@ sidebar_label: "Managing forwarders"
 sidebar_position: 12
 description: "Edit, clone, and delete Snowplow event forwarders in Console to update configurations, duplicate setups, or remove unused destinations."
 keywords: ["manage forwarders", "edit forwarder", "delete forwarder", "clone forwarder", "forwarder configuration"]
+content_type: how-to
 ---
 
 This page explains how to edit, clone, and delete event forwarders. To start, go to **Destinations** > **Event forwarding** in [Snowplow Console](https://console.snowplowanalytics.com).

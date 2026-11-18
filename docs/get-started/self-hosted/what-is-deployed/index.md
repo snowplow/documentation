@@ -4,6 +4,7 @@ sidebar_label: "What is deployed?"
 sidebar_position: 3
 description: "Overview of Snowplow pipeline infrastructure components deployed by Terraform including collector, enrichment, and loader modules."
 keywords: ["infrastructure", "Terraform modules", "pipeline architecture", "deployed components"]
+content_type: reference
 ---
 
 ```mdx-code-block

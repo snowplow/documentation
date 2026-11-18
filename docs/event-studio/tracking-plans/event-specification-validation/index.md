@@ -1,10 +1,11 @@
 ---
-title: "Event specification validation"
-sidebar_label: "Validation"
-sidebar_position: 3
+title: "How event specification validation checks events"
+sidebar_label: "How validation checks events"
+sidebar_position: 6
 description: "Event specification validation checks events that arrive with a specification entity attached against the instructions defined in your published specifications. When an event fails validation, the pipeline attaches an entity describing the failure."
 keywords: ["event specification validation", "event validation", "validation entity", "tracking plans", "data quality", "entity cardinality", "property instructions"]
 date: "2026-04-27"
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -16,7 +17,7 @@ The pipeline runs validation on events that arrive with an `event_specification`
 When an event fails validation, the pipeline attaches an [entity](/docs/fundamentals/entities/index.md) to it describing the failure. By default, the pipeline still enriches and delivers events that fail validation alongside successful ones; only the validation entity reflects the failure. You don't need to change your tracking implementation, as validation runs against newly published specifications immediately.
 
 :::note[Validation failures don't drop events by default]
-The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md), unless you configure the tracking plan to [send invalid events to failed events](#send-invalid-events-to-failed-events).
+The pipeline still delivers events that fail validation as enriched events. The pipeline records the failure in the validation entity, but does not route the event to [failed events](/docs/fundamentals/failed-events/index.md), unless you configure the tracking plan to [send invalid events to failed events](/docs/event-studio/tracking-plans/data-quality/index.md#send-invalid-events-to-failed-events).
 :::
 
 In your warehouse, three cases are possible:
@@ -24,7 +25,7 @@ In your warehouse, three cases are possible:
 - **Passed validation, or matched by inference**: the event has an `event_specification` entity but no `event_specification_validation` entity. Either the event was Snowtype-tracked and passed validation, or the pipeline matched it to a specification by inference.
 - **Not associated with a specification**: the event has neither entity. No specification was attached at tracking time, and the pipeline did not match the event to a published specification.
 
-These cases assume the default **Data quality rules** setting. If the tracking plan [sends invalid events to failed events](#send-invalid-events-to-failed-events), events that fail validation don't reach your warehouse `events` table.
+These cases assume the default **Data quality rules** setting. If the tracking plan [sends invalid events to failed events](/docs/event-studio/tracking-plans/data-quality/index.md#send-invalid-events-to-failed-events), events that fail validation don't reach your warehouse `events` table.
 
 Console shows how many events fall into each of these cases for every tracking plan and event specification, without a warehouse query. See [Monitor tracking plan data quality in Console](/docs/event-studio/tracking-plans/data-quality/index.md).
 
@@ -98,24 +99,8 @@ A Snowtype-tracked event declares a specific `(id, version)` pair in its `event_
 :::info[Enable validation for an existing tracking implementation]
 1. Update the Snowtype dependency in your package manager or CI configuration to 0.17.0 or later
 2. Regenerate the tracker code with `snowtype generate`, either manually or as part of your build pipeline
-3. [Publish](/docs/event-studio/tracking-plans/event-specifications/index.md) the relevant event specifications; pipelines don't validate against drafts. To validate against a draft before publishing, use a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications).
+3. [Publish](/docs/event-studio/test-and-publish/index.md#publish-event-specifications) the relevant event specifications; pipelines don't validate against drafts. To validate against a draft before publishing, use a [development environment](/docs/testing/snowplow-micro/console/index.md#validate-event-specifications).
 4. Deploy the regenerated tracker code
 :::
 
-When you publish a new version of a specification, events from existing tracker code continue to declare the previous version, validating against its instructions. The new version applies once you regenerate your tracker code with [Snowtype](/docs/event-studio/implement-tracking/index.md) and deploy the updated tracker code, after which new events declare and validate against the new version.
-
-Different versions of a specification can coexist. Each event validates against the version it declares, whether the variation comes from a rolling update, from different applications using different versions, or from different deployment stages.
-
-## Send invalid events to failed events
-
-Each tracking plan has a **Data quality rules** setting that controls where events that fail validation go. In the Console, open the tracking plan and select **Data quality rules**. You need the **Edit** [permission](/docs/account-management/managing-permissions/index.md#tracking-plans) on tracking plans to change this setting.
-
-The default is **Send to valid events and mark as violation**, which keeps those events with your enriched ones. Select **Send to failed events as validation error** to route them to [failed events](/docs/fundamentals/failed-events/index.md) instead, keeping events that don't conform to their specifications out of your warehouse `events` table.
-
-!["Data quality rules" dialog for a tracking plan, showing the options "Send to valid events and mark as violation" and "Send to failed events as validation error"](images/data-quality-rules-dialog.png)
-
-The setting applies to all event specifications in the tracking plan and all their versions. Changes take effect within a few minutes, with no new specification version to publish and no tracking code to redeploy.
-
-These events appear in failed events as enrichment failures from the event specification enrichment. They keep both the `event_specification` and `event_specification_validation` entities, so you can inspect why each event failed. In Console, they count as [failed events](/docs/event-studio/tracking-plans/data-quality/index.md#understand-the-event-categories) rather than events with violations.
-
-If the pipeline cannot find the specification an event declares, that event stays with your enriched events, even when the tracking plan sends invalid events to failed events.
+When you publish a new version of a specification, events keep validating against the version that their tracker code declares until you regenerate and deploy that code. See [Publish the new specification version](/docs/event-studio/evolve-tracking-design/index.md#publish-the-new-specification-version).

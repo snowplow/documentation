@@ -1,9 +1,10 @@
 ---
-title: "Define attributes"
+title: "Configure attributes"
 sidebar_position: 10
-sidebar_label: "Attributes"
+sidebar_label: "Configure attributes"
 description: "Define individual attributes within attribute groups by selecting event schemas or event specifications, properties, and aggregation types. Use time periods and criteria filters to control when attributes update."
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection", "python sdk attributes", "attribute configuration"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -116,9 +117,9 @@ Signals supports the following aggregation types:
 | Least Frequent | Least frequent property value seen | String, Numeric, Boolean | Tracks up to 100 distinct values; ties are broken arbitrarily |
 | Approx Count Distinct | Approximate distinct count ([HyperLogLog](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/)) | String, Numeric, Boolean | Approximate, with a typical error around 1%. Don't use where an exact count matters |
 | Category Count | Dictionary of unique values and their counts | String, Numeric, Boolean | Keeps the 100 highest-count values; lower-count values are dropped |
-| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See below |
-| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
-| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See below |
+| Unique List | List of unique property values | String, Numeric, Boolean | Ordered oldest to newest by `derived_tstamp`, capped at 100 values. See [Unique list ordering](#unique-list-ordering) |
+| Time Since Last | Duration since the most recent matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
+| Time Since First | Duration since the earliest matching event | Always uses `derived_tstamp` | Requires `time_unit`. Result type must be `float` or `double`. See [Time since aggregations](#time-since-aggregations) |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
@@ -242,7 +243,7 @@ Click **Confirm** to use the calculated property for this attribute.
 
 ![Calculated property panel combining geo_country and geo_city with the concat operation and a hyphen separator](../../images/calculated-properties.png)
 
-The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as shown above, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
+The picker only lists properties compatible with the attribute's aggregation, so choose the aggregation first. For example, to concatenate `geo_country` and `geo_city` as in the screenshot, use an aggregation such as `last` or `unique_list`: numeric aggregations such as `sum` hide string properties.
 
 The aggregation also decides which operations are offered. With `sum`, `mean`, `min`, or `max`, you can choose `sum`, `product`, `min`, `max`, or `coalesce`, but not `concat`. With `time_since_last` or `time_since_first`, you can only select one property, so calculated properties aren't available.
 
@@ -483,7 +484,7 @@ With the Python SDK, you can also restrict the attribute to structured events by
 
 ## All attribute options
 
-The table below lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
+This table lists all available arguments for a Python SDK `Attribute`. The same options are available in the Console attribute configuration interface.
 
 | Argument | Description | Type | Required? |
 | --- | --- | --- | --- |
@@ -808,9 +809,3 @@ experiment_variants_seen = Attribute(
 ```
 
 Each event contributes one entry, such as `"exp3-blue"`, and `unique_list` keeps the distinct ones. If either property can be missing on an event, add [criteria](#filter-with-criteria) requiring both to be set: `concat` skips a null property, so an event with an experiment but no variant would otherwise contribute `"exp3"`, colliding with any other event that produces `"exp3"`.
-
-```mdx-code-block
-import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"
-
-<SignalsFreeTier/>
-```

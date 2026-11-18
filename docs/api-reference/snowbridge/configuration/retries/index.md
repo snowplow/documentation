@@ -3,6 +3,7 @@ title: "Snowbridge retry behavior configuration (beta)"
 sidebar_label: "Retry behavior (beta)"
 description: "Configure retry behavior for transient and setup failures with exponential backoff and configurable max attempts."
 keywords: ["snowbridge config", "retry configuration", "transient failures", "setup failures", "exponential backoff", "error handling"]
+content_type: reference
 ---
 
 ```mdx-code-block

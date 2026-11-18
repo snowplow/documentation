@@ -1,27 +1,10 @@
-.customized {
-  font-weight: 400;
-  color: var(--ifm-color-primary);
-  padding-left: 4px;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-}
-
-.customized:hover {
-  color: var(--ifm-color-primary);
-  text-decoration: underline;
-}
-
-.customized:not(:last-of-type) {
-  margin-right: 16px;
-}
-
-@media screen and (max-width: 1070px) {
+/* Below 1200px the navbar items move into the mobile menu */
+@media screen and (max-width: 1200px) {
   :global(.navbar__inner) .customized {
-    display: none !important;
+    display: none;
   }
 
   :global(.navbar__items .navbar__toggle) {
-    display: block !important;
+    display: block;
   }
 }

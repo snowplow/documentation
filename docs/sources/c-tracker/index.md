@@ -5,13 +5,14 @@ description: "The Snowplow C++ Tracker enables event tracking from C++ applicati
 keywords: ["c++ tracker", "cpp tracker", "c++ sdk", "server-side tracking", "game tracking"]
 date: "2020-02-25"
 sidebar_position: 240
+content_type: sdk
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
-
-<Badges badgeType="Actively Maintained"></Badges>
+<TrackerTier id="cpp" />
 ```
+
+<TrackerFeatures id="cpp" />
 
 The [Snowplow C++ Tracker](https://github.com/snowplow/snowplow-cpp-tracker) allows you to track Snowplow events from your C++ apps, games and servers.
 

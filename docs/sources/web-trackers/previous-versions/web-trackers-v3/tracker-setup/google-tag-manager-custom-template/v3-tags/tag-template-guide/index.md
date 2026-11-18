@@ -1,5 +1,6 @@
 ---
 title: "Snowplow v3"
+sidebar_label: "Snowplow v3"
 date: "2021-11-18"
 sidebar_position: 100
 description: "Documentation for Snowplow v3 in the web tracker."

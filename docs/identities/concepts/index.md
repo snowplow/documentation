@@ -5,6 +5,7 @@ date: "2025-02-25"
 sidebar_position: 1
 description: "Core concepts behind Snowplow Identities: identifiers, Snowplow IDs, merges, and identity resolution."
 keywords: ["identities", "identity resolution", "identifiers", "Snowplow ID", "merges"]
+content_type: concept
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -14,7 +15,7 @@ Identities is based on several core concepts.
 * **A Snowplow ID** is a persistent, immutable identifier for a collection of linked identifiers that represent a single user
 * **[Merges](/docs/identities/concepts/merges/index.md)** occur when identifiers link two previously separate Snowplow IDs together
 * **[Unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)** prevent incorrect merges when users share devices
-* **[Cross-domain tracking](/docs/identities/concepts/cross-domain-tracking/index.md)** resolves identity across sites with different cookie domains
+* **[Cross-domain tracking](/docs/events/cross-navigation/index.md#identities-and-cross-domain-tracking)** resolves identity across sites with different cookie domains
 
 ## Identifiers
 

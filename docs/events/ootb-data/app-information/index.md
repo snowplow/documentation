@@ -4,6 +4,7 @@ sidebar_label: "App and tracker information"
 sidebar_position: 10
 description: "Track application and tracker metadata including version, build, platform, and namespace in atomic fields and context entities."
 keywords: ["app information", "tracker metadata", "app_id", "tracker version"]
+content_type: reference
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"

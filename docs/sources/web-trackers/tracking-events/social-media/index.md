@@ -4,6 +4,7 @@ sidebar_label: "Social media"
 sidebar_position: 140
 description: "Track user interactions with social media widgets including likes, shares, and retweets across Facebook, Twitter, and other platforms."
 keywords: ["social media", "social interactions"]
+content_type: how-to
 ---
 
 ```mdx-code-block

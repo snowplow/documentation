@@ -4,6 +4,7 @@ sidebar_label: "Quick start"
 sidebar_position: 100
 description: "Add Snowplow v4 custom templates to your Google Tag Manager workspace and configure basic tracking. Import templates from the GTM gallery and set up your collector endpoint for event tracking."
 keywords: ["gtm setup", "tag manager templates", "gtm workspace", "snowplow v4 setup", "gtm gallery"]
+content_type: how-to
 ---
 
 This guide will walk you through the initial setup for Snowplow in Google Tag Manager.

@@ -4,6 +4,7 @@ sidebar_position: 30
 sidebar_label: "Managing enrichments"
 description: "Enable, configure, and deploy enrichments for your pipelines using Snowplow Console UI."
 keywords: ["manage enrichments", "enable enrichments", "enrichment configuration"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

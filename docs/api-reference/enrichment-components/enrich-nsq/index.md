@@ -4,6 +4,7 @@ sidebar_label: "Enrich NSQ (cloud agnostic)"
 sidebar_position: 35
 description: "Cloud-agnostic standalone JVM application for enriching Snowplow events from NSQ with configurable enrichments and validation."
 keywords: ["enrich nsq", "nsq", "cloud agnostic enrichment"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ description: "Configure tracker behavior with options for cookies, events, anony
 keywords: ["tracker configuration", "initialization options", "configuration object", "tracker settings"]
 date: "2021-03-31"
 sidebar_position: 2000
+content_type: reference
 ---
 
 ```mdx-code-block
@@ -85,8 +86,8 @@ The following table shows all the configuration parameters. These are **all opti
 | [`maxPostBytes`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#maximum-payload-size)                                      | Maximum size in bytes for POST requests.                                                             | 40000                                 | `int`                      |
 | [`maxGetBytes`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#maximum-payload-size)                                       | Maximum size for GET request URLs.                                                                   |                                       | `int`                      |
 | [`postPath`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#custom-post-path)                                              | Custom collector POST path.                                                                          | `/com.snowplowanalytics.snowplow/tp2` | `string`                   |
-| [`crossDomainLinker`](/docs/sources/web-trackers/cross-domain-tracking/index.md)                                                            | Function to determine which links to decorate for cross-domain tracking.                             |                                       | `function`                 |
-| [`useExtendedCrossDomainLinker`](/docs/sources/web-trackers/cross-domain-tracking/index.md)                                                 | Use extended format for cross-domain linker with additional user/session data.                       | `false`                               | `boolean` or `object`      |
+| [`crossDomainLinker`](/docs/events/cross-navigation/index.md#choose-which-links-to-decorate)                                                            | Function to determine which links to decorate for cross-domain tracking.                             |                                       | `function`                 |
+| [`useExtendedCrossDomainLinker`](/docs/events/cross-navigation/index.md#configure-extended-format-properties)                                                 | Use extended format for cross-domain linker with additional user/session data.                       | `false`                               | `boolean` or `object`      |
 | [`cookieLifetime`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-lifetime-and-duration)          | Set the cookie lifetime in seconds.                                                                  | 63072000 (2 years)                    | `int`                      |
 | [`sessionCookieTimeout`](/docs/sources/web-trackers/tracking-events/session/index.md)                                                       | Set the session timeout in seconds.                                                                  | 1800 (30 minutes)                     | `int`                      |
 | [`stateStorageStrategy`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#storage-strategy)                | How to store tracker state.                                                                          | `cookieAndLocalStorage`               | `string` enum              |

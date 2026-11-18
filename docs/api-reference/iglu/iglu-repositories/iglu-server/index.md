@@ -5,6 +5,7 @@ sidebar_position: 10
 date: "2026-10-16"
 description: "Iglu Server is a RESTful schema registry for publishing, validating, and serving Iglu schemas in self-hosted Snowplow pipelines."
 keywords: ["iglu server", "schema registry", "self-hosted snowplow", "self-hosted"]
+content_type: how-to
 ---
 
 ```mdx-code-block

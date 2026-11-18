@@ -5,6 +5,7 @@ date: "2020-10-12"
 sidebar_position: 200
 description: "Deprecated. Reference for the legacy Snowplow Tracking CLI interface. Use the snowplow-cli events send command instead."
 keywords: ["tracking cli deprecated", "snowplow-cli events send"]
+content_type: reference
 ---
 
 The command line interface is as follows:

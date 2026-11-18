@@ -4,6 +4,7 @@ sidebar_label: "Creating forwarders"
 sidebar_position: 11
 description: "Step-by-step guide to create a Snowplow event forwarder to send events to third-party destinations in real-time with connections, filters, and field mappings."
 keywords: ["create forwarder", "event forwarding setup", "connection configuration", "field mapping", "destination integration"]
+content_type: how-to
 ---
 
 Follow the steps below to configure a new event forwarder. See [available integrations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific guides.

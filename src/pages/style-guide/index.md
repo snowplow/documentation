@@ -1,3 +1,10 @@
+---
+title: "Snowplow style guide"
+sidebar_label: "Snowplow style guide"
+description: "Writing rules for all Snowplow content, including documentation, blog posts, and marketing copy."
+keywords: ["style guide", "writing guidelines", "snowplow content"]
+---
+
 # Snowplow style guide
 
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
@@ -217,7 +224,7 @@ Here are two pieces of older content that only partially follow the style guide.
     | on top of that |
     | quickly        |
 
-- Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
+- Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section. If the reader needs the concept to follow the task, one sentence defining it before the link is fine
   - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
   - No ellipses ("...")
 
@@ -320,6 +327,18 @@ Here are two pieces of older content that only partially follow the style guide.
     | ---------------------------------------------- |
     | 🎉 Reduce your data loading costs by up to 80%. |
 
+### Writing for retrieval
+
+Search engines and AI agents often read one section of a page, or one chunk of its Markdown copy, without the rest of the page. Write each section so it makes sense on its own:
+
+- Don't point at other content with "above", "below", or "the following". Name the section or link to it instead.
+- Put the exact error string next to its fix, formatted as code, so a search for the message finds the fix.
+- Restate every diagram as numbered steps or a list in the text. The Markdown copy of the page keeps the diagram's alt text, but not its layout.
+- Repeat the subject of each section instead of starting with "it" or "this".
+- Use the `<AppliesTo>` component for version requirements, so the marker and the versions page come from the same list.
+
+See the [components page](/style-guide/components/) for the MDX components that help with this, such as `<Steps>` and `<ParamTable>`.
+
 ### Diagrams and images
 - Adding diagrams and images is encouraged
 - Diagrams and images should have white backgrounds
@@ -327,6 +346,28 @@ Here are two pieces of older content that only partially follow the style guide.
 - Images should be a sensible size (max 2000px x 500px)
 - Highlighting the relevant part of an image is recommended
 - For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as they adjust automatically
+
+## Content types and page templates
+
+Every docs page has a `content_type` in its frontmatter. The type says what the page is for, and each type has a fixed shape, so readers learn where to look and search tools can filter by type. Pick the type before you start writing, and follow its template.
+
+Templates stay within the 3 to 5 H2 limit. Put the description, and when or why to use the feature, in the opening paragraphs before the first H2. Don't add a "Next steps" heading: end the page with a short paragraph of links instead.
+
+| `content_type` | Use it for                                                    | H2 sections, in order                                                                                      |
+| -------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `concept`      | Explaining what something is and why it matters               | What it is and why it matters · How it works (diagram plus a text version) · Example · Related concepts    |
+| `how-to`       | Doing one task                                                | Before you begin · Steps (verify as the last step) · Troubleshooting (exact error string, then the fix)   |
+| `tutorial`     | A guided example that builds something end to end            | What you'll build (with a time estimate) · Requirements · Steps · Clean up                                 |
+| `reference`    | Lookup material such as parameters, fields, and methods       | Parameters (generated table) · Example · Errors · Version applicability                                    |
+| `integration`  | Connecting a destination or third-party tool                  | Compatibility · Connect · Configure · Troubleshooting                                                       |
+| `sdk`          | A tracker or SDK landing page                                 | Feature support (row from the tracker matrix) · Install and initialize · Track your first event            |
+| `landing`      | Hubs and overviews that route readers to other pages          | A task table, then short groups of links                                                                   |
+
+Some rules that go with the templates:
+
+- Use `<Steps>` for the Steps section of how-to and tutorial pages, and `<ParamTable>` for reference parameters. See the [components page](/style-guide/components/).
+- Leave out Troubleshooting or Errors when there are no known errors. Don't write generic advice to fill the section.
+- Don't mix how-to and reference content on one page. Split it into a how-to page and a reference page that link to each other. [Check your Collector configuration](/docs/pipeline/collector/) and the [Collector configuration reference](/docs/pipeline/collector/configuration-reference/) are an example.
 
 ## Inclusive language
 ### Allowlist and denylist

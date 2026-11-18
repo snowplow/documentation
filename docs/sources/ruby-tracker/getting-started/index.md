@@ -5,6 +5,7 @@ date: "2021-10-15"
 sidebar_position: 0
 description: "Install the Ruby tracker gem, initialize trackers with emitters, configure subject properties, and implement singleton pattern for Ruby and Rails apps."
 keywords: ["ruby tracker setup", "gem installation", "singleton pattern"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -1,5 +1,6 @@
 ---
 title: "Consent"
+sidebar_label: "Consent"
 date: "2021-04-07"
 sidebar_position: 4000
 description: "Documentation for Consent in the web tracker."

@@ -5,6 +5,7 @@ description: "Reduce the JavaScript tracker's exposure to compromised third-part
 keywords: ["security", "hardening", "subresource integrity", "sri", "content security policy", "csp", "supply chain"]
 date: "2026-11-06"
 sidebar_position: 3300
+content_type: how-to
 ---
 
 The JavaScript tracker runs in your page, so every script it loads, including `sp.js`, plugins, and libraries that plugins load, runs with the same access as your own code. If a CDN or an upstream package serving one of those scripts is compromised, the change reaches your page the next time the script loads.

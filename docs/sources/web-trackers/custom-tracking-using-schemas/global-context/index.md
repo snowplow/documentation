@@ -5,6 +5,7 @@ description: "Define context entities once and automatically attach them to all 
 keywords: ["global context", "context generators", "filter functions", "rulesets"]
 date: "2022-08-30"
 sidebar_position: 20
+content_type: how-to
 ---
 
 ```mdx-code-block

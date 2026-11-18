@@ -1,5 +1,6 @@
 ---
 title: "Initialization options"
+sidebar_label: "Initialization options"
 sidebar_position: 10
 description: "Setup and initialization instructions for Initialization options."
 keywords: ["setup", "installation"]

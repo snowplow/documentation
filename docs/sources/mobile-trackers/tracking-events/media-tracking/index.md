@@ -4,6 +4,7 @@ sidebar_label: "Media"
 sidebar_position: 100
 description: "Track media playback events including play, pause, buffering, and completion using the mobile media tracking plugin."
 keywords: ["media tracking", "video tracking", "avplayer tracking"]
+content_type: how-to
 ---
 
 ```mdx-code-block

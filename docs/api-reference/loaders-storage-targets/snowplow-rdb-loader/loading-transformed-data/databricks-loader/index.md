@@ -5,6 +5,7 @@ date: "2022-05-27"
 sidebar_position: 300
 description: "Load wide row Parquet data into Databricks with automatic schema creation and Delta Lake optimization."
 keywords: ["databricks loader", "databricks rdb", "wide row parquet", "delta lake", "databricks copy"]
+content_type: how-to
 ---
 
 ```mdx-code-block

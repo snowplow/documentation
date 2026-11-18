@@ -5,6 +5,7 @@ sidebar_position: 10
 date: "2026-03-26"
 description: "Add static global context to all Flutter tracker events. Configure global context at initialization or add and remove it at runtime using tags."
 keywords: ["flutter global context", "context entities", "entity configuration", "global entities"]
+content_type: how-to
 ---
 
 **Global context** lets you define context entities once and have them sent with every tracked event. This saves you from having to manually attach the same context entities to every individual event call.

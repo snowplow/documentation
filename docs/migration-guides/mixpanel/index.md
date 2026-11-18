@@ -5,6 +5,7 @@ sidebar_position: 5
 sidebar_label: "Mixpanel to Snowplow"
 description: "Migrate from Mixpanel to Snowplow with guidance on event tracking, user profiles, super properties, and warehouse modeling."
 keywords: ["mixpanel", "migration", "tracking plan", "user profiles", "super properties", "event tracking"]
+content_type: how-to
 ---
 
 import AiAssistantInstall from '@site/docs/reusable/ai-assistant-install/_index.md';

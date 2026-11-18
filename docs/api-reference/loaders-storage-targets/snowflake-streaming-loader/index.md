@@ -4,6 +4,7 @@ sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
 description: "Load Snowplow events to Snowflake with sub-minute latency from Kinesis, Pub/Sub, or Kafka using Snowpipe Streaming."
 keywords: ["snowflake loader", "snowpipe streaming", "real-time warehouse", "snowflake data warehouse"]
+content_type: how-to
 ---
 
 ```mdx-code-block

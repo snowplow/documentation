@@ -1,5 +1,6 @@
 ---
 title: "Configuring how events are sent"
+sidebar_label: "Configuring how events are sent"
 date: "2021-04-07"
 sidebar_position: 2750
 description: "Documentation for Configuring how events are sent in the web tracker."

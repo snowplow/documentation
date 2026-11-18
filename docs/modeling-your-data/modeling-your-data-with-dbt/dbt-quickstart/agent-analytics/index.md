@@ -5,6 +5,7 @@ sidebar_position: 80
 description: "Quick start guide for the Snowplow Agent Analytics dbt package to model AI agent traffic and AI-referred human page views."
 keywords: ["agent analytics quickstart", "agent analytics setup", "dbt agent analytics installation"]
 date: "2026-09-28"
+content_type: how-to
 ---
 
 This guide walks you through setting up the [Snowplow Agent Analytics dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-agent-analytics-data-model/index.md).

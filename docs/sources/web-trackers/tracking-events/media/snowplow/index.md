@@ -4,6 +4,7 @@ sidebar_label: "Snowplow media"
 sidebar_position: 5
 description: "Manually track media events from any video player using flexible event tracking methods with custom entities and ad support."
 keywords: ["media tracking", "video events"]
+content_type: how-to
 ---
 
 ```mdx-code-block

@@ -5,6 +5,7 @@ sidebar_position: 80
 description: "Upgrade an existing Snowflake Agent Analytics base table to scalar fields while retaining its event history and incremental state."
 keywords: ["agent analytics migration", "Snowflake", "dbt package upgrade"]
 date: "2026-10-29"
+content_type: how-to
 ---
 
 Use this guide when upgrading to Agent Analytics 0.2.0 from a Snowflake installation that stores raw entity columns in `base_events`. Version 0.2.0 stores 19 scalar columns, including `utm_source`, `utm_medium`, and `load_tstamp_date`. You can derive these columns from the existing table without replaying atomic events or resetting incremental processing. New installations need no migration.

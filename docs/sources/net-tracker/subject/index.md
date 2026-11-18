@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 50
 description: "Add user and environment data to tracked events using the Subject class with platform, language, and user properties."
 keywords: [".net subject configuration", "user properties", "environment data"]
+content_type: reference
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.

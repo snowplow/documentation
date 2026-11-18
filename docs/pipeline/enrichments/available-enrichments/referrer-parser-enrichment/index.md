@@ -4,6 +4,7 @@ sidebar_position: 3
 sidebar_label: Referrer parser
 description: "Extract attribution data from referrer URLs and utm_source parameters to identify traffic sources, search terms, and marketing channels."
 keywords: ["referrer parser", "traffic source", "attribution", "referer", "utm_source", "chatbot"]
+content_type: reference
 ---
 
 import Tabs from '@theme/Tabs';

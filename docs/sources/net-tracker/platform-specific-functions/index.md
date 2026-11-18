@@ -5,6 +5,7 @@ date: "2020-02-26"
 sidebar_position: 70
 description: "Access platform-specific information for mobile, desktop, and geo-location contexts in Xamarin and .NET applications."
 keywords: ["platform-specific functions", "mobile context", "geo-location"]
+content_type: reference
 ---
 
 To support multiple platforms we provide several utility functions for fetching platform specific information.

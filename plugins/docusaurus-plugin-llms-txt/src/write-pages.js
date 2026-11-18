@@ -77,6 +77,7 @@ function formatPageMarkdown(page, pageUrl, siteUrl, outdatedPrefixes) {
     lines.push(`> ${page.description}`)
   }
   lines.push(`> Source: ${pageUrl}`)
+  lines.push(`> Documentation index: ${siteUrl}/llms.txt`)
 
   if (page.kind === 'release-note') {
     if (page.date) lines.push(`> Date: ${page.date}`)

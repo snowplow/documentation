@@ -4,6 +4,7 @@ sidebar_label: "Generic timing"
 sidebar_position: 98
 description: "Track custom timing events to measure how long resources take to load or user actions take to complete with category and label organization."
 keywords: ["timing events", "performance"]
+content_type: how-to
 ---
 
 ```mdx-code-block

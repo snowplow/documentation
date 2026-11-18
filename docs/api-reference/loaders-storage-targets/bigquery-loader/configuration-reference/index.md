@@ -4,6 +4,7 @@ sidebar_label: "Configuration reference"
 sidebar_position: 1
 description: "Configure BigQuery Streaming Loader with BigQuery, Kinesis, and Pub/Sub settings for streaming enriched Snowplow events."
 keywords: ["bigquery config", "loader configuration", "streaming config", "kinesis config", "pubsub config"]
+content_type: reference
 ---
 
 ```mdx-code-block

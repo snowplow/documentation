@@ -4,6 +4,7 @@ sidebar_label: "Performance timings"
 sidebar_position: 98
 description: "Track page load performance metrics using the PerformanceNavigationTiming API including DNS lookup, connection times, and resource loading duration."
 keywords: ["performance", "page load"]
+content_type: how-to
 ---
 
 ```mdx-code-block

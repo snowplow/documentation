@@ -5,6 +5,7 @@ sidebar_position: 50
 description: "Upgrade guide for Snowplow Elasticsearch Loader 3.0.x covering common-streams refactoring, configuration changes, and removed features."
 keywords: ["elasticsearch loader 3.0", "common-streams", "configuration migration", "kinesis"]
 date: "2026-04-28"
+content_type: how-to
 ---
 
 In version 3.0.0, the Elasticsearch Loader is rewritten to use [common-streams](https://github.com/snowplow-incubator/common-streams) libraries under the hood. [common-streams](https://github.com/snowplow-incubator/common-streams) is the collection of libraries that contains streaming-related constructs commonly used across many Snowplow streaming applications.

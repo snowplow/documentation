@@ -5,6 +5,7 @@ date: "2022-08-30"
 sidebar_position: 70
 description: "Track events from both native mobile code and embedded WebViews in hybrid apps using unified session tracking."
 keywords: ["hybrid apps", "webview tracking", "mobile web integration"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -60,6 +61,8 @@ We recommend using the Web tracker (v4.3+) to forward all Web events to the mobi
 The Web tracker will automatically intercept all web events and forward them to the mobile tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity).
 
 The forwarded events are filtered out of the Web tracker event queue so that they are not tracked twice.
+
+With [screen context](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) enabled, the mobile tracker also adds its own `Screen` entity to forwarded events. If you enable the [`screenContextFromEvent` option](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#keep-the-screen-an-event-was-triggered-on), forwarded events that already carry a screen entity from the JavaScript tracker keep it, and the mobile tracker doesn't add its own.
 
 The WebView plugin uses the [Snowplow WebView tracker](/docs/sources/webview-tracker/index.md) as a dependency.
 

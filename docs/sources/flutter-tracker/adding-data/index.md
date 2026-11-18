@@ -5,6 +5,7 @@ description: "Enrich Flutter events with custom context entities using self-desc
 keywords: ["event context", "context entities", "subject configuration", "self-describing json", "event enrichment"]
 date: "2022-01-31"
 sidebar_position: 4000
+content_type: how-to
 ---
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset:

@@ -1,21 +1,12 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { darkTheme, lightTheme } from '@site/src/components/MuiTheme'
 import { useColorMode } from '@docusaurus/theme-common'
 
-// Themeing
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-})
+// Themes come from the design tokens
+export { darkTheme, lightTheme }
 
 export const SchemaSetter = (props) => {
   const [manifestSchema, setManifestSchema] = useState('my_manifest_schema')

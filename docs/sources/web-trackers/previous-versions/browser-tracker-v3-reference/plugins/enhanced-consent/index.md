@@ -1,5 +1,6 @@
 ---
 title: "Enhanced Consent"
+sidebar_label: "Enhanced Consent"
 sidebar_position: 6500
 description: "Documentation for Enhanced Consent in the web tracker."
 keywords: ["tracker", "configuration"]

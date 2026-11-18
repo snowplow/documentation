@@ -4,6 +4,7 @@ sidebar_position: 10
 sidebar_label: "Recover loaded events with SQL"
 description: "Learn how to recover failed events from your failed events table back into your good events table using SQL queries."
 keywords: ["SQL event recovery", "recover with SQL", "failed events SQL"]
+content_type: how-to
 ---
 
 ```mdx-code-block

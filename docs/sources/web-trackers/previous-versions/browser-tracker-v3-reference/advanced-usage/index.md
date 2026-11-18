@@ -1,5 +1,6 @@
 ---
 title: "Advanced Usage"
+sidebar_label: "Advanced Usage"
 date: "2021-04-07"
 sidebar_position: 4000
 description: "Advanced configuration and usage patterns for the Browser tracker v3 including timestamps, tracker information, and ID services."

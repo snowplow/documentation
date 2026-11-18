@@ -5,6 +5,7 @@ sidebar_position: 70
 description: "Quick start guide for the Snowplow Identities dbt package to transform identity entities and merge events into resolved identity tables."
 keywords: ["identities quickstart", "identities setup", "dbt identities installation"]
 date: "2026-03-23"
+content_type: how-to
 ---
 
 This guide walks you through setting up the [Snowplow Identities dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md).

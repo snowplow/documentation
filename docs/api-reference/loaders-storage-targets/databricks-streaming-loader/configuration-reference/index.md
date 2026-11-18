@@ -4,6 +4,7 @@ sidebar_label: "Configuration reference"
 sidebar_position: 1
 description: "Configure Databricks Streaming Loader with Unity Catalog, Kinesis, Pub/Sub, and Kafka settings for lakehouse streaming."
 keywords: ["databricks config", "unity catalog config", "lakeflow config", "streaming loader configuration"]
+content_type: reference
 ---
 
 ```mdx-code-block

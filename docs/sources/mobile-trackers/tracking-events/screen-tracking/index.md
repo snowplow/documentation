@@ -1,9 +1,10 @@
 ---
 title: "Track screen views and engagement with the native mobile trackers"
-sidebar_label: "Screen view and engagement"
+sidebar_label: "Screen views and engagement"
 sidebar_position: 40
 description: "Automatically track screen changes, time spent on screens, and user engagement metrics in mobile applications."
 keywords: ["screen view tracking", "screen engagement", "mobile analytics"]
+content_type: how-to
 ---
 
 ```mdx-code-block
@@ -134,6 +135,122 @@ Automatic screen view tracking tracks two pieces of information:
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 
 Indeed, disabling the `screenViewAutotracking` only, the tracker can still attach `Screen` entities automatically based only to the manual tracking of `ScreenView` events, and vice versa.
+
+### Keep the screen an event was triggered on
+
+<AppliesTo feature="screen-context-from-event-ios" /> <AppliesTo feature="screen-context-from-event-android" />
+
+The tracker adds the current screen when the event reaches `track()`, not when the user acted. If your app tracks an event after async work, such as a network request, the user may have moved to another screen in the meantime, and the event gets the new screen. If you capture the screen yourself and attach it as a `Screen` entity, the event ends up with two screen entities.
+
+Enable `screenContextFromEvent` to fix this. With the option on, an event that you track with your own `iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-x-x` entity keeps that entity, and the tracker doesn't add the current screen. Events without their own screen entity still get the current screen.
+
+The option is off by default and only applies when `screenContext` is enabled. It follows these rules:
+
+- Only entities attached to the event count: a screen entity added by [global context](/docs/sources/mobile-trackers/custom-tracking-using-schemas/global-context/index.md) generators or plugins doesn't stop the tracker from adding the current screen
+- Screen view and screen end events always get the screen they describe
+- [Web view events](/docs/sources/mobile-trackers/hybrid-apps/index.md) that carry the screen entity from the JavaScript tracker don't get the native screen entity
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let trackerConfig = TrackerConfiguration()
+    .screenContext(true)
+    .screenContextFromEvent(true)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    .screenContext(true)
+    .screenContextFromEvent(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
+    .screenContext(true)
+    .screenContextFromEvent(true);
+```
+
+  </TabItem>
+</Tabs>
+
+You can also change the option at runtime through the `screenContextFromEvent` property of the tracker controller.
+
+To attach the screen yourself, capture its name and ID when the user acts, and add the entity to the event you track later. The ID must match the `id` of the screen view event that you tracked for the screen. This example tracks the screen view manually so the app knows the ID:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+// Track the screen view and keep its ID
+let screenId = UUID()
+tracker.track(ScreenView(name: "product_detail", screenId: screenId))
+
+// When the user taps, capture the screen they're on
+let screen = SelfDescribingJson(
+    schema: "iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-0-0",
+    andDictionary: ["name": "product_detail", "id": screenId.uuidString]
+)
+
+Task {
+    await addToCart(product) // the user may navigate away in the meantime
+    let event = Structured(category: "cart", action: "add").entities([screen])
+    tracker.track(event)
+}
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+// Track the screen view and keep its ID
+val screenId = UUID.randomUUID()
+tracker.track(ScreenView("product_detail", screenId))
+
+// When the user taps, capture the screen they're on
+val screen = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-0-0",
+    mapOf("name" to "product_detail", "id" to screenId.toString())
+)
+
+scope.launch {
+    addToCart(product) // the user may navigate away in the meantime
+    val event = Structured("cart", "add").entities(listOf(screen))
+    tracker.track(event)
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+// Track the screen view and keep its ID
+UUID screenId = UUID.randomUUID();
+tracker.track(new ScreenView("product_detail", screenId));
+
+// When the user taps, capture the screen they're on
+Map<String, Object> screenData = new HashMap<>();
+screenData.put("name", "product_detail");
+screenData.put("id", screenId.toString());
+SelfDescribingJson screen = new SelfDescribingJson(
+    "iglu:com.snowplowanalytics.mobile/screen/jsonschema/1-0-0", screenData);
+
+addToCart(product, () -> {
+    // the user may navigate away in the meantime
+    Structured event = new Structured("cart", "add");
+    event.entities(Collections.singletonList(screen));
+    tracker.track(event);
+});
+```
+
+  </TabItem>
+</Tabs>
 
 ## Screen engagement tracking
 
@@ -367,15 +484,17 @@ Snowplow.defaultTracker.track(event);
 
 A manually tracked `ScreenEnd` behaves exactly like the automatic one: foreground and background time, list item, and scroll depth metrics stop accumulating against the ended screen, and the event carries that screen's final `screen_summary` entity.
 
-You don't need to suppress the automatic behaviour when you do this, and there's no need to check whether the tracker has already ended a screen. If you later track a `ScreenView` event, the automatic `screen_end` preceding it reports only the time elapsed since your manual call, so engagement time is never counted twice.
+You don't need to suppress the automatic behavior when you do this, and there's no need to check whether the tracker has already ended a screen. If you later track a `ScreenView` event, the tracker doesn't track another `screen_end` event before it, so engagement time is never counted twice.
 
-:::note
-`ScreenEnd` ends the screen's *engagement summary*, but doesn't clear the [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity). Events tracked after the call still carry the ended screen until the next `ScreenView` event is tracked, in the same way that they do while the app is in the background.
+After the call, events don't carry the ended screen. Until the next `ScreenView` event is tracked, the tracker attaches neither the [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity) nor the `screen_summary` entity, and lifecycle, list item, and scroll changed events no longer update the ended screen's summary.
 
-The `previousName`, `previousId`, and `previousType` properties of the next [screen view event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views) also report the manually-ended screen, the same as they would after a normal screen-to-screen transition.
+The `previousName`, `previousId`, and `previousType` properties of the next [screen view event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views) still report the manually-ended screen, the same as they would after a normal screen-to-screen transition.
+
+:::note[Behavior in earlier versions]
+Before version 6.3.1 of the iOS tracker and version 6.4.2 of the Android tracker, events tracked after a manual `ScreenEnd` kept carrying the ended screen's `Screen` and `screen_summary` entities until the next `ScreenView` event, and the tracker sent a second `screen_end` event before that screen view.
 :::
 
-If there's no active screen to end, for example because no `ScreenView` event has been tracked yet, the event isn't tracked at all.
+If there's no active screen to end, for example because no `ScreenView` event has been tracked yet, or because you already ended it, the event isn't tracked at all.
 
 ### Modeled data using the Snowplow Unified dbt package
 

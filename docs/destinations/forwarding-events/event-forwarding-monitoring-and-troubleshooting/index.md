@@ -4,6 +4,7 @@ sidebar_label: "Monitoring and troubleshooting forwarders"
 sidebar_position: 15
 description: "Monitor event forwarder performance, debug failures, and understand retry logic with cloud metrics, failed event logs, and Console statistics."
 keywords: ["forwarder monitoring", "troubleshooting", "failed events", "retry logic", "performance metrics"]
+content_type: how-to
 ---
 
 This page outlines how to monitor event forwarder performance and diagnose delivery issues. Snowplow provides both summary metrics and detailed failed event logs to help you understand failure patterns and troubleshoot specific problems.
@@ -98,7 +99,7 @@ To inspect individual failed events, query the [failed event logs](#inspecting-a
 ### Cloud monitoring metrics
 
 :::info
-Forwarder cloud metrics are only available for [CDI Private Managed Cloud](/docs/get-started/index.md#cdi-private-managed-cloud) customers.
+Forwarder cloud metrics are only available for [CDI Private Managed Cloud](/docs/get-started/deployment-options/index.md#cdi-private-managed-cloud) customers.
 :::
 
 Forwarders emit the following metrics in your cloud provider's monitoring service:

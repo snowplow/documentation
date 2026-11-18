@@ -4,6 +4,7 @@ sidebar_label: "Consent"
 sidebar_position: 100
 description: "Track user consent preferences and GDPR compliance with enhanced consent events for acceptance, selection, denial, expiration, and withdrawal."
 keywords: ["consent", "gdpr", "consent management", "enhanced consent", "user privacy", "data protection"]
+content_type: how-to
 ---
 
 ```mdx-code-block

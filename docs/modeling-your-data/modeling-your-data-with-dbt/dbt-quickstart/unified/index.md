@@ -1,14 +1,12 @@
 ---
+type: link
 sidebar_label: "Unified Digital"
 sidebar_position: 10
 title: "Unified Digital Quickstart"
-description: "Quick start guide for the Snowplow Unified Digital dbt package to model web and mobile event data into views, sessions, and users."
+href: /tutorials/unified-digital/setting-up-locally/
+description: "This page moved to the Unified Digital tutorial."
 keywords: ["unified digital quickstart", "unified setup", "dbt unified installation"]
+content_type: landing
 ---
 
-:::info
-
-
-We are gradually moving tutorials like the QuickStart Guides from our standard Documentation to the **Tutorials & Guides** section. You can now find the latest tutorial on how to get started with the Unified Digital package [here](/tutorials/unified-digital/intro).
-
-:::
+This content is now part of the [Unified Digital tutorial](/tutorials/unified-digital/setting-up-locally/).

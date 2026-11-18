@@ -4,21 +4,17 @@ sidebar_label: "Media Player"
 description: "Transform raw media player event data into derived tables for media plays, ad views, and media stats across HTML5, YouTube, and Vimeo."
 keywords: ["media player dbt", "video analytics", "media tracking", "HTML5 video", "YouTube tracking", "media data model"]
 sidebar_position: 20
+content_type: concept
 ---
 
-```mdx-code-block
-import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
-import AvailabilityBadges from '@site/src/components/ui/availability-badges'
-```
 
 <BadgeGroup>
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
-<Badges badgeType="Actively Maintained"></Badges>
-<Badges badgeType="SPAL"></Badges>
+<VersionBadge component="dbtSnowplowMediaPlayer" />
+<TierBadge tier="actively-maintained" />
+<LicenseBadge license="spal" />
 </BadgeGroup>
 
-<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Media Player package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+<Availability available={['cloud', 'pmc', 'addon']} note="The Media Player package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
 

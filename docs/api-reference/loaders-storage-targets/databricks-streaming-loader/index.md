@@ -4,6 +4,7 @@ sidebar_label: "Databricks Streaming Loader"
 sidebar_position: 5
 description: "Load Snowplow events to Databricks with low latency using Lakeflow Declarative Pipelines and Unity Catalog volumes."
 keywords: ["databricks loader", "lakeflow", "unity catalog", "databricks lakehouse"]
+content_type: how-to
 ---
 
 ```mdx-code-block

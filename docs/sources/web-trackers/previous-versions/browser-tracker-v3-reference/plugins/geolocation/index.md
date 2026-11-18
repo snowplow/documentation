@@ -1,5 +1,6 @@
 ---
 title: "Geolocation"
+sidebar_label: "Geolocation"
 date: "2021-04-07"
 sidebar_position: 11000
 description: "Documentation for Geolocation in the web tracker."

@@ -5,6 +5,7 @@ sidebar_position: 3
 description: "Use the local Snowplow CLI MCP server to work with the tracking plan files on your disk through AI assistants."
 keywords: ["mcp", "model context protocol", "ai", "cli", "tracking plan"]
 date: "2026-01-08"
+content_type: how-to
 ---
 
 import Tabs from '@theme/Tabs';

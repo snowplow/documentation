@@ -1,14 +1,17 @@
 ---
-title: "Programmatic management using CLI or API"
-sidebar_label: "Programmatic management"
-sidebar_position: 70
+title: "Manage your tracking design as code"
+sidebar_label: "Manage tracking as code"
+sidebar_position: 100
 description: "Automate Event Studio workflows using Snowplow CLI for git-ops integration or the APIs for custom tooling and CI/CD pipelines."
 keywords: ["Snowplow CLI", "API", "automation", "git-ops", "CI/CD", "programmatic access"]
+content_type: landing
 ---
 
 Data structures and tracking plans can be managed programmatically, enabling git-ops workflows, CI/CD integration, and custom tooling.
 
 Partnered with other tools like the data structures [CI tool](/docs/testing/data-structures-ci-tool/index.md) and the testing pipeline [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+
+To keep data structures and tracking plans in your application's repository, generate the tracking code from them with Snowtype, and check and publish every change from GitHub Actions, follow the tutorial to [manage tracking from a repository with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction).
 
 ## Snowplow CLI
 

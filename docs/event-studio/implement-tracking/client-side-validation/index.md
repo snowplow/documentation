@@ -4,6 +4,7 @@ sidebar_label: "Client-side validation for web"
 sidebar_position: 4
 description: "Enable real-time schema and event specification validation in the browser for JavaScript and TypeScript trackers to catch tracking errors before events are sent, using Snowtype."
 keywords: ["snowtype", "client-side validation", "browser validation", "schema validation", "event specification validation", "JavaScript validation", "TypeScript validation", "instructions"]
+content_type: how-to
 ---
 
 Using Snowtype you can get notified, at runtime, if tracked events don't match their schema definitions, or the rules defined in their event specification. This allows you to catch errors before they reach production.
@@ -181,7 +182,7 @@ A warning also appears when a required entity is missing entirely:
 
 ## Property instructions validation
 
-[Property rule](/docs/event-studio/tracking-plans/create-and-manage/index.md) instructions are constraints you define on event or entity properties within an event specification.
+[Property rule](/docs/event-studio/tracking-plans/event-specifications/index.md#add-property-instructions) instructions are constraints you define on event or entity properties within an event specification.
 
 Snowtype creates [types for property rules](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#property-rules-and-instructions) for all trackers. This additional runtime validation layer can catch any mistakes that slip through, such as when using dynamic values.
 

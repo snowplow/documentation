@@ -1,5 +1,6 @@
 ---
 title: "Using Plugins"
+sidebar_label: "Using Plugins"
 date: "2023-12-20"
 sidebar_position: 200
 description: "Plugin documentation for Using Plugins functionality in the tracker."

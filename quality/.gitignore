@@ -1,0 +1,4 @@
+.baselines/
+test-results/
+playwright-report/
+a11y-report/

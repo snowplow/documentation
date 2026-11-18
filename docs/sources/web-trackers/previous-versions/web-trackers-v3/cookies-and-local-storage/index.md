@@ -1,5 +1,6 @@
 ---
 title: "Cookies and local storage"
+sidebar_label: "Cookies and local storage"
 sidebar_position: 2850
 description: "Documentation for Cookies and local storage in the web tracker."
 keywords: ["tracker", "configuration"]

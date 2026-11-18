@@ -1,5 +1,6 @@
 ---
 title: "GA cookies"
+sidebar_label: "GA cookies"
 sidebar_position: 130
 description: "Documentation for GA cookies in the web tracker."
 keywords: ["tracker", "configuration"]

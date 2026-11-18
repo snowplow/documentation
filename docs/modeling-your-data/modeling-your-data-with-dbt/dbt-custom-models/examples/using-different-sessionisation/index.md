@@ -4,6 +4,7 @@ sidebar_label: "Using different sessionisation"
 description: "Use custom session identifiers in Snowplow dbt packages including daily aggregates and alternative sessionization logic."
 keywords: ["custom sessionization", "session identifiers", "daily aggregates", "alternative session logic"]
 sidebar_position: 50
+content_type: how-to
 ---
 
 Using a different sessionisation is a rare use case for our packages, but can be done in 2 different ways. The use case for each approach is often different so we treat them differently on this page.

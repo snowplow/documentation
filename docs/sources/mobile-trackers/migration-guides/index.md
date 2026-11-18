@@ -5,6 +5,7 @@ date: "2021-04-12"
 sidebar_position: 900
 description: "Upgrade to newer versions of the iOS and Android mobile trackers using version-specific migration guides."
 keywords: ["migration guide", "tracker upgrade", "version migration"]
+content_type: landing
 ---
 
 This section contains information to help you upgrade to newer versions of the mobile trackers.

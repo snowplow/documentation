@@ -5,6 +5,7 @@ date: "2021-08-14"
 sidebar_position: 50
 description: "Complete HOCON configuration reference for Snowplow Enrich applications including monitoring, validation, and stream-specific settings."
 keywords: ["enrich configuration", "hocon", "enrichment settings"]
+content_type: reference
 ---
 
 This page lists the configuration options for Enrich applications.

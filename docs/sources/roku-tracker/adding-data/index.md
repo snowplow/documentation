@@ -5,6 +5,7 @@ date: "2021-11-16"
 sidebar_position: 3000
 description: "Add event context entities, subject data with user and platform information, and custom timestamps to Roku tracker events."
 keywords: ["roku event context", "subject configuration", "custom timestamps"]
+content_type: how-to
 ---
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset. Each of them involves a different class from the Roku tracker.

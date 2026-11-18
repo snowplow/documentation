@@ -2,7 +2,7 @@
 title: "Full example of the repository"
 sidebar_label: "Full example"
 position: 5
-description: "Every file the tutorial on managing tracking from a repository adds, in its final state: data structures, tracking plan, source application, Snowtype configuration, and GitHub Actions workflows."
+description: "Every file the tutorial on managing tracking as code adds, in its final state: data structures, tracking plan, source application, Snowtype configuration, and GitHub Actions workflows."
 keywords: ["tracking plan repository example", "snowtype config example", "snowplow cli github actions example"]
 date: "2026-11-17"
 ---

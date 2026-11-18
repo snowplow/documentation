@@ -154,4 +154,4 @@ The CLI MCP server works on tracking plan files on your machine. To work with yo
 
 - [Manage your data structures with snowplow-cli](/docs/api-reference/snowplow-cli/data-structures/index.md)
 - [Send events from the command line with snowplow-cli](/docs/api-reference/snowplow-cli/send-events/index.md)
-- [Manage tracking from a repository with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction)
+- [Manage tracking as code with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction)

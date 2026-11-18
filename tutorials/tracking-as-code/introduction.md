@@ -1,5 +1,5 @@
 ---
-title: "Manage tracking from a repository with Snowtype and Snowplow CLI"
+title: "Manage tracking as code with Snowtype and Snowplow CLI"
 sidebar_label: "Introduction"
 position: 1
 description: "Keep data structures and tracking plans in your application's repository, generate the tracking code with Snowtype, and check and publish every change with Snowplow CLI and GitHub Actions."

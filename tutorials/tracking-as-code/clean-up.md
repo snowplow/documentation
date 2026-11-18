@@ -2,7 +2,7 @@
 title: "Clean up the example tracking and API key"
 sidebar_label: "Clean up"
 position: 6
-description: "Remove the API key and the example data structures that you created while following the tutorial on managing tracking from a repository."
+description: "Remove the API key and the example data structures that you created while following the tutorial on managing tracking as code."
 keywords: ["snowplow api key", "hide data structure"]
 date: "2026-11-13"
 ---

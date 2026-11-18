@@ -8,6 +8,10 @@ keywords: ["snowplow mini", "control plane api", "mini configuration"]
 content_type: reference
 ---
 
+import SunsetCallout from "/docs/reusable/snowplow-mini-sunset/_callout.md"
+
+<SunsetCallout />
+
 Snowplow Mini Control Plane API is created for controlling and configuring the Snowplow Mini instance without ssh to it.
 
 You can use control plane from Snowplow Mini dashboard or you can send a request to a specific endpoint of the API with any HTTP client e.g. cURL

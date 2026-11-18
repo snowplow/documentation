@@ -62,6 +62,8 @@ The Web tracker will automatically intercept all web events and forward them to 
 
 The forwarded events are filtered out of the Web tracker event queue so that they are not tracked twice.
 
+With [screen context](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) enabled, the mobile tracker also adds its own `Screen` entity to forwarded events. If you enable the [`screenContextFromEvent` option](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#keep-the-screen-an-event-was-triggered-on), forwarded events that already carry a screen entity from the JavaScript tracker keep it, and the mobile tracker doesn't add its own.
+
 The WebView plugin uses the [Snowplow WebView tracker](/docs/sources/webview-tracker/index.md) as a dependency.
 
 

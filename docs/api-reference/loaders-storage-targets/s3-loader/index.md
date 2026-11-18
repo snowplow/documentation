@@ -56,3 +56,9 @@ Here is a standard command to run the loader on a EC2 instance in AWS:
       snowplow/snowplow-s3-loader:${versions.s3Loader} \\
       --config /snowplow/config/config.hocon
 `}</CodeBlock>
+
+## Monitor the loader
+
+The S3 Loader reports metrics covering event counts and latency. It can send them to StatsD, to Prometheus, or to both.
+
+See [Monitoring the S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/monitoring/index.md) for the full list of metrics and for how to configure each protocol.

@@ -24,7 +24,7 @@ This page covers serving Signals *data* to an agent inside your own application 
 
 ## When to use the MCP server
 
-The MCP server suits an agent that discovers and selects at runtime what context it needs. It lists the attribute groups and agentic contexts your deployment offers, reads each one's description, and fetches the ones that fit the task, so you don't write retrieval code for each of them. Use the [SDKs](/docs/signals/connection/index.md) instead when your application already knows what it needs, and you prefer to handle fetching and injecting context values in code.
+The MCP server suits an agent that discovers and selects at runtime what context it needs. It lists the attribute groups and agentic contexts your deployment offers, reads each one's description, and fetches the ones that fit the task, so you don't write retrieval code for each of them. Use the [SDKs](/docs/signals/connection/index.md) instead when your application already knows what it needs, and you prefer to handle fetching and injecting context values in code. For an agent on Google CX Agent Studio that reads Signals through OpenAPI tools you host, see the [Gemini Enterprise for CX accelerator](/tutorials/signals-google-cx-agent-studio/introduction).
 
 Two properties are worth planning around:
 

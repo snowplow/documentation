@@ -18,5 +18,5 @@ In this tutorial, you:
 ## Next steps
 
 * Read the [Snowplow CLI documentation](/docs/api-reference/snowplow-cli) for further workflows and commands
-* Follow the [Snowplow CLI Git tutorial](/tutorials/data-structures-in-git/introduction) to manage your tracking plans with Git version control
+* Follow the [Snowplow CLI Git tutorial](/tutorials/tracking-as-code/introduction) to manage your tracking plans with Git version control
 * Check out our [tracking design best practise guide](/docs/fundamentals/tracking-design-best-practice)

@@ -8,6 +8,10 @@ keywords: ["snowplow mini", "usage guide", "testing", "debugging", "mini dashboa
 content_type: how-to
 ---
 
+import SunsetCallout from "/docs/reusable/snowplow-mini-sunset/_callout.md"
+
+<SunsetCallout />
+
 ## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:

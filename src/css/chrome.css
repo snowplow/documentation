@@ -135,16 +135,29 @@
     background: var(--sp-color-accent);
   }
 
-  /* Product switcher: Snowplow CDI | Signals */
+  /* Product switcher: Snowplow CDI | Signals. Styled as a segmented
+     toggle, not as tabs: both segments use full-strength text, the inactive
+     one fills on hover, and a divider separates it from the tabs. */
   .product-switcher {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    margin-right: var(--sp-space-3);
+    margin-right: var(--sp-space-4);
     padding: 3px;
-    border: 1px solid var(--sp-color-border);
+    border: 1px solid var(--sp-color-border-strong);
     border-radius: var(--sp-radius-lg);
-    background: var(--sp-color-surface);
+    background: var(--sp-color-bg);
+  }
+
+  .product-switcher::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: calc(var(--sp-space-4) / -2 - 1px);
+    bottom: 6px;
+    width: 1px;
+    background: var(--sp-color-border);
   }
 
   .product-switcher__link {
@@ -153,21 +166,23 @@
     min-height: 28px;
     padding: 0 var(--sp-space-3);
     border-radius: var(--sp-radius-md);
-    color: var(--sp-color-fg-muted);
+    color: var(--sp-color-fg);
     font-size: var(--sp-text-sm);
     font-weight: var(--sp-weight-medium);
     white-space: nowrap;
+    transition: background-color 120ms ease, color 120ms ease;
   }
 
   .product-switcher__link:hover {
+    background: var(--sp-color-surface-raised);
     color: var(--sp-color-fg);
     text-decoration: none;
   }
 
   .product-switcher__link--active,
   .product-switcher__link--active:hover {
-    background: var(--sp-color-bg);
-    box-shadow: inset 0 0 0 1px var(--sp-color-border);
+    background: var(--sp-color-accent-soft);
+    box-shadow: inset 0 0 0 1px var(--sp-color-accent-border);
     color: var(--sp-color-accent);
   }
 

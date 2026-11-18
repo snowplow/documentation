@@ -178,7 +178,6 @@ const fallbackRules = [
   ['/docs/getting-started-on-community-edition/what-is-snowplow-open-source/*', '/docs/getting-started-on-community-edition/what-is-community-edition/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/additional-options/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/', 301],
-  ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/*', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/:splat', 301],
   ['/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/snowplow-plugin-for-analytics-npm-package/', '/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/', 301],
@@ -307,7 +306,6 @@ const fallbackRules = [
   ['/docs/pipeline/enrichments/what-is-enrichment/*', '/docs/pipeline/enrichments/:splat', 301],
   ['/docs/pipeline/enrichments/managing-enrichments/ui/*', '/docs/pipeline/enrichments/managing-enrichments/:splat', 301],
   ['/docs/destinations/warehouses-lakes/storage-options/*', '/docs/destinations/warehouses-lakes/:splat', 301],
-  ['/docs/destinations/forwarding-events/snowbridge/getting-started/*', '/docs/destinations/forwarding-events/snowbridge/getting-started/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/concepts/application-overview/*', '/docs/destinations/forwarding-events/snowbridge/concepts/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/configuration/sources/stdin/*', '/docs/destinations/forwarding-events/snowbridge/configuration/sources/:splat', 301],
   ['/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/create-a-script/*', '/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/:splat', 301],
@@ -430,7 +428,6 @@ const fallbackRules = [
   ['/docs/resources/migration-guides/*', '/docs/migration-guides/:splat', 301],
   ['/docs/resources/*', '/docs/licensing/:splat', 301],
   ['/docs/licensing/copyright-license/*', '/docs/licensing/:splat', 301],
-  ['/docs/api-reference/*', '/docs/api-reference/versions/:splat', 301],
   // New data modeling feature
   ['/docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/*', '/docs/modeling-your-data/running-data-models-via-console/resolving-data-model-failures/:splat', 301],
   ['/docs/modeling-your-data/running-data-models-via-console/dbt/*', '/docs/modeling-your-data/running-data-models-via-console/', 301],

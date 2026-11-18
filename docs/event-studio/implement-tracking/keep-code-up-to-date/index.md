@@ -162,17 +162,10 @@ This is a risky operation. Make sure to commit your lock file beforehand, so you
 
 ## Automate with CI/CD
 
-You can run Snowtype in a CI/CD pipeline to catch outdated tracking code before it reaches production. A typical approach:
-
-1. Run `snowtype update --yes` to check for updates, and regenerate the configuration file or lock file if any are found
-2. Generate the tracking code with `snowtype generate`
-3. If the generated output changes, fail the build or open a pull request with the updated code
-
-The `--yes` flag runs non-interactively, accepting all available updates.
-
-Combine this with [`--disallowDevSchemas`](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) on the `generate` step to also prevent development-only schemas from reaching production:
+You can run Snowtype in a CI/CD pipeline to catch outdated tracking code before it reaches production. Run [`snowtype check`](/docs/event-studio/implement-tracking/command-reference/index.md#check) to fail the build when the committed code doesn't match what `snowtype generate` writes. Add [`--disallowDevSchemas`](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) to also fail it when a schema is only deployed to the development environment:
 
 ```bash
-npx snowtype update --yes
-npx snowtype generate --disallowDevSchemas
+npx snowtype check --disallowDevSchemas
 ```
+
+To pick up new schema and event specification versions in the same pipeline, run `snowtype update --yes` and open a pull request with the changes. The `--yes` flag runs non-interactively, accepting all available updates.

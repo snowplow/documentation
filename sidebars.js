@@ -244,6 +244,7 @@ const sidebars = {
         exclude: [
           'signals/applications/agentic-contexts',
           'signals/applications/mcp-server',
+          'signals/applications/predictive-attributes',
           'signals/applications/subscribe',
         ],
       }),
@@ -257,6 +258,10 @@ const sidebars = {
     group('Intervene', [
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
+    ], { collapsible: true, collapsed: true }),
+    group('Predict outcomes', [
+      pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
+      pick('signals/applications/predictive-attributes', { label: 'Retrieve predictive attribute scores' }),
     ], { collapsible: true, collapsed: true }),
   ],
 
@@ -281,7 +286,6 @@ const sidebars = {
       }),
       pick('api-reference/snowbridge'),
       pick('api-reference/iglu'),
-      pick('api-reference/snowplow-mini'),
       pick('api-reference/dataflow-runner'),
     ]),
     group('Schemas, data, and versions', [
@@ -311,7 +315,7 @@ const sidebars = {
           'api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/rdb-loader-previous-versions',
           { label: 'RDB Loader configuration' }
         ),
-        pick('api-reference/snowplow-mini/previous-releases', { label: 'Snowplow Mini' }),
+        pick('api-reference/snowplow-mini', { label: 'Snowplow Mini' }),
         pick('sources/snowplow-tracking-cli', { label: 'Tracking CLI (unsupported)' }),
         pick('modeling-your-data/modeling-your-data-with-sql-runner', { label: 'SQL Runner models' }),
       ],

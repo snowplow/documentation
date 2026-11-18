@@ -157,6 +157,57 @@ You can pass in the path to the data structures directly, or the Snowplow CLI di
 
 Provide the path relative to the location of your configuration file.
 
-:::note[Snowtype limitation]
-Snowtype can only create tracking code for local data structures, not for local tracking plans (data products).
-:::
+### Local tracking plans
+
+<AppliesTo feature="snowtype-local-tracking-plans" />
+
+If you manage tracking plans as code with [Snowplow CLI](/docs/api-reference/snowplow-cli/tracking-plans/index.md), Snowtype can generate code from the tracking plan files in your repository. Add their paths to the `localDataProducts` array, and add the data structures their event specifications reference to `repositories`:
+
+```json
+{
+  "tracker": "@snowplow/browser-tracker",
+  "language": "typescript",
+  "outpath": "./src/tracking",
+  "repositories": ["./data-structures"],
+  "localDataProducts": ["./data-products"],
+  "igluCentralSchemas": [],
+  "dataStructures": [],
+  "eventSpecificationIds": [],
+  "dataProductIds": []
+}
+```
+
+Each path can be a directory or a single file, relative to the location of your configuration file. Snowtype reads every JSON and YAML file under a directory, uses the ones that declare `resourceType: data-product`, and follows their `$ref` links to source applications. `snowtype patch` has no option for `localDataProducts`, so edit the configuration file directly.
+
+Snowtype reads the files in the format [Snowplow CLI](/docs/api-reference/snowplow-cli/tracking-plans/index.md) writes them, for example when you run `snowplow-cli dp download`.
+
+For the fields Snowtype reads from each event specification, see [local tracking plan fields](/docs/event-studio/implement-tracking/configuration-reference/index.md#local-tracking-plan-fields).
+
+Snowtype doesn't connect to Console, and doesn't need Console credentials, when the configuration lists `localDataProducts` and no `dataStructures`, `eventSpecificationIds`, or `dataProductIds`.
+
+Run `snowtype generate` to write the code. When Snowtype generates only from your repository, it warns that it doesn't check schemas against the environments they're deployed to, and it doesn't create a `.snowtype-lock.json` file:
+
+```bash
+npx snowtype generate
+```
+
+```text
+✔: Valid configuration found
+⚠ Warning: Generating from local definitions only. Schemas are not checked against the environments they are deployed to.
+✔: Code generated, writing...
+```
+
+To combine local tracking plans with tracking plans from Console, also list the Console tracking plan IDs in `dataProductIds`. Snowtype then connects to Console and needs Console credentials. It generates code for the event specifications from both sources, and pins only the event specifications from Console in `.snowtype-lock.json`.
+
+Each event specification must come from one place only. A tracking plan downloaded with Snowplow CLI keeps its Console IDs, so list it either in `localDataProducts` or in `dataProductIds`, not in both.
+
+To confirm in CI that the committed code matches your tracking plan files, run [`snowtype check`](/docs/event-studio/implement-tracking/command-reference/index.md#check).
+
+## Troubleshooting
+
+These errors stop `snowtype generate` and `snowtype check` for a configuration that lists `localDataProducts`. Each item gives the error message, then the fix:
+
+- `Required API key credentials not detected. Please refer to https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#authenticating-with-the-console`: the configuration connects to Console, and Snowtype found no API key. [Authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) with a Console API key, or change the configuration so that it generates only from [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) and doesn't need Console credentials.
+- `An event specification in a local data product does not declare its version: Sign up. Add a version to it in the data product file, matching the version the platform holds.`: run `snowplow-cli dp validate --fix`, which adds the missing `version` to the tracking plan file.
+- `A schema referenced by a local event specification is not among the repositories or the Iglu Central schemas the configuration declares: iglu:com.example/missing/jsonschema/1-0-0, referenced by "Sign up"`: add the data structure to a path in `repositories`, or add its URI to `igluCentralSchemas`.
+- `The same event specification is reached more than once, from Console or from more than one local data product: Sign up`: list each tracking plan in one place only, either in `dataProductIds` or in one file under `localDataProducts`.

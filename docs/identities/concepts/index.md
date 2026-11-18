@@ -151,7 +151,7 @@ The `merges` array contains **all** Snowplow IDs that have ever been merged into
 
 When a [correction](/docs/identities/concepts/corrections/index.md) merges Snowplow IDs that were left separate, Identities emits a correction event into the enriched event stream, as well as a merge event for the same merge. The correction event carries the same `snowplow_id`, `created_at`, `merges`, and `merged` fields as a merge event, so downstream consumers can process both kinds of event in the same way. The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, which deduplicates the two.
 
-The `correction_id` equals the event's `event_id` and the `triggering_event_id` of every merge the correction made. The `affected_snowplow_ids` array lists the Snowplow IDs this correction merged, while `merges` holds the full merge history of the surviving `snowplow_id`. The `type` is `late_merge` and the `source` is `automatic`.
+The `affected_snowplow_ids` array lists the Snowplow IDs this correction merged, while `merges` holds the full merge history of the surviving `snowplow_id`.
 
 <SchemaProperties
   overview={{event: true}}

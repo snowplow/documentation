@@ -1,5 +1,5 @@
 ---
-title: "Corrections"
+title: "Identity graph corrections"
 sidebar_label: "Corrections"
 sidebar_position: 50
 date: "2026-11-18"
@@ -8,13 +8,13 @@ keywords: ["identities", "identity resolution", "corrections", "late merge", "co
 content_type: concept
 ---
 
-Corrections are how Identities manages the quality of the identity graph in the background. Identities resolves each event against the graph in real time, and under normal operation every [merge](/docs/identities/concepts/merges/index.md) happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow and Identities resolved events without seeing every existing Snowplow ID. In both cases one identifier can end up linked to two Snowplow IDs that aren't merged. A correction is how Identities applies the missed merge later and announces the repair to your warehouse in a correction event.
+Corrections are how Identities manages the quality of the identity graph in the background. Under normal operation, every [merge](/docs/identities/concepts/merges/index.md) happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
 
 :::note[No action needed]
 You don't need to do anything when a correction happens. Identities finds the missed merge and applies it with the same rules as a real-time merge. It then emits a merge event and a correction event, so your downstream models see the two Snowplow IDs come together.
 :::
 
-Corrections are rare. Identities files one only when an identifier ends up linked to two Snowplow IDs that aren't merged. Eventual consistency then brings the graph back to one Snowplow ID for that user. Events already in your warehouse keep the Snowplow ID that Identities assigned to them, so use the correction event to map them to the surviving Snowplow ID in your models.
+Corrections are rare. Events already in your warehouse keep the Snowplow ID that Identities assigned to them, so use the correction event to map them to the surviving Snowplow ID in your models.
 
 ## How a late merge happens
 

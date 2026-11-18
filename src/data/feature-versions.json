@@ -90,6 +90,12 @@
       "component": "flutterTracker",
       "since": "0.11.3",
       "href": "/docs/sources/flutter-tracker/plugins/#attach-entities-from-a-plugin"
+    },
+    "snowplow-cli-event-specification-versions": {
+      "label": "Snowplow CLI: declared event specification versions",
+      "component": "snowplowCli",
+      "since": "0.4.0",
+      "href": "/docs/api-reference/snowplow-cli/tracking-plans/"
     }
   }
 }

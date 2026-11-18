@@ -72,4 +72,8 @@ export const componentInfo = {
   // Testing
   snowplowMicro: { label: 'Snowplow Micro', href: '/docs/testing/snowplow-micro/' },
   igluServer: { label: 'Iglu Server', href: '/docs/api-reference/iglu/iglu-repositories/iglu-server/' },
+
+  // Developer tools
+  snowplowCli: { label: 'Snowplow CLI', href: '/docs/api-reference/snowplow-cli/' },
+  snowtype: { label: 'Snowtype', href: '/docs/event-studio/implement-tracking/' },
 }

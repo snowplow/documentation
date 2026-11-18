@@ -36,7 +36,7 @@ Identity resolution happens in real time as part of the [event enrichment proces
 
 After all other configured enrichments run, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing Snowplow ID, or creates a new one. Enrich then adds the resolved Snowplow ID to the event in an [identity entity](/docs/identities/concepts/index.md#identity-entity).
 
-Some incoming identifiers will reveal that two previously separate Snowplow IDs actually belong to the same user. Identities will merge them in its graph database, and emit a [merge event](/docs/identities/concepts/index.md#merge-events) directly into your enriched event stream. Identities also manages the quality of the graph in the background. Under extreme concurrency, when a user's events reach more than one instance of Identities at the same moment, or during post-incident recovery, a merge can be left behind. A correction applies it later and emits a [correction event](/docs/identities/concepts/index.md#correction-events).
+Some incoming identifiers will reveal that two previously separate Snowplow IDs actually belong to the same user. Identities will merge them in its graph database, and emit a [merge event](/docs/identities/concepts/index.md#merge-events) directly into your enriched event stream. Identities also manages the quality of the graph in the background: when it misses a merge, a [correction](/docs/identities/concepts/corrections/index.md) applies it later and emits a [correction event](/docs/identities/concepts/index.md#correction-events).
 
 Your Identities infrastructure is deployed into the same cloud as your pipeline. The core components are:
 * **Identities API**: used for identity operations

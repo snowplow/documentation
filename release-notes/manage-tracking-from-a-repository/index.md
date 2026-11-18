@@ -1,6 +1,6 @@
 ---
-title: "Manage tracking from a repository with Snowplow CLI 0.4.0 and Snowtype 0.20.0"
-sidebar_label: "Tracking from a repository"
+title: "Manage tracking as code with Snowplow CLI 0.4.0 and Snowtype 0.20.0"
+sidebar_label: "Tracking as code"
 description: "Declare event specification versions in your tracking plan files with Snowplow CLI, generate tracking code from the same files with Snowtype, and follow a new tutorial that checks and publishes every change from GitHub Actions."
 keywords: ["snowplow cli", "snowtype", "tracking as code", "event specification versions", "release notes"]
 date: "2026-11-16"
@@ -34,4 +34,4 @@ The new `snowtype check` command reports whether the generated code matches your
 
 ## Follow a tutorial for the whole flow
 
-[Manage tracking from a repository with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction/) replaces the "Manage data structures with Git" tutorial. It sets up one repository for a web app, checks every pull request with GitHub Actions, publishes changes merged to `develop` to your development environment, and promotes them to production from `main`.
+[Manage tracking as code with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction/) replaces the "Manage data structures with Git" tutorial. It sets up one repository for a web app, checks every pull request with GitHub Actions, publishes changes merged to `develop` to your development environment, and promotes them to production from `main`.

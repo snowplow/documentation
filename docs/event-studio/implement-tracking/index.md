@@ -2,7 +2,7 @@
 title: "Implement tracking with Snowtype"
 sidebar_label: "Implement tracking"
 sidebar_position: 44
-description: "Compare implementing tracking from Console with managing it as code in your repository using Snowtype and Snowplow CLI, and learn when each fits and how to move a tracking plan to your repository."
+description: "Compare implementing tracking from Console with managing it as code using Snowtype and Snowplow CLI, and learn how to move a tracking plan to your repository."
 keywords: ["tracking implementation", "code generation", "Snowtype", "tracking code", "SDK integration", "tracking as code", "tracking plan version control"]
 content_type: concept
 ---
@@ -36,29 +36,30 @@ A coding agent connected to the Snowplow MCP server can read your tracking plans
 
 ## Choose where your tracking definitions live
 
-There are two ways to implement tracking. From Console, your data structures and tracking plans live in your Snowplow account, and you write the tracking code by hand, copy the Console code snippets, or generate it with Snowtype reading from Console. As code, your data structures and tracking plans live as files in your application's repository, Snowtype generates the tracking code from those files, and Snowplow CLI checks every change in pull requests and publishes it to Console.
+Your data structures and tracking plans, your tracking definitions, can live in one of two places:
 
-### Compare Console and tracking as code
+* From Console: the definitions live in your Snowplow account. You write the tracking code by hand, copy the Console code snippets, or generate it with Snowtype.
+* As code: the definitions live as files in your application's repository. Snowtype generates the tracking code from those files, and Snowplow CLI checks each change in pull requests and publishes it to Console.
 
-The Console way and tracking as code differ in what checks a change, when, and which steps need Console credentials:
+### Compare tracking from Console and as code
 
-| Question | From Console | As code in your repository |
+| Aspect | From Console | As code |
 | --- | --- | --- |
-| Where the definitions live | In your Snowplow account. You create them in Console, or with a coding agent connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) | As files in your application's repository. Snowplow CLI publishes them to your Snowplow account |
-| How the tracking code is produced | By hand, from the [Console code snippets](#console-code-snippets), or with Snowtype reading from Console | With Snowtype reading the [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) in your repository |
-| What catches a breaking change, and when | Validation, when you send test events to [Snowplow Micro](/docs/testing/snowplow-micro/index.md) or a [Console development environment](/docs/testing/snowplow-micro/console/index.md). If you generate code with Snowtype, [`snowtype check`](/docs/event-studio/implement-tracking/command-reference/index.md#check) in CI fails when the committed code doesn't match what Snowtype generates | Checks on every pull request: `snowtype check`, the offline version check (`snowplow-cli dp validate offline`), and the checks against Console (`snowplow-cli ds validate` and `snowplow-cli dp validate`). When you publish, `snowplow-cli dp sync` and `snowplow-cli dp release` [refuse a version that doesn't match](/docs/api-reference/snowplow-cli/tracking-plans/index.md#verify-the-versions-against-console) |
-| Where you see a change before it's live | In Console, where a changed event specification stays a draft until you [publish it](/docs/event-studio/test-and-publish/index.md) | In a pull request, with a review and a history next to the code change that needs it |
-| Which steps need Console credentials | Creating the definitions, which you do logged in to Console, and generating code with Snowtype, which needs a Console [API key](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) | Only the checks against Console and publishing, with an API key stored in the repository secrets. Writing the definitions, generating the code with Snowtype, `snowtype check`, and the offline version check need none |
+| Where the definitions live | Your Snowplow account, edited in Console or by a coding agent connected to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) | Files in your application's repository |
+| How the tracking code is produced | By hand, from the [Console code snippets](#console-code-snippets), or with Snowtype | With Snowtype, from the [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) |
+| What catches a breaking change | Validation of test events in [Snowplow Micro](/docs/testing/snowplow-micro/index.md) or a [Console development environment](/docs/testing/snowplow-micro/console/index.md) | [Snowtype and Snowplow CLI checks](/tutorials/tracking-as-code/automate-with-github-actions) on every pull request |
+| Where you review a change before it's live | A draft event specification in Console, until you [publish it](/docs/event-studio/test-and-publish/index.md) | A pull request, next to the code change that needs it |
+| Which steps need Console credentials | Editing the definitions, and generating code with Snowtype, which needs an [API key](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) | Only the checks against Console and publishing |
 
-### When to use Console or tracking as code
+### When to track from Console or as code
 
-Work from Console when you're starting out, trying things, or building a first integration. Snowtype reading from Console is part of the Console way, so you can generate type-safe code without moving your definitions.
+Track from Console when you're starting out, trying things, or building a first integration. You can still generate type-safe code with Snowtype without moving your definitions to a repository.
 
-Manage tracking as code once several people change the tracking, your application builds in CI, or the tracking in production must not break. Every change to a definition then goes through the same pull request as the code that sends the event.
+Manage tracking as code when several people change the tracking, your application builds in CI, or you need a review and a history for every tracking change. Every change to a definition then goes through the same pull request as the code that sends the event.
 
 ### Move a tracking plan to your repository
 
-To move an existing tracking plan from Console to your repository, start from the copy in Console. Download the data structures with [Snowplow CLI](/docs/api-reference/snowplow-cli/data-structures/index.md#downloading-data-structures), and the tracking plans with [the versions Console holds](/docs/api-reference/snowplow-cli/tracking-plans/index.md#add-the-versions-console-holds). If Snowtype already generates code for the tracking plan from Console, see [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) to switch it to your repository. Then follow the tutorial to [manage tracking as code with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction).
+To move an existing tracking plan from Console to your repository, start from the copy in Console. Download the data structures and the tracking plans with Snowplow CLI ([data structures](/docs/api-reference/snowplow-cli/data-structures/index.md#downloading-data-structures), [tracking plans](/docs/api-reference/snowplow-cli/tracking-plans/index.md#downloading-tracking-plans-event-specifications-and-source-apps)), then [add the versions Console holds](/docs/api-reference/snowplow-cli/tracking-plans/index.md#add-the-versions-console-holds). If Snowtype already generates code for the tracking plan from Console, see [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) to switch it to your repository. Then follow the tutorial to [manage tracking as code with Snowtype and Snowplow CLI](/tutorials/tracking-as-code/introduction).
 
 ## Snowtype workflow
 

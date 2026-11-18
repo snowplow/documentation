@@ -8,7 +8,7 @@ keywords: ["identities", "identity resolution", "corrections", "late merge", "co
 content_type: concept
 ---
 
-A correction is a graph consistency change that Identities applies in the background in case the real-time processing missed it. Corrections are how Identities manages the quality of the identity graph, and they're rare. Under normal operation, every [merge](/docs/identities/concepts/merges/index.md) happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
+A correction is a graph consistency change that Identities applies in the background in case the real-time processing missed it. Corrections are how Identities manages the quality of the identity graph, and they're rare. The correction that Identities applies is a late merge: a [merge](/docs/identities/concepts/merges/index.md) that real-time processing missed. Under normal operation, every merge happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A late-merge correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
 
 :::note[No action needed]
 Identities applies corrections automatically, so you don't need to trigger them. If your models map historical events to Snowplow IDs, handle correction events as described in [Recognize a correction in your warehouse](#recognize-a-correction-in-your-warehouse).
@@ -62,25 +62,25 @@ graph LR
 
 ## What a correction changes
 
-A correction applies the merge that real-time processing missed. A correction:
+A late-merge correction applies the merge that real-time processing missed. It:
 
 * Uses the same rules as a real-time merge, so it merges the Snowplow IDs that share the identifier into the oldest of them
 * Respects the merge limit, which caps how many Snowplow IDs can merge into one, and [unique identifiers](/docs/identities/concepts/unique-identifiers/index.md)
 * Never creates a Snowplow ID and never changes the value of an existing Snowplow ID
 * Never rewrites an earlier merge
 
-A Snowplow ID that these rules refuse stays separate. Identities emits a correction event only when the correction merged something. Detection and application run in the background, so some time passes between the concurrent events and the correction. During that time, events for the user carry whichever Snowplow ID their identifiers resolve to.
+A Snowplow ID that these rules refuse stays separate. Identities emits a correction event only when the correction changed the graph. Detection and application run in the background, so some time passes between the concurrent events and the correction. During that time, events for the user carry whichever Snowplow ID their identifiers resolve to.
 
 ## Recognize a correction in your warehouse
 
-A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream like a [merge event](/docs/identities/concepts/index.md#merge-events). It carries the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. A model that processes merge events can process correction events in the same way. Identities also emits a merge event for the same merge, and the two events can arrive in either order. A model that reads both kinds of event therefore sees the merge twice.
+A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream like a [merge event](/docs/identities/concepts/index.md#merge-events). It carries the Snowplow IDs the correction changed. For a late merge, that is the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. A model that processes merge events can process correction events in the same way. Identities also emits a merge event for the same merge, and the two events can arrive in either order. A model that reads both kinds of event therefore sees the merge twice.
 
 Six fields set a correction event apart from a merge event:
 
 * `correction_id` identifies the correction and equals the event's `event_id`
 * `type` names the class of correction, `late_merge` for a late merge
 * `source` names who found the correction, `automatic` for a correction that Identities found itself
-* `affected_snowplow_ids` lists the Snowplow IDs this correction merged, as opposed to the full merge history in `merges`
+* `affected_snowplow_ids` lists the Snowplow IDs this correction changed, as opposed to the full merge history in `merges`
 * `refused_snowplow_ids` lists the Snowplow IDs that the merge rules refused, when there are any
 * `applied_at` is when the correction changed the graph, and the event's `true_tstamp` and `derived_tstamp` carry the same value
 

@@ -11,10 +11,10 @@ content_type: concept
 A correction is a graph consistency change that Identities applies in the background in case the real-time processing missed it. Corrections are how Identities manages the quality of the identity graph. Under normal operation, every [merge](/docs/identities/concepts/merges/index.md) happens as Identities processes the event. Two situations can leave a merge behind. One is extreme concurrency, when a user's events reach more than one instance of Identities at the same moment. The other is post-incident recovery, after the graph database was unavailable or slow. A late-merge correction applies the missed merge later and announces the repair to your warehouse in a correction event, so the graph is eventually consistent.
 
 :::note[No action needed]
-Identities applies corrections automatically, so you don't need to trigger them. If your models map historical events to Snowplow IDs, handle correction events as described in [Recognize a correction in your warehouse](#recognize-a-correction-in-your-warehouse).
+Identities applies corrections automatically, and it emits a merge event for every merge a correction makes, so there is nothing to change in your models. To find out which merges were late, query the correction events instead.
 :::
 
-Events already in your warehouse keep the Snowplow ID that Identities assigned to them, so use the correction event to map them to the surviving Snowplow ID in your models.
+Events already in your warehouse keep the Snowplow ID that Identities assigned to them. The merge event maps them to the surviving Snowplow ID, as for any other merge.
 
 ## How a late merge happens
 
@@ -73,7 +73,7 @@ A Snowplow ID that these rules refuse stays separate. Identities emits a correct
 
 ## Recognize a correction in your warehouse
 
-A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream like a [merge event](/docs/identities/concepts/index.md#merge-events). It carries the Snowplow IDs the correction changed. For a late merge, that's the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. A model that processes merge events can process correction events in the same way. Identities also emits a merge event for the same merge, and the two events can arrive in either order. A model that reads both kinds of event therefore sees the merge twice.
+A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream like a [merge event](/docs/identities/concepts/index.md#merge-events). It carries the Snowplow IDs the correction changed. For a late merge, that's the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. Identities also emits a merge event for the same merge, and the two events can arrive in either order, so a model that already handles merge events needs no change. Query correction events to find out which merges were late and what each correction changed.
 
 Six fields set a correction event apart from a merge event:
 
@@ -86,4 +86,4 @@ Six fields set a correction event apart from a merge event:
 
 The merge event for the same merge carries the `correction_id` as its `triggering_event_id`. A merge event for a real-time merge carries the `event_id` of the event that caused the merge instead, so `triggering_event_id` tells the two apart and deduplicates them.
 
-The Identities [dbt package](/docs/identities/data-models/index.md) doesn't read correction events, but it still sees each late merge through its merge event. See [Merges](/docs/identities/concepts/merges/index.md) for how a real-time merge works, and [Identity resolution process](/docs/identities/concepts/index.md#identity-resolution-process) for how Identities resolves each event.
+The Identities [dbt package](/docs/identities/data-models/index.md) handles late merges through their merge events. See [Merges](/docs/identities/concepts/merges/index.md) for how a real-time merge works, and [Identity resolution process](/docs/identities/concepts/index.md#identity-resolution-process) for how Identities resolves each event.

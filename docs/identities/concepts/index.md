@@ -94,7 +94,7 @@ The identity resolution process for each event is as follows:
 
 Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the Snowplow ID reflects the most up-to-date identity information.
 
-If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback Snowplow ID linked to the event's identifiers, without looking up existing Snowplow IDs. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events. A merge that the outage left behind can be applied later by a [correction](/docs/identities/concepts/corrections/index.md).
+If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback Snowplow ID linked to the event's identifiers, without looking up existing Snowplow IDs. Full identity resolution is deferred to avoid additional pipeline latency. A merge that the outage left behind can be applied later by a [correction](/docs/identities/concepts/corrections/index.md).
 
 Tracked events are sometimes delayed in arriving into your pipeline, for example due to network issues or offline tracking. When they're eventually processed, they're resolved against the current state of the identity graph.
 

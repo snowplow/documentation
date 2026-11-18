@@ -12,4 +12,6 @@ Identities includes a [dbt package](/docs/modeling-your-data/modeling-your-data-
 
 The Identities dbt package is currently standalone from our other dbt packages.
 
+The package reads identity entities and merge events, not [correction events](/docs/identities/concepts/index.md#correction-events). It still sees each late merge, because Identities also emits a merge event for it. To process correction events in your own models, see [Recognize a correction in your warehouse](/docs/identities/concepts/corrections/index.md#recognize-a-correction-in-your-warehouse).
+
 Check out the [Identities dbt package overview](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) for more information.

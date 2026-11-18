@@ -14,6 +14,8 @@ When Snowplow IDs merge, the older Snowplow ID becomes the ID for the combined s
 
 When a merge occurs, Identities emits a [merge event](/docs/identities/concepts/index.md#merge-events) into your enriched event stream.
 
+In rare cases, such as extreme concurrency or post-incident recovery, Identities can miss a merge and apply it later as a [correction](/docs/identities/concepts/corrections/index.md).
+
 ## Example merge process
 
 In this example, a user has been browsing the ExampleCompany website. Identities, running in the ExampleCompany Snowplow pipeline, has created Snowplow ID `sp_001` with two linked identifiers: a `domain_userid` from the browser cookie, and a `user_id` from their authenticated email.

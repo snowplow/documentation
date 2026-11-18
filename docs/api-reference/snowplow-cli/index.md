@@ -78,7 +78,7 @@ snowplow-cli logout
 This revokes the saved login and deletes the file, which also logs Snowtype out. It doesn't affect API keys.
 
 :::note[API keys take precedence]
-If an API key is configured, Snowplow CLI uses it instead of the saved login. Remove the API key from your configuration to use the login.
+If an API key is configured, Snowplow CLI uses it instead of the saved login. Remove the API key from your configuration to use the login. To see which one is in use, run [`snowplow-cli status`](#verify-the-configuration).
 :::
 
 :::note[For SSO-enabled Snowplow organizations]
@@ -146,7 +146,7 @@ snowplow-cli status
 ```
 
 This command will:
-- Check that a login or API credentials are configured
+- Check that a login or API credentials are configured, and show which of the two is in use (`auth=login` or `auth=api-key`)
 - Verify connectivity to Snowplow Console
 - Confirm your organization access
 - Provide helpful troubleshooting information if issues are found

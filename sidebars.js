@@ -244,6 +244,7 @@ const sidebars = {
         exclude: [
           'signals/applications/agentic-contexts',
           'signals/applications/mcp-server',
+          'signals/applications/predictive-attributes',
           'signals/applications/subscribe',
         ],
       }),
@@ -257,6 +258,10 @@ const sidebars = {
     group('Intervene', [
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
+    ], { collapsible: true, collapsed: true }),
+    group('Predict outcomes', [
+      pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
+      pick('signals/applications/predictive-attributes', { label: 'Retrieve predictive attribute scores' }),
     ], { collapsible: true, collapsed: true }),
   ],
 

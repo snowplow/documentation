@@ -3,7 +3,7 @@ title: "New in Signals: predictive attributes"
 description: "Train a model on the history of your stream attributes, using event data in your Snowflake warehouse, and score how likely each session is to reach a goal in real time."
 sidebar_label: "Signals predictive attributes"
 keywords: ["predictive attributes", "propensity score", "machine learning", "conversion prediction", "Signals", "Snowflake"]
-date: "2026-10-26"
+date: "2026-11-19"
 category:
   - "Product news"
 components:

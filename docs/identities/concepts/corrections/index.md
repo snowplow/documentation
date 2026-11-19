@@ -73,7 +73,7 @@ A Snowplow ID that these rules refuse stays separate. Identities emits a correct
 
 ## Recognize a correction in your warehouse
 
-A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream like a [merge event](/docs/identities/concepts/index.md#merge-events). It carries the Snowplow IDs the correction changed. For a late merge, that's the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. Identities also emits a merge event for the same merge, and the two events can arrive in either order, so a model that already handles merge events needs no change. Query correction events to find out which merges were late and what each correction changed.
+A [correction event](/docs/identities/concepts/index.md#correction-events) arrives in your enriched event stream the same way as a [merge event](/docs/identities/concepts/index.md#merge-events) does. It carries the Snowplow IDs the correction applied. For a late merge (currently, the only correction type), that's the surviving Snowplow ID and every Snowplow ID merged into it, in the same `snowplow_id`, `merges`, and `merged` fields as a merge event. Identities also emits a merge event for the same merge, so a model that already handles merge events needs no change. Note that the two events can arrive in either order. Query correction events to find out which merges were late and what each correction changed.
 
 Six fields set a correction event apart from a merge event:
 
@@ -84,6 +84,6 @@ Six fields set a correction event apart from a merge event:
 * `refused_snowplow_ids` lists the Snowplow IDs that the merge rules refused, when there are any
 * `applied_at` is when the correction changed the graph, and the event's `true_tstamp` and `derived_tstamp` carry the same value
 
-The merge event for the same merge carries the `correction_id` as its `triggering_event_id`. A merge event for a real-time merge carries the `event_id` of the event that caused the merge instead, so `triggering_event_id` tells the two apart and deduplicates them.
+The merge event for the same merge carries the `correction_id` as its `triggering_event_id`, where a merge event for a real-time merge carries the `event_id` of the event that caused the merge.
 
-The Identities [dbt package](/docs/identities/data-models/index.md) handles late merges through their merge events. See [Merges](/docs/identities/concepts/merges/index.md) for how a real-time merge works, and [Identity resolution process](/docs/identities/concepts/index.md#identity-resolution-process) for how Identities resolves each event.
+The Identities [dbt package](/docs/identities/data-models/index.md) handles late merges through the respective merge events. See [Merges](/docs/identities/concepts/merges/index.md) for how a real-time merge works, and [Identity resolution process](/docs/identities/concepts/index.md#identity-resolution-process) for how Identities resolves each event.

@@ -58,6 +58,7 @@ New variables:
 
 | Variable | Default | What it does |
 | --- | --- | --- |
+| `snowplow__identities_app_id` | `['snowplow-identities']` | App IDs for identity-service merge events, separate from the application-event filter `snowplow__app_id`. Set to `[]` to disable the merge-event app filter. |
 | `snowplow__lookback_days` | 1 | Days of overlap re-scanned each run for late-arriving data. Also the run-twice idempotency window. |
 | `snowplow__partition_tstamp` | `load_tstamp` | The column `atomic.events` is physically partitioned by. Set to `collector_tstamp` if that is your partition key, so staging scans still prune. |
 | `snowplow__partition_tstamp_type` | `timestamp` | `timestamp` or `date`, matching the above column's type. |
@@ -84,7 +85,10 @@ to drop them after validation.
 
 ### Upgrade steps
 
-1. Pin the Git revision to `0.2.0` in your `packages.yml`, then run `dbt deps`:
+1. **Pause scheduled jobs that select Identities**, then pin the Git revision to
+   `0.2.0` in your `packages.yml` and run `dbt deps`. The startup check rejects runs
+   until the package-scoped full refresh in step 3 is complete. Keep these jobs paused
+   during the upgrade and resume them after the backfill and validation in step 3.
 
    ```yaml title="packages.yml"
    packages:

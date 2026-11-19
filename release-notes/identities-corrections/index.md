@@ -1,5 +1,5 @@
 ---
-title: "Correction events in Identities"
+title: "Identities: introducing corrections for a higher quality graph"
 sidebar_label: "Identities corrections"
 description: "Keep the identity graph consistent under extreme concurrency"
 keywords: ["identities", "corrections", "correction event", "late merge", "identity resolution"]

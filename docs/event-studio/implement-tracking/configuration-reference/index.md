@@ -239,7 +239,7 @@ The `update` options apply when running `snowtype update`, which checks for new 
 | Option                | Type                                | Default   | Description                                                                                                                                                              |
 | --------------------- | ----------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `regenerateOnUpdate`  | `boolean`                           | `true`    | Automatically regenerate code after accepting updates.                                                                                                                   |
-| `maximumBump`         | `"major"` \| `"minor"` \| `"patch"` | `"major"` | The highest [SchemaVer](/docs/fundamentals/schemas/index.md) bump level to include in update checks. For example, setting this to `"minor"` hides major version updates. |
+| `maximumBump`         | `"major"` \| `"minor"` \| `"patch"` | `"major"` | The highest [schema version](/docs/fundamentals/schemas/versioning/index.md) bump level to include in update checks. For example, setting this to `"minor"` hides major version updates. |
 | `showOnlyProdUpdates` | `boolean`                           | `false`   | Only show updates for data structures that have been deployed to the production environment.                                                                             |
 
 ```json title="Example"

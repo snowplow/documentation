@@ -55,9 +55,9 @@ npx snowtype update --yes
 
 Your code won't be regenerated until you run `snowtype generate` again, unless you've configured [`regenerateOnUpdate`](/docs/event-studio/implement-tracking/configuration-reference/index.md#update) in your configuration file.
 
-### Update based on SchemaVer level
+### Update based on version level
 
-For data structure updates, you can filter what `update` shows you based on the [SchemaVer](/docs/fundamentals/schemas/versioning/index.md) bump level. The `--maximumBump` flag sets the highest level of update to include. It defaults to `major`, meaning all updates are shown.
+For data structure updates, you can filter what `update` shows you based on the [schema version](/docs/fundamentals/schemas/versioning/index.md) bump level. The `--maximumBump` flag sets the highest level of update to include. It defaults to `major`, meaning all updates are shown.
 
 For example, if your configuration pins `iglu:com.acme_company/page_unload/jsonschema/1-0-0` and versions `1-0-1`, `1-1-0`, and `2-0-0` are available:
 

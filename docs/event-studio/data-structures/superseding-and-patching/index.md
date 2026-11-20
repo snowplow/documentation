@@ -1,7 +1,7 @@
 ---
 title: "Superseding and patching schemas"
 sidebar_label: "Superseding and patching"
-sidebar_position: 50
+sidebar_position: 4
 date: "2026-11-20"
 description: "Fix mistakes in existing schema versions by marking them as superseded or patching them, with guidelines on when each approach is appropriate."
 keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas", "supersede schemas"]

@@ -26,4 +26,4 @@ Changing a schema without incrementing the version has several risks:
 * Your warehouse Loader, which updates the table [according to the schema](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number)
 * Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes
 
-Aim to treat each schema version as immutable. However, if you can't avoid making changes to an existing schema version, you have two options: [marking it as superseded, or patching the schema](/docs/fundamentals/schemas/superseding-and-patching/index.md).
+Aim to treat each schema version as immutable. However, if you can't avoid making changes to an existing schema version, you have two options: [marking it as superseded, or patching the schema](/docs/event-studio/data-structures/superseding-and-patching/index.md).

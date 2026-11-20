@@ -24,7 +24,7 @@ import CdiCallout from "/docs/reusable/iglu-self-hosted-only/_callout.md"
 - Serve schemas to your pipeline components via the [Iglu Resolver](/docs/api-reference/iglu/iglu-resolver/index.md).
 - Issue scoped API keys, so different teams or applications can read or write only the vendor prefixes they own.
 - Receive webhook notifications when schemas are published or updated. See [`webhooks.schemaPublished`](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) in the configuration reference.
-- Mark schema versions as [superseded](/docs/fundamentals/schemas/superseding-and-patching/index.md#mark-a-schema-as-superseded) when you need to fix a schema that's already in production.
+- Mark schema versions as [superseded](/docs/event-studio/data-structures/superseding-and-patching/index.md#mark-a-schema-as-superseded) when you need to fix a schema that's already in production.
 
 Most users interact with Iglu Server through [Igluctl](/docs/api-reference/iglu/igluctl/index.md) rather than calling the API directly. See [Manage schemas](/docs/api-reference/iglu/manage-schemas/index.md).
 

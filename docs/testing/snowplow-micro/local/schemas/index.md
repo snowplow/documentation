@@ -84,7 +84,7 @@ For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/local/ad
 
 :::note[Limitations]
 
-This method doesn't work for [marking schemas as superseded](/docs/fundamentals/schemas/superseding-and-patching/index.md#mark-a-schema-as-superseded).
+This method doesn't work for [marking schemas as superseded](/docs/event-studio/data-structures/superseding-and-patching/index.md#mark-a-schema-as-superseded).
 
 :::
 

@@ -47,7 +47,7 @@ license: {
 | `database.enableStartupChecks` | Optional. Default: `true`. Whether to ping Postgres during startup and fail immediately if it isn't available. Recommended for production, so the instance isn't considered healthy until the Postgres connection is healthy. |
 | `swagger.baseUrl` | Optional. Example: `/custom/prefix`. Customize the api base url in Swagger. Helpful for when running Iglu Server behind a proxy server. |
 | `debug` | Optional. Default: `true`. Enable the additional `/api/debug` endpoint, which responds with all internal state. |
-| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [Overwrite a schema](/docs/fundamentals/schemas/superseding-and-patching/index.md#overwrite-a-schema). |
+| `patchesAllowed` | Optional. Default: `false`. If `true`, allows overwriting a given version of a schema with new content. See [Overwrite a schema](/docs/event-studio/data-structures/superseding-and-patching/index.md#overwrite-a-schema). |
 | `webhooks.schemaPublished` | Optional. Array with the list of webhooks that will be called when a schema is published or updated with a vendor that matches the specified prefixes. See the [examples on GitHub](https://github.com/snowplow/iglu-server/blob/0.8.7/config/config.reference.hocon#L81-L99). |
 | `webhooks.schemaPublished.uri` | Required. URI of the HTTP server that will receive the webhook event. |
 | `webhooks.schemaPublished.vendorPrefixes` | Optional. Example: `["com", "org.acme", "org.snowplow"]`. List of schema prefixes (regexes) that should be sent via the webhook. |

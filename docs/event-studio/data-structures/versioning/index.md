@@ -46,7 +46,7 @@ For the deployment steps, see [Deploy data structures to your development enviro
 
 ## Patch a schema
 
-To [patch a schema](/docs/fundamentals/schemas/superseding-and-patching/index.md#overwrite-a-schema), which means applying changes to it without updating the version, select the **Patch** option when saving the schema.
+To [patch a schema](/docs/event-studio/data-structures/superseding-and-patching/index.md#overwrite-a-schema), which means applying changes to it without updating the version, select the **Patch** option when saving the schema.
 
 Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it's controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 
@@ -58,7 +58,7 @@ You'll need to explicitly enable patching in the [Iglu Server configuration](/do
 
 ## Mark a schema as superseded
 
-If events are failing in production because of a mistake in a schema version, and you can't immediately update the tracking code, [mark the incorrect version as superseded](/docs/fundamentals/schemas/superseding-and-patching/index.md#mark-a-schema-as-superseded) by a new, corrected version. Events that reference the incorrect version are then validated against the corrected version instead.
+If events are failing in production because of a mistake in a schema version, and you can't immediately update the tracking code, [mark the incorrect version as superseded](/docs/event-studio/data-structures/superseding-and-patching/index.md#mark-a-schema-as-superseded) by a new, corrected version. Events that reference the incorrect version are then validated against the corrected version instead.
 
 You can only mark a schema as superseded in the JSON editor. For example, to supersede version `1-0-2`:
 
@@ -118,6 +118,6 @@ Once you've confirmed the new version supersedes the incorrect one, [promote it 
 
 Production events and entities that reference the superseded version are then validated against the new version in the same way. Because of schema caching, this can take up to 10 minutes to take effect.
 
-You can't change the `$supersedes` field of a schema version after you've published it. To change which version supersedes which, create another new version. For details and examples, see [Superseding and patching schemas](/docs/fundamentals/schemas/superseding-and-patching/index.md#mark-a-schema-as-superseded).
+You can't change the `$supersedes` field of a schema version after you've published it. To change which version supersedes which, create another new version. For details and examples, see [Superseding and patching schemas](/docs/event-studio/data-structures/superseding-and-patching/index.md#mark-a-schema-as-superseded).
 
 To roll out a new data structure version to the event specifications and tracking code that use it, see [Evolve a tracking design](/docs/event-studio/evolve-tracking-design/index.md).

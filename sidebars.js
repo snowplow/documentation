@@ -263,6 +263,9 @@ const sidebars = {
       pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
       pick('signals/applications/predictive-attributes', { label: 'Retrieve predictive attribute scores' }),
     ], { collapsible: true, collapsed: true }),
+    group('Integrations', [
+      pick('signals/integrations', { hoist: true, indexLabel: 'Integrations overview' }),
+    ], { collapsible: true, collapsed: true }),
   ],
 
   reference: [

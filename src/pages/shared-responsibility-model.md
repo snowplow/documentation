@@ -5,9 +5,9 @@
 This document describes how responsibilities are divided between Snowplow and its customers for the two Snowplow-managed deployments of Snowplow CDI:
 
 * **Snowplow CDI Cloud**: Snowplow runs the pipeline in cloud accounts that Snowplow owns.
-* **Snowplow CDI Private Managed Cloud (PMC)**: Snowplow deploys and runs the pipeline in an AWS sub-account, Azure subscription, or GCP project that you own.
+* **Snowplow CDI Private Managed Cloud**: Snowplow deploys and runs the pipeline in an AWS sub-account, Azure subscription, or GCP project that you own.
 
-In both deployments, Snowplow operates the pipeline and Console. You own your tracking, your destinations, and the data in them. In PMC, you also own the cloud account that hosts the pipeline, which adds the responsibilities listed in [Additional responsibilities for Private Managed Cloud](#additional-responsibilities-for-private-managed-cloud).
+In both deployments, Snowplow operates the pipeline and Console. You own your tracking, your destinations, and the data in them. In Private Managed Cloud, you also own the cloud account that hosts the pipeline, which adds the responsibilities listed in [Additional responsibilities for Private Managed Cloud](#additional-responsibilities-for-private-managed-cloud).
 
 Understanding this division is critical for keeping your data secure and your pipeline running without interruption.
 
@@ -30,7 +30,7 @@ The table below summarizes who is responsible for each area.
 
 ## Your responsibilities in all deployments
 
-These responsibilities apply to both Snowplow CDI Cloud and PMC.
+These responsibilities apply to both Snowplow CDI Cloud and Private Managed Cloud.
 
 ### Implementing and maintaining tracking
 
@@ -78,9 +78,9 @@ Snowplow provides and operates the platform. The responsibilities below differ o
 The Snowplow team sets up, manages, scales, and upgrades your Snowplow pipeline:
 
 * **Snowplow CDI Cloud**: in cloud accounts that Snowplow owns. Snowplow is responsible for the cloud accounts themselves, including their security, access controls, and cloud provider costs.
-* **PMC**: in your own AWS, Azure, or GCP account. Snowplow also works with you to optimize your AWS, Azure, or GCP costs once you have a good understanding of your traffic volume and patterns.
+* **Private Managed Cloud**: in your own AWS, Azure, or GCP account. Snowplow also works with you to optimize your AWS, Azure, or GCP costs once you have a good understanding of your traffic volume and patterns.
 
-### Evergreen pipelines and infrastructure
+### Keeping pipelines and infrastructure up to date
 
 Snowplow updates your pipeline components to the latest available versions as soon as possible. Snowplow also regularly upgrades the managed infrastructure, including libraries, operating systems, and cloud managed service versions.
 
@@ -90,37 +90,37 @@ Snowplow hosts and operates Console, which you use to configure your pipeline, d
 
 ## Additional responsibilities for Private Managed Cloud
 
-In PMC, the pipeline runs in a cloud account that you own, so you take on these additional responsibilities. They don't apply to Snowplow CDI Cloud.
+In Private Managed Cloud, the pipeline runs in a cloud account that you own, so you take on these additional responsibilities. They don't apply to Snowplow CDI Cloud.
 
 ### Ensuring Snowplow's cloud access remains in place
 
 You must provide and maintain the necessary cloud access permissions for Snowplow to deploy and manage the infrastructure in your cloud account. This involves setting up and regularly verifying the integrity of cloud access roles and permissions to ensure uninterrupted service. Due to the nature of the deployment model, a loss of access can immediately impact the availability of your infrastructure.
 
-### Cloud account management
+### Monitoring cloud account alerts
 
 While Snowplow looks after all deployed infrastructure, Snowplow doesn't receive all alerts sent to the AWS sub-account, Azure subscription, or GCP project. These are generally routed to the owner of the cloud account. Forward anything relating to Snowplow to Snowplow Support so that it can be triaged.
 
-### Valid billing with the cloud provider
+### Maintaining valid billing with the cloud provider
 
 You must ensure that your billing information is up to date and valid with your cloud provider. This includes monitoring your billing status and resolving any issues promptly to avoid service interruptions. Snowplow doesn't have insight into cloud billing and can't resolve issues related to it.
 
-### Cloud support coordination
+### Coordinating cloud provider support
 
 At times, you may need to use your AWS, GCP, or Azure support package to escalate issues and investigations with cloud-provided managed services. When possible, name Snowplow as a support contact for the specific sub-account, project, or subscription to allow direct access to your cloud support tier.
 
-### Audit controls within the cloud account
+### Maintaining audit controls within the cloud account
 
 You are responsible for implementing and managing audit controls to monitor activities and changes within your cloud account, including setting up logging and monitoring services such as AWS CloudTrail, Azure Audit Logs, or GCP Cloud Audit Logs.
 
-### IAM permissions boundaries
+### Creating IAM permissions boundaries
 
 For AWS customers who intend to implement IAM permissions boundaries, you are responsible for creating and maintaining these boundaries. Snowplow deploys infrastructure with the ARN you provide.
 
-### GCP service account impersonation
+### Setting up GCP service account impersonation
 
 For GCP customers who intend to use service account impersonation, you are responsible for creating the service account. Once you have done so and assigned the necessary roles, add the group `techops-cloud-admin@snowplowanalytics.com` to the service account with the `iam.serviceAccountTokenCreator` role.
 
-### Cloud storage management
+### Managing access to cloud storage
 
 You manage access to data within S3 (AWS), AFS (Azure), and GCS (GCP). You can do this by creating roles within the shared AWS sub-account, Azure subscription, or GCP project, or by applying custom access policies to the buckets directly. Don't alter or remove any policies that Snowplow sets on the buckets. You are also responsible for creating any lifecycle policies you need.
 

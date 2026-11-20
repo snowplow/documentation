@@ -39,7 +39,7 @@ Before:
 flowchart RL
   style v102 fill:orange
   linkStyle default stroke:none,fill:none
-  v102("1-0-2\n(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
+  v102("1-0-2<br/>(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
 ```
 
 After:
@@ -48,8 +48,8 @@ After:
 flowchart RL
   style v102 fill:orange
   style v103 fill:teal
-  v102("1-0-2\n(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
-  v103("1-0-3\n(corrected)") -->|supersedes| v102
+  v102("1-0-2<br/>(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
+  v103("1-0-3<br/>(corrected)") -->|supersedes| v102
   linkStyle 0,1 stroke:none,fill:none
 ```
 
@@ -226,7 +226,7 @@ flowchart LR
   style v102 fill:orange
   %% ~~~ is not working for some reason
   linkStyle default stroke:none,fill:none
-  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(incorrect)")
+  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2<br/>(incorrect)")
 ```
 
 After:
@@ -235,7 +235,7 @@ After:
 flowchart LR
   style v102 fill:teal
   linkStyle default stroke:none,fill:none
-  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(corrected)")
+  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2<br/>(corrected)")
 ```
 
 ## Example

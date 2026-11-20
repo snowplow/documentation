@@ -14,11 +14,13 @@ Aim to treat each schema version as immutable. However, if you can't avoid makin
 
 If your events are failing in production because of an incorrect schema, you might not be able to instantly update the tracking code to use a new schema version. This is a common situation for mobile tracking, for example. You can resolve this by marking the old schema version as superseded by the new schema version.
 
-:::note
+Marking a schema as superseded requires these component versions:
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Micro](/docs/testing/snowplow-micro/index.md), you will need version 1.7.1+.
+<AppliesTo feature="schema-superseding-enrich" />
 
-:::
+<AppliesTo feature="schema-superseding-iglu-server" />
+
+<AppliesTo feature="schema-superseding-micro" />
 
 Before:
 
@@ -46,11 +48,11 @@ Here's how this works, at a glance:
 * In the new schema, add the following field at the root: `"$supersedes": ["1-0-2"]`.
 * [Set the version](/docs/event-studio/data-structures/versioning/index.md) of the new schema as usual, i.e. `1-0-3` if there are no breaking changes or `2-0-0` if there are.
 * [Add](/docs/event-studio/test-and-publish/index.md#promote-data-structures-to-production) the new schema to your production environment.
-* Events or entities that use schema `1-0-2` will now be automatically updated (in the Enrich application) to use version `1-0-3`, and will be validated against that version. (A special entity will be added to these events to record this fact.)
+* Enrich updates events and entities that use schema `1-0-2` to use version `1-0-3`, and validates them against that version. Enrich also adds a special entity to these events to record this.
 
 ### Example
 
-Let’s say we have a mobile application. We are sending certain events from this application, and these events contain entities with following schema:
+Suppose you have a mobile application that sends events with entities that use the following schema:
 
 <details>
   <summary>Geolocation <code>1-0-2</code></summary>
@@ -80,7 +82,7 @@ Let’s say we have a mobile application. We are sending certain events from thi
 
 </details>
 
-Later, we realize that when implementing tracking, we have mistakenly included an `altitude` field in the entity objects:
+Later, you realize that the tracking code mistakenly includes an `altitude` field in the entity objects:
 
 <details>
   <summary>Wrong tracking code (iOS)</summary>
@@ -102,9 +104,9 @@ tracker.track(event)
 
 Since `additionalProperties` is set to `false`, all events with the `altitude` field end up as [failed events](/docs/fundamentals/failed-events/index.md).
 
-We can create a new schema with version `1-0-3` that contains the `altitude` field and then use this schema in the next version of the application. This would make the events valid. However, users will not update their application to the new version all at once. Events from the older version will continue to come, therefore there will still be failed events until all users start to use a newer version.
+You can create a new schema with version `1-0-3` that contains the `altitude` field, and use this schema in the next version of the application. This makes the events valid. However, users don't all update their application to the new version at once. Events from the older version keep arriving, so failed events continue until all users are on the newer version.
 
-To solve this problem, we simply add the `$supersedes` definition to the new schema.
+To fix this, add the `$supersedes` field to the new schema:
 
 <details>
   <summary>Geolocation <code>1-0-3</code> with <code>$supersedes</code></summary>
@@ -139,9 +141,9 @@ To solve this problem, we simply add the `$supersedes` definition to the new sch
 
 </details>
 
-Now, when we receive events from the mobile application that use schema `1-0-2`, these events will be updated to use schema `1-0-3` and will be validated against that schema. Therefore, these events will be valid.
+When Enrich receives events from the mobile application that use schema `1-0-2`, it updates them to use schema `1-0-3` and validates them against that schema. These events are therefore valid.
 
-To record this fact, an extra entity will be added to all such events:
+To record this, Enrich adds an extra entity to all such events:
 
 ```json
 {
@@ -153,7 +155,7 @@ To record this fact, an extra entity will be added to all such events:
 }
 ```
 
-Finally, if we [browse](/docs/event-studio/data-structures/index.md) schema version `1-0-2`, we will see that Iglu Server automatically keeps track of which schema supersedes which. Specifically, it will now contain a `$supersededBy` definition:
+Finally, if you [browse](/docs/event-studio/data-structures/index.md) schema version `1-0-2`, you can see that Iglu Server automatically keeps track of which schema supersedes which. Schema `1-0-2` contains a `$supersededBy` field:
 
 <details>
   <summary>Geolocation <code>1-0-2</code> with <code>$supersededBy</code></summary>
@@ -187,7 +189,7 @@ Finally, if we [browse](/docs/event-studio/data-structures/index.md) schema vers
 
 ### Usage
 
-The `$supersedes` field states that the schema version defined in the `self` part supersedes the schema versions listed in the `$supersedes` field (one or more). Its value must be an array of strings (even if it only includes one item). For example:
+The `$supersedes` field states that the schema version defined in the `self` part supersedes the schema versions listed in the `$supersedes` field (one or more). Its value must be an array of strings, even if it only includes one item. For example:
 
 ```json
 ...
@@ -197,25 +199,27 @@ The `$supersedes` field states that the schema version defined in the `self` par
 
 :::note[Patching and superseding]
 
-Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where patching is allowed. Likewise, you can’t patch (overwrite) an existing schema version to add `$supersedes`.
+Once you've defined the `$supersedes` field for a schema version, you can't update it, even in the development environment where patching is allowed. Likewise, you can't patch (overwrite) an existing schema version to add `$supersedes`.
 
 You can only change which schema version supersedes which by creating _new_ schema versions.
 
-For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you create version `1-0-3` which also supersedes `1-0-1`, then `1-0-1` will be superseded by the newest version, i.e. `1-0-3`. See diagrams below for more information on how this is determined.
+For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you create version `1-0-3` which also supersedes `1-0-1`, then the newest version, `1-0-3`, supersedes `1-0-1`. See [Rules](#rules) for how this is determined.
 
 :::
 
 :::tip[Schema caching]
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
+Various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes, controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md). This means that the effect of superseding a schema isn't immediate.
 
 :::
 
 ### Rules
 
+Iglu Server enforces the following rules for `$supersedes`.
+
 #### A schema version can only supersede previous versions
 
-For example, `1-0-2` can supersede `1-0-1`, but _can’t_ supersede `1-0-3`, `1-1-0`, or `2-0-0`. Iglu Server will reject a schema with a definition that breaks this rule.
+For example, `1-0-2` can supersede `1-0-1`, but _can't_ supersede `1-0-3`, `1-1-0`, or `2-0-0`. Iglu Server rejects a schema with a definition that breaks this rule.
 
 <table>
 <thead><tr><td align="center">✅ OK</td><td align="center">❌ Invalid</td></tr></thead>
@@ -243,7 +247,7 @@ flowchart LR
 
 #### A schema version can supersede multiple previous versions at once
 
-Events referencing either of those previous versions will be treated as explained above.
+Enrich validates events that reference any of those versions against the superseding version.
 
 <table>
 <thead><tr><td align="center">✅ OK</td></tr></thead>
@@ -268,7 +272,7 @@ flowchart RL
 
 Iglu Server automatically upholds this rule.
 
-For example, if you specify that `1-0-3` supersedes `1-0-2` and (later) that `1-0-4` also supersedes `1-0-2`, the latest schema — `1-0-4` — will automatically become the one that supersedes `1-0-2`.
+For example, if you specify that `1-0-3` supersedes `1-0-2` and later that `1-0-4` also supersedes `1-0-2`, the latest schema, `1-0-4`, automatically becomes the one that supersedes `1-0-2`.
 
 <table>
 <thead><tr><td align="center">Specified</td><td align="center">Becomes</td></tr></thead>
@@ -297,7 +301,7 @@ flowchart RL
 </tbody>
 </table>
 
-The same happens if you specify “chains”, e.g. `1-0-3` supersedes `1-0-2` and `1-0-4` supersedes `1-0-3`. This will be automatically updated so that `1-0-4` supersedes `1-0-2` and `1-0-3`.
+The same happens if you specify "chains", e.g. `1-0-3` supersedes `1-0-2` and `1-0-4` supersedes `1-0-3`. Iglu Server updates this automatically so that `1-0-4` supersedes `1-0-2` and `1-0-3`.
 
 <table>
 <thead><tr><td align="center">Specified</td><td align="center">Becomes</td></tr></thead>
@@ -329,17 +333,19 @@ flowchart RL
 
 ## Overwrite a schema
 
-Overwriting a schema (also called “patching”) is available if your schema version isn't yet in production.
+Overwriting a schema (also called "patching") is available if your schema version isn't yet in production.
 
 :::danger[Development schemas only]
 For Snowplow CDI customers, patching is disabled for production pipelines.
 
 Patching in a production environment can break your loading, especially if your patch contains breaking changes.
 
-Also, never patch a schema version that exists in a production environment, even if you are doing the patching in a development environment. This will lead to problems later when you try to promote that schema to production.
+Also, never patch a schema version that exists in a production environment, even if you are doing the patching in a development environment. This causes problems when you later try to promote that schema to production.
 :::
 
 If you are working on a new schema version in a development environment, patching is safer as it won't corrupt any production data.
+
+Patching replaces the content of an existing version in place, so the version number stays the same. For example, patching an incorrect version `1-0-2` leaves a corrected `1-0-2`, with no new version.
 
 Before:
 
@@ -360,4 +366,6 @@ flowchart LR
   v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(corrected)")
 ```
 
-Follow these [instructions](/docs/event-studio/data-structures/versioning/index.md#patch-a-schema) to patch a schema.
+To patch a schema in Console, see [Patch a schema](/docs/event-studio/data-structures/versioning/index.md#patch-a-schema).
+
+To mark a schema as superseded in Console, see [Mark a schema as superseded](/docs/event-studio/data-structures/versioning/index.md#mark-a-schema-as-superseded). For how schema versions work, see [Versioning schemas](/docs/fundamentals/schemas/versioning/index.md).

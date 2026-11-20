@@ -120,6 +120,24 @@
       "component": "snowtype",
       "since": "0.21.0",
       "href": "/docs/event-studio/implement-tracking/install-snowtype/"
+    },
+    "schema-superseding-enrich": {
+      "label": "Mark schemas as superseded: Enrich",
+      "component": "enrich",
+      "since": "3.8.0",
+      "href": "/docs/fundamentals/schemas/superseding-and-patching/"
+    },
+    "schema-superseding-iglu-server": {
+      "label": "Mark schemas as superseded: Iglu Server",
+      "component": "igluServer",
+      "since": "0.11.0",
+      "href": "/docs/fundamentals/schemas/superseding-and-patching/"
+    },
+    "schema-superseding-micro": {
+      "label": "Mark schemas as superseded: Snowplow Micro",
+      "component": "snowplowMicro",
+      "since": "1.7.1",
+      "href": "/docs/fundamentals/schemas/superseding-and-patching/"
     }
   }
 }

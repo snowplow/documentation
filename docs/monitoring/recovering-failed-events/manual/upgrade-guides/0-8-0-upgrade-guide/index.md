@@ -5,6 +5,7 @@ sidebar_position: -80
 description: "Upgrade event recovery to 0.8.0, covering the removal of the Spark job, the new EMR 7.13 setup for the Flink job, IAM permissions, and monitoring changes."
 keywords: ["event recovery 0.8.0", "upgrade guide", "Spark to Flink migration", "EMR 7.13"]
 date: "2026-11-09"
+content_type: how-to
 ---
 
 Version 0.8.0 makes the Flink job the only way to recover [failed events](/docs/fundamentals/failed-events/index.md) on AWS, and moves it to a current EMR release. This guide covers what you need to change if you run recoveries with the Spark job, or with the Flink job from version 0.7.x or earlier.

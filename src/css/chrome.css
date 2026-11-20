@@ -210,7 +210,7 @@
     width: var(--sp-layout-toc);
   }
 
-  .doc-article > :is(.theme-doc-version-badge, footer),
+  .doc-article > :is(.theme-doc-version-badge, footer, .sp-feedback),
   .doc-article__paginator {
     max-width: var(--sp-layout-content);
     margin-inline: auto;

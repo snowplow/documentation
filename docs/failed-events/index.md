@@ -62,7 +62,7 @@ Manual recovery runs a job that reads failed events from your buckets, applies t
 2. [Introduction to manual failed event recovery](/docs/monitoring/recovering-failed-events/manual/getting-started/index.md): how a recovery job works
 3. [Configure an event recovery job](/docs/monitoring/recovering-failed-events/manual/configuration/index.md), with [configuration examples](/docs/monitoring/recovering-failed-events/manual/configuration/configuration-examples/index.md)
 4. [Test an event recovery configuration locally](/docs/monitoring/recovering-failed-events/manual/testing/index.md)
-5. [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md) on [Flink](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md), [GCP Dataflow with Beam](/docs/monitoring/recovering-failed-events/manual/running/gcp-beam/index.md), or [Spark (legacy)](/docs/monitoring/recovering-failed-events/manual/running/spark/index.md)
+5. [Run event recovery jobs](/docs/monitoring/recovering-failed-events/manual/running/index.md) on [AWS with Flink](/docs/monitoring/recovering-failed-events/manual/running/flink/index.md) or [GCP Dataflow with Beam](/docs/monitoring/recovering-failed-events/manual/running/gcp-beam/index.md)
 6. [Monitor event recovery jobs](/docs/monitoring/recovering-failed-events/manual/monitoring/index.md)
 7. [Troubleshoot the manual event recovery process](/docs/monitoring/recovering-failed-events/manual/troubleshooting/index.md)
 

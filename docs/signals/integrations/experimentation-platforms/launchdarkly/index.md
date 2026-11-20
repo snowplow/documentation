@@ -140,7 +140,7 @@ For an iOS or Android app, follow the same steps with the LaunchDarkly mobile SD
 
 Create a Signals service for the browser with the `public` access mode, containing only attributes that are safe to show to the user, as described in [Choose what the browser can read](/docs/signals/integrations/experimentation-platforms/index.md#choose-what-the-browser-can-read). These examples call it `checkout_intent_browser`.
 
-Read it with `getServiceAttributes()` from the [Signals browser plugin](/docs/signals/applications/public-services/index.md#read-the-service), version 0.3.0 or later. Pass the user's `domain_userid` as the identifier. `getDomainUserId` reads it from the tracker's `_sp_id` cookie, and you also use it as the user key in LaunchDarkly.
+Read it with `getServiceAttributes()` from the [Signals browser plugin](/docs/signals/applications/public-services/index.md#read-the-service), version 0.3.0 or later. Pass the user's `domain_userid` as the identifier. Get it from your browser tracker, the `tracker` that `newTracker` returns, and use the same ID as the user key in LaunchDarkly.
 
 ```typescript
 import { getServiceAttributes } from '@snowplow/signals-browser-plugin';
@@ -169,11 +169,9 @@ export async function fetchSignalsAttributes(
     return {};
   }
 }
-
-export function getDomainUserId(cookies: string): string | undefined {
-  return cookies.match(/(?:^|;\s*)_sp_id\.[^=]+=([^.;]+)/)?.[1];
-}
 ```
+
+If you load the tracker with the JavaScript tag, read the ID inside a callback instead, for example `window.snowplow(function () { domainUserId = this.sp.getDomainUserId(); })`, where `sp` is your tracker's name, and track with `window.snowplow('trackPageView', ...)`.
 
 Like the server helper, `fetchSignalsAttributes` returns no attributes if there's no `domain_userid` yet or the read is slow or fails, and drops `null` values.
 
@@ -184,7 +182,7 @@ The browser SDK evaluates flags for the context it starts with, so fetch the att
 ```typescript
 import { createClient } from '@launchdarkly/js-client-sdk';
 
-const domainUserId = getDomainUserId(document.cookie);
+const domainUserId = tracker.getDomainUserId();
 const attributes = await fetchSignalsAttributes(domainUserId, TIMEOUT_MS);
 
 const ldClient = createClient(
@@ -217,7 +215,7 @@ const exposures = detail.reason?.inExperiment
     }]
   : [];
 
-window.snowplow('trackPageView', {
+tracker.trackPageView({
   context: exposures.map((data) => ({
     schema: 'iglu:com.example/experiment_exposure/jsonschema/1-0-0',
     data,

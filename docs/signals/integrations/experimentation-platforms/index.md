@@ -126,7 +126,7 @@ The user key is the identifier the experimentation platform uses to assign a var
 
 Use `domain_sessionid` only for experiments where the outcome happens in the same session, because a new session would assign the user again. Use `user_id` only if your platform keeps assignments the same across login.
 
-The JavaScript tracker stores `domain_userid` as the first value in its `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md), so your server and the browser can both read it. Each platform guide includes a helper that reads it. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
+The JavaScript tracker stores `domain_userid` as the first value in its `_sp_id` cookie, as described in [Getting cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md), so your server can read it from the request. In the browser, get it from the tracker with `getDomainUserId()`. Each platform guide shows both. On a user's first page view, your server may not receive the cookie yet, so experiments that target in-session behavior should assign on a later request.
 
 In a mobile app, use the session `userId` from the Snowplow tracker, `tracker.session?.userId`, as the user key. It's the identifier the tracker reads Signals attributes by.
 

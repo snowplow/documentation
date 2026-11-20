@@ -49,7 +49,7 @@ Your tracking definitions are your data structures and tracking plans. You can m
 | How the tracking code is produced | By hand, from the [Console code snippets](#console-code-snippets), or with Snowtype | With Snowtype, from the [local tracking plans](/docs/event-studio/implement-tracking/snowtype-config/index.md#local-tracking-plans) |
 | What catches a breaking change | Validation of test events in [Snowplow Micro](/docs/testing/snowplow-micro/index.md) or a [Console development environment](/docs/testing/snowplow-micro/console/index.md) | [Snowtype and Snowplow CLI checks](/tutorials/tracking-as-code/automate-with-github-actions) on every pull request |
 | Where you review a change before it's live | A draft event specification in Console, until you [publish it](/docs/event-studio/test-and-publish/index.md) | A pull request, next to the code change that needs it |
-| Which steps need Console credentials | Editing the definitions, and generating code with Snowtype, with a [browser login or an API key](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) | Only checking changes against Console, and publishing them |
+| Which steps need Console credentials | Editing the definitions, and generating code with Snowtype (with a [browser login or an API key](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate)) | Only checking changes against Console, and publishing them |
 
 ### Decide when to manage tracking as code
 

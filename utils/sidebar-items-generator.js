@@ -152,6 +152,21 @@ function swap(allItems, linkItems, descriptions) {
             items: swap(item.items, linkItems, descriptions),
           },
         ]
+      // A directory holding only a `type: link` index page (a merged-page
+      // stub) comes back as an empty category, so swap it for a link item
+      // here, or the sidebar would point at the stub page
+      const linkItem = linkItems[item.link?.id]
+      if (linkItem) {
+        return [
+          {
+            type: 'link',
+            label: linkItem.sidebar_label ?? linkItem.title,
+            href: linkItem.href,
+            className,
+            customProps: linkItem.sidebar_custom_props,
+          },
+        ]
+      }
       // Empty categories don't respect className, so render them as docs
       return [
         {

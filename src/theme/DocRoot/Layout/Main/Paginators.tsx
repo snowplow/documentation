@@ -43,7 +43,7 @@ export const Paginators: React.FC<{
           onClick={() => setActiveStep(prev)}
           isNext={false}
           permalink={prev.path}
-          title={prev.title}
+          title={prev.sidebar_label || prev.title}
           subLabel="Previous"
         />
       ) : (
@@ -54,7 +54,7 @@ export const Paginators: React.FC<{
           onClick={() => handleNextClick(next)}
           isNext={true}
           permalink={next.path}
-          title={next.title}
+          title={next.sidebar_label || next.title}
           subLabel="Next"
         />
       )}

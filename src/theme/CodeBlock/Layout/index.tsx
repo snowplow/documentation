@@ -16,8 +16,8 @@ import Buttons from '@theme/CodeBlock/Buttons'
 export default function CodeBlockLayout({ className }: Props): ReactNode {
   const { metadata } = useCodeBlockContext()
 
-  // Always show header with language badge
-  const showHeader = true
+  const showBadge = Boolean(metadata.language) && metadata.language !== 'text'
+  const showHeader = showBadge || Boolean(metadata.title)
 
   return (
     <Container as="div" className={clsx(className, metadata.className)}>
@@ -26,7 +26,7 @@ export default function CodeBlockLayout({ className }: Props): ReactNode {
           {/* Left side: Language badge and title */}
           <div className="flex items-center gap-2 flex-1">
             {/* Language badge - hidden for 'text' language */}
-            {metadata.language && metadata.language !== 'text' && (
+            {showBadge && (
               <span className="inline-flex items-center px-2 py-1 rounded text-sm font-medium bg-muted text-foreground border border-border leading-none">
                 {metadata.language}
               </span>
@@ -46,8 +46,11 @@ export default function CodeBlockLayout({ className }: Props): ReactNode {
         </div>
       )}
 
-      <div className="relative">
+      <div className="group relative">
         <Content />
+        {!showHeader && (
+          <Buttons className="absolute right-2 top-2 rounded-lg bg-[var(--sp-color-surface)] opacity-0 transition-opacity duration-200 focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100" />
+        )}
       </div>
     </Container>
   )

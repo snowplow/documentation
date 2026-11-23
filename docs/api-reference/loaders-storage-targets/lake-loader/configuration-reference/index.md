@@ -69,7 +69,7 @@ license: {
 
 :::note
 
-The REST catalog integration has been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, and Databricks Unity Catalog.
+The REST catalog integration has been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, Databricks Unity Catalog, and Google BigLake metastore.
 
 :::
 

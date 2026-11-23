@@ -11,7 +11,7 @@ components:
   - "Identities"
 ---
 
-The dbt data model for Snowplow Identities transforms the raw identity data and merges events in your warehouse into a set of tables for identity resolution and identifier lookup.
+The dbt data model for Snowplow Identities transforms the raw identity data and merge events in your warehouse into a set of tables for identity resolution and identifier lookup.
 
 The [0.2.0 release](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0) improves the performance and reduces the complexity of the model. As a result, we estimate up to 6× lower compute costs when running the new model.
 

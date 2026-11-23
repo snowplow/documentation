@@ -3,7 +3,7 @@ title: "New in Signals: datasets for evaluating decision models"
 sidebar_label: "Signals datasets for decision models"
 description: "Signals datasets can now rebuild the moments your app calls a decision model, the attributes and agentic contexts it would have sent, and what users did next."
 keywords: ["signals", "datasets", "decision models", "system one models", "offline evaluation", "agentic context"]
-date: "2026-10-09"
+date: "2026-11-23"
 category:
   - "Product news"
 components:

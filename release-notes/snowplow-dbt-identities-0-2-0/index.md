@@ -1,7 +1,7 @@
 ---
 title: "Snowplow dbt Identities 0.2.0 released"
 sidebar_label: "dbt Identities 0.2.0"
-description: "Immutable identifier mappings, preferred-owner flags, and a guarded migration for the Snowplow Identities dbt package."
+description: "Up to 6× lower warehouse compute costs with a more performant and simpler model."
 keywords: ["dbt identities", "identity resolution", "0.2.0"]
 date: "2026-10-23"
 category:
@@ -11,30 +11,14 @@ components:
   - "Identities"
 ---
 
-[Snowplow Identities 0.2.0](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0)
-simplifies current identity resolution on Snowflake, BigQuery, and Databricks. Immutable
-identifier rows resolve through a view, so merges no longer rewrite those rows. Install
-the package from Git with `revision: "0.2.0"`, following the
-[quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/).
+The dbt data model for Snowplow Identities transforms the raw identity data and merges events in your warehouse into a set of tables for identity resolution and identifier lookup.
 
-The mapping view adds `mapping_state` and `is_preferred`. The optional merge-limit heuristic
-retains every owner and marks an unambiguous preferred owner; it also covers identifiers
-that reappear after TTL expiry. Enable it only when the service has no configured unique
-identifiers.
+The [0.2.0 release](https://github.com/snowplow-incubator/dbt-snowplow-identities/releases/tag/0.2.0) improves the performance and reduces the complexity of the model. As a result, we estimate up to 6× lower compute costs when running the new model.
 
-Incremental readers advance across empty periods. Delayed merge events retain the
-current root, and stored children follow subsequent root changes, subject to the
-[pruned-payload limitation](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/#process-sparse-streams-and-delayed-merges).
+To achieve this, we removed outputs that were not useful in practice, along with the respective processing steps. Also, the new model only reads the columns it needs, as opposed to the entire atomic table. Overall, it is easier to understand, extend, and maintain, and more resilient.
 
-## Breaking upgrade
+## Upgrading
 
-This release removes `id_changes` and `id_mapping_scd`, renames `new_identities` to
-`identities`, lowercases `id_type`, and converts `identifier_mapping` to a view. Derived
-identifier keys can change with the normalized type.
+This release includes breaking changes. For example, the `id_changes` and `id_mapping_scd` tables are removed, `new_identities` is renamed to `identities`, etc.
 
-Upgrading from 0.1.0 requires a full refresh of every enabled package model, adequate
-retained source history, and a backup. The startup check rejects partial upgrades.
-Prefer a separate output schema, finish backfilling, validate the models and downstream
-queries, then switch consumers. Retain old history tables until their consumers have a
-validated replacement. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/)
-for the full procedure and rollback requirements.
+To upgrade from version `0.1.0` to `0.2.0`, you will need to run the new model with a full refresh and adapt any downstream models. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/) for the complete procedure and rollback requirements.

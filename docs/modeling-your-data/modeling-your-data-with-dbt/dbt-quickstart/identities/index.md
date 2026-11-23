@@ -144,8 +144,6 @@ Run this package before any other Snowplow dbt packages, so that downstream mode
 
 ## Full refresh and backfill
 
-Version 0.2.0 tracks progress from each model's `load_tstamp`; it has no progress manifest.
-The old `snowplow__allow_refresh` and `snowplow__dev_target_name` variables no longer apply.
 A full refresh rebuilds package outputs from `snowplow__start_date`, so verify source
 retention and back up existing outputs first.
 
@@ -153,18 +151,10 @@ retention and back up existing outputs first.
 dbt run --full-refresh --select package:snowplow_identities
 ```
 
-For an upgrade from 0.1.0, select every enabled package model and remove any
-`full_refresh: false` overrides on incremental package models. The startup check rejects
-partial upgrades, but does not block runs that select only unrelated models.
-
 The first build processes the configured backfill window. Run again without `--full-refresh`
-to continue. Empty periods advance to the first eligible day. Before switching consumers,
-finish the backfill and run:
+to continue. Empty periods advance to the first eligible day. After the backfill finishes, run
+the package tests:
 
 ```bash
 dbt test --select package:snowplow_identities
 ```
-
-The [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md)
-explains the required first full refresh for 0.1.0 installations, removed history tables,
-source-retention requirements and rollback.

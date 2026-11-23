@@ -13,5 +13,3 @@ Identities includes a [dbt package](/docs/modeling-your-data/modeling-your-data-
 The Identities dbt package is standalone from our other dbt packages.
 
 Check out the [Identities dbt package overview](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md) for more information.
-
-Version 0.2.0 removes the earlier change-history and slowly changing dimension (SCD) outputs. If you use 0.1.0, follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md) before upgrading.

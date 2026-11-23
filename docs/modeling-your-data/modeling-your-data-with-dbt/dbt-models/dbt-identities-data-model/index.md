@@ -29,11 +29,7 @@ This means that the standard guidance around [package mechanics](/docs/modeling-
 :::
 
 :::warning[Breaking changes in 0.2.0]
-
-This is a breaking upgrade from 0.1.0. It removes the `id_changes` and `id_mapping_scd`
-outputs and renames `new_identities` to `identities`. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md)
-before changing existing projects. Retain the 0.1.0 history tables if consumers need
-historical point-in-time state; current mappings cannot reconstruct that history exactly.
+Version 0.2.0 is a breaking upgrade from 0.1.0. Follow the [migration guide](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md) before upgrading existing projects.
 :::
 
 ## Key fields
@@ -150,4 +146,4 @@ The gap lookup adds source reads when a normal forward window is empty, and the 
 resolves owners at read time. Incremental child-to-root mapping runs also read the existing
 graph, even when they write only changed rows. Follow the
 [benchmark guidance](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#benchmark-before-a-large-rollout)
-before a production cutover; no general performance improvement is guaranteed.
+before a production cutover.

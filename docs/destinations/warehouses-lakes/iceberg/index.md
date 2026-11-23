@@ -31,6 +31,7 @@ Iceberg data can be consumed using various tools and products, for example:
 * Apache Spark or Amazon EMR
 * Snowflake
 * Databricks
+* BigQuery, through BigLake metastore
 * ClickHouse
 
 We currently support the following catalogs:
@@ -39,7 +40,7 @@ We currently support the following catalogs:
 | Glue | :white_check_mark: | :x: |
 | REST¹ | :white_check_mark: | :white_check_mark: |
 
-_¹The REST catalog has only been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, and Databricks Unity Catalog._
+_¹The REST catalog has only been tested with Snowflake Open Catalog (Apache Polaris), Snowflake Horizon Catalog, Databricks Unity Catalog, and Google BigLake metastore._
 
 ## What you will need
 
@@ -61,6 +62,11 @@ Keep in mind that you will need to be able to:
   <TabItem value="rest-databricks" label="REST (Databricks)">
     * Create an external location, a catalog, and a schema, and provide the catalog and schema names
     * Create a service principal and provide the OAuth client ID and client secret
+  </TabItem>
+  <TabItem value="rest-biglake" label="REST (BigLake)">
+    * Specify your Google Cloud project ID
+    * Create a GCS bucket, a BigLake catalog and namespace, and provide their names
+    * Create a service account with required access and provide its key
   </TabItem>
   <TabItem value="glue" label="AWS Glue">
     * Specify your AWS account ID

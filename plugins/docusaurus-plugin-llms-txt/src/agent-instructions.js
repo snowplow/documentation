@@ -136,7 +136,7 @@ export async function buildAgentInstructions({ siteDir, siteUrl }) {
   lines.push('## Instructions for AI agents')
   lines.push('')
   lines.push(
-    'Read this section before writing Snowplow code. Each link below points to a Markdown copy of the page: append `.md` to any docs URL, without the trailing slash, to fetch the Markdown version of that page.'
+    'Read this section before writing Snowplow code. Every page has a Markdown copy: append `.md` to any docs URL, without the trailing slash, to fetch the Markdown version of that page.'
   )
   lines.push('')
 

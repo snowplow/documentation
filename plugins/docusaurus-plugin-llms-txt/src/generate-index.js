@@ -4,7 +4,14 @@ import { htmlPathToMdPath, tutorialMdPath } from './write-pages.js'
 import { isPreviousVersion } from './version-utils.js'
 import { groupTutorialSteps } from './content-metadata.js'
 import { buildAgentInstructions } from './agent-instructions.js'
-import { buildProductRouter, writeProductIndexes } from './product-indexes.js'
+import {
+  buildProductRouter,
+  buildSectionIndexes,
+  buildSectionRouter,
+  INLINE_SECTION_PAGES,
+  writeIndexFile,
+  writeProductIndexes,
+} from './product-indexes.js'
 
 /**
  * Generate llms.txt index file.
@@ -39,27 +46,40 @@ export async function generateIndex(outDir, pages, options) {
     lines.push(...(await buildAgentInstructions({ siteDir, siteUrl })))
   }
 
-  if (sidebarMap.size > 0) {
-    lines.push(...buildProductRouter(siteUrl))
-  }
+  const productSections = buildSectionIndexes(pages, sidebarMap, sidebarOutlines, (page) =>
+    formatDocsEntry(page, linkOptions)
+  )
+  const groups =
+    productSections.length > 0
+      ? await writeSectionIndexes(outDir, pages, productSections, {
+          labelMap,
+          linkOptions,
+          tutorialMeta,
+          lines,
+        })
+      : [
+          ...buildDocsGroups(pages, labelMap, linkOptions),
+          buildTutorialsGroup(pages, tutorialMeta, linkOptions),
+          buildReleaseNotesGroup(pages, linkOptions),
+        ].filter((group) => group && group.entries.length > 0)
 
-  const groups = [
-    ...buildDocsGroups(pages, labelMap, linkOptions),
-    buildTutorialsGroup(pages, tutorialMeta, linkOptions),
-    buildReleaseNotesGroup(pages, linkOptions),
-  ].filter((group) => group && group.entries.length > 0)
-
-  for (const group of groups) {
-    lines.push(`## ${group.label}`)
-    lines.push('')
-
-    if (group.note) {
-      lines.push(group.note)
-      lines.push('')
+  if (productSections.length === 0) {
+    if (sidebarMap.size > 0) {
+      lines.push(...buildProductRouter(siteUrl))
     }
 
-    lines.push(...group.entries)
-    lines.push('')
+    for (const group of groups) {
+      lines.push(`## ${group.label}`)
+      lines.push('')
+
+      if (group.note) {
+        lines.push(group.note)
+        lines.push('')
+      }
+
+      lines.push(...group.entries)
+      lines.push('')
+    }
   }
 
   const outputPath = path.join(outDir, 'llms.txt')
@@ -88,6 +108,75 @@ export async function generateIndex(outDir, pages, options) {
       0
     )} entries)`
   )
+}
+
+const ROOT_INDEX_NOTE =
+  'This file is the root index. It lists section indexes, not every page. A link ending in `llms.txt` returns the list of pages in one section, as `[title](url): description` links. A link ending in `.md` returns one page as Markdown. Fetch the section index that matches your task, then fetch the pages you need from it.'
+
+async function writeSectionIndexes(
+  outDir,
+  pages,
+  productSections,
+  { labelMap, linkOptions, tutorialMeta, lines }
+) {
+  const { siteUrl } = linkOptions
+  const agentInstructionsAt = lines.indexOf('## Instructions for AI agents')
+  lines.splice(agentInstructionsAt === -1 ? lines.length : agentInstructionsAt, 0, ROOT_INDEX_NOTE, '')
+  lines.push(
+    ...buildSectionRouter(productSections, siteUrl, (page) => formatDocsEntry(page, linkOptions))
+  )
+
+  const sections = productSections.flatMap(({ sections }) => sections)
+  const listed = new Set(
+    productSections.flatMap(({ wholeProduct, rootPages, sections }) => [
+      ...(wholeProduct?.pages ?? []),
+      ...rootPages,
+      ...sections.flatMap((section) => section.pages),
+    ])
+  )
+  const otherPages = pages.filter((page) => page.kind === 'doc' && !listed.has(page))
+  const tutorials = buildTutorialsGroup(pages, tutorialMeta, linkOptions)
+  const releaseNotes = buildReleaseNotesGroup(pages, linkOptions)
+  const more = [
+    otherPages.length > INLINE_SECTION_PAGES && {
+      label: 'Other pages',
+      file: 'docs/other/llms.txt',
+      title: 'Snowplow documentation: other pages',
+      description: `Pages outside the product sections. ${otherPages.length} pages.`,
+      groups: buildDocsGroups(otherPages, labelMap, linkOptions),
+    },
+    tutorials && {
+      label: 'Tutorials',
+      file: 'tutorials/llms.txt',
+      title: 'Snowplow tutorials',
+      description: `Step-by-step tutorials, each returned as a single page. ${tutorials.entries.length} tutorials.`,
+      groups: [tutorials],
+    },
+    releaseNotes && {
+      label: 'Release notes',
+      file: 'release-notes/llms.txt',
+      title: 'Snowplow release notes',
+      description: `Changes to Snowplow components, newest first. ${releaseNotes.entries.length} notes.`,
+      groups: [releaseNotes],
+    },
+  ].filter(Boolean)
+
+  const inlinePages = otherPages.length > INLINE_SECTION_PAGES ? [] : otherPages
+
+  if (more.length > 0 || inlinePages.length > 0) {
+    lines.push('## More', '')
+    lines.push(...inlinePages.map((page) => formatDocsEntry(page, linkOptions)))
+    lines.push(
+      ...more.map((index) => `- [${index.label}](${siteUrl}/${index.file}): ${index.description}`)
+    )
+    lines.push('')
+  }
+
+  for (const index of [...sections, ...more]) {
+    await writeIndexFile(outDir, index, siteUrl)
+  }
+
+  return [...sections, ...more].flatMap((index) => index.groups)
 }
 
 /**

@@ -96,7 +96,8 @@ export function buildSidebarOutlines(plugins = []) {
 
 /**
  * Split a sidebar into its section headers, each listing its doc routes in
- * order. Top-level docs outside any header go into a group of their own.
+ * order, as a whole and per top-level item. Top-level docs outside any header
+ * go into a group of their own.
  */
 function sidebarSections({ sidebar, permalinkOf }, includeHidden = []) {
   const sections = []
@@ -114,17 +115,23 @@ function sidebarSections({ sidebar, permalinkOf }, includeHidden = []) {
     if (item.type === 'category' && !hidden) item.items.forEach((child) => collect(child, out))
     return out
   }
+  const entryOf = (item) => ({ label: item.label ?? null, routes: collect(item, []) })
   for (const item of sidebar) {
     if (item.type === 'category' && classesOf(item).includes('section-header')) {
-      sections.push({ label: item.label, routes: collect({ ...item, link: undefined }, []) })
+      const items = classesOf(item).includes('hidden') ? [] : item.items.map(entryOf)
+      sections.push({ label: item.label, items })
     } else {
-      const routes = collect(item, [])
       const last = sections[sections.length - 1]
-      if (last && last.loose) last.routes.push(...routes)
-      else sections.push({ label: null, loose: true, routes })
+      if (last && last.loose) last.items.push(entryOf(item))
+      else sections.push({ label: null, loose: true, items: [entryOf(item)] })
     }
   }
-  return sections.filter((s) => s.routes.length > 0)
+  return sections
+    .map((section) => {
+      const items = section.items.filter((item) => item.routes.length > 0)
+      return { ...section, items, routes: items.flatMap((item) => item.routes) }
+    })
+    .filter((s) => s.routes.length > 0)
 }
 
 /**
@@ -235,4 +242,145 @@ export async function writeProductIndexes(
     const count = groups.reduce((n, g) => n + g.entries.length, 0)
     console.log(`[llms-txt] Wrote ${index.file} (${count} entries)`)
   }
+}
+
+const slugOf = (label) =>
+  label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+const pageCount = (count) => `${count} ${count === 1 ? 'page' : 'pages'}`
+
+export const INLINE_SECTION_PAGES = 1
+
+const SINGLE_INDEX_PRODUCT_PAGES = 50
+
+export function buildSectionIndexes(pages, sidebarMap, sidebarOutlines, formatDocsEntry) {
+  return PRODUCT_INDEXES.flatMap((product) => {
+    const outline = sidebarOutlines.get(product.sidebar)
+    if (!outline) return []
+
+    const docPages = pages.filter(
+      (page) =>
+        page.kind === 'doc' && sidebarMap.get(normalizeRoute(page.routePath)) === product.sidebar
+    )
+    const byRoute = new Map(docPages.map((page) => [normalizeRoute(page.routePath), page]))
+    const used = new Set()
+    const take = (routes) =>
+      routes.flatMap((route) => {
+        const page = byRoute.get(route)
+        if (!page || used.has(route)) return []
+        used.add(route)
+        return [page]
+      })
+    const dir = path.posix.dirname(product.file)
+    const toSection = (label, items) => {
+      const direct = items.filter((item) => item.pages.length === 1).flatMap((item) => item.pages)
+      const groups = [
+        { label, pages: direct },
+        ...items.filter((item) => item.pages.length > 1),
+      ].filter((group) => group.pages.length > 0)
+      const count = items.reduce((n, item) => n + item.pages.length, 0)
+      const topics = items.map((item) => item.label).join('; ')
+      return {
+        title: `${product.title}: ${label}`,
+        label,
+        file: `${dir}/${slugOf(label)}/llms.txt`,
+        description: `${topics}. ${pageCount(count)}.`,
+        pages: items.flatMap((item) => item.pages),
+        groups: groups.map((group) => ({
+          label: group.label,
+          entries: group.pages.map(formatDocsEntry),
+        })),
+      }
+    }
+
+    const outlined = sidebarSections(outline, product.includeHidden).map((section) => ({
+      ...section,
+      items: section.items
+        .map((item) => {
+          const itemPages = take(item.routes)
+          return { label: item.label ?? itemPages[0]?.title, pages: itemPages }
+        })
+        .filter((item) => item.pages.length > 0),
+    }))
+    const rest = docPages.filter((page) => !used.has(normalizeRoute(page.routePath)))
+
+    const sections = [
+      ...outlined
+        .filter((section) => !section.loose && section.items.length > 0)
+        .map((section) => toSection(section.label, section.items)),
+    ]
+    const isSmall = (section) => section.pages.length <= INLINE_SECTION_PAGES
+
+    if (docPages.length <= SINGLE_INDEX_PRODUCT_PAGES) {
+      const topics = sections.map((section) => section.label).join('; ')
+      return [
+        {
+          product,
+          wholeProduct: { description: `${topics}. ${pageCount(docPages.length)}.`, pages: docPages },
+          rootPages: [],
+          sections: [],
+        },
+      ]
+    }
+
+    const withRest = [
+      ...sections,
+      ...(rest.length > 0
+        ? [toSection('More pages', rest.map((page) => ({ label: page.title, pages: [page] })))]
+        : []),
+    ]
+
+    return [
+      {
+        product,
+        rootPages: [
+          ...outlined
+            .filter((section) => section.loose)
+            .flatMap((section) => section.items.flatMap((item) => item.pages)),
+          ...withRest.filter(isSmall).flatMap((section) => section.pages),
+        ],
+        sections: withRest.filter((section) => !isSmall(section)),
+      },
+    ]
+  })
+}
+
+export function buildSectionRouter(productSections, siteUrl, formatDocsEntry) {
+  return productSections.flatMap(({ product, wholeProduct, rootPages, sections }) => [
+    `## ${product.title}`,
+    '',
+    product.description,
+    '',
+    ...(wholeProduct
+      ? [`- [${product.title}](${siteUrl}/${product.file}): ${wholeProduct.description}`]
+      : []),
+    ...rootPages.map(formatDocsEntry),
+    ...sections.map(
+      (section) => `- [${section.label}](${siteUrl}/${section.file}): ${section.description}`
+    ),
+    '',
+  ])
+}
+
+export async function writeIndexFile(outDir, { file, title, description, groups }, siteUrl) {
+  const lines = [`# ${title}`, '', `> ${description}`, '']
+  lines.push(
+    `This index lists the pages in one section of the Snowplow documentation. The other sections are listed in ${siteUrl}/llms.txt. Read the instructions for AI agents at the top of that file before you write Snowplow code. Every link points to a Markdown copy of the page.`
+  )
+  lines.push('')
+
+  for (const group of groups) {
+    lines.push(`## ${group.label}`, '')
+    if (group.note) lines.push(group.note, '')
+    lines.push(...group.entries, '')
+  }
+
+  const outputPath = path.join(outDir, file)
+  await fs.mkdir(path.dirname(outputPath), { recursive: true })
+  await fs.writeFile(outputPath, lines.join('\n'), 'utf8')
+  const count = groups.reduce((n, g) => n + g.entries.length, 0)
+  console.log(`[llms-txt] Wrote ${file} (${count} entries)`)
 }

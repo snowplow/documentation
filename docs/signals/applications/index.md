@@ -20,6 +20,7 @@ Use this table to find the page for what reads the data:
 | An agent that chooses what to read at runtime | Published attribute groups and agentic contexts, as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) | Any MCP client |
 | Application code that decides how to treat a session | A score between 0 and 1 for how likely the session is to reach a goal | [Define a predictive attribute](/docs/signals/predictive-attributes/index.md), then [retrieve its score](/docs/signals/applications/predictive-attributes/index.md) | Python SDK, Node.js SDK, Signals API |
 | An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, iOS and Android trackers, Signals API |
+| A back-end system that reacts when criteria are met | The same intervention payload, sent as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [forward them](/docs/signals/applications/forward-interventions/index.md) | Webhook, Kafka, Amazon Kinesis, Google Cloud Pub/Sub |
 | Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/ml-training-datasets/index.md) | Python SDK |
 
 ## Agents

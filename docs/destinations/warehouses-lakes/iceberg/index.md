@@ -65,8 +65,9 @@ Keep in mind that you will need to be able to:
   </TabItem>
   <TabItem value="rest-biglake" label="REST (BigLake)">
     * Specify your Google Cloud project ID
-    * Create a GCS bucket, a BigLake catalog and namespace, and provide their names
-    * Create a service account with required access and provide its key
+    * Create a GCS bucket
+    * Create a BigLake catalog and namespace (using the bucket), and provide their names
+    * Create a service account with the `serviceusage.serviceUsageConsumer` and `biglake.editor` roles, and provide its key
   </TabItem>
   <TabItem value="glue" label="AWS Glue">
     * Specify your AWS account ID

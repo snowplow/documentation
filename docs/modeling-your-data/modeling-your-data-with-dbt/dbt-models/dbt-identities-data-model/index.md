@@ -131,7 +131,7 @@ One row per merge event. The log retains the raw merge history used by the mappi
 
 The package also builds two internal models. `snowplow_identities_stg_identity_events`, in the scratch schema, holds events with the identity entity. `snowplow_identities_identifier_mapping_base` holds the unresolved, event-time identifier rows behind the `identifier_mapping` view. Query the view instead of this table.
 
-Each model tracks its own progress using the latest `load_tstamp` in its table. The following sections describe how the models handle gaps in the data, merges, and reloaded data. Some of this behavior adds warehouse cost, and the `identifier_mapping` view resolves owners each time you query it. Before a production rollout, follow the [benchmark guidance](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#benchmark-before-a-large-rollout) to measure these costs on your data.
+Each model tracks its own progress using the latest `load_tstamp` in its table. The following sections describe how the models handle gaps in the data, merges, and reloaded data. Some of this behavior adds warehouse cost, and the `identifier_mapping` view resolves owners each time you query it. Before a production rollout, [benchmark these costs](#benchmark-warehouse-costs) on your data.
 
 ### Process periods without data
 
@@ -149,7 +149,7 @@ The child-to-root mapping handles merges in the following ways:
 - When a root merges into another identity, its stored children move to the new root, even if the identity service's cumulative payload no longer lists them
 - Reprocessing a batch that hasn't changed doesn't rewrite any mapping rows
 
-This behavior relies on merges from the identity service being cumulative and free of cycles. The package's no-chain and stale-root tests check that every child maps directly to a current root, so keep them enabled.
+This behavior relies on merges from the identity service being cumulative and free of cycles. The package's `snowplow_id_mapping_no_chains` and `identifier_mapping_no_stale_roots` tests check that every child maps directly to a current root, so keep them enabled.
 
 Because the model reads the existing mapping to resolve delayed merges and move children, an incremental run can scan the whole stored graph even when the new batch is small.
 
@@ -157,8 +157,16 @@ Because the model reads the existing mapping to resolve delayed merges and move 
 
 The mapping can keep an intermediate parent in one case. If a child has been pruned from the cumulative payload, the model follows only one extra parent to find its root. For example, a stored `A -> B` mapping stays chained if `B -> C` and `C -> D` arrive in the same processing window, after both `A` and `B` have been pruned from the payload for `D`. Pruning happens through TTL expiry, erasure, or the `max_merges` limit.
 
-The no-chain test detects this case. If it fails, don't switch consumers to the affected outputs, and keep the previous outputs and source history while you investigate. A larger backfill window doesn't recover links that are missing from the payloads.
+The `snowplow_id_mapping_no_chains` test detects this case. If it fails, don't switch consumers to the affected outputs, and keep the previous outputs and source history while you investigate. A larger backfill window doesn't recover links that are missing from the payloads.
 
 ### Reprocess backdated data
 
 Incremental processing depends on `load_tstamp` recording when each row arrived in the warehouse. If you reload rows with a `load_tstamp` older than `snowplow__lookback_days`, the models won't pick them up. Increase the lookback or rebuild the affected period. Also set `snowplow__partition_buffer_days` to cover the actual gap between your partition column and `load_tstamp`.
+
+### Benchmark warehouse costs
+
+The package tests check correctness, not performance at production scale. Before a production rollout, benchmark the package on a representative copy of your data.
+
+Measure a full read of `snowplow_identities_identifier_mapping` and the queries your consumers run. Compare the results with the cost of [materializing the view as a table](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#resolve-identifier-mappings-through-the-view) as often as you need it. Record the elapsed time, bytes scanned, shuffle or spill, warehouse size, graph size, and whether results came from cache.
+
+Also measure an incremental `snowplow_identities_snowplow_id_mapping` run that includes merges, and a repeat run with no new data. Include periods with no data, large merge groups, and shared identifiers. As described in [Resolve merges](#resolve-merges) and [Process periods without data](#process-periods-without-data), even a small batch can scan the whole stored mapping, and periods with no data add queries on `atomic.events`.

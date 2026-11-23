@@ -8,6 +8,10 @@ date: "2026-11-23"
 content_type: reference
 ---
 
+:::note[Public preview]
+Intervention forwarding is in public preview. You can't configure it in Console: Snowplow deploys it for you after you request it. Its configuration and payload may change in ways that aren't backward compatible before it's generally available.
+:::
+
 This page describes what Snowplow sends when it [forwards interventions](/docs/signals/applications/forward-interventions/index.md) to your destination, and how it handles your webhook's responses.
 
 Each forwarded intervention is a JSON object. It contains the same information as the [payload that subscriptions receive](/docs/signals/applications/subscribe/index.md#payload), but in a different shape: the target is in `attributeKey`, and `attributes` is a list.

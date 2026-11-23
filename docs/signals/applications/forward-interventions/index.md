@@ -8,9 +8,13 @@ date: "2026-11-23"
 content_type: how-to
 ---
 
+:::note[Public preview]
+Intervention forwarding is in public preview. You can't configure it in Console: Snowplow deploys it for you after you request it. Its configuration and payload may change in ways that aren't backward compatible before it's generally available.
+:::
+
 Intervention forwarding sends every triggered intervention to a destination you own, as soon as Signals triggers it. Use it when the system that reacts to an intervention is a back-end service, such as a CRM, a messaging platform, or your own profile service, rather than a page or app that can [subscribe](/docs/signals/applications/subscribe/index.md) to interventions.
 
-Forwarding doesn't replace subscriptions. Both receive the same triggered interventions, and you can use them together. You can't configure forwarding yourself in Console: you request it, and Snowplow sets it up for you.
+Forwarding doesn't replace subscriptions. Both receive the same triggered interventions, and you can use them together.
 
 Forwarding can deliver interventions to these destinations:
 

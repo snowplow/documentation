@@ -44,7 +44,7 @@ dbt deps
 
 ## Configure the package
 
-The steps below walk through each variable you need to set in your `dbt_project.yml` to get the package running. Check out the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) for more details.
+The steps below cover the required settings and optional overrides for your `dbt_project.yml`. See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) for all defaults.
 
 ### 1. Configure license acceptance
 
@@ -79,7 +79,7 @@ vars:
 
 ### 4. Check source data
 
-The package reads from your atomic events table. By default, it assumes the `atomic` schema in your `target.database`. To override this, add the following to your `dbt_project.yml`:
+The package reads from `target.database` by default. If each environment's dbt target already points to the database containing its events, leave `snowplow__database` unset. The source schema defaults to `atomic`. Set only the values you need to override:
 
 ```yaml title="dbt_project.yml"
 vars:
@@ -87,6 +87,14 @@ vars:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
+
+Use literal database and schema names in `vars:`. A Jinja conditional in the value can reach the source catalog as text and cause `dbt docs generate` to fail. If each environment needs a different source database from its target, pass the database name with `--vars` on each job command that uses the source, including `dbt docs generate`. For example:
+
+```bash
+dbt docs generate --select package:snowplow_agent_analytics --vars '{"snowplow__database": "RAW_QA"}'
+```
+
+Command-line variables apply to all packages in that invocation. See [dbt project variables](https://docs.getdbt.com/docs/build/project-variables#variable-precedence) for precedence and scope.
 
 The events table must include `load_tstamp`. Use the native entity format produced by your Snowplow loader: Snowflake VARIANT arrays, BigQuery repeated records, or Databricks typed arrays of structs.
 

@@ -5,6 +5,8 @@ sidebar_label: "Evaluate decision models"
 description: "Replay a decision model call, such as a call to a System One model or an LLM prompt, on past sessions with a Signals dataset, and check its answers against what users did next."
 keywords: ["System One models", "decision models", "offline evaluation", "Jev", "replay", "agentic context", "dataset builder"]
 date: "2026-10-07"
+content_type: how-to
+pagination_next: signals/agentic-contexts/index
 ---
 
 A decision model answers a typed question about a state object, for example which panel a page should lead with, or whether a user is likely to buy in this session. System One models such as TypeSafe's Jev work this way, and so does an LLM prompt that returns one of a fixed set of answers. These models don't need training, so there is no training dataset to test them on before they go live.
@@ -24,7 +26,7 @@ Start from the call your application already makes. Each part of it maps to part
 
 | Part of the call | Dataset setting |
 | --- | --- |
-| When the application makes the call | The anchors. Use [user-supplied anchors](/docs/signals/datasets/anchors/index.md#user-supplied-anchors) from logs of past calls, [event anchors](/docs/signals/datasets/anchors/index.md#event-anchors) when the call responds to an event, or [trigger anchors](/docs/signals/datasets/anchors/index.md#trigger-anchors) when it responds to a condition over attributes. |
+| When the application makes the call | The anchors. Use [user-supplied anchors](/docs/signals/datasets/anchors/index.md#user-supplied-anchors) from logs of past calls, or [event anchors](/docs/signals/datasets/anchors/index.md#event-anchors) when the call responds to an event. If the call responds to a condition over attributes, such as a third product view, log the calls and use the log as user-supplied anchors. |
 | The Signals data the state is built from | The attribute groups and the agentic contexts the application reads, passed as `attribute_groups` and `agentic_contexts`. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md). |
 | How the state is built | Your own state-building code, run over each dataset row instead of a live Signals response |
 | What the decision is meant to predict or change | [Outcome columns](/docs/signals/datasets/context-and-outcomes/index.md#add-outcome-columns), such as a purchase later in the session |
@@ -46,7 +48,6 @@ from snowplow_signals import (
     Criteria,
     Criterion,
     DatasetOutcome,
-    SessionSample,
     TrainingSpan,
     WarehouseTable,
 )
@@ -55,6 +56,7 @@ product_view = Criteria(all=[Criterion.eq(AtomicProperty(name="event_name"), "pr
 purchase = Criteria(all=[Criterion.eq(AtomicProperty(name="event_name"), "transaction")])
 add_to_cart = Criteria(all=[Criterion.eq(AtomicProperty(name="event_name"), "add_to_cart")])
 
+# sp_signals: the client from Connect to Signals
 run = sp_signals.submit_dataset_run_with_event_anchors(
     attribute_groups=[sp_signals.get_attribute_group(name="session_shopping")],
     agentic_contexts=[sp_signals.get_event_log(name="recent_activity")],
@@ -64,8 +66,6 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
         end_time=datetime(2026, 1, 22, tzinfo=timezone.utc),
     ),
     max_per_session=1,
-    pick="random",
-    sample=SessionSample(max_sessions=5000, seed="eval-v1"),
     outcomes=[
         DatasetOutcome(name="purchased_later", criteria=purchase),
         DatasetOutcome(name="added_to_cart_within_10m", criteria=add_to_cart, within_seconds=600),
@@ -74,6 +74,8 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
     dataset_table=WarehouseTable(table="intent_eval"),
 )
 ```
+
+With `max_per_session=1`, each session contributes its first product view, so long sessions don't dominate the results. If the dataset has more rows than the preview limit of 10,000, shorten the time window or query the table in your warehouse.
 
 After the run succeeds, ask the model at every moment and run the three checks:
 

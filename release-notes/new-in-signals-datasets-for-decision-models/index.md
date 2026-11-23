@@ -20,11 +20,7 @@ A dataset row is one moment your application would have called the model. It hol
 
 ### Event anchors
 
-Create one row for every event that matches criteria, such as a product page view, to match an application that calls a model in response to an event. You can keep the first or a random matching event per session, and choose whether the anchor event itself counts toward the attributes.
-
-### Trigger anchors
-
-Create rows at the moments a rule over attribute values would have held, replayed the way the streaming engine evaluates it, including the `changed` operator and a cooldown and cap per session.
+Create one row for every event that matches criteria, such as a product page view, to match an application that calls a model in response to an event. You can cap the number of rows per session, keeping the earliest.
 
 ### Agentic contexts in datasets
 
@@ -32,11 +28,11 @@ Add a column per agentic context, holding the entries the streaming engine would
 
 ### Outcome columns
 
-Add boolean columns that record whether something happened after each moment, such as a purchase later in the session or an add to cart within ten minutes.
+Add boolean columns that record whether something happened after each moment, such as a purchase later in the session or an add to cart within ten minutes. Outcomes can follow the session or another attribute key, such as the user.
 
-### Session sampling
+### Reuse anchors across versions
 
-Use a deterministic sample of sessions, so that the same seed always selects the same sessions and different versions of a context can be compared on the same moments.
+Reuse the anchors table from one run as user-supplied anchors in the next, so that different versions of your attributes or agentic contexts are compared on the same moments.
 
 ## Getting started
 

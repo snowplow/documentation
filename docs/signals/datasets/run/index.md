@@ -5,6 +5,7 @@ sidebar_label: "Run a build"
 description: "Build a Signals dataset as a managed run in your warehouse, or generate the SQL and run it yourself. Check status, preview rows, and query the result."
 keywords: ["dataset builder", "managed run", "sql bundle", "snowflake", "signals python sdk"]
 date: "2026-10-07"
+content_type: how-to
 ---
 
 Once you have chosen your anchors and the context and outcomes for each row, you can build the dataset in two ways: submit a managed run where Signals executes the queries in your warehouse, or generate the SQL and run it yourself.
@@ -15,14 +16,16 @@ The `submit_dataset_run_with_*()` methods have Signals build the dataset in your
 
 - `submit_dataset_run_with_session_anchors()`
 - `submit_dataset_run_with_event_anchors()`
-- `submit_dataset_run_with_trigger_anchors()`
 - `submit_dataset_run_with_custom_anchors()`
+
+Before it starts, a managed run checks that your events table has the columns the criteria read, and that a user-supplied anchors table has the attribute key columns and no column that clashes with the dataset's own. A failed check returns an error straight away, instead of a run that fails in the warehouse.
 
 ### Check run status
 
 Use `get_dataset_run_status()` to check whether the run has finished. The `status` field is one of `pending`, `success`, or `failed`. When a run fails, `error` contains the warehouse error message.
 
 ```python
+# run: the response from a submit_dataset_run_* call
 status = sp_signals.get_dataset_run_status(run.id)
 print(status.status)  # "pending", "success", or "failed"
 ```
@@ -33,6 +36,7 @@ To wait for completion in a notebook or script:
 import time
 from snowplow_signals import DatasetRunStatus
 
+# sp_signals and run: as in the previous block
 while True:
     status = sp_signals.get_dataset_run_status(run.id)
     if status.status == DatasetRunStatus.SUCCESS:
@@ -44,9 +48,10 @@ while True:
 
 ### Preview results
 
-Once the run status is `success`, call `get_dataset_run_preview()` to fetch rows of the completed dataset. By default it returns up to 100 rows, configurable up to 10,000 with the `limit` parameter. The rows aren't ordered, so a preview of a larger dataset is an arbitrary subset. For evaluation, sample sessions so the whole dataset fits within the limit, or query the table directly.
+Once the run status is `success`, call `get_dataset_run_preview()` to fetch rows of the completed dataset. By default it returns up to 100 rows, configurable up to 10,000 with the `limit` parameter. The rows aren't ordered, so a preview of a larger dataset is an arbitrary subset. For evaluation, keep the dataset within the limit with `max_per_session` and a shorter time window, or query the table directly.
 
 ```python
+# sp_signals and run: as in Check run status
 preview = sp_signals.get_dataset_run_preview(run.id, limit=10000)
 df = preview.to_pandas()
 ```
@@ -58,6 +63,7 @@ The resulting DataFrame contains one row per anchor, with columns for the attrib
 The complete dataset is written to your warehouse at the table location stored in `run.dataset`. Datasets can contain millions of rows, so for model training you should query this table directly in your warehouse rather than loading it into memory.
 
 ```python
+# run: the response from a submit_dataset_run_* call
 dataset_location = run.dataset
 print(f"{dataset_location.database}.{dataset_location.schema_}.{dataset_location.table}")
 # e.g. "analytics.ml.signals_training_dataset"
@@ -68,6 +74,7 @@ print(f"{dataset_location.database}.{dataset_location.schema_}.{dataset_location
 To cancel a dataset build that is still in progress:
 
 ```python
+# sp_signals and run: as in Check run status
 sp_signals.cancel_dataset_run(run.id)
 ```
 
@@ -76,6 +83,7 @@ sp_signals.cancel_dataset_run(run.id)
 If you want to review or customize the SQL before running it, use the `build_dataset_with_*()` methods, which take the same arguments as the managed runs. They generate the SQL files without executing them, so you can inspect, modify, or run them on your own schedule.
 
 ```python
+# sp_signals, session_attributes, product_view, and span: as in Choose dataset anchors
 bundle = sp_signals.build_dataset_with_event_anchors(
     attribute_groups=[session_attributes],
     criteria=product_view,
@@ -95,7 +103,7 @@ Run the SQL files in the order specified in `README.md` against your warehouse t
 
 ## Customize output tables
 
-By default, the dataset builder creates tables in the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). Each build writes three kinds of table, and a new build with the same names replaces them. Give each build its own table names when you want to keep several, for example to compare context variants on the same anchors.
+By default, the dataset builder creates tables in the output database and schema from your [Signals warehouse connection](/docs/signals/setup/index.md). Each build writes three kinds of table: the anchors, one attributes table per attribute key, and the dataset. A managed run marks every table it creates in the table comment, and a later run with the same table names replaces only tables marked this way. If a table with one of those names exists and wasn't created by a dataset run, or another run that's still pending writes to it, the run is rejected. Give each build its own table names when you want to keep several, for example to compare context variants on the same anchors.
 
 | Argument | Description | Type | Default |
 | --- | --- | --- | --- |
@@ -107,8 +115,9 @@ By default, the dataset builder creates tables in the output database and schema
 ```python
 from snowplow_signals import WarehouseTable
 
+# sp_signals: the client from Connect to Signals
 run = sp_signals.submit_dataset_run_with_session_anchors(
-    ...
+    ...,  # attribute_groups, goal_criteria, and training_span as in Choose dataset anchors
     dataset_table=WarehouseTable(
         table="my_training_dataset",   # required
         database="analytics",          # optional, defaults to Signals connection

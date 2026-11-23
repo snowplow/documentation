@@ -5,6 +5,7 @@ sidebar_label: "Datasets"
 description: "Build point-in-time correct datasets from your Snowplow events to train machine learning models or evaluate decision models such as System One models on past traffic."
 keywords: ["training datasets", "machine learning", "dataset builder", "anchors", "outcomes", "System One models", "offline evaluation", "signals python sdk"]
 date: "2026-07-15"
+content_type: concept
 ---
 
 <NotebookLinks path="snowplow/documentation/blob/main/static/notebooks/signals-dataset-builder.ipynb" />
@@ -32,7 +33,7 @@ A dataset build has three stages:
 flowchart LR
     subgraph stage1["1. Anchors"]
         direction TB
-        A1["Session, event, or<br>trigger anchors from<br>your events"] --> A3["One row per<br>moment"]
+        A1["Session or event<br>anchors from<br>your events"] --> A3["One row per<br>moment"]
         A2["Your own table<br>of moments"] --> A3
     end
 
@@ -50,7 +51,7 @@ flowchart LR
     stage1 --> stage2 --> stage3
 ```
 
-1. Anchors: decide the moments that become rows. Signals can derive them from your events, by session goal, by matching events, or by replaying an attribute trigger, or you can supply your own table. See [Choose dataset anchors](/docs/signals/datasets/anchors/index.md).
+1. Anchors: decide the moments that become rows. Signals can derive them from your events, by session goal or by matching events, or you can supply your own table. See [Choose dataset anchors](/docs/signals/datasets/anchors/index.md).
 2. Context: for each anchor, compute attribute values and agentic context entries using only the events before it. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md).
 3. Assembly: join anchors with their context, plus labels or outcome columns, into a single table with one row per anchor.
 
@@ -72,12 +73,13 @@ The dataset builder supports Snowflake only. A [Signals warehouse connection](/d
 | --- | --- |
 | Session anchors | ✅ |
 | Event anchors | ✅ |
-| Trigger anchors | ✅ |
 | User-supplied anchors | ✅ |
 | Outcome columns | ✅ |
 | Agentic contexts | ✅ |
 | Managed runs | ✅ |
 | Self-built SQL | ✅ |
+
+The dataset builder computes attributes from stream attribute groups only. It doesn't support [warehouse attribute groups](/docs/signals/attributes/warehouse-config/index.md) yet. The attribute groups can use any attribute key, including custom keys read from an entity or an event property.
 
 ## Workflow
 
@@ -89,3 +91,5 @@ Building and using a dataset follows this process:
 4. [Run the build](/docs/signals/datasets/run/index.md), either as a managed run or by executing the SQL yourself
 5. Train your model on the dataset, or [evaluate a decision model](/docs/signals/datasets/evaluate-decision-models/index.md) against it
 6. Serve the same attributes and agentic contexts to your model in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [Retrieve agentic contexts](/docs/signals/applications/agentic-contexts/index.md)
+
+For a complete walkthrough, from defining attributes to training and serving a model, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).

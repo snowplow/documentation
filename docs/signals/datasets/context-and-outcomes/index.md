@@ -5,6 +5,7 @@ sidebar_label: "Add context and outcomes"
 description: "Add point-in-time attribute values, agentic contexts, and outcome columns to each row of a Signals dataset."
 keywords: ["dataset builder", "point-in-time", "agentic context", "outcomes", "labels", "dataset columns"]
 date: "2026-10-07"
+content_type: how-to
 ---
 
 Each row in a dataset holds the context your application would have read at the anchor, and optionally what happened afterwards. Context comes from your attribute groups and agentic contexts. What happened afterwards comes from labels on the anchors or from outcome columns.
@@ -13,22 +14,19 @@ Each row in a dataset holds the context your application would have read at the 
 
 Every attribute in the `attribute_groups` you pass becomes a column. Signals computes each value from the events for that attribute key before the anchor, looking back as far as the longest period across your attributes. Use `max_lookback_days` to override that window.
 
-Whether the anchor event itself is included depends on the anchor type:
-
-| Anchor type | Includes the anchor event |
-| --- | --- |
-| Session anchors | No |
-| Event anchors | Only with `include_anchor_event=True` |
-| Trigger anchors | Yes, because the trigger fires after the event updates the attributes |
-| User-supplied anchors | No |
+Values include only the events before the anchor, never the anchor event itself, for every anchor type.
 
 The attribute groups don't need to be published. You can pass a draft definition to test it before it goes live.
 
+Because each attribute becomes a column, attribute names must be unique across all the attribute groups you pass, ignoring case. Names also can't match the dataset's own columns: `anchor_ts`, `label`, or an attribute key column such as `domain_sessionid`. To use two groups that share an attribute name, rename the attribute in one of them.
+
 ## Add agentic contexts at each anchor
 
-Pass [agentic context](/docs/signals/agentic-contexts/index.md) definitions as `agentic_contexts` to add one column per agentic context. Each column holds an array of the entries the streaming engine would have buffered at that anchor, oldest first, in the same shape as the JSON returned when you [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md).
+Pass up to five [agentic context](/docs/signals/agentic-contexts/index.md) definitions as `agentic_contexts` to add one column per agentic context. Each column holds an array of the entries the streaming engine would have buffered at that anchor, oldest first, in the same shape as the JSON returned when you [retrieve an agentic context](/docs/signals/applications/agentic-contexts/index.md).
 
 ```python
+# sp_signals: the client from Connect to Signals
+# session_attributes, product_view, and span: as in Choose dataset anchors
 agentic_context = sp_signals.get_event_log(name="recent_activity")
 
 run = sp_signals.submit_dataset_run_with_event_anchors(
@@ -45,7 +43,7 @@ The entries follow the agentic context's configuration:
 - Entries older than `max_age_seconds` before the newest entry are dropped, and only the newest `max_events` are kept.
 - If no matching event arrived within `max_age_seconds` before the anchor, the column holds an empty array.
 
-Agentic contexts in datasets require Snowflake. Event selections that use an event specification ID aren't supported.
+Agentic contexts are buffered per session, so the dataset gets a `domain_sessionid` column when you add one. Agentic contexts in datasets require Snowflake. Event selections that use an event specification ID aren't supported yet.
 
 ## Add outcome columns
 
@@ -54,6 +52,8 @@ Outcomes are boolean columns that record whether something happened after each a
 ```python
 from snowplow_signals import AtomicProperty, Criteria, Criterion, DatasetOutcome
 
+# sp_signals, session_attributes, product_view, and span: as in Choose dataset anchors
+# user_attributes: an attribute group keyed on domain_userid
 purchase = Criteria(
     all=[Criterion.eq(AtomicProperty(name="event_name"), "transaction")]
 )
@@ -74,14 +74,18 @@ run = sp_signals.submit_dataset_run_with_event_anchors(
 )
 ```
 
-An outcome is `true` when an event matching `criteria` has a later `collector_tstamp` than the anchor, has the anchor's value of `attribute_key`, and occurs within `within_seconds` of the anchor if set.
+An outcome is `true` when an event matching `criteria` has a later `collector_tstamp` than the anchor, has the anchor's value of `attribute_key`, and occurs within `within_seconds` of the anchor if set. Otherwise it's `false`.
+
+An outcome is empty (`NULL`) when the anchor has no value for its `attribute_key`, for example an outcome on `domain_userid` for an anchor without a user ID. Signals can't tell whether that user did anything next, so filter these rows out rather than counting them as `false`.
+
+You can add up to 20 outcomes to a dataset.
 
 | Field | Description | Type | Required? |
 | --- | --- | --- | --- |
-| `name` | Name of the outcome column. Must not match another column in the dataset. | `str` | ✅ |
+| `name` | Name of the outcome column. Must not match another column in the dataset, ignoring case, including `anchor_ts` and `label`. | `str` | ✅ |
 | `criteria` | Events that count as the outcome happening. Same format as event anchor criteria. | `Criteria` | ✅ |
-| `attribute_key` | Attribute key the outcome follows. Only events with the anchor's value of this key count. Must be the key of one of the dataset's attribute groups. | `str` | Default: `"domain_sessionid"` |
-| `within_seconds` | Only count events up to this many seconds after the anchor. Required for any attribute key other than `domain_sessionid`. Without it, an outcome on `domain_sessionid` covers the rest of the session. | `int` | Default: `None` |
+| `attribute_key` | Attribute key the outcome follows. Only events with the anchor's value of this key count. Must be a key column of the dataset: the key of one of the attribute groups, or `domain_sessionid` with session or event anchors. | `str` | Default: `"domain_sessionid"` |
+| `within_seconds` | Only count events up to this many seconds after the anchor, up to a year. Required for any attribute key other than `domain_sessionid`. Without it, an outcome on `domain_sessionid` covers the rest of the session, up to a day after the dataset's last anchor. | `int` | Default: `None` |
 
 ## Review an example row
 

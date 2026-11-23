@@ -129,21 +129,36 @@ One row per merge event. The log retains the raw merge history used by the mappi
 
 ## Internal models and operation
 
-`snowplow_identities_stg_identity_events` holds events with the identity entity in the scratch schema.
-`snowplow_identities_identifier_mapping_base` holds immutable event-time identifier rows;
-consumers should normally query the resolved view.
+The package also builds two internal models. `snowplow_identities_stg_identity_events`, in the scratch schema, holds events with the identity entity. `snowplow_identities_identifier_mapping_base` holds the unresolved, event-time identifier rows behind the `identifier_mapping` view. Query the view instead of this table.
 
-The atomic readers advance across gaps, and downstream models follow their upstream
-watermarks. Delayed merge events resolve through stored parents, and children follow a
-root that merges again. Run the package's tests to verify unique keys and flat root mappings.
+Each model tracks its own progress using the latest `load_tstamp` in its table. The following sections describe how the models handle gaps in the data, merges, and reloaded data. Some of this behavior adds warehouse cost, and the `identifier_mapping` view resolves owners each time you query it. Before a production rollout, follow the [benchmark guidance](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#benchmark-before-a-large-rollout) to measure these costs on your data.
 
-Pruned cumulative payloads can leave an intermediate parent when several root changes
-arrive in the same processing window. The fallback follows one additional parent; see
-the [pruned-payload limitation](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#process-sparse-streams-and-delayed-merges)
-before switching consumers to the new outputs.
+### Process periods without data
 
-The gap lookup adds source reads when a normal forward window is empty, and the view
-resolves owners at read time. Incremental child-to-root mapping runs also read the existing
-graph, even when they write only changed rows. Follow the
-[benchmark guidance](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/identities/index.md#benchmark-before-a-large-rollout)
-before a production cutover.
+When no new data arrives within the normal processing window, the models that read `atomic.events` skip ahead to the next day that has matching events. They process up to that day, not all remaining history at once. This also works on the initial build and when a table is empty.
+
+Downstream models follow their upstream tables. The identities and identifier models follow the staged identity events, and the child-to-root mapping follows the merge log, so a period with merges but no new identity events still gets processed. Each model keeps its own watermark and lookback, so a model that failed catches up on the next run.
+
+Skipping ahead adds a query on `atomic.events` whenever the normal window is empty, which increases warehouse usage during a sparse historical backfill. `snowplow__backfill_limit_days` limits the number of days with data that each run processes, not the bytes it scans.
+
+### Resolve merges
+
+The child-to-root mapping handles merges in the following ways:
+
+- A delayed merge event is resolved against the stored mapping before its new links are applied
+- When a root merges into another identity, its stored children move to the new root, even if the identity service's cumulative payload no longer lists them
+- Reprocessing a batch that hasn't changed doesn't rewrite any mapping rows
+
+This behavior relies on merges from the identity service being cumulative and free of cycles. The package's no-chain and stale-root tests check that every child maps directly to a current root, so keep them enabled.
+
+Because the model reads the existing mapping to resolve delayed merges and move children, an incremental run can scan the whole stored graph even when the new batch is small.
+
+### Handle pruned merge payloads
+
+The mapping can keep an intermediate parent in one case. If a child has been pruned from the cumulative payload, the model follows only one extra parent to find its root. For example, a stored `A -> B` mapping stays chained if `B -> C` and `C -> D` arrive in the same processing window, after both `A` and `B` have been pruned from the payload for `D`. Pruning happens through TTL expiry, erasure, or the `max_merges` limit.
+
+The no-chain test detects this case. If it fails, don't switch consumers to the affected outputs, and keep the previous outputs and source history while you investigate. A larger backfill window doesn't recover links that are missing from the payloads.
+
+### Reprocess backdated data
+
+Incremental processing depends on `load_tstamp` recording when each row arrived in the warehouse. If you reload rows with a `load_tstamp` older than `snowplow__lookback_days`, the models won't pick them up. Increase the lookback or rebuild the affected period. Also set `snowplow__partition_buffer_days` to cover the actual gap between your partition column and `load_tstamp`.

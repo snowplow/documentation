@@ -8,88 +8,70 @@ date: "2026-10-23"
 content_type: how-to
 ---
 
-Use this guide when upgrading an existing Snowplow Identities dbt project. For a new project, follow the [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md).
+Use this guide to upgrade an existing Snowplow Identities dbt project. For a new project, follow the [Identities quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/identities/index.md) instead.
 
 ## Upgrade to 0.2.0
 
-This release removes two output tables, renames a third, and rebuilds
-`snowplow_identities_identifier_mapping` as a view. The view keeps its name and resolved-identifier grain, but adds
-`mapping_state` and `is_preferred`, normalizes `id_type` to lowercase, and changes the
-opt-in merge-limit behavior. Review downstream filters and explicit column lists.
+Version 0.2.0 is a breaking release. It removes two output tables, renames a third, and turns `snowplow_identities_identifier_mapping` into a view. The upgrade requires a full refresh of the package, and you'll need to update any downstream models that use the changed tables.
 
 ### What changed
 
+The following table lists the changes to each output and what you need to do about them:
+
 | Table | Change | Action needed |
 | --- | --- | --- |
-| `snowplow_identities_snowplow_id_mapping` | Same child-to-root grain; delayed merges preserve current roots. Gains `merge_event_id`, `triggering_event_id`, and `load_tstamp`; partitioned on `load_tstamp` rather than `merged_at` | Rebuild with the package-scoped full refresh below |
-| `snowplow_identities_merge_events` | Same grain and values. Gains `load_tstamp`; partitioned on `load_tstamp` rather than `derived_tstamp` | Rebuild with the package-scoped full refresh below |
-| `snowplow_identities_identifier_mapping` | A view over immutable rows, with lowercase `id_type` and new `mapping_state` / `is_preferred` columns. The collapse option selects a preferred owner without deleting other owners. | Update case-sensitive filters; filter `is_preferred` only when the heuristic is appropriate |
-| `snowplow_identities_new_identities` | Renamed to `snowplow_identities_identities`; per-identifier columns removed | Update references; see [Rebuild the wide identity row](#rebuild-the-wide-identity-row) |
+| `snowplow_identities_snowplow_id_mapping` | Same grain: one row per merged child. Adds `merge_event_id`, `triggering_event_id`, and `load_tstamp`. Partitioned on `load_tstamp` instead of `merged_at`. Delayed merges keep the current root | Rebuild with a full refresh |
+| `snowplow_identities_merge_events` | Same grain and values. Adds `load_tstamp`. Partitioned on `load_tstamp` instead of `derived_tstamp` | Rebuild with a full refresh |
+| `snowplow_identities_identifier_mapping` | A view with the same name and grain. Adds `mapping_state` and `is_preferred`, and `id_type` values are lowercase. The merge-limit collapse option marks a preferred owner instead of deleting the other owners | Update case-sensitive `id_type` filters. Filter on `is_preferred` only if the heuristic suits your data |
+| `snowplow_identities_new_identities` | Renamed to `snowplow_identities_identities`. Per-identifier columns removed | Update references. See [Rebuild the wide identity row](#rebuild-the-wide-identity-row) |
 | `snowplow_identities_id_changes` | Removed | See [Rebuild `id_changes`](#rebuild-id_changes) |
 | `snowplow_identities_id_mapping_scd` | Removed | See [Rebuild `id_mapping_scd`](#rebuild-id_mapping_scd) |
 
-New models:
-
-- `snowplow_identities_identifier_mapping_base` (`derived`). The table the view resolves at
-  read time. It holds unresolved, event-time rows, so query the view instead.
-- `snowplow_identities_identities` (`derived`). The renamed `new_identities`.
-- `snowplow_identities_stg_identity_events` (`scratch`). Events with the identity entity read from
-  `atomic.events`, replacing the old base layer.
-
-Every derived table also gains a `load_tstamp` column, which is how each model tracks
-its own progress. See [Track progress per model](#track-progress-per-model).
+The release also adds two internal models. `snowplow_identities_identifier_mapping_base`, in the derived schema, is the table behind the `identifier_mapping` view. It holds unresolved rows, so query the view instead. `snowplow_identities_stg_identity_events`, in the scratch schema, holds events with the identity entity read from `atomic.events`, and replaces the old base layer.
 
 ### Track progress per model
 
-The shared manifest table and the hooks that maintained it are gone. Each model asks its
-own table for the newest `load_tstamp` it holds and processes forward from there, so a
-failed run leaves that model slightly behind and it catches up on the next one. This
-deletes the manifest, three supporting models, the whole `_this_run` scratch layer, and
-the manifest-maintenance hooks. The package goes from 15 models to five models and one view. A read-only startup
-check rejects an upgrade that is missing the required full refresh. It runs only when
-an Identities model is selected, so unrelated models can still run. While legacy tables
-remain, a full refresh must include every enabled package model; a partial selection
-or a `full_refresh: false` override on an incremental package model does not bypass the check.
+Version 0.2.0 drops the incremental manifest. Each model reads the latest `load_tstamp` in its own table and processes new data from that point. If a run fails, the affected model catches up on the next run. Removing the manifest also removes three supporting models, the `_this_run` scratch tables, and the manifest hooks, so the package goes from 15 models to five models and one view.
 
-Removed variables: `snowplow__allow_refresh`, `snowplow__dev_target_name`,
-and the `models_to_remove` variable (all belonged to the manifest). A `--full-refresh`
-rebuilds from `snowplow__start_date`, with no manifest to guard.
+To prevent a partial upgrade, the package checks for 0.1.0 tables at the start of every `dbt run` or `dbt build` that selects an Identities model. If `snowplow_identities_merge_events` or `snowplow_identities_snowplow_id_mapping` exists without a `load_tstamp` column, the run fails before it changes any tables, unless it meets all of these conditions:
 
-New variables:
+- It uses `--full-refresh`
+- It selects every enabled Identities model, for example with `--select package:snowplow_identities`
+- No incremental Identities model has `full_refresh: false` in its configuration
 
-| Variable | Default | What it does |
+After the full refresh, both tables have a `load_tstamp` column and the check passes. Runs that don't select any Identities models skip the check.
+
+### Update project variables
+
+Version 0.2.0 removes the `snowplow__allow_refresh`, `snowplow__dev_target_name`, and `models_to_remove` variables, which configured the manifest. Delete them from your `dbt_project.yml`. Without `snowplow__allow_refresh`, nothing blocks a `--full-refresh` run, which rebuilds the package from `snowplow__start_date`.
+
+The release adds these variables:
+
+| Variable | Default | Description |
 | --- | --- | --- |
-| `snowplow__identities_app_id` | `['snowplow-identities']` | App IDs for identity-service merge events, separate from the application-event filter `snowplow__app_id`. Set to `[]` to disable the merge-event app filter. |
-| `snowplow__lookback_days` | 1 | Days of overlap re-scanned each run for late-arriving data. Also the run-twice idempotency window. |
-| `snowplow__partition_tstamp` | `load_tstamp` | The column `atomic.events` is physically partitioned by. Set to `collector_tstamp` if that is your partition key, so staging scans still prune. |
-| `snowplow__partition_tstamp_type` | `timestamp` | `timestamp` or `date`, matching the above column's type. |
-| `snowplow__partition_buffer_days` | 2 | Extra days on the prune predicate to absorb collector-to-load lag. |
+| `snowplow__identities_app_id` | `['snowplow-identities']` | App IDs of the identity service's merge events. This filter is separate from `snowplow__app_id`, which filters your application events. Set to `[]` to disable it |
+| `snowplow__lookback_days` | 1 | Number of days each run re-scans to pick up late-arriving data. Re-running a batch within this window gives the same result. If you reload data with an older `load_tstamp`, see [Reprocess backdated data](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md#reprocess-backdated-data) |
+| `snowplow__partition_tstamp` | `load_tstamp` | The column that partitions `atomic.events`. Set to `collector_tstamp` if your table uses that column, so that staging queries can prune partitions |
+| `snowplow__partition_tstamp_type` | `timestamp` | The type of the partition column: `timestamp` or `date` |
+| `snowplow__partition_buffer_days` | 2 | Extra days added to the partition filter to cover the delay between collection and loading |
 
-### Rebuild the package on the first run
+### Prepare for the full refresh
 
-The existing `snowplow_id_mapping` and `merge_events` tables gain `load_tstamp` and
-change their partition key. Appending columns alone would leave old rows with null
-watermarks and would not repartition the tables. `identifier_mapping` also changes
-from a table to a view. In particular, BigQuery rejects that conversion during a
-normal run; it requires a full refresh or a manual drop.
+The upgrade needs a full refresh because the `snowplow_id_mapping` and `merge_events` tables gain a `load_tstamp` column and a new partition key. Adding the column alone would leave existing rows without a value and keep the old partitioning. The full refresh also replaces the `identifier_mapping` table with a view.
 
-Use a package-scoped full refresh for the initial upgrade so dbt handles both
-repartitioning and table-to-view conversion. This rebuilds the package's outputs
-from `atomic.events`. Historical completeness therefore requires all necessary
-identity and merge events to be available from `snowplow__start_date`. Check source
-retention and back up the 0.1.0 tables first. If history has expired, retain the old
-tables and establish a migration plan before upgrading; missing events cannot be
-reconstructed by the new models.
+The full refresh rebuilds every output from `atomic.events`, starting at `snowplow__start_date`. Before you upgrade:
 
-The removed tables and renamed `new_identities` are left behind until you choose
-to drop them after validation.
+- Check that your warehouse still holds all identity and merge events since `snowplow__start_date`. The new models can't recover events that are no longer there. If some history has expired, keep the 0.1.0 tables and plan the migration before you upgrade
+- Back up all 0.1.0 output schemas, including the manifest and history tables
+- Keep your current `package-lock.yml` so you can [roll back](#validate-and-roll-back)
+
+The full refresh doesn't drop the removed tables or the old `new_identities` table. You can drop them yourself after validation.
 
 ### Upgrade steps
 
-1. **Pause scheduled jobs that select Identities**, then pin the Git revision to
-   `0.2.0` in your `packages.yml` and run `dbt deps`. The startup check rejects runs
-   until the package-scoped full refresh in step 3 is complete. Keep these jobs paused
-   during the upgrade and resume them after the backfill and validation in step 3.
+Follow these steps to upgrade:
+
+1. Pause any scheduled jobs that run Identities models. Their runs fail the [upgrade check](#track-progress-per-model) until step 3 is complete. Then set the Git revision to `0.2.0` in `packages.yml` and run `dbt deps`:
 
    ```yaml title="packages.yml"
    packages:
@@ -97,36 +79,31 @@ to drop them after validation.
        revision: "0.2.0"
    ```
 
-2. **Back up the existing outputs and confirm source retention**, per
-   [Rebuild the package on the first run](#rebuild-the-package-on-the-first-run).
+2. Back up the existing outputs and check source retention, as described in [Prepare for the full refresh](#prepare-for-the-full-refresh).
 
-3. **Run one full refresh, then finish the backfill incrementally.** The first run
-   rebuilds from `snowplow__start_date`. Set a backfill window that covers the required
-   history where practical, for example:
+3. Run a full refresh. To process more history per run, increase the backfill window:
 
    ```bash
    dbt run --full-refresh --select package:snowplow_identities --vars '{snowplow__backfill_limit_days: 400}'
    ```
 
-   If more history remains, run again **without** `--full-refresh` to advance. Repeating
-   the full-refresh flag restarts from the beginning. Empty periods are skipped to the
-   first eligible day, so the start date may precede the first identity event.
+   If more history remains, run the package again without `--full-refresh` until it catches up. Running with `--full-refresh` again starts the backfill over. Days without data are skipped, so `snowplow__start_date` can be earlier than your first identity event.
 
    ```bash
    dbt run --select package:snowplow_identities --vars '{snowplow__backfill_limit_days: 400}'
    ```
 
-   Incremental runs log their resolved processing bounds, so you can watch progress:
+   Each incremental model logs its watermark and processing window, which you can use to follow progress:
 
    ```text
    Snowplow: snowplow_identities_identities at watermark 2026-07-14 -- processing load_tstamp from 2026-07-14 to 2026-08-14
    ```
 
-   Until the backfill completes, the tables only cover the period processed so far.
-   Historical completeness depends on the retained source events. Validate the backfilled
-   outputs against the saved 0.1.0 tables before switching downstream consumers.
+   The windows for identity events and merge events can differ. On the initial build, the log shows the requested window, and the actual upper bound can be later.
 
-4. Drop the old tables after you validate the new outputs and their downstream consumers, since dbt no longer manages them:
+   The tables only cover the processed period until the backfill finishes. When it does, [validate the outputs](#validate-and-roll-back) against your 0.1.0 backup, then resume the scheduled jobs.
+
+4. After you've validated the new outputs and their downstream consumers, drop the old tables. dbt doesn't manage them anymore:
 
    ```sql
    -- removed outputs
@@ -147,115 +124,39 @@ to drop them after validation.
    drop table if exists <scratch_schema>.snowplow_identities_id_changes_this_run;
    ```
 
-   The initial full refresh replaces `identifier_mapping` with the view, so it does
-   not need a separate manual drop.
-
-### Process sparse streams and delayed merges
-
-Both atomic readers look for the first eligible day after their current watermark.
-If a gap extends past the normal window, its upper bound extends through that first
-populated day. It does not jump to the newest source timestamp and process all remaining
-history at once. The lookup applies the same application and identity-entity filters
-as the reader. It also works when the existing table is empty or on the initial build.
-
-Derived models extend their windows through their upstream data: identities and identifier
-rows follow identity staging; the child-to-root mapping follows the merge log. A merge-only
-period therefore does not depend on new events with the identity entity. Lower bounds retain each
-model's own watermark and configured lookback, so a failed downstream model catches up.
-
-A bounded probe checks the normal forward window first. Only when it is empty does
-the source-day lookup search eligible timestamps beyond the batch. This adds read work
-during a sparse historical backfill; the backfill
-setting limits populated days processed, not a guarantee on bytes scanned. Benchmark
-warehouse usage on representative data before switching production consumers.
-
-A delayed merge is resolved against the stored child-to-root mapping before applying
-new edges. Stored children also follow a root that merges again, including children no
-longer present in the service's cumulative payload. Repeating an unchanged batch does
-not rewrite the mapping rows. These rules rely on the identity service's cumulative,
-acyclic merge semantics; the package's no-chain and stale-root tests remain required.
-
-The fallback for pruned payloads follows one additional parent, not an arbitrary chain.
-For example, a stored `A -> B` can remain chained if `B -> C` and `C -> D` arrive in the
-same window after both A and B have been pruned from D's cumulative payload. TTL eviction,
-erasure, or `max_merges` truncation can produce this case. The no-chain test detects the
-remaining intermediate parent; do not switch consumers to outputs that fail it. Retain
-the prior outputs and source history while investigating. A larger backfill window alone
-does not guarantee recovery of links omitted from the payloads.
-
-`load_tstamp` must describe warehouse arrival. Rows inserted with an old `load_tstamp`
-outside the configured lookback are not automatically rediscovered. Increase the lookback
-or rebuild the affected period after such a backdated reload. Partition-buffer settings
-must also cover the actual difference between the partition timestamp and `load_tstamp`.
-
-### Monitor processing windows
-
-Incremental models log their watermark and resolved processing window. Windows can differ
-between identity and merge streams. Each model resolves its bounds once and reuses those
-dates for both the predicate and log, avoiding a second atomic gap probe for logging.
-Initial-build logging reports the requested starting
-window; source gaps or an upstream anchor can extend its upper bound.
+   You don't need to drop `identifier_mapping`. The full refresh already replaced it with the view.
 
 ## Adapt downstream models
 
-Review consumers of the changed outputs before switching to 0.2.0. The following sections explain the available replacements and their limitations.
+Review the consumers of each changed output before you switch them to 0.2.0. This section describes the replacements and their limitations.
 
 ### Resolve identifier mappings through the view
 
-Previously, a merge physically rewrote identifier rows to point at the winning
-identity, then deleted the leftovers via a post-hook. That approach caused a recurring
-class of bug: stale rows after cascading merges, duplicate keys when one identifier was
-shared across identities, and a `MERGE` failure when two re-pointed rows collapsed onto one
-key.
+In 0.1.0, a merge rewrote identifier rows to point to the surviving identity, and a post-hook deleted the leftover rows. This caused stale rows after cascading merges, duplicate keys when identities shared an identifier, and `MERGE` failures when two rewritten rows ended up with the same key.
 
-In 0.2.0, `identifier_mapping_base` stores one row per `(snowplow_id, id_type, id_value)`
-under an immutable key that never changes, and the view resolves each row to its
-current `active_snowplow_id` on read. Merges are reflected the moment
-`snowplow_id_mapping` updates, and nothing upstream is ever rewritten.
+In 0.2.0, `identifier_mapping_base` stores one row per `(snowplow_id, id_type, id_value)` and never rewrites it. The `identifier_mapping` view resolves each row to its current `active_snowplow_id` when you query it, so merges show up as soon as `snowplow_id_mapping` updates.
 
-Consider these consequences:
+Because the view resolves owners on every query, frequent queries can be slow. If that's a problem, materialize the view as a table in your own project:
 
-- **The view does the resolution work on every query.** It joins the immutable identifier
-  base to the complete child-to-root mapping and identities, then ranks owners using
-  window functions. If you query it heavily and it becomes a bottleneck, materialize it
-  in your own project:
+```sql
+-- models/my_identifier_mapping.sql
+{{ config(materialized='table') }}
+select * from {{ ref('snowplow_identities_identifier_mapping') }}
+```
 
-  ```sql
-  -- models/my_identifier_mapping.sql
-  {{ config(materialized='table') }}
-  select * from {{ ref('snowplow_identities_identifier_mapping') }}
-  ```
+The table only reflects new merges after each rebuild, while the view always shows the current state. Choose based on how often you query the data and how fresh it needs to be.
 
-  That table pays the full resolution cost on each rebuild and remains unchanged between
-  rebuilds. The view pays per read and reflects new merges immediately. Choose based on
-  query frequency and freshness needs.
-
-- An identifier can belong to more than one identity over its lifetime. If an
-  identifier expires from the identity engine and later reappears under a new identity,
-  both rows are kept in `identifier_mapping_base`. Previously the second sighting
-  overwrote the first. The view still shows one row per
-  `(active_snowplow_id, id_type, id_value)`, so this only surfaces if the two identities
-  have not merged, in which case you correctly see two owners.
+An identifier can belong to more than one identity over time. If an identifier expires in the identity service and later reappears under a different identity, `identifier_mapping_base` keeps both rows. In 0.1.0, the second row replaced the first. The view returns one row per `(active_snowplow_id, id_type, id_value)`, so you only see two owners if the two identities haven't merged.
 
 ### Benchmark before a large rollout
 
-The integration fixtures verify correctness; they do not establish production-scale
-performance. On a representative copy, measure a full read of `identifier_mapping` and
-the queries consumers actually run, then compare them with the cost and frequency of
-rebuilding a consumer-owned table. Record elapsed time, bytes scanned, shuffle or spill,
-warehouse size, graph size, and whether result caching was used.
+The package tests check correctness, not performance at production scale. On a representative copy of your data, measure a full read of `identifier_mapping` and the queries your consumers run. Compare the results with the cost of rebuilding a table in your own project as often as you need it. Record the elapsed time, bytes scanned, shuffle or spill, warehouse size, graph size, and whether results came from cache.
 
-Also measure an incremental `snowplow_id_mapping` run with merges and an unchanged repeat.
-The model reads the existing mapping to resolve delayed parents and retained children,
-even though it writes only changed rows. Include sparse atomic periods, large merge
-groups, and shared identifiers in the benchmark; a small new batch does not imply a
-small scan of the stored graph.
+Also measure an incremental `snowplow_id_mapping` run that includes merges, and a repeat run with no new data. The model reads the existing mapping to resolve delayed merges and move children, so even a small batch can scan the whole stored graph. Include periods with no data, large merge groups, and shared identifiers in the benchmark. Periods with no data add queries on `atomic.events` because the models [skip ahead](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md#process-periods-without-data) to the next day with data.
 
 ### Rebuild the wide identity row
 
-`identities` no longer carries `domain_userid`, `user_id`, and other identifier columns. Those values
-live in `identifier_mapping`, which keeps *every* value an identity has carried rather
-than collapsing to one per type. If you want the old wide shape, pivot the mapping back:
+The `identities` table no longer has `domain_userid`, `user_id`, or other identifier columns. These values are in `identifier_mapping`, which keeps every value an identity has had, not just one per type. To get the previous wide format, pivot the mapping:
 
 ```sql
 -- models/my_identities_wide.sql
@@ -279,45 +180,35 @@ left join identifiers x
     on coalesce(m.active_snowplow_id, i.snowplow_id) = x.active_snowplow_id
 ```
 
-The `max()` matters. Where an identity carries several values of one type it picks one
-arbitrarily, which is the lossiness that motivated removing these columns. Join
-`identifier_mapping` at the identifier grain instead where you can.
+If an identity has several values of the same type, `max()` picks one of them, so this query loses data in the same way the old columns did. Where you can, join `identifier_mapping` at the identifier level instead.
 
 ### Rebuild `id_changes`
 
-The removed history table has no drop-in replacement in 0.2.0. Keep the saved 0.1.0
-history if downstream users depend on it. The merge log retains cumulative payloads,
-but those payloads preserve a child's original `merged_at` when a group changes root;
-they do not reproduce every timestamp and processing decision of the removed model.
+Version 0.2.0 has no replacement for `id_changes`. If your consumers depend on it, keep the 0.1.0 table. The merge log stores the cumulative payloads, but these keep a child's original `merged_at` when its group changes root, so you can't reproduce the old table's timestamps from them.
 
-For history from the cutover onwards, capture changes to the resolved mapping in a
-consumer-owned snapshot or history model. Define whether validity means service event
-time or warehouse processing time, and validate late arrivals and cascading merges
-against that contract before migrating those consumers.
+To record changes from the upgrade onward, build a snapshot or history model in your own project on top of the resolved mapping. Decide whether its validity periods use event time from the identity service or processing time in the warehouse. Test it with late-arriving data and cascading merges before you migrate consumers.
 
 ### Rebuild `id_mapping_scd`
 
-Retain the 0.1.0 SCD table for historical point-in-time queries. A new snapshot of current
-mapping state can record changes from the cutover onwards, but cannot recover previously
-unobserved transitions or reproduce the old SCD history from current mappings alone.
-Do not drop these old outputs until their consumers have an independently validated
-replacement. If exact historical compatibility is required, remain on 0.1.0 while that
-migration is designed.
+Keep the 0.1.0 `id_mapping_scd` table for historical point-in-time queries. A snapshot of the current mapping records changes from the upgrade onward, but it can't recover earlier history. Keep the old tables until their consumers have a validated replacement. If you need exact compatibility with the old history, stay on 0.1.0 until you've designed that migration.
 
 ## Validate and roll back
 
-Prefer rebuilding into a separate output target/schema while keeping the atomic source
-configuration unchanged. Finish the backfill and run `dbt test --select package:snowplow_identities`
-before switching consumers. Check identity counts, resolved owners, earliest/latest source
-coverage, case-sensitive `id_type` filters, and the opt-in preferred-owner behavior. UUIDs
-are derived from `id_type`, so normalizing its case can change keys used downstream.
+Build 0.2.0 into a separate target or schema if possible, using the same `atomic.events` source. When the backfill finishes, run the package tests:
 
-Keep the prior package lockfile and a consistent backup of all 0.1.0 output schemas,
-including manifest and history tables. If validation fails, leave consumers on the old
-schemas. After an in-place upgrade, rollback requires restoring those backups and pinning
-0.1.0 again; changing the package version alone cannot undo the table-to-view conversion
-or restore the removed history. Rehearse that restore using your warehouse's backup or
-clone mechanism before upgrading in place.
+```bash
+dbt test --select package:snowplow_identities
+```
+
+Before you switch consumers, compare the new outputs with your 0.1.0 backup. Check:
+
+- The no-chain and stale-root tests pass. A no-chain failure can come from [pruned merge payloads](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-identities-data-model/index.md#handle-pruned-merge-payloads), which a larger backfill doesn't fix
+- Identity counts and resolved owners
+- The earliest and latest source data covered
+- Filters on `id_type` that depend on case. Keys derived from `id_type` can change because the values are lowercase in 0.2.0
+- The preferred-owner behavior, if you enabled `snowplow__merge_limit_collapse`
+
+If validation fails, keep your consumers on the old schemas. If you upgraded in place, rolling back means restoring your backups and setting the revision back to `0.1.0`. Changing the package version alone doesn't turn the view back into a table or restore the removed history tables. Test the restore with your warehouse's backup or clone feature before you upgrade in place.
 
 ## Upgrade to 0.1.0
 

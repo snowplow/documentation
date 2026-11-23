@@ -203,6 +203,8 @@ To receive and take action on interventions, you'll need to [subscribe](/docs/si
 
 Subscription is by attribute key, not by intervention: a subscription using a specific attribute key ID, for example a `domain_userid` ID for the current user, will receive all triggered interventions for that ID. See the [delivery example](/docs/signals/applications/subscribe/index.md#delivery-example) for how targeting, subscription, and the send-once rule work together.
 
+To send interventions to a back-end system instead of an application, Snowplow can [forward them](/docs/signals/applications/forward-interventions/index.md) to a webhook, Kafka, Amazon Kinesis, or Google Cloud Pub/Sub.
+
 ### Types of intervention
 
 Signals has two types of interventions: rule-based or direct.

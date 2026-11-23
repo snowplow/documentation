@@ -18,6 +18,8 @@ Subscribe to interventions to automatically respond within your application. You
 * The [iOS and Android trackers](/docs/sources/mobile-trackers/signals/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
+To send interventions to a back-end system instead, such as a webhook or a Kafka topic, see [Forward interventions](/docs/signals/applications/forward-interventions/index.md).
+
 Subscription is by attribute key ID, not by individual intervention. What you need first depends on the option:
 * Python SDK: a client, created as described in [Connect to Signals](/docs/signals/connection/index.md#create-a-signals-client)
 * Browser plugin: your Signals API URL, from Console > **Signals** > **Overview**. It doesn't need an API key.

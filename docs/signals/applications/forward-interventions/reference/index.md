@@ -12,6 +12,8 @@ This page describes what Snowplow sends when it [forwards interventions](/docs/s
 
 Each forwarded intervention is a JSON object. It contains the same information as the [payload that subscriptions receive](/docs/signals/applications/subscribe/index.md#payload), but in a different shape: the target is in `attributeKey`, and `attributes` is a list.
 
+The payload follows the [`iglu:com.snowplowanalytics.signals/intervention_instance/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_instance/jsonschema/1-0-0) schema in Iglu Central. Use it to validate the payloads you receive, or to generate types for your code.
+
 ## Parameters
 
 The forwarded payload has these fields:

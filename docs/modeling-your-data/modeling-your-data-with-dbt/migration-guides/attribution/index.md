@@ -11,9 +11,9 @@ Use this guide to review configuration and behavior changes before upgrading Att
 
 ### Upgrading to 1.0.1
 
-Version 1.0.1 anchors incremental conversion windows on `cv_tstamp` and retains the full first day of each conversion's path lookback. No full refresh is required to continue incremental runs. Corrected paths can change attribution values when the affected conversions are reprocessed.
+Version 1.0.1 anchors incremental conversion windows on `cv_tstamp` and retains the full first day of each conversion's path lookback. You can continue with normal incremental runs after upgrading. Attribution values can change as the package reprocesses affected conversions.
 
-Set `snowplow__days_late_allowed` to the maximum number of days late that your conversions source can deliver conversions. The default is `3`; each run re-reads conversions from this value plus one day before the latest processed conversion, or 96 hours by default. Spark and Databricks select the whole dates covered by that window.
+Set `snowplow__days_late_allowed` to the maximum delay, in days, between a conversion and its arrival in the conversions source. Each run looks back that many days plus one from the latest processed conversion. The default of `3` gives a 96-hour window. Spark and Databricks select the whole dates covered by that window.
 
 If you customized this variable in Unified, set the same value explicitly under `snowplow_attribution`. Attribution cannot read a value scoped under `snowplow_unified`. For example, if your Unified setting is `5`:
 
@@ -25,9 +25,9 @@ vars:
     snowplow__days_late_allowed: 5
 ```
 
-Keep the variable package-scoped unless you intend to configure both packages with a top-level value. `snowplow__lookback_window_hours` no longer controls Attribution's incremental window.
+Keep the variable package-scoped unless you intend to configure both packages with a top-level value. Attribution 1.0.1 ignores `snowplow__lookback_window_hours`.
 
-The narrower window also limits which existing conversions are updated after a user-mapping change or a late path event. Conversions outside it are not reprocessed automatically. If you need to correct older paths, back up the existing outputs and confirm that the conversion and path sources retain the required history before running a full refresh. The source check now fails whenever the conversions source is behind the model.
+Attribution applies user-mapping changes and late path events to conversions inside the replay window. To correct older paths, back up the existing outputs and confirm that the conversion and path sources retain the required history before running a full refresh. The incremental source check fails if the latest source conversion is older than the latest conversion in the model.
 
 Update the package version in `packages.yml`, run `dbt deps`, and review the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx).
 

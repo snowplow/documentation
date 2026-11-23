@@ -410,7 +410,7 @@
       "minimum": 0,
       "title": "Days Late Allowed",
       "description": "How many days late conversions can arrive in the conversions source.",
-      "longDescription": "Each incremental run re-reads conversions from this value plus one day before the latest processed conversion (96 hours with the default of 3). If you changed snowplow__days_late_allowed under snowplow_unified, set the same value under snowplow_attribution; this package cannot read the other package's scoped value. For a custom conversions source, use its maximum delivery delay. Changes to older conversions, including user mappings and late path events, require a full refresh to be picked up.",
+      "longDescription": "Each run looks back this many days plus one from the latest processed conversion (96 hours with the default of 3). If you customized `snowplow__days_late_allowed` under `snowplow_unified`, set the same value under `snowplow_attribution`. For a custom conversions source, use its maximum delivery delay. Run a full refresh to apply user mapping changes or late path events to older conversions outside the replay window.",
       "packageDefault": "3",
       "group": "Operation and Logic"
     }

@@ -50,9 +50,11 @@ The option opens a form that asks for your organization, the destination you wan
 
 For a webhook, give Snowplow the host name of your endpoint and, optionally, a path. For example, the host `profiles.example.com` with the path `interventions/forward` sends requests to `https://profiles.example.com/interventions/forward`. Snowplow always sends requests over HTTPS.
 
-Also share the bearer token that your endpoint expects. Snowplow sends it in the `Authorization: Bearer <token>` header of every request. Share the token through the secure channel Snowplow gives you, not in the form.
+Also share the bearer token that your endpoint expects. Snowplow sends it in the `Authorization: Bearer <token>` header of every request.
 
 For Kafka, Amazon Kinesis, or Google Cloud Pub/Sub, give Snowplow the topic or stream to write to and how to authenticate to it.
+
+Don't put tokens or other credentials in the request form or in email. Share them through the credential sharing form in Console instead: select **Contact us**, turn on **Credential sharing form**, enter the support ticket number that Snowplow gives you for your request, and add the credentials in **Message**.
 
 ### Allowlist Snowplow's IP addresses
 

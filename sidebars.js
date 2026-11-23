@@ -246,6 +246,7 @@ const sidebars = {
           'signals/applications/mcp-server',
           'signals/applications/predictive-attributes',
           'signals/applications/subscribe',
+          'signals/applications/forward-interventions',
         ],
       }),
       pick('signals/ml-training-datasets', { label: 'Build training datasets' }),
@@ -258,6 +259,7 @@ const sidebars = {
     group('Intervene', [
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
+      pick('signals/applications/forward-interventions', { label: 'Forward interventions to your systems' }),
     ], { collapsible: true, collapsed: true }),
     group('Predict outcomes', [
       pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),

@@ -3,7 +3,7 @@ title: "Snowplow dbt Identities 0.2.0 released"
 sidebar_label: "dbt Identities 0.2.0"
 description: "Up to 6× lower warehouse compute costs with a more performant and simpler model."
 keywords: ["dbt identities", "identity resolution", "0.2.0"]
-date: "2026-10-23"
+date: "2026-11-23"
 category:
   - "Release notes"
 components:

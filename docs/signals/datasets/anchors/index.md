@@ -14,7 +14,7 @@ Choose the anchor type that matches how your model is used:
 
 | Anchor type | Rows are | Use it to |
 | --- | --- | --- |
-| [Session anchors](#session-anchors) | Labeled points in sessions, positive at a goal event | Train a model that predicts a goal, such as a purchase |
+| [Session anchors](#session-anchors) | Labeled points in sessions, positive at a goal event | [Train a model](/docs/signals/datasets/train-ml-models/index.md) that predicts a goal, such as a purchase |
 | [Event anchors](#event-anchors) | Every event that matches criteria | Evaluate a model your application calls in response to an event |
 | [User-supplied anchors](#user-supplied-anchors) | Rows of a table you provide | Use your own labels, or logs of past model calls |
 

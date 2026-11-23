@@ -1,5 +1,5 @@
 ---
-title: "Build datasets to train and evaluate models"
+title: "Build ML training and evaluation datasets"
 sidebar_position: 32
 sidebar_label: "Datasets"
 description: "Build point-in-time correct datasets from your Snowplow events to train machine learning models or evaluate decision models such as System One models on past traffic."
@@ -14,7 +14,7 @@ The Signals dataset builder creates datasets from your Snowplow event data, with
 
 You can use the dataset builder for two kinds of work:
 
-- Train a machine learning model: build a labeled dataset of features, train a model on it, and serve the same attributes to the model in real time.
+- Train a machine learning model: build a labeled dataset of features, train a model on it, and serve the same attributes to the model in real time. See [Build a training dataset for a machine learning model](/docs/signals/datasets/train-ml-models/index.md).
 - Evaluate a decision model: rebuild the moments your application would have called a model such as a System One model or an LLM prompt, the state it would have sent, and what each user did next. Then ask the model at every moment and check its answers before you change anything in production. See [Evaluate decision models on past traffic](/docs/signals/datasets/evaluate-decision-models/index.md).
 
 Start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` client object.
@@ -89,7 +89,7 @@ Building and using a dataset follows this process:
 2. [Choose the anchors](/docs/signals/datasets/anchors/index.md) that define the rows
 3. [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md) to each row
 4. [Run the build](/docs/signals/datasets/run/index.md), either as a managed run or by executing the SQL yourself
-5. Train your model on the dataset, or [evaluate a decision model](/docs/signals/datasets/evaluate-decision-models/index.md) against it
+5. [Train your model](/docs/signals/datasets/train-ml-models/index.md) on the dataset, or [evaluate a decision model](/docs/signals/datasets/evaluate-decision-models/index.md) against it
 6. Serve the same attributes and agentic contexts to your model in real time via [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) and [Retrieve agentic contexts](/docs/signals/applications/agentic-contexts/index.md)
 
 For a complete walkthrough, from defining attributes to training and serving a model, follow [Train and serve a purchase propensity model](/tutorials/signals-ml-purchase-propensity/introduction).

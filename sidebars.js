@@ -250,7 +250,7 @@ const sidebars = {
           'signals/applications/forward-interventions',
         ],
       }),
-      pick('signals/ml-training-datasets', { label: 'Build training datasets' }),
+      pick('signals/datasets', { label: 'Build training datasets' }),
     ], { collapsible: true, collapsed: true }),
     group('Feed AI agents', [
       pick('signals/agentic-contexts', { label: 'Define agentic contexts' }),

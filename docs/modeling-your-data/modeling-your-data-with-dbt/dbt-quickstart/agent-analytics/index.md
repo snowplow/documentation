@@ -44,7 +44,7 @@ dbt deps
 
 ## Configure the package
 
-The steps below cover the required settings and optional overrides for your `dbt_project.yml`. See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) for all defaults.
+Configure the required settings in your `dbt_project.yml` and override the defaults that differ for your deployment. See the [configuration reference](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/agent-analytics/index.md) for all defaults.
 
 ### 1. Configure license acceptance
 

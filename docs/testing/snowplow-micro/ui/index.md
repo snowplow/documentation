@@ -21,3 +21,15 @@ import videoUrl from '../images/ui-tour.mp4'
 ```
 
 <TrackedReactFilePlayer label="Micro dashboard" controls url={videoUrl} width='100%' height='100%' />
+
+## Filter events
+
+Filterable columns in the events table have a filter box under their header. Type a value and press Enter, or pick one of the suggested values. When you select several values, the table shows events matching any of them. To filter by time, use the time range filter instead.
+
+<AppliesTo feature="micro-filter-any-column" />
+
+When you [run Micro through Console](/docs/testing/snowplow-micro/console/index.md) or [persist events in PostgreSQL](/docs/testing/snowplow-micro/local/advanced-usage/index.md#persisting-events-across-restarts), filters use exact matching. You can filter on any column (except for timestamps - use the time filter for that), including fields of [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md). A filter on an entity field matches events where at least one entity of that type has the value.
+
+Ten columns are fully indexed and support searching across the entire set of events: `collector_tstamp`, `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `network_userid`, and `v_tracker`. Searches on other columns only consider the last 100k events.
+
+When Micro stores events in memory, filters use case-insensitive substring matching and search all events.

@@ -52,7 +52,26 @@ Events in a session that come before the session's first goal event become train
 
 Signals builds the examples with queries in your Snowflake warehouse, and balances them so that sessions that don't reach the goal don't dominate. It holds out the most recent 20% of sessions to measure the model's quality, and trains the model on the rest. Scores are adjusted to account for the balancing, so they're on the scale of your real goal rate. Training runs in a separate Signals service from attribute calculation, so it doesn't slow down your stream attributes.
 
-Each training keeps its dataset as a table in the output database and schema of your [Signals warehouse connection](/docs/signals/setup/index.md), so you can inspect the data the model learned from. Signals doesn't delete these tables.
+## Understand data location and costs
+
+Predictive attribute training uses your Snowflake warehouse and your Signals deployment. Your Signals deployment runs in the AWS region you chose when you [set up Signals](/docs/signals/setup/index.md). The Signals free tier runs in the US or EU region Snowplow hosts it in.
+
+### Check where training data goes
+
+Predictive attribute training moves data through three stages:
+1. Build the dataset in Snowflake: Signals runs the dataset queries in your warehouse. Your events stay in Snowflake. The result is one table of training examples, each with a session identifier, the anchor time, the input attribute values, and the label.
+2. Train the model in Signals: the Signals training service reads the dataset table, up to one million examples, into your Signals deployment. It trains the model there, then deletes its copy of the dataset when the training finishes, whether the training succeeds or fails.
+3. Store the model in Signals: Signals keeps each trained model in your Signals deployment until you delete its version. Publishing a training loads its model into the Profiles Store, where Signals scores requests.
+
+A trained model doesn't contain your events or the session identifiers from the dataset. It does contain some values from your data: for categorical inputs, the common values that become feature columns, as described in [Choose input attributes](#choose-input-attributes).
+
+### Estimate warehouse costs
+
+Predictive attribute training adds two kinds of cost to your Snowflake account:
+* Compute: the data check and each training run queries on the warehouse in your Signals warehouse connection, using its Snowflake credits. A longer training window or a larger `max_lookback_days` makes these queries read more events.
+* Storage: each training keeps its dataset as a table named `signals_training_dataset_<name>_v<version>_<training>`, in the output database and schema of your [Signals warehouse connection](/docs/signals/setup/index.md), so you can inspect the data the model learned from. Signals doesn't delete these tables, so drop the ones you no longer need.
+
+To find these queries in Snowflake's `QUERY_HISTORY`, filter by query tag. Training queries are tagged `signals-ml-engine:<training ID>`, and data checks are tagged `signals-api:test-predictive-attribute`.
 
 ## Create a predictive attribute
 

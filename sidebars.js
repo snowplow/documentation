@@ -250,7 +250,6 @@ const sidebars = {
           'signals/applications/forward-interventions',
         ],
       }),
-      pick('signals/datasets', { label: 'Build training datasets' }),
     ], { collapsible: true, collapsed: true }),
     group('Feed AI agents', [
       pick('signals/agentic-contexts', { label: 'Define agentic contexts' }),
@@ -265,6 +264,7 @@ const sidebars = {
     group('Predict outcomes', [
       pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
       pick('signals/applications/predictive-attributes', { label: 'Retrieve predictive attribute scores' }),
+      pick('signals/datasets', { label: 'Build training datasets' }),
     ], { collapsible: true, collapsed: true }),
   ],
 

@@ -6,7 +6,6 @@ description: "Replay a decision model call, such as a call to a System One model
 keywords: ["System One models", "decision models", "offline evaluation", "Jev", "replay", "agentic context", "dataset builder"]
 date: "2026-10-07"
 content_type: how-to
-pagination_next: signals/agentic-contexts/index
 ---
 
 A decision model answers a typed question about a state object, for example which panel a page should lead with, or whether a user is likely to buy in this session. System One models such as TypeSafe's Jev work this way, and so does an LLM prompt that returns one of a fixed set of answers. These models don't need training, so there is no training dataset to test them on before they go live.

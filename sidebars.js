@@ -261,7 +261,7 @@ const sidebars = {
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
       pick('signals/applications/forward-interventions', { label: 'Forward interventions to your systems' }),
     ], { collapsible: true, collapsed: true }),
-    group('Train and evaluate models', [
+    group('Train & evaluate models', [
       pick('signals/datasets', { hoist: true, indexLabel: 'Datasets overview' }),
     ], { collapsible: true, collapsed: true }),
   ],

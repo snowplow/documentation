@@ -28,6 +28,6 @@ Filterable columns in the events table have a filter box under their header. Typ
 
 When you [run Micro through Console](/docs/testing/snowplow-micro/console/index.md) or [persist events in PostgreSQL](/docs/testing/snowplow-micro/local/advanced-usage/index.md#persisting-events-across-restarts), filters use exact matching. Since version 4.7.0, you can filter on any column (except for timestamps - use the time filter for that), including fields of self-describing events and entities. A filter on an entity field matches events where at least one entity of that type has the value.
 
-Most columns are read from the stored event, so filtering on them only searches the most recent 100,000 events. Their filter placeholder reads **Filter (last 100k events)...**. The columns `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `network_userid`, and `v_tracker` search all events.
+Ten columns are fully indexed and support searching across the entire set of events: `collector_tstamp`, `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `network_userid`, and `v_tracker`. Searches on other columns only consider the last 100k events.
 
 When Micro stores events in memory, filters use case-insensitive substring matching and search all events.

@@ -210,7 +210,7 @@
     width: var(--sp-layout-toc);
   }
 
-  .doc-article > :is(.theme-doc-version-badge, footer),
+  .doc-article > :is(.theme-doc-version-badge, footer, .sp-feedback),
   .doc-article__paginator {
     max-width: var(--sp-layout-content);
     margin-inline: auto;
@@ -874,18 +874,19 @@
 
   .tutorial-layout__paginator {
     margin: var(--sp-space-8) 0;
+    padding-inline: calc(var(--sp-space-4) + 1px);
   }
 
-  @media (min-width: 900px) {
-    .tutorial-layout__paginator {
-      max-width: 75%;
-    }
+  .tutorial-layout__content:has(.doc-layout__toc) .tutorial-layout__paginator {
+    margin-right: calc(var(--sp-layout-toc) + var(--sp-space-6));
   }
 
   .tutorial-paginator {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--sp-space-4);
+    max-width: var(--sp-layout-wide);
+    margin-inline: auto;
   }
 
   .tutorial-paginator > :only-child {

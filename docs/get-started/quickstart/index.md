@@ -12,6 +12,8 @@ Add Snowplow tracking to your application with one prompt. Your coding agent ask
 
 You'll need a coding agent that supports MCP, such as Claude Code, Cursor, or Codex. If you don't have an application to track, the agent can create one.
 
+This quickstart implements tracking from Console: the agent creates your data structures and tracking plans in your Snowplow account. To keep them as files in your application's repository instead, compare [the two ways to implement tracking](/docs/event-studio/implement-tracking/index.md#choose-where-your-tracking-definitions-live) and follow the tutorial to [manage tracking as code](/tutorials/tracking-as-code/introduction).
+
 ## Sign up
 
 Start a [free trial](https://snowplow.io/get-started/snowplow-free-trial) of Snowplow CDI Cloud, or create an account on the [Signals free tier](https://signals.snowplow.io/start?utm_source=docs.snowplow.io&utm_medium=referral) for a hosted environment with no end date. Neither needs a credit card.

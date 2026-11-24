@@ -194,7 +194,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, we recommend using 
 | Application                                                             |      Latest version      |
 | :---------------------------------------------------------------------- | :----------------------: |
 | [Snowplow Micro](/docs/testing/snowplow-micro/index.md)                 | {versions.snowplowMicro} |
-| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md) | {versions.snowplowMini}  |
 
 ### Analytics SDKs
 

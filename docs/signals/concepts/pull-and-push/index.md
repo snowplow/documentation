@@ -43,7 +43,7 @@ This table summarizes the differences.
 | What your application receives | Current attribute values | An intervention payload |
 | Decision logic | In your application code | In the intervention criteria, defined in Signals |
 | How often | Every request returns current values | Once, the first time the criteria are met |
-| How to receive it | [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) with the Python SDK, Node.js SDK, or Signals API | [Subscribe](/docs/signals/applications/subscribe/index.md) with the Python SDK, the browser tracker plugin, or the Signals API |
+| How to receive it | [Retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) with the Python SDK, Node.js SDK, or Signals API | [Subscribe](/docs/signals/applications/subscribe/index.md) with the Python SDK, the browser tracker plugin, or the Signals API, or [forward](/docs/signals/applications/forward-interventions/index.md) them to a webhook or stream |
 | Versioning | A service pins specific attribute group versions | Criteria use the latest published version of each attribute group |
 
 Agents can also pull: an agent can read attribute groups and [agentic contexts](/docs/signals/applications/agentic-contexts/index.md) as tools through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md).

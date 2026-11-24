@@ -27,6 +27,7 @@ Each task in managing data structures has its own page:
 | Edit an existing data structure | [Edit a data structure](/docs/event-studio/data-structures/create/index.md#edit-a-data-structure) |
 | Deploy a data structure to development and promote it to production | [Test, promote, and publish a tracking design](/docs/event-studio/test-and-publish/index.md) |
 | Choose a version number for my changes | [Version and amend data structures](/docs/event-studio/data-structures/versioning/index.md) |
+| Understand how to fix a mistake in an existing schema version | [Superseding and patching schemas](/docs/event-studio/data-structures/superseding-and-patching/index.md) |
 | Hide, restore, or unlock a data structure | [Hide, restore, and unlock data structures](/docs/event-studio/data-structures/hide-and-lock/index.md) |
 | Manage schemas from a repository | [Manage your tracking design as code](/docs/event-studio/programmatic-management/index.md) or [Snowplow CLI data structures](/docs/api-reference/snowplow-cli/data-structures/index.md) |
 

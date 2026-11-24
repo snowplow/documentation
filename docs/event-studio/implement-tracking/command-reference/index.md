@@ -34,6 +34,23 @@ These options work with any command.
 | `-s, --apiKeyId <string>` | Snowplow Console API key ID.       |
 | `-v, --verbose`           | Enable verbose logging.            |
 
+## `login`
+
+<AppliesTo feature="snowtype-login" />
+
+Logs in to Snowplow Console in the browser. Snowtype uses the login when no API key is set. [Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login. See [authenticate](/docs/event-studio/implement-tracking/install-snowtype/index.md#authenticate) for when to use a login or an API key.
+
+| Flag                     | Description                                                        |
+| ------------------------ | ------------------------------------------------------------------ |
+| `--clientId <string>`    | Auth0 client ID. The default works for Snowplow Console.           |
+| `--auth0Domain <string>` | Auth0 domain. The default works for Snowplow Console.              |
+
+## `logout`
+
+<AppliesTo feature="snowtype-login" />
+
+Logs out of Snowplow Console. Snowplow CLI shares the same login, so this logs it out too. API keys aren't affected. This command has no flags.
+
 ## `init`
 
 Initializes Snowtype in a project by creating the configuration file.
@@ -62,6 +79,23 @@ Generates tracking code based on the configuration file.
 | `--disallowDevSchemas`                  | Disallow [generation of code](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#prevent-generation-from-development-schemas) using schemas only deployed on DEV environment. | `false` |
 | `--deprecateOnlyOnProdAvailableUpdates` | Show [deprecation warnings](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#deprecation-and-hidden-warnings) only when there are PROD-available schema updates.            | `false` |
 
+## `check`
+
+<AppliesTo feature="snowtype-check-command" />
+
+Reports whether the generated code in the output path matches what `generate` writes, without writing anything. `check` uses the same configuration file and takes the same flags as [`generate`](/docs/event-studio/implement-tracking/command-reference/index.md#generate).
+
+The `--instructions` flag behaves differently: `check` ignores [event specification instructions](/docs/event-studio/implement-tracking/generate-tracking-code/index.md#markdown-instructions) in the output path, and warns that the check doesn't cover them.
+
+`check` exits with code `0` when the generated code is up to date. It exits with code `1` when any file differs or when Snowtype can't generate the code, for example without Console credentials. `check` doesn't compare or update `.snowtype-lock.json`.
+
+When the generated code is out of date, `check` fails with this error and lists each file in the output path that differs, is missing, or isn't one that `generate` writes. To fix it, run `snowtype generate` and commit the result:
+
+```text
+✗ Error: The generated code is not up to date with the tracking definitions. Run `snowtype generate` and commit the result.
+  src/tracking/snowplow.ts
+```
+
 ## `update`
 
 Checks for updates to event specifications and data structures. Event specification updates are checked against the versions pinned in `.snowtype-lock.json`. Data structure updates are checked against versions in `snowtype.config.json`.
@@ -70,7 +104,7 @@ Checks for updates to event specifications and data structures. Event specificat
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `-c, --config <string>`       | Config file path.                                                                                                                                                                                    |         |
 | `-y, --yes`                   | Apply all available updates without prompting. Overwrites the configuration and lock files.                                                                                                          | `false` |
-| `-m, --maximumBump <level>`   | For data structures and schemas only. Maximum [SchemaVer](/docs/fundamentals/schemas/versioning/index.md#schema-version-format) bump to show update notifications for. Values: `patch`, `minor`, `major`. | `major` |
+| `-m, --maximumBump <level>`   | For data structures and schemas only. Maximum [schema version](/docs/fundamentals/schemas/versioning/index.md) bump to show update notifications for. Values: `patch`, `minor`, `major`. | `major` |
 | `-d, --latestDraft`           | Include draft versions when checking for event specification updates. By default, only published versions are shown. Does not affect data structures.                                                |         |
 | `-e, --eventSpecs <ids...>`   | Check only the specified event specifications.                                                                                                                                                       |         |
 | `-p, --dataProducts <ids...>` | Check only event specifications belonging to the specified tracking plans.                                                                                                                           |         |

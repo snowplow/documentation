@@ -54,14 +54,14 @@ Signals calculates attributes from your events and stores the latest values in t
 1. A Snowplow tracker sends events to your pipeline.
 2. Signals updates the values of your **attribute groups** as each event arrives, or syncs them from warehouse tables.
 3. Applications read the values through a **service**. Agents read the user's recent events through an **agentic context**, or attribute values through the Signals MCP server.
-4. When values meet an **intervention**'s criteria, Signals pushes the intervention to subscribed applications.
+4. When values meet an **intervention**'s criteria, Signals pushes the intervention to subscribed applications, or forwards it to your webhook or stream.
 
 The components you configure:
 
 * **Attribute group**: a versioned set of attributes, such as `product_view_count_last_10_min`, calculated for one attribute key.
 * **Attribute key**: who or what attributes describe, such as `domain_userid` for a user or `domain_sessionid` for a session.
 * **Service**: attribute groups pinned to specific versions, for applications to read.
-* **Intervention**: an if-then rule on attribute values. The first time a user meets the rule, Signals pushes the intervention to subscribed applications, such as the browser plugin.
+* **Intervention**: an if-then rule on attribute values. The first time a user meets the rule, Signals pushes the intervention to subscribed applications, such as the browser plugin, or forwards it to your webhook or stream.
 * **Agentic context**: the user's most recent events in the current session, up to 100 events and no older than 1 hour, as JSON or a narrative for an agent.
 
 See [How Signals works](/docs/signals/concepts/index.md) for detail on each.
@@ -77,7 +77,7 @@ See [How Signals works](/docs/signals/concepts/index.md) for detail on each.
 | Read attributes in my application | [Services](/docs/signals/applications/services/index.md), then [retrieve attributes](/docs/signals/applications/retrieve-attributes/index.md) |
 | Ground an AI agent in the user's current session | [Define agentic contexts](/docs/signals/agentic-contexts/index.md) |
 | Let an agent read Signals data as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) |
-| React when a user meets criteria | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) |
+| React when a user meets criteria | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) or [forward them](/docs/signals/applications/forward-interventions/index.md) |
 | Build training data for an ML model | [Create ML training datasets](/docs/signals/ml-training-datasets/index.md) |
 
 To manage Signals from a chat instead, connect your assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), or use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console.

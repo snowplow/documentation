@@ -138,6 +138,12 @@
       "component": "snowplowMicro",
       "since": "1.7.1",
       "href": "/docs/event-studio/data-structures/superseding-and-patching/"
+    },
+    "micro-filter-any-column": {
+      "label": "Snowplow Micro: filter on any column with persistent storage",
+      "component": "snowplowMicro",
+      "since": "4.7.0",
+      "href": "/docs/testing/snowplow-micro/ui/#filter-events"
     }
   }
 }

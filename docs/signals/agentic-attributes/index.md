@@ -169,7 +169,7 @@ The `context` field holds the stream attribute values and agentic context events
     "agentic_contexts": [
       "session_log_v1"
     ],
-    "context": "{\"attributes\": {\"search_count\": 5}, \"event_logs\": {\"session_log\": [...]}}",
+    "context": "{\"attributes\": {\"search_count\": 5}, \"event_logs\": {\"session_log\": [{\"event\": \"site_search\", \"terms\": \"lisbon hotels\"}, {\"event\": \"site_search\", \"terms\": \"cheap lisbon hotels\"}]}}",
     "context_truncated": false,
     "model_identifier": "<MODEL_ID>",
     "decided_at": "2026-10-09T14:03:12Z"

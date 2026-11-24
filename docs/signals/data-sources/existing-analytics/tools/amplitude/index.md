@@ -21,7 +21,7 @@ You need:
 - Amplitude Browser SDK 2 (`@amplitude/analytics-browser`).
 - The Admin or Manager role on your Amplitude project, or someone who has it. Only those roles can see the API key and add destinations.
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you.
 - Your Amplitude tracking plan, so you can check your ecommerce and search event names against the names the converter recognizes. Other events become generic `external_event` events.
 
 ## Set up with an agent

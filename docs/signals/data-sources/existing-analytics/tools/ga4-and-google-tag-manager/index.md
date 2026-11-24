@@ -18,7 +18,7 @@ You need:
 
 - GA4 on your site, through GTM.
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start). Every other schema the setup uses is on Iglu Central.
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you. Every other schema the setup uses is on Iglu Central.
 
 ## Set up with an agent
 

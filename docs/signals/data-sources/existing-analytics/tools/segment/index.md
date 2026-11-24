@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a destination plugin in analytic
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you.
 - Segment's analytics.js 2.0 (analytics-next) on your site.
 - Segment ecommerce events that use Segment's v2 spec names (`Product Viewed`, `Order Completed`, and so on) with a price and a currency. Other events become generic `external_event` events.
 

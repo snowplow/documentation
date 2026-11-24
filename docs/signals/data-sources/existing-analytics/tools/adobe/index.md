@@ -23,7 +23,7 @@ You need:
 - A Snowplow pipeline with Signals enabled, and its Collector URL.
 - Access to change your Adobe setup: the Tags property, or the page code that configures the Web SDK.
 - A list of the XDM fields that hold the user ID, plan, account ID, and search term. The adapter reads only the fields you name.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you.
 
 ## Set up with an agent
 

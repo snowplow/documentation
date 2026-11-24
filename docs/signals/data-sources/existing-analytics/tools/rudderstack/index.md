@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a custom device mode integration
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you.
 - The RudderStack JavaScript SDK v3 (`@rudderstack/analytics-js`) 3.23.0 or later on your site, loaded with a snippet that lists `addCustomIntegration` among its methods. If yours doesn't, copy a current snippet from your source's **Setup** tab.
 - RudderStack ecommerce events that use the ecommerce spec names (`Product Viewed`, `Order Completed`, and so on) with a price and a currency. Other events become generic `external_event` events.
 

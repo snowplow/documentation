@@ -61,10 +61,18 @@ If your tool exports to a warehouse, such as Segment's warehouse, the GA4 BigQue
 
 ## Where to start
 
-1. Create the `external_event` and `external_identity` schemas in your registry, under your vendor. Copy [`external_event.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json) and [`external_identity.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_identity.json) from the `existing-analytics` skill, and replace `com.example` in `self.vendor` with your vendor. Change nothing else: the adapters depend on the field names and limits. Create `external_event` as an event and `external_identity` as an entity, using the [JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor), and deploy both to your development environment. Until both exist, every adapter event fails validation. If you set up with an agent, it does this for you.
-2. Open your [tool's page](#choose-your-tool) and set up its recommended approach, with an agent or by hand.
-3. Test in your Console development environment, a hosted Snowplow Micro included in every trial. Point the adapter at its Collector endpoint, under **Pipelines** in Console, then select **Open dashboard** and check that events arrive with none failed. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md). When the events look right, switch the adapter to your pipeline's Collector.
-4. Agree what personal data may reach Snowplow, and wire consent. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
-5. [Create attribute groups](/docs/signals/attributes/index.md) for your use case. The `signals` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) can build and publish them for you.
-6. [Create an intervention](/docs/signals/interventions/index.md) and [receive it in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin).
-7. When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+1. Install the [Snowplow plugin](/docs/ai/skills/index.mdx) in your coding agent. It connects the agent to your Snowplow account through the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), and includes the `existing-analytics` skill.
+2. Open your [tool's page](#choose-your-tool) and give your agent the prompt under **Set up with an agent**. The agent creates the `external_event` and `external_identity` schemas in your registry under your vendor, installs the recommended approach, and tests it in your Console development environment, a hosted Snowplow Micro included in every trial.
+3. Agree what personal data may reach Snowplow, and wire consent. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+4. [Create attribute groups](/docs/signals/attributes/index.md) for your use case. The `signals` skill in the same plugin can build and publish them for you.
+5. When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+
+### Set up without an agent
+
+If you don't use a coding agent, create the two schemas yourself before you follow the manual steps on your tool's page:
+
+1. Copy [`external_event.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json) and [`external_identity.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_identity.json) from the `existing-analytics` skill.
+2. Replace `com.example` in `self.vendor` with your vendor. Change nothing else: the adapters depend on the field names and limits.
+3. Create `external_event` as an event and `external_identity` as an entity, using the [JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor), and deploy both to your development environment.
+
+Until both schemas exist, every adapter event fails validation. Then test the adapter against your Console development environment: point it at the Collector endpoint under **Pipelines**, select **Open dashboard**, and check that events arrive with none failed. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md). When the events look right, switch to your pipeline's Collector.

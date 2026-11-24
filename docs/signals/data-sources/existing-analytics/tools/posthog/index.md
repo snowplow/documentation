@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a hook in the posthog-js `before
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
+- If you set up without an agent, the `external_event` and `external_identity` schemas in your Snowplow registry, under your vendor. See [Set up without an agent](/docs/signals/data-sources/existing-analytics/index.md#set-up-without-an-agent). With an agent, the `existing-analytics` skill creates them for you.
 - posthog-js 1.187.0 or later on your site, which added `before_send`.
 - Your PostHog project token. In PostHog, go to **Settings** > **Project** > **General** and copy **Project token**.
 - PostHog ecommerce events that use PostHog's ecommerce spec names (`Product Viewed`, `Order Completed`, `Products Searched`, and so on) with a price and a currency. Other events become generic `external_event` events.

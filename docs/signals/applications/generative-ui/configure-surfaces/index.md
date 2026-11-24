@@ -11,9 +11,9 @@ A surface declares which behavior powers one place in your app where a model com
 
 ## Create a surface
 
-{/* TODO: add the Console navigation path to the surface editor, and how to publish, once confirmed. */}
+To create a surface, go to **Signals** > **GenUI surfaces** in Snowplow Console and select **Create surface**.
 
-The surface editor in Console has five sections:
+The surface editor has five sections:
 
 ![The surface editor in Console, with the surface ID, default event counts, client-side attributes, Signals inputs, and a preview of what the model sees](../../../images/genui-create-surface.png)
 
@@ -25,7 +25,7 @@ The surface editor in Console has five sections:
 | **Signals inputs** | [What Signals knows about the user](#add-signals-data), read on your server |
 | **What the model sees** | A preview of the lines Signals GenUI adds to the model's system prompt. It updates as you edit. |
 
-Publish the surface once you've saved it. Signals GenUI only loads published surfaces: when you edit a published surface, your app keeps using the published version until you publish the change.
+Select **Create** to save the surface, then **Publish** on its page. Signals GenUI only loads published surfaces: when you edit a published surface, your app keeps using the published version until you publish the change.
 
 
 ## Add client-side attributes

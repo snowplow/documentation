@@ -107,9 +107,7 @@ This guide counts page pings, so enable [activity tracking](/docs/sources/web-tr
 
 A surface tells Signals GenUI which behavior to compute, and tells the model what each value means.
 
-{/* TODO: add the Console navigation path to the surface editor, and the name of the save button, once confirmed. */}
-
-Create a surface, and add one client-side attribute that counts the page pings on the current page:
+In Snowplow Console, go to **Signals** > **GenUI surfaces** and select **Create surface**. Then add one client-side attribute that counts the page pings on the current page:
 
 1. Set **Surface ID** to `pdp_purchase_assist`, the ID your component passes to the SDK
 2. Under **Client-side attributes**, click **Add attribute**, and set:
@@ -118,7 +116,7 @@ Create a surface, and add one client-side attribute that counts the page pings o
     * **Aggregation**: **Count**
     * **Scope**: **Page view**, so the count restarts on every page
 3. In the attribute's description, write what the value means for the model: "Activity heartbeats on this page, about one per 10 seconds of active reading. 2 means about 20 seconds engaged."
-4. Save the surface, then publish it. Signals GenUI only loads published surfaces, so a surface that's only saved has no effect.
+4. Select **Create**, then **Publish** on the surface's page. Signals GenUI only loads published surfaces, so a surface that's only created has no effect.
 
 ![The surface editor in Console, with the surface ID, default event counts, client-side attributes, Signals inputs, and a preview of what the model sees](../../../images/genui-create-surface.png)
 

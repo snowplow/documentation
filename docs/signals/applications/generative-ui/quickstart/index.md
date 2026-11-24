@@ -118,7 +118,7 @@ Create a surface, and add one client-side attribute that counts the page pings o
     * **Aggregation**: **Count**
     * **Scope**: **Page view**, so the count restarts on every page
 3. In the attribute's description, write what the value means for the model: "Activity heartbeats on this page, about one per 10 seconds of active reading. 2 means about 20 seconds engaged."
-4. Save the surface
+4. Save the surface, then publish it. Signals GenUI only loads published surfaces, so a surface that's only saved has no effect.
 
 ![The surface editor in Console, with the surface ID, default event counts, client-side attributes, Signals inputs, and a preview of what the model sees](../../../images/genui-create-surface.png)
 

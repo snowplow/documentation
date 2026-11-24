@@ -46,8 +46,15 @@ Each object in the `filters` array has the following fields:
 | Field | Type | Description |
 |---|---|---|
 | `column` | string | Column name to filter on (e.g., `app_id`, `event_name`). |
-| `values` (since version 4.4.0) | array of strings | One or more values to filter for. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `v_tracker`.  |
+| `values` (since version 4.4.0) | array of strings | One or more values to filter for. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used, and some columns only search the most recent events (see below). |
 | `value` (before version 4.4.0) | string | The value to filter for. In-memory mode uses case-insensitive substring matching. When persistent storage is enabled (including [Micro in Console](/docs/testing/snowplow-micro/console/index.md)), exact matching is used and only the following columns are supported: `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `v_tracker`.  |
+
+When persistent storage is enabled, which columns you can filter on depends on the Micro version:
+
+* Since version 4.7.0: any column except timestamp columns (use `timeRange` for those). This includes fields of self-describing events and entities, written as `<column>.<field>`, for example `unstruct_event_com_example_button_click_1.label` or `contexts_com_example_product_1.sku`. A filter on an entity field matches events where at least one entity of that type has one of the values.
+* Before version 4.7.0: only `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `network_userid`, and `v_tracker`.
+
+Filters on columns other than those nine only search the most recent 100,000 events that match `timeRange` and `validEvents`. Older events aren't returned, even if they match.
 
 The `timeRange` object has the following fields:
 

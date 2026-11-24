@@ -44,4 +44,5 @@ To try it, follow the [quickstart](/docs/signals/applications/generative-ui/quic
 
 * [Configure surfaces](/docs/signals/applications/generative-ui/configure-surfaces/index.md): choose the behavior each surface uses
 * [Use your UI framework](/docs/signals/applications/generative-ui/frameworks/index.md): json-render, A2UI, or your own components
+* [Measure goal impact](/docs/signals/applications/generative-ui/goal-impact/index.md): how the components a surface showed relate to a goal event
 * [API reference](/docs/signals/applications/generative-ui/reference/index.md): every option, function, and tracked event

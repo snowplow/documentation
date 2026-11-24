@@ -14,7 +14,7 @@ Snowplow Micro 4.7.0 is out. Here is what is new since 4.6.2.
 
 When Micro stores events in PostgreSQL, which is the case for [Micro in Console](/docs/testing/snowplow-micro/console/), the [dashboard](/docs/testing/snowplow-micro/ui/) used to let you filter on only a handful of columns, such as `app_id` and `event_name`. You can now filter on any column except timestamps, including fields of self-describing events and entities. For example, you can find the events whose product entity has a given SKU.
 
-To keep the dashboard responsive on large datasets, filters on most columns only search the most recent 100,000 events. The filter placeholder tells you when this applies. The same filtering is available through the [`/micro/events` API](/docs/api-reference/snowplow-micro/api/#microevents).
+To keep the dashboard responsive on large datasets, filtering on anything other than the ten core columns only considers the most recent 100,000 events. The filter placeholder tells you when this applies. The same filtering is available through the [`/micro/events` API](/docs/api-reference/snowplow-micro/api/#microevents).
 
 ## Other changes
 

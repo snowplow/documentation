@@ -51,10 +51,8 @@ Each object in the `filters` array has the following fields:
 
 When persistent storage is enabled, which columns you can filter on depends on the Micro version:
 
-* Since version 4.7.0: any column except timestamp columns (use `timeRange` for those). This includes fields of self-describing events and entities, written as `<column>.<field>`, for example `unstruct_event_com_example_button_click_1.label` or `contexts_com_example_product_1.sku`. A filter on an entity field matches events where at least one entity of that type has one of the values.
 * Before version 4.7.0: only `event_id`, `app_id`, `event_name`, `platform`, `name_tracker`, `user_id`, `domain_userid`, `network_userid`, and `v_tracker`.
-
-Filters on columns other than those nine only search the most recent 100,000 events that match `timeRange` and `validEvents`. Older events aren't returned, even if they match.
+* Since version 4.7.0: any column except timestamp columns (use `timeRange` for those). This includes fields of self-describing events and entities, written as `<column>.<field>`, for example `unstruct_event_com_example_button_click_1.label` or `contexts_com_example_product_1.sku`. A filter on an entity field matches events where at least one entity of that type has one of the values. For columns other than the nine supported until 4.7.0, the filters only search across the most recent 100,000 events matching `timeRange` and `validEvents`. Older events aren't returned, even if they match.
 
 The `timeRange` object has the following fields:
 

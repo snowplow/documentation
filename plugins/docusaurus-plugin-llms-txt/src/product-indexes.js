@@ -254,8 +254,6 @@ const pageCount = (count) => `${count} ${count === 1 ? 'page' : 'pages'}`
 
 export const INLINE_SECTION_PAGES = 1
 
-const SINGLE_INDEX_PRODUCT_PAGES = 50
-
 export function buildSectionIndexes(pages, sidebarMap, sidebarOutlines, formatDocsEntry) {
   return PRODUCT_INDEXES.flatMap((product) => {
     const outline = sidebarOutlines.get(product.sidebar)
@@ -314,18 +312,6 @@ export function buildSectionIndexes(pages, sidebarMap, sidebarOutlines, formatDo
     ]
     const isSmall = (section) => section.pages.length <= INLINE_SECTION_PAGES
 
-    if (docPages.length <= SINGLE_INDEX_PRODUCT_PAGES) {
-      const topics = sections.map((section) => section.label).join('; ')
-      return [
-        {
-          product,
-          wholeProduct: { description: `${topics}. ${pageCount(docPages.length)}.`, pages: docPages },
-          rootPages: [],
-          sections: [],
-        },
-      ]
-    }
-
     const withRest = [
       ...sections,
       ...(rest.length > 0
@@ -349,14 +335,11 @@ export function buildSectionIndexes(pages, sidebarMap, sidebarOutlines, formatDo
 }
 
 export function buildSectionRouter(productSections, siteUrl, formatDocsEntry) {
-  return productSections.flatMap(({ product, wholeProduct, rootPages, sections }) => [
+  return productSections.flatMap(({ product, rootPages, sections }) => [
     `## ${product.title}`,
     '',
     product.description,
     '',
-    ...(wholeProduct
-      ? [`- [${product.title}](${siteUrl}/${product.file}): ${wholeProduct.description}`]
-      : []),
     ...rootPages.map(formatDocsEntry),
     ...sections.map(
       (section) => `- [${section.label}](${siteUrl}/${section.file}): ${section.description}`

@@ -16,7 +16,7 @@ If your assistant is connected to the [Snowplow MCP server](/docs/ai/snowplow-mc
 
 This documentation follows the [`llms.txt` standard](https://llmstxt.org/), providing structured information to help an LLM use the site.
 
-An index is available at [`llms.txt`](pathname:///llms.txt). It starts with instructions for agents, then lists the sections of the docs, grouped by product. To stay small, it doesn't list every page: each section links to its own index, in the same format, that lists the pages in that section.
+An index is available at [`llms.txt`](pathname:///llms.txt). The root index starts with instructions for agents, then lists the sections of the docs, grouped by product. To keep the file small, the root index doesn't list every page. Instead, each section links to its own index, in the same format, which lists the pages in that section.
 
 An extended version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of the current pages. For token efficiency, sections relating to older versions of components aren't included in this file. These sections are still listed in the section indexes, labeled as `[previous version]`.
 
@@ -34,7 +34,7 @@ An agent reads the root index to choose a section, then fetches that section's i
 | [`/tutorials/llms.txt`](pathname:///tutorials/llms.txt) | Tutorials, each as a single page |
 | [`/release-notes/llms.txt`](pathname:///release-notes/llms.txt) | Release notes, newest first |
 
-A section with a single page is linked from the root index directly. A product with few pages, such as Signals, has one index for all of its pages instead of one per section.
+A section with a single page is linked from the root index directly.
 
 ### Product indexes
 

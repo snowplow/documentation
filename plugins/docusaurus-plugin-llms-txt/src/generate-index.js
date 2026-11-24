@@ -128,8 +128,7 @@ async function writeSectionIndexes(
 
   const sections = productSections.flatMap(({ sections }) => sections)
   const listed = new Set(
-    productSections.flatMap(({ wholeProduct, rootPages, sections }) => [
-      ...(wholeProduct?.pages ?? []),
+    productSections.flatMap(({ rootPages, sections }) => [
       ...rootPages,
       ...sections.flatMap((section) => section.pages),
     ])

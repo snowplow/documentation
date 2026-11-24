@@ -120,8 +120,8 @@ export function trackerSupportLines(manifest, siteUrl) {
     if (yes.length) parts.push(`supports: ${yes.join(', ')}`)
     if (partial.length) parts.push(`partial: ${partial.join(', ')}`)
     if (no.length) parts.push(`not supported: ${no.join(', ')}`)
-    const href = t.href ? ` ${siteUrl}${t.href.replace(/\/$/, '')}.md` : ''
-    lines.push(`- ${t.name}:${href}. ${parts.join('; ')}.`)
+    const name = t.href ? `[${t.name}](${siteUrl}${t.href.replace(/\/$/, '')}.md)` : t.name
+    lines.push(`- ${name}: ${parts.join('; ')}.`)
   }
   return lines
 }
@@ -160,7 +160,7 @@ export async function buildAgentInstructions({ siteDir, siteUrl }) {
     lines.push('### Tracker feature support')
     lines.push('')
     lines.push(
-      `Check this list before you suggest a tracker feature. For a feature that isn't supported, the tracker has no built-in method or plugin, so track it yourself with self-describing events and entities. The full matrix is at ${siteUrl}/docs/sources.md.`
+      `Check this list before you suggest a tracker feature. For a feature that isn't supported, the tracker has no built-in method or plugin, so track it yourself with self-describing events and entities. See the [full tracker feature matrix](${siteUrl}/docs/sources.md).`
     )
     lines.push('')
     lines.push(...trackerLines)
@@ -173,7 +173,7 @@ export async function buildAgentInstructions({ siteDir, siteUrl }) {
     lines.push(`- ${p.pkg} on ${p.registry}: ${p.use}`)
   }
   lines.push(
-    `- Signals overview: ${siteUrl}/docs/signals/introduction.md. Signals quickstart: ${siteUrl}/docs/signals/quickstart.md`
+    `- [Signals overview](${siteUrl}/docs/signals/introduction.md) and [Signals quickstart](${siteUrl}/docs/signals/quickstart.md).`
   )
   lines.push('')
 
@@ -190,9 +190,9 @@ export async function buildAgentInstructions({ siteDir, siteUrl }) {
   lines.push('### Tools for agents')
   lines.push('')
   lines.push(
-    `- The Snowplow MCP server and skills let a coding agent create schemas, tracking plans, and Signals configuration in a Snowplow account: ${siteUrl}/docs/ai/snowplow-mcp.md`
+    `- [Snowplow MCP server and skills](${siteUrl}/docs/ai/snowplow-mcp.md): Let a coding agent create schemas, tracking plans, and Signals configuration in a Snowplow account.`
   )
-  lines.push(`- Every page in full, in one file: ${siteUrl}/llms-full.txt`)
+  lines.push(`- [llms-full.txt](${siteUrl}/llms-full.txt): Every page in full, in one file.`)
   lines.push('')
 
   return lines

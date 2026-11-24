@@ -25,7 +25,7 @@ Signals evaluates an agentic attribute in four steps:
 
 1. The streaming engine checks your trigger criteria every time an event updates one of the session's [attributes](/docs/signals/attributes/index.md)
 2. If the criteria hold, it queues an evaluation for that session
-3. An evaluation worker sends the model your goal, the allowed values, the session's agentic contexts, and its published stream attributes
+3. An evaluation worker sends the model your goal, the allowed values, the session's agentic contexts, and the session's values for every published stream attribute keyed on `domain_sessionid`
 4. The model's answer, justification, and evaluation time are stored against the session's `domain_sessionid`, ready for your application to read
 
 Unlike [interventions](/docs/signals/interventions/index.md), which fire only the first time their criteria are met, an agentic attribute is re-evaluated every time its criteria hold. This keeps the value current as the session develops. The [evaluation policy](#configure-the-evaluation-policy) caps how often this happens.
@@ -111,7 +111,7 @@ The evaluation policy caps how often the model runs for each session. Neither se
 | `cooldown_seconds` | Minimum time between evaluations for the same session, measured from when the last value was written | 600     | 10 to 86400 |
 | `max_per_session`  | Maximum number of values written per session. Failed evaluations don't count toward this limit        | 3       | 1 to 100    |
 
-Each evaluation is a call to an LLM, so these limits also control cost. The model receives every event in the referenced agentic contexts and every published stream attribute for the session, so keep your agentic contexts focused on the events the goal needs.
+Each evaluation is a call to an LLM, so these limits also control cost. The model receives every event in the referenced agentic contexts and the value of every published stream attribute keyed on `domain_sessionid`, so keep your agentic contexts focused on the events the goal needs. Attributes keyed on other attribute keys, such as `domain_userid`, aren't sent to the model.
 
 ## Publish an agentic attribute
 

@@ -234,6 +234,7 @@ const sidebars = {
         indexLabel: 'Attributes overview',
         exclude: ['signals/attributes/warehouse-config'],
       }),
+      pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
       pick('signals/publish'),
     ], { collapsible: true, collapsed: true }),
     group('Serve attributes', [
@@ -245,7 +246,6 @@ const sidebars = {
         exclude: [
           'signals/applications/agentic-contexts',
           'signals/applications/mcp-server',
-          'signals/applications/predictive-attributes',
           'signals/applications/subscribe',
           'signals/applications/forward-interventions',
         ],
@@ -261,10 +261,8 @@ const sidebars = {
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
       pick('signals/applications/forward-interventions', { label: 'Forward interventions to your systems' }),
     ], { collapsible: true, collapsed: true }),
-    group('Predict outcomes', [
-      pick('signals/predictive-attributes', { label: 'Define predictive attributes' }),
-      pick('signals/applications/predictive-attributes', { label: 'Retrieve predictive attribute scores' }),
-      pick('signals/datasets', { label: 'Build training datasets' }),
+    group('Train and evaluate models', [
+      pick('signals/datasets', { hoist: true, indexLabel: 'Datasets overview' }),
     ], { collapsible: true, collapsed: true }),
   ],
 

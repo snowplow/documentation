@@ -6,7 +6,6 @@ description: "Read a public Signals service directly from a website or mobile ap
 keywords: ["public services", "client-side attributes", "browser plugin", "ios tracker", "android tracker", "getServiceAttributes", "personalization"]
 date: "2026-11-08"
 content_type: how-to
-pagination_next: signals/agentic-contexts/index
 ---
 
 ```mdx-code-block

@@ -40,7 +40,7 @@ A client-side attribute is one named value that Signals GenUI computes in the br
 | **Property** | For every aggregation except a count: the property to read |
 | **Scope** | **Page view** restarts the value on every page view. **Session** keeps it for the user's session. |
 | **Criteria** | Optional: only events that meet conditions on their properties |
-| Description | What the value means, for the model. See [write descriptions for the model](#write-descriptions-for-the-model). |
+| **What it means, for the model** | The attribute's description: what the value means, for the model. Without one, the model sees only the attribute's definition. See [write descriptions for the model](#write-descriptions-for-the-model). |
 
 Each aggregation has a starting value, so the model and your UI can tell that something hasn't happened yet:
 

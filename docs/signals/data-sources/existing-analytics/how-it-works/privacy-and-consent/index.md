@@ -18,7 +18,7 @@ An adapter sends Snowplow only the fields it maps: the standard fields of each S
 | Page URL, referrer and title | Sent, including query strings | Sent when your tool includes them |
 | User ID | Sent unchanged. If it's an email address, the email reaches Snowplow | Same |
 | Search terms | Sent in `site_search` and `external_event.search_term` | Same |
-| Your tool's cookies | Sent to a Collector on the same site as your pages; see below | Not sent |
+| Your tool's cookies | Sent to a Collector on the same site as your pages; see [Your tool's cookies and a same-site Collector](#your-tools-cookies-and-a-same-site-collector) | Not sent |
 | Snowplow cookies | Set by the Snowplow tracker and the Collector | Not set |
 
 Identify traits, user properties and any property that doesn't fit a mapped field are never sent. Your tool itself still receives everything it did before.
@@ -29,7 +29,7 @@ When your Collector is on the same site as your pages, for example `collector.ex
 
 - **Accept it,** and agree with your privacy owner how your Collector handles request headers.
 - **Put the Collector on a different site** from your pages.
-- **Send without credentials.** Add `credentials: 'omit'` to the Snowplow tracker's `newTracker` options. On adapters that post to the Collector directly, such as Amplitude's [variant without the tracker](/docs/signals/data-sources/existing-analytics/tools/amplitude/index.md#send-without-the-snowplow-tracker), set it on the `fetch` call:
+- **Send without credentials.** Add `credentials: 'omit'` to the Snowplow tracker's `newTracker` options. On adapters that post to the Collector directly, such as Amplitude's [variant without the tracker](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/amplitude.md#send-without-the-snowplow-tracker), set it on the `fetch` call:
 
 ```js
 await fetch(COLLECTOR + '/com.snowplowanalytics.snowplow/tp2', {
@@ -51,7 +51,7 @@ Client-side adapters hook into your tool's library where it sends an event, so t
 | Adobe Web SDK and AppMeasurement callbacks | Yes. Events held while consent is pending are sent when it's granted |
 | GA4, GTM tag templates | Only with the consent settings you give the Snowplow tags in GTM |
 | GA4, page script | No: load it only after consent is granted |
-| GA4, server-side GTM | Only with the consent condition below |
+| GA4, server-side GTM | Only with the [consent condition](#gate-server-side-gtm-on-consent-mode) |
 | Segment, RudderStack, Amplitude client-side | The adapter runs on every event your tool processes |
 | PostHog, `before_send` hook | Yes |
 | Segment, RudderStack, Amplitude, PostHog and Adobe server-side | The destination runs on every event your tool ingests |

@@ -8,7 +8,7 @@ date: "2026-11-13"
 content_type: landing
 ---
 
-Each tool page covers the client-side and server-side approaches for that tool, how its events map to Snowplow, its identifiers, and its limits.
+Each tool page sets up the client-side and server-side approaches for that tool, with an agent or by hand. For how each tool's events and IDs map to Snowplow, see [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md#map-events-from-each-tool) and [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md#tool-ids-by-tool).
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

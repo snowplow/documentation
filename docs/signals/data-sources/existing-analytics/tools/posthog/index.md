@@ -2,122 +2,84 @@
 title: "Use Signals with PostHog"
 sidebar_label: "PostHog"
 sidebar_position: 60
-description: "Send the events you already capture with PostHog to Snowplow, from the browser or from a PostHog destination, and build Signals attributes on them without retagging."
+description: "Send the events you already capture with PostHog to Snowplow, from the browser or from a PostHog destination, and calculate Signals attributes on them without retagging."
 keywords: ["posthog", "posthog-js", "before_send", "hog", "http webhook destination", "external_event", "signals"]
 date: "2026-11-16"
 content_type: how-to
 ---
 
-Use the pageviews, autocaptured events, custom events, `identify` and `group` calls you already capture with PostHog to build Snowplow Signals attributes, without retagging your site.
+Use the pageviews, autocaptured events, custom events, and `identify` and `group` calls you already capture with PostHog to calculate Snowplow Signals attributes, without retagging your site. An adapter maps each PostHog event to a Snowplow event, as described in [Event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md?analytics-tool=posthog#map-events-from-each-tool).
 
-## Choose an approach
-
-Most sites should use the **client-side `before_send` hook**. It's a few lines next to `posthog.init`, interventions arrive within a second or two, and it gives you a random visitor key that is safe to use for interventions.
-
-Use one of the [other approaches](#other-approaches) when:
-
-| Approach | Use it when |
-|---|---|
-| [HTTP Webhook destination](#http-webhook-destination) | You need events from PostHog's server or mobile SDKs or the capture API, or you can't change the page. Events arrive a few seconds after PostHog receives them |
-| [Warehouse history](#warehouse-history) | You want history alongside a real-time approach |
-
-You can run the hook and the destination together. Filter the destination so it skips browser events, as described in its steps.
+Most sites should use the client-side approach: a hook in the posthog-js `before_send` option copies each event into the Snowplow JavaScript tracker on the same page. It's a few lines next to `posthog.init`, interventions arrive within a second or two, and it gives you a random visitor ID that is safe for interventions. Use the HTTP Webhook destination only for events from PostHog's server or mobile SDKs or the capture API, or if you can't change the page. You can run both, as long as you filter the destination so it skips browser events. If you already export PostHog events to a warehouse, Signals can also read history from a table of attributes you build there, as described in [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md). Build it per `$device_id` or `distinct_id`, with a custom attribute key for that ID, and select only the columns your attributes need: PostHog's events export includes person properties and the IP address.
 
 ## Before you begin
 
+You need:
+
+- A Snowplow Collector URL for a pipeline with Signals enabled.
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
 - posthog-js 1.187.0 or later on your site, which added `before_send`.
 - Your PostHog project token. In PostHog, go to **Settings** > **Project** > **General** and copy **Project token**.
-- A Snowplow Collector URL and Signals enabled on your pipeline.
-- Ecommerce events that use PostHog's ecommerce spec names (`Product Viewed`, `Order Completed`, `Products Searched` and so on) with a price and a currency. Other names become `external_event`. See [How PostHog events map to Snowplow](#how-posthog-events-map-to-snowplow).
+- PostHog ecommerce events that use PostHog's ecommerce spec names (`Product Viewed`, `Order Completed`, `Products Searched`, and so on) with a price and a currency. Other events become generic `external_event` events.
+
+## Set up with an agent
+
+The `existing-analytics` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) holds the tested setup and mapping scripts for each approach. Install the plugin:
+
+```bash
+npx plugins add snowplow/skills
+```
+
+Then ask your agent, in the repository that calls `posthog.init`:
+
+```text
+Use the Snowplow existing-analytics skill to send our PostHog events to Snowplow with the client-side before_send approach. Test against my Console development environment first.
+```
+
+The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the Snowplow tracker, the converter script, and the `before_send` hook next to your PostHog snippet, sends test events, and checks that none failed. For the HTTP Webhook destination, it gives you the Hog source and the inputs to set, and you create the destination in PostHog yourself.
 
 ## Set up the client-side approach
 
-The client-side approach loads the Snowplow JavaScript tracker and its ecommerce plugin next to posthog-js, then adds a hook to PostHog's `before_send` option. The hook replays each event into the Snowplow tracker and returns it unchanged, so PostHog receives exactly what it did before.
+The client-side approach uses the mapping script [`converter.js`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/scripts/posthog/converter.js). If your ecommerce or search event names differ from PostHog's spec names, add them, in lower case, to the `ECOM` and `SEARCH` lists near the top of the script. The [PostHog setup reference](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/posthog.md#set-up-the-client-side-approach) has the code for each step.
 
-1. Load the Snowplow tracker and the ecommerce plugin, and create a tracker that points at your Collector. Put this before the PostHog snippet.
+<Steps>
 
-   ```html
-   <script>
-   ;(function (p, l, o, w, i, n, g) { if (!p[i]) { p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || []; p.GlobalSnowplowNamespace.push(i); p[i] = function () { (p[i].q = p[i].q || []).push(arguments); }; p[i].q = p[i].q || []; n = l.createElement(o); g = l.getElementsByTagName(o)[0]; n.async = 1; n.src = w; g.parentNode.insertBefore(n, g); } })(window, document, 'script', 'https://cdn.jsdelivr.net/npm/@snowplow/javascript-tracker@4.10.3/dist/sp.js', 'snowplow');
-   window.snowplow('newTracker', 'sp', 'https://collector.example.com', {
-     appId: 'my-site', eventMethod: 'post', bufferSize: 1,
-     contexts: { webPage: true }, credentials: 'omit',
-   });
-   window.snowplow('addPlugin', 'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-snowplow-ecommerce@4.10.3/dist/index.umd.min.js', ['snowplowEcommerceAccelerator', 'SnowplowEcommercePlugin']);
-   window.snowplow('enableActivityTracking', { minimumVisitLength: 5, heartbeatDelay: 5 });
-   </script>
-   ```
+### Load the Snowplow tracker
 
-   Replace `https://collector.example.com` with your Collector URL and `my-site` with your app ID. Activity tracking sends the page pings that engagement attributes need. `credentials: 'omit'` keeps PostHog's `ph_` cookie, which can hold your user ID, off requests to a Collector on the same site as your pages.
+Before the PostHog snippet, load the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md) with the ecommerce plugin, create a tracker that points at your Collector, and enable activity tracking. Activity tracking sends the page pings that engagement attributes need. Set `credentials: 'omit'` in `newTracker`, so PostHog's `ph_` cookie, which can hold your user ID, stays off requests to a Collector on the same site as your pages.
 
-2. Load `converter.js` from [Mapping code](#mapping-code). It defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event.
+### Load the converter
 
-3. Add the hook. It must be defined before `posthog.init` runs.
+Save `converter.js` on your site, set `vendor` near its top to your vendor, and load it after the tracker. It defines `PostHogSnowplow`, which maps each PostHog event to a Snowplow event.
 
-   ```html
-   <script>
-   // The client-side adapter: a before_send hook that copies each PostHog event into the Snowplow
-   // browser tracker and returns the event unchanged, so PostHog receives exactly what it did before.
-   // Load converter.js and the Snowplow tag first. Put this hook LAST in before_send, so it
-   // sees events after the site's own redaction and sampling hooks.
-   function snowplowBeforeSend(event) {
-     if (!event) return event;
-     try {
-       var S = window.PostHogSnowplow;
-       var c = S.fromBrowser(event);
-       var l = S.ladder(c);
-       if (!l) return event;
-       var ident = S.identity(c);
-       var context = ident ? [ident] : [];
-       var timestamp = c.timeMs ? { type: 'ttm', value: c.timeMs } : undefined;
-       window.snowplow('setUserId', S.userIdOf(c) || null);
-       // Queued calls can be handed over after the URL changed, so use the URL PostHog recorded.
-       if (c.props.$current_url) window.snowplow('setCustomUrl', c.props.$current_url);
-       if (l.rung === 'page_view') {
-         window.snowplow('trackPageView', { title: c.props.title, context: context, timestamp: timestamp });
-       } else if (l.plugin) {
-         var arg = l.plugin[1];
-         window.snowplow(l.plugin[0], Object.assign({}, arg, { context: (arg.context || []).concat(context), timestamp: timestamp }));
-       } else {
-         window.snowplow('trackSelfDescribingEvent', { event: l.event, context: l.entities.concat(context), timestamp: timestamp });
-       }
-     } catch (e) {
-       // A Snowplow problem must never stop the event reaching PostHog.
-       if (window.console) console.warn('snowplow forwarder', e);
-     }
-     return event;
-   }
-   </script>
-   ```
+### Define the hook
 
-4. Add the hook to `before_send` in your `posthog.init` call, after the PostHog snippet:
+Add the `snowplowBeforeSend` function from the [setup reference](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/posthog.md#set-up-the-client-side-approach) to the page. It must be defined before `posthog.init` runs. The hook copies each event into the Snowplow tracker and returns it unchanged, so PostHog receives exactly what it did before.
 
-   ```html
-   <script>
-   // PostHog's snippet from posthog.com/docs/libraries/js goes here.
-   posthog.init('<project_token>', {
-     api_host: 'https://us.i.posthog.com',
-     defaults: '2026-08-30',
-     before_send: [snowplowBeforeSend],
-   });
-   </script>
-   ```
+### Add the hook to `before_send`
 
-   If you already have `before_send` hooks, put `snowplowBeforeSend` last, for example `before_send: [redactHook, sampleHook, snowplowBeforeSend]`, so it sees events after your own redaction and sampling.
+In your `posthog.init` call, add the hook to `before_send`:
 
-5. Publish the page change.
+```js
+posthog.init('<project_token>', {
+  api_host: 'https://us.i.posthog.com',
+  before_send: [snowplowBeforeSend],
+});
+```
 
-The hook follows PostHog's consent: when the visitor has opted out, or consent is pending, posthog-js doesn't call `before_send`, so nothing reaches Snowplow either. Load the Snowplow tracker under the same consent, because it sets its own cookies. Session replay and heatmap events pass through the hook, and the converter drops them. See [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md).
+If you already have `before_send` hooks, put `snowplowBeforeSend` last, so it sees events after your own redaction and sampling, for example `before_send: [redactHook, sampleHook, snowplowBeforeSend]`.
 
-To react to interventions in the page, add the Signals browser plugin to the Snowplow tracker. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#receive-interventions-in-the-page).
+Then publish the page change.
 
-## Check it works
+The hook follows PostHog's consent: when the visitor has opted out, or consent is pending, posthog-js doesn't call `before_send`, so nothing reaches Snowplow either. Load the Snowplow tracker under the same consent, because it sets its own cookies. Session replay and heatmap events pass through the hook, and the converter drops them.
 
-Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one: it runs Snowplow Micro, hosted by Snowplow. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
+### Check it works
 
-1. In Console, go to **Pipelines** and select your development environment.
-2. Copy its Collector endpoint, and point the Snowplow tracker at it. For the destination, use it as the `collector_url` input.
-3. Send a few events from a test page.
+Test with your Console development environment before you send events to your pipeline. Every Snowplow trial includes one. See [Run Snowplow Micro through Console](/docs/testing/snowplow-micro/console/index.md).
+
+1. In Console, go to **Pipelines**, select your development environment, and copy its Collector endpoint.
+2. Point the tracker at it.
+3. Send a page view, a product view, an order, a search, and an `identify` call from a test page.
 4. Select **Open dashboard** to see the good and failed events.
 
 You should see:
@@ -125,275 +87,53 @@ You should see:
 - A `page_view` for each `$pageview`, including single-page app route changes.
 - `snowplow_ecommerce_action` events for product views and orders, with one `product` entity per product and a `transaction` entity on orders.
 - A `site_search` event for each search, and an `identify` event whose only field is `id`.
-- `external_event` for everything else, such as `$autocapture`, `$groupidentify` and your own events, with `name` set to the PostHog event name.
+- `external_event` for everything else, such as `$autocapture`, `$groupidentify`, and your own events, with `name` set to the PostHog event name.
 - An `external_identity` entity on every event, with `tool` set to `posthog` and `anonymous_id` set to PostHog's `$device_id`.
-- With the client-side approach, `page_ping` events.
+- `page_ping` events.
 - No failed events.
 
-Once the events look right, point the tracker or the destination at your pipeline's Collector.
+When the events look right, point the tracker at your pipeline's Collector.
 
-## Other approaches
+</Steps>
 
-### HTTP Webhook destination
+## Set up the HTTP Webhook destination
 
-A destination built from PostHog's HTTP Webhook template receives each event after PostHog has ingested it, from any PostHog SDK or the capture API. Its source is replaced by Hog code that maps the event the same way as the converter and posts it to your Collector. Check that your PostHog plan includes destinations: PostHog bills each event that triggers one beyond a free allotment.
+A destination built from PostHog's HTTP Webhook template receives each event after PostHog has ingested it, from any PostHog SDK or the capture API. You replace its source with [`snowplow-collector-destination.hog`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/scripts/posthog/snowplow-collector-destination.hog), which maps each event the same way as the converter and posts it to your Collector. Don't edit the stock template's JSON body instead: body templating can't choose between page views, ecommerce events, and `external_event`, and its default body sends every person property, including any email.
 
-Use the Hog source below, not the stock template with its JSON body edited. Body templating can't choose between page views, ecommerce events and `external_event`, and its default body sends every person property, including any email.
+The destination keys visitors on PostHog's `$device_id` and sessions on `$session_id`, so read these attributes from your backend, not the public intervention endpoint. Events reach your Collector a few seconds after PostHog receives them. Events from PostHog's server SDKs and the capture API usually carry only a `distinct_id`. The destination then sends the `distinct_id` as the anonymous ID, in `domain_userid` and `external_identity.anonymous_id`, with an empty `user_id`. To send it as the user ID, add a `$device_id` to those events that differs from the `distinct_id`. Check that your PostHog plan includes destinations: PostHog bills each event that triggers one beyond a free allotment.
 
-1. In PostHog, under **CDP**, open **Destinations**, click **New destination**, search for "Webhook" and click **Create** on **HTTP Webhook**.
+<Steps>
 
-2. Click **Edit source code**, then delete the template's inputs except **Log responses**: click each input's cog, then the bin. **Log responses** is the `debug` input the source reads.
+### Create the destination
 
-3. Add two String inputs with **Add input variable**. Set each name in its cog panel, then enter the value in the editor under the input in the list.
+In PostHog, under **CDP**, open **Destinations**, click **New destination**, search for "Webhook", and click **Create** on **HTTP Webhook**.
 
-   | Input | Value |
-   |---|---|
-   | `collector_url` | Your Collector URL, for example `https://collector.example.com`, with no trailing slash |
-   | `app_id` | The app ID these events should carry |
+### Set the inputs
 
-4. Replace the source with the Hog code below. If you added event names to the converter, add them to the same lists near the top.
+Click **Edit source code**, then delete the template's inputs except **Log responses**: click each input's cog, then the bin. **Log responses** is the `debug` input the source reads.
 
-   <details>
-   <summary>Hog source for the Snowplow Collector</summary>
+Add two String inputs with **Add input variable**. Set each name in its cog panel, then enter the value in the editor under the input in the list.
 
-   ```text
-   // Snowplow collector destination for PostHog (paste into a new HTTP Webhook destination, Edit source code).
-   // Inputs: collector_url (https://collector.example.com), app_id, debug (the template's Log responses).
-   // Sends each event down the ladder: page_view, Snowplow ecommerce with every product, site_search,
-   // identify with the id only, external_event for the rest; external_identity on every event.
-   // Person properties, $set and $set_once are never read, so traits such as email stay in PostHog.
+| Input | Value |
+|---|---|
+| `collector_url` | Your Collector URL, for example `https://collector.example.com`, with no trailing slash |
+| `app_id` | The app ID these events should carry |
 
-   let TOOL := 'posthog'
-   let E := 'iglu:com.snowplowanalytics.snowplow.ecommerce/'
-   let V := 'iglu:com.snowplowanalytics.snowplow/'
-   let DROP := ['$snapshot', '$$heatmap', '$feature_flag_called', '$web_vitals', '$exception', '$$client_ingestion_warning', '$opt_in', '$set']
-   let ECOM := {
-     'product viewed': 'product_view', 'product added': 'add_to_cart', 'product removed': 'remove_from_cart',
-     'checkout started': 'checkout_step', 'checkout step viewed': 'checkout_step', 'checkout step completed': 'checkout_step',
-     'order completed': 'transaction', 'order refunded': 'refund'
-   }
+### Add the source
 
-   fun isNum(v) { return typeof(v) = 'integer' or typeof(v) = 'float' }
-   fun num(v) {
-     if (isNum(v)) { return v }
-     if (typeof(v) = 'string' and v =~ '^-?[0-9]+(\\.[0-9]+)?$') { return toFloat(v) }
-     return null
-   }
-   fun money(v) {
-     let n := num(v)
-     if (n = null or n < 0) { return null }
-     return round(n * 100) / 100
-   }
-   fun int(v) {
-     let n := num(v)
-     if (n = null or n < 0) { return null }
-     return toInt(round(n))
-   }
-   fun cur3(v) {
-     if (typeof(v) = 'string' and v =~ '^[A-Za-z]{3}$') { return upper(v) }
-     return null
-   }
-   fun str255(v) {
-     if (v = null or (typeof(v) != 'string' and not isNum(v) and typeof(v) != 'boolean')) { return null }
-     let s := toString(v)
-     if (empty(s)) { return null }
-     return substring(s, 1, 255)
-   }
-   fun compact(o) {
-     let r := {}
-     for (let k, v in o) {
-       if (v != null and v != '') { r[k] := v }
-     }
-     return r
-   }
-   fun sdj(schema, data) { return {'schema': schema, 'data': data} }
+Replace the source with the Hog code from `snowplow-collector-destination.hog`, and set `VENDOR` near its top to your vendor. If you added event names to the converter, add ecommerce names to the `ECOM` map near the top of the Hog source, and search names to its `lname = 'products searched'` check.
 
-   fun product(it, currency) {
-     let id := str255(it.product_id ?? it.sku ?? it.id)
-     let price := money(it.price)
-     let cur := cur3(it.currency) ?? currency
-     if (id = null or price = null or cur = null) { return null }
-     let out := compact({'id': id, 'name': str255(it.name), 'price': price, 'currency': cur, 'quantity': int(it.quantity),
-       'variant': str255(it.variant), 'brand': str255(it.brand), 'position': int(it.position)})
-     out['category'] := str255(it.category) ?? ''
-     return out
-   }
-   fun products(p, currency) {
-     let out := []
-     if (typeof(p.products) = 'array') {
-       for (let it in p.products) {
-         let x := product(it ?? {}, currency)
-         if (x != null) { out := arrayPushBack(out, x) }
-       }
-     }
-     return out
-   }
-   fun prodEntities(list) {
-     let out := []
-     for (let x in list) { out := arrayPushBack(out, sdj(f'{E}product/jsonschema/1-0-0', x)) }
-     return out
-   }
+### Filter the events
 
-   let ev := event
-   let p := ev.properties ?? {}
-   let name := ev.event
-   let lname := lower(trim(toString(name)))
+In **Filters**, choose the events to forward. If you also run the client-side hook, add a property filter so `$lib` is not `web`. Browser test pages then don't reach the destination, so test from a server SDK or the capture API, or turn the filter off while you test.
 
-   if (has(DROP, name)) {
-     if (inputs.debug) { print('skipped', name) }
-   } else {
-     let deviceId := p.$device_id
-     let identified := name = '$identify' or (deviceId != null and ev.distinct_id != deviceId)
-     let uid := null
-     if (identified and notEmpty(ev.distinct_id)) {
-       uid := ev.distinct_id
-       uid := substring(uid, 1, 255)
-     }
-     let anon := deviceId
-     if (anon = null and ev.distinct_id != '$posthog_cookieless' and uid = null) { anon := ev.distinct_id }
+### Check it works
 
-     let isPv := name = '$pageview'
-     let ue := null
-     let ents := []
-     let cur := cur3(p.currency)
-     let type := ECOM[lname]
+Set `collector_url` to your Console development environment's Collector endpoint. Under **Testing**, click **Start testing**, then **Test function**. It posts a sample `$pageview` to your Collector and shows **Success**. Click **Create & enable**.
 
-     if (not isPv) {
-       if (name = '$identify' and uid != null) {
-         ue := sdj('iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0', {'id': uid})
-       } else if (lname = 'products searched' and str255(p.query) != null) {
-         ue := sdj('iglu:com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0', {'terms': [str255(p.query)]})
-       } else if (type = 'product_view' or type = 'add_to_cart' or type = 'remove_from_cart') {
-         let one := product(p, cur)
-         if (one != null) {
-           ents := prodEntities([one])
-           let total := money(p.cart_total ?? p.value)
-           if (type != 'product_view' and total != null) {
-             ents := arrayPushBack(ents, sdj(f'{E}cart/jsonschema/1-0-0', compact({'cart_id': str255(p.cart_id), 'total_value': total, 'currency': one.currency})))
-           }
-           ue := sdj(f'{E}snowplow_ecommerce_action/jsonschema/1-0-2', {'type': type})
-         }
-       } else if (type = 'checkout_step') {
-         let step := int(p.step)
-         if (step = null or step < 1 or step > 90) { step := 1 }
-         ents := arrayPushBack(prodEntities(products(p, cur)), sdj(f'{E}checkout_step/jsonschema/1-0-0', compact({'step': step,
-           'delivery_method': str255(p.shipping_method), 'payment_method': str255(p.payment_method), 'coupon_code': str255(p.coupon)})))
-         ue := sdj(f'{E}snowplow_ecommerce_action/jsonschema/1-0-2', {'type': type})
-       } else if (type = 'transaction') {
-         let rev := money(p.revenue ?? p.total ?? p.value)
-         let oid := str255(p.order_id ?? p.checkout_id)
-         if (cur != null and rev != null and oid != null) {
-           let ps := products(p, cur)
-           let qty := 0
-           for (let x in ps) { qty := qty + (x.quantity ?? 1) }
-           ents := arrayPushBack(prodEntities(ps), sdj(f'{E}transaction/jsonschema/1-0-0', compact({'transaction_id': oid, 'revenue': rev,
-             'currency': cur, 'payment_method': str255(p.payment_method) ?? 'unknown', 'total_quantity': qty,
-             'tax': money(p.tax), 'shipping': money(p.shipping), 'discount_code': str255(p.coupon), 'discount_amount': money(p.discount)})))
-           ue := sdj(f'{E}snowplow_ecommerce_action/jsonschema/1-0-2', {'type': type})
-         }
-       } else if (type = 'refund') {
-         let amt := money(p.total ?? p.revenue ?? p.value)
-         if (cur != null and amt != null and p.order_id != null) {
-           ents := arrayPushBack(prodEntities(products(p, cur)), sdj(f'{E}refund/jsonschema/1-0-0', {'transaction_id': str255(p.order_id), 'currency': cur, 'refund_amount': amt}))
-           ue := sdj(f'{E}snowplow_ecommerce_action/jsonschema/1-0-2', {'type': type})
-         }
-       }
-       if (ue = null) {
-         ents := []
-         let kind := 'track'
-         if (name = '$groupidentify') { kind := 'group' } else if (name = '$create_alias') { kind := 'alias' } else if (name = '$identify') { kind := 'identify' }
-         let first := {}
-         if (typeof(p.products) = 'array' and length(p.products) > 0) { first := p.products[1] ?? {} }
-         let value := num(p.revenue ?? p.value ?? p.total ?? p.price)
-         if (name = '$pageleave') { value := num(p.$prev_pageview_duration) }
-         ue := sdj(f'{V}external_event/jsonschema/1-0-0', compact({
-           'name': substring(toString(name ?? 'unknown'), 1, 255), 'tool': TOOL, 'kind': kind, 'value': value, 'currency': cur,
-           'item_id': str255(p.product_id ?? p.sku ?? first.product_id), 'item_category': str255(p.category ?? first.category),
-           'search_term': typeof(p.query) = 'string' ? str255(p.query) : null,
-           'plan': str255(p.plan ?? (kind = 'group' ? p.$group_set?.plan : null)),
-           'group_id': kind = 'group' ? str255(p.$group_key) : null,
-           'previous_id': kind = 'alias' ? str255(p.alias) : null
-         }))
-       }
-     }
+Open the **Invocations** tab to see each event's status. With **Log responses** on, a delivered event logs `sent` and `200`. Check for the same events as the [client-side approach](#check-it-works), except page pings. When the events look right, turn **Log responses** off and set `collector_url` to your pipeline's Collector.
 
-     let ctx := arrayPushBack(ents, sdj(f'{V}external_identity/jsonschema/1-0-0', {'tool': TOOL,
-       'anonymous_id': anon != null ? substring(toString(anon), 1, 255) : null, 'user_id': uid, 'session_id': p.$session_id ?? null,
-       'session_number': null, 'event_id': ev.uuid ?? null, 'event_name': substring(toString(name), 1, 255)}))
-     let t := toString(toUnixTimestampMilli(toDateTime(ev.timestamp)))
-     let tp := compact({
-       'e': isPv ? 'pv' : 'ue', 'p': 'web', 'tv': 'posthog-hog-0.1', 'aid': inputs.app_id, 'eid': ev.uuid,
-       'dtm': t, 'ttm': t, 'stm': toString(toUnixTimestampMilli(now())),
-       'duid': anon, 'tnuid': anon, 'uid': uid,
-       // $session_id is a UUIDv7, so it fits domain_sessionid as is.
-       'sid': (typeof(p.$session_id) = 'string' and p.$session_id =~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$') ? p.$session_id : null,
-       'ip': p.$ip, 'ua': p.$raw_user_agent, 'lang': p.$browser_language,
-       'url': p.$current_url, 'refr': (p.$referrer = '$direct') ? null : p.$referrer,
-       'res': (p.$screen_width != null) ? f'{p.$screen_width}x{p.$screen_height}' : null,
-       'page': isPv ? (p.title ?? null) : null,
-       'ue_pr': ue != null ? jsonStringify(sdj('iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0', ue)) : null,
-       'co': length(ctx) > 0 ? jsonStringify(sdj('iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-1', ctx)) : null
-     })
-     let res := fetch(f'{inputs.collector_url}/com.snowplowanalytics.snowplow/tp2', {
-       'method': 'POST',
-       'headers': {'Content-Type': 'application/json; charset=utf-8'},
-       'body': sdj('iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4', [tp])
-     })
-     if (res.status >= 400) {
-       throw Error(f'Snowplow collector returned {res.status}')
-     }
-     if (inputs.debug) { print('sent', name, res.status) }
-   }
-   ```
-
-   </details>
-
-5. In **Filters**, choose the events to forward. If you also run the client-side hook, add a property filter so `$lib` is not `web`. Browser test pages then don't reach the destination, so test from a server SDK or the capture API, or turn the filter off while you test.
-
-6. Under **Testing**, click **Start testing**, then **Test function**. It posts a sample `$pageview` to your Collector and shows **Success**.
-
-7. Click **Create & enable**.
-
-8. Open the **Invocations** tab to see each event's status. With **Log responses** on, a delivered event logs `sent` and `200`. Turn **Log responses** off once the events look right.
-
-The destination keys visitors on PostHog's `$device_id` and sessions on `$session_id`. Read these attributes from your backend: `$device_id` isn't recommended as a key on the public intervention endpoint. Events reach your Collector a few seconds after PostHog receives them, so don't rely on this approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
-
-### Warehouse history
-
-If you already use PostHog's batch exports to a warehouse, Signals can read pre-calculated attributes from a table there. Build a table of attributes per `$device_id` or `distinct_id` from the export, then configure it as described in [Warehouse configuration](/docs/signals/attributes/warehouse-config/index.md), with a custom attribute key for the PostHog ID. This needs a warehouse connection in Signals. PostHog's events export includes person properties and the IP address, so select only the columns your attributes need.
-
-## How PostHog events map to Snowplow
-
-Each PostHog event takes the first rung of the [event mapping](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) ladder that fits. Both approaches use the same mapping.
-
-| PostHog event | Snowplow event | Notes |
-|---|---|---|
-| `$pageview` | `page_view` | URL from `$current_url`, title from `title` |
-| `Product Viewed` | `snowplow_ecommerce_action` (`product_view`) with `product` | Needs a product ID, price and currency |
-| `Product Added`, `Product Removed` | `snowplow_ecommerce_action` (`add_to_cart`, `remove_from_cart`) with `product` | A `cart` entity when there's a `cart_total` or `value` |
-| `Checkout Started`, `Checkout Step Viewed`, `Checkout Step Completed` | `snowplow_ecommerce_action` (`checkout_step`) | |
-| `Order Completed` | `snowplow_ecommerce_action` (`transaction`) with one `product` per product and `transaction` | Needs an order ID, revenue or total, and currency |
-| `Order Refunded` | `snowplow_ecommerce_action` (`refund`) | Needs an order ID, total and currency |
-| `Products Searched` | `site_search` | `query` becomes the search term |
-| `$identify` | `identify` | The user ID only. Person properties are dropped |
-| `$groupidentify` | `external_event`, kind `group` | `group_id` from `$group_key`, `plan` from `$group_set` |
-| `$pageleave` | `external_event`, kind `track` | `value` is the seconds the page was open |
-| `$autocapture`, `$rageclick` and any other event | `external_event`, kind `track` | `name` is the PostHog event name. Element details aren't sent |
-| `$snapshot`, `$$heatmap` and SDK bookkeeping events | Not sent | |
-
-Ecommerce and search events are matched by name, ignoring case. An ecommerce event missing a required field falls back to `external_event`. PostHog properties that don't match a typed field stay in PostHog.
-
-## Identifiers
-
-| PostHog field | Snowplow field | Use as a Signals key? |
-|---|---|---|
-| Snowplow's own visitor and session cookies (client-side) | `domain_userid`, `domain_sessionid` | Yes, including on the public intervention endpoint |
-| `$device_id` | `external_identity.anonymous_id`. Server-side, also `domain_userid` | Server-side reads only |
-| `$session_id` | `external_identity.session_id`. Server-side, also `domain_sessionid` | Server-side reads only |
-| `distinct_id` after `identify` | `user_id`, `external_identity.user_id` and `identify.id`, unchanged | Server-side reads only |
-| `$group_key` on `$groupidentify` | `external_event.group_id` | Server-side reads only, for account attributes |
-
-`$device_id` can't be guessed, but it includes the time of the visitor's first visit, and PostHog's server SDKs accept any value for it. For interventions, use the client-side approach. If you run PostHog in cookieless mode, there's no `$device_id`, so use the client-side approach, which keys on Snowplow's own IDs.
+</Steps>
 
 ## Troubleshooting
 
@@ -404,203 +144,4 @@ Ecommerce and search events are matched by name, ignoring case. An ecommerce eve
 - **Browser events arrive twice:** both approaches send them. Add the `$lib` is not `web` filter to the destination.
 - **`plan` changes unexpectedly:** any event with a `plan` property updates it, so a later event replaces the plan from `$groupidentify`.
 
-Where to go next:
-
-- Create attributes from these events with the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md).
-- Read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) before you go live.
-- When you are ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time. On the client-side approach the visitor ID stays the same, so attributes carry over.
-
-## Mapping code
-
-The client-side approach loads `converter.js` before the hook. The server-side Hog source carries the same mapping.
-
-<details>
-<summary>converter.js</summary>
-
-```js
-// PostHog event -> Snowplow, down the shared ladder. Dependency-free so the same file runs in the page
-// (posthog-js before_send) and in Node.
-// Input shapes: the browser CaptureResult ({uuid, event, properties, $set, timestamp}) or the CDP globals
-// a Hog destination sees ({event: {uuid, event, distinct_id, properties, timestamp}, person}).
-
-var PH = {
-  tool: 'posthog',
-  tv: 'posthog-adapter-1.0', aid: 'posthog-adapter',
-  vendor: 'com.snowplowanalytics.snowplow',
-};
-
-function iglu(name) {
-  var map = {
-    action: 'com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2',
-    product: 'com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0',
-    transaction: 'com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0',
-    cart: 'com.snowplowanalytics.snowplow.ecommerce/cart/jsonschema/1-0-0',
-    refund: 'com.snowplowanalytics.snowplow.ecommerce/refund/jsonschema/1-0-0',
-    checkout: 'com.snowplowanalytics.snowplow.ecommerce/checkout_step/jsonschema/1-0-0',
-    siteSearch: 'com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0',
-    identify: 'com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0',
-    external: PH.vendor + '/external_event/jsonschema/1-0-0',
-    identity: PH.vendor + '/external_identity/jsonschema/1-0-0',
-  };
-  return 'iglu:' + map[name];
-}
-
-// Never forwarded: replay, heatmaps and SDK bookkeeping. Person updates ($set) carry traits only.
-var DROP = ['$snapshot', '$$heatmap', '$feature_flag_called', '$web_vitals', '$exception', '$$client_ingestion_warning', '$opt_in', '$set'];
-
-var ECOM = {
-  product_view: ['product viewed'],
-  add_to_cart: ['product added'],
-  remove_from_cart: ['product removed'],
-  checkout_step: ['checkout started', 'checkout step viewed', 'checkout step completed'],
-  transaction: ['order completed'],
-  refund: ['order refunded'],
-};
-var SEARCH = ['products searched'];
-
-function pick() { for (var i = 0; i < arguments.length; i++) { var v = arguments[i]; if (v !== undefined && v !== null && v !== '') return v; } return undefined; }
-function str255(v) { return v === undefined || v === null || typeof v === 'object' ? undefined : String(v).slice(0, 255); }
-function num(v) { if (typeof v === 'number' && isFinite(v)) return v; if (typeof v === 'string' && v.trim() !== '' && isFinite(Number(v))) return Number(v); return undefined; }
-function money(v) { v = num(v); return v === undefined || v < 0 ? undefined : Math.round(v * 100) / 100; }
-function int(v) { v = num(v); return v === undefined || v < 0 ? undefined : Math.round(v); }
-function cur3(v) { return typeof v === 'string' && /^[A-Za-z]{3}$/.test(v) ? v.toUpperCase() : undefined; }
-function compact(o) { var r = {}; for (var k in o) if (o[k] !== undefined && o[k] !== null && o[k] !== '') r[k] = o[k]; return r; }
-function sdj(name, data) { return { schema: iglu(name), data: data }; }
-
-// One canonical event from either input shape.
-function fromBrowser(ev) {
-  var p = ev.properties || {};
-  return { name: ev.event, uuid: ev.uuid, props: p, distinctId: p.distinct_id, deviceId: p.$device_id,
-    sessionId: p.$session_id, userState: p.$user_state, timeMs: ev.timestamp ? new Date(ev.timestamp).getTime() : undefined,
-    ip: undefined, ua: p.$raw_user_agent, groupSet: p.$group_set };
-}
-function fromCdp(g) {
-  var e = g.event, p = e.properties || {};
-  return { name: e.event, uuid: e.uuid, props: p, distinctId: e.distinct_id, deviceId: p.$device_id,
-    sessionId: p.$session_id, userState: p.$user_state, timeMs: Date.parse(e.timestamp),
-    ip: p.$ip, ua: p.$raw_user_agent, groupSet: p.$group_set };
-}
-
-// distinct_id becomes the app's user id after identify(); before that it equals $device_id.
-// identify() itself is sent while $user_state is still "anonymous", with the new id as distinct_id.
-function userIdOf(c) {
-  var identified = c.userState === 'identified' || c.name === '$identify' || (c.distinctId && c.deviceId && c.distinctId !== c.deviceId);
-  if (!identified || !c.distinctId) return undefined;
-  return String(c.distinctId).slice(0, 255);
-}
-
-function spProduct(it, currency) {
-  var id = str255(pick(it.product_id, it.sku, it.id)), price = money(it.price), cur = cur3(it.currency) || currency;
-  if (id === undefined || price === undefined || !cur) return undefined;
-  var out = compact({ id: id, name: str255(it.name), price: price, currency: cur, quantity: int(it.quantity),
-    variant: str255(it.variant), brand: str255(it.brand), position: int(it.position) });
-  out.category = str255(it.category) || '';
-  return out;
-}
-function spProducts(p, currency) {
-  var list = Array.isArray(p.products) ? p.products : [], out = [];
-  for (var i = 0; i < list.length; i++) { var x = spProduct(list[i] || {}, currency); if (x) out.push(x); }
-  return out;
-}
-
-// Rungs 2 and 3: Snowplow ecommerce and site_search. Returns the event and entities as the ecommerce plugin
-// would send them, plus the plugin call that produces them in the browser; undefined falls to external_event.
-function standardEvent(c) {
-  var p = c.props, n = String(c.name || '').trim().toLowerCase(), cur = cur3(p.currency), type, t;
-  for (t in ECOM) if (ECOM[t].indexOf(n) >= 0) type = t;
-  function prod(list) { return list.map(function (d) { return sdj('product', d); }); }
-  function action(x) { return sdj('action', { type: x }); }
-  if (SEARCH.indexOf(n) >= 0) {
-    var q = str255(p.query);
-    return q ? { event: sdj('siteSearch', { terms: [q] }), entities: [], plugin: ['trackSiteSearch', { terms: [q] }] } : undefined;
-  }
-  if (type === 'product_view') {
-    var one = spProduct(p, cur);
-    return one ? { event: action(type), entities: prod([one]), plugin: ['trackProductView', one] } : undefined;
-  }
-  if (type === 'add_to_cart' || type === 'remove_from_cart') {
-    var line = spProduct(p, cur), total = money(pick(p.cart_total, p.value));
-    if (!line) return undefined;
-    var cart = total === undefined ? undefined : compact({ cart_id: str255(p.cart_id), total_value: total, currency: line.currency });
-    return { event: action(type), entities: prod([line]).concat(cart ? [sdj('cart', cart)] : []),
-      plugin: cart ? [type === 'add_to_cart' ? 'trackAddToCart' : 'trackRemoveFromCart', Object.assign({ products: [line] }, cart)] : undefined };
-  }
-  if (type === 'checkout_step') {
-    var step = int(p.step), cs = compact({ step: step >= 1 && step <= 90 ? step : 1, delivery_method: str255(p.shipping_method), payment_method: str255(p.payment_method), coupon_code: str255(p.coupon) });
-    var cp = spProducts(p, cur);
-    return { event: action(type), entities: prod(cp).concat([sdj('checkout', cs)]), plugin: ['trackCheckoutStep', Object.assign({ context: prod(cp) }, cs)] };
-  }
-  if (type === 'transaction') {
-    var rev = money(pick(p.revenue, p.total, p.value)), oid = str255(pick(p.order_id, p.checkout_id));
-    if (!cur || rev === undefined || !oid) return undefined;
-    var ps = spProducts(p, cur), qty = 0;
-    ps.forEach(function (x) { qty += x.quantity === undefined ? 1 : x.quantity; });
-    // payment_method is required by the schema and absent from PostHog's Order Completed.
-    var trx = compact({ transaction_id: oid, revenue: rev, currency: cur, payment_method: str255(p.payment_method) || 'unknown',
-      total_quantity: qty, tax: money(p.tax), shipping: money(p.shipping), discount_code: str255(p.coupon), discount_amount: money(p.discount) });
-    return { event: action(type), entities: prod(ps).concat([sdj('transaction', trx)]), plugin: ['trackTransaction', Object.assign({ products: ps }, trx)] };
-  }
-  if (type === 'refund') {
-    var amt = money(pick(p.total, p.revenue, p.value));
-    if (!cur || amt === undefined || !p.order_id) return undefined;
-    var rp = spProducts(p, cur), rf = { transaction_id: str255(p.order_id), currency: cur, refund_amount: amt };
-    return { event: action(type), entities: prod(rp).concat([sdj('refund', rf)]), plugin: ['trackRefund', Object.assign({ products: rp }, rf)] };
-  }
-  return undefined;
-}
-
-function kindOf(c) {
-  if (c.name === '$groupidentify') return 'group';
-  if (c.name === '$create_alias') return 'alias';
-  if (c.name === '$identify') return 'identify';
-  return 'track';
-}
-
-// Rung 5: group, alias, autocapture and the prospect's own events.
-function externalEvent(c) {
-  var p = c.props, kind = kindOf(c), first = Array.isArray(p.products) && p.products.length ? p.products[0] || {} : {};
-  var gs = c.groupSet || {};
-  return sdj('external', compact({
-    name: String(pick(c.name, 'unknown')).slice(0, 255), tool: PH.tool, kind: kind,
-    // $pageleave carries how long the page was open; it is the only engagement signal without the tracker.
-    value: c.name === '$pageleave' ? num(p.$prev_pageview_duration) : num(pick(p.revenue, p.value, p.total, p.price)),
-    currency: cur3(p.currency),
-    item_id: str255(pick(p.product_id, p.sku, first.product_id)),
-    item_category: str255(pick(p.category, first.category)),
-    search_term: str255(typeof p.query === 'string' ? p.query : undefined),
-    plan: str255(pick(p.plan, kind === 'group' ? gs.plan : undefined)),
-    group_id: str255(kind === 'group' ? p.$group_key : undefined),
-    previous_id: str255(kind === 'alias' ? p.alias : undefined),
-  }));
-}
-
-// The ladder. Returns null for events that are never forwarded.
-function ladder(c) {
-  if (DROP.indexOf(c.name) >= 0) return null;
-  if (c.name === '$pageview') return { rung: 'page_view', entities: [] };
-  var uid = userIdOf(c);
-  if (c.name === '$identify' && uid) return { rung: 'identify', event: sdj('identify', { id: uid }), entities: [] };
-  var std = standardEvent(c);
-  if (std) return { rung: std.event.schema === iglu('siteSearch') ? 'site_search' : 'ecommerce', event: std.event, entities: std.entities, plugin: std.plugin };
-  return { rung: 'external_event', event: externalEvent(c), entities: [] };
-}
-
-// Cookieless mode has no $device_id and one shared distinct_id for every visitor, so anonymous_id is null;
-// an identified distinct_id is a user id, never an anonymous one.
-function identity(c) {
-  var anon = c.deviceId;
-  if (anon === undefined && c.distinctId !== '$posthog_cookieless' && !userIdOf(c)) anon = c.distinctId;
-  return sdj('identity', {
-    tool: PH.tool, anonymous_id: anon === undefined || anon === null || anon === '' ? null : String(anon).slice(0, 255),
-    user_id: userIdOf(c) || null,
-    session_id: c.sessionId ? String(c.sessionId) : null, session_number: null, event_id: c.uuid ? String(c.uuid) : null,
-    event_name: String(c.name).slice(0, 255),
-  });
-}
-
-var PostHogSnowplow = { PH: PH, iglu: iglu, DROP: DROP, fromBrowser: fromBrowser, fromCdp: fromCdp, ladder: ladder, identity: identity, userIdOf: userIdOf };
-if (typeof module !== 'undefined' && module.exports) module.exports = PostHogSnowplow;
-else if (typeof window !== 'undefined') window.PostHogSnowplow = PostHogSnowplow;
-```
-
-</details>
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=posthog#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

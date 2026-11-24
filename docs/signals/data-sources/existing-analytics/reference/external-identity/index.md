@@ -8,17 +8,15 @@ date: "2026-11-16"
 content_type: reference
 ---
 
-`external_identity` is an entity that adapters attach to every event they send. It keeps the IDs your analytics tool assigned to the visitor, user and session, and the event's original name. Use it to join Snowplow data back to your tool's data, and to filter attributes on the original event name.
+`external_identity` is an entity that adapters attach to every event they send. It keeps the IDs your analytics tool assigned to the visitor, user, and session, and the event's original name. Use it to join Snowplow data back to your tool's data, and to filter attributes on the original event name.
 
 | | |
 | --- | --- |
-| Schema | `iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0` |
+| Schema | `iglu:com.example/external_identity/jsonschema/1-0-0`, where `com.example` is your vendor |
 | Type | Entity |
 | Attached to | Every event an adapter sends, whichever rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) it takes |
 
-:::note
-`external_identity` is published on Iglu Central.
-:::
+`external_identity` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schema in your registry](#create-the-schema-in-your-registry).
 
 ## Fields
 
@@ -34,22 +32,22 @@ content_type: reference
 
 No other properties are allowed.
 
-Only `tool` is required, so every event carries the entity. An event with no visitor ID, such as a server-side call with only a `userId`, or a PostHog event in cookieless mode, has a null `anonymous_id`. The RudderStack transformation puts the `userId` in `anonymous_id` instead.
+Only `tool` is required, so every event carries the entity. An event with no visitor ID, such as a server-side call with only a `userId`, or a PostHog event in cookieless mode, has a null `anonymous_id`.
 
 ## What each tool puts in it
 
 | Tool | `anonymous_id` | `user_id` | `session_id` | `session_number` | `event_id` |
 | --- | --- | --- | --- | --- | --- |
 | Segment | `anonymousId` | `userId` | Empty: Segment has no session ID | Empty | `messageId` |
-| RudderStack | `anonymousId`, or `userId` when the event has no `anonymousId` | `userId` | `context.sessionId`, where sent | Empty | `messageId` |
+| RudderStack | `anonymousId` | `userId` | `context.sessionId`, where sent | Empty | `messageId` |
 | GA4 | GA client ID | GA `user_id` | GA session ID | GA session number | Empty: GA4 has no event ID |
 | Amplitude | `device_id` | `user_id` | Amplitude `session_id` | Empty | `insert_id`, or `uuid` on the webhook when there's no `insert_id` |
-| Adobe | ECID | The authenticated ID from `identityMap` or `setCustomerIDs` | Empty: Adobe computes visits on its servers | Empty | XDM `_id` on event forwarding, otherwise empty |
-| PostHog | `$device_id` | `distinct_id` after `identify` | `$session_id` | Empty | Event `uuid` |
+| Adobe | ECID | The Web SDK `identityMap` CRMID, or your user ID eVar | Empty: Adobe computes visits on its servers | Empty | XDM `_id` on event forwarding, otherwise empty |
+| PostHog | `$device_id`. On server SDK and capture API events with only a `distinct_id`, the `distinct_id` | `distinct_id` after `identify`. Empty on server events with only a `distinct_id` | `$session_id` | Empty | Event `uuid` |
 
 `event_name` is the name your tool used, such as a Segment track event name, a GA4 event name, an Amplitude `event_type`, an Adobe XDM `eventType` or link name, or a PostHog event name. On client-side approaches, page pings carry the entity of the page view they belong to, including its event name.
 
-See each tool page under [tools](/docs/signals/data-sources/existing-analytics/tools/segment/index.md) for details.
+For each tool's IDs and whether you can use them as keys, see [Tool IDs by tool](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md#tool-ids-by-tool).
 
 ## Don't use these IDs as public keys
 
@@ -71,7 +69,7 @@ A Segment track call, as it arrives in Snowplow:
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/external_identity/jsonschema/1-0-0",
+  "schema": "iglu:com.example/external_identity/jsonschema/1-0-0",
   "data": {
     "tool": "segment",
     "anonymous_id": "a525264d-56e3-4050-9599-397af94571a2",
@@ -92,7 +90,7 @@ Read `event_name` to count or list your tool's original event names on any event
 from snowplow_signals import EntityProperty
 
 original_event_name = EntityProperty(
-    vendor="com.snowplowanalytics.snowplow",
+    vendor="com.example",
     name="external_identity",
     major_version=1,
     path="event_name",
@@ -101,14 +99,17 @@ original_event_name = EntityProperty(
 
 You can also define a custom attribute key on `anonymous_id`, to calculate attributes on your tool's visitor ID. Only events that carry the entity count towards it. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md#keep-attributes-on-a-server-side-approach).
 
-## JSON schema
+## Create the schema in your registry
+
+In Console, create this schema as an entity with the JSON editor, replacing `com.example` in `self.vendor` with your vendor. See [Create a data structure with the JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor). Then deploy it to your development environment and promote it to production. Change nothing else in the schema: the adapters depend on its field names and limits. If you set up with an agent, the `existing-analytics` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) creates it for you. For both schemas together, see [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+
 
 ```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Identifiers that another analytics tool assigned to the user, session and event, so Snowplow events can be joined to that tool's data",
   "self": {
-    "vendor": "com.snowplowanalytics.snowplow",
+    "vendor": "com.example",
     "name": "external_identity",
     "format": "jsonschema",
     "version": "1-0-0"

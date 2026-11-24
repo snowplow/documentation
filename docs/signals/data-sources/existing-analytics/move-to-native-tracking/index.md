@@ -19,7 +19,7 @@ How smoothly this goes depends on your approach:
 
 ## What stays and what changes
 
-Page views, ecommerce events, site searches and identify calls already arrive as standard Snowplow events, so they don't need to move. Attributes that read them keep working as they are.
+Page views, ecommerce events, site searches, and identify calls already arrive as standard Snowplow events, so they don't need to move. Attributes that read them keep working as they are.
 
 What you move is the `external_event` rung: your own event names, group and alias calls, and any ecommerce event that fell back to `external_event` because it lacked a required field. For each one, you:
 
@@ -34,7 +34,7 @@ Find the event's name in your tool's tracking plan, and create a schema with the
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0",
+  "schema": "iglu:com.example/external_event/jsonschema/1-0-0",
   "data": {
     "name": "Signup Form Submitted",
     "tool": "segment",
@@ -45,14 +45,14 @@ Find the event's name in your tool's tracking plan, and create a schema with the
 }
 ```
 
-could become a schema of your own, with the plan and the form's source page declared as properties:
+could become a schema of your own, under your vendor (`com.example` on this page), with the plan and the form's source page declared as properties:
 
 ```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "A visitor submitted the signup form",
   "self": {
-    "vendor": "com.acme",
+    "vendor": "com.example",
     "name": "signup_form_submitted",
     "format": "jsonschema",
     "version": "1-0-0"
@@ -77,7 +77,7 @@ The adapter already loads the Snowplow JavaScript tracker in your page. Call the
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.acme/signup_form_submitted/jsonschema/1-0-0',
+    schema: 'iglu:com.example/signup_form_submitted/jsonschema/1-0-0',
     data: { plan: 'pro', form_location: 'pricing' },
   },
 });
@@ -95,7 +95,7 @@ For events that come from your servers or apps rather than the browser, use the 
 
 If your tool still receives the event, the adapter will keep forwarding it as `external_event`, and the event will be counted twice. Stop the adapter from forwarding it once native tracking ships.
 
-On [Segment's client-side plugin](/docs/signals/data-sources/existing-analytics/tools/segment/index.md#set-up-the-client-side-approach), for example, the change is a check at the top of the function that handles each call:
+On Segment's client-side plugin, for example, the change is a check at the top of the `snowplowDestination[method]` handler, the function that handles each call. The plugin code is in the [Segment setup reference](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/segment.md#set-up-the-client-side-approach):
 
 ```javascript
 const nativelyTracked = ['Signup Form Submitted'];
@@ -117,15 +117,15 @@ Changing an attribute's definition means publishing a new version of its attribu
 2. Publish it alongside the old version, and if you have a warehouse connection, backfill it from a date before the switch. Backfill reads your atomic events table, which already holds the `external_event` history.
 3. Move your services to the new version, then unpublish the old one.
 
-For the funnel group on the [starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md#funnel) page, the new version of `signup_submitted` could read both events:
+For example, if an attribute group counts a `signup_submitted` event, its new version could read both events:
 
 ```python
 from datetime import datetime, timezone
 
 from snowplow_signals import AtomicProperty, Attribute, Criteria, Criterion, Event, EventProperty, StreamAttributeGroup, domain_userid
 
-external_event = Event(vendor="com.snowplowanalytics.snowplow", name="external_event", version="1-0-0")
-signup_form_submitted = Event(vendor="com.acme", name="signup_form_submitted", version="1-0-0")
+external_event = Event(vendor="com.example", name="external_event", version="1-0-0")
+signup_form_submitted = Event(vendor="com.example", name="signup_form_submitted", version="1-0-0")
 
 signup_submitted = Attribute(
     name="signup_submitted",
@@ -136,7 +136,7 @@ signup_submitted = Attribute(
         any=[
             Criterion.eq(
                 EventProperty(
-                    vendor="com.snowplowanalytics.snowplow",
+                    vendor="com.example",
                     name="external_event",
                     major_version=1,
                     path="name",
@@ -149,8 +149,8 @@ signup_submitted = Attribute(
     default_value=0,
 )
 
-funnel_v2 = StreamAttributeGroup(
-    name="funnel",
+signups_v2 = StreamAttributeGroup(
+    name="signups",
     version=2,
     attribute_key=domain_userid,
     owner="user@company.com",
@@ -169,7 +169,7 @@ On a server-side approach, `domain_userid` holds your tool's visitor ID, for exa
 
 - **Accept the reset.** For attributes with a short period, such as a 7-day count, the gap closes after one period.
 - **Move to the client-side approach first.** Where your tool has one, it runs the Snowplow tracker and keeps your tool's ID in the [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity. Attributes reset once, at that switch, and after that native tracking keeps the same ID. You also gain sessions and page pings.
-- **Key on your tool's ID.** A custom attribute key on `external_identity.anonymous_id` keeps counting on your tool's ID, as long as every event carries the entity, so attach it to your native tracker calls too. This ID is your tool's, so the [guidance on public keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) still applies: never use a GA client ID, an Adobe ECID, Amplitude's `device_id` or Segment's `anonymousId` on the public intervention endpoint.
+- **Key on your tool's ID.** A custom attribute key on `external_identity.anonymous_id` keeps counting on your tool's ID, as long as every event carries the entity, so attach it to your native tracker calls too. This ID is your tool's, so the [guidance on public keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) still applies: never use a GA client ID, an Adobe ECID, Amplitude's `device_id`, or Segment's `anonymousId` on the public intervention endpoint.
 
 ```python
 from snowplow_signals import AttributeKey, EntityProperty
@@ -178,7 +178,7 @@ tool_visitor_key = AttributeKey(
     name="external_anonymous_id",
     description="The visitor ID assigned by the source tool",
     property=EntityProperty(
-        vendor="com.snowplowanalytics.snowplow",
+        vendor="com.example",
         name="external_identity",
         major_version=1,
         path="anonymous_id",
@@ -192,6 +192,6 @@ Amplitude's client-side plugin can also post directly to the Collector without t
 
 Where to go next:
 
-- [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md)
+- [Define attribute groups](/docs/signals/attributes/index.md)
 - [external_event reference](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md)
 - [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md)

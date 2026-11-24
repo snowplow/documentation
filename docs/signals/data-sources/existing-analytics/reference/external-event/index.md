@@ -8,17 +8,15 @@ date: "2026-11-16"
 content_type: reference
 ---
 
-`external_event` is the self-describing event an adapter sends when an event from your analytics tool has no standard Snowplow schema. It is the last rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md): page views, ecommerce events, site searches and identify calls use Snowplow's own schemas instead.
+`external_event` is the self-describing event an adapter sends when an event from your analytics tool has no standard Snowplow schema. It is the last rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md): page views, ecommerce events, site searches, and identify calls use Snowplow's own schemas instead.
 
 | | |
 | --- | --- |
-| Schema | `iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0` |
+| Schema | `iglu:com.example/external_event/jsonschema/1-0-0`, where `com.example` is your vendor |
 | Type | Self-describing event |
 | Sent with | The [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity |
 
-:::note
-`external_event` is published on Iglu Central.
-:::
+`external_event` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schema in your registry](#create-the-schema-in-your-registry).
 
 ## Fields
 
@@ -56,7 +54,7 @@ Each adapter maps your tool's properties to these fields. As examples, the Segme
 | `group_id` | `groupId` on a group call | `$group_key` on `$groupidentify` |
 | `previous_id` | `previousId` on an alias call | The `alias` property on `$create_alias` |
 
-Each tool page lists its own mapping. See the [tools](/docs/signals/data-sources/existing-analytics/tools/segment/index.md) section.
+For every tool's mapping, see [Map events from each tool](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md#map-events-from-each-tool).
 
 ## Example
 
@@ -64,7 +62,7 @@ A Segment track call, as it arrives in Snowplow:
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0",
+  "schema": "iglu:com.example/external_event/jsonschema/1-0-0",
   "data": {
     "name": "Signup Form Submitted",
     "tool": "segment",
@@ -79,7 +77,7 @@ A Segment group call:
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/external_event/jsonschema/1-0-0",
+  "schema": "iglu:com.example/external_event/jsonschema/1-0-0",
   "data": {
     "name": "group",
     "tool": "segment",
@@ -92,7 +90,7 @@ A Segment group call:
 
 ## Use it in Signals
 
-Every custom event from your tool shares this one schema, so attributes tell events apart with a criterion on `name`. Use `kind` instead when the name differs between tools, as it does for group calls. See [Starter attribute groups](/docs/signals/data-sources/existing-analytics/starter-attribute-groups/index.md) for examples.
+Every custom event from your tool shares this one schema, so attributes tell events apart with a criterion on `name`. Use `kind` instead when the name differs between tools, as it does for group calls. See [Filter attributes on the event name](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md#filter-attributes-on-the-event-name) for an example.
 
 ```python
 from snowplow_signals import Criteria, Criterion, EventProperty
@@ -101,7 +99,7 @@ signup_only = Criteria(
     all=[
         Criterion.eq(
             EventProperty(
-                vendor="com.snowplowanalytics.snowplow",
+                vendor="com.example",
                 name="external_event",
                 major_version=1,
                 path="name",
@@ -114,14 +112,17 @@ signup_only = Criteria(
 
 When you need a property that isn't on this schema, track that event with a schema of your own. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
 
-## JSON schema
+## Create the schema in your registry
+
+In Console, create this schema as an event with the JSON editor, replacing `com.example` in `self.vendor` with your vendor. See [Create a data structure with the JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor). Then deploy it to your development environment and promote it to production. Change nothing else in the schema: the adapters depend on its field names and limits. If you set up with an agent, the `existing-analytics` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) creates it for you. For both schemas together, see [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+
 
 ```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "An event first tracked by another analytics tool and sent to Snowplow, for events that no more specific Snowplow schema describes",
   "self": {
-    "vendor": "com.snowplowanalytics.snowplow",
+    "vendor": "com.example",
     "name": "external_event",
     "format": "jsonschema",
     "version": "1-0-0"

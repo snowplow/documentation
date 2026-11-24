@@ -16,15 +16,29 @@ If your assistant is connected to the [Snowplow MCP server](/docs/ai/snowplow-mc
 
 This documentation follows the [`llms.txt` standard](https://llmstxt.org/), providing structured information to help an LLM use the site.
 
-An index is available at [`llms.txt`](pathname:///llms.txt).
+An index is available at [`llms.txt`](pathname:///llms.txt). The root index starts with instructions for agents, then lists the sections of the docs, grouped by product. To keep the file small, the root index doesn't list every page. Instead, each section links to its own index, in the same format, which lists the pages in that section.
 
-An extended version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of the current pages. For token efficiency, sections relating to older versions of components aren't included in this file. These sections are still listed in the `llms.txt` index, labeled as `[previous version]`.
+An extended version is also available at [`llms-full.txt`](pathname:///llms-full.txt), that includes the complete text of the current pages. For token efficiency, sections relating to older versions of components aren't included in this file. These sections are still listed in the section indexes, labeled as `[previous version]`.
 
 The `llms-full.txt` file is very large. It might be more effective to access individual pages as needed, using the Markdown access method described below.
 
+### Section indexes
+
+An agent reads the root index to choose a section, then fetches that section's index to find the pages it needs. The sections follow each product's navigation sidebar. For example:
+
+| Index | Covers |
+| --- | --- |
+| [`/docs/cdi/collect-events/llms.txt`](pathname:///docs/cdi/collect-events/llms.txt) | Trackers, webhooks, and built-in events and entities |
+| [`/docs/cdi/query-and-model-data/llms.txt`](pathname:///docs/cdi/query-and-model-data/llms.txt) | Querying data in the warehouse and data models |
+| [`/docs/api-reference/component-configuration/llms.txt`](pathname:///docs/api-reference/component-configuration/llms.txt) | Configuration reference for the Collector, Enrich, loaders, and other components |
+| [`/tutorials/llms.txt`](pathname:///tutorials/llms.txt) | Tutorials, each as a single page |
+| [`/release-notes/llms.txt`](pathname:///release-notes/llms.txt) | Release notes, newest first |
+
+A section with a single page is linked from the root index directly.
+
 ### Product indexes
 
-The root `llms.txt` starts with instructions for agents and a list of smaller indexes, one for each part of the docs. An agent working on one product can fetch only the index it needs:
+Each product also has an index of all of its pages in one file. An agent working on one product can fetch it instead of the section indexes:
 
 | Index | Covers |
 | --- | --- |
@@ -33,7 +47,7 @@ The root `llms.txt` starts with instructions for agents and a list of smaller in
 | [`/docs/api-reference/llms.txt`](pathname:///docs/api-reference/llms.txt) | Reference: APIs, SDK and configuration reference, versions, and previous versions |
 | [`/docs/platform/llms.txt`](pathname:///docs/platform/llms.txt) | Pages shared by both products: fundamentals, AI, account management, and policies |
 
-Each index lists the same pages, in the same format, as the matching sections of the root `llms.txt`.
+Each index lists the same pages, in the same format, as the section indexes of that product.
 
 ### Tell your agent about the indexes
 
@@ -57,4 +71,4 @@ Each tutorial is also available as a single Markdown file containing all of its 
 - Tutorial step: `https://docs.snowplow.io/tutorials/signals-interventions/start/`
 - Complete tutorial: `https://docs.snowplow.io/tutorials/signals-interventions.md`
 
-The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The `llms.txt` index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.
+The combined file opens with a list of the tutorial's steps and their URLs, followed by the content of each step. The tutorials index links to these files rather than to individual steps, so an LLM retrieves a whole tutorial in one request.

@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior. You'll need to define them, as described on this page, and [subscribe](/docs/signals/applications/subscribe/index.md) to them in your application.
+[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior. You'll need to define them, as described on this page, and either [subscribe](/docs/signals/applications/subscribe/index.md) to them in your application or [forward them](/docs/signals/applications/forward-interventions/index.md) to a webhook or stream.
 
 There are three methods for defining interventions in Signals:
 * Snowplow Console UI

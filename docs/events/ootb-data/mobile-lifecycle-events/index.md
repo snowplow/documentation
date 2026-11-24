@@ -76,7 +76,7 @@ This table shows the support for mobile lifecycle event tracking across the main
 
 ### Foreground event
 
-The foreground event is tracked each time the app becomes visible on the screen. The `foregroundIndex` property counts how many times the app has been foregrounded since installation.
+The foreground event is tracked each time the app returns to the screen from the background. The trackers don't track it when the user launches the app. The `foregroundIndex` property counts how many times the app has been foregrounded since installation.
 
 <SchemaProperties
   overview={{event: true}}

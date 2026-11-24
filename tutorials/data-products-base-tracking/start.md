@@ -10,7 +10,7 @@ This guide will help you understand some of the basic capabilities of tracking p
 
 ## Prerequisites
 - A [collector](/docs/pipeline/collector/) endpoint.
-- A [Console API key](/docs/event-studio/implement-tracking/install-snowtype/#authenticate) for generating code using Snowtype.
+- A Console account to [log in with Snowtype](/docs/event-studio/implement-tracking/install-snowtype/#authenticate) for generating code.
 
 ## What you'll be doing
 

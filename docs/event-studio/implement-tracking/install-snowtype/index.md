@@ -17,7 +17,6 @@ To use Snowtype, you'll need:
 
 - [Node.js](https://nodejs.org/en/) version 18 or later
 - A Snowplow CDI account
-- A Console API key
 
 ## Install Snowtype
 
@@ -59,7 +58,38 @@ The examples on this page use `npx`. Replace with `yarn` or `pnpm` if you prefer
 
 ## Authenticate
 
-Snowtype needs a Console API key to read your event specifications and data structures. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
+Snowtype needs to authenticate with Console to read your event specifications and data structures. There are two ways to do it:
+
+* [Log in with your browser](#log-in-with-your-browser): for interactive use, when you run Snowtype yourself in a terminal. This is the default.
+* [Use an API key](#use-an-api-key): for non-interactive use, such as CI, where nobody can sign in.
+
+### Log in with your browser
+
+<AppliesTo feature="snowtype-login" />
+
+Run the `login` command:
+
+```bash
+npx snowtype login
+```
+
+The command prints a sign-in link and offers to open it in your browser. If you belong to more than one organization, it asks you to select a default one.
+
+After that, Snowtype uses this login when no API key is set.
+
+[Snowplow CLI](/docs/api-reference/snowplow-cli/index.md#configure) shares the same login, so you only need to log in with one of the two tools.
+
+To log out, run:
+
+```bash
+npx snowtype logout
+```
+
+This also logs Snowplow CLI out. It doesn't affect API keys.
+
+### Use an API key
+
+For non-interactive use, such as CI, use a Console API key. [Create an API key](/docs/account-management/index.md#create-an-api-key) in Console under **Settings** > **Manage organization** > **View and manage API keys**. Snowtype only reads data, so the key needs the **View** permission on tracking plans and data structures, and nothing else.
 
 You need both the **API key** and the **API key ID**.
 
@@ -85,6 +115,8 @@ export SNOWPLOW_CONSOLE_API_KEY_ID=your-api-key-id
 </Tabs>
 
 You can also pass the credentials directly as CLI flags (`--apiKey` and `--apiKeyId`), but environment variables are easier to manage and keep credentials out of your command history.
+
+If an API key is set, Snowtype uses it instead of the saved login.
 
 ## Initialize your project
 

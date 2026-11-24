@@ -66,6 +66,78 @@
       "component": "rdbLoader",
       "since": "6.0.0",
       "href": "/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/"
+    },
+    "screen-context-from-event-ios": {
+      "label": "iOS tracker: screenContextFromEvent",
+      "component": "iosTracker",
+      "since": "6.4.0",
+      "href": "/docs/sources/mobile-trackers/tracking-events/screen-tracking/#keep-the-screen-an-event-was-triggered-on"
+    },
+    "screen-context-from-event-android": {
+      "label": "Android tracker: screenContextFromEvent",
+      "component": "androidTracker",
+      "since": "6.5.0",
+      "href": "/docs/sources/mobile-trackers/tracking-events/screen-tracking/#keep-the-screen-an-event-was-triggered-on"
+    },
+    "screen-context-from-event-flutter": {
+      "label": "Flutter tracker: screenContextFromEvent",
+      "component": "flutterTracker",
+      "since": "0.11.3",
+      "href": "/docs/sources/flutter-tracker/tracking-events/#keep-the-screen-an-event-was-triggered-on"
+    },
+    "flutter-plugin-entities": {
+      "label": "Flutter tracker: plugin entities",
+      "component": "flutterTracker",
+      "since": "0.11.3",
+      "href": "/docs/sources/flutter-tracker/plugins/#attach-entities-from-a-plugin"
+    },
+    "snowplow-cli-event-specification-versions": {
+      "label": "Snowplow CLI: declared event specification versions",
+      "component": "snowplowCli",
+      "since": "0.4.0",
+      "href": "/docs/api-reference/snowplow-cli/tracking-plans/"
+    },
+    "snowplow-cli-login": {
+      "label": "Snowplow CLI: log in with your browser",
+      "component": "snowplowCli",
+      "since": "0.5.0",
+      "href": "/docs/api-reference/snowplow-cli/"
+    },
+    "snowtype-local-tracking-plans": {
+      "label": "Snowtype: generate from local tracking plans",
+      "component": "snowtype",
+      "since": "0.20.0",
+      "href": "/docs/event-studio/implement-tracking/snowtype-config/"
+    },
+    "snowtype-check-command": {
+      "label": "Snowtype: check command",
+      "component": "snowtype",
+      "since": "0.20.0",
+      "href": "/docs/event-studio/implement-tracking/command-reference/"
+    },
+    "snowtype-login": {
+      "label": "Snowtype: log in with your browser",
+      "component": "snowtype",
+      "since": "0.21.0",
+      "href": "/docs/event-studio/implement-tracking/install-snowtype/"
+    },
+    "schema-superseding-enrich": {
+      "label": "Mark schemas as superseded: Enrich",
+      "component": "enrich",
+      "since": "3.8.0",
+      "href": "/docs/event-studio/data-structures/superseding-and-patching/"
+    },
+    "schema-superseding-iglu-server": {
+      "label": "Mark schemas as superseded: Iglu Server",
+      "component": "igluServer",
+      "since": "0.11.0",
+      "href": "/docs/event-studio/data-structures/superseding-and-patching/"
+    },
+    "schema-superseding-micro": {
+      "label": "Mark schemas as superseded: Snowplow Micro",
+      "component": "snowplowMicro",
+      "since": "1.7.1",
+      "href": "/docs/event-studio/data-structures/superseding-and-patching/"
     }
   }
 }

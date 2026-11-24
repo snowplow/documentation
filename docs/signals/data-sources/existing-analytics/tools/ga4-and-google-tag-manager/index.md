@@ -18,7 +18,7 @@ You need:
 
 - GA4 on your site, through GTM.
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry). Every other schema the setup uses is on Iglu Central.
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start). Every other schema the setup uses is on Iglu Central.
 
 ## Set up with an agent
 
@@ -119,7 +119,7 @@ The Snowplow tags fire whatever the consent state until you add a requirement. O
 
 ### Receive interventions
 
-On the Window Loaded page view tag, open **Load Plugins** and add the Signals browser plugin. Then add a **Custom HTML** tag that subscribes to interventions, with the Window Loaded page view tag as its **Set-up Tag** under **Advanced Settings**, then **Tag Sequencing**. See [Receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md).
+On the Window Loaded page view tag, open **Load Plugins** and add a row with **Plugin URL** set to `https://cdn.jsdelivr.net/npm/@snowplow/signals-browser-plugin@0.2.2/dist/index.umd.min.js` and **Plugin Configuration** set to `snowplowSignals,SignalsPlugin`. If the tag also fires on **History Change**, split it and load the plugin only on the Window Loaded one. Then add a **Custom HTML** tag that subscribes to interventions, with the Window Loaded page view tag as its **Set-up Tag** under **Advanced Settings**, then **Tag Sequencing**. See [Subscribe with the browser tracker plugin](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin).
 
 ### Preview and publish
 
@@ -175,4 +175,4 @@ If the GA4 BigQuery export is on, schedule the [BigQuery query](https://github.c
 - **A custom event carries an old `group_id` or `plan`:** Data Layer Variables keep the last value pushed. Put `group_id` on the `join_group` tag only.
 - **Funnel attributes stay empty:** GA4 event names are lowercase with underscores, such as `signup_form_submitted`. Use them exactly in your attribute filters.
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) for how each approach handles consent and personal data. Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=ga4-and-google-tag-manager#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md) for how each approach handles consent and personal data. Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=ga4-and-google-tag-manager#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

@@ -21,7 +21,7 @@ You need:
 - Amplitude Browser SDK 2 (`@amplitude/analytics-browser`).
 - The Admin or Manager role on your Amplitude project, or someone who has it. Only those roles can see the API key and add destinations.
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 - Your Amplitude tracking plan, so you can check your ecommerce and search event names against the names the converter recognizes. Other events become generic `external_event` events.
 
 ## Set up with an agent
@@ -133,4 +133,4 @@ Set the URL to your Console development environment's Collector endpoint, keepin
 - **Server or app events are missing:** the client-side plugin sees browser events only. Add the Webhook destination for the rest.
 - **`plan` changes unexpectedly:** any event with a `plan` property updates it, so a later track event replaces the plan from `groupIdentify`.
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=amplitude#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=amplitude#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

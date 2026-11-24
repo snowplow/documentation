@@ -26,7 +26,7 @@ Every adapter maps an event the same way, whatever the tool or approach. It goes
 
 Every event also carries an `external_identity` entity with your tool's IDs and the original event name. See [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md).
 
-The `external_event` and `external_identity` schemas aren't on Iglu Central. You create them in your own registry, under your own vendor, shown on this page as `com.example`. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry). Every other schema on this page is on Iglu Central.
+The `external_event` and `external_identity` schemas aren't on Iglu Central. You create them in your own registry, under your own vendor, shown on this page as `com.example`. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start). Every other schema on this page is on Iglu Central.
 
 ### Page views
 

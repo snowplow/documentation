@@ -179,7 +179,7 @@ Every event carries an `external_identity` entity with the IDs your tool assigne
 
 Use it to join Snowplow events to your tool's own export, to compare counts by event name while you check the setup, and to keep history keyed on your tool's ID when you move to native tracking. Until your tool has set its ID, the entity is sent with a null `anonymous_id`.
 
-The schema is under your own vendor, shown here as `com.example`. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+The schema is under your own vendor, shown here as `com.example`. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 
 ## Combine keys and keep history
 

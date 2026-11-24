@@ -23,7 +23,7 @@ You need:
 - A Snowplow pipeline with Signals enabled, and its Collector URL.
 - Access to change your Adobe setup: the Tags property, or the page code that configures the Web SDK.
 - A list of the XDM fields that hold the user ID, plan, account ID, and search term. The adapter reads only the fields you name.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 
 ## Set up with an agent
 
@@ -155,4 +155,4 @@ If you load Adobe Analytics Data Feeds into the warehouse Signals reads, you can
 - **Each event arrives twice:** your site runs both the Web SDK and AppMeasurement hooks. Keep one.
 - **A value is missing from `external_event`:** add its XDM path, eVar, or prop to your field map. Attributes read only the typed fields of `external_event`, and Adobe's own processing, such as eVar persistence and processing rules, isn't applied.
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=adobe#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=adobe#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a custom device mode integration
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 - The RudderStack JavaScript SDK v3 (`@rudderstack/analytics-js`) 3.23.0 or later on your site, loaded with a snippet that lists `addCustomIntegration` among its methods. If yours doesn't, copy a current snippet from your source's **Setup** tab.
 - RudderStack ecommerce events that use the ecommerce spec names (`Product Viewed`, `Order Completed`, and so on) with a price and a currency. Other events become generic `external_event` events.
 
@@ -123,6 +123,6 @@ Set the **Webhook URL** to your Console development environment's Collector endp
 - **Ecommerce events arrive as `external_event`:** the event name isn't a spec name, or it lacks a price, currency, or order ID. Rename it, or add the missing field.
 - **Events arrive twice:** both approaches receive your browser source. Connect the server-side destination only to server and mobile sources.
 - **A changed transformation has no effect:** publish it as a new version.
-- **A property is missing from attributes:** Signals only reads fields a schema declares. Map it to a typed `external_event` field. See [`external_event`](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
+- **A property is missing from attributes:** Signals only reads fields a schema declares. Map it to a typed `external_event` field. See [`external_event`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json).
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=rudderstack#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=rudderstack#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

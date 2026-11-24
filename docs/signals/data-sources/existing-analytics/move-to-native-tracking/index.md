@@ -8,7 +8,7 @@ date: "2026-11-13"
 content_type: how-to
 ---
 
-An adapter gets your existing events into Signals without retagging, but every event without a standard Snowplow schema arrives as [`external_event`](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md), with a fixed set of typed fields. When you need a property that doesn't fit those fields, or want an event validated against its own schema, you can replace that event with native Snowplow tracking. You don't have to move everything at once: replace one event, check its attributes, then move to the next.
+An adapter gets your existing events into Signals without retagging, but every event without a standard Snowplow schema arrives as [`external_event`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json), with a fixed set of typed fields. When you need a property that doesn't fit those fields, or want an event validated against its own schema, you can replace that event with native Snowplow tracking. You don't have to move everything at once: replace one event, check its attributes, then move to the next.
 
 How smoothly this goes depends on your approach:
 
@@ -168,7 +168,7 @@ You can add attributes on the properties the native schema declares, such as the
 On a server-side approach, `domain_userid` holds your tool's visitor ID, for example Segment's `anonymousId` or Amplitude's `device_id`. Native tracking in the browser sets Snowplow's own ID instead, so attributes keyed on `domain_userid` start again from empty for every visitor. You have three options:
 
 - **Accept the reset.** For attributes with a short period, such as a 7-day count, the gap closes after one period.
-- **Move to the client-side approach first.** Where your tool has one, it runs the Snowplow tracker and keeps your tool's ID in the [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity. Attributes reset once, at that switch, and after that native tracking keeps the same ID. You also gain sessions and page pings.
+- **Move to the client-side approach first.** Where your tool has one, it runs the Snowplow tracker and keeps your tool's ID in the [`external_identity`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_identity.json) entity. Attributes reset once, at that switch, and after that native tracking keeps the same ID. You also gain sessions and page pings.
 - **Key on your tool's ID.** A custom attribute key on `external_identity.anonymous_id` keeps counting on your tool's ID, as long as every event carries the entity, so attach it to your native tracker calls too. This ID is your tool's, so the [guidance on public keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md) still applies: never use a GA client ID, an Adobe ECID, Amplitude's `device_id`, or Segment's `anonymousId` on the public intervention endpoint.
 
 ```python
@@ -193,5 +193,5 @@ Amplitude's client-side plugin can also post directly to the Collector without t
 Where to go next:
 
 - [Define attribute groups](/docs/signals/attributes/index.md)
-- [external_event reference](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md)
+- [`external_event` schema](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json)
 - [Identifiers and attribute keys](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md)

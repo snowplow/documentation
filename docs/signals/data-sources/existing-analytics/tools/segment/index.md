@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a destination plugin in analytic
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 - Segment's analytics.js 2.0 (analytics-next) on your site.
 - Segment ecommerce events that use Segment's v2 spec names (`Product Viewed`, `Order Completed`, and so on) with a price and a currency. Other events become generic `external_event` events.
 
@@ -115,6 +115,6 @@ Set `collectorUrl` to your Console development environment's Collector endpoint,
 - **Ecommerce events arrive as `external_event`:** the event name isn't a Segment spec name, or it lacks a price, currency, or order ID. Rename it, or add the missing field.
 - **Events arrive twice:** both approaches receive your browser source. Connect the Destination Function only to server and app sources.
 - **No events when analytics.js is blocked:** the plugin runs inside analytics.js, so an ad blocker or consent tool that stops it stops the plugin too.
-- **A property is missing from attributes:** Signals only reads fields a schema declares. See [`external_event`](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md).
+- **A property is missing from attributes:** Signals only reads fields a schema declares. See [`external_event`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json).
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=segment#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=segment#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

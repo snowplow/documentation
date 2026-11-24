@@ -17,7 +17,7 @@ Most sites should use the client-side approach: a hook in the posthog-js `before
 You need:
 
 - A Snowplow Collector URL for a pipeline with Signals enabled.
-- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
+- The `external_event` and `external_identity` schemas, created in your Snowplow registry under your vendor. See [Where to start](/docs/signals/data-sources/existing-analytics/index.md#where-to-start).
 - posthog-js 1.187.0 or later on your site, which added `before_send`.
 - Your PostHog project token. In PostHog, go to **Settings** > **Project** > **General** and copy **Project token**.
 - PostHog ecommerce events that use PostHog's ecommerce spec names (`Product Viewed`, `Order Completed`, `Products Searched`, and so on) with a price and a currency. Other events become generic `external_event` events.
@@ -146,4 +146,4 @@ Open the **Invocations** tab to see each event's status. With **Log responses** 
 - **Browser events arrive twice:** both approaches send them. Add the `$lib` is not `web` filter to the destination.
 - **`plan` changes unexpectedly:** any event with a `plan` property updates it, so a later event replaces the plan from `$groupidentify`.
 
-Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=posthog#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/data-sources/existing-analytics/receive-interventions/index.md). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.
+Before you go live, read [Privacy and consent](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md). Then [create attribute groups](/docs/signals/attributes/index.md) for your use case, keyed as described in [Identifiers](/docs/signals/data-sources/existing-analytics/how-it-works/identifiers/index.md?analytics-tool=posthog#tool-ids-by-tool), and [receive interventions in the page](/docs/signals/applications/subscribe/index.md#subscribe-with-the-browser-tracker-plugin). When you're ready, [move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md) one event at a time.

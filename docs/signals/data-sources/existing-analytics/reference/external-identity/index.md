@@ -16,7 +16,7 @@ content_type: reference
 | Type | Entity |
 | Attached to | Every event an adapter sends, whichever rung of the [event mapping ladder](/docs/signals/data-sources/existing-analytics/how-it-works/event-mapping/index.md) it takes |
 
-`external_identity` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schema in your registry](#create-the-schema-in-your-registry).
+`external_identity` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
 
 ## Fields
 
@@ -98,64 +98,3 @@ original_event_name = EntityProperty(
 ```
 
 You can also define a custom attribute key on `anonymous_id`, to calculate attributes on your tool's visitor ID. Only events that carry the entity count towards it. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md#keep-attributes-on-a-server-side-approach).
-
-## Create the schema in your registry
-
-In Console, create this schema as an entity with the JSON editor, replacing `com.example` in `self.vendor` with your vendor. See [Create a data structure with the JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor). Then deploy it to your development environment and promote it to production. Change nothing else in the schema: the adapters depend on its field names and limits. If you set up with an agent, the `existing-analytics` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) creates it for you. For both schemas together, see [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
-
-
-```json
-{
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "description": "Identifiers that another analytics tool assigned to the user, session and event, so Snowplow events can be joined to that tool's data",
-  "self": {
-    "vendor": "com.example",
-    "name": "external_identity",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  },
-  "type": "object",
-  "properties": {
-    "tool": {
-      "description": "The tool that assigned the identifiers, in lower case",
-      "type": "string",
-      "pattern": "^[a-z0-9_.-]+$",
-      "maxLength": 64
-    },
-    "anonymous_id": {
-      "description": "The tool's anonymous or device identifier",
-      "type": ["string", "null"],
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "user_id": {
-      "description": "The tool's user identifier",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "session_id": {
-      "description": "The tool's session identifier",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "session_number": {
-      "description": "The tool's session counter",
-      "type": ["integer", "null"],
-      "minimum": 0,
-      "maximum": 2147483647
-    },
-    "event_id": {
-      "description": "The event's identifier in the tool",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "event_name": {
-      "description": "The event name in the tool",
-      "type": ["string", "null"],
-      "maxLength": 255
-    }
-  },
-  "required": ["tool"],
-  "additionalProperties": false
-}
-```

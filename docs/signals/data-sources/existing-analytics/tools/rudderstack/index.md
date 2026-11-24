@@ -32,7 +32,9 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository that loads the RudderStack SDK:
 
 ```text
-Use the Snowplow existing-analytics skill to send our RudderStack events to Snowplow with the client-side approach. Test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our RudderStack events
+to Snowplow with the client-side approach. Test against my Console
+development environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the Snowplow tracker, the adapter, and the custom integration next to your RudderStack snippet, sends test events, and checks that none failed. You still add the Custom Device Mode destination in your RudderStack workspace and give the agent its destination ID. For the server-side approaches, the agent gives you the transformation code or the HTTP Webhook mapping values to paste into your RudderStack workspace.
@@ -86,6 +88,10 @@ When the events look right, point the tracker at your pipeline's Collector.
 ## Set up the server-side approaches
 
 The server-side approaches run in your RudderStack workspace and cover RudderStack's server and mobile SDKs too. RudderStack's `anonymousId` becomes `domain_userid`, so read these attributes from your backend, not the public intervention endpoint. There are no sessions or page pings, and events arrive seconds after the call. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). If your Collector is behind a firewall, add RudderStack's outbound IP addresses to your allowlist.
+
+:::note[Not yet validated in a full workspace]
+The transformation was tested on a self-hosted RudderStack server, and the HTTP Webhook mappings were checked by review only. Neither has run in a RudderStack Cloud workspace yet, and nor has the client-side Custom Device Mode destination. Check it against your development environment before you go live.
+:::
 
 If your workspace can't use transformations, add an **HTTP Webhook** destination instead, with URL `https://collector.example.com/i`, method `GET`, no authentication, and batching off. Build the Collector request from query parameter mappings, not the JSONata body template, and copy each value exactly from the [HTTP Webhook mappings](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/rudderstack.md#server-side-without-code-http-webhook-mappings) in the setup reference. The mappings send `messageId` as the event ID, which Snowplow requires to be a UUID, so use the transformation for sources whose `messageId` may not be one. The mappings also check only for a currency, so an ecommerce event with a currency but no order ID, price, or product ID fails validation. Then set the `aid` mapping to your app ID, and use your vendor in the `external_event` and `external_identity` schema URIs inside the `ue_pr` and `co` values. Connect the destination to your sources and enable it, then test it with your Console development environment's Collector endpoint followed by `/i`, and check for the same events as the [client-side approach](#check-it-works), except page pings and sessions.
 

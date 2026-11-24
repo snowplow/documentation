@@ -31,7 +31,9 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository for your site:
 
 ```text
-Use the Snowplow existing-analytics skill to send our GA4 events to Snowplow with Snowplow tags in our web Google Tag Manager container. Test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our GA4 events to
+Snowplow with Snowplow tags in our web Google Tag Manager container.
+Test against my Console development environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then finds how your site loads GA4 and gives you the exact tags, variables, and triggers to create in your GTM container, including the code for the Custom JavaScript variables. For the page script approach, it adds the tracker and mapping file to your site itself. You still create the tags in GTM, set their consent requirements, and publish the container, unless your agent has browser access to GTM.
@@ -155,6 +157,10 @@ Use the [page script](https://github.com/snowplow/skills/blob/main/plugins/snowp
 ### Server-side GTM
 
 [Server-side GTM](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/ga4-and-google-tag-manager.md#server-side-gtm) adds the **Snowplow** tag to a server-side GTM container that already receives your GA4 hits through the GA4 client. Your tagging server needs an `https://` URL, set in **Admin**, then **Container Settings**, under **Server container URLs**. You fire the tag on a Custom trigger where **Client Name** equals your GA4 client's name, map events to schemas under **Advanced Event Settings**, and add `external_identity` under **Context entities**, using your vendor in both schema URIs. Events you don't map keep the tag's defaults: recommended events such as `sign_up` arrive with `com.google.tag-manager.server-side` schemas, `user_engagement` with `com.google.ga4`, and Enhanced Measurement events such as `scroll` with `com.google.ga4.enhanced-measurement`. It has no Snowplow sessions and no key that's safe on the public intervention endpoint. For the tag, see [Google Tag Manager server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md). For consent, see [Gate server-side GTM on Consent Mode](/docs/signals/data-sources/existing-analytics/how-it-works/privacy-and-consent/index.md#gate-server-side-gtm-on-consent-mode).
+
+:::note[Not yet validated in a full workspace]
+The tag was tested in a server container on a local tagging server, not yet on a hosted tagging server with an `https://` URL. Check it against your development environment before you go live.
+:::
 
 ### Warehouse history: BigQuery export
 

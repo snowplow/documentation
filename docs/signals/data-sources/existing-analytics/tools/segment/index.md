@@ -32,7 +32,9 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository that loads analytics.js:
 
 ```text
-Use the Snowplow existing-analytics skill to send our Segment events to Snowplow with the client-side approach. Test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our Segment events to
+Snowplow with the client-side approach. Test against my Console
+development environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the Snowplow tracker and the destination plugin next to your Segment snippet, sends test events, and checks that none failed. For the server-side approach, it gives you the Destination Function code to paste into your Segment workspace.
@@ -82,6 +84,10 @@ When the events look right, point the tracker at your pipeline's Collector, and 
 ## Set up the server-side approach
 
 A Destination Function maps each event Segment receives and posts it to your Collector. Segment's `anonymousId` becomes `domain_userid`, so read these attributes from your backend, not the public intervention endpoint. There are no sessions or page pings, and events arrive seconds later through Segment's queue. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). Segment bills function execution time beyond its free allotment.
+
+:::note[Not yet validated in a full workspace]
+This approach was tested by running the function code outside Segment, not yet as a Destination Function in a Segment workspace. Check it against your development environment before you go live.
+:::
 
 <Steps>
 

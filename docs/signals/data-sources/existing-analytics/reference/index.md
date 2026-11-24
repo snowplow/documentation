@@ -20,7 +20,7 @@ The adapters send `iglu:com.example/external_event/jsonschema/1-0-0` and attach 
 
 ### Copy the schemas
 
-Copy [`external_event.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json) and [`external_identity.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_identity.json) from the `existing-analytics` skill. The same JSON is on the [`external_event`](/docs/signals/data-sources/existing-analytics/reference/external-event/index.md#create-the-schema-in-your-registry) and [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md#create-the-schema-in-your-registry) pages.
+Copy [`external_event.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_event.json) and [`external_identity.json`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/schemas/external_identity.json) from the `existing-analytics` skill.
 
 ### Set your vendor
 

@@ -36,7 +36,9 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository that configures the Web SDK:
 
 ```text
-Use the Snowplow existing-analytics skill to send our Adobe Web SDK events to Snowplow with the onBeforeEventSend callback. Test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our Adobe Web SDK
+events to Snowplow with the onBeforeEventSend callback. Test against my
+Console development environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the shared script and the Web SDK mapping to your site, asks you for your XDM field paths, adds the callback, sends test events, and checks that none failed. If you deploy the Web SDK, AppMeasurement, or event forwarding with Tags, the agent gives you the code and settings to add in Adobe Experience Platform Data Collection, and you publish the library yourself.
@@ -86,7 +88,7 @@ If you deploy the Web SDK with Tags, add this to the **On before event send call
 try { if (window.snowplowAdobe && window.snowplowAdobe.mirrorXdm) window.snowplowAdobe.mirrorXdm(content); } catch (e) {}
 ```
 
-Keep the `try` and `catch`, and never return `false`: either would stop the event for Adobe too.
+Keep the `try` and `catch`, and never return `false`: either would stop the event for Adobe too. The Tags extension setup hasn't yet been validated in a full Adobe Tags property, so check it against your development environment before you publish the library.
 
 ### Gate the tracker on consent
 
@@ -134,6 +136,10 @@ If your site pushes events to the Adobe Client Data Layer (`adobeDataLayer`), yo
 ### Event forwarding
 
 Event forwarding runs a rule on Adobe's servers for each Web SDK or Mobile SDK event that reaches the Edge Network, and posts a Snowplow event to your Collector. Nothing changes in the browser or the app. It has no Snowplow sessions, the visitor key is the ECID, and values arrive later than client-side. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay). Adobe includes event forwarding with Real-Time CDP Connections, Prime, and Ultimate.
+
+:::note[Not yet validated in a full workspace]
+The converter was tested outside Adobe's runtime, not yet in an event forwarding property. Check it against your development environment before you go live.
+:::
 
 In your event forwarding property, create a **Core Custom Code** data element, for example `snowplow body`, that holds [`event-forwarding-converter.js`](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/scripts/adobe/event-forwarding-converter.js) and the [closing lines from the reference](https://github.com/snowplow/skills/blob/main/plugins/snowplow/skills/existing-analytics/references/adobe.md#event-forwarding). In the converter, set `VENDOR` to your vendor, `aid` to your app ID, and `slots` to the same XDM paths as `FIELDS` in `web-sdk-mapping.js`, and change `searchQuery`, `loginTypes`, and `userNamespaces` if yours differ. Then install the **Adobe Cloud Connector** extension, and create a rule with a **Make Fetch Call** action that sends a `POST` to `https://<your collector>/com.snowplowanalytics.snowplow/tp2`, with the header `Content-Type: application/json` and the `snowplow body` data element as the body. Publish the event forwarding library.
 

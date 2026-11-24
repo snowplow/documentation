@@ -16,7 +16,7 @@ content_type: reference
 | Type | Self-describing event |
 | Sent with | The [`external_identity`](/docs/signals/data-sources/existing-analytics/reference/external-identity/index.md) entity |
 
-`external_event` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schema in your registry](#create-the-schema-in-your-registry).
+`external_event` isn't on Iglu Central: you create it in your own registry before you set up an adapter. See [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
 
 ## Fields
 
@@ -111,81 +111,3 @@ signup_only = Criteria(
 ```
 
 When you need a property that isn't on this schema, track that event with a schema of your own. See [Move to native Snowplow tracking](/docs/signals/data-sources/existing-analytics/move-to-native-tracking/index.md).
-
-## Create the schema in your registry
-
-In Console, create this schema as an event with the JSON editor, replacing `com.example` in `self.vendor` with your vendor. See [Create a data structure with the JSON editor](/docs/event-studio/data-structures/create/index.md#create-a-data-structure-with-the-json-editor). Then deploy it to your development environment and promote it to production. Change nothing else in the schema: the adapters depend on its field names and limits. If you set up with an agent, the `existing-analytics` skill in the [Snowplow plugin](/docs/ai/skills/index.mdx) creates it for you. For both schemas together, see [Create the schemas in your registry](/docs/signals/data-sources/existing-analytics/reference/index.md#create-the-schemas-in-your-registry).
-
-
-```json
-{
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "description": "An event first tracked by another analytics tool and sent to Snowplow, for events that no more specific Snowplow schema describes",
-  "self": {
-    "vendor": "com.example",
-    "name": "external_event",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  },
-  "type": "object",
-  "properties": {
-    "name": {
-      "description": "The event name in the source tool",
-      "type": "string",
-      "maxLength": 255
-    },
-    "tool": {
-      "description": "The tool that first tracked the event, in lower case",
-      "type": "string",
-      "pattern": "^[a-z0-9_.-]+$",
-      "maxLength": 64
-    },
-    "kind": {
-      "description": "The type of call in the source tool",
-      "type": "string",
-      "enum": ["track", "identify", "group", "alias", "screen", "page"]
-    },
-    "value": {
-      "description": "A monetary or numeric value carried by the event",
-      "type": ["number", "null"]
-    },
-    "currency": {
-      "description": "ISO 4217 currency code for value",
-      "type": ["string", "null"],
-      "pattern": "^[A-Z]{3}$"
-    },
-    "item_id": {
-      "description": "Identifier of the item the event refers to",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "item_category": {
-      "description": "Category of the item the event refers to",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "search_term": {
-      "description": "Search term carried by the event",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "plan": {
-      "description": "Plan or tier carried by the event",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "group_id": {
-      "description": "Identifier of the group or account the event refers to",
-      "type": ["string", "null"],
-      "maxLength": 255
-    },
-    "previous_id": {
-      "description": "Previous user identifier, for alias calls",
-      "type": ["string", "null"],
-      "maxLength": 255
-    }
-  },
-  "required": ["name", "tool", "kind"],
-  "additionalProperties": false
-}
-```

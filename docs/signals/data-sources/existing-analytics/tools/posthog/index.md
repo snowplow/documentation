@@ -33,7 +33,9 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository that calls `posthog.init`:
 
 ```text
-Use the Snowplow existing-analytics skill to send our PostHog events to Snowplow with the client-side before_send approach. Test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our PostHog events to
+Snowplow with the client-side before_send approach. Test against my
+Console development environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the Snowplow tracker, the converter script, and the `before_send` hook next to your PostHog snippet, sends test events, and checks that none failed. For the HTTP Webhook destination, it gives you the Hog source and the inputs to set, and you create the destination in PostHog yourself.

@@ -35,7 +35,10 @@ npx plugins add snowplow/skills
 Then ask your agent, in the repository that calls `amplitude.init`:
 
 ```text
-Use the Snowplow existing-analytics skill to send our Amplitude events to Snowplow with the client-side destination plugin. Gate it on our existing consent tool, and test against my Console development environment first.
+Use the Snowplow existing-analytics skill to send our Amplitude events
+to Snowplow with the client-side destination plugin. Gate it on our
+existing consent tool, and test against my Console development
+environment first.
 ```
 
 The agent first creates the `external_event` and `external_identity` schemas in your registry, under your vendor, if they don't exist yet. It then adds the Snowplow tracker, the converter, and the destination plugin next to your `amplitude.init` call, sends test events, and checks that none failed. For the Webhook destination, it gives you the template and settings, and you create the destination in Amplitude yourself, with the Admin or Manager role.
@@ -91,6 +94,10 @@ When the events look right, point the tracker at your pipeline's Collector, and 
 ## Set up the Webhook destination
 
 Amplitude's Webhook destination formats each event with a FreeMarker template and posts it straight to your Collector, with no service in between. It covers every source Amplitude streams, including server SDKs, the HTTP API, and mobile apps. Check that your Amplitude plan includes the Webhook destination.
+
+:::note[Not yet validated in a full workspace]
+The template was tested by rendering it with FreeMarker and sending the result to a Collector, not yet from a Webhook destination in an Amplitude project. Check it against your development environment before you go live.
+:::
 
 The webhook keys visitors on Amplitude's `device_id`, which a `?deviceId=` link can set, so read these attributes from your backend only. Amplitude's documented delivery target is 60 seconds at the 95th percentile, so don't rely on this approach for reactions within a page view. See [Delivery and delay](/docs/signals/data-sources/existing-analytics/index.md#delivery-and-delay).
 

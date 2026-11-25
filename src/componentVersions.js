@@ -21,7 +21,7 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
-  collector: '3.9.0',
+  collector: '3.10.0',
   enrich: '6.15.0',
   dataflowRunner: '0.7.10',
   snowbridge: '6.1.0',

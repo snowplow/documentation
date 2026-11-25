@@ -243,6 +243,7 @@ const sidebars = {
         indexClassName: 'hidden',
         exclude: [
           'signals/applications/agentic-contexts',
+          'signals/applications/agentic-attributes',
           'signals/applications/mcp-server',
           'signals/applications/predictive-attributes',
           'signals/applications/subscribe',
@@ -255,6 +256,10 @@ const sidebars = {
       pick('signals/agentic-contexts', { label: 'Define agentic contexts' }),
       pick('signals/applications/agentic-contexts', { label: 'Retrieve agentic contexts' }),
       pick('signals/applications/mcp-server'),
+    ], { collapsible: true, collapsed: true }),
+    group('Classify sessions with AI', [
+      pick('signals/agentic-attributes', { label: 'Define agentic attributes' }),
+      pick('signals/applications/agentic-attributes', { label: 'Retrieve agentic attributes' }),
     ], { collapsible: true, collapsed: true }),
     group('Intervene', [
       pick('signals/interventions', { label: 'Define interventions' }),

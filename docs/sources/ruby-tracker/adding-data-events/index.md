@@ -185,7 +185,7 @@ end
 
 Similarly, the `domain_session_id` and `domain_session_idx` values are saved in the first-party `_sp_ses` and `_sp_id` cookies. If you configured the JavaScript tracker with a different “cookieName” option, then these cookies will be named differently.
 
-The `network_user_id` derives from the event collector's third-party cookie, hence the name "network" as it is set at a network level. It is the server-side user identifier. The cookie is named `sp` (Snowplow Micro pipelines call it `micro` instead). The default behavior is for the collector to provide a new cookie/network user ID for each event it receives. You can override the collector cookie's value with your own generated ID using the `set_network_user_id` method.
+The `network_user_id` derives from the event Collector's third-party cookie, hence the name "network" as it is set at a network level. It is the server-side user identifier. The cookie is named `sp` (Snowplow Micro pipelines call it `micro` instead). The default behavior is for the Collector to provide a new cookie/network user ID for each event it receives. To set the `network_user_id` to your own generated ID instead, use the `set_network_user_id` method. Calling `set_network_user_id` changes the ID recorded with the event, not the cookie the Collector sets.
 
 The user fingerprint is also a client-side concept. The JavaScript Tracker generates a fingerprint based on browser features and attaches it to all client-side events. You could develop your own fingerprints to attach to your Ruby server-side events with `set_fingerprint`.
 

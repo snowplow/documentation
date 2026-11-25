@@ -24,7 +24,7 @@ export const versions = {
   collector: '3.9.0',
   enrich: '6.15.0',
   dataflowRunner: '0.7.10',
-  snowbridge: '6.1.0',
+  snowbridge: '6.3.0',
 
   // Loaders
   bqLoader: '2.2.2',

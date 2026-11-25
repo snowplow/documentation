@@ -291,7 +291,7 @@ The loader automatically detects and decompresses zstd- or gzip-compressed Kines
 
 #### Monitoring
 
-The loader exposes runtime metrics and health information through several optional integrations:
+The loader exposes runtime metrics and health information through several optional integrations. See [Monitoring the Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/monitoring/index.md) for the list of metrics and for how to configure each protocol.
 
 | Name | Description |
 | ---- | ----------- |
@@ -299,11 +299,11 @@ The loader exposes runtime metrics and health information through several option
 | `monitoring.metrics.statsd.port` | Optional. Port of the StatsD server. Default: `8125`. |
 | `monitoring.metrics.statsd.tags` | Optional. Map of key/value pairs sent along with each metric. |
 | `monitoring.metrics.statsd.period` | Optional. How often to report metrics. Default: `"1 minute"`. |
-| `monitoring.metrics.statsd.prefix` | Optional. Prefix for metric names. |
+| `monitoring.metrics.statsd.prefix` | Optional. Prefix for metric names, e.g. `snowplow.elasticsearch.loader`. |
 | `monitoring.metrics.prometheus.tags` | Optional. Map of key/value pairs used as common labels on all Prometheus metrics. The loader exposes these metrics at the `/metrics` endpoint on the health probe port (see `monitoring.healthProbe.port`). |
 | `monitoring.sentry.dsn` | Optional. Sentry DSN for reporting unexpected runtime exceptions. |
 | `monitoring.sentry.tags` | Optional. Map of key/value pairs included as tags on Sentry events. |
-| `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. |
+| `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. The loader also exposes Prometheus metrics at `/metrics` on this port. Default: `8000`. |
 | `monitoring.healthProbe.unhealthyLatency` | Optional. The health probe becomes unhealthy if any received event has not been fully processed before this cutoff time. Default: `"2 minutes"`. |
 
 #### Telemetry
@@ -312,6 +312,12 @@ The loader exposes runtime metrics and health information through several option
 | ---- | ----------- |
 | `telemetry.disable` | Optional. Set to `true` to disable telemetry. Default: `false`. |
 | `telemetry.userProvidedId` | Optional. Identifier to tie events together across modules and infrastructure. |
+
+## Monitor the loader
+
+The Elasticsearch Loader reports metrics covering event counts and latency. It can send them to StatsD, to Prometheus, or to both.
+
+See [Monitoring the Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/monitoring/index.md) for the full list of metrics and for how to configure each protocol.
 
 ## Check document count
 

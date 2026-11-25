@@ -1,19 +1,20 @@
 ---
 title: "Retrieve agentic attributes in your application"
-sidebar_position: 27
+sidebar_position: 25.5
 sidebar_label: "Agentic attributes"
 description: "Fetch the value an LLM decided for a user's session from Snowplow Signals, together with the model's reasoning, to personalize your application."
 keywords: ["agentic attribute", "llm", "session intent", "signals api", "justification"]
 date: "2026-10-09"
+content_type: how-to
 ---
 
-:::note[Private preview]
-Agentic attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
+:::note[Public preview]
+Agentic attributes are in public preview. Their configuration, API, and behavior may change in ways that aren't backward compatible before they're generally available.
 :::
 
 Once an agentic attribute is [published](/docs/signals/agentic-attributes/index.md), fetch its value in your application to react to the model's judgment of a user's session, for example to offer help to a user the model classifies as stuck. Each value comes with the model's reasoning.
 
-An agentic attribute is stored per session, so you retrieve it for a specific `domain_sessionid` value. Retrieve it using the [Signals API](/docs/signals/connection/index.md#signals-api). Every request needs a Bearer token, as described in [Authenticate to the Signals API](/docs/signals/connection/index.md#authenticate-to-the-signals-api).
+An agentic attribute is stored per session, so you retrieve it for a specific `domain_sessionid` value. Retrieve it using the [Signals API](/docs/signals/connection/index.md#signals-api). Every request needs a Bearer token, as described in [Get an access token](/docs/signals/connection/index.md#get-an-access-token).
 
 ## Get the session identifier
 

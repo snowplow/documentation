@@ -5,10 +5,11 @@ sidebar_label: "Define agentic attributes"
 description: "Configure agentic attributes in Snowplow Signals to have an LLM classify a user's session from their recent activity, and read the result and its reasoning in your application."
 keywords: ["agentic attribute", "llm", "ai classification", "session intent", "agentic context", "signals api"]
 date: "2026-10-09"
+content_type: how-to
 ---
 
-:::note[Private preview]
-Agentic attributes are in private preview. Contact Snowplow to enable them for your Signals deployment. The configuration and API described here may change.
+:::note[Public preview]
+Agentic attributes are in public preview. Their configuration, API, and behavior may change in ways that aren't backward compatible before they're generally available.
 :::
 
 An agentic attribute is a value that an LLM decides for a user's session, together with its reasoning. You write a goal, for example "classify this session's booking intent from recent funnel activity", and list the answers the model can choose from. When the session matches your trigger criteria, Signals sends the user's recent activity to the model and stores its answer.
@@ -34,7 +35,7 @@ An agentic attribute isn't a stream attribute. You can't use it in intervention 
 
 ## Create an agentic attribute
 
-You define agentic attributes through the [Signals API](/docs/signals/connection/index.md#signals-api). Every request needs a Bearer token, as described in [Authenticate to the Signals API](/docs/signals/connection/index.md#authenticate-to-the-signals-api).
+You define agentic attributes through the [Signals API](/docs/signals/connection/index.md#signals-api). Every request needs a Bearer token, as described in [Get an access token](/docs/signals/connection/index.md#get-an-access-token).
 
 This example classifies whether a session is progressing, stuck, or exploring. It's evaluated once the session has run at least four searches:
 

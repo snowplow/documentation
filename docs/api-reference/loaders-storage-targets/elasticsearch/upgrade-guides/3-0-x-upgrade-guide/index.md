@@ -22,7 +22,7 @@ The Elasticsearch Loader no longer supports NSQ as an input or output. Only Kine
 
 ### Remove CloudWatch metrics
 
-The `monitoring.metrics.cloudWatch` config option is removed. Metrics are now reported via [StatsD](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md#monitoring) or exposed via a [Prometheus `/metrics` endpoint](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md#monitoring).
+The `monitoring.metrics.cloudWatch` config option is removed. Metrics are now reported via [StatsD](/docs/api-reference/loaders-storage-targets/elasticsearch/monitoring/index.md#statsd) or exposed via a [Prometheus `/metrics` endpoint](/docs/api-reference/loaders-storage-targets/elasticsearch/monitoring/index.md#prometheus).
 
 ### Remove Snowplow monitoring
 

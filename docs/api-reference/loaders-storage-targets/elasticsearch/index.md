@@ -291,7 +291,7 @@ The loader automatically detects and decompresses zstd- or gzip-compressed Kines
 
 #### Monitoring
 
-The loader exposes runtime metrics and health information through several optional integrations. See [Monitoring the Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/monitoring/index.md) for the list of metrics and for how to configure each protocol.
+The loader exposes runtime metrics and health information through several optional integrations:
 
 | Name | Description |
 | ---- | ----------- |
@@ -303,7 +303,7 @@ The loader exposes runtime metrics and health information through several option
 | `monitoring.metrics.prometheus.tags` | Optional. Map of key/value pairs used as common labels on all Prometheus metrics. The loader exposes these metrics at the `/metrics` endpoint on the health probe port (see `monitoring.healthProbe.port`). |
 | `monitoring.sentry.dsn` | Optional. Sentry DSN for reporting unexpected runtime exceptions. |
 | `monitoring.sentry.tags` | Optional. Map of key/value pairs included as tags on Sentry events. |
-| `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. The loader also exposes Prometheus metrics at `/metrics` on this port. Default: `8000`. |
+| `monitoring.healthProbe.port` | Optional. Port for the HTTP health probe server. Returns `200 OK` when healthy. Default: `8000`. |
 | `monitoring.healthProbe.unhealthyLatency` | Optional. The health probe becomes unhealthy if any received event has not been fully processed before this cutoff time. Default: `"2 minutes"`. |
 
 #### Telemetry

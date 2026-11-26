@@ -9,13 +9,13 @@ We recommend that you schedule a compaction job to run once per day.
 
 The compaction command depends on your table's [layout](/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/index.md).
 
-On a table partitioned by `event_name` or `app_id`, your daily compaction job should operate on files that were loaded in the previous calendar day, i.e. the last completed timestamp partition.  For example, if you run the job via SQL, then use a `WHERE` clause on `load_tstamp_date < current_date()`:
+On a table partitioned by `load_tstamp_date` and `event_name` or `app_id`, your daily compaction job should operate on files that were loaded in the previous calendar day, i.e. the last completed timestamp partition.  For example, if you run the job via SQL, then use a `WHERE` clause on `load_tstamp_date < current_date()`:
 
 ```sql
 OPTIMIZE <your_table> WHERE load_tstamp_date < current_date()
 ```
 
-On a time-only table, which isn't partitioned and uses liquid clustering on `load_tstamp`, run `OPTIMIZE` on the whole table. Liquid clustering is incremental: each run mostly rewrites the files written since the previous run, so the daily job doesn't grow with the size of your table:
+On a table with the liquid clustering layout, which isn't partitioned, run `OPTIMIZE` on the whole table. Liquid clustering is incremental: each run mostly rewrites the files written since the previous run, so the daily job doesn't grow with the size of your table:
 
 ```sql
 OPTIMIZE <your_table>
@@ -27,9 +27,9 @@ Data compaction has two benefits for Snowplow data:
 2. When there are fewer data files, the size of the table's delta log files is smaller.  This reduces the overhead of creating a new delta log file, and thus improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
 
 
-## Cluster a time-only table by event type
+## Cluster by event type as well as time
 
-A time-only table, which isn't partitioned and uses liquid clustering on `load_tstamp`, starts out clustered by `load_tstamp` alone. That suits models that read every event type. If you later run models that target specific events, add `event_name` (or `app_id`) as a second clustering key:
+A table with the liquid clustering layout starts out clustered by `load_tstamp` alone. That suits models that read every event type. If you later run models that target specific events, add `event_name` (or `app_id`) as a second clustering key:
 
 ```sql
 ALTER TABLE <your_table> CLUSTER BY (load_tstamp, event_name)

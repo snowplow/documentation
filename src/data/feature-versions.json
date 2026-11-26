@@ -146,7 +146,7 @@
       "href": "/docs/testing/snowplow-micro/ui/#filter-events"
     },
     "lake-loader-table-layout": {
-      "label": "Lake Loader: partition by app_id, or a time-only Delta table with liquid clustering",
+      "label": "Lake Loader: partition by app_id, or a Delta table with liquid clustering",
       "component": "lakeLoader",
       "since": "0.16.0",
       "href": "/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/"

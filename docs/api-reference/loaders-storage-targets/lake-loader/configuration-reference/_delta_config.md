@@ -33,6 +33,6 @@ import Link from '@docusaurus/Link';
         <li><code>null</code>: the table isn't partitioned, and uses liquid clustering on <code>load_tstamp</code></li>
       </ul>
       <p>Only an explicit <code>null</code> turns partitioning off. If you leave the setting out, the loader partitions by <code>event_name</code>.</p>
-      <p>The loader applies the layout when it creates the table. If the table already exists and its partitioning doesn't match this setting, the loader stops with a setup error. The loader never checks a time-only table's clustering keys, so you can change them in Databricks without changing this setting.</p>
+      <p>The loader applies the layout when it creates the table. If the table already exists and its partitioning doesn't match this setting, the loader stops with a setup error. The loader never checks a liquid clustering table's clustering keys, so you can change them in Databricks without changing this setting.</p>
     </td>
 </tr>

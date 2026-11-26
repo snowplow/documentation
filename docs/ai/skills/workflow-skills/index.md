@@ -15,6 +15,10 @@ The Snowplow Workflows skills are a set of agent skills for multi-step Snowplow 
 
 The Snowplow Workflows skills complement the official Snowplow plugin. They don't replace it. The official plugin, from [`snowplow/skills`](https://github.com/snowplow/skills), installs the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Console-facing Snowplow [skills](/docs/ai/skills/index.mdx). The Snowplow Workflows plugin ships skills only, with no MCP server of its own. Whenever a workflow skill needs to read or write Console, such as publishing a schema or creating an event specification, it calls the Snowplow MCP server's tools. Install both plugins.
 
+:::note[Field skills with best-effort support]
+The Snowplow Workflows skills are field skills maintained by Snowplow's field team, not part of the supported Snowplow product. Support is best-effort. To report a problem or request a skill, open an issue in the [`snowplow-agent-skills`](https://github.com/snowplow-industry-solutions/snowplow-agent-skills) repository. For product support, use the official Snowplow plugin and the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+:::
+
 Use the Snowplow Workflows skills when you want your coding agent to carry a task from start to finish in your repository, for example from "we should track checkout" through to validated events in Micro. For a single Console question or action, the official skills and the Snowplow MCP server are enough on their own.
 
 ## Before you begin
@@ -98,7 +102,7 @@ npx skills@latest add https://github.com/snowplow-industry-solutions/snowplow-ag
 
 ### Restart your agent and authorize the MCP server
 
-If your agent was running during the install, restart it so it loads the new skills. The first time a skill calls the Snowplow MCP server, your agent opens a browser window to log in to Console. The agent then has the same permissions as your Console user. To use an API key instead of OAuth, see [Authentication](/docs/ai/snowplow-mcp/index.md#authentication).
+Restart your agent after installing both plugins. The agent loads skills when it starts, so it doesn't see the new skills until you restart it. The first time a skill calls the Snowplow MCP server, your agent opens a browser window to log in to Console. The agent then has the same permissions as your Console user. To use an API key instead of OAuth, see [Authentication](/docs/ai/snowplow-mcp/index.md#authentication).
 
 ### Set up your project context
 
@@ -221,4 +225,4 @@ Example prompts:
 
 For more on the warehouse tables, see [warehouses and lakes](/docs/destinations/warehouses-lakes/index.md).
 
-To report a problem or request a skill, open an issue in the [`snowplow-agent-skills`](https://github.com/snowplow-industry-solutions/snowplow-agent-skills) repository. For the Console-facing skills, see the [skills library](/docs/ai/skills/index.mdx), and for the tools they use, see the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
+To report a problem with the Snowplow Workflows skills, open an issue in the [`snowplow-agent-skills`](https://github.com/snowplow-industry-solutions/snowplow-agent-skills) repository. For the Console-facing skills, see the [skills library](/docs/ai/skills/index.mdx), and for the tools they use, see the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).

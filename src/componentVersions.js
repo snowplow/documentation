@@ -35,7 +35,7 @@ export const versions = {
   rdbLoader: '6.10.0',
   s3Loader: '3.3.0',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.15.0',
+  lakeLoader: '0.16.0',
   snowflakeStreamingLoader: '0.6.2',
   databricksStreamingLoader: '0.5.0',
 

@@ -150,6 +150,12 @@
       "component": "lakeLoader",
       "since": "0.16.0",
       "href": "/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/"
+    },
+    "lake-loader-iceberg-date-partitioned": {
+      "label": "Lake Loader: an Iceberg table partitioned by date alone",
+      "component": "lakeLoader",
+      "since": "0.17.0",
+      "href": "/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/"
     }
   }
 }

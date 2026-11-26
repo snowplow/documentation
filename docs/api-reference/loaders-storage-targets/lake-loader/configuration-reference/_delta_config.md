@@ -30,7 +30,7 @@ import Link from '@docusaurus/Link';
       <ul>
         <li><code>event_name</code>: the table is partitioned by <code>load_tstamp_date</code> and <code>event_name</code></li>
         <li><code>app_id</code>: the table is partitioned by <code>load_tstamp_date</code> and <code>app_id</code></li>
-        <li><code>null</code>: the table isn't partitioned, and uses liquid clustering on <code>load_tstamp</code></li>
+        <li><code>null</code>: the table isn't partitioned, and uses liquid clustering on <code>load_tstamp</code>. The loader groups each commit into files by the table's clustering keys, reading them when it starts.</li>
       </ul>
       <p>Only an explicit <code>null</code> turns partitioning off. If you leave the setting out, the loader partitions by <code>event_name</code>.</p>
       <p>The loader applies the layout when it creates the table. If the table already exists and its partitioning doesn't match this setting, the loader stops with a setup error. The loader never checks a liquid clustering table's clustering keys, so you can change them in Databricks without changing this setting.</p>

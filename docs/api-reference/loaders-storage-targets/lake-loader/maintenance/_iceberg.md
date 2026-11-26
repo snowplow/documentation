@@ -35,6 +35,18 @@ CALL catalog_name.system.rewrite_data_files(
 );
 ```
 
+On a table partitioned by date, which means by `day(load_tstamp)` alone, the default bin-pack strategy merges files of different event types together. Bin-packing suits a table you mostly query for every event type. If you also run event-specific queries over older data, use the sort strategy for your daily compaction job instead of the default bin-pack. It sorts by the table's sort order, which is `event_name, load_tstamp` unless you've changed it, so that each compacted file holds only a few event types:
+
+```sql
+CALL catalog_name.system.rewrite_data_files(
+    table => 'snowplow.events',
+    strategy => 'sort',
+    where => 'load_tstamp < current_date()'
+);
+```
+
+A sort compaction costs more compute than a bin-pack, typically one and a half to two times as much, and needs more local disk on the workers that run it. Not every engine offers one: Amazon Athena's `OPTIMIZE`, for example, only bin-packs. See [Choose a table layout for your lake](/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/index.md).
+
 The `rewriteDataFiles` action has two benefits for Snowplow data:
 
 1. Queries are more efficient when the underlying parquet files are large.  After you compact your files, you will benefit from this whenever you run queries over your historic data, i.e. not just the most recently loaded events.

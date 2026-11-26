@@ -37,7 +37,7 @@ ALTER TABLE <your_table> CLUSTER BY (load_tstamp, event_name)
 
 From then on, every `OPTIMIZE` groups files by event type as well as by time. Once compacted, event-specific queries read about as little as they do on a compacted partitioned table, and a query that mixes `event_name` with another column in an `OR` can skip files too, which it can't do on a partitioned Delta table. The trade-off is compaction cost: clustering on two keys costs several times as much compute as compacting a partitioned table. Freshly loaded data isn't clustered until `OPTIMIZE` runs, so a second clustering key helps queries over older data more than queries over the last few hours.
 
-The Lake Loader doesn't check a table's clustering keys, so you can change them without stopping the loader or changing its configuration.
+The Lake Loader accepts any clustering keys, so you can change them without stopping the loader or changing its configuration. The loader reads the clustering keys when it starts, and groups each commit's files by event type (or by `app_id`, if the keys include `app_id` but not `event_name`), so fresh files already roughly match what `OPTIMIZE` produces.
 
 Don't cluster on `event_name` alone. Without `load_tstamp` as a clustering key, compacted files lose their time order, and every incremental query opens every recent file.
 

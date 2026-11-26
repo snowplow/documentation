@@ -35,7 +35,7 @@ A table with the liquid clustering layout starts out clustered by `load_tstamp` 
 ALTER TABLE <your_table> CLUSTER BY (load_tstamp, event_name)
 ```
 
-From then on, every `OPTIMIZE` groups files by event type as well as by time. Once compacted, event-specific queries read much less than on a table clustered by `load_tstamp` alone, and a query that mixes `event_name` with another column in an `OR` can skip files too, which it can't do on a partitioned Delta table. The trade-off is compaction cost: clustering on two keys costs several times as much compute as compacting a partitioned table. Freshly loaded data isn't clustered until `OPTIMIZE` runs, so a second clustering key helps queries over older data more than queries over the last few hours.
+From then on, every `OPTIMIZE` groups files by event type as well as by time. Once compacted, event-specific queries read about as little as they do on a compacted partitioned table, and a query that mixes `event_name` with another column in an `OR` can skip files too, which it can't do on a partitioned Delta table. The trade-off is compaction cost: clustering on two keys costs several times as much compute as compacting a partitioned table. Freshly loaded data isn't clustered until `OPTIMIZE` runs, so a second clustering key helps queries over older data more than queries over the last few hours.
 
 The Lake Loader doesn't check a table's clustering keys, so you can change them without stopping the loader or changing its configuration.
 

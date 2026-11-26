@@ -33,7 +33,7 @@ The Python SDK is available for teams that prefer code-based workflows.
 
 ### Production-grade performance
 
-The Profiles API delivers 45ms p50 response times, enabling in-session personalization use cases like:
+The Profiles API delivers 6ms p50 and under 10ms p95 response times for simple attribute reads, enabling in-session personalization use cases like:
 
 * Dynamic pricing and offers
 * Contextual product recommendations

@@ -128,7 +128,7 @@ This table lists the fields in the default mapping, with a suggested ClickHouse 
 
 ## Troubleshooting
 
-The forwarder sorts ClickHouse errors into setup errors, which trigger [setup alerts](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md#configuring-setup-alerts), and data errors, which create failed events. It retries when ClickHouse reports it's overloaded, for example with `TOO_MANY_PARTS` or `TOO_MANY_SIMULTANEOUS_QUERIES`. See [Monitoring and troubleshooting](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md) for how to inspect failed events.
+The forwarder generates two types of ClickHouse errors: setup errors, which trigger [setup alerts](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md#configuring-setup-alerts), and data errors, which create failed events. It retries when ClickHouse reports it's overloaded, for example with `TOO_MANY_PARTS` or `TOO_MANY_SIMULTANEOUS_QUERIES`. See [Monitoring and troubleshooting](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md) for how to inspect failed events.
 
 | Error | Cause | Fix |
 | --- | --- | --- |

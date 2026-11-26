@@ -8,7 +8,7 @@ date: "2026-11-26"
 content_type: concept
 ---
 
-The table layout decides how the Lake Loader arranges your events table into files: which files a query has to open, how many files the loader writes, and how much work your compaction jobs do. The loader sets the layout when it creates the table, so you choose it before the loader first runs. For a short guide, see [Choose a layout](#choose-a-layout).
+The table layout decides how the Lake Loader arranges your events table into files: which files a query has to open, and how many files the loader writes. The loader sets the layout when it creates the table, so you choose it before the loader first runs. For a short guide, see [Choose a layout](#choose-a-layout).
 
 Every layout keeps the newest events together, so queries that filter on `load_tstamp`, including Snowplow's incremental data models, read only the files they need. The layouts differ in how they treat queries that also filter on `event_name` or `app_id`. Choose the layout that matches how you query your data. The difference to your total compute is a few percent either way, so it isn't a reason to migrate a table you already have.
 
@@ -34,7 +34,7 @@ If you use Snowplow's dbt packages, set the `snowplow__session_timestamp` variab
 
 ## How each layout arranges your files
 
-The Lake Loader commits a batch of events to the lake every few minutes. Every file in a commit has the same `load_tstamp`. The layouts differ in how each commit is split into files, and in what compaction does with those files afterwards.
+The Lake Loader commits a batch of events to the lake every few minutes. Every file in a commit has the same `load_tstamp`. The layouts differ in how each commit is split into files.
 
 A partitioned table gets a separate file for every event type in every commit, written into that event type's partition. A liquid clustering table gets roughly one file per CPU core of the loader in every commit, and each file holds a mix of event types. The diagram shows two commits, five minutes apart:
 
@@ -66,18 +66,22 @@ In text, the diagram shows:
 
 This leads to different strengths:
 
-- **Partitioned by `event_name`**: a query that filters on `event_name` goes straight to that event's partition and skips every other event type, on freshly loaded data and after any compaction. The cost is many more files, many of them small. A query that reads every event type opens all of them, which adds a few percent to the compute cost of models such as Snowplow's unified package. Partitioning by `app_id` works the same way for queries that filter on `app_id`.
-- **Liquid clustering**: a query that reads every event type over a recent time range opens far fewer files. A query that filters on `event_name` can't skip files by event type, so it reads every event in its time range. While the table is clustered by `load_tstamp` alone, compaction keeps mixing event types in every file.
+- **Partitioned by `event_name` or `app_id`**: a query that filters on the partition column goes straight to the matching partitions and skips the rest. The cost is many more files, many of them small: one for every event type, or every `app_id`, in every commit. A query that reads every event type opens all of them, which adds a few percent to the compute cost of models such as Snowplow's unified package.
+- **Liquid clustering**: a query that reads every event type over a recent time range opens far fewer files. A query that filters on `event_name` can't skip files by event type, so it reads every event in its time range.
 
-Compaction affects each layout differently. On a partitioned table, compaction merges each event type's small files into larger ones. On a liquid clustering table, `OPTIMIZE` merges files and clusters them by the table's clustering keys. See [Lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md).
+Every layout needs regular maintenance, because the Lake Loader writes new files every few minutes. Whichever layout you choose, schedule the jobs described in [Lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md).
 
 ## Choose a layout
 
-Choose by how you query your events table:
+Choose by what your queries mostly filter on, besides `load_tstamp`:
 
-- **Partitioned by `event_name`**: choose this if you run models or queries that target specific events, such as Snowplow's ecommerce or media player packages, your own event-specific models, or analysis of particular events. It keeps working whatever compaction you run. It's the default.
-- **Partitioned by `app_id`**: choose this if your queries mostly target one source application at a time, and you have only a few distinct `app_id` values. Every `app_id` gets its own partition per day, so many `app_id` values produce many small files.
-- **Liquid clustering**: choose this if you use the Delta format and your modeling mostly reads every event type, such as Snowplow's unified package on its own. It depends least on compaction, because reads of every event type are efficient even before compaction runs.
+- **Event type**: choose partitioned by `event_name`. This suits Snowplow's ecommerce and media player packages, your own event-specific models, and analysis of particular events. It's the default.
+- **Source application**: choose partitioned by `app_id`. This suits reporting on each website or mobile app separately, and Snowplow's dbt packages when you set the `snowplow__app_id` variable to model particular apps.
+- **Nothing else, because your modeling reads every event type**: choose liquid clustering, if you use the Delta format. This suits Snowplow's unified package on its own.
+
+A partitioned table gets a separate partition for every value of its partition column, every day, so every extra value adds more small files. Your tracking setup decides how many distinct `event_name` and `app_id` values you have, so check how many your events table contains before you choose a partition column.
+
+If your queries filter on both event type and source application, choose the one most of your queries use. If you're not sure, keep the default.
 
 ## What you can change after the table is created
 

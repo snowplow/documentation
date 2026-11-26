@@ -15,6 +15,8 @@ import clickhouseSchema from '@site/src/components/EventForwardingSchemaTable/Sc
 
 <IntegrationBadges id="forwarder-clickhouse" />
 
+<LifecycleBadge stage="preview" />
+
 Send Snowplow events to a table in [ClickHouse Cloud](https://clickhouse.com/cloud) for real-time analytics with SQL. The forwarder inserts events in batches through the ClickHouse [HTTP interface](https://clickhouse.com/docs/en/interfaces/http), and each mapped field becomes a column in your table.
 
 ClickHouse doesn't define a payload format for this integration. Instead, your table is the schema: you create the table, and you map Snowplow fields to its column names.
@@ -25,10 +27,10 @@ The ClickHouse integration is in Preview. It works with ClickHouse Cloud service
 
 Before you set up the forwarder in Console, you'll need:
 
-- A ClickHouse Cloud service, and its HTTPS host and port from the **Connect** screen in the ClickHouse Cloud console.
+- A ClickHouse Cloud service, and its HTTPS host and port from the **Connect** screen in the ClickHouse Cloud console
 - A table to receive events. Every field in your forwarder's mapping must have a column with the same name.
-- A ClickHouse user with the `INSERT` privilege on that table.
-- Network access from Snowplow to your service, if your service restricts connections with an IP access list.
+- A ClickHouse user with the `INSERT` privilege on that table
+- Network access from Snowplow to your service, if your service restricts connections with an IP access list
 
 ### Preview limitation: one bad event fails its batch
 
@@ -134,5 +136,5 @@ The forwarder sorts ClickHouse errors into setup errors, which trigger [setup al
 | `ACCESS_DENIED` or `NOT_ENOUGH_PRIVILEGES` | The user can't insert into the table. | Grant `INSERT` on the table to the forwarder's user. |
 | `UNKNOWN_DATABASE` or `UNKNOWN_TABLE` | The database or table name in the connection doesn't exist. | Check the names in the connection. Names are case-sensitive. |
 | `INCORRECT_DATA` or `NO_SUCH_COLUMN_IN_TABLE` | A mapped field has no matching column. | Add the column to your table, or remove the field from the mapping. |
-| `CANNOT_PARSE_...` or `TYPE_MISMATCH` | A value doesn't fit its column's type, for example a non-UUID string in a `UUID` column. | Change the column type, or change the mapping expression so it produces a valid value. The whole batch fails, as described in the [Preview limitation](#preview-limitation-one-bad-event-fails-its-batch). |
+| `CANNOT_PARSE_UUID`, `CANNOT_PARSE_DATETIME`, `CANNOT_PARSE_TEXT`, or `TYPE_MISMATCH` | A value doesn't fit its column's type, for example a non-UUID string in a `UUID` column. | Change the column type, or change the mapping expression so it produces a valid value. The whole batch fails, as described in the [Preview limitation](#preview-limitation-one-bad-event-fails-its-batch). |
 | Connection test fails or times out, and no events arrive | The service's IP access list blocks Snowplow, or the host is wrong. | Check the host against the **Connect** screen, and [allow connections from Snowplow](#allow-connections-from-snowplow). |

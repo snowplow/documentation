@@ -32,8 +32,8 @@
 
     { "id": "forwarder-amplitude", "name": "Amplitude", "href": "/docs/destinations/forwarding-events/integrations/amplitude/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
     { "id": "forwarder-bloomreach", "name": "Bloomreach", "href": "/docs/destinations/forwarding-events/integrations/bloomreach/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
-    { "id": "forwarder-clickhouse", "name": "ClickHouse", "href": "/docs/destinations/forwarding-events/integrations/clickhouse/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
     { "id": "forwarder-braze", "name": "Braze", "href": "/docs/destinations/forwarding-events/integrations/braze/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
+    { "id": "forwarder-clickhouse", "name": "ClickHouse", "href": "/docs/destinations/forwarding-events/integrations/clickhouse/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
     { "id": "forwarder-meta", "name": "Meta Conversions API", "href": "/docs/destinations/forwarding-events/integrations/meta-conversions/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
     { "id": "forwarder-mixpanel", "name": "Mixpanel", "href": "/docs/destinations/forwarding-events/integrations/mixpanel/", "type": "forwarder", "delivery": ["real-time"], "cloud": ["aws", "azure", "gcp"], "status": "add-on" },
 

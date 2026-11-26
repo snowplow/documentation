@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [],
+  "additionalProperties": true,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique identifier for the Snowplow event. Use it as a primary or deduplication key. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.event_id",
+      "consoleRequired": false
+    },
+    "event_name": {
+      "type": "string",
+      "description": "Name of the Snowplow event. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.event_name",
+      "consoleRequired": false
+    },
+    "app_id": {
+      "type": "string",
+      "description": "Identifier of the application the event was tracked from. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.app_id",
+      "consoleRequired": false
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User identifier set by your application. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.user_id",
+      "consoleRequired": false
+    },
+    "collector_tstamp": {
+      "type": "string",
+      "description": "Timestamp when the Collector received the event, in ISO 8601 format. ClickHouse parses it with best-effort date parsing. Suggested ClickHouse column: `DateTime64(3)`.",
+      "consoleDefault": "event.collector_tstamp",
+      "consoleRequired": false
+    },
+    "web_page_id": {
+      "type": "string",
+      "description": "Page view identifier from the `web_page` entity. If the event has no `web_page` entity, the field is omitted and the column gets its default value. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.contexts_com_snowplowanalytics_snowplow_web_page_1?.[0]?.id",
+      "consoleRequired": false
+    },
+    "domain_userid": {
+      "type": "string",
+      "description": "First-party cookie identifier for the user's device. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.domain_userid",
+      "consoleRequired": false
+    },
+    "domain_sessionid": {
+      "type": "string",
+      "description": "First-party cookie identifier for the user's session. Suggested ClickHouse column: `String`.",
+      "consoleDefault": "event.domain_sessionid",
+      "consoleRequired": false
+    }
+  }
+}

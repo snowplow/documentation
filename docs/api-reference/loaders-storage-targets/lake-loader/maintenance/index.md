@@ -14,6 +14,8 @@ import DeltaMaintenance from '@site/docs/api-reference/loaders-storage-targets/l
 import IcebergMaintenance from '@site/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/_iceberg.md';
 ```
 
+You don't need to stop or pause the Lake Loader while the maintenance jobs on this page run. The loader keeps writing new events to the table, and if one of its commits conflicts with a maintenance job, it retries the commit.
+
 <Tabs groupId="lake-format" queryString>
   <TabItem value="delta" label="Delta Lake" default>
       <DeltaMaintenance/>

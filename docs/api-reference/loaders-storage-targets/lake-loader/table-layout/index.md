@@ -66,22 +66,22 @@ In text, the diagram shows:
 
 This leads to different strengths:
 
-- **Partitioned by `event_name` or `app_id`**: a query that filters on the partition column goes straight to the matching partitions and skips the rest. The cost is many more files, many of them small: one for every event type, or every `app_id`, in every commit. A query that reads every event type, such as the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package, opens all of them, whichever column the table is partitioned by. That adds a few percent to its compute cost.
-- **Liquid clustering**: a query that reads every event type over a recent time range opens far fewer files. A query that filters on `event_name` can't skip files by event type, so it reads every event in its time range.
+- **Partitioning by `event_name` or `app_id`**: queries that look for specific event types, or specific source applications, are efficient. They go straight to the matching partitions and skip the rest. Queries that read every event in a time range, such as those in the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package, cost a few percent more in compute than on a liquid clustering table, because they open many small files: one for every event type, or every `app_id`, in every commit.
+- **Liquid clustering**: queries that read every event in a time range are more efficient than on a partitioned table, because there are fewer files to open. Queries that look for specific event types or source applications are less efficient, because they can't skip files except by time range. Adding `event_name` or `app_id` as a second clustering key makes these queries efficient once the table is compacted. See [What you can change after the table is created](#what-you-can-change-after-the-table-is-created).
 
 Every layout needs regular maintenance, because the Lake Loader writes new files every few minutes. Whichever layout you choose, schedule the jobs described in [Lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md).
 
 ## Choose a layout
 
-Choose by what your queries mostly filter on, besides `load_tstamp`:
+Each layout suits a different way of querying your events table:
 
-- **Event type**: choose partitioned by `event_name`. This suits the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) and [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt packages, your own event-specific models, and analysis of particular events. It's the default.
-- **Source application**: choose partitioned by `app_id`. This suits reporting on each website or mobile app separately, and [Snowplow's dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) when you set the `snowplow__app_id` variable to model particular apps.
-- **Nothing else, because your modeling reads every event type**: choose liquid clustering, if you use the Delta format. This suits the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package on its own.
+- **Partitioning by `event_name` (default)**: choose this if your queries mostly look for specific event types, such as the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) and [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt packages, your own event-specific models, and analysis of particular events.
+- **Partitioning by `app_id`**: choose this if your queries mostly look at specific source applications, such as reporting on each website or mobile app separately, or [Snowplow's dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) with the `snowplow__app_id` variable set.
+- **Liquid clustering**: choose this if you use the Delta format and your modeling mostly reads every event type, such as the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package on its own.
 
-A partitioned table gets a separate partition for every value of its partition column, every day, so every extra value adds more small files. Your tracking setup decides how many distinct `event_name` and `app_id` values you have, so check how many your events table contains before you choose a partition column.
+Don't partition by a column that has thousands of distinct values in your events table. Your tracking setup decides how many distinct `app_id` values you have, so check before you choose partitioning by `app_id`.
 
-If your queries filter on both event type and source application, choose the one most of your queries use. If you're not sure, keep the default layout, partitioned by `event_name`.
+If your queries look for both specific event types and specific source applications, choose the one most of your queries use. If you're not sure, keep the default layout, partitioned by `event_name`.
 
 ## What you can change after the table is created
 

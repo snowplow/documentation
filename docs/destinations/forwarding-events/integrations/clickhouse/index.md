@@ -77,7 +77,9 @@ GRANT INSERT ON snowplow.snowplow_events TO snowplow_forwarder;
 
 ### Allow connections from Snowplow
 
-ClickHouse Cloud services accept connections only from addresses on the service's IP access list. If your list doesn't allow all addresses, contact Snowplow Support for the IP addresses that your forwarder connects from, and add them to the service's IP access list in the ClickHouse Cloud console.
+ClickHouse Cloud services accept connections only from addresses on the service's IP access list. If your list doesn't allow all addresses, add the IP addresses of your Snowplow NAT gateways to it.
+
+To find these addresses, go to **Settings** > **Workspaces** in Console, select the **Default** workspace, and copy the NAT IP addresses. Then add each one to the service's IP access list in the ClickHouse Cloud console.
 
 ### Create the connection and forwarder
 

@@ -19,14 +19,12 @@ The Lake Loader offers three layouts. Every layout is available on Delta, and th
 | Layout | Delta | Iceberg | Suits |
 | --- | --- | --- | --- |
 | Partitioned by `event_name` (default) | Partitioned by `load_tstamp_date` and `event_name` | Partitioned by `day(load_tstamp)` and `event_name` | Models and queries that target specific events |
-| Partitioned by `app_id` | Partitioned by `load_tstamp_date` and `app_id` | Partitioned by `day(load_tstamp)` and `app_id` | Queries that target one application, when you have only a few `app_id` values |
-| Time only | Not partitioned, with liquid clustering on `load_tstamp` | Not available | Models that read every event type over a recent time range |
-
-The `app_id` and time-only layouts: <AppliesTo feature="lake-loader-table-layout" />
+| Partitioned by `app_id` <AppliesTo feature="lake-loader-table-layout" /> | Partitioned by `load_tstamp_date` and `app_id` | Partitioned by `day(load_tstamp)` and `app_id` | Queries that target one application, when you have only a few `app_id` values |
+| Time only <AppliesTo feature="lake-loader-table-layout" /> | Not partitioned, with liquid clustering on `load_tstamp` | Not available | Models that read every event type over a recent time range |
 
 On a partitioned Delta table, `load_tstamp_date` is a generated column, defined as `CAST(load_tstamp AS DATE)`. A time-only Delta table has no `load_tstamp_date` column.
 
-A time-only Delta table collects file statistics on `event_name` and `app_id` as well as on the timestamp columns. Delta can only cluster on a column it has statistics for, so collecting these statistics lets you add either column to the table's clustering keys later. See [Add a clustering key to a time-only table](#add-a-clustering-key-to-a-time-only-table).
+A time-only Delta table collects file statistics on `event_name` and `app_id` as well as on the timestamp columns. Delta can only cluster on a column it has statistics for, so collecting these statistics lets you add either column to the table's clustering keys later. See [Cluster a time-only table by event type](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md?lake-format=delta#cluster-a-time-only-table-by-event-type).
 
 If you self-host the Lake Loader, choose the layout with the `output.good.partitionColumn` setting: `event_name`, `app_id`, or `null` for time only. See the [configuration reference](/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/index.md).
 
@@ -85,18 +83,6 @@ Choose by how you query your events table:
 
 The Lake Loader sets a table's partitioning when it creates the table, and the partitioning can't change afterwards. When the loader starts, it checks that the table's partitioning matches the layout it's configured with. If the table is partitioned differently, or is partitioned when the loader expects a time-only table, or the other way around, the loader stops and reports a setup error. It reports the same error if you create the table yourself, ahead of the loader, with partitioning that doesn't match.
 
-A time-only Delta table's clustering keys are different. The loader sets them when it creates the table, but never checks them afterwards, so you can change them at any time, without stopping the loader or changing its configuration. The next `OPTIMIZE` uses the new keys.
-
-### Add a clustering key to a time-only table
-
-A time-only Delta table starts out clustered by `load_tstamp` alone. If you later run models that target specific events, you can add `event_name` (or `app_id`) as a second clustering key, without rewriting the table:
-
-```sql
-ALTER TABLE <your_table> CLUSTER BY (load_tstamp, event_name)
-```
-
-From then on, every `OPTIMIZE` groups files by event type as well as by time. Once compacted, event-specific queries read about as little as they do on a compacted partitioned table, and a query that mixes `event_name` with another column in an `OR` can skip files too, which it can't do on a partitioned Delta table. The trade-off is compaction cost: clustering on two keys costs several times as much compute as compacting a partitioned table. Freshly loaded data isn't clustered until `OPTIMIZE` runs, so a second clustering key helps queries over older data more than queries over the last few hours.
-
-Don't cluster on `event_name` alone. Without `load_tstamp` as a clustering key, compacted files lose their time order, and every incremental query opens every recent file.
+A time-only Delta table's clustering keys are different. The loader sets them when it creates the table, but never checks them afterwards, so you can change them at any time, without stopping the loader or changing its configuration. The next `OPTIMIZE` uses the new keys. For example, adding `event_name` as a second clustering key makes the table efficient for event-specific queries once it's compacted. See [Cluster a time-only table by event type](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md?lake-format=delta#cluster-a-time-only-table-by-event-type).
 
 For how to compact each layout, see [Lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md). For every loader setting, see the [configuration reference](/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/index.md).

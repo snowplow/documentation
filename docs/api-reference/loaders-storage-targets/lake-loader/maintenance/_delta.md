@@ -15,19 +15,31 @@ On a table partitioned by `event_name` or `app_id`, your daily compaction job sh
 OPTIMIZE <your_table> WHERE load_tstamp_date < current_date()
 ```
 
-On a time-only table, which uses liquid clustering, run `OPTIMIZE` without a `WHERE` clause. A clustered table has no `load_tstamp_date` column, and `OPTIMIZE` on a clustered table doesn't accept a `WHERE` clause. Liquid clustering is incremental: each run mostly rewrites the files written since the previous run, so the job doesn't grow with the size of your table:
+On a time-only table, which isn't partitioned and uses liquid clustering on `load_tstamp`, run `OPTIMIZE` on the whole table. Liquid clustering is incremental: each run mostly rewrites the files written since the previous run, so the daily job doesn't grow with the size of your table:
 
 ```sql
 OPTIMIZE <your_table>
 ```
-
-On a time-only table, `OPTIMIZE` groups rows by the table's clustering keys. A table clustered by `load_tstamp` alone is the cheapest to compact. If you've added `event_name` or `app_id` as a clustering key, each `OPTIMIZE` costs more compute, and in return event-specific queries over compacted data read much less. See [Add a clustering key to a time-only table](/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/index.md#add-a-clustering-key-to-a-time-only-table).
 
 Data compaction has two benefits for Snowplow data:
 
 1. Queries are more efficient when the underlying parquet files are large.  After you compact your files, you will benefit from this whenever you run queries over your historic data, i.e. not just the most recently loaded events.
 2. When there are fewer data files, the size of the table's delta log files is smaller.  This reduces the overhead of creating a new delta log file, and thus improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
 
+
+## Cluster a time-only table by event type
+
+A time-only table, which isn't partitioned and uses liquid clustering on `load_tstamp`, starts out clustered by `load_tstamp` alone. That suits models that read every event type. If you later run models that target specific events, add `event_name` (or `app_id`) as a second clustering key:
+
+```sql
+ALTER TABLE <your_table> CLUSTER BY (load_tstamp, event_name)
+```
+
+From then on, every `OPTIMIZE` groups files by event type as well as by time. Once compacted, event-specific queries read about as little as they do on a compacted partitioned table, and a query that mixes `event_name` with another column in an `OR` can skip files too, which it can't do on a partitioned Delta table. The trade-off is compaction cost: clustering on two keys costs several times as much compute as compacting a partitioned table. Freshly loaded data isn't clustered until `OPTIMIZE` runs, so a second clustering key helps queries over older data more than queries over the last few hours.
+
+The Lake Loader doesn't check a table's clustering keys, so you can change them without stopping the loader or changing its configuration.
+
+Don't cluster on `event_name` alone. Without `load_tstamp` as a clustering key, compacted files lose their time order, and every incremental query opens every recent file.
 
 ## Vacuum data files
 

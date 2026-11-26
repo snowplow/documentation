@@ -225,6 +225,7 @@ const sidebars = {
     // Where attribute values come from: events (stream) or warehouse tables
     group('Data sources', [
       pick('signals/data-sources/events'),
+      pick('signals/data-sources/existing-analytics'),
       pick('signals/attributes/warehouse-config', { label: 'Sync warehouse tables' }),
     ], { collapsible: true, collapsed: true }),
     group('Define attributes', [

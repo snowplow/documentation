@@ -9,7 +9,7 @@ content_type: how-to
 pagination_prev: signals/connection/reference/index
 ---
 
-Signals calculates stream attributes from Snowplow [events](/docs/fundamentals/events/index.md). On the free tier, event collection is included, so you add a Snowplow tracker to your application and point it at your Collector endpoint. If you already run Snowplow, Signals reads the events from your existing pipeline, and you don't need to change your tracking.
+Signals calculates stream attributes from Snowplow [events](/docs/fundamentals/events/index.md). On the free tier, event collection is included, so you add a Snowplow tracker to your application and point it at your Collector endpoint. If you already run Snowplow, Signals reads the events from your existing pipeline, and you don't need to change your tracking. If your site already sends events to another analytics tool, such as Segment or Google Analytics 4, you can [use Signals with your existing analytics](/docs/signals/data-sources/existing-analytics/index.md) without retagging.
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

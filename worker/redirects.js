@@ -474,6 +474,7 @@ const fallbackRules = [
   ['/docs/api-reference/iglu/iglu-repositories/iglu-server/setup/*', '/docs/api-reference/iglu/iglu-repositories/iglu-server/#deploy-iglu-server', 301],
   ['/docs/api-reference/iglu/iglu-clients/*', '/docs/api-reference/iglu/', 301],
   ['/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/*', '/docs/api-reference/iglu/iglu-repositories/', 301],
+  ['/docs/api-reference/loaders-storage-targets/lake-loader/partitions/*', '/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/:splat', 301],
 ];
 
 function findInRules(rules, pathname) {

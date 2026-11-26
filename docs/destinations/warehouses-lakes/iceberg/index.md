@@ -92,6 +92,8 @@ You can add an Iceberg destination through the Snowplow Console. (For self-hoste
 
 <SetupInstructions destinationName="Iceberg" connectionType="Iceberg" />
 
+The Lake Loader can lay out your events table in different ways, depending on how you query it. See [Choose a table layout for your lake](/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/index.md).
+
 For AWS Glue, we recommend scheduling regular [lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md?lake-format=iceberg) to ensure the best long-term performance.
 
 ## How loading works

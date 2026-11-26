@@ -35,7 +35,18 @@ import Link from '@docusaurus/Link';
     <td>
     Optional. A map of key/value strings corresponding to Iceberg's table properties.
     These can be anything <Link to="https://iceberg.apache.org/docs/latest/configuration/">from the Iceberg table properties documentation</Link>.
-    The default properties include configuring Iceberg's column-level statistics for the important Snowplow timestamp columns: <code>load_tstamp</code>, <code>collector_tstamp</code>, <code>derived_tstamp</code>, <code>dvce_created_tstamp</code>.
+    The default properties include configuring Iceberg's column-level statistics for the important Snowplow timestamp columns: <code>load_tstamp</code>, <code>collector_tstamp</code>, <code>derived_tstamp</code>, <code>dvce_created_tstamp</code>, and <code>true_tstamp</code>.
+    </td>
+</tr>
+<tr>
+    <td><code>output.good.partitionColumn</code> <AppliesTo feature="lake-loader-table-layout" /></td>
+    <td>
+      <p>Optional. Default value <code>event_name</code>. Sets the <Link to="/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/">table layout</Link>:</p>
+      <ul>
+        <li><code>event_name</code>: the table is partitioned by <code>day(load_tstamp)</code> and <code>event_name</code></li>
+        <li><code>app_id</code>: the table is partitioned by <code>day(load_tstamp)</code> and <code>app_id</code></li>
+      </ul>
+      <p>The loader applies the layout when it creates the table. If the table already exists and its partitioning doesn't match this setting, the loader stops with a setup error.</p>
     </td>
 </tr>
 <tr>

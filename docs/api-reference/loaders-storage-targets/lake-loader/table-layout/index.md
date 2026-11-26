@@ -66,7 +66,7 @@ In text, the diagram shows:
 
 This leads to different strengths:
 
-- **Partitioned by `event_name` or `app_id`**: a query that filters on the partition column goes straight to the matching partitions and skips the rest. The cost is many more files, many of them small: one for every event type, or every `app_id`, in every commit. A query that reads every event type opens all of them, which adds a few percent to the compute cost of models such as Snowplow's unified package.
+- **Partitioned by `event_name` or `app_id`**: a query that filters on the partition column goes straight to the matching partitions and skips the rest. The cost is many more files, many of them small: one for every event type, or every `app_id`, in every commit. A query that reads every event type, such as Snowplow's unified package, opens all of them, whichever column the table is partitioned by. That adds a few percent to its compute cost.
 - **Liquid clustering**: a query that reads every event type over a recent time range opens far fewer files. A query that filters on `event_name` can't skip files by event type, so it reads every event in its time range.
 
 Every layout needs regular maintenance, because the Lake Loader writes new files every few minutes. Whichever layout you choose, schedule the jobs described in [Lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md).
@@ -81,7 +81,7 @@ Choose by what your queries mostly filter on, besides `load_tstamp`:
 
 A partitioned table gets a separate partition for every value of its partition column, every day, so every extra value adds more small files. Your tracking setup decides how many distinct `event_name` and `app_id` values you have, so check how many your events table contains before you choose a partition column.
 
-If your queries filter on both event type and source application, choose the one most of your queries use. If you're not sure, keep the default.
+If your queries filter on both event type and source application, choose the one most of your queries use. If you're not sure, keep the default layout, partitioned by `event_name`.
 
 ## What you can change after the table is created
 

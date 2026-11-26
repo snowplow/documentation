@@ -202,7 +202,7 @@ Configure how the enrichment should access your database in the `database` sect
 We strongly recommend restricting the username to minimal read-only permissions on just the tables required to execute the SQL query.
 :::
 
-If your database server has additional authentication in place, such as IP allowlisting, configure it to permit access from the NAT gateway associated with the Snowplow pipeline.
+If your database server has additional authentication in place, such as IP allowlisting, configure it to permit access from all of the NAT gateway IP addresses associated with the Snowplow pipeline. A pipeline can have more than one, for example one per availability zone on AWS, and connections can come from any of them.
 
 ### `query`
 

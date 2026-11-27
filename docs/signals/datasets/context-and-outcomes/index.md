@@ -8,7 +8,26 @@ date: "2026-10-07"
 content_type: how-to
 ---
 
-Each row in a dataset holds the context your application would have read at the anchor, and optionally what happened afterwards. Context comes from your attribute groups and agentic contexts. What happened afterwards comes from labels on the anchors or from outcome columns.
+To train or test a model on past traffic, you need to go back to points in time and see two things: what was known about the user at that point, and whether they went on to convert afterwards. Each row in a dataset holds both for one anchor:
+
+- Context is what your application would have known at the anchor: attribute values and agentic contexts, computed only from the events before it.
+- Outcomes are what happened after the anchor, such as whether the user went on to purchase. They come from labels on the anchors or from outcome columns.
+
+```mermaid
+flowchart TB
+    subgraph before["Context: events before"]
+        direction LR
+        E1["page_view"] --> E2["product_view"] --> E3["add_to_cart"]
+    end
+    A(["Anchor"])
+    subgraph after["Outcome: events after"]
+        direction LR
+        E4["page_view"] --> E5["transaction"]
+    end
+    before --> A --> after
+```
+
+In this session, the row for the anchor has attributes such as `product_views = 1` and `cart_adds = 1`, computed from the three earlier events. Its outcome `purchased_later` is `true`, because a `transaction` followed later in the session.
 
 ## Add attributes at each anchor
 

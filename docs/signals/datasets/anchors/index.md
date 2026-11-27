@@ -14,8 +14,8 @@ Choose the anchor type that matches how your model is used:
 
 | Anchor type | Rows are | Use it to |
 | --- | --- | --- |
-| [Session anchors](#session-anchors) | Labeled points in sessions, positive at a goal event | [Train a model](/docs/signals/datasets/train-ml-models/index.md) that predicts a goal, such as a purchase |
-| [Event anchors](#event-anchors) | Every event that matches criteria | Evaluate a model your application calls in response to an event |
+| [Session anchors](#session-anchors) | Labeled points in sessions, positive at a goal event | [Train a model](/docs/signals/datasets/train-ml-models/index.md) that predicts a goal within the current session, such as a purchase |
+| [Event anchors](#event-anchors) | Every event that matches criteria | Evaluate a model your application calls in response to an event, such as choosing what to show when a user views a product or adds an item to the cart |
 | [User-supplied anchors](#user-supplied-anchors) | Rows of a table you provide | Use your own labels, or logs of past model calls |
 
 Session and event anchors are counted per session, so the dataset always has a `domain_sessionid` column with them, even when none of your attribute groups uses that key. Events without a `domain_sessionid`, such as server-side events that only have a `user_id`, never become session or event anchors.

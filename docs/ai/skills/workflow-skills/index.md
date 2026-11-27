@@ -13,13 +13,13 @@ import TabItem from '@theme/TabItem';
 
 The Snowplow Workflows skills are a set of agent skills for multi-step Snowplow field workflows: turning a product spec into a tracking plan, instrumenting and validating tracking locally with [Snowplow Micro](/docs/testing/snowplow-micro/index.md), debugging and recovering [failed events](/docs/fundamentals/failed-events/index.md), and writing SQL against your Snowplow data. The skills are published as the `snowplow-workflows` plugin in the [`snowplow-industry-solutions/snowplow-agent-skills`](https://github.com/snowplow-industry-solutions/snowplow-agent-skills) GitHub repository.
 
+Use the Snowplow Workflows skills when you want your coding agent to carry a task from start to finish in your repository, for example from "we should track checkout" through to validated events in Micro. For a single Console question or action, the official skills and the Snowplow MCP server are enough on their own.
+
 The Snowplow Workflows skills complement the official Snowplow plugin. They don't replace it. The official plugin, from [`snowplow/skills`](https://github.com/snowplow/skills), installs the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md) and the Console-facing Snowplow [skills](/docs/ai/skills/index.mdx). The Snowplow Workflows plugin ships skills only, with no MCP server of its own. Whenever a workflow skill needs to read or write Console, such as publishing a schema or creating an event specification, it calls the Snowplow MCP server's tools. Install both plugins.
 
 :::note[Field skills with best-effort support]
 The Snowplow Workflows skills are field skills maintained by Snowplow's field team, not part of the supported Snowplow product. Support is best-effort. To report a problem or request a skill, open an issue in the [`snowplow-agent-skills`](https://github.com/snowplow-industry-solutions/snowplow-agent-skills) repository. For product support, use the official Snowplow plugin and the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md).
 :::
-
-Use the Snowplow Workflows skills when you want your coding agent to carry a task from start to finish in your repository, for example from "we should track checkout" through to validated events in Micro. For a single Console question or action, the official skills and the Snowplow MCP server are enough on their own.
 
 ## Before you begin
 

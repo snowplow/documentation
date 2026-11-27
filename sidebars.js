@@ -248,6 +248,7 @@ const sidebars = {
           'signals/applications/mcp-server',
           'signals/applications/subscribe',
           'signals/applications/forward-interventions',
+          'signals/applications/experiments',
         ],
       }),
     ], { collapsible: true, collapsed: true }),
@@ -260,6 +261,9 @@ const sidebars = {
       pick('signals/interventions', { label: 'Define interventions' }),
       pick('signals/applications/subscribe', { label: 'Receive interventions in your app' }),
       pick('signals/applications/forward-interventions', { label: 'Forward interventions to your systems' }),
+    ], { collapsible: true, collapsed: true }),
+    group('Run experiments', [
+      pick('signals/applications/experiments', { hoist: true, indexLabel: 'Quickstart' }),
     ], { collapsible: true, collapsed: true }),
     group('Train & evaluate models', [
       pick('signals/datasets', { hoist: true, indexLabel: 'Datasets overview' }),

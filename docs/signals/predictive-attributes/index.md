@@ -301,7 +301,7 @@ Each successful training records quality metrics, measured on the evaluation spl
 
 Like `baseline_rate`, the percentile metrics and `mean_score` account for the reduced negative examples.
 
-In Console, go to the **Model versions** tab, click the `⋯` button on a training's row, and select **Review**. The review page rates AUC from **Poor** to **Excellent**, shows how much each input attribute contributed, and compares the training with another one, such as the published training. The **Conversion by score percentile** card plots the real goal rate of each percentile, smoothed, against the baseline, and shows how much of the evaluation data percentiles 90 to 99 really hold. In the SDK, the metrics are in the `metrics` field of the training.
+In Console, go to the **Model versions** tab, click the `⋯` button on a training's row, and select **Review**. The review page rates AUC from **Poor** to **Excellent**, shows how much each input attribute contributed, and compares the training with another one, such as the published training. The **Conversion by score percentile** card plots the goal rate of each percentile, smoothed, against the baseline, and shows the share of evaluation data in percentiles 90 to 99. In the SDK, the metrics are in the `metrics` field of the training.
 
 ![Training review page comparing a training with the published one, showing AUC rated Good, baseline conversion, training examples, top-10% lift, and the input attributes that most influenced the model](../images/predictive-attribute-training-review.png)
 
@@ -314,11 +314,15 @@ Score tiers name ranges of score percentiles, such as `hot` for percentiles 90 t
 Tiers follow these rules:
 * Names are 1 to 64 characters long, and unique ignoring case
 * Ranges use whole numbers from 0 to 99, and a tier's lower bound can't be above its upper bound
-* Ranges can't overlap. Gaps are allowed, and a score in a gap has no tier
+* Ranges can't overlap. Gaps are allowed, and a score in a gap has no tier.
 
 Tied scores in the evaluation data all take the highest percentile of their tie, so a tier can hold more or less than its share of examples, or none. Check each tier's share on the chart in Console, or in `percentile_shares`, before you publish.
 
-Each training has its own tiers. You can edit them while the training is successful and unpublished, and they go live when you publish it. A new training starts with the tiers of the most recent successful training that has tiers, from any version of the predictive attribute, as they were when you started it. Edits you make while it trains don't reach it. To change the live tiers, publish another training with the tiers you want, or unpublish the training, edit its tiers, and publish it again. Score requests return `404` while it's unpublished.
+Each training has its own tiers. You can edit a training's tiers while the training is successful and unpublished, and the tiers go live when you publish the training.
+
+A new training starts with a copy of the tiers from the most recent successful training that has tiers, from any version of the predictive attribute. Signals copies the tiers when you start the new training, so edits you make to the earlier training's tiers while the new training runs don't carry over.
+
+To change the live tiers, publish another training with the tiers you want. Alternatively, unpublish the training, edit its tiers, and publish it again. Score requests return `404` while the predictive attribute has no published training.
 
 To set tiers in Console, open the training's review page. In the **Conversion by score percentile** card, click **Add tier**, enter a name and a range of percentiles, then click **Save tiers**. Each tier shows as a colored band on the chart, with its share of the evaluation data, its goal rate, its lift over the baseline, and its range of scores. Tiers are read-only once the training is published, or if you don't have write access. If you publish with unsaved tier changes, the publish dialog warns you.
 

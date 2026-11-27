@@ -122,8 +122,6 @@ To decide how to treat a session, act on its `tier` rather than a score cutoff i
 
 The share of live scores in each tier can differ from its share in training, because it depends on how often, and at which points in a session, your application requests a score.
 
-The raw score is still useful when you need an order rather than a category, for example to sort sessions by how likely they are to reach the goal. Compare raw scores only within one training, because a new model can shift the range of scores.
-
 Signals scores a session whatever state it's in. Scores are less reliable for states that training doesn't cover, such as a very short session, or a session that has already reached the goal.
 
 ### Handle errors

@@ -78,7 +78,7 @@ See [How Signals works](/docs/signals/concepts/index.md) for detail on each.
 | Ground an AI agent in the user's current session | [Define agentic contexts](/docs/signals/agentic-contexts/index.md) |
 | Let an agent read Signals data as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) |
 | React when a user meets criteria | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) or [forward them](/docs/signals/applications/forward-interventions/index.md) |
-| Build training data for an ML model | [Create ML training datasets](/docs/signals/ml-training-datasets/index.md) |
+| Build training data for an ML model | [Build ML training and evaluation datasets](/docs/signals/datasets/index.md) |
 
 To manage Signals from a chat instead, connect your assistant to the [Snowplow MCP server](/docs/ai/snowplow-mcp/index.md), or use the [Snowplow Assistant](/docs/ai/console-agent/index.md) in Console.
 

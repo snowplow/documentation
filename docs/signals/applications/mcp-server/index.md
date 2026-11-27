@@ -215,10 +215,10 @@ A grounded answer takes at least two calls: the agent lists what your deployment
 
 You have to tell your agent which attribute keys it can use. Most keys identify a user, but a custom key can identify a product, a campaign, or a region.
 
-Inject the values server-side into your system prompt, labelled with each attribute key's exact name:
+Inject the values server-side into your system prompt, labeled with each attribute key's exact name:
 
 ```text
-Snowplow Signals identifiers for this user, labelled by attribute key name:
+Snowplow Signals identifiers for this user, labeled by attribute key name:
 domain_sessionid: {{SESSION_ID}}
 domain_userid: {{USER_ID}}
 ```
@@ -237,13 +237,19 @@ The agent reads a predictive attribute with `get_attributes` by naming it in `gr
 {"name": "purchase_propensity", "attributes": ["score", "tier"]}
 ```
 
-Its values come back like a group's, for example `{"score": 0.75, "tier": "hot"}`. The agent passes the same labelled identifiers as for attribute groups, and the server sends each predictive attribute the ones its attribute keys need.
+A predictive attribute's values come back like a group's, for example `{"score": 0.75, "tier": "hot"}`. The agent passes the same labeled identifiers as for attribute groups, and the server sends each predictive attribute the ones its attribute keys need.
 
 The `score` is between 0 and 1 and ranks how likely the goal is later in the session, compared with other sessions. It isn't a probability, and the tool descriptions tell the agent never to present it as a percentage chance. See [interpret the score](/docs/signals/applications/predictive-attributes/index.md#interpret-the-score) for more on what the score means.
 
-The `tier` is the name you gave to the score range it falls in, such as `hot` for roughly the top 10%, set when you [review a training](/docs/signals/predictive-attributes/index.md#review-the-training-results) in Console. It's null when the score falls in no tier, or when the training has no tiers.
+The `tier` is the name you gave to the score range it falls in, such as `hot` for roughly the top 10%, set when you [review a training](/docs/signals/predictive-attributes/index.md#review-the-training-results) in Console. The `tier` is null when the score falls in no tier, or when the training has no tiers.
 
-If the agent has no identifier for one of the predictive attribute's attribute keys, names an attribute other than `score` or `tier`, or scoring is temporarily unavailable, for example while a model loads, that entry carries an `error`. Other groups in the same call are read as usual.
+A predictive attribute's entry carries an `error` when:
+
+* The agent has no identifier for one of the predictive attribute's attribute keys
+* The agent names an attribute other than `score` or `tier`
+* Scoring is temporarily unavailable, for example while a model loads
+
+Other groups in the same call are read as usual.
 
 ## Inspect the server
 

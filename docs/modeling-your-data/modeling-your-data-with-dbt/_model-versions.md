@@ -57,7 +57,7 @@ Postgres is technically supported in the models within the package, however one 
 
 | snowplow-attribution version      | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres | Spark |
 | --------------------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: | :---: |
-| {versions.dbtSnowplowAttribution} | >=1.6.0 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |   ✅   |
+| {versions.dbtSnowplowAttribution} | >=1.10.6 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |   ✅   |
 | 0.3.0                             | >=1.6.0 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |   ❌   |
 
 </TabItem>

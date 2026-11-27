@@ -149,18 +149,18 @@ Your agent loads the skills on demand. There are no slash commands to remember: 
 
 Pick your starting point by what you already have:
 
-| You have | Start with |
-| --- | --- |
-| A fresh repository, with no Snowplow work started | `setup-snowplow-context` |
-| A product requirements document (PRD) or business goals, with tracking undecided | `create-data-spec` |
-| Agreed events and entities that need schemas | `design-tracking-plan` |
-| An application with no Snowplow tracker | `install-snowplow-tracking` |
-| Event specifications in Console, and you want typed tracking code | `setup-snowtype` |
-| A feature to instrument from start to finish | `implement-custom-events` |
-| Tracking code that needs verifying | `setup-micro`, then `validate-snowplow-implementation` |
-| Events failing validation | `debug-failed-events` |
-| Schema validation failures already loaded in your warehouse | `recover-failed-events` |
-| Snowplow data in your warehouse, and a question to answer with SQL | `query-snowplow-data` |
+| You have | Start with | What you get |
+| --- | --- | --- |
+| A fresh repository, with no Snowplow work started | `setup-snowplow-context` | Every other skill reads your vendor, warehouse, and platforms, so schemas and SQL come out right without asking again. |
+| A product requirements document (PRD) or business goals, with tracking undecided | `create-data-spec` | An agreed list of KPIs, events, and entities before anyone writes a schema. |
+| Agreed events and entities that need schemas | `design-tracking-plan` | Schemas that reuse entities and version cleanly, instead of one-off schemas that are hard to change. |
+| An application with no Snowplow tracker | `install-snowplow-tracking` | A tracker built on the current API, not outdated training data, with user identification set up. |
+| Event specifications in Console, and you want typed tracking code | `setup-snowtype` | Missing or wrong properties fail at compile time, not as failed events. |
+| A feature to instrument from start to finish | `implement-custom-events` | One request takes you from "track this" to validated events, running the other skills in order. |
+| Tracking code that needs verifying | `setup-micro`, then `validate-snowplow-implementation` | Failed events caught on your machine, not in production. |
+| Events failing validation | `debug-failed-events` | The root cause and tracking fix for each failure, not a raw error to decode. |
+| Schema validation failures already loaded in your warehouse | `recover-failed-events` | Lost events written back to the atomic events table, after you approve a test `SELECT`. |
+| Snowplow data in your warehouse, and a question to answer with SQL | `query-snowplow-data` | Correct deduplication, bot filtering, and user and session counts, so the numbers are right. |
 
 ### Design and implement tracking
 

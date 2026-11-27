@@ -22,7 +22,7 @@ Use this table to find the page for what reads the data:
 | An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, iOS and Android trackers, Signals API |
 | A website that runs A/B tests on users who meet criteria | The user's variant in a running experiment, with exposure tracking | [Show experiment variants](/docs/signals/applications/experiments/index.md) | Browser plugin |
 | A back-end system that reacts when criteria are met | The same intervention payload, sent as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [forward them](/docs/signals/applications/forward-interventions/index.md) | Webhook, Kafka, Amazon Kinesis, Google Cloud Pub/Sub |
-| Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/ml-training-datasets/index.md) | Python SDK |
+| Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/datasets/index.md) | Python SDK |
 
 ## Agents
 

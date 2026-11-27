@@ -1,11 +1,12 @@
 ---
 title: "Retrieve predictive attribute scores in your application"
 sidebar_position: 26
-sidebar_label: "Predictive attributes"
+sidebar_label: "Retrieve predictive attribute scores"
 description: "Score a session in real time with a published Snowplow Signals predictive attribute, using the Python SDK, Node.js SDK, or Signals API."
 keywords: ["predictive attribute", "propensity score", "real-time scoring", "signals python sdk", "signals node sdk"]
 date: "2026-10-26"
 content_type: how-to
+pagination_next: signals/agentic-contexts/index
 ---
 
 ```mdx-code-block

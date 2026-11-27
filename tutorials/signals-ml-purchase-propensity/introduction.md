@@ -18,7 +18,7 @@ In this tutorial you'll build a model that predicts whether an ecommerce session
 
 The hard part of a real-time model is usually not the model. It's making sure that the features it trains on are computed the same way as the features it sees in production. If you write a SQL pipeline for training and separate code for serving, the two drift apart, and the model quietly gets worse. Signals avoids this by using one definition for both:
 
-* The [dataset builder](/docs/signals/ml-training-datasets/) turns an [attribute group](/docs/signals/attributes/attribute-groups/) into a training table in your warehouse, computing each attribute as it was at each moment in the past
+* The [dataset builder](/docs/signals/datasets/) turns an [attribute group](/docs/signals/attributes/attribute-groups/) into a training table in your warehouse, computing each attribute as it was at each moment in the past
 * The same attribute group, once published, is computed in real time from your event stream and served through the [Signals Profiles API](/docs/signals/applications/retrieve-attributes/)
 
 By the end you'll have:

@@ -75,13 +75,11 @@ Every layout needs regular maintenance, because the Lake Loader writes new files
 
 Each layout suits a different way of querying your events table:
 
-- **Partitioning by `event_name` (default)**: choose this if your queries mostly look for specific event types, such as the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) and [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt packages, your own event-specific models, and analysis of particular events.
-- **Partitioning by `app_id`**: choose this if your queries mostly look at specific source applications, such as reporting on each website or mobile app separately, or [Snowplow's dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) with the `snowplow__app_id` variable set.
-- **Liquid clustering**: choose this if you use the Delta format and your modeling mostly reads every event type, such as the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package on its own.
+- **Partitioning by `event_name` (default)**: choose this if your queries mostly look for specific event types. This suits the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) and [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt packages, your own event-specific models, and analysis of particular events.
+- **Partitioning by `app_id`**: choose this if your queries mostly look at specific source applications, and you track about 20 distinct `app_id` values or fewer. This suits reporting on each website or mobile app separately, and [Snowplow's dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) with the `snowplow__app_id` variable set.
+- **Liquid clustering**: choose this if you use the Delta format and your modeling mostly reads every event type. This suits the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package on its own.
 
-Don't partition by a column that has thousands of distinct values in your events table. Your tracking setup decides how many distinct `app_id` values you have, so check before you choose partitioning by `app_id`.
-
-If your queries look for both specific event types and specific source applications, choose the one most of your queries use. If you're not sure, keep the default layout, partitioned by `event_name`.
+If your queries look for both specific event types and specific source applications, choose the partition column that most of your queries filter on. If you're not sure, keep the default layout, partitioned by `event_name`.
 
 ## What you can change after the table is created
 

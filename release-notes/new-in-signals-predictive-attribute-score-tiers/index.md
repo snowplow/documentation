@@ -19,6 +19,6 @@ Predictive attributes are in public preview, so their configuration, API, and be
 
 ## How to use score tiers
 
-Set tiers on a training's review page in Console, or with the Signals API, while the training is unpublished. They go live when you publish the training. Trainings run before score tiers were available don't have percentile results, so retrain to use tiers.
+Set tiers on a training's review page in Console, or with the Signals API, while the training is unpublished. They go live when you publish the training.
 
 See [Set score tiers](/docs/signals/predictive-attributes/#set-score-tiers) to define them, and [Interpret the score](/docs/signals/applications/predictive-attributes/#interpret-the-score) to use them in your application.

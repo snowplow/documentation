@@ -299,7 +299,7 @@ Each successful training records quality metrics, measured on the evaluation spl
 | `percentile_shares`  | The share of evaluation examples in each percentile, 0 to 99                                                  |
 | `percentile_goal_rates` | The share of evaluation examples in each percentile that reach the goal. Each percentile holds about 1% of the examples, so these rates are noisy |
 
-Like `baseline_rate`, the percentile metrics and `mean_score` account for the reduced negative examples. Trainings run before [score tiers](#set-score-tiers) were available don't have them.
+Like `baseline_rate`, the percentile metrics and `mean_score` account for the reduced negative examples.
 
 In Console, go to the **Model versions** tab, click the `⋯` button on a training's row, and select **Review**. The review page rates AUC from **Poor** to **Excellent**, shows how much each input attribute contributed, and compares the training with another one, such as the published training. The **Conversion by score percentile** card plots the real goal rate of each percentile, smoothed, against the baseline, and shows how much of the evaluation data percentiles 90 to 99 really hold. In the SDK, the metrics are in the `metrics` field of the training.
 
@@ -318,7 +318,7 @@ Tiers follow these rules:
 
 Tied scores in the evaluation data all take the highest percentile of their tie, so a tier can hold more or less than its share of examples, or none. Check each tier's share on the chart in Console, or in `percentile_shares`, before you publish.
 
-Each training has its own tiers. You can edit them while the training is successful and unpublished, and they go live when you publish it. A new training starts with the tiers of the most recent successful training that has tiers, from any version of the predictive attribute, as they were when you started it. Edits you make while it trains don't reach it. To change the live tiers, publish another training with the tiers you want, or unpublish the training, edit its tiers, and publish it again. Score requests return `404` while it's unpublished. You can't set tiers on a training run before score tiers were available. Retrain to use them.
+Each training has its own tiers. You can edit them while the training is successful and unpublished, and they go live when you publish it. A new training starts with the tiers of the most recent successful training that has tiers, from any version of the predictive attribute, as they were when you started it. Edits you make while it trains don't reach it. To change the live tiers, publish another training with the tiers you want, or unpublish the training, edit its tiers, and publish it again. Score requests return `404` while it's unpublished.
 
 To set tiers in Console, open the training's review page. In the **Conversion by score percentile** card, click **Add tier**, enter a name and a range of percentiles, then click **Save tiers**. Each tier shows as a colored band on the chart, with its share of the evaluation data, its goal rate, its lift over the baseline, and its range of scores. Tiers are read-only once the training is published, or if you don't have write access. If you publish with unsaved tier changes, the publish dialog warns you.
 

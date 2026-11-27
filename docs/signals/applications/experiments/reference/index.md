@@ -63,9 +63,8 @@ On the server, the hook returns `{ variant: null, loading: true }`. It only work
 | Property | Description |
 | --- | --- |
 | `experiment_id` | The experiment's ID in Signals |
-| `experiment` | The experiment's name, as passed to `getExperimentVariant()` |
+| `experiment` | The experiment's name, as your app passed it to `getExperimentVariant()` or `useExperimentVariant()` |
 | `variant` | The variant key the user saw |
-| `entered_at` | When the user entered the experiment |
 
 ## Example
 

@@ -29,27 +29,7 @@ The dataset builder prevents leakage by construction. It computes each value usi
 
 A dataset build has three stages:
 
-```mermaid
-flowchart LR
-    subgraph stage1["1. Anchors"]
-        direction TB
-        A1["Session or event<br>anchors from<br>your events"] --> A3["One row per<br>moment"]
-        A2["Your own table<br>of moments"] --> A3
-    end
-
-    subgraph stage2["2. Context"]
-        direction TB
-        B1["Attributes computed<br>from events before<br>each moment"] --> B3["Values as they<br>stood"]
-        B2["Agentic contexts<br>as buffered at<br>each moment"] --> B3
-    end
-
-    subgraph stage3["3. Assembly"]
-        direction TB
-        C1["Join anchors, context,<br>labels, and outcomes"] --> C2["One row per moment,<br>one column per value"]
-    end
-
-    stage1 --> stage2 --> stage3
-```
+![Diagram: three stages of a dataset build. Anchors: session or event anchors, or your own table of moments, give one row per moment. Context: attributes from earlier events and agentic contexts at each moment give values as they stood. Assembly: anchors with their context, plus labels or outcome columns, give one dataset table.](../images/dataset-build-stages.svg)
 
 1. Anchors: decide the moments that become rows. Signals can derive them from your events, by session goal or by matching events, or you can supply your own table. See [Choose dataset anchors](/docs/signals/datasets/anchors/index.md).
 2. Context: for each anchor, compute attribute values and agentic context entries using only the events before it. See [Add context and outcomes](/docs/signals/datasets/context-and-outcomes/index.md).

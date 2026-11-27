@@ -27,7 +27,7 @@ import Link from '@docusaurus/Link';
     <td>
     Optional. A map of key/value strings corresponding to Iceberg's table properties.
     These can be anything <Link to="https://iceberg.apache.org/docs/latest/configuration/">from the Iceberg table properties documentation</Link>.
-    The default properties include configuring Iceberg's column-level statistics for the important Snowplow timestamp columns: <code>load_tstamp</code>, <code>collector_tstamp</code>, <code>derived_tstamp</code>, <code>dvce_created_tstamp</code>, and <code>true_tstamp</code>.
+    The default properties configure Iceberg's column-level statistics for <code>event_name</code>, <code>app_id</code>, and the important Snowplow timestamp columns: <code>load_tstamp</code>, <code>collector_tstamp</code>, <code>derived_tstamp</code>, <code>dvce_created_tstamp</code>, and <code>true_tstamp</code>.
     </td>
 </tr>
 <tr>
@@ -37,7 +37,9 @@ import Link from '@docusaurus/Link';
       <ul>
         <li><code>event_name</code>: the table is partitioned by <code>day(load_tstamp)</code> and <code>event_name</code></li>
         <li><code>app_id</code>: the table is partitioned by <code>day(load_tstamp)</code> and <code>app_id</code></li>
+        <li><code>null</code> <AppliesTo feature="lake-loader-iceberg-date-partitioned" />: the table is partitioned by <code>day(load_tstamp)</code> alone, with sort order <code>event_name, load_tstamp</code>. The loader groups each commit into files by the table's sort order, reading it when it starts.</li>
       </ul>
+      <p>Only an explicit <code>null</code> selects partitioning by date alone. If you leave the setting out, the loader partitions by <code>event_name</code>.</p>
       <p>The loader applies the layout when it creates the table. If the table already exists and its partitioning doesn't match this setting, the loader stops with a setup error.</p>
     </td>
 </tr>

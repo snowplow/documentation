@@ -145,7 +145,7 @@ To change one value later, edit the file directly. Re-run `setup-snowplow-contex
 
 ## Use the skills
 
-Your agent loads the skills on demand. There are no slash commands to remember: describe the task, and the agent picks the skill whose description matches it. To force a specific skill, name it in your prompt, for example "Use the `design-tracking-plan` skill to...".
+Your agent loads the skills on demand. There are no slash commands to remember: describe the task, and the agent picks the skill whose description matches it. To force a specific skill, name it in your prompt, for example "Use the `design-tracking-plan` skill to design schemas for checkout."
 
 Pick your starting point by what you already have:
 
@@ -191,7 +191,7 @@ The official Snowplow plugin has overlapping skills for lighter tasks. Its `trac
 
 ### Debug failed events
 
-The `debug-failed-events` skill diagnoses individual events that fail validation. It reads failed events from a pasted error, from Micro's `/bad` endpoint during local testing, or from a production pipeline through Console, the Snowplow MCP server, or a failed events table in your warehouse. The skill sorts each failure into one of four categories, schema resolution, schema validation, enrichment, or malformed event, and suggests a fix.
+The `debug-failed-events` skill diagnoses individual events that fail validation. It reads failed events from a pasted error, from Micro's `/bad` endpoint during local testing, or from a production pipeline through Console, the Snowplow MCP server, or a failed events table in your warehouse. The skill sorts each failure into one of four categories (schema resolution, schema validation, enrichment, or malformed event) and suggests a fix.
 
 Example prompts:
 

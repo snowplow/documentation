@@ -2,8 +2,8 @@
 title: "Serve Signals data to your agent with the MCP server"
 sidebar_position: 27
 sidebar_label: "Signals MCP server"
-description: "Connect an agent in your application to the Signals MCP server, so it can discover and read calculated attributes and agentic contexts as tools."
-keywords: ["signals mcp server", "model context protocol", "agent tools", "calculated attributes", "agentic contexts", "vercel ai sdk", "google adk", "openai agents sdk", "langchain", "mcp inspector"]
+description: "Connect an agent in your application to the Signals MCP server, so it can discover and read calculated attributes, predictive attribute scores, and agentic contexts as tools."
+keywords: ["signals mcp server", "model context protocol", "agent tools", "calculated attributes", "predictive attributes", "agentic contexts", "vercel ai sdk", "google adk", "openai agents sdk", "langchain", "mcp inspector"]
 date: "2026-10-15"
 content_type: how-to
 pagination_next: signals/interventions/index
@@ -14,7 +14,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Your agent can fetch Signals data using the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP), the standard way an agent discovers and calls tools. Once you add the server to your agent's tool list, the agent can list what your deployment has published and read whichever parts the task warrants: [calculated attribute](/docs/signals/applications/retrieve-attributes/index.md) values and the raw recent activity in an [agentic context](/docs/signals/applications/agentic-contexts/index.md).
+Your agent can fetch Signals data using the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP), the standard way an agent discovers and calls tools. Once you add the server to your agent's tool list, the agent can list what your deployment has published and read whichever parts the task warrants: [calculated attribute](/docs/signals/applications/retrieve-attributes/index.md) values, [predictive attribute](/docs/signals/predictive-attributes/index.md) scores, and the raw recent activity in an [agentic context](/docs/signals/applications/agentic-contexts/index.md).
 
 The server is part of your Signals deployment, so there's nothing to install or host. It serves the same data as the [SDKs and API](/docs/signals/connection/index.md), and every tool is read-only.
 
@@ -28,7 +28,7 @@ The MCP server suits an agent that discovers and selects at runtime what context
 
 Two properties are worth planning around:
 
-* **Discovery**: you add the server URL once, and the agent discovers each attribute group and agentic context you publish from then on, without any change to your application
+* **Discovery**: you add the server URL once, and the agent discovers each attribute group, predictive attribute, and agentic context you publish from then on, without any change to your application
 * **Descriptions at call time**: the descriptions you write reach the model as it decides what to call, so what you put on an attribute or a context is what steers the agent toward or away from reading it
 
 ## Connect to the server
@@ -204,8 +204,8 @@ The server exposes four read-only tools in two families. Attributes are the valu
 
 | Tool                    | What it returns                                                                                                          |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `list_attribute_groups` | Each published attribute group, with its version, the attribute key it's read by, and the attributes it holds |
-| `get_attributes`        | Calculated attribute values, for one or more attribute groups in a single call                                           |
+| `list_attribute_groups` | Each published attribute group, with its version, the attribute key it's read by, and the attributes it holds, followed by each published predictive attribute |
+| `get_attributes`        | Calculated attribute values and predictive attribute scores, for one or more attribute groups or predictive attributes in a single call |
 | `list_agentic_contexts` | The name and description of each published agentic context                    |
 | `get_agentic_context`   | One user's recent activity for a named agentic context, as a narrative summary (default) or as JSON                      |
 
@@ -226,6 +226,24 @@ domain_userid: {{USER_ID}}
 The label is the contract, so prefer the registry's names verbatim. Supplying more than you need costs nothing, because identifiers no group uses are ignored.
 
 Snowplow sessions roll over after around 30 minutes of inactivity, so send [`domain_sessionid`](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#domain-session-id) to your backend with every message rather than once at the start.
+
+### Predictive attributes
+
+If predictive attributes are enabled for your organization, `list_attribute_groups` lists each published [predictive attribute](/docs/signals/predictive-attributes/index.md) after the attribute groups, with `kind` set to `predictive_attribute`. Each entry has its name, version, description, and the goal it predicts as a condition such as `event_name = 'purchase'`. A predictive attribute's inputs can come from attribute groups with different attribute keys, so instead of one `attribute_key` the entry lists every attribute key a score needs a value for, in `attribute_keys`.
+
+The agent reads a predictive attribute with `get_attributes` by naming it in `groups`, the same way as an attribute group and in the same call. A predictive attribute has two attributes, `score` and `tier`:
+
+```json
+{"name": "purchase_propensity", "attributes": ["score", "tier"]}
+```
+
+Its values come back like a group's, for example `{"score": 0.75, "tier": "hot"}`. The agent passes the same labelled identifiers as for attribute groups, and the server sends each predictive attribute the ones its attribute keys need.
+
+The `score` is between 0 and 1 and ranks how likely the goal is later in the session, compared with other sessions. It isn't a probability, and the tool descriptions tell the agent never to present it as a percentage chance. See [interpret the score](/docs/signals/applications/predictive-attributes/index.md#interpret-the-score) for more on what the score means.
+
+The `tier` is the name you gave to the score range it falls in, such as `hot` for roughly the top 10%, set when you [review a training](/docs/signals/predictive-attributes/index.md#review-the-training-results) in Console. It's null when the score falls in no tier, or when the training has no tiers.
+
+If the agent has no identifier for one of the predictive attribute's attribute keys, names an attribute other than `score` or `tier`, or scoring is temporarily unavailable, for example while a model loads, that entry carries an `error`. Other groups in the same call are read as usual.
 
 ## Inspect the server
 

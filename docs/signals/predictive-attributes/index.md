@@ -42,7 +42,7 @@ There are two methods for defining predictive attributes in Signals:
 * Snowplow Console UI
 * Signals Python SDK
 
-Once published, [retrieve a predictive attribute score](/docs/signals/applications/predictive-attributes/index.md) in your application.
+Once published, [retrieve a predictive attribute score](/docs/signals/applications/predictive-attributes/index.md) in your application. An agent can also read scores through the [Signals MCP server](/docs/signals/applications/mcp-server/index.md#predictive-attributes).
 
 ## Understand how training works
 

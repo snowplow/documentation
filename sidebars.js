@@ -264,6 +264,9 @@ const sidebars = {
     group('Train & evaluate models', [
       pick('signals/datasets', { hoist: true, indexLabel: 'Datasets overview' }),
     ], { collapsible: true, collapsed: true }),
+    group('Integrations', [
+      pick('signals/integrations', { hoist: true, indexLabel: 'Integrations overview' }),
+    ], { collapsible: true, collapsed: true }),
   ],
 
   reference: [

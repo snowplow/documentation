@@ -2,8 +2,8 @@
 title: "Choose how to use Signals attributes"
 sidebar_position: 30
 sidebar_label: "Use in your application"
-description: "Choose how your application, agent, or model reads Signals data: services, agentic contexts, the Signals MCP server, interventions, predictive attributes, or training datasets."
-keywords: ["retrieve attributes", "subscribe interventions", "agentic contexts", "signals mcp server", "predictive attributes", "real-time personalization"]
+description: "Choose how your application, agent, or model reads Signals data: services, agentic contexts, the Signals MCP server, interventions, experiments, predictive attributes, or training datasets."
+keywords: ["retrieve attributes", "subscribe interventions", "experiments", "agentic contexts", "signals mcp server", "predictive attributes", "real-time personalization"]
 date: "2026-06-11"
 content_type: landing
 ---
@@ -20,6 +20,7 @@ Use this table to find the page for what reads the data:
 | An agent that chooses what to read at runtime | Published attribute groups and agentic contexts, as tools | [Signals MCP server](/docs/signals/applications/mcp-server/index.md) | Any MCP client |
 | Application code that decides how to treat a session | A score between 0 and 1 for how likely the session is to reach a goal | [Define a predictive attribute](/docs/signals/predictive-attributes/index.md), then [retrieve its score](/docs/signals/applications/predictive-attributes/index.md) | Python SDK, Node.js SDK, Signals API |
 | An application that reacts when criteria are met | An intervention payload, pushed as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [subscribe to them](/docs/signals/applications/subscribe/index.md) | Python SDK, browser plugin, iOS and Android trackers, Signals API |
+| A website that runs A/B tests on users who meet criteria | The user's variant in a running experiment, with exposure tracking | [Show experiment variants](/docs/signals/applications/experiments/index.md) | Browser plugin |
 | A back-end system that reacts when criteria are met | The same intervention payload, sent as soon as the criteria are met | [Define interventions](/docs/signals/interventions/index.md), then [forward them](/docs/signals/applications/forward-interventions/index.md) | Webhook, Kafka, Amazon Kinesis, Google Cloud Pub/Sub |
 | Offline model training | Point-in-time attribute values for labeled anchors, in a warehouse table | [Build training datasets](/docs/signals/ml-training-datasets/index.md) | Python SDK |
 

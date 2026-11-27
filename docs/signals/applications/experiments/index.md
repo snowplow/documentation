@@ -68,18 +68,21 @@ Read the variant where you show it:
 <Tabs groupId="experiments-framework" queryString>
 <TabItem value="javascript" label="JavaScript" default>
 
-`getExperimentVariant()` returns the user's variant key, or `null` when the user isn't in the experiment:
+`getExperimentVariant()` returns the user's variant key, or `null` when the user isn't in the experiment. Render once, then again from `onExperimentsChange()`, which runs when the assignment loads or the user enters the experiment while on the page:
 
 ```javascript
-import { getExperimentVariant } from '@snowplow/signals-browser-plugin';
+import { getExperimentVariant, onExperimentsChange } from '@snowplow/signals-browser-plugin';
 
-const variant = getExperimentVariant('free_shipping_banner');
-
-if (variant === 'banner') {
-  showFreeShippingBanner();
-} else {
-  showDefaultHeader(); // control, or not in the experiment
+function renderHeader() {
+  if (getExperimentVariant('free_shipping_banner') === 'banner') {
+    showFreeShippingBanner();
+  } else {
+    showDefaultHeader(); // control, not in the experiment, or still loading
+  }
 }
+
+renderHeader();
+onExperimentsChange(renderHeader);
 ```
 
 </TabItem>
@@ -107,7 +110,7 @@ Reading the variant tracks an exposure, once per page view, so it's safe to call
 
 ### Check that it works
 
-Make the experiment's entry condition true for yourself, for example by viewing the pricing page three times, then reload the page that shows the experiment. You should see your variant.
+Make the experiment's entry condition true for yourself, for example by viewing the pricing page three times, then go to the page that shows the experiment. You should see your variant.
 
 In [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md), look for an `experiment_exposure` event with the experiment name and your variant.
 

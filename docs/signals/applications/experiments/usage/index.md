@@ -42,28 +42,20 @@ function renderHeader() {
 
 To replace the placeholder once the answer arrives, run `renderHeader()` again from an [`onExperimentsChange()`](#show-the-variant-to-users-who-enter-mid-page) listener. In React, the hook's `loading` value is the same flag, and the hook re-renders for you.
 
-Only a user's first page waits. Returning users get their variant on the first render, so `isLoadingExperiments()` is `false` for them from the start. It's never `true` for longer than `timeoutMs`.
+Users who are already in an experiment get their variant on the first render of every later page, so `isLoadingExperiments()` is `false` for them from the start. For other users, it's `true` until the load answers, and never for longer than `timeoutMs`.
 
 ## Show the variant to users who enter mid-page
 
-A user can enter an experiment while they're on the page, when the entry condition becomes true. To show them their variant without a reload, register a listener with `onExperimentsChange()`, and read the variant again inside it:
+A user can enter an experiment while they're on the page, when the entry condition becomes true. To show them their variant without a reload, register a listener with `onExperimentsChange()`, and read the variant again inside it, as in the [quickstart](/docs/signals/applications/experiments/index.md#show-the-variant). Without a listener, the user sees their variant from their next page load.
+
+The listener runs when the assignment loads, when the wait times out, and when the user enters an experiment. `onExperimentsChange()` returns a function that removes the listener. Call it when the part of the page that shows the experiment goes away:
 
 ```javascript
-import { getExperimentVariant, onExperimentsChange } from '@snowplow/signals-browser-plugin';
-
-function renderHeader() {
-  if (getExperimentVariant('free_shipping_banner') === 'banner') {
-    showFreeShippingBanner();
-  } else {
-    showDefaultHeader();
-  }
-}
-
-renderHeader();
 const unsubscribe = onExperimentsChange(renderHeader);
-```
 
-The listener runs when the assignment loads, when the wait times out, and when the user enters an experiment. Call `unsubscribe()` when the part of the page that shows the experiment goes away.
+// Later, when the header is removed
+unsubscribe();
+```
 
 `useExperimentVariant()` does this for you, so React components re-render on their own.
 

@@ -100,7 +100,7 @@
     "hast-util-select": "^6.0.4",
     "hast-util-to-html": "^9.0.5",
     "hast-util-to-string": "^3.0.1",
-    "postcss": "8.4.31",
+    "postcss": "8.5.23",
     "postcss-loader": "7.3.3",
     "prettier": "2.7.1",
     "rehype-parse": "^9.0.1",

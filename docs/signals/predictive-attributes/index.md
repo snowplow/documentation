@@ -326,17 +326,19 @@ To change the live tiers, publish another training with the tiers you want. Alte
 
 To set tiers in Console, open the training's review page. In the **Conversion by score percentile** card, click **Add tier**, enter a name and a range of percentiles, then click **Save tiers**. Each tier shows as a colored band on the chart, with its share of the evaluation data, its goal rate, its lift over the baseline, and its range of scores. Tiers are read-only once the training is published, or if you don't have write access. If you publish with unsaved tier changes, the publish dialog warns you.
 
-To set tiers with the [Signals API](/docs/signals/connection/index.md#signals-api), send the full list of tiers in a `PUT` request to the training. An empty list clears them.
+To set tiers with the Python SDK, pass the full list of tiers to `set_predictive_attribute_score_tiers()`. An empty list clears them.
 
-```bash
-curl -X PUT \
-  --header 'Authorization: Bearer <JWT>' \
-  --header 'Content-Type: application/json' \
-  --data '{"score_tiers": [
-    {"name": "hot", "min_percentile": 90, "max_percentile": 99},
-    {"name": "warm", "min_percentile": 75, "max_percentile": 89}
-  ]}' \
-  '{{API_URL}}/api/v1/registry/predictive_attributes/purchase_propensity/versions/1/trainings/2'
+```python
+from snowplow_signals import ScoreTier
+
+training = sp_signals.set_predictive_attribute_score_tiers(
+    purchase_propensity,
+    training,
+    score_tiers=[
+        ScoreTier(name="hot", min_percentile=90, max_percentile=99),
+        ScoreTier(name="warm", min_percentile=75, max_percentile=89),
+    ],
+)
 ```
 
 ## Publish a predictive attribute

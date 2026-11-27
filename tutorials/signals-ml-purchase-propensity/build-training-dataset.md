@@ -18,7 +18,7 @@ In this step you'll get a labeled training table built by the Signals dataset bu
 
 ## Understand what each row means
 
-The dataset builder uses [session anchors](/docs/signals/ml-training-datasets/#session-anchors). It scans the sessions in a time window you choose, and treats each event in a session as a possible prediction moment:
+The dataset builder uses [session anchors](/docs/signals/datasets/anchors/#session-anchors). It scans the sessions in a time window you choose, and treats each event in a session as a possible prediction moment:
 
 * Events after a session's first purchase are dropped, because there's nothing left to predict
 * The remaining events in a session that went on to buy get `label = 1`

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320">
+<defs>
+ <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#a98af0"/>
+ </marker>
+</defs>
+<rect width="1000" height="320" fill="#ffffff"/>
+<g font-family="'Source Sans 3', Helvetica, Arial, sans-serif" text-anchor="middle">
+
+ <!-- three stages -->
+ <g fill="#ffffff" stroke="#d9cdf3" stroke-width="2">
+  <rect x="40" y="30" width="280" height="220" rx="12"/>
+  <rect x="360" y="30" width="280" height="220" rx="12"/>
+  <rect x="680" y="30" width="280" height="220" rx="12"/>
+ </g>
+ <g font-size="16" font-weight="700" fill="#2b1a4f">
+  <text x="180" y="60">1. Anchors</text>
+  <text x="500" y="60">2. Context</text>
+  <text x="820" y="60">3. Assembly</text>
+ </g>
+
+ <!-- inputs to each stage -->
+ <g fill="#f1ebfb" stroke="#d9cdf3" stroke-width="1.5">
+  <rect x="60" y="78" width="240" height="40" rx="20"/>
+  <rect x="60" y="126" width="240" height="40" rx="20"/>
+  <rect x="380" y="78" width="240" height="40" rx="20"/>
+  <rect x="380" y="126" width="240" height="40" rx="20"/>
+  <rect x="700" y="78" width="240" height="40" rx="20"/>
+  <rect x="700" y="126" width="240" height="40" rx="20"/>
+ </g>
+ <g font-size="14" fill="#2b1a4f">
+  <text x="180" y="103">Session or event anchors</text>
+  <text x="180" y="151">Your own table of moments</text>
+  <text x="500" y="103">Attributes from earlier events</text>
+  <text x="500" y="151">Agentic contexts at each moment</text>
+  <text x="820" y="103">Anchors and their context</text>
+  <text x="820" y="151">Labels or outcome columns</text>
+ </g>
+
+ <g fill="none" stroke="#a98af0" stroke-width="2.5" marker-end="url(#arrow)">
+  <path d="M180,168 V190"/>
+  <path d="M500,168 V190"/>
+  <path d="M820,168 V190"/>
+  <path d="M322,140 H356"/>
+  <path d="M642,140 H676"/>
+ </g>
+
+ <!-- output of each stage -->
+ <g fill="#6638b8">
+  <rect x="60" y="194" width="240" height="40" rx="10"/>
+  <rect x="380" y="194" width="240" height="40" rx="10"/>
+  <rect x="700" y="194" width="240" height="40" rx="10"/>
+ </g>
+ <g font-size="15" font-weight="700" fill="#ffffff">
+  <text x="180" y="219">One row per moment</text>
+  <text x="500" y="219">Values as they stood</text>
+  <text x="820" y="219">One dataset table</text>
+ </g>
+
+ <text x="500" y="290" font-size="18" fill="#2b1a4f">Each row holds one column per value, computed only from events before its moment.</text>
+</g>
+</svg>

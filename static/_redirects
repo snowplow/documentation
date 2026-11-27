@@ -538,6 +538,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /deprecation-policy /lifecycle-policy 301
 
+# Signals ML training datasets broadened to datasets for training and evaluating models
+/docs/signals/ml-training-datasets/* /docs/signals/datasets/:splat 301
+
 # Data structures in Git tutorial rewrite
 /tutorials/data-structures-in-git/validation-and-publishing/ /tutorials/tracking-as-code/automate-with-github-actions/ 301
 /tutorials/data-structures-in-git/follow-up-with-data-products/ /tutorials/tracking-as-code/local-setup/ 301

@@ -475,6 +475,8 @@ const fallbackRules = [
   ['/docs/api-reference/iglu/iglu-clients/*', '/docs/api-reference/iglu/', 301],
   ['/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/*', '/docs/api-reference/iglu/iglu-repositories/', 301],
   ['/docs/api-reference/loaders-storage-targets/lake-loader/partitions/*', '/docs/api-reference/loaders-storage-targets/lake-loader/table-layout/:splat', 301],
+  // Signals ML training datasets broadened to datasets for training and evaluating models
+  ['/docs/signals/ml-training-datasets/*', '/docs/signals/datasets/:splat', 301],
 ];
 
 function findInRules(rules, pathname) {

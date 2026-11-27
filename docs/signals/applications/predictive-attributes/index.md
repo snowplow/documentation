@@ -45,7 +45,7 @@ result = sp_signals.get_predictive_attribute_score(
         "domain_userid": "218e8926-3858-431d-b2ed-66da03a1cbe5",
     },
 )
-print(result.score)
+print(result.score, result.tier)
 ```
 
 | Argument      | Description                                                         | Type             | Required? |
@@ -68,7 +68,7 @@ const result = await signals.getPredictiveAttributeScore({
     domain_userid: "218e8926-3858-431d-b2ed-66da03a1cbe5",
   },
 });
-console.log(result.score);
+console.log(result.score, result.tier);
 ```
 
 | Argument      | Description                                                         | Type                     | Required? |
@@ -92,14 +92,15 @@ curl \
 
 ## Read the response
 
-The response contains the score and the version of the model that produced it:
+The response contains the score, the version of the model that produced it, and the score's tier:
 
 ```json
 {
   "name": "purchase_propensity",
   "version": 2,
   "minor_version": 1,
-  "score": 0.42
+  "score": 0.42,
+  "tier": "hot"
 }
 ```
 
@@ -111,10 +112,15 @@ The table below describes each field in the response.
 | `version`       | The published version of the predictive attribute               | `integer` |
 | `minor_version` | The training of that version whose model produced the score     | `integer` |
 | `score`         | How likely the session is to reach the goal, between 0 and 1    | `number`  |
+| `tier`          | The name of the [score tier](/docs/signals/predictive-attributes/index.md#set-score-tiers) the score falls in. Absent if the score falls in no tier, or the published training has no tiers | `string`  |
 
 ### Interpret the score
 
-A higher score means the model considers the goal more likely. Use the score to rank sessions and set a threshold to act above, not as an exact probability. Signals corrects scores for the sampling it uses in training, so they're on the scale of your real goal rate, but they aren't guaranteed to be calibrated. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely. Choose thresholds by looking at the scores your sessions receive, and revisit them each time you publish a new training, because a new model can shift the range of scores.
+A higher score means the model considers the goal more likely. Signals corrects scores for the sampling it uses in training, so they're on the scale of your real goal rate, but they aren't guaranteed to be calibrated. A session scored `0.6` is more likely to reach the goal than one scored `0.3`, but not necessarily 60% likely.
+
+To decide how to treat a session, act on its `tier` rather than a score cutoff in your code. A tier is a named range of score percentiles, such as `hot` for percentiles 90 to 99 and `warm` for 75 to 89, that you [set on a training](/docs/signals/predictive-attributes/index.md#set-score-tiers) before you publish it. Each training records the percentile boundaries of the scores in its evaluation data, and Signals places every live score against them. Percentile 90 or above is roughly the top 10% of the training's evaluation examples. The boundaries stay fixed until you publish another training. A new training has its own boundaries and starts with the same tiers, so a tier keeps its meaning when you retrain, and your code doesn't need to change.
+
+The share of live scores in each tier can differ from its share in training, because it depends on how often, and at which points in a session, your application requests a score.
 
 Signals scores a session whatever state it's in. Scores are less reliable for states that training doesn't cover, such as a very short session, or a session that has already reached the goal.
 

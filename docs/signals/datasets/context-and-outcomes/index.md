@@ -13,19 +13,7 @@ To train or test a model on past traffic, you need to go back to points in time 
 - Context is what your application would have known at the anchor: attribute values and agentic contexts, computed only from the events before it.
 - Outcomes are what happened after the anchor, such as whether the user went on to purchase. They come from labels on the anchors or from outcome columns.
 
-```mermaid
-flowchart TB
-    subgraph before["Context: events before"]
-        direction LR
-        E1["page_view"] --> E2["product_view"] --> E3["add_to_cart"]
-    end
-    A(["Anchor"])
-    subgraph after["Outcome: events after"]
-        direction LR
-        E4["page_view"] --> E5["transaction"]
-    end
-    before --> A --> after
-```
+![Diagram: a session's page_view, product_view and add_to_cart events come before the anchor and are computed into attributes. The page_view and transaction events after the anchor set the outcome. The dataset row holds product_views = 1, cart_adds = 1, and purchased_later = true.](../../images/dataset-context-and-outcome.svg)
 
 In this session, the row for the anchor has attributes such as `product_views = 1` and `cart_adds = 1`, computed from the three earlier events. Its outcome `purchased_later` is `true`, because a `transaction` followed later in the session.
 

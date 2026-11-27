@@ -16,9 +16,11 @@ Signals experiments are in preview. The browser plugin's experiments API can cha
 
 The experiments functions are exported from `@snowplow/signals-browser-plugin`, and the React hook from `@snowplow/signals-browser-plugin/react`. To set them up, follow the [quickstart](/docs/signals/applications/experiments/index.md).
 
-## Functions
+## Parameters
 
 Call `loadExperiments()` once per page, then read variants with `getExperimentVariant()` or the React hook.
+
+### Functions
 
 | Function | Returns |
 | --- | --- |
@@ -27,7 +29,7 @@ Call `loadExperiments()` once per page, then read variants with `getExperimentVa
 | `isLoadingExperiments()` | `true` while the plugin is waiting for the user's assignment and has no earlier one to answer with. Never `true` for longer than `timeoutMs`. |
 | `onExperimentsChange(listener)` | A function that removes the listener. `listener` runs with no arguments when the user's assignment or `isLoadingExperiments()` changes: when the assignment loads, when the wait times out, or when the user enters an experiment while on the page. |
 
-### Options for loadExperiments
+### Options for `loadExperiments()`
 
 <ParamTable>
   <Param name="endpoint" type="string" required>
@@ -41,7 +43,7 @@ Call `loadExperiments()` once per page, then read variants with `getExperimentVa
   </Param>
 </ParamTable>
 
-## React hook
+### React hook
 
 `useExperimentVariant(name)` returns the experiment's state for the current user, and re-renders the component when it changes. It needs React 18 or later.
 
@@ -52,7 +54,7 @@ Call `loadExperiments()` once per page, then read variants with `getExperimentVa
 
 On the server, the hook returns `{ variant: null, loading: true }`. It only works with the plugin installed from npm, not with a plugin loaded from the CDN with `sp.js`.
 
-## Tracked event
+### Tracked event
 
 `getExperimentVariant()` and `useExperimentVariant()` track an `experiment_exposure` [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) the first time they return a variant on each page view. They track it with the tracker that loaded the experiments.
 
@@ -64,6 +66,42 @@ On the server, the hook returns `{ variant: null, loading: true }`. It only work
 | `experiment` | The experiment's name, as passed to `getExperimentVariant()` |
 | `variant` | The variant key the user saw |
 | `entered_at` | When the user entered the experiment |
+
+## Example
+
+This example waits up to 1000 ms for the assignment, using the tracker named `sp1`, then shows the variant:
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import {
+  SignalsPlugin,
+  loadExperiments,
+  getExperimentVariant,
+  onExperimentsChange,
+} from '@snowplow/signals-browser-plugin';
+
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app',
+  plugins: [SignalsPlugin()],
+});
+
+function renderHeader() {
+  if (getExperimentVariant('free_shipping_banner') === 'banner') {
+    showFreeShippingBanner();
+  } else {
+    showDefaultHeader();
+  }
+}
+
+await loadExperiments({
+  endpoint: '000000000000.signals.snowplowanalytics.com',
+  timeoutMs: 1000,
+  tracker: 'sp1',
+});
+
+renderHeader();
+onExperimentsChange(renderHeader);
+```
 
 ```mdx-code-block
 import SignalsFreeTier from "@site/docs/reusable/signals-free-tier/_index.md"

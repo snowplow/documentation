@@ -1,5 +1,5 @@
 ---
-title: "Show Signals experiment variants in your website"
+title: "Show Signals experiment variants on your website"
 sidebar_position: 10
 sidebar_label: "Quickstart"
 description: "Add Signals experiments to a website with the Signals browser plugin: load the user's assignment, show their variant, and track the exposure."
@@ -88,7 +88,7 @@ onExperimentsChange(renderHeader);
 </TabItem>
 <TabItem value="react" label="React">
 
-`useExperimentVariant()` returns the variant, and whether the plugin is still waiting for an answer. It needs React 18 or later. Create the tracker and call `loadExperiments()` outside your components, as in the previous step.
+`useExperimentVariant()` returns the variant, and whether the plugin is still waiting for an answer. It needs React 18 or later. Create the tracker and call `loadExperiments()` outside your components, as shown in [Load the user's assignment](#load-the-users-assignment).
 
 ```jsx
 import { useExperimentVariant } from '@snowplow/signals-browser-plugin/react';
@@ -118,11 +118,18 @@ In [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md), look for an 
 
 ## Troubleshooting
 
-If `getExperimentVariant()` always returns `null`, check that:
+The plugin logs these messages to the browser console:
+
+| Message | Fix |
+| --- | --- |
+| `loadExperiments: no tracker has activated SignalsPlugin` | Add `SignalsPlugin()` to the tracker, and create the tracker before you call `loadExperiments()` |
+| `No domain_userid (anonymous tracking?); no experiments to load` | The tracker is in [anonymous tracking](/docs/sources/web-trackers/anonymous-tracking/index.md) mode. Users without a `domain_userid` never enter experiments. |
+| `Failed to load experiments` | Check that `endpoint` is your Signals API URL |
+
+If `getExperimentVariant()` always returns `null` and there's no message, check that:
 
 * The name you pass matches the experiment's name in Signals exactly, including case
 * The experiment is running
-* The tracker isn't in [anonymous tracking](/docs/sources/web-trackers/anonymous-tracking/index.md) mode. Users without a `domain_userid` never enter experiments.
 * The entry condition became true for you while the experiment was running. A user enters when the condition changes from false to true, so if it was already true when the experiment started, you won't enter until it becomes true again.
 
 To handle the loading state, users who enter while on the page, and other details, see [Use experiment variants in your app](/docs/signals/applications/experiments/usage/index.md). Every function and option is in the [API reference](/docs/signals/applications/experiments/reference/index.md).
